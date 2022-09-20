@@ -55,11 +55,14 @@
     "survey-creator-core": "../survey-creator-core/build",
     "tslib": "^2.3.0",
     "typescript": "~4.4.3",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "testcafe": "1.18.4"
   },
   "scripts": {
     "build": "ng build",
     "serve:example": "ng serve",
+    "testcafe:angular": "testcafe chrome ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal,dashboard --env=angular",
+    "testcafe:ci:angular": "testcafe -c 4 chrome:headless ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "serve:example:aot": "http-server ./dist/angular-ui",
     "build:example": "ng build --aot --output-hashing=none angular-ui",
     "test": "ng test survey-creator-angular",

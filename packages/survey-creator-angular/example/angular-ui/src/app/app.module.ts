@@ -5,13 +5,19 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { SurveyCreatorAngularModule } from "survey-creator-angular";
 import { SurveyAngularModule } from "survey-angular-ui";
+import { ExampleComponent } from "./example.component";
+import { AppRoutingModule } from "./router.module";
+import { TestComponent } from "./test/test.component";
+import { TestDefaultComponent } from "./test/default.component";
+import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
+import { ThemePreviewComponent } from "./test/theme-preview.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, ExampleComponent, TestComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent
   ],
   imports: [
-    BrowserModule, SurveyCreatorAngularModule, FormsModule, SurveyAngularModule
+    BrowserModule, SurveyCreatorAngularModule, FormsModule, SurveyAngularModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
