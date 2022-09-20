@@ -15,9 +15,9 @@ test("Simple click", async (t) => {
 
 async function setupCategories(t, windowWidth = 1910) {
   const changeCategories = ClientFunction(() => {
-    window["creator"].toolbox.clearCategories();
+    window["creator"].toolbox.removeCategories();
     window["creator"].toolbox.orderedQuestions = ["radiogroup", "matrix", "matrixdropdown", "panel", "panaldynamic"];
-    window["creator"].toolbox.showCategoryTitle = true;
+    window["creator"].toolbox.showCategoryTitles = true;
     window["creator"].toolbox.changeCategories([
       {
         name: "panel",

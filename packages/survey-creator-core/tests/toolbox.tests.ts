@@ -79,18 +79,18 @@ test("toolbox clear categories", (): any => {
   expect(toolbox.hasCategories).toBeFalsy();
   toolbox.changeCategories([{ name: "text", category: "test" }]);
   expect(toolbox.hasCategories).toBeTruthy();
-  toolbox.clearCategories();
+  toolbox.removeCategories();
   expect(toolbox.hasCategories).toBeFalsy();
 });
 
 test("toolbox keepAllCategoriesExpanded", (): any => {
   var toolbox = new QuestionToolbox(["text", "dropdown"], undefined, true);
   expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
-  toolbox.showCategoryTitle = true;
+  toolbox.showCategoryTitles = true;
   expect(toolbox.keepAllCategoriesExpanded).toBeFalsy();
   toolbox.keepAllCategoriesExpanded = true;
   expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
-  toolbox.showCategoryTitle = false;
+  toolbox.showCategoryTitles = false;
   expect(toolbox.keepAllCategoriesExpanded).toBeTruthy();
 });
 
@@ -100,7 +100,7 @@ test("toolbox check categories separators", (): any => {
   toolbox.changeCategories([{ name: "text", category: "one" }, { name: "dropdown", category: "two" }]);
   expect(toolbox.hasCategories).toBeTruthy();
   expect(toolbox.actions.filter(a => a.needSeparator).length).toEqual(2);
-  toolbox.clearCategories();
+  toolbox.removeCategories();
   expect(toolbox.hasCategories).toBeFalsy();
   expect(toolbox.actions.filter(a => a.needSeparator).length).toEqual(0);
 });
@@ -171,12 +171,12 @@ test("toolbox change categories", (): any => {
   expect(toolbox.categories).toHaveLength(4);
 });
 
-test("toolbox showCategoryTitle shold be set on first category change", (): any => {
+test("toolbox showCategoryTitles shold be set on first category change", (): any => {
   var toolbox = new QuestionToolbox([], undefined, true);
-  expect(toolbox.showCategoryTitle).toBeFalsy();
+  expect(toolbox.showCategoryTitles).toBeFalsy();
 
   toolbox.changeCategories([]);
-  expect(toolbox.showCategoryTitle).toBeTruthy();
+  expect(toolbox.showCategoryTitles).toBeTruthy();
 });
 
 test("toolbox load custom/composite questions", (): any => {

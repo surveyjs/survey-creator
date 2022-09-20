@@ -35,7 +35,7 @@ export class AdaptiveToolbox extends Toolbox {
     return (
       <div ref={this.rootRef} className={className}>
         <div className="svc-toolbox__container">
-          {(this.toolbox.isCompact || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitle) ?
+          {(this.toolbox.isCompact || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitles) ?
             (<div className="svc-toolbox__category">
               {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompact)}
             </div>)

@@ -129,7 +129,7 @@ export class QuestionToolbox
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
-  private showCategoryTitleValue: boolean = false;
+  private showCategoryTitlesValue: boolean = false;
   private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
@@ -162,7 +162,7 @@ export class QuestionToolbox
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
-      if (target.hasCategories && target.showCategoryTitle) {
+      if (target.hasCategories && target.showCategoryTitles) {
         if (val) {
           target.isResponsivenessDisabled = false;
           target.raiseUpdate(true);
@@ -190,7 +190,7 @@ export class QuestionToolbox
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
-    if(useDefaultCategories) {
+    if (useDefaultCategories) {
       let defaultCategories = this.getDefaultCategories();
       this.showTitleOnCategoryChange = false;
       this.changeCategories(defaultCategories);
@@ -212,10 +212,10 @@ export class QuestionToolbox
   }
   private getDefaultCategories() {
     let categories = [];
-    Object.keys(QuestionToolbox.defaultCategories).forEach((key) =>{
+    Object.keys(QuestionToolbox.defaultCategories).forEach((key) => {
       const cat = QuestionToolbox.defaultCategories[key];
-      cat.forEach((name)=>{
-        if(!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString("ed."+key) });
+      cat.forEach((name) => {
+        if (!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString("ed." + key) });
       });
     });
     return categories;
@@ -424,7 +424,7 @@ export class QuestionToolbox
    * Set it to true to expand all categories and hide expand/collapse category buttons
    */
   public get keepAllCategoriesExpanded(): boolean {
-    return this.keepAllCategoriesExpandedValue || !this.showCategoryTitleValue;
+    return this.keepAllCategoriesExpandedValue || !this.showCategoryTitlesValue;
   }
   public set keepAllCategoriesExpanded(val: boolean) {
     this.keepAllCategoriesExpandedValue = val;
@@ -433,13 +433,16 @@ export class QuestionToolbox
   }
 
   /**
-   * Set it to true to show title for categories
+   * Specifies whether to display category titles in the Toolbox.
+   *
+   * If you disable this property, the Toolbox hides the titles but continues to display horizontal lines that divide categories. To remove these lines as well, call the `removeCategories()` method.
+   * @see removeCategories
    */
-  public get showCategoryTitle(): boolean {
-    return this.showCategoryTitleValue;
+  public get showCategoryTitles(): boolean {
+    return this.showCategoryTitlesValue;
   }
-  public set showCategoryTitle(val: boolean) {
-    this.showCategoryTitleValue = val;
+  public set showCategoryTitles(val: boolean) {
+    this.showCategoryTitlesValue = val;
     this.updateCategoriesState();
   }
   public updateTitles(): void {
@@ -489,9 +492,9 @@ export class QuestionToolbox
   }
 
   /**
-   * Clear categories for all toolbox items.
+   * Removes categories from the Toolbox.
    */
-  public clearCategories() {
+  public removeCategories() {
     const allTypes: string[] = ElementFactory.Instance.getAllTypes();
     this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
@@ -569,7 +572,7 @@ export class QuestionToolbox
     return null;
   }
   protected onItemsChanged() {
-    this.showCategoryTitle = this.showTitleOnCategoryChange;
+    this.showCategoryTitles = this.showTitleOnCategoryChange;
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
@@ -605,7 +608,7 @@ export class QuestionToolbox
     }
 
     let newItems = [];
-    this.categories.forEach((cat)=>{
+    this.categories.forEach((cat) => {
       newItems = newItems.concat(cat.items);
     });
     this.actions = newItems;
@@ -628,7 +631,7 @@ export class QuestionToolbox
     categories.forEach((category: any, categoryIndex) => {
       (category.items || []).forEach((item, index) => {
         item.needSeparator = categoryIndex !== 0 && index == 0;
-        if(item.innerItem) item.innerItem.needSeparator = item.needSeparator;
+        if (item.innerItem) item.innerItem.needSeparator = item.needSeparator;
       });
     });
   }
