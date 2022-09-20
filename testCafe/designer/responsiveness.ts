@@ -59,14 +59,14 @@ test("Responsive creator: toolbox & page navigator", async (t) => {
     ]
   });
   await t
-    .resizeWindow(1920, 1000)
+    .resizeWindow(1920, 1200)
     .click(collapseButtonSelector)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
     .expect(toolboxItemTitles.count).eql(20)
     .expect(pageNavigator.visible).ok()
 
-    .resizeWindow(1000, 1000)
+    .resizeWindow(1000, 1200)
     .expect(toolbox.visible).ok()
     .expect(toolboxItemIcons.count).eql(20)
     .expect(toolboxItemTitles.count).eql(0)

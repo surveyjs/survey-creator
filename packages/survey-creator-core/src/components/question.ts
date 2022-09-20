@@ -205,7 +205,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const res = [];
     convertClasses.forEach((className: string) => {
       const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
-      res.push(this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName));
+      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName);
+      action.needSeparator = item.needSeparator;
+      res.push(action);
     });
     return res;
   }

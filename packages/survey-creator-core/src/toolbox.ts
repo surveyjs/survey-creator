@@ -16,7 +16,8 @@ import {
   DragOrClickHelper
 } from "survey-core";
 import { CreatorBase, toolboxLocationType } from "./creator-base";
-import { editorLocalization } from "./editorLocalization";
+import { editorLocalization, getLocString } from "./editorLocalization";
+import { localization } from "./entries";
 import { settings } from "./settings";
 
 /**
@@ -93,20 +94,21 @@ export class QuestionToolbox
   implements IQuestionToolbox {
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   static defaultIconName = "icon-default";
+  static defaultCategories = {
+    toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking"],
+    toolboxTextCategory: ["text", "comment", "multipletext"],
+    toolboxContainersCategory: ["panel", "paneldynamic"],
+    toolboxMatrixCategory: ["matrix", "matrixdropdown", "matrixdynamic"],
+    toolboxMiscCategory: ["html", "expression", "image", "signaturepad"]
+  }
   private _orderedQuestions = [
-    "text",
-    "checkbox",
-    "radiogroup",
-    "dropdown",
-    "comment",
-    "rating",
-    "ranking",
-    "imagepicker",
-    "boolean",
-    "image",
-    "html",
-    "signaturepad"
+    "radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking",
+    "text", "comment", "multipletext",
+    "panel", "paneldynamic",
+    "matrix", "matrixdropdown", "matrixdynamic",
+    "html", "expression", "image", "signaturepad"
   ];
+  showTitleOnCategoryChange: boolean = true;
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -127,6 +129,7 @@ export class QuestionToolbox
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
+  private showCategoryTitleValue: boolean = false;
   private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
@@ -159,7 +162,7 @@ export class QuestionToolbox
   @property({
     defaultValue: false,
     onSet: (val: boolean, target: QuestionToolbox) => {
-      if (target.hasCategories) {
+      if (target.hasCategories && target.showCategoryTitle) {
         if (val) {
           target.isResponsivenessDisabled = false;
           target.raiseUpdate(true);
@@ -181,11 +184,18 @@ export class QuestionToolbox
   @property() forceCompact: boolean;
 
   constructor(
-    supportedQuestions: Array<string> = null,
-    public creator: CreatorBase = null
+    private supportedQuestions: Array<string> = null,
+    public creator: CreatorBase = null,
+    useDefaultCategories = false
   ) {
     super();
     this.createDefaultItems(supportedQuestions);
+    if(useDefaultCategories) {
+      let defaultCategories = this.getDefaultCategories();
+      this.showTitleOnCategoryChange = false;
+      this.changeCategories(defaultCategories);
+      this.showTitleOnCategoryChange = true;
+    }
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
@@ -200,12 +210,25 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
   }
+  private getDefaultCategories() {
+    let categories = [];
+    Object.keys(QuestionToolbox.defaultCategories).forEach((key) =>{
+      const cat = QuestionToolbox.defaultCategories[key];
+      cat.forEach((name)=>{
+        if(!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString("ed."+key) });
+      });
+    });
+    return categories;
+  }
+
   private onActiveCategoryChanged(newValue: string) {
     const categories: Array<QuestionToolboxCategory> = this.categories;
+    //if(!this.allowExpandMultipleCategories) {
     for (var i = 0; i < categories.length; i++) {
       var category = categories[i];
       category.collapsed = category.name !== newValue;
     }
+    //}
   }
   public setLocation(toolboxLocation: toolboxLocationType) {
     if (toolboxLocation === "sidebar") {
@@ -401,11 +424,22 @@ export class QuestionToolbox
    * Set it to true to expand all categories and hide expand/collapse category buttons
    */
   public get keepAllCategoriesExpanded(): boolean {
-    return this.keepAllCategoriesExpandedValue;
+    return this.keepAllCategoriesExpandedValue || !this.showCategoryTitleValue;
   }
   public set keepAllCategoriesExpanded(val: boolean) {
     this.keepAllCategoriesExpandedValue = val;
     this.canCollapseCategories = !this.keepAllCategoriesExpanded;
+    this.updateCategoriesState();
+  }
+
+  /**
+   * Set it to true to show title for categories
+   */
+  public get showCategoryTitle(): boolean {
+    return this.showCategoryTitleValue;
+  }
+  public set showCategoryTitle(val: boolean) {
+    this.showCategoryTitleValue = val;
     this.updateCategoriesState();
   }
   public updateTitles(): void {
@@ -421,7 +455,7 @@ export class QuestionToolbox
     var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
     if (noActive) {
       this.activeCategory = "";
-      if (this.keepAllCategoriesExpanded) {
+      if (this.keepAllCategoriesExpandedValue) {
         this.expandAllCategories();
       }
     } else {
@@ -451,6 +485,15 @@ export class QuestionToolbox
         toolboxItem.category = item.category;
       }
     }
+    this.onItemsChanged();
+  }
+
+  /**
+   * Clear categories for all toolbox items.
+   */
+  public clearCategories() {
+    const allTypes: string[] = ElementFactory.Instance.getAllTypes();
+    this.changeCategories(allTypes.map(t => ({ name: t, category: null })));
     this.onItemsChanged();
   }
   public toggleCategoryState(categoryName: string) {
@@ -526,6 +569,7 @@ export class QuestionToolbox
     return null;
   }
   protected onItemsChanged() {
+    this.showCategoryTitle = this.showTitleOnCategoryChange;
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
@@ -559,7 +603,15 @@ export class QuestionToolbox
         }
       }
     }
+
+    let newItems = [];
+    this.categories.forEach((cat)=>{
+      newItems = newItems.concat(cat.items);
+    });
+    this.actions = newItems;
+
     this.hasCategories = categories.length > 1;
+    //this.updateCategoriesState();
     this.updateItemSeparators();
   }
   protected createCategory(): QuestionToolboxCategory {
@@ -572,11 +624,11 @@ export class QuestionToolbox
     return -1;
   }
   private updateItemSeparators() {
-    this.categories.forEach((category: any, categoryIndex) => {
+    const categories = this.hasCategories ? this.categories : [{ items: this.actions }];
+    categories.forEach((category: any, categoryIndex) => {
       (category.items || []).forEach((item, index) => {
-        if (categoryIndex !== 0 && index == 0) {
-          item.needSeparator = true;
-        }
+        item.needSeparator = categoryIndex !== 0 && index == 0;
+        if(item.innerItem) item.innerItem.needSeparator = item.needSeparator;
       });
     });
   }

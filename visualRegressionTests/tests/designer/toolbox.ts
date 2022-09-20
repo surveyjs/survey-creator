@@ -139,3 +139,12 @@ test("Toolbox category collapsed", async (t) => {
   await t.resizeWindow(2560, 1440);
   await checkElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t);
 });
+
+test("Toolbox with category titles", async (t) => {
+  const toolboxElement = Selector(".svc-toolbox");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await ClientFunction(() => { window["creator"].toolbox.keepAllCategoriesExpanded = true; window["creator"].toolbox.changeCategories([]); })();
+  await t.resizeWindow(2560, 1440);
+  await checkElementScreenshot("toolbox-categories.png", toolboxElement, t);
+});
