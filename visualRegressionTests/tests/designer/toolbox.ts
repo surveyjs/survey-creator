@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, changeToolboxLocation, getTabbedMenuItemByText, checkElementScreenshot, setJSON, collapseButtonSelector } from "../../helper";
 
 const title = "Toolbox Screenshot";
@@ -129,4 +129,13 @@ test("designer tab view with page navigator", async (t) => {
 
   await changeToolboxLocation("right");
   await checkElementScreenshot("designer-tab-page-navigator-toolbox-right.png", designerTab, t);
+});
+
+test("Toolbox category collapsed", async (t) => {
+  const toolboxElement = Selector(".svc-toolbox");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]); window["creator"].toolbox.allowExpandMultipleCategories = true; })();
+  await t.resizeWindow(2560, 1440);
+  await checkElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t);
 });

@@ -99,3 +99,10 @@ svc-toolbox {
     padding-top: calcSize(0.5);
   }
 }
+
+.svc-toolbox__category--collapsed{
+  .svc-toolbox__tool {
+    height: 0;
+    visibility: hidden;
+  }
+}
