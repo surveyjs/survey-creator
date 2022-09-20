@@ -17,6 +17,9 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
   public get toolbox() {
     return this.props.toolbox;
   }
+  public get class() {
+    return "svc-toolbox__category" + (this.category.collapsed ? " svc-toolbox__category--collapsed" : "");
+  }
 
   protected getStateElement(): Base {
     return (this.category as any);
@@ -26,7 +29,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
     const header = this.renderCategoryHeader();
     const items = this.renderCategoryContent();
     return (
-      <div className="svc-toolbox__category" key={this.category.name}>
+      <div className={this.class} key={this.category.name}>
         {header}
         {items}
       </div>
@@ -58,7 +61,7 @@ export class SurveyCreatorToolboxCategory extends SurveyElementBase<ISurveyCreat
   }
 
   protected renderCategoryContent(): Array<any> {
-    return !this.category.collapsed ? this.renderItems(this.category.items) : [];
+    return this.renderItems(this.category.items);
   }
 
   renderItems(items: Array<any>, isCompact = false) {

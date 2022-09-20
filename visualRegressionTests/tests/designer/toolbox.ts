@@ -131,6 +131,15 @@ test("designer tab view with page navigator", async (t) => {
   await checkElementScreenshot("designer-tab-page-navigator-toolbox-right.png", designerTab, t);
 });
 
+test("Toolbox category collapsed", async (t) => {
+  const toolboxElement = Selector(".svc-toolbox");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]); window["creator"].toolbox.allowExpandMultipleCategories = true; })();
+  await t.resizeWindow(2560, 1440);
+  await checkElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t);
+});
+
 test("Toolbox with category titles", async (t) => {
   const toolboxElement = Selector(".svc-toolbox");
 
