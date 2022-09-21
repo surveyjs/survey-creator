@@ -91,9 +91,8 @@ test("Categories large mode", async (t) => {
 });
 
 test.before(async (t) => {
-  await t.resizeWindow(1200, 600);
+  await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
-
   await setupCategories(t, 1110);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
