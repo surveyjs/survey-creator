@@ -160,7 +160,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
     const style: any = {};
     if(!!survey.width) {
-      style.width = survey.width;
+      style.width = survey.renderedWidth;
     }
 
     return (<React.Fragment>
