@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -15,6 +15,9 @@ test("Simple click", async (t) => {
 
 async function setupCategories(t, windowWidth = 1910) {
   const changeCategories = ClientFunction(() => {
+    window["creator"].toolbox.removeCategories();
+    window["creator"].toolbox.orderedQuestions = ["radiogroup", "matrix", "matrixdropdown", "panel", "panaldynamic"];
+    window["creator"].toolbox.showCategoryTitles = true;
     window["creator"].toolbox.changeCategories([
       {
         name: "panel",
@@ -88,9 +91,8 @@ test("Categories large mode", async (t) => {
 });
 
 test.before(async (t) => {
-  await t.resizeWindow(1200, 600);
+  await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
-
   await setupCategories(t, 1110);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -124,9 +126,10 @@ test.before(async (t) => {
 });
 
 test("Categories allowExpandMultipleCategories property", async (t) => {
+
   await setupCategories(t);
-  await setupToolboxProperty("forceCompact", false);
   await setupToolboxProperty("allowExpandMultipleCategories", true);
+  await setupToolboxProperty("forceCompact", false);
 
   await t
     .expect(categoriesHeader.count).eql(3)
@@ -198,4 +201,25 @@ test("add question from toolbox popup items", async (t) => {
     .click(popup.find(".sv-list__item"))
     .expect(Selector(".svc-question__content").exists).ok()
     .resizeWindow(1900, 600);
+});
+
+test("check toolbox scroll", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+  const hasNoScroll = ClientFunction(() => {
+    let element = document.querySelector(".svc-toolbox");
+    return element?.scrollHeight == element?.clientHeight;
+  });
+
+  const setSize = ClientFunction((size) => {
+    let element = document.querySelector(".svc-creator");
+    element["style"].height = size + "px";
+  });
+
+  for (var i = 580; i > 540; i--) {
+    await setSize(i);
+    await t
+      .wait(100)
+      .expect(hasNoScroll()).ok();
+  }
 });

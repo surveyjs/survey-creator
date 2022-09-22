@@ -41,10 +41,10 @@ svc-toolbox {
 }
 
 .svc-toolbox__category-separator {
-  height: calcSize(0.1);
+  height: 1px;
   width: calcSize(6);
   background-color: $border;
-  margin: calcSize(1) 0;
+  margin: calcSize(1) 0 calcSize(1.5);
 }
 
 .svc-toolbox__category-header {
@@ -95,7 +95,25 @@ svc-toolbox {
   cursor: default;
 
   .sv-action__content {
-    display: block;
+    display: flex;
     padding-top: calcSize(0.5);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.svc-creator__toolbox--right {
+  .svc-toolbox__tool {
+    .sv-action__content {
+      align-items: flex-end;
+    }
+  }
+}
+
+
+.svc-toolbox__category--collapsed{
+  .svc-toolbox__tool {
+    height: 0;
+    visibility: hidden;
   }
 }

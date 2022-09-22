@@ -94,7 +94,7 @@ test("toolboxLocation sidebar", async (t) => {
     .expect(toolboxInDesigner.visible).ok()
     .expect(toolboxInSidebar.exists).notOk()
     .expect(toolboxButtonSelector.visible).notOk();
-
+  await ClientFunction(() => window["creator"].toolbox.removeCategories())();
   await changeToolboxLocation("sidebar");
   await t
     .expect(toolboxInDesigner.exists).notOk()
@@ -200,6 +200,7 @@ test("toolboxLocation sidebar: check toolbox items", async (t) => {
     .expect(visibleItemsInToolboxInDesigner.count).lt(toolboxItemCount)
     .expect(toolboxInSidebar.exists).notOk();
 
+  await ClientFunction(() => window["creator"].toolbox.removeCategories())();
   await changeToolboxLocation("sidebar");
   await t
     .click(toolboxButtonSelector)

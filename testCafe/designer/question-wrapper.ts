@@ -51,20 +51,20 @@ test("Single input question wrapper action convert", async (t) => {
 
     .click(convertActionButton)
     .expect(listItems.count).eql(19)
-    .expect(listItems.nth(0).innerText).eql("Single Input")
-    .expect(listItems.nth(1).innerText).eql("Checkbox")
-    .expect(listItems.nth(4).innerText).eql("Comment")
+    .expect(listItems.nth(8).innerText).eql("Single Input")
+    .expect(listItems.nth(2).innerText).eql("Checkbox")
+    .expect(listItems.nth(9).innerText).eql("Comment")
 
-    .click(listItems.nth(4))
+    .click(listItems.nth(9))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Comment"]'))
     .expect(listItems.count).eql(19)
-    .expect(listItems.nth(0).innerText).eql("Single Input")
-    .expect(listItems.nth(1).innerText).eql("Checkbox")
-    .expect(listItems.nth(4).innerText).eql("Comment")
+    .expect(listItems.nth(8).innerText).eql("Single Input")
+    .expect(listItems.nth(2).innerText).eql("Checkbox")
+    .expect(listItems.nth(9).innerText).eql("Comment")
 
-    .click(listItems.nth(0))
+    .click(listItems.nth(8))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
@@ -86,20 +86,20 @@ test("Single input question wrapper action convert on hover", async (t) => {
 
     .click(convertActionButton)
     .expect(listItems.count).eql(19)
-    .expect(listItems.nth(0).innerText).eql("Single Input")
-    .expect(listItems.nth(1).innerText).eql("Checkbox")
-    .expect(listItems.nth(4).innerText).eql("Comment")
+    .expect(listItems.nth(8).innerText).eql("Single Input")
+    .expect(listItems.nth(2).innerText).eql("Checkbox")
+    .expect(listItems.nth(9).innerText).eql("Comment")
 
-    .click(listItems.nth(4))
+    .click(listItems.nth(9))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Comment"]'))
     .expect(listItems.count).eql(19)
-    .expect(listItems.nth(0).innerText).eql("Single Input")
-    .expect(listItems.nth(1).innerText).eql("Checkbox")
-    .expect(listItems.nth(4).innerText).eql("Comment")
+    .expect(listItems.nth(8).innerText).eql("Single Input")
+    .expect(listItems.nth(2).innerText).eql("Checkbox")
+    .expect(listItems.nth(9).innerText).eql("Comment")
 
-    .click(listItems.nth(0))
+    .click(listItems.nth(8))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
