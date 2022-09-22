@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -201,4 +201,25 @@ test("add question from toolbox popup items", async (t) => {
     .click(popup.find(".sv-list__item"))
     .expect(Selector(".svc-question__content").exists).ok()
     .resizeWindow(1900, 600);
+});
+
+test("check toolbox scroll", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+  const hasNoScroll = ClientFunction(() => {
+    let element = document.querySelector(".svc-toolbox");
+    return element?.scrollHeight == element?.clientHeight;
+  });
+
+  const setSize = ClientFunction((size) => {
+    let element = document.querySelector(".svc-creator");
+    element["style"].height = size + "px";
+  });
+
+  for (var i = 580; i > 540; i--) {
+    await setSize(i);
+    await t
+      .wait(100)
+      .expect(hasNoScroll()).ok();
+  }
 });
