@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 
 import { CreatorComponent } from "./creator.component";
 import { SurveyAngularModule } from "survey-angular-ui";
-import { DesignerTabComponent } from "./tabs/designer.component";
+import { DesignerTabComponent } from "./tabs/designer/designer.component";
 import { SvgBundleComponent } from "./svg-bundle.component";
 import { TabbedMenuItemComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
 import { TabbledMenuComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
@@ -47,13 +47,14 @@ import { QuestionEditorComponent } from "./question-editor.component";
 import { CellQuestionDropdownComponent } from "./adorners/cell-question-dropdown.component";
 import { CreatorRowComponent } from "./row.component";
 import { NotifierComponent } from "./notifier.component";
-import { PagesControllerComponent } from "./page-controller.component";
+import { DesignerPagesComponent } from "./tabs/designer/designer-pages.component";
+import { DesignerSurveyComponent } from "./tabs/designer/designer-survey.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
-    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, NotifierComponent, PagesControllerComponent],
+    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, NotifierComponent, DesignerPagesComponent, DesignerSurveyComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],
