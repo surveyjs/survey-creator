@@ -161,6 +161,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const style: any = {};
     if(!!survey.width) {
       style.width = survey.renderedWidth;
+      style.maxWidth = survey.renderedWidth;
     }
 
     return (<React.Fragment>
