@@ -80,6 +80,7 @@ const json = {
 export class ExampleComponent {
   constructor() {
     this.creator.JSON = json;
+    (<any>window).creator = this.creator;
   }
 
   public survey = new SurveyModel(json);
