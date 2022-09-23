@@ -232,7 +232,7 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
       questionsToMove.forEach(question => {
         if (question.getType() === "dropdown") {
           question.allowClear = false;
-          question.renderAs = "logicoperator"
+          question.renderAs = "logicoperator";
         }
         triggerQuestionsPanel.addQuestion(question);
       });

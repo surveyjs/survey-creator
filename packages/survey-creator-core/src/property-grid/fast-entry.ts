@@ -58,8 +58,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
         var choicesCount = this.getChoicesCount();
         if (maxChoicesCount < choicesCount) {
           options.error = editorLocalization
-            .getString("pe.fastEntryChoicesCountError")
-          ["format"](choicesCount, maxChoicesCount);
+            .getString("pe.fastEntryChoicesCountError")["format"](choicesCount, maxChoicesCount);
         }
         return;
       }
@@ -67,8 +66,7 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       let uniqueValue = this.getFirstUniqueValue();
       if (!!uniqueValue) {
         options.error = editorLocalization
-          .getString("pe.fastEntryNonUniqueError")
-        ["format"](uniqueValue);
+          .getString("pe.fastEntryNonUniqueError")["format"](uniqueValue);
       }
     });
   }
