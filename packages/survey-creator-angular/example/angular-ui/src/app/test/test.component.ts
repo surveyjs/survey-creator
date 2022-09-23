@@ -14,6 +14,6 @@ export class TestComponent implements OnInit {
     (<any>window).creator = this.creator;
   }
   protected createCreator(): void {
-    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
   }
 }
