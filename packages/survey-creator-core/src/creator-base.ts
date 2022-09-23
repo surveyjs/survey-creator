@@ -3008,19 +3008,18 @@ export class CreatorBase extends Base
     var availableTypes = this.toolbox.items.map((item) => {
       return this.createIActionBarItemByClass(item.name, item.title, item.iconName);
     });
-    const popupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          availableTypes,
-          (item: any) => {
-            this.currentAddQuestionType = item.id;
-            this.addNewQuestionInPage(beforeAdd, panel);
-            popupModel.toggleVisibility();
-          },
-          false
-        )
+    const listModel = new ListModel(
+      availableTypes,
+      (item: any) => {
+        this.currentAddQuestionType = item.id;
+        this.addNewQuestionInPage(beforeAdd, panel);
+        popupModel.toggleVisibility();
       },
+      false
+    );
+    listModel.locOwner = this;
+    const popupModel = new PopupModel(
+      "sv-list", { model: listModel },
       "bottom",
       "center"
     );

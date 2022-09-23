@@ -16,9 +16,11 @@
   <script src="../node_modules/survey-react-ui/survey-react-ui.js"></script>
   <script src="../node_modules/survey-creator-core/survey-creator-core.js"></script>
   <script src="../node_modules/survey-core/survey.i18n.min.js"></script>
+  <script src="../node_modules/survey-creator-core/survey-creator-core.i18n.min.js"></script>
 
   <!--<script src="../build/survey-creator-react.js"></script>-->
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
+  <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/modern.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.css" /> -->
@@ -26,7 +28,8 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
+  <button onclick="window.creator.locale='de'">Change locale</button>
+  <div id="root" style="position: fixed; top: 20px; left: 0; right: 0; bottom: 0;"></div>
 </body>
 <script src="index.js" type="text/babel"></script>
 

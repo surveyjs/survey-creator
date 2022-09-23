@@ -78,20 +78,15 @@ export class TabLogicPlugin implements ICreatorPlugin {
       SurveyHelper.sortItems(items, "title");
       questionPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllQuestionsText }].concat(items));
     };
+    const questionListModel = new ListModel(
+      [{ id: null, title: this.showAllQuestionsText }],
+      (item: IAction) => {
+        this.model.questionFilter = !!item.id ? item.id : "";
+        questionPopupModel.toggleVisibility();
+      }, true);
+    questionListModel.locOwner = this.creator;
     const questionPopupModel = new PopupModel<{ model: ListModel }>(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllQuestionsText }],
-          (item: IAction) => {
-            this.model.questionFilter = !!item.id ? item.id : "";
-            questionPopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "bottom",
-      "center",
+      "sv-list", { model: questionListModel }, "bottom", "center",
       undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
     );
 
@@ -109,20 +104,15 @@ export class TabLogicPlugin implements ICreatorPlugin {
       SurveyHelper.sortItems(items, "title");
       actionTypesPopupModel.contentComponentData.model.setItems([{ id: null, title: this.showAllActionTypesText }].concat(items));
     };
+    const actionTypesListModel = new ListModel(
+      [{ id: null, title: this.showAllActionTypesText }],
+      (item: IAction) => {
+        this.model.actionTypeFilter = !!item.id ? item.id : "";
+        actionTypesPopupModel.toggleVisibility();
+      }, true);
+    actionTypesListModel.locOwner = this.creator;
     const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(
-      "sv-list",
-      {
-        model: new ListModel(
-          [{ id: null, title: this.showAllActionTypesText }],
-          (item: IAction) => {
-            this.model.actionTypeFilter = !!item.id ? item.id : "";
-            actionTypesPopupModel.toggleVisibility();
-          },
-          true
-        )
-      },
-      "bottom",
-      "center",
+      "sv-list", { model: actionTypesListModel }, "bottom", "center",
       undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
     );
 
