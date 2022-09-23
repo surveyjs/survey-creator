@@ -1,3 +1,4 @@
+import { Selector } from "testcafe";
 import { setSurveyProp, url, setJSON, getDropdownValue } from "../helper";
 const title = "Change survey locale";
 
@@ -22,15 +23,16 @@ fixture`${title}`.page`${url}`.beforeEach(
 );
 
 test("Change survey locale", async t => {
+  const placeholder = Selector(".sd-input.sd-dropdown input").getAttribute("placeholder");
   await setJSON(json);
 
-  await t.expect(getDropdownValue()).eql("Select...");
+  await t.expect(placeholder).eql("Select...");
   await setSurveyProp("locale", "de");
-  await t.expect(getDropdownValue()).eql("Bitte auswählen...");
+  await t.expect(placeholder).eql("Bitte auswählen...");
   await setSurveyProp("locale", "es");
-  await t.expect(getDropdownValue()).eql("Seleccione...");
+  await t.expect(placeholder).eql("Seleccione...");
   await setSurveyProp("locale", "it");
-  await t.expect(getDropdownValue()).eql("Scegli...");
+  await t.expect(placeholder).eql("Scegli...");
   await setSurveyProp("locale", "");
-  await t.expect(getDropdownValue()).eql("Select...");
+  await t.expect(placeholder).eql("Select...");
 });

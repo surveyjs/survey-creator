@@ -96,9 +96,13 @@ export class PageNavigatorViewModel extends Base {
   private createActionBarItem(page: PageModel): Action {
     const item: IAction = {
       id: page.id,
-      title: <any>new ComputedUpdater<boolean>(() => this.pagesController
-        ? this.pagesController.getDisplayName(page)
-        : page.title)
+      title: <any>new ComputedUpdater<boolean>(() => {
+        var pageName = page.name;
+        var pageTitle = page.title;
+        return this.pagesController
+          ? this.pagesController.getDisplayName(page)
+          : (pageTitle || pageName);
+      })
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
