@@ -13,9 +13,11 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() model!: PageModel;
   @Input() survey!: SurveyModel;
   @Input() creator!: CreatorBase;
+  @Input() isGhost?: boolean;
   public adorner!: PageAdorner;
   protected createModel(): void {
     if (this.model) {
+      this.previousModel?.dispose();
       this.adorner = new PageAdorner(this.creator, this.model);
     }
   }
@@ -28,6 +30,10 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   public selectQuestionType(event: any) {
     event.stopPropagation();
     this.adorner.questionTypeSelectorModel.action();
+  }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner.dispose();
   }
 }
 
