@@ -144,5 +144,5 @@ export const patchDragDropToDisableDrop = ClientFunction(() => {
 });
 
 export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {
-  return Selector(selector).find("input").getAttribute("placeholder");
+  return Selector(selector).find(".sv-string-viewer").textContent;
 }
