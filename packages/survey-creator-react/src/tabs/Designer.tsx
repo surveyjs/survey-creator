@@ -78,12 +78,14 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       }
     } else {
       const page2Display = this.model.pagesController.page2Display;
-      let cachedPage = this.renderedPagesCache[page2Display.id];
-      if (!cachedPage) {
-        cachedPage = this.createRenderedPage(page2Display, 0, true);
-        this.renderedPagesCache[page2Display.id] = cachedPage;
+      if(!!page2Display) {
+        let cachedPage = this.renderedPagesCache[page2Display.id];
+        if (!cachedPage) {
+          cachedPage = this.createRenderedPage(page2Display, 0, true);
+          this.renderedPagesCache[page2Display.id] = cachedPage;
+        }
+        renderedPages.push(cachedPage);
       }
-      renderedPages.push(cachedPage);
     }
 
     return renderedPages;
