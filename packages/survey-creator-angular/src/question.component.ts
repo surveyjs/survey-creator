@@ -34,6 +34,10 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
     event.stopPropagation();
     this.adorner.questionTypeSelectorModel.action(this.adorner.questionTypeSelectorModel, event);
   }
+  public addNewQuestion(event: any) {
+    event.stopPropagation();
+    this.adorner.addNewQuestion();
+  }
   adornerComponent = "";
 }
 

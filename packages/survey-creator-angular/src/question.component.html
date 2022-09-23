@@ -15,7 +15,7 @@
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
         <div *ngIf="adorner.element.isPanel && adorner.showAddQuestionButton"
-          class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
+          class="svc-panel__add-new-question svc-action-button" [key2click] (click)="addNewQuestion($event)"
           data-bind="clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
@@ -33,7 +33,7 @@
 
       <div *ngIf="!adorner.isEmptyElement && model.isPanel && adorner.showAddQuestionButton"
         class="svc-panel__add-new-question-container">
-        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
+        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="addNewQuestion($event)"
           data-bind="clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
@@ -60,7 +60,7 @@
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
         <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
-          (click)="adorner.addNewQuestion()" data-bind="clickBubble: false">
+          (click)="addNewQuestion($event)" data-bind="clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
           </span>
@@ -68,7 +68,7 @@
       </div>
 
       <div *ngIf="!adorner.isEmptyElement" class="svc-panel__add-new-question-container">
-        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="adorner.addNewQuestion()"
+        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="addNewQuestion($event)"
           data-bind="clickBubble: false">
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}

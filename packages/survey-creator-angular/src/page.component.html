@@ -6,7 +6,7 @@
   </div>
   <page [model]="model" [survey]="survey"></page>
   <div *ngIf="adorner.showAddQuestionButton" class="svc-page__add-new-question svc-btn" [key2click]
-    (click)="adorner.addNewQuestion(adorner, $event)" (mouseover)="adorner.hoverStopper($event, $event.currentTarget)"
+    (click)="addNewQuestion($event)" (mouseover)="adorner.hoverStopper($event, $event.currentTarget)"
     data-bind="clickBubble: false">
     <span class="svc-text svc-text--normal svc-text--bold">
       {{ adorner.addNewQuestionText }}
