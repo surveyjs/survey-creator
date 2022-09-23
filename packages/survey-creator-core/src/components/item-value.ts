@@ -14,6 +14,7 @@ import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
 import { ICollectionItemAllowOperations } from "../settings";
+import { StringEditorViewModelBase } from "./string-editor";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;

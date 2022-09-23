@@ -16,6 +16,7 @@ export class StringEditorViewModel {
 
   constructor(public locString: any, private creator: CreatorBase, element: any) {
     this.baseModel = new StringEditorViewModelBase(locString, creator);
+    this.baseModel.getEditorElement = () => this.getEditorElement(element);
     this.implementor = new ImplementorBase(this.baseModel);
     this.focusEditor = () => {
       this.getEditorElement(element).focus();

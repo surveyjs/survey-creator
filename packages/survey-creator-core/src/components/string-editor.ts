@@ -1,12 +1,29 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
 
 export class StringEditorViewModelBase extends Base {
+  public static getActivateEventForLocString(locString: LocalizableString): SurveyEvent <(sender: StringEditorViewModelBase, options: any) => any, any> {
+    return locString["_editorActivateEvent"];
+  }
+  private setActivateEventForLocString(locString: LocalizableString) {
+    let event = StringEditorViewModelBase.getActivateEventForLocString(locString);
+    if(!event) {
+      event =
+          new SurveyEvent <(sender: StringEditorViewModelBase, options: any) => any, any>();
+      locString["_editorActivateEvent"] = event;
+    }
+    event.add(()=>{ this.activate(); });
+  }
+
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
+
+  public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+
+  public getEditorElement: () => HTMLElement;
 
   @property() errorText: string;
   @property() focused: boolean;
@@ -14,7 +31,16 @@ export class StringEditorViewModelBase extends Base {
   compostionInProgress: boolean;
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
+    this.setActivateEventForLocString(locString);
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+  }
+
+  public activate() {
+    const element = this.getEditorElement();
+    if(element) {
+      element.focus();
+      select(element);
+    }
   }
 
   public setLocString(locString: LocalizableString) {
