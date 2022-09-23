@@ -194,6 +194,7 @@ test("Hidden Question Issue: #3298", async (t) => {
 
 const json3 = {
   "width": "755px",
+  "widthMode": "static",
   "pages": [
     {
       "name": "page1",
