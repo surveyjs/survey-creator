@@ -4,8 +4,7 @@ import { CreatorBase } from "survey-creator-core";
 
 @Component({
   selector: "svc-creator",
-  templateUrl: "./creator.component.html",
-  styleUrls: []
+  templateUrl: "./creator.component.html"
 })
 export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterViewInit {
   @Input() model!: CreatorBase;

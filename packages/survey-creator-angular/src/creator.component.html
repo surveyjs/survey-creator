@@ -30,7 +30,7 @@
           </div>
           <div *ngIf="creator.isMobileView" class="svc-footer-bar">
             <div class="svc-toolbar-wrapper" [visible]="creator.isMobileView">
-              <sv-action-bar [model: creator.footerToolbar]></sv-action-bar>
+              <sv-action-bar [model]="creator.footerToolbar"></sv-action-bar>
             </div>
           </div>
         </div>
