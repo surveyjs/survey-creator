@@ -906,6 +906,49 @@ test("init placeholders", () => {
   expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("Q 1");
 });
+test("init placeholders for choices", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "question1",
+        "choices": [
+          {
+            "value": 1,
+            "text": {
+              "default": "Item 1",
+              "da": "I 1"
+            }
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(2);
+  const choicesPanel = <PanelModel>question1.elements[1];
+  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
+  expect(choicesProps.name).toEqual("question1_choices");
+  expect(choicesProps.columns).toHaveLength(2);
+  const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
+  const cellQuestion2 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeholder).toEqual("1");
+  expect(cellQuestion1.value).toEqual("Item 1");
+  expect(cellQuestion2.placeholder).toEqual("Item 1");
+  expect(cellQuestion2.value).toEqual("I 1");
+
+  cellQuestion1.value = "";
+  expect(cellQuestion1.placeholder).toEqual("1");
+  expect(cellQuestion1.value).toEqual("");
+  expect(cellQuestion2.placeholder).toEqual("1");
+  expect(cellQuestion2.value).toEqual("I 1");
+});
 
 test("localize placeholders", () => {
   const survey = new SurveyModel({

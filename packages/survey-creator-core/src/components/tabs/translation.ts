@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel, Helpers } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -162,8 +162,8 @@ export class TranslationItem extends TranslationItemBase {
     if (!(this.context instanceof PageModel) && this.name === "title") {
       return this.getPlaceholderText(locale) || this.context.name;
     }
-    if (this.context.ownerPropertyName === "choices" && this.context.typeName === "itemvalue") {
-      return this.getPlaceholderText(locale) || placeholderText;
+    if (this.context.ownerPropertyName === "choices" && this.context.getType() === "itemvalue") {
+      return this.getPlaceholderText(locale) || this.getItemValuePlaceholderText() || placeholderText;
     }
     return placeholderText;
   }
@@ -184,6 +184,10 @@ export class TranslationItem extends TranslationItemBase {
     if(index < 0) return "";
     loc = loc.substring(0, index);
     return loc === surveyLocalization.defaultLocale ? "" : loc;
+  }
+  private getItemValuePlaceholderText(): string {
+    const val = this.context.value;
+    return !Helpers.isValueEmpty(val) ? val.toString() : "";
   }
 }
 
