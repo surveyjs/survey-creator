@@ -148,7 +148,7 @@ export class TranslationItem extends TranslationItemBase {
   private getKeys(): Array<string> {
     return this.locString.getLocales();
   }
-  public mergeLocaleWithDefault(loc: string) {
+  public mergeLocaleWithDefault(loc: string): void {
     var locText = this.locString.getLocaleText(loc);
     if (!locText) return;
     this.locString.setLocaleText("", locText);
@@ -175,6 +175,7 @@ export class TranslationItem extends TranslationItemBase {
     return this.getPlaceholderText(loc);
   }
   public getPlaceholderText(loc: string): string {
+    if(!loc || loc === "default") return "";
     const root = this.getRootDialect(loc);
     return this.locString.getLocaleText(root);
   }
@@ -703,7 +704,7 @@ export class Translation extends Base implements ITranslationLocales {
         const colName = options.columnName;
         options.row.cells.forEach(cell => {
           if(colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
-            this.updateCellPlaceholdersByDefault(cell, options.value, item);
+            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
         });
       }
     });
@@ -712,13 +713,6 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
     cellQuestion.placeholder = item.getPlaceholder(locale);
-  }
-  private updateCellPlaceholdersByDefault(cell: MatrixDropdownCell, newValue: string, item: TranslationItem) {
-    if (!!newValue) {
-      (<QuestionTextBase>cell.question).placeholder = item.getPlaceholder(cell.column.value);
-    } else {
-      this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-    }
   }
   private createStringsHeaderSurvey() {
     let json = {};

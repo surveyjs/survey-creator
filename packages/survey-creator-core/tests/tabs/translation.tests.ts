@@ -895,7 +895,7 @@ test("init placeholders", () => {
   expect(question1Props.rows[0].value).toEqual("title");
   const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeholder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("Q 1");
@@ -1003,7 +1003,7 @@ test("init placeholders for dialects", () => {
   const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
   const cellQuestion3 = <QuestionCommentModel>question1Props.visibleRows[0].cells[2].question;
   const cellQuestion4 = <QuestionCommentModel>question1Props.visibleRows[0].cells[3].question;
-  expect(cellQuestion1.placeholder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("Question uk");
