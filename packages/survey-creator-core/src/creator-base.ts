@@ -57,7 +57,7 @@ import { ICreatorOptions } from "./creator-options";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
-import { StringEditorViewModelBase } from "./entries";
+import { StringEditorConnector } from "./components/string-editor";
 
 Serializer.removeClass("tagbox"); // remove after tagbox implemented
 QuestionFactory.Instance.unregisterElement("tagbox");
@@ -2373,9 +2373,7 @@ export class CreatorBase extends Base
           }
         }
         if(startEdit) {
-          StringEditorViewModelBase.getActivateEventForLocString(
-            (element as Question).locTitle
-          ).fire((element as Question).locTitle, {});
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 100);
     }

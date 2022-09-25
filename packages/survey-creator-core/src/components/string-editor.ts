@@ -1,27 +1,34 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
 
+export class StringEditorConnector extends Base {
+  public static get(locString: LocalizableString): StringEditorConnector {
+    if(!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
+    return locString["_stringEditorConnector"];
+  }
+  public activateEditor(): void {
+    this.onDoActivate.fire(this.locString, {});
+  }
+  public setItemValue(item: ItemValue, question: QuestionSelectBase): void {
+    this.onEditComplete.add(()=>{
+      const itemIndex = question.visibleChoices.indexOf(item);
+      if(itemIndex < question.visibleChoices.length - 1) StringEditorConnector.get(question.visibleChoices[itemIndex + 1].locText).activateEditor();
+    });
+  }
+  public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  constructor(private locString: LocalizableString) {
+    super();
+  }
+}
 export class StringEditorViewModelBase extends Base {
-  public static getActivateEventForLocString(locString: LocalizableString): SurveyEvent <(sender: StringEditorViewModelBase, options: any) => any, any> {
-    return locString["_editorActivateEvent"];
-  }
-  private setActivateEventForLocString(locString: LocalizableString) {
-    let event = StringEditorViewModelBase.getActivateEventForLocString(locString);
-    if(!event) {
-      event =
-          new SurveyEvent <(sender: StringEditorViewModelBase, options: any) => any, any>();
-      locString["_editorActivateEvent"] = event;
-    }
-    event.add(()=>{ this.activate(); });
-  }
 
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-
-  public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  private connector: StringEditorConnector
 
   public getEditorElement: () => HTMLElement;
 
@@ -29,9 +36,11 @@ export class StringEditorViewModelBase extends Base {
   @property() focused: boolean;
   @property({ defaultValue: true }) editAsText: boolean;
   compostionInProgress: boolean;
+
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
-    this.setActivateEventForLocString(locString);
+    this.connector = StringEditorConnector.get(locString);
+    this.connector.onDoActivate.add(()=>{ this.activate(); });
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
@@ -176,6 +185,7 @@ export class StringEditorViewModelBase extends Base {
   public onKeyDown(event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
       this.blurEditor();
+      this.connector.onEditComplete.fire(this, {});
       this.done(event);
     }
     if (event.keyCode === 27) {
