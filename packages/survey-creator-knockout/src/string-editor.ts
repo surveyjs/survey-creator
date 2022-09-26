@@ -50,6 +50,9 @@ export class StringEditorViewModel {
   public get contentEditable(): string {
     return this.baseModel.contentEditable?"true":"false";
   }
+  public get focusOnRender(): boolean {
+    return this.baseModel.focusOnRender;
+  }
 
   public errorText: ko.Observable<string> = ko.observable(null);
   public onClick(sender: StringEditorViewModel, event: any): void {

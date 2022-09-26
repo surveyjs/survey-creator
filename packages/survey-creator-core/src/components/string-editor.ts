@@ -2,19 +2,56 @@ import { Base, LocalizableString, Serializer, JsonObjectProperty, property, Item
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
+import { ItemValueWrapperViewModel } from "./item-value";
 
 export class StringEditorConnector extends Base {
   public static get(locString: LocalizableString): StringEditorConnector {
     if(!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
     return locString["_stringEditorConnector"];
   }
+  public static setFocusOnNewItem(question: QuestionSelectBase, value: boolean) {
+    question["_focusOnNewItem"] = value;
+  }
+  public static getFocusOnNewItem(question: QuestionSelectBase): StringEditorConnector {
+    return question["_focusOnNewItem"];
+  }
+
+  private hasEditCompleteHandler = false;
+  private question: QuestionSelectBase;
+  private item: ItemValue;
+
+  public get focusOnEditor() {
+    return this.question &&
+           StringEditorConnector.getFocusOnNewItem(this.question) &&
+           this.question.choices[this.question.choices.length - 1] == this.item;
+  }
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
-  public setItemValue(item: ItemValue, question: QuestionSelectBase): void {
+  public activateEditorTimeout(): void {
+    setTimeout(()=>{
+      this.activateEditor();
+    }, 100);
+  }
+  public setItemValue(item: ItemValueWrapperViewModel): void {
+    this.question = item.question;
+    this.item = item.item;
+    const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
+    let activeChoices = item.question.choices;
+    if (!titleConnector.hasEditCompleteHandler) {
+      titleConnector.onEditComplete.add(()=>{
+        StringEditorConnector.get(item.question.visibleChoices[0].locText).activateEditor();
+      });
+      titleConnector.hasEditCompleteHandler = true;
+    }
     this.onEditComplete.add(()=>{
-      const itemIndex = question.visibleChoices.indexOf(item);
-      if(itemIndex < question.visibleChoices.length - 1) StringEditorConnector.get(question.visibleChoices[itemIndex + 1].locText).activateEditor();
+      const itemIndex = activeChoices.indexOf(item.item);
+      if(itemIndex >= 0 && itemIndex < activeChoices.length - 1) {
+        StringEditorConnector.get(activeChoices[itemIndex + 1].locText).activateEditor();
+      }
+      if(itemIndex == activeChoices.length - 1) {
+        item.addNewItem(item.question.newItem, item.question, item.creator);
+      }
     });
   }
   public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
@@ -31,6 +68,10 @@ export class StringEditorViewModelBase extends Base {
   private connector: StringEditorConnector
 
   public getEditorElement: () => HTMLElement;
+
+  public get focusOnRender() {
+    return this.connector.focusOnEditor;
+  }
 
   @property() errorText: string;
   @property() focused: boolean;
