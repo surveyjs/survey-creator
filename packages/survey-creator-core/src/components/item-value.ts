@@ -146,7 +146,7 @@ export class ItemValueWrapperViewModel extends Base {
     question.choices.push(itemValue);
     this.updateNewItemValue();
     if (this.creator) this.creator.onItemValueAddedCallback(question, "choices", itemValue, question.choices);
-    StringEditorConnector.setFocusOnNewItem(question, true);
+    StringEditorConnector.get(itemValue.locText).setAutoFocus();
   }
 
   public remove(model: ItemValueWrapperViewModel) {

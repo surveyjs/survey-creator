@@ -34,6 +34,10 @@ export class StringEditorViewModel {
     return locString;
   }
 
+  public afterRender = ()=>{
+    this.baseModel.afterRender();
+  }
+
   public get koHasHtml(): boolean {
     return this.locString.koHasHtml();
   }

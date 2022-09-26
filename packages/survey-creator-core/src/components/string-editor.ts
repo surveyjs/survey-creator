@@ -9,38 +9,20 @@ export class StringEditorConnector extends Base {
     if(!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
     return locString["_stringEditorConnector"];
   }
-  public static setFocusOnNewItem(question: QuestionSelectBase, value: boolean) {
-    question["_focusOnNewItem"] = value;
-  }
-  public static getFocusOnNewItem(question: QuestionSelectBase): StringEditorConnector {
-    return question["_focusOnNewItem"];
-  }
+  public setAutoFocus() { this.focusOnEditor = true; }
 
   private hasEditCompleteHandler = false;
-  private question: QuestionSelectBase;
-  private item: ItemValue;
 
-  public get focusOnEditor() {
-    return this.question &&
-           StringEditorConnector.getFocusOnNewItem(this.question) &&
-           this.question.choices[this.question.choices.length - 1] == this.item;
-  }
+  public focusOnEditor: boolean;
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
-  public activateEditorTimeout(): void {
-    setTimeout(()=>{
-      this.activateEditor();
-    }, 100);
-  }
   public setItemValue(item: ItemValueWrapperViewModel): void {
-    this.question = item.question;
-    this.item = item.item;
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
     let activeChoices = item.question.choices;
     if (!titleConnector.hasEditCompleteHandler) {
       titleConnector.onEditComplete.add(()=>{
-        StringEditorConnector.get(item.question.visibleChoices[0].locText).activateEditor();
+        if(item.question.choices.length) StringEditorConnector.get(item.question.choices[0].locText).activateEditor();
       });
       titleConnector.hasEditCompleteHandler = true;
     }
@@ -69,10 +51,6 @@ export class StringEditorViewModelBase extends Base {
 
   public getEditorElement: () => HTMLElement;
 
-  public get focusOnRender() {
-    return this.connector.focusOnEditor;
-  }
-
   @property() errorText: string;
   @property() focused: boolean;
   @property({ defaultValue: true }) editAsText: boolean;
@@ -83,6 +61,13 @@ export class StringEditorViewModelBase extends Base {
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(()=>{ this.activate(); });
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+  }
+
+  public afterRender() {
+    if(this.connector.focusOnEditor) {
+      this.activate();
+      this.connector.focusOnEditor = false;
+    }
   }
 
   public activate() {
