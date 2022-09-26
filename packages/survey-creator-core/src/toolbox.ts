@@ -722,7 +722,7 @@ export class QuestionToolbox
       isCopied: false,
       category: category
     });
-    const index = this.supportedQuestions.indexOf(item.id);
+    const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;
     const action = this.getActionByItem(item);
     if(index > -1) {
       this.actions.splice(index, 0, action);
