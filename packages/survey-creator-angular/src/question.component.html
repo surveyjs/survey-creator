@@ -55,8 +55,7 @@
     </div>
 
     <ng-container *ngIf="!adorner.element.isInteractiveDesignElement">
-      <ng-template [component]="{ name: 'sv-template-renderer', data: { model: model } }"></ng-template>
-
+      <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
       <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
         <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
