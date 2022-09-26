@@ -11,7 +11,7 @@ fixture`${title}`.page`${url}`;
 const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
+  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-of-type(5)");
   await t
     .resizeWindow(1920, 900)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
