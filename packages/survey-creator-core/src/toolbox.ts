@@ -722,7 +722,13 @@ export class QuestionToolbox
       isCopied: false,
       category: category
     });
-    this.actions.push(this.getActionByItem(item));
+    const index = this.supportedQuestions.indexOf(item.id);
+    const action = this.getActionByItem(item);
+    if(index > -1) {
+      this.actions.splice(index, 0, action);
+    } else {
+      this.actions.push(action);
+    }
   }
   private getQuestionJSON(question: any): any {
     var json = new JsonObject().toJsonObject(question);
