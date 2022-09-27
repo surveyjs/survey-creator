@@ -152,6 +152,7 @@ export class StringEditorViewModelBase extends Base {
       }
       this.errorText = null;
       this.focused = false;
+      window?.getSelection().removeAllRanges();
       return;
     }
 
@@ -203,6 +204,7 @@ export class StringEditorViewModelBase extends Base {
       this.locString.strChanged();
     }
     this.focused = false;
+    window?.getSelection().removeAllRanges();
   }
   public done(event: Event): void {
     event.stopImmediatePropagation();
@@ -211,7 +213,9 @@ export class StringEditorViewModelBase extends Base {
   public onKeyDown(event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
       this.blurEditor();
-      this.connector.onEditComplete.fire(this, {});
+      if(!event.ctrlKey) {
+        this.connector.onEditComplete.fire(this, {});
+      }
       this.done(event);
     }
     if (event.keyCode === 27) {

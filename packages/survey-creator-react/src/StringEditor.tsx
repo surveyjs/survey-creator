@@ -11,6 +11,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     super(props);
     this.state = { changed: 0 };
     this.svStringEditorRef = React.createRef();
+    this.baseModel.getEditorElement = () => this.svStringEditorRef.current;
   }
   protected createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
@@ -46,7 +47,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     super.componentDidMount();
     if (!this.locString) return;
     const self: SurveyLocStringEditor = this;
-
+    this.baseModel.afterRender();
     this.locString.onStringChanged.add(this.onChangedHandler);
     if (this.locString["__isEditing"]) {
       this.svStringEditorRef.current.focus();
