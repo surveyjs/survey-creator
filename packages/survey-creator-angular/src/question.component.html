@@ -1,7 +1,7 @@
 <ng-template #template>
   <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()"
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
-    [attr.data-sv-drop-target-survey-element]="adorner.element.name || null">
+    [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
     <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()"
       [key2click] (click)="adorner.select(adorner, $event)" data-bind="clickBubble: false">

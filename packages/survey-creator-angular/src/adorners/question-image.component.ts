@@ -1,8 +1,6 @@
-import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
-import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
-import { ItemValue, PageModel, Question, SurveyModel } from "survey-core";
-import { CreatorBase, QuestionAdornerViewModel, QuestionDropdownAdornerViewModel, QuestionImageAdornerViewModel } from "survey-creator-core";
-import { CreatorModelComponent } from "../creator-model.component";
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
+import { QuestionImageAdornerViewModel } from "survey-creator-core";
 import { QuestionDesignerComponent } from "../question.component";
 
 @Component({
@@ -10,13 +8,18 @@ import { QuestionDesignerComponent } from "../question.component";
   templateUrl: "../question.component.html",
   styles: [":host { display: none; }"]
 })
-export class QuestionImageDesignerComponent extends QuestionDesignerComponent {
+export class QuestionImageDesignerComponent extends QuestionDesignerComponent implements AfterViewInit {
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
+
   protected override createModel(): void {
     if (this.componentData) {
       this.adorner = new QuestionImageAdornerViewModel(this.creator, this.model, <any>null, this.viewContainerRef?.element.nativeElement.nextSibling);
     }
   }
   public override adornerComponent = "svc-image-question-adorner";
+  ngAfterViewInit(): void {
+    (<QuestionImageAdornerViewModel>this.adorner).questionRoot = this.container.nativeElement;
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-image-question", QuestionImageDesignerComponent);
@@ -27,7 +30,7 @@ AngularComponentFactory.Instance.registerComponent("svc-image-question", Questio
   styles: [":host { display: none; }"]
 })
 export class QuestionImageAdornerDesignerComponent extends EmbeddedViewContentComponent {
-  @Input() adorner!: any;
+  @Input() adorner!: QuestionImageAdornerViewModel;
   @Input() question!: any;
 }
 
