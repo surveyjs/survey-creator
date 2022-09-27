@@ -1,8 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, ViewEncapsulation } from "@angular/core";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styles: [":host { position: fixed; top: 0; bottom: 0; right: 0; left: 0;}"]
+  styleUrls: ["./app.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
   public isTest = !!(<any>window)["%hammerhead%"];

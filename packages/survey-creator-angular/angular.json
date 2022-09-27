@@ -55,6 +55,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "survey-core",
+              "survey-creator-core"
+            ],
             "preserveSymlinks": true,
             "outputPath": "./dist/angular-ui",
             "index": "./example/angular-ui/src/index.html",
@@ -67,14 +71,11 @@
               "./example/angular-ui/src/assets",
               "./example/angular-ui/src/testCafe"
             ],
-            "styles": [
-              "./example/angular-ui/node_modules/survey-core/defaultV2.css",
-              "./example/angular-ui/node_modules/survey-creator-core/survey-creator-core.css"
-            ],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",

@@ -4,7 +4,6 @@ import { TestComponent } from "./test.component";
 @Component({
   selector: "test-by-page",
   templateUrl: "./test.component.html",
-  styleUrls: ["./test.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class TestByPageComponent extends TestComponent {
