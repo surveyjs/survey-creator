@@ -58,9 +58,6 @@ import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
 
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
-
 export interface IKeyboardShortcut {
   name?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
@@ -326,7 +323,7 @@ export class CreatorBase extends Base
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
-    if(!!locStrName) {
+    if (!!locStrName) {
       title = undefined;
     }
     const tab: TabbedMenuItem = new TabbedMenuItem({
@@ -2283,7 +2280,7 @@ export class CreatorBase extends Base
     this.addNewElementReason = "ELEMENT_COPIED";
     newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
     const panels: any = newPage.getPanels();
-    if(Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
+    if (Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
     this.addNewElementReason = "";
     return newPage;
   }
@@ -2488,18 +2485,18 @@ export class CreatorBase extends Base
     return isValid;
   }
   private getPropertyGridExpandedCategory(): string {
-    if(!this.designerPropertyGrid) return undefined;
+    if (!this.designerPropertyGrid) return undefined;
     const panels = this.designerPropertyGrid.survey.getAllPanels();
-    for(var i = 0; i < panels.length; i ++) {
-      if((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    for (var i = 0; i < panels.length; i++) {
+      if ((<PanelModel>panels[i]).isExpanded) return panels[i].name;
     }
     return "";
   }
   private expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
-    if(!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
+    if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
-      if(!!panel) {
+      if (!!panel) {
         panel.expand();
       }
     }
@@ -2880,7 +2877,7 @@ export class CreatorBase extends Base
     editor: any,
     list: any[]
   ): string {
-    if(this.onConditionQuestionsGetList.isEmpty) return "asc";
+    if (this.onConditionQuestionsGetList.isEmpty) return "asc";
     var options = {
       propertyName: propertyName,
       obj: obj,

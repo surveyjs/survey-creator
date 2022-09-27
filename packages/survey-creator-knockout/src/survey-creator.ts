@@ -1,13 +1,9 @@
 import * as ko from "knockout";
-import { Serializer, QuestionFactory } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { SurveyCreator } from "./creator";
 
 const template = require("./survey-creator.html");
 // import template from "./creator.html";
-
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
 
 export class CreatorViewModel {
   constructor(public creator: SurveyCreator, private rootNode: HTMLElement) {
