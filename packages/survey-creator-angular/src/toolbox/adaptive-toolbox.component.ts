@@ -18,7 +18,7 @@ export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> imple
   ngAfterViewInit() {
     this.responsivityManager =
       new VerticalResponsivityManager(this.container.nativeElement,
-        this.model, ".svc-toolbox__tool:not(.sv-dots)", 44, 44);
+        this.model, ".svc-toolbox__tool:not(.sv-dots)");
   }
   protected getModel(): QuestionToolbox {
     return this.model;

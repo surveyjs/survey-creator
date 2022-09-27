@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { SurveyModel } from "survey-core";
 import { CreatorBase } from "survey-creator-core";
+import * as Survey from "survey-core";
 
 const json = {
   "logoPosition": "right",
@@ -81,6 +82,7 @@ export class ExampleComponent {
   constructor() {
     this.creator.JSON = json;
     (<any>window).creator = this.creator;
+    (<any>window).Survey = Survey;
   }
 
   public survey = new SurveyModel(json);

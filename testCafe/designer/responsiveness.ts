@@ -28,7 +28,7 @@ test("Check base responsiveness for tabbed menu", async (t) => {
 });
 
 test("Check base responsiveness for toolbox", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
+  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(20)");
   await t
     .resizeWindow(1280, 1100)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
