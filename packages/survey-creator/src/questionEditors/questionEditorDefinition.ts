@@ -168,6 +168,7 @@ export class SurveyQuestionEditorDefinition {
         "commentText",
         "commentPlaceholder",
         { name: "useDropdown", tab: "layout" },
+        { name: "displayMode", tab: "layout" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
