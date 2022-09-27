@@ -3006,7 +3006,7 @@ export class CreatorBase extends Base
 
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
     var availableTypes = this.toolbox.items.map((item) => {
-      return this.createIActionBarItemByClass(item.name, item.title, item.iconName);
+      return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
     });
     const listModel = new ListModel(
       availableTypes,
@@ -3048,12 +3048,14 @@ export class CreatorBase extends Base
     let newElement = this.createNewElement(json);
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
-  createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
-    return new Action({
+  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean): Action {
+    const action = new Action({
       title: title,
       id: className,
       iconName: iconName
     });
+    action.needSeparator = needSeparator;
+    return action;
   }
 
   public onElementMenuItemsChanged(element: any, items: Action[]) {
