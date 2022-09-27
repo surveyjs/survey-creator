@@ -1,4 +1,4 @@
-import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel } from "survey-core";
+import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty, Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel, PopupModel, ListModel, PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel, MatrixDropdownCell, QuestionTextBase, ComputedUpdater, createDropdownActionModel, Helpers } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
@@ -148,11 +148,46 @@ export class TranslationItem extends TranslationItemBase {
   private getKeys(): Array<string> {
     return this.locString.getLocales();
   }
-  public mergeLocaleWithDefault(loc: string) {
+  public mergeLocaleWithDefault(loc: string): void {
     var locText = this.locString.getLocaleText(loc);
     if (!locText) return;
     this.locString.setLocaleText("", locText);
     this.locString.setLocaleText(loc, null);
+  }
+  public getPlaceholder(locale: string): string {
+    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
+    if (this.context instanceof SurveyModel) {
+      return surveyLocalization.getString(this.name, locale) || placeholderText;
+    }
+    if (!(this.context instanceof PageModel) && this.name === "title") {
+      return this.getPlaceholderText(locale) || this.context.name;
+    }
+    if (this.context.ownerPropertyName === "choices" && this.context.getType() === "itemvalue") {
+      return this.getPlaceholderText(locale) || this.getItemValuePlaceholderText() || placeholderText;
+    }
+    return placeholderText;
+  }
+  public getTextForExport(loc: string): string {
+    const res = this.locString.getLocaleText(loc);
+    if(!!res) return res;
+    const index = loc.indexOf("-");
+    if(index < 0) return "";
+    return this.getPlaceholderText(loc);
+  }
+  public getPlaceholderText(loc: string): string {
+    if(!loc || loc === "default") return "";
+    const root = this.getRootDialect(loc);
+    return this.locString.getLocaleText(root);
+  }
+  private getRootDialect(loc: string): string {
+    const index = loc.indexOf("-");
+    if(index < 0) return "";
+    loc = loc.substring(0, index);
+    return loc === surveyLocalization.defaultLocale ? "" : loc;
+  }
+  private getItemValuePlaceholderText(): string {
+    const val = this.context.value;
+    return !Helpers.isValueEmpty(val) ? val.toString() : "";
   }
 }
 
@@ -670,35 +705,18 @@ export class Translation extends Base implements ITranslationLocales {
       const item = getTransationItem(options.question, options.row.name);
       if (!!item) {
         item.setLocText(options.columnName, options.value);
-        if (options.columnName == "default") {
-          options.row.cells.forEach(cell => {
-            this.updateCellPlaceholdersByDefault(cell, options.value, item);
-          });
-        }
+        const colName = options.columnName;
+        options.row.cells.forEach(cell => {
+          if(colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
+            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
+        });
       }
     });
     survey.currentPage = survey.pages[0];
     return survey;
   }
   private setPlaceHolder(cellQuestion: QuestionCommentModel, item: TranslationItem, locale: string) {
-    const itemContext = item["context"];
-    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
-    if (itemContext instanceof SurveyModel) {
-      cellQuestion.placeholder = surveyLocalization.getString(item.name, locale) || placeholderText;
-    } else if (!(itemContext instanceof PageModel) && item.name === "title") {
-      cellQuestion.placeholder = itemContext[item.name] || itemContext.name;
-    } else if (itemContext.ownerPropertyName === "choices" && itemContext.typeName === "itemvalue") {
-      cellQuestion.placeholder = itemContext.text || placeholderText;
-    } else {
-      cellQuestion.placeholder = placeholderText;
-    }
-  }
-  private updateCellPlaceholdersByDefault(cell: MatrixDropdownCell, newValue: string, item: TranslationItem) {
-    if (!!newValue) {
-      (<QuestionTextBase>cell.question).placeholder = newValue;
-    } else {
-      this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-    }
+    cellQuestion.placeholder = item.getPlaceholder(locale);
   }
   private createStringsHeaderSurvey() {
     let json = {};
@@ -968,7 +986,7 @@ export class Translation extends Base implements ITranslationLocales {
       let row = [key];
       let item = itemsHash[key];
       for (let i = 0; i < visibleLocales.length; i++) {
-        let val = item.locString.getLocaleText(visibleLocales[i]);
+        let val = item.getTextForExport(visibleLocales[i]);
         row.push(!val && i == 0 ? item.defaultValue : val);
       }
       res.push(row);
