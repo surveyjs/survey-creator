@@ -58,9 +58,6 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
-
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
     PropertyGridEditorCollection.clearHash();
@@ -240,7 +237,7 @@ test("set property editor", () => {
   (<any>question).prop1 = ["item1", "item3"];
   var propertyGrid = new PropertyGridModelTester(question);
   var editQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("prop1");
-  expect(editQuestion.getType()).toEqual("checkbox");
+  expect(editQuestion.getType()).toEqual("tagbox");
   expect(editQuestion.choices.length).toEqual(3);
   expect(editQuestion.value).toHaveLength(2);
   expect(editQuestion.value[0]).toEqual("item1");
@@ -2705,8 +2702,8 @@ test("Use validation in custom property editor", (): any => {
     getJSON: function (obj, prop, options) {
       return { type: "text", textUpdateMode: "onBlur" };
     },
-    validateValue: function(obj, question, prop, value: any): string {
-      if(!value) return "";
+    validateValue: function (obj, question, prop, value: any): string {
+      if (!value) return "";
       const valid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
       return !valid ? "Incorrect email" : "";
     }

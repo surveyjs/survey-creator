@@ -4,6 +4,7 @@ import {
   QuestionTextModel,
   QuestionCheckboxModel,
   QuestionDropdownModel,
+  QuestionTagboxModel,
   QuestionMatrixDynamicModel,
   QuestionMatrixDropdownModel,
   SurveyModel,
@@ -46,9 +47,6 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
 export * from "../../src/components/link-value";
-
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -1305,7 +1303,7 @@ test("'set' property editor", () => {
   var setQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("region")
   );
-  expect(setQuestion.getType()).toEqual("checkbox");
+  expect(setQuestion.getType()).toEqual("tagbox");
   expect(setQuestion.choices).toHaveLength(5);
   Serializer.removeProperty("survey", "region");
 });
@@ -1937,11 +1935,11 @@ test("SurveyPropertyMultipleValuesEditor", () => {
   });
   const question = new Question("q1");
   const propertyGrid = new PropertyGridModelTester(question);
-  const multipleQuestion = <QuestionCheckboxModel>(
+  const multipleQuestion = <QuestionTagboxModel>(
     propertyGrid.survey.getQuestionByName("multiple")
   );
   expect(multipleQuestion).toBeTruthy();
-  expect(multipleQuestion.getType()).toEqual("checkbox");
+  expect(multipleQuestion.getType()).toEqual("tagbox");
   expect(multipleQuestion.choices).toHaveLength(3);
   expect(multipleQuestion.choices[0].value).toEqual(1);
   expect(multipleQuestion.choices[2].text).toEqual("Item 3");
