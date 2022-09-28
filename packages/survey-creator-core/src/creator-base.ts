@@ -57,6 +57,7 @@ import { ICreatorOptions } from "./creator-options";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
+import { StringEditorConnector } from "./components/string-editor";
 
 Serializer.removeClass("tagbox"); // remove after tagbox implemented
 QuestionFactory.Instance.unregisterElement("tagbox");
@@ -2341,7 +2342,7 @@ export class CreatorBase extends Base
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
-  public selectElement(element: any, propertyName?: string, focus = true) {
+  public selectElement(element: any, propertyName?: string, focus = true, startEdit = false) {
     if (!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
@@ -2370,6 +2371,9 @@ export class CreatorBase extends Base
           if (!propertyName) {
             el.parentElement && el.parentElement.focus();
           }
+        }
+        if(startEdit) {
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 100);
     }
@@ -2535,7 +2539,7 @@ export class CreatorBase extends Base
       }
       this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
-      this.selectElement(newElement);
+      this.selectElement(newElement, null, true, true);
     }
   }
   public getJSONForNewElement(json: any): any {
