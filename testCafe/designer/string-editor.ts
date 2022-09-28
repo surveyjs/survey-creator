@@ -93,19 +93,19 @@ test("Edit question title", async (t) => {
     .click(svStringSelector)
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
-    .pressKey("enter")
+    .pressKey("ctrl+enter")
     .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
 
     .click(svStringSelector)
     .pressKey("ctrl+a")
     .pressKey("delete")
-    .pressKey("enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText(title).visible).ok("Question title is reset to question name")
 
     .click(svStringSelector)
     .pressKey("ctrl+a")
     .pressKey("delete")
-    .pressKey("enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText(title).visible).ok("Question title still contains question name");
 });
 
@@ -515,4 +515,26 @@ test("Test string change event", async (t) => {
   await ClientFunction(() => {
     window["creator"].survey.getAllQuestions()[0].columns[0].text = "newTitle";
   })();
+});
+
+test("Focus on new question", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+});
+
+test("Focus switch on select base", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item2").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item4").focused).ok()
+    .pressKey("Ctrl+Enter")
+    .expect(Selector(".sv-string-editor").withText("item5").visible).notOk();
 });
