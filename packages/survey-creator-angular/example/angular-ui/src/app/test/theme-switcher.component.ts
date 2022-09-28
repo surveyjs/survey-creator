@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { TestComponent } from "./test.component";
+import { TestDefaultComponent } from "./default.component";
 
 @Component({
   selector: "test-theme-switcher",
@@ -7,5 +7,5 @@ import { TestComponent } from "./test.component";
   styleUrls: ["./theme-switcher.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
-export class TestThemeSwitcherComponent extends TestComponent {
+export class TestThemeSwitcherComponent extends TestDefaultComponent {
 }

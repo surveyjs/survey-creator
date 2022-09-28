@@ -12,10 +12,11 @@ import { TestDefaultComponent } from "./test/default.component";
 import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { ThemePreviewComponent } from "./test/theme-preview.component";
 import { TestByPageComponent } from "./test/by-page.component";
+import { TestCustomWidgetComponent } from "./test/custom-widget.component";
 
 @NgModule({
   declarations: [
-    AppComponent, ExampleComponent, TestComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent
+    AppComponent, ExampleComponent, TestComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent
   ],
   imports: [
     BrowserModule, SurveyCreatorAngularModule, FormsModule, SurveyAngularModule, AppRoutingModule
