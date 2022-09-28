@@ -95,14 +95,14 @@ export class QuestionToolbox
   static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
-    toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking"],
+    toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
     toolboxTextCategory: ["text", "comment", "multipletext"],
     toolboxContainersCategory: ["panel", "paneldynamic"],
     toolboxMatrixCategory: ["matrix", "matrixdropdown", "matrixdynamic"],
     toolboxMiscCategory: ["html", "expression", "image", "signaturepad"]
   }
   private _orderedQuestions = [
-    "radiogroup", "rating", "checkbox", "dropdown", "boolean", "file", "imagepicker", "ranking",
+    "radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking",
     "text", "comment", "multipletext",
     "panel", "paneldynamic",
     "matrix", "matrixdropdown", "matrixdynamic",
@@ -724,7 +724,7 @@ export class QuestionToolbox
     });
     const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;
     const action = this.getActionByItem(item);
-    if(index > -1) {
+    if (index > -1) {
       this.actions.splice(index, 0, action);
     } else {
       this.actions.push(action);

@@ -30,6 +30,7 @@ export var enStrings = {
     ranking: "Ranking",
     image: "Image",
     dropdown: "Dropdown",
+    tagbox: "Tag Box",
     file: "File",
     html: "HTML",
     matrix: "Single-Choice Matrix",

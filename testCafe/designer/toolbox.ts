@@ -81,7 +81,7 @@ test("Categories large mode", async (t) => {
 
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -101,7 +101,7 @@ test.before(async (t) => {
 
     .resizeWindow(1900, 600)
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -117,7 +117,7 @@ test.before(async (t) => {
   await setupCategories(t);
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .resizeWindow(1200, 600)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -137,16 +137,16 @@ test("Categories allowExpandMultipleCategories property", async (t) => {
     .expect(visibleToolboxItems.count).eql(0)
 
     .click(categoriesHeader.nth(0))
-    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(15)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(16)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(categories.nth(1).find(".svc-toolbox__tool").count).eql(3)
-    .expect(visibleToolboxItems.count).eql(18)
+    .expect(visibleToolboxItems.count).eql(19)
 
     .click(categoriesHeader.nth(2))
     .expect(categories.nth(2).find(".svc-toolbox__tool").count).eql(2)
-    .expect(visibleToolboxItems.count).eql(20);
+    .expect(visibleToolboxItems.count).eql(21);
 });
 
 test("Categories keepAllCategoriesExpanded property", async (t) => {
@@ -157,7 +157,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
   await t
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(0), { speed: 0.5 })
     .expect(getExpandedCategories(0).exists).notOk()
@@ -166,7 +166,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(0))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(1), { speed: 0.5 })
     .expect(getExpandedCategories(1).exists).notOk()
@@ -175,7 +175,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(1))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(2), { speed: 0.5 })
     .expect(getExpandedCategories(2).exists).notOk()
@@ -184,7 +184,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(2))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20);
+    .expect(visibleToolboxItems.count).eql(21);
 });
 
 test("add question from toolbox popup items", async (t) => {
