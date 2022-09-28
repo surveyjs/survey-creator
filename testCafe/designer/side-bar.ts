@@ -183,7 +183,7 @@ test("toolboxLocation left", async (t) => {
 });
 
 test("toolboxLocation sidebar: check toolbox items", async (t) => {
-  const toolboxItemCount = 20;
+  const toolboxItemCount = 21;
   const itemsInToolboxInDesigner = toolboxInDesigner.find(".svc-toolbox__item");
   const visibleItemsInToolboxInDesigner = itemsInToolboxInDesigner.filterVisible();
   const itemsInToolboxInSidebar = toolboxInSidebar.find(".svc-toolbox__item");
