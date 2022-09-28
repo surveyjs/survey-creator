@@ -928,7 +928,7 @@ var germanTranslation = {
     showCaption: "Titel anzeigen",
     iconName: "Name des Icons",
     iconSize: "Größe des Icons",
-    useDropdown: "Dropdown verwenden",
+    displayMode: "Anzeigemodus",
   },
 };
 
