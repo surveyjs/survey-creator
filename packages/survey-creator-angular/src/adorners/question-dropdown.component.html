@@ -8,7 +8,7 @@
       </div>
     </div>
     <svc-action-button *ngIf="adorner.needToCollapse" [text]="adorner.getButtonText()"
-      (click)="adorner.switchCollapse(adorner)">
+      [click]="adorner.switchCollapse.bind(adorner)">
     </svc-action-button>
     <!-- ko if: needToCollapse -->
     <!-- <svc-action-button params="text: getButtonText(), click: switchCollapse, allowBubble: true">
