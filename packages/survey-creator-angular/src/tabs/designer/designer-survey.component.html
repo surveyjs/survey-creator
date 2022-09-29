@@ -1,8 +1,7 @@
 <ng-template #template>
   <div [class]="model.getDesignerCss()" [style.width]="survey.renderedWidth" [style.maxWidth]="survey.renderedWidth">
     <div *ngIf="creator.allowEditSurveyTitle" class="svc-designer-header">
-      <!-- ko template: { name: 'survey-header', data: survey } -->
-      <!-- /ko -->
+      <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
     </div>
 
     <!-- ko if: survey.isShowProgressBarOnTop -->
