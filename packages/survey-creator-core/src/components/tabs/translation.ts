@@ -57,7 +57,7 @@ export class TranslationItem extends TranslationItemBase {
     public locString: ILocalizableString,
     public defaultValue: string = "",
     translation: ITranslationLocales,
-    private context: any, private property: JsonObjectProperty = null
+    public context: any, private property: JsonObjectProperty = null
   ) {
     super(name, translation);
     if (!!this.translation) {
@@ -984,9 +984,12 @@ export class Translation extends Base implements ITranslationLocales {
     this.fillItemsHash("", this.root, itemsHash);
     for (let key in itemsHash) {
       let row = [key];
-      let item = itemsHash[key];
+      let item: TranslationItem = itemsHash[key];
       for (let i = 0; i < visibleLocales.length; i++) {
-        let val = item.getTextForExport(visibleLocales[i]);
+        const loc = visibleLocales[i];
+        let val = item.getTextForExport(loc);
+        val = !val && i == 0 ? item.defaultValue : val;
+        val = this.options.getTranslationExportedText(item.context, item.name, item.locString, loc, val);
         row.push(!val && i == 0 ? item.defaultValue : val);
       }
       res.push(row);

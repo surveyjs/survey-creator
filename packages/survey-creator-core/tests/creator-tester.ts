@@ -6,10 +6,10 @@ import { SurveyLogic } from "../src/components/tabs/logic";
 
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
+    super(options, options2);
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
     }
-    super(options, options2);
     this.onSurveyInstanceCreated.add((creator, options) => {
       options.survey.getRendererForString = (element: Base, name: string): any => {
         if (!this.readOnly && isStringEditable(element, name)) {

@@ -22,6 +22,7 @@ import {
   QuestionSelectBase,
   QuestionRowModel,
   LocalizableString,
+  ILocalizableString,
   ILocalizableOwner
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
@@ -905,11 +906,22 @@ export class CreatorBase extends Base
    */
   public onTranslationImportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-  * The method is called when the translation from csv file is imported.
+  * The event is called when the translation from csv file is imported.
   * @see translation
   * @see showTranslationTab
   */
   public onTranslationImported: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  //(sender: Crobj: Base, locString: ILocalizableString, locale: string, text: string
+  /**
+   * The event is called before the text for translation item is exported. You can modify the text to export a different text into csv file.
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being exported.
+   * - `options.locale` - the locale name, like 'en', 'de' and so on.
+   * - `options.name` - The full name of the localizable string, it can be: "survey.page1.question2.title"
+   * - `options.locString` - The localization string instance. You can use getLocaleText(locale) to get the text for a needed locale.
+   * - `options.text` - The exported text for the locale for this item. You can change this text to export a different string.
+   */
+  public onTranslationExportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * Use this event to control drag&drop operations.
@@ -2923,6 +2935,17 @@ export class CreatorBase extends Base
       logicItem: logicItem
     };
     this.onLogicItemDisplayText.fire(this, options);
+    return options.text;
+  }
+  getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string {
+    if (this.onTranslationExportItem.isEmpty) return text;
+    const options = {
+      obj: obj,
+      locString: locString,
+      locale: locale,
+      text: text
+    };
+    this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
   /**
