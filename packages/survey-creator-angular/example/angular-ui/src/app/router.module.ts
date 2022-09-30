@@ -3,6 +3,7 @@ import { RouterModule } from "@angular/router";
 import { TestByPageComponent } from "./test/by-page.component";
 import { TestCustomWidgetComponent } from "./test/custom-widget.component";
 import { TestDefaultComponent } from "./test/default.component";
+import { TestDropdownCollapseComponent } from "./test/dropdown-collapse.component";
 import { ThemePreviewComponent } from "./test/theme-preview.component";
 import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 
@@ -11,7 +12,8 @@ const routes = [
   { path: "testCafe/preview-theme-switcher.html", component: TestThemeSwitcherComponent },
   { path: "testCafe/theme-for-preview-option.html", component: ThemePreviewComponent },
   { path: "testCafe/by-page.html", component: TestByPageComponent },
-  { path: "testCafe/testcafe-widget.html", component: TestCustomWidgetComponent }
+  { path: "testCafe/testcafe-widget.html", component: TestCustomWidgetComponent },
+  { path: "testCafe/dropdown-collapse-view.html", component: TestDropdownCollapseComponent }
 ];
 
 @NgModule({
