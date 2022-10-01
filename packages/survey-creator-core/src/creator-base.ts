@@ -1574,15 +1574,17 @@ export class CreatorBase extends Base
         parentObj.getType(),
         obj.ownerPropertyName
       );
+      let allowEdit = true;
+      if (parentObj instanceof QuestionSelectBase) allowEdit = (parentObj as QuestionSelectBase).isItemInList(obj);
 
       const allowQuestionOperations = this.getElementAllowOperations(parentObj);
       if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
-        parentObj.getPropertyValue(parentProperty.name),
+        parentObj.getPropertyValue(parentProperty?.name),
         obj,
         options
       );
@@ -1593,7 +1595,7 @@ export class CreatorBase extends Base
       if (this.onIsPropertyReadOnlyCallback(
         parentObj,
         parentProperty,
-        parentProperty.readOnly,
+        parentProperty?.readOnly,
         null,
         null
       )) {
@@ -2369,7 +2371,7 @@ export class CreatorBase extends Base
             el.parentElement && el.parentElement.focus();
           }
         }
-        if(startEdit) {
+        if (startEdit) {
           StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 100);
