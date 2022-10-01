@@ -911,15 +911,17 @@ export class CreatorBase extends Base
   * @see showTranslationTab
   */
   public onTranslationImported: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
-  //(sender: Crobj: Base, locString: ILocalizableString, locale: string, text: string
   /**
-   * The event is called before the text for translation item is exported. You can modify the text to export a different text into csv file.
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being exported.
-   * - `options.locale` - the locale name, like 'en', 'de' and so on.
-   * - `options.name` - The full name of the localizable string, it can be: "survey.page1.question2.title"
-   * - `options.locString` - The localization string instance. You can use getLocaleText(locale) to get the text for a needed locale.
-   * - `options.text` - The exported text for the locale for this item. You can change this text to export a different string.
+   * Use this event to modify a translated string before it is exported to CSV.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - sender - A Survey Creator instance that raised the event.
+   * - options.obj - A survey object instance (survey, page, panel, question) whose string translations are being exported to CSV.
+   * - options.locale - A locale identifier ("en", "de", etc.).
+   * - options.name - A full name of the translated string. It is composed of names of all parent elements, for example: "mySurvey.page1.question2.title".
+   * - options.locString - The localization string instance. You can use getLocaleText(locale) to get the text for a needed locale.
+   * - options.text - The exported text for the locale for this item. You can change this text to export a different string.
    */
   public onTranslationExportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
