@@ -29,6 +29,7 @@ export class ItemValueWrapperViewModel extends Base {
     public item: ItemValue
   ) {
     super();
+
     this.updateIsNew(question, item);
     const updateFromProperty = () => {
       this.updateIsNew(question, item);
@@ -80,7 +81,7 @@ export class ItemValueWrapperViewModel extends Base {
     return this.isNew || isContentEditable;
   }
   private updateNewItemValue() {
-    if(!this.creator || !this.question || !this.question.newItem) return;
+    if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
   }
 

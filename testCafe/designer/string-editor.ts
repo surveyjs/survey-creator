@@ -538,3 +538,16 @@ test("Focus switch on select base", async (t) => {
     .pressKey("Ctrl+Enter")
     .expect(Selector(".sv-string-editor").withText("item5").visible).notOk();
 });
+
+test("Disable edit inactive items", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Checkbox"))
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Select All").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("None").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "false").exists).ok()
+    .click(Selector(".svc-item-value-controls__add").nth(0))
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Select All").withAttribute("contenteditable", "true").exists).ok()
+    .click(Selector(".svc-item-value-controls__add").nth(1))
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("None").withAttribute("contenteditable", "true").exists).ok()
+    .click(Selector(".svc-item-value-controls__add").nth(1))
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "true").exists).ok();
+});

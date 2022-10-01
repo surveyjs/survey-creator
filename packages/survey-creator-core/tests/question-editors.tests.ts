@@ -1,4 +1,4 @@
-import { QuestionRatingModel, Event } from "survey-core";
+import { QuestionRatingModel, Event, QuestionCheckboxModel } from "survey-core";
 import { MatrixCellWrapperViewModel } from "../src/components/matrix-cell";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
@@ -49,7 +49,7 @@ test("MatrixCellWrapperViewModel select context", () => {
     creator.selectedProperty = property;
   };
   const event: any = {
-    stopPropagation: () => {}
+    stopPropagation: () => { }
   };
 
   let cellWrapper = new MatrixCellWrapperViewModel(creator, null, null, null, null);
@@ -73,4 +73,38 @@ test("MatrixCellWrapperViewModel select context", () => {
   cellWrapper.selectContext(cellWrapper, event);
   expect(creator.selectedElement).toBe(cellWrapper.templateData);
   expect(creator.selectedProperty).toBe(undefined);
+});
+
+test("Special choices editability", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
+  const q0 = <QuestionCheckboxModel>creator.survey.getQuestionByName("q0");
+  expect(creator.isCanModifyProperty(q0.choices[0], "text")).toBeTruthy();
+  expect(creator.isCanModifyProperty(q0.selectAllItem, "text")).toBeFalsy();
+  expect(creator.isCanModifyProperty(q0.noneItem, "text")).toBeFalsy();
+  expect(creator.isCanModifyProperty(q0.otherItem, "text")).toBeFalsy();
+
+  q0.hasSelectAll = true;
+  expect(creator.isCanModifyProperty(q0.selectAllItem, "text")).toBeTruthy();
+  q0.hasNone = true;
+  expect(creator.isCanModifyProperty(q0.noneItem, "text")).toBeTruthy();
+  q0.hasOther = true;
+  expect(creator.isCanModifyProperty(q0.otherItem, "text")).toBeTruthy();
 });
