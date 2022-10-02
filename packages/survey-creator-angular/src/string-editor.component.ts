@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, ViewChild, ViewContainerRef } from "@angular/core";
 import { LocalizableString } from "survey-core";
 import { StringEditorViewModelBase, CreatorBase, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
@@ -14,6 +14,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   private justFocused: boolean = false;
   @Input() model!: any;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
+  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef, private ngZone: NgZone) {
+    super(cdr, vcr);
+  }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
   }
@@ -79,11 +82,14 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     super.ngOnDestroy();
   }
   ngAfterViewInit(): void {
+    this.baseModel.getEditorElement = () => this.container.nativeElement;
     this.baseModel.blurEditor = () => {
       this.container.nativeElement.blur();
       this.container.nativeElement.spellcheck = false;
     };
-
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => this.baseModel.afterRender());
+    });
   }
 }
 
