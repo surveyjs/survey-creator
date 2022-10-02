@@ -145,7 +145,7 @@ test("toolbox default categories actions separator", (): any => {
 test("toolbox default categories", (): any => {
   var toolbox = new QuestionToolbox(undefined, undefined, true);
   expect(toolbox.categories.length).toBe(5);
-  expect(toolbox.categories[0].items.length).toBe(8);
+  expect(toolbox.categories[0].items.length).toBe(9);
   expect(toolbox.categories[1].items.length).toBe(3);
   expect(toolbox.categories[2].items.length).toBe(2);
   expect(toolbox.categories[3].items.length).toBe(3);
@@ -505,4 +505,54 @@ test("Check that d&d not working for toobox invisible items in readOnly mode", (
   creator.toolbox["hiddenItemsListModel"].onPointerDown(undefined, undefined);
   expect(trace).toBe("processed->"); //pointer down should not be processed in readOnlyMode;
   DragOrClickHelper.prototype.onPointerDown = oldOnPointerDown;
+});
+test("Use custom widgets in questionTypes array to keep them in correct order in the toolbox", (): any => {
+  CustomWidgetCollection.Instance.clear();
+  CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "first",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Question) => {
+        return question.name == "question2";
+      }
+    },
+    "customtype"
+  );
+  CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "second",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Question) => {
+        return (<Question>question).getType() == "checkbox";
+      }
+    },
+    "customtype"
+  );
+  CustomWidgetCollection.Instance.addCustomWidget(
+    {
+      name: "third",
+      widgetIsLoaded: () => {
+        return true;
+      },
+      isFit: (question: Question) => {
+        return (<Question>question).getType() == "checkbox";
+      },
+      showInToolbox: false
+    },
+    "customtype"
+  );
+  ComponentCollection.Instance.add(<any>{ name: "comp1", questionJSON: { type: "dropdown", choices: [1, 2, 3, 4, 5] } });
+  var toolbox = new QuestionToolbox(["radiogroup", "first", "second", "comp1", "third", "dropdown"]);
+  expect(toolbox.items).toHaveLength(5);
+  expect(toolbox.items[0].name).toEqual("radiogroup");
+  expect(toolbox.items[1].name).toEqual("first");
+  expect(toolbox.items[2].name).toEqual("second");
+  expect(toolbox.items[3].name).toEqual("comp1");
+  expect(toolbox.items[4].name).toEqual("dropdown");
+  CustomWidgetCollection.Instance.clear();
+  ComponentCollection.Instance.clear();
 });

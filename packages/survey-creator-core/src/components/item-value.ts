@@ -14,6 +14,7 @@ import "./item-value.scss";
 import { getLocString } from "../editorLocalization";
 
 import { ICollectionItemAllowOperations } from "../settings";
+import { StringEditorConnector, StringEditorViewModelBase } from "./string-editor";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
@@ -28,6 +29,7 @@ export class ItemValueWrapperViewModel extends Base {
     public item: ItemValue
   ) {
     super();
+
     this.updateIsNew(question, item);
     const updateFromProperty = () => {
       this.updateIsNew(question, item);
@@ -67,6 +69,7 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
+    StringEditorConnector.get(item.locText).setItemValue(this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
@@ -78,7 +81,7 @@ export class ItemValueWrapperViewModel extends Base {
     return this.isNew || isContentEditable;
   }
   private updateNewItemValue() {
-    if(!this.creator || !this.question || !this.question.newItem) return;
+    if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
   }
 
@@ -134,14 +137,19 @@ export class ItemValueWrapperViewModel extends Base {
       (<any>model.question).hasSelectAll = true;
       return;
     } else {
-      model.item.value = "newitem";
-      const itemValue = model.creator.createNewItemValue(model.question);
-      model.question.choices.push(itemValue);
-      this.updateNewItemValue();
-      if(this.creator) this.creator.onItemValueAddedCallback(model.question, "choices", itemValue, model.question.choices);
+      this.addNewItem(model.item, model.question, model.creator);
     }
     this.updateIsNew(model.question, model.item);
   }
+  public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: CreatorBase) {
+    item.value = "newitem";
+    const itemValue = creator.createNewItemValue(question);
+    question.choices.push(itemValue);
+    this.updateNewItemValue();
+    if (this.creator) this.creator.onItemValueAddedCallback(question, "choices", itemValue, question.choices);
+    StringEditorConnector.get(itemValue.locText).setAutoFocus();
+  }
+
   public remove(model: ItemValueWrapperViewModel) {
     if (model.question.noneItem === model.item) {
       model.question.hasNone = false;

@@ -4,9 +4,6 @@ import { settings as creatorSetting } from "../src/settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
 
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
-
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     if (setOldDefaultNewSurveyJSON) {
@@ -49,7 +46,7 @@ export class CreatorTester extends CreatorBase {
   public logicCreatedId = 0;
   protected createSurveyLogicForUpdate(): SurveyLogic {
     const res = super.createSurveyLogicForUpdate();
-    res["createdId"] = ++ this.logicCreatedId;
+    res["createdId"] = ++this.logicCreatedId;
     return res;
   }
 }

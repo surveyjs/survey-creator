@@ -170,7 +170,7 @@ export class SurveyQuestionEditorDefinition {
         "hasComment",
         "commentText",
         "commentPlaceholder",
-        { name: "useDropdown", tab: "layout" },
+        { name: "displayMode", tab: "layout" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
@@ -226,6 +226,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
+        { name: "allowClear", tab: "choices" }
+      ]
+    },
+    tagbox: {
+      properties: [
+        "placeholder",
+        { name: "searchEnabled", tab: "layout" },
+        { name: "hideSelectedItems", tab: "layout" },
         { name: "allowClear", tab: "choices" }
       ]
     },

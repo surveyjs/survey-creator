@@ -23,17 +23,6 @@ export async function takeElementScreenshot(screenshotName: string, element: Sel
   await comparer.takeScreenshot(screenshotName, element, screenshotComparerOptions);
 }
 
-export async function checkElementScreenshot(screenshotName: string, element: Selector, t: TestController) {
-  const comparer = createScreenshotsComparer(t);
-  await t
-    .wait(1000)
-    .expect(element.visible).ok("element is invisible for " + screenshotName);
-  await comparer.takeScreenshot(screenshotName, element, screenshotComparerOptions);
-  await t
-    .expect(comparer.compareResults.isValid())
-    .ok(comparer.compareResults.errorMessages());
-}
-
 //devextreme-screenshot-comparer options
 export const screenshotComparerOptions = {
   path: "./tests",

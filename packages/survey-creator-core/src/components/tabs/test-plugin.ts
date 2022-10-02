@@ -235,6 +235,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         },
         true
       );
+      this.changeThemeModel.locOwner = this.creator;
 
       this.changeThemePopupModel = new PopupModel(
         "sv-list",

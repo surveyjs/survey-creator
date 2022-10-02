@@ -57,9 +57,7 @@ import { ICreatorOptions } from "./creator-options";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
-
-Serializer.removeClass("tagbox"); // remove after tagbox implemented
-QuestionFactory.Instance.unregisterElement("tagbox");
+import { StringEditorConnector } from "./components/string-editor";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -326,7 +324,7 @@ export class CreatorBase extends Base
     index?: number
   ) {
     const locStrName = !title ? "ed." + name : (title.indexOf("ed.") == 0 ? title : "");
-    if(!!locStrName) {
+    if (!!locStrName) {
       title = undefined;
     }
     const tab: TabbedMenuItem = new TabbedMenuItem({
@@ -1576,15 +1574,17 @@ export class CreatorBase extends Base
         parentObj.getType(),
         obj.ownerPropertyName
       );
+      let allowEdit = true;
+      if (parentObj instanceof QuestionSelectBase) allowEdit = (parentObj as QuestionSelectBase).isItemInList(obj);
 
       const allowQuestionOperations = this.getElementAllowOperations(parentObj);
       if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: true };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
-        parentObj.getPropertyValue(parentProperty.name),
+        parentObj.getPropertyValue(parentProperty?.name),
         obj,
         options
       );
@@ -1595,7 +1595,7 @@ export class CreatorBase extends Base
       if (this.onIsPropertyReadOnlyCallback(
         parentObj,
         parentProperty,
-        parentProperty.readOnly,
+        parentProperty?.readOnly,
         null,
         null
       )) {
@@ -2283,7 +2283,7 @@ export class CreatorBase extends Base
     this.addNewElementReason = "ELEMENT_COPIED";
     newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
     const panels: any = newPage.getPanels();
-    if(Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
+    if (Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
     this.addNewElementReason = "";
     return newPage;
   }
@@ -2341,7 +2341,7 @@ export class CreatorBase extends Base
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
-  public selectElement(element: any, propertyName?: string, focus = true) {
+  public selectElement(element: any, propertyName?: string, focus = true, startEdit = false) {
     if (!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
@@ -2370,6 +2370,9 @@ export class CreatorBase extends Base
           if (!propertyName) {
             el.parentElement && el.parentElement.focus();
           }
+        }
+        if (startEdit) {
+          StringEditorConnector.get((element as Question).locTitle).activateEditor();
         }
       }, 100);
     }
@@ -2488,18 +2491,18 @@ export class CreatorBase extends Base
     return isValid;
   }
   private getPropertyGridExpandedCategory(): string {
-    if(!this.designerPropertyGrid) return undefined;
+    if (!this.designerPropertyGrid) return undefined;
     const panels = this.designerPropertyGrid.survey.getAllPanels();
-    for(var i = 0; i < panels.length; i ++) {
-      if((<PanelModel>panels[i]).isExpanded) return panels[i].name;
+    for (var i = 0; i < panels.length; i++) {
+      if ((<PanelModel>panels[i]).isExpanded) return panels[i].name;
     }
     return "";
   }
   private expandCategoryIfNeeded(): void {
     const expandedTabName = settings.propertyGrid.defaultExpandedTabName;
-    if(!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
+    if (!!expandedTabName && !this.getPropertyGridExpandedCategory() && !this.survey.isEmpty) {
       const panel = <PanelModel>this.designerPropertyGrid.survey.getPanelByName(expandedTabName);
-      if(!!panel) {
+      if (!!panel) {
         panel.expand();
       }
     }
@@ -2535,7 +2538,7 @@ export class CreatorBase extends Base
       }
       this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
-      this.selectElement(newElement);
+      this.selectElement(newElement, null, true, true);
     }
   }
   public getJSONForNewElement(json: any): any {
@@ -2880,7 +2883,7 @@ export class CreatorBase extends Base
     editor: any,
     list: any[]
   ): string {
-    if(this.onConditionQuestionsGetList.isEmpty) return "asc";
+    if (this.onConditionQuestionsGetList.isEmpty) return "asc";
     var options = {
       propertyName: propertyName,
       obj: obj,
@@ -3006,21 +3009,20 @@ export class CreatorBase extends Base
 
   public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
     var availableTypes = this.toolbox.items.map((item) => {
-      return this.createIActionBarItemByClass(item.name, item.title, item.iconName);
+      return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
     });
-    const popupModel = new PopupModel(
-      "sv-list",
-      {
-        model: new ListModel(
-          availableTypes,
-          (item: any) => {
-            this.currentAddQuestionType = item.id;
-            this.addNewQuestionInPage(beforeAdd, panel);
-            popupModel.toggleVisibility();
-          },
-          false
-        )
+    const listModel = new ListModel(
+      availableTypes,
+      (item: any) => {
+        this.currentAddQuestionType = item.id;
+        this.addNewQuestionInPage(beforeAdd, panel);
+        popupModel.toggleVisibility();
       },
+      false
+    );
+    listModel.locOwner = this;
+    const popupModel = new PopupModel(
+      "sv-list", { model: listModel },
       "bottom",
       "center"
     );
@@ -3049,12 +3051,14 @@ export class CreatorBase extends Base
     let newElement = this.createNewElement(json);
     this.clickToolboxItem(newElement, panel, "ADDED_FROM_PAGEBUTTON");
   }
-  createIActionBarItemByClass(className: string, title: string, iconName: string): Action {
-    return new Action({
+  createIActionBarItemByClass(className: string, title: string, iconName: string, needSeparator: boolean): Action {
+    const action = new Action({
       title: title,
       id: className,
       iconName: iconName
     });
+    action.needSeparator = needSeparator;
+    return action;
   }
 
   public onElementMenuItemsChanged(element: any, items: Action[]) {

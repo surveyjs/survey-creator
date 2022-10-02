@@ -17,6 +17,7 @@ test("Correct focus agter delete by Del key", async t => {
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
     .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content").count).eql(2)
+    .click(getVisibleElement(".svc-question__content"), { offsetX: 5, offsetY: 5 })
     .pressKey("delete")
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
     .pressKey("delete")

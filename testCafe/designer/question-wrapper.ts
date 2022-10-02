@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -10,11 +10,15 @@ function normalize(str) {
   return str.replace(/\xa0/gi, " ").replace(/(?:\r\n|\r|\n)/g, "");
 }
 
+const convertQuestionTypesCount = 20;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
 const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
+const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
+const popupContent = Selector(".sv-popup__content .sv-list").filterVisible();
+const convertPopupContent = "Radiogroup\nRating\nCheckbox\nDropdown\nTag Box\nBoolean\nFile\nImage Picker\nRanking\nSingle Input\nComment\nMultiple Text\nDynamic Panel\nSingle-Choice Matrix\nMultiple-Choice Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature Pad";
 
 test("Single input question wrapper actions", async (t) => {
   const separator = questionToolbarActions.nth(3).find(".sv-action-bar-separator");
@@ -38,7 +42,6 @@ test("Single input question wrapper actions", async (t) => {
 
 test("Single input question wrapper action convert", async (t) => {
   const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-  const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 
   await t
     .expect(questions.exists).notOk()
@@ -50,27 +53,22 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
-    .expect(listItems.count).eql(19)
-    .expect(listItems.nth(8).innerText).eql("Single Input")
-    .expect(listItems.nth(2).innerText).eql("Checkbox")
-    .expect(listItems.nth(9).innerText).eql("Comment")
+    .expect(listItems.count).eql(convertQuestionTypesCount)
+    .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(listItems.nth(9))
+    .click(getListItemByText("Comment"))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Comment"]'))
-    .expect(listItems.count).eql(19)
-    .expect(listItems.nth(8).innerText).eql("Single Input")
-    .expect(listItems.nth(2).innerText).eql("Checkbox")
-    .expect(listItems.nth(9).innerText).eql("Comment")
+    .expect(listItems.count).eql(convertQuestionTypesCount)
+    .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(listItems.nth(8))
+    .click(getListItemByText("Single Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {
   const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-  const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 
   await t
     .expect(questions.exists).notOk()
@@ -85,21 +83,17 @@ test("Single input question wrapper action convert on hover", async (t) => {
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
-    .expect(listItems.count).eql(19)
-    .expect(listItems.nth(8).innerText).eql("Single Input")
-    .expect(listItems.nth(2).innerText).eql("Checkbox")
-    .expect(listItems.nth(9).innerText).eql("Comment")
+    .expect(listItems.count).eql(convertQuestionTypesCount)
+    .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(listItems.nth(9))
+    .click(getListItemByText("Comment"))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Comment"]'))
-    .expect(listItems.count).eql(19)
-    .expect(listItems.nth(8).innerText).eql("Single Input")
-    .expect(listItems.nth(2).innerText).eql("Checkbox")
-    .expect(listItems.nth(9).innerText).eql("Comment")
+    .expect(listItems.count).eql(convertQuestionTypesCount)
+    .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(listItems.nth(8))
+    .click(getListItemByText("Single Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 

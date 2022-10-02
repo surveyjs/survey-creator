@@ -1,4 +1,4 @@
-import { url, checkElementScreenshot, objectSelectorButton, propertyGridSelector, setJSON, creatorContentSelector, getPropertyGridCategory, generalGroupName } from "../../helper";
+import { url, takeElementScreenshot, objectSelectorButton, propertyGridSelector, setJSON, creatorContentSelector, getPropertyGridCategory, generalGroupName, wrapVisualTest } from "../../helper";
 
 const title = "Sidebar Screenshot";
 
@@ -28,14 +28,16 @@ const json = {
 };
 
 test("check scrollbars", async (t) => {
-  await t.resizeWindow(1920, 900);
-  await setJSON(json);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    await setJSON(json);
 
-  await checkElementScreenshot("scrollbar-property-grid.png", propertyGridSelector, t);
-  //await t.hover(propertyGridSelector, { offsetX: -6, offsetY: 100, speed: 0.5 });
-  //await checkElementScreenshot("scrollbar-property-grid-hover.png", propertyGridSelector, t);
+    await takeElementScreenshot("scrollbar-property-grid.png", propertyGridSelector, t, comparer);
+    //await t.hover(propertyGridSelector, { offsetX: -6, offsetY: 100, speed: 0.5 });
+    //await takeElementScreenshot("scrollbar-property-grid-hover.png", propertyGridSelector, t, comparer);
 
-  await checkElementScreenshot("scrollbar-creator-content.png", creatorContentSelector, t);
-  //await t.hover(creatorContentSelector, { offsetX: -23, offsetY: 100 });
-  //await checkElementScreenshot("scrollbar-creator-content-hover.png", creatorContentSelector, t);
+    await takeElementScreenshot("scrollbar-creator-content.png", creatorContentSelector, t, comparer);
+    //await t.hover(creatorContentSelector, { offsetX: -23, offsetY: 100 });
+    //await takeElementScreenshot("scrollbar-creator-content-hover.png", creatorContentSelector, t, comparer);
+  });
 });
