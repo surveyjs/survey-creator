@@ -1364,3 +1364,55 @@ test("Export dialect languages", () => {
     "Question pt2",
   ]);
 });
+test("creator.onTranslationExportItem", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.onTranslationExportItem.add((sender, options) => {
+    if(!options.text) {
+      options.text = options.locString.getLocaleText("");
+    }
+  });
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+        "title": {
+          "default": "Question 1",
+          "de": "Question de",
+        }
+      },
+      {
+        "type": "text",
+        "name": "question2",
+        "title": {
+          "default": "Question 2",
+          "pt": "Question pt",
+        }
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation: Translation = tabTranslation.model;
+  let exported;
+  parse(translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de", "pt"]);
+  expect(exported[1]).toEqual([
+    "survey.page1.question1.title",
+    "Question 1",
+    "Question de",
+    "Question 1",
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.question2.title",
+    "Question 2",
+    "Question 2",
+    "Question pt",
+  ]);
+});

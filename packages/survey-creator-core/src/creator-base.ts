@@ -22,6 +22,7 @@ import {
   QuestionSelectBase,
   QuestionRowModel,
   LocalizableString,
+  ILocalizableString,
   ILocalizableOwner
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
@@ -905,11 +906,24 @@ export class CreatorBase extends Base
    */
   public onTranslationImportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-  * The method is called when the translation from csv file is imported.
+  * The event is called when the translation from csv file is imported.
   * @see translation
   * @see showTranslationTab
   */
   public onTranslationImported: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * Use this event to modify a translated string before it is exported to CSV.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being exported to CSV.
+   * - `options.locale` - The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * - `options.name` - A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   * - `options.locString` - A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   * - `options.text` - A text string to be exported. The string is taken from the current locale. Redefine this property if you want to export a different string.
+   */
+  public onTranslationExportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
   /**
    * Use this event to control drag&drop operations.
@@ -2925,6 +2939,17 @@ export class CreatorBase extends Base
       logicItem: logicItem
     };
     this.onLogicItemDisplayText.fire(this, options);
+    return options.text;
+  }
+  getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string {
+    if (this.onTranslationExportItem.isEmpty) return text;
+    const options = {
+      obj: obj,
+      locString: locString,
+      locale: locale,
+      text: text
+    };
+    this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
   /**

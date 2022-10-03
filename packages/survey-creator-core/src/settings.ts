@@ -1,4 +1,4 @@
-import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel } from "survey-core";
+import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel, ILocalizableString } from "survey-core";
 
 /**
  * List available question convert modes
@@ -245,6 +245,7 @@ export interface ISurveyCreatorOptions {
     text: string,
     logicItem: any
   ): string;
+  getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -372,6 +373,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     text: string,
     logicItem: any
   ): string { return text; }
+  getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string { return text; }
 }
 
 StylesManager.applyTheme("defaultV2");
