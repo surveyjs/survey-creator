@@ -545,18 +545,6 @@ jobs:
       artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
-      Contents: '**'
-      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
-      OverWrite: true
-
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
-
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm i
