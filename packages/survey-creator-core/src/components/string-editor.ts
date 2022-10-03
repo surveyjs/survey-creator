@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase, QuestionRatingModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
@@ -16,6 +16,12 @@ export class StringEditorConnector extends Base {
   public focusOnEditor: boolean;
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
+  }
+  public static focusNextRatingValue(item: ItemValue, question: QuestionRatingModel): void {
+    const itemIndex = question.rateValues.indexOf(item);
+    if (itemIndex < question.rateValues.length - 1) {
+      StringEditorConnector.get(question.rateValues[itemIndex + 1].locText).setAutoFocus();
+    }
   }
   public setItemValue(item: ItemValueWrapperViewModel): void {
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);

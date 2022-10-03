@@ -12,6 +12,7 @@ import { getLocString } from "../editorLocalization";
 import { getNextValue } from "../utils/utils";
 
 import "./question-rating.scss";
+import { StringEditorConnector } from "./string-editor";
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(
@@ -29,6 +30,7 @@ export class QuestionRatingAdornerViewModel extends Base {
         rateValues[index][options.name] = options.newValue;
         this.element.rateValues = rateValues;
         stopEventProcessing = false;
+        StringEditorConnector.focusNextRatingValue(this.element.rateValues[index], this.element);
       }
       return "";
     });

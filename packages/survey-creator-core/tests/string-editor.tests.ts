@@ -1,7 +1,8 @@
 import { StringEditorConnector, StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
@@ -409,4 +410,24 @@ test("StringEditorConnector for Items", (): any => {
   expect(question.choices.length).toEqual(2);
   connectorItem2.onEditComplete.fire(null, {});
   expect(question.choices.length).toEqual(3);
+});
+test("StringEditorConnector for RatingItems", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    questions: [{
+      "type": "rating",
+      "name": "q1",
+      "rateValues": [
+        1,
+        2
+      ]
+    }]
+  });
+  const question: QuestionRatingModel = survey.getQuestionByName("q1") as QuestionRatingModel;
+  var connectorItem2 = StringEditorConnector.get(question.rateValues[1].locText);
+  StringEditorConnector.focusNextRatingValue(question.rateValues[0], question);
+  expect(connectorItem2.focusOnEditor).toBeTruthy();
+  connectorItem2.focusOnEditor = false;
+  StringEditorConnector.focusNextRatingValue(question.rateValues[1], question);
+  expect(connectorItem2.focusOnEditor).toBeFalsy();
 });
