@@ -513,3 +513,76 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
       npm run testcafe:a11y:ci
     displayName: 'A11Y Functional test CreatorV2 Knockout'
+
+- job: CreatorV2Angular
+  dependsOn: CreatorV2Core
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm i
+    displayName: 'npm install'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run build
+    displayName: 'Build CreatorV2 Knockout'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run test
+    displayName: 'Unit test CreatorV2 Angular'
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/example/angular-ui
+      npm i
+    displayName: 'npm install in example project'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run build:example
+    displayName: 'build example'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run testcafe:ci
+    displayName: 'Functional test CreatorV2 Angular'
