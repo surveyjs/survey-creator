@@ -916,12 +916,12 @@ export class CreatorBase extends Base
    *
    * The event handler accepts the following arguments:
    *
-   * - sender - A Survey Creator instance that raised the event.
-   * - options.obj - A survey object instance (survey, page, panel, question) whose string translations are being exported to CSV.
-   * - options.locale - A locale identifier ("en", "de", etc.).
-   * - options.name - A full name of the translated string. It is composed of names of all parent elements, for example: "mySurvey.page1.question2.title".
-   * - options.locString - The localization string instance. You can use getLocaleText(locale) to get the text for a needed locale.
-   * - options.text - The exported text for the locale for this item. You can change this text to export a different string.
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being exported to CSV.
+   * - `options.locale` - The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * - `options.name` - A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   * - `options.locString` - A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   * - `options.text` - A text string to be exported. The string is taken from the current locale. Redefine this property if you want to export a different string.
    */
   public onTranslationExportItem: Survey.Event<(sender: CreatorBase, options: any) => any, any> = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
 
