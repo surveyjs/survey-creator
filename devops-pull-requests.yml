@@ -547,7 +547,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -565,7 +565,7 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run build
-    displayName: 'Build CreatorV2 Knockout'
+    displayName: 'Build CreatorV2 Angular'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
