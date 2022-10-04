@@ -578,7 +578,7 @@ jobs:
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
-      npm run test
+      npm run test:single
     displayName: 'Unit test CreatorV2 Angular'
   
   - script: |
