@@ -560,7 +560,16 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm i
+      rm node_modules/survey-angular-ui
     displayName: 'npm install'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-angular-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui'
+      OverWrite: true
+    displayName: 'copy survey-angular-ui in node_modules'
 
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
