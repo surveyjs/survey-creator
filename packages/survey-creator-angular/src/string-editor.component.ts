@@ -19,6 +19,10 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+    this.baseModel.blurEditor = () => {
+      this.container.nativeElement.blur();
+      this.container.nativeElement.spellcheck = false;
+    };
   }
   public get locString(): LocalizableString {
     return this.model.locStr;
@@ -83,10 +87,6 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   ngAfterViewInit(): void {
     this.baseModel.getEditorElement = () => this.container.nativeElement;
-    this.baseModel.blurEditor = () => {
-      this.container.nativeElement.blur();
-      this.container.nativeElement.spellcheck = false;
-    };
     this.ngZone.runOutsideAngular(() => {
       setTimeout(() => this.baseModel.afterRender());
     });
