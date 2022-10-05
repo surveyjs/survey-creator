@@ -12,7 +12,6 @@ import { getLocString } from "../editorLocalization";
 import { getNextValue } from "../utils/utils";
 
 import "./question-rating.scss";
-import { StringEditorConnector } from "./string-editor";
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(
@@ -21,19 +20,6 @@ export class QuestionRatingAdornerViewModel extends Base {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
-    let stopEventProcessing = false;
-    this.element.onItemValuePropertyChanged.add((sender, options) => {
-      if (!stopEventProcessing && this.element.rateValues.length === 0) {
-        stopEventProcessing = true;
-        const rateValues = this.element.visibleRateValues;
-        const index = rateValues.map((item) => item.value).indexOf(options.obj.value);
-        rateValues[index][options.name] = options.newValue;
-        this.element.rateValues = rateValues;
-        stopEventProcessing = false;
-        StringEditorConnector.focusNextRatingValue(this.element.rateValues[index], this.element);
-      }
-      return "";
-    });
   }
 
   get element(): QuestionRatingModel {

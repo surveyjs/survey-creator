@@ -562,5 +562,7 @@ test("Focus switch on rating base", async (t) => {
     .expect(svStringSelector.focused).ok();
   await t
     .pressKey("tab")
-    .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("3").focused).ok();
+    .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("4").focused).notOk();
 });
