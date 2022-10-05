@@ -411,23 +411,3 @@ test("StringEditorConnector for Items", (): any => {
   connectorItem2.onEditComplete.fire(null, {});
   expect(question.choices.length).toEqual(3);
 });
-test("StringEditorConnector for RatingItems", (): any => {
-  let creator = new CreatorTester();
-  const survey: SurveyModel = new SurveyModel({
-    questions: [{
-      "type": "rating",
-      "name": "q1",
-      "rateValues": [
-        1,
-        2
-      ]
-    }]
-  });
-  const question: QuestionRatingModel = survey.getQuestionByName("q1") as QuestionRatingModel;
-  var connectorItem2 = StringEditorConnector.get(question.rateValues[1].locText);
-  StringEditorConnector.focusNextRatingValue(question.rateValues[0], question);
-  expect(connectorItem2.focusOnEditor).toBeTruthy();
-  connectorItem2.focusOnEditor = false;
-  StringEditorConnector.focusNextRatingValue(question.rateValues[1], question);
-  expect(connectorItem2.focusOnEditor).toBeFalsy();
-});
