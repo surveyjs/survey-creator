@@ -5,7 +5,6 @@ import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
-import { ListModel } from "survey-core";
 
 import "survey-core/survey.i18n";
 
@@ -308,11 +307,22 @@ test("invisibleToggleAction doesn't created, there are no exceptions", (): any =
   };
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   creator.makeNewViewActive("test");
-  const model: TestSurveyTabViewModel = testPlugin.model;
-
-  expect(model.invisibleToggleAction).toBeFalsy();
-  model.survey.doComplete();
-  expect(model.invisibleToggleAction).toBeFalsy();
+  const action = creator.getActionBarItem("showInvisible");
+  expect(action).toBeFalsy();
+});
+test("invisibleToggleAction title", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  creator.makeNewViewActive("test");
+  const action = creator.getActionBarItem("showInvisible");
+  expect(action.title).toEqual("Show invisible elements");
 });
 
 test("Test correct survey results node levels", (): any => {
@@ -554,6 +564,7 @@ test("Change test themes list actions titles on changing locale", (): any => {
   expect(actions[1].title).toEqual("Modern");
   creator.locale = "de";
   expect(themeAction.title).toEqual("Default de");
+  expect(actions[1].getLocale()).toEqual("de");
   expect(actions[1].title).toEqual("Modern de");
   creator.locale = "";
   expect(themeAction.title).toEqual("Default");

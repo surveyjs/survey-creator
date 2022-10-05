@@ -229,7 +229,7 @@ var italianTranslation = {
     rowsVisibleIf: "Righe visibili se",
     choicesByUrl: "Opzioni da URL",
     showValueInLink: "Mostra il valore nel link",
-    useDropdown: "Usa menù a tendina",
+    displayMode: "Modalità display",
     isUnique: "È unico",
     showInMultipleColumns: "Mostra in più colonne",
     totalMaximumFractionDigits: "Numero massimo di cifre frazionarie",

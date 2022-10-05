@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -15,6 +15,9 @@ test("Simple click", async (t) => {
 
 async function setupCategories(t, windowWidth = 1910) {
   const changeCategories = ClientFunction(() => {
+    window["creator"].toolbox.removeCategories();
+    window["creator"].toolbox.orderedQuestions = ["radiogroup", "matrix", "matrixdropdown", "panel", "panaldynamic"];
+    window["creator"].toolbox.showCategoryTitles = true;
     window["creator"].toolbox.changeCategories([
       {
         name: "panel",
@@ -78,7 +81,7 @@ test("Categories large mode", async (t) => {
 
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -88,9 +91,8 @@ test("Categories large mode", async (t) => {
 });
 
 test.before(async (t) => {
-  await t.resizeWindow(1200, 600);
+  await t.resizeWindow(1200, 605);
 })("Categories Responsiveness small -> large", async (t) => {
-
   await setupCategories(t, 1110);
   await t
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -99,7 +101,7 @@ test.before(async (t) => {
 
     .resizeWindow(1900, 600)
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(visibleToolboxItems.count).eql(3)
@@ -115,7 +117,7 @@ test.before(async (t) => {
   await setupCategories(t);
   await t
     .expect(categoriesHeader.count).eql(3)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .resizeWindow(1200, 600)
     .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
@@ -124,9 +126,10 @@ test.before(async (t) => {
 });
 
 test("Categories allowExpandMultipleCategories property", async (t) => {
+
   await setupCategories(t);
-  await setupToolboxProperty("forceCompact", false);
   await setupToolboxProperty("allowExpandMultipleCategories", true);
+  await setupToolboxProperty("forceCompact", false);
 
   await t
     .expect(categoriesHeader.count).eql(3)
@@ -134,16 +137,16 @@ test("Categories allowExpandMultipleCategories property", async (t) => {
     .expect(visibleToolboxItems.count).eql(0)
 
     .click(categoriesHeader.nth(0))
-    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(15)
-    .expect(visibleToolboxItems.count).eql(15)
+    .expect(categories.nth(0).find(".svc-toolbox__tool").count).eql(16)
+    .expect(visibleToolboxItems.count).eql(16)
 
     .click(categoriesHeader.nth(1))
     .expect(categories.nth(1).find(".svc-toolbox__tool").count).eql(3)
-    .expect(visibleToolboxItems.count).eql(18)
+    .expect(visibleToolboxItems.count).eql(19)
 
     .click(categoriesHeader.nth(2))
     .expect(categories.nth(2).find(".svc-toolbox__tool").count).eql(2)
-    .expect(visibleToolboxItems.count).eql(20);
+    .expect(visibleToolboxItems.count).eql(21);
 });
 
 test("Categories keepAllCategoriesExpanded property", async (t) => {
@@ -154,7 +157,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
   await t
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(0), { speed: 0.5 })
     .expect(getExpandedCategories(0).exists).notOk()
@@ -163,7 +166,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(0))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(1), { speed: 0.5 })
     .expect(getExpandedCategories(1).exists).notOk()
@@ -172,7 +175,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(1))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20)
+    .expect(visibleToolboxItems.count).eql(21)
 
     .hover(categoriesHeader.nth(2), { speed: 0.5 })
     .expect(getExpandedCategories(2).exists).notOk()
@@ -181,7 +184,7 @@ test("Categories keepAllCategoriesExpanded property", async (t) => {
     .click(categoriesHeader.nth(2))
     .expect(categoriesHeader.count).eql(3)
     .expect(collapsibleCategories.count).eql(0)
-    .expect(visibleToolboxItems.count).eql(20);
+    .expect(visibleToolboxItems.count).eql(21);
 });
 
 test("add question from toolbox popup items", async (t) => {
@@ -198,4 +201,25 @@ test("add question from toolbox popup items", async (t) => {
     .click(popup.find(".sv-list__item"))
     .expect(Selector(".svc-question__content").exists).ok()
     .resizeWindow(1900, 600);
+});
+
+test("check toolbox scroll", async (t) => {
+  await explicitErrorHandler();
+  await t.resizeWindow(1900, 800);
+  const hasNoScroll = ClientFunction(() => {
+    let element = document.querySelector(".svc-toolbox");
+    return element?.scrollHeight == element?.clientHeight;
+  });
+
+  const setSize = ClientFunction((size) => {
+    let element = document.querySelector(".svc-creator");
+    element["style"].height = size + "px";
+  });
+
+  for (var i = 580; i > 540; i--) {
+    await setSize(i);
+    await t
+      .wait(100)
+      .expect(hasNoScroll()).ok();
+  }
 });

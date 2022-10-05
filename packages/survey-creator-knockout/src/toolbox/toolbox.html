@@ -1,10 +1,10 @@
 <div class="svc-toolbox">
   <div class="svc-toolbox__container">
-    <!-- ko ifnot: categories().length == 1 -->
+    <!-- ko ifnot: categories().length == 1 || !$data.toolbox.showCategoryTitles -->
     <!-- ko foreach: categories -->
     <div class="svc-toolbox__category">
       <div class="svc-toolbox__category-header"
-        data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories">
+        data-bind="click: toggleState, key2click, css: { 'svc-toolbox__category-header--collapsed': $data.toolbox.canCollapseCategories }">
         <span class="svc-toolbox__category-title" data-bind="text: name"></span>
         <!-- ko if: $data.toolbox.canCollapseCategories -->
         <div class="svc-toolbox__category-header__controls">
@@ -25,7 +25,7 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: categories().length == 1 -->
+    <!-- ko if: categories().length == 1 || !$data.toolbox.showCategoryTitles -->
     <div class="svc-toolbox__category">
       <!-- ko foreach: $data.toolbox.visibleActions -->
       <!-- ko component: { name: 'svc-toolbox-tool', params: { item: $data, creator: $parent.creator, isCompact: false } } -->

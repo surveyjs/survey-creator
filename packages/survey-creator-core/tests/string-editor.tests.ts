@@ -1,6 +1,7 @@
-import { StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent } from "survey-core";
+import { StringEditorConnector, StringEditorViewModelBase } from "../src/components/string-editor";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
+import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
@@ -344,4 +345,68 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onInput({ target: null });
   stringEditorSurveyTitle.onCompositionEnd({ target: null });
   expect(sanitizeEditableContent).toBeCalledTimes(5);
+});
+test("StringEditorConnector activate test", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({});
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var connector = StringEditorConnector.get(locStrSurvey);
+  var activated = false;
+  connector.onDoActivate.add(() => {
+    activated = true;
+  });
+  connector.activateEditor();
+  expect(activated).toBeTruthy();
+});
+
+test("StringEditorConnector for Items", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({ questions: [{
+    "type": "radiogroup",
+    "name": "q1",
+    "choices": [
+      "item1",
+      "item2"
+    ]
+  }] });
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  const question: QuestionSelectBase = survey.getQuestionByName("q1") as QuestionSelectBase;
+  survey.setDesignMode(true);
+  settings.supportCreatorV2 = true;
+  (<any>question).updateVisibleChoices();
+  var connectorTitle = StringEditorConnector.get(question.locTitle);
+  var connectorItem1 = StringEditorConnector.get(question.choices[0].locText);
+  var connectorItem2 = StringEditorConnector.get(question.choices[1].locText);
+
+  connectorItem1.setItemValue(new ItemValueWrapperViewModel(creator, question, question.choices[0]));
+  connectorItem2.setItemValue(new ItemValueWrapperViewModel(creator, question, question.choices[1]));
+
+  var activatedTitle = false, activatedItem1 = false, activatedItem2 = false;
+  connectorTitle.onDoActivate.add(() => {
+    activatedTitle = true;
+  });
+  connectorItem1.onDoActivate.add(() => {
+    activatedItem1 = true;
+  });
+  connectorItem2.onDoActivate.add(() => {
+    activatedItem2 = true;
+  });
+  connectorTitle.activateEditor();
+  expect(activatedTitle).toBeTruthy();
+  expect(activatedItem1).toBeFalsy();
+  expect(activatedItem2).toBeFalsy();
+
+  connectorTitle.onEditComplete.fire(null, {});
+  expect(activatedTitle).toBeTruthy();
+  expect(activatedItem1).toBeTruthy();
+  expect(activatedItem2).toBeFalsy();
+
+  connectorItem1.onEditComplete.fire(null, {});
+  expect(activatedTitle).toBeTruthy();
+  expect(activatedItem1).toBeTruthy();
+  expect(activatedItem2).toBeTruthy();
+
+  expect(question.choices.length).toEqual(2);
+  connectorItem2.onEditComplete.fire(null, {});
+  expect(question.choices.length).toEqual(3);
 });

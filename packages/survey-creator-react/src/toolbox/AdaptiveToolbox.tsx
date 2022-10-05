@@ -19,9 +19,7 @@ export class AdaptiveToolbox extends Toolbox {
     this.manager = new VerticalResponsivityManager(
       container,
       this.toolbox,
-      ".svc-toolbox__tool:not(.sv-dots)>.sv-action__content",
-      44,
-      44
+      ".svc-toolbox__tool:not(.sv-dots)"
     );
   }
   componentWillUnmount() {
@@ -35,7 +33,7 @@ export class AdaptiveToolbox extends Toolbox {
     return (
       <div ref={this.rootRef} className={className}>
         <div className="svc-toolbox__container">
-          {(this.toolbox.isCompact || this.toolbox.categories.length == 1) ?
+          {(this.toolbox.isCompact || this.toolbox.categories.length == 1 || !this.toolbox.showCategoryTitles) ?
             (<div className="svc-toolbox__category">
               {this.renderItems(this.toolbox.renderedActions, this.toolbox.isCompact)}
             </div>)

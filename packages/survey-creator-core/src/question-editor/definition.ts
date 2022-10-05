@@ -70,7 +70,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
-        "commentPlaceHolder",
+        "commentPlaceholder",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",
@@ -169,8 +169,8 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
-        "commentPlaceHolder",
-        { name: "useDropdown", tab: "layout" },
+        "commentPlaceholder",
+        { name: "displayMode", tab: "layout" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
@@ -184,14 +184,14 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "hasComment",
         "commentText",
-        "commentPlaceHolder",
+        "commentPlaceholder",
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "layout" },
         { name: "hasOther", tab: "choices" },
         { name: "otherText", tab: "choices" },
-        { name: "otherPlaceHolder", tab: "choices" },
+        { name: "otherPlaceholder", tab: "choices" },
         { name: "hasNone", tab: "choices" },
         { name: "noneText", tab: "choices" },
         { name: "hideIfChoicesEmpty", tab: "logic" },
@@ -226,6 +226,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
+        { name: "allowClear", tab: "choices" }
+      ]
+    },
+    tagbox: {
+      properties: [
+        "placeholder",
+        { name: "searchEnabled", tab: "layout" },
+        { name: "hideSelectedItems", tab: "layout" },
         { name: "allowClear", tab: "choices" }
       ]
     },

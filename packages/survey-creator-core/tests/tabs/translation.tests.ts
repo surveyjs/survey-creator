@@ -3,7 +3,7 @@ import { Translation, TranslationItem } from "../../src/components/tabs/translat
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/settings";
 import { CreatorTester } from "../creator-tester";
-
+import { parse } from "papaparse";
 import "survey-core/survey.i18n";
 import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/localization/russian";
@@ -845,7 +845,7 @@ test("empty title placeholders", () => {
   cellQuestion1.value = "Question 1";
   cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeholder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("test");
@@ -895,7 +895,7 @@ test("init placeholders", () => {
   expect(question1Props.rows[0].value).toEqual("title");
   const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
-  expect(cellQuestion1.placeholder).toEqual("Question 1");
+  expect(cellQuestion1.placeholder).toEqual("question1");
   expect(cellQuestion1.value).toEqual("Question 1");
   expect(cellQuestion2.placeholder).toEqual("Question 1");
   expect(cellQuestion2.value).toEqual("Q 1");
@@ -905,6 +905,49 @@ test("init placeholders", () => {
   expect(cellQuestion1.value).toEqual("");
   expect(cellQuestion2.placeholder).toEqual("question1");
   expect(cellQuestion2.value).toEqual("Q 1");
+});
+test("init placeholders for choices", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "question1",
+        "choices": [
+          {
+            "value": 1,
+            "text": {
+              "default": "Item 1",
+              "da": "I 1"
+            }
+          }
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(2);
+  const choicesPanel = <PanelModel>question1.elements[1];
+  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
+  expect(choicesProps.name).toEqual("question1_choices");
+  expect(choicesProps.columns).toHaveLength(2);
+  const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
+  const cellQuestion2 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[1].question;
+  expect(cellQuestion1.placeholder).toEqual("1");
+  expect(cellQuestion1.value).toEqual("Item 1");
+  expect(cellQuestion2.placeholder).toEqual("Item 1");
+  expect(cellQuestion2.value).toEqual("I 1");
+
+  cellQuestion1.value = "";
+  expect(cellQuestion1.placeholder).toEqual("1");
+  expect(cellQuestion1.value).toEqual("");
+  expect(cellQuestion2.placeholder).toEqual("1");
+  expect(cellQuestion2.value).toEqual("I 1");
 });
 
 test("localize placeholders", () => {
@@ -931,6 +974,10 @@ test("localize placeholders", () => {
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(2);
+  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
+  expect(surveyProps.name).toEqual("survey_props");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeHolder).toEqual("Translation...");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeHolder).toEqual("Перевод...");
   const pagePanel = <PanelModel>page.elements[1];
   expect(pagePanel.elements).toHaveLength(2);
   expect(pagePanel.elements[0].name).toEqual("page1_props");
@@ -964,6 +1011,60 @@ test("localize placeholders", () => {
   expect(surveyCell2.placeholder).toEqual("Редактирование");
   expect(surveyCell2.value).toEqual(null);
 });
+test("init placeholders for dialects", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+        "title": {
+          "default": "Question 1",
+          "en-uk": "Question uk",
+          "pt": "Question pt",
+          "pt-br": "Question br",
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  expect(pagePanel.elements[0].name).toEqual("question1");
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(1);
+  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.columns).toHaveLength(4);
+  expect(question1Props.columns[0].name).toEqual("default");
+  expect(question1Props.columns[3].name).toEqual("pt-br");
+  expect(question1Props.rows).toHaveLength(1);
+  expect(question1Props.rows[0].value).toEqual("title");
+  const cellQuestion1 = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
+  const cellQuestion2 = <QuestionCommentModel>question1Props.visibleRows[0].cells[1].question;
+  const cellQuestion3 = <QuestionCommentModel>question1Props.visibleRows[0].cells[2].question;
+  const cellQuestion4 = <QuestionCommentModel>question1Props.visibleRows[0].cells[3].question;
+  expect(cellQuestion1.placeholder).toEqual("question1");
+  expect(cellQuestion1.value).toEqual("Question 1");
+  expect(cellQuestion2.placeholder).toEqual("Question 1");
+  expect(cellQuestion2.value).toEqual("Question uk");
+  expect(cellQuestion3.placeholder).toEqual("Question 1");
+  expect(cellQuestion3.value).toEqual("Question pt");
+  expect(cellQuestion4.placeholder).toEqual("Question pt");
+  expect(cellQuestion4.value).toEqual("Question br");
+
+  cellQuestion1.value = "Question 11";
+  expect(cellQuestion2.placeholder).toEqual("Question 11");
+  expect(cellQuestion3.placeholder).toEqual("Question 11");
+  expect(cellQuestion4.placeholder).toEqual("Question pt");
+  cellQuestion3.value = "Question pt1";
+  expect(cellQuestion2.placeholder).toEqual("Question 11");
+  expect(cellQuestion3.placeholder).toEqual("Question 11");
+  expect(cellQuestion4.placeholder).toEqual("Question pt1");
+});
+
 test("Test settings.translation.maximumSelectedLocales", () => {
   const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
   settings.translation.maximumSelectedLocales = 2;
@@ -1211,4 +1312,107 @@ test("Reset on changing creator.JSON", () => {
   expect(action.title).toEqual("Verschmelze en mit der Standardsprache");
   expect(action.tooltip).toEqual("Verschmelze en mit der Standardsprache");
   creator.locale = "";
+});
+test("Export dialect languages", () => {
+  const survey: SurveyModel = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+        "title": {
+          "default": "Question 1",
+          "en-uk": "Question uk",
+          "de": "Question de",
+          "pt": "Question pt",
+          "pt-br": "Question br",
+        }
+      },
+      {
+        "type": "text",
+        "name": "question2",
+        "title": {
+          "default": "Question 2",
+          "pt": "Question pt2",
+        }
+      }
+    ]
+  });
+  const translation: Translation = new Translation(survey);
+  let exported;
+  parse(translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "en-uk", "de", "pt", "pt-br"]);
+  expect(exported[1]).toEqual([
+    "survey.page1.question1.title",
+    "Question 1",
+    "Question uk",
+    "Question de",
+    "Question pt",
+    "Question br",
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.question2.title",
+    "Question 2",
+    "Question 2",
+    "",
+    "Question pt2",
+    "Question pt2",
+  ]);
+});
+test("creator.onTranslationExportItem", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  creator.onTranslationExportItem.add((sender, options) => {
+    if(!options.text) {
+      options.text = options.locString.getLocaleText("");
+    }
+  });
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+        "title": {
+          "default": "Question 1",
+          "de": "Question de",
+        }
+      },
+      {
+        "type": "text",
+        "name": "question2",
+        "title": {
+          "default": "Question 2",
+          "pt": "Question pt",
+        }
+      }
+    ]
+  };
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation: Translation = tabTranslation.model;
+  let exported;
+  parse(translation.exportToCSV(), {
+    complete: function (results, file) {
+      exported = results.data;
+    }
+  });
+
+  expect(exported).toHaveLength(3);
+  expect(exported[0]).toEqual(["description ↓ - language →", "default", "de", "pt"]);
+  expect(exported[1]).toEqual([
+    "survey.page1.question1.title",
+    "Question 1",
+    "Question de",
+    "Question 1",
+  ]);
+  expect(exported[2]).toEqual([
+    "survey.page1.question2.title",
+    "Question 2",
+    "Question 2",
+    "Question pt",
+  ]);
 });

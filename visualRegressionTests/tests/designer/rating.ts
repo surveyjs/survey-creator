@@ -1,7 +1,7 @@
 import { Selector } from "testcafe";
 import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
 
-import { url, screenshotComparerOptions, setJSON, checkElementScreenshot } from "../../helper";
+import { url, screenshotComparerOptions, setJSON, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Rating Screenshot";
 
@@ -55,49 +55,55 @@ const jsonMulti = {
 };
 
 test("Rating adorners", async (t) => {
-  await setJSON(json);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON(json);
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const question = Selector("div[data-name=question1]");
-  await takeScreenshot("rating-not-selected.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    const question = Selector("div[data-name=question1]");
+    await takeScreenshot("rating-not-selected.png", question, screenshotComparerOptions);
+    await t
+      .expect(compareResults.isValid())
+      .ok(compareResults.errorMessages());
 
-  await t
-    .click(question, { offsetY: 40 })
-    .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
-  await takeScreenshot("rating-selected.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t
+      .click(question, { offsetY: 40 })
+      .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
+    await takeScreenshot("rating-selected.png", question, screenshotComparerOptions);
+    await t
+      .expect(compareResults.isValid())
+      .ok(compareResults.errorMessages());
+  });
 });
 
 test("Rating adorners with comment", async (t) => {
-  await setJSON(jsonComment);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON(jsonComment);
 
-  const question = Selector("div[data-name=question1]");
-  await checkElementScreenshot("rating-comment-not-selected.png", question, t);
+    const question = Selector("div[data-name=question1]");
+    await takeElementScreenshot("rating-comment-not-selected.png", question, t, comparer);
 
-  await t
-    .click(question, { offsetY: 40 })
-    .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
-  await checkElementScreenshot("rating-comment-selected.png", question, t);
+    await t
+      .click(question, { offsetY: 40 })
+      .expect(Selector(".svc-question__content--selected div[data-name=question1]").visible).ok();
+    await takeElementScreenshot("rating-comment-selected.png", question, t, comparer);
+  });
 });
 
 test("Multi row rating adorner", async (t) => {
-  await setJSON(jsonMulti);
-  await t.resizeWindow(1200, 900);
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
-  const question = Selector("div[data-name=question1]");
-  await takeScreenshot("rating-multiline.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON(jsonMulti);
+    await t.resizeWindow(1200, 900);
+    const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    const question = Selector("div[data-name=question1]");
+    await takeScreenshot("rating-multiline.png", question, screenshotComparerOptions);
+    await t
+      .expect(compareResults.isValid())
+      .ok(compareResults.errorMessages());
 
-  await t.resizeWindow(550, 900);
-  await takeScreenshot("rating-multiline-mobile.png", question, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t.resizeWindow(550, 900);
+    await takeScreenshot("rating-multiline-mobile.png", question, screenshotComparerOptions);
+    await t
+      .expect(compareResults.isValid())
+      .ok(compareResults.errorMessages());
+  });
 });

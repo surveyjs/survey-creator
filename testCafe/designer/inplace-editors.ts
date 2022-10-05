@@ -557,6 +557,7 @@ test("Image picker question inplace editor - add new item", async (t) => {
 test("Image question inplace editor", async (t) => {
   const controls = getVisibleElement(".svc-image-question-controls");
   await t
+    .resizeWindow(2560, 1440)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image"), { speed: 0.5 })
     .click(getToolboxItemByText("Image"), { speed: 0.5 })
@@ -568,6 +569,7 @@ test("Image question inplace editor", async (t) => {
 
 test("Image question inplace editor - choose image via inplace editor", async (t) => {
   await t
+    .resizeWindow(2560, 1440)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image"), { speed: 0.5 })
     .click(getToolboxItemByText("Image"), { speed: 0.5 });

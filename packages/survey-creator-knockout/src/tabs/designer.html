@@ -20,7 +20,7 @@
 
     <!-- ko if: !showPlaceholder -->
 
-    <div data-bind="css: getDesignerCss(), style:{width: survey.width}">
+    <div data-bind="css: getDesignerCss(), style:{maxWidth: survey.renderedWidth, width: survey.renderedWidth}">
       <!-- ko if: creator.allowEditSurveyTitle -->
       <div class="svc-designer-header">
         <!-- ko template: { name: 'survey-header', data: survey } -->
