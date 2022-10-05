@@ -523,6 +523,18 @@ test("Focus on new question", async (t) => {
   await t.expect(svStringSelector.focused).ok();
 });
 
+test("Focus on new question dragged", async (t) => {
+  await setJSON({ pages: [{ name: "page1" }] });
+  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+});
+
 test("Focus switch on select base", async (t) => {
   await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
