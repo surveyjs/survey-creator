@@ -1,8 +1,9 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase, QuestionBooleanModel, SurveyElement } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
 import { ItemValueWrapperViewModel } from "./item-value";
+import { QuestionAdornerViewModel } from "./question";
 
 export class StringEditorConnector extends Base {
   public static get(locString: LocalizableString): StringEditorConnector {
@@ -17,6 +18,19 @@ export class StringEditorConnector extends Base {
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
+
+  public static setSurveyElement(question: SurveyElement): void {
+    if (question instanceof QuestionBooleanModel) {
+      const titleConnector: StringEditorConnector = StringEditorConnector.get(question.locTitle);
+      if (!titleConnector.hasEditCompleteHandler) {
+        titleConnector.onEditComplete.add(() => {
+          StringEditorConnector.get(question.locLabelFalse).activateEditor();
+        });
+        titleConnector.hasEditCompleteHandler = true;
+      }
+    }
+  }
+
   public setItemValue(item: ItemValueWrapperViewModel): void {
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
     let activeChoices = item.question.choices;
