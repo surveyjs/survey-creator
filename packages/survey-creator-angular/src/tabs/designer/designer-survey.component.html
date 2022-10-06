@@ -1,0 +1,35 @@
+<ng-template #template>
+  <div [class]="model.getDesignerCss()" [style.width]="survey.renderedWidth" [style.maxWidth]="survey.renderedWidth">
+    <div *ngIf="creator.allowEditSurveyTitle" class="svc-designer-header">
+      <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
+    </div>
+
+    <!-- ko if: survey.isShowProgressBarOnTop -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+    <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
+      <ng-container *ngFor="let page of survey.pages">
+        <svc-page class="svc-page" *ngIf="!model.showNewPage || page !== model.newPage"
+          [attr.data-sv-drop-target-survey-element]="page.name" [attr.data-sv-drop-target-page]="page.name"
+          [model]="page" [survey]="survey" [creator]="creator"></svc-page>
+      </ng-container>
+      <svc-page *ngIf="model.showNewPage && model.newPage" class="svc-page"
+        [attr.data-sv-drop-target-survey-element]="'newGhostPage'" [model]="model.newPage" [survey]="survey"
+        [creator]="creator" [isGhost]="true"></svc-page>
+    </ng-container>
+    <ng-container *ngIf="model.pagesController.page2Display && creator.pageEditMode === 'bypage'">
+      <svc-designer-pages [model]="model"></svc-designer-pages>
+    </ng-container>
+    
+    <!-- ko if: survey.isShowProgressBarOnBottom -->
+    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- /ko -->
+    <!-- /ko -->
+  </div>
+
+  <div *ngIf="creator.showPageNavigator" class="svc-tab-designer__page-navigator">
+    <svc-page-navigator [pagesController]="model.pagesController" [pageEditMode]="creator.pageEditMode">
+    </svc-page-navigator>
+  </div>
+</ng-template>

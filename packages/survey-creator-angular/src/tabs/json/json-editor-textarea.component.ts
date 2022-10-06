@@ -12,11 +12,6 @@ export class TextareaJsonEditorComponent extends BaseAngular<TextareaJsonEditorM
   protected getModel(): TextareaJsonEditorModel {
     return this.model;
   }
-
-  public onChange(event: any): void {
-    this.model.text = event.target.value;
-  }
-
   public override ngOnInit(): void {
     this.model.canShowErrors = false;
     super.ngOnInit();

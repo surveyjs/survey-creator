@@ -151,7 +151,7 @@ export var indonesianStrings = {
     valueName: "Nama nilai",
     titleName: "Nama judul",
 
-    hasOther: "Memiliki item lain",
+    showOtherItem: "Memiliki item lain",
     otherText: "Teks item lain",
     name: "Nama",
     title: "Judul",
@@ -432,8 +432,8 @@ export var indonesianStrings = {
     validators: "validator",
     titleLocation: "lokasi judul",
 
-    hasComment: "memiliki komentar",
-    hasOther: "memiliki lainnya",
+    showCommentArea: "memiliki komentar",
+    showOtherItem: "memiliki lainnya",
     choices: "pilihan",
     choicesOrder: "urutkan pilihan",
     choicesByUrl: "pilihan dari URL",
@@ -552,7 +552,7 @@ export var indonesianStrings = {
 
     defaultPanelValue: "nilai panel default",
     defaultRowValue: "nilai baris default",
-    hasNone: "Memiliki None",
+    showNoneItem: "Memiliki None",
     noneText: "Non-teks",
 
     text: "teks",

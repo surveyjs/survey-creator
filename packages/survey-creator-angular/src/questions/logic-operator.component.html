@@ -1,0 +1,30 @@
+<ng-template #template>
+  <div [class]="model.cssClasses.selectWrapper">
+    <ng-container *ngIf="!model.isReadOnly">
+      <div [class]="model.getControlClass()"  (click)="click($event)" (keyup)="keyup($event)"
+        [attr.id]="model.inputId" 
+        [attr.required]="model.isRequired" 
+        [attr.tabindex]= "model.isInputReadOnly ? undefined : 0"
+        [attr.disabled]="model.isInputReadOnly"
+        [attr.role]="model.ariaRole"
+        [attr.aria-required]="model.ariaRequired" 
+        [attr.aria-label]="model.ariaLabel" 
+        [attr.aria-invalid]="model.ariaInvalid" 
+        [attr.aria-describedby]= "model.ariaDescribedBy" 
+      >
+        <div [class]="model.cssClasses.controlValue">
+          <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
+          <div>{{model.readOnlyText}}</div>
+        </div>
+        <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear" [visible]="!model.isEmpty()">
+          <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.cleanButtonCaption" [size]="24" sv-ng-svg-icon></svg>
+        </div>
+      </div>
+        <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
+    </ng-container>
+    <div disabled *ngIf="model.isReadOnly" [class]="model.getControlClass()" [attr.id]="model.inputId">
+      <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
+      <div>{{model.readOnlyText}}</div>
+    </div>
+  </div>
+</ng-template>

@@ -272,9 +272,9 @@ var portugueseTranslation = {
     surveyDescriptionPlaceholder: "Insira a descrição do questionário",
     pageDescriptionPlaceholder: "Insira a descrição da página",
 
-    hasOther: "Tem item 'outros'",
+    showOtherItem: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
-    hasNone: "Tem item 'nenhum'",
+    showNoneItem: "Tem item 'nenhum'",
     noneText: "Texto do item 'nenhum'",
     hasSelectAll: "Tem item 'selecionar todos'",
     selectAllText: "Texto do item 'selecionar todos'",
@@ -631,7 +631,7 @@ var portugueseTranslation = {
     titleLocation: "Localização do título",
 
     hasComment: "Tem comentário",
-    hasOther: "Tem item 'outros'",
+    showOtherItem: "Tem item 'outros'",
     choices: "Opções",
     choicesOrder: "Selecione a ordem das opções",
     choicesByUrl: "Opções com origem na Web",
@@ -750,7 +750,7 @@ var portugueseTranslation = {
 
     defaultPanelValue: "valor por defeito do painel",
     defaultRowValue: "valor por defeito da linha",
-    hasNone: "não tem nenhum",
+    showNoneItem: "não tem nenhum",
     noneText: "nenhum texto",
 
     text: "texto",

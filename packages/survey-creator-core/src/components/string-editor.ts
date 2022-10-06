@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase, QuestionBooleanModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
@@ -17,6 +17,7 @@ export class StringEditorConnector extends Base {
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
+
   public setItemValue(item: ItemValueWrapperViewModel): void {
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
     let activeChoices = item.question.choices;
