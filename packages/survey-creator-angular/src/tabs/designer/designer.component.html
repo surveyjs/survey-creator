@@ -6,8 +6,7 @@
     <div class="svc-tab-designer_content">
       <ng-container *ngIf="model.showPlaceholder">
         <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
-          <!-- ko template: { name: 'survey-header', data: survey } -->
-          <!-- /ko -->
+          <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
         </div>
         <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
           <span class="svc-designer-placeholder-text svc-text svc-text--normal">
