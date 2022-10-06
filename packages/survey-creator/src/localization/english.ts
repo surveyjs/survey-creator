@@ -277,9 +277,9 @@ export var enStrings = {
     surveyDescriptionPlaceholder: "Enter a survey description",
     pageDescriptionPlaceholder: "Enter a page description",
 
-    hasOther: "Has other item",
+    showOtherItem: "Has other item",
     otherText: "Other item text",
-    hasNone: "Has none item",
+    showNoneItem: "Has none item",
     noneText: "None item text",
     hasSelectAll: "Has select all item",
     selectAllText: "Select all item text",
@@ -645,7 +645,7 @@ export var enStrings = {
     titleLocation: "titleLocation",
 
     hasComment: "hasComment",
-    hasOther: "hasOther",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -766,7 +766,7 @@ export var enStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",

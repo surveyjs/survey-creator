@@ -272,11 +272,11 @@ export var hrStrings = {
     surveyDescriptionPlaceholder: "Unesite opis ankete",
     pageDescriptionPlaceholder: "Unesite opis stranice",
 
-    hasOther: "Ima i drugu stavku",
+    showOtherItem: "Ima i drugu stavku",
     otherText: "Tekst druge stavke",
-    hasNone: "Nema stavku",
+    showNoneItem: "Nema stavku",
     noneText: "Nijedan tekst stavke",
-    hasSelectAll: "Sadrži odaberite sve stavke",
+    showSelectAllItem: "Sadrži odaberite sve stavke",
     selectAllText: "Odaberite sve stavke tekst",
     choicesMin: "Minimalna vrijednost za automatski generirane stavke",
     choicesMax: "Maksimalna vrijednost za automatski generirane stavke",
@@ -633,8 +633,8 @@ export var hrStrings = {
     validators: "validators",
     titleLocation: "titleLocation",
 
-    hasComment: "hasComment",
-    hasOther: "hasOther",
+    showCommentArea: "hasComment",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -753,7 +753,7 @@ export var hrStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",

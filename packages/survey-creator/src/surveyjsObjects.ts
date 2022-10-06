@@ -586,10 +586,10 @@ Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   };
   [
     "choices",
-    "hasOther",
-    "hasComment",
-    "hasNone",
-    "hasSelectAll",
+    "showOtherItem",
+    "showCommentArea",
+    "showNoneItem",
+    "showSelectAllItem",
     "colCount",
     "titleLocation",
     "rateValues",

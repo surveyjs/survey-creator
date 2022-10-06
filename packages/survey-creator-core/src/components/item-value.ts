@@ -35,14 +35,14 @@ export class ItemValueWrapperViewModel extends Base {
       this.updateIsNew(question, item);
     };
     if (question.noneItem === item) {
-      question.registerFunctionOnPropertyValueChanged("hasNone", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showNoneItem", updateFromProperty);
     } else if (question.otherItem === item) {
-      question.registerFunctionOnPropertyValueChanged("hasOther", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showOtherItem", updateFromProperty);
     } else if (
       question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>question).selectAllItem === item
     ) {
-      question.registerFunctionOnPropertyValueChanged("hasSelectAll", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showSelectAllItem", updateFromProperty);
     } else if (this.isNew) {
       question.visibleChoicesChangedCallback = () => {
         this.updateNewItemValue();
