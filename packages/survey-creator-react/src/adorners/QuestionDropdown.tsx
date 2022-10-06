@@ -40,7 +40,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
               >
                 {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,
                   ReactElementFactory.Instance.createElement(
-                    "survey-radiogroup-item",
+                    this.dropdownModel.itemComponent,
                     {
                       question: this.question,
                       cssClasses: this.question.cssClasses,
