@@ -268,9 +268,9 @@ export var fiStrings = {
     surveyDescriptionPlaceholder: "Lisää kyselyn kuvaus",
     pageDescriptionPlaceholder: "Lisää sivun kuvaus",
 
-    hasOther: "On muu",
+    showOtherItem: "On muu",
     otherText: "Muu teksti",
-    hasNone: "Ei mitään",
+    showNoneItem: "Ei mitään",
     noneText: "Ei mitään tekstiä",
     hasSelectAll: "On valinnut kaikki",
     selectAllText: "Valitse kaikki tekstit",
@@ -628,7 +628,7 @@ export var fiStrings = {
     titleLocation: "titleLocation",
 
     hasComment: "hasComment",
-    hasOther: "hasOther",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -747,7 +747,7 @@ export var fiStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",
