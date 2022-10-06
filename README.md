@@ -11,8 +11,6 @@ Survey Creator is a GUI-based no-code form builder library that allows easy drag
 
 ![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
 
-[Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
-
 ## Features
 
 - Native support for React and Knockout
