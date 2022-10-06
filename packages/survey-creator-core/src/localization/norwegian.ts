@@ -267,11 +267,11 @@ export var nbStrings = {
     surveyDescriptionPlaceholder: "Skriv skjema-beskrivelse",
     pageDescriptionPlaceholder: "Skriv side-beskrivelse",
 
-    hasOther: "Har annet element",
+    showOtherItem: "Har annet element",
     otherText: "Annet element-tekst",
-    hasNone: "Har velg ingen",
+    showNoneItem: "Har velg ingen",
     noneText: "Velg ingen-tekst",
-    hasSelectAll: "Har velg alt-element",
+    showSelectAllItem: "Har velg alt-element",
     selectAllText: "Velg alt elememt-tekst",
     choicesMin: "Minsteverdi for auto-genererte elementer",
     choicesMax: "Maksverdi for auto-genererte elementer",
@@ -618,8 +618,8 @@ export var nbStrings = {
     validators: "validators",
     titleLocation: "titleLocation",
 
-    hasComment: "hasComment",
-    hasOther: "hasOther",
+    showCommentArea: "hasComment",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -738,7 +738,7 @@ export var nbStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",

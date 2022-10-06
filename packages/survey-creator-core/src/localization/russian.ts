@@ -242,11 +242,11 @@ export var ruStrings = {
     surveyDescriptionPlaceholder: "Введите описание опроса",
     pageDescriptionPlaceholder: "Введите описание страницы",
 
-    hasOther: "Есть пункт 'Другое'",
+    showOtherItem: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
-    hasNone: "Нет ни одного пункта",
+    showNoneItem: "Нет ни одного пункта",
     noneText: "Текст пункта 'Ничего'",
-    hasSelectAll: "Выбрать все пункты",
+    showSelectAllItem: "Выбрать все пункты",
     selectAllText: "Текст пункта 'Выбрать все пункты'",
     choicesMin: "Минимальное значение для автоматически сгенерированных элементов",
     choicesMax: "Максимальное значение для автоматически сгенерированных элементов",
@@ -565,8 +565,8 @@ export var ruStrings = {
     validators: "Валидаторы",
     titleLocation: "Расположение заголовка",
 
-    hasComment: "Есть комментарий",
-    hasOther: "Есть значение 'Другое'",
+    showCommentArea: "Есть комментарий",
+    showOtherItem: "Есть значение 'Другое'",
     choices: "Выбор",
     choicesOrder: "Выбрать порядок выбора",
     choicesByUrl: "Выбрать из интернета",
@@ -686,7 +686,7 @@ export var ruStrings = {
 
     defaultPanelValue: "Значение панели по умолчанию",
     defaultRowValue: "Значение строки по умолчанию",
-    hasNone: "Нет ни одного пункта",
+    showNoneItem: "Нет ни одного пункта",
     noneText: "Текст пункта 'Ничего'",
 
     text: "Текст"

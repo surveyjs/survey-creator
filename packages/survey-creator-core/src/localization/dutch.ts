@@ -268,11 +268,11 @@ export var nlStrings = {
     surveyDescriptionPlaceholder: "Voer een onderzoeksbeschrijving in",
     pageDescriptionPlaceholder: "Voer een paginabeschrijving in",
 
-    hasOther: "Heeft de 'Anders:'-optie",
+    showOtherItem: "Heeft de 'Anders:'-optie",
     otherText: "Titel 'Anders:'-optie",
-    hasNone: "Heeft de 'Geen'-optie",
+    showNoneItem: "Heeft de 'Geen'-optie",
     noneText: "Titel 'Geen'-optie",
-    hasSelectAll: "Heeft de 'Alles selecteren'-optie",
+    showSelectAllItem: "Heeft de 'Alles selecteren'-optie",
     selectAllText: "Titel 'Alles selecteren'-optie",
     allowEmptyResponse: "Leeg respons toestaan",
     choicesMin: "Minimumwaarde voor automatisch gegenereerde items",
@@ -651,8 +651,8 @@ export var nlStrings = {
     maxWidth: "Maximale breedte",
     useDisplayValuesInTitle: "Waardes in titel gebruiken",
 
-    hasComment: "Heeft commentaar",
-    hasOther: "Heeft andere",
+    showCommentArea: "Heeft commentaar",
+    showOtherItem: "Heeft andere",
     choices: "Keuzes",
     choicesOrder: "Keuzes bestellen",
     choicesByUrl: "Keuzes per url",
@@ -778,7 +778,7 @@ export var nlStrings = {
 
     defaultPanelValue: "Standaard paneelwaarde",
     defaultRowValue: "Standaard rijwaarde",
-    hasNone: "Heeft er geen",
+    showNoneItem: "Heeft er geen",
     noneText: "Geen tekst",
 
     text: "Tekst",

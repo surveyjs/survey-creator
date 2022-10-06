@@ -155,7 +155,7 @@ export var huStrings = {
     valueName: "Érték megnevezése",
     titleName: "Cím megnevezése",
 
-    hasOther: "Rendelkezik egyéb értékkel",
+    showOtherItem: "Rendelkezik egyéb értékkel",
     otherText: "Az egyéb érték szövege",
     name: "Megnevezés",
     title: "Cím",
@@ -431,8 +431,8 @@ export var huStrings = {
     validators: "Validátorok",
     titleLocation: "Cím elhelyezése",
 
-    hasComment: "Van megjegyzés",
-    hasOther: "Van 'egyéb'",
+    showCommentArea: "Van megjegyzés",
+    showOtherItem: "Van 'egyéb'",
     choices: "Lehetőségek",
     choicesOrder: "Lehetőségek rendezése",
     choicesByUrl: "Lehetőségek a webről",
@@ -554,7 +554,7 @@ export var huStrings = {
 
     defaultPanelValue: "Panel alapértelmezett értéke",
     defaultRowValue: "Sor alapértelmezett értéke",
-    hasNone: "Lehet üres",
+    showNoneItem: "Lehet üres",
     noneText: "Üres szöveg",
 
     text: "Szöveg"

@@ -133,7 +133,7 @@ export var danishStrings = {
     valueName: "Værdiens navn",
     titleName: "Titelnavn",
 
-    hasOther: "Har andet element",
+    showOtherItem: "Har andet element",
     otherText: "Andet element tekst",
     name: "Navn",
     title: "Titel",
@@ -392,8 +392,8 @@ export var danishStrings = {
     validators: "validators",
     titleLocation: "titleLocation",
 
-    hasComment: "hasComment",
-    hasOther: "hasOther",
+    showCommentArea: "hasComment",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -512,7 +512,7 @@ export var danishStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",
