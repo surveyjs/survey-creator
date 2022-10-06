@@ -1,5 +1,6 @@
 <ng-container *ngIf="!creator.isCreatorDisposed">
-  <div class="svc-creator" [class.svc-creator--mobile]="creator.isMobileView">
+  <sv-ng-modal-container></sv-ng-modal-container>
+  <div class="svc-creator" [class.svc-creator--mobile]="creator.isMobileView" #container>
     <div>
       <svc-svg-bundle></svc-svg-bundle>
     </div>
@@ -29,7 +30,7 @@
           </div>
           <div *ngIf="creator.isMobileView" class="svc-footer-bar">
             <div class="svc-toolbar-wrapper" [visible]="creator.isMobileView">
-              <sv-action-bar [model: creator.footerToolbar]></sv-action-bar>
+              <sv-action-bar [model]="creator.footerToolbar"></sv-action-bar>
             </div>
           </div>
         </div>
@@ -44,8 +45,7 @@
           </a>
         </span>
       </div>
-      <!-- ko component: { name: 'svc-notifier', params: { creator: creator, notifier: creator.notifier } } -->
-      <!-- /ko -->
+      <svc-notifier [notifier]="creator.notifier"></svc-notifier>
     </div>
   </div>
 </ng-container>
