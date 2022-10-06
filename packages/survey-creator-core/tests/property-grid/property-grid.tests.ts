@@ -2137,11 +2137,11 @@ test("Change cellType in the column in property grid", () => {
   expect(cellTypQuestion).toBeTruthy();
   expect(cellTypQuestion.getType()).toEqual("dropdown");
   expect(cellTypQuestion.value).toEqual("default");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeFalsy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeFalsy();
   cellTypQuestion.value = "checkbox";
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
 });
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
