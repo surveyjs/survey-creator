@@ -21,7 +21,7 @@ Survey Creator is a GUI-based no-code form builder library that allows easy drag
 - TypeScript support
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
 - [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
-- A dynamic, data-driven approach using industry-standard JSON as common ground: your entire form is defined as a data model (a ‘schema’) written in JSON, and form UI is built automatically from templates using the model.
+- A dynamic, data-driven approach that uses industry-standard JSON as common ground: your entire form is defined as a data model (a "schema") written in JSON, and a form UI is built automatically from templates using this model.
 - Compatibility with any server + database combination
 - [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
