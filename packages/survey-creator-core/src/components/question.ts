@@ -29,7 +29,6 @@ import {
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import "./question.scss";
 import { settings } from "../settings";
-import { StringEditorConnector } from "./string-editor";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
@@ -67,8 +66,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.surveyElement;
       return element.dragTypeOverMe;
     });
-
-    StringEditorConnector.setSurveyElement(surveyElement);
   }
 
   get element() {
