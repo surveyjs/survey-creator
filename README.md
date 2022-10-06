@@ -1,4 +1,4 @@
-# Survey Creator / Form Builder by SurveyJS
+# Survey Creator Library
 
 <a href="https://github.com/surveyjs/survey-creator/issues">
 <img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/surveyjs/survey-creator.svg">
@@ -7,7 +7,7 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display a survey or form in your application.
+Survey Creator is a GUI-based no-code form builder library that allows easy drag-and-drop form creation even for non-technical users. The form buider produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display a survey form in your application. You can try out our [free survey tool](https://surveyjs.io/create-free-survey) built to demonstrate the capabilities of the Survey Creator library and estimate its potential value for your project(s).
 
 ![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
 
@@ -17,11 +17,12 @@ Survey Creator / Form Builder is a visual designer that allows users to create s
 
 - Native support for React and Knockout
 - Integration of the Knockout version into Angular, Vue, and jQuery applications
-- Modern, customizable UI themes
+- Built-in themes and CSS customization
 - TypeScript support
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
 - [Integration with any backend framework](https://surveyjs.io/Documentation/Survey-Creator?id=integration-with-backend) (examples for PHP, NodeJS, and ASP.NET included)
-- Survey JSON schemas can be stored in any database
+- A dynamic, data-driven approach that uses industry-standard JSON as common ground: your entire form is defined as a data model (a "schema") written in JSON, and a form UI is built automatically from templates using this model.
+- Compatibility with any server + database combination
 - [Third-party component integration](https://surveyjs.io/Documentation/Survey-Creator?id=Create-Custom-Widget)
 
 ## Get Started
