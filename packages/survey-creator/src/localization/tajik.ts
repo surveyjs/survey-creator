@@ -239,9 +239,9 @@ export var tgStrings = {
     surveyDescriptionPlaceholder: "Тавсифи пурсишро ворид кунед",
     pageDescriptionPlaceholder: "Тавсифи саҳифаро ворид кунед",
 
-    hasOther: "Нуқтаи 'Дигар' вуҷуд аст",
+    showOtherItem: "Нуқтаи 'Дигар' вуҷуд аст",
     otherText: "Манти нуқтаи 'Дигар'",
-    hasNone: "Ягон нуқта вуҷуд надорад",
+    showNoneItem: "Ягон нуқта вуҷуд надорад",
     noneText: "Матни нуқтаи 'Ҳиҷӣ'",
     hasSelectAll: "Ҳамаи нуқтаҳоро интихоб кардан",
     selectAllText: "Матни нуқта 'Ҳамаи нуқтаҳоро интихоб кардан'",
@@ -563,7 +563,7 @@ export var tgStrings = {
     titleLocation: "Ҷойгиршавии сарлавҳа",
 
     hasComment: "Шарҳ вуҷуд аст",
-    hasOther: "Қиммати 'Дигар' вуҷуд аст",
+    showOtherItem: "Қиммати 'Дигар' вуҷуд аст",
     choices: "Интихоб",
     choicesOrder: "Интихоби фармоиши интихоб",
     choicesByUrl: "Интихоб аз интернет",
@@ -683,7 +683,7 @@ export var tgStrings = {
 
     defaultPanelValue: "Қимматҳои бастаи нобаён",
     defaultRowValue: "Қимматҳои сатри нобаён",
-    hasNone: "Ягон нуқта нест",
+    showNoneItem: "Ягон нуқта нест",
     noneText: "Матни нуқтаи 'Ҳеҷ чиз'",
 
     text: "Матн"

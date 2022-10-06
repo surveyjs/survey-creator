@@ -2137,11 +2137,11 @@ test("Change cellType in the column in property grid", () => {
   expect(cellTypQuestion).toBeTruthy();
   expect(cellTypQuestion.getType()).toEqual("dropdown");
   expect(cellTypQuestion.value).toEqual("default");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeFalsy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeFalsy();
   cellTypQuestion.value = "checkbox";
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
 });
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
@@ -2723,10 +2723,10 @@ test("Use validation in custom property editor", (): any => {
 test("autoComplate property", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
-  const autoCompleteQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("autoComplete");
-  expect(autoCompleteQuestion.dataList).toBeTruthy();
-  expect(Array.isArray(autoCompleteQuestion.dataList)).toBeTruthy();
-  expect(autoCompleteQuestion.dataList.length > 10).toBeTruthy();
+  const autoCompleteQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("autoComplete");
+  expect(autoCompleteQuestion.choices).toBeTruthy();
+  expect(Array.isArray(autoCompleteQuestion.choices)).toBeTruthy();
+  expect(autoCompleteQuestion.choices.length > 10).toBeTruthy();
 });
 test("property editor title description html", () => {
   var survey = new SurveyModel();

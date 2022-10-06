@@ -1,0 +1,33 @@
+import { Component, Input } from "@angular/core";
+import { QuestionRowModel } from "survey-core";
+import { CreatorBase, RowViewModel } from "survey-creator-core";
+import { CreatorModelComponent } from "./creator-model.component";
+import { AngularComponentFactory } from "survey-angular-ui";
+
+@Component({
+  selector: "svc-row",
+  templateUrl: "./row.component.html"
+})
+export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
+  @Input() componentData!: { creator: CreatorBase, row: QuestionRowModel };
+
+  public model!: RowViewModel;
+
+  public get row() {
+    return this.componentData.row;
+  }
+  public get creator() {
+    return this.componentData.creator;
+  }
+  protected getModel(): RowViewModel {
+    return this.model;
+  }
+  createModel() {
+    this.model = new RowViewModel(this.creator, this.row, <any>undefined);
+  }
+  getPropertiesToTrack(): string[] {
+    return ["creator", "row"];
+  }
+}
+
+AngularComponentFactory.Instance.registerComponent("svc-row", CreatorRowComponent);

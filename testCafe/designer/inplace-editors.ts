@@ -588,7 +588,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
 
 test("Matrix dropdown question inplace popup editor", async (t) => {
   const showControl = ClientFunction(() => {
-    const el: any = document.querySelectorAll("td:nth-child(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+    const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
     el.style.display = "block";
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);

@@ -139,7 +139,7 @@ var portugueseTranslation = {
     valueName: "Nome do valor",
     titleName: "Nome do título",
 
-    hasOther: "Tem item 'outros'",
+    showOtherItem: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
     name: "Nome",
     title: "Título",
@@ -401,8 +401,8 @@ var portugueseTranslation = {
     validators: "Validadores",
     titleLocation: "Localização do título",
 
-    hasComment: "Tem comentário",
-    hasOther: "Tem item 'outros'",
+    showCommentArea: "Tem comentário",
+    showOtherItem: "Tem item 'outros'",
     choices: "Opções",
     choicesOrder: "Selecione a ordem das alternativas",
     choicesByUrl: "Opções com origem na Web",
@@ -521,7 +521,7 @@ var portugueseTranslation = {
 
     defaultPanelValue: "valor default do painel",
     defaultRowValue: "valor default da linha",
-    hasNone: "não tem nenhum",
+    showNoneItem: "não tem nenhum",
     noneText: "nenhum texto",
 
     text: "texto",

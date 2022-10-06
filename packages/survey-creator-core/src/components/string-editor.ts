@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionSelectBase, QuestionRatingModel } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, select } from "../utils/utils";
@@ -6,7 +6,7 @@ import { ItemValueWrapperViewModel } from "./item-value";
 
 export class StringEditorConnector extends Base {
   public static get(locString: LocalizableString): StringEditorConnector {
-    if(!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
+    if (!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
     return locString["_stringEditorConnector"];
   }
   public setAutoFocus() { this.focusOnEditor = true; }
@@ -22,17 +22,17 @@ export class StringEditorConnector extends Base {
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
     let activeChoices = item.question.choices;
     if (!titleConnector.hasEditCompleteHandler) {
-      titleConnector.onEditComplete.add(()=>{
-        if(item.question.choices.length) StringEditorConnector.get(item.question.choices[0].locText).activateEditor();
+      titleConnector.onEditComplete.add(() => {
+        if (item.question.choices.length) StringEditorConnector.get(item.question.choices[0].locText).activateEditor();
       });
       titleConnector.hasEditCompleteHandler = true;
     }
-    this.onEditComplete.add(()=>{
+    this.onEditComplete.add(() => {
       const itemIndex = activeChoices.indexOf(item.item);
-      if(itemIndex >= 0 && itemIndex < activeChoices.length - 1) {
+      if (itemIndex >= 0 && itemIndex < activeChoices.length - 1) {
         StringEditorConnector.get(activeChoices[itemIndex + 1].locText).activateEditor();
       }
-      if(itemIndex == activeChoices.length - 1) {
+      if (itemIndex == activeChoices.length - 1) {
         item.addNewItem(item.question.newItem, item.question, item.creator);
       }
     });
@@ -60,12 +60,12 @@ export class StringEditorViewModelBase extends Base {
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
     this.connector = StringEditorConnector.get(locString);
-    this.connector.onDoActivate.add(()=>{ this.activate(); });
+    this.connector.onDoActivate.add(() => { this.activate(); });
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
   public afterRender() {
-    if(this.connector.focusOnEditor) {
+    if (this.connector.focusOnEditor) {
       this.activate();
       this.connector.focusOnEditor = false;
     }
@@ -73,7 +73,7 @@ export class StringEditorViewModelBase extends Base {
 
   public activate() {
     const element = this.getEditorElement();
-    if(element) {
+    if (element) {
       element.focus();
       select(element);
     }
@@ -133,7 +133,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onInput(event: any): void {
-    if(this.editAsText && !this.compostionInProgress) {
+    if (this.editAsText && !this.compostionInProgress) {
       sanitizeEditableContent(event.target);
     }
   }
@@ -214,7 +214,7 @@ export class StringEditorViewModelBase extends Base {
   public onKeyDown(event: KeyboardEvent): boolean {
     if (event.keyCode === 13) {
       this.blurEditor();
-      if(!event.ctrlKey) {
+      if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});
       }
       this.done(event);

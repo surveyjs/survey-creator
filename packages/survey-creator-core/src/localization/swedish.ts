@@ -141,7 +141,7 @@ export let svStrings = {
     valueName: "Värde namn",
     titleName: "Titel namn",
 
-    hasOther: "Har annat element",
+    showOtherItem: "Har annat element",
     otherText: "Annat",
     name: "Namn",
     title: "Titel",
@@ -402,8 +402,8 @@ export let svStrings = {
     validators: "validators",
     titleLocation: "titleLocation",
 
-    hasComment: "hasComment",
-    hasOther: "hasOther",
+    showCommentArea: "hasComment",
+    showOtherItem: "hasOther",
     choices: "choices",
     choicesOrder: "choicesOrder",
     choicesByUrl: "choicesByUrl",
@@ -522,7 +522,7 @@ export let svStrings = {
 
     defaultPanelValue: "defaultPanelValue",
     defaultRowValue: "defaultRowValue",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "text",

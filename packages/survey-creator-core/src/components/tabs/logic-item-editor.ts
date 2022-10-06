@@ -331,8 +331,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         dynamicPanel.removePanelUI(panel);
       }
     };
-    removeActionLinkQuestion.linkValueText = "";
     removeActionLinkQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+    removeActionLinkQuestion.linkValueText = "";
 
     return panel;
   }
@@ -426,7 +426,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       text = el.locTitle.renderedHtml;
     }
     if (!text) text = el.name;
-    if(el.isQuestion) {
+    if (el.isQuestion) {
       text = this.options.getObjectDisplayName(el, "logic-tab:question-selector", "condition", text);
     }
     return text;
