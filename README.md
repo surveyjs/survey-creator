@@ -7,7 +7,7 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-Survey Creator is a GUI-based no-code form builder library that allows easy drag-and-drop form creation even for non-technical users. The form buider produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](https://github.com/surveyjs/survey-library) to display a survey form in your application. You can try out our [free survey tool](https://surveyjs.io/create-free-survey) built to demonstrate the capabilities of the Survey Creator library and estimate its potential value for your project(s).
+Survey Creator is a GUI-based no-code form builder library that allows easy drag-and-drop form creation even for non-technical users. The form buider produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Form Library](https://github.com/surveyjs/survey-library) to display a survey form in your application. You can try out our [free survey tool](https://surveyjs.io/create-free-survey) built to demonstrate the capabilities of the Survey Creator library and estimate its potential value for your project(s).
 
 ![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
 
@@ -41,4 +41,4 @@ Survey Creator is a GUI-based no-code form builder library that allows easy drag
 
 ## Licensing
 
-Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/Licenses#SurveyCreator). However, you can use [online Survey Creator](https://surveyjs.io/create-survey) to produce JSON survey configurations and use them with SurveyJS in your application free of charge.
+Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing) for software developer(s) who will be working with the SurveyJS product's APIs and implementing their integration. However, you can use our [free survey tool](https://surveyjs.io/create-free-survey) to generate survey configuration file in the JSON format and use it with SurveyJS Form Library in your application free of charge.
