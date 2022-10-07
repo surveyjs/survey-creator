@@ -1,7 +1,8 @@
 import { StringEditorConnector, StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),

@@ -153,6 +153,7 @@ export var enStrings = {
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
+    auto: "auto",
     //completedHtmlOnConditionItemText: "Show if",
     lg: {
       addNewItem: "Add New Rule",
