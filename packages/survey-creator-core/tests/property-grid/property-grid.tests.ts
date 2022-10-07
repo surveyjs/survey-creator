@@ -2738,3 +2738,19 @@ test("property editor title description html", () => {
   );
   expect(titleQuestion.locDescription.html).toEqual("Common <span class='spg-bold'>Title</span>");
 });
+test("Image picker question imageHeight placeholder", () => {
+  const question = new QuestionImagePickerModel("q1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let imageHeightQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("imageHeight")
+  );
+  expect(imageHeightQuestion.placeholder).toEqual("auto");
+  var curStrings = editorLocalization.getLocale("");
+  curStrings.pe.auto = "Auto 2";
+  propertyGrid = new PropertyGridModelTester(question);
+  imageHeightQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("imageHeight")
+  );
+  expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
+  curStrings.pe.auto = "auto";
+});
