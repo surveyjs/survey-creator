@@ -80,5 +80,7 @@ import "../property-grid-theme/property-grid.scss";
 import "../utils/design.scss";
 import "../utils/layout.scss";
 
-import { settings } from "survey-core";
+import { settings, checkLibraryVersion } from "survey-core";
 settings.supportCreatorV2 = true;
+
+checkLibraryVersion(`${process.env.VERSION}`, "survey-creator-core");
