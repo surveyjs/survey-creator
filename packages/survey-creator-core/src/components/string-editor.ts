@@ -36,9 +36,24 @@ export class StringEditorConnector extends Base {
         item.addNewItem(item.question.newItem, item.question, item.creator);
       }
     });
+    this.onBackspaceEmptyString.add(() => {
+      const itemIndex = item.question.choices.indexOf(item.item);
+      let itemToFocus: ItemValue = null;
+      if (itemIndex !== -1) {
+        if (itemIndex == 0 && item.question.choices.length >= 2) itemToFocus = item.question.choices[1];
+        if (itemIndex > 0) itemToFocus = item.question.choices[itemIndex - 1];
+        if (itemToFocus) {
+          const connector = StringEditorConnector.get(itemToFocus.locText);
+          connector.setAutoFocus();
+          connector.activateEditor();
+        }
+        item.remove(item);
+      }
+    })
   }
   public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  public onBackspaceEmptyString: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   constructor(private locString: LocalizableString) {
     super();
   }
@@ -222,6 +237,10 @@ export class StringEditorViewModelBase extends Base {
     if (event.keyCode === 27) {
       this.blurredByEscape = true;
       this.blurEditor();
+      this.done(event);
+    }
+    if (event.keyCode === 8 && !(event.target as any).innerText) {
+      this.connector.onBackspaceEmptyString.fire(this, {});
       this.done(event);
     }
     this.checkConstraints(event);

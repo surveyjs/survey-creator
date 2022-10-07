@@ -563,3 +563,27 @@ test("Disable edit inactive items", async (t) => {
     .click(Selector(".svc-item-value-controls__add").nth(1))
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "true").exists).ok();
 });
+
+test("Delete items on backspace", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter").pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .pressKey("backspace")
+    .pressKey("backspace")
+    .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .pressKey("backspace")
+    .pressKey("backspace")
+    .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).notOk()
+    .pressKey("backspace")
+    .pressKey("backspace")
+    .expect(Selector(".sv-string-editor").withText("item3").visible).notOk();
+});
