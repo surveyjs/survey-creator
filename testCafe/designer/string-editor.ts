@@ -575,15 +575,18 @@ test("Delete items on backspace", async (t) => {
     .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
     .pressKey("backspace")
     .pressKey("backspace")
+    .wait(300)
     .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
     .expect(Selector(".sv-string-editor").withText("item2").visible).notOk()
     .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
     .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
     .pressKey("backspace")
     .pressKey("backspace")
+    .wait(300)
     .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
     .expect(Selector(".sv-string-editor").withText("item1").visible).notOk()
     .pressKey("backspace")
     .pressKey("backspace")
+    .wait(300)
     .expect(Selector(".sv-string-editor").withText("item3").visible).notOk();
 });
