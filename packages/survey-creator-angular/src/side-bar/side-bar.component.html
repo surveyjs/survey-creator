@@ -7,9 +7,7 @@
           <div class="svc-side-bar__container-actions">
             <sv-action-bar [model]="model.toolbar"></sv-action-bar>
           </div>
-          <div *ngIf="!!model.headerText" class="svc-side-bar__container-title">
-            {{model.headerText}}
-          </div>
+          <div *ngIf="!!model.headerText" class="svc-side-bar__container-title">{{model.headerText}}</div>
         </div>
         <div class="svc-side-bar__container-content">
           <ng-container *ngFor="let tab of model.tabs">

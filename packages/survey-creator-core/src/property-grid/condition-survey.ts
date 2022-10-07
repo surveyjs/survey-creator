@@ -314,9 +314,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updatePlaceholderVisibileIf();
   }
   protected updatePlaceholderVisibileIf() {
-    if(!!this.panel) {
+    if (!!this.panel) {
       let expression = "";
-      if(this.isModal) {
+      if (this.isModal) {
         expression = "{panel.questionName} empty and {panelIndex} == 0";
       }
       this.panel.templateValue.getQuestionByName("placeholder").visibleIf = expression;
@@ -490,7 +490,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
 
   public apply(): boolean {
-    if(this.hasErrorInUI()) {
+    if (this.hasErrorInUI()) {
       return false;
     }
     if (!this.object || !this.propertyName) return;
@@ -548,8 +548,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         dynamicPanel.removePanelUI(panel);
       }
     };
-    removeQuestionQuestion.linkValueText = "";
     removeQuestionQuestion.linkSetButtonCssClasses = "svc-logic-condition-remove svc-icon-remove";
+    removeQuestionQuestion.linkValueText = "";
   }
   private setItemToPanel(item: ConditionEditorItem, panel: PanelModel) {
     this.isSettingPanelValues = true;
@@ -667,7 +667,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       }
     }
     this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
-    if(sortOrder === "asc") {
+    if (sortOrder === "asc") {
       SurveyHelper.sortItems(res);
     }
     return res;
