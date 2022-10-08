@@ -564,6 +564,21 @@ test("Disable edit inactive items", async (t) => {
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "true").exists).ok();
 });
 
+test("Focus switch on rating base", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Rating"));
+  await t.pressKey("Enter");
+  const svStringSelector = Selector(".svc-rating-question-content .sv-string-editor").withText("2");
+  await t
+    .expect(svStringSelector.visible).ok()
+    .click(svStringSelector)
+    .expect(svStringSelector.focused).ok();
+  await t
+    .pressKey("tab")
+    .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("4").focused).notOk();
+});
+
 test("Delete items on backspace", async (t) => {
   await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");

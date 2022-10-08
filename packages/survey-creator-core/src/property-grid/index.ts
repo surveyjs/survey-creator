@@ -621,7 +621,9 @@ export class PropertyJSONGenerator {
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    json.placeholder = typeof propDescr === "object" ? propDescr.placeholder : undefined;
+    if(typeof propDescr === "object" && propDescr.placeholder) {
+      json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
+    }
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {

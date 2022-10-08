@@ -20,18 +20,6 @@ export class QuestionRatingAdornerViewModel extends Base {
     public templateData: SurveyTemplateRendererTemplateData
   ) {
     super();
-    let stopEventProcessing = false;
-    this.element.onItemValuePropertyChanged.add((sender, options) => {
-      if (!stopEventProcessing && this.element.rateValues.length === 0) {
-        stopEventProcessing = true;
-        const rateValues = this.element.visibleRateValues;
-        const index = rateValues.map((item) => item.value).indexOf(options.obj.value);
-        rateValues[index][options.name] = options.newValue;
-        this.element.rateValues = rateValues;
-        stopEventProcessing = false;
-      }
-      return "";
-    });
   }
 
   get element(): QuestionRatingModel {
