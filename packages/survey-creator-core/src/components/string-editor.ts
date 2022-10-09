@@ -36,6 +36,7 @@ export class StringEditorConnector extends Base {
         item.addNewItem(item.question.newItem, item.question, item.creator);
       }
     });
+    this.onBackspaceEmptyString.clear();
     this.onBackspaceEmptyString.add(() => {
       const itemIndex = item.question.choices.indexOf(item.item);
       let itemToFocus: ItemValue = null;
@@ -75,6 +76,7 @@ export class StringEditorViewModelBase extends Base {
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
     this.connector = StringEditorConnector.get(locString);
+    this.connector.onDoActivate.clear();
     this.connector.onDoActivate.add(() => { this.activate(); });
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
@@ -96,6 +98,9 @@ export class StringEditorViewModelBase extends Base {
 
   public setLocString(locString: LocalizableString) {
     this.locString = locString;
+    this.connector = StringEditorConnector.get(locString);
+    this.connector.onDoActivate.clear();
+    this.connector.onDoActivate.add(() => { this.activate(); });
   }
   public checkConstraints(event: any) {
     if (this.maxLength > 0 && event.keyCode >= 32) {
@@ -240,8 +245,8 @@ export class StringEditorViewModelBase extends Base {
       this.done(event);
     }
     if (event.keyCode === 8 && !(event.target as any).innerText) {
-      this.connector.onBackspaceEmptyString.fire(this, {});
       this.done(event);
+      this.connector.onBackspaceEmptyString.fire(this, {});
     }
     this.checkConstraints(event);
     return true;
