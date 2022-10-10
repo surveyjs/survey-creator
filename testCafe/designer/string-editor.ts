@@ -578,3 +578,33 @@ test("Focus switch on rating base", async (t) => {
     .pressKey("Enter")
     .expect(Selector(".svc-rating-question-content .sv-string-editor").withText("4").focused).notOk();
 });
+
+test("Delete items on backspace", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter").pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("item2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("item1").visible).notOk()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("item3").visible).notOk();
+});
