@@ -99,7 +99,7 @@ var polishStrings = {
     valueName: "Value name",
     titleName: "Title name",
 
-    hasOther: "Czy możliwa własna odpowiedź",
+    showOtherItem: "Czy możliwa własna odpowiedź",
     otherText: "Other item text",
     name: "Nazwa",
     title: "Etykieta",

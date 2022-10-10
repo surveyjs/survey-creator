@@ -1205,6 +1205,10 @@ implements ISurveyCreatorOptions {
       property.name == "hasNone" ||
       property.name == "hasOther" ||
       property.name == "hasSelectAll" ||
+      property.name == "showCommentArea" ||
+      property.name == "showNoneItem" ||
+      property.name == "showOtherItem" ||
+      property.name == "showSelectAllItem" ||
       property.name == "locale"
     ) {
       this.doPropertyGridChanged();

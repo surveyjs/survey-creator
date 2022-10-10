@@ -1,14 +1,14 @@
-import { ChangeDetectorRef, Component, Input } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
 import { CreatorBase } from "survey-creator-core";
 
 @Component({
   selector: "svc-creator",
-  templateUrl: "./creator.component.html",
-  styleUrls: []
+  templateUrl: "./creator.component.html"
 })
-export class CreatorComponent extends BaseAngular<CreatorBase> {
+export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterViewInit {
   @Input() model!: CreatorBase;
+  @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
 
   constructor(changeDetectorRef: ChangeDetectorRef) {
     super(changeDetectorRef);
@@ -22,6 +22,16 @@ export class CreatorComponent extends BaseAngular<CreatorBase> {
   }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();
+  }
+  public ngAfterViewInit(): void {
+    this.creator.initKeyboardShortcuts(this.container.nativeElement);
+    this.creator.initResponsivityManager(this.container.nativeElement);
+    super.ngOnInit();
+  }
+  public override ngOnDestroy(): void {
+    this.creator.removeKeyboardShortcuts(this.container.nativeElement);
+    this.creator.resetResponsivityManager();
+    super.ngOnDestroy();
   }
 }
 

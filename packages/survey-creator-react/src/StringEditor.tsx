@@ -54,6 +54,10 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       // document.execCommand('selectAll', false, null);
     }
   }
+  public componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    this.baseModel.afterRender();
+  }
   public componentWillUnmount() {
     super.componentWillUnmount();
     if (!this.locString) return;

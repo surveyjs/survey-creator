@@ -255,14 +255,14 @@ export var turkishStrings = {
     surveyDescriptionPlaceholder: "Anket açıklaması giriniz",
     pageDescriptionPlaceholder: "Sayfa açıklaması giriniz",
 
-    hasComment: "Yorumu var",
-    hasOther: "Başka bir öğeye sahip",
+    showCommentArea: "Yorumu var",
+    showOtherItem: "Başka bir öğeye sahip",
     otherText: "Diğer eleman metni",
     showClearButton: "Temizleme butonunu göster",
     allowEmptyResponse: "Boş cevaba izin ver",
-    hasNone: "Hiçbir elemana sahip değil",
+    showNoneItem: "Hiçbir elemana sahip değil",
     noneText: "Hiçbir eleman metni",
-    hasSelectAll: "Tüm elemanlar seçildi",
+    showSelectAllItem: "Tüm elemanlar seçildi",
     selectAllText: "Tüm elemanların yazısını seç",
     choicesMin: "Otomatik oluşturulan öğeler için minimum değer",
     choicesMax: "Otomatik oluşturulan öğeler için maksimum değer",
@@ -626,8 +626,8 @@ export var turkishStrings = {
     maxWidth: "Maksimum genişlik",
     useDisplayValuesInTitle: "Başlıkta görünen değeri kullan",
 
-    hasComment: "Yorum var mı?",
-    hasOther: "Diğerleri var mı?",
+    showCommentArea: "Yorum var mı?",
+    showOtherItem: "Diğerleri var mı?",
     choices: "Seçenekler",
     choicesOrder: "Seçenek sırası",
     choicesByUrl: "URL'e göre seçimler",
@@ -760,7 +760,7 @@ export var turkishStrings = {
 
     defaultPanelValue: "Varsayılan panel değeri",
     defaultRowValue: "Varsayılan satır değeri",
-    hasNone: "hasNone",
+    showNoneItem: "hasNone",
     noneText: "noneText",
 
     text: "yazı",

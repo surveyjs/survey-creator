@@ -28,6 +28,13 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
     return this.surveyElement as QuestionDropdownModel;
   }
 
+  get itemComponent(): string {
+    if (this.surveyElement.isDescendantOf("dropdown")) {
+      return "survey-radiogroup-item";
+    }
+    return "survey-checkbox-item";
+  }
+
   get needToCollapse(): boolean {
     return this.visibleCount > 0 && this.question.visibleChoices.length > this.visibleCount;
   }

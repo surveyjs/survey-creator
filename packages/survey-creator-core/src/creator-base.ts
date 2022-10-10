@@ -1735,7 +1735,7 @@ export class CreatorBase extends Base
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();
-      this.selectElement(options.draggedElement, undefined, false);
+      this.selectElement(options.draggedElement, undefined, false, true);
       this.onAfterDrop.fire(null, null);
     });
   }
@@ -2376,13 +2376,15 @@ export class CreatorBase extends Base
       this.selectionChanged(this.selectedElement, propertyName, focus);
     }
     var selEl: any = this.getSelectedSurveyElement();
-    if (oldValue !== element && focus && !!document && !!selEl) {
+    if (oldValue !== element && !!document && !!selEl) {
       setTimeout(() => {
-        const el = document.getElementById(selEl.id);
-        if (!!el) {
-          el.scrollIntoView({ block: "center" });
-          if (!propertyName) {
-            el.parentElement && el.parentElement.focus();
+        if (focus) {
+          const el = document.getElementById(selEl.id);
+          if (!!el) {
+            el.scrollIntoView({ block: "center" });
+            if (!propertyName) {
+              el.parentElement && el.parentElement.focus();
+            }
           }
         }
         if (startEdit) {
@@ -3266,7 +3268,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   if (!element.isContentElement) {
     if (element instanceof Question) {
-      const isDropdown = element.isDescendantOf("dropdown");
+      const isDropdown = element.isDescendantOf("dropdown") || element.isDescendantOf("tagbox");
       if (isPopupEditorContent) {
         return isDropdown ? "svc-cell-dropdown-question" : "svc-cell-question";
       }

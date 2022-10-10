@@ -1,7 +1,8 @@
 import { StringEditorConnector, StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
+import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
@@ -409,4 +410,87 @@ test("StringEditorConnector for Items", (): any => {
   expect(question.choices.length).toEqual(2);
   connectorItem2.onEditComplete.fire(null, {});
   expect(question.choices.length).toEqual(3);
+});
+
+test("StringEditorConnector for Items delete with backspace", (): any => {
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    questions: [{
+      "type": "radiogroup",
+      "name": "q1",
+      "choices": [
+        "item1",
+        "item2",
+        "item3"
+      ]
+    }]
+  });
+  const question: QuestionSelectBase = survey.getQuestionByName("q1") as QuestionSelectBase;
+  survey.setDesignMode(true);
+  settings.supportCreatorV2 = true;
+  (<any>question).updateVisibleChoices();
+  var connectorItem1 = StringEditorConnector.get(question.choices[0].locText);
+  var connectorItem2 = StringEditorConnector.get(question.choices[1].locText);
+  var connectorItem3 = StringEditorConnector.get(question.choices[2].locText);
+
+
+  var itemValueWrapper1 = new ItemValueWrapperViewModel(creator, question, question.choices[0]);
+  var itemValueWrapper2 = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  var itemValueWrapper3 = new ItemValueWrapperViewModel(creator, question, question.choices[2]);
+
+  var activatedItem1 = false, activatedItem2 = false, activatedItem3 = false;
+  var removeItem1 = false, removeItem2 = false, removeItem3 = false;
+
+
+  itemValueWrapper1.remove = (item: ItemValueWrapperViewModel) => {
+    removeItem1 = true;
+    item.question.choices.splice(item.question.choices.indexOf(item.item), 1);
+  }
+  itemValueWrapper2.remove = (item: ItemValueWrapperViewModel) => {
+    removeItem2 = true;
+    item.question.choices.splice(item.question.choices.indexOf(item.item), 1);
+  }
+  itemValueWrapper3.remove = (item: ItemValueWrapperViewModel) => {
+    removeItem3 = true;
+    item.question.choices.splice(item.question.choices.indexOf(item.item), 1);
+  }
+
+  connectorItem1.onDoActivate.add(() => {
+    activatedItem1 = true;
+  });
+  connectorItem2.onDoActivate.add(() => {
+    activatedItem2 = true;
+  });
+  connectorItem3.onDoActivate.add(() => {
+    activatedItem3 = true;
+  });
+
+
+  connectorItem1.setItemValue(itemValueWrapper1);
+  connectorItem2.setItemValue(itemValueWrapper2);
+  connectorItem3.setItemValue(itemValueWrapper3);
+
+  connectorItem2.onBackspaceEmptyString.fire(this, {});
+  expect(activatedItem1).toBeTruthy();
+  expect(activatedItem2).toBeFalsy();
+  expect(activatedItem3).toBeFalsy();
+  expect(removeItem1).toBeFalsy();
+  expect(removeItem2).toBeTruthy();
+  expect(removeItem3).toBeFalsy();
+
+  connectorItem1.onBackspaceEmptyString.fire(this, {});
+  expect(activatedItem1).toBeTruthy();
+  expect(activatedItem2).toBeFalsy();
+  expect(activatedItem3).toBeTruthy();
+  expect(removeItem1).toBeTruthy();
+  expect(removeItem2).toBeTruthy();
+  expect(removeItem3).toBeFalsy();
+
+  connectorItem3.onBackspaceEmptyString.fire(this, {});
+  expect(activatedItem1).toBeTruthy();
+  expect(activatedItem2).toBeFalsy();
+  expect(activatedItem3).toBeTruthy();
+  expect(removeItem1).toBeTruthy();
+  expect(removeItem2).toBeTruthy();
+  expect(removeItem3).toBeTruthy();
 });

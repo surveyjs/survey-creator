@@ -32,9 +32,9 @@ QUnit.test("Hide/show property", function (assert) {
   //creatorProperties.hideProperty("hasOther");
   //var model = new SurveyQuestionProperties(new Survey.QuestionDropdown("q1"));
   //assert.notOk(model.getProperty("hasOther"), "The hasOther is invisible");
-  creatorProperties.showProperty("hasOther");
+  creatorProperties.showProperty("showOtherItem");
   var model = new SurveyQuestionProperties(new Survey.QuestionDropdown("q1"));
-  assert.ok(model.getProperty("hasOther"), "The hasOther is visible now");
+  assert.ok(model.getProperty("showOtherItem"), "The hasOther is visible now");
 });
 QUnit.test("Hide category", function (assert) {
   storePropertyGridDefinition();

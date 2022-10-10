@@ -323,11 +323,11 @@ var germanTranslation = {
     surveyDescriptionPlaceholder: "Umfragebeschreibung eingeben",
     pageDescriptionPlaceholder: "Seitenbeschreibung eingeben",
 
-    hasOther: "Sonstiges auswählbar?",
+    showOtherItem: "Sonstiges auswählbar?",
     otherText: "Text für Sonstiges",
-    hasNone: "Alle Elemente abwählbar?",
+    showNoneItem: "Alle Elemente abwählbar?",
     noneText: "Text für die Abwahl aller Elemente",
-    hasSelectAll: "Alle Elemente auswählbar?",
+    showSelectAllItem: "Alle Elemente auswählbar?",
     separateSpecialChoices: "Spezielle Auswahlmöglichkeiten separieren",
     selectAllText: "Text für die Auswahl aller Elemente",
     choicesMin: "Minimaler Wert für automatisch erzeugte Elemente",
@@ -711,8 +711,8 @@ var germanTranslation = {
     validators: "Validierungen",
     titleLocation: "Position des Titels",
 
-    hasComment: "Kommentare erlaubt?",
-    hasOther: "Sonstiges auswählbar?",
+    showCommentArea: "Kommentare erlaubt?",
+    showOtherItem: "Sonstiges auswählbar?",
     choices: "Auswahlmöglichkeiten",
     choicesOrder: "Auswahlreihenfolge",
     choicesByUrl: "Auswahlreihenfolge nach URL",
@@ -838,7 +838,7 @@ var germanTranslation = {
 
     defaultPanelValue: "Standardwert für Panels",
     defaultRowValue: "Standardwert für Zeilen",
-    hasNone: "Alle Elemente abwählbar?",
+    showNoneItem: "Alle Elemente abwählbar?",
     noneText: "Text",
 
     text: "Text",
