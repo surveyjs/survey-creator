@@ -1,4 +1,4 @@
-import { Question, SurveyModel, Base, ListModel } from "survey-core";
+import { Question, SurveyModel, Base, ListModel, QuestionMatrixDropdownModel } from "survey-core";
 import {
   ObjectSelector,
   ObjectSelectorItem,
@@ -100,6 +100,31 @@ test("Initial objects building, panel support", () => {
   expect(objects.items[3].title).toEqual("panel1"); //  "The first panel"
   expect(objects.items[3].level).toEqual(2); //  "The first panel"
   expect(objects.items[4].title).toEqual("q2");
+  expect(objects.items[4].level).toEqual(3);
+});
+
+test("Initial objects building, matrix dropdown support", () => {
+  var survey = new SurveyModel();
+  var page1 = survey.addNewPage("page1");
+  var q1: QuestionMatrixDropdownModel = page1.addNewQuestion("matrixdropdown", "q1") as QuestionMatrixDropdownModel;
+  q1.rows = [
+    { value: "row1", text: "Row 1" },
+    { value: "row2", text: "Row 2" },
+  ];
+  q1.columns = [];
+  q1.addColumn("col1");
+  q1.addColumn("col2");
+
+  var objects = new ObjectSelector(null, survey);
+  expect(objects.items).toHaveLength(1 + 1 + 1 + 2); //"1 survey + 1 page + 1 question +  2 columns."
+  expect(objects.items[0].title).toEqual("Survey"); //"The first item is Survey");
+  expect(objects.items[1].title).toEqual("page1"); //  "The first panel"
+  expect(objects.items[1].level).toEqual(1); //  "The first panel"
+  expect(objects.items[2].title).toEqual("q1");
+  expect(objects.items[2].level).toEqual(2);
+  expect(objects.items[3].title).toEqual("col1");
+  expect(objects.items[3].level).toEqual(3);
+  expect(objects.items[4].title).toEqual("col2");
   expect(objects.items[4].level).toEqual(3);
 });
 
