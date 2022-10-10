@@ -60,3 +60,6 @@ export { SurveyQuestionEditorDefinition } from "survey-creator-core";
 export { ISurveyCreatorOptions, IPropertyGridEditor } from "survey-creator-core";
 export { ToolboxToolViewModel, PropertyGridEditorCollection } from "survey-creator-core";
 export { StylesManager } from "survey-creator-core";
+
+import { checkLibraryVersion } from "survey-core";
+checkLibraryVersion(`${process.env.VERSION}`, "survey-creator-react");
