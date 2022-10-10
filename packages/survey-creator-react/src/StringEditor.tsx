@@ -130,6 +130,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
+          aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
@@ -149,6 +150,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
+          aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
           onBlur={this.onBlur}
