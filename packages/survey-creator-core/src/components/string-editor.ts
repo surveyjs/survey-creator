@@ -1,8 +1,10 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
-import { clearNewLines, select } from "../utils/utils";
+import { clearNewLines, getNextValue, select } from "../utils/utils";
 import { ItemValueWrapperViewModel } from "./item-value";
+import { QuestionAdornerViewModel } from "./question";
+import { QuestionRatingAdornerViewModel } from "./question-rating";
 
 export class StringEditorConnector extends Base {
   public static get(locString: LocalizableString): StringEditorConnector {
@@ -17,6 +19,64 @@ export class StringEditorConnector extends Base {
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
+
+  private static setEventsForItem(question: QuestionMultipleTextModel, items: MultipleTextItemModel[], item: MultipleTextItemModel) {
+    const connector = StringEditorConnector.get(item.locTitle);
+    connector.onEditComplete.clear();
+    connector.onEditComplete.add(() => {
+      const itemIndex = items.indexOf(item);
+      if (itemIndex >= 0 && itemIndex < items.length - 1) {
+        StringEditorConnector.get(items[itemIndex + 1].locTitle).activateEditor();
+      }
+      if (itemIndex == items.length - 1) {
+        question.addItem(getNextValue("text", items.map(i => i.name)) as string);
+        StringEditorConnector.get(items[items.length - 1].locTitle).setAutoFocus();
+      }
+    });
+
+    connector.onBackspaceEmptyString.clear();
+    connector.onBackspaceEmptyString.add(() => {
+      const itemIndex = items.indexOf(item);
+      let itemToFocus: MultipleTextItemModel = null;
+      if (itemIndex !== -1) {
+        if (itemIndex == 0 && items.length >= 2) itemToFocus = items[1];
+        if (itemIndex > 0) itemToFocus = items[itemIndex - 1];
+        if (itemToFocus) {
+          const connector = StringEditorConnector.get(itemToFocus.locTitle);
+          connector.setAutoFocus();
+          connector.activateEditor();
+        }
+        items.splice(itemIndex, 1);
+      }
+    })
+  }
+
+  public static setQuestion(questionAdorner: QuestionAdornerViewModel): void {
+    const question = questionAdorner.element as Question;
+    if (question instanceof QuestionMultipleTextModel) {
+      const titleConnector: StringEditorConnector = StringEditorConnector.get(question.locTitle);
+      let activeChoices = question.items;
+      if (!titleConnector.hasEditCompleteHandler) {
+        titleConnector.onEditComplete.add(() => {
+          if (activeChoices.length) StringEditorConnector.get(activeChoices[0].locTitle).activateEditor();
+        });
+        titleConnector.hasEditCompleteHandler = true;
+      }
+      activeChoices.forEach(item => {
+        StringEditorConnector.setEventsForItem(question, activeChoices, item);
+      })
+
+      question.onPropertyChanged.add((sender: any, options: any) => {
+        if (options.name == "items") {
+          activeChoices.forEach(item => {
+            StringEditorConnector.setEventsForItem(question, activeChoices, item);
+          })
+        }
+      });
+
+    }
+  }
+
 
   public setItemValue(item: ItemValueWrapperViewModel): void {
     const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);

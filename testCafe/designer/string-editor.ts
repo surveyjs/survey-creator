@@ -608,3 +608,49 @@ test("Delete items on backspace", async (t) => {
     .wait(200)
     .expect(Selector(".sv-string-editor").withText("item3").visible).notOk();
 });
+
+test("Focus switch on multiple text", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("text1").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("text2").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("text3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("text4").focused).ok()
+    .pressKey("Ctrl+Enter")
+    .expect(Selector(".sv-string-editor").withText("text5").visible).notOk();
+});
+
+test("Delete  multiple text items on backspace", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter").pressKey("Enter").pressKey("Enter").pressKey("shift+tab")
+    .expect(Selector(".sv-string-editor").withText("text2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("text1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("text2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("text3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("text1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("text2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("text1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("text3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("text3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("text1").visible).notOk()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("text3").visible).notOk();
+});
