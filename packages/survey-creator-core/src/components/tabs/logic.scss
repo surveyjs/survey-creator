@@ -139,14 +139,14 @@
   }
 
   tbody {
-    tr:last-child {
+    tr:last-of-type {
       .sl-table__cell {
         padding-bottom: calcSize(10);
       }
     }
   }
 
-  tr:first-child {
+  tr:first-of-type {
     .sl-table__cell {
       padding-top: calcSize(4);
     }
@@ -164,7 +164,7 @@
   }
   td,
   th {
-    &:last-child {
+    &:last-of-type {
       padding-right: calcSize(4);
     }
   }

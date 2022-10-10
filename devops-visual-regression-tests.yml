@@ -433,3 +433,107 @@ jobs:
       publishLocation: 'Container'
     condition: always()
     displayName: 'publish vrt ko artifacts'
+
+# ======================= CreatorV2Angular ======================= #
+- job: CreatorV2Angular
+  dependsOn: CreatorV2Core
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator
+      npm install devextreme-screenshot-comparer -D
+    displayName: 'install devextreme-screenshot-comparer to root'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm i
+    displayName: 'npm install'
+    
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      rmdir node_modules\survey-angular-ui
+    displayName: 'delete survey-angular-ui symlink'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-angular-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui'
+      OverWrite: true
+    displayName: 'copy survey-angular-ui in node_modules'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run build
+    displayName: 'Build CreatorV2 Angular'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/example/angular-ui
+      npm i
+    displayName: 'npm install in example project'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run build:example
+    displayName: 'build example'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run visual-regression-tests:ci
+    displayName: 'Visual Regression Tests CreatorV2 Angular'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/visualRegressionTests'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/Creator_Angular_VRT'
+      OverWrite: true
+    condition: always()
+    displayName: 'copy vrt angular artifacts'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/Creator_Angular_VRT/'
+      ArtifactName: 'Creator_Angular_VRT'
+      publishLocation: 'Container'
+    condition: always()
+    displayName: 'publish vrt angular artifacts'
