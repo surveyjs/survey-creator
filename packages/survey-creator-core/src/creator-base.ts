@@ -3268,7 +3268,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   }
   if (!element.isContentElement) {
     if (element instanceof Question) {
-      const isDropdown = element.isDescendantOf("dropdown");
+      const isDropdown = element.isDescendantOf("dropdown") || element.isDescendantOf("tagbox");
       if (isPopupEditorContent) {
         return isDropdown ? "svc-cell-dropdown-question" : "svc-cell-question";
       }
