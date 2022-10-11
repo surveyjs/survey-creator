@@ -33,8 +33,8 @@ export class StringEditorConnector extends Base {
   private static addNewItem(question: any, items: any) {
     if (question instanceof QuestionMultipleTextModel) question.addItem(getNextValue("text", items.map(i => i.name)) as string);;
     if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
-      if (items == question.columns) question.addColumn(getNextValue("Column ", items.map(i => i.name)) as string);
-      if (items == question.rows) question.rows.push(new ItemValue(getNextValue("Row ", items.map(i => i.name)) as string));
+      if (items == question.columns) question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
+      if (items == question.rows) question.rows.push(new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
     };
   }
   private static getItemsPropertyName(question: any, items: any) {
@@ -62,6 +62,7 @@ export class StringEditorConnector extends Base {
       if (itemIndex == items.length - 1) {
         StringEditorConnector.addNewItem(question, items);
         StringEditorConnector.get(StringEditorConnector.getItemLocString(items[items.length - 1])).setAutoFocus();
+        StringEditorConnector.get(StringEditorConnector.getItemLocString(items[items.length - 1])).activateEditor();
       }
     });
 
@@ -175,17 +176,18 @@ export class StringEditorViewModelBase extends Base {
 
   public afterRender() {
     if (this.connector.focusOnEditor) {
-      this.activate();
-      this.connector.focusOnEditor = false;
+      if (this.activate()) this.connector.focusOnEditor = false;
     }
   }
 
   public activate() {
     const element = this.getEditorElement();
-    if (element) {
+    if (element && element.offsetParent != null) {
       element.focus();
       select(element);
+      return true;
     }
+    return false;
   }
 
   public setLocString(locString: LocalizableString) {
