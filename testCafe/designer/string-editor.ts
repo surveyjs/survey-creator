@@ -654,3 +654,90 @@ test("Delete  multiple text items on backspace", async (t) => {
     .wait(200)
     .expect(Selector(".sv-string-editor").withText("text3").visible).notOk();
 });
+
+test("Focus switch on matrix columns and rows", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 1").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 2").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 4").focused).ok()
+    .pressKey("Ctrl+Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 5").visible).notOk()
+    .click(Selector(".sv-string-editor").withText("Row 1"))
+    .expect(Selector(".sv-string-editor").withText("Row 1").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Row 2").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Row 3").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Row 4").focused).ok()
+    .pressKey("Ctrl+Enter")
+    .expect(Selector(".sv-string-editor").withText("Row 5").visible).notOk();
+});
+
+test("Delete matrix Columns on backspace", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("Enter").pressKey("Enter")
+    .expect(Selector(".sv-string-editor").withText("Column 2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Column 1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("Column 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Column 3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Column 1").visible).notOk()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Column 3").visible).notOk();
+});
+
+test("Delete matrix rows on backspace", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).ok();
+  await t.pressKey("tab").pressKey("tab").pressKey("tab").pressKey("tab");
+  await t.pressKey("Enter").pressKey("Enter").pressKey("shift+tab")
+    .expect(Selector(".sv-string-editor").withText("Row 2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Row 1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("Row 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 3").visible).ok()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Row 3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Row 1").visible).notOk()
+    .pressKey("backspace")
+    .wait(200)
+    .pressKey("backspace")
+    .wait(200)
+    .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
+});

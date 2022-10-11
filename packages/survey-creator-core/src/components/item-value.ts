@@ -69,7 +69,6 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
-    StringEditorConnector.get(item.locText).setItemValue(this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;

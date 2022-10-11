@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -26,11 +26,13 @@ export class StringEditorConnector extends Base {
     if (item instanceof MatrixDropdownColumn) return item.locTitle;
   }
   private static getItemSets(question: any) {
+    if (question instanceof QuestionSelectBase) return [question.choices];
     if (question instanceof QuestionMultipleTextModel) return [question.items];
     if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel) return [question.columns, question.rows];
     if (question instanceof QuestionMatrixDynamicModel) return [question.columns];
   }
   private static addNewItem(question: any, items: any) {
+    if (question instanceof QuestionSelectBase) question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.name)) as string));;
     if (question instanceof QuestionMultipleTextModel) question.addItem(getNextValue("text", items.map(i => i.name)) as string);;
     if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
       if (items == question.columns) question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
@@ -38,6 +40,7 @@ export class StringEditorConnector extends Base {
     };
   }
   private static getItemsPropertyName(question: any, items: any) {
+    if (question instanceof QuestionSelectBase) return "choices";
     if (question instanceof QuestionMultipleTextModel) return "items";
     if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
       if (items == question.columns) return "columns";
@@ -48,7 +51,8 @@ export class StringEditorConnector extends Base {
     return ((question instanceof QuestionMultipleTextModel) ||
       (question instanceof QuestionMatrixDropdownModel) ||
       (question instanceof QuestionMatrixDynamicModel) ||
-      (question instanceof QuestionMatrixModel));
+      (question instanceof QuestionMatrixModel) ||
+      (question instanceof QuestionSelectBase));
   }
 
   private static setEventsForItem(question: any, items: any[], item: any) {
@@ -111,40 +115,6 @@ export class StringEditorConnector extends Base {
     }
   }
 
-  public setItemValue(item: ItemValueWrapperViewModel): void {
-    const titleConnector: StringEditorConnector = StringEditorConnector.get(item.question.locTitle);
-    let activeChoices = item.question.choices;
-    if (!titleConnector.hasEditCompleteHandler) {
-      titleConnector.onEditComplete.add(() => {
-        if (item.question.choices.length) StringEditorConnector.get(item.question.choices[0].locText).activateEditor();
-      });
-      titleConnector.hasEditCompleteHandler = true;
-    }
-    this.onEditComplete.add(() => {
-      const itemIndex = activeChoices.indexOf(item.item);
-      if (itemIndex >= 0 && itemIndex < activeChoices.length - 1) {
-        StringEditorConnector.get(activeChoices[itemIndex + 1].locText).activateEditor();
-      }
-      if (itemIndex == activeChoices.length - 1) {
-        item.addNewItem(item.question.newItem, item.question, item.creator);
-      }
-    });
-    this.onBackspaceEmptyString.clear();
-    this.onBackspaceEmptyString.add(() => {
-      const itemIndex = item.question.choices.indexOf(item.item);
-      let itemToFocus: ItemValue = null;
-      if (itemIndex !== -1) {
-        if (itemIndex == 0 && item.question.choices.length >= 2) itemToFocus = item.question.choices[1];
-        if (itemIndex > 0) itemToFocus = item.question.choices[itemIndex - 1];
-        if (itemToFocus) {
-          const connector = StringEditorConnector.get(itemToFocus.locText);
-          connector.setAutoFocus();
-          connector.activateEditor();
-        }
-        item.remove(item);
-      }
-    })
-  }
   public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onBackspaceEmptyString: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
