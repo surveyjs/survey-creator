@@ -19,7 +19,13 @@
   "typings": "survey-creator-angular.d.ts",
   "peerDependencies": {
     "rxjs": "~7.4.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@angular/cdk": "*",
+    "@angular/core": "*",
+    "@angular/forms": "*",
+    "survey-angular-ui": "^1.9.46",
+    "survey-core": "^1.9.46",
+    "survey-creator-core": "^1.9.46"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.5",
