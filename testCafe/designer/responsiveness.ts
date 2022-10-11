@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton
 } from "../helper";
 const title = "Responsiveness";
 
@@ -231,7 +231,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbar.exists).notOk()
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
-    .click(Selector("span").withText("Add Question").nth(1))
+    .click(getAddNewQuestionButton().nth(1))
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).ok()
     .expect(creatorFooterToolbar.exists).notOk()

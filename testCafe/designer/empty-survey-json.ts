@@ -1,4 +1,4 @@
-import { getTabbedMenuItemByText, getToolboxItemByText, url } from "../helper";
+import { getAddNewQuestionButton, getTabbedMenuItemByText, getToolboxItemByText, url } from "../helper";
 import { Selector } from "testcafe";
 const title = "Check Empty Survey JSON";
 
@@ -16,7 +16,7 @@ test("Designer with empty json should show only one ghost page", async (t) => {
     .expect(pages.count).eql(1)
     .expect(ghostPage.count).eql(1)
 
-    .click(Selector("span").withText("Add Question"))
+    .click(getAddNewQuestionButton())
     .expect(pages.count).eql(2)
     .expect(ghostPage.count).eql(1)
 
