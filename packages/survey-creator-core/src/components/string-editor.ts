@@ -32,7 +32,7 @@ export class StringEditorConnector extends Base {
     if (question instanceof QuestionMatrixDynamicModel) return [question.columns];
   }
   private static addNewItem(question: any, items: any) {
-    if (question instanceof QuestionSelectBase) question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.name)) as string));;
+    if (question instanceof QuestionSelectBase) question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.value)) as string));;
     if (question instanceof QuestionMultipleTextModel) question.addItem(getNextValue("text", items.map(i => i.name)) as string);;
     if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
       if (items == question.columns) question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
@@ -139,7 +139,6 @@ export class StringEditorViewModelBase extends Base {
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
     this.connector = StringEditorConnector.get(locString);
-    this.connector.onDoActivate.clear();
     this.connector.onDoActivate.add(() => { this.activate(); });
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
@@ -163,7 +162,6 @@ export class StringEditorViewModelBase extends Base {
   public setLocString(locString: LocalizableString) {
     this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
-    this.connector.onDoActivate.clear();
     this.connector.onDoActivate.add(() => { this.activate(); });
   }
   public checkConstraints(event: any) {
