@@ -96,6 +96,9 @@ export function getBarItemByTitle(text: string) {
 export function getListItemByText(text) {
   return Selector(".sv-popup__content .sv-list .sv-list__item").withText(text).filterVisible();
 }
+export function getAddNewQuestionButton() {
+  return Selector(".svc-page__add-new-question > span").withText("Add Question");
+}
 
 export function getVisibleElement(selector: string | Selector): Selector {
   return selectorIsVisibleFilter(Selector(selector));

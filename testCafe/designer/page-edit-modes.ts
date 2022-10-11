@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { url, urlByPage, setJSON, changeToolboxLocation, addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement } from "../helper";
+import { url, urlByPage, getAddNewQuestionButton } from "../helper";
 
 const title = "Page Edit Modes";
 
@@ -11,23 +11,23 @@ test("Continious (ordinary) page mode", async (t) => {
     .maximizeWindow()
 
     .expect(Selector(".svc-tab-designer__page-navigator").exists).notOk()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").visible).ok()
+    .expect(getAddNewQuestionButton().count).eql(1)
+    .expect(getAddNewQuestionButton().visible).ok()
 
-    .click(Selector(".svc-page__add-new-question > span").withText("Add Question"))
+    .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").exists).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").visible).ok()
     //.expect(Selector(".svc-page-navigator-item-content").count).eql(0)
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(2)
+    .expect(getAddNewQuestionButton().count).eql(2)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").visible).ok()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").visible).ok()
 
-    .click(Selector(".svc-page__add-new-question > span").withText("Add Question").nth(1))
+    .click(getAddNewQuestionButton().nth(1))
     .expect(Selector(".svc-tab-designer__page-navigator").exists).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").visible).ok()
     .expect(Selector("span").withText("question2").visible).ok()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(3)
+    .expect(getAddNewQuestionButton().count).eql(3)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").visible).ok()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").visible).ok()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 3']").visible).ok()
@@ -41,27 +41,27 @@ test.page(urlByPage)("By page edit mode", async (t) => {
     .maximizeWindow()
 
     .expect(Selector(".svc-tab-designer__page-navigator").exists).notOk()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").visible).ok()
+    .expect(getAddNewQuestionButton().count).eql(1)
+    .expect(getAddNewQuestionButton().visible).ok()
 
-    .click(Selector(".svc-page__add-new-question > span").withText("Add Question"))
+    .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").exists).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").visible).ok()
     .expect(Selector(".svc-page-navigator-item-content").count).eql(2)
     .expect(Selector(".svc-page-navigator-item-content").withText("page1").visible).ok()
     .expect(Selector(".svc-page-navigator-item-content").withText("page2").visible).ok()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
+    .expect(getAddNewQuestionButton().count).eql(1)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").exists).ok()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").exists).notOk()
 
     .click(Selector(".svc-page-navigator-item-content").withText("page2"))
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").visible).ok()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
+    .expect(getAddNewQuestionButton().count).eql(1)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").exists).notOk()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").exists).ok()
 
-    .click(Selector(".svc-page__add-new-question > span").withText("Add Question"))
+    .click(getAddNewQuestionButton())
     .expect(Selector(".svc-tab-designer__page-navigator").exists).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").visible).ok()
     .expect(Selector("span").withText("question2").visible).ok()
@@ -69,12 +69,12 @@ test.page(urlByPage)("By page edit mode", async (t) => {
     .expect(Selector(".svc-page-navigator-item-content").withText("page1").visible).ok()
     .expect(Selector(".svc-page-navigator-item-content").withText("page2").visible).ok()
     .expect(Selector(".svc-page-navigator-item-content").withText("page3").visible).ok()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
+    .expect(getAddNewQuestionButton().count).eql(1)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").visible).ok()
 
     .click(Selector(".svc-page-navigator-item-content").withText("page3"))
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 3']").visible).ok()
-    .expect(Selector(".svc-page__add-new-question > span").withText("Add Question").count).eql(1)
+    .expect(getAddNewQuestionButton().count).eql(1)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").exists).notOk()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").exists).notOk()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 3']").exists).ok();
