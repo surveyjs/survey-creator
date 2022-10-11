@@ -360,6 +360,7 @@ test("StringEditorConnector activate test", (): any => {
   expect(activated).toBeTruthy();
 });
 
+/*
 test("StringEditorConnector for Items", (): any => {
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({ questions: [{
@@ -494,3 +495,4 @@ test("StringEditorConnector for Items delete with backspace", (): any => {
   expect(removeItem2).toBeTruthy();
   expect(removeItem3).toBeTruthy();
 });
+*/
