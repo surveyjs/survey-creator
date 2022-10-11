@@ -6,67 +6,33 @@ import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
 
-export class StringEditorConnector extends Base {
-  public static get(locString: LocalizableString): StringEditorConnector {
-    if (!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
-    return locString["_stringEditorConnector"];
-  }
-  public setAutoFocus() { this.focusOnEditor = true; }
-
-  private hasEditCompleteHandler = false;
-
-  public focusOnEditor: boolean;
-  public activateEditor(): void {
-    this.onDoActivate.fire(this.locString, {});
-  }
-
-  private static getItemLocString(item: any) {
-    if (item instanceof MultipleTextItemModel) return item.locTitle;
-    if (item instanceof ItemValue) return item.locText;
-    if (item instanceof MatrixDropdownColumn) return item.locTitle;
-  }
-  private static getItemSets(question: any) {
-    if (question instanceof QuestionSelectBase) return [question.choices];
-    if (question instanceof QuestionMultipleTextModel) return [question.items];
-    if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel) return [question.columns, question.rows];
-    if (question instanceof QuestionMatrixDynamicModel) return [question.columns];
-  }
-  private static addNewItem(question: any, items: any) {
-    if (question instanceof QuestionSelectBase) question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.value)) as string));;
-    if (question instanceof QuestionMultipleTextModel) question.addItem(getNextValue("text", items.map(i => i.name)) as string);;
-    if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
-      if (items == question.columns) question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
-      if (items == question.rows) question.rows.push(new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
-    };
-  }
-  private static getItemsPropertyName(question: any, items: any) {
-    if (question instanceof QuestionSelectBase) return "choices";
-    if (question instanceof QuestionMultipleTextModel) return "items";
-    if (question instanceof QuestionMatrixModel || question instanceof QuestionMatrixDropdownModel || question instanceof QuestionMatrixDynamicModel) {
-      if (items == question.columns) return "columns";
-      if (items == question.rows) return "rows";
-    };
-  }
-  private static supportKeyboard(question: any) {
-    return ((question instanceof QuestionMultipleTextModel) ||
-      (question instanceof QuestionMatrixDropdownModel) ||
-      (question instanceof QuestionMatrixDynamicModel) ||
-      (question instanceof QuestionMatrixModel) ||
-      (question instanceof QuestionSelectBase));
+export abstract class StringItemsNavigatorBase {
+  constructor(protected question: any) { };
+  protected abstract getItemLocString(items: any, item: any): LocalizableString;
+  protected abstract getItemSets(): Array<any>;
+  protected abstract addNewItem(items: any): void;
+  protected abstract getItemsPropertyName(items: any): string;
+  private static createItemsNavigator(question: any): StringItemsNavigatorBase {
+    if (question instanceof QuestionMultipleTextModel) return new StringItemsNavigatorMultipleText(question);
+    if (question instanceof QuestionMatrixDropdownModel) return new StringItemsNavigatorMatrixDropdown(question);
+    if (question instanceof QuestionMatrixDynamicModel) return new StringItemsNavigatorMatrixDynamic(question);
+    if (question instanceof QuestionMatrixModel) return new StringItemsNavigatorMatrix(question);
+    if (question instanceof QuestionSelectBase) return new StringItemsNavigatorSelectBase(question);
+    return null;
   }
 
-  private static setEventsForItem(question: any, items: any[], item: any) {
-    const connector = StringEditorConnector.get(StringEditorConnector.getItemLocString(item));
+  private setEventsForItem(items: any[], item: any) {
+    const connector = StringEditorConnector.get(this.getItemLocString(items, item));
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
       const itemIndex = items.indexOf(item);
       if (itemIndex >= 0 && itemIndex < items.length - 1) {
-        StringEditorConnector.get(StringEditorConnector.getItemLocString(items[itemIndex + 1])).activateEditor();
+        StringEditorConnector.get(this.getItemLocString(items, items[itemIndex + 1])).activateEditor();
       }
       if (itemIndex == items.length - 1) {
-        StringEditorConnector.addNewItem(question, items);
-        StringEditorConnector.get(StringEditorConnector.getItemLocString(items[items.length - 1])).setAutoFocus();
-        StringEditorConnector.get(StringEditorConnector.getItemLocString(items[items.length - 1])).activateEditor();
+        this.addNewItem(items);
+        StringEditorConnector.get(this.getItemLocString(items, items[items.length - 1])).setAutoFocus();
+        StringEditorConnector.get(this.getItemLocString(items, items[items.length - 1])).activateEditor();
       }
     });
 
@@ -78,7 +44,7 @@ export class StringEditorConnector extends Base {
         if (itemIndex == 0 && items.length >= 2) itemToFocus = items[1];
         if (itemIndex > 0) itemToFocus = items[itemIndex - 1];
         if (itemToFocus) {
-          const connector = StringEditorConnector.get(StringEditorConnector.getItemLocString(itemToFocus));
+          const connector = StringEditorConnector.get(this.getItemLocString(items, itemToFocus));
           connector.setAutoFocus();
           connector.activateEditor();
         }
@@ -89,32 +55,104 @@ export class StringEditorConnector extends Base {
 
   public static setQuestion(questionAdorner: QuestionAdornerViewModel): void {
     const question = questionAdorner.element as Question;
-    if (StringEditorConnector.supportKeyboard(question)) {
+    const navigator = StringItemsNavigatorBase.createItemsNavigator(question);
+    if (navigator) {
       const titleConnector: StringEditorConnector = StringEditorConnector.get(question.locTitle);
-      let allItemSets = StringEditorConnector.getItemSets(question);
+      let allItemSets = navigator.getItemSets();
       let activeChoices = allItemSets[0];
       if (!titleConnector.hasEditCompleteHandler) {
         titleConnector.onEditComplete.add(() => {
-          if (activeChoices.length) StringEditorConnector.get(StringEditorConnector.getItemLocString(activeChoices[0])).activateEditor();
+          if (activeChoices.length) StringEditorConnector.get(navigator.getItemLocString(activeChoices, activeChoices[0])).activateEditor();
         });
         titleConnector.hasEditCompleteHandler = true;
       }
       allItemSets.forEach((activeChoices) => {
         activeChoices.forEach(item => {
-          StringEditorConnector.setEventsForItem(question, activeChoices, item);
+          navigator.setEventsForItem(activeChoices, item);
         })
-        const itemsPropertyName = StringEditorConnector.getItemsPropertyName(question, activeChoices);
+        const itemsPropertyName = navigator.getItemsPropertyName(activeChoices);
         question.onPropertyChanged.add((sender: any, options: any) => {
           if (options.name == itemsPropertyName) {
             activeChoices.forEach(item => {
-              StringEditorConnector.setEventsForItem(question, activeChoices, item);
+              navigator.setEventsForItem(activeChoices, item);
             })
           }
         });
       })
     }
   }
+}
 
+class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
+  protected getItemLocString(items: any, item: any) {
+    return item.locText;
+  }
+  protected getItemSets() {
+    return [this.question.choices];
+  }
+  protected addNewItem(items: any) {
+    this.question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.value)) as string));
+  }
+  protected getItemsPropertyName(items: any) {
+    return "choices";
+  }
+}
+
+class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
+  protected getItemLocString(items: any, item: any) {
+    return item.locTitle;
+  }
+  protected getItemSets() {
+    return [this.question.items];
+  }
+  protected addNewItem(items: any) {
+    this.question.addItem(getNextValue("text", items.map(i => i.name)) as string);
+  }
+  protected getItemsPropertyName(items: any) {
+    return "items";
+  }
+}
+class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
+  protected getItemLocString(items: any, item: any) {
+    return item.locText;
+  }
+  protected getItemSets() {
+    return [this.question.columns, this.question.rows];
+  }
+  protected addNewItem(items: any) {
+    if (items == this.question.columns) this.question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
+    if (items == this.question.rows) this.question.rows.push(new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
+  }
+  protected getItemsPropertyName(items: any) {
+    if (items == this.question.columns) return "columns";
+    if (items == this.question.rows) return "rows";
+  }
+}
+class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
+  protected getItemLocString(items: any, item: any) {
+    if (items == this.question.columns) return item.locTitle;
+    return item.locText;
+  }
+}
+class StringItemsNavigatorMatrixDynamic extends StringItemsNavigatorMatrixDropdown {
+  protected getItemSets() {
+    return [this.question.columns];
+  }
+}
+
+export class StringEditorConnector extends Base {
+  public static get(locString: LocalizableString): StringEditorConnector {
+    if (!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
+    return locString["_stringEditorConnector"];
+  }
+  public setAutoFocus() { this.focusOnEditor = true; }
+
+  public hasEditCompleteHandler = false;
+
+  public focusOnEditor: boolean;
+  public activateEditor(): void {
+    this.onDoActivate.fire(this.locString, {});
+  }
   public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onBackspaceEmptyString: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
