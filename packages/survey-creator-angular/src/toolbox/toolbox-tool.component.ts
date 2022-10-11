@@ -22,4 +22,7 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   protected getModel(): Action {
     return this.item;
   }
+  protected override getPropertiesToUpdateSync(): string[] {
+    return ["mode"];
+  }
 }
