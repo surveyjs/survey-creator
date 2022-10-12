@@ -2355,7 +2355,7 @@ export class CreatorBase extends Base
     return element.getPropertyValue("isSelectedInDesigner");
   }
 
-  public selectElement(element: any, propertyName?: string, focus = true, startEdit = false) {
+  public selectElement(element: any, propertyName?: string, focus: boolean | string = true, startEdit = false) {
     if (!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
@@ -2373,7 +2373,7 @@ export class CreatorBase extends Base
       }
     }
     if (oldValue !== element || !!propertyName) {
-      this.selectionChanged(this.selectedElement, propertyName, focus);
+      this.selectionChanged(this.selectedElement, propertyName, !!focus);
     }
     var selEl: any = this.getSelectedSurveyElement();
     if (oldValue !== element && !!document && !!selEl) {
@@ -2382,8 +2382,9 @@ export class CreatorBase extends Base
           const el = document.getElementById(selEl.id);
           if (!!el) {
             el.scrollIntoView({ block: "center" });
-            if (!propertyName) {
-              el.parentElement && el.parentElement.focus();
+            if (!propertyName && el.parentElement) {
+              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+              elToFocus && elToFocus.focus();
             }
           }
         }
@@ -3014,7 +3015,7 @@ export class CreatorBase extends Base
     if (!el || el.getType() === newType) return;
     if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
-    this.selectElement(el);
+    this.selectElement(el, null, "#convertTo button");
   }
 
   public getAddNewQuestionText(currentAddQuestionType: string = null) {
