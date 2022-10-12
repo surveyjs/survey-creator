@@ -565,7 +565,7 @@ test("Do not focus on existing question dragged", async (t) => {
   const dragZone = q1.find(".svc-question__drag-element");
 
   await t
-    .hover(q1, { speed: 0.5 })
+    .hover(q1, { speed: 0.5, offsetX: 5, offsetY: 5 })
     .hover(dragZone, { speed: 0.5 })
     .dragToElement(dragZone, q3, {
       offsetX: 5,
