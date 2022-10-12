@@ -12,7 +12,7 @@
         (click)="adorner.add(adorner)" [iconName]="'icon-add_16x16'" [size]="16" [attr.title]="undefined"
         [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
       <svg *ngIf="adorner.allowRemove" class="svc-item-value-controls__button svc-item-value-controls__remove"
-        [key2click] (click)="adorner.remove(adorner)" [iconName]="'icon-remove_16x16'" [size]="16"
+        [key2click] (click)="adorner.remove(adorner)" (blur)="onBlur($event)" [iconName]="'icon-remove_16x16'" [size]="16"
         [attr.title]="undefined" [attr.aria-label]="undefined" sv-ng-svg-icon></svg>
     </div>
 

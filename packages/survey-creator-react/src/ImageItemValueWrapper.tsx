@@ -108,7 +108,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
               <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
             </span>) : null}
             {this.model.allowRemove ? attachKey2click(<span
-              className="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
+              className="svc-image-item-value-controls__button svc-image-item-value-controls__remove ddd"
               onClick={() => this.model.remove(this.model)}
             >
               <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
