@@ -1,5 +1,5 @@
 import { url, setJSON, getJSON } from "../helper";
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
@@ -78,4 +78,57 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
     .click(clearButton)
     .click(addButton)
     .expect(clearButton.visible).ok();
+});
+test.only("Load choices by custom button in fast edit", async (t) => {
+  const setCreatorHandler = ClientFunction(() => {
+    window["creator"].onPropertyGridShowModal.add((sender, options) => {
+      const editor = options.popupEditor;
+      options.popupModel.footerToolbar.addAction({
+        id: "fast-entry-custom",
+        innerCss: "sv-popup__body-footer-item sv-popup__button",
+        title: "Set Items",
+        visibleIndex: 1,
+        action: () => {
+          editor.comment.value = "1|Item 1\n2|Item 2\ncustom-3|Item 3\n4|Item 4\n5|Item 5";
+        }
+      });
+    });
+  });
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "question1",
+            "title": "question1",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await setCreatorHandler();
+  const question1 = Selector("[data-name=\"question1\"]");
+  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabContent = choicesTabTitle.parent().nextSibling();
+  const fastEntryButton = choicesTabContent.find(".spg-action-button[title='Edit']");
+  const setItemsButton = choicesTabContent.find(".sv-popup__button[title='Set Items']");
+  const applyButton = choicesTabContent.find(".sv-popup__button[title='Apply']");
+  const item5Text = choicesTabContent.find("input[placeholder='custom-3']");
+
+  await t
+    .click(question1)
+    .click(choicesTabTitle)
+    .click(fastEntryButton)
+    .click(setItemsButton)
+    .click(applyButton)
+    .expect(item5Text.exists).ok()
+    .expect(item5Text.value).eql("Item 3");
 });

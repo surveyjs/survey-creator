@@ -23,7 +23,8 @@ import {
   QuestionRowModel,
   LocalizableString,
   ILocalizableString,
-  ILocalizableOwner
+  ILocalizableOwner,
+  PopupBaseViewModel
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
 import { editorLocalization } from "./editorLocalization";
@@ -537,6 +538,19 @@ export class CreatorBase extends Base
     (sender: CreatorBase, options: any) => any,
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  /**
+   * The event is called before a modal window in property editor is showing. For example fast entry for choices or modal condition editor
+   * You can use this event to modify, for example popup window footer by adding a new action buttons
+   *- options.obj the survey object that is currently editing in the property grid
+   *- options.property the property that the current property editor is editing
+   *- options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
+   *- options.popupEditor the editor inside the popup window. It has an editSurvey property that you can use
+   *- options.popupModel the popup window model. You can use options.popupModel.footerToolbar to change popup footer actions.
+   */
+   public onPropertyGridShowModal: Survey.Event<
+   (sender: CreatorBase, options: any) => any,
+   any
+ > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called before rendering a delete button in the Property Grid or in Question Editor.
     * Obsolete, please use onCollectionItemAllowOperations
@@ -2790,6 +2804,14 @@ export class CreatorBase extends Base
   ): void {
     const options = { obj: object, property: property, editor: editor, titleActions: titleActions };
     this.onPropertyEditorUpdateTitleActions.fire(this, options);
+  }
+  onPropertyGridShowModalCallback(object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    popupEditor: any,
+    popupModel: PopupBaseViewModel): void {
+    const options = { obj: object, property: property, editor: editor, popupEditor: popupEditor, popupModel: popupModel };
+    this.onPropertyGridShowModal.fire(this, options);
   }
   onCanDeleteItemCallback(
     object: any,
