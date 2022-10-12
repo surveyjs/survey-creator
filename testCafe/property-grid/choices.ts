@@ -79,7 +79,7 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
     .click(addButton)
     .expect(clearButton.visible).ok();
 });
-test.only("Load choices by custom button in fast edit", async (t) => {
+test("Load choices by custom button in fast edit", async (t) => {
   const setCreatorHandler = ClientFunction(() => {
     window["creator"].onPropertyGridShowModal.add((sender, options) => {
       const editor = options.popupEditor;
