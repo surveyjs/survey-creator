@@ -87,7 +87,7 @@ test("Load choices by custom button in fast edit", async (t) => {
         id: "fast-entry-custom",
         innerCss: "sv-popup__body-footer-item sv-popup__button",
         title: "Set Items",
-        visibleIndex: 1,
+        visibleIndex: 2,
         action: () => {
           editor.comment.value = "1|Item 1\n2|Item 2\ncustom-3|Item 3\n4|Item 4\n5|Item 5";
         }
