@@ -535,6 +535,49 @@ test("Focus on new question dragged", async (t) => {
   await t.expect(svStringSelector.focused).ok();
 });
 
+test("Do not focus on existing question dragged", async (t) => {
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "name": "question2"
+          },
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    ]
+  });
+
+  const questionName = "question1";
+  const q1 = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
+  const q3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
+  const dragZone = q1.find(".svc-question__drag-element");
+
+  await t
+    .hover(q1, { speed: 0.5, offsetX: 5, offsetY: 5 })
+    .hover(dragZone, { speed: 0.5 })
+    .dragToElement(dragZone, q3, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: 1,
+      speed: 0.5
+    });
+
+  const svStringSelector = Selector(".sv-string-editor").withText("question1");
+  await t.expect(svStringSelector.focused).notOk();
+});
+
 test("Focus switch on select base", async (t) => {
   await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");

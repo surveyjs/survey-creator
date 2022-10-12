@@ -3145,7 +3145,7 @@ test("undo/redo DnD ", (): any => {
 
   const q1 = creator.survey.pages[0].elements[0];
   const q2 = creator.survey.pages[0].elements[1];
-  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2 }, null);
+  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2, draggedElement: q1 }, null);
 
   creator.survey.pages[0].removeElement(q1);
   creator.survey.pages[0].addElement(q1);

@@ -1725,8 +1725,10 @@ export class CreatorBase extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
       let panel = sender.dropTarget.parent;
+      isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onBeforeDrop.fire(null, null);
       this.startUndoRedoTransaction("drag drop");
       this.undoRedoManager.setUndoCallbackForTransaction(() => {
@@ -1735,7 +1737,8 @@ export class CreatorBase extends Base
     });
     this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
       this.stopUndoRedoTransaction();
-      this.selectElement(options.draggedElement, undefined, false, true);
+      this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
+      isDraggedFromToolbox = false;
       this.onAfterDrop.fire(null, null);
     });
   }
