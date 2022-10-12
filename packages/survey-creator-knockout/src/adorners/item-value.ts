@@ -20,6 +20,10 @@ class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   ) {
     super(creator, question, item);
   }
+  public koOnFocusOut(sender: KnockoutItemValueWrapperViewModel, event: any): void {
+    this.onFocusOut(event);
+  }
+  pu
   get attributes() {
     return this.isDraggable
       ? { "data-sv-drop-target-item-value": this.item.value }
