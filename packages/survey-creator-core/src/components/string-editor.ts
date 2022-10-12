@@ -299,7 +299,7 @@ export class StringEditorViewModelBase extends Base {
       }
     }
 
-    if (this.locString.text != clearedText) {
+    if (this.locString.calculatedText != clearedText) {
       if (!this.errorText) {
         if (this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
           this.locString.owner.value = clearedText;

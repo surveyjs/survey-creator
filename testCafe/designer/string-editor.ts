@@ -784,3 +784,11 @@ test("Delete matrix rows on backspace", async (t) => {
     .wait(200)
     .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
 });
+test("Undo after new item add", async (t) => {
+  await t
+    .click(Selector(".svc-toolbox__tool").withText("Radiogroup"))
+    .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
+    .expect(Selector(".svc-item-value-controls__remove").count).eql(4)
+    .click(Selector("button[title=Undo]"))
+    .expect(Selector(".svc-item-value-controls__remove").count).eql(3);
+});
