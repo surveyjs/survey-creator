@@ -92,6 +92,37 @@ test("Default value popup", async (t) => {
   });
 });
 
+test("Custom button into fast entry popup", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    await ClientFunction(() => {
+      (<any>window).creator.onPropertyGridShowModal.add((sender, options) => {
+        const editor = options.popupEditor;
+        options.popupModel.footerToolbar.addAction({
+          id: "fast-entry-custom",
+          innerCss: "sv-popup__body-footer-item sv-popup__button",
+          title: "Set Items",
+          visibleIndex: 1,
+          action: () => {
+            editor.comment.value = "1|Item 1\n2|Item 2\n3|Item 3";
+          }
+        });
+      });
+    })();
+
+    const generalTab = Selector("h4").withExactText("General");
+    const choicesTab = Selector("h4").withExactText("Choices");
+
+    await t
+      .hover(getToolboxItemByText("Dropdown"))
+      .click(getToolboxItemByText("Dropdown"))
+      .click(generalTab)
+      .click(choicesTab)
+      .click(Selector(".spg-action-button[title='Edit']"));
+    await takeElementScreenshot("pg-choices-fast-entry-popup.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+  });
+});
+
 test("Logic popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
