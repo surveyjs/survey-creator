@@ -1,4 +1,6 @@
-import { StylesManager, Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, Question, SurveyModel, ILocalizableString } from "survey-core";
+import { StylesManager, Base, IAction, ItemValue,
+  JsonObjectProperty, MatrixDropdownColumn, Question,
+  SurveyModel, ILocalizableString, PopupBaseViewModel } from "survey-core";
 
 /**
  * List available question convert modes
@@ -141,6 +143,7 @@ export interface ICollectionItemAllowOperations {
 }
 
 export interface ISurveyCreatorOptions {
+  isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
@@ -174,6 +177,11 @@ export interface ISurveyCreatorOptions {
     editor: Question,
     titleActions: IAction[]
   );
+  onPropertyGridShowModalCallback(object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    popupEditor: any,
+    popupModel: PopupBaseViewModel);
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,
@@ -249,6 +257,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;
   maxLogicItemsInCondition: number;
@@ -286,7 +295,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     property: JsonObjectProperty,
     editor: Question,
     titleActions: IAction[]
-  ) { }
+  ): void { }
+  onPropertyGridShowModalCallback(object: any,
+    property: JsonObjectProperty,
+    editor: Question,
+    popupEditor: any,
+    popupModel: PopupBaseViewModel): void {}
   onIsPropertyReadOnlyCallback(
     obj: Base,
     property: JsonObjectProperty,
