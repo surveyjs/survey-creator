@@ -18,12 +18,11 @@ svc-page-navigator-item,
   &:focus {
     outline: none;
   }
-
-  transition: 0.25s ease-in-out;
 }
 
 .svc-page-navigator__items--up {
   .svc-page-navigator-item-content {
+    transition: 0.25s ease-in-out;
     transform: translateY(-100%);
   }
 
@@ -34,6 +33,7 @@ svc-page-navigator-item,
 
 .svc-page-navigator__items--down {
   .svc-page-navigator-item-content {
+    transition: 0.25s ease-in-out;
     transform: translateY(100%);
   }
 
