@@ -914,6 +914,12 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
+      if(!!this.survey) {
+        const question = this.survey.getQuestionByName(options.name);
+        if(!!question) {
+          question.focus();
+        }
+      }
     }
   }
   private changeDependedProperties(question: Question, dependedsQuetion: (name: string) => Question,

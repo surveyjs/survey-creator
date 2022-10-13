@@ -2139,6 +2139,7 @@ test("Change cellType in the column in property grid", () => {
   expect(cellTypQuestion.value).toEqual("default");
   expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeFalsy();
   cellTypQuestion.value = "checkbox";
+  expect(propertyGrid.survey.getPanelByName("general").isExpanded).toBeTruthy();
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
   expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
