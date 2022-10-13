@@ -190,7 +190,7 @@ export class PageNavigatorViewModel extends Base {
         newVisibleItemsStartIndex = currantPageIndex - navigator.visibleItemsCount + 1;
       }
       if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
-        if (!!navigator._itemsContainer) {
+        if (navigator.visible && !!navigator._itemsContainer) {
           const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
           navigator._itemsContainer.children[0].children[1].className = cssClass;
           setTimeout(() => {
