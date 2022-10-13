@@ -32,6 +32,7 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
         el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
           return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };
+        self.model.setItemsContainer(el.parentElement);
       }
     }
   }
@@ -40,6 +41,7 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
     if (!!el && !!el.parentElement?.parentElement?.parentElement) {
       el.parentElement.parentElement.parentElement.onscroll = <any>undefined;
     }
+    this.model.stopItemsContainerHeightObserver();
     this.model.dispose();
     super.ngOnDestroy();
   }

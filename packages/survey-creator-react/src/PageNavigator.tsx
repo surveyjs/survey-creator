@@ -49,6 +49,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
         el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
           return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };
+        self.model.setItemsContainer(el.parentElement);
       }
     }
   }
@@ -57,6 +58,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
     const el = this.containerRef.current;
     if (!!el) {
       el.parentElement.parentElement.parentElement.onscroll = undefined;
+      this.model.stopItemsContainerHeightObserver();
     }
     this.model.dispose();
   }
@@ -83,7 +85,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
           //className="svc-page-navigator__popup"
           ></Popup>
         </div>)}
-        {this.model.items.map((item) => (
+        {this.model.visibleItems.map((item) => (
           <SurveyPageNavigatorItem
             key={item.id}
             item={item}
