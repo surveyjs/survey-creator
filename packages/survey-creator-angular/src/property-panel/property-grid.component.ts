@@ -12,6 +12,9 @@ export class PropertyGridComponent extends BaseAngular<PropertyGridViewModel> {
   protected getModel(): PropertyGridViewModel {
     return this.model;
   }
+  protected override getPropertiesToUpdateSync(): Array<string> {
+    return ["survey"];
+  }
 }
 AngularComponentFactory.Instance.registerComponent("buttongroup-question", ButtonGroupQuestionComponent);
 AngularComponentFactory.Instance.registerComponent("svc-property-grid", PropertyGridComponent);

@@ -784,7 +784,6 @@ test("Delete matrix rows on backspace", async (t) => {
     .wait(200)
     .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
 });
-
 test("Paste multiline selectbase", async (t) => {
   await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
 
@@ -795,4 +794,12 @@ test("Paste multiline selectbase", async (t) => {
   await t.expect(ClientFunction(() => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
   })()).eql("[\"item1\",\"ita\",\"b\",\"cem2\",\"item3\"]");
+});
+test("Undo after new item add", async (t) => {
+  await t
+    .click(Selector(".svc-toolbox__tool").withText("Radiogroup"))
+    .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
+    .expect(Selector(".svc-item-value-controls__remove").count).eql(4)
+    .click(Selector("button[title=Undo]"))
+    .expect(Selector(".svc-item-value-controls__remove").count).eql(3);
 });
