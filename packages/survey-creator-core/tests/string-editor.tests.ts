@@ -639,3 +639,32 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
     expect(question.rows.map(c => c.value)).toEqual([]);
   }
 });
+
+test("StringEditor on property value changing", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", title: "q", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  var stringEditorQuestion = new StringEditorViewModelBase(question.locTitle, creator);
+  var eventRaised = 0;
+  creator.onPropertyValueChanging.add((sender, options) => {
+    if (!!options.value && options.propertyName === "title" && options.obj == question) {
+      eventRaised++;
+      if (options.newValue == "a") {
+        options.newValue = "b";
+      }
+    }
+  });
+  var event = { target: { innerText: "a" } };
+  stringEditorQuestion.onBlur(event);
+  expect(eventRaised).toEqual(1);
+  expect(question.locTitle.text).toEqual("b");
+
+  var event = { target: { innerText: "c" } };
+  stringEditorQuestion.onBlur(event);
+  expect(eventRaised).toEqual(2);
+  expect(question.locTitle.text).toEqual("c");
+})
