@@ -10,7 +10,7 @@ export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { };
   protected abstract getItemLocString(items: any, item: any): LocalizableString;
   protected abstract getItemSets(): Array<any>;
-  protected abstract addNewItem(items: any): void;
+  protected abstract addNewItem(items: any, text?: string): void;
   protected abstract getItemsPropertyName(items: any): string;
   private static createItemsNavigator(question: any): StringItemsNavigatorBase {
     if (question instanceof QuestionMultipleTextModel) return new StringItemsNavigatorMultipleText(question);
@@ -21,6 +21,10 @@ export abstract class StringItemsNavigatorBase {
     return null;
   }
 
+  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
+    let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new ItemValue(text))).concat(items.slice(startIndex + 1));
+    this.question[this.getItemsPropertyName(items)] = newItems;
+  };
   private setEventsForItem(items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
     connector.onEditComplete.clear();
@@ -50,6 +54,19 @@ export abstract class StringItemsNavigatorBase {
         }
         items.splice(itemIndex, 1);
       }
+    })
+
+    connector.onTextChanging.clear();
+    connector.onTextChanging.add((sender, options) => {
+      let lines = options.value.split(/\r?\n/);
+      if (lines.length <= 1) return;
+      options.cancel = true;
+      const itemIndex = items.indexOf(item);
+      this.addNewItems(items, itemIndex, lines);
+      let focusedItemIndex = itemIndex + lines.length;
+      if (focusedItemIndex >= items.length) focusedItemIndex = items.length - 1;
+      StringEditorConnector.get(this.getItemLocString(items, items[focusedItemIndex])).setAutoFocus();
+      StringEditorConnector.get(this.getItemLocString(items, items[focusedItemIndex])).activateEditor();
     })
   }
 
@@ -90,8 +107,8 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.choices];
   }
-  protected addNewItem(items: any) {
-    this.question.choices.push(new ItemValue(getNextValue("item", items.map(i => i.value)) as string));
+  protected addNewItem(items: any, text: string = null) {
+    this.question.choices.push(new ItemValue(text || getNextValue("item", items.map(i => i.value)) as string));
   }
   protected getItemsPropertyName(items: any) {
     return "choices";
@@ -105,12 +122,16 @@ class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.items];
   }
-  protected addNewItem(items: any) {
-    this.question.addItem(getNextValue("text", items.map(i => i.name)) as string);
+  protected addNewItem(items: any, text: string = null) {
+    this.question.addItem(text || getNextValue("text", items.map(i => i.name)) as string);
   }
   protected getItemsPropertyName(items: any) {
     return "items";
   }
+  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
+    let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MultipleTextItemModel(text))).concat(items.slice(startIndex + 1));
+    this.question[this.getItemsPropertyName(items)] = newItems;
+  };
 }
 class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected getItemLocString(items: any, item: any) {
@@ -119,9 +140,9 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.columns, this.question.rows];
   }
-  protected addNewItem(items: any) {
-    if (items == this.question.columns) this.question.addColumn(getNextValue("Column ", items.map(i => i.value)) as string);
-    if (items == this.question.rows) this.question.rows.push(new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
+  protected addNewItem(items: any, text: string = null) {
+    if (items == this.question.columns) this.question.addColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+    if (items == this.question.rows) this.question.rows.push(text || new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
   }
   protected getItemsPropertyName(items: any) {
     if (items == this.question.columns) return "columns";
@@ -133,6 +154,15 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) return item.locTitle;
     return item.locText;
   }
+  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
+    if (items == this.question.columns) {
+      let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MatrixDropdownColumn(text))).concat(items.slice(startIndex + 1));
+      this.question[this.getItemsPropertyName(items)] = newItems;
+    }
+    else {
+      super.addNewItems(items, startIndex, itemsToAdd);
+    }
+  };
 }
 class StringItemsNavigatorMatrixDynamic extends StringItemsNavigatorMatrixDropdown {
   protected getItemSets() {
@@ -154,6 +184,7 @@ export class StringEditorConnector extends Base {
     this.onDoActivate.fire(this.locString, {});
   }
   public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  public onTextChanging: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   public onBackspaceEmptyString: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
   constructor(private locString: LocalizableString) {
@@ -254,6 +285,9 @@ export class StringEditorViewModelBase extends Base {
 
   public onInput(event: any): void {
     if (this.editAsText && !this.compostionInProgress) {
+      const options = { value: event.target?.innerText, cancel: null };
+      this.connector.onTextChanging.fire(this, options);
+      if (options.cancel) return;
       sanitizeEditableContent(event.target);
     }
   }
