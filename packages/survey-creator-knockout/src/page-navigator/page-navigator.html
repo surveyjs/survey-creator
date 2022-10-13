@@ -4,7 +4,9 @@
     <sv-svg-icon class="svc-page-navigator__navigator-icon" params="iconName: icon, size: 24"></sv-svg-icon>
     <sv-popup params="model: popupModel, cssClass: 'svc-page-navigator__popup'"></sv-popup>
 </div>
-<!-- ko foreach: visibleItems -->
-<svc-page-navigator-item params="item: $data"></svc-page-navigator-item>
-<!-- /ko -->
+<div>
+    <!-- ko foreach: visibleItems -->
+    <svc-page-navigator-item params="item: $data"></svc-page-navigator-item>
+    <!-- /ko -->
+</div>
 <!-- /ko -->

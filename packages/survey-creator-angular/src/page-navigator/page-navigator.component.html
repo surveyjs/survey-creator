@@ -6,7 +6,9 @@
           <svg class="svc-page-navigator__navigator-icon" [iconName]="model.icon" [size]="24" sv-ng-svg-icon></svg>
           <sv-ng-popup [popupModel]="model.popupModel"></sv-ng-popup>
       </div>
-      <svc-page-navigator-item *ngFor="let item of model.visibleItems" [model]="item"></svc-page-navigator-item>
+      <div>
+        <svc-page-navigator-item *ngFor="let item of model.visibleItems" [model]="item"></svc-page-navigator-item>
+      </div>
     </ng-container>
   </div>
 </ng-template>

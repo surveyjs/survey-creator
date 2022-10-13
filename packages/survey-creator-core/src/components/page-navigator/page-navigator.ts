@@ -182,17 +182,30 @@ export class PageNavigatorViewModel extends Base {
       if (currantPageIndex >= navigator.visibleItemsStartIndex && currantPageIndex < navigator.visibleItemsStartIndex + navigator.visibleItemsCount) {
         return;
       }
+      let newVisibleItemsStartIndex = navigator.visibleItemsStartIndex;
       if (currantPageIndex < navigator.visibleItemsStartIndex) {
-        navigator.visibleItemsStartIndex = currantPageIndex;
-        return;
+        newVisibleItemsStartIndex = currantPageIndex;
       }
       if (currantPageIndex >= navigator.visibleItemsStartIndex + navigator.visibleItemsCount) {
-        navigator.visibleItemsStartIndex = currantPageIndex - navigator.visibleItemsCount + 1;
+        newVisibleItemsStartIndex = currantPageIndex - navigator.visibleItemsCount + 1;
+      }
+      if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
+        if (!!navigator._itemsContainer) {
+          const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
+          navigator._itemsContainer.children[0].children[1].className = cssClass;
+          setTimeout(() => {
+            navigator._itemsContainer.children[0].children[1].className = "";
+            navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
+          }, 250);
+        } else {
+          navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
+        }
       }
     }
   }) currentPage: PageModel;
 
   public stopItemsContainerHeightObserver() {
+    this._itemsContainer = undefined;
     if (!!this._resizeObserver) {
       this._resizeObserver.disconnect();
       this._resizeObserver = undefined;
@@ -202,8 +215,10 @@ export class PageNavigatorViewModel extends Base {
   }
   @property({ defaultValue: 0 }) visibleItemsStartIndex: number;
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
+  private _itemsContainer: HTMLDivElement;
   public setItemsContainer(itemsContainer: HTMLDivElement) {
     this.stopItemsContainerHeightObserver();
+    this._itemsContainer = itemsContainer;
     this._resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[], observer: ResizeObserver) => this.updateVisibleItems(entries[0].contentBoxSize[0].blockSize));
     this._resizeObserver.observe(itemsContainer)
   }

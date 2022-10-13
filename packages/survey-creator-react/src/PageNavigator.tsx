@@ -85,12 +85,14 @@ export class SurveyPageNavigator extends CreatorModelElement<
           //className="svc-page-navigator__popup"
           ></Popup>
         </div>)}
-        {this.model.visibleItems.map((item) => (
-          <SurveyPageNavigatorItem
-            key={item.id}
-            item={item}
-          ></SurveyPageNavigatorItem>
-        ))}
+        <div>
+          {this.model.visibleItems.map((item) => (
+            <SurveyPageNavigatorItem
+              key={item.id}
+              item={item}
+            ></SurveyPageNavigatorItem>
+          ))}
+        </div>
       </div>
     );
   }
