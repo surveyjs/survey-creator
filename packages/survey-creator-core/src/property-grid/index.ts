@@ -820,8 +820,8 @@ export class PropertyGridModel {
     this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
-        const qustionToFocus = options.panel.getFirstQuestionToFocus();
-        this.currentlySelectedProperty = !!qustionToFocus ? qustionToFocus.name : "";
+        const questionToFocus = options.panel.getFirstQuestionToFocus(false, true);
+        this.currentlySelectedProperty = !!questionToFocus ? questionToFocus.name : "";
         this.currentlySelectedPanel = options.panel;
       }
     });
