@@ -784,6 +784,17 @@ test("Delete matrix rows on backspace", async (t) => {
     .wait(200)
     .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
 });
+test("Paste multiline selectbase", async (t) => {
+  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+
+  await t
+    .click(Selector(".sv-string-editor").withText("item2"))
+    .typeText(Selector(".sv-string-editor").withText("item2"), "a\nb\nc", { caretPos: 2, paste: true });
+  await t.expect(Selector(".sv-string-editor").withText("item3").focused).ok();
+  await t.expect(ClientFunction(() => {
+    return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
+  })()).eql("[\"item1\",\"ita\",\"b\",\"cem2\",\"item3\"]");
+});
 test("Undo after new item add", async (t) => {
   await t
     .click(Selector(".svc-toolbox__tool").withText("Radiogroup"))
