@@ -547,10 +547,10 @@ export class CreatorBase extends Base
    *- options.popupEditor the editor inside the popup window. It has an editSurvey property that you can use
    *- options.popupModel the popup window model. You can use options.popupModel.footerToolbar to change popup footer actions.
    */
-   public onPropertyGridShowModal: Survey.Event<
-   (sender: CreatorBase, options: any) => any,
-   any
- > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
+  public onPropertyGridShowModal: Survey.Event<
+    (sender: CreatorBase, options: any) => any,
+    any
+  > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
     * The event is called before rendering a delete button in the Property Grid or in Question Editor.
     * Obsolete, please use onCollectionItemAllowOperations
@@ -3284,6 +3284,17 @@ export function initializeDesignTimeSurveyModel(model: any, creator: CreatorBase
   };
 }
 
+function isContentElement(element: any) {
+  let current = element;
+  while (!!current) {
+    if (current.isContentElement) {
+      return true;
+    }
+    current = current.parentQuestion;
+  }
+  return false;
+}
+
 export const editableStringRendererName = "svc-string-editor";
 export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
   if (reason === "logo-image") {
@@ -3292,7 +3303,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   if (reason === "cell" || reason === "column-header" || reason === "row-header") {
     return "svc-matrix-cell";
   }
-  if (!element.isContentElement) {
+  if (!isContentElement(element)) {
     if (element instanceof Question) {
       const isDropdown = element.isDescendantOf("dropdown") || element.isDescendantOf("tagbox");
       if (isPopupEditorContent) {
@@ -3316,7 +3327,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
   return undefined;
 }
 export function getQuestionContentWrapperComponentName(element) {
-  if (element.isDescendantOf("rating") && !element.isContentElement) {
+  if (element.isDescendantOf("rating") && !isContentElement(element)) {
     return "svc-rating-question-content";
   }
   return undefined;
@@ -3352,7 +3363,7 @@ export function getItemValueWrapperComponentName(
   item: ItemValue,
   question: QuestionSelectBase
 ): string {
-  if (question.isContentElement) {
+  if (isContentElement(question)) {
     return SurveyModel.TemplateRendererComponentName;
   }
   if (question.isDescendantOf("imagepicker")) {
@@ -3376,7 +3387,7 @@ export function getItemValueWrapperComponentData(
 }
 export function isStringEditable(element: any, name: string): boolean {
   const parentIsMatrix = !!element.data && element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix && (!element.isContentElement || element.isEditableTemplateElement);
+  return !parentIsMatrix && (!isContentElement(element) || element.isEditableTemplateElement);
 }
 export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
