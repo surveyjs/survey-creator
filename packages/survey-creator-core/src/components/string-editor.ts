@@ -322,8 +322,19 @@ export class StringEditorViewModelBase extends Base {
       this.creator.onHtmlToMarkdown.fire(this, options);
       mdText = options.text;
     }
-    const clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
     let owner = this.locString.owner as any;
+
+    var changingOptions = {
+      obj: owner,
+      propertyName: this.locString.name,
+      value: this.locString.text,
+      newValue: clearedText,
+      doValidation: false
+    };
+    this.creator.onValueChangingCallback(changingOptions);
+    clearedText = changingOptions.newValue;
+
 
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
     if (!this.errorText && !clearedText) {
