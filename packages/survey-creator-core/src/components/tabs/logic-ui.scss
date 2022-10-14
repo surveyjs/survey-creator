@@ -50,6 +50,7 @@
   color: $foreground-light;
   height: calcSize(5);
   line-height: calcSize(3);
+  cursor: pointer;
 
   option {
     background: $background;
