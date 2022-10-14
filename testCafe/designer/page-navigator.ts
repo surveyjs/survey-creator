@@ -51,8 +51,8 @@ test("Check page navigator track scrolling", async (t) => {
     };
   })();
 
-  const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(2) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(2) > .svc-page-navigator-item--selected";
-  const lastPageNavigatorItem = "svc-page-navigator-item:nth-child(5) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(5) > .svc-page-navigator-item--selected";
+  const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
+  const lastPageNavigatorItem = "svc-page-navigator-item:nth-child(4) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(4) > .svc-page-navigator-item--selected";
 
   await t
     .expect(Selector(firstPageNavigatorItem).exists).ok()
