@@ -50,6 +50,7 @@
   color: $foreground-light;
   height: calcSize(5);
   line-height: calcSize(3);
+  cursor: pointer;
 
   option {
     background: $background;
@@ -61,7 +62,7 @@
   outline: 1px dotted $primary;
 }
 
-.svc-logic-question--answered .svc-logic-operator {
+.sl-question.svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
 .svc-logic-operator.svc-logic-operator {
@@ -240,7 +241,7 @@
   white-space: nowrap;
 }
 
-.svc-logic-placeholder { 
+.svc-logic-placeholder {
   width: calcSize(78);
   min-width: 100%;
   max-width: 100%;
