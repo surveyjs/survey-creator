@@ -752,6 +752,11 @@ jobs:
       OverWrite: true
     displayName: 'copy survey-angular-ui in node_modules'
 
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run release
+    displayName: 'Release specific version survey-creator-angular'
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run build
@@ -776,3 +781,14 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run testcafe:ci
     displayName: 'Functional test CreatorV2 Angular'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/build'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-angular
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-angular'
+      ArtifactName: 'SurveyJSCreatorV2BuildAngular'
+      publishLocation: 'Container'  
