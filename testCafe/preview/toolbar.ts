@@ -161,12 +161,12 @@ test("Landscape switcher", async (t) => {
     .click(getListItemByText("iPad"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).ok()
-    .expect(Selector(".svd-simulator-wrapper").clientWidth).gt(900)
-    .expect(Selector(".svd-simulator-wrapper").clientHeight).lt(800)
+    .expect(Selector(".svd-simulator-wrapper").clientWidth).gt(1200)
+    .expect(Selector(".svd-simulator-wrapper").clientHeight).lt(1000)
     .click(getBarItemByTitle("Landscape"))
     .expect(getBarItemByTitle("Portrait").visible).ok()
-    .expect(Selector(".svd-simulator-wrapper").clientWidth).lt(800)
-    .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(900);
+    .expect(Selector(".svd-simulator-wrapper").clientWidth).lt(1000)
+    .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(1200);
 });
 test("Device selector", async (t) => {
   await explicitErrorHandler();

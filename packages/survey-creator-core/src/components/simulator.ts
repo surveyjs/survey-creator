@@ -129,17 +129,17 @@ export class SurveySimulatorModel extends Base {
       return undefined;
     }
     const device = simulatorDevices[this.activeDevice];
-    const scale = DEFAULT_MONITOR_DPI / device.ppi;
+    const scale = 1;//DEFAULT_MONITOR_DPI / device.ppi;
 
     const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
-    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth);
-    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight);
+    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth) / device.cssPixelRatio;
+    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight) / device.cssPixelRatio;
     const frameWidth = deviceLandscapedFrameWidth * scale;
     const frameHeight = deviceLandscapedFrameHeight * scale;
 
     return {
-      scale: this.simulatorScaleEnabled ? scale * device.cssPixelRatio : 1,
+      scale: this.simulatorScaleEnabled ? scale /* * device.cssPixelRatio */ : 1,
       frameWidth: frameWidth,
       frameHeight: frameHeight,
       landscapedFrameWidth: this.landscapeOrientation ? frameHeight : frameWidth,
@@ -194,17 +194,17 @@ export var simulatorDevices = {
   //   title: "iPhone",
   //   cssClass: "svd-simulator-iphone4"
   // },
-  iPhone5: {
-    cssPixelRatio: 1.83,
-    ppi: 326,
-    width: 640,
-    height: 1136,
-    frameWidth: 750,
-    frameHeight: 1500,
-    deviceType: "phone",
-    title: "iPhone 5",
-    cssClass: "svd-simulator-iphone5",
-  },
+  // iPhone5: {
+  //   cssPixelRatio: 2,
+  //   ppi: 326,
+  //   width: 640,
+  //   height: 1136,
+  //   frameWidth: 750,
+  //   frameHeight: 1500,
+  //   deviceType: "phone",
+  //   title: "iPhone 5",
+  //   cssClass: "svd-simulator-iphone5",
+  // },
   iPhone6: {
     cssPixelRatio: 2,
     ppi: 326,
@@ -284,11 +284,11 @@ export var simulatorDevices = {
   },
   iPadMini: {
     cssPixelRatio: 2,
-    ppi: 163,
-    width: 768,
-    height: 1024,
-    frameWidth: 945,
-    frameHeight: 1300,
+    ppi: 326,
+    width: 1536,
+    height: 2048,
+    frameWidth: 1890,
+    frameHeight: 2600,
     deviceType: "tablet",
     title: "iPad Mini",
     cssClass: "svd-simulator-ipadmini",
@@ -338,12 +338,12 @@ export var simulatorDevices = {
     cssClass: "svd-simulator-androidtablet",
   },
   win10Phone: {
-    cssPixelRatio: 1,
-    ppi: 152,
-    width: 330,
-    height: 568,
-    frameWidth: 480,
-    frameHeight: 846,
+    cssPixelRatio: 2,
+    ppi: 294,
+    width: 720,
+    height: 1280,
+    frameWidth: 1152,
+    frameHeight: 2030,
     deviceType: "phone",
     title: "Windows 10 Phone",
     cssClass: "svd-simulator-win10phone",
