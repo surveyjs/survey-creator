@@ -18,7 +18,8 @@ import {
   QuestionMatrixDynamicModel,
   QuestionCheckboxModel,
   ComponentCollection,
-  QuestionCompositeModel
+  QuestionCompositeModel,
+  QuestionCustomModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -1481,7 +1482,7 @@ test("getQuestionContentWrapperComponentName", (): any => {
 });
 
 test("getQuestionContentWrapperComponentName for component", (): any => {
-  ComponentCollection.Instance.add({
+  ComponentCollection.Instance.add(<any>{
     name: "test",
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
@@ -1504,6 +1505,45 @@ test("getElementWrapperComponentData", (): any => {
   const panelDynamic = new QuestionPanelDynamicModel("q1");
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentData(panelDynamictemplateQuestion, "", testCreator)).toEqual(testCreator);
+});
+
+test("getElementWrapperComponentName for inner component elements", () => {
+  ComponentCollection
+    .Instance
+    .add(<any>{
+      name: "myPanel",
+      title: "Dynamic Panel (Custom)",
+      questionJSON: {
+        "type": "paneldynamic",
+        "name": "myPanel1",
+        "panelCount": 1,
+        "templateElements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    });
+  const creator = new CreatorTester();
+  const survey = creator.createSurvey({
+    questions: [{
+      "type": "mypanel",
+      "name": "question1"
+    },]
+  });
+  const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
+  const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
+  expect(q.name).toBe("myPanel1");
+
+  const panel = q.panels[0] as PanelModel;
+  const question = panel.questions[0] as QuestionTextModel;
+
+  expect(getElementWrapperComponentName(qCustom, "", false)).toEqual("svc-question");
+  expect(getElementWrapperComponentName(q, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
+  ComponentCollection.Instance.clear();
 });
 
 test("isStringEditable", (): any => {
