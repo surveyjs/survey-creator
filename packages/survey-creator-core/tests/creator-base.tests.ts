@@ -18,7 +18,8 @@ import {
   QuestionMatrixDynamicModel,
   QuestionCheckboxModel,
   ComponentCollection,
-  QuestionCompositeModel
+  QuestionCompositeModel,
+  QuestionCustomModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -306,6 +307,109 @@ test("PageNavigatorViewModel currentPage", (): any => {
   expect(model.items[0].active).toBeFalsy();
   expect(model.items[1].active).toBeTruthy();
   expect(model.currentPage).toEqual(pages[1]);
+});
+
+test("PageNavigatorViewModel visibleItems", (): any => {
+  const creator = new CreatorTester();
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "");
+  expect(model.items).toHaveLength(1);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        elements: [{ type: "text", name: "question2" }]
+      },
+      {
+        elements: [{ type: "text", name: "question3" }]
+      },
+      {
+        elements: [{ type: "text", name: "question4" }]
+      },
+      {
+        elements: [{ type: "text", name: "question5" }]
+      },
+      {
+        elements: [{ type: "text", name: "question6" }]
+      },
+      {
+        elements: [{ type: "text", name: "question7" }]
+      },
+      {
+        elements: [{ type: "text", name: "question8" }]
+      },
+      {
+        elements: [{ type: "text", name: "question9" }]
+      },
+      {
+        elements: [{ type: "text", name: "question10" }]
+      },
+      {
+        elements: [{ type: "text", name: "question11" }]
+      },
+      {
+        elements: [{ type: "text", name: "question12" }]
+      },
+      {
+        elements: [{ type: "text", name: "question13" }]
+      },
+      {
+        elements: [{ type: "text", name: "question14" }]
+      },
+      {
+        elements: [{ type: "text", name: "question15" }]
+      },
+      {
+        elements: [{ type: "text", name: "question16" }]
+      }
+    ]
+  };
+  const pages = creator.survey.pages;
+
+  expect(model.items).toHaveLength(pages.length);
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  expect(model.visibleItemsCount).toEqual(Number.MAX_VALUE);
+  expect(model.visibleItems).toHaveLength(pages.length);
+
+  model["updateVisibleItems"](230);
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  expect(model.visibleItemsCount).toEqual(5);
+  expect(model.visibleItems).toHaveLength(model.visibleItemsCount);
+
+  model.currentPage = pages[1];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[2];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[3];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[4];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[5];
+  expect(model.visibleItemsStartIndex).toEqual(1);
+
+  model.currentPage = pages[14];
+  expect(model.visibleItemsStartIndex).toEqual(10);
+  model.currentPage = pages[15];
+  expect(model.visibleItemsStartIndex).toEqual(11);
+  model.currentPage = pages[14];
+  expect(model.visibleItemsStartIndex).toEqual(11);
+
+  model.currentPage = pages[5];
+  expect(model.visibleItemsStartIndex).toEqual(5);
+  model.currentPage = pages[4];
+  expect(model.visibleItemsStartIndex).toEqual(4);
+  model.currentPage = pages[3];
+  expect(model.visibleItemsStartIndex).toEqual(3);
+  model.currentPage = pages[2];
+  expect(model.visibleItemsStartIndex).toEqual(2);
+  model.currentPage = pages[1];
+  expect(model.visibleItemsStartIndex).toEqual(1);
+  model.currentPage = pages[0];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+
 });
 
 test("PageNavigatorViewModel bypage mode", (): any => {
@@ -1378,7 +1482,7 @@ test("getQuestionContentWrapperComponentName", (): any => {
 });
 
 test("getQuestionContentWrapperComponentName for component", (): any => {
-  ComponentCollection.Instance.add({
+  ComponentCollection.Instance.add(<any>{
     name: "test",
     elementsJSON: [{ type: "rating", name: "rate1" }]
   });
@@ -1401,6 +1505,45 @@ test("getElementWrapperComponentData", (): any => {
   const panelDynamic = new QuestionPanelDynamicModel("q1");
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentData(panelDynamictemplateQuestion, "", testCreator)).toEqual(testCreator);
+});
+
+test("getElementWrapperComponentName for inner component elements", () => {
+  ComponentCollection
+    .Instance
+    .add(<any>{
+      name: "myPanel",
+      title: "Dynamic Panel (Custom)",
+      questionJSON: {
+        "type": "paneldynamic",
+        "name": "myPanel1",
+        "panelCount": 1,
+        "templateElements": [
+          {
+            "type": "text",
+            "name": "question3"
+          }
+        ]
+      }
+    });
+  const creator = new CreatorTester();
+  const survey = creator.createSurvey({
+    questions: [{
+      "type": "mypanel",
+      "name": "question1"
+    },]
+  });
+  const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
+  const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
+  expect(q.name).toBe("myPanel1");
+
+  const panel = q.panels[0] as PanelModel;
+  const question = panel.questions[0] as QuestionTextModel;
+
+  expect(getElementWrapperComponentName(qCustom, "", false)).toEqual("svc-question");
+  expect(getElementWrapperComponentName(q, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(panel, "", false)).toEqual(undefined);
+  expect(getElementWrapperComponentName(question, "", false)).toEqual(undefined);
+  ComponentCollection.Instance.clear();
 });
 
 test("isStringEditable", (): any => {
@@ -1819,14 +1962,14 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
     let page = null;
-    if(options.obj.isPage) {
+    if (options.obj.isPage) {
       page = options.obj;
     } else {
       page = options.obj.page;
     }
     if (!!page) {
       const isFirstPage = sender.survey.pages.indexOf(page) === 0;
-      if(isFirstPage) {
+      if (isFirstPage) {
         options.allowEdit = false;
         options.allowCopy = false;
       }
@@ -3145,7 +3288,7 @@ test("undo/redo DnD ", (): any => {
 
   const q1 = creator.survey.pages[0].elements[0];
   const q2 = creator.survey.pages[0].elements[1];
-  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2 }, null);
+  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2, draggedElement: q1 }, null);
 
   creator.survey.pages[0].removeElement(q1);
   creator.survey.pages[0].addElement(q1);
@@ -3213,11 +3356,11 @@ test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
   let survey: SurveyModel = undefined;
   const getCategoryName = (): string => {
-    if(!survey) return "";
+    if (!survey) return "";
     const panels = survey.getAllPanels();
-    for(var i = 0; i < panels.length; i ++) {
+    for (var i = 0; i < panels.length; i++) {
       const p = <PanelModel>panels[i];
-      if(p.state === "expanded") return p.name;
+      if (p.state === "expanded") return p.name;
     }
     return "";
   };

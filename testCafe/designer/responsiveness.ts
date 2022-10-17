@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton
 } from "../helper";
 const title = "Responsiveness";
 
@@ -11,7 +11,7 @@ fixture`${title}`.page`${url}`;
 const flyoutPropertyGrid = Selector(".svc-flyout-side-bar");
 
 test("Check base responsiveness for tabbed menu", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-child(5)");
+  const tabbedMenuItemSelector = Selector(".svc-tabbed-menu .svc-tabbed-menu-item-container:nth-of-type(5)");
   await t
     .resizeWindow(1920, 900)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
@@ -28,7 +28,7 @@ test("Check base responsiveness for tabbed menu", async (t) => {
 });
 
 test("Check base responsiveness for toolbox", async (t) => {
-  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-child(20)");
+  const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(20)");
   await t
     .resizeWindow(1280, 1200)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
@@ -231,7 +231,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbar.exists).notOk()
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
-    .click(Selector("span").withText("Add Question").nth(1))
+    .click(getAddNewQuestionButton().nth(1))
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(testTabToolbar.exists).ok()
     .expect(creatorFooterToolbar.exists).notOk()

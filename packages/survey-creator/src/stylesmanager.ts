@@ -95,8 +95,8 @@ export class StylesManager {
       "$error-color": "#ed5565"
     },
     winter: {
-      "$primary-color": "#5ac8fa",
-      "$secondary-color": "#5ac8fa",
+      "$primary-color": "#3c3b40",
+      "$secondary-color": "#3c3b40",
       "$primary-text-color": "#676a6c",
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
@@ -110,8 +110,8 @@ export class StylesManager {
       "$error-color": "#ed5565"
     },
     winterstone: {
-      "$primary-color": "#3c3b40",
-      "$secondary-color": "#3c3b40",
+      "$primary-color": "#5ac8fa",
+      "$secondary-color": "#5ac8fa",
       "$primary-text-color": "#676a6c",
       "$secondary-text-color": "#a7a7a7",
       "$inverted-text-color": "#ffffff",
@@ -134,7 +134,7 @@ export class StylesManager {
     StylesManager.currentTheme(themeName);
     Survey.StylesManager.applyTheme(themeName);
 
-    if(!document || !document.body || !document.body.style) {
+    if (!document || !document.body || !document.body.style) {
       return;
     }
 
@@ -144,7 +144,7 @@ export class StylesManager {
 
     Object.keys(theme).forEach(colorVariableName => {
       let cssVariableName = StylesManager.ThemeVariablesMap[colorVariableName];
-      if(!!cssVariableName && theme[colorVariableName]) {
+      if (!!cssVariableName && theme[colorVariableName]) {
         document.body.style.setProperty(cssVariableName, theme[colorVariableName]);
       }
     });

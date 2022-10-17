@@ -254,3 +254,24 @@ test("Dropdown question with ability to collapse choices", async (t) => {
     .click(Selector(".svc-question__dropdown-choice .svc-item-value-controls__add"))
     .expect(buttonSelector.exists).ok();
 });
+
+test("Keep focus on question convert", async (t) => {
+  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
+    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(convertActionButton.visible).ok()
+
+    .click(convertActionButton)
+    .expect(listItems.count).eql(convertQuestionTypesCount)
+    .expect(popupContent.innerText).eql(convertPopupContent)
+
+    .click(getListItemByText("Comment"))
+    .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected #convertTo button").focused).ok();
+});

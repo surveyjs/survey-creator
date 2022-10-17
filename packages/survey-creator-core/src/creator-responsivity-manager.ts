@@ -55,10 +55,19 @@ export class CreatorResponsivityManager {
     }
   }
 
+  private findCorrectParent(container: HTMLElement) {
+    if (!!window?.getComputedStyle) {
+      if (window.getComputedStyle(container.parentElement).display === "inline") {
+        return this.findCorrectParent(container.parentElement);
+      }
+    }
+    return container.parentElement
+  }
+
   constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
-      this.resizeObserver.observe(this.container.parentElement);
+      this.resizeObserver.observe(this.findCorrectParent(this.container))
       this.process();
       if (this.currentWidth == "xs" || this.currentWidth == "s" || this.currentWidth === "m") {
         this.creator.setShowSidebar(false);

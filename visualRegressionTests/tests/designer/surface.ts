@@ -106,7 +106,7 @@ test("Matrix column editor", async (t) => {
     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
     const showControl = ClientFunction(() => {
-      const el: any = document.querySelectorAll("td:nth-child(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+      const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
       el.style.display = "block";
     });
 

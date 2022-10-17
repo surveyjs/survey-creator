@@ -106,10 +106,10 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
         this.question.hasOther = false;
         index = model.question.choices.length;
       } else if (this.question["selectAllItem"] === this.item) {
-        this.question["hasSelectAll"] = false;
+        this.question["showSelectAllItem"] = false;
         index = 0;
       } else if (this.question["noneItem"] === this.item) {
-        this.question["hasNone"] = false;
+        this.question["showNoneItem"] = false;
         index = model.question.choices.length;
       } else {
         needRemove = true;
@@ -439,32 +439,32 @@ export var itemDraggableAdorner = {
       }
     };
     if (
-      editor.canShowObjectProperty(model, "hasOther") &&
+      editor.canShowObjectProperty(model, "showOtherItem") &&
       model.hasOther !== true
     ) {
       itemsRoot[0].appendChild(
         createCustomElement(editorLocalization.getString("pe.addOther"), () => {
           var newValue = !model.hasOther;
-          newValue = raiseChangingEvent(model, "hasOther", newValue);
+          newValue = raiseChangingEvent(model, "showOtherItem", newValue);
           model.hasOther = newValue;
-          raiseChangedEvent(model, "hasOther", newValue);
+          raiseChangedEvent(model, "showOtherItem", newValue);
           focusAfterChange(model, model.choices.length + 1);
         })
       );
     }
     if (
-      model["hasSelectAll"] !== undefined &&
-      model["hasSelectAll"] !== true &&
-      editor.canShowObjectProperty(model, "hasSelectAll")
+      model["showSelectAllItem"] !== undefined &&
+      model["showSelectAllItem"] !== true &&
+      editor.canShowObjectProperty(model, "showSelectAllItem")
     ) {
       itemsRoot[0].appendChild(
         createCustomElement(
           editorLocalization.getString("pe.addSelectAll"),
           () => {
-            var newValue = !model["hasSelectAll"];
-            newValue = raiseChangingEvent(model, "hasSelectAll", newValue);
-            model["hasSelectAll"] = newValue;
-            raiseChangedEvent(model, "hasSelectAll", newValue);
+            var newValue = !model["showSelectAllItem"];
+            newValue = raiseChangingEvent(model, "showSelectAllItem", newValue);
+            model["showSelectAllItem"] = newValue;
+            raiseChangedEvent(model, "showSelectAllItem", newValue);
             focusAfterChange(model, 0);
           }
         )
@@ -473,14 +473,14 @@ export var itemDraggableAdorner = {
     if (
       model.hasNone !== undefined &&
       model.hasNone !== true &&
-      editor.canShowObjectProperty(model, "hasNone")
+      editor.canShowObjectProperty(model, "showNoneItem")
     ) {
       itemsRoot[0].appendChild(
         createCustomElement(editorLocalization.getString("pe.addNone"), () => {
           var newValue = !model.hasNone;
-          newValue = raiseChangingEvent(model, "hasNone", newValue);
+          newValue = raiseChangingEvent(model, "showNoneItem", newValue);
           model.hasNone = newValue;
-          raiseChangedEvent(model, "hasNone", newValue);
+          raiseChangedEvent(model, "showNoneItem", newValue);
           focusAfterChange(model, model.choices.length);
         })
       );

@@ -19,7 +19,13 @@
   "typings": "survey-creator-angular.d.ts",
   "peerDependencies": {
     "rxjs": "~7.4.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@angular/cdk": "*",
+    "@angular/core": "*",
+    "@angular/forms": "*",
+    "survey-angular-ui": "^1.9.46",
+    "survey-core": "^1.9.46",
+    "survey-creator-core": "^1.9.46"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.2.5",
@@ -37,6 +43,8 @@
     "@types/ace": "0.0.44",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.20.43",
+    "@types/express-serve-static-core": "4.17.30",
+    "http-server": "^14.1.1",
     "jasmine": "^4.1.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
@@ -54,13 +62,18 @@
     "survey-creator-core": "../survey-creator-core/build",
     "tslib": "^2.3.0",
     "typescript": "~4.4.3",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "testcafe": "1.18.4"
   },
   "scripts": {
     "build": "ng build",
     "serve:example": "ng serve",
-    "build:example": "ng build --aot --output-hashing=none angular-ui",
+    "testcafe": "testcafe chrome ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal,dashboard --env=angular",
+    "testcafe:ci": "testcafe -c 4 -q chrome:headless ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
+    "serve:example:aot": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
+    "build:example": "ng build  angular-ui",
     "test": "ng test survey-creator-angular",
+    "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
     "release": "standard-version --message \"Release: %s [skip ci]\" "
   }

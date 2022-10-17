@@ -200,7 +200,7 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
   const nameReady = "svc-hovered-ready";
 
   function setClass(className, checkReady = null) {
-    const arr = element.className.split(" ");
+    const arr = (element.className || "").split(" ");
     if (checkReady) {
       if (arr.indexOf(checkReady) == -1) {
         return;
@@ -223,8 +223,8 @@ export function toggleHovered(e: MouseEvent, element: HTMLElement, timeout = 0) 
     }
     e[processedFlagName] = true;
   } else {
-    element.className = element.className.replace(" svc-hovered-ready", "");
-    element.className = element.className.replace(" svc-hovered", "");
+    element.className = (element.className || "").replace(" svc-hovered-ready", "");
+    element.className = (element.className || "").replace(" svc-hovered", "");
   }
 }
 

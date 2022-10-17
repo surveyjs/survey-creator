@@ -11,6 +11,7 @@
     <td [class.svd-test-results__node-value]="model.isNode" [class.svd-dark-border-color]="!model.isNode">
       {{model.getString(model.displayValue)}}
     </td>
+  </tr>
   <ng-container *ngIf="model.isNode && !model.collapsed">
     <ng-container *ngFor="let row of model.data">
       <survey-results-table-row [model]="row"></survey-results-table-row>

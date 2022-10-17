@@ -64,7 +64,7 @@ export class SurveyQuestionEditorDefinition {
     },
     file: {
       properties: [
-        "hasComment",
+        "showCommentArea",
         "commentText",
         "commentPlaceholder",
         "allowMultiple",
@@ -164,7 +164,7 @@ export class SurveyQuestionEditorDefinition {
     },
     rating: {
       properties: [
-        "hasComment",
+        "showCommentArea",
         "commentText",
         "commentPlaceholder",
         { name: "displayMode", tab: "layout" },
@@ -179,17 +179,17 @@ export class SurveyQuestionEditorDefinition {
     },
     selectbase: {
       properties: [
-        "hasComment",
+        "showCommentArea",
         "commentText",
         "commentPlaceholder",
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "layout" },
-        { name: "hasOther", tab: "choices" },
+        { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "otherPlaceholder", tab: "choices" },
-        { name: "hasNone", tab: "choices" },
+        { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
@@ -204,7 +204,7 @@ export class SurveyQuestionEditorDefinition {
     },
     checkbox: {
       properties: [
-        { name: "hasSelectAll", tab: "choices" },
+        { name: "showSelectAllItem", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" },
       ],
@@ -327,12 +327,12 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@checkbox": {
       properties: [
-        { name: "hasOther", tab: "choices" },
+        { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "choices" },
-        { name: "hasSelectAll", tab: "choices" },
-        { name: "hasNone", tab: "choices" },
+        { name: "showSelectAllItem", tab: "choices" },
+        { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" },
         { name: "selectAllText", tab: "choices" }
@@ -344,12 +344,12 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@radiogroup": {
       properties: [
-        { name: "hasOther", tab: "choices" },
+        { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "choices" },
-        { name: "hasSelectAll", tab: "choices" },
-        { name: "hasNone", tab: "choices" },
+        { name: "showSelectAllItem", tab: "choices" },
+        { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
       ],
       tabs: [
@@ -359,11 +359,11 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@dropdown": {
       properties: [
-        { name: "hasOther", tab: "choices" },
+        { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "placeholder", tab: "choices" },
-        { name: "hasNone", tab: "choices" },
+        { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
       ],
       tabs: [

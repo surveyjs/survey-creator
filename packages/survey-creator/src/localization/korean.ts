@@ -120,7 +120,7 @@ export var koreanStrings = {
     valueName: "값 이름",
     titleName: "제목 이름",
 
-    hasOther: "다른 항목이 있습니다",
+    showOtherItem: "다른 항목이 있습니다",
     otherText: "기타 항목 텍스트",
     name: "이름",
     title: "제목",
@@ -373,7 +373,7 @@ export var koreanStrings = {
     titleLocation: "제목 위치",
 
     hasComment: "답변",
-    hasOther: "다른 답변 허용",
+    showOtherItem: "다른 답변 허용",
     choices: "선택",
     choicesOrder: "기타 선택",
     choicesByUrl: "URL을 통한 선택",

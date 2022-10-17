@@ -588,7 +588,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
 
 test("Matrix dropdown question inplace popup editor", async (t) => {
   const showControl = ClientFunction(() => {
-    const el: any = document.querySelectorAll("td:nth-child(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+    const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
     el.style.display = "block";
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
@@ -637,4 +637,56 @@ test("Matrix dropdown question inplace row header editor #2553", async (t) => {
     .click(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']"))
     .pressKey("ctrl+a delete 3 0 0 p x")
     .expect(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']").value).eql("300px");
+});
+
+test("Checkbox question inplace editor", async (t) => {
+
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "paneldynamic1",
+            "templateElements": [
+              {
+                "type": "checkbox",
+                "name": "question1",
+                "choices": [
+                  "item1",
+                  "item2",
+                  "item3",
+                  "item4",
+                  "item5",
+                  "item6"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await t
+    .click(Selector(".svc-string-editor").withText("question1"))
+    .wait(200)
+    .pressKey("tab")
+    .expect(Selector(".svc-item-value-controls__add").nth(0).focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".svc-item-value-controls__remove").nth(0).focused).ok()
+    .pressKey("space")
+    .expect(Selector(".svc-item-value-controls__remove").nth(0).focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("space")
+    .expect(Selector(".svc-item-value-controls__remove").nth(1).focused).ok()
+    .pressKey("tab tab tab tab tab tab")
+    .pressKey("shift+tab shift+tab")
+    .pressKey("space")
+    .expect(Selector(".svc-item-value-controls__remove").nth(2).focused).ok()
+    .pressKey("shift+tab shift+tab")
+    .pressKey("space")
+    .expect(Selector(".svc-item-value-controls__remove").nth(0).focused).ok();
 });

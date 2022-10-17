@@ -34,6 +34,9 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   protected getStateElement(): Base {
     return this.model;
   }
+  private onBlur = (event: any) => {
+    this.model.onFocusOut(event.nativeEvent);
+  };
 
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
@@ -90,7 +93,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
       >
         <div className="svc-item-value__ghost"></div>
 
-        <div className="svc-item-value-controls">{button}</div>
+        <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
 
         <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event)}>{this.props.element}</div>
       </div>

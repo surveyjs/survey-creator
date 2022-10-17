@@ -1,0 +1,15 @@
+<ng-template #template>
+  <div class="svc-toolbox__item" role="button" [attr.aria-label]="ariaLabel"
+    [class]="'svc-toolbox__item--' + item.iconName" (click)="viewModel.click($event)" [key2click]>
+    <span class="svc-toolbox__item-container">
+      <svg [iconName]="item.iconName" [size]="24" [title]="ariaLabel" sv-ng-svg-icon></svg>
+    </span>
+    <span *ngIf="isCompact" class="svc-toolbox__item-banner svc-item__banner">
+      <svg [iconName]="item.iconName" [size]="24" [title]="ariaLabel" class="svc-toolbox__item-icon" sv-ng-svg-icon></svg>
+      <span class="svc-toolbox__item-title">{{item.title}}</span>
+    </span>
+    <span *ngIf="!isCompact" class="svc-toolbox__item-title">
+      {{item.title}}
+    </span>
+  </div>
+</ng-template>

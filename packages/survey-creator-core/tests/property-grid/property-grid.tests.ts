@@ -2137,11 +2137,12 @@ test("Change cellType in the column in property grid", () => {
   expect(cellTypQuestion).toBeTruthy();
   expect(cellTypQuestion.getType()).toEqual("dropdown");
   expect(cellTypQuestion.value).toEqual("default");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeFalsy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeFalsy();
   cellTypQuestion.value = "checkbox";
+  expect(propertyGrid.survey.getPanelByName("general").isExpanded).toBeTruthy();
   expect(question.columns[0].cellType).toEqual("checkbox");
   expect(propertyGrid.survey.getQuestionByName("name").value).toEqual("col1");
-  expect(propertyGrid.survey.getQuestionByName("hasNone")).toBeTruthy();
+  expect(propertyGrid.survey.getQuestionByName("showNoneItem")).toBeTruthy();
 });
 test("Validate Selected Element Errors", (): any => {
   var titleProp = Serializer.findProperty("question", "title");
@@ -2723,10 +2724,10 @@ test("Use validation in custom property editor", (): any => {
 test("autoComplate property", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
-  const autoCompleteQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("autoComplete");
-  expect(autoCompleteQuestion.dataList).toBeTruthy();
-  expect(Array.isArray(autoCompleteQuestion.dataList)).toBeTruthy();
-  expect(autoCompleteQuestion.dataList.length > 10).toBeTruthy();
+  const autoCompleteQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("autoComplete");
+  expect(autoCompleteQuestion.choices).toBeTruthy();
+  expect(Array.isArray(autoCompleteQuestion.choices)).toBeTruthy();
+  expect(autoCompleteQuestion.choices.length > 10).toBeTruthy();
 });
 test("property editor title description html", () => {
   var survey = new SurveyModel();
@@ -2737,4 +2738,20 @@ test("property editor title description html", () => {
     propertyGrid.survey.getQuestionByName("title")
   );
   expect(titleQuestion.locDescription.html).toEqual("Common <span class='spg-bold'>Title</span>");
+});
+test("Image picker question imageHeight placeholder", () => {
+  const question = new QuestionImagePickerModel("q1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let imageHeightQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("imageHeight")
+  );
+  expect(imageHeightQuestion.placeholder).toEqual("auto");
+  var curStrings = editorLocalization.getLocale("");
+  curStrings.pe.auto = "Auto 2";
+  propertyGrid = new PropertyGridModelTester(question);
+  imageHeightQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("imageHeight")
+  );
+  expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
+  curStrings.pe.auto = "auto";
 });

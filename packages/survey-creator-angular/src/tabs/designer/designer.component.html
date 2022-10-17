@@ -1,0 +1,24 @@
+<ng-template #template>
+  <div class="svc-flex-column">
+    <svc-adaptive-toolbox *ngIf="model.isToolboxVisible" [creator]="creator"></svc-adaptive-toolbox>
+  </div>
+  <div class="svc-tab-designer" [class]="model.getRootCss()" (click)="model.clickDesigner()">
+    <div class="svc-tab-designer_content">
+      <ng-container *ngIf="model.showPlaceholder">
+        <div *ngIf="creator.showHeaderInEmptySurvey && creator.allowEditSurveyTitle" class="svc-designer-header">
+          <div *ngIf="survey.renderedHasHeader" [class]="survey.css.header" [survey]="survey" sv-ng-survey-header></div>
+        </div>
+        <div class="svc-designer__placeholder-container" [attr.data-sv-drop-target-survey-element]="'newGhostPage'">
+          <span class="svc-designer-placeholder-text svc-text svc-text--normal">
+            {{ model.placeholderText }}
+          </span>
+          <svc-page class="svc-designer-placeholder-page" [model]="model.newPage" [survey]="survey" [creator]="creator"></svc-page>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!model.showPlaceholder">
+        <svc-designer-survey [model]="model"></svc-designer-survey>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

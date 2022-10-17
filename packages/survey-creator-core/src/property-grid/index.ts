@@ -18,6 +18,7 @@ import {
   ComputedUpdater,
   QuestionDropdownModel,
   QuestionSelectBase,
+  PopupBaseViewModel,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -120,7 +121,7 @@ export interface IPropertyGridEditor {
     property: JsonObjectProperty,
     question: Question,
     options: ISurveyCreatorOptions
-  ) => any;
+  ) => IPropertyEditorSetup;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
   onAfterRenderQuestion?: (
@@ -621,7 +622,9 @@ export class PropertyJSONGenerator {
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    json.placeholder = typeof propDescr === "object" ? propDescr.placeholder : undefined;
+    if(typeof propDescr === "object" && propDescr.placeholder) {
+      json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
+    }
     return json;
   }
   private getColumnPropertyJSON(className: string, propName: string): any {
@@ -817,8 +820,8 @@ export class PropertyGridModel {
     this.updateDependedPropertiesEditors();
     this.survey.onFocusInPanel.add((sender, options) => {
       if (this.currentlySelectedPanel !== options.panel) {
-        const qustionToFocus = options.panel.getFirstQuestionToFocus();
-        this.currentlySelectedProperty = !!qustionToFocus ? qustionToFocus.name : "";
+        const questionToFocus = options.panel.getFirstQuestionToFocus(false, true);
+        this.currentlySelectedProperty = !!questionToFocus ? questionToFocus.name : "";
         this.currentlySelectedPanel = options.panel;
       }
     });
@@ -911,6 +914,12 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
+      if(!!this.survey) {
+        const question = this.survey.getQuestionByName(options.name);
+        if(!!question) {
+          question.focus();
+        }
+      }
     }
   }
   private changeDependedProperties(question: Question, dependedsQuetion: (name: string) => Question,
@@ -1112,9 +1121,10 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions,
     onClose?: (reason: "apply" | "cancel") => void
-  ): any {
+  ): IPropertyEditorSetup {
+    const obj = (<any>question).obj;
     const surveyPropertyEditor = editor.createPropertyEditorSetup(
-      (<any>question).obj,
+      obj,
       property,
       question,
       options
@@ -1124,7 +1134,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
     if (!settings.showModal) return surveyPropertyEditor;
-    settings.showModal(
+    const popupModel: PopupBaseViewModel = settings.showModal(
       "survey",
       {
         survey: surveyPropertyEditor.editSurvey,
@@ -1140,21 +1150,21 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
         onClose && onClose("cancel");
       },
       "sv-property-editor",
-      question.title,
-      (options as CreatorBase).isMobileView ? "overlay" : "popup"
+      question.title, options.isMobileView ? "overlay" : "popup"
     );
     this.onModalPropertyEditorShown(editor, property, question, options);
+    options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
     return surveyPropertyEditor;
   }
   protected onModalPropertyEditorShown(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
     options: ISurveyCreatorOptions
-  ) {
+  ): void {
 
   }
   protected onModalPropertyEditorClosed(editor: IPropertyGridEditor,
     property: JsonObjectProperty, question: Question,
-    options: ISurveyCreatorOptions, reason: "apply" | "cancel") {
+    options: ISurveyCreatorOptions, reason: "apply" | "cancel"): void {
 
   }
   public isSupportGrouping(): boolean {

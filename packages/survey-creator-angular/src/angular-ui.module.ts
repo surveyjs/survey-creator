@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 
 import { CreatorComponent } from "./creator.component";
 import { SurveyAngularModule } from "survey-angular-ui";
-import { DesignerTabComponent } from "./tabs/designer.component";
+import { DesignerTabComponent } from "./tabs/designer/designer.component";
 import { SvgBundleComponent } from "./svg-bundle.component";
 import { TabbedMenuItemComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
 import { TabbledMenuComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu.component";
@@ -27,9 +27,40 @@ import { TestAgainActionComponent } from "./tabs/preview/test-again.component";
 import { SurveyResultsComponent } from "./tabs/preview/survey-results.component";
 import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-row.component";
 import { TestTabComponent } from "./tabs/preview/test.component";
+import { PageDesignerComponent } from "./page.component";
+import { QuestionDesignerComponent } from "./question.component";
+import { ItemValueDesignerComponent } from "./adorners/item-value.component";
+import { ImageItemValueDesignerComponent } from "./adorners/image-item-value.component";
+import { QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent } from "./adorners/question-dropdown.component";
+import { QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent } from "./adorners/question-image.component";
+import { PanelDesignerComponent } from "./panel.component";
+import { AdaptiveToolboxComponent } from "./toolbox/adaptive-toolbox.component";
+import { ToolboxToolComponent } from "./toolbox/toolbox-tool.component";
+import { ToolboxItemComponent } from "./toolbox/toolbox-item.component";
+import { ToolboxCategoryComponent } from "./toolbox/toolbox-category.component";
+import { StringEditorComponent } from "./string-editor.component";
+import { PageNavigatorComponent } from "./page-navigator/page-navigator.component";
+import { PageNavigatorItemComponent } from "./page-navigator/page-navigator-item.component";
+import { LogicOperatorComponent } from "./questions/logic-operator.component";
+import { MatrixCellComponent } from "./adorners/matrix-cell.component";
+import { QuestionEditorComponent } from "./question-editor.component";
+import { CellQuestionDropdownComponent } from "./adorners/cell-question-dropdown.component";
+import { CreatorRowComponent } from "./row.component";
+import { NotifierComponent } from "./notifier.component";
+import { DesignerPagesComponent } from "./tabs/designer/designer-pages.component";
+import { DesignerSurveyComponent } from "./tabs/designer/designer-survey.component";
+import { CellQuestionComponent } from "./adorners/cell-question.component";
+import { QuestionWidgetDesignerComponent } from "./question-widget.component";
+import { ToolboxComponent } from "./toolbox/toolbox.component";
+import { QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent } from "./adorners/question-rating.component";
+import { CreatorLogoImageComponent } from "./header/logo-image.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent],
+  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
+    AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
+    QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
+    ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, NotifierComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent],
   imports: [
     CommonModule, FormsModule, SurveyAngularModule
   ],

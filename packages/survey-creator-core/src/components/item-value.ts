@@ -35,14 +35,14 @@ export class ItemValueWrapperViewModel extends Base {
       this.updateIsNew(question, item);
     };
     if (question.noneItem === item) {
-      question.registerFunctionOnPropertyValueChanged("hasNone", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showNoneItem", updateFromProperty);
     } else if (question.otherItem === item) {
-      question.registerFunctionOnPropertyValueChanged("hasOther", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showOtherItem", updateFromProperty);
     } else if (
       question.isDescendantOf("checkbox") &&
       (<QuestionCheckboxModel>question).selectAllItem === item
     ) {
-      question.registerFunctionOnPropertyValueChanged("hasSelectAll", updateFromProperty);
+      question.registerFunctionOnPropertyValueChanged("showSelectAllItem", updateFromProperty);
     } else if (this.isNew) {
       question.visibleChoicesChangedCallback = () => {
         this.updateNewItemValue();
@@ -69,12 +69,12 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator.isCanModifyProperty(question, "choices")) {
       this.canTouchItems = false;
     }
-    StringEditorConnector.get(item.locText).setItemValue(this);
   }
 
   private dragOrClickHelper: DragOrClickHelper;
   private allowItemOperations: ICollectionItemAllowOperations;
   private canTouchItems: boolean = true;
+  private focusCameFromDown: boolean = false;
 
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
@@ -162,9 +162,38 @@ export class ItemValueWrapperViewModel extends Base {
       (<any>model.question).hasSelectAll = false;
     } else {
       var index = model.question.choices.indexOf(model.item);
+      let indexToFocus = this.findNextElementIndexToRemove(index)
       model.question.choices.splice(index, 1);
+      this.focusNextElementToRemove(indexToFocus);
     }
     this.updateIsNew(model.question, model.item);
+  }
+
+  public onFocusOut(event: any): void {
+    this.question["_lastActiveItemValueIndex"] = this.question.choices.indexOf(this.item)
+  };
+
+  private findNextElementIndexToRemove(index) {
+    let indexToFocus = 0;
+    if (this.question.choices.length > 0) {
+      if (index < this.question["_lastActiveItemValueIndex"]) {
+        indexToFocus = index - 1;
+      }
+      else {
+        indexToFocus = index;
+      }
+      if (indexToFocus < 0) indexToFocus = 0;
+      if (indexToFocus >= this.question.choices.length - 2) indexToFocus = this.question.choices.length - 2;
+    }
+    return indexToFocus;
+  }
+  private focusNextElementToRemove(index) {
+    setTimeout(() => {
+      const el = document.getElementById(this.question.id);
+      const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
+      (buttons[index] as HTMLElement)?.focus()
+    }, 100
+    )
   }
   private updateIsNew(question: QuestionSelectBase, item: ItemValue) {
     this.isNew = !question.isItemInList(item);

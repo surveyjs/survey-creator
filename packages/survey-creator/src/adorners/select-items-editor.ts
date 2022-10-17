@@ -62,25 +62,25 @@ ko.components.register("select-items-editor", {
         toggle: () => isExpanded(!isExpanded()),
         showOther: ko.computed(
           () =>
-            params.editor.canShowObjectProperty(params.question, "hasOther") &&
+            params.editor.canShowObjectProperty(params.question, "showOtherItem") &&
             params.question.hasOther !== true
         ),
         addOther: () => {
           var newValue = !params.question.hasOther;
-          newValue = raiseChangingEvent(params.question, "hasOther", newValue);
+          newValue = raiseChangingEvent(params.question, "showOtherItem", newValue);
           params.question.hasOther = newValue;
-          raiseChangedEvent(params.question, "hasOther", newValue);
+          raiseChangedEvent(params.question, "showOtherItem", newValue);
         },
         showNone: ko.computed(
           () =>
-            params.editor.canShowObjectProperty(params.question, "hasNone") &&
+            params.editor.canShowObjectProperty(params.question, "showNoneItem") &&
             params.question.hasNone !== true
         ),
         addNone: () => {
           var newValue = !params.question.hasNone;
-          newValue = raiseChangingEvent(params.question, "hasNone", newValue);
+          newValue = raiseChangingEvent(params.question, "showNoneItem", newValue);
           params.question.hasNone = newValue;
-          raiseChangedEvent(params.question, "hasNone", newValue);
+          raiseChangedEvent(params.question, "showNoneItem", newValue);
         },
         addItem: createAddItemHandler(
           params.question,

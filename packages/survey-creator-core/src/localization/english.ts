@@ -153,6 +153,7 @@ export var enStrings = {
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
+    auto: "auto",
     //completedHtmlOnConditionItemText: "Show if",
     lg: {
       addNewItem: "Add New Rule",
@@ -331,12 +332,12 @@ export var enStrings = {
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
 
-    hasOther: "Allow the Other option",
+    showOtherItem: "Allow the Other option",
     otherText: "Other option text",
     otherPlaceHolder: "Comment area placeholder",
-    hasNone: "Allow the None option",
+    showNoneItem: "Allow the None option",
     noneText: "None option text",
-    hasSelectAll: "Allow the Select All option",
+    showSelectAllItem: "Allow the Select All option",
     selectAllText: "Select All option text",
     choicesMin: "Minimum value for auto-generated items",
     choicesMax: "Maximum value for auto-generated items",
@@ -556,7 +557,7 @@ export var enStrings = {
     separateSpecialChoices: "Separate special choices (None, Other, Select All)",
     choicesFromQuestion: "Copy choices from the following question",
     choicesFromQuestionMode: "Which choices to copy?",
-    hasComment: "Show the comment area",
+    showCommentArea: "Show the comment area",
     commentPlaceHolder: "Comment area placeholder",
     displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
     rowsOrder: "Row order",

@@ -427,7 +427,7 @@ svc-question,
     margin-top: calcSize(1);
   }
 
-  .svc-row:first-child {
+  .svc-row:first-of-type {
     margin-top: 0;
   }
 

@@ -54,6 +54,10 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
       // document.execCommand('selectAll', false, null);
     }
   }
+  public componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    this.baseModel.afterRender();
+  }
   public componentWillUnmount() {
     super.componentWillUnmount();
     if (!this.locString) return;
@@ -126,6 +130,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
+          aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
           dangerouslySetInnerHTML={htmlValue}
@@ -145,6 +150,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
+          aria-label={this.placeholder || "content editable"}
           suppressContentEditableWarning={true}
           // style={this.style}
           onBlur={this.onBlur}
