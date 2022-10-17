@@ -296,13 +296,13 @@ test("Test string editor inplaceEditForValues", (): any => {
   itemValue = q0.choices[0];
   var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
   expect(itemValue.text).toEqual("item1");
-  seChoice.onBlur({ target: { innerText: "newItem", innerHTML: "newItem" } });
+  seChoice.onBlur({ target: { innerText: "newItem", innerHTML: "newItem", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("item1");
   expect(itemValue.text).toEqual("newItem");
 
   creator.inplaceEditForValues = true;
-  seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue" } });
+  seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.locText.text).toEqual("newItem");
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
@@ -659,15 +659,48 @@ test("StringEditor on property value changing", () => {
       }
     }
   });
-  var event = { target: { innerText: "a" } };
+  var event = { target: { innerText: "a", setAttribute: () => { }, removeAttribute: () => { } } };
   stringEditorQuestion.onBlur(event);
   expect(eventRaised).toEqual(1);
   expect(question.locTitle.text).toEqual("b");
 
-  var event = { target: { innerText: "c" } };
+  var event = { target: { innerText: "c", setAttribute: () => { }, removeAttribute: () => { } } };
   stringEditorQuestion.onBlur(event);
   expect(eventRaised).toEqual(2);
   expect(question.locTitle.text).toEqual("c");
+})
+
+test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator/issues/3568", () => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { name: "q", type: "text" }
+        ]
+      }
+    ]
+  });
+
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+
+  var attrTest, valueTest;
+  var event = {
+    target: {
+      parentElement: { click: () => { } },
+      innerText: "a", setAttribute: (attr, val) => {
+        attrTest = attr;
+        valueTest = val
+      }, removeAttribute: (attr, val) => { attrTest = attr }
+    }
+  };
+  stringEditorSurveyTitle.onFocus(event);
+  expect(attrTest).toEqual("tabindex");
+  expect(valueTest).toEqual(-1);
+  attrTest = null;
+  stringEditorSurveyTitle.onBlur(event);
+  expect(attrTest).toEqual("tabindex");
 })
 
 test("StringEditor multiline paste for selectbase questions", (): any => {
