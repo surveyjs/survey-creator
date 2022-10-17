@@ -23,6 +23,9 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
   public get item(): ItemValue {
     return this.componentData.model;
   }
+  public onBlur(event: any) {
+    this.adorner.onFocusOut(event);
+  }
   protected createModel(): void {
     if (this.componentData) {
       this.adorner = new ItemValueWrapperViewModel(this.creator, this.question, this.item);
