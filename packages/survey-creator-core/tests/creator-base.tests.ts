@@ -308,6 +308,109 @@ test("PageNavigatorViewModel currentPage", (): any => {
   expect(model.currentPage).toEqual(pages[1]);
 });
 
+test("PageNavigatorViewModel visibleItems", (): any => {
+  const creator = new CreatorTester();
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  const pagesController = desigerTab.pagesController;
+  const model = new PageNavigatorViewModel(pagesController, "");
+  expect(model.items).toHaveLength(1);
+  creator.JSON = {
+    pages: [
+      {
+        elements: [{ type: "text", name: "question1" }]
+      },
+      {
+        elements: [{ type: "text", name: "question2" }]
+      },
+      {
+        elements: [{ type: "text", name: "question3" }]
+      },
+      {
+        elements: [{ type: "text", name: "question4" }]
+      },
+      {
+        elements: [{ type: "text", name: "question5" }]
+      },
+      {
+        elements: [{ type: "text", name: "question6" }]
+      },
+      {
+        elements: [{ type: "text", name: "question7" }]
+      },
+      {
+        elements: [{ type: "text", name: "question8" }]
+      },
+      {
+        elements: [{ type: "text", name: "question9" }]
+      },
+      {
+        elements: [{ type: "text", name: "question10" }]
+      },
+      {
+        elements: [{ type: "text", name: "question11" }]
+      },
+      {
+        elements: [{ type: "text", name: "question12" }]
+      },
+      {
+        elements: [{ type: "text", name: "question13" }]
+      },
+      {
+        elements: [{ type: "text", name: "question14" }]
+      },
+      {
+        elements: [{ type: "text", name: "question15" }]
+      },
+      {
+        elements: [{ type: "text", name: "question16" }]
+      }
+    ]
+  };
+  const pages = creator.survey.pages;
+
+  expect(model.items).toHaveLength(pages.length);
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  expect(model.visibleItemsCount).toEqual(Number.MAX_VALUE);
+  expect(model.visibleItems).toHaveLength(pages.length);
+
+  model["updateVisibleItems"](230);
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  expect(model.visibleItemsCount).toEqual(5);
+  expect(model.visibleItems).toHaveLength(model.visibleItemsCount);
+
+  model.currentPage = pages[1];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[2];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[3];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[4];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+  model.currentPage = pages[5];
+  expect(model.visibleItemsStartIndex).toEqual(1);
+
+  model.currentPage = pages[14];
+  expect(model.visibleItemsStartIndex).toEqual(10);
+  model.currentPage = pages[15];
+  expect(model.visibleItemsStartIndex).toEqual(11);
+  model.currentPage = pages[14];
+  expect(model.visibleItemsStartIndex).toEqual(11);
+
+  model.currentPage = pages[5];
+  expect(model.visibleItemsStartIndex).toEqual(5);
+  model.currentPage = pages[4];
+  expect(model.visibleItemsStartIndex).toEqual(4);
+  model.currentPage = pages[3];
+  expect(model.visibleItemsStartIndex).toEqual(3);
+  model.currentPage = pages[2];
+  expect(model.visibleItemsStartIndex).toEqual(2);
+  model.currentPage = pages[1];
+  expect(model.visibleItemsStartIndex).toEqual(1);
+  model.currentPage = pages[0];
+  expect(model.visibleItemsStartIndex).toEqual(0);
+
+});
+
 test("PageNavigatorViewModel bypage mode", (): any => {
   const creator = new CreatorTester({ pageEditMode: "bypage" });
   const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
@@ -1819,14 +1922,14 @@ test("PageAdorner and onElementAllowOperations, allowEdit", (): any => {
   creator.survey.addNewPage("page2");
   creator.onElementAllowOperations.add((sender, options) => {
     let page = null;
-    if(options.obj.isPage) {
+    if (options.obj.isPage) {
       page = options.obj;
     } else {
       page = options.obj.page;
     }
     if (!!page) {
       const isFirstPage = sender.survey.pages.indexOf(page) === 0;
-      if(isFirstPage) {
+      if (isFirstPage) {
         options.allowEdit = false;
         options.allowCopy = false;
       }
@@ -3213,11 +3316,11 @@ test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
   let survey: SurveyModel = undefined;
   const getCategoryName = (): string => {
-    if(!survey) return "";
+    if (!survey) return "";
     const panels = survey.getAllPanels();
-    for(var i = 0; i < panels.length; i ++) {
+    for (var i = 0; i < panels.length; i++) {
       const p = <PanelModel>panels[i];
-      if(p.state === "expanded") return p.name;
+      if (p.state === "expanded") return p.name;
     }
     return "";
   };

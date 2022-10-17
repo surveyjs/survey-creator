@@ -13,6 +13,7 @@ svc-page-navigator,
   padding: calcSize(1.25);
   border-radius: 50%;
   cursor: pointer;
+
   use {
     fill: $foreground-light;
   }
@@ -27,12 +28,14 @@ svc-page-navigator,
 survey-creator,
 .svc-creator {
   .svc-page-navigator__selector {
+
     &:hover,
     &:focus {
       outline: none;
 
       .svc-page-navigator__navigator-icon {
         background-color: $primary-light;
+
         use {
           fill: $primary;
         }
@@ -43,8 +46,10 @@ survey-creator,
 
 .svc-page-navigator__selector--opened {
   opacity: 0.5;
+
   .svc-page-navigator__navigator-icon {
     background-color: $primary-light;
+
     use {
       fill: $primary;
     }
@@ -63,10 +68,10 @@ survey-creator,
 
 .svc-tab-designer__page-navigator {
   width: calcSize(5.5);
-  height: 0;
   position: absolute;
-  padding-top: calcSize(16.5);
+  padding: calcSize(16.5) 0;
   top: 0;
+  bottom: 0;
   right: calcSize(1);
 }
 
@@ -77,6 +82,7 @@ survey-creator,
       margin-left: calcSize(6.5);
     }
   }
+
   .svc-tab-designer__page-navigator {
     right: unset;
     left: calcSize(1);

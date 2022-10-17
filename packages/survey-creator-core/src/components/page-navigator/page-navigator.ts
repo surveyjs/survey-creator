@@ -15,6 +15,7 @@ export class PageNavigatorViewModel extends Base {
   private currentPagesChangedFunc = (sender: PagesController, options: any) => {
     this.currentPage = this.pagesController.currentPage;
   };
+  private _resizeObserver: ResizeObserver;
 
   constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
@@ -51,6 +52,7 @@ export class PageNavigatorViewModel extends Base {
   }
   public dispose() {
     super.dispose();
+    this.stopItemsContainerHeightObserver();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.remove(this.currentPagesChangedFunc);
   }
@@ -76,9 +78,9 @@ export class PageNavigatorViewModel extends Base {
     for (var i = 0; i < pages.length; i++) {
       items.push(this.createActionBarItem(pages[i]));
     }
-    if(this.pagesController.creator["pageEditMode"] === "bypage") {
+    if (this.pagesController.creator["pageEditMode"] === "bypage") {
       const newPage = (<any>this.pagesController["creator"]).getPlugin("designer").model.newPage;
-      if(!!newPage) {
+      if (!!newPage) {
         items.push(this.createActionBarItem(newPage));
       }
     }
@@ -106,7 +108,7 @@ export class PageNavigatorViewModel extends Base {
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
-      if(this.pageEditMode === "bypage") {
+      if (this.pageEditMode === "bypage") {
         this.pagesController.currentPage = page;
         this.currentPage = page;
         this.pagesController.creator.selectElement(this.pagesController.currentPage);
@@ -174,5 +176,69 @@ export class PageNavigatorViewModel extends Base {
     this.currentPage = maxVisiblePage;
     return visiblePages;
   }
-  @property() currentPage: PageModel;
+  @property({
+    onSet: (page: PageModel, navigator: PageNavigatorViewModel) => {
+      const currantPageIndex = navigator.pagesController.pages.indexOf(page);
+      if (currantPageIndex >= navigator.visibleItemsStartIndex && currantPageIndex < navigator.visibleItemsStartIndex + navigator.visibleItemsCount) {
+        return;
+      }
+      let newVisibleItemsStartIndex = navigator.visibleItemsStartIndex;
+      if (currantPageIndex < navigator.visibleItemsStartIndex) {
+        newVisibleItemsStartIndex = currantPageIndex;
+      }
+      if (currantPageIndex >= navigator.visibleItemsStartIndex + navigator.visibleItemsCount) {
+        newVisibleItemsStartIndex = currantPageIndex - navigator.visibleItemsCount + 1;
+      }
+      if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
+        if (navigator.visible && !!navigator._itemsContainer) {
+          const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
+          navigator._itemsContainer.children[0].children[1].className = cssClass;
+          setTimeout(() => {
+            navigator._itemsContainer.children[0].children[1].className = "";
+            navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
+          }, 250);
+        } else {
+          navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
+        }
+      }
+    }
+  }) currentPage: PageModel;
+
+  public stopItemsContainerHeightObserver() {
+    this._itemsContainer = undefined;
+    if (!!this._resizeObserver) {
+      this._resizeObserver.disconnect();
+      this._resizeObserver = undefined;
+    }
+    this.visibleItemsStartIndex = 0;
+    this.visibleItemsCount = Number.MAX_VALUE;
+  }
+  @property({ defaultValue: 0 }) visibleItemsStartIndex: number;
+  @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
+  private _itemsContainer: HTMLDivElement;
+  public setItemsContainer(itemsContainer: HTMLDivElement) {
+    this.stopItemsContainerHeightObserver();
+    this._itemsContainer = itemsContainer;
+    this._resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[], observer: ResizeObserver) => this.updateVisibleItems(entries[0].contentBoxSize[0].blockSize));
+    this._resizeObserver.observe(itemsContainer)
+  }
+  public static PAGE_NAVIGATION_MENU_ITEM_HEIGHT = 44;
+  public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
+  protected updateVisibleItems(allAvailableHeight: number): void {
+    const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
+    this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
+
+    const currantPageIndex = this.pagesController.pages.indexOf(this.currentPage);
+    let visibleStart = 0;
+    if (currantPageIndex >= this.visibleItemsCount) {
+      visibleStart = this.items.length - currantPageIndex - 1 < this.visibleItemsCount / 2 ? this.items.length - this.visibleItemsCount : currantPageIndex - Math.floor(this.visibleItemsCount / 2);
+    }
+    this.visibleItemsStartIndex = visibleStart;
+  }
+  public get visibleItems() {
+    if (this.items.length <= this.visibleItemsCount) {
+      return this.items;
+    }
+    return this.items.slice(this.visibleItemsStartIndex, this.visibleItemsStartIndex + this.visibleItemsCount);
+  }
 }
