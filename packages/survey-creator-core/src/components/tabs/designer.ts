@@ -9,13 +9,13 @@ import { SurveyHelper } from "../../survey-helper";
 export const initialSettingsAllowShowEmptyTitleInDesignMode = settings.allowShowEmptyTitleInDesignMode;
 
 export class TabDesignerViewModel extends Base {
-  private widthUpdater: ComputedUpdater;
+  private cssUpdater: ComputedUpdater;
   private pagesControllerValue: PagesController;
 
   @property() newPage: PageModel;
   @property({ defaultValue: false }) showNewPage: boolean;
   @property() pageCount: number;
-  @property() withModifier: string;
+  @property() designerCss: string;
   @property() showPlaceholder: boolean;
   public creator: CreatorBase;
 
@@ -84,16 +84,19 @@ export class TabDesignerViewModel extends Base {
     }
     this.isUpdatingNewPage = false;
   }
+  private calculateDesignerCss() {
+    return this.survey.css.container + " " + this.survey.css.container + "--" + this.survey.calculatedWidthMode;
+  }
   public initSurvey() {
     if (!this.survey) return;
     this.showNewPage = false;
     this.newPage = undefined;
     this.checkNewPage(false);
-    this.widthUpdater && this.widthUpdater.dispose();
-    this.widthUpdater = new ComputedUpdater<string>(() => {
-      return this.survey.calculateWidthMode();
+    this.cssUpdater && this.cssUpdater.dispose();
+    this.cssUpdater = new ComputedUpdater<string>(() => {
+      return this.calculateDesignerCss();
     });
-    this.withModifier = <any>this.widthUpdater;
+    this.designerCss = <any>this.cssUpdater;
     this.pagesController.onSurveyChanged();
   }
   private checkNewPage(updatePageController: boolean) {
@@ -139,9 +142,6 @@ export class TabDesignerViewModel extends Base {
 
   public clickDesigner() {
     this.creator.selectedElement = this.creator.survey;
-  }
-  public getDesignerCss(): string {
-    return this.survey.css.container + " " + this.survey.css.container + "--" + this.withModifier;
   }
   public getRootCss(): string {
     let rootCss = this.survey.css.root;

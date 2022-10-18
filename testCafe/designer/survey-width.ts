@@ -1,4 +1,4 @@
-import { url, setJSON, getJSON } from "../helper";
+import { url, setJSON, getJSON, getToolboxItemByText } from "../helper";
 import { Selector } from "testcafe";
 const title = "Property Grid";
 
@@ -34,4 +34,19 @@ test("Change survey width", async (t) => {
 
   await t
     .expect(Selector(".sd-container-modern").clientWidth).eql(755);
+});
+
+test("Change survey width", async (t) => {
+  await t
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"));
+
+  await t
+    .expect(Selector(".svc-tab-designer_content .sd-container-modern").hasClass("sd-container-modern--static")).ok();
+
+  await t
+    .hover(getToolboxItemByText("Single-Choice Matrix"))
+    .click(getToolboxItemByText("Single-Choice Matrix"));
+  await t
+    .expect(Selector(".svc-tab-designer_content .sd-container-modern").hasClass("sd-container-modern--responsive")).ok();
 });
