@@ -15,7 +15,7 @@ test("Add New Question", async t => {
     .expect(getAddNewQuestionButton().visible).ok()
     .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok()
-    .expect(Selector('[class^="svc-question__content svc-question__content--selec"]').visible).ok()
+    .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .click(Selector(".svc-page__add-new-question > button.svc-page__question-type-selector"))
     .wait(100)
     .pressKey("p")
