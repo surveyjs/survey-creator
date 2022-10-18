@@ -722,12 +722,17 @@ export class QuestionToolbox
       isCopied: false,
       category: category
     });
-    const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;
     const action = this.getActionByItem(item);
-    if (index > -1) {
-      this.actions.splice(index, 0, action);
+    const existingAction = this.getActionById(item.id);
+    if(!!existingAction) {
+      this.actions.splice(this.actions.indexOf(existingAction), 1, action);
     } else {
-      this.actions.push(action);
+      const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;
+      if (index > -1) {
+        this.actions.splice(index, 0, action);
+      } else {
+        this.actions.push(action);
+      }
     }
   }
   private getQuestionJSON(question: any): any {
