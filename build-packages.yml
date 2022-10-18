@@ -707,6 +707,12 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - powershell: |
+      $env:GIT_REDIRECT_STDERR = '2>&1'
+      git config --global user.email "kurmanov.work@gmail.com"
+      git config --global user.name "dmitrykurmanov"
+    displayName: 'Set up git config'
 
   - task: DownloadBuildArtifacts@0
     inputs:
