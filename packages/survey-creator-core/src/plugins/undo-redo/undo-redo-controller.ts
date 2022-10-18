@@ -150,8 +150,8 @@ export class UndoRedoController extends Base {
     return items;
   }
   private updateUndeRedoActions() {
-    this.undoAction.active = this.undoRedoManager.canUndo();
-    this.redoAction.active = this.undoRedoManager.canRedo();
+    this.undoAction.enabled = this.undoRedoManager.canUndo();
+    this.redoAction.enabled = this.undoRedoManager.canRedo();
   }
 
   /**

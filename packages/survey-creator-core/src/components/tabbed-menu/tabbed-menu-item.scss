@@ -48,14 +48,14 @@
 
 #action-undo,
 #action-redo {
-  .sv-action-bar-item .sv-action-bar-item__icon use {
-    opacity: 0.25;
+  .sv-action-bar-item:disabled {
+      background-color: $background;
   }
 }
 
 #action-undo,
 #action-redo {
-  .sv-action-bar-item--active .sv-action-bar-item__icon use {
+  .sv-action-bar-item .sv-action-bar-item__icon use {
     fill: $foreground-light;
     opacity: 1;
   }

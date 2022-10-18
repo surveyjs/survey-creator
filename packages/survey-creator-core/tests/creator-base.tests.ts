@@ -870,6 +870,23 @@ test("canUndo/canRedo functions ", (): any => {
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
 });
 
+test("undo/redo actions enabled", (): any => {
+  const creator = new CreatorTester();
+  const undoAction = creator.toolbar.getActionById("action-undo");
+  const redoAction = creator.toolbar.getActionById("action-redo");
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.undo();
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeTruthy();
+  creator.redo();
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+});
+
 test("Check survey settings button ", (): any => {
   const creator = new CreatorTester();
   const item = creator.getActionBarItem("svd-settings");
