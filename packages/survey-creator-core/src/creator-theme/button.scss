@@ -1,7 +1,4 @@
 .svc-btn {
-  &:hover {
-    box-shadow: 0 0 0 2px $primary;
-  }
   display: flex;
   align-items: center;
   height: calcSize(7);
@@ -22,4 +19,10 @@
     justify-content: center;
     color: $primary;
   }
+}
+
+.svc-btn:hover,
+.svc-btn:focus {
+  box-shadow: 0 0 0 2px $primary;
+  outline: none;
 }
