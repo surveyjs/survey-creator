@@ -262,6 +262,7 @@ export class StringEditorViewModelBase extends Base {
     this.creator.selectFromStringEditor = true;
     event.target.parentElement.click();
     event.target.spellcheck = true;
+    event.target.setAttribute("tabindex", -1);
     this.focused = true;
     this.justFocused = true;
   }
@@ -297,6 +298,7 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onBlur(event: any): void {
+    event.target.removeAttribute("tabindex");
     if (this.blurredByEscape) {
       this.blurredByEscape = false;
       if (this.locString.hasHtml) {
