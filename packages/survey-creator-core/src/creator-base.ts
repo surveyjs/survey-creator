@@ -546,10 +546,10 @@ export class CreatorBase extends Base
    * Parameters:
    *
    * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.obj` - The instance of a survey element (question or panel) that users are configuring in the Property Grid.
+   * - `options.obj` - An instance of a survey element (question or panel) that users are configuring in the Property Grid.
    * - `options.property`- A `JsonObjectProperty` object with metadata about the property being edited.
-   * - `options.editor` - The property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
-   * - `options.popupEditor` - The editor inside the pop-up window.
+   * - `options.editor` - A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * - `options.popupEditor` - An editor inside the pop-up window.
    * - `options.popupModel` - A `PopupBaseViewModel` object that describes the pop-up window model. Use `options.popupModel.footerToolbar` to access the actions at the bottom of the window.
    */
   public onPropertyGridShowModal: Survey.Event<
