@@ -896,22 +896,7 @@ test("Check survey settings button ", (): any => {
   creator.selectElement(creator.survey);
   expect(item.active).toBeTruthy();
 });
-test("Check survey undo/redo buttons ", (): any => {
-  const creator = new CreatorTester();
-  const undoItem = creator.getActionBarItem("action-undo");
-  const redoItem = creator.getActionBarItem("action-redo");
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeFalsy();
-  creator.survey.title = "My title";
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-  creator.undo();
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeTruthy();
-  creator.redo();
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-});
+
 test("undo/redo add new page", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
