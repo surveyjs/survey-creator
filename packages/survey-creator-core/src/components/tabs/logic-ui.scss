@@ -36,6 +36,7 @@
 }
 .svc-logic-paneldynamic div.svc-logic-operator {
   height: calcSize(3);
+  box-sizing: content-box;
 }
 .svc-logic-paneldynamic .svc-logic-operator {
   -webkit-appearance: none;
