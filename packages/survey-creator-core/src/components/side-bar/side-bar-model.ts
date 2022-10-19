@@ -4,6 +4,7 @@ import { getLocString } from "../../editorLocalization";
 import { CreatorBase } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";
 import { ResizeManager } from "../../utils/resizer";
+import { notShortCircuitAnd } from "../../utils/utils";
 
 export class SidebarModel extends Base {
   public toolbar: AdaptiveActionContainer = new AdaptiveActionContainer();
@@ -75,8 +76,7 @@ export class SidebarModel extends Base {
         },
         locTitleName: "ed.showPanel",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const visible = !this.visible;
-          return this.hasVisibleTabs && visible;
+          return notShortCircuitAnd(this.hasVisibleTabs, !this.visible);
         }),
         showTitle: false
       });

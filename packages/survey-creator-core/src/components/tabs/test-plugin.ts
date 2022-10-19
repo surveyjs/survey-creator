@@ -1,3 +1,4 @@
+import { notShortCircuitAnd } from "../../utils/utils";
 import { Action, ComputedUpdater, createDropdownActionModel, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
@@ -128,7 +129,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
     const availableThemesToItems = [];
-    for(var i = 0; i < themeMapper.length; i ++) {
+    for (var i = 0; i < themeMapper.length; i++) {
       const item = themeMapper[i];
       const action = new Action({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
       (<any>action).value = item.name;
@@ -168,8 +169,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-desktop",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
         }),
       }, {
         items: deviceSelectorItems,
@@ -186,8 +186,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab)
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -226,7 +225,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.changeThemeModel = new ListModel(
         availableThemesToItems,
         (item: any) => {
-          if(!!this.model) {
+          if (!!this.model) {
             this.model.setTheme(item.value, themeMapper);
           }
           this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
@@ -255,8 +254,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         locTitleName: this.getThemeLocName(getStartThemeName()),
         needSeparator: true,
         visible: <any>new ComputedUpdater<boolean>(() => {
-          const showSimulatorInTestSurveyTab = this.creator.showSimulatorInTestSurveyTab;
-          return this.creator.activeTab === "test" && showSimulatorInTestSurveyTab;
+          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
         }),
         action: () => {
           this.changeThemePopupModel.toggleVisibility();

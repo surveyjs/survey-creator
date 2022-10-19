@@ -6,6 +6,7 @@ import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
+import { notShortCircuitAnd } from "../../utils/utils";
 
 // import template from "./test.html";
 
@@ -43,8 +44,8 @@ export class TestSurveyTabViewModel extends Base {
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
-        if(survey.firstPageIsStarted) {
-          if(val === survey.pages[0]) {
+        if (survey.firstPageIsStarted) {
+          if (val === survey.pages[0]) {
             survey.clear(false, true);
           } else {
             if (survey.state == "starting") {
@@ -194,11 +195,11 @@ export class TestSurveyTabViewModel extends Base {
       const currentIndex: number = this.survey.currentPageNo;
       const shift: number = isNext ? 1 : -1;
       let newIndex = currentIndex + shift;
-      if(this.survey.state === "starting" && isNext) {
+      if (this.survey.state === "starting" && isNext) {
         newIndex = 0;
       }
       let nearPage: PageModel = this.survey.visiblePages[newIndex];
-      if(!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
+      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
         && this.survey.pages.length > 0) {
         nearPage = this.survey.pages[0];
       }
@@ -209,9 +210,7 @@ export class TestSurveyTabViewModel extends Base {
 
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const pageListItems = this.pageListItems;
-        const isTestTabActive = this.surveyProvider.activeTab === "test";
-        return this.isRunning && isTestTabActive && pageListItems.length > 1;
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
       });
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
@@ -242,9 +241,7 @@ export class TestSurveyTabViewModel extends Base {
 
     if (this.nextPageAction) {
       this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        const pageListItems = this.pageListItems;
-        const isTestTabActive = this.surveyProvider.activeTab === "test";
-        return this.isRunning && isTestTabActive && pageListItems.length > 1;
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
@@ -300,9 +297,9 @@ export class TestSurveyTabViewModel extends Base {
     }
   }
   private updatePrevNextPageActionState() {
-    if(!this.prevPageAction || !this.survey) return;
+    if (!this.prevPageAction || !this.survey) return;
     const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
-    || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
+      || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
     this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
