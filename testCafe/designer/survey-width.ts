@@ -8,6 +8,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
 
 test("Change survey width", async (t) => {
   const json = {
+    "widthMode": "static",
     "pages": [
       {
         "name": "page1",
