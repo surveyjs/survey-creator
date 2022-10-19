@@ -27,17 +27,11 @@ fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
 });
 
 test(`check custom survey preview`, async t => {
-  const getPosition = ClientFunction(() =>
-    document.documentElement.innerHTML.indexOf(
-      "There is no visible page or question in the survey."
-    )
-  );
+  const emptySurveyPlaceholder = "The survey doesn't contain visible pages or questions.";
 
-  await t.click(
-    Selector(".svd-toolbar-button__title")
-      .child(0)
-      .withText("Survey Preview")
-  );
+  await t
+    .expect(Selector("div").withText(emptySurveyPlaceholder).visible).notOk()
 
-  assert.notEqual(await getPosition(), -1);
+    .click(Selector(".svd-toolbar-button__title span").withText("Survey Preview"))
+    .expect(Selector("div").withText(emptySurveyPlaceholder).visible).ok();
 });
