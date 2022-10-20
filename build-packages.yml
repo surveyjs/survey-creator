@@ -707,6 +707,12 @@ jobs:
     inputs:
       versionSpec: '14.x'
     displayName: 'Install Node.js'
+  
+  - powershell: |
+      $env:GIT_REDIRECT_STDERR = '2>&1'
+      git config --global user.email "kurmanov.work@gmail.com"
+      git config --global user.name "dmitrykurmanov"
+    displayName: 'Set up git config'
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -752,6 +758,11 @@ jobs:
       OverWrite: true
     displayName: 'copy survey-angular-ui in node_modules'
 
+  - powershell: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
+      npm run release
+    displayName: 'Release specific version survey-creator-angular'
+
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run build
@@ -776,3 +787,14 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run testcafe:ci
     displayName: 'Functional test CreatorV2 Angular'
+  
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/build'
+      targetFolder: $(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-angular
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/SurveyJSCreatorV2Build/build/survey-creator-angular'
+      ArtifactName: 'SurveyJSCreatorV2BuildAngular'
+      publishLocation: 'Container'  

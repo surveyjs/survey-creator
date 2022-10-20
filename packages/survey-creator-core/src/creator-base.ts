@@ -539,13 +539,18 @@ export class CreatorBase extends Base
     any
   > = new Survey.Event<(sender: CreatorBase, options: any) => any, any>();
   /**
-   * The event is called before a modal window in property editor is showing. For example fast entry for choices or modal condition editor
-   * You can use this event to modify, for example popup window footer by adding a new action buttons
-   *- options.obj the survey object that is currently editing in the property grid
-   *- options.property the property that the current property editor is editing
-   *- options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
-   *- options.popupEditor the editor inside the popup window. It has an editSurvey property that you can use
-   *- options.popupModel the popup window model. You can use options.popupModel.footerToolbar to change popup footer actions.
+   * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, and so on.
+   *
+   * Use this event to customize the pop-up window, for example, add custom action buttons.
+   *
+   * Parameters:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.obj` - An instance of a survey element (question or panel) that users are configuring in the Property Grid.
+   * - `options.property`- A `JsonObjectProperty` object with metadata about the property being edited.
+   * - `options.editor` - A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * - `options.popupEditor` - An editor inside the pop-up window.
+   * - `options.popupModel` - A `PopupBaseViewModel` object that describes the pop-up window model. Use `options.popupModel.footerToolbar` to access the actions at the bottom of the window.
    */
   public onPropertyGridShowModal: Survey.Event<
     (sender: CreatorBase, options: any) => any,

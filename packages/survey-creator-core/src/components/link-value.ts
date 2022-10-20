@@ -6,8 +6,8 @@ import "./link-value.scss";
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;
-  public linkSetButtonCssClasses = "svc-link-value-button svc-question-link__set-button";
-  public linkClearButtonCssClasses = "svc-question-link__clear-button";
+  @property({ defaultValue: "svc-link-value-button svc-question-link__set-button" }) public linkSetButtonCssClasses: string;
+  @property({ defaultValue: "svc-question-link__clear-button" }) public linkClearButtonCssClasses: string;
 
   @property({ defaultValue: false }) isSelected: boolean;
   @property() linkValueText: string;

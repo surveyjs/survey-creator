@@ -1,20 +1,21 @@
 {
   "name": "survey-creator-angular",
-  "version": "1.9.46",
-  "description": "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
+  "version": "1.9.54",
+  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
   "keywords": [
     "Survey",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
     "JavaScript",
-    "Bootstrap",
-    "Library",
-    "angular",
-    "angular-component"
+    "TypeScript"
   ],
-  "homepage": "https://surveyjs.io/",
-  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/surveyjs.git"
+    "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "typings": "survey-creator-angular.d.ts",
   "peerDependencies": {
