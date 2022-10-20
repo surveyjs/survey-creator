@@ -1,5 +1,5 @@
-import { QuestionRatingModel, Event, QuestionCheckboxModel } from "survey-core";
-import { MatrixCellWrapperViewModel } from "../src/components/matrix-cell";
+import { QuestionRatingModel, Event, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionSelectBase } from "survey-core";
+import { MatrixCellWrapperViewModel, MatrixCellWrapperEditSurvey } from "../src/components/matrix-cell";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 
@@ -107,4 +107,28 @@ test("Special choices editability", (): any => {
   expect(creator.isCanModifyProperty(q0.noneItem, "text")).toBeTruthy();
   q0.hasOther = true;
   expect(creator.isCanModifyProperty(q0.otherItem, "text")).toBeTruthy();
+});
+
+test("Edit matrix cell question", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "colum1", cellType: "radiogroup" }],
+        "choices": ["item1", "item2"],
+        "rows": ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  const question = matrix.visibleRows[0].cells[0].question;
+  const editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
+  const editQuestion = <QuestionSelectBase>editSurvey.survey.getAllQuestions()[0];
+  expect(editQuestion.getType()).toEqual("radiogroup");
+  editQuestion.choices = [1, 2, 3, 4];
+  editSurvey.apply();
+  expect(matrix.columns[0].choices).toHaveLength(4);
+  expect(matrix.columns[0].cellType).toEqual("radiogroup");
 });

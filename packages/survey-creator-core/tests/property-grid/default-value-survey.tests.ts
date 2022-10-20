@@ -75,7 +75,7 @@ test("Edit panel dynamic panel default value", () => {
   editor.apply();
   expect(question.defaultPanelValue).toEqual({ q1: 3, q2: 4 });
 });
-test("DefaultValueEditor, simple test", () => {
+test("DefaultValueEditor, simple test 2", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
@@ -160,4 +160,27 @@ test("Cells-Editor", () => {
     },
   };
   expect(matrix.cells.getJson()).toEqual(newValue);
+});
+test("DefaultValueEditor, question title", () => {
+  var question = new QuestionDropdownModel("q1");
+  var editor = new DefaultValueEditor(question, "defaultValue");
+  const editorQuestionJSON1 = editor["getQuestionJSON"]();
+  expect(editorQuestionJSON1.name).toEqual("question");
+  expect(editorQuestionJSON1.title).toEqual(question.name);
+  expect(editorQuestionJSON1).toEqual({
+    "name": "question",
+    "storeOthersAsComment": false,
+    "title": "q1",
+    "type": "dropdown",
+  });
+  question.title = "Title";
+  const editorQuestionJSON2 = editor["getQuestionJSON"]();
+  expect(editorQuestionJSON1.name).toEqual("question");
+  expect(editorQuestionJSON2.title).toEqual(question.title);
+  expect(editorQuestionJSON2).toEqual({
+    "name": "question",
+    "storeOthersAsComment": false,
+    "title": "Title",
+    "type": "dropdown",
+  });
 });

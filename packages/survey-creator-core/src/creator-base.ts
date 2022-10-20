@@ -675,7 +675,6 @@ export class CreatorBase extends Base
    * - `options.propertyName` - The name of the property.
    * - `options.value` - A property value entered by a user.
    * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
-   * - `options.doValidation` - Enable this field to validate the property value while the user enters it.
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */

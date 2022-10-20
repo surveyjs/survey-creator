@@ -6,12 +6,41 @@ import {
   MatrixDropdownColumn,
   property,
   QuestionMatrixDropdownModelBase,
+  QuestionSelectBase,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 
 import "./matrix-cell.scss";
+
+export class MatrixCellWrapperEditSurvey {
+  private surveyValue: SurveyModel;
+  constructor(creator: CreatorBase, private cellQuestion: Question) {
+    let questionJSON = cellQuestion.toJSON();
+    questionJSON.type = cellQuestion.getType();
+    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
+    this.survey.css = defaultV2Css;
+    this.survey.setDesignMode(true);
+    (<any>this.survey).isPopupEditorContent = true;
+    this.survey.showQuestionNumbers = "none";
+    this.survey.questionTitleLocation = "hidden";
+    this.survey.getAllQuestions()[0].setSurveyImpl(this.survey);
+  }
+  public get survey(): SurveyModel { return this.surveyValue; }
+  public apply(): void {
+    const matrix = <QuestionMatrixDropdownModelBase>this.cellQuestion.parentQuestion;
+    const column: MatrixDropdownColumn = matrix.getColumnByName(this.cellQuestion.name);
+    const columnJSON = column.toJSON();
+    const prevCellType = columnJSON["cellType"];
+    const questionJSON = this.survey.getAllQuestions()[0].toJSON();
+    if(!!prevCellType) {
+      questionJSON.cellType = prevCellType;
+    }
+    column.fromJSON(questionJSON);
+    matrix.onColumnCellTypeChanged(column);
+  }
+}
 
 export class MatrixCellWrapperViewModel extends Base {
   constructor(public creator: CreatorBase, public templateData: any, public question: Question, public row: any, public column: any) {
@@ -32,26 +61,15 @@ export class MatrixCellWrapperViewModel extends Base {
   }
 
   public editQuestion(model: MatrixCellWrapperViewModel) {
-    const column: MatrixDropdownColumn = (<any>model.question.parentQuestion).getColumnByName(model.question.name);
-    let questionJSON = model.question.toJSON();
-    questionJSON.type = model.question.getType();
-    const survey = model.creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
-    survey.css = defaultV2Css;
-    survey.setDesignMode(true);
-    (<any>survey).isPopupEditorContent = true;
-    survey.showQuestionNumbers = "none";
-    survey.questionTitleLocation = "hidden";
-    survey.getAllQuestions()[0].setSurveyImpl(survey);
+    const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question);
     settings.showModal(
       "svc-question-editor-content",
       {
-        survey: survey,
+        survey: editSurvey.survey,
         creator: this.creator
       },
       () => {
-        questionJSON = survey.getAllQuestions()[0].toJSON();
-        column.fromJSON(questionJSON);
-        (<QuestionMatrixDropdownModelBase>model.question.parentQuestion).onColumnCellTypeChanged(column);
+        editSurvey.apply();
         return true;
       },
       undefined, "svc-matrix-cell__popup", model.question.name,
