@@ -870,6 +870,23 @@ test("canUndo/canRedo functions ", (): any => {
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
 });
 
+test("undo/redo actions enabled", (): any => {
+  const creator = new CreatorTester();
+  const undoAction = creator.toolbar.getActionById("action-undo");
+  const redoAction = creator.toolbar.getActionById("action-redo");
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.undo();
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeTruthy();
+  creator.redo();
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+});
+
 test("Check survey settings button ", (): any => {
   const creator = new CreatorTester();
   const item = creator.getActionBarItem("svd-settings");
@@ -879,22 +896,7 @@ test("Check survey settings button ", (): any => {
   creator.selectElement(creator.survey);
   expect(item.active).toBeTruthy();
 });
-test("Check survey undo/redo buttons ", (): any => {
-  const creator = new CreatorTester();
-  const undoItem = creator.getActionBarItem("action-undo");
-  const redoItem = creator.getActionBarItem("action-redo");
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeFalsy();
-  creator.survey.title = "My title";
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-  creator.undo();
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeTruthy();
-  creator.redo();
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-});
+
 test("undo/redo add new page", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
