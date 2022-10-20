@@ -2095,6 +2095,42 @@ test("ConvertTo, show the current question type selected", (): any => {
   creator.convertCurrentQuestion("radiogroup");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
 });
+test("Has one item type in convertTo", (): any => {
+  CustomWidgetCollection.Instance.add({
+    name: "text",
+    title: "Single Input",
+    widgetIsLoaded: () => { return true; },
+    isFit: () => (question) => { return question.getType() === "text"; }
+  }, "customtype");
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" }
+    ]
+  };
+  let counter = 0;
+  creator.toolbox.itemNames.forEach(item => { if(item === "text") counter ++; });
+  expect(counter).toEqual(1);
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  const popup = questionModel.getActionById("convertTo").popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  counter = 0;
+  list.actions.forEach(item => {
+    if(item.id === "text") counter ++;
+  });
+  expect(counter).toEqual(1);
+  CustomWidgetCollection.Instance.clear();
+});
 
 test("ConverTo, change title of question item", (): any => {
   const creator = new CreatorTester();
