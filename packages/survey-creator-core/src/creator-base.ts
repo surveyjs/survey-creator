@@ -2622,6 +2622,7 @@ export class CreatorBase extends Base
    */
   public uploadFiles(
     files: File[],
+    question: Question,
     uploadingCallback: (status: string, data: any) => any
   ) {
     if (this.onUploadFile.isEmpty) {
@@ -2632,6 +2633,7 @@ export class CreatorBase extends Base
       fileReader.readAsDataURL(files[0]);
     } else {
       this.onUploadFile.fire(this, {
+        question: question,
         files: files || [],
         callback: uploadingCallback
       });

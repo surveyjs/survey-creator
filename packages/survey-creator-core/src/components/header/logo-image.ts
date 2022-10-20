@@ -18,7 +18,7 @@ export class LogoImageViewModel extends Base {
     return this.creator.survey;
   }
   private uploadFile(model: LogoImageViewModel, fileInput: HTMLInputElement, files: File[]) {
-    model.creator.uploadFiles(files, (_, link) => {
+    model.creator.uploadFiles(files, undefined, (_, link) => {
       model.creator.survey.logo = link;
       fileInput.value = "";
     });

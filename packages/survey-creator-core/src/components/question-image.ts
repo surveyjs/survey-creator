@@ -18,7 +18,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   chooseFile(model: QuestionImageAdornerViewModel) {
     const fileInput = <HTMLInputElement>model.questionRoot.getElementsByClassName("svc-choose-file-input")[0];
     model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
+      model.creator.uploadFiles(files, model.surveyElement as QuestionImageModel, (_, link) => {
         (<QuestionImageModel>model.surveyElement).imageLink = link;
       });
     });

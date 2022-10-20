@@ -275,3 +275,30 @@ test("QuestionImageAdornerViewModel read only mode", () => {
 
   expect(imageAdorner.allowEdit).toBeFalsy();
 });
+
+test("QuestionImageAdornerViewModel pass question into onUploadFile event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const rootElement = document.createElement("div");
+  rootElement.innerHTML = "<input type='file' class='svc-choose-file-input' />";
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(
+    creator,
+    question,
+    <any>{},
+    rootElement
+  );
+
+  let counter = 0;
+  creator.onUploadFile.add((s, o) => {
+    expect(o.question).toEqual(question);
+    counter++;
+  });
+  creator.onOpenFileChooser.add((s, o) => {
+    o.callback([{}]);
+  });
+  imageAdorner.chooseFile(imageAdorner);
+  expect(counter).toEqual(1);
+});
