@@ -275,3 +275,14 @@ test("Keep focus on question convert", async (t) => {
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
     .expect(Selector(".svc-question__content--selected #convertTo button").focused).ok();
 });
+
+test("Matrix column title - get focus on click, not tab", async (t) => {
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
+    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+  await t
+    .click(Selector(".svc-matrix-cell").withText("Column 1"), { offsetX: 5, offsetY: 5 })
+    .expect(Selector(".svc-matrix-cell").withText("Column 1").focused).ok()
+    .pressKey("tab tab")
+    .expect(Selector(".sv-string-editor").withText("Column 2").focused).ok();
+});
