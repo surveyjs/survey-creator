@@ -1,40 +1,40 @@
 {
-    "name": "survey-creator",
-    "homepage": "https://surveyjs.io/Overview/Survey-Creator",
-    "license": "https://surveyjs.io/Licenses#SurveyCreator",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/surveyjs/survey-creator.git"
-    },
-    "private": true,
-    "version": "0.0.1",
-    "scripts": {
-        "bootstrap": "lerna bootstrap",
-        "build": "lerna run build",
-        "test": "lerna run test",
-        "testcafe": "lerna run testcafe",
-        "testcafe:ci": "lerna run testcafe:ci",
-        "testcafe:file": "lerna run testcafe:file",
-        "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
-        "testcafe:dev": "testcafe chrome ./testCafe/designer/drag-drop.js --reporter minimal --selector-timeout 1500",
-        "lint": "eslint ./packages --quiet && eslint ./testCafe --quiet && eslint ./visualRegressionTests --quiet",
-        "pre-push-check": "npm run lint && npm run test",
-        "prepare": "husky install"
-    },
-    "devDependencies": {
-        "@types/jest": "^26.0.23",
-        "@typescript-eslint/eslint-plugin": "^4.31.0",
-        "@typescript-eslint/parser": "^4.31.0",
-        "concurrently": "^6.2.0",
-        "devextreme-screenshot-comparer": "^2.0.11",
-        "eslint": "^7.32.0",
-        "eslint-cli": "^1.1.1",
-        "eslint-plugin-react": "^7.25.1",
-        "eslint-plugin-surveyjs": "file:eslint-surveyjs",
-        "husky": "^7.0.4",
-        "lerna": "^3.22.1",
-        "testcafe": "1.18.4",
-        "testcafe-reporter-dashboard": "^0.2.4-rc.1",
-        "typescript": "4.4.4"
-    }
+  "name": "survey-creator",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "testcafe": "lerna run testcafe",
+    "testcafe:ci": "lerna run testcafe:ci",
+    "testcafe:file": "lerna run testcafe:file",
+    "dev": "concurrently \"npm run dev --prefix ../survey-library\" \"http-server -p 7777 --silent\" \"npm run watch:dev --prefix packages/survey-creator-core\" \"npm run watch:prod --prefix packages/survey-creator-core\" \"npm run watch:dev --prefix packages/survey-creator-knockout\" \"npm run watch:prod --prefix packages/survey-creator-knockout\" \"npm run watch:dev --prefix packages/survey-creator-react\" \"npm run watch:prod --prefix packages/survey-creator-react\" ",
+    "testcafe:dev": "testcafe chrome ./testCafe/designer/drag-drop.js --reporter minimal --selector-timeout 1500",
+    "lint": "eslint ./packages --quiet && eslint ./testCafe --quiet && eslint ./visualRegressionTests --quiet",
+    "pre-push-check": "npm run lint && npm run test",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "concurrently": "^7",
+    "devextreme-screenshot-comparer": "^2.0.11",
+    "eslint": "^7.32.0",
+    "eslint-cli": "^1.1.1",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-surveyjs": "file:eslint-surveyjs",
+    "husky": "^7.0.4",
+    "lerna": "^3.22.1",
+    "testcafe": "1.18.4",
+    "testcafe-reporter-dashboard": "^0.2.4-rc.1",
+    "typescript": "4.4.4"
+  }
 }
