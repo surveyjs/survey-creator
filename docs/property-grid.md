@@ -24,6 +24,7 @@ Property Grid displays the properties of a selected survey element and allows a 
     - [`maxLength`](#maxlength)
     - [`minValue` and `maxValue`](#minvalue-and-maxvalue)
     - [`dependsOn`](#dependson)
+    - [`showMode`](#showMode)
     - [`onGetValue`](#ongetvalue)
     - [`onSetValue`](#onsetvalue)
     - [`onExecuteExpression`](#onexecuteexpression)
@@ -413,6 +414,10 @@ Survey.Serializer.addProperty("survey", {
   }
 });
 ```
+
+#### `showMode`
+
+This property is available for custom properties of `itemvalue` elements. Set `showMode` to `form` to edit custom properties in a detail form.
 
 #### `onGetValue`
 
