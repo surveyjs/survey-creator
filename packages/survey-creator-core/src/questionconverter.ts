@@ -18,14 +18,12 @@ export class QuestionConverter {
       ? getAllQuestionTypes(className, includeCurrent)
       : QuestionConverter.convertInfo[className];
     if (!res) return [];
-    if (
-      !!availableTypes &&
-      Array.isArray(availableTypes) &&
-      availableTypes.length > 0
+    if (Array.isArray(availableTypes) && availableTypes.length > 0
     ) {
-      res = res
-        .filter((item) => availableTypes.indexOf(item) >= 0)
-        .sort((a, b) => availableTypes.indexOf(a) - availableTypes.indexOf(b));
+      const types = [];
+      res.forEach(item => types.push(item));
+      res = availableTypes
+        .filter((item) => types.indexOf(item) >= 0);
     }
     return !!res ? res : [];
   }

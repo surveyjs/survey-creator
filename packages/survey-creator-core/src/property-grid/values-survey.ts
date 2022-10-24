@@ -25,6 +25,7 @@ export class DefaultValueEditor extends PropertyEditorSetupValue {
   protected getQuestionJSON(): any {
     var json = this.editQuestion.toJSON();
     json.name = "question";
+    json.title = json.title || this.editQuestion.name;
     json.type = this.editQuestion.getType();
     if (json.type == "expression") {
       json.type = "text";

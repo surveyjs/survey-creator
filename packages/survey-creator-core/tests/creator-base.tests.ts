@@ -870,6 +870,23 @@ test("canUndo/canRedo functions ", (): any => {
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
 });
 
+test("undo/redo actions enabled", (): any => {
+  const creator = new CreatorTester();
+  const undoAction = creator.toolbar.getActionById("action-undo");
+  const redoAction = creator.toolbar.getActionById("action-redo");
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.survey.title = "My title";
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+  creator.undo();
+  expect(undoAction.enabled).toBeFalsy();
+  expect(redoAction.enabled).toBeTruthy();
+  creator.redo();
+  expect(undoAction.enabled).toBeTruthy();
+  expect(redoAction.enabled).toBeFalsy();
+});
+
 test("Check survey settings button ", (): any => {
   const creator = new CreatorTester();
   const item = creator.getActionBarItem("svd-settings");
@@ -879,22 +896,7 @@ test("Check survey settings button ", (): any => {
   creator.selectElement(creator.survey);
   expect(item.active).toBeTruthy();
 });
-test("Check survey undo/redo buttons ", (): any => {
-  const creator = new CreatorTester();
-  const undoItem = creator.getActionBarItem("action-undo");
-  const redoItem = creator.getActionBarItem("action-redo");
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeFalsy();
-  creator.survey.title = "My title";
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-  creator.undo();
-  expect(undoItem.active).toBeFalsy();
-  expect(redoItem.active).toBeTruthy();
-  creator.redo();
-  expect(undoItem.active).toBeTruthy();
-  expect(redoItem.active).toBeFalsy();
-});
+
 test("undo/redo add new page", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -2094,6 +2096,42 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(list.selectedItem.id).toEqual("radiogroup");
   creator.convertCurrentQuestion("radiogroup");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
+});
+test("Has one item type in convertTo", (): any => {
+  CustomWidgetCollection.Instance.add({
+    name: "text",
+    title: "Single Input",
+    widgetIsLoaded: () => { return true; },
+    isFit: () => (question) => { return question.getType() === "text"; }
+  }, "customtype");
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" }
+    ]
+  };
+  let counter = 0;
+  creator.toolbox.itemNames.forEach(item => { if(item === "text") counter ++; });
+  expect(counter).toEqual(1);
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  const popup = questionModel.getActionById("convertTo").popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  counter = 0;
+  list.actions.forEach(item => {
+    if(item.id === "text") counter ++;
+  });
+  expect(counter).toEqual(1);
+  CustomWidgetCollection.Instance.clear();
 });
 
 test("ConverTo, change title of question item", (): any => {

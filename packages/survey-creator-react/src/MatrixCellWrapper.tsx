@@ -58,6 +58,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     return (
       <div
         className={"svc-matrix-cell"}
+        tabIndex={-1}
         key={this.props.element.key}
         onClick={(e: any) => !this.props.question && this.model.selectContext(this.model, e)}
         onMouseOut={e => this.model.hover(e.nativeEvent, e.currentTarget)}
