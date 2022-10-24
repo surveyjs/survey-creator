@@ -2,16 +2,12 @@
     <div class="svd-test-results__header">
         <div class="svd-test-results__header-text" data-bind="text: surveyResultsText"></div>
         <div class="svd-test-results__header-types">
-            <!-- ko component: {
-                name: 'svc-action-button',
-                params: { text: $data.getLocString('ed.surveyResultsTable'), click: selectTableClick, disabled: false, selected: isTableSelected }
-            } -->
-            <!-- /ko --> 
-            <!-- ko component: {
-                name: 'svc-action-button',
-                params: { text: $data.getLocString('ed.surveyResultsJson'), click: selectJsonClick, disabled: false, selected: isJsonSelected }
-            } -->
-            <!-- /ko --> 
+            <svc-action-button
+                params="text: surveyResultsTableText, click: selectTableClick, disabled: false, selected: isTableSelected">
+            </svc-action-button>
+            <svc-action-button
+                params="text: surveyResultsJsonText, click: selectJsonClick, disabled: false, selected: isJsonSelected">
+            </svc-action-button>
         </div>
     </div>
     <div class="svd-test-results__text svd-light-bg-color" data-bind="visible: resultViewType === 'text'">
