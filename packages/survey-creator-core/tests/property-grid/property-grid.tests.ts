@@ -2755,3 +2755,10 @@ test("Image picker question imageHeight placeholder", () => {
   expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
   curStrings.pe.auto = "auto";
 });
+test("Add tab after general for survey object", () => {
+  Serializer.addProperty("survey", { name: "region", category: "geoLocation", categoryIndex: 10 });
+  const survey = new SurveyModel();
+  let propertyGrid = new PropertyGridModelTester(survey);
+  expect(propertyGrid.survey.getAllPanels()[1].name).toEqual("geoLocation");
+  Serializer.removeProperty("survey", "region");
+});
