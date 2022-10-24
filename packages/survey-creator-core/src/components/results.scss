@@ -23,10 +23,7 @@
     }
     .svd-test-results__header-types {
       display: flex;
-
-      .svc-action-button:first-of-type {
-        margin-right: calcSize(1);
-      }
+      gap: calcSize(1);
     }
   }
 
