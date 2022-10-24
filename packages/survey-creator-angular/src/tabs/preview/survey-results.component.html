@@ -3,8 +3,8 @@
   <div class="svd-test-results__header">
       <div class="svd-test-results__header-text">{{model.surveyResultsText}}</div>
       <div class="svd-test-results__header-types">
-        <svc-action-button [text]="model.getLocString('ed.surveyResultsTable')" [click]="model.selectTableClick" [disabled]="false" [selected]="model.isTableSelected"></svc-action-button>
-        <svc-action-button [text]="model.getLocString('ed.surveyResultsJson')" [click]="model.selectJsonClick" [disabled]="false" [selected]="model.isJsonSelected"></svc-action-button>
+        <svc-action-button [text]="model.surveyResultsTableText" [click]="model.selectTableClick" [disabled]="false" [selected]="model.isTableSelected"></svc-action-button>
+        <svc-action-button [text]="model.surveyResultsJsonText" [click]="model.selectJsonClick" [disabled]="false" [selected]="model.isJsonSelected"></svc-action-button>
       </div>
   </div>
   <div class="svd-test-results__text svd-light-bg-color" [visible]="model.resultViewType === 'text'">
