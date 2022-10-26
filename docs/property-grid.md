@@ -288,30 +288,31 @@ A string value that specifies a category in which to display the property. If `c
 
 The following table describes predefined categories:
 
-| `category` | Element types that have the category | `visibleIndex` |
-| ---------- | ------------------------------------ | -------------- |
-| `"general"` | Question, Panel, Page, Survey | -1 |
-| `"logic"` | Question, Panel, Page, Survey | 100 |
-| `"layout"` | Question, Panel, Page | 200 |
-| `"data"` | Question | 300 |
-| `"validation"` | Question, Panel, Page | 400 |
-| `"navigation"` | Survey | 100 |
-| `"question"` | Survey | 200 |
-| `"logic"` | Survey | 300 |
-| `"data"` | Survey | 400 |
-| `"validation"` | Survey | 500 |
-| `"showOnCompleted"` | Survey | 600 |
-| `"timer"` | Survey | 700 |
-| `"columns"` | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 10 |
-| `"rows"` | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 11 |
-| `"choices"` | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 12 |
-| `"columns"` | Matrix | 10 |
-| `"rows"` | Matrix | 11 |
-| `"cells"` | Matrix | 12 |
-| `"items"` | Multiple Text | 10 |
-| `"rateValues"` | Rating | 10 |
-| `"choices"` | SelectBase (Dropdown, Checkbox, Radiogroup) | 10 |
-| `"choicesByUrl"` | SelectBase (Dropdown, Checkbox, Radiogroup) | 11 |
+| `category`          | Element types that have the category                 | `categoryIndex` |
+| ------------------- | ---------------------------------------------------- | --------------- |
+| `"general"`         | Question, Panel, Page, Survey                        | -1              |
+| `"logic"`           | Question, Panel, Page, Survey                        | 100             |
+| `"layout"`          | Question, Panel, Page                                | 200             |
+| `"data"`            | Question                                             | 300             |
+| `"validation"`      | Question, Panel, Page                                | 400             |
+| `"logo"`            | Survey                                               | 50              |
+| `"navigation"`      | Survey                                               | 100             |
+| `"question"`        | Survey                                               | 200             |
+| `"logic"`           | Survey                                               | 300             |
+| `"data"`            | Survey                                               | 400             |
+| `"validation"`      | Survey                                               | 500             |
+| `"showOnCompleted"` | Survey                                               | 600             |
+| `"timer"`           | Survey                                               | 700             |
+| `"columns"`         | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 10              |
+| `"rows"`            | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 11              |
+| `"choices"`         | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 12              |
+| `"columns"`         | Matrix                                               | 10              |
+| `"rows"`            | Matrix                                               | 11              |
+| `"cells"`           | Matrix                                               | 12              |
+| `"items"`           | Multiple Text                                        | 10              |
+| `"rateValues"`      | Rating                                               | 10              |
+| `"choices"`         | SelectBase (Dropdown, Checkbox, Radiogroup)          | 10              |
+| `"choicesByUrl"`    | SelectBase (Dropdown, Checkbox, Radiogroup)          | 11              |
 
 #### `categoryIndex`
 

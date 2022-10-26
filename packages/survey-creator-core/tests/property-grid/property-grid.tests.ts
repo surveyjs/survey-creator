@@ -2259,11 +2259,12 @@ test("DependedOn properties, dynamic choices", () => {
   });
   function getChoicesByEntity(obj: any): Array<any> {
     var entity = !!obj ? obj["targetEntity"] : null;
-    var choices = [];
+    var choices = new Array<any>();
     if (!entity) return choices;
+    choices.push({ value: null });
     choices.push({ value: "entity" });
-    choices.push({ value: entity + " 1", text: entity + " 1" });
-    choices.push({ value: entity + " 2", text: entity + " 2" });
+    choices.push({ value: entity + "1", text: entity + " 1" });
+    choices.push({ value: entity + "2", text: entity + " 2" });
     return choices;
   }
 
@@ -2277,7 +2278,13 @@ test("DependedOn properties, dynamic choices", () => {
   expect(targetQuestion.visibleChoices).toHaveLength(0);
   entityQuestion.value = "Account";
   expect(targetQuestion.visibleChoices).toHaveLength(3);
-  expect(targetQuestion.visibleChoices[1].value).toEqual("Account 1");
+  expect(targetQuestion.allowClear).toBeTruthy();
+  expect(targetQuestion.visibleChoices[1].value).toEqual("Account1");
+  targetQuestion.value = "Account2";
+  entityQuestion.value = "Product";
+  expect(targetQuestion.visibleChoices).toHaveLength(3);
+  expect(targetQuestion.visibleChoices[1].value).toEqual("Product1");
+  expect(targetQuestion.value).toBeFalsy();
 
   Serializer.removeProperty("question", "targetEntity");
   Serializer.removeProperty("question", "targetField");
@@ -2345,7 +2352,7 @@ test("DependedOn an array property", () => {
   Serializer.removeProperty("dropdown", "custProp");
 });
 
-test("showOptionsCaption for dropdown with empty choice item", () => {
+test("showOptionsCaption/allowClear for dropdown with empty choice item", () => {
   Serializer.addProperty("question", {
     name: "test",
     choices: function (obj) {
@@ -2363,6 +2370,7 @@ test("showOptionsCaption for dropdown with empty choice item", () => {
   expect(testQuestion.getType()).toEqual("dropdown");
   expect(testQuestion.choices).toHaveLength(10);
   expect(testQuestion.showOptionsCaption).toBeTruthy();
+  expect(testQuestion.allowClear).toBeTruthy();
   expect(testQuestion.optionsCaption).toEqual("Empty value");
 
   Serializer.removeProperty("question", "test");
@@ -2754,4 +2762,11 @@ test("Image picker question imageHeight placeholder", () => {
   );
   expect(imageHeightQuestion.placeholder).toEqual("Auto 2");
   curStrings.pe.auto = "auto";
+});
+test("Add tab after general for survey object", () => {
+  Serializer.addProperty("survey", { name: "region", category: "geoLocation", categoryIndex: 10 });
+  const survey = new SurveyModel();
+  let propertyGrid = new PropertyGridModelTester(survey);
+  expect(propertyGrid.survey.getAllPanels()[1].name).toEqual("geoLocation");
+  Serializer.removeProperty("survey", "region");
 });

@@ -603,6 +603,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "logoFit", tab: "logo" }
       ],
       tabs: [
+        { name: "logo", index: 50 },
         { name: "navigation", index: 100 },
         { name: "question", index: 200 },
         { name: "pages", index: 250 },

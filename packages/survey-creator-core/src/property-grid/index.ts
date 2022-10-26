@@ -1349,15 +1349,21 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       choices: choices,
       showOptionsCaption: false
     };
-    var emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
-    if (!!emptyValueItem) {
-      json.showOptionsCaption = true;
-      json.optionsCaption = emptyValueItem.text;
-    }
+    this.updateObjBasedOnEmptyValueItem(prop, choices, json);
     return json;
   }
   private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
     return prop.getChoices(obj, (choices: any) => {});
+  }
+  private updateObjBasedOnEmptyValueItem(prop: JsonObjectProperty, choices: Array<any>, objOrJson: any): void {
+    const emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
+    if (!!emptyValueItem) {
+      objOrJson.showOptionsCaption = true;
+      objOrJson.allowClear = true;
+      if(emptyValueItem.text) {
+        objOrJson.optionsCaption = emptyValueItem.text;
+      }
+    }
   }
   protected get canRenderAsButtonGroup(): boolean {
     return creatorSettings.propertyGrid.useButtonGroup;
@@ -1394,8 +1400,13 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     obj: Base,
     prop: JsonObjectProperty,
     question: Question
-  ) {
+  ): void {
     this.setChoices(obj, question, prop);
+    if(!question.isEmpty()) {
+      if(!ItemValue.getItemByValue((<QuestionSelectBase>question).choices, question.value)) {
+        question.clearValue();
+      }
+    }
   }
   private setChoicesCore(
     question: Question,
@@ -1404,6 +1415,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
   ) {
     if (!propChoices || !Array.isArray(propChoices) || propChoices.length == 0)
       return;
+    this.updateObjBasedOnEmptyValueItem(prop, propChoices, question);
     (<QuestionSelectBase>question).choices = this.choicesFromPropChoices(prop, propChoices);
   }
   private isLocaleProp(prop: JsonObjectProperty): boolean {
@@ -1450,6 +1462,7 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
       this.setChoicesCore(question, prop, choices);
     });
     this.setChoicesCore(question, prop, propChoices);
+
   }
   private getEmptyJsonItemValue(
     prop: JsonObjectProperty,

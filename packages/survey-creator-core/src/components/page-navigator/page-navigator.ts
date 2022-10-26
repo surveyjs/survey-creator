@@ -191,12 +191,15 @@ export class PageNavigatorViewModel extends Base {
       }
       if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
         if (navigator.visible && !!navigator._itemsContainer) {
-          const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
-          navigator._itemsContainer.children[0].children[1].className = cssClass;
-          setTimeout(() => {
-            navigator._itemsContainer.children[0].children[1].className = "";
-            navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
-          }, 250);
+          const itemsHolder = navigator._itemsContainer.querySelectorAll(".svc-page-navigator__selector + div")[0];
+          if(!!itemsHolder) {
+            const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
+            itemsHolder.className = cssClass;
+            setTimeout(() => {
+              itemsHolder.className = "";
+              navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
+            }, 250);
+          }
         } else {
           navigator.visibleItemsStartIndex = newVisibleItemsStartIndex;
         }
@@ -220,7 +223,7 @@ export class PageNavigatorViewModel extends Base {
     this.stopItemsContainerHeightObserver();
     this._itemsContainer = itemsContainer;
     this._resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[], observer: ResizeObserver) => this.updateVisibleItems(entries[0].contentBoxSize[0].blockSize));
-    this._resizeObserver.observe(itemsContainer)
+    this._resizeObserver.observe(itemsContainer);
   }
   public static PAGE_NAVIGATION_MENU_ITEM_HEIGHT = 44;
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
