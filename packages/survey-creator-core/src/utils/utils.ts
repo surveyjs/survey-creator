@@ -283,3 +283,6 @@ export function capitalize(str: string): string {
   });
   return str;
 }
+export function notShortCircuitAnd(...args: Array<boolean>): boolean {
+  return args.every((val) => val === true);
+}

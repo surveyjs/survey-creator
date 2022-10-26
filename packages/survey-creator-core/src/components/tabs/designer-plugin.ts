@@ -1,3 +1,4 @@
+import { notShortCircuitAnd } from "../../utils/utils";
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { PropertyGridModel } from "../../property-grid";
@@ -85,7 +86,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     return true;
   }
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
-    if(!!this.model) {
+    if (!!this.model) {
       this.model.onDesignerSurveyPropertyChanged(obj, propName);
     }
   }
@@ -108,9 +109,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       },
       active: <any>new ComputedUpdater<boolean>(() => this.creator.sidebar.activeTab === "toolbox"),
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const toolboxLocationSidebar = this.creator.toolboxLocation === "sidebar";
-        const toolboxVisibility = this.creator.showToolbox;
-        return this.creator.activeTab === "designer" && toolboxVisibility && toolboxLocationSidebar;
+        return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showToolbox, this.creator.toolboxLocation === "sidebar");
       }),
       title: "Toolbox",
       showTitle: false
@@ -120,15 +119,13 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       id: "svd-settings",
       iconName: "icon-settings",
       needSeparator: <any>new ComputedUpdater<boolean>(() => {
-        const toolboxLocationSidebar = this.creator.toolboxLocation === "sidebar";
-        return !this.creator.isMobileView && !toolboxLocationSidebar;
+        return notShortCircuitAnd(this.creator.toolboxLocation !== "sidebar", !this.creator.isMobileView);
       }),
       action: () => {
         this.selectSurvey();
       },
       active: <any>new ComputedUpdater<boolean>(() => {
-        const settingTabIsActive = this.creator.sidebar.activeTab === this.propertyGridTab.id;
-        return this.isSurveySelected && settingTabIsActive;
+        return notShortCircuitAnd(this.creator.sidebar.activeTab === this.propertyGridTab.id, this.isSurveySelected);
       }),
       visible: this.createVisibleUpdater(),
       title: "Settings",
@@ -142,8 +139,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       active: false,
       enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {
-        const isDesignerTabActive = this.creator.activeTab === "designer";
-        return this.creator.showSaveButton && isDesignerTabActive;
+        return notShortCircuitAnd(this.creator.activeTab === "designer", this.creator.showSaveButton);
       }),
       locTitleName: "ed.saveSurvey",
       locTooltipName: "ed.saveSurveyTooltip",

@@ -75,7 +75,7 @@
           },
           "configurations": {
             "production": {
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
