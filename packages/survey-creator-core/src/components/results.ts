@@ -74,6 +74,12 @@ export class SurveyResultsModel extends Base {
   public get surveyResultsText() {
     return this.getLocString("ed.surveyResults");
   }
+  public get surveyResultsTableText() {
+    return this.getLocString("ed.surveyResultsTable");
+  }
+  public get surveyResultsJsonText() {
+    return this.getLocString("ed.surveyResultsJson");
+  }
   public get resultsTitle() {
     return this.getLocString("ed.resultsTitle");
   }

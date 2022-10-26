@@ -36,9 +36,9 @@ export const screenshotComparerOptions = {
   attemptTimeout: 500,
   looksSameComparisonOptions: {
     strict: false,
-    tolerance: 8,
+    tolerance: 1,
     ignoreAntialiasing: true,
-    antialiasingTolerance: 8,
+    antialiasingTolerance: 3,
     ignoreCaret: true,
   },
   textComparisonOptions: {

@@ -35,13 +35,13 @@ export class SurveyResults extends CreatorModelElement<
           <div className="svd-test-results__header-types">
             <ActionButton
               click={() => this.model.selectTableClick()}
-              text={this.model.getLocString("ed.surveyResultsTable")}
+              text={this.model.surveyResultsTableText}
               selected={this.model.isTableSelected}
               disabled={false}
             ></ActionButton>
             <ActionButton
               click={() => this.model.selectJsonClick()}
-              text={this.model.getLocString("ed.surveyResultsJson")}
+              text={this.model.surveyResultsJsonText}
               selected={this.model.isJsonSelected}
               disabled={false}
             ></ActionButton>
