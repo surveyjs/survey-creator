@@ -28,14 +28,14 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     model.creator.chooseFiles(fileInput, (files: File[]) => {
-      model.creator.uploadFiles(files, (_, link) => {
+      model.creator.uploadFiles(files, model.question, (_, link) => {
         model.item.imageLink = link;
       });
     });
   }
 
   public uploadFiles(files) {
-    this.creator.uploadFiles(files, (_, link) => {
+    this.creator.uploadFiles(files, this.question, (_, link) => {
       const itemValue = <ImageItemValue>this.creator.createNewItemValue(this.question);
       itemValue.imageLink = link;
       this.question.choices.push(itemValue);
