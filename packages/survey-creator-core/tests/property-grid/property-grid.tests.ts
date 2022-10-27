@@ -2732,7 +2732,7 @@ test("Use validation in custom property editor", (): any => {
 test("autoComplate property", () => {
   const question = new QuestionTextModel("q1");
   const propertyGrid = new PropertyGridModelTester(question);
-  const autoCompleteQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("autoComplete");
+  const autoCompleteQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("autocomplete");
   expect(autoCompleteQuestion.choices).toBeTruthy();
   expect(Array.isArray(autoCompleteQuestion.choices)).toBeTruthy();
   expect(autoCompleteQuestion.choices.length > 10).toBeTruthy();

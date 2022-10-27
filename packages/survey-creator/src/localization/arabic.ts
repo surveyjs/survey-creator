@@ -825,7 +825,7 @@ var arabicStrings = {
     showClearButton: "إظهار زر الإزالة",
     contentMode: "نمط عرض المحتوى",
     imageFit: "إحتواء الصورة",
-    autoComplete: "الإكمال التلقائي",
+    autocomplete: "الإكمال التلقائي",
     min: "الحد الأدنى",
     max: "الحد الأقصى",
     minValueExpression: "الحد الأدنى للعملية حسابية",

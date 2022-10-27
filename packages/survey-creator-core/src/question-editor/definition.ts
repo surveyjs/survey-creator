@@ -222,7 +222,7 @@ export class SurveyQuestionEditorDefinition {
     dropdown: {
       properties: [
         "placeholder",
-        "autoComplete",
+        "autocomplete",
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
@@ -281,7 +281,7 @@ export class SurveyQuestionEditorDefinition {
         "max",
         "step",
         "placeholder",
-        "autoComplete",
+        "autocomplete",
         "dataList",
         { name: "minValueExpression", tab: "logic" },
         { name: "maxValueExpression", tab: "logic" },

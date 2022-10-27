@@ -735,7 +735,7 @@ export var skStrings = {
     showClearButton: "zobraziť tlačidlo Vymazať",
     contentMode: "režim obsahu",
     imageFit: "umiestnenie obrázka",
-    autoComplete: "automatické dokončenie",
+    autocomplete: "automatické dokončenie",
     min: "min.",
     max: "max.",
     minValueExpression: "výraz minimálnej hodnoty",

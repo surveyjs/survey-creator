@@ -479,7 +479,7 @@ var italianTranslation = {
     loadingHtml:
       "Markup da mostrare durante il caricamento del modello del questionario",
     commentText: "Titolo dell'Area commento",
-    autoComplete: "Tipo di completamento automatico",
+    autocomplete: "Tipo di completamento automatico",
     labelTrue: 'Etichetta "Vero"',
     labelFalse: 'Etichetta "Falso"',
     allowClear: "Mostra il tasto Cancella",
@@ -826,7 +826,7 @@ var italianTranslation = {
       "Per ulteriori informazioni, consultare la descrizione dell'attributo [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
     columnColCount:
       "Applicabile solo ai tipi di cella Opzione multipla e Casella di controllo.",
-    autoComplete:
+    autocomplete:
       "Per ulteriori informazioni, consultare la descrizione dell'attributo [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     valueName:
       "Se non si imposta questa proprietà, la risposta sarà memorizzata in un campo specificato dalla proprietà Nome.",

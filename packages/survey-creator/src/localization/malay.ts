@@ -735,7 +735,7 @@ export var msStrings = {
     showClearButton: "Tunjukkan butang kosongkan",
     contentMode: "Mod kandungan",
     imageFit: "Muat imej",
-    autoComplete: "Auto lengkap",
+    autocomplete: "Auto lengkap",
     min: "min",
     max: "maks",
     minValueExpression: "Ekspresi nilai min",

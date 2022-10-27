@@ -901,7 +901,7 @@ var germanTranslation = {
     showClearButton: "Button anzeigen, der es erlaubt, die Auswahl zu leeren",
     contentMode: "Inhaltsmodus",
     imageFit: "Passform des Bildes",
-    autoComplete: "Automatisch abschließen",
+    autocomplete: "Automatisch abschließen",
     min: "Minimaler Wert",
     max: "Maximaler Wert",
     minValueExpression: "Ausdruck für minimalen Wert",
