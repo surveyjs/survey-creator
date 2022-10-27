@@ -8,6 +8,7 @@ survey-creator,
   position: relative;
   z-index: 0;
 
+  -webkit-font-smoothing: antialiased;
   * {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
