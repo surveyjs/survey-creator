@@ -403,7 +403,7 @@ Survey.Serializer.addProperty("survey", {
         const response = JSON.parse(xhr.response);
         const result = [];
         // Make the property nullable
-        res.push({ value: null });
+        result.push({ value: null });
         response.forEach(item => {
           result.push({ value: item.cioc, text: item.name });
         });
