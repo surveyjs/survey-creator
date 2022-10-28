@@ -649,7 +649,7 @@ var germanTranslation = {
     validators: "Validierungen",
     titleLocation: "Position des Titels",
     descriptionLocation: "Position der Beschreibung",
-    useDisplayValuesInTitle: "Verwende Anzeigewerte im Titel",
+    useDisplayValuesInDynamicTexts: "Verwende Anzeigewerte im Titel",
 
     hasComment: "Kommentare erlaubt?",
     showOtherItem: "Sonstiges auswählbar?",

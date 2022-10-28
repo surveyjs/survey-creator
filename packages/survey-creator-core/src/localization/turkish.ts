@@ -624,7 +624,7 @@ export var turkishStrings = {
     descriptionLocation: "Açıklama konumu",
     minWidth: "Minimum genişlik",
     maxWidth: "Maksimum genişlik",
-    useDisplayValuesInTitle: "Başlıkta görünen değeri kullan",
+    useDisplayValuesInDynamicTexts: "Başlıkta görünen değeri kullan",
 
     showCommentArea: "Yorum var mı?",
     showOtherItem: "Diğerleri var mı?",

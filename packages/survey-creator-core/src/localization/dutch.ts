@@ -649,7 +649,7 @@ export var nlStrings = {
     descriptionLocation: "Plek omschrijving",
     minWidth: "Minimale breedte",
     maxWidth: "Maximale breedte",
-    useDisplayValuesInTitle: "Waardes in titel gebruiken",
+    useDisplayValuesInDynamicTexts: "Waardes in titel gebruiken",
 
     showCommentArea: "Heeft commentaar",
     showOtherItem: "Heeft andere",

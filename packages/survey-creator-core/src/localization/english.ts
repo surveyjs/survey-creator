@@ -865,7 +865,7 @@ export var enStrings = {
     widthMode: "widthMode",
     navigationTitle: "navigationTitle",
     navigationDescription: "navigationDescription",
-    useDisplayValuesInTitle: "useDisplayValuesInTitle",
+    useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
     descriptionLocation: "descriptionLocation",
     defaultValueExpression: "defaultValueExpression",
     bindings: "bindings",
