@@ -283,6 +283,7 @@ export var enStrings = {
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError:
       "Please limit the number of items from {0} to {1}",
+    fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
     formEntry: "Form Entry",
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",

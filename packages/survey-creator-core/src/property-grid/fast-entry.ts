@@ -51,7 +51,8 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       this.editSurvey.getQuestionByName("question")
     );
     this.setComment();
-    (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder = this.getPlaceHolder();
+    (this.editSurvey.getQuestionByName("question") as QuestionTextBase).placeholder =
+      editorLocalization.getString("pe.fastEntryPlaceholder");
     this.editSurvey.onValidateQuestion.add((sender, options) => {
       const maxChoicesCount = this.options.maximumChoicesCount;
       if (maxChoicesCount > 0) {
@@ -125,12 +126,6 @@ export class FastEntryEditorBase extends PropertyEditorSetupValue {
       if (!!str) res++;
     }
     return res;
-  }
-
-  protected getPlaceHolder(): string {
-    return this.names.map(name => name + " 1").join(ItemValue.Separator) + "\n" +
-      this.names.map(name => name + " 2").join(ItemValue.Separator) + "\n" +
-      this.names[0] + " 3";
   }
 
   protected get isValueUnique(): boolean {
