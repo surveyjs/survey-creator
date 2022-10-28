@@ -28,7 +28,7 @@ $logic-space: 20px;
   border-bottom-color: var(--secondary-border-color, $secondary-border-color);
   th,
   td {
-    padding: $logic-space / 2;
+    padding: calc($logic-space / 2);
   }
 }
 

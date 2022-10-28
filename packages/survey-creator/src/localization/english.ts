@@ -829,7 +829,7 @@ export var enStrings = {
     showClearButton: "showClearButton",
     contentMode: "contentMode",
     imageFit: "imageFit",
-    autoComplete: "autoComplete",
+    autocomplete: "autocomplete",
     min: "min",
     max: "max",
     minValueExpression: "minValueExpression",

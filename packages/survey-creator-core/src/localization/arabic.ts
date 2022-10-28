@@ -821,7 +821,7 @@ export var arStrings = {
     showClearButton: "showClearButton",
     contentMode: "نمط عرض المحتوى",
     imageFit: "إحتواء الصورة",
-    autoComplete: "الإكمال التلقائي",
+    autocomplete: "الإكمال التلقائي",
     min: "أقل",
     max: "أكبر",
     minValueExpression: "minValueExpression",
