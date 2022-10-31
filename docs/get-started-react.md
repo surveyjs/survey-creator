@@ -16,6 +16,8 @@ If you are looking for a quick-start application that enables all Survey Creator
 
 Survey Creator for React is distributed as a <a href="https://www.npmjs.com/package/survey-creator-react" target="_blank">survey-creator-react</a> npm package. Run the following command to install it:
 
+Survey Creator for React consists of two npm packages: [`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core) (platform-independent code) and [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) (rendering code). Run the following command to install `survey-creator-react`. The `survey-creator-core` package will be installed automatically as a dependency.
+
 ```cmd
 npm install survey-creator-react --save
 ```
@@ -172,18 +174,18 @@ To load a survey model schema JSON into Survey Creator, assign the schema to Sur
 ```js
 // ...
 const defaultJson = {
-    pages: [{
-        name: "Name",
-        elements: [{
-            name: "FirstName",
-            title: "Enter your first name:",
-            type: "text"
-        }, {
-            name: "LastName",
-            title: "Enter your last name:",
-            type: "text"
-        }]
+  pages: [{
+    name: "Name",
+    elements: [{
+      name: "FirstName",
+      title: "Enter your first name:",
+      type: "text"
+    }, {
+      name: "LastName",
+      title: "Enter your last name:",
+      type: "text"
     }]
+  }]
 };
 
 export function SurveyCreatorWidget() {
