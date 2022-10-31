@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { CreatorComponent } from "./creator.component";
-import { SurveyAngularModule } from "survey-angular-ui";
+import { SurveyModule } from "survey-angular-ui";
 import { DesignerTabComponent } from "./tabs/designer/designer.component";
 import { SvgBundleComponent } from "./svg-bundle.component";
 import { TabbedMenuItemComponent } from "./tabbed-menu/tabbed-menu/tabbed-menu-item.component";
@@ -62,11 +62,11 @@ import { CreatorLogoImageComponent } from "./header/logo-image.component";
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, NotifierComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
     QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent],
   imports: [
-    CommonModule, FormsModule, SurveyAngularModule
+    CommonModule, FormsModule, SurveyModule
   ],
   exports: [
     CreatorComponent
   ],
   providers: [],
 })
-export class SurveyCreatorAngularModule { }
+export class SurveyCreatorModule { }

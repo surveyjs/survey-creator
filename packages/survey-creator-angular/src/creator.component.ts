@@ -3,7 +3,7 @@ import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "su
 import { CreatorBase } from "survey-creator-core";
 
 @Component({
-  selector: "svc-creator",
+  selector: "survey-creator",
   templateUrl: "./creator.component.html"
 })
 export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterViewInit {

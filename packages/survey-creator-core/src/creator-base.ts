@@ -3208,6 +3208,7 @@ export class CreatorBase extends Base
     super.dispose();
   }
 }
+export class SurveyCreatorModel extends CreatorBase { }
 
 export class StylesManager {
   public static get currentTheme(): string {

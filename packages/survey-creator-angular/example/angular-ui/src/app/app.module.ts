@@ -3,8 +3,8 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
-import { SurveyCreatorAngularModule } from "survey-creator-angular";
-import { SurveyAngularModule } from "survey-angular-ui";
+import { SurveyCreatorModule } from "src/angular-ui.module";
+import { SurveyModule } from "survey-angular-ui";
 import { ExampleComponent } from "./example.component";
 import { AppRoutingModule } from "./router.module";
 import { TestComponent } from "./test/test.component";
@@ -20,7 +20,7 @@ import { TestDropdownCollapseComponent } from "./test/dropdown-collapse.componen
     AppComponent, ExampleComponent, TestComponent, TestDefaultComponent, TestThemeSwitcherComponent, ThemePreviewComponent, TestByPageComponent, TestCustomWidgetComponent, TestDropdownCollapseComponent
   ],
   imports: [
-    BrowserModule, SurveyCreatorAngularModule, FormsModule, SurveyAngularModule, AppRoutingModule
+    BrowserModule, SurveyCreatorModule, FormsModule, SurveyModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
