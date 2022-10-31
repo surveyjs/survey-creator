@@ -3,7 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
-import { SurveyCreatorModule } from "src/angular-ui.module";
+import { SurveyCreatorModule } from "survey-creator-angular";
 import { SurveyModule } from "survey-angular-ui";
 import { ExampleComponent } from "./example.component";
 import { AppRoutingModule } from "./router.module";
