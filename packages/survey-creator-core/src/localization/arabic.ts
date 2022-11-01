@@ -785,7 +785,7 @@ export var arStrings = {
     showNumber: "عرض الرقم",
     navigationTitle: "navigationTitle",
     navigationDescription: "navigationDescription",
-    useDisplayValuesInTitle: "إستخدم عرض القيم في العنوان",
+    useDisplayValuesInDynamicTexts: "إستخدم عرض القيم في العنوان",
     setDefaultValue: "تثبيت قيمة إفتراضية",
     setCorrectValue: "تثبيت إجابة صحيحة",
     minWidth: "أقل عرض",

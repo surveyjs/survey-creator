@@ -796,7 +796,7 @@ export var enStrings = {
     showNumber: "showNumber",
     navigationTitle: "navigationTitle",
     navigationDescription: "navigationDescription",
-    useDisplayValuesInTitle: "useDisplayValuesInTitle",
+    useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
     minWidth: "minWidth",
     maxWidth: "maxWidth",
     descriptionLocation: "descriptionLocation",

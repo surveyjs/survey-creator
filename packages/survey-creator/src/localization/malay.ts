@@ -702,7 +702,7 @@ export var msStrings = {
     showNumber: "Tunjukkan nombor",
     navigationTitle: "Tajuk navigasi",
     navigationDescription: "Perihalan navigasi",
-    useDisplayValuesInTitle: "Guna nilai paparan dalam tajuk",
+    useDisplayValuesInDynamicTexts: "Guna nilai paparan dalam tajuk",
     minWidth: "Lebar min",
     maxWidth: "Lebar maks",
     descriptionLocation: "Lokasi perihalan",

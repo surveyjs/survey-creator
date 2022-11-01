@@ -701,7 +701,7 @@ export var skStrings = {
     showNumber: "zobraziť číslo",
     navigationTitle: "Navigácia –​ titul",
     navigationDescription: "Navigácia – opis",
-    useDisplayValuesInTitle: "Použiť zobrazené hodnoty v titule",
+    useDisplayValuesInDynamicTexts: "Použiť zobrazené hodnoty v titule",
     minWidth: "minimálna šírka",
     maxWidth: "maximálna šírka",
     descriptionLocation: "poloha opisu",
