@@ -2756,7 +2756,6 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   };
   const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
 
-  //logicPlugin.activate();
   creator.makeNewViewActive("logic");
   const logic = logicPlugin.model;
 
