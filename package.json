@@ -32,6 +32,6 @@
         "eslint-plugin-surveyjs": "file:eslint-surveyjs",
         "husky": "^7.0.4",
         "lerna": "^6.0.1",
-        "testcafe": "1.18.4"
+        "testcafe": "2.0.2"
     }
 }
