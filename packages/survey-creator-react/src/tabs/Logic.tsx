@@ -55,7 +55,7 @@ export class TabLogicComponent extends SurveyElementBase<any, any> {
           <Survey model={this.model.itemsSurvey}></Survey>
           {this.model.hasItems ? null : (
             <div className="svc-logic-tab__content-empty" >
-              <span className="svc-text">{this.model.emptyTabPlaceHolder}</span>
+              <span className="svc-text">{this.model.emptyTabPlaceholder}</span>
             </div>)}
           {addLogic}
         </div>

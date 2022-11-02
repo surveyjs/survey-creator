@@ -2740,3 +2740,46 @@ test("Use creator.onGetObjectDisplayName for element selector in visibleIf actio
   expect(choices[0].text).toEqual("# question 1");
   expect(choices[4].text).toEqual("# question 11");
 });
+test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule was not saved", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2" },
+          { type: "text", name: "q3" },
+          { type: "text", name: "q4" },
+        ],
+      },
+    ]
+  };
+  const logicPlugin = <TabLogicPlugin>(creator.getPlugin("logic"));
+
+  creator.makeNewViewActive("logic");
+  const logic = logicPlugin.model;
+
+  expect(logic.items).toHaveLength(0);
+  expect(logic.haveUnsavedRules()).toBeFalsy();
+
+  logic.addNewUI();
+  expect(logic.items).toHaveLength(1);
+  expect(logic.haveUnsavedRules()).toBeTruthy();
+
+  creator.makeNewViewActive("test");
+  expect(creator.activeTab).toBe("logic");
+
+  logic.expressionEditor.text = "{q1} = 4";
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_enable";
+  panel.getQuestionByName("elementSelector").value = "q4";
+
+  expect(logic.haveUnsavedRules()).toBeTruthy();
+
+  creator.makeNewViewActive("test");
+  expect(creator.activeTab).toBe("logic");
+
+  logic.saveEditableItem();
+  creator.makeNewViewActive("test");
+  expect(creator.activeTab).toBe("test");
+});
