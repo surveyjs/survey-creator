@@ -130,8 +130,8 @@ const creator = new SurveyCreator(creatorOptions);
 import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
 // In Angular:
-import { CreatorBase } from "survey-creator-angular";
-const creator = new CreatorBase(creatorOptions);
+import { SurveyCreatorModel } from "survey-creator-angular";
+const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
 [View Multiple Languages example](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages (linkStyle))

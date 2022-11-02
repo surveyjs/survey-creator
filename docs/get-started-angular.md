@@ -78,11 +78,11 @@ const creatorOptions = {
 };
 ```
 
-Pass the configuration object to the `CreatorBase` constructor as shown in the code below to instantiate Survey Creator. Assign the produced instance to a component property that will be used later to render Survey Creator:
+Pass the configuration object to the `SurveyCreatorModel` constructor as shown in the code below to instantiate Survey Creator. Assign the produced instance to a component property that will be used later to render Survey Creator:
 
 ```js
 import { Component, OnInit } from '@angular/core';
-import { CreatorBase } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-angular";
 
 @Component({
   selector: 'survey-creator',
@@ -90,9 +90,9 @@ import { CreatorBase } from "survey-creator-angular";
   styleUrls: ['./survey-creator.component.css']
 })
 export class SurveyCreatorComponent implements OnInit {
-  surveyCreatorModel: CreatorBase;
+  surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
-    const creator = new CreatorBase(creatorOptions);
+    const creator = new SurveyCreatorModel(creatorOptions);
     this.surveyCreatorModel = creator;
   }
 }
@@ -103,7 +103,7 @@ export class SurveyCreatorComponent implements OnInit {
 
 ```js
 import { Component, OnInit } from "@angular/core";
-import { CreatorBase } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-angular";
 
 const creatorOptions = {
   showLogicTab: true,
@@ -116,7 +116,7 @@ const creatorOptions = {
   styleUrls: ['./survey-creator.component.css']
 })
 export class SurveyCreatorComponent implements OnInit {
-  surveyCreatorModel: CreatorBase;
+  surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
     const creator = new SurveyCreator(creatorOptions);
     this.surveyCreatorModel = creator;
@@ -127,18 +127,18 @@ export class SurveyCreatorComponent implements OnInit {
 
 ## Render Survey Creator
 
-Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your NgModule class (usually resides in the `app.module.ts` file), import the `SurveyCreatorAngularModule` from `survey-creator-angular`, and list it in the `imports` array.
+Before you render the survey, you need to import the module that integrates Survey Creator with Angular. Open your NgModule class (usually resides in the `app.module.ts` file), import the `SurveyCreatorModule` from `survey-creator-angular`, and list it in the `imports` array.
 
 ```js
 // app.module.ts
 // ...
-import { SurveyCreatorAngularModule } from 'survey-creator-angular';
+import { SurveyCreatorModule } from 'survey-creator-angular';
 
 @NgModule({
   declarations: [ ... ],
   imports: [
     ...,
-    SurveyCreatorAngularModule
+    SurveyCreatorModule
   ],
   providers: [ ... ],
   bootstrap: [ ... ]
@@ -147,11 +147,11 @@ export class AppModule { }
 
 ```
 
-To render Survey Creator, add a `<svc-creator>` element to your component template and bind the element's `model` attribute to the model instance you created in the previous step:
+To render Survey Creator, add a `<survey-creator>` element to your component template and bind the element's `model` attribute to the model instance you created in the previous step:
 
 ```html
 <div id="surveyCreator">
-  <svc-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></svc-creator>
 </div>
 ```
 ```css
@@ -167,14 +167,14 @@ To render Survey Creator, add a `<svc-creator>` element to your component templa
 ```html
 <!-- survey-creator.component.html -->
 <div id="surveyCreator">
-  <svc-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></svc-creator>
 </div>
 ```
 
 ```js
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
-import { CreatorBase } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-angular";
 
 const creatorOptions = {
   showLogicTab: true,
@@ -187,9 +187,9 @@ const creatorOptions = {
   styleUrls: ['./survey-creator.component.css']
 })
 export class SurveyCreatorComponent implements OnInit {
-  surveyCreatorModel: CreatorBase;
+  surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
-    const creator = new CreatorBase(creatorOptions);
+    const creator = new SurveyCreatorModel(creatorOptions);
     this.surveyCreatorModel = creator;
   }
 }
@@ -207,7 +207,7 @@ export class SurveyCreatorComponent implements OnInit {
 // app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SurveyCreatorAngularModule } from 'survey-creator-angular';
+import { SurveyCreatorModule } from 'survey-creator-angular';
 
 import { AppComponent } from './app.component';
 import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
@@ -219,7 +219,7 @@ import { SurveyCreatorComponent } from './survey-creator/survey-creator.componen
   ],
   imports: [
     BrowserModule,
-    SurveyCreatorAngularModule
+    SurveyCreatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -321,14 +321,14 @@ To view the application, run `ng serve` in a command line and open [http://local
 ```html
 <!-- survey-creator.component.html -->
 <div id="surveyCreator">
-  <svc-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></svc-creator>
 </div>
 ```
 
 ```js
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
-import { CreatorBase } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-angular";
 
 const creatorOptions = {
   showLogicTab: true,
@@ -356,9 +356,9 @@ const defaultJson = {
   styleUrls: ['./survey-creator.component.css']
 })
 export class SurveyCreatorComponent implements OnInit {
-  surveyCreatorModel: CreatorBase;
+  surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
-    const creator = new CreatorBase(creatorOptions);
+    const creator = new SurveyCreatorModel(creatorOptions);
     creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
 
     creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
@@ -401,7 +401,7 @@ export class SurveyCreatorComponent implements OnInit {
 // app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SurveyCreatorAngularModule } from 'survey-creator-angular';
+import { SurveyCreatorModule } from 'survey-creator-angular';
 
 import { AppComponent } from './app.component';
 import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
@@ -413,7 +413,7 @@ import { SurveyCreatorComponent } from './survey-creator/survey-creator.componen
   ],
   imports: [
     BrowserModule,
-    SurveyCreatorAngularModule
+    SurveyCreatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
