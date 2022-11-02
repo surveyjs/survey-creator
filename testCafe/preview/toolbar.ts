@@ -181,7 +181,7 @@ test("Device selector", async (t) => {
     .click(getBarItemByTitle("Select device type"))
     .expect(getListItemByText("iPad").visible).ok()
 
-    .click(getListItemByText("Select device type"))
+    .click(getListItemByText("iPad"))
     .click(Selector("input[value='Complete']"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
