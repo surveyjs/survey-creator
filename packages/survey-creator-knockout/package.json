@@ -27,7 +27,7 @@
         "visual-regression-tests": "testcafe chrome --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
         "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q --disable-font-subpixel-positioning ../../visualRegressionTests/ --app \"http-server\" --screenshots ../../ --selector-timeout 1500 --reporter minimal,dashboard",
         "visual-regression-tests:file": "testcafe chrome:headless --disable-font-subpixel-positioning --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-choices.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
-        "release": "standard-version --message \"Release: %s [skip ci]\"",
+        "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
         "remove-package-lock": "rimraf package-lock.json",
         "build": "webpack --env.buildType dev && webpack --env.buildType prod",
         "watch:dev": "webpack --env.buildType dev --watch",
