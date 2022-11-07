@@ -620,6 +620,7 @@ export class PropertyJSONGenerator {
     json.isReadOnly = prop.readOnly;
     if (prop.isRequired) {
       json.isRequired = true;
+      json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
       json.placeholder = this.obj?.getPropertyValue(prop.name);
     }
     json.title = this.getQuestionTitle(prop, title);
@@ -746,6 +747,9 @@ export class PropertyGridModel {
       json.mode = "display";
     }
     if (!!this.surveyValue) {
+      if(this.survey.editingObj) {
+        this.survey.editingObj.onPropertyChanged.remove(this.onPropertyChanged);
+      }
       this.surveyValue.onValidateQuestion.clear();
       this.surveyValue.onValueChanging.clear();
       this.surveyValue.onValueChanged.clear();
@@ -818,12 +822,7 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
-    this.survey.editingObj.onPropertyChanged.add((sender, options) => {
-      if (this.obj?.getPropertyByName(options.name)?.isRequired) {
-        const editor = this.survey.getQuestionByName(options.name);
-        if (editor && editor instanceof QuestionTextModel) editor.placeholder = options.newValue;
-      }
-    });
+    this.survey.editingObj.onPropertyChanged.add(this.onPropertyChanged);
 
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
@@ -842,6 +841,12 @@ export class PropertyGridModel {
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
+  }
+  private onPropertyChanged(sender, options) {
+    if (this.obj?.getPropertyByName(options.name)?.isRequired) {
+      const editor = this.survey.getQuestionByName(options.name);
+      if (editor && editor instanceof QuestionTextModel) editor.placeholder = options.newValue;
+    }
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;

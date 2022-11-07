@@ -2161,6 +2161,20 @@ test("Validate Selected Element Errors", (): any => {
   expect(question.title).toEqual("Question 1");
   titleProp.isRequired = oldIsRequired;
 });
+test("Required properties placeholders", (): any => {
+  var titleProp = Serializer.findProperty("question", "title");
+  var oldIsRequired = titleProp.isRequired;
+  titleProp.isRequired = true;
+  var question = new QuestionTextModel("q1");
+  var options = new EmptySurveyCreatorOptions();
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  expect(propertyGrid.validate()).toBeFalsy();
+  var titleQuestion = propertyGrid.survey.getQuestionByName("title") as QuestionTextModel;
+  expect(titleQuestion.placeholder).toEqual("q1");
+  question.name = "q2";
+  expect(titleQuestion.placeholder).toEqual("q2");
+  titleProp.isRequired = oldIsRequired;
+});
 test("Validate Selected Element Errors", () => {
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
