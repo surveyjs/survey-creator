@@ -19,6 +19,7 @@ import {
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
+  QuestionTextModel,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -617,8 +618,10 @@ export class PropertyJSONGenerator {
     json.name = prop.name;
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
-    json.isRequired = prop.isRequired;
-    json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
+    if (prop.isRequired) {
+      json.isRequired = true;
+      json.placeholder = this.obj?.getPropertyValue(prop.name);
+    }
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
@@ -755,6 +758,7 @@ export class PropertyGridModel {
     }
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = propertyGridCss;
+    this.surveyValue.hideRequiredErrors = true;
     var page = this.surveyValue.createNewPage("p1");
     if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
@@ -814,6 +818,13 @@ export class PropertyGridModel {
       }
     });
     this.survey.editingObj = this.obj;
+    this.survey.editingObj.onPropertyChanged.add((sender, options) => {
+      if (this.obj?.getPropertyByName(options.name)?.isRequired) {
+        const editor = this.survey.getQuestionByName(options.name);
+        if (editor && editor instanceof QuestionTextModel) editor.placeholder = options.newValue;
+      }
+    });
+
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
