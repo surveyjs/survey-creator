@@ -8,6 +8,7 @@ This help topic gives a detailed overview of UI, UX, and internal design changes
   - [Issue 3: Knockout adoption decline](#issue-3-knockout-adoption-decline)
   - [Solution](#solution)
 - [Native Survey Creator for React](#native-survey-creator-for-react)
+- [Native Survey Creator for Angular](#native-survey-creator-for-angular)
 - [Major UI/UX changes](#major-uiux-changes)
   - [New Toolbox and Property Grid design](#new-toolbox-and-property-grid-design)
   - [Action buttons](#action-buttons)
@@ -22,7 +23,7 @@ This help topic gives a detailed overview of UI, UX, and internal design changes
   - [Survey Creator UI elements are surveys](#survey-creator-ui-elements-are-surveys)
   - [Lazy Rendering](#lazy-rendering)
   - [Alternative Rendering for Adorners](#alternative-rendering-for-adorners)
-- [Native Survey Creator for Angular and Vue (Planned)](#native-survey-creator-for-angular-and-vue-planned)
+- [Native Survey Creator for Vue (Planned)](#native-survey-creator-for-vue-planned)
 - [Migration to the New Survey Creator](#migration-to-the-new-survey-creator)
 
 <a id="knockout-complaints"></a>
@@ -45,7 +46,7 @@ Knockout enriches a pure JavaScript application with features like templates, de
 
 ### Solution
 
-The new Survey Creator introduces a native implementation for React (more on this below). Implementations for Angular and Vue are planned for future development. For those customers who still use Knockout in their applications, we also ship an updated Survey Creator for Knockout with new look and feel that matches the React version.
+The new Survey Creator introduces a native implementation for React and Angular (more on this below). An similar implementation for Vue is planned for future development. For those customers who still use Knockout in their applications, we also ship an updated Survey Creator for Knockout with new look and feel that matches the React version.
 
 <a id="react-version"></a>
 
@@ -54,6 +55,10 @@ The new Survey Creator introduces a native implementation for React (more on thi
 New Survey Creator for React is a composition of true React components. The native implementation became possible because we separated the platform-independent model code (now distributed as the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package) from the platform-specific rendering code (the [`survey-creator-react`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-react) package). You can override the default rendering functions of our React components and integrate your own React components (view the [Override the Property Grid Component](https://surveyjs.io/Examples/Survey-Creator?id=overridepropertygrid&platform=ReactjsV2) example). We implemented the same concept in the SurveyJS Library earlier.
 
 Most of the UI elements in the new Survey Creator (Property Grid, Translation and Logic Tabs, modal editors) are stylized surveys from our own SurveyJS Library for React. This feature allows you to integrate any 3rd-party React component into the SurveyJS library and then reuse the same configuration to integrate the component into the Survey Creator. View examples that show how to integrate the [React Select](https://react-select.com/home) component [into a standalone survey](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) or [into the Survey Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select).
+
+## Native Survey Creator for Angular
+
+In November 2022, we also introduce a native implementation of Survey Creator for Angular. Angular-specific rendering code is distributed as the [`survey-creator-angular`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-angular) npm package. It should be used along with the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package that contains platform-independent code. Refer to the following tutorial to get started with native Survey Creator for Angular: [Add a Survey to an Angular Application](https://surveyjs.io/form-library/documentation/get-started-angular).
 
 <a id="ui-changes"></a>
 
@@ -177,12 +182,9 @@ Previously, we used to render survey elements first, and only then added [adorne
 
 <a id="platforms-and-plans"></a>
 
-## Native Survey Creator for Angular and Vue (Planned)
+## Native Survey Creator for Vue (Planned)
 
-The new Survey Creator includes native support for React and Knockout. We also plan to develop native versions for Angular and Vue in the future. For now, you can integrate the Knockout version into your Angular or Vue application as described in the following articles:
-
-- [Get Started with Survey Creator in Angular](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-angular)
-- [Get Started with Survey Creator in Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue)
+The new Survey Creator includes native support for React, Angular, and Knockout. We also plan to develop a native version for Vue in the future. For now, you can integrate the Knockout version into your Vue application as described in the following article: [Get Started with Survey Creator in Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue).
 
 ## Migration to the New Survey Creator
 
