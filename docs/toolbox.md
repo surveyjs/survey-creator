@@ -31,6 +31,8 @@ You can also use the [`isCompact`](https://surveyjs.io/Documentation/Survey-Crea
 console.log(creator.toolbox.isCompact);
 ```
 
+[View the "Toolbox Customization" Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+
 ## Limit Available Question and Panel Types
 
 All available question and panel types are listed in the [`getType()`](https://surveyjs.io/Documentation/Library?id=Question#getType) method description. If you need to show only a part of these types, specify them in the Survey Creator's [`questionTypes`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#questionTypes) array:
@@ -49,7 +51,7 @@ import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
 ```
 
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+[View the "Toolbox Customization" Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
 ## Group Toolbox Items by Categories
 
@@ -75,7 +77,7 @@ creator.toolbox.changeCategories([
 ]);
 ```
 
-[View Toolbox Categories example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
+[View the "Toolbox Categories" Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
 
 Ungrouped items fall into the General category. You can use [localization capabilities](https://surveyjs.io/Documentation/Survey-Creator?id=localization#localize-survey-creator-ui) to change its caption. If your application does not employ modules, use the following code:
 
@@ -125,7 +127,7 @@ creator.toolbox
   ];
 ```
 
-[View Toolbox Customization example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
+[View the "Toolbox Customization" Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcustomization (linkStyle))
 
 ## Add a Custom Toolbox Item
 

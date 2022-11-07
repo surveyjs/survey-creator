@@ -50,6 +50,7 @@ SurveyCreator.removeAdorners();
 ```
 -->
 
+[View the "Custom Adorner" Demo](https://surveyjs.io/survey-creator/examples/customadorner/ (linkstyle))
 
 ## Customize Survey Elements on Creation
 
@@ -80,7 +81,11 @@ creator.onQuestionAdded.add(function (_, options) {
 });
 ```
 
+[View the "Modify New Question" Demo](https://surveyjs.io/survey-creator/examples/oncreatequestion/ (linkstyle))
+
 ## Access Survey Instances Within Survey Creator
+
+[View Demo](https://surveyjs.io/survey-creator/examples/modifysurveys/reactjs#content-js (linkstyle))
 
 Survey Creator contains different survey instances for design and preview modes. In design mode, survey elements have [adorners](#specify-adorner-availability). In preview mode, the survey is displayed as respondents will see it.
 
