@@ -82,7 +82,7 @@ Pass the configuration object to the `SurveyCreatorModel` constructor as shown i
 
 ```js
 import { Component, OnInit } from '@angular/core';
-import { SurveyCreatorModel } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 @Component({
   selector: 'survey-creator',
@@ -103,7 +103,7 @@ export class SurveyCreatorComponent implements OnInit {
 
 ```js
 import { Component, OnInit } from "@angular/core";
-import { SurveyCreatorModel } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
   showLogicTab: true,
@@ -174,7 +174,7 @@ To render Survey Creator, add a `<survey-creator>` element to your component tem
 ```js
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
-import { SurveyCreatorModel } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
   showLogicTab: true,
@@ -328,7 +328,7 @@ To view the application, run `ng serve` in a command line and open [http://local
 ```js
 // survey-creator.component.ts
 import { Component, OnInit } from "@angular/core";
-import { SurveyCreatorModel } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 const creatorOptions = {
   showLogicTab: true,

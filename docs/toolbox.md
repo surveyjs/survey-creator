@@ -49,7 +49,7 @@ const creator = new SurveyCreator(creatorOptions);
 import { SurveyCreator } from "survey-creator-react";
 const creator = new SurveyCreator(creatorOptions);
 // In Angular:
-import { SurveyCreatorModel } from "survey-creator-angular";
+import { SurveyCreatorModel } from "survey-creator-core";
 const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
