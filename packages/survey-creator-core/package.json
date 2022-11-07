@@ -1,5 +1,5 @@
 {
-  "version": "1.9.55",
+  "version": "1.9.56",
   "name": "survey-creator-core",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -16,7 +16,7 @@
     "test:dev": "jest --watch",
     "watch:dev": "webpack --env.buildType dev --watch",
     "watch:prod": "webpack --env.buildType prod --watch",
-    "release": "standard-version --message \"Release: %s [skip ci]\"",
+    "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
     "remove-package-lock": "rimraf package-lock.json",
     "lint": "eslint ./src"
   },

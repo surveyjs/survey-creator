@@ -868,7 +868,7 @@ var germanTranslation = {
     showNumber: "Nummer anzeigen",
     navigationTitle: "Navigationstitel",
     navigationDescription: "Navigationsbeschreibung",
-    useDisplayValuesInTitle: "Verwende Anzeigewerte im Titel",
+    useDisplayValuesInDynamicTexts: "Verwende Anzeigewerte im Titel",
     minWidth: "Minimale Breite",
     maxWidth: "Maximale Breite",
     descriptionLocation: "Position der Beschreibung",

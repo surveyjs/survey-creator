@@ -866,7 +866,7 @@ var italianTranslation = {
     widthMode: "Larghezza questionario",
     navigationTitle: "Titolo navigazione",
     navigationDescription: "Descrizione navigazione",
-    useDisplayValuesInTitle: "Usa Valori di Riferimento nel titolo",
+    useDisplayValuesInDynamicTexts: "Usa Valori di Riferimento nel titolo",
     descriptionLocation: "Posizione della descrizione",
     defaultValueExpression: "Espressione valore predefinito",
     bindings: "Collegamenti",

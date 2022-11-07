@@ -29,6 +29,9 @@ module.exports = function(config) {
     preprocessors: {
       "**/*.ts": ["webpack", "sourcemap"]
     },
+    captureTimeout: 210000,
+    browserDisconnectTimeout: 100000,
+    browserDisconnectTolerance: 3,
     browserNoActivityTimeout: 100000,
     webpack: {
       mode: "development",
@@ -46,7 +49,25 @@ module.exports = function(config) {
       devtool: 'source-map'
     },
     reporters: ["progress", "dots", "junit"],
-    browsers: ["ChromeHeadless"],
+    browsers: ["ChromeHeadlessNoSandbox"],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: [
+          "--no-sandbox",
+          "--disable-gpu",
+          "--no-default-browser-check",
+          "--no-first-run",
+          "--disable-default-apps",
+          "--disable-popup-blocking",
+          "--disable-translate",
+          "--disable-background-timer-throttling",
+          "--disable-renderer-backgrounding",
+          "--disable-device-discovery-notifications",
+          "--disable-web-security"
+        ]
+      }
+    },
     colors: true,
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_WARN,

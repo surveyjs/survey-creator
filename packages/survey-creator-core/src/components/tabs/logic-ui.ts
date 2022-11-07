@@ -98,6 +98,15 @@ export class SurveyLogicUI extends SurveyLogic {
       this.expressionEditor.setIsFastEntry(this.expressionEditorIsFastEntry);
     }
   }
+  public updateEditableItemIsModifiedState(): void {
+    if (!!this.editableItem) {
+      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.isModified(this.editableItem.expression));
+    }
+  }
+  public haveUnsavedRules(): boolean {
+    this.updateEditableItemIsModifiedState();
+    return this.visibleItems.some(item => item.isModified || item.isNew);
+  }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
     if (name === "items") {
@@ -159,9 +168,7 @@ export class SurveyLogicUI extends SurveyLogic {
     this.expressionEditorCanShowBuilder = ConditionEditor.canBuildExpression(this.expressionEditor.text);
   }
   protected onEndEditing() {
-    if (!!this.editableItem) {
-      this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.isModified(this.editableItem.expression));
-    }
+    this.updateEditableItemIsModifiedState();
     super.onEndEditing();
     this.expressionEditorValue = null;
     this.itemEditorValue = null;
@@ -382,7 +389,7 @@ export class SurveyLogicUI extends SurveyLogic {
     return getLogicString("addNewItem");
   }
 
-  public get emptyTabPlaceHolder(): string {
+  public get emptyTabPlaceholder(): string {
     return getLogicString("empty_tab");
   }
 }

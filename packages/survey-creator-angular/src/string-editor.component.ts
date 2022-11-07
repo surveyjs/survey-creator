@@ -9,7 +9,7 @@ import { AngularComponentFactory } from "survey-angular-ui";
   templateUrl: "./string-editor.component.html",
   styles: [":host { display: none; }"]
 })
-export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
+export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> {
   public baseModel!: StringEditorViewModelBase;
   private justFocused: boolean = false;
   @Input() model!: any;
@@ -23,6 +23,10 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
       this.container.nativeElement.blur();
       this.container.nativeElement.spellcheck = false;
     };
+    this.baseModel.getEditorElement = () => this.container.nativeElement;
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => this.baseModel.afterRender());
+    });
   }
   public get locString(): LocalizableString {
     return this.model.locStr;
@@ -84,12 +88,6 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   override ngOnDestroy(): void {
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
-  }
-  ngAfterViewInit(): void {
-    this.baseModel.getEditorElement = () => this.container.nativeElement;
-    this.ngZone.runOutsideAngular(() => {
-      setTimeout(() => this.baseModel.afterRender());
-    });
   }
 }
 

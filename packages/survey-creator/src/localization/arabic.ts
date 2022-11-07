@@ -789,7 +789,7 @@ var arabicStrings = {
     showNumber: "عرض الرقم",
     navigationTitle: "عنوان التنقل",
     navigationDescription: "الوصف للتنقل",
-    useDisplayValuesInTitle: "إستخدم عرض القيم في العنوان",
+    useDisplayValuesInDynamicTexts: "إستخدم عرض القيم في العنوان",
     setDefaultValue: "تثبيت قيمة إفتراضية",
     setCorrectValue: "تثبيت إجابة صحيحة",
     minWidth: "أقل عرض",

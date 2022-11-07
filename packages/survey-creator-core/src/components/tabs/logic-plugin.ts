@@ -58,6 +58,11 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.model.update(this.creator.survey);
   }
   public deactivate(): boolean {
+    if (!!this.model && this.model.haveUnsavedRules()) {
+      this.creator.notify(editorLocalization.getString("ed.lg.expressionInvalid"), "error");
+      return false;
+    }
+
     this.filterActionTypeAction.title = undefined;
     this.filterQuestionAction.title = undefined;
     if (this.model) {
