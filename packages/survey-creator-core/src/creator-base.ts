@@ -223,9 +223,11 @@ export class CreatorBase extends Base
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   /**
-   * ?????
+   * Specifies the orientation of the selected device in the Preview tab.
    *
-   * Default value: `landscape`
+   * Possible values:
+   * - `"landscape"` (default)
+   * - `"portrait"`
    */
   @property({ defaultValue: "landscape" }) previewOrientation: "landscape" | "portrait";
   private isRTLValue: boolean = false;

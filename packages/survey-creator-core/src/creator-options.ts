@@ -216,9 +216,11 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
-   * Preview orientation.   
+   * Specifies the orientation of the selected device in the Preview tab.
    * 
-   * Default value: "landscape"
+   * Possible values:
+   * - `"landscape"` (default)
+   * - `"portrait"`
    */
   previewOrientation?: "landscape" | "portrait";
    /**
