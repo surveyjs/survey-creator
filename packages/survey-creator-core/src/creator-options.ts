@@ -216,11 +216,11 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
-   * Limits question and panels types available in the Toolbox and Add Question menu.   
+   * Preview orientation.   
    * 
    * Default value: "landscape"
    */
-  defaultPreviewOrientation?: "landscape" | "portrait";
+  previewOrientation?: "landscape" | "portrait";
    /**
     * Limits question and panels types available in the Toolbox and Add Question menu.
     * 

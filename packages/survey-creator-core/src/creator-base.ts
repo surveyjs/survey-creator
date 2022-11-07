@@ -222,6 +222,12 @@ export class CreatorBase extends Base
   @property({ defaultValue: false }) showSearch: boolean;
   @property({ defaultValue: true }) generateValidJSON: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+  /**
+   * ?????
+   *
+   * Default value: `landscape`
+   */
+  @property({ defaultValue: "landscape" }) previewOrientation: "landscape" | "portrait";
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
@@ -1306,6 +1312,7 @@ export class CreatorBase extends Base
       this.options = !!options2 ? options2 : {};
       SurveyHelper.warnText("Creator constructor has one parameter, as creator options, in V2.");
     }
+    this.previewOrientation = options.previewOrientation;
     this.toolbarValue = new ToolbarActionContainer(this);
     this.toolbarValue.locOwner = this;
     this.tabbedMenu = new TabbedMenuContainer();
