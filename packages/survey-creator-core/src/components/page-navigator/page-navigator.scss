@@ -75,7 +75,10 @@ survey-creator,
   right: calcSize(1);
 }
 
-.svc-creator__toolbox--right {
+.svc-creator__toolbox--right,
+[dir='rtl'],
+[style*='direction:rtl'],
+[style*='direction: rtl'] {
   .svc-tab-designer--with-page-navigator {
     .svc-tab-designer_content {
       margin-right: 0;

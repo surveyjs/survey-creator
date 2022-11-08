@@ -84,7 +84,10 @@ svc-page-navigator-item,
   }
 }
 
-.svc-creator__toolbox--right {
+.svc-creator__toolbox--right,
+[dir='rtl'],
+[style*='direction:rtl'],
+[style*='direction: rtl'] {
   .svc-page-navigator-item__banner {
     right: unset;
     left: calc(0.625 * var(--base-unit, 8px));
@@ -116,7 +119,10 @@ svc-page-navigator-item,
   }
 }
 
-.svc-creator__toolbox--right {
+.svc-creator__toolbox--right,
+[dir='rtl'],
+[style*='direction:rtl'],
+[style*='direction: rtl'] {
 
   .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):hover,
   .svc-page-navigator-item-content:not(.svc-page-navigator-item--selected):focus {

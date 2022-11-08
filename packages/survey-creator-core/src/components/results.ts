@@ -60,7 +60,7 @@ export class SurveyResultsModel extends Base {
   constructor(private survey: Survey.SurveyModel) {
     super();
     this.resultText = JSON.stringify(survey.data, null, 4);
-    var plainData = survey.getPlainData({ includeEmpty: false });
+    var plainData = survey.getPlainData({ includeEmpty: false, includeValues: true });
     this.resultData = addCollapsed(plainData, 0);
   }
 

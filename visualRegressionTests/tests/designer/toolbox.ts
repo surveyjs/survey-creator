@@ -82,6 +82,47 @@ test("Right toolbox", async (t) => {
   });
 });
 
+test("Right toolbox (rtl)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const toolboxItem = Selector(".svc-toolbox__item");
+    const toolboxItemDots = Selector(".svc-toolbox__tool .sv-dots__item");
+
+    await ClientFunction(() => {
+      document.body.setAttribute("dir", "rtl");
+    })();
+
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t
+      .resizeWindow(2560, 1440)
+      .click(collapseButtonSelector);
+
+    const toolboxElement = Selector(".svc-toolbox");
+    await takeElementScreenshot("toolbox-right.png", toolboxElement, t, comparer);
+
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-hover-item.png", toolboxElement, t, comparer);
+
+    await t
+      .hover(translationTab) // move cursor from toolboxItem
+      .resizeWindow(1510, 870);
+    await takeElementScreenshot("toolbox-right-adaptive.png", toolboxElement, t, comparer);
+
+    await t.hover(toolboxItemDots);
+    await takeElementScreenshot("toolbox-right-hover-dots-item.png", toolboxElement, t, comparer);
+
+    await t
+      .hover(translationTab) // move cursor from toolboxItem
+      .resizeWindow(1240, 870);
+    await takeElementScreenshot("toolbox-right-adaptive-compact.png", toolboxElement, t, comparer);
+
+    await t.hover(toolboxItem);
+    await takeElementScreenshot("toolbox-right-compact-hover-item.png", toolboxElement, t, comparer);
+
+    await t.click(toolboxItemDots);
+    await takeElementScreenshot("toolbox-right-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t, comparer);
+  });
+});
+
 test("toolbox inside sidebar", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const toolboxItem = Selector(".svc-toolbox__item");

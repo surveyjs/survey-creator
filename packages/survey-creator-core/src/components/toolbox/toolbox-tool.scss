@@ -39,16 +39,21 @@
     left: calcSize(1.5);
     top: calcSize(1);
   }
-  
+
   .svc-toolbox__item-title {
     color: $foreground;
   }
+
   .sv-svg-icon use {
     fill: $primary;
   }
 }
 
-.svc-creator__toolbox--right {
+.svc-creator__toolbox--right,
+[dir='rtl'],
+[style*='direction:rtl'],
+[style*='direction: rtl'] {
+
   .svc-toolbox__item:hover .svc-toolbox__item-banner,
   .svc-toolbox__item:focus .svc-toolbox__item-banner {
     flex-direction: row-reverse;
@@ -57,6 +62,7 @@
     margin-left: 0;
     margin-right: 0;
     transform: translateX(calc(1.5 * #{$base-unit}));
+
     .svc-toolbox__item-title {
       padding-left: calcSize(1);
       padding-right: calcSize(4);
@@ -66,9 +72,11 @@
   .svc-toolbox__item {
     flex-direction: row-reverse;
   }
+
   .svc-toolbox__tool.sv-dots {
     place-self: flex-end;
   }
+
   .svc-toolbox__tool {
     justify-content: flex-end;
   }
@@ -82,7 +90,7 @@
       left: auto;
       right: calcSize(1.5);
     }
-  }  
+  }
 }
 
 .svc-toolbox__item-title {
@@ -102,6 +110,7 @@
     padding-left: calcSize(1.5);
     padding-right: calcSize(2);
     opacity: 1;
+
     .svc-toolbox__item-title {
       padding-left: calcSize(4);
     }
@@ -109,6 +118,7 @@
 }
 
 .svc-toolbox:not(.svc-toolbox--compact) {
+
   .svc-toolbox__item:not(.sv-dots):focus,
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
@@ -120,6 +130,7 @@
     .svc-toolbox__item-title {
       color: $foreground;
     }
+
     .sv-svg-icon use {
       fill: $primary;
     }
@@ -145,6 +156,7 @@
         display: none;
       }
     }
+
     .sv-list__item-body {
       padding-top: calcSize(1.5);
       padding-bottom: calcSize(1.5);
@@ -154,13 +166,17 @@
   }
 }
 
-.svc-toolbox, .svc-toolbox:not(.svc-toolbox--compact) {
+.svc-toolbox,
+.svc-toolbox:not(.svc-toolbox--compact) {
   .svc-toolbox__tool--pressed {
-    .svc-toolbox__item:not(.sv-dots), .svc-toolbox__item:not(.sv-dots):hover {
+
+    .svc-toolbox__item:not(.sv-dots),
+    .svc-toolbox__item:not(.sv-dots):hover {
       .sv-svg-icon use {
         fill: $foreground;
         opacity: 0.5;
       }
+
       color: $foreground;
       opacity: 0.5;
     }
