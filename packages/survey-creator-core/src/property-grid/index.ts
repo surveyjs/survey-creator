@@ -814,7 +814,7 @@ export class PropertyGridModel {
         options.html = parsePropertyDescription(options.text);
       }
     });
-
+    this.survey.editingObj = this.obj;
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
     }
@@ -902,16 +902,16 @@ export class PropertyGridModel {
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
-    /*
     if(q.property.isRequired && !options.value) {
-      if(q.property.name == "name" && this.obj instanceof Question) {
+      if(q.property.name == "name" &&
+         this.obj instanceof Question &&
+         (this.options as CreatorBase)?.survey) {
         options.value = SurveyHelper.getNewQuestionName((this.options as CreatorBase).survey.getAllQuestions());
       }
       else {
         options.value = options.oldValue;
       }
     }
-    */
   }
   private onValueChanged(options: any) {
     var q = options.question;
