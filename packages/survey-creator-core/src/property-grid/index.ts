@@ -618,11 +618,8 @@ export class PropertyJSONGenerator {
     json.name = prop.name;
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
-    if (prop.isRequired) {
-      json.isRequired = true;
-      json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
-      json.placeholder = this.obj?.getPropertyValue(prop.name);
-    }
+    json.isRequired = prop.isRequired;
+    json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
@@ -747,9 +744,6 @@ export class PropertyGridModel {
       json.mode = "display";
     }
     if (!!this.surveyValue) {
-      if(this.survey.editingObj) {
-        this.survey.editingObj.onPropertyChanged.remove(this.onPropertyChanged);
-      }
       this.surveyValue.onValidateQuestion.clear();
       this.surveyValue.onValueChanging.clear();
       this.surveyValue.onValueChanged.clear();
@@ -762,7 +756,6 @@ export class PropertyGridModel {
     }
     this.surveyValue = this.createSurvey(json);
     this.surveyValue.css = propertyGridCss;
-    this.surveyValue.hideRequiredErrors = true;
     var page = this.surveyValue.createNewPage("p1");
     if (!this.obj) return;
     new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
@@ -821,8 +814,6 @@ export class PropertyGridModel {
         options.html = parsePropertyDescription(options.text);
       }
     });
-    this.survey.editingObj = this.obj;
-    this.survey.editingObj.onPropertyChanged.add(this.onPropertyChanged);
 
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
@@ -841,12 +832,6 @@ export class PropertyGridModel {
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
-  }
-  private onPropertyChanged(sender, options) {
-    if (this.obj?.getPropertyByName(options.name)?.isRequired) {
-      const editor = this.survey.getQuestionByName(options.name);
-      if (editor && editor instanceof QuestionTextModel) editor.placeholder = options.newValue;
-    }
   }
   public get options(): ISurveyCreatorOptions {
     return this.optionsValue;
@@ -917,6 +902,16 @@ export class PropertyGridModel {
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
+    /*
+    if(q.property.isRequired && !options.value) {
+      if(q.property.name == "name" && this.obj instanceof Question) {
+        options.value = SurveyHelper.getNewQuestionName((this.options as CreatorBase).survey.getAllQuestions());
+      }
+      else {
+        options.value = options.oldValue;
+      }
+    }
+    */
   }
   private onValueChanged(options: any) {
     var q = options.question;
