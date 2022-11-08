@@ -62,6 +62,9 @@ creator.onShowingProperty.add(function (_, options) {
 
 <div id="addproperties"></div>
 
+[View the "Hide a category in the Properties Grid" Demo](https://surveyjs.io/survey-creator/examples/hidecategoryinpropertiesgrid/ (linkStyle))
+[View the "Remove properties" Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
+
 ## Add Custom Properties to the Property Grid
 
 Custom properties can be serialized and included in the survey JSON schema. To add a custom property, call the `addProperty(questionType, propertySettings)` method on the `Survey.Serializer` object. This method accepts the following arguments:
@@ -74,7 +77,7 @@ A string value that specifies the question type to which the property should be 
 - `propertySettings`      
 Settings that configure the property's appearance and behavior. For information about these settings, refer to the [Survey Element Property Settings](#survey-element-property-settings) help section below.
 
-[View Add Properties example](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator/?id=addproperties (linkStyle))
 
 ### Survey Element Property Settings
 
@@ -123,7 +126,7 @@ SurveyCreator.PropertyGridEditorCollection.register({
 });
 ```
 
-[View Custom Property example](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
+[View the "Custom property editor" Demo](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
 
 You can add the type to the `name` property after a colon character as a shortcut:
 
@@ -260,6 +263,8 @@ Survey.Serializer.addProperty("text", {
   }
 });
 ```
+
+[View the "Property Dependencies" Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
 
 #### `visibleIndex`
 
@@ -415,6 +420,8 @@ Survey.Serializer.addProperty("survey", {
 });
 ```
 
+[View the "Property Dependencies" Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
+
 #### `onGetValue`
 
 A function that you can use to adjust or exclude the property value from the survey JSON schema.
@@ -472,3 +479,5 @@ const surveyJson = {
   }]
 }
 ```
+
+[View Demo](https://surveyjs.io/form-library/examples/condition-customproperty/ (linkstyle))

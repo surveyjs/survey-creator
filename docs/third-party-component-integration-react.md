@@ -251,6 +251,11 @@ PropertyGridEditorCollection.register({
 
 [View full code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components)
 
+## See also
+
+The following demo shows how to use the [React Select](https://react-select.com/home) control as a drop-down editor for a survey question.
+[View the "React Select as a Drop-Down Editor" Demo](https://surveyjs.io/survey-creator/examples/react-select/ (linkstyle))
+
 ## Further Reading
 
 - [Create Specialized Question Types](/Documentation/Survey-Creator?id=create-specialized-question-types)
