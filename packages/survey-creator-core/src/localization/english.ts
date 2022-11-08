@@ -401,9 +401,9 @@ export var enStrings = {
     showTitle: "Show the title",
     expandCollapseTitle: "Expand/collapse title",
     locale: "Survey language",
-    simulator: "Choose device",
-    landscapeOrientation: "Landscape",
-    portraitOrientation: "Portrait",
+    simulator: "Select device type",
+    landscapeOrientation: "Switch to landscape orientation",
+    portraitOrientation: "Switch to portrait orientation",
     mode: "Editable or read-only",
     clearInvisibleValues: "Clear invisible values",
     cookieName: "Cookie name",
@@ -807,7 +807,8 @@ export var enStrings = {
   //Preview (Survey)
   ts: {
     selectPage: "Select the page to test it",
-    showInvisibleElements: "Show invisible elements"
+    showInvisibleElements: "Show invisible elements",
+    hideInvisibleElements: "Hide invisible elements"
   },
   validators: {
     answercountvalidator: "Answer count",

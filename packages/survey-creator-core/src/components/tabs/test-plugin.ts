@@ -31,7 +31,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     let currentType = simulatorDevices[this.model.simulator.device].deviceType;
     this.orientationSelectorAction.enabled = currentType != "desktop";
     this.deviceSelectorAction.iconName = "icon-device-" + currentType;
-    this.deviceSelectorAction.title = this.getSimulatorDevicesTitle();
+    this.deviceSelectorAction.title = getLocString("pe.simulator");
   }
   private setDefaultLanguageOption(opt: boolean | string) {
     const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.model.survey.getUsedLocales().length > 1);
@@ -59,7 +59,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.creator.showSimulatorInTestSurveyTab) {
       this.setDevice(this.model.simulator.device);
       this.deviceSelectorAction.data.selectedItem = { id: this.model.simulator.device };
-      this.orientationSelectorAction.title = getLocString("pe.landscapeOrientation");
+      this.orientationSelectorAction.title = getLocString("pe.portraitOrientation");
     }
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
@@ -94,6 +94,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.model.onSurveyCreatedCallback = (survey) => {
       this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
     };
+    this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
   }
   public update(): void {
@@ -190,7 +191,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
-          this.orientationSelectorAction.title = getLocString(this.model.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
+          this.orientationSelectorAction.title = getLocString(!this.model.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
         }
       });
       items.push(this.orientationSelectorAction);
@@ -208,6 +209,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
           this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements")
         }
       });
       items.push(this.invisibleToggleAction);

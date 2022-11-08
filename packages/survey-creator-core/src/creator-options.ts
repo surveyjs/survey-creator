@@ -216,10 +216,18 @@ export interface ICreatorOptions {
    */
   allowChangeThemeInPreview?: boolean;
   /**
-   * Limits question and panels types available in the Toolbox and Add Question menu.
+   * Specifies the orientation of the selected device in the Preview tab.
    * 
-   * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
+   * Possible values:
+   * - `"landscape"` (default)
+   * - `"portrait"`
    */
+  previewOrientation?: "landscape" | "portrait";
+   /**
+    * Limits question and panels types available in the Toolbox and Add Question menu.
+    * 
+    * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
+    */
   questionTypes?: Array<string>;
   /**
    * Specifies how Survey Creator users edit survey pages.

@@ -156,15 +156,15 @@ test("Landscape switcher", async (t) => {
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).notOk()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByTitle("Desktop"))
+    .click(getBarItemByTitle("Select device type"))
     .expect(getListItemByText("iPad").visible).ok()
     .click(getListItemByText("iPad"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).ok()
     .expect(Selector(".svd-simulator-wrapper").clientWidth).gt(1200)
     .expect(Selector(".svd-simulator-wrapper").clientHeight).lt(1000)
-    .click(getBarItemByTitle("Landscape"))
-    .expect(getBarItemByTitle("Portrait").visible).ok()
+    .click(getBarItemByTitle("Switch to portrait orientation"))
+    .expect(getBarItemByTitle("Switch to landscape orientation").visible).ok()
     .expect(Selector(".svd-simulator-wrapper").clientWidth).lt(1000)
     .expect(Selector(".svd-simulator-wrapper").clientHeight).gt(1200);
 });
@@ -178,7 +178,7 @@ test("Device selector", async (t) => {
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByTitle("Desktop"))
+    .click(getBarItemByTitle("Select device type"))
     .expect(getListItemByText("iPad").visible).ok()
 
     .click(getListItemByText("iPad"))
@@ -186,7 +186,7 @@ test("Device selector", async (t) => {
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
 
-    .click(getBarItemByTitle("iPad"))
+    .click(getBarItemByTitle("Select device type"))
     .expect(getListItemByText("Desktop").visible).ok()
 
     .click(getListItemByText("Desktop"))
@@ -194,6 +194,27 @@ test("Device selector", async (t) => {
     .expect(orientationAction.hasAttribute("disabled")).ok()
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
-    .click(getBarItemByTitle("Desktop"))
+    .click(getBarItemByTitle("Select device type"))
     .expect(getListItemByText("iPad").visible).ok();
+});
+test("Title hints", async (t) => {
+  await explicitErrorHandler();
+  await setJSON(json);
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .expect(Selector(".svc-top-bar .sv-action-bar-item").filterVisible().count).eql(3)
+    .expect(orientationAction.hasAttribute("disabled")).ok()
+    .expect(getBarItemByTitle("Show invisible elements").visible).ok()
+
+    .click(getBarItemByTitle("Select device type"))
+    .expect(getListItemByText("iPad").visible).ok()
+
+    .click(getListItemByText("iPad"))
+    .click(getBarItemByTitle("Switch to portrait orientation"))
+    .click(getBarItemByTitle("Switch to landscape orientation"))
+    .click(getBarItemByTitle("Show invisible elements"))
+    .expect(getBarItemByTitle("Hide invisible elements").visible).ok()
+    .click(getBarItemByTitle("Hide invisible elements"))
+    .expect(getBarItemByTitle("Show invisible elements").visible).ok();
 });

@@ -577,3 +577,28 @@ test("Change test themes list actions titles on changing locale", (): any => {
   creator.locale = "";
   expect(themeAction.title).toEqual("Modern");
 });
+test("Default mobile orientation", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.makeNewViewActive("test");
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(creator.previewOrientation).toBe("landscape");
+  expect(model.simulator.landscape).toBeTruthy();
+
+  const creator2: CreatorTester = new CreatorTester({ previewOrientation: "portrait" });
+  const testPlugin2: TabTestPlugin = <TabTestPlugin>creator2.getPlugin("test");
+  creator2.makeNewViewActive("test");
+  const model2: TestSurveyTabViewModel = testPlugin2.model;
+  expect(creator2.previewOrientation).toBe("portrait");
+  expect(model2.simulator.landscape).toBeFalsy();
+
+  creator2.previewOrientation = "landscape";
+  creator2.makeNewViewActive("test");
+  expect(model2.simulator.landscape).toBeFalsy();
+
+  const creator3: CreatorTester = new CreatorTester({ previewOrientation: "landscape" });
+  const testPlugin3: TabTestPlugin = <TabTestPlugin>creator3.getPlugin("test");
+  creator3.makeNewViewActive("test");
+  const model3: TestSurveyTabViewModel = testPlugin3.model;
+  expect(model3.simulator.landscape).toBeTruthy();
+});
