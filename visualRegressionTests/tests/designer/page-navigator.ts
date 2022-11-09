@@ -95,7 +95,7 @@ test("On the left side (rtl)", async (t) => {
 
   await t.expect(pageNavigatorElement.visible).ok();
   await t.wait(1000);
-  await takeScreenshot("page-navigator-left.png", pageNavigatorElement, screenshotComparerOptions);
+  await takeScreenshot("page-navigator-left-rtl.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
@@ -103,7 +103,7 @@ test("On the left side (rtl)", async (t) => {
   await t
     .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
   await t.wait(1000);
-  await takeScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, screenshotComparerOptions);
+  await takeScreenshot("page-navigator-left-rtl-hovered.png", pageNavigatorElement, screenshotComparerOptions);
   await t
     .expect(compareResults.isValid())
     .ok(compareResults.errorMessages());
