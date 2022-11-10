@@ -66,10 +66,10 @@ test("Check deactivating other tabs when json has errros", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(Selector("h5").withText("Change me").exists).notOk();
 });
-test("Check searchbox", async (t) => {
+test("Check search", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
     .pressKey("ctrl+f")
-    .expect(Selector(".ace_search").visible).ok();
+    .expect(Selector(".ace_content").visible).ok();
 });

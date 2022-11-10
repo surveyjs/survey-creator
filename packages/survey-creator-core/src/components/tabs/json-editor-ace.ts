@@ -7,7 +7,6 @@ import {
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
-import "brace/ext/searchbox";
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: AceAjax.Editor;
@@ -32,6 +31,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 
   public init(aceEditor: AceAjax.Editor): void {
     this.aceEditor = aceEditor;
+    this.aceEditor.commands["removeCommand"]("find");
     this.aceEditor.setReadOnly(this.readOnly);
     if (AceJsonEditorModel.aceBasePath) {
       try {
