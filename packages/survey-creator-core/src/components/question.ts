@@ -251,6 +251,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     (<Question>this.surveyElement).isRequired;
     const requiredAction = new Action({
       id: "isrequired",
+      ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       css: this.isRequired ? "sv-action-bar-item--secondary" : "",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
