@@ -7,8 +7,7 @@ import {
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
 import "./json-editor-ace.scss";
-import 'brace';
-import 'brace/ext/searchbox';
+import "brace/ext/searchbox";
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: AceAjax.Editor;
