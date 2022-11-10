@@ -2175,11 +2175,6 @@ test("Required properties restore on change to empty value", (): any => {
   expect(titleQuestion.value).toEqual("q1t");
   titleQuestion.value = "";
   expect(titleQuestion.value).toEqual("q1t");
-
-  var nameQuestion = propertyGrid.survey.getQuestionByName("name") as QuestionTextModel;
-  nameQuestion.value = "";
-  expect(nameQuestion.value).toEqual("question1");
-
   titleProp.isRequired = oldIsRequired;
 });
 test("Validate Selected Element Errors", () => {
