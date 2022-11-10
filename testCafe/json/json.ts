@@ -70,6 +70,6 @@ test("Check search", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
-    .pressKey("ctrl+f")
-    .expect(Selector(".ace_content").visible).ok();
+    .pressKey("ctrl+f") //check if there will be no errors
+    .expect(getTabbedMenuItemByText("JSON Editor").visible).ok();
 });
