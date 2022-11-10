@@ -19,6 +19,7 @@ import {
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
+  QuestionTextModel,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -901,6 +902,9 @@ export class PropertyGridModel {
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
+    if (q.property.isRequired && !options.value) {
+      options.value = options.oldValue;
+    }
   }
   private onValueChanged(options: any) {
     var q = options.question;
