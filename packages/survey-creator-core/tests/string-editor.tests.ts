@@ -1,5 +1,5 @@
 import { StringEditorConnector, StringItemsNavigatorBase, StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel, QuestionCheckboxModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
@@ -403,7 +403,7 @@ test("StringEditorConnector for selectbase questions", (): any => {
 
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual([]);
-})
+});
 
 test("StringEditorConnector for multiple text questions", (): any => {
   const creator = new CreatorTester();
@@ -447,7 +447,7 @@ test("StringEditorConnector for multiple text questions", (): any => {
 
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.items.map(c => c.name)).toEqual([]);
-})
+});
 
 test("StringEditorConnector for matrix questions (columns)", (): any => {
   const creator = new CreatorTester();
@@ -491,7 +491,7 @@ test("StringEditorConnector for matrix questions (columns)", (): any => {
 
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.columns.map(c => c.value)).toEqual([]);
-})
+});
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
@@ -541,8 +541,7 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
     connectorItem3.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual([]);
   }
-})
-
+});
 
 test("StringEditorConnector for matrixdropdown questions (columns)", (): any => {
   const creator = new CreatorTester();
@@ -591,7 +590,7 @@ test("StringEditorConnector for matrixdropdown questions (columns)", (): any => 
     connectorItem3.onBackspaceEmptyString.fire(null, {});
     expect(question.columns.map(c => c.value)).toEqual([]);
   }
-})
+});
 
 test("StringEditorConnector for matrix questions (rows)", (): any => {
   const creator = new CreatorTester();
@@ -640,7 +639,6 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   }
 });
 
-
 test("StringEditor on property value changing", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -668,7 +666,7 @@ test("StringEditor on property value changing", () => {
   stringEditorQuestion.onBlur(event);
   expect(eventRaised).toEqual(2);
   expect(question.locTitle.text).toEqual("c");
-})
+});
 
 test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator/issues/3568", () => {
   const creator = new CreatorTester();
@@ -691,8 +689,8 @@ test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator
       parentElement: { click: () => { } },
       innerText: "a", setAttribute: (attr, val) => {
         attrTest = attr;
-        valueTest = val
-      }, removeAttribute: (attr, val) => { attrTest = attr }
+        valueTest = val;
+      }, removeAttribute: (attr, val) => { attrTest = attr; }
     }
   };
   stringEditorSurveyTitle.onFocus(event);
@@ -701,7 +699,32 @@ test("StringEditor Shift+Tab Safari - https://github.com/surveyjs/survey-creator
   attrTest = null;
   stringEditorSurveyTitle.onBlur(event);
   expect(attrTest).toEqual("tabindex");
-})
+});
+
+test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com/surveyjs/survey-creator/issues/3658", () => {
+  const creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({
+    pages: [
+      {
+        elements: [
+          { name: "q", type: "checkbox", choices: [1, 2, 3], hasOther: true }
+        ]
+      }
+    ]
+  });
+
+  const question = survey.getQuestionByName("q") as QuestionCheckboxModel;
+  const locStrOtherItem: LocalizableString = question.otherItem.locText;
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrOtherItem, creator);
+
+  creator.onGetPropertyReadOnly.add((sender, options) => {
+    if(options.property.name === "otherText" && options.obj.getType() === "checkbox") {
+      options.readOnly = true;
+    }
+  });
+
+  expect(stringEditorSurveyTitle.contentEditable).toBeFalsy();
+});
 
 test("StringEditor multiline paste for selectbase questions", (): any => {
   const creator = new CreatorTester();
@@ -722,7 +745,7 @@ test("StringEditor multiline paste for selectbase questions", (): any => {
 
   connectorItem2.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "c", "item3"]);
-})
+});
 
 test("StringEditor multiline paste for multipletext questions", (): any => {
   const creator = new CreatorTester();
@@ -743,7 +766,7 @@ test("StringEditor multiline paste for multipletext questions", (): any => {
 
   connectorItem2.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.items.map(c => c.name)).toEqual(["text1", "a", "b", "c"]);
-})
+});
 
 test("StringEditor multiline paste for matrix questions", (): any => {
   const creator = new CreatorTester();
@@ -768,4 +791,4 @@ test("StringEditor multiline paste for matrix questions", (): any => {
 
   connectorItemRow.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.rows.map(c => c.text)).toEqual(["a", "b", "c", "Row 2"]);
-})
+});
