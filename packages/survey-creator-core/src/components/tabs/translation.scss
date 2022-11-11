@@ -1,5 +1,4 @@
 @import "../../variables.scss";
-@import "../../colors.scss";
 
 .svc-tab-translation {
   width: 100%;
@@ -75,7 +74,7 @@
   padding-left: calcSize(3);
   margin: 0;
 
-  background-color: $background-for-editors;
+  background-color: $background-dim-light;
   border-bottom: 1px solid $border-light;
 }
 .st-table {
@@ -88,7 +87,7 @@
   display: block;
   flex: 1 1;
   box-sizing: border-box;
-  background-color: $primary-bg-color;
+  background-color: $background;
   border-bottom: 1px solid $border-light;
   padding: calcSize(1) 0;
 }
@@ -123,7 +122,8 @@ td.st-table__cell:first-of-type {
   width: calc(100% - 3 * #{$base-unit});
   border: unset;
   outline: none;
-  background-color: $primary-bg-color;
+  background-color: $background;
+  color: $foreground;
   resize: none;
   padding: 0;
 }
