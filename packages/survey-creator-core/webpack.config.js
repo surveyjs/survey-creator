@@ -3,6 +3,7 @@
 var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 var rimraf = require("rimraf");
 var packageJson = require("./package.json");
 var fs = require("fs");
@@ -24,7 +25,7 @@ var banner = [
 
 var dts_banner = [
   "Type definitions for SurveyJS Creator JavaScript library v" +
-    packageJson.version,
+  packageJson.version,
   "(c) 2015-" + year + " Devsoft Baltic OÜ - http://surveyjs.io/",
   "Github: https://github.com/surveyjs/survey-creator",
   "License: https://surveyjs.io/Licenses#SurveyCreator",
@@ -115,7 +116,7 @@ module.exports = function (options) {
       }
     );
   }
-  
+
   //var packageName = chunkName || packageJson.name;
   var packageName = packageJson.name;
 
@@ -146,6 +147,7 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
+      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -246,6 +248,7 @@ module.exports = function (options) {
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
+      new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
         filename: isProductionBuild ? "[name].min.css" : "[name].css",
       }),
