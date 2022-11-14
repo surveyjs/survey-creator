@@ -56,9 +56,11 @@ import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 
+import "./fonts.scss";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
+
 import { StringEditorConnector } from "./components/string-editor";
 
 export interface IKeyboardShortcut {
@@ -1613,7 +1615,7 @@ export class CreatorBase extends Base
       parentObj = obj.locOwner;
       parentProperty = Survey.Serializer.findProperty(
         parentObj.getType(),
-        obj.ownerPropertyName
+        obj.ownerPropertyName || propertyName
       );
       let allowEdit = true;
       if (parentObj instanceof QuestionSelectBase) allowEdit = (parentObj as QuestionSelectBase).isItemInList(obj);
