@@ -1613,7 +1613,7 @@ export class CreatorBase extends Base
       parentObj = obj.locOwner;
       parentProperty = Survey.Serializer.findProperty(
         parentObj.getType(),
-        obj.ownerPropertyName
+        obj.ownerPropertyName || propertyName
       );
       let allowEdit = true;
       if (parentObj instanceof QuestionSelectBase) allowEdit = (parentObj as QuestionSelectBase).isItemInList(obj);
