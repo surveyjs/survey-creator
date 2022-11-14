@@ -56,9 +56,11 @@ import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 
+import "./fonts.scss";
 import "./components/creator.scss";
 import "./components/string-editor.scss";
 import "./creator-theme/creator.scss";
+
 import { StringEditorConnector } from "./components/string-editor";
 
 export interface IKeyboardShortcut {
