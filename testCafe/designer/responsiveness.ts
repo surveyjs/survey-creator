@@ -189,13 +189,13 @@ test("property grid for mobile devices", async (t) => {
     .resizeWindow(370, 400)
     .expect(mobilePropertGrid.visible).notOk()
 
-    .click(getBarItemByTitle("Survey Settings").filterVisible())
+    .click(getBarItemByTitle("Settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
     .expect(mobilePropertGridTitle.textContent).eql("Survey")
 
     .click(mobileCloseButton)
     .click(Selector("span").withText("Add Question"))
-    .click(getBarItemByTitle("Survey Settings").filterVisible().nth(0))
+    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
     .expect(mobilePropertGridTitle.textContent).eql("question1")
 
     .resizeWindow(1920, 900)
