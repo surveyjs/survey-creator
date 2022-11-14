@@ -189,13 +189,13 @@ test("property grid for mobile devices", async (t) => {
     .resizeWindow(370, 400)
     .expect(mobilePropertGrid.visible).notOk()
 
-    .click(getBarItemByTitle("Settings").filterVisible())
+    .click(getBarItemByTitle("Survey Settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
     .expect(mobilePropertGridTitle.textContent).eql("Survey")
 
     .click(mobileCloseButton)
     .click(Selector("span").withText("Add Question"))
-    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
+    .click(getBarItemByTitle("Survey Settings").filterVisible().nth(0))
     .expect(mobilePropertGridTitle.textContent).eql("question1")
 
     .resizeWindow(1920, 900)
@@ -333,7 +333,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
     .expect(flyoutPropertyGrid.exists).ok()
     .expect(objectSelectorButton.withText("page1").visible).ok()
     .click(collapseButtonSelector)
-    .click(getBarItemByTitle("Settings").filterVisible())
+    .click(getBarItemByTitle("Survey Settings").filterVisible())
     .expect(objectSelectorButton.withText("Survey").visible).ok()
     .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
 
