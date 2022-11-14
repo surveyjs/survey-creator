@@ -32,9 +32,18 @@ test("Change survey width", async (t) => {
 
     .typeText(widthEditorInput, "755px", { replace: true })
     .pressKey("tab");
-
   await t
     .expect(Selector(".sd-container-modern").clientWidth).eql(755);
+
+  await t
+    .click(widthEditorInput)
+
+    .typeText(widthEditorInput, "10000px", { replace: true })
+    .pressKey("tab");
+
+  await t
+    .expect(Selector(".sd-container-modern").clientWidth).gt(1300)
+    .expect(Selector(".sd-container-modern").clientWidth).lt(1310);
 });
 
 test("Change survey width", async (t) => {
