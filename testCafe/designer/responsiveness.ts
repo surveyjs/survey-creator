@@ -189,7 +189,7 @@ test("property grid for mobile devices", async (t) => {
     .resizeWindow(370, 400)
     .expect(mobilePropertGrid.visible).notOk()
 
-    .click(getBarItemByTitle("Settings").filterVisible())
+    .click(getBarItemByTitle("Survey Settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
     .expect(mobilePropertGridTitle.textContent).eql("Survey")
 
