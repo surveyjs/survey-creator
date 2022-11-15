@@ -10,10 +10,10 @@
         [class.svc-creator__side-bar--left]="creator.sidebarLocation == 'left'">
         <div class="svc-flex-column svc-flex-row__element svc-flex-row__element--growing">
           <div class="svc-top-bar">
-            <div class="svc-tabbed-menu-wrapper" [visible]="creator.showTabs">
+            <div class="svc-tabbed-menu-wrapper" [surveyVisible]="creator.showTabs">
               <svc-tabbed-menu [model]="creator.tabbedMenu"></svc-tabbed-menu>
             </div>
-            <div *ngIf="creator.showToolbar" class="svc-toolbar-wrapper" [visible]="creator.showToolbar">
+            <div *ngIf="creator.showToolbar" class="svc-toolbar-wrapper" [surveyVisible]="creator.showToolbar">
               <sv-action-bar [model]="creator.toolbar"></sv-action-bar>
             </div>
           </div>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div *ngIf="creator.isMobileView" class="svc-footer-bar">
-            <div class="svc-toolbar-wrapper" [visible]="creator.isMobileView">
+            <div class="svc-toolbar-wrapper" [surveyVisible]="creator.isMobileView">
               <sv-action-bar [model]="creator.footerToolbar"></sv-action-bar>
             </div>
           </div>

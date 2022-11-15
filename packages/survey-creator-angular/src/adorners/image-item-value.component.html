@@ -1,5 +1,6 @@
 <ng-template #template>
-  <div (pointerdown)="adorner.onPointerDown($event)" [class]="adorner.getRootCss()" [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? this.item.value : null" #container>
+  <div (pointerdown)="adorner.onPointerDown($event)" [class]="adorner.getRootCss()"
+    [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? this.item.value : null" #container>
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
     <div class="svc-image-item-value-wrapper__content">
@@ -9,15 +10,20 @@
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
           <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
         </div>
-        <span class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator" (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
+        <span class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator"
+          (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
           <svg [iconName]="'icon-drag-area-indicator'" [size]="24" sv-ng-svg-icon></svg>
         </span>
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
           <ng-container *ngIf="adorner.allowRemove">
-            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
+              (click)="adorner.chooseFile(adorner)" [surveyKey2Click] [attr.title]="undefined"
+              [attr.aria-label]="undefined">
               <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
             </span>
-            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__remove" (click)="adorner.remove(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
+              (click)="adorner.remove(adorner)" [surveyKey2Click] [attr.title]="undefined"
+              [attr.aria-label]="undefined">
               <svg [iconName]="'icon-delete'" [size]="24" sv-ng-svg-icon></svg>
             </span>
           </ng-container>
@@ -35,7 +41,8 @@
         </div>
 
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-          <span  class="svc-image-item-value-controls__button svc-image-item-value-controls__add" [key2click] (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
+          <span class="svc-image-item-value-controls__button svc-image-item-value-controls__add" [surveyKey2Click]
+            (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
             <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon></svg>
           </span>
         </div>

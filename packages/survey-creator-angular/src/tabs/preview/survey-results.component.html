@@ -7,10 +7,10 @@
         <svc-action-button [text]="model.surveyResultsJsonText" [click]="model.selectJsonClick" [disabled]="false" [selected]="model.isJsonSelected"></svc-action-button>
       </div>
   </div>
-  <div class="svd-test-results__text svd-light-bg-color" [visible]="model.resultViewType === 'text'">
+  <div class="svd-test-results__text svd-light-bg-color" [surveyVisible]="model.resultViewType === 'text'">
       <div>{{model.resultText}}</div>
   </div>
-  <div class="svd-test-results__table svd-light-bg-color" [visible]="model.resultViewType === 'table'">
+  <div class="svd-test-results__table svd-light-bg-color" [surveyVisible]="model.resultViewType === 'table'">
       <table>
           <thead>
               <tr class="svd-light-background-color">

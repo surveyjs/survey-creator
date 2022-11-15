@@ -1,13 +1,12 @@
 <ng-template #template>
-  <tr (click)="model.toggle()" [key2click]>
-    <td class="svd-dark-border-color"
-        [style.paddingLeft]="model.textMargin ">
-        <span *ngIf="model.isNode" class="svd-test-results__marker"
-              [class.svd-test-results__marker--expanded]="!model.collapsed"
-                         [style.left]="model.markerMargin">
-            <svg [iconName]="'icon-expand_16x16'" [size]="16" sv-ng-svg-icon></svg>
-        </span>
-        <span >{{model.title}}</span></td>
+  <tr (click)="model.toggle()" [surveyKey2Click]>
+    <td class="svd-dark-border-color" [style.paddingLeft]="model.textMargin ">
+      <span *ngIf="model.isNode" class="svd-test-results__marker"
+        [class.svd-test-results__marker--expanded]="!model.collapsed" [style.left]="model.markerMargin">
+        <svg [iconName]="'icon-expand_16x16'" [size]="16" sv-ng-svg-icon></svg>
+      </span>
+      <span>{{model.title}}</span>
+    </td>
     <td [class.svd-test-results__node-value]="model.isNode" [class.svd-dark-border-color]="!model.isNode">
       {{model.getString(model.displayValue)}}
     </td>

@@ -16,7 +16,7 @@
           <sv-ng-string *ngIf="model.selectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
           <div>{{model.readOnlyText}}</div>
         </div>
-        <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear" [visible]="!model.isEmpty()">
+        <div *ngIf="model.allowClear && model.cssClasses.cleanButtonIconId" [class]="model.cssClasses.cleanButton" (click)="clear" [surveyVisible]="!model.isEmpty()">
           <svg [class]="model.cssClasses.cleanButtonSvg" [iconName]="model.cssClasses.cleanButtonIconId" [size]="'auto'" [title]="model.clearCaption" [size]="24" sv-ng-svg-icon></svg>
         </div>
       </div>
