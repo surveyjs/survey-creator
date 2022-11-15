@@ -290,6 +290,9 @@ export class StringEditorViewModelBase extends Base {
       this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
       sanitizeEditableContent(event.target);
+      if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
+        event.target.innerText = event.target.innerText.substring(0, this.maxLength);
+      }
     }
   }
   public onCompositionEnd(event: any): void {
