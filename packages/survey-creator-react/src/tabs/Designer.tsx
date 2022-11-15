@@ -78,7 +78,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
       }
     } else {
       const page2Display = this.model.pagesController.page2Display;
-      if(!!page2Display) {
+      if (!!page2Display) {
         let cachedPage = this.renderedPagesCache[page2Display.id];
         if (!cachedPage) {
           cachedPage = this.createRenderedPage(page2Display, 0, true);
@@ -161,8 +161,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
     const survey: SurveyModel = this.creator.survey;
     const surveyHeader = this.renderHeader(this.creator.allowEditSurveyTitle);
     const style: any = {};
-    if(!!survey.width) {
-      style.width = survey.renderedWidth;
+    if (!!survey.width) {
       style.maxWidth = survey.renderedWidth;
     }
 
