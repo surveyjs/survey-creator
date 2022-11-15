@@ -348,6 +348,20 @@ test("Sanitizing in compostion input", (): any => {
   stringEditorSurveyTitle.onCompositionEnd({ target: null });
   expect(sanitizeEditableContent).toBeCalledTimes(5);
 });
+
+test("Maxlen check", (): any => {
+  Serializer.findProperty("survey", "title").maxLength = 12;
+  let creator = new CreatorTester();
+  const survey: SurveyModel = new SurveyModel({});
+  const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "title");
+  var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
+
+  var target = { innerText: "very long title" };
+  stringEditorSurveyTitle.onInput({ target: target });
+  expect(target.innerText).toEqual("very long ti");
+  Serializer.findProperty("survey", "title").maxLength = -1;
+});
+
 test("StringEditorConnector activate test", (): any => {
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({});
