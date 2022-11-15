@@ -3,7 +3,7 @@ import { Selector } from "testcafe";
 const title = "Property Grid";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await t.maximizeWindow();
+  await t.resizeWindow(1920, 1080);
 });
 
 test("Change survey width", async (t) => {
@@ -42,8 +42,8 @@ test("Change survey width", async (t) => {
     .pressKey("tab");
 
   await t
-    .expect(Selector(".sd-container-modern").clientWidth).gt(1300)
-    .expect(Selector(".sd-container-modern").clientWidth).lt(1310);
+    .expect(Selector(".sd-container-modern").clientWidth).gt(1220)
+    .expect(Selector(".sd-container-modern").clientWidth).lt(1230);
 });
 
 test("Change survey width", async (t) => {
