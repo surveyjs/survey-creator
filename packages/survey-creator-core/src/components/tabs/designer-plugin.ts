@@ -127,8 +127,12 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       active: <any>new ComputedUpdater<boolean>(() => {
         return notShortCircuitAnd(this.creator.sidebar.activeTab === this.propertyGridTab.id, this.isSurveySelected);
       }),
+      pressed: <any>new ComputedUpdater<boolean>(() => {
+        return notShortCircuitAnd(this.creator.sidebar.activeTab === this.propertyGridTab.id, this.isSurveySelected);
+      }),
       visible: this.createVisibleUpdater(),
-      title: "Settings",
+      locTitleName: "ed.surveySettings",
+      locTooltipName: "ed.surveySettingsTooltip",
       showTitle: false
     });
 
@@ -163,9 +167,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     items.push(this.surveySettingsAction);
     this.creator.onSelectedElementChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     this.creator.onShowSidebarVisibilityChanged.add((sender, options) => {
       this.surveySettingsAction.active = this.isSettingsActive;
+      this.surveySettingsAction.pressed = this.isSettingsActive;
     });
     return items;
   }

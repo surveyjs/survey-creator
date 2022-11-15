@@ -87,6 +87,8 @@ export var enStrings = {
     logic: "Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
+    surveySettings: "Survey Settings",
+    surveySettingsTooltip: "Survey Settings",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     designer: "Designer",
