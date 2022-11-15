@@ -4,13 +4,14 @@
   <div class="svc-item-value-controls">
     <!-- ko if: isDraggable -->
     <span class="svc-item-value-controls__button svc-item-value-controls__drag">
-      <sv-svg-icon data-bind="attr: { 'aria-label': dragTooltip }" class="svc-item-value-controls__drag-icon"
+      <sv-svg-icon class="svc-item-value-controls__drag-icon"
         params="iconName: 'icon-drag-area-indicator', size: 24, title: dragTooltip"></sv-svg-icon>
     </span>
     <!-- /ko -->
     <!-- ko if: allowAdd -->
     <sv-svg-icon class="svc-item-value-controls__button svc-item-value-controls__add"
-      data-bind="click: add, key2click, attr: { 'aria-label': tooltip }" params="iconName: 'icon-add_16x16', size: 16, title: tooltip">
+      data-bind="click: add, key2click, attr: { 'aria-label': tooltip }"
+      params="iconName: 'icon-add_16x16', size: 16, title: tooltip">
     </sv-svg-icon>
     <!-- /ko -->
     <!-- ko if: allowRemove -->
