@@ -2,11 +2,11 @@
   "Categories": [
     {
       "Name": "overview",
-      "Title": "Survey Creator / Form Builder Overview"
+      "Title": "Overview"
     },
     {
       "Name": "get-started",
-      "Title": "Get Started with Survey Creator / Form Builder",
+      "Title": "Get Started",
       "Items": [
         {
           "Name": "get-started-angular",
