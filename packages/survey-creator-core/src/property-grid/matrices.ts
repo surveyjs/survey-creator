@@ -94,6 +94,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showDetailAction.iconName = row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
       };
       showDetailAction.visibleIndex = 0;
+      showDetailAction.visible = this.hasPropertiesInDetail;
       row.onDetailPanelShowingChanged = () => {
         showDetailAction.iconName = this.getShowDetailActionIconName(row);
       };
