@@ -53,6 +53,7 @@ import {
 } from "../../src/property-grid/values";
 import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
 import { editorLocalization } from "../../src/editorLocalization";
+import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/condition";
@@ -2785,4 +2786,25 @@ test("Add tab after general for survey object", () => {
   let propertyGrid = new PropertyGridModelTester(survey);
   expect(propertyGrid.survey.getAllPanels()[1].name).toEqual("geoLocation");
   Serializer.removeProperty("survey", "region");
+});
+test("itemvalue[] property editor + row actions + invisible detail elements", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  const options = new EmptySurveyCreatorOptions();
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const actions1 = choicesQuestion.renderedTable.rowsActions[0];
+  expect(actions1).toHaveLength(2);
+
+  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
+    { name: "general", visible: false }
+  ];
+  const propertyGrid2 = new PropertyGridModelTester(question, options);
+  const choicesQuestion2 = <QuestionMatrixDynamicModel>(
+    propertyGrid2.survey.getQuestionByName("choices")
+  );
+  const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
+  expect(actions2).toHaveLength(1);
 });
