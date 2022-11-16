@@ -401,7 +401,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     var evtOptions = {
       allowAddRemoveItems: true,
       allowRemoveAllItems: true,
-      showTextView: true
+      showTextView: true,
+      enableTextView: true
       // options.itemsEntryType
     };
     options.onSetPropertyEditorOptionsCallback(prop.name, <any>obj, evtOptions);
@@ -411,6 +412,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     (<any>matrix).allowRemoveAllItems = evtOptions.allowRemoveAllItems;
     (<any>matrix).showTextView = evtOptions.showTextView;
+    (<any>matrix).enableTextView = evtOptions.enableTextView;
   }
 }
 
@@ -426,7 +428,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): boolean {
-    if ((<any>question).showTextView === false) return false;
+    if ((<any>question).enableTextView === false) return false;
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
     var items = question.value;

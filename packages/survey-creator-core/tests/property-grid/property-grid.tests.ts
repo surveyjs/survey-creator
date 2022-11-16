@@ -1526,7 +1526,7 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
     object = obj;
     options.allowAddRemoveItems = false;
     options.allowRemoveAllItems = false;
-    options.showTextView = false;
+    options.enableTextView = false;
   };
 
   const question = new QuestionDropdownModel("q1");
@@ -1542,8 +1542,37 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   const actions = choicesQuestion.getTitleActions();
   expect(actions).toHaveLength(2);
   const updater = getAddItemActionEnableUpdater(choicesQuestion);
+  expect(actions[0].id).toEqual("property-grid-setup");
   expect(actions[0].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
+});
+
+test("options.onSetPropertyEditorOptionsCallback - enableTextView", () => {
+  const options = new EmptySurveyCreatorOptions();
+  var propName = "";
+  var object = null;
+  options.onSetPropertyEditorOptionsCallback = (
+    propertyName: string,
+    obj: Base,
+    options: any
+  ) => {
+    if (propertyName != "choices") return;
+    propName = propertyName;
+    object = obj;
+    options.showTextView = false;
+  };
+
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(propName).toEqual("choices");
+  const actions = choicesQuestion.getTitleActions();
+  expect(actions).toHaveLength(2);
+  expect(actions[0].id).toEqual("property-grid-clear");
+  expect(actions[1].id).toEqual("add-item");
 });
 
 test("options.onValueChangingCallback", () => {

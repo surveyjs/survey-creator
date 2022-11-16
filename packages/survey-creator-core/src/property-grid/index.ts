@@ -321,20 +321,22 @@ export class PropertyGridTitleActionsCreator {
         this.createClearValueAction(editor, property, question, enabled)
       );
     }
-    if (!!editor.createPropertyEditorSetup) {
-      if (enabled) {
-        enabled =
-          !editor.isPropertyEditorSetupEnabled ||
-          editor.isPropertyEditorSetupEnabled(
-            this.obj,
-            property,
-            options.question,
-            this.options
-          );
+    if ((<any>question).showTextView !== false) {
+      if (!!editor.createPropertyEditorSetup) {
+        if (enabled) {
+          enabled =
+            !editor.isPropertyEditorSetupEnabled ||
+            editor.isPropertyEditorSetupEnabled(
+              this.obj,
+              property,
+              options.question,
+              this.options
+            );
+        }
+        actions.push(
+          this.createEditorSetupAction(editor, property, question, enabled)
+        );
       }
-      actions.push(
-        this.createEditorSetupAction(editor, property, question, enabled)
-      );
     }
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
