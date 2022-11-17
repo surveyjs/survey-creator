@@ -2798,6 +2798,7 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   const actions1 = choicesQuestion.renderedTable.rowsActions[0];
   expect(actions1).toHaveLength(2);
 
+  const oldDefinition = SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs;
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = [
     { name: "general", visible: false }
   ];
@@ -2807,4 +2808,5 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   );
   const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
   expect(actions2).toHaveLength(1);
+  SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = oldDefinition;
 });
