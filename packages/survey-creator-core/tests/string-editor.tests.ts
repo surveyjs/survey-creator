@@ -757,7 +757,7 @@ test("StringEditor multiline paste for selectbase questions", (): any => {
   );
   var connectorItem2 = StringEditorConnector.get(question.choices[1].locText);
 
-  connectorItem2.onTextChanging.fire(null, { value: "a\nb\r\nc" });
+  connectorItem2.onTextChanging.fire(null, { value: "\na\nb\r\nc\n" });
   expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "c", "item3"]);
 });
 

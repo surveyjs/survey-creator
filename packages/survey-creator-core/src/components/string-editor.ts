@@ -58,7 +58,7 @@ export abstract class StringItemsNavigatorBase {
 
     connector.onTextChanging.clear();
     connector.onTextChanging.add((sender, options) => {
-      let lines = options.value.split(/\r?\n/);
+      let lines = options.value.split(/\r?\n/).filter(line => !!line);
       if (lines.length <= 1) return;
       options.cancel = true;
       const itemIndex = items.indexOf(item);
