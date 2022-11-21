@@ -401,7 +401,8 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     var evtOptions = {
       allowAddRemoveItems: true,
       allowRemoveAllItems: true,
-      showTextView: true
+      showTextView: true,
+      allowBatchEdit: true
       // options.itemsEntryType
     };
     options.onSetPropertyEditorOptionsCallback(prop.name, <any>obj, evtOptions);
@@ -411,6 +412,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     (<any>matrix).allowRemoveAllItems = evtOptions.allowRemoveAllItems;
     (<any>matrix).showTextView = evtOptions.showTextView;
+    (<any>matrix).allowBatchEdit = evtOptions.allowBatchEdit;
   }
 }
 
