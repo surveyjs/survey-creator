@@ -1526,7 +1526,7 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
     object = obj;
     options.allowAddRemoveItems = false;
     options.allowRemoveAllItems = false;
-    options.enableTextView = false;
+    options.showTextView = false;
   };
 
   const question = new QuestionDropdownModel("q1");
@@ -1547,7 +1547,7 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(updater()).toBeFalsy();
 });
 
-test("options.onSetPropertyEditorOptionsCallback - enableTextView", () => {
+test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   const options = new EmptySurveyCreatorOptions();
   var propName = "";
   var object = null;
@@ -1559,7 +1559,7 @@ test("options.onSetPropertyEditorOptionsCallback - enableTextView", () => {
     if (propertyName != "choices") return;
     propName = propertyName;
     object = obj;
-    options.showTextView = false;
+    options.allowBatchEdit = false;
   };
 
   const question = new QuestionDropdownModel("q1");

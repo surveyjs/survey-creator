@@ -321,7 +321,7 @@ export class PropertyGridTitleActionsCreator {
         this.createClearValueAction(editor, property, question, enabled)
       );
     }
-    if ((<any>question).showTextView !== false) {
+    if ((<any>question).allowBatchEdit !== false) {
       if (!!editor.createPropertyEditorSetup) {
         if (enabled) {
           enabled =

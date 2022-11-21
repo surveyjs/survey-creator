@@ -402,7 +402,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       allowAddRemoveItems: true,
       allowRemoveAllItems: true,
       showTextView: true,
-      enableTextView: true
+      allowBatchEdit: true
       // options.itemsEntryType
     };
     options.onSetPropertyEditorOptionsCallback(prop.name, <any>obj, evtOptions);
@@ -412,7 +412,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     (<any>matrix).allowRemoveAllItems = evtOptions.allowRemoveAllItems;
     (<any>matrix).showTextView = evtOptions.showTextView;
-    (<any>matrix).enableTextView = evtOptions.enableTextView;
+    (<any>matrix).allowBatchEdit = evtOptions.allowBatchEdit;
   }
 }
 
@@ -428,7 +428,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): boolean {
-    if ((<any>question).enableTextView === false) return false;
+    if ((<any>question).showTextView === false) return false;
     var matrix = <QuestionMatrixDynamicModel>question;
     var column = matrix.getColumnByName("value");
     var items = question.value;

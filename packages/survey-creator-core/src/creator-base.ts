@@ -643,8 +643,7 @@ export class CreatorBase extends Base
    *- options.editorOptions  options that can be changed.
    *- options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
    *- options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
-   *- options.editorOptions.enabledTextView a boolean property, true by default. Set it false to disable "Manual Entry" tab for "choices" property.
-   *- options.editorOptions.showTextView a boolean property, true by default. Set it false to hide "Manual Entry" tab for "choices" property.
+   *- options.editorOptions.allowBatchEdit a boolean property, true by default. Set it false to hide "Manual Entry" tab for "choices" property.
    *- options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Manual Entry" tab for "choices" property by default.
    */
   public onSetPropertyEditorOptions: Survey.Event<
