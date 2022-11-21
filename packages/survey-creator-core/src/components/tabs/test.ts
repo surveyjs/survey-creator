@@ -38,7 +38,11 @@ export class TestSurveyTabViewModel extends Base {
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
-  @property({ defaultValue: true }) isRunning: boolean;
+  @property({
+    defaultValue: true, onSet: (value: boolean, target: TestSurveyTabViewModel) => {
+      if (!!target.simulator) target.simulator.isRunning = value;
+    }
+  }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
     onSet: (val: PageModel, target: TestSurveyTabViewModel) => {

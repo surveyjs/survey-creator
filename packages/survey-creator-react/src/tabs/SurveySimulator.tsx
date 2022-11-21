@@ -13,8 +13,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   }
 
   renderElement(): JSX.Element {
-    const mainSimulatorClass = "svd-simulator-main" +
-      (this.model.device === "desktop" ? " svd-simulator-main--desktop" : "");
+    const mainSimulatorClass = this.model.getRootCss();
     if (!this.model.survey) {
       return <div className={mainSimulatorClass}></div>;
     }
