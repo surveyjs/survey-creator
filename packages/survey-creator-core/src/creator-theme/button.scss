@@ -10,7 +10,7 @@
   border-radius: calcSize(0.5);
   cursor: pointer;
   user-select: none;
-  outline-color: $primary;
+  outline: solid calcSize(0.25) transparent;
 
   .svc-text {
     display: flex;
@@ -24,5 +24,4 @@
 .svc-btn:hover,
 .svc-btn:focus {
   box-shadow: 0 0 0 2px $primary;
-  outline: none;
 }

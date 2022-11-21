@@ -178,11 +178,11 @@
 
   .svc-logic-tab__content-action--disabled {
     cursor: default;
-    outline: none;
+    outline: solid calcSize(0.25) transparent;
+    box-shadow: 0px 1px 2px $shadow-inner;
 
     &:hover {
       background-color: $background;
-      box-shadow: 0px 1px 2px $shadow-inner;
     }
   }
 
