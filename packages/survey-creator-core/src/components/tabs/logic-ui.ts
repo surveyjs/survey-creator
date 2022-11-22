@@ -60,7 +60,6 @@ export class SurveyLogicUI extends SurveyLogic {
       this.expressionEditorCanShowBuilder = !!this.editableItem;
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
-      if (this.readOnly) return;
       updateMatrixLogicExpandAction(options.question, options.actions, options.row);
       updateMatrixLogicRemoveAction(options.question, options.actions, options.row);
     });
@@ -116,6 +115,9 @@ export class SurveyLogicUI extends SurveyLogic {
   protected onReadOnlyChanged(): void {
     if (!this.itemsSurvey) return;
     this.itemsSurvey.mode = this.readOnly ? "display" : "edit";
+    Object.keys(this.itemUIHash || {}).forEach(id => {
+      this.updateEditModeLogicItem(this.itemUIHash[id]);
+    });
   }
   public get expressionEditor(): ConditionEditor {
     return this.expressionEditorValue;
@@ -129,11 +131,18 @@ export class SurveyLogicUI extends SurveyLogic {
   public getLogicItemEditor(item: SurveyLogicItem): LogicItemEditor {
     return this.getLogicItemUI(item).itemEditor;
   }
+  private updateEditModeLogicItem(item: ILogicItemUI) {
+    if (!item) return;
+
+    item.expressionEditor.editSurvey.mode = this.readOnly ? "display" : "edit";
+    item.itemEditor.editSurvey.mode = this.readOnly ? "display" : "edit";
+  }
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
     let res: ILogicItemUI = this.itemUIHash[item.id];
     if (!res) {
       const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
+      this.updateEditModeLogicItem(res);
       res.expressionEditor.context = context;
       res.itemEditor.context = context;
       res.expressionEditor.text = item.expression;
@@ -191,7 +200,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
-    if(this.expressionEditor.hasErrorInUI()) {
+    if (this.expressionEditor.hasErrorInUI()) {
       this.errorText = this.expressionEditor.errorText;
       return true;
     }
@@ -298,7 +307,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private getLogicItemDisplayText(item: SurveyLogicItem): string {
     const text = item.getDisplayText();
-    if(!this.options) return text;
+    if (!this.options) return text;
     return this.options.onLogicGetTitleCallback(item.expression, item.expressionText, text, item);
   }
   private updateItemsSurveyData() {

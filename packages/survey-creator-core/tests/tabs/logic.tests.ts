@@ -2783,3 +2783,46 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("test");
 });
+test("Creator is readonly", () => {
+  const creator = new CreatorTester({ showTitlesInExpressions: true });
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "Question 1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  };
+  creator.readOnly = true;
+  const logicUI = new SurveyLogicUI(creator.survey, creator);
+
+  logicUI.editItem(logicUI.items[0]);
+  const logicUIHash = logicUI["itemUIHash"];
+  expect(Object.keys(logicUIHash)).toHaveLength(1);
+  let rule1 = logicUIHash[logicUI.items[0].id];
+  expect(rule1.expressionEditor.editSurvey.mode).toBe("display");
+  expect(rule1.itemEditor.editSurvey.mode).toBe("display");
+
+  logicUI.editItem(logicUI.items[1]);
+  expect(Object.keys(logicUIHash)).toHaveLength(2);
+  let rule2 = logicUIHash[logicUI.items[1].id];
+  expect(rule1.expressionEditor.editSurvey.mode).toBe("display");
+  expect(rule1.itemEditor.editSurvey.mode).toBe("display");
+  expect(rule2.expressionEditor.editSurvey.mode).toBe("display");
+  expect(rule2.itemEditor.editSurvey.mode).toBe("display");
+
+  logicUI.readOnly = false;
+  expect(Object.keys(logicUIHash)).toHaveLength(2);
+  expect(rule1.expressionEditor.editSurvey.mode).toBe("edit");
+  expect(rule1.itemEditor.editSurvey.mode).toBe("edit");
+  expect(rule2.expressionEditor.editSurvey.mode).toBe("edit");
+  expect(rule2.itemEditor.editSurvey.mode).toBe("edit");
+
+  logicUI.readOnly = true;
+  expect(Object.keys(logicUIHash)).toHaveLength(2);
+  expect(rule1.expressionEditor.editSurvey.mode).toBe("display");
+  expect(rule1.itemEditor.editSurvey.mode).toBe("display");
+  expect(rule2.expressionEditor.editSurvey.mode).toBe("display");
+  expect(rule2.itemEditor.editSurvey.mode).toBe("display");
+});
