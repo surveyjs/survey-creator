@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
+import { CreatorBase } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
 
 @Component({
@@ -8,4 +9,7 @@ import { TestDefaultComponent } from "./default.component";
   encapsulation: ViewEncapsulation.None
 })
 export class TestThemeSwitcherComponent extends TestDefaultComponent {
+  protected override createCreator(): void {
+    this.creator = new CreatorBase({});
+  }
 }
