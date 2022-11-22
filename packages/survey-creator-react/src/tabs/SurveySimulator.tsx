@@ -20,7 +20,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     if (this.model.hasFrame) {
       return (
         <div
-          className={mainSimulatorClass + " " + this.model.simulatorMainCssClass}
+          className={mainSimulatorClass}
           onKeyDown={e => this.model.tryToZoom(e, e)}
           onMouseEnter={this.model.device === "desktop" ? null : this.model.activateZoom}
           onMouseLeave={this.model.device === "desktop" ? null : this.model.deactivateZoom}
