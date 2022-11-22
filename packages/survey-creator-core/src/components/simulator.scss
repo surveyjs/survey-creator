@@ -115,6 +115,9 @@
 
   &.svd-simulator-main--desktop {
     min-height: auto;
+    &.svd-simulator-main--running {
+      height: 100%;
+    }
   }
 
   &.svd-simulator-main--frame {

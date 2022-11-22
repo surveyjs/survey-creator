@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest } from "../../helper";
 
 const title = "Test tab Screenshot";
@@ -230,5 +230,79 @@ test("survey-width", async (t) => {
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await takeElementScreenshot("test-tab-survey-width.png", simulator, t, comparer);
+  });
+});
+test("Check survey timer", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+
+    await t.resizeWindow(1920, 1080);
+    const json = {
+      "title": "American History",
+      "showTimerPanel": "bottom",
+      "showTimerPanelMode": "survey",
+      "maxTimeToFinish": 60,
+      "widthMode": "static",
+      "firstPageIsStarted": true,
+      "pages": [
+        {
+          "elements": [
+            {
+              "type": "html",
+              "html": "You are about to start a quiz on American history. <br>You will have 10 seconds for every question and 25 seconds to end the quiz.<br>Enter your name below and click <b>Start Quiz</b> to begin."
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "civilwar",
+              "title": "When was the American Civil War?",
+              "choices": [
+                "1796-1803",
+                "1810-1814",
+                "1861-1865",
+                "1939-1945"
+              ],
+              "correctAnswer": "1861-1865"
+            },
+            {
+              "type": "radiogroup",
+              "name": "libertyordeath",
+              "title": "Whose quote is this: \"Give me liberty, or give me death\"?",
+              "choices": [
+                "John Hancock",
+                "James Madison",
+                "Patrick Henry",
+                "Samuel Adams"
+              ],
+              "correctAnswer": "Patrick Henry"
+            },
+            {
+              "type": "radiogroup",
+              "name": "magnacarta",
+              "title": "What is Magna Carta?",
+              "choices": [
+                "The foundation of the British parliamentary system",
+                "The Great Seal of the monarchs of England",
+                "The French Declaration of the Rights of Man",
+                "The charter signed by the Pilgrims on the Mayflower"
+              ],
+              "correctAnswer": "The foundation of the British parliamentary system"
+            }
+          ]
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      const style = document.createElement("style");
+      style.innerHTML = ".sd-timer__progress--animation { transition: none !important; }";
+      document.body.appendChild(style);
+      (<any>window).Survey.SurveyTimer.instance.start = () => { };
+    })();
+    await setJSON(json);
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(Selector(".sd-navigation__start-btn"));
+    await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });

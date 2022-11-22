@@ -1,4 +1,4 @@
-import { Base, property, SurveyModel } from "survey-core";
+import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 
 import "./simulator.scss";
 
@@ -41,7 +41,7 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: "desktop" }) device: string;
   @property({ defaultValue: "l" }) orientation: string;
   @property({ defaultValue: true }) considerDPI: boolean;
-
+  @property({ defaultValue: true }) isRunning: boolean;
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
 
@@ -120,10 +120,6 @@ export class SurveySimulatorModel extends Base {
     return this.simulatorEnabled && device.deviceType !== "desktop";
   }
 
-  public get simulatorMainCssClass() {
-    return this.hasFrame ? "svd-simulator-main--frame" : "";
-  }
-
   public get simulatorFrame() {
     if (!this.hasFrame) {
       return undefined;
@@ -150,6 +146,14 @@ export class SurveySimulatorModel extends Base {
         device.cssClass +
         (this.landscapeOrientation ? " svd-simulator-frame-landscape" : ""),
     };
+  }
+  public getRootCss(): string {
+    return new CssClassBuilder()
+      .append("svd-simulator-main")
+      .append("svd-simulator-main--frame", this.hasFrame)
+      .append("svd-simulator-main--desktop", this.device === "desktop")
+      .append("svd-simulator-main--running", this.isRunning)
+      .toString();
   }
 }
 
