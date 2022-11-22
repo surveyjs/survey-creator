@@ -262,9 +262,9 @@ test("Simulator view switch", (): any => {
     ]
   };
   let model: TestSurveyTabViewModel = getTestModel(creator);
-  expect(model.simulator.simulatorMainCssClass).toEqual("");
+  expect(model.simulator.getRootCss().includes("svd-simulator-main--frame")).toBeFalsy();
   model.simulator.device = "iPhone6";
-  expect(model.simulator.simulatorMainCssClass).toEqual("svd-simulator-main--frame");
+  expect(model.simulator.getRootCss().includes("svd-simulator-main--frame")).toBeTruthy();
 });
 test("Simulator in iphone6", (): any => {
   let creator: CreatorTester = new CreatorTester();
