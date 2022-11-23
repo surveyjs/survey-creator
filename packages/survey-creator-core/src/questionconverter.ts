@@ -37,6 +37,7 @@ export class QuestionConverter {
     if(!newQuestion) {
       newQuestion = Survey.Serializer.createClass(convertToClass, {});
     }
+    if(newQuestion instanceof Survey.QuestionSelectBase) newQuestion.choices = null;
     newQuestion.name = obj.name;
     const json = newQuestion.toJSON();
     const qJson = obj.toJSON();
