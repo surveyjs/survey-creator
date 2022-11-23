@@ -29,28 +29,28 @@ test("Checkbox question inplace editor", async (t) => {
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(1))
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(1).find("span").withText("item1").exists).ok()
+    .expect(items.nth(1).find("span").withText("Item 1").exists).ok()
     .expect(items.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(2))
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(2).find("span").withText("item2").exists).ok()
+    .expect(items.nth(2).find("span").withText("Item 2").exists).ok()
     .expect(items.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(3).find("span").withText("item3").exists).ok()
+    .expect(items.nth(3).find("span").withText("Item 3").exists).ok()
     .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("item4").exists).ok()
+    .expect(items.nth(4).find("span").withText("Item 4").exists).ok()
     .expect(items.nth(6).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(6).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(6).find(".svc-item-value-controls__remove").visible).notOk()
@@ -95,7 +95,7 @@ test("Checkbox question inplace editor", async (t) => {
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(5).find("span").withText("item5").exists).ok()
+    .expect(items.nth(5).find("span").withText("Item 5").exists).ok()
 
     .click(items.nth(4).find(".svc-item-value-controls__remove"))
     .expect(items.count).eql(7)
@@ -126,28 +126,28 @@ test("Radiogroup question inplace editor", async (t) => {
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(0))
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(0).find("span").withText("item1").exists).ok()
+    .expect(items.nth(0).find("span").withText("Item 1").exists).ok()
     .expect(items.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(1))
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(1).find("span").withText("item2").exists).ok()
+    .expect(items.nth(1).find("span").withText("Item 2").exists).ok()
     .expect(items.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(2))
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(2).find("span").withText("item3").exists).ok()
+    .expect(items.nth(2).find("span").withText("Item 3").exists).ok()
     .expect(items.nth(3).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(3).find("span").withText("item4").exists).ok()
+    .expect(items.nth(3).find("span").withText("Item 4").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
@@ -192,7 +192,7 @@ test("Radiogroup question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("item5").exists).ok()
+    .expect(items.nth(4).find("span").withText("Item 5").exists).ok()
 
     .click(items.nth(3).find(".svc-item-value-controls__remove"))
     .expect(items.count).eql(6)
@@ -224,9 +224,9 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
                 "type": "radiogroup",
                 "name": "question1",
                 "choices": [
-                  "item1",
-                  "item2",
-                  "item3"
+                  "Item 1",
+                  "Item 2",
+                  "Item 3"
                 ]
               }
             ]
@@ -246,28 +246,28 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(0))
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(0).find("span").withText("item1").exists).ok()
+    .expect(items.nth(0).find("span").withText("Item 1").exists).ok()
     .expect(items.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(1))
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(1).find("span").withText("item2").exists).ok()
+    .expect(items.nth(1).find("span").withText("Item 2").exists).ok()
     .expect(items.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(2))
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(2).find("span").withText("item3").exists).ok()
+    .expect(items.nth(2).find("span").withText("Item 3").exists).ok()
     .expect(items.nth(3).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(3).find("span").withText("item4").exists).ok()
+    .expect(items.nth(3).find("span").withText("Item 4").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
@@ -312,7 +312,7 @@ test("Radiogroup inside PanelDynamic question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("item5").exists).ok()
+    .expect(items.nth(4).find("span").withText("Item 5").exists).ok()
 
     .click(items.nth(3).find(".svc-item-value-controls__remove"))
     .expect(items.count).eql(6)
@@ -344,28 +344,28 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(0))
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(0).find("span").withText("item1").exists).ok()
+    .expect(items.nth(0).find("span").withText("Item 1").exists).ok()
     .expect(items.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(1))
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(1).find("span").withText("item2").exists).ok()
+    .expect(items.nth(1).find("span").withText("Item 2").exists).ok()
     .expect(items.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(2))
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(2).find("span").withText("item3").exists).ok()
+    .expect(items.nth(2).find("span").withText("Item 3").exists).ok()
     .expect(items.nth(3).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(3).find("span").withText("item4").exists).ok()
+    .expect(items.nth(3).find("span").withText("Item 4").exists).ok()
     .expect(items.nth(5).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(5).find(".svc-item-value-controls__remove").visible).notOk()
@@ -410,7 +410,7 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("item5").exists).ok()
+    .expect(items.nth(4).find("span").withText("Item 5").exists).ok()
 
     .click(items.nth(3).find(".svc-item-value-controls__remove"))
     .expect(items.count).eql(6)
@@ -444,28 +444,28 @@ test("Ranking question inplace editor", async (t) => {
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(0))
     .expect(items.nth(0).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(0).find("span").withText("item1").exists).ok()
+    .expect(items.nth(0).find("span").withText("Item 1").exists).ok()
     .expect(items.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(1).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(1))
     .expect(items.nth(1).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(1).find("span").withText("item2").exists).ok()
+    .expect(items.nth(1).find("span").withText("Item 2").exists).ok()
     .expect(items.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(2).find(".svc-item-value-controls__remove").visible).ok()
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(2))
     .expect(items.nth(2).find(".svc-item-value-controls__drag-icon").visible).ok()
-    .expect(items.nth(2).find("span").withText("item3").exists).ok()
+    .expect(items.nth(2).find("span").withText("Item 3").exists).ok()
     .expect(items.nth(3).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).ok()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(3).find("span").withText("item4").exists).ok()
+    .expect(items.nth(3).find("span").withText("Item 4").exists).ok()
 
     .click(items.nth(3).find(".svc-item-value-controls__add"))
     .expect(items.count).eql(5)
@@ -481,7 +481,7 @@ test("Ranking question inplace editor", async (t) => {
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .hover(items.nth(4))
     .expect(items.nth(4).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .expect(items.nth(4).find("span").withText("item5").exists).ok()
+    .expect(items.nth(4).find("span").withText("Item 5").exists).ok()
 
     .click(items.nth(3).find(".svc-item-value-controls__remove"))
     .expect(items.count).eql(4)
@@ -654,12 +654,12 @@ test("Checkbox question inplace editor", async (t) => {
                 "type": "checkbox",
                 "name": "question1",
                 "choices": [
-                  "item1",
-                  "item2",
-                  "item3",
-                  "item4",
-                  "item5",
-                  "item6"
+                  "Item 1",
+                  "Item 2",
+                  "Item 3",
+                  "Item 4",
+                  "Item 5",
+                  "Item 6"
                 ]
               }
             ]

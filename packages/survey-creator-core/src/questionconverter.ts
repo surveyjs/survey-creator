@@ -60,7 +60,11 @@ export class QuestionConverter {
       if(convertToClass === "image" && !json.imageLink) {
         json.imageLink = questionDefaultSettings.imageLink;
       }
-      if(convertToClass === "imagepicker") {
+      if(convertToClass === "imagepicker" ||
+        convertToClass === "dropdown" ||
+        convertToClass === "checkbox" ||
+        convertToClass === "radiogroup"
+      ) {
         if(!json.choices) {
           json.choices = questionDefaultSettings.choices;
         }

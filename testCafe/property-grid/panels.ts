@@ -17,9 +17,9 @@ test("Panel stay focused on question change", async (t) => {
             "name": "question1",
             "title": "question1",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           },
           {
@@ -27,9 +27,9 @@ test("Panel stay focused on question change", async (t) => {
             "name": "question2",
             "title": "question2",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           }
         ]

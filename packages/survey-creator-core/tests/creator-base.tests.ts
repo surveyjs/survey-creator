@@ -1257,7 +1257,7 @@ test("Convert text question into dropdown", (): any => {
   var el = <QuestionDropdownModel>creator.selectedElement;
   expect(el.getType()).toEqual("dropdown");
   expect(el.choices).toHaveLength(3);
-  expect(el.choices[0].value).toEqual("item1");
+  expect(el.choices[0].value).toEqual("Item 1");
 });
 test("Convert text question into single matrix", (): any => {
   var creator = new CreatorTester();
@@ -1532,7 +1532,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    },]
+    }, ]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
