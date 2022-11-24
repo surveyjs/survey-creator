@@ -270,21 +270,21 @@ test("Check string editor inplaceEditForValues property", async (t) => {
     .expect(ClientFunction(() => {
       var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
       return { value: itemvalue.value, text: itemvalue.text };
-    })()).eql({ value: "Item 1", text: "newitem1" });
+    })()).eql({ value: "Item 1", text: "newItem 1" });
 
   await ClientFunction(() => {
     window["creator"].inplaceEditForValues = true;
   })();
 
   await t
-    .click(Selector(".sv-string-editor").withText("newitem1"))
-    .click(Selector(".sv-string-editor").withText("newitem1"))
-    .typeText(Selector(".sv-string-editor").withText("newitem1"), "Ok", { caretPos: 0 })
+    .click(Selector(".sv-string-editor").withText("newItem 1"))
+    .click(Selector(".sv-string-editor").withText("newItem 1"))
+    .typeText(Selector(".sv-string-editor").withText("newItem 1"), "Ok", { caretPos: 0 })
     .pressKey("enter")
     .expect(ClientFunction(() => {
       var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
       return { value: itemvalue.value, text: itemvalue.text };
-    })()).eql({ value: "Oknewitem1", text: "newitem1" });
+    })()).eql({ value: "OknewItem 1", text: "newItem 1" });
 });
 
 test("Check item string editor focus out on near click", async (t) => {
@@ -793,7 +793,7 @@ test("Paste multiline selectbase", async (t) => {
   await t.expect(Selector(".sv-string-editor").withText("Item 3").focused).ok();
   await t.expect(ClientFunction(() => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
-  })()).eql("[\"Item 1\",\"ita\",\"b\",\"cem2\",\"Item 3\"]");
+  })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
 test("Undo after new item add", async (t) => {
   await t

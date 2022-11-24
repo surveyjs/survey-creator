@@ -91,6 +91,9 @@ export var settings = {
       radiogroup: {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
+      ranking: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
       imagepicker: {
         choices: [
           {

@@ -251,7 +251,7 @@ test("Edit Logic rule", async (t) => {
 
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'q1' == \'item2\', make question 'q3' visible");
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'q1' == \'Item 2\', make question 'q3' visible");
 });
 
 test("Filtering rules", async (t) => {
