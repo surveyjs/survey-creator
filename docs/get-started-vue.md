@@ -1,4 +1,8 @@
-# Add Survey Creator / Form Builder to a Vue Application
+---
+title: JS Form Builder Library for Vue.js | Getting Started Guide
+description: A step-by-step guide to get started with Survey Creator component in a Vue.js application.
+---
+# Add Survey Creator / Form Builder to a Vue.js Application
 
 This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a Vue application. To add the component to your application, follow the steps below:
 

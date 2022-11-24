@@ -1,3 +1,7 @@
+---
+title: JS Form Builder Library for Knockout and jQuery | Getting Started Guide
+description: A step-by-step guide to get started with Survey Creator component in a Knockout or jQuery application.
+---
 # Add Survey Creator / Form Builder to a Knockout or jQuery Application
 
 This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a Knockout or jQuery application. To add Survey Creator to your application, follow the steps below:

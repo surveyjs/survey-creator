@@ -1,3 +1,7 @@
+---
+title: JS Form Builder Library for React | Getting Started Guide
+description: A step-by-step guide to get started with Survey Creator component in a React application.
+---
 # Add Survey Creator / Form Builder to a React Application
 
 This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a React application. To add the component to your application, follow the steps below:
