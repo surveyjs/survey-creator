@@ -51,6 +51,8 @@ var buildPlatformJson = {
   files: [
     packageJson.name + ".css",
     packageJson.name + ".min.css",
+    packageJson.name + ".fontless.css",
+    packageJson.name + ".fontless.min.css",
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
     packageJson.name + ".min.js",
