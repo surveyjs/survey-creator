@@ -12,7 +12,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react" target="_blank">Get Started with Survey Creator / Form Builder - React</a>.
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
 If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">React + SurveyJS Quick Start Boilerplate</a>.
 
@@ -64,7 +64,7 @@ export function SurveyCreatorWidget() {
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 import { SurveyCreator } from "survey-creator-react";
@@ -104,7 +104,7 @@ export function SurveyCreatorWidget() {
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
@@ -202,7 +202,7 @@ export function SurveyCreatorWidget() {
 To view the application, run `npm run start` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
@@ -262,7 +262,7 @@ export function SurveyCreatorWidget() {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react" target="_blank">View full code on GitHub</a>
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
 ## Further Reading
 

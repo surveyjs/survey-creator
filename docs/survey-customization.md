@@ -16,15 +16,15 @@ Adorners are design-surface controls that allow Survey Creator users to manipula
 
 You can control the visibility of adorners using the `onElementAllowOperations` event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
 
-| Property | Description |
-|--------- | ----------- |
-| `allowAddToToolbox` | Shows or hides the adorner that saves the current survey element configuration in the Toolbox. |
-| `allowChangeRequired` | Shows or hides the adorner that makes the question required. |
-| `allowChangeType` | Shows or hides the adorner that changes the survey element type. |
-| `allowCopy` | Shows or hides the adorner that duplicates the survey element. |
-| `allowDelete` | Shows or hides the adorner that deletes the survey element. |
-| `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements. |
-| `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
+| Property              | Description                                                                                                                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowAddToToolbox`   | Shows or hides the adorner that saves the current survey element configuration in the Toolbox.                                                                                                          |
+| `allowChangeRequired` | Shows or hides the adorner that makes the question required.                                                                                                                                            |
+| `allowChangeType`     | Shows or hides the adorner that changes the survey element type.                                                                                                                                        |
+| `allowCopy`           | Shows or hides the adorner that duplicates the survey element.                                                                                                                                          |
+| `allowDelete`         | Shows or hides the adorner that deletes the survey element.                                                                                                                                             |
+| `allowDragging`       | Shows or hides the adorner that allows users to drag and drop survey elements.                                                                                                                          |
+| `allowEdit`           | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
 
@@ -50,19 +50,19 @@ SurveyCreator.removeAdorners();
 ```
 -->
 
-[View the "Custom Adorner" Demo](https://surveyjs.io/survey-creator/examples/customadorner/ (linkstyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/customadorner/ (linkstyle))
 
 ## Customize Survey Elements on Creation
 
 Survey Creator raises events when users add new elements to a survey. You can handle these events to customize the elements.
 
-| Event name | Raised when |
-| ---------- | ----------- |
-| [onQuestionAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onQuestionAdded) | Raised when users add a question to the survey. |
-| [onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPanelAdded) | Raised when users add a panel to the survey. |
-| [onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPageAdded) | Raised when users add a page to the survey. |
+| Event name                                                                                                    | Raised when                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [onQuestionAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onQuestionAdded)         | Raised when users add a question to the survey.                                                                                                                                                                                          |
+| [onPanelAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPanelAdded)               | Raised when users add a panel to the survey.                                                                                                                                                                                             |
+| [onPageAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPageAdded)                 | Raised when users add a page to the survey.                                                                                                                                                                                              |
 | [onMatrixColumnAdded](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onMatrixColumnAdded) | Raised when users add a column to the [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) or [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) question. |
-| [onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded) | Raised when users add a new item value (column, row, choice). |
+| [onItemValueAdded](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded)        | Raised when users add a new item value (column, row, choice).                                                                                                                                                                            |
 
 The code below shows how you can handle the `onQuestionAdded` event to customize the default question name:
 
@@ -81,7 +81,7 @@ creator.onQuestionAdded.add(function (_, options) {
 });
 ```
 
-[View the "Modify New Question" Demo](https://surveyjs.io/survey-creator/examples/oncreatequestion/ (linkstyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/oncreatequestion/ (linkstyle))
 
 ## Access Survey Instances Within Survey Creator
 

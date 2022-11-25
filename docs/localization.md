@@ -55,7 +55,7 @@ translations.pe.visible = "Is element visible?";
 translations.ed.jsonEditor = "Edit As Text";
 ```
 
-[View the "Interface Localization" Demo](https://surveyjs.io/Examples/Survey-Creator/?id=localization (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator/?id=localization (linkStyle))
 
 
 You can also create a custom locale to apply multiple translations in a batch. Declare an object with your translations and assign it to the `locales["localeName"]` property. The following code shows how to do it in a separate TypeScript translation file (dictionary):
@@ -134,4 +134,4 @@ import { SurveyCreatorModel } from "survey-creator-core";
 const creator = new SurveyCreatorModel(creatorOptions);
 ```
 
-[View the "Multiple Languages" Demo](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator/?id=multiplelanguages (linkStyle))

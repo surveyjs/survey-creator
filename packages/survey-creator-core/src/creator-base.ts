@@ -208,7 +208,7 @@ export class CreatorBase extends Base
    *
    * Default value: `false`
    *
-   * **IMPORTANT**: You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
+   * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
    */
   @property({ defaultValue: false }) haveCommercialLicense: boolean;
   public get licenseText(): string {
@@ -1146,7 +1146,7 @@ export class CreatorBase extends Base
    *
    * Default value: `true`
    *
-   * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
    */
   public allowChangeThemeInPreview = true;
 
