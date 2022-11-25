@@ -91,6 +91,9 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateFilterPageAction(true);
   }
   public deactivate(): boolean {
+    if(!!this.model) {
+      this.model.dispose();
+    }
     this.model = undefined;
     this.sidebarTab.visible = false;
     this.filterStringsAction.visible = false;

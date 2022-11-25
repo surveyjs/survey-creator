@@ -1111,6 +1111,19 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   dispose() {
+    this.isEmpty = true;
+    if(!!this.stringsSurvey) {
+      this.stringsSurvey.dispose();
+      this.stringsSurvey = undefined;
+    }
+    if(!!this.stringsHeaderSurvey) {
+      this.stringsHeaderSurvey.dispose();
+      this.stringsHeaderSurvey = undefined;
+    }
+    if(!!this.settingsSurveyValue) {
+      this.settingsSurveyValue.dispose();
+      this.settingsSurveyValue = undefined;
+    }
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
