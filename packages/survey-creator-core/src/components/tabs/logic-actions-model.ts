@@ -229,7 +229,8 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
 
     if (!!this.logicType.questionNames) {
       const questionsToMove = triggerEditorPanel.elements.filter(el => this.logicType.questionNames.indexOf(el.name) !== -1);
-      questionsToMove.forEach(question => {
+      questionsToMove.forEach(q => {
+        const question = q as QuestionDropdownModel;
         if (question.getType() === "dropdown") {
           question.allowClear = false;
           question.renderAs = "logicoperator";
