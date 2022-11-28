@@ -167,6 +167,7 @@ test("disable locales", () => {
   });
   surveyLocalization.supportedLocales = ["", "fr"];
   const translation: Translation = new Translation(survey);
+  translation.reset();
   const locales: string[] = translation.locales;
   expect(locales).toHaveLength(4);
   expect(translation.localesQuestion.choices).toHaveLength(3);
@@ -196,6 +197,7 @@ test("Translation show All strings", () => {
   survey.pages[0].title = "title1";
   survey.pages[0].addNewQuestion("checkbox", "question1");
   const translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.root.locItems).toHaveLength(1);
   expect(translation.root.groups).toHaveLength(1);
   const pageGroup: TranslationGroup = translation.root.groups[0];
@@ -210,6 +212,7 @@ test("Do not add group if there is no items in it.", () => {
   const survey: SurveyModel = new SurveyModel();
   survey.triggers.push(new SurveyTriggerComplete());
   const translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.root.groups).toHaveLength(0);
 });
 test("Question validators name", () => {
@@ -263,6 +266,7 @@ test("Filter by Page", () => {
   survey.addNewPage("Page 2");
   survey.pages[1].title = "title2";
   const translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.root.groups).toHaveLength(2);
   translation.filteredPage = survey.pages[0];
   expect(translation.root.obj.name).toEqual("Page 1");
@@ -396,6 +400,7 @@ test("Export to array", () => {
     ]
   });
   const translation: Translation = new Translation(survey);
+  translation.reset();
   let exported;
   parse(translation.exportToCSV(), {
     complete: function (results, file) {
@@ -425,6 +430,7 @@ test("Export settings.translation.prefix", () => {
     ]
   });
   var translation = new Translation(survey);
+  translation.reset();
   const exportStr1 = translation.exportToCSV();
   settings.translation.exportPrefix = "12345;";
   const exportStr2 = translation.exportToCSV();
@@ -463,6 +469,7 @@ test("Merging a locale with default", () => {
     ]
   });
   const translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.locales).toHaveLength(3);
   expect(translation.locales).toContain("de");
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
@@ -565,6 +572,7 @@ test("Add pages as a custom property, it should not produce the error, Bug#991",
     ]
   });
   const translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.locales).toHaveLength(3);
   Serializer.removeProperty("page", "pages");
 });
@@ -589,6 +597,7 @@ test("Show questions as they are in survey. Do not sort them", () => {
     ]
   });
   let translation: Translation = new Translation(survey);
+  translation.reset();
   expect(translation.root.groups).toHaveLength(1);
   let group: TranslationGroup = translation.root.groups[0];
   expect(group.items).toHaveLength(2);
@@ -596,6 +605,7 @@ test("Show questions as they are in survey. Do not sort them", () => {
   expect(group.items[1].name).toEqual("question2");
   settings.translation.sortByName = false;
   translation = new Translation(survey);
+  translation.reset();
   group = translation.root.groups[0];
   expect(group.items[0].name).toEqual("question2");
   expect(group.items[1].name).toEqual("question1");
@@ -626,6 +636,7 @@ test("check LocalizableStrings/dataList property", () => {
   );
   q1.dataList = ["en1", "en2"];
   const translation: Translation = new Translation(survey);
+  translation.reset();
   const root: TranslationGroup = translation.root;
   expect(root.groups).toHaveLength(1);
   const q1G: TranslationGroup = root.groups[0].groups[0];

@@ -519,7 +519,7 @@ export class Translation extends Base implements ITranslationLocales {
       el.value = "";
     };
     this.settingsSurveyValue = this.createSettingsSurvey();
-    this.survey = survey;
+    this.surveyValue = survey;
     this.setupToolbarItems();
     this.calcIsChooseLanguageEnabled();
   }
@@ -742,18 +742,16 @@ export class Translation extends Base implements ITranslationLocales {
     for (var i = 0; i < group.items.length; i++) {
       if (group.items[i].isGroup) continue;
       let item = <TranslationItem>group.items[i];
-      if (panel.questions.length == 0) {
-        let matrix = <QuestionMatrixDropdownModel>(
-          Serializer.createClass("matrixdropdown")
-        );
-        matrix.cellType = "comment";
-        matrix.titleLocation = "hidden";
-        matrix.name = this.getStringsSurveyQuestionName(group, parent);
-        matrix.showHeader = false;
-        panel.addQuestion(matrix);
-        this.addLocaleColumns(matrix);
-      }
-      let matrix = <QuestionMatrixDropdownModel>panel.questions[0];
+      let matrix = <QuestionMatrixDropdownModel>(
+        Serializer.createClass("matrixdropdown")
+      );
+      matrix.cellType = "comment";
+      matrix.titleLocation = "hidden";
+      matrix.name = this.getStringsSurveyQuestionName(group, parent) + i;
+      matrix.showHeader = false;
+      panel.addQuestion(matrix);
+      this.addLocaleColumns(matrix);
+      // let matrix = <QuestionMatrixDropdownModel>panel.questions[0];
       var itemValue = new ItemValue(item.name, item.text);
       itemValue["translationData"] = item;
       matrix.rows.push(itemValue);
@@ -1111,6 +1109,19 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   dispose() {
+    this.isEmpty = true;
+    if(!!this.stringsSurvey) {
+      this.stringsSurvey.dispose();
+      this.stringsSurvey = undefined;
+    }
+    if(!!this.stringsHeaderSurvey) {
+      this.stringsHeaderSurvey.dispose();
+      this.stringsHeaderSurvey = undefined;
+    }
+    if(!!this.settingsSurveyValue) {
+      this.settingsSurveyValue.dispose();
+      this.settingsSurveyValue = undefined;
+    }
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
