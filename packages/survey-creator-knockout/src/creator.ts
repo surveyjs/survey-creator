@@ -1,9 +1,10 @@
 import * as ko from "knockout";
-import { Survey, SurveyModel } from "survey-knockout-ui";
+import { Survey } from "survey-knockout-ui";
 import {
   ICreatorOptions,
   CreatorBase
 } from "survey-creator-core";
+import { SurveyModel } from "survey-core";
 
 if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
