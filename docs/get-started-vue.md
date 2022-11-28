@@ -12,7 +12,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue" target="_blank">Get Started with Survey Creator / Form Builder - Vue</a>.
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue (linkStyle))
 
 If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue Quick Start Boilerplate</a>.
 
@@ -74,7 +74,7 @@ export default {
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 <script>
@@ -130,7 +130,7 @@ export default {
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 <template>
@@ -250,7 +250,7 @@ export default {
 To view the application, run `npm run serve` in a command line and open [http://localhost:8080/](http://localhost:8080/) in your browser.
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 <template>
@@ -323,7 +323,7 @@ export default {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue" target="_blank">View full code on GitHub</a>
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue (linkStyle))
 
 ## Further Reading
 

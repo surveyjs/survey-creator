@@ -15,7 +15,7 @@ As an example, we will integrate the [React Color](https://casesandberg.github.i
 npm install react-color --save
 ```
 
-[View full code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components)
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components (linkStyle))
 
 ## Create a Model
 
@@ -249,12 +249,13 @@ PropertyGridEditorCollection.register({
 });
 ```
 
-[View full code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components)
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components  (linkStyle))
 
 ## See also
 
 The following demo shows how to use the [React Select](https://react-select.com/home) control as a drop-down editor for a survey question.
-[View the "React Select as a Drop-Down Editor" Demo](https://surveyjs.io/survey-creator/examples/react-select/ (linkstyle))
+
+[View Demo](https://surveyjs.io/survey-creator/examples/react-select/ (linkstyle))
 
 ## Further Reading
 

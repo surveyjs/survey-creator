@@ -136,7 +136,7 @@ export class QuestionToolbox
   /**
    * Contains toolbox categories and allows you to modify them.
    * 
-   * [View example](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
+   * [View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
    */
   @propertyArray() categories: Array<QuestionToolboxCategory>;
   /**
@@ -724,7 +724,7 @@ export class QuestionToolbox
     });
     const action = this.getActionByItem(item);
     const existingAction = this.getActionById(item.id);
-    if(!!existingAction) {
+    if (!!existingAction) {
       this.actions.splice(this.actions.indexOf(existingAction), 1, action);
     } else {
       const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(item.id) : -1;

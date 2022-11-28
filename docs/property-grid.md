@@ -62,8 +62,7 @@ creator.onShowingProperty.add(function (_, options) {
 
 <div id="addproperties"></div>
 
-[View the "Hide a category in the Properties Grid" Demo](https://surveyjs.io/survey-creator/examples/hidecategoryinpropertiesgrid/ (linkStyle))
-[View the "Remove properties" Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
 
 ## Add Custom Properties to the Property Grid
 
@@ -89,18 +88,18 @@ A string value that specifies the property name. It is the only required propert
 
 A string value that specifies the property type. Accepts one of the values described in the table below. Each type produces a different property editor.
 
-| `type` | Property Editor | Description |
-| ------ | --------------- | ----------- |
-| `"string"` (default) | Text input | Use this type for short string values. |
-| `"boolean"` | Checkbox | Use this type for Boolean values. |
-| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enableIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
-| `"expression"` | Multi-line text input with a hint icon | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions). |
-| `"number"` | Text input | Use this type for numeric values. |
-| `"text"` | Multi-line text input | Use this type for multi-line text values. |
-| `"html"` | Multi-line text input | Use this type for HTML markup. |
-| `"itemvalues"` | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkbox, and Radiogroup questions use this type for the [`choices`](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choices) property. |
-| `"value"` | Button that opens a dialog window | The dialog window displays the survey element and allows users to set the element's default value. |
-| `"multiplevalues"` | A group of checkboxes with a Select All checkbox | Use this type to allow respondents to select more than one predefined value. Requires a defined [`choices`](#choices) array. |
+| `type`               | Property Editor                                      | Description                                                                                                                                                                                                                                                                                                             |
+| -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"string"` (default) | Text input                                           | Use this type for short string values.                                                                                                                                                                                                                                                                                  |
+| `"boolean"`          | Checkbox                                             | Use this type for Boolean values.                                                                                                                                                                                                                                                                                       |
+| `"condition"`        | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enableIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
+| `"expression"`       | Multi-line text input with a hint icon               | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions).                                                                                                                                                                                  |
+| `"number"`           | Text input                                           | Use this type for numeric values.                                                                                                                                                                                                                                                                                       |
+| `"text"`             | Multi-line text input                                | Use this type for multi-line text values.                                                                                                                                                                                                                                                                               |
+| `"html"`             | Multi-line text input                                | Use this type for HTML markup.                                                                                                                                                                                                                                                                                          |
+| `"itemvalues"`       | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkbox, and Radiogroup questions use this type for the [`choices`](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choices) property.                                        |
+| `"value"`            | Button that opens a dialog window                    | The dialog window displays the survey element and allows users to set the element's default value.                                                                                                                                                                                                                      |
+| `"multiplevalues"`   | A group of checkboxes with a Select All checkbox     | Use this type to allow respondents to select more than one predefined value. Requires a defined [`choices`](#choices) array.                                                                                                                                                                                            |
 
 `type` can also accept custom values. In this case, you need to register a property editor for the custom type in the `PropertyGridEditorCollection` and specify a standard JSON object that the custom type should produce. For example, the following code configures a `"shortname"` property that has a custom `"shorttext"` type: 
 
@@ -126,7 +125,7 @@ SurveyCreator.PropertyGridEditorCollection.register({
 });
 ```
 
-[View the "Custom property editor" Demo](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator/?id=custompropertyeditor (linkStyle))
 
 You can add the type to the `name` property after a colon character as a shortcut:
 
@@ -264,7 +263,7 @@ Survey.Serializer.addProperty("text", {
 });
 ```
 
-[View the "Property Dependencies" Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
 
 #### `visibleIndex`
 
@@ -420,7 +419,7 @@ Survey.Serializer.addProperty("survey", {
 });
 ```
 
-[View the "Property Dependencies" Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
 
 #### `onGetValue`
 
@@ -439,7 +438,7 @@ Survey.Serializer.addProperty("question", {
 
 A function that you can use to perform actions when the property value is set (for example, update another property value).
 
-> NOTE: Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
+> Do not assign a value directly to an object property because this will trigger the `onSetValue` function again. Use the object's `setPropertyValue(propertyName, newValue)` method instead.
 
 ```js
 Survey.Serializer.addProperty("question", {
