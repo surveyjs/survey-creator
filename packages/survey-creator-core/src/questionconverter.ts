@@ -64,7 +64,8 @@ export class QuestionConverter {
       if(convertToClass === "imagepicker" ||
         convertToClass === "dropdown" ||
         convertToClass === "checkbox" ||
-        convertToClass === "radiogroup"
+        convertToClass === "radiogroup" ||
+        convertToClass === "ranking"
       ) {
         if(!json.choices) {
           json.choices = questionDefaultSettings.choices;
