@@ -28,7 +28,7 @@ import {
 } from "../utils/utils";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {

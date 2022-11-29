@@ -12,7 +12,7 @@ import {
 } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { ExpressionToDisplayText } from "../../expressionToDisplayText";
-import { ISurveyCreatorOptions } from "../../settings";
+import { ISurveyCreatorOptions } from "../../creator-settings";
 import { wrapTextByCurlyBraces } from "../../utils/utils";
 
 export function getLogicString(name: string) {

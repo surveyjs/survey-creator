@@ -26,7 +26,7 @@ import {
   ILocalizableOwner,
   PopupBaseViewModel
 } from "survey-core";
-import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
+import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropSurveyElements, DragDropChoices } from "survey-core";

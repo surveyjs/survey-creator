@@ -5,7 +5,7 @@ import {
   PropertyGridEditor
 } from "./index";
 import { ConditionEditor } from "./condition-survey";
-import { ISurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions } from "../creator-settings";
 
 export class PropertyGridEditorExpression extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {

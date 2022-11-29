@@ -1,5 +1,5 @@
 import { Base, property } from "survey-core";
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 require("./notifier.scss");
 
 export class Notifier extends Base {

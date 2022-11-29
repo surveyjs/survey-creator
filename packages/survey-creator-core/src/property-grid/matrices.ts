@@ -1,7 +1,7 @@
 import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
-import { ISurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions } from "../creator-settings";
 import { getNextValue } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {

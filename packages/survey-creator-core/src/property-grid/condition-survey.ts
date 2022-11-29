@@ -1,5 +1,5 @@
 import { SurveyModel, Serializer, ConditionsParser, QuestionPanelDynamicModel, Operand, UnaryOperand, BinaryOperand, Variable, Const, ArrayOperand, ItemValue, PanelModel, Helpers, Base, JsonObject, Question, QuestionCommentModel, FunctionFactory, QuestionDropdownModel, QuestionMatrixDropdownModelBase } from "survey-core";
-import { ISurveyCreatorOptions, settings } from "../settings";
+import { ISurveyCreatorOptions, settings } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyHelper } from "../survey-helper";
 import { PropertyEditorSetupValue } from "./index";

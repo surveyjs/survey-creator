@@ -1,6 +1,6 @@
 import { Question, Base } from "survey-core";
 import { PropertyEditorSetupValue } from "./index";
-import { ISurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions } from "../creator-settings";
 import { SurveyHelper } from "../survey-helper";
 import { editorLocalization } from "../editorLocalization";
 

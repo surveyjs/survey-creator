@@ -33,7 +33,7 @@ import {
   ISurveyCreatorOptions,
   ICollectionItemAllowOperations,
   settings as creatorSettings
-} from "../settings";
+} from "../creator-settings";
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../survey-helper";

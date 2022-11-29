@@ -13,7 +13,7 @@ import { DragDropChoices } from "survey-core";
 require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
 
-import { ICollectionItemAllowOperations } from "../settings";
+import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector, StringEditorViewModelBase } from "./string-editor";
 
 export class ItemValueWrapperViewModel extends Base {

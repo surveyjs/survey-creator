@@ -1,6 +1,6 @@
 import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";

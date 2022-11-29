@@ -4,7 +4,7 @@ Version = `${process.env.VERSION}`;
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
-export * from "../settings";
+export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
 
 export * from "../creator-base";

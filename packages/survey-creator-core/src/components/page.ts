@@ -5,7 +5,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
 require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 
 export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;

@@ -7,7 +7,7 @@ import {
   property
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: AdaptiveActionContainer;

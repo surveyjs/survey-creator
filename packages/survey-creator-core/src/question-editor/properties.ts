@@ -4,7 +4,7 @@ import {
 } from "./definition";
 import * as Survey from "survey-core";
 import { SurveyHelper } from "../survey-helper";
-import { ISurveyCreatorOptions, settings } from "../settings";
+import { ISurveyCreatorOptions, settings } from "../creator-settings";
 
 export class SurveyQuestionEditorPropertyDefinition {
   public property: Survey.JsonObjectProperty;
