@@ -19,6 +19,6 @@ export class SidebarComponent extends BaseAngular<SidebarModel> implements After
     super.ngOnDestroy();
   }
   ngAfterViewInit(): void {
-    this.model.initResizeManager(this.container.nativeElement);
+    this.model.initResizeManager(this.container.nativeElement as HTMLDivElement);
   }
 }

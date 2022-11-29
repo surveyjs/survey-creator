@@ -6,7 +6,7 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-import "./json-editor-ace.scss";
+require("./json-editor-ace.scss");
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: AceAjax.Editor;

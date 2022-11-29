@@ -1,9 +1,9 @@
-import { PageModel, property, SurveyElement, SurveyModel } from "survey-core";
+import { IAction, PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
-import "./page.scss";
+require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../settings";
 
@@ -11,7 +11,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: false }) isSelected: boolean;
   @property({ defaultValue: true }) isPageLive: boolean;
   public onPageSelectedCallback: () => void;
-  public questionTypeSelectorModel;
+  public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
 
   constructor(creator: CreatorBase, page: PageModel) {
@@ -133,10 +133,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       ? "svc-page__content--selected"
       : "";
   }
-  public hover(event: MouseEvent, element: HTMLElement) {
+  public hover(event: MouseEvent, element: HTMLElement | any) {
     toggleHovered(event, element, this.creator.pageHoverDelay);
   }
-  public hoverStopper(event: MouseEvent, element: HTMLElement) {
+  public hoverStopper(event: MouseEvent, element: HTMLElement | any) {
     event["__svc_question_processed"] = true;
   }
 

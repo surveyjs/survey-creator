@@ -37,7 +37,7 @@ export interface ISurveyLogicType {
     lt: SurveyLogicType
   ) => string;
   getElementName?: (element: Base) => string;
-  getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement>;
+  getSelectorChoices?: (survey: SurveyModel, context: Question) => Array<SurveyElement<any>>;
   supportContext?: (question: Base) => boolean;
   getParentElement?(element: Base): Base;
 }
@@ -148,7 +148,7 @@ export class SurveyLogicType {
   public get hasSelectorChoices(): boolean {
     return !!this.logicType.getSelectorChoices;
   }
-  public getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+  public getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
     if (!this.hasSelectorChoices) return null;
     return this.logicType.getSelectorChoices(survey, context);
   }
@@ -221,7 +221,7 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel): boolean {
         return survey.getAllPanels().length > 0;
       },
-      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         return <any>survey.getAllPanels();
       }
     },
@@ -235,7 +235,7 @@ export class SurveyLogicTypes {
       getParentElement(element: Base): Base {
         return !!element ? (<Question>element).parentQuestion : null;
       },
-      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         const res = [];
         const questions = survey.getAllQuestions();
         for (var i = 0; i < questions.length; i++) {
@@ -263,7 +263,7 @@ export class SurveyLogicTypes {
       getParentElement(element: Base): Base {
         return !!element ? (<any>element).colOwner : null;
       },
-      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         const res = [];
         const questions = survey.getAllQuestions();
         for (var i = 0; i < questions.length; i++) {
@@ -280,7 +280,7 @@ export class SurveyLogicTypes {
       }
     }
   };
-  public static types = [
+  public static types: Array<ISurveyLogicType> = [
     {
       name: "page_visibility",
       baseClass: "page",
@@ -288,7 +288,7 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel): boolean {
         return survey.pages.length > 1;
       },
-      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         return survey.pages;
       }
     },
@@ -299,7 +299,7 @@ export class SurveyLogicTypes {
       showIf: function (survey: SurveyModel): boolean {
         return survey.pages.length > 1;
       },
-      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement> {
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
         return survey.pages;
       }
     },

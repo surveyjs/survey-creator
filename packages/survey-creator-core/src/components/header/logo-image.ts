@@ -1,6 +1,6 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
-import "./logo-image.scss";
+require("./logo-image.scss");
 
 export class LogoImageViewModel extends Base {
   constructor(private creator: CreatorBase, public root: HTMLDivElement) {

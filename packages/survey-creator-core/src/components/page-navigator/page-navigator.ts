@@ -1,8 +1,8 @@
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
-import "./page-navigator.scss";
-import "./page-navigator-item.scss";
+require("./page-navigator.scss");
+require("./page-navigator-item.scss");
 import { getLocString } from "../../editorLocalization";
 
 export class PageNavigatorViewModel extends Base {
@@ -133,7 +133,7 @@ export class PageNavigatorViewModel extends Base {
   protected createActionBarCore(item: IAction): Action {
     return new Action(item);
   }
-  togglePageSelector = () => this.popupModel.toggleVisibility();
+  togglePageSelector = (event?: any) => this.popupModel.toggleVisibility();
   public get pageSelectorCaption() {
     return getLocString("ed.selectPage");
   }
@@ -219,7 +219,7 @@ export class PageNavigatorViewModel extends Base {
   @property({ defaultValue: 0 }) visibleItemsStartIndex: number;
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
   private _itemsContainer: HTMLDivElement;
-  public setItemsContainer(itemsContainer: HTMLDivElement) {
+  public setItemsContainer(itemsContainer: HTMLDivElement | any) {
     this.stopItemsContainerHeightObserver();
     this._itemsContainer = itemsContainer;
     this._resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[], observer: ResizeObserver) => this.updateVisibleItems(entries[0].contentBoxSize[0].blockSize));

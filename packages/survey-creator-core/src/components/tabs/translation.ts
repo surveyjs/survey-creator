@@ -4,7 +4,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 
-import "./translation.scss";
+require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";

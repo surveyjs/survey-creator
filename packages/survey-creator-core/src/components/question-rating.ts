@@ -11,7 +11,7 @@ import { CreatorBase } from "../creator-base";
 import { getLocString } from "../editorLocalization";
 import { getNextValue } from "../utils/utils";
 
-import "./question-rating.scss";
+require("./question-rating.scss");
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(

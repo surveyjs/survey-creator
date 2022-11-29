@@ -49,7 +49,7 @@ export class SurveyPageNavigator extends CreatorModelElement<
         el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
           return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };
-        self.model.setItemsContainer(el.parentElement);
+        self.model.setItemsContainer(el.parentElement as HTMLDivElement);
       }
     }
   }

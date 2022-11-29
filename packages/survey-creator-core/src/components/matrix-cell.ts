@@ -12,7 +12,7 @@ import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 
-import "./matrix-cell.scss";
+require("./matrix-cell.scss");
 
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
@@ -96,7 +96,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
     event.stopPropagation();
   }
-  public hover(event: MouseEvent, element: HTMLElement) {
+  public hover(event: MouseEvent, element: HTMLElement | any) {
     if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
       toggleHovered(event, element);
     }

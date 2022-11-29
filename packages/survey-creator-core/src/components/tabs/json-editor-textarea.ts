@@ -5,7 +5,7 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-import "./json-editor-textarea.scss";
+require("./json-editor-textarea.scss");
 
 export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })

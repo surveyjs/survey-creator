@@ -100,6 +100,7 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
+      npm run build-typings:windows
     displayName: 'Build Creator V2 Core'
 
   - task: CopyFiles@2

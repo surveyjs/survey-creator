@@ -10,7 +10,7 @@ import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { json } from "./embed-json";
-import "./embed.scss";
+require("./embed.scss");
 
 export class EmbedModel extends Base {
   @property() survey: SurveyModel;
