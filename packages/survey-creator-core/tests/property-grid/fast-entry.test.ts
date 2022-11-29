@@ -1,6 +1,6 @@
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 import { QuestionRadiogroupModel, QuestionTextBase, Serializer } from "survey-core";
-import { EmptySurveyCreatorOptions } from "../../src/settings";
+import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 
 test("Create survey with editingObj", () => {
   var originalElement = new QuestionRadiogroupModel("originalElement");

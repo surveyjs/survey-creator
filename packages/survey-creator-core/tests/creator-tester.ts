@@ -1,6 +1,6 @@
 import { SurveyModel, IAction, Base, Serializer, QuestionFactory } from "survey-core";
 import { CreatorBase, isStringEditable } from "../src/creator-base";
-import { settings as creatorSetting } from "../src/settings";
+import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
 

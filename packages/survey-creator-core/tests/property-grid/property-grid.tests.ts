@@ -42,7 +42,7 @@ import {
   EmptySurveyCreatorOptions,
   ICollectionItemAllowOperations,
   settings
-} from "../../src/settings";
+} from "../../src/creator-settings";
 import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { PropertyGridEditorCondition } from "../../src/property-grid/condition";
 import { QuestionLinkValueModel } from "../../src/components/link-value";

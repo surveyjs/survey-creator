@@ -1,6 +1,6 @@
 import { SurveyModel, settings as surveySettings } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
-import { settings as creatorSetting, settings } from "../src/settings";
+import { settings as creatorSetting, settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";

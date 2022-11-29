@@ -1,7 +1,7 @@
 import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
-import { settings } from "../../src/settings";
+import { settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 import { parse } from "papaparse";
 import "survey-core/survey.i18n";

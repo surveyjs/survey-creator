@@ -27,7 +27,7 @@ import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
 import { CreatorTester } from "../creator-tester";
 import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
-import { settings } from "../../src/settings";
+import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
 
 export * from "../../src/components/link-value";
