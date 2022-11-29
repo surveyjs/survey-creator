@@ -91,7 +91,8 @@ var frenchTranslation = {
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
-    addNewQuestion: "Ajouter question",
+    surveyPlaceHolder: "L' enquête est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
+    addNewQuestion: "Ajouter {0}",
     completedHtmlOnConditionItemText: "Afficher si :",
     lg: {
       //Logic tab strings
