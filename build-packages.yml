@@ -749,6 +749,8 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm i
       rm node_modules/survey-angular-ui
+      rm node_modules/survey-core
+      rm node_modules/survey-creator-core/node_modules/survey-core
     displayName: 'npm install'
 
   - task: CopyFiles@2
@@ -758,6 +760,14 @@ jobs:
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui'
       OverWrite: true
     displayName: 'copy survey-angular-ui in node_modules'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-core'
+      OverWrite: true
+    displayName: 'copy survey-core in node_modules'
 
   - powershell: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
