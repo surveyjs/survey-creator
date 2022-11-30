@@ -787,7 +787,6 @@ jobs:
   - script: |
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/example/angular-ui
       npm i
-      rm node_modules/survey-creator-core/node_modules/survey-core
     displayName: 'npm install in example project'
 
   - script: |
