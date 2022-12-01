@@ -90,6 +90,7 @@ export class EmbedModel extends Base {
       }
     );
     this.survey = creator.createSurvey(json, "embed");
+    this.survey.getCss().list = {};
     this.survey.css = propertyGridCss;
     settings.readOnlyCommentRenderMode = "default";
     this.survey.onUpdateQuestionCssClasses.add((_, options) => {
