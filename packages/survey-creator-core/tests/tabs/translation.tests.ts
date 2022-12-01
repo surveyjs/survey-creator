@@ -15,6 +15,7 @@ test("Fire callback on base objects creation", () => {
   q.title = "some value";
   const cretorHash = {};
   const translation = new Translation(survey, null);
+  translation.reset();
   translation.makeObservable((obj: Base) => {
     const type = obj.getType();
     if (!cretorHash[type]) {
@@ -89,6 +90,7 @@ test("create available locales", () => {
   });
   surveyLocalization.supportedLocales = ["fr", "de"];
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.settingsSurvey.getValue("selLocales")).toHaveLength(3);
   expect(translation.getSurveyLocales()[0]).toHaveLength(4);
   translation.addLocale("de");
@@ -118,6 +120,7 @@ test("create locales question", () => {
   });
   surveyLocalization.supportedLocales = ["fr", "de"];
   const translation = new Translation(survey);
+  translation.reset();
   const localesQuestion = <QuestionDropdownModel>(
     translation.settingsSurvey.getQuestionByName("locales")
   );
@@ -156,6 +159,7 @@ test("stringsSurvey - one question in survey", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -166,7 +170,7 @@ test("stringsSurvey - one question in survey", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(2);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.name).toEqual("question1_props0");
   expect(question1Props.titleLocation).toEqual("hidden");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
@@ -175,18 +179,21 @@ test("stringsSurvey - one question in survey", () => {
   expect(question1Props.rows[0].value).toEqual("title");
   expect(question1Props.rows[0].text).toEqual("Title");
   const choicesPanel = <PanelModel>question1.elements[1];
-  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(choicesProps.name).toEqual("question1_choices");
-  expect(choicesProps.columns).toHaveLength(4);
-  expect(choicesProps.columns[0].name).toEqual("default");
-  expect(choicesProps.columns[0].title).toEqual("Default (English)");
-  expect(choicesProps.columns[1].name).toEqual("fr");
-  expect(choicesProps.columns[1].title).toEqual("Français");
-  expect(choicesProps.rows).toHaveLength(3);
-  expect(choicesProps.rows[0].value).toEqual("item1");
-  expect(choicesProps.rows[0].text).toEqual("Item 1");
-  expect(choicesProps.rows[2].value).toEqual("item3");
-  expect(choicesProps.rows[2].text).toEqual("Item 3");
+  expect(choicesPanel.elements.length).toBe(3);
+  const choicesProps1 = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
+  expect(choicesProps1.name).toEqual("question1_choices0");
+  expect(choicesProps1.columns).toHaveLength(4);
+  expect(choicesProps1.columns[0].name).toEqual("default");
+  expect(choicesProps1.columns[0].title).toEqual("Default (English)");
+  expect(choicesProps1.columns[1].name).toEqual("fr");
+  expect(choicesProps1.columns[1].title).toEqual("Français");
+  expect(choicesProps1.rows).toHaveLength(1);
+  expect(choicesProps1.rows[0].value).toEqual("item1");
+  expect(choicesProps1.rows[0].text).toEqual("Item 1");
+  const choicesProps2 = <QuestionMatrixDropdownModel>choicesPanel.elements[2];
+  expect(choicesProps2.rows).toHaveLength(1);
+  expect(choicesProps2.rows[0].value).toEqual("item3");
+  expect(choicesProps2.rows[0].text).toEqual("Item 3");
   expect(question1Props.value).toEqual({
     title: {
       default: "question 1",
@@ -225,13 +232,15 @@ test("stringsSurvey - check properties text, should use pe. from localization in
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   const pagePanel = <PanelModel>page.elements[0];
   const question = <PanelModel>pagePanel.elements[0];
   const question1Props = <QuestionMatrixDropdownModel>question.elements[0];
   expect(question1Props.rows[0].text).toEqual("test rating title");
-  expect(question1Props.rows[1].text).toEqual("test rating min description");
+  const question2Props = <QuestionMatrixDropdownModel>question.elements[1];
+  expect(question2Props.rows[0].text).toEqual("test rating min description");
   editorLocalization.currentLocale = "";
 });
 
@@ -259,6 +268,7 @@ test("Add/remove columns on adding/removing locales", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   const matrix = <QuestionMatrixDropdownModel>(
     translation.stringsSurvey.getAllQuestions()[0]
   );
@@ -292,6 +302,7 @@ test("stringsSurvey and filterPage", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(2);
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
@@ -312,6 +323,7 @@ test("stringsSurvey and filterPage + one page", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
   translation.filteredPage = survey.pages[0];
   expect(translation.stringsSurvey.getAllQuestions()).toHaveLength(1);
@@ -333,6 +345,7 @@ test("Translation show All strings and property visibility", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const translation = tabTranslation.model;
+  translation.reset();
   expect(translation.root.locItems).toHaveLength(1);
   translation.showAllStrings = true;
   expect(translation.root.locItems).toHaveLength(2);
@@ -463,6 +476,7 @@ test("StringsHeaderSurvey layout", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   const stringsMatrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
   const headerMatrix = <QuestionMatrixDropdownModel>(translation.stringsHeaderSurvey.getAllQuestions()[0]);
   expect(stringsMatrix.columns).toHaveLength(1);
@@ -579,6 +593,7 @@ test("stringsSurvey - text question dataList property, default", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -586,12 +601,12 @@ test("stringsSurvey - text question dataList property, default", () => {
   expect(pagePanel.elements).toHaveLength(1);
   expect(pagePanel.elements[0].name).toEqual("question1");
   const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(1);
+  expect(question1.elements).toHaveLength(2);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.name).toEqual("question1_props0");
   expect(question1Props.columns).toHaveLength(1);
   expect(question1Props.columns[0].name).toEqual("default");
-  expect(question1Props.rows).toHaveLength(2);
+  expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("dataList");
   const cellQuestion = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   expect(cellQuestion.acceptCarriageReturn).toBeTruthy();
@@ -614,6 +629,7 @@ test("stringsSurvey - use question's name instead of question's title in title o
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   const page = translation.stringsSurvey.pages[0];
   const pagePanel = <PanelModel>page.elements[0];
   const panel = pagePanel.elements[0];
@@ -637,16 +653,17 @@ test("stringsSurvey - text question dataList property, several locales", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   const pagePanel = <PanelModel>page.elements[0];
   const question1 = <PanelModel>pagePanel.elements[0];
-  expect(question1.elements).toHaveLength(1);
+  expect(question1.elements).toHaveLength(2);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
   expect(question1Props.columns).toHaveLength(2);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[1].name).toEqual("de");
-  expect(question1Props.rows).toHaveLength(2);
+  expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("dataList");
   const cellQuestionDefault = <QuestionCommentModel>question1Props.visibleRows[0].cells[0].question;
   expect(cellQuestionDefault.acceptCarriageReturn).toBeTruthy();
@@ -683,6 +700,7 @@ test("Respect property maxLength attrigute in stringsSurvey comment questions", 
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   const page = translation.stringsSurvey.pages[0];
   const pagePanel = <PanelModel>page.elements[1];
   const questionPanel = <PanelModel>pagePanel.elements[1];
@@ -729,6 +747,7 @@ test("translationStringVisibilityCallback", () => {
   const survey = new SurveyModel(surveyJson);
 
   const translation = new Translation(survey, null);
+  translation.reset();
   expect(translation.root.items).toHaveLength(3);
   expect(translation.root.groups).toHaveLength(2);
   expect(translation.root.groups[0].name).toEqual("page1");
@@ -820,6 +839,7 @@ test("empty title placeholders", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -829,7 +849,7 @@ test("empty title placeholders", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.name).toEqual("question1_props0");
   expect(question1Props.columns).toHaveLength(2);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[1].name).toEqual("da");
@@ -878,6 +898,7 @@ test("init placeholders", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -887,7 +908,7 @@ test("init placeholders", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.name).toEqual("question1_props0");
   expect(question1Props.columns).toHaveLength(2);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[1].name).toEqual("da");
@@ -925,6 +946,7 @@ test("init placeholders for choices", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -934,7 +956,7 @@ test("init placeholders for choices", () => {
   expect(question1.elements).toHaveLength(2);
   const choicesPanel = <PanelModel>question1.elements[1];
   const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
-  expect(choicesProps.name).toEqual("question1_choices");
+  expect(choicesProps.name).toEqual("question1_choices0");
   expect(choicesProps.columns).toHaveLength(2);
   const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
   const cellQuestion2 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[1].question;
@@ -970,23 +992,24 @@ test("localize placeholders", () => {
   });
 
   const translation = new Translation(survey);
+  translation.reset();
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(2);
+  expect(page.elements).toHaveLength(13);
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
-  expect(surveyProps.name).toEqual("survey_props");
+  expect(surveyProps.name).toEqual("survey_props0");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeHolder).toEqual("Translation...");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeHolder).toEqual("Перевод...");
-  const pagePanel = <PanelModel>page.elements[1];
-  expect(pagePanel.elements).toHaveLength(2);
-  expect(pagePanel.elements[0].name).toEqual("page1_props");
-  expect(pagePanel.elements[1].name).toEqual("question1");
+  const pagePanel = <PanelModel>page.elements[12];
+  expect(pagePanel.elements).toHaveLength(5);
+  expect(pagePanel.elements[0].name).toEqual("page1_props0");
+  expect(pagePanel.elements[4].name).toEqual("question1");
   const page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
   expect(page1Props.columns).toHaveLength(2);
   expect(page1Props.columns[0].name).toEqual("default");
   expect(page1Props.columns[1].name).toEqual("ru");
-  expect(page1Props.rows).toHaveLength(4);
+  expect(page1Props.rows).toHaveLength(1);
   expect(page1Props.rows[0].value).toEqual("title");
 
   const cellQuestion1 = <QuestionCommentModel>page1Props.visibleRows[0].cells[0].question;
@@ -996,16 +1019,18 @@ test("localize placeholders", () => {
   expect(cellQuestion2.placeholder).toEqual("Перевод...");
   expect(cellQuestion2.value).toEqual(null);
 
-  const survey_props = <QuestionMatrixDropdownModel>page.elements[0];
-  expect(survey_props.columns).toHaveLength(2);
-  expect(survey_props.columns[0].name).toEqual("default");
-  expect(survey_props.columns[1].name).toEqual("ru");
-  expect(survey_props.rows).toHaveLength(12);
-  expect(survey_props.rows[0].value).toEqual("title");
-  expect(survey_props.rows[11].value).toEqual("editText");
+  const survey_props0 = <QuestionMatrixDropdownModel>page.elements[0];
+  expect(survey_props0.columns).toHaveLength(2);
+  expect(survey_props0.columns[0].name).toEqual("default");
+  expect(survey_props0.columns[1].name).toEqual("ru");
+  expect(survey_props0.rows).toHaveLength(1);
+  expect(survey_props0.rows[0].value).toEqual("title");
+  const survey_props11 = <QuestionMatrixDropdownModel>page.elements[11];
+  expect(survey_props11.rows).toHaveLength(1);
+  expect(survey_props11.rows[0].value).toEqual("editText");
 
-  const surveyCell1 = <QuestionCommentModel>survey_props.visibleRows[11].cells[0].question;
-  const surveyCell2 = <QuestionCommentModel>survey_props.visibleRows[11].cells[1].question;
+  const surveyCell1 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[0].question;
+  const surveyCell2 = <QuestionCommentModel>survey_props11.visibleRows[0].cells[1].question;
   expect(surveyCell1.placeholder).toEqual("Edit");
   expect(surveyCell1.value).toEqual(null);
   expect(surveyCell2.placeholder).toEqual("Редактирование");
@@ -1027,6 +1052,7 @@ test("init placeholders for dialects", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(1);
@@ -1036,7 +1062,7 @@ test("init placeholders for dialects", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props");
+  expect(question1Props.name).toEqual("question1_props0");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[3].name).toEqual("pt-br");
@@ -1084,6 +1110,7 @@ test("Test settings.translation.maximumSelectedLocales", () => {
     ]
   });
   const translation = new Translation(survey);
+  translation.reset();
   expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
   expect(translation.localesQuestion.value).toHaveLength(2);
   expect(translation.localesQuestion.value[0]).toEqual("de");
@@ -1146,6 +1173,7 @@ test("Translation check all locale name are capitalized", () => {
   });
 
   const translation = new Translation(survey);
+  translation.reset();
   const testLocaleAction = translation.chooseLanguageActions.filter((item: IAction) => item.id === "test_locale")[0];
   expect(testLocaleAction.title).toEqual("Test Locale Name");
   translation.addLocale("test_locale");
@@ -1256,15 +1284,16 @@ test("Reset on changing creator.JSON", () => {
   const tabTranslationPlugin = <TabTranslationPlugin>creator.getPlugin("translation");
   creator.activeTab = "translation";
   const translation: Translation = tabTranslationPlugin.model;
+  translation.reset();
   translation.addLocale("de");
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   let page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(2);
-  let pagePanel = <PanelModel>page.elements[1];
-  expect(pagePanel.elements).toHaveLength(2);
-  expect(pagePanel.elements[0].name).toEqual("page1_props");
-  expect(pagePanel.elements[1].name).toEqual("q1");
+  expect(page.elements).toHaveLength(13);
+  let pagePanel = <PanelModel>page.elements[12];
+  expect(pagePanel.elements).toHaveLength(5);
+  expect(pagePanel.elements[0].name).toEqual("page1_props0");
+  expect(pagePanel.elements[4].name).toEqual("q1");
   let page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
   expect(page1Props.columns).toHaveLength(2);
 
@@ -1284,11 +1313,11 @@ test("Reset on changing creator.JSON", () => {
   creator.JSON = json;
   expect(translation.localesQuestion.value).toHaveLength(0);
   page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(2);
-  pagePanel = <PanelModel>page.elements[1];
-  expect(pagePanel.elements).toHaveLength(2);
-  expect(pagePanel.elements[0].name).toEqual("page1_props");
-  expect(pagePanel.elements[1].name).toEqual("q1");
+  expect(page.elements).toHaveLength(13);
+  pagePanel = <PanelModel>page.elements[12];
+  expect(pagePanel.elements).toHaveLength(5);
+  expect(pagePanel.elements[0].name).toEqual("page1_props0");
+  expect(pagePanel.elements[4].name).toEqual("q1");
   page1Props = <QuestionMatrixDropdownModel>pagePanel.elements[0];
   expect(page1Props.columns).toHaveLength(1);
 
@@ -1338,6 +1367,7 @@ test("Export dialect languages", () => {
     ]
   });
   const translation: Translation = new Translation(survey);
+  translation.reset();
   let exported;
   parse(translation.exportToCSV(), {
     complete: function (results, file) {
@@ -1415,4 +1445,17 @@ test("creator.onTranslationExportItem", () => {
     "Question 2",
     "Question pt",
   ]);
+});
+test("Construction -> Reset -> Dispose", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  expect(tabTranslation.model).toBeUndefined();
+  tabTranslation.activate();
+  const translation: Translation = tabTranslation.model;
+  expect(translation.stringsSurvey).toBeDefined();
+  expect(translation.stringsHeaderSurvey).toBeDefined();
+  tabTranslation.deactivate();
+  expect(translation.stringsSurvey).toBeUndefined();
+  expect(translation.stringsHeaderSurvey).toBeUndefined();
+  expect(tabTranslation.model).toBeUndefined();
 });

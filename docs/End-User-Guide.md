@@ -122,12 +122,12 @@ Respondents select one or several images or videos from a series. A value associ
 
 <img src="images/question-types-imagepicker.png" alt="Question types - Image Picker" width="50%">
 
-- **How to: Associate values with images or videos**          
+- How to: Associate values with images or videos          
 Expand the **Choices** category and enter the values in the **Choices** table:
 
     <img src="images/survey-creator-choices-value.png" alt="Survey Creator - Image value" width="40%">
 
-- **How to: Enable multiple image or video selection**           
+- How to: Enable multiple image or video selection           
 Expand the **General** category and select **Allow multiple selection**:
 
     <img src="images/survey-creator-allow-multiple-selection.png" alt="Survey Creator - Allow multiple selection" width="40%">
@@ -153,17 +153,17 @@ Respondents use mouse or touch gestures to draw their signature within the alloc
 <img src="images/question-types-signature-pad.png" alt="Question types - Signature pad" width="50%">
 
 
-- **How to: Resize the allocated area**         
+- How to: Resize the allocated area         
 Expand the **General** category and change the **Width** and **Height** values:
 
     <img src="images/survey-creator-change-size.png" alt="Survey Creator - Change size" width="40%">
 
-- **How to: Change the image format**        
+- How to: Change the image format        
 The respondent's input is saved as a base64-encoded image in one of the following formats: PNG, JPEG, SVG. To select the desired format, use the **Image format** drop-down menu in the **General** category:
 
     <img src="images/survey-creator-image-format.png" alt="Survey Creator - Image format" width="40%">
 
-- **How to: Change the pen color**          
+- How to: Change the pen color          
 Expand the **General** category and select the desired color from the **Pen color** drop-down menu:
 
     <img src="images/survey-creator-pen-color.png" alt="Survey Creator - Pen color" width="40%">
@@ -185,14 +185,14 @@ Use the File type to allow respondents to upload files. Respondents drag and dro
 
 <img src="images/question-types-file.png" alt="Question types - File" width="50%">
 
-- **How to: Restrict uploaded file types**          
+- How to: Restrict uploaded file types          
 The File type is built upon the standard `<input type="file">` HTML element. To restrict file types, the standard element uses the <a href="https://www.w3schools.com/tags/att_input_accept.asp" target="_blank">`accept`</a> attribute. Enter its value into the **Accepted file types** field in the **General** category:
 
     <img src="images/survey-creator-accepted-file-types.png" alt="Survey Creator - Accepted file types" width="40%">
 
-> **IMPORTANT**: Always restrict the allowed file types to prevent possible security vulnerabilities. 
+> Always restrict the allowed file types to prevent possible security vulnerabilities. 
 
-- **How to: Enable multiple file selection**           
+- How to: Enable multiple file selection           
 Expand the **General** category and select **Allow multiple files**:
 
     <img src="images/survey-creator-allow-multiple-files.png" alt="Survey Creator - Allow multiple files" width="40%">
@@ -203,12 +203,12 @@ The Single-Choice Matrix type displays radio buttons in rows and columns. Respon
 
 <img src="images/question-types-matrix-single-choice.png" alt="Question types - Single-Choice Matrix" width="50%">
 
-- **How to: Add new rows**          
+- How to: Add new rows          
 Expand the **Rows** category and click **Add New**:
 
     <img src="images/survey-creator-add-new-row.png" alt="Survey Creator - Add new row to a matrix question" width="40%">
 
-- **How to: Randomize rows**        
+- How to: Randomize rows        
 Expand the **Rows** category, find the **Row order** editor, and switch it to *Random*:
 
     <img src="images/survey-creator-row-order.png" alt="Survey Creator - Row order in a matrix question" width="40%">
@@ -235,7 +235,7 @@ Respondents use these editors to select a desired value in each cell. The follow
 
 <img src="images/question-types-matrix-multiple-choices.png" alt="Question types - Multiple-Choice Matrix" width="50%">
 
-- **How to: Change the editor type**          
+- How to: Change the editor type         
 Expand the **General** category and select the desired editor type from the **Cell type** drop-down menu:
 
     <img src="images/survey-creator-matrix-cell-type.png" alt="Survey Creator - Matrix cell type" width="40%">
@@ -257,7 +257,7 @@ Respondents enter their answers into multiple single-line text editors. Use the 
 
 <img src="images/question-types-multiple-text.png" alt="Question types - Multiple text" width="50%">
 
-- **How to: Specify default answers**           
+- How to: Specify default answers           
 Expand the **Data** category and click **Set Default Answer** to open the Default Answer pop-up window. Enter the default answers into the text editors and click **Apply**:
 
     <img src="images/survey-creator-multiple-text-set-default-answer.png" alt="Survey Creator - Matrix cell type" width="80%">
@@ -356,37 +356,37 @@ Conditions that you specify in the UI are converted to logical expressions. If y
 
 Select one of the following actions from the drop-down menu:
 
-- **Show (hide) page**          
+- Show (hide) page          
 Makes the selected page visible. If you want to hide the page, invert the logic of your condition.
 
-- **Enable (disable) page**         
+- Enable (disable) page         
 Makes the selected page editable. If you want to make the page read-only, invert the logic of your condition.
 
-- **Show (hide) question**          
+- Show (hide) question          
 Makes the selected question visible. If you want to hide the question, invert the logic of your condition.
 
-- **Enable (disable) question**         
+- Enable (disable) question         
 Makes the selected question editable. If you want to make the question read-only, invert the logic of your condition.
 
-- **Make question required**            
+- Make question required            
 Requires an answer for the selected question.
 
-- **Complete survey**           
+- Complete survey           
 Completes the survey.
 
-- **Set answer**            
+- Set answer            
 Sets a specified answer to the selected question.
 
-- **Copy answer**           
+- Copy answer           
 Copies the answer from the selected question to a target question.
 
-- **Skip to question**          
+- Skip to question          
 Navigates the survey to the selected question.
 
-- **Run expression**            
+- Run expression            
 Runs a custom expression on the selected question.
 
-- **Set "Survey Complete" page markup**         
+- Set "Survey Complete" page markup         
 Specifies custom HTML markup for the Survey Complete page.
 
 ### How to: Edit a rule

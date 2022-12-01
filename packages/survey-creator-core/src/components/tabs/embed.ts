@@ -34,7 +34,7 @@ export class EmbedModel extends Base {
         }
         return (
           result +
-          `\n<script src="https://unpkg.com/survey-${framework}@${Version}/survey.${framework}.min.js"></script>`
+          `\n<script src="https://unpkg.com/survey-${framework}@${Version}/survey.${framework !== "knockout" ? framework : "ko"}.min.js"></script>`
         );
       }
     );
@@ -73,11 +73,10 @@ export class EmbedModel extends Base {
             result += `$("#surveyContainer").Survey${window}({\n    model: survey,\n    onComplete: sendDataToServer\n});`;
             break;
           case "knockout":
-            result += `var survey = new Survey.Model${window}(surveyJSON${
-              show === "page" ? ', "surveyContainer"' : ""
-            });\n`;
+            result += `var survey = new Survey.Survey${window}(surveyJSON);\n`;
             result += show === "window" ? "survey.show();\n" : "";
-            result += "survey.onComplete.add(sendDataToServer);";
+            result += "survey.onComplete.add(sendDataToServer);\n";
+            result += show !== "window" ? "survey.render(\"surveyContainer\");" : "";
             break;
           case "react":
             result += `ReactDOM.render(<Survey.Survey${window} json={ surveyJSON } onComplete={ sendDataToServer } />, document.getElementById("surveyContainer"));`;

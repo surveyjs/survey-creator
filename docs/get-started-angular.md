@@ -1,3 +1,7 @@
+---
+title: JS Form Builder Library for Angular | Getting Started Guide
+description: A step-by-step guide to get started with Survey Creator component in an Angular application.
+---
 # Add Survey Creator / Form Builder to an Angular Application
 
 This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in an Angular application. To add the component to your application, follow the steps below:
@@ -8,7 +12,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular" target="_blank">Get Started with Survey Creator / Form Builder - Angular</a>.
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
 If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_angular_cli" target="_blank">Angular CLI + SurveyJS Quick Start Boilerplate</a>.
 
@@ -20,7 +24,7 @@ Survey Creator for Angular consists of two npm packages: [`survey-creator-core`]
 npm install survey-creator-angular --save
 ```
 
-> NOTE: SurveyJS for Angular requires Angular v13.0.0 or newer and depends on the `@angular/cdk` package. If your project does not include it yet, run the following command:
+> SurveyJS for Angular requires Angular v13.0.0 or newer and depends on the `@angular/cdk` package. If your project does not include it yet, run the following command:
 >
 > ```cmd
 > npm install @angular/cdk@^13.0.0 --save
@@ -59,7 +63,7 @@ Open the `angular.json` file and reference Survey Creator and SurveyJS Library s
 
 Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
 
-[View Customize Theme Using CSS Variables example](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme-css-vars (linkStyle))
+[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=editor-custom-theme-css-vars (linkStyle))
 
 ## Configure Survey Creator
 
@@ -99,7 +103,7 @@ export class SurveyCreatorComponent implements OnInit {
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```js
 import { Component, OnInit } from "@angular/core";
@@ -162,7 +166,7 @@ To render Survey Creator, add a `<survey-creator>` element to your component tem
 ```
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```html
 <!-- survey-creator.component.html -->
@@ -316,7 +320,7 @@ export class SurveyCreatorComponent implements OnInit {
 To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 <details>
-  <summary>View full code</summary>
+  <summary>View Full Code</summary>
 
 ```html
 <!-- survey-creator.component.html -->
@@ -422,7 +426,7 @@ export class AppModule { }
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular" target="_blank">View full code on GitHub</a>
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
 ## Further Reading
 

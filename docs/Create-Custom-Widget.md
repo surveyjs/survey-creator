@@ -16,10 +16,10 @@ There are two main scenarios when you want to create a new Custom Widget. You wa
 
 If you want to change the standard question UI, then it is better to modify [CSS classes](https://surveyjs.io/Examples/Library?id=survey-cssclasses) or use SurveyJS events, for example [survey.onAfterRenderQuestion](https://surveyjs.io/Examples/Library?id=survey-afterrender) event.
 
-We have several [built-in custom widgets](https://surveyjs.io/Examples/Library?id=custom-widget-select2-tagbox), that we have created for you. Please note, we are using third-party libraries. If there is a bug or you need a new functionality from a third-party library, that we use in our custom widget, then please contact authors of these libraries.
+We have several [built-in custom widgets](https://surveyjs.io/form-library/examples/custom-widget-datepicker/jquery), that we have created for you. Please note, we are using third-party libraries. If there is a bug or you need a new functionality from a third-party library, that we use in our custom widget, then please contact authors of these libraries.
 [View the 'surveyjs-widgets' library source code on GitHub](https://github.com/surveyjs/custom-widgets)
 
-[View the "Custom Widgets" Demo](https://surveyjs.io/survey-creator/examples/customwidgets/ (linkstyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/customwidgets/ (linkstyle))
 
 <div id="simplewidget"></div>
 

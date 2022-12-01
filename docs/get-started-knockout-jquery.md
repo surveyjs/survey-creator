@@ -1,3 +1,7 @@
+---
+title: JS Form Builder Library for Knockout and jQuery | Getting Started Guide
+description: A step-by-step guide to get started with Survey Creator component in a Knockout or jQuery application.
+---
 # Add Survey Creator / Form Builder to a Knockout or jQuery Application
 
 This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a Knockout or jQuery application. To add Survey Creator to your application, follow the steps below:
@@ -9,7 +13,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 Survey Creator is powered by Knockout and does not have an individual implementation for jQuery. However, you can integrate the version for Knockout into your jQuery application by following the same instructions.
 
-You can find the full code for this tutorial in the following GitHub repository: <a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/knockout" target="_blank">Get Started with Survey Creator / Form Builder - Knockout</a>.
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/knockout (linkStyle))
 
 ## Link Resources
 
@@ -59,7 +63,7 @@ const creator = new SurveyCreator.SurveyCreator(creatorOptions);
 ```
 
 <details>
-    <summary>View full code</summary>  
+    <summary>View Full Code</summary>  
 
 ```html
 <!DOCTYPE html>
@@ -114,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 
 <details>
-    <summary>View full code</summary>  
+    <summary>View Full Code</summary>  
 
 ```html
 <!DOCTYPE html>
@@ -220,7 +224,7 @@ creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defa
 ```
 
 <details>
-    <summary>View full code</summary>  
+    <summary>View Full Code</summary>  
 
 ```html
 <!DOCTYPE html>
@@ -299,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 </details>
 
-<a href="https://github.com/surveyjs/code-examples/tree/main/get-started-creator/knockout" target="_blank">View full code on GitHub</a>
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/knockout (linkStyle))
 
 ## Further Reading
 

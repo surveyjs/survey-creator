@@ -48,7 +48,7 @@ export interface ICreatorOptions {
    *
    * Default value: `false`
    *
-   * **IMPORTANT**: You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
+   * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
    */
   haveCommercialLicense?: boolean;
   /**
@@ -212,7 +212,7 @@ export interface ICreatorOptions {
    *
    * Default value: `true`
    *
-   * [View the "Switch Between Themes" demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
    */
   allowChangeThemeInPreview?: boolean;
   /**
@@ -223,11 +223,11 @@ export interface ICreatorOptions {
    * - `"portrait"`
    */
   previewOrientation?: "landscape" | "portrait";
-   /**
-    * Limits question and panels types available in the Toolbox and Add Question menu.
-    * 
-    * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
-    */
+  /**
+   * Limits question and panels types available in the Toolbox and Add Question menu.
+   * 
+   * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
+   */
   questionTypes?: Array<string>;
   /**
    * Specifies how Survey Creator users edit survey pages.
