@@ -583,3 +583,13 @@ test("Check survey layout in mobile mode", async (t) => {
     await takeElementScreenshot("designer-survey-layout-mobile.png", designerTabContent, t, comparer);
   });
 });
+
+test("Check property grid flyout", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1120, 900);
+    const root = Selector(".svc-creator");
+    await setJSON({});
+    await t.click(Selector("button[title='Survey Settings']"));
+    await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
+  });
+});
