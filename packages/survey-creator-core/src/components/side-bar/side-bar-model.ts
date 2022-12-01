@@ -44,24 +44,27 @@ export class SidebarModel extends Base {
   }
 
   private createActions() {
-    if (this.creator.allowCollapseSidebar) {
-      this._collapseAction = new Action({
-        id: "svd-grid-hide",
-        iconName: "icon-collapse-panel",
-        css: "svd-grid-hide",
-        locTitleName: "ed.hidePanel",
-        showTitle: false,
-        visible: <any>new ComputedUpdater<boolean>(() => this.visible),
-        action: () => {
-          this.collapseSidebar();
-          if (!this.flyoutMode) {
-            this.collapsedManually = true;
-            this.expandedManually = false;
-          }
+    this._collapseAction = new Action({
+      id: "svd-grid-hide",
+      iconName: "icon-collapse-panel",
+      css: "svd-grid-hide",
+      locTitleName: "ed.hidePanel",
+      showTitle: false,
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        return notShortCircuitAnd(
+          !notShortCircuitAnd(!this.creator.allowCollapseSidebar, !this.flyoutMode),
+          this.visible);
+      }),
+      action: () => {
+        this.collapseSidebar();
+        if (!this.flyoutMode) {
+          this.collapsedManually = true;
+          this.expandedManually = false;
         }
-      });
-      this.toolbar.actions.push(this._collapseAction);
-
+      }
+    });
+    this.toolbar.actions.push(this._collapseAction);
+    if (this.creator.allowCollapseSidebar) {
       this._expandAction = new Action({
         id: "svd-grid-expand",
         iconName: "icon-expand-panel",

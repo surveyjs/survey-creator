@@ -1865,6 +1865,30 @@ test("Show/hide property grid by collapse/expand actions", (): any => {
   expect(creator.sidebar.visible).toBeTruthy();
   expect(expandBarItem.visible).toBeFalsy();
 });
+test("Hide property grid is always visible in flyoutMode", (): any => {
+  const creator = new CreatorTester();
+  creator.allowCollapseSidebar = false;
+  creator.JSON = {
+    pages: [
+      {
+        elements: [
+          {
+            type: "text",
+            name: "question1"
+          }
+        ]
+      }
+    ]
+  };
+  const hidePropertyModelBarItem = creator.sidebar.toolbar.actions.filter((item) => { return item.id === "svd-grid-hide"; })[0];
+
+  expect(creator.showSidebar).toBeTruthy();
+  expect(creator.sidebar.visible).toBeTruthy();
+  expect(hidePropertyModelBarItem).toBeTruthy();
+  expect(hidePropertyModelBarItem.visible).toBeFalsy();
+  creator.sidebar.flyoutMode = true;
+  expect(hidePropertyModelBarItem.visible).toBeTruthy();
+})
 
 test("Check property grid expand action is always last", (): any => {
   const creator = new CreatorTester();
@@ -2111,7 +2135,7 @@ test("Has one item type in convertTo", (): any => {
     ]
   };
   let counter = 0;
-  creator.toolbox.itemNames.forEach(item => { if(item === "text") counter ++; });
+  creator.toolbox.itemNames.forEach(item => { if (item === "text") counter++; });
   expect(counter).toEqual(1);
   const question = creator.survey.getQuestionByName("q1");
   creator.selectElement(question);
@@ -2128,7 +2152,7 @@ test("Has one item type in convertTo", (): any => {
   expect(list).toBeTruthy();
   counter = 0;
   list.actions.forEach(item => {
-    if(item.id === "text") counter ++;
+    if (item.id === "text") counter++;
   });
   expect(counter).toEqual(1);
   CustomWidgetCollection.Instance.clear();
