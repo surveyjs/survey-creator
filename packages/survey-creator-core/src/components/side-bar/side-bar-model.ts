@@ -1,5 +1,5 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
-import { settings } from "../../settings";
+import { settings } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
 import { CreatorBase } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";

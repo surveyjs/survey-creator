@@ -4,7 +4,7 @@ import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
 import { ObjectSelectorModel } from "./object-selector";
 import { CreatorBase } from "../creator-base";
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 
 export class PropertyGridViewModel extends Base {

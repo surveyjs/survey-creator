@@ -1,10 +1,10 @@
 
-import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder } from "survey-core";
+import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
 
-import "./question-dropdown.scss";
+require("./question-dropdown.scss");
 
 export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   @property({ defaultValue: true }) private isCollapsed: boolean;
@@ -56,7 +56,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
       .toString();
   }
 
-  public getRenderedItems() {
+  public getRenderedItems(): ItemValue[] {
     return this.isCollapsed ?
       this.question.visibleChoices.slice(0, this.visibleCount) :
       this.question.visibleChoices;

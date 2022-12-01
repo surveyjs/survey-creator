@@ -14,7 +14,7 @@ export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageVi
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public model!: LogoImageViewModel;
   protected createModel(): void {
-    this.model = new LogoImageViewModel(this.creator, null);
+    this.model = new LogoImageViewModel(this.creator, null as any);
   }
   protected getModel(): LogoImageViewModel {
     return this.model;

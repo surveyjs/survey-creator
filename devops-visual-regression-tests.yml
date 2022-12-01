@@ -102,6 +102,11 @@ jobs:
       npm run build
     displayName: 'Build Creator V2 Core'
 
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build-typings:windows
+    displayName: 'Build Creator V2 Core Typings'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'

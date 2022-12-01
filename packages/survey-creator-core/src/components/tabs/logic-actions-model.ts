@@ -1,7 +1,7 @@
 import { Base, Helpers, IElement, ItemValue, PanelModel, Question, QuestionCommentModel, QuestionDropdownModel, Serializer, SurveyModel } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
 import { PropertyJSONGenerator } from "../../property-grid";
-import { ISurveyCreatorOptions } from "../../settings";
+import { ISurveyCreatorOptions } from "../../creator-settings";
 import { SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType } from "./logic-types";
 

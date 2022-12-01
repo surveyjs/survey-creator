@@ -1,9 +1,9 @@
 import { SurveyModel, Base, Serializer, Event, ExpressionRunner, Question, HashTable, Helpers, property, propertyArray, ItemValue, MatrixDropdownColumn, QuestionDropdownModel } from "survey-core";
 import { editorLocalization } from "../../editorLocalization";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { ISurveyLogicItemOwner, SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicTypes, SurveyLogicType } from "./logic-types";
-import "./logic.scss";
+require("./logic.scss");
 
 export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.isFocusedContent = true;

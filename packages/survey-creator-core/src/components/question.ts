@@ -27,8 +27,8 @@ import {
   toggleHovered
 } from "../utils/utils";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
-import "./question.scss";
-import { settings } from "../settings";
+require("./question.scss");
+import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
@@ -142,7 +142,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   get isDraggable() {
     return true;
   }
-  public hover(event: MouseEvent, element: HTMLElement) {
+  public hover(event: MouseEvent, element: HTMLElement | any) {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }

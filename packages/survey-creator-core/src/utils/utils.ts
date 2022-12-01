@@ -1,5 +1,5 @@
 import { defaultV2Css, Serializer } from "survey-core";
-import { settings } from "../settings";
+import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
   if (!str) return "";

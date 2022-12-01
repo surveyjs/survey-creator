@@ -94,7 +94,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
 
         <div className="svc-item-value-controls" onBlur={this.onBlur}>{button}</div>
 
-        <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event)}>{this.props.element}</div>
+        <div className={"svc-item-value__item"} onClick={(event) => this.model.select(this.model, event.nativeEvent)}>{this.props.element}</div>
       </div>
     );
   }

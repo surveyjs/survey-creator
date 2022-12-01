@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Action } from "survey-core";
+import { Action, IAction } from "survey-core";
 import { BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -8,12 +8,15 @@ import { BaseAngular } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class PageNavigatorItemComponent extends BaseAngular<Action> {
-  @Input() model!: Action;
+  @Input() model!: Action | IAction;
   protected getModel(): Action {
-    return this.model;
+    return this.model as Action;
+  }
+  get anyModel(): any {
+    return this.model as any;
   }
   click(event: any) {
     event.stopPropagation();
-    this.model.action();
+    this.getModel().action();
   }
 }

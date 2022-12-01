@@ -242,6 +242,7 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build:i18n
       npm run build
+      npm run build-typings:linux
     displayName: 'Build Creator V2 Core'
 
   - script: |

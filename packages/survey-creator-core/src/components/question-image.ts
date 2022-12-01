@@ -3,7 +3,7 @@ import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, 
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 
-import "./question-image.scss";
+require("./question-image.scss");
 
 export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   constructor(

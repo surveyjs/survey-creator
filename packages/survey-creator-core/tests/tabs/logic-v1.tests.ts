@@ -15,7 +15,7 @@ import {
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
 import { SurveyLogicAction } from "../../src/components/tabs/logic-items";
-import { EmptySurveyCreatorOptions } from "../../src/settings";
+import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 
 export * from "../../src/components/link-value";
 

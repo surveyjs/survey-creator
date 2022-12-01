@@ -17,7 +17,7 @@ import {
   QuestionFactory
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
-import { QuestionConvertMode, settings } from "../src/settings";
+import { QuestionConvertMode, settings } from "../src/creator-settings";
 
 test("get converted classes", () => {
   settings.questionConvertMode = QuestionConvertMode.CompatibleTypes;

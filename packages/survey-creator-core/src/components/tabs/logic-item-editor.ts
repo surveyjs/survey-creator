@@ -1,5 +1,5 @@
 import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement } from "survey-core";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType, getLogicString } from "./logic-types";

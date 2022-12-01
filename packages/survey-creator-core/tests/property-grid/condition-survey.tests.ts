@@ -10,7 +10,7 @@ import {
   QuestionTextModel
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
-import { settings, EmptySurveyCreatorOptions } from "../../src/settings";
+import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
 
 export * from "../../src/components/link-value";
 

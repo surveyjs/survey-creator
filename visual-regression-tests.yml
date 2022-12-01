@@ -78,9 +78,16 @@ jobs:
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
   
   # update 'file' npm dependencies in case of cache
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules
+      rm -rf survey-core
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'remove survey-core symlink from node_modules'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+      Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/node_modules/survey-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -101,6 +108,11 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
       npm run build
     displayName: 'Build Creator V2 Core'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run build-typings:windows
+    displayName: 'Build Creator V2 Core Typings'
 
   - task: CopyFiles@2
     inputs:

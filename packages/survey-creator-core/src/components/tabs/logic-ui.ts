@@ -1,6 +1,6 @@
 import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
@@ -9,7 +9,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
 import { QuestionEmbeddedSurveyModel } from "../embedded-survey";
 import { updateMatrixLogicRemoveAction, updateMatrixLogicExpandAction } from "../../utils/actions";
 
-import "./logic-ui.scss";
+require("./logic-ui.scss");
 
 import { logicCss } from "./logic-theme";
 

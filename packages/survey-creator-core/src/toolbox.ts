@@ -18,7 +18,7 @@ import {
 import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { localization } from "./entries";
-import { settings } from "./settings";
+import { settings } from "./creator-settings";
 
 /**
  * The Toolbox item description.

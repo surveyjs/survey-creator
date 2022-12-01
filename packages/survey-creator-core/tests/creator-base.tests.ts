@@ -47,7 +47,7 @@ import {
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
-import { EmptySurveyCreatorOptions, settings } from "../src/settings";
+import { EmptySurveyCreatorOptions, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 import { ObjectSelector } from "../src/property-grid/object-selector";

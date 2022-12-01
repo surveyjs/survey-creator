@@ -4,7 +4,7 @@ import {
   QuestionMatrixModel,
   SurveyModel,
 } from "survey-core";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
 import { PropertyEditorSetupValue } from "./index";
 

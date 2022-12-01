@@ -15,7 +15,7 @@ import { editorLocalization } from "../../editorLocalization";
 import { ExpressionRemoveVariable } from "../../expressionToDisplayText";
 import { updateLogicExpression } from "./logic-expression";
 import { SurveyLogicType, getLogicString } from "./logic-types";
-import { settings } from "../../settings";
+import { settings } from "../../creator-settings";
 import { wrapTextByCurlyBraces } from "../../utils/utils";
 import { SurveyHelper } from "../../survey-helper";
 

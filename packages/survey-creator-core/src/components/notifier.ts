@@ -1,6 +1,6 @@
 import { Base, property } from "survey-core";
-import { settings } from "../settings";
-import "./notifier.scss";
+import { settings } from "../creator-settings";
+require("./notifier.scss");
 
 export class Notifier extends Base {
   @property({ defaultValue: false }) active;

@@ -10,7 +10,7 @@ import {
   DragOrClickHelper
 } from "survey-core";
 import { QuestionLinkValueModel } from "../src/components/link-value";
-import { settings } from "../src/settings";
+import { settings } from "../src/creator-settings";
 import { QuestionToolbox } from "../src/toolbox";
 import { CreatorTester } from "./creator-tester";
 

@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.9.60",
+  "version": "1.9.61",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -49,6 +49,7 @@
     "@storybook/addon-storysource": "6.0.21",
     "@storybook/addon-viewport": "6.0.21",
     "@types/ace": "0.0.44",
+    "@types/babel__traverse": "7.18.2",
     "@types/jest": "23.3.3",
     "@types/jquery": "3.3.29",
     "@types/lodash": "4.14.186",

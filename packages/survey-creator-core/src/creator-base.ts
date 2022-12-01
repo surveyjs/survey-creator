@@ -26,7 +26,7 @@ import {
   ILocalizableOwner,
   PopupBaseViewModel
 } from "survey-core";
-import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./settings";
+import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropSurveyElements, DragDropChoices } from "survey-core";
@@ -56,10 +56,10 @@ import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 
-import "./fonts.scss";
-import "./components/creator.scss";
-import "./components/string-editor.scss";
-import "./creator-theme/creator.scss";
+require("./fonts.scss");
+require("./components/creator.scss");
+require("./components/string-editor.scss");
+require("./creator-theme/creator.scss");
 
 import { StringEditorConnector } from "./components/string-editor";
 
@@ -3097,7 +3097,7 @@ export class CreatorBase extends Base
       "center"
     );
 
-    return {
+    return <any>{
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
       action: () => {

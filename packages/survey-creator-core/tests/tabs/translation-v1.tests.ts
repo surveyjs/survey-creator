@@ -17,7 +17,7 @@ import {
   TranslationItemString
 } from "../../src/components/tabs/translation";
 import { parse } from "papaparse";
-import { settings } from "../../src/settings";
+import { settings } from "../../src/creator-settings";
 
 import "survey-core/survey.i18n";
 

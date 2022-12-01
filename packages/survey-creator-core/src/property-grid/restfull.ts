@@ -10,7 +10,7 @@ import {
   PropertyJSONGenerator,
   PropertyGridEditorQuestion,
 } from "./index";
-import { ISurveyCreatorOptions } from "../settings";
+import { ISurveyCreatorOptions } from "../creator-settings";
 
 var json = {
   name: "propertygrid_restfull",

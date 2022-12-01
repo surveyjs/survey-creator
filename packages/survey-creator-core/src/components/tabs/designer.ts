@@ -1,7 +1,7 @@
 import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
-import "./designer.scss";
+require("./designer.scss");
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";

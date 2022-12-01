@@ -31,7 +31,7 @@ import {
 import {
   ISurveyCreatorOptions,
   EmptySurveyCreatorOptions
-} from "../../src/settings";
+} from "../../src/creator-settings";
 import {
   defaultStrings,
   editorLocalization
