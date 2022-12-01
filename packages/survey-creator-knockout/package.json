@@ -50,6 +50,7 @@
         "@storybook/addon-viewport": "6.0.21",
         "@storybook/knockout": "file:./storybook-knockout",
         "@types/ace": "0.0.44",
+        "@types/babel__traverse": "7.18.2",
         "@types/jest": "23.3.3",
         "@types/jquery": "3.3.29",
         "@types/lodash": "4.14.186",
