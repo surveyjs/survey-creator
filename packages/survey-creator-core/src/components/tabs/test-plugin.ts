@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, defaultStandardCss, defaultV2Css, IAction, ListModel, modernCss, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
@@ -17,7 +17,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private designerAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
-  private simulatorTheme: any = defaultV2Css;
+  private simulatorTheme: any = surveyCss[defaultV2ThemeName];
 
   public model: TestSurveyTabViewModel;
 
@@ -71,17 +71,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     }
   }
   private setPreviewTheme(themeName: string): void {
-    switch (themeName) {
-      case "modern":
-        this.simulatorTheme = modernCss;
-        break;
-      case "default":
-        this.simulatorTheme = defaultStandardCss;
-        break;
-      default:
-        this.simulatorTheme = defaultV2Css;
-        break;
-    }
+    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
   }
 
   constructor(private creator: CreatorBase) {
@@ -215,11 +205,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    const themeMapper = [
-      { name: "defaultV2", theme: defaultV2Css },
-      { name: "modern", theme: modernCss },
-      { name: "default", theme: defaultStandardCss }
-    ];
+    const themeMapper = surveyCss.getAvailableThemes().map(themeName => { return { name: themeName, theme: surveyCss[themeName] } });
     const filteredThemes = this.filterThemeMapper(themeMapper);
     let availableThemesToItems = this.getAvailableThemes(filteredThemes);
 
