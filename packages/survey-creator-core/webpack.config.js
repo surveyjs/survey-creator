@@ -12,6 +12,7 @@ var svgStoreUtils = require(path.resolve(
   __dirname,
   "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
 ));
+const RenameWebpackPlugin = require('rename-webpack-plugin')
 
 const today = new Date();
 const year = today.getFullYear();
@@ -149,8 +150,8 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
-      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss"),
-      "survey-creator-core": path.resolve(__dirname, "./src/entries/survey-creator-core.scss")
+      "survey-creator.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss"),
+      "survey-creator": path.resolve(__dirname, "./src/entries/survey-creator-core.scss")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -253,12 +254,20 @@ module.exports = function (options) {
       }),
       new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
-        filename: isProductionBuild ? "[name].min.css" : "[name].css",
+        filename: isProductionBuild ? "[name]-core.min.css" : "[name]-core.css",
       }),
       new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({
         banner: banner,
       }),
+      new RenameWebpackPlugin({
+        originNameReg: "survey-creator.fontless-core.css",
+        targetName: "survey-creator-core.fontless.css"
+      }),
+      new RenameWebpackPlugin({
+        originNameReg: "survey-creator.fontless-core.min.css",
+        targetName: "survey-creator-core.fontless.min.css"
+      })
     ],
   };
 
