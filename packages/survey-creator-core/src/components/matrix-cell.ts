@@ -12,8 +12,6 @@ import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 
-require("./matrix-cell.scss");
-
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
   constructor(creator: CreatorBase, private cellQuestion: Question) {
@@ -34,7 +32,7 @@ export class MatrixCellWrapperEditSurvey {
     const columnJSON = column.toJSON();
     const prevCellType = columnJSON["cellType"];
     const questionJSON = this.survey.getAllQuestions()[0].toJSON();
-    if(!!prevCellType) {
+    if (!!prevCellType) {
       questionJSON.cellType = prevCellType;
     }
     column.fromJSON(questionJSON);

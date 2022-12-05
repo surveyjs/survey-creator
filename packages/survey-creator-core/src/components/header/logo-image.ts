@@ -1,6 +1,5 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
-require("./logo-image.scss");
 
 export class LogoImageViewModel extends Base {
   constructor(private creator: CreatorBase, public root: HTMLDivElement) {
@@ -24,9 +23,9 @@ export class LogoImageViewModel extends Base {
     });
   }
   public chooseFile(model: LogoImageViewModel) {
-    if(this.allowEdit) {
+    if (this.allowEdit) {
       const fileInput: HTMLInputElement =
-      <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
+        <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
       if (fileInput.files.length === 0) {
         model.creator.chooseFiles(fileInput, (files: File[]) => {
           model.uploadFile(model, fileInput, files);

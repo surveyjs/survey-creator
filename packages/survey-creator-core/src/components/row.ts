@@ -5,8 +5,6 @@ import {
   QuestionRowModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-require("./row.scss");
-
 export class RowViewModel extends Base {
   constructor(
     public creator: CreatorBase,

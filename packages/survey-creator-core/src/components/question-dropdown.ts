@@ -4,8 +4,6 @@ import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
 
-require("./question-dropdown.scss");
-
 export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   @property({ defaultValue: true }) private isCollapsed: boolean;
   @property({ defaultValue: -1 }) private visibleCount: number;

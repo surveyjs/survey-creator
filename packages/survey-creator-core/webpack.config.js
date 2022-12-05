@@ -149,7 +149,8 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
-      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss")
+      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss"),
+      "survey-creator-core": path.resolve(__dirname, "./src/entries/survey-creator-core.scss")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],

@@ -2,7 +2,6 @@ import { CssClassBuilder, ImageItemValue, property, QuestionSelectBase } from "s
 import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 
-require("./image-item-value.scss");
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   @property({ defaultValue: false }) isFileDragging: boolean;

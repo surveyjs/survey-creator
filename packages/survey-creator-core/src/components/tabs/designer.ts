@@ -1,7 +1,6 @@
 import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { DragDropSurveyElements } from "survey-core";
-require("./designer.scss");
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
@@ -70,16 +69,16 @@ export class TabDesignerViewModel extends Base {
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
-    if(!obj || this.isUpdatingNewPage) return;
+    if (!obj || this.isUpdatingNewPage) return;
     this.isUpdatingNewPage = true;
-    if(propName === "elements" && obj.isDescendantOf("page")) {
+    if (propName === "elements" && obj.isDescendantOf("page")) {
       let updatePageController = false;
-      if((<PageModel>obj).elements.length === 0) {
+      if ((<PageModel>obj).elements.length === 0) {
         updatePageController = this.checkLastPageToDelete();
       }
       this.checkNewPage(updatePageController);
     }
-    if(propName === "pages" && obj.isDescendantOf("survey")) {
+    if (propName === "pages" && obj.isDescendantOf("survey")) {
       this.checkNewPage(true);
     }
     this.isUpdatingNewPage = false;
@@ -115,7 +114,7 @@ export class TabDesignerViewModel extends Base {
       this.showNewPage = false;
       this.newPage = undefined;
     }
-    if(updatePageController) {
+    if (updatePageController) {
       if (this.newPage) {
         this.newPage.num = this.survey.pages.length + 1;
         this.newPage.name = SurveyHelper.getNewPageName(this.survey.pages);
@@ -124,7 +123,7 @@ export class TabDesignerViewModel extends Base {
     }
   }
   private checkLastPageToDelete(): boolean {
-    if(this.survey.pageCount === 0) return false;
+    if (this.survey.pageCount === 0) return false;
     if (this.survey.pageCount === 1 && !this.creator.isInitialSurveyEmpty) return false;
     const lastPage: PageModel = this.survey.pages[this.survey.pageCount - 1];
     if (lastPage.elements.length > 0 || (<any>lastPage).isConverting) return false;
@@ -134,7 +133,7 @@ export class TabDesignerViewModel extends Base {
     //If there is at least one property in page is set, then return
     for (var key in json) return false;
     lastPage.delete();
-    if(this.survey.pageCount === 0) {
+    if (this.survey.pageCount === 0) {
       this.creator.selectElement(this.survey);
     }
     return true;

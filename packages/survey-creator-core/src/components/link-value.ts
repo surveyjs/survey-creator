@@ -1,8 +1,6 @@
 import { Question, Serializer, QuestionFactory, property, Helpers } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 
-require("./link-value.scss");
-
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;

@@ -27,7 +27,6 @@ import {
   toggleHovered
 } from "../utils/utils";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
-require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 
@@ -295,7 +294,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
   }
   protected duplicate() {
-    setTimeout(()=>{
+    setTimeout(() => {
       var newElement = this.creator.fastCopyQuestion(this.surveyElement);
       this.creator.selectElement(newElement);
     }, 1);

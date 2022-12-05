@@ -5,7 +5,6 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-require("./json-editor-textarea.scss");
 
 export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   @property({ defaultValue: "", onSet: (_, target) => target.onTextChanged() })
@@ -29,7 +28,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
       textareaElement.value = textareaElement.value.substring(0, start) +
         "\t" + textareaElement.value.substring(end);
       textareaElement.selectionStart =
-      textareaElement.selectionEnd = start + 1;
+        textareaElement.selectionEnd = start + 1;
       e.stopPropagation();
     }
     return true;
@@ -76,8 +75,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorTextareaPlugin
   extends TabJsonEditorBasePlugin
-  implements ICreatorPlugin
-{
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase) {
     super(creator);
     creator.addPluginTab(

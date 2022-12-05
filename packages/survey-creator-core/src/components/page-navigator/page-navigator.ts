@@ -1,8 +1,6 @@
 import { PagesController } from "../../pages-controller";
 import { PageModel, PopupModel, ListModel, Base, propertyArray, SurveyModel, property, IAction, Action, ComputedUpdater } from "survey-core";
 
-require("./page-navigator.scss");
-require("./page-navigator-item.scss");
 import { getLocString } from "../../editorLocalization";
 
 export class PageNavigatorViewModel extends Base {
@@ -192,7 +190,7 @@ export class PageNavigatorViewModel extends Base {
       if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
         if (navigator.visible && !!navigator._itemsContainer) {
           const itemsHolder = navigator._itemsContainer.querySelectorAll(".svc-page-navigator__selector + div")[0];
-          if(!!itemsHolder) {
+          if (!!itemsHolder) {
             const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
             itemsHolder.className = cssClass;
             setTimeout(() => {

@@ -1,7 +1,5 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 
-require("./simulator.scss");
-
 export class SurveySimulatorModel extends Base {
   constructor() {
     super();

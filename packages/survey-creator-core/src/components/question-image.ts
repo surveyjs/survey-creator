@@ -2,15 +2,12 @@
 import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
-
-require("./question-image.scss");
-
 export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   constructor(
     creator: CreatorBase,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
-      public questionRoot: HTMLElement
+    public questionRoot: HTMLElement
   ) {
     super(creator, surveyElement, templateData);
   }

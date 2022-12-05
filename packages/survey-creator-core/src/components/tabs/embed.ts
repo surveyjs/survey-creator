@@ -10,7 +10,7 @@ import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { json } from "./embed-json";
-require("./embed.scss");
+
 
 export class EmbedModel extends Base {
   @property() survey: SurveyModel;
@@ -21,16 +21,15 @@ export class EmbedModel extends Base {
       (params: [string, string]) => {
         const [framework, theme]: [string, string] = params;
         let result: string = "";
-        if(framework ==="jquery") {
+        if (framework === "jquery") {
           result = "<script src=\"https://unpkg.com/jquery\"></script>";
         } else {
           result = `<!-- Your platform (${framework}) scripts -->`;
         }
-        result +="\n\n";
+        result += "\n\n";
         if (theme !== "bootstrap") {
-          result += `<link href="https://unpkg.com/survey-${framework}@${Version}/${
-            ["defaultV2", "modern"].indexOf(theme) > -1 ? theme : "survey"
-          }.css" type="text/css" rel="stylesheet"/>`;
+          result += `<link href="https://unpkg.com/survey-${framework}@${Version}/${["defaultV2", "modern"].indexOf(theme) > -1 ? theme : "survey"
+            }.css" type="text/css" rel="stylesheet"/>`;
         }
         return (
           result +
@@ -46,9 +45,8 @@ export class EmbedModel extends Base {
           case "angular":
             return "<ng-app></ng-app>";
           case "vue":
-            return `<div id="surveyContainer"><survey${
-              show === "window" ? "-window" : ""
-            } :survey=\"survey\"/></div>`;
+            return `<div id="surveyContainer"><survey${show === "window" ? "-window" : ""
+              } :survey=\"survey\"/></div>`;
           default:
             return '<div id="surveyContainer"></div>';
         }

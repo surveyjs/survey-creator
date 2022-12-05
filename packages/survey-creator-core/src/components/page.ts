@@ -3,7 +3,6 @@ import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
-require("./page.scss");
 import { SurveyHelper } from "../survey-helper";
 import { settings } from "../creator-settings";
 

@@ -1,9 +1,6 @@
 import { editorLocalization } from "../editorLocalization";
 import * as Survey from "survey-core";
 import { Base, property, propertyArray } from "survey-core";
-
-require("./results.scss");
-
 export class SurveyResultsItemModel extends Base {
   @property({ defaultValue: true }) collapsed: boolean;
   @property({ defaultValue: 0 }) lvl: number;

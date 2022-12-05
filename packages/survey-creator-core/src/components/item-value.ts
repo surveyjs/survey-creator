@@ -10,7 +10,6 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropChoices } from "survey-core";
-require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
 
 import { ICollectionItemAllowOperations } from "../creator-settings";

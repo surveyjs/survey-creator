@@ -1,3 +1,45 @@
 @import "../components/creator.scss";
 @import "../components/string-editor.scss";
 @import "../creator-theme/creator.scss";
+
+@import "../responsivity.scss";
+
+@import "../components/tabs/embed.scss";
+@import "../components/tabs/json-editor-ace.scss";
+@import "../components/tabs/json-editor-textarea.scss";
+@import "../components/tabs/test.scss";
+@import "../components/tabs/logic.scss";
+@import "../components/tabs/translation.scss";
+@import "../components/tabs/designer.scss";
+@import "../components/tabs/logic-ui.scss";
+
+@import "../components/page-navigator/page-navigator.scss";
+@import "../components/page-navigator/page-navigator-item.scss";
+@import "../components/page.scss";
+@import "../components/row.scss";
+@import "../components/question.scss";
+@import "../components/question-dropdown.scss";
+@import "../components/question-image.scss";
+@import "../components/question-rating.scss";
+@import "../components/item-value.scss";
+@import "../components/image-item-value.scss";
+@import "../components/matrix-cell.scss";
+@import "../components/simulator.scss";
+@import "../components/results.scss";
+@import "../components/header/logo-image.scss";
+@import "../components/link-value.scss";
+
+@import "../components/notifier.scss";
+
+
+@import "../components/property-panel/property-panel-item.scss";
+@import "../components/property-panel/property-panel.scss";
+@import "../components/tabbed-menu/tabbed-menu-item.scss";
+@import "../components/tabbed-menu/tabbed-menu.scss";
+@import "../components/toolbox/toolbox-tool.scss";
+@import "../components/question-dropdown.scss";
+@import "../components/toolbox/toolbox.scss";
+@import "../components/side-bar/side-bar.scss";
+@import "../property-grid-theme/property-grid.scss";
+@import "../utils/design.scss";
+@import "../utils/layout.scss";

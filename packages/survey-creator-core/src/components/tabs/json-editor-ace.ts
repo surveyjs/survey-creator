@@ -6,7 +6,7 @@ import {
   JsonEditorBaseModel,
   TabJsonEditorBasePlugin
 } from "./json-editor-plugin";
-require("./json-editor-ace.scss");
+
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
   private aceEditor: AceAjax.Editor;
@@ -37,7 +37,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
       try {
         ace["config"].set("basePath", AceJsonEditorModel.aceBasePath);
         this.aceEditor.session.setMode("ace/mode/json");
-      } catch {}
+      } catch { }
     }
     const self: AceJsonEditorModel = this;
     this.aceEditor.setShowPrintMargin(false);
@@ -90,8 +90,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin
-  implements ICreatorPlugin
-{
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase) {
     super(creator);
     creator.addPluginTab(
