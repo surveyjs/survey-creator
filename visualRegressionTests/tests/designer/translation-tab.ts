@@ -21,9 +21,9 @@ const json = {
           "type": "radiogroup",
           "name": "question3",
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         },
         {
@@ -34,9 +34,9 @@ const json = {
             "ru": "Вопрос 3"
           },
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         }
       ]

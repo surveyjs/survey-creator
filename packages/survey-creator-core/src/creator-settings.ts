@@ -84,6 +84,18 @@ export var settings = {
      * Use it to change the default question JSON on dropping it into designer or converting questions
      */
     defaultJSON: {
+      dropdown: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
+      checkbox: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
+      radiogroup: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
+      ranking: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
       imagepicker: {
         choices: [
           {

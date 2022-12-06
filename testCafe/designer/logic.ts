@@ -9,9 +9,9 @@ const json = {
       type: "checkbox",
       name: "string_editor",
       choices: [
-        "item1",
-        "item2",
-        "item3"
+        "Item 1",
+        "Item 2",
+        "Item 3"
       ]
     }
   ]
@@ -23,12 +23,12 @@ const json2 = {
       type: "radiogroup",
       name: "q1",
       choices: [
-        "item1",
-        "item2",
-        "item3"
+        "Item 1",
+        "Item 2",
+        "Item 3"
       ]
     },
-    { type: "text", name: "q2", visibleIf: "{q1}='item1'" },
+    { type: "text", name: "q2", visibleIf: "{q1}='Item 1'" },
     { type: "text", name: "q3" }
   ]
 };
@@ -241,9 +241,9 @@ test("Edit Logic rule", async (t) => {
     .expect(logicQuestionSelector.textContent).contains("q1")
     .expect(logicOperatorSelector.textContent).contains("Equals")
 
-    .expect(getDropdownValue(logicDropdownValueSelector)).eql("item1")
+    .expect(getDropdownValue(logicDropdownValueSelector)).eql("Item 1")
     .click(logicDropdownValueSelector)
-    .click(getListItemByText("item2"))
+    .click(getListItemByText("Item 2"))
 
     .expect(logicQuestionSelector.nth(-1).textContent).contains("q2")
     .click(logicQuestionSelector.nth(-1))
@@ -251,7 +251,7 @@ test("Edit Logic rule", async (t) => {
 
     .click(doneButton)
     .expect(tableRulesSelector.count).eql(1)
-    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'q1' == \'item2\', make question 'q3' visible");
+    .expect(tableRulesSelector.find("td").nth(1).innerText).eql("If 'q1' == \'Item 2\', make question 'q3' visible");
 });
 
 test("Filtering rules", async (t) => {
@@ -326,7 +326,7 @@ test("Manual Entry of the editing condition", async (t) => {
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
     .typeText(conditionTextEdit, "werwerwer")
     .expect(fastEntryAction.hasAttribute("disabled")).ok()
-    .typeText(conditionTextEdit, "{q1}='item1'", { replace: true })
+    .typeText(conditionTextEdit, "{q1}='Item 1'", { replace: true })
     .expect(fastEntryAction.hasAttribute("disabled")).notOk()
 
     .click(logicAddNewRuleButton)
@@ -377,13 +377,13 @@ async function check2Rule(t: TestController) {
     .expect(cellRules.nth(1).innerText).eql(newRuleDisplayText)
     .expect(logicQuestionSelector.textContent).contains("q1")
     .expect(logicOperatorSelector.textContent).contains("Equals")
-    .expect(getDropdownValue(logicDropdownValueSelector)).eql("item2")
+    .expect(getDropdownValue(logicDropdownValueSelector)).eql("Item 2")
     .expect(logicActionSelector.textContent).contains("Show (hide) question")
     .expect(logicQuestionSelector.nth(1).textContent).contains("q3");
 }
 
 test("Modified rules without saving", async (t) => {
-  const rule1Condition = "If 'q1' == 'item1', make question 'q2' visible";
+  const rule1Condition = "If 'q1' == 'Item 1', make question 'q2' visible";
   const additinalClass = "sl-table__row--additional";
 
   await setJSON(json2);
@@ -411,7 +411,7 @@ test("Modified rules without saving", async (t) => {
     .click(logicQuestionSelector)
     .click(getListItemByText("q1"))
     .click(logicDropdownValueSelector)
-    .click(getListItemByText("item2"))
+    .click(getListItemByText("Item 2"))
     .click(logicActionSelector)
     .click(getListItemByText("Show (hide) question"))
     .click(logicQuestionSelector.nth(1))
@@ -436,7 +436,7 @@ test("Modified rules without saving", async (t) => {
 
   await t
     .click(doneButton)
-    .expect(cellRules.nth(1).innerText).eql("If 'q1' == 'item2', make question 'q3' visible")
+    .expect(cellRules.nth(1).innerText).eql("If 'q1' == 'Item 2', make question 'q3' visible")
     .expect(tableRulesSelector.nth(0).classNames).contains(additinalClass)
     .expect(tableRulesSelector.nth(1).classNames).notContains(additinalClass)
 
