@@ -1,5 +1,5 @@
-import { Action, ArrayChanges, Base, ComputedUpdater, Event, property, SurveyModel } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { Action, ArrayChanges, Base, ComputedUpdater, property, SurveyModel } from "survey-core";
+import { CreatorBase, CreatorEvent } from "../../creator-base";
 import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoController extends Base {
@@ -158,32 +158,20 @@ export class UndoRedoController extends Base {
    * The event is called before undo happens.
    * options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
-  public onBeforeUndo: Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Event<(sender: CreatorBase, options: any) => any, any>();
+  public onBeforeUndo: CreatorEvent = new CreatorEvent();
   /**
     * The event is called before redo happens.
     * options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
-  public onBeforeRedo: Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Event<(sender: CreatorBase, options: any) => any, any>();
+  public onBeforeRedo: CreatorEvent = new CreatorEvent();
   /**
     * The event is called after undo happens.
     * options.state is an undo/redo item.
     */
-  public onAfterUndo: Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Event<(sender: CreatorBase, options: any) => any, any>();
+  public onAfterUndo: CreatorEvent = new CreatorEvent();
   /**
     * The event is called after redo happens.
     * options.state is an undo/redo item.
     */
-  public onAfterRedo: Event<
-    (sender: CreatorBase, options: any) => any,
-    any
-  > = new Event<(sender: CreatorBase, options: any) => any, any>();
+  public onAfterRedo: CreatorEvent = new CreatorEvent();
 }
