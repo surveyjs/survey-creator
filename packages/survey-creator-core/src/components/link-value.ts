@@ -30,6 +30,10 @@ export class QuestionLinkValueModel extends Question {
     }
   }
 
+  public get ariaRole(): string {
+    return "button";
+  }
+
   public get tooltip() {
     return this.showTooltip ? this.linkValueText : undefined;
   }

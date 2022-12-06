@@ -122,8 +122,8 @@ test("Choices: Ranking", async (t) => {
               "type": "ranking",
               "name": "question1",
               "choices": [
-                "item1",
-                "item2"
+                "Item 1",
+                "Item 2"
               ]
             }
           ]
@@ -164,9 +164,9 @@ test("Matrix: Property Grid: Choices", async (t) => {
               "type": "checkbox",
               "name": "question1",
               "choices": [
-                "item1",
-                "item2",
-                "item3"
+                "Item 1",
+                "Item 2",
+                "Item 3"
               ]
             }
           ]

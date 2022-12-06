@@ -11,6 +11,8 @@ export function initLogicOperator(question: QuestionDropdownModel) {
   question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
 }
 
+export class LogicEvent extends Event<(sender: SurveyLogic, options: any) => any, any> { }
+
 export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
   private editableItemValue: SurveyLogicItem;
   public static get visibleActions(): Array<string> {
@@ -29,10 +31,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
    * The event is called when logic item is saved.
    * options.item is the saved logic item.
    */
-  public onLogicItemSaved: Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemSaved: LogicEvent = new LogicEvent();
   /**
    * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
    * You can use options.item.actions to access actions and optionally set errorText to a particular action.
@@ -41,27 +40,18 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
    * usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
    * error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
    */
-  public onLogicItemValidation: Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemValidation: LogicEvent = new LogicEvent();
   /**
    * The event is called before logic item is being removed.
    * options.allowRemove is the option you can set to false and prevent removing.
    * options.item is the logic item to remove.
    */
-  public onLogicItemRemoving: Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemRemoving: LogicEvent = new LogicEvent();
   /**
    * The event is called when logic item is removed.
    * options.item is the removed logic item.
    */
-  public onLogicItemRemoved: Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemRemoved: LogicEvent = new LogicEvent();
 
   constructor(
     public survey: SurveyModel,

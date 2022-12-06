@@ -33,10 +33,12 @@ export class QuestionConverter {
     defaultJSON: any = null
   ): Survey.Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
+    let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
     var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
     if(!newQuestion) {
       newQuestion = Survey.Serializer.createClass(convertToClass, {});
     }
+    if (newQuestion instanceof Survey.QuestionSelectBase && questionDefaultSettings?.choices) newQuestion.choices = null;
     newQuestion.name = obj.name;
     const json = newQuestion.toJSON();
     const qJson = obj.toJSON();
@@ -60,7 +62,12 @@ export class QuestionConverter {
       if(convertToClass === "image" && !json.imageLink) {
         json.imageLink = questionDefaultSettings.imageLink;
       }
-      if(convertToClass === "imagepicker") {
+      if(convertToClass === "imagepicker" ||
+        convertToClass === "dropdown" ||
+        convertToClass === "checkbox" ||
+        convertToClass === "radiogroup" ||
+        convertToClass === "ranking"
+      ) {
         if(!json.choices) {
           json.choices = questionDefaultSettings.choices;
         }

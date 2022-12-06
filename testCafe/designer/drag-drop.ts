@@ -392,9 +392,9 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", async (t)
             "name": "question2",
             "startWithNewLine": false,
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           },
           {
@@ -501,9 +501,9 @@ test("Drag Drop Question with Multiline and OtherPage (StartWithNewLine === fals
             "name": "question2",
             "startWithNewLine": false,
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           },
           {
@@ -629,7 +629,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
           {
             type: "radiogroup",
             name: "question1",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       }
@@ -638,9 +638,9 @@ test("Drag Drop ItemValue (choices)", async (t) => {
   await setJSON(json);
 
   const Question1 = Selector("[data-name=\"question1\"]");
-  const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
-  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
-  const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
+  const Item1 = Selector("[data-sv-drop-target-item-value=\"Item 1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
+  const Item3 = Selector("[data-sv-drop-target-item-value=\"Item 3\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
   await t
@@ -654,7 +654,7 @@ test("Drag Drop ItemValue (choices)", async (t) => {
       speed: 0.1
     });
   let value = await getItemValueByIndex("question1", 0);
-  const expectedValue = "item2";
+  const expectedValue = "Item 2";
   await t.expect(value).eql(expectedValue);
 
   await t.dragToElement(DragZoneItem2, Item3, {
@@ -676,7 +676,7 @@ test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
           {
             type: "radiogroup",
             name: "question1",
-            choices: ["item1", "item2"]
+            choices: ["Item 1", "Item 2"]
           }
         ]
       }
@@ -686,10 +686,10 @@ test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
 
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const Question1 = Selector("[data-name=\"question1\"]");
-  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
-  const DnDShortcutControls = Selector("body > div > [data-sv-drop-target-item-value='item2']").find(".svc-item-value-controls__button");
+  const DnDShortcutControls = Selector("body > div > [data-sv-drop-target-item-value='Item 2']").find(".svc-item-value-controls__button");
 
   await patchDragDropToDisableDrop();
 
@@ -715,7 +715,7 @@ test("Drag Drop Ranking (choices)", async (t) => {
           {
             type: "ranking",
             name: "question1",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       }
@@ -724,9 +724,9 @@ test("Drag Drop Ranking (choices)", async (t) => {
   await setJSON(json);
 
   const Question1 = Selector("[data-name=\"question1\"]");
-  const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
-  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
-  const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
+  const Item1 = Selector("[data-sv-drop-target-item-value=\"Item 1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
+  const Item3 = Selector("[data-sv-drop-target-item-value=\"Item 3\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
   await t
@@ -740,7 +740,7 @@ test("Drag Drop Ranking (choices)", async (t) => {
       speed: 0.1
     });
   let value = await getItemValueByIndex("question1", 0);
-  const expectedValue = "item2";
+  const expectedValue = "Item 2";
   await t.expect(value).eql(expectedValue);
 
   await t.dragToElement(DragZoneItem2, Item3, {
@@ -762,7 +762,7 @@ test("Animation (choices)", async (t) => {
           {
             type: "radiogroup",
             name: "question1",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       }
@@ -771,9 +771,9 @@ test("Animation (choices)", async (t) => {
   await setJSON(json);
 
   const Question1 = Selector("[data-name=\"question1\"]");
-  const Item1 = Selector("[data-sv-drop-target-item-value=\"item1\"]");
-  const Item2 = Selector("[data-sv-drop-target-item-value=\"item2\"]");
-  const Item3 = Selector("[data-sv-drop-target-item-value=\"item3\"]");
+  const Item1 = Selector("[data-sv-drop-target-item-value=\"Item 1\"]");
+  const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
+  const Item3 = Selector("[data-sv-drop-target-item-value=\"Item 3\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
   await t
@@ -880,7 +880,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
           {
             type: "radiogroup",
             name: "question1",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       }
@@ -906,7 +906,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
       speed: 0.5
     });
 
-  const expectedValue = "item2";
+  const expectedValue = "Item 2";
   let value = await getItemValueByIndex("question1", 0);
   await t.expect(value).eql(expectedValue);
 
@@ -926,7 +926,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
           {
             type: "radiogroup",
             name: "question1",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       },
@@ -936,7 +936,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
           {
             type: "radiogroup",
             name: "question2",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       },
@@ -946,7 +946,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
           {
             type: "radiogroup",
             name: "question3",
-            choices: ["item1", "item2", "item3"]
+            choices: ["Item 1", "Item 2", "Item 3"]
           }
         ]
       }

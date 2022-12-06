@@ -244,3 +244,23 @@ test("Convert matrix question", () => {
   expect(newQ2.columns[1].title).toEqual("Col2");
   expect(newQ2.columns[1].name).toEqual("Column 2");
 });
+test("Convert text to radio with unset default questions", () => {
+  var survey = new SurveyModel();
+  var page = survey.addNewPage();
+  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  QuestionConverter.convertObject(q1, "radiogroup");
+  expect((<Base>(<any>page.elements[0])).getType()).toEqual("radiogroup");
+  var newQ1 = <QuestionImagePickerModel>page.elements[0];
+  expect(newQ1.choices).toHaveLength(3);
+  expect(newQ1.choices[0].value).toEqual("Item 1");
+
+  var oldChoices = settings.toolbox.defaultJSON["radiogroup"].choices;
+  settings.toolbox.defaultJSON["radiogroup"].choices = <any>null;
+  var q2 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  QuestionConverter.convertObject(q2, "radiogroup");
+  expect((<Base>(<any>page.elements[1])).getType()).toEqual("radiogroup");
+  var newQ1 = <QuestionImagePickerModel>page.elements[1];
+  expect(newQ1.choices).toHaveLength(3);
+  expect(newQ1.choices[0].value).toEqual("item1");
+  settings.toolbox.defaultJSON["radiogroup"].choices = oldChoices;
+});

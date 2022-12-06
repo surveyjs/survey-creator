@@ -17,9 +17,9 @@ const json = {
           "type": "dropdown",
           "name": "question1",
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         }
       ]

@@ -395,6 +395,7 @@ export class SurveyQuestionEditorDefinition {
         "max",
         "step",
         "placeholder",
+        "dataList",
         "maxLength"
       ],
       tabs: [{ name: "validators", index: 10 }]

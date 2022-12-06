@@ -8,9 +8,9 @@ const json = {
       type: "checkbox",
       name: "string_editor",
       choices: [
-        "item1",
-        "item2",
-        "item3"
+        "Item 1",
+        "Item 2",
+        "Item 3"
       ]
     }
   ]
@@ -23,9 +23,9 @@ const json2 = {
       name: "string_editor",
       description: "desc",
       choices: [
-        "item1",
-        "item2",
-        "item3"
+        "Item 1",
+        "Item 2",
+        "Item 3"
       ]
     }
   ]
@@ -37,9 +37,9 @@ const json3 = {
       name: "string_editor",
       description: "desc",
       choices: [
-        "item1",
-        "item2",
-        "item3"
+        "Item 1",
+        "Item 2",
+        "Item 3"
       ]
     },
     {
@@ -133,16 +133,16 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
         type: "checkbox",
         name: "q1",
         choices: [
-          "item1",
-          "item2"
+          "Item 1",
+          "Item 2"
         ]
       },
       {
         type: "radiogroup",
         name: "q2",
         choices: [
-          "item3",
-          "item4"
+          "Item 3",
+          "Item 4"
         ]
       }
     ]
@@ -150,10 +150,10 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
   await setJSON(json_t);
 
   await t
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "true").exists).ok();
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 1").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 2").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 3").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 4").withAttribute("contenteditable", "true").exists).ok();
 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("itemvalue", "text").readOnly = true;
@@ -161,10 +161,10 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
   await setJSON(json_t);
 
   await t
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "false").exists).ok();
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 1").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 3").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 4").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 2").withAttribute("contenteditable", "false").exists).ok();
 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("itemvalue", "text").readOnly = false;
@@ -173,10 +173,10 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
   await setJSON(json_t);
 
   await t
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "true").exists).ok();
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 1").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 2").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 3").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 4").withAttribute("contenteditable", "true").exists).ok();
 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = false;
@@ -188,10 +188,10 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
   await setJSON(json_t);
 
   await t
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item1").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item2").withAttribute("contenteditable", "true").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item3").withAttribute("contenteditable", "false").exists).ok()
-    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("item4").withAttribute("contenteditable", "false").exists).ok();
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 1").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 2").withAttribute("contenteditable", "true").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 3").withAttribute("contenteditable", "false").exists).ok()
+    .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Item 4").withAttribute("contenteditable", "false").exists).ok();
 
 });
 
@@ -237,7 +237,7 @@ test("Check string editor not loosing focus and selects underlying items", async
   await setJSON(json3);
 
   const svStringSelector = Selector(".sv-string-editor").withText("string_editor");
-  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+  const svItemSelector = Selector(".sv-string-editor").withText("Item 1");
 
   await t
     .click(svStringSelector)
@@ -260,7 +260,7 @@ test("Check string editor not loosing focus and selects underlying items", async
 test("Check string editor inplaceEditForValues property", async (t) => {
   await setJSON(json);
 
-  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+  const svItemSelector = Selector(".sv-string-editor").withText("Item 1");
 
   await t
     .click(svItemSelector)
@@ -270,21 +270,21 @@ test("Check string editor inplaceEditForValues property", async (t) => {
     .expect(ClientFunction(() => {
       var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
       return { value: itemvalue.value, text: itemvalue.text };
-    })()).eql({ value: "item1", text: "newitem1" });
+    })()).eql({ value: "Item 1", text: "newItem 1" });
 
   await ClientFunction(() => {
     window["creator"].inplaceEditForValues = true;
   })();
 
   await t
-    .click(Selector(".sv-string-editor").withText("newitem1"))
-    .click(Selector(".sv-string-editor").withText("newitem1"))
-    .typeText(Selector(".sv-string-editor").withText("newitem1"), "Ok", { caretPos: 0 })
+    .click(Selector(".sv-string-editor").withText("newItem 1"))
+    .click(Selector(".sv-string-editor").withText("newItem 1"))
+    .typeText(Selector(".sv-string-editor").withText("newItem 1"), "Ok", { caretPos: 0 })
     .pressKey("enter")
     .expect(ClientFunction(() => {
       var itemvalue = window["creator"].survey.getQuestionByName("string_editor").choices[0];
       return { value: itemvalue.value, text: itemvalue.text };
-    })()).eql({ value: "Oknewitem1", text: "newitem1" });
+    })()).eql({ value: "OknewItem 1", text: "newItem 1" });
 });
 
 test("Check item string editor focus out on near click", async (t) => {
@@ -293,19 +293,19 @@ test("Check item string editor focus out on near click", async (t) => {
       {
         "type": "checkbox",
         "name": "question1",
-        "choices": ["item1"]
+        "choices": ["Item 1"]
       }
     ]
   };
 
   await setJSON(json);
 
-  const svItemSelector = Selector(".sv-string-editor").withText("item1");
+  const svItemSelector = Selector(".sv-string-editor").withText("Item 1");
 
   await t
     .click(svItemSelector)
     .expect(svItemSelector.focused).ok()
-    .click(Selector(".svc-item-value-wrapper").withText("item1"), { offsetX: 200 })
+    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200 })
     .expect(svItemSelector.focused).notOk();
 });
 
@@ -583,15 +583,15 @@ test("Focus switch on select base", async (t) => {
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("item2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 3").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("item4").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 4").focused).ok()
     .pressKey("Ctrl+Enter")
-    .expect(Selector(".sv-string-editor").withText("item5").visible).notOk();
+    .expect(Selector(".sv-string-editor").withText("Item 5").visible).notOk();
 });
 
 test("Disable edit inactive items", async (t) => {
@@ -627,29 +627,29 @@ test("Delete items on backspace", async (t) => {
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("item2").focused).ok()
-    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
-    .expect(Selector(".sv-string-editor").withText("item2").visible).ok()
-    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 3").visible).ok()
     .pressKey("backspace")
     .wait(200)
     .pressKey("backspace")
     .wait(200)
-    .expect(Selector(".sv-string-editor").withText("item1").focused).ok()
-    .expect(Selector(".sv-string-editor").withText("item2").visible).notOk()
-    .expect(Selector(".sv-string-editor").withText("item1").visible).ok()
-    .expect(Selector(".sv-string-editor").withText("item3").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("Item 1").visible).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 3").visible).ok()
     .pressKey("backspace")
     .wait(200)
     .pressKey("backspace")
     .wait(200)
-    .expect(Selector(".sv-string-editor").withText("item3").focused).ok()
-    .expect(Selector(".sv-string-editor").withText("item1").visible).notOk()
+    .expect(Selector(".sv-string-editor").withText("Item 3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").visible).notOk()
     .pressKey("backspace")
     .wait(200)
     .pressKey("backspace")
     .wait(200)
-    .expect(Selector(".sv-string-editor").withText("item3").visible).notOk();
+    .expect(Selector(".sv-string-editor").withText("Item 3").visible).notOk();
 });
 
 test("Focus switch on multiple text", async (t) => {
@@ -788,12 +788,12 @@ test("Paste multiline selectbase", async (t) => {
   await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
 
   await t
-    .click(Selector(".sv-string-editor").withText("item2"))
-    .typeText(Selector(".sv-string-editor").withText("item2"), "a\nb\nc", { caretPos: 2, paste: true });
-  await t.expect(Selector(".sv-string-editor").withText("item3").focused).ok();
+    .click(Selector(".sv-string-editor").withText("Item 2"))
+    .typeText(Selector(".sv-string-editor").withText("Item 2"), "a\nb\nc", { caretPos: 2, paste: true });
+  await t.expect(Selector(".sv-string-editor").withText("Item 3").focused).ok();
   await t.expect(ClientFunction(() => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
-  })()).eql("[\"item1\",\"ita\",\"b\",\"cem2\",\"item3\"]");
+  })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
 test("Undo after new item add", async (t) => {
   await t

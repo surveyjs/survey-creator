@@ -19,9 +19,9 @@ const json1 = {
           "type": "checkbox",
           "name": "question2",
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         }
       ],
@@ -171,9 +171,9 @@ test("Hidden Question Issue: #3298", async (t) => {
                 "type": "checkbox",
                 "name": "question1",
                 "choices": [
-                  "item1",
-                  "item2",
-                  "item3"
+                  "Item 1",
+                  "Item 2",
+                  "Item 3"
                 ]
               },
               {
@@ -181,9 +181,9 @@ test("Hidden Question Issue: #3298", async (t) => {
                 "name": "question2",
                 "visibleIf": "{question1} notempty",
                 "choices": [
-                  "item1",
-                  "item2",
-                  "item3"
+                  "Item 1",
+                  "Item 2",
+                  "Item 3"
                 ]
               }
             ]

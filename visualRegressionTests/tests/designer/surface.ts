@@ -136,8 +136,8 @@ test("Choices (Checkbox): Layout", async (t) => {
               "type": "checkbox",
               "name": "question1",
               "choices": [
-                "item1",
-                "item2"
+                "Item 1",
+                "Item 2"
               ],
               "hasOther": true,
               "colCount": 2
