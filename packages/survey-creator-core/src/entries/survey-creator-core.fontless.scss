@@ -1,7 +1,3 @@
-@import "../components/creator.scss";
-@import "../components/string-editor.scss";
-@import "../creator-theme/creator.scss";
-
 @import "../responsivity.scss";
 
 @import "../components/tabs/embed.scss";
@@ -31,6 +27,9 @@
 
 @import "../components/notifier.scss";
 
+@import "../components/creator.scss";
+@import "../components/string-editor.scss";
+@import "../creator-theme/creator.scss";
 
 @import "../components/property-panel/property-panel-item.scss";
 @import "../components/property-panel/property-panel.scss";
