@@ -265,7 +265,7 @@ const jsonAllActionTypes = {
   "logoPosition": "right",
   "completedHtmlOnCondition": [
     {
-      "expression": "{question4} = ['item1']",
+      "expression": "{question4} = ['Item 1']",
       "html": "Thanks"
     }
   ],
@@ -322,27 +322,27 @@ const jsonAllActionTypes = {
         {
           "type": "checkbox",
           "name": "question4",
-          "visibleIf": "{question4} = ['item1']",
+          "visibleIf": "{question4} = ['Item 1']",
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         },
         {
           "type": "dropdown",
           "name": "question5",
-          "enableIf": "{question4} = ['item1']",
+          "enableIf": "{question4} = ['Item 1']",
           "choices": [
-            "item1",
-            "item2",
-            "item3"
+            "Item 1",
+            "Item 2",
+            "Item 3"
           ]
         },
         {
           "type": "rating",
           "name": "question6",
-          "requiredIf": "{question4} = ['item1']"
+          "requiredIf": "{question4} = ['Item 1']"
         }
       ],
       "title": "page1 -- title",
@@ -379,31 +379,31 @@ const jsonAllActionTypes = {
   "triggers": [
     {
       "type": "complete",
-      "expression": "{question4} = ['item1']"
+      "expression": "{question4} = ['Item 1']"
     },
     {
       "type": "setvalue",
-      "expression": "{question4} = ['item1']",
+      "expression": "{question4} = ['Item 1']",
       "setToName": "question4",
       "setValue": [
-        "item1",
-        "item2"
+        "Item 1",
+        "Item 2"
       ]
     },
     {
       "type": "copyvalue",
-      "expression": "{question4} = ['item1']",
+      "expression": "{question4} = ['Item 1']",
       "fromName": "question6",
       "setToName": "question11"
     },
     {
       "type": "skip",
-      "expression": "{question4} = ['item1']",
+      "expression": "{question4} = ['Item 1']",
       "gotoName": "nps_score"
     },
     {
       "type": "runexpression",
-      "expression": "{question4} = ['item1']",
+      "expression": "{question4} = ['Item 1']",
       "setToName": "question11",
       "runExpression": "{sdfsd}"
     }

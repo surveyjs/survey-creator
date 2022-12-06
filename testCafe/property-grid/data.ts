@@ -17,9 +17,9 @@ test("Default value", async (t) => {
             "name": "question1",
             "title": "question1",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           }
         ]
@@ -36,12 +36,12 @@ test("Default value", async (t) => {
     .click(question1)
     .click(dataTab)
     .click(Selector("span").withExactText("Set Default Answer"))
-    .click(Selector(".sv-popup--modal span").withExactText("item1"))
+    .click(Selector(".sv-popup--modal span").withExactText("Item 1"))
     .click(Selector(".sv-popup--modal button").withExactText("Apply"))
     .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
   const resultJson = await getJSON();
   await t
-    .expect(resultJson.pages[0].elements[0].defaultValue).eql(["item1"])
+    .expect(resultJson.pages[0].elements[0].defaultValue).eql(["Item 1"])
     .click(Selector("span").withExactText("Clear"))
     .expect(Selector("span").withExactText("Set Default Answer").visible).ok();
   const resultJson2 = await getJSON();

@@ -17,9 +17,9 @@ test("Rename choice", async (t) => {
             "name": "question1",
             "title": "question1",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           }
         ]
@@ -56,9 +56,9 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
             "name": "question1",
             "title": "question1",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           }
         ]
@@ -104,9 +104,9 @@ test("Load choices by custom button in fast edit", async (t) => {
             "name": "question1",
             "title": "question1",
             "choices": [
-              "item1",
-              "item2",
-              "item3"
+              "Item 1",
+              "Item 2",
+              "Item 3"
             ]
           }
         ]
