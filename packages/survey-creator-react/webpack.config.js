@@ -5,7 +5,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const rimraf = require("rimraf");
+const DtsGeneratorPlugin = require("../../webpack-plugins/dts-generator");
 const packageJson = require("./package.json");
 const fs = require("fs");
 const replace = require("replace-in-file");
@@ -63,7 +63,6 @@ const buildPlatformJson = {
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
-  const dts_generator = __dirname + "/d_ts_generator.js";
   const isProductionBuild = options.buildType === "prod";
 
   const percentage_handler = function handler(percentage, msg) {
@@ -71,9 +70,6 @@ module.exports = function (options) {
       console.log("Build started... good luck!");
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        console.log("Generating d.ts file: " + dts_generator);
-        require(dts_generator);
-        rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
         );
@@ -109,12 +105,6 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-          options: {
-            compilerOptions: {
-              declaration: isProductionBuild,
-              outDir: buildPath + "typings/"
-            }
-          }
         },
         {
           test: /\.css$/,
@@ -224,6 +214,11 @@ module.exports = function (options) {
         filename: "index.html",
         inject: "body",
         template: "index.html"
+      }),
+      new DtsGeneratorPlugin({
+        webpack: webpack,
+        filePath: "build/survey-creator-react.d.ts",
+        moduleName: "survey-creator-react"
       })
     ]);
     config.devServer = {
