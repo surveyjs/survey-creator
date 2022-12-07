@@ -8,6 +8,7 @@ var rimraf = require("rimraf");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
+var mergeFiles = require("merge-files");
 var svgStoreUtils = require(path.resolve(
   __dirname,
   "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
@@ -118,6 +119,37 @@ module.exports = function (options) {
     );
   }
 
+  async function createStylesBundleWithFonts() {
+    const getdir = (filename) => {
+      return buildPath + filename;
+    }
+
+    let outputPath = getdir("survey-creator-core.css");
+    let inputPathList = [
+      getdir("fonts.fontless.css"),
+      getdir("survey-creator-core.fontless.css")
+    ];
+    // status: true or false
+    let status = await mergeFiles(inputPathList, outputPath);
+    // or
+    mergeFiles(inputPathList, outputPath).then((status) => {
+      // next
+    });
+
+    // min verstion
+    outputPath = getdir("survey-creator-core.min.css");
+    inputPathList = [
+      getdir("fonts.fontless.min.css"),
+      getdir("survey-creator-core.fontless.min.css")
+    ];
+    // status: true or false
+    status = await mergeFiles(inputPathList, outputPath);
+    // or
+    mergeFiles(inputPathList, outputPath).then((status) => {
+      // next
+    });
+  }
+
   //var packageName = chunkName || packageJson.name;
   var packageName = packageJson.name;
 
@@ -138,6 +170,8 @@ module.exports = function (options) {
           "utf8"
         );
       }
+
+      createStylesBundleWithFonts();
     }
   };
 
@@ -145,7 +179,7 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
-      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss")
+      "fonts": path.resolve(__dirname, "./src/entries/fonts.scss")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -242,7 +276,7 @@ module.exports = function (options) {
       }),
       new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
-        filename: isProductionBuild ? "[name].min.css" : "[name].css",
+        filename: isProductionBuild ? "[name].fontless.min.css" : "[name].fontless.css",
       }),
       new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({
