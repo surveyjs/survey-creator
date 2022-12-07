@@ -79,7 +79,6 @@ var buildPlatformJson = {
 
 module.exports = function (options) {
   var buildPath = __dirname + "/build/";
-  var dts_generator = __dirname + "/d_ts_generator.js";
   var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
@@ -127,9 +126,6 @@ module.exports = function (options) {
       console.log("Build started... good luck!");
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        console.log("Generating d.ts file: " + dts_generator);
-        require(dts_generator);
-        rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
         );
@@ -166,12 +162,6 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-          options: {
-            compilerOptions: {
-              declaration: isProductionBuild,
-              outDir: buildPath + "typings/",
-            },
-          },
         },
         {
           test: /\.css$/,

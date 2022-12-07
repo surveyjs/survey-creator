@@ -9,7 +9,7 @@ import {
 require("./json-editor-ace.scss");
 export class AceJsonEditorModel extends JsonEditorBaseModel {
   public static aceBasePath: string = "";
-  private aceEditor: AceAjax.Editor;
+  private aceEditor: any;
   @property() private aceCanUndo: boolean = false;
   @property() private aceCanRedo: boolean = false;
 
@@ -29,15 +29,15 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.isProcessingImmediately = false;
   }
 
-  public init(aceEditor: AceAjax.Editor): void {
+  public init(aceEditor: any): void {
     this.aceEditor = aceEditor;
     this.aceEditor.commands["removeCommand"]("find");
     this.aceEditor.setReadOnly(this.readOnly);
     if (AceJsonEditorModel.aceBasePath) {
       try {
-        ace["config"].set("basePath", AceJsonEditorModel.aceBasePath);
+        window["ace"]["config"].set("basePath", AceJsonEditorModel.aceBasePath);
         this.aceEditor.session.setMode("ace/mode/json");
-      } catch {}
+      } catch { }
     }
     const self: AceJsonEditorModel = this;
     this.aceEditor.setShowPrintMargin(false);
@@ -50,7 +50,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.onPluginActivate();
   }
   private updateUndoRedoState(): void {
-    const undoManager: AceAjax.UndoManager = this.aceEditor
+    const undoManager: any = this.aceEditor
       .getSession()
       .getUndoManager();
     this.aceCanUndo = undoManager.hasUndo();
@@ -64,11 +64,11 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     this.updateUndoRedoState();
     super.onTextChanged();
   }
-  private createAnnotations(errors: any[]): AceAjax.Annotation[] {
-    const annotations: AceAjax.Annotation[] = [];
+  private createAnnotations(errors: any[]): any[] {
+    const annotations: any[] = [];
     for (let i = 0; i < errors.length; i++) {
       const error: any = errors[i];
-      const annotation: AceAjax.Annotation = {
+      const annotation: any = {
         row: error.position.start.row,
         column: error.position.start.column,
         text: error.text,
@@ -90,8 +90,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 
 export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin
-  implements ICreatorPlugin
-{
+  implements ICreatorPlugin {
   constructor(creator: CreatorBase) {
     super(creator);
     creator.addPluginTab(
@@ -107,6 +106,6 @@ export class TabJsonEditorAcePlugin
     return new AceJsonEditorModel(creator);
   }
   public static hasAceEditor(): boolean {
-    return typeof ace !== "undefined";
+    return typeof window["ace"] !== "undefined";
   }
 }
