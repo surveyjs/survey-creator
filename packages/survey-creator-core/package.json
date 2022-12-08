@@ -52,6 +52,7 @@
     "jest": "^26.1.0",
     "jest-canvas-mock": "^2.2.0",
     "jquery": "^3.5.1",
+    "merge-files": "0.1.2",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "puppeteer": "^1.19.0",
