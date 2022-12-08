@@ -4,7 +4,7 @@ var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-var rimraf = require("rimraf");
+const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
@@ -270,6 +270,11 @@ module.exports = function (options) {
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
+      new DtsGeneratorPlugin({
+        webpack: webpack,
+        filePath: "build/survey-creator-core.d.ts",
+        moduleName: "survey-creator-core"
+      }),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
