@@ -12,8 +12,8 @@
 
   border: calcSize(0.25) solid transparent;
 
-  &:focus:enabled,
-  &:hover:enabled {
+  &:focus,
+  &:hover {
     background-color: $primary-light;
     outline: none;
   }
