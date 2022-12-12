@@ -21,7 +21,7 @@
   border-radius: calcSize(12.5);
   padding: 0;
 
-  &:hover,
+  &:hover:enabled,
   &.sv-focused--by-key {
     background-color: $primary-light;
     outline: none;
@@ -37,7 +37,7 @@
   padding: calcSize(1);
   cursor: pointer;
 
-  &:hover,
+  &:hover:enabled,
   &.sv-focused--by-key {
     background-color: $red-light;
     outline: none;
@@ -71,8 +71,8 @@
 }
 
 .sl-table__cell .svc-action-button,
-.sl-table__cell .svc-action-button:hover,
-.sl-table__cell .svc-action-button:focus {
+.sl-table__cell .svc-action-button:hover:enabled,
+.sl-table__cell .svc-action-button:focus:enabled {
   @include mediumBold;
 
   background: transparent;
@@ -196,7 +196,7 @@
 
     user-select: none;
   }
-  button:hover {
+  button:hover:enabled {
     background-color: $primary;
     color: $primary-foreground;
   }
