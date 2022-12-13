@@ -4,10 +4,11 @@ var webpack = require("webpack");
 var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-var rimraf = require("rimraf");
+const DtsGeneratorPlugin = require("../../webpack-plugins/webpack-dts-generator");
 var packageJson = require("./package.json");
 var fs = require("fs");
 var replace = require("replace-in-file");
+var mergeFiles = require("merge-files");
 var svgStoreUtils = require(path.resolve(
   __dirname,
   "./node_modules/webpack-svgstore-plugin/src/helpers/utils.js"
@@ -79,7 +80,6 @@ var buildPlatformJson = {
 
 module.exports = function (options) {
   var buildPath = __dirname + "/build/";
-  var dts_generator = __dirname + "/d_ts_generator.js";
   var isProductionBuild = options.buildType === "prod";
 
   function createSVGBundle() {
@@ -119,6 +119,37 @@ module.exports = function (options) {
     );
   }
 
+  async function createStylesBundleWithFonts() {
+    const getdir = (filename) => {
+      return buildPath + filename;
+    }
+
+    let outputPath = getdir("survey-creator-core.css");
+    let inputPathList = [
+      getdir("fonts.fontless.css"),
+      getdir("survey-creator-core.fontless.css")
+    ];
+    // status: true or false
+    let status = await mergeFiles(inputPathList, outputPath);
+    // or
+    mergeFiles(inputPathList, outputPath).then((status) => {
+      // next
+    });
+
+    // min verstion
+    outputPath = getdir("survey-creator-core.min.css");
+    inputPathList = [
+      getdir("fonts.fontless.min.css"),
+      getdir("survey-creator-core.fontless.min.css")
+    ];
+    // status: true or false
+    status = await mergeFiles(inputPathList, outputPath);
+    // or
+    mergeFiles(inputPathList, outputPath).then((status) => {
+      // next
+    });
+  }
+
   //var packageName = chunkName || packageJson.name;
   var packageName = packageJson.name;
 
@@ -127,9 +158,6 @@ module.exports = function (options) {
       console.log("Build started... good luck!");
     } else if (1 == percentage) {
       if (isProductionBuild) {
-        console.log("Generating d.ts file: " + dts_generator);
-        require(dts_generator);
-        rimraf.sync(buildPath + "typings");
         fs.createReadStream("./README.md").pipe(
           fs.createWriteStream(buildPath + "README.md")
         );
@@ -142,6 +170,8 @@ module.exports = function (options) {
           "utf8"
         );
       }
+
+      createStylesBundleWithFonts();
     }
   };
 
@@ -149,7 +179,7 @@ module.exports = function (options) {
     mode: isProductionBuild ? "production" : "development",
     entry: {
       [packageJson.name]: path.resolve(__dirname, "./src/entries/index.ts"),
-      "survey-creator-core.fontless": path.resolve(__dirname, "./src/entries/survey-creator-core.fontless.scss")
+      "fonts": path.resolve(__dirname, "./src/entries/fonts.scss")
     },
     resolve: {
       extensions: [".ts", ".js", ".tsx", ".scss"],
@@ -166,12 +196,6 @@ module.exports = function (options) {
         {
           test: /\.(ts|tsx)$/,
           loader: "ts-loader",
-          options: {
-            compilerOptions: {
-              declaration: isProductionBuild,
-              outDir: buildPath + "typings/",
-            },
-          },
         },
         {
           test: /\.css$/,
@@ -246,13 +270,18 @@ module.exports = function (options) {
     },
     plugins: [
       new webpack.ProgressPlugin(percentage_handler),
+      new DtsGeneratorPlugin({
+        webpack: webpack,
+        filePath: "build/survey-creator-core.d.ts",
+        moduleName: "survey-creator-core"
+      }),
       new webpack.DefinePlugin({
         "process.env.ENVIRONMENT": JSON.stringify(options.buildType),
         "process.env.VERSION": JSON.stringify(packageJson.version),
       }),
       new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
-        filename: isProductionBuild ? "[name].min.css" : "[name].css",
+        filename: isProductionBuild ? "[name].fontless.min.css" : "[name].fontless.css",
       }),
       new webpack.WatchIgnorePlugin([/svgbundle\.html/]),
       new webpack.BannerPlugin({

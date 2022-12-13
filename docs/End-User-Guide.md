@@ -174,10 +174,7 @@ Use the Expression type to calculate values and present them to respondents. For
 
 <img src="images/question-types-expression.png" alt="Question types - Expression" width="50%">
 
-To specify an expression, enter it into the **Expression** field in the **General** category. Your expression can reference other survey questions (for example, `{question1} + {question2}`) or use built-in calculation functions. Refer to the following help topics for more information:
-
-- [Boolean Expressions](https://surveyjs.io/Documentation/Library#boolean-expressions)
-- [Built-In Functions](https://surveyjs.io/Documentation/Library#built-in-functions)
+To specify an expression, enter it into the **Expression** field in the **General** category. Your expression can reference other survey questions (for example, `{question1} + {question2}`) or use built-in calculation functions. Refer to the following help topic for more information: [Expressions](https://surveyjs.io/form-library/documentation/design-survey/conditional-logic#expressions)
 
 #### File
 
