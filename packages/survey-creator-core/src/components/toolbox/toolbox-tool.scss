@@ -137,8 +137,8 @@
   }
 }
 
-.svc-toolbox__tool .sv-dots__item:hover,
-.svc-toolbox__tool .sv-dots__item:focus,
+.svc-toolbox__tool .sv-dots__item:hover:enabled,
+.svc-toolbox__tool .sv-dots__item:focus:enabled,
 .svc-toolbox__tool .sv-dots__item.sv-action-bar-item--pressed {
   background-color: $primary-light;
   border-radius: calcSize(12.5);
