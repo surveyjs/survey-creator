@@ -2161,6 +2161,49 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   expect(logicTypeName.value).toEqual("question_visibility");
   expect(logicTypeName.choices.length).toEqual(3);
 });
+test("LogicUI: edit visibleIf property for panel dynamic question template when question is located in the panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [
+          { type: "text", name: "q1_col1" },
+          { type: "panel", name: "panel",
+            elements: [{ type: "text", name: "q1_col2", visibleIf: "{panel.q1_col1} = 1" }]
+          },
+          { type: "text", name: "q1_col3" }]
+      },
+      { type: "text", name: "q2" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(1);
+  logic.editItem(logic.items[0]);
+  const expressionEditor = logic.expressionEditor;
+  expect(expressionEditor.context).toBeTruthy();
+  expect(expressionEditor.context.name).toEqual("q1");
+  const itemEditor = logic.itemEditor;
+  expect(itemEditor.panels).toHaveLength(1);
+  const actionPanel = itemEditor.panels[0];
+  const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
+  expect(logicTypeName.value).toEqual("question_visibility");
+  expect(logicTypeName.displayValue).toEqual("Show (hide) question");
+  const colSelector = <QuestionDropdownModel>(actionPanel.getQuestionByName("elementSelector"));
+  expect(colSelector.choices).toHaveLength(4);
+  expect(colSelector.choices[1].text).toEqual("q1.q1_col1");
+  expect(colSelector.value).toEqual("q1.q1_col2");
+  colSelector.value = "q1.q1_col3";
+  logic.saveEditableItem();
+  const panel = <QuestionPanelDynamicModel>survey.getQuestionByName("q1");
+  expect(<Question>(panel.templateElements[1]).visibleIf).toBeFalsy();
+  expect((<Question>panel.templateElements[2]).visibleIf).toEqual("{panel.q1_col1} = 1");
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    logic.itemsSurvey.getQuestionByName("items")
+  );
+  const row = itemsQuestion.visibleRows[0];
+  expect(row.cells[0].value).toEqual("If 'panel.q1_col1' == 1, make question 'q1_col3' visible");
+});
+
 test("LogicUI: check runExpression question", () => {
   const survey = new SurveyModel({
     elements: [
