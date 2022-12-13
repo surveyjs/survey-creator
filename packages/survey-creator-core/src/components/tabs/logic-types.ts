@@ -236,18 +236,21 @@ export class SurveyLogicTypes {
         return !!element ? (<Question>element).parentQuestion : null;
       },
       getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
-        const res = [];
+        const res = new Array<SurveyElement<any>>();
         const questions = survey.getAllQuestions();
+        const addElement = function(el: any) {
+          res.push(el);
+          if(el.isPanel) {
+            el.elements.forEach(child => addElement(child));
+          }
+        };
         for (var i = 0; i < questions.length; i++) {
           const q = questions[i];
           if (!context) {
             res.push(q);
           }
           if (q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
-            const templates = q.templateElements;
-            for (var j = 0; j < templates.length; j++) {
-              res.push(templates[j]);
-            }
+            q.templateElements.forEach(el => addElement(el));
           }
         }
         return res;
