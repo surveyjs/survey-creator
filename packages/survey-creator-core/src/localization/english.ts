@@ -325,6 +325,9 @@ export var enStrings = {
     url: "Service URL",
     path: "Path to data within the service",
     valueName: "Store answers in the following JSON field",
+    choicesbyurl: {
+      valueName: "Get values from the following JSON field"
+    },
     titleName: "Get display texts from the following JSON field",
     imageLinkName: "Get image URLs from the following JSON field",
     allowEmptyResponse: "Allow empty response",
