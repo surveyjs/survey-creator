@@ -90,7 +90,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.getPage();
   }
 
-  private addGhostPage = () => {
+  private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
       currentPage.unRegisterFunctionOnPropertiesValueChanged([
@@ -101,12 +101,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.creator.survey.addPage(currentPage);
       this.creator.survey.currentPage = currentPage;
     }
-    this.creator.selectElement(currentPage);
+    if (selectCurrentPage) {
+      this.creator.selectElement(currentPage);
+    }
   }
 
   addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
     this.creator.addNewQuestionInPage((type) => {
-      this.addGhostPage();
+      this.addGhostPage(false);
+      this.creator.survey.currentPage = this.page;
     }, null, this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
