@@ -1459,3 +1459,40 @@ test("Construction -> Reset -> Dispose", () => {
   expect(translation.stringsHeaderSurvey).toBeUndefined();
   expect(tabTranslation.model).toBeUndefined();
 });
+test("Check onTranlationItemChanging event", () => {
+  const creator = new CreatorTester({ showTranslationTab: true });
+  let log = "";
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1",
+        "title": {
+          "default": "Question 1",
+          "de": "Question de",
+        }
+      }
+    ]
+  };
+  const surveyQuestion = creator.survey.getAllQuestions()[0];
+  creator.onTranslationItemChanging.add((_, opt) => {
+    log += "->called";
+    opt.newText += "_changed_text";
+    expect(opt.locale).toBe("de");
+    expect(opt.locString).toBe(surveyQuestion.locTitle);
+    expect(opt.obj).toBe(surveyQuestion);
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation: Translation = tabTranslation.model;
+  const page = translation.stringsSurvey.pages[0];
+  const pagePanel = <PanelModel>page.elements[0];
+  const question1 = <PanelModel>pagePanel.elements[0];
+  const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
+  const cellQuestion = question1Props.visibleRows[0].cells[1].question;
+  cellQuestion.value = "changed_de";
+  expect(surveyQuestion.locTitle.getLocaleText("de")).toBe("changed_de_changed_text");
+  expect(cellQuestion.value).toBe("changed_de_changed_text");
+  //check that event callback is called once
+  expect(log).toBe("->called");
+});

@@ -95,7 +95,11 @@ export class TranslationItem extends TranslationItemBase {
   public getLocText(loc: string): string {
     return this.locString.getLocaleText(loc);
   }
-  public setLocText(loc: string, newValue: string) {
+  public setLocText(loc: string, newValue: string): string {
+    if(!newValue) {
+      newValue = "";
+    }
+    newValue = this.translation.getProcessedTranslationItemText(loc, this.locString, newValue, this.context);
     this.locString.setLocaleText(loc, newValue);
     !!this.translation.tranlationChangedCallback &&
       this.translation.tranlationChangedCallback(
@@ -104,6 +108,7 @@ export class TranslationItem extends TranslationItemBase {
         newValue,
         this.context
       );
+    return newValue;
   }
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
@@ -169,19 +174,19 @@ export class TranslationItem extends TranslationItemBase {
   }
   public getTextForExport(loc: string): string {
     const res = this.locString.getLocaleText(loc);
-    if(!!res) return res;
+    if (!!res) return res;
     const index = loc.indexOf("-");
-    if(index < 0) return "";
+    if (index < 0) return "";
     return this.getPlaceholderText(loc);
   }
   public getPlaceholderText(loc: string): string {
-    if(!loc || loc === "default") return "";
+    if (!loc || loc === "default") return "";
     const root = this.getRootDialect(loc);
     return this.locString.getLocaleText(root);
   }
   private getRootDialect(loc: string): string {
     const index = loc.indexOf("-");
-    if(index < 0) return "";
+    if (index < 0) return "";
     loc = loc.substring(0, index);
     return loc === surveyLocalization.defaultLocale ? "" : loc;
   }
@@ -207,6 +212,7 @@ export interface ITranslationLocales {
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
   canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
+  getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
 
 export class TranslationGroup extends TranslationItemBase {
@@ -523,6 +529,9 @@ export class Translation extends Base implements ITranslationLocales {
     this.setupToolbarItems();
     this.calcIsChooseLanguageEnabled();
   }
+  getProcessedTranslationItemText(locale: string, locString: LocalizableString, newText: string, context: any): string {
+    return this.options.getProcessedTranslationItemText(locale, locString, newText, context);
+  }
   public getType(): string {
     return "translation";
   }
@@ -701,15 +710,24 @@ export class Translation extends Base implements ITranslationLocales {
         }
       }
     });
+    let isCellValueChanging = false;
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      const item = getTransationItem(options.question, options.row.name);
-      if (!!item) {
-        item.setLocText(options.columnName, options.value);
-        const colName = options.columnName;
-        options.row.cells.forEach(cell => {
-          if(colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
-            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-        });
+      if (!isCellValueChanging) {
+        isCellValueChanging = true;
+        const item = getTransationItem(options.question, options.row.name);
+        if (!!item) {
+          const newValue = item.setLocText(options.columnName, options.value);
+          const colName = options.columnName;
+          const columnQuestion = options.getCellQuestion(options.columnName);
+          if (!!columnQuestion) {
+            columnQuestion.value = newValue;
+          }
+          options.row.cells.forEach(cell => {
+            if (colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
+              this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
+          });
+        }
+        isCellValueChanging = false;
       }
     });
     survey.currentPage = survey.pages[0];
@@ -1110,15 +1128,15 @@ export class Translation extends Base implements ITranslationLocales {
   }
   dispose() {
     this.isEmpty = true;
-    if(!!this.stringsSurvey) {
+    if (!!this.stringsSurvey) {
       this.stringsSurvey.dispose();
       this.stringsSurvey = undefined;
     }
-    if(!!this.stringsHeaderSurvey) {
+    if (!!this.stringsHeaderSurvey) {
       this.stringsHeaderSurvey.dispose();
       this.stringsHeaderSurvey = undefined;
     }
-    if(!!this.settingsSurveyValue) {
+    if (!!this.settingsSurveyValue) {
       this.settingsSurveyValue.dispose();
       this.settingsSurveyValue = undefined;
     }

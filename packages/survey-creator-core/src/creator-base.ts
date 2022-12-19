@@ -840,6 +840,8 @@ export class CreatorBase extends Base
    */
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
+  public onTranslationItemChanging: CreatorEvent = new CreatorEvent();
+
   /**
    * Use this event to control drag&drop operations.
    *- sender the survey creator object that fires the event.
@@ -2848,6 +2850,17 @@ export class CreatorBase extends Base
     };
     this.onLogicItemDisplayText.fire(this, options);
     return options.text;
+  }
+  getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
+    if (this.onTranslationItemChanging.isEmpty) return newText;
+    const options = {
+      locale: locale,
+      obj: obj,
+      locString: locString,
+      newText: newText
+    }
+    this.onTranslationItemChanging.fire(this, options);
+    return options.newText;
   }
   getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string {
     if (this.onTranslationExportItem.isEmpty) return text;
