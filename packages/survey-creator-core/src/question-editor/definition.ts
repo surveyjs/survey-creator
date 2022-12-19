@@ -355,7 +355,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" },
-        { name: "selectAllText", tab: "choices" }
+        { name: "selectAllText", tab: "choices" },
+        { name: "choicesVisibleIf", tab: "logic" },
+        { name: "choicesEnableIf", tab: "logic" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -369,7 +371,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
-        { name: "noneText", tab: "choices" }
+        { name: "noneText", tab: "choices" },
+        { name: "choicesVisibleIf", tab: "logic" },
+        { name: "choicesEnableIf", tab: "logic" },
       ],
       tabs: [
         { name: "choices", index: 10 },
@@ -383,7 +387,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesOrder", tab: "choices" },
         { name: "optionsCaption", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
-        { name: "noneText", tab: "choices" }
+        { name: "noneText", tab: "choices" },
+        { name: "choicesVisibleIf", tab: "logic" },
+        { name: "choicesEnableIf", tab: "logic" },
       ],
       tabs: [
         { name: "choices", index: 10 },

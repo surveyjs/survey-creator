@@ -1532,7 +1532,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    }, ]
+    },]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -3450,4 +3450,25 @@ test("Initial Property Grid category expanded state", (): any => {
   creator.selectElement(creator.survey.getQuestionByName("q2"));
   expect(getCategoryName()).toEqual("general");
   settings.defaultNewSurveyJSON = defaultJSON;
+});
+test("PageAdorner: check Add new question creates property grid only once", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  creator.getPlugin("designer").activate();
+  creator = new CreatorTester({ allowModifyPages: false });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+
+  creator.getPlugin("designer").activate();
+  let pageModel = creator.survey.pages[0];
+  let pageAdornerModel = new PageAdorner(creator, pageModel);
+  let log = "";
+  creator.onSelectedElementChanging.add(() => {
+    log += "->changed";
+  })
+  pageAdornerModel.addNewQuestion(null, null);
+  expect(log).toBe("->changed");
 });
