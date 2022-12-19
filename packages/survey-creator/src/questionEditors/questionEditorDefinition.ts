@@ -148,6 +148,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "hideIfRowsEmpty", tab: "rows" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "rowsVisibleIf", tab: "logic" },
+        { name: "columnMinWidth", tab: "layout" },
+        { name: "rowTitleWidth", tab: "layout" }
       ],
       tabs: [
         { name: "columns", index: 10 },
