@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
-import Sortable from "sortablejs";
+import Sortable from "../../vendor/sortable";
 import { TitleInplaceEditor } from "./title-editor";
 import { SurveyCreator } from "../editor";
 import { getNextValue, createKey2click } from "../utils/utils";
@@ -50,7 +50,7 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
           (this.question.choices.indexOf(this.item) -
             1 +
             this.question.choices.length) %
-            this.question.choices.length
+          this.question.choices.length
         );
         event.stopPropagation();
         return false;
@@ -60,7 +60,7 @@ export class ItemInplaceEditor extends TitleInplaceEditor {
           this.question.choices,
           this.item,
           (this.question.choices.indexOf(this.item) + 1) %
-            this.question.choices.length
+          this.question.choices.length
         );
         event.stopPropagation();
         return false;
@@ -199,7 +199,7 @@ export var itemAdorner = {
       var decoration = document.createElement("span");
       decoration.className = "svda-adorner-root";
       var itemValue = ko.dataFor(elements[i]);
-      if(!itemValue) {
+      if (!itemValue) {
         continue;
       }
       var propertyName = itemAdorner.inplaceEditForValues ? "value" : "text";
@@ -348,7 +348,7 @@ export var itemDraggableAdorner = {
     }
     for (var i = 0; i < elements.length; i++) {
       var itemValue = ko.dataFor(elements[i]);
-      if(!itemValue) {
+      if (!itemValue) {
         continue;
       }
       if (
