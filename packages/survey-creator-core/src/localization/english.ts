@@ -839,6 +839,9 @@ export var enStrings = {
     columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
     autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
     valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
+    choicesbyurl: {
+      valueName: " "
+    },
     keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
   },
   //Properties
