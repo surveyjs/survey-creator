@@ -838,9 +838,7 @@ export var enStrings = {
     acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
     columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
     autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
-    dropdown: {
-      valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
-    },
+    valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
     keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
   },
   //Properties

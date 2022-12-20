@@ -828,10 +828,8 @@ var italianTranslation = {
       "Applicabile solo ai tipi di cella Opzione multipla e Casella di controllo.",
     autocomplete:
       "Per ulteriori informazioni, consultare la descrizione dell'attributo [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
-    dropdown: {
-      valueName:
-        "Se non si imposta questa proprietà, la risposta sarà memorizzata in un campo specificato dalla proprietà Nome.",
-    },
+    valueName:
+      "Se non si imposta questa proprietà, la risposta sarà memorizzata in un campo specificato dalla proprietà Nome.",
     keyName:
       'Se la colonna specificata contiene valori identici, il questionario produce l\'errore "Valore chiave non univoco".',
   },
