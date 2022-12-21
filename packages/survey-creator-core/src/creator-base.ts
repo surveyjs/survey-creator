@@ -1365,15 +1365,33 @@ export class CreatorBase extends Base
   public set currentPage(value: PageModel) {
     this.survey.currentPage = value;
   }
+  /**
+   * The event is fired on adding a page into survey.
+   *- `sender` - the survey object that fires the event.
+   *- `options.page` - a newly added `panel` object.
+   *- `options.allowAdd` - a boolean flag allowing to add the page, default value: true.
+   * @see PanelModel
+   */
+  public onPageAdding: CreatorEvent = new CreatorEvent();
   @undoRedoTransaction()
-  public addPage(pagetoAdd?: PageModel): PageModel {
+  public addPage(pagetoAdd?: PageModel, changeSelection = true): PageModel {
+    const options = {
+      page: pagetoAdd,
+      allowAdd: true
+    };
+    this.onPageAdding.fire(this, options);
+    if(!options.allowAdd) {
+      return null;
+    }
     let page = pagetoAdd;
     if (!page) {
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
     }
-    this.selectElement(page);
+    if(changeSelection) {
+      this.selectElement(page);
+    }
     return page;
   }
   private addNewPageIntoSurvey(): PageModel {
