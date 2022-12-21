@@ -2012,6 +2012,11 @@ export class CreatorBase extends Base
       this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
+    if(this.pageEditMode === "bypage") {
+      const desigerTab = this.getPlugin("designer").model as any;
+      const pagesController = desigerTab.pagesController;
+      parent = pagesController.page2Display;
+    }
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {

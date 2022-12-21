@@ -61,6 +61,8 @@ test("Get property description from peHelp. based on class name", () => {
   expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty3")).toEqual("Help_Question3");
   expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty3")).toEqual("Help_Question3");
   expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeTruthy();
+  expect(editorLocalization.getPropertyHelpInEditor("dropdown", "valueName", "string")).toBeTruthy();
+  expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeFalsy();
 });
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;

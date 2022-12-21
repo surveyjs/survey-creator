@@ -10,7 +10,7 @@
 
 /*global ko*/
 
-(function(factory) {
+(function (factory) {
   "use strict";
   //get ko ref via global or require
   var koRef;
@@ -36,7 +36,7 @@
     typeof module === "object"
   ) {
     //commonjs / node.js
-    sortableRef = require("sortablejs");
+    sortableRef = require("./sortable");
   }
   //use references if we found them
   if (koRef !== undefined && sortableRef !== undefined) {
@@ -45,15 +45,15 @@
     //if both references aren't found yet, get via AMD if available
     //we may have a reference to only 1, or none
     if (koRef !== undefined && sortableRef === undefined) {
-      define(["sortablejs"], function(amdSortableRef) {
+      define(["./sortable"], function (amdSortableRef) {
         factory(koRef, amdSortableRef);
       });
     } else if (koRef === undefined && sortableRef !== undefined) {
-      define(["knockout"], function(amdKnockout) {
+      define(["knockout"], function (amdKnockout) {
         factory(amdKnockout, sortableRef);
       });
     } else if (koRef === undefined && sortableRef === undefined) {
-      define(["knockout", "sortablejs"], factory);
+      define(["knockout", "./sortable"], factory);
     }
   } else {
     //no more routes to get references
@@ -68,71 +68,71 @@
       );
     }
   }
-})(function(ko, Sortable) {
+})(function (ko, Sortable) {
   "use strict";
 
-  var init = function(
-      element,
-      valueAccessor,
-      allBindings,
-      viewModel,
-      bindingContext,
-      sortableOptions
-    ) {
-      var options = buildOptions(valueAccessor, sortableOptions);
+  var init = function (
+    element,
+    valueAccessor,
+    allBindings,
+    viewModel,
+    bindingContext,
+    sortableOptions
+  ) {
+    var options = buildOptions(valueAccessor, sortableOptions);
 
-      // Its seems that we cannot update the eventhandlers after we've created
-      // the sortable, so define them in init instead of update
-      [
-        "onStart",
-        "onEnd",
-        "onRemove",
-        "onAdd",
-        "onUpdate",
-        "onSort",
-        "onFilter",
-        "onMove",
-        "onClone"
-      ].forEach(function(e) {
-        if (options[e] || eventHandlers[e])
-          options[e] = function(
-            eventType,
-            parentVM,
-            parentBindings,
-            handler,
-            e
-          ) {
-            var itemVM = ko.dataFor(e.item),
-              // All of the bindings on the parent element
-              bindings = ko.utils.peekObservable(parentBindings()),
-              // The binding options for the draggable/sortable binding of the parent element
-              bindingHandlerBinding = bindings.sortable || bindings.draggable,
-              // The collection that we should modify
-              collection =
-                bindingHandlerBinding.collection ||
-                bindingHandlerBinding.foreach;
-            if (handler && handler(e, itemVM, parentVM, collection, bindings))
-              return;
-            if (eventHandlers[eventType])
-              eventHandlers[eventType](
-                e,
-                itemVM,
-                parentVM,
-                collection,
-                bindings
-              );
-          }.bind(undefined, e, viewModel, allBindings, options[e]);
-      });
+    // Its seems that we cannot update the eventhandlers after we've created
+    // the sortable, so define them in init instead of update
+    [
+      "onStart",
+      "onEnd",
+      "onRemove",
+      "onAdd",
+      "onUpdate",
+      "onSort",
+      "onFilter",
+      "onMove",
+      "onClone"
+    ].forEach(function (e) {
+      if (options[e] || eventHandlers[e])
+        options[e] = function (
+          eventType,
+          parentVM,
+          parentBindings,
+          handler,
+          e
+        ) {
+          var itemVM = ko.dataFor(e.item),
+            // All of the bindings on the parent element
+            bindings = ko.utils.peekObservable(parentBindings()),
+            // The binding options for the draggable/sortable binding of the parent element
+            bindingHandlerBinding = bindings.sortable || bindings.draggable,
+            // The collection that we should modify
+            collection =
+              bindingHandlerBinding.collection ||
+              bindingHandlerBinding.foreach;
+          if (handler && handler(e, itemVM, parentVM, collection, bindings))
+            return;
+          if (eventHandlers[eventType])
+            eventHandlers[eventType](
+              e,
+              itemVM,
+              parentVM,
+              collection,
+              bindings
+            );
+        }.bind(undefined, e, viewModel, allBindings, options[e]);
+    });
 
-      var sortableElement = Sortable.create(element, options);
+    var sortableElement = Sortable.create(element, options);
 
-      // Destroy the sortable if knockout disposes the element its connected to
-      ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-        sortableElement.destroy();
-      });
-      return ko.bindingHandlers.template.init(element, valueAccessor);
-    },
-    update = function(
+    // Destroy the sortable if knockout disposes the element its connected to
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+      sortableElement.destroy();
+    });
+    return ko.bindingHandlers.template.init(element, valueAccessor);
+  },
+    update = function (
       element,
       valueAccessor,
       allBindings,
@@ -151,9 +151,9 @@
         bindingContext
       );
     },
-    eventHandlers = (function(handlers) {
+    eventHandlers = (function (handlers) {
       var moveOperations = [],
-        tryMoveOperation = function(
+        tryMoveOperation = function (
           e,
           itemVM,
           parentVM,
@@ -163,13 +163,13 @@
           // A move operation is the combination of a add and remove event,
           // this is to make sure that we have both the target and origin collections
           var currentOperation = {
-              event: e,
-              itemVM: itemVM,
-              parentVM: parentVM,
-              collection: collection,
-              parentBindings: parentBindings
-            },
-            existingOperation = moveOperations.filter(function(op) {
+            event: e,
+            itemVM: itemVM,
+            parentVM: parentVM,
+            collection: collection,
+            parentBindings: parentBindings
+          },
+            existingOperation = moveOperations.filter(function (op) {
               return op.itemVM === currentOperation.itemVM;
             })[0];
 
@@ -181,9 +181,9 @@
             moveOperations.splice(moveOperations.indexOf(existingOperation), 1);
 
             var removeOperation =
-                currentOperation.event.type === "remove"
-                  ? currentOperation
-                  : existingOperation,
+              currentOperation.event.type === "remove"
+                ? currentOperation
+                : existingOperation,
               addOperation =
                 currentOperation.event.type === "add"
                   ? currentOperation
@@ -201,7 +201,7 @@
         // Moves an item from the "from" collection to the "to" collection, these
         // can be references to the same collection which means its a sort.
         // clone indicates if we should move or copy the item into the new collection
-        moveItem = function(itemVM, from, to, clone, e) {
+        moveItem = function (itemVM, from, to, clone, e) {
           // Unwrapping this allows us to manipulate the actual array
           var fromArray = from(),
             // Its not certain that the items actual index is the same
@@ -244,7 +244,7 @@
 
       handlers.onRemove = tryMoveOperation;
       handlers.onAdd = tryMoveOperation;
-      handlers.onUpdate = function(
+      handlers.onUpdate = function (
         e,
         itemVM,
         parentVM,
@@ -260,25 +260,25 @@
     })({}),
     // bindingOptions are the options set in the "data-bind" attribute in the ui.
     // options are custom options, for instance draggable/sortable specific options
-    buildOptions = function(bindingOptions, options) {
+    buildOptions = function (bindingOptions, options) {
       // deep clone/copy of properties from the "from" argument onto
       // the "into" argument and returns the modified "into"
-      var merge = function(into, from) {
-          for (var prop in from) {
+      var merge = function (into, from) {
+        for (var prop in from) {
+          if (
+            Object.prototype.toString.call(from[prop]) === "[object Object]"
+          ) {
             if (
-              Object.prototype.toString.call(from[prop]) === "[object Object]"
+              Object.prototype.toString.call(into[prop]) !== "[object Object]"
             ) {
-              if (
-                Object.prototype.toString.call(into[prop]) !== "[object Object]"
-              ) {
-                into[prop] = {};
-              }
-              into[prop] = merge(into[prop], from[prop]);
-            } else into[prop] = from[prop];
-          }
+              into[prop] = {};
+            }
+            into[prop] = merge(into[prop], from[prop]);
+          } else into[prop] = from[prop];
+        }
 
-          return into;
-        },
+        return into;
+      },
         // unwrap the supplied options
         unwrappedOptions =
           ko.utils.peekObservable(bindingOptions()).options || {};
@@ -292,7 +292,7 @@
       if (
         unwrappedOptions.group &&
         Object.prototype.toString.call(unwrappedOptions.group) !==
-          "[object Object]"
+        "[object Object]"
       ) {
         // group property is a name string declaration, convert to object.
         unwrappedOptions.group = { name: unwrappedOptions.group };
@@ -306,7 +306,7 @@
       group: { pull: "clone", put: false },
       sort: false
     },
-    init: function(
+    init: function (
       element,
       valueAccessor,
       allBindings,
@@ -322,7 +322,7 @@
         ko.bindingHandlers.draggable.sortableOptions
       );
     },
-    update: function(
+    update: function (
       element,
       valueAccessor,
       allBindings,
@@ -344,7 +344,7 @@
     sortableOptions: {
       group: { pull: true, put: true }
     },
-    init: function(
+    init: function (
       element,
       valueAccessor,
       allBindings,
@@ -360,7 +360,7 @@
         ko.bindingHandlers.sortable.sortableOptions
       );
     },
-    update: function(
+    update: function (
       element,
       valueAccessor,
       allBindings,
