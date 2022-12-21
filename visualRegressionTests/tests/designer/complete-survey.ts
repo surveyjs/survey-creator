@@ -4,8 +4,6 @@ import { url, setJSON, getTabbedMenuItemByText, creatorTabPreviewName, takeEleme
 const title = "Complete survey tab";
 
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-  });
 });
 
 const json = {
