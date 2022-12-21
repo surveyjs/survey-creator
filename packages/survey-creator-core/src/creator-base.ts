@@ -1366,11 +1366,16 @@ export class CreatorBase extends Base
     this.survey.currentPage = value;
   }
   /**
-   * The event is fired on adding a page into survey.
-   *- `sender` - the survey object that fires the event.
-   *- `options.page` - a newly added `panel` object.
-   *- `options.allowAdd` - a boolean flag allowing to add the page, default value: true.
-   * @see PanelModel
+   * An event that is raised before a new page is added to the survey.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
+   * An added page.
+   * - `options.allow`: `Boolean`\
+   * Set this property to `false` if you do not want to add the page.
    */
   public onPageAdding: CreatorEvent = new CreatorEvent();
   @undoRedoTransaction()
