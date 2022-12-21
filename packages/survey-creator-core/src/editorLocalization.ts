@@ -72,7 +72,7 @@ export class EditorLocalization {
   }
   public getPropertyHelpInEditor(typeName: string, propName: string, propType: string = undefined): string {
     let helpStr = this.getPropertyInfoInEditorByType(typeName, propName, this.peHelpByClass, "pehelp");
-    if(!!helpStr) return helpStr;
+    if(!!helpStr) return (helpStr === " ") ? null: helpStr;
     const loc = this.getLocale();
     if(!!loc && !!loc.pehelp) {
       helpStr = loc.pehelp[propName];

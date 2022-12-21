@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import * as Survey from "survey-knockout";
 import { registerAdorner } from "../surveyjsObjects";
 import { editorLocalization } from "../editorLocalization";
-import Sortable from "sortablejs";
+import Sortable from "../../vendor/sortable";
 import { SurveyCreator } from "../editor";
 import { createAddItemElement } from "./item-editor";
 import { getNextValue } from "../utils/utils";
@@ -20,7 +20,7 @@ class ImageItemInplaceEditor {
     private rootElement,
     private editor: SurveyCreator,
     private itemsRoot
-  ) {}
+  ) { }
 
   deleteItem(model: ImageItemInplaceEditor, event) {
     if (model.question.choices.length > 1) {

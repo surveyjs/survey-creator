@@ -771,21 +771,20 @@ export class CreatorBase extends Base
   public onSelectedElementChanged: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired then one need to choose files.
-   *- sender the survey creator object that fires the event
-   * input file input HTML element
-   * callback need to be called after files has been chosen
-   * @see uploadFile
+   * 
+   * - `sender` - the survey creator object that fires the event
+   * - `options.input` - file input HTML element
+   * - `options.callback` - need to be called after files has been chosen
+   * @see uploadFiles
    */
   public onOpenFileChooser: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired on uploading the files.
-   *- sender the survey creator object that fires the event
-   * There are two properties in options:
-   * files the Javascript File objects array
-   * callback called on upload complete,
-   * which takes two string arguments:
-   * a status and an image link
-   * @see uploadFile
+   * 
+   * - `sender` - the survey creator object that fires the event
+   * - `options.files` - the Javascript File objects array
+   * - `options.callback(status, imageLink)` - called on upload complete
+   * @see uploadFiles
    */
   public onUploadFile: CreatorEvent = new CreatorEvent();
   /**
@@ -1995,6 +1994,11 @@ export class CreatorBase extends Base
       this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
+    if(this.pageEditMode === "bypage") {
+      const desigerTab = this.getPlugin("designer").model as any;
+      const pagesController = desigerTab.pagesController;
+      parent = pagesController.page2Display;
+    }
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
