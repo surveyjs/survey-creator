@@ -1,7 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { createScreenshotsComparer } from "devextreme-screenshot-comparer";
-
-import { url, screenshotComparerOptions, setJSON, changeToolboxLocation } from "../../helper";
+import { url, setJSON, changeToolboxLocation, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Page Navigator Screenshot";
 
@@ -33,78 +31,58 @@ const json = {
 };
 
 test("On the right side (default)", async (t) => {
-  await t.resizeWindow(1920, 1080);
-  await setJSON({ pages: [{ name: "page1" }] });
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({ pages: [{ name: "page1" }] });
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    await setJSON(json);
+    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
-  await setJSON(json);
-  const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+    await t.expect(pageNavigatorElement.visible).ok();
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-right.png", pageNavigatorElement, t, comparer);
 
-  await t.expect(pageNavigatorElement.visible).ok();
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-right.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
-
-  await t
-    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, t, comparer);
+  });
 });
 
 test("On the left side", async (t) => {
-  await t.resizeWindow(1920, 1080);
-  await setJSON({ pages: [{ name: "page1" }] });
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({ pages: [{ name: "page1" }] });
 
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+    await setJSON(json);
+    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+    await changeToolboxLocation("right");
 
-  await setJSON(json);
-  const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
-  await changeToolboxLocation("right");
+    await t.expect(pageNavigatorElement.visible).ok();
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-left.png", pageNavigatorElement, t, comparer);
 
-  await t.expect(pageNavigatorElement.visible).ok();
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-left.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
-
-  await t
-    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, t, comparer);
+  });
 });
 
 test("On the left side (rtl)", async (t) => {
-  await t.resizeWindow(1920, 1080);
-  await ClientFunction(() => {
-    document.body.setAttribute("dir", "rtl");
-  })();
-  const { takeScreenshot, compareResults } = createScreenshotsComparer(t);
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      document.body.setAttribute("dir", "rtl");
+    })();
 
-  await setJSON(json);
-  const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
+    await setJSON(json);
+    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
-  await t.expect(pageNavigatorElement.visible).ok();
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-left-rtl.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t.expect(pageNavigatorElement.visible).ok();
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-left-rtl.png", pageNavigatorElement, t, comparer);
 
-  await t
-    .hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
-  await t.wait(1000);
-  await takeScreenshot("page-navigator-left-rtl-hovered.png", pageNavigatorElement, screenshotComparerOptions);
-  await t
-    .expect(compareResults.isValid())
-    .ok(compareResults.errorMessages());
+    await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
+    await t.wait(1000);
+    await takeElementScreenshot("page-navigator-left-rtl-hovered.png", pageNavigatorElement, t, comparer);
+  });
 });
