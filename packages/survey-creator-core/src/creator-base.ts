@@ -2879,7 +2879,7 @@ export class CreatorBase extends Base
       obj: obj,
       locString: locString,
       newText: newText
-    }
+    };
     this.onTranslationItemChanging.fire(this, options);
     return options.newText;
   }

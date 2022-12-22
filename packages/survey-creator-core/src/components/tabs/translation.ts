@@ -95,11 +95,7 @@ export class TranslationItem extends TranslationItemBase {
   public getLocText(loc: string): string {
     return this.locString.getLocaleText(loc);
   }
-  public setLocText(loc: string, newValue: string): string {
-    if(!newValue) {
-      newValue = "";
-    }
-    newValue = this.translation.getProcessedTranslationItemText(loc, this.locString, newValue, this.context);
+  public setLocText(loc: string, newValue: string) {
     this.locString.setLocaleText(loc, newValue);
     !!this.translation.tranlationChangedCallback &&
       this.translation.tranlationChangedCallback(
@@ -108,7 +104,6 @@ export class TranslationItem extends TranslationItemBase {
         newValue,
         this.context
       );
-    return newValue;
   }
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
@@ -529,7 +524,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.setupToolbarItems();
     this.calcIsChooseLanguageEnabled();
   }
-  getProcessedTranslationItemText(locale: string, locString: LocalizableString, newText: string, context: any): string {
+  getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, context: any): string {
     return this.options.getProcessedTranslationItemText(locale, locString, newText, context);
   }
   public getType(): string {
@@ -710,25 +705,31 @@ export class Translation extends Base implements ITranslationLocales {
         }
       }
     });
-    let isCellValueChanging = false;
-    survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
-      if (!isCellValueChanging) {
-        isCellValueChanging = true;
+    //todo: need to remove this flag after fix multiple call of onMatrixCellValueChangingEvent: https://github.com/surveyjs/survey-library/issues/5396
+    let isMatrixCellCurrentlyChanging = false;
+    survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
+      if(!isMatrixCellCurrentlyChanging) {
+        isMatrixCellCurrentlyChanging = true;
         const item = getTransationItem(options.question, options.row.name);
-        if (!!item) {
-          const newValue = item.setLocText(options.columnName, options.value);
-          const colName = options.columnName;
-          const columnQuestion = options.getCellQuestion(options.columnName);
-          if (!!columnQuestion) {
-            columnQuestion.value = newValue;
-          }
-          options.row.cells.forEach(cell => {
-            if (colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
-              this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
-          });
+        if(!!item) {
+          options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
         }
-        isCellValueChanging = false;
+        if(options.value === options.oldValue) {
+          isMatrixCellCurrentlyChanging = false;
+        }
       }
+    });
+    survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
+      const item = getTransationItem(options.question, options.row.name);
+      if (!!item) {
+        item.setLocText(options.columnName, options.value);
+        const colName = options.columnName;
+        options.row.cells.forEach(cell => {
+          if (colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
+            this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
+        });
+      }
+      isMatrixCellCurrentlyChanging = false;
     });
     survey.currentPage = survey.pages[0];
     return survey;
