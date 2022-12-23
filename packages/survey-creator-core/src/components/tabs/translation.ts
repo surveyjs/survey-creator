@@ -705,18 +705,10 @@ export class Translation extends Base implements ITranslationLocales {
         }
       }
     });
-    //todo: need to remove this flag after fix multiple call of onMatrixCellValueChangingEvent: https://github.com/surveyjs/survey-library/issues/5396
-    let isMatrixCellCurrentlyChanging = false;
     survey.onMatrixCellValueChanging.add((_: SurveyModel, options: any) => {
-      if(!isMatrixCellCurrentlyChanging) {
-        isMatrixCellCurrentlyChanging = true;
-        const item = getTransationItem(options.question, options.row.name);
-        if(!!item) {
-          options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
-        }
-        if(options.value === options.oldValue) {
-          isMatrixCellCurrentlyChanging = false;
-        }
+      const item = getTransationItem(options.question, options.row.name);
+      if(!!item) {
+        options.value = this.getProcessedTranslationItemText(options.columnName, item.locString, options.value, item.context);
       }
     });
     survey.onMatrixCellValueChanged.add((sender: SurveyModel, options: any) => {
@@ -729,7 +721,6 @@ export class Translation extends Base implements ITranslationLocales {
             this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
         });
       }
-      isMatrixCellCurrentlyChanging = false;
     });
     survey.currentPage = survey.pages[0];
     return survey;
