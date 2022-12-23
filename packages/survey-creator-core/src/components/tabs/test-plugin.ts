@@ -205,7 +205,9 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    const themeMapper = surveyCss.getAvailableThemes().map(themeName => { return { name: themeName, theme: surveyCss[themeName] } });
+    const themeMapper = surveyCss.getAvailableThemes()
+      .filter(themeName => ["defaultV2", "modern", "default"].indexOf(themeName) !== -1)
+      .map(themeName => { return { name: themeName, theme: surveyCss[themeName] } });
     const filteredThemes = this.filterThemeMapper(themeMapper);
     let availableThemesToItems = this.getAvailableThemes(filteredThemes);
 
