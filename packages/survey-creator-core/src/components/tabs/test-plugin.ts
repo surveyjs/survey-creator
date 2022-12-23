@@ -1,5 +1,5 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
@@ -131,14 +131,6 @@ export class TabTestPlugin implements ICreatorPlugin {
   private getThemeLocName(name: string): string {
     return "ed." + name + "Theme";
   }
-  protected filterThemeMapper(themeMapper: Array<any>): Array<any> {
-    let res = [];
-    if (!!document && !!document.body) {
-      const styles = getComputedStyle(document.body);
-      res = themeMapper.filter(item => item.theme.variables && styles.getPropertyValue(item.theme.variables.themeMark));
-    }
-    return res;
-  }
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
 
@@ -205,11 +197,8 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    const themeMapper = surveyCss.getAvailableThemes()
-      .filter(themeName => ["defaultV2", "modern", "default"].indexOf(themeName) !== -1)
-      .map(themeName => { return { name: themeName, theme: surveyCss[themeName] } });
-    const filteredThemes = this.filterThemeMapper(themeMapper);
-    let availableThemesToItems = this.getAvailableThemes(filteredThemes);
+    const themeMapper = StylesManager.getIncludedThemeCss();
+    let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
     if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
       this.changeThemeModel = new ListModel(
