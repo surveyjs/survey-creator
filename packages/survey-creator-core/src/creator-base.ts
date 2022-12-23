@@ -1379,16 +1379,21 @@ export class CreatorBase extends Base
    */
   public onPageAdding: CreatorEvent = new CreatorEvent();
   @undoRedoTransaction()
-  public addPage(pagetoAdd?: PageModel, changeSelection = true): PageModel {
+  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
     const options = {
-      page: pagetoAdd,
-      allowAdd: true
+      page: pageToAdd,
+      allow: true
     };
     this.onPageAdding.fire(this, options);
-    if(!options.allowAdd) {
+    if(!options.allow) {
       return null;
     }
-    let page = pagetoAdd;
+    if(beforeAdd !== undefined) {
+      if(!beforeAdd()) {
+        return;
+      }
+    }
+    let page = pageToAdd;
     if (!page) {
       page = this.addNewPageIntoSurvey();
     } else {

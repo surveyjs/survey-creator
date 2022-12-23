@@ -1045,7 +1045,7 @@ test("creator.onPageAdding", () => {
   let allowAdd = true;
   creator.onPageAdding.add(function (sender, options) {
     counter++;
-    options.allowAdd = allowAdd;
+    options.allow = allowAdd;
   });
   creator.JSON = {};
   expect(creator.survey.pages).toHaveLength(1);
