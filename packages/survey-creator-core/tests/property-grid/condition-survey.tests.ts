@@ -241,13 +241,11 @@ test("Use question.valueName, bug: #367", () => {
   expect(valueQuestion).toBeTruthy();
   expect(valueQuestion.choices).toHaveLength(2);
 });
-test("Use dropdown question instead of readiogroup for editing values", () => {
+test("Don't use dropdown question instead of readiogroup for editing values", () => {
   var survey = new SurveyModel();
   var page = survey.addNewPage("p");
   var question = <QuestionDropdownModel>page.addNewQuestion("text", "q1");
-  var question2 = <QuestionRadiogroupModel>(
-    page.addNewQuestion("radiogroup", "q2")
-  );
+  var question2 = <QuestionRadiogroupModel>(page.addNewQuestion("radiogroup", "q2"));
   question2.choices = [1, 2, 3, 4];
 
   var editor = new ConditionEditor(survey, question);
@@ -256,7 +254,7 @@ test("Use dropdown question instead of readiogroup for editing values", () => {
   panel.getQuestionByName("questionName").value = "q2";
   var valueQuestion = panel.getQuestionByName("questionValue");
   expect(valueQuestion).toBeTruthy();
-  expect(valueQuestion.getType()).toEqual("dropdown");
+  expect(valueQuestion.getType()).toEqual("radiogroup");
 });
 test("Add condition from wizard on apply, without pressing 'Add' button", () => {
   var survey = new SurveyModel();
@@ -837,10 +835,10 @@ test("Parse calcaluted values, Bug #727 and Bug #740", () => {
 test("Change questionName in panel", () => {
   var survey = new SurveyModel({
     elements: [
-      { name: "q1", type: "text" },
-      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
-      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
-      { name: "q4", type: "text", visibleIf: "{q1} = 'abc'" }
+      { "name": "q1", "type": "text" },
+      { "name": "q2", "type": "radiogroup", choices: [1, 2, 3] },
+      { "name": "q3", "type": "checkbox", choices: [1, 2, 3] },
+      { "name": "q4", "type": "text", visibleIf: "{q1} = 'abc'" }
     ]
   });
   var question = survey.getQuestionByName("q4");
@@ -853,30 +851,20 @@ test("Change questionName in panel", () => {
   expect(panel.getQuestionByName("questionValue").value).toEqual("abc");
 
   panel.getQuestionByName("questionName").value = "q2";
-  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
-    "dropdown"
-  );
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("radiogroup");
 
   panel.getQuestionByName("questionName").value = "q3";
-  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
-    "checkbox"
-  );
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("checkbox");
 
   panel.getQuestionByName("questionName").value = "q2";
-  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
-    "dropdown"
-  );
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("radiogroup");
   expect(panel.getQuestionByName("questionValue").choices).toHaveLength(3);
 
   panel.getQuestionByName("operator").value = "anyof";
-  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
-    "checkbox"
-  );
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("checkbox");
 
   panel.getQuestionByName("operator").value = "equal";
-  expect(panel.getQuestionByName("questionValue").getType()).toEqual(
-    "dropdown"
-  );
+  expect(panel.getQuestionByName("questionValue").getType()).toEqual("radiogroup");
 });
 test("Create expression from scratch", () => {
   var survey = new SurveyModel({
