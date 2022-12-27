@@ -623,6 +623,7 @@ export var enStrings = {
       showOnCompleted: "Survey Complete",
       logo: "Logo in Survey Title",
       slider: "Slider",
+      expression: "Expression",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",
