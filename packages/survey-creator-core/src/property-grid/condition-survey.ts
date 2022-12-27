@@ -792,9 +792,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
-    if (!!json && json.type == "radiogroup") {
-      json.type = "dropdown";
-    }
+    // if (!!json && json.type == "radiogroup") {
+    //   json.type = "dropdown";
+    // }
     if (!!json && json.type == "expression") {
       json.type = "text";
     }
