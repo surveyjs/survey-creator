@@ -221,6 +221,7 @@ export var logicCss = {
     cellTextDisabled: ""
   },
   matrixdropdown: {
+    tableWrapper: "",
     mainRoot: "",
     root: "",
     row: "",
@@ -229,6 +230,7 @@ export var logicCss = {
     headerCell: ""
   },
   matrixdynamic: {
+    tableWrapper: "",
     mainRoot: "sl-question st-row__question st-scrollable",
     root: "sl-table st-matrixdynamic",
     row: "sl-table__row",
