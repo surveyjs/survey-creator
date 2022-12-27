@@ -108,7 +108,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
         css: "sv-action-bar-item--secondary",
-        title: this.creator.getLocString("survey.duplicate"),
+        locTitleName: "survey.duplicate",
         visibleIndex: 10,
         iconSize: 16,
         action: () => {
@@ -122,7 +122,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "settings",
         iconName: "icon-settings_16x16",
         css: "sv-action-bar-item--secondary",
-        title: this.creator.getLocString("survey.settings"),
+        locTitleName: "ed.settings",
+        locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
         iconSize: 16,
         action: () => {
@@ -137,7 +138,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconName: "icon-delete_16x16",
         css: "sv-action-bar-item--secondary",
         //needSeparator: items.length > 0,
-        title: this.creator.getLocString("pe.delete"),
+        locTitleName: "pe.delete",
         visibleIndex: 30,
         iconSize: 16,
         action: () => {
