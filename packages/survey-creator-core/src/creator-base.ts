@@ -1365,15 +1365,43 @@ export class CreatorBase extends Base
   public set currentPage(value: PageModel) {
     this.survey.currentPage = value;
   }
+  /**
+   * An event that is raised before a new page is added to the survey.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
+   * An added page.
+   * - `options.allow`: `Boolean`\
+   * Set this property to `false` if you do not want to add the page.
+   */
+  public onPageAdding: CreatorEvent = new CreatorEvent();
   @undoRedoTransaction()
-  public addPage(pagetoAdd?: PageModel): PageModel {
-    let page = pagetoAdd;
+  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
+    const options = {
+      page: pageToAdd,
+      allow: true
+    };
+    this.onPageAdding.fire(this, options);
+    if(!options.allow) {
+      return null;
+    }
+    if(beforeAdd !== undefined) {
+      if(!beforeAdd()) {
+        return;
+      }
+    }
+    let page = pageToAdd;
     if (!page) {
       page = this.addNewPageIntoSurvey();
     } else {
       this.survey.addPage(page);
     }
-    this.selectElement(page);
+    if(changeSelection) {
+      this.selectElement(page);
+    }
     return page;
   }
   private addNewPageIntoSurvey(): PageModel {

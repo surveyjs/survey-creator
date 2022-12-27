@@ -11,7 +11,8 @@ import {
   PopupModel,
   QuestionCheckboxModel,
   QuestionImageModel,
-  Question
+  Question,
+  PageModel
 } from "survey-core";
 import { getNextValue } from "../src/utils/utils";
 import { editorLocalization } from "../src/editorLocalization";
@@ -1036,4 +1037,23 @@ test("addQuestion into the QuestionPanelDynamic into second page", () => {
   creator.selectElement(newQuestion);
   expect(creator.selectedElement).toEqual(newQuestion);
   expect(creator.currentPage.name).toEqual("p2");
+});
+
+test("creator.onPageAdding", () => {
+  const creator = new CreatorTester();
+  let counter = 0;
+  let allowAdd = true;
+  creator.onPageAdding.add(function (sender, options) {
+    counter++;
+    options.allow = allowAdd;
+  });
+  creator.JSON = {};
+  expect(creator.survey.pages).toHaveLength(1);
+  creator.addPage(new PageModel("p2"));
+  expect(counter).toBe(1);
+  expect(creator.survey.pages).toHaveLength(2);
+  allowAdd = false;
+  creator.addPage(new PageModel("p3"));
+  expect(counter).toBe(2);
+  expect(creator.survey.pages).toHaveLength(2);
 });

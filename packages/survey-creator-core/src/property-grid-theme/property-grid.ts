@@ -207,11 +207,13 @@ export var propertyGridCss = {
     cellTextDisabled: "spg-matrix__text--disabled"
   },
   matrixdropdown: {
+    tableWrapper: "",
     root: "spg-table",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header"
   },
   matrixdynamic: {
+    tableWrapper: "",
     root: "spg-table spg-matrixdynamic",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",

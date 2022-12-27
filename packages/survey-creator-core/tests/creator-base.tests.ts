@@ -2802,78 +2802,78 @@ test("Add new question to Panel and Page", (): any => {
     ]
   };
 
-  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(
+  const panelAdornerModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
     <any>creator.survey.getAllPanels()[0],
     undefined
   );
-  const panelModel2: QuestionAdornerViewModel = new QuestionAdornerViewModel(
+  const panelAdornerModel2: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
     <any>creator.survey.getAllPanels()[1],
     undefined
   );
-  const panelModel3: QuestionAdornerViewModel = new QuestionAdornerViewModel(
+  const panelAdornerModel3: QuestionAdornerViewModel = new QuestionAdornerViewModel(
     creator,
     <any>creator.survey.getAllPanels()[2],
     undefined
   );
 
-  const pageModel = new PageAdorner(creator, creator.survey.pages[0]);
-  const pageModel2 = new PageAdorner(creator, creator.survey.pages[1]);
-  const pageModel3 = new PageAdorner(creator, creator.survey.pages[2]);
+  const pageAdornerModel = new PageAdorner(creator, creator.survey.pages[0]);
+  const pageAdornerModel2 = new PageAdorner(creator, creator.survey.pages[1]);
+  const pageAdornerModel3 = new PageAdorner(creator, creator.survey.pages[2]);
 
-  expect(panelModel.addNewQuestionText).toEqual("Add Question");
-  expect(panelModel2.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel3.addNewQuestionText).toEqual("Add Question");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Question");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel3.addNewQuestionText).toEqual("Add Question");
 
   expect(creator.survey.getAllQuestions().length).toEqual(0);
-  pageModel.addNewQuestion(null, null);
+  pageAdornerModel.addNewQuestion(null, null);
   expect(creator.survey.getAllQuestions().length).toEqual(1);
-  expect(panelModel.element.getElementsInDesign().length).toEqual(0);
-  panelModel.addNewQuestion();
-  expect(panelModel.element.getElementsInDesign().length).toEqual(1);
+  expect(panelAdornerModel.element.getElementsInDesign().length).toEqual(0);
+  panelAdornerModel.addNewQuestion();
+  expect(panelAdornerModel.element.getElementsInDesign().length).toEqual(1);
 
-  const selectorModelPanel = panelModel.questionTypeSelectorModel;
+  const selectorModelPanel = panelAdornerModel.questionTypeSelectorModel;
   const listModelPanel: ListModel = selectorModelPanel.popupModel.contentComponentData.model;
   const ratingItem = listModelPanel.actions.filter((item) => item.id == "rating")[0];
   listModelPanel.onItemClick(ratingItem);
 
-  expect(panelModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelModel2.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Question");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
-  const selectorModelPanel2 = panelModel2.questionTypeSelectorModel;
+  const selectorModelPanel2 = panelAdornerModel2.questionTypeSelectorModel;
   const listModelPanel2: ListModel = selectorModelPanel2.popupModel.contentComponentData.model;
   const commentItem = listModelPanel2.actions.filter((item) => item.id == "comment")[0];
   listModelPanel2.onItemClick(commentItem);
 
-  expect(panelModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
-  expect(pageModel.addNewQuestionText).toEqual("Add Question");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Question");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
+  expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
-  const selectorModelPage = pageModel.questionTypeSelectorModel;
+  const selectorModelPage = pageAdornerModel.questionTypeSelectorModel;
   const listModelPage: ListModel = selectorModelPage.popupModel.contentComponentData.model;
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
   listModelPage.onItemClick(rankingItem);
 
-  expect(panelModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
-  expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add Question");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
+  expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
-  const selectorModelPage2 = pageModel2.questionTypeSelectorModel;
+  const selectorModelPage2 = pageAdornerModel2.questionTypeSelectorModel;
   const listModelPage2: ListModel = selectorModelPage2.popupModel.contentComponentData.model;
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
   listModelPage2.onItemClick(htmlItem);
 
-  expect(panelModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelModel2.addNewQuestionText).toEqual("Add Comment");
-  expect(pageModel.addNewQuestionText).toEqual("Add Ranking");
-  expect(pageModel2.addNewQuestionText).toEqual("Add HTML");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
+  expect(pageAdornerModel2.addNewQuestionText).toEqual("Add HTML");
 
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating"]);
   expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment"]);
@@ -2881,10 +2881,10 @@ test("Add new question to Panel and Page", (): any => {
   expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "html"]);
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "text", "ranking", "comment", "html"]);
 
-  pageModel.addNewQuestion(null, null);
-  panelModel.addNewQuestion();
-  pageModel2.addNewQuestion(null, null);
-  panelModel2.addNewQuestion();
+  pageAdornerModel.addNewQuestion(null, null);
+  panelAdornerModel.addNewQuestion();
+  pageAdornerModel2.addNewQuestion(null, null);
+  panelAdornerModel2.addNewQuestion();
 
   expect((creator.survey.getAllPanels()[0] as PanelModel).questions.map(q => q.getType())).toEqual(["text", "rating", "rating"]);
   expect((creator.survey.getAllPanels()[1] as PanelModel).questions.map(q => q.getType())).toEqual(["comment", "comment"]);
@@ -2892,9 +2892,9 @@ test("Add new question to Panel and Page", (): any => {
   expect(creator.survey.pages[1].questions.map(q => q.getType())).toEqual(["comment", "comment", "html", "html"]);
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html"]);
 
-  pageModel3.addNewQuestion(null, null);
+  pageAdornerModel3.addNewQuestion(null, null);
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text"]);
-  panelModel3.addNewQuestion();
+  panelAdornerModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
 test("Use settings.designer.defaultAddQuestionType", (): any => {
