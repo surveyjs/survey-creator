@@ -549,6 +549,26 @@ test("Change theme action hidden", (): any => {
 
   StylesManager.getIncludedThemeCss = oldF;
 });
+
+test("Themes switcher list actions", (): any => {
+  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
+  var oldF = StylesManager.getIncludedThemeCss;
+  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
+
+  const creator = new CreatorTester();
+  const themeAction = creator.toolbar.getActionById("themeSwitcher");
+  expect(themeAction).toBeTruthy();
+  expect(themeAction.title).toEqual("Default");
+  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
+  const actions = listModel.actions;
+  expect(actions).toHaveLength(3);
+  expect(actions[0].title).toEqual("Default");
+  expect(actions[1].title).toEqual("Modern");
+  expect(actions[2].title).toEqual("Default (legacy)");
+
+  StylesManager.getIncludedThemeCss = oldF;
+});
+
 test("Change test themes list actions titles on changing locale", (): any => {
   TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
   var oldF = StylesManager.getIncludedThemeCss;
