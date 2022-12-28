@@ -50,10 +50,9 @@
 }
 
 .svc-creator__toolbox--right,
-[dir='rtl'],
-[style*='direction:rtl'],
-[style*='direction: rtl'] {
-
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
   .svc-toolbox__item:hover .svc-toolbox__item-banner,
   .svc-toolbox__item:focus .svc-toolbox__item-banner {
     flex-direction: row-reverse;
@@ -118,7 +117,6 @@
 }
 
 .svc-toolbox:not(.svc-toolbox--compact) {
-
   .svc-toolbox__item:not(.sv-dots):focus,
   .svc-toolbox__item:not(.sv-dots):hover {
     overflow: hidden;
@@ -148,7 +146,6 @@
   }
 }
 
-
 .svc-toolbox-popup {
   .sv-list__item {
     &:first-child {
@@ -160,8 +157,8 @@
     .sv-list__item-body {
       padding-top: calcSize(1.5);
       padding-bottom: calcSize(1.5);
-      padding-left: calcSize(2);
-      padding-right: calcSize(5);
+      padding-inline-start: calcSize(2);
+      padding-inline-end: calcSize(5);
     }
   }
 }
