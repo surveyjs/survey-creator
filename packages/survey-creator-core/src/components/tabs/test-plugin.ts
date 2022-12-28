@@ -197,7 +197,11 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    const themeMapper = StylesManager.getIncludedThemeCss();
+    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
+    const sequence = ["defaultV2", "modern", "default"];
+    themeMapper = themeMapper.sort((theme1, theme2) => {
+      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
+    });
     let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
     if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
