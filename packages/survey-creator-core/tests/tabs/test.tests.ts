@@ -1,7 +1,7 @@
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { SurveyResultsItemModel, SurveyResultsModel } from "../../src/components/results";
-import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel } from "survey-core";
+import { IAction, ListModel, Question, QuestionDropdownModel, SurveyModel, StylesManager } from "survey-core";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
 import { SurveySimulatorModel } from "../../src/components/simulator";
 import { editorLocalization } from "../../src/editorLocalization";
@@ -536,6 +536,8 @@ test("Prev/Next actions enabled/disabled", (): any => {
 });
 test("Change theme action hidden", (): any => {
   TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
+  var oldF = StylesManager.getIncludedThemeCss;
+  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
   let creator: CreatorTester = new CreatorTester();
   let testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
@@ -544,9 +546,33 @@ test("Change theme action hidden", (): any => {
   testPlugin = <TabTestPlugin>creator.getPlugin("test");
   testPlugin.activate();
   expect(testPlugin["changeThemeAction"]).toBeUndefined();
+
+  StylesManager.getIncludedThemeCss = oldF;
 });
+
+test("Themes switcher list actions", (): any => {
+  TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
+  var oldF = StylesManager.getIncludedThemeCss;
+  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
+
+  const creator = new CreatorTester();
+  const themeAction = creator.toolbar.getActionById("themeSwitcher");
+  expect(themeAction).toBeTruthy();
+  expect(themeAction.title).toEqual("Default");
+  const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
+  const actions = listModel.actions;
+  expect(actions).toHaveLength(3);
+  expect(actions[0].title).toEqual("Default");
+  expect(actions[1].title).toEqual("Modern");
+  expect(actions[2].title).toEqual("Default (legacy)");
+
+  StylesManager.getIncludedThemeCss = oldF;
+});
+
 test("Change test themes list actions titles on changing locale", (): any => {
   TabTestPlugin.prototype["filterThemeMapper"] = (themeMapper: Array<any>): Array<any> => { return themeMapper; };
+  var oldF = StylesManager.getIncludedThemeCss;
+  StylesManager.getIncludedThemeCss = (): Array<any> => { return StylesManager.getAvailableThemes(); };
   const deutschStrings: any = {
     ed: {
       defaultV2Theme: "Default de",
@@ -561,21 +587,24 @@ test("Change test themes list actions titles on changing locale", (): any => {
   const listModel = <ListModel>themeAction.popupModel.contentComponentData.model;
   const actions = listModel.actions;
   expect(actions).toHaveLength(3);
-  expect(actions[1].title).toEqual("Modern");
+  const modernAction = actions.filter(act => act.id === "modern_themeSwitcher")[0];
+  expect(modernAction.title).toEqual("Modern");
   creator.locale = "de";
   expect(themeAction.title).toEqual("Default de");
-  expect(actions[1].getLocale()).toEqual("de");
-  expect(actions[1].title).toEqual("Modern de");
+  expect(modernAction.getLocale()).toEqual("de");
+  expect(modernAction.title).toEqual("Modern de");
   creator.locale = "";
   expect(themeAction.title).toEqual("Default");
-  expect(actions[1].title).toEqual("Modern");
+  expect(modernAction.title).toEqual("Modern");
 
-  listModel.onItemClick(actions[1]);
+  listModel.onItemClick(modernAction);
   expect(themeAction.title).toEqual("Modern");
   creator.locale = "de";
   expect(themeAction.title).toEqual("Modern de");
   creator.locale = "";
   expect(themeAction.title).toEqual("Modern");
+
+  StylesManager.getIncludedThemeCss = oldF;
 });
 test("Default mobile orientation", (): any => {
   const creator: CreatorTester = new CreatorTester();
