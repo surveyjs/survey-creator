@@ -189,13 +189,13 @@ test("property grid for mobile devices", async (t) => {
     .resizeWindow(370, 400)
     .expect(mobilePropertGrid.visible).notOk()
 
-    .click(getBarItemByTitle("Survey Settings").filterVisible())
+    .click(getBarItemByTitle("Open survey settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
     .expect(mobilePropertGridTitle.textContent).eql("Survey")
 
     .click(mobileCloseButton)
     .click(Selector("span").withText("Add Question"))
-    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
+    .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
     .expect(mobilePropertGridTitle.textContent).eql("question1")
 
     .resizeWindow(1920, 900)
@@ -294,10 +294,10 @@ test("Property grid editor popup", async (t) => {
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector(".sv-action-bar-item[title=\"Settings\"]").filterVisible())
+    .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(mobileCloseButton)
     .click(question1)
-    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Settings\"]").filterVisible())
+    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
@@ -333,7 +333,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
     .expect(flyoutPropertyGrid.exists).ok()
     .expect(objectSelectorButton.withText("page1").visible).ok()
     .click(collapseButtonSelector)
-    .click(getBarItemByTitle("Survey Settings").filterVisible())
+    .click(getBarItemByTitle("Open survey settings").filterVisible())
     .expect(objectSelectorButton.withText("Survey").visible).ok()
     .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
 

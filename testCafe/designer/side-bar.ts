@@ -80,7 +80,7 @@ test("SelectObject", async (t: TestController) => {
 const toolboxInDesigner = Selector(".svc-creator-tab .svc-toolbox");
 const toolboxInSidebar = Selector(".svc-side-bar .svc-toolbox");
 const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
-const settingsButtonSelector = Selector(".sv-action-bar-item[title=\"Survey Settings\"]");
+const settingsButtonSelector = Selector(".sv-action-bar-item[title=\"Open survey settings\"]");
 
 test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");

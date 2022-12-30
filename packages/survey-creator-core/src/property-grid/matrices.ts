@@ -831,6 +831,7 @@ export class PropertyGridEditorBindings extends PropertyGridEditor {
     json.cellType = json.type;
     delete json.type;
     json.name = "value";
+    json.title = editorLocalization.getString("pe.value");
     var res = [json];
     return res;
   }
