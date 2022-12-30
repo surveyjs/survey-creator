@@ -656,16 +656,16 @@ export var enStrings = {
     triggerRunExpressionEmpty: "Please enter a valid expression",
     emptyExpressionPlaceHolder: "Type expression here...",
     noFile: "No file choosen",
-    clearIfInvisible: "Clear if invisible",
+    clearIfInvisible: "Clear the value if the question becomes hidden",
     valuePropertyName: "Value property name",
-    searchEnabled: "Search enabled",
+    searchEnabled: "Enable search",
     hideSelectedItems: "Hide selected items",
     signatureWidth: "Signature width",
     signatureHeight: "Signature height",
-    verticalAlign: "Vertical align",
+    verticalAlign: "Vertical alignment",
     alternateRows: "Alternate rows",
-    columnsVisibleIf: "Columns visible if",
-    rowsVisibleIf: "Rows visible if"
+    columnsVisibleIf: "Columns are visible if",
+    rowsVisibleIf: "Rows are visible if"
   },
   //Property values
   pv: {
