@@ -10,7 +10,7 @@ import {
   QuestionImagePickerModel,
   QuestionImageModel,
   QuestionMatrixDropdownModel,
-  MatrixDropdownColumn,
+  QuestionMatrixDynamicModel,
   QuestionMatrixModel,
   Serializer,
   ElementFactory,
@@ -179,7 +179,7 @@ test("Convert matrix question", () => {
   Serializer.addClass("matrix_new", [], () => {
     return new QuestionMatrixModel_New("");
   },
-    "matrix"
+  "matrix"
   );
   QuestionFactory.Instance.registerQuestion("matrix_new", (name) => {
     var q = new QuestionMatrixModel_New(name);
@@ -263,4 +263,54 @@ test("Convert text to radio with unset default questions", () => {
   expect(newQ1.choices).toHaveLength(3);
   expect(newQ1.choices[0].value).toEqual("item1");
   settings.toolbox.defaultJSON["radiogroup"].choices = oldChoices;
+});
+test("Convert matrix to matrix dropdown and back", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrix",
+        name: "q1",
+        columns: ["col1", { value: "col2", text: "Column 2" }, "col3", "col4"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  });
+  const q1 = <QuestionMatrixModel>survey.getQuestionByName("q1");
+  const q2 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown");
+  expect(q2.getType()).toEqual("matrixdropdown");
+  expect(q2.columns).toHaveLength(4);
+  expect(q2.columns[0].name).toEqual("col1");
+  expect(q2.columns[1].name).toEqual("col2");
+  expect(q2.columns[1].title).toEqual("Column 2");
+  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix");
+  expect(q3.getType()).toEqual("matrix");
+  expect(q3.columns).toHaveLength(4);
+  expect(q3.columns[0].value).toEqual("col1");
+  expect(q3.columns[1].value).toEqual("col2");
+  expect(q3.columns[1].text).toEqual("Column 2");
+});
+test("Convert matrix to matrix dynamic and back", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrix",
+        name: "q1",
+        columns: ["col1", { value: "col2", text: "Column 2" }, "col3", "col4"],
+        rows: ["row1", "row2"]
+      }
+    ]
+  });
+  const q1 = <QuestionMatrixModel>survey.getQuestionByName("q1");
+  const q2 = <QuestionMatrixDynamicModel>QuestionConverter.convertObject(q1, "matrixdynamic");
+  expect(q2.getType()).toEqual("matrixdynamic");
+  expect(q2.columns).toHaveLength(4);
+  expect(q2.columns[0].name).toEqual("col1");
+  expect(q2.columns[1].name).toEqual("col2");
+  expect(q2.columns[1].title).toEqual("Column 2");
+  const q3 = <QuestionMatrixModel>QuestionConverter.convertObject(q2, "matrix");
+  expect(q3.getType()).toEqual("matrix");
+  expect(q3.columns).toHaveLength(4);
+  expect(q3.columns[0].value).toEqual("col1");
+  expect(q3.columns[1].value).toEqual("col2");
+  expect(q3.columns[1].text).toEqual("Column 2");
 });
