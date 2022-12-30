@@ -954,7 +954,7 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   };
   await setJSON(json);
 
-  const Settings = Selector("[title=\"Survey Settings\"]");
+  const Settings = Selector("[title=\"Open survey settings\"]");
   const PagesTab = Selector("h4").withExactText("Pages");
   await t
     .click(Settings, { speed: 0.5 })
