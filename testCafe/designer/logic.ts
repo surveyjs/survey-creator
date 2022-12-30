@@ -20,7 +20,7 @@ const json = {
 const json2 = {
   questions: [
     {
-      type: "radiogroup",
+      type: "dropdown",
       name: "q1",
       choices: [
         "Item 1",
