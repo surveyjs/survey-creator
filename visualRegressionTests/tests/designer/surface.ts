@@ -589,7 +589,7 @@ test("Check property grid flyout", async (t) => {
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
-    await t.click(Selector("button[title='Survey Settings']"));
+    await t.click(Selector("button[title='Open survey settings']"));
     await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
   });
 });

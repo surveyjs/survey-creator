@@ -195,7 +195,7 @@ test("property grid for mobile devices", async (t) => {
 
     .click(mobileCloseButton)
     .click(Selector("span").withText("Add Question"))
-    .click(getBarItemByTitle("Settings").filterVisible().nth(0))
+    .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
     .expect(mobilePropertGridTitle.textContent).eql("question1")
 
     .resizeWindow(1920, 900)
