@@ -524,6 +524,40 @@ test("surveypages property editor", () => {
   expect(pagesQuestion.visibleRows[1].cells[1].value).toEqual("Page 2");
 });
 
+test("surveypages property editor and onCollectionItemAllowingCallback", () => {
+  const survey = new SurveyModel();
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  const options = new EmptySurveyCreatorOptions();
+  options.onCollectionItemAllowingCallback = (
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base,
+    options: ICollectionItemAllowOperations
+  ): void => {
+    if(property.name !== "pages") return;
+    const name = (<any>item).name;
+    options.allowDelete = name !== "page2";
+    options.allowEdit = name !== "page2";
+  };
+  const propertyGrid = new PropertyGridModelTester(survey, options);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const rows = pagesQuestion.visibleRows;
+  expect(rows[0].cells[0].question.isReadOnly).toBeFalsy();
+  expect(rows[0].cells[1].question.isReadOnly).toBeFalsy();
+  expect(rows[1].cells[0].question.isReadOnly).toBeTruthy();
+  expect(rows[1].cells[1].question.isReadOnly).toBeTruthy();
+  expect(rows[2].cells[0].question.isReadOnly).toBeFalsy();
+  expect(rows[2].cells[1].question.isReadOnly).toBeFalsy();
+  expect(pagesQuestion.canRemoveRow(rows[0])).toBeTruthy();
+  expect(pagesQuestion.canRemoveRow(rows[1])).toBeFalsy();
+  expect(pagesQuestion.canRemoveRow(rows[2])).toBeTruthy();
+});
+
 test("Change editingObj of the property grid", () => {
   var question = new QuestionTextModel("q1");
   var question2 = new QuestionTextModel("q2");

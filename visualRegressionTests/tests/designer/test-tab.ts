@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -96,12 +96,6 @@ const json2 = {
 test("Theme Switcher", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const simulator = Selector(".svd-simulator-content");
-    const checkTheme = async (listID, screnName) => {
-      await t
-        .click(Selector("#themeSwitcher"))
-        .click(Selector(".sv-popup__container .sv-list .sv-list__item").filterVisible().nth(listID));
-      await takeElementScreenshot(screnName, simulator, t, comparer);
-    };
 
     await t.resizeWindow(1280, 900);
     await explicitErrorHandler();
@@ -117,12 +111,22 @@ test("Theme Switcher", async (t) => {
     await t
       .click(Selector("#themeSwitcher"))
       .click(Selector(".sd-navigation__complete-btn"));
-
     await takeElementScreenshot("theme-default-test-again.png", simulator, t, comparer);
 
-    await checkTheme(1, "theme-modern-test-again.png");
-    await checkTheme(2, "theme-legacy-test-again.png");
-    await checkTheme(0, "theme-default-test-again.png");
+    await t
+      .click(Selector("#themeSwitcher"))
+      .click(getListItemByText("Modern"));
+    await takeElementScreenshot("theme-modern-test-again.png", simulator, t, comparer);
+
+    await t
+      .click(Selector("#themeSwitcher"))
+      .click(getListItemByText("Default (legacy)"));
+    await takeElementScreenshot("theme-legacy-test-again.png", simulator, t, comparer);
+
+    await t
+      .click(Selector("#themeSwitcher"))
+      .click(getListItemByText("Default"));
+    await takeElementScreenshot("theme-default-test-again.png", simulator, t, comparer);
 
     await t.click(Selector(".svc-preview__test-again"));
     await takeElementScreenshot("theme-default-preview.png", simulator, t, comparer);
