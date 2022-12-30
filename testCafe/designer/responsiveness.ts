@@ -294,10 +294,10 @@ test("Property grid editor popup", async (t) => {
     .expect(Selector(".sv-popup--modal").visible).ok()
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
-    .click(Selector(".sv-action-bar-item[title=\"Settings\"]").filterVisible())
+    .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(mobileCloseButton)
     .click(question1)
-    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Settings\"]").filterVisible())
+    .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--overlay").visible).ok();
 });
