@@ -86,11 +86,11 @@ export class QuestionConverter {
       }
     }
     if(Survey.Serializer.isDescendantOf(convertToClass, "matrix") &&
-       Survey.Serializer.isDescendantOf(convertFromClass, "matrixdropdown") &&
+       Survey.Serializer.isDescendantOf(convertFromClass, "matrixdropdownbase") &&
        json.columns) {
       json.columns = json.columns.map(col => col.title ? { value: col.name, text: col.title } : col.name);
     }
-    if(Survey.Serializer.isDescendantOf(convertToClass, "matrixdropdown") &&
+    if(Survey.Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
        Survey.Serializer.isDescendantOf(convertFromClass, "matrix") &&
        json.columns) {
       json.columns = json.columns.map(col => <any>{ name: col.value || col, title: col.text });

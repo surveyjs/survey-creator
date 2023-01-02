@@ -12,7 +12,6 @@ export var enStrings = {
     addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
     duplicate: "Duplicate",
-    settings: "Settings",
     addToToolbox: "Add to toolbox",
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
@@ -52,16 +51,14 @@ export var enStrings = {
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Survey",
-    settings: "Survey Settings",
-    settingsTooltip: "Open survey settings",
-    //opjectPropertiesHeader: "Advanced",
-    //showObjectProperties: "Show Object Properties",
-    //hideObjectProperties: "Hide Object Properties",
+    settings: "Settings",
+    settingsTooltip: "Open settings",
+    surveySettings: "Survey Settings",
+    surveySettingsTooltip: "Open survey settings",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
     nextSelected: "Select next",
-    //editSurvey: "Edit Survey",
     surveyTypeName: "Survey",
     pageTypeName: "Page",
     panelTypeName: "Panel",
@@ -87,8 +84,6 @@ export var enStrings = {
     logic: "Logic",
     embedSurvey: "Embed Survey",
     translation: "Translation",
-    surveySettings: "Survey Settings",
-    surveySettingsTooltip: "Survey Settings",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
     designer: "Designer",
@@ -564,7 +559,7 @@ export var enStrings = {
     choicesFromQuestion: "Copy choices from the following question",
     choicesFromQuestionMode: "Which choices to copy?",
     showCommentArea: "Show the comment area",
-    commentPlaceHolder: "Comment area placeholder",
+    commentPlaceholder: "Comment area placeholder",
     displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
     rowsOrder: "Row order",
     columnsLayout: "Column layout",
@@ -661,6 +656,16 @@ export var enStrings = {
     triggerRunExpressionEmpty: "Please enter a valid expression",
     emptyExpressionPlaceHolder: "Type expression here...",
     noFile: "No file choosen",
+    clearIfInvisible: "Clear the value if the question becomes hidden",
+    valuePropertyName: "Value property name",
+    searchEnabled: "Enable search",
+    hideSelectedItems: "Hide selected items",
+    signatureWidth: "Signature width",
+    signatureHeight: "Signature height",
+    verticalAlign: "Vertical alignment",
+    alternateRows: "Alternate rows",
+    columnsVisibleIf: "Columns are visible if",
+    rowsVisibleIf: "Rows are visible if"
   },
   //Property values
   pv: {
@@ -768,6 +773,28 @@ export var enStrings = {
       default: "Users cannot expand or collapse panels",
       collapsed: "All panels are collapsed",
       expanded: "All panels are expanded"
+    },
+    widthMode: {
+      auto: "Auto",
+      static: "Static",
+      responsive: "Responsive"
+    },
+    imageFit: {
+      none: "None",
+      contain: "Contain",
+      cover: "Cover",
+      fill: "Fill"
+    },
+    contentMode: {
+      auto: "Auto",
+      image: "Image",
+      video: "Video",
+      youtube: "YouTube"
+    },
+    displayMode: {
+      auto: "Auto",
+      buttons: "Buttons",
+      dropdown: "Dropdown"
     }
   },
   //Operators
@@ -900,7 +927,8 @@ export var enStrings = {
     backgroundColor: "backgroundColor",
     showCaption: "showCaption",
     iconName: "iconName",
-    iconSize: "iconSize"
+    iconSize: "iconSize",
+    value: "Value",
   }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
