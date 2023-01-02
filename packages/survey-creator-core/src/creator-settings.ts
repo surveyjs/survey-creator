@@ -267,10 +267,16 @@ export interface ISurveyCreatorOptions {
     text: string,
     logicItem: any
   ): string;
+  getProcessedTranslationItemText(
+    locale: string, locString: ILocalizableString, newText: string, obj: any
+  ): string;
   getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
+    return newText;
+  }
   isMobileView: boolean = false;
   alwaySaveTextInPropertyEditors: boolean;
   readOnly: boolean;

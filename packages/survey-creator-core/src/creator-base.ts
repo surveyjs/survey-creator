@@ -840,6 +840,29 @@ export class CreatorBase extends Base
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
   /**
+   * An event that is raised before a string translation is changed. Use this event to override a new translation value.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: `any`\
+   * A survey object instance (survey, page, panel, question) whose string translation is being changed.
+   * - `options.locale`: `String`\
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * - `options.locString`: `LocalizableString`\
+   * An object that you can use to manipulate a localization string. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   * - `options.newText`: `String`\
+   * A new value for the string translation.
+   * 
+   * Refer to the following help topics for more information on localization:
+   * 
+   * - [Localization & Globalization in SurveyJS Form Library](https://surveyjs.io/form-library/documentation/survey-localization)
+   * - [Localization & Globalization in Survey Creator](https://surveyjs.io/survey-creator/documentation/localization)
+   */
+  public onTranslationItemChanging: CreatorEvent = new CreatorEvent();
+
+  /**
    * Use this event to control drag&drop operations.
    *- sender the survey creator object that fires the event.
    *- options.survey the editing survey object.
@@ -2880,6 +2903,17 @@ export class CreatorBase extends Base
     };
     this.onLogicItemDisplayText.fire(this, options);
     return options.text;
+  }
+  getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
+    if (this.onTranslationItemChanging.isEmpty) return newText;
+    const options = {
+      locale: locale,
+      obj: obj,
+      locString: locString,
+      newText: newText
+    };
+    this.onTranslationItemChanging.fire(this, options);
+    return options.newText;
   }
   getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string {
     if (this.onTranslationExportItem.isEmpty) return text;
