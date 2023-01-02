@@ -147,7 +147,7 @@ function getKeyName(key) {
   if(key.indexOf("-") > -1 || key.indexOf("@") > -1) return "\"" + key + "\"";
   return key;
 }
-function updateTranslationKey(lines, englishJson, json, level) {
+function updateTranslationKey(lines, englishJson, json, level, levelKey) {
   let missedKeys = 0;
   let isStarted = true;
   let propComment = "";
@@ -165,13 +165,13 @@ function updateTranslationKey(lines, englishJson, json, level) {
         lines.push(getNewLineText(level) + "// " + keyComments[key]);
       }
       lines.push(getNewLineText(level) + keyName + ": {");
-      missedKeys += updateTranslationKey(lines, englishJson[key], !!json ? json[key] : undefined, level + 1);
+      missedKeys += updateTranslationKey(lines, englishJson[key], !!json ? json[key] : undefined, level + 1, key);
       lines.push(getNewLineText(level) + "}");
     } else {
       let hasValue = !!json && !!json[key];
       let value = hasValue ? json[key] : englishJson[key];
       let line = keyName + ": " + JSON.stringify(value);
-      if(!!json && !hasValue || !json && key === value) {
+      if(!!json && !hasValue || !json && key === value && levelKey === "p") {
         line = "//" + line;
         missedKeys ++;
       }
