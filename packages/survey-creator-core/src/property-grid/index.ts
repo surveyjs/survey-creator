@@ -19,6 +19,7 @@ import {
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
+  surveyLocalization,
   QuestionTextModel,
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -1141,6 +1142,9 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
     if (!settings.showModal) return surveyPropertyEditor;
+    const prevCurrentLocale = surveyLocalization.currentLocale;
+    const locale = editorLocalization.currentLocale;
+    surveyLocalization.currentLocale = locale;
     const popupModel: PopupBaseViewModel = settings.showModal(
       "survey",
       {
@@ -1159,6 +1163,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       "sv-property-editor",
       question.title, options.isMobileView ? "overlay" : "popup"
     );
+    popupModel.locale = locale;
+    surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);
     options.onPropertyGridShowModalCallback(obj, property, question, surveyPropertyEditor, popupModel);
     return surveyPropertyEditor;
