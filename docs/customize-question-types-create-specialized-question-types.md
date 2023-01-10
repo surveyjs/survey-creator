@@ -1,3 +1,8 @@
+---
+title: Create Specialized Question Types | SurveyJS Documentation
+description: You can add custom question types to the collection of the built-in components for easier and more secure use of survey elements.
+---
+
 # Create Specialized Question Types
 
 Built-in question types are versatile and multi-functional, but in some cases, you need a question type with a more specific functionality. For example, you need to pre-populate a [Dropdown](/Documentation/Library?id=questiondropdownmodel) with a country list. You can use a regular Dropdown and customize it directly or you can create a specialized question type. The first approach is more straightforward, but the second results in a more reusable solution. Let's consider both. 
