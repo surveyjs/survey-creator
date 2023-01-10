@@ -1,8 +1,15 @@
 {
   "folders": [
+    "customize-question-types"
   ],
   "rename": {
+    "create-specialized-question-types": "customize-question-types-create-specialized-question-types",
+    "create-composite-question-types": "customize-question-types-create-composite-question-types",
+    "create-custom-widget": "customize-question-types-create-custom-widgets",
+    "third-party-component-integration-react": "customize-question-types-third-party-component-integration-react"
   },
   "classRename": {
+    "surveyeditor": "survey-creator",
+    "surveycreator": "survey-creator"
   }
 }
