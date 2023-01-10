@@ -110,7 +110,7 @@ function replaceText(name, newText, missedKeys) {
   let missedKeysStr = "";
   if(name !== "english") {
     if(missedKeys > 0) {
-      missedKeysStr = "//There " + missedKeys + " untranslated keys. You can find them in uncommented lines.\n";
+      missedKeysStr = "// This dictionary contains " + missedKeys + " untranslated or inherited localization strings.\n// These strings are commented out. Uncomment and edit them if you want to add your translations.\n";
     }
     const importIndex = content.indexOf("import {");
     if(importIndex > 0) {
@@ -172,7 +172,7 @@ function updateTranslationKey(lines, englishJson, json, level) {
       let value = hasValue ? json[key] : englishJson[key];
       let line = keyName + ": " + JSON.stringify(value);
       if(!!json && !hasValue || !json && key === value) {
-        line = "//" + line;
+        line = "// " + line;
         missedKeys ++;
       }
       lines.push(getNewLineText(level) + line);
