@@ -1367,7 +1367,6 @@ test("Export dialect languages", () => {
     ]
   });
   const translation: Translation = new Translation(survey);
-  translation.reset();
   let exported;
   parse(translation.exportToCSV(), {
     complete: function (results, file) {
