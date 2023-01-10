@@ -1,27 +1,23 @@
+//There 69 untranslated keys. You can find them in uncommented lines.
 import { editorLocalization } from "survey-creator-core";
 
 var italianTranslation = {
-  // strings for survey templates
+  // survey templates
   survey: {
     edit: "Modifica",
     externalHelpLink: "Guarda e impara come creare questionari",
-    externalHelpLinkUrl:
-      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Aggiungi una domanda qui",
-    addLogicItem:
-      "Crea una regola per personalizzare il percorso del questionario.",
+    addLogicItem: "Crea una regola per personalizzare il percorso del questionario.",
     copy: "Copia",
     duplicate: "Duplica",
-    settings: "Impostazioni",
     addToToolbox: "Aggiungi alla toolbox",
     deletePanel: "Elimina Pannello",
     deleteQuestion: "Elimina Domanda",
     convertTo: "Converti in",
-    drag: "Trascina l'elemento",
-    license:
-      "È necessario acquistare una licenza per sviluppatori per utilizzare Survey Creator nella propria applicazione.",
+    drag: "Trascina l'elemento"
   },
-  // strings for question types
+  // Question types
   qt: {
     default: "Default",
     checkbox: "Casella di controllo",
@@ -30,6 +26,7 @@ var italianTranslation = {
     ranking: "Classifica",
     image: "Immagine",
     dropdown: "Tendina",
+    //tagbox: "Tag Box",
     file: "File",
     html: "Html",
     matrix: "Matrice (scelta singola)",
@@ -44,15 +41,16 @@ var italianTranslation = {
     boolean: "Booleano",
     expression: "Espressione (sola lettura)",
     signaturepad: "Pad per la firma",
-    buttongroup: "Gruppo di pulsanti",
-    flowpanel: "Pannello di flusso",
+    buttongroup: "Gruppo di pulsanti"
   },
-  // strings for editor
+  // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Questionario",
     settings: "Impostazioni Questionario",
     settingsTooltip: "Apri le impostazioni del questionario",
+    //surveySettings: "Survey Settings",
+    //surveySettingsTooltip: "Open survey settings",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -92,6 +90,8 @@ var italianTranslation = {
     redo: "Ripristina",
     undoTooltip: "Annulla l'ultima modifica",
     redoTooltip: "Ripristina l'ultima modifica",
+    //showMoreChoices: "Show more",
+    //showLessChoices: "Show less",
     copy: "Copia",
     cut: "Taglia",
     paste: "Incolla",
@@ -105,6 +105,11 @@ var italianTranslation = {
     "property-grid": "Proprietà",
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
     toolboxGeneralCategory: "Generale",
+    //toolboxChoiceCategory: "Choice Questions",
+    //toolboxTextCategory: "Text Input Questions",
+    //toolboxContainersCategory: "Containers",
+    //toolboxMatrixCategory: "Matrix Questions",
+    //toolboxMiscCategory: "Misc",
     correctJSON: "Correggi il tuo JSON",
     surveyResults: "Risultati del questionario: ",
     surveyResultsTable: "Come tabella",
@@ -132,19 +137,16 @@ var italianTranslation = {
     bold: "Grassetto",
     italic: "Corsivo",
     underline: "Sottolineato",
-    fpAddQuestion: "Aggiungi domanda...",
+    addNewQuestion: "Aggiungi domanda",
     selectPage: "Seleziona la pagina...",
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
-    surveyPlaceHolder:
-      "Il questionario è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
-    addNewQuestion: "Aggiungi domanda",
-    addNewTypeQuestion: "Aggiungi {0}",
+    surveyPlaceHolder: "Il questionario è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
+    addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     lg: {
       addNewItem: "Aggiungi Nuova Regola",
-      empty_tab:
-        "Crea una regola per personalizzare il percorso del questionario.",
+      empty_tab: "Crea una regola per personalizzare il percorso del questionario.",
       page_visibilityName: "Mostra (nascondi) pagina",
       page_enableName: "Abilita (disabilita) pagina",
       panel_visibilityName: "Mostra (nascondi) pannello",
@@ -160,52 +162,37 @@ var italianTranslation = {
       trigger_copyvalueName: "Copia la risposta",
       trigger_skipName: "Passa alla domanda",
       trigger_runExpressionName: "Esegui l'espressione",
-      completedHtmlOnConditionName:
-        'Imposta il markup della pagina "Questionario Completo"',
-      page_visibilityDescription:
-        "Rendi la pagina visibile quando l'espressione logica restituisce vero. Altrimenti, mantienila invisibile.",
-      panel_visibilityDescription:
-        "Rendi il pannello visibile quando l'espressione logica restituisce vero. Altrimenti, mantienilo invisibile.",
-      panel_enableDescription:
-        "Rendi il pannello e tutti gli elementi al suo interno abilitati quando l'espressione logica restituisce vero. Altrimenti, mantienili disabilitati.",
-      question_visibilityDescription:
-        "Rendi visibile la domanda quando l'espressione logica restituisce vero. Altrimenti, mantienila invisibile.",
-      question_enableDescription:
-        "Rendi la domanda abilitata quando l'espressione logica restituisce vero. Altrimenti, mantienila disabilitata.",
-      question_requireDescription:
-        "La domanda diventa obbligatoria quando l'espressione logica restituisce vero.",
-      trigger_completeDescription:
-        "Quando l'espressione logica restituisce vero, il questionario diventa completo e l'utente finale vede la 'Pagina di ringraziamento'.",
-      trigger_setvalueDescription:
-        "Quando i valori della domanda, utilizzati nell'espressione logica, vengono modificati e l'espressione logica restituisce vero, il valore viene impostato sulla domanda selezionata.",
-      trigger_copyvalueDescription:
-        "Quando i valori della domanda, utilizzata nell'espressione logica, vengono modificati e l'espressione logica restituisce vero, il valore di una domanda selezionata viene copiato in un'altra domanda selezionata.",
-      trigger_skipDescription:
-        "Quando l'espressione logica restituisce vero, il questionario passa / si focalizza sulla domanda selezionata.",
-      trigger_runExpressionDescription:
-        "Quando l'espressione logica restituisce vero, viene eseguita l'espressione personalizzata. È possibile impostare il risultato dell'espressione nella domanda selezionata.",
-      completedHtmlOnConditionDescription:
-        "Se l'espressione logica restituisce vero, il testo di default per la 'Pagina di ringraziamento' viene modificato in quello indicato.",
-      itemExpressionText: "Quando l'espressione: '{0}' restituisce vero:",
+      completedHtmlOnConditionName: "Imposta il markup della pagina \"Questionario Completo\"",
+      page_visibilityDescription: "Rendi la pagina visibile quando l'espressione logica restituisce vero. Altrimenti, mantienila invisibile.",
+      panel_visibilityDescription: "Rendi il pannello visibile quando l'espressione logica restituisce vero. Altrimenti, mantienilo invisibile.",
+      panel_enableDescription: "Rendi il pannello e tutti gli elementi al suo interno abilitati quando l'espressione logica restituisce vero. Altrimenti, mantienili disabilitati.",
+      question_visibilityDescription: "Rendi visibile la domanda quando l'espressione logica restituisce vero. Altrimenti, mantienila invisibile.",
+      question_enableDescription: "Rendi la domanda abilitata quando l'espressione logica restituisce vero. Altrimenti, mantienila disabilitata.",
+      question_requireDescription: "La domanda diventa obbligatoria quando l'espressione logica restituisce vero.",
+      trigger_completeDescription: "Quando l'espressione logica restituisce vero, il questionario diventa completo e l'utente finale vede la 'Pagina di ringraziamento'.",
+      trigger_setvalueDescription: "Quando i valori della domanda, utilizzati nell'espressione logica, vengono modificati e l'espressione logica restituisce vero, il valore viene impostato sulla domanda selezionata.",
+      trigger_copyvalueDescription: "Quando i valori della domanda, utilizzata nell'espressione logica, vengono modificati e l'espressione logica restituisce vero, il valore di una domanda selezionata viene copiato in un'altra domanda selezionata.",
+      trigger_skipDescription: "Quando l'espressione logica restituisce vero, il questionario passa / si focalizza sulla domanda selezionata.",
+      trigger_runExpressionDescription: "Quando l'espressione logica restituisce vero, viene eseguita l'espressione personalizzata. È possibile impostare il risultato dell'espressione nella domanda selezionata.",
+      completedHtmlOnConditionDescription: "Se l'espressione logica restituisce vero, il testo di default per la 'Pagina di ringraziamento' viene modificato in quello indicato.",
+      itemExpressionText: "Quando l'espressione: '{0}' restituisce vero:", //{0} - the expression
       itemEmptyExpressionText: "Nuova regola",
-      page_visibilityText: "rendi la pagina {0} visibile",
-      panel_visibilityText: "rendi il pannello {0} visibile",
-      panel_enableText: "rendi il pannello {0} abilitato",
-      question_visibilityText: "rendi la domanda {0} visibile",
-      question_enableText: "rendi la domanda {0} abilitata",
-      question_requireText: "rendi la domanda {0} obbligatoria",
-      column_visibilityText: "rendi la colonna {0} della domanda {1} visibile",
-      column_enableText: "rendi la colonna {0} della domanda {1} abilitata",
-      column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria",
+      page_visibilityText: "rendi la pagina {0} visibile", //{0} page name
+      panel_visibilityText: "rendi il pannello {0} visibile", //{0} panel name
+      panel_enableText: "rendi il pannello {0} abilitato", //{0} panel name
+      question_visibilityText: "rendi la domanda {0} visibile", //{0} question name
+      question_enableText: "rendi la domanda {0} abilitata", //{0} question name
+      question_requireText: "rendi la domanda {0} obbligatoria", //{0} question name
+      column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
+      column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
+      column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
       trigger_completeText: "il questionario viene completato",
-      trigger_setvalueText: "imposta nella domanda: {0} valore {1}",
-      trigger_copyvalueText:
-        "copia nella domanda: {0} valore dalla domanda {1}",
-      trigger_skipText: "questionario passa alla domanda {0}",
-      trigger_runExpressionText1: "esegui l'espressione: '{0}'",
-      trigger_runExpressionText2: " e imposta il risultato nella domanda: {0}",
-      completedHtmlOnConditionText:
-        "mostra il testo personalizzato per la 'Pagina di ringraziamento'.",
+      trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
+      trigger_copyvalueText: "copia nella domanda: {0} valore dalla domanda {1}", //{0} and {1} question names
+      trigger_skipText: "questionario passa alla domanda {0}", //{0} question name
+      trigger_runExpressionText1: "esegui l'espressione: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " e imposta il risultato nella domanda: {0}", //{0} question name
+      completedHtmlOnConditionText: "mostra il testo personalizzato per la 'Pagina di ringraziamento'.",
       showAllQuestions: "Tutte le Domande",
       showAllActionTypes: "Tutti i Tipi di Azione",
       conditions: "Condizione(i)",
@@ -219,23 +206,11 @@ var italianTranslation = {
       noActionError: "Aggiungi almeno un'azione.",
       actionInvalid: "Risolvi i problemi nell'azione(i)",
       expressionSetup: "Impostazione espressione",
-      actionsSetup: "Impostazione azioni",
-    },
+      actionsSetup: "Impostazione azioni"
+    }
   },
-  // strings for property editors
+  // Property Editors
   pe: {
-    clearIfInvisible: "Cancella se Invisibile",
-    columnsVisibleIf: "Colonne visibili se",
-    rowsVisibleIf: "Righe visibili se",
-    choicesByUrl: "Opzioni da URL",
-    showValueInLink: "Mostra il valore nel link",
-    displayMode: "Modalità display",
-    isUnique: "È unico",
-    showInMultipleColumns: "Mostra in più colonne",
-    totalMaximumFractionDigits: "Numero massimo di cifre frazionarie",
-    totalMinimumFractionDigits: "Numero minimo di cifre frazionarie",
-    questions: "Domande",
-    runExpression: "Esegui l'espressione",
     apply: "Applica",
     ok: "OK",
     save: "Salva",
@@ -271,6 +246,7 @@ var italianTranslation = {
     fastEntry: "Inserimento manuale",
     fastEntryNonUniqueError: "Il valore '{0}' non è univoco",
     fastEntryChoicesCountError: "Limita il numero di opzioni da {0} a {1}",
+    //fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
     formEntry: "Inserimento dati",
     testService: "Prova il servizio",
     itemSelectorEmpty: "Seleziona elemento",
@@ -279,17 +255,14 @@ var italianTranslation = {
     conditionSelectPage: "Seleziona pagina...",
     conditionSelectPanel: "Seleziona pannello...",
     conditionValueQuestionTitle: "Inserisci/seleziona valore",
-    expressionHelp:
-      "Inserisci un’espressione. Puoi usare le parentesi graffe per ottenere l’accesso ai valori delle domande: ‘{domanda1} + {domanda2}’. Le espressioni supportano anche le funzioni: iif(), today(), age(), min(), max(), count(), avg(), e altre.",
-    aceEditorHelp:
-      "Premi ctrl+spazio per ottenere un suggerimento sul completamento dell'espressione",
+    expressionHelp: "Inserisci un’espressione. Puoi usare le parentesi graffe per ottenere l’accesso ai valori delle domande: ‘{domanda1} + {domanda2}’. Le espressioni supportano anche le funzioni: iif(), today(), age(), min(), max(), count(), avg(), e altre.",
+    aceEditorHelp: "Premi ctrl+spazio per ottenere un suggerimento sul completamento dell'espressione",
     aceEditorRowTitle: "Riga corrente",
     aceEditorPanelTitle: "Pannello Corrente",
     showMore: "Per maggiori dettagli, guarda la documentazione",
     assistantTitle: "Domande disponibili:",
     cellsEmptyRowsColumns: "Dovrebbe esserci almeno una colonna o riga",
-    showPreviewBeforeComplete:
-      "Vedi l'anteprima delle risposte prima di inviare il questionario",
+    showPreviewBeforeComplete: "Vedi l'anteprima delle risposte prima di inviare il questionario",
     propertyIsEmpty: "Per favore, inserisci un valore",
     propertyIsNoUnique: "Inserisci un valore univoco",
     propertyNameIsNotUnique: "Inserisci un nome univoco",
@@ -306,6 +279,9 @@ var italianTranslation = {
     url: "URL",
     path: "Percorso",
     valueName: "Nome Valore",
+    choicesbyurl: {
+      //valueName: "Get values from the following JSON field"
+    },
     titleName: "Nome Titolo",
     imageLinkName: "Ottieni gli URL delle immagini dal seguente campo JSON:",
     allowEmptyResponse: "Consenti risposta vuota",
@@ -317,7 +293,6 @@ var italianTranslation = {
     pageDescriptionPlaceholder: "Descrizione",
     showOtherItem: "Consenti l'opzione Altro",
     otherText: "Testo dell'opzione Altro",
-    otherPlaceHolder: "Testo segnaposto area commenti",
     showNoneItem: "Consenti l'opzione Nessuno",
     noneText: "Testo dell'opzione Nessuno",
     showSelectAllItem: "Consenti l'opzione Seleziona tutti",
@@ -333,7 +308,7 @@ var italianTranslation = {
     visible: "Visibile",
     isRequired: "Obbligatoria",
     isAllRowRequired: "Richiedi risposta per tutte le righe",
-    requiredErrorText: '"Obbligatoria" messaggio di errore',
+    requiredErrorText: "\"Obbligatoria\" messaggio di errore",
     startWithNewLine: "Visualizza la domanda su una nuova riga",
     rows: "Righe",
     cols: "Colonne",
@@ -355,7 +330,6 @@ var italianTranslation = {
     maxRateDescription: "Descrizione del valore massimo",
     inputType: "Tipo di inserimento",
     optionsCaption: "Testo segnaposto dell'opzione",
-    showOptionsCaption: "Mostra l'opzione testo segnaposto",
     defaultValue: "Valore default",
     cellsDefaultRow: "Testi default",
     surveyEditorTitle: "Modifica le impostazioni del questionario",
@@ -363,12 +337,10 @@ var italianTranslation = {
     maxLength: "Lunghezza massima (in caratteri)",
     buildExpression: "Build",
     editExpression: "Modifica",
-    and: "e",
-    or: "o",
     remove: "Elimina",
     addCondition: "Aggiungi Condizione",
+    //emptyLogicPopupMessage: "Select a question to start configuring conditions.",
     if: "se",
-    then: "allora",
     setToName: "Domanda mirata",
     fromName: "Domanda da cui copiare la risposta",
     gotoName: "Domanda a cui passare",
@@ -382,10 +354,8 @@ var italianTranslation = {
     portraitOrientation: "Verticale",
     mode: "Modalità (editabile/sola lettura)",
     clearInvisibleValues: "Cancella i valori invisibili",
-    cookieName:
-      "Nome cookie (per disabilitare esegui il questionario due volte in locale)",
-    sendResultOnPageNext:
-      "Invia i risultati del questionario alla pagina successiva",
+    cookieName: "Nome cookie (per disabilitare esegui il questionario due volte in locale)",
+    sendResultOnPageNext: "Invia i risultati del questionario alla pagina successiva",
     storeOthersAsComment: "Memorizza il valore Altro in campi separati",
     showPageTitles: "Visualizza titolo e descrizione pagina",
     showPageNumbers: "Visualizza numero pagina",
@@ -395,32 +365,28 @@ var italianTranslation = {
     previewText: "Testo del tasto Anteprima risposte",
     editText: "Testo del tasto Modifica risposta",
     startSurveyText: "Testo del tasto Inizia Questionario",
-    showNavigationButtons:
-      "Visualizza tasti di navigazione (navigazione di default)",
-    showPrevButton:
-      "Visualizza tasto Pagina Precedente (l'utente può tornare alla pagina precedente)",
+    showNavigationButtons: "Visualizza tasti di navigazione (navigazione di default)",
+    showPrevButton: "Visualizza tasto Pagina Precedente (l'utente può tornare alla pagina precedente)",
     firstPageIsStarted: "La prima pagina nel questionario è la pagina iniziale",
     showCompletedPage: "Mostra la pagina Questionario Completo",
-    goNextPageAutomatic:
-      "Rispondendo a tutte le domande, vai alla pagina successiva in automatico",
+    goNextPageAutomatic: "Rispondendo a tutte le domande, vai alla pagina successiva in automatico",
     showProgressBar: "Visualizza barra di avanzamento",
     questionTitleLocation: "Posizione del titolo della domanda",
     requiredText: "Simbolo domanda obbligatoria, ad esempio (*)",
     questionStartIndex: "La domanda inizia con l'indice (1, 2 oppure 'A', 'a')",
     showQuestionNumbers: "Visualizza il numero delle domande",
-    questionTitleTemplate:
-      "Template titolo della domanda, il default è: '{no}. {require} {title}'",
+    questionTitleTemplate: "Template titolo della domanda, il default è: '{no}. {require} {title}'",
     questionErrorLocation: "Posizione del messaggio di errore",
-    focusFirstQuestionAutomatic:
-      "Al cambio pagina, posiziona il cursore sulla prima domanda",
+    focusFirstQuestionAutomatic: "Al cambio pagina, posiziona il cursore sulla prima domanda",
     questionsOrder: "Ordine delle domande sulla pagina",
     maxTimeToFinish: "Tempo massimo per terminare il questionario",
-    maxTimeToFinishPage:
-      "Tempo massimo per terminare una pagina del questionario",
+    maxTimeToFinishPage: "Tempo massimo per terminare una pagina del questionario",
     page: {
-      maxTimeToFinish: "Tempo massimo per terminare la pagina (in secondi)",
+      maxTimeToFinish: "Tempo massimo per terminare la pagina (in secondi)"
     },
-    question: { page: "Pagina principale" },
+    question: {
+      page: "Pagina principale"
+    },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
     renderMode: "Modalità di visualizzazione",
@@ -437,8 +403,7 @@ var italianTranslation = {
     allowAddRows: "Permetti di aggiungere righe",
     allowRemoveRows: "Permetti di eliminare righe",
     allowRowsDragAndDrop: "Consenti il trascinamento delle righe",
-    responsiveImageSizeHelp:
-      "Non si applica se si specifica l'esatta larghezza o altezza dell'immagine.",
+    responsiveImageSizeHelp: "Non si applica se si specifica l'esatta larghezza o altezza dell'immagine.",
     minImageWidth: "Larghezza minima dell'immagine",
     maxImageWidth: "Larghezza massima dell'immagine",
     minImageHeight: "Altezza minima dell'immagine",
@@ -452,7 +417,7 @@ var italianTranslation = {
     regex: "Espressione regolare",
     surveyvalidator: {
       text: "Messaggio di errore",
-      expression: "Espressione di convalida",
+      expression: "Espressione di convalida"
     },
     totalText: "Testo della riga Totale",
     totalType: "Tipo Totale",
@@ -464,24 +429,20 @@ var italianTranslation = {
     questionsOnPageMode: "Struttura questionario",
     maxTextLength: "Lunghezza massima della risposta (in caratteri)",
     maxOthersLength: "Lunghezza massima del commento (in caratteri)",
-    autoGrowComment:
-      "Espansione automatica dell'area dei commenti, se necessaria",
+    autoGrowComment: "Espansione automatica dell'area dei commenti, se necessaria",
     textUpdateMode: "Aggiornare il valore del testo della domanda",
     focusOnFirstError: "Imposta il focus sulla prima risposta invalida",
     checkErrorsMode: "Esegui la convalida",
     navigateToUrl: "Naviga fino all'URL",
     navigateToUrlOnCondition: "URL Dinamico",
-    completedBeforeHtml:
-      "Markup da mostrare se l'utente ha già compilato questo questionario",
+    completedBeforeHtml: "Markup da mostrare se l'utente ha già compilato questo questionario",
     completedHtml: "Markup della pagina Questionario Completo",
-    completedHtmlOnCondition:
-      "Markup dinamico della pagina Questionario Completo",
-    loadingHtml:
-      "Markup da mostrare durante il caricamento del modello del questionario",
+    completedHtmlOnCondition: "Markup dinamico della pagina Questionario Completo",
+    loadingHtml: "Markup da mostrare durante il caricamento del modello del questionario",
     commentText: "Titolo dell'Area commento",
     autocomplete: "Tipo di completamento automatico",
-    labelTrue: 'Etichetta "Vero"',
-    labelFalse: 'Etichetta "Falso"',
+    labelTrue: "Etichetta \"Vero\"",
+    labelFalse: "Etichetta \"Falso\"",
     allowClear: "Mostra il tasto Cancella",
     displayStyle: "Stile di visualizzazione del valore",
     format: "Stringa formattata",
@@ -498,7 +459,9 @@ var italianTranslation = {
     maxRowCount: "Numero massimo di righe",
     confirmDelete: "Conferma eliminazione della riga",
     confirmDeleteText: "Testo del messaggio di conferma",
-    paneldynamic: { confirmDelete: "Conferma eliminazione del pannello" },
+    paneldynamic: {
+      confirmDelete: "Conferma eliminazione del pannello"
+    },
     panelCount: "Numero iniziale di pannelli",
     minPanelCount: "Numero minimo di pannelli",
     maxPanelCount: "Numero massimo di pannelli",
@@ -520,16 +483,14 @@ var italianTranslation = {
     width: "Larghezza (in valori accettati da CSS)",
     showHeader: "Mostra intestazioni colonna",
     horizontalScroll: "Mostra la barra di scorrimento orizzontale",
-    columnMinWidth:
-      "Larghezza minima della colonna (in valori accettati da CSS)",
-    rowTitleWidth:
-      "Larghezza dell'intestazione della riga (in valori accettati dai CSS)",
-    valueTrue: 'Valore "Vero"',
-    valueFalse: 'Valore "Falso"',
-    minErrorText: '"Valore inferiore al minimo" messaggio di errore',
-    maxErrorText: '"Valore superiore al massimo" messaggio di errore',
-    otherErrorText: '"Commento vuoto" messaggio di errore',
-    keyDuplicationError: '"Valore chiave non univoco" messaggio di errore',
+    columnMinWidth: "Larghezza minima della colonna (in valori accettati da CSS)",
+    rowTitleWidth: "Larghezza dell'intestazione della riga (in valori accettati dai CSS)",
+    valueTrue: "Valore \"Vero\"",
+    valueFalse: "Valore \"Falso\"",
+    minErrorText: "\"Valore inferiore al minimo\" messaggio di errore",
+    maxErrorText: "\"Valore superiore al massimo\" messaggio di errore",
+    otherErrorText: "\"Commento vuoto\" messaggio di errore",
+    keyDuplicationError: "\"Valore chiave non univoco\" messaggio di errore",
     maxSelectedChoices: "Max. scelte selezionabili",
     showClearButton: "Mostra il tasto Cancella",
     showNumber: "Mostra numero pannello",
@@ -537,16 +498,14 @@ var italianTranslation = {
     logoHeight: "Altezza logo (in valori accettati da CSS)",
     readOnly: "Sola lettura",
     enableIf: "Editabile se",
-    emptyRowsText: '"Nessuna riga" messaggio',
+    emptyRowsText: "\"Nessuna riga\" messaggio",
     size: "Dimensione dell'input (in caratteri)",
-    separateSpecialChoices:
-      "Scelte speciali separate (Nessuno, Altro, Seleziona tutti)",
+    separateSpecialChoices: "Scelte speciali separate (Nessuno, Altro, Seleziona tutti)",
     choicesFromQuestion: "Copia le scelte dalla domanda seguente:",
     choicesFromQuestionMode: "Quale scelta copiare?",
     showCommentArea: "Mostra l'area commento",
-    commentPlaceHolder: "Testo segnaposto area commento",
-    displayRateDescriptionsAsExtremeItems:
-      "Mostra le descrizioni come valori estremi",
+    commentPlaceholder: "Testo segnaposto area commento",
+    displayRateDescriptionsAsExtremeItems: "Mostra le descrizioni come valori estremi",
     rowsOrder: "Ordine righe",
     columnsLayout: "Layout colonna",
     columnColCount: "Numero colonne annidate",
@@ -555,6 +514,9 @@ var italianTranslation = {
     defaultPanelValue: "Valori di default",
     cells: "Testi Celle",
     keyName: "Colonna chiave",
+    itemvalue: {
+      //text: "Alt text"
+    },
     logoPosition: "Posizione Logo",
     addLogo: "Aggiungi logo...",
     changeLogo: "Modifica logo...",
@@ -563,7 +525,7 @@ var italianTranslation = {
       left: "Sinistra",
       right: "Destra",
       top: "In alto",
-      bottom: "In basso",
+      bottom: "In basso"
     },
     tabs: {
       general: "Generale",
@@ -598,7 +560,8 @@ var italianTranslation = {
       showOnCompleted: "Questionario Completo",
       logo: "Logo nel Titolo Questionario",
       slider: "Cursore",
-      others: "Altri",
+      //expression: "Expression",
+      others: "Altri"
     },
     editProperty: "Modifica propietà '{0}'",
     items: "[ Elemento: {0} ]",
@@ -607,17 +570,17 @@ var italianTranslation = {
     columnsEnableIf: "Colonne visibili se",
     rowsEnableIf: "Righe visibili se",
     indent: "Aggiungi rientri",
-    panel: { indent: "Aggiungi rientri esterni" },
+    panel: {
+      indent: "Aggiungi rientri esterni"
+    },
     innerIndent: "Aggiungi rientri interni",
     defaultValueFromLastRow: "Prendi i valori predefiniti dall'ultima riga",
-    defaultValueFromLastPanel:
-      "Prendi i valori predefiniti dall'ultimo pannello",
+    defaultValueFromLastPanel: "Prendi i valori predefiniti dall'ultimo pannello",
     enterNewValue: "Inserisci il valore.",
     noquestions: "Non c'è alcuna domanda nel questionario.",
     createtrigger: "Il trigger non è impostato",
     titleKeyboardAdornerTip: "Premi il tasto Invio per modificare",
-    keyboardAdornerTip:
-      "Premi il tasto Invio per modificare l'elemento, premi il tasto Cancella per eliminare l'elemento, premi alt più freccia su o freccia giù per spostare l'elemento.",
+    keyboardAdornerTip: "Premi il tasto Invio per modificare l'elemento, premi il tasto Cancella per eliminare l'elemento, premi alt più freccia su o freccia giù per spostare l'elemento.",
     triggerOn: "Attivazione",
     triggerMakePagesVisible: "Rendi visibili le pagine:",
     triggerMakeQuestionsVisible: "Rendi visibili le domande:",
@@ -629,40 +592,24 @@ var italianTranslation = {
     triggerRunExpression: "Esegui questa Espressione:",
     triggerSetValue: "a: ",
     triggerGotoName: "Vai alla domanda:",
-    triggerIsVariable:
-      "Non inserire la variabile del risultato del questionario",
+    triggerIsVariable: "Non inserire la variabile del risultato del questionario",
     triggerRunExpressionEmpty: "Inserisci un'espressione valida",
     emptyExpressionPlaceHolder: "Digita qui l'espressione...",
     noFile: "Nessun file scelto",
+    clearIfInvisible: "Cancella se Invisibile",
+    //valuePropertyName: "Value property name",
+    //searchEnabled: "Enable search",
+    //hideSelectedItems: "Hide selected items",
+    //signatureWidth: "Signature width",
+    //signatureHeight: "Signature height",
+    //verticalAlign: "Vertical alignment",
+    //alternateRows: "Alternate rows",
+    columnsVisibleIf: "Colonne visibili se",
+    rowsVisibleIf: "Righe visibili se",
+    otherPlaceholder: "Testo segnaposto area commenti"
   },
+  // Property values
   pv: {
-    contain: "Comprimi",
-    cover: "Ricopri",
-    fill: "Riempi",
-    auto: "Auto",
-    static: "Statico",
-    responsive: "Responsive",
-    dropdown: "Tendina",
-    checkbox: "Casella di controllo",
-    radiogroup: "Opzione multipla",
-    comment: "Commento",
-    boolean: "Booleano",
-    expression: "Espressione (sola lettura)",
-    rating: "Valutazione",
-    selected: "Selezionata",
-    unselected: "Non selezionata",
-    image: "Immagine",
-    video: "Video",
-    youtube: "Youtube",
-    never: "Mai",
-    always: "Sempre",
-    sum: "Somma",
-    count: "Totale",
-    min: "Min",
-    max: "Max",
-    avg: "Media",
-    true: "vero",
-    false: "falso",
     inherit: "Default",
     show: "Visibile",
     hide: "Nascosto",
@@ -675,9 +622,6 @@ var italianTranslation = {
     asc: "Ascendente",
     desc: "Discendente",
     indeterminate: "Indeterminato",
-    decimal: "decimale",
-    currency: "valuta",
-    percent: "percentuale",
     firstExpanded: "Il primo pannello è esteso",
     off: "Nascondi il numero delle domande",
     onpanel: "Inizia su ogni pannello",
@@ -686,8 +630,7 @@ var italianTranslation = {
     list: "Lista",
     progressTop: "Navigatore del pannello + Barra di avanzamento in alto",
     progressBottom: "Navigatore del pannello + Barra di avanzamento in basso",
-    progressTopBottom:
-      "Navigatore del pannello + Barra di avanzamento in alto e in basso",
+    progressTopBottom: "Navigatore del pannello + Barra di avanzamento in alto e in basso",
     horizontal: "Orizzontale",
     vertical: "Verticale",
     top: "In alto",
@@ -696,20 +639,6 @@ var italianTranslation = {
     both: "Entrambe",
     left: "Sinistra",
     right: "Destra",
-    color: "colore",
-    date: "data",
-    datetime: "data e ora",
-    "datetime-local": "data e ora-locale",
-    email: "email",
-    month: "mese",
-    number: "numero",
-    password: "password",
-    range: "intervallo",
-    tel: "tel",
-    text: "testo",
-    time: "tempo",
-    url: "url",
-    week: "settimana",
     hidden: "Nascosto",
     on: "Inizia da capo in ogni pagina",
     onPage: "Continua dalla pagina precedente",
@@ -717,9 +646,10 @@ var italianTranslation = {
     display: "Sola lettura",
     onComplete: "Al termine del questionario",
     onHidden: "Quando la domanda diventa nascosta",
-    onHiddenContainer:
-      "Quando la domanda, o il suo pannello/pagina, diventa nascosta",
-    clearInvisibleValues: { none: "Mai" },
+    onHiddenContainer: "Quando la domanda, o il suo pannello/pagina, diventa nascosta",
+    clearInvisibleValues: {
+      none: "Mai"
+    },
     all: "Tutto",
     page: "Pagina",
     survey: "Questionario",
@@ -743,19 +673,53 @@ var italianTranslation = {
     onTyping: "Mentre si digita",
     underRow: "Sotto la riga",
     underRowSingle: "Sotto la riga, solo un pannello è visibile",
-    showNavigationButtons: { none: "Nascosto" },
-    showProgressBar: { off: "Nascosto" },
-    showTimerPanel: { none: "Nascosto" },
-    showTimerPanelMode: { all: "Entrambe" },
-    detailPanelMode: { none: "Nascosto" },
-    addRowLocation: { default: "Dipende dal layout della matrice" },
+    showNavigationButtons: {
+      none: "Nascosto"
+    },
+    showProgressBar: {
+      off: "Nascosto"
+    },
+    showTimerPanel: {
+      none: "Nascosto"
+    },
+    showTimerPanelMode: {
+      all: "Entrambe"
+    },
+    detailPanelMode: {
+      none: "Nascosto"
+    },
+    addRowLocation: {
+      default: "Dipende dal layout della matrice"
+    },
     panelsState: {
       default: "Gli utenti non possono espandere o comprimere i pannelli",
       collapsed: "Tutti i pannelli sono compressi",
-      expanded: "Tutti i pannelli sono estesi",
+      expanded: "Tutti i pannelli sono estesi"
     },
+    widthMode: {
+      //auto: "Auto",
+      //static: "Static",
+      //responsive: "Responsive"
+    },
+    imageFit: {
+      //none: "None",
+      //contain: "Contain",
+      //cover: "Cover",
+      //fill: "Fill"
+    },
+    contentMode: {
+      //auto: "Auto",
+      //image: "Image",
+      //video: "Video",
+      //youtube: "YouTube"
+    },
+    displayMode: {
+      //auto: "Auto",
+      //buttons: "Buttons",
+      //dropdown: "Dropdown"
+    }
   },
-  // strings for operators
+  // Operators
   op: {
     empty: "è vuoto",
     notempty: "non è vuoto ",
@@ -768,11 +732,9 @@ var italianTranslation = {
     greater: "maggiore",
     less: "minore",
     greaterorequal: "maggiore o uguale",
-    lessorequal: "minore o uguale",
-    and: "e",
-    or: "o",
+    lessorequal: "minore o uguale"
   },
-  // strings for embed window
+  // Embed window
   ew: {
     angular: "Versione per Angular",
     jquery: "Versione per jQuery",
@@ -793,12 +755,13 @@ var italianTranslation = {
     loadFromServer: "Carica JSON dal server",
     titleScript: "Scripts e stili",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript",
+    titleJavaScript: "JavaScript"
   },
-  //Preview (Survey)
+  // Preview (Survey)
   ts: {
     selectPage: "Seleziona la pagina da testare:",
     showInvisibleElements: "Mostra elementi nascosti",
+    //hideInvisibleElements: "Hide invisible elements"
   },
   validators: {
     answercountvalidator: "Numero risposte",
@@ -806,7 +769,7 @@ var italianTranslation = {
     expressionvalidator: "Espressione",
     numericvalidator: "Numerico",
     regexvalidator: "Regex",
-    textvalidator: "Testo",
+    textvalidator: "Testo"
   },
   triggers: {
     completetrigger: "Completa questionario",
@@ -814,84 +777,103 @@ var italianTranslation = {
     copyvaluetrigger: "Copia risposta",
     skiptrigger: "Vai alla domanda",
     runexpressiontrigger: "Esegui espressione",
-    visibletrigger: "Cambia visibilità",
+    visibletrigger: "Cambia visibilità"
   },
   pehelp: {
-    cookieName:
-      "I cookie impediscono agli utenti di compilare due volte lo stesso questionario.",
+    cookieName: "I cookie impediscono agli utenti di compilare due volte lo stesso questionario.",
     format: "Usa {0} come segnaposto per il valore effettivo.",
-    totalText:
-      "Visibile solo quando almeno una colonna ha il tipo Totale o l'espressione Totale.",
-    acceptedTypes:
-      "Per ulteriori informazioni, consultare la descrizione dell'attributo [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
-    columnColCount:
-      "Applicabile solo ai tipi di cella Opzione multipla e Casella di controllo.",
-    autocomplete:
-      "Per ulteriori informazioni, consultare la descrizione dell'attributo [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
-    valueName:
-      "Se non si imposta questa proprietà, la risposta sarà memorizzata in un campo specificato dalla proprietà Nome.",
-    keyName:
-      'Se la colonna specificata contiene valori identici, il questionario produce l\'errore "Valore chiave non univoco".',
+    totalText: "Visibile solo quando almeno una colonna ha il tipo Totale o l'espressione Totale.",
+    acceptedTypes: "Per ulteriori informazioni, consultare la descrizione dell'attributo [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
+    columnColCount: "Applicabile solo ai tipi di cella Opzione multipla e Casella di controllo.",
+    autocomplete: "Per ulteriori informazioni, consultare la descrizione dell'attributo [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
+    valueName: "Se non si imposta questa proprietà, la risposta sarà memorizzata in un campo specificato dalla proprietà Nome.",
+    choicesbyurl: {
+      //valueName: " "
+    },
+    keyName: "Se la colonna specificata contiene valori identici, il questionario produce l'errore \"Valore chiave non univoco\"."
   },
-  //Properties
+  // Properties
   p: {
     title: {
       name: "Titolo",
-      title: "Lascialo vuoto, se è uguale a 'Nome'",
+      title: "Lascialo vuoto, se è uguale a 'Nome'"
     },
-    rowCount: "Numero riga",
-    panelCount: "Numero pannello",
-    navigationButtonsVisibility: "Visibilità Pulsanti di navigazione",
-    visibleIf: "Visibile Se",
-    description: "Descrizione",
-    requiredIf: "Obbligatoria Se",
-    validators: "Validatori",
-    titleLocation: "Posizione del titolo",
-    choices: "Scelte",
-    label: "Etichetta",
-    currency: "Valuta",
-    columns: "Colonne",
-    itemSize: "Dimensione opzione",
-    templateTitle: "Titolo del template",
-    triggers: "Triggers",
-    defaultRowValue: "Valore predefinito Riga",
     multiSelect: "Consenti selezione multipla",
     showLabel: "Mostra le didascalie delle immagini",
+    //value: "Value",
+    visibleIf: "Visibile Se",
+    //attachOriginalItems: "attachOriginalItems",
+    useDisplayValuesInDynamicTexts: "Usa Valori di Riferimento nel titolo",
+    titleLocation: "Posizione del titolo",
+    description: "Descrizione",
+    descriptionLocation: "Posizione della descrizione",
+    defaultValueExpression: "Espressione valore predefinito",
+    requiredIf: "Obbligatoria Se",
+    validators: "Validatori",
+    bindings: "Collegamenti",
+    //renderAs: "renderAs",
+    currency: "Valuta",
+    //cellHint: "cellHint",
+    //isUnique: "isUnique",
+    //showInMultipleColumns: "showInMultipleColumns",
+    //totalMaximumFractionDigits: "totalMaximumFractionDigits",
+    //totalMinimumFractionDigits: "totalMinimumFractionDigits",
+    columns: "Colonne",
+    //detailElements: "detailElements",
+    choices: "Scelte",
+    //allowAdaptiveActions: "allowAdaptiveActions",
+    defaultRowValue: "Valore predefinito Riga",
+    detailPanelShowOnAdding: "Dettaglio Mostra Pannello su Aggiunta",
     logoFit: "Adattamento del logo",
     pages: "Pagine",
+    //questions: "questions",
+    triggers: "Triggers",
     calculatedValues: "Valori calcolati",
+    //surveyId: "surveyId",
+    //surveyPostId: "surveyPostId",
+    //surveyShowDataSaving: "surveyShowDataSaving",
     questionDescriptionLocation: "Posizione descrizione domanda",
     progressBarType: "Tipo barra di avanzamento",
     questionTitlePattern: "Modello titolo della domanda",
     widthMode: "Larghezza questionario",
-    navigationTitle: "Titolo navigazione",
-    navigationDescription: "Descrizione navigazione",
-    useDisplayValuesInDynamicTexts: "Usa Valori di Riferimento nel titolo",
-    descriptionLocation: "Posizione della descrizione",
-    defaultValueExpression: "Espressione valore predefinito",
-    bindings: "Collegamenti",
-    allowAddRows: "Permetti Aggiungere Righe",
-    allowRemoveRows: "Permetti Eliminare Righe",
-    detailPanelShowOnAdding: "Dettaglio Mostra Pannello su Aggiunta",
-    allowRowsDragAndDrop: "Permetti Trascinamento Righe",
-    otherPlaceHolder: "Testo segnaposto Altro",
-    contentMode: "Modalità contenuto",
-    imageFit: "Adattamento dell'immagine",
+    //showBrandInfo: "showBrandInfo",
+    //choicesByUrl: "choicesByUrl",
+    //choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
+    //choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
+    //inputFieldComponent: "inputFieldComponent",
+    //itemComponent: "itemComponent",
     min: "min",
     max: "max",
     minValueExpression: "Valore min Espressione",
     maxValueExpression: "Valore max Espressione",
     step: "Distanza",
     dataList: "Lista dati",
+    itemSize: "Dimensione opzione",
+    //elements: "elements",
+    //content: "content",
+    navigationButtonsVisibility: "Visibilità Pulsanti di navigazione",
+    navigationTitle: "Titolo navigazione",
+    navigationDescription: "Descrizione navigazione",
+    //closeOnSelect: "closeOnSelect",
+    //longTap: "longTap",
     autoGrow: "Espansione automatica",
-    multiLine: "Multilinea",
+    //acceptCarriageReturn: "acceptCarriageReturn",
+    //displayMode: "displayMode",
+    label: "Etichetta",
+    contentMode: "Modalità contenuto",
+    imageFit: "Adattamento dell'immagine",
+    //altText: "altText",
     height: "Altezza",
     penColor: "Colore penna",
     backgroundColor: "Colore sfondo",
+    //templateElements: "templateElements",
+    //operator: "operator",
+    //isVariable: "isVariable",
+    //runExpression: "runExpression",
     showCaption: "Mostra didascalia",
     iconName: "Nome icona",
-    iconSize: "Grandezza icona",
-  },
+    iconSize: "Grandezza icona"
+  }
 };
 
 editorLocalization.locales["it"] = italianTranslation;

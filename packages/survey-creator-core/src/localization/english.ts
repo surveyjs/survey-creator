@@ -2,12 +2,11 @@
 //import { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export var enStrings = {
-  //survey templates
+  // survey templates
   survey: {
     edit: "Edit",
     externalHelpLink: "Watch and learn how to create surveys",
-    externalHelpLinkUrl:
-      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Please drop a question here from the Toolbox.",
     addLogicItem: "Create a rule to customize the flow of the survey.",
     copy: "Copy",
@@ -16,11 +15,9 @@ export var enStrings = {
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element",
-    license:
-      "You must purchase a developer license to use Survey Creator in your app"
+    drag: "Drag element"
   },
-  //questionTypes
+  // Question types
   qt: {
     default: "Default",
     checkbox: "Checkbox",
@@ -44,10 +41,9 @@ export var enStrings = {
     boolean: "Boolean",
     expression: "Expression (read-only)",
     signaturepad: "Signature Pad",
-    buttongroup: "Button Group",
-    flowpanel: "Flow Panel"
+    buttongroup: "Button Group"
   },
-  //Strings in SurveyJS Creator
+  // Strings in SurveyJS Creator
   ed: {
     defaultLocale: "Default ({0})",
     survey: "Survey",
@@ -114,8 +110,6 @@ export var enStrings = {
     toolboxContainersCategory: "Containers",
     toolboxMatrixCategory: "Matrix Questions",
     toolboxMiscCategory: "Misc",
-    //delSelObject: "Delete selected object",
-    //editSelObject: "Edit selected object",
     correctJSON: "Please correct JSON.",
     surveyResults: "Survey Results ",
     surveyResultsTable: "As Table",
@@ -151,10 +145,8 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "auto",
-    //completedHtmlOnConditionItemText: "Show if",
     lg: {
       addNewItem: "Add New Rule",
-      //Logic tab strings
       empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show (hide) page",
       page_enableName: "Enable (disable) page",
@@ -172,32 +164,18 @@ export var enStrings = {
       trigger_skipName: "Skip to question",
       trigger_runExpressionName: "Run expression",
       completedHtmlOnConditionName: "Set \"Survey Complete\" page markup",
-
-      page_visibilityDescription:
-        "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
-      panel_visibilityDescription:
-        "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
-      panel_enableDescription:
-        "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
-      question_visibilityDescription:
-        "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
-      question_enableDescription:
-        "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
-      question_requireDescription:
-        "Question becomes required when the logic expression returns true.",
-      trigger_completeDescription:
-        "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
-      trigger_setvalueDescription:
-        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
-      trigger_copyvalueDescription:
-        "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
-      trigger_skipDescription:
-        "When the logic expression returns true then the survey skip to / focus the selected question.",
-      trigger_runExpressionDescription:
-        "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
-      completedHtmlOnConditionDescription:
-        "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
-
+      page_visibilityDescription: "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_visibilityDescription: "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
+      panel_enableDescription: "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
+      question_visibilityDescription: "Make the question visible when the logic expression returns true. Otherwise keep it invisible.",
+      question_enableDescription: "Make the question enable when the logic expression returns true. Otherwise keep it disabled.",
+      question_requireDescription: "Question becomes required when the logic expression returns true.",
+      trigger_completeDescription: "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'.",
+      trigger_setvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question.",
+      trigger_copyvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question.",
+      trigger_skipDescription: "When the logic expression returns true then the survey skip to / focus the selected question.",
+      trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
+      completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
       itemExpressionText: "When expression: '{0}' returns true", //{0} - the expression
       itemEmptyExpressionText: "New rule",
       page_visibilityText: "make page {0} visible", //{0} page name
@@ -216,32 +194,23 @@ export var enStrings = {
       trigger_runExpressionText1: "run expression: '{0}'", //{0} the expression
       trigger_runExpressionText2: " and set its result into question: {0}", //{0} question name
       completedHtmlOnConditionText: "show custom text for the 'Thank you page'.",
-
       showAllQuestions: "All Questions",
       showAllActionTypes: "All Action Types",
-
       conditions: "Condition(s)",
       actions: "Action(s)",
       expressionEditorTitle: "Define condition(s)",
       actionsEditorTitle: "Define action(s)",
-
       deleteAction: "Delete Action",
       addNewAction: "Add Action",
       selectedActionCaption: "Select action...",
-
-      expressionInvalid:
-        "The logic expression is empty or invalid. Please correct it.",
+      expressionInvalid: "The logic expression is empty or invalid. Please correct it.",
       noActionError: "Please, add at least one action.",
       actionInvalid: "Please, fix problems in your action(s).",
       expressionSetup: "",
       actionsSetup: ""
     }
   },
-  //Property names in table headers
-  // pel: {
-  //   isRequired: "Required?"
-  // },
-  //Property Editors
+  // Property Editors
   pe: {
     apply: "Apply",
     ok: "OK",
@@ -270,7 +239,6 @@ export var enStrings = {
     saveAndBack: "Save and return",
     saveAndBackTooltip: "Save and return",
     doneEditing: "Done",
-    // itemValueEdit: "Visible If",
     editChoices: "Edit Choices",
     showChoices: "Show Choices",
     move: "Move",
@@ -278,8 +246,7 @@ export var enStrings = {
     emptyValue: "Value is empty",
     fastEntry: "Manual Entry",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
-    fastEntryChoicesCountError:
-      "Please limit the number of items from {0} to {1}",
+    fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
     fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -289,20 +256,14 @@ export var enStrings = {
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    // conditionHelp:
-    //   "Please enter a boolean expression. It should return true to keep the question/page visible. For example: {question1} = 'value1' or ({question2} * {question4}  > 20 and {question3} < 5)",
-    expressionHelp:
-      "Use curly brackets to access answers: `{question1} + {question2}`. Expressions also support functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`, and others",
+    expressionHelp: "Use curly brackets to access answers: `{question1} + {question2}`. Expressions also support functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`, and others",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
     showMore: "For more details please check the documentation",
-    // conditionShowMoreUrl:
-    //   "https://surveyjs.io/Documentation/LibraryParameter?id=Question&parameter=visibleIf",
     assistantTitle: "Available questions",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "Preview answers before submitting the survey",
-
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
@@ -316,7 +277,6 @@ export var enStrings = {
     imageLink: "Image or video URL",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
-
     url: "Service URL",
     path: "Path to data within the service",
     valueName: "Store answers in the following JSON field",
@@ -332,10 +292,8 @@ export var enStrings = {
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
-
     showOtherItem: "Allow the Other option",
     otherText: "Other option text",
-    otherPlaceHolder: "Comment area placeholder",
     showNoneItem: "Allow the None option",
     noneText: "None option text",
     showSelectAllItem: "Allow the Select All option",
@@ -373,15 +331,11 @@ export var enStrings = {
     maxRateDescription: "Maximum rate value description",
     inputType: "Input type",
     optionsCaption: "Option placeholder",
-    showOptionsCaption: "Show option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
-
     surveyEditorTitle: "Edit survey settings",
     qEditorTitle: "Edit: {0}",
-
     maxLength: "Maximum length (in characters)",
-
     buildExpression: "Build",
     editExpression: "Edit",
     and: "and",
@@ -396,8 +350,6 @@ export var enStrings = {
     gotoName: "Question to skip to",
     ruleIsNotSet: "Rule is incorrect",
     includeIntoResult: "Include into survey results",
-
-    //survey
     showTitle: "Show the title",
     expandCollapseTitle: "Expand/collapse title",
     locale: "Survey language",
@@ -427,15 +379,14 @@ export var enStrings = {
     requiredText: "Required symbol(s)",
     questionStartIndex: "Start index (number or letter)",
     showQuestionNumbers: "Question numbering",
-    questionTitleTemplate:
-      "Question title template, default is: '{no}. {require} {title}'",
+    questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
     questionErrorLocation: "Error message location",
     focusFirstQuestionAutomatic: "Focus first question on a new page",
     questionsOrder: "Element order on the page",
     maxTimeToFinish: "Time limit to finish the survey (in seconds)",
     maxTimeToFinishPage: "Time limit to finish one page (in seconds)",
     page: {
-      maxTimeToFinish: "Time limit to finish the page (in seconds)",
+      maxTimeToFinish: "Time limit to finish the page (in seconds)"
     },
     question: {
       page: "Parent page"
@@ -456,13 +407,11 @@ export var enStrings = {
     allowAddRows: "Allow adding rows",
     allowRemoveRows: "Allow removing rows",
     allowRowsDragAndDrop: "Allow row drag and drop",
-
     responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
     minImageWidth: "Minimum image width",
     maxImageWidth: "Maximum image width",
     minImageHeight: "Minimum image height",
     maxImageHeight: "Maximum image height",
-
     minValue: "Minimum value",
     maxValue: "Maximum value",
     minLength: "Minimum length (in characters)",
@@ -515,7 +464,7 @@ export var enStrings = {
     confirmDelete: "Confirm row deletion",
     confirmDeleteText: "Confirmation message",
     paneldynamic: {
-      confirmDelete: "Confirm panel deletion",
+      confirmDelete: "Confirm panel deletion"
     },
     panelCount: "Initial panel count",
     minPanelCount: "Minimum panel count",
@@ -572,8 +521,6 @@ export var enStrings = {
     itemvalue: {
       text: "Alt text"
     },
-
-    // Header  adorner
     logoPosition: "Logo position",
     addLogo: "Add logo...",
     changeLogo: "Change logo...",
@@ -584,7 +531,6 @@ export var enStrings = {
       top: "On the top",
       bottom: "In the bottom"
     },
-
     tabs: {
       general: "General",
       fileOptions: "Options",
@@ -634,13 +580,11 @@ export var enStrings = {
     innerIndent: "Add inner indents",
     defaultValueFromLastRow: "Take default values from the last row",
     defaultValueFromLastPanel: "Take default values from the last panel",
-
     enterNewValue: "Please, enter the value.",
     noquestions: "There are no questions in the survey.",
     createtrigger: "Please create a trigger",
     titleKeyboardAdornerTip: "Press enter button to edit",
-    keyboardAdornerTip:
-      "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
+    keyboardAdornerTip: "Press enter button to edit item, press delete button to delete item, press alt plus arrow up or arrow down to move item",
     triggerOn: "On ",
     triggerMakePagesVisible: "Make pages visible",
     triggerMakeQuestionsVisible: "Make elements visible",
@@ -665,9 +609,10 @@ export var enStrings = {
     verticalAlign: "Vertical alignment",
     alternateRows: "Alternate rows",
     columnsVisibleIf: "Columns are visible if",
-    rowsVisibleIf: "Rows are visible if"
+    rowsVisibleIf: "Rows are visible if",
+    otherPlaceholder: "Comment area placeholder"
   },
-  //Property values
+  // Property values
   pv: {
     true: "true",
     false: "false",
@@ -797,7 +742,7 @@ export var enStrings = {
       dropdown: "Dropdown"
     }
   },
-  //Operators
+  // Operators
   op: {
     empty: "Empty",
     notempty: "Not empty",
@@ -814,7 +759,7 @@ export var enStrings = {
     and: "and",
     or: "or"
   },
-  //Embed window
+  // Embed window
   ew: {
     angular: "Use Angular version",
     jquery: "Use jQuery version",
@@ -837,7 +782,7 @@ export var enStrings = {
     titleHtml: "HTML",
     titleJavaScript: "JavaScript"
   },
-  //Preview (Survey)
+  // Preview (Survey)
   ts: {
     selectPage: "Select the page to test it",
     showInvisibleElements: "Show invisible elements",
@@ -849,7 +794,7 @@ export var enStrings = {
     expressionvalidator: "Expression",
     numericvalidator: "Number",
     regexvalidator: "Regex",
-    textvalidator: "Text",
+    textvalidator: "Text"
   },
   triggers: {
     completetrigger: "Complete survey",
@@ -870,65 +815,89 @@ export var enStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
+    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
   },
-  //Properties
+  // Properties
   p: {
     title: {
       name: "title",
       title: "Leave it empty, if it is the same as 'Name'"
     },
-    navigationButtonsVisibility: "navigationButtonsVisibility",
-    visibleIf: "visibleIf",
-    description: "description",
-    requiredIf: "requiredIf",
-    validators: "validators",
-    titleLocation: "titleLocation",
-    choices: "choices",
-    label: "label",
-    currency: "currency",
-    columns: "columns",
-    itemSize: "itemSize",
-    templateTitle: "templateTitle",
-    triggers: "triggers",
-    defaultRowValue: "defaultRowValue",
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
-    logoFit: "logoFit",
-    pages: "pages",
-    calculatedValues: "calculatedValues",
-    questionDescriptionLocation: "questionDescriptionLocation",
-    progressBarType: "progressBarType",
-    questionTitlePattern: "questionTitlePattern",
-    widthMode: "widthMode",
-    navigationTitle: "navigationTitle",
-    navigationDescription: "navigationDescription",
-    useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
-    descriptionLocation: "descriptionLocation",
-    defaultValueExpression: "defaultValueExpression",
-    bindings: "bindings",
-    allowAddRows: "allowAddRows",
-    allowRemoveRows: "allowRemoveRows",
-    detailPanelShowOnAdding: "detailPanelShowOnAdding",
-    allowRowsDragAndDrop: "allowRowsDragAndDrop",
-    otherPlaceHolder: "otherPlaceHolder",
-    contentMode: "contentMode",
-    imageFit: "imageFit",
-    min: "min",
-    max: "max",
-    minValueExpression: "minValueExpression",
-    maxValueExpression: "maxValueExpression",
-    step: "step",
-    dataList: "dataList",
-    autoGrow: "autoGrow",
-    multiLine: "multiLine",
-    height: "height",
-    penColor: "penColor",
-    backgroundColor: "backgroundColor",
-    showCaption: "showCaption",
-    iconName: "iconName",
-    iconSize: "iconSize",
     value: "Value",
+    //visibleIf: "visibleIf",
+    //attachOriginalItems: "attachOriginalItems",
+    //useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
+    //titleLocation: "titleLocation",
+    //description: "description",
+    //descriptionLocation: "descriptionLocation",
+    //defaultValueExpression: "defaultValueExpression",
+    //requiredIf: "requiredIf",
+    //validators: "validators",
+    //bindings: "bindings",
+    //renderAs: "renderAs",
+    //currency: "currency",
+    //cellHint: "cellHint",
+    //isUnique: "isUnique",
+    //showInMultipleColumns: "showInMultipleColumns",
+    //totalMaximumFractionDigits: "totalMaximumFractionDigits",
+    //totalMinimumFractionDigits: "totalMinimumFractionDigits",
+    //columns: "columns",
+    //detailElements: "detailElements",
+    //choices: "choices",
+    //allowAdaptiveActions: "allowAdaptiveActions",
+    //defaultRowValue: "defaultRowValue",
+    //detailPanelShowOnAdding: "detailPanelShowOnAdding",
+    //logoFit: "logoFit",
+    //pages: "pages",
+    //questions: "questions",
+    //triggers: "triggers",
+    //calculatedValues: "calculatedValues",
+    //surveyId: "surveyId",
+    //surveyPostId: "surveyPostId",
+    //surveyShowDataSaving: "surveyShowDataSaving",
+    //questionDescriptionLocation: "questionDescriptionLocation",
+    //progressBarType: "progressBarType",
+    //questionTitlePattern: "questionTitlePattern",
+    //widthMode: "widthMode",
+    //showBrandInfo: "showBrandInfo",
+    //choicesByUrl: "choicesByUrl",
+    //choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
+    //choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
+    //inputFieldComponent: "inputFieldComponent",
+    //itemComponent: "itemComponent",
+    //min: "min",
+    //max: "max",
+    //minValueExpression: "minValueExpression",
+    //maxValueExpression: "maxValueExpression",
+    //step: "step",
+    //dataList: "dataList",
+    //itemSize: "itemSize",
+    //elements: "elements",
+    //content: "content",
+    //navigationButtonsVisibility: "navigationButtonsVisibility",
+    //navigationTitle: "navigationTitle",
+    //navigationDescription: "navigationDescription",
+    //closeOnSelect: "closeOnSelect",
+    //longTap: "longTap",
+    //autoGrow: "autoGrow",
+    //acceptCarriageReturn: "acceptCarriageReturn",
+    //displayMode: "displayMode",
+    //label: "label",
+    //contentMode: "contentMode",
+    //imageFit: "imageFit",
+    //altText: "altText",
+    //height: "height",
+    //penColor: "penColor",
+    //backgroundColor: "backgroundColor",
+    //templateElements: "templateElements",
+    //operator: "operator",
+    //isVariable: "isVariable",
+    //runExpression: "runExpression",
+    //showCaption: "showCaption",
+    //iconName: "iconName",
+    //iconSize: "iconSize"
   }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
