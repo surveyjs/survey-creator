@@ -302,3 +302,69 @@ test("QuestionImageAdornerViewModel pass question into onUploadFile event", () =
   imageAdorner.chooseFile(imageAdorner);
   expect(counter).toEqual(1);
 });
+
+test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate values", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateValues.length).toBe(0);
+
+  ratingAdorner.addItem(ratingAdorner);
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateMax).toBe(4);
+  expect(ratingAdorner.element.rateValues.length).toBe(0);
+
+  ratingAdorner.removeItem(ratingAdorner);
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateMax).toBe(3);
+  expect(ratingAdorner.element.rateValues.length).toBe(0);
+});
+
+test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", "rateValues": [
+      "item1",
+      "item2",
+      "item3"
+    ] }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateValues.length).toBe(3);
+
+  ratingAdorner.addItem(ratingAdorner);
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateMax).toBe(5);
+  expect(ratingAdorner.element.rateValues.length).toBe(4);
+
+  ratingAdorner.removeItem(ratingAdorner);
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.element.rateMax).toBe(5);
+  expect(ratingAdorner.element.rateValues.length).toBe(3);
+});
