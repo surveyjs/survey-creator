@@ -183,3 +183,7 @@ test("Change Creator locale property", (): any => {
   expect(textQuestion.title).toEqual("Single Input");
   expect(saveAction.title).toEqual("Save Survey");
 });
+test("Check creator license localization", (): any => {
+  const creator = new CreatorTester({});
+  expect(creator.licenseText).toBe("PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP");
+});
