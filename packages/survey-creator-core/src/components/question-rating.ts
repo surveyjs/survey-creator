@@ -82,7 +82,9 @@ export class QuestionRatingAdornerViewModel extends Base {
     }
   }
   public get allowAdd() {
-    return !this.creator.readOnly;
+    return !this.creator.readOnly &&
+      (this.creator.maximumRateValues < 1 ||
+        ((this.element.rateValues.length > 0 || this.creator.maximumRateValues > this.element.rateMax) && (this.element.rateValues.length < 1 || this.creator.maximumRateValues > this.element.rateValues.length)));
   }
   public get allowRemove() {
     return !this.creator.readOnly;
