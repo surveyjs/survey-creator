@@ -2984,7 +2984,8 @@ export class CreatorBase extends Base
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
     if (!el || el.getType() === newType) return;
-    if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
+    const objType = SurveyHelper.getObjectType(el);
+    if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el, null, "#convertTo button");
   }
