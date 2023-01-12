@@ -1983,8 +1983,8 @@ export class CreatorBase extends Base
     }
   }
 
-  protected convertQuestion(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
+  protected convertQuestion(obj: Question, className: string): Question {
+    var newQuestion = <Question>QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,

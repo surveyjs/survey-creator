@@ -29,10 +29,10 @@ export class QuestionConverter {
     return !!res ? res : [];
   }
   public static convertObject(
-    obj: SurveyElement,
+    obj: Question,
     convertToClass: string,
     defaultJSON: any = null
-  ): SurveyElement {
+  ): Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
     let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
     var newQuestion = QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
@@ -55,7 +55,7 @@ export class QuestionConverter {
     panel.addElement(newQuestion, index);
     delete (<any>panel).isConverting;
     newQuestion.onSurveyLoad();
-    return <Question>newQuestion;
+    return newQuestion;
   }
   private static updateJSON(json: any, convertToClass: string, convertFromClass: string, defaultJSON: any): void {
     QuestionConverter.updateJSONFromQuestionDefaultSettings(json, convertToClass, defaultJSON);
@@ -124,7 +124,6 @@ export class QuestionConverter {
     }
   }
 }
-
 function getAllQuestionTypes(className: string, includeCurrent: boolean = false): Array<string> {
   if(className === "panel") return includeCurrent ? ["panel", "paneldynamic"] : ["paneldynamic"];
   var classes = Serializer.getChildrenClasses("question", true);
