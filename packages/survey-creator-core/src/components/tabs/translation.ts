@@ -980,6 +980,9 @@ export class Translation extends Base implements ITranslationLocales {
     return editorLocalization.getString("ed.translationNoStrings");
   }
   public exportToCSV(): string {
+    if(!this.root) {
+      this.reset();
+    }
     let res = [];
     let headerRow = [];
     let visibleLocales = this.locales;
