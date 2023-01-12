@@ -15,7 +15,8 @@ export var enStrings = {
     deletePanel: "Delete Panel",
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
-    drag: "Drag element"
+    drag: "Drag element",
+    license: "PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP"
   },
   // Question types
   qt: {
