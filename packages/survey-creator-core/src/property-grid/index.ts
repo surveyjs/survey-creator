@@ -1187,9 +1187,10 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (!this.isSupportGrouping()) return;
     const question = options.question;
     if (!question || !question.parent) return;
-    const index = question.parent.elements.indexOf(question);
+    const visibleElements = question.parent.elements.filter(element => element.visible);
+    const index = visibleElements.indexOf(question);
     if (index < 1) return;
-    if (question.parent.elements[index - 1].getType() !== question.getType()) return;
+    if (visibleElements[index - 1].getType() !== question.getType()) return;
     options.cssClasses.mainRoot += " spg-row-narrow__question";
   }
 }

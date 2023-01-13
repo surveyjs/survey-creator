@@ -233,6 +233,7 @@ export class SurveyQuestionEditorDefinition {
     },
     tagbox: {
       properties: [
+        "closeOnSelect",
         "placeholder",
         { name: "searchEnabled", tab: "layout" },
         { name: "hideSelectedItems", tab: "layout" },
