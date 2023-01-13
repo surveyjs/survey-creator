@@ -299,6 +299,14 @@ svc-question,
 
 .sd-panel,
 .sd-row--multiple {
+  :not(.svc-hovered) {
+      &>.svc-question__content {
+        &:not(.svc-question__content--selected) {
+          border: 1px dashed $border;
+          box-shadow: none;
+        }
+      }
+    }
   .svc-question__content {
     &.svc-question__content--selected {
       border: 1px solid transparent;
@@ -311,8 +319,7 @@ svc-question,
     }
 
     &:not(.svc-question__content--selected):not(:hover) {
-      border: 1px dashed $border;
-      box-shadow: none;
+
     }
 
     border-radius: 0;
