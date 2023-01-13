@@ -1983,8 +1983,8 @@ export class CreatorBase extends Base
     }
   }
 
-  protected convertQuestion(obj: Survey.Question, className: string) {
-    var newQuestion = QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
+  protected convertQuestion(obj: Question, className: string): Question {
+    var newQuestion = <Question>QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -2984,7 +2984,8 @@ export class CreatorBase extends Base
   public convertCurrentQuestion(newType: string) {
     var el = this.selectedElement;
     if (!el || el.getType() === newType) return;
-    if (SurveyHelper.getObjectType(el) !== ObjType.Question) return;
+    const objType = SurveyHelper.getObjectType(el);
+    if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
     el = this.convertQuestion(<Survey.Question>el, newType);
     this.selectElement(el, null, "#convertTo button");
   }
