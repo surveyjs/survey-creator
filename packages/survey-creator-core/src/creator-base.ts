@@ -2958,10 +2958,10 @@ export class CreatorBase extends Base
         if (isSuccess) {
           this.setState("saved");
         } else {
-          if (this.showErrorOnFailedSave) {
-            this.notify(this.getLocString("ed.saveError"));
-          }
           this.setState("modified");
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"), "error");
+          }
         }
       });
     }

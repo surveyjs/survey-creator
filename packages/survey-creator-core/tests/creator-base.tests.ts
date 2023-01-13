@@ -2961,6 +2961,32 @@ test("Creator state, change the same property, isAutoSave=false", () => {
   question.title = "Title 2";
   expect(creator.state).toEqual("modified");
 });
+test("Creator notify state, change the same property, isAutoSave=false", () => {
+  let notifierLog = "";
+  const creator = new CreatorTester();
+  creator.notify = (msg, type) => {
+    notifierLog += msg;
+    if(type) {
+      notifierLog += " - " + type;
+    }
+    notifierLog += (", ");
+  };
+
+  creator.saveSurveyFunc = function (no: number, doSaveCallback: (no: number, isSuccess: boolean) => void) {
+    doSaveCallback(no, false);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  expect(notifierLog).toBe("");
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(creator.state).toEqual("modified");
+  expect(notifierLog).toBe("Modified, ");
+  notifierLog = "";
+  creator.doSaveFunc();
+  expect(creator.state).toEqual("modified");
+  expect(notifierLog).toBe("Saving, Modified, Error! Editor content is not saved. - error, ");
+});
 test("Creator state, change the same property, isAutoSave=true", () => {
   const creator = new CreatorTester();
   creator.isAutoSave = true;
