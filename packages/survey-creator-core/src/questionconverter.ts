@@ -1,4 +1,5 @@
-import * as Survey from "survey-core";
+import { SurveyElement, QuestionSelectBase, QuestionFactory,
+  Serializer, PanelModelBase, Question, Helpers, CustomWidgetCollection } from "survey-core";
 import { QuestionConvertMode, settings } from "./creator-settings";
 import { IQuestionToolboxItem, QuestionToolbox } from "./toolbox";
 
@@ -28,17 +29,17 @@ export class QuestionConverter {
     return !!res ? res : [];
   }
   public static convertObject(
-    obj: Survey.Question,
+    obj: Question,
     convertToClass: string,
     defaultJSON: any = null
-  ): Survey.Question {
+  ): Question {
     if (!obj || !obj.parent || convertToClass == obj.getType()) return null;
     let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
-    var newQuestion = Survey.QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
+    var newQuestion = QuestionFactory.Instance.createQuestion(convertToClass, obj.name);
     if(!newQuestion) {
-      newQuestion = Survey.Serializer.createClass(convertToClass, {});
+      newQuestion = Serializer.createClass(convertToClass, {});
     }
-    if (newQuestion instanceof Survey.QuestionSelectBase && questionDefaultSettings?.choices) newQuestion.choices = null;
+    if (newQuestion instanceof QuestionSelectBase && questionDefaultSettings?.choices) newQuestion.choices = null;
     newQuestion.name = obj.name;
     const json = newQuestion.toJSON();
     const qJson = obj.toJSON();
@@ -47,71 +48,93 @@ export class QuestionConverter {
     }
     QuestionConverter.updateJSON(json, convertToClass, obj.getType(), defaultJSON);
     newQuestion.fromJSON(json);
-    var panel = <Survey.PanelModelBase>obj.parent;
+    var panel = <PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
     (<any>panel).isConverting = true;
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
     delete (<any>panel).isConverting;
     newQuestion.onSurveyLoad();
-    return <Survey.Question>newQuestion;
+    return newQuestion;
   }
-  private static updateJSON(json: any, convertToClass: string, convertFromClass: string, defaultJSON: any): any {
-    let questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
-    if(questionDefaultSettings) {
-      if(convertToClass === "image" && !json.imageLink) {
-        json.imageLink = questionDefaultSettings.imageLink;
+  private static updateJSON(json: any, convertToClass: string, convertFromClass: string, defaultJSON: any): void {
+    QuestionConverter.updateJSONFromQuestionDefaultSettings(json, convertToClass, defaultJSON);
+    QuestionConverter.updateJSONForRating(json, convertToClass, defaultJSON);
+    QuestionConverter.updateJSONForMatrices(json, convertToClass, convertFromClass);
+    QuestionConverter.updateJSONForPanels(json, convertToClass, convertFromClass);
+  }
+  private static updateJSONFromQuestionDefaultSettings(json: any, convertToClass: string, defaultJSON: any): void {
+    const questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
+    if(!questionDefaultSettings) return;
+    if(convertToClass === "image" && !json.imageLink) {
+      json.imageLink = questionDefaultSettings.imageLink;
+    }
+    if(convertToClass === "imagepicker" ||
+      convertToClass === "dropdown" ||
+      convertToClass === "checkbox" ||
+      convertToClass === "radiogroup" ||
+      convertToClass === "ranking"
+    ) {
+      if(!json.choices) {
+        json.choices = questionDefaultSettings.choices;
       }
-      if(convertToClass === "imagepicker" ||
-        convertToClass === "dropdown" ||
-        convertToClass === "checkbox" ||
-        convertToClass === "radiogroup" ||
-        convertToClass === "ranking"
-      ) {
-        if(!json.choices) {
-          json.choices = questionDefaultSettings.choices;
-        }
-      } else {
-        for(var key in questionDefaultSettings) {
-          if(!defaultJSON || !defaultJSON[key]) {
-            json[key] = questionDefaultSettings[key];
-          }
+    } else {
+      for(var key in questionDefaultSettings) {
+        if(!defaultJSON || !defaultJSON[key]) {
+          json[key] = questionDefaultSettings[key];
         }
       }
     }
-    if(convertToClass === "rating" && json.choices) {
-      if(!defaultJSON || !defaultJSON.choices ||
-        !Survey.Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
-        json.rateValues = json.choices;
-      }
-    }
-    if(Survey.Serializer.isDescendantOf(convertToClass, "matrix") &&
-       Survey.Serializer.isDescendantOf(convertFromClass, "matrixdropdownbase") &&
+  }
+  private static updateJSONForMatrices(json: any, convertToClass: string, convertFromClass: string): void {
+    if(Serializer.isDescendantOf(convertToClass, "matrix") &&
+       Serializer.isDescendantOf(convertFromClass, "matrixdropdownbase") &&
        json.columns) {
       json.columns = json.columns.map(col => col.title ? { value: col.name, text: col.title } : col.name);
     }
-    if(Survey.Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
-       Survey.Serializer.isDescendantOf(convertFromClass, "matrix") &&
+    if(Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
+       Serializer.isDescendantOf(convertFromClass, "matrix") &&
        json.columns) {
       json.columns = json.columns.map(col => <any>{ name: col.value || col, title: col.text });
     }
-    else {
-      if(json.rateValues) {
-        json.choices = json.rateValues;
+  }
+  private static updateJSONForRating(json: any, convertToClass: string, defaultJSON: any): void {
+    if(convertToClass === "rating" && json.choices) {
+      if(!defaultJSON || !defaultJSON.choices ||
+        !Helpers.isArraysEqual(defaultJSON.choices, json.choices)) {
+        json.rateValues = json.choices;
       }
+    }
+    if(!!json.rateValues && !Serializer.isDescendantOf(convertToClass, "matrixdropdownbase")) {
+      json.choices = json.rateValues;
+    }
+  }
+  private static updateJSONForPanels(json: any, convertToClass: string, convertFromClass: string): void {
+    if(Serializer.isDescendantOf(convertToClass, "paneldynamic") &&
+       Serializer.isDescendantOf(convertFromClass, "panel") &&
+       json.elements) {
+      json.templateElements = json.elements;
+      delete json.elements;
+    }
+    if(Serializer.isDescendantOf(convertToClass, "panel") &&
+       Serializer.isDescendantOf(convertFromClass, "paneldynamic") &&
+       json.templateElements) {
+      json.elements = json.templateElements;
+      delete json.templateElements;
     }
   }
 }
-
 function getAllQuestionTypes(className: string, includeCurrent: boolean = false): Array<string> {
-  var classes = Survey.Serializer.getChildrenClasses("question", true);
+  if(className === "panel") return includeCurrent ? ["panel", "paneldynamic"] : ["paneldynamic"];
+  var classes = Serializer.getChildrenClasses("question", true);
   var res = [];
   for (var i = 0; i < classes.length; i++) {
     if (includeCurrent || classes[i].name !== className) {
       res.push(classes[i].name);
     }
   }
-  const widgets = Survey.CustomWidgetCollection.Instance.widgets;
+  if(className === "paneldynamic") res.push("panel");
+  const widgets = CustomWidgetCollection.Instance.widgets;
   for(var i = 0; i < widgets.length; i ++) {
     if (includeCurrent || widgets[i].name !== className) {
       res.push(widgets[i].name);
@@ -121,7 +144,7 @@ function getAllQuestionTypes(className: string, includeCurrent: boolean = false)
 }
 
 function createDefaultQuestionConverterItems() {
-  var classes = Survey.Serializer.getChildrenClasses("selectbase", true);
+  var classes = Serializer.getChildrenClasses("selectbase", true);
   for (var i = 0; i < classes.length; i++) {
     for (var j = 0; j < classes.length; j++) {
       if (i == j) continue;

@@ -14,7 +14,9 @@ import {
   QuestionMatrixModel,
   Serializer,
   ElementFactory,
-  QuestionFactory
+  QuestionFactory,
+  PanelModel,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/creator-settings";
@@ -91,6 +93,16 @@ test("Allow to convert to all question types", () => {
     "comment",
     "text"
   ]);
+  expect(classes).toHaveLength(2);
+});
+test("Allow to convert to paneldynamic from panel and back", () => {
+  let classes = QuestionConverter.getConvertToClasses("paneldynamic", ["text", "checkbox", "panel", "paneldynamic"]);
+  expect(classes).toHaveLength(3);
+  classes = QuestionConverter.getConvertToClasses("paneldynamic", ["text", "checkbox", "panel", "paneldynamic"], true);
+  expect(classes).toHaveLength(4);
+  classes = QuestionConverter.getConvertToClasses("panel", ["text", "checkbox", "panel", "paneldynamic"]);
+  expect(classes).toHaveLength(1);
+  classes = QuestionConverter.getConvertToClasses("panel", ["text", "checkbox", "panel", "paneldynamic"], true);
   expect(classes).toHaveLength(2);
 });
 test("Convert to custom component", () => {
@@ -313,4 +325,30 @@ test("Convert matrix to matrix dynamic and back", () => {
   expect(q3.columns[0].value).toEqual("col1");
   expect(q3.columns[1].value).toEqual("col2");
   expect(q3.columns[1].text).toEqual("Column 2");
+});
+test("Convert panel to panel dynamic and back", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "panel",
+        name: "panel",
+        title: "Panel",
+        elements: [
+          { type: "text", name: "q1" },
+          { type: "text", name: "q2" },
+        ]
+      }
+    ]
+  });
+  const panel1 = <PanelModel>survey.getPanelByName("panel");
+  const q1 = <QuestionPanelDynamicModel>QuestionConverter.convertObject(panel1, "paneldynamic");
+  expect(q1.getType()).toEqual("paneldynamic");
+  expect(q1.title).toEqual("Panel");
+  expect(q1.templateElements).toHaveLength(2);
+  expect(q1.templateElements[1].name).toEqual("q2");
+  const panel2 = <PanelModel>QuestionConverter.convertObject(q1, "panel");
+  expect(panel2.getType()).toEqual("panel");
+  expect(panel2.title).toEqual("Panel");
+  expect(panel2.elements).toHaveLength(2);
+  expect(panel2.elements[0].name).toEqual("q1");
 });

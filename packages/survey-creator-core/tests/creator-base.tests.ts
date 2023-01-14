@@ -1589,7 +1589,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    },]
+    }, ]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -2177,6 +2177,34 @@ test("ConvertTo, show the current question type selected", (): any => {
   expect(list.selectedItem.id).toEqual("radiogroup");
   creator.convertCurrentQuestion("radiogroup");
   expect((<any>creator.selectedElement).id).toEqual(question.id);
+});
+test("ConvertTo, show it for a panel", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel" }
+    ]
+  };
+  const panel = creator.survey.getPanelByName("panel");
+  creator.selectElement(panel);
+
+  const panelModel = new QuestionAdornerViewModel(
+    creator,
+    panel,
+    undefined
+  );
+  const items = panelModel.getConvertToTypesActions();
+  expect(items).toHaveLength(2);
+  expect(items[0].id).toEqual("panel");
+  expect(items[1].id).toEqual("paneldynamic");
+  const popup = panelModel.getActionById("convertTo").popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  expect(list.selectedItem).toBeTruthy();
+  expect(list.selectedItem.id).toEqual("panel");
+  creator.convertCurrentQuestion("paneldynamic");
+  expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
 test("Has one item type in convertTo", (): any => {
   CustomWidgetCollection.Instance.add({
@@ -2960,6 +2988,32 @@ test("Creator state, change the same property, isAutoSave=false", () => {
   expect(creator.state).toEqual("saved");
   question.title = "Title 2";
   expect(creator.state).toEqual("modified");
+});
+test("Creator notify state, change the same property, isAutoSave=false", () => {
+  let notifierLog = "";
+  const creator = new CreatorTester();
+  creator.notify = (msg, type) => {
+    notifierLog += msg;
+    if(type) {
+      notifierLog += " - " + type;
+    }
+    notifierLog += (", ");
+  };
+
+  creator.saveSurveyFunc = function (no: number, doSaveCallback: (no: number, isSuccess: boolean) => void) {
+    doSaveCallback(no, false);
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  expect(creator.state).toBeFalsy();
+  expect(notifierLog).toBe("");
+  const question = creator.survey.getAllQuestions()[0];
+  question.title = "Title 1";
+  expect(creator.state).toEqual("modified");
+  expect(notifierLog).toBe("Modified, ");
+  notifierLog = "";
+  creator.doSaveFunc();
+  expect(creator.state).toEqual("modified");
+  expect(notifierLog).toBe("Saving, Modified, Error! Editor content is not saved. - error, ");
 });
 test("Creator state, change the same property, isAutoSave=true", () => {
   const creator = new CreatorTester();

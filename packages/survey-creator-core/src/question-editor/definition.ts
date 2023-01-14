@@ -235,8 +235,8 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "closeOnSelect",
         "placeholder",
-        { name: "searchEnabled", tab: "layout" },
-        { name: "hideSelectedItems", tab: "layout" },
+        { name: "searchEnabled", tab: "choices" },
+        { name: "hideSelectedItems", tab: "choices" },
         { name: "allowClear", tab: "choices" }
       ]
     },

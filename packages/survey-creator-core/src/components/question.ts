@@ -283,10 +283,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   protected buildActions(items: Array<Action>) {
     super.buildActions(items);
     let element = this.surveyElement;
-    if (!element.isPanel) {
-      items.push(this.createConverToAction());
-    }
-
+    items.push(this.createConverToAction());
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&
