@@ -605,6 +605,7 @@ export var enStrings = {
     valuePropertyName: "Value property name",
     searchEnabled: "Enable search",
     hideSelectedItems: "Hide selected items",
+    closeOnSelect: "Close the dropdown after selection",
     signatureWidth: "Signature width",
     signatureHeight: "Signature height",
     verticalAlign: "Vertical alignment",
