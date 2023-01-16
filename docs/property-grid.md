@@ -479,4 +479,4 @@ const surveyJson = {
 }
 ```
 
-[View Demo](https://surveyjs.io/form-library/examples/condition-customproperty/ (linkstyle))
+[View Demo](https://surveyjs.io/form-library/examples/condition-customproperty/ (linkStyle))

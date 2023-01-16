@@ -255,7 +255,7 @@ PropertyGridEditorCollection.register({
 
 The following demo shows how to use the [React Select](https://react-select.com/home) control as a drop-down editor for a survey question.
 
-[View Demo](https://surveyjs.io/survey-creator/examples/react-select/ (linkstyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/react-select/ (linkStyle))
 
 ## Further Reading
 

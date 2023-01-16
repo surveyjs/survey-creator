@@ -19,7 +19,7 @@ If you want to change the standard question UI, then it is better to modify [CSS
 We have several [built-in custom widgets](https://surveyjs.io/form-library/examples/custom-widget-datepicker/jquery), that we have created for you. Please note, we are using third-party libraries. If there is a bug or you need a new functionality from a third-party library, that we use in our custom widget, then please contact authors of these libraries.
 [View the 'surveyjs-widgets' library source code on GitHub](https://github.com/surveyjs/custom-widgets)
 
-[View Demo](https://surveyjs.io/survey-creator/examples/customwidgets/ (linkstyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/customwidgets/ (linkStyle))
 
 <div id="simplewidget"></div>
 
