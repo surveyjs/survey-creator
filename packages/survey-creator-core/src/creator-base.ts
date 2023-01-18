@@ -46,8 +46,7 @@ import { TabTestPlugin } from "./components/tabs/test-plugin";
 import { SurveyLogic } from "./components/tabs/logic";
 import { TabTranslationPlugin } from "./components/tabs/translation-plugin";
 import { TabLogicPlugin } from "./components/tabs/logic-plugin";
-import { defaultV2Css } from "survey-core";
-import { Notifier } from "./components/notifier";
+import { defaultV2Css, Notifier } from "survey-core";
 import { UndoRedoManager } from "./plugins/undo-redo/undo-redo-manager";
 import { ignoreUndoRedo, UndoRedoPlugin, undoRedoTransaction } from "./plugins/undo-redo";
 import { TabDesignerPlugin } from "./components/tabs/designer-plugin";
@@ -1408,11 +1407,11 @@ export class CreatorBase extends Base
       allow: true
     };
     this.onPageAdding.fire(this, options);
-    if(!options.allow) {
+    if (!options.allow) {
       return null;
     }
-    if(beforeAdd !== undefined) {
-      if(!beforeAdd()) {
+    if (beforeAdd !== undefined) {
+      if (!beforeAdd()) {
         return;
       }
     }
@@ -1422,7 +1421,7 @@ export class CreatorBase extends Base
     } else {
       this.survey.addPage(page);
     }
-    if(changeSelection) {
+    if (changeSelection) {
       this.selectElement(page);
     }
     return page;
@@ -1947,7 +1946,13 @@ export class CreatorBase extends Base
   }
   public onStateChanged: CreatorEvent = new CreatorEvent();
 
-  notifier = new Notifier();
+  notifier = new Notifier({
+    root: "svc-notifier",
+    info: "svc-notifier--info",
+    error: "svc-notifier--error",
+    success: "svc-notifier--success",
+    button: "",
+  });
 
   public setModified(options: any = null): void {
     this.setState("modified");
@@ -2045,7 +2050,7 @@ export class CreatorBase extends Base
       this.addNewPageIntoSurvey();
     }
     var parent: IPanel = this.currentPage;
-    if(this.pageEditMode === "bypage") {
+    if (this.pageEditMode === "bypage") {
       const desigerTab = this.getPlugin("designer").model as any;
       const pagesController = desigerTab.pagesController;
       parent = pagesController.page2Display;

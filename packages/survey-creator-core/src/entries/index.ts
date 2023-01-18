@@ -63,7 +63,6 @@ export * from "../utils/events";
 export * from "../utils/utils";
 export * from "../question-editor/definition";
 export * from "../survey-helper";
-export * from "../components/notifier";
 export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";

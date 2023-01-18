@@ -8,6 +8,7 @@ import {
   SurveyModel
 } from "survey-core";
 import {
+  NotifierComponent,
   SurveyActionBar,
   ReactElementFactory,
   ReactQuestionFactory,
@@ -21,7 +22,6 @@ import {
   ITabbedMenuItem
 } from "survey-creator-core";
 import { TabbedMenuComponent } from "./TabbedMenu";
-import { NotifierComponent } from "./Notifier";
 import { SvgBundleComponent } from "./SvgBundle";
 
 interface ISurveyCreatorComponentProps {
@@ -111,10 +111,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
             {this.renderSidebar()}
           </div>
           {licenseBanner}
-          <NotifierComponent
-            creator={creator}
-            notifier={creator.notifier}
-          ></NotifierComponent>
+          <NotifierComponent notifier={creator.notifier}></NotifierComponent>
         </div>
       </div>
     );
