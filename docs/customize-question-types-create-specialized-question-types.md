@@ -51,7 +51,6 @@ This approach gives you the following advantages:
 - End users cannot break the functionality because the Property Grid hides the `questionJSON` object properties.
 - If you modify the question configuration, changes automatically apply to every instance of this question.
 - A cleaner JSON schema:
-
   ```json
   {
     "type": "country",
