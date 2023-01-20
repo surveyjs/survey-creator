@@ -189,13 +189,11 @@ export class QuestionToolbox
     useDefaultCategories = false
   ) {
     super();
-    this.createDefaultItems(supportedQuestions);
-    if (useDefaultCategories) {
-      let defaultCategories = this.getDefaultCategories();
-      this.showTitleOnCategoryChange = false;
-      this.changeCategories(defaultCategories);
-      this.showTitleOnCategoryChange = true;
-    }
+    this.createDefaultItems(supportedQuestions, useDefaultCategories);
+    this.initDotsItem();
+  }
+
+  private initDotsItem() {
     this.dotsItem.popupModel.horizontalPosition = "right";
     this.dotsItem.popupModel.verticalPosition = "top";
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
@@ -210,15 +208,17 @@ export class QuestionToolbox
     };
     this.dotsItem.popupModel.cssClass = "svc-toolbox-popup";
   }
-  private getDefaultCategories() {
-    let categories = [];
+  private getDefaultQuestionCategories() {
+    const questionCategoryMap = {};
     Object.keys(QuestionToolbox.defaultCategories).forEach((key) => {
       const cat = QuestionToolbox.defaultCategories[key];
       cat.forEach((name) => {
-        if (!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) categories.push({ name: name, category: getLocString("ed." + key) });
+        if (!this.supportedQuestions || this.supportedQuestions.indexOf(name) != -1) {
+          questionCategoryMap[name] = getLocString("ed." + key);
+        }
       });
     });
-    return categories;
+    return questionCategoryMap;
   }
 
   private onActiveCategoryChanged(newValue: string) {
@@ -488,6 +488,7 @@ export class QuestionToolbox
         toolboxItem.category = item.category;
       }
     }
+    this.updateShowCategoryTitles();
     this.onItemsChanged();
   }
 
@@ -572,23 +573,19 @@ export class QuestionToolbox
     return null;
   }
   protected onItemsChanged() {
-    this.showCategoryTitles = this.showTitleOnCategoryChange;
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
     for (var i = 0; i < this.actions.length; i++) {
       var item = this.actions[i];
-      var categoryName = item.category
-        ? item.category
-        : editorLocalization.getString("ed.toolboxGeneralCategory");
+      var categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
       if (!categoriesHash[categoryName]) {
         var category = this.createCategory();
         category.name = categoryName;
-        category.collapsed =
-          categoryName !== prevActiveCategory &&
-          !this.keepAllCategoriesExpanded;
+        category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
+        this.updateShowCategoryTitles();
       }
       categoriesHash[categoryName].items.push(item);
     }
@@ -645,9 +642,12 @@ export class QuestionToolbox
     });
     this.onItemsChanged();
   }
-  private createDefaultItems(supportedQuestions: Array<string>) {
+  private createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
     this.clearItems();
     var questions = this.getQuestionTypes(supportedQuestions);
+
+    let defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
+
     for (var i = 0; i < questions.length; i++) {
       var name = questions[i];
       var question = ElementFactory.Instance.createElement(name, "q1");
@@ -664,7 +664,7 @@ export class QuestionToolbox
         tooltip: title,
         json: json,
         isCopied: false,
-        category: ""
+        category: (defaultCategories[name] || "")
       };
       this.actions.push(this.getActionByItem(item));
     }
@@ -766,6 +766,11 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
+  }
+  private updateShowCategoryTitles(): void {
+    if(this.showTitleOnCategoryChange) {
+      this.showCategoryTitles = true;
+    }
   }
 
   public dispose() { }

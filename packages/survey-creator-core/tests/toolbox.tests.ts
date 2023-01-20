@@ -111,18 +111,10 @@ test("toolbox default categories calculator", (): any => {
     "dropdown",
     "matrix"
   ]);
-  expect(toolbox["getDefaultCategories"]()).toEqual([{
-    "category": "Choice Questions",
-    "name": "radiogroup",
-  },
-  {
-    "category": "Choice Questions",
-    "name": "dropdown",
-  },
-  {
-    "category": "Matrix Questions",
-    "name": "matrix",
-  }]);
+  expect(toolbox["getDefaultQuestionCategories"]()).toEqual({
+    "radiogroup": "Choice Questions",
+    "dropdown": "Choice Questions",
+    "matrix": "Matrix Questions" });
 });
 
 test("toolbox default categories actions separator", (): any => {
@@ -177,6 +169,14 @@ test("toolbox showCategoryTitles shold be set on first category change", (): any
 
   toolbox.changeCategories([]);
   expect(toolbox.showCategoryTitles).toBeTruthy();
+});
+
+test("toolbox showCategoryTitles not change if add item", (): any => {
+  var toolbox = new QuestionToolbox([], undefined, true);
+  expect(toolbox.showCategoryTitles).toBeFalsy();
+
+  toolbox.addItem(<any>{ name: "countries" });
+  expect(toolbox.showCategoryTitles).toBeFalsy();
 });
 
 test("toolbox load custom/composite questions", (): any => {
