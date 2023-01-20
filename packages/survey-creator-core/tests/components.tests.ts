@@ -1,4 +1,5 @@
-import { ItemValue, QuestionCheckboxModel, QuestionImageModel, QuestionRatingModel, Serializer, settings } from "survey-core";
+import { ImageItemValue, ItemValue, Model, QuestionCheckboxModel, QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings } from "survey-core";
+import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
@@ -367,4 +368,39 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values"
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.element.rateMax).toBe(5);
   expect(ratingAdorner.element.rateValues.length).toBe(3);
+});
+
+test("ImageItemValueWrapperViewModel raises onItemValueAdded", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1" }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const imegItem = new ImageItemValue("item1");
+  const imageItemAdorner = new ImageItemValueWrapperViewModel(
+    creator,
+    question,
+    imegItem,
+    undefined,
+    undefined as any
+  );
+
+  let callCount = 0;
+  creator.onItemValueAdded.add(() => {
+    callCount++;
+  });
+  creator.onUploadFile.add((s, o) => {
+    o.callback("success", {});
+  });
+
+  imageItemAdorner["isChoosingNewFile"] = true;
+  imageItemAdorner.uploadFiles([{}]);
+
+  expect(callCount).toBe(1);
+  expect(imageItemAdorner["isChoosingNewFile"]).toBeFalsy();
+
+  imageItemAdorner.uploadFiles([{}]);
+
+  expect(callCount).toBe(1);
+  expect(imageItemAdorner["isChoosingNewFile"]).toBeFalsy();
 });

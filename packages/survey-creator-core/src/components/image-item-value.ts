@@ -4,7 +4,7 @@ import { ItemValueWrapperViewModel } from "./item-value";
 
 require("./image-item-value.scss");
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
-
+  private isChoosingNewFile = false;
   @property({ defaultValue: false }) isFileDragging: boolean;
 
   constructor(creator: CreatorBase, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, public itemsRoot: HTMLElement) {
@@ -41,12 +41,17 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       this.question.choices.push(itemValue);
       const nextValue = this.creator.getNextItemValue(this.question);
       this.item.value = nextValue;
+      if (this.isChoosingNewFile && this.creator) {
+        this.creator.onItemValueAddedCallback(this.question, "choices", itemValue, this.question.choices);
+        this.isChoosingNewFile = false;
+      }
     });
   }
 
   chooseNewFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];
     model.creator.chooseFiles(fileInput, (files: File[]) => {
+      this.isChoosingNewFile = true;
       model.uploadFiles(files);
     });
   }
