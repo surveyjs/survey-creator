@@ -47,7 +47,6 @@ export * from "../toolbox/adaptive-toolbox";
 export * from "../toolbox/toolbox-item";
 export * from "../toolbox/toolbox-tool";
 export * from "../header/logo-image";
-export * from "../notifier";
 export * from "../tabs/translation-line-skeleton";
 export * from "../utils/survey-widget";
 export * from "../utils/utils";

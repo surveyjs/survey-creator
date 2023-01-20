@@ -43,7 +43,6 @@ export * from "./adorners/matrix-cell.component";
 export * from "./question-editor.component";
 export * from "./adorners/cell-question-dropdown.component";
 export * from "./row.component";
-export * from "./notifier.component";
 export * from "./tabs/designer/designer-pages.component";
 export * from "./tabs/designer/designer-survey.component";
 export * from "./adorners/cell-question.component";
