@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -13,6 +13,7 @@ export abstract class StringItemsNavigatorBase {
   protected abstract addNewItem(items: any, text?: string): void;
   protected abstract getItemsPropertyName(items: any): string;
   private static createItemsNavigator(question: any): StringItemsNavigatorBase {
+    if (question instanceof QuestionImagePickerModel) return null;
     if (question instanceof QuestionMultipleTextModel) return new StringItemsNavigatorMultipleText(question);
     if (question instanceof QuestionMatrixDropdownModel) return new StringItemsNavigatorMatrixDropdown(question);
     if (question instanceof QuestionMatrixDynamicModel) return new StringItemsNavigatorMatrixDynamic(question);
@@ -70,7 +71,7 @@ export abstract class StringItemsNavigatorBase {
     })
   }
 
-  public static setQuestion(questionAdorner: QuestionAdornerViewModel): void {
+  public static setQuestion(questionAdorner: QuestionAdornerViewModel): boolean {
     const question = questionAdorner.element as Question;
     const navigator = StringItemsNavigatorBase.createItemsNavigator(question);
     if (navigator) {
@@ -97,6 +98,7 @@ export abstract class StringItemsNavigatorBase {
         });
       })
     }
+    return !!navigator;
   }
 }
 

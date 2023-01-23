@@ -1,4 +1,4 @@
-import { generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
+import { explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
@@ -802,4 +802,27 @@ test("Undo after new item add", async (t) => {
     .expect(Selector(".svc-item-value-controls__remove").count).eql(4)
     .click(Selector("button[title=Undo]"))
     .expect(Selector(".svc-item-value-controls__remove").count).eql(3);
+});
+test("Check string editor focus on imagepicker caption click", async (t) => {
+  await explicitErrorHandler();
+  await setJSON({
+    "elements": [
+      {
+        "type": "imagepicker",
+        "name": "question1",
+        "choices": [
+          {
+            "value": "lion",
+            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          }
+        ],
+        "showLabel": true
+      }]
+  });
+
+  const svStringSelector = Selector(".sv-string-editor").withText("lion");
+
+  await t
+    .click(svStringSelector)
+    .expect(svStringSelector.focused).ok();
 });
