@@ -1,4 +1,5 @@
-<div data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }, attr: attributes, css: getRootCss()">
+<div
+  data-bind="event: { pointerdown: function(model, event) { return onPointerDown(event); } }, attr: attributes, css: getRootCss()">
   <div class="svc-image-item-value-wrapper__ghost" data-bind="style: getNewItemStyle()"></div>
 
   <div class="svc-image-item-value-wrapper__content">
