@@ -3583,3 +3583,12 @@ test("PageAdorner: check Add new question creates property grid only once", (): 
   pageAdornerModel.addNewQuestion(null, null);
   expect(log).toBe("->changed");
 });
+test("getNextItemValue test", (): any => {
+  let creator = new CreatorTester();
+  let question = new QuestionCheckboxModel("q");
+  question.choices = ["a", "b"];
+  expect(creator.getNextItemValue(question)).toBe("Item 1");
+
+  question.choices = ["a1", "a2"];
+  expect(creator.getNextItemValue(question)).toBe("a3");
+});

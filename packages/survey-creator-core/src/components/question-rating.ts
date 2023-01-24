@@ -35,7 +35,7 @@ export class QuestionRatingAdornerViewModel extends Base {
       const values = model.element.rateValues.map(function (item) {
         return item.value;
       });
-      const itemText = surveyLocalization.getString("choices_Item");
+      const itemText = model.creator.getChoicesItemBaseTitle();
       nextValue = getNextValue(itemText, values);
 
       const itemValue = new ItemValue(nextValue);

@@ -3086,8 +3086,13 @@ export class CreatorBase extends Base
     this.onElementAllowOperations.fire(this, options);
     return options;
   }
+
+  public getChoicesItemBaseTitle() {
+    return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
+  }
+
   public getNextItemValue(question: Survey.QuestionSelectBase) {
-    const itemText = Survey.surveyLocalization.getString("choices_Item");
+    const itemText = this.getChoicesItemBaseTitle();
     const values = question.choices.map((item: Survey.ItemValue) => item.value);
     const nextValue = getNextValue(itemText, values);
     return nextValue;
