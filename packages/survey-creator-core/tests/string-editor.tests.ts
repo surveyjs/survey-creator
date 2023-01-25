@@ -1,5 +1,5 @@
 import { StringEditorConnector, StringItemsNavigatorBase, StringEditorViewModelBase } from "../src/components/string-editor";
-import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel, QuestionCheckboxModel } from "survey-core";
+import { SurveyModel, LocalizableString, Serializer, QuestionMatrixDropdownModel, QuestionSelectBase, ItemValue, QuestionDropdownModel, QuestionRadiogroupModel, QuestionPanelDynamicModel, sanitizeEditableContent, settings, QuestionRatingModel, QuestionMultipleTextModel, QuestionMatrixModel, QuestionCheckboxModel, QuestionTextModel, QuestionMatrixDynamicModel, QuestionImagePickerModel } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
@@ -806,3 +806,13 @@ test("StringEditor multiline paste for matrix questions", (): any => {
   connectorItemRow.onTextChanging.fire(null, { value: "a\nb\r\nc" });
   expect(question.rows.map(c => c.text)).toEqual(["a", "b", "c", "Row 2"]);
 });
+
+test("StringEditor Navigator - supported types", (): any => {
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionTextModel("q") })).toBeFalsy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMultipleTextModel("q") })).toBeTruthy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMatrixDropdownModel("q") })).toBeTruthy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMatrixDynamicModel("q") })).toBeTruthy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMatrixModel("q") })).toBeTruthy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
+  expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
+})

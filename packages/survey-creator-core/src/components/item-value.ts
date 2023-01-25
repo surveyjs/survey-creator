@@ -86,8 +86,9 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   onPointerDown(pointerDownEvent: PointerEvent) {
-    if (this.isBanStartDrag(pointerDownEvent)) return;
+    if (this.isBanStartDrag(pointerDownEvent)) return true;
     this.dragOrClickHelper.onPointerDown(pointerDownEvent);
+    return false;
   }
 
   startDragItemValue = (pointerDownEvent: PointerEvent, currentTarget: any) => {
