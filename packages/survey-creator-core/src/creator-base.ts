@@ -529,7 +529,7 @@ export class CreatorBase extends Base
   public onPropertyGridShowModal: CreatorEvent = new CreatorEvent();
   /**
     * The event is called before rendering a delete button in the Property Grid or in Question Editor.
-    * Obsolete, please use onCollectionItemAllowOperations
+    * @Deprecated Obsolete, please use onCollectionItemAllowOperations
     *- sender the survey creator object that fires the event
     *- options.obj the survey Question
     *- options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
@@ -539,7 +539,7 @@ export class CreatorBase extends Base
   public onCanDeleteItem: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
-   * Obsolete, please use onCollectionItemAllowOperations
+   * @Deprecated Obsolete, please use onCollectionItemAllowOperations
    *- sender the survey creator object that fires the event
    *- options.obj the survey object: Question, Panel, Page or Survey
    *- options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
@@ -551,16 +551,16 @@ export class CreatorBase extends Base
    */
   public onCollectionItemDeleting: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called before rendering a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
-   * You can make detail/edit and remove buttons invsible and/or disable editing.
+   * The event is called before rendering a collection item in a property editor. For example: a column in a column editor, or an item in Choices and so on.
+   * Use this event to prevent a collection item from being edited or removed from a collection. 
    *- sender the survey creator object that fires the event
    *- options.obj the survey object: Question, Panel, Page or Survey
    *- options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
    *- options.propertyName the collection property name
-   *- options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
-   *- options.item the collection item that we are going to delete
-   *- options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
-   *- options.allowEdit a boolean value. It is true by default. Set it false to disable editing.
+   *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
+   *- options.item a target collection item
+   *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
+   *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
   /**
