@@ -231,7 +231,7 @@ test("item value adorner and newItem value", () => {
   question.choices.splice(2, 2);
   expect(question.newItem.value).toEqual(3);
   question.choices = [];
-  expect(question.newItem.value).toEqual("item1");
+  expect(question.newItem.value).toEqual("Item 1");
 });
 
 test("QuestionRatingAdornerViewModel read only mode", () => {

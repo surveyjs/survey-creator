@@ -146,6 +146,7 @@ export var enStrings = {
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "auto",
+    choices_Item: "Item ",
     lg: {
       addNewItem: "Add New Rule",
       empty_tab: "Create a rule to customize the flow of the survey.",
