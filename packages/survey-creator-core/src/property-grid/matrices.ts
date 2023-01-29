@@ -89,6 +89,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.iconName = this.getShowDetailActionIconName(row);
       showDetailAction.showTitle = false;
       showDetailAction.location = "end";
+      showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       showDetailAction.action = () => {
         row.showHideDetailPanelClick();
         showDetailAction.iconName = row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";
@@ -97,6 +98,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       showDetailAction.visible = this.hasPropertiesInDetail;
       row.onDetailPanelShowingChanged = () => {
         showDetailAction.iconName = this.getShowDetailActionIconName(row);
+        showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       };
     }
     this.updateMatixActionsClasses(actions);
@@ -273,9 +275,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!q.options) {
       this.setupUsingOptions(obj, matrix, q.options, prop);
     }
-    if(!!prop.uniquePropertyName) {
+    if (!!prop.uniquePropertyName) {
       const column = matrix.getColumnByName(prop.uniquePropertyName);
-      if(!!column) {
+      if (!!column) {
         column.isUnique = true;
       }
     }
