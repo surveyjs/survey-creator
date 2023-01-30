@@ -25,9 +25,6 @@ export class CreatorTester extends CreatorBase {
     if (!!name) return name;
     return this.selectedElement.getType();
   }
-  public get propertyGrid(): SurveyModel {
-    return this.designerPropertyGrid.survey;
-  }
   public getActionBarItem(id: string): IAction {
     return this.getActionBarItemByActions(this.toolbarItems, id);
   }
