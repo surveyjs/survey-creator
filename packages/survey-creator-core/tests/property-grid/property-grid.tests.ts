@@ -1406,10 +1406,16 @@ test("options.onCollectionItemDeletingCallback", () => {
   var pagesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("pages")
   );
-  var rows = pagesQuestion.visibleRows;
-  expect(pagesQuestion.canRemoveRow(rows[0])).toBeFalsy();
-  expect(pagesQuestion.canRemoveRow(rows[1])).toBeFalsy();
+  const rows = pagesQuestion.visibleRows;
+  expect(pagesQuestion.canRemoveRow(rows[0])).toBeTruthy();
+  expect(pagesQuestion.canRemoveRow(rows[1])).toBeTruthy();
   expect(pagesQuestion.canRemoveRow(rows[2])).toBeTruthy();
+  pagesQuestion.removeRowUI(rows[0]);
+  expect(survey.pages).toHaveLength(3);
+  pagesQuestion.removeRowUI(rows[1]);
+  expect(survey.pages).toHaveLength(3);
+  pagesQuestion.removeRowUI(rows[2]);
+  expect(survey.pages).toHaveLength(2);
 });
 test("options.onCollectionItemAllowingCallback", () => {
   const options = new EmptySurveyCreatorOptions();
@@ -2872,4 +2878,24 @@ test("itemvalue[] property editor + row actions + invisible detail elements", ()
   const actions2 = choicesQuestion2.renderedTable.rowsActions[0];
   expect(actions2).toHaveLength(1);
   SurveyQuestionEditorDefinition.definition["itemvalue[]@choices"].tabs = oldDefinition;
+});
+test("choices and onCollectionItemDeleting", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3];
+  const options = new EmptySurveyCreatorOptions();
+  options.onCollectionItemDeletingCallback = (obj: Base, property: JsonObjectProperty, collection: any, item: Base): boolean => {
+    return collection.indexOf(item) % 2 === 1;
+  };
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const rows = choicesQuestion.visibleRows;
+  expect(choicesQuestion.canRemoveRow(rows[0])).toBeTruthy();
+  expect(choicesQuestion.canRemoveRow(rows[1])).toBeTruthy();
+  expect(choicesQuestion.canRemoveRow(rows[2])).toBeTruthy();
+  choicesQuestion.removeRowUI(rows[0]);
+  expect(question.choices).toHaveLength(3);
+  choicesQuestion.removeRowUI(rows[1]);
+  expect(question.choices).toHaveLength(2);
 });
