@@ -232,3 +232,34 @@ test("tablet size click outside", async (t) => {
   isSidebarOpen = await getSidebarOpen();
   await t.expect(isSidebarOpen).notOk;
 });
+
+test("Focus in Property grid", async (t) => {
+  await setJSON({
+    questions: [
+      {
+        type: "text",
+        name: "test_q"
+      }
+    ]
+  });
+  await t.resizeWindow(820, 1180);
+
+  const getSidebarOpen = ClientFunction(() => { return !!window["creator"].sidebar.flyoutPanelMode; });
+
+  const hideSidebarButton = Selector("[title='Hide Panel']");
+
+  let isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
+
+  await t.click(Selector(".svc-question__adorner"), { offsetX: 5, offsetY: 5 });
+  await t.expect(Selector(".svc-question__adorner button").withText("Settings").visible).ok();
+  await t.click(Selector(".svc-question__adorner button").withText("Settings"));
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).ok;
+  await t.expect(Selector("input").withText("test_q").focused).ok;
+
+  await t.click(hideSidebarButton);
+  isSidebarOpen = await getSidebarOpen();
+  await t.expect(isSidebarOpen).notOk;
+  await t.expect(Selector(".svc-question__content").focused).ok;
+});

@@ -2332,23 +2332,28 @@ export class CreatorBase extends Base
     }
     var selEl: any = this.getSelectedSurveyElement();
     if (oldValue !== element && !!document && !!selEl) {
-      setTimeout(() => {
-        if (focus) {
-          const el = document.getElementById(selEl.id);
-          if (!!el) {
-            el.scrollIntoView({ block: "center" });
-            if (!propertyName && el.parentElement) {
-              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-              elToFocus && elToFocus.focus();
-            }
-          }
-        }
-        if (startEdit) {
-          StringEditorConnector.get((element as Question).locTitle).activateEditor();
-        }
-      }, 100);
+      this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
+    if (!selEl) selEl = this.getSelectedSurveyElement();
+    setTimeout(() => {
+      if (focus) {
+        const el = document.getElementById(selEl.id);
+        if (!!el) {
+          el.scrollIntoView({ block: "center" });
+          if (!propertyName && el.parentElement) {
+            let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+            elToFocus && elToFocus.focus();
+          }
+        }
+      }
+      if (startEdit) {
+        StringEditorConnector.get((element as Question).locTitle).activateEditor();
+      }
+    }, 100);
+  }
+
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
@@ -2365,6 +2370,9 @@ export class CreatorBase extends Base
     const propertyGridTab = this.sidebar.getTabById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
+  }
+  public get propertyGrid(): SurveyModel {
+    return this.designerPropertyGrid.survey;
   }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid

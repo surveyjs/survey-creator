@@ -128,6 +128,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconSize: 16,
         action: () => {
           this.creator.setShowSidebar(true, true);
+          this.creator.propertyGrid.getAllQuestions()[0].focus();
         }
       })
     );
