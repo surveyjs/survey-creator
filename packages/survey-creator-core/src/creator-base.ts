@@ -2338,7 +2338,7 @@ export class CreatorBase extends Base
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     setTimeout(() => {
-      if (focus) {
+      if (focus && !!selEl) {
         const el = document.getElementById(selEl.id);
         if (!!el) {
           el.scrollIntoView({ block: "center" });
@@ -2348,7 +2348,7 @@ export class CreatorBase extends Base
           }
         }
       }
-      if (startEdit) {
+      if (startEdit && !!element) {
         StringEditorConnector.get((element as Question).locTitle).activateEditor();
       }
     }, 100);
