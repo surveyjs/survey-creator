@@ -5,7 +5,7 @@ import {
   QuestionCheckboxModel,
   QuestionSelectBase,
   Serializer,
-  SurveyModel,
+  JsonObjectProperty,
   DragOrClickHelper
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
@@ -55,9 +55,9 @@ export class ItemValueWrapperViewModel extends Base {
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
 
     this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined };
-
+    this.collectionProperty = Serializer.findProperty(question.getType(), this.collectionPropertyName);
     this.creator.onCollectionItemAllowingCallback(question,
-      Serializer.findProperty(question.getType(), this.item.ownerPropertyName),
+      this.collectionProperty,
       question.visibleChoices,
       this.item,
       this.allowItemOperations
@@ -75,6 +75,7 @@ export class ItemValueWrapperViewModel extends Base {
   private allowItemOperations: ICollectionItemAllowOperations;
   private canTouchItems: boolean = true;
   private focusCameFromDown: boolean = false;
+  private collectionProperty: JsonObjectProperty
 
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
@@ -83,6 +84,9 @@ export class ItemValueWrapperViewModel extends Base {
   private updateNewItemValue() {
     if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
+  }
+  private get collectionPropertyName(): string {
+    return !!this.item.ownerPropertyName ? this.item.ownerPropertyName : "choices";
   }
 
   onPointerDown(pointerDownEvent: PointerEvent) {
@@ -147,7 +151,7 @@ export class ItemValueWrapperViewModel extends Base {
     const itemValue = creator.createNewItemValue(question);
     question.choices.push(itemValue);
     this.updateNewItemValue();
-    if (this.creator) this.creator.onItemValueAddedCallback(question, "choices", itemValue, question.choices);
+    if (this.creator) this.creator.onItemValueAddedCallback(question, this.collectionPropertyName, itemValue, question.choices);
     StringEditorConnector.get(itemValue.locText).setAutoFocus();
   }
 
@@ -162,8 +166,10 @@ export class ItemValueWrapperViewModel extends Base {
     ) {
       (<any>model.question).hasSelectAll = false;
     } else {
-      var index = model.question.choices.indexOf(model.item);
-      let indexToFocus = this.findNextElementIndexToRemove(index)
+      const choices = model.question.choices;
+      var index = choices.indexOf(model.item);
+      if(!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
+      var indexToFocus = this.findNextElementIndexToRemove(index);
       model.question.choices.splice(index, 1);
       this.focusNextElementToRemove(indexToFocus);
     }
@@ -171,8 +177,8 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public onFocusOut(event: any): void {
-    this.question["_lastActiveItemValueIndex"] = this.question.choices.indexOf(this.item)
-  };
+    this.question["_lastActiveItemValueIndex"] = this.question.choices.indexOf(this.item);
+  }
 
   private findNextElementIndexToRemove(index) {
     let indexToFocus = 0;
@@ -192,9 +198,9 @@ export class ItemValueWrapperViewModel extends Base {
     setTimeout(() => {
       const el = document.getElementById(this.question.id);
       const buttons = el.querySelectorAll(".svc-item-value-controls__remove");
-      (buttons[index] as HTMLElement)?.focus()
+      (buttons[index] as HTMLElement)?.focus();
     }, 100
-    )
+    );
   }
   private updateIsNew(question: QuestionSelectBase, item: ItemValue) {
     this.isNew = !question.isItemInList(item);

@@ -1,4 +1,5 @@
-import { ImageItemValue, ItemValue, Model, QuestionCheckboxModel, QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings } from "survey-core";
+import { Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
@@ -403,4 +404,28 @@ test("ImageItemValueWrapperViewModel raises onItemValueAdded", () => {
 
   expect(callCount).toBe(1);
   expect(imageItemAdorner["isChoosingNewFile"]).toBeFalsy();
+});
+
+test("remove() and ", () => {
+  const creator = new CreatorTester();
+  let allowRemove = false;
+  creator.onCollectionItemDeletingCallback = (
+    obj: Base,
+    property: JsonObjectProperty,
+    collection: Array<Base>,
+    item: Base
+  ): boolean => {
+    return allowRemove;
+  };
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, question, question.choices[1]);
+  expect(question.choices).toHaveLength(3);
+  newItemAdorner.remove(newItemAdorner);
+  expect(question.choices).toHaveLength(3);
+  allowRemove = true;
+  newItemAdorner.remove(newItemAdorner);
+  expect(question.choices).toHaveLength(2);
 });

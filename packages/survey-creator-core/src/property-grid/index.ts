@@ -801,6 +801,9 @@ export class PropertyGridModel {
     this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
       options.allow = this.getMatrixAllowRemoveRow(options.question, options.row);
     });
+    this.survey.onMatrixRowRemoving.add((sender, options) => {
+      options.allow = this.getMatrixOnRowRemoving(options.question, options.row);
+    });
     this.survey.onMatrixRowAdded.add((sender, options) => {
       this.onMatrixRowAdded(options);
     });
@@ -1056,6 +1059,9 @@ export class PropertyGridModel {
     }
     return (<any>row).allowDeleteRow;
   }
+  private getMatrixOnRowRemoving(question: Question, row: MatrixDynamicRowModel): boolean {
+    return this.options.onCollectionItemDeletingCallback(<any>this.obj, (<any>question).property, question.value, row.editingObj);
+  }
   private getMatrixAllowEditRow(question: Question, row: MatrixDynamicRowModel): boolean {
     if (question.readOnly)
       return false;
@@ -1082,13 +1088,6 @@ export class PropertyGridModel {
       (<any>question).property,
       row
     );
-    res =
-      this.options.onCollectionItemDeletingCallback(
-        <any>this.obj,
-        (<any>question).property,
-        question.value,
-        row.editingObj
-      ) && res;
     return this.options.onCanDeleteItemCallback(
       <any>this.obj,
       row.editingObj,
