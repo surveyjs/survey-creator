@@ -89,9 +89,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
-    let result = this.creator.isElementSelected(this.surveyElement)
-      ? "svc-question__content--selected"
-      : "";
+    let result = typeof this.surveyElement.getType === "function" ? ("svc-question__content--" + this.surveyElement.getType()) : "";
+    if(this.creator.isElementSelected(this.surveyElement)) {
+      result += " svc-question__content--selected";
+    }
 
     if (this.isEmptyElement) {
       result += " svc-question__content--empty";
