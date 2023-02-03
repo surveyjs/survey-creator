@@ -97,12 +97,12 @@ export class UndoRedoController extends Base {
     if (!this.undoRedoManager) return;
     this.undoRedoManager.suspend();
     var options = { canUndo: this.undoRedoManager.canUndo() };
-    this.onBeforeUndo.fire(self, options);
-    this.creator.onBeforeUndo.fire(self, options);
+    this.onBeforeUndo.fire(this.creator, options);
+    this.creator.onBeforeUndo.fire(this.creator, options);
     if (options.canUndo) {
       var item = this.undoRedoManager.undo();
-      this.onAfterUndo.fire(self, { state: item });
-      this.creator.onAfterUndo.fire(self, { state: item });
+      this.onAfterUndo.fire(this.creator, { state: item });
+      this.creator.onAfterUndo.fire(this.creator, { state: item });
       this.selectElementAfterUndo();
     }
     this.undoRedoManager.resume();
@@ -110,12 +110,12 @@ export class UndoRedoController extends Base {
   public redo() {
     if (!this.undoRedoManager) return;
     const options = { canRedo: this.undoRedoManager.canRedo() };
-    this.onBeforeRedo.fire(self, options);
-    this.creator.onBeforeRedo.fire(self, options);
+    this.onBeforeRedo.fire(this.creator, options);
+    this.creator.onBeforeRedo.fire(this.creator, options);
     if (options.canRedo) {
       const item = this.undoRedoManager.redo();
-      this.onAfterRedo.fire(self, { state: item });
-      this.creator.onAfterRedo.fire(self, { state: item });
+      this.onAfterRedo.fire(this.creator, { state: item });
+      this.creator.onAfterRedo.fire(this.creator, { state: item });
       this.selectElementAfterUndo();
     }
   }
