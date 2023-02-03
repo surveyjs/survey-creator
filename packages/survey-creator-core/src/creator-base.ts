@@ -1705,18 +1705,22 @@ export class CreatorBase extends Base
     }
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
-    if (this.isObjQuestion(obj)) {
-      if (propertyName === "name" && !obj["valueName"]) {
-        this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
-      }
-      if (propertyName === "valueName") {
-        const oldName = !!oldValue ? oldValue : obj["name"];
-        const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
-        this.updateLogicOnQuestionNameChanged(oldName, newName);
-      }
+    if (!this.isObjQuestion(obj)) return;
+    if (propertyName === "name" && !obj["valueName"]) {
+      this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
     }
-    if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
-      this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    if (propertyName === "valueName") {
+      const oldName = !!oldValue ? oldValue : obj["name"];
+      const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+      this.updateLogicOnQuestionNameChanged(oldName, newName);
+    }
+    if (propertyName === "name") {
+      if(obj.isDescendantOf("matrixdropdowncolumn")) {
+        this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+      }
+      if(obj.isDescendantOf("selectbase")) {
+        this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
+      }
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
@@ -1775,6 +1779,14 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
     this.surveyLogicRenaming = false;
+  }
+  private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
+    const questions = this.survey.getAllQuestions();
+    questions.forEach(q => {
+      if(q.choicesFromQuestion === oldName) {
+        q.choicesFromQuestion = newName;
+      }
+    });
   }
   public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");
