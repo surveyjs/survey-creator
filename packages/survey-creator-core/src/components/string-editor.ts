@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -185,10 +185,10 @@ export class StringEditorConnector extends Base {
   public activateEditor(): void {
     this.onDoActivate.fire(this.locString, {});
   }
-  public onDoActivate: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
-  public onTextChanging: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
-  public onEditComplete: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
-  public onBackspaceEmptyString: SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any> = new SurveyEvent<(sender: StringEditorViewModelBase, options: any) => any, any>();
+  public onDoActivate: EventBase<LocalizableString, any> = new EventBase<LocalizableString, any>();
+  public onTextChanging: EventBase<StringEditorViewModelBase, any> = new EventBase<StringEditorViewModelBase, any>();
+  public onEditComplete: EventBase<StringEditorViewModelBase, any> = new EventBase<StringEditorViewModelBase, any>();
+  public onBackspaceEmptyString: EventBase<StringEditorViewModelBase, any> = new EventBase<StringEditorViewModelBase, any>();
   constructor(private locString: LocalizableString) {
     super();
   }
@@ -277,7 +277,7 @@ export class StringEditorViewModelBase extends Base {
       html: "",
     };
     if (this.creator) {
-      this.creator.onHtmlToMarkdown.fire(this, options);
+      this.creator.onHtmlToMarkdown.fire(this.creator, options);
       this.editAsText = (options.text === null);
     }
   }
@@ -326,7 +326,7 @@ export class StringEditorViewModelBase extends Base {
         name: this.locString.name,
         html: event.target.innerHTML
       };
-      this.creator.onHtmlToMarkdown.fire(this, options);
+      this.creator.onHtmlToMarkdown.fire(this.creator, options);
       mdText = options.text;
     }
     let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);

@@ -457,7 +457,7 @@ export class Translation implements ITranslationLocales {
     showAllStrings: boolean = false,
     public koReadOnly = ko.computed(() => false),
     private onCanShowProperty?: (obj: Survey.Base, prop: Survey.JsonObjectProperty) => boolean,
-    private onLocaleSelected? : (locale: string) => boolean
+    private onLocaleSelected?: (locale: string) => boolean
   ) {
     this.koLocales = ko.observableArray([
       {
@@ -876,11 +876,11 @@ export class TranslationViewModel {
     );
     this.model.translationStringVisibilityCallback = (obj: Survey.Base, propertyName: string, visible: boolean) => {
       const options = { obj: obj, propertyName: propertyName, visible: visible };
-      !creator.onTranslationStringVisibility.isEmpty && creator.onTranslationStringVisibility.fire(self, options);
+      !creator.onTranslationStringVisibility.isEmpty && creator.onTranslationStringVisibility.fire(creator, options);
       return options.visible;
     };
     this.model.importFinishedCallback = function () {
-      creator.onTranslationImported.fire(self, {});
+      creator.onTranslationImported.fire(creator, {});
     };
     this.model.translateItemAfterRenderCallback = function (item: TranslationItem, el: any, locale: string) {
       if (creator.onTranslateItemAfterRender.isEmpty) return;

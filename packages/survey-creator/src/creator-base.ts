@@ -13,11 +13,13 @@ export interface ICreatorOptions {
   [index: string]: any;
 }
 
+export class CreatorBaseEvent<T> extends Survey.EventBase<CreatorBase<T>, any> {
+}
+
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends { [index: string]: any }>
-implements ISurveyCreatorOptions {
+export class CreatorBase<T extends { [index: string]: any }> implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
@@ -48,10 +50,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.elementType the type of the element: 'question', 'panel' or 'page'.
    * <br/> options.allowing set it to false to cancel the element deleting
    */
-  public onElementDeleting: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onElementDeleting: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
 
   /**
    * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
@@ -63,10 +63,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
    * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
-  public onGetPropertyReadOnly: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onGetPropertyReadOnly: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
 
   /**
    * The event is fired when the survey creator creates a survey object (Survey.Survey).
@@ -74,10 +72,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.survey the survey object showing in the creator.
    * <br/> options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Test Survey" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
    */
-  public onSurveyInstanceCreated: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onSurveyInstanceCreated: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
 
   /**
    * The event allows to display the custom name for objects: questions, pages and panels. By default the object name is using. You may show object title by setting showObjectTitles property to true.
@@ -88,10 +84,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.displayName change this property to show your custom display name for the object
    * @see showObjectTitles
    */
-  public onGetObjectDisplayName: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onGetObjectDisplayName: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
 
   /**
    * Use this event to add/remove/modify the element (question/panel) menu items.
@@ -100,10 +94,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.items the list of menu items. It has two required fields: text and onClick: function(obj: Survey.Base) {} and optional name field.
    * @see onElementAllowOperations
    */
-  public onDefineElementMenuItems: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onDefineElementMenuItems: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * The event is called before showing a property in the Properties Grid or in the Question Editor.
    * <br/> sender the survey creator object that fires the event
@@ -115,10 +107,8 @@ implements ISurveyCreatorOptions {
    * <br/>
    * <br/> [Example: Hide a category in the Properties Grid](https://surveyjs.io/Examples/Survey-Creator?id=hidecategoryinpropertiesgrid)
    */
-  public onShowingProperty: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onShowingProperty: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * @Deprecated Obsolete, please use onShowingProperty event.
    * The event is called before showing a property in the Property Grid or in Question Editor.
@@ -129,9 +119,7 @@ implements ISurveyCreatorOptions {
    * <br/> options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
    * <br/> options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
    */
-  public onCanShowProperty: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
+  public onCanShowProperty: CreatorBaseEvent<T
   > = this.onShowingProperty;
   /**
    * The event is called before rendering a delete button in the Property Grid or in Question Editor.
@@ -140,10 +128,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
    * <br/> options.canDelete a boolean value. It is true by default. Set it false to remove delete button from the Property Grid or in Question Editor
    */
-  public onCanDeleteItem: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onCanDeleteItem: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
    * <br/> sender the survey creator object that fires the event
@@ -154,10 +140,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.item the collection item that we are going to delete
    * <br/> options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
    */
-  public onCollectionItemDeleting: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onCollectionItemDeleting: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
@@ -167,10 +151,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.newItem a new created Survey.ItemValue object.
    * <br/> options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
    */
-  public onItemValueAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onItemValueAdded: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
    * <br/> sender the survey creator object that fires the event
@@ -178,10 +160,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.newColumn a new created Survey.MatrixDropdownColumn object.
    * <br/> options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
    */
-  public onMatrixColumnAdded: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onMatrixColumnAdded: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * Use this event to control Property Editors UI.
    * <br/> sender the survey creator object that fires the event
@@ -193,10 +173,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.editorOptions.showTextView a boolean property, true by default. Set it false to disable "Fast Entry" tab for "choices" property.
    * <br/> options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Fast Entry" tab for "choices" property by default.
    */
-  public onSetPropertyEditorOptions: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onSetPropertyEditorOptions: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * The event is called on generation a new name for a new created element.
    * <br/> sender the survey creator object that fires the event
@@ -204,10 +182,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.name a new suggested name, that is unique for the current survey. You can suggest your own name. If it is unique, creator will assign it to the element.
    * <br/> options.isUnique a boolean property, set this property to false, if you want to ask Creator to generate another name
    */
-  public onGenerateNewName: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onGenerateNewName: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
    * <br/> sender the survey creator object that fires the event
@@ -217,10 +193,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
    * @see onPropertyValueChanging
    */
-  public onPropertyValidationCustomError: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onPropertyValidationCustomError: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
    * <br/> sender the survey creator object that fires the event
@@ -231,10 +205,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.doValidation set the value to true to call the property validation. If there is an error, the user sees it immediately.
    * @see onPropertyValidationCustomError
    */
-  public onPropertyValueChanging: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onPropertyValueChanging: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
    * <br/> sender the survey creator object that fires the event
@@ -243,10 +215,8 @@ implements ISurveyCreatorOptions {
    * <br/> options.editor the instance of Property Editor.
    * <br/> options.list the list of the questions available for condition
    */
-  public onConditionQuestionsGetList: Survey.Event<
-    (sender: CreatorBase<T>, options: any) => any,
-    any
-  > = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onConditionQuestionsGetList: CreatorBaseEvent<T
+  > = new CreatorBaseEvent<T>();
   /**
    * Use this event to modify the list of the strings available in the Translation tab.
    *
@@ -257,7 +227,7 @@ implements ISurveyCreatorOptions {
    * - `options.propertyName` - The name of a property being translated.
    * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
-  public onTranslationStringVisibility: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onTranslationStringVisibility: CreatorBaseEvent<T> = new CreatorBaseEvent<T>();
   /**
    * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
    *
@@ -267,7 +237,7 @@ implements ISurveyCreatorOptions {
    * - `options.locale` - the locale name, like 'en', 'de' and so on.
    * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
    */
-  public onTranslationLocaleInitiallySelected: Survey.Event<(sender: CreatorBase<T>, options: any) => any, any> = new Survey.Event<(sender: CreatorBase<T>, options: any) => any, any>();
+  public onTranslationLocaleInitiallySelected: CreatorBaseEvent<T> = new CreatorBaseEvent<T>();
 
   /**
    * This callback is used internally for providing survey JSON text.
