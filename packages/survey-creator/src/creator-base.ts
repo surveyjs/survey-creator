@@ -19,8 +19,7 @@ export class CreatorBaseEvent<T> extends Survey.EventBase<CreatorBase<T>, any> {
 /**
  * Base class for Survey Creator.
  */
-export class CreatorBase<T extends { [index: string]: any }>
-  implements ISurveyCreatorOptions {
+export class CreatorBase<T extends { [index: string]: any }> implements ISurveyCreatorOptions {
   private showDesignerTabValue = ko.observable<boolean>(false);
   private showJSONEditorTabValue = ko.observable<boolean>(false);
   private showTestSurveyTabValue = ko.observable<boolean>(false);
