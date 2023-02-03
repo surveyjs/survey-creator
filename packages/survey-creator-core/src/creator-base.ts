@@ -24,7 +24,8 @@ import {
   LocalizableString,
   ILocalizableString,
   ILocalizableOwner,
-  PopupBaseViewModel
+  PopupBaseViewModel,
+  EventBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -117,7 +118,7 @@ export class ToolbarActionContainer extends ActionContainer {
 
 export type toolboxLocationType = "left" | "right" | "sidebar";
 
-export class CreatorEvent extends Survey.Event<(sender: CreatorBase, options: any) => any, any> { }
+export class CreatorEvent extends EventBase<CreatorBase, any> { }
 
 /**
  * Base class for Survey Creator.
@@ -1663,8 +1664,8 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
-  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
-  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onBeforeDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onAfterDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
