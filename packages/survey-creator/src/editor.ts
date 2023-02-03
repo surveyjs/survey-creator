@@ -1648,6 +1648,9 @@ export class SurveyCreator
       var newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
       this.updateConditions(oldName, newName);
     }
+    if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
+      this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
+    }
   }
   private isObjQuestion(obj: Survey.Base) {
     var classInfo = Survey.Serializer.findClass(obj.getType());
@@ -2087,6 +2090,14 @@ export class SurveyCreator
   private updateConditions(oldName: string, newName: string) {
     if (oldName === newName) return;
     new SurveyLogic(this.survey, this).renameQuestion(oldName, newName);
+  }
+  private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
+    const questions = this.survey.getAllQuestions();
+    questions.forEach(q => {
+      if(q.choicesFromQuestion === oldName) {
+        q.choicesFromQuestion = newName;
+      }
+    });
   }
   public get showModalOnElementEditing(): boolean {
     return !this.showElementEditorAsPropertyGrid || !this.showPropertyGrid;
