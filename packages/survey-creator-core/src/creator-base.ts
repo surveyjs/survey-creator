@@ -1705,22 +1705,21 @@ export class CreatorBase extends Base
     }
   }
   public updateConditionsOnNameChanged(obj: Base, propertyName: string, oldValue: any): void {
-    if (!this.isObjQuestion(obj)) return;
-    if (propertyName === "name" && !obj["valueName"]) {
-      this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
-    }
-    if (propertyName === "valueName") {
-      const oldName = !!oldValue ? oldValue : obj["name"];
-      const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
-      this.updateLogicOnQuestionNameChanged(oldName, newName);
-    }
-    if (propertyName === "name") {
-      if(obj.isDescendantOf("matrixdropdowncolumn")) {
-        this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
+    if (this.isObjQuestion(obj)) {
+      if (propertyName === "name" && !obj["valueName"]) {
+        this.updateLogicOnQuestionNameChanged(oldValue, obj["name"]);
       }
-      if(obj.isDescendantOf("selectbase")) {
+      if (propertyName === "valueName") {
+        const oldName = !!oldValue ? oldValue : obj["name"];
+        const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
+        this.updateLogicOnQuestionNameChanged(oldName, newName);
+      }
+      if(propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
+    }
+    if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
+      this.updateLogicOnColumnNameChanged(obj, oldValue, obj["name"]);
     }
   }
   private surveyLogicForUpdate: SurveyLogic;
