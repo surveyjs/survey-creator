@@ -35,7 +35,7 @@ import { Commands } from "./commands";
 import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
 import { SurveyObjectProperty } from "./objectProperty";
-import { CreatorBase } from "./creator-base";
+import { CreatorBase, CreatorBaseEvent } from "./creator-base";
 import { IAction } from "survey-knockout";
 import { EditableObject } from "./propertyEditors/editableObject";
 
@@ -48,6 +48,8 @@ Survey.QuestionFactory.Instance.unregisterElement("tagbox");
  * Survey Creator is WYSIWYG editor.
  */
 
+export class CreatorEvent extends Survey.EventBase<SurveyCreator> {
+}
 export class SurveyCreator
   extends CreatorBase<SurveyForDesigner>
   implements ISurveyObjectEditorOptions {
@@ -99,58 +101,37 @@ export class SurveyCreator
    * In case of any subscriptions to this event all notifications will be redirected into the event handler.
    * <br/> options.message is a message to show.
    */
-  public onNotify: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onNotify: CreatorEvent = new CreatorEvent();
   /**
    * The event is called before undo happens.
    * <br/> options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
-  public onBeforeUndo: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onBeforeUndo: CreatorEvent = new CreatorEvent();
   /**
    * The event is called before redo happens.
    * <br/> options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
    */
-  public onBeforeRedo: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onBeforeRedo: CreatorEvent = new CreatorEvent();
   /**
    * The event is called after undo happens.
    * <br/> options.state is an undo/redo item.
    */
-  public onAfterUndo: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onAfterUndo: CreatorEvent = new CreatorEvent();
   /**
    * The event is called after redo happens.
    * <br/> options.state is an undo/redo item.
    */
-  public onAfterRedo: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onAfterRedo: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on changing the selected element. You may change the new selected element by changing the property options.newSelectedElement to your own
    * <br/> options.newSelectedElement the element that is going to be selected in the survey desiger: question, panel, page or survey.
    */
-  public onSelectedElementChanging: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onSelectedElementChanging: CreatorEvent = new CreatorEvent();
   /**
    * The event is called after the selected element is changed.
    * <br/> options.newSelectedElement the new selected element in the survey desiger: question, panel, page or survey.
    */
-  public onSelectedElementChanged: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onSelectedElementChanged: CreatorEvent = new CreatorEvent();
   /**
    * The event is called when creator tab has been rendered.
    * <br/> sender the survey creator object that fires the event
@@ -159,19 +140,13 @@ export class SurveyCreator
    * <br/> options.model current context model
    * <br/> options.tabData the data of the rendered tab
    */
-  public onEditorTabRendered: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onEditorTabRendered: CreatorEvent = new CreatorEvent();
   /**
    * The event is called when creator active tab is changed.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.tabName the name of new active tab
    */
-  public onActiveTabChanged: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onActiveTabChanged: CreatorEvent = new CreatorEvent();
   /**
    * The event allows you to custom sort properties in the Property Grid. It is a compare function. You should set options.result to -1 or 1 by comparing options.property1 and options.property2.
    * <br/> sender the survey creator object that fires the event
@@ -180,10 +155,7 @@ export class SurveyCreator
    * <br/> options.property2 the right object property (Survey.JsonObjectProperty object).
    * <br/> options.result the result of comparing. It can be 0 (use default behavior),  -1 options.property1 is less than options.property2 or 1 options.property1 is more than options.property2
    */
-  public onCustomSortProperty: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onCustomSortProperty: CreatorEvent = new CreatorEvent();
   /**
    * The event allows you modify DOM element for a property in the Property Grid. For example, you may change its styles.
    * <br/> sender the survey creator object that fires the event
@@ -192,48 +164,33 @@ export class SurveyCreator
    * <br/> options.property object property (Survey.JsonObjectProperty object).
    * <br/> options.propertyEditor the property Editor.
    */
-  public onPropertyAfterRender: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onPropertyAfterRender: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.question a new added survey question. Survey.Question object
    * <br/> options.page the survey Page object where question has been added.
    */
-  public onQuestionAdded: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onQuestionAdded: CreatorEvent = new CreatorEvent();
   /**
    * The event is called when an end-user double click on an element (question/panel).
    * <br/> sender the survey creator object that fires the event
    * <br/> options.element an instance of the element
    */
-  public onElementDoubleClick: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onElementDoubleClick: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.panel a new added survey panel. Survey.Panel object
    * <br/> options.page the survey Page object where question has been added.
    */
-  public onPanelAdded: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onPanelAdded: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on adding a new page into the survey.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.page the new survey Page object.
    */
-  public onPageAdded: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onPageAdded: CreatorEvent = new CreatorEvent();
   /**
    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
    * <br/> sender the survey creator object that fires the event
@@ -280,10 +237,7 @@ export class SurveyCreator
    * <br/>
    * <br/> options.type: "TRANSLATIONS_CHANGED"
    */
-  public onModified: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onModified: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired on changing question, panel or page name.
    * <br/> sender the survey creator object that fires the event
@@ -291,37 +245,25 @@ export class SurveyCreator
    * <br/> options.oldName the previous name of the element
    * <br/> options.newName the new name of the element
    */
-  public onElementNameChanged: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onElementNameChanged: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the creator.
    */
-  public onDesignerSurveyCreated: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onDesignerSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired when the survey creator runs the survey in the test mode.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.survey  the survey object showing in the "Test survey" tab.
    */
-  public onTestSurveyCreated: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onTestSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to show a check and custom error in property grid and adorners of the selected elements.
    * Returns true if selected element is null or there is no errors.
    * <br/> options.errors an array of error messages if any.
    */
-  public onValidateSelectedElement: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onValidateSelectedElement: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to change the value entered in the property editor. You may call a validation, so an end user sees the error immediately
    * <br/> sender the survey creator object that fires the event
@@ -330,10 +272,7 @@ export class SurveyCreator
    * <br/> options.editor the instance of Property Editor.
    * @see onPropertyValueChanging
    */
-  public onPropertyEditorObjectAssign: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onPropertyEditorObjectAssign: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to modify the survey that used on setting value for condition/expression properties, like visibleIf, enableIf and so on.
    * <br/> sender the survey creator object that fires the event
@@ -343,10 +282,7 @@ export class SurveyCreator
    * <br/> options.valueQuestionName the name of the question that shows in the survey for choosing the value
    * <br/> options.survey the instance of the survey that allows to choose the value. You may modify it before it shows to the end-user
    */
-  public onConditionValueSurveyCreated: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onConditionValueSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to process key down event in a property editor
    * <br/> sender the survey creator object that fires the event
@@ -355,10 +291,7 @@ export class SurveyCreator
    * <br/> options.editor the instance of Property Editor.
    * <br/> options.event the instance of mouse event.
    */
-  public onPropertyEditorKeyDown: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onPropertyEditorKeyDown: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to disable user interactions with a question or panel on the design surface.
    *
@@ -377,10 +310,7 @@ export class SurveyCreator
    *
    * To disable a user interaction, set the correponding `allow...` property to `false`.
    */
-  public onElementAllowOperations: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onElementAllowOperations: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to show the description on the top or/and bottom of the property modal editor.
    * <br/> sender the survey creator object that fires the event
@@ -389,10 +319,7 @@ export class SurveyCreator
    * <br/> options.htmlTop the html  that you want to see on the top of the modal window
    * <br/> options.htmlBottom the html that you want to see on the bottom of the modal window
    */
-  public onShowPropertyModalEditorDescription: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onShowPropertyModalEditorDescription: CreatorEvent = new CreatorEvent();
   /**
    * @Deprecated Obsolete, please use onGetObjectDisplayName event
    * Use this event to change the text showing in the dropdown of the property grid.
@@ -401,10 +328,7 @@ export class SurveyCreator
    * <br/> options.text the current object text, commonly it is a name. You must change this attribute
    * @see onGetObjectDisplayName
    */
-  public onGetObjectTextInPropertyGrid: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onGetObjectTextInPropertyGrid: CreatorEvent = new CreatorEvent();
 
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
@@ -414,20 +338,14 @@ export class SurveyCreator
    * <br/> options.itemOptions a json object that allows you to override question properties. Attributes are: name, title, isCopied, iconName, json and category.
    * @see onCustomElementAddedIntoToolbox
    */
-  public onCustomElementAddingIntoToolbox: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onCustomElementAddingIntoToolbox: CreatorEvent = new CreatorEvent();
   /**
    * The event is called when end-user addes new element (question or panel) into the survey toolbox.
    * <br/> sender the survey creator object that fires the event
    * <br/> options.element is a new added element
    * @see onCustomElementAddingIntoToolbox
    */
-  public onCustomElementAddedIntoToolbox: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onCustomElementAddedIntoToolbox: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired on clearing the files.
    * <br/> sender the survey creator object that fires the event
@@ -436,10 +354,7 @@ export class SurveyCreator
    * <br/> callback - called on clear complete
    * @see clearFiles
    */
-  public onClearFile: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onClearFile: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired on uploading the files.
    * <br/> sender the survey creator object that fires the event
@@ -448,10 +363,7 @@ export class SurveyCreator
    * <br/> callback called on upload complete
    * @see uploadFile
    */
-  public onUploadFile: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onUploadFile: CreatorEvent = new CreatorEvent();
   /**
    * The event is fired then one need to choose files.
    * <br/> sender the survey creator object that fires the event
@@ -459,19 +371,13 @@ export class SurveyCreator
    * <br/> callback need to be called after files has been chosen
    * @see uploadFile
    */
-  public onOpenFileChooser: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onOpenFileChooser: CreatorEvent = new CreatorEvent();
   /**
    * The method is called when the translation from csv file is imported.
    * @see translation
    * @see showTranslationTab
    */
-  public onTranslationImported: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onTranslationImported: CreatorEvent = new CreatorEvent();
   /**
    * The method is called on after render translation item. You can modify the html element using this event
    * <br/> options.item - translation item
@@ -481,10 +387,7 @@ export class SurveyCreator
    * @see translation
    * @see showTranslationTab
    */
-  public onTranslateItemAfterRender: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onTranslateItemAfterRender: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to control drag&drop operations.
    * <br/> sender the survey creator object that fires the event.
@@ -496,10 +399,7 @@ export class SurveyCreator
    * <br/> options.insertBefore an element before the target element is dragging. It can be null if parent container (page or panel) is empty or dragging an element under the last element of the container.
    * <br/> options.insertAfter an element after the target element is dragging. It can be null if parent container (page or panel) is empty or dragging element to the top of the parent container.
    */
-  public onDragDropAllow: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onDragDropAllow: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to get access rendered adorder.
    * <br/> sender the survey creator object that fires the event.
@@ -509,19 +409,13 @@ export class SurveyCreator
    * <br/> options.element a root adorner element.
    * <br/> options.context a context for adorner element, e.g. current item of a select base question.
    */
-  public onAdornerRendered: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onAdornerRendered: CreatorEvent = new CreatorEvent();
   /**
    * The event is called after user closes the popup element editor.
    * <br/> options.element the edited element.
    * <br/> options.isCanceled indicated user clicked Cancel.
    */
-  public onElementEditorClosed: Survey.Event<
-    (sender: SurveyCreator, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyCreator, options: any) => any, any>();
+  public onElementEditorClosed: CreatorEvent = new CreatorEvent();
   selectFromStringEditor: boolean;
 
   /**
@@ -1969,7 +1863,7 @@ export class SurveyCreator
           name: "dragelement",
           needFocus: false,
           text: self.getLocString("survey.drag"),
-          onClick: function (selObj) {},
+          onClick: function (selObj) { },
         });
       }
 
@@ -2129,8 +2023,8 @@ export class SurveyCreator
     var self = this;
     var elWindow = this.renderedElement
       ? <HTMLElement>(
-          this.renderedElement.querySelector("#surveyquestioneditorwindow")
-        )
+        this.renderedElement.querySelector("#surveyquestioneditorwindow")
+      )
       : null;
     var isCanceled = true;
     var oldName = element["name"];
@@ -2265,7 +2159,7 @@ export class SurveyCreator
       editor.parentProperty
     );
   }
-  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void {}
+  onTitleInplaceEditorStartEdit(inputElem: HTMLInputElement): void { }
   onPropertyEditorKeyDownCallback(
     propertyName: string,
     obj: Survey.Base,
