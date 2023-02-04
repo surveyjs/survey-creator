@@ -82,7 +82,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
     this.model.onSurveyCreatedCallback = (survey) => {
-      this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(self, { survey: survey });
+      this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(this.creator, { survey: survey });
     };
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
