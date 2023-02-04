@@ -2309,6 +2309,46 @@ test("ConvertTo, show custom widgets in ConvertTo action", (): any => {
   expect(items[2].iconName).toEqual("icon-editor");
   CustomWidgetCollection.Instance.clear();
 });
+
+test("ConvertTo separators", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" },
+      { type: "panel", name: "panel" }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+
+  const questionModel = new QuestionAdornerViewModel(
+    creator,
+    question,
+    undefined
+  );
+  const items = questionModel.getConvertToTypesActions();
+  expect(items).toHaveLength(20);
+  expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy()
+  expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy()
+  expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy()
+  expect(items.filter(i => i.id == "paneldynamic")[0].needSeparator).toBeTruthy()
+
+  const panel = creator.survey.getPanelByName("panel");
+  creator.selectElement(panel);
+
+  const panelModel = new QuestionAdornerViewModel(
+    creator,
+    panel,
+    undefined
+  );
+  const items2 = panelModel.getConvertToTypesActions();
+  expect(items2).toHaveLength(2);
+  expect(items2[0].needSeparator).toBeFalsy();
+  expect(items2[1].needSeparator).toBeFalsy();
+
+});
+
+
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
