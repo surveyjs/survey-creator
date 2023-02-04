@@ -722,6 +722,6 @@ test("Check question scroll", async (t) => {
       ]
     });
     const root = Selector(".sd-page");
-    await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
+    await takeElementScreenshot("question-checkboxes-scroll.png", root, t, comparer);
   });
 });
