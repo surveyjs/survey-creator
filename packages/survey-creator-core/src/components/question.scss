@@ -13,7 +13,6 @@ svc-question {
   position: relative;
   height: 100%;
   width: 100%;
-  min-width: 260px;
 
   .sv-action-bar {
     overflow: visible;
@@ -48,6 +47,9 @@ svc-question {
 }
 
 .svc-question__content {
+  .sd-question__content {
+      overflow-x: scroll;
+    }
   .sd-multipletext__item-title {
     color: $foreground;
   }

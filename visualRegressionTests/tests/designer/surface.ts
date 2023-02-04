@@ -685,3 +685,43 @@ test("Check question adorner width", async (t) => {
     await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
   });
 });
+
+test("Check question scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "promoter_features",
+              "title": "What features do you value the most?",
+              "isRequired": true,
+              "validators": [
+                {
+                  "type": "answercount",
+                  "text": "Please select two features maximum.",
+                  "maxCount": 2
+                }
+              ],
+              "choices": [
+                "Performance",
+                "Stability",
+                "User Interface",
+                "Complete Functionality"
+              ],
+              "showOtherItem": true,
+              "otherText": "Other feature:",
+              "colCount": 4
+            }
+          ]
+        }
+      ]
+    });
+    const root = Selector(".sd-page");
+    await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
+  });
+});
