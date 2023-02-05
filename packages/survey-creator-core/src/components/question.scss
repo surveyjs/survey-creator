@@ -47,7 +47,7 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-selectbase {
+  &>.sd-selectbase {
       overflow-x: auto;
       padding-left: calcSize(5);
         margin-left: calcSize(-5);
