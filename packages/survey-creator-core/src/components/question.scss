@@ -47,8 +47,8 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-question__content {
-      overflow-x: scroll;
+  .sd-selectbase {
+      overflow-x: auto;
     }
   .sd-multipletext__item-title {
     color: $foreground;
