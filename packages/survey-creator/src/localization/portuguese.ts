@@ -280,7 +280,7 @@ var portugueseTranslation = {
     path: "Caminho",
     valueName: "Nome do valor",
     choicesbyurl: {
-     valueName: "Obtenha valores do seguinte campo JSON"
+      valueName: "Obtenha valores do seguinte campo JSON"
     },
     titleName: "Nome do título",
     imageLinkName: "Obtenha URLs de imagem do seguinte campo JSON",
@@ -385,10 +385,10 @@ var portugueseTranslation = {
     maxTimeToFinish: "Tempo máximo para finalizar pesquisa",
     maxTimeToFinishPage: "Tempo máximo para finalizar página da pesquisa",
     page: {
-    maxTimeToFinish: "Tempo limite para finalizar esta página (em segundos)",
+      maxTimeToFinish: "Tempo limite para finalizar esta página (em segundos)",
     },
     question: {
-    page: "Página principal",
+      page: "Página principal",
     },
     showTimerPanel: "Mostrar o painel de cronômetro",
     showTimerPanelMode: "Mostrar painel de modo de cronômetro",
@@ -419,8 +419,8 @@ var portugueseTranslation = {
     maxCount: "Contagem máxima",
     regex: "Expressão regular",
     surveyvalidator: {
-    text: "Mensagem de erro",
-    expression: "Expressão de validação"
+      text: "Mensagem de erro",
+      expression: "Expressão de validação"
     },
     totalText: "Texto total da linha",
     totalType: "Tipo total",
@@ -463,7 +463,7 @@ var portugueseTranslation = {
     confirmDelete: "Confirme a eliminação da linha",
     confirmDeleteText: "Mensagem de confirmação",
     paneldynamic: {
-     confirmDelete: "Confirme a eliminação do painel"
+      confirmDelete: "Confirme a eliminação do painel"
     },
     panelCount: "Contagem inicial do painel",
     minPanelCount: "Contagem mínima de painéis",
