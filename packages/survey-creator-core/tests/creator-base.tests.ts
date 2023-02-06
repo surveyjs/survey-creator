@@ -1589,7 +1589,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    }, ]
+    },]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -3631,4 +3631,18 @@ test("getNextItemValue test", (): any => {
 
   question.choices = ["a1", "a2"];
   expect(creator.getNextItemValue(question)).toBe("a3");
+});
+test("Update choicesFromQuestion on question name change", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "radiogroup", name: "q2", choicesFromQuestion: "q1" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q2");
+  expect(q2.choicesFromQuestion).toEqual("q1");
+  q1.name = "q3";
+  expect(q2.choicesFromQuestion).toEqual("q3");
 });
