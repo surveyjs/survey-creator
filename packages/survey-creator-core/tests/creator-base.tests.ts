@@ -35,7 +35,7 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
-import { ConditionEditor } from "../src/property-grid/condition-survey";
+import { getNextItemText } from "../src/utils/utils";
 
 import {
   getElementWrapperComponentData,
@@ -1589,7 +1589,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    }, ]
+    },]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -2328,10 +2328,10 @@ test("ConvertTo separators", (): any => {
   );
   const items = questionModel.getConvertToTypesActions();
   expect(items).toHaveLength(20);
-  expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy()
-  expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy()
-  expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy()
-  expect(items.filter(i => i.id == "paneldynamic")[0].needSeparator).toBeTruthy()
+  expect(items.filter(i => i.id == "text")[0].needSeparator).toBeTruthy();
+  expect(items.filter(i => i.id == "comment")[0].needSeparator).toBeFalsy();
+  expect(items.filter(i => i.id == "multipletext")[0].needSeparator).toBeFalsy();
+  expect(items.filter(i => i.id == "paneldynamic")[0].needSeparator).toBeTruthy();
 
   const panel = creator.survey.getPanelByName("panel");
   creator.selectElement(panel);
@@ -2347,7 +2347,6 @@ test("ConvertTo separators", (): any => {
   expect(items2[1].needSeparator).toBeFalsy();
 
 });
-
 
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
@@ -2388,6 +2387,22 @@ test("QuestionAdornerViewModel for selectbase and creator.onItemValueAdded", ():
   newItemAdorner.add(newItemAdorner);
   expect(q1.choices).toHaveLength(3);
   expect(q1.choices[2].text).toEqual("radiogroup:choices,item3,3");
+});
+test("QuestionAdornerViewModel question.newItem.value/text", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "radiogroup", name: "q1", choices: [{ value: 1, text: "Item 1" }, { value: 2, text: "Item 2" }] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const newItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.visibleChoices[2]);
+  expect(q1.newItem.value).toEqual(3);
+  expect(q1.newItem.text).toEqual("Item 3");
+  newItemAdorner.add(newItemAdorner);
+  expect(q1.choices).toHaveLength(3);
+  expect(q1.choices[2].value).toEqual(3);
+  expect(q1.choices[2].text).toEqual("Item 3");
+  expect(q1.newItem.value).toEqual(4);
+  expect(q1.newItem.text).toEqual("Item 4");
 });
 
 test("Modify property editor settings on event", (): any => {

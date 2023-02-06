@@ -39,8 +39,6 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       const itemValue = <ImageItemValue>this.creator.createNewItemValue(this.question);
       itemValue.imageLink = link;
       this.question.choices.push(itemValue);
-      const nextValue = this.creator.getNextItemValue(this.question);
-      this.item.value = nextValue;
       if (this.isChoosingNewFile && this.creator) {
         this.creator.onItemValueAddedCallback(this.question, "choices", itemValue, this.question.choices);
         this.isChoosingNewFile = false;
