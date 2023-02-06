@@ -29,7 +29,7 @@ var portugueseTranslation = {
     file: "Arquivo",
     html: "Html",
     matrix: "Matriz (opção única)",
-    matrixdropdown: "Matriz (multiplas opções)",
+    matrixdropdown: "Matriz (múltiplas opções)",
     matrixdynamic: "Matriz (linhas dinâmicas)",
     multipletext: "Texto múltiplo",
     panel: "Painel",
