@@ -12,9 +12,10 @@ import {
   QuestionCheckboxModel,
   QuestionImageModel,
   Question,
-  PageModel
+  PageModel,
+  ItemValue
 } from "survey-core";
-import { getNextValue } from "../src/utils/utils";
+import { getNextValue, getNextItemText } from "../src/utils/utils";
 import { editorLocalization } from "../src/editorLocalization";
 import { ConditionEditor } from "../src/property-grid/condition-survey";
 import { CreatorTester } from "./creator-tester";
@@ -95,6 +96,18 @@ test("getNextValue", () => {
   expect(getNextValue(prefix, ["a01"])).toEqual("a02");
   expect(getNextValue(prefix, ["a01", "a02"])).toEqual("a03");
   expect(getNextValue(prefix, ["aaa1bbb2ccc3"])).toEqual("aaa1bbb2ccc4");
+});
+
+test("getNextValue test", (): any => {
+  const choices: Array<ItemValue> = [];
+  expect(getNextItemText(choices)).toBeFalsy();
+  choices.push(new ItemValue("a"));
+  choices.push(new ItemValue("b"));
+  expect(getNextItemText(choices)).toBeFalsy();
+  choices.push(new ItemValue("c", "Item c"));
+  expect(getNextItemText(choices)).toEqual("Item c1");
+  choices.push(new ItemValue("c1", "Item c1"));
+  expect(getNextItemText(choices)).toEqual("Item c2");
 });
 
 test("Set Text property", () => {

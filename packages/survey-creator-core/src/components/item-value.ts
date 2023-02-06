@@ -12,7 +12,7 @@ import { CreatorBase } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
-
+import { getNextItemText } from "../utils/utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector, StringEditorViewModelBase } from "./string-editor";
 
@@ -84,6 +84,7 @@ export class ItemValueWrapperViewModel extends Base {
   private updateNewItemValue() {
     if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
+    this.question.newItem.text = getNextItemText(this.question.choices);
   }
   private get collectionPropertyName(): string {
     return !!this.item.ownerPropertyName ? this.item.ownerPropertyName : "choices";
@@ -151,7 +152,7 @@ export class ItemValueWrapperViewModel extends Base {
     const itemValue = creator.createNewItemValue(question);
     question.choices.push(itemValue);
     this.updateNewItemValue();
-    if (this.creator) this.creator.onItemValueAddedCallback(question, this.collectionPropertyName, itemValue, question.choices);
+    creator.onItemValueAddedCallback(question, this.collectionPropertyName, itemValue, question.choices);
     StringEditorConnector.get(itemValue.locText).setAutoFocus();
   }
 

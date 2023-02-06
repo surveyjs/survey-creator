@@ -34,7 +34,7 @@ import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { getNextValue } from "./utils/utils";
+import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -3111,15 +3111,15 @@ export class CreatorBase extends Base
     return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
   }
 
-  public getNextItemValue(question: Survey.QuestionSelectBase) {
+  public getNextItemValue(question: QuestionSelectBase): string|number {
     const itemText = this.getChoicesItemBaseTitle();
-    const values = question.choices.map((item: Survey.ItemValue) => item.value);
-    const nextValue = getNextValue(itemText, values);
-    return nextValue;
+    return getNextItemValue(itemText, question.choices);
   }
-  public createNewItemValue(question: Survey.QuestionSelectBase) {
+  public createNewItemValue(question: QuestionSelectBase): ItemValue {
     const nextValue = this.getNextItemValue(question);
-    return question.createItemValue(nextValue);
+    const res = question.createItemValue(nextValue);
+    res.text = getNextItemText(question.choices);
+    return res;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
