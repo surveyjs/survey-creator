@@ -60,6 +60,7 @@ test("toolbox addItem with index", (): any => {
 
 test("toolbox several categories", (): any => {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  toolbox.showCategoryTitles = true;
   expect(toolbox.hasCategories).toBeFalsy();
   toolbox.addItem(<any>{ name: "countries", category: "additional" });
   expect(toolbox.hasCategories).toBeTruthy();
@@ -210,6 +211,7 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
     "comment",
     "matrix"
   ]);
+  toolbox.showCategoryTitles = true;
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
@@ -259,6 +261,7 @@ test("toolbox categories + keepAllCategoriesExpanded property", (): any => {
     "comment",
     "matrix"
   ]);
+  toolbox.showCategoryTitles = true;
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }

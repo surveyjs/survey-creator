@@ -488,7 +488,6 @@ export class QuestionToolbox
         toolboxItem.category = item.category;
       }
     }
-    this.updateShowCategoryTitles();
     this.onItemsChanged();
   }
 
@@ -585,7 +584,9 @@ export class QuestionToolbox
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
-        this.updateShowCategoryTitles();
+        // if(!isСategoryInitialization && this.showTitleOnCategoryChange) {
+        //   this.showCategoryTitles = true;
+        // }
       }
       categoriesHash[categoryName].items.push(item);
     }
@@ -644,9 +645,8 @@ export class QuestionToolbox
   }
   private createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
     this.clearItems();
-    var questions = this.getQuestionTypes(supportedQuestions);
-
-    let defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
+    const questions = this.getQuestionTypes(supportedQuestions);
+    const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
 
     for (var i = 0; i < questions.length; i++) {
       var name = questions[i];
@@ -766,11 +766,6 @@ export class QuestionToolbox
         questions.push(name);
     }
     return questions;
-  }
-  private updateShowCategoryTitles(): void {
-    if(this.showTitleOnCategoryChange) {
-      this.showCategoryTitles = true;
-    }
   }
 
   public dispose() { }
