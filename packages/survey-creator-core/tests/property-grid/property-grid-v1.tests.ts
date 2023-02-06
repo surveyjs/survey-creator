@@ -1118,8 +1118,13 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
     propertyGrid.survey.getQuestionByName("pages")
   );
   survey.currentPage = survey.pages[0];
-  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeFalsy();
-  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[2])).toBeTruthy();
+  const rows = pagesQuestion.visibleRows;
+  expect(pagesQuestion.canRemoveRow(rows[1])).toBeTruthy();
+  expect(pagesQuestion.canRemoveRow(rows[2])).toBeTruthy();
+  pagesQuestion.removeRowUI(rows[1]);
+  expect(survey.pages).toHaveLength(3);
+  pagesQuestion.removeRowUI(rows[2]);
+  expect(survey.pages).toHaveLength(2);
 });
 
 test("SurveyPropertyPagesEditor custom loc item for 'add item'.", () => {

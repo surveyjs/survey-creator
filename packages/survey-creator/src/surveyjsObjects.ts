@@ -17,25 +17,15 @@ export interface ISurveyObjectMenuItem {
   template?: string;
 }
 
+export class SurveyEvent extends Survey.EventBase<Survey.Survey> { }
+
 export class SurveyForDesigner extends Survey.Survey {
   private selectedElementValue: any;
   editQuestionClick: any;
-  public onSelectedElementChanged: Survey.Event<
-    (sender: Survey.Survey, options: any) => any,
-    any
-  > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-  public onEditButtonClick: Survey.Event<
-    (sender: Survey.Survey, options: any) => any,
-    any
-  > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-  public onGetMenuItems: Survey.Event<
-    (sender: Survey.Survey, options: any) => any,
-    any
-  > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
-  public onElementDoubleClick: Survey.Event<
-    (sender: Survey.Survey, options: any) => any,
-    any
-  > = new Survey.Event<(sender: Survey.Survey, options: any) => any, any>();
+  public onSelectedElementChanged: SurveyEvent = new SurveyEvent();
+  public onEditButtonClick: SurveyEvent = new SurveyEvent();
+  public onGetMenuItems: SurveyEvent = new SurveyEvent();
+  public onElementDoubleClick: SurveyEvent = new SurveyEvent();
   public onUpdateElementAllowingOptions: (options: any) => any;
   public getEditor: () => SurveyEditor;
   public emptyPageTemplate: string;

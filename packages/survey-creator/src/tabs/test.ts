@@ -260,7 +260,7 @@ export class SurveyLiveTester {
     survey["afterRenderSurvey"](element);
   }
 
-  dispose() {}
+  dispose() { }
 }
 
 ko.components.register("survey-tester", {
@@ -271,7 +271,7 @@ ko.components.register("survey-tester", {
 
       model.onSurveyCreatedCallback = (survey) => {
         creator.onTestSurveyCreated &&
-          creator.onTestSurveyCreated.fire(self, { survey: survey });
+          creator.onTestSurveyCreated.fire(creator, { survey: survey });
       };
       model.onGetObjectDisplayName = (obj) => {
         return creator.getObjectDisplayName(obj, "survey-tester");

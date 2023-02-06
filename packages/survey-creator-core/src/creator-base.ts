@@ -24,7 +24,8 @@ import {
   LocalizableString,
   ILocalizableString,
   ILocalizableOwner,
-  PopupBaseViewModel
+  PopupBaseViewModel,
+  EventBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -117,7 +118,7 @@ export class ToolbarActionContainer extends ActionContainer {
 
 export type toolboxLocationType = "left" | "right" | "sidebar";
 
-export class CreatorEvent extends Survey.Event<(sender: CreatorBase, options: any) => any, any> { }
+export class CreatorEvent extends EventBase<CreatorBase, any> { }
 
 /**
  * Base class for Survey Creator.
@@ -529,7 +530,7 @@ export class CreatorBase extends Base
   public onPropertyGridShowModal: CreatorEvent = new CreatorEvent();
   /**
     * The event is called before rendering a delete button in the Property Grid or in Question Editor.
-    * Obsolete, please use onCollectionItemAllowOperations
+    * @Deprecated Obsolete, please use onCollectionItemAllowOperations
     *- sender the survey creator object that fires the event
     *- options.obj the survey Question
     *- options.item the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
@@ -539,7 +540,7 @@ export class CreatorBase extends Base
   public onCanDeleteItem: CreatorEvent = new CreatorEvent();
   /**
    * The event is called on deleting a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
-   * Obsolete, please use onCollectionItemAllowOperations
+   * @Deprecated Obsolete, please use onCollectionItemAllowOperations
    *- sender the survey creator object that fires the event
    *- options.obj the survey object: Question, Panel, Page or Survey
    *- options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
@@ -551,16 +552,16 @@ export class CreatorBase extends Base
    */
   public onCollectionItemDeleting: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called before rendering a collection item from the Property Editor. For example: column in columns editor or item in choices and so on.
-   * You can make detail/edit and remove buttons invsible and/or disable editing.
+   * The event is called before rendering a collection item in a property editor. For example: a column in a column editor, or an item in Choices and so on.
+   * Use this event to prevent a collection item from being edited or removed from a collection. 
    *- sender the survey creator object that fires the event
    *- options.obj the survey object: Question, Panel, Page or Survey
    *- options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
    *- options.propertyName the collection property name
-   *- options.collection the editing collection where deleting item is located. It is can be columns in the matrices or choices in dropdown question and so on.
-   *- options.item the collection item that we are going to delete
-   *- options.allowDelete a boolean value. It is true by default. Set it false to abondome the element removing from the collection
-   *- options.allowEdit a boolean value. It is true by default. Set it false to disable editing.
+   *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
+   *- options.item a target collection item
+   *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
+   *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
   /**
@@ -1663,8 +1664,8 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
-  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
-  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onBeforeDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onAfterDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
@@ -2332,23 +2333,28 @@ export class CreatorBase extends Base
     }
     var selEl: any = this.getSelectedSurveyElement();
     if (oldValue !== element && !!document && !!selEl) {
-      setTimeout(() => {
-        if (focus) {
-          const el = document.getElementById(selEl.id);
-          if (!!el) {
-            el.scrollIntoView({ block: "center" });
-            if (!propertyName && el.parentElement) {
-              let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
-              elToFocus && elToFocus.focus();
-            }
-          }
-        }
-        if (startEdit) {
-          StringEditorConnector.get((element as Question).locTitle).activateEditor();
-        }
-      }, 100);
+      this.focusElement(element, focus, selEl, propertyName, startEdit);
     }
   }
+  public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
+    if (!selEl) selEl = this.getSelectedSurveyElement();
+    setTimeout(() => {
+      if (focus && !!selEl) {
+        const el = document.getElementById(selEl.id);
+        if (!!el) {
+          el.scrollIntoView({ block: "center" });
+          if (!propertyName && el.parentElement) {
+            let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
+            elToFocus && elToFocus.focus();
+          }
+        }
+      }
+      if (startEdit && !!element) {
+        StringEditorConnector.get((element as Question).locTitle).activateEditor();
+      }
+    }, 100);
+  }
+
   private getSelectedSurveyElement(): IElement {
     var sel: any = this.selectedElement;
     if (!sel || sel.getType() == "survey") return null;
@@ -2365,6 +2371,9 @@ export class CreatorBase extends Base
     const propertyGridTab = this.sidebar.getTabById("propertyGrid");
     if (!propertyGridTab) return null;
     return propertyGridTab.model ? (propertyGridTab.model.propertyGridModel as any as PropertyGridModel) : null;
+  }
+  public get propertyGrid(): SurveyModel {
+    return this.designerPropertyGrid.survey;
   }
   /**
    * Collapse certain property editor tab (category) in properties panel/grid
@@ -3086,8 +3095,13 @@ export class CreatorBase extends Base
     this.onElementAllowOperations.fire(this, options);
     return options;
   }
+
+  public getChoicesItemBaseTitle() {
+    return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
+  }
+
   public getNextItemValue(question: Survey.QuestionSelectBase) {
-    const itemText = Survey.surveyLocalization.getString("choices_Item");
+    const itemText = this.getChoicesItemBaseTitle();
     const values = question.choices.map((item: Survey.ItemValue) => item.value);
     const nextValue = getNextValue(itemText, values);
     return nextValue;

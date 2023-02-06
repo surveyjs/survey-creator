@@ -23,9 +23,12 @@ export class SurveyQuestionEditorDefinition {
         "name",
         "title",
         "description",
-        { name: "visible" },
-        { name: "isRequired" },
-        { name: "readOnly" },
+        "visible",
+        "isRequired",
+        "readOnly",
+        "showCommentArea",
+        "commentText",
+        "commentPlaceholder",
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
@@ -68,9 +71,6 @@ export class SurveyQuestionEditorDefinition {
     },
     file: {
       properties: [
-        "showCommentArea",
-        "commentText",
-        "commentPlaceholder",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",
@@ -169,9 +169,6 @@ export class SurveyQuestionEditorDefinition {
     },
     rating: {
       properties: [
-        "showCommentArea",
-        "commentText",
-        "commentPlaceholder",
         { name: "displayMode", tab: "layout" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
@@ -184,9 +181,6 @@ export class SurveyQuestionEditorDefinition {
     },
     selectbase: {
       properties: [
-        "showCommentArea",
-        "commentText",
-        "commentPlaceholder",
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },

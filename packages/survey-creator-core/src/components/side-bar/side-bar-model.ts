@@ -61,6 +61,9 @@ export class SidebarModel extends Base {
           this.collapsedManually = true;
           this.expandedManually = false;
         }
+        else {
+          this.creator.focusElement(this.creator.selectedElement, true);
+        }
       }
     });
     this.toolbar.actions.push(this._collapseAction);

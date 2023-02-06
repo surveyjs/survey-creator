@@ -26,7 +26,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
       const options = { obj: obj, propertyName: propertyName, visible: visible };
-      !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(self, options);
+      !this.creator.onTranslationStringVisibility.isEmpty && this.creator.onTranslationStringVisibility.fire(this.creator, options);
       return options.visible;
     };
     this.model.localeInitialVisibleCallback = (locale: string): boolean => {
@@ -70,7 +70,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
       if (options.name === "filteredPage") {
         this.updateFilterPageAction();
       }
-      if(options.name === "showAllStrings") {
+      if (options.name === "showAllStrings") {
         this.updateFilterStrigsAction();
       }
       if (options.name === "canMergeLocaleWithDefault") {
@@ -91,7 +91,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     this.updateFilterPageAction(true);
   }
   public deactivate(): boolean {
-    if(!!this.model) {
+    if (!!this.model) {
       this.model.dispose();
     }
     this.model = undefined;
@@ -109,7 +109,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private createMergeLocaleWithDefaultActionTitleUpdater(): any {
     return <any>new ComputedUpdater<string>(() => {
       let loc = this.creator.locale;
-      if(!loc) loc = "en";
+      if (!loc) loc = "en";
       return editorLocalization.getString("ed.translationMergeLocaleWithDefault")["format"](surveyLocalization.defaultLocale);
     });
   }
@@ -224,7 +224,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private updateFilterStrigsAction(updateSelectedItem: boolean = false) {
     const title = this.getFilterStringsActionTitle();
     this.filterStringsAction.title = title;
-    if(updateSelectedItem) {
+    if (updateSelectedItem) {
       this.filterStringsAction.needSeparator = this.filterPageAction.visible;
       const list = <ListModel>this.filterStringsAction.data;
       list.selectedItem = list.actions.filter((el: IAction) => el.title === title)[0];
@@ -232,7 +232,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   private updateFilterPageAction(updateSelectedItem: boolean = false) {
     this.filterPageAction.title = this.getFilterPageActionTitle();
-    if(updateSelectedItem) {
+    if (updateSelectedItem) {
       const list = <ListModel>this.filterPageAction.data;
       const id = this.model.filteredPage ? this.model.filteredPage.name : null;
       list.selectedItem = list.actions.filter((el: IAction) => el.id === id)[0];
@@ -243,7 +243,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     return pageDisplayName || this.showAllPagesText;
   }
   private getFilterStringsActionTitle(): string {
-    return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText: this.showAllStringsText;
+    return (this.model && !this.model.showAllStrings) ? this.showUsedStringsOnlyText : this.showAllStringsText;
   }
   private getPageDisplayText(page: PageModel): string {
     return this.creator.getObjectDisplayName(page, "translation-tab", "survey-translation", page.title);
