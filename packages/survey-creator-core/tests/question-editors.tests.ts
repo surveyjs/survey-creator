@@ -132,3 +132,16 @@ test("Edit matrix cell question", (): any => {
   expect(matrix.columns[0].choices).toHaveLength(4);
   expect(matrix.columns[0].cellType).toEqual("radiogroup");
 });
+test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded event", () => {
+  const creator = new CreatorTester();
+  let valueFromCallback;
+  creator.onItemValueAdded.add((sender, options) => {
+    valueFromCallback = options.newItem.value;
+  });
+  const ratingQuestion = new QuestionRatingModel("q1");
+  ratingQuestion.rateValues = ["item1", "item2", "item3"];
+  const ratingEditor = new QuestionRatingAdornerViewModel(creator, ratingQuestion, <any>{});
+  ratingEditor.addItem(ratingEditor);
+  expect(ratingQuestion.rateValues).toHaveLength(4);
+  expect(valueFromCallback).toEqual("item4");
+});

@@ -24,7 +24,8 @@ import {
   LocalizableString,
   ILocalizableString,
   ILocalizableOwner,
-  PopupBaseViewModel
+  PopupBaseViewModel,
+  EventBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -33,7 +34,7 @@ import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { getNextValue } from "./utils/utils";
+import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -117,7 +118,7 @@ export class ToolbarActionContainer extends ActionContainer {
 
 export type toolboxLocationType = "left" | "right" | "sidebar";
 
-export class CreatorEvent extends Survey.Event<(sender: CreatorBase, options: any) => any, any> { }
+export class CreatorEvent extends EventBase<CreatorBase, any> { }
 
 /**
  * Base class for Survey Creator.
@@ -1663,8 +1664,8 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
-  public onBeforeDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
-  public onAfterDrop: Survey.Event<() => any, any> = new Survey.Event<() => any, any>();
+  public onBeforeDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onAfterDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
@@ -1713,6 +1714,9 @@ export class CreatorBase extends Base
         const oldName = !!oldValue ? oldValue : obj["name"];
         const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
         this.updateLogicOnQuestionNameChanged(oldName, newName);
+      }
+      if(propertyName === "name" && obj.isDescendantOf("selectbase")) {
+        this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
@@ -1775,6 +1779,14 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
     this.surveyLogicRenaming = false;
+  }
+  private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
+    const questions = this.survey.getAllQuestions();
+    questions.forEach(q => {
+      if(q.choicesFromQuestion === oldName) {
+        q.choicesFromQuestion = newName;
+      }
+    });
   }
   public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");
@@ -3099,15 +3111,15 @@ export class CreatorBase extends Base
     return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
   }
 
-  public getNextItemValue(question: Survey.QuestionSelectBase) {
+  public getNextItemValue(question: QuestionSelectBase): string|number {
     const itemText = this.getChoicesItemBaseTitle();
-    const values = question.choices.map((item: Survey.ItemValue) => item.value);
-    const nextValue = getNextValue(itemText, values);
-    return nextValue;
+    return getNextItemValue(itemText, question.choices);
   }
-  public createNewItemValue(question: Survey.QuestionSelectBase) {
+  public createNewItemValue(question: QuestionSelectBase): ItemValue {
     const nextValue = this.getNextItemValue(question);
-    return question.createItemValue(nextValue);
+    const res = question.createItemValue(nextValue);
+    res.text = getNextItemText(question.choices);
+    return res;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);

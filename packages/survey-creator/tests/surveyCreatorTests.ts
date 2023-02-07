@@ -2414,3 +2414,17 @@ QUnit.test("isCanModifyProperty", function (assert) {
     "Readonly by event"
   );
 });
+QUnit.test("Update choicesFromQuestion on question name change", function (assert) {
+  const creator = new SurveyCreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "radiogroup", name: "q2", choicesFromQuestion: "q1" }
+    ]
+  };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  assert.equal(q2.choicesFromQuestion, "q1");
+  q1.name = "q3";
+  assert.equal(q2.choicesFromQuestion, "q3");
+});

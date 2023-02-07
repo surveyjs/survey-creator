@@ -1509,6 +1509,18 @@ test("options.onItemValueAddedCallback", () => {
   expect(question.choices).toHaveLength(4);
   expect(question.choices[3].text).toEqual("dropdown:choices,4,4");
 });
+test("Set text into new ItemValue", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices = [{ value: 1, text: "Item 1" }, { value: 2, text: "Item 2" }];
+  var propertyGrid = new PropertyGridModelTester(question, new EmptySurveyCreatorOptions());
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  var rows = choicesQuestion.visibleRows;
+  choicesQuestion.addRow();
+  expect(question.choices).toHaveLength(3);
+  expect(question.choices[2].text).toEqual("Item 3");
+});
 test("options.onMatrixDropdownColumnAddedCallback", () => {
   var options = new EmptySurveyCreatorOptions();
   options.onMatrixDropdownColumnAddedCallback = (

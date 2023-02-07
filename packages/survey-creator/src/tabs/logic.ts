@@ -41,6 +41,8 @@ function getLogicString(name: string) {
   return editorLocalization.getString("ed.lg." + name);
 }
 
+export class SurveyLogicEvent extends Survey.EventBase<SurveyLogic> { }
+
 export class SurveyLogicType {
   public static expressionToDisplayText(
     survey: Survey.SurveyModel,
@@ -796,10 +798,7 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
    * The event is called when logic item is saved.
    * <br/> options.item is the saved logic item.
    */
-  public onLogicItemSaved: Survey.Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemSaved: SurveyLogicEvent = new SurveyLogicEvent();
   /**
    * The event is called before logic item is saved. You can set options.error to non empty string to show error instead of saving the item.
    * You can use options.item.actions to access actions and optionally set errorText to a particular action.
@@ -807,27 +806,18 @@ export class SurveyLogic implements ISurveyLogicItemOwner {
    * <br/> usedNamesInExpression - the string list of all variables (questions, calculatedValues, and so on) that are used in expression
    * <br/> error - the error string. It is empty by default. You have to set it to non-empty string to show the error on saving.
    */
-  public onLogicItemValidation: Survey.Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemValidation: SurveyLogicEvent = new SurveyLogicEvent();
   /**
    * The event is called before logic item is being removed.
    * <br/> options.allowRemove is the option you can set to false and prevent removing.
    * <br/> options.item is the logic item to remove.
    */
-  public onLogicItemRemoving: Survey.Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemRemoving: SurveyLogicEvent = new SurveyLogicEvent();
   /**
    * The event is called when logic item is removed.
    * <br/> options.item is the removed logic item.
    */
-  public onLogicItemRemoved: Survey.Event<
-    (sender: SurveyLogic, options: any) => any,
-    any
-  > = new Survey.Event<(sender: SurveyLogic, options: any) => any, any>();
+  public onLogicItemRemoved: SurveyLogicEvent = new SurveyLogicEvent();
 
   koAfterRender: any;
 

@@ -1,4 +1,4 @@
-import { defaultV2Css, Serializer } from "survey-core";
+import { defaultV2Css, ItemValue, Serializer } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
@@ -41,6 +41,20 @@ function hasValueInArray(values: any[], search: any): boolean {
   }
   return false;
 }
+export function getNextItemValue(prefix: string, choices: ItemValue[]): string | number {
+  const values = choices.map((item: ItemValue) => item.value);
+  return getNextValue(prefix, values);
+}
+export function getNextItemText(choices: ItemValue[]): string {
+  const ln = choices.length;
+  if(ln === 0) return "";
+  if(!choices[ln - 1].text || choices[ln - 1].text === choices[ln - 1].value) return "";
+  const values = [];
+  choices.forEach(item => { if(item.hasText) values.push(item.text); });
+  choices.map((item: ItemValue) => item.text);
+  const nextValue = getNextValue("", values);
+  return !!nextValue ? nextValue.toString() : "";
+}
 export function getNextValue(prefix: string, values: any[]): string | number {
   if (values.length > 0)
     var oposite = getOpositValue(values[values.length - 1]);
@@ -75,6 +89,9 @@ export function getNextValue(prefix: string, values: any[]): string | number {
       }
     } while (hasValueInArray(values, newValue));
     return newValue;
+  }
+  if(!prefix) {
+    prefix = values[values.length - 1];
   }
   return prefix + 1;
 }
