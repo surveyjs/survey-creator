@@ -15,6 +15,13 @@ As an example, we will integrate the [React Color](https://casesandberg.github.i
 npm install react-color --save
 ```
 
+<iframe src="https://codesandbox.io/embed/great-rain-8knv5f?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="great-rain-8knv5f"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components (linkStyle))
 
 ## Create a Model
@@ -212,7 +219,7 @@ const CUSTOM_TYPE = "color-picker";
 
 const locale = localization.getLocale("");
 locale.qt[CUSTOM_TYPE] = "Color Picker";
-locale.pe.colorPickerType = "Color Picker type";
+locale.pe.colorPickerType = "Color picker type";
 locale.pe.disableAlpha = "Disable alpha channel";
 ```
 
@@ -244,14 +251,66 @@ PropertyGridEditorCollection.register({
     return prop.type === "color";
   },
   getJSON: function () {
-    return { type: CUSTOM_TYPE };
+    return {
+      type: CUSTOM_TYPE,
+      colorPickerType: "Compact"
+    };
   }
 });
 ```
 
-[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components  (linkStyle))
+To try the functionality, you can add a custom property of the `"color"` type to the survey. The code below adds a custom `backgroundColor` property. When users change its value, they change the `--background` CSS variable. The [`onActiveTabChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onActiveTabChanged) event handler reapplies the selected background color when users switch to the Designer or Preview page.
 
-## See also
+```js
+import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
+import { Serializer } from "survey-core";
+import { registerColorPicker } from "./ColorPicker";
+import "survey-core/defaultV2.css";
+import "survey-creator-core/survey-creator-core.css";
+
+registerColorPicker();
+addBackgroundColorProperty();
+
+export function SurveyCreatorWidget () {
+  const creator = new SurveyCreator();
+  creator.onActiveTabChanged.add(handleActiveTabChange);
+  return <SurveyCreatorComponent creator={creator} />;
+}
+
+function addBackgroundColorProperty() {
+  Serializer.addProperty("survey", {
+    name: "backgroundColor",
+    displayName: "Background color",
+    type: "color",
+    category: "general",
+    visibleIndex: 3,
+    onSetValue: (survey, value) => {
+      survey.setPropertyValue("backgroundColor", value);
+      applyBackground(value);
+    }
+  });
+}
+
+function applyBackground(color) {
+  setTimeout(() => {
+    const surveyEl = document.getElementsByClassName("sd-root-modern")[0];
+    if (!!surveyEl) {
+      surveyEl.style.setProperty("--background", color);
+    }
+  }, 50);
+}
+
+function handleActiveTabChange(sender, options) {
+  if (options.tabName === "test" || options.tabName === "designer") {
+    applyBackground(sender.survey.backgroundColor);
+  }
+}
+```
+
+[View Demo](/survey-creator/examples/custom-colorpicker-property-editor/react)
+[View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components (linkStyle))
+
+## See Also
 
 The following demo shows how to use the [React Select](https://react-select.com/home) control as a drop-down editor for a survey question.
 
