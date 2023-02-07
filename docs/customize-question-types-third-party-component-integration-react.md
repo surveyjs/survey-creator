@@ -259,7 +259,7 @@ PropertyGridEditorCollection.register({
 });
 ```
 
-To try the functionality, you can add a custom property of the `"color"` type to the survey. The code below adds a custom `backgroundColor` property. When users change its value, they change the `--background` CSS variable. The [`onActiveTabChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onActiveTabChanged) event handler reapplies the selected background color when users switch to the Designer or Preview page.
+To try the functionality, you can add a custom property of the `"color"` type to the survey. The code below adds a custom `backgroundColor` property. When users change its value, they change the `--background` CSS variable. The [`onActiveTabChanged`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onActiveTabChanged) event handler reapplies the selected background color when users switch to the Designer or Preview tab.
 
 ```js
 import { SurveyCreator, SurveyCreatorComponent } from "survey-creator-react";
