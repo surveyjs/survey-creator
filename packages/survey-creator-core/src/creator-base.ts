@@ -1674,7 +1674,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
       let panel = sender.dropTarget.parent;
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onBeforeDrop.fire(null, null);
+      this.onBeforeDrop.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
       this.undoRedoManager.setUndoCallbackForTransaction(() => {
         panel.updateRows();
@@ -1684,7 +1684,7 @@ export class CreatorBase extends Base
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
       isDraggedFromToolbox = false;
-      this.onAfterDrop.fire(null, null);
+      this.onAfterDrop.fire(sender, options);
     });
   }
   private initDragDropChoices() {
