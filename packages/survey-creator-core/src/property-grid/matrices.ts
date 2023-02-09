@@ -2,7 +2,7 @@ import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectPrope
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
-import { getNextValue } from "../utils/utils";
+import { getNextItemText, getNextValue } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -145,7 +145,10 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!!this.getObjTypeName()) {
       item[this.getObjTypeName()] = item.getType();
     }
-    var arr = (<any>matrix).obj[prop.name];
+    const arr = (<any>matrix).obj[prop.name];
+    if(Serializer.isDescendantOf(item.getType(), "itemvalue")) {
+      item.text = getNextItemText(arr);
+    }
     arr.push(item);
     if (arr != matrix.value) {
       matrix.value = arr;

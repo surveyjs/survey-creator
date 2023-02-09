@@ -20,6 +20,9 @@ export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterV
   public get creator(): CreatorBase {
     return this.model;
   }
+  protected override getShouldReattachChangeDetector(): boolean {
+    return false;
+  }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();
   }

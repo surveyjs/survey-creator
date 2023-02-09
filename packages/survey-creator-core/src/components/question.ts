@@ -89,9 +89,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
-    let result = this.creator.isElementSelected(this.surveyElement)
-      ? "svc-question__content--selected"
-      : "";
+    let result = typeof this.surveyElement.getType === "function" ? ("svc-question__content--" + this.surveyElement.getType()) : "";
+    if(this.creator.isElementSelected(this.surveyElement)) {
+      result += " svc-question__content--selected";
+    }
 
     if (this.isEmptyElement) {
       result += " svc-question__content--empty";
@@ -205,9 +206,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.currentType, this.creator.toolbox.itemNames, true
     );
     const res = [];
+    let lastItem = null;
     convertClasses.forEach((className: string) => {
       const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
-      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
+      const needSeparator = lastItem && item.category != lastItem.category;
+      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
+      lastItem = item;
       res.push(action);
     });
     return res;

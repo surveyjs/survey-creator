@@ -2,8 +2,8 @@
 
 .svc-image-question-controls {
   position: absolute;
-  top: calcSize(1.5);
-  right: calcSize(1.5);
+  top: calcSize(5);
+  right: calcSize(1);
   display: none;
 }
 
@@ -31,11 +31,16 @@
   use {
     fill: $foreground-light;
   }
+
+  &:hover {
+
+    // background-color: $primary-light;
+    use {
+      fill: $primary;
+    }
+  }
 }
 
-.svc-image-item-value-controls__choose-file:hover {
-  // background-color: $primary-light;
-  use {
-    fill: $primary;
-  }
+.svc-question__content--image {
+  padding: calcSize(4) 0 calcSize(8) 0;
 }

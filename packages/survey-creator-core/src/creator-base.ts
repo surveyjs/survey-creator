@@ -34,7 +34,7 @@ import { DragDropSurveyElements, DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
-import { getNextValue } from "./utils/utils";
+import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
@@ -1674,7 +1674,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
       let panel = sender.dropTarget.parent;
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onBeforeDrop.fire(null, null);
+      this.onBeforeDrop.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
       this.undoRedoManager.setUndoCallbackForTransaction(() => {
         panel.updateRows();
@@ -1684,7 +1684,7 @@ export class CreatorBase extends Base
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
       isDraggedFromToolbox = false;
-      this.onAfterDrop.fire(null, null);
+      this.onAfterDrop.fire(sender, options);
     });
   }
   private initDragDropChoices() {
@@ -1714,6 +1714,9 @@ export class CreatorBase extends Base
         const oldName = !!oldValue ? oldValue : obj["name"];
         const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
         this.updateLogicOnQuestionNameChanged(oldName, newName);
+      }
+      if(propertyName === "name" && obj.isDescendantOf("selectbase")) {
+        this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
     }
     if (propertyName === "name" && obj.isDescendantOf("matrixdropdowncolumn")) {
@@ -1776,6 +1779,14 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = true;
     this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
     this.surveyLogicRenaming = false;
+  }
+  private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
+    const questions = this.survey.getAllQuestions();
+    questions.forEach(q => {
+      if(q.choicesFromQuestion === oldName) {
+        q.choicesFromQuestion = newName;
+      }
+    });
   }
   public isObjQuestion(obj: Base): boolean {
     return this.isObjThisType(obj, "question");
@@ -3100,15 +3111,15 @@ export class CreatorBase extends Base
     return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
   }
 
-  public getNextItemValue(question: Survey.QuestionSelectBase) {
+  public getNextItemValue(question: QuestionSelectBase): string|number {
     const itemText = this.getChoicesItemBaseTitle();
-    const values = question.choices.map((item: Survey.ItemValue) => item.value);
-    const nextValue = getNextValue(itemText, values);
-    return nextValue;
+    return getNextItemValue(itemText, question.choices);
   }
-  public createNewItemValue(question: Survey.QuestionSelectBase) {
+  public createNewItemValue(question: QuestionSelectBase): ItemValue {
     const nextValue = this.getNextItemValue(question);
-    return question.createItemValue(nextValue);
+    const res = question.createItemValue(nextValue);
+    res.text = getNextItemText(question.choices);
+    return res;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
