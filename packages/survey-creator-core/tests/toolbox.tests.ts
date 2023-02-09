@@ -164,12 +164,12 @@ test("toolbox change categories", (): any => {
   expect(toolbox.categories).toHaveLength(4);
 });
 
-test("toolbox showCategoryTitles shold be set on first category change", (): any => {
+test("toolbox showCategoryTitles should not be set on first category change", (): any => {
   var toolbox = new QuestionToolbox([], undefined, true);
   expect(toolbox.showCategoryTitles).toBeFalsy();
 
   toolbox.changeCategories([]);
-  expect(toolbox.showCategoryTitles).toBeTruthy();
+  expect(toolbox.showCategoryTitles).toBeFalsy();
 });
 
 test("toolbox showCategoryTitles not change if add item", (): any => {

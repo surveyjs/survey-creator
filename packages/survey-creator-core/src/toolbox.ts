@@ -108,7 +108,7 @@ export class QuestionToolbox
     "matrix", "matrixdropdown", "matrixdynamic",
     "html", "expression", "image", "signaturepad"
   ];
-  showTitleOnCategoryChange: boolean = true;
+
   public static getQuestionDefaultSettings(questionType: string): any {
     if (!settings.toolbox || !settings.toolbox.defaultJSON) return undefined;
     return settings.toolbox.defaultJSON[questionType];
@@ -584,9 +584,6 @@ export class QuestionToolbox
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
         categories.push(category);
-        // if(!isСategoryInitialization && this.showTitleOnCategoryChange) {
-        //   this.showCategoryTitles = true;
-        // }
       }
       categoriesHash[categoryName].items.push(item);
     }
