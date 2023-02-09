@@ -189,10 +189,11 @@ test("Toolbox category collapsed", async (t) => {
     await ClientFunction(() => {
       var toolbox = window["creator"].toolbox;
       toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]);
-      toolbox.allowExpandMultipleCategories = true;
       toolbox.showCategoryTitles = true;
+      toolbox.allowExpandMultipleCategories = true;
     })();
     await t.resizeWindow(2560, 1440);
+    await t.wait(200);
     await takeElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t, comparer);
   });
 });
@@ -209,6 +210,7 @@ test("Toolbox with category titles", async (t) => {
       toolbox.showCategoryTitles = true;
     })();
     await t.resizeWindow(2560, 1440);
+    await t.wait(200);
     await takeElementScreenshot("toolbox-categories.png", toolboxElement, t, comparer);
   });
 });
