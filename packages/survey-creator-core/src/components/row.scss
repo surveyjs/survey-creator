@@ -7,6 +7,9 @@
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
   gap: calcSize(1);
+  .sd-row--multiple {
+      overflow: unset;
+    }
 }
 
 .sd-panel .svc-row .sd-row--multiple {
