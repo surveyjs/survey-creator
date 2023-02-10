@@ -186,14 +186,10 @@ test("Toolbox category collapsed", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
-    await ClientFunction(() => {
-      var toolbox = window["creator"].toolbox;
-      toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]);
-      toolbox.showCategoryTitles = true;
-      toolbox.allowExpandMultipleCategories = true;
-    })();
+    await ClientFunction(() => { window["creator"].toolbox.changeCategories([{ name: "matrixdropdown", category: "matrix" }]); })();
+    await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
+    await ClientFunction(() => { window["creator"].toolbox.allowExpandMultipleCategories = true; })();
     await t.resizeWindow(2560, 1440);
-    await t.wait(200);
     await takeElementScreenshot("toolbox-categories-collapsed.png", toolboxElement, t, comparer);
   });
 });
@@ -203,14 +199,10 @@ test("Toolbox with category titles", async (t) => {
     const toolboxElement = Selector(".svc-toolbox");
 
     await setJSON({ pages: [{ name: "page1" }] });
-    await ClientFunction(() => {
-      var toolbox = window["creator"].toolbox;
-      toolbox.keepAllCategoriesExpanded = true;
-      toolbox.changeCategories([]);
-      toolbox.showCategoryTitles = true;
-    })();
+    await ClientFunction(() => { window["creator"].toolbox.keepAllCategoriesExpanded = true; })();
+    await ClientFunction(() => { window["creator"].toolbox.changeCategories([]); })();
+    await ClientFunction(() => { window["creator"].toolbox.showCategoryTitles = true; })();
     await t.resizeWindow(2560, 1440);
-    await t.wait(200);
     await takeElementScreenshot("toolbox-categories.png", toolboxElement, t, comparer);
   });
 });
