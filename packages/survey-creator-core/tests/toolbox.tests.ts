@@ -60,6 +60,7 @@ test("toolbox addItem with index", (): any => {
 
 test("toolbox several categories", (): any => {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
+  toolbox.showCategoryTitles = true;
   expect(toolbox.hasCategories).toBeFalsy();
   toolbox.addItem(<any>{ name: "countries", category: "additional" });
   expect(toolbox.hasCategories).toBeTruthy();
@@ -111,18 +112,10 @@ test("toolbox default categories calculator", (): any => {
     "dropdown",
     "matrix"
   ]);
-  expect(toolbox["getDefaultCategories"]()).toEqual([{
-    "category": "Choice Questions",
-    "name": "radiogroup",
-  },
-  {
-    "category": "Choice Questions",
-    "name": "dropdown",
-  },
-  {
-    "category": "Matrix Questions",
-    "name": "matrix",
-  }]);
+  expect(toolbox["getDefaultQuestionCategories"]()).toEqual({
+    "radiogroup": "Choice Questions",
+    "dropdown": "Choice Questions",
+    "matrix": "Matrix Questions" });
 });
 
 test("toolbox default categories actions separator", (): any => {
@@ -171,12 +164,20 @@ test("toolbox change categories", (): any => {
   expect(toolbox.categories).toHaveLength(4);
 });
 
-test("toolbox showCategoryTitles shold be set on first category change", (): any => {
+test("toolbox showCategoryTitles should not be set on first category change", (): any => {
   var toolbox = new QuestionToolbox([], undefined, true);
   expect(toolbox.showCategoryTitles).toBeFalsy();
 
   toolbox.changeCategories([]);
-  expect(toolbox.showCategoryTitles).toBeTruthy();
+  expect(toolbox.showCategoryTitles).toBeFalsy();
+});
+
+test("toolbox showCategoryTitles not change if add item", (): any => {
+  var toolbox = new QuestionToolbox([], undefined, true);
+  expect(toolbox.showCategoryTitles).toBeFalsy();
+
+  toolbox.addItem(<any>{ name: "countries" });
+  expect(toolbox.showCategoryTitles).toBeFalsy();
 });
 
 test("toolbox load custom/composite questions", (): any => {
@@ -210,6 +211,7 @@ test("toolbox categories + allowExpandMultipleCategories property", (): any => {
     "comment",
     "matrix"
   ]);
+  toolbox.showCategoryTitles = true;
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
@@ -259,6 +261,7 @@ test("toolbox categories + keepAllCategoriesExpanded property", (): any => {
     "comment",
     "matrix"
   ]);
+  toolbox.showCategoryTitles = true;
   toolbox.changeCategories([
     { name: "comment", category: "comment" },
     { name: "matrix", category: "matrix" }
