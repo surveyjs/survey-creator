@@ -59,6 +59,7 @@ var buildPlatformJson = {
     packageJson.name + ".min.js",
     "survey-creator-core.i18n.js",
     "survey-creator-core.i18n.min.js",
+    "ts3.4/survey-creator-core.d.ts"
   ],
   main: packageJson.name + ".js",
   repository: {
@@ -69,6 +70,13 @@ var buildPlatformJson = {
     node: ">=0.10.0",
   },
   typings: packageJson.name + ".d.ts",
+  typesVersions: {
+    "<4.2": {
+      "*": [
+        "ts3.4/*"
+      ]
+    }
+  },
   peerDependencies: {
     "ace-builds": "^1.4.12",
   },

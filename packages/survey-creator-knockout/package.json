@@ -29,7 +29,7 @@
         "visual-regression-tests:file": "testcafe chrome:headless --disable-font-subpixel-positioning --app \"http-server\" ../../visualRegressionTests/tests/designer/pg-choices.ts --screenshots ../../ --reporter minimal --selector-timeout 1500",
         "release": "standard-version --message \"Release: %s [azurepipelines skip]\"",
         "remove-package-lock": "rimraf package-lock.json",
-        "build": "webpack --env.buildType dev && webpack --env.buildType prod",
+        "build": "webpack --env.buildType dev && webpack --env.buildType prod && rimraf build/ts3.4 && downlevel-dts build build/ts3.4",
         "watch:dev": "webpack --env.buildType dev --watch",
         "watch:prod": "webpack --env.buildType prod --watch",
         "-prestorybook": "npm run test:generate-output",
@@ -93,7 +93,8 @@
         "webpack-cli": "^3.3.11",
         "webpack-dev-server": "^3.11.0",
         "webpack-svgstore-plugin": "^4.1.0",
-        "colors": "1.4.0"
+        "colors": "1.4.0",
+        "downlevel-dts": "~0.11.0"
     },
     "dependencies": {
         "knockout": "^3.5.1",

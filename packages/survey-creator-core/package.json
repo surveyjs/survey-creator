@@ -8,7 +8,7 @@
     "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "scripts": {
-    "build": "webpack --env.buildType dev && webpack --env.buildType prod",
+    "build": "webpack --env.buildType dev && webpack --env.buildType prod && rimraf build/ts3.4 && downlevel-dts build build/ts3.4",
     "build:i18n": "webpack --config ./webpack.i18n.js --env.buildType dev && webpack --config ./webpack.i18n.js --env.buildType prod",
     "doc_gen": "node doc_generator/editor_docgenerator.js src/entries/index.ts",
     "test": "jest",
@@ -42,6 +42,7 @@
     "css-loader": "^3.6.0",
     "dotenv": "4.0.0",
     "dts-bundle": "0.7.2",
+    "downlevel-dts": "~0.11.0",
     "eslint": "^7.32.0",
     "file-loader": "0.10.0",
     "github-api": "^3.3.0",

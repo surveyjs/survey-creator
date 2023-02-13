@@ -37,7 +37,8 @@ const buildPlatformJson = {
   files: [
     packageJson.name + ".js",
     packageJson.name + ".d.ts",
-    packageJson.name + ".min.js"
+    packageJson.name + ".min.js",
+    "ts3.4/" + packageJson.name + ".d.ts",
   ],
   main: packageJson.name + ".js",
   repository: {
@@ -48,6 +49,13 @@ const buildPlatformJson = {
     node: ">=0.10.0"
   },
   typings: packageJson.name + ".d.ts",
+  "typesVersions": {
+    "<4.2": {
+      "*": [
+        "ts3.4/*"
+      ]
+    }
+  },
   peerDependencies: {
     "ace-builds": "^1.4.12"
   },
@@ -62,7 +70,7 @@ const buildPlatformJson = {
 
 module.exports = function (options) {
   const buildPath = __dirname + "/build/";
-  const isProductionBuild = options.buildType === "prod";  
+  const isProductionBuild = options.buildType === "prod";
 
   const percentage_handler = function handler(percentage, msg) {
     if (0 == percentage) {
