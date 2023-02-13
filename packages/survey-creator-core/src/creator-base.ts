@@ -253,7 +253,7 @@ export class CreatorBase extends Base
   public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
   }
-  protected set pageEditMode(val: "standard" | "single" | "bypage") {
+  public set pageEditMode(val: "standard" | "single" | "bypage") {
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
@@ -999,7 +999,7 @@ export class CreatorBase extends Base
   public get allowModifyPages() {
     return this._allowModifyPages;
   }
-  protected set allowModifyPages(val: boolean) {
+  public set allowModifyPages(val: boolean) {
     this._allowModifyPages = val;
     this.changePageModifications(val);
   }
@@ -1715,7 +1715,7 @@ export class CreatorBase extends Base
         const newName = !!obj["valueName"] ? obj["valueName"] : obj["name"];
         this.updateLogicOnQuestionNameChanged(oldName, newName);
       }
-      if(propertyName === "name" && obj.isDescendantOf("selectbase")) {
+      if (propertyName === "name" && obj.isDescendantOf("selectbase")) {
         this.updateChoicesFromQuestionOnColumnNameChanged(oldValue, obj["name"]);
       }
     }
@@ -1783,7 +1783,7 @@ export class CreatorBase extends Base
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
     const questions = this.survey.getAllQuestions();
     questions.forEach(q => {
-      if(q.choicesFromQuestion === oldName) {
+      if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
       }
     });
@@ -3111,7 +3111,7 @@ export class CreatorBase extends Base
     return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
   }
 
-  public getNextItemValue(question: QuestionSelectBase): string|number {
+  public getNextItemValue(question: QuestionSelectBase): string | number {
     const itemText = this.getChoicesItemBaseTitle();
     return getNextItemValue(itemText, question.choices);
   }
