@@ -137,6 +137,8 @@ test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded ev
   let valueFromCallback;
   creator.onItemValueAdded.add((sender, options) => {
     valueFromCallback = options.newItem.value;
+    options.newItem.value = "newItem1";
+    options.newItem.text = "New Item 1";
   });
   const ratingQuestion = new QuestionRatingModel("q1");
   ratingQuestion.rateValues = ["item1", "item2", "item3"];
@@ -144,4 +146,6 @@ test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded ev
   ratingEditor.addItem(ratingEditor);
   expect(ratingQuestion.rateValues).toHaveLength(4);
   expect(valueFromCallback).toEqual("item4");
+  expect(ratingQuestion.rateValues[3].value).toEqual("newItem1");
+  expect(ratingQuestion.rateValues[3].text).toEqual("New Item 1");
 });
