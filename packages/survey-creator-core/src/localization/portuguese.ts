@@ -843,7 +843,6 @@ var portugueseTranslation = {
     currency: "Moeda",
     cellHint: "Dica de célula",
     isUnique: "É único",
-    isUnique: "É único",
     showInMultipleColumns: "Mostrar em múltiplas colunas",
     totalMaximumFractionDigits: "Total Máximo de Dígitos da Fração",
     totalMinimumFractionDigits: "Total Mínimo de Dígitos da Fração",
