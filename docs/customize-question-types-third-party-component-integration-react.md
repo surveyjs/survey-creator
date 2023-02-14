@@ -81,7 +81,6 @@ export function SurveyCreatorWidget () {
   const creator = new SurveyCreator();
   return <SurveyCreatorComponent creator={creator} />;
 }
-
 ```
 
 ## Configure JSON Serialization
@@ -213,7 +212,7 @@ ReactQuestionFactory.Instance.registerQuestion(CUSTOM_TYPE, (props) => {
 Survey Creator generates captions for your custom question type and its properties automatically. If you need to change them, use the [localization engine](/Documentation/Survey-Creator?id=localization):
 
 ```js
-import { localization } from "survey-creator-react";
+import { localization } from "survey-creator-core";
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -230,6 +229,7 @@ Each question type has an icon that is displayed next to the type name in the [T
 ```js
 import { ReactComponent as ColorPickerIcon } from "../color-picker.svg";
 import ReactDOMServer from "react-dom/server";
+import { SvgRegistry } from "survey-core"
 
 const CUSTOM_TYPE = "color-picker";
 
@@ -307,7 +307,8 @@ function handleActiveTabChange(sender, options) {
 }
 ```
 
-[View Demo](/survey-creator/examples/custom-colorpicker-property-editor/react)
+[View Demo](/survey-creator/examples/custom-colorpicker-property-editor/react (linkStyle))
+
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/integrate-third-party-react-components (linkStyle))
 
 ## See Also
