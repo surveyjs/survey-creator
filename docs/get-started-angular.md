@@ -89,7 +89,7 @@ import { Component, OnInit } from '@angular/core';
 import { SurveyCreatorModel } from "survey-creator-core";
 
 @Component({
-  selector: 'survey-creator',
+  selector: 'survey-creator-component',
   templateUrl: './survey-creator.component.html',
   styleUrls: ['./survey-creator.component.css']
 })
@@ -115,7 +115,7 @@ const creatorOptions = {
 };
 
 @Component({
-  selector: 'survey-creator',
+  selector: 'survey-creator-component',
   templateUrl: './survey-creator.component.html',
   styleUrls: ['./survey-creator.component.css']
 })
@@ -155,7 +155,7 @@ To render Survey Creator, add a `<survey-creator>` element to your component tem
 
 ```html
 <div id="surveyCreator">
-  <survey-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></survey-creator>
 </div>
 ```
 ```css
@@ -171,7 +171,7 @@ To render Survey Creator, add a `<survey-creator>` element to your component tem
 ```html
 <!-- survey-creator.component.html -->
 <div id="surveyCreator">
-  <survey-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></survey-creator>
 </div>
 ```
 
@@ -186,7 +186,7 @@ const creatorOptions = {
 };
 
 @Component({
-  selector: 'survey-creator',
+  selector: 'survey-creator-component',
   templateUrl: './survey-creator.component.html',
   styleUrls: ['./survey-creator.component.css']
 })
@@ -325,7 +325,7 @@ To view the application, run `ng serve` in a command line and open [http://local
 ```html
 <!-- survey-creator.component.html -->
 <div id="surveyCreator">
-  <survey-creator [model]="surveyCreatorModel"></svc-creator>
+  <survey-creator [model]="surveyCreatorModel"></survey-creator>
 </div>
 ```
 
@@ -355,7 +355,7 @@ const defaultJson = {
 };
 
 @Component({
-  selector: 'survey-creator',
+  selector: 'survey-creator-component',
   templateUrl: './survey-creator.component.html',
   styleUrls: ['./survey-creator.component.css']
 })
