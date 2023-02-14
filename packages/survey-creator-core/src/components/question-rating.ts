@@ -52,7 +52,8 @@ export class QuestionRatingAdornerViewModel extends Base {
         }
       };
       model.element.rateValues = model.element.rateValues.concat([itemValue]);
-      model.creator.onItemValueAddedCallback(model.element, "rateValues", itemValue, model.element.rateValues);
+      const rateValues = model.element.rateValues;
+      model.creator.onItemValueAddedCallback(model.element, "rateValues", rateValues[rateValues.length - 1], rateValues);
     }
   }
   public removeItem(model: QuestionRatingAdornerViewModel) {
