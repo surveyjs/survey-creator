@@ -202,7 +202,7 @@ test("Hidden Question Issue: #3298", async (t) => {
     await takeElementScreenshot("preview-tab-show-invisible-by-creator-button.png", Selector(".sd-page"), t, comparer);
 
     const hideInvisibleElements = Selector('[title="Hide invisible elements"]');
-    await t.click(hideInvisibleElements).click(Selector(".sd-selectbase__item"));
+    await t.click(hideInvisibleElements).click(Selector("span").withText("Item 2"));
     await takeElementScreenshot("preview-tab-show-invisible-by-trigger.png", Selector("[data-name='question2']"), t, comparer);
   });
 });
