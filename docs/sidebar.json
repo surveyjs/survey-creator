@@ -63,9 +63,13 @@
           "Title": "Create Custom Widgets"
         },
         {
+          "Name": "customize-question-types-third-party-component-integration-angular",
+          "Title": "Integrate Third-Party Angular Components"
+        },
+        {
           "Name": "customize-question-types-third-party-component-integration-react",
           "Title": "Integrate Third-Party React Components"
-        },
+        }
       ]
     },
     {
