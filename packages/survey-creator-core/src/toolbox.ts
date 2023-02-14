@@ -129,7 +129,7 @@ export class QuestionToolbox
   public copiedItemMaxCount: number = 3;
   private allowExpandMultipleCategoriesValue: boolean = false;
   private keepAllCategoriesExpandedValue: boolean = false;
-  private showCategoryTitlesValue: boolean = false;
+  @property({ defaultValue: false }) private showCategoryTitlesValue: boolean;
   private dragOrClickHelper: DragOrClickHelper;
 
   //koItems = ko.observableArray();
