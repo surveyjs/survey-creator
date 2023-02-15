@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "survey-angular-ui": [
+        "./node_modules/survey-angular-ui"
+      ],
       "survey-core": [
         "./node_modules/survey-core"
       ],
