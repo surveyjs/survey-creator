@@ -87,6 +87,9 @@ export var settings = {
       dropdown: {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
+      tagbox: {
+        choices: ["Item 1", "Item 2", "Item 3"]
+      },
       checkbox: {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
@@ -99,19 +102,19 @@ export var settings = {
       imagepicker: {
         choices: [
           {
-            value: "lion",
+            value: "Image 1",
             imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
           },
           {
-            value: "giraffe",
+            value: "Image 2",
             imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
           },
           {
-            value: "panda",
+            value: "Image 3",
             imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
           },
           {
-            value: "camel",
+            value: "Image 4",
             imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
           }
         ]
