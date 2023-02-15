@@ -535,7 +535,6 @@ test("Tag Box question inplace editor default values", async (t) => {
     .expect(items.nth(6).find("span").withText("Other (describe)").exists).ok();
 });
 
-
 test("Ranking question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
