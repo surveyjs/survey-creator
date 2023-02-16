@@ -161,7 +161,7 @@ test("Convert text and radio question to image picker", () => {
   var newQ1 = <QuestionImagePickerModel>page.elements[0];
   var newQ2 = <QuestionImagePickerModel>page.elements[1];
   expect(newQ1.choices).toHaveLength(4);
-  expect(newQ1.choices[0].value).toEqual("lion");
+  expect(newQ1.choices[0].value).toEqual("Image 1");
   expect(newQ1.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
   expect(newQ2.choices).toHaveLength(3);
   expect(newQ2.choices[0].value).toEqual("item1");
