@@ -12,7 +12,7 @@ _site/
 .sass-cache
 docs/pmes.json
 docs/classes.json
-/dist/
+dist/
 /shippable
 /Properties
 /src/templateEditor.ko.html.ts
