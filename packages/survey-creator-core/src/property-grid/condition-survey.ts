@@ -666,7 +666,9 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         this.addConditionQuestionsHash[res[i].name] = question;
       }
     }
-    this.addValuesIntoConditionQuestions(this.survey.getVariableNames(), res);
+    const variableNames = this.survey.getVariableNames();
+    this.addSurveyCalculatedValues(variableNames);
+    this.addValuesIntoConditionQuestions(variableNames, res);
     if (sortOrder === "asc") {
       SurveyHelper.sortItems(res);
     }
@@ -693,6 +695,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
         question: this.getCalculatedValueQuestion()
       });
     }
+  }
+  private addSurveyCalculatedValues(names: Array<any>) {
+    this.survey.calculatedValues.forEach(item => {
+      if(names.indexOf(item.name) < 0) names.push(item.name);
+    });
   }
   private calculatedValueQuestion: Question = null;
   private getCalculatedValueQuestion(): Question {
