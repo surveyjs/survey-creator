@@ -9,6 +9,32 @@ A platform-independent data model for Survey Creator / Form Builder by [SurveyJS
 - [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) for Angular
 - [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) for Knockout, jQuery, and Vue
 
+## Build the Survey Creator Model from Sources
+
+If you want to build the library yourself, do the following:
+
+1.  **Clone the repo from GitHub and install build dependencies**
+
+    ```
+    git clone https://github.com/surveyjs/survey-creator.git
+    cd survey-creator/packages/survey-creator-core
+    npm install
+    ```
+
+1.  **Build the library**
+
+    ```
+    npm run build
+    ```
+
+    You can find the built library in the "build" directory.
+
+1.  **Run unit tests**
+    ```
+    npm test
+    ```
+    This command runs unit tests using [Karma](https://karma-runner.github.io/0.13/index.html).
+
 ## Licensing
 
 Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Product Licensing](https://surveyjs.io/licensing).

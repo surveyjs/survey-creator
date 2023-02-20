@@ -1,5 +1,5 @@
-//Uncomment this line on creating a translation file
-//import { editorLocalization, defaultStrings } from "../editorLocalization";
+// Uncomment the line below if you create a custom dictionary
+// import { editorLocalization, defaultStrings } from "../editorLocalization";
 
 export var enStrings = {
   //survey templates
@@ -858,5 +858,8 @@ export var enStrings = {
     iconSize: "iconSize"
   },
 };
-//Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
-//editorLocalization.locales["en"] = enStrings;
+
+// Uncomment the line below if you create a custom dictionary.
+// Replace "en" with a custom locale code (for example, "fr" or "de"),
+// Replace `enStrings` with the name of the variable that contains the custom dictionary.
+// editorLocalization.locales["en"] = enStrings;
