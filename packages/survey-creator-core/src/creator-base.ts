@@ -2484,8 +2484,8 @@ export class CreatorBase extends Base
     return isValid;
   }
   /**
-   * Remove all strings for the passed locale in the survey.
-   * @param locale the locale name, like 'en', 'de' and so on.
+   * Deletes all custom translation strings for the passed locale from Survey Creator and from the generated survey JSON schema.
+   * @param locale A locale code (for example, "en").
    */
   public deleteLocaleStrings(locale: string): void {
     const translation = new Translation(this.survey);
