@@ -1589,7 +1589,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    },]
+    }, ]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -3661,3 +3661,23 @@ test("Update choicesFromQuestion on question name change", (): any => {
   q1.name = "q3";
   expect(q2.choicesFromQuestion).toEqual("q3");
 });
+test("creator.deleteLocaleStrings", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          de: "Title de"
+        }
+      }
+    ]
+  };
+  creator.survey.locale = "de";
+  const q = creator.survey.getQuestionByName("question1");
+  expect(q.title).toEqual("Title de");
+  creator.deleteLocaleStrings("de");
+  expect(q.title).toEqual("question1");
+});
+

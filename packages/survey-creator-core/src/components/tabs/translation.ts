@@ -22,6 +22,7 @@ export class TranslationItemBase extends Base {
   public makeObservable() {
     this.fireOnObjCreating();
   }
+  public deleteLocaleStrings(locale: string): void { }
   protected fireOnObjCreating(obj: Base = null) {
     if (this.translation) {
       if (!obj) obj = this;
@@ -153,6 +154,9 @@ export class TranslationItem extends TranslationItemBase {
     if (!locText) return;
     this.locString.setLocaleText("", locText);
     this.locString.setLocaleText(loc, null);
+  }
+  public deleteLocaleStrings(locale: string): void {
+    this.setLocText(locale, "");
   }
   public getPlaceholder(locale: string): string {
     const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
@@ -304,6 +308,9 @@ export class TranslationGroup extends TranslationItemBase {
   }
   public mergeLocaleWithDefault(loc: string) {
     this.itemValues.forEach((item) => item.mergeLocaleWithDefault(loc));
+  }
+  public deleteLocaleStrings(locale: string): void {
+    this.items.forEach(item => item.deleteLocaleStrings(locale));
   }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
@@ -569,6 +576,13 @@ export class Translation extends Base implements ITranslationLocales {
     return <QuestionCheckboxModel>(
       this.settingsSurvey.getQuestionByName("locales")
     );
+  }
+  public deleteLocaleStrings(locale: string): void {
+    if(!this.root) {
+      this.reset();
+    }
+    if(!this.root) return;
+    this.root.deleteLocaleStrings(locale);
   }
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();

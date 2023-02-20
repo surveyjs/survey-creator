@@ -1495,3 +1495,45 @@ test("Check onTranlationItemChanging event", () => {
   //check that event callback is called once
   expect(log).toBe("->called");
 });
+test("Make add language button disabled if there are no options", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              de: "Title de"
+            },
+            dataList: {
+              default: ["Item1", "Item2"],
+              de: ["Item1-de", "Item2-de"],
+            }
+          }
+        ]
+      },
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        },
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.locales[1]).toEqual("de");
+  translation.deleteLocaleStrings("de");
+  translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(1);
+});
