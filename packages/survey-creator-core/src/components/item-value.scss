@@ -135,6 +135,10 @@
   .sv-ranking-item__icon-container {
     display: none;
   }
+
+  .sv-ranking-item__text {
+    overflow: visible;
+  }
 }
 
 .svc-item-value--ghost {
