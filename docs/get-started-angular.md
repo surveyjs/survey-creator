@@ -24,7 +24,7 @@ Survey Creator for Angular consists of two npm packages: [`survey-creator-core`]
 npm install survey-creator-angular --save
 ```
 
-> SurveyJS for Angular requires Angular v13.0.0 or newer and depends on the `@angular/cdk` package. If your project does not include it yet, run the following command:
+> SurveyJS for Angular requires Angular v12.0.0 or newer and depends on the `@angular/cdk` package. If your project does not include it yet, run the following command:
 >
 > ```cmd
 > npm install @angular/cdk@^12.0.0 --save
