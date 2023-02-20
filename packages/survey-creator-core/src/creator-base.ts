@@ -55,6 +55,7 @@ import { UndoRedoController } from "./plugins/undo-redo/undo-redo-controller";
 import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
+import { Translation } from "../src/components/tabs/translation";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -2481,6 +2482,14 @@ export class CreatorBase extends Base
     return isValid && options.errors.length == 0;
     */
     return isValid;
+  }
+  /**
+   * Deletes all custom translation strings for the passed locale from Survey Creator and from the generated survey JSON schema.
+   * @param locale A locale code (for example, "en").
+   */
+  public deleteLocaleStrings(locale: string): void {
+    const translation = new Translation(this.survey);
+    translation.deleteLocaleStrings(locale);
   }
   private getPropertyGridExpandedCategory(): string {
     if (!this.designerPropertyGrid) return undefined;
