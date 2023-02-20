@@ -163,7 +163,7 @@ test("toolboxLocation left", async (t) => {
     .expect(popup.visible).ok()
     .expect(popup.offsetTop).gte(0)
     .expect(popup.offsetLeft).lt(1500 - 100) // window width - popup width
-    .click(popup.find(".sv-list__item"));
+    .click(popup.find(".sv-list__item").withText("page2"));
 
   await changeToolboxLocation("right");
   await t
