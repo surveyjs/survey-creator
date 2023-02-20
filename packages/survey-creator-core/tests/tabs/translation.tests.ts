@@ -539,6 +539,49 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
+test("Make invisible locales in language selector, that has been already choosen", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              "de": "Question 1, de"
+            }
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  surveyLocalization.supportedLocales = ["en", "fr", "de"];
+  const translation = new Translation(survey);
+  translation.reset();
+  const locales = translation.locales;
+  expect(locales).toHaveLength(2);
+  expect(locales[0]).toEqual("");
+  expect(locales[1]).toEqual("de");
+  const langList = translation.chooseLanguageActions;
+  expect(langList).toHaveLength(3);
+  expect(langList[0].id).toEqual("en");
+  expect(langList[1].id).toEqual("fr");
+  expect(langList[2].id).toEqual("de");
+  expect(langList[0].visible).toBeFalsy();
+  expect(langList[1].visible).toBeTruthy();
+  expect(langList[2].visible).toBeFalsy();
+});
 
 test("Make add language button disabled if there are no options", () => {
   const survey = new SurveyModel({
