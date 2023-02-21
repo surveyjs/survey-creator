@@ -3,13 +3,13 @@
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
-The Survey Creator is a visual survey designer / form builder for [SurveyJS](https://github.com/surveyjs/survey-library).
+A visual designer that enables you and your users to create and modify surveys and forms.
 
-> **NOTE**: This package contains an obsolete version of Survey Creator. For information on the new Survey Creator, refer to the following directories:
-> - [survey-creator-react](../survey-creator-react) for React
-> - [survey-creator-knockout](../survey-creator-knockout) for Knockout, jQuery, Angular, and Vue
+> **NOTE**: This package contains an obsolete version of Survey Creator. We recommend using the new Survey Creator that ships with an updated UI and native support for Angular and React. Refer to the following help topics for more information:
 >
-> Differences between these two versions are described in the following help topic: [SurveyJS Creator V2: What's new](https://surveyjs.io/Documentation/Survey-Creator?id=Creator-V2-Whats-New). For information on how to migrate to the new version, refer to the [Migration Guide for SurveyJS Creator - from V1 to V2](https://surveyjs.io/Documentation/Survey-Creator?id=Migrate-from-V1-to-V2).
+> - [What's New in Survey Creator V2](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new)
+> - [Get Started with Survey Creator V2](https://surveyjs.io/survey-creator/documentation/get-started)
+> - [Migrate to Survey Creator V2 from V1](https://surveyjs.io/survey-creator/documentation/migrate-from-v1-to-v2)
 
 ## Quick Start
 
@@ -69,6 +69,6 @@ If you want to build the library yourself, do the following:
     ```
     This command runs unit tests using [Karma](https://karma-runner.github.io/0.13/index.html).
 
-## License
+## Licensing
 
-The Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Licenses](http://surveyjs.io/Licenses).
+Survey Creator (Form Builder) is **not available for free commercial usage**. You can find more information about licensing this product on the following page: [Product Licensing](https://surveyjs.io/licensing).
