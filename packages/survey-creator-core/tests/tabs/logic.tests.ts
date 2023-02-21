@@ -2869,3 +2869,25 @@ test("Creator is readonly", () => {
   expect(rule2.expressionEditor.editSurvey.mode).toBe("display");
   expect(rule2.itemEditor.editSurvey.mode).toBe("display");
 });
+
+test("Include calculatedValues without expressions", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", },
+      { type: "text", name: "q2", },
+      { type: "text", name: "q3" }
+    ],
+    calculatedValues: [
+      { name: "var1", expression: "1" },
+      { name: "var2" }
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  expect(logic.mode).toEqual("new");
+  const list = logic.expressionEditor.allConditionQuestions;
+  expect(list).toHaveLength(5);
+  expect(list[2].value).toEqual("q3");
+  expect(list[3].value).toEqual("var1");
+  expect(list[4].value).toEqual("var2");
+});

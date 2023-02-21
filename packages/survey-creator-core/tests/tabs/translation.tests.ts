@@ -539,6 +539,49 @@ test("Make invisible locales in language selector, that has been already choosen
   expect(list.actions[1].visible).toBeFalsy();
   surveyLocalization.supportedLocales = [];
 });
+test("Make invisible locales in language selector, that has been already choosen", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              default: "Question 1",
+              "de": "Question 1, de"
+            }
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  surveyLocalization.supportedLocales = ["en", "fr", "de"];
+  const translation = new Translation(survey);
+  translation.reset();
+  const locales = translation.locales;
+  expect(locales).toHaveLength(2);
+  expect(locales[0]).toEqual("");
+  expect(locales[1]).toEqual("de");
+  const langList = translation.chooseLanguageActions;
+  expect(langList).toHaveLength(3);
+  expect(langList[0].id).toEqual("en");
+  expect(langList[1].id).toEqual("fr");
+  expect(langList[2].id).toEqual("de");
+  expect(langList[0].visible).toBeFalsy();
+  expect(langList[1].visible).toBeTruthy();
+  expect(langList[2].visible).toBeFalsy();
+});
 
 test("Make add language button disabled if there are no options", () => {
   const survey = new SurveyModel({
@@ -1494,4 +1537,46 @@ test("Check onTranlationItemChanging event", () => {
   expect(cellQuestion.value).toBe("changed_de_changed_text");
   //check that event callback is called once
   expect(log).toBe("->called");
+});
+test("Make add language button disabled if there are no options", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "question1",
+            title: {
+              de: "Title de"
+            },
+            dataList: {
+              default: ["Item1", "Item2"],
+              de: ["Item1-de", "Item2-de"],
+            }
+          }
+        ]
+      },
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        },
+        elements: [
+          {
+            type: "text",
+            name: "question2"
+          }
+        ]
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.locales[1]).toEqual("de");
+  translation.deleteLocaleStrings("de");
+  translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(1);
 });

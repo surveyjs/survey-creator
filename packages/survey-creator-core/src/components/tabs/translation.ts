@@ -22,6 +22,7 @@ export class TranslationItemBase extends Base {
   public makeObservable() {
     this.fireOnObjCreating();
   }
+  public deleteLocaleStrings(locale: string): void { }
   protected fireOnObjCreating(obj: Base = null) {
     if (this.translation) {
       if (!obj) obj = this;
@@ -153,6 +154,9 @@ export class TranslationItem extends TranslationItemBase {
     if (!locText) return;
     this.locString.setLocaleText("", locText);
     this.locString.setLocaleText(loc, null);
+  }
+  public deleteLocaleStrings(locale: string): void {
+    this.setLocText(locale, "");
   }
   public getPlaceholder(locale: string): string {
     const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
@@ -304,6 +308,9 @@ export class TranslationGroup extends TranslationItemBase {
   }
   public mergeLocaleWithDefault(loc: string) {
     this.itemValues.forEach((item) => item.mergeLocaleWithDefault(loc));
+  }
+  public deleteLocaleStrings(locale: string): void {
+    this.items.forEach(item => item.deleteLocaleStrings(locale));
   }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
@@ -522,7 +529,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.settingsSurveyValue = this.createSettingsSurvey();
     this.surveyValue = survey;
     this.setupToolbarItems();
-    this.calcIsChooseLanguageEnabled();
+    this.updateChooseLanguageActions();
   }
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, context: any): string {
     return this.options.getProcessedTranslationItemText(locale, locString, newText, context);
@@ -569,6 +576,13 @@ export class Translation extends Base implements ITranslationLocales {
     return <QuestionCheckboxModel>(
       this.settingsSurvey.getQuestionByName("locales")
     );
+  }
+  public deleteLocaleStrings(locale: string): void {
+    if(!this.root) {
+      this.reset();
+    }
+    if(!this.root) return;
+    this.root.deleteLocaleStrings(locale);
   }
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
@@ -859,8 +873,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.settingsSurvey.setValue(valueName, val);
     }
   }
-  private isLocaleVisible(locale: string): boolean {
-    return locale !== surveyLocalization.defaultLocale && !this.hasLocale(locale);
+  private isLocaleVisible(locales: string[], locale: string): boolean {
+    return locale !== surveyLocalization.defaultLocale && locales.indexOf(locale) < 0;
   }
   private setupToolbarItems() {
     this.chooseLanguageActions = this.getSurveyLocales()[0].map((locale: ItemValue) => (
@@ -868,8 +882,7 @@ export class Translation extends Base implements ITranslationLocales {
         {
           id: locale.value,
           title: this.getLocaleName(locale.value),
-          data: locale,
-          visible: this.isLocaleVisible(locale.value)
+          data: locale
         }
       )
     ));
@@ -921,6 +934,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateSettingsSurveyLocales();
     this.updateLocales();
     this.resetStringsSurvey();
+    this.updateChooseLanguageActions();
   }
   private updateReadOnly(): void {
     if (this.stringsSurvey) {
@@ -958,9 +972,14 @@ export class Translation extends Base implements ITranslationLocales {
     if (!this.hasLocale(locale)) {
       this.addLocaleIntoValue(locale, true);
     }
-    var actions = this.chooseLanguageActions.filter(item => { return item.id === locale; });
-    if (Array.isArray(actions) && actions.length == 1) {
-      actions[0].visible = this.isLocaleVisible(locale);
+    this.updateChooseLanguageActions();
+  }
+  private updateChooseLanguageActions(): void {
+    const actions = this.chooseLanguageActions;
+    let locales = this.settingsSurvey.getValue("selLocales");
+    if (!locales) locales = [];
+    if (Array.isArray(actions)) {
+      actions.forEach(item => item.visible = this.isLocaleVisible(locales, item.data.value));
     }
     this.calcIsChooseLanguageEnabled();
   }
