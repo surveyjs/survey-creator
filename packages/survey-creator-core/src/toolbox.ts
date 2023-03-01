@@ -611,6 +611,7 @@ export class QuestionToolbox
     this.hasCategories = categories.length > 1;
     //this.updateCategoriesState();
     this.updateItemSeparators();
+    this.raiseUpdate(false);
   }
   protected createCategory(): QuestionToolboxCategory {
     return new QuestionToolboxCategory(this);

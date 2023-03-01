@@ -1,4 +1,4 @@
-import { url, getJSON, toolboxItems, explicitErrorHandler } from "../helper";
+import { url, getJSON, toolboxItems, explicitErrorHandler, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Toolbox";
 
@@ -222,4 +222,71 @@ test("check toolbox scroll", async (t) => {
       .wait(100)
       .expect(hasNoScroll()).ok();
   }
+});
+
+test("toolbar responsiveness in compact mode", async (t) => {
+  await t.resizeWindow(1200, 605);
+  const addCustomeButtonIntoQuestionToolbar = ClientFunction(() => {
+    const customCategoryName = "Custom Questions";
+    const customQuestionsData = {};
+
+    var addIntoCustomItems = (element) => {
+      var json = new window["Survey"].JsonObject().toJsonObject(element);
+      json.type = element.getType();
+      var item = {
+        id: element.name,
+        name: element.name,
+        iconName: "icon-" + element.getType(),
+        title: element.title,
+        json: json,
+        isCopied: false,
+        isStandard: false,
+        category: customCategoryName
+      };
+      customQuestionsData[item.name] = item;
+      window["creator"].toolbox.addItem(item);
+    };
+
+    window["creator"].onDefineElementMenuItems.add(function (editor, options) {
+      if (options.obj.isPage) return;
+      const objToAdd = options.obj;
+      options.items.unshift({
+        id: "addtosharedrepo",
+        title: "Save as Toolbox Item",
+        iconName: "icon-toolbox",
+        iconSize: 16,
+        action: () => {
+          addIntoCustomItems(objToAdd);
+        }
+      });
+    });
+  });
+  await addCustomeButtonIntoQuestionToolbar();
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  });
+
+  await t
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
+    .expect(visibleToolboxItems.count).eql(11)
+    .expect(Selector(".svc-toolbox__tool").count).eql(22)
+
+    .click(".svc-question__content--text", { offsetX: 200, offsetY: 20 })
+    .click(Selector(".sv-action-bar-item__title").withText("Save as Toolbox Item"))
+
+    .expect(Selector(".svc-toolbox .sv-dots__item").visible).ok()
+    .expect(Selector(".svc-toolbox__container").clientHeight).lte(510)
+    .expect(visibleToolboxItems.count).eql(11)
+    .expect(Selector(".svc-toolbox__tool").count).eql(23);
 });
