@@ -25,6 +25,30 @@
   cursor: pointer;
 }
 
+.spg-text__content,
+.spg-comment__content {
+  position: relative;
+}
+
+.spg-question__content:focus-within .spg-remaining-character-counter {
+  display: flex;
+}
+
+.spg-remaining-character-counter {
+  display: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0px;
+  font-family: $font-family;
+  line-height: calcSize(2);
+  font-size: calcSize(1.5);
+  color: $foreground-light;
+  position: absolute;
+  inset-inline-end: calcSize(0.75);
+  inset-block-end: calcSize(0.5);
+}
+
 .spg-question__description {
   line-height: calcSize(3);
   font-size: calcSize(2);

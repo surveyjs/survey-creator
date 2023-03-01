@@ -157,7 +157,8 @@ export var propertyGridCss = {
   text: {
     root: "spg-input spg-text",
     small: "spg-row__question--small",
-    content: "spg-question__content",
+    content: "spg-question__content spg-text__content",
+    remainingCharacterCounter: "spg-remaining-character-counter",
     onError: "spg-input--error"
   },
   multipletext: {
@@ -251,7 +252,8 @@ export var propertyGridCss = {
   },
   comment: {
     root: "spg-input spg-comment",
-    content: "spg-question__content",
+    content: "spg-question__content spg-comment__content",
+    remainingCharacterCounter: "spg-remaining-character-counter",
     small: "spg-row__question--small"
   },
   expression: "",
