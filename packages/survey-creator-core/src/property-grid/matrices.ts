@@ -146,7 +146,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       item[this.getObjTypeName()] = item.getType();
     }
     const arr = (<any>matrix).obj[prop.name];
-    if(Serializer.isDescendantOf(item.getType(), "itemvalue")) {
+    if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
       item.text = getNextItemText(arr);
     }
     arr.push(item);
@@ -781,66 +781,6 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
     return res;
   }
 }
-export class PropertyGridEditorBindings extends PropertyGridEditor {
-
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "bindings";
-  }
-  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
-    const res = {
-      type: "matrixdropdown",
-      rows: this.getRows(obj),
-      columns: this.getColumns(obj, options)
-    };
-    return res;
-  }
-  public onMatrixCellCreated(obj: Base, options: any) {
-    const bindingValue = obj.bindings.getValueNameByPropertyName(options.row.rowName);
-    if (!!bindingValue) {
-      options.cellQuestion.value = bindingValue;
-    }
-  }
-
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
-    question.valueFromDataCallback = function (value: any): any {
-      if (!value) return value;
-      let result: any = {};
-      Object.keys(value).forEach(bindingName => result[bindingName] = { value: value[bindingName] });
-      return result;
-    };
-
-    question.valueToDataCallback = function (newValue: any): any {
-      if (!newValue) return newValue;
-      const result: any = {};
-      Object.keys(newValue).forEach(bindingName => result[bindingName] = newValue[bindingName].value);
-      return result;
-    };
-  }
-
-  private getRows(obj: Base): Array<any> {
-    var props = obj.bindings.getProperties();
-    var res = [];
-    for (var i = 0; i < props.length; i++) {
-      var propName = props[i].name;
-      res.push({
-        value: propName,
-        text: editorLocalization.getPropertyName(propName)
-      });
-    }
-    return res;
-  }
-  private getColumns(obj: Base, options: ISurveyCreatorOptions): Array<any> {
-    var prop = new JsonObjectProperty(null, "value");
-    prop.type = "questionvalue";
-    var json = PropertyGridEditorCollection.getJSON(obj, prop, options);
-    json.cellType = json.type;
-    delete json.type;
-    json.name = "value";
-    json.title = editorLocalization.getString("pe.value");
-    var res = [json];
-    return res;
-  }
-}
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
@@ -859,5 +799,3 @@ PropertyGridEditorCollection.register(
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
-
-PropertyGridEditorCollection.register(new PropertyGridEditorBindings());

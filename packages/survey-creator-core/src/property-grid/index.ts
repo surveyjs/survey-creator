@@ -456,7 +456,8 @@ export class PropertyJSONGenerator {
     public obj: Base,
     private options: ISurveyCreatorOptions = null,
     private parentObj: Base = null,
-    private parentProperty: JsonObjectProperty = null
+    private parentProperty: JsonObjectProperty = null,
+    private properties: Array<JsonObjectProperty> = null
   ) { }
   public toJSON(isNested: boolean = false, context: string = undefined): any {
     return this.createJSON(isNested, context);
@@ -626,7 +627,7 @@ export class PropertyJSONGenerator {
     json.title = this.getQuestionTitle(prop, title);
 
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    if(typeof propDescr === "object" && propDescr.placeholder) {
+    if (typeof propDescr === "object" && propDescr.placeholder) {
       json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
     }
     return json;
@@ -889,7 +890,7 @@ export class PropertyGridModel {
     if (question.isRequired && Helpers.isValueEmpty(val))
       return editorLocalization.getString("pe.propertyIsEmpty");
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
-    if(!!editorError) return editorError;
+    if (!!editorError) return editorError;
     return this.options.onGetErrorTextOnValidationCallback(prop.name, obj, val);
   }
   private onValidateQuestion(options: any) {
@@ -925,9 +926,9 @@ export class PropertyGridModel {
       this.classNameValue !== options.value
     ) {
       this.setObj(this.obj);
-      if(!!this.survey) {
+      if (!!this.survey) {
         const question = this.survey.getQuestionByName(options.name);
-        if(!!question) {
+        if (!!question) {
           question.focus();
         }
       }
@@ -1013,7 +1014,7 @@ export class PropertyGridModel {
   private onMatrixCellValidate(options: any) {
     if (this.isCellCreating) return;
     const q = options.row.getQuestionByColumnName(options.columnName);
-    if(!q || !q.property) return;
+    if (!q || !q.property) return;
     options.error = this.validateQuestionValue(<any>options.row.editingObj, q, q.property, options.value);
   }
   private onGetMatrixRowAction(options: any) {
@@ -1365,14 +1366,14 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     return json;
   }
   private getChoices(obj: Base, prop: JsonObjectProperty): Array<any> {
-    return prop.getChoices(obj, (choices: any) => {});
+    return prop.getChoices(obj, (choices: any) => { });
   }
   private updateObjBasedOnEmptyValueItem(prop: JsonObjectProperty, choices: Array<any>, objOrJson: any): void {
     const emptyValueItem: ItemValue = this.getEmptyJsonItemValue(prop, choices);
     if (!!emptyValueItem) {
       objOrJson.showOptionsCaption = true;
       objOrJson.allowClear = true;
-      if(emptyValueItem.text) {
+      if (emptyValueItem.text) {
         objOrJson.optionsCaption = emptyValueItem.text;
       }
     }
@@ -1414,8 +1415,8 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     question: Question
   ): void {
     this.setChoices(obj, question, prop);
-    if(!question.isEmpty()) {
-      if(!ItemValue.getItemByValue((<QuestionSelectBase>question).choices, question.value)) {
+    if (!question.isEmpty()) {
+      if (!ItemValue.getItemByValue((<QuestionSelectBase>question).choices, question.value)) {
         question.clearValue();
       }
     }
