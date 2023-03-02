@@ -1483,7 +1483,7 @@ test("onPropertyValueChanging callback, set empty string, Bug#1158", () => {
     propertyGrid.survey.getQuestionByName("name")
   );
   titleQuestion.value = "  ";
-  expect(titleQuestion.errors).toHaveLength(0);
+  expect(titleQuestion.errors).toHaveLength(1);
   expect(question.name).toEqual("q1");
 });
 
