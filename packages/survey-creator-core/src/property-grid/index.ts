@@ -8,19 +8,16 @@ import {
   PanelModelBase,
   Question,
   QuestionButtonGroupModel,
-  QuestionMatrixDynamicModel,
   Serializer,
   settings,
   SurveyModel,
   Action,
-  IAction,
   MatrixDynamicRowModel,
   ComputedUpdater,
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
-  surveyLocalization,
-  AnswerRequiredError
+  surveyLocalization
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
