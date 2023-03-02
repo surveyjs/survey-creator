@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -201,6 +201,7 @@ export class StringEditorViewModelBase extends Base {
   private connector: StringEditorConnector
 
   public getEditorElement: () => HTMLElement;
+  public characterCounter = new CharacterCounter();
 
   @property() errorText: string;
   @property() focused: boolean;
@@ -236,8 +237,11 @@ export class StringEditorViewModelBase extends Base {
     this.connector.onDoActivate.add(() => { this.activate(); });
   }
   public checkConstraints(event: any) {
+    this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength > 0 ? this.maxLength : null);
+
     if (this.maxLength > 0 && event.keyCode >= 32) {
       var text: string = (event.target as any).innerText || "";
+
       if (text.length >= this.maxLength) {
         event.preventDefault();
       }
@@ -459,6 +463,12 @@ export class StringEditorViewModelBase extends Base {
   }
   public get contentEditable(): boolean {
     return this.creator.isCanModifyProperty(<any>this.locString.owner, this.locString.name);
+  }
+  public get showCharacterCounter(): boolean {
+    return this.maxLength !== -1;
+  }
+  public get getCharacterCounterClass(): string {
+    return "sd-remaining-character-counter";
   }
 
   public className(text: any): string {

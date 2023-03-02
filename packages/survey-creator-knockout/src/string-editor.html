@@ -14,6 +14,10 @@
         <span role="textbox" class="sv-string-editor" spellcheck="false"
             data-bind="html: editValue, event: { focus: onFocus, blur: onBlur, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
         <!-- /ko -->
+        <!--ko if: showCharacterCounter -->
+        <!-- ko component: { name: 'sv-character-counter', params: { counter: characterCounter, remainingCharacterCounter: getCharacterCounterClass } } -->
+        <!-- /ko -->
+        <!-- /ko -->
     </span>
     <!-- ko if: errorText -->
     <span class="svc-string-editor__error" data-bind="text: errorText"></span>

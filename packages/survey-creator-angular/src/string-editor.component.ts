@@ -46,6 +46,16 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public get contentEditable(): boolean {
     return this.baseModel.contentEditable;
   }
+  public get characterCounter(): any {
+    return this.baseModel.characterCounter;
+  }
+  public get showCharacterCounter(): boolean {
+    return this.baseModel.showCharacterCounter;
+  }
+  public get getCharacterCounterClass(): string {
+    return this.baseModel.getCharacterCounterClass;
+  }
+
   public get className(): string {
     return this.baseModel.className(this.locString.renderedHtml);
   }

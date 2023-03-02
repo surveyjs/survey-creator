@@ -54,6 +54,15 @@ export class StringEditorViewModel {
   public get contentEditable(): string {
     return this.baseModel.contentEditable?"true":"false";
   }
+  public get characterCounter(): any {
+    return this.baseModel.characterCounter;
+  }
+  public get showCharacterCounter(): boolean {
+    return this.baseModel.showCharacterCounter;
+  }
+  public get getCharacterCounterClass(): string {
+    return this.baseModel.getCharacterCounterClass;
+  }
 
   public errorText: ko.Observable<string> = ko.observable(null);
   public onClick(sender: StringEditorViewModel, event: any): void {
