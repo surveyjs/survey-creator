@@ -8,19 +8,16 @@ import {
   PanelModelBase,
   Question,
   QuestionButtonGroupModel,
-  QuestionMatrixDynamicModel,
   Serializer,
   settings,
   SurveyModel,
   Action,
-  IAction,
   MatrixDynamicRowModel,
   ComputedUpdater,
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
-  surveyLocalization,
-  QuestionTextModel,
+  surveyLocalization
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -886,8 +883,9 @@ export class PropertyGridModel {
     return res;
   }
   private validateQuestionValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
-    if (question.isRequired && Helpers.isValueEmpty(val))
+    if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"])) {
       return editorLocalization.getString("pe.propertyIsEmpty");
+    }
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
     if(!!editorError) return editorError;
     return this.options.onGetErrorTextOnValidationCallback(prop.name, obj, val);
@@ -899,7 +897,7 @@ export class PropertyGridModel {
   }
   private onValueChanging(options: any) {
     var q = options.question;
-    if (!q || !q.property) return;
+    if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue)) return;
     var changingOptions = {
       obj: this.obj,
       propertyName: q.property.name,
@@ -909,13 +907,20 @@ export class PropertyGridModel {
     };
     this.options.onValueChangingCallback(changingOptions);
     options.value = changingOptions.newValue;
-    if (q.property.isRequired && !options.value) {
-      options.value = options.oldValue;
+    if (q.property.isRequired) {
+      const isEmpty = Helpers.isValueEmpty(options.value);
+      if(isEmpty) {
+        options.value = options.oldValue;
+      }
+      q["valueChangingEmpty"] = isEmpty;
     }
   }
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
+    if(q["valueChangingEmpty"]) {
+      q["valueChangingEmpty"] = false;
+    }
     this.changeDependedProperties(q, (name: string): Question => { return this.survey.getQuestionByName(name); },
       (name: string): any => { return this.survey.getValue(name); });
     PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
