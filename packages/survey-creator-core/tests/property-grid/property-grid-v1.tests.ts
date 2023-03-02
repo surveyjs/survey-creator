@@ -201,7 +201,8 @@ test("PropertyEditor and hasError - required", () => {
   expect(nameQuestion.isRequired).toEqual(true);
   nameQuestion.value = "";
   expect(question.name).toEqual("q1");
-  expect(nameQuestion.errors).toHaveLength(0);
+  expect(nameQuestion.errors).toHaveLength(1);
+  expect(nameQuestion.errors[0].text).toEqual("Please enter a value");
   nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
   expect(nameQuestion.errors).toHaveLength(0);
