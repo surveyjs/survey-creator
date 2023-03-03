@@ -9,6 +9,7 @@
 @import "blocks/spg-checkbox.scss";
 @import "blocks/spg-matrixdynamic.scss";
 @import "blocks/spg-table.scss";
+@import "blocks/spg-question-group.scss";
 
 .spg-root-modern {
   width: 100%;
@@ -34,12 +35,13 @@
   }
   padding: calcSize(4);
 
-  .sd-body, .sl-body {
+  .sd-body,
+  .sl-body {
     min-width: calcSize(78);
   }
 }
-.sv-popup.sv-property-editor .sd-root-modern{
-  --sd-mobile-width: 0; 
+.sv-popup.sv-property-editor .sd-root-modern {
+  --sd-mobile-width: 0;
 }
 .svc-object-selector .sv-popup__container {
   margin-left: calcSize(1);
