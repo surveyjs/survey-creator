@@ -556,6 +556,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "showProgressBar", tab: "navigation" },
         { name: "progressBarType", tab: "navigation" },
         { name: "questionsOnPageMode", tab: "navigation" },
+        { name: "showTOC", tab: "navigation" },
+        { name: "tocLocation", tab: "navigation" },
 
         { name: "questionTitleLocation", tab: "question" },
         { name: "questionDescriptionLocation", tab: "question" },
