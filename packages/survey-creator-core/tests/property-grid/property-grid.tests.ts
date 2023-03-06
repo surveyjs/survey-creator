@@ -35,7 +35,8 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  QuestionCustomModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -56,6 +57,7 @@ import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 
 export * from "../../src/property-grid/matrices";
+export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 
@@ -1035,24 +1037,24 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.renderedTable.rows[1].cells[2].question.value).toEqual("Item 2");
 });
 test("bindings property editor", () => {
-  var survey = new SurveyModel({
+  const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q2" },
       { type: "matrixdynamic", name: "q1", bindings: { rowCount: "q2" } },
       { type: "text", name: "q3" }
     ]
   });
-  var matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
-  var propertyGrid = new PropertyGridModelTester(matrix);
-  var bindingsQuestion = <QuestionMatrixDynamicModel>(
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(matrix);
+  const bindingsQuestion = <QuestionCompositeModel>(
     propertyGrid.survey.getQuestionByName("bindings")
   );
   expect(bindingsQuestion).toBeTruthy();
-  expect(bindingsQuestion.getType()).toEqual("matrixdropdown");
-  expect(bindingsQuestion.visibleRows).toHaveLength(1);
-  expect(bindingsQuestion.visibleRows[0].rowName).toEqual("rowCount");
-  expect(bindingsQuestion.columns).toHaveLength(1);
-  var q = bindingsQuestion.visibleRows[0].cells[0].question;
+  expect(bindingsQuestion.getType()).toEqual("propertygrid_bindings");
+  expect(bindingsQuestion.contentPanel.questions).toHaveLength(1);
+  const q = bindingsQuestion.contentPanel.questions[0];
+  expect(q.titleLocation).toEqual("left");
+  expect(q.name).toEqual("rowCount");
   expect(q.choices).toHaveLength(3);
   expect(q.value).toEqual("q2");
   q.value = "q3";
@@ -1086,13 +1088,12 @@ test("Dynamic panel 'Panel count' binding property editor", () => {
 
   propertyGrid.obj = paneldynamic;
   expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
-  let bindingsQuestion = <QuestionMatrixDropdownModel>(propertyGrid.survey.getQuestionByName("bindings"));
-  bindingsQuestion["createRenderedTable"]();
-  expect(bindingsQuestion.renderedTable).toBeDefined();
-  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
-  expect(bindingsQuestion.visibleRows[0].cells[0].question.value).toEqual("numberInput");
+  const bindingsQuestion = <QuestionCompositeModel>(propertyGrid.survey.getQuestionByName("bindings"));
 
-  bindingsQuestion.visibleRows[0].cells[0].question.value = "q1";
+  expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("numberInput");
+  expect(bindingsQuestion.contentPanel.questions[0].value).toEqual("numberInput");
+
+  bindingsQuestion.contentPanel.questions[0].value = "q1";
   expect(paneldynamic.bindings.getValueNameByPropertyName("panelCount")).toEqual("q1");
 });
 

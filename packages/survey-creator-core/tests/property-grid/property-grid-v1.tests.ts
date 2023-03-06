@@ -43,6 +43,7 @@ import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 import { PropertyGridValueEditor } from "../../src/property-grid/values";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
 
+export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
@@ -1725,20 +1726,19 @@ test("property editor titleQuestion.description", () => {
 });
 
 test("binding property editor", () => {
-  var tester = new BindingsTester();
+  const tester = new BindingsTester();
   tester.bindings.setBinding("property1", "q1");
-  var propertyGrid = new PropertyGridModelTester(tester);
-  var bindingsQuestion = <QuestionMatrixDropdownModel>(
+  const propertyGrid = new PropertyGridModelTester(tester);
+  const bindingsQuestion = <QuestionCompositeModel>(
     propertyGrid.survey.getQuestionByName("bindings")
   );
-  expect(bindingsQuestion.rows).toHaveLength(2);
-  var rows = bindingsQuestion.visibleRows;
-  var cellQuestion = rows[0].cells[0].question;
-  expect(cellQuestion.value).toEqual("q1");
-  expect(cellQuestion.choices).toHaveLength(2);
-  expect(bindingsQuestion.rows[0].value).toEqual("property1");
-  expect(bindingsQuestion.rows[0].text).toEqual("Property 1");
-  cellQuestion.value = "q2";
+  expect(bindingsQuestion.contentPanel.questions).toHaveLength(2);
+  const q = bindingsQuestion.contentPanel.questions[0];
+  expect(q.value).toEqual("q1");
+  expect(q.choices).toHaveLength(2);
+  expect(q.name).toEqual("property1");
+  expect(q.title).toEqual("Property 1");
+  q.value = "q2";
   expect(tester.bindings.getValueNameByPropertyName("property1")).toEqual("q2");
 });
 

@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -228,5 +228,17 @@ test("Dropdown popup in property grid", async (t) => {
       .click(Selector(".spg-dropdown[aria-label='Input type']"));
 
     await takeElementScreenshot("pg-dropdown-editor.png", Selector(".svc-side-bar"), t, comparer);
+  });
+});
+
+test("Check bindings question", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
+    await t
+      .click(Selector("h4[aria-label=General]"))
+      .click(Selector("h4[aria-label=Logic]"));
+
+    await takeElementScreenshot("bindings-editor.png", Selector(".spg-question[data-name='bindings']"), t, comparer);
   });
 });
