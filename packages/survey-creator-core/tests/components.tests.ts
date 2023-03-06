@@ -186,6 +186,21 @@ test("item value no pointer down on new or editable", (): any => {
   itemNoneAdorner.onPointerDown(fakePointerDownEvent);
   expect(log).toEqual("->onPointerDown_1");
 });
+test("item value no pointer down on None, Select All items", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const allChoices = question.visibleChoices;
+  expect(allChoices).toHaveLength(3 + 3 + 1);
+  const selectAllItemAdorner = new ItemValueWrapperViewModel(creator, question, allChoices[0]);
+  const firstItemAdorner = new ItemValueWrapperViewModel(creator, question, allChoices[1]);
+  const itemNoneAdorner = new ItemValueWrapperViewModel(creator, question, allChoices[6]);
+  expect(selectAllItemAdorner.canBeDragged).toBeFalsy();
+  expect(firstItemAdorner.canBeDragged).toBeTruthy();
+  expect(itemNoneAdorner.canBeDragged).toBeFalsy();
+});
 
 test("item value allowAdd isDraggable allowRemove on events", () => {
   const creator = new CreatorTester();

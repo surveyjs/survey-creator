@@ -175,7 +175,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -336,7 +336,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true

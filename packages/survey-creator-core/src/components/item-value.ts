@@ -77,9 +77,12 @@ export class ItemValueWrapperViewModel extends Base {
   private focusCameFromDown: boolean = false;
   private collectionProperty: JsonObjectProperty
 
+  get canBeDragged(): boolean {
+    return !this.isNew && this.question.choices.indexOf(this.item) > -1;
+  }
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
-    return this.isNew || isContentEditable;
+    return isContentEditable || !this.canBeDragged;
   }
   private updateNewItemValue() {
     if (!this.creator || !this.question || !this.question.newItem) return;

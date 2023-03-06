@@ -53,7 +53,7 @@ export class ObjectSelector {
     }
     return null;
   }
-  public filterByText(filteredText: string) {
+  public filterByText(filteredText: string): void {
     this.filteredTextInLow = !!filteredText ? filteredText.toLocaleLowerCase() : "";
     this.updateItemsVisibility();
   }
@@ -149,7 +149,7 @@ export class ObjectSelectorModel extends Base {
     this.selector = new ObjectSelector(this.creator, survey, this.getObjectDisplayName);
     const selectedItem = this.selector.getItemByObj(selectedObj);
     if (!this.listModelValue) {
-      this.listModelValue = new ListModel(
+      this.listModelValue = new ListModel<Action>(
         this.selector.items,
         (item: IAction) => { onClose(item.data); },
         true, selectedItem,

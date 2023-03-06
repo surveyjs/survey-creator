@@ -1,4 +1,4 @@
-import { SurveyModel, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
+import { BaseAction, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
 import { getLogicString } from "./logic-types";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
@@ -90,7 +90,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
         questionPopupModel.toggleVisibility();
       }, true);
     questionListModel.locOwner = this.creator;
-    const questionPopupModel = new PopupModel<{ model: ListModel }>(
+    const questionPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
       "sv-list", { model: questionListModel }, "bottom", "center",
       undefined, undefined, undefined, undefined, undefined, onQuestionPopupShow
     );
@@ -116,7 +116,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
         actionTypesPopupModel.toggleVisibility();
       }, true);
     actionTypesListModel.locOwner = this.creator;
-    const actionTypesPopupModel = new PopupModel<{ model: ListModel }>(
+    const actionTypesPopupModel = new PopupModel<{ model: ListModel<BaseAction> }>(
       "sv-list", { model: actionTypesListModel }, "bottom", "center",
       undefined, undefined, undefined, undefined, undefined, onActionTypesPopupShow
     );
