@@ -237,8 +237,6 @@ export class StringEditorViewModelBase extends Base {
     this.connector.onDoActivate.add(() => { this.activate(); });
   }
   public checkConstraints(event: any) {
-    this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength > 0 ? this.maxLength : null);
-
     if (this.maxLength > 0 && event.keyCode >= 32) {
       var text: string = (event.target as any).innerText || "";
 
@@ -264,6 +262,9 @@ export class StringEditorViewModelBase extends Base {
     if (!this.focusedProgram) {
       this.valueBeforeEdit = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
       this.focusedProgram = false;
+    }
+    if (this.maxLength > 0) {
+      this.characterCounter.updateRemainingCharacterCounter(this.valueBeforeEdit, this.maxLength);
     }
     this.creator.selectFromStringEditor = true;
     event.target.parentElement.click();
@@ -291,6 +292,10 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public onInput(event: any): void {
+    if (this.maxLength > 0) {
+      var text: string = (event.target as any).innerText || "";
+      this.characterCounter.updateRemainingCharacterCounter(text, this.maxLength);
+    }
     if (this.editAsText && !this.compostionInProgress) {
       const options = { value: event.target?.innerText, cancel: null };
       this.connector.onTextChanging.fire(this, options);
@@ -468,7 +473,7 @@ export class StringEditorViewModelBase extends Base {
     return this.maxLength !== -1;
   }
   public get getCharacterCounterClass(): string {
-    return "sd-remaining-character-counter";
+    return "svc-remaining-character-counter";
   }
 
   public className(text: any): string {

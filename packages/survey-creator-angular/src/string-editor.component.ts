@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, ViewChild, ViewContainerRef } from "@angular/core";
-import { LocalizableString } from "survey-core";
+import { LocalizableString, CharacterCounter } from "survey-core";
 import { StringEditorViewModelBase, CreatorBase, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
 import { AngularComponentFactory } from "survey-angular-ui";
@@ -46,7 +46,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public get contentEditable(): boolean {
     return this.baseModel.contentEditable;
   }
-  public get characterCounter(): any {
+  public get characterCounter(): CharacterCounter {
     return this.baseModel.characterCounter;
   }
   public get showCharacterCounter(): boolean {

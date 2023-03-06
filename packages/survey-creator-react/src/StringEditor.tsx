@@ -181,12 +181,14 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
             ></SvgIcon>
 
           </div>
-          {control}
-          <div className="svc-string-editor__controls"
-            onClick={this.edit}>
-          </div>
+          <span className="svc-string-editor__input">
+            {control}
+            <div className="svc-string-editor__controls"
+              onClick={this.edit}>
+            </div>
+            {counter}
+          </span>
         </span>
-        {counter}
         {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>
     );

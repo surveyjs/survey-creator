@@ -9,7 +9,6 @@
   
   position: static;
   .sv-string-editor {
-    display: inline-block;
     position: relative;
     outline: none;
     white-space: pre-wrap;
@@ -29,6 +28,29 @@
   display: inline-block;
   position: relative;
   z-index: 10;
+}
+
+.svc-string-editor__content:focus-within .svc-remaining-character-counter {
+  display: inline-block;
+}
+
+.svc-string-editor__input {
+  display: flex;
+}
+
+.svc-remaining-character-counter {
+  display: none;
+  position: relative;
+  outline: none;
+  z-index: 20;
+  padding: 0px;
+  vertical-align: top;
+  margin-inline-start: calcSize(2);
+  font-size: calcSize(1.5);
+  font-family: $font-family;
+  font-weight: 400;
+  color: $foreground-light;
+  line-height: calcSize(2);
 }
 
 .svc-string-editor__border {
@@ -92,13 +114,12 @@
   color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(0);
-    bottom: calcSize(0);
-    left: calcSize(-0.5);
+    top: calcSize(-0.5);
+    bottom: calcSize(-0.5);
+    left: calcSize(-1);
+    right: calcSize(-1);
     //right: calcSize(-4.5); // if need pencil icon
-    right: calcSize(-0.5);
-    border: none;
-    background-color: $primary-light;
+    border: calcSize(0.25) solid rgba(0, 0, 0, 0.16);
     border-radius: 3px;
   }
 }
@@ -110,8 +131,8 @@
     bottom: calcSize(-0.5);
     left: calcSize(-1);
     right: calcSize(-1);
-    border: 2px solid $primary;
-    border-radius: 5px;
+    border: calcSize(0.25) solid $primary;
+    border-radius: 3px;
     box-sizing: content-box;
     background-color: $background;
     box-shadow: 0px 2px 6px $shadow-medium;
