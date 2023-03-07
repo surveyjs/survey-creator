@@ -3,6 +3,7 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "JSON tab";
 
 const json = {
+  logoPosition: "right",
   questions: [
     {
       type: "text",
