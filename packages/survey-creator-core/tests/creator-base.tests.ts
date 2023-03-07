@@ -1589,7 +1589,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    }, ]
+    },]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -2836,8 +2836,9 @@ test("doClickQuestionCore", () => {
   expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });
 
-test("logoPosition set right", () => {
+test("logoPosition set right for emtpy survey only", () => {
   const creator = new CreatorTester();
+  expect(creator.survey.logoPosition).toEqual("right");
   creator.JSON = {
     "pages": [
       {
@@ -2851,7 +2852,7 @@ test("logoPosition set right", () => {
       }
     ]
   };
-  expect(creator.survey.logoPosition).toEqual("right");
+  expect(creator.survey.logoPosition).toEqual("left");
   creator.JSON = {
     "logoPosition": "top",
     "pages": [
@@ -2866,6 +2867,10 @@ test("logoPosition set right", () => {
       }
     ]
   };
+  expect(creator.survey.logoPosition).toEqual("top");
+  creator.text = "";
+  expect(creator.survey.logoPosition).toEqual("right");
+  creator.JSON = undefined;
   expect(creator.survey.logoPosition).toEqual("right");
 });
 
