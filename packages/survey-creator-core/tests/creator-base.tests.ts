@@ -487,7 +487,6 @@ test("Creator bypage edit mode - add question to a new page", (): any => {
   expect(pages).toHaveLength(3);
   expect(model.items).toHaveLength(4);
   expect(creator.JSON).toEqual({
-    "logoPosition": "right",
     "pages": [
       {
         "elements": [
@@ -1589,7 +1588,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    },]
+    }, ]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
