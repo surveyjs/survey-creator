@@ -4,7 +4,7 @@ import * as Survey from "survey-knockout";
 import { SurveyCreator } from "../editor";
 
 import "./test.scss";
-import { IAction } from "survey-knockout";
+import { IAction, Page } from "survey-knockout";
 
 var templateHtml = require("./test.html");
 
@@ -147,11 +147,11 @@ export class SurveyLiveTester {
     });
     this.survey.onCurrentPageChanged.add((sender: Survey.Survey, options) => {
       self.koActivePage(options.newCurrentPage);
-      self.setActivePageItem(options.oldCurrentPage, false);
-      self.setActivePageItem(options.newCurrentPage, true);
+      self.setActivePageItem(<Page>options.oldCurrentPage, false);
+      self.setActivePageItem(<Page>options.newCurrentPage, true);
     });
     this.survey.onPageVisibleChanged.add((sender: Survey.Survey, options) => {
-      self.updatePageItem(options.page);
+      self.updatePageItem(<Page>options.page);
     });
   }
   private updatePageItem(page: Survey.Page) {

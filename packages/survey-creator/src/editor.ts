@@ -36,7 +36,7 @@ import { PagesEditor } from "./pages-editor";
 import { isPropertyVisible } from "./utils/utils";
 import { SurveyObjectProperty } from "./objectProperty";
 import { CreatorBase, CreatorBaseEvent } from "./creator-base";
-import { IAction } from "survey-knockout";
+import { IAction, Page, Panel } from "survey-knockout";
 import { EditableObject } from "./propertyEditors/editableObject";
 
 type ContainerLocation = "left" | "right" | "top" | "none" | boolean;
@@ -1654,7 +1654,7 @@ export class SurveyCreator
           options.htmlElement,
           options.panel,
           true,
-          options.panel.koIsDragging()
+          (<any>options.panel).koIsDragging()
         );
         var pnlEl = options.htmlElement.querySelector("f-panel");
         if (!!pnlEl) {
@@ -1665,20 +1665,20 @@ export class SurveyCreator
           }
         }
       } else {
-        options.panel.emptyElement = addEmptyPanelElement(
+        (<any>options.panel).emptyElement = addEmptyPanelElement(
           newSurvey,
           options.htmlElement,
-          options.panel.dragDropHelper(),
+          (<any>options.panel).dragDropHelper(),
           options.panel
         );
         if (options.panel.elements.length > 0) {
-          options.panel.emptyElement.style.display = "none";
+          (<any>options.panel).emptyElement.style.display = "none";
         }
         afterRenderElementHandler(
           options.htmlElement,
           options.panel,
           true,
-          options.panel.koIsDragging()
+          (<any>options.panel).koIsDragging()
         );
       }
     });
@@ -1686,7 +1686,7 @@ export class SurveyCreator
       afterRenderHeaderHandler(options.htmlElement, sender);
     });
     newSurvey.onDragDropAllow.add(function (sender, options) {
-      options.survey = sender;
+      (<any>options).survey = sender;
       self.onDragDropAllow.fire(self, options);
     });
     newSurvey.onGetMenuItems.add((sender, options) => {
@@ -1892,15 +1892,15 @@ export class SurveyCreator
       self.doOnElementRemoved(options.question);
     });
     newSurvey.onPanelAdded.add((sender: Survey.Survey, options) => {
-      self.doOnPanelAdded(options.panel, options.parentPanel);
+      self.doOnPanelAdded(<Panel>options.panel, options.parentPanel);
     });
     newSurvey.onPanelRemoved.add((sender: Survey.Survey, options) => {
       self.doOnElementRemoved(options.panel);
     });
     newSurvey.onPageAdded.add((sender: Survey.Survey, options) => {
       if (self.surveyObjects.hasObject(options.page)) return;
-      self.doOnPageAdded(options.page);
-      self.addPageToUI(options.page);
+      self.doOnPageAdded(<Page>options.page);
+      self.addPageToUI(<Page>options.page);
       self.setModified({ type: "PAGE_ADDED", newValue: options.page });
     });
 
