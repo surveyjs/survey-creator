@@ -487,7 +487,6 @@ test("Creator bypage edit mode - add question to a new page", (): any => {
   expect(pages).toHaveLength(3);
   expect(model.items).toHaveLength(4);
   expect(creator.JSON).toEqual({
-    "logoPosition": "right",
     "pages": [
       {
         "elements": [
@@ -2836,8 +2835,9 @@ test("doClickQuestionCore", () => {
   expect(creator.survey.getAllQuestions()[3].startWithNewLine).toEqual(false);
 });
 
-test("logoPosition set right", () => {
+test("logoPosition set right for emtpy survey only", () => {
   const creator = new CreatorTester();
+  expect(creator.survey.logoPosition).toEqual("right");
   creator.JSON = {
     "pages": [
       {
@@ -2851,7 +2851,7 @@ test("logoPosition set right", () => {
       }
     ]
   };
-  expect(creator.survey.logoPosition).toEqual("right");
+  expect(creator.survey.logoPosition).toEqual("left");
   creator.JSON = {
     "logoPosition": "top",
     "pages": [
@@ -2866,6 +2866,10 @@ test("logoPosition set right", () => {
       }
     ]
   };
+  expect(creator.survey.logoPosition).toEqual("top");
+  creator.text = "";
+  expect(creator.survey.logoPosition).toEqual("right");
+  creator.JSON = undefined;
   expect(creator.survey.logoPosition).toEqual("right");
 });
 

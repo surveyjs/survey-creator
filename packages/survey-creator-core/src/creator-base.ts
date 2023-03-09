@@ -1226,7 +1226,7 @@ export class CreatorBase extends Base
     this.sidebar = new SidebarModel(this);
     this.setOptions(this.options);
     this.patchMetadata();
-    this.initSurveyWithJSON({}, false);
+    this.initSurveyWithJSON(undefined, false);
     this.toolbox = new QuestionToolbox(this.options && this.options.questionTypes ? this.options.questionTypes : null, this, true);
     this.updateToolboxIsCompact();
     this.initTabs();
@@ -1614,6 +1614,9 @@ export class CreatorBase extends Base
    */
   public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
+    if(!json) {
+      json = { "logoPosition": "right" };
+    }
     // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
     const survey = this.createSurvey({});
@@ -1622,7 +1625,6 @@ export class CreatorBase extends Base
     survey.lazyRendering = true;
     survey.setJsonObject(json);
     this.isInitialSurveyEmptyValue = survey.isEmpty;
-    survey.logoPosition = "right";
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
@@ -1873,13 +1875,17 @@ export class CreatorBase extends Base
    * @param value JSON as text
    * @param clearState default false. Set this parameter to true to clear undo/redo states.
    */
-  public changeText(value: string, clearState = false) {
+  public changeText(value: string, clearState = false): void {
     this.setTextValue(value);
-    var textWorker = new SurveyTextWorker(value);
-    if (textWorker.isJsonCorrect || !!textWorker.survey) {
-      this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+    if(!value) {
+      this.initSurveyWithJSON(undefined, clearState);
     } else {
-      this.viewType = "editor";
+      const textWorker = new SurveyTextWorker(value);
+      if (textWorker.isJsonCorrect || !!textWorker.survey) {
+        this.initSurveyWithJSON(textWorker.survey.toJSON(), clearState);
+      } else {
+        this.viewType = "editor";
+      }
     }
   }
 
