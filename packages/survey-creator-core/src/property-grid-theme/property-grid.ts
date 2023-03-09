@@ -193,7 +193,7 @@ export var propertyGridCss = {
     other: "spg-comment spg-question__other"
   },
   matrix: {
-    tableWrapper: "spg-matrix",
+    tableWrapper: "spg-matrix spg-table-wrapper",
     root: "spg-table",
     rowError: "spg-matrix__row--error",
     cell: "spg-table__cell spg-matrix__cell",
@@ -210,13 +210,13 @@ export var propertyGridCss = {
     cellTextDisabled: "spg-matrix__text--disabled"
   },
   matrixdropdown: {
-    tableWrapper: "",
+    tableWrapper: "spg-table-wrapper",
     root: "spg-table",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header"
   },
   matrixdynamic: {
-    tableWrapper: "",
+    tableWrapper: "spg-table-wrapper",
     root: "spg-table spg-matrixdynamic",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
