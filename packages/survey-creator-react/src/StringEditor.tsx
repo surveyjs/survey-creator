@@ -1,6 +1,6 @@
 import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
-import { ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
+import { CharacterCounterComponent, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
 import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
@@ -167,6 +167,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
         </span>
       );
     }
+    const counter = this.baseModel.showCharacterCounter ? (<CharacterCounterComponent counter={this.baseModel.characterCounter} remainingCharacterCounter={this.baseModel.getCharacterCounterClass}></CharacterCounterComponent>) : null;
     return (
       <span className={this.className}>
         <span className="svc-string-editor__content">
@@ -180,10 +181,13 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
             ></SvgIcon>
 
           </div>
-          {control}
-          <div className="svc-string-editor__controls"
-            onClick={this.edit}>
-          </div>
+          <span className="svc-string-editor__input">
+            {control}
+            <div className="svc-string-editor__controls"
+              onClick={this.edit}>
+            </div>
+            {counter}
+          </span>
         </span>
         {this.errorText ? <span className="svc-string-editor__error">{this.errorText}</span> : ""}
       </span>

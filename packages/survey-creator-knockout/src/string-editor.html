@@ -4,16 +4,22 @@
             <sv-svg-icon class="svc-string-editor__button svc-string-editor__button--edit" data-bind="click: edit"
                 params="iconName: 'icon-edit', size: 16"></sv-svg-icon>
         </div>
-        <!-- ko ifnot: koHasHtml -->
-        <!--ko template: {afterRender: afterRender} -->
-        <span role="textbox" class="sv-string-editor" spellcheck="false"
-            data-bind="text: editValue, event: { focus: onFocus, blur: onBlur, input: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
-        <!-- /ko -->
-        <!-- /ko -->
-        <!-- ko if: koHasHtml -->
-        <span role="textbox" class="sv-string-editor" spellcheck="false"
-            data-bind="html: editValue, event: { focus: onFocus, blur: onBlur, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
-        <!-- /ko -->
+        <span class="svc-string-editor__input">
+            <!-- ko ifnot: koHasHtml -->
+            <!-- ko template: {afterRender: afterRender} -->
+            <span role="textbox" class="sv-string-editor" spellcheck="false"
+                data-bind="text: editValue, event: { focus: onFocus, blur: onBlur, input: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: koHasHtml -->
+            <span role="textbox" class="sv-string-editor" spellcheck="false"
+                data-bind="html: editValue, event: { focus: onFocus, blur: onBlur, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
+            <!-- /ko -->
+            <!-- ko if: showCharacterCounter -->
+            <!-- ko component: { name: 'sv-character-counter', params: { counter: characterCounter, remainingCharacterCounter: getCharacterCounterClass } } -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </span>
     </span>
     <!-- ko if: errorText -->
     <span class="svc-string-editor__error" data-bind="text: errorText"></span>
