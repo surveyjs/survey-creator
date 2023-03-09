@@ -1644,7 +1644,7 @@ export class CreatorBase extends Base
       this.doOnPageAdded(options.page);
     });
     survey.onDragDropAllow.add((sender, options) => {
-      options.survey = sender;
+      (<any>options).survey = sender;
       this.onDragDropAllow.fire(this, options);
     });
 

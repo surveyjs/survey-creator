@@ -833,7 +833,7 @@ export class PropertyGridModel {
     });
     this.survey.onFocusInQuestion.add((sender, options) => {
       this.currentlySelectedProperty = options.question.name;
-      this.currentlySelectedPanel = options.question.parent;
+      this.currentlySelectedPanel = <PanelModel>options.question.parent;
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);

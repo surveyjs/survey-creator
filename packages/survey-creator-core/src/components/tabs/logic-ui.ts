@@ -60,8 +60,8 @@ export class SurveyLogicUI extends SurveyLogic {
       this.expressionEditorCanShowBuilder = !!this.editableItem;
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
-      updateMatrixLogicExpandAction(options.question, options.actions, options.row);
-      updateMatrixLogicRemoveAction(options.question, options.actions, options.row);
+      updateMatrixLogicExpandAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
+      updateMatrixLogicRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
     });
     this.updateItemsSurveyData();
     this.onReadOnlyChanged();
