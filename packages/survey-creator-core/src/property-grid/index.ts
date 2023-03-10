@@ -1269,9 +1269,12 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
   }
 }
 
-export class PropertyGridEditorImageSize extends PropertyGridEditorNumber {
+export class PropertyGridEditorImageSize extends PropertyGridEditorString {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "number" && (prop.name == "imageHeight" || prop.name == "imageWidth");
+    return prop.type == "string" && (prop.name == "imageHeight" || prop.name == "imageWidth");
+  }
+  public isDefault(): boolean {
+    return false;
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {

@@ -387,6 +387,10 @@ export var enStrings = {
     questionsOrder: "Element order on the page",
     maxTimeToFinish: "Time limit to finish the survey (in seconds)",
     maxTimeToFinishPage: "Time limit to finish one page (in seconds)",
+    image: {
+      imageHeight: "Image height (in CSS-accepted values)",
+      imageWidth: "Image width (in CSS-accepted values)",
+    },
     page: {
       maxTimeToFinish: "Time limit to finish the page (in seconds)"
     },
