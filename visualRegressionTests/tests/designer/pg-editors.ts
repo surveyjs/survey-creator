@@ -242,3 +242,15 @@ test("Check bindings question", async (t) => {
     await takeElementScreenshot("bindings-editor.png", Selector(".spg-question[data-name='bindings']"), t, comparer);
   });
 });
+
+test("Check triggers question", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await t
+      .click(Selector("h4[aria-label=General]"))
+      .click(Selector("h4[aria-label=Logic]"))
+      .click(Selector("div[data-name='triggers'] .spg-action-button__icon[aria-label='Add New']"));
+
+    await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
+  });
+});
