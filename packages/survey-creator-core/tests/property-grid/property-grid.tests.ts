@@ -2912,3 +2912,47 @@ test("choices and onCollectionItemDeleting", () => {
   choicesQuestion.removeRowUI(rows[1]);
   expect(question.choices).toHaveLength(2);
 });
+test("PropertyGridEditorQuestionValue without nonvalue questions", () => {
+  const survey = new SurveyModel({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "aNumber"
+          },
+          {
+            "type": "html",
+            "name": "question1",
+            "html": "<div>Hello World</div>"
+          },
+          {
+            "type": "image",
+            "name": "question2",
+            "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+          }
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "type": "setvalue",
+        "expression": "expression: \"{aNumber} <> 100\",",
+        "setToName": "aNumber"
+      }
+    ]
+  });
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const triggersQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("triggers"));
+  expect(triggersQuestion).toBeTruthy();
+  expect(triggersQuestion.isUniqueCaseSensitive).toEqual(false);
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  triggersQuestion.visibleRows[0].showDetailPanel();
+  const setToValue = triggersQuestion.visibleRows[0].detailPanel.getQuestionByName("setToName");
+  expect(setToValue).toBeTruthy();
+  expect(setToValue.getType()).toEqual("dropdown");
+  expect(setToValue.choices).toHaveLength(1);
+  expect(setToValue.value).toEqual("aNumber");
+});
