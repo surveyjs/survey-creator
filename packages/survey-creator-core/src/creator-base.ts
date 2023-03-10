@@ -614,16 +614,16 @@ export class CreatorBase extends Base
    */
   public onPropertyValidationCustomError: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised each time a user edits a survey object property.
-   * Use this event to correct or validate the property value while the user enters it.
+   * This event is raised each time a user modifies a survey object property.
+   * Use this event to validate or correct a property value while the user enters it.
    *
    * The event handler accepts the following arguments:
    *
    * - `sender`- A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
+   * - `options.obj` - An object instance whose property is being edited.
    * - `options.propertyName` - The name of the property.
-   * - `options.value` - A property value entered by a user.
-   * - `options.newValue` - A corrected property value. Specify this field if you want to override the `options.value`.
+   * - `options.value` - The property value before the change made by a user.
+   * - `options.newValue` - The property value the user just entered. Specify this field if you want to override the newly entered value.   
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */
@@ -1614,7 +1614,7 @@ export class CreatorBase extends Base
    */
   public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
-    if(!json) {
+    if (!json) {
       json = { "logoPosition": "right" };
     }
     // currentPlugin.deactivate && currentPlugin.deactivate();
@@ -1877,7 +1877,7 @@ export class CreatorBase extends Base
    */
   public changeText(value: string, clearState = false): void {
     this.setTextValue(value);
-    if(!value) {
+    if (!value) {
       this.initSurveyWithJSON(undefined, clearState);
     } else {
       const textWorker = new SurveyTextWorker(value);
