@@ -622,7 +622,7 @@ export class CreatorBase extends Base
    * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
    * - `options.propertyName` - The name of the property.
    * - `options.value` - An old property value.
-   * - `options.newValue` - A new property value. Specify this field if you want to override the entered value.   
+   * - `options.newValue` - A new property value. Specify this field if you want to override the entered value.
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */
