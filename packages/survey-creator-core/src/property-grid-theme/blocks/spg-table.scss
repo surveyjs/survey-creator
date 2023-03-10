@@ -1,7 +1,10 @@
+.spg-table-wrapper {
+  border: 1px solid $border;
+  border-bottom: none;
+}
 .spg-table {
   width: 100%;
   background-color: $background;
-  border: 1px solid $border;
   border-collapse: collapse;
   tr {
     border-bottom: 1px solid $border;
@@ -53,5 +56,5 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 100px;  
+  max-width: 100px;
 }
