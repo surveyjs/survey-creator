@@ -614,16 +614,15 @@ export class CreatorBase extends Base
    */
   public onPropertyValidationCustomError: CreatorEvent = new CreatorEvent();
   /**
-   * This event is raised each time a user modifies a survey object property.
-   * Use this event to validate or correct a property value while the user enters it.
+   * An event that is raised each time a user modifies a survey object property. Use this event to validate or correct a property value while the user enters it.
    *
    * The event handler accepts the following arguments:
    *
    * - `sender`- A Survey Creator instance that raised the event.
-   * - `options.obj` - An object instance whose property is being edited.
+   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
    * - `options.propertyName` - The name of the property.
-   * - `options.value` - The property value before the change made by a user.
-   * - `options.newValue` - The property value the user just entered. Specify this field if you want to override the newly entered value.   
+   * - `options.value` - An old property value.
+   * - `options.newValue` - A new property value. Specify this field if you want to override the entered value.   
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */
