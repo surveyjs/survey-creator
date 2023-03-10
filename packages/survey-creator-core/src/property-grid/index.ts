@@ -1598,6 +1598,10 @@ export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion 
   protected getItemValue(question: Question): any {
     return question.getValueName();
   }
+  protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
+    const questions = super.getQuestions(survey, obj);
+    return questions.filter(q => { return !Serializer.isDescendantOf(q.getType(), "nonvalue"); });
+  }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
