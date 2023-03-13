@@ -641,7 +641,12 @@ export class QuestionToolbox
     });
     this.onItemsChanged();
   }
-  private createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
+  /**
+   * Add default toolbox items into the Toolbox
+   * @param supportedQuestions limits question and panels types available in the Toolbox.
+   * @param useDefaultCategories set it to true to create default categories.
+   */
+  public createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
     this.clearItems();
     const questions = this.getQuestionTypes(supportedQuestions);
     const defaultCategories = useDefaultCategories ? this.getDefaultQuestionCategories() : {};
