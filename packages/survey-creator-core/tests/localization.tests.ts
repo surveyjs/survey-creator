@@ -27,6 +27,7 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("question", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty")).toEqual("Text");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "showTOC")).toEqual("Show TOC");
 
   expect(editorLocalization.getPropertyNameInEditor("base", "testProperty2")).toEqual("All2");
   expect(editorLocalization.getPropertyNameInEditor("page", "testProperty2")).toEqual("All2");
@@ -137,6 +138,7 @@ test("getPropertyValue and spaces", () => {
   expect(editorLocalization.convertToCamelCase("On Top")).toEqual("On Top");
   expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
   expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
+  expect(editorLocalization.convertToCamelCase("showTOC")).toEqual("Show TOC");
 });
 test("Update innerItem on changign title", (): any => {
   const item: any = {

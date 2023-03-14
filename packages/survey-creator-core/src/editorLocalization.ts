@@ -134,7 +134,7 @@ export class EditorLocalization {
     if (!value) return value;
     value = value.trim();
     if(value.indexOf(" ") > -1) return value;
-    var hasLowCase = false;
+    let hasLowCase = false;
     for (var i = 0; i < value.length; i++) {
       if(value[i] !== value[i].toUpperCase()) {
         hasLowCase = true;
@@ -142,12 +142,19 @@ export class EditorLocalization {
       }
     }
     if(!hasLowCase) return value;
-    var res = value[0].toUpperCase();
+    let res = value[0].toUpperCase();
+    let isPrevUpperCase = false;
+    const isUpperCase = (index: number) : boolean => {
+      if(index >= value.length) return false;
+      return value[i].toUpperCase() === value[i];
+    };
     for (var i = 1; i < value.length; i++) {
-      if (value[i] === value[i].toUpperCase()) {
+      if (!isPrevUpperCase && isUpperCase(i)) {
         res += " ";
       }
-      res += value[i].toLowerCase();
+      const requireConvert = !isPrevUpperCase && !isUpperCase(i + 1);
+      res += requireConvert ? value[i].toLowerCase() : value[i];
+      isPrevUpperCase = isUpperCase(i);
     }
     if (toLowCase) {
       res = res.toLowerCase();
