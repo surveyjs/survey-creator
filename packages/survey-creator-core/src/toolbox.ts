@@ -642,9 +642,9 @@ export class QuestionToolbox
     this.onItemsChanged();
   }
   /**
-   * Add default toolbox items into the Toolbox
-   * @param supportedQuestions limits question and panels types available in the Toolbox.
-   * @param useDefaultCategories set it to true to create default categories.
+   * Adds default items to the Toolbox. If the Toolbox contains any items before you call this method, they will be removed.
+   * @param supportedQuestions Specifies which question and panel types to include in the Toolbox.
+   * @param useDefaultCategories Pass `true` if you want to create default categories.
    */
   public createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
     this.clearItems();
