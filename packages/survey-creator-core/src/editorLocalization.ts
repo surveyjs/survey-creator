@@ -146,7 +146,7 @@ export class EditorLocalization {
     let isPrevUpperCase = false;
     const isUpperCase = (index: number) : boolean => {
       if(index >= value.length) return false;
-      return value[i].toUpperCase() === value[i];
+      return value[index].toUpperCase() === value[index];
     };
     for (var i = 1; i < value.length; i++) {
       if (!isPrevUpperCase && isUpperCase(i)) {
