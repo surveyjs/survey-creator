@@ -35,6 +35,10 @@ import "survey-creator-core/survey-creator-core.min.css";
 </script>
 ```
 
+Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/Documentation/Library?id=get-started-angular#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
+
+[View Demo](https://surveyjs.io/survey-creator/examples/edit-user-interface-theme-with-custom-css/ (linkStyle))
+
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions) in a configuration object. In this tutorial, the object enables the following properties:
