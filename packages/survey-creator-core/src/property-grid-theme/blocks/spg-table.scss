@@ -23,7 +23,7 @@
   }
   background: $background-dim;
 }
-.spg-table__cell:not(.spg-table__cell--detail-panel) .spg-text {
+.spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
   appearance: none;
   line-height: calcSize(3);
   font-size: calcSize(2);
@@ -40,6 +40,11 @@
 }
 .spg-table__cell--actions:first-of-type {
   width: calcSize(6);
+}
+.spg-table__cell--actions:last-of-type {
+  .spg-action-bar {
+    justify-content: flex-end;
+  }
 }
 .spg-table__cell--actions > .spg-matrixdynamic__drag-element {
   display: inline-block;

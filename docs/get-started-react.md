@@ -28,12 +28,17 @@ npm install survey-creator-react --save
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Library style sheets as shown below. Note that although SurveyJS Library supports [different UI themes](https://surveyjs.io/Documentation/Library?id=get-started-react#configure-styles), Survey Creator can use only the Default V2 theme:
+Import Survey Creator and SurveyJS Library style sheets as shown below:
 
 ```js
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 ```
+
+Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/form-library/documentation/get-started-react#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
+
+[View Demo](https://surveyjs.io/survey-creator/examples/edit-user-interface-theme-with-custom-css/reactjs (linkStyle))
+
 ## Configure Survey Creator
 
 To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions) in a configuration object. In this tutorial, the object enables the following properties:
