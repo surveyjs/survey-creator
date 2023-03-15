@@ -19,7 +19,7 @@ Survey Creator is powered by Knockout and does not have an individual implementa
 
 Survey Creator for Knockout consists of two parts: `survey-creator-core` (platform-independent code) and `survey-creator-knockout` (view models). Each part includes style sheets and scripts. Insert links to these resources within the `<head>` tag on your HTML page as shown below.
 
-Survey Creator also requires SurveyJS resources. Link them _after_ the Knockout library, but _before_ the Survey Creator resources. Note that although SurveyJS supports [different UI themes](https://surveyjs.io/Documentation/Library?id=get-started-knockout#link-surveyjs-resources), Survey Creator can use only the Default V2 theme:
+Survey Creator also requires SurveyJS resources. Link them _after_ the Knockout library, but _before_ the Survey Creator resources:
 
 ```html
 <head>
@@ -38,6 +38,10 @@ Survey Creator also requires SurveyJS resources. Link them _after_ the Knockout 
     <!-- ... -->
 </head>
 ```
+
+Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/form-library/documentation/get-started-knockout#link-surveyjs-resources), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
+
+[View Demo](https://surveyjs.io/survey-creator/examples/edit-user-interface-theme-with-custom-css/knockout (linkStyle))
 
 ## Configure Survey Creator
 
