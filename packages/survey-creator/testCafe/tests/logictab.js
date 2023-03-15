@@ -9,6 +9,7 @@ fixture`General: ${title}`.page`${url}`.beforeEach(async (ctx) => {
 });
 
 test(`Create logic: question visibility`, async (t) => {
+  await t.maximizeWindow();
   await t
     .click(page.toolBarQuestion("Dropdown"))
     .click(page.toolBarQuestion("Checkbox"))

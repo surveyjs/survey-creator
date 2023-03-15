@@ -8,6 +8,7 @@ fixture`General: ${title}`.page`${url}`.beforeEach(async (ctx) => {
 });
 
 test(`Set visibleIf property`, async (t) => {
+  await t.maximizeWindow();
   await t
     .click(page.toolBarQuestion("Dropdown"))
     .click(page.toolBarQuestion("Checkbox"))

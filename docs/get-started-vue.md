@@ -26,7 +26,7 @@ npm install survey-creator-knockout --save
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Library style sheets as shown below. Note that although SurveyJS Library supports [different UI themes](https://surveyjs.io/Documentation/Library?id=get-started-vue#configure-styles), Survey Creator can use only the Default V2 theme:
+Import Survey Creator and SurveyJS Library style sheets as shown below:
 
 ```js
 <script>
@@ -34,6 +34,10 @@ import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 </script>
 ```
+
+Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/form-library/documentation/get-started-vue#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
+
+[View Demo](https://surveyjs.io/survey-creator/examples/edit-user-interface-theme-with-custom-css/ (linkStyle))
 
 ## Configure Survey Creator
 
