@@ -1,11 +1,15 @@
 @import "../variables.scss";
 
+.svc-notifier.svc-notifier--shown {
+  visibility: visible;
+  opacity: 0.75;
+}
 .svc-notifier {
   position: absolute;
   bottom: calcSize(1);
   left: calcSize(1);
   background: $background;
-  opacity: 0.75;
+  opacity: 0;
   padding: calcSize(1) calcSize(2);
   box-shadow: 0px 2px 6px $shadow-medium;
   border-radius: calcSize(0.5);
@@ -13,6 +17,8 @@
   min-width: calcSize(30);
   text-align: center;
   z-index: 1600; //todo: should overlap popup
+
+  visibility: hidden;
 
   @include smallBold;
 }

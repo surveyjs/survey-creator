@@ -1970,6 +1970,7 @@ export class CreatorBase extends Base
     error: "svc-notifier--error",
     success: "svc-notifier--success",
     button: "",
+    shown: "svc-notifier--shown"
   });
 
   public setModified(options: any = null): void {
