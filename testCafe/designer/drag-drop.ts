@@ -1001,13 +1001,14 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
   const DynamicPanel = Selector("[data-sv-drop-target-survey-element=\"paneldynamic1\"]");
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
+  const FirstRow = Selector(".svc-row");
 
   await t
     .hover(RatingToolboxItem)
-    .dragToElement(RatingToolboxItem, DynamicPanel, {
+    .dragToElement(RatingToolboxItem, FirstRow, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
+      destinationOffsetY: 25,
       speed: 0.5
     })
 
