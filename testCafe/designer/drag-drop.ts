@@ -261,14 +261,15 @@ test("Drag Drop Question", async (t) => {
   const Rating1 = Selector("[data-sv-drop-target-survey-element=\"rating1\"]");
   const Rating2 = Selector(`[data-sv-drop-target-survey-element=${questionName}]`);
   const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
+  const FirstRow = Selector(".svc-row");
 
   await t
     .hover(Rating2, { speed: 0.5 })
     .hover(DragZoneRating2, { speed: 0.5 })
-    .dragToElement(DragZoneRating2, Rating1, {
+    .dragToElement(DragZoneRating2, FirstRow, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
+      destinationOffsetY: 25,
       speed: 0.5
     });
 
