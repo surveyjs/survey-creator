@@ -51,6 +51,7 @@ export var settings = {
     showAddQuestionButton: true
   },
   logic: {
+    defaultOperator: "equal",
     visibleActions: [],
     logicItemTitleMaxChars: 50,
     openBracket: "{",
