@@ -829,6 +829,25 @@ test("Triggers property editor", () => {
   expect(survey.triggers[1].getType()).toEqual("completetrigger");
 });
 
+test("Triggers property editor after remove trigger class", () => {
+  const runexpressiontriggerClass = Serializer.findClass("runexpressiontrigger");
+  Serializer.removeClass("runexpressiontrigger");
+
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const triggersQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("triggers"));
+  expect(triggersQuestion).toBeTruthy(); //visibleIf is here
+  expect(triggersQuestion.visibleRows).toHaveLength(0);
+  triggersQuestion.addRow();
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+  const triggerTypeQuestion = triggersQuestion.visibleRows[0].cells[0].question;
+  expect(triggerTypeQuestion.getType()).toEqual("dropdown");
+  expect(triggerTypeQuestion.value).toEqual("completetrigger");
+  expect(triggerTypeQuestion.choices).toHaveLength(4);
+
+  Serializer.addClass(runexpressiontriggerClass.name, runexpressiontriggerClass.properties, runexpressiontriggerClass.creator, runexpressiontriggerClass.parentName);
+});
+
 test("calculatedValues property editor", () => {
   var survey = new SurveyModel();
   survey.calculatedValues.push(new CalculatedValue("var1", "{q1}=1"));
