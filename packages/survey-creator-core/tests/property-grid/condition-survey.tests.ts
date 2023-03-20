@@ -1655,3 +1655,17 @@ test("Check errors for logic popup", () => {
   expect(panel.getQuestionByName("questionName").errors.length > 0).toBe(false);
   expect(notifierLog).toBe("->called");
 });
+test("Change the default operator", () => {
+  settings.logic.defaultOperator = "anyof";
+  var survey = new SurveyModel({
+    questions: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "dropdown", name: "q2", choices: [1, 2, 3] }
+    ]
+  });
+  var editor = new ConditionEditor(survey, survey.getQuestionByName("q1"));
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("anyof");
+  settings.logic.defaultOperator = "equal";
+});

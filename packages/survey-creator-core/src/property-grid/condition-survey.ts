@@ -10,7 +10,7 @@ import { getLogicString } from "../components/tabs/logic-types";
 export class ConditionEditorItem {
   public conjunction: string = "and";
   public questionName: string;
-  public operator: string = "equal";
+  public operator: string = settings.logic.defaultOperator;
   public value: any;
 }
 export class SurveyConditionEditorItem extends ConditionEditorItem {
@@ -521,7 +521,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     questionOperator.choices = this.getOperators();
     questionOperator.value = item.operator;
     questionOperator.onOpened.add((_, opt) => {
-      const json = this.getQuestionConditionJson(panel.getQuestionByName("questionName").value, "equal");
+      const json = this.getQuestionConditionJson(panel.getQuestionByName("questionName").value, this.defaultOperator);
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
@@ -815,7 +815,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private updateOperatorEnables(panel: PanelModel) {
     const questionName = panel.getQuestionByName("questionName");
     if (!questionName) return;
-    const json = this.getQuestionConditionJson(questionName.value, "equal");
+    const json = this.getQuestionConditionJson(questionName.value, this.defaultOperator);
     const qType = !!json ? json.type : null;
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return;
@@ -857,13 +857,14 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       valueQuestion.width = isValueSameLine ? "35%" : "";
     }
   }
+  private get defaultOperator(): string { return settings.logic.defaultOperator; }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
     for (let i = 0; i < choices.length; i++) {
       if (choices[i].isEnabled) {
         return choices[i].value;
       }
     }
-    return "equal";
+    return this.defaultOperator;
   }
   private onPanelAdded() {
     this.setItemToPanel(
@@ -876,7 +877,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.context = this.getContextFromPanels();
       this.rebuildQuestionValue(panel);
       if (!this.isSettingPanelValues) {
-        panel.getQuestionByName("operator").value = "equal";
+        panel.getQuestionByName("operator").value = this.defaultOperator;
       }
     }
     if (name == "operator") {
