@@ -138,12 +138,12 @@ var frenchTranslation = {
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
-    addNewQuestion: "Ajouter {0}",
+    addNewQuestion: "Ajouter une Question",
     // selectPage: "Select page...",
     // htmlPlaceHolder: "HTML content will be here.",
     // panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "L' enquête est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
-    // addNewTypeQuestion: "Add {0}", //{0} is localizable question type
+    addNewTypeQuestion: "Ajouter {0}", //{0} is localizable question type
     // chooseLogoPlaceholder: "[LOGO]",
     // auto: "auto",
     lg: {
