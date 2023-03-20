@@ -26,7 +26,7 @@ test("Add New Question", async t => {
 
 test("No Add New Question in HTML question placeholder", async t => {
   await t
-    .maximizeWindow()
+    .resizeWindow(2560, 2000)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("HTML"), { speed: 0.5 })
     .click(getToolboxItemByText("HTML"), { speed: 0.5 })
