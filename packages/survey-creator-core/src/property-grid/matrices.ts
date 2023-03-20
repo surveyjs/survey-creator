@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
@@ -755,6 +755,9 @@ export class PropertyGridEditorMatrixValidators extends PropertyGridEditorMatrix
 }
 
 export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMultipleTypes {
+  private getAvailableTriggers(): Array<JsonMetadataClass> {
+    return Serializer.getChildrenClasses("surveytrigger", true).filter(classObj => classObj.name !== "visibletrigger");
+  }
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "triggers";
   }
@@ -762,23 +765,18 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
     return "triggerType";
   }
   protected getDefaultClassName(prop: JsonObjectProperty): string {
-    return "runexpressiontrigger";
+    const classes = this.getAvailableTriggers().map(tr => tr.name);
+    if (!classes.length) return prop.name;
+
+    if (classes.indexOf("runexpressiontrigger") !== -1) {
+      return "runexpressiontrigger";
+    } else {
+      return classes[0];
+    }
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
-    var classes = Serializer.getChildrenClasses("surveytrigger", true);
-    var res = [];
-    for (var i = 0; i < classes.length; i++) {
-      var name = classes[i].name;
-      if (name == "visibletrigger") {
-        continue;
-      }
-      res.push({
-        value: name,
-        text: editorLocalization.getTriggerName(name)
-      });
-    }
-    return res;
+    return this.getAvailableTriggers().map((tr) => { return { value: tr.name, text: editorLocalization.getTriggerName(tr.name) } });
   }
 }
 

@@ -220,6 +220,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 test("Drag Drop Toolbox Responsivity", async (t) => {
   const tabbedMenuItemSelector = Selector(".svc-toolbox .svc-toolbox__tool:nth-of-type(19)");
   await t
+    .resizeWindow(1920, 1080)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).notOk()
     .resizeWindow(970, 632)
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
@@ -260,14 +261,15 @@ test("Drag Drop Question", async (t) => {
   const Rating1 = Selector("[data-sv-drop-target-survey-element=\"rating1\"]");
   const Rating2 = Selector(`[data-sv-drop-target-survey-element=${questionName}]`);
   const DragZoneRating2 = Rating2.find(".svc-question__drag-element");
+  const FirstRow = Selector(".svc-row");
 
   await t
     .hover(Rating2, { speed: 0.5 })
     .hover(DragZoneRating2, { speed: 0.5 })
-    .dragToElement(DragZoneRating2, Rating1, {
+    .dragToElement(DragZoneRating2, FirstRow, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
+      destinationOffsetY: 25,
       speed: 0.5
     });
 
@@ -313,8 +315,8 @@ test("Drag Drop to Panel", async (t) => {
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
-      speed: 0.01
+      destinationOffsetY: 0,
+      speed: 0.1
     })
 
     .hover(RatingToolboxItem, { speed: 0.01 })
@@ -322,30 +324,30 @@ test("Drag Drop to Panel", async (t) => {
       offsetX: 5,
       offsetY: 5,
       destinationOffsetY: -1,
-      speed: 0.01
+      speed: 0.1
     })
 
     .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Panel, {
       offsetX: 5,
       offsetY: 5,
-      speed: 0.01
+      speed: 0.1
     })
 
     .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
-      speed: 0.01
+      destinationOffsetY: 25,
+      speed: 0.1
     })
 
     .hover(RatingToolboxItem, { speed: 0.01 })
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -1,
-      speed: 0.01
+      destinationOffsetY: -10,
+      speed: 0.1
     });
   const expectedJson = {
     pages: [
@@ -999,13 +1001,14 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
   const DynamicPanel = Selector("[data-sv-drop-target-survey-element=\"paneldynamic1\"]");
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
+  const FirstRow = Selector(".svc-row");
 
   await t
     .hover(RatingToolboxItem)
-    .dragToElement(RatingToolboxItem, DynamicPanel, {
+    .dragToElement(RatingToolboxItem, FirstRow, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 1,
+      destinationOffsetY: 25,
       speed: 0.5
     })
 
@@ -1155,4 +1158,76 @@ test("Drag Drop Question: click on drag area should work withot drag start", asy
   await t.expect(getSelectedElementName()).eql("rating1");
   await t.hover(Rating2).click(DragZoneRating2); // select Rating2 without drag start
   await t.expect(getSelectedElementName()).eql("rating2");
+});
+
+test("Drag Drop below the last Panel", async (t) => {
+  await t.resizeWindow(2560, 1440);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const LastPanel = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
+  const PanelToolboxItem = Selector("[aria-label='Panel toolbox item']");
+
+  await t
+    .hover(PanelToolboxItem, { speed: 0.01 })
+    .dragToElement(PanelToolboxItem, LastPanel, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: -1,
+      speed: 0.1
+    });
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          },
+          {
+            "type": "panel",
+            "name": "panel3"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
 });
