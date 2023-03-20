@@ -1,12 +1,11 @@
 @import "../variables.scss";
 
 .svc-string-editor {
-
   [contenteditable] {
     user-select: text;
     -webkit-user-select: text;
   }
-  
+
   position: static;
   .sv-string-editor {
     position: relative;
@@ -111,31 +110,28 @@
 }
 
 .svc-string-editor:hover:not(.svc-string-editor--readonly):not(:focus-within) {
-  color: $foreground;
   .svc-string-editor__border {
     display: flex;
-    top: calcSize(-0.5);
-    bottom: calcSize(-0.5);
-    left: calcSize(-1);
-    right: calcSize(-1);
+    top: 0;
+    bottom: 0;
+    left: calcSize(-0.5);
+    right: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
-    border: calcSize(0.25) solid rgba(0, 0, 0, 0.16);
     border-radius: 3px;
+    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) rgba(0, 0, 0, 0.16);
   }
 }
 .svc-string-editor:focus-within {
-  color: $foreground;
   .svc-string-editor__border {
     display: flex;
     top: calcSize(-0.5);
     bottom: calcSize(-0.5);
     left: calcSize(-1);
     right: calcSize(-1);
-    border: calcSize(0.25) solid $primary;
     border-radius: 3px;
     box-sizing: content-box;
     background-color: $background;
-    box-shadow: 0px 2px 6px $shadow-medium;
+    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
   }
 }
 
