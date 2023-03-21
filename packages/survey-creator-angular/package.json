@@ -69,12 +69,12 @@
   "scripts": {
     "build": "ng build",
     "serve:example": "ng serve",
-    "testcafe": "testcafe chrome ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal,dashboard --env=angular",
+    "testcafe": "testcafe chrome ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "testcafe:ci": "testcafe -c 4 -q attemptLimit=5,successThreshold=1 chrome:headless ../../testCafe/ --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --selector-timeout 1500 --reporter minimal --env=angular",
     "serve:example:aot": "http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080",
     "build:example": "ng build  angular-ui",
     "test": "ng test survey-creator-angular",
-    "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
+    "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q attemptLimit=5,successThreshold=1 --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" "
   }
