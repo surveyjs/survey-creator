@@ -1666,35 +1666,37 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
-  public onBeforeDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
-  public onAfterDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onDragStart: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onBeforeDrop: Survey.Event<() => any, any, any> = this.onDragStart;
+  public onDragEnd: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onAfterDrop: Survey.Event<() => any, any, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
-    this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       let panel = sender.dropTarget.parent;
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onBeforeDrop.fire(sender, options);
+      this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
       this.undoRedoManager.setUndoCallbackForTransaction(() => {
         panel.updateRows();
       });
     });
-    this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
       isDraggedFromToolbox = false;
-      this.onAfterDrop.fire(sender, options);
+      this.onDragEnd.fire(sender, options);
     });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
-    this.dragDropChoices.onBeforeDrop.add((sender, options) => {
+    this.dragDropChoices.onDragStart.add((sender, options) => {
       this.startUndoRedoTransaction("drag drop");
     });
-    this.dragDropChoices.onAfterDrop.add((sender, options) => {
+    this.dragDropChoices.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
