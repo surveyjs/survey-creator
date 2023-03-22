@@ -4,6 +4,7 @@ import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 
 export class TabTestPlugin implements ICreatorPlugin {
   private languageSelectorAction: Action;
@@ -18,6 +19,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private prevPageAction: Action;
   private nextPageAction: Action;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private sidebarTab: SidebarTabModel;
 
   public model: TestSurveyTabViewModel;
 
@@ -78,6 +80,8 @@ export class TabTestPlugin implements ICreatorPlugin {
     creator.addPluginTab("test", this, "ed.testSurvey");
     this.setPreviewTheme(this.creator.themeForPreview);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
+    this.sidebarTab = this.creator.sidebar.addTab("preview");
+    this.sidebarTab.caption = editorLocalization.getString("ed.previewPropertyGridTitle");
   }
   public activate(): void {
     this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
@@ -86,6 +90,9 @@ export class TabTestPlugin implements ICreatorPlugin {
     };
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
+    this.sidebarTab.model = this.model.themeEditorSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activeTab = this.sidebarTab.id;
   }
   public update(): void {
     if (!this.model) return;
@@ -113,6 +120,7 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.model.onSurveyCreatedCallback = undefined;
       this.model = undefined;
     }
+    this.sidebarTab.visible = false;
     this.languageSelectorAction.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
@@ -169,7 +177,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab)
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -191,7 +199,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
           this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
-          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements")
+          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
       items.push(this.invisibleToggleAction);

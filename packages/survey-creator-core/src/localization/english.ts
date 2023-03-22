@@ -125,6 +125,7 @@ export var enStrings = {
     propertyEditorError: "Error",
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
+    previewPropertyGridTitle: "Theme Settings",
     translationLanguages: "Languages",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "All Strings",
@@ -905,6 +906,15 @@ export var enStrings = {
     //showCaption: "showCaption",
     //iconName: "iconName",
     //iconSize: "iconSize"
+  },
+  theme: {
+    "primary": "Primary Color",
+    "background": "Background Color",
+    "background-dim": "Background Dim Color",
+    "background-dim-light": "Background Dim Light Color",
+    "primary-foreground": "Primary Foreground Color",
+    "foreground": "Foreground Color",
+    "base-unit": "Base Unit",
   }
 };
 

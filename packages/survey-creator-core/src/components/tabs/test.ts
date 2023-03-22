@@ -27,6 +27,7 @@ export class TestSurveyTabViewModel extends Base {
   public testAgainAction: Action;
   public nextPageAction: Action;
   private selectPageAction: Action;
+  private themeEditorSurveyValue: SurveyModel;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -82,10 +83,14 @@ export class TestSurveyTabViewModel extends Base {
   public get isPageToolbarVisible(): boolean {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
+  public get themeEditorSurvey(): SurveyModel {
+    return this.themeEditorSurveyValue;
+  }
 
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
+    this.themeEditorSurveyValue = this.createThemeEditorSurvey();
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
@@ -309,5 +314,45 @@ export class TestSurveyTabViewModel extends Base {
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
+  }
+  protected createThemeEditorSurvey(): SurveyModel {
+    var json = this.getThemeEditorSurveyJSON();
+    setSurveyJSONForPropertyGrid(json, true, false);
+    var res = this.surveyProvider.createSurvey(json, "theme_editor");
+    res.getCss().list = {};
+    res.css = propertyGridCss;
+    res.onValueChanged.add((sender, options) => {
+      const variables = {};
+      const themeData = sender.data;
+      Object.keys(themeData).forEach(varName => {
+        variables["--"+varName] = themeData[varName];
+      });
+      this.simulator.themeVariables = variables;
+    });
+    return res;
+  }
+  private getThemeEditorSurveyJSON() {
+    const themeVariables = {
+      "primary": "#19b394",
+      "background": "#ffffff",
+      "background-dim": "#f3f3f3",
+      "background-dim-light": "#f9f9f9",
+      "primary-foreground": "#ffffff",
+      "foreground": "#161616",
+      "base-unit": "8px",
+    };
+    const themeEditorSurveyJSON = {
+      elements: [{ type: "panel", elements: [] }]
+    };
+    Object.keys(themeVariables).forEach(varName => {
+      themeEditorSurveyJSON.elements[0].elements.push({
+        type: "text",
+        inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
+        title: editorLocalization.getString("theme." + varName),
+        name: varName,
+        defaultValue: themeVariables[varName]
+      });
+    });
+    return themeEditorSurveyJSON;
   }
 }
