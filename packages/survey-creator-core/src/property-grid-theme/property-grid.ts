@@ -165,6 +165,7 @@ export var propertyGridCss = {
     root: "spg-multipletext",
     item: "spg-multipletext__item",
     itemTitle: "spg-multipletext__item-title",
+    content: "spg-multipletext__content spg-text__content",
     row: "spg-multipletext__row",
     cell: "spg-multipletext__cell"
   },
@@ -218,6 +219,7 @@ export var propertyGridCss = {
   matrixdynamic: {
     tableWrapper: "spg-table-wrapper",
     root: "spg-table spg-matrixdynamic",
+    content: "spg-multipletext__content spg-text__content",
     cell: "spg-table__cell",
     headerCell: "spg-table__cell spg-table__cell--header",
     button: "spg-btn",
