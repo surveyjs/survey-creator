@@ -50,15 +50,7 @@ var buildPlatformJson = {
   homepage: "https://surveyjs.io/Overview/Survey-Creator",
   license: "https://surveyjs.io/Licenses#SurveyCreator",
   files: [
-    packageJson.name + ".css",
-    packageJson.name + ".min.css",
-    packageJson.name + ".fontless.css",
-    packageJson.name + ".fontless.min.css",
-    packageJson.name + ".js",
-    packageJson.name + ".d.ts",
-    packageJson.name + ".min.js",
-    "survey-creator-core.i18n.js",
-    "survey-creator-core.i18n.min.js",
+    "**/*"
   ],
   main: packageJson.name + ".js",
   repository: {
@@ -293,7 +285,7 @@ module.exports = function (options) {
   if (isProductionBuild) {
     config.plugins.push = config.plugins.concat([]);
   } else {
-    config.devtool = "inline-source-map";
+    config.devtool = "source-map";
     config.plugins = config.plugins.concat([
       new webpack.LoaderOptionsPlugin({ debug: true }),
     ]);
