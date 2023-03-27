@@ -322,25 +322,21 @@ export class TestSurveyTabViewModel extends Base {
     res.getCss().list = {};
     res.css = propertyGridCss;
     res.onValueChanged.add((sender, options) => {
-      const variables = {};
-      const themeData = sender.data;
-      Object.keys(themeData).forEach(varName => {
-        variables["--"+varName] = themeData[varName];
-      });
-      this.simulator.themeVariables = variables;
+      this.simulator.themeVariables = sender.data;
     });
     return res;
   }
   private getThemeEditorSurveyJSON() {
-    const themeVariables = {
-      "primary": "#19b394",
-      "background": "#ffffff",
-      "background-dim": "#f3f3f3",
-      "background-dim-light": "#f9f9f9",
-      "primary-foreground": "#ffffff",
-      "foreground": "#161616",
-      "base-unit": "8px",
+    const defaultV2ThemeVariables = {
+      "--primary": "#19b394",
+      "--background": "#ffffff",
+      "--background-dim": "#f3f3f3",
+      "--background-dim-light": "#f9f9f9",
+      "--primary-foreground": "#ffffff",
+      "--foreground": "#161616",
+      "--base-unit": "8px",
     };
+    const themeVariables = defaultV2ThemeVariables;
     const themeEditorSurveyJSON = {
       elements: [{ type: "panel", elements: [] }]
     };

@@ -908,13 +908,13 @@ export var enStrings = {
     //iconSize: "iconSize"
   },
   theme: {
-    "primary": "Primary Color",
-    "background": "Background Color",
-    "background-dim": "Background Dim Color",
-    "background-dim-light": "Background Dim Light Color",
-    "primary-foreground": "Primary Foreground Color",
-    "foreground": "Foreground Color",
-    "base-unit": "Base Unit",
+    "--primary": "Primary Color",
+    "--background": "Background Color",
+    "--background-dim": "Background Dim Color",
+    "--background-dim-light": "Background Dim Light Color",
+    "--primary-foreground": "Primary Foreground Color",
+    "--foreground": "Foreground Color",
+    "--base-unit": "Base Unit",
   }
 };
 
