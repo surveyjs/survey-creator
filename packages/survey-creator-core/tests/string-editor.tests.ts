@@ -732,7 +732,7 @@ test("StringEditor onGetPropertyReadOnly for radio/checkbox - https://github.com
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrOtherItem, creator);
 
   creator.onGetPropertyReadOnly.add((sender, options) => {
-    if(options.property.name === "otherText" && options.obj.getType() === "checkbox") {
+    if (options.property.name === "otherText" && options.obj.getType() === "checkbox") {
       options.readOnly = true;
     }
   });
@@ -815,4 +815,4 @@ test("StringEditor Navigator - supported types", (): any => {
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionMatrixModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionRadiogroupModel("q") })).toBeTruthy();
   expect(StringItemsNavigatorBase.setQuestion(<any>{ element: new QuestionImagePickerModel("q") })).toBeFalsy();
-})
+});
