@@ -241,7 +241,8 @@ export var propertyGridCss = {
     dragDropGhostPositionTop: "spg-matrixdynamic__drag-drop-ghost-position-top",
     dragDropGhostPositionBottom: "spg-matrixdynamic__drag-drop-ghost-position-bottom",
     emptyRowsSection: "spg-matrixdynamic__placeholder",
-    emptyRowsText: "spg-matrixdynamic__placeholder-text"
+    emptyRowsText: "spg-matrixdynamic__placeholder-text",
+    cellQuestionWrapper: "spg-table__question-wrapper"
   },
   rating: {
     root: "spg-rating",
