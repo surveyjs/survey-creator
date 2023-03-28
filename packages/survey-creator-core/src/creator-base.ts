@@ -1666,8 +1666,37 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
+  /**
+   * An event that is raised when users start to drag a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element being dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` is being dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` is being dragged.
+   * @see onDragEnd
+   */
   public onDragStart: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   public onBeforeDrop: Survey.Event<() => any, any, any> = this.onDragStart;
+  /**
+   * An event that is raised when users finish dragging a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element that was dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` was dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` was dragged.
+   */
   public onDragEnd: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   public onAfterDrop: Survey.Event<() => any, any, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
