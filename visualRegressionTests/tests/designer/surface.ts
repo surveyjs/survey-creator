@@ -725,7 +725,7 @@ test("Check question scroll", async (t) => {
     await takeElementScreenshot("question-checkboxes-scroll.png", root, t, comparer);
   });
 });
-test("Check question scroll", async (t) => {
+test("Check required question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await setJSON({
@@ -743,7 +743,6 @@ test("Check question scroll", async (t) => {
     const stringEditor = Selector(".svc-question__content .svc-string-editor");
     await takeElementScreenshot("question-required.png", root, t, comparer);
     await t.hover(stringEditor);
-    await t.debug();
     await takeElementScreenshot("question-required-hover.png", root, t, comparer);
     await t.click(stringEditor);
     await takeElementScreenshot("question-required-focus.png", root, t, comparer);
