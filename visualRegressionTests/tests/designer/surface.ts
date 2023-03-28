@@ -725,7 +725,7 @@ test("Check question scroll", async (t) => {
     await takeElementScreenshot("question-checkboxes-scroll.png", root, t, comparer);
   });
 });
-test.only("Check question scroll", async (t) => {
+test("Check question scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await setJSON({
