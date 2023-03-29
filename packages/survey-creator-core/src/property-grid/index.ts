@@ -1280,6 +1280,7 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorString {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
       const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
       const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
+      if(!imageHeightProperty && !imageWidthProperty) return false;
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
     question.valueFromDataCallback = function (value: any): any {
