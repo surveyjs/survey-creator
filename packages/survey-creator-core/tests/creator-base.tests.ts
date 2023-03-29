@@ -1588,7 +1588,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    }, ]
+    }]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
@@ -3053,7 +3053,7 @@ test("Creator notify state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.notify = (msg, type) => {
     notifierLog += msg;
-    if(type) {
+    if (type) {
       notifierLog += " - " + type;
     }
     notifierLog += (", ");
@@ -3520,7 +3520,7 @@ test("undo/redo DnD ", (): any => {
 
   const q1 = creator.survey.pages[0].elements[0];
   const q2 = creator.survey.pages[0].elements[1];
-  creator.dragDropSurveyElements.onBeforeDrop.fire({ dropTarget: q2, draggedElement: q1 }, null);
+  creator.dragDropSurveyElements.onDragStart.fire({ dropTarget: q2, draggedElement: q1 }, null);
 
   creator.survey.pages[0].removeElement(q1);
   creator.survey.pages[0].addElement(q1);
@@ -3528,7 +3528,7 @@ test("undo/redo DnD ", (): any => {
   q1.startWithNewLine = false;
 
   expect(creator.survey.pages[0].rows.length).toEqual(1);
-  creator.dragDropSurveyElements.onAfterDrop.fire({ dropTarget: q2 }, { draggedElement: q1 });
+  creator.dragDropSurveyElements.onDragEnd.fire({ dropTarget: q2 }, { draggedElement: q1 });
   expect(creator.survey.pages[0].rows.length).toEqual(1);
   expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question2", "question1"]);
   creator.undoRedoManager.undo();

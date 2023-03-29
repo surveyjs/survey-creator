@@ -2,4 +2,4 @@ node_modules
 dist
 **/*.js
 **/*.d.ts
-packages/survey-creator-core
+packages/survey-creator-angular

@@ -169,7 +169,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab)
+          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -191,7 +191,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         action: () => {
           this.model.showInvisibleElements = !this.model.showInvisibleElements;
           this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
-          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements")
+          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
         }
       });
       items.push(this.invisibleToggleAction);
