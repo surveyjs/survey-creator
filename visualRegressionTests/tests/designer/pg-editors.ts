@@ -250,7 +250,8 @@ test("Check triggers question", async (t) => {
       .click(Selector("h4[aria-label=General]"))
       .click(Selector("h4[aria-label=Logic]"))
       .click(Selector("div[data-name='triggers'] .spg-action-button__icon[aria-label='Add New']"));
-
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
+    await ClientFunction(() => (<any>document).querySelector("[aria-label='triggerType'] input").focus())();
+    await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
