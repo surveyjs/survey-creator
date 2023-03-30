@@ -562,6 +562,7 @@ export class CreatorBase extends Base
    *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
    *- options.item a target collection item
    *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
+   *- options.allowAdd a boolean value. It is `true` by default. Set it false to prevent an item from being added to the collection
    *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
@@ -1540,7 +1541,7 @@ export class CreatorBase extends Base
       if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit, allowAdd: true };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
         parentObj.getPropertyValue(parentProperty?.name),
@@ -2863,11 +2864,13 @@ export class CreatorBase extends Base
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,
-      allowDelete: itemOptions.allowDelete
+      allowDelete: itemOptions.allowDelete,
+      allowAdd: itemOptions.allowAdd
     };
     this.onCollectionItemAllowOperations.fire(this, options);
     itemOptions.allowEdit = options.allowEdit;
     itemOptions.allowDelete = options.allowDelete;
+    itemOptions.allowAdd = options.allowAdd;
   }
   onItemValueAddedCallback(
     obj: Base,
