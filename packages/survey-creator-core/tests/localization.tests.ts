@@ -3,7 +3,7 @@ import { CreatorTester } from "./creator-tester";
 import { Action } from "survey-core";
 
 test("Get nested property", () => {
-  expect(editorLocalization.getString("qt.text")).toEqual("Single Input");
+  expect(editorLocalization.getString("qt.text")).toEqual("Text Entry");
   expect(editorLocalization.getString("qt.text1")).toEqual("text1");
   expect(editorLocalization.getString("qt1.text")).toEqual("qt1");
 });
@@ -170,7 +170,7 @@ test("Change Creator locale property", (): any => {
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
   const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
   const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
-  const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single Input")[0];
+  const textQuestion = creator.toolbox.actions.filter(item => item.title === "Text Entry")[0];
   const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
   expect(tabPreview).toBeTruthy();
   creator.locale = "de";
@@ -182,7 +182,7 @@ test("Change Creator locale property", (): any => {
   creator.locale = "";
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
   expect(tabButton.title).toEqual("Logic");
-  expect(textQuestion.title).toEqual("Single Input");
+  expect(textQuestion.title).toEqual("Text Entry");
   expect(saveAction.title).toEqual("Save Survey");
 });
 test("Check creator license localization", (): any => {

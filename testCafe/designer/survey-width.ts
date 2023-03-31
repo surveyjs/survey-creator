@@ -48,15 +48,15 @@ test("Change survey width", async (t) => {
 
 test("Change survey width", async (t) => {
   await t
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"));
+    .hover(getToolboxItemByText("Text Entry"))
+    .click(getToolboxItemByText("Text Entry"));
 
   await t
     .expect(Selector(".svc-tab-designer_content .sd-container-modern").hasClass("sd-container-modern--static")).ok();
 
   await t
-    .hover(getToolboxItemByText("Single-Choice Matrix"))
-    .click(getToolboxItemByText("Single-Choice Matrix"));
+    .hover(getToolboxItemByText("Matrix Table"))
+    .click(getToolboxItemByText("Matrix Table"));
   await t
     .expect(Selector(".svc-tab-designer_content .sd-container-modern").hasClass("sd-container-modern--responsive")).ok();
 });

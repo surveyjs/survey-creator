@@ -60,7 +60,7 @@ test("Matrix question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Single-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Matrix Table");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -90,7 +90,7 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Matrix Table with Dropdown");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -110,7 +110,7 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Matrix Table with Dropdown");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -128,7 +128,7 @@ test("Matrix dynamic question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
+  await addQuestionByAddQuestionButton(t, "Dynamic Matrix Table");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")

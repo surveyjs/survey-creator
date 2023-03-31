@@ -181,7 +181,7 @@ test("Check string editor visibility on defferent ReadOnly cases", async (t) => 
   await ClientFunction(() => {
     window["Survey"].Serializer.getProperty("checkbox", "choices").readOnly = false;
     window["creator"].onGetPropertyReadOnly.add(function (editor, options) {
-      if (options.obj.getType() === "radiogroup" && options.propertyName == "choices")
+      if (options.obj.getType() === "Radio Button Group" && options.propertyName == "choices")
         options.readOnly = true;
     });
   })();
@@ -518,7 +518,7 @@ test("Test string change event", async (t) => {
 });
 
 test("Focus on new question", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
 });
@@ -579,7 +579,7 @@ test("Do not focus on existing question dragged", async (t) => {
 });
 
 test("Focus switch on select base", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -595,7 +595,7 @@ test("Focus switch on select base", async (t) => {
 });
 
 test("Disable edit inactive items", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Checkbox"))
+  await t.click(Selector(".svc-toolbox__tool").withText("Checkboxes"))
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Select All").withAttribute("contenteditable", "false").exists).ok()
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("None").withAttribute("contenteditable", "false").exists).ok()
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "false").exists).ok()
@@ -623,7 +623,7 @@ test("Focus switch on rating base", async (t) => {
 });
 
 test("Delete items on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter")
@@ -653,7 +653,7 @@ test("Delete items on backspace", async (t) => {
 });
 
 test("Focus switch on multiple text", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text Box"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -669,7 +669,7 @@ test("Focus switch on multiple text", async (t) => {
 });
 
 test("Delete  multiple text items on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text Box"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter").pressKey("Enter").pressKey("shift+tab")
@@ -699,7 +699,7 @@ test("Delete  multiple text items on backspace", async (t) => {
 });
 
 test("Focus switch on matrix columns and rows", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Matrix Table"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -725,7 +725,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
 });
 
 test("Delete matrix Columns on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Matrix Table"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter")
@@ -755,7 +755,7 @@ test("Delete matrix Columns on backspace", async (t) => {
 });
 
 test("Delete matrix rows on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Matrix Table"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("tab").pressKey("tab").pressKey("tab").pressKey("tab");
@@ -785,7 +785,7 @@ test("Delete matrix rows on backspace", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
 });
 test("Paste multiline selectbase", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
 
   await t
     .click(Selector(".sv-string-editor").withText("Item 2"))
@@ -797,7 +797,7 @@ test("Paste multiline selectbase", async (t) => {
 });
 test("Undo after new item add", async (t) => {
   await t
-    .click(Selector(".svc-toolbox__tool").withText("Radiogroup"))
+    .click(Selector(".svc-toolbox__tool").withText("Radio Button Group"))
     .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
     .expect(Selector(".svc-item-value-controls__remove").count).eql(4)
     .click(Selector("button[title=Undo]"))

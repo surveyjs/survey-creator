@@ -2208,7 +2208,7 @@ test("ConvertTo, show it for a panel", (): any => {
 test("Has one item type in convertTo", (): any => {
   CustomWidgetCollection.Instance.add({
     name: "text",
-    title: "Single Input",
+    title: "Text Entry",
     widgetIsLoaded: () => { return true; },
     isFit: () => (question) => { return question.getType() === "text"; }
   }, "customtype");
@@ -2938,7 +2938,7 @@ test("Add new question to Panel and Page", (): any => {
   listModelPanel2.onItemClick(commentItem);
 
   expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Text Area");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
@@ -2948,7 +2948,7 @@ test("Add new question to Panel and Page", (): any => {
   listModelPage.onItemClick(rankingItem);
 
   expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Text Area");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
@@ -2958,7 +2958,7 @@ test("Add new question to Panel and Page", (): any => {
   listModelPage2.onItemClick(htmlItem);
 
   expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Text Area");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add HTML");
 

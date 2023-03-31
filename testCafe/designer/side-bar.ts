@@ -86,8 +86,8 @@ test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
-  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
-  const CheckboxItem = Selector("[aria-label='Checkbox toolbox item']");
+  const SingleInputItem = Selector("[aria-label='Text Entry toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkboxes toolbox item']");
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t

@@ -69,26 +69,26 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
-  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
-  const CheckboxItem = Selector("[aria-label='Checkbox toolbox item']");
-  const RadiogroupItem = Selector("[aria-label='Radiogroup toolbox item']");
+  const SingleInputItem = Selector("[aria-label='Text Entry toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkboxes toolbox item']");
+  const RadiogroupItem = Selector("[aria-label='Radio Button Group toolbox item']");
   const DropdownItem = Selector("[aria-label='Dropdown toolbox item']");
-  const CommentItem = Selector("[aria-label='Comment toolbox item']");
+  const CommentItem = Selector("[aria-label='Text Area toolbox item']");
   const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
   const RankingItem = Selector("[aria-label='Ranking toolbox item']");
   const ImagePickerItem = Selector("[aria-label='Image Picker toolbox item']");
-  const BooleanItem = Selector("[aria-label='Boolean toolbox item']");
+  const BooleanItem = Selector("[aria-label='Yes/No Question toolbox item']");
   const ImageItem = Selector("[aria-label='Image toolbox item']");
   const HtmlItem = Selector("[aria-label='HTML toolbox item']");
   const SignatureItem = Selector("[aria-label='Signature Pad toolbox item']");
   const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
   const FileItem = Selector("[aria-label='File toolbox item']");
-  const MatrixSingleChoiceItem = Selector("[aria-label='Single-Choice Matrix toolbox item']");
-  const MatrixMultipleChoiceItem = Selector("[aria-label='Multiple-Choice Matrix toolbox item']");
-  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix toolbox item']");
-  const MultipleTextItem = Selector("[aria-label='Multiple Text toolbox item']");
+  const MatrixSingleChoiceItem = Selector("[aria-label='Matrix Table toolbox item']");
+  const MatrixMultipleChoiceItem = Selector("[aria-label='Matrix Table with Dropdown toolbox item']");
+  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix Table toolbox item']");
+  const MultipleTextItem = Selector("[aria-label='Multiple Text Box toolbox item']");
   const PanelItem = Selector("[aria-label='Panel toolbox item']");
-  const PanelDynamicItem = Selector("[aria-label='Panel toolbox item']");
+  const PanelDynamicItem = Selector("[aria-label='Dynamic Panel toolbox item']");
 
   await t.resizeWindow(2560, 2000);
 

@@ -12,10 +12,10 @@ test("Correct focus agter delete by Del key", async t => {
   await t
     .maximizeWindow()
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
-    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Text Entry"), { speed: 0.5 })
+    .click(getToolboxItemByText("Text Entry"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content").count).eql(1)
-    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
+    .click(getToolboxItemByText("Text Entry"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content").count).eql(2)
     .click(getVisibleElement(".svc-question__content"), { offsetX: 5, offsetY: 5 })
     .pressKey("delete")
