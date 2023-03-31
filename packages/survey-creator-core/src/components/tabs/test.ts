@@ -326,7 +326,7 @@ export class TestSurveyTabViewModel extends Base {
     });
     return res;
   }
-  private getThemeEditorSurveyJSON() {
+  private _getThemeEditorSurveyJSON() {
     const defaultV2ThemeVariables = {
       "--primary": "#19b394",
       "--background": "#ffffff",
@@ -342,6 +342,171 @@ export class TestSurveyTabViewModel extends Base {
     };
     Object.keys(themeVariables).forEach(varName => {
       themeEditorSurveyJSON.elements[0].elements.push({
+        type: "text",
+        inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
+        title: editorLocalization.getString("theme." + varName),
+        name: varName,
+        defaultValue: themeVariables[varName]
+      });
+    });
+    return themeEditorSurveyJSON;
+  }
+
+  private getThemeEditorSurveyJSON() {
+    const defaultV2ThemeVariables = {
+      "--primary": "#19b394",
+      "--background": "#ffffff",
+      "--background-dim": "#f3f3f3",
+      "--background-dim-light": "#f9f9f9",
+      "--primary-foreground": "#ffffff",
+      "--foreground": "#161616",
+      "--base-unit": "8px",
+    };
+    const themeVariables = defaultV2ThemeVariables;
+    const themeEditorSurveyJSON = {
+      "clearInvisibleValues": "none",
+      elements: [{
+        type: "panel",
+        state: "expanded",
+        title: "General",
+        elements: [
+          {
+            type: "panel",
+            elements: [
+              {
+                type: "dropdown",
+                name: "theme",
+                choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
+                defaultValue: "default",
+                allowClear: false
+              },
+              {
+                type: "buttongroup",
+                name: "weight",
+                choices: ["panels", "lightweight"],
+                defaultValue: "panels"
+              },
+              {
+                type: "buttongroup",
+                name: "side",
+                titleLocation: "hidden",
+                choices: ["light", "dark"],
+                defaultValue: "light"
+              }
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "text",
+                inputType: "color",
+                name: "--primary",
+                title: "Accent Color",
+                defaultValue: "#19b394"
+              },
+              {
+                type: "text",
+                inputType: "color",
+                name: "--background-dim",
+                title: "Background Color",
+                defaultValue: "#f3f3f3"
+              },
+              {
+                type: "text",
+                name: "background-image",
+                title: "Background image"
+              },
+              {
+                type: "text",
+                inputType: "number",
+                name: "background-image-opacity",
+                titleLocation: "left",
+                title: "Opacity",
+                defaultValue: 100,
+                min: 0,
+                max: 100,
+                step: 5
+              },
+              {
+                type: "text",
+                inputType: "number",
+                name: "panelBackgroundTransparency",
+                title: "Panel Background Transparency",
+                defaultValue: 100,
+                min: 0,
+                max: 100,
+                step: 5
+              },
+              {
+                type: "text",
+                inputType: "number",
+                name: "questionBackgroundTransparency",
+                title: "Question Background Transparency",
+                defaultValue: 100,
+                min: 0,
+                max: 100,
+                step: 5
+              }
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "dropdown",
+                name: "--font-family",
+                choices: ["Open Sans", "Arial"],
+                defaultValue: "Open Sans",
+                allowClear: false
+              },
+              {
+                type: "text",
+                inputType: "number",
+                name: "--font-size",
+                title: "Font Size",
+                defaultValue: 100,
+                min: 0
+              },
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "text",
+                inputType: "number",
+                name: "--scale",
+                title: "Scale", defaultValue: 100, min: 0, step: 5
+              },
+              {
+                type: "expression",
+                name: "--base-unit",
+                expression: "{--scale}*8/100+\"px\"",
+                visible: false
+              },
+              {
+                type: "text",
+                inputType: "number",
+                name: "--corner-radius",
+                title: "Corner Radius",
+                defaultValue: 8,
+                min: 0
+              },
+            ]
+          }
+        ]
+      }, {
+        type: "panel",
+        title: "Advanced",
+        state: "collapsed",
+        elements: [
+          {
+            type: "panel",
+            elements: []
+          }]
+      }]
+    };
+
+    Object.keys(themeVariables).forEach(varName => {
+      themeEditorSurveyJSON.elements[1].elements[0].elements.push(<any>{
         type: "text",
         inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
         title: editorLocalization.getString("theme." + varName),
