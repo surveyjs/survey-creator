@@ -1077,7 +1077,7 @@ export class PropertyGridModel {
     return (<any>row).allowEditRow;
   }
   private calculateMatrixAllowOperations(question: Question, row: MatrixDynamicRowModel) {
-    const rowOptions: ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true };
+    const rowOptions: ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true, allowAdd: undefined };
     this.options.onCollectionItemAllowingCallback(<any>this.obj,
       (<any>question).property,
       question.value,

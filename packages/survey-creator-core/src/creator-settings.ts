@@ -158,6 +158,7 @@ export var settings = {
 export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
   allowEdit: boolean;
+  allowAdd: boolean;
 }
 
 export interface ISurveyCreatorOptions {
