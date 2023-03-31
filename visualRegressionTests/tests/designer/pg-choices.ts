@@ -39,7 +39,9 @@ test("Check section", async (t) => {
     const sectionContentElement = Selector("h4[aria-label=Choices]").parent().nextSibling();
     await t.expect(sectionContentElement.visible).ok();
     await takeElementScreenshot("choices-section-default.png", sectionContentElement, t, comparer);
-
+    await ClientFunction(() => (<any>document).querySelector("[data-name='choices'] .spg-input").focus())();
+    await takeElementScreenshot("choices-section-default-focused.png", sectionContentElement, t, comparer);
+    await ClientFunction(() => (<any>document).querySelector("body").focus())();
     await t.hover(sectionContentElement.find(".spg-action-button").nth(0));
     await takeElementScreenshot("choices-clear-button-hovered.png", sectionContentElement, t, comparer);
 

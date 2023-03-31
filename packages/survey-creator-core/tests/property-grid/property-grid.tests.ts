@@ -2975,3 +2975,11 @@ test("PropertyGridEditorQuestionValue without nonvalue questions", () => {
   expect(setToValue.choices).toHaveLength(1);
   expect(setToValue.value).toEqual("aNumber");
 });
+test("cellType equals 'file'", (): any => {
+  const question = new QuestionMatrixDynamicModel("q1");
+  const column = question.addColumn("col1");
+  column.cellType = "file";
+  const propertyGrid = new PropertyGridModelTester(column);
+  const cellTypePropEditor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("cellType");
+  expect(cellTypePropEditor.value).toEqual("file");
+});

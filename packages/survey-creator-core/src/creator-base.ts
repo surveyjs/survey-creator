@@ -562,6 +562,7 @@ export class CreatorBase extends Base
    *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
    *- options.item a target collection item
    *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
+   *- options.allowAdd a boolean value. It is `true` by default. Set it false to prevent an item from being added to the collection
    *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
@@ -1540,7 +1541,7 @@ export class CreatorBase extends Base
       if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit, allowAdd: true };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
         parentObj.getPropertyValue(parentProperty?.name),
@@ -1666,35 +1667,66 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
-  public onBeforeDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
-  public onAfterDrop: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  /**
+   * An event that is raised when users start to drag a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element being dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` is being dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` is being dragged.
+   * @see onDragEnd
+   */
+  public onDragStart: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onBeforeDrop: Survey.Event<() => any, any, any> = this.onDragStart;
+  /**
+   * An event that is raised when users finish dragging a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element that was dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` was dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` was dragged.
+   */
+  public onDragEnd: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
+  public onAfterDrop: Survey.Event<() => any, any, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
-    this.dragDropSurveyElements.onBeforeDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       let panel = sender.dropTarget.parent;
       isDraggedFromToolbox = !sender.draggedElement.parent;
-      this.onBeforeDrop.fire(sender, options);
+      this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
       this.undoRedoManager.setUndoCallbackForTransaction(() => {
         panel.updateRows();
       });
     });
-    this.dragDropSurveyElements.onAfterDrop.add((sender, options) => {
+    this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
       isDraggedFromToolbox = false;
-      this.onAfterDrop.fire(sender, options);
+      this.onDragEnd.fire(sender, options);
     });
   }
   private initDragDropChoices() {
     this.dragDropChoices = new DragDropChoices(null, this);
-    this.dragDropChoices.onBeforeDrop.add((sender, options) => {
+    this.dragDropChoices.onDragStart.add((sender, options) => {
       this.startUndoRedoTransaction("drag drop");
     });
-    this.dragDropChoices.onAfterDrop.add((sender, options) => {
+    this.dragDropChoices.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
       this.selectElement(options.draggedElement, undefined, false);
     });
@@ -2832,11 +2864,13 @@ export class CreatorBase extends Base
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,
-      allowDelete: itemOptions.allowDelete
+      allowDelete: itemOptions.allowDelete,
+      allowAdd: itemOptions.allowAdd
     };
     this.onCollectionItemAllowOperations.fire(this, options);
     itemOptions.allowEdit = options.allowEdit;
     itemOptions.allowDelete = options.allowDelete;
+    itemOptions.allowAdd = options.allowAdd;
   }
   onItemValueAddedCallback(
     obj: Base,

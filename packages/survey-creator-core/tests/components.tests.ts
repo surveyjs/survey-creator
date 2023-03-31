@@ -118,7 +118,7 @@ test("item hasNone, hasOther, hasSelectAll change trigger updateIsNew and behave
   expect(noneItemAdorner.allowRemove).toBeTruthy();
 });
 
-test("item value allowAdd isDraggable allowRemove on events", () => {
+test("item value allowRemove on events", () => {
   const creator = new CreatorTester();
 
   creator.onCollectionItemAllowOperations.add(function (sender, options) {
@@ -148,6 +148,59 @@ test("item value allowAdd isDraggable allowRemove on events", () => {
 
   expect(firstItemAdorner.allowRemove).toBeFalsy();
   expect(secondItemAdorner.allowRemove).toBeTruthy();
+});
+
+test("item value allowAdd on events", () => {
+  const creator = new CreatorTester();
+
+  creator.onCollectionItemAllowOperations.add(function (sender, options) {
+    const q = <QuestionCheckboxModel>options.obj;
+    if (q && q.selectAllItem == options.item) {
+      options.allowAdd = true;
+    }
+    if (q && q.noneItem == options.item) {
+      options.allowAdd = true;
+    }
+    if (q && q.otherItem == options.item) {
+      options.allowAdd = false;
+    }
+    if (q && q.newItem == options.item) {
+      options.allowAdd = false;
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const allChoices = question.visibleChoices;
+  expect(allChoices.length).toEqual(7);
+
+  const selectAllAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.selectAllItem
+  );
+  const noneAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.noneItem
+  );
+  const otherAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.otherItem
+  );
+  const newAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.newItem
+  );
+
+  expect(selectAllAdorner.allowAdd).toBeTruthy();
+  expect(noneAdorner.allowAdd).toBeTruthy();
+  expect(otherAdorner.allowAdd).toBeFalsy();
+  expect(newAdorner.allowAdd).toBeFalsy();
 });
 
 test("item value no pointer down on new or editable", (): any => {

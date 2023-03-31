@@ -118,7 +118,7 @@
     right: calcSize(-0.5);
     //right: calcSize(-4.5); // if need pencil icon
     border-radius: 3px;
-    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 0px calcSize(0.25) rgba(0, 0, 0, 0.16);
   }
 }
 .svc-string-editor:focus-within {
@@ -166,6 +166,14 @@
     .svc-string-editor__border {
       left: calcSize(-0.7);
       right: calcSize(-0.7);
+    }
+  }
+}
+.svc-string-editor {
+  &:hover,
+  &:focus-within {
+    & ~ .sd-question__required-text {
+      visibility: hidden;
     }
   }
 }
