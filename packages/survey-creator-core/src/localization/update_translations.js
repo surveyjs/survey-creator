@@ -72,7 +72,7 @@ if(parameter === "all") {
   });
 } else {
   if(!isTranslationExists(parameter)) {
-    reportMessage("There is translation file: " + getTranslationFileName(parameter));
+    reportMessage("There is no translation file: " + getTranslationFileName(parameter));
     return;
   }
   updateTranslation(parameter);
@@ -135,7 +135,8 @@ function updateTranslation(name) {
 }
 function updateEnglishTranslation() {
   const lines = [];
-  updateTranslationKey(lines, englishJSON, undefined, 1);
+  const json = readJson("english.ts");
+  updateTranslationKey(lines, englishJSON, json, 1, true);
   lines.push(getNewLineText(0));
   replaceText("english", lines.join(""), 0);
   reportMessage("Updated file: " + getTranslationFileName("english"));
@@ -147,12 +148,12 @@ function getKeyName(key) {
   if(key.indexOf("-") > -1 || key.indexOf("@") > -1) return "\"" + key + "\"";
   return key;
 }
-function updateTranslationKey(lines, englishJson, json, level) {
+function updateTranslationKey(lines, englishJson, json, level, isEnglish) {
   let missedKeys = 0;
   let isStarted = true;
   let propComment = "";
   for(let key in englishJson) {
-    if(key === "license") continue;
+    if(key === "license" && !isEnglish) continue;
     if(!isStarted) {
       lines[lines.length - 1] += "," + propComment;
     }
@@ -165,15 +166,24 @@ function updateTranslationKey(lines, englishJson, json, level) {
         lines.push(getNewLineText(level) + "// " + keyComments[key]);
       }
       lines.push(getNewLineText(level) + keyName + ": {");
-      missedKeys += updateTranslationKey(lines, englishJson[key], !!json ? json[key] : undefined, level + 1);
+      missedKeys += updateTranslationKey(lines, englishJson[key], !!json ? json[key] : undefined, level + 1, isEnglish);
       lines.push(getNewLineText(level) + "}");
     } else {
-      let hasValue = !!json && !!json[key];
+      let hasValue = !!json && json[key] !== undefined;
       let value = hasValue ? json[key] : englishJson[key];
       let line = keyName + ": " + JSON.stringify(value);
-      if(!!json && !hasValue || !json && key === value) {
-        line = "// " + line;
-        missedKeys ++;
+      if(isEnglish) {
+        if(!hasValue) {
+          line = keyName + ": " + JSON.stringify(getGeneratedEnglishName(keyName));
+          if(!propertiesComments[key]) {
+            propertiesComments[key] = " Auto generated string.";
+          }
+        }
+      } else {
+        if(!!json && !hasValue || !json && key === value) {
+          line = "// " + line;
+          missedKeys ++;
+        }
       }
       lines.push(getNewLineText(level) + line);
       propComment = !!propertiesComments[key] ? " //" + propertiesComments[key] : "";
@@ -183,6 +193,17 @@ function updateTranslationKey(lines, englishJson, json, level) {
     lines[lines.length - 1] += propComment;
   }
   return missedKeys;
+}
+function getGeneratedEnglishName(name) {
+  if(!name) return name;
+  let res = name[0].toUpperCase();
+  for(var i = 1; i < name.length; i ++) {
+    if(name[i] === name[i].toUpperCase()) {
+      res += " ";
+    }
+    res += name[i];
+  }
+  return res;
 }
 function isObject(englishJson, name) {
   const val = englishJson[name];
