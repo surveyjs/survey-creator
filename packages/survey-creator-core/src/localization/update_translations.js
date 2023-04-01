@@ -205,7 +205,7 @@ function getGeneratedEnglishName(name) {
   if(!name) return name;
   let res = name[0].toUpperCase();
   for(var i = 1; i < name.length; i ++) {
-    if(name[i] === name[i].toUpperCase() && i + 1 < name.length && name[i + 1] !== name[i + 1].toUpperCase()) {
+    if(name[i] === name[i].toUpperCase() && name[i - 1] !== name[i - 1].toUpperCase()) {
       res += " ";
     }
     res += name[i];

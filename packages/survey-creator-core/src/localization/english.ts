@@ -844,7 +844,7 @@ export var enStrings = {
     surveyShowDataSaving: "Survey Show Data Saving", //Auto generated string
     questionDescriptionLocation: "Question Description Location", //Auto generated string
     progressBarType: "Progress Bar Type", //Auto generated string
-    showTOC: "ShowTOC", //Auto generated string
+    showTOC: "Show TOC", //Auto generated string
     tocLocation: "Toc Location", //Auto generated string
     questionTitlePattern: "Question Title Pattern", //Auto generated string
     widthMode: "Width Mode", //Auto generated string
