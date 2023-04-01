@@ -833,80 +833,80 @@ export var enStrings = {
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
     value: "Value",
-    description: "Description", // Auto generated string.
-    logoFit: "Logo Fit", // Auto generated string.
-    pages: "Pages", // Auto generated string.
-    questions: "Questions", // Auto generated string.
-    triggers: "Triggers", // Auto generated string.
-    calculatedValues: "Calculated Values", // Auto generated string.
-    surveyId: "Survey Id", // Auto generated string.
-    surveyPostId: "Survey Post Id", // Auto generated string.
-    surveyShowDataSaving: "Survey Show Data Saving", // Auto generated string.
-    questionDescriptionLocation: "Question Description Location", // Auto generated string.
-    progressBarType: "Progress Bar Type", // Auto generated string.
-    showTOC: "Show T O C", // Auto generated string.
-    tocLocation: "Toc Location", // Auto generated string.
-    questionTitlePattern: "Question Title Pattern", // Auto generated string.
-    widthMode: "Width Mode", // Auto generated string.
-    showBrandInfo: "Show Brand Info", // Auto generated string.
-    useDisplayValuesInDynamicTexts: "Use Display Values In Dynamic Texts", // Auto generated string.
-    visibleIf: "Visible If", // Auto generated string.
-    titleLocation: "Title Location", // Auto generated string.
-    descriptionLocation: "Description Location", // Auto generated string.
-    defaultValueExpression: "Default Value Expression", // Auto generated string.
-    requiredIf: "Required If", // Auto generated string.
-    validators: "Validators", // Auto generated string.
-    bindings: "Bindings", // Auto generated string.
-    renderAs: "Render As", // Auto generated string.
-    attachOriginalItems: "Attach Original Items", // Auto generated string.
-    choices: "Choices", // Auto generated string.
-    choicesByUrl: "Choices By Url", // Auto generated string.
-    currency: "Currency", // Auto generated string.
-    cellHint: "Cell Hint", // Auto generated string.
-    isUnique: "Is Unique", // Auto generated string.
-    showInMultipleColumns: "Show In Multiple Columns", // Auto generated string.
-    totalMaximumFractionDigits: "Total Maximum Fraction Digits", // Auto generated string.
-    totalMinimumFractionDigits: "Total Minimum Fraction Digits", // Auto generated string.
-    columns: "Columns", // Auto generated string.
-    detailElements: "Detail Elements", // Auto generated string.
-    allowAdaptiveActions: "Allow Adaptive Actions", // Auto generated string.
-    defaultRowValue: "Default Row Value", // Auto generated string.
-    detailPanelShowOnAdding: "Detail Panel Show On Adding", // Auto generated string.
-    choicesLazyLoadEnabled: "Choices Lazy Load Enabled", // Auto generated string.
-    choicesLazyLoadPageSize: "Choices Lazy Load Page Size", // Auto generated string.
-    inputFieldComponent: "Input Field Component", // Auto generated string.
-    itemComponent: "Item Component", // Auto generated string.
-    min: "Min", // Auto generated string.
-    max: "Max", // Auto generated string.
-    minValueExpression: "Min Value Expression", // Auto generated string.
-    maxValueExpression: "Max Value Expression", // Auto generated string.
-    step: "Step", // Auto generated string.
-    dataList: "Data List", // Auto generated string.
-    itemSize: "Item Size", // Auto generated string.
-    elements: "Elements", // Auto generated string.
-    content: "Content", // Auto generated string.
-    navigationButtonsVisibility: "Navigation Buttons Visibility", // Auto generated string.
-    navigationTitle: "Navigation Title", // Auto generated string.
-    navigationDescription: "Navigation Description", // Auto generated string.
-    longTap: "Long Tap", // Auto generated string.
-    autoGrow: "Auto Grow", // Auto generated string.
-    acceptCarriageReturn: "Accept Carriage Return", // Auto generated string.
-    displayMode: "Display Mode", // Auto generated string.
-    rateType: "Rate Type", // Auto generated string.
-    label: "Label", // Auto generated string.
-    contentMode: "Content Mode", // Auto generated string.
-    imageFit: "Image Fit", // Auto generated string.
-    altText: "Alt Text", // Auto generated string.
-    height: "Height", // Auto generated string.
-    penColor: "Pen Color", // Auto generated string.
-    backgroundColor: "Background Color", // Auto generated string.
-    templateElements: "Template Elements", // Auto generated string.
-    operator: "Operator", // Auto generated string.
-    isVariable: "Is Variable", // Auto generated string.
-    runExpression: "Run Expression", // Auto generated string.
-    showCaption: "Show Caption", // Auto generated string.
-    iconName: "Icon Name", // Auto generated string.
-    iconSize: "Icon Size" // Auto generated string.
+    description: "Description", //Auto generated string
+    logoFit: "Logo Fit", //Auto generated string
+    pages: "Pages", //Auto generated string
+    questions: "Questions", //Auto generated string
+    triggers: "Triggers", //Auto generated string
+    calculatedValues: "Calculated Values", //Auto generated string
+    surveyId: "Survey Id", //Auto generated string
+    surveyPostId: "Survey Post Id", //Auto generated string
+    surveyShowDataSaving: "Survey Show Data Saving", //Auto generated string
+    questionDescriptionLocation: "Question Description Location", //Auto generated string
+    progressBarType: "Progress Bar Type", //Auto generated string
+    showTOC: "ShowTOC", //Auto generated string
+    tocLocation: "Toc Location", //Auto generated string
+    questionTitlePattern: "Question Title Pattern", //Auto generated string
+    widthMode: "Width Mode", //Auto generated string
+    showBrandInfo: "Show Brand Info", //Auto generated string
+    useDisplayValuesInDynamicTexts: "Use Display Values In Dynamic Texts", //Auto generated string
+    visibleIf: "Visible If", //Auto generated string
+    titleLocation: "Title Location", //Auto generated string
+    descriptionLocation: "Description Location", //Auto generated string
+    defaultValueExpression: "Default Value Expression", //Auto generated string
+    requiredIf: "Required If", //Auto generated string
+    validators: "Validators", //Auto generated string
+    bindings: "Bindings", //Auto generated string
+    renderAs: "Render As", //Auto generated string
+    attachOriginalItems: "Attach Original Items", //Auto generated string
+    choices: "Choices", //Auto generated string
+    choicesByUrl: "Choices By Url", //Auto generated string
+    currency: "Currency", //Auto generated string
+    cellHint: "Cell Hint", //Auto generated string
+    isUnique: "Is Unique", //Auto generated string
+    showInMultipleColumns: "Show In Multiple Columns", //Auto generated string
+    totalMaximumFractionDigits: "Total Maximum Fraction Digits", //Auto generated string
+    totalMinimumFractionDigits: "Total Minimum Fraction Digits", //Auto generated string
+    columns: "Columns", //Auto generated string
+    detailElements: "Detail Elements", //Auto generated string
+    allowAdaptiveActions: "Allow Adaptive Actions", //Auto generated string
+    defaultRowValue: "Default Row Value", //Auto generated string
+    detailPanelShowOnAdding: "Detail Panel Show On Adding", //Auto generated string
+    choicesLazyLoadEnabled: "Choices Lazy Load Enabled", //Auto generated string
+    choicesLazyLoadPageSize: "Choices Lazy Load Page Size", //Auto generated string
+    inputFieldComponent: "Input Field Component", //Auto generated string
+    itemComponent: "Item Component", //Auto generated string
+    min: "Min", //Auto generated string
+    max: "Max", //Auto generated string
+    minValueExpression: "Min Value Expression", //Auto generated string
+    maxValueExpression: "Max Value Expression", //Auto generated string
+    step: "Step", //Auto generated string
+    dataList: "Data List", //Auto generated string
+    itemSize: "Item Size", //Auto generated string
+    elements: "Elements", //Auto generated string
+    content: "Content", //Auto generated string
+    navigationButtonsVisibility: "Navigation Buttons Visibility", //Auto generated string
+    navigationTitle: "Navigation Title", //Auto generated string
+    navigationDescription: "Navigation Description", //Auto generated string
+    longTap: "Long Tap", //Auto generated string
+    autoGrow: "Auto Grow", //Auto generated string
+    acceptCarriageReturn: "Accept Carriage Return", //Auto generated string
+    displayMode: "Display Mode", //Auto generated string
+    rateType: "Rate Type", //Auto generated string
+    label: "Label", //Auto generated string
+    contentMode: "Content Mode", //Auto generated string
+    imageFit: "Image Fit", //Auto generated string
+    altText: "Alt Text", //Auto generated string
+    height: "Height", //Auto generated string
+    penColor: "Pen Color", //Auto generated string
+    backgroundColor: "Background Color", //Auto generated string
+    templateElements: "Template Elements", //Auto generated string
+    operator: "Operator", //Auto generated string
+    isVariable: "Is Variable", //Auto generated string
+    runExpression: "Run Expression", //Auto generated string
+    showCaption: "Show Caption", //Auto generated string
+    iconName: "Icon Name", //Auto generated string
+    iconSize: "Icon Size" //Auto generated string
   }
 };
 
