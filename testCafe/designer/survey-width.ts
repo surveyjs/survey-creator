@@ -30,7 +30,7 @@ test("Change survey width", async (t) => {
   await t
     .click(widthEditorInput)
 
-    .typeText(widthEditorInput, "755px", { replace: true })
+    .typeText(widthEditorInput, "755px", { replace: true, paste: true })
     .pressKey("tab");
   await t
     .expect(Selector(".sd-container-modern").clientWidth).eql(755);
@@ -38,7 +38,7 @@ test("Change survey width", async (t) => {
   await t
     .click(widthEditorInput)
 
-    .typeText(widthEditorInput, "10000px", { replace: true })
+    .typeText(widthEditorInput, "10000px", { replace: true, paste: true })
     .pressKey("tab");
 
   await t
