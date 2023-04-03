@@ -165,7 +165,7 @@ The following code shows how you can use expressions and triggers to implement t
 }
 ```
 
-Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onCreated`](https://surveyjs.io/Documentation/Library?id=ICustomQuestionTypeConfiguration#onCreated) function to implement the trigger logic.
+Survey Creator users can implement the same UI and logic, but this requires time and basic understanding of expressions and triggers. To help the users with this task, you can create a custom composite question type that already implements this UI and logic. The code below demonstrates this composite question type configuration. Note that the [`enableIf`](/Documentation/Library?id=questioncommentmodel#enableIf) expression uses the `composite` prefix to access a nested question. Instead of triggers, composite questions use the [`onValueChanged`](https://surveyjs.io/form-library/documentation/api-reference/icustomquestiontypeconfiguration#onValueChanged) function to implement the trigger logic.
 
 ```js
 Survey.ComponentCollection.Instance.add({
@@ -189,23 +189,23 @@ Survey.ComponentCollection.Instance.add({
     enableIf: "{composite.shippingSameAsBusiness} <> true",
     isRequired: true
   }],
-  onCreated(question) {
+  onValueChanged(question, name) {
     const businessAddress = question.contentPanel.getQuestionByName("businessAddress");
     const shippingAddress = question.contentPanel.getQuestionByName("shippingAddress");
     const shippingSameAsBusiness = question.contentPanel.getQuestionByName("shippingSameAsBusiness");
 
-    businessAddress.valueChangedCallback = function () {
+    if (name === "businessAddress") {
       // If "Shipping address same as business address" is selected
-      if (shippingSameAsBusiness.value) {
+      if (shippingSameAsBusiness.value == true) {
         // Copy the Business Address value to Shipping Address
         shippingAddress.value = businessAddress.value;
       }
-    };
-    shippingSameAsBusiness.valueChangedCallback = function () {
+    }
+    if (name === "shippingSameAsBusiness") {
       // If "Shipping address same as business address" is selected, copy the Business Address to Shipping Address
       // Otherwise, clear the Shipping Address value
-      shippingAddress.value = shippingSameAsBusiness.value ? businessAddress.value : "";
-    };
+      shippingAddress.value = shippingSameAsBusiness.value == true ? businessAddress.value : "";
+    }
   }
 });
 ```
