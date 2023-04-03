@@ -101,7 +101,7 @@ test("Test question type selector", async (t) => {
 test("Matrix column editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
-    await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+    await addQuestionByAddQuestionButton(t, "Matrix Table with Dropdown");
     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
