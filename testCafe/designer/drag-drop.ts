@@ -1189,15 +1189,16 @@ test("Drag Drop below the last Panel", async (t) => {
   await setJSON(json);
 
   const LastPanel = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
+  const afterLastPanel = Selector("[data-sv-drop-target-survey-element=\"page1\"]").find(".svc-page__add-new-question");
   const PanelToolboxItem = Selector("[aria-label='Panel toolbox item']");
 
   await t
     .hover(PanelToolboxItem, { speed: 0.01 })
-    .dragToElement(PanelToolboxItem, LastPanel, {
+    .dragToElement(PanelToolboxItem, afterLastPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -1,
-      speed: 0.1
+      destinationOffsetY: 0,
+      speed: 0.01
     });
 
   const expectedJson = {
