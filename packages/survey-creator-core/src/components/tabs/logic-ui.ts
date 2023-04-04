@@ -89,7 +89,8 @@ export class SurveyLogicUI extends SurveyLogic {
     if (this.items.length == 0 || !this.items[this.items.length - 1].isNew) {
       this.addNew();
     }
-    this.matrixItems.visibleRows[this.matrixItems.visibleRows.length - 1].showDetailPanel();
+    const rows = this.matrixItems.visibleRows;
+    rows[rows.length - 1].showDetailPanel();
   }
   public toggleExpressionEditorIsFastEntry() {
     this.expressionEditorIsFastEntry = !this.expressionEditorIsFastEntry;
@@ -102,9 +103,29 @@ export class SurveyLogicUI extends SurveyLogic {
       this.editableItem.isModified = !!this.itemEditor && !!this.expressionEditor && (this.itemEditor.isModified || this.expressionEditor.isModified(this.editableItem.expression));
     }
   }
+  private getFirstUnsavedRuleIndex(): number {
+    for(var i = 0; i < this.visibleItems.length; i ++) {
+      const item = this.visibleItems[i];
+      if(!item.isNew) continue;
+      if(!this.editableItem && item.isModified) return i;
+      if(!!this.editableItem && (!this.expressionEditor.isEmpty() || !this.itemEditor.isEmpty())) return i;
+    }
+    for(var i = 0; i < this.visibleItems.length; i ++) {
+      const item = this.visibleItems[i];
+      if(item.isModified && !item.isNew) return i;
+    }
+    return -1;
+  }
   public haveUnsavedRules(): boolean {
     this.updateEditableItemIsModifiedState();
-    return this.visibleItems.some(item => item.isModified || item.isNew);
+    const index = this.getFirstUnsavedRuleIndex();
+    const rows = this.matrixItems.visibleRows;
+    const row = index > -1 && index < rows.length ? rows[index] : null;
+    if(!!row) {
+      row.showDetailPanel();
+      this.hasErrorInUI();
+    }
+    return !!row;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
@@ -197,9 +218,6 @@ export class SurveyLogicUI extends SurveyLogic {
     } else {
       this.updateItemsSurveyData();
     }
-  }
-  protected isNewItemEmptyCore(): boolean {
-    return this.expressionEditor.isEmpty() && this.itemEditor.isEmpty();
   }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;

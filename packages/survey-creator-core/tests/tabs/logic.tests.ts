@@ -2899,7 +2899,24 @@ test("Empty new item returns no errors", () => {
       { type: "text", name: "q2", }
     ]
   });
-  var logic = new SurveyLogicUI(survey);
+  const logic = new SurveyLogicUI(survey);
   logic.addNew();
-  expect(logic.hasError()).toBeFalsy();
+  expect(logic.haveUnsavedRules()).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 2";
+  expect(logic.haveUnsavedRules()).toBeTruthy();
+  logic.expressionEditor.text = "";
+  expect(logic.haveUnsavedRules()).toBeFalsy();
+  const panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect(logic.haveUnsavedRules()).toBeTruthy();
+  logic.itemEditor.panel.addPanel();
+  logic.itemEditor.panel.removePanel(0);
+  expect(logic.haveUnsavedRules()).toBeFalsy();
+  logic.expressionEditor.text = "{q1} = 2";
+  logic.mode = "view";
+  expect(logic.editableItem).toBeFalsy();
+  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.mode).toEqual("new");
+  expect(logic.editableItem).toBeTruthy();
+  expect(logic.matrixItems.visibleRows[0].isDetailPanelShowing).toBeTruthy();
 });
