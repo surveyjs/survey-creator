@@ -20,6 +20,32 @@ import { notShortCircuitAnd } from "../../utils/utils";
 // export { SurveySimulatorModel as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
 // export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
 
+export const Themes = {
+  "default-light": {
+    "--primary": "#19b394",
+    "--background": "#ffffff",
+    "--background-dim": "#f3f3f3",
+    "--background-dim-light": "#f9f9f9",
+    "--sjs-editor-background": "#f9f9f9",
+    "--sjs-question-background": "#ffffff",
+    "--primary-foreground": "#ffffff",
+    "--foreground": "#161616",
+    "--base-unit": "8px",
+  },
+  "default-dark": {
+    "--primary": "#1ab7fa",
+    "--background": "#555555",
+    "--background-dim": "#4d4d4d",
+    "--background-dim-light": "#4d4d4d",
+    "--sjs-editor-background": "#4d4d4d",
+    "--sjs-question-background": "#555555",
+    "--primary-foreground": "#ffffff",
+    "--foreground": "#ededed",
+    "--base-unit": "8px"
+
+  }
+};
+
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -318,51 +344,36 @@ export class TestSurveyTabViewModel extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     var json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    var res = this.surveyProvider.createSurvey(json, "theme_editor");
-    res.getCss().list = {};
-    res.css = propertyGridCss;
-    res.onValueChanged.add((sender, options) => {
+    var themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
+    themeEditorSurvey.getCss().list = {};
+    themeEditorSurvey.css = propertyGridCss;
+    themeEditorSurvey.onValueChanged.add((sender, options) => {
+      if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
+        this[options.name] = options.value;
+        themeEditorSurvey.mergeData(this.themeVariables);
+      }
+      if (options.name === "questionBackgroundTransparency" || options.name === "--background-dim-light") {
+        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
+        themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, options.value / 100));
+      }
+      if (options.name === "panelBackgroundTransparency" || options.name === "--background") {
+        let baseColor = themeEditorSurvey.getValue("--background");
+        themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, options.value / 100));
+      }
       this.simulator.themeVariables = sender.data;
     });
-    return res;
+    return themeEditorSurvey;
   }
-  private _getThemeEditorSurveyJSON() {
-    const defaultV2ThemeVariables = {
-      "--primary": "#19b394",
-      "--background": "#ffffff",
-      "--background-dim": "#f3f3f3",
-      "--background-dim-light": "#f9f9f9",
-      "--primary-foreground": "#ffffff",
-      "--foreground": "#161616",
-      "--base-unit": "8px",
-    };
-    const themeVariables = defaultV2ThemeVariables;
-    const themeEditorSurveyJSON = {
-      elements: [{ type: "panel", elements: [] }]
-    };
-    Object.keys(themeVariables).forEach(varName => {
-      themeEditorSurveyJSON.elements[0].elements.push({
-        type: "text",
-        inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
-        title: editorLocalization.getString("theme." + varName),
-        name: varName,
-        defaultValue: themeVariables[varName]
-      });
-    });
-    return themeEditorSurveyJSON;
+
+  @property({ defaultValue: "default" }) themeName;
+  @property({ defaultValue: "light" }) themePalette;
+  @property({ defaultValue: "panel" }) themeMode;
+
+  get themeVariables(): any {
+    return Themes[this.themeName + "-" + this.themePalette];
   }
 
   private getThemeEditorSurveyJSON() {
-    const defaultV2ThemeVariables = {
-      "--primary": "#19b394",
-      "--background": "#ffffff",
-      "--background-dim": "#f3f3f3",
-      "--background-dim-light": "#f9f9f9",
-      "--primary-foreground": "#ffffff",
-      "--foreground": "#161616",
-      "--base-unit": "8px",
-    };
-    const themeVariables = defaultV2ThemeVariables;
     const themeEditorSurveyJSON = {
       "clearInvisibleValues": "none",
       elements: [{
@@ -375,20 +386,20 @@ export class TestSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "dropdown",
-                name: "theme",
+                name: "themeName",
                 choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
                 defaultValue: "default",
                 allowClear: false
               },
               {
                 type: "buttongroup",
-                name: "weight",
+                name: "themeMode",
                 choices: ["panels", "lightweight"],
                 defaultValue: "panels"
               },
               {
                 type: "buttongroup",
-                name: "side",
+                name: "themePalette",
                 titleLocation: "hidden",
                 choices: ["light", "dark"],
                 defaultValue: "light"
@@ -505,15 +516,23 @@ export class TestSurveyTabViewModel extends Base {
       }]
     };
 
-    Object.keys(themeVariables).forEach(varName => {
+    Object.keys(this.themeVariables).forEach(varName => {
       themeEditorSurveyJSON.elements[1].elements[0].elements.push(<any>{
         type: "text",
         inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
         title: editorLocalization.getString("theme." + varName),
         name: varName,
-        defaultValue: themeVariables[varName]
+        defaultValue: this.themeVariables[varName]
       });
     });
     return themeEditorSurveyJSON;
   }
+}
+
+function ingectAlpha(baseColor: any, alpha: number): any {
+  const r = parseInt(baseColor.slice(1, 3), 16);
+  const g = parseInt(baseColor.slice(3, 5), 16);
+  const b = parseInt(baseColor.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
