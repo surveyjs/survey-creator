@@ -833,80 +833,81 @@ export var enStrings = {
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
     value: "Value",
+    tabAlign: "Tab alignment",
     description: "Description", // Auto-generated string
-    logoFit: "Logo Fit", // Auto-generated string
+    logoFit: "Logo fit", // Auto-generated string
     pages: "Pages", // Auto-generated string
     questions: "Questions", // Auto-generated string
     triggers: "Triggers", // Auto-generated string
-    calculatedValues: "Calculated Values", // Auto-generated string
-    surveyId: "Survey Id", // Auto-generated string
-    surveyPostId: "Survey Post Id", // Auto-generated string
-    surveyShowDataSaving: "Survey Show Data Saving", // Auto-generated string
-    questionDescriptionLocation: "Question Description Location", // Auto-generated string
-    progressBarType: "Progress Bar Type", // Auto-generated string
-    showTOC: "Show TOC", // Auto-generated string
-    tocLocation: "Toc Location", // Auto-generated string
-    questionTitlePattern: "Question Title Pattern", // Auto-generated string
-    widthMode: "Width Mode", // Auto-generated string
-    showBrandInfo: "Show Brand Info", // Auto-generated string
-    useDisplayValuesInDynamicTexts: "Use Display Values In Dynamic Texts", // Auto-generated string
-    visibleIf: "Visible If", // Auto-generated string
-    titleLocation: "Title Location", // Auto-generated string
-    descriptionLocation: "Description Location", // Auto-generated string
-    defaultValueExpression: "Default Value Expression", // Auto-generated string
-    requiredIf: "Required If", // Auto-generated string
+    calculatedValues: "Calculated values", // Auto-generated string
+    surveyId: "Survey id", // Auto-generated string
+    surveyPostId: "Survey post id", // Auto-generated string
+    surveyShowDataSaving: "Survey show data saving", // Auto-generated string
+    questionDescriptionLocation: "Question description location", // Auto-generated string
+    progressBarType: "Progress bar type", // Auto-generated string
+    showTOC: "Show tOC", // Auto-generated string
+    tocLocation: "Toc location", // Auto-generated string
+    questionTitlePattern: "Question title pattern", // Auto-generated string
+    widthMode: "Width mode", // Auto-generated string
+    showBrandInfo: "Show brand info", // Auto-generated string
+    useDisplayValuesInDynamicTexts: "Use display values in dynamic texts", // Auto-generated string
+    visibleIf: "Visible if", // Auto-generated string
+    titleLocation: "Title location", // Auto-generated string
+    descriptionLocation: "Description location", // Auto-generated string
+    defaultValueExpression: "Default value expression", // Auto-generated string
+    requiredIf: "Required if", // Auto-generated string
     validators: "Validators", // Auto-generated string
     bindings: "Bindings", // Auto-generated string
-    renderAs: "Render As", // Auto-generated string
-    attachOriginalItems: "Attach Original Items", // Auto-generated string
+    renderAs: "Render as", // Auto-generated string
+    attachOriginalItems: "Attach original items", // Auto-generated string
     choices: "Choices", // Auto-generated string
-    choicesByUrl: "Choices By Url", // Auto-generated string
+    choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string
-    cellHint: "Cell Hint", // Auto-generated string
-    isUnique: "Is Unique", // Auto-generated string
-    showInMultipleColumns: "Show In Multiple Columns", // Auto-generated string
-    totalMaximumFractionDigits: "Total Maximum Fraction Digits", // Auto-generated string
-    totalMinimumFractionDigits: "Total Minimum Fraction Digits", // Auto-generated string
+    cellHint: "Cell hint", // Auto-generated string
+    isUnique: "Is unique", // Auto-generated string
+    showInMultipleColumns: "Show in multiple columns", // Auto-generated string
+    totalMaximumFractionDigits: "Total maximum fraction digits", // Auto-generated string
+    totalMinimumFractionDigits: "Total minimum fraction digits", // Auto-generated string
     columns: "Columns", // Auto-generated string
-    detailElements: "Detail Elements", // Auto-generated string
-    allowAdaptiveActions: "Allow Adaptive Actions", // Auto-generated string
-    defaultRowValue: "Default Row Value", // Auto-generated string
-    detailPanelShowOnAdding: "Detail Panel Show On Adding", // Auto-generated string
-    choicesLazyLoadEnabled: "Choices Lazy Load Enabled", // Auto-generated string
-    choicesLazyLoadPageSize: "Choices Lazy Load Page Size", // Auto-generated string
-    inputFieldComponent: "Input Field Component", // Auto-generated string
-    itemComponent: "Item Component", // Auto-generated string
+    detailElements: "Detail elements", // Auto-generated string
+    allowAdaptiveActions: "Allow adaptive actions", // Auto-generated string
+    defaultRowValue: "Default row value", // Auto-generated string
+    detailPanelShowOnAdding: "Detail panel show on adding", // Auto-generated string
+    choicesLazyLoadEnabled: "Choices lazy load enabled", // Auto-generated string
+    choicesLazyLoadPageSize: "Choices lazy load page size", // Auto-generated string
+    inputFieldComponent: "Input field component", // Auto-generated string
+    itemComponent: "Item component", // Auto-generated string
     min: "Min", // Auto-generated string
     max: "Max", // Auto-generated string
-    minValueExpression: "Min Value Expression", // Auto-generated string
-    maxValueExpression: "Max Value Expression", // Auto-generated string
+    minValueExpression: "Min value expression", // Auto-generated string
+    maxValueExpression: "Max value expression", // Auto-generated string
     step: "Step", // Auto-generated string
-    dataList: "Data List", // Auto-generated string
-    itemSize: "Item Size", // Auto-generated string
+    dataList: "Data list", // Auto-generated string
+    itemSize: "Item size", // Auto-generated string
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
-    navigationButtonsVisibility: "Navigation Buttons Visibility", // Auto-generated string
-    navigationTitle: "Navigation Title", // Auto-generated string
-    navigationDescription: "Navigation Description", // Auto-generated string
-    longTap: "Long Tap", // Auto-generated string
-    autoGrow: "Auto Grow", // Auto-generated string
-    acceptCarriageReturn: "Accept Carriage Return", // Auto-generated string
-    displayMode: "Display Mode", // Auto-generated string
-    rateType: "Rate Type", // Auto-generated string
+    navigationButtonsVisibility: "Navigation buttons visibility", // Auto-generated string
+    navigationTitle: "Navigation title", // Auto-generated string
+    navigationDescription: "Navigation description", // Auto-generated string
+    longTap: "Long tap", // Auto-generated string
+    autoGrow: "Auto grow", // Auto-generated string
+    acceptCarriageReturn: "Accept carriage return", // Auto-generated string
+    displayMode: "Display mode", // Auto-generated string
+    rateType: "Rate type", // Auto-generated string
     label: "Label", // Auto-generated string
-    contentMode: "Content Mode", // Auto-generated string
-    imageFit: "Image Fit", // Auto-generated string
-    altText: "Alt Text", // Auto-generated string
+    contentMode: "Content mode", // Auto-generated string
+    imageFit: "Image fit", // Auto-generated string
+    altText: "Alt text", // Auto-generated string
     height: "Height", // Auto-generated string
-    penColor: "Pen Color", // Auto-generated string
-    backgroundColor: "Background Color", // Auto-generated string
-    templateElements: "Template Elements", // Auto-generated string
+    penColor: "Pen color", // Auto-generated string
+    backgroundColor: "Background color", // Auto-generated string
+    templateElements: "Template elements", // Auto-generated string
     operator: "Operator", // Auto-generated string
-    isVariable: "Is Variable", // Auto-generated string
-    runExpression: "Run Expression", // Auto-generated string
-    showCaption: "Show Caption", // Auto-generated string
-    iconName: "Icon Name", // Auto-generated string
-    iconSize: "Icon Size" // Auto-generated string
+    isVariable: "Is variable", // Auto-generated string
+    runExpression: "Run expression", // Auto-generated string
+    showCaption: "Show caption", // Auto-generated string
+    iconName: "Icon name", // Auto-generated string
+    iconSize: "Icon size" // Auto-generated string
   }
 };
 
