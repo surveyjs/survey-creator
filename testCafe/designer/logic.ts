@@ -392,12 +392,11 @@ test("Modified rules without saving", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(cellRules.nth(0).innerText).eql(rule1Condition)
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
-
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement.nth(0))
     .click(logicQuestionSelector)
     .click(getListItemByText("q3"))
-    .typeText(logicQuestionValueSelector, "45", { replace: true })
+    .typeText(logicQuestionValueSelector, "45", { replace: true, paste: true })
     .click(logicActionSelector)
     .click(getListItemByText("Complete survey"));
   await check1Rule(t, rule1Condition);
