@@ -198,6 +198,9 @@ export class SurveyLogicUI extends SurveyLogic {
       this.updateItemsSurveyData();
     }
   }
+  protected isNewItemEmptyCore(): boolean {
+    return this.expressionEditor.isEmpty() && this.itemEditor.isEmpty();
+  }
   protected hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
     if (this.expressionEditor.hasErrorInUI()) {

@@ -29,6 +29,7 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
+import exp from "constants";
 
 export * from "../../src/components/link-value";
 
@@ -2890,4 +2891,15 @@ test("Include calculatedValues without expressions", () => {
   expect(list[2].value).toEqual("q3");
   expect(list[3].value).toEqual("var1");
   expect(list[4].value).toEqual("var2");
+});
+test("Empty new item returns no errors", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", },
+      { type: "text", name: "q2", }
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  expect(logic.hasError()).toBeFalsy();
 });
