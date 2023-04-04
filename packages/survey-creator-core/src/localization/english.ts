@@ -902,7 +902,6 @@ export var enStrings = {
     penColor: "Pen color", // Auto-generated string
     backgroundColor: "Background color", // Auto-generated string
     templateElements: "Template elements", // Auto-generated string
-    tabAlign: "Tab align", // Auto-generated string
     operator: "Operator", // Auto-generated string
     isVariable: "Is variable", // Auto-generated string
     runExpression: "Run expression", // Auto-generated string
