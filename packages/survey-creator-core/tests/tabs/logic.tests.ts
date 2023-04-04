@@ -2804,11 +2804,12 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   const logic = logicPlugin.model;
 
   expect(logic.items).toHaveLength(0);
-  expect(logic.haveUnsavedRules()).toBeFalsy();
+  expect(logic.tryLeaveUI()).toBeTruthy();
 
   logic.addNewUI();
+  logic.expressionEditor.text = "{q1} = 1";
   expect(logic.items).toHaveLength(1);
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
 
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("logic");
@@ -2816,16 +2817,19 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_enable";
-  panel.getQuestionByName("elementSelector").value = "q4";
 
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
 
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("logic");
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("elementSelector").value = "q4";
 
-  logic.saveEditableItem();
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("test");
+
+  const q4 = creator.survey.getQuestionByName("q4");
+  expect(q4.enableIf).toBe("{q1} = 4");
 });
 test("Creator is readonly", () => {
   const creator = new CreatorTester({ showTitlesInExpressions: true });
@@ -2892,7 +2896,7 @@ test("Include calculatedValues without expressions", () => {
   expect(list[3].value).toEqual("var1");
   expect(list[4].value).toEqual("var2");
 });
-test("Empty new item returns no errors", () => {
+test("New items and tryLeaveUI", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1", },
@@ -2901,22 +2905,26 @@ test("Empty new item returns no errors", () => {
   });
   const logic = new SurveyLogicUI(survey);
   logic.addNew();
-  expect(logic.haveUnsavedRules()).toBeFalsy();
+  expect(logic.tryLeaveUI()).toBeTruthy();
   logic.expressionEditor.text = "{q1} = 2";
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
   logic.expressionEditor.text = "";
-  expect(logic.haveUnsavedRules()).toBeFalsy();
-  const panel = logic.itemEditor.panels[0];
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  let panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
   logic.itemEditor.panel.addPanel();
   logic.itemEditor.panel.removePanel(0);
-  expect(logic.haveUnsavedRules()).toBeFalsy();
+  expect(logic.tryLeaveUI()).toBeTruthy();
   logic.expressionEditor.text = "{q1} = 2";
   logic.mode = "view";
   expect(logic.editableItem).toBeFalsy();
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
   expect(logic.mode).toEqual("new");
   expect(logic.editableItem).toBeTruthy();
   expect(logic.matrixItems.visibleRows[0].isDetailPanelShowing).toBeTruthy();
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_complete";
+  logic.mode = "view";
+  expect(logic.tryLeaveUI()).toBeTruthy();
 });
