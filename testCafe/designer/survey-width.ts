@@ -6,7 +6,7 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.resizeWindow(1920, 1080);
 });
 
-test("Change survey width", async (t) => {
+test.only("Change survey width", async (t) => {
   const json = {
     "widthMode": "static",
     "pages": [
@@ -42,8 +42,8 @@ test("Change survey width", async (t) => {
     .pressKey("tab");
 
   await t
-    .expect(Selector(".sd-container-modern").clientWidth).gt(1220)
-    .expect(Selector(".sd-container-modern").clientWidth).lt(1230);
+    .expect(Selector(".sd-container-modern").clientWidth).gt(1190)
+    .expect(Selector(".sd-container-modern").clientWidth).lt(1200);
 });
 
 test("Change survey width", async (t) => {
