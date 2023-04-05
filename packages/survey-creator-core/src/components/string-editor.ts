@@ -481,8 +481,8 @@ export class StringEditorViewModelBase extends Base {
   public className(text: any): string {
     return new CssClassBuilder()
       .append("svc-string-editor")
-      .append("svc-string-hidden", text == "" && this.placeholder == "")
-      .append("svc-string-editor--readonly", this.contentEditable)
+      .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
+      .append("svc-string-editor--readonly", !this.contentEditable)
       .append("svc-string-editor--error", !!this.errorText)
       .toString();
   }
