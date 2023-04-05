@@ -45,6 +45,9 @@ export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../editorLocalization";
 export * from "../json5";
+//custom property grid quesitons
+export * from "../property-grid/custom-questions/question-spin-editor";
+
 export * from "../property-grid";
 export * from "../property-grid/condition";
 export * from "../property-grid/matrices";

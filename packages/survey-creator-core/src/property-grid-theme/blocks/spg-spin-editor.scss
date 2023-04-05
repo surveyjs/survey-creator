@@ -1,0 +1,38 @@
+.spg-spin-editor {
+  display: flex;
+  justify-content: space-between;
+  cursor: default;
+  padding: calcSize(0.5);
+  gap: calcSize(0.5);
+}
+.spg-spin-editor__input {
+  outline: none;
+  border: none;
+  flex-grow: 1;
+  padding: calcSize(1) calcSize(1.5);
+}
+.spg-spin-editor__buttons-container {
+  display: flex;
+}
+.spg-spin-editor__arrow {
+  width: calcSize(5);
+  height: calcSize(5);
+  padding: calcSize(1);
+  appearance: none;
+  border: none;
+  background: $background;
+  cursor: pointer;
+  outline: none;
+  svg {
+    height: calcSize(3);
+    width: calcSize(3);
+    fill: rgba(0, 0, 0, 0.45);
+  }
+  &:hover,
+  &:active {
+    background: $background-dim;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+}

@@ -316,4 +316,12 @@ export var propertyGridCss = {
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",
   },
+  spinedit: {
+    root: "spg-input spg-spin-editor",
+    control: "spg-spin-editor__input",
+    buttonsContainer: "spg-spin-editor__buttons-container",
+    arrowButton: "spg-spin-editor__arrow",
+    increaseButtonIcon: "icon-arrow-up",
+    decreaseButtonIcon: "icon-arrow-down",
+  }
 };

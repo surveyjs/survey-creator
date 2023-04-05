@@ -53,6 +53,8 @@ export * from "../utils/utils";
 
 export * from "../creator";
 
+export * from "../property-panel/custom-questions/spin-editor";
+
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";
 export { svgBundle } from "survey-creator-core";

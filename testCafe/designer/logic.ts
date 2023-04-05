@@ -382,7 +382,7 @@ async function check2Rule(t: TestController) {
     .expect(logicQuestionSelector.nth(1).textContent).contains("q3");
 }
 
-test("Modified rules without saving", async (t) => {
+test.only("Modified rules without saving", async (t) => {
   const rule1Condition = "If 'q1' == 'Item 1', make question 'q2' visible";
   const additinalClass = "sl-table__row--additional";
 
@@ -396,7 +396,9 @@ test("Modified rules without saving", async (t) => {
     .click(logicDetailButtonElement.nth(0))
     .click(logicQuestionSelector)
     .click(getListItemByText("q3"))
-    .typeText(logicQuestionValueSelector, "45", { replace: true, paste: true })
+    .debug()
+    .typeText(logicQuestionValueSelector, "45", { replace: true })
+    .debug()
     .click(logicActionSelector)
     .click(getListItemByText("Complete survey"));
   await check1Rule(t, rule1Condition);

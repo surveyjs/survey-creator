@@ -255,3 +255,35 @@ test("Check triggers question", async (t) => {
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
+
+test("Check spinedit editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await t.debug();
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontSize",
+        default: 16,
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreator.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontSize";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "spinedit", unit: "px" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontSize']");
+    await takeElementScreenshot("spin-editor.png", questionSelector, t, comparer);
+    await t.hover(questionSelector.find(".spg-spin-editor__arrow"));
+    await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find(".spg-spin-editor__input"));
+    await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
+  });
+});
