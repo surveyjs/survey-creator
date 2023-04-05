@@ -10,15 +10,18 @@ survey-creator,
   z-index: 0;
 
   -webkit-font-smoothing: antialiased;
+
   * {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
+
   ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
     background-color: transparent;
   }
+
   ::-webkit-scrollbar-thumb {
     border: 4px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
@@ -38,9 +41,10 @@ survey-creator,
 
 .svc-creator__area {
   position: relative;
-  
+
   @include disableUserSelect;
 }
+
 .svc-creator__area.svc-creator__area--with-banner {
   height: calc(100% - calc(4 * #{$base-unit}));
 }
@@ -49,6 +53,7 @@ survey-creator,
   width: 100%;
   height: calc(100% - calc(8 * #{$base-unit})); // without top toolbar
 }
+
 .svc-creator__content-wrapper--footer-toolbar {
   height: calc(100% - calc(6 * #{$base-unit})); // without footer toolbar
 }
@@ -123,6 +128,7 @@ survey-creator,
   font-size: calcSize(2);
   text-transform: uppercase;
   vertical-align: middle;
+
   a {
     color: $primary-foreground;
     text-decoration: none;

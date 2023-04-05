@@ -7,9 +7,10 @@
 .svc-row .sd-row--multiple {
   padding: calcSize(1);
   gap: calcSize(1);
+
   .sd-row--multiple {
-      overflow: unset;
-    }
+    overflow: unset;
+  }
 }
 
 .sd-panel .svc-row .sd-row--multiple {
@@ -28,6 +29,25 @@
   }
 
   .sd-row {
+    height: calcSize(4);
+  }
+
+  &:last-child .sd-row {
+    height: initial;
+    margin-top: calcSize(2);
+    margin-bottom: calcSize(2);
+  }
+
+  &+.svc-row {
+    .sd-page__row {
+      margin-top: 0;
+    }
+  }
+}
+
+.svc-panel .svc-row.svc-row--ghost.svc-row.svc-row--ghost {
+  .sd-row {
+    height: initial;
     margin-top: calcSize(2);
     margin-bottom: calcSize(2);
   }
