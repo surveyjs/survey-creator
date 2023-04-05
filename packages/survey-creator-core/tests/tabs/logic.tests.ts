@@ -2928,3 +2928,29 @@ test("New items and tryLeaveUI", () => {
   logic.mode = "view";
   expect(logic.tryLeaveUI()).toBeTruthy();
 });
+test("Show errors on tryLeaveUI", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").clearValue();
+  logic.mode = "view";
+  logic.editItem(logic.items[1]);
+
+  expect(logic.tryLeaveUI()).toBeFalsy();
+  expect(logic.mode).toEqual("edit");
+  expect(logic.editableItem).toBe(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q5";
+
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  expect(survey.getQuestionByName("q1").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 1");
+});

@@ -134,6 +134,8 @@ export class SurveyLogicUI extends SurveyLogic {
     const rows = this.matrixItems.visibleRows;
     const row = index > -1 && index < rows.length ? rows[index] : null;
     if(!!row) {
+      rows.forEach(r => r.hideDetailPanel());
+      this.mode = "view";
       row.showDetailPanel();
       this.hasErrorInUI();
     }
