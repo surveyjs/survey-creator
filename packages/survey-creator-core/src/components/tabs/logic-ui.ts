@@ -1,4 +1,5 @@
 import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
+import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { LogicItemEditor } from "./logic-item-editor";
@@ -107,7 +108,7 @@ export class SurveyLogicUI extends SurveyLogic {
     const res = [];
     for(var i = 0; i < this.visibleItems.length; i ++) {
       const item = this.visibleItems[i];
-      const itemUI = this.itemUIHash[item.id];
+      const itemUI = this.findLogicItemUI(item);
       if(!itemUI) continue;
       if(item.isNew) {
         if(!itemUI.expressionEditor.isEmpty() || !itemUI.itemEditor.isEmpty()) {
@@ -124,10 +125,14 @@ export class SurveyLogicUI extends SurveyLogic {
   private getErroredItem(items: Array<SurveyLogicItem>) : SurveyLogicItem {
     for(let i = 0; i < items.length; i ++) {
       const item = items[i];
-      const itemUI = this.itemUIHash[item.id];
-      if(itemUI.expressionEditor.hasErrors() || itemUI.itemEditor.hasErrors()) return item;
+      if(this.isErroredItem(item)) return item;
     }
     return null;
+  }
+  private isErroredItem(item : SurveyLogicItem): boolean {
+    const itemUI = this.findLogicItemUI(item);
+    if(!itemUI) return false;
+    return itemUI.expressionEditor.hasErrors() || itemUI.itemEditor.hasErrors();
   }
   private showErroredItem(item: SurveyLogicItem): void {
     const index = this.visibleItems.indexOf(item);
@@ -141,20 +146,51 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   private saveItem(item: SurveyLogicItem): void {
+    if(this.isErroredItem(item)) return;
     !!this.options && this.options.startUndoRedoTransaction();
     this.doItemApply(item);
     !!this.options && this.options.stopUndoRedoTransaction();
   }
-  public tryLeaveUI(): boolean {
+  public tryLeaveUI(resultFunc?: (res: boolean) => void): boolean|undefined {
     this.updateEditableItemIsModifiedState();
     const unsavedItems = this.getUnsavedItems();
-    if(unsavedItems.length === 0) return true;
-    const erroredItem = this.getErroredItem(unsavedItems);
-    if(erroredItem) {
-      this.showErroredItem(erroredItem);
-      return false;
+    if(unsavedItems.length === 0) {
+      !!resultFunc && resultFunc(true);
+      return true;
     }
-    unsavedItems.forEach(item => this.saveItem(item));
+    const erroredItem = this.getErroredItem(unsavedItems);
+    const onLeavingFunc = () => {
+      unsavedItems.forEach(item => this.saveItem(item));
+      !!resultFunc && resultFunc(true);
+    };
+    if(!erroredItem) {
+      onLeavingFunc();
+      return true;
+    }
+    const onStayingFunc = () => {
+      this.showErroredItem(erroredItem);
+      !!resultFunc && resultFunc(false);
+    };
+    if(this.confirmLeavingOnError(onLeavingFunc, onStayingFunc)) {
+      return undefined;
+    }
+    onStayingFunc();
+    return false;
+  }
+  protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
+    if(!libSettings.showModal) return false;
+    libSettings.showModal(
+      undefined,
+      undefined,
+      () => {
+        onLeaving();
+        return true;
+      },
+      () => {
+        onStaying();
+        return true;
+      }, undefined, "Uncompleted rules",
+      "popup");
     return true;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
@@ -189,7 +225,7 @@ export class SurveyLogicUI extends SurveyLogic {
     item.itemEditor.editSurvey.mode = this.readOnly ? "display" : "edit";
   }
   private getLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
-    let res: ILogicItemUI = this.itemUIHash[item.id];
+    let res: ILogicItemUI = this.findLogicItemUI(item);
     if (!res) {
       const context = <Question>item.getContext();
       res = { expressionEditor: this.createExpressionPropertyEditor(), itemEditor: new LogicItemEditor(item, this.options) };
@@ -203,6 +239,9 @@ export class SurveyLogicUI extends SurveyLogic {
       this.itemUIHash[item.id] = res;
     }
     return res;
+  }
+  private findLogicItemUI(item: SurveyLogicItem): ILogicItemUI {
+    return this.itemUIHash[item.id];
   }
   public get expressionSurvey(): SurveyModel {
     return this.expressionEditor.editSurvey;
@@ -243,7 +282,7 @@ export class SurveyLogicUI extends SurveyLogic {
     }
   }
   private doItemApply(item : SurveyLogicItem): void {
-    const itemUI = this.itemUIHash[item.id];
+    const itemUI = this.findLogicItemUI(item);
     if(!itemUI) return;
     itemUI.expressionEditor.apply();
     itemUI.itemEditor.apply();

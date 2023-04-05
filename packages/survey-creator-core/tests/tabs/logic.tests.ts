@@ -2951,6 +2951,39 @@ test("Show errors on tryLeaveUI", () => {
   logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q5";
 
   expect(logic.tryLeaveUI()).toBeTruthy();
-  expect(survey.getQuestionByName("q1").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
   expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 1");
+});
+test("Choose leave on error", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  });
+  class SurveyLogicUITester extends SurveyLogicUI {
+    protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
+      onLeaving();
+      return true;
+    }
+  }
+  const logic = new SurveyLogicUITester(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").clearValue();
+  logic.mode = "view";
+  logic.editItem(logic.items[1]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q5";
+  let canLeave = false;
+  const resFunc = (res: boolean) => {
+    canLeave = res;
+  };
+  expect(logic.tryLeaveUI(resFunc)).toBe(undefined);
+  expect(canLeave).toBeTruthy();
+  expect(survey.getQuestionByName("q2").visibleIf).toBe("{q1}=1");
+  expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 2");
 });
