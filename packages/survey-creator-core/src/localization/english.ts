@@ -389,7 +389,7 @@ export var enStrings = {
     maxTimeToFinishPage: "Time limit to finish one page (in seconds)",
     image: {
       imageHeight: "Image height (in CSS-accepted values)",
-      imageWidth: "Image width (in CSS-accepted values)",
+      imageWidth: "Image width (in CSS-accepted values)"
     },
     page: {
       maxTimeToFinish: "Time limit to finish the page (in seconds)"
@@ -833,78 +833,81 @@ export var enStrings = {
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
     value: "Value",
-    //visibleIf: "visibleIf",
-    //attachOriginalItems: "attachOriginalItems",
-    //useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
-    //titleLocation: "titleLocation",
-    //description: "description",
-    //descriptionLocation: "descriptionLocation",
-    //defaultValueExpression: "defaultValueExpression",
-    //requiredIf: "requiredIf",
-    //validators: "validators",
-    //bindings: "bindings",
-    //renderAs: "renderAs",
-    //currency: "currency",
-    //cellHint: "cellHint",
-    //isUnique: "isUnique",
-    //showInMultipleColumns: "showInMultipleColumns",
-    //totalMaximumFractionDigits: "totalMaximumFractionDigits",
-    //totalMinimumFractionDigits: "totalMinimumFractionDigits",
-    //columns: "columns",
-    //detailElements: "detailElements",
-    //choices: "choices",
-    //allowAdaptiveActions: "allowAdaptiveActions",
-    //defaultRowValue: "defaultRowValue",
-    //detailPanelShowOnAdding: "detailPanelShowOnAdding",
-    //logoFit: "logoFit",
-    //pages: "pages",
-    //questions: "questions",
-    //triggers: "triggers",
-    //calculatedValues: "calculatedValues",
-    //surveyId: "surveyId",
-    //surveyPostId: "surveyPostId",
-    //surveyShowDataSaving: "surveyShowDataSaving",
-    //questionDescriptionLocation: "questionDescriptionLocation",
-    //progressBarType: "progressBarType",
-    //questionTitlePattern: "questionTitlePattern",
-    //widthMode: "widthMode",
-    //showBrandInfo: "showBrandInfo",
-    //choicesByUrl: "choicesByUrl",
-    //choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
-    //choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
-    //inputFieldComponent: "inputFieldComponent",
-    //itemComponent: "itemComponent",
-    //min: "min",
-    //max: "max",
-    //minValueExpression: "minValueExpression",
-    //maxValueExpression: "maxValueExpression",
-    //step: "step",
-    //dataList: "dataList",
-    //itemSize: "itemSize",
-    //elements: "elements",
-    //content: "content",
-    //navigationButtonsVisibility: "navigationButtonsVisibility",
-    //navigationTitle: "navigationTitle",
-    //navigationDescription: "navigationDescription",
-    //closeOnSelect: "closeOnSelect",
-    //longTap: "longTap",
-    //autoGrow: "autoGrow",
-    //acceptCarriageReturn: "acceptCarriageReturn",
-    //displayMode: "displayMode",
-    //label: "label",
-    //contentMode: "contentMode",
-    //imageFit: "imageFit",
-    //altText: "altText",
-    //height: "height",
-    //penColor: "penColor",
-    //backgroundColor: "backgroundColor",
-    //templateElements: "templateElements",
-    //operator: "operator",
-    //isVariable: "isVariable",
-    //runExpression: "runExpression",
-    //showCaption: "showCaption",
-    //iconName: "iconName",
-    //iconSize: "iconSize"
+    tabAlign: "Tab alignment",
+    description: "Description", // Auto-generated string
+    logoFit: "Logo fit", // Auto-generated string
+    pages: "Pages", // Auto-generated string
+    questions: "Questions", // Auto-generated string
+    triggers: "Triggers", // Auto-generated string
+    calculatedValues: "Calculated values", // Auto-generated string
+    surveyId: "Survey id", // Auto-generated string
+    surveyPostId: "Survey post id", // Auto-generated string
+    surveyShowDataSaving: "Survey show data saving", // Auto-generated string
+    questionDescriptionLocation: "Question description location", // Auto-generated string
+    progressBarType: "Progress bar type", // Auto-generated string
+    showTOC: "Show TOC", // Auto-generated string
+    tocLocation: "Toc location", // Auto-generated string
+    questionTitlePattern: "Question title pattern", // Auto-generated string
+    widthMode: "Width mode", // Auto-generated string
+    showBrandInfo: "Show brand info", // Auto-generated string
+    useDisplayValuesInDynamicTexts: "Use display values in dynamic texts", // Auto-generated string
+    visibleIf: "Visible if", // Auto-generated string
+    titleLocation: "Title location", // Auto-generated string
+    descriptionLocation: "Description location", // Auto-generated string
+    defaultValueExpression: "Default value expression", // Auto-generated string
+    requiredIf: "Required if", // Auto-generated string
+    validators: "Validators", // Auto-generated string
+    bindings: "Bindings", // Auto-generated string
+    renderAs: "Render as", // Auto-generated string
+    attachOriginalItems: "Attach original items", // Auto-generated string
+    choices: "Choices", // Auto-generated string
+    choicesByUrl: "Choices by url", // Auto-generated string
+    currency: "Currency", // Auto-generated string
+    cellHint: "Cell hint", // Auto-generated string
+    isUnique: "Is unique", // Auto-generated string
+    showInMultipleColumns: "Show in multiple columns", // Auto-generated string
+    totalMaximumFractionDigits: "Total maximum fraction digits", // Auto-generated string
+    totalMinimumFractionDigits: "Total minimum fraction digits", // Auto-generated string
+    columns: "Columns", // Auto-generated string
+    detailElements: "Detail elements", // Auto-generated string
+    allowAdaptiveActions: "Allow adaptive actions", // Auto-generated string
+    defaultRowValue: "Default row value", // Auto-generated string
+    detailPanelShowOnAdding: "Detail panel show on adding", // Auto-generated string
+    choicesLazyLoadEnabled: "Choices lazy load enabled", // Auto-generated string
+    choicesLazyLoadPageSize: "Choices lazy load page size", // Auto-generated string
+    inputFieldComponent: "Input field component", // Auto-generated string
+    itemComponent: "Item component", // Auto-generated string
+    min: "Min", // Auto-generated string
+    max: "Max", // Auto-generated string
+    minValueExpression: "Min value expression", // Auto-generated string
+    maxValueExpression: "Max value expression", // Auto-generated string
+    step: "Step", // Auto-generated string
+    dataList: "Data list", // Auto-generated string
+    itemSize: "Item size", // Auto-generated string
+    elements: "Elements", // Auto-generated string
+    content: "Content", // Auto-generated string
+    navigationButtonsVisibility: "Navigation buttons visibility", // Auto-generated string
+    navigationTitle: "Navigation title", // Auto-generated string
+    navigationDescription: "Navigation description", // Auto-generated string
+    longTap: "Long tap", // Auto-generated string
+    autoGrow: "Auto grow", // Auto-generated string
+    acceptCarriageReturn: "Accept carriage return", // Auto-generated string
+    displayMode: "Display mode", // Auto-generated string
+    rateType: "Rate type", // Auto-generated string
+    label: "Label", // Auto-generated string
+    contentMode: "Content mode", // Auto-generated string
+    imageFit: "Image fit", // Auto-generated string
+    altText: "Alt text", // Auto-generated string
+    height: "Height", // Auto-generated string
+    penColor: "Pen color", // Auto-generated string
+    backgroundColor: "Background color", // Auto-generated string
+    templateElements: "Template elements", // Auto-generated string
+    operator: "Operator", // Auto-generated string
+    isVariable: "Is variable", // Auto-generated string
+    runExpression: "Run expression", // Auto-generated string
+    showCaption: "Show caption", // Auto-generated string
+    iconName: "Icon name", // Auto-generated string
+    iconSize: "Icon size" // Auto-generated string
   }
 };
 
