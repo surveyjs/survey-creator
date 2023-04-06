@@ -234,7 +234,7 @@ test("Dropdown popup in property grid", async (t) => {
 test("Check bindings question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
-    await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
+    await addQuestionByAddQuestionButton(t, "Dynamic Matrix Table");
     await t
       .click(Selector("h4[aria-label=General]"))
       .click(Selector("h4[aria-label=Logic]"));
