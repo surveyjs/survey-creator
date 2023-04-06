@@ -207,13 +207,17 @@ test("Check creator events on string editor", async (t) => {
   })(json2, msg);
 
   const svStringSelector = Selector(".sv-string-editor").withText("desc");
-
+  const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
   await t
     .click(svStringSelector)
     .click(svStringSelector)
     .typeText(svStringSelector, "1234567890", { caretPos: 0 })
     .pressKey("enter")
-    .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
+    .expect(errorNotifyBalloonSelector.innerText).eql(msg)
+    .expect(Selector(".sd-question__description .svc-string-editor").hasClass("svc-string-editor--error")).ok()
+    .expect(ClientFunction(() => {
+      return window?.getSelection()?.rangeCount || 0 > 0;
+    })()).ok();
 });
 
 test("Check string editor on isRequired", async (t) => {
@@ -224,13 +228,18 @@ test("Check string editor on isRequired", async (t) => {
   })(json2, msg);
 
   const svStringSelector = Selector(".sv-string-editor").withText("desc");
+  const errorNotifyBalloonSelector = Selector(".svc-notifier.svc-notifier--error").filterVisible();
 
   await t
     .click(svStringSelector)
     .expect(svStringSelector.focused).ok()
     .pressKey("ctrl+a delete")
     .pressKey("enter")
-    .expect(Selector(".sd-question__description .svc-string-editor").withText(msg).visible).ok();
+    .expect(errorNotifyBalloonSelector.innerText).eql(msg)
+    .expect(Selector(".sd-question__description .svc-string-editor").hasClass("svc-string-editor--error")).ok()
+    .expect(ClientFunction(() => {
+      return window?.getSelection()?.rangeCount || 0 > 0;
+    })()).ok();
 });
 
 test("Check string editor not loosing focus and selects underlying items", async (t) => {
