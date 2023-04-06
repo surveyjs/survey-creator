@@ -37,7 +37,7 @@ test("Rename choice", async (t) => {
     .click(question1)
     .click(choicesTab)
 
-    .typeText(item1PGEditorInput, expectedNewChoiceName, { replace: true })
+    .typeText(item1PGEditorInput, expectedNewChoiceName, { replace: true, paste: true })
     .pressKey("enter");
 
   const resultJson = await getJSON();
