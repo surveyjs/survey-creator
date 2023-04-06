@@ -1,4 +1,4 @@
-import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable } from "survey-core";
+import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
@@ -179,9 +179,11 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
     if(!libSettings.showModal) return false;
-    libSettings.showModal(
-      undefined,
-      undefined,
+    const locStr = new LocalizableString(undefined);
+    locStr.text = "You have not completed at least one rule. In case you leave the tab you will loose some of your changes. Are you sure you want to leave the tab?";
+    const popupModel = libSettings.showModal(
+      "sv-string-viewer",
+      { locStr: locStr },
       () => {
         onLeaving();
         return true;
@@ -191,6 +193,11 @@ export class SurveyLogicUI extends SurveyLogic {
         return true;
       }, undefined, "Uncompleted rules",
       "popup");
+    const toolbar = popupModel.footerToolbar;
+    const cancelBtn = toolbar.getActionById("cancel");
+    const applyBtn = toolbar.getActionById("apply");
+    cancelBtn.title = "No, I want to complete the rule";
+    applyBtn.title = "Yes";
     return true;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {

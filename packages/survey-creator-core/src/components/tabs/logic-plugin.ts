@@ -70,7 +70,14 @@ export class TabLogicPlugin implements ICreatorPlugin {
     }
     onSuccess();
   }
+  public deactivate(): boolean {
+    this.disposeObjs();
+    return true;
+  }
   public dispose(): void {
+    this.disposeObjs();
+  }
+  private disposeObjs(): void {
     this.filterActionTypeAction.title = undefined;
     this.filterQuestionAction.title = undefined;
     if (this.model) {
