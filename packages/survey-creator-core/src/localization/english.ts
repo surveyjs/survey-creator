@@ -208,6 +208,10 @@ export var enStrings = {
       expressionInvalid: "The logic expression is empty or invalid. Please correct it.",
       noActionError: "Please, add at least one action.",
       actionInvalid: "Please, fix problems in your action(s).",
+      uncompletedRule_title: "Uncompleted rules",
+      uncompletedRule_text: "You have not completed at least one rule. In case you leave the tab you will loose some of your changes. Are you sure you want to leave the tab?",
+      uncompletedRule_apply: "Yes",
+      uncompletedRule_cancel: "No, I want to complete the rule",
       expressionSetup: "",
       actionsSetup: ""
     }

@@ -180,7 +180,7 @@ export class SurveyLogicUI extends SurveyLogic {
   protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
     if(!libSettings.showModal) return false;
     const locStr = new LocalizableString(undefined);
-    locStr.text = "You have not completed at least one rule. In case you leave the tab you will loose some of your changes. Are you sure you want to leave the tab?";
+    locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
     const popupModel = libSettings.showModal(
       "sv-string-viewer",
       { locStr: locStr },
@@ -191,13 +191,13 @@ export class SurveyLogicUI extends SurveyLogic {
       () => {
         onStaying();
         return true;
-      }, undefined, "Uncompleted rules",
+      }, undefined, this.getLocString("ed.lg.uncompletedRule_title"),
       "popup");
     const toolbar = popupModel.footerToolbar;
-    const cancelBtn = toolbar.getActionById("cancel");
     const applyBtn = toolbar.getActionById("apply");
-    cancelBtn.title = "No, I want to complete the rule";
-    applyBtn.title = "Yes";
+    const cancelBtn = toolbar.getActionById("cancel");
+    cancelBtn.title = this.getLocString("ed.lg.uncompletedRule_cancel");
+    applyBtn.title = this.getLocString("ed.lg.uncompletedRule_apply");
     return true;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
