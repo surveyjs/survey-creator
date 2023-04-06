@@ -184,3 +184,25 @@ test("DefaultValueEditor, question title", () => {
     "type": "dropdown",
   });
 });
+test("cells-editor for columns with number values should be created ok", () => {
+  var survey = new SurveyModel({
+    questions: [
+      {
+        type: "matrix",
+        name: "question1",
+        columns: [
+          { value: 0, text: "No" },
+          { value: 1, text: "Yes" }
+        ],
+        rows: ["Row 1"],
+      },
+    ],
+  });
+  var matrix = <QuestionMatrixModel>survey.getQuestionByName("question1");
+  try {
+    var cellsEditor = new CellsEditor(matrix);
+    expect(true).toBeTruthy();
+  } catch(e) {
+    expect(e).toBeUndefined();
+  }
+});
