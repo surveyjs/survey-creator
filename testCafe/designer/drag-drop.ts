@@ -226,7 +226,7 @@ test("Drag Drop Toolbox Responsivity", async (t) => {
     .expect(tabbedMenuItemSelector.hasClass("sv-action--hidden")).ok()
     .click(".svc-toolbox__tool.sv-dots");
 
-  const PopupSelector = Selector(".sv-popup").filterVisible();
+  const PopupSelector = Selector(".sv-popup .sv-popup__container").filterVisible();
   const DynamicPanelItem = PopupSelector.find(".sv-list__item").withText("Dynamic Panel");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
