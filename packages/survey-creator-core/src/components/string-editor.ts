@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -373,8 +373,11 @@ export class StringEditorViewModelBase extends Base {
         }
       }
       else {
+        this.creator.notify(this.errorText, "error");
         this.focusedProgram = true;
+        event.target.innerText = clearedText;
         event.target.focus();
+        return;
       }
     } else {
       if (this.locString.hasHtml) {
@@ -476,8 +479,11 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public className(text: any): string {
-    return "svc-string-editor" +
-      (text == "" && this.placeholder == "" ? " svc-string-editor--hidden" : "") +
-      (this.contentEditable ? "" : " svc-string-editor--readonly");
+    return new CssClassBuilder()
+      .append("svc-string-editor")
+      .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
+      .append("svc-string-editor--readonly", !this.contentEditable)
+      .append("svc-string-editor--error", !!this.errorText)
+      .toString();
   }
 }

@@ -828,3 +828,28 @@ test("Character counter on surface", async t => {
     await takeElementScreenshot("surface-question-title-maxLength.png", stringEditorSelector.nth(4), t, comparer);
   });
 });
+test("Check string editor on isRequired", async (t) => {
+  const msg = "Please enter a value";
+  await ClientFunction((json, msg) => {
+    window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
+    window["creator"].JSON = json;
+  })({
+    title: "title",
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  }, msg);
+
+  const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .click(svStringSelector)
+      .pressKey("delete")
+      .pressKey("enter")
+      .expect((svStringSelector).hasClass("svc-string-editor--error")).ok();
+    await takeElementScreenshot("surface-string-editor-error.png", Selector(".svc-designer-header .sd-title"), t, comparer);
+  });
+});
