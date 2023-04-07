@@ -354,11 +354,19 @@ export class TestSurveyTabViewModel extends Base {
       }
       if (options.name === "questionBackgroundTransparency" || options.name === "--background-dim-light") {
         let baseColor = themeEditorSurvey.getValue("--background-dim-light");
-        themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, options.value / 100));
+        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
+        themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
       }
       if (options.name === "panelBackgroundTransparency" || options.name === "--background") {
         let baseColor = themeEditorSurvey.getValue("--background");
-        themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, options.value / 100));
+        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
+        themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+      }
+      if (options.name === "background-image") {
+        this.survey.backgroundImage = options.value;
+      }
+      if (options.name === "background-opacity") {
+        this.survey.backgroundOpacity = options.value / 100;
       }
       this.simulator.themeVariables = sender.data;
     });
@@ -430,7 +438,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "text",
                 inputType: "number",
-                name: "background-image-opacity",
+                name: "background-opacity",
                 titleLocation: "left",
                 title: "Opacity",
                 defaultValue: 100,
