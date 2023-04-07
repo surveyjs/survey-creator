@@ -259,7 +259,6 @@ test("Check triggers question", async (t) => {
 test("Check spinedit editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
-    await t.debug();
     await ClientFunction(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {
         name: "fontSize",
