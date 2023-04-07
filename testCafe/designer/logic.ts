@@ -602,8 +602,9 @@ test("Could not change 'and' on 'or' in logic tab or in condition editor", async
     .expect(visibleListItems.nth(1).textContent).contains("or");
 });
 test("Confirm dialog on leaving tab with an incorrect rule", async (t) => {
-  const cancelButton = Selector("span").withText("I want to complete the rules");
-  const applyButton = Selector("span").withText("Yes");
+  const popupButtonSelector = Selector(".sv-popup__button");
+  const cancelButton = popupButtonSelector.withText("I want to complete the rules");
+  const applyButton = popupButtonSelector.withText("Yes");
 
   await setJSON(json2);
 
