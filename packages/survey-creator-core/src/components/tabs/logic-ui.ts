@@ -179,11 +179,11 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
     if(!libSettings.showModal) return false;
-    const locStr = new LocalizableString(this.survey);
+    const locStr = new LocalizableString(undefined);
     locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
     const popupModel = libSettings.showModal(
       "sv-string-viewer",
-      { locStr: locStr },
+      { locStr: locStr, locString: locStr }, //TODO fix in library
       () => {
         onLeaving();
         return true;
