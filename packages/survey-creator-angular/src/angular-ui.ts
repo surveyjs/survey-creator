@@ -50,3 +50,5 @@ export * from "./question-widget.component";
 export * from "./toolbox/toolbox.component";
 export * from "./adorners/question-rating.component";
 export * from "./header/logo-image.component";
+
+export * from "./property-panel/custom-questions/spin-editor.component";

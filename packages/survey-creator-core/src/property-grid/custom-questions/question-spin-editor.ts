@@ -1,4 +1,4 @@
-import { QuestionTextModel, Serializer, property } from "survey-core";
+import { QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
 
 export class QuestionSpinEditorModel extends QuestionTextModel {
   @property() public unit: string;
@@ -101,4 +101,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
 }
 Serializer.addClass("spinedit", [
   "unit"
-], (name: string) => new QuestionSpinEditorModel(name), "text");
+], () => new QuestionSpinEditorModel(""), "text");
+QuestionFactory.Instance.registerQuestion("spinedit", name => {
+  return new QuestionSpinEditorModel(name);
+});
