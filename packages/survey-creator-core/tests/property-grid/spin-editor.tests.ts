@@ -1,4 +1,4 @@
-import { QuestionSpinEditorModel } from "../../src/property-grid/custom-questions/question-spin-editor";
+import { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 
 test("Check spin editor question", () => {
   const question = new QuestionSpinEditorModel("q1");
