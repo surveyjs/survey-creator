@@ -1,7 +1,7 @@
 import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
 import { LogicItemEditor } from "./logic-item-editor";
 import { getLogicString } from "./logic-types";
 import { SurveyLogicAction, SurveyLogicItem } from "./logic-items";
@@ -179,7 +179,7 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
     if(!libSettings.showModal) return false;
-    const locStr = new LocalizableString(undefined);
+    const locStr = new LocalizableString(this.survey);
     locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
     const popupModel = libSettings.showModal(
       "sv-string-viewer",
