@@ -198,6 +198,8 @@ export class SurveyLogicUI extends SurveyLogic {
     const cancelBtn = toolbar.getActionById("cancel");
     cancelBtn.title = this.getLocString("ed.lg.uncompletedRule_cancel");
     applyBtn.title = this.getLocString("ed.lg.uncompletedRule_apply");
+    applyBtn.innerCss += " svc-logic-tab__leave-apply-button";
+    popupModel.width = "800px";
     return true;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
