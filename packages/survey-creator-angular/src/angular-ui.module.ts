@@ -53,7 +53,7 @@ import { QuestionWidgetDesignerComponent } from "./question-widget.component";
 import { ToolboxComponent } from "./toolbox/toolbox.component";
 import { QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent } from "./adorners/question-rating.component";
 import { CreatorLogoImageComponent } from "./header/logo-image.component";
-import { QuestionSpinEditorComponent } from "./property-panel/custom-questions/spin-editor.component";
+import { QuestionSpinEditorComponent } from "./custom-questions/spin-editor.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent,
