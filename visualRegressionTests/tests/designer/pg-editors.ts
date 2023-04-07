@@ -266,7 +266,7 @@ test("Check spinedit editor", async (t) => {
         category: "general",
         visibleIndex: 0
       });
-      (<any>window).SurveyCreator.PropertyGridEditorCollection.register({
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
         fit: function (prop) {
           return prop.name === "fontSize";
         },
