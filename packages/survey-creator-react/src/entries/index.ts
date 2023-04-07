@@ -51,6 +51,8 @@ export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 
+export * from "../custom-questions/SpinEditor";
+
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";
 export { svgBundle } from "survey-creator-core";

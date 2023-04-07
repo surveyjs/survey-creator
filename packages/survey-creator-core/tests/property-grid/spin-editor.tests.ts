@@ -59,6 +59,12 @@ test("Check spin editor question event callbacks", (done) => {
   question.onButtonMouseUp();
   expect(question.value).toBe(16);
 
+  question.onBlur(<any>{ target: { tagName: "BUTTON", value: "17" } });
+  expect(question.value).toBe(16);
+  question.onBlur(<any>{ target: { tagName: "INPUT", value: "17" } });
+  expect(question.value).toBe(17);
+
+  question.value = 16;
   question.onDownButtonMouseDown();
   setTimeout(() => {
     question.onButtonMouseUp();

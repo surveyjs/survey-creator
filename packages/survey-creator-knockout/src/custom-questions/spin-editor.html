@@ -1,5 +1,5 @@
 <div data-bind="css: question.cssClasses.root, event: { keydown: question.koOnKeyDown }">
-  <input autocomplete="off" data-bind="disable: question.isInputReadOnly, attr: { size: question.renderedInputSize, id: question.inputId, placeholder: question.renderedPlaceholder, maxLength: question.getMaxLength(), min: question.renderedMin, max: question.renderedMax, step: question.renderedStep, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-describedby': question.ariaDescribedBy }, 
+  <input autocomplete="off" data-bind="disable: question.isInputReadOnly, attr: { id: question.inputId, placeholder: question.renderedPlaceholder, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-describedby': question.ariaDescribedBy }, 
     event: { change: question.koOnChange, keydown: question.koOnInputKeyDown, blur: question.koOnBlur, focus: question.koOnFocus, beforeinput: question.koOnBeforeInput },
     value: question.renderedValue,
     css: question.cssClasses.control"></input>

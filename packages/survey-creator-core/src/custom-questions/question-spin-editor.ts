@@ -24,7 +24,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   private correctValue(newValue: string | number): number {
     let renderedMax = Number(this.renderedMax);
     let renderedMin = Number(this.renderedMin);
-    newValue = typeof newValue === "string" ? parseFloat(newValue) : newValue;
+    newValue = typeof newValue === "string" ? parseFloat(newValue): newValue;
     if(isNaN(newValue)) {
       newValue = isNaN(renderedMin) ? 0 : renderedMin;
     }
@@ -34,6 +34,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     else if(newValue < renderedMin) {
       newValue = renderedMin;
     }
+    newValue = Math.round(newValue * 1000) / 1000;
     return newValue;
   }
   protected setNewValue(newValue: string | number): void {
@@ -94,9 +95,15 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
   public onBlur = (event: Event) => {
     this._showUnitsInEditor = true;
+    if((<any>event.target).tagName == "INPUT") {
+      this["updateValueOnEvent"](event);
+    }
   }
   public getType(): string {
     return "spinedit";
+  }
+  public get isInputTextUpdate(): boolean {
+    return false;
   }
 }
 Serializer.addClass("spinedit", [
