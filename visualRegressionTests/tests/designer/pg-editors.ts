@@ -255,3 +255,34 @@ test("Check triggers question", async (t) => {
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
+test("Check spinedit editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontColor",
+        default: "#19B394",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontColor";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "color" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontColor']");
+    await takeElementScreenshot("color-editor.png", questionSelector, t, comparer);
+    await t.hover(questionSelector.find(".spg-color-editor__color-dropdown"));
+    await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find(".spg-color-editor__input"));
+    await takeElementScreenshot("color-editor-focus.png", questionSelector, t, comparer);
+  });
+});
+
