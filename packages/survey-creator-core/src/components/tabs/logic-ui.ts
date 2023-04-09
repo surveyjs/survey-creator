@@ -183,7 +183,7 @@ export class SurveyLogicUI extends SurveyLogic {
     locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
     const popupModel = libSettings.showModal(
       "sv-string-viewer",
-      { locStr: locStr, locString: locStr }, //TODO fix in library
+      { locStr: locStr, locString: locStr, model: locStr }, //TODO fix in library
       () => {
         onLeaving();
         return true;
