@@ -39,7 +39,7 @@ export class QuestionColorModel extends QuestionTextModel {
   public get renderedValue(): string {
     return this._renderedValue ?? this.value ?? "#000000";
   }
-  public getColorSignStyle(): {[index: string]: string} {
+  public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
   }
   public get isInputTextUpdate(): boolean {

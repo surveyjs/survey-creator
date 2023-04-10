@@ -34,14 +34,14 @@ test("Check custom color question event callbacks", () => {
     value: "#123123"
   } });
   expect(question.value).toBe("#123123");
-  expect(question.getColorSignStyle()).toEqual({
+  expect(question.getSwatchStyle()).toEqual({
     backgroundColor: "#123123"
   });
   question.onColorInputChange(<any>{ target: {
     value: "#F9F9F9"
   } });
   expect(question.value).toBe("#F9F9F9");
-  expect(question.getColorSignStyle()).toEqual({
+  expect(question.getSwatchStyle()).toEqual({
     backgroundColor: "#F9F9F9"
   });
   let preventLog ="";

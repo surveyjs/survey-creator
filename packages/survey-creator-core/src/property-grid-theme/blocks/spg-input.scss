@@ -37,3 +37,21 @@
   padding-right: 0;
   min-width: calcSize(8);
 }
+.spg-input__edit-button {
+  position: relative;
+  box-sizing: border-box;
+  width: calcSize(5);
+  height: calcSize(5);
+  padding: calcSize(1);
+  &:hover {
+    background: $background-dim;
+  }
+  &:active {
+    opacity: 0.5;
+  }
+  svg {
+    height: 24px;
+    width: 24px;
+    fill: rgba(0, 0, 0, 0.45);
+  }
+}

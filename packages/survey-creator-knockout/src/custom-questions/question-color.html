@@ -1,5 +1,5 @@
 <div data-bind="css: question.cssClasses.root">
-  <span data-bind="css: question.cssClasses.colorSign, style: question.getColorSignStyle()"></span>
+  <span data-bind="css: question.cssClasses.swatch, style: question.getSwatchStyle()"></span>
   <input autocomplete="off" data-bind="disable: question.isInputReadOnly, attr: { id: question.inputId, placeholder: question.renderedPlaceholder, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-describedby': question.ariaDescribedBy }, 
     event: { change: question.koOnChange, blur: question.koOnBlur, beforeinput: question.koOnBeforeInput },
     value: question.renderedValue,

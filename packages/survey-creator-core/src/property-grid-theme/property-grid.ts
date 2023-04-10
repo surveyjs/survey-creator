@@ -318,10 +318,10 @@ export var propertyGridCss = {
   },
   color: {
     root: "spg-input spg-color-editor",
-    colorSign: "spg-color-editor__color-swatch",
-    colorDropdown: "spg-color-editor__color-dropdown",
+    swatch: "spg-color-editor__color-swatch",
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input",
+    colorDropdown: "spg-input__edit-button",
     colorDrodownIcon: "icon-drop-down-arrow"
   }
 };

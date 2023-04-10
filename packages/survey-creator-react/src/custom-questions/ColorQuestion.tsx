@@ -43,7 +43,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
     return this.question.renderedValue;
   }
   protected renderColorSwatch(): JSX.Element {
-    return <span className={this.question.cssClasses.colorSign} style={this.question.getColorSignStyle()}></span>
+    return <span className={this.question.cssClasses.swatch} style={this.question.getSwatchStyle()}></span>
   }
   protected renderColorInput(): JSX.Element {
     return (

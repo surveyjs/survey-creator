@@ -12,24 +12,6 @@
   flex-grow: 1;
   padding: calcSize(1) calcSize(1.5);
 }
-.spg-color-editor__color-dropdown {
-  position: relative;
-  box-sizing: border-box;
-  width: calcSize(5);
-  height: calcSize(5);
-  padding: calcSize(1);
-  &:hover {
-    background: $background-dim;
-  }
-  &:active {
-    opacity: 0.5;
-  }
-  svg {
-    height: 24px;
-    width: 24px;
-    fill: rgba(0, 0, 0, 0.45);
-  }
-}
 .spg-color-editor__color-input {
   position: absolute;
   height: 1px;
