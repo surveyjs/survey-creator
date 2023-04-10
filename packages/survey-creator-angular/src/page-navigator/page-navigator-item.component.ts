@@ -16,7 +16,8 @@ export class PageNavigatorItemComponent extends BaseAngular<Action> {
     return this.model as any;
   }
   click(event: any) {
-    event.stopPropagation();
     this.getModel().action();
+    event.stopPropagation();
+    event.preventDefault();
   }
 }

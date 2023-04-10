@@ -108,14 +108,25 @@ export class PageNavigatorViewModel extends Base {
     };
     item.active = <any>new ComputedUpdater<boolean>(() => page === this.currentPage);
     item.action = (item: any) => {
-      if (this.pageEditMode === "bypage") {
-        this.pagesController.currentPage = page;
-        this.currentPage = page;
-        this.pagesController.creator.selectElement(this.pagesController.currentPage);
-        return;
+      this.scrollToPage(page);
+    };
+    item.data = page;
+    return this.createActionBarCore(item);
+  }
+  public scrollToPage(page: PageModel) {
+    if (this.pageEditMode === "bypage") {
+      this.pagesController.currentPage = page;
+      this.currentPage = page;
+      this.pagesController.creator.selectElement(this.pagesController.currentPage);
+      return;
+    }
+    const el: any = document.getElementById(page.id);
+    if (!!el) {
+      if(!!this._scrollableContainer) {
+        // const y = el.offsetTop - (this._scrollableContainer.clientHeight / 4);
+        this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
       }
-      const el: any = document.getElementById(page.id);
-      if (!!el) {
+      else {
         el.scrollIntoView({ block: "start" });
         this.patchContainerOffset(el);
         const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
@@ -126,9 +137,7 @@ export class PageNavigatorViewModel extends Base {
           }, 50);
         }
       }
-    };
-    item.data = page;
-    return this.createActionBarCore(item);
+    }
   }
   protected createActionBarCore(item: IAction): Action {
     return new Action(item);
@@ -218,6 +227,10 @@ export class PageNavigatorViewModel extends Base {
   }
   @property({ defaultValue: 0 }) visibleItemsStartIndex: number;
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;
+  private _scrollableContainer: HTMLDivElement;
+  public setScrollableContainer(scrollableContainer: HTMLDivElement | any) {
+    this._scrollableContainer = scrollableContainer;
+  }
   private _itemsContainer: HTMLDivElement;
   public setItemsContainer(itemsContainer: HTMLDivElement | any) {
     this.stopItemsContainerHeightObserver();
