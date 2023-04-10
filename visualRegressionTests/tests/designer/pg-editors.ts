@@ -255,7 +255,7 @@ test("Check triggers question", async (t) => {
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
-test("Check spinedit editor", async (t) => {
+test("Check color editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await ClientFunction(() => {
@@ -279,7 +279,7 @@ test("Check spinedit editor", async (t) => {
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='fontColor']");
     await takeElementScreenshot("color-editor.png", questionSelector, t, comparer);
-    await t.hover(questionSelector.find(".spg-color-editor__color-dropdown"));
+    await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-color-editor__input"));
     await takeElementScreenshot("color-editor-focus.png", questionSelector, t, comparer);
