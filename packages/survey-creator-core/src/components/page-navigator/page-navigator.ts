@@ -122,14 +122,21 @@ export class PageNavigatorViewModel extends Base {
     }
     const el: any = document.getElementById(page.id);
     if (!!el) {
+      const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
       if(!!this._scrollableContainer) {
         // const y = el.offsetTop - (this._scrollableContainer.clientHeight / 4);
         this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
+        this.patchContainerOffset(el);
+        if (isLastPage) {
+          setTimeout(() => {
+            this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
+            this.patchContainerOffset(el);
+          }, 50);
+        }
       }
       else {
         el.scrollIntoView({ block: "start" });
         this.patchContainerOffset(el);
-        const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
         if (isLastPage) {
           setTimeout(() => {
             el.scrollIntoView({ block: "start" });
