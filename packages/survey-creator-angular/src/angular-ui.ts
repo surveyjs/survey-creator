@@ -50,3 +50,4 @@ export * from "./question-widget.component";
 export * from "./toolbox/toolbox.component";
 export * from "./adorners/question-rating.component";
 export * from "./header/logo-image.component";
+export * from "./custom-questions/color.component";
