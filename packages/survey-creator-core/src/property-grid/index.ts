@@ -756,6 +756,7 @@ export class PropertyGridModel {
       this.surveyValue.dispose();
     }
     this.surveyValue = this.createSurvey(json);
+    this.surveyValue.questionErrorLocation = "bottom";
     this.surveyValue.getCss().list = {};
     this.surveyValue.css = propertyGridCss;
     var page = this.surveyValue.createNewPage("p1");

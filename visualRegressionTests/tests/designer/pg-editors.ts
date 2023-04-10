@@ -255,3 +255,20 @@ test("Check triggers question", async (t) => {
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
+
+test("Check question with error", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await setJSON({
+      type: "text",
+      name: "q1",
+    });
+    await addQuestionByAddQuestionButton(t, "Single Input");
+    const questionSelector = Selector("div[data-name='name']");
+    await t
+    .selectText(questionSelector.find("input"))
+    .pressKey('delete')
+    .pressKey('tab')
+    await takeElementScreenshot("pg-editor-errors.png", questionSelector, t, comparer);
+  });
+});

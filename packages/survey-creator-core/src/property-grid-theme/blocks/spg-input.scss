@@ -36,3 +36,7 @@
   padding-right: 0;
   min-width: calcSize(8);
 }
+.spg-input.spg-input--error {
+  border-color: $red;
+  box-shadow: none;
+}
