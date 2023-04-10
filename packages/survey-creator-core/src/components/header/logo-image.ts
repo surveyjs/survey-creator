@@ -14,13 +14,16 @@ export class LogoImageViewModel extends Base {
       .append("svc-logo-image-container")
       .append("svc-logo-image-container--editable", this.allowEdit).toString();
   }
+  @property({ defaultValue: false }) isUploading;
   public get survey(): SurveyModel {
     return this.creator.survey;
   }
   private uploadFile(model: LogoImageViewModel, fileInput: HTMLInputElement, files: File[]) {
+    model.isUploading = true;
     model.creator.uploadFiles(files, undefined, (_, link) => {
       model.creator.survey.logo = link;
       fileInput.value = "";
+      model.isUploading = false;
     });
   }
   public chooseFile(model: LogoImageViewModel) {

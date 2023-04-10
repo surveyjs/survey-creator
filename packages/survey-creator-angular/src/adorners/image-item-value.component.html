@@ -13,7 +13,7 @@
           <svg [iconName]="'icon-drag-area-indicator'" [size]="24" sv-ng-svg-icon></svg>
         </span>
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-          <ng-container *ngIf="adorner.allowRemove">
+          <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
             <span class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
               <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
             </span>
@@ -35,8 +35,8 @@
         </div>
 
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-          <span  class="svc-image-item-value-controls__button svc-image-item-value-controls__add" [key2click] (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
-            <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon></svg>
+          <span class="svc-image-item-value-controls__button svc-image-item-value-controls__add" [key2click] (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
+            <svg *ngIf="adorner.allowAdd && !adorner.isUploading" [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon></svg>
           </span>
         </div>
       </ng-container>
