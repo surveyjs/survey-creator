@@ -43,7 +43,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
     return this.question.renderedValue;
   }
   protected renderColorSwatch(): JSX.Element {
-    return <span className={this.question.cssClasses.swatch} style={this.question.getSwatchStyle()}></span>
+    return <span className={this.question.cssClasses.swatch} style={this.question.getSwatchStyle()}></span>;
   }
   protected renderColorInput(): JSX.Element {
     return (
@@ -51,7 +51,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
         <SvgIcon iconName={this.question.cssClasses.colorDrodownIcon} size={"auto"}></SvgIcon>
         <input type="color" value={this.question.renderedValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
       </label>
-      );
+    );
   }
 }
 

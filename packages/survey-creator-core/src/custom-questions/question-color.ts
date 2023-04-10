@@ -20,7 +20,7 @@ export class QuestionColorModel extends QuestionTextModel {
     return newValue.toUpperCase();
   }
   protected setNewValue(newValue: string): void {
-    this._renderedValue = ""
+    this._renderedValue = "";
     super.setNewValue(this.getCorrectedValue(newValue));
     this._renderedValue = this.value;
   }
