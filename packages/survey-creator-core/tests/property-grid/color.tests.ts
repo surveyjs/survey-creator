@@ -2,16 +2,31 @@ import { QuestionColorModel } from "../../src/custom-questions/question-color";
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");
+  expect(question.renderedValue).toBe("#000000");
+  expect(question.value).toBe(undefined);
   question.value = undefined;
   expect(question.value).toBe("#000000");
+  expect(question.renderedValue).toBe("#000000");
   question.value = "incorrect_value";
   expect(question.value).toBe("#000000");
+  expect(question.renderedValue).toBe("#000000");
   question.value = "fe#fe";
   expect(question.value).toBe("#FE0000");
+  expect(question.renderedValue).toBe("#FE0000");
   question.value = "#fea";
   expect(question.value).toBe("#FEAFEA");
+  expect(question.renderedValue).toBe("#FEAFEA");
   question.value = "#fea123";
   expect(question.value).toBe("#FEA123");
+  expect(question.renderedValue).toBe("#FEA123");
+  let renderValueChangedLog = "";
+  question.onPropertyChanged.add((sender, options) => {
+    if(options.name === "_renderedValue") {
+      renderValueChangedLog += `-> ${options.newValue}`;
+    }
+  });
+  question.value = "#fea123123";
+  expect(renderValueChangedLog).toBe("-> -> #FEA123");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");

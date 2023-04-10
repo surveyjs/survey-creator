@@ -20,7 +20,9 @@ export class QuestionColorModel extends QuestionTextModel {
     return newValue.toUpperCase();
   }
   protected setNewValue(newValue: string): void {
+    this._renderedValue = ""
     super.setNewValue(this.getCorrectedValue(newValue));
+    this._renderedValue = this.value;
   }
   public onBeforeInput(event: InputEvent): void {
     if(!!event.data && !/[\d\w#]/.test(event.data)) {
@@ -33,8 +35,9 @@ export class QuestionColorModel extends QuestionTextModel {
   public getType(): string {
     return "color";
   }
+  @property({}) _renderedValue: string;
   public get renderedValue(): string {
-    return this.value ?? "#000000";
+    return this._renderedValue ?? this.value ?? "#000000";
   }
   public getColorSignStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
