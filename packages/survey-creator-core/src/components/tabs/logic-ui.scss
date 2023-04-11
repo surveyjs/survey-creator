@@ -34,10 +34,12 @@
     width: 100%;
   }
 }
+
 .svc-logic-paneldynamic div.svc-logic-operator {
   height: calcSize(3);
   box-sizing: content-box;
 }
+
 .svc-logic-paneldynamic .svc-logic-operator {
   -webkit-appearance: none;
   appearance: none;
@@ -66,7 +68,9 @@
 .sl-question.svc-logic-question--answered .svc-logic-operator {
   color: $foreground;
 }
+
 .svc-logic-operator.svc-logic-operator {
+
   &:hover,
   &:focus {
     color: #ffffff;
@@ -74,16 +78,20 @@
     box-shadow: none;
   }
 }
+
 .svc-logic-operator.svc-logic-operator--question {
   background-color: $blue-light;
+
   &:hover,
   &:focus {
     background-color: $blue;
   }
 }
+
 .svc-logic-operator.svc-logic-operator--conjunction,
 .svc-logic-operator.svc-logic-operator--operator {
   background-color: $yellow-light;
+
   &:hover,
   &:focus {
     background-color: $yellow;
@@ -92,6 +100,7 @@
 
 .svc-logic-operator.svc-logic-operator--action {
   background-color: $red-light;
+
   &:hover,
   &:focus {
     background-color: $red;
@@ -113,9 +122,11 @@
     display: none;
   }
 }
+
 .svc-action-button.svc-logic-condition-remove.svc-icon-remove:focus {
   outline: none;
 }
+
 .svc-logic-condition-remove.svc-icon-remove {
   display: none;
   width: calcSize(5);
@@ -125,14 +136,17 @@
   background-size: calcSize(3) calcSize(3);
   background-position: center;
 }
+
 .sl-panel-wrapper--in-row:hover .svc-logic-condition-remove.svc-icon-remove,
 .sl-panel-wrapper--in-row:focus-within .svc-logic-condition-remove.svc-icon-remove {
   display: block;
 }
+
 .svc-logic-condition-remove.svc-icon-remove:hover,
 .svc-logic-condition-remove.svc-icon-remove:focus {
   background-color: $red-light;
 }
+
 .svc-logic-condition-remove-question {
   height: calcSize(5);
 }
@@ -199,6 +213,7 @@
 
 .svc-logic-paneldynamic {
   font-family: $font-family;
+
   .sd-row--multiple {
     padding: 0;
     background: none;
@@ -206,9 +221,11 @@
     border-radius: 0;
     overflow: visible;
   }
+
   .sd-question__content {
     margin-top: 0;
   }
+
   .sd-row__panel {
     width: calc(100% - 5 * #{$base-unit});
   }
@@ -225,6 +242,7 @@
     min-width: none;
     max-width: none;
   }
+
   .sd-page.sd-body__page {
     padding: 0;
   }
@@ -237,6 +255,7 @@
 .sl-dropdown {
   max-width: 45vw;
 }
+
 .sl-dropdown__value {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -254,6 +273,7 @@
   border-radius: calcSize(0.5);
   padding: calcSize(4) calcSize(5) calcSize(5);
 }
+
 .svc-logic-placeholder__text {
   font-family: $font-family;
   font-style: normal;
@@ -264,4 +284,8 @@
   color: $foreground-light;
   display: block;
   padding: calcSize(4) calcSize(8);
+}
+
+.svc-logic-tab__leave-apply-button {
+  background-color: $red;
 }

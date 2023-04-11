@@ -316,4 +316,12 @@ export var propertyGridCss = {
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",
   },
+  color: {
+    root: "spg-input spg-color-editor",
+    swatch: "spg-color-editor__color-swatch",
+    colorInput: "spg-color-editor__color-input",
+    control: "spg-color-editor__input",
+    colorDropdown: "spg-input__edit-button",
+    colorDrodownIcon: "icon-drop-down-arrow"
+  }
 };

@@ -51,6 +51,9 @@ export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 
+//custom questions
+export * from "../custom-questions/ColorQuestion";
+
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";
 export { svgBundle } from "survey-creator-core";
