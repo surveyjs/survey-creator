@@ -29,6 +29,9 @@ export * from "../adorners/cell-question";
 export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
+//custom questions for property grid
+export * from "../custom-questions/question-color";
+
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
 export * from "../property-panel/object-selector";
@@ -52,6 +55,8 @@ export * from "../utils/survey-widget";
 export * from "../utils/utils";
 
 export * from "../creator";
+
+export * from "../custom-questions/spin-editor";
 
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";

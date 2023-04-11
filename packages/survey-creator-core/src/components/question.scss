@@ -68,7 +68,8 @@ svc-question {
   }
 
   .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
-    color: $foreground-disabled-for-editors;
+    color: $foreground;
+    opacity: 0.25;
   }
 }
 

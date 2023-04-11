@@ -7,7 +7,8 @@ import {
   QuestionRadiogroupModel,
   QuestionPanelDynamicModel,
   ItemValue,
-  QuestionTextModel
+  QuestionTextModel,
+  ComponentCollection
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -1668,4 +1669,27 @@ test("Change the default operator", () => {
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("operator").value).toEqual("anyof");
   settings.logic.defaultOperator = "equal";
+});
+test("Condition editor and question value cssClasses", () => {
+  ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
+  const survey = new SurveyModel({
+    questions: [
+      { type: "comp1", name: "q1", choices: [1, 2, 3] },
+      { type: "dropdown", name: "q2", choices: [1, 2, 3] },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const editor = new ConditionEditor(survey, survey.getQuestionByName("q3"));
+  const panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q2";
+  const q2 = panel.getQuestionByName("questionValue");
+  expect(q2.getType()).toBe("dropdown");
+  expect(q2.cssClasses.content).toContain("sd-question__content");
+  panel.getQuestionByName("questionName").value = "q1";
+  const comp = panel.getQuestionByName("questionValue");
+  expect(comp.getType()).toBe("comp1");
+  expect(comp.cssClasses.content).toContain("sd-question__content");
+  expect(comp.contentQuestion).toBeTruthy();
+  expect(comp.contentQuestion.cssClasses.content).toContain("sd-question__content");
+  ComponentCollection.Instance.clear();
 });
