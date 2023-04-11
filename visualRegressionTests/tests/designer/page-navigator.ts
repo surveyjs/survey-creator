@@ -98,12 +98,12 @@ test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
 
     const firstPageNavigatorItem = "svc-page-navigator-item:nth-child(1) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(1) > .svc-page-navigator-item--selected";
     const thirdPageNavigatorItem = "svc-page-navigator-item:nth-child(3) > .svc-page-navigator-item--selected, .svc-page-navigator-item:nth-of-type(3) > .svc-page-navigator-item--selected";
-    const navigatorItem2Click = "svc-page-navigator-item:nth-child(3), .svc-page-navigator-item:nth-of-type(3)";
+    const navigatorItem2Click = ".svc-page-navigator-item-content";
 
     await t
       .expect(Selector(firstPageNavigatorItem).exists).ok()
       .expect(Selector(thirdPageNavigatorItem).exists).notOk()
-      .click(navigatorItem2Click)
+      .click(Selector(navigatorItem2Click).nth(2))
       .expect(Selector(firstPageNavigatorItem).exists).notOk()
       .expect(Selector(thirdPageNavigatorItem).exists).ok();
 
