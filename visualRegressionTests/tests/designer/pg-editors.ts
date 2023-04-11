@@ -265,9 +265,9 @@ test("Check question with error", async (t) => {
     await addQuestionByAddQuestionButton(t, "Single Input");
     const questionSelector = Selector("div[data-name='name']");
     await t
-    .selectText(questionSelector.find("input"))
-    .pressKey('delete')
-    .pressKey('tab')
+      .selectText(questionSelector.find("input"))
+      .pressKey("delete")
+      .pressKey("tab");
     await takeElementScreenshot("pg-editor-errors.png", questionSelector, t, comparer);
   });
 });
