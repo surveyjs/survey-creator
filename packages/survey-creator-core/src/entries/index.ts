@@ -45,8 +45,10 @@ export * from "../components/embedded-survey";
 export * from "../components/link-value";
 export * from "../editorLocalization";
 export * from "../json5";
-//custom property grid quesitons
+
+//custom questions for property grid
 export * from "../custom-questions/question-spin-editor";
+export * from "../custom-questions/question-color";
 
 export * from "../property-grid";
 export * from "../property-grid/condition";

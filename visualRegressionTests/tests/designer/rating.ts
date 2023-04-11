@@ -92,3 +92,13 @@ test("Multi row rating adorner", async (t) => {
     await takeElementScreenshot("rating-multiline-mobile.png", question, t, comparer);
   });
 });
+
+test("Rating editing", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON(json);
+
+    const question = Selector("div[data-name=question1]");
+    await t.click(question.find("span").withText("3"));
+    await takeElementScreenshot("rating-editing.png", question, t, comparer);
+  });
+});

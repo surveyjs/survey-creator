@@ -196,6 +196,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
   public resetModified(): void {
     this.isModifiedValue = false;
   }
+  public isEmpty(): boolean {
+    if(this.panels.length === 0) return true;
+    if(this.panels.length > 1) return false;
+    const modelAction = this.getActionModelByPanel(this.panels[0]);
+    return !modelAction;
+  }
   public apply(): boolean {
     if (this.editSurvey.hasErrors()) return false;
     for (let i = 0; i < this.panels.length; i++) {

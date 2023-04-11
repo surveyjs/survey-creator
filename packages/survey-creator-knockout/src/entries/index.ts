@@ -29,6 +29,9 @@ export * from "../adorners/cell-question";
 export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
+//custom questions for property grid
+export * from "../custom-questions/question-color";
+
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
 export * from "../property-panel/object-selector";

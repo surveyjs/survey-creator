@@ -38,7 +38,7 @@ test("Left toolbox", async (t) => {
     await takeElementScreenshot("toolbox-left-compact-hover-item.png", toolboxElement, t, comparer);
 
     await t.click(toolboxItemDots);
-    await takeElementScreenshot("toolbox-left-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t, comparer);
+    await takeElementScreenshot("toolbox-left-popup.png", null, t, comparer);
 
     await t.resizeWindow(2560, 1440);
   });
@@ -78,7 +78,7 @@ test("Right toolbox", async (t) => {
     await takeElementScreenshot("toolbox-right-compact-hover-item.png", toolboxElement, t, comparer);
 
     await t.click(toolboxItemDots);
-    await takeElementScreenshot("toolbox-right-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t, comparer);
+    await takeElementScreenshot("toolbox-right-popup.png", null, t, comparer);
   });
 });
 
@@ -119,7 +119,7 @@ test("Right toolbox (rtl)", async (t) => {
     await takeElementScreenshot("toolbox-right-rtl-compact-hover-item.png", toolboxElement, t, comparer);
 
     await t.click(toolboxItemDots);
-    await takeElementScreenshot("toolbox-right-rtl-popup.png", Selector(".sv-popup.svc-toolbox-popup"), t, comparer);
+    await takeElementScreenshot("toolbox-right-rtl-popup.png", null, t, comparer);
   });
 });
 

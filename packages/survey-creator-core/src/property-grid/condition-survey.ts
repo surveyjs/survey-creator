@@ -477,6 +477,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return true;
   }
   public errorText: string;
+  public isEmpty(): boolean {
+    if(this.panel.panels.length === 0) return true;
+    if(this.panel.panels.length > 1) return false;
+    const item = this.createEditorItemFromPanel(this.panel.panels[0]);
+    return !item.questionName;
+  }
   public hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
     if (!this.isReady) {

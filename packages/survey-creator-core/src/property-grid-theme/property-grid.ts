@@ -322,6 +322,14 @@ export var propertyGridCss = {
     buttonsContainer: "spg-spin-editor__buttons-container",
     arrowButton: "spg-spin-editor__arrow",
     increaseButtonIcon: "icon-arrow-up",
-    decreaseButtonIcon: "icon-arrow-down",
+    decreaseButtonIcon: "icon-arrow-down"
+  },
+  color: {
+    root: "spg-input spg-color-editor",
+    swatch: "spg-color-editor__color-swatch",
+    colorInput: "spg-color-editor__color-input",
+    control: "spg-color-editor__input",
+    colorDropdown: "spg-input__edit-button",
+    colorDrodownIcon: "icon-drop-down-arrow"
   }
 };

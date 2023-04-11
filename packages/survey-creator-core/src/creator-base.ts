@@ -74,6 +74,7 @@ export interface ICreatorPlugin {
   activate: () => void;
   update?: () => void;
   deactivate?: () => boolean;
+  canDeactivateAsync?: (onSuccess: () => void) => void;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -1177,6 +1178,16 @@ export class CreatorBase extends Base
    */
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
+    const plugin: ICreatorPlugin = this.currentPlugin;
+    if(!!plugin && !!plugin.canDeactivateAsync) {
+      plugin.canDeactivateAsync(() => {
+        this.switchViewType(viewName);
+      });
+      return undefined;
+    }
+    return this.switchViewType(viewName);
+  }
+  private switchViewType(viewName: string): boolean {
     const chaningOptions = { tabName: viewName, allow: true };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;

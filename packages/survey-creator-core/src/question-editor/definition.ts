@@ -170,6 +170,7 @@ export class SurveyQuestionEditorDefinition {
     rating: {
       properties: [
         { name: "displayMode", tab: "layout" },
+        { name: "rateCount", tab: "rateValues" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
@@ -456,6 +457,7 @@ export class SurveyQuestionEditorDefinition {
     paneldynamic: {
       properties: [
         "renderMode",
+        "tabAlign",
         "panelCount",
         "minPanelCount",
         "maxPanelCount",
