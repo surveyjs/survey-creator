@@ -311,7 +311,7 @@ test("Check spinedit editor", async (t) => {
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='fontSize']");
     await takeElementScreenshot("spin-editor.png", questionSelector, t, comparer);
-    await t.hover(questionSelector.find(".spg-spin-editor__arrow"));
+    await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-spin-editor__input"));
     await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
