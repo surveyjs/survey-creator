@@ -52,6 +52,7 @@ export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 
 //custom questions
+export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorQuestion";
 
 export { editorLocalization, localization } from "survey-creator-core";

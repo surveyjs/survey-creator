@@ -47,6 +47,7 @@ export * from "../editorLocalization";
 export * from "../json5";
 
 //custom questions for property grid
+export * from "../custom-questions/question-spin-editor";
 export * from "../custom-questions/question-color";
 
 export * from "../property-grid";
