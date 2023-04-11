@@ -82,7 +82,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         </div>
 
         <div className="svc-image-item-value-controls">
-          {this.model.allowAdd ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
+          {this.model.allowAdd && !this.model.isUploading ? attachKey2click(<span className="svc-image-item-value-controls__button svc-image-item-value-controls__add" onClick={() => this.model.chooseNewFile(this.model)}>
             <SvgIcon size={24} iconName={"icon-add-lg"}></SvgIcon>
           </span>) : null}
         </div>
@@ -101,13 +101,13 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
           </span>
 
           <div className="svc-image-item-value-controls">
-            {this.model.allowRemove ? attachKey2click(<span
+            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
               className="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
               onClick={() => this.model.chooseFile(this.model)}
             >
               <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
             </span>) : null}
-            {this.model.allowRemove ? attachKey2click(<span
+            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
               className="svc-image-item-value-controls__button svc-image-item-value-controls__remove ddd"
               onClick={() => this.model.remove(this.model)}
             >
