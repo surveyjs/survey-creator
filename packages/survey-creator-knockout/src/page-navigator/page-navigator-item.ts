@@ -13,6 +13,7 @@ export class PageNavigatorItemViewModel {
     if (!this.disabled) {
       this.item.action();
       event.stopPropagation();
+      event.preventDefault();
     }
   };
   private unwrap<T>(value: T | (() => T)): T {
