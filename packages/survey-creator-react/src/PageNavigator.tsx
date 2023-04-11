@@ -125,8 +125,7 @@ export class SurveyPageNavigatorItem extends CreatorModelElement<any, any> {
           className={className}
           onClick={(e) => {
             item.action(item);
-            e.nativeEvent.stopPropagation();
-            e.nativeEvent.preventDefault();
+            e.stopPropagation();
           }}
         >
           <div className="svc-page-navigator-item__dot" title={item.title}></div>
