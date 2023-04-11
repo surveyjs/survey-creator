@@ -202,7 +202,8 @@
   }
 
   .svc-logic-tab__content-action--disabled .svc-text {
-    color: $foreground-disabled;
+    color: $foreground;
+    opacity: 0.25;
   }
 
   .sd-paneldynamic__panel-wrapper--in-row {

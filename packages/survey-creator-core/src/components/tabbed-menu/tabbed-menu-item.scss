@@ -26,7 +26,8 @@
 
 .svc-tabbed-menu-item--disabled {
   cursor: default;
-  color: $foreground-disabled;
+  color: $foreground;
+  opacity: 0.25;
   &:hover {
     background-color: $background;
   }

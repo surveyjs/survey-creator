@@ -29,7 +29,8 @@
 
 .spg-input:disabled,
 .spg-input:disabled::placeholder {
-  color: $foreground-disabled;
+  color: $foreground;
+  opacity: 0.25;
 }
 
 .spg-input[type="color"] {
