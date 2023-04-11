@@ -19,7 +19,8 @@
 }
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
-  color: $foreground-disabled;
+  color: $foreground;
+  opacity: 0.25;
   cursor: default;
 }
 .spg-panel__title--expandable:not(.spg-panel__title[aria-expanded=true]) {

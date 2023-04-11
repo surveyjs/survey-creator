@@ -20,7 +20,8 @@
 .svc-property-panel__group:disabled,
 .svc-property-panel__group:disabled:hover {
   background-color: $background;
-  color: $foreground-disabled;
+  color: $foreground;
+  opacity: 0.25;
   cursor: default;
 }
 
