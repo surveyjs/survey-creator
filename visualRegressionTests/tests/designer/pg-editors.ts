@@ -75,6 +75,35 @@ test("Values editors, keep them close", async (t) => {
   });
 });
 
+test("Check default value editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const json = {
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1",
+          "defaultValue": "default"
+        }
+      ]
+    };
+    await t.resizeWindow(1560, 1440);
+    await setJSON(json);
+
+    const question1 = Selector("[data-name=\"question1\"]");
+
+    await t
+      .click(question1)
+      .pressKey("enter")
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Data"));
+    const questionSelector = Selector("div[data-name='defaultValue']");
+
+    await takeElementScreenshot("default-value-clear-button.png", questionSelector, t, comparer);
+    await ClientFunction(() => { (<HTMLElement>document.querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); })();
+    await takeElementScreenshot("default-value-clear-button-focus.png", questionSelector, t, comparer);
+  });
+});
+
 test("Default value popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);

@@ -331,5 +331,8 @@ export var propertyGridCss = {
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
     colorDrodownIcon: "icon-drop-down-arrow"
+  },
+  linkvalue: {
+    content: "spg-link"
   }
 };
