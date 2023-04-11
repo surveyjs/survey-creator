@@ -316,11 +316,19 @@ export var propertyGridCss = {
     itemIcon: "spg-action-button__icon",
     itemTitle: "spg-action-button__title",
   },
+  spinedit: {
+    root: "spg-input spg-spin-editor spg-input-container",
+    control: "spg-spin-editor__input spg-input-container__input",
+    buttonsContainer: "spg-spin-editor__buttons-container",
+    arrowButton: "spg-input__edit-button",
+    increaseButtonIcon: "icon-arrow-up",
+    decreaseButtonIcon: "icon-arrow-down"
+  },
   color: {
-    root: "spg-input spg-color-editor",
+    root: "spg-input spg-color-editor spg-input-container",
     swatch: "spg-color-editor__color-swatch",
     colorInput: "spg-color-editor__color-input",
-    control: "spg-color-editor__input",
+    control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
     colorDrodownIcon: "icon-drop-down-arrow"
   }

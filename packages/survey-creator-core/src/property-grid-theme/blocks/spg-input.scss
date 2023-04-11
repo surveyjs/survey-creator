@@ -21,8 +21,8 @@
 
 .spg-input:focus,
 .spg-input.spg-dropdown:focus,
-.spg-color-editor:focus-within,
-.spg-input.spg-dropdown:focus-within {
+.spg-input.spg-dropdown:focus-within,
+.spg-input-container:focus-within {
   border-color: $primary;
   box-shadow: inset 0 0 0 1px $primary;
 }
@@ -41,6 +41,9 @@
 .spg-input__edit-button {
   position: relative;
   box-sizing: border-box;
+  appearance: none;
+  background: $background;
+  border: none;
   width: calcSize(5);
   height: calcSize(5);
   padding: calcSize(1);
