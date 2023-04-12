@@ -52,7 +52,7 @@ test("Default value", async (t) => {
   await t
     .expect(resultJson2.pages[0].elements[0].defaultValue).eql(undefined);
 });
-test.only("Default value & readonly", async (t) => {
+test("Default value & readonly", async (t) => {
   const json = {
     "pages": [
       {
