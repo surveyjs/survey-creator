@@ -1049,3 +1049,8 @@ export class SurveyQuestionEditor extends SurveyElementEditorContentModel {
     return res;
   }
 }
+
+Survey.Serializer.findProperty("rating", "rateValues").visibleIf = null;
+Survey.Serializer.findProperty("rating", "rateMin").visibleIf = null;
+Survey.Serializer.findProperty("rating", "rateMax").visibleIf = null;
+Survey.Serializer.findProperty("rating", "rateStep").visibleIf = null;
