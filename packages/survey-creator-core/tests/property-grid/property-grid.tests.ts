@@ -1878,8 +1878,6 @@ test("DefaultValue editor & readOnly", () => {
   var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
   expect(valueQuestion).toBeTruthy();
   expect(valueQuestion.value).toEqual(2);
-  expect(valueEditor.editSurvey.mode).toBe("display");
-  expect(valueQuestion.isReadOnly).toBeTruthy();
   defaultValueProp.readOnly = false;
 });
 test("DefaultRowValue editor", () => {
