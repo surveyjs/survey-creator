@@ -6,6 +6,10 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 
+const makeCreatorReadOnly = ClientFunction(() => {
+  window["creator"].readOnly = true;
+});
+
 test("Default value", async (t) => {
   const json = {
     "pages": [
@@ -47,4 +51,35 @@ test("Default value", async (t) => {
   const resultJson2 = await getJSON();
   await t
     .expect(resultJson2.pages[0].elements[0].defaultValue).eql(undefined);
+});
+test.only("Default value & readonly", async (t) => {
+  const json = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question1",
+            "defaultValue": 3
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await makeCreatorReadOnly();
+
+  const question1 = Selector("[data-name=\"question1\"]");
+  const dataTab = Selector("h4").withExactText("Data");
+
+  await t
+    .click(question1)
+    .click(dataTab)
+    .expect(Selector("span").withExactText("Clear").exists).notOk()
+    .click(Selector("span").withExactText("Change Default Answer"))
+    .click(Selector(".sv-popup__body-header").withExactText("Default Answer"))
+    .expect(Selector(".sv-popup--modal button").withExactText("Apply").filterVisible().exists).notOk()
+    .click(Selector(".sv-popup--modal button").withExactText("Cancel"))
+    .expect(Selector("span").withExactText("Change Default Answer").visible).ok();
 });
