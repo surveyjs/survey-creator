@@ -1,4 +1,4 @@
-import { CreatorBase } from "src/creator-base";
+import { CreatorBase } from "../creator-base";
 import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 
