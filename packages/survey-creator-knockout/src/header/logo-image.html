@@ -1,7 +1,7 @@
 <div class="svc-logo-image" data-bind="click: function(m, e) { return true; }, clickBubble: false">
   <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
   <!-- ko ifnot: survey.locLogo.koRenderedHtml -->
-  <!-- ko if: allowEdit -->
+  <!-- ko if: allowEdit && !isUploading -->
   <div class="svc-logo-image-placeholder" data-bind="click: chooseFile, key2click">
     <svg>
       <use xlink:href="#icon-logo"></use>
@@ -11,8 +11,8 @@
   <!-- /ko -->
   <!-- ko if: survey.locLogo.koRenderedHtml -->
   <div data-bind="css: containerCss, click: chooseFile, key2click">
-  <!-- ko component: { name: 'sv-logo-image', params: survey } -->
-  <!-- /ko -->
+    <!-- ko component: { name: 'sv-logo-image', params: survey } -->
+    <!-- /ko -->
   </div>
   <!-- /ko -->
 </div>

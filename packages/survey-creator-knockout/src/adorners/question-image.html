@@ -1,5 +1,5 @@
 <div class="svc-image-question-controls">
-  <!-- ko if: allowEdit -->
+  <!-- ko if: allowEdit && !isUploading -->
   <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
   <sv-svg-icon class="svc-image-question-controls__button" data-bind="click: chooseFile, key2click"
     params="iconName: 'icon-file', size: 24"></sv-svg-icon>

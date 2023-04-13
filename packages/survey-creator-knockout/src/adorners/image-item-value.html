@@ -17,7 +17,7 @@
     </sv-svg-icon>
 
     <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-      <!-- ko if: allowRemove -->
+      <!-- ko if: allowRemove && !isUploading -->
       <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
         data-bind="click: chooseFile, key2click" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
       <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
@@ -30,15 +30,13 @@
     <div class="svc-image-item-value__item" data-bind="event: { dragover: dragover, drop: drop, dragleave: dragleave }">
       <div class="sd-imagepicker__item sd-imagepicker__item--inline">
         <label class="sd-imagepicker__label">
-          <div
-            data-bind="style: getNewItemStyle()"
-            class="sd-imagepicker__image"></div>
+          <div data-bind="style: getNewItemStyle()" class="sd-imagepicker__image"></div>
         </label>
       </div>
     </div>
 
     <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-      <!-- ko if: allowAdd -->
+      <!-- ko if: allowAdd && !isUploading -->
       <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
         data-bind="click: chooseNewFile, key2click, clickBubble: false" params="iconName: 'icon-add-lg', size: 24">
       </sv-svg-icon>

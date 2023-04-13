@@ -1850,7 +1850,36 @@ test("DefaultValue editor for invisible values", () => {
   expect(valueQuestion.visibleChoices).toHaveLength(3);
   expect(valueQuestion.visibleChoices[1].isEnabled).toBeTruthy();
 });
-
+test("DefaultValue editor & readOnly", () => {
+  PropertyGridEditorCollection.register(new PropertyGridValueEditor());
+  const question = new QuestionDropdownModel("q1");
+  question.choices = [1, 2, 3, 4, 5];
+  question.defaultValue = 2;
+  const defaultValueProp = Serializer.findProperty("question", "defaultValue");
+  defaultValueProp.readOnly = true;
+  var propertyGrid = new PropertyGridModelTester(question);
+  const editQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("defaultValue");
+  const property = <JsonObjectProperty>(<any>editQuestion).property;
+  expect(editQuestion.isReadOnly).toBeTruthy();
+  expect(editQuestion.isClickable).toBeTruthy();
+  question.defaultValue = undefined;
+  expect(editQuestion.isReadOnly).toBeTruthy();
+  expect(editQuestion.isClickable).toBeFalsy();
+  question.defaultValue = 2;
+  const editor = <PropertyGridValueEditor>(
+    PropertyGridEditorCollection.getEditor(property)
+  );
+  const valueEditor = editor.createPropertyEditorSetup(
+    question,
+    property,
+    editQuestion,
+    new EmptySurveyCreatorOptions()
+  );
+  var valueQuestion = valueEditor.editSurvey.getQuestionByName("question");
+  expect(valueQuestion).toBeTruthy();
+  expect(valueQuestion.value).toEqual(2);
+  defaultValueProp.readOnly = false;
+});
 test("DefaultRowValue editor", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");

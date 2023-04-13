@@ -648,21 +648,21 @@ var germanTranslation = {
     topBottom: "oben und unten",
     both: "beides",
     left: "links",
-    // right: "Right",
-    // color: "color",
-    // date: "date",
-    // datetime: "datetime",
+    right: "rechts",
+    color: "Farbe",
+    date: "Datum",
+    datetime: "Datum/Uhrzeit",
     // "datetime-local": "datetime-local",
-    // email: "email",
-    // month: "month",
-    // number: "number",
-    // password: "password",
-    // range: "range",
-    // tel: "tel",
-    // text: "text",
-    // time: "time",
-    // url: "url",
-    // week: "week",
+    email: "E-Mail",
+    month: "Monat",
+    number: "Nummer",
+    password: "Passwort",
+    range: "Bereich",
+    tel: "Telefon",
+    text: "Text",
+    time: "Uhrzeit",
+    url: "URL",
+    week: "Woche",
     hidden: "versteckt",
     on: "an",
     onPage: "an (unabhängig für jede Seite)",
@@ -670,16 +670,16 @@ var germanTranslation = {
     display: "Anzeigen",
     onComplete: "Wenn die Umfrage abgeschlossen wurde",
     onHidden: "Wenn die Umfrage versteckt wurde",
-    // onHiddenContainer: "When the question or its panel/page becomes hidden",
+    onHiddenContainer: "Wenn die Frage oder ihr Panel/Seite ausgeblendet wird",
     clearInvisibleValues: {
-      // none: "Never"
+      none: "Niemals"
     },
     all: "alle",
     page: "Seite",
     survey: "Umfrage",
     onNextPage: "Wenn die Seite gewechselt wurde",
     onValueChanged: "Wenn ein Wert geändert wurde",
-    // onValueChanging: "Before an answer is changed",
+    onValueChanging: "Bevor eine Antwort geändert wird",
     standard: "Standard",
     singlePage: "Alle Fragen auf eine Seite",
     questionPerPage: "Alle Fragen auf eine eigene Seite",
@@ -698,22 +698,22 @@ var germanTranslation = {
     // underRow: "Under the row",
     // underRowSingle: "Under the row, only one panel is visible",
     showNavigationButtons: {
-      // none: "Hidden"
+      none: "Versteckt"
     },
     showProgressBar: {
-      // off: "Hidden"
+      off: "Versteckt"
     },
     showTimerPanel: {
-      // none: "Hidden"
+      none: "Versteckt"
     },
     showTimerPanelMode: {
-      // all: "Both"
+      all: "Beide"
     },
     detailPanelMode: {
-      // none: "Hidden"
+      none: "Versteckt"
     },
     addRowLocation: {
-      // default: "Depends on matrix layout"
+      default: "Hängt vom Matrix Layout ab"
     },
     panelsState: {
       // default: "Users cannot expand or collapse panels",
@@ -875,8 +875,8 @@ var germanTranslation = {
     step: "Schritt",
     dataList: "Datenliste",
     itemSize: "Elementgröße",
-    // elements: "elements",
-    // content: "content",
+    elements: "Elemente",
+    content: "Inhalt",
     navigationButtonsVisibility: "Sichtbarkeit der Navigationsbuttons",
     navigationTitle: "Navigationstitel",
     navigationDescription: "Navigationsbeschreibung",

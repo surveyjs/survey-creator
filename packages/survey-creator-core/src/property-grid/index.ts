@@ -1147,6 +1147,9 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
+    if(question.isReadOnly) {
+      surveyPropertyEditor.editSurvey.mode = "display";
+    }
     if (!settings.showModal) return surveyPropertyEditor;
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
@@ -1169,6 +1172,12 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       "sv-property-editor",
       question.title, options.isMobileView ? "overlay" : "popup"
     );
+    if(question.isReadOnly) {
+      const applyBtn = popupModel.footerToolbar.getActionById("apply");
+      if(!!applyBtn) {
+        applyBtn.visible = false;
+      }
+    }
     popupModel.locale = locale;
     surveyLocalization.currentLocale = prevCurrentLocale;
     this.onModalPropertyEditorShown(editor, property, question, options);

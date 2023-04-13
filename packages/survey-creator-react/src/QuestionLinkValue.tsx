@@ -33,7 +33,7 @@ export class SurveyQuestionLinkValue extends SurveyQuestionElementBase {
           classes={this.question.linkSetButtonCssClasses}
           click={() => this.question.doLinkClick()}
           selected={this.question.isSelected}
-          disabled={this.question.isReadOnly}
+          disabled={!this.question.isClickable}
           text={this.question.linkValueText}
           title={this.question.tooltip}
         ></ActionButton>
