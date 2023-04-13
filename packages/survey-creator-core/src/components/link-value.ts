@@ -6,6 +6,7 @@ require("./link-value.scss");
 export class QuestionLinkValueModel extends Question {
   public linkClickCallback: () => void;
   public resetClickCallback: () => void;
+  public isClickableCallback: () => boolean;
   @property({ defaultValue: "svc-link-value-button svc-question-link__set-button" }) public linkSetButtonCssClasses: string;
   @property({ defaultValue: "svc-question-link__clear-button" }) public linkClearButtonCssClasses: string;
 
@@ -15,6 +16,7 @@ export class QuestionLinkValueModel extends Question {
   @property({ defaultValue: true }) allowClear: boolean;
   @property({ defaultValue: true }) showValueInLink: boolean;
   @property({ defaultValue: false }) showTooltip: boolean;
+  @property({ defaultValue: true }) isClickable: boolean;
   constructor(name: string, json: any = null) {
     super(name);
     const linkValueText = json && !json.showValueInLink && (editorLocalization.getString("pe.set")) + " " + json.title || null;
@@ -27,9 +29,16 @@ export class QuestionLinkValueModel extends Question {
       if (this.allowClear) {
         this.showClear = !Helpers.isValueEmpty(newValue);
       }
+      this.updateIsClickable();
     }
   }
-
+  protected onReadOnlyChanged(): void {
+    this.updateIsClickable();
+    super.onReadOnlyChanged();
+  }
+  private updateIsClickable(): void {
+    this.setPropertyValue("isClickable", !this.isReadOnly || (!!this.isClickableCallback && this.isClickableCallback()));
+  }
   public get ariaRole(): string {
     return "button";
   }
