@@ -19,7 +19,6 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     } else {
       result -= step;
     }
-    parsedValue.value = result;
     this.value = result;
   }
   private get showUnitsInEditor(): boolean {
