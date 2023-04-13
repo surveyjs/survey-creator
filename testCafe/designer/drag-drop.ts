@@ -796,7 +796,7 @@ test("Animation (choices)", async (t) => {
 
   const animationClassesCount = await ClientFunction(() => {
     let result = 0;
-    const itemValueNodes = document.querySelector("[data-name='question1']").querySelectorAll(".svc-item-value-wrapper");
+    const itemValueNodes = (<any>document.querySelector("[data-name='question1']")).querySelectorAll(".svc-item-value-wrapper");
     itemValueNodes.forEach(itemValueNode => {
       if (itemValueNode.classList.contains("svc-item-value--movedown") ||
         itemValueNode.classList.contains("svc-item-value--moveup")) {
@@ -915,6 +915,48 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
 
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
+});
+
+test("Drag Drop MatrixRows (choices placeholder)", async (t) => {
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "radiogroup",
+            name: "question1",
+            choices: ["Item 1", "Item 2", "Item 3"]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[data-name=\"question1\"]");
+  await t.click(Question1, { speed: 0.5 });
+
+  const ChoicesTab = Selector("h4").withExactText("Choices");
+  await t.click(ChoicesTab);
+
+  const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
+  const Item2 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1);
+  const Item3 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(2);
+  let DragZoneItem1 = Item1.find(".spg-drag-element__svg");
+  await t
+    .hover(Item1).hover(Item2).hover(Item3).hover(DragZoneItem1)
+    .dragToElement(DragZoneItem1, Item2, {
+      offsetX: 5,
+      offsetY: 5,
+      speed: 0.5
+    });
+
+  const expectedPlaceholderValue = "Item 1";
+  const placeholderInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(1).find("input").nth(1);
+  const placeholder = await placeholderInput().getAttribute("placeholder");
+
+  await t.expect(expectedPlaceholderValue).eql(<string>placeholder);
 });
 
 test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
