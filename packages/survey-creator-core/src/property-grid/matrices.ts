@@ -12,6 +12,15 @@ import {
 } from "./index";
 import { updateMatrixRemoveAction } from "../utils/actions";
 
+Serializer.addProperty("itemvalue",
+  {
+    name: "icon", isSerializable: false, readOnly: true, visibleIndex: 0, visibleIf: (obj: ItemValue): boolean => {
+      return obj &&
+          obj.ownerPropertyName === "rateValues" &&
+          obj.locOwner instanceof QuestionRatingModel &&
+          obj.locOwner.rateType == "smileys";
+    },
+  });
 export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   static getNewColumnName(
     objs: Array<any>,
@@ -363,6 +372,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   ): number {
     return -1;
   }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames;
+  }
   protected getColumnsJSON(
     obj: Base,
     prop: JsonObjectProperty,
@@ -375,7 +387,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var res = new PropertyJSONGenerator(obj, options).createColumnsJSON(
       className,
-      propNames
+      this.filterPropertyNames(propNames)
     );
     for (var i = 0; i < res.length; i++) {
       if (res[i].cellType == "comment") {
@@ -424,8 +436,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
 export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return (
-      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue")
+      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name != "rateValues"
     );
+  }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames.filter(p => p != "icon");
   }
   public isPropertyEditorSetupEnabled(
     obj: Base,
@@ -549,6 +564,17 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       //options.cellQuestion.html = "<svg style='fill: red'><use xlink:href=\"#" + options.cellQuestion.value + "\"></use></svg>";
       options.cellQuestion.html = options.cellQuestion.value;
     }
+  }
+}
+
+export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrixItemValues {
+  public fit(prop: JsonObjectProperty): boolean {
+    return (
+      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name == "rateValues"
+    );
+  }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames;
   }
 }
 
@@ -811,6 +837,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixRateValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(
