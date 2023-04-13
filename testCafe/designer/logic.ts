@@ -392,12 +392,11 @@ test("Modified rules without saving", async (t) => {
     .click(getTabbedMenuItemByText(creatorTabLogicName))
     .expect(cellRules.nth(0).innerText).eql(rule1Condition)
     .expect(tableRulesSelector.nth(0).classNames).notContains(additinalClass)
-
     .hover(tableRulesSelector.nth(0))
     .click(logicDetailButtonElement.nth(0))
     .click(logicQuestionSelector)
     .click(getListItemByText("q3"))
-    .typeText(logicQuestionValueSelector, "45", { replace: true })
+    .typeText(logicQuestionValueSelector, "45", { replace: true, paste: true })
     .click(logicActionSelector)
     .click(getListItemByText("Complete survey"));
   await check1Rule(t, rule1Condition);
@@ -601,4 +600,32 @@ test("Could not change 'and' on 'or' in logic tab or in condition editor", async
     .expect(visibleListItems.count).eql(2)
     .expect(visibleListItems.nth(0).textContent).contains("and")
     .expect(visibleListItems.nth(1).textContent).contains("or");
+});
+test("Confirm dialog on leaving tab with an incorrect rule", async (t) => {
+  const popupButtonSelector = Selector(".sv-popup__button");
+  const cancelButton = popupButtonSelector.withText("I want to complete the rules");
+  const applyButton = popupButtonSelector.withText("Yes");
+
+  await setJSON(json2);
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicAddNewRuleButton)
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .expect(Selector(".sv-string-viewer").withText("General").exists).ok()
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicAddNewRuleButton)
+    .click(logicActionSelector)
+    .click(getListItemByText("Complete survey"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .click(applyButton)
+    .expect(Selector(".sv-string-viewer").withText("General").exists).ok()
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+    .click(logicAddNewRuleButton)
+    .click(logicActionSelector)
+    .click(getListItemByText("Complete survey"))
+    .click(getTabbedMenuItemByText(creatorTabDesignerName))
+    .click(cancelButton)
+    .expect(Selector(".sv-string-viewer").withText("General").exists).notOk()
+    .expect(logicActionSelector.exists).ok();
 });

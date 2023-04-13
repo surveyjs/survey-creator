@@ -1077,7 +1077,7 @@ export class PropertyGridModel {
     return (<any>row).allowEditRow;
   }
   private calculateMatrixAllowOperations(question: Question, row: MatrixDynamicRowModel) {
-    const rowOptions: ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true };
+    const rowOptions: ICollectionItemAllowOperations = { allowDelete: this.onMatrixAllowRemoveRow(question, row), allowEdit: true, allowAdd: undefined };
     this.options.onCollectionItemAllowingCallback(<any>this.obj,
       (<any>question).property,
       question.value,
@@ -1280,6 +1280,7 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorString {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
       const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
       const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
+      if(!imageHeightProperty && !imageWidthProperty) return false;
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
     question.valueFromDataCallback = function (value: any): any {

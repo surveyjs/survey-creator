@@ -57,12 +57,27 @@ export class TabLogicPlugin implements ICreatorPlugin {
     if (!this.model) return;
     this.model.update(this.creator.survey);
   }
-  public deactivate(): boolean {
-    if (!!this.model && this.model.haveUnsavedRules()) {
-      this.creator.notify(editorLocalization.getString("ed.lg.expressionInvalid"), "error");
-      return false;
+  public canDeactivateAsync(onSuccess: () => void): void {
+    if (!!this.model) {
+      this.model.tryLeaveUI((res) => {
+        if(!res) {
+          this.creator.notify(editorLocalization.getString("ed.lg.expressionInvalid"), "error");
+        } else {
+          onSuccess();
+        }
+      });
+      return;
     }
-
+    onSuccess();
+  }
+  public deactivate(): boolean {
+    this.disposeObjs();
+    return true;
+  }
+  public dispose(): void {
+    this.disposeObjs();
+  }
+  private disposeObjs(): void {
     this.filterActionTypeAction.title = undefined;
     this.filterQuestionAction.title = undefined;
     if (this.model) {
@@ -73,8 +88,6 @@ export class TabLogicPlugin implements ICreatorPlugin {
     this.filterQuestionAction.visible = false;
     this.filterActionTypeAction.visible = false;
     this.fastEntryAction && (this.fastEntryAction.visible = false);
-
-    return true;
   }
   public createActions() {
     const items: Array<Action> = [];

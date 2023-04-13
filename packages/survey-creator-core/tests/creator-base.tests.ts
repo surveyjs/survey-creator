@@ -1588,7 +1588,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     questions: [{
       "type": "mypanel",
       "name": "question1"
-    },]
+    }]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
   const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;

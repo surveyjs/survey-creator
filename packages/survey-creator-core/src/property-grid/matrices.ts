@@ -776,7 +776,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   }
   protected getAllowRowDragDrop(prop: JsonObjectProperty): boolean { return true; }
   protected getChoices(obj: Base): Array<any> {
-    return this.getAvailableTriggers().map((tr) => { return { value: tr.name, text: editorLocalization.getTriggerName(tr.name) } });
+    return this.getAvailableTriggers().map((tr) => { return { value: tr.name, text: editorLocalization.getTriggerName(tr.name) }; });
   }
 }
 

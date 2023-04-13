@@ -27,4 +27,8 @@
     min-width: auto;
     justify-content: flex-start;
   }
+  .sd-rating__item--fixed-size:focus-within {
+    width: unset;
+    padding: calcSize(0.5) calcSize(2.5);
+  }
 }

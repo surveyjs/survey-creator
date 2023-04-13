@@ -52,11 +52,13 @@ svc-question {
     padding-left: calcSize(5);
     margin-left: calcSize(-5);
   }
-    .sd-table .sd-selectbase:not(.sd-imagepicker) {
-      overflow-x: visible;
-      padding-left: 0;
-      margin-left: 0;
-    }
+
+  .sd-table .sd-selectbase:not(.sd-imagepicker) {
+    overflow-x: visible;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
   .sd-multipletext__item-title {
     color: $foreground;
   }
@@ -66,7 +68,8 @@ svc-question {
   }
 
   .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
-    color: $foreground-disabled-for-editors;
+    color: $foreground;
+    opacity: 0.25;
   }
 }
 
@@ -94,6 +97,7 @@ svc-question {
       max-width: 100%;
       flex-direction: row-reverse;
     }
+
     .sv-action-bar-item__title {
       @include textEllipsis;
 
@@ -118,6 +122,7 @@ svc-question {
   &.svc-question__content--selected {
     box-shadow: 0 0 0 2px $secondary;
   }
+
   &>.svc-question__content-actions {
     display: block;
   }
@@ -136,6 +141,7 @@ svc-question {
     }
   }
 }
+
 .svc-question__content {
   .sd-question.sd-question--table {
     margin-top: calcSize(-1);
@@ -310,13 +316,14 @@ svc-question,
 .sd-panel,
 .sd-row--multiple {
   :not(.svc-hovered) {
-      &>.svc-question__content {
-        &:not(.svc-question__content--selected) {
-          border: 1px dashed $border;
-          box-shadow: none;
-        }
+    &>.svc-question__content {
+      &:not(.svc-question__content--selected) {
+        border: 1px dashed $border;
+        box-shadow: none;
       }
     }
+  }
+
   .svc-question__content {
     &.svc-question__content--selected {
       border: 1px solid transparent;
@@ -328,9 +335,7 @@ svc-question,
       box-shadow: none;
     }
 
-    &:not(.svc-question__content--selected):not(:hover) {
-
-    }
+    &:not(.svc-question__content--selected):not(:hover) {}
 
     border-radius: 0;
   }
@@ -452,14 +457,5 @@ svc-question,
   .svc-row .sd-row {
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  .svc-row.svc-row--ghost {
-    margin-top: calcSize(1);
-    margin-bottom: calcSize(1.5);
-
-    .sv-drag-drop-ghost {
-      top: 0;
-    }
   }
 }

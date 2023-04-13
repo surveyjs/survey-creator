@@ -250,7 +250,70 @@ test("Check triggers question", async (t) => {
       .click(Selector("h4[aria-label=General]"))
       .click(Selector("h4[aria-label=Logic]"))
       .click(Selector("div[data-name='triggers'] .spg-action-button__icon[aria-label='Add New']"));
-
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
+    await ClientFunction(() => (<any>document).querySelector("[aria-label='triggerType'] input").focus())();
+    await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
+  });
+});
+
+test("Check color editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontColor",
+        default: "#19B394",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontColor";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "color" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontColor']");
+    await takeElementScreenshot("color-editor.png", questionSelector, t, comparer);
+    await t.hover(questionSelector.find(".spg-input__edit-button"));
+    await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find(".spg-color-editor__input"));
+    await takeElementScreenshot("color-editor-focus.png", questionSelector, t, comparer);
+  });
+});
+
+test("Check spinedit editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontSize",
+        default: 16,
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontSize";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "spinedit", unit: "px" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontSize']");
+    await takeElementScreenshot("spin-editor.png", questionSelector, t, comparer);
+    await t.hover(questionSelector.find(".spg-input__edit-button"));
+    await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find(".spg-spin-editor__input"));
+    await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
   });
 });

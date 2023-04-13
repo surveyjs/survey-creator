@@ -54,7 +54,7 @@ export class ItemValueWrapperViewModel extends Base {
     );
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragItemValue);
 
-    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined };
+    this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined };
     this.collectionProperty = Serializer.findProperty(question.getType(), this.collectionPropertyName);
     this.creator.onCollectionItemAllowingCallback(question,
       this.collectionProperty,
@@ -64,6 +64,9 @@ export class ItemValueWrapperViewModel extends Base {
     );
     if (this.allowItemOperations.allowDelete === undefined) {
       this.allowItemOperations.allowDelete = true;
+    }
+    if (this.allowItemOperations.allowAdd === undefined) {
+      this.allowItemOperations.allowAdd = true;
     }
 
     if (!this.creator.isCanModifyProperty(question, "choices")) {
@@ -222,7 +225,7 @@ export class ItemValueWrapperViewModel extends Base {
   }
   get allowAdd() {
     const isNew = !this.question.isItemInList(this.item);
-    return !this.creator.readOnly && this.canTouchItems && isNew;
+    return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowAdd) && isNew;
   }
   public select(model: ItemValueWrapperViewModel, event: Event) {
     model.creator.selectElement(model.question, "choices", false);

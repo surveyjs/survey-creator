@@ -29,9 +29,11 @@ export class PageNavigatorComponent extends CreatorModelComponent<PageNavigatorV
       const el = this.container.nativeElement;
       if (!!el && !!el.parentElement?.parentElement?.parentElement) {
         const self = this;
-        el.parentElement.parentElement.parentElement.onscroll = function (this: GlobalEventHandlers, ev: Event) {
+        const scrollableViewPort = el.parentElement.parentElement.parentElement;
+        scrollableViewPort.onscroll = function (this: GlobalEventHandlers, ev: Event) {
           return self.model.onContainerScroll(ev.currentTarget as HTMLDivElement);
         };
+        self.model.setScrollableContainer(scrollableViewPort);
         self.model.setItemsContainer(el.parentElement);
       }
     }

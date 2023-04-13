@@ -248,7 +248,7 @@ test("unsaved rule", async (t) => {
     await takeElementScreenshot("logic-error-condition-question-value.png", ruleContent, t, comparer);
 
     await t
-      .typeText(Selector(".sd-input.sd-input--error"), "test")
+      .typeText(Selector(".sd-input.sd-input--error"), "test", { paste: true })
       .click(doneButtonSelector);
 
     await takeElementScreenshot("logic-error-action-empty.png", ruleContent, t, comparer);

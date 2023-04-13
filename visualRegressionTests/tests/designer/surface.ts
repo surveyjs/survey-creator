@@ -725,6 +725,29 @@ test("Check question scroll", async (t) => {
     await takeElementScreenshot("question-checkboxes-scroll.png", root, t, comparer);
   });
 });
+test("Check required question", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "elements": [
+        {
+          type: "text",
+          name: "q1",
+          title: "Question Title",
+          isRequired: true
+        }
+      ]
+    });
+    const root = Selector(".svc-question__content");
+    const stringEditor = Selector(".svc-question__content .svc-string-editor");
+    await takeElementScreenshot("question-required.png", root, t, comparer);
+    await t.hover(stringEditor);
+    await takeElementScreenshot("question-required-hover.png", root, t, comparer);
+    await t.click(stringEditor);
+    await takeElementScreenshot("question-required-focus.png", root, t, comparer);
+  });
+});
 
 test("Character counter in property grid", async t => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -803,5 +826,30 @@ test("Character counter on surface", async t => {
       .click(stringEditorSelector.nth(4))
       .click(stringEditorSelector.nth(4));
     await takeElementScreenshot("surface-question-title-maxLength.png", stringEditorSelector.nth(4), t, comparer);
+  });
+});
+test("Check string editor on isRequired", async (t) => {
+  const msg = "Please enter a value";
+  await ClientFunction((json, msg) => {
+    window["Survey"].Serializer.findProperty("survey", "title").isRequired = true;
+    window["creator"].JSON = json;
+  })({
+    title: "title",
+    questions: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  }, msg);
+
+  const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .click(svStringSelector)
+      .pressKey("delete")
+      .pressKey("enter")
+      .expect((svStringSelector).hasClass("svc-string-editor--error")).ok();
+    await takeElementScreenshot("surface-string-editor-error.png", Selector(".svc-designer-header .sd-title"), t, comparer);
   });
 });

@@ -1,4 +1,4 @@
-import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter } from "survey-core";
+import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
@@ -7,7 +7,7 @@ import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
 
 export abstract class StringItemsNavigatorBase {
-  constructor(protected question: any) { };
+  constructor(protected question: any) { }
   protected abstract getItemLocString(items: any, item: any): LocalizableString;
   protected abstract getItemSets(): Array<any>;
   protected abstract addNewItem(items: any, text?: string): void;
@@ -25,7 +25,7 @@ export abstract class StringItemsNavigatorBase {
   protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new ItemValue(text))).concat(items.slice(startIndex + 1));
     this.question[this.getItemsPropertyName(items)] = newItems;
-  };
+  }
   private setEventsForItem(items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
     connector.onEditComplete.clear();
@@ -55,7 +55,7 @@ export abstract class StringItemsNavigatorBase {
         }
         items.splice(itemIndex, 1);
       }
-    })
+    });
 
     connector.onTextChanging.clear();
     connector.onTextChanging.add((sender, options) => {
@@ -68,7 +68,7 @@ export abstract class StringItemsNavigatorBase {
       if (focusedItemIndex >= items.length) focusedItemIndex = items.length - 1;
       StringEditorConnector.get(this.getItemLocString(items, items[focusedItemIndex])).setAutoFocus();
       StringEditorConnector.get(this.getItemLocString(items, items[focusedItemIndex])).activateEditor();
-    })
+    });
   }
 
   public static setQuestion(questionAdorner: QuestionAdornerViewModel): boolean {
@@ -87,16 +87,16 @@ export abstract class StringItemsNavigatorBase {
       allItemSets.forEach((activeChoices) => {
         activeChoices.forEach(item => {
           navigator.setEventsForItem(activeChoices, item);
-        })
+        });
         const itemsPropertyName = navigator.getItemsPropertyName(activeChoices);
         question.onPropertyChanged.add((sender: any, options: any) => {
           if (options.name == itemsPropertyName) {
             activeChoices.forEach(item => {
               navigator.setEventsForItem(activeChoices, item);
-            })
+            });
           }
         });
-      })
+      });
     }
     return !!navigator;
   }
@@ -133,7 +133,7 @@ class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
   protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MultipleTextItemModel(text))).concat(items.slice(startIndex + 1));
     this.question[this.getItemsPropertyName(items)] = newItems;
-  };
+  }
 }
 class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected getItemLocString(items: any, item: any) {
@@ -164,7 +164,7 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     else {
       super.addNewItems(items, startIndex, itemsToAdd);
     }
-  };
+  }
 }
 class StringItemsNavigatorMatrixDynamic extends StringItemsNavigatorMatrixDropdown {
   protected getItemSets() {
@@ -351,7 +351,6 @@ export class StringEditorViewModelBase extends Base {
     this.creator.onValueChangingCallback(changingOptions);
     clearedText = changingOptions.newValue;
 
-
     this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
     if (!this.errorText && !clearedText) {
       const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
@@ -374,8 +373,11 @@ export class StringEditorViewModelBase extends Base {
         }
       }
       else {
+        this.creator.notify(this.errorText, "error");
         this.focusedProgram = true;
+        event.target.innerText = clearedText;
         event.target.focus();
+        return;
       }
     } else {
       if (this.locString.hasHtml) {
@@ -477,8 +479,11 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public className(text: any): string {
-    return "svc-string-editor" +
-      (text == "" && this.placeholder == "" ? " svc-string-editor--hidden" : "") +
-      (this.contentEditable ? "" : " svc-string-editor--readonly");
+    return new CssClassBuilder()
+      .append("svc-string-editor")
+      .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
+      .append("svc-string-editor--readonly", !this.contentEditable)
+      .append("svc-string-editor--error", !!this.errorText)
+      .toString();
   }
 }

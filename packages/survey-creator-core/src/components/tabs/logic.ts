@@ -186,7 +186,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.removeQuestionCore(name, this.invisibleItems);
   }
   public hasError(): boolean {
-    if (!this.editableItem) return true;
+    if (!this.editableItem) return false;
     if (this.hasErrorInUI()) return true;
     var exp = new ExpressionRunner(this.getExpressionText());
     var options = {

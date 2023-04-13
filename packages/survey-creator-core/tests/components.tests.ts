@@ -5,6 +5,7 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
+import { LogoImageViewModel } from "../src/components/header/logo-image";
 
 beforeEach(() => { });
 
@@ -118,7 +119,7 @@ test("item hasNone, hasOther, hasSelectAll change trigger updateIsNew and behave
   expect(noneItemAdorner.allowRemove).toBeTruthy();
 });
 
-test("item value allowAdd isDraggable allowRemove on events", () => {
+test("item value allowRemove on events", () => {
   const creator = new CreatorTester();
 
   creator.onCollectionItemAllowOperations.add(function (sender, options) {
@@ -148,6 +149,59 @@ test("item value allowAdd isDraggable allowRemove on events", () => {
 
   expect(firstItemAdorner.allowRemove).toBeFalsy();
   expect(secondItemAdorner.allowRemove).toBeTruthy();
+});
+
+test("item value allowAdd on events", () => {
+  const creator = new CreatorTester();
+
+  creator.onCollectionItemAllowOperations.add(function (sender, options) {
+    const q = <QuestionCheckboxModel>options.obj;
+    if (q && q.selectAllItem == options.item) {
+      options.allowAdd = true;
+    }
+    if (q && q.noneItem == options.item) {
+      options.allowAdd = true;
+    }
+    if (q && q.otherItem == options.item) {
+      options.allowAdd = false;
+    }
+    if (q && q.newItem == options.item) {
+      options.allowAdd = false;
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const allChoices = question.visibleChoices;
+  expect(allChoices.length).toEqual(7);
+
+  const selectAllAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.selectAllItem
+  );
+  const noneAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.noneItem
+  );
+  const otherAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.otherItem
+  );
+  const newAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.newItem
+  );
+
+  expect(selectAllAdorner.allowAdd).toBeTruthy();
+  expect(noneAdorner.allowAdd).toBeTruthy();
+  expect(otherAdorner.allowAdd).toBeFalsy();
+  expect(newAdorner.allowAdd).toBeFalsy();
 });
 
 test("item value no pointer down on new or editable", (): any => {
@@ -443,4 +497,66 @@ test("remove() and ", () => {
   allowRemove = true;
   newItemAdorner.remove(newItemAdorner);
   expect(question.choices).toHaveLength(2);
+});
+
+test("ImageItemValueWrapperViewModel isUploading", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const imageItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.choices[0], undefined, {} as HTMLElement);
+  let uploadCount = 0;
+  creator.onUploadFile.add((s, o) => {
+    expect(imageItemAdorner.isUploading).toBeTruthy();
+    uploadCount++;
+    o.callback({}, "success");
+  });
+  expect(imageItemAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(0);
+  imageItemAdorner.uploadFiles([{}]);
+  expect(imageItemAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(1);
+});
+
+test("QuestionImageAdornerViewModel isUploading", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  let uploadCount = 0;
+  creator.onOpenFileChooser.add((s, o) => {
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    expect(imageAdorner.isUploading).toBeTruthy();
+    uploadCount++;
+    o.callback({}, "success");
+  });
+  expect(imageAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(0);
+  imageAdorner.chooseFile(imageAdorner);
+  expect(imageAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(1);
+});
+
+test("LogoImageViewModel isUploading", () => {
+  const creator = new CreatorTester();
+  const logoImageAdorner = new LogoImageViewModel(creator, { getElementsByClassName: () => [{ files: [{}] }] } as any);
+  let uploadCount = 0;
+  creator.onOpenFileChooser.add((s, o) => {
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    expect(logoImageAdorner.isUploading).toBeTruthy();
+    uploadCount++;
+    o.callback({}, "success");
+  });
+  expect(logoImageAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(0);
+  logoImageAdorner.chooseFile(logoImageAdorner);
+  expect(logoImageAdorner.isUploading).toBeFalsy();
+  expect(uploadCount).toBe(1);
 });

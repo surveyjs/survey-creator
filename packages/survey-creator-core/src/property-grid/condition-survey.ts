@@ -477,6 +477,12 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     return true;
   }
   public errorText: string;
+  public isEmpty(): boolean {
+    if(this.panel.panels.length === 0) return true;
+    if(this.panel.panels.length > 1) return false;
+    const item = this.createEditorItemFromPanel(this.panel.panels[0]);
+    return !item.questionName;
+  }
   public hasErrorInUI(): boolean {
     const creator = (<any>this.survey).creator;
     if (!this.isReady) {
@@ -908,7 +914,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
     // options.cssClasses.mainRoot += "sd-question sd-row__question";
-    if (options.question.name === "questionValue") {
+    if (options.question.name === "questionValue" || options.question.isContentElement) {
       assignDefaultV2Classes(options.cssClasses, options.question.getType());
       options.cssClasses.mainRoot += " svc-logic-question-value";
       options.cssClasses.error.root = "svc-logic-operator__error";

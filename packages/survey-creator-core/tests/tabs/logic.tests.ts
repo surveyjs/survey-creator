@@ -29,6 +29,7 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
+import exp from "constants";
 
 export * from "../../src/components/link-value";
 
@@ -2803,11 +2804,12 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   const logic = logicPlugin.model;
 
   expect(logic.items).toHaveLength(0);
-  expect(logic.haveUnsavedRules()).toBeFalsy();
+  expect(logic.tryLeaveUI()).toBeTruthy();
 
   logic.addNewUI();
+  logic.expressionEditor.text = "{q1} = 1";
   expect(logic.items).toHaveLength(1);
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
 
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("logic");
@@ -2815,16 +2817,19 @@ test("LogicPlugin: Prevent users from leaving the Logic tab when a Logic Rule wa
   logic.expressionEditor.text = "{q1} = 4";
   let panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "question_enable";
-  panel.getQuestionByName("elementSelector").value = "q4";
 
-  expect(logic.haveUnsavedRules()).toBeTruthy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
 
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("logic");
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("elementSelector").value = "q4";
 
-  logic.saveEditableItem();
   creator.makeNewViewActive("test");
   expect(creator.activeTab).toBe("test");
+
+  const q4 = creator.survey.getQuestionByName("q4");
+  expect(q4.enableIf).toBe("{q1} = 4");
 });
 test("Creator is readonly", () => {
   const creator = new CreatorTester({ showTitlesInExpressions: true });
@@ -2890,4 +2895,95 @@ test("Include calculatedValues without expressions", () => {
   expect(list[2].value).toEqual("q3");
   expect(list[3].value).toEqual("var1");
   expect(list[4].value).toEqual("var2");
+});
+test("New items and tryLeaveUI", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", },
+      { type: "text", name: "q2", }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  logic.expressionEditor.text = "{q1} = 2";
+  expect(logic.tryLeaveUI()).toBeFalsy();
+  logic.expressionEditor.text = "";
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  let panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect(logic.tryLeaveUI()).toBeFalsy();
+  logic.itemEditor.panel.addPanel();
+  logic.itemEditor.panel.removePanel(0);
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  logic.expressionEditor.text = "{q1} = 2";
+  logic.mode = "view";
+  expect(logic.editableItem).toBeFalsy();
+  expect(logic.tryLeaveUI()).toBeFalsy();
+  expect(logic.mode).toEqual("new");
+  expect(logic.editableItem).toBeTruthy();
+  expect(logic.matrixItems.visibleRows[0].isDetailPanelShowing).toBeTruthy();
+  panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "trigger_complete";
+  logic.mode = "view";
+  expect(logic.tryLeaveUI()).toBeTruthy();
+});
+test("Show errors on tryLeaveUI", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").clearValue();
+  logic.mode = "view";
+  logic.editItem(logic.items[1]);
+
+  expect(logic.tryLeaveUI()).toBeFalsy();
+  expect(logic.mode).toEqual("edit");
+  expect(logic.editableItem).toBe(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q5";
+
+  expect(logic.tryLeaveUI()).toBeTruthy();
+  expect(survey.getQuestionByName("q2").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 1");
+});
+test("Choose leave on error", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", visibleIf: "{q1}=1" },
+      { type: "text", name: "q3", visibleIf: "{q1}=1" },
+      { type: "text", name: "q4", visibleIf: "{q1}=2" },
+      { type: "text", name: "q5" }
+    ]
+  });
+  class SurveyLogicUITester extends SurveyLogicUI {
+    protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
+      onLeaving();
+      return true;
+    }
+  }
+  const logic = new SurveyLogicUITester(survey);
+  expect(logic.items).toHaveLength(2);
+  logic.editItem(logic.items[0]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").clearValue();
+  logic.mode = "view";
+  logic.editItem(logic.items[1]);
+  logic.itemEditor.panels[0].getQuestionByName("elementSelector").value = "q5";
+  let canLeave = false;
+  const resFunc = (res: boolean) => {
+    canLeave = res;
+  };
+  expect(logic.tryLeaveUI(resFunc)).toBe(undefined);
+  expect(canLeave).toBeTruthy();
+  expect(survey.getQuestionByName("q2").visibleIf).toBe("{q1}=1");
+  expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy();
+  expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 2");
 });

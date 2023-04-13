@@ -52,7 +52,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
   renderElementPlaceholder(): JSX.Element {
     return (
       <div className="svc-image-question-controls">
-        {this.model.allowEdit ? attachKey2click(<span
+        {this.model.allowEdit && !(this.model as QuestionImageAdornerViewModel).isUploading ? attachKey2click(<span
           className="svc-image-question-controls__button svc-image-question-controls__choose-file"
           onClick={() => this.imageModel.chooseFile(this.imageModel)}
         >

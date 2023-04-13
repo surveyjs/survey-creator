@@ -74,6 +74,7 @@ export interface ICreatorPlugin {
   activate: () => void;
   update?: () => void;
   deactivate?: () => boolean;
+  canDeactivateAsync?: (onSuccess: () => void) => void;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -562,6 +563,7 @@ export class CreatorBase extends Base
    *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
    *- options.item a target collection item
    *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
+   *- options.allowAdd a boolean value. It is `true` by default. Set it false to prevent an item from being added to the collection
    *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
@@ -1176,6 +1178,16 @@ export class CreatorBase extends Base
    */
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
+    const plugin: ICreatorPlugin = this.currentPlugin;
+    if(!!plugin && !!plugin.canDeactivateAsync) {
+      plugin.canDeactivateAsync(() => {
+        this.switchViewType(viewName);
+      });
+      return undefined;
+    }
+    return this.switchViewType(viewName);
+  }
+  private switchViewType(viewName: string): boolean {
     const chaningOptions = { tabName: viewName, allow: true };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
@@ -1540,7 +1552,7 @@ export class CreatorBase extends Base
       if (allowQuestionOperations.allowEdit === false)
         return false;
 
-      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit };
+      const options: ICollectionItemAllowOperations = { allowDelete: true, allowEdit: allowEdit, allowAdd: true };
       this.onCollectionItemAllowingCallback(parentObj,
         property,
         parentObj.getPropertyValue(parentProperty?.name),
@@ -1666,8 +1678,37 @@ export class CreatorBase extends Base
     this.initDragDropSurveyElements();
     this.initDragDropChoices();
   }
+  /**
+   * An event that is raised when users start to drag a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element being dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` is being dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` is being dragged.
+   * @see onDragEnd
+   */
   public onDragStart: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   public onBeforeDrop: Survey.Event<() => any, any, any> = this.onDragStart;
+  /**
+   * An event that is raised when users finish dragging a survey element within the design surface.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.draggedElement`: `any`\
+   * A survey element that was dragged.
+   * - `options.fromElement`: `any`\
+   * A survey element from which `draggedElement` was dragged.
+   * - `options.toElement`: `any`\
+   * A survey element to which `draggedElement` was dragged.
+   */
   public onDragEnd: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
   public onAfterDrop: Survey.Event<() => any, any, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
@@ -2834,11 +2875,13 @@ export class CreatorBase extends Base
       collection: collection,
       item: item,
       allowEdit: itemOptions.allowEdit,
-      allowDelete: itemOptions.allowDelete
+      allowDelete: itemOptions.allowDelete,
+      allowAdd: itemOptions.allowAdd
     };
     this.onCollectionItemAllowOperations.fire(this, options);
     itemOptions.allowEdit = options.allowEdit;
     itemOptions.allowDelete = options.allowDelete;
+    itemOptions.allowAdd = options.allowAdd;
   }
   onItemValueAddedCallback(
     obj: Base,
