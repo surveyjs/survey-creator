@@ -23,7 +23,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "skipLibCheck": true,
-    "outFile": "build/survey-creator-knockout.d.ts",
+    "outDir": "build/typings/",
   },
   "include": [
     "./src/entries/index.ts",
