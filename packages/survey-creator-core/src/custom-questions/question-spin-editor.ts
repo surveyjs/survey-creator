@@ -11,12 +11,15 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
   }
   private changeValue(increase: boolean) {
     const parsedValue = this.parseValue(this.renderedValue);
+    const step = Number(this.renderedStep || 1);
+
+    let result = parsedValue.value;
     if (increase) {
-      parsedValue.value++;
+      result += step;
     } else {
-      parsedValue.value--;
+      result -= step;
     }
-    this.value = parsedValue.value;
+    this.value = result;
   }
   private get showUnitsInEditor(): boolean {
     return !!this.unit && this._showUnitsInEditor;
