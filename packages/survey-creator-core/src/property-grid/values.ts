@@ -9,6 +9,7 @@ import {
 } from "./values-survey";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { SurveyHelper } from "../survey-helper";
+import { QuestionLinkValueModel } from "../components/link-value";
 
 export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
   public getJSON(
@@ -23,11 +24,15 @@ export abstract class PropertyGridValueEditorBase extends PropertyGridEditor {
     };
   }
   public onCreated = (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => {
-    (<any>question).linkClickCallback = () => {
-      this.showModalPropertyEditor(this, prop, question, options, () => (<any>question).isSelected = false);
-      (<any>question).isSelected = true;
+    const linkQuestion = <QuestionLinkValueModel>question;
+    linkQuestion.isClickableCallback = () => {
+      return !linkQuestion.isReadOnly || !this.isValueEmpty(linkQuestion.value);
     };
-    (<any>question).clearClickCallback = () => {
+    linkQuestion.linkClickCallback = () => {
+      this.showModalPropertyEditor(this, prop, question, options, () => linkQuestion.isSelected = false);
+      linkQuestion.isSelected = true;
+    };
+    linkQuestion.clearClickCallback = () => {
       this.clearPropertyValue(
         (<any>question).obj,
         prop,

@@ -1,9 +1,10 @@
 <ng-template #template>
-  <svc-action-button [text]="model.linkValueText" [click]="model.doLinkClick.bind(model)" [selected]="model.isSelected"  [disabled]="model.isReadOnly" [classes]="model.linkSetButtonCssClasses" [title]="model.tooltip">
+  <svc-action-button [text]="model.linkValueText" [click]="model.doLinkClick.bind(model)" [selected]="model.isSelected"
+    [disabled]="!model.isClickable" [classes]="model.linkSetButtonCssClasses" [title]="model.tooltip">
   </svc-action-button>
   <ng-container *ngIf="!model.isReadOnly && model.showClear">
-    <svc-action-button
-      [text]="clearCaption" [click]="model.doClearClick.bind(model)" [selected]="model.isSelected" [disabled]="false" [classes]="model.linkClearButtonCssClasses">
+    <svc-action-button [text]="clearCaption" [click]="model.doClearClick.bind(model)" [selected]="model.isSelected"
+      [disabled]="false" [classes]="model.linkClearButtonCssClasses">
     </svc-action-button>
   </ng-container>
 </ng-template>
