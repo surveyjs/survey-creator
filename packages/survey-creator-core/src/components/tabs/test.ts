@@ -346,7 +346,9 @@ export class TestSurveyTabViewModel extends Base {
     setSurveyJSONForPropertyGrid(json, true, false);
     var themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
     themeEditorSurvey.getCss().list = {};
-    themeEditorSurvey.css = propertyGridCss;
+    const themeBuilderCss = { ...propertyGridCss };
+    themeBuilderCss.root += " spg-theme-builder-root";
+    themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
@@ -417,15 +419,13 @@ export class TestSurveyTabViewModel extends Base {
             type: "panel",
             elements: [
               {
-                type: "text",
-                inputType: "color",
+                type: "color",
                 name: "--primary",
                 title: "Accent Color",
                 defaultValue: "#19b394"
               },
               {
-                type: "text",
-                inputType: "color",
+                type: "color",
                 name: "--background-dim",
                 title: "Background Color",
                 defaultValue: "#f3f3f3"
@@ -436,31 +436,31 @@ export class TestSurveyTabViewModel extends Base {
                 title: "Background image"
               },
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "background-opacity",
                 titleLocation: "left",
                 title: "Opacity",
+                unit: "%",
                 defaultValue: 100,
                 min: 0,
                 max: 100,
                 step: 5
               },
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "panelBackgroundTransparency",
                 title: "Panel Background Transparency",
+                unit: "%",
                 defaultValue: 100,
                 min: 0,
                 max: 100,
                 step: 5
               },
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "questionBackgroundTransparency",
                 title: "Question Background Transparency",
+                unit: "%",
                 defaultValue: 100,
                 min: 0,
                 max: 100,
@@ -478,22 +478,26 @@ export class TestSurveyTabViewModel extends Base {
                 allowClear: false
               },
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "--font-size",
                 title: "Font Size",
+                unit: "%",
                 defaultValue: 100,
-                min: 0
+                min: 0,
+                step: 5
               },
             ]
           }, {
             type: "panel",
             elements: [
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "--scale",
-                title: "Scale", defaultValue: 100, min: 0, step: 5
+                title: "Scale",
+                unit: "%",
+                defaultValue: 100,
+                min: 0,
+                step: 5
               },
               {
                 type: "expression",
@@ -502,10 +506,10 @@ export class TestSurveyTabViewModel extends Base {
                 visible: false
               },
               {
-                type: "text",
-                inputType: "number",
+                type: "spinedit",
                 name: "--corner-radius",
                 title: "Corner Radius",
+                unit: "px",
                 defaultValue: 8,
                 min: 0
               },
