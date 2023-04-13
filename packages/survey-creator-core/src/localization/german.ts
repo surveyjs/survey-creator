@@ -27,7 +27,7 @@ var germanTranslation = {
     ranking: "Reihenfolge",
     image: "Bild",
     dropdown: "Dropdown",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Datei",
     html: "HTML",
     matrix: "Matrix (einfache Auswahl)",
@@ -672,7 +672,7 @@ var germanTranslation = {
     onHidden: "Wenn die Umfrage versteckt wurde",
     onHiddenContainer: "Wenn die Frage oder ihr Panel/Seite ausgeblendet wird",
     clearInvisibleValues: {
-    none: "Niemals"
+      none: "Niemals"
     },
     all: "alle",
     page: "Seite",

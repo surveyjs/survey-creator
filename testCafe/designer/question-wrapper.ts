@@ -13,12 +13,12 @@ function normalize(str) {
 const convertQuestionTypesCount = 20;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
-const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
 const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
 const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 const popupContent = Selector(".sv-popup__content .sv-list").filterVisible();
-const convertPopupContent = "Radiogroup\nRating\nCheckbox\nDropdown\nTag Box\nBoolean\nFile\nImage Picker\nRanking\nSingle Input\nComment\nMultiple Text\nDynamic Panel\nSingle-Choice Matrix\nMultiple-Choice Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature Pad";
+const convertPopupContent = "Radio Button Group\nRating Scale\nCheckboxes\nDropdown\nMulti-Select Dropdown\nYes/No (Boolean)\nFile Upload\nImage Picker\nRanking\nSingle-Line Input\nLong Text\nMultiple Textboxes\nDynamic Panel\nSingle-Select Matrix\nMulti-Select Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature";
 
 test("Single input question wrapper actions", async (t) => {
   const separator = questionToolbarActions.nth(3).find(".sv-action-bar-separator");
@@ -26,8 +26,8 @@ test("Single input question wrapper actions", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(questionToolbarActions.count).eql(4)
@@ -41,13 +41,13 @@ test("Single input question wrapper actions", async (t) => {
 });
 
 test("Single input question wrapper action convert", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(convertActionButton.visible).ok()
@@ -56,25 +56,25 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(getListItemByText("Comment"))
+    .click(getListItemByText("Long Text"))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
-    .click(questionToolbarActions.find('button[title="Comment"]'))
+    .click(questionToolbarActions.find('button[title="Long Text"]'))
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(getListItemByText("Single Input"))
+    .click(getListItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .click(Selector(".svc-tab-designer"), { offsetX: 5, offsetY: 5 })
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).notOk()
     .hover(".svc-question__content", { offsetX: 5, offsetY: 5 })
@@ -86,14 +86,14 @@ test("Single input question wrapper action convert on hover", async (t) => {
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(getListItemByText("Comment"))
+    .click(getListItemByText("Long Text"))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
 
-    .click(questionToolbarActions.find('button[title="Comment"]'))
+    .click(questionToolbarActions.find('button[title="Long Text"]'))
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(getListItemByText("Single Input"))
+    .click(getListItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
 
@@ -101,8 +101,8 @@ test("Single input question wrapper action duplicate", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(duplicateActionButton.visible).ok()
@@ -126,8 +126,8 @@ test("Single input question wrapper action change require", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
 
@@ -149,8 +149,8 @@ test("Single input question wrapper action delete", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(deleteActionButton.visible).ok()
@@ -161,8 +161,8 @@ test("Single input question wrapper action delete", async (t) => {
 
 test("Matrix dropdown with vertical layout and and selecting rows", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
-    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+    .hover(getToolboxItemByText("Multi-Select Matrix"))
+    .click(getToolboxItemByText("Multi-Select Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").columnLayout = "vertical";
@@ -176,25 +176,25 @@ test("Matrix dropdown with vertical layout and and selecting rows", async (t) =>
 
 test("Matrix dropdown with detail panel", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
-    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+    .hover(getToolboxItemByText("Multi-Select Matrix"))
+    .click(getToolboxItemByText("Multi-Select Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
   })();
-  const SingleInputItem = Selector("[aria-label='Single Input toolbox item']");
+  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
   await t
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .hover(SingleInputItem)
     .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single Input").visible)).ok();
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok();
 
 });
 
 test("Matrix dropdown with detail panel - add question button", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
-    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+    .hover(getToolboxItemByText("Multi-Select Matrix"))
+    .click(getToolboxItemByText("Multi-Select Matrix"));
 
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
@@ -203,7 +203,7 @@ test("Matrix dropdown with detail panel - add question button", async (t) => {
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
-    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single Input").visible)).ok()
+    .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok()
     .expect(Selector(".sd-question[data-name=question2]").visible).ok()
     .click(Selector(".sd-question[data-name=question1] .svc-panel__add-new-question"))
     .expect(Selector(".sd-question[data-name=question3]").visible).ok();
@@ -214,8 +214,8 @@ test("Rating question required property", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Rating"))
-    .click(getToolboxItemByText("Rating"))
+    .hover(getToolboxItemByText("Rating Scale"))
+    .click(getToolboxItemByText("Rating Scale"))
     .expect(isrequiredButton.visible).ok()
     .expect(isrequiredButton.classNames).notContains("sv-action-bar-item--secondary")
     .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-inactive_16x16")
@@ -244,8 +244,8 @@ test("Dropdown question with ability to collapse choices", async (t) => {
     .click(buttonSelector)
     .expect(buttonSelector.withText("Show less").exists).ok()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(buttonSelector.withText("Show more").exists).ok()
 
     .click(Selector(".svc-question__dropdown-choice .svc-item-value-controls__remove"))
@@ -256,13 +256,13 @@ test("Dropdown question with ability to collapse choices", async (t) => {
 });
 
 test("Keep focus on question convert", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(convertActionButton.visible).ok()
@@ -271,15 +271,15 @@ test("Keep focus on question convert", async (t) => {
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
-    .click(getListItemByText("Comment"))
+    .click(getListItemByText("Long Text"))
     .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
     .expect(Selector(".svc-question__content--selected #convertTo button").focused).ok();
 });
 
 test("Matrix column title - get focus on click, not tab", async (t) => {
   await t.expect(questions.exists).notOk()
-    .hover(getToolboxItemByText("Multiple-Choice Matrix"))
-    .click(getToolboxItemByText("Multiple-Choice Matrix"));
+    .hover(getToolboxItemByText("Multi-Select Matrix"))
+    .click(getToolboxItemByText("Multi-Select Matrix"));
   await t
     .click(Selector(".svc-matrix-cell").withText("Column 1"), { offsetX: 5, offsetY: 5 })
     .expect(Selector(".svc-matrix-cell").withText("Column 1").focused).ok()

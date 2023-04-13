@@ -27,7 +27,7 @@ var frenchTranslation = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Liste déroulante",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Fichier",
     html: "HTML",
     matrix: "Matrice (choix unique)",
@@ -41,7 +41,7 @@ var frenchTranslation = {
     text: "Champ texte",
     boolean: "Booléen",
     expression: "Expression",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

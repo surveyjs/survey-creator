@@ -2208,7 +2208,7 @@ test("ConvertTo, show it for a panel", (): any => {
 test("Has one item type in convertTo", (): any => {
   CustomWidgetCollection.Instance.add({
     name: "text",
-    title: "Single Input",
+    title: "Single-Line Input",
     widgetIsLoaded: () => { return true; },
     isFit: () => (question) => { return question.getType() === "text"; }
   }, "customtype");

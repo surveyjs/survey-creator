@@ -27,7 +27,7 @@ export var danishStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Dropdown",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Fil",
     html: "Html",
     matrix: "Matrice (ét valg)",
@@ -41,7 +41,7 @@ export var danishStrings = {
     text: "Tekstfelt",
     boolean: "Sandt/falsk",
     expression: "Udtryk",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

@@ -27,7 +27,7 @@ export var huStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Legördülő",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Állomány",
     html: "HTML",
     matrix: "Mátrix (egyválasztós)",
@@ -41,7 +41,7 @@ export var huStrings = {
     text: "Egysoros szöveg",
     boolean: "Igaz-hamis",
     expression: "Kifejezés (csak olvasható)",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

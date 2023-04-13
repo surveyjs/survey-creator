@@ -27,7 +27,7 @@ export var msStrings = {
     ranking: "Kedudukan",
     image: "Imej",
     dropdown: "Juntai bawah",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Fail",
     html: "HTML",
     matrix: "Matriks (pilihan tunggal)",
@@ -39,7 +39,7 @@ export var msStrings = {
     radiogroup: "Kumpulan radio",
     rating: "Penarafan",
     text: "Input Tunggal",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Ekspresi (baca sahaja)",
     signaturepad: "Pad tandatangan",
     // buttongroup: "Button Group"

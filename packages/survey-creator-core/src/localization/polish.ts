@@ -27,7 +27,7 @@ var polishStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Lista wyboru",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Plik",
     html: "Html",
     matrix: "Macierz (jednokrotny wybór)",
@@ -41,7 +41,7 @@ var polishStrings = {
     text: "Pojedyncza odpowiedź",
     boolean: "Prawda/Fałsz",
     expression: "Wyrażenie",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

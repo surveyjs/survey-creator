@@ -27,7 +27,7 @@ var spanishTranslation = {
     ranking: "Ranking",
     image: "Imagen",
     dropdown: "Desplegable",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Archivo",
     html: "Html",
     matrix: "Matriz (selección única)",

@@ -27,7 +27,7 @@ export var skStrings = {
     ranking: "Hodnotenie",
     image: "Obrázok",
     dropdown: "Rozbaľovací zoznam",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Súbor",
     html: "Html",
     matrix: "Matica (jedna možnosť)",
@@ -39,7 +39,7 @@ export var skStrings = {
     radiogroup: "Skupina tlačidiel",
     rating: "Hodnotenie",
     text: "Jeden vstup",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Výraz (iba na čítanie)",
     signaturepad: "Priestor na podpis",
     // buttongroup: "Button Group"

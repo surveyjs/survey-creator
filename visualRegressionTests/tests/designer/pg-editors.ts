@@ -83,8 +83,8 @@ test("Default value popup", async (t) => {
     const dataTab = Selector("h4").withExactText("Data");
 
     await t
-      .hover(getToolboxItemByText("Single Input"))
-      .click(getToolboxItemByText("Single Input"))
+      .hover(getToolboxItemByText("Single-Line Input"))
+      .click(getToolboxItemByText("Single-Line Input"))
       .click(generalTab)
       .click(dataTab)
       .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
@@ -131,8 +131,8 @@ test("Logic popup", async (t) => {
     const logicTab = Selector("h4").withExactText("Logic");
 
     await t
-      .hover(getToolboxItemByText("Single Input"))
-      .click(getToolboxItemByText("Single Input"))
+      .hover(getToolboxItemByText("Single-Line Input"))
+      .click(getToolboxItemByText("Single-Line Input"))
       .click(generalTab)
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));

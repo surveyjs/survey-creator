@@ -27,7 +27,7 @@ export var indonesianStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Kotak Kombo",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Berkas",
     html: "Html",
     matrix: "Matriks (pilihan tunggal)",
@@ -39,9 +39,9 @@ export var indonesianStrings = {
     radiogroup: "Pilihan Ganda",
     rating: "Peringkat",
     text: "Input Tunggal",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Ekspresi (dibaca saja)",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

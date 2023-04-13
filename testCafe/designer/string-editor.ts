@@ -527,14 +527,14 @@ test("Test string change event", async (t) => {
 });
 
 test("Focus on new question", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
 });
 
 test("Focus on new question dragged", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
-  const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   await t
@@ -588,7 +588,7 @@ test("Do not focus on existing question dragged", async (t) => {
 });
 
 test("Focus switch on select base", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -604,7 +604,7 @@ test("Focus switch on select base", async (t) => {
 });
 
 test("Disable edit inactive items", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Checkbox"))
+  await t.click(Selector(".svc-toolbox__tool").withText("Checkboxes"))
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Select All").withAttribute("contenteditable", "false").exists).ok()
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("None").withAttribute("contenteditable", "false").exists).ok()
     .expect(Selector(".svc-item-value__item .svc-string-editor .sv-string-editor").withText("Other").withAttribute("contenteditable", "false").exists).ok()
@@ -617,7 +617,7 @@ test("Disable edit inactive items", async (t) => {
 });
 
 test("Focus switch on rating base", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Rating"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Rating Scale"));
   await t.pressKey("Enter");
   const svStringSelector = Selector(".svc-rating-question-content .sv-string-editor").withText("2");
   await t
@@ -632,7 +632,7 @@ test("Focus switch on rating base", async (t) => {
 });
 
 test("Delete items on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter")
@@ -662,7 +662,7 @@ test("Delete items on backspace", async (t) => {
 });
 
 test("Focus switch on multiple text", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Textboxes"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -678,7 +678,7 @@ test("Focus switch on multiple text", async (t) => {
 });
 
 test("Delete  multiple text items on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Text"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Multiple Textboxes"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter").pressKey("Enter").pressKey("shift+tab")
@@ -708,7 +708,7 @@ test("Delete  multiple text items on backspace", async (t) => {
 });
 
 test("Focus switch on matrix columns and rows", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Select Matrix"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
@@ -734,7 +734,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
 });
 
 test("Delete matrix Columns on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Select Matrix"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter").pressKey("Enter")
@@ -764,7 +764,7 @@ test("Delete matrix Columns on backspace", async (t) => {
 });
 
 test("Delete matrix rows on backspace", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Single-Choice Matrix"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Single-Select Matrix"));
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("tab").pressKey("tab").pressKey("tab").pressKey("tab");
@@ -794,7 +794,7 @@ test("Delete matrix rows on backspace", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Row 3").visible).notOk();
 });
 test("Paste multiline selectbase", async (t) => {
-  await t.click(Selector(".svc-toolbox__tool").withText("Radiogroup"));
+  await t.click(Selector(".svc-toolbox__tool").withText("Radio Button Group"));
 
   await t
     .click(Selector(".sv-string-editor").withText("Item 2"))
@@ -806,7 +806,7 @@ test("Paste multiline selectbase", async (t) => {
 });
 test("Undo after new item add", async (t) => {
   await t
-    .click(Selector(".svc-toolbox__tool").withText("Radiogroup"))
+    .click(Selector(".svc-toolbox__tool").withText("Radio Button Group"))
     .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
     .expect(Selector(".svc-item-value-controls__remove").count).eql(4)
     .click(Selector("button[title=Undo]"))

@@ -21,13 +21,13 @@ export let svStrings = {
   // Question types
   qt: {
     default: "Standard",
-    checkbox: "Checkbox",
+    checkbox: "Checkboxes",
     comment: "Kommentar",
     imagepicker: "Bild-väljare",
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Rullgardinsmeny",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Fil",
     html: "Html",
     matrix: "Matris (enkel val)",
@@ -39,9 +39,9 @@ export let svStrings = {
     radiogroup: "Radiogrupper",
     rating: "Rankning",
     text: "Enkel text",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Formel",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator
