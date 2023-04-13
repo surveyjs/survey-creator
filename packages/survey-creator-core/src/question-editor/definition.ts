@@ -457,6 +457,7 @@ export class SurveyQuestionEditorDefinition {
     paneldynamic: {
       properties: [
         "renderMode",
+        "templateTabTitle",
         "tabAlign",
         "panelCount",
         "minPanelCount",
