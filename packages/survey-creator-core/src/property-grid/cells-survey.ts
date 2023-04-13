@@ -47,7 +47,7 @@ export class CellsEditor extends PropertyEditorSetupValue {
   private buildColumns() {
     var columns = this.matrix.columns;
     for (var i = 0; i < columns.length; i++) {
-      this.editMatrix.addColumn(columns[i].value, columns[i].text);
+      this.editMatrix.addColumn("" + columns[i].value, columns[i].text);
     }
   }
   private buildRows() {

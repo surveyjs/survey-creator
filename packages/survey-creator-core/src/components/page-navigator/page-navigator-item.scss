@@ -134,6 +134,7 @@ svc-page-navigator-item,
 
 .svc-page-navigator-item--disabled {
   .svc-page-navigator-item__banner {
-    color: $foreground-disabled;
+    color: $foreground;
+    opacity: 0.25;
   }
 }

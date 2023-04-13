@@ -66,6 +66,7 @@
   line-height: calcSize(4);
   font-size: calcSize(2);
   color: red;
+  display: none;
 }
 
 .svc-string-editor__controls {
@@ -132,6 +133,11 @@
     box-sizing: content-box;
     background-color: $background;
     box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
+  }
+}
+.svc-string-editor.svc-string-editor--error:focus-within {
+  .svc-string-editor__border {
+    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
   }
 }
 
