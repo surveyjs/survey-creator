@@ -1,7 +1,7 @@
-import { ISurveyCreatorOptions } from "src/creator-settings";
 import { JsonObjectProperty, Base, ComponentCollection, QuestionCompositeModel } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { PropertyGridEditor, PropertyGridEditorCollection } from ".";
+import { ISurveyCreatorOptions } from "../creator-settings";
 
 var json = {
   name: "propertygrid_bindings",

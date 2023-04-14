@@ -1,4 +1,4 @@
-import { QuestionFactory, QuestionFileModel, Serializer } from "survey-core";
+import { Helpers, QuestionFactory, QuestionFileModel, Serializer } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
@@ -9,7 +9,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       if(!this.isLoadingFromJson) {
         this.loadPreview(newValue);
       }
-      this.loadedFilesValue = this.value;
+      this.loadedFilesValue = newValue;
       this.value = this.previewValue[0].content;
     }
   }
@@ -24,6 +24,13 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public set allowMultiple(val: boolean) {}
   public clear(doneCallback?: () => void, shouldClearValue: boolean = true) {
     if (!this.survey) return;
+    const callback = () => {
+      if(shouldClearValue) {
+        this.value = undefined;
+      }
+      this.errors = [];
+      !!doneCallback && doneCallback();
+    };
     if(!!this.loadedFilesValue) {
       this.containsMultiplyFiles = false;
       this.survey.clearFiles(
@@ -33,22 +40,20 @@ export class QuestionFileEditorModel extends QuestionFileModel {
         null,
         (status, data) => {
           if (status === "success") {
-            if(shouldClearValue) {
-              this.value = undefined;
-            }
-            this.errors = [];
-            !!doneCallback && doneCallback();
+            callback();
           }
         }
       );
     } else {
-      !!doneCallback && doneCallback();
+      callback();
     }
-    this.loadedFilesValue = undefined;
   }
   protected updateValueFromInputEvent(event: Event) {
-    // this.clear(undefined, false);
-    this.value = (<HTMLInputElement>event.target).value;
+    if(!Helpers.isTwoValueEquals((<HTMLInputElement>event.target).value, this.value)) {
+      this.clear(undefined, false);
+      this.loadedFilesValue = undefined;
+      this.value = (<HTMLInputElement>event.target).value;
+    }
   }
   public onInputChange(event: Event) {
     if(event.target !== document.activeElement) {
