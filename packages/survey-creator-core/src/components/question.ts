@@ -274,7 +274,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let actionTitle = !!selItem ? selItem.title : selValue;
 
     const newAction = createDropdownActionModel({
-      id: "convertInputType",
+      id: id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
       iconName: "icon-drop-down-arrow_16x16",
       iconSize: 16,
