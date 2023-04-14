@@ -14,6 +14,7 @@ const convertQuestionTypesCount = 20;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+const convertInputTypeActionButton = questionToolbarActions.find('button[title="text"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
 const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
 const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
@@ -30,8 +31,9 @@ test("Single input question wrapper actions", async (t) => {
     .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
-    .expect(questionToolbarActions.count).eql(4)
+    .expect(questionToolbarActions.count).eql(5)
     .expect(convertActionButton.visible).ok()
+    .expect(convertInputTypeActionButton.visible).ok()
     .expect(duplicateActionButton.visible).ok()
     .expect(requiredActionButton.visible).ok()
     //.expect(separator.visible).ok()
