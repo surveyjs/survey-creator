@@ -53,6 +53,10 @@
   &:active {
     opacity: 0.5;
   }
+  &:disabled {
+    opacity: 0.25;
+    background: $background;
+  }
   svg {
     height: 24px;
     width: 24px;
@@ -68,4 +72,7 @@
   font-family: $font-family;
   outline: none;
   border: none;
+}
+.spg-input-container__buttons-container {
+  display: flex;
 }

@@ -66,6 +66,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public getType() {
     return "fileedit";
   }
+  public getIsClearButtonDisabled(): boolean {
+    return !this.value || this.isInputReadOnly;
+  }
 }
 Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");
 
