@@ -59,3 +59,13 @@
     fill: rgba(0, 0, 0, 0.45);
   }
 }
+.spg-input-container__input {
+  flex-grow: 1;
+  width: 100%;
+  padding: calcSize(1) calcSize(1.5);
+  color: $foreground;
+  font-size: calcSize(2);
+  font-family: $font-family;
+  outline: none;
+  border: none;
+}

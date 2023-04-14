@@ -24,7 +24,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "skipLibCheck": true,
-    "outFile": "build/survey-creator-react.d.ts",
+    "outDir": "build/typings/",
   },
   "include": [
     "./src/entries/index.ts",
