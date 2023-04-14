@@ -96,7 +96,7 @@ test("Responsive creator: property grid", async (t) => {
         elements: [{ type: "text", name: "question1" }, { type: "text", name: "question2" }]
       },
       {
-        elements: [{ type: "text", name: "question2" }]
+        elements: [{ type: "text", name: "question3" }]
       }
     ]
   });
