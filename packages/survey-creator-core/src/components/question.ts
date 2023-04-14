@@ -18,7 +18,7 @@ import {
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { DragDropSurveyElements } from "survey-core";
-import { getLocString } from "../editorLocalization";
+import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
 import {
@@ -132,10 +132,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() dragTypeOverMe: DragTypeOverMeEnum;
 
   dispose() {
-    this.surveyElement.unRegisterFunctionOnPropertyValueChanged(
-      "isRequired",
-      "isRequiredAdorner"
-    );
+    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
+    this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
       (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
     }
@@ -153,11 +151,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
     super.updateElementAllowOptions(options, operationsAllow);
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
-    const prop = Serializer.findProperty(this.surveyElement.getType(), "isRequired");
-    const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
-    this.updateActionVisibility("isrequired", operationsAllow && options.allowChangeRequired && !isPropReadOnly);
+    this.updateActionVisibilityByProp("isrequired", "isRequired", operationsAllow && options.allowChangeRequired);
+    this.updateActionVisibilityByProp("convertInputType", "inputType", true);
   }
-
+  private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
+    const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
+    if(!prop) return;
+    const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
+    this.updateActionVisibility(actionName, allow && !isPropReadOnly);
+  }
   public get isEmptyElement(): boolean {
     if (this.surveyElement instanceof QuestionHtmlModel) {
       return !this.surveyElement.html;
@@ -220,7 +222,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.surveyElement.getType();
   }
 
-  private createConverToAction() {
+  private createConvertToAction() {
     const availableTypes = this.getConvertToTypesActions();
     const allowChangeType: boolean = availableTypes.length > 0;
     const curType = this.currentType;
@@ -248,6 +250,57 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       selectedItem: selectedItems.length > 0 ? selectedItems[0] : undefined,
       horizontalPosition: "center"
     });
+    return newAction;
+  }
+  private createConvertInputType() {
+    if(this.surveyElement.getType() !== "text") return null;
+    const prop = Serializer.findProperty("text", "inputType");
+    if(!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
+    const inputType = (<any>this.surveyElement).inputType;
+    const items = prop.getChoices(this.surveyElement, (chs: any) => { });
+    const availableTypes = [];
+    items.forEach(item => {
+      availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
+    });
+    const getSelectedItem = (id: string): Action => {
+      const selectedItems = availableTypes.filter(item => item.id === id);
+      return selectedItems.length > 0 ? selectedItems[0] : undefined;
+    };
+
+    const selItem = getSelectedItem(inputType);
+    let actionTitle = !!selItem ? selItem.title : inputType;
+
+    const newAction = createDropdownActionModel({
+      id: "convertInputType",
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      iconName: "icon-drop-down-arrow_16x16",
+      iconSize: 16,
+      title: actionTitle,
+      visibleIndex: 1,
+      disableShrink: true,
+      action: (newType) => { newAction.popupModel.displayMode = "popup"; },
+    }, {
+      items: availableTypes,
+      onSelectionChanged: (item: any) => {
+        (<any>this.surveyElement).inputType = item.id;
+        newAction.title = item.title;
+      },
+      allowSelection: true,
+      selectedItem: selItem,
+      horizontalPosition: "center"
+    });
+    this.surveyElement.registerFunctionOnPropertyValueChanged(
+      "inputType",
+      () => {
+        const item = getSelectedItem((<any>this.surveyElement).inputType);
+        if(!item) return;
+        const popup = newAction.popupModel;
+        const list = popup.contentComponentData.model;
+        list.selectedItem = item;
+        newAction.title = item.title;
+      },
+      "inputTypeAdorner"
+    );
     return newAction;
   }
 
@@ -284,10 +337,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return requiredAction;
   }
 
-  protected buildActions(items: Array<Action>) {
+  protected buildActions(items: Array<Action>): void {
     super.buildActions(items);
     let element = this.surveyElement;
-    items.push(this.createConverToAction());
+    items.push(this.createConvertToAction());
+    const inputTypeConverter = this.createConvertInputType();
+    if(!!inputTypeConverter) {
+      items.push(inputTypeConverter);
+    }
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&

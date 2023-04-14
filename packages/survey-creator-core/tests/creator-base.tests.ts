@@ -2346,6 +2346,38 @@ test("ConvertTo separators", (): any => {
   expect(items2[1].needSeparator).toBeFalsy();
 
 });
+test("convertInputType, change inputType for a text question", (): any => {
+  const creator = new CreatorTester();
+
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  let question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  let questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  expect(questionModel.getActionById("convertInputType")).toBeFalsy();
+  question = creator.survey.getQuestionByName("q2");
+  creator.selectElement(question);
+  questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  const action = questionModel.getActionById("convertInputType");
+  expect(action).toBeTruthy();
+  expect(action.title).toBe("text");
+  const popup = action.popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  expect(list.selectedItem).toBeTruthy();
+  expect(list.selectedItem.id).toEqual("text");
+  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+  expect(question.inputType).toBe("tel");
+  expect(action.title).toBe("tel");
+  question.inputType = "password";
+  expect(action.title).toBe("password");
+  expect(list.selectedItem.id).toEqual("password");
+});
 
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
