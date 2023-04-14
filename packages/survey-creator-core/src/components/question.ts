@@ -225,31 +225,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createConvertToAction() {
     const availableTypes = this.getConvertToTypesActions();
     const allowChangeType: boolean = availableTypes.length > 0;
-    const curType = this.currentType;
-    const selectedItems = availableTypes.filter(item => item.id === curType);
-    let actionTitle = selectedItems.length > 0 ? selectedItems[0].title : this.creator.getLocString("qt." + this.currentType);
-
-    const newAction = createDropdownActionModel({
-      id: "convertTo",
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: "icon-drop-down-arrow_16x16",
-      iconSize: 16,
-      title: actionTitle,
-      visibleIndex: 0,
-      enabled: allowChangeType,
-      disableShrink: true,
-      action: (newType) => {
-        newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
-      },
-    }, {
-      items: availableTypes,
-      onSelectionChanged: (item: any) => {
+    const newAction = this.createDropdownModel("convertTo", availableTypes,
+      "sv-action--convertTo sv-action-bar-item--secondary",
+      allowChangeType, 0, this.currentType,
+      (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
-      },
-      allowSelection: true,
-      selectedItem: selectedItems.length > 0 ? selectedItems[0] : undefined,
-      horizontalPosition: "center"
-    });
+      });
     return newAction;
   }
   private createConvertInputType() {
@@ -262,37 +243,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     items.forEach(item => {
       availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
     });
-    const getSelectedItem = (id: string): Action => {
-      const selectedItems = availableTypes.filter(item => item.id === id);
-      return selectedItems.length > 0 ? selectedItems[0] : undefined;
-    };
-
-    const selItem = getSelectedItem(inputType);
-    let actionTitle = !!selItem ? selItem.title : inputType;
-
-    const newAction = createDropdownActionModel({
-      id: "convertInputType",
-      css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: "icon-drop-down-arrow_16x16",
-      iconSize: 16,
-      title: actionTitle,
-      visibleIndex: 1,
-      disableShrink: true,
-      action: (newType) => { newAction.popupModel.displayMode = "popup"; },
-    }, {
-      items: availableTypes,
-      onSelectionChanged: (item: any) => {
+    const newAction = this.createDropdownModel("convertInputType", availableTypes,
+      "sv-action--convertTo sv-action-bar-item--secondary", true, 1, inputType,
+      (item: any) => {
         (<any>this.surveyElement).inputType = item.id;
         newAction.title = item.title;
-      },
-      allowSelection: true,
-      selectedItem: selItem,
-      horizontalPosition: "center"
-    });
+      });
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       "inputType",
       () => {
-        const item = getSelectedItem((<any>this.surveyElement).inputType);
+        const item = this.getSelectedItem(availableTypes, (<any>this.surveyElement).inputType);
         if(!item) return;
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
@@ -301,6 +261,37 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
       "inputTypeAdorner"
     );
+    return newAction;
+  }
+  private getSelectedItem(actions: IAction[], id: string): IAction {
+    const selectedItems = actions.filter(item => item.id === id);
+    return selectedItems.length > 0 ? selectedItems[0] : undefined;
+  }
+  private createDropdownModel(id: string, actions: IAction[], css: string,
+    enabled: boolean, index: number, selValue: string,
+    onSelectionChanged: (item: any) => void): Action {
+    const selItem = this.getSelectedItem(actions, selValue);
+    let actionTitle = !!selItem ? selItem.title : selValue;
+
+    const newAction = createDropdownActionModel({
+      id: "convertInputType",
+      css: "sv-action--convertTo sv-action-bar-item--secondary",
+      iconName: "icon-drop-down-arrow_16x16",
+      iconSize: 16,
+      title: actionTitle,
+      enabled: enabled,
+      visibleIndex: index,
+      disableShrink: true,
+      action: (newType) => {
+        newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
+      },
+    }, {
+      items: actions,
+      onSelectionChanged: onSelectionChanged,
+      allowSelection: true,
+      selectedItem: selItem,
+      horizontalPosition: "center"
+    });
     return newAction;
   }
 
