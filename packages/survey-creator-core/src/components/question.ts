@@ -226,7 +226,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const availableTypes = this.getConvertToTypesActions();
     const allowChangeType: boolean = availableTypes.length > 0;
     const newAction = this.createDropdownModel("convertTo", availableTypes,
-      "sv-action--convertTo sv-action-bar-item--secondary",
       allowChangeType, 0, this.currentType,
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
@@ -243,8 +242,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     items.forEach(item => {
       availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
     });
-    const newAction = this.createDropdownModel("convertInputType", availableTypes,
-      "sv-action--convertTo sv-action-bar-item--secondary", true, 1, inputType,
+    const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, inputType,
       (item: any) => {
         (<any>this.surveyElement).inputType = item.id;
         newAction.title = item.title;
@@ -267,7 +265,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const selectedItems = actions.filter(item => item.id === id);
     return selectedItems.length > 0 ? selectedItems[0] : undefined;
   }
-  private createDropdownModel(id: string, actions: IAction[], css: string,
+  private createDropdownModel(id: string, actions: IAction[],
     enabled: boolean, index: number, selValue: string,
     onSelectionChanged: (item: any) => void): Action {
     const selItem = this.getSelectedItem(actions, selValue);
@@ -336,6 +334,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if(!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
+    items[items.length - 1].css += " sv-action--convertTo-last";
     if (
       typeof element["isRequired"] !== "undefined" &&
       propertyExists(element, "isRequired") &&
