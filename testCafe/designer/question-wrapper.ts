@@ -68,7 +68,7 @@ test("Single input question wrapper action convert", async (t) => {
     .click(getListItemByText("Single Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
-test.only("Single input question wrapper action convert inputType", async (t) => {
+test("Single input question wrapper action convert inputType", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
