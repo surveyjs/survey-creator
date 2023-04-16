@@ -1,6 +1,6 @@
 <div [class]="model.cssClasses.root" (dragenter)="model.onDragEnter($event)" (dragover)="model.onDragOver($event)"
   (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)">
-  <input type="text" tabindex="-1" [class]="model.cssClasses.control" [value]="model.value ||''"
+  <input type="text" [class]="model.cssClasses.control" [value]="model.value ||''"
     (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)" />
   <div [class]="model.cssClasses.buttonsContainer">
     <button type="button" [class]="model.cssClasses.clearButton" [disabled]="model.getIsClearButtonDisabled()"

@@ -1,6 +1,6 @@
 <div
   data-bind="css: question.cssClasses.root, event: { dragenter: question.ondragenter, dragover: question.ondragover, drop: question.ondrop, dragleave: question.ondragleave }">
-  <input type="text" tabindex="-1"
+  <input type="text"
     data-bind="css: question.cssClasses.control, value: question.koReadOnlyValue, event: { change: question.koOnInputChange, blur: question.koOnInputBlur }">
   <div data-bind="css: question.cssClasses.buttonsContainer">
     <button type="button"
