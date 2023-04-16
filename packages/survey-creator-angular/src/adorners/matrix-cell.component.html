@@ -1,8 +1,10 @@
 <ng-template #template>
-  <div tabindex="-1" class="svc-matrix-cell" (click)="adorner.selectContext(adorner, $event)" (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)">
+  <div tabindex="-1" class="svc-matrix-cell" (click)="adorner.selectContext(adorner, $event)"
+    (mouseover)="adorner.hover($event, $event.currentTarget)"
+    (mouseleave)="adorner.hover($event, $event.currentTarget)">
     <div class="svc-matrix-cell--selected" [class.svc-visible]="adorner.isSelected"></div>
     <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
-    <div *ngIf="question" class="svc-matrix-cell__question-controls">
+    <div *ngIf="isSupportCellEditor" class="svc-matrix-cell__question-controls">
       <span class="svc-matrix-cell__question-controls-button" (click)="adorner.editQuestion(adorner)" [key2click]>
         <svg [iconName]="'icon-edit'" [size]="24" [size]="24" sv-ng-svg-icon></svg>
       </span>
