@@ -79,14 +79,14 @@ test("Single input question wrapper action convert inputType", async (t) => {
     .expect(convertInputTypeActionButton.visible).ok()
 
     .click(convertInputTypeActionButton)
-    //.expect(listItems.count).eql(convertTextQuestionInputTypesCount) TODO
-    //.expect(popupContent.innerText).eql(convertInputTypePopupContent) TODO
+    .expect(listItems.count).eql(convertTextQuestionInputTypesCount)
+    .expect(popupContent.innerText).eql(convertInputTypePopupContent)
 
     .click(getListItemByText("date"))
 
-    .click(questionToolbarActions.find('button[title="date"]'));
-  //.expect(listItems.count).eql(convertTextQuestionInputTypesCount); TODO
-  //.expect(popupContent.innerText).eql(convertInputTypePopupContent); TODO 
+    .click(questionToolbarActions.find('button[title="date"]'))
+    .expect(listItems.count).eql(convertTextQuestionInputTypesCount)
+    .expect(popupContent.innerText).eql(convertInputTypePopupContent);
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {

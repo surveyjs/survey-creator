@@ -2098,7 +2098,8 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   creator.JSON = {
     elements: [
       { type: "text", name: "q1" },
-      { type: "comment", name: "q2" }
+      { type: "comment", name: "q2" },
+      { type: "text", name: "q3" }
     ]
   };
   creator.survey.addNewPage("page2");
@@ -2106,24 +2107,24 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
     if (options.obj.isQuestion) {
       options.allowChangeType = options.obj.getType() !== "comment";
       options.allowChangeRequired = options.obj.getType() !== "text";
+      options.allowChangeInputType = options.obj.name !== "q1";
     }
   });
-  const q1Model = new QuestionAdornerViewModel(
-    creator,
-    creator.survey.getAllQuestions()[0],
-    undefined
-  );
-  const q2Model = new QuestionAdornerViewModel(
-    creator,
-    creator.survey.getAllQuestions()[1],
-    undefined
-  );
+  const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
+  const q3Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[2], undefined);
   creator.selectElement(q1Model.element);
   expect(q1Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q1Model.getActionById("isrequired").visible).toBeFalsy();
+  expect(q1Model.getActionById("convertInputType").visible).toBeFalsy();
   creator.selectElement(q2Model.element);
   expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
   expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
+  expect(q2Model.getActionById("convertInputType")).toBeFalsy();
+  creator.selectElement(q3Model.element);
+  expect(q3Model.getActionById("convertTo").visible).toBeTruthy();
+  expect(q3Model.getActionById("isrequired").visible).toBeFalsy();
+  expect(q3Model.getActionById("convertInputType").visible).toBeTruthy();
 });
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
   const creator = new CreatorTester();
