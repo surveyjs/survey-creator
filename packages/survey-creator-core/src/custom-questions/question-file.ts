@@ -2,16 +2,17 @@ import { Helpers, QuestionFactory, QuestionFileModel, Serializer } from "survey-
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
-  protected onChangeQuestionValue(newValue: any): void {
-    super.onChangeQuestionValue(newValue);
+  protected onChangeQuestionValue(newValue: any): void {}
+  protected setNewValue(newValue: any): void {
     if(typeof newValue === "object") {
       this.stateChanged(this.isEmpty() ? "empty" : "loaded");
       if(!this.isLoadingFromJson) {
         this.loadPreview(newValue);
       }
       this.loadedFilesValue = newValue;
-      this.value = this.previewValue[0].content;
+      newValue = this.previewValue[0].content;
     }
+    super.setNewValue(newValue);
   }
   protected loadPreview(newValue: any): void {
     if(typeof newValue !== "string") {
