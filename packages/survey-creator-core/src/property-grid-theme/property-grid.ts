@@ -94,7 +94,7 @@ export var propertyGridCss = {
   image: { root: "spg-image", image: "sv_image_image" },
   error: {
     root: "spg-question__erbox",
-    icon: "",
+    icon: "spg-question__erbox-icon",
     item: "",
     locationTop: "spg-question__erbox--location--top",
     locationBottom: "spg-question__erbox--location--bottom"
@@ -257,7 +257,8 @@ export var propertyGridCss = {
     root: "spg-input spg-comment",
     content: "spg-question__content spg-comment__content",
     remainingCharacterCounter: "spg-remaining-character-counter",
-    small: "spg-row__question--small"
+    small: "spg-row__question--small",
+    onError: "spg-input--error"
   },
   expression: "",
   file: {
