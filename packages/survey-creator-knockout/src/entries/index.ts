@@ -31,6 +31,8 @@ export * from "../action-button";
 
 //custom questions for property grid
 export * from "../custom-questions/question-color";
+export * from "../custom-questions/spin-editor";
+export * from "../custom-questions/question-file";
 
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
@@ -55,8 +57,6 @@ export * from "../utils/survey-widget";
 export * from "../utils/utils";
 
 export * from "../creator";
-
-export * from "../custom-questions/spin-editor";
 
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";
