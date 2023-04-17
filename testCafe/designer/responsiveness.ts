@@ -93,10 +93,10 @@ test("Responsive creator: property grid", async (t) => {
   await setJSON({
     pages: [
       {
-        elements: [{ type: "text", name: "question1" }, { type: "text", name: "question2" }]
+        elements: [{ type: "comment", name: "question1" }, { type: "comment", name: "question2" }]
       },
       {
-        elements: [{ type: "text", name: "question2" }]
+        elements: [{ type: "comment", name: "question3" }]
       }
     ]
   });
