@@ -64,6 +64,10 @@
     fill: rgba(0, 0, 0, 0.45);
   }
 }
+.spg-input.spg-input--error {
+  border-color: $red;
+  box-shadow: none;
+}
 .spg-input-container__input {
   flex-grow: 1;
   width: 100%;

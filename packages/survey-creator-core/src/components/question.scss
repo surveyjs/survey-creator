@@ -91,7 +91,6 @@ svc-question {
   .sv-action--convertTo {
     min-width: calcSize(13);
     max-width: max-content;
-    margin-inline-end: auto; // margin-right
 
     .sv-action-bar-item {
       max-width: 100%;
@@ -109,6 +108,10 @@ svc-question {
       margin-inline-start: 0; // margin-left
       margin-inline-end: calcSize(0.5); // margin-right
     }
+  }
+
+  .sv-action--convertTo-last {
+    margin-inline-end: auto; // margin-right
   }
 }
 
