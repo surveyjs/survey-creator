@@ -3012,3 +3012,29 @@ test("cellType equals 'file'", (): any => {
   const cellTypePropEditor = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("cellType");
   expect(cellTypePropEditor.value).toEqual("file");
 });
+test("rating smileys - icon column", () => {
+  var question = new QuestionRatingModel("q1");
+  question.autoGenerate = false;
+  question.rateCount = 2;
+  question.rateDisplayMode = "smileys";
+  var propertyGrid = new PropertyGridModelTester(question);
+  var rateValuesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  expect(rateValuesQuestion).toBeTruthy();
+
+  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-not-good");
+  expect(rateValuesQuestion.visibleRows[1].cells[0].question.html).toContain("#icon-very-good");
+
+  question.rateCount = 3;
+  expect(rateValuesQuestion.visibleRows[0].cells[0].question.html).toContain("#icon-not-good");
+  expect(rateValuesQuestion.visibleRows[2].cells[0].question.html).toContain("#icon-very-good");
+});
+test("Check rateValues position in tab", () => {
+  var question = new QuestionRatingModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var panel = <PanelModel>propertyGrid.survey.getPanelByName("rateValues");
+  var rateValuesQuestion = propertyGrid.survey.getQuestionByName("rateValues");
+  expect(panel).toBeTruthy();
+  expect(panel.questions.indexOf(rateValuesQuestion)).toBeGreaterThan(0);
+});

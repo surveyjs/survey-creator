@@ -231,6 +231,34 @@ test("Dropdown popup in property grid", async (t) => {
   });
 });
 
+test("rateValues in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    await setJSON({
+      "elements": [
+        {
+          "type": "rating",
+          "name": "question1",
+          "rateDisplayMode": "smileys",
+          "autoGenerate": false,
+          "rateValues": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ]
+    });
+    await t
+      .click(Selector(".svc-question__adorner"))
+      .click(Selector(".spg-panel__title").withText("Rate Values"));
+
+    await takeElementScreenshot("pg-rate-values.png", Selector("div[data-name=rateValues"), t, comparer);
+  });
+});
+
 test("Check bindings question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
