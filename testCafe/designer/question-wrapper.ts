@@ -15,7 +15,7 @@ const convertTextQuestionInputTypesCount = 13;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-const convertInputTypeActionButton = questionToolbarActions.find('button[title="text"]');
+const convertInputTypeActionButton = questionToolbarActions.find('button[title="Text"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
 const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
 const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
@@ -84,7 +84,7 @@ test("Single input question wrapper action convert inputType", async (t) => {
 
     .click(getListItemByText("Date"))
 
-    .click(questionToolbarActions.find('button[title="date"]'))
+    .click(questionToolbarActions.find('button[title="Date"]'))
     .expect(listItems.count).eql(convertTextQuestionInputTypesCount)
     .expect(popupContent.innerText).eql(convertInputTypePopupContent);
 });
