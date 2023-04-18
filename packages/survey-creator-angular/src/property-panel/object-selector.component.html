@@ -1,5 +1,5 @@
 <ng-template #template>
-    <div class="svc-object-selector" *ngIf="model.isVisible">
+    <ng-container *ngIf="model.isVisible">
         <sv-ng-list [model]="model.list"></sv-ng-list>
-    </div>
+    </ng-container>
 </ng-template>
