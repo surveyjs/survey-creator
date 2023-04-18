@@ -319,7 +319,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       if (this.isModal) {
         expression = "{panel.questionName} empty and {panelIndex} == 0";
       }
-      this.panel["templateValue"].getQuestionByName("placeholder").visibleIf = expression;
+      this.panel.template.getQuestionByName("placeholder").visibleIf = expression;
     }
   }
   protected getSurveyJSON(): any {

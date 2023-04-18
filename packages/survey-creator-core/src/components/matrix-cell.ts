@@ -96,6 +96,11 @@ export class MatrixCellWrapperViewModel extends Base {
     }
     event.stopPropagation();
   }
+  public get isSupportCellEditor(): boolean {
+    if(!this.question || !this.question.getType) return false;
+    const type = this.question.getType();
+    return type !== "text" && type !== "comment";
+  }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {
       toggleHovered(event, element);
