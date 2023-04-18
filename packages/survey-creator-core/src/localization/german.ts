@@ -390,7 +390,7 @@ var germanTranslation = {
       maxTimeToFinish: "Zeitlimit zum Beenden der Seite (in Sekunden)"
     },
     question: {
-      page: "Elternseite
+      page: "Elternseite"
     },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",

@@ -11,6 +11,8 @@ import {
   PropertyJSONGenerator,
 } from "./index";
 import { updateMatrixRemoveAction } from "../utils/actions";
+import { QuestionRatingAdornerViewModel } from "../components/question-rating";
+import { CreatorBase } from "../entries";
 
 Serializer.addProperty("itemvalue",
   {
@@ -573,6 +575,28 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
       prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name == "rateValues"
     );
   }
+
+  private updateAllowAddRemove(matrixQuestion: QuestionMatrixDynamicModel, obj: QuestionRatingModel) {
+    matrixQuestion.allowRemoveRows = QuestionRatingAdornerViewModel.allowRemoveForElement(obj);
+    matrixQuestion.allowAddRows = QuestionRatingAdornerViewModel.allowAddForElement(obj, matrixQuestion.maxRowCount);
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+    super.onCreated(obj, question, prop);
+    const matrixQuestion = <QuestionMatrixDynamicModel>question;
+    this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+    obj.onPropertyChanged.add((sender, options) => {
+      if (options.name == "rateCount" || options.name == "rateDisplayMode") {
+        this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+      }
+    });
+  }
+
+  public onGetQuestionTitleActions(obj: Base, options: any): void {
+    const clearAction = options.titleActions.filter((a) => a.id == "property-grid-clear")[0];
+    if (clearAction) clearAction.visible = false;
+    super.onGetQuestionTitleActions(obj, options);
+  }
+
   protected filterPropertyNames(propNames: Array<string>) {
     return propNames;
   }
