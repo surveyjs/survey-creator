@@ -52,3 +52,4 @@ export * from "./adorners/question-rating.component";
 export * from "./header/logo-image.component";
 export * from "./custom-questions/spin-editor.component";
 export * from "./custom-questions/color.component";
+export * from "./custom-questions/file.component";

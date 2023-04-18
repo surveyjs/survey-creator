@@ -391,3 +391,28 @@ test("Check spinedit editor", async (t) => {
     await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
   });
 });
+test("Check file editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "image",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "image";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "fileedit" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='image']");
+    await takeElementScreenshot("file-editor.png", questionSelector, t, comparer);
+  });
+});
