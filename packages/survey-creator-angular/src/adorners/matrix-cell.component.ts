@@ -21,7 +21,7 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
     return this.componentData.question;
   }
   public get isSupportCellEditor(): boolean {
-    return this.componentData.isSupportCellEditor;
+    return this.adorner.isSupportCellEditor;
   }
   public get column() {
     return this.componentData.column;
