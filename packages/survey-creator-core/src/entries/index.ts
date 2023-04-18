@@ -49,6 +49,7 @@ export * from "../json5";
 //custom questions for property grid
 export * from "../custom-questions/question-spin-editor";
 export * from "../custom-questions/question-color";
+export * from "../custom-questions/question-file";
 
 export * from "../property-grid";
 export * from "../property-grid/condition";

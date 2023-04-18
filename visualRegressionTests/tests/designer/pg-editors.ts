@@ -75,6 +75,35 @@ test("Values editors, keep them close", async (t) => {
   });
 });
 
+test("Check default value editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const json = {
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1",
+          "defaultValue": "default"
+        }
+      ]
+    };
+    await t.resizeWindow(1560, 1440);
+    await setJSON(json);
+
+    const question1 = Selector("[data-name=\"question1\"]");
+
+    await t
+      .click(question1)
+      .pressKey("enter")
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Data"));
+    const questionSelector = Selector("div[data-name='defaultValue']");
+
+    await takeElementScreenshot("default-value-clear-button.png", questionSelector, t, comparer);
+    await ClientFunction(() => { (<HTMLElement>document.querySelector("div[data-name='defaultValue'] .svc-question-link__clear-button"))?.focus(); })();
+    await takeElementScreenshot("default-value-clear-button-focus.png", questionSelector, t, comparer);
+  });
+});
+
 test("Default value popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
@@ -284,6 +313,23 @@ test("Check triggers question", async (t) => {
   });
 });
 
+test("Check question with error", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await setJSON({
+      type: "text",
+      name: "q1",
+    });
+    await addQuestionByAddQuestionButton(t, "Single Input");
+    const questionSelector = Selector("div[data-name='name']");
+    await t
+      .selectText(questionSelector.find("input"))
+      .pressKey("delete")
+      .pressKey("tab");
+    await takeElementScreenshot("pg-editor-errors.png", questionSelector, t, comparer);
+  });
+});
+
 test("Check color editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
@@ -343,5 +389,30 @@ test("Check spinedit editor", async (t) => {
     await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-spin-editor__input"));
     await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
+  });
+});
+test("Check file editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "image",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "image";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "fileedit" };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='image']");
+    await takeElementScreenshot("file-editor.png", questionSelector, t, comparer);
   });
 });
