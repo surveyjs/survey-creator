@@ -52,7 +52,7 @@ import {
   PropertyGridRowValueEditor,
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
-import { PropertyGridEditorMatrixMutlipleTextItems } from "../../src/property-grid/matrices";
+import { PropertyGridEditorMatrixMutlipleTextItems, PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 
@@ -1054,6 +1054,27 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
   expect(itemsQuestion.renderedTable.rows[1].cells[1].question.value).toEqual("item2");
   expect(itemsQuestion.renderedTable.rows[1].cells[2].question.value).toEqual("Item 2");
+});
+test("check Fast Entry for Rating", () => {
+  const question = new QuestionRatingModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixRateValues();
+  const fastEntry: any = propertyEditor.createPropertyEditorSetup(propertyGrid.obj, (<any>itemsQuestion).property,
+    itemsQuestion, new EmptySurveyCreatorOptions());
+  fastEntry.commentValue.value = "1|item1\n2\n3\n4|item4";
+  fastEntry.apply();
+  expect(question.rateValues).toHaveLength(4);
+  expect(question.rateValues[0].value).toEqual("1");
+  expect(question.rateValues[0].text).toEqual("item1");
+  expect(question.rateValues[1].value).toEqual("2");
+  expect(question.rateValues[1].text).toEqual("2");
+  expect(question.rateValues[2].value).toEqual("3");
+  expect(question.rateValues[2].text).toEqual("3");
+  expect(question.rateValues[3].value).toEqual("4");
+  expect(question.rateValues[3].text).toEqual("item4");
 });
 test("bindings property editor", () => {
   const survey = new SurveyModel({

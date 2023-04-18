@@ -467,10 +467,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    var names = [];
-    (<any>question).columns.forEach((col) => {
-      names.push(col.name);
-    });
+    var names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public canClearPropertyValue(
