@@ -397,6 +397,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "dropdown",
                 name: "themeName",
+                descriptionLocation: "hidden",
                 choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
                 defaultValue: "default",
                 allowClear: false
@@ -404,6 +405,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "buttongroup",
                 name: "themeMode",
+                descriptionLocation: "hidden",
                 choices: ["panels", "lightweight"],
                 defaultValue: "panels"
               },
@@ -422,24 +424,29 @@ export class TestSurveyTabViewModel extends Base {
                 type: "color",
                 name: "--primary",
                 title: "Accent Color",
+                descriptionLocation: "hidden",
                 defaultValue: "#19b394"
               },
               {
                 type: "color",
                 name: "--background-dim",
                 title: "Background Color",
+                descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
               },
               {
-                type: "text",
+                type: "fileedit",
                 name: "background-image",
-                title: "Background image"
+                title: "Background image",
+                descriptionLocation: "hidden",
+                placeholder: "Browse..."
               },
               {
                 type: "spinedit",
                 name: "background-opacity",
                 titleLocation: "left",
                 title: "Opacity",
+                descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
                 min: 0,
@@ -450,6 +457,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "panelBackgroundTransparency",
                 title: "Panel Background Transparency",
+                descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
                 min: 0,
@@ -460,6 +468,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "questionBackgroundTransparency",
                 title: "Question Background Transparency",
+                descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
                 min: 0,
@@ -473,6 +482,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "dropdown",
                 name: "--font-family",
+                descriptionLocation: "hidden",
                 choices: ["Open Sans", "Arial"],
                 defaultValue: "Open Sans",
                 allowClear: false
@@ -481,6 +491,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "--font-size",
                 title: "Font Size",
+                descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
                 min: 0,
@@ -494,6 +505,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "--scale",
                 title: "Scale",
+                descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
                 min: 0,
@@ -509,6 +521,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "--corner-radius",
                 title: "Corner Radius",
+                descriptionLocation: "hidden",
                 unit: "px",
                 defaultValue: 8,
                 min: 0
