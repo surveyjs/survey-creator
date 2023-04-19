@@ -67,13 +67,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       addGhostPage();
     };
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     if (!!this.page) {
       this.page.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
       ]);
+      this.page["surveyChangedCallback"] = undefined;
     }
     this.onPropertyValueChangedCallback = undefined;
   }

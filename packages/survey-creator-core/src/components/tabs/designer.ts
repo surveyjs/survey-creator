@@ -125,6 +125,10 @@ export class TabDesignerViewModel extends Base {
       this.pagesController.raisePagesChanged();
     }
   }
+  public dispose(): void {
+    super.dispose();
+    this.cssUpdater && this.cssUpdater.dispose();
+  }
   private checkLastPageToDelete(): boolean {
     if(this.survey.pageCount === 0) return false;
     if (this.survey.pageCount === 1 && !this.creator.isInitialSurveyEmpty) return false;
