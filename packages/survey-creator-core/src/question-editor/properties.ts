@@ -371,7 +371,7 @@ export class SurveyQuestionProperties {
     );
     for (var i = 0; i < props.length; i++) {
       var index = props[i].property.visibleIndex;
-      if (props[i].createdFromTabName) {
+      if (props[i].createdFromTabName && index < 0) {
         index = 0;
       }
       if (index < 0) continue;

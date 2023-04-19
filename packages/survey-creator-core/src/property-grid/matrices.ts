@@ -1,4 +1,4 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, Serializer } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
@@ -12,6 +12,15 @@ import {
 } from "./index";
 import { updateMatrixRemoveAction } from "../utils/actions";
 
+Serializer.addProperty("itemvalue",
+  {
+    name: "icon", isSerializable: false, readOnly: true, visibleIndex: 0, visibleIf: (obj: ItemValue): boolean => {
+      return obj &&
+          obj.ownerPropertyName === "rateValues" &&
+          obj.locOwner instanceof QuestionRatingModel &&
+          obj.locOwner.rateType == "smileys";
+    },
+  });
 export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   static getNewColumnName(
     objs: Array<any>,
@@ -363,6 +372,9 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   ): number {
     return -1;
   }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames;
+  }
   protected getColumnsJSON(
     obj: Base,
     prop: JsonObjectProperty,
@@ -375,7 +387,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var res = new PropertyJSONGenerator(obj, options).createColumnsJSON(
       className,
-      propNames
+      this.filterPropertyNames(propNames)
     );
     for (var i = 0; i < res.length; i++) {
       if (res[i].cellType == "comment") {
@@ -424,8 +436,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
 export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return (
-      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue")
+      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name != "rateValues"
     );
+  }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames.filter(p => p != "icon");
   }
   public isPropertyEditorSetupEnabled(
     obj: Base,
@@ -452,10 +467,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     question: Question,
     options: ISurveyCreatorOptions
   ): IPropertyEditorSetup {
-    var names = [];
-    (<any>question).columns.forEach((col) => {
-      names.push(col.name);
-    });
+    var names = (<any>question).columns.filter(c => !c.readOnly).map(c => c.name);
     return new FastEntryEditor(obj[prop.name], options, prop.className, names);
   }
   public canClearPropertyValue(
@@ -486,6 +498,16 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
   }
   protected getKeyValue(): string {
     return "value";
+  }
+  protected getMatrixJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    propNames: Array<string>,
+    options: ISurveyCreatorOptions
+  ): any {
+    let res = super.getMatrixJSON(obj, prop, propNames, options);
+    if (prop.name === "rateValues" && res.columns[0].name == "icon") res.showHeader = res.columns > 3;
+    return res;
   }
   protected getMaximumRowCount(
     obj: Base,
@@ -519,6 +541,37 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       }
     }
     return false;
+  }
+  public onMatrixCellCreated(obj: Base, options: any): void {
+    super.onMatrixCellCreated(obj, options);
+    function updateHtml(question, value) {
+      question.html = "<div class=\"spg-smiley-icon\"><svg><use xlink:href=\"#icon-" + value + "\"></use></svg></div>";
+    }
+    function changeValueCallback(sender, options) {
+      if (options.name != "value") return;
+      updateHtml(sender, options.newValue);
+    }
+    if (obj instanceof QuestionRatingModel && options.columnName == "icon") {
+      updateHtml(options.cellQuestion, options.cellQuestion.value);
+      options.cellQuestion.onPropertyChanged.add(changeValueCallback);
+    }
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    if (obj instanceof QuestionRatingModel && options.columnName == "icon") {
+      //options.cellQuestion.html = "<svg style='fill: red'><use xlink:href=\"#" + options.cellQuestion.value + "\"></use></svg>";
+      options.cellQuestion.html = options.cellQuestion.value;
+    }
+  }
+}
+
+export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrixItemValues {
+  public fit(prop: JsonObjectProperty): boolean {
+    return (
+      prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name == "rateValues"
+    );
+  }
+  protected filterPropertyNames(propNames: Array<string>) {
+    return propNames;
   }
 }
 
@@ -781,6 +834,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixItemValues());
+PropertyGridEditorCollection.register(new PropertyGridEditorMatrixRateValues());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixColumns());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixPages());
 PropertyGridEditorCollection.register(
@@ -797,3 +851,17 @@ PropertyGridEditorCollection.register(
 );
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixValidators());
 PropertyGridEditorCollection.register(new PropertyGridEditorMatrixTriggers());
+
+PropertyGridEditorCollection.register({
+  fit: function (prop) {
+    if (prop.name === "icon") {
+      return prop.classInfo.name === "itemvalue";
+    }
+    return false;
+  },
+  getJSON: function (obj: Question) {
+    return {
+      "type": "html"
+    };
+  }
+});

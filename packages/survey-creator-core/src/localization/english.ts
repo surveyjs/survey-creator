@@ -491,6 +491,9 @@ export var enStrings = {
     hideIfRowsEmpty: "Hide the question if there are no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
     rateValues: "Custom rate values",
+    rateCount: "Rate count",
+    rateDisplayMode: "Rate display mode",
+    autoGenerate: "How to specify rate values?",
     hideIfChoicesEmpty: "Hide the question if it contains no choices",
     hideNumber: "Hide question number",
     minWidth: "Minimum width (in CSS-accepted values)",
@@ -684,6 +687,21 @@ export var enStrings = {
     onHiddenContainer: "When the question or its panel/page becomes hidden",
     clearInvisibleValues: {
       none: "Never"
+    },
+    inputType: {
+      color: "Color",
+      date: "Date",
+      "datetime-local": "Date and Time",
+      email: "Email",
+      month: "Month",
+      number: "Number",
+      password: "Password",
+      range: "Range",
+      tel: "Phone Number",
+      text: "Text",
+      time: "Time",
+      url: "URL",
+      week: "Week"
     },
     all: "All",
     page: "Page",

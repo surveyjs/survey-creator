@@ -20,6 +20,9 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   public get question(): QuestionSelectBase {
     return this.componentData.question;
   }
+  public get isSupportCellEditor(): boolean {
+    return this.adorner.isSupportCellEditor;
+  }
   public get column() {
     return this.componentData.column;
   }

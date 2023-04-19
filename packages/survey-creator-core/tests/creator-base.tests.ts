@@ -2098,7 +2098,8 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   creator.JSON = {
     elements: [
       { type: "text", name: "q1" },
-      { type: "comment", name: "q2" }
+      { type: "comment", name: "q2" },
+      { type: "text", name: "q3" }
     ]
   };
   creator.survey.addNewPage("page2");
@@ -2106,24 +2107,24 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
     if (options.obj.isQuestion) {
       options.allowChangeType = options.obj.getType() !== "comment";
       options.allowChangeRequired = options.obj.getType() !== "text";
+      options.allowChangeInputType = options.obj.name !== "q1";
     }
   });
-  const q1Model = new QuestionAdornerViewModel(
-    creator,
-    creator.survey.getAllQuestions()[0],
-    undefined
-  );
-  const q2Model = new QuestionAdornerViewModel(
-    creator,
-    creator.survey.getAllQuestions()[1],
-    undefined
-  );
+  const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
+  const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
+  const q3Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[2], undefined);
   creator.selectElement(q1Model.element);
   expect(q1Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q1Model.getActionById("isrequired").visible).toBeFalsy();
+  expect(q1Model.getActionById("convertInputType").visible).toBeFalsy();
   creator.selectElement(q2Model.element);
   expect(q2Model.getActionById("convertTo").visible).toBeFalsy();
   expect(q2Model.getActionById("isrequired").visible).toBeTruthy();
+  expect(q2Model.getActionById("convertInputType")).toBeFalsy();
+  creator.selectElement(q3Model.element);
+  expect(q3Model.getActionById("convertTo").visible).toBeTruthy();
+  expect(q3Model.getActionById("isrequired").visible).toBeFalsy();
+  expect(q3Model.getActionById("convertInputType").visible).toBeTruthy();
 });
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
   const creator = new CreatorTester();
@@ -2345,6 +2346,45 @@ test("ConvertTo separators", (): any => {
   expect(items2[0].needSeparator).toBeFalsy();
   expect(items2[1].needSeparator).toBeFalsy();
 
+});
+test("convertInputType, change inputType for a text question", (): any => {
+  const creator = new CreatorTester();
+
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  let question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  let questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  expect(questionModel.getActionById("convertInputType")).toBeFalsy();
+  let action = questionModel.getActionById("convertTo");
+  expect(action).toBeTruthy();
+  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
+  question = creator.survey.getQuestionByName("q2");
+  creator.selectElement(question);
+  questionModel = new QuestionAdornerViewModel(creator, question, undefined);
+  action = questionModel.getActionById("convertTo");
+  expect(action).toBeTruthy();
+  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeFalsy();
+  action = questionModel.getActionById("convertInputType");
+  expect(action).toBeTruthy();
+  expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
+  expect(action.title).toBe("Text");
+  const popup = action.popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  expect(list).toBeTruthy();
+  expect(list.selectedItem).toBeTruthy();
+  expect(list.selectedItem.id).toEqual("text");
+  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+  expect(question.inputType).toBe("tel");
+  expect(action.title).toBe("Phone Number");
+  question.inputType = "password";
+  expect(action.title).toBe("Password");
+  expect(list.selectedItem.id).toEqual("password");
 });
 
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {

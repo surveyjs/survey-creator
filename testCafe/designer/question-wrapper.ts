@@ -11,14 +11,17 @@ function normalize(str) {
 }
 
 const convertQuestionTypesCount = 20;
+const convertTextQuestionInputTypesCount = 13;
 const requiredActionButton = questionToolbarActions.find('button[title="Required"]');
 const deleteActionButton = questionToolbarActions.find('button[title="Delete"]');
 const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
+const convertInputTypeActionButton = questionToolbarActions.find('button[title="Text"]');
 const duplicateActionButton = questionToolbarActions.find('button[title="Duplicate"]');
 const dotsButton = Selector(".svc-question__content-actions .sv-action.sv-dots");
 const listItems = Selector(".sv-popup .sv-list__item").filterVisible();
 const popupContent = Selector(".sv-popup__content .sv-list").filterVisible();
 const convertPopupContent = "Radiogroup\nRating\nCheckbox\nDropdown\nTag Box\nBoolean\nFile\nImage Picker\nRanking\nSingle Input\nComment\nMultiple Text\nDynamic Panel\nSingle-Choice Matrix\nMultiple-Choice Matrix\nDynamic Matrix\nHTML\nExpression (read-only)\nImage\nSignature Pad";
+const convertInputTypePopupContent = "Color\nDate\nDate and Time\nEmail\nMonth\nNumber\nPassword\nRange\nPhone Number\nText\nTime\nURL\nWeek";
 
 test("Single input question wrapper actions", async (t) => {
   const separator = questionToolbarActions.nth(3).find(".sv-action-bar-separator");
@@ -30,8 +33,9 @@ test("Single input question wrapper actions", async (t) => {
     .click(getToolboxItemByText("Single Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
-    .expect(questionToolbarActions.count).eql(4)
+    .expect(questionToolbarActions.count).eql(5)
     .expect(convertActionButton.visible).ok()
+    .expect(convertInputTypeActionButton.visible).ok()
     .expect(duplicateActionButton.visible).ok()
     .expect(requiredActionButton.visible).ok()
     //.expect(separator.visible).ok()
@@ -41,8 +45,6 @@ test("Single input question wrapper actions", async (t) => {
 });
 
 test("Single input question wrapper action convert", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-
   await t
     .expect(questions.exists).notOk()
 
@@ -66,10 +68,28 @@ test("Single input question wrapper action convert", async (t) => {
     .click(getListItemByText("Single Input"))
     .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
 });
+test("Single input question wrapper action convert inputType", async (t) => {
+  await t
+    .expect(questions.exists).notOk()
+
+    .hover(getToolboxItemByText("Single Input"))
+    .click(getToolboxItemByText("Single Input"))
+    .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
+    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(convertInputTypeActionButton.visible).ok()
+
+    .click(convertInputTypeActionButton)
+    .expect(listItems.count).eql(convertTextQuestionInputTypesCount)
+    .expect(popupContent.innerText).eql(convertInputTypePopupContent)
+
+    .click(getListItemByText("Date"))
+
+    .click(questionToolbarActions.find('button[title="Date"]'))
+    .expect(listItems.count).eql(convertTextQuestionInputTypesCount)
+    .expect(popupContent.innerText).eql(convertInputTypePopupContent);
+});
 
 test("Single input question wrapper action convert on hover", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-
   await t
     .expect(questions.exists).notOk()
 
@@ -256,8 +276,6 @@ test("Dropdown question with ability to collapse choices", async (t) => {
 });
 
 test("Keep focus on question convert", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single Input"]');
-
   await t
     .expect(questions.exists).notOk()
 
