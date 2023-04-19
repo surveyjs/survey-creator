@@ -687,6 +687,21 @@ export var enStrings = {
     clearInvisibleValues: {
       none: "Never"
     },
+    inputType: {
+      color: "Color",
+      date: "Date",
+      "datetime-local": "Date and Time",
+      email: "Email",
+      month: "Month",
+      number: "Number",
+      password: "Password",
+      range: "Range",
+      tel: "Phone Number",
+      text: "Text",
+      time: "Time",
+      url: "URL",
+      week: "Week"
+    },
     all: "All",
     page: "Page",
     survey: "Survey",
