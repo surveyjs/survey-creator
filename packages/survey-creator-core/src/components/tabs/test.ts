@@ -366,9 +366,11 @@ export class TestSurveyTabViewModel extends Base {
       }
       if (options.name === "background-image") {
         this.survey.backgroundImage = options.value;
+        return;
       }
       if (options.name === "background-opacity") {
         this.survey.backgroundOpacity = options.value / 100;
+        return;
       }
       this.simulator.themeVariables = sender.data;
     });
