@@ -933,13 +933,28 @@ export var enStrings = {
     iconSize: "Icon size" // Auto-generated string
   },
   theme: {
-    "--primary": "Primary Color",
     "--background": "Background Color",
-    "--background-dim": "Background Dim Color",
     "--background-dim-light": "Background Dim Light Color",
     "--primary-foreground": "Primary Foreground Color",
     "--foreground": "Foreground Color",
     "--base-unit": "Base Unit",
+    "themeName": "Theme",
+    "themeMode": "Modes",
+    "themeModePanels": "Panels",
+    "themeModeLightweight": "Lightweight",
+    "themePaletteLight": "Light",
+    "themePaletteDark": "Dark",
+    "--primary": "Accent Color",
+    "--background-dim": "Background Color",
+    "background-image": "Background Image",
+    "background-opacity": "Opacity",
+    "panelBackgroundTransparency": "Panel Background Transparency",
+    "questionBackgroundTransparency": "Question Background Transparency",
+    "--font-family": "Font Family",
+    "--font-size": "Font Size",
+    "--scale": "Scale",
+    "--corner-radius": "Corner Radius",
+
   },
 };
 

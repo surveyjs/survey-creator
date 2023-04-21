@@ -403,6 +403,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "dropdown",
                 name: "themeName",
+                title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
                 choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
                 defaultValue: "default",
@@ -411,15 +412,21 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "buttongroup",
                 name: "themeMode",
+                title: getLocString("theme.themeMode"),
                 descriptionLocation: "hidden",
-                choices: ["panels", "lightweight"],
+                choices: [
+                  { value: "panels", text: getLocString("theme.themeModePanels") },
+                  { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
                 defaultValue: "panels"
               },
               {
                 type: "buttongroup",
                 name: "themePalette",
                 titleLocation: "hidden",
-                choices: ["light", "dark"],
+                choices: [
+                  { value: "light", text: getLocString("theme.themePaletteLight") },
+                  { value: "dark", text: getLocString("theme.themePaletteDark") }
+                ],
                 defaultValue: "light"
               }
             ]
@@ -429,21 +436,21 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "color",
                 name: "--primary",
-                title: "Accent Color",
+                title: getLocString("theme.--primary"),
                 descriptionLocation: "hidden",
                 defaultValue: "#19b394"
               },
               {
                 type: "color",
                 name: "--background-dim",
-                title: "Background Color",
+                title: getLocString("theme.--background-dim"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
               },
               {
                 type: "fileedit",
                 name: "background-image",
-                title: "Background image",
+                title: getLocString("theme.background-image"),
                 descriptionLocation: "hidden",
                 placeholder: "Browse..."
               },
@@ -451,7 +458,7 @@ export class TestSurveyTabViewModel extends Base {
                 type: "spinedit",
                 name: "background-opacity",
                 titleLocation: "left",
-                title: "Opacity",
+                title: getLocString("theme.background-opacity"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -462,7 +469,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "spinedit",
                 name: "panelBackgroundTransparency",
-                title: "Panel Background Transparency",
+                title: getLocString("theme.panelBackgroundTransparency"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -473,7 +480,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "spinedit",
                 name: "questionBackgroundTransparency",
-                title: "Question Background Transparency",
+                title: getLocString("theme.questionBackgroundTransparency"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -488,6 +495,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "dropdown",
                 name: "--font-family",
+                title: getLocString("theme.--font-family"),
                 descriptionLocation: "hidden",
                 choices: ["Open Sans", "Arial"],
                 defaultValue: "Open Sans",
@@ -496,7 +504,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "spinedit",
                 name: "--font-size",
-                title: "Font Size",
+                title: getLocString("theme.--font-size"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -516,7 +524,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "spinedit",
                 name: "--scale",
-                title: "Scale",
+                title: getLocString("theme.--scale"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -532,7 +540,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "spinedit",
                 name: "--corner-radius",
-                title: "Corner Radius",
+                title: getLocString("theme.--corner-radius"),
                 descriptionLocation: "hidden",
                 unit: "px",
                 defaultValue: 8,
