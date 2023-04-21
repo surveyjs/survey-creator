@@ -372,6 +372,10 @@ export class TestSurveyTabViewModel extends Base {
         this.survey.backgroundOpacity = options.value / 100;
         return;
       }
+      if (options.name === "themeMode") {
+        this.survey["isCompact"] = options.value === "lightweight";
+        return;
+      }
       this.simulator.themeVariables = sender.data;
     });
     return themeEditorSurvey;
@@ -498,6 +502,12 @@ export class TestSurveyTabViewModel extends Base {
                 defaultValue: 100,
                 min: 0,
                 step: 5
+              },
+              {
+                type: "expression",
+                name: "--sjs-font-size",
+                expression: "{--font-size}*16/100+\"px\"",
+                visible: false
               },
             ]
           }, {
