@@ -26,6 +26,11 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   public get column() {
     return this.componentData.column;
   }
+  public selectContext(event: MouseEvent) {
+    if(this.question) {
+      this.adorner.selectContext(this.adorner, event);
+    }
+  }
 
   public get row() {
     return this.componentData.row;
