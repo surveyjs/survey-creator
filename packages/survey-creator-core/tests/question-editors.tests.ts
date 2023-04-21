@@ -1,7 +1,8 @@
-import { QuestionRatingModel, Event, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionSelectBase } from "survey-core";
+import { QuestionRatingModel, Event, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionSelectBase, MatrixDropdownColumn, Helpers } from "survey-core";
 import { MatrixCellWrapperViewModel, MatrixCellWrapperEditSurvey } from "../src/components/matrix-cell";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
+import { SurveyHelper } from "../src/survey-helper";
 
 test("QuestionRatingAdornerViewModel add/remove items w/o ratingItems", () => {
   const ratingQuestion = new QuestionRatingModel("q1");
@@ -73,6 +74,46 @@ test("MatrixCellWrapperViewModel select context", () => {
   cellWrapper.selectContext(cellWrapper, event);
   expect(creator.selectedElement).toBe(cellWrapper.templateData);
   expect(creator.selectedProperty).toBe(undefined);
+});
+test("Helpers.isSupportCellEditor", () => {
+  expect(SurveyHelper.isSupportCellEditor("text")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("comment")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("file")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("checkbox")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("dropdown")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("radiogroup")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("rating")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("boolean")).toBeTruthy();
+});
+test("MatrixCellWrapperViewModel.isSupportCellEditor", () => {
+  const creator: any = {
+    selectedElement: undefined,
+    selectedProperty: undefined,
+    selectElement: undefined,
+    onSelectedElementChanged: new Event()
+  };
+  creator.selectElement = (element: any, property?: string, focus?: boolean) => {
+    creator.selectedElement = element;
+    creator.selectedProperty = property;
+  };
+  const event: any = {
+    stopPropagation: () => { }
+  };
+
+  let cellWrapper = new MatrixCellWrapperViewModel(creator, null, null, null, null);
+  expect(cellWrapper.isSupportCellEditor).toBeFalsy();
+  const column = new MatrixDropdownColumn("q1");
+  cellWrapper = new MatrixCellWrapperViewModel(creator, null, column.templateQuestion, null, null);
+  expect(cellWrapper.isSupportCellEditor).toBeTruthy();
+  column.cellType = "text";
+  cellWrapper = new MatrixCellWrapperViewModel(creator, null, column.templateQuestion, null, null);
+  expect(cellWrapper.isSupportCellEditor).toBeFalsy();
+  column.cellType = "comment";
+  cellWrapper = new MatrixCellWrapperViewModel(creator, null, column.templateQuestion, null, null);
+  expect(cellWrapper.isSupportCellEditor).toBeFalsy();
+  column.cellType = "dropdown";
+  cellWrapper = new MatrixCellWrapperViewModel(creator, null, column.templateQuestion, null, null);
+  expect(cellWrapper.isSupportCellEditor).toBeTruthy();
 });
 
 test("Special choices editability", (): any => {

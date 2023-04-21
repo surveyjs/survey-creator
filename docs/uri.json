@@ -1,13 +1,16 @@
 {
-  "folders": [
-    "customize-question-types"
-  ],
+  "folders": [ ],
   "rename": {
-    "create-specialized-question-types": "customize-question-types-create-specialized-question-types",
-    "create-composite-question-types": "customize-question-types-create-composite-question-types",
-    "build-component-questions": "customize-question-types-create-composite-question-types",
-    "create-custom-widget": "customize-question-types-create-custom-widgets",
-    "third-party-component-integration-react": "customize-question-types-third-party-component-integration-react"
+    "create-specialized-question-types": "customize-question-types",
+    "create-composite-question-types": "customize-question-types",
+    "build-component-questions": "customize-question-types",
+    "create-custom-widget": "customize-question-types",
+    "third-party-component-integration-react": "customize-question-types",
+    "customize-question-types-create-specialized-question-types": "customize-question-types",
+    "customize-question-types-create-composite-question-types": "customize-question-types",
+    "customize-question-types-create-custom-widgets": "customize-question-types",
+    "customize-question-types-third-party-component-integration-react": "customize-question-types",
+    "customize-question-types-third-party-component-integration-angular": "customize-question-types"
   },
   "classRename": {
     "surveyeditor": "survey-creator",

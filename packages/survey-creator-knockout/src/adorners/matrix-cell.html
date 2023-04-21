@@ -5,7 +5,7 @@
   <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
   <!-- /ko -->
 
-  <!-- ko if: $data.question -->
+  <!-- ko if: $data.isSupportCellEditor -->
   <div class="svc-matrix-cell__question-controls">
     <sv-svg-icon class="svc-matrix-cell__question-controls-button" data-bind="click: editQuestion, key2click"
       params="iconName: 'icon-edit', size: 24"></sv-svg-icon>

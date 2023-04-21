@@ -11,6 +11,7 @@ import {
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
+import { SurveyHelper } from "../survey-helper";
 
 require("./matrix-cell.scss");
 
@@ -95,6 +96,10 @@ export class MatrixCellWrapperViewModel extends Base {
       model.creator.selectElement(model.context);
     }
     event.stopPropagation();
+  }
+  public get isSupportCellEditor(): boolean {
+    if(!this.question || !this.question.getType) return false;
+    return SurveyHelper.isSupportCellEditor(this.question.getType());
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     if (!this.row && this.context && this.context.getPropertyValue && this.context.getType && this.context.getType() !== "itemvalue") {

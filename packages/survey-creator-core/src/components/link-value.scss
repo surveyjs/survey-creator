@@ -8,11 +8,11 @@
   margin-left: calcSize(-2);
 }
 .svc-question-link__clear-button {
-  margin-left: calcSize(4);
   color: $red;
   font-weight: 600;
   cursor: pointer;
 }
+.svc-question-link__clear-button:focus,
 .svc-question-link__clear-button:hover {
   background-color: $red-light;
 }

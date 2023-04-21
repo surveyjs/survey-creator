@@ -2372,7 +2372,7 @@ test("convertInputType, change inputType for a text question", (): any => {
   action = questionModel.getActionById("convertInputType");
   expect(action).toBeTruthy();
   expect(action.css.indexOf("sv-action--convertTo-last") > -1).toBeTruthy();
-  expect(action.title).toBe("text");
+  expect(action.title).toBe("Text");
   const popup = action.popupModel;
   expect(popup).toBeTruthy();
   const list = popup.contentComponentData.model;
@@ -2381,9 +2381,9 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(list.selectedItem.id).toEqual("text");
   list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
   expect(question.inputType).toBe("tel");
-  expect(action.title).toBe("tel");
+  expect(action.title).toBe("Phone Number");
   question.inputType = "password";
-  expect(action.title).toBe("password");
+  expect(action.title).toBe("Password");
   expect(list.selectedItem.id).toEqual("password");
 });
 

@@ -94,7 +94,7 @@ export var propertyGridCss = {
   image: { root: "spg-image", image: "sv_image_image" },
   error: {
     root: "spg-question__erbox",
-    icon: "",
+    icon: "spg-question__erbox-icon",
     item: "",
     locationTop: "spg-question__erbox--location--top",
     locationBottom: "spg-question__erbox--location--bottom"
@@ -257,7 +257,8 @@ export var propertyGridCss = {
     root: "spg-input spg-comment",
     content: "spg-question__content spg-comment__content",
     remainingCharacterCounter: "spg-remaining-character-counter",
-    small: "spg-row__question--small"
+    small: "spg-row__question--small",
+    onError: "spg-input--error"
   },
   expression: "",
   file: {
@@ -319,7 +320,7 @@ export var propertyGridCss = {
   spinedit: {
     root: "spg-input spg-spin-editor spg-input-container",
     control: "spg-spin-editor__input spg-input-container__input",
-    buttonsContainer: "spg-spin-editor__buttons-container",
+    buttonsContainer: "spg-input-container__buttons-container",
     arrowButton: "spg-input__edit-button",
     increaseButtonIcon: "icon-arrow-up",
     decreaseButtonIcon: "icon-arrow-down"
@@ -331,5 +332,18 @@ export var propertyGridCss = {
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
     colorDrodownIcon: "icon-drop-down-arrow"
+  },
+  fileedit: {
+    root: "spg-input spg-input-container spg-file-edit",
+    control: "spg-input-container__input",
+    buttonsContainer: "spg-input-container__buttons-container",
+    chooseButtonIcon: "icon-file",
+    clearButtonIcon: "icon-clear",
+    fileInput: "sd-visuallyhidden",
+    clearButton: "spg-input__edit-button",
+    chooseButton: "spg-input__edit-button spg-file-edit__choose-button"
+  },
+  linkvalue: {
+    content: "spg-link"
   }
 };
