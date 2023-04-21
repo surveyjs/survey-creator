@@ -451,7 +451,7 @@ export class CreatorBase extends Base
    * - `options.allowAddToToolbox` - Allows users to save the current survey element configuration in the Toolbox.
    * - `options.allowChangeRequired` - Allows users to make the survey element required.
    * - `options.allowChangeType` - Allows users to change the survey element type.
-   * - `options.allowChangeInputType` - Allows users to change the text question inputType property.
+   * - `options.allowChangeInputType` - Allows users to change the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions.
    * - `options.allowCopy` - Allows users to duplicate the survey element.
    * - `options.allowDelete` - Allows users to delete the survey element.
    * - `options.allowDragging` - Allows users to drag and drop the survey element.

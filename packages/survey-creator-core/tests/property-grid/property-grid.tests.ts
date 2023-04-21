@@ -3059,3 +3059,18 @@ test("Check rateValues position in tab", () => {
   expect(panel).toBeTruthy();
   expect(panel.questions.indexOf(rateValuesQuestion)).toBeGreaterThan(0);
 });
+test("test rateValues allow add, allow remove", () => {
+  const question = new QuestionRatingModel("q1");
+  question.rateCount = 2;
+  const propertyGrid = new PropertyGridModelTester(question);
+  const rateValuesQuestion = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("rateValues");
+  //expect(rateValuesQuestion.titleActions.filter(a => a.id == "property-grid-clear")[0].visible).toBeFalsy();
+
+  expect(rateValuesQuestion.allowRemoveRows).toBeFalsy();
+  expect(rateValuesQuestion.allowAddRows).toBeTruthy();
+
+  question.rateCount = 20;
+  expect(rateValuesQuestion.allowRemoveRows).toBeTruthy();
+  expect(rateValuesQuestion.allowAddRows).toBeFalsy();
+
+});

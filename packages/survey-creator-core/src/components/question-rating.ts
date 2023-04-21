@@ -4,6 +4,7 @@ import {
   Serializer,
   QuestionRatingModel,
   surveyLocalization,
+  settings,
   ItemValue,
   Base
 } from "survey-core";
@@ -26,9 +27,13 @@ export class QuestionRatingAdornerViewModel extends Base {
     return this.surveyElement as QuestionRatingModel;
   }
 
+  static useRateValues(element: any): boolean {
+    return element.useRateValues();
+  }
+
   public addItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowAdd) return;
-    if (model.element.rateValues.length === 0) {
+    if (!QuestionRatingAdornerViewModel.useRateValues(model.element)) {
       model.element.rateMax += model.element.rateStep;
     } else {
       let nextValue = null;
@@ -70,12 +75,12 @@ export class QuestionRatingAdornerViewModel extends Base {
     if (allowDelete) {
       const question = model.element;
       if (
-        question.rateValues.length === 0 &&
+        !QuestionRatingAdornerViewModel.useRateValues(model.element) &&
         itemIndex === question.rateValues.length - 1
       ) {
         question.rateMax -= question.rateStep;
       } else {
-        if (question.rateValues.length === 0) {
+        if (!QuestionRatingAdornerViewModel.useRateValues(model.element)) {
           // eslint-disable-next-line no-self-assign
           question.rateValues = question.rateValues;
         }
@@ -83,13 +88,23 @@ export class QuestionRatingAdornerViewModel extends Base {
       }
     }
   }
-  public get allowAdd() {
-    return !this.creator.readOnly &&
-      (this.creator.maximumRateValues < 1 ||
-        ((this.element.rateValues.length > 0 || this.creator.maximumRateValues > this.element.rateMax) && (this.element.rateValues.length < 1 || this.creator.maximumRateValues > this.element.rateValues.length)));
+
+  public static allowAddForElement(element: QuestionRatingModel, maximumRateValues: number): boolean {
+    if ((maximumRateValues < 1 || maximumRateValues > settings.ratingMaximumRateValueCount) && !QuestionRatingAdornerViewModel.useRateValues(element)) maximumRateValues = settings.ratingMaximumRateValueCount;
+    if (element.rateDisplayMode == "smileys" && (maximumRateValues < 1 || maximumRateValues > 10)) maximumRateValues = 10;
+    if (maximumRateValues < 1) return true;
+    return element.rateCount < maximumRateValues;
   }
-  public get allowRemove() {
-    return !this.creator.readOnly;
+  public get allowAdd(): boolean {
+    if (this.creator.readOnly) return false;
+    return QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maximumRateValues);
+  }
+  public static allowRemoveForElement(element: QuestionRatingModel): boolean {
+    return element.rateCount > 2;
+  }
+  public get allowRemove(): boolean {
+    if (this.creator.readOnly) return false;
+    return QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
   }
   get addTooltip() {
     return getLocString("pe.addItem");
