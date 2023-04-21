@@ -1,7 +1,8 @@
-import { QuestionRatingModel, Event, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionSelectBase, MatrixDropdownColumn } from "survey-core";
+import { QuestionRatingModel, Event, QuestionCheckboxModel, QuestionMatrixDropdownModel, QuestionSelectBase, MatrixDropdownColumn, Helpers } from "survey-core";
 import { MatrixCellWrapperViewModel, MatrixCellWrapperEditSurvey } from "../src/components/matrix-cell";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
+import { SurveyHelper } from "../src/survey-helper";
 
 test("QuestionRatingAdornerViewModel add/remove items w/o ratingItems", () => {
   const ratingQuestion = new QuestionRatingModel("q1");
@@ -74,7 +75,16 @@ test("MatrixCellWrapperViewModel select context", () => {
   expect(creator.selectedElement).toBe(cellWrapper.templateData);
   expect(creator.selectedProperty).toBe(undefined);
 });
-
+test("Helpers.isSupportCellEditor", () => {
+  expect(SurveyHelper.isSupportCellEditor("text")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("comment")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("file")).toBeFalsy();
+  expect(SurveyHelper.isSupportCellEditor("checkbox")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("dropdown")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("radiogroup")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("rating")).toBeTruthy();
+  expect(SurveyHelper.isSupportCellEditor("boolean")).toBeTruthy();
+});
 test("MatrixCellWrapperViewModel.isSupportCellEditor", () => {
   const creator: any = {
     selectedElement: undefined,

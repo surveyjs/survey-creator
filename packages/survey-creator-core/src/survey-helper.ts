@@ -327,4 +327,11 @@ export class SurveyHelper {
     }
     return undefined;
   }
+  public static isSupportCellEditor(type: string): boolean {
+    const supportedTypes = ["selectbase", "boolean", "rating"];
+    for(let i = 0; i < supportedTypes.length; i ++) {
+      if(Serializer.isDescendantOf(type, supportedTypes[i])) return true;
+    }
+    return false;
+  }
 }
