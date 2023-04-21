@@ -11,7 +11,7 @@ import {
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
-import { SurveyHelper } from "src/survey-helper";
+import { SurveyHelper } from "../survey-helper";
 
 require("./matrix-cell.scss");
 
