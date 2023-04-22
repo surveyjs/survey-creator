@@ -49,7 +49,7 @@ test("Add calculated values", async (t) => {
     .expect(rows.count).eql(2);
 });
 
-test.only("Check showInMultiple columns editing", async (t) => {
+test("Check showInMultiple columns editing", async (t) => {
   const json = {
     "elements": [
       {
