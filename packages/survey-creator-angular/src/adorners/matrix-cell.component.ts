@@ -26,10 +26,11 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   public get column() {
     return this.componentData.column;
   }
+  public get element() {
+    return this.componentData.element;
+  }
   public selectContext(event: MouseEvent) {
-    if(this.question) {
-      this.adorner.selectContext(this.adorner, event);
-    }
+    this.adorner.selectContext(this.adorner, event);
   }
 
   public get row() {
@@ -37,7 +38,7 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   }
   protected createModel(): void {
     if (this.componentData) {
-      this.adorner = new MatrixCellWrapperViewModel(this.creator, null, this.question, this.row, this.column);
+      this.adorner = new MatrixCellWrapperViewModel(this.creator, this.element, this.question, this.row, this.column);
     }
   }
   protected getPropertiesToTrack(): string[] {
