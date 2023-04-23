@@ -77,8 +77,8 @@ test("Single input question wrapper action convert inputType", async (t) => {
   await t
     .expect(questions.exists).notOk()
 
-    .hover(getToolboxItemByText("Single Input"))
-    .click(getToolboxItemByText("Single Input"))
+    .hover(getToolboxItemByText("Single-Line Input"))
+    .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
     .expect(convertInputTypeActionButton.visible).ok()
