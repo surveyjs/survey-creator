@@ -364,7 +364,7 @@ test("Check question with error", async (t) => {
       type: "text",
       name: "q1",
     });
-    await addQuestionByAddQuestionButton(t, "Single Input");
+    await addQuestionByAddQuestionButton(t, "Single-Line Input");
     const questionSelector = Selector("div[data-name='name']");
     await t
       .selectText(questionSelector.find("input"))
