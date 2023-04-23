@@ -21,7 +21,9 @@
   }
 }
 
-.svc-btn:hover,
+.svc-btn:hover {
+  background-color: $background-dark;
+}
 .svc-btn:focus {
   box-shadow: 0 0 0 2px $primary;
 }

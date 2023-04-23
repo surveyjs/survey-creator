@@ -49,6 +49,50 @@ test("Properties on the same line", async (t) => {
   });
 });
 
+test("Properties on the same line (date)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const json = {
+      "elements": [
+        {
+          "type": "text",
+          "name": "question1",
+          "inputType": "date"
+        }
+      ]
+    };
+    await t.resizeWindow(2560, 1440);
+    await ClientFunction(() => {
+      const qDef = window["SurveyCreatorCore"].SurveyQuestionEditorDefinition.definition.text;
+      const props = qDef.properties;
+      props.splice(0, 1, { name: "inputType", tab: "Input" });
+      props.splice(1, 1, { name: "min", tab: "Input" });
+      props.splice(2, 1, { name: "max", tab: "Input" });
+      qDef.tabs = [{ name: "Input", index: 1 }];
+    })();
+    await setJSON(json);
+
+    const question1 = Selector("[data-name=\"question1\"]");
+
+    await t
+      .click(question1)
+      .pressKey("enter")
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Input"))
+      .expect(Selector("span").withExactText("Min").visible).ok()
+      .expect(Selector(".spg-panel__content").filterVisible().visible).ok();
+
+    await takeElementScreenshot("properties-on-one-line-narrow-date.png", Selector(".spg-panel__content").filterVisible(), t, comparer);
+
+    const westResizer = Selector(".svc-resizer-west");
+    await t
+      .drag(westResizer, -60, 0);
+    await takeElementScreenshot("properties-on-one-line-date.png", Selector(".spg-panel__content").filterVisible(), t, comparer);
+
+    await t.click(Selector(".spg-panel__content .spg-question__title").withText("Max"));
+    await takeElementScreenshot("properties-on-one-line-focus-date.png", Selector(".spg-panel__content").filterVisible(), t, comparer);
+  });
+});
+
 test("Values editors, keep them close", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {

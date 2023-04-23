@@ -1,5 +1,5 @@
 <ng-template #template>
-  <div tabindex="-1" class="svc-matrix-cell" (click)="adorner.selectContext(adorner, $event)"
+  <div tabindex="-1" class="svc-matrix-cell" (click)="selectContext($event)"
     (mouseover)="adorner.hover($event, $event.currentTarget)"
     (mouseleave)="adorner.hover($event, $event.currentTarget)">
     <div class="svc-matrix-cell--selected" [class.svc-visible]="adorner.isSelected"></div>
