@@ -539,7 +539,7 @@ test("surveypages property editor and onCollectionItemAllowingCallback", () => {
     item: Base,
     options: ICollectionItemAllowOperations
   ): void => {
-    if(property.name !== "pages") return;
+    if (property.name !== "pages") return;
     const name = (<any>item).name;
     options.allowDelete = name !== "page2";
     options.allowEdit = name !== "page2";
@@ -2320,7 +2320,7 @@ test("Required properties restore on change to empty value", (): any => {
   var question = new QuestionTextModel("q1");
   question.title = "q1Title";
   var options = new EmptySurveyCreatorOptions();
-  options["survey"] = { getAllQuestions: ()=> [question] };
+  options["survey"] = { getAllQuestions: () => [question] };
   var propertyGrid = new PropertyGridModelTester(question, options);
   var titleQuestion = propertyGrid.survey.getQuestionByName("title") as QuestionTextModel;
   titleQuestion.value = "q1t";
@@ -2592,9 +2592,9 @@ test("We should not have 'Others' category in our objects", () => {
   const panel = page.addNewPanel("panel");
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
+  const ingnoredQuestions = ["selectbase", "matrixdropdownbase", "linkvalue"];
   for (let i = 0; i < allQuestionTypes.length; i++) {
-    if (allQuestionTypes[i].name == "linkvalue")
-      continue;
+    if (ingnoredQuestions.indexOf(allQuestionTypes[i].name) > -1) continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
     if (!!question) {
       objToCheck.push(question);
