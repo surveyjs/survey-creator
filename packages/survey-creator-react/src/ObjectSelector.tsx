@@ -16,11 +16,7 @@ class ObjectSelectorComponent extends SurveyElementBase<IObjectSelectorComponent
   renderElement(): JSX.Element {
     if (!this.model.isVisible) return null;
 
-    return (
-      <div className="svc-object-selector">
-        <List model={this.model.list}></List>
-      </div>
-    );
+    return (<List model={this.model.list}></List>);
   }
 }
 

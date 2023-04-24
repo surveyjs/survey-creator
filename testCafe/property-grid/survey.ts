@@ -48,3 +48,46 @@ test("Add calculated values", async (t) => {
     .click(addButton)
     .expect(rows.count).eql(2);
 });
+
+test("Check showInMultiple columns editing", async (t) => {
+  const json = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [
+          {
+            "name": "Column 1",
+            "cellType": "radiogroup"
+
+          },
+        ],
+        "choices": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "rows": [
+          "Row 1",
+        ]
+      }]
+  };
+  await setJSON(json);
+  const question = Selector("[data-name=\"q1\"]");
+  const columns = Selector("h4").withExactText("Columns");
+  const edit = Selector("button[title='Edit']");
+  const showInMultiple = Selector("input[aria-label='Show in multiple columns']");
+  const radioMatrixCell = Selector("td:nth-of-type(2) .svc-matrix-cell");
+  const controlButton = radioMatrixCell.find(".svc-matrix-cell__question-controls");
+  await t
+    .click(question)
+    .click(columns)
+    .click(edit)
+    .click(showInMultiple)
+    .expect(Selector("th .svc-matrix-cell .sv-string-editor").textContent).eql("1")
+    .hover(radioMatrixCell)
+    .click(controlButton)
+    .expect(Selector(".sv-popup__container .sd-selectbase__item .sd-item__control-label .svc-string-editor .sv-string-editor").filterVisible().textContent).eql("1");
+});

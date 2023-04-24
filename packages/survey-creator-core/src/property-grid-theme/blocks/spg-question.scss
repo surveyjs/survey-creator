@@ -111,21 +111,14 @@
   flex-wrap: wrap;
 
   & > div {
-    width: 0;
     flex-grow: 1;
     min-width: calcSize(25.5);
     .spg-question__header--location--left {
       min-width: calcSize(8);
     }
     input {
-      min-width: calcSize(17);
-      width: 100%;
-    }
-    input[type="date"] {
-      &::-webkit-calendar-picker-indicator {
-        display: none;
-      }
-      width: 100%;
+      min-width: calc(max(17 * #{$base-unit}, 100%));
+      width: 0;
     }
   }
 }

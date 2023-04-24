@@ -53,7 +53,7 @@ export const expandButtonSelector = Selector(".sv-action-bar-item[title=\"Show P
 export const collapseButtonSelector = Selector(".sv-action-bar-item[title=\"Hide Panel\"]");
 export const propertyGridSelector = Selector(".svc-side-bar__container");
 export const objectSelectorButton = Selector(".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item");
-export const objectSelectorPopup = Selector(".sv-popup .svc-object-selector");
+export const objectSelectorPopup = Selector(".sv-popup.svc-object-selector .sv-list__container");
 export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-grid-object-selector .sv-action-bar-item__title";
 
 export const questions = Selector(".svc-question__content");

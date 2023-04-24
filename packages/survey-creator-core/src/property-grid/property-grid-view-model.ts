@@ -140,6 +140,7 @@ export class PropertyGridViewModel extends Base {
           }
         );
         this.selectorPopupModel.toggleVisibility();
+        selectorModel.list.scrollToSelectedItem();
       },
       popupModel: this.selectorPopupModel
     });
