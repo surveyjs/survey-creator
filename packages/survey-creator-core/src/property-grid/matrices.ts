@@ -49,10 +49,16 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
       if (propertyName === "text" && objType === "itemvalue") {
-        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => !!rowObj.value ? rowObj.text : rowObj.text);
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
+          if(!!rowObj.value) return rowObj.value.toString();
+          return rowObj.text;
+        });
       }
       if (propertyName === "title" && objType === "matrixdropdowncolumn") {
-        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => !!rowObj.name ? rowObj.title: rowObj.title);
+        (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
+          if(!!rowObj.name) return rowObj.name;
+          return rowObj.title;
+        });
       }
     }
   }
