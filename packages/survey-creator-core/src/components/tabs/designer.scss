@@ -72,6 +72,7 @@ svc-tab-designer {
   align-items: center;
   justify-content: center;
   padding: calcSize(2);
+  box-sizing: border-box;
 }
 
 .svc-designer-placeholder-page {
