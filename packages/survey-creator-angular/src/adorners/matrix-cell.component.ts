@@ -26,13 +26,19 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   public get column() {
     return this.componentData.column;
   }
+  public get element() {
+    return this.componentData.element;
+  }
+  public selectContext(event: MouseEvent) {
+    this.adorner.selectContext(this.adorner, event);
+  }
 
   public get row() {
     return this.componentData.row;
   }
   protected createModel(): void {
     if (this.componentData) {
-      this.adorner = new MatrixCellWrapperViewModel(this.creator, null, this.question, this.row, this.column);
+      this.adorner = new MatrixCellWrapperViewModel(this.creator, this.element, this.question, this.row, this.column);
     }
   }
   protected getPropertiesToTrack(): string[] {

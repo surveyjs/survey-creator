@@ -121,7 +121,10 @@ export var settings = {
         ]
       },
       image: {
-        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
+        imageFit: "cover",
+        imageHeight: "100%",
+        imageWidth: "100%"
       }
     }
   },
