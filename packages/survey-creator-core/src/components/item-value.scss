@@ -87,20 +87,25 @@
     fill: $foreground;
   }
 }
+.svc-item-value-controls__button--disabled {
+  fill: $foreground-light;
+  opacity: 0.25;
+  cursor: default;
+}
 
-.svc-item-value-controls__remove {
+.svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
   use {
     fill: $red;
   }
 }
 
-.svc-item-value-controls__add {
+.svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
   use {
     fill: $primary;
   }
 }
 
-.svc-item-value-controls__add {
+.svc-item-value-controls__add:not(.svc-item-value-controls__button--disabled) {
 
   &:hover,
   &:focus {
@@ -108,7 +113,7 @@
   }
 }
 
-.svc-item-value-controls__remove {
+.svc-item-value-controls__remove:not(.svc-item-value-controls__button--disabled) {
 
   &:hover,
   &:focus {

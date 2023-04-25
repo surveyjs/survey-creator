@@ -66,6 +66,33 @@ test("Rating adorners", async (t) => {
   });
 });
 
+test("Rating adorners - disabled buttons", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      elements: [
+        {
+          type: "rating",
+          name: "question1",
+          rateMax: 20
+        }
+      ]
+    });
+
+    const question = Selector("div[data-name=question1]");
+    await takeElementScreenshot("rating-disabled-add.png", question, t, comparer);
+    await setJSON({
+      elements: [
+        {
+          type: "rating",
+          name: "question1",
+          rateMax: 2
+        }
+      ]
+    });
+    await takeElementScreenshot("rating-disabled-remove.png", question, t, comparer);
+  });
+});
+
 test("Rating adorners with comment", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON(jsonComment);

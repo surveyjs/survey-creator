@@ -390,16 +390,20 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate valu
 
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   expect(ratingAdorner.element.rateValues.length).toBe(0);
 
   ratingAdorner.addItem(ratingAdorner);
-  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.element.rateMax).toBe(4);
   expect(ratingAdorner.element.rateValues.length).toBe(0);
 
   ratingAdorner.removeItem(ratingAdorner);
   expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
   expect(ratingAdorner.element.rateMax).toBe(3);
   expect(ratingAdorner.element.rateValues.length).toBe(0);
@@ -421,18 +425,60 @@ test("QuestionRatingAdornerViewModel respect library limits", () => {
   creator.maximumRateValues = 0;
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   question.rateMax = 20;
-  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   question.rateMax = 2;
   expect(ratingAdorner.allowAdd).toBeTruthy();
-  expect(ratingAdorner.allowRemove).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeFalsy();
 
   question.rateMax = 15;
   expect(ratingAdorner.allowAdd).toBeTruthy();
   expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
 
   question.rateDisplayMode = "smileys";
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
+
+  creator.readOnly = true;
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
+  expect(ratingAdorner.enableRemove).toBeFalsy();
+
+});
+
+test("QuestionRatingAdornerViewModel button styles", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__add");
+  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
+  question.rateMax = 2;
+  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__add");
+  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__button--disabled svc-item-value-controls__remove");
+  question.rateMax = 4;
+  expect(ratingAdorner.addClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__button--disabled svc-item-value-controls__add");
+  expect(ratingAdorner.removeClassNames).toBe("svc-item-value-controls__button svc-item-value-controls__remove");
 });
 
 test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
@@ -453,19 +499,19 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values"
     <any>{}
   );
 
-  expect(ratingAdorner.allowAdd).toBeTruthy();
-  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   expect(ratingAdorner.element.rateValues.length).toBe(3);
 
   ratingAdorner.addItem(ratingAdorner);
-  expect(ratingAdorner.allowAdd).toBeFalsy();
-  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   expect(ratingAdorner.element.rateMax).toBe(5);
   expect(ratingAdorner.element.rateValues.length).toBe(4);
 
   ratingAdorner.removeItem(ratingAdorner);
-  expect(ratingAdorner.allowAdd).toBeTruthy();
-  expect(ratingAdorner.allowRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+  expect(ratingAdorner.enableRemove).toBeTruthy();
   expect(ratingAdorner.element.rateMax).toBe(5);
   expect(ratingAdorner.element.rateValues.length).toBe(3);
 });

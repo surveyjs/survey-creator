@@ -2,9 +2,9 @@
   <div class="svc-rating-question-content">
     <div class="svc-rating-question-controls svc-item-value-controls">
       <svg *ngIf="adorner.allowRemove" [iconName]="'icon-remove_16x16'" [size]="16" [key2click] (click)="adorner.removeItem(adorner)"
-      class="svc-item-value-controls__button svc-item-value-controls__remove" [attr.title]="adorner.removeTooltip" [attr.aria-label]="adorner.removeTooltip" sv-ng-svg-icon></svg>
+      [class]="adorner.removeClassNames" [attr.title]="adorner.removeTooltip" [attr.aria-label]="adorner.removeTooltip" sv-ng-svg-icon></svg>
       <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add_16x16'" [size]="16" [key2click] (click)="adorner.addItem(adorner)"
-      class="svc-item-value-controls__button svc-item-value-controls__add" [attr.title]="adorner.addTooltip" [attr.aria-label]="adorner.addTooltip"sv-ng-svg-icon></svg>
+      [class]="adorner.addClassNames" [attr.title]="adorner.addTooltip" [attr.aria-label]="adorner.addTooltip"sv-ng-svg-icon></svg>
     </div>
     <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
   </div>
