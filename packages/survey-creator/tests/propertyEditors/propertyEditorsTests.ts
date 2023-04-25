@@ -3264,9 +3264,8 @@ QUnit.test("We should not have 'Others' category in our objects",
     const panel = page.addNewPanel("panel");
     const objToCheck: Array<Survey.Base> = [survey, panel, page];
     const allQuestionTypes = Survey.Serializer.getChildrenClasses("question", true);
-    const ingnoredQuestions = ["selectbase", "matrixdropdownbase"];
     for (let i = 0; i < allQuestionTypes.length; i++) {
-      if (ingnoredQuestions.indexOf(allQuestionTypes[i].name) > -1) continue;
+      if (allQuestionTypes[i].name === "signaturepad") continue; //TODO
       let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
       if (!!question) {
         objToCheck.push(question);
