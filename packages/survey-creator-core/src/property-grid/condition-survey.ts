@@ -10,7 +10,7 @@ import { getLogicString } from "../components/tabs/logic-types";
 export class ConditionEditorItem {
   public conjunction: string = "and";
   public questionName: string;
-  public operator: string = settings.logic.defaultOperator;
+  public operator: string = settings.logic.defaultOperators.default;
   public value: any;
 }
 export class SurveyConditionEditorItem extends ConditionEditorItem {
@@ -527,7 +527,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     questionOperator.choices = this.getOperators();
     questionOperator.value = item.operator;
     questionOperator.onOpened.add((_, opt) => {
-      const json = this.getQuestionConditionJson(panel.getQuestionByName("questionName").value, this.defaultOperator);
+      const questionName = panel.getQuestionByName("questionName").value;
+      const json = this.getQuestionConditionJson(questionName);
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
@@ -787,10 +788,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   private getConditionQuestion(name: string): Question {
     return <Question>this.addConditionQuestionsHash[name];
   }
-  private getQuestionConditionJson(questionName: string, operator: string): any {
+  private getQuestionConditionJson(questionName: string, operator?: string): any {
     let path = "";
     const question = this.getConditionQuestion(questionName);
     if (!question) return null;
+    if(!operator) {
+      operator = this.getDefaultOperatorByQuestion(question);
+    }
     if (questionName.indexOf(question.getValueName()) == 0) {
       path = questionName.substring(question.getValueName().length);
     }
@@ -805,9 +809,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
-    // if (!!json && json.type == "radiogroup") {
-    //   json.type = "dropdown";
-    // }
     if (!!json && json.type == "expression") {
       json.type = "text";
     }
@@ -818,10 +819,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     return !!json ? json : null;
   }
+  private
   private updateOperatorEnables(panel: PanelModel) {
     const questionName = panel.getQuestionByName("questionName");
     if (!questionName) return;
-    const json = this.getQuestionConditionJson(questionName.value, this.defaultOperator);
+    const json = this.getQuestionConditionJson(questionName.value);
     const qType = !!json ? json.type : null;
     const questionOperator = <QuestionDropdownModel>panel.getQuestionByName("operator");
     if (!questionOperator) return;
@@ -863,7 +865,17 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       valueQuestion.width = isValueSameLine ? "35%" : "";
     }
   }
-  private get defaultOperator(): string { return settings.logic.defaultOperator; }
+  private get defaultOperator(): string { return settings.logic.defaultOperators.default; }
+  private getDefaultOperatorByQuestionName(questionName: string): string {
+    return this.getDefaultOperatorByQuestion(this.getConditionQuestion(questionName));
+  }
+  private getDefaultOperatorByQuestion(question: Question): string {
+    if(!!question) {
+      const defOps = settings.logic.defaultOperators;
+      if(!!defOps[question.getType()]) return defOps[question.getType()];
+    }
+    return this.defaultOperator;
+  }
   private getFirstEnabledOperator(choices: Array<ItemValue>): string {
     for (let i = 0; i < choices.length; i++) {
       if (choices[i].isEnabled) {
@@ -883,7 +895,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       this.context = this.getContextFromPanels();
       this.rebuildQuestionValue(panel);
       if (!this.isSettingPanelValues) {
-        panel.getQuestionByName("operator").value = this.defaultOperator;
+        panel.getQuestionByName("operator").value = this.getDefaultOperatorByQuestionName(panel.getQuestionByName("questionName").value);
       }
     }
     if (name == "operator") {
