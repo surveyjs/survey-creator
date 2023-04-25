@@ -368,6 +368,10 @@ export class TestSurveyTabViewModel extends Base {
         this.survey.backgroundImage = options.value;
         return;
       }
+      if (options.name === "background-image-fit") {
+        this.survey.backgroundImageFit = options.value;
+        return;
+      }
       if (options.name === "background-opacity") {
         this.survey.backgroundOpacity = options.value / 100;
         return;
@@ -453,6 +457,17 @@ export class TestSurveyTabViewModel extends Base {
                 title: getLocString("theme.background-image"),
                 descriptionLocation: "hidden",
                 placeholder: "Browse..."
+              },
+              {
+                type: "buttongroup",
+                name: "background-image-fit",
+                titleLocation: "hidden",
+                choices: [
+                  { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
+                  { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
+                  { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
+                ],
+                defaultValue: "cover"
               },
               {
                 type: "spinedit",
