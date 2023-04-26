@@ -27,7 +27,7 @@ export var nlStrings = {
     // ranking: "Ranking",
     image: "Afbeelding",
     dropdown: "Keuzelijst",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Bestandsupload",
     html: "Html",
     matrix: "Matrix (enkele keuze)",
@@ -39,7 +39,7 @@ export var nlStrings = {
     radiogroup: "Meerkeuzevraag",
     rating: "Beoordeling",
     text: "Tekstvak",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Berekening",
     signaturepad: "Handtekening",
     // buttongroup: "Button Group"

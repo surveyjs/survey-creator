@@ -11,7 +11,7 @@ test("Select questions and survey", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Rating");
+  await addQuestionByAddQuestionButton(t, "Rating Scale");
   await t
     .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -60,7 +60,7 @@ test("Matrix question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Single-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Single-Select Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -90,7 +90,7 @@ test("Matrix dropdown question", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
@@ -110,7 +110,7 @@ test("Matrix dropdown question select column", async (t) => {
     .expect(Selector(".svc-question__content").exists).notOk()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")

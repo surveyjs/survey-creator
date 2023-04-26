@@ -27,7 +27,7 @@ export var nbStrings = {
     // ranking: "Ranking",
     image: "Bilde",
     dropdown: "Nedtrekksliste",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Fil",
     html: "Html",
     matrix: "Matrise (enkelvalg)",
@@ -39,7 +39,7 @@ export var nbStrings = {
     radiogroup: "Radiogruppe",
     rating: "Rangering",
     text: "Enkel tekst",
-    boolean: "Boolean",
+    boolean: "Yes/No (Boolean)",
     expression: "Formel",
     signaturepad: "Signatur",
     // buttongroup: "Button Group"

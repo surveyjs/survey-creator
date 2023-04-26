@@ -27,7 +27,7 @@ export var hrStrings = {
     // ranking: "Ranking",
     image: "Slike",
     dropdown: "Padajući",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Datoteku",
     html: "Html",
     matrix: "Matrica (jedan izbor)",

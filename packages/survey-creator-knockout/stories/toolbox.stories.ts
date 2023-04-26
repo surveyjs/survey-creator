@@ -25,11 +25,11 @@ export const Toolbox = () => {
         {
           items: [
             {
-              title: "Radiogroup",
+              title: "Radio Button Group",
               iconName: "radiogroup",
             },
             {
-              title: "Checkbox",
+              title: "Checkboxes",
               iconName: "checkbox",
             },
             {
@@ -37,11 +37,11 @@ export const Toolbox = () => {
               iconName: "dropdown",
             },
             {
-              title: "Single Input",
+              title: "Single-Line Input",
               iconName: "text",
             },
             {
-              title: "Rating",
+              title: "Rating Scale",
               iconName: "rating",
             },
             {
@@ -53,15 +53,15 @@ export const Toolbox = () => {
         {
           items: [
             {
-              title: "Boolean",
+              title: "Yes/No (Boolean)",
               iconName: "boolean",
             },
             {
-              title: "Comment",
+              title: "Long Text",
               iconName: "comment",
             },
             {
-              title: "Multiple Text",
+              title: "Multiple Textboxes",
               iconName: "multipletext",
             },
             {
@@ -69,7 +69,7 @@ export const Toolbox = () => {
               iconName: "matrix",
             },
             {
-              title: "File",
+              title: "File Upload",
               iconName: "file",
             },
             {

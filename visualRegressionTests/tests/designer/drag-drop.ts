@@ -12,7 +12,7 @@ test("Ghost Survey Element", async (t) => {
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
 
-    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
@@ -35,7 +35,7 @@ test("Toolbox Item State After Drag", async (t) => {
     await t.resizeWindow(2560, 1440);
     await setJSON({ pages: [{ name: "page1" }] });
 
-    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
     const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
     await t
@@ -68,7 +68,7 @@ test("Empty Panel Styles", async (t) => {
     await patchDragDropToDisableDrop();
 
     const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
-    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
 
     await t
       .hover(RatingToolboxItem)
@@ -99,7 +99,7 @@ test("Empty Panel Dynamic Styles", async (t) => {
     await patchDragDropToDisableDrop();
 
     const PanelDynamic = Selector("[data-sv-drop-target-survey-element=\"question1\"]");
-    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
 
     await t
       .hover(RatingToolboxItem)
@@ -284,7 +284,7 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
     };
     await setJSON(json);
 
-    const RatingToolboxItem = Selector("[aria-label='Rating toolbox item']");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
     const Question2 = Selector("[data-name=\"question2\"]");
     const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
 

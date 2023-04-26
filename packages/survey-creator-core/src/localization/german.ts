@@ -27,7 +27,11 @@ var germanTranslation = {
     ranking: "Reihenfolge",
     image: "Bild",
     dropdown: "Dropdown",
-    tagbox: "Tag Box",
+    // <<<<<<< HEAD
+    // tagbox: "Multi-Select Dropdown",
+    // =======
+    //     tagbox: "Tag Box",
+    // >>>>>>> master
     file: "Datei",
     html: "HTML",
     matrix: "Matrix (einfache Auswahl)",

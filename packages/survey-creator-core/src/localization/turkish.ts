@@ -27,7 +27,7 @@ export var turkishStrings = {
     // ranking: "Ranking",
     image: "Resim",
     dropdown: "Seçim Kıutusu",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Dosya",
     html: "Html",
     matrix: "Matrix (tek seçim)",

@@ -1927,8 +1927,8 @@ if (!window["%hammerhead%"]) {
                       "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -2101,8 +2101,8 @@ if (!window["%hammerhead%"]) {
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -3845,8 +3845,8 @@ if (!window["%hammerhead%"]) {
                       "{row.ExpenseExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -4018,8 +4018,8 @@ if (!window["%hammerhead%"]) {
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -5385,8 +5385,8 @@ if (!window["%hammerhead%"]) {
                       "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -5601,8 +5601,8 @@ if (!window["%hammerhead%"]) {
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -5733,8 +5733,8 @@ if (!window["%hammerhead%"]) {
                       "{row.ResourceExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -6525,8 +6525,8 @@ if (!window["%hammerhead%"]) {
                       "{row.ExpenseExists} anyof ['No', 'NA'] and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -6735,8 +6735,8 @@ if (!window["%hammerhead%"]) {
                       "{row.IncomeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -6867,8 +6867,8 @@ if (!window["%hammerhead%"]) {
                       "{row.IncomeeExists} = 'No' and {row.InBudget} = 'Yes'"
                   },
                   {
-                    name: "Comment",
-                    title: "Comment",
+                    name: "Long Text",
+                    title: "Long Text",
                     cellType: "comment",
                     isRequired: true,
                     visibleIf:
@@ -7479,8 +7479,8 @@ if (!window["%hammerhead%"]) {
                   "{row.IncomeExists_UnETARGET} = 'No' and {row.IncomeInBudget_UETarget} = 'Yes'"
               },
               {
-                name: "Comment",
-                title: "Comment",
+                name: "Long Text",
+                title: "Long Text",
                 cellType: "comment",
                 isRequired: true,
                 visibleIf:

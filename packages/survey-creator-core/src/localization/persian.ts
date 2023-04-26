@@ -27,7 +27,7 @@ var persianStrings = {
     ranking: "رتبه بندی(رنک)",
     image: "عکس",
     dropdown: "لیست انتخابی",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "فایل",
     html: "Html",
     matrix: "ماتریس (تک انتخابی)",

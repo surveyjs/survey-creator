@@ -1408,7 +1408,7 @@ test("Question type selector", (): any => {
     selectorModel.popupModel.contentComponentData.model;
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
-  expect(creator.addNewQuestionText).toEqual("Add Rating");
+  expect(creator.addNewQuestionText).toEqual("Add Rating Scale");
   expect(survey.getAllQuestions().length).toEqual(1);
   expect(survey.getAllQuestions()[0].getType()).toEqual("rating");
   expect(creator.addNewQuestionInPage(() => { }));
@@ -1474,7 +1474,7 @@ test("Question type selector localization", (): any => {
     selectorModel.popupModel.contentComponentData.model;
   const ratingItem = listModel.actions.filter((item) => item.id == "rating")[0];
   listModel.onItemClick(ratingItem);
-  expect(creator.addNewQuestionText).toEqual("Add New Rating");
+  expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
 });
@@ -2209,7 +2209,7 @@ test("ConvertTo, show it for a panel", (): any => {
 test("Has one item type in convertTo", (): any => {
   CustomWidgetCollection.Instance.add({
     name: "text",
-    title: "Single Input",
+    title: "Single-Line Input",
     widgetIsLoaded: () => { return true; },
     isFit: () => (question) => { return question.getType() === "text"; }
   }, "customtype");
@@ -2967,7 +2967,7 @@ test("Add new question to Panel and Page", (): any => {
   const ratingItem = listModelPanel.actions.filter((item) => item.id == "rating")[0];
   listModelPanel.onItemClick(ratingItem);
 
-  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating Scale");
   expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Question");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
@@ -2977,8 +2977,8 @@ test("Add new question to Panel and Page", (): any => {
   const commentItem = listModelPanel2.actions.filter((item) => item.id == "comment")[0];
   listModelPanel2.onItemClick(commentItem);
 
-  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating Scale");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Long Text");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Question");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
@@ -2987,8 +2987,8 @@ test("Add new question to Panel and Page", (): any => {
   const rankingItem = listModelPage.actions.filter((item) => item.id == "ranking")[0];
   listModelPage.onItemClick(rankingItem);
 
-  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating Scale");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Long Text");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add Question");
 
@@ -2997,8 +2997,8 @@ test("Add new question to Panel and Page", (): any => {
   const htmlItem = listModelPage2.actions.filter((item) => item.id == "html")[0];
   listModelPage2.onItemClick(htmlItem);
 
-  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating");
-  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Comment");
+  expect(panelAdornerModel.addNewQuestionText).toEqual("Add Rating Scale");
+  expect(panelAdornerModel2.addNewQuestionText).toEqual("Add Long Text");
   expect(pageAdornerModel.addNewQuestionText).toEqual("Add Ranking");
   expect(pageAdornerModel2.addNewQuestionText).toEqual("Add HTML");
 

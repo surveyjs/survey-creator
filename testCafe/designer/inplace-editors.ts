@@ -12,8 +12,8 @@ const imageItems = getVisibleElement(".svc-image-item-value-wrapper");
 test("Checkbox question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Checkbox"), { speed: 0.5 })
-    .click(getToolboxItemByText("Checkbox"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Checkboxes"), { speed: 0.5 })
+    .click(getToolboxItemByText("Checkboxes"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(7)
     .expect(items.nth(0).hasClass("svc-item-value--new")).ok()
@@ -116,8 +116,8 @@ test("Checkbox question inplace editor", async (t) => {
 test("Radiogroup question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Radiogroup"), { speed: 0.5 })
-    .click(getToolboxItemByText("Radiogroup"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Radio Button Group"), { speed: 0.5 })
+    .click(getToolboxItemByText("Radio Button Group"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(6)
     .expect(items.nth(0).hasClass("svc-item-value--new")).notOk()
@@ -426,16 +426,16 @@ test("Dropdown question inplace editor", async (t) => {
     .hover(items.nth(5))
     .expect(items.nth(5).find(".svc-item-value-controls__drag-icon").visible).notOk()
     .expect(items.nth(5).find("span").withText("Other (describe)").exists).ok()
-    .hover(getToolboxItemByText("Single Input"), { speed: 0.5 })
-    .click(getToolboxItemByText("Single Input"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Single-Line Input"), { speed: 0.5 })
+    .click(getToolboxItemByText("Single-Line Input"), { speed: 0.5 })
     .expect(items.count).eql(6); // Choice editors are visible if another question is selected
 });
 
 test("Tag Box question inplace editor default values", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Tag Box"), { speed: 0.5 })
-    .click(getToolboxItemByText("Tag Box"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+    .click(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(items.count).eql(7)
     .expect(items.nth(0).hasClass("svc-item-value--new")).ok()
@@ -697,7 +697,7 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   });
   const row1Column1Cell = Selector("tbody .svc-matrix-cell").filterVisible().nth(1);
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
   await t
     .expect(Selector(".svc-question__content").exists).ok()
     .hover(row1Column1Cell, { speed: 0.5 });
@@ -717,8 +717,8 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
 test("Rating question inplace editor", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
-    .hover(getToolboxItemByText("Rating"), { speed: 0.5 })
-    .click(getToolboxItemByText("Rating"), { speed: 0.5 })
+    .hover(getToolboxItemByText("Rating Scale"), { speed: 0.5 })
+    .click(getToolboxItemByText("Rating Scale"), { speed: 0.5 })
     .click(Selector(".sd-rating__item-text .sv-string-editor").withText("3"))
     .typeText(Selector(".sd-rating__item-text .sv-string-editor").withText("3"), "abc")
     .pressKey("Enter")
@@ -730,7 +730,7 @@ test("Rating question inplace editor", async (t) => {
 
 test("Matrix dropdown question inplace row header editor #2553", async (t) => {
   await t.expect(Selector(".svc-question__content").exists).notOk();
-  await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+  await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
   await t.expect(Selector(".svc-question__content").exists).ok();
 
   await t
