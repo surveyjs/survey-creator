@@ -769,7 +769,8 @@ export var enStrings = {
       auto: "Auto",
       buttons: "Buttons",
       dropdown: "Dropdown"
-    }
+    },
+    rateColorMode: { default: "Default" }
   },
   // Operators
   op: {

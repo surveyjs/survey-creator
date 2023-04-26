@@ -6,7 +6,8 @@ import {
   surveyLocalization,
   settings,
   ItemValue,
-  Base
+  Base,
+  CssClassBuilder
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { getLocString } from "../editorLocalization";
@@ -96,15 +97,31 @@ export class QuestionRatingAdornerViewModel extends Base {
     return element.rateCount < maximumRateValues;
   }
   public get allowAdd(): boolean {
-    if (this.creator.readOnly) return false;
-    return QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maximumRateValues);
+    return !this.creator.readOnly;
+  }
+  public get enableAdd(): boolean {
+    return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maximumRateValues);
+  }
+  public get addClassNames(): string {
+    return new CssClassBuilder()
+      .append("svc-item-value-controls__button")
+      .append("svc-item-value-controls__button--disabled", !this.enableAdd)
+      .append("svc-item-value-controls__add").toString();
   }
   public static allowRemoveForElement(element: QuestionRatingModel): boolean {
     return element.rateCount > 2;
   }
   public get allowRemove(): boolean {
-    if (this.creator.readOnly) return false;
-    return QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
+    return !this.creator.readOnly;
+  }
+  public get enableRemove(): boolean {
+    return this.allowRemove && QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);
+  }
+  public get removeClassNames(): string {
+    return new CssClassBuilder()
+      .append("svc-item-value-controls__button")
+      .append("svc-item-value-controls__button--disabled", !this.enableRemove)
+      .append("svc-item-value-controls__remove").toString();
   }
   get addTooltip() {
     return getLocString("pe.addItem");

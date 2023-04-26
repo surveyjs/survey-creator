@@ -1042,8 +1042,8 @@ test("localize placeholders", () => {
   expect(page.elements).toHaveLength(13);
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
   expect(surveyProps.name).toEqual("survey_props0");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeHolder).toEqual("Translation...");
-  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeHolder).toEqual("Перевод...");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Translation...");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод...");
   const pagePanel = <PanelModel>page.elements[12];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");

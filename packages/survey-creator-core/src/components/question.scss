@@ -112,6 +112,9 @@ svc-question {
       margin-inline-end: calcSize(0.5); // margin-right
     }
   }
+  .sv-action--convertTo.sv-action--hidden {
+    min-width: 0;
+  }
 
   .sv-action--convertTo-last {
     margin-inline-end: auto; // margin-right

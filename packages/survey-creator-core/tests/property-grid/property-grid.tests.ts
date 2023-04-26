@@ -3074,3 +3074,19 @@ test("test rateValues allow add, allow remove", () => {
   expect(rateValuesQuestion.allowAddRows).toBeFalsy();
 
 });
+test("itemvalue[] property editor & placeholder, bug#4032", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices = ["Item 1", "Item 2", "Item 3"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  const row = choicesQuestion.visibleRows[2];
+  const qValue = <QuestionTextModel>row.cells[0].question;
+  const qText = <QuestionTextModel>row.cells[1].question;
+  expect(qText.placeholder).toBe("Item 3");
+  qText.value = "Item Three";
+  qValue.value = "Item D";
+  qText.clearValue();
+  expect(qText.placeholder).toBe("Item D");
+});
