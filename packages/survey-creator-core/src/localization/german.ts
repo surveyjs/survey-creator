@@ -650,7 +650,7 @@ var germanTranslation = {
     color: "Farbe",
     date: "Datum",
     datetime: "Datum/Uhrzeit",
-    "datetime-local": "Datum/Uhrzeit (Lokal)"
+    "datetime-local": "Datum/Uhrzeit (Lokal)",
     email: "E-Mail",
     month: "Monat",
     number: "Nummer",
