@@ -259,6 +259,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       },
       "inputTypeAdorner"
     );
+    newAction.removePriority = 1;
     return newAction;
   }
   private getSelectedItem(actions: IAction[], id: string): IAction {

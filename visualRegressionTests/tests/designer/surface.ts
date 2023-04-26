@@ -853,3 +853,31 @@ test("Check string editor on isRequired", async (t) => {
     await takeElementScreenshot("surface-string-editor-error.png", Selector(".svc-designer-header .sd-title"), t, comparer);
   });
 });
+
+test("Question actions", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(400, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-content-mobile-actions.png", pageContent, t, comparer);
+  });
+});

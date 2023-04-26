@@ -16,15 +16,16 @@ Adorners are design-surface controls that allow Survey Creator users to manipula
 
 You can control the visibility of adorners using the `onElementAllowOperations` event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
 
-| Property              | Description                                                                                                                                                                                             |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowAddToToolbox`   | Shows or hides the adorner that saves the current survey element configuration in the Toolbox.                                                                                                          |
-| `allowChangeRequired` | Shows or hides the adorner that makes the question required.                                                                                                                                            |
-| `allowChangeType`     | Shows or hides the adorner that changes the survey element type.                                                                                                                                        |
-| `allowCopy`           | Shows or hides the adorner that duplicates the survey element.                                                                                                                                          |
-| `allowDelete`         | Shows or hides the adorner that deletes the survey element.                                                                                                                                             |
-| `allowDragging`       | Shows or hides the adorner that allows users to drag and drop survey elements.                                                                                                                          |
-| `allowEdit`           | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
+| Property               | Description                                                                                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowAddToToolbox`    | Shows or hides the adorner that saves the current survey element configuration in the Toolbox.                                                                                                          |
+| `allowChangeRequired`  | Shows or hides the adorner that makes the question required.                                                                                                                                            |
+| `allowChangeType`      | Shows or hides the adorner that changes the survey element type.                                                                                                                                        |
+| `allowChangeInputType` | Shows or hides the adorner that changes the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions.    |
+| `allowCopy`            | Shows or hides the adorner that duplicates the survey element.                                                                                                                                          |
+| `allowDelete`          | Shows or hides the adorner that deletes the survey element.                                                                                                                                             |
+| `allowDragging`        | Shows or hides the adorner that allows users to drag and drop survey elements.                                                                                                                          |
+| `allowEdit`            | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
 

@@ -229,8 +229,10 @@ export class PageNavigatorViewModel extends Base {
       this._resizeObserver.disconnect();
       this._resizeObserver = undefined;
     }
-    this.visibleItemsStartIndex = 0;
-    this.visibleItemsCount = Number.MAX_VALUE;
+    if(!this.isDisposed) {
+      this.visibleItemsStartIndex = 0;
+      this.visibleItemsCount = Number.MAX_VALUE;
+    }
   }
   @property({ defaultValue: 0 }) visibleItemsStartIndex: number;
   @property({ defaultValue: Number.MAX_VALUE }) visibleItemsCount: number;

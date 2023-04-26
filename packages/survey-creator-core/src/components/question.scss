@@ -47,6 +47,9 @@ svc-question {
 }
 
 .svc-question__content {
+  .sd-element__header .sd-description {
+    margin-top: 0;
+  }
   .sd-selectbase:not(.sd-imagepicker) {
     overflow-x: auto;
     padding-left: calcSize(5);
@@ -108,6 +111,9 @@ svc-question {
       margin-inline-start: 0; // margin-left
       margin-inline-end: calcSize(0.5); // margin-right
     }
+  }
+  .sv-action--convertTo.sv-action--hidden {
+    min-width: 0;
   }
 
   .sv-action--convertTo-last {

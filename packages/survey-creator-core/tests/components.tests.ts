@@ -405,6 +405,36 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate valu
   expect(ratingAdorner.element.rateValues.length).toBe(0);
 });
 
+test("QuestionRatingAdornerViewModel respect library limits", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+  creator.maximumRateValues = 0;
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  question.rateMax = 20;
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+  question.rateMax = 2;
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
+
+  question.rateMax = 15;
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.allowRemove).toBeTruthy();
+
+  question.rateDisplayMode = "smileys";
+});
+
 test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values", () => {
   const creator = new CreatorTester();
   creator.maximumRateValues = 4;
