@@ -109,7 +109,7 @@ import "../localization/italian";
 import "../localization/japanese";
 import "../localization/korean";
 import "../localization/malay";
-import "../localization/mongolian"
+import "../localization/mongolian";
 import "../localization/norwegian";
 import "../localization/persian";
 import "../localization/polish";
