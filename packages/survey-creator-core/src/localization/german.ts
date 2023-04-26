@@ -501,7 +501,7 @@ var germanTranslation = {
     logoHeight: "Logohöhe (in CSS-akzeptierten Werten)",
     readOnly: "Nur Lesend",
     enableIf: "Bearbeitbar, wenn",
-    emptyRowsText: "Meldung "\"Keine Zeilen\"",
+    emptyRowsText: "Meldung \"Keine Zeilen\"",
     size: "Eingabegröße (in Zeichen)",
     separateSpecialChoices: "Spezielle Auswahlmöglichkeiten separieren",
     choicesFromQuestion: "Kopieren Sie die Auswahlmöglichkeiten aus der folgenden Frage",
