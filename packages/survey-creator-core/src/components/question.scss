@@ -439,7 +439,7 @@ svc-question,
   background-color: transparent;
   cursor: pointer;
   margin-right: calcSize(1);
-
+  outline: none;
   use {
     fill: $foreground-light;
   }
@@ -447,6 +447,9 @@ svc-question,
   &:hover {
     background-color: $background-dim;
   }
+    &:focus {
+      background-color: $primary-background-light;
+    }
 
   top: calcSize(2);
   margin: 0;

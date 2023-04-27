@@ -74,8 +74,10 @@ svc-page {
   use {
     fill: $foreground-light;
   }
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $background-dim;
+  }
+  &:focus {
+    background-color: $primary-background-light;
   }
 }
