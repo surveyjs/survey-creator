@@ -51,7 +51,13 @@ export var settings = {
     showAddQuestionButton: true
   },
   logic: {
-    defaultOperator: "equal",
+    get defaultOperator(): string { return settings.logic.defaultOperators.default; },
+    set defaultOperator(val: string) { settings.logic.defaultOperators.default = val; },
+    defaultOperators: {
+      default: "equal",
+      checkbox: "allof",
+      tagbox: "allof"
+    },
     visibleActions: [],
     logicItemTitleMaxChars: 50,
     openBracket: "{",
