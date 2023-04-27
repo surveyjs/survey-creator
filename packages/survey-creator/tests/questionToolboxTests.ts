@@ -442,3 +442,25 @@ QUnit.test("Add customWidgets and components into toolbox", function (assert) {
   Survey.CustomWidgetCollection.Instance.clear();
   Survey.ComponentCollection.Instance.clear();
 });
+QUnit.test("Add customWidgets into toolbox that registered in ElementFactor.registerCustomQuestion", function (assert) {
+  var toolbox = new QuestionToolbox();
+  const origionalItemCount = toolbox.items.length;
+  const cType = "xnewcustomwidget";
+  Survey.CustomWidgetCollection.Instance.clear();
+  Survey.CustomWidgetCollection.Instance.addCustomWidget({
+    name: cType,
+    isFit: (question) => {
+      return question.getType() == cType;
+    },
+  });
+  if (!Survey.Serializer.findClass(cType)) {
+    Survey.Serializer.addClass(cType, [], undefined, "text");
+    Survey.ElementFactory.Instance.registerCustomQuestion(cType);
+  }
+  toolbox = new QuestionToolbox();
+  assert.equal(toolbox.items.length, origionalItemCount + 1);
+  assert.equal(toolbox.items[origionalItemCount].name, cType);
+  Survey.Serializer.removeClass(cType);
+  Survey.ElementFactory.Instance.unregisterElement(cType);
+  Survey.CustomWidgetCollection.Instance.clear();
+});
