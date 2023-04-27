@@ -97,7 +97,6 @@ test("Theme builder panelBackgroundTransparency", (): any => {
 
   themeEditor.getQuestionByName("--background").value = "#eeeeee";
   expect(themeEditor.data["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
-
 });
 
 test("Theme builder questionBackgroundTransparency", (): any => {
@@ -168,4 +167,32 @@ test("Theme builder: survey settings", (): any => {
   expect(simulatorSurvey.backgroundImageFit).toEqual("auto");
   expect(simulatorSurvey.backgroundOpacity).toEqual(0.6);
   expect(simulatorSurvey["isCompact"]).toBe(true);
+});
+
+test("Theme builder switch themes", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
+  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePalette = themeEditor.getQuestionByName("themePalette");
+  const primaryColor = themeEditor.getQuestionByName("--primary");
+  const backgroundDimColor = themeEditor.getQuestionByName("--background-dim");
+
+  expect(themePalette.value).toEqual("light");
+  expect(primaryColor.value).toEqual("#19b394");
+  expect(backgroundDimColor.value).toEqual("#f3f3f3");
+
+  themePalette.value = "dark";
+  expect(primaryColor.value).toEqual("#1ab7fa");
+  expect(backgroundDimColor.value).toEqual("#4d4d4d");
 });

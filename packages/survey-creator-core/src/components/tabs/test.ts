@@ -26,6 +26,10 @@ export const Themes = {
     "--background": "#ffffff",
     "--background-dim": "#f3f3f3",
     "--background-dim-light": "#f9f9f9",
+    "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45);",
+    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91);",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45);",
     "--sjs-editor-background": "#f9f9f9",
     "--sjs-question-background": "#ffffff",
     "--primary-foreground": "#ffffff",
@@ -38,13 +42,16 @@ export const Themes = {
     "--background": "#555555",
     "--background-dim": "#4d4d4d",
     "--background-dim-light": "#4d4d4d",
+    "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
+    "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.42)",
+    "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.79)",
+    "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.45)",
     "--sjs-editor-background": "#4d4d4d",
     "--sjs-question-background": "#555555",
     "--primary-foreground": "#ffffff",
     "--foreground": "#ededed",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px"
-
   }
 };
 
@@ -507,7 +514,7 @@ export class TestSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "dropdown",
-                name: "fontFamily",
+                name: "--font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
                 choices: ["Open Sans", "Arial"],
