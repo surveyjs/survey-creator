@@ -31,6 +31,7 @@ export const Themes = {
     "--primary-foreground": "#ffffff",
     "--foreground": "#161616",
     "--base-unit": "8px",
+    "--sjs-corner-radius": "4px"
   },
   "default-dark": {
     "--primary": "#1ab7fa",
@@ -41,7 +42,8 @@ export const Themes = {
     "--sjs-question-background": "#555555",
     "--primary-foreground": "#ffffff",
     "--foreground": "#ededed",
-    "--base-unit": "8px"
+    "--base-unit": "8px",
+    "--sjs-corner-radius": "4px"
 
   }
 };
@@ -364,15 +366,11 @@ export class TestSurveyTabViewModel extends Base {
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
       }
-      if (options.name === "background-image") {
-        this.survey.backgroundImage = options.value;
+      if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
+        this.survey[options.name] = options.value;
         return;
       }
-      if (options.name === "background-image-fit") {
-        this.survey.backgroundImageFit = options.value;
-        return;
-      }
-      if (options.name === "background-opacity") {
+      if (options.name === "backgroundOpacity") {
         this.survey.backgroundOpacity = options.value / 100;
         return;
       }
@@ -440,27 +438,27 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "color",
                 name: "--primary",
-                title: getLocString("theme.--primary"),
+                title: getLocString("theme.primaryColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#19b394"
               },
               {
                 type: "color",
                 name: "--background-dim",
-                title: getLocString("theme.--background-dim"),
+                title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
               },
               {
                 type: "fileedit",
-                name: "background-image",
-                title: getLocString("theme.background-image"),
+                name: "backgroundImage",
+                title: getLocString("theme.backgroundImage"),
                 descriptionLocation: "hidden",
                 placeholder: "Browse..."
               },
               {
                 type: "buttongroup",
-                name: "background-image-fit",
+                name: "backgroundImageFit",
                 titleLocation: "hidden",
                 choices: [
                   { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
@@ -471,9 +469,9 @@ export class TestSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "background-opacity",
+                name: "backgroundOpacity",
                 titleLocation: "left",
-                title: getLocString("theme.background-opacity"),
+                title: getLocString("theme.backgroundOpacity"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -509,8 +507,8 @@ export class TestSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "dropdown",
-                name: "--font-family",
-                title: getLocString("theme.--font-family"),
+                name: "fontFamily",
+                title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
                 choices: ["Open Sans", "Arial"],
                 defaultValue: "Open Sans",
@@ -518,8 +516,8 @@ export class TestSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "--font-size",
-                title: getLocString("theme.--font-size"),
+                name: "fontSize",
+                title: getLocString("theme.fontSize"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -529,7 +527,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--sjs-font-size",
-                expression: "{--font-size}*16/100+\"px\"",
+                expression: "{fontSize}*16/100+\"px\"",
                 visible: false
               },
             ]
@@ -538,8 +536,8 @@ export class TestSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "spinedit",
-                name: "--scale",
-                title: getLocString("theme.--scale"),
+                name: "commonScale",
+                title: getLocString("theme.scale"),
                 descriptionLocation: "hidden",
                 unit: "%",
                 defaultValue: 100,
@@ -549,17 +547,23 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--base-unit",
-                expression: "{--scale}*8/100+\"px\"",
+                expression: "{commonScale}*8/100+\"px\"",
                 visible: false
               },
               {
                 type: "spinedit",
-                name: "--corner-radius",
-                title: getLocString("theme.--corner-radius"),
+                name: "cornerRadius",
+                title: getLocString("theme.cornerRadius"),
                 descriptionLocation: "hidden",
                 unit: "px",
-                defaultValue: 8,
+                defaultValue: 4,
                 min: 0
+              },
+              {
+                type: "expression",
+                name: "--sjs-corner-radius",
+                expression: "{cornerRadius}+\"px\"",
+                visible: false
               },
             ]
           }
