@@ -2099,7 +2099,8 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
     elements: [
       { type: "text", name: "q1" },
       { type: "comment", name: "q2" },
-      { type: "text", name: "q3" }
+      { type: "text", name: "q3" },
+      { type: "rating", name: "q4" },
     ]
   };
   creator.survey.addNewPage("page2");
@@ -2113,6 +2114,7 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   const q1Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[0], undefined);
   const q2Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[1], undefined);
   const q3Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[2], undefined);
+  const q4Model = new QuestionAdornerViewModel(creator, creator.survey.getAllQuestions()[3], undefined);
   creator.selectElement(q1Model.element);
   expect(q1Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q1Model.getActionById("isrequired").visible).toBeFalsy();
@@ -2125,7 +2127,12 @@ test("QuestionAdornerViewModel and onElementAllowOperations", (): any => {
   expect(q3Model.getActionById("convertTo").visible).toBeTruthy();
   expect(q3Model.getActionById("isrequired").visible).toBeFalsy();
   expect(q3Model.getActionById("convertInputType").visible).toBeTruthy();
+  creator.selectElement(q4Model.element);
+  expect(q4Model.getActionById("convertTo").visible).toBeTruthy();
+  expect(q4Model.getActionById("isrequired").visible).toBeTruthy();
+  expect(q4Model.getActionById("convertInputType").visible).toBeTruthy();
 });
+
 test("QuestionAdornerViewModel and onElementAllowOperations on new elements", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
