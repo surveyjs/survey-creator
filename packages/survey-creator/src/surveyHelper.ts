@@ -249,7 +249,7 @@ export class SurveyHelper {
     items.forEach((item) => {
       if (text) text += "\n";
       text += item.value;
-      if (item.pureText) text += "|" + item.pureText;
+      if (item.pureText) text += Survey.ItemValue.Separator + item.pureText;
     });
 
     return text;
