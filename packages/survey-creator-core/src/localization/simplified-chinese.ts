@@ -27,7 +27,7 @@ var simplifiedChineseTranslation = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "下拉框",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "文件上传",
     html: "Html 代码",
     matrix: "矩阵 (单选题)",
@@ -41,7 +41,7 @@ var simplifiedChineseTranslation = {
     text: "单行文本",
     boolean: "逻辑项",
     expression: "表达式(只读)",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

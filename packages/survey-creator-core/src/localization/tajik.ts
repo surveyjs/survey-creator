@@ -27,7 +27,7 @@ export var tgStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "Рӯйхати таркишӣ",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Боркунии файлҳо",
     // html: "HTML",
     matrix: "Матриса (интихоби танҳо)",
@@ -41,7 +41,7 @@ export var tgStrings = {
     text: "Воридкунии матнӣ",
     boolean: "Қиммати булӣ",
     expression: "Ифода (танҳо барои хондан)",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

@@ -27,7 +27,7 @@ export var arStrings = {
     ranking: "تصنيف",
     image: "صورة",
     dropdown: "قائمة منسدلة",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "ملف",
     html: "لغة ترميز النصوص HTML",
     matrix: "مصفوفة (إختيار واحد)",

@@ -101,7 +101,7 @@ test("Test question type selector", async (t) => {
 test("Matrix column editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
-    await addQuestionByAddQuestionButton(t, "Multiple-Choice Matrix");
+    await addQuestionByAddQuestionButton(t, "Multi-Select Matrix");
     const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
     const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
 
@@ -879,5 +879,30 @@ test("Question actions", async (t) => {
     const qContent = Selector(".svc-question__content");
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("question-content-mobile-actions.png", pageContent, t, comparer);
+  });
+});
+
+test("Question actions on hover in mobile mode", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(400, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    await t.hover(qContent, { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-content-mobile-actions-hover.png", pageContent, t, comparer);
   });
 });

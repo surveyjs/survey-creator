@@ -27,7 +27,7 @@ export var fiStrings = {
     ranking: "Sijoitus",
     image: "Kuva",
     dropdown: "Pudotusvalikko",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "Tiedosto",
     html: "Html",
     matrix: "Matrix (yksi valinta)",

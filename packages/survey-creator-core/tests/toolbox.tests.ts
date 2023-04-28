@@ -1,5 +1,6 @@
 import {
   ElementFactory,
+  Serializer,
   ComponentCollection,
   QuestionCheckboxModel,
   QuestionTextModel,
@@ -424,6 +425,29 @@ test("Add customWidgets into toolbox", (): any => {
   expect(toolbox.items[4].name).toEqual("comp1");
   CustomWidgetCollection.Instance.clear();
   ComponentCollection.Instance.clear();
+});
+
+test("Add customWidgets into toolbox that registered in ElementFactor.registerCustomQuestion", (): any => {
+  var toolbox = new QuestionToolbox();
+  const origionalItemCount = toolbox.items.length;
+  const cType = "xnewcustomwidget";
+  CustomWidgetCollection.Instance.clear();
+  CustomWidgetCollection.Instance.addCustomWidget({
+    name: cType,
+    isFit: (question) => {
+      return question.getType() == cType;
+    },
+  });
+  if (!Serializer.findClass(cType)) {
+    Serializer.addClass(cType, [], undefined, "text");
+    ElementFactory.Instance.registerCustomQuestion(cType);
+  }
+  toolbox = new QuestionToolbox();
+  expect(toolbox.items).toHaveLength(origionalItemCount + 1);
+  expect(toolbox.items[origionalItemCount].name).toBe(cType);
+  Serializer.removeClass(cType);
+  ElementFactory.Instance.unregisterElement(cType);
+  CustomWidgetCollection.Instance.clear();
 });
 
 test("Creator layout: toolbox location", (): any => {

@@ -27,7 +27,7 @@ export var koreanStrings = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "드롭다운",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "파일",
     html: "HTML",
     matrix: "행렬 (단일 선택)",
@@ -41,7 +41,7 @@ export var koreanStrings = {
     text: "텍스트 상자",
     boolean: "불린(boolean)",
     expression: "표현식",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

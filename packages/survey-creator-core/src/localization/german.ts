@@ -27,7 +27,11 @@ var germanTranslation = {
     ranking: "Reihenfolge",
     image: "Bild",
     dropdown: "Dropdown",
-    tagbox: "Tag Box",
+    // <<<<<<< HEAD
+    // tagbox: "Multi-Select Dropdown",
+    // =======
+    //     tagbox: "Tag Box",
+    // >>>>>>> master
     file: "Datei",
     html: "HTML",
     matrix: "Matrix (einfache Auswahl)",
@@ -397,7 +401,7 @@ var germanTranslation = {
     renderMode: "Anzeigemodus",
     allowAddPanel: "Erlaube das Hinzufügen eines Paneltexts",
     allowRemovePanel: "Erlaube das Entfernen eines Paneltexts",
-    // noEntriesText: "Empty entries text",
+    noEntriesText: "Leerer Eintragstext",
     panelAddText: "Paneltext hinzufügen",
     panelRemoveText: "Paneltext entfernen",
     isSinglePage: "Alle Elemente auf einer Seite anzeigen",
@@ -563,22 +567,22 @@ var germanTranslation = {
       showOnCompleted: "Abschluss",
       logo: "Logo im Umfragetitel",
       slider: "Slider",
-      // expression: "Expression",
+      expression: "Ausdruck",
       others: "Weiteres"
     },
     editProperty: "Eigenschaft bearbeiten '{0}'",
-    items: "Gegenstände",
-    // choicesVisibleIf: "Choices are visible if",
-    // choicesEnableIf: "Choices are selectable if",
-    // columnsEnableIf: "Columns are visible if",
-    // rowsEnableIf: "Rows are visible if",
-    // indent: "Add indents",
+    items: "Eiträge",
+    choicesVisibleIf: "Auswahlmöglichkeiten sind sichtbar, wenn",
+    choicesEnableIf: "Wahlmöglichkeiten sind wählbar, wenn",
+    columnsEnableIf: "Spalten sind sichtbar, wenn",
+    rowsEnableIf: "Zeilen sind sichtbar, wenn",
+    indent: "Einzüge hinzufügen",
     panel: {
-      // indent: "Add outer indents"
+      indent: "Äußere Einzüge hinzufügen"
     },
-    // innerIndent: "Add inner indents",
-    // defaultValueFromLastRow: "Take default values from the last row",
-    // defaultValueFromLastPanel: "Take default values from the last panel",
+    innerIndent: "Fügen Sie innere Einzüge hinzu",
+    defaultValueFromLastRow: "Nehmen Sie Standardwerte aus der letzten Zeile",
+    defaultValueFromLastPanel: "Nehmen Sie Standardwerte aus dem letzten Bereich",
     enterNewValue: "Bitte einen Wert eingeben.",
     noquestions: "Die Umfrage enthält keine Frage.",
     createtrigger: "Bitte einen Trigger eingeben.",
@@ -599,17 +603,17 @@ var germanTranslation = {
     triggerRunExpressionEmpty: "Bitte geben Sie einen gültigen Ausdruck ein",
     emptyExpressionPlaceHolder: "Tippen Sie hier Ihren Ausdruck ein ...",
     noFile: "Keine Datei ausgewählt",
-    // clearIfInvisible: "Clear the value if the question becomes hidden",
-    // valuePropertyName: "Value property name",
-    // searchEnabled: "Enable search",
-    // hideSelectedItems: "Hide selected items",
-    // signatureWidth: "Signature width",
-    // signatureHeight: "Signature height",
-    // verticalAlign: "Vertical alignment",
-    // alternateRows: "Alternate rows",
-    // columnsVisibleIf: "Columns are visible if",
-    // rowsVisibleIf: "Rows are visible if",
-    // otherPlaceholder: "Comment area placeholder"
+    clearIfInvisible: "Löschen Sie den Wert, wenn die Frage ausgeblendet wird",
+    valuePropertyName: "Wert Eigenschaftsname",
+    searchEnabled: "Suche aktivieren",
+    hideSelectedItems: "Ausgewählte Elemente ausblenden",
+    signatureWidth: "Signaturbreite",
+    signatureHeight: "Signaturhöhe",
+    verticalAlign: "Vertikale Ausrichtung",
+    alternateRows: "Zeilen wechseln",
+    columnsVisibleIf: "Spalten sind sichtbar, wenn",
+    rowsVisibleIf: "Zeilen sind sichtbar, wenn",
+    otherPlaceholder: "Platzhalter für den Kommentarbereich"
   },
   // Property values
   pv: {
@@ -650,7 +654,7 @@ var germanTranslation = {
     color: "Farbe",
     date: "Datum",
     datetime: "Datum/Uhrzeit",
-    // "datetime-local": "datetime-local",
+    "datetime-local": "Datum/Uhrzeit (Lokal)",
     email: "E-Mail",
     month: "Monat",
     number: "Nummer",
@@ -785,7 +789,7 @@ var germanTranslation = {
   ts: {
     selectPage: "Seite:",
     showInvisibleElements: "Unsichtbare Elemente anzeigen",
-    // hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "Unsichtbare Elemente ausblenden"
   },
   validators: {
     answercountvalidator: "Antwortanzahl",

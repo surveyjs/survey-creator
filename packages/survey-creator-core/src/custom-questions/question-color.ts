@@ -17,12 +17,12 @@ export class QuestionColorModel extends QuestionTextModel {
         newValue += "0";
       }
     }
-    return newValue.toUpperCase();
+    return newValue;
   }
   protected setNewValue(newValue: string): void {
-    this._renderedValue = "";
+    this.resetRenderedValue();
     super.setNewValue(this.getCorrectedValue(newValue));
-    this._renderedValue = this.value;
+    this.updateRenderedValue();
   }
   public onBeforeInput(event: InputEvent): void {
     if(!!event.data && !/[\d\w#]/.test(event.data)) {
@@ -36,14 +36,24 @@ export class QuestionColorModel extends QuestionTextModel {
     return "color";
   }
   @property({}) _renderedValue: string;
+  private resetRenderedValue(): void {
+    this._renderedValue = undefined;
+  }
+  private updateRenderedValue(): void {
+    this._renderedValue = this.value;
+  }
   public get renderedValue(): string {
-    return this._renderedValue ?? this.value ?? "#000000";
+    return (this._renderedValue ?? this.value ?? "#000000").toUpperCase();
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
   }
   public get isInputTextUpdate(): boolean {
     return false;
+  }
+  public onSurveyValueChanged(newValue: any): void {
+    super.onSurveyValueChanged(newValue);
+    this.updateRenderedValue();
   }
 
 }

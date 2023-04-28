@@ -27,7 +27,7 @@ var traditionalChineseTranslation = {
     // ranking: "Ranking",
     // image: "Image",
     dropdown: "下拉框",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "文件上傳",
     html: "Html 代碼",
     matrix: "矩陣 (單選題)",
@@ -41,7 +41,7 @@ var traditionalChineseTranslation = {
     text: "文本框",
     boolean: "布林選項",
     expression: "表達式",
-    // signaturepad: "Signature Pad",
+    // signaturepad: "Signature",
     // buttongroup: "Button Group"
   },
   // Strings in SurveyJS Creator

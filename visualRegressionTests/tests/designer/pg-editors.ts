@@ -156,8 +156,8 @@ test("Default value popup", async (t) => {
     const dataTab = Selector("h4").withExactText("Data");
 
     await t
-      .hover(getToolboxItemByText("Single Input"))
-      .click(getToolboxItemByText("Single Input"))
+      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(dataTab)
       .click(Selector(".svc-action-button.svc-question-link__set-button").withText("Set Default Answer"));
@@ -204,8 +204,8 @@ test("Logic popup", async (t) => {
     const logicTab = Selector("h4").withExactText("Logic");
 
     await t
-      .hover(getToolboxItemByText("Single Input"))
-      .click(getToolboxItemByText("Single Input"))
+      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
       .click(generalTab)
       .click(logicTab)
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
@@ -364,7 +364,7 @@ test("Check question with error", async (t) => {
       type: "text",
       name: "q1",
     });
-    await addQuestionByAddQuestionButton(t, "Single Input");
+    await addQuestionByAddQuestionButton(t, "Single-Line Input");
     const questionSelector = Selector("div[data-name='name']");
     await t
       .selectText(questionSelector.find("input"))

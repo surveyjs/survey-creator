@@ -27,7 +27,7 @@ export var jaStrings = {
     ranking: "ランキング",
     image: "画像",
     dropdown: "ドロップダウン",
-    // tagbox: "Tag Box",
+    // tagbox: "Multi-Select Dropdown",
     file: "ファイル",
     html: "HTML",
     matrix: "マトリックス（単一選択）",
