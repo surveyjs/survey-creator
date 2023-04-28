@@ -1,3 +1,4 @@
+import { PageModel, SurveyModel } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
 
 test("Check custom color question", () => {
@@ -26,7 +27,7 @@ test("Check custom color question", () => {
     }
   });
   question.value = "#fea123123";
-  expect(renderValueChangedLog).toBe("-> -> #FEA123");
+  expect(renderValueChangedLog).toBe("-> undefined-> #FEA123");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");
@@ -61,4 +62,15 @@ test("Check custom color question event callbacks", () => {
     preventLog += "->a";
   } });
   expect(preventLog).toBe("->.->+");
+});
+test("Check custom color question with survey mergeData", () => {
+  const survey = new SurveyModel();
+  const page = new PageModel("p1");
+  const question = new QuestionColorModel("q1");
+  page.addElement(question);
+  survey.addPage(page);
+  question.value = "#FFFFFF";
+  expect(question.renderedValue).toBe("#FFFFFF");
+  survey.mergeData({ "q1": "#9A2828" });
+  expect(question.renderedValue).toBe("#9A2828");
 });
