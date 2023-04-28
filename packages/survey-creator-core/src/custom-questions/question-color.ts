@@ -17,7 +17,7 @@ export class QuestionColorModel extends QuestionTextModel {
         newValue += "0";
       }
     }
-    return newValue.toUpperCase();
+    return newValue;
   }
   protected setNewValue(newValue: string): void {
     this.resetRenderedValue();
@@ -43,7 +43,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this._renderedValue = this.value;
   }
   public get renderedValue(): string {
-    return this._renderedValue ?? this.value ?? "#000000";
+    return (this._renderedValue ?? this.value ?? "#000000").toUpperCase();
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };

@@ -12,13 +12,13 @@ test("Check custom color question", () => {
   expect(question.value).toBe("#000000");
   expect(question.renderedValue).toBe("#000000");
   question.value = "fe#fe";
-  expect(question.value).toBe("#FE0000");
+  expect(question.value).toBe("#fe0000");
   expect(question.renderedValue).toBe("#FE0000");
   question.value = "#fea";
-  expect(question.value).toBe("#FEAFEA");
+  expect(question.value).toBe("#feafea");
   expect(question.renderedValue).toBe("#FEAFEA");
   question.value = "#fea123";
-  expect(question.value).toBe("#FEA123");
+  expect(question.value).toBe("#fea123");
   expect(question.renderedValue).toBe("#FEA123");
   let renderValueChangedLog = "";
   question.onPropertyChanged.add((sender, options) => {
@@ -27,7 +27,8 @@ test("Check custom color question", () => {
     }
   });
   question.value = "#fea123123";
-  expect(renderValueChangedLog).toBe("-> undefined-> #FEA123");
+  expect(renderValueChangedLog).toBe("-> undefined-> #fea123");
+  expect(question.renderedValue).toBe("#FEA123");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");
