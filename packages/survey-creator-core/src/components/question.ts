@@ -233,24 +233,26 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return newAction;
   }
   private createConvertInputType() {
-    if(this.surveyElement.getType() !== "text") return null;
-    const prop = Serializer.findProperty("text", "inputType");
+    let prop = null;
+    if (this.surveyElement.getType() === "text") prop = Serializer.findProperty("text", "inputType");
+    if (this.surveyElement.getType() === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
     if(!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
-    const inputType = (<any>this.surveyElement).inputType;
+    const propName = prop.name;
+    const questionSubType = this.surveyElement.getPropertyValue(propName);
     const items = prop.getChoices(this.surveyElement, (chs: any) => { });
     const availableTypes = [];
     items.forEach(item => {
       availableTypes.push({ id: item, title: editorLocalization.getPropertyValueInEditor(prop.name, item) });
     });
-    const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, inputType,
+    const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, questionSubType,
       (item: any) => {
-        (<any>this.surveyElement).inputType = item.id;
+        this.surveyElement.setPropertyValue(propName, item.id);
         newAction.title = item.title;
       });
     this.surveyElement.registerFunctionOnPropertyValueChanged(
-      "inputType",
+      propName,
       () => {
-        const item = this.getSelectedItem(availableTypes, (<any>this.surveyElement).inputType);
+        const item = this.getSelectedItem(availableTypes, this.surveyElement.getPropertyValue(propName));
         if(!item) return;
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;

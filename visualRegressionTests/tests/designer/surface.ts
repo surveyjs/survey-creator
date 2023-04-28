@@ -909,3 +909,27 @@ test("Keep scroll to selected on tab changed", async (t) => {
     await takeElementScreenshot("question-5-selected-in-view.png", root, t, comparer);
   });
 });
+test("Question actions on hover in mobile mode", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(400, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    await t.hover(qContent, { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-content-mobile-actions-hover.png", pageContent, t, comparer);
+  });
+});
