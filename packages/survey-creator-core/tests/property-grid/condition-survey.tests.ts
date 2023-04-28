@@ -429,8 +429,8 @@ test("Error in value input, Bug# T2598 (customer marked it private)", () => {
   var editor = new ConditionEditor(survey, question);
   var panel = editor.panel.panels[0];
   panel.getQuestionByName("questionName").value = "q1";
-  panel.getQuestionByName("questionValue").value = 1;
-  expect(editor.text).toEqual("{q1} = [1]");
+  panel.getQuestionByName("questionValue").value = [1];
+  expect(editor.text).toEqual("{q1} allof [1]");
   panel.getQuestionByName("questionName").value = "q3";
   expect(editor.isReady).toEqual(false);
   expect(editor.text).toEqual("");
