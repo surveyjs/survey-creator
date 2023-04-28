@@ -1,7 +1,7 @@
 import { SurveySimulatorModel } from "../simulator";
 
 require("./test.scss");
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -55,6 +55,57 @@ export const Themes = {
   }
 };
 
+ComponentCollection.Instance.add({
+  name: "fontSettings",
+  elementsJSON: [
+    {
+      type: "dropdown",
+      name: "family",
+      title: getLocString("theme.fontFamily"),
+      titleLocation: "left",
+      descriptionLocation: "hidden",
+      choices: ["Open Sans", "Arial"],
+      defaultValue: "Open Sans",
+      allowClear: false
+    },
+    {
+      type: "buttongroup",
+      name: "weight",
+      titleLocation: "hidden",
+      descriptionLocation: "hidden",
+      choices: [
+        { value: "regular", text: getLocString("theme.fontWeightRegular") },
+        { value: "semiBold", text: getLocString("theme.fontWeightSemiBold") },
+        { value: "bold", text: getLocString("theme.fontWeightBold") },
+      ],
+      defaultValue: "regular"
+    },
+    {
+      type: "color",
+      name: "color",
+      title: getLocString("theme.color"),
+      titleLocation: "left",
+      descriptionLocation: "hidden"
+    },
+    {
+      type: "spinedit",
+      name: "size",
+      title: getLocString("theme.size"),
+      titleLocation: "left",
+      descriptionLocation: "hidden",
+      unit: "pt",
+      min: 0,
+    },
+  ],
+  onInit() {
+  },
+  onCreated(question) {
+    const color = question.contentPanel.getQuestionByName("color");
+    color.visible = question.name !== "surveyTitle";
+  },
+  onValueChanged(question, name, newValue) {
+  },
+});
 export class TestSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -385,6 +436,12 @@ export class TestSurveyTabViewModel extends Base {
         this.survey["isCompact"] = options.value === "lightweight";
         return;
       }
+      if(options.question.getType() === "fontsettings") {
+        Object.keys(options.value).forEach(key => {
+          this.simulator.themeVariables[`--sjs-font-${options.name}-${key}`] = options.value[key];
+        });
+        return;
+      }
       this.simulator.themeVariables = sender.data;
     });
     return themeEditorSurvey;
@@ -582,20 +639,57 @@ export class TestSurveyTabViewModel extends Base {
         elements: [
           {
             type: "panel",
-            elements: []
+            elements: [
+              {
+                type: "color",
+                name: "--background-dim",
+                title: getLocString("theme.backgroundDimColor"),
+                descriptionLocation: "hidden",
+                defaultValue: "#f3f3f3"
+              }, {
+                type: "fontSettings",
+                name: "surveyTitle",
+                title: getLocString("theme.surveyTitle"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  weight: "bold",
+                  size: 32
+                }
+              }, {
+                type: "fontSettings",
+                name: "pageTitle",
+                title: getLocString("theme.pageTitle"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  weight: "bold",
+                  size: 24
+                }
+              }, {
+                type: "fontSettings",
+                name: "pageDescription",
+                title: getLocString("theme.pageDescription"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  size: 16
+                }
+              }
+            ]
           }]
       }]
     };
 
-    Object.keys(this.themeVariables).forEach(varName => {
-      themeEditorSurveyJSON.elements[1].elements[0].elements.push(<any>{
-        type: "text",
-        inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
-        title: editorLocalization.getString("theme." + varName),
-        name: varName,
-        defaultValue: this.themeVariables[varName]
-      });
-    });
+    // Object.keys(this.themeVariables).forEach(varName => {
+    //   themeEditorSurveyJSON.elements[1].elements[0].elements.push(<any>{
+    //     type: "text",
+    //     inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
+    //     title: editorLocalization.getString("theme." + varName),
+    //     name: varName,
+    //     defaultValue: this.themeVariables[varName]
+    //   });
+    // });
     return themeEditorSurveyJSON;
   }
 }

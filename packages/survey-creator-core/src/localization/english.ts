@@ -954,10 +954,18 @@ export var enStrings = {
     "backgroundOpacity": "Opacity",
     "panelBackgroundTransparency": "Panel Background Transparency",
     "questionBackgroundTransparency": "Question Background Transparency",
-    "fontFamily": "Font Family",
-    "fontSize": "Font Size",
-    "scale": "Scale",
+    fontFamily: "Font Family",
+    fontSize: "Font Size",
+    color: "Color",
+    size: "Size",
+    fontWeightRegular: "Regular",
+    fontWeightSemiBold: "Semi-Bold",
+    fontWeightBold: "Bold",
+    scale: "Scale",
     cornerRadius: "Corner Radius",
+    surveyTitle: "Survey Title Font",
+    pageTitle: "Page Title Font",
+    pageDescription: "Page Description Font"
 
   },
 };

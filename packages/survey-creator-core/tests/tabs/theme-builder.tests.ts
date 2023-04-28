@@ -196,3 +196,34 @@ test("Theme builder switch themes", (): any => {
   expect(primaryColor.value).toEqual("#1ab7fa");
   expect(backgroundDimColor.value).toEqual("#4d4d4d");
 });
+
+test("Theme builder: composite question fontSettings", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  testPlugin.activate();
+  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
+  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const simulator = testSurveyTab.simulator;
+  const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
+
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-family"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-weight"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-color"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-size"]).toBeUndefined();
+
+  surveyTitleFontSettings.value = {family: 'Open Sans', weight: 'semiBold', color: '#161616', size: 32};
+
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-family"]).toEqual('Open Sans');
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-weight"]).toEqual("semiBold");
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-color"]).toEqual("#161616");
+  expect(simulator.themeVariables["--sjs-font-surveyTitle-size"]).toEqual(32);
+});

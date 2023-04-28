@@ -1,3 +1,9 @@
-.spg-theme-builder-root .sd-element--expanded > .spg-panel__content {
-  padding: 0;
+.spg-theme-builder-root {
+  .sd-element--expanded > .spg-panel__content {
+    padding: 0;
+  }
+
+  .sd-element--complex .spg-panel__content {
+    padding: 0;
+  }
 }
