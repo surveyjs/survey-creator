@@ -907,7 +907,7 @@ test("Question actions on hover in mobile mode", async (t) => {
   });
 });
 
-test.only("Question add type selector button", async (t) => {
+test("Question add type selector button", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1400, 900);
     const json = {
