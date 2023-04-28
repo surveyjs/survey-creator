@@ -56,7 +56,7 @@ export const Themes = {
 };
 
 ComponentCollection.Instance.add({
-  name: "fontSettings",
+  name: "fontsettings",
   elementsJSON: [
     {
       type: "dropdown",
@@ -102,6 +102,54 @@ ComponentCollection.Instance.add({
   onCreated(question) {
     const color = question.contentPanel.getQuestionByName("color");
     color.visible = question.name !== "surveyTitle";
+  },
+  onValueChanged(question, name, newValue) {
+  },
+});
+
+ComponentCollection.Instance.add({
+  name: "elementsettings",
+  elementsJSON: [
+    {
+      type: "color",
+      name: "backcolor",
+      title: getLocString("theme.backcolor"),
+      titleLocation: "left",
+      descriptionLocation: "hidden"
+    },
+    {
+      type: "color",
+      name: "hovercolor",
+      title: getLocString("theme.hovercolor"),
+      titleLocation: "left",
+      descriptionLocation: "hidden"
+    },
+    {
+      type: "spinedit",
+      name: "corner",
+      title: getLocString("theme.cornerRadius"),
+      titleLocation: "left",
+      descriptionLocation: "hidden",
+      unit: "px",
+      defaultValue: 4,
+      min: 0
+    },
+    {
+      type: "expression",
+      name: "cornerRadius",
+      expression: "{composite.corner}+\"px\"",
+      visible: false
+    }, {
+      type: "text",
+      name: "border",
+      title: getLocString("theme.border"),
+      titleLocation: "left",
+      descriptionLocation: "hidden"
+    }
+  ],
+  onInit() {
+  },
+  onCreated(question) {
   },
   onValueChanged(question, name, newValue) {
   },
@@ -409,17 +457,21 @@ export class TestSurveyTabViewModel extends Base {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
+    themeEditorSurvey.mergeData(this.themeVariables);
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
+
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         themeEditorSurvey.mergeData(this.themeVariables);
       }
-      if (options.name === "questionBackgroundTransparency" || options.name === "--background-dim-light") {
+      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
         let baseColor = themeEditorSurvey.getValue("--background-dim-light");
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
         themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
       }
-      if (options.name === "panelBackgroundTransparency" || options.name === "--background") {
+      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
         let baseColor = themeEditorSurvey.getValue("--background");
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
@@ -436,9 +488,16 @@ export class TestSurveyTabViewModel extends Base {
         this.survey["isCompact"] = options.value === "lightweight";
         return;
       }
-      if(options.question.getType() === "fontsettings") {
+      if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           this.simulator.themeVariables[`--sjs-font-${options.name}-${key}`] = options.value[key];
+        });
+        return;
+      }
+      if (options.question?.getType() === "elementsettings") {
+        Object.keys(options.value).forEach(key => {
+          if (key === "corner") return;
+          this.simulator.themeVariables[`--sjs-${options.name}-${key}`] = options.value[key];
         });
         return;
       }
@@ -580,7 +639,7 @@ export class TestSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "fontSize",
+                name: "--font-size",
                 title: getLocString("theme.fontSize"),
                 descriptionLocation: "hidden",
                 unit: "%",
@@ -591,7 +650,7 @@ export class TestSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--sjs-font-size",
-                expression: "{fontSize}*16/100+\"px\"",
+                expression: "{--font-size}*16/100+\"px\"",
                 visible: false
               },
             ]
@@ -677,6 +736,78 @@ export class TestSurveyTabViewModel extends Base {
                 }
               }
             ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "elementSettings",
+                name: "questionPanel",
+                title: getLocString("theme.questionPanel"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  backcolor: "#ffffff",
+                  hovercolor: "#f8f8f8",
+                  corner: 4,
+                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                }
+              }, {
+                type: "expression",
+                name: "--background",
+                expression: "{questionPanel.backcolor}",
+                visible: false
+              }, {
+                type: "fontSettings",
+                name: "questionTitle",
+                title: getLocString("theme.questionTitle"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  size: 16
+                }
+              }, {
+                type: "fontSettings",
+                name: "questionDescription",
+                title: getLocString("theme.questionDescription"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  size: 16
+                }
+              }
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "elementSettings",
+                name: "editorPanel",
+                title: getLocString("theme.editorPanel"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  backcolor: "#ffffff",
+                  hovercolor: "#f8f8f8",
+                  corner: 4,
+                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                }
+              }, {
+                type: "expression",
+                name: "--background-dim-light",
+                expression: "{editorPanel.backcolor}",
+                visible: false
+              }, {
+                type: "fontSettings",
+                name: "editorFont",
+                title: getLocString("theme.editorFont"),
+                descriptionLocation: "hidden",
+                defaultValue: {
+                  color: "#161616",
+                  size: 16
+                }
+              }
+            ]
+          }, {
+            type: "panel",
+            elements: []
           }]
       }]
     };
