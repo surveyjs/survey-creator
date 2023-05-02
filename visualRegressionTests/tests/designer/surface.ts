@@ -893,11 +893,6 @@ test("Keep scroll to selected on tab changed", async (t) => {
         { "name": "page3", "elements": [{ "type": "text", "name": "question3" }] },
         { "name": "page4", "elements": [{ "type": "text", "name": "question4" }] },
         { "name": "page5", "elements": [{ "type": "text", "name": "question5" }] },
-        { "name": "page6", "elements": [{ "type": "text", "name": "question6" }] },
-        { "name": "page7", "elements": [{ "type": "text", "name": "question7" }] },
-        { "name": "page8", "elements": [{ "type": "text", "name": "question8" }] },
-        { "name": "page9", "elements": [{ "type": "text", "name": "question9" }] },
-        { "name": "page10", "elements": [{ "type": "text", "name": "question10" }] },
       ]
     };
     await setJSON(json);
