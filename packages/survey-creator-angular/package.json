@@ -75,6 +75,7 @@
     "build:example": "ng build  angular-ui",
     "test": "ng test survey-creator-angular",
     "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q attemptLimit=5,successThreshold=1 --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
+    "visual-regression-tests": "testcafe chrome -c 4 -q attemptLimit=5,successThreshold=1 --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"http-server ./dist/angular-ui --proxy http://localhost:8080? -p 8080\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "test:single": "ng test --watch=false --browsers=ChromeHeadless survey-creator-angular",
     "release": "standard-version --message \"Release: %s [azurepipelines skip]\" "
   }
