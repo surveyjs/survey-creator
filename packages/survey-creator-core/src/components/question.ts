@@ -110,16 +110,28 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--drag-over-inside", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft || this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
       result += " svc-question__content--drag-over-left";
     } else {
       result = result.replace(" svc-question__content--drag-over-left", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight || this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
       result += " svc-question__content--drag-over-right";
     } else {
       result = result.replace(" svc-question__content--drag-over-right", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      result += " svc-question__content--drag-over-top";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-top", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      result += " svc-question__content--drag-over-bottom";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
 
     return result;

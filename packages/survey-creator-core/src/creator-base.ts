@@ -25,7 +25,8 @@ import {
   ILocalizableString,
   ILocalizableOwner,
   PopupBaseViewModel,
-  EventBase
+  EventBase,
+  PanelModelBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -56,12 +57,12 @@ import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
+import { StringEditorConnector } from "./components/string-editor";
+import { DragDropSurveyElementsInCreator } from "./survey-elements-dnd";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
-
-import { StringEditorConnector } from "./components/string-editor";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -1715,7 +1716,7 @@ export class CreatorBase extends Base
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
-    this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements = new DragDropSurveyElementsInCreator(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       let panel = sender.dropTarget.parent;
