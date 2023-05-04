@@ -89,8 +89,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
 
   css() {
-    let result = typeof this.surveyElement.getType === "function" ? ("svc-question__content--" + this.surveyElement.getType()) : "";
-    if(this.creator.isElementSelected(this.surveyElement)) {
+    if (!this.surveyElement.isInteractiveDesignElement) return "";
+
+    let result = "svc-question__content";
+    result += typeof this.surveyElement.getType === "function" ? (" svc-question__content--" + this.surveyElement.getType()) : "";
+    if (this.creator.isElementSelected(this.surveyElement)) {
       result += " svc-question__content--selected";
     }
 
@@ -156,7 +159,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   }
   private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
     const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
-    if(!prop) return;
+    if (!prop) return;
     const isPropReadOnly = this.creator.onIsPropertyReadOnlyCallback(this.surveyElement, prop, prop.readOnly, null, null);
     this.updateActionVisibility(actionName, allow && !isPropReadOnly);
   }
@@ -236,7 +239,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let prop = null;
     if (this.surveyElement.getType() === "text") prop = Serializer.findProperty("text", "inputType");
     if (this.surveyElement.getType() === "rating") prop = Serializer.findProperty("rating", "rateDisplayMode");
-    if(!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
+    if (!prop || !isPropertyVisible(this.surveyElement, prop.name)) return null;
     const propName = prop.name;
     const questionSubType = this.surveyElement.getPropertyValue(propName);
     const items = prop.getChoices(this.surveyElement, (chs: any) => { });
@@ -253,7 +256,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       propName,
       () => {
         const item = this.getSelectedItem(availableTypes, this.surveyElement.getPropertyValue(propName));
-        if(!item) return;
+        if (!item) return;
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
         list.selectedItem = item;
@@ -334,7 +337,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     let element = this.surveyElement;
     items.push(this.createConvertToAction());
     const inputTypeConverter = this.createConvertInputType();
-    if(!!inputTypeConverter) {
+    if (!!inputTypeConverter) {
       items.push(inputTypeConverter);
     }
     items[items.length - 1].css += " sv-action--convertTo-last";
@@ -347,7 +350,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
   }
   protected duplicate() {
-    setTimeout(()=>{
+    setTimeout(() => {
       var newElement = this.creator.fastCopyQuestion(this.surveyElement);
       this.creator.selectElement(newElement);
     }, 1);
