@@ -1076,6 +1076,21 @@ test("check Fast Entry for Rating", () => {
   expect(question.rateValues[3].value).toEqual("4");
   expect(question.rateValues[3].text).toEqual("item4");
 });
+
+test("check editor for rating in matrix Rating", () => {
+  const question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("col1");
+  question.columns[0].cellType = "rating";
+  question.columns[0].templateQuestion.rateCount = 2;
+  const propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixRateValues();
+  expect(itemsQuestion.allowAddRows).toEqual(true);
+  expect(itemsQuestion.allowRemoveRows).toEqual(false);
+});
+
 test("bindings property editor", () => {
   const survey = new SurveyModel({
     elements: [
