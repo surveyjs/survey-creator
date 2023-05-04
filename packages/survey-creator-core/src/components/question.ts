@@ -17,7 +17,6 @@ import {
   createDropdownActionModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropSurveyElements } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
@@ -30,6 +29,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
+import { DragDropSurveyElements } from "../survey-elements";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;

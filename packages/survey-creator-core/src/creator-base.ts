@@ -31,7 +31,7 @@ import {
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DragDropSurveyElements, DragDropChoices } from "survey-core";
+import { DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -59,6 +59,7 @@ import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { DragDropSurveyElementsInCreator } from "./survey-elements-dnd";
+import { DragDropSurveyElements } from "./survey-elements";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
