@@ -1,2 +1,50 @@
 <ng-template #template>
+  <div *ngIf="adorner" class="svc-question__adorner" [class]="adorner.rootCss()"
+    (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
+    [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
+
+    <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content" [class]="adorner.css()"
+      [key2click] (click)="adorner.select(adorner, $event)">
+      <div *ngIf="adorner.allowDragging && adorner.element.isInteractiveDesignElement" class="svc-question__drag-area"
+        (pointerdown)="adorner.onPointerDown($event)">
+        <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
+          sv-ng-svg-icon></svg>
+      </div>
+
+      <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
+
+      <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
+        <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
+        <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
+          (click)="addNewQuestion($event)">
+          <span class="svc-text svc-text--normal svc-text--bold">
+            {{ adorner.addNewQuestionText }}
+          </span>
+        </div>
+      </div>
+
+      <ng-template *ngIf="adornerComponent && adorner.element.isInteractiveDesignElement"
+        [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
+      </ng-template>
+
+      <div *ngIf="!adorner.isEmptyElement && adorner.showAddQuestionButton"
+        class="svc-panel__add-new-question-container">
+        <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="addNewQuestion($event)">
+          <span class="svc-text svc-text--normal svc-text--bold">
+            {{ adorner.addNewQuestionText }}
+          </span>
+        </div>
+        <button type="button" [attr.title]="adorner.addNewQuestionText" [key2click] (click)="selectQuestionType($event)"
+          class="svc-panel__question-type-selector">
+          <svg class="svc-panel__question-type-selector-icon" [iconName]="adorner.questionTypeSelectorModel.iconName"
+            [size]="24" sv-ng-svg-icon></svg>
+          <sv-ng-popup [popupModel]="adorner.questionTypeSelectorModel.popupModel"></sv-ng-popup>
+        </button>
+      </div>
+
+      <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions">
+        <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
+      </div>
+    </div>
+  </div>
 </ng-template>

@@ -7,7 +7,7 @@ import { QuestionDesignerComponent } from "./question.component";
 
 @Component({
   selector: "svc-panel",
-  templateUrl: "./question.component.html",
+  templateUrl: "./panel.component.html",
   styles: [":host { display: none; }"]
 })
 export class PanelDesignerComponent extends QuestionDesignerComponent {
