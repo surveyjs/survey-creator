@@ -151,5 +151,5 @@ test("Dynamic panel inner panel not selectable", async (t) => {
     .expect(Selector(".svc-question__content").exists).ok()
     .expect(Selector(".svc-question__adorner .svc-question__adorner").exists).ok()
     .expect(Selector(".svc-question__content .svc-question__content").exists).notOk()
-    .expect(Selector(".svc-question__adorner .svc-question__adorner>.svc-panel__placeholder_frame").exists).ok();
+    .expect(Selector(".svc-question__adorner .svc-question__adorner .svc-panel__placeholder_frame").exists).ok();
 });
