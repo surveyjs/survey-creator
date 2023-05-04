@@ -79,6 +79,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new TabDesignerViewModel(this.creator);
     this.creator.sidebar.activeTab = this.propertyGridTab.id;
+    this.creator.focusElement(undefined, true);
   }
   public deactivate(): boolean {
     this.model = undefined;

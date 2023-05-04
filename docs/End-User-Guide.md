@@ -40,6 +40,12 @@ Respondents select one number within a range. Use the Rating Scale type when you
 
 <img src="images/question-types-rating.png" alt="SurveyJS Question types - Rating Scale" width="75%">
 
+- How to: Use graphic symbols ([stars, emojis](https://surveyjs.io/form-library/examples/rating-scale/)) for rate values           
+Expand the **Rate Values** category and select a required **Rate type**:
+    <img src="images/survey-creator-rate-type.png" alt="Survey Creator - Change rate type in Property Grid" width="50%">        
+Alternatively, you can change the rate type using an adorner directly on the design surface:
+    <img src="images/survey-creator-rate-type-using-adorner.png" alt="Survey Creator - Change rate type using an adorner" width="75%">
+
 <div id="#checkbox"></div>
 
 #### Checkboxes
