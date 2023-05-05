@@ -586,7 +586,7 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     super.onCreated(obj, question, prop);
     const matrixQuestion = <QuestionMatrixDynamicModel>question;
-    this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+    this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>((obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : obj));
     obj.onPropertyChanged.add((sender, options) => {
       if (options.name == "rateCount" || options.name == "rateDisplayMode") {
         this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
