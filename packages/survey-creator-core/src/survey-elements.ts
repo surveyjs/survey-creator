@@ -9,6 +9,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     "sv-drag-drop-ghost-survey-element-name"; // before renaming use globa search (we have also css selectors)
 
   protected isEdge: boolean = false;
+  protected isSide: boolean = false;
   protected prevIsEdge: any = null;
   protected ghostSurveyElement: IElement = null;
 
@@ -113,6 +114,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     event: PointerEvent
   ): any {
     this.isEdge = this.calculateIsEdge(dropTargetNode, event.clientY);
+    this.isSide = this.calculateIsSide(dropTargetNode, event.clientX);
 
     if (!dataAttributeValue) {
       // panel dynamic
@@ -157,12 +159,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     });
 
     // drop to paneldynamic
-    if (dropTarget.getType() === "paneldynamic" && !this.isEdge) {
+    if (dropTarget.getType() === "paneldynamic" && !this.isEdge && !this.isSide) {
       dropTarget = (<any>dropTarget).template;
     }
 
     // drop to matrix detail panel
-    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && !this.isEdge) {
+    if ((dropTarget.getType() === "matrixdropdown" || dropTarget.getType() === "matrixdynamic") && (<any>dropTarget).detailPanelMode !== "none" && !this.isEdge && !this.isSide) {
       dropTarget = (<any>dropTarget).detailPanel;
     }
 
@@ -279,31 +281,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const rect = dropTargetNode.getBoundingClientRect();
     return clientY - rect.top <= DragDropSurveyElements.edgeHeight || rect.bottom - clientY <= DragDropSurveyElements.edgeHeight;
   }
-
-  // private calculateIsRight(): boolean {
-  //   // const dropTarget = this.dropTarget;
-  //   // const targetRow = this.getTargetRow(dropTarget);
-
-  //   // if (targetRow.elements.indexOf(this.draggedElement) !== -1) {
-  //   //   var pageOrPanel = dropTarget.parent;
-  //   //   var srcIndex = pageOrPanel.elements.indexOf(this.draggedElement);
-  //   //   var destIndex = pageOrPanel.elements.indexOf(dropTarget);
-  //   // } else {
-  //   //   if (targetRow.elements.indexOf(dropTarget) === 0) {
-  //   //     return false;
-  //   //   } else {
-  //   //     return true;
-  //   //   }
-  //   //   // else if (targetRow.elements.indexOf(dropTarget) === targetRow.elements.length -1) {
-  //   //   //   return true;
-  //   //   // }
-  //   // }
-
-  //   // return srcIndex < destIndex;
-
-  //   const middle = this.calculateHorizontalMiddleOfHTMLElement(this.dropTargetNode);
-  //   return clientY >= middle;
-  // }
+  private calculateIsSide(dropTargetNode: HTMLElement, clientX: number) {
+    const rect = dropTargetNode.getBoundingClientRect();
+    return clientX - rect.left <= DragDropSurveyElements.edgeHeight || rect.right - clientX <= DragDropSurveyElements.edgeHeight;
+  }
 
   protected doDragOver(dropTargetNode?: HTMLElement, event?: PointerEvent): void {
     this.isRight = this.calculateIsRight(event.clientX, dropTargetNode);
@@ -411,7 +392,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return targetParent;
   }
 
-  private getTargetRow(dropTarget: any): QuestionRowModel {
+  protected getTargetRow(dropTarget: any): QuestionRowModel {
     const targetParent = this.getTargetParent(dropTarget);
     let targetRow: any;
 
@@ -426,7 +407,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected isDragOverInsideEmptyPanel(): boolean {
     const isEmptyPanel = this.dropTarget.isPanel && this.dropTarget.questions.length === 0;
-    const isDragOverInside = !this.isEdge;
+    const isDragOverInside = !this.isEdge && !this.isSide;
     return isEmptyPanel && isDragOverInside;
   }
 

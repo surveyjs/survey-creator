@@ -10,7 +10,21 @@ export class DragDropSurveyElementsInCreator extends DragDropSurveyElements {
     this.parentElement = this.dropTarget.isPage
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
+
+    const row = this.parentElement.dragDropFindRow(this.dropTarget);
+    if(!!row && row.elements.length > 1 && (this.dropTarget.dragTypeOverMe === DragTypeOverMeEnum.Top || this.dropTarget.dragTypeOverMe === DragTypeOverMeEnum.Bottom)) {
+      row.dragTypeOverMe = this.dropTarget.dragTypeOverMe;
+      this.dropTarget.dragTypeOverMe = null;
+    }
   }
+  protected removeDragOverMarker(dropTarget: { dragTypeOverMe: boolean }): void {
+    super.removeDragOverMarker(dropTarget);
+    const row = this.parentElement?.dragDropFindRow(dropTarget);
+    if(!!row) {
+      row.dragTypeOverMe = null;
+    }
+  }
+
   protected afterDragOver(dropTargetNode?: HTMLElement, event?: PointerEvent): void {
 
   }
@@ -89,12 +103,13 @@ export class DragDropSurveyElementsInCreator extends DragDropSurveyElements {
         src.parent.removeElement(src);
       }
     }
-    if(!this.isEdge && (dest.isPanel || dest.isPage)) {
+    if(!this.isEdge && !this.isSide && (dest.isPanel || dest.isPage)) {
       dest.addElement(target);
     } else if(!!row && targetIndex > -1) {
       row.panel.addElement(target, targetIndex);
-      (page.survey as SurveyModel).stopMovingQuestion();
+      row.panel.updateRows();
     }
+    (page.survey as SurveyModel).stopMovingQuestion();
 
     elementsToSetSWNL.map((e) => { e.startWithNewLine = true; });
     elementsToResetSWNL.map((e) => { e.startWithNewLine = false; });
