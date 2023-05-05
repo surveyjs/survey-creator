@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, ViewContainerRef, ViewEncapsulation } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, PanelModel, Question, SurveyModel } from "survey-core";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
@@ -7,7 +7,8 @@ import { CreatorModelComponent } from "./creator-model.component";
 @Component({
   selector: "svc-question",
   templateUrl: "./question.component.html",
-  styles: [":host { display: none; }"]
+  encapsulation: ViewEncapsulation.None,
+  styles: [":host { display: none; } .svc-question__content--image.svc-question__content--empty  sv-ng-file-question { width: 100% }"]
 })
 export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
   @Input() componentName!: string;
@@ -29,6 +30,15 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   }
   protected getModel(): QuestionAdornerViewModel {
     return this.adorner;
+  }
+  public get placeholderComponent(): string {
+    return "";
+  }
+  public get placeholderComponentData(): any {
+    return null;
+  }
+  public get showPlaceholderComponent(): boolean {
+    return false;
   }
   public selectQuestionType(event: any) {
     event.stopPropagation();

@@ -17,6 +17,15 @@ export class QuestionImageDesignerComponent extends QuestionDesignerComponent im
     }
   }
   public override adornerComponent = "svc-image-question-adorner";
+  public override get placeholderComponent(): string {
+    return "file-question";
+  }
+  public override get placeholderComponentData() {
+    return { model: (<QuestionImageAdornerViewModel>this.adorner).filePresentationModel };
+  }
+  public override get showPlaceholderComponent(): boolean {
+    return !!this.placeholderComponentData;
+  }
   ngAfterViewInit(): void {
     (<QuestionImageAdornerViewModel>this.adorner).questionRoot = this.container.nativeElement;
   }

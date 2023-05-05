@@ -22,6 +22,17 @@ ko.components.register("svc-image-question", {
       );
       createQuestionViewModel(params, componentInfo, model);
       model["adornerComponent"] = "svc-image-question-adorner";
+      model["koIsEmptyImageLink"] = ko.computed(() => {
+        return model.isEmptyImageLink;
+      });
+      model["koIsEmptyElement"] = ko.computed(() => {
+        return model.isEmptyImageLink;
+      });
+      model["placeholderComponentData"] = {
+        name: "survey-question-file",
+        data: model.filePresentationModel,
+        afterRender: () => { }
+      };
       return model;
     }
   },
