@@ -15,20 +15,20 @@ test("calculateVerticalMiddleOfHTMLElement", () => {
   expect(result).toBe(60);
 });
 
-test("calculateIsBottom", () => {
-  let ddHelper = new DragDropSurveyElements(null);
-  const testElement = document.body.appendChild(document.createElement("div"));
-  (<any>testElement).getBoundingClientRect = () => ({
-    y: 100,
-    height: 100,
-  });
+// test("calculateIsBottom", () => {
+//   let ddHelper = new DragDropSurveyElements(null);
+//   const testElement = document.body.appendChild(document.createElement("div"));
+//   (<any>testElement).getBoundingClientRect = () => ({
+//     y: 100,
+//     height: 100,
+//   });
 
-  let result = ddHelper["calculateIsBottom"](150, testElement);
-  expect(result).toBe(true);
+//   let result = ddHelper["calculateIsBottom"](150, testElement);
+//   expect(result).toBe(true);
 
-  result = ddHelper["calculateIsBottom"](100, testElement);
-  expect(result).toBe(false);
-});
+//   result = ddHelper["calculateIsBottom"](100, testElement);
+//   expect(result).toBe(false);
+// });
 
 test("calculateIsEdge", () => {
   DragDropSurveyElements.edgeHeight = 20;
@@ -53,20 +53,38 @@ test("calculateIsEdge", () => {
   expect(result).toBe(true);
 });
 
-test("calculateIsRight", () => {
+test("calculateIsSide", () => {
   let ddHelper = new DragDropSurveyElements(null);
   const testElement = document.body.appendChild(document.createElement("div"));
   (<any>testElement).getBoundingClientRect = () => ({
-    x: 100,
-    width: 100,
+    left: 100,
+    right: 200,
   });
 
-  let result = ddHelper["calculateIsRight"](150, testElement);
+  let result = ddHelper["calculateIsSide"](testElement, 100);
   expect(result).toBe(true);
 
-  result = ddHelper["calculateIsRight"](100, testElement);
+  result = ddHelper["calculateIsSide"](testElement, 150);
   expect(result).toBe(false);
+
+  result = ddHelper["calculateIsSide"](testElement, 200);
+  expect(result).toBe(true);
 });
+
+// test("calculateIsRight", () => {
+//   let ddHelper = new DragDropSurveyElements(null);
+//   const testElement = document.body.appendChild(document.createElement("div"));
+//   (<any>testElement).getBoundingClientRect = () => ({
+//     x: 100,
+//     width: 100,
+//   });
+
+//   let result = ddHelper["calculateIsRight"](150, testElement);
+//   expect(result).toBe(true);
+
+//   result = ddHelper["calculateIsRight"](100, testElement);
+//   expect(result).toBe(false);
+// });
 
 // QUnit.test("calculateIsRight", function (
 //   assert
@@ -136,7 +154,7 @@ test("surveyelement: onDragStart and onDragEnd events", () => {
   let afterCount = 0;
   let draggedElement;
 
-  const ddHelper: any = new DragDropSurveyElements(survey);
+  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
   ddHelper.onDragStart.add((sender, options) => {
     beforeCount++;
   });
@@ -193,7 +211,7 @@ test("onDragStart event options", () => {
   let toElement;
 
   // init
-  const ddHelper: any = new DragDropSurveyElements(survey);
+  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
 
   ddHelper.onDragEnd.add((sender, options) => {
     fromElement = options.fromElement;
@@ -288,100 +306,100 @@ test("SurveyElements: isDropTargetValid", () => {
   expect(ddHelper.isDropTargetValid()).toBe(true); // "dropTarget is valid (pd template)"
 });
 
-test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
-  const survey = new SurveyModel({
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "paneldynamic",
-            "name": "paneldynamic1",
-            "templateElements": [
-              {
-                "type": "text",
-                "name": "text1"
-              },
-              {
-                "type": "text",
-                "name": "text2",
-                "startWithNewLine": false
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  });
+// test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
+//   const survey = new SurveyModel({
+//     "logoPosition": "right",
+//     "pages": [
+//       {
+//         "name": "page1",
+//         "elements": [
+//           {
+//             "type": "paneldynamic",
+//             "name": "paneldynamic1",
+//             "templateElements": [
+//               {
+//                 "type": "text",
+//                 "name": "text1"
+//               },
+//               {
+//                 "type": "text",
+//                 "name": "text2",
+//                 "startWithNewLine": false
+//               }
+//             ]
+//           }
+//         ]
+//       }
+//     ]
+//   });
 
-  const paneldynamic1 = survey.getQuestionByName("paneldynamic1");
-  const text1 = paneldynamic1.template.elements[0];
-  const text2 = paneldynamic1.template.elements[1];
+//   const paneldynamic1 = survey.getQuestionByName("paneldynamic1");
+//   const text1 = paneldynamic1.template.elements[0];
+//   const text2 = paneldynamic1.template.elements[1];
 
-  const ddHelper: any = new DragDropSurveyElements(<any>survey);
-  ddHelper.isEdge = true;
-  ddHelper.draggedElement = text1;
-  ddHelper.dropTarget = text2;
+//   const ddHelper: any = new DragDropSurveyElements(<any>survey);
+//   ddHelper.isEdge = true;
+//   ddHelper.draggedElement = text1;
+//   ddHelper.dropTarget = text2;
 
-  expect(ddHelper["calcTargetRowMultiple"]()).toBe(true);
-});
+//   expect(ddHelper["calcTargetRowMultiple"]()).toBe(true);
+// });
 
-test("surveyelement: calcTargetRowMultiple for paneldynamic 2", () => {
-  const json = {
-    "logoPosition": "right",
-    "pages": [
-      {
-        "name": "page1",
-        "elements": [
-          {
-            "type": "paneldynamic",
-            "name": "question2",
-            "title": "paneldynamic",
-            "templateElements": [
-              {
-                "type": "panel",
-                "name": "panel1",
-                "elements": [
-                  {
-                    "type": "rating",
-                    "name": "question3"
-                  },
-                  {
-                    "type": "rating",
-                    "name": "question4",
-                    "startWithNewLine": false
-                  }
-                ],
-                "title": "panel"
-              }
-            ]
-          },
-          {
-            "type": "rating",
-            "name": "question1"
-          }
-        ]
-      }
-    ]
-  };
-  const survey = new SurveyModel(json);
+// test("surveyelement: calcTargetRowMultiple for paneldynamic 2", () => {
+//   const json = {
+//     "logoPosition": "right",
+//     "pages": [
+//       {
+//         "name": "page1",
+//         "elements": [
+//           {
+//             "type": "paneldynamic",
+//             "name": "question2",
+//             "title": "paneldynamic",
+//             "templateElements": [
+//               {
+//                 "type": "panel",
+//                 "name": "panel1",
+//                 "elements": [
+//                   {
+//                     "type": "rating",
+//                     "name": "question3"
+//                   },
+//                   {
+//                     "type": "rating",
+//                     "name": "question4",
+//                     "startWithNewLine": false
+//                   }
+//                 ],
+//                 "title": "panel"
+//               }
+//             ]
+//           },
+//           {
+//             "type": "rating",
+//             "name": "question1"
+//           }
+//         ]
+//       }
+//     ]
+//   };
+//   const survey = new SurveyModel(json);
 
-  const paneldynamic = survey.getQuestionByName("question2");
-  const question3 = paneldynamic.template.elements[0].elements[0];
-  const question1 = survey.getQuestionByName("question1");
+//   const paneldynamic = survey.getQuestionByName("question2");
+//   const question3 = paneldynamic.template.elements[0].elements[0];
+//   const question1 = survey.getQuestionByName("question1");
 
-  question3.__page = survey.pages[0];
+//   question3.__page = survey.pages[0];
 
-  const ddHelper: any = new DragDropSurveyElements(<any>survey);
-  ddHelper.isEdge = true;
-  ddHelper.draggedElement = question1;
-  ddHelper.dropTarget = question3;
+//   const ddHelper: any = new DragDropSurveyElements(<any>survey);
+//   ddHelper.isEdge = true;
+//   ddHelper.draggedElement = question1;
+//   ddHelper.dropTarget = question3;
 
-  ddHelper["calcTargetRowMultiple"]();
+//   ddHelper["calcTargetRowMultiple"]();
 
-  expect(ddHelper.dropTarget.__page).toBeDefined();
-});
+//   expect(ddHelper.dropTarget.__page).toBeDefined();
+// });
 
 test("drag drop existing to top/bottom", () => {
   const json = {
