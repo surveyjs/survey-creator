@@ -122,3 +122,37 @@ test("Collection editor headers", async (t) => {
     await takeElementScreenshot("collection-editor-header.png", sectionContentElement, t, comparer);
   });
 });
+
+test("Check choices editor with narrow property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "question1",
+              "choices": [1, 2, 3],
+            },
+          ]
+        }
+      ]
+    };
+
+    await setJSON(surveyJSON);
+
+    const westResizer = Selector(".svc-resizer-west");
+    const questionSelector = Selector("div[data-name='choices']");
+    await t
+      .drag(westResizer, 100, 0)
+      .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 })
+      .click(Selector("h4[aria-label=General]"))
+      .click(Selector("h4[aria-label=Choices]"))
+      .click(questionSelector.find(".spg-action-button").nth(3));
+
+    await takeElementScreenshot("choices-editor-narrow-pg.png", questionSelector, t, comparer);
+  });
+});
