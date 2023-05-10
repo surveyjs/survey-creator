@@ -52,9 +52,9 @@ The new Survey Creator introduces a native implementation for React and Angular 
 
 ## Native Survey Creator for React
 
-New Survey Creator for React is a composition of true React components. The native implementation became possible because we separated the platform-independent model code (now distributed as the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package) from the platform-specific rendering code (the [`survey-creator-react`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-react) package). You can override the default rendering functions of our React components and integrate your own React components (view the [Override the Property Grid Component](https://surveyjs.io/Examples/Survey-Creator?id=overridepropertygrid&platform=ReactjsV2) example). We implemented the same concept in the SurveyJS Library earlier.
+New Survey Creator for React is a composition of true React components. The native implementation became possible because we separated the platform-independent model code (now distributed as the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package) from the platform-specific rendering code (the [`survey-creator-react`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-react) package). You can override the default rendering functions of our React components and integrate your own React components (view the [Override the Property Grid Component](https://surveyjs.io/Examples/Survey-Creator?id=overridepropertygrid&platform=ReactjsV2) example). We implemented the same concept in the SurveyJS Form Library earlier.
 
-Most of the UI elements in the new Survey Creator (Property Grid, Translation and Logic Tabs, modal editors) are stylized surveys from our own SurveyJS Library for React. This feature allows you to integrate any 3rd-party React component into the SurveyJS library and then reuse the same configuration to integrate the component into the Survey Creator. View examples that show how to integrate the [React Select](https://react-select.com/home) component [into a standalone survey](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) or [into the Survey Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select).
+Most of the UI elements in the new Survey Creator (Property Grid, Translation and Logic Tabs, modal editors) are stylized surveys from our own SurveyJS Form Library for React. This feature allows you to integrate any 3rd-party React component into the SurveyJS Form Library and then reuse the same configuration to integrate the component into the Survey Creator. View examples that show how to integrate the [React Select](https://react-select.com/home) component [into a standalone survey](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) or [into the Survey Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select).
 
 ## Native Survey Creator for Angular
 
@@ -162,7 +162,7 @@ We renamed the Test Survey tab to Preview and added a device selector that allow
 
 ### Survey Creator UI elements are surveys
 
-In the new Survey Creator, we use our own SurveyJS Library to render most of the UI elements. The main benefit of this approach is that we didn't have to implement native rendering because the SurveyJS Library already supports it for all frameworks.
+In the new Survey Creator, we use our own SurveyJS Form Library to render most of the UI elements. The main benefit of this approach is that we didn't have to implement native rendering because the SurveyJS Form Library already supports it for all frameworks.
 
 This new internal design also prompted us to extend the Library with new features used in the Survey Creator. For example, question titles can now contain [context actions](https://surveyjs.io/Examples/Library?id=survey-titleactions), and [Comment](https://surveyjs.io/Documentation/Library?id=questioncommentmodel) questions can [automatically grow or shrink](https://surveyjs.io/Documentation/Library?id=questioncommentmodel#autoGrow) the input field to accommodate the content.
 
@@ -172,7 +172,7 @@ Since Survey Creator UI elements are surveys, you can customize them as you woul
 
 ### Lazy Rendering
 
-To improve performance on large multi-page surveys, we introduce support for Lazy Rendering to our SurveyJS Library. This feature allows the survey to render questions outside the viewport as skeletons instead of rendering them in full.
+To improve performance on large multi-page surveys, we introduce support for Lazy Rendering to our SurveyJS Form Library. This feature allows the survey to render questions outside the viewport as skeletons instead of rendering them in full.
 
 [View Demo](https://surveyjs.io/Examples/Library?id=survey-lazy (linkStyle))
 

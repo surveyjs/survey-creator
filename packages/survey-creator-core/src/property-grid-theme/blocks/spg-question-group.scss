@@ -5,23 +5,4 @@
       margin-top: calcSize(1);
     }
   }
-  .spg-question--location--left {
-    box-sizing: border-box;
-    &:focus-within {
-      box-shadow: 0 0 0 1px $primary;
-    }
-    .spg-question__header--location--left {
-      width: auto;
-      flex: 1;
-      border: none;
-      box-shadow: none;
-    }
-    .spg-question__content--left {
-      width: auto;
-      flex: 2;
-      .spg-input.spg-dropdown:focus-within {
-        box-shadow: none;
-      }
-    }
-  }
 }
