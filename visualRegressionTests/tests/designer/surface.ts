@@ -975,6 +975,8 @@ test("String editor whitespaces and linedreaks", async (t) => {
     });
   })();
 
+  await t.resizeWindow(1400, 900);
+
   await setJSON({
     "elements": [
       {

@@ -17,7 +17,8 @@
       color: $foreground-light;
     }
   }
-    .sv-string-editor--html {
+        .sv-string-editor--html,
+        .sv-string-editor:focus-within {
       white-space: pre-wrap;
     }
   &.svc-string-editor--hidden {
