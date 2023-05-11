@@ -837,6 +837,9 @@ export class PropertyGridModel {
       this.currentlySelectedPanel = <PanelModel>options.question.parent;
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
+    this.survey.onQuestionCreated.add((_, opt) => {
+      opt.question.allowRootStyle = false;
+    });
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
   }
   public get options(): ISurveyCreatorOptions {
