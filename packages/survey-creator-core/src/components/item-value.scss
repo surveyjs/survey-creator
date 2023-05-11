@@ -6,7 +6,7 @@
   gap: calcSize(1);
   align-items: center;
   margin-left: calcSize(-5);
-  min-width: calcSize(27);
+  min-width: calcSize(28);
 }
 
 .svc-question__dropdown-choice,
@@ -150,6 +150,10 @@
 .sv-ranking {
   .svc-item-value-wrapper {
     align-items: center;
+    min-width: calcSize(27);
+  }
+  .svc-item-value__item {
+    padding-right: 0;
   }
 }
 
