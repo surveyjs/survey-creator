@@ -965,3 +965,32 @@ test("Question add type selector button", async (t) => {
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
   });
 });
+
+test("String editor whitespaces and linedreaks", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => {
+        if (options.element.name == "q1") options.html = options.text;
+      });
+    });
+  })();
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "a\nb\nc"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "a\nb\nc"
+      }
+    ]
+  });
+  await wrapVisualTest(t, async (t, comparer) => {
+    await takeElementScreenshot("string-editor-linebreaks-html.png", Selector(".svc-question__content").nth(0), t, comparer);
+    await takeElementScreenshot("string-editor-linebreaks-plain.png", Selector(".svc-question__content").nth(1), t, comparer);
+  });
+});
