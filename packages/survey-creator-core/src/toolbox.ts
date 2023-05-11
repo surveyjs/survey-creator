@@ -751,7 +751,7 @@ export class QuestionToolbox
   }
   private isHiddenCustomWidget(name: string): boolean {
     const widget = CustomWidgetCollection.Instance.getCustomWidgetByName(name);
-    return !!widget && !widget.canShowInToolbox;
+    return !!widget && !widget.showInToolbox;
   }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
     const allTypes: string[] = ElementFactory.Instance.getAllTypes();
