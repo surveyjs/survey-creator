@@ -6,13 +6,13 @@
   gap: calcSize(1);
   align-items: center;
   margin-left: calcSize(-5);
-  min-width: calcSize(28);
 }
 
 .svc-question__dropdown-choice,
 .sd-selectbase {
   .svc-item-value-wrapper {
     align-items: flex-start;
+    min-width: calcSize(28);
   }
 }
 
