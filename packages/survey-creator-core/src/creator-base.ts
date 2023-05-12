@@ -58,7 +58,6 @@ import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
-import { DragDropSurveyElementsInCreator } from "./survey-elements-dnd";
 import { DragDropSurveyElements } from "./survey-elements";
 
 require("./components/creator.scss");
@@ -1717,7 +1716,7 @@ export class CreatorBase extends Base
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
-    this.dragDropSurveyElements = new DragDropSurveyElementsInCreator(null, this);
+    this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
       let panel = sender.dropTarget.parent;

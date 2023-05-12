@@ -1,6 +1,5 @@
 import { DragTypeOverMeEnum, Question, SurveyModel } from "survey-core";
 import { DragDropSurveyElements } from "../src/survey-elements";
-import { DragDropSurveyElementsInCreator } from "../src/survey-elements-dnd";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
   let ddHelper = new DragDropSurveyElements(null);
@@ -154,7 +153,7 @@ test("surveyelement: onDragStart and onDragEnd events", () => {
   let afterCount = 0;
   let draggedElement;
 
-  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.onDragStart.add((sender, options) => {
     beforeCount++;
   });
@@ -211,7 +210,7 @@ test("onDragStart event options", () => {
   let toElement;
 
   // init
-  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  const ddHelper: any = new DragDropSurveyElements(survey);
 
   ddHelper.onDragEnd.add((sender, options) => {
     fromElement = options.fromElement;
@@ -415,7 +414,7 @@ test("drag drop existing to top/bottom", () => {
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
-  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
   ddHelper.dropTarget = q1;
 
@@ -466,7 +465,7 @@ test("drag drop existing to left/right", () => {
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
-  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
   ddHelper.dropTarget = q2;
 
@@ -518,7 +517,7 @@ test("drag drop existing from single row to outside top/bottom - break into seve
   const q2 = survey.getQuestionByName("q2");
   const q3 = survey.getQuestionByName("q3");
 
-  const ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
   ddHelper.dropTarget = q1;
 
@@ -570,7 +569,7 @@ test("drag drop existing from single row to outside top", () => {
   let q2 = survey.getQuestionByName("q2");
   let q3 = survey.getQuestionByName("q3");
 
-  let ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
   ddHelper.dropTarget = q2;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
@@ -594,7 +593,7 @@ test("drag drop existing from single row to outside top", () => {
   q2 = survey.getQuestionByName("q2");
   q3 = survey.getQuestionByName("q3");
 
-  ddHelper = new DragDropSurveyElementsInCreator(survey);
+  ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
   ddHelper.dropTarget = q1;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
@@ -618,7 +617,7 @@ test("drag drop existing from single row to outside top", () => {
   q2 = survey.getQuestionByName("q2");
   q3 = survey.getQuestionByName("q3");
 
-  ddHelper = new DragDropSurveyElementsInCreator(survey);
+  ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
   ddHelper.dropTarget = q1;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
@@ -651,7 +650,7 @@ test("drag drop existing from single row to outside bottom", () => {
   let q2 = survey.getQuestionByName("q2");
   let q3 = survey.getQuestionByName("q3");
 
-  let ddHelper: any = new DragDropSurveyElementsInCreator(survey);
+  let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
   ddHelper.dropTarget = q3;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
@@ -675,7 +674,7 @@ test("drag drop existing from single row to outside bottom", () => {
   q2 = survey.getQuestionByName("q2");
   q3 = survey.getQuestionByName("q3");
 
-  ddHelper = new DragDropSurveyElementsInCreator(survey);
+  ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
   ddHelper.dropTarget = q3;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
@@ -699,7 +698,7 @@ test("drag drop existing from single row to outside bottom", () => {
   q2 = survey.getQuestionByName("q2");
   q3 = survey.getQuestionByName("q3");
 
-  ddHelper = new DragDropSurveyElementsInCreator(survey);
+  ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
   ddHelper.dropTarget = q2;
   ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
