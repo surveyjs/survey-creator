@@ -26,7 +26,7 @@ npm install survey-creator-react --save
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Library style sheets as shown below:
+Import Survey Creator and SurveyJS Form Library style sheets as shown below:
 
 ```js
 import "survey-core/defaultV2.min.css";

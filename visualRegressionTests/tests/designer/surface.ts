@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName } from "../../helper";
 
 const title = "Designer surface";
 
@@ -882,6 +882,28 @@ test("Question actions", async (t) => {
   });
 });
 
+test("Keep scroll to selected on tab changed", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1600, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        { "name": "page1", "elements": [{ "type": "text", "name": "question1" }] },
+        { "name": "page2", "elements": [{ "type": "text", "name": "question2" }] },
+        { "name": "page3", "elements": [{ "type": "text", "name": "question3" }] },
+        { "name": "page4", "elements": [{ "type": "text", "name": "question4" }] },
+        { "name": "page5", "elements": [{ "type": "text", "name": "question5" }] },
+      ]
+    };
+    await setJSON(json);
+    await t.click(Selector("button.sv-action-bar-item[title=\"Survey\"]"), { offsetX: 5, offsetY: 5 });
+    await t.click(Selector(".sv-list__item span").withExactText("question5").filterVisible(), { offsetX: 5, offsetY: 5 });
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(getTabbedMenuItemByText(creatorTabDesignerName));
+    const root = Selector(".svc-creator");
+    await takeElementScreenshot("question-5-selected-in-view.png", root, t, comparer);
+  });
+});
 test("Question actions on hover in mobile mode", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(400, 900);

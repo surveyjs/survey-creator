@@ -189,3 +189,20 @@ test("Check creator license localization", (): any => {
   const creator = new CreatorTester({});
   expect(creator.licenseText).toBe("PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP");
 });
+test("getPropertyValue autoGenerate and boolean", () => {
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generate");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Enter manually");
+  const deutschStrings: any = {
+    pv: {
+      autoGenerate: {
+        "true": "Generieren",
+        "false": "Manuell Eintragen"
+      }
+    }
+  };
+  editorLocalization.locales["de"] = deutschStrings;
+  editorLocalization.currentLocale = "de";
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generieren");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Manuell Eintragen");
+  editorLocalization.currentLocale = "";
+});

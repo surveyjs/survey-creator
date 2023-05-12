@@ -62,6 +62,7 @@ export class QuestionConverter {
     QuestionConverter.updateJSONForRating(json, convertToClass, defaultJSON);
     QuestionConverter.updateJSONForMatrices(json, convertToClass, convertFromClass);
     QuestionConverter.updateJSONForPanels(json, convertToClass, convertFromClass);
+    QuestionConverter.updateJSONForBarrating(json, convertToClass);
   }
   private static updateJSONFromQuestionDefaultSettings(json: any, convertToClass: string, defaultJSON: any): void {
     const questionDefaultSettings = QuestionToolbox.getQuestionDefaultSettings(convertToClass);
@@ -107,6 +108,11 @@ export class QuestionConverter {
     }
     if(!!json.rateValues && !Serializer.isDescendantOf(convertToClass, "matrixdropdownbase")) {
       json.choices = json.rateValues;
+    }
+  }
+  private static updateJSONForBarrating(json: any, convertToClass: string): void {
+    if(convertToClass === "barrating") {
+      json.choices = [1, 2, 3, 4, 5];
     }
   }
   private static updateJSONForPanels(json: any, convertToClass: string, convertFromClass: string): void {
