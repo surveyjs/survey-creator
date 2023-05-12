@@ -74,11 +74,11 @@ ComponentCollection.Instance.add({
       titleLocation: "hidden",
       descriptionLocation: "hidden",
       choices: [
-        { value: "regular", text: getLocString("theme.fontWeightRegular") },
-        { value: "semiBold", text: getLocString("theme.fontWeightSemiBold") },
-        { value: "bold", text: getLocString("theme.fontWeightBold") },
+        { value: "400", text: getLocString("theme.fontWeightRegular") },
+        { value: "500", text: getLocString("theme.fontWeightSemiBold") },
+        { value: "700", text: getLocString("theme.fontWeightBold") },
       ],
-      defaultValue: "regular"
+      defaultValue: "400"
     },
     {
       type: "color",
@@ -93,9 +93,9 @@ ComponentCollection.Instance.add({
       title: getLocString("theme.size"),
       titleLocation: "left",
       descriptionLocation: "hidden",
-      unit: "pt",
+      unit: "px",
       min: 0,
-    },
+    }
   ],
   onInit() {
   },
@@ -488,20 +488,20 @@ export class TestSurveyTabViewModel extends Base {
         this.survey["isCompact"] = options.value === "lightweight";
         return;
       }
+      const _data = sender.data;
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
-          this.simulator.themeVariables[`--sjs-font-${options.name}-${key}`] = options.value[key];
+          const innerQ = options.question.contentPanel.getQuestionByName(key);
+          _data[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
         });
-        return;
       }
       if (options.question?.getType() === "elementsettings") {
         Object.keys(options.value).forEach(key => {
           if (key === "corner") return;
-          this.simulator.themeVariables[`--sjs-${options.name}-${key}`] = options.value[key];
+          _data[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
         });
-        return;
       }
-      this.simulator.themeVariables = sender.data;
+      this.simulator.themeVariables = _data;
     });
     return themeEditorSurvey;
   }
