@@ -186,7 +186,7 @@ test("Theme builder switch themes", (): any => {
   const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
   const themeEditor = testSurveyTab.themeEditorSurvey;
   const themePalette = themeEditor.getQuestionByName("themePalette");
-  const primaryColor = themeEditor.getQuestionByName("--primary");
+  const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditor.getQuestionByName("--background-dim");
 
   expect(themePalette.value).toEqual("light");

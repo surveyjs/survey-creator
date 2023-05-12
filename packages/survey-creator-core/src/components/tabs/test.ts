@@ -22,7 +22,7 @@ import { notShortCircuitAnd } from "../../utils/utils";
 
 export const Themes = {
   "default-light": {
-    "--primary": "#19b394",
+    "--sjs-primary-backcolor": "#19b394",
     "--background": "#ffffff",
     "--background-dim": "#f3f3f3",
     "--background-dim-light": "#f9f9f9",
@@ -32,13 +32,13 @@ export const Themes = {
     "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45);",
     "--sjs-editor-background": "#f9f9f9",
     "--sjs-question-background": "#ffffff",
-    "--primary-foreground": "#ffffff",
+    "--sjs-primary-forecolor": "#ffffff",
     "--foreground": "#161616",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px"
   },
   "default-dark": {
-    "--primary": "#1ab7fa",
+    "--sjs-primary-backcolor": "#1ab7fa",
     "--background": "#555555",
     "--background-dim": "#4d4d4d",
     "--background-dim-light": "#4d4d4d",
@@ -48,7 +48,7 @@ export const Themes = {
     "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.45)",
     "--sjs-editor-background": "#4d4d4d",
     "--sjs-question-background": "#555555",
-    "--primary-foreground": "#ffffff",
+    "--sjs-primary-forecolor": "#ffffff",
     "--foreground": "#ededed",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px"
@@ -560,7 +560,7 @@ export class TestSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "color",
-                name: "--primary",
+                name: "--sjs-primary-backcolor",
                 title: getLocString("theme.primaryColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#19b394"
@@ -807,7 +807,81 @@ export class TestSurveyTabViewModel extends Base {
             ]
           }, {
             type: "panel",
-            elements: []
+            elements: [{
+              type: "panel",
+              title: "Accent Background",
+              elements: [
+                {
+                  type: "color",
+                  name: "--sjs-primary-backcolor",
+                  title: getLocString("theme.primaryColor"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "#19b394"
+                },
+                {
+                  type: "color",
+                  name: "--sjs-primary-backcolor-dark",
+                  title: getLocString("theme.primaryDarkColor"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "#14A48B"
+                },
+                {
+                  type: "color",
+                  name: "--sjs-primary-backcolor-light",
+                  title: getLocString("theme.primaryLightColor"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "#19b394"
+                }
+              ]
+            }, {
+              type: "panel",
+              title: "Accent Foreground",
+              elements: [
+                {
+                  type: "color",
+                  name: "--sjs-primary-forecolor",
+                  title: getLocString("theme.primaryForecolor"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "#ffffff"
+                },
+                {
+                  type: "color",
+                  name: "--sjs-primary-forecolor-light",
+                  title: getLocString("theme.primaryForecolorLight"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "#ffffff"
+                }
+              ]
+            }]
+          }, {
+            type: "panel",
+            elements: [{
+              type: "panel",
+              title: "Lines",
+              elements: [
+                {
+                  type: "color",
+                  name: "--sjs-border-default",
+                  title: getLocString("theme.borderDefault"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "rgba(0, 0, 0, 0.16)"
+                },
+                {
+                  type: "color",
+                  name: "--sjs-border-light",
+                  title: getLocString("theme.borderLight"),
+                  titleLocation: "left",
+                  descriptionLocation: "hidden",
+                  defaultValue: "rgba(0, 0, 0, 0.09)"
+                }
+              ]
+            }]
           }]
       }]
     };

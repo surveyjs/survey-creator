@@ -1,9 +1,18 @@
 .spg-theme-builder-root {
-  .sd-element--expanded > .spg-panel__content {
-    padding: 0;
-  }
+  // .sd-element--expanded > .spg-panel__content {
+  //   padding: 0;
+  // }
 
-  .sd-element--complex .spg-panel__content {
+  // .sd-element--complex .spg-panel__content {
+  //   padding: 0;
+  // }
+
+  .spg-panel__content .spg-panel__content {
     padding: 0;
+
+    .spg-panel__title {
+      background-color: transparent;
+      box-shadow: none;
+    }
   }
 }
