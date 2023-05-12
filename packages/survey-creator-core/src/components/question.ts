@@ -61,12 +61,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
-    this.dragTypeOverMe = <any>new ComputedUpdater(() => {
-      let element = this.surveyElement.getType() === "paneldynamic" ?
-        (<any>this.surveyElement).template :
-        this.surveyElement;
-      return element.dragTypeOverMe;
-    });
     StringItemsNavigatorBase.setQuestion(this);
   }
 
@@ -141,7 +135,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.surveyElement.isDragMe;
   }
 
-  @property() dragTypeOverMe: DragTypeOverMeEnum;
+  get dragTypeOverMe() {
+    return this.element.dragTypeOverMe;
+  }
 
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");

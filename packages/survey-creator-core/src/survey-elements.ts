@@ -175,6 +175,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dropTarget.__page = page;
     }
 
+    this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
@@ -403,14 +404,15 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
 
-    if (this.isDragOverInsideEmptyPanel()) {
-      this.dropTarget.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
+    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
+    if (!this.isEdge && !this.isSide && this.isDragOverInsideEmptyPanel()) {
+      dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
     } else {
-      const row = this.parentElement.dragDropFindRow(this.dragOverIndicatorElement || this.dropTarget);
+      const row = this.parentElement.dragDropFindRow(dragOverIndicator);
       if(!!row && row.elements.length > 1 && (this.dragOverLocation === DragTypeOverMeEnum.Top || this.dragOverLocation === DragTypeOverMeEnum.Bottom)) {
         row.dragTypeOverMe = this.dragOverLocation;
       } else {
-        (this.dragOverIndicatorElement || this.dropTarget).dragTypeOverMe = this.dragOverLocation;
+        dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
     }
   }
@@ -426,6 +428,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   protected doClear = (): void => {
     // this.removeGhostElementFromSurvey();
     this.isEdge = null;
+    this.isSide = null;
     // this.ghostSurveyElement = null;
     this.removeDragOverMarker(this.prevDropTarget);
     this.removeDragOverMarker(this.dropTarget);
