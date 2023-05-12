@@ -14,6 +14,9 @@
     align-items: flex-start;
     min-width: calcSize(28);
   }
+  .svc-item-value__item {
+    padding-right: calcSize(1);
+  }
 }
 
 .svc-question__content {
@@ -169,7 +172,6 @@
   .sv-ranking-item__text {
     overflow: visible;
   }
-  padding-right: calcSize(1);
 }
 
 .svc-item-value--ghost {
