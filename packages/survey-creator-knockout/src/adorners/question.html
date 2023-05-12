@@ -1,7 +1,6 @@
 <div class="svc-question__adorner"
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
-  <!-- ko if: $data.element.isInteractiveDesignElement -->
-  <div class="svc-question__content" data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
+  <div data-bind="click: koSelect, key2click, clickBubble: false, css: css()">
     <!-- ko if: allowDragging -->
     <div class="svc-question__drag-area" data-bind="event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
       <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->
@@ -11,17 +10,9 @@
 
     <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
     <!-- /ko -->
-    <!-- ko if: koIsEmptyElement -->
+    <!-- ko if: koIsEmptyElement() -->
     <div class="svc-panel__placeholder_frame">
       <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-      <!-- ko if: element.isPanel && showAddQuestionButton -->
-      <div class="svc-panel__add-new-question svc-action-button"
-        data-bind="click: addNewQuestion, key2click, clickBubble: false">
-        <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
-        </span>
-      </div>
-      <!-- /ko -->
-
     </div>
     <!-- /ko -->
 
@@ -30,61 +21,9 @@
     <!-- /ko -->
     <!-- /ko -->
 
-    <!-- ko if: !koIsEmptyElement() && element.isPanel && showAddQuestionButton -->
-    <div class="svc-panel__add-new-question-container">
-      <div class="svc-panel__add-new-question svc-action-button"
-        data-bind="click: addNewQuestion, key2click, clickBubble: false">
-        <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
-        </span>
-      </div>
-      <!-- ko with: questionTypeSelectorModel -->
-      <button type="button"
-        data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
-        class="svc-panel__question-type-selector">
-        <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
-        <sv-popup params="model: popupModel"></sv-popup>
-      </button>
-      <!-- /ko -->
-    </div>
-    <!-- /ko -->
-
     <div class="svc-question__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
     </div>
   </div>
-  <!-- /ko -->
-  <!-- ko ifnot:  $data.element.isInteractiveDesignElement -->
-  <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
-  <!-- /ko -->
-  <!-- ko if: koIsEmptyElement -->
-  <div class="svc-panel__placeholder_frame">
-    <div class="svc-panel__placeholder" data-bind="text: placeholderText"></div>
-    <!-- ko if: showAddQuestionButton -->
-    <div class="svc-panel__add-new-question svc-action-button"
-      data-bind="click: addNewQuestion, key2click, clickBubble: false">
-      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
-      </span>
-    </div>
-    <!-- /ko -->
-  </div>
-  <!-- /ko -->
-  <!-- ko if: !koIsEmptyElement() -->
-  <div class="svc-panel__add-new-question-container">
-    <div class="svc-panel__add-new-question svc-action-button"
-      data-bind="click: addNewQuestion, key2click, clickBubble: false">
-      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
-      </span>
-    </div>
-    <!-- ko with: questionTypeSelectorModel -->
-    <button type="button"
-      data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
-      class="svc-panel__question-type-selector">
-      <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
-      <sv-popup params="model: popupModel"></sv-popup>
-    </button>
-    <!-- /ko -->
-  </div>
-  <!-- /ko -->
-  <!-- /ko -->
 </div>
