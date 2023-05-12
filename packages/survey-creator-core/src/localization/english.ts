@@ -772,7 +772,11 @@ export var enStrings = {
       buttons: "Buttons",
       dropdown: "Dropdown"
     },
-    rateColorMode: { default: "Default" }
+    rateColorMode: { default: "Default" },
+    autoGenerate: {
+      "true": "Generate",
+      "false": "Enter manually"
+    }
   },
   // Operators
   op: {
