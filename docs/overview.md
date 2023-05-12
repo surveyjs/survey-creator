@@ -12,8 +12,8 @@ Survey Creator / Form Builder is a visual designer that allows users to create s
 
 ## Features
 
-- Native support for React and Knockout
-- Integration of the Knockout version into Angular, Vue, and jQuery applications
+- Native support for React, Angular, and Knockout
+- Integration of the Knockout version into Vue and jQuery applications
 - Modern, customizable UI themes
 - TypeScript support
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)

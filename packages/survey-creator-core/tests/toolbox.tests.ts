@@ -449,6 +449,28 @@ test("Add customWidgets into toolbox that registered in ElementFactor.registerCu
   ElementFactory.Instance.unregisterElement(cType);
   CustomWidgetCollection.Instance.clear();
 });
+test("Do not add customWidgets into toolbox that registered in ElementFactor.registerCustomQuestion, showInToolbox=false", (): any => {
+  var toolbox = new QuestionToolbox();
+  const origionalItemCount = toolbox.items.length;
+  const cType = "xnewcustomwidget";
+  CustomWidgetCollection.Instance.clear();
+  CustomWidgetCollection.Instance.addCustomWidget({
+    name: cType,
+    isFit: (question) => {
+      return question.getType() == cType;
+    },
+    showInToolbox: false
+  });
+  if (!Serializer.findClass(cType)) {
+    Serializer.addClass(cType, [], undefined, "text");
+    ElementFactory.Instance.registerCustomQuestion(cType);
+  }
+  toolbox = new QuestionToolbox();
+  expect(toolbox.items).toHaveLength(origionalItemCount);
+  Serializer.removeClass(cType);
+  ElementFactory.Instance.unregisterElement(cType);
+  CustomWidgetCollection.Instance.clear();
+});
 
 test("Creator layout: toolbox location", (): any => {
   const creator = new CreatorTester();
