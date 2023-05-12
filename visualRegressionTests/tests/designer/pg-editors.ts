@@ -402,6 +402,14 @@ test("Check color editor", async (t) => {
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-color-editor__input"));
     await takeElementScreenshot("color-editor-focus.png", questionSelector, t, comparer);
+    await ClientFunction(() => {
+      (<any>window).creator.propertyGrid.getQuestionByName("fontColor").titleLocation = "left";
+    })();
+    await takeElementScreenshot("color-editor-title-location-left-focus.png", questionSelector, t, comparer);
+    await ClientFunction(() => {
+      document.body.focus();
+    })();
+    await takeElementScreenshot("color-editor-title-location-left.png", questionSelector, t, comparer);
   });
 });
 
@@ -433,6 +441,14 @@ test("Check spinedit editor", async (t) => {
     await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-spin-editor__input"));
     await takeElementScreenshot("spin-editor-focus.png", questionSelector, t, comparer);
+    await ClientFunction(() => {
+      (<any>window).creator.propertyGrid.getQuestionByName("fontSize").titleLocation = "left";
+    })();
+    await takeElementScreenshot("spin-editor-title-location-left-focus.png", questionSelector, t, comparer);
+    await ClientFunction(() => {
+      document.body.focus();
+    })();
+    await takeElementScreenshot("spin-editor-title-location-left.png", questionSelector, t, comparer);
   });
 });
 test("Check file editor", async (t) => {
@@ -458,5 +474,40 @@ test("Check file editor", async (t) => {
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='image']");
     await takeElementScreenshot("file-editor.png", questionSelector, t, comparer);
+    await ClientFunction(() => {
+      (<any>window).creator.propertyGrid.getQuestionByName("image").titleLocation = "left";
+    })();
+    await takeElementScreenshot("file-editor-title-location-left.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find("input"));
+    await takeElementScreenshot("file-editor-title-location-left-focus.png", questionSelector, t, comparer);
   });
 });
+
+test("Check dropdown editor with titleLocation: 'left'", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontFamily",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontFamily";
+        },
+        getJSON: function (obj, prop, options) {
+          return { type: "dropdown", titleLocation: "left", choices: ["Item 1"] };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontFamily']");
+    await takeElementScreenshot("dropdown-editor-title-location-left.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find("input"));
+    await takeElementScreenshot("dropdown-editor-title-location-left-focus.png", questionSelector, t, comparer);
+  });
+});
+

@@ -48,6 +48,7 @@
   width: calcSize(5);
   height: calcSize(5);
   padding: calcSize(1);
+  line-height: 0;
   &:hover {
     background: $background-dim;
   }

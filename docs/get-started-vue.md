@@ -26,7 +26,7 @@ npm install survey-creator-knockout --save
 
 ## Configure Styles
 
-Import Survey Creator and SurveyJS Library style sheets as shown below:
+Import Survey Creator and SurveyJS Form Library style sheets as shown below:
 
 ```js
 <script>

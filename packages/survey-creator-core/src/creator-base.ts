@@ -3209,6 +3209,15 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ defaultValue: false }) isMobileView;
+  /**
+   * Specifies Toolbox location.
+   * 
+   * Possible values:
+   * 
+   * - `"left"` (default) - Displays Toolbox on the left side of the design surface.
+   * - `"right"` - Displays Toolbox on the right side of the design surface.
+   * - `"sidebar"` - Displays Toolbox as an overlay on top of Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify Property Grid position.
+   */
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase) => {
       if (!target.toolbox) return;
@@ -3216,6 +3225,15 @@ export class CreatorBase extends Base
       target.updateToolboxIsCompact();
     }
   }) toolboxLocation: toolboxLocationType;
+  /**
+   * Specifies the position of the sidebar that displays Property Grid.
+   * 
+   * Possible values:
+   * 
+   * - `"right"` (default) - Displays the sidebar on the right side of the design surface.
+   * - `"left"` - Displays the sidebar on the left side of the design surface.
+   * @see toolboxLocation
+   */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 

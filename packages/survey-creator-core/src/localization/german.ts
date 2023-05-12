@@ -743,6 +743,10 @@ var germanTranslation = {
       // auto: "Auto",
       // buttons: "Buttons",
       // dropdown: "Dropdown"
+    },
+    autoGenerate: {
+      "true": "Generieren",
+      "false": "Manuell Eintragen"
     }
   },
   // Operators

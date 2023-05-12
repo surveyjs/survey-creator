@@ -1076,6 +1076,21 @@ test("check Fast Entry for Rating", () => {
   expect(question.rateValues[3].value).toEqual("4");
   expect(question.rateValues[3].text).toEqual("item4");
 });
+
+test("check editor for rating in matrix Rating", () => {
+  const question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("col1");
+  question.columns[0].cellType = "rating";
+  question.columns[0].templateQuestion.rateCount = 2;
+  const propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixRateValues();
+  expect(itemsQuestion.allowAddRows).toEqual(true);
+  expect(itemsQuestion.allowRemoveRows).toEqual(false);
+});
+
 test("bindings property editor", () => {
   const survey = new SurveyModel({
     elements: [
@@ -3089,4 +3104,17 @@ test("itemvalue[] property editor & placeholder, bug#4032", () => {
   qValue.value = "Item D";
   qText.clearValue();
   expect(qText.placeholder).toBe("Item D");
+});
+
+test("Check allowRootStyle is set false for all questions inside property grids", () => {
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = ["Item 1", "Item 2", "Item 3"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.allowRootStyle).toBeFalsy();
+  const row = choicesQuestion.visibleRows[2];
+  row.showHideDetailPanelClick();
+  expect(row.detailPanel.questions.filter(q => q.allowRootStyle).length).toBe(0);
 });

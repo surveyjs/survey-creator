@@ -22,7 +22,7 @@ const buildPlatformJson = {
   name: packageJson.name,
   version: packageJson.version,
   description:
-    "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+    "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   keywords: [
     "Survey",
     "Survey Creator",
