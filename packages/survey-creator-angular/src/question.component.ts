@@ -7,8 +7,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 @Component({
   selector: "svc-question",
   templateUrl: "./question.component.html",
-  encapsulation: ViewEncapsulation.None,
-  styles: [":host { display: none; } .svc-question__content--image.svc-question__content--empty  sv-ng-file-question { width: 100% }"]
+  styles: [":host { display: none; }"]
 })
 export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdornerViewModel> {
   @Input() componentName!: string;
