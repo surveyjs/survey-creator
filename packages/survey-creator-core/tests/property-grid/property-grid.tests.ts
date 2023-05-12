@@ -1091,6 +1091,21 @@ test("check editor for rating in matrix Rating", () => {
   expect(itemsQuestion.allowRemoveRows).toEqual(false);
 });
 
+test("check Rate values panel in matrix Rating equals to regular Rating", () => {
+  const questionMatrix = new QuestionMatrixDropdownModel("q1");
+  questionMatrix.addColumn("col1");
+  questionMatrix.columns[0].cellType = "rating";
+  const ratingColumnParams =
+    (new PropertyGridModelTester(questionMatrix.columns[0]))
+      .survey.getPanelByName("rateValues").elements.map(e => e.name);
+
+  const question = new QuestionRatingModel("q1");
+  const ratingQuestionParams =
+    (new PropertyGridModelTester(question))
+      .survey.getPanelByName("rateValues").elements.map(e => e.name);
+  expect(ratingColumnParams).toEqual(ratingQuestionParams);
+});
+
 test("bindings property editor", () => {
   const survey = new SurveyModel({
     elements: [
