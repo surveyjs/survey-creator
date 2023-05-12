@@ -370,6 +370,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       let isSamePanel = !!row && row.panel == src.parent;
       if(isSamePanel) {
         this.moveElementInPanel(row.panel, src, target, targetIndex);
+        row.panel.updateRows();
         targetIndex = -1;
       } else {
         src.parent.removeElement(src);
@@ -377,6 +378,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     if(!this.isEdge && !this.isSide && (dest.isPanel || dest.isPage)) {
       dest.addElement(target);
+      dest.updateRows();
     } else if(!!row && targetIndex > -1) {
       row.panel.addElement(target, targetIndex);
       row.panel.updateRows();
