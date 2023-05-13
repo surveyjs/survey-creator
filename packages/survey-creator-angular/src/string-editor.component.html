@@ -7,8 +7,8 @@
         </div>
         <span class="svc-string-editor__input">
           <span role="textbox" *ngIf="!locString.hasHtml" class="sv-string-editor" spellcheck="false"
-              (focus)="onFocus($event)" (blur)="onBlur($event)"  (input)="baseModel.onInput($event)" (keydown)="baseModel.onKeyDown($event)" (keyup)="baseModel.onKeyUp($event)" (mouseup)="baseModel.onMouseUp($event)" (click)="edit($event)" [attr.aria-placeholder]="placeholder" [attr.contenteditable]="contentEditable" [innerText]="editValue" #container></span>
-          <span role="textbox" *ngIf="locString.hasHtml" class="sv-string-editor" spellcheck="false"
+              (focus)="onFocus($event)" (blur)="onBlur($event)"  (input)="baseModel.onInput($event)" (keydown)="baseModel.onKeyDown($event)" (keyup)="baseModel.onKeyUp($event)" (mouseup)="baseModel.onMouseUp($event)" (click)="edit($event)" [textContent]="editValue" [attr.aria-placeholder]="placeholder" [attr.contenteditable]="contentEditable" #container></span>
+          <span role="textbox" *ngIf="locString.hasHtml" class="sv-string-editor sv-string-editor--html" spellcheck="false"
           (focus)="onFocus($event)" (blur)="onBlur($event)" (keydown)="baseModel.onKeyDown($event)" (keyup)="baseModel.onKeyUp($event)" (mouseup)="baseModel.onMouseUp($event)"
           (click)="edit($event)" [attr.aria-placeholder]="placeholder" [attr.contenteditable]="contentEditable" [innerHtml]="editValue" #container></span>
           <sv-ng-character-counter *ngIf="showCharacterCounter" [counter]="characterCounter" [remainingCharacterCounter]="getCharacterCounterClass"></sv-ng-character-counter>

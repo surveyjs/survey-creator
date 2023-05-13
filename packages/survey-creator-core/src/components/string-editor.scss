@@ -10,7 +10,6 @@
   .sv-string-editor {
     position: relative;
     outline: none;
-    white-space: pre-wrap;
     word-break: break-word;
     z-index: 12;
     &[aria-placeholder]:empty:before {
@@ -18,6 +17,10 @@
       color: $foreground-light;
     }
   }
+        .sv-string-editor--html,
+        .sv-string-editor:focus-within {
+      white-space: pre-wrap;
+    }
   &.svc-string-editor--hidden {
     display: none;
   }
