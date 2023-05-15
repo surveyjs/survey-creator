@@ -216,17 +216,17 @@ test("Theme builder: composite question fontSettings", (): any => {
   const simulator = testSurveyTab.simulator;
   const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
 
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-family"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-weight"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-color"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-size"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
 
   surveyTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#161616", size: 32 };
 
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-family"]).toEqual("Open Sans");
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-weight"]).toEqual("semiBold");
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-color"]).toEqual("#161616");
-  expect(simulator.themeVariables["--sjs-font-surveyTitle-size"]).toEqual(32);
+  expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-color"]).toEqual("#161616");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
 });
 
 test("Theme builder: composite question elementSettings", (): any => {
@@ -247,15 +247,15 @@ test("Theme builder: composite question elementSettings", (): any => {
   const simulator = testSurveyTab.simulator;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
-  expect(simulator.themeVariables["--sjs-questionPanel-backcolor"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-questionPanel-hovercolor"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-questionPanel-cornerRadius"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-questionPanel-border"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-questionpanel-border"]).toBeUndefined();
 
   questionPanelSettings.value = { backcolor: "#ffffff", hovercolor: "#f8f8f8", corner: 4, border: "0 1 2 rgba(0, 0, 0, 0.15)" };
 
-  expect(simulator.themeVariables["--sjs-questionPanel-backcolor"]).toEqual("#ffffff");
-  expect(simulator.themeVariables["--sjs-questionPanel-hovercolor"]).toEqual("#f8f8f8");
-  expect(simulator.themeVariables["--sjs-questionPanel-cornerRadius"]).toEqual("4px");
-  expect(simulator.themeVariables["--sjs-questionPanel-border"]).toEqual("0 1 2 rgba(0, 0, 0, 0.15)");
+  expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toEqual("#ffffff");
+  expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toEqual("#f8f8f8");
+  expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("4px");
+  expect(simulator.themeVariables["--sjs-questionpanel-border"]).toEqual("0 1 2 rgba(0, 0, 0, 0.15)");
 });

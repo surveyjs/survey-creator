@@ -712,7 +712,7 @@ export class TestSurveyTabViewModel extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   color: "#161616",
-                  weight: "bold",
+                  weight: "700",
                   size: 32
                 }
               }, {
@@ -722,7 +722,7 @@ export class TestSurveyTabViewModel extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   color: "#161616",
-                  weight: "bold",
+                  weight: "700",
                   size: 24
                 }
               }, {
