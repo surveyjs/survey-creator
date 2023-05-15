@@ -2,6 +2,7 @@
 import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
+import { getAcceptedTypesByContentMode } from "../utils/utils";
 
 require("./question-image.scss");
 
@@ -26,5 +27,8 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         model.isUploading = false;
       });
     });
+  }
+  public get acceptedTypes() : string {
+    return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
   }
 }

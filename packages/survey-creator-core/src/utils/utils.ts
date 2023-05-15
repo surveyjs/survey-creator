@@ -303,3 +303,17 @@ export function capitalize(str: string): string {
 export function notShortCircuitAnd(...args: Array<boolean>): boolean {
   return args.every((val) => val === true);
 }
+
+export const imageMimeTypes = "image/png, image/gif, image/jpeg, image/apng, image/avif, image/svg+xml, image/webp";
+
+export function getAcceptedTypesByContentMode(contentMode: string) {
+  if(["auto", "image"].indexOf(contentMode) > -1) {
+    return imageMimeTypes;
+  }
+  else if (contentMode == "video") {
+    return "video/*";
+  }
+  else {
+    return "";
+  }
+}

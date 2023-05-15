@@ -3240,6 +3240,7 @@ export class CreatorBase extends Base
     });
     super.dispose();
   }
+  @property({ defaultValue: false }) enableLinkFileEditor: boolean;
 }
 export class SurveyCreatorModel extends CreatorBase { }
 

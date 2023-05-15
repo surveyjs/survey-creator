@@ -3,7 +3,8 @@
   <div class="svc-image-item-value-wrapper__ghost" data-bind="style: getNewItemStyle()"></div>
 
   <div class="svc-image-item-value-wrapper__content">
-    <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+    <input type="file" aria-hidden="true" tabindex="-1" class="svc-choose-file-input"
+      data-bind="attr: { accept: acceptedTypes }" />
 
     <!-- ko ifnot: isNew -->
     <div class="svc-image-item-value__item">

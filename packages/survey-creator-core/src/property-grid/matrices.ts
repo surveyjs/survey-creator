@@ -2,7 +2,7 @@ import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, J
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
-import { getNextItemText, getNextValue } from "../utils/utils";
+import { getAcceptedTypesByContentMode, getNextItemText, getNextValue } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -45,6 +45,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  private initializeAcceptedTypes(obj: any, cellQuestion: Question) {
+    if(obj.getType() === "imagepicker" && cellQuestion.name == "imageLink" && cellQuestion.getType() == "fileedit") {
+      obj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
+        cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+      });
+      cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(obj.contentMode);
+    }
+  }
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
@@ -67,6 +75,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
+    this.initializeAcceptedTypes(obj, q);
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
