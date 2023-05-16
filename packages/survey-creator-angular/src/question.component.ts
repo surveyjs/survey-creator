@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, ViewContainerRef, ViewEncapsulation } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, PanelModel, Question, SurveyModel } from "survey-core";
 import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
@@ -29,6 +29,15 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
   }
   protected getModel(): QuestionAdornerViewModel {
     return this.adorner;
+  }
+  public get placeholderComponent(): string {
+    return "";
+  }
+  public get placeholderComponentData(): any {
+    return null;
+  }
+  public get showPlaceholderComponent(): boolean {
+    return false;
   }
   public selectQuestionType(event: any) {
     event.stopPropagation();

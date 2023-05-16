@@ -41,3 +41,17 @@ test("Dropdown adorners", async (t) => {
     await takeElementScreenshot("dropdown-selected.png", question, t, comparer);
   });
 });
+
+test("Select base editing", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON(json);
+
+    const question = Selector(".svc-question__content");
+
+    await t
+      .click(Selector(".svc-string-editor").withText("Item 1"))
+      .typeText(Selector(".sv-string-editor").withText("Item 1"), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+    await takeElementScreenshot("dropdown-long-item-text.png", question, t, comparer);
+  });
+});
