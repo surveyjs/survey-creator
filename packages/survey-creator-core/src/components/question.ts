@@ -34,6 +34,8 @@ import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+  placeholderComponent: string;
+  placeholderComponentData: any;
 
   private dragOrClickHelper: DragOrClickHelper;
 

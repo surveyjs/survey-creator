@@ -11,9 +11,12 @@
 
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
 
-      <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
+      <div *ngIf="adorner.isEmptyElement && !showPlaceholderComponent" class="svc-panel__placeholder_frame">
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
       </div>
+      <ng-template *ngIf="adorner.isEmptyElement && !!showPlaceholderComponent"
+        [component]="{ name: placeholderComponent, data: placeholderComponentData }">
+      </ng-template>
 
       <ng-template *ngIf="adornerComponent"
         [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
