@@ -33,7 +33,6 @@
   }
 
   &:hover {
-
     // background-color: $primary-light;
     use {
       fill: $primary;
@@ -41,6 +40,14 @@
   }
 }
 
-.svc-question__content--image {
+.svc-question__content--image:not(.svc-question__content--empty) {
   padding: calcSize(4) 0 calcSize(8) 0;
+}
+
+.svc-question__content--image.svc-question__content--empty .sd-file,
+.svc-question__content--image.svc-question__content--empty sv-ng-file-question {
+  width: 100%;
+}
+.svc-question__content--image.svc-question__content--empty .sd-question--image {
+  display: none;
 }
