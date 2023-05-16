@@ -142,7 +142,7 @@ ComponentCollection.Instance.add({
     }, {
       type: "text",
       name: "border",
-      title: getLocString("theme.border"),
+      title: getLocString("theme.borderDecoration"),
       titleLocation: "left",
       descriptionLocation: "hidden"
     }
@@ -520,7 +520,7 @@ export class TestSurveyTabViewModel extends Base {
       elements: [{
         type: "panel",
         state: "expanded",
-        title: "General",
+        title: getLocString("theme.groupGeneral"),
         elements: [
           {
             type: "panel",
@@ -693,7 +693,7 @@ export class TestSurveyTabViewModel extends Base {
         ]
       }, {
         type: "panel",
-        title: "Advanced",
+        title: getLocString("theme.groupAdvanced"),
         state: "collapsed",
         elements: [
           {
@@ -809,12 +809,12 @@ export class TestSurveyTabViewModel extends Base {
             type: "panel",
             elements: [{
               type: "panel",
-              title: "Accent Background",
+              title: getLocString("theme.accentBackground"),
               elements: [
                 {
                   type: "color",
                   name: "--sjs-primary-backcolor",
-                  title: getLocString("theme.primaryColor"),
+                  title: getLocString("theme.primaryDefaultColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
                   defaultValue: "#19b394"
@@ -833,12 +833,12 @@ export class TestSurveyTabViewModel extends Base {
                   title: getLocString("theme.primaryLightColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#19b394"
+                  defaultValue: "#e8f7f4"
                 }
               ]
             }, {
               type: "panel",
-              title: "Accent Foreground",
+              title: getLocString("theme.accentForeground"),
               elements: [
                 {
                   type: "color",
@@ -862,7 +862,7 @@ export class TestSurveyTabViewModel extends Base {
             type: "panel",
             elements: [{
               type: "panel",
-              title: "Lines",
+              title: getLocString("theme.linesColors"),
               elements: [
                 {
                   type: "color",
@@ -870,7 +870,7 @@ export class TestSurveyTabViewModel extends Base {
                   title: getLocString("theme.borderDefault"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "rgba(0, 0, 0, 0.16)"
+                  defaultValue: "#d6d6d6"
                 },
                 {
                   type: "color",
@@ -878,7 +878,7 @@ export class TestSurveyTabViewModel extends Base {
                   title: getLocString("theme.borderLight"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "rgba(0, 0, 0, 0.09)"
+                  defaultValue: "#e8e8e8"
                 }
               ]
             }]
