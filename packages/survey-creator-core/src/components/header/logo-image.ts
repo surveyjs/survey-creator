@@ -1,5 +1,6 @@
 import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
+import { getAcceptedTypesByContentMode } from "../../utils/utils";
 require("./logo-image.scss");
 
 export class LogoImageViewModel extends Base {
@@ -43,5 +44,8 @@ export class LogoImageViewModel extends Base {
   }
   get chooseLogoPlaceholder() {
     return this.creator.getLocString("ed.chooseLogoPlaceholder");
+  }
+  public get acceptedTypes(): string {
+    return getAcceptedTypesByContentMode("image");
   }
 }
