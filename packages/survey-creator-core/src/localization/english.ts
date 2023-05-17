@@ -656,6 +656,7 @@ export var enStrings = {
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
+    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
