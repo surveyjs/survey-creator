@@ -27,7 +27,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
       data.element,
       data.question,
       data.row,
-      data.column,
+      data.column || data.element.cell?.column,
     );
   }
   protected getUpdatedModelProps(): string[] {
