@@ -142,6 +142,7 @@ test("Do not convert default choices", () => {
   expect(dest.rateValues).toHaveLength(0);
 });
 test("Convert text question to image", () => {
+  settings.toolbox.defaultJSON["image"]["imageLink"] = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
   var survey = new SurveyModel();
   var page = survey.addNewPage();
   var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
@@ -149,6 +150,7 @@ test("Convert text question to image", () => {
   expect((<Base>(<any>page.elements[0])).getType()).toEqual("image");
   var newQ1 = <QuestionImageModel>page.elements[0];
   expect(newQ1.imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  delete settings.toolbox.defaultJSON["image"]["imageLink"];
 });
 test("Convert text and radio question to image picker", () => {
   var survey = new SurveyModel();
