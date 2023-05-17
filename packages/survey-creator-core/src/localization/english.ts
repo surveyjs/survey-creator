@@ -143,7 +143,7 @@ export var enStrings = {
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
-    imagePlaceHolder: "Drop an image here or click the button below to load the image.",
+    imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
     imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
