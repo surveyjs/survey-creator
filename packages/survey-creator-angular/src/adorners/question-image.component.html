@@ -1,9 +1,11 @@
 <ng-template #template>
   <div class="svc-image-question-controls">
-    <ng-container *ngIf="adorner.allowEdit && !adorner.isUploading">
-      <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes" class="svc-choose-file-input" />
-      <span class="svc-image-question-controls__button" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
-        <svg  [iconName]="'icon-file'" [size]="24" (click)="adorner.chooseFile(adorner)" sv-ng-svg-icon></svg>
+    <ng-container *ngIf="adorner.allowEdit && !adorner.isUploading && !adorner.isEmptyElement">
+      <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes"
+        class="svc-choose-file-input" />
+      <span class="svc-image-question-controls__button" [key2click] [attr.title]="undefined"
+        [attr.aria-label]="undefined">
+        <svg [iconName]="'icon-file'" [size]="24" (click)="adorner.chooseFile(adorner)" sv-ng-svg-icon></svg>
       </span>
     </ng-container>
   </div>

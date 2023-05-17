@@ -1,5 +1,5 @@
 // Uncomment the line below if you create a custom dictionary
-import { editorLocalization } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var mnStrings = {
   // survey templates

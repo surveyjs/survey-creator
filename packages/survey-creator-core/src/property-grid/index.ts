@@ -846,6 +846,9 @@ export class PropertyGridModel {
       this.options.uploadFiles(options.files, obj, callback);
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
+    this.survey.onQuestionCreated.add((_, opt) => {
+      opt.question.allowRootStyle = false;
+    });
     this.options.onPropertyGridSurveyCreatedCallback(this.obj, this.survey);
   }
   public get options(): ISurveyCreatorOptions {

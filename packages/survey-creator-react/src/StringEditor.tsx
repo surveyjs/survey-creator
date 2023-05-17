@@ -126,7 +126,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
         <span
           role="textbox"
           ref={this.svStringEditorRef}
-          className="sv-string-editor"
+          className="sv-string-editor sv-string-editor--html"
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
