@@ -503,6 +503,10 @@ export class TestSurveyTabViewModel extends Base {
       }
       this.simulator.themeVariables = _data;
     });
+    themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
+    themeEditorSurvey.onQuestionCreated.add((_, opt) => {
+      opt.question.allowRootStyle = false;
+    });
     return themeEditorSurvey;
   }
 
@@ -535,24 +539,30 @@ export class TestSurveyTabViewModel extends Base {
                 allowClear: false
               },
               {
-                type: "buttongroup",
+                type: "panel",
                 name: "themeMode",
                 title: getLocString("theme.themeMode"),
-                descriptionLocation: "hidden",
-                choices: [
-                  { value: "panels", text: getLocString("theme.themeModePanels") },
-                  { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
-                defaultValue: "panels"
-              },
-              {
-                type: "buttongroup",
-                name: "themePalette",
-                titleLocation: "hidden",
-                choices: [
-                  { value: "light", text: getLocString("theme.themePaletteLight") },
-                  { value: "dark", text: getLocString("theme.themePaletteDark") }
-                ],
-                defaultValue: "light"
+                elements: [
+                  {
+                    type: "buttongroup",
+                    name: "themeMode",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "panels", text: getLocString("theme.themeModePanels") },
+                      { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
+                    defaultValue: "panels"
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "themePalette",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "light", text: getLocString("theme.themePaletteLight") },
+                      { value: "dark", text: getLocString("theme.themePaletteDark") }
+                    ],
+                    defaultValue: "light"
+                  }
+                ]
               }
             ]
           }, {
@@ -573,34 +583,40 @@ export class TestSurveyTabViewModel extends Base {
                 defaultValue: "#f3f3f3"
               },
               {
-                type: "fileedit",
-                name: "backgroundImage",
+                type: "panel",
+                name: "background",
                 title: getLocString("theme.backgroundImage"),
-                descriptionLocation: "hidden",
-                placeholder: "Browse..."
-              },
-              {
-                type: "buttongroup",
-                name: "backgroundImageFit",
-                titleLocation: "hidden",
-                choices: [
-                  { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
-                  { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
-                  { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
-                ],
-                defaultValue: "cover"
-              },
-              {
-                type: "spinedit",
-                name: "backgroundOpacity",
-                titleLocation: "left",
-                title: getLocString("theme.backgroundOpacity"),
-                descriptionLocation: "hidden",
-                unit: "%",
-                defaultValue: 100,
-                min: 0,
-                max: 100,
-                step: 5
+                elements: [
+                  {
+                    type: "fileedit",
+                    name: "backgroundImage",
+                    titleLocation: "hidden",
+                    placeholder: "Browse..."
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "backgroundImageFit",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
+                      { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
+                      { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
+                    ],
+                    defaultValue: "cover"
+                  },
+                  {
+                    type: "spinedit",
+                    name: "backgroundOpacity",
+                    titleLocation: "left",
+                    title: getLocString("theme.backgroundOpacity"),
+                    descriptionLocation: "hidden",
+                    unit: "%",
+                    defaultValue: 100,
+                    min: 0,
+                    max: 100,
+                    step: 5
+                  },
+                ]
               },
               {
                 type: "spinedit",
