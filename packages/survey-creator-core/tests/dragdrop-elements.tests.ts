@@ -1,5 +1,5 @@
 import { DragTypeOverMeEnum, Question, SurveyModel } from "survey-core";
-import { DragDropSurveyElements } from "../src/survey-elements";
+import { DragDropSurveyElements, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
   let ddHelper = new DragDropSurveyElements(null);
@@ -38,17 +38,17 @@ test("calculateIsEdge", () => {
     bottom: 300
   });
 
-  let result = ddHelper["calculateIsEdge"](testElement, 100);
+  let result = calculateIsEdge(testElement, 100);
   expect(result).toBe(true);
 
-  result = ddHelper["calculateIsEdge"](testElement, 121);
+  result = calculateIsEdge(testElement, 121);
   expect(result).toBe(false);
-  result = ddHelper["calculateIsEdge"](testElement, 150);
+  result = calculateIsEdge(testElement, 150);
   expect(result).toBe(false);
-  result = ddHelper["calculateIsEdge"](testElement, 279);
+  result = calculateIsEdge(testElement, 279);
   expect(result).toBe(false);
 
-  result = ddHelper["calculateIsEdge"](testElement, 280);
+  result = calculateIsEdge(testElement, 280);
   expect(result).toBe(true);
 });
 
@@ -60,13 +60,13 @@ test("calculateIsSide", () => {
     right: 200,
   });
 
-  let result = ddHelper["calculateIsSide"](testElement, 100);
+  let result = calculateIsSide(testElement, 100);
   expect(result).toBe(true);
 
-  result = ddHelper["calculateIsSide"](testElement, 150);
+  result = calculateIsSide(testElement, 150);
   expect(result).toBe(false);
 
-  result = ddHelper["calculateIsSide"](testElement, 200);
+  result = calculateIsSide(testElement, 200);
   expect(result).toBe(true);
 });
 
@@ -292,17 +292,12 @@ test("SurveyElements: isDropTargetValid", () => {
   expect(ddHelper.isDropTargetValid(null)).toBe(false); // "dropTarget should be"
 
   ddHelper.draggedElement = pd;
-  ddHelper.dropTarget = pd;
-  expect(ddHelper.isDropTargetValid()).toBe(false); // "can't drop to itself"
-  ddHelper.dropTarget = pd.template;
-  expect(ddHelper.isDropTargetValid()).toBe(false); // "can't drop to itself (pd template)")
+  expect(ddHelper.isDropTargetValid(pd)).toBe(false); // "can't drop to itself"
+  expect(ddHelper.isDropTargetValid(pd.template)).toBe(false); // "can't drop to itself (pd template)")
 
   ddHelper.draggedElement = survey.getQuestionByName("q2");
-  ddHelper.dropTarget = pd;
-  expect(ddHelper.isDropTargetValid()).toBe(true); // "dropTarget is valid"
-
-  ddHelper.dropTarget = pd.template;
-  expect(ddHelper.isDropTargetValid()).toBe(true); // "dropTarget is valid (pd template)"
+  expect(ddHelper.isDropTargetValid(pd)).toBe(true); // "dropTarget is valid"
+  expect(ddHelper.isDropTargetValid(pd.template)).toBe(true); // "dropTarget is valid (pd template)"
 });
 
 // test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
@@ -416,10 +411,8 @@ test("drag drop existing to top/bottom", () => {
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dropTarget = q1;
 
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -434,8 +427,7 @@ test("drag drop existing to top/bottom", () => {
     ],
   });
 
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -467,10 +459,8 @@ test("drag drop existing to left/right", () => {
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dropTarget = q2;
 
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Left;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -485,9 +475,7 @@ test("drag drop existing to left/right", () => {
     ],
   });
 
-  ddHelper.dropTarget = q1;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Right;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Right);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -519,10 +507,8 @@ test("drag drop existing from single row to outside top/bottom - break into seve
 
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
-  ddHelper.dropTarget = q1;
 
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -538,9 +524,7 @@ test("drag drop existing from single row to outside top/bottom - break into seve
   });
 
   ddHelper.draggedElement = q1;
-  ddHelper.dropTarget = q3;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -571,9 +555,7 @@ test("drag drop existing from single row to outside top", () => {
 
   let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
-  ddHelper.dropTarget = q2;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -595,9 +577,7 @@ test("drag drop existing from single row to outside top", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
-  ddHelper.dropTarget = q1;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -619,9 +599,7 @@ test("drag drop existing from single row to outside top", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dropTarget = q1;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Top;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -652,9 +630,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   let ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
-  ddHelper.dropTarget = q3;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -676,9 +652,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q2;
-  ddHelper.dropTarget = q3;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -700,9 +674,7 @@ test("drag drop existing from single row to outside bottom", () => {
 
   ddHelper = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q3;
-  ddHelper.dropTarget = q2;
-  ddHelper.dragOverLocation = DragTypeOverMeEnum.Bottom;
-  ddHelper.duringDragOver();
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Bottom);
   ddHelper.doDrop();
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
@@ -712,6 +684,72 @@ test("drag drop existing from single row to outside bottom", () => {
           { "name": "q1", "type": "text", },
           { "name": "q2", "type": "text", "startWithNewLine": false },
           { "name": "q3", "type": "text", },
+        ],
+      },
+    ],
+  });
+});
+
+test("drag drop first to left of last item", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1", },
+      { "type": "text", "name": "q2", "startWithNewLine": false },
+      { "type": "text", "name": "q3", "startWithNewLine": false },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q3 = survey.getQuestionByName("q3");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q1;
+
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q2", "type": "text", },
+          { "name": "q1", "type": "text", "startWithNewLine": false },
+          { "name": "q3", "type": "text", "startWithNewLine": false },
+        ],
+      },
+    ],
+  });
+});
+
+test("drag drop first to right of last item", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1", },
+      { "type": "text", "name": "q2", "startWithNewLine": false },
+      { "type": "text", "name": "q3", "startWithNewLine": false },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q3 = survey.getQuestionByName("q3");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q1;
+
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q2", "type": "text", },
+          { "name": "q3", "type": "text", "startWithNewLine": false },
+          { "name": "q1", "type": "text", "startWithNewLine": false },
         ],
       },
     ],

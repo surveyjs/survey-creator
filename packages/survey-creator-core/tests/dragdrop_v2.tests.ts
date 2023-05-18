@@ -1,4 +1,5 @@
-import { SurveyModel, QuestionTextModel, settings } from "survey-core";
+import { SurveyModel, QuestionTextModel, settings, DragTypeOverMeEnum } from "survey-core";
+import { DragDropSurveyElements } from "../src/survey-elements";
 
 var assert: any;
 
@@ -15,94 +16,80 @@ test("Move item in row from left to right", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
+    const ddHelper: any = new DragDropSurveyElements(survey);
     var target = new QuestionTextModel("q2");
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q2, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q2;
 
-    page.dragDropMoveTo(q2, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 0) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q2, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 2. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 1) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 3. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 2) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 4. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q2", "q4"], "Iteration "+i+". Move 4. The last row is q2, q3, q2, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 3) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q3", "q2", "q4"], "Iteration "+i+". End. The last row is q3, q2, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q3", "q2", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q4, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 5. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q2", "q4"], "Iteration "+i+". Move 5. The last row is q2, q3, q2, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 4) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q3", "q2", "q4"], "Iteration "+i+". End. The last row is q3, q2, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q3", "q2", "q4"]); // "Iteration "+i+". End. The last row is q3, q2, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q4, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 6. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q2"], "Iteration "+i+". Move 6. The last row is q2, q3, q4, q2");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 5) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q3", "q4", "q2"], "Iteration "+i+". End. The last row is q3, q4, q2");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q3", "q4", "q2"]); // "Iteration "+i+". End. The last row is q3, q4, q2");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -121,95 +108,80 @@ test("Move item in row from right to left", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
-    var target = new QuestionTextModel("q4");
-    target.startWithNewLine = false;
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q4, target);
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    page.dragDropMoveTo(q4, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q4;
+
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 0) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q4, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 2. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 1) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 3. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 2) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 4. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q4", "q3", "q4"], "Iteration "+i+". Move 4. The last row is q2, q4, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 3) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q4", "q3"], "Iteration "+i+". End. The last row is q2, q4, q3");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q4", "q3"]); // "Iteration "+i+". End. The last row is q2, q4, q3");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q2, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 5. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q4", "q3", "q4"], "Iteration "+i+". Move 5. The last row is q2, q4, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 4) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q4", "q3"], "Iteration "+i+". End. The last row is q2, q4, q3");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q4", "q3"]); // "Iteration "+i+". End. The last row is q2, q4, q3");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q2, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 6. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q4", "q2", "q3", "q4"], "Iteration "+i+". Move 6. The last row is q4, q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 5) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q4", "q2", "q3"], "Iteration "+i+". End. The last row is q4, q2, q3");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q4", "q2", "q3"]); // "Iteration "+i+". End. The last row is q4, q2, q3");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -228,66 +200,55 @@ test("Move item in row from center to right", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
-    var target = new QuestionTextModel("q3");
-    target.startWithNewLine = false;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q3, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q3;
 
-    page.dragDropMoveTo(q3, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 0) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 2. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 1) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q4, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 3. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 2) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q4, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 4. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q3"], "Iteration "+i+". Move 4. The last row is q2, q3, q4, q3");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 3) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q4", "q3"], "Iteration "+i+". End. The last row is q2, q4, q3");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q4", "q3"]); // "Iteration "+i+". End. The last row is q2, q4, q3");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -307,66 +268,55 @@ test("Move item in row from center to left", () => {
     var q4 = page.addNewQuestion("text", "q4");
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
-    var target = new QuestionTextModel("q3");
-    target.startWithNewLine = false;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q3, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q3;
 
-    page.dragDropMoveTo(q3, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 0) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q3, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 2. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(null);
     if(i == 1) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q2, true);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 3. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 2) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q3, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
-    page.dragDropMoveTo(q2, false);
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 4. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q3", "q2", "q3", "q4"], "Iteration "+i+". Move 4. The last row is q3, q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 3) {
-      page.dragDropFinish();
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q3", "q2", "q4"], "Iteration "+i+". End. The last row is q3, q2, q4");
-      assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q3", "q2", "q4"]); // "Iteration "+i+". End. The last row is q3, q2, q4");
+      expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -387,99 +337,81 @@ test("Move item in prev row from left to multi-row", () => {
     q1.startWithNewLine = false;
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
-    var target = new QuestionTextModel("q0");
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q0, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q0;
 
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 0) {
-      page.dragDropMoveTo(q2, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 1. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q0", "q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q0, q2, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q0", "q2", "q3", "q4"], "Iteration "+i+". End. The last row is q0, q2, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q0", "q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q0, q2, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 1) {
-      page.dragDropMoveTo(q2, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 2. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q0", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q0, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q0", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q0, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q0", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q0, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 2) {
-      page.dragDropMoveTo(q3, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 3. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q0", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q0, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q0", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q0, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q0", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q0, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 3) {
-      page.dragDropMoveTo(q3, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 4. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q0", "q4"], "Iteration "+i+". Move 4. The last row is q2, q3, q0, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q0", "q4"], "Iteration "+i+". End. The last row is q2, q3, q0, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q0", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q0, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 4) {
-      page.dragDropMoveTo(q4, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 5. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q0", "q4"], "Iteration "+i+". Move 5. The last row is q2, q3, q0, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q0", "q4"], "Iteration "+i+". End. The last row is q2, q3, q0, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q0", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q0, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 5) {
-      page.dragDropMoveTo(q4, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 6. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q0"], "Iteration "+i+". Move 6. The last row is q2, q3, q4, q2");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q0"], "Iteration "+i+". End. The last row is q2, q3, q4, q0");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q1");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4", "q0"]); // "Iteration "+i+". End. The last row is q2, q3, q4, q0");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -500,100 +432,81 @@ test("Move item in prev row from right to multi-row", () => {
     q1.startWithNewLine = false;
     q3.startWithNewLine = false;
     q4.startWithNewLine = false;
-    var target = new QuestionTextModel("q1");
-    target.startWithNewLine = false;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(q1, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = q1;
 
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 0) {
-      page.dragDropMoveTo(q2, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 1. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1", "q2", "q3", "q4"], "Iteration "+i+". Move 1. The last row is q1, q2, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1", "q2", "q3", "q4"], "Iteration "+i+". End. The last row is q1, q2, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q1", "q2", "q3", "q4"]); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q2);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 1) {
-      page.dragDropMoveTo(q2, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 2. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q1", "q3", "q4"], "Iteration "+i+". Move 2. The last row is q2, q1, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q1", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q1, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q1", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q1, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 2) {
-      page.dragDropMoveTo(q3, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 3. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q1", "q3", "q4"], "Iteration "+i+". Move 3. The last row is q2, q1, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q1", "q3", "q4"], "Iteration "+i+". End. The last row is q2, q1, q3, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q1", "q3", "q4"]); // "Iteration "+i+". End. The last row is q2, q1, q3, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q3);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 3) {
-      page.dragDropMoveTo(q3, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 4. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q1", "q4"], "Iteration "+i+". Move 4. The last row is q2, q3, q1, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q1", "q4"], "Iteration "+i+". End. The last row is q2, q3, q1, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q1", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q1, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Left);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Left);
     if(i == 4) {
-      page.dragDropMoveTo(q4, false);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 5. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q1", "q4"], "Iteration "+i+". Move 5. The last row is q2, q3, q1, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q1", "q4"], "Iteration "+i+". End. The last row is q2, q3, q1, q4");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q1", "q4"]); // "Iteration "+i+". End. The last row is q2, q3, q1, q4");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
 
+    ddHelper.dragOverCore(q4, DragTypeOverMeEnum.Right);
+    expect(ddHelper.dropTarget).toBe(q4);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
     if(i == 5) {
-      page.dragDropMoveTo(q4, true);
-      assert.equal(page.rows.length, 2, "Iteration "+i+". Move 1. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0", "q1"], "Iteration "+i+". Move 6. The first row is q0, q1");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q1"], "Iteration "+i+". Move 6. The last row is q2, q3, q4, q1");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
-      page.dragDropFinish();
-      assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-      assert.equal(page.rows.length, 2, "Iteration "+i+". End. No rows should be added");
-      assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q0"], "Iteration "+i+". End. The first row is q0");
-      assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2", "q3", "q4", "q1"], "Iteration "+i+". End. The last row is q2, q3, q4, q1");
-      assert.equal(page.questions.length, 5, "Iteration "+i+". we have only 5 questions");
+      ddHelper.doDrop();
+      expect(page.rows.length).toBe(2); // "Iteration "+i+". End. No rows should be added");
+      expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q0"]); // "Iteration "+i+". End. The first row is q0");
+      expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2", "q3", "q4", "q1"]); // "Iteration "+i+". End. The last row is q2, q3, q4, q1");
+      expect(page.questions.length).toBe(5); // "Iteration "+i+". we have only four questions");
       continue;
     }
   }
@@ -614,31 +527,23 @@ test("Move item multi-row to single-row bottom, from bottom to top", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
-    var target = new QuestionTextModel(dragQuestionName);
-    target.startWithNewLine = dragQuestion.startWithNewLine;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(dragQuestion, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
 
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Bottom);
+    ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
-
-    page.dragDropMoveTo(q1, true);
-    assert.equal(page.rows.length, 3, "Iteration "+i+". Move 1. Row added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The first row is dragged");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), arr, "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
     arr.splice(i - 2, 1);
-
-    page.dragDropFinish();
-    assert.equal(page.rows.length, 3, "Iteration "+i+". End.  Row added");
-    assert.equal(page.rows[2].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The first row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The first row is dragged");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), arr, "Iteration "+i+". End. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    expect(page.rows.length).toBe(3); // "Iteration "+i+". End. No rows should be added");
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[1].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[2].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
   }
 });
 
@@ -657,31 +562,23 @@ test("Move item multi-row to single-row top, from bottom to top", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
-    var target = new QuestionTextModel(dragQuestionName);
-    target.startWithNewLine = dragQuestion.startWithNewLine;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[1].elements.length, 3, "Iteration "+i+". There are three elements in the last row");
-    page.dragDropStart(dragQuestion, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
 
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+    ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
-
-    page.dragDropMoveTo(q1, false);
-    assert.equal(page.rows.length, 3, "Iteration "+i+". Move 1. Row added");
-    assert.equal(page.rows[2].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The first row is dragged");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The second row is q1");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), arr, "Iteration "+i+". Move 1. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
     arr.splice(i - 2, 1);
-
-    page.dragDropFinish();
-    assert.equal(page.rows.length, 3, "Iteration "+i+". End.  Row added");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The first row is dragged");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The second row is q1");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), arr, "Iteration "+i+". End. The last row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    expect(page.rows.length).toBe(3); // "Iteration "+i+". End. No rows should be added");
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[2].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
   }
 });
 
@@ -700,35 +597,27 @@ test("Move item multi-row to single-row bottom, from top to bottom", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
-    var target = new QuestionTextModel(dragQuestionName);
-    target.startWithNewLine = dragQuestion.startWithNewLine;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[0].elements.length, 3, "Iteration "+i+". There are three elements in the first row");
-    page.dragDropStart(dragQuestion, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[0].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
 
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Bottom);
+    ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
-
-    page.dragDropMoveTo(q1, true);
-    assert.equal(page.rows.length, 3, "Iteration "+i+". Move 1. Row added");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The pre-last row is q1");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". Move 1. The first row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
     arr.splice(i - 2, 1);
-
-    page.dragDropFinish();
-    assert.equal(page.rows.length, 3, "Iteration "+i+". End.  Row added");
-    assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The pre-last row is q1");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". End. The first row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    expect(page.rows.length).toBe(3); // "Iteration "+i+". End. No rows should be added");
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[2].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
   }
 });
 
-test("Move item multi-row to single-row bottom, from top to bottom", () => {
+test("Move item multi-row to single-row top, from top to bottom", () => {
   settings.supportCreatorV2 = true;
   for(let i = 2; i <= 4; i++) {
     var survey = new SurveyModel();
@@ -743,31 +632,23 @@ test("Move item multi-row to single-row bottom, from top to bottom", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
-    var target = new QuestionTextModel(dragQuestionName);
-    target.startWithNewLine = dragQuestion.startWithNewLine;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 2, "Iteration "+i+". Three is two rows");
-    assert.equal(page.rows[0].elements.length, 3, "Iteration "+i+". There are three elements in the first row");
-    page.dragDropStart(dragQuestion, target);
+    expect(page.rows.length).toBe(2); // "Iteration "+i+". Three is two rows");
+    expect(page.rows[0].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
 
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+    ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
-
-    page.dragDropMoveTo(q1, false);
-    assert.equal(page.rows.length, 3, "Iteration "+i+". Move 1. Row added");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The last row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The pre-last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". Move 1. The first row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
-
     arr.splice(i - 2, 1);
-
-    page.dragDropFinish();
-    assert.equal(page.rows.length, 3, "Iteration "+i+". End.  Row added");
-    assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
-    assert.deepEqual(page.rows[2].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The last row is q1");
-    assert.deepEqual(page.rows[1].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The pre-last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". End. The first row is q2, q3, q4");
-    assert.equal(page.questions.length, 4, "Iteration "+i+". we have only four questions");
+    expect(page.rows.length).toBe(3); // "Iteration "+i+". End. No rows should be added");
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page.rows[1].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[2].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.questions.length).toBe(4); // "Iteration "+i+". we have only four questions");
   }
 });
 
@@ -781,22 +662,57 @@ test("Move item between pages", () => {
   var q1 = page.addNewQuestion("text", "q1");
   var q2 = page.addNewQuestion("text", "q2");
   var q3 = page2.addNewQuestion("text", "q3");
+  const ddHelper: any = new DragDropSurveyElements(survey);
 
-  var target = new QuestionTextModel("q1");
+  expect(page.rows.length).toBe(2); // Three are two rows");
+  expect(page2.rows.length).toBe(1); // Three is one rows");
+  ddHelper.draggedElement = q1;
 
-  //debugger;
-  page2.dragDropStart(q1, target);
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Top);
+  expect(ddHelper.dropTarget).toBe(q3);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(page.elements.map(e => e.name)).toStrictEqual(["q2"]); // "End. The first page q2"
+  expect(page2.elements.map(e => e.name)).toStrictEqual(["q1", "q3"]); // "End. The last page is q1, q3"
+  expect(page.rows.length).toBe(1); // Three is one rows");
+  expect(page2.rows.length).toBe(2); // Three are two rows");
+});
 
-  page2.dragDropMoveTo(q3, false);
-  assert.equal(page2.rows.length, 2, "Move/ Page 2 has 2 rows");
-  assert.deepEqual(page2.rows[0].elements.map(e => e.name), ["q1"], "Move. The first row of last page is q1");
-  assert.deepEqual(page2.rows[1].elements.map(e => e.name), ["q3"], "Move. The second row of last page is q3");
-  assert.equal(page.rows.length, 2, "Move/ Page 1 has 2 rows");
-  assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Move. The first row of last page is q1");
-  assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2"], "Move. The second row of last page is q2");
-  page2.dragDropFinish();
-  assert.deepEqual(page2.elements.map(e => e.name), ["q1", "q3"], "End. The last page is q1, q3");
-  assert.deepEqual(page.elements.map(e => e.name), ["q2"], "End. The first page q2");
+test("Move item multi-row to single-row top, between pages", () => {
+  settings.supportCreatorV2 = true;
+  for(let i = 2; i <= 4; i++) {
+    var survey = new SurveyModel();
+    survey["_isDesignMode"] = true;
+    settings.supportCreatorV2 = true;
+    var page = survey.addNewPage("p1");
+    var page2 = survey.addNewPage("p2");
+    var q2 = page.addNewQuestion("text", "q2");
+    var q3 = page.addNewQuestion("text", "q3");
+    var q4 = page.addNewQuestion("text", "q4");
+    var q1 = page2.addNewQuestion("text", "q1");
+    q3.startWithNewLine = false;
+    q4.startWithNewLine = false;
+    var dragQuestionName = "q" + i;
+    var dragQuestion = page.getQuestionByName(dragQuestionName);
+    const ddHelper: any = new DragDropSurveyElements(survey);
+
+    expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
+    expect(page.rows[0].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
+
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+    ddHelper.doDrop();
+    var arr = ["q2", "q3", "q4"];
+    arr.splice(i - 2, 1);
+    expect(page.rows.length).toBe(1); // Three is one row
+    expect(page2.rows.length).toBe(2); // Three are two rows
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page2.rows[0].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page2.rows[1].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[0].elements[0].startWithNewLine).toBeTruthy(); // "Iteration "+i+". End. The first element SWNL = true");
+  }
 });
 
 test("Move item multi-row to single-row bottom, between pages", () => {
@@ -815,31 +731,24 @@ test("Move item multi-row to single-row bottom, between pages", () => {
     q4.startWithNewLine = false;
     var dragQuestionName = "q" + i;
     var dragQuestion = page.getQuestionByName(dragQuestionName);
-    var target = new QuestionTextModel(dragQuestionName);
-    target.startWithNewLine = dragQuestion.startWithNewLine;
+    const ddHelper: any = new DragDropSurveyElements(survey);
 
-    assert.equal(page.rows.length, 1, "Iteration "+i+". There is one row in page 1");
-    assert.equal(page.rows[0].elements.length, 3, "Iteration "+i+". There are three elements in the first row");
-    page2.dragDropStart(dragQuestion, target);
+    expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
+    expect(page.rows[0].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the last row");
+    ddHelper.draggedElement = dragQuestion;
 
+    ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+    expect(ddHelper.dropTarget).toBe(q1);
+    expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Bottom);
+    ddHelper.doDrop();
     var arr = ["q2", "q3", "q4"];
-
-    page2.dragDropMoveTo(q1, false);
-    assert.equal(page.rows.length, 1, "Iteration "+i+". Move 1. No rows added");
-    assert.equal(page2.rows.length, 2, "Iteration "+i+". Move 1. Page 2 - two rows");
-    assert.deepEqual(page2.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". Move 1. The last row is q1");
-    assert.deepEqual(page2.rows[0].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The pre-last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". Move 1. The first row is correct");
-
     arr.splice(i - 2, 1);
-
-    page2.dragDropFinish();
-    assert.equal(page.rows.length, 1, "Iteration "+i+". End.  Page1 - no Row added");
-    assert.equal(page2.rows.length, 2, "Iteration "+i+". End.  Page2 - Row added");
-    assert.deepEqual(page2.rows[1].elements.map(e => e.name), ["q1"], "Iteration "+i+". End. The last row is q1");
-    assert.deepEqual(page2.rows[0].elements.map(e => e.name), [dragQuestionName], "Iteration "+i+". Move 1. The pre-last row is dragged");
-    assert.deepEqual(page.rows[0].elements.map(e => e.name), arr, "Iteration "+i+". End. The first row is correct");
-    assert.equal(page.rows[0].elements[0].startWithNewLine, true, "Iteration "+i+". End. The first element SWNL = true");
+    expect(page.rows.length).toBe(1); // Three is one row
+    expect(page2.rows.length).toBe(2); // Three are two rows
+    expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(arr); // "Iteration "+i+". End. The last row is q1, q2, q3, q4");
+    expect(page2.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // "Iteration "+i+". End. The first row is q0");
+    expect(page2.rows[1].elements.map(e => e.name)).toStrictEqual([dragQuestionName]); // "Iteration "+i+". End. The first row is q0");
+    expect(page.rows[0].elements[0].startWithNewLine).toBeTruthy(); // "Iteration "+i+". End. The first element SWNL = true");
   }
 });
 
@@ -851,18 +760,20 @@ test("Move item from nowhere (creator toolbox) to page", () => {
   var page = survey.addNewPage("p1");
   var q1 = new QuestionTextModel("q1");
   var q2 = page.addNewQuestion("text", "q2");
+  const ddHelper: any = new DragDropSurveyElements(survey);
 
-  var target = new QuestionTextModel("q1");
+  expect(page.rows.length).toBe(1); // "Iteration "+i+". Three is one row
+  expect(page.rows[0].elements.length).toBe(1); // "Iteration "+i+". There are three elements in the last row");
+  ddHelper.draggedElement = q1;
 
-  //debugger;
-  page.dragDropStart(q1, target);
-
-  page.dragDropMoveTo(q2, false);
-  assert.equal(page.rows.length, 2, "Move/ Page has 2 rows");
-  assert.deepEqual(page.rows[0].elements.map(e => e.name), ["q1"], "Move. The first row of last page is q1");
-  assert.deepEqual(page.rows[1].elements.map(e => e.name), ["q2"], "Move. The second row of last page is q2");
-  page.dragDropFinish();
-  assert.deepEqual(page.elements.map(e => e.name), ["q1", "q2"], "End. The page is q1, q2");
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Top);
+  expect(ddHelper.dropTarget).toBe(q2);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+  expect(page.rows.length).toBe(2); // Three are two rows
+  expect(page.rows[0].elements.map(e => e.name)).toStrictEqual(["q1"]); // First row q1
+  expect(page.rows[1].elements.map(e => e.name)).toStrictEqual(["q2"]); // Second row q2
+  expect(page.elements.map(e => e.name)).toStrictEqual(["q1", "q2"]);
 });
 
 test("Move new question under row with several questions", () => {
@@ -875,18 +786,24 @@ test("Move new question under row with several questions", () => {
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
-  assert.equal(page.rows.length, 2, "There are two rows");
-  assert.equal(page.rows[0].elements.length, 2, "There are two elements in the first row");
-  var target = new QuestionTextModel("q4");
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
+  expect(page.rows[0].elements.length).toBe(2); // "Iteration "+i+". There are two elements in the first row");
+
   var newQuestion = new QuestionTextModel("q4");
-  page.dragDropStart(newQuestion, target);
-  page.dragDropMoveTo(q3, false, true);
-  page.dragDropFinish();
-  assert.equal(page.rows.length, 3, "There are 3 rows");
-  assert.equal(page.rows[0].elements.length, 2, "We still have two elements in the first row");
-  assert.equal(page.rows[1].elements.length, 1, "One element in the second row");
-  assert.equal(page.rows[1].elements[0].name, "q4", "New question is in the second row");
-  assert.equal(page.rows[1].elements[0].startWithNewLine, true, "New question starts with new line");
+  ddHelper.draggedElement = newQuestion;
+
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Top, true);
+  expect(ddHelper.dropTarget).toBe(q3);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+
+  expect(page.rows.length).toBe(3); // "There are 3 rows");
+  expect(page.rows[0].elements.length).toBe(2); // "We still have two elements in the first row");
+  expect(page.rows[1].elements.length).toBe(1); // "One element in the second row");
+  expect(page.rows[1].elements[0].name).toBe("q4"); // "New question is in the second row");
+  expect(page.rows[1].elements[0].startWithNewLine).toBe(true); // "New question starts with new line");
 });
 
 test("Move new question inside the row with several questions", () => {
@@ -899,18 +816,24 @@ test("Move new question inside the row with several questions", () => {
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
-  assert.equal(page.rows.length, 2, "There are two rows");
-  assert.equal(page.rows[0].elements.length, 2, "There are two elements in the first row");
-  var target = new QuestionTextModel("q4");
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
+  expect(page.rows[0].elements.length).toBe(2); // "Iteration "+i+". There are two elements in the first row");
+
   var newQuestion = new QuestionTextModel("q4");
-  page.dragDropStart(newQuestion, target);
-  page.dragDropMoveTo(q2, true, true);
-  page.dragDropFinish();
-  assert.equal(page.rows.length, 2, "There are 2 rows");
-  assert.equal(page.rows[0].elements.length, 3, "There are 3 elements in the first row");
-  assert.equal(page.rows[1].elements.length, 1, "One element in the second row");
-  assert.equal(page.rows[0].elements[2].name, "q4", "New question is in the first row");
-  assert.equal(page.rows[0].elements[2].startWithNewLine, false, "New question is on the same line");
+  ddHelper.draggedElement = newQuestion;
+
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right, true);
+  expect(ddHelper.dropTarget).toBe(q2);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
+  ddHelper.doDrop();
+
+  expect(page.rows.length).toBe(2); // "There are 2 rows");
+  expect(page.rows[0].elements.length).toBe(3); // "We still have two elements in the first row");
+  expect(page.rows[1].elements.length).toBe(1); // "One element in the second row");
+  expect(page.rows[0].elements[2].name).toBe("q4"); // "New question is in the first row");
+  expect(page.rows[0].elements[2].startWithNewLine).toBe(false); // "New question is on the same line");
 });
 
 test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
@@ -926,30 +849,27 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   const q4 = page.addNewQuestion("text", "q4");
   q3.startWithNewLine = false;
   q4.startWithNewLine = false;
+  const ddHelper: any = new DragDropSurveyElements(survey);
 
-  assert.equal(page.rows.length, 2, "There are two rows");
-  assert.equal(page.rows[1].elements.length, 3, "There are three elements in the second row");
+  expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
+  expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the second row");
+  expect(page.rows[0].elements[0].name).toBe("q1"); // "r1 q1 check");
+  expect(page.rows[1].elements[0].name).toBe("q2"); // "r2 q2 check");
+  expect(page.rows[1].elements[1].name).toBe("q3"); // "r2 q3 check");
+  expect(page.rows[1].elements[2].name).toBe("q4"); // "r2 q4 check");
 
-  assert.equal(page.rows[0].elements[0].name, "q1", "r1 q1 check");
-  assert.equal(page.rows[1].elements[0].name, "q2", "r2 q2 check");
-  assert.equal(page.rows[1].elements[1].name, "q3", "r2 q3 check");
-  assert.equal(page.rows[1].elements[2].name, "q4", "r2 q4 check");
+  ddHelper.draggedElement = q2;
+  ddHelper.dragOverCore(q3, DragTypeOverMeEnum.Right);
+  expect(ddHelper.dropTarget).toBe(q3);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
+  ddHelper.doDrop();
 
-  var target = new QuestionTextModel("q2");
-
-  page.dragDropStart(q2, target);
-  page.dragDropMoveTo(q3, true, false);
-  page.dragDropFinish();
-
-  assert.equal(page.rows.length, 2, "There are 2 rows at the page");
-
-  assert.equal(page.rows[0].elements.length, 1, "There are 1 elements in the first row");
-  assert.equal(page.rows[0].elements[0].name, "q1", "r1 q1 check");
-
-  assert.equal(page.rows[1].elements.length, 3, "There are three elements in the second row");
-  assert.equal(page.rows[1].elements[0].name, "q3", "r2 q3 check");
-  assert.equal(page.rows[1].elements[1].name, "q2", "r2 q2 check");
-  assert.equal(page.rows[1].elements[2].name, "q4", "r2 q4 check");
+  expect(page.rows.length).toBe(2); // "There are 2 rows");
+  expect(page.rows[0].elements[0].name).toBe("q1"); // "r1 q1 check");
+  expect(page.rows[1].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the second row");
+  expect(page.rows[1].elements[0].name).toBe("q3"); // "r2 q3 check");
+  expect(page.rows[1].elements[1].name).toBe("q2"); // "r2 q2 check");
+  expect(page.rows[1].elements[2].name).toBe("q4"); // "r2 q4 check");
 });
 
 test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
@@ -958,29 +878,27 @@ test("Drag Drop Question with Multiline (StartWithNewLine === false)", () => {
   survey["_isDesignMode"] = true;
   settings.supportCreatorV2 = true;
   const page = survey.addNewPage("p1");
-
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");
   const q3 = page.addNewQuestion("text", "q3");
   q2.startWithNewLine = false;
+  const ddHelper: any = new DragDropSurveyElements(survey);
 
-  assert.equal(page.rows.length, 2, "There are two rows");
-  assert.equal(page.rows[1].elements.length, 1, "There on element in the 2 row");
+  expect(page.rows.length).toBe(2); // "Iteration "+i+". Three are two rows
+  expect(page.rows[1].elements.length).toBe(1); // "Iteration "+i+". There is one element in the second row");
+  expect(page.rows[0].elements[0].name).toBe("q1"); // "r1 q1 check");
+  expect(page.rows[0].elements[1].name).toBe("q2"); // "r1 q2 check");
+  expect(page.rows[1].elements[0].name).toBe("q3"); // "r2 q3 check");
 
-  assert.equal(page.rows[0].elements[0].name, "q1", "r1 q1 check");
-  assert.equal(page.rows[0].elements[1].name, "q2", "r1 q2 check");
-  assert.equal(page.rows[1].elements[0].name, "q3", "r2 q3 check");
+  ddHelper.draggedElement = q3;
+  ddHelper.dragOverCore(q2, DragTypeOverMeEnum.Right);
+  expect(ddHelper.dropTarget).toBe(q2);
+  expect(ddHelper.dropTarget.dragTypeOverMe).toBe(DragTypeOverMeEnum.Right);
+  ddHelper.doDrop();
 
-  var target = new QuestionTextModel("q3");
-
-  page.dragDropStart(q3, target);
-  page.dragDropMoveTo(q2, true);
-  page.dragDropFinish();
-
-  assert.equal(page.rows.length, 1, "There are 1 rows at the page");
-
-  assert.equal(page.rows[0].elements.length, 3, "There are three elements in the first row");
-  assert.equal(page.rows[0].elements[0].name, "q1", "r2 q1 check");
-  assert.equal(page.rows[0].elements[1].name, "q2", "r2 q2 check");
-  assert.equal(page.rows[0].elements[2].name, "q3", "r2 q3 check");
+  expect(page.rows.length).toBe(1); // "There are 1 rows");
+  expect(page.rows[0].elements.length).toBe(3); // "Iteration "+i+". There are three elements in the second row");
+  expect(page.rows[0].elements[0].name).toBe("q1"); // "r1 q1 check");
+  expect(page.rows[0].elements[1].name).toBe("q2"); // "r1 q2 check");
+  expect(page.rows[0].elements[2].name).toBe("q3"); // "r1 q3 check");
 });
