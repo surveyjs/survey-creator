@@ -660,18 +660,28 @@ test("Image picker question inplace editor - add new item", async (t) => {
 
 test("Image question inplace editor", async (t) => {
   const controls = getVisibleElement(".svc-image-question-controls");
+  const question = getVisibleElement(".svc-question__content.svc-question__content--selected");
+  const getImageLink = ClientFunction(() => {
+    return document.querySelectorAll("img.sd-image__image")[0]["src"];
+  });
   await t
     .resizeWindow(2560, 1440)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image"), { speed: 0.5 })
     .click(getToolboxItemByText("Image"), { speed: 0.5 })
-    .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(getVisibleElement(".svc-question__content--selected").find("img[alt=question1]").exists).ok()
+    .expect(question.exists).ok()
+    .expect(question.find("img[alt=question1]").exists).ok()
+    .expect(question.find(".sd-file__choose-btn").visible).ok()
     .expect(controls.count).eql(1)
-    .expect(controls.nth(0).find(".svc-image-question-controls__button").visible).ok();
+    .expect(controls.nth(0).find(".svc-image-question-controls__button").count).eql(0);
+
+  let imageLink = await getImageLink();
+  await t.expect(imageLink).eql("");
 });
 
 test("Image question inplace editor - choose image via inplace editor", async (t) => {
+  const question = getVisibleElement(".svc-question__content.svc-question__content--selected");
+  const controls = getVisibleElement(".svc-image-question-controls");
   await t
     .resizeWindow(2560, 1440)
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
@@ -682,7 +692,26 @@ test("Image question inplace editor - choose image via inplace editor", async (t
     return document.querySelectorAll("img.sd-image__image")[0]["src"];
   });
   let imageLink = await getImageLink();
-  await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+
+  await t
+    .expect(imageLink).eql("")
+    .click(question.find(".sd-file__choose-btn"))
+    .setFilesToUpload(getVisibleElement(".svc-question__content input[type=file"), "./image.jpg");
+  imageLink = await getImageLink();
+  await t
+    .expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA")
+    .expect(controls.count).eql(1)
+    .expect(controls.nth(0).find(".svc-image-question-controls__button").count).eql(1)
+    .expect(question.find(".sd-image__no-image").exists).notOk();
+
+  await ClientFunction(() => {
+    window["creator"].survey.getAllQuestions()[0].imageLink = "testUrl";
+  })();
+  imageLink = await getImageLink();
+  await t
+    .expect(imageLink).contains("testUrl")
+    .expect(question.find(".sd-image__no-image").visible).ok();
+
   await t
     .click(getVisibleElement(".svc-image-question-controls__button"))
     .setFilesToUpload(getVisibleElement(".svc-question__content input[type=file"), "./image.jpg");
