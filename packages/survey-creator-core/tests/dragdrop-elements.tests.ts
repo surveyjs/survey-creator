@@ -1,4 +1,4 @@
-import { DragTypeOverMeEnum, Question, SurveyModel } from "survey-core";
+import { DragTypeOverMeEnum, Question, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
@@ -753,5 +753,174 @@ test("drag drop first to right of last item", () => {
         ],
       },
     ],
+  });
+});
+
+test("drag drop to panel vertical", () => {
+  const json = {
+    "elements": [
+      { "type": "panel", "name": "p1", },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const p1 = survey.getPanelByName("p1");
+  const q1 = new QuestionTextModel("q1");
+  const q2 = new QuestionTextModel("q2");
+  const q3 = new QuestionTextModel("q3");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q1;
+
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [{
+          "name": "q1",
+          "type": "text",
+        }]
+        }
+      ],
+    }]
+  });
+
+  ddHelper.draggedElement = q2;
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [
+          {
+            "name": "q2",
+            "type": "text",
+          },
+          {
+            "name": "q1",
+            "type": "text",
+          }
+        ]
+        }
+      ],
+    }]
+  });
+
+  ddHelper.draggedElement = q3;
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [
+          {
+            "name": "q2",
+            "type": "text",
+          },
+          {
+            "name": "q1",
+            "type": "text",
+          },
+          {
+            "name": "q3",
+            "type": "text",
+          }
+        ]
+        }
+      ],
+    }]
+  });
+});
+
+test("drag drop to panel horizontal", () => {
+  const json = {
+    "elements": [
+      { "type": "panel", "name": "p1", },
+    ]
+  };
+  const survey = new SurveyModel(json);
+
+  const p1 = survey.getPanelByName("p1");
+  const q1 = new QuestionTextModel("q1");
+  const q2 = new QuestionTextModel("q2");
+  const q3 = new QuestionTextModel("q3");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q1;
+
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Top);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [{
+          "name": "q1",
+          "type": "text",
+        }]
+        }
+      ],
+    }]
+  });
+
+  ddHelper.draggedElement = q2;
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Left);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [
+          {
+            "name": "q2",
+            "type": "text",
+          },
+          {
+            "name": "q1",
+            "type": "text",
+            "startWithNewLine": false
+          }
+        ]
+        }
+      ],
+    }]
+  });
+
+  ddHelper.draggedElement = q3;
+  ddHelper.dragOverCore(survey.getQuestionByName("q1"), DragTypeOverMeEnum.Right);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [{
+      name: "page1",
+      "elements": [
+        { "type": "panel", "name": "p1", elements: [
+          {
+            "name": "q2",
+            "type": "text",
+          },
+          {
+            "name": "q1",
+            "type": "text",
+            "startWithNewLine": false
+          },
+          {
+            "name": "q3",
+            "type": "text",
+            "startWithNewLine": false
+          }
+        ]
+        }
+      ],
+    }]
   });
 });

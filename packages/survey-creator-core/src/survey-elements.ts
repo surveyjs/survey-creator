@@ -417,7 +417,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
 
     if(!!row) {
-      if(this.dragOverLocation === DragTypeOverMeEnum.Left) {
+      const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
+      const dragOverLocation = dragOverIndicator.dragTypeOverMe;
+      if(dragOverLocation === DragTypeOverMeEnum.Left) {
         elementsToResetSWNL.push(dest);
         if(row.elements.indexOf(dest) === 0 || row.elements.indexOf(src) === 0 && row.elements.indexOf(dest) === 1) {
           elementsToSetSWNL.push(dragged);
@@ -425,17 +427,17 @@ export class DragDropSurveyElements extends DragDropCore<any> {
           elementsToResetSWNL.push(dragged);
         }
       }
-      else if(this.dragOverLocation === DragTypeOverMeEnum.Right) {
+      else if(dragOverLocation === DragTypeOverMeEnum.Right) {
         elementsToResetSWNL.push(dragged);
         if(row.elements.indexOf(dest) === 0) {
           elementsToSetSWNL.push(dragged);
         }
       } else if(row.elements.length > 1) {
         elementsToSetSWNL.push(dragged);
-        if(this.dragOverLocation === DragTypeOverMeEnum.Top) {
+        if(dragOverLocation === DragTypeOverMeEnum.Top) {
           targetIndex = this.getElementIndexInPanel(row.elements[0], row);
         }
-        else if(this.dragOverLocation === DragTypeOverMeEnum.Bottom) {
+        else if(dragOverLocation === DragTypeOverMeEnum.Bottom) {
           targetIndex = this.getElementIndexInPanel(row.elements[row.elements.length - 1], row) + 1;
         }
       } else {

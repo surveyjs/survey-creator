@@ -311,43 +311,33 @@ test("Drag Drop to Panel", async (t) => {
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
-    .hover(RatingToolboxItem, { speed: 0.01 })
+    .hover(RatingToolboxItem, { speed: 0.1 })
     .dragToElement(RatingToolboxItem, Panel, {
-      offsetX: 5,
-      offsetY: 5,
       destinationOffsetY: 0,
-      speed: 0.1
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.01 })
+    .hover(RatingToolboxItem, { speed: 0.1 })
     .dragToElement(RatingToolboxItem, Panel, {
-      offsetX: 5,
-      offsetY: 5,
       destinationOffsetY: -1,
-      speed: 0.1
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.01 })
+    .hover(RatingToolboxItem, { speed: 0.1 })
     .dragToElement(RatingToolboxItem, Panel, {
-      offsetX: 5,
-      offsetY: 5,
-      speed: 0.1
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.01 })
+    .hover(RatingToolboxItem, { speed: 0.1 })
     .dragToElement(RatingToolboxItem, Question3, {
-      offsetX: 5,
-      offsetY: 5,
-      destinationOffsetY: 25,
-      speed: 0.1
+      destinationOffsetY: 10,
+      speed: 0.5
     })
 
-    .hover(RatingToolboxItem, { speed: 0.01 })
+    .hover(RatingToolboxItem, { speed: 0.1 })
     .dragToElement(RatingToolboxItem, Question3, {
-      offsetX: 5,
-      offsetY: 5,
       destinationOffsetY: -10,
-      speed: 0.1
+      speed: 0.5
     });
   const expectedJson = {
     pages: [
@@ -608,8 +598,8 @@ test("Drag Drop Question out of Multiline (StartWithNewLine === false)", async (
   await t.dragToElement(DragZoneQuestion2, Question1, {
     offsetX: 5,
     offsetY: 5,
-    destinationOffsetX: -1,
-    destinationOffsetY: -1,
+    destinationOffsetX: -50,
+    destinationOffsetY: -10,
     speed: 0.1
   });
 
@@ -618,6 +608,32 @@ test("Drag Drop Question out of Multiline (StartWithNewLine === false)", async (
   });
   const result = await check();
   await t.expect(result).eql(true);
+
+  const expectedJson = {
+    pages: [
+      {
+        name: "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          },
+          {
+            "type": "text",
+            "startWithNewLine": false,
+            "name": "question3"
+          },
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+
 });
 
 test("Drag Drop ItemValue (choices)", async (t) => {
@@ -702,7 +718,6 @@ test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
       offsetY: 5,
       speed: 0.1
     });
-
   await t.expect(DnDShortcutControls.getStyleProperty("cursor")).eql("not-allowed");
 });
 
@@ -1189,15 +1204,14 @@ test("Drag Drop below the last Panel", async (t) => {
   await setJSON(json);
 
   const LastPanel = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
-  const afterLastPanel = Selector("[data-sv-drop-target-survey-element=\"page1\"]").find(".svc-page__add-new-question");
   const PanelToolboxItem = Selector("[aria-label='Panel toolbox item']");
 
   await t
     .hover(PanelToolboxItem, { speed: 0.01 })
-    .dragToElement(PanelToolboxItem, afterLastPanel, {
+    .dragToElement(PanelToolboxItem, LastPanel, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: 0,
+      destinationOffsetY: -10,
       speed: 0.01
     });
 
