@@ -135,7 +135,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
             type="file"
             aria-hidden="true"
             tabIndex={-1}
-            accept="image/*"
+            accept={this.model.acceptedTypes}
             className="svc-choose-file-input"
             style={{
               position: "absolute",

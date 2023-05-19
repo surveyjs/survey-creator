@@ -35,9 +35,10 @@ import {
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
-import { CreatorBase } from "../creator-base";
 import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
+import { QuestionFileEditorModel } from "../custom-questions/question-file";
+import { getAcceptedTypesByContentMode } from "../utils/utils";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -695,6 +696,9 @@ export class PropertyGridModel {
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
   ) {
     this.options = options;
+    if(this.options.enableLinkFileEditor) {
+      PropertyGridEditorCollection.register(new PropertyGridLinkEditor());
+    }
     this.obj = obj;
   }
   public get obj() {
@@ -835,6 +839,11 @@ export class PropertyGridModel {
     this.survey.onFocusInQuestion.add((sender, options) => {
       this.currentlySelectedProperty = options.question.name;
       this.currentlySelectedPanel = <PanelModel>options.question.parent;
+    });
+    this.survey.onUploadFiles.add((_, options) => {
+      const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
+      const obj = options.question.obj.getType() == "image" ? options.question.obj : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : undefined);
+      this.options.uploadFiles(options.files, obj, callback);
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
@@ -1262,6 +1271,34 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     return json;
   }
 }
+
+export class PropertyGridLinkEditor extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return ["logo", "imageLink"].indexOf(prop.name) > -1;
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    const res: any = { type: "fileedit", storeDataAsText: false, };
+    return res;
+  }
+
+  public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    if(["image"].indexOf(obj.getType()) > -1) {
+      const questionObj = <Question>obj;
+      questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
+        question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+      });
+      question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+    } else {
+      question.acceptedTypes = getAcceptedTypesByContentMode("image");
+    }
+  }
+
+}
+
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number" || prop.type == "responsiveImageSize";

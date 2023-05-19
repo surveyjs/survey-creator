@@ -1,6 +1,7 @@
-import { CssClassBuilder, ImageItemValue, property, QuestionSelectBase } from "survey-core";
+import { CssClassBuilder, ImageItemValue, property, QuestionImagePickerModel, QuestionSelectBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
+import { getAcceptedTypesByContentMode } from "../utils/utils";
 
 require("./image-item-value.scss");
 export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
@@ -76,6 +77,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   }
   onDragLeave = (event: any) => {
     this.isFileDragging = false;
+  }
+  get acceptedTypes () {
+    return getAcceptedTypesByContentMode(this.question.contentMode);
   }
 }
 

@@ -40,7 +40,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     }
     return (
       <div ref={this.rootRef} className="svc-logo-image">
-        <input aria-hidden="true" type="file" tabIndex={-1} accept="image/*" className="svc-choose-file-input" />
+        <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />
         {content}
       </div>
     );

@@ -1,5 +1,6 @@
 <div class="svc-logo-image" data-bind="click: function(m, e) { return true; }, clickBubble: false">
-  <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+  <input type="file" aria-hidden="true" tabindex="-1" class="svc-choose-file-input"
+    data-bind="attr: { accept: acceptedTypes }" />
   <!-- ko ifnot: survey.locLogo.koRenderedHtml -->
   <!-- ko if: allowEdit && !isUploading -->
   <div class="svc-logo-image-placeholder" data-bind="click: chooseFile, key2click">

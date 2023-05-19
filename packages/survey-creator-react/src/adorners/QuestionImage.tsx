@@ -36,7 +36,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
         type="file"
         aria-hidden="true"
         tabIndex={-1}
-        accept="image/*"
+        accept={this.imageModel.acceptedTypes}
         className="svc-choose-file-input"
         style={{
           position: "absolute",
