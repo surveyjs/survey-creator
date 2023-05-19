@@ -318,6 +318,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       const row = this.parentElement.dragDropFindRow(dragOverIndicator);
       if(!!row && row.elements.length > 1 && (this.dragOverLocation === DragTypeOverMeEnum.Top || this.dragOverLocation === DragTypeOverMeEnum.Bottom)) {
         row.dragTypeOverMe = this.dragOverLocation;
+        this.dragOverIndicatorElement = row;
       } else {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
