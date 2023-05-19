@@ -138,6 +138,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   protected getDropTargetByDataAttributeValue(dataAttributeValue: string, dropTargetNode: HTMLElement, event: PointerEvent): any {
+    this.removeDragOverMarker(this.dragOverIndicatorElement);
+    this.dragOverIndicatorElement = null;
+
     if (!dataAttributeValue) {
       // panel dynamic
       const nearestDropTargetElement = dropTargetNode.parentElement.closest<HTMLElement>(this.dropTargetDataAttributeName);
@@ -203,7 +206,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       dropTarget.__page = page;
     }
 
-    this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.dragOverIndicatorElement = dragOverElement;
     return dropTarget;
     // EO drop to question or panel
