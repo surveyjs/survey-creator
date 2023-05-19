@@ -923,9 +923,6 @@ export class PropertyGridModel {
     options.value = changingOptions.newValue;
     if (q.property.isRequired) {
       const isEmpty = Helpers.isValueEmpty(options.value);
-      if(isEmpty) {
-        options.value = options.oldValue;
-      }
       q["valueChangingEmpty"] = isEmpty;
     }
   }
@@ -1262,7 +1259,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     options: ISurveyCreatorOptions
   ): any {
     const json = this.updateMaxLength(prop, { type: "text" });
-    if (prop.name == "name") {
+    if (prop.isRequired) {
       json.textUpdateMode = "onBlur";
     }
     if (!!prop.dataList) {

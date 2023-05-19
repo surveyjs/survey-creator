@@ -2356,7 +2356,8 @@ test("Required properties restore on change to empty value", (): any => {
   titleQuestion.value = "q1t";
   expect(titleQuestion.value).toEqual("q1t");
   titleQuestion.value = "";
-  expect(titleQuestion.value).toEqual("q1t");
+  expect(question.title).toEqual("q1t");
+  expect(titleQuestion.value).toBeFalsy();
   titleProp.isRequired = oldIsRequired;
 });
 test("Validate Selected Element Errors", () => {
@@ -3132,4 +3133,26 @@ test("Check allowRootStyle is set false for all questions inside property grids"
   const row = choicesQuestion.visibleRows[2];
   row.showHideDetailPanelClick();
   expect(row.detailPanel.questions.filter(q => q.allowRootStyle).length).toBe(0);
+});
+test("PropertyEditor and hasError - required for survey.title", () => {
+  const survey = new SurveyModel();
+  survey.title = "My Title";
+  let propertyGrid = new PropertyGridModelTester(survey);
+  let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  const prop = Serializer.findProperty("survey", "title");
+  prop.isRequired = true;
+  propertyGrid = new PropertyGridModelTester(survey);
+  titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.textUpdateMode).toBe("onBlur");
+  titleQuestion.value = "";
+  expect(survey.title).toEqual("My Title");
+  expect(titleQuestion.errors).toHaveLength(1);
+  expect(titleQuestion.errors[0].text).toEqual("Please enter a value");
+  expect(titleQuestion.value).toBeFalsy();
+  titleQuestion.value = "title1";
+  expect(survey.title).toEqual("title1");
+  expect(titleQuestion.errors).toHaveLength(0);
+  prop.isRequired = false;
 });
