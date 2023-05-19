@@ -844,7 +844,7 @@ test("Check string editor on isRequired", async (t) => {
   }, msg);
 
   const hideCursor = ClientFunction(() => {
-    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor sv-string-editor")[0];
+    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
     el.style.color = "transparent";
   });
 
