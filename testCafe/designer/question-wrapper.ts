@@ -35,7 +35,7 @@ test("Single input question wrapper actions", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(questionToolbarActions.count).eql(5)
     .expect(convertActionButton.visible).ok()
     .expect(convertInputTypeActionButton.visible).ok()
@@ -56,7 +56,7 @@ test("Single input question wrapper action convert", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
@@ -64,14 +64,14 @@ test("Single input question wrapper action convert", async (t) => {
     .expect(popupContent.innerText).eql(convertPopupContent)
 
     .click(getListItemByText("Long Text"))
-    .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("textarea").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Long Text"]'))
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
     .click(getListItemByText("Single-Line Input"))
-    .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
+    .expect(Selector(".svc-question__content--selected input").visible).ok();
 });
 test("Single input question wrapper action convert inputType", async (t) => {
   await t
@@ -80,7 +80,7 @@ test("Single input question wrapper action convert inputType", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(convertInputTypeActionButton.visible).ok()
 
     .click(convertInputTypeActionButton)
@@ -106,7 +106,7 @@ test("Single input question wrapper action convert on hover", async (t) => {
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).notOk()
     .hover(".svc-question__content", { offsetX: 5, offsetY: 5 })
     .wait(500)
-    .expect(Selector(".svc-question__content").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content").find("input").visible).ok()
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
@@ -114,14 +114,14 @@ test("Single input question wrapper action convert on hover", async (t) => {
     .expect(popupContent.innerText).eql(convertPopupContent)
 
     .click(getListItemByText("Long Text"))
-    .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("textarea").visible).ok()
 
     .click(questionToolbarActions.find('button[title="Long Text"]'))
     .expect(listItems.count).eql(convertQuestionTypesCount)
     .expect(popupContent.innerText).eql(convertPopupContent)
 
     .click(getListItemByText("Single-Line Input"))
-    .expect(Selector(".svc-question__content--selected input[aria-label=question1]").visible).ok();
+    .expect(Selector(".svc-question__content--selected input").visible).ok();
 });
 
 test("Single input question wrapper action duplicate", async (t) => {
@@ -131,7 +131,7 @@ test("Single input question wrapper action duplicate", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(duplicateActionButton.visible).ok()
 
     .click(duplicateActionButton);
@@ -156,7 +156,7 @@ test("Single input question wrapper action change require", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok();
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok();
 
   await t.expect(requiredActionButton.visible).ok();
 
@@ -179,7 +179,7 @@ test("Single input question wrapper action delete", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(deleteActionButton.visible).ok()
 
     .click(deleteActionButton)
@@ -290,7 +290,7 @@ test("Keep focus on question convert", async (t) => {
     .hover(getToolboxItemByText("Single-Line Input"))
     .click(getToolboxItemByText("Single-Line Input"))
     .expect(Selector(".svc-question__content.svc-question__content--selected").exists).ok()
-    .expect(Selector(".svc-question__content--selected").find("input[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("input").visible).ok()
     .expect(convertActionButton.visible).ok()
 
     .click(convertActionButton)
@@ -298,7 +298,7 @@ test("Keep focus on question convert", async (t) => {
     .expect(popupContent.innerText).eql(convertPopupContent)
 
     .click(getListItemByText("Long Text"))
-    .expect(Selector(".svc-question__content--selected").find("textarea[aria-label=question1]").visible).ok()
+    .expect(Selector(".svc-question__content--selected").find("textarea").visible).ok()
     .expect(Selector(".svc-question__content--selected #convertTo button").focused).ok();
 });
 

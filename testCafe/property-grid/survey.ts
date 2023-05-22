@@ -103,7 +103,7 @@ test("Merge undo/redo transcactioins for text", async (t) => {
     ]
   };
   const question = Selector("[data-name=\"q1\"]");
-  const titleEditor = Selector("textarea[aria-label=Title]");
+  const titleEditor = Selector("[data-name='title']").find("textarea");
   const undoAction = Selector("button[title=Undo]");
   const getQuestionTitle = ClientFunction(() => {
     return window["creator"].survey.getQuestionByName("q1").title;
