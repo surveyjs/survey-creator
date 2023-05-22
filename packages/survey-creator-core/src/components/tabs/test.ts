@@ -296,8 +296,4 @@ export class TestSurveyTabViewModel extends Base {
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
-
-  @property({ defaultValue: "default" }) themeName;
-  @property({ defaultValue: "light" }) themePalette;
-  @property({ defaultValue: "panel" }) themeMode;
 }
