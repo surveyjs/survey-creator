@@ -11,7 +11,15 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="survey.locLogo.renderedHtml">
-      <div [class]="model.containerCss" (click)="model.chooseFile(model)" [key2click]>
+      <div [class]="model.containerCss">
+        <div class="svc-context-container svc-logo-image-controls">
+            <span class="svc-context-button" (click)="model.chooseFile(model)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+              <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
+            </span>
+            <span class="svc-context-button svc-context-button--danger" (click)="model.remove(model)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+              <svg [iconName]="'icon-clear'" [size]="24" sv-ng-svg-icon></svg>
+            </span>
+        </div>
         <sv-logo-image [data]="survey"></sv-logo-image>
       </div>
     </ng-container>
