@@ -1,0 +1,36 @@
+@import "../variables.scss";
+.svc-context-container {
+  display: flex;
+  gap: calcSize(1);
+  width: max-content;
+}
+.svc-context-button {
+  display: block;
+  box-sizing: border-box;
+  background-color: $background;
+  border-radius: 50%;
+  width: calcSize(6);
+  height: calcSize(6);
+  cursor: pointer;
+  padding: calcSize(1.5);
+  use {
+    fill: $foreground-light;
+  }
+  outline: none;
+}
+.svc-context-button {
+  &:hover,
+  &:focus {
+    use {
+      fill: $primary;
+    }
+  }
+}
+.svc-context-button--danger {
+  &:hover,
+  &:focus {
+    use {
+      fill: $red;
+    }
+  }
+}

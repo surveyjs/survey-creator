@@ -1,5 +1,7 @@
 @import "../../variables.scss";
-
+.svc-designer-header .sd-container-modern__title {
+  gap: calcSize(6);
+}
 .svc-logo-image {
   position: relative;
   justify-content: flex-end;
@@ -27,7 +29,7 @@
   justify-content: center;
   align-items: center;
   margin-right: calcSize(-2);
-  border-radius:  calcSize(4);
+  border-radius: calcSize(4);
   &:hover {
     background-color: $primary-light;
     opacity: unset;
@@ -43,4 +45,24 @@
 
 .svc-logo-image-placeholder use {
   fill: $foreground-light;
+}
+.svc-logo-image-container {
+  position: relative;
+  .sd-logo {
+    margin: 0;
+  }
+}
+.svc-logo-image-controls {
+  opacity: 0;
+  width: max-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.svc-logo-image-container--editable:focus-within,
+.svc-logo-image-container--editable:hover {
+  .svc-logo-image-controls {
+    opacity: 1;
+  }
 }
