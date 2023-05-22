@@ -44,6 +44,7 @@ export const Themes = {
 
 ComponentCollection.Instance.add({
   name: "fontsettings",
+  showInToolbox: false,
   elementsJSON: [
     {
       type: "dropdown",
@@ -96,6 +97,7 @@ ComponentCollection.Instance.add({
 
 ComponentCollection.Instance.add({
   name: "elementsettings",
+  showInToolbox: false,
   elementsJSON: [
     {
       type: "color",
