@@ -88,13 +88,13 @@ test("Edit question title", async (t) => {
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("esc")
-    .expect(Selector("textarea[aria-label=Title]").value).eql("", "Question title in property grid still empty")
+    .expect(Selector("[data-name='title']").find("textarea").value).eql("", "Question title in property grid still empty")
 
     .click(svStringSelector)
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("ctrl+enter")
-    .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
+    .expect(Selector("[data-name='title']").find("textarea").value).eql(prefix + title, "Question title in property grid is updated")
 
     .click(svStringSelector)
     .pressKey("ctrl+a")

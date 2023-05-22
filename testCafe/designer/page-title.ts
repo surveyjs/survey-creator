@@ -20,7 +20,7 @@ fixture`${title}`.page`${url}`.beforeEach(
 test("Edit page title", async (t) => {
   await setJSON(json);
   const title = "PageTitle";
-  const editorValue = Selector("textarea[aria-label=Title]");
+  const editorValue = Selector("[data-name='title']").find("textarea");
   await t
     .click(getPropertyGridCategory(generalGroupName))
 
