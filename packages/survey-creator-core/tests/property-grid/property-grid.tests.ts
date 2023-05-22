@@ -3133,3 +3133,34 @@ test("Check allowRootStyle is set false for all questions inside property grids"
   row.showHideDetailPanelClick();
   expect(row.detailPanel.questions.filter(q => q.allowRootStyle).length).toBe(0);
 });
+test("PropertyEditor for question name", () => {
+  const question = new QuestionTextModel("q");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let nameQuestion = propertyGrid.survey.getQuestionByName("name");
+  const checkedData = ["Row", "panel", "choice", "Item"];
+  const errorText = "Do not use reserved words: 'item', 'choice', 'panel', 'row.";
+  let prevName = question.name;
+  for(let i = 0; i < checkedData.length; i ++) {
+    const erroredName = checkedData[i];
+    const validName = "q" + (i + 1).toString();
+    nameQuestion.value = erroredName;
+    expect(nameQuestion.value).toBe(prevName);
+    expect(question.name).toEqual(prevName);
+    expect(nameQuestion.errors).toHaveLength(1);
+    expect(nameQuestion.errors[0].text).toEqual(errorText);
+    nameQuestion.value = validName;
+    expect(question.name).toEqual(validName);
+    expect(nameQuestion.errors).toHaveLength(0);
+    prevName = validName;
+  }
+  const panel = new PanelModel("p");
+  propertyGrid = new PropertyGridModelTester(panel);
+  nameQuestion = propertyGrid.survey.getQuestionByName("name");
+  for(let i = 0; i < checkedData.length; i ++) {
+    const erroredName = checkedData[i];
+    nameQuestion.value = erroredName;
+    expect(nameQuestion.value).toBe(erroredName);
+    expect(panel.name).toEqual(erroredName);
+    expect(nameQuestion.errors).toHaveLength(0);
+  }
+});
