@@ -1,6 +1,7 @@
 @import "../../variables.scss";
 .svc-designer-header .sd-container-modern__title {
-  gap: calcSize(6);
+  gap: 0;
+  column-gap: calcSize(6);
 }
 .svc-logo-image {
   position: relative;
