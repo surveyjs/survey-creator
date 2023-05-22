@@ -1,4 +1,4 @@
-import { defaultV2Css, ItemValue, Serializer } from "survey-core";
+import { defaultV2Css, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
@@ -316,4 +316,8 @@ export function getAcceptedTypesByContentMode(contentMode: string) {
   else {
     return "";
   }
+}
+
+export function getQuestionFromObj(obj: SurveyElement): Question {
+  return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
 }
