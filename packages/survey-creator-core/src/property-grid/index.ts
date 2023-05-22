@@ -897,9 +897,10 @@ export class PropertyGridModel {
     return res;
   }
   private validateQuestionValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
-    if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"])) {
+    if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"]))
       return editorLocalization.getString("pe.propertyIsEmpty");
-    }
+    if(this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
+      return editorLocalization.getString("pe.propertyNameIsIncorrect");
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
     if (!!editorError) return editorError;
     return this.options.onGetErrorTextOnValidationCallback(prop.name, obj, val);
@@ -925,13 +926,21 @@ export class PropertyGridModel {
       const isEmpty = Helpers.isValueEmpty(options.value);
       q["valueChangingEmpty"] = isEmpty;
     }
+    const isPropertyNameInValid = this.isPropNameInValid(this.obj, q.property, options.value);
+    q["nameHasError"] = isPropertyNameInValid;
+  }
+  private isPropNameInValid(obj: Base, prop: JsonObjectProperty, val: any): boolean {
+    if(obj["isQuestion"] && prop.name === "name" && !!val) {
+      val = (<string>val).toLowerCase();
+      return ["item", "choice", "row", "panel"].indexOf(val) > -1;
+    }
+    return false;
   }
   private onValueChanged(options: any) {
     var q = options.question;
     if (!q || !q.property) return;
-    if(q["valueChangingEmpty"]) {
-      q["valueChangingEmpty"] = false;
-    }
+    q["valueChangingEmpty"] = false;
+    q["nameHasError"] = false;
     this.changeDependedProperties(q, (name: string): Question => { return this.survey.getQuestionByName(name); },
       (name: string): any => { return this.survey.getValue(name); });
     PropertyGridEditorCollection.onValueChanged(this.obj, q.property, q);
