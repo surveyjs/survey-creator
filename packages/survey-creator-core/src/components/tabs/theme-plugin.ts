@@ -1,15 +1,12 @@
 import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
+import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
-import { TestSurveyTabViewModel } from "./test";
+import { ThemeSurveyTabViewModel } from "./theme";
+import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 
-export class TabTestPlugin implements ICreatorPlugin {
-  private languageSelectorAction: Action;
-  private changeThemePopupModel: PopupModel;
-  private changeThemeModel: ListModel;
-  protected changeThemeAction: Action;
+export class TabThemePlugin implements ICreatorPlugin {
   private deviceSelectorAction: Action;
   private orientationSelectorAction: Action;
   private invisibleToggleAction: Action;
@@ -18,8 +15,9 @@ export class TabTestPlugin implements ICreatorPlugin {
   private prevPageAction: Action;
   private nextPageAction: Action;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private sidebarTab: SidebarTabModel;
 
-  public model: TestSurveyTabViewModel;
+  public model: ThemeSurveyTabViewModel;
 
   private getSimulatorDevicesTitle(): string {
     if (!this.model) return "";
@@ -33,29 +31,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.deviceSelectorAction.iconName = "icon-device-" + currentType;
     this.deviceSelectorAction.title = getLocString("pe.simulator");
   }
-  private setDefaultLanguageOption(opt: boolean | string) {
-    const vis: boolean = opt === true || opt === "all" || (opt === "auto" && this.model.survey.getUsedLocales().length > 1);
-    this.languageSelectorAction.visible = vis;
-    let languages: Array<IAction> = [];
-    if (vis) {
-      languages = this.getLanguages(opt !== "all" ? this.model.survey.getUsedLocales() : null);
-    }
-    this.languageSelectorAction.popupModel.contentComponentData.model.setItems(languages);
-    this.languageSelectorAction.data.selectedItem = languages.filter(lang => lang.id === this.model.activeLanguage)[0];
-  }
-  private getLanguages(usedLanguages: Array<string> = null): Array<IAction> {
-    const res: Array<IAction> = [];
-    const locales = !!usedLanguages && usedLanguages.length > 1 ? usedLanguages : surveyLocalization.getLocales();
-    for (let i = 0; i < locales.length; i++) {
-      const loc: string = locales[i];
-      res.push({ id: loc, title: editorLocalization.getLocaleName(loc) });
-    }
-    return res;
-  }
   private updateActions() {
-    this.languageSelectorAction.title = editorLocalization.getLocaleName(this.model.activeLanguage);
-    this.languageSelectorAction.visible = true;
-
     if (this.creator.showSimulatorInTestSurveyTab) {
       this.setDevice(this.model.simulator.device);
       this.deviceSelectorAction.data.selectedItem = { id: this.model.simulator.device };
@@ -66,26 +42,22 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
       this.invisibleToggleAction.visible = this.model.isRunning;
     }
-    if (this.creator.showDefaultLanguageInTestSurveyTab != undefined) {
-      this.setDefaultLanguageOption(this.creator.showDefaultLanguageInTestSurveyTab);
-    }
-  }
-  private setPreviewTheme(themeName: string): void {
-    this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
   }
 
   constructor(private creator: CreatorBase) {
-    creator.addPluginTab("test", this, "ed.testSurvey");
-    this.setPreviewTheme(this.creator.themeForPreview);
+    creator.addPluginTab("theme", this, "ed.themeSurvey");
+    this.simulatorTheme = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
+    this.sidebarTab = this.creator.sidebar.addTab("preview");
+    this.sidebarTab.caption = editorLocalization.getString("ed.previewPropertyGridTitle");
   }
   public activate(): void {
-    this.model = new TestSurveyTabViewModel(this.creator, this.simulatorTheme);
-    this.model.onSurveyCreatedCallback = (survey) => {
-      this.creator["onTestSurveyCreated"] && this.creator["onTestSurveyCreated"].fire(this.creator, { survey: survey });
-    };
+    this.model = new ThemeSurveyTabViewModel(this.creator, this.simulatorTheme);
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
+    this.sidebarTab.model = this.model.themeEditorSurvey;
+    this.sidebarTab.componentName = "survey-widget";
+    this.creator.sidebar.activeTab = this.sidebarTab.id;
   }
   public update(): void {
     if (!this.model) return;
@@ -113,24 +85,12 @@ export class TabTestPlugin implements ICreatorPlugin {
       this.model.onSurveyCreatedCallback = undefined;
       this.model = undefined;
     }
-    this.languageSelectorAction.visible = false;
+    this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
-  private getAvailableThemes(themeMapper: Array<any>): Array<Action> {
-    const availableThemesToItems = [];
-    for (var i = 0; i < themeMapper.length; i++) {
-      const item = themeMapper[i];
-      const action = new Action({ id: item.name + "_themeSwitcher", locTitleName: this.getThemeLocName(item.name) });
-      (<any>action).value = item.name;
-      availableThemesToItems.push(action);
-    }
-    return availableThemesToItems;
-  }
-  private getThemeLocName(name: string): string {
-    return "ed." + name + "Theme";
-  }
+
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
 
@@ -152,7 +112,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-desktop",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSimulatorInTestSurveyTab);
         }),
       }, {
         items: deviceSelectorItems,
@@ -169,7 +129,7 @@ export class TabTestPlugin implements ICreatorPlugin {
         iconName: "icon-device-rotate",
         mode: "small",
         visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "test", this.creator.showSimulatorInTestSurveyTab);
+          return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSimulatorInTestSurveyTab);
         }),
         action: () => {
           this.model.simulator.landscape = !this.model.simulator.landscape;
@@ -197,85 +157,14 @@ export class TabTestPlugin implements ICreatorPlugin {
       items.push(this.invisibleToggleAction);
     }
 
-    let themeMapper = StylesManager.getIncludedThemeCss() as Array<any>;
-    const sequence = ["defaultV2", "modern", "default"];
-    themeMapper = themeMapper.sort((theme1, theme2) => {
-      return sequence.indexOf(theme1.name) > sequence.indexOf(theme2.name) ? 1 : -1;
-    });
-    let availableThemesToItems = this.getAvailableThemes(themeMapper);
-
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
-      this.changeThemeModel = new ListModel(
-        availableThemesToItems,
-        (item: any) => {
-          if (!!this.model) {
-            this.model.setTheme(item.value, themeMapper);
-          }
-          this.changeThemeAction.locTitleName = this.getThemeLocName(item.value);
-          this.changeThemeAction.locStrsChanged();
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        true
-      );
-      this.changeThemeModel.locOwner = this.creator;
-
-      this.changeThemePopupModel = new PopupModel(
-        "sv-list",
-        { model: this.changeThemeModel },
-        "bottom",
-        "center"
-      );
-      const getStartThemeName = (): string => {
-        const availableThemes = themeMapper.filter(item => item.theme.root === this.simulatorTheme.root);
-        return availableThemes.length > 0 ? availableThemes[0].name : "defaultV2";
-      };
-      this.changeThemeAction = new Action({
-        id: "themeSwitcher",
-        iconName: "icon-theme",
-        component: "sv-action-bar-item-dropdown",
-        mode: "large",
-        locTitleName: this.getThemeLocName(getStartThemeName()),
-        needSeparator: true,
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.showSimulatorInTestSurveyTab, this.creator.activeTab === "test");
-        }),
-        action: () => {
-          this.changeThemePopupModel.toggleVisibility();
-        },
-        popupModel: this.changeThemePopupModel
-      });
-
-      items.push(this.changeThemeAction);
-    }
-
-    this.languageSelectorAction = createDropdownActionModel({
-      id: "languageSelector",
-      iconName: "icon-language",
-      visible: false,
-      mode: <any>new ComputedUpdater<string>(() => {
-        return this.creator.isMobileView ? "small" : "large";
-      }),
-    }, {
-      items: [],
-      allowSelection: true,
-      onSelectionChanged: (item: any) => {
-        this.model.activeLanguage = item.id;
-        this.languageSelectorAction.title = editorLocalization.getLocaleName(item.id);
-      },
-      horizontalPosition: "center",
-      onHide: () => { this.languageSelectorAction.enabled = true; },
-      onShow: () => { this.languageSelectorAction.enabled = false; }
-    });
-    items.push(this.languageSelectorAction);
-
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-preview",
       needSeparator: true,
       action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "theme"),
       visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "test");
+        return (this.creator.activeTab === "theme");
       }),
       locTitleName: "ed.designer",
       showTitle: false
@@ -298,7 +187,6 @@ export class TabTestPlugin implements ICreatorPlugin {
   public addFooterActions() {
     this.creator.footerToolbar.actions.push(this.testAgainAction);
     this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
-    this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
     this.creator.footerToolbar.actions.push(this.prevPageAction);
     this.creator.footerToolbar.actions.push(this.nextPageAction);
     this.creator.footerToolbar.actions.push(this.designerAction);

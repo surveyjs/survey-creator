@@ -1,14 +1,14 @@
 import { CreatorTester } from "../creator-tester";
-import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
+import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
+import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 
 import "survey-core/survey.i18n";
 
 test("Theme builder initialization", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -18,10 +18,10 @@ test("Theme builder initialization", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("default");
   expect(themeEditor.getQuestionByName("themeMode").value).toEqual("panels");
@@ -41,7 +41,7 @@ test("Theme builder initialization", (): any => {
 });
 
 test("Theme builder initialization", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -51,10 +51,10 @@ test("Theme builder initialization", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("default");
   expect(themeEditor.getQuestionByName("themeMode").value).toEqual("panels");
@@ -74,7 +74,7 @@ test("Theme builder initialization", (): any => {
 });
 
 test("Theme builder panelBackgroundTransparency", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -84,10 +84,10 @@ test("Theme builder panelBackgroundTransparency", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
   const panelBackgroundTransparency = themeEditor.getQuestionByName("panelBackgroundTransparency");
 
   expect(panelBackgroundTransparency.value).toEqual(100);
@@ -101,7 +101,7 @@ test("Theme builder panelBackgroundTransparency", (): any => {
 });
 
 test("Theme builder questionBackgroundTransparency", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -111,10 +111,10 @@ test("Theme builder questionBackgroundTransparency", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
@@ -128,7 +128,7 @@ test("Theme builder questionBackgroundTransparency", (): any => {
 });
 
 test("Theme builder: survey settings", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -138,11 +138,11 @@ test("Theme builder: survey settings", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
-  const simulatorSurvey = testSurveyTab.survey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulatorSurvey = themeSurveyTab.survey;
 
   const backgroundImage = themeEditor.getQuestionByName("backgroundImage");
   const backgroundImageFit = themeEditor.getQuestionByName("backgroundImageFit");
@@ -171,7 +171,7 @@ test("Theme builder: survey settings", (): any => {
 });
 
 test("Theme builder switch themes", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -181,10 +181,10 @@ test("Theme builder switch themes", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
   const themePalette = themeEditor.getQuestionByName("themePalette");
   const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditor.getQuestionByName("--background-dim");
@@ -199,7 +199,7 @@ test("Theme builder switch themes", (): any => {
 });
 
 test("Theme builder: composite question fontSettings", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -209,11 +209,11 @@ test("Theme builder: composite question fontSettings", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
-  const simulator = testSurveyTab.simulator;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulator = themeSurveyTab.simulator;
   const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
 
   expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
@@ -230,7 +230,7 @@ test("Theme builder: composite question fontSettings", (): any => {
 });
 
 test("Theme builder: composite question elementSettings", (): any => {
-  const creator: CreatorTester = new CreatorTester();
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
       {
@@ -240,11 +240,11 @@ test("Theme builder: composite question elementSettings", (): any => {
       }
     ]
   };
-  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
-  const testSurveyTab = testPlugin.model as TestSurveyTabViewModel;
-  const themeEditor = testSurveyTab.themeEditorSurvey;
-  const simulator = testSurveyTab.simulator;
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulator = themeSurveyTab.simulator;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
   expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();

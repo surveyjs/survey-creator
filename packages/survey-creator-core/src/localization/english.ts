@@ -72,6 +72,7 @@ export var enStrings = {
     newPanelName: "panel",
     newTextItemName: "text",
     testSurvey: "Preview",
+    themeSurvey: "Themes",
     defaultV2Theme: "Default",
     modernTheme: "Modern",
     defaultTheme: "Default (legacy)",
