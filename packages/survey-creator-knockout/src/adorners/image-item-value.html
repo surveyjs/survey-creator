@@ -12,17 +12,17 @@
       <!-- /ko -->
     </div>
 
-    <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator"
+    <sv-svg-icon class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
       data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }"
       params="iconName: 'icon-drag-area-indicator', size: 24">
     </sv-svg-icon>
 
-    <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+    <div class="svc-context-container svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowRemove && !isUploading -->
-      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file"
-        data-bind="click: chooseFile, key2click" params="iconName: 'icon-file', size: 24"></sv-svg-icon>
-      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__remove"
-        data-bind="click: remove, key2click" params="iconName: 'icon-delete', size: 24"></sv-svg-icon>
+      <sv-svg-icon class="svc-context-button" data-bind="click: chooseFile, key2click"
+        params="iconName: 'icon-file', size: 24"></sv-svg-icon>
+      <sv-svg-icon class="svc-context-button svc-context-button--danger" data-bind="click: remove, key2click"
+        params="iconName: 'icon-delete', size: 24"></sv-svg-icon>
       <!-- /ko -->
     </div>
     <!-- /ko -->
@@ -38,7 +38,7 @@
 
     <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowAdd && !isUploading -->
-      <sv-svg-icon class="svc-image-item-value-controls__button svc-image-item-value-controls__add"
+      <sv-svg-icon class="svc-context-button svc-image-item-value-controls__add"
         data-bind="click: chooseNewFile, key2click, clickBubble: false" params="iconName: 'icon-add-lg', size: 24">
       </sv-svg-icon>
       <!-- /ko -->
