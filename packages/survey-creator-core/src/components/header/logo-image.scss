@@ -60,6 +60,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.svc-logo-image-container {
+  cursor: default;
+}
+.svc-logo-image-container:not(.svc-logo-image-container--editable) {
+  .svc-logo-image-controls {
+    display: none;
+  }
+}
 .svc-logo-image-container--editable:focus-within,
 .svc-logo-image-container--editable:hover {
   .svc-logo-image-controls {
