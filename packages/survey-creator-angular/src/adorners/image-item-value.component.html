@@ -3,7 +3,7 @@
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
     <div class="svc-image-item-value-wrapper__content">
-      <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+      <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes" class="svc-choose-file-input" />
 
       <ng-container *ngIf="!adorner.isNew">
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">

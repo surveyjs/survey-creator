@@ -1,32 +1,13 @@
+---
+title: Property Grid Customization | JavaScript Survey Creator
+description: Learn how to hide survey properties from Property Grid, add custom properties to it, and override default property values. Read this guide for SurveyJS Survey Creator.
+---
+
 # Property Grid Customization
 
 Property Grid displays the properties of a selected survey element and allows a user to change the property values. This help topic describes how you can modify the Property Grid contents.
 
 <img src="./images/survey-creator-property-grid.png" alt="Survey Creator - Property Grid" width="100%">
-
-- [Hide Properties from the Property Grid](#hide-properties-from-the-property-grid)
-- [Add Custom Properties to the Property Grid](#add-custom-properties-to-the-property-grid)
-  - [Survey Element Property Settings](#survey-element-property-settings)
-    - [`name`](#name)
-    - [`type`](#type)
-    - [`default`](#default)
-    - [`displayName`](#displayname)
-    - [`choices`](#choices)
-    - [`isRequired`](#isrequired)
-    - [`isSerializable`](#isserializable)
-    - [`isLocalizable`](#islocalizable)
-    - [`visible`](#visible)
-    - [`visibleIf`](#visibleif)
-    - [`visibleIndex`](#visibleindex)
-    - [`readOnly`](#readonly)
-    - [`category`](#category)
-    - [`categoryIndex`](#categoryindex)
-    - [`maxLength`](#maxlength)
-    - [`minValue` and `maxValue`](#minvalue-and-maxvalue)
-    - [`dependsOn`](#dependson)
-    - [`onGetValue`](#ongetvalue)
-    - [`onSetValue`](#onsetvalue)
-    - [`onExecuteExpression`](#onexecuteexpression)
 
 ## Hide Properties from the Property Grid
 
@@ -63,6 +44,19 @@ creator.onShowingProperty.add(function (_, options) {
 <div id="addproperties"></div>
 
 [View Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
+
+## Override Default Property Values
+
+You can specify a different default value for a property in Property Grid. To do this, call `Serializer`'s `getProperty(questionType, propertyName)` method and change the property's `defaultValue` setting:
+
+```js
+// Override the default value of the `isAllRowRequired` property for Single-Select Matrix questions
+Survey.Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+
+// In modular applications:
+import { Serializer } from "survey-core";
+Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+```
 
 ## Add Custom Properties to the Property Grid
 

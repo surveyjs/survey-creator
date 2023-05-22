@@ -2,6 +2,7 @@
 import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
+import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { getLocString } from "../editorLocalization";
 
 require("./question-image.scss");
@@ -48,7 +49,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       });
     });
   }
-
+  public get acceptedTypes(): string {
+    return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
+  }
   imageLinkValueChangedHandler() {
     this.isEmptyImageLink = !this.question.imageLink;
     this.filePresentationModel.value = null;

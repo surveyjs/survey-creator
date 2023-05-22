@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 .svc-string-editor {
-  [contenteditable] {
+  [contenteditable="true"] {
     user-select: text;
     -webkit-user-select: text;
   }

@@ -6,6 +6,7 @@ import { QuestionImageAdornerViewModel } from "../src/components/question-image"
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
+import { imageMimeTypes } from "../src/utils/utils";
 
 beforeEach(() => { });
 
@@ -347,6 +348,26 @@ test("QuestionImageAdornerViewModel read only mode", () => {
   expect(imageAdorner.allowEdit).toBeFalsy();
 });
 
+test("QuestionImageAdornerViewModel acceptedTypes", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+
+  const imageAdorner = new QuestionImageAdornerViewModel(
+    creator,
+    question,
+    <any>{},
+    null
+  );
+  expect(imageAdorner.acceptedTypes).toBe(imageMimeTypes);
+  question.contentMode = "video";
+  expect(imageAdorner.acceptedTypes).toBe("video/*");
+  question.contentMode = "image";
+  expect(imageAdorner.acceptedTypes).toBe(imageMimeTypes);
+});
+
 test("QuestionImageAdornerViewModel pass question into onUploadFile event", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -551,6 +572,27 @@ test("ImageItemValueWrapperViewModel raises onItemValueAdded", () => {
   expect(imageItemAdorner["isChoosingNewFile"]).toBeFalsy();
 });
 
+test("ImageItemValueWrapperViewModel acceptedTypes", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1" }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const imegItem = new ImageItemValue("item1");
+  const imageItemAdorner = new ImageItemValueWrapperViewModel(
+    creator,
+    question,
+    imegItem,
+    undefined,
+    undefined as any
+  );
+  expect(imageItemAdorner.acceptedTypes).toBe(imageMimeTypes);
+  question.contentMode = "video";
+  expect(imageItemAdorner.acceptedTypes).toBe("video/*");
+  question.contentMode = "image";
+  expect(imageItemAdorner.acceptedTypes).toBe(imageMimeTypes);
+});
+
 test("remove() and ", () => {
   const creator = new CreatorTester();
   let allowRemove = false;
@@ -635,4 +677,10 @@ test("LogoImageViewModel isUploading", () => {
   logoImageAdorner.chooseFile(logoImageAdorner);
   expect(logoImageAdorner.isUploading).toBeFalsy();
   expect(uploadCount).toBe(1);
+});
+
+test("LogoImageViewModel isUploading", () => {
+  const creator = new CreatorTester();
+  const logoImageAdorner = new LogoImageViewModel(creator, { getElementsByClassName: () => [{ files: [{}] }] } as any);
+  expect(logoImageAdorner.acceptedTypes).toBe(imageMimeTypes);
 });

@@ -782,10 +782,10 @@ test("Character counter in property grid", async t => {
     await t
       .click(Selector(".svc-question__content"))
       .click(showSidebarButton)
-      .click(Selector("input[aria-label=\"Name\"]"));
+      .click(Selector("[data-name='name']").find("input"));
     await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
 
-    await t.click(Selector("textarea[aria-label=\"Title\"]"));
+    await t.click(Selector("[data-name='title']").find("textarea"));
     await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
   });
 });
@@ -843,7 +843,13 @@ test("Check string editor on isRequired", async (t) => {
     ]
   }, msg);
 
+  const hideCursor = ClientFunction(() => {
+    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+    el.style.color = "transparent";
+  });
+
   const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+  await hideCursor();
   await wrapVisualTest(t, async (t, comparer) => {
     await t
       .click(svStringSelector)
