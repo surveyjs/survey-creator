@@ -782,10 +782,10 @@ test("Character counter in property grid", async t => {
     await t
       .click(Selector(".svc-question__content"))
       .click(showSidebarButton)
-      .click(Selector("input[aria-label=\"Name\"]"));
+      .click(Selector("[data-name='name']").find("input"));
     await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
 
-    await t.click(Selector("textarea[aria-label=\"Title\"]"));
+    await t.click(Selector("[data-name='title']").find("textarea"));
     await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
   });
 });
