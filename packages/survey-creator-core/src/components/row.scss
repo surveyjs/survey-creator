@@ -73,3 +73,18 @@
   width: 100%;
   height: 4px;
 }
+
+.svc-question__content--panel,
+.sd-panel__content {
+  .svc-row--drag-over-top:before {
+    top: -6px;
+
+    &:first-child {}
+  }
+
+  .svc-row--drag-over-bottom:after {
+    bottom: -6px;
+
+    &:last-child {}
+  }
+}

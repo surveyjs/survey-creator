@@ -246,6 +246,23 @@ svc-question {
   height: 4px;
 }
 
+.svc-question__content--panel,
+.sd-panel__content {
+  .sd-row>div:first-child {
+    .svc-question__content--drag-over-left {
+      margin-left: 8px;
+      width: calc(100% - 8px);
+    }
+  }
+
+  .sd-row>div:last-child {
+    .svc-question__content--drag-over-right {
+      margin-right: 8px;
+      width: calc(100% - 8px);
+    }
+  }
+}
+
 .svc-question__content-actions {
   .sv-action-bar {
     box-sizing: border-box;
