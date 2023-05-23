@@ -76,10 +76,6 @@ svc-tab-test {
   }
 }
 
-.svc-test-tab__content.svc-creator-tab__content--with-toolbar .sd-body__navigation {
-  padding-bottom: calcSize(8);
-}
-
 .svc-test-tab__content .sd-body--empty {
   @include centerText;
 }

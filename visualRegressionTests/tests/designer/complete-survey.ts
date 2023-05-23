@@ -87,7 +87,7 @@ test("Check the upper part of the page", async (t) => {
 
 test("Check the lower part of the page", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 1280);
 
     await setJSON(json);
 
