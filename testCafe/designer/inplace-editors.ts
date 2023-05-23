@@ -693,7 +693,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
   await t
     .expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA")
     .expect(controls.count).eql(1)
-    .expect(controls.nth(0).find(".svc-image-question-controls__button").count).eql(1)
+    .expect(controls.nth(0).find(".svc-context-button").count).eql(1)
     .expect(question.find(".sd-image__no-image").exists).notOk();
 
   await ClientFunction(() => {
