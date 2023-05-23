@@ -7,7 +7,7 @@ svc-tab-test {
 }
 
 .svc-test-tab__content .svc-plugin-tab__content {
-  overflow-y: auto;
+  overflow-y: overlay;
 
   .sv-root-modern .sv-completedpage,
   .sv_default_css .sv_completed_page {

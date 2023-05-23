@@ -12,6 +12,7 @@
   top: 50%;
   left: 50%;
   transform: scale(1.26) translate(-50%, -50%);
+  overflow: overlay;
 }
 
 .svd-simulator-wrapper {
@@ -139,9 +140,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  overflow-y: overlay;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
