@@ -599,6 +599,8 @@ test("Ranking question inplace editor", async (t) => {
 
 test("Image picker question inplace editor", async (t) => {
   await explicitErrorHandler();
+  const chooseButtonSelector = ".svc-image-item-value-controls .svc-context-button:not(.svc-context-buttton--danger):not(.svc-image-item-value-controls__add)";
+  const deleteButtonSelector = ".svc-image-item-value-controls .svc-context-button--danger";
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
@@ -607,28 +609,28 @@ test("Image picker question inplace editor", async (t) => {
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(0).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(0).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(0).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(0).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(0).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(0).find("img[alt=\"Image 1\"").exists).ok()
     .expect(imageItems.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(1).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(1).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(1).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(1).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(1).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(1).find("img[alt=\"Image 2\"]").exists).ok()
     .expect(imageItems.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(2).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(2).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(2).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(2).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(2).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(2).find("img[alt=\"Image 3\"]").exists).ok()
     .expect(imageItems.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(3).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(3).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(3).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(3).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(3).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(3).find("img[alt=\"Image 4\"]").exists).ok()
     .expect(imageItems.nth(4).hasClass("svc-image-item-value--new")).ok()
     .expect(imageItems.nth(4).find(".svc-image-item-value-controls__add").visible).ok()
-    .expect(imageItems.nth(4).find(".svc-image-item-value-controls__choose-file").visible).notOk()
-    .expect(imageItems.nth(4).find(".svc-image-item-value-controls__remove").visible).notOk()
+    .expect(imageItems.nth(4).find(chooseButtonSelector).visible).notOk()
+    .expect(imageItems.nth(4).find(deleteButtonSelector).visible).notOk()
     .expect(imageItems.nth(4).find("img").exists).notOk()
 
     .setFilesToUpload(imageItems.nth(4).find(".svc-choose-file-input"), "./image.jpg");
@@ -668,7 +670,7 @@ test("Image question inplace editor", async (t) => {
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
     .expect(getVisibleElement(".svc-question__content--selected").find("img[alt=question1]").exists).ok()
     .expect(controls.count).eql(1)
-    .expect(controls.nth(0).find(".svc-image-question-controls__button").visible).ok();
+    .expect(controls.nth(0).find(".svc-context-button").visible).ok();
 });
 
 test("Image question inplace editor - choose image via inplace editor", async (t) => {
@@ -684,7 +686,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
   let imageLink = await getImageLink();
   await t.expect(imageLink).eql("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
   await t
-    .click(getVisibleElement(".svc-image-question-controls__button"))
+    .click(getVisibleElement(".svc-context-button"))
     .setFilesToUpload(getVisibleElement(".svc-question__content input[type=file"), "./image.jpg");
   imageLink = await getImageLink();
   await t.expect(imageLink.substring(0, 48)).eql("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABA");

@@ -545,6 +545,12 @@ test("Logo image adorners", async (t) => {
     };
     await setJSON(json);
     await takeElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container"));
+    await takeElementScreenshot("logo-image-adorners-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button"));
+    await takeElementScreenshot("logo-image-adorners-choose-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button--danger"));
+    await takeElementScreenshot("logo-image-adorners-clear-hover.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
 

@@ -54,7 +54,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     return (
       <div className="svc-image-question-controls">
         {this.model.allowEdit && !(this.model as QuestionImageAdornerViewModel).isUploading ? attachKey2click(<span
-          className="svc-image-question-controls__button svc-image-question-controls__choose-file"
+          className="svc-context-button"
           onClick={() => this.imageModel.chooseFile(this.imageModel)}
         >
           <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>

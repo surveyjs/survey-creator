@@ -39,53 +39,8 @@
   left: calc(50% - 3 * #{$base-unit});
 }
 
-.svc-image-item-value-controls {
-  display: flex;
-}
-
-.svc-image-item-value-controls__button {
-  display: block;
-  background-color: $background;
-  border-radius: 50%;
-  width: calcSize(6);
-  height: calcSize(6);
-  cursor: pointer;
-
-  &:not(:last-child) {
-    margin-right: calcSize(1);
-  }
-
-  .sv-svg-icon {
-    margin-top: calc(50% - 1.5 * #{$base-unit});
-    margin-left: calc(50% - 1.5 * #{$base-unit});
-  }
-
-  use {
-    fill: $foreground-light;
-  }
-  outline: none;
-}
-
 .svc-image-item-value--new .svc-image-item-value-controls__button {
   background-color: transparent;
-}
-
-.svc-image-item-value-controls__choose-file {
-  // background-color: $primary-light;
-  &:hover, &:focus {
-    use {
-      fill: $primary;
-    }
-  }
-}
-
-.svc-image-item-value-controls__remove {
-  // background-color: $red-light;
-  &:hover, &:focus {
-    use {
-      fill: $red;
-    }
-  }
 }
 
 .svc-image-item-value-controls__add {
@@ -95,7 +50,8 @@
 }
 
 .svc-image-item-value-controls__add {
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: $primary-light;
   }
 }
@@ -113,18 +69,18 @@
   }
 }
 
-.svc-question__content--selected .svc-image-item-value-wrapper:hover {
-  .svc-image-item-value-controls__drag-area-indicator {
-    display: block;
-  }
-}
-
 .svc-image-item-value-controls__drag-area-indicator {
+  display: none;
   cursor: move;
   position: absolute;
   top: calcSize(1);
   left: calcSize(1);
-  display: none;
+}
+
+.svc-question__content--selected .svc-image-item-value-wrapper:hover {
+  .svc-image-item-value-controls__drag-area-indicator {
+    display: block;
+  }
 }
 
 .svc-image-item-value-wrapper--ghost {
@@ -144,6 +100,6 @@
 .svc-image-item-value--single {
   width: 100%;
   .sd-imagepicker__image {
-    height: calcSize(30);  
+    height: calcSize(30);
   }
 }
