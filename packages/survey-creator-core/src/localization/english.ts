@@ -777,7 +777,12 @@ export var enStrings = {
     autoGenerate: {
       "true": "Generate",
       "false": "Enter manually"
-    }
+    },
+    rateType: {
+      labels: "Labels",
+      stars: "Stars",
+      smileys: "Smileys"
+    },
   },
   // Operators
   op: {
