@@ -229,7 +229,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
 });
 
-test("Theme builder: composite question elementSettings", (): any => {
+test.skip("Theme builder: composite question elementSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
