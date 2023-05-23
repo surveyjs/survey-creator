@@ -1,8 +1,8 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
-import { getAcceptedTypesByContentMode, getNextItemText, getNextValue } from "../utils/utils";
+import { getAcceptedTypesByContentMode, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -595,10 +595,11 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     super.onCreated(obj, question, prop);
     const matrixQuestion = <QuestionMatrixDynamicModel>question;
-    this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>((obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : obj));
+    const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
+    this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
       if (options.name == "rateCount" || options.name == "rateDisplayMode") {
-        this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+        this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
   }

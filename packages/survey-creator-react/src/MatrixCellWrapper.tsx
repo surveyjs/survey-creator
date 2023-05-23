@@ -27,7 +27,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
       data.element,
       data.question,
       data.row,
-      data.column,
+      data.column || data.element.cell?.column,
     );
   }
   protected getUpdatedModelProps(): string[] {
@@ -38,7 +38,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     const data = this.props.componentData;
     this.model.templateData = data.element;
     this.model.row = data.row;
-    this.model.column = data.column;
+    this.model.column = data.column || data.element?.cell?.column;
     this.model.question = data.question;
   }
   protected getStateElement(): Base {
@@ -49,7 +49,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
     let controls = null;
     if (!!this.model.isSupportCellEditor) {
       controls = <div className="svc-matrix-cell__question-controls">
-        {attachKey2click(<span className="svc-matrix-cell__question-controls-button" onClick={() => this.model.editQuestion(this.model)}>
+        {attachKey2click(<span className="svc-matrix-cell__question-controls-button" onClick={(event: any) => this.model.editQuestion(this.model, event)}>
           <SvgIcon size={24} iconName={"icon-edit"}></SvgIcon>
         </span>)}
       </div>;

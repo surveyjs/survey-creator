@@ -24,16 +24,11 @@ svc-tab-designer {
 }
 
 .svc-tab-designer {
-
   .svc-tab-designer_content {
     width: 100%;
   }
 
   .sd-container-modern {
-    .sd-container-modern__title {
-      gap: 0;
-    }
-
     min-width: calcSize(70);
     width: 100%;
     box-sizing: border-box;

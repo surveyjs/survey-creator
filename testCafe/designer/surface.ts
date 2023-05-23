@@ -104,7 +104,7 @@ test("Check imagepicker add/delete items style", async (t) => {
   });
 
   await t
-    .click(".svc-tab-designer .svc-image-item-value-controls__remove")
+    .click(".svc-tab-designer .svc-context-button--danger")
     .expect(Selector(".svc-tab-designer .svc-image-item-value--new").visible).ok()
     .setFilesToUpload(getVisibleElement(".svc-image-item-value-wrapper").nth(1).find(".svc-choose-file-input"), "./image.jpg")
     .click(".svc-image-item-value-controls__add");

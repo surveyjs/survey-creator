@@ -1,5 +1,5 @@
 import React from "react";
-import { Base, SurveyModel } from "survey-core";
+import { Base } from "survey-core";
 import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
 import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
@@ -28,19 +28,51 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     super.componentDidMount();
     this.model.root = this.rootRef.current;
   }
+  renderChooseButton() {
+    return attachKey2click(<span
+      className="svc-context-button"
+      onClick={() => this.model.chooseFile(this.model)}
+    >
+      <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+    </span>);
+  }
+  renderClearButton() {
+    return attachKey2click(<span
+      className="svc-context-button svc-context-button--danger"
+      onClick={() => this.model.remove(this.model)}
+    >
+      <SvgIcon size={24} iconName={"icon-clear"}></SvgIcon>
+    </span>);
+  }
+  renderButtons() {
+    return (<div className="svc-context-container svc-logo-image-controls">
+      {this.renderChooseButton()}
+      {this.renderClearButton()}
+    </div>);
+  }
+  renderImage() {
+    return <div className={ this.model.containerCss }>
+      {this.renderButtons()}
+      <LogoImage data={this.props.data.survey}></LogoImage>
+    </div>;
+  }
+  renderPlaceHolder() {
+    return this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;
+  }
+  renderInput() {
+    return <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />;
+  }
   render(): JSX.Element {
     let content: JSX.Element = null;
     if (this.model.survey.locLogo.renderedHtml) {
-      content = attachKey2click(<div className={ this.model.containerCss } onClick={() => this.model.chooseFile(this.model)}>
-        <LogoImage data={this.props.data.survey}></LogoImage>
-      </div>);
+      content = this.renderImage();
     }
     else {
-      content = this.model.allowEdit && !this.model.isUploading ? attachKey2click(<div className="svc-logo-image-placeholder" onClick={() => this.model.chooseFile(this.model)}><svg><use xlinkHref="#icon-logo"></use></svg></div>) : null;
+      content = this.renderPlaceHolder();
     }
     return (
       <div ref={this.rootRef} className="svc-logo-image">
-        <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />
+        {this.renderInput()}
         {content}
       </div>
     );
