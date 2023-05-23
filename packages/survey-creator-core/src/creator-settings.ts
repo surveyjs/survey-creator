@@ -127,7 +127,6 @@ export var settings = {
         ]
       },
       image: {
-        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
         imageFit: "cover",
         imageHeight: "auto",
         imageWidth: "100%"
