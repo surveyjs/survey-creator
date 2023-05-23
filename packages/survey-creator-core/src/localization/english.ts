@@ -275,7 +275,7 @@ export var enStrings = {
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
-    propertyNameIsIncorrect: "Do not use reserved words: 'item', 'choice', 'panel', 'row.",
+    propertyNameIsIncorrect: "Do not use reserved words: 'item', 'choice', 'panel', 'row'.",
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "No choices have been added yet",
     "addNew@choices": "Add a choice",
