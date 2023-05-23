@@ -229,6 +229,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return true;
   }
 
+  protected doBanDropHere = () => {
+    this.removeDragOverMarker(this.dragOverIndicatorElement);
+    this.removeDragOverMarker(this.dropTarget);
+  }
+
   // protected calculateIsBottom(clientY: number, dropTargetNode?: HTMLElement): boolean {
   //   return false;
   // }
@@ -297,6 +302,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   }
 
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum, isEdge: boolean = false, isSide: boolean = false): void {
+    this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.removeDragOverMarker(this.dropTarget);
     if(dropTarget === this.draggedElement) {
       this.allowDropHere = false;

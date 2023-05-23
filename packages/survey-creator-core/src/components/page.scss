@@ -6,6 +6,7 @@ svc-page {
 
 .svc-page {
   margin-top: calcSize(2);
+
   .sd-page__title {
     margin: calcSize(2.5) 0 0 0;
   }
@@ -17,6 +18,7 @@ svc-page {
   box-sizing: border-box;
   width: 100%;
   outline: none;
+
   .sd-page {
     margin: 0;
     padding: calcSize(1) calcSize(3) calcSize(2);
@@ -41,9 +43,11 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
   border-radius: calcSize(0.5);
+
   &.svc-page__content--selected {
     box-shadow: 0 0 0 2px $secondary inset;
     background: $secondary-back-light;
+
     .svc-page__content-actions {
       display: block;
     }
@@ -71,13 +75,26 @@ svc-page {
   cursor: pointer;
   margin-inline-end: calcSize(1); // margin-right
   outline: none;
+
   use {
     fill: $foreground-light;
   }
+
   &:hover {
     background-color: $background-dim;
   }
+
   &:focus {
     background-color: $primary-background-light;
   }
+}
+
+.svc-page--drag-over-empty:after {
+  content: " ";
+  position: absolute;
+  background: $secondary;
+  left: calcSize(3);
+  bottom: calcSize(11);
+  width: calc(100% - 48px);
+  height: 4px;
 }

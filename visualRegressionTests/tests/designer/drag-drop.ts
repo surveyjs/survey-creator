@@ -27,7 +27,7 @@ test("Ghost Survey Element", async (t) => {
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
 
-    await takeElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".sv-drag-drop-ghost"), t, comparer);
+    await takeElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".svc-page--drag-over-empty"), t, comparer);
   });
 });
 
