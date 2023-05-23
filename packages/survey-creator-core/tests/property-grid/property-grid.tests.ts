@@ -1089,6 +1089,10 @@ test("check editor for rating in matrix Rating", () => {
   const propertyEditor = new PropertyGridEditorMatrixRateValues();
   expect(itemsQuestion.allowAddRows).toEqual(true);
   expect(itemsQuestion.allowRemoveRows).toEqual(false);
+
+  question.columns[0].rateCount++;
+  expect(itemsQuestion.allowAddRows).toEqual(true);
+  expect(itemsQuestion.allowRemoveRows).toEqual(true);
 });
 
 test("check Rate values panel in matrix Rating equals to regular Rating", () => {
