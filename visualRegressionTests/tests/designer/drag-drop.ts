@@ -17,6 +17,8 @@ test("Ghost Survey Element", async (t) => {
 
     const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
       window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
     });
 
     await patchDragDropToShowGhostElementAfterDrop();
@@ -153,6 +155,7 @@ test("Matrix: Property Grid: Choices", async (t) => {
     const patchMatrixDragDropToDisableDrop = ClientFunction(() => {
       const matrix = window["creator"].designerPropertyGrid.survey.getAllQuestions().filter((q) => q.name === "choices")[0];
       matrix.dragDropMatrixRows.drop = () => { };
+      matrix.dragDropMatrixRows.domAdapter.drop = () => { };
     });
 
     const json = {
