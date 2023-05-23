@@ -62,6 +62,7 @@ require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
 import { StringEditorConnector } from "./components/string-editor";
+import { TabThemePlugin } from "./components/tabs/theme-plugin";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -157,6 +158,12 @@ export class CreatorBase extends Base
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
+  /**
+   * Specifies whether to display the Theme tab.
+   *
+   * Default value: `false`
+   */
+  @property({ defaultValue: false }) showThemeTab: boolean;
   /**
    * Specifies whether to display the Embed Survey tab.
    *
@@ -1458,6 +1465,9 @@ export class CreatorBase extends Base
     }
     if (this.showPreviewTab) {
       new TabTestPlugin(this);
+    }
+    if (this.showThemeTab) {
+      new TabThemePlugin(this);
     }
     if (this.showLogicTab) {
       new TabLogicPlugin(this);

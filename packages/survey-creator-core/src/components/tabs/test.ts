@@ -1,24 +1,10 @@
 import { SurveySimulatorModel } from "../simulator";
 
 require("./test.scss");
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { setSurveyJSONForPropertyGrid } from "../../property-grid";
-import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { notShortCircuitAnd } from "../../utils/utils";
-
-// import template from "./test.html";
-
-// export * from "@survey/creator/components/toolbar";
-// export * from "@survey/creator/components/simulator";
-// export * from "@survey/creator/components/results";
-// export * from "@survey/creator/utils/dropdown";
-// export * from "@survey/creator/utils/boolean";
-// export * from "@survey/creator/utils/svg-icon";
-// export * from "@survey/creator/utils/survey-widget";
-// export { SurveySimulatorModel as SurveySimulatorComponentV1 } from "@survey/creator/components/simulator";
-// export { SurveyResultsModel as SurveyResultsModelV1 } from "@survey/creator/components/results";
 
 export class TestSurveyTabViewModel extends Base {
   private json: any;
