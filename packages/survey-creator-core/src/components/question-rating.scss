@@ -21,6 +21,11 @@
     margin-inline-start: calcSize(9); // margin-left
     width: calc(100% - 9 * #{$base-unit});
   }
+    .sd-question--table .sd-rating {
+      margin-inline-start: 0;
+      width: fit-content;
+      margin: auto;
+    }
   .svc-rating-question-controls {
     display: flex;
     width: calcSize(8);

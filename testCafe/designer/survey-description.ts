@@ -20,5 +20,5 @@ test("Edit survey description", async (t) => {
     .click(Selector(`span[aria-placeholder='${placeholder}']`))
     .pressKey(description.split("").join(" "))
     .pressKey("enter")
-    .expect(Selector("textarea[aria-label=Description]").value).eql(description, "Survey description in property grid is updated");
+    .expect(Selector("[data-name='description']").find("textarea").value).eql(description, "Survey description in property grid is updated");
 });

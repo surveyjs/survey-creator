@@ -7,11 +7,12 @@ import {
   settings,
   ItemValue,
   Base,
-  CssClassBuilder
+  CssClassBuilder,
+  MatrixDropdownColumn
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { getLocString } from "../editorLocalization";
-import { getNextValue } from "../utils/utils";
+import { getNextValue, getQuestionFromObj } from "../utils/utils";
 
 require("./question-rating.scss");
 
@@ -25,7 +26,7 @@ export class QuestionRatingAdornerViewModel extends Base {
   }
 
   get element(): QuestionRatingModel {
-    return this.surveyElement as QuestionRatingModel;
+    return getQuestionFromObj(this.surveyElement) as QuestionRatingModel;
   }
 
   static useRateValues(element: any): boolean {

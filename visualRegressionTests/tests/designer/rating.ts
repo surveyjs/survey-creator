@@ -129,3 +129,49 @@ test("Rating editing", async (t) => {
     await takeElementScreenshot("rating-editing.png", question, t, comparer);
   });
 });
+
+test("Rating in matrix", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "question1",
+              "columns": [
+                {
+                  "name": "Column 1",
+                  "cellType": "rating",
+                  "rateType": "stars"
+                },
+                {
+                  "name": "Column 2"
+                }
+              ],
+              "choices": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "cellType": "rating",
+              "rows": [
+                "Row 1",
+                "Row 2"
+              ]
+            }
+          ]
+        }
+      ],
+      "widthMode": "static",
+      "width": "900"
+    });
+    await t.resizeWindow(1900, 900);
+    const question = Selector("div[data-name=question1]");
+    await takeElementScreenshot("rating-in-matrix.png", question, t, comparer);
+  });
+});

@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, objectSelectorButton, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -599,6 +599,8 @@ test("Ranking question inplace editor", async (t) => {
 
 test("Image picker question inplace editor", async (t) => {
   await explicitErrorHandler();
+  const chooseButtonSelector = ".svc-image-item-value-controls .svc-context-button:not(.svc-context-buttton--danger):not(.svc-image-item-value-controls__add)";
+  const deleteButtonSelector = ".svc-image-item-value-controls .svc-context-button--danger";
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()
     .hover(getToolboxItemByText("Image Picker"), { speed: 0.5 })
@@ -607,28 +609,28 @@ test("Image picker question inplace editor", async (t) => {
     .expect(imageItems.count).eql(5)
     .expect(imageItems.nth(0).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(0).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(0).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(0).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(0).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(0).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(0).find("img[alt=\"Image 1\"").exists).ok()
     .expect(imageItems.nth(1).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(1).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(1).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(1).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(1).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(1).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(1).find("img[alt=\"Image 2\"]").exists).ok()
     .expect(imageItems.nth(2).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(2).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(2).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(2).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(2).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(2).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(2).find("img[alt=\"Image 3\"]").exists).ok()
     .expect(imageItems.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(imageItems.nth(3).find(".svc-image-item-value-controls__add").visible).notOk()
-    .expect(imageItems.nth(3).find(".svc-image-item-value-controls__choose-file").visible).ok()
-    .expect(imageItems.nth(3).find(".svc-image-item-value-controls__remove").visible).ok()
+    .expect(imageItems.nth(3).find(chooseButtonSelector).visible).ok()
+    .expect(imageItems.nth(3).find(deleteButtonSelector).visible).ok()
     .expect(imageItems.nth(3).find("img[alt=\"Image 4\"]").exists).ok()
     .expect(imageItems.nth(4).hasClass("svc-image-item-value--new")).ok()
     .expect(imageItems.nth(4).find(".svc-image-item-value-controls__add").visible).ok()
-    .expect(imageItems.nth(4).find(".svc-image-item-value-controls__choose-file").visible).notOk()
-    .expect(imageItems.nth(4).find(".svc-image-item-value-controls__remove").visible).notOk()
+    .expect(imageItems.nth(4).find(chooseButtonSelector).visible).notOk()
+    .expect(imageItems.nth(4).find(deleteButtonSelector).visible).notOk()
     .expect(imageItems.nth(4).find("img").exists).notOk()
 
     .setFilesToUpload(imageItems.nth(4).find(".svc-choose-file-input"), "./image.jpg");
@@ -703,7 +705,7 @@ test("Image question inplace editor - choose image via inplace editor", async (t
     .expect(question.find(".sd-image__no-image").visible).ok();
 
   await t
-    .click(getVisibleElement(".svc-image-question-controls__button"))
+    .click(getVisibleElement(".svc-context-button"))
     .setFilesToUpload(question.find("input[type=file]"), "./image.jpg")
     .expect(question.find("img").exists).ok();
 
@@ -732,7 +734,8 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
     .expect(Selector(".sv-popup__content .sd-page__title").exists).notOk()
 
     .click(Selector(".sv-popup__button--cancel"))
-    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk();
+    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk()
+    .expect(objectSelectorButton.withText("Column 1").visible).ok();
 });
 
 test("Rating question inplace editor", async (t) => {
@@ -758,10 +761,10 @@ test("Matrix dropdown question inplace row header editor #2553", async (t) => {
     // .click(Selector("button[title='ShowPanel']"))
     .click(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"))
     .typeText(Selector(".sd-table__row .svc-matrix-cell .sv-string-editor"), "Row header")
-    .click(Selector("h4.spg-title[aria-label='Layout']"))
-    .click(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']"))
+    .click(Selector("h4.spg-title"))
+    .click(Selector("input.spg-input"))
     .pressKey("ctrl+a delete 3 0 0 p x")
-    .expect(Selector("input.spg-input[aria-label='Row header width (in CSS-accepted values)']").value).eql("300px");
+    .expect(Selector("input.spg-input").value).eql("300px");
 });
 
 test("Checkbox question inplace editor", async (t) => {

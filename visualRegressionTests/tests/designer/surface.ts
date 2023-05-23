@@ -545,6 +545,12 @@ test("Logo image adorners", async (t) => {
     };
     await setJSON(json);
     await takeElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container"));
+    await takeElementScreenshot("logo-image-adorners-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button"));
+    await takeElementScreenshot("logo-image-adorners-choose-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button--danger"));
+    await takeElementScreenshot("logo-image-adorners-clear-hover.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
 
@@ -782,10 +788,10 @@ test("Character counter in property grid", async t => {
     await t
       .click(Selector(".svc-question__content"))
       .click(showSidebarButton)
-      .click(Selector("input[aria-label=\"Name\"]"));
+      .click(Selector("[data-name='name']").find("input"));
     await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
 
-    await t.click(Selector("textarea[aria-label=\"Title\"]"));
+    await t.click(Selector("[data-name='title']").find("textarea"));
     await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
   });
 });
