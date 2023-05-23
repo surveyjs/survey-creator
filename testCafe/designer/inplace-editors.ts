@@ -1,4 +1,4 @@
-import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, setJSON, url } from "../helper";
+import { addQuestionByAddQuestionButton, explicitErrorHandler, getToolboxItemByText, getVisibleElement, objectSelectorButton, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Inplace editors";
 
@@ -713,7 +713,8 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
     .expect(Selector(".sv-popup__content .sd-page__title").exists).notOk()
 
     .click(Selector(".sv-popup__button--cancel"))
-    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk();
+    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk()
+    .expect(objectSelectorButton.withText("Column 1").visible).ok();
 });
 
 test("Rating question inplace editor", async (t) => {
