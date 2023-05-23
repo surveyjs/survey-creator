@@ -1,4 +1,4 @@
-import { defaultV2Css, ItemValue, Serializer } from "survey-core";
+import { defaultV2Css, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
@@ -302,4 +302,22 @@ export function capitalize(str: string): string {
 }
 export function notShortCircuitAnd(...args: Array<boolean>): boolean {
   return args.every((val) => val === true);
+}
+
+export const imageMimeTypes = "image/png, image/gif, image/jpeg, image/apng, image/avif, image/svg+xml, image/webp";
+
+export function getAcceptedTypesByContentMode(contentMode: string) {
+  if(["auto", "image"].indexOf(contentMode) > -1) {
+    return imageMimeTypes;
+  }
+  else if (contentMode == "video") {
+    return "video/*";
+  }
+  else {
+    return "";
+  }
+}
+
+export function getQuestionFromObj(obj: SurveyElement): Question {
+  return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
 }

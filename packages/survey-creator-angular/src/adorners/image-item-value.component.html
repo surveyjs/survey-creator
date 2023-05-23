@@ -3,21 +3,21 @@
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
     <div class="svc-image-item-value-wrapper__content">
-      <input type="file" aria-hidden="true" tabindex="-1" accept="image/*" class="svc-choose-file-input" />
+      <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes" class="svc-choose-file-input" />
 
       <ng-container *ngIf="!adorner.isNew">
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
           <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
         </div>
-        <span class="svc-image-item-value-controls__button svc-image-item-value-controls__drag-area-indicator" (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
+        <span class="svc-context-button svc-image-item-value-controls__drag-area-indicator" (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
           <svg [iconName]="'icon-drag-area-indicator'" [size]="24" sv-ng-svg-icon></svg>
         </span>
-        <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
+        <div class="svc-context-container svc-image-item-value-controls">
           <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
-            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__choose-file" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+            <span class="svc-context-button" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
               <svg [iconName]="'icon-file'" [size]="24" sv-ng-svg-icon></svg>
             </span>
-            <span class="svc-image-item-value-controls__button svc-image-item-value-controls__remove" (click)="adorner.remove(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
+            <span class="svc-context-button svc-context-button--danger" (click)="adorner.remove(adorner)" [key2click] [attr.title]="undefined" [attr.aria-label]="undefined">
               <svg [iconName]="'icon-delete'" [size]="24" sv-ng-svg-icon></svg>
             </span>
           </ng-container>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-          <span class="svc-image-item-value-controls__button svc-image-item-value-controls__add" [key2click] (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
+          <span class="svc-context-button svc-image-item-value-controls__add" [key2click] (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
             <svg *ngIf="adorner.allowAdd && !adorner.isUploading" [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon></svg>
           </span>
         </div>

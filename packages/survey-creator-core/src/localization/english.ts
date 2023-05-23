@@ -143,6 +143,8 @@ export var enStrings = {
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
+    imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
+    imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "auto",
@@ -273,6 +275,7 @@ export var enStrings = {
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
+    propertyNameIsIncorrect: "Do not use reserved words: 'item', 'choice', 'panel', 'row.",
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "No choices have been added yet",
     "addNew@choices": "Add a choice",
@@ -654,6 +657,7 @@ export var enStrings = {
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
+    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
@@ -774,7 +778,12 @@ export var enStrings = {
     autoGenerate: {
       "true": "Generate",
       "false": "Enter manually"
-    }
+    },
+    rateType: {
+      labels: "Labels",
+      stars: "Stars",
+      smileys: "Smileys"
+    },
   },
   // Operators
   op: {

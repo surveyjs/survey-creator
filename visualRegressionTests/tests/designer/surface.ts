@@ -545,6 +545,12 @@ test("Logo image adorners", async (t) => {
     };
     await setJSON(json);
     await takeElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container"));
+    await takeElementScreenshot("logo-image-adorners-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button"));
+    await takeElementScreenshot("logo-image-adorners-choose-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button--danger"));
+    await takeElementScreenshot("logo-image-adorners-clear-hover.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
 
@@ -782,10 +788,10 @@ test("Character counter in property grid", async t => {
     await t
       .click(Selector(".svc-question__content"))
       .click(showSidebarButton)
-      .click(Selector("input[aria-label=\"Name\"]"));
+      .click(Selector("[data-name='name']").find("input"));
     await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
 
-    await t.click(Selector("textarea[aria-label=\"Title\"]"));
+    await t.click(Selector("[data-name='title']").find("textarea"));
     await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
   });
 });
@@ -843,7 +849,13 @@ test("Check string editor on isRequired", async (t) => {
     ]
   }, msg);
 
+  const hideCursor = ClientFunction(() => {
+    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+    el.style.color = "transparent";
+  });
+
   const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+  await hideCursor();
   await wrapVisualTest(t, async (t, comparer) => {
     await t
       .click(svStringSelector)
@@ -963,5 +975,36 @@ test("Question add type selector button", async (t) => {
     await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-page__add-new-question"), t, comparer);
     await t.hover(Selector(".svc-page__question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
+  });
+});
+
+test("String editor whitespaces and linedreaks", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => {
+        if (options.element.name == "q1") options.html = options.text;
+      });
+    });
+  })();
+
+  await t.resizeWindow(1400, 900);
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "a\nb\nc"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "a\nb\nc"
+      }
+    ]
+  });
+  await wrapVisualTest(t, async (t, comparer) => {
+    await takeElementScreenshot("string-editor-linebreaks-html.png", Selector(".svc-question__content").nth(0), t, comparer);
+    await takeElementScreenshot("string-editor-linebreaks-plain.png", Selector(".svc-question__content").nth(1), t, comparer);
   });
 });

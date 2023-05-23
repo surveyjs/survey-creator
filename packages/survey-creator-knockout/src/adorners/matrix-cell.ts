@@ -19,6 +19,7 @@ ko.components.register("svc-matrix-cell", {
       const question = params.componentData.question;
       const row = params.componentData.row;
       const column = params.componentData.column;
+      const element = params.componentData.element;
 
       params.templateData["nodes"] = componentInfo.templateNodes;
 
@@ -27,7 +28,7 @@ ko.components.register("svc-matrix-cell", {
         params.templateData,
         question,
         row,
-        column
+        column || element.cell?.column
       );
       new ImplementorBase(model);
       return model;

@@ -1,6 +1,9 @@
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
+//should be loaded before other styles for easier override 
+require("../utils/context-button.scss");
+
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";

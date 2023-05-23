@@ -424,11 +424,18 @@ export class SurveyQuestionEditorDefinition {
     "matrixdropdowncolumn@rating": {
       properties: [
         "rateValues",
+        { name: "rateType", tab: "rateValues" },
+        { name: "rateCount", tab: "rateValues" },
+        { name: "rateColorMode", tab: "rateValues" },
+        { name: "scaleColorMode", tab: "rateValues" },
+        { name: "autoGenerate", tab: "rateValues" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
-        { name: "maxRateDescription", tab: "rateValues" }
+        { name: "maxRateDescription", tab: "rateValues" },
+        { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
+
       ],
       tabs: [{ name: "rateValues", index: 5 }]
     },

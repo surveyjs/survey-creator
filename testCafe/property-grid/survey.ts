@@ -91,3 +91,37 @@ test("Check showInMultiple columns editing", async (t) => {
     .click(controlButton)
     .expect(Selector(".sv-popup__container .sd-selectbase__item .sd-item__control-label .svc-string-editor .sv-string-editor").filterVisible().textContent).eql("1");
 });
+
+test("Merge undo/redo transcactioins for text", async (t) => {
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  const question = Selector("[data-name=\"q1\"]");
+  const titleEditor = Selector("[data-name='title']").find("textarea");
+  const undoAction = Selector("button[title=Undo]");
+  const getQuestionTitle = ClientFunction(() => {
+    return window["creator"].survey.getQuestionByName("q1").title;
+  });
+  await setJSON(json);
+  await t
+    .click(question)
+    .click(titleEditor)
+    .typeText(titleEditor, "1")
+    .typeText(titleEditor, "-234")
+    .expect(getQuestionTitle()).eql("title1-234")
+    .click(undoAction)
+    .expect(getQuestionTitle()).eql("title")
+    .click(titleEditor)
+    .typeText(titleEditor, "2")
+    .wait(1100)
+    .typeText(titleEditor, "-345")
+    .expect(getQuestionTitle()).eql("title2-345")
+    .click(undoAction)
+    .expect(getQuestionTitle()).eql("title2");
+});
