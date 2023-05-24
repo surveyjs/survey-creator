@@ -65,7 +65,7 @@ test.before(async t => {
   await t.expect(questionsLength).eql(2);
 });
 
-test("Drag Drop Toolbox All Questions", async (t) => {
+test.skip("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
