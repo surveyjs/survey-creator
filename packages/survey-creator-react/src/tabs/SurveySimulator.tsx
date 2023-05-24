@@ -15,11 +15,12 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
   renderElement(): JSX.Element {
     const mainSimulatorClass = this.model.getRootCss();
     if (!this.model.survey) {
-      return <div className={mainSimulatorClass}></div>;
+      return <div className={mainSimulatorClass} style={this.model.themeVariables}></div>;
     }
     if (this.model.hasFrame) {
       return (
         <div
+          style={this.model.themeVariables}
           className={mainSimulatorClass}
           onKeyDown={e => this.model.tryToZoom(e, e)}
           onMouseEnter={this.model.device === "desktop" ? null : this.model.activateZoom}
@@ -67,6 +68,7 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
     } else {
       return (
         <div
+          style={this.model.themeVariables}
           className={mainSimulatorClass}>
           <div className="svd-simulator-content">
             <Survey model={this.model.survey}></Survey>
