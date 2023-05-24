@@ -17,7 +17,6 @@ import {
   createDropdownActionModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
-import { DragDropSurveyElements } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
@@ -30,6 +29,7 @@ import { SurveyElementAdornerBase } from "./action-container-view-model";
 require("./question.scss");
 import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
+import { DragDropSurveyElements } from "../survey-elements";
 
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
@@ -63,12 +63,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     this.checkActionProperties();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragSurveyElement);
-    this.dragTypeOverMe = <any>new ComputedUpdater(() => {
-      let element = this.surveyElement.getType() === "paneldynamic" ?
-        (<any>this.surveyElement).template :
-        this.surveyElement;
-      return element.dragTypeOverMe;
-    });
     StringItemsNavigatorBase.setQuestion(this);
   }
 
@@ -115,16 +109,28 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--drag-over-inside", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft || this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
       result += " svc-question__content--drag-over-left";
     } else {
       result = result.replace(" svc-question__content--drag-over-left", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight || this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
       result += " svc-question__content--drag-over-right";
     } else {
       result = result.replace(" svc-question__content--drag-over-right", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      result += " svc-question__content--drag-over-top";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-top", "");
+    }
+
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      result += " svc-question__content--drag-over-bottom";
+    } else {
+      result = result.replace(" svc-question__content--drag-over-bottom", "");
     }
 
     return result;
@@ -134,7 +140,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.surveyElement.isDragMe;
   }
 
-  @property() dragTypeOverMe: DragTypeOverMeEnum;
+  get dragTypeOverMe() {
+    return this.element.dragTypeOverMe;
+  }
 
   dispose() {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
