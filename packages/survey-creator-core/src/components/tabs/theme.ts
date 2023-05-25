@@ -490,7 +490,7 @@ export class ThemeSurveyTabViewModel extends Base {
           changes[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
         });
       }
-      const newTheme = Object.assign({}, this.simulator.themeVariables, changes);
+      const newTheme = assign({}, this.simulator.themeVariables, changes);
       this.simulator.themeVariables = newTheme;
     });
     themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
@@ -911,4 +911,17 @@ function ingectAlpha(baseColor: any, alpha: number): any {
   const b = parseInt(baseColor.slice(5, 7), 16);
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function assign(...objects: Array<any>) {
+  if(objects.length <= 1) {
+    return;
+  }
+  if(objects.length == 2) {
+    Object.keys(objects[1]).forEach(key => objects[0][key] = objects[1][key]);
+    return;
+  }
+  for(let i = 1; i< objects.length; i++) {
+    assign(objects[0], objects[i]);
+  }
 }
