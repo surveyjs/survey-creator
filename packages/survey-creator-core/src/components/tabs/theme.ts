@@ -477,20 +477,21 @@ export class ThemeSurveyTabViewModel extends Base {
         this.survey["isCompact"] = options.value === "lightweight";
         return;
       }
-      const _data = sender.data;
+      const changes = {};
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           const innerQ = options.question.contentPanel.getQuestionByName(key);
-          _data[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
+          changes[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
         });
       }
       if (options.question?.getType() === "elementsettings") {
         Object.keys(options.value).forEach(key => {
           if (key === "corner") return;
-          _data[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
+          changes[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
         });
       }
-      this.simulator.themeVariables = _data;
+      const newTheme = Object.assign({}, this.simulator.themeVariables, changes);
+      this.simulator.themeVariables = newTheme;
     });
     themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {

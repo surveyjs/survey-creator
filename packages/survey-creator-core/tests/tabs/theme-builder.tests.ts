@@ -229,6 +229,57 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
 });
 
+test("Theme builder: composite question values are lost", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulator = themeSurveyTab.simulator;
+  const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
+  const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
+
+  expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+
+  surveyTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#161616", size: 32 };
+
+  expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-color"]).toEqual("#161616");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(simulator.themeVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(simulator.themeVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+
+  pageTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#101010", size: 28 };
+
+  expect(simulator.themeVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-color"]).toEqual("#161616");
+  expect(simulator.themeVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(simulator.themeVariables["--sjs-font-pagetitle-family"]).toEqual("Open Sans");
+  expect(simulator.themeVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
+  expect(simulator.themeVariables["--sjs-font-pagetitle-color"]).toEqual("#101010");
+  expect(simulator.themeVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
+});
+
 test.skip("Theme builder: composite question elementSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
