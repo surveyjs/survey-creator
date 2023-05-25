@@ -689,7 +689,7 @@ export class Translation extends Base implements ITranslationLocales {
     this.updateReadOnly();
   }
   private createStringsSurvey(): SurveyModel {
-    var json = { autoGrowComment: true };
+    var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
     var survey: SurveyModel = this.options.createSurvey(json, "translation_strings");
     survey.lazyRendering = true;
