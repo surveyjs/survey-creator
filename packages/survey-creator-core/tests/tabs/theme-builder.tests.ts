@@ -3,6 +3,7 @@ import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+import { parseColor, createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 
@@ -270,12 +271,11 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
     x: 1,
     y: 2,
     spread: 24,
-    opacity: 100,
     isInset: false,
     color: "#673241"
   }]);
   let createdBoxShadow = createBoxShadow(parsedBoxShadow);
-  expect(createdBoxShadow).toBe("1px 2px 3px 24px rgba(103, 50, 65, 1)");
+  expect(createdBoxShadow).toBe("1px 2px 3px 24px #673241");
   boxShadow = "2px 3px 4px 6px rgba(103, 50, 65, 0.75)";
   parsedBoxShadow = parseBoxShadow(boxShadow);
   expect(parsedBoxShadow).toEqual([{
@@ -283,9 +283,8 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
     x: 2,
     y: 3,
     spread: 6,
-    opacity: 75,
     isInset: false,
-    color: "#673241"
+    color: "rgba(103, 50, 65, 0.75)"
   }]);
   createdBoxShadow = createBoxShadow(parsedBoxShadow);
   expect(createdBoxShadow).toBe("2px 3px 4px 6px rgba(103, 50, 65, 0.75)");
@@ -297,12 +296,11 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
     x: 2,
     y: 3,
     spread: 6,
-    opacity: 100,
     isInset: true,
-    color: "#673241"
+    color: "rgb(103, 50, 65)"
   }]);
   createdBoxShadow = createBoxShadow(parsedBoxShadow);
-  expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgba(103, 50, 65, 1)");
+  expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgb(103, 50, 65)");
 });
 
 test("Check boxshadowsettings question", () => {
@@ -319,9 +317,8 @@ test("Check boxshadowsettings question", () => {
   };
   expect(question.value).toEqual([{
     "blur": 4,
-    "color": "#673241",
+    "color": "rgba(103, 50, 65, 0.75)",
     "isInset": false,
-    "opacity": 75,
     "spread": 6,
     "x": 2,
     "y": 3,
@@ -330,10 +327,60 @@ test("Check boxshadowsettings question", () => {
     "blur": 6,
     "color": "#673fff",
     "isInset": true,
-    "opacity": 7,
     "spread": 8,
     "x": 5,
     "y": 10,
   }];
+  question.contentQuestion.panels[0].getQuestionByName("color").contentPanel.getQuestionByName("opacity").value = 7;
   expect(survey.data).toEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
+});
+
+test("Check parseColor and createColor functions", () => {
+  let color = "#673241";
+  let parsedColor = parseColor(color);
+  expect(parsedColor).toEqual({
+    color: "#673241",
+    opacity: 100
+  });
+  let createdColor = createColor(parsedColor);
+  expect(createdColor).toBe("rgba(103, 50, 65, 1)");
+  color = "rgb(103, 50, 65)";
+  parsedColor = parseColor(color);
+  expect(parsedColor).toEqual({
+    color: "#673241",
+    opacity: 100
+  });
+  createdColor = createColor(parsedColor);
+  expect(createdColor).toBe("rgba(103, 50, 65, 1)");
+  color = "rgb(103, 50, 65, 0.75)";
+  parsedColor = parseColor(color);
+  expect(parsedColor).toEqual({
+    color: "#673241",
+    opacity: 75
+  });
+  createdColor = createColor(parsedColor);
+  expect(createdColor).toBe("rgba(103, 50, 65, 0.75)");
+});
+
+test("Check colorsettings question", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "colorsettings",
+      name: "test",
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+  expect(survey.data).toEqual({});
+  survey.data = {
+    "test": "rgba(103, 50, 65, 0.75)"
+  };
+  expect(question.value).toEqual({
+    "color": "#673241",
+    "opacity": 75
+  });
+  question.value = {
+    "color": "#673fff",
+    "opacity": 50
+  };
+  expect(survey.data).toEqual({ "test": "rgba(103, 63, 255, 0.5)" });
 });

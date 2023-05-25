@@ -1002,7 +1002,7 @@ export var enStrings = {
     pageDescription: "Page Description Font",
     boxShadowX: "X",
     boxShadowY: "Y",
-    boxShadowOpacity: "Opacity",
+    opacity: "Opacity",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Spread",
     questionShadow: "Question Panel Border / Shadow",

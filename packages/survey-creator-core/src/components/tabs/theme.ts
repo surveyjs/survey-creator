@@ -138,6 +138,7 @@ ComponentCollection.Instance.add({
   onValueChanged(question, name, newValue) {
   },
 });
+
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -760,8 +761,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   blur: 2,
                   spread: 0,
                   isInset: false,
-                  opacity: 15,
-                  color: "#000000"
+                  color: "rgba(0, 0, 0, 0.15)"
                 }
               },
               {
@@ -814,8 +814,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   blur: 2,
                   spread: 0,
                   isInset: true,
-                  opacity: 15,
-                  color: "#000000"
+                  color: "rgba(0, 0, 0, 0.15)"
                 }
               }, {
                 type: "expression",
