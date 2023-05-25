@@ -1,4 +1,4 @@
-import { IAction, PageModel, property, SurveyElement, SurveyModel } from "survey-core";
+import { ComputedUpdater, DragTypeOverMeEnum, IAction, PageModel, property, SurveyElement, SurveyModel } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -13,6 +13,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
+  @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
 
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -30,6 +31,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     super.attachElement(surveyElement);
 
     if (!!this.page) {
+      this.dragTypeOverMe = <any> new ComputedUpdater(() => this.page.dragTypeOverMe);
 
       this.page["surveyChangedCallback"] = () => {
         this.isPageLive = !!this.page.survey;
@@ -100,6 +102,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           "description"
         ]);
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
+        this.dragTypeOverMe = null;
         return true;
       })) {
         this.creator.survey.currentPage = currentPage;
@@ -133,12 +136,17 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
 
   get css(): string {
-    if (this.isGhost) {
-      return "svc-page__content--new";
+    let result = "";
+    if(!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
+      result = "svc-page--drag-over-empty";
     }
-    return this.creator.isElementSelected(this.page)
-      ? "svc-page__content--selected"
-      : "";
+    if(this.isGhost) {
+      return result + " svc-page__content--new";
+    }
+    if(this.creator.isElementSelected(this.page)) {
+      result += " svc-page__content--selected";
+    }
+    return result;
   }
   public hover(event: MouseEvent, element: HTMLElement | any) {
     toggleHovered(event, element, this.creator.pageHoverDelay);

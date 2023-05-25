@@ -449,6 +449,7 @@ export var enStrings = {
     maxTextLength: "Maximum answer length (in characters)",
     maxOthersLength: "Maximum comment length (in characters)",
     autoGrowComment: "Auto-expand comment area if necessary",
+    allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update text question value",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
@@ -929,6 +930,7 @@ export var enStrings = {
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string
     autoGrow: "Auto grow", // Auto-generated string
+    allowResize: "Allow resizing",
     acceptCarriageReturn: "Accept carriage return", // Auto-generated string
     displayMode: "Display mode", // Auto-generated string
     rateType: "Rate type", // Auto-generated string

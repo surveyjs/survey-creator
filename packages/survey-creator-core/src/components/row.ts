@@ -2,7 +2,8 @@ import {
   Base,
   SurveyModel,
   SurveyTemplateRendererTemplateData,
-  QuestionRowModel
+  QuestionRowModel,
+  DragTypeOverMeEnum
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 require("./row.scss");
@@ -25,8 +26,13 @@ export class RowViewModel extends Base {
       this.row.elements[0].name === "sv-drag-drop-ghost-survey-element-name"
     ) {
       result += ghostClass;
-    } else {
-      result = result.replace(ghostClass, "");
+    }
+
+    if(this.row.dragTypeOverMe === DragTypeOverMeEnum.Top) {
+      result += " svc-row--drag-over-top";
+    }
+    if(this.row.dragTypeOverMe === DragTypeOverMeEnum.Bottom) {
+      result += " svc-row--drag-over-bottom";
     }
 
     return result;
