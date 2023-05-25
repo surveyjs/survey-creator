@@ -63,7 +63,8 @@ ComponentCollection.Instance.add({
       descriptionLocation: "hidden",
       choices: [
         { value: "400", text: getLocString("theme.fontWeightRegular") },
-        { value: "500", text: getLocString("theme.fontWeightSemiBold") },
+        { value: "500", text: getLocString("theme.fontWeightHeavy") },
+        { value: "600", text: getLocString("theme.fontWeightSemiBold") },
         { value: "700", text: getLocString("theme.fontWeightBold") },
       ],
       defaultValue: "400"
@@ -151,6 +152,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public nextPageAction: Action;
   private selectPageAction: Action;
   private themeEditorSurveyValue: SurveyModel;
+  private themeChanges = {};
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -189,6 +191,14 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
+  @property({ defaultValue: "default" }) themeName;
+  @property({ defaultValue: "light" }) themePalette;
+  @property({ defaultValue: "panel" }) themeMode;
+
+  get themeVariables(): any {
+    return Themes[this.themeName + "-" + this.themePalette];
+  }
+
   public get activeLanguage(): string {
     return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
   }
@@ -439,9 +449,9 @@ export class ThemeSurveyTabViewModel extends Base {
     this.nextPageAction.enabled = isNextEnabled;
   }
   protected createThemeEditorSurvey(): SurveyModel {
-    var json = this.getThemeEditorSurveyJSON();
+    const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    var themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
+    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -449,21 +459,18 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.mergeData(this.themeVariables);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
+    assign(this.simulator.themeVariables, this.themeVariables);
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         themeEditorSurvey.mergeData(this.themeVariables);
-      }
-      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
-        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
-        themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
-      }
-      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background");
-        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
-        themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+        assign(this.simulator.themeVariables, this.themeVariables);
+
+        if (options.name === "themeMode") {
+          this.survey["isCompact"] = options.value === "lightweight";
+        }
+        return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
         this.survey[options.name] = options.value;
@@ -473,24 +480,31 @@ export class ThemeSurveyTabViewModel extends Base {
         this.survey.backgroundOpacity = options.value / 100;
         return;
       }
-      if (options.name === "themeMode") {
-        this.survey["isCompact"] = options.value === "lightweight";
-        return;
+
+      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
+        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
+        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
+        this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
       }
-      const changes = {};
+      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
+        let baseColor = themeEditorSurvey.getValue("--background");
+        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
+        this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
+      }
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           const innerQ = options.question.contentPanel.getQuestionByName(key);
-          changes[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
+          this.themeChanges[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
         });
       }
       if (options.question?.getType() === "elementsettings") {
         Object.keys(options.value).forEach(key => {
           if (key === "corner") return;
-          changes[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
+          this.themeChanges[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
         });
       }
-      const newTheme = assign({}, this.simulator.themeVariables, changes);
+      const newTheme = {};
+      assign(newTheme, this.simulator.themeVariables, this.themeChanges);
       this.simulator.themeVariables = newTheme;
     });
     themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
@@ -498,14 +512,6 @@ export class ThemeSurveyTabViewModel extends Base {
       opt.question.allowRootStyle = false;
     });
     return themeEditorSurvey;
-  }
-
-  @property({ defaultValue: "default" }) themeName;
-  @property({ defaultValue: "light" }) themePalette;
-  @property({ defaultValue: "panel" }) themeMode;
-
-  get themeVariables(): any {
-    return Themes[this.themeName + "-" + this.themePalette];
   }
 
   private getThemeEditorSurveyJSON() {
@@ -768,7 +774,8 @@ export class ThemeSurveyTabViewModel extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   color: "#161616",
-                  size: 16
+                  weight: "600",
+                  size: 16,
                 }
               }, {
                 type: "fontSettings",
@@ -823,7 +830,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.primaryDefaultColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#19b394"
+                  defaultValue: "#19B394"
                 },
                 {
                   type: "color",
@@ -839,7 +846,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.primaryLightColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#e8f7f4"
+                  defaultValue: "#E8F7F4"
                 }
               ]
             }, {

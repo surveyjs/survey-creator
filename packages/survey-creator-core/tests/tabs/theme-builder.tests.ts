@@ -88,16 +88,17 @@ test("Theme builder panelBackgroundTransparency", (): any => {
   themePlugin.activate();
   const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulator = themeSurveyTab.simulator;
   const panelBackgroundTransparency = themeEditor.getQuestionByName("panelBackgroundTransparency");
 
   expect(panelBackgroundTransparency.value).toEqual(100);
-  expect(themeEditor.data["--sjs-question-background"]).toEqual("#ffffff");
+  expect(simulator.themeVariables["--sjs-question-background"]).toEqual("#ffffff");
 
   panelBackgroundTransparency.value = 60;
-  expect(themeEditor.data["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
+  expect(simulator.themeVariables["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
 
   themeEditor.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = "#eeeeee";
-  expect(themeEditor.data["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
+  expect(simulator.themeVariables["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
 });
 
 test("Theme builder questionBackgroundTransparency", (): any => {
@@ -115,16 +116,17 @@ test("Theme builder questionBackgroundTransparency", (): any => {
   themePlugin.activate();
   const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const simulator = themeSurveyTab.simulator;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
-  expect(themeEditor.data["--sjs-editor-background"]).toEqual("#f9f9f9");
+  expect(simulator.themeVariables["--sjs-editor-background"]).toEqual("#f9f9f9");
 
   questionBackgroundTransparency.value = 60;
-  expect(themeEditor.data["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(simulator.themeVariables["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-  expect(themeEditor.data["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(simulator.themeVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 });
 
 test("Theme builder: survey settings", (): any => {
@@ -280,7 +282,7 @@ test("Theme builder: composite question values are lost", (): any => {
   expect(simulator.themeVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
 });
 
-test.skip("Theme builder: composite question elementSettings", (): any => {
+test("Theme builder: composite question elementSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
     questions: [
@@ -303,10 +305,40 @@ test.skip("Theme builder: composite question elementSettings", (): any => {
   expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
   expect(simulator.themeVariables["--sjs-questionpanel-border"]).toBeUndefined();
 
-  questionPanelSettings.value = { backcolor: "#ffffff", hovercolor: "#f8f8f8", corner: 4, border: "0 1 2 rgba(0, 0, 0, 0.15)" };
+  questionPanelSettings.value = { backcolor: "#ffffff", hovercolor: "#f8f8f8", corner: 5, border: "0 1 2 rgba(0, 0, 0, 0.15)" };
 
   expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toEqual("#ffffff");
   expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toEqual("#f8f8f8");
-  expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("4px");
+  expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
   expect(simulator.themeVariables["--sjs-questionpanel-border"]).toEqual("0 1 2 rgba(0, 0, 0, 0.15)");
+});
+
+test("Theme builder calculating dependent colors", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const themePalette = themeEditor.getQuestionByName("themePalette");
+  const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
+  const primaryColorDark = themeEditor.getQuestionByName("--sjs-primary-backcolor-dark");
+  const primaryColorLight = themeEditor.getQuestionByName("--sjs-primary-backcolor-light");
+
+  expect(themePalette.value).toEqual("light");
+  expect(primaryColor.value).toEqual("#19b394");
+  expect(primaryColorDark.value).toEqual("#14A48B");
+  expect(primaryColorLight.value).toEqual("#E8F7F4");
+
+  // themePalette.value = "dark";
+  // expect(primaryColor.value).toEqual("#1ab7fa");
+  // expect(backgroundDimColor.value).toEqual("#4d4d4d");
 });
