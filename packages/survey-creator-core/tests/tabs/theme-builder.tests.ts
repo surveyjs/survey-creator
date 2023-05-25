@@ -1,11 +1,12 @@
 import { CreatorTester } from "../creator-tester";
-import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
+import { ThemeSurveyTabViewModel, createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 
 import "survey-core/survey.i18n";
+import { SurveyModel } from "survey-core";
 
 test("Theme builder initialization", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
@@ -258,4 +259,80 @@ test.skip("Theme builder: composite question elementSettings", (): any => {
   expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toEqual("#f8f8f8");
   expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("4px");
   expect(simulator.themeVariables["--sjs-questionpanel-border"]).toEqual("0 1 2 rgba(0, 0, 0, 0.15)");
+});
+
+test("Check createBoxShadow and parseBoxShadow functions", () => {
+  let boxShadow = "1px 2px 3px 24px #673241";
+  let parsedBoxShadow = parseBoxShadow(boxShadow);
+  expect(parsedBoxShadow).toEqual([{
+    blur: 3,
+    x: 1,
+    y: 2,
+    spread: 24,
+    opacity: 100,
+    isInset: false,
+    color: "#673241"
+  }]);
+  let createdBoxShadow = createBoxShadow(parsedBoxShadow);
+  expect(createdBoxShadow).toBe("1px 2px 3px 24px rgba(103, 50, 65, 1)");
+  boxShadow = "2px 3px 4px 6px rgba(103, 50, 65, 0.75)";
+  parsedBoxShadow = parseBoxShadow(boxShadow);
+  expect(parsedBoxShadow).toEqual([{
+    blur: 4,
+    x: 2,
+    y: 3,
+    spread: 6,
+    opacity: 75,
+    isInset: false,
+    color: "#673241"
+  }]);
+  createdBoxShadow = createBoxShadow(parsedBoxShadow);
+  expect(createdBoxShadow).toBe("2px 3px 4px 6px rgba(103, 50, 65, 0.75)");
+
+  boxShadow = "inset 2px 3px 4px 6px rgb(103, 50, 65)";
+  parsedBoxShadow = parseBoxShadow(boxShadow);
+  expect(parsedBoxShadow).toEqual([{
+    blur: 4,
+    x: 2,
+    y: 3,
+    spread: 6,
+    opacity: 100,
+    isInset: true,
+    color: "#673241"
+  }]);
+  createdBoxShadow = createBoxShadow(parsedBoxShadow);
+  expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgba(103, 50, 65, 1)");
+});
+
+test("Check boxshadowsettings question", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "boxshadowsettings",
+      name: "test",
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+  expect(survey.data).toEqual({});
+  survey.data = {
+    "test": "2px 3px 4px 6px rgba(103, 50, 65, 0.75)"
+  };
+  expect(question.value).toEqual([{
+    "blur": 4,
+    "color": "#673241",
+    "isInset": false,
+    "opacity": 75,
+    "spread": 6,
+    "x": 2,
+    "y": 3,
+  }]);
+  question.value = [{
+    "blur": 6,
+    "color": "#673fff",
+    "isInset": true,
+    "opacity": 7,
+    "spread": 8,
+    "x": 5,
+    "y": 10,
+  }];
+  expect(survey.data).toEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
 });

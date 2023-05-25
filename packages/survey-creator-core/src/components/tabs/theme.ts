@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection, FunctionFactory, QuestionCustomModel, QuestionPanelDynamicModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -128,12 +128,6 @@ ComponentCollection.Instance.add({
       name: "cornerRadius",
       expression: "{composite.corner}+\"px\"",
       visible: false
-    }, {
-      type: "text",
-      name: "border",
-      title: getLocString("theme.borderDecoration"),
-      titleLocation: "left",
-      descriptionLocation: "hidden"
     }
   ],
   onInit() {
@@ -141,6 +135,75 @@ ComponentCollection.Instance.add({
   onCreated(question) {
   },
   onValueChanged(question, name, newValue) {
+  },
+});
+ComponentCollection.Instance.add({
+  name: "boxshadowsettings",
+  showInToolbox: false,
+  questionJSON: {
+    "type": "paneldynamic",
+    "panelCount": 1,
+    //temp
+    "maxPanelCount": 1,
+    "minPanelCount": 1,
+    "templateElements": [
+      {
+        "type": "spinedit",
+        "name": "x",
+        "title": getLocString("theme.boxShadowX"),
+        "titleLocation": "left",
+        "min": 0,
+      },
+      {
+        "type": "spinedit",
+        "name": "y",
+        "min": 0,
+        "startWithNewLine": false,
+        "title": getLocString("theme.boxShadowY"),
+        "titleLocation": "left"
+      },
+      {
+        "type": "spinedit",
+        "name": "blur",
+        "title": getLocString("theme.boxShadowBlur"),
+        "min": 0,
+        "titleLocation": "left"
+      },
+      {
+        "type": "spinedit",
+        "name": "spread",
+        "min": 0,
+        "startWithNewLine": false,
+        "title": getLocString("theme.boxShadowSpread"),
+        "titleLocation": "left"
+      },
+      {
+        "type": "color",
+        "name": "color",
+        "titleLocation": "hidden"
+      },
+      {
+        "type": "spinedit",
+        "name": "opacity",
+        "startWithNewLine": false,
+        "title": getLocString("theme.boxShadowOpacity"),
+        "titleLocation": "left",
+        "min": 0,
+        "max": 100,
+        "unit": "%"
+      },
+      {
+        "type": "buttongroup",
+        "name": "isInset",
+        "titleLocation": "hidden",
+        "choices": [{ text: "Drop", value: false }, { text: "Inner", value: true }]
+      }
+    ]
+  },
+  onCreated(question: QuestionCustomModel) {
+    question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
+    question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
+    (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
   },
 });
 export class ThemeSurveyTabViewModel extends Base {
@@ -449,7 +512,6 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.mergeData(this.themeVariables);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
-
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
@@ -478,6 +540,9 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       const _data = sender.data;
+      if(options.question?.getType() == "boxshadowsettings") {
+        _data[options.question.name] = createBoxShadow(options.question.value);
+      }
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           const innerQ = options.question.contentPanel.getQuestionByName(key);
@@ -492,7 +557,7 @@ export class ThemeSurveyTabViewModel extends Base {
       }
       this.simulator.themeVariables = _data;
     });
-    themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
+    themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
@@ -752,10 +817,25 @@ export class ThemeSurveyTabViewModel extends Base {
                 defaultValue: {
                   backcolor: "#ffffff",
                   hovercolor: "#f8f8f8",
-                  corner: 4,
-                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                  corner: 4
                 }
-              }, {
+              },
+              {
+                type: "boxshadowsettings",
+                name: "--sjs-general-shadow-small",
+                descriptionLocation: "hidden",
+                title: getLocString("theme.questionShadow"),
+                defaultValue: {
+                  x: 0,
+                  y: 1,
+                  blur: 2,
+                  spread: 0,
+                  isInset: false,
+                  opacity: 15,
+                  color: "#000000"
+                }
+              },
+              {
                 type: "expression",
                 name: "--background",
                 expression: "{questionPanel.backcolor}",
@@ -791,8 +871,22 @@ export class ThemeSurveyTabViewModel extends Base {
                 defaultValue: {
                   backcolor: "#ffffff",
                   hovercolor: "#f8f8f8",
-                  corner: 4,
-                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                  corner: 4
+                }
+              },
+              {
+                type: "boxshadowsettings",
+                name: "--sjs-general-shadow-inner",
+                descriptionLocation: "hidden",
+                title: getLocString("theme.editorShadow"),
+                defaultValue: {
+                  x: 0,
+                  y: 1,
+                  blur: 2,
+                  spread: 0,
+                  isInset: true,
+                  opacity: 15,
+                  color: "#000000"
                 }
               }, {
                 type: "expression",
@@ -905,9 +999,59 @@ export class ThemeSurveyTabViewModel extends Base {
 }
 
 function ingectAlpha(baseColor: any, alpha: number): any {
-  const r = parseInt(baseColor.slice(1, 3), 16);
-  const g = parseInt(baseColor.slice(3, 5), 16);
-  const b = parseInt(baseColor.slice(5, 7), 16);
+  if(!!baseColor && alpha !== undefined) {
+    const r = parseInt(baseColor.slice(1, 3), 16);
+    const g = parseInt(baseColor.slice(3, 5), 16);
+    const b = parseInt(baseColor.slice(5, 7), 16);
 
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+}
+
+function colorToHex(color: string): { hex: string, alpha: number } {
+  const matchRgb = color.match(/\((.*)\)/);
+  if(matchRgb) {
+    const rgbValues = matchRgb[1].split(",");
+    let alpha = 1;
+    if(rgbValues.length == 4) {
+      alpha = parseFloat(rgbValues.pop());
+    }
+    const hex = rgbValues.reduce((res: string, color: string) => {
+      const hex = parseInt(color).toString(16);
+      return res + (hex.length == 1 ? "0" + hex : hex);
+    }, "#");
+    return { hex, alpha };
+  }
+  else {
+    return { hex: color, alpha: 1 };
+  }
+}
+
+export function createBoxShadow(value: Array<any>): string {
+  return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x}px ${val.y}px ${val.blur}px ${val.spread}px ${ingectAlpha(val.color, val.opacity/100)}`
+  )).join(",");
+}
+
+export function parseBoxShadow(value: string): Array<Object> {
+  return value.split(/(?<!\([^)]*),(?!.*\))/).map(value => {
+    const color = value.match(/#[a-zA-Z0-9]+| rgba?\(.*?\)/);
+    const isInset = value.indexOf("inset") > -1;
+    const res: Object = {};
+    if(isInset) {
+      value = value.replace("inset", "");
+    }
+    if(!!color) {
+      value = value.replace(color[0], "");
+      let hexColor = colorToHex(color[0]);
+      res["color"] = hexColor.hex;
+      res["opacity"] = hexColor.alpha * 100;
+    }
+    const values = value.replace(/\s+/g, " ").replace(/^\s|\s$/g, "").split(" ");
+    res["x"] = parseInt(values[0]) || 0;
+    res["y"] = parseInt(values[1]) || 0;
+    res["blur"] = parseInt(values[2]) || 0;
+    res["spread"] = parseInt(values[3]) || 0;
+    res["isInset"] = isInset;
+    return res;
+  });
 }

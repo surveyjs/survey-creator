@@ -1,4 +1,28 @@
 .spg-theme-builder-root {
+  .spg-row--multiple {
+    .spg-spin-editor {
+      .spg-input-container__buttons-container {
+        display: none;
+      }
+    }
+    .spg-question__header--location--left {
+      min-width: auto;
+    }
+    & > div {
+      flex: 1 1 0;
+      min-width: calcSize(12.5);
+      input {
+        min-width: 0;
+      }
+      .spg-question--location--left {
+        height: calcSize(6);
+        box-sizing: border-box;
+        .spg-input {
+          height: auto;
+        }
+      }
+    }
+  }
   .sv-button-group {
     overflow: hidden;
   }
