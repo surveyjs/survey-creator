@@ -4,7 +4,7 @@ import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+import { assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 
 require("./theme.scss");
 
@@ -932,26 +932,5 @@ export class ThemeSurveyTabViewModel extends Base {
     //   });
     // });
     return themeEditorSurveyJSON;
-  }
-}
-
-function ingectAlpha(baseColor: any, alpha: number): any {
-  const r = parseInt(baseColor.slice(1, 3), 16);
-  const g = parseInt(baseColor.slice(3, 5), 16);
-  const b = parseInt(baseColor.slice(5, 7), 16);
-
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-function assign(...objects: Array<any>) {
-  if(objects.length <= 1) {
-    return;
-  }
-  if(objects.length == 2) {
-    Object.keys(objects[1]).forEach(key => objects[0][key] = objects[1][key]);
-    return;
-  }
-  for(let i = 1; i< objects.length; i++) {
-    assign(objects[0], objects[i]);
   }
 }

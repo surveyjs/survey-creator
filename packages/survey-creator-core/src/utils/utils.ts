@@ -331,3 +331,16 @@ export function ingectAlpha(baseColor: any, alpha: number): any {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 }
+
+export function assign(...objects: Array<any>) {
+  if(objects.length <= 1) {
+    return;
+  }
+  if(objects.length == 2) {
+    Object.keys(objects[1]).forEach(key => objects[0][key] = objects[1][key]);
+    return;
+  }
+  for(let i = 1; i < objects.length; i++) {
+    assign(objects[0], objects[i]);
+  }
+}

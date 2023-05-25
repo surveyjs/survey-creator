@@ -306,14 +306,12 @@ test("Theme builder: composite question elementSettings", (): any => {
   expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
   expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
   expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
-  expect(simulator.themeVariables["--sjs-questionpanel-border"]).toBeUndefined();
 
-  questionPanelSettings.value = { backcolor: "#ffffff", hovercolor: "#f8f8f8", corner: 5, border: "0 1 2 rgba(0, 0, 0, 0.15)" };
+  questionPanelSettings.value = { backcolor: "#ffffff", hovercolor: "#f8f8f8", corner: 5 };
 
   expect(simulator.themeVariables["--sjs-questionpanel-backcolor"]).toEqual("#ffffff");
   expect(simulator.themeVariables["--sjs-questionpanel-hovercolor"]).toEqual("#f8f8f8");
   expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
-  expect(simulator.themeVariables["--sjs-questionpanel-border"]).toEqual("0 1 2 rgba(0, 0, 0, 0.15)");
 });
 
 test("Theme builder calculating dependent colors", (): any => {
