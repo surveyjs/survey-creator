@@ -63,12 +63,9 @@
   display: block;
 }
 
-.svc-question__content--selected-no-border {
-  padding: 0;
+.svc-question__content--in-popup {
   width: calc(100% - 25 * #{$base-unit});
   min-width: calcSize(70);
-  box-shadow: none;
-  background-color: inherit;
 }
 
 .svc-matrix-cell__popup {
