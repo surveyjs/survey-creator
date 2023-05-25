@@ -1,10 +1,11 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { notShortCircuitAnd } from "../../utils/utils";
+import { ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+
 require("./theme.scss");
 
 export const Themes = {
@@ -128,12 +129,6 @@ ComponentCollection.Instance.add({
       name: "cornerRadius",
       expression: "{composite.corner}+\"px\"",
       visible: false
-    }, {
-      type: "text",
-      name: "border",
-      title: getLocString("theme.borderDecoration"),
-      titleLocation: "left",
-      descriptionLocation: "hidden"
     }
   ],
   onInit() {
@@ -143,6 +138,7 @@ ComponentCollection.Instance.add({
   onValueChanged(question, name, newValue) {
   },
 });
+
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -449,7 +445,6 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.mergeData(this.themeVariables);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
-
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
@@ -492,7 +487,7 @@ export class ThemeSurveyTabViewModel extends Base {
       }
       this.simulator.themeVariables = _data;
     });
-    themeEditorSurvey.getAllQuestions().map(q => q.allowRootStyle = false);
+    themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
@@ -752,10 +747,24 @@ export class ThemeSurveyTabViewModel extends Base {
                 defaultValue: {
                   backcolor: "#ffffff",
                   hovercolor: "#f8f8f8",
-                  corner: 4,
-                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                  corner: 4
                 }
-              }, {
+              },
+              {
+                type: "boxshadowsettings",
+                name: "--sjs-general-shadow-small",
+                descriptionLocation: "hidden",
+                title: getLocString("theme.questionShadow"),
+                defaultValue: {
+                  x: 0,
+                  y: 1,
+                  blur: 2,
+                  spread: 0,
+                  isInset: false,
+                  color: "rgba(0, 0, 0, 0.15)"
+                }
+              },
+              {
                 type: "expression",
                 name: "--background",
                 expression: "{questionPanel.backcolor}",
@@ -791,8 +800,21 @@ export class ThemeSurveyTabViewModel extends Base {
                 defaultValue: {
                   backcolor: "#ffffff",
                   hovercolor: "#f8f8f8",
-                  corner: 4,
-                  border: "0 1 2 rgba(0, 0, 0, 0.15)"
+                  corner: 4
+                }
+              },
+              {
+                type: "boxshadowsettings",
+                name: "--sjs-general-shadow-inner",
+                descriptionLocation: "hidden",
+                title: getLocString("theme.editorShadow"),
+                defaultValue: {
+                  x: 0,
+                  y: 1,
+                  blur: 2,
+                  spread: 0,
+                  isInset: true,
+                  color: "rgba(0, 0, 0, 0.15)"
                 }
               }, {
                 type: "expression",
@@ -902,12 +924,4 @@ export class ThemeSurveyTabViewModel extends Base {
     // });
     return themeEditorSurveyJSON;
   }
-}
-
-function ingectAlpha(baseColor: any, alpha: number): any {
-  const r = parseInt(baseColor.slice(1, 3), 16);
-  const g = parseInt(baseColor.slice(3, 5), 16);
-  const b = parseInt(baseColor.slice(5, 7), 16);
-
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }

@@ -321,3 +321,13 @@ export function getAcceptedTypesByContentMode(contentMode: string) {
 export function getQuestionFromObj(obj: SurveyElement): Question {
   return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
 }
+
+export function ingectAlpha(baseColor: any, alpha: number): any {
+  if(!!baseColor && alpha !== undefined) {
+    const r = parseInt(baseColor.slice(1, 3), 16);
+    const g = parseInt(baseColor.slice(3, 5), 16);
+    const b = parseInt(baseColor.slice(5, 7), 16);
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+}

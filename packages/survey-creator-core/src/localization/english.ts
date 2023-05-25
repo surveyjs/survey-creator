@@ -1001,8 +1001,14 @@ export var enStrings = {
     cornerRadius: "Corner Radius",
     surveyTitle: "Survey Title Font",
     pageTitle: "Page Title Font",
-    pageDescription: "Page Description Font"
-
+    pageDescription: "Page Description Font",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    opacity: "Opacity",
+    boxShadowBlur: "Blur",
+    boxShadowSpread: "Spread",
+    questionShadow: "Question Panel Border / Shadow",
+    editorShadow: "Editor Border / Shadow"
   },
 };
 
