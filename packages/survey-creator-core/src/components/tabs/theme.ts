@@ -540,9 +540,6 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       const _data = sender.data;
-      if(options.question?.getType() == "boxshadowsettings") {
-        _data[options.question.name] = createBoxShadow(options.question.value);
-      }
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           const innerQ = options.question.contentPanel.getQuestionByName(key);
