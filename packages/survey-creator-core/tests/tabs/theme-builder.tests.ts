@@ -1,8 +1,9 @@
 import { CreatorTester } from "../creator-tester";
-import { ThemeSurveyTabViewModel, createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme";
+import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 
 import "survey-core/survey.i18n";

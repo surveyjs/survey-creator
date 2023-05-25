@@ -19,6 +19,7 @@ export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
 export * from "../components/tabs/test-plugin";
+export * from "../components/tabs/theme-custom-questions/boxshadow-settings";
 export * from "../components/tabs/theme";
 export * from "../components/tabs/theme-plugin";
 export * from "../components/tabs/logic";
