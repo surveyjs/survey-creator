@@ -150,6 +150,7 @@ ComponentCollection.Instance.add({
       {
         "type": "spinedit",
         "name": "x",
+        "unit": "px",
         "title": getLocString("theme.boxShadowX"),
         "titleLocation": "left",
         "min": 0,
@@ -157,6 +158,7 @@ ComponentCollection.Instance.add({
       {
         "type": "spinedit",
         "name": "y",
+        "unit": "px",
         "min": 0,
         "startWithNewLine": false,
         "title": getLocString("theme.boxShadowY"),
@@ -165,6 +167,7 @@ ComponentCollection.Instance.add({
       {
         "type": "spinedit",
         "name": "blur",
+        "unit": "px",
         "title": getLocString("theme.boxShadowBlur"),
         "min": 0,
         "titleLocation": "left"
@@ -172,6 +175,7 @@ ComponentCollection.Instance.add({
       {
         "type": "spinedit",
         "name": "spread",
+        "unit": "px",
         "min": 0,
         "startWithNewLine": false,
         "title": getLocString("theme.boxShadowSpread"),
