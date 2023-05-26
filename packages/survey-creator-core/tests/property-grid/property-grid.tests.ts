@@ -3191,3 +3191,22 @@ test("PropertyEditor for question name", () => {
     expect(nameQuestion.errors).toHaveLength(0);
   }
 });
+test("editor base check for unique property value and correct error in another editor, Bug#4165", () => {
+  var question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("column1");
+  question.addColumn("column2");
+  question.addColumn("column3");
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  const rows = columnsQuestion.visibleRows;
+
+  const column1Name = rows[0].getQuestionByColumnName("name");
+  const column2Name = rows[1].getQuestionByColumnName("name");
+  column2Name.value = "column1";
+  expect(column2Name.errors).toHaveLength(1);
+  column1Name.value = "column5";
+  expect(column2Name.errors).toHaveLength(0);
+});
