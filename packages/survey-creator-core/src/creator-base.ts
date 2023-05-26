@@ -63,6 +63,7 @@ require("./creator-theme/creator.scss");
 
 import { StringEditorConnector } from "./components/string-editor";
 import { TabThemePlugin } from "./components/tabs/theme-plugin";
+import { PageAdorner } from "./entries";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -746,6 +747,9 @@ export class CreatorBase extends Base
    *- options.page the new survey Page object.
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
+
+  public onGetPageAdornerFooterActions: CreatorEvent = new CreatorEvent();
+
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    *- sender the survey creator object that fires the event
@@ -3133,6 +3137,16 @@ export class CreatorBase extends Base
       popupModel: popupModel
     };
   }
+
+  public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {
+    const options = {
+      pageAdorner: pageAdorner,
+      actions
+    };
+    this.onGetPageAdornerFooterActions.fire(this, options);
+    return options.actions;
+  }
+
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)

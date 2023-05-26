@@ -3732,3 +3732,23 @@ test("creator.deleteLocaleStrings", () => {
   expect(q.title).toEqual("question1");
 });
 
+test("Check onGetPageAdornerFooterActions event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const pageModel = new PageAdorner(creator, creator.survey.currentPage);
+  let log = "";
+  creator.onGetPageAdornerFooterActions.add((_, opt) => {
+    expect(opt.pageAdorner).toBe(pageModel);
+    opt.actions.push({
+      title: "test",
+      action: () => {}
+    });
+    log += "->fired";
+  });
+  expect(pageModel.footerActionsBar.actions.length).toBe(2);
+  expect(pageModel.footerActionsBar.actions[1].title).toBe("test");
+  //check that footerActionsBar getter fires event only once
+  expect(log).toBe("->fired");
+});

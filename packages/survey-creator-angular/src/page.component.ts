@@ -27,14 +27,6 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   protected getPropertiesToTrack(): string[] {
     return ["creator", "model"];
   }
-  public addNewQuestion(event: any) {
-    event.stopPropagation();
-    this.adorner.addNewQuestion(this.adorner, event);
-  }
-  public selectQuestionType(event: any) {
-    event.stopPropagation();
-    this.adorner.questionTypeSelectorModel.action();
-  }
   override ngOnDestroy(): void {
     super.ngOnDestroy();
     this.adorner.dispose();
