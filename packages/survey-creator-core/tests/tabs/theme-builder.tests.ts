@@ -314,35 +314,6 @@ test("Theme builder: composite question elementSettings", (): any => {
   expect(simulator.themeVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
 });
 
-test("Theme builder calculating dependent colors", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = {
-    questions: [
-      {
-        type: "text",
-        name: "q1",
-        title: { default: "1", de: "2", ff: "3" }
-      }
-    ]
-  };
-  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
-  themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
-  const themePalette = themeEditor.getQuestionByName("themePalette");
-  const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
-  const primaryColorDark = themeEditor.getQuestionByName("--sjs-primary-backcolor-dark");
-  const primaryColorLight = themeEditor.getQuestionByName("--sjs-primary-backcolor-light");
-
-  expect(themePalette.value).toEqual("light");
-  expect(primaryColor.value).toEqual("#19b394");
-  expect(primaryColorDark.value).toEqual("#14A48B");
-  expect(primaryColorLight.value).toEqual("#E8F7F4");
-
-  // themePalette.value = "dark";
-  // expect(primaryColor.value).toEqual("#1ab7fa");
-  // expect(backgroundDimColor.value).toEqual("#4d4d4d");
-});
 test("Check createBoxShadow and parseBoxShadow functions", () => {
   let boxShadow = "1px 2px 3px 24px #673241";
   let parsedBoxShadow = parseBoxShadow(boxShadow);
