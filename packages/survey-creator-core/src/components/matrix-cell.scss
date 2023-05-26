@@ -66,6 +66,7 @@
 .svc-question__content--in-popup {
   width: calc(100% - 25 * #{$base-unit});
   min-width: calcSize(70);
+  padding: calcSize(5);
 }
 
 .svc-matrix-cell__popup {
