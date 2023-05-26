@@ -62,6 +62,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxLength", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
+        { name: "allowResize", tab: "layout" },
         { name: "multiLine", tab: "layout" },
       ],
     },
@@ -553,6 +554,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
         { name: "autoGrowComment", tab: "question" },
+        { name: "allowResizeComment", tab: "question" },
 
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },

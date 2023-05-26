@@ -1008,3 +1008,51 @@ test("String editor whitespaces and linedreaks", async (t) => {
     await takeElementScreenshot("string-editor-linebreaks-plain.png", Selector(".svc-question__content").nth(1), t, comparer);
   });
 });
+
+test("Matrix dropdown popup edit ", async (t) => {
+
+  await t.resizeWindow(1400, 900);
+
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrixdropdown",
+            "name": "question1",
+            "columns": [
+              {
+                "name": "Column 1"
+              },
+              {
+                "name": "Column 2",
+                "cellType": "rating"
+              }
+            ],
+            "choices": [
+              1,
+              2
+            ],
+            "rows": [
+              "Row 1"
+            ]
+          }
+        ]
+      }
+    ]
+  });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.hover(".svc-matrix-cell .sd-dropdown");
+    await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await takeElementScreenshot("matrix-dropdown-popup-select.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+    await t.click(Selector("button").withText("Cancel"));
+    await t.hover(".svc-matrix-cell .sd-rating");
+    await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});

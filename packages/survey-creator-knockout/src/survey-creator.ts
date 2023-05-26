@@ -11,8 +11,8 @@ export class CreatorViewModel {
     this.creator.initResponsivityManager(this.rootNode as HTMLDivElement);
     new ImplementorBase(this.creator.notifier);
     new ImplementorBase(this.creator.toolbox);
-    new ImplementorBase(this.creator.dragDropSurveyElements);
-    new ImplementorBase(this.creator.dragDropChoices);
+    // new ImplementorBase(this.creator.dragDropSurveyElements);
+    // new ImplementorBase(this.creator.dragDropChoices);
     new ImplementorBase(this.creator);
   }
   dispose(): void {

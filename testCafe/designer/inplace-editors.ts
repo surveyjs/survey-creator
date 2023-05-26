@@ -729,12 +729,12 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   await showControl();
 
   await t.click(Selector(".svc-matrix-cell__question-controls-button"))
-    .expect(Selector(".svc-question__content--selected-no-border").visible).ok()
+    .expect(Selector(".svc-question__content--in-popup").visible).ok()
     .expect(Selector(".sv-popup__content .sd-header__text").exists).notOk()
     .expect(Selector(".sv-popup__content .sd-page__title").exists).notOk()
 
     .click(Selector(".sv-popup__button--cancel"))
-    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk()
+    .expect(Selector(".svc-question__content--in-popup").exists).notOk()
     .expect(objectSelectorButton.withText("Column 1").visible).ok();
 });
 

@@ -1,11 +1,11 @@
-# Survey Creator V1 (OBSOLETE)
+# Survey Creator V1
 
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
 A visual designer that enables you and your users to create and modify surveys and forms.
 
-> **NOTE**: This package contains an obsolete version of Survey Creator. We recommend using the new Survey Creator that ships with an updated UI and native support for Angular and React. Refer to the following help topics for more information:
+> **NOTE**: This package contains a legacy version of Survey Creator. We recommend using the new Survey Creator that ships with an updated UI and native support for Angular and React. Refer to the following help topics for more information:
 >
 > - [What's New in Survey Creator V2](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new)
 > - [Get Started with Survey Creator V2](https://surveyjs.io/survey-creator/documentation/get-started)
