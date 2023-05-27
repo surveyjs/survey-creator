@@ -19,6 +19,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
           ref={(input) => (this.setControl(input))}
           placeholder={this.question.renderedPlaceholder}
           autoComplete="off"
+          onKeyUp={(event) => this.question.onKeyUp(event.nativeEvent)}
           onBlur={(event) => this.question.onBlur(event.nativeEvent) }
           onChange={this.question.onChange}
           onBeforeInput={event => this.question.onBeforeInput(event.nativeEvent as InputEvent)}

@@ -12,6 +12,7 @@
     [attr.aria-invalid]="model.ariaInvalid" 
     [attr.aria-describedby]="model.ariaDescribedBy" 
     (change)="model.onChange($event)" 
+    (keyup)="model.onKeyUp($event)" 
     (blur)="model.onBlur($event)" 
     (beforeinput)="model.onBeforeInput($event)"
     [value]="model.renderedValue"

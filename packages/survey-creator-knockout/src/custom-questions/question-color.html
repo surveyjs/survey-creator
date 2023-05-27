@@ -5,7 +5,7 @@
       data-bind="css: question.cssClasses.colorInput, value: question.renderedValue, event: { change: question.koOnColorInputChange }">
   </label>
   <input autocomplete="off" data-bind="disable: question.isInputReadOnly, attr: { id: question.inputId, placeholder: question.renderedPlaceholder, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-describedby': question.ariaDescribedBy }, 
-    event: { change: question.koOnChange, blur: question.koOnBlur, beforeinput: question.koOnBeforeInput },
+    event: { change: question.koOnChange, blur: question.koOnBlur, keyup: question.koOnKeyUp, beforeinput: question.koOnBeforeInput },
     value: question.renderedValue,
     css: question.cssClasses.control"></input>
   <!-- ko component: { name: 'sv-action-bar-item', params: { item: question.dropdownAction } } --><!-- /ko -->
