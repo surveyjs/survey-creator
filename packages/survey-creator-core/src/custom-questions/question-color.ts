@@ -81,7 +81,7 @@ export class QuestionColorModel extends QuestionTextModel {
 
   public createDropdownAction(): Action {
     const action = createDropdownActionModelAdvanced({
-      iconName: this.cssClasses.colorDrodownIcon
+      iconName: this.cssClasses.colorDropdownIcon
     }, {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
