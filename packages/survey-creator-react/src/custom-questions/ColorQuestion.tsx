@@ -1,6 +1,6 @@
 import * as React from "react";
 import { QuestionColorModel } from "survey-creator-core";
-import { ReactQuestionFactory, SurveyQuestionText, SvgIcon } from "survey-react-ui";
+import { ReactElementFactory, ReactQuestionFactory, SurveyQuestionText, SvgIcon, Popup } from "survey-react-ui";
 
 export class SurveyQuestionColor extends SurveyQuestionText {
   constructor(props: any) {
@@ -36,6 +36,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
         { this.renderColorSwatch() }
         { this.renderInput() }
         { this.renderColorInput() }
+        {this.renderPopup()}
       </div>
     );
   }
@@ -43,15 +44,16 @@ export class SurveyQuestionColor extends SurveyQuestionText {
     return this.question.renderedValue;
   }
   protected renderColorSwatch(): JSX.Element {
-    return <span className={this.question.cssClasses.swatch} style={this.question.getSwatchStyle()}></span>;
+    return <label className={this.question.cssClasses.swatch} style={this.question.getSwatchStyle()}>
+      <SvgIcon iconName={this.question.cssClasses.swatchIcon} size={"auto"}></SvgIcon>
+      <input type="color" value={this.question.renderedValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
+    </label>;
   }
   protected renderColorInput(): JSX.Element {
-    return (
-      <label className={this.question.cssClasses.colorDropdown}>
-        <SvgIcon iconName={this.question.cssClasses.colorDrodownIcon} size={"auto"}></SvgIcon>
-        <input type="color" value={this.question.renderedValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
-      </label>
-    );
+    return ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction });
+  }
+  protected renderPopup(): JSX.Element {
+    return <Popup model={this.question.dropdownAction.popupModel}></Popup>;
   }
 }
 

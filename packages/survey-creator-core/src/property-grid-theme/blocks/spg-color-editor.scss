@@ -13,16 +13,34 @@
   overflow: hidden;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
-  left: calc(50%);
-  top: calc(100%);
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 100%;
+  transform: translateY(-50%);
+}
+.spg-color-editor__color-item {
+  display: flex;
+  gap: calcSize(2);
+  .spg-color-editor__color-swatch {
+    margin-left: 0;
+  }
 }
 .spg-color-editor__color-swatch {
+  position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  border: 1px solid rgba(0, 0, 0, 0.16);
   border-radius: 3px;
-  width: calcSize(4.5);
+  width: calcSize(4);
   height: calcSize(3);
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.16);
   margin-left: calcSize(1.5);
+  .sv-svg-icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    fill: $background;
+  }
 }
