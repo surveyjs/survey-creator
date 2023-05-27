@@ -1,5 +1,8 @@
 <div [class]="model.cssClasses.root">
-  <span [class]="model.cssClasses.swatch" [style]="model.getSwatchStyle()"></span>
+  <label [class]="model.cssClasses.swatch" [style]="model.getSwatchStyle()">
+    <svg [iconName]="model.cssClasses.swatchIcon" [size]="'auto'" sv-ng-svg-icon></svg>
+    <input type="color" [class]="model.cssClasses.colorInput" [value]="model.renderedValue" (change)="model.onColorInputChange($event)"/>
+  </label>
   <input autocomplete="off" 
     [disabled]="model.isInputReadOnly" 
     [attr.id]="model.inputId" 
@@ -13,8 +16,6 @@
     (beforeinput)="model.onBeforeInput($event)"
     [value]="model.renderedValue"
     [class]="model.cssClasses.control"/>  
-    <label [class]="model.cssClasses.colorDropdown">
-      <svg [iconName]="model.cssClasses.colorDrodownIcon" [size]="'auto'" sv-ng-svg-icon></svg>
-    <input type="color" [class]="model.cssClasses.colorInput" [value]="model.renderedValue" (change)="model.onColorInputChange($event)"/>
-  </label>
+    <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
+    <sv-ng-popup [popupModel]="model.dropdownAction.popupModel"></sv-ng-popup>
 </div>

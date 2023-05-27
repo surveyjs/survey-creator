@@ -1,6 +1,6 @@
 import React from "react";
-import { Action, ItemValue } from "survey-core";
-import { ReactElementFactory, ReactSurveyElement, SurveyElementBase } from "survey-react-ui";
+import { ItemValue } from "survey-core";
+import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
 
 class ItemTemplateComponent extends SurveyElementBase<{item: ItemValue}, any> {
   render() {
