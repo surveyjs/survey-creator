@@ -396,9 +396,11 @@ export class ColorCalculator {
   }
 
   calculateColors(newColor: string) {
-    const newColorRbg = parseRgbaFromString(newColor);
+    let newColorRbg = parseRgbaFromString(newColor);
+    if (newColorRbg.length === 0) {
+      newColorRbg = parseRgbaFromString(ingectAlpha(newColor, 1));
+    }
     const newColorHsb = RGBToHSB(newColorRbg[0], newColorRbg[1], newColorRbg[2]);
-
     const newPrimaryColorDarkRGB = HSBToRGB(newColorHsb[0], newColorHsb[1], newColorHsb[2] - this.colorSettings.deltaDarkColor);
     const newPrimaryColorLightRGB = HSBToRGB(newColorHsb[0], newColorHsb[1], newColorHsb[2] - this.colorSettings.deltaLightColor);
 

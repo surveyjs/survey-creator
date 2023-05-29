@@ -4,13 +4,15 @@ import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 
 require("./theme.scss");
 
 export const Themes = {
   "default-light": {
-    "--sjs-primary-backcolor": "#19b394",
+    "--sjs-primary-backcolor": "rgba(25, 179, 148, 1)",
+    "--sjs-primary-backcolor-light": "rgba(25, 179, 148, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(20, 164, 139, 1)",
     "--background": "#ffffff",
     "--background-dim": "#f3f3f3",
     "--background-dim-light": "#f9f9f9",
@@ -26,7 +28,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px"
   },
   "default-dark": {
-    "--sjs-primary-backcolor": "#1ab7fa",
+    "--sjs-primary-backcolor": "rgba(255, 152, 20, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-primary-backcolor-dark": "rgba(255, 170, 24, 1)",
     "--background": "#555555",
     "--background-dim": "#4d4d4d",
     "--background-dim-light": "#4d4d4d",
@@ -149,6 +153,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private selectPageAction: Action;
   private themeEditorSurveyValue: SurveyModel;
   private themeChanges = {};
+  private colorCalculator = new ColorCalculator();
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -444,6 +449,13 @@ export class ThemeSurveyTabViewModel extends Base {
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
+  initializeColorCalculator() {
+    this.colorCalculator.initialize(
+      this.themeVariables["--sjs-primary-backcolor"],
+      this.themeVariables["--sjs-primary-backcolor-light"],
+      this.themeVariables["--sjs-primary-backcolor-dark"]
+    );
+  }
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
@@ -456,12 +468,16 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
     assign(this.simulator.themeVariables, this.themeVariables);
+    this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
+        this.initializeColorCalculator();
         themeEditorSurvey.mergeData(this.themeVariables);
-        assign(this.simulator.themeVariables, this.themeVariables);
+        const newTheme = {};
+        assign(newTheme, this.themeVariables);
+        this.simulator.themeVariables = newTheme;
 
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
@@ -476,7 +492,14 @@ export class ThemeSurveyTabViewModel extends Base {
         this.survey.backgroundOpacity = options.value / 100;
         return;
       }
-
+      if (options.name === "--sjs-primary-backcolor") {
+        this.colorCalculator.calculateColors(options.value);
+        this.themeChanges["--sjs-primary-backcolor"] = options.value;
+        this.themeChanges["--sjs-primary-backcolor-light"] = this.colorCalculator.colorSettings.newColorLight;
+        this.themeChanges["--sjs-primary-backcolor-dark"] = this.colorCalculator.colorSettings.newColorDark;
+        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      }
       if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
         let baseColor = themeEditorSurvey.getValue("--background-dim-light");
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");

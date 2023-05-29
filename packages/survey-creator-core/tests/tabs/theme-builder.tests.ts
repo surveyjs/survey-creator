@@ -195,11 +195,11 @@ test("Theme builder switch themes", (): any => {
   const backgroundDimColor = themeEditor.getQuestionByName("--background-dim");
 
   expect(themePalette.value).toEqual("light");
-  expect(primaryColor.value).toEqual("#19b394");
+  expect(primaryColor.value).toEqual("rgba(25, 179, 148, 1)");
   expect(backgroundDimColor.value).toEqual("#f3f3f3");
 
   themePalette.value = "dark";
-  expect(primaryColor.value).toEqual("#1ab7fa");
+  expect(primaryColor.value).toEqual("rgba(255, 152, 20, 1)");
   expect(backgroundDimColor.value).toEqual("#4d4d4d");
 });
 
