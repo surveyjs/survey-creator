@@ -60,12 +60,11 @@ import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { TabThemePlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
+import { PageAdorner } from "./components/page";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
-
-import { PageAdorner } from "./entries";
 
 export interface IKeyboardShortcut {
   name?: string;
