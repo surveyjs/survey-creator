@@ -749,7 +749,7 @@ export class CreatorBase extends Base
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
 
-  public onGetPageAdornerFooterActions: CreatorEvent = new CreatorEvent();
+  public onGetPageActions: CreatorEvent = new CreatorEvent();
 
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
@@ -3141,10 +3141,11 @@ export class CreatorBase extends Base
 
   public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {
     const options = {
-      pageAdorner: pageAdorner,
+      page: pageAdorner.page,
+      addNewQuestion: (type: string) => { pageAdorner.addNewQuestion(pageAdorner, undefined, type); },
       actions
     };
-    this.onGetPageAdornerFooterActions.fire(this, options);
+    this.onGetPageActions.fire(this, options);
     return options.actions;
   }
 

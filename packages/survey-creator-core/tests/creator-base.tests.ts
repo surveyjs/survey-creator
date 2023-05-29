@@ -19,7 +19,8 @@ import {
   QuestionCheckboxModel,
   ComponentCollection,
   QuestionCompositeModel,
-  QuestionCustomModel
+  QuestionCustomModel,
+  PageModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -3732,18 +3733,21 @@ test("creator.deleteLocaleStrings", () => {
   expect(q.title).toEqual("question1");
 });
 
-test("Check onGetPageAdornerFooterActions event", () => {
+test("Check onGetPageActions event", () => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [{ type: "text", name: "question1" }]
   };
-  const pageModel = new PageAdorner(creator, creator.survey.currentPage);
+  const page = <PageModel>creator.survey.currentPage;
+  const pageModel = new PageAdorner(creator, page);
   let log = "";
-  creator.onGetPageAdornerFooterActions.add((_, opt) => {
-    expect(opt.pageAdorner).toBe(pageModel);
+  creator.onGetPageActions.add((_, opt) => {
+    expect(opt.page).toBe(creator.survey.currentPage);
     opt.actions.push({
       title: "test",
-      action: () => {}
+      action: () => {
+        opt.addNewQuestion("panel");
+      }
     });
     log += "->fired";
   });
@@ -3751,4 +3755,8 @@ test("Check onGetPageAdornerFooterActions event", () => {
   expect(pageModel.footerActionsBar.actions[1].title).toBe("test");
   //check that footerActionsBar getter fires event only once
   expect(log).toBe("->fired");
+  expect(page.rows.length).toBe(1);
+  pageModel.footerActionsBar.actions[1].action();
+  expect(page.rows.length).toBe(2);
+  expect(page.rows[1].elements[0].getType()).toBe("panel");
 });
