@@ -749,6 +749,20 @@ export class CreatorBase extends Base
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
 
+  /**
+   * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.actions`: [`IAction[]`](/form-library/documentation/api-reference/iaction)\
+   * An array of actions. You can add or remove actions from this array.
+   * - `options.page`: [`PageModel`](/form-library/documentation/api-reference/page-model)\
+   * A page for which the event is raised.
+   * - `options.addNewQuestion(type)`: Method\
+   * Adds a new question of a specified [`type`](/form-library/documentation/api-reference/question#getType) to the page.
+   */
   public onGetPageActions: CreatorEvent = new CreatorEvent();
 
   /**
