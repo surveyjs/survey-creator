@@ -112,11 +112,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
   }
 
-  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent, type?: string) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
-    }, null, this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+    }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
