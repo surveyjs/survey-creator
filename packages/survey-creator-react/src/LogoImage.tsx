@@ -16,7 +16,11 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     this.rootRef = React.createRef();
   }
   protected createModel(): void {
-    this.model = new LogoImageViewModel(this.props.data, null);
+    let prevRoot: HTMLDivElement = null;
+    if(!!this.model) {
+      prevRoot = this.model.root;
+    }
+    this.model = new LogoImageViewModel(this.props.data, prevRoot);
   }
   protected getUpdatedModelProps(): string[] {
     return ["data"];
