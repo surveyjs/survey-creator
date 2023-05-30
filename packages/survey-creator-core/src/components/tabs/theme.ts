@@ -4,13 +4,15 @@ import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 
 require("./theme.scss");
 
 export const Themes = {
   "default-light": {
-    "--sjs-primary-backcolor": "#19b394",
+    "--sjs-primary-backcolor": "rgba(25, 179, 148, 1)",
+    "--sjs-primary-backcolor-light": "rgba(25, 179, 148, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(20, 164, 139, 1)",
     "--background": "#ffffff",
     "--background-dim": "#f3f3f3",
     "--background-dim-light": "#f9f9f9",
@@ -26,7 +28,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px"
   },
   "default-dark": {
-    "--sjs-primary-backcolor": "#1ab7fa",
+    "--sjs-primary-backcolor": "rgba(255, 152, 20, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-primary-backcolor-dark": "rgba(255, 170, 24, 1)",
     "--background": "#555555",
     "--background-dim": "#4d4d4d",
     "--background-dim-light": "#4d4d4d",
@@ -64,7 +68,8 @@ ComponentCollection.Instance.add({
       descriptionLocation: "hidden",
       choices: [
         { value: "400", text: getLocString("theme.fontWeightRegular") },
-        { value: "500", text: getLocString("theme.fontWeightSemiBold") },
+        { value: "500", text: getLocString("theme.fontWeightHeavy") },
+        { value: "600", text: getLocString("theme.fontWeightSemiBold") },
         { value: "700", text: getLocString("theme.fontWeightBold") },
       ],
       defaultValue: "400"
@@ -147,6 +152,8 @@ export class ThemeSurveyTabViewModel extends Base {
   public nextPageAction: Action;
   private selectPageAction: Action;
   private themeEditorSurveyValue: SurveyModel;
+  private themeChanges = {};
+  private colorCalculator = new ColorCalculator();
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -185,6 +192,14 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
+  @property({ defaultValue: "default" }) themeName;
+  @property({ defaultValue: "light" }) themePalette;
+  @property({ defaultValue: "panel" }) themeMode;
+
+  get themeVariables(): any {
+    return Themes[this.themeName + "-" + this.themePalette];
+  }
+
   public get activeLanguage(): string {
     return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
   }
@@ -434,10 +449,17 @@ export class ThemeSurveyTabViewModel extends Base {
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
+  initializeColorCalculator() {
+    this.colorCalculator.initialize(
+      this.themeVariables["--sjs-primary-backcolor"],
+      this.themeVariables["--sjs-primary-backcolor-light"],
+      this.themeVariables["--sjs-primary-backcolor-dark"]
+    );
+  }
   protected createThemeEditorSurvey(): SurveyModel {
-    var json = this.getThemeEditorSurveyJSON();
+    const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    var themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
+    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -445,20 +467,22 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.mergeData(this.themeVariables);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
+    assign(this.simulator.themeVariables, this.themeVariables);
+    this.initializeColorCalculator();
+
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
+        this.initializeColorCalculator();
         themeEditorSurvey.mergeData(this.themeVariables);
-      }
-      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
-        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
-        themeEditorSurvey.setValue("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100));
-      }
-      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background");
-        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
-        themeEditorSurvey.setValue("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100));
+        const newTheme = {};
+        assign(newTheme, this.themeVariables);
+        this.simulator.themeVariables = newTheme;
+
+        if (options.name === "themeMode") {
+          this.survey["isCompact"] = options.value === "lightweight";
+        }
+        return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
         this.survey[options.name] = options.value;
@@ -468,38 +492,45 @@ export class ThemeSurveyTabViewModel extends Base {
         this.survey.backgroundOpacity = options.value / 100;
         return;
       }
-      if (options.name === "themeMode") {
-        this.survey["isCompact"] = options.value === "lightweight";
-        return;
+      if (options.name === "--sjs-primary-backcolor") {
+        this.colorCalculator.calculateColors(options.value);
+        this.themeChanges["--sjs-primary-backcolor"] = options.value;
+        this.themeChanges["--sjs-primary-backcolor-light"] = this.colorCalculator.colorSettings.newColorLight;
+        this.themeChanges["--sjs-primary-backcolor-dark"] = this.colorCalculator.colorSettings.newColorDark;
+        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       }
-      const _data = sender.data;
+      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
+        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
+        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
+        this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
+      }
+      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
+        let baseColor = themeEditorSurvey.getValue("--background");
+        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
+        this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
+      }
       if (options.question?.getType() === "fontsettings") {
         Object.keys(options.value).forEach(key => {
           const innerQ = options.question.contentPanel.getQuestionByName(key);
-          _data[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
+          this.themeChanges[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
         });
       }
       if (options.question?.getType() === "elementsettings") {
         Object.keys(options.value).forEach(key => {
           if (key === "corner") return;
-          _data[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
+          this.themeChanges[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
         });
       }
-      this.simulator.themeVariables = _data;
+      const newTheme = {};
+      assign(newTheme, this.simulator.themeVariables, this.themeChanges);
+      this.simulator.themeVariables = newTheme;
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
     return themeEditorSurvey;
-  }
-
-  @property({ defaultValue: "default" }) themeName;
-  @property({ defaultValue: "light" }) themePalette;
-  @property({ defaultValue: "panel" }) themeMode;
-
-  get themeVariables(): any {
-    return Themes[this.themeName + "-" + this.themePalette];
   }
 
   private getThemeEditorSurveyJSON() {
@@ -776,7 +807,8 @@ export class ThemeSurveyTabViewModel extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   color: "#161616",
-                  size: 16
+                  weight: "600",
+                  size: 16,
                 }
               }, {
                 type: "fontSettings",
@@ -844,7 +876,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.primaryDefaultColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#19b394"
+                  defaultValue: "#19B394"
                 },
                 {
                   type: "color",
@@ -860,7 +892,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.primaryLightColor"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#e8f7f4"
+                  defaultValue: "#E8F7F4"
                 }
               ]
             }, {

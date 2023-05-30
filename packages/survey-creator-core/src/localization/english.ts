@@ -995,6 +995,7 @@ export var enStrings = {
     color: "Color",
     size: "Size",
     fontWeightRegular: "Regular",
+    fontWeightHeavy: "Heavy",
     fontWeightSemiBold: "Semi-Bold",
     fontWeightBold: "Bold",
     scale: "Scale",
