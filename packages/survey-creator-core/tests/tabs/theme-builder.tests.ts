@@ -3,9 +3,10 @@ import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
-import { parseColor, createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
+import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
+import { parseColor } from "../../src/utils/utils";
 import { SurveyModel } from "survey-core";
 
 import "survey-core/survey.i18n";
@@ -95,7 +96,7 @@ test("Theme builder panelBackgroundTransparency", (): any => {
   const panelBackgroundTransparency = themeEditor.getQuestionByName("panelBackgroundTransparency");
 
   expect(panelBackgroundTransparency.value).toEqual(100);
-  expect(simulator.themeVariables["--sjs-question-background"]).toEqual("#ffffff");
+  expect(simulator.themeVariables["--sjs-question-background"]).toBeUndefined();
 
   panelBackgroundTransparency.value = 60;
   expect(simulator.themeVariables["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
@@ -123,7 +124,7 @@ test("Theme builder questionBackgroundTransparency", (): any => {
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
-  expect(simulator.themeVariables["--sjs-editor-background"]).toEqual("#f9f9f9");
+  expect(simulator.themeVariables["--sjs-editor-background"]).toBeUndefined();
 
   questionBackgroundTransparency.value = 60;
   expect(simulator.themeVariables["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
@@ -196,11 +197,11 @@ test("Theme builder switch themes", (): any => {
 
   expect(themePalette.value).toEqual("light");
   expect(primaryColor.value).toEqual("rgba(25, 179, 148, 1)");
-  expect(backgroundDimColor.value).toEqual("#f3f3f3");
+  expect(backgroundDimColor.value).toEqual("rgba(243, 243, 243, 1)");
 
   themePalette.value = "dark";
   expect(primaryColor.value).toEqual("rgba(255, 152, 20, 1)");
-  expect(backgroundDimColor.value).toEqual("#4d4d4d");
+  expect(backgroundDimColor.value).toEqual("rgba(36, 36, 36, 1)");
 });
 
 test("Theme builder: composite question fontSettings", (): any => {

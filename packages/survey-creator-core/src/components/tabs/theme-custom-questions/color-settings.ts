@@ -1,6 +1,6 @@
 import { ComponentCollection, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
-import { ingectAlpha, parseRgbaFromString } from "../../../utils/utils";
+import { ingectAlpha, parseColor, parseRgbaFromString } from "../../../utils/utils";
 
 ComponentCollection.Instance.add({
   name: "colorsettings",
@@ -32,20 +32,4 @@ ComponentCollection.Instance.add({
 export function createColor(value: any): string {
   return ingectAlpha(value.color, value.opacity / 100);
 }
-export function parseColor(value: string): { color: string, opacity: number } {
-  const rgbValues = parseRgbaFromString(value);
-  if(rgbValues.length !== 0) {
-    let opacity = 1;
-    if(rgbValues.length == 4) {
-      opacity = rgbValues.pop();
-    }
-    const color = rgbValues.reduce((res: string, color: number) => {
-      const hex = color.toString(16);
-      return res + (hex.length == 1 ? "0" + hex : hex);
-    }, "#");
-    return { color, opacity: opacity * 100 };
-  }
-  else {
-    return { color: value, opacity: 100 };
-  }
-}
+
