@@ -59,6 +59,11 @@ Object.keys(MikeThemes).forEach(function (themeName) {
     themes[themeName]["--sjs-shadow-large"] = shadowGroup["large"] ? getShadowSettings(shadowGroup["large"]) : undefined;
     themes[themeName]["--sjs-shadow-inner"] = shadowGroup["inner"] ? getShadowSettings(shadowGroup["inner"]) : undefined;
   }
+  if(!!bordersGroup) {
+    themes[themeName]["--sjs-border-light"] = bordersGroup["light-border"] ? bordersGroup["light-border"]["value"] : undefined;
+    themes[themeName]["--sjs-border-default"] = bordersGroup["default-border"] ? bordersGroup["default-border"]["value"] : undefined;
+    themes[themeName]["--sjs-border-inside"] = bordersGroup["inside-border"] ? bordersGroup["inside-border"]["value"] : undefined;
+  }
 
   console.log(JSON.stringify(themes[themeName]));
 });

@@ -27,7 +27,10 @@ export const Themes = {
     "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
     "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.1)",
     "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)"
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.16)",
+    "--sjs-border-inside": "rgba(0, 0, 0, 0.16)"
   },
   "contrast": {
     "--background-dark": "rgba(228, 228, 228, 1)",
@@ -41,7 +44,9 @@ export const Themes = {
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.25)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.25)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.25)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.25)"
   },
   "plain": {
     "--background-dark": "rgba(241, 246, 255, 1)",
@@ -55,7 +60,9 @@ export const Themes = {
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.15)",
-    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)"
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(220, 229, 241, 1)",
+    "--sjs-border-default": "rgba(179, 200, 229, 1)"
   },
   "simple": {
     "--background": "rgba(246, 246, 246, 1)",
@@ -69,7 +76,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.12)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.12)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.12)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.12)"
   },
   "blank": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -83,7 +92,9 @@ export const Themes = {
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
     "--sjs-shadow-medium": "0px 0px 0px 1px rgba(0, 0, 0, 0.1)",
     "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.05)",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.15)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.15)"
   },
   "double": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -98,7 +109,9 @@ export const Themes = {
     "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 0.07)",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.08)",
-    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(0, 0, 0, 0.1)"
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(0, 0, 0, 0.1)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.1)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.1)"
   },
   "bulk": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -128,7 +141,9 @@ export const Themes = {
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 2px 0px 0px rgba(0, 0, 0, 0.2)",
-    "--sjs-shadow-inner": "inset 0px 2px 0px 0px rgba(0, 0, 0, 0.1)"
+    "--sjs-shadow-inner": "inset 0px 2px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.16)"
   },
   "playful": {
     "--background": "rgba(248, 248, 248, 1)",
@@ -143,7 +158,9 @@ export const Themes = {
     "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.08)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.08)"
   },
   "ultra": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -162,7 +179,9 @@ export const Themes = {
     "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
     "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
     "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
-    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.2)",
+    "--sjs-border-default": "rgba(0, 0, 0, 1)"
   },
   "default-dark": {
     "--background": "rgba(48, 48, 48, 1)",
@@ -182,7 +201,10 @@ export const Themes = {
     "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.35)",
     "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.2)",
     "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
-    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2)"
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.08)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-inside": "rgba(255, 255, 255, 0.08)"
   },
   "contrast-dark": {
     "--background-dark": "rgba(58, 58, 58, 1)",
@@ -199,7 +221,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.28)",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.22)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.22)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.22)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.22)"
   },
   "plain-dark": {
     "--background": "rgba(43, 48, 63, 1)",
@@ -214,7 +238,9 @@ export const Themes = {
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.35)",
-    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.2)"
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-border-light": "rgba(55, 62, 79, 1)",
+    "--sjs-border-default": "rgba(65, 72, 90, 1)"
   },
   "simple-dark": {
     "--background": "rgba(48, 48, 48, 1)",
@@ -228,7 +254,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.09)",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.07)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.07)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.07)"
   },
   "blank-dark": {
     "--background": "rgba(36, 36, 36, 1)",
@@ -242,7 +270,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
-    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)"
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
   },
   "double-dark": {
     "--background": "rgba(52, 52, 52, 1)",
@@ -257,7 +287,9 @@ export const Themes = {
     "--sjs-shadow-small": "0px 0px 0px 2px rgba(255, 255, 255, 0.12)",
     "--sjs-shadow-medium": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
     "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)"
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.1)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.1)"
   },
   "bulk-dark": {
     "--background": "rgba(39, 40, 50, 1)",
@@ -275,7 +307,9 @@ export const Themes = {
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
-    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(54, 56, 69, 1)",
+    "--sjs-border-default": "rgba(67, 69, 85, 1)"
   },
   "pseudo-3d-dark": {
     "--background": "rgba(53, 55, 63, 1)",
@@ -290,7 +324,9 @@ export const Themes = {
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
     "--sjs-shadow-small": "0px 2px 0px 0px rgba(33, 35, 43, 1)",
-    "--sjs-shadow-inner": "0px -2px 0px 0px rgba(33, 35, 43, 1)"
+    "--sjs-shadow-inner": "0px -2px 0px 0px rgba(33, 35, 43, 1)",
+    "--sjs-border-light": "rgba(65, 69, 83, 1)",
+    "--sjs-border-default": "rgba(97, 101, 118, 1)"
   },
   "playful-dark": {
     "--background": "rgba(38, 38, 38, 1)",
@@ -305,7 +341,9 @@ export const Themes = {
     "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
     "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
-    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
   },
   "ultra-dark": {
     "--background": "rgba(255, 216, 77, 1)",
@@ -325,7 +363,9 @@ export const Themes = {
     "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
     "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
     "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
-    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(232, 192, 51, 1)",
+    "--sjs-border-default": "rgba(0, 0, 0, 1)"
   },
   "default-lw": {
     "--background-dim": "rgba(255, 255, 255, 1)"
