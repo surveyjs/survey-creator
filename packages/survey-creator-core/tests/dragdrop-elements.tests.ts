@@ -1,5 +1,6 @@
 import { DragTypeOverMeEnum, Question, QuestionTextModel, SurveyModel } from "survey-core";
 import { DragDropSurveyElements, calculateIsEdge, calculateIsSide } from "../src/survey-elements";
+import { CreatorTester } from "./creator-tester";
 
 test("calculateVerticalMiddleOfHTMLElement", () => {
   let ddHelper = new DragDropSurveyElements(null);
@@ -923,4 +924,54 @@ test("drag drop to panel horizontal", () => {
       ],
     }]
   });
+});
+
+test("Undo/redo question dragged from last page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const ddHelper: any = creator.dragDropSurveyElements;
+
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  ddHelper.draggedElement = creator.survey.getQuestionByName("question2");
+  ddHelper.dragOverCore(creator.survey.getQuestionByName("question1"), DragTypeOverMeEnum.Bottom);
+  creator.startUndoRedoTransaction("drag/drop");
+  ddHelper.doDrop();
+  creator.stopUndoRedoTransaction();
+
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
