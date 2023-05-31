@@ -11,6 +11,7 @@ export * from "../tabs/logic-operator";
 export * from "../tabs/translation";
 
 export * from "../page";
+export * from "../page-add-question";
 export * from "../row";
 export * from "../string-editor";
 export * from "../adorners/question";

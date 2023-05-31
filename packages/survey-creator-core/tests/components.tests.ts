@@ -684,3 +684,56 @@ test("LogoImageViewModel isUploading", () => {
   const logoImageAdorner = new LogoImageViewModel(creator, { getElementsByClassName: () => [{ files: [{}] }] } as any);
   expect(logoImageAdorner.acceptedTypes).toBe(imageMimeTypes);
 });
+
+test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", name: "q1", rateMax: 3 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+
+  var eventFunction = (sender, options) => {
+    if (options.property.name === "rateValues") {
+      options.readOnly = true;
+    }
+  };
+
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+
+  creator.onGetPropertyReadOnly.add((sender, options) => eventFunction(sender, options));
+
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
+
+  eventFunction = (sender, options) => {
+    if (options.property.name === "rateCount") {
+      options.readOnly = true;
+    }
+  };
+
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
+
+  eventFunction = (sender, options) => {
+    if (options.property.name === "rateMax") {
+      options.readOnly = true;
+    }
+  };
+
+  expect(ratingAdorner.allowAdd).toBeFalsy();
+  expect(ratingAdorner.allowRemove).toBeFalsy();
+
+  question.autoGenerate = false;
+
+  expect(ratingAdorner.allowAdd).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+});
+

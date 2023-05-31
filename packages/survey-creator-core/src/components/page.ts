@@ -1,4 +1,4 @@
-import { ComputedUpdater, DragTypeOverMeEnum, IAction, PageModel, property, SurveyElement, SurveyModel } from "survey-core";
+import { ActionContainer, ComputedUpdater, DragTypeOverMeEnum, IAction, PageModel, property } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
@@ -14,7 +14,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
-
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
@@ -113,11 +112,11 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     }
   }
 
-  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent) {
+  addNewQuestion(model: PageAdorner, event: IPortableMouseEvent, type?: string) {
     this.creator.addNewQuestionInPage((type) => {
       this.addGhostPage(false);
       this.creator.survey.currentPage = this.page;
-    }, null, this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
+    }, null, type || this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   select(model: PageAdorner, event: IPortableMouseEvent) {
     if (!model.isGhost) {
@@ -164,4 +163,25 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       return this.creator.getLocString("ed.addNewQuestion");
     return !!this.creator ? this.creator.getAddNewQuestionText(this.currentAddQuestionType) : "";
   }
+  private _footerActionsBar: ActionContainer;
+  public get footerActionsBar(): ActionContainer {
+    if(!this._footerActionsBar) {
+      this._footerActionsBar = new ActionContainer();
+      this._footerActionsBar.containerCss = "svc-page__footer";
+      this._footerActionsBar.cssClasses = {
+        item: "svc-btn",
+        itemTitle: "svc-text svc-text--normal svc-text--bold"
+      };
+      let footerActions: Array<IAction> = [{
+        css: "svc-add-new-question-action",
+        visible: <boolean><unknown>(new ComputedUpdater<boolean>(() => this.showAddQuestionButton)),
+        component: "svc-add-new-question-btn",
+        data: this
+      }];
+      footerActions = this.creator.getUpdatedPageAdornerFooterActions(this, footerActions);
+      this.footerActionsBar.setItems(footerActions);
+    }
+    return this._footerActionsBar;
+  }
+
 }

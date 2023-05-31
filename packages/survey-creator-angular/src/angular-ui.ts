@@ -26,6 +26,7 @@ export * from "./tabs/preview/survey-results-row.component";
 export * from "./tabs/preview/test.component";
 export * from "./tabs/theme/theme.component";
 export * from "./page.component";
+export * from "./page-add-question.component";
 export * from "./question.component";
 export * from "./adorners/item-value.component";
 export * from "./adorners/image-item-value.component";
