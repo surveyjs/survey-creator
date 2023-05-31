@@ -17,6 +17,8 @@
     (beforeinput)="model.onBeforeInput($event)"
     [value]="model.renderedValue"
     [class]="model.cssClasses.control"/>  
-    <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
-    <sv-ng-popup [popupModel]="model.dropdownAction.popupModel" [visible]="false"></sv-ng-popup>
+    <ng-container *ngIf="model.showDropdownAction">
+      <sv-action-bar-item [model]="model.dropdownAction"></sv-action-bar-item>
+      <sv-ng-popup [popupModel]="model.dropdownAction.popupModel" [visible]="false"></sv-ng-popup>
+    </ng-container>
 </div>

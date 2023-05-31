@@ -79,6 +79,10 @@ export class QuestionColorModel extends QuestionTextModel {
     this.setPropertyValue("choices", newValue);
   }
 
+  public get showDropdownAction() {
+    return !this.isValueEmpty(this.choices);
+  }
+
   public createDropdownAction(): Action {
     const action = createDropdownActionModelAdvanced({
       iconName: this.cssClasses.colorDropdownIcon
@@ -86,7 +90,7 @@ export class QuestionColorModel extends QuestionTextModel {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
-      items: this.choices || []
+      items: this.choices
     }, {
       showPointer: false,
       verticalPosition: "bottom",

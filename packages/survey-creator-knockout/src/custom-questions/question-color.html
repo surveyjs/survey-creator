@@ -8,6 +8,8 @@
     event: { change: question.koOnChange, blur: question.koOnBlur, keyup: question.koOnKeyUp, beforeinput: question.koOnBeforeInput },
     value: question.renderedValue,
     css: question.cssClasses.control"></input>
+  <!-- ko if: question.showDropdownAction -->
   <!-- ko component: { name: 'sv-action-bar-item', params: { item: question.dropdownAction } } --><!-- /ko -->
   <sv-popup params="model: question.dropdownAction.popupModel"></sv-popup>
+  <!-- /ko -->
 </div>

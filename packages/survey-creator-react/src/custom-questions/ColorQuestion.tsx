@@ -36,8 +36,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
       <div className={this.question.cssClasses.root}>
         { this.renderColorSwatch() }
         { this.renderInput() }
-        { this.renderColorInput() }
-        {this.renderPopup()}
+        { this.question.showDropdownAction ? this.renderDropdownAction() : null }
       </div>
     );
   }
@@ -50,8 +49,13 @@ export class SurveyQuestionColor extends SurveyQuestionText {
       <input type="color" value={this.question.renderedValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
     </label>;
   }
-  protected renderColorInput(): JSX.Element {
-    return ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction });
+  protected renderDropdownAction(): JSX.Element {
+    return (
+      <>
+        {ReactElementFactory.Instance.createElement("sv-action-bar-item", { item: this.question.dropdownAction })}
+        {this.renderPopup()}
+      </>
+    );
   }
   protected renderPopup(): JSX.Element {
     return <Popup model={this.question.dropdownAction.popupModel}></Popup>;
