@@ -53,6 +53,13 @@ Object.keys(MikeThemes).forEach(function (themeName) {
     themes[themeName]["--base-unit"] = "8px";
     themes[themeName]["--sjs-corner-radius"] = "4px";
   }
+  if(!!secondaryGroup) {
+    themes[themeName]["--sjs-secondary-backcolor"] = secondaryGroup["backcolor"] ? secondaryGroup["backcolor"]["value"] : undefined;
+    themes[themeName]["--sjs-secondary-backcolor-light"] = secondaryGroup["backcolor-light"] ? secondaryGroup["backcolor-light"]["value"] : undefined;
+    themes[themeName]["--sjs-secondary-backcolor-semi-light"] = secondaryGroup["backcolor-semi-light"] ? secondaryGroup["backcolor-semi-light"]["value"] : undefined;
+    themes[themeName]["--sjs-secondary-forecolor"] = secondaryGroup["forecolor"] ? secondaryGroup["forecolor"]["value"] : undefined;
+    themes[themeName]["--sjs-secondary-forecolor-light"] = secondaryGroup["forecolor-light"] ? secondaryGroup["forecolor-light"]["value"] : undefined;
+  }
   if(!!shadowGroup) {
     themes[themeName]["--sjs-shadow-small"] = shadowGroup["small"] ? getShadowSettings(shadowGroup["small"]) : undefined;
     themes[themeName]["--sjs-shadow-medium"] = shadowGroup["medium"] ? getShadowSettings(shadowGroup["medium"]) : undefined;
@@ -63,6 +70,23 @@ Object.keys(MikeThemes).forEach(function (themeName) {
     themes[themeName]["--sjs-border-light"] = bordersGroup["light-border"] ? bordersGroup["light-border"]["value"] : undefined;
     themes[themeName]["--sjs-border-default"] = bordersGroup["default-border"] ? bordersGroup["default-border"]["value"] : undefined;
     themes[themeName]["--sjs-border-inside"] = bordersGroup["inside-border"] ? bordersGroup["inside-border"]["value"] : undefined;
+  }
+  if(!!specialGroup) {
+    themes[themeName]["--sjs-special-red"] = specialGroup["red"] ? specialGroup["red"]["value"] : undefined;
+    themes[themeName]["--sjs-special-red-light"] = specialGroup["red-light"] ? specialGroup["red-light"]["value"] : undefined;
+    themes[themeName]["--sjs-special-red-forecolor"] = specialGroup["red-forecolor"] ? specialGroup["red-forecolor"]["value"] : undefined;
+
+    themes[themeName]["--sjs-special-green"] = specialGroup["green"] ? specialGroup["green"]["value"] : undefined;
+    themes[themeName]["--sjs-special-green-light"] = specialGroup["green-light"] ? specialGroup["green-light"]["value"] : undefined;
+    themes[themeName]["--sjs-special-green-forecolor"] = specialGroup["green-forecolor"] ? specialGroup["green-forecolor"]["value"] : undefined;
+
+    themes[themeName]["--sjs-special-blue"] = specialGroup["blue"] ? specialGroup["blue"]["value"] : undefined;
+    themes[themeName]["--sjs-special-blue-light"] = specialGroup["blue-light"] ? specialGroup["blue-light"]["value"] : undefined;
+    themes[themeName]["--sjs-special-blue-forecolor"] = specialGroup["blue-forecolor"] ? specialGroup["blue-forecolor"]["value"] : undefined;
+
+    themes[themeName]["--sjs-special-yellow"] = specialGroup["yellow"] ? specialGroup["yellow"]["value"] : undefined;
+    themes[themeName]["--sjs-special-yellow-light"] = specialGroup["yellow-light"] ? specialGroup["yellow-light"]["value"] : undefined;
+    themes[themeName]["--sjs-special-yellow-forecolor"] = specialGroup["yellow-forecolor"] ? specialGroup["yellow-forecolor"]["value"] : undefined;
   }
 
   console.log(JSON.stringify(themes[themeName]));
