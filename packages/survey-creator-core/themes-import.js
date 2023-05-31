@@ -2,18 +2,23 @@ const fs = require('fs');
 const MikeThemes = require("./themes.json");
 const themes = {};
 
+function createBoxShadow(value) {
+  return value.map((val => `${val["type"] === "innerShadow" ? "inset " : ""}${val.x}px ${val.y}px ${val.radius}px ${val.spread}px ${val.color}`
+  )).join(",");
+}
 function getShadowSettings(shadowGroup) {
   const result = {};
-  Object.keys(shadowGroup).forEach(shadowPropery => {
-    if(shadowPropery === "category" || shadowPropery === "exportKey") return;
+  Object.keys(shadowGroup)
+  .filter(shadowPropery => { return (shadowPropery !== "category" && shadowPropery !== "exportKey"); })
+  .forEach(shadowPropery => {
     if(shadowPropery === "offset") {
-      result[shadowPropery + "X"] = shadowGroup[shadowPropery]["x"]["value"];
-      result[shadowPropery + "Y"] = shadowGroup[shadowPropery]["y"]["value"];
+      result["x"] = shadowGroup[shadowPropery]["x"]["value"];
+      result["y"] = shadowGroup[shadowPropery]["y"]["value"];
     } else {
       result[shadowPropery] = shadowGroup[shadowPropery]["value"];
     }
   });
-return result;
+return createBoxShadow([result]);
 }
 
 Object.keys(MikeThemes).forEach(function (themeName) {
@@ -49,10 +54,10 @@ Object.keys(MikeThemes).forEach(function (themeName) {
     themes[themeName]["--sjs-corner-radius"] = "4px";
   }
   if(!!shadowGroup) {
-    themes[themeName]["--sjs-effect-shadow-small"] = shadowGroup["small"] ? getShadowSettings(shadowGroup["small"]) : undefined;
-    themes[themeName]["--sjs-effect-shadow-medium"] = shadowGroup["medium"] ? getShadowSettings(shadowGroup["medium"]) : undefined;
-    themes[themeName]["--sjs-effect-shadow-large"] = shadowGroup["large"] ? getShadowSettings(shadowGroup["large"]) : undefined;
-    themes[themeName]["--sjs-effect-shadow-inner"] = shadowGroup["inner"] ? getShadowSettings(shadowGroup["inner"]) : undefined;
+    themes[themeName]["--sjs-shadow-small"] = shadowGroup["small"] ? getShadowSettings(shadowGroup["small"]) : undefined;
+    themes[themeName]["--sjs-shadow-medium"] = shadowGroup["medium"] ? getShadowSettings(shadowGroup["medium"]) : undefined;
+    themes[themeName]["--sjs-shadow-large"] = shadowGroup["large"] ? getShadowSettings(shadowGroup["large"]) : undefined;
+    themes[themeName]["--sjs-shadow-inner"] = shadowGroup["inner"] ? getShadowSettings(shadowGroup["inner"]) : undefined;
   }
 
   console.log(JSON.stringify(themes[themeName]));

@@ -24,38 +24,10 @@ export const Themes = {
     "--sjs-primary-forecolor": "rgba(255, 255, 255, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 2,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 1,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 6,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 2,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 16,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 8,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "innerShadow",
-      "radius": 2,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 1,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)"
   },
   "contrast": {
     "--background-dark": "rgba(228, 228, 228, 1)",
@@ -68,22 +40,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(69, 24, 142, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.25)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.25)"
   },
   "plain": {
     "--background-dark": "rgba(241, 246, 255, 1)",
@@ -96,22 +54,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(26, 86, 175, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "innerShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)"
   },
   "simple": {
     "--background": "rgba(246, 246, 246, 1)",
@@ -123,23 +67,9 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(64, 159, 31, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.12)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.12)"
   },
   "blank": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -150,38 +80,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(21, 119, 209, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 16,
-      "color": "rgba(0, 0, 0, 0.05)",
-      "offsetX": 0,
-      "offsetY": 8,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.15)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "0px 0px 0px 1px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.05)",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)"
   },
   "double": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -193,31 +95,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(62, 83, 115, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.07)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 16,
-      "color": "rgba(0, 0, 0, 0.08)",
-      "offsetX": 0,
-      "offsetY": 8,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    }
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 0.07)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.08)",
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(0, 0, 0, 0.1)"
   },
   "bulk": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -230,8 +111,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(105, 84, 152, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {},
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "pseudo-3d": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -246,22 +127,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(23, 156, 165, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 2,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "innerShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 2,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 2px 0px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "inset 0px 2px 0px 0px rgba(0, 0, 0, 0.1)"
   },
   "playful": {
     "--background": "rgba(248, 248, 248, 1)",
@@ -273,17 +140,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(189, 61, 84, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {},
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "ultra": {
     "--background": "rgba(255, 255, 255, 1)",
@@ -299,31 +159,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(83, 83, 83, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 6,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "default-dark": {
     "--background": "rgba(48, 48, 48, 1)",
@@ -340,38 +179,10 @@ export const Themes = {
     "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 2,
-      "color": "rgba(0, 0, 0, 0.35)",
-      "offsetX": 0,
-      "offsetY": 1,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 6,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 2,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 16,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 8,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "innerShadow",
-      "radius": 2,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 1,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.35)",
+    "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2)"
   },
   "contrast-dark": {
     "--background-dark": "rgba(58, 58, 58, 1)",
@@ -386,23 +197,9 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(129, 240, 255, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.28)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.22)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.28)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.22)"
   },
   "plain-dark": {
     "--background": "rgba(43, 48, 63, 1)",
@@ -416,22 +213,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(151, 205, 255, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.35)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "innerShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.2)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.35)",
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.2)"
   },
   "simple-dark": {
     "--background": "rgba(48, 48, 48, 1)",
@@ -443,23 +226,9 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(130, 237, 92, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.09)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.07)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.09)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.07)"
   },
   "blank-dark": {
     "--background": "rgba(36, 36, 36, 1)",
@@ -471,23 +240,9 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(126, 193, 255, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.12)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    },
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.12)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 1
-    }
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)"
   },
   "double-dark": {
     "--background": "rgba(52, 52, 52, 1)",
@@ -499,38 +254,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(146, 181, 235, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.12)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 16,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 8,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(255, 255, 255, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    }
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(255, 255, 255, 0.12)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)"
   },
   "bulk-dark": {
     "--background": "rgba(39, 40, 50, 1)",
@@ -546,9 +273,9 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(192, 165, 251, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {},
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "pseudo-3d-dark": {
     "--background": "rgba(53, 55, 63, 1)",
@@ -562,22 +289,8 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(92, 224, 233, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(33, 35, 43, 1)",
-      "offsetX": 0,
-      "offsetY": 2,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(33, 35, 43, 1)",
-      "offsetX": 0,
-      "offsetY": -2,
-      "spread": 0
-    }
+    "--sjs-shadow-small": "0px 2px 0px 0px rgba(33, 35, 43, 1)",
+    "--sjs-shadow-inner": "0px -2px 0px 0px rgba(33, 35, 43, 1)"
   },
   "playful-dark": {
     "--background": "rgba(38, 38, 38, 1)",
@@ -589,17 +302,10 @@ export const Themes = {
     "--sjs-primary-backcolor-dark": "rgba(250, 118, 157, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {},
-    "--sjs-effect-shadow-medium": {},
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 0.1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "ultra-dark": {
     "--background": "rgba(255, 216, 77, 1)",
@@ -616,31 +322,10 @@ export const Themes = {
     "--sjs-primary-forecolor": "rgba(255, 255, 255, 1)",
     "--base-unit": "8px",
     "--sjs-corner-radius": "4px",
-    "--sjs-effect-shadow-small": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-medium": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 0,
-      "spread": 2
-    },
-    "--sjs-effect-shadow-large": {
-      "type": "dropShadow",
-      "radius": 0,
-      "color": "rgba(0, 0, 0, 1)",
-      "offsetX": 0,
-      "offsetY": 6,
-      "spread": 0
-    },
-    "--sjs-effect-shadow-inner": {}
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "default-lw": {
     "--background-dim": "rgba(255, 255, 255, 1)"
@@ -1141,6 +826,8 @@ export class ThemeSurveyTabViewModel extends Base {
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
+      this.themeChanges[options.name] = options.value;
+
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         this.initializeColorCalculator();
@@ -1456,7 +1143,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-small",
+                name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.questionShadow"),
                 defaultValue: {
@@ -1510,7 +1197,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-inner",
+                name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.editorShadow"),
                 defaultValue: {
