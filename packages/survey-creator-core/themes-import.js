@@ -35,10 +35,10 @@ Object.keys(MikeThemes).forEach(function (themeName) {
 
   if(!!generalGroup) {
     themes[themeName] = {
-      "--sjs-general-background": generalGroup["backcolor"] ? generalGroup["backcolor"]["value"] : undefined,
-      "--sjs-general-background-dark": generalGroup["backcolor-dark"] ? generalGroup["backcolor-dark"]["value"] : undefined,
-      "--sjs-general-background-dim": generalGroup["dim-backcolor"] ? generalGroup["dim-backcolor"]["value"]: undefined,
-      "--sjs-general-background-dim-light": generalGroup["dim-backcolor-light"] ? generalGroup["dim-backcolor-light"]["value"] : undefined,
+      "--sjs-general-backcolor": generalGroup["backcolor"] ? generalGroup["backcolor"]["value"] : undefined,
+      "--sjs-general-backcolor-dark": generalGroup["backcolor-dark"] ? generalGroup["backcolor-dark"]["value"] : undefined,
+      "--sjs-general-backcolor-dim": generalGroup["dim-backcolor"] ? generalGroup["dim-backcolor"]["value"]: undefined,
+      "--sjs-general-backcolor-dim-light": generalGroup["dim-backcolor-light"] ? generalGroup["dim-backcolor-light"]["value"] : undefined,
       "--sjs-general-forecolor": generalGroup.forecolor ? generalGroup.forecolor["value"] : undefined,
       "--sjs-general-forecolor-light": generalGroup["forecolor-light"] ? generalGroup["forecolor-light"]["value"]: undefined,
       "--sjs-general-dim-forecolor": generalGroup["dim-forecolor"] ? generalGroup["dim-forecolor"]["value"] : undefined,

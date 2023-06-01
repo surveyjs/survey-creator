@@ -10,10 +10,10 @@ require("./theme.scss");
 
 export const Themes = {
   "default": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dark": "rgba(248, 248, 248, 1)",
-    "--sjs-general-background-dim": "rgba(243, 243, 243, 1)",
-    "--sjs-general-background-dim-light": "rgba(249, 249, 249, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
+    "--sjs-general-backcolor-dim": "rgba(243, 243, 243, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(249, 249, 249, 1)",
     "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
     "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45)",
     "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
@@ -50,9 +50,9 @@ export const Themes = {
     "--sjs-special-yellow-forecolor": "rgba(255, 255, 255, 1)"
   },
   "contrast": {
-    "--sjs-general-background-dark": "rgba(228, 228, 228, 1)",
-    "--sjs-general-background-dim": "rgba(224, 224, 224, 1)",
-    "--sjs-general-background-dim-light": "rgba(238, 238, 238, 1)",
+    "--sjs-general-backcolor-dark": "rgba(228, 228, 228, 1)",
+    "--sjs-general-backcolor-dim": "rgba(224, 224, 224, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)",
     "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.6)",
     "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.6)",
     "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)",
@@ -66,9 +66,9 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.25)"
   },
   "plain": {
-    "--sjs-general-background-dark": "rgba(241, 246, 255, 1)",
-    "--sjs-general-background-dim": "rgba(231, 240, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(238, 245, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(241, 246, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 245, 255, 1)",
     "--sjs-general-forecolor-light": "rgba(133, 154, 186, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(133, 154, 186, 1)",
     "--sjs-primary-backcolor": "rgba(35, 101, 200, 1)",
@@ -82,10 +82,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(179, 200, 229, 1)"
   },
   "simple": {
-    "--sjs-general-background": "rgba(246, 246, 246, 1)",
-    "--sjs-general-background-dark": "rgba(235, 235, 235, 1)",
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor": "rgba(246, 246, 246, 1)",
+    "--sjs-general-backcolor-dark": "rgba(235, 235, 235, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
     "--sjs-primary-backcolor": "rgba(85, 181, 52, 1)",
     "--sjs-primary-backcolor-light": "rgba(85, 181, 52, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(64, 159, 31, 1)",
@@ -98,9 +98,9 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.12)"
   },
   "blank": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
     "--sjs-primary-backcolor": "rgba(37, 137, 229, 1)",
     "--sjs-primary-backcolor-light": "rgba(37, 137, 229, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(21, 119, 209, 1)",
@@ -114,10 +114,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.15)"
   },
   "double": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dark": "rgba(239, 239, 239, 1)",
-    "--sjs-general-background-dim": "rgba(245, 245, 245, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(239, 239, 239, 1)",
+    "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
     "--sjs-primary-backcolor": "rgba(76, 100, 137, 1)",
     "--sjs-primary-backcolor-light": "rgba(76, 100, 137, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(62, 83, 115, 1)",
@@ -131,10 +131,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.1)"
   },
   "bulk": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dark": "rgba(244, 244, 244, 1)",
-    "--sjs-general-background-dim": "rgba(216, 207, 236, 1)",
-    "--sjs-general-background-dim-light": "rgba(241, 237, 248, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(244, 244, 244, 1)",
+    "--sjs-general-backcolor-dim": "rgba(216, 207, 236, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(241, 237, 248, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.5)",
     "--sjs-primary-backcolor": "rgba(122, 100, 168, 1)",
     "--sjs-primary-backcolor-light": "rgba(122, 100, 168, 0.1)",
@@ -145,10 +145,10 @@ export const Themes = {
     "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
   },
   "pseudo-3d": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dark": "rgba(243, 243, 243, 1)",
-    "--sjs-general-background-dim": "rgba(46, 172, 180, 1)",
-    "--sjs-general-background-dim-light": "rgba(245, 245, 245, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(243, 243, 243, 1)",
+    "--sjs-general-backcolor-dim": "rgba(46, 172, 180, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(245, 245, 245, 1)",
     "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.43)",
     "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.8)",
@@ -163,10 +163,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.16)"
   },
   "playful": {
-    "--sjs-general-background": "rgba(248, 248, 248, 1)",
-    "--sjs-general-background-dark": "rgba(242, 242, 242, 1)",
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor": "rgba(248, 248, 248, 1)",
+    "--sjs-general-backcolor-dark": "rgba(242, 242, 242, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
     "--sjs-primary-backcolor": "rgba(217, 74, 100, 1)",
     "--sjs-primary-backcolor-light": "rgba(217, 74, 100, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(189, 61, 84, 1)",
@@ -180,10 +180,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 0.08)"
   },
   "ultra": {
-    "--sjs-general-background": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dark": "rgba(255, 216, 77, 1)",
-    "--sjs-general-background-dim": "rgba(255, 216, 77, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 216, 77, 1)",
     "--sjs-general-forecolor": "rgba(0, 0, 0, 1)",
     "--sjs-general-forecolor-light": "rgba(0, 0, 0, 1)",
     "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 1)",
@@ -201,10 +201,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 1)"
   },
   "default-dark": {
-    "--sjs-general-background": "rgba(48, 48, 48, 1)",
-    "--sjs-general-background-dark": "rgba(52, 52, 52, 1)",
-    "--sjs-general-background-dim": "rgba(36, 36, 36, 1)",
-    "--sjs-general-background-dim-light": "rgba(43, 43, 43, 1)",
+    "--sjs-general-backcolor": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dark": "rgba(52, 52, 52, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(43, 43, 43, 1)",
     "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
     "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.42)",
     "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.79)",
@@ -241,9 +241,9 @@ export const Themes = {
     "--sjs-special-yellow-forecolor": "rgba(48, 48, 48, 1)"
   },
   "contrast-dark": {
-    "--sjs-general-background-dark": "rgba(58, 58, 58, 1)",
-    "--sjs-general-background-dim": "rgba(27, 27, 27, 1)",
-    "--sjs-general-background-dim-light": "rgba(33, 33, 33, 1)",
+    "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(27, 27, 27, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)",
     "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
     "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.5)",
     "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.8)",
@@ -260,10 +260,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(255, 255, 255, 0.22)"
   },
   "plain-dark": {
-    "--sjs-general-background": "rgba(43, 48, 63, 1)",
-    "--sjs-general-background-dark": "rgba(50, 55, 72, 1)",
-    "--sjs-general-background-dim": "rgba(33, 37, 51, 1)",
-    "--sjs-general-background-dim-light": "rgba(36, 41, 55, 1)",
+    "--sjs-general-backcolor": "rgba(43, 48, 63, 1)",
+    "--sjs-general-backcolor-dark": "rgba(50, 55, 72, 1)",
+    "--sjs-general-backcolor-dim": "rgba(33, 37, 51, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(36, 41, 55, 1)",
     "--sjs-general-forecolor-light": "rgba(114, 120, 137, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(114, 120, 137, 1)",
     "--sjs-primary-backcolor": "rgba(114, 187, 255, 1)",
@@ -277,10 +277,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(65, 72, 90, 1)"
   },
   "simple-dark": {
-    "--sjs-general-background": "rgba(48, 48, 48, 1)",
-    "--sjs-general-background-dark": "rgba(56, 56, 56, 1)",
-    "--sjs-general-background-dim": "rgba(36, 36, 36, 1)",
-    "--sjs-general-background-dim-light": "rgba(43, 43, 43, 1)",
+    "--sjs-general-backcolor": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dark": "rgba(56, 56, 56, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(43, 43, 43, 1)",
     "--sjs-primary-backcolor": "rgba(92, 214, 49, 1)",
     "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
     "--sjs-primary-backcolor-dark": "rgba(130, 237, 92, 1)",
@@ -293,10 +293,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(255, 255, 255, 0.07)"
   },
   "blank-dark": {
-    "--sjs-general-background": "rgba(36, 36, 36, 1)",
-    "--sjs-general-background-dark": "rgba(47, 47, 47, 1)",
-    "--sjs-general-background-dim": "rgba(36, 36, 36, 1)",
-    "--sjs-general-background-dim-light": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dark": "rgba(47, 47, 47, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(36, 36, 36, 1)",
     "--sjs-primary-backcolor": "rgba(85, 171, 250, 1)",
     "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.12)",
     "--sjs-primary-backcolor-dark": "rgba(126, 193, 255, 1)",
@@ -309,10 +309,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
   },
   "double-dark": {
-    "--sjs-general-background": "rgba(52, 52, 52, 1)",
-    "--sjs-general-background-dark": "rgba(58, 58, 58, 1)",
-    "--sjs-general-background-dim": "rgba(47, 47, 47, 1)",
-    "--sjs-general-background-dim-light": "rgba(47, 47, 47, 1)",
+    "--sjs-general-backcolor": "rgba(52, 52, 52, 1)",
+    "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(47, 47, 47, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(47, 47, 47, 1)",
     "--sjs-primary-backcolor": "rgba(120, 156, 210, 1)",
     "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(146, 181, 235, 1)",
@@ -326,10 +326,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(255, 255, 255, 0.1)"
   },
   "bulk-dark": {
-    "--sjs-general-background": "rgba(39, 40, 50, 1)",
-    "--sjs-general-background-dark": "rgba(46, 47, 58, 1)",
-    "--sjs-general-background-dim": "rgba(30, 31, 40, 1)",
-    "--sjs-general-background-dim-light": "rgba(32, 33, 43, 1)",
+    "--sjs-general-backcolor": "rgba(39, 40, 50, 1)",
+    "--sjs-general-backcolor-dark": "rgba(46, 47, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(30, 31, 40, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(32, 33, 43, 1)",
     "--sjs-general-forecolor": "rgba(213, 215, 238, 1)",
     "--sjs-general-forecolor-light": "rgba(117, 120, 140, 1)",
     "--sjs-general-dim-forecolor": "rgba(213, 215, 238, 1)",
@@ -346,10 +346,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(67, 69, 85, 1)"
   },
   "pseudo-3d-dark": {
-    "--sjs-general-background": "rgba(53, 55, 63, 1)",
-    "--sjs-general-background-dark": "rgba(60, 63, 74, 1)",
-    "--sjs-general-background-dim": "rgba(38, 40, 47, 1)",
-    "--sjs-general-background-dim-light": "rgba(46, 48, 55, 1)",
+    "--sjs-general-backcolor": "rgba(53, 55, 63, 1)",
+    "--sjs-general-backcolor-dark": "rgba(60, 63, 74, 1)",
+    "--sjs-general-backcolor-dim": "rgba(38, 40, 47, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(46, 48, 55, 1)",
     "--sjs-general-forecolor-light": "rgba(125, 129, 143, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(125, 130, 148, 1)",
     "--sjs-primary-backcolor": "rgba(58, 202, 211, 1)",
@@ -363,10 +363,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(97, 101, 118, 1)"
   },
   "playful-dark": {
-    "--sjs-general-background": "rgba(38, 38, 38, 1)",
-    "--sjs-general-background-dark": "rgba(48, 48, 48, 1)",
-    "--sjs-general-background-dim": "rgba(28, 28, 28, 1)",
-    "--sjs-general-background-dim-light": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor": "rgba(38, 38, 38, 1)",
+    "--sjs-general-backcolor-dark": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dim": "rgba(28, 28, 28, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(48, 48, 48, 1)",
     "--sjs-primary-backcolor": "rgba(243, 87, 134, 1)",
     "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.05)",
     "--sjs-primary-backcolor-dark": "rgba(250, 118, 157, 1)",
@@ -380,10 +380,10 @@ export const Themes = {
     "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
   },
   "ultra-dark": {
-    "--sjs-general-background": "rgba(255, 216, 77, 1)",
-    "--sjs-general-background-dark": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim": "rgba(0, 0, 0, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dark": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(0, 0, 0, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
     "--sjs-general-forecolor": "rgba(0, 0, 0, 1)",
     "--sjs-general-forecolor-light": "rgba(0, 0, 0, 1)",
     "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 1)",
@@ -402,62 +402,62 @@ export const Themes = {
     "--sjs-border-default": "rgba(0, 0, 0, 1)"
   },
   "default-lw": {
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)"
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
   },
   "contrast-lw": {
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(238, 238, 238, 1)"
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)"
   },
   "plain-lw": {
-    "--sjs-general-background": "rgba(231, 240, 255, 1)",
-    "--sjs-general-background-dark": "rgba(220, 232, 252, 1)",
-    "--sjs-general-background-dim": "rgba(231, 240, 255, 1)",
-    "--sjs-general-background-dim-light": "rgba(255, 255, 255, 1)"
+    "--sjs-general-backcolor": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(220, 232, 252, 1)",
+    "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)"
   },
   "simple-lw": {
-    "--sjs-general-background-dim": "rgba(246, 246, 246, 1)"
+    "--sjs-general-backcolor-dim": "rgba(246, 246, 246, 1)"
   },
   "double-lw": {
-    "--sjs-general-background-dim": "rgba(245, 245, 245, 1)"
+    "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)"
   },
   "bulk-lw": {
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)"
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
   },
   "pseudo-3d-lw": {
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
     "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
     "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)"
   },
   "playful-lw": {
-    "--sjs-general-background-dim": "rgba(248, 248, 248, 1)"
+    "--sjs-general-backcolor-dim": "rgba(248, 248, 248, 1)"
   },
   "ultra-lw": {
-    "--sjs-general-background-dim": "rgba(255, 255, 255, 1)"
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
   },
   "default-dark-lw": {
-    "--sjs-general-background-dim": "rgba(48, 48, 48, 1)"
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
   },
   "contrast-dark-lw": {
-    "--sjs-general-background-dim": "rgba(48, 48, 48, 1)",
-    "--sjs-general-background-dim-light": "rgba(33, 33, 33, 1)"
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)"
   },
   "plain-dark-lw": {
-    "--sjs-general-background-dim": "rgba(43, 48, 63, 1)"
+    "--sjs-general-backcolor-dim": "rgba(43, 48, 63, 1)"
   },
   "simple-dark-lw": {
-    "--sjs-general-background-dim": "rgba(48, 48, 48, 1)"
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
   },
   "double-dark-lw": {
-    "--sjs-general-background-dim": "rgba(52, 52, 52, 1)"
+    "--sjs-general-backcolor-dim": "rgba(52, 52, 52, 1)"
   },
   "bulk-dark-lw": {
-    "--sjs-general-background-dim": "rgba(39, 40, 50, 1)"
+    "--sjs-general-backcolor-dim": "rgba(39, 40, 50, 1)"
   },
   "pseudo-3d-dark-lw": {
-    "--sjs-general-background-dim": "rgba(53, 55, 63, 1)"
+    "--sjs-general-backcolor-dim": "rgba(53, 55, 63, 1)"
   },
   "ultra-dark-lw": {
-    "--sjs-general-background-dim": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
     "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 1)",
     "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 1)"
   },
@@ -894,8 +894,8 @@ export class ThemeSurveyTabViewModel extends Base {
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.mergeData(this.themeVariables);
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-background"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-background-dim-light"];
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor-dim-light"];
     assign(this.simulator.themeVariables, this.themeVariables);
     this.initializeColorCalculator();
 
@@ -935,12 +935,12 @@ export class ThemeSurveyTabViewModel extends Base {
         this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       }
       if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--sjs-general-background-dim-light");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light");
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
         this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
       }
       if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--sjs-general-background");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor");
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
       }
@@ -1026,7 +1026,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "color",
-                name: "--sjs-general-background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
@@ -1166,7 +1166,7 @@ export class ThemeSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "color",
-                name: "--sjs-general-background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
@@ -1231,7 +1231,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "expression",
-                name: "--sjs-general-background",
+                name: "--sjs-general-backcolor",
                 expression: "{questionPanel.backcolor}",
                 visible: false
               }, {
@@ -1284,7 +1284,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 }
               }, {
                 type: "expression",
-                name: "--sjs-general-background-dim-light",
+                name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",
                 visible: false
               }, {

@@ -193,7 +193,7 @@ test("Theme builder switch themes", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const themePalette = themeEditor.getQuestionByName("themePalette");
   const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
-  const backgroundDimColor = themeEditor.getQuestionByName("--sjs-general-background-dim");
+  const backgroundDimColor = themeEditor.getQuestionByName("--sjs-general-backcolor-dim");
 
   expect(themePalette.value).toEqual("light");
   expect(primaryColor.value).toEqual("rgba(25, 179, 148, 1)");
