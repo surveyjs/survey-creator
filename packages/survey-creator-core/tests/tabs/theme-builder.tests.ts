@@ -38,7 +38,7 @@ test("Theme builder initialization", (): any => {
   expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("16px");
 
   expect(themeEditor.getQuestionByName("commonScale").value).toEqual(100);
-  expect(themeEditor.getQuestionByName("--base-unit").value).toEqual("8px");
+  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("8px");
 
   expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(4);
   expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("4px");
@@ -71,7 +71,7 @@ test("Theme builder initialization", (): any => {
   expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("16px");
 
   expect(themeEditor.getQuestionByName("commonScale").value).toEqual(100);
-  expect(themeEditor.getQuestionByName("--base-unit").value).toEqual("8px");
+  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("8px");
 
   expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(4);
   expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("4px");
@@ -193,7 +193,7 @@ test("Theme builder switch themes", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const themePalette = themeEditor.getQuestionByName("themePalette");
   const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
-  const backgroundDimColor = themeEditor.getQuestionByName("--background-dim");
+  const backgroundDimColor = themeEditor.getQuestionByName("--sjs-general-background-dim");
 
   expect(themePalette.value).toEqual("light");
   expect(primaryColor.value).toEqual("rgba(25, 179, 148, 1)");
