@@ -546,7 +546,7 @@ export class PropertyJSONGenerator {
     linkValue.visibleIf = "propertyEnableIf() = false";
     const overridingQuestion = panel.getQuestionByName(overridingProp);
     const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
-    linkValue.linkValueText = "Set by " + text;
+    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix") + text;
     linkValue.titleLocation = "hidden";
     if(!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
@@ -1089,6 +1089,7 @@ export class PropertyGridModel {
       options.question.property,
       options
     );
+
   }
   private onGetQuestionTitleActions(options: any) {
     PropertyGridEditorCollection.onGetQuestionTitleActions(
