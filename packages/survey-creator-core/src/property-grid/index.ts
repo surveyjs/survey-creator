@@ -39,13 +39,19 @@ import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question
 import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
+import { QuestionLinkValueModel } from "../components/link-value";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
   return this.question.property.visibleIf(this.question.obj);
 }
+function propertyEnableIf(params: any): boolean {
+  if (!this.question || !this.question.obj || !this.question.property) return false;
+  return !this.question.obj[this.question.property.overridingProperty];
+}
 
 FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
+FunctionFactory.Instance.register("propertyEnableIf", propertyEnableIf);
 
 export interface IPropertyEditorSetup {
   editSurvey: SurveyModel;
@@ -487,11 +493,19 @@ export class PropertyJSONGenerator {
       q.property = prop;
       q.obj = this.obj;
       q.options = this.options;
-      var eventVisibility = this.getVisibilityOnEvent(prop);
-      q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
+      const eventVisibility = this.getVisibilityOnEvent(prop);
+      const eventReadOnly = this.isPropertyReadOnly(prop);
+      q.readOnly = q.readOnly || eventReadOnly;
       q.visible = q.visible && eventVisibility;
-      if (!!prop.visibleIf) {
-        q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
+      if (!!prop.visibleIf && eventVisibility) {
+        q.visibleIf = "propertyVisibleIf() = true";
+      }
+      if(!!prop.overridingProperty) {
+        if(!eventReadOnly) {
+          q.enableIf = "propertyEnableIf() = true";
+        }
+        const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
+        q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
       }
       q.descriptionLocation = "hidden";
       let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
@@ -522,6 +536,24 @@ export class PropertyJSONGenerator {
       this.parentObj,
       this.parentProperty
     );
+  }
+  private createOverridingQuestion(panel: PanelModelBase, question: Question, overridingProp: string): Question {
+    const linkValue = <QuestionLinkValueModel>Serializer.createClass("linkvalue");
+    linkValue.name = question.name + "_" + "overridingProperty";
+    linkValue.startWithNewLine = false;
+    linkValue.property = question.property;
+    linkValue.obj = question.obj;
+    linkValue.visibleIf = "propertyEnableIf() = false";
+    const overridingQuestion = panel.getQuestionByName(overridingProp);
+    const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
+    linkValue.linkValueText = "Set by " + text;
+    linkValue.titleLocation = "hidden";
+    if(!!overridingQuestion) {
+      linkValue.linkClickCallback = () => {
+        overridingQuestion.focus();
+      };
+    }
+    return linkValue;
   }
   private getClasPropName(): string {
     if (!!this.parentObj && !!this.parentProperty)
