@@ -41,6 +41,7 @@
   position: absolute;
   top: calc(50% - 3 * #{$base-unit});
   left: calc(50% - 3 * #{$base-unit});
+  z-index: 2;
 }
 
 .svc-matrix-cell__question-controls-button {
