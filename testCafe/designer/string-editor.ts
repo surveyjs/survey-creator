@@ -804,6 +804,46 @@ test("Paste multiline selectbase", async (t) => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
   })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
+
+test.skip("Paste html data", async (t) => {
+  // this test does not work in Chrome. Keep it here fore future investigation
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      },
+      {
+        "type": "html",
+        "html": "<span id='copy-simulator'>Sim copy</span><span tabindex='-1' id='paste-simulator'>Sim paste</span>"
+      }]
+  });
+
+  await ClientFunction(() => {
+    document.addEventListener("copy", function (e) {
+      e.clipboardData.setData("text/html", "<span>s\nd</span>");
+      e.clipboardData.setData("text/plain", "s d");
+    });
+
+    document.getElementById("copy-simulator")?.addEventListener("click", () => {
+      document.execCommand("copy");
+    });
+    document.getElementById("paste-simulator")?.addEventListener("mouseover", () => {
+      document.execCommand("paste"); // does not work in chrome
+    });
+  })();
+
+  await t.wait(200);
+  await t.click(Selector("span").withText("Sim copy"));
+
+  await t
+    .click(Selector(".sv-string-editor").withText("question1"));
+
+  await t.hover(Selector("span").withText("Sim paste"));
+  await t.expect(ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[0].title;
+  })()).eql("s d");
+});
 test("Undo after new item add", async (t) => {
   await t
     .click(Selector(".svc-toolbox__tool").withText("Radio Button Group"))
