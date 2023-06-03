@@ -352,6 +352,35 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
   }]);
   createdBoxShadow = createBoxShadow(parsedBoxShadow);
   expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgb(103, 50, 65)");
+
+  boxShadow = "inset 2px 3px 4px 6px rgb(103, 50, 65), 1px 1px 1px 1px rgb(22, 21, 23), 3px 3px 3px 3px rgb(32, 31, 33)";
+  parsedBoxShadow = parseBoxShadow(boxShadow);
+  expect(parsedBoxShadow).toEqual([{
+    blur: 4,
+    x: 2,
+    y: 3,
+    spread: 6,
+    isInset: true,
+    color: "rgb(103, 50, 65)"
+  },
+  {
+    blur: 1,
+    x: 1,
+    y: 1,
+    spread: 1,
+    isInset: false,
+    color: "rgb(22, 21, 23)"
+  },
+  {
+    blur: 3,
+    x: 3,
+    y: 3,
+    spread: 3,
+    isInset: false,
+    color: "rgb(32, 31, 33)"
+  }]);
+  createdBoxShadow = createBoxShadow(parsedBoxShadow);
+  expect(createdBoxShadow).toBe("inset 2px 3px 4px 6px rgb(103, 50, 65), 1px 1px 1px 1px rgb(22, 21, 23), 3px 3px 3px 3px rgb(32, 31, 33)");
 });
 
 test("Check boxshadowsettings question", () => {
