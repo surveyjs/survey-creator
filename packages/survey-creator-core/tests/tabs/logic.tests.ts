@@ -432,7 +432,35 @@ test("SurveyLogicUI: Test logicItemsSurvey", () => {
   expect(itemsQuestion.value).toHaveLength(2);
   expect(itemsQuestion.rowCount).toEqual(2);
 });
-test("SurveyLogicItem, clonse and equals", () => {
+test("SurveyLogicItem,  clear setValue value", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{q1}=1", setToName: "q2", setValue: 5 }
+    ]
+  });
+  var logic = new SurveyLogicUI(survey);
+  const trigger = <SurveyTriggerSetValue>survey.triggers[0];
+  expect(trigger.setValue).toBe(5);
+  expect(logic.items).toHaveLength(1);
+  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, set into question: 'q2' value 5");
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const item = logic.items[0];
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("trigger_setvalue");
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  expect(triggerEditorPanel.getQuestionByName("setValue").value).toBe(5);
+  triggerEditorPanel.getQuestionByName("setValue").clearValue();
+  row.detailPanel.footerActions[0].action();
+  expect(row.isDetailPanelShowing).toBeFalsy();
+  expect(trigger.setValue).toBeFalsy();
+  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, clear question value: 'q2'");
+});
+test("SurveyLogicItem, clone and equals", () => {
   var survey = new SurveyModel({
     elements: [
       { type: "text", name: "q1" },
