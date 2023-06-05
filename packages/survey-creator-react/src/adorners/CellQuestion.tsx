@@ -38,7 +38,7 @@ export class CellQuestionAdornerComponent extends CreatorModelElement<
           data-sv-drop-target-survey-element={this.model.element.name}
           className={"svc-question__adorner"}
         >
-          <div className={" svc-question__content--selected-no-border svc-question__content"}>
+          <div className={" svc-question__content--in-popup svc-question__content"}>
             {this.props.element}
           </div>
         </div>

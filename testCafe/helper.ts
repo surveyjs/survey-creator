@@ -145,6 +145,8 @@ export const explicitErrorHandler = ClientFunction(() => {
 export const patchDragDropToDisableDrop = ClientFunction(() => {
   window["creator"].dragDropSurveyElements.drop = () => { };
   window["creator"].dragDropChoices.drop = () => { };
+  window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+  window["creator"].dragDropChoices.domAdapter.drop = () => { };
 });
 
 export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {

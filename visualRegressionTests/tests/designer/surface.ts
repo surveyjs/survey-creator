@@ -123,6 +123,79 @@ test("Matrix column editor", async (t) => {
   });
 });
 
+test("Matrix column editor boolean", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "question23",
+              "defaultValue": {
+                "Row 1": {
+                  "Column 2": true
+                }
+              },
+              "columns": [
+                {
+                  "name": "Column 2",
+                  "cellType": "boolean"
+                }
+              ],
+              "rows": [
+                "Row 1"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+    const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+
+    const showControl = ClientFunction(() => {
+      const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+      el.style.display = "block";
+    });
+
+    await t
+      .expect(Selector(".svc-question__content").exists).ok()
+      .hover(row1Column1Cell, { speed: 0.5 });
+
+    // TODO: remove this line after TestCafe implements workig hover
+    await showControl();
+    await takeElementScreenshot("matrix-cell-edit-bool.png", row1Column1Cell, t, comparer);
+  });
+});
+
+test("Boolean no wrap", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1",
+              "defaultValue": "true",
+              "labelTrue": "Dashed-text"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    await t.click(Selector("span").withText("Dashed-text"));
+    await takeElementScreenshot("bool-no-wrap-edit.png", Selector(".sd-boolean"), t, comparer);
+  });
+});
+
 test("Choices (Checkbox): Layout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -545,6 +618,12 @@ test("Logo image adorners", async (t) => {
     };
     await setJSON(json);
     await takeElementScreenshot("logo-image-adorners.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container"));
+    await takeElementScreenshot("logo-image-adorners-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button"));
+    await takeElementScreenshot("logo-image-adorners-choose-hover.png", Selector(".svc-logo-image"), t, comparer);
+    await t.hover(Selector(".svc-logo-image-container .svc-context-button--danger"));
+    await takeElementScreenshot("logo-image-adorners-clear-hover.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
 
@@ -782,10 +861,10 @@ test("Character counter in property grid", async t => {
     await t
       .click(Selector(".svc-question__content"))
       .click(showSidebarButton)
-      .click(Selector("input[aria-label=\"Name\"]"));
+      .click(Selector("[data-name='name']").find("input"));
     await takeElementScreenshot("pg-maxLength-text.png", Selector(".spg-question__content").nth(0), t, comparer);
 
-    await t.click(Selector("textarea[aria-label=\"Title\"]"));
+    await t.click(Selector("[data-name='title']").find("textarea"));
     await takeElementScreenshot("pg-maxLength-comment.png", Selector(".spg-question__content").nth(1), t, comparer);
   });
 });
@@ -843,7 +922,13 @@ test("Check string editor on isRequired", async (t) => {
     ]
   }, msg);
 
+  const hideCursor = ClientFunction(() => {
+    const el: any = document.querySelectorAll(".svc-designer-header .sd-title .svc-string-editor .sv-string-editor")[0];
+    el.style.color = "transparent";
+  });
+
   const svStringSelector = Selector(".svc-designer-header .sd-title .svc-string-editor");
+  await hideCursor();
   await wrapVisualTest(t, async (t, comparer) => {
     await t
       .click(svStringSelector)
@@ -963,5 +1048,84 @@ test("Question add type selector button", async (t) => {
     await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-page__add-new-question"), t, comparer);
     await t.hover(Selector(".svc-page__question-type-selector"));
     await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
+  });
+});
+
+test("String editor whitespaces and linedreaks", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => {
+        if (options.element.name == "q1") options.html = options.text;
+      });
+    });
+  })();
+
+  await t.resizeWindow(1400, 900);
+
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "a\nb\nc"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "a\nb\nc"
+      }
+    ]
+  });
+  await wrapVisualTest(t, async (t, comparer) => {
+    await takeElementScreenshot("string-editor-linebreaks-html.png", Selector(".svc-question__content").nth(0), t, comparer);
+    await takeElementScreenshot("string-editor-linebreaks-plain.png", Selector(".svc-question__content").nth(1), t, comparer);
+  });
+});
+
+test("Matrix dropdown popup edit ", async (t) => {
+
+  await t.resizeWindow(1400, 900);
+
+  await setJSON({
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "matrixdropdown",
+            "name": "question1",
+            "columns": [
+              {
+                "name": "Column 1"
+              },
+              {
+                "name": "Column 2",
+                "cellType": "rating"
+              }
+            ],
+            "choices": [
+              1,
+              2
+            ],
+            "rows": [
+              "Row 1"
+            ]
+          }
+        ]
+      }
+    ]
+  });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.hover(".svc-matrix-cell .sd-dropdown");
+    await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await takeElementScreenshot("matrix-dropdown-popup-select.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+    await t.click(Selector("button").withText("Cancel"));
+    await t.hover(".svc-matrix-cell .sd-rating");
+    await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
+    await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });

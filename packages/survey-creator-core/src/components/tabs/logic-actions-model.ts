@@ -171,8 +171,22 @@ export class LogicActionTriggerModel extends LogicActionModelBase {
   public updateCurrentLogicAction(survey: SurveyModel): boolean {
     const createNewAction = !this.initialLogicAction || this.initialLogicAction.logicType != this.logicType;
     if (!createNewAction) {
-      this.initialLogicAction.element.fromJSON(this.panelObj.toJSON());
+      const el = this.initialLogicAction.element;
+      const srcJson = this.panelObj.toJSON();
+      const srcKeys = Object.keys(srcJson);
+      const destKeys = Object.keys(el.toJSON());
+      const propsToDelete = [];
+      for(let i = 0; i < destKeys.length; i ++) {
+        const key = destKeys[i];
+        if(srcKeys.indexOf(key) < 0) {
+          propsToDelete.push(key);
+        }
+      }
+      el.fromJSON(srcJson);
       this.currentLogicAction = this.initialLogicAction;
+      for(let i = 0; i < propsToDelete.length; i ++) {
+        el[propsToDelete[i]] = undefined;
+      }
       return false;
     }
     this.currentLogicAction = new SurveyLogicAction(this.logicType, this.panelObj, survey);

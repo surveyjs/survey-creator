@@ -50,6 +50,7 @@ svc-question {
   .sd-element__header .sd-description {
     margin-top: 0;
   }
+
   .sd-selectbase:not(.sd-imagepicker) {
     overflow-x: auto;
     padding-left: calcSize(5);
@@ -112,6 +113,7 @@ svc-question {
       margin-inline-end: calcSize(0.5); // margin-right
     }
   }
+
   .sv-action--convertTo.sv-action--hidden {
     min-width: 0;
   }
@@ -170,6 +172,10 @@ svc-question {
   z-index: 1000;
   box-shadow: 0px 8px 16px $shadow-medium;
   @include disableUserSelect;
+  max-width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {
@@ -222,6 +228,43 @@ svc-question {
   top: 0;
   height: 100%;
   width: 4px;
+}
+
+.svc-question__content--drag-over-top:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  background: $secondary;
+  top: -12px;
+  width: 100%;
+  height: 4px;
+}
+
+.svc-question__content--drag-over-bottom:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  background: $secondary;
+  bottom: -12px;
+  width: 100%;
+  height: 4px;
+}
+
+.svc-question__content--panel,
+.sd-panel__content {
+  .sd-row>div:first-child {
+    .svc-question__content--drag-over-left {
+      margin-left: 8px;
+      width: calc(100% - 8px);
+    }
+  }
+
+  .sd-row>div:last-child {
+    .svc-question__content--drag-over-right {
+      margin-right: 8px;
+      width: calc(100% - 8px);
+    }
+  }
 }
 
 .svc-question__content-actions {
@@ -440,6 +483,7 @@ svc-question,
   cursor: pointer;
   margin-right: calcSize(1);
   outline: none;
+
   use {
     fill: $foreground-light;
   }
@@ -447,9 +491,10 @@ svc-question,
   &:hover {
     background-color: $background-dim;
   }
-    &:focus {
-      background-color: $primary-background-light;
-    }
+
+  &:focus {
+    background-color: $primary-background-light;
+  }
 
   top: calcSize(2);
   margin: 0;

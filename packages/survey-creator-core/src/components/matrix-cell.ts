@@ -61,7 +61,7 @@ export class MatrixCellWrapperViewModel extends Base {
     }
   }
 
-  public editQuestion(model: MatrixCellWrapperViewModel) {
+  public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question);
     settings.showModal(
       "svc-question-editor-content",
@@ -76,6 +76,8 @@ export class MatrixCellWrapperViewModel extends Base {
       undefined, "svc-matrix-cell__popup", model.question.name,
       this.creator.isMobileView ? "overlay" : "popup"
     );
+    event.stopPropagation();
+    model.creator.selectElement(model.column);
   }
   get context() {
     return this.row || this.column || this.templateData;

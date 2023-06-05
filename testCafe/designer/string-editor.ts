@@ -88,13 +88,13 @@ test("Edit question title", async (t) => {
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("esc")
-    .expect(Selector("textarea[aria-label=Title]").value).eql("", "Question title in property grid still empty")
+    .expect(Selector("[data-name='title']").find("textarea").value).eql("", "Question title in property grid still empty")
 
     .click(svStringSelector)
     .click(svStringSelector)
     .typeText(svStringSelector, prefix, { caretPos: 0 })
     .pressKey("ctrl+enter")
-    .expect(Selector("textarea[aria-label=Title]").value).eql(prefix + title, "Question title in property grid is updated")
+    .expect(Selector("[data-name='title']").find("textarea").value).eql(prefix + title, "Question title in property grid is updated")
 
     .click(svStringSelector)
     .pressKey("ctrl+a")
@@ -804,6 +804,46 @@ test("Paste multiline selectbase", async (t) => {
     return JSON.stringify(window["creator"].survey.getAllQuestions()[0].choices.map(c => c.text));
   })()).eql("[\"Item 1\",\"Ita\",\"b\",\"cem 2\",\"Item 3\"]");
 });
+
+test.skip("Paste html data", async (t) => {
+  // this test does not work in Chrome. Keep it here fore future investigation
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      },
+      {
+        "type": "html",
+        "html": "<span id='copy-simulator'>Sim copy</span><span tabindex='-1' id='paste-simulator'>Sim paste</span>"
+      }]
+  });
+
+  await ClientFunction(() => {
+    document.addEventListener("copy", function (e) {
+      e.clipboardData.setData("text/html", "<span>s\nd</span>");
+      e.clipboardData.setData("text/plain", "s d");
+    });
+
+    document.getElementById("copy-simulator")?.addEventListener("click", () => {
+      document.execCommand("copy");
+    });
+    document.getElementById("paste-simulator")?.addEventListener("mouseover", () => {
+      document.execCommand("paste"); // does not work in chrome
+    });
+  })();
+
+  await t.wait(200);
+  await t.click(Selector("span").withText("Sim copy"));
+
+  await t
+    .click(Selector(".sv-string-editor").withText("question1"));
+
+  await t.hover(Selector("span").withText("Sim paste"));
+  await t.expect(ClientFunction(() => {
+    return window["creator"].survey.getAllQuestions()[0].title;
+  })()).eql("s d");
+});
 test("Undo after new item add", async (t) => {
   await t
     .click(Selector(".svc-toolbox__tool").withText("Radio Button Group"))
@@ -834,4 +874,27 @@ test("Check string editor focus on imagepicker caption click", async (t) => {
   await t
     .click(svStringSelector)
     .expect(svStringSelector.focused).ok();
+});
+
+test("Check string editor with html", async (t) => {
+  await explicitErrorHandler();
+  await ClientFunction(() => {
+    (<any>window).creator.onDesignerSurveyCreated.add(function (editor, options) {
+      options.survey.onTextMarkdown.add((_, opt) => {
+        opt.html = opt.text;
+      });
+    });
+  })();
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        title: "<p id='markup_html' style='color:rgb(255, 0, 255);'>Test</p>",
+        "name": "question1",
+      }]
+  });
+
+  const htmlMarkupSelector = Selector(".sv-string-editor--html #markup_html").withText("Test");
+
+  await t.expect(htmlMarkupSelector.getStyleProperty("color")).eql("rgb(255, 0, 255)");
 });

@@ -1,5 +1,11 @@
-import { SurveyElement, SurveyModel } from "survey-core";
+import { QuestionImageModel, QuestionImagePickerModel, SurveyElement, SurveyModel } from "survey-core";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
+import { PropertyGridModelTester } from "./property-grid.tests";
+import {
+  EmptySurveyCreatorOptions,
+} from "../../src/creator-settings";
+import { imageMimeTypes } from "../../src/utils/utils";
+import { CreatorBase } from "../../src/creator-base";
 
 test("Check file editor value", () => {
   const question = new QuestionFileEditorModel("q1");
@@ -64,4 +70,93 @@ test("Check file editor event callbacks", () => {
     value: "second_url"
   } });
   expect(question.value).toBe("second_url");
+});
+
+test("Check PropertyGridLinkFileEditor visible only if enableLinkFileEditor set true", () => {
+  let question = new QuestionImageModel("q1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let questionEditor = propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.getType()).toBe("text");
+  const options = new EmptySurveyCreatorOptions();
+  options.enableLinkFileEditor = true;
+  question = new QuestionImageModel("q2");
+  propertyGrid = new PropertyGridModelTester(question, options);
+  questionEditor = propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.getType()).toBe("fileedit");
+});
+
+test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
+  const options = new EmptySurveyCreatorOptions();
+  options.enableLinkFileEditor = true;
+  const question = new QuestionImageModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
+  question.contentMode = "video";
+  expect(questionEditor.acceptedTypes).toBe("video/*");
+  question.contentMode = "image";
+  expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
+});
+
+test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
+  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  let uploadCount = 0;
+  const question = new QuestionImageModel("q1");
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback("success", "test_url");
+    expect(o.question.name).toBe("q1");
+  });
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(uploadCount).toBe(1);
+  expect(questionEditor.value).toBe("test_url");
+});
+
+test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image item value", () => {
+  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  let uploadCount = 0;
+  const question = new QuestionImagePickerModel("q1");
+  question.choices = [{ value: "lion" }];
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback("success", "test_url");
+    expect(o.question.name).toBe("q1");
+  });
+  const propertyGrid = new PropertyGridModelTester(question.choices[0], creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(uploadCount).toBe(1);
+  expect(questionEditor.value).toBe("test_url");
+});
+
+test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo image", () => {
+  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const survey = new SurveyModel();
+  let uploadCount = 0;
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback("success", "test_url");
+    expect(o.question).toBe(undefined);
+  });
+  const propertyGrid = new PropertyGridModelTester(survey, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("logo");
+  questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(uploadCount).toBe(1);
+  expect(questionEditor.value).toBe("test_url");
+});
+
+test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
+  const options = new EmptySurveyCreatorOptions();
+  options.enableLinkFileEditor = true;
+  const question = new QuestionImagePickerModel("q1");
+  question.choices = [{ value: "lion" }];
+  const propertyGrid = new PropertyGridModelTester(question, options);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("choices").renderedTable.rows[0].cells[3].question;
+  expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
+  question.contentMode = "video";
+  expect(questionEditor.acceptedTypes).toBe("video/*");
+  question.contentMode = "image";
+  expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
 });

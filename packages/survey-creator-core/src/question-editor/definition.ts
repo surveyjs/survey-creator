@@ -67,6 +67,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxLength", tab: "validation" },
         { name: "textUpdateMode", tab: "data" },
         { name: "autoGrow", tab: "layout" },
+        { name: "allowResize", tab: "layout" },
       ]
     },
     file: {
@@ -424,11 +425,18 @@ export class SurveyQuestionEditorDefinition {
     "matrixdropdowncolumn@rating": {
       properties: [
         "rateValues",
+        { name: "rateType", tab: "rateValues" },
+        { name: "rateCount", tab: "rateValues" },
+        { name: "rateColorMode", tab: "rateValues" },
+        { name: "scaleColorMode", tab: "rateValues" },
+        { name: "autoGenerate", tab: "rateValues" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
-        { name: "maxRateDescription", tab: "rateValues" }
+        { name: "maxRateDescription", tab: "rateValues" },
+        { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
+
       ],
       tabs: [{ name: "rateValues", index: 5 }]
     },
@@ -577,6 +585,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
         { name: "autoGrowComment", tab: "question" },
+        { name: "allowResizeComment", tab: "question" },
 
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },

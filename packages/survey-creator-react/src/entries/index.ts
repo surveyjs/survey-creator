@@ -44,6 +44,7 @@ export * from "../tabs/JsonEditorAce";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";
 export * from "../tabs/Preview";
+export * from "../tabs/Theme";
 export * from "../tabs/Translation";
 export * from "../tabs/SurveySimulator";
 
@@ -53,6 +54,7 @@ export * from "../PropertyGrid";
 
 //custom questions
 export * from "../custom-questions/SpinEditor";
+export * from "../custom-questions/ColorItem";
 export * from "../custom-questions/ColorQuestion";
 export * from "../custom-questions/FileEditQuestion";
 

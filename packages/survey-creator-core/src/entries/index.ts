@@ -1,6 +1,9 @@
 export let Version: string;
 Version = `${process.env.VERSION}`;
 
+//should be loaded before other styles for easier override 
+require("../utils/context-button.scss");
+
 export { enStrings } from "../localization/english";
 export { editorLocalization, defaultStrings } from "../editorLocalization";
 export { editorLocalization as localization } from "../editorLocalization";
@@ -16,6 +19,10 @@ export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
 export * from "../components/tabs/test";
 export * from "../components/tabs/test-plugin";
+export * from "../components/tabs/theme-custom-questions/color-settings";
+export * from "../components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../components/tabs/theme";
+export * from "../components/tabs/theme-plugin";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
 export * from "../components/tabs/translation-theme";

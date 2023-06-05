@@ -7,11 +7,12 @@ import {
   settings,
   ItemValue,
   Base,
-  CssClassBuilder
+  CssClassBuilder,
+  MatrixDropdownColumn
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { getLocString } from "../editorLocalization";
-import { getNextValue } from "../utils/utils";
+import { getNextValue, getQuestionFromObj } from "../utils/utils";
 
 require("./question-rating.scss");
 
@@ -25,7 +26,7 @@ export class QuestionRatingAdornerViewModel extends Base {
   }
 
   get element(): QuestionRatingModel {
-    return this.surveyElement as QuestionRatingModel;
+    return getQuestionFromObj(this.surveyElement) as QuestionRatingModel;
   }
 
   static useRateValues(element: any): boolean {
@@ -97,7 +98,7 @@ export class QuestionRatingAdornerViewModel extends Base {
     return element.rateCount < maximumRateValues;
   }
   public get allowAdd(): boolean {
-    return !this.creator.readOnly;
+    return this.canAddOrRemove();
   }
   public get enableAdd(): boolean {
     return this.allowAdd && QuestionRatingAdornerViewModel.allowAddForElement(this.element, this.creator.maximumRateValues);
@@ -111,8 +112,14 @@ export class QuestionRatingAdornerViewModel extends Base {
   public static allowRemoveForElement(element: QuestionRatingModel): boolean {
     return element.rateCount > 2;
   }
+
+  private canAddOrRemove() {
+    return this.creator.isCanModifyProperty(this.element, "rateValues") &&
+      this.creator.isCanModifyProperty(this.element, "rateCount") &&
+      (!this.element.autoGenerate || this.creator.isCanModifyProperty(this.element, "rateMax"));
+  }
   public get allowRemove(): boolean {
-    return !this.creator.readOnly;
+    return this.canAddOrRemove();
   }
   public get enableRemove(): boolean {
     return this.allowRemove && QuestionRatingAdornerViewModel.allowRemoveForElement(this.element);

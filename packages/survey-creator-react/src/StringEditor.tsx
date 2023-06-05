@@ -85,6 +85,9 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private onInput = (event: any) => {
     this.baseModel.onInput(event.nativeEvent);
   };
+  private onPaste = (event: any) => {
+    this.baseModel.onPaste(event.nativeEvent);
+  };
   private justFocused = false;
   private onFocus = (event: any) => {
     this.baseModel.onFocus(event.nativeEvent);
@@ -126,7 +129,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
         <span
           role="textbox"
           ref={this.svStringEditorRef}
-          className="sv-string-editor"
+          className="sv-string-editor sv-string-editor--html"
           contentEditable={this.contentEditable}
           spellCheck={false}
           aria-placeholder={this.placeholder}
@@ -155,6 +158,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
           // style={this.style}
           onBlur={this.onBlur}
           onInput={this.onInput}
+          onPaste={this.onPaste}
           onCompositionStart={this.onCompositionStart}
           onCompositionEnd={this.onCompositionEnd}
           onFocus={this.onFocus}

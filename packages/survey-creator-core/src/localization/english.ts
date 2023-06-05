@@ -72,6 +72,7 @@ export var enStrings = {
     newPanelName: "panel",
     newTextItemName: "text",
     testSurvey: "Preview",
+    themeSurvey: "Themes",
     defaultV2Theme: "Default",
     modernTheme: "Modern",
     defaultTheme: "Default (legacy)",
@@ -125,6 +126,7 @@ export var enStrings = {
     propertyEditorError: "Error",
     saveError: "Error! Editor content is not saved.",
     translationPropertyGridTitle: "Language Settings",
+    previewPropertyGridTitle: "Theme Settings",
     translationLanguages: "Languages",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "All Strings",
@@ -143,6 +145,8 @@ export var enStrings = {
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
+    imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload",
+    imageChooseImage: "Choose Image",
     addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "auto",
@@ -191,6 +195,7 @@ export var enStrings = {
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name
       trigger_copyvalueText: "copy into question: {0} value from question {1}", //{0} and {1} question names
       trigger_skipText: "survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "run expression: '{0}'", //{0} the expression
@@ -273,6 +278,7 @@ export var enStrings = {
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
+    propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".",
     listIsEmpty: "No items have been added yet",
     "listIsEmpty@choices": "No choices have been added yet",
     "addNew@choices": "Add a choice",
@@ -444,6 +450,7 @@ export var enStrings = {
     maxTextLength: "Maximum answer length (in characters)",
     maxOthersLength: "Maximum comment length (in characters)",
     autoGrowComment: "Auto-expand comment area if necessary",
+    allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update text question value",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
@@ -654,6 +661,7 @@ export var enStrings = {
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
     progressTopBottom: "Panel navigator + Progress bar at the top and bottom",
+    tab: "Tabs",
     horizontal: "Horizontal",
     vertical: "Vertical",
     top: "Top",
@@ -774,7 +782,12 @@ export var enStrings = {
     autoGenerate: {
       "true": "Generate",
       "false": "Enter manually"
-    }
+    },
+    rateType: {
+      labels: "Labels",
+      stars: "Stars",
+      smileys: "Smileys"
+    },
   },
   // Operators
   op: {
@@ -918,6 +931,7 @@ export var enStrings = {
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string
     autoGrow: "Auto grow", // Auto-generated string
+    allowResize: "Allow resizing",
     acceptCarriageReturn: "Accept carriage return", // Auto-generated string
     displayMode: "Display mode", // Auto-generated string
     rateType: "Rate type", // Auto-generated string
@@ -935,7 +949,69 @@ export var enStrings = {
     showCaption: "Show caption", // Auto-generated string
     iconName: "Icon name", // Auto-generated string
     iconSize: "Icon size" // Auto-generated string
-  }
+  },
+  theme: {
+    "--background": "Background Color",
+    "--background-dim-light": "Background Dim Light Color",
+    "--primary-foreground": "Primary Foreground Color",
+    "--foreground": "Foreground Color",
+    "--base-unit": "Base Unit",
+    groupGeneral: "General",
+    groupAdvanced: "Advanced",
+    "themeName": "Theme",
+    "themeMode": "Modes",
+    "themeModePanels": "Panels",
+    "themeModeLightweight": "Lightweight",
+    "themePaletteLight": "Light",
+    "themePaletteDark": "Dark",
+    primaryColor: "Accent Color",
+    primaryDefaultColor: "Default",
+    primaryDarkColor: "Hover",
+    primaryLightColor: "Selected",
+    "backgroundDimColor": "Background Color",
+    "backgroundImage": "Background Image",
+    "backgroundImageFitAuto": "Auto",
+    "backgroundImageFitCover": "Cover",
+    "backgroundImageFitContain": "Contain",
+    "backgroundOpacity": "Opacity",
+    "panelBackgroundTransparency": "Panel Background Transparency",
+    "questionBackgroundTransparency": "Question Background Transparency",
+    questionPanel: "Question Panel",
+    questionTitle: "Question Title Font",
+    questionDescription: "Question Description Font",
+    editorPanel: "Editor",
+    editorFont: "Editor Font",
+    backcolor: "Default Background",
+    hovercolor: "Hover Background",
+    borderDecoration: "Border Decoration",
+    accentBackground: "Accent Background",
+    accentForeground: "Accent Foreground",
+    primaryForecolor: "Default Color",
+    primaryForecolorLight: "Disabled Color",
+    linesColors: "Lines",
+    borderDefault: "Major",
+    borderLight: "Minor",
+    fontFamily: "Font Family",
+    fontSize: "Font Size",
+    color: "Color",
+    size: "Size",
+    fontWeightRegular: "Regular",
+    fontWeightHeavy: "Heavy",
+    fontWeightSemiBold: "Semi-Bold",
+    fontWeightBold: "Bold",
+    scale: "Scale",
+    cornerRadius: "Corner Radius",
+    surveyTitle: "Survey Title Font",
+    pageTitle: "Page Title Font",
+    pageDescription: "Page Description Font",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    opacity: "Opacity",
+    boxShadowBlur: "Blur",
+    boxShadowSpread: "Spread",
+    questionShadow: "Question Panel Border / Shadow",
+    editorShadow: "Editor Border / Shadow"
+  },
 };
 
 // Uncomment the line below if you create a custom dictionary.

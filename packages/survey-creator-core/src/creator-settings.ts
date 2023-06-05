@@ -107,6 +107,7 @@ export var settings = {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
       imagepicker: {
+        imageFit: "cover",
         choices: [
           {
             value: "Image 1",
@@ -127,7 +128,6 @@ export var settings = {
         ]
       },
       image: {
-        imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg",
         imageFit: "cover",
         imageHeight: "auto",
         imageWidth: "100%"
@@ -182,6 +182,7 @@ export interface ISurveyCreatorOptions {
   maximumChoicesCount: number;
   maximumRowsCount: number;
   maximumRateValues: number;
+  enableLinkFileEditor: boolean;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -285,9 +286,15 @@ export interface ISurveyCreatorOptions {
     locale: string, locString: ILocalizableString, newText: string, obj: any
   ): string;
   getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string;
+  uploadFiles(
+    files: File[],
+    question: Question,
+    uploadingCallback: (status: string, data: any) => any
+  ): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  enableLinkFileEditor: boolean;
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
     return newText;
   }
@@ -422,6 +429,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     logicItem: any
   ): string { return text; }
   getTranslationExportedText(obj: Base, name: string, locString: ILocalizableString, locale: string, text: string): string { return text; }
+  uploadFiles(
+    files: File[],
+    question: Question,
+    uploadingCallback: (status: string, data: any) => any
+  ): void {}
 }
 
 StylesManager.applyTheme("defaultV2");

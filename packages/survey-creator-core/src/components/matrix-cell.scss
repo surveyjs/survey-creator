@@ -41,6 +41,7 @@
   position: absolute;
   top: calc(50% - 3 * #{$base-unit});
   left: calc(50% - 3 * #{$base-unit});
+  z-index: 2;
 }
 
 .svc-matrix-cell__question-controls-button {
@@ -63,12 +64,10 @@
   display: block;
 }
 
-.svc-question__content--selected-no-border {
-  padding: 0;
+.svc-question__content--in-popup {
   width: calc(100% - 25 * #{$base-unit});
   min-width: calcSize(70);
-  box-shadow: none;
-  background-color: inherit;
+  padding: calcSize(5);
 }
 
 .svc-matrix-cell__popup {

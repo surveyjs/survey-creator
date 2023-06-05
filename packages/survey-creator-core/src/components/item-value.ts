@@ -115,8 +115,13 @@ export class ItemValueWrapperViewModel extends Base {
       this.handleDragDropGhostPositionChanged
     );
   }
+
+  private getGhostPosition(item: any): string {
+    if (this.dragDropHelper.dropTarget !== item) return null;
+    return this.dragDropHelper.isBottom ? "bottom" : "top";
+  }
   private handleDragDropGhostPositionChanged = () => {
-    this.ghostPosition = this.dragDropHelper.getGhostPosition(this.item);
+    this.ghostPosition = this.getGhostPosition(this.item);
     this.isDragDropGhost = this.item === this.dragDropHelper.draggedElement;
 
     if (this.item === this.dragDropHelper.prevDropTarget) {

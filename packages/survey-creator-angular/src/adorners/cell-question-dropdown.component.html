@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-question__adorner">
-    <div class="svc-question__content svc-question__content--selected-no-border">
+    <div class="svc-question__content svc-question__content--in-popup">
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
       <div class="svc-question__dropdown-choices">
           <div *ngFor="let item of model.visibleChoices"class="svc-question__dropdown-choice">

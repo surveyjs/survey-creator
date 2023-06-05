@@ -4,7 +4,6 @@ import {
   Base,
   ComponentCollection,
   CustomWidgetCollection,
-  DragDropSurveyElements,
   ElementFactory,
   IAction,
   JsonObject,
@@ -19,6 +18,7 @@ import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { localization } from "./entries";
 import { settings } from "./creator-settings";
+import { DragDropSurveyElements } from "./survey-elements";
 
 /**
  * The Toolbox item description.

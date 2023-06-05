@@ -15,7 +15,7 @@ test("Set logo in property grid and remove it in designer", async (t) => {
   })();
   await t
     .click(Selector(".spg-title").withText(logoSection))
-    .typeText(Selector("input[aria-label=\"Logo (URL or base64-encoded string)\"]"), base64image, { paste: true })
+    .typeText(Selector("[data-name='logo']").find("input[type='text']"), base64image, { paste: true })
     .pressKey("tab")
     .expect(Selector("img").withAttribute("src", base64image).exists).ok();
 });
@@ -49,7 +49,7 @@ test("Set logo in property grid and change it in designer", async (t) => {
   })();
   await t
     .click(Selector(".spg-title").withText(logoSection))
-    .typeText(Selector("input[aria-label=\"Logo (URL or base64-encoded string)\"]"), base64image, { paste: true })
+    .typeText(Selector("[data-name='logo']").find("input[type='text']"), base64image, { paste: true })
     .pressKey("tab")
     .expect(Selector("img").withAttribute("src", base64image).exists).ok();
   const logoImage = await ClientFunction(() => {
