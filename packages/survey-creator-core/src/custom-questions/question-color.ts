@@ -1,7 +1,15 @@
-import { QuestionFactory, QuestionTextModel, Serializer, property } from "survey-core";
+import { Action, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 
 export class QuestionColorModel extends QuestionTextModel {
   @property() public unit: string;
+
+  constructor(name: string) {
+    super(name);
+    this.createItemValues("choices");
+    this.registerFunctionOnPropertyValueChanged("choices", () => {
+      this.updateChoices();
+    });
+  }
 
   private getCorrectedValue(newValue: string): string {
     newValue = newValue ?? "";
@@ -55,10 +63,62 @@ export class QuestionColorModel extends QuestionTextModel {
     super.onSurveyValueChanged(newValue);
     this.updateRenderedValue();
   }
+  private _dropdownAction: Action;
 
+  public get dropdownAction (): Action {
+    if(!this._dropdownAction) {
+      this._dropdownAction = this.createDropdownAction();
+    }
+    return this._dropdownAction;
+  }
+
+  public get choices(): Array<ItemValue> {
+    return this.getPropertyValue("choices");
+  }
+  public set choices(newValue: Array<ItemValue>) {
+    this.setPropertyValue("choices", newValue);
+  }
+
+  public get showDropdownAction() {
+    return !this.isValueEmpty(this.choices);
+  }
+
+  public createDropdownAction(): Action {
+    const action = createDropdownActionModelAdvanced({
+      iconName: this.cssClasses.colorDropdownIcon
+    }, {
+      onSelectionChanged: (item) => {
+        this.value = (<ItemValue><unknown>item).value;
+      },
+      items: this.choices
+    }, {
+      showPointer: false,
+      verticalPosition: "bottom",
+      horizontalPosition: "center"
+    });
+    const popupModel = <PopupModel>action.popupModel;
+    const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
+    listModel.cssClasses = {
+      itemBody: listModel.cssClasses.itemBody + " " + this.cssClasses.colorItem
+    };
+    popupModel.setWidthByTarget = true;
+    popupModel.positionMode = "fixed";
+    listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
+    action.cssClasses = { item: this.cssClasses.colorDropdown };
+    return action;
+  }
+
+  private updateChoices() {
+    this.dropdownAction.popupModel.contentComponentData.model.setItems(this.choices);
+  }
+
+  public get itemComponent() {
+    return "color-item";
+  }
 }
 Serializer.addClass("color", [
-  "unit"
+  "unit",
+  "choices:itemvalue[]"
 ], () => new QuestionColorModel(""), "text");
 
 QuestionFactory.Instance.registerQuestion("color", name => {
