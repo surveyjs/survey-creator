@@ -172,6 +172,30 @@ test("Matrix column editor boolean", async (t) => {
   });
 });
 
+test("Boolean no wrap", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1",
+              "defaultValue": "true",
+              "labelTrue": "Dashed-text"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    await t.click(Selector("span").withText("Dashed-text"));
+    await takeElementScreenshot("bool-no-wrap-edit.png", Selector(".sd-boolean"), t, comparer);
+  });
+});
+
 test("Choices (Checkbox): Layout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
