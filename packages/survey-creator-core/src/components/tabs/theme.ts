@@ -95,6 +95,12 @@ export class ThemeSurveyTabViewModel extends Base {
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
+    this.themeName = this.surveyProvider.theme["themeName"];
+    this.themePalette = this.surveyProvider.theme["themePalette"];
+    this.themeMode = this.surveyProvider.theme.isCompact ? "lightweight" : undefined;
+    if (Object.keys(this.surveyProvider.theme.cssVariables).length === 0) {
+      assign(this.surveyProvider.theme.cssVariables, this.themeVariables);
+    }
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
   }
 
@@ -102,6 +108,7 @@ export class ThemeSurveyTabViewModel extends Base {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme");
     newSurvey.setCss(theme, false);
     this.simulator.survey = newSurvey;
+    this.setThemeToSurvey();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: ThemeSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -336,6 +343,9 @@ export class ThemeSurveyTabViewModel extends Base {
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.mergeData(this.themeVariables);
+    themeEditorSurvey.setPropertyValue("themeName", this.themeName);
+    themeEditorSurvey.setPropertyValue("themeMode", this.themeMode);
+    themeEditorSurvey.setPropertyValue("themePalette", this.themePalette);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor-dim-light"];
     assign(this.simulator.themeVariables, this.themeVariables);
@@ -349,6 +359,10 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
+          this.surveyProvider.theme.isCompact = options.value === "lightweight";
+        } else {
+          this.surveyProvider.theme["themeName"] = this.themeName;
+          this.surveyProvider.theme["themePalette"] = this.themePalette;
         }
         const newTheme = {};
         assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
@@ -358,14 +372,18 @@ export class ThemeSurveyTabViewModel extends Base {
 
         themeEditorSurvey.mergeData(newTheme);
         this.simulator.themeVariables = newTheme;
+        this.surveyProvider.theme.cssVariables = newTheme;
+        this.setThemeToSurvey();
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
         this.survey[options.name] = options.value;
+        this.surveyProvider.theme[options.name] = options.value;
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.survey.backgroundOpacity = options.value / 100;
+        this.surveyProvider.theme.backgroundOpacity = options.value / 100;
         return;
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -399,14 +417,20 @@ export class ThemeSurveyTabViewModel extends Base {
         });
       }
       const newTheme = {};
-      assign(newTheme, this.simulator.themeVariables, this.themeChanges);
-      this.simulator.themeVariables = newTheme;
+      assign(newTheme, this.surveyProvider.theme.cssVariables, this.themeChanges);
+      // this.simulator.themeVariables = newTheme;
+      this.surveyProvider.theme.cssVariables = newTheme;
+      this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
     return themeEditorSurvey;
+  }
+
+  private setThemeToSurvey() {
+    this.survey.applyTheme(this.surveyProvider.theme);
   }
 
   private getThemeEditorSurveyJSON() {

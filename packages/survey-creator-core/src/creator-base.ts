@@ -26,6 +26,7 @@ import {
   ILocalizableOwner,
   PopupBaseViewModel,
   EventBase,
+  ITheme,
   PanelModelBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
@@ -1018,6 +1019,7 @@ export class CreatorBase extends Base
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
+  public theme: ITheme = { cssVariables: {} };
 
   private _allowModifyPages = true;
   /**
