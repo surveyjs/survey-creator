@@ -27,7 +27,9 @@ svc-tab-designer {
   .svc-tab-designer_content {
     width: 100%;
   }
-
+  .sd-title {
+    display: flex;
+  }
   .sd-container-modern {
     min-width: calcSize(70);
     width: 100%;
@@ -42,6 +44,9 @@ svc-tab-designer {
     &.sd-container-modern--responsive {
       max-width: initial;
       padding: 0 calcSize(1);
+    }
+    .sd-container-modern__title {
+      background-color: inherit;
     }
   }
 
