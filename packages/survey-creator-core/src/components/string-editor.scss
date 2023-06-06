@@ -17,10 +17,10 @@
       color: $foreground-light;
     }
   }
-        .sv-string-editor--html,
-        .sv-string-editor:focus-within {
-      white-space: pre-wrap;
-    }
+  .sv-string-editor--html,
+  .sv-string-editor:focus-within {
+    white-space: pre-wrap;
+  }
   &.svc-string-editor--hidden {
     display: none;
   }
@@ -143,6 +143,12 @@
     box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
   }
 }
+.sd-element__title {
+  .svc-string-editor {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
 .sd-boolean {
   .sv-string-editor:focus-within {
     white-space: nowrap;
@@ -158,6 +164,12 @@
         display: none;
       }
     }
+  }
+}
+.sd-table__cell--actions,
+.sd-matrixdynamic__add-btn {
+  .svc-string-editor__button--done {
+    width: calcSize(2);
   }
 }
 .sd-table__cell--header {
