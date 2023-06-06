@@ -1,5 +1,11 @@
 @import "../variables.scss";
 
+.sd-element__title {
+  .svc-string-editor {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
 .svc-string-editor {
   [contenteditable="true"] {
     user-select: text;
@@ -141,12 +147,6 @@
 .svc-string-editor.svc-string-editor--error:focus-within {
   .svc-string-editor__border {
     box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
-  }
-}
-.sd-element__title {
-  .svc-string-editor {
-    display: inline-block;
-    max-width: 100%;
   }
 }
 .sd-boolean {
