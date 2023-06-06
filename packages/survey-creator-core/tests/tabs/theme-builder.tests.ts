@@ -3,6 +3,8 @@ import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+export * from "../../src/components/tabs/theme-custom-questions/font-settings";
+export * from "../../src/components/tabs/theme-custom-questions/element-settings";
 import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
