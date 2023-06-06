@@ -342,7 +342,7 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
-    themeEditorSurvey.mergeData(this.themeVariables);
+    themeEditorSurvey.mergeData(this.surveyProvider.theme.cssVariables);
     themeEditorSurvey.setPropertyValue("themeName", this.themeName);
     themeEditorSurvey.setPropertyValue("themeMode", this.themeMode);
     themeEditorSurvey.setPropertyValue("themePalette", this.themePalette);
