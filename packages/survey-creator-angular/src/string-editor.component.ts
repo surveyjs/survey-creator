@@ -79,6 +79,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     this.baseModel.onFocus(event);
     this.justFocused = true;
   }
+  public onPaste(event: any): void {
+    this.baseModel.onPaste(event);
+  }
   public done(event: any): void {
     this.baseModel.done(event);
     (<any>this.locString).__isEditing = false;

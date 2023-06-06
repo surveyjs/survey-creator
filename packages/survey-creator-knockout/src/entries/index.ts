@@ -31,6 +31,7 @@ export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
 //custom questions for property grid
+export * from "../custom-questions/color-item";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/spin-editor";
 export * from "../custom-questions/question-file";

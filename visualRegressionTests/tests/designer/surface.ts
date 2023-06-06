@@ -123,6 +123,79 @@ test("Matrix column editor", async (t) => {
   });
 });
 
+test("Matrix column editor boolean", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "question23",
+              "defaultValue": {
+                "Row 1": {
+                  "Column 2": true
+                }
+              },
+              "columns": [
+                {
+                  "name": "Column 2",
+                  "cellType": "boolean"
+                }
+              ],
+              "rows": [
+                "Row 1"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const row1Column1Cell = Selector(".sd-table__row").nth(0).find(".svc-matrix-cell").filterVisible().nth(1);
+    const editColumnButton = Selector(".svc-matrix-cell__question-controls-button").filterVisible();
+
+    const showControl = ClientFunction(() => {
+      const el: any = document.querySelectorAll("td:nth-of-type(2) .svc-matrix-cell .svc-matrix-cell__question-controls")[0];
+      el.style.display = "block";
+    });
+
+    await t
+      .expect(Selector(".svc-question__content").exists).ok()
+      .hover(row1Column1Cell, { speed: 0.5 });
+
+    // TODO: remove this line after TestCafe implements workig hover
+    await showControl();
+    await takeElementScreenshot("matrix-cell-edit-bool.png", row1Column1Cell, t, comparer);
+  });
+});
+
+test("Boolean no wrap", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1",
+              "defaultValue": "true",
+              "labelTrue": "Dashed-text"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    await t.click(Selector("span").withText("Dashed-text"));
+    await takeElementScreenshot("bool-no-wrap-edit.png", Selector(".sd-boolean"), t, comparer);
+  });
+});
+
 test("Choices (Checkbox): Layout", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
