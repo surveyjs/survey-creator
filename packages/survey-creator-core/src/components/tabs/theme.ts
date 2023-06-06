@@ -9,40 +9,463 @@ import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../
 require("./theme.scss");
 
 export const Themes = {
-  "default-light": {
+  "default": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
+    "--sjs-general-backcolor-dim": "rgba(243, 243, 243, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(249, 249, 249, 1)",
+    "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45)",
+    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)",
     "--sjs-primary-backcolor": "rgba(25, 179, 148, 1)",
     "--sjs-primary-backcolor-light": "rgba(25, 179, 148, 0.1)",
     "--sjs-primary-backcolor-dark": "rgba(20, 164, 139, 1)",
-    "--background": "#ffffff",
-    "--background-dim": "#f3f3f3",
-    "--background-dim-light": "#f9f9f9",
-    "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
-    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45);",
-    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91);",
-    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45);",
-    "--sjs-editor-background": "#f9f9f9",
-    "--sjs-question-background": "#ffffff",
-    "--sjs-primary-forecolor": "#ffffff",
-    "--foreground": "#161616",
-    "--base-unit": "8px",
-    "--sjs-corner-radius": "4px"
+    "--sjs-primary-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-secondary-backcolor": "rgba(255, 152, 20, 1)",
+    "--sjs-secondary-backcolor-light": "rgba(255, 152, 20, 0.1)",
+    "--sjs-secondary-backcolor-semi-light": "rgba(255, 152, 20, 0.25)",
+    "--sjs-secondary-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-secondary-forecolor-light": "rgba(255, 255, 255, 0.25)",
+    "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.16)",
+    "--sjs-border-inside": "rgba(0, 0, 0, 0.16)",
+    "--sjs-special-red": "rgba(229, 10, 62, 1)",
+    "--sjs-special-red-light": "rgba(229, 10, 62, 0.1)",
+    "--sjs-special-red-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-special-green": "rgba(25, 179, 148, 1)",
+    "--sjs-special-green-light": "rgba(25, 179, 148, 0.1)",
+    "--sjs-special-green-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-special-blue": "rgba(67, 127, 217, 1)",
+    "--sjs-special-blue-light": "rgba(67, 127, 217, 0.1)",
+    "--sjs-special-blue-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-special-yellow": "rgba(255, 152, 20, 1)",
+    "--sjs-special-yellow-light": "rgba(255, 152, 20, 0.1)",
+    "--sjs-special-yellow-forecolor": "rgba(255, 255, 255, 1)"
+  },
+  "contrast": {
+    "--sjs-general-backcolor-dark": "rgba(228, 228, 228, 1)",
+    "--sjs-general-backcolor-dim": "rgba(224, 224, 224, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.6)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.6)",
+    "--sjs-primary-backcolor": "rgba(103, 58, 176, 1)",
+    "--sjs-primary-backcolor-light": "rgba(103, 58, 176, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(69, 24, 142, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.25)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.25)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.25)"
+  },
+  "plain": {
+    "--sjs-general-backcolor-dark": "rgba(241, 246, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 245, 255, 1)",
+    "--sjs-general-forecolor-light": "rgba(133, 154, 186, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(133, 154, 186, 1)",
+    "--sjs-primary-backcolor": "rgba(35, 101, 200, 1)",
+    "--sjs-primary-backcolor-light": "rgba(35, 101, 200, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(26, 86, 175, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(220, 229, 241, 1)",
+    "--sjs-border-default": "rgba(179, 200, 229, 1)"
+  },
+  "simple": {
+    "--sjs-general-backcolor": "rgba(246, 246, 246, 1)",
+    "--sjs-general-backcolor-dark": "rgba(235, 235, 235, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor": "rgba(85, 181, 52, 1)",
+    "--sjs-primary-backcolor-light": "rgba(85, 181, 52, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(64, 159, 31, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.12)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.12)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.12)"
+  },
+  "blank": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor": "rgba(37, 137, 229, 1)",
+    "--sjs-primary-backcolor-light": "rgba(37, 137, 229, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(21, 119, 209, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-shadow-medium": "0px 0px 0px 1px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.05)",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(0, 0, 0, 0.15)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.15)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.15)"
+  },
+  "double": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(239, 239, 239, 1)",
+    "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor": "rgba(76, 100, 137, 1)",
+    "--sjs-primary-backcolor-light": "rgba(76, 100, 137, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(62, 83, 115, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 0.07)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.08)",
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(0, 0, 0, 0.1)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.1)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.1)"
+  },
+  "bulk": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(244, 244, 244, 1)",
+    "--sjs-general-backcolor-dim": "rgba(216, 207, 236, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(241, 237, 248, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.5)",
+    "--sjs-primary-backcolor": "rgba(122, 100, 168, 1)",
+    "--sjs-primary-backcolor-light": "rgba(122, 100, 168, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(105, 84, 152, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined"
+  },
+  "pseudo-3d": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(243, 243, 243, 1)",
+    "--sjs-general-backcolor-dim": "rgba(46, 172, 180, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(245, 245, 245, 1)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.43)",
+    "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.8)",
+    "--sjs-primary-backcolor": "rgba(46, 172, 180, 1)",
+    "--sjs-primary-backcolor-light": "rgba(46, 172, 180, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(23, 156, 165, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 2px 0px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "inset 0px 2px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.16)"
+  },
+  "playful": {
+    "--sjs-general-backcolor": "rgba(248, 248, 248, 1)",
+    "--sjs-general-backcolor-dark": "rgba(242, 242, 242, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor": "rgba(217, 74, 100, 1)",
+    "--sjs-primary-backcolor-light": "rgba(217, 74, 100, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(189, 61, 84, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.08)",
+    "--sjs-border-default": "rgba(0, 0, 0, 0.08)"
+  },
+  "ultra": {
+    "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 216, 77, 1)",
+    "--sjs-general-forecolor": "rgba(0, 0, 0, 1)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 1)",
+    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 1)",
+    "--sjs-primary-backcolor": "rgba(0, 0, 0, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 216, 77, 1)",
+    "--sjs-primary-backcolor-dark": "rgba(83, 83, 83, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(0, 0, 0, 0.2)",
+    "--sjs-border-default": "rgba(0, 0, 0, 1)"
   },
   "default-dark": {
-    "--sjs-primary-backcolor": "rgba(255, 152, 20, 1)",
-    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
-    "--sjs-primary-backcolor-dark": "rgba(255, 170, 24, 1)",
-    "--background": "#555555",
-    "--background-dim": "#4d4d4d",
-    "--background-dim-light": "#4d4d4d",
+    "--sjs-general-backcolor": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dark": "rgba(52, 52, 52, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(43, 43, 43, 1)",
     "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
     "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.42)",
     "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.79)",
     "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.45)",
-    "--sjs-editor-background": "#4d4d4d",
-    "--sjs-question-background": "#555555",
-    "--sjs-primary-forecolor": "#ffffff",
-    "--foreground": "#ededed",
-    "--base-unit": "8px",
+    "--sjs-primary-backcolor": "rgba(255, 152, 20, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-primary-backcolor-dark": "rgba(255, 170, 24, 1)",
+    "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-secondary-backcolor": "rgba(255, 152, 20, 1)",
+    "--sjs-secondary-backcolor-light": "rgba(255, 152, 20, 0.1)",
+    "--sjs-secondary-backcolor-semi-light": "rgba(255, 152, 20, 0.25)",
+    "--sjs-secondary-forecolor": "rgba(48, 48, 48, 1)",
+    "--sjs-secondary-forecolor-light": "rgba(48, 48, 48, 0.25)",
+    "--sjs-shadow-small": "0px 1px 2px 0px rgba(0, 0, 0, 0.35)",
+    "--sjs-shadow-medium": "0px 2px 6px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-shadow-inner": "inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.08)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-inside": "rgba(255, 255, 255, 0.08)",
+    "--sjs-special-red": "rgba(254, 76, 108, 1)",
+    "--sjs-special-red-light": "rgba(254, 76, 108, 0.1)",
+    "--sjs-special-red-forecolor": "rgba(48, 48, 48, 1)",
+    "--sjs-special-green": "rgba(36, 197, 164, 1)",
+    "--sjs-special-green-light": "rgba(36, 197, 164, 0.1)",
+    "--sjs-special-green-forecolor": "rgba(48, 48, 48, 1)",
+    "--sjs-special-blue": "rgba(91, 151, 242, 1)",
+    "--sjs-special-blue-light": "rgba(91, 151, 242, 0.1)",
+    "--sjs-special-blue-forecolor": "rgba(48, 48, 48, 1)",
+    "--sjs-special-yellow": "rgba(255, 152, 20, 1)",
+    "--sjs-special-yellow-light": "rgba(255, 152, 20, 0.1)",
+    "--sjs-special-yellow-forecolor": "rgba(48, 48, 48, 1)"
+  },
+  "contrast-dark": {
+    "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(27, 27, 27, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)",
+    "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
+    "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.5)",
+    "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.8)",
+    "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.55)",
+    "--sjs-primary-backcolor": "rgba(16, 226, 255, 1)",
+    "--sjs-primary-backcolor-light": "rgba(0, 0, 0, 0.35)",
+    "--sjs-primary-backcolor-dark": "rgba(129, 240, 255, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.28)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.22)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.22)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.22)"
+  },
+  "plain-dark": {
+    "--sjs-general-backcolor": "rgba(43, 48, 63, 1)",
+    "--sjs-general-backcolor-dark": "rgba(50, 55, 72, 1)",
+    "--sjs-general-backcolor-dim": "rgba(33, 37, 51, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(36, 41, 55, 1)",
+    "--sjs-general-forecolor-light": "rgba(114, 120, 137, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(114, 120, 137, 1)",
+    "--sjs-primary-backcolor": "rgba(114, 187, 255, 1)",
+    "--sjs-primary-backcolor-light": "rgba(114, 187, 255, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(151, 205, 255, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 0px rgba(0, 0, 0, 0.35)",
+    "--sjs-shadow-inner": "inset 0px 0px 0px 0px rgba(0, 0, 0, 0.2)",
+    "--sjs-border-light": "rgba(55, 62, 79, 1)",
+    "--sjs-border-default": "rgba(65, 72, 90, 1)"
+  },
+  "simple-dark": {
+    "--sjs-general-backcolor": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dark": "rgba(56, 56, 56, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(43, 43, 43, 1)",
+    "--sjs-primary-backcolor": "rgba(92, 214, 49, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-primary-backcolor-dark": "rgba(130, 237, 92, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.09)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.07)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.07)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.07)"
+  },
+  "blank-dark": {
+    "--sjs-general-backcolor": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dark": "rgba(47, 47, 47, 1)",
+    "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(36, 36, 36, 1)",
+    "--sjs-primary-backcolor": "rgba(85, 171, 250, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.12)",
+    "--sjs-primary-backcolor-dark": "rgba(126, 193, 255, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "0px 0px 0px 1px rgba(255, 255, 255, 0.12)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
+  },
+  "double-dark": {
+    "--sjs-general-backcolor": "rgba(52, 52, 52, 1)",
+    "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(47, 47, 47, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(47, 47, 47, 1)",
+    "--sjs-primary-backcolor": "rgba(120, 156, 210, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(146, 181, 235, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(255, 255, 255, 0.12)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
+    "--sjs-shadow-large": "0px 8px 16px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.1)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.1)"
+  },
+  "bulk-dark": {
+    "--sjs-general-backcolor": "rgba(39, 40, 50, 1)",
+    "--sjs-general-backcolor-dark": "rgba(46, 47, 58, 1)",
+    "--sjs-general-backcolor-dim": "rgba(30, 31, 40, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(32, 33, 43, 1)",
+    "--sjs-general-forecolor": "rgba(213, 215, 238, 1)",
+    "--sjs-general-forecolor-light": "rgba(117, 120, 140, 1)",
+    "--sjs-general-dim-forecolor": "rgba(213, 215, 238, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(117, 119, 141, 1)",
+    "--sjs-primary-backcolor": "rgba(164, 127, 243, 1)",
+    "--sjs-primary-backcolor-light": "rgba(164, 127, 243, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(192, 165, 251, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(54, 56, 69, 1)",
+    "--sjs-border-default": "rgba(67, 69, 85, 1)"
+  },
+  "pseudo-3d-dark": {
+    "--sjs-general-backcolor": "rgba(53, 55, 63, 1)",
+    "--sjs-general-backcolor-dark": "rgba(60, 63, 74, 1)",
+    "--sjs-general-backcolor-dim": "rgba(38, 40, 47, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(46, 48, 55, 1)",
+    "--sjs-general-forecolor-light": "rgba(125, 129, 143, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(125, 130, 148, 1)",
+    "--sjs-primary-backcolor": "rgba(58, 202, 211, 1)",
+    "--sjs-primary-backcolor-light": "rgba(67, 70, 80, 1)",
+    "--sjs-primary-backcolor-dark": "rgba(92, 224, 233, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 2px 0px 0px rgba(33, 35, 43, 1)",
+    "--sjs-shadow-inner": "0px -2px 0px 0px rgba(33, 35, 43, 1)",
+    "--sjs-border-light": "rgba(65, 69, 83, 1)",
+    "--sjs-border-default": "rgba(97, 101, 118, 1)"
+  },
+  "playful-dark": {
+    "--sjs-general-backcolor": "rgba(38, 38, 38, 1)",
+    "--sjs-general-backcolor-dark": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dim": "rgba(28, 28, 28, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(48, 48, 48, 1)",
+    "--sjs-primary-backcolor": "rgba(243, 87, 134, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.05)",
+    "--sjs-primary-backcolor-dark": "rgba(250, 118, 157, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-medium": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-shadow-large": "0px 0px 0px 0px rgba(0, 0, 0, 0.1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
+    "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
+  },
+  "ultra-dark": {
+    "--sjs-general-backcolor": "rgba(255, 216, 77, 1)",
+    "--sjs-general-backcolor-dark": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim": "rgba(0, 0, 0, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
+    "--sjs-general-forecolor": "rgba(0, 0, 0, 1)",
+    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 1)",
+    "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor": "rgba(0, 0, 0, 1)",
+    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 1)",
+    "--sjs-primary-backcolor-dark": "rgba(53, 53, 53, 1)",
+    "--sjs-primary-forecolor": "rgba(255, 255, 255, 1)",
+    "--sjs-base-unit": "8px",
+    "--sjs-corner-radius": "4px",
+    "--sjs-shadow-small": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-medium": "0px 0px 0px 2px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-large": "0px 6px 0px 0px rgba(0, 0, 0, 1)",
+    "--sjs-shadow-inner": "undefinedpx undefinedpx undefinedpx undefinedpx undefined",
+    "--sjs-border-light": "rgba(232, 192, 51, 1)",
+    "--sjs-border-default": "rgba(0, 0, 0, 1)"
+  },
+  "default-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
+  },
+  "contrast-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)"
+  },
+  "plain-lw": {
+    "--sjs-general-backcolor": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dark": "rgba(220, 232, 252, 1)",
+    "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)"
+  },
+  "simple-lw": {
+    "--sjs-general-backcolor-dim": "rgba(246, 246, 246, 1)"
+  },
+  "double-lw": {
+    "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)"
+  },
+  "bulk-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
+  },
+  "pseudo-3d-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
+    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)"
+  },
+  "playful-lw": {
+    "--sjs-general-backcolor-dim": "rgba(248, 248, 248, 1)"
+  },
+  "ultra-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
+  },
+  "default-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
+  },
+  "contrast-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)",
+    "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)"
+  },
+  "plain-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(43, 48, 63, 1)"
+  },
+  "simple-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
+  },
+  "double-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(52, 52, 52, 1)"
+  },
+  "bulk-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(39, 40, 50, 1)"
+  },
+  "pseudo-3d-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(53, 55, 63, 1)"
+  },
+  "ultra-dark-lw": {
+    "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
+    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 1)",
+    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 1)"
+  },
+  "dark-designer": {
+    "--sjs-primary-backcolor": "rgba(36, 197, 164, 1)",
+    "--sjs-primary-backcolor-light": "rgba(36, 197, 164, 0.1)",
+    "--sjs-primary-backcolor-dark": "rgba(44, 206, 173, 1)",
+    "--sjs-base-unit": "8px",
     "--sjs-corner-radius": "4px"
   }
 };
@@ -197,8 +620,14 @@ export class ThemeSurveyTabViewModel extends Base {
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panel" }) themeMode;
 
+  getFullThemeName(_themeName?: string) {
+    if (this.themePalette === "light") {
+      return _themeName || this.themeName;
+    }
+    return (_themeName || this.themeName) + "-" + this.themePalette;
+  }
   get themeVariables(): any {
-    return Themes[this.themeName + "-" + this.themePalette];
+    return Themes[this.getFullThemeName()];
   }
 
   public get activeLanguage(): string {
@@ -466,23 +895,28 @@ export class ThemeSurveyTabViewModel extends Base {
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.mergeData(this.themeVariables);
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor-dim-light"];
     assign(this.simulator.themeVariables, this.themeVariables);
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
+      this.themeChanges[options.name] = options.value;
+
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         this.initializeColorCalculator();
-        themeEditorSurvey.mergeData(this.themeVariables);
-        const newTheme = {};
-        assign(newTheme, this.themeVariables);
-        this.simulator.themeVariables = newTheme;
-
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
         }
+        const newTheme = {};
+        assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
+        if (this.survey["isCompact"]) {
+          assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
+        }
+
+        themeEditorSurvey.mergeData(newTheme);
+        this.simulator.themeVariables = newTheme;
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
@@ -502,12 +936,12 @@ export class ThemeSurveyTabViewModel extends Base {
         this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       }
       if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light");
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
         this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
       }
       if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor");
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
       }
@@ -550,7 +984,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
+                choices: ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"],
                 defaultValue: "default",
                 allowClear: false
               },
@@ -593,7 +1027,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "color",
-                name: "--background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
@@ -701,7 +1135,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "expression",
-                name: "--base-unit",
+                name: "--sjs-base-unit",
                 expression: "{commonScale}*8/100+\"px\"",
                 visible: false
               },
@@ -733,7 +1167,7 @@ export class ThemeSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "color",
-                name: "--background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
@@ -784,7 +1218,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-small",
+                name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.questionShadow"),
                 defaultValue: {
@@ -798,7 +1232,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "expression",
-                name: "--background",
+                name: "--sjs-general-backcolor",
                 expression: "{questionPanel.backcolor}",
                 visible: false
               }, {
@@ -838,7 +1272,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-inner",
+                name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.editorShadow"),
                 defaultValue: {
@@ -851,7 +1285,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 }
               }, {
                 type: "expression",
-                name: "--background-dim-light",
+                name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",
                 visible: false
               }, {

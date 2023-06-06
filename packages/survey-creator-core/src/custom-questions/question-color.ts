@@ -1,4 +1,5 @@
 import { Action, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { parseColor } from "../utils/utils";
 
 export class QuestionColorModel extends QuestionTextModel {
   @property() public unit: string;
@@ -12,7 +13,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   private getCorrectedValue(newValue: string): string {
-    newValue = newValue ?? "";
+    newValue = parseColor(newValue ?? "").color;
     newValue = (newValue.match(/#(\d|\w){1,6}/) || ["#000000"])[0];
     if(newValue.length === 4) {
       for(let i = 1; i < 4; i++) {
