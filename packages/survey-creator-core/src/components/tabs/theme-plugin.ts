@@ -14,6 +14,9 @@ export class TabThemePlugin implements ICreatorPlugin {
   private designerAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
+  private importAction: Action;
+  private exportAction: Action;
+  private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
 
@@ -58,6 +61,8 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.importAction.visible = true;
+    this.exportAction.visible = true;
   }
   public update(): void {
     if (!this.model) return;
@@ -87,6 +92,8 @@ export class TabThemePlugin implements ICreatorPlugin {
     }
     this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
+    this.importAction.visible = false;
+    this.exportAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
@@ -181,6 +188,45 @@ export class TabThemePlugin implements ICreatorPlugin {
       iconName: "icon-arrow-right_16x16",
       visible: false
     });
+
+    this.importAction = new Action({
+      id: "svc-theme-import",
+      iconName: "icon-load",
+      locTitleName: "ed.themeImportButton",
+      locTooltipName: "ed.themeImportButton",
+      visible: false,
+      mode: "small",
+      component: "sv-action-bar-item",
+      needSeparator: true,
+      action: () => {
+        if (!document) return;
+        if (!this.inputFileElement) {
+          this.inputFileElement = document.createElement("input");
+          this.inputFileElement.type = "file";
+          this.inputFileElement.style.display = "none";
+          this.inputFileElement.onchange = () => {
+            this.model.importFromFileUI(this.inputFileElement);
+          };
+        }
+        this.inputFileElement.click();
+      }
+    });
+    items.push(this.importAction);
+
+    this.exportAction = new Action({
+      id: "svc-theme-export",
+      iconName: "icon-download",
+      locTitleName: "ed.themeExportButton",
+      locTooltipName: "ed.themeExportButton",
+      visible: false,
+      mode: "small",
+      component: "sv-action-bar-item",
+      action: () => {
+        this.model.exportToFileUI();
+      }
+    });
+    items.push(this.exportAction);
+
     return items;
   }
 

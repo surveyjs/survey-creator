@@ -25,6 +25,9 @@ export var settings = {
      */
     exportFileName: "survey_translation.csv"
   },
+  theme: {
+    exportFileName: "survey_theme.json"
+  },
   operators: {
     empty: [],
     notempty: [],
