@@ -314,7 +314,7 @@ test("Check item string editor focus out on near click", async (t) => {
   await t
     .click(svItemSelector)
     .expect(svItemSelector.focused).ok()
-    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200 })
+    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200, offsetY: 50 })
     .expect(svItemSelector.focused).notOk();
 });
 
