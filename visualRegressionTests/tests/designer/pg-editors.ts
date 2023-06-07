@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToBody } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -403,6 +403,7 @@ test("Check color editor", async (t) => {
     await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-input__edit-button"));
+    await resetHoverToBody(t);
     await takeElementScreenshot("color-editor-choices.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t.click(questionSelector.find(".spg-input__edit-button"));
     await t.click(questionSelector.find(".spg-color-editor__input"));

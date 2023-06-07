@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToBody } from "../../helper";
 
 const title = "Designer surface";
 
@@ -492,6 +492,7 @@ test("Panel multi-question row", async (t) => {
       destinationOffsetX: -80,
       speed: 0.5
     });
+    await resetHoverToBody(t);
 
     await takeElementScreenshot("surface-panel-multi-row-question-selected.png", Selector(".svc-question__content"), t, comparer);
   });
@@ -1121,11 +1122,13 @@ test("Matrix dropdown popup edit ", async (t) => {
     await t.hover(".svc-matrix-cell .sd-dropdown");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
     await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await resetHoverToBody(t);
     await takeElementScreenshot("matrix-dropdown-popup-select.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t.click(Selector("button").withText("Cancel"));
     await t.hover(".svc-matrix-cell .sd-rating");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
     await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await resetHoverToBody(t);
     await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
