@@ -33,7 +33,7 @@ ComponentCollection.Instance.add({
       name: "color",
       title: getLocString("theme.color"),
       titleLocation: "left",
-      choices: ["#00FFFF", "#00FFFF"],
+      // choices: ["#00FFFF", "#00FFFF"],
       descriptionLocation: "hidden"
     },
     {

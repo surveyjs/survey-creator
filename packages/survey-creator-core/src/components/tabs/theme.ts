@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -90,6 +90,9 @@ export class ThemeSurveyTabViewModel extends Base {
   }
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
+  }
+  public get currentTheme(): ITheme {
+    return this.surveyProvider.theme;
   }
 
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
@@ -343,12 +346,11 @@ export class ThemeSurveyTabViewModel extends Base {
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.mergeData(this.surveyProvider.theme.cssVariables);
-    themeEditorSurvey.setPropertyValue("themeName", this.themeName);
-    themeEditorSurvey.setPropertyValue("themeMode", this.themeMode);
-    themeEditorSurvey.setPropertyValue("themePalette", this.themePalette);
+    themeEditorSurvey.setValue("themeName", this.themeName);
+    themeEditorSurvey.setValue("themeMode", this.themeMode);
+    themeEditorSurvey.setValue("themePalette", this.themePalette);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--sjs-general-backcolor-dim-light"];
-    assign(this.simulator.themeVariables, this.themeVariables);
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
@@ -371,7 +373,6 @@ export class ThemeSurveyTabViewModel extends Base {
         }
 
         themeEditorSurvey.mergeData(newTheme);
-        this.simulator.themeVariables = newTheme;
         this.surveyProvider.theme.cssVariables = newTheme;
         this.setThemeToSurvey();
         return;
@@ -418,7 +419,6 @@ export class ThemeSurveyTabViewModel extends Base {
       }
       const newTheme = {};
       assign(newTheme, this.surveyProvider.theme.cssVariables, this.themeChanges);
-      // this.simulator.themeVariables = newTheme;
       this.surveyProvider.theme.cssVariables = newTheme;
       this.setThemeToSurvey();
     });
