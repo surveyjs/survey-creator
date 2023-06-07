@@ -59,7 +59,7 @@ export class ThemeSurveyTabViewModel extends Base {
   activePage: PageModel;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
-  @property({ defaultValue: "panel" }) themeMode;
+  @property({ defaultValue: "panels" }) themeMode;
 
   getFullThemeName(_themeName?: string) {
     if (this.themePalette === "light") {
