@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToBody } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -43,7 +43,7 @@ test("Toolbox Item State After Drag", async (t) => {
     await t
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
-    await resetHoverToBody(t);
+    await resetHoverToCreator(t);
 
     await takeElementScreenshot("toolbox-item-state-after-drag.png", Selector(RatingToolboxItem), t, comparer);
   });
@@ -76,7 +76,6 @@ test("Empty Panel Styles", async (t) => {
     await t
       .hover(RatingToolboxItem)
       .dragToElement(RatingToolboxItem, Panel, { speed: 0.5 });
-    await resetHoverToBody(t);
 
     await takeElementScreenshot("drag-drop-survey-element-empty-panel.png", Panel, t, comparer);
   });
@@ -254,7 +253,7 @@ test("Drag Drop ImagePicker (choices) drop to invalid area", async (t) => {
       .hover(GiraffeItem, { speed: 0.1 }).hover(DragZoneGiraffeItem, { speed: 0.1 })
       .dragToElement(DragZoneGiraffeItem, SurveyTitle, { speed: 0.1 })
       .wait(1000);
-    await resetHoverToBody(t);
+    await resetHoverToCreator(t);
 
     await takeElementScreenshot("drag-drop-image-picker-invalid-drop-area.png", Selector(GiraffeItem), t, comparer);
   });
