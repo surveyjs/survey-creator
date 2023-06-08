@@ -91,12 +91,15 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const PanelDynamicItem = Selector("[aria-label='Dynamic Panel toolbox item']");
 
   await t.resizeWindow(2560, 2000);
-
   await ClientFunction(() => {
     const el: any = document.getElementById("survey-creator");
     el.style.position = "relative";
     el.style.bottom = undefined;
     el.style.height = "10000px";
+    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    if (!!rootEl) {
+      rootEl.style.position = "relative";
+    }
   })();
 
   let pagesLength;
