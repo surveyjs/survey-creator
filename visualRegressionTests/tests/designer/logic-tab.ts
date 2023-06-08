@@ -9,7 +9,7 @@ test("empty view", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
 
-    const tabContent = Selector(".svc-creator-tab__content");
+    const tabContent = Selector(".svc-creator-tab");
 
     await t.click(getTabbedMenuItemByText(creatorTabLogicName));
     await takeElementScreenshot("logic-tab-empty.png", tabContent, t, comparer);
