@@ -92,6 +92,13 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t.resizeWindow(2560, 2000);
 
+  await ClientFunction(() => {
+    const el: any = document.getElementById("survey-creator");
+    el.style.position = "relative";
+    el.style.bottom = undefined;
+    el.style.height = "10000px";
+  })();
+
   let pagesLength;
 
   await t
