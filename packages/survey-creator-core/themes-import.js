@@ -7,29 +7,40 @@ function createBoxShadow(value) {
   )).join(",");
 }
 function getShadowSettings(shadowGroup) {
-  const result = {};
-  Object.keys(shadowGroup)
+  let result = [];
+  const parseShadowSettings = (settings => {
+    const _result = {};
+    Object.keys(settings)
     .filter(shadowPropery => { return (shadowPropery !== "category" && shadowPropery !== "exportKey"); })
     .forEach(shadowPropery => {
       if(shadowPropery === "offset") {
-        result["x"] = shadowGroup[shadowPropery]["x"]["value"];
-        result["y"] = shadowGroup[shadowPropery]["y"]["value"];
+        _result["x"] = settings[shadowPropery]["x"]["value"];
+        _result["y"] = settings[shadowPropery]["y"]["value"];
       } else {
-        result[shadowPropery] = shadowGroup[shadowPropery]["value"];
+        _result[shadowPropery] = settings[shadowPropery]["value"];
       }
     });
-  return createBoxShadow([result]);
+    return _result;
+  })
+  if(!!shadowGroup["0"]) {
+    result = Object.keys(shadowGroup)
+    .filter(shadowPropery => { return (shadowPropery !== "category" && shadowPropery !== "exportKey"); })
+    .map(key => shadowGroup[key]).map(item => parseShadowSettings(item))
+  } else {
+    result = [parseShadowSettings(shadowGroup)]
+  }
+  return createBoxShadow(result);
 }
 
 Object.keys(MikeThemes).forEach(function (themeName) {
   console.log(themeName);
 
-  const generalGroup = MikeThemes[themeName].general;
-  const primaryGroup = MikeThemes[themeName].primary;
-  const secondaryGroup = MikeThemes[themeName].secondary;
-  const shadowGroup = MikeThemes[themeName].shadow;
-  const bordersGroup = MikeThemes[themeName].borders;
-  const specialGroup = MikeThemes[themeName].special;
+  const generalGroup = MikeThemes[themeName]["general"];
+  const primaryGroup = MikeThemes[themeName]["primary"];
+  const secondaryGroup = MikeThemes[themeName]["secondary"];
+  const shadowGroup = MikeThemes[themeName]["shadow"];
+  const bordersGroup = MikeThemes[themeName]["borders"];
+  const specialGroup = MikeThemes[themeName]["special"];
 
   themes[themeName] = {};
 

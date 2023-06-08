@@ -1,4 +1,13 @@
 .spg-theme-builder-root {
+  .spg-paneldynamic__separator {
+    border: none;
+    height: calcSize(2);
+    margin: 0;
+  }
+  .spg-paneldynamic__remove-btn {
+    display: none;
+  }
+
   .spg-row--multiple {
     .spg-spin-editor {
       .spg-input-container__buttons-container {
