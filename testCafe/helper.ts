@@ -152,3 +152,7 @@ export const patchDragDropToDisableDrop = ClientFunction(() => {
 export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {
   return Selector(selector).find(".sv-string-viewer").textContent;
 }
+
+export async function resetHoverToCreator(t: TestController): Promise<void> {
+  await t.hover(Selector("#survey-creator"), { offsetX: 0, offsetY: 0 });
+}

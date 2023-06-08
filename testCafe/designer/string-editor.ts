@@ -314,7 +314,7 @@ test("Check item string editor focus out on near click", async (t) => {
   await t
     .click(svItemSelector)
     .expect(svItemSelector.focused).ok()
-    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200 })
+    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200, offsetY: 50 })
     .expect(svItemSelector.focused).notOk();
 });
 
@@ -599,7 +599,7 @@ test("Focus switch on select base", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Item 3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("Item 4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("Item 5").visible).notOk();
 });
 
@@ -673,7 +673,7 @@ test("Focus switch on multiple text", async (t) => {
     .expect(Selector(".sv-string-editor").withText("text3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("text4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("text5").visible).notOk();
 });
 
@@ -719,7 +719,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Column 3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("Column 4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("Column 5").visible).notOk()
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(".sv-string-editor").withText("Row 1").focused).ok()
@@ -729,7 +729,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Row 3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("Row 4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("Row 5").visible).notOk();
 });
 
