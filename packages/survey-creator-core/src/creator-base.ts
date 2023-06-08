@@ -25,12 +25,14 @@ import {
   ILocalizableString,
   ILocalizableOwner,
   PopupBaseViewModel,
-  EventBase
+  EventBase,
+  ITheme,
+  PanelModelBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
-import { DragDropSurveyElements, DragDropChoices } from "survey-core";
+import { DragDropChoices } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -56,12 +58,14 @@ import { CreatorResponsivityManager } from "./creator-responsivity-manager";
 import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
+import { StringEditorConnector } from "./components/string-editor";
+import { TabThemePlugin } from "./components/tabs/theme-plugin";
+import { DragDropSurveyElements } from "./survey-elements";
+import { PageAdorner } from "./components/page";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
-
-import { StringEditorConnector } from "./components/string-editor";
 
 export interface IKeyboardShortcut {
   name?: string;
@@ -157,6 +161,12 @@ export class CreatorBase extends Base
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
+  /**
+   * Specifies whether to display the Theme tab.
+   *
+   * Default value: `false`
+   */
+  @property({ defaultValue: false }) showThemeTab: boolean;
   /**
    * Specifies whether to display the Embed Survey tab.
    *
@@ -739,6 +749,23 @@ export class CreatorBase extends Base
    *- options.page the new survey Page object.
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
+
+  /**
+   * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.actions`: [`IAction[]`](/form-library/documentation/api-reference/iaction)\
+   * An array of actions. You can add or remove actions from this array.
+   * - `options.page`: [`PageModel`](/form-library/documentation/api-reference/page-model)\
+   * A page for which the event is raised.
+   * - `options.addNewQuestion(type)`: Method\
+   * Adds a new question of a specified [`type`](/form-library/documentation/api-reference/question#getType) to the page.
+   */
+  public onGetPageActions: CreatorEvent = new CreatorEvent();
+
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    *- sender the survey creator object that fires the event
@@ -992,6 +1019,7 @@ export class CreatorBase extends Base
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
+  public theme: ITheme = { cssVariables: {} };
 
   private _allowModifyPages = true;
   /**
@@ -1458,6 +1486,9 @@ export class CreatorBase extends Base
     }
     if (this.showPreviewTab) {
       new TabTestPlugin(this);
+    }
+    if (this.showThemeTab) {
+      new TabThemePlugin(this);
     }
     if (this.showLogicTab) {
       new TabLogicPlugin(this);
@@ -3123,6 +3154,17 @@ export class CreatorBase extends Base
       popupModel: popupModel
     };
   }
+
+  public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {
+    const options = {
+      page: pageAdorner.page,
+      addNewQuestion: (type: string) => { pageAdorner.addNewQuestion(pageAdorner, undefined, type); },
+      actions
+    };
+    this.onGetPageActions.fire(this, options);
+    return options.actions;
+  }
+
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)
@@ -3208,6 +3250,15 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
   @property({ defaultValue: false }) isMobileView;
+  /**
+   * Specifies Toolbox location.
+   * 
+   * Possible values:
+   * 
+   * - `"left"` (default) - Displays Toolbox on the left side of the design surface.
+   * - `"right"` - Displays Toolbox on the right side of the design surface.
+   * - `"sidebar"` - Displays Toolbox as an overlay on top of Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify Property Grid position.
+   */
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase) => {
       if (!target.toolbox) return;
@@ -3215,6 +3266,15 @@ export class CreatorBase extends Base
       target.updateToolboxIsCompact();
     }
   }) toolboxLocation: toolboxLocationType;
+  /**
+   * Specifies the position of the sidebar that displays Property Grid.
+   * 
+   * Possible values:
+   * 
+   * - `"right"` (default) - Displays the sidebar on the right side of the design surface.
+   * - `"left"` - Displays the sidebar on the left side of the design surface.
+   * @see toolboxLocation
+   */
   @property({ defaultValue: "right" }) sidebarLocation: "left" | "right";
   selectFromStringEditor: boolean;
 
@@ -3240,6 +3300,7 @@ export class CreatorBase extends Base
     });
     super.dispose();
   }
+  @property({ defaultValue: false }) enableLinkFileEditor: boolean;
 }
 export class SurveyCreatorModel extends CreatorBase { }
 

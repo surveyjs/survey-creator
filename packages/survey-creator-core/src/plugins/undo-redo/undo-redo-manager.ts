@@ -73,8 +73,10 @@ export class UndoRedoManager {
     if (transaction.isEmpty()) return;
 
     this._cutOffTail();
-    this._transactions.push(transaction);
-    this._currentTransactionIndex++;
+    if(this._transactions[this._currentTransactionIndex] !== transaction) {
+      this._transactions.push(transaction);
+      this._currentTransactionIndex++;
+    }
     this.canUndoRedoCallback();
   }
   private _getCurrentTransaction() {
@@ -203,12 +205,16 @@ export interface IUndoRedoAction {
 }
 
 export class UndoRedoAction implements IUndoRedoAction {
+  static maximumMergeTime = 1000;
+  private tickCount: number;
   constructor(
     private _propertyName: string,
     private _oldValue: any,
     private _newValue: any,
     private _sender: Base
-  ) { }
+  ) {
+    this.tickCount = new Date().getTime();
+  }
 
   apply(): void {
     this._sender[this._propertyName] = this._newValue;
@@ -230,6 +236,7 @@ export class UndoRedoAction implements IUndoRedoAction {
     if(sender !== this._sender || propertyName !== this._propertyName || newValue == this._oldValue) return false;
     const prop = Serializer.findProperty(sender.getType(), propertyName);
     if(!prop || (prop.type !== "string" && prop.type !== "text")) return false;
+    if(new Date().getTime() - this.tickCount > UndoRedoAction.maximumMergeTime) return false;
     this._newValue = newValue;
     return true;
   }

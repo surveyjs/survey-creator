@@ -1,0 +1,14 @@
+<ng-template #template>
+  <div class="svc-creator-tab__content svc-test-tab__content" [class.svc-creator-tab__content--with-toolbar]="model.isPageToolbarVisible">
+    <div class="svc-plugin-tab__content">
+      <survey-simulator [model]="model.simulator"></survey-simulator>
+      <ng-container *ngIf="!model.isRunning">
+        <survey-test-again [model]="model.testAgainAction"></survey-test-again>
+        <survey-results [survey]="model.survey"></survey-results>
+      </ng-container>
+    </div>
+    <div *ngIf="model.isPageToolbarVisible" class="svc-plugin-tab__content-actions svc-test-tab__content-actions">
+      <sv-action-bar [model]="model.pages"></sv-action-bar>
+    </div>
+  </div>
+</ng-template>

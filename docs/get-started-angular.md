@@ -37,7 +37,7 @@ npm install survey-creator-angular --save
 
 ## Configure Styles
 
-Open the `angular.json` file and reference Survey Creator and SurveyJS Library style sheets:
+Open the `angular.json` file and reference Survey Creator and SurveyJS Form Library style sheets:
 
 ```js
 {

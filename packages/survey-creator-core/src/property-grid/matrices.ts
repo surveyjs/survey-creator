@@ -1,8 +1,8 @@
-import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer } from "survey-core";
+import { Base, ComputedUpdater, IAction, ISurveyData, ItemValue, JsonMetadata, JsonMetadataClass, JsonObjectProperty, MatrixDropdownColumn, MatrixDropdownRowModelBase, MatrixDynamicRowModel, PanelModel, Question, QuestionHtmlModel, QuestionMatrixDropdownModelBase, QuestionMatrixDropdownRenderedRow, QuestionMatrixDynamicModel, QuestionRatingModel, Serializer, SurveyElement } from "survey-core";
 import { editorLocalization } from "../editorLocalization";
 import { SurveyQuestionProperties } from "../question-editor/properties";
 import { ISurveyCreatorOptions } from "../creator-settings";
-import { getNextItemText, getNextValue } from "../utils/utils";
+import { getAcceptedTypesByContentMode, getNextItemText, getNextValue, getQuestionFromObj } from "../utils/utils";
 import { FastEntryEditor, FastEntryEditorBase } from "./fast-entry";
 import {
   IPropertyEditorSetup,
@@ -45,6 +45,14 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  private initializeAcceptedTypes(obj: any, cellQuestion: Question) {
+    if(obj.getType() === "imagepicker" && cellQuestion.name == "imageLink" && cellQuestion.getType() == "fileedit") {
+      obj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
+        cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+      });
+      cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(obj.contentMode);
+    }
+  }
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
@@ -67,8 +75,21 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
+    this.initializeAcceptedTypes(obj, q);
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
+  }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    const column = options.question.getColumnByName(options.columnName);
+    if(!column || !column.isUnique) return;
+    options.question.visibleRows.forEach(row => {
+      if(row !== options.row) {
+        const q = row.getQuestionByColumnName(options.columnName);
+        if(!!q && q.errors.length > 0) {
+          q.hasErrors();
+        }
+      }
+    });
   }
   private updateMatixActionsClasses(actions: Array<IAction>) {
     actions.forEach(action => {
@@ -565,6 +586,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
+    super.onMatrixCellValueChanged(obj, options);
     if (obj instanceof QuestionRatingModel && options.columnName == "icon") {
       //options.cellQuestion.html = "<svg style='fill: red'><use xlink:href=\"#" + options.cellQuestion.value + "\"></use></svg>";
       options.cellQuestion.html = options.cellQuestion.value;
@@ -586,10 +608,11 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
     super.onCreated(obj, question, prop);
     const matrixQuestion = <QuestionMatrixDynamicModel>question;
-    this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+    const ratingQuestion = <QuestionRatingModel>getQuestionFromObj(obj as SurveyElement);
+    this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
     obj.onPropertyChanged.add((sender, options) => {
       if (options.name == "rateCount" || options.name == "rateDisplayMode") {
-        this.updateAllowAddRemove(matrixQuestion, <QuestionRatingModel>obj);
+        this.updateAllowAddRemove(matrixQuestion, ratingQuestion);
       }
     });
   }
@@ -781,13 +804,10 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
-    if (options.columnName != this.getObjTypeName()) {
-      return;
-    }
+    super.onMatrixCellValueChanged(obj, options);
+    if (options.columnName !== this.getObjTypeName()) return;
     var index = options.question.visibleRows.indexOf(options.row);
-    if (index < 0) {
-      return;
-    }
+    if (index < 0) return;
     var isDetailPanelShowing = options.row.isDetailPanelShowing;
     var objJSON = options.row.editingObj.toJSON();
     delete objJSON.type;

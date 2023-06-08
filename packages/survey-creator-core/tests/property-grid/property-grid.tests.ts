@@ -1076,6 +1076,40 @@ test("check Fast Entry for Rating", () => {
   expect(question.rateValues[3].value).toEqual("4");
   expect(question.rateValues[3].text).toEqual("item4");
 });
+
+test("check editor for rating in matrix Rating", () => {
+  const question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("col1");
+  question.columns[0].cellType = "rating";
+  question.columns[0].templateQuestion.rateCount = 2;
+  const propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("rateValues")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixRateValues();
+  expect(itemsQuestion.allowAddRows).toEqual(true);
+  expect(itemsQuestion.allowRemoveRows).toEqual(false);
+
+  question.columns[0].rateCount++;
+  expect(itemsQuestion.allowAddRows).toEqual(true);
+  expect(itemsQuestion.allowRemoveRows).toEqual(true);
+});
+
+test("check Rate values panel in matrix Rating equals to regular Rating", () => {
+  const questionMatrix = new QuestionMatrixDropdownModel("q1");
+  questionMatrix.addColumn("col1");
+  questionMatrix.columns[0].cellType = "rating";
+  const ratingColumnParams =
+    (new PropertyGridModelTester(questionMatrix.columns[0]))
+      .survey.getPanelByName("rateValues").elements.map(e => e.name);
+
+  const question = new QuestionRatingModel("q1");
+  const ratingQuestionParams =
+    (new PropertyGridModelTester(question))
+      .survey.getPanelByName("rateValues").elements.map(e => e.name);
+  expect(ratingColumnParams).toEqual(ratingQuestionParams);
+});
+
 test("bindings property editor", () => {
   const survey = new SurveyModel({
     elements: [
@@ -2326,7 +2360,8 @@ test("Required properties restore on change to empty value", (): any => {
   titleQuestion.value = "q1t";
   expect(titleQuestion.value).toEqual("q1t");
   titleQuestion.value = "";
-  expect(titleQuestion.value).toEqual("q1t");
+  expect(question.title).toEqual("q1t");
+  expect(titleQuestion.value).toBeFalsy();
   titleProp.isRequired = oldIsRequired;
 });
 test("Validate Selected Element Errors", () => {
@@ -3089,4 +3124,89 @@ test("itemvalue[] property editor & placeholder, bug#4032", () => {
   qValue.value = "Item D";
   qText.clearValue();
   expect(qText.placeholder).toBe("Item D");
+});
+
+test("Check allowRootStyle is set false for all questions inside property grids", () => {
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = ["Item 1", "Item 2", "Item 3"];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.allowRootStyle).toBeFalsy();
+  const row = choicesQuestion.visibleRows[2];
+  row.showHideDetailPanelClick();
+  expect(row.detailPanel.questions.filter(q => q.allowRootStyle).length).toBe(0);
+});
+test("PropertyEditor and hasError - required for survey.title", () => {
+  const survey = new SurveyModel();
+  survey.title = "My Title";
+  let propertyGrid = new PropertyGridModelTester(survey);
+  let titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeTruthy();
+  const prop = Serializer.findProperty("survey", "title");
+  prop.isRequired = true;
+  propertyGrid = new PropertyGridModelTester(survey);
+  titleQuestion = <QuestionTextModel>propertyGrid.survey.getQuestionByName("title");
+  expect(titleQuestion.isSurveyInputTextUpdate).toBeFalsy();
+  expect(titleQuestion.textUpdateMode).toBe("onBlur");
+  titleQuestion.value = "";
+  expect(survey.title).toEqual("My Title");
+  expect(titleQuestion.errors).toHaveLength(1);
+  expect(titleQuestion.errors[0].text).toEqual("Please enter a value");
+  expect(titleQuestion.value).toBeFalsy();
+  titleQuestion.value = "title1";
+  expect(survey.title).toEqual("title1");
+  expect(titleQuestion.errors).toHaveLength(0);
+  prop.isRequired = false;
+});
+test("PropertyEditor for question name", () => {
+  const question = new QuestionTextModel("q");
+  let propertyGrid = new PropertyGridModelTester(question);
+  let nameQuestion = propertyGrid.survey.getQuestionByName("name");
+  const checkedData = ["Row", "panel", "choice", "Item"];
+  const errorText = "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".";
+  let prevName = question.name;
+  for(let i = 0; i < checkedData.length; i ++) {
+    const erroredName = checkedData[i];
+    const validName = "q" + (i + 1).toString();
+    nameQuestion.value = erroredName;
+    expect(nameQuestion.value).toBe(erroredName);
+    expect(question.name).toEqual(prevName);
+    expect(nameQuestion.errors).toHaveLength(1);
+    expect(nameQuestion.errors[0].text).toEqual(errorText);
+    nameQuestion.value = validName;
+    expect(question.name).toEqual(validName);
+    expect(nameQuestion.errors).toHaveLength(0);
+    prevName = validName;
+  }
+  const panel = new PanelModel("p");
+  propertyGrid = new PropertyGridModelTester(panel);
+  nameQuestion = propertyGrid.survey.getQuestionByName("name");
+  for(let i = 0; i < checkedData.length; i ++) {
+    const erroredName = checkedData[i];
+    nameQuestion.value = erroredName;
+    expect(nameQuestion.value).toBe(erroredName);
+    expect(panel.name).toEqual(erroredName);
+    expect(nameQuestion.errors).toHaveLength(0);
+  }
+});
+test("editor base check for unique property value and correct error in another editor, Bug#4165", () => {
+  var question = new QuestionMatrixDropdownModel("q1");
+  question.addColumn("column1");
+  question.addColumn("column2");
+  question.addColumn("column3");
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const columnsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("columns")
+  );
+  const rows = columnsQuestion.visibleRows;
+
+  const column1Name = rows[0].getQuestionByColumnName("name");
+  const column2Name = rows[1].getQuestionByColumnName("name");
+  column2Name.value = "column1";
+  expect(column2Name.errors).toHaveLength(1);
+  column1Name.value = "column5";
+  expect(column2Name.errors).toHaveLength(0);
 });

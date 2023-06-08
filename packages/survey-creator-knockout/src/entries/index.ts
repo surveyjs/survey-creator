@@ -11,9 +11,11 @@ export * from "../tabs/logic-operator";
 export * from "../tabs/translation";
 
 export * from "../page";
+export * from "../page-add-question";
 export * from "../row";
 export * from "../string-editor";
 export * from "../adorners/question";
+export * from "../adorners/panel";
 export * from "../adorners/question-dropdown";
 export * from "../question-link-value";
 export * from "../question-embedded-survey";
@@ -22,7 +24,6 @@ export * from "../adorners/question-rating";
 export * from "../question-widget";
 export * from "../adorners/item-value";
 export * from "../adorners/image-item-value";
-export * from "../panel";
 export * from "../adorners/matrix-cell";
 export * from "../question-editor-content";
 export * from "../adorners/cell-question";
@@ -30,6 +31,7 @@ export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
 //custom questions for property grid
+export * from "../custom-questions/color-item";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/spin-editor";
 export * from "../custom-questions/question-file";
@@ -45,6 +47,7 @@ export * from "../simulator";
 export * from "../svg-bundle";
 export * from "../survey-renderers/dropdown";
 export * from "../tabs/test";
+export * from "../tabs/theme";
 export * from "../tabbed-menu/tabbed-menu";
 export * from "../tabbed-menu/tabbed-menu-item";
 export * from "../toolbox/toolbox";

@@ -1,11 +1,12 @@
-import { Base, PageModel, SurveyModel } from "survey-core";
+import { Action, Base, IAction, PageModel, SurveyModel } from "survey-core";
 import {
   attachKey2click,
   Popup,
   SurveyActionBar,
   ReactElementFactory,
   SurveyPage,
-  SvgIcon
+  SvgIcon,
+  SurveyElementBase
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import {
@@ -93,7 +94,19 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     </div>);
   }
   protected renderFooter(): JSX.Element {
-    if (!this.model.showAddQuestionButton) return null;
+    return <SurveyActionBar model={this.model.footerActionsBar}></SurveyActionBar>;
+  }
+}
+
+ReactElementFactory.Instance.registerElement("svc-page", (props) => {
+  return React.createElement(CreatorSurveyPageComponent, props);
+});
+
+class AddQuestionButtonComponent extends SurveyElementBase<{ item: Action }, any> {
+  public get model() {
+    return this.props.item.data;
+  }
+  protected renderElement(): JSX.Element {
     const questionTypeSelectorModel = this.model.questionTypeSelectorModel;
     return attachKey2click(<div
       className="svc-page__add-new-question svc-btn"
@@ -129,6 +142,6 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
 }
 
-ReactElementFactory.Instance.registerElement("svc-page", (props) => {
-  return React.createElement(CreatorSurveyPageComponent, props);
+ReactElementFactory.Instance.registerElement("svc-add-new-question-btn", (props) => {
+  return React.createElement(AddQuestionButtonComponent, props);
 });

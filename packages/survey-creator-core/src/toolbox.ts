@@ -4,7 +4,6 @@ import {
   Base,
   ComponentCollection,
   CustomWidgetCollection,
-  DragDropSurveyElements,
   ElementFactory,
   IAction,
   JsonObject,
@@ -19,6 +18,7 @@ import { CreatorBase, toolboxLocationType } from "./creator-base";
 import { editorLocalization, getLocString } from "./editorLocalization";
 import { localization } from "./entries";
 import { settings } from "./creator-settings";
+import { DragDropSurveyElements } from "./survey-elements";
 
 /**
  * The Toolbox item description.
@@ -749,6 +749,10 @@ export class QuestionToolbox
     }
     return json;
   }
+  private isHiddenCustomWidget(name: string): boolean {
+    const widget = CustomWidgetCollection.Instance.getCustomWidgetByName(name);
+    return !!widget && !widget.showInToolbox;
+  }
   private getQuestionTypes(supportedQuestions: Array<string>): string[] {
     const allTypes: string[] = ElementFactory.Instance.getAllTypes();
     if (!supportedQuestions || supportedQuestions.length == 0)
@@ -764,7 +768,8 @@ export class QuestionToolbox
       if (
         questions.indexOf(name) < 0 &&
         QuestionToolbox.hiddenTypes.indexOf(name) < 0 &&
-        allTypes.indexOf(name) > -1
+        allTypes.indexOf(name) > -1 &&
+        !this.isHiddenCustomWidget(name)
       )
         questions.push(name);
     }

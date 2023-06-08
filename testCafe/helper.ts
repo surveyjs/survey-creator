@@ -7,6 +7,7 @@ export const urlByPage = "http://127.0.0.1:8080/testCafe/by-page.html";
 export const urlPreviewThemeSwitcher = "http://127.0.0.1:8080/testCafe/preview-theme-switcher.html";
 export const urlThemeForPreview = "http://127.0.0.1:8080/testCafe/theme-for-preview-option.html";
 export const urlDropdownCollapseView = "http://127.0.0.1:8080/testCafe/dropdown-collapse-view.html";
+export const urlLocalized_de = "http://127.0.0.1:8080/testCafe/testcafe_localized_ui.html";
 
 export const base64image =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
@@ -77,7 +78,7 @@ export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-q
 export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 
-export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey") {
+export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik") {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
 export function getSelectOptionByText(text: string) {
@@ -144,6 +145,8 @@ export const explicitErrorHandler = ClientFunction(() => {
 export const patchDragDropToDisableDrop = ClientFunction(() => {
   window["creator"].dragDropSurveyElements.drop = () => { };
   window["creator"].dragDropChoices.drop = () => { };
+  window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+  window["creator"].dragDropChoices.domAdapter.drop = () => { };
 });
 
 export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {

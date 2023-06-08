@@ -3,11 +3,12 @@ import {
   QuestionAdornerViewModel
 } from "survey-creator-core";
 import React from "react";
-import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { attachKey2click, ReactElementFactory, ReactQuestionFactory, SvgIcon } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
 } from "./Question";
+import { Base } from "survey-core";
 
 export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
   constructor(props: QuestionAdornerComponentProps) {
@@ -35,7 +36,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
         type="file"
         aria-hidden="true"
         tabIndex={-1}
-        accept="image/*"
+        accept={this.imageModel.acceptedTypes}
         className="svc-choose-file-input"
         style={{
           position: "absolute",
@@ -53,13 +54,35 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     return (
       <div className="svc-image-question-controls">
         {this.model.allowEdit && !(this.model as QuestionImageAdornerViewModel).isUploading ? attachKey2click(<span
-          className="svc-image-question-controls__button svc-image-question-controls__choose-file"
+          className="svc-context-button"
           onClick={() => this.imageModel.chooseFile(this.imageModel)}
         >
           <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
         </span>) : null}
       </div>
     );
+  }
+
+  protected getStateElements(): Array<Base> {
+    return [this.model, this.imageModel.filePresentationModel];
+  }
+
+  protected renderElementContent(): JSX.Element {
+    if (this.imageModel.isEmptyImageLink) {
+      const fileQuestion = ReactQuestionFactory.Instance.createQuestion("file", {
+        creator: this.imageModel.question.survey,
+        isDisplayMode: false,
+        question: this.imageModel.filePresentationModel
+      });
+      return fileQuestion;
+    } else {
+      return (
+        <>
+          {this.props.element}
+          {this.renderElementPlaceholder()}
+        </>
+      );
+    }
   }
 }
 

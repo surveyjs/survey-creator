@@ -8,11 +8,11 @@
             <!-- ko ifnot: koHasHtml -->
             <!-- ko template: {afterRender: afterRender} -->
             <span role="textbox" class="sv-string-editor" spellcheck="false"
-                data-bind="text: editValue, event: { focus: onFocus, blur: onBlur, input: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
+                data-bind="text: editValue, event: { focus: onFocus, paste: onPaste, blur: onBlur, input: onInput, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
             <!-- /ko -->
             <!-- /ko -->
             <!-- ko if: koHasHtml -->
-            <span role="textbox" class="sv-string-editor" spellcheck="false"
+            <span role="textbox" class="sv-string-editor sv-string-editor--html" spellcheck="false"
                 data-bind="html: editValue, event: { focus: onFocus, blur: onBlur, keydown: onKeyDown, keyup: onKeyUp, mouseup: onMouseUp, compositionstart: onCompositionStart, compositionend: onCompositionEnd }, click: edit, attr: { 'aria-placeholder': placeholder, 'aria-label': this.placeholder || 'content editable', contenteditable: contentEditable }"></span>
             <!-- /ko -->
             <!-- ko if: showCharacterCounter -->

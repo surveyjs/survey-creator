@@ -16,7 +16,8 @@ import {
   ElementFactory,
   QuestionFactory,
   PanelModel,
-  QuestionPanelDynamicModel
+  QuestionPanelDynamicModel,
+  CustomWidgetCollection
 } from "survey-core";
 import { QuestionConverter } from "../src/questionconverter";
 import { QuestionConvertMode, settings } from "../src/creator-settings";
@@ -141,6 +142,7 @@ test("Do not convert default choices", () => {
   expect(dest.rateValues).toHaveLength(0);
 });
 test("Convert text question to image", () => {
+  settings.toolbox.defaultJSON["image"]["imageLink"] = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
   var survey = new SurveyModel();
   var page = survey.addNewPage();
   var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
@@ -148,6 +150,7 @@ test("Convert text question to image", () => {
   expect((<Base>(<any>page.elements[0])).getType()).toEqual("image");
   var newQ1 = <QuestionImageModel>page.elements[0];
   expect(newQ1.imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  delete settings.toolbox.defaultJSON["image"]["imageLink"];
 });
 test("Convert text and radio question to image picker", () => {
   var survey = new SurveyModel();
@@ -351,4 +354,32 @@ test("Convert panel to panel dynamic and back", () => {
   expect(panel2.title).toEqual("Panel");
   expect(panel2.elements).toHaveLength(2);
   expect(panel2.elements[0].name).toEqual("q1");
+});
+test("Convert text to custom widget barrating", () => {
+  const barType = "barrating";
+  CustomWidgetCollection.Instance.clear();
+  CustomWidgetCollection.Instance.addCustomWidget({
+    name: barType,
+    isFit: (question) => {
+      return question.getType() == barType;
+    },
+  });
+  if (!Serializer.findClass(barType)) {
+    Serializer.addClass(barType, [], undefined, "dropdown");
+    ElementFactory.Instance.registerCustomQuestion(barType);
+  }
+
+  const survey = new SurveyModel();
+  const page = survey.addNewPage();
+  const q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  QuestionConverter.convertObject(q1, barType);
+  expect((<Base>(<any>page.elements[0])).getType()).toEqual(barType);
+  const newQ1 = <QuestionImagePickerModel>page.elements[0];
+  expect(newQ1.choices).toHaveLength(5);
+  expect(newQ1.choices[0].value).toEqual(1);
+  expect(newQ1.choices[4].value).toEqual(5);
+
+  Serializer.removeClass(barType);
+  ElementFactory.Instance.unregisterElement(barType);
+  CustomWidgetCollection.Instance.clear();
 });

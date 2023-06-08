@@ -4,7 +4,7 @@ description: Survey Creator is a powerful and extensible JS component for creati
 ---
 # Survey Creator / Form Builder Overview
 
-Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Library](/Documentation/Library) to display a survey or form in your application.
+Survey Creator / Form Builder is a visual designer that allows users to create surveys and forms. The designer produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Form Library](/Documentation/Library) to display a survey or form in your application.
 
 ![Survey Creator / Form Builder by SurveyJS](images/survey-creator-overview.png)
 
@@ -12,8 +12,8 @@ Survey Creator / Form Builder is a visual designer that allows users to create s
 
 ## Features
 
-- Native support for React and Knockout
-- Integration of the Knockout version into Angular, Vue, and jQuery applications
+- Native support for React, Angular, and Knockout
+- Integration of the Knockout version into Vue and jQuery applications
 - Modern, customizable UI themes
 - TypeScript support
 - [Community-supported UI localization to 25+ languages](https://surveyjs.io/Documentation/Survey-Creator?id=localization)

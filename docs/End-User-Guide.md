@@ -5,11 +5,11 @@ This document illustrates how to perform basic tasks in the Survey Creator compo
 <img src="images/survey-creator-tabs.png" alt="Survey Creator - Tabs" width="100%" usemap="#tabs-map">
 
 <map name="tabs-map">
-    <area alt="Designer Tab" title="Designer Tab" href="#designer-tab" coords="10,67,140,135" shape="rect">
-    <area alt="Preview Tab" title="Preview Tab" href="#preview-tab" coords="152,68,274,135" shape="rect">
-    <area alt="Logic Tab" title="Logic Tab" href="#logic-tab" coords="282,68,392,135" shape="rect">
-    <area alt="JSON Editor Tab" title="JSON Editor Tab" href="#json-editor-tab" coords="398,67,545,135" shape="rect">
-    <area alt="Translation Tab" title="Translation Tab" href="#translation-tab" coords="561,68,713,136" shape="rect">
+    <area alt="Designer Tab" title="Designer Tab" href="#designer-tab" coords="16,54,91,86" shape="rect">
+    <area alt="Preview Tab" title="Preview Tab" href="#preview-tab" coords="120,54,185,86" shape="rect">
+    <area alt="Logic Tab" title="Logic Tab" href="#logic-tab" coords="210,54,255,86" shape="rect">
+    <area alt="JSON Editor Tab" title="JSON Editor Tab" href="#json-editor-tab" coords="290,54,370,86" shape="rect">
+    <area alt="Translation Tab" title="Translation Tab" href="#translation-tab" coords="400,54,490,86" shape="rect">
 </map>
 
 ## Designer Tab
@@ -39,6 +39,12 @@ See also: [Dropdown](#dropdown)
 Respondents select one number within a range. Use the Rating Scale type when you want respondents to enter a rating.
 
 <img src="images/question-types-rating.png" alt="SurveyJS Question types - Rating Scale" width="75%">
+
+- How to: Use graphic symbols ([stars, emojis](https://surveyjs.io/form-library/examples/rating-scale/)) for rate values           
+Expand the **Rate Values** category and select a required **Rate type**:
+    <img src="images/survey-creator-rate-type.png" alt="Survey Creator - Change rate type in Property Grid" width="50%">        
+Alternatively, you can change the rate type using an adorner directly on the design surface:
+    <img src="images/survey-creator-rate-type-using-adorner.png" alt="Survey Creator - Change rate type using an adorner" width="75%">
 
 <div id="#checkbox"></div>
 

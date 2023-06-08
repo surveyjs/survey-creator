@@ -1,7 +1,7 @@
 {
   "name": "survey-creator-angular",
-  "version": "1.9.85",
-  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Library.",
+  "version": "1.9.91",
+  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "https://surveyjs.io/Licenses#SurveyCreator",
   "keywords": [

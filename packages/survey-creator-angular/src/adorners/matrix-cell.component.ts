@@ -38,7 +38,7 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   }
   protected createModel(): void {
     if (this.componentData) {
-      this.adorner = new MatrixCellWrapperViewModel(this.creator, this.element, this.question, this.row, this.column);
+      this.adorner = new MatrixCellWrapperViewModel(this.creator, this.element, this.question, this.row, this.column || this.element.cell?.column);
     }
   }
   protected getPropertiesToTrack(): string[] {

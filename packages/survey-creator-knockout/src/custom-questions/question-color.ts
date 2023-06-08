@@ -25,6 +25,10 @@ export class QuestionColorImplementor extends QuestionImplementor {
       this.question.onColorInputChange(event);
       return true;
     });
+    this.setCallbackFunc("koOnKeyUp", (_: any, event: any) => {
+      this.question.onKeyUp(event);
+      return true;
+    });
 
     this.setObservaleObj("koReadOnlyValue", ko.computed(() => this.question.renderedValue));
   }
