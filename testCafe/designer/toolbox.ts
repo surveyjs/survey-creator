@@ -58,19 +58,20 @@ test("Categories check hover icons", async (t) => {
   await setupCategories(t);
 
   await t
+    .resizeWindow(1920, 1920)
     .expect(categoriesHeader.count).eql(3)
     .expect(categoriesHeader.nth(0).innerText).eql("General")
     .expect(categoriesHeader.nth(1).innerText).eql("Matrix")
     .expect(categoriesHeader.nth(2).innerText).eql("Panels")
-    .hover(categoriesHeader.nth(0), { speed: 0.5, offsetX: 5, offsetY: 5 })
+    .hover(categoriesHeader.nth(0))
     .expect(getExpandedCategories(0).visible).ok()
     .expect(getCollapsedCategories(0).visible).notOk()
 
-    .hover(categoriesHeader.nth(1), { speed: 0.5, offsetX: 5, offsetY: 5 })
+    .hover(categoriesHeader.nth(1))
     .expect(getExpandedCategories(1).visible).notOk()
     .expect(getCollapsedCategories(1).visible).ok()
 
-    .hover(categoriesHeader.nth(2), { speed: 0.5, offsetX: 5, offsetY: 5 })
+    .hover(categoriesHeader.nth(2))
     .expect(getExpandedCategories(2).visible).notOk()
     .expect(getCollapsedCategories(2).visible).ok()
     .wait(100);
