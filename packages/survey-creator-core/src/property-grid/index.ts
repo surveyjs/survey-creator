@@ -501,6 +501,9 @@ export class PropertyJSONGenerator {
         q.visibleIf = "propertyVisibleIf() = true";
       }
       if(!!prop.overridingProperty) {
+        q.onUpdateCssClassesCallback = (css: any) => {
+          css.questionWrapper = "spg-boolean-wrapper--overriding";
+        };
         if(!eventReadOnly) {
           q.enableIf = "propertyEnableIf() = true";
         }
@@ -548,6 +551,9 @@ export class PropertyJSONGenerator {
     const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
     linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix") + text;
     linkValue.titleLocation = "hidden";
+    linkValue.onUpdateCssClassesCallback = (css: any) => {
+      css.questionWrapper = "spg-link-wrapper--overriding";
+    };
     if(!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
         overridingQuestion.focus();
