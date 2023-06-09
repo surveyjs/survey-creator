@@ -213,21 +213,21 @@ svc-question {
 .svc-question__content--drag-over-left:before {
   content: " ";
   position: absolute;
-  left: -7px;
+  left: -6px;
   background: $secondary;
   top: 0;
   height: 100%;
-  width: 4px;
+  width: 2px;
 }
 
 .svc-question__content--drag-over-right:after {
   content: " ";
   position: absolute;
-  right: -7px;
+  right: -6px;
   background: $secondary;
   top: 0;
   height: 100%;
-  width: 4px;
+  width: 2px;
 }
 
 .svc-question__content--drag-over-top:before {
@@ -235,9 +235,9 @@ svc-question {
   position: absolute;
   left: 0;
   background: $secondary;
-  top: -12px;
+  top: -11px;
   width: 100%;
-  height: 4px;
+  height: 2px;
 }
 
 .svc-question__content--drag-over-bottom:before {
@@ -245,9 +245,9 @@ svc-question {
   position: absolute;
   left: 0;
   background: $secondary;
-  bottom: -12px;
+  bottom: -11px;
   width: 100%;
-  height: 4px;
+  height: 2px;
 }
 
 .svc-question__content--panel,
@@ -264,6 +264,14 @@ svc-question {
       margin-right: 8px;
       width: calc(100% - 8px);
     }
+  }
+
+  .svc-question__content--drag-over-top:before {
+    top: -6px;
+  }
+
+  .svc-question__content--drag-over-bottom:before {
+    bottom: -6px;
   }
 }
 

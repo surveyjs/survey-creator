@@ -61,7 +61,7 @@
   background: $secondary;
   top: 6px;
   width: 100%;
-  height: 4px;
+  height: 2px;
 }
 
 .svc-row--drag-over-bottom:after {
@@ -71,19 +71,19 @@
   background: $secondary;
   bottom: -10px;
   width: 100%;
-  height: 4px;
+  height: 2px;
 }
 
 .svc-question__content--panel,
 .sd-panel__content {
   .svc-row--drag-over-top:before {
-    top: -6px;
+    top: -4px;
 
     &:first-child {}
   }
 
   .svc-row--drag-over-bottom:after {
-    bottom: -6px;
+    bottom: -4px;
 
     &:last-child {}
   }
