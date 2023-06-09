@@ -4666,7 +4666,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').find('[aria-label=\"questionName\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').find('[aria-label=\"questionName\"]')"
                               },
                               "ruleType":"aria-label"
                            },
@@ -4674,7 +4674,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').find('.form-control')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').find('.form-control')"
                               },
                               "ruleType":"class"
                            },
@@ -4682,7 +4682,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
                               },
                               "ruleType":"$attr$"
                            },
@@ -4802,7 +4802,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).nth(2).nth(2).find('[aria-label=\"Please enter/select the value\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).nth(2).nth(2).find('[aria-label=\"Please enter/select the value\"]')"
                               },
                               "ruleType":"aria-label"
                            },
@@ -4810,7 +4810,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).find('.form-control')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).find('.form-control')"
                               },
                               "ruleType":"class"
                            },
@@ -4818,7 +4818,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).nth(2).find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).nth(2).find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
                               },
                               "ruleType":"$attr$"
                            },
@@ -6137,7 +6137,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).nth(2).nth(2).find('[aria-label=\"Please enter/select the value\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).nth(2).nth(2).find('[aria-label=\"Please enter/select the value\"]')"
                               },
                               "ruleType":"aria-label"
                            },
@@ -6145,7 +6145,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).find('.form-control')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).find('.form-control')"
                               },
                               "ruleType":"class"
                            },
@@ -6153,7 +6153,7 @@
                               "ancestorRuleType":"$attr$",
                               "rawSelector":{
                                  "type":"js-expr",
-                                 "value":"Selector('[data-bind=\"css: question.koCss().selectWrapper\"]').nth(2).nth(2).find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
+                                 "value":"Selector('[data-bind=\"css: question.cssClasses.selectWrapper\"]').nth(2).nth(2).find('[data-bind^=\"if: true, attr: {id: question.inputId, \\\\\\'aria-label\"]')"
                               },
                               "ruleType":"$attr$"
                            },

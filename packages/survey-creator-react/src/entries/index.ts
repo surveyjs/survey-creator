@@ -54,6 +54,7 @@ export * from "../PropertyGrid";
 
 //custom questions
 export * from "../custom-questions/SpinEditor";
+export * from "../custom-questions/ColorItem";
 export * from "../custom-questions/ColorQuestion";
 export * from "../custom-questions/FileEditQuestion";
 

@@ -172,6 +172,10 @@ svc-question {
   z-index: 1000;
   box-shadow: 0px 8px 16px $shadow-medium;
   @include disableUserSelect;
+  max-width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {

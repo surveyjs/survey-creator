@@ -1,4 +1,4 @@
-import { PageModel, SurveyModel } from "survey-core";
+import { ItemValue, ListModel, PageModel, SurveyModel } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
 
 test("Check custom color question", () => {
@@ -74,4 +74,34 @@ test("Check custom color question with survey mergeData", () => {
   expect(question.renderedValue).toBe("#FFFFFF");
   survey.mergeData({ "q1": "#9A2828" });
   expect(question.renderedValue).toBe("#9A2828");
+});
+
+test("Check custom color question popup", () => {
+  const survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+    choices: ["#f1b505", "#359ba7", "#6a3bff"]
+  }] });
+  survey.css = { color: { colorItem: "colorItemTest", colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
+  const question = <QuestionColorModel>survey.getAllQuestions()[0];
+  const dropdownAction = question.dropdownAction;
+  const popupModel = dropdownAction.popupModel;
+  const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
+
+  expect(dropdownAction.cssClasses.item).toBe("colorDropdownTest");
+  expect(dropdownAction.iconName).toBe("colorDropdownIconTest");
+  expect(popupModel.setWidthByTarget).toBeTruthy();
+  expect(popupModel.positionMode).toBe("fixed");
+  expect(listModel.cssClasses.itemBody).toBe("sv-list__item-body colorItemTest");
+
+  expect(listModel.actions.map((item => item.value))).toEqual(["#f1b505", "#359ba7", "#6a3bff"]);
+  question.choices = <Array<ItemValue>><unknown>["#94a500", "#6a3bff", "#359ba7"];
+  expect(listModel.actions.map((item => item.value))).toEqual(["#94a500", "#6a3bff", "#359ba7"]);
+
+  listModel.onSelectionChanged(listModel.actions[1]);
+  expect(question.renderedValue).toBe("#6A3BFF");
+  expect(listModel.isItemSelected(listModel.actions[1])).toBeTruthy();
+  expect(listModel.isItemSelected(listModel.actions[0])).toBeFalsy();
+
+  expect(listModel.actions[0].component).toBe("color-item");
 });

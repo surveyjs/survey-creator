@@ -137,6 +137,8 @@ export var enStrings = {
     translationImportFromSCVButton: "Import from CSV",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    themeExportButton: "Export",
+    themeImportButton: "Import",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -195,6 +197,7 @@ export var enStrings = {
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name
       trigger_copyvalueText: "copy into question: {0} value from question {1}", //{0} and {1} question names
       trigger_skipText: "survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "run expression: '{0}'", //{0} the expression

@@ -25,6 +25,9 @@ export var settings = {
      */
     exportFileName: "survey_translation.csv"
   },
+  theme: {
+    exportFileName: "survey_theme.json"
+  },
   operators: {
     empty: [],
     notempty: [],
@@ -107,6 +110,7 @@ export var settings = {
         choices: ["Item 1", "Item 2", "Item 3"]
       },
       imagepicker: {
+        imageFit: "cover",
         choices: [
           {
             value: "Image 1",

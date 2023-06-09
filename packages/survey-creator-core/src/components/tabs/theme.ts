@@ -1,151 +1,19 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+import { settings } from "../../creator-settings";
 
 require("./theme.scss");
-
-export const Themes = {
-  "default-light": {
-    "--sjs-primary-backcolor": "rgba(25, 179, 148, 1)",
-    "--sjs-primary-backcolor-light": "rgba(25, 179, 148, 0.1)",
-    "--sjs-primary-backcolor-dark": "rgba(20, 164, 139, 1)",
-    "--background": "#ffffff",
-    "--background-dim": "#f3f3f3",
-    "--background-dim-light": "#f9f9f9",
-    "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
-    "--sjs-general-forecolor-light": "rgba(0, 0, 0, 0.45);",
-    "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91);",
-    "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45);",
-    "--sjs-editor-background": "#f9f9f9",
-    "--sjs-question-background": "#ffffff",
-    "--sjs-primary-forecolor": "#ffffff",
-    "--foreground": "#161616",
-    "--base-unit": "8px",
-    "--sjs-corner-radius": "4px"
-  },
-  "default-dark": {
-    "--sjs-primary-backcolor": "rgba(255, 152, 20, 1)",
-    "--sjs-primary-backcolor-light": "rgba(255, 255, 255, 0.07)",
-    "--sjs-primary-backcolor-dark": "rgba(255, 170, 24, 1)",
-    "--background": "#555555",
-    "--background-dim": "#4d4d4d",
-    "--background-dim-light": "#4d4d4d",
-    "--sjs-general-forecolor": "rgba(255, 255, 255, 0.78)",
-    "--sjs-general-forecolor-light": "rgba(255, 255, 255, 0.42)",
-    "--sjs-general-dim-forecolor": "rgba(255, 255, 255, 0.79)",
-    "--sjs-general-dim-forecolor-light": "rgba(255, 255, 255, 0.45)",
-    "--sjs-editor-background": "#4d4d4d",
-    "--sjs-question-background": "#555555",
-    "--sjs-primary-forecolor": "#ffffff",
-    "--foreground": "#ededed",
-    "--base-unit": "8px",
-    "--sjs-corner-radius": "4px"
-  }
-};
-
-ComponentCollection.Instance.add({
-  name: "fontsettings",
-  showInToolbox: false,
-  elementsJSON: [
-    {
-      type: "dropdown",
-      name: "family",
-      title: getLocString("theme.fontFamily"),
-      titleLocation: "left",
-      descriptionLocation: "hidden",
-      choices: ["Open Sans", "Arial"],
-      defaultValue: "Open Sans",
-      allowClear: false
-    },
-    {
-      type: "buttongroup",
-      name: "weight",
-      titleLocation: "hidden",
-      descriptionLocation: "hidden",
-      choices: [
-        { value: "400", text: getLocString("theme.fontWeightRegular") },
-        { value: "500", text: getLocString("theme.fontWeightHeavy") },
-        { value: "600", text: getLocString("theme.fontWeightSemiBold") },
-        { value: "700", text: getLocString("theme.fontWeightBold") },
-      ],
-      defaultValue: "400"
-    },
-    {
-      type: "color",
-      name: "color",
-      title: getLocString("theme.color"),
-      titleLocation: "left",
-      descriptionLocation: "hidden"
-    },
-    {
-      type: "spinedit",
-      name: "size",
-      title: getLocString("theme.size"),
-      titleLocation: "left",
-      descriptionLocation: "hidden",
-      unit: "px",
-      min: 0,
-    }
-  ],
-  onInit() {
-  },
-  onCreated(question) {
-    const color = question.contentPanel.getQuestionByName("color");
-    color.visible = question.name !== "surveyTitle";
-  },
-  onValueChanged(question, name, newValue) {
-  },
-});
-
-ComponentCollection.Instance.add({
-  name: "elementsettings",
-  showInToolbox: false,
-  elementsJSON: [
-    {
-      type: "color",
-      name: "backcolor",
-      title: getLocString("theme.backcolor"),
-      titleLocation: "left",
-      descriptionLocation: "hidden"
-    },
-    {
-      type: "color",
-      name: "hovercolor",
-      title: getLocString("theme.hovercolor"),
-      titleLocation: "left",
-      descriptionLocation: "hidden"
-    },
-    {
-      type: "spinedit",
-      name: "corner",
-      title: getLocString("theme.cornerRadius"),
-      titleLocation: "left",
-      descriptionLocation: "hidden",
-      unit: "px",
-      defaultValue: 4,
-      min: 0
-    },
-    {
-      type: "expression",
-      name: "cornerRadius",
-      expression: "{composite.corner}+\"px\"",
-      visible: false
-    }
-  ],
-  onInit() {
-  },
-  onCreated(question) {
-  },
-  onValueChanged(question, name, newValue) {
-  },
-});
+export const Themes = require("../../../imported-themes.json");
 
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
+  public exportToFileUI: any;
+  public importFromFileUI: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
   public testAgainAction: Action;
@@ -194,10 +62,16 @@ export class ThemeSurveyTabViewModel extends Base {
   activePage: PageModel;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
-  @property({ defaultValue: "panel" }) themeMode;
+  @property({ defaultValue: "panels" }) themeMode;
 
+  getFullThemeName(_themeName?: string) {
+    if (this.themePalette === "light") {
+      return _themeName || this.themeName;
+    }
+    return (_themeName || this.themeName) + "-" + this.themePalette;
+  }
   get themeVariables(): any {
-    return Themes[this.themeName + "-" + this.themePalette];
+    return Themes[this.getFullThemeName()];
   }
 
   public get activeLanguage(): string {
@@ -220,17 +94,46 @@ export class ThemeSurveyTabViewModel extends Base {
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
   }
+  public get currentTheme(): ITheme {
+    return this.surveyProvider.theme;
+  }
 
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
+    this.loadTheme(this.surveyProvider.theme);
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
+    var self = this;
+    this.exportToFileUI = function () {
+      self.exportToFile(settings.theme.exportFileName);
+    };
+    this.importFromFileUI = function (el) {
+      if (el.files.length < 1) return;
+      self.importFromFile(el.files[0]);
+      el.value = "";
+    };
+  }
+
+  private loadTheme(theme: ITheme) {
+    this.themeName = theme["themeName"];
+    this.themePalette = theme["themePalette"];
+    this.themeMode = theme.isCompact ? "lightweight" : undefined;
+    const fullThemeName = this.getFullThemeName();
+    if (!Themes[fullThemeName]) {
+      Themes[fullThemeName] = theme;
+      const themeSelector = this.themeEditorSurveyValue.getQuestionByName("themeName");
+      themeSelector.choices = themeSelector.choices.concat(new ItemValue(theme["themeName"]));
+    }
+    const themeVariables = {};
+    assign(themeVariables, this.themeVariables, theme.cssVariables);
+    theme.cssVariables = themeVariables;
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme");
     newSurvey.setCss(theme, false);
     this.simulator.survey = newSurvey;
+    this.setThemeToSurvey();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: ThemeSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -262,6 +165,33 @@ export class ThemeSurveyTabViewModel extends Base {
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
+  }
+
+  public exportToFile(fileName: string) {
+    if (!window) return;
+    const data = JSON.stringify(this.currentTheme, null, 4);
+    const blob = new Blob([data], { type: "application/json" });
+    if (window.navigator["msSaveOrOpenBlob"]) {
+      window.navigator["msSaveBlob"](blob, fileName);
+    } else {
+      const elem = window.document.createElement("a");
+      elem.href = window.URL.createObjectURL(blob);
+      elem.download = fileName;
+      document.body.appendChild(elem);
+      elem.click();
+      document.body.removeChild(elem);
+    }
+  }
+  public importFromFile(file: File) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const theme: ITheme | any = JSON.parse(fileReader.result as string);
+      this.surveyProvider.theme = theme;
+      this.loadTheme(theme);
+      this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
+      this.initializeColorCalculator();
+    };
+    fileReader.readAsText(file);
   }
 
   public setJSON(json: any, currTheme: any) {
@@ -451,9 +381,9 @@ export class ThemeSurveyTabViewModel extends Base {
   }
   initializeColorCalculator() {
     this.colorCalculator.initialize(
-      this.themeVariables["--sjs-primary-backcolor"],
-      this.themeVariables["--sjs-primary-backcolor-light"],
-      this.themeVariables["--sjs-primary-backcolor-dark"]
+      this.currentTheme.cssVariables["--sjs-primary-backcolor"],
+      this.currentTheme.cssVariables["--sjs-primary-backcolor-light"],
+      this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]
     );
   }
   protected createThemeEditorSurvey(): SurveyModel {
@@ -464,32 +394,41 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
-    themeEditorSurvey.mergeData(this.themeVariables);
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.themeVariables["--background-dim-light"];
-    assign(this.simulator.themeVariables, this.themeVariables);
+    this.loadThemeIntoPropertyGrid(themeEditorSurvey);
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
+      this.themeChanges[options.name] = options.value;
+
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         this.initializeColorCalculator();
-        themeEditorSurvey.mergeData(this.themeVariables);
-        const newTheme = {};
-        assign(newTheme, this.themeVariables);
-        this.simulator.themeVariables = newTheme;
-
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
+          this.surveyProvider.theme.isCompact = options.value === "lightweight";
+        } else {
+          this.surveyProvider.theme["themeName"] = this.themeName;
+          this.surveyProvider.theme["themePalette"] = this.themePalette;
         }
+        const newTheme = {};
+        assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
+        if (this.survey["isCompact"]) {
+          assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
+        }
+
+        themeEditorSurvey.mergeData(newTheme);
+        this.surveyProvider.theme.cssVariables = newTheme;
+        this.setThemeToSurvey();
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
         this.survey[options.name] = options.value;
+        this.surveyProvider.theme[options.name] = options.value;
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.survey.backgroundOpacity = options.value / 100;
+        this.surveyProvider.theme.backgroundOpacity = options.value / 100;
         return;
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -501,12 +440,12 @@ export class ThemeSurveyTabViewModel extends Base {
         this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       }
       if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background-dim-light");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light");
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
         this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
       }
       if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--background");
+        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor");
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
       }
@@ -523,14 +462,31 @@ export class ThemeSurveyTabViewModel extends Base {
         });
       }
       const newTheme = {};
-      assign(newTheme, this.simulator.themeVariables, this.themeChanges);
-      this.simulator.themeVariables = newTheme;
+      assign(newTheme, this.surveyProvider.theme.cssVariables, this.themeChanges);
+      this.surveyProvider.theme.cssVariables = newTheme;
+      this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
     return themeEditorSurvey;
+  }
+
+  private loadThemeIntoPropertyGrid(themeEditorSurvey: SurveyModel) {
+    themeEditorSurvey.mergeData(this.surveyProvider.theme.cssVariables);
+    themeEditorSurvey.setValue("themeName", this.themeName);
+    themeEditorSurvey.setValue("themeMode", this.themeMode);
+    themeEditorSurvey.setValue("themePalette", this.themePalette);
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"];
+  }
+
+  private setThemeToSurvey(theme?: ITheme) {
+    if (!!theme) {
+      this.surveyProvider.theme = theme;
+    }
+    this.survey.applyTheme(this.surveyProvider.theme);
   }
 
   private getThemeEditorSurveyJSON() {
@@ -549,7 +505,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: ["default", "contrast", "plain", "simple", "blank", "double", "ultra"],
+                choices: ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"],
                 defaultValue: "default",
                 allowClear: false
               },
@@ -592,7 +548,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "color",
-                name: "--background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
@@ -606,6 +562,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     type: "fileedit",
                     name: "backgroundImage",
                     titleLocation: "hidden",
+                    acceptedTypes: "image/*",
                     placeholder: "Browse..."
                   },
                   {
@@ -700,7 +657,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "expression",
-                name: "--base-unit",
+                name: "--sjs-base-unit",
                 expression: "{commonScale}*8/100+\"px\"",
                 visible: false
               },
@@ -732,11 +689,65 @@ export class ThemeSurveyTabViewModel extends Base {
             elements: [
               {
                 type: "color",
-                name: "--background-dim",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
                 defaultValue: "#f3f3f3"
               }, {
+                type: "panel",
+                title: getLocString("theme.accentBackground"),
+                elements: [
+                  {
+                    type: "color",
+                    name: "--sjs-primary-backcolor",
+                    title: getLocString("theme.primaryDefaultColor"),
+                    titleLocation: "left",
+                    descriptionLocation: "hidden",
+                    defaultValue: "#19B394"
+                  },
+                  {
+                    type: "color",
+                    name: "--sjs-primary-backcolor-dark",
+                    title: getLocString("theme.primaryDarkColor"),
+                    titleLocation: "left",
+                    descriptionLocation: "hidden",
+                    defaultValue: "#14A48B"
+                  },
+                  {
+                    type: "color",
+                    name: "--sjs-primary-backcolor-light",
+                    title: getLocString("theme.primaryLightColor"),
+                    titleLocation: "left",
+                    descriptionLocation: "hidden",
+                    defaultValue: "#E8F7F4"
+                  }
+                ]
+              }, {
+                type: "panel",
+                title: getLocString("theme.accentForeground"),
+                elements: [
+                  {
+                    type: "color",
+                    name: "--sjs-primary-forecolor",
+                    title: getLocString("theme.primaryForecolor"),
+                    titleLocation: "left",
+                    descriptionLocation: "hidden",
+                    defaultValue: "#ffffff"
+                  },
+                  {
+                    type: "color",
+                    name: "--sjs-primary-forecolor-light",
+                    title: getLocString("theme.primaryForecolorLight"),
+                    titleLocation: "left",
+                    descriptionLocation: "hidden",
+                    defaultValue: "#ffffff"
+                  }
+                ]
+              }]
+          }, {
+            type: "panel",
+            elements: [
+              {
                 type: "fontSettings",
                 name: "surveyTitle",
                 title: getLocString("theme.surveyTitle"),
@@ -783,7 +794,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-small",
+                name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.questionShadow"),
                 defaultValue: {
@@ -797,7 +808,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "expression",
-                name: "--background",
+                name: "--sjs-general-backcolor",
                 expression: "{questionPanel.backcolor}",
                 visible: false
               }, {
@@ -837,7 +848,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "boxshadowsettings",
-                name: "--sjs-general-shadow-inner",
+                name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.editorShadow"),
                 defaultValue: {
@@ -850,7 +861,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 }
               }, {
                 type: "expression",
-                name: "--background-dim-light",
+                name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",
                 visible: false
               }, {
@@ -864,59 +875,6 @@ export class ThemeSurveyTabViewModel extends Base {
                 }
               }
             ]
-          }, {
-            type: "panel",
-            elements: [{
-              type: "panel",
-              title: getLocString("theme.accentBackground"),
-              elements: [
-                {
-                  type: "color",
-                  name: "--sjs-primary-backcolor",
-                  title: getLocString("theme.primaryDefaultColor"),
-                  titleLocation: "left",
-                  descriptionLocation: "hidden",
-                  defaultValue: "#19B394"
-                },
-                {
-                  type: "color",
-                  name: "--sjs-primary-backcolor-dark",
-                  title: getLocString("theme.primaryDarkColor"),
-                  titleLocation: "left",
-                  descriptionLocation: "hidden",
-                  defaultValue: "#14A48B"
-                },
-                {
-                  type: "color",
-                  name: "--sjs-primary-backcolor-light",
-                  title: getLocString("theme.primaryLightColor"),
-                  titleLocation: "left",
-                  descriptionLocation: "hidden",
-                  defaultValue: "#E8F7F4"
-                }
-              ]
-            }, {
-              type: "panel",
-              title: getLocString("theme.accentForeground"),
-              elements: [
-                {
-                  type: "color",
-                  name: "--sjs-primary-forecolor",
-                  title: getLocString("theme.primaryForecolor"),
-                  titleLocation: "left",
-                  descriptionLocation: "hidden",
-                  defaultValue: "#ffffff"
-                },
-                {
-                  type: "color",
-                  name: "--sjs-primary-forecolor-light",
-                  title: getLocString("theme.primaryForecolorLight"),
-                  titleLocation: "left",
-                  descriptionLocation: "hidden",
-                  defaultValue: "#ffffff"
-                }
-              ]
-            }]
           }, {
             type: "panel",
             elements: [{
@@ -945,15 +903,6 @@ export class ThemeSurveyTabViewModel extends Base {
       }]
     };
 
-    // Object.keys(this.themeVariables).forEach(varName => {
-    //   themeEditorSurveyJSON.elements[1].elements[0].elements.push(<any>{
-    //     type: "text",
-    //     inputType: varName.indexOf("-unit") === -1 ? "color" : undefined,
-    //     title: editorLocalization.getString("theme." + varName),
-    //     name: varName,
-    //     defaultValue: this.themeVariables[varName]
-    //   });
-    // });
     return themeEditorSurveyJSON;
   }
 }

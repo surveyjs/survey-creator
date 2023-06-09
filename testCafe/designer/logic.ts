@@ -142,7 +142,7 @@ test("Create logic rule", async (t) => {
 
     .click(addButton)
     .expect(removeButton.count).eql(2)
-    .expect(removeButton.filterVisible().count).eql(0)
+    .expect(removeButton.filterVisible().count).eql(1) // this line is hovered
     .expect(logicOperatorConjuction.count).eql(1)
     .expect(logicQuestionSelector.count).eql(2)
     .expect(logicOperatorSelector.count).eql(2)

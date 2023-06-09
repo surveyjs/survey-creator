@@ -3760,3 +3760,46 @@ test("Check onGetPageActions event", () => {
   expect(page.rows.length).toBe(2);
   expect(page.rows[1].elements[0].getType()).toBe("panel");
 });
+
+test("Undo/redo question removed from last page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getQuestionByName("question2"));
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+});

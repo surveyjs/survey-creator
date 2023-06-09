@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, takeElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText, wrapVisualTest } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, creatorTabLogicName, takeElementScreenshot, logicQuestionSelector, logicActionSelector, tableRulesSelector, logicAddNewRuleButton, getListItemByText, wrapVisualTest, resetHoverToCreator } from "../../helper";
 
 const title = "Logic tab Screenshot";
 
@@ -9,7 +9,7 @@ test("empty view", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
 
-    const tabContent = Selector(".svc-creator-tab__content");
+    const tabContent = Selector(".svc-creator-tab");
 
     await t.click(getTabbedMenuItemByText(creatorTabLogicName));
     await takeElementScreenshot("logic-tab-empty.png", tabContent, t, comparer);
@@ -419,6 +419,7 @@ test("logic actions", async (t) => {
     await takeElementScreenshot("logic-panel-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t, comparer);
 
     await t.click(tableRulesSelector.nth(1));
+    await resetHoverToCreator(t);
     await takeElementScreenshot("logic-question-actions.png", Selector(".sl-embedded-survey .svc-logic-paneldynamic").nth(1), t, comparer);
   });
 });

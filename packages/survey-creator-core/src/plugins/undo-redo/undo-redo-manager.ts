@@ -73,8 +73,10 @@ export class UndoRedoManager {
     if (transaction.isEmpty()) return;
 
     this._cutOffTail();
-    this._transactions.push(transaction);
-    this._currentTransactionIndex++;
+    if(this._transactions[this._currentTransactionIndex] !== transaction) {
+      this._transactions.push(transaction);
+      this._currentTransactionIndex++;
+    }
     this.canUndoRedoCallback();
   }
   private _getCurrentTransaction() {

@@ -377,6 +377,9 @@ export class SurveyLogicTypes {
         formatStr: string,
         lt: SurveyLogicType
       ): string {
+        if(Helpers.isValueEmpty(element["setValue"])) {
+          formatStr = getLogicString("trigger_setvalueEmptyText");
+        }
         return formatStr["format"](
           lt.formatElName(element["setToName"]),
           element["setValue"]

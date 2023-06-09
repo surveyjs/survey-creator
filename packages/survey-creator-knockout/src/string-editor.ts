@@ -79,6 +79,9 @@ export class StringEditorViewModel {
   public onInput(sender: StringEditorViewModel, event: any): void {
     this.baseModel.onInput(event);
   }
+  public onPaste(sender: StringEditorViewModel, event: any): void {
+    this.baseModel.onPaste(event);
+  }
 
   public onBlur(sender: StringEditorViewModel, event: any): void {
     event.currentTarget.spellcheck = false;
