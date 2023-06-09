@@ -42,7 +42,7 @@ svc-question {
   padding: calcSize(4) calcSize(5) calcSize(8);
   background: $background;
   box-shadow: 0px 1px 2px $shadow-inner;
-  border: 2px solid transparent;
+  // border: 2px solid transparent;
   outline: none;
 }
 
@@ -131,7 +131,7 @@ svc-question {
 .svc-creator .svc-page .svc-question__content--selected:not(.svc-question__content--dragged),
 .svc-creator:not(.svc-creator--mobile) .svc-page .svc-hovered>.svc-question__content:not(.svc-question__content--dragged) {
   &.svc-question__content--selected {
-    box-shadow: 0 0 0 2px $secondary;
+    box-shadow: 0 0 0 2px $secondary inset;
   }
 
   &>.svc-question__content-actions {
@@ -235,7 +235,7 @@ svc-question {
   position: absolute;
   left: 0;
   background: $secondary;
-  top: -11px;
+  top: -9px;
   width: 100%;
   height: 2px;
 }
@@ -245,7 +245,7 @@ svc-question {
   position: absolute;
   left: 0;
   background: $secondary;
-  bottom: -11px;
+  bottom: -9px;
   width: 100%;
   height: 2px;
 }
