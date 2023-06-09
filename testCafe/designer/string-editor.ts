@@ -344,6 +344,33 @@ test("Check markdown events", async (t) => {
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
 });
 
+test("Check markdown shift-enter", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text);
+      window["creator"].onHtmlToMarkdown.add((survey, options) => options.text = options.html);
+    });
+  })();
+
+  await setJSON({
+    "description": "abc",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("abc"))
+    .typeText(Selector(".sv-string-editor").withText("abc"), "d", { caretPos: 1 })
+    .pressKey("shift+enter")
+    .expect(Selector(".sv-string-editor").withText("adbc").focused).ok()
+    .pressKey("enter")
+    .expect(Selector(".sv-string-editor").withText("adbc").focused).notOk();
+});
+
 test("Check markdown back events", async (t) => {
   await ClientFunction(() => {
     window["creator"].onSurveyInstanceCreated.add((sender, options) => {
