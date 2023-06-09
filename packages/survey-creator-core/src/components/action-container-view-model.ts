@@ -149,7 +149,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     );
   }
   public get allowEdit(): boolean {
-    return !!this.creator && !this.creator.readOnly;
+    const allowedOperations = this.creator.getElementAllowOperations(this.surveyElement);
+    const allowEdit = (allowedOperations.allowEdit == undefined || !!allowedOperations.allowEdit);
+    return !!this.creator && !this.creator.readOnly && allowEdit;
   }
   public get showAddQuestionButton(): boolean {
     return this.getPropertyValue("showAddQuestionButton");
