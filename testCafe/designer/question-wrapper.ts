@@ -312,3 +312,20 @@ test("Matrix column title - get focus on click, not tab", async (t) => {
     .pressKey("tab tab")
     .expect(Selector(".sv-string-editor").withText("Column 2").focused).ok();
 });
+test.skip("Carryforward banner", async (t) => {
+  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const carryForwardEditor = Selector("div[aria-label='Copy choices from the following question']");
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Dropdown"))
+    .click(getToolboxItemByText("Dropdown"))
+    .hover(getToolboxItemByText("Radio Button Group"))
+    .click(getToolboxItemByText("Radio Button Group"))
+    .hover(getToolboxItemByText("Dropdown"))
+    .click(getToolboxItemByText("Dropdown"));
+
+  await t
+    .click(choicesTabTitle)
+    .click(carryForwardEditor)
+    .click(Selector(".sd-selectbase__label").withText("Question1"))
+    .expect(Selector("span").withText("Copy choices from").exists).ok();
+});
