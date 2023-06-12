@@ -334,6 +334,6 @@ test("Carryforward banner", async (t) => {
     .click(carryForwardEditor)
     .click(Selector(".sv-popup__content .sv-list .sv-list__item").withText("question1"))
     .expect(Selector("span").withText("Copy choices from").exists).ok()
-    .click(Selector(".svc-question__carryforward").find("span").withText("question1"))
+    .click(Selector(".svc-carry-forward-panel").find(".svc-action-button").withText("question1"))
     .expect(getSelectedElementName()).eql("question1");
 });
