@@ -1,5 +1,8 @@
-<div>
+<div class="svc-carry-forward-panel">
   <span data-bind="text:text"></span>
-  <svc-action-button params="text: question.name, click: onClick">
+  <span class="svc-carry-forward-panel__link">
+    <!-- ko component: { name: "svc-action-button", params: { text: question.name, click: onClick } }-->
+    <!-- /ko -->
+  </span>
   </svc-action-button>
 </div>
