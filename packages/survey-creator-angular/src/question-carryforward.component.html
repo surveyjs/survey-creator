@@ -1,5 +1,9 @@
-<div class="svc-question__carryforward">
-  <span>{{text}}></span>
-  <svc-action-button [text]="question.name" [click]="model.onClick.bind(model)">
-  </svc-action-button>
-</div>
+<ng-template #template>
+  <div class="svc-carry-forward-panel">
+    <span>{{model.text}} </span>
+    <span class="svc-carry-forward-panel__link">
+      <svc-action-button [text]="model.question.name" (click)="model.onClick()">
+      </svc-action-button>
+    </span>
+  </div>
+<ng-template>

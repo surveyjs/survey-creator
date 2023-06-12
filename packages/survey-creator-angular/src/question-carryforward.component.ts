@@ -4,7 +4,8 @@ import { QuestionCarryForwardParams } from "survey-creator-core";
 
 @Component({
   selector: "svc-question-carryforward",
-  templateUrl: "./question-carryforward.component.html"
+  templateUrl: "./question-carryforward.component.html",
+  styles: [":host { display: none }"]
 })
 export class QuestionCarryForwardComponent extends EmbeddedViewContentComponent {
   @Input() model!: QuestionCarryForwardParams;
