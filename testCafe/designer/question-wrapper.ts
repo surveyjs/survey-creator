@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -311,4 +311,29 @@ test("Matrix column title - get focus on click, not tab", async (t) => {
     .expect(Selector(".svc-matrix-cell").withText("Column 1").focused).ok()
     .pressKey("tab tab")
     .expect(Selector(".sv-string-editor").withText("Column 2").focused).ok();
+});
+test("Carryforward banner", async (t) => {
+  const getSelectedElementName = ClientFunction(() => {
+    return window["creator"].selectedElement.name;
+  });
+  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const generalTabTitle = Selector("h4").withExactText(generalGroupName);
+  const carryForwardEditor = Selector("div[aria-label='Copy choices from the following question']");
+  await t.expect(questions.exists).notOk()
+    .hover(getToolboxItemByText("Checkboxes"))
+    .click(getToolboxItemByText("Checkboxes"))
+    .hover(getToolboxItemByText("Radio Button Group"))
+    .click(getToolboxItemByText("Radio Button Group"))
+    .hover(getToolboxItemByText("Dropdown"))
+    .click(getToolboxItemByText("Dropdown"));
+
+  await t
+    .expect(getSelectedElementName()).eql("question3")
+    .click(generalTabTitle)
+    .click(choicesTabTitle)
+    .click(carryForwardEditor)
+    .click(Selector(".sv-popup__content .sv-list .sv-list__item").withText("question1"))
+    .expect(Selector("span").withText("Copy choices from").exists).ok()
+    .click(Selector(".svc-question__carryforward").find("span").withText("question1"))
+    .expect(getSelectedElementName()).eql("question1");
 });
