@@ -46,3 +46,10 @@ test("Show/hide go to visibleIf link", () => {
   visibleIfGoQuestion.doLinkClick();
   expect(logicPanel.isExpanded).toBeTruthy();
 });
+
+test("Check boolean question support grouping event with overridigng property", () => {
+  const question = new QuestionTextModel("q");
+  let propertyGrid = new PropertyGridModelTester(question);
+  question.visibleIf = "{q1} = false";
+  expect(propertyGrid.survey.getQuestionByName("isRequired").cssClasses.mainRoot.includes("spg-row-narrow__question")).toBeTruthy();
+});

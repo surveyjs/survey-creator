@@ -1255,14 +1255,22 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   public isSupportGrouping(): boolean {
     return false;
   }
-  onUpdateQuestionCssClasses(obj: Base, options: any) {
-    if (!this.isSupportGrouping()) return;
-    const question = options.question;
-    if (!question || !question.parent) return;
+  private hasPreviousElementForGrouping(question: Question): boolean {
+    if (!question || !question.parent) return false;
     const index = question.parent.elements.indexOf(question);
     if (index < 1) return;
-    if (question.parent.elements[index - 1].getType() !== question.getType()) return;
-    options.cssClasses.mainRoot += " spg-row-narrow__question";
+    const prevElement = question.parent.elements[index - 1];
+    const prevPrevElement = question.parent.elements[index - 2];
+    if (prevElement.getType() === question.getType()) return true;
+    //in case of overriding property
+    if (index > 1 && !prevElement.startWithNewLine && prevPrevElement["property"] === prevElement["property"] && prevPrevElement.getType() === question.getType()) return true;
+    return false;
+  }
+  onUpdateQuestionCssClasses(obj: Base, options: any) {
+    if (!this.isSupportGrouping()) return;
+    if(this.hasPreviousElementForGrouping(options.question)) {
+      options.cssClasses.mainRoot += " spg-row-narrow__question";
+    }
   }
 }
 
