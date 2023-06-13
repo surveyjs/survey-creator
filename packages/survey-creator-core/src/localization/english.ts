@@ -144,6 +144,7 @@ export var enStrings = {
     underline: "Underline",
     addNewQuestion: "Add Question",
     selectPage: "Select page...",
+    carryForwardChoicesCopied: "Choices are copied from",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",

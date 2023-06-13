@@ -1132,3 +1132,38 @@ test("Matrix dropdown popup edit ", async (t) => {
     await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
+
+test("Check carry forward panel", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "checkbox",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected"
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel.png", rootSelector, t, comparer);
+  });
+});

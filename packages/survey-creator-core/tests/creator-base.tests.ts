@@ -3263,7 +3263,7 @@ test("allowEdit and onElementAllowOperations", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
 
-  let allowEdit = undefined;
+  let allowEdit: any = undefined;
   creator.onElementAllowOperations.add((sender, options) => {
     options.allowEdit = allowEdit;
   });
@@ -3297,7 +3297,32 @@ test("allowEdit and onElementAllowOperations", (): any => {
   creator.selectElement(question);
   expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
 });
-
+test("Carry-forward banner", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" },
+  ] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  q2.choicesFromQuestion = "";
+  expect(q2AdornerModel.isUsingCarryForward).toBeFalsy();
+  expect(q2AdornerModel.createCarryForwardParams()).toBeFalsy();
+  q2.choicesFromQuestion = "q1";
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  q1.name = "q11";
+  expect(q2.choicesFromQuestion).toBe("q11");
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  const params = q2AdornerModel.createCarryForwardParams();
+  expect(params.question.name).toBe("q11");
+  expect(params.text).toBe("Choices are copied from");
+  creator.selectElement(q2);
+  expect(creator.selectedElementName).toBe("q2");
+  params.onClick();
+  expect(creator.selectedElementName).toBe("q11");
+});
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");
   expect(isTextInput(textarea)).toBeTruthy();
