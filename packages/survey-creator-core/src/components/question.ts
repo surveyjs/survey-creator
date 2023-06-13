@@ -31,6 +31,12 @@ import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../survey-elements";
 
+export interface QuestionCarryForwardParams {
+  question: Question;
+  text: string;
+  onClick: () => void;
+}
+
 export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   @property() isDragged: boolean;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
@@ -142,6 +148,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
   get dragTypeOverMe() {
     return this.element.dragTypeOverMe;
+  }
+  public get isUsingCarryForward(): boolean {
+    return (<any>this.element)?.isUsingCarryForward;
+  }
+  public createCarryForwardParams(): QuestionCarryForwardParams {
+    if(!this.isUsingCarryForward) return null;
+    const name = (<any>this.element)?.choicesFromQuestion;
+    if(!name) return null;
+    const question = this.creator.survey.getQuestionByName(name);
+    if(!question) return null;
+    return { question: question, text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
+      onClick: () => { this.creator.selectElement(question); } };
   }
 
   dispose() {

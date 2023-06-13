@@ -9,6 +9,7 @@ export * from "../adorners/Row";
 export * from "../adorners/Question";
 export * from "../adorners/QuestionHeader";
 export * from "../adorners/QuestionFooter";
+export * from "../adorners/QuestionCarryForward";
 export * from "../adorners/QuestionDropdown";
 export * from "../adorners/QuestionImage";
 export * from "../adorners/QuestionRating";
