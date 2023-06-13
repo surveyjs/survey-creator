@@ -366,9 +366,9 @@ test("Check markdown shift-enter", async (t) => {
     .click(Selector(".sv-string-editor").withText("abc"))
     .typeText(Selector(".sv-string-editor").withText("abc"), "d", { caretPos: 1 })
     .pressKey("shift+enter")
-    .expect(Selector(".sv-string-editor").withText("adbc").focused).ok()
+    .expect(Selector(".sd-title .sd-description .sv-string-editor").focused).ok()
     .pressKey("enter")
-    .expect(Selector(".sv-string-editor").withText("adbc").focused).notOk();
+    .expect(Selector(".sd-title .sd-description .sv-string-editor").focused).notOk();
 });
 
 test("Check markdown back events", async (t) => {
