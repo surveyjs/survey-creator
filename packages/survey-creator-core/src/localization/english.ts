@@ -1008,11 +1008,12 @@ export var enStrings = {
     pageDescription: "Page Description Font",
     boxShadowX: "X",
     boxShadowY: "Y",
+    boxShadowAddRule: "Add More Shadow Effect",
     opacity: "Opacity",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Spread",
     questionShadow: "Question Panel Border / Shadow",
-    editorShadow: "Editor Border / Shadow"
+    editorShadow: "Editor Border / Shadow",
   },
 };
 
