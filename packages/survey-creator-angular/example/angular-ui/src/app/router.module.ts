@@ -7,6 +7,7 @@ import { TestDropdownCollapseComponent } from "./test/dropdown-collapse.componen
 import { ThemePreviewComponent } from "./test/theme-preview.component";
 import { TestThemeSwitcherComponent } from "./test/theme-switcher.component";
 import { TestLocalizationComponent } from "./test/localization.component";
+import { ThemeTabComponent } from "./test/test-theme-tab.component";
 
 const routes = [
   { path: "testCafe/testcafe.html", component: TestDefaultComponent },
@@ -15,7 +16,8 @@ const routes = [
   { path: "testCafe/by-page.html", component: TestByPageComponent },
   { path: "testCafe/testcafe-widget.html", component: TestCustomWidgetComponent },
   { path: "testCafe/testcafe_localized_ui.html", component: TestLocalizationComponent },
-  { path: "testCafe/dropdown-collapse-view.html", component: TestDropdownCollapseComponent }
+  { path: "testCafe/dropdown-collapse-view.html", component: TestDropdownCollapseComponent },
+  { path: "testCafe/testcafe-theme-tab.html", component: ThemeTabComponent }
 ];
 
 @NgModule({
