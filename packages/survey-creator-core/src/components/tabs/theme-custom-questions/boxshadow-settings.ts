@@ -6,10 +6,8 @@ ComponentCollection.Instance.add({
   showInToolbox: false,
   questionJSON: {
     "type": "paneldynamic",
-    "panelCount": 1,
-    //temp
-    "maxPanelCount": 1,
     "minPanelCount": 1,
+    "panelAddText": getLocString("theme.boxShadowAddRule"),
     "templateElements": [
       {
         "type": "spinedit",
@@ -67,11 +65,11 @@ ComponentCollection.Instance.add({
 
 export function createBoxShadow(value: Array<any>): string {
   return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x}px ${val.y}px ${val.blur}px ${val.spread}px ${val.color}`
-  )).join(",");
+  )).join(", ");
 }
 
 export function parseBoxShadow(value: string): Array<Object> {
-  return value.split(/(?<!\([^)]*),(?!.*\))/).map(value => {
+  return value.split(/,(?![^(]*\))/).map(value => {
     const color = value.match(/#[a-zA-Z0-9]+|rgba?\(.*?\)/);
     const isInset = value.indexOf("inset") > -1;
     const res: Object = {};

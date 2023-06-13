@@ -53,11 +53,21 @@ svc-page {
     }
   }
 }
-
-.svc-page__add-new-question {
+.svc-page__footer {
+  overflow: visible;
   margin-left: calcSize(3);
   margin-right: calcSize(3);
+  .sv-action {
+    flex: 1 1 0;
+  }
+  .svc-btn {
+    flex-grow: 1;
+    border: none;
+  }
+  gap: calcSize(2);
+}
 
+.svc-page__add-new-question {
   .svc-text {
     margin-left: calcSize(6);
   }

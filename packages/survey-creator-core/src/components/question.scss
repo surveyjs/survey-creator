@@ -1,5 +1,5 @@
 @import "../variables.scss";
-
+@import "./carry-forward-panel.scss";
 svc-question {
   display: block;
   position: absolute;
@@ -47,10 +47,6 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-element__header .sd-description {
-    margin-top: 0;
-  }
-
   .sd-selectbase:not(.sd-imagepicker) {
     overflow-x: auto;
     padding-left: calcSize(5);
@@ -172,6 +168,10 @@ svc-question {
   z-index: 1000;
   box-shadow: 0px 8px 16px $shadow-medium;
   @include disableUserSelect;
+  max-width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .svc-dragged-element-shortcut .sv-svg-icon use {

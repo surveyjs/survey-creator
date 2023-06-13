@@ -79,6 +79,18 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
+  public onMatrixCellValueChanged(obj: Base, options: any) {
+    const column = options.question.getColumnByName(options.columnName);
+    if(!column || !column.isUnique) return;
+    options.question.visibleRows.forEach(row => {
+      if(row !== options.row) {
+        const q = row.getQuestionByColumnName(options.columnName);
+        if(!!q && q.errors.length > 0) {
+          q.hasErrors();
+        }
+      }
+    });
+  }
   private updateMatixActionsClasses(actions: Array<IAction>) {
     actions.forEach(action => {
       action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
@@ -574,6 +586,7 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
+    super.onMatrixCellValueChanged(obj, options);
     if (obj instanceof QuestionRatingModel && options.columnName == "icon") {
       //options.cellQuestion.html = "<svg style='fill: red'><use xlink:href=\"#" + options.cellQuestion.value + "\"></use></svg>";
       options.cellQuestion.html = options.cellQuestion.value;
@@ -791,13 +804,10 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
     }
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
-    if (options.columnName != this.getObjTypeName()) {
-      return;
-    }
+    super.onMatrixCellValueChanged(obj, options);
+    if (options.columnName !== this.getObjTypeName()) return;
     var index = options.question.visibleRows.indexOf(options.row);
-    if (index < 0) {
-      return;
-    }
+    if (index < 0) return;
     var isDetailPanelShowing = options.row.isDetailPanelShowing;
     var objJSON = options.row.editingObj.toJSON();
     delete objJSON.type;

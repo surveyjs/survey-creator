@@ -21,6 +21,8 @@ export * from "../components/tabs/test";
 export * from "../components/tabs/test-plugin";
 export * from "../components/tabs/theme-custom-questions/color-settings";
 export * from "../components/tabs/theme-custom-questions/boxshadow-settings";
+export * from "../components/tabs/theme-custom-questions/font-settings";
+export * from "../components/tabs/theme-custom-questions/element-settings";
 export * from "../components/tabs/theme";
 export * from "../components/tabs/theme-plugin";
 export * from "../components/tabs/logic";

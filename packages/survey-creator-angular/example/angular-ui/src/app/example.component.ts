@@ -86,5 +86,5 @@ export class ExampleComponent {
   }
 
   public survey = new SurveyModel(json);
-  public creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true })
+  public creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, showThemeTab: true })
 }

@@ -37,8 +37,8 @@ export var propertyGridCss = {
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
     title: "spg-title spg-question__title",
-    button: "spg-btn",
-    buttonRemove: "spg-paneldynamic__remove-btn",
+    button: "spg-action-button spg-action-button--text",
+    buttonRemove: "spg-action-button--danger",
     buttonAdd: "spg-paneldynamic__add-btn",
     progressTop: "spg-paneldynamic__progress spg-paneldynamic__progress--top",
     progressBottom:
@@ -49,6 +49,7 @@ export var propertyGridCss = {
     progress: "spg-progress",
     progressBar: "spg-progress__bar",
     progressText: "spg-paneldynamic__progress-text",
+    panelFooter: "spg-panel__footer",
     separator: "spg-paneldynamic__separator"
   },
   progress: "spg-progress spg-body__progress",
@@ -331,7 +332,9 @@ export var propertyGridCss = {
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
-    colorDrodownIcon: "icon-drop-down-arrow"
+    colorDropdownIcon: "icon-drop-down-arrow",
+    colorItem: "spg-color-editor__color-item",
+    swatchIcon: "icon-color-picker"
   },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",

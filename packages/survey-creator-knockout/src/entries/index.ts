@@ -11,11 +11,13 @@ export * from "../tabs/logic-operator";
 export * from "../tabs/translation";
 
 export * from "../page";
+export * from "../page-add-question";
 export * from "../row";
 export * from "../string-editor";
 export * from "../adorners/question";
 export * from "../adorners/panel";
 export * from "../adorners/question-dropdown";
+export * from "../adorners/question-carryforward";
 export * from "../question-link-value";
 export * from "../question-embedded-survey";
 export * from "../adorners/question-image";
@@ -30,6 +32,7 @@ export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
 //custom questions for property grid
+export * from "../custom-questions/color-item";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/spin-editor";
 export * from "../custom-questions/question-file";

@@ -29,6 +29,7 @@ import { SurveyResultsTableRowComponent } from "./tabs/preview/survey-results-ro
 import { TestTabComponent } from "./tabs/preview/test.component";
 import { ThemeTabComponent } from "./tabs/theme/theme.component";
 import { PageDesignerComponent } from "./page.component";
+import { AddQuestionButtonComponent } from "./page-add-question.component";
 import { QuestionDesignerComponent } from "./question.component";
 import { ItemValueDesignerComponent } from "./adorners/item-value.component";
 import { ImageItemValueDesignerComponent } from "./adorners/image-item-value.component";
@@ -55,15 +56,17 @@ import { ToolboxComponent } from "./toolbox/toolbox.component";
 import { QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent } from "./adorners/question-rating.component";
 import { CreatorLogoImageComponent } from "./header/logo-image.component";
 import { QuestionSpinEditorComponent } from "./custom-questions/spin-editor.component";
+import { ColorItemComponent } from "./custom-questions/color-item.component";
 import { QuestionColorComponent } from "./custom-questions/color.component";
 import { QuestionFileEditorComponent } from "./custom-questions/file.component";
+import { QuestionCarryForwardComponent } from "./question-carryforward.component";
 
 @NgModule({
   declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
-    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, QuestionColorComponent, QuestionFileEditorComponent],
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionCarryForwardComponent],
   imports: [
     CommonModule, FormsModule, SurveyModule
   ],
@@ -72,7 +75,7 @@ import { QuestionFileEditorComponent } from "./custom-questions/file.component";
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
-    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, QuestionColorComponent, QuestionFileEditorComponent],
+    QuestionRatingAdornerDesignerComponent, QuestionRatingDesignerComponent, QuestionSpinEditorComponent, ColorItemComponent, QuestionColorComponent, QuestionFileEditorComponent, AddQuestionButtonComponent, QuestionCarryForwardComponent],
   providers: [],
 })
 export class SurveyCreatorModule { }

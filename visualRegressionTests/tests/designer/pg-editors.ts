@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -74,7 +74,7 @@ test("Properties on the same line (date)", async (t) => {
     const question1 = Selector("[data-name=\"question1\"]");
 
     await t
-      .click(question1)
+      .click(question1, { offsetX: 20, offsetY: 20 })
       .pressKey("enter")
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Input"))
@@ -389,7 +389,9 @@ test("Check color editor", async (t) => {
           return prop.name === "fontColor";
         },
         getJSON: function (obj, prop, options) {
-          return { type: "color" };
+          return {
+            type: "color", choices: [{ text: "Contrast", value: "#673AB0" }, { text: "Plain", value: "673AB0" }, { text: "Simple", value: "#55B534" }],
+          };
         }
       });
     })();
@@ -400,6 +402,10 @@ test("Check color editor", async (t) => {
     await takeElementScreenshot("color-editor.png", questionSelector, t, comparer);
     await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
+    await t.click(questionSelector.find(".spg-input__edit-button"));
+    await resetHoverToCreator(t);
+    await takeElementScreenshot("color-editor-choices.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+    await t.click(questionSelector.find(".spg-input__edit-button"));
     await t.click(questionSelector.find(".spg-color-editor__input"));
     await takeElementScreenshot("color-editor-focus.png", questionSelector, t, comparer);
     await ClientFunction(() => {

@@ -19,7 +19,8 @@ import {
   QuestionCheckboxModel,
   ComponentCollection,
   QuestionCompositeModel,
-  QuestionCustomModel
+  QuestionCustomModel,
+  PageModel
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -3262,7 +3263,7 @@ test("allowEdit and onElementAllowOperations", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
 
-  let allowEdit = undefined;
+  let allowEdit: any = undefined;
   creator.onElementAllowOperations.add((sender, options) => {
     options.allowEdit = allowEdit;
   });
@@ -3296,7 +3297,32 @@ test("allowEdit and onElementAllowOperations", (): any => {
   creator.selectElement(question);
   expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
 });
-
+test("Carry-forward banner", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" },
+  ] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = creator.survey.getQuestionByName("q2");
+  const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  q2.choicesFromQuestion = "";
+  expect(q2AdornerModel.isUsingCarryForward).toBeFalsy();
+  expect(q2AdornerModel.createCarryForwardParams()).toBeFalsy();
+  q2.choicesFromQuestion = "q1";
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  q1.name = "q11";
+  expect(q2.choicesFromQuestion).toBe("q11");
+  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  const params = q2AdornerModel.createCarryForwardParams();
+  expect(params.question.name).toBe("q11");
+  expect(params.text).toBe("Choices are copied from");
+  creator.selectElement(q2);
+  expect(creator.selectedElementName).toBe("q2");
+  params.onClick();
+  expect(creator.selectedElementName).toBe("q11");
+});
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");
   expect(isTextInput(textarea)).toBeTruthy();
@@ -3732,3 +3758,73 @@ test("creator.deleteLocaleStrings", () => {
   expect(q.title).toEqual("question1");
 });
 
+test("Check onGetPageActions event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const page = <PageModel>creator.survey.currentPage;
+  const pageModel = new PageAdorner(creator, page);
+  let log = "";
+  creator.onGetPageActions.add((_, opt) => {
+    expect(opt.page).toBe(creator.survey.currentPage);
+    opt.actions.push({
+      title: "test",
+      action: () => {
+        opt.addNewQuestion("panel");
+      }
+    });
+    log += "->fired";
+  });
+  expect(pageModel.footerActionsBar.actions.length).toBe(2);
+  expect(pageModel.footerActionsBar.actions[1].title).toBe("test");
+  //check that footerActionsBar getter fires event only once
+  expect(log).toBe("->fired");
+  expect(page.rows.length).toBe(1);
+  pageModel.footerActionsBar.actions[1].action();
+  expect(page.rows.length).toBe(2);
+  expect(page.rows[1].elements[0].getType()).toBe("panel");
+});
+
+test("Undo/redo question removed from last page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  creator.deleteElement(creator.survey.getQuestionByName("question2"));
+  expect(creator.survey.getAllQuestions()).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(creator.undoRedoManager.canUndo()).toBeTruthy();
+  expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  creator.undo();
+  expect(creator.survey.getAllQuestions()).toHaveLength(2);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(creator.undoRedoManager.canUndo()).toBeFalsy();
+  expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+});

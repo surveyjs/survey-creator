@@ -26,6 +26,7 @@ import {
   ILocalizableOwner,
   PopupBaseViewModel,
   EventBase,
+  ITheme,
   PanelModelBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
@@ -60,6 +61,7 @@ import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
 import { TabThemePlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
+import { PageAdorner } from "./components/page";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -747,6 +749,23 @@ export class CreatorBase extends Base
    *- options.page the new survey Page object.
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
+
+  /**
+   * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.actions`: [`IAction[]`](/form-library/documentation/api-reference/iaction)\
+   * An array of actions. You can add or remove actions from this array.
+   * - `options.page`: [`PageModel`](/form-library/documentation/api-reference/page-model)\
+   * A page for which the event is raised.
+   * - `options.addNewQuestion(type)`: Method\
+   * Adds a new question of a specified [`type`](/form-library/documentation/api-reference/question#getType) to the page.
+   */
+  public onGetPageActions: CreatorEvent = new CreatorEvent();
+
   /**
    * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
    *- sender the survey creator object that fires the event
@@ -1000,6 +1019,7 @@ export class CreatorBase extends Base
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
+  public theme: ITheme = { cssVariables: {} };
 
   private _allowModifyPages = true;
   /**
@@ -3134,6 +3154,17 @@ export class CreatorBase extends Base
       popupModel: popupModel
     };
   }
+
+  public getUpdatedPageAdornerFooterActions(pageAdorner: PageAdorner, actions: Array<IAction>) {
+    const options = {
+      page: pageAdorner.page,
+      addNewQuestion: (type: string) => { pageAdorner.addNewQuestion(pageAdorner, undefined, type); },
+      actions
+    };
+    this.onGetPageActions.fire(this, options);
+    return options.actions;
+  }
+
   @undoRedoTransaction()
   public addNewQuestionInPage(beforeAdd: (string) => void, panel: IPanel = null, type: string = null) {
     if (!type)

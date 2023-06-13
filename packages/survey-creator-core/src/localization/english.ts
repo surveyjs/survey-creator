@@ -137,11 +137,14 @@ export var enStrings = {
     translationImportFromSCVButton: "Import from CSV",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
+    themeExportButton: "Export",
+    themeImportButton: "Import",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
     addNewQuestion: "Add Question",
     selectPage: "Select page...",
+    carryForwardChoicesCopied: "Choices are copied from",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
@@ -195,6 +198,7 @@ export var enStrings = {
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name
       trigger_copyvalueText: "copy into question: {0} value from question {1}", //{0} and {1} question names
       trigger_skipText: "survey skip to the question {0}", //{0} question name
       trigger_runExpressionText1: "run expression: '{0}'", //{0} the expression
@@ -995,6 +999,7 @@ export var enStrings = {
     color: "Color",
     size: "Size",
     fontWeightRegular: "Regular",
+    fontWeightHeavy: "Heavy",
     fontWeightSemiBold: "Semi-Bold",
     fontWeightBold: "Bold",
     scale: "Scale",
@@ -1004,11 +1009,12 @@ export var enStrings = {
     pageDescription: "Page Description Font",
     boxShadowX: "X",
     boxShadowY: "Y",
+    boxShadowAddRule: "Add More Shadow Effect",
     opacity: "Opacity",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Spread",
     questionShadow: "Question Panel Border / Shadow",
-    editorShadow: "Editor Border / Shadow"
+    editorShadow: "Editor Border / Shadow",
   },
 };
 

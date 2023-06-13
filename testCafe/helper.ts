@@ -78,7 +78,7 @@ export const logicActionTriggerQuestionsElement = Selector(".svc-logic_trigger-q
 export const logicDetailButtonElement = Selector(".sl-table__detail-button").filterVisible();
 export const tableRulesSelector = Selector(".sl-table tbody .sl-table__row:not(.st-table__row--detail)").filterVisible();
 
-export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik") {
+export function getTabbedMenuItemByText(text: "Designer" | "Preview" | "Logic" | "Translation" | "JSON Editor" | "Embed Survey" | "Miner Logik" | "Themes") {
   return Selector(".svc-tabbed-menu-item-container .svc-tabbed-menu-item__text").withText(text).filterVisible();
 }
 export function getSelectOptionByText(text: string) {
@@ -151,4 +151,8 @@ export const patchDragDropToDisableDrop = ClientFunction(() => {
 
 export function getDropdownValue(selector: string | Selector = ".sd-input.sd-dropdown") {
   return Selector(selector).find(".sv-string-viewer").textContent;
+}
+
+export async function resetHoverToCreator(t: TestController): Promise<void> {
+  await t.hover(Selector("#survey-creator"), { offsetX: 0, offsetY: 0 });
 }

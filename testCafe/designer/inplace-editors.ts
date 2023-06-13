@@ -576,8 +576,6 @@ test("Ranking question inplace editor", async (t) => {
     .expect(items.nth(3).hasClass("svc-item-value--new")).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__add").visible).notOk()
     .expect(items.nth(3).find(".svc-item-value-controls__remove").visible).ok()
-    .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).notOk()
-    .hover(items.nth(3))
     .expect(items.nth(3).find(".svc-item-value-controls__drag-icon").visible).ok()
     .expect(items.nth(4).hasClass("svc-item-value--new")).ok()
     .expect(items.nth(4).find(".svc-item-value-controls__add").visible).ok()
@@ -729,12 +727,12 @@ test("Matrix dropdown question inplace popup editor", async (t) => {
   await showControl();
 
   await t.click(Selector(".svc-matrix-cell__question-controls-button"))
-    .expect(Selector(".svc-question__content--selected-no-border").visible).ok()
+    .expect(Selector(".svc-question__content--in-popup").visible).ok()
     .expect(Selector(".sv-popup__content .sd-header__text").exists).notOk()
     .expect(Selector(".sv-popup__content .sd-page__title").exists).notOk()
 
     .click(Selector(".sv-popup__button--cancel"))
-    .expect(Selector(".svc-question__content--selected-no-border").exists).notOk()
+    .expect(Selector(".svc-question__content--in-popup").exists).notOk()
     .expect(objectSelectorButton.withText("Column 1").visible).ok();
 });
 
