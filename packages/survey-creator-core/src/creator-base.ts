@@ -81,7 +81,7 @@ export interface ICreatorPlugin {
   canDeactivateAsync?: (onSuccess: () => void) => void;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
-  model: Base;
+  model?: any;
 }
 //Obsolete
 export class CreatorAction extends Action {
@@ -2145,7 +2145,7 @@ export class CreatorBase extends Base
     }
     var parent: IPanel = this.currentPage;
     if (this.pageEditMode === "bypage") {
-      const desigerTab = this.getPlugin("designer").model as any;
+      const desigerTab = this.getPlugin<TabDesignerPlugin>("designer").model;
       const pagesController = desigerTab.pagesController;
       parent = pagesController.page2Display;
     }
