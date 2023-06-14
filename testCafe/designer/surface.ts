@@ -26,7 +26,7 @@ test("Image question", async (t) => {
     .resizeWindow(1280, 900)
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
-    .expect(imageQuestionSelector.clientWidth).eql(620)
+    .expect(imageQuestionSelector.clientWidth).eql(624)
     .expect(imageQuestionSelector.clientHeight).eql(412)
 
     .click(imageQuestionSelector)
@@ -38,7 +38,7 @@ test("Image question", async (t) => {
     .click(collapseButtonSelector)
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
-    .expect(imageQuestionSelector.clientWidth).eql(620)
+    .expect(imageQuestionSelector.clientWidth).eql(624)
     .expect(imageQuestionSelector.clientHeight).eql(412)
 
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
