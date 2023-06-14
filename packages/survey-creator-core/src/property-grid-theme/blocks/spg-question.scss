@@ -59,6 +59,11 @@
 .spg-row-narrow__question {
   margin-top: calcSize(-2);
 }
+.spg-row--multiple {
+  & > div > .spg-row-narrow__question {
+    margin-top: calcSize(-1);
+  }
+}
 .spg-question--location--left {
   flex-direction: row;
   background: $background;

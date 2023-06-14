@@ -39,13 +39,19 @@ import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question
 import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
+import { QuestionLinkValueModel } from "../components/link-value";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
   return this.question.property.visibleIf(this.question.obj);
 }
+function propertyEnableIf(params: any): boolean {
+  if (!this.question || !this.question.obj || !this.question.property) return false;
+  return !this.question.obj[this.question.property.overridingProperty];
+}
 
 FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
+FunctionFactory.Instance.register("propertyEnableIf", propertyEnableIf);
 
 export interface IPropertyEditorSetup {
   editSurvey: SurveyModel;
@@ -487,11 +493,22 @@ export class PropertyJSONGenerator {
       q.property = prop;
       q.obj = this.obj;
       q.options = this.options;
-      var eventVisibility = this.getVisibilityOnEvent(prop);
-      q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
+      const eventVisibility = this.getVisibilityOnEvent(prop);
+      const eventReadOnly = this.isPropertyReadOnly(prop);
+      q.readOnly = q.readOnly || eventReadOnly;
       q.visible = q.visible && eventVisibility;
-      if (!!prop.visibleIf) {
-        q.visibleIf = eventVisibility ? "propertyVisibleIf() = true" : "";
+      if (!!prop.visibleIf && eventVisibility) {
+        q.visibleIf = "propertyVisibleIf() = true";
+      }
+      if(!!prop.overridingProperty) {
+        q.onUpdateCssClassesCallback = (css: any) => {
+          css.questionWrapper = "spg-boolean-wrapper--overriding";
+        };
+        if(!eventReadOnly) {
+          q.enableIf = "propertyEnableIf() = true";
+        }
+        const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
+        q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
       }
       q.descriptionLocation = "hidden";
       let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
@@ -522,6 +539,27 @@ export class PropertyJSONGenerator {
       this.parentObj,
       this.parentProperty
     );
+  }
+  private createOverridingQuestion(panel: PanelModelBase, question: Question, overridingProp: string): Question {
+    const linkValue = <QuestionLinkValueModel>Serializer.createClass("linkvalue");
+    linkValue.name = question.name + "_" + "overridingProperty";
+    linkValue.startWithNewLine = false;
+    linkValue.property = question.property;
+    linkValue.obj = question.obj;
+    linkValue.visibleIf = "propertyEnableIf() = false";
+    const overridingQuestion = panel.getQuestionByName(overridingProp);
+    const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
+    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix") + text;
+    linkValue.titleLocation = "hidden";
+    linkValue.onUpdateCssClassesCallback = (css: any) => {
+      css.questionWrapper = "spg-link-wrapper--overriding";
+    };
+    if(!!overridingQuestion) {
+      linkValue.linkClickCallback = () => {
+        overridingQuestion.focus();
+      };
+    }
+    return linkValue;
   }
   private getClasPropName(): string {
     if (!!this.parentObj && !!this.parentProperty)
@@ -1057,6 +1095,7 @@ export class PropertyGridModel {
       options.question.property,
       options
     );
+
   }
   private onGetQuestionTitleActions(options: any) {
     PropertyGridEditorCollection.onGetQuestionTitleActions(
@@ -1216,14 +1255,22 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   public isSupportGrouping(): boolean {
     return false;
   }
-  onUpdateQuestionCssClasses(obj: Base, options: any) {
-    if (!this.isSupportGrouping()) return;
-    const question = options.question;
-    if (!question || !question.parent) return;
+  private hasPreviousElementForGrouping(question: Question): boolean {
+    if (!question || !question.parent) return false;
     const index = question.parent.elements.indexOf(question);
     if (index < 1) return;
-    if (question.parent.elements[index - 1].getType() !== question.getType()) return;
-    options.cssClasses.mainRoot += " spg-row-narrow__question";
+    const prevElement = question.parent.elements[index - 1];
+    const prevPrevElement = question.parent.elements[index - 2];
+    if (prevElement.getType() === question.getType()) return true;
+    //in case of overriding property
+    if (index > 1 && !prevElement.startWithNewLine && prevPrevElement["property"] === prevElement["property"] && prevPrevElement.getType() === question.getType()) return true;
+    return false;
+  }
+  onUpdateQuestionCssClasses(obj: Base, options: any) {
+    if (!this.isSupportGrouping()) return;
+    if(this.hasPreviousElementForGrouping(options.question)) {
+      options.cssClasses.mainRoot += " spg-row-narrow__question";
+    }
   }
 }
 

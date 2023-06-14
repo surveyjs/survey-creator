@@ -1,0 +1,17 @@
+.spg-boolean-wrapper--overriding.spg-boolean-wrapper--overriding {
+  min-width: 0;
+  flex: 0 0 max-content;
+}
+.spg-link-wrapper--overriding {
+  align-self: end;
+  .svc-action-button {
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    margin: 0;
+    &:focus,
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

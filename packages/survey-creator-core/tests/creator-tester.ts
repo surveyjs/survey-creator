@@ -3,6 +3,9 @@ import { CreatorBase, isStringEditable } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
+import { QuestionLinkValueModel } from "../src/components/link-value";
+
+const dummyQuestion = new QuestionLinkValueModel("q1");
 
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {

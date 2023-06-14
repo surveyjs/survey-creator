@@ -517,3 +517,28 @@ test("Check dropdown editor with titleLocation: 'left'", async (t) => {
   });
 });
 
+test("Check overriding property editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1"
+            },
+            {
+              "type": "text",
+              "name": "question2",
+              "visibleIf": "{question1} = true"
+            }
+          ]
+        }
+      ]
+    });
+    await t.resizeWindow(1920, 1920);
+    await t.click("div[data-sv-drop-target-survey-element='question2']");
+    await takeElementScreenshot("overriding-property-editor.png", Selector(".spg-row--multiple"), t, comparer);
+  });
+});
