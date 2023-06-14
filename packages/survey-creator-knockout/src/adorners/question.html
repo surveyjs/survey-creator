@@ -21,16 +21,16 @@
     <!-- /ko -->
     <!-- /ko -->
     <!-- /ko -->
-    <!-- ko if: isUsingCarryForward -->
-    <!-- ko component: { name: 'svc-question-carryforward', params: $data } -->
-    <!-- /ko -->
-    <!-- /ko -->
 
     <!-- ko if: adornerComponent -->
     <!-- ko component: { name: adornerComponent, params: { model: $data } } -->
     <!-- /ko -->
     <!-- /ko -->
 
+    <!-- ko if: isUsingCarryForward -->
+    <!-- ko component: { name: 'svc-question-carryforward', params: $data } -->
+    <!-- /ko -->
+    <!-- /ko -->
     <div class="svc-question__content-actions">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
