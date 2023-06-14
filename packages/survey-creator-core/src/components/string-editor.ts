@@ -406,7 +406,7 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && (this.editAsText || !event.shiftKey)) {
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});

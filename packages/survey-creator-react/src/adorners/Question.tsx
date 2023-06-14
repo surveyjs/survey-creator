@@ -66,7 +66,7 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
-    if (!allowInteractions) return <>{ content }{this.renderFooter()}</>;
+    if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
       <div
         className={"svc-question__content " + this.model.css()}
@@ -84,11 +84,16 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected renderFooter(): JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model });
   }
+  protected renderCarryForwardBanner(): JSX.Element {
+    if (!this.model.isUsingCarryForward) return null;
+    return ReactElementFactory.Instance.createElement("svc-question-carryforward", this.model.createCarryForwardParams());
+  }
   protected renderElementContent(): JSX.Element {
     return (
       <>
         {this.props.element}
         {this.renderElementPlaceholder()}
+        {this.renderCarryForwardBanner()}
       </>
     );
   }

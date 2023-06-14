@@ -1,5 +1,5 @@
 @import "../variables.scss";
-
+@import "./carry-forward-panel.scss";
 svc-question {
   display: block;
   position: absolute;
@@ -47,10 +47,6 @@ svc-question {
 }
 
 .svc-question__content {
-  .sd-element__header .sd-description {
-    margin-top: 0;
-  }
-
   .sd-selectbase:not(.sd-imagepicker) {
     overflow-x: auto;
     padding-left: calcSize(5);
