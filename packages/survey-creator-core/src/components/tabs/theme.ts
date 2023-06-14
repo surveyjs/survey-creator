@@ -98,6 +98,18 @@ export class ThemeSurveyTabViewModel extends Base {
     return this.surveyProvider.theme;
   }
 
+  public applySelectedTheme() {
+    const newTheme = {};
+    assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
+    if (this.survey["isCompact"]) {
+      assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
+    }
+
+    this.themeEditorSurvey.mergeData(newTheme);
+    this.surveyProvider.theme.cssVariables = newTheme;
+    this.setThemeToSurvey();
+  }
+
   constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
@@ -410,15 +422,7 @@ export class ThemeSurveyTabViewModel extends Base {
           this.surveyProvider.theme["themeName"] = this.themeName;
           this.surveyProvider.theme["themePalette"] = this.themePalette;
         }
-        const newTheme = {};
-        assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
-        if (this.survey["isCompact"]) {
-          assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
-        }
-
-        themeEditorSurvey.mergeData(newTheme);
-        this.surveyProvider.theme.cssVariables = newTheme;
-        this.setThemeToSurvey();
+        this.applySelectedTheme();
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {

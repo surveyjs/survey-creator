@@ -14,6 +14,7 @@ export class TabThemePlugin implements ICreatorPlugin {
   private designerAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
+  private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
   private inputFileElement: HTMLInputElement;
@@ -61,6 +62,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.resetTheme.visible = true;
     this.importAction.visible = true;
     this.exportAction.visible = true;
   }
@@ -92,6 +94,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     }
     this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
+    this.resetTheme.visible = false;
     this.importAction.visible = false;
     this.exportAction.visible = false;
     this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
@@ -188,6 +191,19 @@ export class TabThemePlugin implements ICreatorPlugin {
       iconName: "icon-arrow-right_16x16",
       visible: false
     });
+
+    this.resetTheme = new Action({
+      id: "resetTheme",
+      iconName: "icon-reset",
+      mode: "small",
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        return (this.creator.activeTab === "theme");
+      }),
+      action: () => {
+        this.model.applySelectedTheme();
+      }
+    });
+    items.push(this.resetTheme);
 
     this.importAction = new Action({
       id: "svc-theme-import",
