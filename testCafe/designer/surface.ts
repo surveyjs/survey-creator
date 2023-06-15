@@ -4,7 +4,7 @@ const title = "Designer surface";
 
 fixture`${title}`.page`${url}`;
 
-test.only("Image question", async (t) => {
+test("Image question", async (t) => {
   const json = {
     "pages": [
       {
