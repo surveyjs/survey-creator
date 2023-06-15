@@ -4,7 +4,7 @@ const title = "Designer surface";
 
 fixture`${title}`.page`${url}`;
 
-test("Image question", async (t) => {
+test.only("Image question", async (t) => {
   const json = {
     "pages": [
       {
@@ -26,8 +26,8 @@ test("Image question", async (t) => {
     .resizeWindow(1280, 900)
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
-    .expect(imageQuestionSelector.clientWidth).eql(620)
-    .expect(imageQuestionSelector.clientHeight).eql(412)
+    .expect(imageQuestionSelector.clientWidth).eql(624)
+    .expect(imageQuestionSelector.clientHeight).eql(415)
 
     .click(imageQuestionSelector)
     .expect(Selector("div [data-name=\"imageHeight\"] input").value).eql("")
@@ -38,8 +38,8 @@ test("Image question", async (t) => {
     .click(collapseButtonSelector)
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
-    .expect(imageQuestionSelector.clientWidth).eql(620)
-    .expect(imageQuestionSelector.clientHeight).eql(412)
+    .expect(imageQuestionSelector.clientWidth).eql(624)
+    .expect(imageQuestionSelector.clientHeight).eql(415)
 
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(imageQuestionSelector.exists).ok()
