@@ -98,11 +98,14 @@ export class ThemeSurveyTabViewModel extends Base {
     return this.surveyProvider.theme;
   }
 
-  public applySelectedTheme() {
+  public applySelectedTheme(saveChanges = false) {
     const newTheme = {};
     assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
     if (this.survey["isCompact"]) {
       assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
+    }
+    if(saveChanges) {
+      assign(newTheme, this.themeChanges);
     }
 
     this.themeEditorSurvey.mergeData(newTheme);
@@ -422,7 +425,7 @@ export class ThemeSurveyTabViewModel extends Base {
           this.surveyProvider.theme["themeName"] = this.themeName;
           this.surveyProvider.theme["themePalette"] = this.themePalette;
         }
-        this.applySelectedTheme();
+        this.applySelectedTheme(options.name === "themeMode");
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {

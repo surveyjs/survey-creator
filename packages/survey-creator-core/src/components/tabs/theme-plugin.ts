@@ -52,8 +52,8 @@ export class TabThemePlugin implements ICreatorPlugin {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
     this.simulatorTheme = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
-    this.sidebarTab = this.creator.sidebar.addTab("preview");
-    this.sidebarTab.caption = editorLocalization.getString("ed.previewPropertyGridTitle");
+    this.sidebarTab = this.creator.sidebar.addTab("theme");
+    this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
   }
   public activate(): void {
     this.model = new ThemeSurveyTabViewModel(this.creator, this.simulatorTheme);
