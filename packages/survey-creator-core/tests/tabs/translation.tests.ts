@@ -1580,3 +1580,30 @@ test("Make add language button disabled if there are no options", () => {
   translation.reset();
   expect(translation.locales).toHaveLength(1);
 });
+test("choices with 0 value", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "question1",
+        "choices": [{ "value": 0, text: "Item 1" }, { "value": 1, text: "Item 2" }]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(1);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(2);
+  const choicesPanel = <PanelModel>question1.elements[1];
+  const choicesProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
+  expect(choicesProps.name).toEqual("question1_choices0");
+  expect(choicesProps.visibleRows).toHaveLength(1);
+  const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
+  expect(cellQuestion1.placeholder).toEqual("Item 1");
+  expect(cellQuestion1.value).toEqual("Item 1");
+});
