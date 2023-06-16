@@ -2010,7 +2010,10 @@ export class CreatorBase extends Base
     }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
-      (<any>survey).locale = editorLocalization.currentLocale;
+      survey.locale = editorLocalization.currentLocale;
+      if(!json["clearInvisibleValues"]) {
+        survey.clearInvisibleValues = "onComplete";
+      }
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;

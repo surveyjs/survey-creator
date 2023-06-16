@@ -1,9 +1,10 @@
-import { SurveyModel, settings as surveySettings } from "survey-core";
+import { SurveyModel, settings as surveySettings, Serializer } from "survey-core";
 import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { settings as creatorSetting, settings } from "../src/creator-settings";
 import { CreatorTester } from "./creator-tester";
 import { UndoRedoController } from "../src/plugins/undo-redo/undo-redo-controller";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
+import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 
 surveySettings.supportCreatorV2 = true;
 creatorSetting.defaultNewSurveyJSON = {};
@@ -127,4 +128,22 @@ test("setting empty JSON into creator do not update undo/redo survey and onModif
   creator.JSON = {};
   creator.survey.title = "title2";
   expect(counter).toEqual(2);
+});
+
+test("Change clearInvisibleValues  default value, bug#4229", (): any => {
+  const prop = Serializer.findProperty("survey", "clearInvisibleValues");
+  const oldDefaultValue = prop.defaultValue;
+  prop.defaultValue = "onHidden";
+  const creator = new CreatorTester();
+  creator.JSON = {};
+  expect(creator.survey.clearInvisibleValues).toBe("onHidden");
+  expect(creator.propertyGrid.clearInvisibleValues).toBe("onComplete");
+  creator.activeTab = "test";
+  const testPlugin = <TabTestPlugin>(creator.getPlugin("test"));
+  expect(testPlugin.model.survey.clearInvisibleValues).toBe("onHidden");
+  const survey1 = creator.createSurvey({ clearInvisibleValues: "none" }, "dummy");
+  expect(survey1.clearInvisibleValues).toBe("none");
+  prop.defaultValue = oldDefaultValue;
+  const survey2 = creator.createSurvey({ clearInvisibleValues: "onHidden" }, "dummy");
+  expect(survey2.clearInvisibleValues).toBe("onHidden");
 });

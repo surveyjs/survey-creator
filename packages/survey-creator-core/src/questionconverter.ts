@@ -48,6 +48,7 @@ export class QuestionConverter {
     }
     QuestionConverter.updateJSON(json, convertToClass, obj.getType(), defaultJSON);
     newQuestion.fromJSON(json);
+    QuestionConverter.removeValidators(newQuestion);
     var panel = <PanelModelBase>obj.parent;
     var index = panel.elements.indexOf(obj);
     (<any>panel).isConverting = true;
@@ -127,6 +128,17 @@ export class QuestionConverter {
        json.templateElements) {
       json.elements = json.templateElements;
       delete json.templateElements;
+    }
+  }
+  private static removeValidators(question: Question): void {
+    const validators = question.validators;
+    if(!Array.isArray(validators) || validators.length === 0) return;
+    const supported = question.getSupportedValidators();
+    for(var i = validators.length - 1; i >= 0; i --) {
+      const valType = validators[i].getType().replace("validator", "");
+      if(supported.indexOf(valType) < 0) {
+        validators.splice(i, 1);
+      }
     }
   }
 }
