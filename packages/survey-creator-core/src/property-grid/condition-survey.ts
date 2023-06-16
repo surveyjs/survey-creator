@@ -809,17 +809,32 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       path = path.substring(1);
     }
     const json = question && question.getConditionJson ? question.getConditionJson(operator, path) : null;
-    if (!!json && json.type == "expression") {
+    if(!json) return null;
+    if(!!json.choicesFromQuestion) {
+      this.updateChoicesFromQuestion(json);
+    }
+    if (json.type == "expression") {
       json.type = "text";
     }
-    if (!!json && operator == "anyof") {
+    if (operator == "anyof") {
       if (!ConditionEditor.isClassContains(json.type, ["checkbox"], [])) {
         json.type = "checkbox";
       }
     }
-    return !!json ? json : null;
+    return json;
   }
-  private
+  private updateChoicesFromQuestion(json: any): void {
+    const question = this.getConditionQuestion(json.choicesFromQuestion);
+    if(!question) return;
+    delete json.choicesFromQuestion;
+    const questionJSON = question.toJSON();
+    if(!!questionJSON.choices) {
+      json.choices = questionJSON.choices;
+    }
+    if(!!questionJSON.choicesByUrl) {
+      json.choicesByUrl = questionJSON.choicesByUrl;
+    }
+  }
   private updateOperatorEnables(panel: PanelModel) {
     const questionName = panel.getQuestionByName("questionName");
     if (!questionName) return;
