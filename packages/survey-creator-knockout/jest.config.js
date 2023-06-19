@@ -16,7 +16,8 @@ module.exports = {
     "\\.(jpg|png)$": "<rootDir>/tests/empty-module.js",
     "survey-core": "<rootDir>/node_modules/survey-core",
     "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
-    "survey-knockout-ui": "<rootDir>/node_modules/survey-knockout-ui"
+    "survey-knockout-ui": "<rootDir>/node_modules/survey-knockout-ui",
+    "tslib": "<rootDir>/node_modules/tslib",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

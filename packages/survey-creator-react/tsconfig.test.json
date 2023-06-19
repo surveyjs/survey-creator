@@ -3,6 +3,15 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "survey-core": [
+        "./node_modules/survey-core"
+      ],
+      "survey-creator-core": [
+        "./node_modules/survey-creator-core"
+      ],
+      "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+    }
   }
 }
