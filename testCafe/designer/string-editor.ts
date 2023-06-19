@@ -619,15 +619,15 @@ test("Focus switch on select base", async (t) => {
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 3").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 4").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 4").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("ctrl+enter")
-    .expect(Selector(".sv-string-editor").withText("Item 5").visible).notOk();
+    .expect(Selector(".sv-string-editor").withText("Item 5").withAttribute("contenteditable", "true").visible).notOk();
 });
 
 test("Disable edit inactive items", async (t) => {

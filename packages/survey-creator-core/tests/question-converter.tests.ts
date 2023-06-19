@@ -344,12 +344,12 @@ test("Convert panel to panel dynamic and back", () => {
     ]
   });
   const panel1 = <PanelModel>survey.getPanelByName("panel");
-  const q1 = <QuestionPanelDynamicModel>QuestionConverter.convertObject(panel1, "paneldynamic");
+  const q1 = <QuestionPanelDynamicModel>QuestionConverter.convertObject(<any>panel1, "paneldynamic");
   expect(q1.getType()).toEqual("paneldynamic");
   expect(q1.title).toEqual("Panel");
   expect(q1.templateElements).toHaveLength(2);
   expect(q1.templateElements[1].name).toEqual("q2");
-  const panel2 = <PanelModel>QuestionConverter.convertObject(q1, "panel");
+  const panel2 = <PanelModel><any>QuestionConverter.convertObject(q1, "panel");
   expect(panel2.getType()).toEqual("panel");
   expect(panel2.title).toEqual("Panel");
   expect(panel2.elements).toHaveLength(2);
@@ -382,4 +382,37 @@ test("Convert text to custom widget barrating", () => {
   Serializer.removeClass(barType);
   ElementFactory.Instance.unregisterElement(barType);
   CustomWidgetCollection.Instance.clear();
+});
+test("Remove incorrect validators, Bug#4228", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1",
+        validators: [
+          { type: "numeric", minValue: 10 },
+          { type: "text", maxLength: 20 },
+        ]
+      },
+      { type: "checkbox", name: "q2",
+        validators: [
+          { type: "answercount", minCount: 3 }
+        ]
+      }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  expect(q1.validators).toHaveLength(2);
+  expect(q2.validators).toHaveLength(1);
+
+  const q1_1 = QuestionConverter.convertObject(q1, "comment");
+  expect(q1_1.validators).toHaveLength(1);
+  expect((<any>q1_1.validators[0]).maxLength).toBe(20);
+  const q1_2 = QuestionConverter.convertObject(q1_1, "dropdown");
+  expect(q1_2.validators).toHaveLength(0);
+
+  const q2_1 = QuestionConverter.convertObject(q2, "tagbox");
+  expect(q2_1.validators).toHaveLength(1);
+  expect((<any>q2_1.validators[0]).minCount).toBe(3);
+  const q2_2 = QuestionConverter.convertObject(q2_1, "dropdown");
+  expect(q2_2.validators).toHaveLength(0);
 });
