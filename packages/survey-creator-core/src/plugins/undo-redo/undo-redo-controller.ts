@@ -64,9 +64,9 @@ export class UndoRedoController extends Base {
       };
     }
     this.undoRedoManager = new UndoRedoManager();
-    this.undoRedoManager.changesFinishedCallback = (changes: UndoRedoAction[], isUndo: boolean) => {
-      for(let i = changes.length - 1; i >= 0; i--) {
-        const action = changes[i];
+    this.undoRedoManager.changesFinishedCallback = (actions: UndoRedoAction[], isUndo: boolean) => {
+      for(let i = actions.length - 1; i >= 0; i--) {
+        const action = actions[i];
         if(!!action) {
           const changes = action.getChanges(isUndo);
           this.creator.notifySurveyPropertyChanged({

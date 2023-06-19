@@ -54,6 +54,7 @@ import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrice
 import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
+import { UndoRedoAction } from "../src/plugins/undo-redo/undo-redo-manager";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -3816,11 +3817,22 @@ test("Undo/redo question removed from last page", (): any => {
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
 
+  let lastActions: UndoRedoAction[] = [];
+  const prevCallback = creator.undoRedoManager.changesFinishedCallback;
+  creator.undoRedoManager.changesFinishedCallback = (actions: UndoRedoAction[], isUndo: boolean) => {
+    lastActions = actions;
+    prevCallback(actions, isUndo);
+  };
+
   creator.deleteElement(creator.survey.getQuestionByName("question2"));
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
   expect(creator.survey.pages).toHaveLength(1);
   expect(creator.undoRedoManager.canUndo()).toBeTruthy();
   expect(creator.undoRedoManager.canRedo()).toBeFalsy();
+
+  expect(lastActions.length).toBe(2);
+  expect(lastActions[0].getChanges().propertyName).toBe("elements");
+  expect(lastActions[1].getChanges().propertyName).toBe("pages");
 
   creator.undo();
   expect(creator.survey.getAllQuestions()).toHaveLength(2);
