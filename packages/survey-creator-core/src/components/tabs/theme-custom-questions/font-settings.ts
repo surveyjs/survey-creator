@@ -22,9 +22,9 @@ ComponentCollection.Instance.add({
       descriptionLocation: "hidden",
       choices: [
         { value: "400", text: getLocString("theme.fontWeightRegular") },
-        { value: "500", text: getLocString("theme.fontWeightHeavy") },
-        { value: "600", text: getLocString("theme.fontWeightSemiBold") },
-        { value: "700", text: getLocString("theme.fontWeightBold") },
+        { value: "500", text: getLocString("theme.fontWeightSemiBold") },
+        { value: "600", text: getLocString("theme.fontWeightBold") },
+        { value: "700", text: getLocString("theme.fontWeightHeavy") },
       ],
       defaultValue: "400"
     },
