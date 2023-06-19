@@ -1,6 +1,6 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, property, SurveyModel } from "survey-core";
 import { CreatorBase, CreatorEvent } from "../../creator-base";
-import { IUndoRedoChange, UndoRedoManager } from "./undo-redo-manager";
+import { IUndoRedoChange, UndoRedoAction, UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoController extends Base {
   private undoAction: Action;
@@ -64,15 +64,19 @@ export class UndoRedoController extends Base {
       };
     }
     this.undoRedoManager = new UndoRedoManager();
-    this.undoRedoManager.changesFinishedCallback = (
-      changes: IUndoRedoChange
-    ) => {
-      this.creator.notifySurveyPropertyChanged({
-        name: changes.propertyName,
-        target: changes.object,
-        oldValue: changes.oldValue,
-        newValue: changes.newValue
-      });
+    this.undoRedoManager.changesFinishedCallback = (changes: UndoRedoAction[], isUndo: boolean) => {
+      for(let i = changes.length - 1; i >= 0; i--) {
+        const action = changes[i];
+        if(!!action) {
+          const changes = action.getChanges(isUndo);
+          this.creator.notifySurveyPropertyChanged({
+            name: changes.propertyName,
+            target: changes.object,
+            oldValue: changes.oldValue,
+            newValue: changes.newValue
+          });
+        }
+      }
     };
     this.undoRedoManager.canUndoRedoCallback = () => {
       this.updateUndeRedoActions();
