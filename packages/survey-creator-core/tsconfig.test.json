@@ -1,7 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "survey-creator-core": [
+        "./src/editorLocalization.ts"
+      ],
+      "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+    }
   },
   "exclude": [
     "src/entries/**/*.ts"
