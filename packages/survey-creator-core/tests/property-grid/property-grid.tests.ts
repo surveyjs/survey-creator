@@ -3210,3 +3210,16 @@ test("editor base check for unique property value and correct error in another e
   column1Name.value = "column5";
   expect(column2Name.errors).toHaveLength(0);
 });
+test("Required name property for page", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" }
+    ],
+  });
+  const options = new EmptySurveyCreatorOptions();
+  const generator = new PropertyJSONGenerator(survey.pages[0], options);
+  let panel = new PanelModel("panel");
+  generator.setupObjPanel(panel);
+  let question = panel.getQuestionByName("name");
+  expect(question.isRequired).toBeTruthy();
+});

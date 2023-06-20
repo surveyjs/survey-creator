@@ -317,6 +317,66 @@ test("Theme builder: composite question elementSettings", (): any => {
   expect(currentTheme.cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
 });
 
+test("Theme builder reset to default", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const currentTheme = themeSurveyTab.currentTheme;
+  const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+
+  expect(questionBackgroundTransparency.value).toEqual(100);
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+
+  questionBackgroundTransparency.value = 60;
+  themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+
+  themeSurveyTab.applySelectedTheme();
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+});
+
+test("Theme builder themeMode not change modified values ", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    questions: [
+      {
+        type: "text",
+        name: "q1",
+        title: { default: "1", de: "2", ff: "3" }
+      }
+    ]
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const currentTheme = themeSurveyTab.currentTheme;
+  const themeMode = themeEditor.getQuestionByName("themeMode");
+  const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+
+  expect(questionBackgroundTransparency.value).toEqual(100);
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+
+  questionBackgroundTransparency.value = 60;
+  themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(themeMode.value).toEqual("panels");
+
+  themeMode.value = "lightweight";
+  expect(currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+});
+
 test("Check createBoxShadow and parseBoxShadow functions", () => {
   let boxShadow = "1px 2px 3px 24px #673241";
   let parsedBoxShadow = parseBoxShadow(boxShadow);
