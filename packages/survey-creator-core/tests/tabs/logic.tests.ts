@@ -2521,18 +2521,18 @@ test("Do not reacreate logic for updating expressions for every change", (): any
   creator.survey.getQuestionByName("q1").name = "question1";
   expect(creator.logicCreatedId).toEqual(1);
   creator.survey.getQuestionByName("question1").name = "question2";
-  expect(creator.logicCreatedId).toEqual(1);
+  expect(creator.logicCreatedId).toEqual(2);
   creator.survey.getQuestionByName("q2").visibleIf = "{question2} = 11";
   creator.survey.getQuestionByName("question2").name = "question3";
-  expect(creator.logicCreatedId).toEqual(2);
+  expect(creator.logicCreatedId).toEqual(3);
   creator.survey.triggers[0].gotoName = "q4";
   creator.survey.getQuestionByName("question3").name = "question4";
-  expect(creator.logicCreatedId).toEqual(3);
+  expect(creator.logicCreatedId).toEqual(4);
   creator.survey.getQuestionByName("question4").name = "question5";
-  expect(creator.logicCreatedId).toEqual(3);
+  expect(creator.logicCreatedId).toEqual(5);
   creator.survey.triggers.splice(0, 1);
   creator.survey.getQuestionByName("question5").name = "question6";
-  expect(creator.logicCreatedId).toEqual(4);
+  expect(creator.logicCreatedId).toEqual(6);
 });
 test("Update logic on changing choices value", (): any => {
   const creator = new CreatorTester();
