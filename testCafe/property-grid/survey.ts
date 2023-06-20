@@ -125,3 +125,32 @@ test("Merge undo/redo transcactioins for text", async (t) => {
     .click(undoAction)
     .expect(getQuestionTitle()).eql("title2");
 });
+
+test("Check ctrl+z undo/redo", async (t) => {
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  const question = Selector("[data-name=\"q1\"]");
+  const titleEditor = Selector("[data-name='title']").find("textarea");
+  const getQuestionTitle = ClientFunction(() => {
+    return window["creator"].survey.getQuestionByName("q1").title;
+  });
+  await setJSON(json);
+  await t
+    .click(question)
+    .click(titleEditor)
+    .pressKey("ctrl+a")
+    .typeText(titleEditor, "1234")
+    .wait(1000)
+    .pressKey("ctrl+a")
+    .pressKey("backspace")
+    .wait(1000)
+    .pressKey("ctrl+z")
+    .expect(getQuestionTitle()).eql("1234");
+});
