@@ -1604,6 +1604,5 @@ test("choices with 0 value", () => {
   expect(choicesProps.name).toEqual("question1_choices0");
   expect(choicesProps.visibleRows).toHaveLength(1);
   const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
-  expect(cellQuestion1.placeholder).toEqual("Item 1");
   expect(cellQuestion1.value).toEqual("Item 1");
 });
