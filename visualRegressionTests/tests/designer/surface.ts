@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText } from "../../helper";
 
 const title = "Designer surface";
 
@@ -223,6 +223,25 @@ test("Choices (Checkbox): Layout", async (t) => {
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-checkbox-layout.png", QRoot, t, comparer);
+  });
+});
+
+test("Choices (Tagbox): Layout", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1280, 900)
+      .hover(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Data"))
+      .click(Selector("span").withExactText("Set Default Answer"))
+      .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
+      .click(getListItemByText("Item 2"))
+      .click(getListItemByText("Item 3"))
+      .click(Selector(".sv-popup--modal button").withExactText("Apply"));
+
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
   });
 });
 
