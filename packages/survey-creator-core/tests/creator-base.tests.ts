@@ -3839,4 +3839,6 @@ test("Undo/redo question removed from last page", (): any => {
   expect(creator.survey.pages).toHaveLength(2);
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
+
+  creator.undoRedoManager.changesFinishedCallback = prevCallback;
 });
