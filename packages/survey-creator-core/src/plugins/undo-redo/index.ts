@@ -4,7 +4,7 @@ import { UndoRedoController } from "./undo-redo-controller";
 import { UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoPlugin implements ICreatorPlugin {
-
+  public model: UndoRedoController;
   constructor(private creator: CreatorBase) {
     this.model = new UndoRedoController(creator);
     this.model.createActions().forEach(action => creator.toolbar.actions.push(action));

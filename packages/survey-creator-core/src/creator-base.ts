@@ -81,7 +81,6 @@ export interface ICreatorPlugin {
   canDeactivateAsync?: (onSuccess: () => void) => void;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
-  model?: any;
 }
 //Obsolete
 export class CreatorAction extends Action {
@@ -1223,7 +1222,7 @@ export class CreatorBase extends Base
     if (!this.canSwitchViewType()) return false;
     const plugin = this.activatePlugin(viewName);
     this.viewType = viewName;
-    this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin, model: !!plugin ? plugin.model : undefined });
+    this.onActiveTabChanged.fire(this, { tabName: viewName, plugin: plugin });
     return true;
   }
   private canSwitchViewType(): boolean {
