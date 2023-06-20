@@ -17,6 +17,7 @@ module.exports = {
     "survey-core": "<rootDir>/node_modules/survey-core",
     "survey-creator-core": "<rootDir>/node_modules/survey-creator-core",
     "survey-react-ui": "<rootDir>/node_modules/survey-react-ui",
+    "tslib": "<rootDir>/node_modules/tslib",
   },
   testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
