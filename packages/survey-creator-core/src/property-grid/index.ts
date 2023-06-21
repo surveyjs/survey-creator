@@ -17,7 +17,8 @@ import {
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
-  surveyLocalization
+  surveyLocalization,
+  QuestionTextBase
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -1305,6 +1306,9 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
       json.maxLength = prop.maxLength;
     }
     return json;
+  }
+  public onCreated(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    question.disableNativeUndoRedo = true;
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
