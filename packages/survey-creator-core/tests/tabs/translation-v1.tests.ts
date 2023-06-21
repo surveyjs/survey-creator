@@ -26,7 +26,7 @@ test("Text question localization properties", () => {
   const group: TranslationGroup = new TranslationGroup(question.name, question);
   expect(group.items.length >= 4).toBeTruthy();
 });
-test("Text question choices localization", () => {
+test("Test question choices localization", () => {
   const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
   question.choices = ["item1", { value: "item2", text: "text 2" }];
   const group: TranslationGroup = new TranslationGroup(question.name, question);
@@ -42,6 +42,23 @@ test("Text question choices localization", () => {
   expect(choices.items[0].name).toEqual("item1");
   expect(choices.items[1].name).toEqual("item2");
 });
+test("Question choices localization with value=0", () => {
+  const question: QuestionCheckboxModel = new QuestionCheckboxModel("q1");
+  question.choices = [{ value: 0, text: "text 1" }, { value: 1, text: "text 2" }];
+  const group: TranslationGroup = new TranslationGroup(question.name, question);
+  let choices: TranslationGroup = null;
+  for (let i = 0; i < group.groups.length; i++) {
+    if (group.groups[i].name == "choices") {
+      choices = group.groups[i];
+      break;
+    }
+  }
+  expect(choices).toBeTruthy();
+  expect(choices.items).toHaveLength(2);
+  expect(choices.items[0].name).toEqual(0);
+  expect(choices.items[1].name).toEqual(1);
+});
+
 test("Survey child groups", () => {
   const survey: SurveyModel = new SurveyModel();
   const translation: Translation = new Translation(survey);
