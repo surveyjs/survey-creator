@@ -415,6 +415,27 @@ test("Show invisible choices and make all choices enabled, Bug: https://surveyjs
   var valueQuestion = panel.getQuestionByName("questionValue");
   expect(valueQuestion.visibleChoices).toHaveLength(2);
 });
+test("Show choices from carry-forward, bug#4243", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "checkbox", name: "q1", choices: [10, 20, 30] },
+      { type: "dropdown", name: "q2", choicesFromQuestion: "q1", choicesFromQuestionMode: "selected" },
+      { type: "text", name: "q3" },
+    ]
+  });
+  const question = survey.getQuestionByName("q3");
+
+  var editor = new ConditionEditor(survey, question);
+  expect(editor.allConditionQuestions).toHaveLength(2);
+  expect(editor.allConditionQuestions[1].value).toEqual("q2");
+
+  var panel = editor.panel.panels[0];
+  panel.getQuestionByName("questionName").value = "q2";
+  var valueQuestion = panel.getQuestionByName("questionValue");
+  expect(valueQuestion.visibleChoices).toHaveLength(3);
+  expect(valueQuestion.visibleChoices[0].value).toBe(10);
+  expect(valueQuestion.visibleChoices[2].value).toBe(30);
+});
 test("Error in value input, Bug# T2598 (customer marked it private)", () => {
   var survey = new SurveyModel({
     elements: [

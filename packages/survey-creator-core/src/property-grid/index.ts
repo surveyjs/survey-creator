@@ -17,7 +17,8 @@ import {
   QuestionDropdownModel,
   QuestionSelectBase,
   PopupBaseViewModel,
-  surveyLocalization
+  surveyLocalization,
+  QuestionTextBase
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -662,6 +663,11 @@ export class PropertyJSONGenerator {
     json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     json.title = this.getQuestionTitle(prop, title);
 
+    if (["page", "panelbase"].indexOf(prop.className) && json.name === "name") {
+      json.isRequired = true;
+      json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
+    }
+
     const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
     if (typeof propDescr === "object" && propDescr.placeholder) {
       json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
@@ -1300,6 +1306,9 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
       json.maxLength = prop.maxLength;
     }
     return json;
+  }
+  public onCreated(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    question.disableNativeUndoRedo = true;
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {

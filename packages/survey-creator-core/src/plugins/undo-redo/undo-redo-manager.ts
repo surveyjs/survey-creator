@@ -90,9 +90,10 @@ export class UndoRedoManager {
     return nextTransaction;
   }
   private notifyChangesFinished(transaction: Transaction, isUndo: boolean = false) {
-    if (transaction.actions.length > 0 && transaction.actions[0]) {
+    if (transaction.actions.length > 0) {
       !!this.changesFinishedCallback &&
-        this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
+        this.changesFinishedCallback(transaction.actions, isUndo);
+      // this.changesFinishedCallback(transaction.actions[0].getChanges(isUndo));
     }
   }
   canUndoRedoCallback() { }
@@ -157,7 +158,7 @@ export class UndoRedoManager {
   resume() {
     this._ignoreChanges = false;
   }
-  public changesFinishedCallback: (changes: IUndoRedoChange) => void;
+  public changesFinishedCallback: (changes: UndoRedoAction[], isUndo: boolean) => void;
 }
 
 export class Transaction {

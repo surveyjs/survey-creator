@@ -204,7 +204,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     });
     let availableThemesToItems = this.getAvailableThemes(themeMapper);
 
-    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1) {
+    if (this.creator.allowChangeThemeInPreview && availableThemesToItems.length > 1 && !this.creator.showThemeTab) {
       this.changeThemeModel = new ListModel(
         availableThemesToItems,
         (item: any) => {

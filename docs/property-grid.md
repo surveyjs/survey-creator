@@ -417,7 +417,7 @@ Survey.Serializer.addProperty("survey", {
 
 #### `overridingProperty`
 
-The name of a property that, when set, overrides the current property.
+The name of a property that overrides the current property.
 
 ```js
 Survey.Serializer.addProperty("question", 
