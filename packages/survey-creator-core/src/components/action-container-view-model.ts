@@ -12,6 +12,7 @@ import { settings } from "../creator-settings";
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
   public actionContainer: AdaptiveActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
+  private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
@@ -65,22 +66,24 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     }
   }
 
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
   }
-  protected onElementSelectedChanged(isSelected: boolean) {
+  protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
     this.updateActionsProperties();
   }
-  protected updateActionsProperties() {
+  protected updateActionsProperties(): void {
+    if(this.isDisposed) return;
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()
     );
   }
-  protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
+  protected updateElementAllowOptions(options: any, operationsAllow: boolean): void {
     this.allowDragging = operationsAllow && options.allowDragging;
+    this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
     const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
@@ -149,7 +152,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     );
   }
   public get allowEdit(): boolean {
-    return !!this.creator && !this.creator.readOnly;
+    return !!this.creator && !this.creator.readOnly && this.allowEditOption;
   }
   public get showAddQuestionButton(): boolean {
     return this.getPropertyValue("showAddQuestionButton");

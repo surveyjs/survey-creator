@@ -348,6 +348,37 @@ test("QuestionImageAdornerViewModel read only mode", () => {
   expect(imageAdorner.allowEdit).toBeFalsy();
 });
 
+test("QuestionImageAdornerViewModel read only mode on events", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+
+  const imageAdorner = new QuestionImageAdornerViewModel(
+    creator,
+    question,
+    <any>{},
+    null
+  );
+
+  expect(imageAdorner.allowEdit).toBeTruthy();
+  expect(imageAdorner.filePresentationModel.renderedInputReadOnly).toBeFalsy();
+
+  creator.onElementAllowOperations.add((sender, options) => {
+    if (options.obj.name == "q1") options.allowEdit = false;
+  });
+
+  const imageAdornerRO = new QuestionImageAdornerViewModel(
+    creator,
+    question,
+    <any>{},
+    null
+  );
+  expect(imageAdornerRO.allowEdit).toBeFalsy();
+  expect(imageAdornerRO.filePresentationModel.isInputReadOnly).toBeTruthy();
+});
+
 test("QuestionImageAdornerViewModel acceptedTypes", () => {
   const creator = new CreatorTester();
   creator.JSON = {

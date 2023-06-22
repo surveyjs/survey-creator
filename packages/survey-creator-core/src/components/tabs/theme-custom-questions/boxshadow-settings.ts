@@ -6,10 +6,8 @@ ComponentCollection.Instance.add({
   showInToolbox: false,
   questionJSON: {
     "type": "paneldynamic",
-    "panelCount": 1,
-    //temp
-    "maxPanelCount": 1,
     "minPanelCount": 1,
+    "panelAddText": getLocString("theme.boxShadowAddRule"),
     "templateElements": [
       {
         "type": "spinedit",

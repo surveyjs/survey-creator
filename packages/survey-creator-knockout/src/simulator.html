@@ -1,5 +1,5 @@
 <div
-  data-bind="class: getRootCss(), event: { keydown: tryToZoom, mouseover: (device === 'desktop' ? null : activateZoom), mouseout: (device === 'desktop' ? null : deactivateZoom) }, style: themeVariables">
+  data-bind="class: getRootCss(), event: { keydown: tryToZoom, mouseover: (device === 'desktop' ? null : activateZoom), mouseout: (device === 'desktop' ? null : deactivateZoom) }">
   <!-- ko if: hasFrame -->
   <div class="svd-simulator-wrapper" id="svd-simulator-wrapper"
     data-bind="style: { width: simulatorFrame.frameWidth + 'px', height: simulatorFrame.frameHeight + 'px' }">

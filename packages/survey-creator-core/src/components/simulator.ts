@@ -44,7 +44,6 @@ export class SurveySimulatorModel extends Base {
   @property({ defaultValue: true }) isRunning: boolean;
   @property({ defaultValue: true }) simulatorEnabled: boolean;
   @property({ defaultValue: true }) simulatorScaleEnabled: boolean;
-  @property({ defaultValue: {} }) themeVariables: any;
 
   private currZoomScale: number;
   public get zoomScale(): number {

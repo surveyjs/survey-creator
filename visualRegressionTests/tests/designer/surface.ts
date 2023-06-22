@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText } from "../../helper";
 
 const title = "Designer surface";
 
@@ -223,6 +223,25 @@ test("Choices (Checkbox): Layout", async (t) => {
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-checkbox-layout.png", QRoot, t, comparer);
+  });
+});
+
+test("Choices (Tagbox): Layout", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t
+      .resizeWindow(1280, 900)
+      .hover(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getToolboxItemByText("Multi-Select Dropdown"), { speed: 0.5 })
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory("Data"))
+      .click(Selector("span").withExactText("Set Default Answer"))
+      .click(Selector(".sv-popup--modal .sd-dropdown__filter-string-input"))
+      .click(getListItemByText("Item 2"))
+      .click(getListItemByText("Item 3"))
+      .click(Selector(".sv-popup--modal button").withExactText("Apply"));
+
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
   });
 });
 
@@ -492,6 +511,7 @@ test("Panel multi-question row", async (t) => {
       destinationOffsetX: -80,
       speed: 0.5
     });
+    await resetHoverToCreator(t);
 
     await takeElementScreenshot("surface-panel-multi-row-question-selected.png", Selector(".svc-question__content"), t, comparer);
   });
@@ -1121,11 +1141,48 @@ test("Matrix dropdown popup edit ", async (t) => {
     await t.hover(".svc-matrix-cell .sd-dropdown");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
     await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await resetHoverToCreator(t);
     await takeElementScreenshot("matrix-dropdown-popup-select.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t.click(Selector("button").withText("Cancel"));
     await t.hover(".svc-matrix-cell .sd-rating");
     await t.expect(Selector(".svc-matrix-cell__question-controls-button").filterVisible().visible).ok();
     await t.click(Selector(".svc-matrix-cell__question-controls-button").filterVisible());
+    await resetHoverToCreator(t);
     await takeElementScreenshot("matrix-dropdown-popup-rating.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
+test("Check carry forward panel", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3"
+              ]
+            },
+            {
+              "type": "checkbox",
+              "name": "question2",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected"
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const rootSelector = Selector(".svc-question__adorner").nth(1);
+    await takeElementScreenshot("carry-forward-panel.png", rootSelector, t, comparer);
   });
 });

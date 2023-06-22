@@ -631,3 +631,25 @@ test("Default mobile orientation", (): any => {
   const model3: TestSurveyTabViewModel = testPlugin3.model;
   expect(model3.simulator.landscape).toBeTruthy();
 });
+
+test("Apply theme from theme builder", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.theme = <any>{
+    "cssVariables": {
+      "--sjs-general-backcolor": "#252525",
+      "--sjs-general-backcolor-dark": "#606060"
+    },
+    "themeName": "playful",
+    "themePalette": "dark",
+    "isCompact": true
+  };
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+
+  creator.makeNewViewActive("test");
+  expect(testPlugin["changeThemeAction"]).toBeUndefined();
+
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  expect(model.survey.themeVariables["--sjs-general-backcolor"]).toBe("#252525");
+  expect(model.survey["isCompact"]).toBeTruthy();
+});

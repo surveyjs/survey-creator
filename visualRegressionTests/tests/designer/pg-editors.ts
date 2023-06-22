@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -74,7 +74,7 @@ test("Properties on the same line (date)", async (t) => {
     const question1 = Selector("[data-name=\"question1\"]");
 
     await t
-      .click(question1)
+      .click(question1, { offsetX: 20, offsetY: 20 })
       .pressKey("enter")
       .click(getPropertyGridCategory(generalGroupName))
       .click(getPropertyGridCategory("Input"))
@@ -353,6 +353,7 @@ test("Check triggers question", async (t) => {
       .click(Selector("div[data-name='triggers'] .spg-action-button__icon[aria-label='Add New']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[aria-label='triggerType'] input").focus())();
+    await resetHoverToCreator(t);
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });
 });
@@ -403,6 +404,7 @@ test("Check color editor", async (t) => {
     await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
     await t.click(questionSelector.find(".spg-input__edit-button"));
+    await resetHoverToCreator(t);
     await takeElementScreenshot("color-editor-choices.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
     await t.click(questionSelector.find(".spg-input__edit-button"));
     await t.click(questionSelector.find(".spg-color-editor__input"));
@@ -516,3 +518,28 @@ test("Check dropdown editor with titleLocation: 'left'", async (t) => {
   });
 });
 
+test("Check overriding property editor", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "question1"
+            },
+            {
+              "type": "text",
+              "name": "question2",
+              "visibleIf": "{question1} = true"
+            }
+          ]
+        }
+      ]
+    });
+    await t.resizeWindow(1920, 1920);
+    await t.click("div[data-sv-drop-target-survey-element='question2']");
+    await takeElementScreenshot("overriding-property-editor.png", Selector(".spg-row--multiple"), t, comparer);
+  });
+});

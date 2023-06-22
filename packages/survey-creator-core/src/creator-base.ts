@@ -26,6 +26,7 @@ import {
   ILocalizableOwner,
   PopupBaseViewModel,
   EventBase,
+  ITheme,
   PanelModelBase
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
@@ -813,6 +814,8 @@ export class CreatorBase extends Base
    * - `sender` - the survey creator object that fires the event
    * - `options.files` - the Javascript File objects array
    * - `options.callback(status, imageLink)` - called on upload complete
+   * 
+   *  [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))   
    * @see uploadFiles
    */
   public onUploadFile: CreatorEvent = new CreatorEvent();
@@ -1018,6 +1021,7 @@ export class CreatorBase extends Base
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
+  public theme: ITheme = { cssVariables: {} };
 
   private _allowModifyPages = true;
   /**
@@ -1206,7 +1210,7 @@ export class CreatorBase extends Base
   public makeNewViewActive(viewName: string): boolean {
     if (viewName == this.viewType) return false;
     const plugin: ICreatorPlugin = this.currentPlugin;
-    if(!!plugin && !!plugin.canDeactivateAsync) {
+    if (!!plugin && !!plugin.canDeactivateAsync) {
       plugin.canDeactivateAsync(() => {
         this.switchViewType(viewName);
       });
@@ -2008,7 +2012,10 @@ export class CreatorBase extends Base
     }
     survey["needRenderIcons"] = false;
     if (reason != "designer" && reason != "test") {
-      (<any>survey).locale = editorLocalization.currentLocale;
+      survey.locale = editorLocalization.currentLocale;
+      if (!json["clearInvisibleValues"]) {
+        survey.clearInvisibleValues = "onComplete";
+      }
     }
     this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
     return survey;

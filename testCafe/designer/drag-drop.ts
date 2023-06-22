@@ -65,7 +65,7 @@ test.before(async t => {
   await t.expect(questionsLength).eql(2);
 });
 
-test.skip("Drag Drop Toolbox All Questions", async (t) => {
+test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
@@ -91,6 +91,16 @@ test.skip("Drag Drop Toolbox All Questions", async (t) => {
   const PanelDynamicItem = Selector("[aria-label='Dynamic Panel toolbox item']");
 
   await t.resizeWindow(2560, 2000);
+  await ClientFunction(() => {
+    const el: any = document.getElementById("survey-creator");
+    el.style.position = "relative";
+    el.style.bottom = undefined;
+    el.style.height = "10000px";
+    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    if (!!rootEl) {
+      rootEl.style.position = "relative";
+    }
+  })();
 
   let pagesLength;
 

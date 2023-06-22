@@ -314,7 +314,7 @@ test("Check item string editor focus out on near click", async (t) => {
   await t
     .click(svItemSelector)
     .expect(svItemSelector.focused).ok()
-    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200 })
+    .click(Selector(".svc-item-value-wrapper").withText("Item 1"), { offsetX: 200, offsetY: 50 })
     .expect(svItemSelector.focused).notOk();
 });
 
@@ -342,6 +342,33 @@ test("Check markdown events", async (t) => {
     .typeText(Selector(".sv-string-editor").withText("*abc*"), "d", { caretPos: 0 })
     .pressKey("enter")
     .expect(Selector(".sv-string-editor").withText("d$abc$").visible).ok();
+});
+
+test("Check markdown shift-enter", async (t) => {
+  await ClientFunction(() => {
+    window["creator"].onSurveyInstanceCreated.add((sender, options) => {
+      options.survey.onTextMarkdown.add((survey, options) => options.html = options.text);
+      window["creator"].onHtmlToMarkdown.add((survey, options) => options.text = options.html);
+    });
+  })();
+
+  await setJSON({
+    "description": "abc",
+    "elements": [
+      {
+        "type": "text",
+        "name": "question1"
+      }
+    ]
+  });
+
+  await t
+    .click(Selector(".sv-string-editor").withText("abc"))
+    .typeText(Selector(".sv-string-editor").withText("abc"), "d", { caretPos: 1 })
+    .pressKey("shift+enter")
+    .expect(Selector(".sd-title .sd-description .sv-string-editor").focused).ok()
+    .pressKey("enter")
+    .expect(Selector(".sd-title .sd-description .sv-string-editor").focused).notOk();
 });
 
 test("Check markdown back events", async (t) => {
@@ -592,15 +619,15 @@ test("Focus switch on select base", async (t) => {
   const svStringSelector = Selector(".sv-string-editor").withText("question1");
   await t.expect(svStringSelector.focused).ok();
   await t.pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 1").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 1").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 2").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 2").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 3").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("Item 3").withAttribute("contenteditable", "true").focused).ok()
     .pressKey("Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 4").focused).ok()
-    .pressKey("Ctrl+Enter")
-    .expect(Selector(".sv-string-editor").withText("Item 5").visible).notOk();
+    .expect(Selector(".sv-string-editor").withText("Item 4").withAttribute("contenteditable", "true").focused).ok()
+    .pressKey("ctrl+enter")
+    .expect(Selector(".sv-string-editor").withText("Item 5").withAttribute("contenteditable", "true").visible).notOk();
 });
 
 test("Disable edit inactive items", async (t) => {
@@ -673,7 +700,7 @@ test("Focus switch on multiple text", async (t) => {
     .expect(Selector(".sv-string-editor").withText("text3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("text4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("text5").visible).notOk();
 });
 
@@ -719,7 +746,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Column 3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("Column 4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("Column 5").visible).notOk()
     .click(Selector(".sv-string-editor").withText("Row 1"))
     .expect(Selector(".sv-string-editor").withText("Row 1").focused).ok()
@@ -729,7 +756,7 @@ test("Focus switch on matrix columns and rows", async (t) => {
     .expect(Selector(".sv-string-editor").withText("Row 3").focused).ok()
     .pressKey("Enter")
     .expect(Selector(".sv-string-editor").withText("Row 4").focused).ok()
-    .pressKey("Ctrl+Enter")
+    .pressKey("ctrl+enter")
     .expect(Selector(".sv-string-editor").withText("Row 5").visible).notOk();
 });
 

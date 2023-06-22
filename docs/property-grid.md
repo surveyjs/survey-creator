@@ -415,6 +415,21 @@ Survey.Serializer.addProperty("survey", {
 
 [View Demo](https://surveyjs.io/survey-creator/examples/configure-property-dependencies/ (linkStyle))
 
+#### `overridingProperty`
+
+The name of a property that overrides the current property.
+
+```js
+Survey.Serializer.addProperty("question", 
+  { name: "myMasterProperty", type: "condition" }
+  { name: "myDependentProperty", type: "boolean", overridingProperty: "myMasterProperty" }
+);
+```
+
+If you specify `overridingProperty`, the Property Grid disables the current property and displays a jump link to the overriding property:
+
+<img src="./images/property-grid-overridding-properties.png" alt="Survey Creator - Property Grid with overridden properties" width="100%">
+
 #### `onGetValue`
 
 A function that you can use to adjust or exclude the property value from the survey JSON schema.
