@@ -528,6 +528,9 @@ svc-question,
     gap: 0;
     padding-top: 0;
   }
+  .sd-table__cell--detail-panel .sd-panel__content {
+    padding-top: calcSize(1);
+   }
   .sd-paneldynamic__panel-wrapper {
     padding: 0;
   }
