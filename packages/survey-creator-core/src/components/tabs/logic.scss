@@ -255,9 +255,13 @@
   padding-right: calcSize(1);
 }
 .svc-logic-question-value {
+  --sd-base-padding: calc(5 * #{$base-unit});
+  --sd-base-vertical-padding: calc(4 * #{$base-unit});
+  --sd-page-vertical-padding: calc(3 * #{$base-unit});
   padding-right: calcSize(5);
   margin-top: calcSize(2);
 }
+
 .svc-logic_trigger-editor {
   margin-top: calcSize(2);
 }
