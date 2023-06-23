@@ -1,6 +1,11 @@
 @import "./variables.scss";
 
 .svc-creator--mobile {
+  .sd-root-modern {
+    --sd-base-padding: calc(3 * #{$base-unit});
+    --sd-base-vertical-padding: calc(2 * #{$base-unit});
+    --sd-page-vertical-padding: calc(2 * #{$base-unit});
+  }
   .svc-question__content {
     .sd-question__content {
       .sd-selectbase__column {
