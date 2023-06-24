@@ -9,6 +9,8 @@ ko.components.register("svc-tab-test", {
   viewModel: {
     createViewModel: (params: any, componentInfo: any) => {
       const plugin: TabTestPlugin = params.data;
+      const scrollingContainer = <HTMLElement>componentInfo.element.nextElementSibling.querySelector(".svc-plugin-tab__content");
+      plugin.model.setScrollingContainer(scrollingContainer);
       new ImplementorBase(plugin.model.simulator);
       new ImplementorBase(plugin.model.testAgainAction);
       new ImplementorBase(plugin.model);

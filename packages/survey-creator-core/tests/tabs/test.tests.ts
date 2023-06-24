@@ -653,3 +653,56 @@ test("Apply theme from theme builder", (): any => {
   expect(model.survey.themeVariables["--sjs-general-backcolor"]).toBe("#252525");
   expect(model.survey["isCompact"]).toBeTruthy();
 });
+
+test("Check that popups inside survey are closed when scrolling container", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
+
+  creator.makeNewViewActive("test");
+
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  let log = "";
+  const scrollingContainer: any = {
+    listeners: {},
+    addEventListener (event: string, callback: () => {}) {
+      this.listeners[event] = [callback].concat(this.listeners[event] || []);
+      log += "->added";
+    },
+    removeEventListener (event: string, callback: () => {}) {
+      const array = this.listeners[event];
+      const index = array.indexOf(callback);
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+      log += "->removed";
+    },
+    fireEvent (event: string) {
+      this.listeners[event].forEach(callback => {
+        log += "->fired";
+        callback();
+      });
+    }
+  };
+  model.setScrollingContainer(scrollingContainer);
+  const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
+  question.dropdownListModel.popupModel.toggleVisibility();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
+  expect(log).toBe("->added");
+  expect(scrollingContainer.listeners["scroll"].length).toBe(1);
+  scrollingContainer.fireEvent("scroll");
+  expect(question.dropdownListModel.popupModel.isVisible).toBeFalsy();
+  expect(log).toBe("->added->fired->removed");
+  expect(scrollingContainer.listeners["scroll"].length).toBe(0);
+
+  log = "";
+
+  question.dropdownListModel.popupModel.toggleVisibility();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
+  expect(log).toBe("->added");
+  expect(scrollingContainer.listeners["scroll"].length).toBe(1);
+  expect(question.dropdownListModel.popupModel.toggleVisibility());
+  expect(question.dropdownListModel.popupModel.isVisible).toBeFalsy();
+  expect(log).toBe("->added->removed");
+  expect(scrollingContainer.listeners["scroll"].length).toBe(0);
+});

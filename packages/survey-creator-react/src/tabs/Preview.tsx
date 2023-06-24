@@ -40,6 +40,12 @@ ReactElementFactory.Instance.registerElement("svc-tab-preview-test-again", (prop
 });
 
 export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
+  private scrollingContainer: React.RefObject<HTMLDivElement>;
+
+  constructor(props) {
+    super(props);
+    this.scrollingContainer = React.createRef();
+  }
   private get model(): TestSurveyTabViewModel {
     return this.props.data;
   }
@@ -51,7 +57,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
     return (
       <div className={tabContentClassName}>
-        <div className="svc-plugin-tab__content">
+        <div className="svc-plugin-tab__content" ref={this.scrollingContainer}>
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? <TabPreviewTestSurveyAgainComponent button={this.model.testAgainAction} /> : null}
           {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}
@@ -70,6 +76,10 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     } else {
       return null;
     }
+  }
+  componentDidMount(): void {
+    super.componentDidMount();
+    this.model.setScrollingContainer(this.scrollingContainer.current);
   }
 }
 

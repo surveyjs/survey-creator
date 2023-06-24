@@ -113,6 +113,19 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
+    let onScrollCallback: () => void;
+    this.survey.onPopupVisibilityChanged.add((_, options) => {
+      if(this.scrollingContainer) {
+        if(options.visible) {
+          onScrollCallback = () => {
+            options.popup.toggleVisibility();
+          };
+          this.scrollingContainer.addEventListener("scroll", onScrollCallback);
+        } else {
+          this.scrollingContainer.removeEventListener("scroll", onScrollCallback);
+        }
+      }
+    });
   }
 
   public setJSON(json: any, currTheme: any) {
@@ -299,5 +312,9 @@ export class TestSurveyTabViewModel extends Base {
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
+  }
+  private scrollingContainer: HTMLElement;
+  public setScrollingContainer(scrollingContainer: HTMLElement) {
+    this.scrollingContainer = scrollingContainer;
   }
 }
