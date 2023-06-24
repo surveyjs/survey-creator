@@ -113,17 +113,13 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
-    let onScrollCallback: () => void;
     this.survey.onPopupVisibilityChanged.add((_, options) => {
-      if(this.scrollingContainer) {
-        if(options.visible) {
-          onScrollCallback = () => {
-            options.popup.toggleVisibility();
-          };
-          this.scrollingContainer.addEventListener("scroll", onScrollCallback);
-        } else {
-          this.scrollingContainer.removeEventListener("scroll", onScrollCallback);
-        }
+      if(options.visible) {
+        this.onScrollCallback = () => {
+          options.popup.toggleVisibility();
+        };
+      } else {
+        this.onScrollCallback = undefined;
       }
     });
   }
@@ -313,8 +309,10 @@ export class TestSurveyTabViewModel extends Base {
     this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
-  private scrollingContainer: HTMLElement;
-  public setScrollingContainer(scrollingContainer: HTMLElement) {
-    this.scrollingContainer = scrollingContainer;
+  private onScrollCallback: () => void;
+  public onScroll() {
+    if(this.onScrollCallback)
+      this.onScrollCallback();
+    return true;
   }
 }
