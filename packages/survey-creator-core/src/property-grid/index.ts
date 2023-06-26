@@ -501,7 +501,7 @@ export class PropertyJSONGenerator {
       if (!!prop.visibleIf && eventVisibility) {
         q.visibleIf = "propertyVisibleIf() = true";
       }
-      if(!!prop.overridingProperty) {
+      if(!!prop.overridingProperty && q.visible) {
         q.onUpdateCssClassesCallback = (css: any) => {
           css.questionWrapper = "spg-boolean-wrapper--overriding";
         };
@@ -846,10 +846,10 @@ export class PropertyGridModel {
       this.onMatrixCellValueChanged(options);
     });
     this.survey.onMatrixAllowRemoveRow.add((sender, options) => {
-      options.allow = this.getMatrixAllowRemoveRow(options.question, options.row);
+      options.allow = this.getMatrixAllowRemoveRow(options.question, <MatrixDynamicRowModel>options.row);
     });
     this.survey.onMatrixRowRemoving.add((sender, options) => {
-      options.allow = this.getMatrixOnRowRemoving(options.question, options.row);
+      options.allow = this.getMatrixOnRowRemoving(options.question, <MatrixDynamicRowModel>options.row);
     });
     this.survey.onMatrixRowAdded.add((sender, options) => {
       this.onMatrixRowAdded(options);
