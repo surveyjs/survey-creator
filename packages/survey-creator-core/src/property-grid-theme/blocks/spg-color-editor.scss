@@ -47,6 +47,6 @@
     fill: $background;
   }
 }
-.spg-color-editor div:last-child {
-  display: none;
+.spg-color-editor .spg-input__edit-button + * {
+  margin-inline-end: calcSize(-0.5);
 }
