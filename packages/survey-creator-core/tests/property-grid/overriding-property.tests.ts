@@ -46,6 +46,18 @@ test("Show/hide go to visibleIf link", () => {
   visibleIfGoQuestion.doLinkClick();
   expect(logicPanel.isExpanded).toBeTruthy();
 });
+test("Do not show visible_overridingProperty if visible property is hidden", () => {
+  const question = new QuestionTextModel("q");
+  question.visibleIf = "{q1} = false";
+  Serializer.findProperty("question", "visible").visible = false;
+  let propertyGrid = new PropertyGridModelTester(question);
+  let visibleIfGoQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("visible_overridingProperty");
+  expect(visibleIfGoQuestion).toBeFalsy();
+  Serializer.findProperty("question", "visible").visible = true;
+  propertyGrid = new PropertyGridModelTester(question);
+  visibleIfGoQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("visible_overridingProperty");
+  expect(visibleIfGoQuestion).toBeTruthy();
+});
 
 test("Check boolean question support grouping event with overridigng property", () => {
   const question = new QuestionTextModel("q");
