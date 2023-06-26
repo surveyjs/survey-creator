@@ -117,6 +117,7 @@ export class UndoRedoManager {
     this._preparingTransaction = null;
   }
   setUndoCallbackForTransaction(callback: () => void) {
+    if(!this._preparingTransaction) return;
     this._preparingTransaction.undoCallback = callback;
   }
   public get isProcessingUndoRedo(): boolean {

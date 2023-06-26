@@ -1027,6 +1027,15 @@ export var enStrings = {
       "pseudo-3d": "Pseudo 3D",
       "playful": "Playful",
       "ultra": "Ultra"
+    },
+    colors: {
+      teal: "Teal",
+      blue: "Blue",
+      purple: "Purple",
+      orchid: "Orchid",
+      tulip: "Tulip",
+      brown: "Brown",
+      green: "Green"
     }
   },
 };
