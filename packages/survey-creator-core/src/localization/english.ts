@@ -1016,6 +1016,18 @@ export var enStrings = {
     boxShadowSpread: "Spread",
     questionShadow: "Question Panel Border / Shadow",
     editorShadow: "Editor Border / Shadow",
+    names: {
+      "default": "Default",
+      "contrast": "Contrast",
+      "plain": "Plain",
+      "simple": "Simple",
+      "blank": "Blank",
+      "double": "Double",
+      "bulk": "Bulk",
+      "pseudo-3d": "Pseudo 3D",
+      "playful": "Playful",
+      "ultra": "Ultra"
+    }
   },
 };
 
