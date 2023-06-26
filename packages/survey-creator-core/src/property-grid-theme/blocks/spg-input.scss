@@ -7,7 +7,8 @@
   box-sizing: border-box;
   width: 100%;
   height: calcSize(6);
-  border: 1px solid $border-inside;
+  border: none;
+  box-shadow: inset 0 0 0 1px $border-inside;
   padding: calcSize(1.5) calcSize(2);
   outline: none;
   font-size: calcSize(2);
@@ -23,8 +24,7 @@
 .spg-input.spg-dropdown:focus,
 .spg-input.spg-dropdown:focus-within,
 .spg-input-container:focus-within {
-  border-color: $primary;
-  box-shadow: inset 0 0 0 1px $primary;
+  box-shadow: inset 0 0 0 2px $primary;
 }
 
 .spg-input:disabled,
@@ -66,8 +66,16 @@
   }
 }
 .spg-input.spg-input--error {
-  border-color: $red;
-  box-shadow: none;
+  box-shadow: 0 0 0 1px inset $red;
+}
+.spg-input-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: default;
+  padding: calcSize(0.5);
+  align-items: center;
+  gap: calcSize(0.5);
+  box-shadow: 0 0 0 1px inset $border-inside;
 }
 .spg-input-container__input {
   flex-grow: 1;
@@ -78,7 +86,10 @@
   font-family: $font-family;
   outline: none;
   border: none;
+  line-height: calcSize(3);
+  background-color: transparent;
 }
 .spg-input-container__buttons-container {
   display: flex;
+  gap: calcSize(0.5);
 }

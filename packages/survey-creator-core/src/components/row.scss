@@ -5,10 +5,24 @@
   position: relative;
 }
 
+.svc-row:not(.svc-row--ghost) > .sd-row {
+  min-height: 50px;
+}
+
 .svc-row .sd-row--multiple {
+  overflow: auto;
   padding: calcSize(1);
   gap: calcSize(1);
-
+  margin-top: calcSize(2);
+  margin-left: 0;
+  width: 100%;
+  flex-wrap: nowrap;
+  background: $background;
+  box-shadow: 0px 1px 2px $shadow-inner;
+  border-radius: calcCornerRadius(1);
+  & > div {
+    padding-left: 0;
+  }
   .sd-row--multiple {
     overflow: unset;
   }
@@ -39,7 +53,7 @@
     margin-bottom: calcSize(2);
   }
 
-  &+.svc-row {
+  & + .svc-row {
     .sd-page__row {
       margin-top: 0;
     }
@@ -79,12 +93,14 @@
   .svc-row--drag-over-top:before {
     top: -4px;
 
-    &:first-child {}
+    &:first-child {
+    }
   }
 
   .svc-row--drag-over-bottom:after {
     bottom: -4px;
 
-    &:last-child {}
+    &:last-child {
+    }
   }
 }

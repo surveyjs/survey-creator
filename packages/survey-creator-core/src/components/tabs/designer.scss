@@ -24,10 +24,17 @@ svc-tab-designer {
 }
 
 .svc-tab-designer {
+  .svc-designer-header {
+    .sd-container-modern__title {
+      background-color: transparent;
+    }
+  }
   .svc-tab-designer_content {
     width: 100%;
   }
-
+  .sd-title {
+    display: flex;
+  }
   .sd-container-modern {
     min-width: calcSize(70);
     width: 100%;

@@ -232,7 +232,8 @@ export class ItemValueWrapperViewModel extends Base {
     const isNew = !this.question.isItemInList(this.item);
     return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowAdd) && isNew;
   }
-  public select(model: ItemValueWrapperViewModel, event: Event) {
+  public select(model: ItemValueWrapperViewModel, event: Event|undefined) {
+    if(model.question.inMatrixMode) return;
     model.creator.selectElement(model.question, "choices", false);
     event && event.stopPropagation();
   }

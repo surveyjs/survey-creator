@@ -26,9 +26,11 @@ export class MatrixCellWrapperEditSurvey {
     (<any>this.survey).isPopupEditorContent = true;
     this.survey.showQuestionNumbers = "none";
     this.survey.questionTitleLocation = "hidden";
-    this.survey.getAllQuestions()[0].setSurveyImpl(this.survey);
+    this.question.setSurveyImpl(this.survey);
+    this.question.inMatrixMode = true;
   }
   public get survey(): SurveyModel { return this.surveyValue; }
+  public get question(): Question { return this.survey.getAllQuestions()[0]; }
   public apply(): void {
     const matrix = <QuestionMatrixDropdownModelBase>this.cellQuestion.parentQuestion;
     const column: MatrixDropdownColumn = matrix.getColumnByName(this.cellQuestion.name);

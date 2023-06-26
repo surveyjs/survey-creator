@@ -241,7 +241,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
     if (options.question.name === "setValue") {
       assignDefaultV2Classes(options.cssClasses, options.question.getType());
-      options.cssClasses.mainRoot += " svc-logic-question-value";
+      options.cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
     if (options.question.name === "removeAction") {
       options.question.allowRootStyle = false;
