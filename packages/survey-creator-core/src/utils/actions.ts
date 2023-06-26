@@ -1,7 +1,8 @@
 import {
   QuestionMatrixDynamicModel,
   IAction,
-  MatrixDynamicRowModel
+  MatrixDynamicRowModel,
+  MatrixDropdownRowModelBase
 } from "survey-core";
 
 export function findAction(actions: Array<IAction>, id: string): IAction {
@@ -14,7 +15,7 @@ export function findAction(actions: Array<IAction>, id: string): IAction {
 
 export function updateMatrixLogicExpandAction(question: QuestionMatrixDynamicModel,
   actions: Array<IAction>,
-  row: MatrixDynamicRowModel) {
+  row: MatrixDropdownRowModelBase) {
   const action = findAction(actions, "show-detail");
   if (!action) return;
   action.component = "sv-action-bar-item";
