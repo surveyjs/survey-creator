@@ -1,5 +1,11 @@
 @import "../variables.scss";
 
+.sd-element__title {
+  .svc-string-editor {
+    display: inline-block;
+    max-width: 100%;
+  }
+}
 .svc-string-editor {
   [contenteditable="true"] {
     user-select: text;
@@ -17,10 +23,10 @@
       color: $foreground-light;
     }
   }
-        .sv-string-editor--html,
-        .sv-string-editor:focus-within {
-      white-space: pre-wrap;
-    }
+  .sv-string-editor--html,
+  .sv-string-editor:focus-within {
+    white-space: pre-wrap;
+  }
   &.svc-string-editor--hidden {
     display: none;
   }
@@ -158,6 +164,12 @@
         display: none;
       }
     }
+  }
+}
+.sd-table__cell--actions,
+.sd-matrixdynamic__add-btn {
+  .svc-string-editor__button--done {
+    width: calcSize(2);
   }
 }
 .sd-table__cell--header {
