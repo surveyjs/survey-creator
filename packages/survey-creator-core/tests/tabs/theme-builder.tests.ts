@@ -1,5 +1,5 @@
 import { CreatorTester } from "../creator-tester";
-import { ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
+import { PredefinedColors, ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -44,6 +44,10 @@ test("Theme builder initialization", (): any => {
 
   expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(4);
   expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("4px");
+
+  const colorQuestions = themeEditor.getAllQuestions().filter(q => q.getType() === "color");
+  expect(colorQuestions[0].choices.length).toEqual(7);
+  expect(colorQuestions[0].choices.map(c => c.value)).toStrictEqual(Object.values(PredefinedColors.light));
 });
 
 test("Theme builder initialization", (): any => {
