@@ -6,6 +6,7 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 import { settings } from "../../creator-settings";
+import { DefaultFonts } from "./theme-custom-questions/font-settings";
 
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
@@ -628,7 +629,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
-                choices: ["Open Sans", "Arial"],
+                choices: [].concat(DefaultFonts),
                 defaultValue: "Open Sans",
                 allowClear: false
               },
