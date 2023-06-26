@@ -94,11 +94,15 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
             {this.props.element}
           </div>
 
-          <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
-            onPointerDown={(event: any) => this.model.onPointerDown(event)}
-          >
-            <SvgIcon size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
-          </span>
+          {
+            this.model.isDraggable ?
+              <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
+                onPointerDown={(event: any) => this.model.onPointerDown(event)}
+              >
+                <SvgIcon size={24} iconName={"icon-drag-area-indicator"}></SvgIcon>
+              </span>
+              : null
+          }
 
           <div className="svc-context-container svc-image-item-value-controls">
             {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
