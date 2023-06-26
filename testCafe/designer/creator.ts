@@ -12,10 +12,10 @@ fixture`${title}`.page`${url}`.beforeEach(
 test("Creator dispose", async t => {
   await t
     .maximizeWindow()
-    .expect(Selector("body>div>div.sv-popup, body>div>sv-ng-popup-container>div.sv-popup").exists).ok();
+    .expect(Selector(".sv-popup").exists).ok();
   await ClientFunction(() => {
     window["creator"].dispose();
   })();
   await t
-    .expect(Selector("body>div>div.sv-popup, body>div>sv-ng-popup-container>div.sv-popup").exists).notOk();
+    .expect(Selector(".sv-popup").exists).notOk();
 });

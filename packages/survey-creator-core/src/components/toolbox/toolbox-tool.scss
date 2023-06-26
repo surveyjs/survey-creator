@@ -146,6 +146,14 @@
   }
 }
 
+[dir="rtl"],
+[style*="direction:rtl"],
+[style*="direction: rtl"] {
+  .svc-toolbox-popup {
+    direction: rtl;
+  }
+}
+
 .svc-toolbox-popup {
   .sv-list__item {
     &:first-child {
