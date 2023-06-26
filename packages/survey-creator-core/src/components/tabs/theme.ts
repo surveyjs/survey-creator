@@ -10,6 +10,27 @@ import { settings } from "../../creator-settings";
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
+export const PredefinedColors = {
+  light: {
+    teal: "rgba(11, 128, 128, 1)",
+    blue: "rgba(39, 114, 203, 1)",
+    purple: "rgba(122, 70, 187, 1)",
+    orchid: "rgba(178, 61, 153, 1)",
+    tulip: "rgba(191, 76, 97, 1)",
+    brown: "rgba(177, 94, 47, 1)",
+    green: "rgba(11, 134, 75, 1)"
+  },
+  dark: {
+    teal: "rgba(22, 198, 187, 1)",
+    blue: "rgba(109, 183, 252, 1)",
+    purple: "rgba(173, 144, 255, 1)",
+    orchid: "rgba(232, 113, 220, 1)",
+    tulip: "rgba(245, 131, 151, 1)",
+    brown: "rgba(252, 187, 89, 1)",
+    green: "rgba(140, 204, 90, 1)"
+  }
+};
+
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
   public exportToFileUI: any;
@@ -487,6 +508,11 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.setValue("themePalette", this.themePalette);
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor"];
     themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"];
+    themeEditorSurvey.getAllQuestions().forEach(question => {
+      if(["color"].indexOf(question.getType()) !== -1) {
+        (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
+      }
+    });
   }
 
   private setThemeToSurvey(theme?: ITheme) {
