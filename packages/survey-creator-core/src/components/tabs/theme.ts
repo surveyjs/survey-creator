@@ -11,6 +11,9 @@ import { DefaultFonts } from "./theme-custom-questions/font-settings";
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
+
+export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
+
 export const PredefinedColors = {
   light: {
     teal: "rgba(11, 128, 128, 1)",
@@ -539,7 +542,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"],
+                choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
                 defaultValue: "default",
                 allowClear: false
               },
