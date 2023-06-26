@@ -166,8 +166,9 @@ test("Edit matrix cell question", (): any => {
   const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
   const question = matrix.visibleRows[0].cells[0].question;
   const editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
-  const editQuestion = <QuestionSelectBase>editSurvey.survey.getAllQuestions()[0];
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
   expect(editQuestion.getType()).toEqual("radiogroup");
+  expect(editQuestion.inMatrixMode).toBeTruthy();
   editQuestion.choices = [1, 2, 3, 4];
   editSurvey.apply();
   expect(matrix.columns[0].choices).toHaveLength(4);
