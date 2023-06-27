@@ -3,6 +3,7 @@ import { PredefinedColors, ThemeSurveyTabViewModel } from "../../src/components/
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
+import { QuestionColorModel } from "../../src/custom-questions/question-color";
 export * from "../../src/components/tabs/theme-custom-questions/font-settings";
 export * from "../../src/components/tabs/theme-custom-questions/element-settings";
 import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
@@ -530,4 +531,10 @@ test("Check colorsettings question", () => {
     "opacity": 50
   };
   expect(survey.data).toEqual({ "test": "rgba(103, 63, 255, 0.5)" });
+});
+
+test("QuestionColorModel renderedValue always HEX", () => {
+  const q = new QuestionColorModel("q1");
+  q.value = "rgba(1,2,3,1)";
+  expect(q.renderedValue).toEqual("#010203");
 });

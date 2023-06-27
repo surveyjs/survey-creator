@@ -44,15 +44,16 @@ export class QuestionColorModel extends QuestionTextModel {
   public getType(): string {
     return "color";
   }
-  @property({}) _renderedValue: string;
+  @property() _renderedValue: string;
   private resetRenderedValue(): void {
     this._renderedValue = undefined;
   }
   private updateRenderedValue(): void {
-    this._renderedValue = this.value;
+    const color = parseColor(this.value || "");
+    this._renderedValue = color.color;
   }
   public get renderedValue(): string {
-    return (this._renderedValue ?? this.value ?? "#000000").toUpperCase();
+    return (this._renderedValue ?? (this.value ? parseColor(this.value).color : "#000000")).toUpperCase();
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
