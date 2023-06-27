@@ -240,7 +240,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       options.cssClasses.onError = "svc-logic-operator--error";
     }
     if (options.question.name === "setValue") {
-      assignDefaultV2Classes(options.cssClasses, options.question.getType());
+      assignDefaultV2Classes(options.cssClasses, options.question.getCssType());
       options.cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
     if (options.question.name === "removeAction") {
