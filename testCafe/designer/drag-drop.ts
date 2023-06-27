@@ -894,6 +894,21 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
     .dragToElement(DragZoneGiraffeItem, PandaItem, { speed: 0.1 });
   value = await getItemValueByIndex("question1", 2);
   await t.expect(value).eql(expectedValue);
+
+  // disable question edit (https://github.com/surveyjs/survey-creator/issues/4236) 
+  // unfortunately testcafe "drag-drop" can't reproduce the problem due it is probably some kind of emulation...
+  // const disableQuestionEdit = ClientFunction((json) => {
+  //   window["creator"].onElementAllowOperations.add((sender, options) => {
+  //     options.allowEdit = false;
+  //   });
+  //   window["creator"].text = JSON.stringify(json);
+  // });
+  // await disableQuestionEdit(json);
+  // const Item1 = Question1.find(".svc-image-item-value").nth(1);
+  // const Item2 = Question1.find(".svc-image-item-value").nth(2);
+  // await t
+  //   .hover(Item1, { speed: 0.1 })
+  //   .dragToElement(Item1, Item2, { speed: 0.1 });
 });
 
 test("Drag Drop MatrixRows (property grid)", async (t) => {

@@ -50,6 +50,7 @@ Object.keys(MikeThemes).forEach(function (themeName) {
       "--sjs-general-backcolor-dark": generalGroup["backcolor-dark"] ? generalGroup["backcolor-dark"]["value"] : undefined,
       "--sjs-general-backcolor-dim": generalGroup["dim-backcolor"] ? generalGroup["dim-backcolor"]["value"]: undefined,
       "--sjs-general-backcolor-dim-light": generalGroup["dim-backcolor-light"] ? generalGroup["dim-backcolor-light"]["value"] : undefined,
+      "--sjs-general-backcolor-dim-dark": generalGroup["dim-backcolor-dark"] ? generalGroup["dim-backcolor-dark"]["value"] : undefined,
       "--sjs-general-forecolor": generalGroup.forecolor ? generalGroup.forecolor["value"] : undefined,
       "--sjs-general-forecolor-light": generalGroup["forecolor-light"] ? generalGroup["forecolor-light"]["value"]: undefined,
       "--sjs-general-dim-forecolor": generalGroup["dim-forecolor"] ? generalGroup["dim-forecolor"]["value"] : undefined,
