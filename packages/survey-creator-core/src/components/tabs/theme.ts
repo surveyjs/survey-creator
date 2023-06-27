@@ -11,7 +11,6 @@ import { DefaultFonts } from "./theme-custom-questions/font-settings";
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
-
 export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
 
 export const PredefinedColors = {
