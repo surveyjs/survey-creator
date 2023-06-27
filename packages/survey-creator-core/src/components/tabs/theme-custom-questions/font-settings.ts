@@ -1,6 +1,18 @@
 import { ComponentCollection } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
+export const DefaultFonts = [
+  "Arial, sans-serif",
+  "Brush Script MT, cursive",
+  "Courier New, monospace",
+  "Garamond, serif",
+  "Georgia, serif",
+  "Tahoma, sans-serif",
+  "Times New Roman, serif",
+  "Trebuchet MS, sans-serif",
+  "Verdana, sans-serif",
+];
+
 ComponentCollection.Instance.add({
   name: "fontsettings",
   showInToolbox: false,
@@ -11,7 +23,7 @@ ComponentCollection.Instance.add({
       title: getLocString("theme.fontFamily"),
       titleLocation: "left",
       descriptionLocation: "hidden",
-      choices: ["Open Sans", "Arial"],
+      choices: [].concat(DefaultFonts),
       defaultValue: "Open Sans",
       allowClear: false
     },

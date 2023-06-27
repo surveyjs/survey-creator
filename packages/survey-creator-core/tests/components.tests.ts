@@ -647,6 +647,27 @@ test("remove() and ", () => {
   newItemAdorner.remove(newItemAdorner);
   expect(question.choices).toHaveLength(2);
 });
+test("Do not select choices if a question in a matrix mode (popup in our case) ", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] },
+      { type: "checkbox", name: "q2", choices: [1, 2, 3] }
+    ]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const q2 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
+  q2.inMatrixMode = true;
+  const q1ItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.choices[1]);
+  const q2ItemAdorner = new ItemValueWrapperViewModel(creator, q2, q2.choices[1]);
+  q1ItemAdorner.select(q1ItemAdorner, undefined);
+  expect(creator.selectedElementName).toBe("q1");
+  q2ItemAdorner.select(q2ItemAdorner, undefined);
+  expect(creator.selectedElementName).toBe("q1");
+  q2.inMatrixMode = false;
+  q2ItemAdorner.select(q2ItemAdorner, undefined);
+  expect(creator.selectedElementName).toBe("q2");
+});
 
 test("ImageItemValueWrapperViewModel isUploading", () => {
   const creator = new CreatorTester();

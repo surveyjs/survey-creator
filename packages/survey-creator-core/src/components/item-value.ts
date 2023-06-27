@@ -84,6 +84,7 @@ export class ItemValueWrapperViewModel extends Base {
     return !this.isNew && this.question.choices.indexOf(this.item) > -1;
   }
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
+    if (!this.isDraggable) return true;
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
     return isContentEditable || !this.canBeDragged;
   }
@@ -180,7 +181,7 @@ export class ItemValueWrapperViewModel extends Base {
     } else {
       const choices = model.question.choices;
       var index = choices.indexOf(model.item);
-      if(!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
+      if (!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
       var indexToFocus = this.findNextElementIndexToRemove(index);
       model.question.choices.splice(index, 1);
       this.focusNextElementToRemove(indexToFocus);
@@ -232,7 +233,8 @@ export class ItemValueWrapperViewModel extends Base {
     const isNew = !this.question.isItemInList(this.item);
     return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowAdd) && isNew;
   }
-  public select(model: ItemValueWrapperViewModel, event: Event) {
+  public select(model: ItemValueWrapperViewModel, event: Event|undefined) {
+    if(model.question.inMatrixMode) return;
     model.creator.selectElement(model.question, "choices", false);
     event && event.stopPropagation();
   }

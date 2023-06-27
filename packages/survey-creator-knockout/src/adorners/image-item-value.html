@@ -12,10 +12,12 @@
       <!-- /ko -->
     </div>
 
+    <!-- ko if: isDraggable-->
     <sv-svg-icon class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
       data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }"
       params="iconName: 'icon-drag-area-indicator', size: 24">
     </sv-svg-icon>
+    <!-- /ko -->
 
     <div class="svc-context-container svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowRemove && !isUploading -->
