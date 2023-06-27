@@ -1,6 +1,7 @@
 import { Action, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/utils";
 
+const DEFAULT_COLOR: string = "#000000";
 export class QuestionColorModel extends QuestionTextModel {
   @property() public unit: string;
 
@@ -14,7 +15,7 @@ export class QuestionColorModel extends QuestionTextModel {
 
   private getCorrectedValue(newValue: string): string {
     newValue = parseColor(newValue ?? "").color;
-    newValue = (newValue.match(/#(\d|\w){1,6}/) || ["#000000"])[0];
+    newValue = (newValue.match(/#(\d|\w){1,6}/) || [DEFAULT_COLOR])[0];
     if(newValue.length === 4) {
       for(let i = 1; i < 4; i++) {
         newValue += newValue[i];
@@ -34,7 +35,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this.updateRenderedValue();
   }
   public onBeforeInput(event: InputEvent): void {
-    if(!!event.data && !/[\d\w#]/.test(event.data)) {
+    if(!!event.data && !/[\d\w(),#]/.test(event.data)) {
       event.preventDefault();
     }
   }
@@ -49,11 +50,18 @@ export class QuestionColorModel extends QuestionTextModel {
     this._renderedValue = undefined;
   }
   private updateRenderedValue(): void {
-    const color = parseColor(this.value || "");
-    this._renderedValue = color.color;
+    if(this.value) {
+      const color = parseColor(this.value || "");
+      this._renderedValue = color.color;
+    } else {
+      this._renderedValue = DEFAULT_COLOR;
+    }
   }
   public get renderedValue(): string {
-    return (this._renderedValue ?? (this.value ? parseColor(this.value).color : "#000000")).toUpperCase();
+    if(!this._renderedValue) {
+      this.updateRenderedValue();
+    }
+    return this._renderedValue.toUpperCase();
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
