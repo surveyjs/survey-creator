@@ -6,9 +6,12 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 import { settings } from "../../creator-settings";
+import { DefaultFonts } from "./theme-custom-questions/font-settings";
 
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
+
+export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
 
 export const PredefinedColors = {
   light: {
@@ -538,7 +541,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"],
+                choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
                 defaultValue: "default",
                 allowClear: false
               },
@@ -654,7 +657,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
-                choices: ["Open Sans", "Arial"],
+                choices: [].concat(DefaultFonts),
                 defaultValue: "Open Sans",
                 allowClear: false
               },
