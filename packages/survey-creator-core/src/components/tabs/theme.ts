@@ -46,6 +46,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private themeEditorSurveyValue: SurveyModel;
   private themeChanges = {};
   private colorCalculator = new ColorCalculator();
+  private blockChanges = false;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -84,6 +85,20 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
+  @property({ onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+    if(!!_target.survey) {
+      _target.survey.backgroundImage = newValue;
+    }
+    _target.currentTheme["backgroundImage"] = newValue;
+
+  } }) backgroundImage;
+  @property({ defaultValue: "cover", onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+    if(!!_target.survey) {
+      _target.survey.backgroundImageFit = newValue;
+    }
+    _target.currentTheme["backgroundImageFit"] = newValue;
+
+  } }) backgroundImageFit;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
@@ -132,8 +147,8 @@ export class ThemeSurveyTabViewModel extends Base {
       assign(newTheme, this.themeChanges);
     }
 
-    this.themeEditorSurvey.mergeData(newTheme);
-    this.surveyProvider.theme.cssVariables = newTheme;
+    this.currentTheme.cssVariables = newTheme;
+    this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
     this.setThemeToSurvey();
   }
 
@@ -157,10 +172,13 @@ export class ThemeSurveyTabViewModel extends Base {
     this.themeName = theme["themeName"];
     this.themePalette = theme["themePalette"];
     this.themeMode = theme.isCompact ? "lightweight" : undefined;
+    this.backgroundImage = theme.backgroundImage;
+    this.backgroundImageFit = theme.backgroundImageFit;
+
     const fullThemeName = this.getFullThemeName();
     if (!Themes[fullThemeName]) {
       Themes[fullThemeName] = theme;
-      const themeSelector = this.themeEditorSurveyValue.getQuestionByName("themeName");
+      const themeSelector = this.themeEditorSurvey.getQuestionByName("themeName");
       themeSelector.choices = themeSelector.choices.concat(new ItemValue(theme["themeName"]));
     }
     const themeVariables = {};
@@ -225,12 +243,16 @@ export class ThemeSurveyTabViewModel extends Base {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       const theme: ITheme | any = JSON.parse(fileReader.result as string);
-      this.surveyProvider.theme = theme;
-      this.loadTheme(theme);
-      this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
-      this.initializeColorCalculator();
+      this.setThemeFromFile(theme);
     };
     fileReader.readAsText(file);
+  }
+
+  public setThemeFromFile(theme: ITheme) {
+    this.surveyProvider.theme = theme;
+    this.loadTheme(theme);
+    this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
+    this.initializeColorCalculator();
   }
 
   public setJSON(json: any, currTheme: any) {
@@ -419,6 +441,12 @@ export class ThemeSurveyTabViewModel extends Base {
     this.nextPageAction.enabled = isNextEnabled;
   }
   initializeColorCalculator() {
+    if (!this.currentTheme.cssVariables["--sjs-primary-backcolor"] ||
+      !this.currentTheme.cssVariables["--sjs-primary-backcolor-light"] ||
+      !this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]) {
+      return;
+    }
+
     this.colorCalculator.initialize(
       this.currentTheme.cssVariables["--sjs-primary-backcolor"],
       this.currentTheme.cssVariables["--sjs-primary-backcolor-light"],
@@ -437,6 +465,8 @@ export class ThemeSurveyTabViewModel extends Base {
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
+      if(this.blockChanges) return;
+
       this.themeChanges[options.name] = options.value;
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
@@ -444,22 +474,21 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.surveyProvider.theme.isCompact = options.value === "lightweight";
+          this.currentTheme.isCompact = options.value === "lightweight";
         } else {
-          this.surveyProvider.theme["themeName"] = this.themeName;
-          this.surveyProvider.theme["themePalette"] = this.themePalette;
+          this.currentTheme["themeName"] = this.themeName;
+          this.currentTheme["themePalette"] = this.themePalette;
         }
         this.applySelectedTheme(options.name === "themeMode");
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
-        this.survey[options.name] = options.value;
-        this.surveyProvider.theme[options.name] = options.value;
+        this[options.name] = options.value;
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.survey.backgroundOpacity = options.value / 100;
-        this.surveyProvider.theme.backgroundOpacity = options.value / 100;
+        this.currentTheme.backgroundOpacity = options.value / 100;
         return;
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -493,8 +522,8 @@ export class ThemeSurveyTabViewModel extends Base {
         });
       }
       const newTheme = {};
-      assign(newTheme, this.surveyProvider.theme.cssVariables, this.themeChanges);
-      this.surveyProvider.theme.cssVariables = newTheme;
+      assign(newTheme, this.currentTheme.cssVariables, this.themeChanges);
+      this.currentTheme.cssVariables = newTheme;
       this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
@@ -505,12 +534,36 @@ export class ThemeSurveyTabViewModel extends Base {
   }
 
   private loadThemeIntoPropertyGrid(themeEditorSurvey: SurveyModel) {
-    themeEditorSurvey.mergeData(this.surveyProvider.theme.cssVariables);
-    themeEditorSurvey.setValue("themeName", this.themeName);
-    themeEditorSurvey.setValue("themeMode", this.themeMode);
-    themeEditorSurvey.setValue("themePalette", this.themePalette);
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"];
+    this.blockChanges = true;
+    try {
+      themeEditorSurvey.clear(true);
+      themeEditorSurvey.mergeData(this.currentTheme.cssVariables);
+      themeEditorSurvey.setValue("themeName", this.themeName);
+      themeEditorSurvey.setValue("themeMode", this.themeMode);
+      themeEditorSurvey.setValue("themePalette", this.themePalette);
+      this.updatePGEditors(themeEditorSurvey);
+    }
+    finally {
+      this.blockChanges = false;
+    }
+  }
+
+  private updatePGEditors(themeEditorSurvey: SurveyModel) {
+    const newCssVariables = {};
+    assign(newCssVariables, this.currentTheme.cssVariables);
+    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
+    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
+
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor"];
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dark"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor-dim-light"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dim-dark"];
+
+    themeEditorSurvey.getQuestionByName("pageTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor"];
+    themeEditorSurvey.getQuestionByName("pageDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor-light"];
+    themeEditorSurvey.getQuestionByName("questionTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor"];
+    themeEditorSurvey.getQuestionByName("questionDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor-light"];
+
     themeEditorSurvey.getAllQuestions().forEach(question => {
       if(["color"].indexOf(question.getType()) !== -1) {
         (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
