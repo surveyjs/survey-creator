@@ -6,7 +6,7 @@
   margin: auto;
   margin-bottom: calcSize(5);
   background-color: $background;
-  box-shadow: 0px 1px 2px $shadow-inner;
+  box-shadow: $shadow-small;
   border-radius: 4px;
 
   .svd-test-results__header {
