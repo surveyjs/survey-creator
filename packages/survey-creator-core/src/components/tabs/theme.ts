@@ -253,6 +253,7 @@ export class ThemeSurveyTabViewModel extends Base {
     this.loadTheme(theme);
     this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
     this.initializeColorCalculator();
+    this.setThemeToSurvey();
   }
 
   public setJSON(json: any, currTheme: any) {
