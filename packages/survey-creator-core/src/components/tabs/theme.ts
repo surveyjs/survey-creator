@@ -479,10 +479,11 @@ export class ThemeSurveyTabViewModel extends Base {
           this.survey["isCompact"] = options.value === "lightweight";
           this.currentTheme.isCompact = options.value === "lightweight";
         } else {
+          this.resetChanges();
           this.currentTheme["themeName"] = this.themeName;
           this.currentTheme["themePalette"] = this.themePalette;
         }
-        this.applySelectedTheme(options.name === "themeMode");
+        this.applySelectedTheme();
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
