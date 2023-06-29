@@ -6,9 +6,33 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
 import { settings } from "../../creator-settings";
+import { DefaultFonts } from "./theme-custom-questions/font-settings";
 
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
+
+export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
+
+export const PredefinedColors = {
+  light: {
+    teal: "rgba(11, 128, 128, 1)",
+    blue: "rgba(39, 114, 203, 1)",
+    purple: "rgba(122, 70, 187, 1)",
+    orchid: "rgba(178, 61, 153, 1)",
+    tulip: "rgba(191, 76, 97, 1)",
+    brown: "rgba(177, 94, 47, 1)",
+    green: "rgba(11, 134, 75, 1)"
+  },
+  dark: {
+    teal: "rgba(22, 198, 187, 1)",
+    blue: "rgba(109, 183, 252, 1)",
+    purple: "rgba(173, 144, 255, 1)",
+    orchid: "rgba(232, 113, 220, 1)",
+    tulip: "rgba(245, 131, 151, 1)",
+    brown: "rgba(252, 187, 89, 1)",
+    green: "rgba(140, 204, 90, 1)"
+  }
+};
 
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
@@ -22,6 +46,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private themeEditorSurveyValue: SurveyModel;
   private themeChanges = {};
   private colorCalculator = new ColorCalculator();
+  private blockChanges = false;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -60,6 +85,20 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
+  @property({ onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+    if(!!_target.survey) {
+      _target.survey.backgroundImage = newValue;
+    }
+    _target.currentTheme["backgroundImage"] = newValue;
+
+  } }) backgroundImage;
+  @property({ defaultValue: "cover", onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+    if(!!_target.survey) {
+      _target.survey.backgroundImageFit = newValue;
+    }
+    _target.currentTheme["backgroundImageFit"] = newValue;
+
+  } }) backgroundImageFit;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
@@ -108,8 +147,8 @@ export class ThemeSurveyTabViewModel extends Base {
       assign(newTheme, this.themeChanges);
     }
 
-    this.themeEditorSurvey.mergeData(newTheme);
-    this.surveyProvider.theme.cssVariables = newTheme;
+    this.currentTheme.cssVariables = newTheme;
+    this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
     this.setThemeToSurvey();
   }
 
@@ -133,10 +172,13 @@ export class ThemeSurveyTabViewModel extends Base {
     this.themeName = theme["themeName"];
     this.themePalette = theme["themePalette"];
     this.themeMode = theme.isCompact ? "lightweight" : undefined;
+    this.backgroundImage = theme.backgroundImage;
+    this.backgroundImageFit = theme.backgroundImageFit;
+
     const fullThemeName = this.getFullThemeName();
     if (!Themes[fullThemeName]) {
       Themes[fullThemeName] = theme;
-      const themeSelector = this.themeEditorSurveyValue.getQuestionByName("themeName");
+      const themeSelector = this.themeEditorSurvey.getQuestionByName("themeName");
       themeSelector.choices = themeSelector.choices.concat(new ItemValue(theme["themeName"]));
     }
     const themeVariables = {};
@@ -201,12 +243,17 @@ export class ThemeSurveyTabViewModel extends Base {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       const theme: ITheme | any = JSON.parse(fileReader.result as string);
-      this.surveyProvider.theme = theme;
-      this.loadTheme(theme);
-      this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
-      this.initializeColorCalculator();
+      this.setThemeFromFile(theme);
     };
     fileReader.readAsText(file);
+  }
+
+  public setThemeFromFile(theme: ITheme) {
+    this.surveyProvider.theme = theme;
+    this.loadTheme(theme);
+    this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
+    this.initializeColorCalculator();
+    this.setThemeToSurvey();
   }
 
   public setJSON(json: any, currTheme: any) {
@@ -395,6 +442,12 @@ export class ThemeSurveyTabViewModel extends Base {
     this.nextPageAction.enabled = isNextEnabled;
   }
   initializeColorCalculator() {
+    if (!this.currentTheme.cssVariables["--sjs-primary-backcolor"] ||
+      !this.currentTheme.cssVariables["--sjs-primary-backcolor-light"] ||
+      !this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]) {
+      return;
+    }
+
     this.colorCalculator.initialize(
       this.currentTheme.cssVariables["--sjs-primary-backcolor"],
       this.currentTheme.cssVariables["--sjs-primary-backcolor-light"],
@@ -413,6 +466,8 @@ export class ThemeSurveyTabViewModel extends Base {
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
+      if(this.blockChanges) return;
+
       this.themeChanges[options.name] = options.value;
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
@@ -420,22 +475,21 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.surveyProvider.theme.isCompact = options.value === "lightweight";
+          this.currentTheme.isCompact = options.value === "lightweight";
         } else {
-          this.surveyProvider.theme["themeName"] = this.themeName;
-          this.surveyProvider.theme["themePalette"] = this.themePalette;
+          this.currentTheme["themeName"] = this.themeName;
+          this.currentTheme["themePalette"] = this.themePalette;
         }
         this.applySelectedTheme(options.name === "themeMode");
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
-        this.survey[options.name] = options.value;
-        this.surveyProvider.theme[options.name] = options.value;
+        this[options.name] = options.value;
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.survey.backgroundOpacity = options.value / 100;
-        this.surveyProvider.theme.backgroundOpacity = options.value / 100;
+        this.currentTheme.backgroundOpacity = options.value / 100;
         return;
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -469,8 +523,8 @@ export class ThemeSurveyTabViewModel extends Base {
         });
       }
       const newTheme = {};
-      assign(newTheme, this.surveyProvider.theme.cssVariables, this.themeChanges);
-      this.surveyProvider.theme.cssVariables = newTheme;
+      assign(newTheme, this.currentTheme.cssVariables, this.themeChanges);
+      this.currentTheme.cssVariables = newTheme;
       this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
@@ -481,12 +535,41 @@ export class ThemeSurveyTabViewModel extends Base {
   }
 
   private loadThemeIntoPropertyGrid(themeEditorSurvey: SurveyModel) {
-    themeEditorSurvey.mergeData(this.surveyProvider.theme.cssVariables);
-    themeEditorSurvey.setValue("themeName", this.themeName);
-    themeEditorSurvey.setValue("themeMode", this.themeMode);
-    themeEditorSurvey.setValue("themePalette", this.themePalette);
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = this.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"];
+    this.blockChanges = true;
+    try {
+      themeEditorSurvey.clear(true);
+      themeEditorSurvey.mergeData(this.currentTheme.cssVariables);
+      themeEditorSurvey.setValue("themeName", this.themeName);
+      themeEditorSurvey.setValue("themeMode", this.themeMode);
+      themeEditorSurvey.setValue("themePalette", this.themePalette);
+      this.updatePGEditors(themeEditorSurvey);
+    }
+    finally {
+      this.blockChanges = false;
+    }
+  }
+
+  private updatePGEditors(themeEditorSurvey: SurveyModel) {
+    const newCssVariables = {};
+    assign(newCssVariables, this.currentTheme.cssVariables);
+    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
+    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
+
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor"];
+    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dark"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor-dim-light"];
+    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dim-dark"];
+
+    themeEditorSurvey.getQuestionByName("pageTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor"];
+    themeEditorSurvey.getQuestionByName("pageDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor-light"];
+    themeEditorSurvey.getQuestionByName("questionTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor"];
+    themeEditorSurvey.getQuestionByName("questionDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor-light"];
+
+    themeEditorSurvey.getAllQuestions().forEach(question => {
+      if(["color"].indexOf(question.getType()) !== -1) {
+        (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
+      }
+    });
   }
 
   private setThemeToSurvey(theme?: ITheme) {
@@ -512,7 +595,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"],
+                choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
                 defaultValue: "default",
                 allowClear: false
               },
@@ -551,14 +634,14 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--sjs-primary-backcolor",
                 title: getLocString("theme.primaryColor"),
                 descriptionLocation: "hidden",
-                defaultValue: "#19b394"
+                defaultValue: "rgba(25, 179, 148, 1)"
               },
               {
                 type: "color",
                 name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
-                defaultValue: "#f3f3f3"
+                defaultValue: "rgba(243, 243, 243, 1)"
               },
               {
                 type: "panel",
@@ -628,7 +711,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
-                choices: ["Open Sans", "Arial"],
+                choices: [].concat(DefaultFonts),
                 defaultValue: "Open Sans",
                 allowClear: false
               },
@@ -699,7 +782,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
-                defaultValue: "#f3f3f3"
+                defaultValue: "rgba(243, 243, 243, 1)"
               }, {
                 type: "panel",
                 title: getLocString("theme.accentBackground"),
@@ -710,7 +793,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     title: getLocString("theme.primaryDefaultColor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
-                    defaultValue: "#19B394"
+                    defaultValue: "rgba(25, 179, 148, 1)"
                   },
                   {
                     type: "color",
@@ -718,7 +801,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     title: getLocString("theme.primaryDarkColor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
-                    defaultValue: "#14A48B"
+                    defaultValue: "rgba(20, 164, 139, 1)"
                   },
                   {
                     type: "color",
@@ -726,7 +809,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     title: getLocString("theme.primaryLightColor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
-                    defaultValue: "#E8F7F4"
+                    defaultValue: "rgba(232, 247, 244, 1)"
                   }
                 ]
               }, {
@@ -739,7 +822,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     title: getLocString("theme.primaryForecolor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
-                    defaultValue: "#ffffff"
+                    defaultValue: "rgba(255, 255, 255, 1)"
                   },
                   {
                     type: "color",
@@ -747,7 +830,7 @@ export class ThemeSurveyTabViewModel extends Base {
                     title: getLocString("theme.primaryForecolorLight"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
-                    defaultValue: "#ffffff"
+                    defaultValue: "rgba(255, 255, 255, 1)"
                   }
                 ]
               }]
@@ -760,7 +843,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.surveyTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 32
                 }
@@ -770,7 +853,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.pageTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 24
                 }
@@ -780,7 +863,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.pageDescription"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   size: 16
                 }
               }
@@ -794,8 +877,8 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.questionPanel"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  backcolor: "#ffffff",
-                  hovercolor: "#f8f8f8",
+                  backcolor: "rgba(255, 255, 255, 1)",
+                  hovercolor: "rgba(248, 248, 248, 1)",
                   corner: 4
                 }
               },
@@ -824,7 +907,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.questionTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   weight: "600",
                   size: 16,
                 }
@@ -834,7 +917,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.questionDescription"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   size: 16
                 }
               }
@@ -848,8 +931,8 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.editorPanel"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  backcolor: "#ffffff",
-                  hovercolor: "#f8f8f8",
+                  backcolor: "rgba(255, 255, 255, 1)",
+                  hovercolor: "rgba(248, 248, 248, 1)",
                   corner: 4
                 }
               },
@@ -877,7 +960,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.editorFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
-                  color: "#161616",
+                  color: "rgba(22, 22, 22, 1)",
                   size: 16
                 }
               }
@@ -894,7 +977,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.borderDefault"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#d6d6d6"
+                  defaultValue: "rgba(214, 214, 214, 1)"
                 },
                 {
                   type: "color",
@@ -902,7 +985,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   title: getLocString("theme.borderLight"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
-                  defaultValue: "#e8e8e8"
+                  defaultValue: "rgba(232, 232, 232, 1)"
                 }
               ]
             }]

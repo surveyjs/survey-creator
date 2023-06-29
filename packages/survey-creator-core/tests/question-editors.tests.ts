@@ -157,21 +157,46 @@ test("Edit matrix cell question", (): any => {
       {
         "type": "matrixdropdown",
         "name": "q1",
-        "columns": [{ name: "colum1", cellType: "radiogroup" }],
+        "columns": [{ name: "column1", cellType: "radiogroup" }],
         "choices": ["item1", "item2"],
         "rows": ["row1", "row2"]
       }
     ]
   };
+  let modifiedCounter = 0;
+  let stateCounter = 0;
+  let type;
+  let columnName;
+  creator.onModified.add((sender, options) => {
+    modifiedCounter++;
+    type = options.type;
+    columnName = options.column.name;
+  });
+  creator.onStateChanged.add((sender, options) => {
+    stateCounter++;
+  });
   const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
-  const question = matrix.visibleRows[0].cells[0].question;
-  const editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
-  const editQuestion = <QuestionSelectBase>editSurvey.survey.getAllQuestions()[0];
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
+  const editQuestion = <QuestionSelectBase>editSurvey.question;
   expect(editQuestion.getType()).toEqual("radiogroup");
+  expect(editQuestion.inMatrixMode).toBeTruthy();
   editQuestion.choices = [1, 2, 3, 4];
+  expect(creator.state).toBeFalsy();
   editSurvey.apply();
   expect(matrix.columns[0].choices).toHaveLength(4);
   expect(matrix.columns[0].cellType).toEqual("radiogroup");
+  expect(creator.state).toBe("modified");
+  expect(modifiedCounter).toBe(1);
+  expect(stateCounter).toBe(1);
+  expect(type).toBe("MATRIX_CELL_EDITOR");
+  expect(columnName).toBe("column1");
+
+  question = matrix.visibleRows[0].cells[0].question;
+  editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
+  editSurvey.apply();
+  expect(modifiedCounter).toBe(1);
+  expect(stateCounter).toBe(1);
 });
 test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded event", () => {
   const creator = new CreatorTester();

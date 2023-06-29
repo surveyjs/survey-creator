@@ -1,4 +1,5 @@
-import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString } from "survey-core";
+import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
+  PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString } from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
@@ -62,7 +63,7 @@ export class SurveyLogicUI extends SurveyLogic {
     });
     this.itemsSurvey.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixLogicExpandAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
-      updateMatrixLogicRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, options.row);
+      updateMatrixLogicRemoveAction(<QuestionMatrixDynamicModel>options.question, options.actions, <MatrixDynamicRowModel>options.row);
     });
     this.updateItemsSurveyData();
     this.onReadOnlyChanged();
