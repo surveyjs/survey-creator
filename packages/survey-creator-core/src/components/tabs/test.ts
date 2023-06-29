@@ -113,7 +113,7 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
     });
-    this.survey.onPopupVisibilityChanged.add((_, options) => {
+    this.survey.onPopupVisibleChanged.add((_, options) => {
       if(options.visible) {
         this.onScrollCallback = () => {
           options.popup.toggleVisibility();
