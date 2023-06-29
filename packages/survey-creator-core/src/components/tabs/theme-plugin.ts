@@ -200,6 +200,7 @@ export class TabThemePlugin implements ICreatorPlugin {
         return (this.creator.activeTab === "theme");
       }),
       action: () => {
+        this.model.resetChanges();
         this.model.applySelectedTheme();
       }
     });

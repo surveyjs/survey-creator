@@ -137,15 +137,13 @@ export class ThemeSurveyTabViewModel extends Base {
     return this.surveyProvider.theme;
   }
 
-  public applySelectedTheme(saveChanges = false) {
+  public applySelectedTheme() {
     const newTheme = {};
     assign(newTheme, Themes[this.getFullThemeName("default")], Themes[this.getFullThemeName()]);
     if (this.survey["isCompact"]) {
       assign(newTheme, Themes[this.getFullThemeName() + "-lw"]);
     }
-    if(saveChanges) {
-      assign(newTheme, this.themeChanges);
-    }
+    assign(newTheme, this.themeChanges);
 
     this.currentTheme.cssVariables = newTheme;
     this.loadThemeIntoPropertyGrid(this.themeEditorSurvey);
@@ -309,6 +307,10 @@ export class ThemeSurveyTabViewModel extends Base {
       });
     }
     this.pageListItems = pages;
+  }
+
+  public resetChanges() {
+    this.themeChanges = {};
   }
 
   public show() {
