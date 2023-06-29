@@ -566,7 +566,7 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.getQuestionByName("questionDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor-light"];
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
-      if(["color"].indexOf(question.getType()) !== -1) {
+      if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
         (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
       }
     });

@@ -1,4 +1,4 @@
-import { ComponentCollection, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 import { ingectAlpha, parseColor, parseRgbaFromString } from "../../../utils/utils";
 
@@ -22,12 +22,40 @@ ComponentCollection.Instance.add({
       titleLocation: "left"
     }
   ],
+  onInit() {
+    Serializer.addProperty("colorsettings", {
+      name: "choices:itemvalue[]"
+    });
+  },
+  onLoaded(question) {
+    syncPropertiesFromCompositeToColor(question, "titleLocation", question.titleLocation);
+    syncPropertiesFromCompositeToColor(question, "choices", question.choices);
+  },
+  onPropertyChanged(question, propertyName, newValue) {
+    syncPropertiesFromCompositeToColor(question, propertyName, newValue);
+  },
   onCreated(question: QuestionCompositeModel) {
     question.valueFromDataCallback = (newValue: string | Object): Object => typeof newValue == "string" ? parseColor(newValue) : newValue;
     question.valueToDataCallback = (newValue: string | Object): string => !!newValue ? (typeof newValue == "string" ? newValue : createColor(newValue)) : "";
     question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
   }
 });
+
+function syncPropertiesFromCompositeToColor(question: Question, propertyName: string, newValue: any) {
+  const colorQuestion = question.contentPanel.questions[0];
+  if(propertyName == "titleLocation") {
+    if(newValue == "left") {
+      question.titleLocation = "hidden";
+      colorQuestion.title = question.title;
+      colorQuestion.titleLocation = newValue;
+    } else {
+      colorQuestion.titleLocation = "hidden";
+    }
+  }
+  if(propertyName == "choices") {
+    colorQuestion.choices = newValue;
+  }
+}
 
 export function createColor(value: any): string {
   return ingectAlpha(value.color, value.opacity / 100);

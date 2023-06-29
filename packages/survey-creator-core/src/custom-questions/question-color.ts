@@ -94,9 +94,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   public createDropdownAction(): Action {
-    const action = createDropdownActionModelAdvanced({
-      iconName: this.cssClasses.colorDropdownIcon
-    }, {
+    const action = createDropdownActionModelAdvanced({}, {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
@@ -108,14 +106,22 @@ export class QuestionColorModel extends QuestionTextModel {
     });
     const popupModel = <PopupModel>action.popupModel;
     const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
-    listModel.cssClasses = {
-      itemBody: listModel.cssClasses.itemBody + " " + this.cssClasses.colorItem
-    };
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
-    action.cssClasses = { item: this.cssClasses.colorDropdown };
     return action;
+  }
+
+  protected calcCssClasses(css: any): void {
+    const classes = super.calcCssClasses(css);
+    const dropdownAction = this.dropdownAction;
+    dropdownAction.cssClasses = { item: classes.colorDropdown };
+    dropdownAction.iconName = classes.colorDropdownIcon;
+    const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
+    listModel.cssClasses = {
+      itemBody: listModel.cssClasses.itemBody + " " + classes.colorItem
+    };
+    return classes;
   }
 
   private updateChoices() {
