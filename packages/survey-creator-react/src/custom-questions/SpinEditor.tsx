@@ -23,6 +23,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           onFocus={(event) => this.question.onFocus(event.nativeEvent)}
           onChange={this.question.onChange}
           onBeforeInput={event => this.question.onBeforeInput(event.nativeEvent as InputEvent)}
+          onKeyUp={(event) => this.question.onKeyUp(event.nativeEvent)}
           onKeyDown={(event) => this.question.onInputKeyDown(event.nativeEvent)}
           aria-required={this.question.ariaRequired}
           aria-label={this.question.ariaLabel}

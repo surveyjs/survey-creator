@@ -1,6 +1,6 @@
 <div data-bind="css: question.cssClasses.root, event: { keydown: question.koOnKeyDown }">
   <input autocomplete="off" data-bind="disable: question.isInputReadOnly, attr: { id: question.inputId, placeholder: question.renderedPlaceholder, 'aria-required': question.ariaRequired, 'aria-label': question.ariaLabel, 'aria-invalid': question.ariaInvalid, 'aria-describedby': question.ariaDescribedBy }, 
-    event: { change: question.koOnChange, keydown: question.koOnInputKeyDown, blur: question.koOnBlur, focus: question.koOnFocus, beforeinput: question.koOnBeforeInput },
+    event: { change: question.koOnChange, keydown: question.koOnInputKeyDown, keyup: question.koOnKeyUp, blur: question.koOnBlur, focus: question.koOnFocus, beforeinput: question.koOnBeforeInput },
     value: question.renderedValue,
     css: question.cssClasses.control"></input>
   <span data-bind="css: question.cssClasses.buttonsContainer">

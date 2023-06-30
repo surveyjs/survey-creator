@@ -10,6 +10,7 @@
     [attr.aria-describedby]="model.ariaDescribedBy" 
     (change)="model.onChange($event)" 
     (keydown)="model.onInputKeyDown($event)" 
+    (keyup)="model.onKeyUp($event)"
     (blur)="model.onBlur($event)" 
     (focus)="model.onFocus($event)" 
     (beforeinput)="model.onBeforeInput($event)"
