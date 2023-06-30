@@ -504,6 +504,29 @@ test("Check colorsettings question", () => {
   expect(survey.data).toEqual({ "test": "rgba(103, 63, 255, 0.5)" });
 });
 
+test("Check colorsettings question passes some properties to color question", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "colorsettings",
+      titleLocation: "left",
+      title: "Test",
+      name: "test",
+      choices: [{ value: "#fff", text: "White" }]
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+  const colorQuestion = question.contentPanel.questions[0];
+  expect(colorQuestion.titleLocation).toBe("left");
+  expect(question.titleLocation).toBe("hidden");
+  expect(colorQuestion.titleLocation).toBe("left");
+  expect(colorQuestion.title).toBe("Test");
+  expect(colorQuestion.choices[0].value).toBe("#fff");
+  expect(colorQuestion.choices[0].title).toBe("White");
+  question.choices = [{ value: "#000", text: "Black" }];
+  expect(colorQuestion.choices[0].value).toBe("#000");
+  expect(colorQuestion.choices[0].title).toBe("Black");
+});
+
 test("Theme builder export value from composite question", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = {
