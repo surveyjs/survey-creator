@@ -309,8 +309,9 @@ export class ThemeSurveyTabViewModel extends Base {
     this.pageListItems = pages;
   }
 
-  public resetChanges() {
+  public resetTheme() {
     this.themeChanges = {};
+    this.applySelectedTheme();
   }
 
   public show() {
@@ -478,12 +479,12 @@ export class ThemeSurveyTabViewModel extends Base {
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
           this.currentTheme.isCompact = options.value === "lightweight";
+          this.applySelectedTheme();
         } else {
-          this.resetChanges();
           this.currentTheme["themeName"] = this.themeName;
           this.currentTheme["themePalette"] = this.themePalette;
+          this.resetTheme();
         }
-        this.applySelectedTheme();
         return;
       }
       if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
