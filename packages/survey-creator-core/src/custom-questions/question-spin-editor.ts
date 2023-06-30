@@ -66,6 +66,9 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     this.decrease();
     this.decreaseTimer = setTimeout(this.onDownButtonMouseDown, 200);
   }
+  public onButtonMouseLeave = () => {
+    this.onButtonMouseUp();
+  }
   public onButtonMouseUp = () => {
     clearTimeout(this.decreaseTimer);
     clearTimeout(this.increaseTimer);

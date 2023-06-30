@@ -17,11 +17,11 @@
     [class]="model.cssClasses.control"/>
   <span [class]="model.cssClasses.buttonsContainer">
     <button
-      [class]="model.cssClasses.arrowButton" (mousedown)="model.onDownButtonMouseDown()" (mouseup)="model.onButtonMouseUp()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
+      [class]="model.cssClasses.arrowButton" (mousedown)="model.onDownButtonMouseDown()" (mouseup)="model.onButtonMouseUp()" (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
       <svg [iconName]="model.cssClasses.decreaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     </button>
     <button
-    [class]="model.cssClasses.arrowButton" (mousedown)="model.onUpButtonMouseDown()" (mouseup)="model.onButtonMouseUp()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
+    [class]="model.cssClasses.arrowButton" (mousedown)="model.onUpButtonMouseDown()" (mouseup)="model.onButtonMouseUp()" (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
     <svg [iconName]="model.cssClasses.increaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
   </button>
   </span>

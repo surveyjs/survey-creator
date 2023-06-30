@@ -50,6 +50,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           className={this.question.cssClasses.arrowButton}
           onMouseDown={this.question.onDownButtonMouseDown}
           onMouseUp={this.question.onButtonMouseUp}
+          onMouseLeave={this.question.onButtonMouseLeave}
           onBlur={event => this.question.onBlur(event.nativeEvent)}
           onFocus={event => this.question.onFocus(event.nativeEvent)}>
           <SvgIcon iconName={this.question.cssClasses.decreaseButtonIcon} size={"auto"}></SvgIcon>
@@ -58,6 +59,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           className={this.question.cssClasses.arrowButton}
           onMouseDown={this.question.onUpButtonMouseDown}
           onMouseUp={this.question.onButtonMouseUp}
+          onMouseLeave={this.question.onButtonMouseLeave}
           onBlur={event => this.question.onBlur(event.nativeEvent)}
           onFocus={event => this.question.onFocus(event.nativeEvent)}>
           <SvgIcon iconName={this.question.cssClasses.increaseButtonIcon} size={"auto"}></SvgIcon>

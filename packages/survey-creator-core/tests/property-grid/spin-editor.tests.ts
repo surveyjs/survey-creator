@@ -71,9 +71,14 @@ test("Check spin editor question event callbacks", (done) => {
     expect(question.value).toBe(14);
     question.onUpButtonMouseDown();
     setTimeout(() => {
-      question.onButtonMouseUp();
+      question.onButtonMouseLeave();
       expect(question.value).toBe(16);
-      done();
+      question.onDownButtonMouseDown();
+      setTimeout(() => {
+        question.onButtonMouseUp();
+        expect(question.value).toBe(14);
+        done();
+      }, 200);
     }, 200);
   }, 200);
 });

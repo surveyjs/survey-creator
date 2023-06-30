@@ -67,6 +67,10 @@ export class QuestionSpinEditorImplementor extends QuestionImplementor {
       this.question.onButtonMouseUp(event);
       return true;
     });
+    this.setCallbackFunc("koOnButtonMouseLeave", (_: any, event: any) => {
+      this.question.onButtonMouseLeave(event);
+      return true;
+    });
 
     this.setObservaleObj("koReadOnlyValue", ko.computed(() => this.question.renderedValue));
   }
