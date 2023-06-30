@@ -1,5 +1,5 @@
 import { TestSurveyTabViewModel } from "survey-creator-core";
-import { Component, Input } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
