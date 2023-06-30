@@ -90,6 +90,7 @@ test("Check custom color question popup", () => {
   }] });
   survey.css = { color: { colorItem: "colorItemTest", colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
+  question.cssClasses;
   const dropdownAction = question.dropdownAction;
   const popupModel = dropdownAction.popupModel;
   const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
