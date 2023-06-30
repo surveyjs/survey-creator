@@ -14,7 +14,9 @@ test("Check spin editor question", () => {
   expect(question.value).toBe(0);
   expect(question.renderedValue).toBe("0pt");
   question.value = undefined;
-  expect(question.value).toBe(0);
+  expect(question.value).toBe(undefined);
+  question.value = null;
+  expect(question.value).toBe(undefined);
   question.value = "incorrect_value";
   expect(question.value).toBe(0);
   question.value = "123.132.123";

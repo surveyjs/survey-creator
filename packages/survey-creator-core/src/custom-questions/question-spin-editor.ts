@@ -25,6 +25,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     return !!this.unit && this._showUnitsInEditor;
   }
   private correctValue(newValue: string | number): number {
+    if(newValue == undefined || newValue == null) return <number>newValue;
     let renderedMax = Number(this.renderedMax);
     let renderedMin = Number(this.renderedMin);
     newValue = typeof newValue === "string" ? parseFloat(newValue): newValue;
