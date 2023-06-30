@@ -6,7 +6,10 @@ test("Check custom color question", () => {
   expect(question.renderedValue).toBe("#000000");
   expect(question.value).toBe(undefined);
   question.value = undefined;
-  expect(question.value).toBe("#000000");
+  expect(question.value).toBe(undefined);
+  expect(question.renderedValue).toBe("#000000");
+  question.value = null;
+  expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("#000000");
   question.value = "incorrect_value";
   expect(question.value).toBe("#000000");

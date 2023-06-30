@@ -14,6 +14,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   private getCorrectedValue(newValue: string): string {
+    if(newValue == undefined || newValue == null) return newValue;
     newValue = parseColor(newValue ?? "").color;
     newValue = (newValue.match(/#(\d|\w){1,6}/) || [DEFAULT_COLOR])[0];
     if(newValue.length === 4) {
