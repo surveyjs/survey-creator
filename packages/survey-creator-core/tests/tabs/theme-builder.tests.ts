@@ -314,7 +314,7 @@ test("Theme builder reset to default", (): any => {
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
   expect(currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
-  themeSurveyTab.applySelectedTheme();
+  themeSurveyTab.resetTheme();
   expect(currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();// rgba(249, 249, 249, 1)
 });
 

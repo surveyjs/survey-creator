@@ -31,7 +31,7 @@
 
 .svc-item-value--dragging {
   background: $background;
-  box-shadow: 0px calcSize(1) calcSize(2) $shadow-medium;
+  box-shadow: $shadow-large;
   border-radius: calcSize(12.5);
   padding-right: calcSize(3);
   padding-left: calcSize(0.5);

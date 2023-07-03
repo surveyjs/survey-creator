@@ -122,7 +122,7 @@
     overflow: hidden;
     border-radius: calcSize(12.5);
     background-color: $background;
-    box-shadow: 0px 2px 6px $shadow-medium;
+    box-shadow: $shadow-medium;
     transition: 0.1s ease-in-out;
 
     .svc-toolbox__item-title {

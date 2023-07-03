@@ -41,7 +41,7 @@ svc-question {
   box-sizing: border-box;
   padding: calcSize(4) calcSize(5) calcSize(8);
   background: $background;
-  box-shadow: 0px 1px 2px $shadow-inner;
+  box-shadow: $shadow-small;
   border: 2px solid transparent;
   outline: none;
 }
@@ -64,7 +64,7 @@ svc-question {
   }
 
   .sd-multipletext__item-container.sd-input:focus-within {
-    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: $shadow-inner;
   }
 
   .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
@@ -169,7 +169,7 @@ svc-question {
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
-  box-shadow: 0px 8px 16px $shadow-medium;
+  box-shadow: $shadow-large;
   @include disableUserSelect;
   max-width: 500px;
   overflow: hidden;
@@ -491,7 +491,7 @@ svc-question,
   }
 
   &:focus {
-    background-color: $primary-background-light;
+    background-color: $primary-light;
   }
 
   top: calcSize(2);

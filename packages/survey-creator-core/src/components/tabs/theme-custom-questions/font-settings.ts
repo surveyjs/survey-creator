@@ -2,6 +2,7 @@ import { ComponentCollection } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 export const DefaultFonts = [
+  "Open Sans",
   "Arial, sans-serif",
   "Brush Script MT, cursive",
   "Courier New, monospace",

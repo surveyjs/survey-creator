@@ -18,7 +18,7 @@
   width: 100%;
   flex-wrap: nowrap;
   background: $background;
-  box-shadow: 0px 1px 2px $shadow-inner;
+  box-shadow: $shadow-small;
   border-radius: calcCornerRadius(1);
   & > div {
     padding-left: 0;
