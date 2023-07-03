@@ -1,6 +1,6 @@
 <div class="svc-creator-tab__content svc-test-tab__content"
   data-bind="css: { 'svc-creator-tab__content--with-toolbar' : isPageToolbarVisible }">
-  <div class="svc-plugin-tab__content">
+  <div class="svc-plugin-tab__content" data-bind="event: { scroll: $data.onScroll }">
     <survey-simulator params="model: simulator"></survey-simulator>
     <!-- ko ifnot: isRunning -->
     <div role="button" class="svc-preview__test-again svc-btn"

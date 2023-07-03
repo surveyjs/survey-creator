@@ -3842,3 +3842,20 @@ test("Undo/redo question removed from last page", (): any => {
 
   creator.undoRedoManager.changesFinishedCallback = prevCallback;
 });
+test("Change column properties, isCorrectProperty", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "matrixdynamic", name: "q", columns: [{ cellType: "expression", name: "col1" }] }]
+  };
+  let propName;
+  creator.onModified.add((sender, options) => {
+    propName = options.name;
+  });
+  const matrix = creator.survey.getQuestionByName("q");
+  const column = matrix.columns[0];
+  expect(creator.undoRedoManager.isCorrectProperty(column, "expression")).toBeTruthy();
+  column.title = "col title";
+  expect(propName).toBe("title");
+  column["expression"] = "today()";
+  expect(propName).toBe("expression");
+});
