@@ -14,7 +14,7 @@ require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
 import { getNextItemText } from "../utils/utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
-import { StringEditorConnector, StringEditorViewModelBase } from "./string-editor";
+import { StringEditorConnector } from "./string-editor";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
@@ -162,9 +162,7 @@ export class ItemValueWrapperViewModel extends Base {
   public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: CreatorBase) {
     item.value = "newitem";
     const itemValue = creator.createNewItemValue(question);
-    question.choices.push(itemValue);
     this.updateNewItemValue();
-    creator.onItemValueAddedCallback(question, this.collectionPropertyName, itemValue, question.choices);
     StringEditorConnector.get(itemValue.locText).setAutoFocus();
   }
 

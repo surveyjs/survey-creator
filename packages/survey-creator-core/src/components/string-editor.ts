@@ -10,7 +10,7 @@ export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
   protected abstract getItemLocString(items: any, item: any): LocalizableString;
   protected abstract getItemSets(): Array<any>;
-  protected abstract addNewItem(items: any, text?: string): void;
+  protected abstract addNewItem(creator: CreatorBase, items: any, text?: string): void;
   protected abstract getItemsPropertyName(items: any): string;
   private static createItemsNavigator(question: any): StringItemsNavigatorBase {
     if (question instanceof QuestionImagePickerModel) return null;
@@ -23,10 +23,14 @@ export abstract class StringItemsNavigatorBase {
   }
 
   protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
-    let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new ItemValue(text))).concat(items.slice(startIndex + 1));
+    const createNewItem = (val: any): ItemValue => {
+      if(this.question.createItemValue) return this.question.createItemValue(val);
+      return new ItemValue(val);
+    };
+    let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => createNewItem(text))).concat(items.slice(startIndex + 1));
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
-  private setEventsForItem(items: any[], item: any) {
+  private setEventsForItem(creator: CreatorBase, items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
@@ -35,7 +39,7 @@ export abstract class StringItemsNavigatorBase {
         StringEditorConnector.get(this.getItemLocString(items, items[itemIndex + 1])).activateEditor();
       }
       if (itemIndex == items.length - 1) {
-        this.addNewItem(items);
+        this.addNewItem(creator, items);
         StringEditorConnector.get(this.getItemLocString(items, items[items.length - 1])).setAutoFocus();
         StringEditorConnector.get(this.getItemLocString(items, items[items.length - 1])).activateEditor();
       }
@@ -75,6 +79,7 @@ export abstract class StringItemsNavigatorBase {
     const question = questionAdorner.element as Question;
     const navigator = StringItemsNavigatorBase.createItemsNavigator(question);
     if (navigator) {
+      const creator = questionAdorner.creator;
       const titleConnector: StringEditorConnector = StringEditorConnector.get(question.locTitle);
       let allItemSets = navigator.getItemSets();
       let activeChoices = allItemSets[0];
@@ -86,13 +91,13 @@ export abstract class StringItemsNavigatorBase {
       }
       allItemSets.forEach((activeChoices) => {
         activeChoices.forEach(item => {
-          navigator.setEventsForItem(activeChoices, item);
+          navigator.setEventsForItem(creator, activeChoices, item);
         });
         const itemsPropertyName = navigator.getItemsPropertyName(activeChoices);
         question.onPropertyChanged.add((sender: any, options: any) => {
           if (options.name == itemsPropertyName) {
             activeChoices.forEach(item => {
-              navigator.setEventsForItem(activeChoices, item);
+              navigator.setEventsForItem(creator, activeChoices, item);
             });
           }
         });
@@ -109,8 +114,9 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.choices];
   }
-  protected addNewItem(items: any, text: string = null) {
-    this.question.choices.push(new ItemValue(text || getNextValue("item", items.map(i => i.value)) as string));
+  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
+    const itemValue = creator.createNewItemValue(this.question);
+    if(!!text) itemValue.value = text;
   }
   protected getItemsPropertyName(items: any) {
     return "choices";
@@ -124,7 +130,7 @@ class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.items];
   }
-  protected addNewItem(items: any, text: string = null) {
+  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
     this.question.addItem(text || getNextValue("text", items.map(i => i.name)) as string);
   }
   protected getItemsPropertyName(items: any) {
@@ -142,7 +148,7 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.columns, this.question.rows];
   }
-  protected addNewItem(items: any, text: string = null) {
+  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
     if (items == this.question.columns) this.question.addColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
     if (items == this.question.rows) this.question.rows.push(text || new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
   }
