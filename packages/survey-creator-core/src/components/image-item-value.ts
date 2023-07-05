@@ -1,4 +1,4 @@
-import { CssClassBuilder, ImageItemValue, property, QuestionImagePickerModel, QuestionSelectBase } from "survey-core";
+import { CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -41,13 +41,10 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   public uploadFiles(files) {
     this.isUploading = true;
     this.creator.uploadFiles(files, this.question, (_, link) => {
-      const itemValue = <ImageItemValue>this.creator.createNewItemValue(this.question);
-      itemValue.imageLink = link;
-      this.question.choices.push(itemValue);
-      if (this.isChoosingNewFile && this.creator) {
-        this.creator.onItemValueAddedCallback(this.question, "choices", itemValue, this.question.choices);
-        this.isChoosingNewFile = false;
-      }
+      this.creator.createNewItemValue(this.question, this.isChoosingNewFile, (res : ItemValue): void => {
+        (<ImageItemValue>res).imageLink = link;
+      });
+      this.isChoosingNewFile = false;
       this.isUploading = false;
     });
   }

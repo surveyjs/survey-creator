@@ -3224,10 +3224,18 @@ export class CreatorBase extends Base
     const itemText = this.getChoicesItemBaseTitle();
     return getNextItemValue(itemText, question.choices);
   }
-  public createNewItemValue(question: QuestionSelectBase): ItemValue {
+  public createNewItemValue(question: QuestionSelectBase, callEvent: boolean = true, callback?: (res: ItemValue) => void): ItemValue {
     const nextValue = this.getNextItemValue(question);
     const res = question.createItemValue(nextValue);
     res.text = getNextItemText(question.choices);
+    question.choices.push(res);
+    if(callback) {
+      callback(res);
+    }
+    if(callEvent) {
+      const propName = !!res.ownerPropertyName ? res.ownerPropertyName : "choices";
+      this.onItemValueAddedCallback(question, propName, res, question.choices);
+    }
     return res;
   }
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
