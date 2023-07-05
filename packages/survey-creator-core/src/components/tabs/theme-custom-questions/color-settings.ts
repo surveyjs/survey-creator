@@ -34,9 +34,13 @@ ComponentCollection.Instance.add({
   onPropertyChanged(question, propertyName, newValue) {
     syncPropertiesFromCompositeToColor(question, propertyName, newValue);
   },
+  valueToQuestion(value) {
+    return !!value ? createColor(value) : "";
+  },
+  valueFromQuestion(value) {
+    return typeof value == "string" ? parseColor(value) : value;
+  },
   onCreated(question: QuestionCompositeModel) {
-    question.valueFromDataCallback = (newValue: string | Object): Object => typeof newValue == "string" ? parseColor(newValue) : newValue;
-    question.valueToDataCallback = (newValue: string | Object): string => !!newValue ? (typeof newValue == "string" ? newValue : createColor(newValue)) : "";
     question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
   }
 });
