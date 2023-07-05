@@ -10,7 +10,7 @@ import { createColor } from "../../src/components/tabs/theme-custom-questions/co
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 import { parseColor } from "../../src/utils/utils";
-import { SurveyModel } from "survey-core";
+import { ComponentCollection, Serializer, SurveyModel } from "survey-core";
 
 import "survey-core/survey.i18n";
 
@@ -493,15 +493,70 @@ test("Check colorsettings question", () => {
   survey.data = {
     "test": "rgba(103, 50, 65, 0.75)"
   };
-  expect(question.value).toEqual({
-    "color": "#673241",
-    "opacity": 75
-  });
+  expect(question.value).toEqual("rgba(103, 50, 65, 0.75)");
+  expect(question.contentPanel.questions[0].value).toBe("#673241");
+  expect(question.contentPanel.questions[1].value).toBe(75);
+
   question.value = {
     "color": "#673fff",
     "opacity": 50
   };
+  expect(question.value).toEqual("rgba(103, 63, 255, 0.5)");
   expect(survey.data).toEqual({ "test": "rgba(103, 63, 255, 0.5)" });
+
+  question.contentPanel.questions[0].value = "#673000";
+  question.contentPanel.questions[1].value = 25;
+
+  expect(question.value).toEqual("rgba(103, 48, 0, 0.25)");
+  expect(survey.data).toEqual({ test: "rgba(103, 48, 0, 0.25)" });
+});
+
+test("Check colorsettings + another composite questions", () => {
+  const json = {
+    name: "elementsettingstest",
+    showInToolbox: false,
+    elementsJSON: [
+      {
+        type: "colorsettings",
+        name: "backcolor",
+        titleLocation: "left",
+        descriptionLocation: "hidden"
+      },
+    ],
+  };
+  ComponentCollection.Instance.add(json);
+  const survey = new SurveyModel({
+    elements: [{
+      type: "elementsettingstest",
+      name: "test",
+      defaultValue: {
+        backcolor: "rgba(68, 69, 67, 0.5)"
+      }
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+
+  expect(question.contentPanel.questions[0].value).toBe("rgba(68, 69, 67, 0.5)");
+  expect(survey.data).toEqual({ test: { backcolor: "rgba(68, 69, 67, 0.5)" } });
+
+  expect(question.contentPanel.questions[0].contentPanel.questions[0].value).toBe("#444543");
+  expect(question.contentPanel.questions[0].contentPanel.questions[1].value).toBe(50);
+
+  survey.data = {
+    test: {
+      backcolor: "#fffff0",
+    }
+  };
+  expect(question.contentPanel.questions[0].value).toBe("rgba(255, 255, 240, 1)");
+  expect(survey.data).toEqual({ test: { backcolor: "#fffff0" } });
+
+  question.contentPanel.questions[0].contentPanel.questions[0].value = "#19b000";
+  question.contentPanel.questions[0].contentPanel.questions[1].value = 40;
+
+  expect(question.contentPanel.questions[0].value).toBe("rgba(25, 176, 0, 0.4)");
+  expect(survey.data).toEqual({ test: { backcolor: "rgba(25, 176, 0, 0.4)" } });
+
+  Serializer.removeClass("elementsettingstest");
 });
 
 test("Check colorsettings question passes some properties to color question", () => {
