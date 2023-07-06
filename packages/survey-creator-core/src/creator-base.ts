@@ -2168,6 +2168,7 @@ export class CreatorBase extends Base
     }
     this.addNewElementReason = modifiedType;
     const currentRow = this.findRowByElement(selectedElement, parent);
+    element.setVisibleIndex(-1);
     if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {
