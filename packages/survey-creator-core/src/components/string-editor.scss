@@ -141,12 +141,12 @@
     border-radius: 3px;
     box-sizing: content-box;
     background-color: $background;
-    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
+    box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
   }
 }
 .svc-string-editor.svc-string-editor--error:focus-within {
   .svc-string-editor__border {
-    box-shadow: 0px 2px 6px $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
+    box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
   }
 }
 .sd-boolean {

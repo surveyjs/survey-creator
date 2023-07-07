@@ -64,7 +64,7 @@ ComponentCollection.Instance.add({
 });
 
 export function createBoxShadow(value: Array<any>): string {
-  return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x}px ${val.y}px ${val.blur}px ${val.spread}px ${val.color}`
+  return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x ?? 0}px ${val.y ?? 0}px ${val.blur ?? 0}px ${val.spread ?? 0}px ${val.color ?? "#000000"}`
   )).join(", ");
 }
 

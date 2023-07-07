@@ -653,3 +653,21 @@ test("Apply theme from theme builder", (): any => {
   expect(model.survey.themeVariables["--sjs-general-backcolor"]).toBe("#252525");
   expect(model.survey["isCompact"]).toBeTruthy();
 });
+
+test("Check that popups inside survey are closed when scrolling container", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = { elements: [{ type: "dropdown", name: "q1", choices: ["Item1", "Item2", "Item3"] }] };
+
+  creator.makeNewViewActive("test");
+
+  const model: TestSurveyTabViewModel = testPlugin.model;
+  const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
+  question.dropdownListModel.popupModel.toggleVisibility();
+  expect(model["onScrollCallback"]).toBeDefined();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
+  model.onScroll();
+  expect(question.dropdownListModel.popupModel.isVisible).toBeFalsy();
+  expect(model["onScrollCallback"]).toBeUndefined();
+  model.onScroll();
+});

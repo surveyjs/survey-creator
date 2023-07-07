@@ -14,7 +14,7 @@ require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
 import { getNextItemText } from "../utils/utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
-import { StringEditorConnector, StringEditorViewModelBase } from "./string-editor";
+import { StringEditorConnector } from "./string-editor";
 
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
@@ -84,6 +84,7 @@ export class ItemValueWrapperViewModel extends Base {
     return !this.isNew && this.question.choices.indexOf(this.item) > -1;
   }
   private isBanStartDrag(pointerDownEvent: PointerEvent): boolean {
+    if (!this.isDraggable) return true;
     const isContentEditable = (<HTMLElement>pointerDownEvent.target).getAttribute("contenteditable") === "true";
     return isContentEditable || !this.canBeDragged;
   }
@@ -161,9 +162,7 @@ export class ItemValueWrapperViewModel extends Base {
   public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: CreatorBase) {
     item.value = "newitem";
     const itemValue = creator.createNewItemValue(question);
-    question.choices.push(itemValue);
     this.updateNewItemValue();
-    creator.onItemValueAddedCallback(question, this.collectionPropertyName, itemValue, question.choices);
     StringEditorConnector.get(itemValue.locText).setAutoFocus();
   }
 
@@ -180,7 +179,7 @@ export class ItemValueWrapperViewModel extends Base {
     } else {
       const choices = model.question.choices;
       var index = choices.indexOf(model.item);
-      if(!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
+      if (!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
       var indexToFocus = this.findNextElementIndexToRemove(index);
       model.question.choices.splice(index, 1);
       this.focusNextElementToRemove(indexToFocus);

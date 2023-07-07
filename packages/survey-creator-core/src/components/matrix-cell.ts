@@ -6,7 +6,7 @@ import {
   MatrixDropdownColumn,
   property,
   QuestionMatrixDropdownModelBase,
-  QuestionSelectBase,
+  Helpers,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
@@ -17,7 +17,9 @@ require("./matrix-cell.scss");
 
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
+  private creator: CreatorBase;
   constructor(creator: CreatorBase, private cellQuestion: Question) {
+    this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
     this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
@@ -40,8 +42,10 @@ export class MatrixCellWrapperEditSurvey {
     if(!!prevCellType) {
       questionJSON.cellType = prevCellType;
     }
+    if(Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
     column.fromJSON(questionJSON);
     matrix.onColumnCellTypeChanged(column);
+    this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
   }
 }
 

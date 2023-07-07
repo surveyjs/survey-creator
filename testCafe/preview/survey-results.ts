@@ -64,3 +64,59 @@ test("Test survey results table expand/collapse", async (t) => {
     .click(tableRows.nth(0))
     .expect(Selector("td span").withText("srow_3").visible).notOk();
 });
+
+test("Check dropdowns inside survey are hided when scrolling container", async (t) => {
+  await t.resizeWindow(1920, 800);
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "dropdown",
+            "name": "question3",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "question2",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "question4",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  });
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabPreviewName))
+    .click(Selector(".sd-dropdown__filter-string-input"))
+    .expect(Selector(".sv-popup__container").filterVisible().exists).ok()
+    .scroll(Selector(".svc-plugin-tab__content"), "bottom")
+    .expect(Selector(".sv-popup__container").filterVisible().exists).notOk();
+});

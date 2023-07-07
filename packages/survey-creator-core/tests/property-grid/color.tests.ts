@@ -6,11 +6,20 @@ test("Check custom color question", () => {
   expect(question.renderedValue).toBe("#000000");
   expect(question.value).toBe(undefined);
   question.value = undefined;
-  expect(question.value).toBe("#000000");
+  expect(question.value).toBe(undefined);
+  expect(question.renderedValue).toBe("#000000");
+  question.value = null;
+  expect(question.value).toBe(undefined);
   expect(question.renderedValue).toBe("#000000");
   question.value = "incorrect_value";
   expect(question.value).toBe("#000000");
   expect(question.renderedValue).toBe("#000000");
+  question.value = "rgba(1, 0, 1, 0.25)";
+  expect(question.value).toBe("#010001");
+  expect(question.renderedValue).toBe("#010001");
+  question.value = "rgb(255, 255, 255)";
+  expect(question.value).toBe("#ffffff");
+  expect(question.renderedValue).toBe("#FFFFFF");
   question.value = "fe#fe";
   expect(question.value).toBe("#fe0000");
   expect(question.renderedValue).toBe("#FE0000");
@@ -84,6 +93,7 @@ test("Check custom color question popup", () => {
   }] });
   survey.css = { color: { colorItem: "colorItemTest", colorDropdownIcon: "colorDropdownIconTest", colorDropdown: "colorDropdownTest" } };
   const question = <QuestionColorModel>survey.getAllQuestions()[0];
+  question.cssClasses;
   const dropdownAction = question.dropdownAction;
   const popupModel = dropdownAction.popupModel;
   const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
@@ -104,4 +114,32 @@ test("Check custom color question popup", () => {
   expect(listModel.isItemSelected(listModel.actions[0])).toBeFalsy();
 
   expect(listModel.actions[0].component).toBe("color-item");
+});
+
+test("QuestionColorModel renderedValue always HEX", () => {
+  const q = new QuestionColorModel("q1");
+  q.value = "rgba(1,2,3,1)";
+  expect(q.renderedValue).toEqual("#010203");
+});
+
+test("QuestionColorModel renderedValue always HEX (value from survey)", () => {
+  const survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+  }] });
+  const q = survey.getQuestionByName("q1");
+  survey.data = {
+    "q1": "rgba(1,2,3,1)"
+  };
+  expect(q.renderedValue).toEqual("#010203");
+});
+
+test("QuestionColorModel renderedValue when _renderedValue and value are empty", () => {
+  let q = new QuestionColorModel("q1");
+  q._renderedValue = "";
+  expect(q.renderedValue).toBe("#000000");
+  q = new QuestionColorModel("q1");
+  q._renderedValue = "";
+  q.value = "";
+  expect(q.renderedValue).toBe("#000000");
 });

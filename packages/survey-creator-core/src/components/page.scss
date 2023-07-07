@@ -36,7 +36,7 @@ svc-page {
 
 .svc-page__content:not(.svc-page__content--new):focus,
 .svc-hovered.svc-page__content:not(.svc-page__content--new) {
-  background: $secondary-back-light;
+  background: $secondary-backcolor-semi-light;
 }
 
 .svc-creator .svc-page .svc-page__content--selected,
@@ -46,7 +46,7 @@ svc-page {
 
   &.svc-page__content--selected {
     box-shadow: 0 0 0 2px $secondary inset;
-    background: $secondary-back-light;
+    background: $secondary-backcolor-semi-light;
 
     .svc-page__content-actions {
       display: block;
@@ -99,7 +99,7 @@ svc-page {
   }
 
   &:focus {
-    background-color: $primary-background-light;
+    background-color: $primary-light;
   }
 }
 

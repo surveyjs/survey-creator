@@ -1,6 +1,7 @@
 import { Action, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/utils";
 
+const DEFAULT_COLOR: string = "#000000";
 export class QuestionColorModel extends QuestionTextModel {
   @property() public unit: string;
 
@@ -13,8 +14,9 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   private getCorrectedValue(newValue: string): string {
+    if(newValue == undefined || newValue == null) return newValue;
     newValue = parseColor(newValue ?? "").color;
-    newValue = (newValue.match(/#(\d|\w){1,6}/) || ["#000000"])[0];
+    newValue = (newValue.match(/#(\d|\w){1,6}/) || [DEFAULT_COLOR])[0];
     if(newValue.length === 4) {
       for(let i = 1; i < 4; i++) {
         newValue += newValue[i];
@@ -34,7 +36,7 @@ export class QuestionColorModel extends QuestionTextModel {
     this.updateRenderedValue();
   }
   public onBeforeInput(event: InputEvent): void {
-    if(!!event.data && !/[\d\w#]/.test(event.data)) {
+    if(!!event.data && !/[\d\w(),#]/.test(event.data)) {
       event.preventDefault();
     }
   }
@@ -44,15 +46,23 @@ export class QuestionColorModel extends QuestionTextModel {
   public getType(): string {
     return "color";
   }
-  @property({}) _renderedValue: string;
+  @property() _renderedValue: string;
   private resetRenderedValue(): void {
     this._renderedValue = undefined;
   }
   private updateRenderedValue(): void {
-    this._renderedValue = this.value;
+    if(this.value) {
+      const color = parseColor(this.value || "");
+      this._renderedValue = color.color;
+    } else {
+      this._renderedValue = DEFAULT_COLOR;
+    }
   }
   public get renderedValue(): string {
-    return (this._renderedValue ?? this.value ?? "#000000").toUpperCase();
+    if(!this._renderedValue) {
+      this.updateRenderedValue();
+    }
+    return this._renderedValue.toUpperCase();
   }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
@@ -85,9 +95,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   public createDropdownAction(): Action {
-    const action = createDropdownActionModelAdvanced({
-      iconName: this.cssClasses.colorDropdownIcon
-    }, {
+    const action = createDropdownActionModelAdvanced({}, {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },
@@ -99,14 +107,23 @@ export class QuestionColorModel extends QuestionTextModel {
     });
     const popupModel = <PopupModel>action.popupModel;
     const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
-    listModel.cssClasses = {
-      itemBody: listModel.cssClasses.itemBody + " " + this.cssClasses.colorItem
-    };
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;
-    action.cssClasses = { item: this.cssClasses.colorDropdown };
     return action;
+  }
+
+  protected calcCssClasses(css: any): void {
+    const classes = super.calcCssClasses(css);
+    const dropdownAction = this.dropdownAction;
+    dropdownAction.cssClasses = { item: classes.colorDropdown };
+    dropdownAction.iconName = classes.colorDropdownIcon;
+    const listModel = <ListModel<ItemValue>>dropdownAction.popupModel.contentComponentData.model;
+    listModel.cssClasses = {};
+    listModel.cssClasses = {
+      itemBody: listModel.cssClasses.itemBody + " " + classes.colorItem
+    };
+    return classes;
   }
 
   private updateChoices() {

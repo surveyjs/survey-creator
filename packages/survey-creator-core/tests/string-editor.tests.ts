@@ -5,6 +5,8 @@ import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { QuestionAdornerViewModel } from "../src/components/question";
 
+settings.supportCreatorV2 = true;
+
 jest.mock("survey-core", () => ({
   ...jest["requireActual"]("survey-core"),
   sanitizeEditableContent: jest.fn(),
@@ -417,6 +419,38 @@ test("StringEditorConnector for selectbase questions", (): any => {
 
   connectorItem3.onBackspaceEmptyString.fire(null, {});
   expect(question.choices.map(c => c.value)).toEqual([]);
+});
+test("StringEditorConnector for new choice, Bug#4292", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: [{ value: "01", text: "item1" }, { value: "02", text: "item2" }] }
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  const connectorNewItem = StringEditorConnector.get(question.choices[1].locText);
+  let eventValue, eventText;
+  let eventCounter = 0;
+  creator.onItemValueAdded.add((sender, options) => {
+    eventCounter ++;
+    eventValue = options.newItem.value;
+    eventText = options.newItem.text;
+  });
+
+  connectorNewItem.onEditComplete.fire(null, {});
+  expect(question.choices).toHaveLength(3);
+  const newItem = question.choices[2];
+  expect(newItem.value).toBe("03");
+  expect(newItem.text).toBe("item3");
+  expect(eventCounter).toBe(1);
+  expect(eventValue).toBe("03");
+  expect(eventText).toBe("item3");
 });
 
 test("StringEditorConnector for multiple text questions", (): any => {
