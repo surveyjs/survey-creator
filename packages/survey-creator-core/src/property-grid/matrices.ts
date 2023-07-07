@@ -45,6 +45,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     };
     this.setupMatrixQuestion(obj, <QuestionMatrixDynamicModel>question, prop);
   }
+  public onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    const matrix = <QuestionMatrixDynamicModel>question;
+    if(matrix.allowRowsDragAndDrop && matrix.dragDropMatrixRows) {
+      matrix.dragDropMatrixRows.onDragStart.add(() => { options.startUndoRedoTransaction(); });
+      matrix.dragDropMatrixRows.onDragEnd.add(() => { options.stopUndoRedoTransaction(); });
+    }
+  }
   private initializeAcceptedTypes(obj: any, cellQuestion: Question) {
     if(obj.getType() === "imagepicker" && cellQuestion.name == "imageLink" && cellQuestion.getType() == "fileedit") {
       obj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
