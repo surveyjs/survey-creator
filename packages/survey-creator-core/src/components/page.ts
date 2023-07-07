@@ -13,7 +13,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public onPageSelectedCallback: () => void;
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
-  @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
+  get dragTypeOverMe(): DragTypeOverMeEnum {
+    return this.page?.dragTypeOverMe;
+  }
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
@@ -30,8 +32,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     super.attachElement(surveyElement);
 
     if (!!this.page) {
-      this.dragTypeOverMe = <any> new ComputedUpdater(() => this.page.dragTypeOverMe);
-
       this.page["surveyChangedCallback"] = () => {
         this.isPageLive = !!this.page.survey;
       };
