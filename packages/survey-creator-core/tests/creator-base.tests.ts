@@ -3078,7 +3078,27 @@ test("Add Questions with selection", (): any => {
   expect(panel.elements[2].name).toEqual("question4");
   expect(panel.elements[3].name).toEqual("question3");
   expect(panel.elements[4].name).toEqual("question5");
+  expect((<any>panel.elements[4]).visibleIndex).toBe(4);
 });
+test("Add Questions into detail panel", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "matrixdynamic", name: "matrix", columns: [{ cellType: "text", name: "col1" }],
+    detailPanelMode: "underRow", detailElements: [{ type: "text", name: "question1" }] }] };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  const row = matrix.visibleRows[0];
+  row.showDetailPanel();
+  const panel = row.detailPanel;
+  expect(panel).toBeTruthy();
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  expect(panel.questions).toHaveLength(2);
+  const question1 = panel.questions[0];
+  const question2 = panel.questions[1];
+  expect(question1.no).toBeFalsy();
+  expect(question2.name).toBe("question2");
+  expect(question2.no).toBeFalsy();
+});
+
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
