@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImagePosition } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -109,14 +109,14 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   }) backgroundImageFit;
   @property({
-    defaultValue: "scroll", onSet: (newValue: ImagePosition, _target: ThemeSurveyTabViewModel) => {
+    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeSurveyTabViewModel) => {
       if (!!_target.survey) {
-        _target.survey.backgroundImagePosition = newValue;
+        _target.survey.backgroundImageAttachment = newValue;
       }
-      _target.currentTheme["backgroundImagePosition"] = newValue;
+      _target.currentTheme["backgroundImageAttachment"] = newValue;
 
     }
-  }) backgroundImagePosition;
+  }) backgroundImageAttachment;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
@@ -190,7 +190,7 @@ export class ThemeSurveyTabViewModel extends Base {
     this.themeMode = theme.isCompact ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
-    this.backgroundImagePosition = theme.backgroundImagePosition;
+    this.backgroundImageAttachment = theme.backgroundImageAttachment;
 
     const fullThemeName = this.getFullThemeName();
     if (!Themes[fullThemeName]) {
@@ -506,7 +506,7 @@ export class ThemeSurveyTabViewModel extends Base {
         }
         return;
       }
-      if (["backgroundImage", "backgroundImageFit", "backgroundImagePosition"].indexOf(options.name) !== -1) {
+      if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         return;
       }
@@ -577,7 +577,7 @@ export class ThemeSurveyTabViewModel extends Base {
     assign(newCssVariables, this.currentTheme.cssVariables);
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
-    themeEditorSurvey.getQuestionByName("backgroundImagePosition").value = this.backgroundImagePosition;
+    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
 
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor"];
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dark"];
@@ -690,11 +690,11 @@ export class ThemeSurveyTabViewModel extends Base {
                   },
                   {
                     type: "buttongroup",
-                    name: "backgroundImagePosition",
+                    name: "backgroundImageAttachment",
                     titleLocation: "hidden",
                     choices: [
-                      { value: "fixed", text: getLocString("theme.backgroundImagePositionFixed") },
-                      { value: "scroll", text: getLocString("theme.backgroundImagePositionScroll") }
+                      { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
+                      { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
                     ],
                     defaultValue: "scroll"
                   },
