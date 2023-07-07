@@ -101,7 +101,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           "description"
         ]);
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-        this.dragTypeOverMe = null;
+        currentPage.dragTypeOverMe = null;
         return true;
       })) {
         this.creator.survey.currentPage = currentPage;
