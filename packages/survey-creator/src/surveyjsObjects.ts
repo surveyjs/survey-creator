@@ -572,7 +572,7 @@ questionPrototype["onSelectedElementChanged"] = function () {
 Survey.QuestionSelectBaseImplementor.prototype["onCreated"] = function () {
   var q: any = this.question;
   var updateTriggerFunction = function () {
-    if(!q.survey.isDesignMode) return;
+    if(!!q && !!q.survey && !q.survey.isDesignMode) return;
     setTimeout(() => q["koElementType"].notifySubscribers(), 0);
   };
   [
