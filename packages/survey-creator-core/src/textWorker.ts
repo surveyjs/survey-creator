@@ -1,4 +1,4 @@
-import { SurveyModel } from "survey-core";
+import { SurveyModel, JsonError, Base } from "survey-core";
 import { SurveyJSON5 } from "./json5";
 
 class SurveyForTextWorker extends SurveyModel {
@@ -7,17 +7,49 @@ class SurveyForTextWorker extends SurveyModel {
     this.setDesignMode(true);
     this.fromJSON(jsonObj);
   }
-  // public get isDesignMode(): boolean {
-  //   return true;
-  // }
+}
+
+export abstract class SurveyTextWorkerError {
+  public rowAt: number = -1;
+  public columnAt: number = -1;
+  public constructor(public at: number, public text: string) {
+  }
+  public abstract getErrorType(): string;
+}
+
+export class SurveyTextWorkerParserError extends SurveyTextWorkerError {
+  public getErrorType(): string { return "parseerror"; }
+}
+
+export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
+  public elementStart: number;
+  public elementEnd: number;
+  //private element: Base;
+  private errorType: string;
+  private propertyName: string;
+  public constructor(jsonError: JsonError) {
+    super(<number>jsonError.at, jsonError.getFullDescription());
+    this.elementStart = <number>jsonError.at;
+    this.elementEnd = <number>jsonError.end;
+    //this.element = jsonError.element;
+    this.errorType = jsonError.type;
+    this.propertyName = jsonError["propertyName"];
+  }
+  public getErrorType(): string { return this.errorType; }
+  public correctAt(text: string): void {
+    if(!this.propertyName || this.at < 0 || this.errorType !== "unknownproperty") return;
+    const index = text.indexOf(this.propertyName, this.at);
+    if(index > -1 && (this.elementEnd < 0 || index < this.elementEnd)) {
+      this.at = index;
+    }
+  }
 }
 
 export class SurveyTextWorker {
   public static newLineChar: string;
-  public errors: Array<any>;
+  public errors: Array<SurveyTextWorkerError>;
   private surveyValue: SurveyModel;
   private jsonValue: any;
-  private surveyObjects: Array<any>;
 
   constructor(public text: string) {
     if (!this.text || this.text.trim() == "") {
@@ -36,28 +68,21 @@ export class SurveyTextWorker {
     try {
       this.jsonValue = new SurveyJSON5(1).parse(this.text);
     } catch (error) {
-      this.errors.push({
-        pos: { start: error.at, end: -1 },
-        text: error.message,
-      });
+      this.errors.push(new SurveyTextWorkerParserError(error.at, error.message));
     }
     if (this.jsonValue != null) {
       this.updateJsonPositions(this.jsonValue);
-      var pureJsonValue = new SurveyJSON5().parse(this.text);
-      this.surveyValue = new SurveyForTextWorker(pureJsonValue);
-      if (this.surveyValue.jsonErrors != null) {
-        for (var i = 0; i < this.surveyValue.jsonErrors.length; i++) {
-          var error = this.surveyValue.jsonErrors[i];
-          this.errors.push({
-            pos: { start: error.at, end: -1 },
-            text: error.getFullDescription(),
-          });
+      this.surveyValue = new SurveyForTextWorker(this.jsonValue);
+      const jsonErrors = this.surveyValue.jsonErrors;
+      if (Array.isArray(jsonErrors)) {
+        for (var i = 0; i < jsonErrors.length; i++) {
+          const error = new SurveyTextWorkerJsonError(jsonErrors[i]);
+          error.correctAt(this.text);
+          this.errors.push(error);
         }
       }
     }
-    this.surveyObjects = this.createSurveyObjects();
-    this.setEditorPositionByChartAt(this.surveyObjects);
-    this.setEditorPositionByChartAt(this.errors);
+    this.setErrorsPositionByChartAt();
   }
   private updateJsonPositions(jsonObj: any) {
     jsonObj["pos"]["self"] = jsonObj;
@@ -69,37 +94,22 @@ export class SurveyTextWorker {
       }
     }
   }
-  private createSurveyObjects(): Array<any> {
-    var result = [];
-    if (this.surveyValue == null) return result;
-    for (var i = 0; i < this.surveyValue.pages.length; i++) {
-      var page = this.surveyValue.pages[i];
-      if (i == 0 && !page["pos"]) {
-        page["pos"] = this.surveyValue["pos"];
-      }
-      result.push(page);
-      for (var j = 0; j < page.questions.length; j++) {
-        result.push(page.questions[j]);
-      }
-    }
-    return result;
-  }
-  private setEditorPositionByChartAt(objects: any[]) {
-    if (objects == null || objects.length == 0) return;
+  private setErrorsPositionByChartAt() {
+    if(this.errors.length === 0) return;
+    this.errors.sort((el1, el2) => {
+      if (el1.at > el2.at) return 1;
+      if (el1.at < el2.at) return -1;
+      return 0;
+    });
     var position = { row: 0, column: 0 };
-    var atObjectsArray = this.getAtArray(objects);
     var startAt: number = 0;
-    for (var i = 0; i < atObjectsArray.length; i++) {
-      var at = atObjectsArray[i].at;
+    for (var i = 0; i < this.errors.length; i++) {
+      let at = this.errors[i].at;
       position = this.getPostionByChartAt(position, startAt, at);
-      var obj = atObjectsArray[i].obj;
-      if (!obj.position) obj.position = {};
-      if (at == obj.pos.start) {
-        obj.position.start = position;
-      } else {
-        if (at == obj.pos.end) {
-          obj.position.end = position;
-        }
+      var error = this.errors[i];
+      if (at == error.at) {
+        error.columnAt = position.column;
+        error.rowAt = position.row;
       }
       startAt = at;
     }
@@ -121,22 +131,5 @@ export class SurveyTextWorker {
       curChar++;
     }
     return result;
-  }
-  private getAtArray(objects: any[]): any[] {
-    var result = [];
-    for (var i = 0; i < objects.length; i++) {
-      var obj = objects[i];
-      var pos = obj.pos;
-      if (!pos) continue;
-      result.push({ at: pos.start, obj: obj });
-      if (pos.end > 0) {
-        result.push({ at: pos.end, obj: obj });
-      }
-    }
-    return result.sort((el1, el2) => {
-      if (el1.at > el2.at) return 1;
-      if (el1.at < el2.at) return -1;
-      return 0;
-    });
   }
 }

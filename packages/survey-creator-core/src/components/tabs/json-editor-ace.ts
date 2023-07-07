@@ -69,8 +69,8 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     for (let i = 0; i < errors.length; i++) {
       const error: any = errors[i];
       const annotation: any = {
-        row: error.position.start.row,
-        column: error.position.start.column,
+        row: error.rowAt,
+        column: error.columnAt,
         text: error.text,
         type: "error"
       };
