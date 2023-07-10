@@ -25,7 +25,6 @@ ComponentCollection.Instance.add({
       titleLocation: "left",
       descriptionLocation: "hidden",
       choices: [].concat(DefaultFonts),
-      defaultValue: "Open Sans",
       allowClear: false
     },
     {
@@ -39,14 +38,12 @@ ComponentCollection.Instance.add({
         { value: "600", text: getLocString("theme.fontWeightBold") },
         { value: "700", text: getLocString("theme.fontWeightHeavy") },
       ],
-      defaultValue: "400"
     },
     {
-      type: "color",
+      type: "colorsettings",
       name: "color",
       title: getLocString("theme.color"),
       titleLocation: "left",
-      // choices: ["#00FFFF", "#00FFFF"],
       descriptionLocation: "hidden"
     },
     {

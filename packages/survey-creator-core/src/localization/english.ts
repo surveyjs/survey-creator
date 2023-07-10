@@ -1016,6 +1016,8 @@ export var enStrings = {
     opacity: "Opacity",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Spread",
+    boxShadowDrop: "Drop",
+    boxShadowInner: "Inner",
     questionShadow: "Question Panel Border / Shadow",
     editorShadow: "Editor Border / Shadow",
     names: {

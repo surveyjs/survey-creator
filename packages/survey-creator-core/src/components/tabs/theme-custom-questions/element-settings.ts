@@ -6,14 +6,14 @@ ComponentCollection.Instance.add({
   showInToolbox: false,
   elementsJSON: [
     {
-      type: "color",
+      type: "colorsettings",
       name: "backcolor",
       title: getLocString("theme.backcolor"),
       titleLocation: "left",
       descriptionLocation: "hidden"
     },
     {
-      type: "color",
+      type: "colorsettings",
       name: "hovercolor",
       title: getLocString("theme.hovercolor"),
       titleLocation: "left",
@@ -26,13 +26,12 @@ ComponentCollection.Instance.add({
       titleLocation: "left",
       descriptionLocation: "hidden",
       unit: "px",
-      defaultValue: 4,
       min: 0
     },
     {
       type: "expression",
       name: "cornerRadius",
-      expression: "{composite.corner}+\"px\"",
+      expression: "iif({composite.corner} notempty, {composite.corner} + 'px', '')",
       visible: false
     }
   ],

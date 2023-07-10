@@ -52,7 +52,7 @@ ComponentCollection.Instance.add({
         "type": "buttongroup",
         "name": "isInset",
         "titleLocation": "hidden",
-        "choices": [{ text: "Drop", value: false }, { text: "Inner", value: true }]
+        "choices": [{ text: getLocString("theme.boxShadowDrop"), value: false }, { text: getLocString("theme.boxShadowInner"), value: true }]
       }
     ]
   },
