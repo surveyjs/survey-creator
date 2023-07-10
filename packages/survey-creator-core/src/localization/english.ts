@@ -978,6 +978,8 @@ export var enStrings = {
     "backgroundImageFitCover": "Cover",
     "backgroundImageFitContain": "Contain",
     "backgroundOpacity": "Opacity",
+    "backgroundImageAttachmentFixed": "Fixed",
+    "backgroundImageAttachmentScroll": "Scroll",
     "panelBackgroundTransparency": "Panel Background Transparency",
     "questionBackgroundTransparency": "Question Background Transparency",
     questionPanel: "Question Panel",
