@@ -1315,7 +1315,10 @@ export class CreatorBase extends Base
   private showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: CreatorEvent = new CreatorEvent();
   /**
-   * Set this this property grid false to hide the property grid.
+   * Specifies whether to show the sidebar that displays Property Grid.
+   * 
+   * Default value: `true`
+   * @see sidebarLocation
    */
   public get showSidebar(): boolean {
     return this.showSidebarValue;
@@ -3292,7 +3295,7 @@ export class CreatorBase extends Base
     }
   }) toolboxLocation: toolboxLocationType;
   /**
-   * Specifies the position of the sidebar that displays Property Grid.
+   * Specifies the position of the sidebar that displays Property Grid. Applies only when [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) is `true`.
    * 
    * Possible values:
    * 
