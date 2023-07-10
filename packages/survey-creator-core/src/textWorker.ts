@@ -37,11 +37,32 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   }
   public getErrorType(): string { return this.errorType; }
   public correctAt(text: string): void {
-    if(!this.propertyName || this.at < 0 || this.errorType !== "unknownproperty") return;
-    const index = text.indexOf(this.propertyName, this.at);
-    if(index > -1 && (this.elementEnd < 0 || index < this.elementEnd)) {
-      this.at = index;
+    if(this.at < 0) return;
+    if(this.propertyName && this.errorType === "unknownproperty") {
+      this.at = this.getCorrectAtForUnknowProperty(text);
     }
+    if(this.errorType === "duplicatename") {
+      this.at = this.getCorrectAtForDuplicateName(text);
+    }
+  }
+  private getCorrectAtForUnknowProperty(text: string): number {
+    const newAt = this.getNewIndex(text, this.propertyName);
+    return newAt > -1 ? newAt : this.at;
+  }
+  private getCorrectAtForDuplicateName(text: string): number {
+    let newAt = this.getNewIndex(text, "name:");
+    if(newAt < 0) {
+      newAt = this.getNewIndex(text, "\"name\":");
+    }
+    return newAt > -1 ? newAt : this.at;
+
+  }
+  private getNewIndex(text: string, findText: string): number {
+    const index = text.indexOf(findText, this.at);
+    if(index > -1 && (this.elementEnd < 0 || index < this.elementEnd)) {
+      return index;
+    }
+    return -1;
   }
 }
 
@@ -81,6 +102,7 @@ export class SurveyTextWorker {
           this.errors.push(error);
         }
       }
+      this.getDuplicatedNamesErrors().forEach(error => this.errors.push(error));
     }
     this.setErrorsPositionByChartAt();
   }
@@ -131,5 +153,46 @@ export class SurveyTextWorker {
       curChar++;
     }
     return result;
+  }
+  private getDuplicatedNamesErrors(): Array<SurveyTextWorkerJsonError> {
+    const res = [];
+    this.getDuplicatedElements().forEach(el => {
+      const error = new SurveyTextWorkerJsonError(this.createDuplicatedError(el));
+      error.correctAt(this.text);
+      if(error) res.push(error);
+    });
+
+    return res;
+  }
+  private getDuplicatedElements(): Array<Base> {
+    const res = [];
+    const names = {};
+    this.survey.pages.forEach(p=> this.checkDuplicatedElement(p, names, res));
+    this.survey.getAllPanels().forEach(p=> this.checkDuplicatedElement(p, names, res));
+    this.survey.getAllQuestions().forEach(q=> this.checkDuplicatedElement(q, names, res));
+    return res;
+  }
+  private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {
+    const name = el["name"];
+    if(names[name]) {
+      duplicates.push(el);
+    } else {
+      names[name] = true;
+    }
+  }
+  private createDuplicatedError(el: Base): JsonError {
+    const pos = el["pos"];
+    if(!pos) return undefined;
+    const error = new JsonError("duplicatename", "The name: '" + el["name"] + "' is duplicated.");
+    error.at = pos.start;
+    error.end = pos.end;
+    error.element = el;
+    return error;
+  }
+}
+export class JsonDuplicateNameError extends JsonError {
+  constructor(el: Base) {
+    super("duplicatename", "The name: '" + el["name"] + "' is duplicated.");
+    this.element = el;
   }
 }

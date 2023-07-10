@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -92,7 +92,7 @@ export class ThemeSurveyTabViewModel extends Base {
     _target.currentTheme["backgroundImage"] = newValue;
 
   } }) backgroundImage;
-  @property({ defaultValue: "cover", onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+  @property({ defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeSurveyTabViewModel) => {
     if(!!_target.survey) {
       _target.survey.backgroundImageFit = newValue;
     }
