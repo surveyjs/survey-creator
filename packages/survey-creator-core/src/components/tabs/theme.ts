@@ -99,15 +99,16 @@ export class ThemeSurveyTabViewModel extends Base {
 
     }
   }) backgroundImage;
+
   @property({
     defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeSurveyTabViewModel) => {
       if (!!_target.survey) {
         _target.survey.backgroundImageFit = newValue;
       }
       _target.currentTheme["backgroundImageFit"] = newValue;
-
     }
   }) backgroundImageFit;
+
   @property({
     defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeSurveyTabViewModel) => {
       if (!!_target.survey) {

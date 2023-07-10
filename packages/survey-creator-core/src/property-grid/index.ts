@@ -130,6 +130,7 @@ export interface IPropertyGridEditor {
     options: ISurveyCreatorOptions
   ) => IPropertyEditorSetup;
   onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
   onAfterRenderQuestion?: (
     obj: Base,
@@ -228,6 +229,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
       res.onCreated(obj, question, prop, options);
+    }
+  },
+  onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onSetup) {
+      res.onSetup(obj, question, prop, options);
     }
   },
   validateValue(obj: Base, question: Question, prop: JsonObjectProperty, value: any): string {
@@ -814,6 +821,9 @@ export class PropertyGridModel {
       false
     );
     this.survey.addPage(page);
+    this.survey.getAllQuestions().forEach(q => {
+      PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+    });
     this.survey.checkErrorsMode = "onValueChanging";
     this.survey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);

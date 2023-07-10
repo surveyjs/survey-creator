@@ -712,6 +712,13 @@ export class CreatorBase extends Base
     *- options.oldValue: the previous value of the changed property
     *- options.newValue: the new value of the changed property
     *
+    *- options.type: "ELEMENT_REORDERED"
+    *- options.arrayName: the name of the array property has been changed
+    *- options.parent: the object containing the array property
+    *- options.element: the element that changed the place in the array
+    *- options.indexFrom: moved from index
+    *- options.indexTo: moved to index
+    *
     *- options.type: "OBJECT_DELETED"
     *- options.target: deleted object
     *
@@ -2074,6 +2081,10 @@ export class CreatorBase extends Base
     options.type = "PROPERTY_CHANGED";
     this.setModified(options);
   }
+  public notifySurveyItemMoved(options: any): void {
+    options.type = "ELEMENT_REORDERED";
+    this.setModified(options);
+  }
   /**
    * This function triggers user notification (via the alert() function if no onNotify event handler added).
    * @see onNotify
@@ -2168,6 +2179,7 @@ export class CreatorBase extends Base
     }
     this.addNewElementReason = modifiedType;
     const currentRow = this.findRowByElement(selectedElement, parent);
+    element.setVisibleIndex(-1);
     if (currentRow && this.isRowMultiline(currentRow)) {
       this.addElemenMultiline(parent, element, index, currentRow);
     } else {

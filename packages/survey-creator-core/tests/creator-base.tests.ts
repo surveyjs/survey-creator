@@ -3078,7 +3078,27 @@ test("Add Questions with selection", (): any => {
   expect(panel.elements[2].name).toEqual("question4");
   expect(panel.elements[3].name).toEqual("question3");
   expect(panel.elements[4].name).toEqual("question5");
+  expect((<any>panel.elements[4]).visibleIndex).toBe(4);
 });
+test("Add Questions into detail panel", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "matrixdynamic", name: "matrix", columns: [{ cellType: "text", name: "col1" }],
+    detailPanelMode: "underRow", detailElements: [{ type: "text", name: "question1" }] }] };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
+  const row = matrix.visibleRows[0];
+  row.showDetailPanel();
+  const panel = row.detailPanel;
+  expect(panel).toBeTruthy();
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  expect(panel.questions).toHaveLength(2);
+  const question1 = panel.questions[0];
+  const question2 = panel.questions[1];
+  expect(question1.no).toBeFalsy();
+  expect(question2.name).toBe("question2");
+  expect(question2.no).toBeFalsy();
+});
+
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
   creator.saveSurveyFunc = function (
@@ -3609,9 +3629,43 @@ test("undo/redo DnD ", (): any => {
   expect(creator.survey.pages[0].elements.map(e => e.name)).toEqual(["question1", "question2"]);
   expect(creator.survey.pages[0].rows.length).toEqual(1);
 });
-test("canUndo with events", (): any => {
+test("creator.onModified, type='ELEMENT_REORDERED'", (): any => {
   const creator = new CreatorTester();
-
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] }]
+  };
+  let counter = 0, totalCounter = 0, indexFrom, indexTo;
+  creator.onModified.add(function (sender, options) {
+    totalCounter ++;
+    if (options.type === "ELEMENT_REORDERED" && options.arrayName === "choices" && options.parent.name === "q1") {
+      counter ++;
+      indexFrom = options.indexFrom;
+      indexTo = options.indexTo;
+    }
+  });
+  const q = <QuestionDropdownModel>creator.survey.getQuestionByName("q1");
+  const item = q.choices[1];
+  creator.startUndoRedoTransaction();
+  q.choices.splice(1, 1);
+  q.choices.splice(4, 0, item);
+  creator.stopUndoRedoTransaction();
+  expect(q.choices[1].value).toBe(3);
+  expect(q.choices[4].value).toBe(2);
+  expect(counter).toBe(1);
+  expect(totalCounter).toBe(1);
+  expect(indexFrom).toBe(1);
+  expect(indexTo).toBe(4);
+  creator.undo();
+  expect(q.choices[1].value).toBe(2);
+  expect(q.choices[4].value).toBe(5);
+  expect(counter).toBe(2);
+  expect(totalCounter).toBe(2);
+  expect(indexFrom).toBe(4);
+  expect(indexTo).toBe(1);
+});
+test("Reordering on drag&drop", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON;
   creator.onModified.add(function (sender, options) {
     // We use the question's name to display in the UI dropdown lists so keep it up to date
     if (options.type === "PROPERTY_CHANGED" && options.name === "title" && options.newValue !== "") {
@@ -3632,6 +3686,7 @@ test("canUndo with events", (): any => {
   creator.undo();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
+
 test("Reason of question Added from toolbox, onclicking add question button, on duplicated question, panel, page", (): any => {
   const creator = new CreatorTester();
   const reason = [];
