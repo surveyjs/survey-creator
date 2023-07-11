@@ -27,11 +27,6 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         });
       }
     });
-    // this.filePresentationModel.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: any) => {
-    //   if (name === "value" && newValue.length > 0) {
-    //     this.question.imageLink = newValue[0].content;
-    //   }
-    // };
   }
 
   constructor(
