@@ -176,7 +176,6 @@ export var propertyGridCss = {
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    selectWrapper: "",
     other: "spg-comment spg-question__other",
     onError: "spg-input--error"
   },

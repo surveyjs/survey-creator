@@ -168,7 +168,6 @@ export var translationCss = {
     root: "st-selectbase",
     small: "st-row__question--small",
     control: "st-input st-dropdown",
-    selectWrapper: "",
     other: "st-comment st-question__other",
     onError: "st-input--error",
     label: "st-selectbase__label",
