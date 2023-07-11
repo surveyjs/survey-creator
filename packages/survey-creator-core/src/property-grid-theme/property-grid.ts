@@ -176,9 +176,12 @@ export var propertyGridCss = {
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    selectWrapper: "",
     other: "spg-comment spg-question__other",
-    onError: "spg-input--error"
+    onError: "spg-input--error",
+    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
+    chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
+    chevronButtonSvg: "sd-dropdown_chevron-button-svg",
+    chevronButtonIconId: "icon-chevron",
   },
   imagepicker: {
     root: "spg-imagepicker",

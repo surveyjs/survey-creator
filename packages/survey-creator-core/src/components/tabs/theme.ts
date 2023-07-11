@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -33,6 +33,11 @@ export const PredefinedColors = {
     green: "rgba(140, 204, 90, 1)"
   }
 };
+
+export interface ICreatorTheme extends ITheme {
+  themeName?: string;
+  themePalette?: string;
+}
 
 export class ThemeSurveyTabViewModel extends Base {
   private json: any;
@@ -85,20 +90,34 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   })
   activePage: PageModel;
-  @property({ onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
-    if(!!_target.survey) {
-      _target.survey.backgroundImage = newValue;
-    }
-    _target.currentTheme["backgroundImage"] = newValue;
+  @property({
+    onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+      if (!!_target.survey) {
+        _target.survey.backgroundImage = newValue;
+      }
+      _target.currentTheme["backgroundImage"] = newValue;
 
-  } }) backgroundImage;
-  @property({ defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeSurveyTabViewModel) => {
-    if(!!_target.survey) {
-      _target.survey.backgroundImageFit = newValue;
     }
-    _target.currentTheme["backgroundImageFit"] = newValue;
+  }) backgroundImage;
 
-  } }) backgroundImageFit;
+  @property({
+    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeSurveyTabViewModel) => {
+      if (!!_target.survey) {
+        _target.survey.backgroundImageFit = newValue;
+      }
+      _target.currentTheme["backgroundImageFit"] = newValue;
+    }
+  }) backgroundImageFit;
+
+  @property({
+    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeSurveyTabViewModel) => {
+      if (!!_target.survey) {
+        _target.survey.backgroundImageAttachment = newValue;
+      }
+      _target.currentTheme["backgroundImageAttachment"] = newValue;
+
+    }
+  }) backgroundImageAttachment;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
@@ -133,7 +152,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
   }
-  public get currentTheme(): ITheme {
+  public get currentTheme(): ICreatorTheme {
     return this.surveyProvider.theme;
   }
 
@@ -166,18 +185,19 @@ export class ThemeSurveyTabViewModel extends Base {
     };
   }
 
-  private loadTheme(theme: ITheme) {
-    this.themeName = theme["themeName"];
-    this.themePalette = theme["themePalette"];
+  private loadTheme(theme: ICreatorTheme) {
+    this.themeName = theme.themeName;
+    this.themePalette = theme.themePalette;
     this.themeMode = theme.isCompact ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
+    this.backgroundImageAttachment = theme.backgroundImageAttachment;
 
     const fullThemeName = this.getFullThemeName();
     if (!Themes[fullThemeName]) {
       Themes[fullThemeName] = theme;
       const themeSelector = this.themeEditorSurvey.getQuestionByName("themeName");
-      themeSelector.choices = themeSelector.choices.concat(new ItemValue(theme["themeName"]));
+      themeSelector.choices = themeSelector.choices.concat(new ItemValue(theme.themeName));
     }
     const themeVariables = {};
     assign(themeVariables, this.themeVariables, theme.cssVariables);
@@ -481,13 +501,13 @@ export class ThemeSurveyTabViewModel extends Base {
           this.currentTheme.isCompact = options.value === "lightweight";
           this.applySelectedTheme();
         } else {
-          this.currentTheme["themeName"] = this.themeName;
-          this.currentTheme["themePalette"] = this.themePalette;
+          this.currentTheme.themeName = this.themeName;
+          this.currentTheme.themePalette = this.themePalette;
           this.resetTheme();
         }
         return;
       }
-      if (["backgroundImage", "backgroundImageFit"].indexOf(options.name) !== -1) {
+      if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         return;
       }
@@ -558,6 +578,7 @@ export class ThemeSurveyTabViewModel extends Base {
     assign(newCssVariables, this.currentTheme.cssVariables);
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
+    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
 
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor"];
     themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dark"];
@@ -667,6 +688,16 @@ export class ThemeSurveyTabViewModel extends Base {
                       { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
                     ],
                     defaultValue: "cover"
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "backgroundImageAttachment",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
+                      { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
+                    ],
+                    defaultValue: "scroll"
                   },
                   {
                     type: "spinedit",
