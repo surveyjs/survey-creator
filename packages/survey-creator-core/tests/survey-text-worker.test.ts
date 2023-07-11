@@ -28,6 +28,12 @@ test("SurveyTextWorker, incorrect property name pos", () => {
   expect(textWorker.text.substring(propNamePos, propNamePos + 5)).toBe("incor");
   expect(error.rowAt).toBe(8);
   expect(error.columnAt).toBe(10);
+  expect(error.isFixable).toBeTruthy();
+  const newJson = JSON.parse(error.fixError(textWorker.text));
+  expect(newJson.elements[1]).toEqual({
+    type: "text",
+    name: "q2"
+  });
 });
 test("SurveyTextWorker, show duplication name errors", () => {
   SurveyTextWorker.newLineChar = "\n";
@@ -61,4 +67,17 @@ test("SurveyTextWorker, show duplication name errors", () => {
   expect(textWorker.text.substring(propNamePos2, propNamePos2 + 7)).toBe("\"name\":");
   expect(error2.rowAt).toBe(15);
   expect(error2.columnAt).toBe(15);
+
+  expect(error2.isFixable).toBeTruthy();
+  const newJson2 = JSON.parse(error2.fixError(textWorker.text));
+  expect(newJson2.pages[0].elements[2]).toEqual({
+    type: "text",
+    name: "question1"
+  });
+  expect(error1.isFixable).toBeTruthy();
+  const newJson1 = JSON.parse(error1.fixError(textWorker.text));
+  expect(newJson1.pages[0].elements[1]).toEqual({
+    type: "text",
+    name: "question1"
+  });
 });

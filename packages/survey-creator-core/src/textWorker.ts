@@ -1,4 +1,5 @@
-import { SurveyModel, JsonError, Base } from "survey-core";
+import { SurveyModel, JsonError, Base, ISurveyElement } from "survey-core";
+import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
 
 class SurveyForTextWorker extends SurveyModel {
@@ -9,60 +10,122 @@ class SurveyForTextWorker extends SurveyModel {
   }
 }
 
+class SurveyTextWorkerJsonErrorFixerBase {
+  public getCorrectAt(text: string, at: number, end: number): number {
+    return at;
+  }
+  public get isFixable(): boolean { return false; }
+  public fixError(text: string, start: number, end: number): string { return text; }
+}
+
 export abstract class SurveyTextWorkerError {
   public rowAt: number = -1;
   public columnAt: number = -1;
+  private fixerValue: SurveyTextWorkerJsonErrorFixerBase;
   public constructor(public at: number, public text: string) {
   }
   public abstract getErrorType(): string;
+  public get isFixable(): boolean { return this.fixer.isFixable; }
+  public fixError(text: string): string { return text; }
+  protected get fixer(): SurveyTextWorkerJsonErrorFixerBase {
+    if(!this.fixerValue) {
+      this.fixerValue = this.createFixer();
+    }
+    return this.fixerValue;
+  }
+  protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
+    return new SurveyTextWorkerJsonErrorFixerBase();
+  }
 }
 
 export class SurveyTextWorkerParserError extends SurveyTextWorkerError {
   public getErrorType(): string { return "parseerror"; }
 }
 
+class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase {
+  public constructor(protected element: Base, protected jsonObj: any) {
+    super();
+  }
+  protected getNewIndex(text: string, findText: string, at: number, end: number): number {
+    const index = text.indexOf(findText, at);
+    if(index > -1 && (end < 0 || index < end)) {
+      return index;
+    }
+    return -1;
+  }
+  public fixError(text: string, start: number, end: number): string {
+    const content = text.substring(start, end + 1);
+    const json = JSON.parse(content);
+    this.updatedJsonObjOnFix(json);
+    return this.replaceJson(text, start, end, json);
+  }
+  protected updatedJsonObjOnFix(json: any): void {
+  }
+  protected replaceJson(text: string, start: number, end: number, json: any): string {
+    const newContent = JSON.stringify(json);
+    return text.substring(0, start) + newContent + text.substring(end + 1);
+  }
+}
+
+class SurveyTextWorkerJsonUnknownPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
+  public constructor(protected element: Base, protected jsonObj: any, private propertyName: string) {
+    super(element, jsonObj);
+  }
+  public get isFixable(): boolean { return !!this.propertyName; }
+  public getCorrectAt(text: string, at: number, end: number): number {
+    const propName = this.propertyName;
+    if(!propName) return at;
+    return this.getNewIndex(text, this.propertyName, at, end);
+  }
+  protected updatedJsonObjOnFix(json: any): void {
+    if(!!this.propertyName) {
+      delete json[this.propertyName];
+    }
+  }
+}
+class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonErrorFixer {
+  public get isFixable(): boolean { return true; }
+  public getCorrectAt(text: string, at: number, end: number): number {
+    let newAt = this.getNewIndex(text, "name:", at, end);
+    if(newAt > at) return newAt;
+    return this.getNewIndex(text, "\"name\":", at, end);
+  }
+  protected updatedJsonObjOnFix(json: any): void {
+    json["name"] = SurveyHelper.getNewElementName(<ISurveyElement><any>this.element);
+  }
+}
+
 export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   public elementStart: number;
   public elementEnd: number;
-  //private element: Base;
+  private element: Base;
   private errorType: string;
   private propertyName: string;
+  private jsonObj: any;
   public constructor(jsonError: JsonError) {
     super(<number>jsonError.at, jsonError.getFullDescription());
     this.elementStart = <number>jsonError.at;
     this.elementEnd = <number>jsonError.end;
-    //this.element = jsonError.element;
+    this.element = jsonError.element;
     this.errorType = jsonError.type;
     this.propertyName = jsonError["propertyName"];
+    this.jsonObj = jsonError.jsonObj;
+  }
+  protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
+    if(this.errorType === "unknownproperty") return new SurveyTextWorkerJsonUnknownPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
+    if(this.errorType === "duplicatename") return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
+    return super.createFixer();
   }
   public getErrorType(): string { return this.errorType; }
+  public get isFixable(): boolean { return this.fixer.isFixable && this.elementStart > -1 && this.elementEnd > this.elementStart; }
   public correctAt(text: string): void {
-    if(this.at < 0) return;
-    if(this.propertyName && this.errorType === "unknownproperty") {
-      this.at = this.getCorrectAtForUnknowProperty(text);
-    }
-    if(this.errorType === "duplicatename") {
-      this.at = this.getCorrectAtForDuplicateName(text);
+    const newAt = this.fixer.getCorrectAt(text, this.at, this.elementEnd);
+    if(newAt > -1) {
+      this.at = newAt;
     }
   }
-  private getCorrectAtForUnknowProperty(text: string): number {
-    const newAt = this.getNewIndex(text, this.propertyName);
-    return newAt > -1 ? newAt : this.at;
-  }
-  private getCorrectAtForDuplicateName(text: string): number {
-    let newAt = this.getNewIndex(text, "name:");
-    if(newAt < 0) {
-      newAt = this.getNewIndex(text, "\"name\":");
-    }
-    return newAt > -1 ? newAt : this.at;
-
-  }
-  private getNewIndex(text: string, findText: string): number {
-    const index = text.indexOf(findText, this.at);
-    if(index > -1 && (this.elementEnd < 0 || index < this.elementEnd)) {
-      return index;
-    }
-    return -1;
+  public fixError(text: string): string {
+    return this.fixer.fixError(text, this.elementStart, this.elementEnd);
   }
 }
 
