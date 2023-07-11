@@ -186,6 +186,9 @@ export var logicCss = {
     controlLabel: "",
     materialDecorator: "",
     controlValue: "sl-dropdown__value",
+    chevronButton: "",
+    chevronButtonSvg: "",
+    chevronButtonIconId: "",
   },
   imagepicker: {
     root: "",
