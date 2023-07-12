@@ -77,11 +77,7 @@ export function fontsettingsFromCssVariable(question: IQuestion, themeCssVariabl
   const result = {};
   Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1).forEach(key => {
     const propertyName = key.split("-").pop();
-    if(propertyName === "cornerRadius") {
-      result["corner"] = parseFloat(themeCssVariables[key].toString());
-    } else {
-      result[propertyName] = themeCssVariables[key];
-    }
+    result[propertyName] = themeCssVariables[key];
   });
 
   if(Object.keys(result).length !== 0) {
