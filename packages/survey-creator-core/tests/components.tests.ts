@@ -712,6 +712,26 @@ test("QuestionImageAdornerViewModel isUploading", () => {
   expect(uploadCount).toBe(1);
 });
 
+test("QuestionImageAdornerViewModel filePresentationModel triggers creator.onUploadFile", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  let uploadCount = 0;
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback({}, "success");
+  });
+  expect(uploadCount).toBe(0);
+
+  imageAdorner.filePresentationModel.loadFiles([<any>{}]);
+
+  expect(uploadCount).toBe(1);
+});
+
 test("LogoImageViewModel isUploading", () => {
   const creator = new CreatorTester();
   const logoImageAdorner = new LogoImageViewModel(creator, { getElementsByClassName: () => [{ files: [{}] }] } as any);

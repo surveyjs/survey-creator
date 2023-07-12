@@ -231,6 +231,9 @@ export class UndoRedoAction implements IUndoRedoAction {
       newValue: isUndo? this._oldValue : this._newValue
     };
   }
+  getDeletedElement(isUndo: boolean): any { return undefined; }
+  getInsertedElement(isUndo: boolean): any { return undefined; }
+  getIndex(): number { return -1; }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
     if(sender !== this._sender || propertyName !== this._propertyName || newValue == this._oldValue) return false;
     const prop = Serializer.getOriginalProperty(sender, propertyName);
@@ -277,6 +280,14 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
       oldValue: this._deletedItems,
       newValue: this._itemsToAdd
     };
+  }
+  getDeletedElement(isUndo: boolean): any { return this.getMovedElement(this._deletedItems, this._itemsToAdd, isUndo); }
+  getInsertedElement(isUndo: boolean): any { return this.getMovedElement(this._itemsToAdd, this._deletedItems, isUndo); }
+  getIndex(): number { return this._index; }
+  private getMovedElement(items1: any[], items2: any[], isUndo: boolean) : any {
+    const items = isUndo ? items2 : items1;
+    if(Array.isArray(items) && items.length === 1) return items[0];
+    return undefined;
   }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
     return false;

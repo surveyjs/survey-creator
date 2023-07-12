@@ -12,16 +12,21 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   private initFilePresentationModel(): void {
     this.filePresentationModel = Serializer.createClass("file", { name: this.question.name });
-    this.filePresentationModel.setSurveyImpl(this.question.getSurvey() as SurveyModel);
+    const surveyModel = this.question.getSurvey() as SurveyModel;
+    this.filePresentationModel.setSurveyImpl(surveyModel);
     this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
     this.filePresentationModel.dragAreaPlaceholder = this.placeholderText;
     this.filePresentationModel.chooseButtonCaption = this.chooseImageText;
     this.filePresentationModel.acceptedTypes = "image/*";
-    this.filePresentationModel.onPropertyValueChangedCallback = (name: string, oldValue: any, newValue: any, sender: Base, arrayChanges: any) => {
-      if (name === "value" && newValue.length > 0) {
-        this.question.imageLink = newValue[0].content;
+    this.filePresentationModel.storeDataAsText = false;
+    surveyModel.onUploadFiles.add((s, o) => {
+      const fileToUpload = o.files[0];
+      if(!!fileToUpload) {
+        this.creator.uploadFiles(o.files, this.question, (status, link) => {
+          this.question.imageLink = link;
+        });
       }
-    };
+    });
   }
 
   constructor(

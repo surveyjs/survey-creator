@@ -712,6 +712,13 @@ export class CreatorBase extends Base
     *- options.oldValue: the previous value of the changed property
     *- options.newValue: the new value of the changed property
     *
+    *- options.type: "ELEMENT_REORDERED"
+    *- options.arrayName: the name of the array property has been changed
+    *- options.parent: the object containing the array property
+    *- options.element: the element that changed the place in the array
+    *- options.indexFrom: moved from index
+    *- options.indexTo: moved to index
+    *
     *- options.type: "OBJECT_DELETED"
     *- options.target: deleted object
     *
@@ -1308,7 +1315,10 @@ export class CreatorBase extends Base
   private showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: CreatorEvent = new CreatorEvent();
   /**
-   * Set this this property grid false to hide the property grid.
+   * Specifies whether to show the sidebar that displays Property Grid.
+   * 
+   * Default value: `true`
+   * @see sidebarLocation
    */
   public get showSidebar(): boolean {
     return this.showSidebarValue;
@@ -2072,6 +2082,10 @@ export class CreatorBase extends Base
       this.onSurveyPropertyValueChanged.fire(this, options);
     }
     options.type = "PROPERTY_CHANGED";
+    this.setModified(options);
+  }
+  public notifySurveyItemMoved(options: any): void {
+    options.type = "ELEMENT_REORDERED";
     this.setModified(options);
   }
   /**
@@ -3281,7 +3295,7 @@ export class CreatorBase extends Base
     }
   }) toolboxLocation: toolboxLocationType;
   /**
-   * Specifies the position of the sidebar that displays Property Grid.
+   * Specifies the position of the sidebar that displays Property Grid. Applies only when [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) is `true`.
    * 
    * Possible values:
    * 
