@@ -4,7 +4,7 @@ import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
-import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd } from "../../utils/utils";
+import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } from "../../utils/utils";
 import { settings } from "../../creator-settings";
 import { DefaultFonts } from "./theme-custom-questions/font-settings";
 
@@ -525,12 +525,12 @@ export class ThemeSurveyTabViewModel extends Base {
         this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       }
       if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light");
+        let baseColor = parseColor(themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light")).color;
         let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
         this.themeChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
       }
       if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = themeEditorSurvey.getValue("--sjs-general-backcolor");
+        let baseColor = parseColor(themeEditorSurvey.getValue("--sjs-general-backcolor")).color;
         let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
         this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
       }
@@ -820,21 +820,21 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.accentBackground"),
                 elements: [
                   {
-                    type: "color",
+                    type: "colorsettings",
                     name: "--sjs-primary-backcolor",
                     title: getLocString("theme.primaryDefaultColor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
                   },
                   {
-                    type: "color",
+                    type: "colorsettings",
                     name: "--sjs-primary-backcolor-dark",
                     title: getLocString("theme.primaryDarkColor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
                   },
                   {
-                    type: "color",
+                    type: "colorsettings",
                     name: "--sjs-primary-backcolor-light",
                     title: getLocString("theme.primaryLightColor"),
                     titleLocation: "left",
@@ -846,14 +846,14 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.accentForeground"),
                 elements: [
                   {
-                    type: "color",
+                    type: "colorsettings",
                     name: "--sjs-primary-forecolor",
                     title: getLocString("theme.primaryForecolor"),
                     titleLocation: "left",
                     descriptionLocation: "hidden",
                   },
                   {
-                    type: "color",
+                    type: "colorsettings",
                     name: "--sjs-primary-forecolor-light",
                     title: getLocString("theme.primaryForecolorLight"),
                     titleLocation: "left",
@@ -870,6 +870,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.surveyTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 32
@@ -880,6 +881,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.pageTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 24
@@ -890,7 +892,9 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.pageDescription"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
+                  weight: "400",
                   size: 16
                 }
               }
@@ -934,6 +938,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.questionTitle"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
                   weight: "600",
                   size: 16,
@@ -944,7 +949,9 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.questionDescription"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
+                  weight: "400",
                   size: 16
                 }
               }
@@ -987,7 +994,9 @@ export class ThemeSurveyTabViewModel extends Base {
                 title: getLocString("theme.editorFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
+                  family: settings.theme.fontFamily,
                   color: "rgba(22, 22, 22, 1)",
+                  weight: "400",
                   size: 16
                 }
               }
@@ -999,14 +1008,14 @@ export class ThemeSurveyTabViewModel extends Base {
               title: getLocString("theme.linesColors"),
               elements: [
                 {
-                  type: "color",
+                  type: "colorsettings",
                   name: "--sjs-border-default",
                   title: getLocString("theme.borderDefault"),
                   titleLocation: "left",
                   descriptionLocation: "hidden",
                 },
                 {
-                  type: "color",
+                  type: "colorsettings",
                   name: "--sjs-border-light",
                   title: getLocString("theme.borderLight"),
                   titleLocation: "left",

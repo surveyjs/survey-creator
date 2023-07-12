@@ -62,6 +62,7 @@ Object.keys(MikeThemes).forEach(function (themeName) {
     themes[themeName]["--sjs-primary-backcolor-light"] = primaryGroup["backcolor-light"] ? primaryGroup["backcolor-light"]["value"] : undefined;
     themes[themeName]["--sjs-primary-backcolor-dark"] = primaryGroup["backcolor-dark"] ? primaryGroup["backcolor-dark"]["value"] : undefined;
     themes[themeName]["--sjs-primary-forecolor"] = primaryGroup["forecolor"] ? primaryGroup["forecolor"]["value"] : undefined;
+    themes[themeName]["--sjs-primary-forecolor-light"] = primaryGroup["forecolor-light"] ? primaryGroup["forecolor-light"]["value"] : undefined;
     themes[themeName]["--sjs-base-unit"] = "8px";
     themes[themeName]["--sjs-corner-radius"] = "4px";
   }
