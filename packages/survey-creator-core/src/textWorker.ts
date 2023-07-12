@@ -94,6 +94,17 @@ class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonEr
     json["name"] = SurveyHelper.getNewElementName(<ISurveyElement><any>this.element);
   }
 }
+class SurveyTextWorkerJsonRequiredPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
+  public constructor(protected element: Base, protected jsonObj: any, private propertyName: string) {
+    super(element, jsonObj);
+  }
+  public get isFixable(): boolean { return this.propertyName === "name"; }
+  protected updatedJsonObjOnFix(json: any): void {
+    let name = this.element["name"];
+    if(!name) name = SurveyHelper.getNewElementName(<ISurveyElement><any>this.element);
+    json["name"] = name;
+  }
+}
 
 export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   public elementStart: number;
@@ -112,8 +123,12 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
     this.jsonObj = jsonError.jsonObj;
   }
   protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
-    if(this.errorType === "unknownproperty") return new SurveyTextWorkerJsonUnknownPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
-    if(this.errorType === "duplicatename") return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
+    if(this.errorType === "unknownproperty")
+      return new SurveyTextWorkerJsonUnknownPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
+    if(this.errorType === "duplicatename")
+      return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
+    if(this.errorType === "requiredproperty")
+      return new SurveyTextWorkerJsonRequiredPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
     return super.createFixer();
   }
   public getErrorType(): string { return this.errorType; }

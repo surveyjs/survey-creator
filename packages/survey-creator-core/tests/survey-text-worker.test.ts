@@ -81,3 +81,26 @@ test("SurveyTextWorker, show duplication name errors", () => {
     name: "question1"
   });
 });
+test("SurveyTextWorker, required properties", () => {
+  SurveyTextWorker.newLineChar = "\n";
+  const textWorker = createTextWorker({
+    pages: [{
+      name: "page1",
+      elements: [
+        {
+          type: "text"
+        }
+      ] }
+    ]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  const error = textWorker.errors[0];
+  const propNamePos = 85;
+  expect(error.at).toBe(propNamePos);
+  expect(error.isFixable).toBeTruthy();
+  const newJson = JSON.parse(error.fixError(textWorker.text));
+  expect(newJson.pages[0].elements[0]).toEqual({
+    type: "text",
+    name: "question1"
+  });
+});
