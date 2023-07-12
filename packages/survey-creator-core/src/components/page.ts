@@ -45,14 +45,14 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
             this.addGhostPage();
           }
         );
-        surveyElement.registerFunctionOnPropertiesValueChanged(
-          ["dragTypeOverMe"],
-          () => {
-            this.updateDragTypeOverMe();
-          }
-        );
         this.patchPageForDragDrop(surveyElement, this.addGhostPage);
       }
+      surveyElement.registerFunctionOnPropertiesValueChanged(
+        ["dragTypeOverMe"],
+        () => {
+          this.updateDragTypeOverMe();
+        }
+      );
       surveyElement.onFirstRendering();
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
@@ -119,9 +119,6 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           "description"
         ]);
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-        currentPage.unRegisterFunctionOnPropertiesValueChanged(
-          ["dragTypeOverMe"],
-        );
         return true;
       })) {
         this.creator.survey.currentPage = currentPage;
