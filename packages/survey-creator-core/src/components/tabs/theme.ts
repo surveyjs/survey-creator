@@ -492,7 +492,9 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if(this.blockChanges) return;
 
-      this.themeChanges[options.name] = options.value;
+      if(options.name.indexOf("--") === 0) {
+        this.themeChanges[options.name] = options.value;
+      }
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
@@ -621,7 +623,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "panel",
-                name: "themeMode",
+                name: "themeSettings",
                 title: getLocString("theme.themeMode"),
                 elements: [
                   {

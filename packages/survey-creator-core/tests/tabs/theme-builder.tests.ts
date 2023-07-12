@@ -1,5 +1,5 @@
 import { CreatorTester } from "../creator-tester";
-import { PredefinedColors, ThemeSurveyTabViewModel } from "../../src/components/tabs/theme";
+import { PredefinedColors, ThemeSurveyTabViewModel, Themes } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -781,4 +781,25 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
     "color": "rgba(201, 90, 231, 0.91)",
     "size": 18
   });
+});
+
+test("Theme builder: import/export theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+
+  themeEditor.getQuestionByName("questionTitle").contentPanel.getQuestionByName("size").value = 19;
+
+  const newResult = {};
+  assign(newResult, Themes["default"], {
+    "--sjs-font-questiontitle-color": "rgba(0, 0, 0, 0.91)",
+    "--sjs-font-questiontitle-family": "Open Sans",
+    "--sjs-font-questiontitle-size": "19px",
+    "--sjs-font-questiontitle-weight": "600"
+  }
+  );
+  expect(themeSurveyTab.currentTheme.cssVariables || {}).toEqual(newResult);
 });
