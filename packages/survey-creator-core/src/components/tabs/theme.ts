@@ -6,7 +6,8 @@ import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } from "../../utils/utils";
 import { settings } from "../../creator-settings";
-import { DefaultFonts } from "./theme-custom-questions/font-settings";
+import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
+import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
@@ -491,7 +492,9 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if(this.blockChanges) return;
 
-      this.themeChanges[options.name] = options.value;
+      if(options.name.indexOf("--") === 0) {
+        this.themeChanges[options.name] = options.value;
+      }
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
@@ -535,16 +538,10 @@ export class ThemeSurveyTabViewModel extends Base {
         this.themeChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
       }
       if (options.question?.getType() === "fontsettings") {
-        Object.keys(options.value).forEach(key => {
-          const innerQ = options.question.contentPanel.getQuestionByName(key);
-          this.themeChanges[`--sjs-font-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key] + (innerQ.unit?.toString() || "");
-        });
+        fontsettingsToCssVariable(options.question, this.themeChanges);
       }
       if (options.question?.getType() === "elementsettings") {
-        Object.keys(options.value).forEach(key => {
-          if (key === "corner") return;
-          this.themeChanges[`--sjs-${options.name.toLocaleLowerCase()}-${key}`] = options.value[key];
-        });
+        elementSettingsToCssVariable(options.question, this.themeChanges);
       }
       const newTheme = {};
       assign(newTheme, this.currentTheme.cssVariables, this.themeChanges);
@@ -580,15 +577,15 @@ export class ThemeSurveyTabViewModel extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
 
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor"];
-    themeEditorSurvey.getQuestionByName("questionPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dark"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = newCssVariables["--sjs-general-backcolor-dim-light"];
-    themeEditorSurvey.getQuestionByName("editorPanel").contentPanel.getQuestionByName("hovercolor").value = newCssVariables["--sjs-general-backcolor-dim-dark"];
+    elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
+    elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
 
-    themeEditorSurvey.getQuestionByName("pageTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor"];
-    themeEditorSurvey.getQuestionByName("pageDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-dim-forecolor-light"];
-    themeEditorSurvey.getQuestionByName("questionTitle").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor"];
-    themeEditorSurvey.getQuestionByName("questionDescription").contentPanel.getQuestionByName("color").value = newCssVariables["--sjs-general-forecolor-light"];
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("surveyTitle"), newCssVariables);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageTitle"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor"]);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables);
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
       if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
@@ -626,7 +623,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "panel",
-                name: "themeMode",
+                name: "themeSettings",
                 title: getLocString("theme.themeMode"),
                 elements: [
                   {
