@@ -527,7 +527,7 @@ export var enStrings = {
     readOnly: "Read-only",
     enableIf: "Editable if",
     emptyRowsText: "\"No rows\" message",
-    size: "Input size (in characters)",
+    size: "Input field size (in characters)",
     separateSpecialChoices: "Separate special choices (None, Other, Select All)",
     choicesFromQuestion: "Copy choices from the following question",
     choicesFromQuestionMode: "Which choices to copy?",
@@ -857,6 +857,7 @@ export var enStrings = {
   },
   pehelp: {
     cookieName: "Cookies prevent users from filling out the same survey twice.",
+    size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length.",
     format: "Use {0} as a placeholder for the actual value.",
     totalText: "Visible only when at least one column has Total type or Total expression.",
     acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
