@@ -1,5 +1,5 @@
-import { Selector } from "testcafe";
-import { getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url } from "../helper";
+import { Selector, ClientFunction } from "testcafe";
+import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url } from "../helper";
 
 const title = "Add new question";
 
@@ -8,6 +8,13 @@ fixture`${title}`.page`${url}`.beforeEach(
     await t.maximizeWindow();
   }
 );
+
+const getQuestionTitle = ClientFunction((index) => {
+  return window["creator"].survey.getAllQuestions()[index].title;
+});
+const setStartEditTitleOnQuestionAdded = ClientFunction((val) => {
+  return window["creator"].startEditTitleOnQuestionAdded = val;
+});
 
 test("Add New Question", async t => {
   await t
@@ -33,4 +40,74 @@ test("No Add New Question in HTML question placeholder", async t => {
     .expect(getVisibleElement(".svc-question__content.svc-question__content--selected").exists).ok()
 
     .expect(Selector(".sd-question--html+.svc-panel__placeholder_frame .svc-panel__add-new-question > span").withText("Add Question").exists).notOk();
+});
+test("Add New Question and show title editor", async t => {
+  await t
+    .maximizeWindow()
+    .expect(getAddNewQuestionButton().visible).ok()
+    .click(getAddNewQuestionButton())
+    .wait(150)
+    .pressKey("A")
+    .pressKey("B")
+    .pressKey("C")
+    .pressKey("Enter");
+
+  let title = await getQuestionTitle(0);
+  await t.expect(title).eql("ABC");
+
+  await setStartEditTitleOnQuestionAdded(false);
+  await t
+    .click(getAddNewQuestionButton())
+    .wait(150)
+    .pressKey("C")
+    .pressKey("D")
+    .pressKey("E")
+    .pressKey("Enter");
+  title = await getQuestionTitle(1);
+  await t.expect(title).eql("question2");
+
+  await setStartEditTitleOnQuestionAdded(true);
+  await t
+    .click(getAddNewQuestionButton())
+    .wait(150)
+    .pressKey("C")
+    .pressKey("D")
+    .pressKey("E")
+    .pressKey("Enter");
+  title = await getQuestionTitle(2);
+  await t.expect(title).eql("CDE");
+});
+test("Drag Drop Toolbox Item and show title editor", async (t) => {
+  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+
+  await setJSON({ pages: [{ name: "page1" }] });
+  await t.maximizeWindow();
+
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
+  await t
+    .wait(150)
+    .pressKey("A")
+    .pressKey("B")
+    .pressKey("C")
+    .pressKey("Enter");
+
+  let title = await getQuestionTitle(0);
+  await t.expect(title).eql("ABC");
+
+  await setStartEditTitleOnQuestionAdded(false);
+  await t
+    .hover(RatingToolboxItem)
+    .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+  await t
+    .wait(150)
+    .pressKey("C")
+    .pressKey("D")
+    .pressKey("E")
+    .pressKey("Enter");
+  title = await getQuestionTitle(1);
+  await t.expect(title).eql("question2");
 });
