@@ -1,4 +1,4 @@
-import { Base, SurveyModel } from "survey-core";
+import { Base, property } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker } from "../../textWorker";
 
@@ -7,6 +7,7 @@ export abstract class JsonEditorBaseModel extends Base {
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
+  @property() hasErrors: boolean;
 
   constructor(protected creator: CreatorBase) {
     super();
@@ -41,7 +42,9 @@ export abstract class JsonEditorBaseModel extends Base {
       }
     }
   }
-  protected abstract setErrors(errors: any[]): void;
+  protected setErrors(errors: any[]): void {
+    this.hasErrors = errors.length > 0;
+  }
   public processErrors(text: string): void {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
     this.setErrors(textWorker.errors);
