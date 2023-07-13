@@ -42,8 +42,9 @@ ComponentCollection.Instance.add({
     {
       type: "colorsettings",
       name: "color",
-      title: getLocString("theme.color"),
-      titleLocation: "left",
+      colorTitle: getLocString("theme.color"),
+      colorTitleLocation: "left",
+      titleLocation: "hidden",
       descriptionLocation: "hidden"
     },
     {
