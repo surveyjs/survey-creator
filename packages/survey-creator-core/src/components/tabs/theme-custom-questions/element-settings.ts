@@ -8,15 +8,17 @@ ComponentCollection.Instance.add({
     {
       type: "colorsettings",
       name: "backcolor",
-      title: getLocString("theme.backcolor"),
-      titleLocation: "left",
+      colorTitle: getLocString("theme.backcolor"),
+      colorTitleLocation: "left",
+      titleLocation: "hidden",
       descriptionLocation: "hidden"
     },
     {
       type: "colorsettings",
       name: "hovercolor",
-      title: getLocString("theme.hovercolor"),
-      titleLocation: "left",
+      colorTitle: getLocString("theme.hovercolor"),
+      colorTitleLocation: "left",
+      titleLocation: "hidden",
       descriptionLocation: "hidden"
     },
     {

@@ -819,22 +819,25 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "colorsettings",
                     name: "--sjs-primary-backcolor",
-                    title: getLocString("theme.primaryDefaultColor"),
-                    titleLocation: "left",
+                    colorTitle: getLocString("theme.primaryDefaultColor"),
+                    colorTitleLocation: "left",
+                    titleLocation: "hidden",
                     descriptionLocation: "hidden",
                   },
                   {
                     type: "colorsettings",
                     name: "--sjs-primary-backcolor-dark",
-                    title: getLocString("theme.primaryDarkColor"),
-                    titleLocation: "left",
+                    colorTitle: getLocString("theme.primaryDarkColor"),
+                    colorTitleLocation: "left",
+                    titleLocation: "hidden",
                     descriptionLocation: "hidden",
                   },
                   {
                     type: "colorsettings",
                     name: "--sjs-primary-backcolor-light",
-                    title: getLocString("theme.primaryLightColor"),
-                    titleLocation: "left",
+                    colorTitle: getLocString("theme.primaryLightColor"),
+                    colorTitleLocation: "left",
+                    titleLocation: "hidden",
                     descriptionLocation: "hidden",
                   }
                 ]
@@ -845,15 +848,17 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "colorsettings",
                     name: "--sjs-primary-forecolor",
-                    title: getLocString("theme.primaryForecolor"),
-                    titleLocation: "left",
+                    colorTitle: getLocString("theme.primaryForecolor"),
+                    colorTitleLocation: "left",
+                    titleLocation: "hidden",
                     descriptionLocation: "hidden",
                   },
                   {
                     type: "colorsettings",
                     name: "--sjs-primary-forecolor-light",
-                    title: getLocString("theme.primaryForecolorLight"),
-                    titleLocation: "left",
+                    colorTitle: getLocString("theme.primaryForecolorLight"),
+                    colorTitleLocation: "left",
+                    titleLocation: "hidden",
                     descriptionLocation: "hidden",
                   }
                 ]
@@ -1007,15 +1012,17 @@ export class ThemeSurveyTabViewModel extends Base {
                 {
                   type: "colorsettings",
                   name: "--sjs-border-default",
-                  title: getLocString("theme.borderDefault"),
-                  titleLocation: "left",
+                  colorTitle: getLocString("theme.borderDefault"),
+                  colorTitleLocation: "left",
+                  titleLocation: "hidden",
                   descriptionLocation: "hidden",
                 },
                 {
                   type: "colorsettings",
                   name: "--sjs-border-light",
-                  title: getLocString("theme.borderLight"),
-                  titleLocation: "left",
+                  colorTitle: getLocString("theme.borderLight"),
+                  colorTitleLocation: "left",
+                  titleLocation: "hidden",
                   descriptionLocation: "hidden",
                 }
               ]

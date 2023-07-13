@@ -646,8 +646,9 @@ test("Check colorsettings question passes some properties to color question", ()
   const survey = new SurveyModel({
     elements: [{
       type: "colorsettings",
-      titleLocation: "left",
-      title: "Test",
+      colorTitleLocation: "left",
+      colorTitle: "Test",
+      titleLocation: "hidden",
       name: "test",
       choices: [{ value: "#fff", text: "White" }]
     }]
