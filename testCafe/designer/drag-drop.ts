@@ -1271,3 +1271,51 @@ test("Drag Drop below the last Panel", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+
+test("Drag Drop to new page and Undo", async (t) => {
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
+  const undoAction = Selector("button[title=Undo]");
+
+  await t.resizeWindow(2560, 2000);
+  await ClientFunction(() => {
+    const el: any = document.getElementById("survey-creator");
+    el.style.position = "relative";
+    el.style.bottom = undefined;
+    el.style.height = "10000px";
+    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    if (!!rootEl) {
+      rootEl.style.position = "relative";
+    }
+  })();
+
+  let pagesLength;
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(1);
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(3);
+
+  await t.click(undoAction);
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  await t.click(undoAction);
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(1);
+});

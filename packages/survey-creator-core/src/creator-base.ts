@@ -1761,13 +1761,9 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      let panel = sender.dropTarget.parent;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
-      this.undoRedoManager.setUndoCallbackForTransaction(() => {
-        panel.updateRows();
-      });
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
