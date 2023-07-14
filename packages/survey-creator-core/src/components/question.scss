@@ -567,3 +567,14 @@ svc-question,
     margin-top: 0;
   }
 }
+
+
+.svc-question__content {
+  .sd-table-wrapper::before {
+    left: calc(calc(-1 * var(--sd-base-padding)) + 2px);
+  }
+
+  .sd-table-wrapper::after {
+    right: calc(calc(-1 * var(--sd-base-padding)) + 2px);
+  }
+}
