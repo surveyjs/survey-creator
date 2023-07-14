@@ -48,6 +48,19 @@ test("On the right side (default)", async (t) => {
   });
 });
 
+test("On the right side opened popup", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await setJSON(json);
+
+    await t.click(".svc-page-navigator__selector");
+    await t.click(".svc-page-navigator__selector");
+    await t.click(".svc-page-navigator__selector");
+    await takeElementScreenshot("page-navigator-popup.png", Selector(".svc-page-navigator__selector .sv-popup__container"), t, comparer);
+    await takeElementScreenshot("page-navigator-with-popup.png", Selector(".svc-creator-tab"), t, comparer);
+  });
+});
+
 test("On the left side", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
