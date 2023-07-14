@@ -26,7 +26,8 @@ export var settings = {
     exportFileName: "survey_translation.csv"
   },
   theme: {
-    exportFileName: "survey_theme.json"
+    exportFileName: "survey_theme.json",
+    fontFamily: "Open Sans"
   },
   operators: {
     empty: [],

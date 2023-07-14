@@ -1,4 +1,4 @@
-import { ComponentCollection } from "survey-core";
+import { ComponentCollection, IQuestion, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 export const DefaultFonts = [
@@ -25,7 +25,6 @@ ComponentCollection.Instance.add({
       titleLocation: "left",
       descriptionLocation: "hidden",
       choices: [].concat(DefaultFonts),
-      defaultValue: "Open Sans",
       allowClear: false
     },
     {
@@ -39,14 +38,13 @@ ComponentCollection.Instance.add({
         { value: "600", text: getLocString("theme.fontWeightBold") },
         { value: "700", text: getLocString("theme.fontWeightHeavy") },
       ],
-      defaultValue: "400"
     },
     {
-      type: "color",
+      type: "colorsettings",
       name: "color",
-      title: getLocString("theme.color"),
-      titleLocation: "left",
-      // choices: ["#00FFFF", "#00FFFF"],
+      colorTitle: getLocString("theme.color"),
+      colorTitleLocation: "left",
+      titleLocation: "hidden",
       descriptionLocation: "hidden"
     },
     {
@@ -68,3 +66,25 @@ ComponentCollection.Instance.add({
   onValueChanged(question, name, newValue) {
   },
 });
+
+export function fontsettingsToCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}) {
+  Object.keys(question.value).forEach(key => {
+    const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
+    themeCssVariables[`--sjs-font-${question.name.toLocaleLowerCase()}-${key}`] = question.value[key] + (innerQ.unit?.toString() || "");
+  });
+}
+
+export function fontsettingsFromCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}, defaultColorVariable?: string): any {
+  const result = {};
+  Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1).forEach(key => {
+    const propertyName = key.split("-").pop();
+    result[propertyName] = themeCssVariables[key];
+  });
+
+  if(Object.keys(result).length !== 0) {
+    question.value = result;
+  } else if(!!defaultColorVariable) {
+    (<QuestionCompositeModel>question).contentPanel.getQuestionByName("color").value = defaultColorVariable;
+  }
+  return result;
+}
