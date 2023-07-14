@@ -245,6 +245,7 @@ export class CreatorBase extends Base
    * - `"portrait"`
    */
   @property({ defaultValue: "landscape" }) previewOrientation: "landscape" | "portrait";
+  public startEditTitleOnQuestionAdded: boolean = true;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
@@ -1767,7 +1768,8 @@ export class CreatorBase extends Base
     });
     this.dragDropSurveyElements.onDragEnd.add((sender, options) => {
       this.stopUndoRedoTransaction();
-      this.selectElement(options.draggedElement, undefined, false, isDraggedFromToolbox);
+      const editTitle = isDraggedFromToolbox && this.startEditTitleOnQuestionAdded;
+      this.selectElement(options.draggedElement, undefined, false, editTitle);
       isDraggedFromToolbox = false;
       this.onDragEnd.fire(sender, options);
     });
@@ -2636,7 +2638,7 @@ export class CreatorBase extends Base
       }
       this.survey.lazyRendering = false;
       this.doClickQuestionCore(newElement, modifiedType, -1, panel);
-      this.selectElement(newElement, null, true, true);
+      this.selectElement(newElement, null, true, this.startEditTitleOnQuestionAdded);
     }
   }
   public getJSONForNewElement(json: any): any {
