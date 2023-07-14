@@ -1730,9 +1730,9 @@ test("options.onGetErrorTextOnValidationCallback", () => {
     obj: Base,
     value: any
   ): string => {
-    if (propertyName != "name") return;
+    if (propertyName != "name") return "";
     if (obj.getType() != "dropdown" || value.length != 3) return "No3Letters";
-    return null;
+    return "";
   };
 
   var question = new QuestionDropdownModel("q1");
