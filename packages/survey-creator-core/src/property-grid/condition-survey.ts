@@ -942,7 +942,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     }
     // options.cssClasses.mainRoot += "sd-question sd-row__question";
     if (options.question.name === "questionValue" || options.question.isContentElement) {
-      assignDefaultV2Classes(options.cssClasses, options.question.getType());
+      assignDefaultV2Classes(options.cssClasses, options.question.getCssType());
       options.cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       options.cssClasses.error.root = "svc-logic-operator__error";
     }
