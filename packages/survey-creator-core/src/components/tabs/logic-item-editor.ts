@@ -218,43 +218,45 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }).filter(action => !!action);
   }
   private onUpdateQuestionCssClasses(options: any) {
-    options.cssClasses.answered = "svc-logic-question--answered";
+    const cssClasses = options.cssClasses;
+    const question = options.question;
+    cssClasses.answered = "svc-logic-question--answered";
 
-    if (options.question.name === "logicTypeName") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.control += " svc-logic-operator svc-logic-operator--action";
-      options.cssClasses.error.root = "svc-logic-operator__error";
-      options.cssClasses.onError = "svc-logic-operator--error";
+    if (question.name === "logicTypeName") {
+      question.allowRootStyle = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--action";
+      cssClasses.error.root = "svc-logic-operator__error";
+      cssClasses.onError = "svc-logic-operator--error";
     }
-    if (options.question.name === "elementSelector" || options.question.name === "setToName" || options.question.name === "fromName" || options.question.name === "gotoName") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.control += " svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.error.root = "svc-logic-operator__error";
-      options.cssClasses.onError = "svc-logic-operator--error";
+    if (question.name === "elementSelector" || question.name === "setToName" || question.name === "fromName" || question.name === "gotoName") {
+      question.allowRootStyle = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--question";
+      cssClasses.error.root = "svc-logic-operator__error";
+      cssClasses.onError = "svc-logic-operator--error";
     }
-    if (options.question.name === "setToName" || options.question.name === "fromName") {
-      options.question.allowRootStyle = false;
-      options.question.titleLocation = "left";
-      options.question.startWithNewLine = false;
-      options.cssClasses.error.root = "svc-logic-operator__error";
-      options.cssClasses.onError = "svc-logic-operator--error";
+    if (question.name === "setToName" || question.name === "fromName") {
+      question.allowRootStyle = false;
+      question.titleLocation = "left";
+      question.startWithNewLine = false;
+      cssClasses.error.root = "svc-logic-operator__error";
+      cssClasses.onError = "svc-logic-operator--error";
     }
-    if (options.question.name === "setValue") {
-      assignDefaultV2Classes(options.cssClasses, options.question.getType());
-      options.cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+    if (question.name === "setValue" || question.isContentElement) {
+      assignDefaultV2Classes(cssClasses, question.getType());
+      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
-    if (options.question.name === "removeAction") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
+    if (question.name === "removeAction") {
+      question.allowRootStyle = false;
+      cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
-    // options.cssClasses.mainRoot = "sd-question sd-row__question";
-    if (options.question.name === "panel") {
-      options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd += " svc-logic-operator--action ";
-      options.cssClasses.iconRemove = "svc-icon-remove";
-      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
-      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
-      options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
+    // cssClasses.mainRoot = "sd-question sd-row__question";
+    if (question.name === "panel") {
+      cssClasses.root += " svc-logic-paneldynamic";
+      cssClasses.buttonAdd += " svc-logic-operator--action ";
+      cssClasses.iconRemove = "svc-icon-remove";
+      cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
+      cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
+      cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
   private onUpdatePanelCssClasses(options: any) {
