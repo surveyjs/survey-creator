@@ -1,16 +1,18 @@
-import { Base, property } from "survey-core";
+import { Base, property, ListModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
-import { SurveyTextWorker } from "../../textWorker";
+import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
+  public errorList: ListModel;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
   @property() hasErrors: boolean;
 
   constructor(protected creator: CreatorBase) {
     super();
+    this.errorList = new ListModel([], () => {}, true);
   }
   public get text(): string {
     return this.getText();
@@ -42,8 +44,25 @@ export abstract class JsonEditorBaseModel extends Base {
       }
     }
   }
-  protected setErrors(errors: any[]): void {
+  protected setErrors(errors: Array<SurveyTextWorkerError>): void {
     this.hasErrors = errors.length > 0;
+    const actions = this.errorList.actions;
+    const oldActions = actions.splice(0, actions.length);
+    this.createErrorActions(errors).forEach(action => actions.push(action));
+    oldActions.forEach(action => action.dispose());
+  }
+  private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
+    const res = [];
+    let counter = 1;
+    errors.forEach(error => {
+      const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
+      res.push(new Action({
+        id: "error_" + counter++,
+        title: line + error.text,
+        data: error
+      }));
+    });
+    return res;
   }
   public processErrors(text: string): void {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);

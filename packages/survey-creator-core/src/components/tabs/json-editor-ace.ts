@@ -80,6 +80,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   }
   protected setErrors(errors: any[]): void {
     this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
+    super.setErrors(errors);
   }
   public onEditorActivated(): void {
     this.aceEditor.getSession().getUndoManager().markClean();
