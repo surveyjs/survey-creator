@@ -715,7 +715,7 @@ test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
   const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
-  const DnDShortcutControls = Selector("#SurveyElement > div > [data-sv-drop-target-item-value='Item 2']").find(".svc-item-value-controls__button");
+  const DnDShortcutControls = Selector("div > [data-sv-drop-target-item-value='Item 2']").find(".svc-item-value-controls__button");
 
   await patchDragDropToDisableDrop();
 
