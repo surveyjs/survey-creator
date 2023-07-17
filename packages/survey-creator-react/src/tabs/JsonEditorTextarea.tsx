@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
+import { ReactElementFactory, SurveyElementBase, List } from "survey-react-ui";
 import { TextareaJsonEditorModel } from "survey-creator-core";
 
 interface ITabJsonEditorTextareaComponentProps {
@@ -22,18 +22,11 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
     return this.props.data;
   }
   renderElement(): JSX.Element {
-    const errors: JSX.Element[] = [];
-    var key = 1;
-    const userFriendlyErrors: any[] = this.model.userFriendlyErrors;
-    for (let i: number = 0; i < userFriendlyErrors.length; i++) {
-      errors.push(<span key={key}><b>Error: </b></span>);
-      key++;
-      errors.push(<span key={key}>{userFriendlyErrors[i]}</span>);
-      key++;
-    }
+    const errorList = this.model.hasErrors ? <List model={this.model.errorList} /> : undefined;
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
+          {errorList}
           <textarea
             className="svc-json-editor-tab__content-area"
             value={this.model.text}
@@ -44,13 +37,6 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
-          {errors.length > 0 &&
-            <button type="button" className="svc-json-editor-tab__errros_button" onClick={() => this.model.toggleErrors()}>
-              {this.model.errorButtonText}
-            </button>
-          }
-          {this.model.canShowErrors && <div className="svc-json-editor-tab__content-errors">{errors}</div>
-          }
         </div>
       </div>
     );

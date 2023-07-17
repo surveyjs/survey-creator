@@ -12,7 +12,6 @@ export abstract class JsonEditorBaseModel extends Base {
 
   constructor(protected creator: CreatorBase) {
     super();
-    this.errorList = new ListModel([], () => {}, true);
   }
   public get text(): string {
     return this.getText();
@@ -45,11 +44,20 @@ export abstract class JsonEditorBaseModel extends Base {
     }
   }
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
-    this.hasErrors = errors.length > 0;
-    const actions = this.errorList.actions;
-    const oldActions = actions.splice(0, actions.length);
-    this.createErrorActions(errors).forEach(action => actions.push(action));
-    oldActions.forEach(action => action.dispose());
+    let hasErrors = errors.length > 0;
+    let oldErrorList = this.errorList;
+    let errorList: ListModel = undefined;
+    if(hasErrors) {
+      const actions = [];
+      this.createErrorActions(errors).forEach(action => actions.push(action));
+      errorList = new ListModel(actions, () => {}, true);
+      errorList.hasVerticalScroller = true;
+    }
+    this.errorList = errorList;
+    if(!!oldErrorList) {
+      oldErrorList.dispose();
+    }
+    this.hasErrors = hasErrors;
   }
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
