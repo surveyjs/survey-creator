@@ -114,12 +114,12 @@ test("Responsive creator: property grid", async (t) => {
     .expect(questionToolbarActions.count).eql(4)
 
     .drag(westResizer, 100, 0)
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(450)
 
     .resizeWindow(750, 700)
     .click(expandButtonSelector)
     .expect(propertyGridSelector.visible).ok()
-    .expect(propertyGridSelector.offsetWidth).eql(370)
+    .expect(propertyGridSelector.offsetWidth).eql(450)
     .expect(flyoutPropertyGrid.exists).ok()
 
     .drag(westResizer, -150, 0)
