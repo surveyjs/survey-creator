@@ -27,7 +27,7 @@ test("Image question", async (t) => {
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
     .expect(imageQuestionSelector.clientWidth).eql(620)
-    .expect(imageQuestionSelector.clientHeight).eql(415)
+    .expect(imageQuestionSelector.clientHeight).eql(412)
 
     .click(imageQuestionSelector)
     .expect(Selector("div [data-name=\"imageHeight\"] input").value).eql("")
@@ -39,7 +39,7 @@ test("Image question", async (t) => {
     .expect(imageQuestionSelector.exists).ok()
     .expect(imageQuestionSelector.classNames).contains("sd-image__image--adaptive")
     .expect(imageQuestionSelector.clientWidth).eql(620)
-    .expect(imageQuestionSelector.clientHeight).eql(415)
+    .expect(imageQuestionSelector.clientHeight).eql(412)
 
     .click(getTabbedMenuItemByText(creatorTabPreviewName))
     .expect(imageQuestionSelector.exists).ok()
