@@ -1,5 +1,5 @@
 import { Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings } from "survey-core";
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
@@ -730,6 +730,21 @@ test("QuestionImageAdornerViewModel filePresentationModel triggers creator.onUpl
   imageAdorner.filePresentationModel.loadFiles([<any>{}]);
 
   expect(uploadCount).toBe(1);
+});
+
+test("QuestionImageAdornerViewModel filePresentationModel creates own survey instance", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const imageAdorner2 = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  expect(imageAdorner.filePresentationModel.getSurvey() === question.getSurvey()).toBeFalsy();
+  expect(imageAdorner2.filePresentationModel.getSurvey() === question.getSurvey()).toBeFalsy();
+  expect(imageAdorner.filePresentationModel.getSurvey() === imageAdorner2.filePresentationModel.getSurvey()).toBeFalsy();
+  expect((question.getSurvey() as SurveyModel).onUploadFiles.isEmpty).toBeTruthy();
 });
 
 test("LogoImageViewModel isUploading", () => {
