@@ -45,10 +45,9 @@ survey-creator,
 }
 
 .svc-page-navigator__selector--opened {
-  opacity: 0.5;
-
   .svc-page-navigator__navigator-icon {
     background-color: $primary-light;
+    opacity: 0.5;
 
     use {
       fill: $primary;
