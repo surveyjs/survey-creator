@@ -12,7 +12,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   private initFilePresentationModel(): void {
     this.filePresentationModel = Serializer.createClass("file", { name: this.question.name });
-    const surveyModel = this.question.getSurvey() as SurveyModel;
+    const surveyModel = new SurveyModel();
     this.filePresentationModel.setSurveyImpl(surveyModel);
     this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
     this.filePresentationModel.dragAreaPlaceholder = this.placeholderText;
