@@ -3,7 +3,6 @@ import { SurveyTextWorker } from "../../src/textWorker";
 import { CreatorTester } from "../creator-tester";
 
 test("JsonEditor & showErrors/errorList", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const creator = new CreatorTester();
   const editor = new TextareaJsonEditorModel(creator);
   editor.text = "{}";

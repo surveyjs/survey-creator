@@ -12,13 +12,13 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   protected _text: string;
   @propertyArray() private _errors: any[];
   public ariaLabel: string = getLocString("ed.jsonEditor");
+  public textElement: HTMLTextAreaElement;
   @property({ defaultValue: false }) canShowErrors: boolean;
 
   constructor(creator: CreatorBase) {
     super(creator);
     this.onPluginActivate();
   }
-
   public checkKey(data: any, e: any) {
     if (e.key === "Tab") {
       e.preventDefault();
@@ -42,6 +42,13 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this._text = value;
     this.processErrors(value);
     this.isProcessingImmediately = false;
+  }
+  protected gotoError(at: number): void {
+    if(!this.textElement) return;
+    const el = this.textElement;
+    el.selectionStart = at;
+    el.selectionEnd = at;
+    el.focus();
   }
   public get errorButtonText(): string {
     return this.canShowErrors ? getLocString("ed.jsonHideErrors") : getLocString("ed.jsonShowErrors");

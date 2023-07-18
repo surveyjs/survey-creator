@@ -5,7 +5,6 @@ function createTextWorker(json: any): SurveyTextWorker {
 }
 
 test("SurveyTextWorker, incorrect property name pos", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const textWorker = createTextWorker({
     elements: [
       {
@@ -36,7 +35,6 @@ test("SurveyTextWorker, incorrect property name pos", () => {
   });
 });
 test("SurveyTextWorker, show duplication name errors", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const textWorker = createTextWorker({
     pages: [{
       name: "page1",
@@ -82,7 +80,6 @@ test("SurveyTextWorker, show duplication name errors", () => {
   });
 });
 test("SurveyTextWorker, required properties", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const textWorker = createTextWorker({
     pages: [{
       name: "page1",

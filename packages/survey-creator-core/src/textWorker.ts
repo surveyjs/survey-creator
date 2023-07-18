@@ -145,7 +145,7 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
 }
 
 export class SurveyTextWorker {
-  public static newLineChar: string;
+  public static newLineChar: string = "\n";
   public errors: Array<SurveyTextWorkerError>;
   private surveyValue: SurveyModel;
   private jsonValue: any;

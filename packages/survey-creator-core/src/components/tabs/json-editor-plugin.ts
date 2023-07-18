@@ -2,6 +2,7 @@ import { Base, property, ListModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 
+const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
@@ -50,7 +51,10 @@ export abstract class JsonEditorBaseModel extends Base {
     if(hasErrors) {
       const actions = [];
       this.createErrorActions(errors).forEach(action => actions.push(action));
-      errorList = new ListModel(actions, () => {}, true);
+      errorList = new ListModel(actions, (action: Action) => {
+        const error: SurveyTextWorkerError = action.data;
+        if(!!error) this.gotoError(error.at);
+      }, true);
       errorList.hasVerticalScroller = true;
     }
     this.errorList = errorList;
@@ -59,14 +63,22 @@ export abstract class JsonEditorBaseModel extends Base {
     }
     this.hasErrors = hasErrors;
   }
+  protected gotoError(at: number): void {}
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
     let counter = 1;
     errors.forEach(error => {
       const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
+      let title = error.text;
+      if(title.length > maxErrorLength + 3) {
+        title = title.substring(0, maxErrorLength) + "...";
+      }
+      title = line + title;
+      const at = error.at;
       res.push(new Action({
         id: "error_" + counter++,
-        title: line + error.text,
+        title: title,
+        tooltip: error.text,
         data: error
       }));
     });
