@@ -23,7 +23,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
   renderElement(): JSX.Element {
     const setControl = (el: HTMLTextAreaElement) => {
       this.model.textElement = el;
-    }
+    };
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
