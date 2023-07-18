@@ -381,7 +381,8 @@ export function RGBToHSB(r, g, b) {
   return [60 * (h < 0 ? h + 6 : h), v && (n / v) * 100, v * 100];
 }
 
-export function assign(...objects: Array<any>) {
+export function assign(...inputs: Array<any>) {
+  const objects = (inputs || []).filter(obj => !!obj);
   if(objects.length <= 1) {
     return;
   }
