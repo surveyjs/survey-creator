@@ -829,6 +829,24 @@ test("Parse expressions", () => {
   expect(panel.getQuestionByName("questionValue").getType()).toEqual("text");
   expect(panel.getQuestionByName("questionValue").value).toEqual(2);
 });
+test("Set variables to editSurvey based on 'questionValue'", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text", visibleIf: "{q1} = 'abc' and {q2} = 1" }
+    ]
+  });
+  const question = survey.getQuestionByName("q4");
+  const editor = new ConditionEditor(survey, question, new EmptySurveyCreatorOptions(), "visibleIf");
+  const panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("questionValue").value).toBe("abc");
+  expect(editor.editSurvey.getVariable("q1")).toBe("abc");
+  expect(editor.editSurvey.getVariable("q2")).toBe(1);
+  panel.getQuestionByName("questionValue").value = "def";
+  expect(editor.editSurvey.getVariable("q1")).toBe("def");
+});
 test("Parse calcaluted values, Bug #727 and Bug #740", () => {
   var survey = new SurveyModel({
     elements: [{ name: "q1", type: "text" }],
