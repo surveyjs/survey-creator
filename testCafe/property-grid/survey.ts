@@ -154,3 +154,24 @@ test("Check ctrl+z undo/redo", async (t) => {
     .pressKey("ctrl+z")
     .expect(getQuestionTitle()).eql("1234");
 });
+
+test("Text editors, loose focus on enter", async (t) => {
+  await t.resizeWindow(1560, 1440);
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t
+    .click(Selector("div[data-name=title] input"))
+    .pressKey("a b c")
+    .expect(Selector("div[data-name=title] input").focused).ok()
+    .pressKey("Enter")
+    .expect(Selector("div[data-name=title] input").focused).notOk();
+
+});
