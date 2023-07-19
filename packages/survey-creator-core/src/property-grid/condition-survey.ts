@@ -532,7 +532,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
-        const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
       });
