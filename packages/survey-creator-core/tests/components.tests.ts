@@ -1,5 +1,5 @@
 import { Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel } from "survey-core";
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
@@ -7,6 +7,8 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
+import { calculateDragOverLocation } from "../src/survey-elements";
+import { settings as creatorSettings } from "../src/creator-settings";
 
 beforeEach(() => { });
 
@@ -824,3 +826,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
   expect(ratingAdorner.enableAdd).toBeTruthy();
 });
 
+test("calculateDragOverLocation", () => {
+  let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Left);
+  creatorSettings.dragDrop.disableDragToTheSameLine = true;
+  location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Top);
+  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Bottom);
+  creatorSettings.dragDrop.disableDragToTheSameLine = false;
+  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Right);
+});
