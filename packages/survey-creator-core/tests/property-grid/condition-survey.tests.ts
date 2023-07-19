@@ -1032,11 +1032,11 @@ test("anyof/allof is enabled on editing, Bug #804", () => {
   var question = survey.getQuestionByName("q2");
   var editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'a'";
-  var panel = editor.panel.panels[0];
-  var itemValue = ItemValue.getItemByValue(
-    panel.getQuestionByName("operator").choices,
-    "anyof"
-  );
+  const panel = editor.panel.panels[0];
+  const opQuestion = <QuestionDropdownModel>panel.getQuestionByName("operator");
+  opQuestion.onOpenedCallBack();
+  const opChoices = opQuestion.choices;
+  const itemValue = ItemValue.getItemByValue(opChoices, "anyof");
   expect(itemValue.isEnabled).toBeFalsy();
   expect(itemValue.isVisible).toBeFalsy();
 });
@@ -1052,33 +1052,20 @@ test("remove operators", () => {
       }
     ]
   });
-  var containsValue = settings.operators.contains;
-  var anyofValue = settings.operators.anyof;
-  delete settings.operators.contains;
-  delete settings.operators.anyof;
-  var question = survey.getQuestionByName("q2");
-  var editor = new ConditionEditor(survey, question);
+  const containsValue = settings.operators.contains;
+  const anyofValue = settings.operators.anyof;
+  settings.operators.contains = ["checkbox"];
+  settings.operators.anyof = ["checkbox"];
+  const question = survey.getQuestionByName("q2");
+  const editor = new ConditionEditor(survey, question);
   editor.text = "{q1} = 'a'";
-  var panel = editor.panel.panels[0];
-  expect(
-    ItemValue.getItemByValue(
-      panel.getQuestionByName("operator").choices,
-      "anyof"
-    )
-  ).toBeFalsy();
-  expect(
-    ItemValue.getItemByValue(
-      panel.getQuestionByName("operator").choices,
-      "contains"
-    )
-  ).toBeFalsy();
-  expect(
-    ItemValue.getItemByValue(
-      panel.getQuestionByName("operator").choices,
-      "equal"
-    )
-  ).toBeTruthy();
-
+  const panel = editor.panel.panels[0];
+  const opQuestion = <QuestionDropdownModel>panel.getQuestionByName("operator");
+  opQuestion.onOpenedCallBack();
+  const opChoices = opQuestion.choices;
+  expect(ItemValue.getItemByValue(opChoices, "anyof").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(opChoices, "contains").isVisible).toBeFalsy();
+  expect(ItemValue.getItemByValue(opChoices, "equal").isVisible).toBeTruthy();
   settings.operators.contains = containsValue;
   settings.operators.anyof = anyofValue;
 });
