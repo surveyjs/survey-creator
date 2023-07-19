@@ -638,7 +638,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "buttongroup",
                     name: "themePalette",
-                    titleLocation: "hidden",
+                    title: getLocString("theme.themePalette"),
                     choices: [
                       { value: "light", text: getLocString("theme.themePaletteLight") },
                       { value: "dark", text: getLocString("theme.themePaletteDark") }
