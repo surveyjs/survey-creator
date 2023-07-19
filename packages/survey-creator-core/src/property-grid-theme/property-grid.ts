@@ -332,6 +332,7 @@ export var propertyGridCss = {
   color: {
     root: "spg-input spg-color-editor spg-input-container",
     swatch: "spg-color-editor__color-swatch",
+    swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
@@ -347,7 +348,8 @@ export var propertyGridCss = {
     clearButtonIcon: "icon-clear",
     fileInput: "sd-visuallyhidden",
     clearButton: "spg-input__edit-button",
-    chooseButton: "spg-input__edit-button spg-file-edit__choose-button"
+    chooseButton: "spg-input__edit-button spg-file-edit__choose-button",
+    chooseButtonDisabled: "spg-input__edit-button--disabled"
   },
   linkvalue: {
     content: "spg-link"

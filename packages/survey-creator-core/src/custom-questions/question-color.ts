@@ -1,4 +1,4 @@
-import { Action, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ComputedUpdater, CssClassBuilder, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/utils";
 
 const DEFAULT_COLOR: string = "#000000";
@@ -64,6 +64,9 @@ export class QuestionColorModel extends QuestionTextModel {
     }
     return this._renderedValue.toUpperCase();
   }
+  public getSwatchCss() {
+    return new CssClassBuilder().append(this.cssClasses.swatch).append(this.cssClasses.swatchDisabled, this.isInputReadOnly).toString();
+  }
   public getSwatchStyle(): {[index: string]: string} {
     return { backgroundColor: this.renderedValue };
   }
@@ -95,7 +98,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   public createDropdownAction(): Action {
-    const action = createDropdownActionModelAdvanced({}, {
+    const action = createDropdownActionModelAdvanced({ enabled: new ComputedUpdater<boolean>(() => !this.isInputReadOnly) as any }, {
       onSelectionChanged: (item) => {
         this.value = (<ItemValue><unknown>item).value;
       },

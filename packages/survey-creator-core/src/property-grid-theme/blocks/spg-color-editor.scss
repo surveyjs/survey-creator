@@ -36,6 +36,11 @@
     fill: $background;
   }
 }
+.spg-color-editor__color-swatch--disabled {
+  .sv-svg-icon {
+    opacity: 0.25;
+  }
+}
 .spg-color-editor .spg-input__edit-button + * {
   margin-inline-end: calcSize(-0.5);
 }
