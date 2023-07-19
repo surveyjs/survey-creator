@@ -43,13 +43,14 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
   }
   protected renderChooseButton(): JSX.Element {
     return (
-      <label tabIndex={0} role="button"
-        className={this.questionFile.cssClasses.chooseButton}
+      <label role="button"
+        className={this.questionFile.getChooseButtonCss()}
         htmlFor={this.questionFile.inputId}
         aria-label={this.questionFile.chooseButtonCaption}>
         <SvgIcon iconName={this.questionFile.cssClasses.chooseButtonIcon} size={"auto"} title={this.questionFile.chooseButtonCaption}></SvgIcon>
         <input
-          type="file" tabIndex={-1}
+          type="file"
+          disabled={this.isDisplayMode}
           className={this.questionFile.cssClasses.fileInput}
           id={this.questionFile.inputId}
           aria-required={this.questionFile.ariaRequired}

@@ -391,7 +391,7 @@ test("Check color editor", async (t) => {
         },
         getJSON: function (obj, prop, options) {
           return {
-            type: "color", choices: [{ text: "Contrast", value: "#673AB0" }, { text: "Plain", value: "673AB0" }, { text: "Simple", value: "#55B534" }],
+            type: "color", readOnly: true, choices: [{ text: "Contrast", value: "#673AB0" }, { text: "Plain", value: "673AB0" }, { text: "Simple", value: "#55B534" }],
           };
         }
       });
@@ -400,6 +400,8 @@ test("Check color editor", async (t) => {
     await t
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='fontColor']");
+    await takeElementScreenshot("color-editor-disabled.png", questionSelector, t, comparer);
+    await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
     await takeElementScreenshot("color-editor.png", questionSelector, t, comparer);
     await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("color-editor-button-hover.png", questionSelector, t, comparer);
@@ -435,7 +437,7 @@ test("Check spinedit editor", async (t) => {
           return prop.name === "fontSize";
         },
         getJSON: function (obj, prop, options) {
-          return { type: "spinedit", unit: "px" };
+          return { type: "spinedit", unit: "px", readOnly: true, };
         }
       });
     })();
@@ -443,6 +445,8 @@ test("Check spinedit editor", async (t) => {
     await t
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='fontSize']");
+    await takeElementScreenshot("spin-editor-disabled.png", questionSelector, t, comparer);
+    await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
     await takeElementScreenshot("spin-editor.png", questionSelector, t, comparer);
     await t.hover(questionSelector.find(".spg-input__edit-button"));
     await takeElementScreenshot("spin-editor-button-hover.png", questionSelector, t, comparer);
@@ -472,7 +476,7 @@ test("Check file editor", async (t) => {
           return prop.name === "image";
         },
         getJSON: function (obj, prop, options) {
-          return { type: "fileedit" };
+          return { type: "fileedit", readOnly: true };
         }
       });
     })();
@@ -480,6 +484,8 @@ test("Check file editor", async (t) => {
     await t
       .click(Selector("h4[aria-label=General]"));
     const questionSelector = Selector("div[data-name='image']");
+    await takeElementScreenshot("file-editor-disabled.png", questionSelector, t, comparer);
+    await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = false)();
     await takeElementScreenshot("file-editor.png", questionSelector, t, comparer);
     await ClientFunction(() => {
       (<any>window).creator.propertyGrid.getQuestionByName("image").titleLocation = "left";
