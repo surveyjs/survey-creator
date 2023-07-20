@@ -281,6 +281,7 @@ export interface ISurveyCreatorOptions {
     expression: string,
     title: string
   ): string;
+  isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,
     displayExpression: string,
@@ -427,6 +428,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return title;
   }
+  isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean { return isEnabled; }
   onLogicGetTitleCallback(
     expression: string,
     displayExpression: string,
