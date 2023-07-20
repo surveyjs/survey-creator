@@ -188,6 +188,7 @@ export interface ISurveyCreatorOptions {
   maximumRowsCount: number;
   maximumRateValues: number;
   enableLinkFileEditor: boolean;
+  rootElement?: HTMLElement;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
     object: any,
@@ -299,6 +300,7 @@ export interface ISurveyCreatorOptions {
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
+  rootElement: HTMLElement;
   enableLinkFileEditor: boolean;
   getProcessedTranslationItemText(locale: string, locString: ILocalizableString, newText: string, obj: any): string {
     return newText;

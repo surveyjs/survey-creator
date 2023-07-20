@@ -2701,6 +2701,19 @@ export class CreatorBase extends Base
     }
   }
 
+  private _rootElementValue: HTMLElement;
+  public get rootElement(): HTMLElement {
+    return this._rootElementValue;
+  }
+  public setRootElement(element: HTMLElement) {
+    this._rootElementValue = element;
+    this.initKeyboardShortcuts(element);
+    this.initResponsivityManager(element as HTMLDivElement);
+  }
+  public unsubscribeRootElement() {
+    this.removeKeyboardShortcuts(this._rootElementValue);
+    this.resetResponsivityManager();
+  }
   public initKeyboardShortcuts(rootNode: HTMLElement) {
     if (!!rootNode) {
       rootNode.addEventListener("keydown", this.onKeyDownHandler);
