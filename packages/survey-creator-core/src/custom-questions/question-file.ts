@@ -1,4 +1,4 @@
-import { Helpers, QuestionFactory, QuestionFileModel, Serializer } from "survey-core";
+import { CssClassBuilder, Helpers, QuestionFactory, QuestionFileModel, Serializer } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
@@ -69,6 +69,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
   public getIsClearButtonDisabled(): boolean {
     return !this.value || this.isInputReadOnly;
+  }
+  public getChooseButtonCss(): string {
+    return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
   }
 }
 Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");

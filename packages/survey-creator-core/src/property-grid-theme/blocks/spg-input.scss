@@ -55,6 +55,7 @@
   &:active {
     opacity: 0.5;
   }
+  &.spg-input__edit-button--disabled,
   &:disabled {
     opacity: 0.25;
     background: $background;
@@ -88,6 +89,9 @@
   border: none;
   line-height: calcSize(3);
   background-color: transparent;
+}
+.spg-input-container__input:disabled {
+  opacity: 0.25;
 }
 .spg-input-container__buttons-container {
   display: flex;

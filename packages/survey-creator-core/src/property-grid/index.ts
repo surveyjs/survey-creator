@@ -820,6 +820,7 @@ export class PropertyGridModel {
       page,
       false
     );
+    this.survey.enterKeyAction = "loseFocus";
     this.survey.addPage(page);
     this.survey.getAllQuestions().forEach(q => {
       PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
