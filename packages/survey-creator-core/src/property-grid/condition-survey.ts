@@ -532,7 +532,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
-        const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
       });
@@ -565,9 +566,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.setupConditionQuestionName(item, panel);
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
+      this.updateSurveyVariable(item);
     }
     this.setupRemoveQuestion(panel);
     this.isSettingPanelValues = false;
+  }
+  private updateSurveyVariable(item: ConditionEditorItem): void {
+    this.editSurvey.setVariable(item.questionName, item.value);
   }
   private getConditionQuestions(): Array<ItemValue> {
     if (!this.context) return this.allConditionQuestions;
@@ -607,6 +612,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     item.operator = panel.getQuestionByName("operator").value;
     if (!!panel.getQuestionByName("questionValue")) {
       item.value = panel.getQuestionByName("questionValue").value;
+      this.updateSurveyVariable(item);
     }
     return item;
   }
