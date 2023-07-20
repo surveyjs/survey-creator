@@ -53,7 +53,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.createErrorActions(errors).forEach(action => actions.push(action));
       errorList = new ListModel(actions, (action: Action) => {
         const error: SurveyTextWorkerError = action.data;
-        if(!!error) this.gotoError(error.at);
+        if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
       }, true);
       errorList.hasVerticalScroller = true;
     }
@@ -63,7 +63,7 @@ export abstract class JsonEditorBaseModel extends Base {
     }
     this.hasErrors = hasErrors;
   }
-  protected gotoError(at: number): void {}
+  protected gotoError(at: number, row: number, column: number): void {}
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
     let counter = 1;

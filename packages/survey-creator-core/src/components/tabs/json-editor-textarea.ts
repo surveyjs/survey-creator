@@ -43,7 +43,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
     this.processErrors(value);
     this.isProcessingImmediately = false;
   }
-  protected gotoError(at: number): void {
+  protected gotoError(at: number, row: number, column: number): void {
     if(!this.textElement) return;
     const el = this.textElement;
     el.selectionStart = at;

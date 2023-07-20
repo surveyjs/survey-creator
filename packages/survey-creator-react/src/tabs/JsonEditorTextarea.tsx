@@ -1,10 +1,30 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase, List } from "survey-react-ui";
-import { TextareaJsonEditorModel } from "survey-creator-core";
+import { TextareaJsonEditorModel, JsonEditorBaseModel } from "survey-creator-core";
 
 interface ITabJsonEditorTextareaComponentProps {
   data: TextareaJsonEditorModel;
+}
+
+interface ITabJsonEditorErrorsProps {
+  data: JsonEditorBaseModel;
+}
+
+export class TabJsonEditorErrorsComponent extends SurveyElementBase<ITabJsonEditorErrorsProps, any> {
+  protected getStateElement(): Base {
+    return this.model;
+  }
+  private get model(): JsonEditorBaseModel {
+    return this.props.data;
+  }
+  renderElement(): JSX.Element {
+    if(!this.model.hasErrors) return null;
+    const style = { width: "100%", height: "150px" };
+    return <div style={style}>
+      <List model={this.model.errorList} />
+    </div>;
+  }
 }
 
 export class TabJsonEditorTextareaComponent extends SurveyElementBase<
@@ -24,10 +44,11 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
     const setControl = (el: HTMLTextAreaElement) => {
       this.model.textElement = el;
     };
+    const errors = <TabJsonEditorErrorsComponent data={this.model}/>;
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
-          {this.renderErrorList()}
+          {errors}
           <textarea
             ref={input => (setControl(input))}
             className="svc-json-editor-tab__content-area"
@@ -42,13 +63,6 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
         </div>
       </div>
     );
-  }
-  private renderErrorList(): JSX.Element {
-    if(!this.model.hasErrors) return undefined;
-    const style = { width: "100%", height: "150px" };
-    return <div style={style}>
-      <List model={this.model.errorList} />
-    </div>;
   }
 }
 
