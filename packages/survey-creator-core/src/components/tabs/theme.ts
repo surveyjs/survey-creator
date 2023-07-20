@@ -678,6 +678,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "buttongroup",
                     name: "backgroundImageFit",
+                    enableIf: "{backgroundImage} notempty",
                     titleLocation: "hidden",
                     choices: [
                       { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
@@ -689,6 +690,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "buttongroup",
                     name: "backgroundImageAttachment",
+                    enableIf: "{backgroundImage} notempty",
                     titleLocation: "hidden",
                     choices: [
                       { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
@@ -699,6 +701,7 @@ export class ThemeSurveyTabViewModel extends Base {
                   {
                     type: "spinedit",
                     name: "backgroundOpacity",
+                    enableIf: "{backgroundImage} notempty",
                     titleLocation: "left",
                     title: getLocString("theme.backgroundOpacity"),
                     descriptionLocation: "hidden",
