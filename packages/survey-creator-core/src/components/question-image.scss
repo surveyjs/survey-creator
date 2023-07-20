@@ -12,7 +12,11 @@
 }
 
 .svc-question__content--image:not(.svc-question__content--empty) {
-  padding: calcSize(4) 2px calcSize(8) 2px;
+  padding: calcSize(4) 0 calcSize(8) 0;
+
+  .sd-image__image {
+    border-radius: 0;
+  }
 }
 
 .svc-question__content--image.svc-question__content--empty .sd-file,
