@@ -416,7 +416,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const page = this.parentElement;
     const dragged = this.draggedElement;
     const src = this.draggedElement;
-    const dest = this.dragOverIndicatorElement.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
+    const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     const row = page.dragDropFindRow(dest);
     let targetIndex = this.getElementIndexInPanel(dest, row);
