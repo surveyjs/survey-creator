@@ -28,6 +28,11 @@ svc-tab-json-editor-textarea {
   font-weight: bold;
 }
 
+.svc-json-editor-tab__errros_list {
+  width: "100%";
+  height: "150px";
+}
+
 .svc-json-editor-tab__content-errors {
   position: absolute;
   right: 0%;
@@ -39,17 +44,17 @@ svc-tab-json-editor-textarea {
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));
   border: 1px solid $border;
   border-radius: 1px;
-  
+
   color: $foreground;
   font-family: monospace;
 
   span {
     white-space: pre-line;
 
-    > b {
+    >b {
       color: $red;
     }
-  }  
+  }
 }
 
 .svc-json-editor-tab__content-errors:empty {

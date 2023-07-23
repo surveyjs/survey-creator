@@ -20,8 +20,7 @@ export class TabJsonEditorErrorsComponent extends SurveyElementBase<ITabJsonEdit
   }
   renderElement(): JSX.Element {
     if(!this.model.hasErrors) return null;
-    const style = { width: "100%", height: "150px" };
-    return <div style={style}>
+    return <div className="svc-json-editor-tab__errros_list">
       <List model={this.model.errorList} />
     </div>;
   }
