@@ -6,11 +6,18 @@ const template: string = require("./json-editor-textarea.html");
 
 ko.components.register("svc-tab-json-editor-textarea", {
   viewModel: {
-    createViewModel: (params: { data: TabJsonEditorTextareaPlugin }) => {
+    createViewModel: (params: { data: TabJsonEditorTextareaPlugin }, componentInfo: any) => {
       const plugin: TabJsonEditorTextareaPlugin = params.data;
       new ImplementorBase(plugin.model);
       const model: TextareaJsonEditorModel = <TextareaJsonEditorModel>plugin.model;
       model.canShowErrors = false;
+      const el = componentInfo.element.parentElement;
+      if(!!el) {
+        const els = el.getElementsByClassName("svc-json-editor-tab__content-area");
+        if(els.length > 0) {
+          model.textElement = els[0];
+        }
+      }
       return model;
     }
   },

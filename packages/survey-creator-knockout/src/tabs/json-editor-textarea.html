@@ -1,17 +1,12 @@
 <div class="svc-creator-tab__content">
   <div class="svc-json-editor-tab__content">
+    <!-- ko if: hasErrors -->
+    <div class="svc-json-editor-tab__errros_list">
+      <sv-list params="model: errorList"></sv-list>
+    </div>
+    <!-- /ko -->
     <textarea class="svc-json-editor-tab__content-area"
       data-bind="textInput: text, disable: readOnly, attr: { 'aria-label': ariaLabel }, event: { keydown: checkKey}">
     </textarea>
-    <!-- ko if: userFriendlyErrors.length !== 0 -->
-    <button type="button" class="svc-json-editor-tab__errros_button"
-      data-bind="text: errorButtonText, click: toggleErrors"></button>
-    <!-- /ko -->
-    <!-- ko if: canShowErrors -->
-    <div class="svc-json-editor-tab__content-errors" data-bind="foreach: userFriendlyErrors">
-      <span><b>Error:</b></span>
-      <span data-bind="text: $data"></span>
-    </div>
-    <!-- /ko -->
   </div>
 </div>

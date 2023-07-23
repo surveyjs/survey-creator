@@ -1,5 +1,10 @@
 <div class="svc-creator-tab__content">
     <div class="svc-json-editor-tab__content">
+        <!-- ko if: hasErrors -->
+        <div className="svc-json-editor-tab__errros_list">
+            <sv-list params="model: errorList"></sv-list>
+        </div>
+        <!-- /ko -->
         <div class="svc-json-editor-tab__ace-editor"></div>
     </div>
 </div>
