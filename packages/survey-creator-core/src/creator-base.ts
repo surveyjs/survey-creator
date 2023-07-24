@@ -674,9 +674,9 @@ export class CreatorBase extends Base
    *- sender the survey creator object that fires the event.
    *- options.questionName - the question name for that condition operator is showing.
    *- options.operator - the condition operator.
-   *- options.isEnabled - change it to show/hide the condition operator for this question.
+   *- options.show - change it to show/hide the condition operator for this question.
    */
-   public onConditionOperatorEnabled: CreatorEvent = new CreatorEvent();
+   public onGetConditionOperator: CreatorEvent = new CreatorEvent();
    /**
    * Use this event to modify the display text of a logic item in the Logic tab.
    * 
@@ -3032,14 +3032,14 @@ export class CreatorBase extends Base
     return options.title;
   }
   isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean {
-    if(this.onConditionOperatorEnabled.isEmpty) return isEnabled;
+    if(this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
       operator: operator,
-      isEnabled: isEnabled
+      show: isEnabled
     };
-    this.onConditionOperatorEnabled.fire(this, options);
-    return options.isEnabled;
+    this.onGetConditionOperator.fire(this, options);
+    return options.show;
   }
   onLogicGetTitleCallback(
     expression: string,
