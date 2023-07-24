@@ -19,8 +19,7 @@ export class TabJsonEditorErrorsComponent extends SurveyElementBase<ITabJsonEdit
     return this.props.data;
   }
   renderElement(): JSX.Element {
-    if(!this.model.hasErrors) return null;
-    return <div className="svc-json-editor-tab__errros_list">
+    return <div className="svc-json-editor-tab__errros_list" style={{ display: this.model.hasErrors ? "block": "none" }}>
       <List model={this.model.errorList} />
     </div>;
   }
@@ -47,7 +46,6 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
-          {errors}
           <textarea
             ref={input => (setControl(input))}
             className="svc-json-editor-tab__content-area"
@@ -59,6 +57,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
+          {errors}
         </div>
       </div>
     );

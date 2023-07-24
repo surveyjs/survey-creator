@@ -1,10 +1,11 @@
 <div class="svc-creator-tab__content">
     <div class="svc-json-editor-tab__content">
+        <div class="svc-json-editor-tab__ace-editor"></div>
         <!-- ko if: hasErrors -->
-        <div className="svc-json-editor-tab__errros_list">
-            <sv-list params="model: errorList"></sv-list>
+        <div className="svc-json-editor-tab__errros_list" data-bind="visible: hasErrors">
+            <!-- ko component: { name: "sv-list", params: { model: errorList } } -->
+            <!-- /ko -->
         </div>
         <!-- /ko -->
-        <div class="svc-json-editor-tab__ace-editor"></div>
     </div>
 </div>

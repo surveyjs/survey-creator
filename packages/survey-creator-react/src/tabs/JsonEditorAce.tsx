@@ -31,11 +31,11 @@ export class TabJsonEditorAceComponent extends SurveyElementBase<
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
-          {errors}
           <div
             className="svc-json-editor-tab__ace-editor"
             ref={this.aceEditorrRef}
           ></div>
+          {errors}
         </div>
       </div>
     );

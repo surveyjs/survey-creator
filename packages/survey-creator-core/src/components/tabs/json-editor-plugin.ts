@@ -6,7 +6,6 @@ const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
-  public errorList: ListModel;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
   @property() hasErrors: boolean;
@@ -44,22 +43,31 @@ export abstract class JsonEditorBaseModel extends Base {
       }
     }
   }
+
+  private errorListValue: ListModel;
+  public get errorList(): ListModel {
+    if(!this.errorListValue) {
+      this.errorListValue = new ListModel([], (action: Action) => {
+        const error: SurveyTextWorkerError = action.data;
+        if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
+      }, false);
+      this.errorListValue.cssClasses = {
+        item: "svc-errors__item",
+        itemIcon: "svc-error__icon",
+        itemBody: "svc-error",
+        itemsContainer: "svc-errors"
+      };
+      this.errorListValue.hasVerticalScroller = true;
+    }
+    return this.errorListValue;
+  }
+
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
     let hasErrors = errors.length > 0;
-    let oldErrorList = this.errorList;
-    let errorList: ListModel = undefined;
     if(hasErrors) {
       const actions = [];
       this.createErrorActions(errors).forEach(action => actions.push(action));
-      errorList = new ListModel(actions, (action: Action) => {
-        const error: SurveyTextWorkerError = action.data;
-        if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
-      }, true);
-      errorList.hasVerticalScroller = true;
-    }
-    this.errorList = errorList;
-    if(!!oldErrorList) {
-      oldErrorList.dispose();
+      this.errorList.setItems(actions);
     }
     this.hasErrors = hasErrors;
   }
@@ -79,6 +87,8 @@ export abstract class JsonEditorBaseModel extends Base {
         id: "error_" + counter++,
         title: title,
         tooltip: error.text,
+        iconName: "icon-error",
+        iconSize: 16,
         data: error
       }));
     });
