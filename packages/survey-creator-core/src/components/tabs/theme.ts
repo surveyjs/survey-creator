@@ -189,7 +189,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private loadTheme(theme: ICreatorTheme) {
     this.themeName = theme.themeName;
     this.themePalette = theme.themePalette;
-    this.themeMode = theme.isCompact ? "lightweight" : undefined;
+    this.themeMode = (theme.isPanelless !== undefined && !theme.isPanelless) ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
     this.backgroundImageAttachment = theme.backgroundImageAttachment;
@@ -501,7 +501,7 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.currentTheme.isCompact = options.value === "lightweight";
+          this.currentTheme.isPanelless = options.value !== "lightweight";
           this.applySelectedTheme();
         } else {
           this.currentTheme.themeName = this.themeName;
