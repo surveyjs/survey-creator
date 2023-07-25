@@ -285,15 +285,22 @@ export class ThemeSurveyTabViewModel extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
+  private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
-    this.setJSON(json, this.startTheme);
-    this.updatePageList();
+    this.blockThemeChangedNotifications += 1;
+    try {
+      this.setJSON(json, this.startTheme);
+      this.updatePageList();
 
-    if (options.showPagesInTestSurveyTab !== undefined) {
-      this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+      if (options.showPagesInTestSurveyTab !== undefined) {
+        this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+      }
+
+      this.buildActions();
     }
-
-    this.buildActions();
+    finally {
+      this.blockThemeChangedNotifications -= 1;
+    }
   }
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
@@ -333,6 +340,9 @@ export class ThemeSurveyTabViewModel extends Base {
   public resetTheme() {
     this.themeChanges = {};
     this.applySelectedTheme();
+    if(this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
+      this.surveyProvider.isThemePristine = true;
+    }
   }
 
   public show() {
@@ -519,6 +529,7 @@ export class ThemeSurveyTabViewModel extends Base {
         this.currentTheme.backgroundOpacity = options.value / 100;
         return;
       }
+      this.blockThemeChangedNotifications += 1;
       if (options.name === "--sjs-primary-backcolor") {
         this.colorCalculator.calculateColors(options.value);
         this.themeChanges["--sjs-primary-backcolor"] = options.value;
@@ -546,6 +557,7 @@ export class ThemeSurveyTabViewModel extends Base {
       const newTheme = {};
       assign(newTheme, this.currentTheme.cssVariables, this.themeChanges);
       this.currentTheme.cssVariables = newTheme;
+      this.blockThemeChangedNotifications -= 1;
       this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
@@ -599,6 +611,9 @@ export class ThemeSurveyTabViewModel extends Base {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
+    if(this.blockThemeChangedNotifications == 0) {
+      this.surveyProvider.raiseThemeChanged();
+    }
   }
 
   private getThemeEditorSurveyJSON() {
