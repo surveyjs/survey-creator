@@ -829,12 +829,12 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
 test("calculateDragOverLocation", () => {
   let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
   expect(location).toBe(DragTypeOverMeEnum.Left);
-  creatorSettings.dragDrop.disableDragToTheSameLine = true;
+  creatorSettings.dragDrop.allowDragToTheSameLine = false;
   location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
   expect(location).toBe(DragTypeOverMeEnum.Top);
   location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
   expect(location).toBe(DragTypeOverMeEnum.Bottom);
-  creatorSettings.dragDrop.disableDragToTheSameLine = false;
+  creatorSettings.dragDrop.allowDragToTheSameLine = true;
   location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
   expect(location).toBe(DragTypeOverMeEnum.Right);
 });
