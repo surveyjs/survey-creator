@@ -804,3 +804,22 @@ test("Theme builder: import/export theme", (): any => {
   );
   expect(themeSurveyTab.currentTheme.cssVariables || {}).toEqual(newResult);
 });
+
+test("Theme builder: import/export theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  let log = "";
+  themeSurveyTab.survey.triggerResponsiveness = (hard: boolean) => {
+    log += `->called:${hard}`;
+  };
+  themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "#ffffff";
+  expect(log).toBe("");
+  themeEditor.getQuestionByName("commonScale").value = 90;
+  expect(log).toBe("->called:true");
+  themeEditor.getQuestionByName("commonScale").value = 80;
+  expect(log).toBe("->called:true->called:true");
+});

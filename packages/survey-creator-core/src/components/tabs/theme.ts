@@ -519,6 +519,9 @@ export class ThemeSurveyTabViewModel extends Base {
         this.currentTheme.backgroundOpacity = options.value / 100;
         return;
       }
+      if(options.name == "commonScale") {
+        this.survey.triggerResponsiveness(true);
+      }
       if (options.name === "--sjs-primary-backcolor") {
         this.colorCalculator.calculateColors(options.value);
         this.themeChanges["--sjs-primary-backcolor"] = options.value;
