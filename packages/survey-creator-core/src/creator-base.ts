@@ -689,6 +689,18 @@ export class CreatorBase extends Base
    * A Boolean property that you can set to `false` if you want to hide the condition operator.
    * 
    */
+  public onGetConditionOperator: CreatorEvent = new CreatorEvent();
+  /**
+   * Use this event to modify the display text of a logic item in the Logic tab.
+   * 
+   * The event handler accepts the following arguments:
+   * 
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.expression` - A logical expression associated with the logic item. 
+   * - `options.expressionText` - The same expression in a user-friendly format. It may contain question titles instead of question names.
+   * - `options.logicItem` - A logic item object. Contains an array of actions and other properties.
+   * - `options.text` - The expression and actions in a user-friendly format. Redefine this property if you want to change the display text.
+   */
   public onLogicItemDisplayText: CreatorEvent = new CreatorEvent();
   /**
     * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
