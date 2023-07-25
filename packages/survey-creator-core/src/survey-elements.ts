@@ -15,8 +15,8 @@ export function calculateDragOverLocation(clientX: number, clientY: number, drop
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
 
-  if(settings.dragDrop.disableDragToTheSameLine) {
-    if(dy >= rect.height/2) {
+  if (!settings.dragDrop.allowDragToTheSameLine) {
+    if (dy >= rect.height / 2) {
       return DragTypeOverMeEnum.Bottom;
     } else {
       return DragTypeOverMeEnum.Top;
@@ -416,7 +416,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const page = this.parentElement;
     const dragged = this.draggedElement;
     const src = this.draggedElement;
-    const dest = this.dropTarget;
+    const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     const row = page.dragDropFindRow(dest);
     let targetIndex = this.getElementIndexInPanel(dest, row);

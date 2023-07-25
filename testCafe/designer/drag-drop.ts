@@ -1079,7 +1079,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -1,
+      destinationOffsetY: -10,
       speed: 0.5
     });
 
@@ -1318,4 +1318,86 @@ test("Drag Drop to new page and Undo", async (t) => {
   await t.click(undoAction);
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(1);
+});
+
+test("Drag Drop on the right of Panel same row", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              },
+              {
+                "type": "text",
+                "name": "question3"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+  const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input toolbox item']");
+
+  await t
+    .hover(SingleInputToolboxItem, { speed: 0.01 })
+    .dragToElement(SingleInputToolboxItem, Panel, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: 100,
+      destinationOffsetX: -10,
+      speed: 0.01
+    });
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              },
+              {
+                "type": "text",
+                "name": "question3"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "question4",
+            "startWithNewLine": false
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
 });

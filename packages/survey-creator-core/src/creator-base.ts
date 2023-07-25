@@ -299,6 +299,11 @@ export class CreatorBase extends Base
     onSaveCallback: (no: number, isSuccess: boolean) => void
   ) => void;
 
+  private saveThemeFuncValue: (
+    no: number,
+    onSaveCallback: (no: number, isSuccess: boolean) => void
+  ) => void;
+
   @property() viewType: string;
 
   /**
@@ -1037,7 +1042,28 @@ export class CreatorBase extends Base
    * Default value: `"defaultV2"`
    */
   public themeForPreview: string = "defaultV2";
-  public theme: ITheme = { cssVariables: {} };
+
+  @property({ defaultValue: false }) hasPendingThemeChanges: boolean;
+  @property({ defaultValue: true }) isThemePristine: boolean;
+
+  private _theme: ITheme = { cssVariables: {} };
+  public get theme(): ITheme { return this._theme; }
+  public set theme(newTheme: ITheme) {
+    this._theme = newTheme;
+    this.raiseThemeChanged();
+  }
+
+  public raiseThemeChanged(): void {
+    this.isThemePristine = false;
+    this.hasPendingThemeChanges = true;
+    const options = {
+      propertyName: "theme",
+      obj: this,
+      value: this.theme,
+      type: "THEME_MODIFIED"
+    };
+    this.setModified(options);
+  }
 
   private _allowModifyPages = true;
   /**
@@ -2072,7 +2098,7 @@ export class CreatorBase extends Base
   public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
-    this.isAutoSave && this.doAutoSave();
+    this.isAutoSave && this.doAutoSave(options.type === "THEME_MODIFIED" ? () => this.doSaveTheme() : () => this.doSave());
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -3086,9 +3112,9 @@ export class CreatorBase extends Base
    */
   public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
-  protected doAutoSave() {
+  protected doAutoSave(saveFunc = () => this.doSave()) {
     if (this.autoSaveDelay <= 0) {
-      this.doSave();
+      saveFunc();
       return;
     }
     if (!!this.autoSaveTimerId) {
@@ -3098,7 +3124,7 @@ export class CreatorBase extends Base
     this.autoSaveTimerId = setTimeout(function () {
       clearTimeout(self.autoSaveTimerId);
       self.autoSaveTimerId = null;
-      self.doSave();
+      saveFunc();
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
@@ -3118,6 +3144,35 @@ export class CreatorBase extends Base
         }
       });
     }
+  }
+  public doSaveTheme() {
+    this.setState("saving");
+    if(this.hasPendingThemeChanges && this.saveThemeFunc) {
+      this.saveNo++;
+      this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
+        if (this.saveNo !== no) return;
+        if (isSuccess) {
+          this.setState("saved");
+          this.hasPendingThemeChanges = false;
+        } else {
+          this.setState("modified");
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"), "error");
+          }
+        }
+      });
+    }
+  }
+
+  /**
+   * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
+   * @see isAutoSave
+   */
+  public get saveThemeFunc() {
+    return this.saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this.saveThemeFuncValue = value;
   }
 
   @property({ defaultValue: false }) showSaveButton: boolean;
