@@ -189,7 +189,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private loadTheme(theme: ICreatorTheme) {
     this.themeName = theme.themeName;
     this.themePalette = theme.colorPalette;
-    this.themeMode = (theme.isPanelless !== undefined && !theme.isPanelless) ? "lightweight" : undefined;
+    this.themeMode = theme.isPanelless ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
     this.backgroundImageAttachment = theme.backgroundImageAttachment;
@@ -340,7 +340,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public resetTheme() {
     this.themeChanges = {};
     this.applySelectedTheme();
-    if(this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
+    if (this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
       this.surveyProvider.isThemePristine = true;
     }
   }
@@ -511,7 +511,7 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.currentTheme.isPanelless = options.value !== "lightweight";
+          this.currentTheme.isPanelless = options.value === "lightweight";
           this.applySelectedTheme();
         } else {
           this.currentTheme.themeName = this.themeName;

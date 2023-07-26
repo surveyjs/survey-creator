@@ -701,7 +701,7 @@ test("import styles from file", ()=> {
     "backgroundImageFit": "auto",
     "themeName": "My Theme",
     "themePalette": "light",
-    "isPanelless": false
+    "isPanelless": true
   } as any);
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("My Theme");
