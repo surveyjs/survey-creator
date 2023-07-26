@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator } from "../../helper";
+import { url, setJSON, takeElementScreenshot, explicitErrorHandler, getPropertyGridCategory, generalGroupName, patchDragDropToDisableDrop, wrapVisualTest, resetHoverToCreator, getPagesLength } from "../../helper";
 
 const title = "DragDrop Screenshot";
 
@@ -28,6 +28,52 @@ test("Ghost Survey Element", async (t) => {
       .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 });
 
     await takeElementScreenshot("drag-drop-survey-element-ghost.png", Selector(".svc-page--drag-over-empty"), t, comparer);
+  });
+});
+
+test("Ghost Survey Element after several drops", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(2560, 1440);
+    await setJSON({ pages: [{ name: "page1" }] });
+
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
+    const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+    const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+
+    const patchDragDropToShowGhostElementAfterDrop = ClientFunction(() => {
+      window["creator"].dragDropSurveyElements.removeGhostElementFromSurvey = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.drop = () => { };
+      window["creator"].dragDropSurveyElements.domAdapter.clear = () => { };
+    });
+
+    let pagesLength;
+
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+    pagesLength = await getPagesLength();
+    await t.expect(pagesLength).eql(1);
+
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+    pagesLength = await getPagesLength();
+    await t.expect(pagesLength).eql(2);
+
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+    pagesLength = await getPagesLength();
+    await t.expect(pagesLength).eql(3);
+
+    await patchDragDropToShowGhostElementAfterDrop();
+
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-survey-element-ghost-page-4.png", Selector(".svc-page--drag-over-empty"), t, comparer);
   });
 });
 

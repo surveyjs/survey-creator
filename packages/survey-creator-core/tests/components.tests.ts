@@ -1,5 +1,5 @@
 import { Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings } from "survey-core";
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum } from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
@@ -7,6 +7,8 @@ import { QuestionRatingAdornerViewModel } from "../src/components/question-ratin
 import { CreatorTester } from "./creator-tester";
 import { LogoImageViewModel } from "../src/components/header/logo-image";
 import { imageMimeTypes } from "../src/utils/utils";
+import { calculateDragOverLocation } from "../src/survey-elements";
+import { settings as creatorSettings } from "../src/creator-settings";
 
 beforeEach(() => { });
 
@@ -712,6 +714,41 @@ test("QuestionImageAdornerViewModel isUploading", () => {
   expect(uploadCount).toBe(1);
 });
 
+test("QuestionImageAdornerViewModel filePresentationModel triggers creator.onUploadFile", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  let uploadCount = 0;
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback({}, "success");
+  });
+  expect(uploadCount).toBe(0);
+
+  imageAdorner.filePresentationModel.loadFiles([<any>{}]);
+
+  expect(uploadCount).toBe(1);
+});
+
+test("QuestionImageAdornerViewModel filePresentationModel creates own survey instance", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const imageAdorner2 = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+
+  expect(imageAdorner.filePresentationModel.getSurvey() === question.getSurvey()).toBeFalsy();
+  expect(imageAdorner2.filePresentationModel.getSurvey() === question.getSurvey()).toBeFalsy();
+  expect(imageAdorner.filePresentationModel.getSurvey() === imageAdorner2.filePresentationModel.getSurvey()).toBeFalsy();
+  expect((question.getSurvey() as SurveyModel).onUploadFiles.isEmpty).toBeTruthy();
+});
+
 test("LogoImageViewModel isUploading", () => {
   const creator = new CreatorTester();
   const logoImageAdorner = new LogoImageViewModel(creator, { getElementsByClassName: () => [{ files: [{}] }] } as any);
@@ -789,3 +826,15 @@ test("QuestionRatingAdornerViewModel allowAdd allowRemove on property readonly",
   expect(ratingAdorner.enableAdd).toBeTruthy();
 });
 
+test("calculateDragOverLocation", () => {
+  let location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Left);
+  creatorSettings.dragDrop.allowDragToTheSameLine = false;
+  location = calculateDragOverLocation(150, 120, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Top);
+  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Bottom);
+  creatorSettings.dragDrop.allowDragToTheSameLine = true;
+  location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
+  expect(location).toBe(DragTypeOverMeEnum.Right);
+});

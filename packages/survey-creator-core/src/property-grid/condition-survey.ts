@@ -532,7 +532,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const qType = !!json ? json.type : null;
 
       opt.choices.forEach((choice, index) => {
-        const isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
+        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
       });
@@ -565,9 +566,13 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.setupConditionQuestionName(item, panel);
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").value = item.value;
+      this.updateSurveyVariable(item);
     }
     this.setupRemoveQuestion(panel);
     this.isSettingPanelValues = false;
+  }
+  private updateSurveyVariable(item: ConditionEditorItem): void {
+    this.editSurvey.setVariable(item.questionName, item.value);
   }
   private getConditionQuestions(): Array<ItemValue> {
     if (!this.context) return this.allConditionQuestions;
@@ -607,6 +612,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     item.operator = panel.getQuestionByName("operator").value;
     if (!!panel.getQuestionByName("questionValue")) {
       item.value = panel.getQuestionByName("questionValue").value;
+      this.updateSurveyVariable(item);
     }
     return item;
   }
@@ -920,39 +926,40 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     this.updateQuestionsWidth(panel);
   }
   private onUpdateQuestionCssClasses(options: any) {
-    options.cssClasses.answered = "svc-logic-question--answered";
+    const cssClasses = options.cssClasses;
+    const question = options.question;
+    cssClasses.answered = "svc-logic-question--answered";
 
-    if (options.question.name === "conjunction") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
+    if (question.name === "conjunction") {
+      question.allowRootStyle = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--conjunction ";
     }
-    if (options.question.name === "questionName") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.control += " svc-logic-operator svc-logic-operator--question";
-      options.cssClasses.error.root = "svc-logic-operator__error";
-      options.cssClasses.onError = "svc-logic-operator--error";
+    if (question.name === "questionName") {
+      question.allowRootStyle = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--question";
+      cssClasses.error.root = "svc-logic-operator__error";
+      cssClasses.onError = "svc-logic-operator--error";
     }
-    if (options.question.name === "operator") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.control += " svc-logic-operator svc-logic-operator--operator";
+    if (question.name === "operator") {
+      question.allowRootStyle = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--operator";
     }
-    if (options.question.name === "removeAction") {
-      options.question.allowRootStyle = false;
-      options.cssClasses.mainRoot += " svc-logic-condition-remove-question";
+    if (question.name === "removeAction") {
+      question.allowRootStyle = false;
+      cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
-    // options.cssClasses.mainRoot += "sd-question sd-row__question";
-    if (options.question.name === "questionValue" || options.question.isContentElement) {
-      assignDefaultV2Classes(options.cssClasses, options.question.getType());
-      options.cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
-      options.cssClasses.error.root = "svc-logic-operator__error";
+    if (question.name === "questionValue" || question.isContentElement) {
+      assignDefaultV2Classes(cssClasses, question.getType());
+      cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+      cssClasses.error.root = "svc-logic-operator__error";
     }
-    if (options.question.name === "panel") {
-      options.cssClasses.root += " svc-logic-paneldynamic";
-      options.cssClasses.buttonAdd += " svc-logic-operator--operator";
-      options.cssClasses.iconRemove = "svc-icon-remove";
-      options.cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
-      options.cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
-      options.cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
+    if (question.name === "panel") {
+      cssClasses.root += " svc-logic-paneldynamic";
+      cssClasses.buttonAdd += " svc-logic-operator--operator";
+      cssClasses.iconRemove = "svc-icon-remove";
+      cssClasses.buttonRemove = "svc-logic-paneldynamic__button svc-logic-paneldynamic__remove-btn";
+      cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
+      cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
   private onValueChanged(options: any) {

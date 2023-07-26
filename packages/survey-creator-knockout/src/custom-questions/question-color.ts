@@ -1,6 +1,6 @@
 import { RendererFactory, QuestionFactory, Serializer } from "survey-core";
 import { QuestionColorModel } from "survey-creator-core";
-import { QuestionImplementor } from "survey-knockout-ui";
+import { ImplementorBase, QuestionImplementor } from "survey-knockout-ui";
 import * as ko from "knockout";
 
 const template = require("./question-color.html");
@@ -29,6 +29,11 @@ export class QuestionColorImplementor extends QuestionImplementor {
       this.question.onKeyUp(event);
       return true;
     });
+    this.setCallbackFunc("koDropdownAction", () => {
+      const dropdownAction = this.question.dropdownAction;
+      new ImplementorBase(dropdownAction);
+      return dropdownAction;
+    });
 
     this.setObservaleObj("koReadOnlyValue", ko.computed(() => this.question.renderedValue));
   }
@@ -51,7 +56,7 @@ export class QuestionColor extends QuestionColorModel {
   }
 }
 
-Serializer.overrideClassCreator("color", function() {
+Serializer.overrideClassCreator("color", function () {
   return new QuestionColor("");
 });
 

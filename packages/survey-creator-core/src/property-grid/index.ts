@@ -820,6 +820,7 @@ export class PropertyGridModel {
       page,
       false
     );
+    this.survey.enterKeyAction = "loseFocus";
     this.survey.addPage(page);
     this.survey.getAllQuestions().forEach(q => {
       PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
@@ -952,12 +953,17 @@ export class PropertyGridModel {
   }
   private validateQuestionValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
     if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"]))
-      return editorLocalization.getString("pe.propertyIsEmpty");
+      return this.getErrorTextOnValidate(
+        editorLocalization.getString("pe.propertyIsEmpty"), prop.name, obj, val);
     if(this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
-      return editorLocalization.getString("pe.propertyNameIsIncorrect");
+      return this.getErrorTextOnValidate(
+        editorLocalization.getString("pe.propertyNameIsIncorrect"), prop.name, obj, val);
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
-    if (!!editorError) return editorError;
-    return this.options.onGetErrorTextOnValidationCallback(prop.name, obj, val);
+    return this.getErrorTextOnValidate(editorError, prop.name, obj, val);
+  }
+  private getErrorTextOnValidate(defaultError: string, propName: string, obj: Base, val: any): string {
+    const customError = this.options.onGetErrorTextOnValidationCallback(propName, obj, val);
+    return !!customError ? customError: defaultError;
   }
   private onValidateQuestion(options: any) {
     var q = options.question;

@@ -1,6 +1,6 @@
 <div [class]="model.cssClasses.root" (dragenter)="model.onDragEnter($event)" (dragover)="model.onDragOver($event)"
   (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)">
-  <input type="text" [class]="model.cssClasses.control" [value]="model.value ||''"
+  <input type="text" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.control" [value]="model.value ||''"
     (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)" />
   <div [class]="model.cssClasses.buttonsContainer">
     <button type="button" [class]="model.cssClasses.clearButton" [disabled]="model.getIsClearButtonDisabled()"
@@ -8,12 +8,12 @@
       <svg [iconName]="model.cssClasses.clearButtonIcon" size="'auto'" [title]="model.clearButtonCaption"
         sv-ng-svg-icon></svg>
     </button>
-    <label tabindex="0" role="button" [class]="model.cssClasses.chooseButton" [attr.for]="model.inputId"
+    <label role="button" [class]="model.getChooseButtonCss()" [attr.for]="model.inputId"
       [attr.aria-label]="model.chooseButtonCaption">
       <svg [iconName]="model.cssClasses.chooseButtonIcon" size="'auto'" [title]="model.chooseButtonCaption"
         sv-ng-svg-icon></svg>
-      <input type="file" tabindex="-1" [class]="model.cssClasses.fileInput" [attr.id]="model.inputId"
-        [attr.aria-required]="model.ariaRequired" [attr.aria-label]="model.ariaLabel"
+      <input type="file" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.fileInput"
+        [attr.id]="model.inputId" [attr.aria-required]="model.ariaRequired" [attr.aria-label]="model.ariaLabel"
         [attr.aria-invalid]="model.ariaInvalid" [attr.aria-describedby]="model.ariaDescribedBy" [attr.multiple]="false"
         [title]="model.inputTitle" [accept]="model.acceptedTypes" (change)="model.doChange($event)">
     </label>

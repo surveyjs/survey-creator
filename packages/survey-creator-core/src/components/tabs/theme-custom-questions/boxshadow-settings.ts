@@ -15,13 +15,11 @@ ComponentCollection.Instance.add({
         "unit": "px",
         "title": getLocString("theme.boxShadowX"),
         "titleLocation": "left",
-        "min": 0,
       },
       {
         "type": "spinedit",
         "name": "y",
         "unit": "px",
-        "min": 0,
         "startWithNewLine": false,
         "title": getLocString("theme.boxShadowY"),
         "titleLocation": "left"
@@ -52,7 +50,7 @@ ComponentCollection.Instance.add({
         "type": "buttongroup",
         "name": "isInset",
         "titleLocation": "hidden",
-        "choices": [{ text: "Drop", value: false }, { text: "Inner", value: true }]
+        "choices": [{ text: getLocString("theme.boxShadowDrop"), value: false }, { text: getLocString("theme.boxShadowInner"), value: true }]
       }
     ]
   },

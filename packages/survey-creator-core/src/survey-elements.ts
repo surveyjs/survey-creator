@@ -1,4 +1,5 @@
-import { DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel, settings } from "survey-core";
+import { DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { settings } from "./creator-settings";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -13,6 +14,14 @@ export function calculateDragOverLocation(clientX: number, clientY: number, drop
   const tg = rect.height / rect.width;
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
+
+  if (!settings.dragDrop.allowDragToTheSameLine) {
+    if (dy >= rect.height / 2) {
+      return DragTypeOverMeEnum.Bottom;
+    } else {
+      return DragTypeOverMeEnum.Top;
+    }
+  }
 
   if(dy >= tg * dx) {
     if(dy >= - tg * dx + rect.height) {
@@ -407,7 +416,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const page = this.parentElement;
     const dragged = this.draggedElement;
     const src = this.draggedElement;
-    const dest = this.dropTarget;
+    const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
 
     const row = page.dragDropFindRow(dest);
     let targetIndex = this.getElementIndexInPanel(dest, row);

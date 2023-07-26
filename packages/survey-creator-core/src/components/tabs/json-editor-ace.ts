@@ -31,7 +31,10 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 
   public init(aceEditor: any): void {
     this.aceEditor = aceEditor;
-    this.aceEditor.commands["removeCommand"]("find");
+    const aceModules = (window["ace"] as any)?.define?.modules;
+    if (!(aceModules && aceModules["ace/ext/searchbox"])) {
+      this.aceEditor.commands["removeCommand"]("find");
+    }
     this.aceEditor.setReadOnly(this.readOnly);
     if (AceJsonEditorModel.aceBasePath) {
       try {

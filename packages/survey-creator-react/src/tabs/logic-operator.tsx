@@ -17,7 +17,6 @@ export class SurveyLogicOpertor extends SurveyQuestionDropdown {
       id={this.question.inputId}
       className={q.getControlClass()}
       tabIndex={this.question.isInputReadOnly ? undefined : 0}
-      onClick={this.click}
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       disabled={this.question.isInputReadOnly}

@@ -14,6 +14,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   public questionTypeSelectorModel: any;
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
+  private updateDragTypeOverMe() {
+    this.dragTypeOverMe = this.page.dragTypeOverMe;
+  }
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
@@ -23,33 +26,54 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         this.addGhostPage();
       }
     );
-    this.attachElement(this.page);
+    this.attachElement(page);
   }
 
   protected attachElement(surveyElement: PageModel): void {
     super.attachElement(surveyElement);
+    this.dragTypeOverMe = null;
 
-    if (!!this.page) {
-      this.dragTypeOverMe = <any> new ComputedUpdater(() => this.page.dragTypeOverMe);
-
-      this.page["surveyChangedCallback"] = () => {
-        this.isPageLive = !!this.page.survey;
+    if (!!surveyElement) {
+      surveyElement["surveyChangedCallback"] = () => {
+        this.isPageLive = !!surveyElement.survey;
       };
       if (this.isGhost) {
         this.updateActionsProperties();
-        this.page.registerFunctionOnPropertiesValueChanged(
+        surveyElement.registerFunctionOnPropertiesValueChanged(
           ["title", "description"],
           () => {
             this.addGhostPage();
           }
         );
-        this.patchPageForDragDrop(this.page, this.addGhostPage);
+        this.patchPageForDragDrop(surveyElement, this.addGhostPage);
       }
-      this.page.onFirstRendering();
-      this.page.updateCustomWidgets();
-      this.page.setWasShown(true);
+      surveyElement.registerFunctionOnPropertiesValueChanged(
+        ["dragTypeOverMe"],
+        () => {
+          this.updateDragTypeOverMe();
+        }
+      );
+      surveyElement.onFirstRendering();
+      surveyElement.updateCustomWidgets();
+      surveyElement.setWasShown(true);
       this.checkActionProperties();
+      this.dragTypeOverMe = surveyElement.dragTypeOverMe;
     }
+  }
+
+  protected detachElement(surveyElement: PageModel): void {
+    if (!!surveyElement) {
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged([
+        "dragTypeOverMe"
+      ]);
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged([
+        "title",
+        "description"
+      ]);
+      surveyElement["surveyChangedCallback"] = undefined;
+    }
+    super.detachElement(surveyElement);
+    this.dragTypeOverMe = null;
   }
 
   protected onElementSelectedChanged(isSelected: boolean) {
@@ -70,13 +94,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   public dispose(): void {
     super.dispose();
-    if (!!this.page) {
-      this.page.unRegisterFunctionOnPropertiesValueChanged([
-        "title",
-        "description"
-      ]);
-      this.page["surveyChangedCallback"] = undefined;
-    }
+    this.detachElement(this.page);
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {
@@ -94,20 +112,19 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
-    if(this.isGhost) {
-      if(!!this.creator.addPage(currentPage, selectCurrentPage, () => {
+    if (this.isGhost) {
+      if (!!this.creator.addPage(currentPage, selectCurrentPage, () => {
         currentPage.unRegisterFunctionOnPropertiesValueChanged([
           "title",
           "description"
         ]);
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
-        this.dragTypeOverMe = null;
         return true;
       })) {
         this.creator.survey.currentPage = currentPage;
       }
     }
-    if(selectCurrentPage) {
+    if (selectCurrentPage) {
       this.creator.selectElement(currentPage);
     }
   }
@@ -136,13 +153,13 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   get css(): string {
     let result = "";
-    if(!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
+    if (!!this.dragTypeOverMe && this.page.elements.length === 0 && this.creator.survey.pages.length > 0) {
       result = "svc-page--drag-over-empty";
     }
-    if(this.isGhost) {
+    if (this.isGhost) {
       return result + " svc-page__content--new";
     }
-    if(this.creator.isElementSelected(this.page)) {
+    if (this.creator.isElementSelected(this.page)) {
       result += " svc-page__content--selected";
     }
     return result;
@@ -165,7 +182,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   }
   private _footerActionsBar: ActionContainer;
   public get footerActionsBar(): ActionContainer {
-    if(!this._footerActionsBar) {
+    if (!this._footerActionsBar) {
       this._footerActionsBar = new ActionContainer();
       this._footerActionsBar.containerCss = "svc-page__footer";
       this._footerActionsBar.cssClasses = {

@@ -14,6 +14,7 @@ svc-page {
 
 .svc-page__content {
   position: relative;
+  border-radius: calcSize(1);
   padding: calcSize(1) calcSize(0) calcSize(3);
   box-sizing: border-box;
   width: 100%;
@@ -42,10 +43,8 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected,
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
-  border-radius: calcSize(0.5);
-
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px $secondary inset;
+    box-shadow: 0 0 0 2px $secondary;
     background: $secondary-backcolor-semi-light;
 
     .svc-page__content-actions {
@@ -53,17 +52,21 @@ svc-page {
     }
   }
 }
+
 .svc-page__footer {
   overflow: visible;
   margin-left: calcSize(3);
   margin-right: calcSize(3);
+
   .sv-action {
     flex: 1 1 0;
   }
+
   .svc-btn {
     flex-grow: 1;
     border: none;
   }
+
   gap: calcSize(2);
 }
 
@@ -104,7 +107,7 @@ svc-page {
   position: absolute;
   background: $secondary;
   left: calcSize(3);
-  bottom: calcSize(11);
+  bottom: calcSize(11.5);
   width: calc(100% - 48px);
-  height: 4px;
+  height: 2px;
 }

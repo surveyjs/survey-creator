@@ -715,7 +715,7 @@ test("Drag Drop ItemValue (choices): not-allowed cursor", async (t) => {
   const Item2 = Selector("[data-sv-drop-target-item-value=\"Item 2\"]");
   const DragZoneItem2 = Item2.find(".svc-item-value-controls__drag");
 
-  const DnDShortcutControls = Selector("body > div > [data-sv-drop-target-item-value='Item 2']").find(".svc-item-value-controls__button");
+  const DnDShortcutControls = Selector("div > [data-sv-drop-target-item-value='Item 2']").find(".svc-item-value-controls__button");
 
   await patchDragDropToDisableDrop();
 
@@ -1079,7 +1079,7 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
     .dragToElement(RatingToolboxItem, Question3, {
       offsetX: 5,
       offsetY: 5,
-      destinationOffsetY: -1,
+      destinationOffsetY: -10,
       speed: 0.5
     });
 
@@ -1263,6 +1263,136 @@ test("Drag Drop below the last Panel", async (t) => {
           {
             "type": "panel",
             "name": "panel3"
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
+
+test("Drag Drop to new page and Undo", async (t) => {
+  const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
+
+  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
+  const undoAction = Selector("button[title=Undo]");
+
+  await t.resizeWindow(2560, 2000);
+  await ClientFunction(() => {
+    const el: any = document.getElementById("survey-creator");
+    el.style.position = "relative";
+    el.style.bottom = undefined;
+    el.style.height = "10000px";
+    const rootEl: any = document.getElementsByTagName("app-root")[0];
+    if (!!rootEl) {
+      rootEl.style.position = "relative";
+    }
+  })();
+
+  let pagesLength;
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(1);
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  await t
+    .hover(SingleInputItem)
+    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(3);
+
+  await t.click(undoAction);
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(2);
+
+  await t.click(undoAction);
+  pagesLength = await getPagesLength();
+  await t.expect(pagesLength).eql(1);
+});
+
+test("Drag Drop on the right of Panel same row", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              },
+              {
+                "type": "text",
+                "name": "question3"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+  const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input toolbox item']");
+
+  await t
+    .hover(SingleInputToolboxItem, { speed: 0.01 })
+    .dragToElement(SingleInputToolboxItem, Panel, {
+      offsetX: 5,
+      offsetY: 5,
+      destinationOffsetY: 100,
+      destinationOffsetX: -10,
+      speed: 0.01
+    });
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              },
+              {
+                "type": "text",
+                "name": "question2"
+              },
+              {
+                "type": "text",
+                "name": "question3"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "question4",
+            "startWithNewLine": false
           }
         ]
       }

@@ -8,16 +8,21 @@ const template = require("./page.html");
 
 export class CreatorSurveyPageComponent extends PageAdorner {
   private pageUpdater;
-  private _page: PageModel;
+  private currPage: PageModel;
 
-  constructor(creator: CreatorBase, page: PageModel | ko.Observable<PageModel>) {
-    super(creator, ko.unwrap(page));
+  constructor(creator: CreatorBase, private _page: PageModel | ko.Observable<PageModel>) {
+    super(creator, ko.unwrap(_page));
 
-    this.pageUpdater = ko.computed(() => {
-      this.detachElement(this.page);
-      this._page = page as any;
-      this.attachElement(this.page);
-    });
+    if(ko.isSubscribable(_page)) {
+      this.pageUpdater = _page.subscribe((newPage: PageModel) => {
+        this.detachElement(this.currPage);
+        this.currPage = newPage;
+        this.attachElement(newPage);
+      });
+    }
+    this.currPage = ko.unwrap(_page);
+    this._page = _page;
+    this.attachElement(this.page);
     new ImplementorBase(this);
   }
 
@@ -25,9 +30,12 @@ export class CreatorSurveyPageComponent extends PageAdorner {
     return ko.unwrap(this._page);
   }
 
-  dispose(): void {
-    this.pageUpdater.dispose();
+  fixedDispose(): void {
+    this.pageUpdater && this.pageUpdater.dispose();
     super.dispose();
+  }
+
+  dispose(): void {
   }
 }
 
@@ -40,6 +48,10 @@ ko.components.register("svc-page", {
       pageAdornerViewModel.onPageSelectedCallback = () => {
         SurveyHelper.scrollIntoViewIfNeeded(componentInfo.element);
       };
+      ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+        pageAdornerViewModel.onPageSelectedCallback = undefined;
+        pageAdornerViewModel.fixedDispose();
+      });
 
       return pageAdornerViewModel;
     }

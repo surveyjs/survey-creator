@@ -26,7 +26,8 @@ export var settings = {
     exportFileName: "survey_translation.csv"
   },
   theme: {
-    exportFileName: "survey_theme.json"
+    exportFileName: "survey_theme.json",
+    fontFamily: "Open Sans"
   },
   operators: {
     empty: [],
@@ -153,7 +154,8 @@ export var settings = {
    * Drag Drop Settings
    */
   dragDrop: {
-    restrictDragQuestionBetweenPages: false
+    restrictDragQuestionBetweenPages: false,
+    allowDragToTheSameLine: true
   },
   /**
    * Creator layout settings
@@ -279,6 +281,7 @@ export interface ISurveyCreatorOptions {
     expression: string,
     title: string
   ): string;
+  isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean;
   onLogicGetTitleCallback(
     expression: string,
     displayExpression: string,
@@ -425,6 +428,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): string {
     return title;
   }
+  isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean { return isEnabled; }
   onLogicGetTitleCallback(
     expression: string,
     displayExpression: string,

@@ -5,6 +5,7 @@ import { clearNewLines, getNextValue, select } from "../utils/utils";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { QuestionAdornerViewModel } from "./question";
 import { QuestionRatingAdornerViewModel } from "./question-rating";
+import { getNextItemValue } from "../utils/utils";
 
 export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
@@ -369,7 +370,19 @@ export class StringEditorViewModelBase extends Base {
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
         if (this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
-          this.locString.owner.value = clearedText;
+          const itemValue = <ItemValue>this.locString.owner;
+          if(itemValue.value !== clearedText) {
+            if(!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
+              const choices = itemValue.locOwner[itemValue.ownerPropertyName];
+              if(Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
+                clearedText = getNextItemValue(clearedText, choices);
+                if(!!event && !!event.target) {
+                  event.target.innerText = clearedText;
+                }
+              }
+            }
+            itemValue.value = clearedText;
+          }
         }
         else {
           const oldStoreDefaultText = this.locString.storeDefaultText;

@@ -17,6 +17,7 @@
 @import "blocks/spg-overriding.scss";
 
 .spg-root-modern {
+  position: relative;
   width: 100%;
   border-right: 1px solid $border;
   box-sizing: border-box;
@@ -27,17 +28,21 @@
     .sv-popup_shadow {
       background-color: transparent;
     }
+
     .sd-root-modern {
       background-color: transparent;
     }
+
     .sd-page {
       margin: 0;
       padding: 0;
     }
   }
+
   .sv-popup__footer {
     padding-bottom: 2px;
   }
+
   padding: calcSize(4);
 
   .sd-body,
@@ -45,13 +50,16 @@
     min-width: calcSize(78);
   }
 }
+
 .sv-popup.sv-property-editor .sd-root-modern {
   --sd-mobile-width: 0;
 }
+
 .svc-object-selector .sv-popup__container {
   margin-left: calcSize(1);
   margin-right: calcSize(1);
 }
+
 .svc-object-selector__content {
   position: relative;
   height: 100%;

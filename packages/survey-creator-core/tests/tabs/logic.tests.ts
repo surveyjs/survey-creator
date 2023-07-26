@@ -4,6 +4,7 @@ import {
   QuestionDropdownModel,
   SurveyTriggerRunExpression,
   PanelModel,
+  ComponentCollection,
   SurveyTriggerSkip,
   QuestionMatrixDynamicModel,
   AdaptiveActionContainer,
@@ -3014,4 +3015,26 @@ test("Choose leave on error", () => {
   expect(survey.getQuestionByName("q2").visibleIf).toBe("{q1}=1");
   expect(survey.getQuestionByName("q4").visibleIf).toBeFalsy();
   expect(survey.getQuestionByName("q5").visibleIf).toBe("{q1} = 2");
+});
+test("SurveyLogicItem,  setValue css", () => {
+  ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "comp1", name: "q2" }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{q1}=1", setToName: "q2", setValue: 5 }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("trigger_setvalue");
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const setValueQuestion = triggerEditorPanel.getQuestionByName("setValue");
+  expect(setValueQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
+  expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
+  ComponentCollection.Instance.clear();
 });

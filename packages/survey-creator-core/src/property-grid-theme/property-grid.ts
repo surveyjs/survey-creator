@@ -176,9 +176,12 @@ export var propertyGridCss = {
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
-    selectWrapper: "",
     other: "spg-comment spg-question__other",
-    onError: "spg-input--error"
+    onError: "spg-input--error",
+    selectWrapper: "sv-dropdown_select-wrapper spg-dropdown_select-wrapper",
+    chevronButton: "sd-dropdown_chevron-button spg-dropdown_chevron-button",
+    chevronButtonSvg: "sd-dropdown_chevron-button-svg",
+    chevronButtonIconId: "icon-chevron",
   },
   imagepicker: {
     root: "spg-imagepicker",
@@ -329,6 +332,7 @@ export var propertyGridCss = {
   color: {
     root: "spg-input spg-color-editor spg-input-container",
     swatch: "spg-color-editor__color-swatch",
+    swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input spg-input-container__input",
     colorDropdown: "spg-input__edit-button",
@@ -344,7 +348,8 @@ export var propertyGridCss = {
     clearButtonIcon: "icon-clear",
     fileInput: "sd-visuallyhidden",
     clearButton: "spg-input__edit-button",
-    chooseButton: "spg-input__edit-button spg-file-edit__choose-button"
+    chooseButton: "spg-input__edit-button spg-file-edit__choose-button",
+    chooseButtonDisabled: "spg-input__edit-button--disabled"
   },
   linkvalue: {
     content: "spg-link"

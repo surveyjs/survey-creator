@@ -309,6 +309,35 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.value).toEqual("newItemValue");
   expect(itemValue.text).toEqual("newItem");
 });
+test("Test string editor inplaceEditForValues + сorrect non-unique value", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "q0",
+            "choices": [
+              "item1",
+              "item2",
+              "newItem"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  creator.inplaceEditForValues = true;
+  const q = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q0");
+  const itemValue = q.choices[2];
+  var seChoice = new StringEditorViewModelBase(itemValue.locText, creator);
+  expect(itemValue.text).toEqual("newItem");
+  seChoice.onBlur({ target: { innerText: "item1", innerHTML: "item1", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(itemValue.value).toEqual("item3");
+  expect(itemValue.text).toEqual("item3");
+});
 test("Test string editor onHtmlToMarkdown event", (): any => {
   let creator = new CreatorTester();
   const survey: SurveyModel = new SurveyModel({

@@ -23,12 +23,21 @@ ComponentCollection.Instance.add({
     }
   ],
   onInit() {
-    Serializer.addProperty("colorsettings", {
-      name: "choices:itemvalue[]"
-    });
+    Serializer.addProperties("colorsettings", [{
+      name: "choices:itemvalue[]",
+    },
+    {
+      name: "colorTitleLocation:string",
+      default: "hidden",
+    },
+    {
+      name: "colorTitle:string",
+    }
+    ]);
   },
   onLoaded(question) {
-    syncPropertiesFromCompositeToColor(question, "titleLocation", question.titleLocation);
+    syncPropertiesFromCompositeToColor(question, "colorTitle", question.colorTitle);
+    syncPropertiesFromCompositeToColor(question, "colorTitleLocation", question.colorTitleLocation);
     syncPropertiesFromCompositeToColor(question, "choices", question.choices);
   },
   onPropertyChanged(question, propertyName, newValue) {
@@ -47,14 +56,11 @@ ComponentCollection.Instance.add({
 
 function syncPropertiesFromCompositeToColor(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[0];
-  if(propertyName == "titleLocation") {
-    if(newValue == "left") {
-      question.titleLocation = "hidden";
-      colorQuestion.title = question.title;
-      colorQuestion.titleLocation = newValue;
-    } else {
-      colorQuestion.titleLocation = "hidden";
-    }
+  if(propertyName == "colorTitleLocation") {
+    colorQuestion.titleLocation = newValue;
+  }
+  if(propertyName == "colorTitle") {
+    colorQuestion.title = newValue;
   }
   if(propertyName == "choices") {
     colorQuestion.choices = newValue;
