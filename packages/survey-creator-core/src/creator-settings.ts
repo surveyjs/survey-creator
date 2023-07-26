@@ -155,7 +155,7 @@ export var settings = {
    */
   dragDrop: {
     restrictDragQuestionBetweenPages: false,
-    disableDragToTheSameLine: false
+    allowDragToTheSameLine: true
   },
   /**
    * Creator layout settings

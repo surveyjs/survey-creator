@@ -701,7 +701,7 @@ test("import styles from file", ()=> {
     "backgroundImageFit": "auto",
     "themeName": "My Theme",
     "themePalette": "light",
-    "isCompact": true
+    "isPanelless": false
   } as any);
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("My Theme");
@@ -803,4 +803,46 @@ test("Theme builder: import/export theme", (): any => {
   }
   );
   expect(themeSurveyTab.currentTheme.cssVariables || {}).toEqual(newResult);
+});
+
+test("Theme onModified and saveThemeFunc", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  let modificationsLog = "";
+  creator.onModified.add((s, o) => {
+    modificationsLog += "->" + o.type;
+  });
+  let saveCount = 0;
+  creator.saveSurveyFunc = () => {
+    saveCount++;
+  };
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = () => {
+    saveThemeCount++;
+  };
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+
+  expect(creator.isThemePristine).toBeTruthy();
+  expect(modificationsLog).toBe("");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(0);
+
+  themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
+
+  expect(creator.isThemePristine).toBeFalsy();
+  expect(modificationsLog).toBe("->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(1);
+
+  themeSurveyTab.resetTheme();
+
+  expect(creator.isThemePristine).toBeTruthy();
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(2);
 });

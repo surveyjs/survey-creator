@@ -168,6 +168,7 @@ export class SurveyCreator extends CreatorBase {
     if (typeof target === "string") {
       node = document.getElementById(target);
     }
+    /* eslint-disable react/no-deprecated */
     ReactDOM.unmountComponentAtNode(node);
     ReactDOM.render(
       <React.StrictMode>
@@ -175,6 +176,7 @@ export class SurveyCreator extends CreatorBase {
       </React.StrictMode>,
       node
     );
+    /* eslint-enable react/no-deprecated */
   }
 
   //ISurveyCreator
