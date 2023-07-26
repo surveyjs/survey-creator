@@ -4,7 +4,7 @@
       data-bind="textInput: text, disable: readOnly, attr: { 'aria-label': ariaLabel }, event: { keydown: checkKey}">
     </textarea>
     <!-- ko if: hasErrors -->
-    <div className="svc-json-editor-tab__errros_list" data-bind="visible: hasErrors">
+    <div class="svc-json-editor-tab__errros_list" data-bind="visible: hasErrors">
       <!-- ko component: { name: "sv-list", params: { model: errorList } } -->
       <!-- /ko -->
     </div>
