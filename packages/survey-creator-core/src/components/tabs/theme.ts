@@ -37,7 +37,7 @@ export const PredefinedColors = {
 
 export interface ICreatorTheme extends ITheme {
   themeName?: string;
-  themePalette?: string;
+  colorPalette?: string;
 }
 
 export class ThemeSurveyTabViewModel extends Base {
@@ -188,8 +188,8 @@ export class ThemeSurveyTabViewModel extends Base {
 
   private loadTheme(theme: ICreatorTheme) {
     this.themeName = theme.themeName;
-    this.themePalette = theme.themePalette;
-    this.themeMode = theme.isCompact ? "lightweight" : undefined;
+    this.themePalette = theme.colorPalette;
+    this.themeMode = (theme.isPanelless !== undefined && !theme.isPanelless) ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
     this.backgroundImageAttachment = theme.backgroundImageAttachment;
@@ -285,15 +285,22 @@ export class ThemeSurveyTabViewModel extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
+  private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
-    this.setJSON(json, this.startTheme);
-    this.updatePageList();
+    this.blockThemeChangedNotifications += 1;
+    try {
+      this.setJSON(json, this.startTheme);
+      this.updatePageList();
 
-    if (options.showPagesInTestSurveyTab !== undefined) {
-      this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+      if (options.showPagesInTestSurveyTab !== undefined) {
+        this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
+      }
+
+      this.buildActions();
     }
-
-    this.buildActions();
+    finally {
+      this.blockThemeChangedNotifications -= 1;
+    }
   }
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
@@ -333,6 +340,9 @@ export class ThemeSurveyTabViewModel extends Base {
   public resetTheme() {
     this.themeChanges = {};
     this.applySelectedTheme();
+    if(this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
+      this.surveyProvider.isThemePristine = true;
+    }
   }
 
   public show() {
@@ -501,11 +511,11 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.currentTheme.isCompact = options.value === "lightweight";
+          this.currentTheme.isPanelless = options.value !== "lightweight";
           this.applySelectedTheme();
         } else {
           this.currentTheme.themeName = this.themeName;
-          this.currentTheme.themePalette = this.themePalette;
+          this.currentTheme.colorPalette = this.themePalette;
           this.resetTheme();
         }
         return;
@@ -519,6 +529,7 @@ export class ThemeSurveyTabViewModel extends Base {
         this.currentTheme.backgroundOpacity = options.value / 100;
         return;
       }
+      this.blockThemeChangedNotifications += 1;
       if(options.name == "commonScale") {
         this.survey.triggerResponsiveness(true);
       }
@@ -549,6 +560,7 @@ export class ThemeSurveyTabViewModel extends Base {
       const newTheme = {};
       assign(newTheme, this.currentTheme.cssVariables, this.themeChanges);
       this.currentTheme.cssVariables = newTheme;
+      this.blockThemeChangedNotifications -= 1;
       this.setThemeToSurvey();
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
@@ -602,6 +614,9 @@ export class ThemeSurveyTabViewModel extends Base {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
+    if(this.blockThemeChangedNotifications == 0) {
+      this.surveyProvider.raiseThemeChanged();
+    }
   }
 
   private getThemeEditorSurveyJSON() {
@@ -625,30 +640,23 @@ export class ThemeSurveyTabViewModel extends Base {
                 allowClear: false
               },
               {
-                type: "panel",
-                name: "themeSettings",
+                type: "buttongroup",
+                name: "themePalette",
+                titleLocation: "hidden",
+                choices: [
+                  { value: "light", text: getLocString("theme.themePaletteLight") },
+                  { value: "dark", text: getLocString("theme.themePaletteDark") }
+                ],
+                defaultValue: "light"
+              },
+              {
+                type: "buttongroup",
+                name: "themeMode",
                 title: getLocString("theme.themeMode"),
-                elements: [
-                  {
-                    type: "buttongroup",
-                    name: "themeMode",
-                    titleLocation: "hidden",
-                    choices: [
-                      { value: "panels", text: getLocString("theme.themeModePanels") },
-                      { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
-                    defaultValue: "panels"
-                  },
-                  {
-                    type: "buttongroup",
-                    name: "themePalette",
-                    title: getLocString("theme.themePalette"),
-                    choices: [
-                      { value: "light", text: getLocString("theme.themePaletteLight") },
-                      { value: "dark", text: getLocString("theme.themePaletteDark") }
-                    ],
-                    defaultValue: "light"
-                  }
-                ]
+                choices: [
+                  { value: "panels", text: getLocString("theme.themeModePanels") },
+                  { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
+                defaultValue: "panels"
               }
             ]
           }, {

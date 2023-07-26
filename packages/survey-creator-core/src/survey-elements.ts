@@ -15,8 +15,8 @@ export function calculateDragOverLocation(clientX: number, clientY: number, drop
   const dx = clientX - rect.x;
   const dy = clientY - rect.y;
 
-  if(settings.dragDrop.disableDragToTheSameLine) {
-    if(dy >= rect.height/2) {
+  if (!settings.dragDrop.allowDragToTheSameLine) {
+    if (dy >= rect.height / 2) {
       return DragTypeOverMeEnum.Bottom;
     } else {
       return DragTypeOverMeEnum.Top;
