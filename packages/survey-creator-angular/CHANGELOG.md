@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.99](https://github.com/surveyjs/survey-creator/compare/v1.9.98...v1.9.99) (2023-07-26)
+
 ### [1.9.98](https://github.com/surveyjs/survey-creator/compare/v1.9.97...v1.9.98) (2023-07-18)
 
 ### [1.9.97](https://github.com/surveyjs/survey-creator/compare/v1.9.96...v1.9.97) (2023-07-12)
