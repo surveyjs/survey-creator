@@ -675,14 +675,22 @@ export class CreatorBase extends Base
    */
   public onConditionGetTitle: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to change the visibility of operators in a condition editor by question.
-   *- sender the survey creator object that fires the event.
-   *- options.questionName - the question name for that condition operator is showing.
-   *- options.operator - the condition operator.
-   *- options.isEnabled - change it to show/hide the condition operator for this question.
+   * An event that is raised when Survey Creator populates a condition editor with operators. Use this event to hide individual condition operators.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.questionName`: `String`\
+   * The name of a question for which conditions are displayed.
+   * - `options.operator`: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`\
+   * A condition opeator for which the event is raised.
+   * - `options.show`: `Boolean`\
+   * A Boolean property that you can set to `false` if you want to hide the condition operator.
+   * 
    */
-   public onConditionOperatorEnabled: CreatorEvent = new CreatorEvent();
-   /**
+  public onGetConditionOperator: CreatorEvent = new CreatorEvent();
+  /**
    * Use this event to modify the display text of a logic item in the Logic tab.
    * 
    * The event handler accepts the following arguments:
@@ -3058,14 +3066,14 @@ export class CreatorBase extends Base
     return options.title;
   }
   isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean {
-    if(this.onConditionOperatorEnabled.isEmpty) return isEnabled;
+    if(this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
       operator: operator,
-      isEnabled: isEnabled
+      show: isEnabled
     };
-    this.onConditionOperatorEnabled.fire(this, options);
-    return options.isEnabled;
+    this.onGetConditionOperator.fire(this, options);
+    return options.show;
   }
   onLogicGetTitleCallback(
     expression: string,
