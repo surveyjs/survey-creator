@@ -530,6 +530,9 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       this.blockThemeChangedNotifications += 1;
+      if(options.name == "commonScale") {
+        this.survey.triggerResponsiveness(true);
+      }
       if (options.name === "--sjs-primary-backcolor") {
         this.colorCalculator.calculateColors(options.value);
         this.themeChanges["--sjs-primary-backcolor"] = options.value;
