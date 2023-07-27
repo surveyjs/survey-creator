@@ -183,14 +183,15 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       );
       keyValue = newName;
     }
-    var item = Serializer.createClass(this.getDefaultClassName(prop), json);
+    const obj: Base = matrix.obj;
+    var item = Serializer.createClass(this.getDefaultClassName(obj, prop), json);
     if (!!keyValue) {
       item[keyPropName] = keyValue;
     }
     if (!!this.getObjTypeName()) {
       item[this.getObjTypeName()] = item.getType();
     }
-    const arr = (<any>matrix).obj[prop.name];
+    const arr = obj[prop.name];
     if (Serializer.isDescendantOf(item.getType(), "itemvalue")) {
       item.text = getNextItemText(arr);
     }
@@ -200,7 +201,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     return item;
   }
-  protected getDefaultClassName(prop: JsonObjectProperty): string {
+  protected getDefaultClassName(obj: Base, prop: JsonObjectProperty): string {
     return prop.className;
   }
   protected getBaseValue(prop: JsonObjectProperty): string {
@@ -840,8 +841,16 @@ export class PropertyGridEditorMatrixValidators extends PropertyGridEditorMatrix
   protected getObjTypeName(): string {
     return "validatorType";
   }
-  protected getDefaultClassName(prop: JsonObjectProperty): string {
-    return "expressionvalidator";
+  protected getDefaultClassName(obj: Base, prop: JsonObjectProperty): string {
+    let res = "expression";
+    const question = <Question>obj;
+    if(!!question.getSupportedValidators) {
+      const validators = question.getSupportedValidators();
+      if(validators.length > 0 && validators.indexOf(res) < 0) {
+        res = validators[0];
+      }
+    }
+    return res + "validator";
   }
   protected getChoices(obj: Base): Array<any> {
     var names = this.getSupportedValidators(obj);
@@ -874,7 +883,7 @@ export class PropertyGridEditorMatrixTriggers extends PropertyGridEditorMatrixMu
   protected getObjTypeName(): string {
     return "triggerType";
   }
-  protected getDefaultClassName(prop: JsonObjectProperty): string {
+  protected getDefaultClassName(obj: Base, prop: JsonObjectProperty): string {
     const classes = this.getAvailableTriggers().map(tr => tr.name);
     if (!classes.length) return prop.name;
 
