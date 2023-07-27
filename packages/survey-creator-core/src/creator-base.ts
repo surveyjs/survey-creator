@@ -2351,7 +2351,7 @@ export class CreatorBase extends Base
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
       : -1;
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index);
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index, question["parent"]);
     return newElement;
   }
   /**

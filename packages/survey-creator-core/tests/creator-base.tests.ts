@@ -1078,6 +1078,35 @@ test("fast copy tests, copy a question and check the index", (): any => {
   expect(creator.survey.getQuestionByName("question4")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
 });
+test("fast copy from paneldynamic", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "question1",
+            "templateElements": [
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(1);
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
+  expect(creator.survey.pages[0].questions).toHaveLength(1);
+  expect(creator.survey.getQuestionByName("question3")).toBeTruthy();
+  expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(2);
+  expect(creator.survey.getQuestionByName("question1").template.elements[1].name).toEqual("question3");
+});
 test("Page duplicate action, copy a page and check the index", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
