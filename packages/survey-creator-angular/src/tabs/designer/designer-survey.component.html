@@ -5,7 +5,7 @@
     </div>
 
     <!-- ko if: survey.isShowProgressBarOnTop -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
     <!-- /ko -->
     <!-- /ko -->
     <ng-container *ngIf="creator.pageEditMode !== 'bypage'">
@@ -23,7 +23,7 @@
     </ng-container>
 
     <!-- ko if: survey.isShowProgressBarOnBottom -->
-    <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+    <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
     <!-- /ko -->
     <!-- /ko -->
   </div>
@@ -35,8 +35,8 @@
 </ng-template>
 
 <ng-template let-page="page" let-isGhost="isGhost" #pageContainer>
-  <div class="svc-page"
-    [attr.data-sv-drop-target-survey-element]="isGhost ? 'newGhostPage' : page.name" [attr.data-sv-drop-target-page]="page.name">
+  <div class="svc-page" [attr.data-sv-drop-target-survey-element]="isGhost ? 'newGhostPage' : page.name"
+    [attr.data-sv-drop-target-page]="page.name">
     <ng-template [component]="{ name: 'svc-page', data: { model: page, creator, survey, isGhost }}"></ng-template>
   </div>
 </ng-template>
