@@ -206,8 +206,6 @@ creator.onElementAllowOperations.add((sender, options) => {
   }
 });
 
-creator.toolbox.getItemByName("radiogroup").json.choices = [1, 2, 3, 4, 5];
-
 creator.saveSurveyFunc = (no, callback) => {
   console.log(no);
   setTimeout(function () {
