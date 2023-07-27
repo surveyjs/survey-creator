@@ -1934,6 +1934,12 @@ export class CreatorBase extends Base
   }
 
   private addNewElementReason: string;
+  public onDragDropItemStart(): void {
+    this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
+  }
+  public onDragDropItemEnd(): void {
+    this.addNewElementReason = undefined;
+  }
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);

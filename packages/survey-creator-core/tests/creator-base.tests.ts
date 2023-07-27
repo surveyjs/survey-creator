@@ -36,7 +36,7 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
-import { getNextItemText } from "../src/utils/utils";
+import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 
 import {
   getElementWrapperComponentData,
@@ -3712,6 +3712,16 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[3]).toEqual("ELEMENT_COPIED");
   expect(reason[4]).toEqual("ELEMENT_COPIED");
   expect(reason[5]).toEqual("ELEMENT_COPIED");
+
+  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator);
+  toolboxViwer.click({});
+  expect(reason).toHaveLength(7);
+  expect(reason[6]).toEqual("ADDED_FROM_TOOLBOX");
+  creator.onDragDropItemStart();
+  creator.survey.pages[0].addNewQuestion("text", "qqq1");
+  creator.onDragDropItemEnd();
+  expect(reason).toHaveLength(8);
+  expect(reason[7]).toEqual("DROPPED_FROM_TOOLBOX");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
