@@ -53,10 +53,10 @@ export abstract class JsonEditorBaseModel extends Base {
       }, false);
       this.errorListValue.searchEnabled = false;
       this.errorListValue.cssClasses = {
-        item: "svc-errors__item",
-        itemIcon: "svc-error__icon",
-        itemBody: "svc-error",
-        itemsContainer: "svc-errors"
+        item: "svc-json-errors__item",
+        itemIcon: "svc-json-error__icon",
+        itemBody: "svc-json-error",
+        itemsContainer: "svc-json-errors"
       };
       this.errorListValue.hasVerticalScroller = true;
     }
