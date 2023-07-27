@@ -84,7 +84,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   protected setErrors(errors: any[]): void {
     super.setErrors(errors);
     this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
-    this.aceEditor.resize();
+    setTimeout(() => this.aceEditor.resize());
   }
   protected gotoError(at: number, row: number, column: number): void {
     this.aceEditor.focus();

@@ -51,6 +51,7 @@ export abstract class JsonEditorBaseModel extends Base {
         const error: SurveyTextWorkerError = action.data;
         if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
       }, false);
+      this.errorListValue.searchEnabled = false;
       this.errorListValue.cssClasses = {
         item: "svc-errors__item",
         itemIcon: "svc-error__icon",
