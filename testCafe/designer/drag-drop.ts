@@ -1401,3 +1401,62 @@ test("Drag Drop on the right of Panel same row", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
+
+test("Drag Drop on the right of Panel same row", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Panel1 = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+  const Panel2 = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
+
+  await t
+    .hover(Panel2, { speed: 0.1 })
+    .dragToElement(Panel2, Panel1, {
+      offsetX: 150,
+      offsetY: 5,
+      destinationOffsetY: 150,
+      destinationOffsetX: 150,
+      speed: 0.1
+    });
+
+  const expectedJson = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel1",
+            "elements": [
+              {
+                "type": "panel",
+                "name": "panel2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const resultJson = await getJSON();
+  await t.expect(resultJson).eql(expectedJson);
+});
