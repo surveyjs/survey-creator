@@ -1934,6 +1934,12 @@ export class CreatorBase extends Base
   }
 
   private addNewElementReason: string;
+  public onDragDropItemStart(): void {
+    this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
+  }
+  public onDragDropItemEnd(): void {
+    this.addNewElementReason = undefined;
+  }
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
@@ -2359,7 +2365,7 @@ export class CreatorBase extends Base
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
       : -1;
-    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index);
+    this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index, question["parent"]);
     return newElement;
   }
   /**
