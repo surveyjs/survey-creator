@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { AngularComponentFactory, QuestionAngular } from "survey-angular-ui";
 import { DropdownListModel, QuestionDropdownModel, RendererFactory } from "survey-core";
+import { initLogicOperator } from "survey-creator-core";
 
 @Component({
   selector: "svc-logic-operator",
@@ -24,6 +25,7 @@ export class LogicOperatorComponent extends QuestionAngular<QuestionDropdownMode
   override ngOnInit(): void {
     super.ngOnInit();
     this.dropdownListModel = this.model.dropdownListModel || new DropdownListModel(this.model);
+    initLogicOperator(this.model);
   }
 }
 AngularComponentFactory.Instance.registerComponent("sv-logic-operator", LogicOperatorComponent);
