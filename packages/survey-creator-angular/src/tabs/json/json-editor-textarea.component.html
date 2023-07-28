@@ -4,7 +4,7 @@
       <textarea class="svc-json-editor-tab__content-area" [attr.aria-label]="model.ariaLabel"
         [disabled]="model.readOnly" [(ngModel)]="model.text" (keydown)="model.checkKey(model, $event)" #inputEl>
       </textarea>
-      <div className="svc-json-editor-tab__errros_list" [visible]="model.hasErrors">
+      <div class="svc-json-editor-tab__errros_list" [visible]="model.hasErrors">
         <sv-ng-list [model]="model.errorList"></sv-ng-list>
       </div>
     </div>
