@@ -424,6 +424,8 @@ export class CreatorBase<T extends { [index: string]: any }> implements ISurveyC
    * @see haveCommercialLicense
    */
   public get haveCommercialLicense() {
+    const checker = (<any>Survey).hasLicense;
+    if (!!checker && checker(1)) return true;
     return this.haveCommercialLicenseValue();
   }
   public set haveCommercialLicense(val) {
