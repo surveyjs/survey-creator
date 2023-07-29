@@ -243,42 +243,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.removeDragOverMarker(this.dropTarget);
   }
 
-  // protected calculateIsBottom(clientY: number, dropTargetNode?: HTMLElement): boolean {
-  //   return false;
-  // }
-
-  // protected calculateIsBottom(
-  //   clientY: number,
-  //   dropTargetNode?: HTMLElement
-  // ): boolean {
-  //   // we shouldn't reculc isBottom if drag over ghost survey element
-  //   if (this.getDataAttributeValueByNode(dropTargetNode) === DragDropSurveyElements.ghostSurveyElementName) {
-  //     return this.isBottom;
-  //   }
-  //   const middle = this.calculateVerticalMiddleOfHTMLElement(dropTargetNode);
-  //   return clientY >= middle;
-  // }
-
-  // protected calculateIsRight(
-  //   clientX: number,
-  //   dropTargetNode?: HTMLElement
-  // ): boolean {
-  //   // we shouldn't reculc isBottom if drag over ghost survey element
-  //   if (this.getDataAttributeValueByNode(dropTargetNode) === DragDropSurveyElements.ghostSurveyElementName) {
-  //     return this.isRight;
-  //   }
-  //   const middle = this.calculateHorizontalMiddleOfHTMLElement(dropTargetNode);
-  //   return clientX >= middle;
-  // }
-
-  // protected isDropTargetDoesntChanged(newIsBottom: boolean): boolean {
-  //   // if (this.dropTarget === this.ghostSurveyElement) return true;
-  //   return (
-  //     this.dropTarget === this.prevDropTarget && newIsBottom === this.isBottom
-  //     && this.isEdge === this.prevIsEdge && this.isRight === this.prevIsRight
-  //   );
-  // }
-
   private shouldRestricDragQuestionBetweenPages(dropTarget: any): boolean {
     const oldPage = (<any>this.draggedElement)["page"];
     const newPage = dropTarget.isPage ? dropTarget : dropTarget["page"];
@@ -371,25 +335,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.dragOverCore(dropTarget, dragOverLocation, this.isEdge, this.isSide);
   }
 
-  // protected doDragOver(dropTargetNode?: HTMLElement, event?: PointerEvent): void {
-  //   this.isRight = this.calculateIsRight(event.clientX, dropTargetNode);
-  // }
-
-  // protected afterDragOver(dropTargetNode: HTMLElement, event: PointerEvent): void {
-  //   this.prevIsEdge = this.isEdge;
-  //   this.prevIsRight = this.isRight;
-  //   this.insertGhostElementIntoSurvey();
-  // }
-
   protected onStartDrag(): void {
     // this.ghostSurveyElement = this.createGhostSurveyElement();
     this.draggedElement.isDragMe = true;
   }
-
-  // protected doBanDropHere = (): void => {
-  //   this.removeGhostElementFromSurvey();
-  //   this.isEdge = null;
-  // };
 
   private getElementIndexInPanel(target: IElement, row: QuestionRowModel): number {
     if (!row) return -1;
@@ -434,9 +383,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     }
 
+    const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
+    const dragOverLocation = dragOverIndicator.dragTypeOverMe;
     if(!!row) {
-      const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
-      const dragOverLocation = dragOverIndicator.dragTypeOverMe;
       if(dragOverLocation === DragTypeOverMeEnum.Left) {
         elementsToResetSWNL.push(dest);
         if(row.elements.indexOf(dest) === 0 || row.elements.indexOf(src) === 0 && row.elements.indexOf(dest) === 1) {
@@ -463,9 +412,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     }
 
+    const isTargetIsContainer = dest.isPanel || dest.isPage;
     if(!!src && !!src.parent) {
       (page.survey as SurveyModel).startMovingQuestion();
-      let isSamePanel = !!row && row.panel == src.parent;
+      let isSamePanel = !(isTargetIsContainer && dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) && !!row && row.panel == src.parent;
       if(isSamePanel) {
         this.moveElementInPanel(row.panel, src, dragged, targetIndex);
         row.panel.updateRows();
@@ -474,7 +424,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         src.parent.removeElement(src);
       }
     }
-    if(!this.isEdge && !this.isSide && (dest.isPanel || dest.isPage)) {
+    if(!this.isEdge && !this.isSide && isTargetIsContainer) {
       dest.addElement(dragged);
       dest.updateRows();
     } else if(!!row && targetIndex > -1) {
@@ -488,16 +438,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return dragged;
   }
-
-  // protected doDrop = (): any => {
-  //   if (this.dropTarget) {
-  //     (<HTMLElement>document.activeElement).blur();
-  //     (<HTMLElement>settings.environment.root.activeElement).blur();
-  //     return this.insertRealElementIntoSurvey();
-  //   }
-
-  //   return null;
-  // };
 
   private removeDragOverMarker(dropTarget: { dragTypeOverMe: boolean }): void {
     if (!!dropTarget) {
@@ -520,77 +460,6 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     }
     super.clear();
   }
-
-  // protected doClear = (): void => {
-  //   // this.removeGhostElementFromSurvey();
-  //   this.isEdge = null;
-  //   this.isSide = null;
-  //   // this.ghostSurveyElement = null;
-  //   this.removeDragOverMarker(this.prevDropTarget);
-  //   this.removeDragOverMarker(this.dropTarget);
-  //   this.removeDragOverMarker(this.dragOverIndicatorElement);
-  //   if (!!this.draggedElement) {
-  //     this.draggedElement.isDragMe = false;
-  //   }
-  //   // this.isRight = null;
-  // };
-
-  // protected insertGhostElementIntoSurvey(): boolean {
-  //   this.removeGhostElementFromSurvey();
-
-  //   let isTargetRowMultiple = this.calcTargetRowMultiple();
-
-  //   this.ghostSurveyElement = this.createGhostSurveyElement(isTargetRowMultiple);
-
-  //   this.ghostSurveyElement.name =
-  //     DragDropSurveyElements.ghostSurveyElementName; // TODO why do we need setup it manually see createGhostSurveyElement method
-
-  //   this.parentElement = this.dropTarget.isPage
-  //     ? this.dropTarget
-  //     : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
-
-  //   if (this.isDragOverInsideEmptyPanel()) {
-  //     this.dropTarget.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
-  //     return;
-  //   }
-
-  //   if (!this.isEdge && isTargetRowMultiple) {
-  //     this.dropTarget.dragTypeOverMe = this.isRight ?
-  //       DragTypeOverMeEnum.MultilineRight :
-  //       DragTypeOverMeEnum.MultilineLeft;
-  //     return;
-  //   }
-
-  //   this.parentElement.dragDropStart(
-  //     this.draggedElement,
-  //     this.ghostSurveyElement,
-  //     DragDropSurveyElements.nestedPanelDepth
-  //   );
-
-  //   const result = this.parentElement.dragDropMoveTo(
-  //     this.dropTarget,
-  //     isTargetRowMultiple ? this.isRight : this.isBottom,
-  //     this.isEdge
-  //   );
-
-  //   return result;
-  // }
-
-  // private calcTargetRowMultiple() {
-  //   const targetParent = this.getTargetParent(this.dropTarget);
-  //   let targetRow: any = this.getTargetRow(this.dropTarget);
-  //   const isTargetRowMultiple = targetRow && targetRow.elements.length > 1;
-
-  //   const isTemplatePanelInPanelDynamic = targetParent.isPanel && !targetParent.name;
-
-  //   if (this.isEdge && isTargetRowMultiple && !isTemplatePanelInPanelDynamic) {
-  //     targetParent.__page = this.dropTarget.page || this.dropTarget.__page;
-  //     this.dropTarget = targetParent;
-  //     return false;
-  //   }
-
-  //   return isTargetRowMultiple;
-  // }
 
   private getTargetParent(dropTarget: any): any {
     let targetParent = dropTarget.isPage || dropTarget.isPanel ? dropTarget : dropTarget.parent;
@@ -620,93 +489,4 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     const isDragOverInside = !this.isEdge && !this.isSide;
     return isEmptyPanel && isDragOverInside;
   }
-
-  // protected removeGhostElementFromSurvey(): void {
-  //   const dropTarget = this.prevDropTarget || this.dropTarget;
-  //   if (!!dropTarget) {
-  //     dropTarget.dragTypeOverMe = null;
-  //   }
-  //   if (!!this.parentElement) this.parentElement.dragDropFinish(true);
-  // }
-
-  // private insertRealElementIntoSurvey() {
-  //   this.removeGhostElementFromSurvey();
-
-  //   const isTargetRowMultiple = this.calcTargetRowMultiple();
-
-  //   // ghost new page
-  //   if (this.dropTarget.isPage && (<any>this.dropTarget)["_isGhost"]) {
-  //     (<any>this.dropTarget)["_addGhostPageViewModel"]();
-  //   }
-  //   // EO ghost new page
-
-  //   //TODO need for dragDrop helper in library
-  //   const json = new JsonObject().toJsonObject(this.draggedElement);
-  //   json["type"] = this.draggedElement.getType();
-  //   const fakeTargetElement = this.createFakeTargetElement(
-  //     this.draggedElement.name,
-  //     json
-  //   );
-  //   //
-
-  //   this.parentElement.dragDropStart(
-  //     this.draggedElement,
-  //     fakeTargetElement,
-  //     DragDropSurveyElements.nestedPanelDepth
-  //   );
-
-  //   this.parentElement.dragDropMoveTo(
-  //     this.dropTarget,
-  //     isTargetRowMultiple ? this.isRight : this.isBottom,
-  //     this.isEdge
-  //   );
-
-  //   const newElement = this.parentElement.dragDropFinish();
-
-  //   return newElement;
-  // }
-
-  // private createFakeTargetElement(elementName: string, json: any): any {
-  //   if (!elementName || !json) return null;
-  //   var targetElement = null;
-  //   targetElement = Serializer.createClass(json["type"]);
-  //   new JsonObject().toObject(json, targetElement);
-  //   targetElement.name = elementName;
-  //   if (targetElement["setSurveyImpl"]) {
-  //     targetElement["setSurveyImpl"](this.survey);
-  //   } else {
-  //     targetElement["setData"](this.survey);
-  //   }
-  //   targetElement.renderWidth = "100%";
-  //   return targetElement;
-  // }
-
-  // private createGhostSurveyElement(isMultipleRowDrag = false): any {
-  //   let className = "sv-drag-drop-ghost";
-  //   let minWidth = "300px";
-
-  //   if (isMultipleRowDrag) {
-  //     minWidth = "4px";
-  //     className += " sv-drag-drop-ghost--vertical";
-  //   }
-
-  //   const json: any = {
-  //     type: "html",
-  //     minWidth,
-  //     name: DragDropSurveyElements.ghostSurveyElementName,
-  //     html: `<div class="${className}"></div>`,
-  //   };
-
-  //   const element = <any>this.createElementFromJson(json);
-  //   element.startWithNewLine = !isMultipleRowDrag;
-
-  //   if (isMultipleRowDrag) {
-  //     element.maxWidth = "4px";
-  //     element.renderWidth = "0px";
-  //     element.paddingRight = "0px";
-  //     element.paddingLeft = "0px";
-  //   }
-
-  //   return element;
-  // }
 }
