@@ -200,7 +200,7 @@ export class CreatorBase extends Base
    * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
    */
   public get haveCommercialLicense(): boolean {
-    if (hasLicense(1)) return true;
+    if (!!hasLicense && hasLicense(1)) return true;
     return this.getPropertyValue("haveCommercialLicense", false);
   }
   public set haveCommercialLicense(val: boolean) {
