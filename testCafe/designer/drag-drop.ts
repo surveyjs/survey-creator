@@ -214,14 +214,16 @@ test("Drag Drop Toolbox All Questions", async (t) => {
 
   await t
     .hover(BooleanItem)
-    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+    .wait(150);
 
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(19);
 
   await t
     .hover(ImageItem)
-    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 });
+    .dragToElement(BooleanItem, newGhostPagePage, { speed: 0.5 })
+    .wait(150);
 
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(20);
