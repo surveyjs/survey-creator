@@ -163,6 +163,7 @@ svc-question {
   background-color: $background;
   color: $foreground;
   padding: calcSize(1) calcSize(1.5);
+  padding-right: calcSize(2);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
