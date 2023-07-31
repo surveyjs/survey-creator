@@ -602,6 +602,16 @@ export class ThemeSurveyTabViewModel extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables);
 
+    if (!!newCssVariables["--sjs-corner-radius"]) {
+      themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
+    }
+    if (!!newCssVariables["--sjs-base-unit"]) {
+      themeEditorSurvey.getQuestionByName("commonScale").value = parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8;
+    }
+    if (!!newCssVariables["--sjs-font-size"]) {
+      themeEditorSurvey.getQuestionByName("commonFontSize").value = parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16;
+    }
+
     themeEditorSurvey.getAllQuestions().forEach(question => {
       if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
         (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
@@ -761,7 +771,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "--font-size",
+                name: "commonFontSize",
                 title: getLocString("theme.fontSize"),
                 descriptionLocation: "hidden",
                 unit: "%",
@@ -772,7 +782,7 @@ export class ThemeSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--sjs-font-size",
-                expression: "{--font-size}*16/100+\"px\"",
+                expression: "{commonFontSize}*16/100+\"px\"",
                 visible: false
               },
             ]
