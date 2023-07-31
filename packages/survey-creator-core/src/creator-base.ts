@@ -1,33 +1,9 @@
-import * as Survey from "survey-core";
 import {
-  Base,
-  SurveyModel,
-  ListModel,
-  Question,
-  PanelModel,
-  PageModel,
-  PopupModel,
-  property,
-  propertyArray,
-  IElement,
-  Serializer, QuestionFactory,
-  JsonObjectProperty,
-  ActionContainer,
-  AdaptiveActionContainer,
-  IAction,
-  Action,
-  IPanel,
-  SurveyElement,
-  ItemValue,
-  QuestionSelectBase,
-  QuestionRowModel,
-  LocalizableString,
-  ILocalizableString,
-  ILocalizableOwner,
-  PopupBaseViewModel,
-  EventBase,
-  ITheme,
-  PanelModelBase
+  Base, SurveyModel, ListModel, Question, PanelModel, PageModel, PopupModel, property, IElement, Serializer,
+  JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
+  QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
+  EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
+  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -223,7 +199,13 @@ export class CreatorBase extends Base
    *
    * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
    */
-  @property({ defaultValue: false }) haveCommercialLicense: boolean;
+  public get haveCommercialLicense(): boolean {
+    if (!!hasLicense && hasLicense(1)) return true;
+    return this.getPropertyValue("haveCommercialLicense", false);
+  }
+  public set haveCommercialLicense(val: boolean) {
+    this.setPropertyValue("haveCommercialLicense", val);
+  }
   public get licenseText(): string {
     return this.getLocString("survey.license");
   }
@@ -270,8 +252,8 @@ export class CreatorBase extends Base
     this.pageEditModeValue = val;
     const allowModifyPages = this.pageEditModeValue !== "single";
     this.changePageModifications(allowModifyPages);
-    Survey.settings.allowShowEmptyTitleInDesignMode = allowModifyPages;
-    Survey.settings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
+    SurveySettings.allowShowEmptyTitleInDesignMode = allowModifyPages;
+    SurveySettings.allowShowEmptyDescriptionInDesignMode = allowModifyPages;
     if (this.pageEditModeValue === "bypage") {
       this.showPageNavigator = true;
     }
@@ -1628,7 +1610,7 @@ export class CreatorBase extends Base
     let parentObj, parentProperty: JsonObjectProperty;
     if (obj instanceof ItemValue) {
       parentObj = obj.locOwner;
-      parentProperty = Survey.Serializer.findProperty(
+      parentProperty = Serializer.findProperty(
         parentObj.getType(),
         obj.ownerPropertyName || propertyName
       );
@@ -1780,8 +1762,8 @@ export class CreatorBase extends Base
    * A survey element to which `draggedElement` is being dragged.
    * @see onDragEnd
    */
-  public onDragStart: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
-  public onBeforeDrop: Survey.Event<() => any, any, any> = this.onDragStart;
+  public onDragStart: Event<() => any, any, any> = new Event<() => any, any, any>();
+  public onBeforeDrop: Event<() => any, any, any> = this.onDragStart;
   /**
    * An event that is raised when users finish dragging a survey element within the design surface.
    * 
@@ -1796,8 +1778,8 @@ export class CreatorBase extends Base
    * - `options.toElement`: `any`\
    * A survey element to which `draggedElement` was dragged.
    */
-  public onDragEnd: Survey.Event<() => any, any, any> = new Survey.Event<() => any, any, any>();
-  public onAfterDrop: Survey.Event<() => any, any, any> = this.onDragEnd;
+  public onDragEnd: Event<() => any, any, any> = new Event<() => any, any, any>();
+  public onAfterDrop: Event<() => any, any, any> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
@@ -1877,7 +1859,7 @@ export class CreatorBase extends Base
     return !!prop && ["expression", "condition", "questionvalue", "question"].indexOf(prop.type) > -1;
   }
   private updateSurveyLogicValues(obj: Base, propertyName: string, oldValue: any): void {
-    if (!obj || !propertyName || Survey.Helpers.isValueEmpty(oldValue)) return;
+    if (!obj || !propertyName || SurveyHelpers.isValueEmpty(oldValue)) return;
     if (propertyName === "value" && obj.isDescendantOf("itemvalue")) {
       this.updateSurveyLogicItemValue(<ItemValue>obj, oldValue);
     }
@@ -1906,7 +1888,7 @@ export class CreatorBase extends Base
   private updateLogicOnColumnNameChanged(column: Base, oldName: string, newName: string) {
     if (!oldName || oldName === newName || !settings.logic.updateExpressionsOnChanging.columnName) return;
     this.surveyLogicRenaming = true;
-    this.getSurveyLogicForUpdate().renameColumn(<Survey.MatrixDropdownColumn>column, oldName);
+    this.getSurveyLogicForUpdate().renameColumn(<MatrixDropdownColumn>column, oldName);
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
@@ -1924,11 +1906,11 @@ export class CreatorBase extends Base
     return this.isObjThisType(obj, "page");
   }
   private isObjThisType(obj: Base, typeName: string): boolean {
-    var classInfo = Survey.Serializer.findClass(obj.getType());
+    var classInfo = Serializer.findClass(obj.getType());
 
     while (!!classInfo && !!classInfo.parentName) {
       if (classInfo.name === typeName) return true;
-      classInfo = Survey.Serializer.findClass(classInfo.parentName);
+      classInfo = Serializer.findClass(classInfo.parentName);
     }
     return !!classInfo && classInfo.name === typeName;
   }
@@ -2037,12 +2019,12 @@ export class CreatorBase extends Base
 
   public getSurveyJSON(): any {
     if (this.viewType != "editor") {
-      return new Survey.JsonObject().toJsonObject(this.survey);
+      return new JsonObject().toJsonObject(this.survey);
     }
     var surveyJsonText = this.text;
     var textWorker = new SurveyTextWorker(surveyJsonText);
     if (textWorker.isJsonCorrect) {
-      return new Survey.JsonObject().toJsonObject(textWorker.survey);
+      return new JsonObject().toJsonObject(textWorker.survey);
     }
     return null;
   }
@@ -2190,7 +2172,7 @@ export class CreatorBase extends Base
     }
   }
   public loadSurvey(surveyId: string): void {
-    new Survey.dxSurveyService().loadSurvey(
+    new dxSurveyService().loadSurvey(
       surveyId,
       (success: boolean, result: string, response: any) => {
         if (success && result) {
@@ -2256,18 +2238,18 @@ export class CreatorBase extends Base
     prevElement.startWithNewLine = false;
   }
 
-  public setNewNames(element: Survey.ISurveyElement) {
+  public setNewNames(element: ISurveyElement) {
     this.newQuestions = [];
     this.newPanels = [];
     this.newQuestionChangedNames = {};
     this.setNewNamesCore(element);
     this.updateNewElementExpressions(element);
   }
-  private updateNewElementExpressions(element: Survey.ISurveyElement) {
+  private updateNewElementExpressions(element: ISurveyElement) {
     var survey = this.createSurvey({}, "updateNewElementExpressions");
     survey.setDesignMode(true);
     if (element.isPage) {
-      survey.addPage(<Survey.PageModel>element);
+      survey.addPage(<PageModel>element);
     } else {
       survey.addNewPage("p1");
       survey.pages[0].addElement(<IElement>element);
@@ -2323,7 +2305,7 @@ export class CreatorBase extends Base
     return SurveyHelper.getNewPanelName(this.getAllPanels());
   }
 
-  protected setNewNamesCore(element: Survey.ISurveyElement) {
+  protected setNewNamesCore(element: ISurveyElement) {
     var elType = element["getType"]();
     var newName = this.getNewName(elType, element.isPanel);
     if (newName != element.name) {
@@ -2334,7 +2316,7 @@ export class CreatorBase extends Base
       if (element.isPanel) {
         this.newPanels.push(element);
       }
-      var panel = <Survey.PanelModelBase>(<any>element);
+      var panel = <PanelModelBase>(<any>element);
       for (var i = 0; i < panel.elements.length; i++) {
         this.setNewNamesCore(panel.elements[i]);
       }
@@ -2344,14 +2326,14 @@ export class CreatorBase extends Base
   }
 
   public createNewElement(json: any): IElement {
-    var newElement = Survey.Serializer.createClass(json["type"]);
-    new Survey.JsonObject().toObject(json, newElement);
+    var newElement = Serializer.createClass(json["type"]);
+    new JsonObject().toObject(json, newElement);
     this.setNewNames(newElement);
     return newElement;
   }
 
   public copyElement(element: Base): IElement {
-    var json = new Survey.JsonObject().toJsonObject(element);
+    var json = new JsonObject().toJsonObject(element);
     json.type = element.getType();
     return this.createNewElement(json);
   }
@@ -2360,7 +2342,7 @@ export class CreatorBase extends Base
    * Copy a question to the active page
    * @param question A copied Survey.Question
    */
-  public fastCopyQuestion(question: Base): Survey.IElement {
+  public fastCopyQuestion(question: Base): IElement {
     var newElement = this.copyElement(question);
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
@@ -2749,6 +2731,19 @@ export class CreatorBase extends Base
     }
   }
 
+  private _rootElementValue: HTMLElement;
+  public get rootElement(): HTMLElement {
+    return this._rootElementValue;
+  }
+  public setRootElement(element: HTMLElement) {
+    this._rootElementValue = element;
+    this.initKeyboardShortcuts(element);
+    this.initResponsivityManager(element as HTMLDivElement);
+  }
+  public unsubscribeRootElement() {
+    this.removeKeyboardShortcuts(this._rootElementValue);
+    this.resetResponsivityManager();
+  }
   public initKeyboardShortcuts(rootNode: HTMLElement) {
     if (!!rootNode) {
       rootNode.addEventListener("keydown", this.onKeyDownHandler);
@@ -2984,8 +2979,8 @@ export class CreatorBase extends Base
   onItemValueAddedCallback(
     obj: Base,
     propertyName: string,
-    itemValue: Survey.ItemValue,
-    itemValues: Array<Survey.ItemValue>
+    itemValue: ItemValue,
+    itemValues: Array<ItemValue>
   ) {
     var options = {
       obj: obj,
@@ -2996,9 +2991,9 @@ export class CreatorBase extends Base
     this.onItemValueAdded.fire(this, options);
   }
   onMatrixDropdownColumnAddedCallback(
-    matrix: Survey.Question,
-    column: Survey.MatrixDropdownColumn,
-    columns: Array<Survey.MatrixDropdownColumn>
+    matrix: Question,
+    column: MatrixDropdownColumn,
+    columns: Array<MatrixDropdownColumn>
   ) {
     var options = { newColumn: column, matrix: matrix, columns: columns };
     this.onMatrixColumnAdded.fire(this, options);
@@ -3072,7 +3067,7 @@ export class CreatorBase extends Base
     return options.title;
   }
   isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean {
-    if(this.onGetConditionOperator.isEmpty) return isEnabled;
+    if (this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
       operator: operator,
@@ -3161,7 +3156,7 @@ export class CreatorBase extends Base
   }
   public doSaveTheme() {
     this.setState("saving");
-    if(this.hasPendingThemeChanges && this.saveThemeFunc) {
+    if (this.hasPendingThemeChanges && this.saveThemeFunc) {
       this.saveNo++;
       this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
         if (this.saveNo !== no) return;
@@ -3208,7 +3203,7 @@ export class CreatorBase extends Base
     if (!el || el.getType() === newType) return;
     const objType = SurveyHelper.getObjectType(el);
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
-    el = this.convertQuestion(<Survey.Question>el, newType);
+    el = this.convertQuestion(<Question>el, newType);
     this.selectElement(el, null, "#convertTo button");
   }
 
@@ -3317,7 +3312,7 @@ export class CreatorBase extends Base
   }
 
   public getChoicesItemBaseTitle() {
-    return this.getLocString("ed.choices_Item") || Survey.surveyLocalization.getString("choices_Item");
+    return this.getLocString("ed.choices_Item") || surveyLocalization.getString("choices_Item");
   }
 
   public getNextItemValue(question: QuestionSelectBase): string | number {
@@ -3329,10 +3324,10 @@ export class CreatorBase extends Base
     const res = question.createItemValue(nextValue);
     res.text = getNextItemText(question.choices);
     question.choices.push(res);
-    if(callback) {
+    if (callback) {
       callback(res);
     }
-    if(callEvent) {
+    if (callEvent) {
       const propName = !!res.ownerPropertyName ? res.ownerPropertyName : "choices";
       this.onItemValueAddedCallback(question, propName, res, question.choices);
     }
@@ -3600,7 +3595,7 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  const parentIsMatrix = !!element.data && element.parentQuestion instanceof Survey.QuestionMatrixDropdownModelBase;
+  const parentIsMatrix = !!element.data && element.parentQuestion instanceof QuestionMatrixDropdownModelBase;
   return !parentIsMatrix && (!isContentElement(element) || element.isEditableTemplateElement);
 }
 export function isTextInput(target: any): boolean {
