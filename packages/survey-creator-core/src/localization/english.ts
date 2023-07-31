@@ -519,6 +519,7 @@ export var enStrings = {
     maxErrorText: "\"Value exceeds maximum\" error message",
     otherErrorText: "\"Empty comment\" error message",
     keyDuplicationError: "\"Non-unique key value\" error message",
+    minSelectedChoices: "Minimum selected choices",
     maxSelectedChoices: "Maximum selected choices",
     showClearButton: "Show the Clear button",
     showNumber: "Show panel number",

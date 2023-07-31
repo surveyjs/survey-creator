@@ -204,6 +204,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "showSelectAllItem", tab: "choices" },
         { name: "selectAllText", tab: "choices" },
+        { name: "minSelectedChoices", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" },
       ],
     },
@@ -332,6 +333,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showSelectAllItem", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "minSelectedChoices", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" },
         { name: "selectAllText", tab: "choices" }
       ],

@@ -629,3 +629,113 @@ test("Confirm dialog on leaving tab with an incorrect rule", async (t) => {
     .expect(Selector(".sv-string-viewer").withText("General").exists).notOk()
     .expect(logicActionSelector.exists).ok();
 });
+test("Logic Tab - The Search option is available", async (t) => {
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question11"
+          },
+          {
+            "type": "rating",
+            "name": "nps_score",
+            "title": "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+            "isRequired": true,
+            "rateCount": 11,
+            "rateMin": 0,
+            "rateMax": 10,
+            "minRateDescription": "(Most unlikely)",
+            "maxRateDescription": "(Most likely)"
+          },
+          {
+            "type": "checkbox",
+            "name": "promoter_features",
+            "title": "What features do you value the most?",
+            "isRequired": true,
+            "validators": [
+              {
+                "type": "answercount",
+                "text": "Please select two features maximum.",
+                "maxCount": 2
+              }
+            ],
+            "choices": [
+              "Performance",
+              "Stability",
+              "User Interface",
+              "Complete Functionality"
+            ],
+            "showOtherItem": true,
+            "otherText": "Other feature:",
+            "colCount": 2
+          },
+          {
+            "type": "comment",
+            "name": "passive_experience",
+            "visibleIf": "{nps_score} > 6",
+            "title": "What is the primary reason for your score?"
+          },
+          {
+            "type": "comment",
+            "name": "disappointed_experience",
+            "title": "What do you miss and what was disappointing in your experience with us?"
+          }
+        ],
+        "title": "page1 -- title",
+        "description": "page1 -- description"
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "checkbox",
+            "name": "question4",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "page3",
+        "elements": [
+          {
+            "type": "dropdown",
+            "name": "question5",
+            "choices": [
+              "item1",
+              "item2",
+              "item3"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "page4",
+        "elements": [
+          {
+            "type": "rating",
+            "name": "question6"
+          }
+        ]
+      }
+    ],
+  });
+
+  await t
+    .click(getTabbedMenuItemByText(creatorTabLogicName))
+
+    .hover(tableRulesSelector)
+
+    .click(logicDetailButtonElement)
+    .expect(logicQuestionSelector.parent().find(".sv-popup").visible).notOk()
+
+    .click(logicQuestionSelector)
+    .expect(logicQuestionSelector.parent().find(".sv-popup").visible).ok()
+    .expect(logicQuestionSelector.parent().find(".sv-popup .sv-list__filter").visible).ok();
+});

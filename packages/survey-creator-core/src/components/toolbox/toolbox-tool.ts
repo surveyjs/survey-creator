@@ -29,10 +29,12 @@ export class ToolboxToolViewModel extends Base {
     this._node = pointerDownEvent.currentTarget;
     this._node.classList.add("svc-toolbox__tool--pressed");
     document.addEventListener("pointerup", this.onPointerUp);
+    this.creator.onDragDropItemStart();
   }
 
   private _node: any
   private onPointerUp = (pointerUpEvent) => {
+    this.creator.onDragDropItemEnd();
     this._node.classList.remove("svc-toolbox__tool--pressed");
     this._node = null;
     document.removeEventListener("pointerup", this.onPointerUp);

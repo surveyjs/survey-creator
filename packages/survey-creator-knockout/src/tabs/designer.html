@@ -29,7 +29,7 @@
       <!-- /ko -->
 
       <!-- ko if: survey.isShowProgressBarOnTop -->
-      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
       <!-- /ko -->
       <!-- /ko -->
 
@@ -52,7 +52,7 @@
       <!-- /ko -->
 
       <!-- ko if: survey.isShowProgressBarOnBottom -->
-      <!-- ko component: { name: 'sv-progress-' + survey.progressBarType, params: { model: survey } } -->
+      <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
       <!-- /ko -->
       <!-- /ko -->
     </div>
