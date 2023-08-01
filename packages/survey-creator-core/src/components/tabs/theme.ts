@@ -563,6 +563,10 @@ export class ThemeSurveyTabViewModel extends Base {
       this.blockThemeChangedNotifications -= 1;
       this.setThemeToSurvey();
     });
+    themeEditorSurvey.onUploadFiles.add((_, options) => {
+      const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
+      this.surveyProvider.uploadFiles(options.files, undefined, callback);
+    });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
@@ -632,6 +636,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private getThemeEditorSurveyJSON() {
     const themeEditorSurveyJSON = {
       "clearInvisibleValues": "none",
+      questionErrorLocation: "bottom",
       elements: [{
         type: "panel",
         state: "expanded",
@@ -691,8 +696,10 @@ export class ThemeSurveyTabViewModel extends Base {
                 elements: [
                   {
                     type: "fileedit",
+                    storeDataAsText: false,
                     name: "backgroundImage",
                     titleLocation: "hidden",
+                    maxSize: this.surveyProvider.onUploadFile.isEmpty ? 65536 : undefined,
                     acceptedTypes: "image/*",
                     placeholder: "Browse..."
                   },
