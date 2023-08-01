@@ -1024,15 +1024,15 @@ export var enStrings = {
     editorShadow: "Input element shadow effects",
     names: {
       "default": "Default",
-      "contrast": "Contrast",
+      "sharp": "Sharp",
+      "borderless": "Borderless",
+      "flat": "Flat",
       "plain": "Plain",
-      "simple": "Simple",
-      "blank": "Blank",
-      "double": "Double",
-      "bulk": "Bulk",
-      "pseudo-3d": "Pseudo 3D",
-      "playful": "Playful",
-      "ultra": "Ultra"
+      "doubleborder": "Double Border",
+      "layered": "Layered",
+      "solid": "Solid",
+      "threedimensional": "3D",
+      "contrast": "Contrast"
     },
     colors: {
       teal: "Teal",

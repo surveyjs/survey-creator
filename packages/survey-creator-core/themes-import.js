@@ -31,17 +31,39 @@ function getShadowSettings(shadowGroup) {
   }
   return createBoxShadow(result);
 }
+const displayNameMap = {
+  "default": "Default",
+  "contrast": "Sharp",
+  "plain": "Borderless",
+  "simple": "Flat",
+  "blank": "Plain",
+  "double": "DoubleBorder",
+  "bulk": "Layered",
+  "pseudo3d": "Solid",
+  "playful": "ThreeDimensional",
+  "ultra": "Contrast"
+};
+function getDisplayName(themeName) {
+  if(themeName.indexOf("pseudo-3d") !== -1) {
+    themeName = themeName.replace("pseudo-3d", "pseudo3d");
+  }
+  const baseThemeName = themeName.split("-")[0];
+  if(!displayNameMap[baseThemeName]) return themeName;
 
-Object.keys(MikeThemes).forEach(function (themeName) {
-  console.log(themeName);
+  return themeName.replace(baseThemeName, displayNameMap[baseThemeName].toLowerCase());
+}
 
-  const generalGroup = MikeThemes[themeName]["general"];
-  const primaryGroup = MikeThemes[themeName]["primary"];
-  const secondaryGroup = MikeThemes[themeName]["secondary"];
-  const shadowGroup = MikeThemes[themeName]["shadow"];
-  const bordersGroup = MikeThemes[themeName]["borders"];
-  const specialGroup = MikeThemes[themeName]["special"];
+Object.keys(MikeThemes).forEach(function (initThemeName) {
+  console.log(initThemeName);
 
+  const generalGroup = MikeThemes[initThemeName]["general"];
+  const primaryGroup = MikeThemes[initThemeName]["primary"];
+  const secondaryGroup = MikeThemes[initThemeName]["secondary"];
+  const shadowGroup = MikeThemes[initThemeName]["shadow"];
+  const bordersGroup = MikeThemes[initThemeName]["borders"];
+  const specialGroup = MikeThemes[initThemeName]["special"];
+
+  const themeName = getDisplayName(initThemeName);
   themes[themeName] = {};
 
   if(!!generalGroup) {

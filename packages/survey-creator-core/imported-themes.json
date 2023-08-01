@@ -41,7 +41,7 @@
         "--sjs-special-yellow-light": "rgba(255, 152, 20, 0.1)",
         "--sjs-special-yellow-forecolor": "rgba(255, 255, 255, 1)"
     },
-    "contrast": {
+    "sharp": {
         "--sjs-general-backcolor-dark": "rgba(228, 228, 228, 1)",
         "--sjs-general-backcolor-dim": "rgba(224, 224, 224, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)",
@@ -58,7 +58,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.25)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.25)"
     },
-    "plain": {
+    "borderless": {
         "--sjs-general-backcolor-dark": "rgba(241, 246, 255, 1)",
         "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(238, 245, 255, 1)",
@@ -75,7 +75,7 @@
         "--sjs-border-light": "rgba(220, 229, 241, 1)",
         "--sjs-border-default": "rgba(179, 200, 229, 1)"
     },
-    "simple": {
+    "flat": {
         "--sjs-general-backcolor": "rgba(246, 246, 246, 1)",
         "--sjs-general-backcolor-dark": "rgba(235, 235, 235, 1)",
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
@@ -92,7 +92,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.12)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.12)"
     },
-    "blank": {
+    "plain": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
@@ -108,7 +108,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.15)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.15)"
     },
-    "double": {
+    "doubleborder": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(239, 239, 239, 1)",
         "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)",
@@ -126,7 +126,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.1)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.1)"
     },
-    "bulk": {
+    "layered": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(244, 244, 244, 1)",
         "--sjs-general-backcolor-dim": "rgba(216, 207, 236, 1)",
@@ -141,7 +141,7 @@
         "--sjs-shadow-small": "0px 2px 4px 0px rgba(0, 0, 0, 0.1),0px 8px 16px 0px rgba(0, 0, 0, 0.1),0px 0px 0px 1px rgba(0, 0, 0, 0.05)",
         "--sjs-shadow-inner": "inset 0px 1px 4px 0px rgba(0, 0, 0, 0.1),inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05)"
     },
-    "pseudo-3d": {
+    "solid": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(243, 243, 243, 1)",
         "--sjs-general-backcolor-dim": "rgba(46, 172, 180, 1)",
@@ -160,7 +160,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.09)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.16)"
     },
-    "playful": {
+    "threedimensional": {
         "--sjs-general-backcolor": "rgba(248, 248, 248, 1)",
         "--sjs-general-backcolor-dark": "rgba(242, 242, 242, 1)",
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
@@ -178,7 +178,7 @@
         "--sjs-border-light": "rgba(0, 0, 0, 0.08)",
         "--sjs-border-default": "rgba(0, 0, 0, 0.08)"
     },
-    "ultra": {
+    "contrast": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(255, 216, 77, 1)",
         "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
@@ -242,7 +242,7 @@
         "--sjs-special-yellow-light": "rgba(255, 152, 20, 0.1)",
         "--sjs-special-yellow-forecolor": "rgba(48, 48, 48, 1)"
     },
-    "contrast-dark": {
+    "sharp-dark": {
         "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
         "--sjs-general-backcolor-dim": "rgba(27, 27, 27, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)",
@@ -262,7 +262,7 @@
         "--sjs-border-light": "rgba(255, 255, 255, 0.22)",
         "--sjs-border-default": "rgba(255, 255, 255, 0.22)"
     },
-    "plain-dark": {
+    "borderless-dark": {
         "--sjs-general-backcolor": "rgba(43, 48, 63, 1)",
         "--sjs-general-backcolor-dark": "rgba(50, 55, 72, 1)",
         "--sjs-general-backcolor-dim": "rgba(33, 37, 51, 1)",
@@ -280,7 +280,7 @@
         "--sjs-border-light": "rgba(55, 62, 79, 1)",
         "--sjs-border-default": "rgba(65, 72, 90, 1)"
     },
-    "simple-dark": {
+    "flat-dark": {
         "--sjs-general-backcolor": "rgba(48, 48, 48, 1)",
         "--sjs-general-backcolor-dark": "rgba(56, 56, 56, 1)",
         "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
@@ -297,7 +297,7 @@
         "--sjs-border-light": "rgba(255, 255, 255, 0.07)",
         "--sjs-border-default": "rgba(255, 255, 255, 0.07)"
     },
-    "blank-dark": {
+    "plain-dark": {
         "--sjs-general-backcolor": "rgba(36, 36, 36, 1)",
         "--sjs-general-backcolor-dark": "rgba(47, 47, 47, 1)",
         "--sjs-general-backcolor-dim": "rgba(36, 36, 36, 1)",
@@ -314,7 +314,7 @@
         "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
         "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
     },
-    "double-dark": {
+    "doubleborder-dark": {
         "--sjs-general-backcolor": "rgba(52, 52, 52, 1)",
         "--sjs-general-backcolor-dark": "rgba(58, 58, 58, 1)",
         "--sjs-general-backcolor-dim": "rgba(47, 47, 47, 1)",
@@ -332,7 +332,7 @@
         "--sjs-border-light": "rgba(255, 255, 255, 0.1)",
         "--sjs-border-default": "rgba(255, 255, 255, 0.1)"
     },
-    "bulk-dark": {
+    "layered-dark": {
         "--sjs-general-backcolor": "rgba(39, 40, 50, 1)",
         "--sjs-general-backcolor-dark": "rgba(46, 47, 58, 1)",
         "--sjs-general-backcolor-dim": "rgba(30, 31, 40, 1)",
@@ -353,7 +353,7 @@
         "--sjs-border-light": "rgba(54, 56, 69, 1)",
         "--sjs-border-default": "rgba(67, 69, 85, 1)"
     },
-    "pseudo-3d-dark": {
+    "solid-dark": {
         "--sjs-general-backcolor": "rgba(53, 55, 63, 1)",
         "--sjs-general-backcolor-dark": "rgba(60, 63, 74, 1)",
         "--sjs-general-backcolor-dim": "rgba(38, 40, 47, 1)",
@@ -371,7 +371,7 @@
         "--sjs-border-light": "rgba(65, 69, 83, 1)",
         "--sjs-border-default": "rgba(97, 101, 118, 1)"
     },
-    "playful-dark": {
+    "threedimensional-dark": {
         "--sjs-general-backcolor": "rgba(38, 38, 38, 1)",
         "--sjs-general-backcolor-dark": "rgba(48, 48, 48, 1)",
         "--sjs-general-backcolor-dim": "rgba(28, 28, 28, 1)",
@@ -389,7 +389,7 @@
         "--sjs-border-light": "rgba(255, 255, 255, 0.12)",
         "--sjs-border-default": "rgba(255, 255, 255, 0.12)"
     },
-    "ultra-dark": {
+    "contrast-dark": {
         "--sjs-general-backcolor": "rgba(255, 216, 77, 1)",
         "--sjs-general-backcolor-dark": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dim": "rgba(0, 0, 0, 1)",
@@ -415,60 +415,60 @@
     "default-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
     },
-    "contrast-lw": {
+    "sharp-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(238, 238, 238, 1)"
     },
-    "plain-lw": {
+    "borderless-lw": {
         "--sjs-general-backcolor": "rgba(231, 240, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(220, 232, 252, 1)",
         "--sjs-general-backcolor-dim": "rgba(231, 240, 255, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dim-dark": "rgba(220, 232, 252, 1)"
     },
-    "simple-lw": {
+    "flat-lw": {
         "--sjs-general-backcolor-dim": "rgba(246, 246, 246, 1)"
     },
-    "double-lw": {
+    "doubleborder-lw": {
         "--sjs-general-backcolor-dim": "rgba(245, 245, 245, 1)"
     },
-    "bulk-lw": {
+    "layered-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
     },
-    "pseudo-3d-lw": {
+    "solid-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)",
         "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 0.91)",
         "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 0.45)"
     },
-    "playful-lw": {
+    "threedimensional-lw": {
         "--sjs-general-backcolor-dim": "rgba(248, 248, 248, 1)"
     },
-    "ultra-lw": {
+    "contrast-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 1)"
     },
     "default-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
     },
-    "contrast-dark-lw": {
+    "sharp-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)",
         "--sjs-general-backcolor-dim-light": "rgba(33, 33, 33, 1)"
     },
-    "plain-dark-lw": {
+    "borderless-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(43, 48, 63, 1)"
     },
-    "simple-dark-lw": {
+    "flat-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(48, 48, 48, 1)"
     },
-    "double-dark-lw": {
+    "doubleborder-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(52, 52, 52, 1)"
     },
-    "bulk-dark-lw": {
+    "layered-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(39, 40, 50, 1)"
     },
-    "pseudo-3d-dark-lw": {
+    "solid-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(53, 55, 63, 1)"
     },
-    "ultra-dark-lw": {
+    "contrast-dark-lw": {
         "--sjs-general-backcolor-dim": "rgba(255, 216, 77, 1)",
         "--sjs-general-dim-forecolor": "rgba(0, 0, 0, 1)",
         "--sjs-general-dim-forecolor-light": "rgba(0, 0, 0, 1)"
