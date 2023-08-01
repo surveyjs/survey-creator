@@ -725,7 +725,7 @@ export class CreatorBase extends Base
     * `options.type`: `"ELEMENT_REORDERED"`\
     * - `options.arrayName` - The name of the changed array.
     * - `options.parent` - An object that contains the changed array.
-    * - `options.element` - An reordered element.
+    * - `options.element` - A reordered element.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
