@@ -138,7 +138,7 @@ export class CreatorBase extends Base
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
   /**
-   * Specifies whether to display the Theme tab.
+   * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
    */
@@ -685,58 +685,61 @@ export class CreatorBase extends Base
    */
   public onLogicItemDisplayText: CreatorEvent = new CreatorEvent();
   /**
-    * The event is called when a survey is changed in the designer. A new page/question/page is added or existing is removed, a property is changed and so on.
-    *- sender the survey creator object that fires the event
-    * options object contains the information about certain modifications
-    *- options.type contains string constant describing certain modification
-    * Available values:
+    * An event that is raised when users modify survey or theme settings.
+    * 
+    * Parameters:
+    * 
+    * - `sender`: `CreatorBase`\
+    * A Survey Creator instance that raised the event.
+    * 
+    * - `options.type`: `"ADDED_FROM_TOOLBOX"` | `"PAGE_ADDED"` | `"PAGE_MOVED"` | `"QUESTION_CONVERTED"` | `"QUESTION_CHANGED_BY_EDITOR"` | `"PROPERTY_CHANGED"` | `"ELEMENT_REORDERED"` | `"OBJECT_DELETED"` | `"VIEW_TYPE_CHANGED"` | `"DO_DROP"` | `"TRANSLATIONS_CHANGED"` | `"JSON_EDITOR"` | `"THEME_MODIFIED"`\
+    * A value that indicates the modification.
+    * 
+    * Depending on the `options.type` value, the `options` object contains parameters listed below:
+    * 
+    * `options.type`: `"ADDED_FROM_TOOLBOX"`\
+    * - `options.question` - An added question.
+    * 
+    * `options.type`: `"PAGE_ADDED"`\
+    * - `options.newValue` - An added page.
     *
-    *- options.type: "ADDED_FROM_TOOLBOX"
-    *- options.question: newly added question
+    * `options.type`: `"PAGE_MOVED"`\
+    * - `options.page` - A moved page.
+    * - `options.indexFrom` - A previous index.
+    * - `options.indexTo` - A current index.
     *
-    *- options.type: "PAGE_ADDED"
-    *- options.newValue: newly created page
+    * `options.type`: `"QUESTION_CONVERTED"`\
+    * - `options.className` - The name of a class to which a question has been converted.
+    * - `options.oldValue` - An object of a previous class.
+    * - `options.newValue` - An object of a class specified by `options.className`.
     *
-    *- options.type: "PAGE_MOVED"
-    *- options.page: page has been moved
-    *- options.indexFrom: pevious index
-    *- options.indexTo: new index
+    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`\
+    * - `options.question` - A question that has been edited in a pop-up editor.
     *
-    *- options.type: "QUESTION_CONVERTED"
-    *- options.className: the converted class name
-    *- options.oldValue: pevious object
-    *- options.newValue: the new object, converted from oldVale to the given class name
+    * `options.type`: `"PROPERTY_CHANGED"`\
+    * - `options.name` - The name of the changed property.
+    * - `options.target` - An object that contains the changed property.
+    * - `options.oldValue` - A previous value of the changed property.
+    * - `options.newValue` - A new value of the changed property.
     *
-    *- options.type: "QUESTION_CHANGED_BY_EDITOR"
-    *- options.question: question has been edited in the popup question editor
+    * `options.type`: `"ELEMENT_REORDERED"`\
+    * - `options.arrayName` - The name of the changed array.
+    * - `options.parent` - An object that contains the changed array.
+    * - `options.element` - A reordered element.
+    * - `options.indexFrom` - A previous index.
+    * - `options.indexTo` - A current index.
     *
-    *- options.type: "PROPERTY_CHANGED"
-    *- options.name: the name of the property has been changed
-    *- options.target: the object containing the changed property
-    *- options.oldValue: the previous value of the changed property
-    *- options.newValue: the new value of the changed property
+    * `options.type`: `"OBJECT_DELETED"`\
+    * - `options.target` - A deleted object.
     *
-    *- options.type: "ELEMENT_REORDERED"
-    *- options.arrayName: the name of the array property has been changed
-    *- options.parent: the object containing the array property
-    *- options.element: the element that changed the place in the array
-    *- options.indexFrom: moved from index
-    *- options.indexTo: moved to index
+    * `options.type`: `"VIEW_TYPE_CHANGED"`\
+    * - `options.newType` - A current view: `"editor"` or `"designer"`.
     *
-    *- options.type: "OBJECT_DELETED"
-    *- options.target: deleted object
-    *
-    *- options.type: "VIEW_TYPE_CHANGED"
-    *- options.newType: new type of the creator view: editor or designer
-    *
-    *- options.type: "DO_DROP"
-    *- options.page: the page of the drap/drop operation
-    *- options.source: the source dragged object
-    *- options.target: the drop target
-    *- options.newElement: a new element. It is defined if a user drops question or panel from the toolbox
-    *
-    *- options.type: "TRANSLATIONS_CHANGED"
-    *- options.type: "JSON_EDITOR"
+    * `options.type`: `"DO_DROP"`\
+    * - `options.page` - A parent page of the dragged element.
+    * - `options.source` - A dragged element.
+    * - `options.target` - A drop target.
+    * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
     */
   public onModified: CreatorEvent = new CreatorEvent();
   /**
@@ -3174,8 +3177,11 @@ export class CreatorBase extends Base
   }
 
   /**
-   * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
-   * @see isAutoSave
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * @see showThemeTab
+   * @see saveSurveyFunc
    */
   public get saveThemeFunc() {
     return this.saveThemeFuncValue;
@@ -3184,11 +3190,17 @@ export class CreatorBase extends Base
     this.saveThemeFuncValue = value;
   }
 
+  /**
+   * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
+   * @see isAutoSave
+   */
   @property({ defaultValue: false }) showSaveButton: boolean;
 
   /**
-   * Assign to this property a function that will be called on clicking the 'Save' button or on any change if isAutoSave equals true.
-   * @see isAutoSave
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a survey JSON schema.
+   * 
+   * For more information, refer to the Save and Load Survey Model Schemas help topic for your framework: [Angular](https://surveyjs.io/survey-creator/documentation/get-started-angular#save-and-load-survey-model-schemas) | [Vue](https://surveyjs.io/survey-creator/documentation/get-started-vue#save-and-load-survey-model-schemas) | [React](https://surveyjs.io/survey-creator/documentation/get-started-react#save-and-load-survey-model-schemas) | [Knockout / jQuery](https://surveyjs.io/survey-creator/documentation/get-started-knockout-jquery).
+   * @see saveThemeFunc
    */
   public get saveSurveyFunc() {
     return this.saveSurveyFuncValue;
