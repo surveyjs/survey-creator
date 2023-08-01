@@ -189,7 +189,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private loadTheme(theme: ICreatorTheme) {
     this.themeName = theme.themeName;
     this.themePalette = theme.colorPalette;
-    this.themeMode = (theme.isPanelless !== undefined && !theme.isPanelless) ? "lightweight" : undefined;
+    this.themeMode = theme.isPanelless ? "lightweight" : undefined;
     this.backgroundImage = theme.backgroundImage;
     this.backgroundImageFit = theme.backgroundImageFit;
     this.backgroundImageAttachment = theme.backgroundImageAttachment;
@@ -340,7 +340,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public resetTheme() {
     this.themeChanges = {};
     this.applySelectedTheme();
-    if(this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
+    if (this.themeName === "default" && this.themeMode === "panels" && this.themePalette === "light") {
       this.surveyProvider.isThemePristine = true;
     }
   }
@@ -511,7 +511,7 @@ export class ThemeSurveyTabViewModel extends Base {
         this.initializeColorCalculator();
         if (options.name === "themeMode") {
           this.survey["isCompact"] = options.value === "lightweight";
-          this.currentTheme.isPanelless = options.value !== "lightweight";
+          this.currentTheme.isPanelless = options.value === "lightweight";
           this.applySelectedTheme();
         } else {
           this.currentTheme.themeName = this.themeName;
@@ -530,6 +530,9 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       this.blockThemeChangedNotifications += 1;
+      if(options.name == "commonScale") {
+        this.survey.triggerResponsiveness(true);
+      }
       if (options.name === "--sjs-primary-backcolor") {
         this.colorCalculator.calculateColors(options.value);
         this.themeChanges["--sjs-primary-backcolor"] = options.value;
@@ -598,6 +601,16 @@ export class ThemeSurveyTabViewModel extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables);
+
+    if (!!newCssVariables["--sjs-corner-radius"]) {
+      themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
+    }
+    if (!!newCssVariables["--sjs-base-unit"]) {
+      themeEditorSurvey.getQuestionByName("commonScale").value = parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8;
+    }
+    if (!!newCssVariables["--sjs-font-size"]) {
+      themeEditorSurvey.getQuestionByName("commonFontSize").value = parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16;
+    }
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
       if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
@@ -758,7 +771,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "--font-size",
+                name: "commonFontSize",
                 title: getLocString("theme.fontSize"),
                 descriptionLocation: "hidden",
                 unit: "%",
@@ -769,7 +782,7 @@ export class ThemeSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--sjs-font-size",
-                expression: "{--font-size}*16/100+\"px\"",
+                expression: "{commonFontSize}*16/100+\"px\"",
                 visible: false
               },
             ]

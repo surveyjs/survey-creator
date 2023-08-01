@@ -7,6 +7,7 @@ import {
   property,
   QuestionMatrixDropdownModelBase,
   Helpers,
+  IDialogOptions,
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { defaultV2Css } from "survey-core";
@@ -69,18 +70,21 @@ export class MatrixCellWrapperViewModel extends Base {
 
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
     const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question);
-    settings.showModal(
-      "svc-question-editor-content",
-      {
-        survey: editSurvey.survey,
-        creator: this.creator
-      },
-      () => {
-        editSurvey.apply();
-        return true;
-      },
-      undefined, "svc-matrix-cell__popup", model.question.name,
-      this.creator.isMobileView ? "overlay" : "popup"
+    settings.showDialog(
+      <IDialogOptions>{
+        componentName: "svc-question-editor-content",
+        data: {
+          survey: editSurvey.survey,
+          creator: this.creator
+        },
+        onApply: () => {
+          editSurvey.apply();
+          return true;
+        },
+        cssClass: "svc-matrix-cell__popup",
+        title: model.question.name,
+        displayMode: this.creator.isMobileView ? "overlay" : "popup"
+      }, model.creator.rootElement
     );
     event.stopPropagation();
     model.creator.selectElement(model.column);

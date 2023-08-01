@@ -1,5 +1,7 @@
-import { SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
-  PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString } from "survey-core";
+import {
+  SurveyModel, Action, Question, MatrixDropdownRowModelBase, MatrixDynamicRowModel,
+  PanelModel, QuestionMatrixDynamicModel, property, HashTable, LocalizableString, IDialogOptions
+} from "survey-core";
 import { settings as libSettings } from "survey-core";
 import { ConditionEditor } from "../../property-grid/condition-survey";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
@@ -179,21 +181,23 @@ export class SurveyLogicUI extends SurveyLogic {
     return false;
   }
   protected confirmLeavingOnError(onLeaving: () => void, onStaying: () => void): boolean {
-    if(!libSettings.showModal) return false;
+    if (!libSettings.showDialog) return false;
     const locStr = new LocalizableString(undefined);
     locStr.text = this.getLocString("ed.lg.uncompletedRule_text");
-    const popupModel = libSettings.showModal(
-      "sv-string-viewer",
-      { locStr: locStr, locString: locStr, model: locStr }, //TODO fix in library
-      () => {
+    const popupModel = libSettings.showDialog(<IDialogOptions>{
+      componentName: "sv-string-viewer",
+      data: { locStr: locStr, locString: locStr, model: locStr }, //TODO fix in library
+      onApply: () => {
         onLeaving();
         return true;
       },
-      () => {
+      onCancel: () => {
         onStaying();
         return true;
-      }, undefined, this.getLocString("ed.lg.uncompletedRule_title"),
-      "popup");
+      },
+      title: this.getLocString("ed.lg.uncompletedRule_title"),
+      displayMode: "popup"
+    }, this.options.rootElement);
     const toolbar = popupModel.footerToolbar;
     const applyBtn = toolbar.getActionById("apply");
     const cancelBtn = toolbar.getActionById("cancel");

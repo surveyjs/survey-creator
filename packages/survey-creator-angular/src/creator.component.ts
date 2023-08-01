@@ -27,13 +27,11 @@ export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterV
     this.changeDetectorRef.detectChanges();
   }
   public ngAfterViewInit(): void {
-    this.creator.initKeyboardShortcuts(this.container.nativeElement);
-    this.creator.initResponsivityManager(this.container.nativeElement);
+    this.creator.setRootElement(this.container.nativeElement);
     super.ngOnInit();
   }
   public override ngOnDestroy(): void {
-    this.creator.removeKeyboardShortcuts(this.container.nativeElement);
-    this.creator.resetResponsivityManager();
+    this.creator.unsubscribeRootElement();
     super.ngOnDestroy();
   }
 }

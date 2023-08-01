@@ -701,7 +701,7 @@ test("import styles from file", ()=> {
     "backgroundImageFit": "auto",
     "themeName": "My Theme",
     "themePalette": "light",
-    "isPanelless": false
+    "isPanelless": true
   } as any);
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("My Theme");
@@ -845,4 +845,45 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
+});
+
+test("Theme builder: trigger responsiveness", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  let log = "";
+  themeSurveyTab.survey.triggerResponsiveness = (hard: boolean) => {
+    log += `->called:${hard}`;
+  };
+  themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "#ffffff";
+  expect(log).toBe("");
+  themeEditor.getQuestionByName("commonScale").value = 90;
+  expect(log).toBe("->called:true");
+  themeEditor.getQuestionByName("commonScale").value = 80;
+  expect(log).toBe("->called:true->called:true");
+});
+test("Theme builder restore PG editor", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-corner-radius": "20px",
+      "--sjs-base-unit": "9.6px",
+      "--sjs-font-size": "17.6px",
+    }
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+
+  expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("20px");
+  expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(20);
+  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("9.6px");
+  expect(themeEditor.getQuestionByName("commonScale").value).toEqual(120);
+  expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("17.6px");
+  expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
 });

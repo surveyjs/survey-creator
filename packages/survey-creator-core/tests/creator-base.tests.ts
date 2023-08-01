@@ -36,7 +36,7 @@ import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
-import { getNextItemText } from "../src/utils/utils";
+import { ToolboxToolViewModel } from "../src/components/toolbox/toolbox-tool";
 
 import {
   getElementWrapperComponentData,
@@ -1077,6 +1077,35 @@ test("fast copy tests, copy a question and check the index", (): any => {
   expect(creator.survey.pages[0].questions).toHaveLength(4);
   expect(creator.survey.getQuestionByName("question4")).toBeTruthy();
   expect(creator.survey.getQuestionByName("question4").visibleIndex).toEqual(1);
+});
+test("fast copy from paneldynamic", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "question1",
+            "templateElements": [
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(1);
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1").template.elements[0]);
+  expect(creator.survey.pages[0].questions).toHaveLength(1);
+  expect(creator.survey.getQuestionByName("question3")).toBeTruthy();
+  expect(creator.survey.getQuestionByName("question1").template.elements.length).toEqual(2);
+  expect(creator.survey.getQuestionByName("question1").template.elements[1].name).toEqual("question3");
 });
 test("Page duplicate action, copy a page and check the index", (): any => {
   const creator = new CreatorTester();
@@ -3712,6 +3741,16 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[3]).toEqual("ELEMENT_COPIED");
   expect(reason[4]).toEqual("ELEMENT_COPIED");
   expect(reason[5]).toEqual("ELEMENT_COPIED");
+
+  const toolboxViwer = new ToolboxToolViewModel(creator.toolbox.items[0], creator);
+  toolboxViwer.click({});
+  expect(reason).toHaveLength(7);
+  expect(reason[6]).toEqual("ADDED_FROM_TOOLBOX");
+  creator.onDragDropItemStart();
+  creator.survey.pages[0].addNewQuestion("text", "qqq1");
+  creator.onDragDropItemEnd();
+  expect(reason).toHaveLength(8);
+  expect(reason[7]).toEqual("DROPPED_FROM_TOOLBOX");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
