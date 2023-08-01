@@ -1,10 +1,12 @@
 import {
   Base,
   Helpers,
+  ISurveyElement,
   ItemValue,
   JsonObjectProperty,
   PageModel,
   Serializer,
+  SurveyModel,
 } from "survey-core";
 import { editorLocalization } from "./editorLocalization";
 import { ISurveyCreatorOptions } from "./creator-settings";
@@ -19,6 +21,13 @@ export enum ObjType {
   Column
 }
 export class SurveyHelper {
+  public static getNewElementName(el: ISurveyElement): string {
+    const survey: SurveyModel = (<any>el).getSurvey();
+    if(!survey) return el.name;
+    if(el.isPage) return this.getNewPageName(survey.pages);
+    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    return this.getNewQuestionName(survey.getAllQuestions());
+  }
   public static getNewPageName(objs: Array<any>) {
     return SurveyHelper.getNewName(
       objs,

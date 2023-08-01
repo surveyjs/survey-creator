@@ -1,12 +1,14 @@
-import { Base, SurveyModel } from "survey-core";
+import { Base, property, ListModel, Action } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
-import { SurveyTextWorker } from "../../textWorker";
+import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 
+const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
   public isJSONChanged: boolean = false;
   public isProcessingImmediately: boolean = false;
   private static updateTextTimeout: number = 1000;
   private jsonEditorChangedTimeoutId: number = -1;
+  @property() hasErrors: boolean;
 
   constructor(protected creator: CreatorBase) {
     super();
@@ -41,7 +43,58 @@ export abstract class JsonEditorBaseModel extends Base {
       }
     }
   }
-  protected abstract setErrors(errors: any[]): void;
+
+  private errorListValue: ListModel;
+  public get errorList(): ListModel {
+    if(!this.errorListValue) {
+      this.errorListValue = new ListModel([], (action: Action) => {
+        const error: SurveyTextWorkerError = action.data;
+        if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
+      }, false);
+      this.errorListValue.searchEnabled = false;
+      this.errorListValue.cssClasses = {
+        item: "svc-json-errors__item",
+        itemIcon: "svc-json-error__icon",
+        itemBody: "svc-json-error",
+        itemsContainer: "svc-json-errors"
+      };
+      this.errorListValue.hasVerticalScroller = true;
+    }
+    return this.errorListValue;
+  }
+
+  protected setErrors(errors: Array<SurveyTextWorkerError>): void {
+    let hasErrors = errors.length > 0;
+    if(hasErrors) {
+      const actions = [];
+      this.createErrorActions(errors).forEach(action => actions.push(action));
+      this.errorList.setItems(actions);
+    }
+    this.hasErrors = hasErrors;
+  }
+  protected gotoError(at: number, row: number, column: number): void {}
+  private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
+    const res = [];
+    let counter = 1;
+    errors.forEach(error => {
+      const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
+      let title = error.text;
+      if(title.length > maxErrorLength + 3) {
+        title = title.substring(0, maxErrorLength) + "...";
+      }
+      title = line + title;
+      const at = error.at;
+      res.push(new Action({
+        id: "error_" + counter++,
+        title: title,
+        tooltip: error.text,
+        iconName: "icon-error",
+        iconSize: 16,
+        data: error
+      }));
+    });
+    return res;
+  }
   public processErrors(text: string): void {
     const textWorker: SurveyTextWorker = new SurveyTextWorker(text);
     this.setErrors(textWorker.errors);
