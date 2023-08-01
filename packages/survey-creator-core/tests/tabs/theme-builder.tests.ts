@@ -679,7 +679,7 @@ test("Theme builder export value from composite question", (): any => {
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(249, 249, 249, 1)");
   expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
 
-  themeEditor.getQuestionByName("themeName").value = "ultra";
+  themeEditor.getQuestionByName("themeName").value = "contrast";
   expect(questionDimLightBackground.value).toEqual("rgba(255, 216, 77, 1)");
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(255, 216, 77, 1)");
   expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
