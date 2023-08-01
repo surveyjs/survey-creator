@@ -12,6 +12,7 @@ import { assign, parseColor } from "../../src/utils/utils";
 import { ComponentCollection, Question, Serializer, SurveyModel } from "survey-core";
 
 import "survey-core/survey.i18n";
+import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 
 const themeFromFile = {
   "cssVariables": {
@@ -886,4 +887,28 @@ test("Theme builder restore PG editor", (): any => {
   expect(themeEditor.getQuestionByName("commonScale").value).toEqual(120);
   expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("17.6px");
   expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
+});
+
+test("Check background image has conditional max size", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  let themeEditor = (themePlugin.model as ThemeSurveyTabViewModel).themeEditorSurvey;
+
+  expect(themeEditor.getQuestionByName("backgroundImage").maxSize).toEqual(65536);
+
+  themePlugin.deactivate();
+
+  creator.onUploadFile.add((_, options) => {
+    options.callback("success", "test_url");
+  });
+  themePlugin.activate();
+
+  themeEditor = (themePlugin.model as ThemeSurveyTabViewModel).themeEditorSurvey;
+  const question = <QuestionFileEditorModel>themeEditor.getQuestionByName("backgroundImage");
+
+  expect(question.maxSize).toEqual(0);
+  question.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(question.value).toBe("test_url");
 });
