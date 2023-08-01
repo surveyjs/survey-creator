@@ -12,7 +12,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
-export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
+export const PredefinedThemes = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
 
 export const PredefinedColors = {
   light: {
@@ -500,9 +500,9 @@ export class ThemeSurveyTabViewModel extends Base {
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
-      if(this.blockChanges) return;
+      if (this.blockChanges) return;
 
-      if(options.name.indexOf("--") === 0) {
+      if (options.name.indexOf("--") === 0) {
         this.themeChanges[options.name] = options.value;
       }
 
@@ -530,7 +530,7 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       this.blockThemeChangedNotifications += 1;
-      if(options.name == "commonScale") {
+      if (options.name == "commonScale") {
         this.survey.triggerResponsiveness(true);
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -613,7 +613,7 @@ export class ThemeSurveyTabViewModel extends Base {
     }
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
-      if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+      if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
         (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
       }
     });
@@ -624,7 +624,7 @@ export class ThemeSurveyTabViewModel extends Base {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
-    if(this.blockThemeChangedNotifications == 0) {
+    if (this.blockThemeChangedNotifications == 0) {
       this.surveyProvider.raiseThemeChanged();
     }
   }
