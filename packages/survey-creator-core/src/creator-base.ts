@@ -177,7 +177,7 @@ export class CreatorBase extends Base
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
   set allowEditSurveyTitle(val: boolean) {
-    this.setPropertyVisibility("survey", val, "title", "description", "logo", "showTitle", "logoWidth", "logoHeight");
+    this.setPropertyVisibility("survey", val, "title", "description", "logo", "logoFit", "showTitle", "logoWidth", "logoHeight");
     this.setPropertyValue("allowEditSurveyTitle", val);
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }

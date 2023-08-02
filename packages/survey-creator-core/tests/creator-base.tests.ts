@@ -2560,8 +2560,18 @@ test("Set allowEditSurveyTitle option", (): any => {
   const creator = new CreatorTester({ allowEditSurveyTitle: false });
   expect(creator.allowEditSurveyTitle).toBeFalsy();
   expect(Serializer.findProperty("survey", "title").visible).toBeFalsy();
+  expect(Serializer.findProperty("survey", "description").visible).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logo").visible).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logoFit").visible).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeFalsy();
+  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeFalsy();
   creator.allowEditSurveyTitle = true;
   expect(Serializer.findProperty("survey", "title").visible).toBeTruthy();
+  expect(Serializer.findProperty("survey", "description").visible).toBeTruthy();
+  expect(Serializer.findProperty("survey", "logo").visible).toBeTruthy();
+  expect(Serializer.findProperty("survey", "logoFit").visible).toBeTruthy();
+  expect(Serializer.findProperty("survey", "logoWidth").visible).toBeTruthy();
+  expect(Serializer.findProperty("survey", "logoHeight").visible).toBeTruthy();
 });
 test("Set allowEditSurveyTitle option with removed logoHeight property", (): any => {
   Serializer.removeProperty("survey", "logoHeight");
