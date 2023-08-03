@@ -148,7 +148,7 @@ export var czStrings = {
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
     imageChooseImage: "Vybrat obrázek",
-    addNewTypeQuestion: "Přidat {0}",
+    addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "automaticky",
     choices_Item: "Položka ",
@@ -183,24 +183,24 @@ export var czStrings = {
       trigger_skipDescription: "Pokud logický výraz vrátí hodnotu true, průzkum přejde na vybranou otázku/zaměří se na ni.",
       trigger_runExpressionDescription: "Pokud logický výraz vrátí hodnotu true, provede se vlastní výraz. Výsledek tohoto výrazu můžete volitelně nastavit do vybrané otázky.",
       completedHtmlOnConditionDescription: "Pokud logický výraz vrátí hodnotu true, změní se výchozí text stránky s poděkováním na zadaný text.",
-      itemExpressionText: "Pokud výraz „{0}“ vrátí hodnotu true:",
+      itemExpressionText: "Pokud výraz „{0}“ vrátí hodnotu true:", //{0} - the expression
       itemEmptyExpressionText: "Nové pravidlo",
-      page_visibilityText: "Zobrazit stránku {0}",
-      panel_visibilityText: "Zobrazit panel {0}",
-      panel_enableText: "Povolit panel {0}",
-      question_visibilityText: "Zobrazit otázku {0}",
-      question_enableText: "Povolit otázku {0}",
-      question_requireText: "Otázka {0} je povinná",
-      column_visibilityText: "zviditelnit sloupec {0} úlohy {1}",
-      column_enableText: "povolit sloupec {0} otázky {1}",
-      column_requireText: "povinný sloupec {0} otázky {1}",
+      page_visibilityText: "Zobrazit stránku {0}", //{0} page name
+      panel_visibilityText: "Zobrazit panel {0}", //{0} panel name
+      panel_enableText: "Povolit panel {0}", //{0} panel name
+      question_visibilityText: "Zobrazit otázku {0}", //{0} question name
+      question_enableText: "Povolit otázku {0}", //{0} question name
+      question_requireText: "Otázka {0} je povinná", //{0} question name
+      column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
+      column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
+      column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
       trigger_completeText: "Průzkum se stává dokončeným",
-      trigger_setvalueText: "Zpochybnit: {0} hodnota {1}",
+      trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Jasná hodnota otázky: {0}", //{0} question name
-      trigger_copyvalueText: "Kopírovat do otázky: {0} hodnota z otázky {1}",
-      trigger_skipText: "Průzkum přeskočí na otázku {0}",
-      trigger_runExpressionText1: "Spustit výraz: „{0}“",
-      trigger_runExpressionText2: " a zpochybnit jeho výsledek: {0}",
+      trigger_copyvalueText: "Kopírovat do otázky: {0} hodnota z otázky {1}", //{0} and {1} question names
+      trigger_skipText: "Průzkum přeskočí na otázku {0}", //{0} question name
+      trigger_runExpressionText1: "Spustit výraz: „{0}“", //{0} the expression
+      trigger_runExpressionText2: " a zpochybnit jeho výsledek: {0}", //{0} question name
       completedHtmlOnConditionText: "Zobrazit vlastní text pro stránku s poděkováním.",
       showAllQuestions: "Všechny otázky",
       showAllActionTypes: "Všechny typy akcí",
@@ -1038,15 +1038,15 @@ export var czStrings = {
     editorShadow: "Hrany / stíny editoru",
     names: {
       default: "Výchozí",
-      contrast: "Kontrast",
+      sharp: "Ostrý",
+      borderless: "Bez okrajů",
+      flat: "Byt",
       plain: "Planina",
-      simple: "Jednoduchý",
-      blank: "Bianko",
-      double: "Dvojitý",
-      bulk: "Množství",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Hravý",
-      ultra: "Ultra"
+      doubleborder: "Dvojitý okraj",
+      layered: "Vrstvený",
+      solid: "Solidní",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Modrozelený",
@@ -1109,3 +1109,10 @@ editorLocalization.locales["cs"] = czStrings;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Hnědý"
 // colors.green: "Green" => "Zelený"
+// names.sharp: "Sharp" => "Ostrý"
+// names.borderless: "Borderless" => "Bez okrajů"
+// names.flat: "Flat" => "Byt"
+// names.doubleborder: "Double Border" => "Dvojitý okraj"
+// names.layered: "Layered" => "Vrstvený"
+// names.solid: "Solid" => "Solidní"
+// names.threedimensional: "3D" => ".3D"

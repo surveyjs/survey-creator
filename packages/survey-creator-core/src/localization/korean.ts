@@ -1038,15 +1038,15 @@ export var koreanStrings = {
     editorShadow: "입력 요소 그림자 효과",
     names: {
       default: "기본값",
-      contrast: "대조",
+      sharp: "날카로운",
+      borderless: "국경",
+      flat: "플랫",
       plain: "평야",
-      simple: "간단한",
-      blank: "빈",
-      double: "배",
-      bulk: "부피",
-      "pseudo-3d": "유사 3D",
-      playful: "장난이 심",
-      ultra: "울트라"
+      doubleborder: "이중 테두리",
+      layered: "계층",
+      solid: "고체",
+      threedimensional: ".3D",
+      contrast: "대조"
     },
     colors: {
       teal: "청록",
@@ -1750,3 +1750,12 @@ editorLocalization.locales["ko"] = koreanStrings;
 // colors.tulip: "Tulip" => "튤립"
 // colors.brown: "Brown" => "갈색"
 // colors.green: "Green" => "녹색"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "날카로운"
+// names.borderless: "Borderless" => "국경"
+// names.flat: "Flat" => "플랫"
+// names.doubleborder: "Double Border" => "이중 테두리"
+// names.layered: "Layered" => "계층"
+// names.solid: "Solid" => "고체"
+// names.threedimensional: "3D" => ".3D"

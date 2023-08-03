@@ -183,24 +183,24 @@ export var turkishStrings = {
       trigger_skipDescription: "Mantıksal ifade geçerli olduğunda anket seçilen soruya atlasın / odaklansın.",
       trigger_runExpressionDescription: "Mantksal ifade geçerli olduğunda ve özel ifade gereçli olur. İsteğe bağlı olarak bu ifade sonucunu seçilen soruya ayarlayabilirsiniz.",
       completedHtmlOnConditionDescription: "Eğer mantıksa ifade geçerli olursa, varsayılan ''Teşekkürler sayfası' yazısı girilen ile dğeiştirilsin.",
-      itemExpressionText: "Mantıksal ifade: '{0}' geçerli olsun:",
+      itemExpressionText: "Mantıksal ifade: '{0}' geçerli olsun:", //{0} - the expression
       itemEmptyExpressionText: "Yeni kural",
-      page_visibilityText: "{0} sayfayı görünür yap",
-      panel_visibilityText: "{0} paneli görünür yap",
-      panel_enableText: "{0} panel aktif olur",
-      question_visibilityText: "{0} soruyu görünür yap",
-      question_enableText: "{0} soruyu aktif yap",
-      question_requireText: "{0} cevabı zorunlu yap",
+      page_visibilityText: "{0} sayfayı görünür yap", //{0} page name
+      panel_visibilityText: "{0} paneli görünür yap", //{0} panel name
+      panel_enableText: "{0} panel aktif olur", //{0} panel name
+      question_visibilityText: "{0} soruyu görünür yap", //{0} question name
+      question_enableText: "{0} soruyu aktif yap", //{0} question name
+      question_requireText: "{0} cevabı zorunlu yap", //{0} question name
       column_visibilityText: "Soru {1} sütununu {0} görünür hale getirme", //{0} column name, {1} question name
       column_enableText: "Sütunun {0} soru {1} etkinleştirin", //{0} column name, {1} question name
       column_requireText: "Sütun {0} soru {1} gerekli hale getirmek", //{0} column name, {1} question name
       trigger_completeText: "Anket tamamlandı",
-      trigger_setvalueText: "Sorunun içine: {0} değer {1}",
+      trigger_setvalueText: "Sorunun içine: {0} değer {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "net soru değeri: {0}", //{0} question name
-      trigger_copyvalueText: "Sorusundan {1}, {0} değerini, soruya kopyala",
-      trigger_skipText: "Soruya geç {0}",
-      trigger_runExpressionText1: "Mantıksal ifadeyi çalıştır: '{0}'",
-      trigger_runExpressionText2: " ve sonuç değerini soruya ekle: {0}",
+      trigger_copyvalueText: "Sorusundan {1}, {0} değerini, soruya kopyala", //{0} and {1} question names
+      trigger_skipText: "Soruya geç {0}", //{0} question name
+      trigger_runExpressionText1: "Mantıksal ifadeyi çalıştır: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " ve sonuç değerini soruya ekle: {0}", //{0} question name
       completedHtmlOnConditionText: "Özel 'Teşekkürler sayfasını' göster.",
       showAllQuestions: "Tüm Sorular",
       showAllActionTypes: "Tüm Eylem Türleri",
@@ -1038,15 +1038,15 @@ export var turkishStrings = {
     editorShadow: "Giriş öğesi gölge efektleri",
     names: {
       default: "Temerrüt",
-      contrast: "Karşıtlık",
+      sharp: "Keskin",
+      borderless: "Kenarlıksız",
+      flat: "Düz",
       plain: "Düz",
-      simple: "Basit",
-      blank: "Boş",
-      double: "Çift",
-      bulk: "Yığın",
-      "pseudo-3d": "Sahte 3D",
-      playful: "Oyunbaz",
-      ultra: "Ultra"
+      doubleborder: "Çift Kenarlık",
+      layered: "Katmanlı",
+      solid: "Katı",
+      threedimensional: ".3D",
+      contrast: "Karşıtlık"
     },
     colors: {
       teal: "Çamurcun",
@@ -1542,3 +1542,12 @@ editorLocalization.locales["tr"] = turkishStrings;
 // colors.tulip: "Tulip" => "Lale"
 // colors.brown: "Brown" => "Kahverengi"
 // colors.green: "Green" => "Yeşil"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Keskin"
+// names.borderless: "Borderless" => "Kenarlıksız"
+// names.flat: "Flat" => "Düz"
+// names.doubleborder: "Double Border" => "Çift Kenarlık"
+// names.layered: "Layered" => "Katmanlı"
+// names.solid: "Solid" => "Katı"
+// names.threedimensional: "3D" => ".3D"

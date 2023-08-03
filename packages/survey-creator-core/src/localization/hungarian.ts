@@ -1038,15 +1038,15 @@ export var huStrings = {
     editorShadow: "Bemeneti elem árnyékeffektusai",
     names: {
       default: "Alapértelmezett",
-      contrast: "Kontraszt",
+      sharp: "Éles",
+      borderless: "Szegély nélküli",
+      flat: "Lapos",
       plain: "Síkság",
-      simple: "Egyszerű",
-      blank: "Üres",
-      double: "Dupla",
-      bulk: "Terjedelem",
-      "pseudo-3d": "Pszeudo 3D",
-      playful: "Játékos",
-      ultra: "Ultra"
+      doubleborder: "Dupla szegély",
+      layered: "Rakott",
+      solid: "Szilárd",
+      threedimensional: ".3D",
+      contrast: "Kontraszt"
     },
     colors: {
       teal: "Kékeszöld",
@@ -1700,3 +1700,12 @@ editorLocalization.locales["hu"] = huStrings;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Barna"
 // colors.green: "Green" => "Zöld"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Éles"
+// names.borderless: "Borderless" => "Szegély nélküli"
+// names.flat: "Flat" => "Lapos"
+// names.doubleborder: "Double Border" => "Dupla szegély"
+// names.layered: "Layered" => "Rakott"
+// names.solid: "Solid" => "Szilárd"
+// names.threedimensional: "3D" => ".3D"

@@ -148,7 +148,7 @@ var persianStrings = {
     surveyPlaceHolder: "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",
     imagePlaceHolder: "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
     imageChooseImage: "انتخاب تصویر",
-    addNewTypeQuestion: "اضافه {0}",
+    addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
     auto: "خودکار",
     choices_Item: "مورد ",
@@ -183,24 +183,24 @@ var persianStrings = {
       trigger_skipDescription: "زمانی که عبارت منطقی صحیح برمی گرداند، سپس نظرسنجی به سوال انتخابی می رود.",
       trigger_runExpressionDescription: "اگر عبارت منطقی مقدار صحیح برگرداند، آنگاه عبارت سفارشی اجرا می شود. شما ممکن است به طور اختیاری این نتیجه را به سوال انتخاب شده تبدیل کنید.",
       completedHtmlOnConditionDescription: " اگر عبارت منطقی مقدار صحیح برگرداند متن صفحه 'تشکر' به متن داده شده تغییر می یابد.",
-      itemExpressionText: "زمانی که عبارت {0} مقدار صحیح بر می گرداند",
+      itemExpressionText: "زمانی که عبارت {0} مقدار صحیح بر می گرداند", //{0} - the expression
       itemEmptyExpressionText: "قانون جدید",
-      page_visibilityText: "صفحه {0} را قابل مشاهده کنید.",
-      panel_visibilityText: "پنل {0} را قابل مشاهده کنید.",
-      panel_enableText: "فعال کردن پنل {0}",
-      question_visibilityText: "سوال {0} را قابل مشاهده کنید.",
-      question_enableText: "فعال کردن سوال {0}",
-      question_requireText: "ایجاد سوال {0} اجباری",
-      column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید",
-      column_enableText: "ستون {0} سوال {1} را فعال کنید",
-      column_requireText: "ستون {0} سوال {1} را الزامی کنید",
+      page_visibilityText: "صفحه {0} را قابل مشاهده کنید.", //{0} page name
+      panel_visibilityText: "پنل {0} را قابل مشاهده کنید.", //{0} panel name
+      panel_enableText: "فعال کردن پنل {0}", //{0} panel name
+      question_visibilityText: "سوال {0} را قابل مشاهده کنید.", //{0} question name
+      question_enableText: "فعال کردن سوال {0}", //{0} question name
+      question_requireText: "ایجاد سوال {0} اجباری", //{0} question name
+      column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", //{0} column name, {1} question name
+      column_enableText: "ستون {0} سوال {1} را فعال کنید", //{0} column name, {1} question name
+      column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
       trigger_completeText: "بررسی نظرسنجی تمام شد",
-      trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید",
+      trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "ارزش سوال روشن: {0}", //{0} question name
-      trigger_copyvalueText: "مقدار سوال {0} را از سوال {1} کپی کنید.",
-      trigger_skipText: "رد کردن نظرسنجی برای سوال {0}",
-      trigger_runExpressionText1: "اجرای عبارت '{0}' ",
-      trigger_runExpressionText2: "و نتیجه آن را داخل سوال {0} ذخیره کنید",
+      trigger_copyvalueText: "مقدار سوال {0} را از سوال {1} کپی کنید.", //{0} and {1} question names
+      trigger_skipText: "رد کردن نظرسنجی برای سوال {0}", //{0} question name
+      trigger_runExpressionText1: "اجرای عبارت '{0}' ", //{0} the expression
+      trigger_runExpressionText2: "و نتیجه آن را داخل سوال {0} ذخیره کنید", //{0} question name
       completedHtmlOnConditionText: "نمایش متن سفارشی برای صفحه 'تشکر'",
       showAllQuestions: "تمام سوالات",
       showAllActionTypes: "همه انواع اقدام",
@@ -1038,15 +1038,15 @@ var persianStrings = {
     editorShadow: "عناصر ورودی اثرات سایه",
     names: {
       default: "پیش فرض",
-      contrast: "کنتراست",
+      sharp: "تیز",
+      borderless: "مرز",
+      flat: "تخت",
       plain: "ساده",
-      simple: "ساده",
-      blank: "خالی",
-      double: "دو",
-      bulk: "فله",
-      "pseudo-3d": "شبه 3D",
-      playful: "بازیگوش",
-      ultra: "فوق العاده"
+      doubleborder: "دو لبه",
+      layered: "لایه",
+      solid: "جامد",
+      threedimensional: ".3D",
+      contrast: "کنتراست"
     },
     colors: {
       teal: "تیل",
@@ -1499,3 +1499,10 @@ editorLocalization.locales["fa"] = persianStrings;
 // colors.tulip: "Tulip" => "لاله"
 // colors.brown: "Brown" => "قهوه ای"
 // colors.green: "Green" => "سبز"
+// names.sharp: "Sharp" => "تیز"
+// names.borderless: "Borderless" => "مرز"
+// names.flat: "Flat" => "تخت"
+// names.doubleborder: "Double Border" => "دو لبه"
+// names.layered: "Layered" => "لایه"
+// names.solid: "Solid" => "جامد"
+// names.threedimensional: "3D" => ".3D"

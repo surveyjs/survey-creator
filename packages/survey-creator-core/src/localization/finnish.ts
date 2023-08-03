@@ -183,24 +183,24 @@ export var fiStrings = {
       trigger_skipDescription: "Kun looginen lauseke palauttaa arvon tosi, kysely siirtyy valittuun kysymykseen / kohdista valittu kysymys.",
       trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
       completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
-      itemExpressionText: "Kun lauseke: '{0}' palauttaa arvon tosi:",
+      itemExpressionText: "Kun lauseke: '{0}' palauttaa arvon tosi:", //{0} - the expression
       itemEmptyExpressionText: "Uusi sääntö",
-      page_visibilityText: "Tee sivu {0} näkyväksi",
-      panel_visibilityText: "Tee paneelista {0} näkyvä",
-      panel_enableText: "Ota paneeli {0} käyttöön",
-      question_visibilityText: "Tee kysymys {0} näkyväksi",
-      question_enableText: "Ota kysymys {0} käyttöön",
-      question_requireText: "Tee kysymyksestä {0} pakollinen",
+      page_visibilityText: "Tee sivu {0} näkyväksi", //{0} page name
+      panel_visibilityText: "Tee paneelista {0} näkyvä", //{0} panel name
+      panel_enableText: "Ota paneeli {0} käyttöön", //{0} panel name
+      question_visibilityText: "Tee kysymys {0} näkyväksi", //{0} question name
+      question_enableText: "Ota kysymys {0} käyttöön", //{0} question name
+      question_requireText: "Tee kysymyksestä {0} pakollinen", //{0} question name
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
       column_requireText: "Tee kysymyksen sarake {0} {1} pakollinen", //{0} column name, {1} question name
       trigger_completeText: "Kyselystä tulee täytetty",
-      trigger_setvalueText: "Laita arvo {1} kysymykseen {0}",
+      trigger_setvalueText: "Laita arvo {1} kysymykseen {0}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Selkeän kysymyksen arvo: {0}", //{0} question name
-      trigger_copyvalueText: "Kopioi kysymykseen: {0} arvo kysymyksestä {1}",
-      trigger_skipText: "Siirry kyselyn kysymykseen {0}",
-      trigger_runExpressionText1: "Suorita lauseke: '{0}'",
-      trigger_runExpressionText2: " ja aseta sen tulos kysymykseen: {0}",
+      trigger_copyvalueText: "Kopioi kysymykseen: {0} arvo kysymyksestä {1}", //{0} and {1} question names
+      trigger_skipText: "Siirry kyselyn kysymykseen {0}", //{0} question name
+      trigger_runExpressionText1: "Suorita lauseke: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " ja aseta sen tulos kysymykseen: {0}", //{0} question name
       completedHtmlOnConditionText: "Näytä mukautettu teksti Kiitos -sivulle.",
       showAllQuestions: "Kaikki kysymykset",
       showAllActionTypes: "Kaikki toimintotyypit",
@@ -1038,15 +1038,15 @@ export var fiStrings = {
     editorShadow: "Syöttöelementin varjotehosteet",
     names: {
       default: "Laiminlyönti",
-      contrast: "Kontrasti",
+      sharp: "Terävä",
+      borderless: "Reunukseton",
+      flat: "Tasainen",
       plain: "Tasanko",
-      simple: "Yksinkertainen",
-      blank: "Aihio",
-      double: "Kaksinkertainen",
-      bulk: "Massa",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Leikkisä",
-      ultra: "Ultra"
+      doubleborder: "Kaksinkertainen reunus",
+      layered: "Kerroksellinen",
+      solid: "Kiinteä",
+      threedimensional: ".3D",
+      contrast: "Kontrasti"
     },
     colors: {
       teal: "Tavi",
@@ -1546,3 +1546,12 @@ editorLocalization.locales["fi"] = fiStrings;
 // colors.tulip: "Tulip" => "Tulppaani"
 // colors.brown: "Brown" => "Ruskea"
 // colors.green: "Green" => "Vihreä"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Terävä"
+// names.borderless: "Borderless" => "Reunukseton"
+// names.flat: "Flat" => "Tasainen"
+// names.doubleborder: "Double Border" => "Kaksinkertainen reunus"
+// names.layered: "Layered" => "Kerroksellinen"
+// names.solid: "Solid" => "Kiinteä"
+// names.threedimensional: "3D" => ".3D"

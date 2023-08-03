@@ -183,24 +183,24 @@ export var nlStrings = {
       trigger_skipDescription: "Als de logische uitdrukking true retourneert, gaat de enquête naar/focust de geselecteerde vraag.",
       trigger_runExpressionDescription: "Wanneer de logische expressie true retourneert, wordt de aangepaste expressie uitgevoerd. U kunt dit expressieresultaat optioneel instellen voor de geselecteerde vraag",
       completedHtmlOnConditionDescription: "Als de logische uitdrukking true retourneert, wordt de standaardtekst voor de 'Bedankpagina' gewijzigd in de opgegeven tekst.",
-      itemExpressionText: "Wanneer expressie: '{0}' true retourneert:",
+      itemExpressionText: "Wanneer expressie: '{0}' true retourneert:", //{0} - the expression
       itemEmptyExpressionText: "Nieuwe regel",
-      page_visibilityText: "Maak pagina {0} zichtbaar",
-      panel_visibilityText: "Maak paneel {0} zichtbaar",
-      panel_enableText: "Schakel paneel {0} in",
-      question_visibilityText: "Maak vraag {0} zichtbaar",
-      question_enableText: "Schakel vraag {0} in",
-      question_requireText: "Stel vraag {0} verplicht",
+      page_visibilityText: "Maak pagina {0} zichtbaar", //{0} page name
+      panel_visibilityText: "Maak paneel {0} zichtbaar", //{0} panel name
+      panel_enableText: "Schakel paneel {0} in", //{0} panel name
+      question_visibilityText: "Maak vraag {0} zichtbaar", //{0} question name
+      question_enableText: "Schakel vraag {0} in", //{0} question name
+      question_requireText: "Stel vraag {0} verplicht", //{0} question name
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", //{0} column name, {1} question name
       column_enableText: "Kolom {0} van vraag maken {1} inschakelen", //{0} column name, {1} question name
       column_requireText: "Kolom {0} met vraag {1} verplicht maken", //{0} column name, {1} question name
       trigger_completeText: "Enquête wordt voltooid",
-      trigger_setvalueText: "Stel de vraag: {0} waarde {1}",
+      trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "duidelijke vraagwaarde: {0}", //{0} question name
-      trigger_copyvalueText: "Kopieer naar vraag: {0} waarde uit vraag {1}",
-      trigger_skipText: "Enquête ga verder met de vraag {0}",
-      trigger_runExpressionText1: "Uitdrukking uitvoeren: '{0}'",
-      trigger_runExpressionText2: " en stel het resultaat in vraag: {0}",
+      trigger_copyvalueText: "Kopieer naar vraag: {0} waarde uit vraag {1}", //{0} and {1} question names
+      trigger_skipText: "Enquête ga verder met de vraag {0}", //{0} question name
+      trigger_runExpressionText1: "Uitdrukking uitvoeren: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " en stel het resultaat in vraag: {0}", //{0} question name
       completedHtmlOnConditionText: "Toon aangepaste tekst voor de 'Bedankpagina'.",
       showAllQuestions: "Alle vragen",
       showAllActionTypes: "Alle actietypen",
@@ -1038,15 +1038,15 @@ export var nlStrings = {
     editorShadow: "Schaduweffecten van invoerelementen",
     names: {
       default: "Verstek",
-      contrast: "Tegenstelling",
+      sharp: "Scherp",
+      borderless: "Grenzeloos",
+      flat: "Plat",
       plain: "Vlakte",
-      simple: "Eenvoudig",
-      blank: "Blanco",
-      double: "Dubbel",
-      bulk: "Omvang",
-      "pseudo-3d": "Pseudo-3D",
-      playful: "Dartel",
-      ultra: "Ultra"
+      doubleborder: "Dubbele rand",
+      layered: "Gelaagd",
+      solid: "Degelijk",
+      threedimensional: ".3D",
+      contrast: "Tegenstelling"
     },
     colors: {
       teal: "Taling",
@@ -1526,3 +1526,12 @@ editorLocalization.locales["nl"] = nlStrings;
 // colors.tulip: "Tulip" => "Tulp"
 // colors.brown: "Brown" => "Bruin"
 // colors.green: "Green" => "Groen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Scherp"
+// names.borderless: "Borderless" => "Grenzeloos"
+// names.flat: "Flat" => "Plat"
+// names.doubleborder: "Double Border" => "Dubbele rand"
+// names.layered: "Layered" => "Gelaagd"
+// names.solid: "Solid" => "Degelijk"
+// names.threedimensional: "3D" => ".3D"

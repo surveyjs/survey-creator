@@ -183,24 +183,24 @@ export var msStrings = {
       trigger_skipDescription: "Apabila ekspresi logik mengembalikan nilai benar, maka tinjauan melangkau kepada / fokus pada soalan yang dipilih.",
       trigger_runExpressionDescription: "Apabila ekspresi mengembalikan nilai benar, maka ekspresi tersuai akan dilaksanakan. Anda boleh menetapkan keputusan ekspresi ini kepada soalan yang dipilih secara pilihan",
       completedHtmlOnConditionDescription: "Apabila ekspresi logik mengembalikan nilai benar, maka teks lalai untuk 'Halaman terima kasih' berubah kepada teks yang diberikan.",
-      itemExpressionText: "Apabila ekspresi: '{0}' mengembalikan nilai benar:",
+      itemExpressionText: "Apabila ekspresi: '{0}' mengembalikan nilai benar:", //{0} - the expression
       itemEmptyExpressionText: "Peraturan baru",
-      page_visibilityText: "Jadikan halaman {0} boleh dilihat",
-      panel_visibilityText: "Jadikan panel {0} boleh dilihat",
-      panel_enableText: "Jadikan panel {0} didayakan",
-      question_visibilityText: "Jadikan soalan {0} boleh dilihat",
-      question_enableText: "Jadikan soalan {0} didayakan",
-      question_requireText: "Jadikan soalan {0} diperlukan",
+      page_visibilityText: "Jadikan halaman {0} boleh dilihat", //{0} page name
+      panel_visibilityText: "Jadikan panel {0} boleh dilihat", //{0} panel name
+      panel_enableText: "Jadikan panel {0} didayakan", //{0} panel name
+      question_visibilityText: "Jadikan soalan {0} boleh dilihat", //{0} question name
+      question_enableText: "Jadikan soalan {0} didayakan", //{0} question name
+      question_requireText: "Jadikan soalan {0} diperlukan", //{0} question name
       column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
       column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
       column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
       trigger_completeText: "Tinjauan dilengkapkan",
-      trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}",
+      trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "nilai soalan yang jelas: {0}", //{0} question name
-      trigger_copyvalueText: "Salin kepada soalan: {0} nilai daripada soalan {1}",
-      trigger_skipText: "Tinjauan melangkau ke soalan {0}",
-      trigger_runExpressionText1: "Jalankan ekspresi: '{0}'",
-      trigger_runExpressionText2: " dan tetapkan keputusannya kepada soalan: {0}",
+      trigger_copyvalueText: "Salin kepada soalan: {0} nilai daripada soalan {1}", //{0} and {1} question names
+      trigger_skipText: "Tinjauan melangkau ke soalan {0}", //{0} question name
+      trigger_runExpressionText1: "Jalankan ekspresi: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " dan tetapkan keputusannya kepada soalan: {0}", //{0} question name
       completedHtmlOnConditionText: "Tunjukkan teks tersuai untuk 'Halaman terima kasih'.",
       showAllQuestions: "Semua Soalan",
       showAllActionTypes: "Semua Jenis Tindakan",
@@ -1038,15 +1038,15 @@ export var msStrings = {
     editorShadow: "Kesan bayang unsur input",
     names: {
       default: "Lalai",
-      contrast: "Sebaliknya",
+      sharp: "Tajam",
+      borderless: "Tanpa sempadan",
+      flat: "Rata",
       plain: "Biasa",
-      simple: "Mudah",
-      blank: "Kosong",
-      double: "Double",
-      bulk: "Pukal",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Suka bermain",
-      ultra: "Ultra"
+      doubleborder: "Sempadan Berkembar",
+      layered: "Berlapis",
+      solid: "Pepejal",
+      threedimensional: ".3D",
+      contrast: "Sebaliknya"
     },
     colors: {
       teal: "Teal",
@@ -1500,3 +1500,12 @@ editorLocalization.locales["ms"] = msStrings;
 // colors.tulip: "Tulip" => "Tulip"
 // colors.brown: "Brown" => "Brown"
 // colors.green: "Green" => "Hijau"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Tajam"
+// names.borderless: "Borderless" => "Tanpa sempadan"
+// names.flat: "Flat" => "Rata"
+// names.doubleborder: "Double Border" => "Sempadan Berkembar"
+// names.layered: "Layered" => "Berlapis"
+// names.solid: "Solid" => "Pepejal"
+// names.threedimensional: "3D" => ".3D"

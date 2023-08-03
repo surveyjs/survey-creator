@@ -1038,15 +1038,15 @@ export let svStrings = {
     editorShadow: "Skuggeffekter för indataelement",
     names: {
       default: "Standard",
-      contrast: "Kontrast",
+      sharp: "Skarp",
+      borderless: "Marginalfri",
+      flat: "Flat",
       plain: "Slätt",
-      simple: "Enkel",
-      blank: "Blank",
-      double: "Dubbel",
-      bulk: "Omfång",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Lekfull",
-      ultra: "Ultra"
+      doubleborder: "Dubbel kantlinje",
+      layered: "Lager",
+      solid: "Solid",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Kricka",
@@ -1724,3 +1724,12 @@ editorLocalization.locales["sv"] = svStrings;
 // colors.tulip: "Tulip" => "Tulpan"
 // colors.brown: "Brown" => "Brun"
 // colors.green: "Green" => "Grön"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Skarp"
+// names.borderless: "Borderless" => "Marginalfri"
+// names.flat: "Flat" => "Flat"
+// names.doubleborder: "Double Border" => "Dubbel kantlinje"
+// names.layered: "Layered" => "Lager"
+// names.solid: "Solid" => "Solid"
+// names.threedimensional: "3D" => ".3D"

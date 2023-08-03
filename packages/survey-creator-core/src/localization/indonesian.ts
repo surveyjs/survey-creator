@@ -1038,15 +1038,15 @@ export var indonesianStrings = {
     editorShadow: "Efek bayangan elemen input",
     names: {
       default: "Default",
-      contrast: "Kontras",
+      sharp: "Tajam",
+      borderless: "Tanpa batas",
+      flat: "Rata",
       plain: "Polos",
-      simple: "Sederhana",
-      blank: "Kosong",
-      double: "Dobel",
-      bulk: "Massal",
-      "pseudo-3d": "Semu 3D",
-      playful: "Menyenangkan",
-      ultra: "Ultra"
+      doubleborder: "Batas Ganda",
+      layered: "Berlapis",
+      solid: "Keras",
+      threedimensional: ".3D",
+      contrast: "Kontras"
     },
     colors: {
       teal: "Teal",
@@ -1701,3 +1701,12 @@ editorLocalization.locales["id"] = indonesianStrings;
 // colors.tulip: "Tulip" => "Tulip"
 // colors.brown: "Brown" => "Coklat"
 // colors.green: "Green" => "Hijau"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Tajam"
+// names.borderless: "Borderless" => "Tanpa batas"
+// names.flat: "Flat" => "Rata"
+// names.doubleborder: "Double Border" => "Batas Ganda"
+// names.layered: "Layered" => "Berlapis"
+// names.solid: "Solid" => "Keras"
+// names.threedimensional: "3D" => ".3D"

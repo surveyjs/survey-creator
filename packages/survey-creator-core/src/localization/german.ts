@@ -148,7 +148,7 @@ var germanTranslation = {
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",
     imagePlaceHolder: "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus",
     imageChooseImage: "Bild auswählen",
-    addNewTypeQuestion: "Add {0}",
+    addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "automatisch",
     choices_Item: "Artikel ",
@@ -183,24 +183,24 @@ var germanTranslation = {
       trigger_skipDescription: "Wenn der logische Ausdruck wahr ergibt, springt die Umfrage zur ausgewählten Frage.",
       trigger_runExpressionDescription: "Wenn der logische Ausdruck wahr ergibt, wird die benutzerdefinierte Anweisung ausgeführt. Sie können optional das Ergebnis der Anweisung in die ausgewählte Frage einsetzen.",
       completedHtmlOnConditionDescription: "Wenn der logische Ausdruck wahr ergibt, dann wird der Standardtext der Abschlussseite der Umfrage mit dem gegebenen Text ersetzt.",
-      itemExpressionText: "Wenn der Ausdruck '{0}' wahr ergibt:",
+      itemExpressionText: "Wenn der Ausdruck '{0}' wahr ergibt:", //{0} - the expression
       itemEmptyExpressionText: "Neue Regel",
-      page_visibilityText: "Mache die Seite {0} sichtbar",
-      panel_visibilityText: "Mache das Panel {0} sichtbar",
-      panel_enableText: "Aktiviere das Panel {0}",
-      question_visibilityText: "Mache die Frage {0} sichtbar",
-      question_enableText: "Aktiviere die Frage {0}",
-      question_requireText: "Mache die Frage {0} erforderlich",
-      column_visibilityText: "Mache die Spalte {0} von Frage {1} sichtbar",
-      column_enableText: "Aktiviere die Spalte {0} von Frage {1}",
-      column_requireText: "Mache die Spalte {0} von Frage {1} erforderlich",
+      page_visibilityText: "Mache die Seite {0} sichtbar", //{0} page name
+      panel_visibilityText: "Mache das Panel {0} sichtbar", //{0} panel name
+      panel_enableText: "Aktiviere das Panel {0}", //{0} panel name
+      question_visibilityText: "Mache die Frage {0} sichtbar", //{0} question name
+      question_enableText: "Aktiviere die Frage {0}", //{0} question name
+      question_requireText: "Mache die Frage {0} erforderlich", //{0} question name
+      column_visibilityText: "Mache die Spalte {0} von Frage {1} sichtbar", //{0} column name, {1} question name
+      column_enableText: "Aktiviere die Spalte {0} von Frage {1}", //{0} column name, {1} question name
+      column_requireText: "Mache die Spalte {0} von Frage {1} erforderlich", //{0} column name, {1} question name
       trigger_completeText: "Umfrage abschließen",
-      trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein",
+      trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klarer Fragewert: {0}", //{0} question name
-      trigger_copyvalueText: "Kopiere in Frage {0} den Wert von Frage {1}",
-      trigger_skipText: "Gehe zu Frage {0}",
-      trigger_runExpressionText1: "Führe folgenden Ausdruck aus: '{0}'",
-      trigger_runExpressionText2: " und setze das Ergebnis in Frage {0} ein",
+      trigger_copyvalueText: "Kopiere in Frage {0} den Wert von Frage {1}", //{0} and {1} question names
+      trigger_skipText: "Gehe zu Frage {0}", //{0} question name
+      trigger_runExpressionText1: "Führe folgenden Ausdruck aus: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " und setze das Ergebnis in Frage {0} ein", //{0} question name
       completedHtmlOnConditionText: "Zeigen Sie einen benutzerdefinierten Text auf der Abschlussseite der Umfrage an.",
       showAllQuestions: "Alle Fragen anzeigen",
       showAllActionTypes: "Alle Aktionen anzeigen",
@@ -1038,15 +1038,15 @@ var germanTranslation = {
     editorShadow: "Schatteneffekte von Eingabeelementen",
     names: {
       default: "Vorgabe",
-      contrast: "Kontrast",
+      sharp: "Scharf",
+      borderless: "Ohne Rand",
+      flat: "Flach",
       plain: "Einfach",
-      simple: "Einfach",
-      blank: "Leer",
-      double: "Doppelt",
-      bulk: "Masse",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Verspielt",
-      ultra: "Ultra"
+      doubleborder: "Doppelter Rand",
+      layered: "Stufig",
+      solid: "Fest",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Krickente",
@@ -1299,3 +1299,12 @@ editorLocalization.locales["de"] = germanTranslation;
 // colors.tulip: "Tulip" => "Tulpe"
 // colors.brown: "Brown" => "Braun"
 // colors.green: "Green" => "Grün"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Scharf"
+// names.borderless: "Borderless" => "Ohne Rand"
+// names.flat: "Flat" => "Flach"
+// names.doubleborder: "Double Border" => "Doppelter Rand"
+// names.layered: "Layered" => "Stufig"
+// names.solid: "Solid" => "Fest"
+// names.threedimensional: "3D" => ".3D"

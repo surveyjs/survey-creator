@@ -64,9 +64,8 @@ module.exports = {
         missedKeysStr = "// This dictionary contains " + missedKeys + " untranslated or inherited localization strings.\n// These strings are commented out. Uncomment and edit them if you want to add your translations.\n";
       }
       if(Array.isArray(translatedKeys)) {
-        let keys = [];
+        let keys = [""];
         if(text.indexOf("// The following strings have") < 0) {
-          keys.push("");
           keys.push("// The following strings have been translated by a machine translation service");
           keys.push("// Remove those strings that you have corrected manually");
         }
@@ -139,9 +138,9 @@ module.exports = {
         lines.push(this.getNewLineText(level) + line + commaText);
         propComment = !!this.propertiesComments[key] ? " //" + this.propertiesComments[key] : "";
       }
-    }
-    if(!!propComment) {
-      lines[lines.length - 1] += propComment;
+      if(!!propComment) {
+        lines[lines.length - 1] += propComment;
+      }
     }
     return missedKeys;
   },

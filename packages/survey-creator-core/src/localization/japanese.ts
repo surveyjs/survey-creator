@@ -183,24 +183,24 @@ export var jaStrings = {
       trigger_skipDescription: "論理式がtrue（真）を返した場合、アンケートは選択された質問にスキップ/フォーカスされます。",
       trigger_runExpressionDescription: "論理式がtrue（真）を返した場合、カスタム式が実行されます。オプションで、この式の結果を選択した質問に設定することができます。",
       completedHtmlOnConditionDescription: "論理式がtrue（真）を返した場合、「サンキューページ」のデフォルトテキストは指定されたものに変更されます。",
-      itemExpressionText: "式：「{0}」がtrue（真）を返した場合：",
+      itemExpressionText: "式：「{0}」がtrue（真）を返した場合：", //{0} - the expression
       itemEmptyExpressionText: "新しいルール",
-      page_visibilityText: "ページ{0}を表示にする",
-      panel_visibilityText: "パネル{0}を表示にする",
-      panel_enableText: "パネル{0}を有効にする",
-      question_visibilityText: "質問{0}を表示にする",
-      question_enableText: "質問{0}を有効にする",
-      question_requireText: "質問{0}を必須にする",
+      page_visibilityText: "ページ{0}を表示にする", //{0} page name
+      panel_visibilityText: "パネル{0}を表示にする", //{0} panel name
+      panel_enableText: "パネル{0}を有効にする", //{0} panel name
+      question_visibilityText: "質問{0}を表示にする", //{0} question name
+      question_enableText: "質問{0}を有効にする", //{0} question name
+      question_requireText: "質問{0}を必須にする", //{0} question name
       column_visibilityText: "質問{1}の列{0}を表示する", //{0} column name, {1} question name
       column_enableText: "質問の列{0}を有効にする{1}", //{0} column name, {1} question name
       column_requireText: "質問{1}の列{0}を必須にする", //{0} column name, {1} question name
       trigger_completeText: "アンケートが完了する",
-      trigger_setvalueText: "質問：{0}値{1}に設定する",
+      trigger_setvalueText: "質問：{0}値{1}に設定する", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "明確な質問値:{0}", //{0} question name
-      trigger_copyvalueText: "質問{1}から質問：{0}値にコピーする",
-      trigger_skipText: "アンケートは質問{0}にスキップする",
-      trigger_runExpressionText1: "式：「{0}」を実行する",
-      trigger_runExpressionText2: " そして、その結果を質問：{0}に設定する",
+      trigger_copyvalueText: "質問{1}から質問：{0}値にコピーする", //{0} and {1} question names
+      trigger_skipText: "アンケートは質問{0}にスキップする", //{0} question name
+      trigger_runExpressionText1: "式：「{0}」を実行する", //{0} the expression
+      trigger_runExpressionText2: " そして、その結果を質問：{0}に設定する", //{0} question name
       completedHtmlOnConditionText: "「サンキューページ」のカスタムテキストを表示します。",
       showAllQuestions: "すべての質問",
       showAllActionTypes: "すべてのアクションタイプ",
@@ -1038,15 +1038,15 @@ export var jaStrings = {
     editorShadow: "入力要素の影の効果",
     names: {
       default: "デフォルト",
-      contrast: "対照",
+      sharp: "鋭い",
+      borderless: "ボーダレス",
+      flat: "平",
       plain: "平地",
-      simple: "簡単",
-      blank: "空砲",
-      double: "複",
-      bulk: "嵩",
-      "pseudo-3d": "擬似 3D",
-      playful: "遊戯的",
-      ultra: "ウルトラ"
+      doubleborder: "二重ボーダー",
+      layered: "層状",
+      solid: "固体",
+      threedimensional: ".3D",
+      contrast: "対照"
     },
     colors: {
       teal: "小鴨",
@@ -1546,3 +1546,12 @@ editorLocalization.locales["ja"] = jaStrings;
 // colors.tulip: "Tulip" => "チューリップ"
 // colors.brown: "Brown" => "褐色"
 // colors.green: "Green" => "緑"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "鋭い"
+// names.borderless: "Borderless" => "ボーダレス"
+// names.flat: "Flat" => "平"
+// names.doubleborder: "Double Border" => "二重ボーダー"
+// names.layered: "Layered" => "層状"
+// names.solid: "Solid" => "固体"
+// names.threedimensional: "3D" => ".3D"

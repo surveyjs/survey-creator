@@ -183,24 +183,24 @@ export var hrStrings = {
       trigger_skipDescription: "Kada se logička ekspresija vrati istinita, anketa preskače na / fokusira odabrano pitanje.",
       trigger_runExpressionDescription: "Kada se logička ekspresija vrati istinita, tada se izvodi prilagođeni izraz. Taj rezultat izraza možete neobavezno postaviti u odabrano pitanje.",
       completedHtmlOnConditionDescription: "Ako se logička ekspresija vrati istinita, zadani tekst za 'Thank you page' mijenja se u zadani.",
-      itemExpressionText: "Kada se izraz '{0}' vrati istinit",
+      itemExpressionText: "Kada se izraz '{0}' vrati istinit", //{0} - the expression
       itemEmptyExpressionText: "Novo pravilo",
-      page_visibilityText: "Učinite stranicu {0} vidljivom",
-      panel_visibilityText: "Učinite ploču {0} vidljivom",
-      panel_enableText: "Omogući panel x {0}",
-      question_visibilityText: "Učinite pitanje {0} vidljivim",
-      question_enableText: "Omogući pitanje {0}",
-      question_requireText: "Neka pitanje {0} bude potrebno",
+      page_visibilityText: "Učinite stranicu {0} vidljivom", //{0} page name
+      panel_visibilityText: "Učinite ploču {0} vidljivom", //{0} panel name
+      panel_enableText: "Omogući panel x {0}", //{0} panel name
+      question_visibilityText: "Učinite pitanje {0} vidljivim", //{0} question name
+      question_enableText: "Omogući pitanje {0}", //{0} question name
+      question_requireText: "Neka pitanje {0} bude potrebno", //{0} question name
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
       trigger_completeText: "Anketa se dovrša",
-      trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}",
+      trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Očisti vrijednost pitanja: {0}", //{0} question name
-      trigger_copyvalueText: "Kopirajte u pitanje: {0} vrijednost od pitanja {1}",
-      trigger_skipText: "Anketa preskače na pitanje {0}",
-      trigger_runExpressionText1: "Pokretanje izraza: '{0}'",
-      trigger_runExpressionText2: " i dovela u pitanje svoj rezultat: {0}",
+      trigger_copyvalueText: "Kopirajte u pitanje: {0} vrijednost od pitanja {1}", //{0} and {1} question names
+      trigger_skipText: "Anketa preskače na pitanje {0}", //{0} question name
+      trigger_runExpressionText1: "Pokretanje izraza: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " i dovela u pitanje svoj rezultat: {0}", //{0} question name
       completedHtmlOnConditionText: "Prikazati prilagođeni tekst za 'Thank you page'.",
       showAllQuestions: "Sva pitanja",
       showAllActionTypes: "Sve vrste akcija",
@@ -1038,15 +1038,15 @@ export var hrStrings = {
     editorShadow: "Efekti sjene ulaznog elementa",
     names: {
       default: "Propust",
-      contrast: "Razlika",
+      sharp: "Oštar",
+      borderless: "Bez obruba",
+      flat: "Stan",
       plain: "Ravnica",
-      simple: "Jednostavan",
-      blank: "Prazno",
-      double: "Dvostruk",
-      bulk: "Veličina",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Razigran",
-      ultra: "Ultra"
+      doubleborder: "Dvostruki obrub",
+      layered: "Slojevita",
+      solid: "Solidan",
+      threedimensional: ".3D",
+      contrast: "Razlika"
     },
     colors: {
       teal: "Teal",
@@ -1540,3 +1540,12 @@ editorLocalization.locales["hr"] = hrStrings;
 // colors.tulip: "Tulip" => "Lala"
 // colors.brown: "Brown" => "Smeđ"
 // colors.green: "Green" => "Zelen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Oštar"
+// names.borderless: "Borderless" => "Bez obruba"
+// names.flat: "Flat" => "Stan"
+// names.doubleborder: "Double Border" => "Dvostruki obrub"
+// names.layered: "Layered" => "Slojevita"
+// names.solid: "Solid" => "Solidan"
+// names.threedimensional: "3D" => ".3D"

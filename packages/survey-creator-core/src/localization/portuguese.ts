@@ -148,7 +148,7 @@ var portugueseTranslation = {
     surveyPlaceHolder: "O questionário está vazio. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
     imagePlaceHolder: "Arraste e solte uma imagem aqui ou clique no botão abaixo e escolha uma imagem para carregar",
     imageChooseImage: "Escolha a imagem",
-    addNewTypeQuestion: "Adicionar {0}",
+    addNewTypeQuestion: "Adicionar {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "auto",
     choices_Item: "Item ",
@@ -183,24 +183,24 @@ var portugueseTranslation = {
       trigger_skipDescription: "Quando a expressão lógica volta a ser ativa, então o questionário salta para / focaliza a pergunta seleccionada.",
       trigger_runExpressionDescription: "Quando a expressão lógica volta a ser ativaa, a expressão personalizada é executada. Opcionalmente, pode definir o resultado desta expressão para a pergunta seleccionada",
       completedHtmlOnConditionDescription: "Se a expressão lógica estiver ativa, então o texto padrão para a 'Página de agradecimento' é alterado para a dada.",
-      itemExpressionText: "Quando a expressão: '{0}' volta a ficar ativa",
+      itemExpressionText: "Quando a expressão: '{0}' volta a ficar ativa", //{0} - the expression
       itemEmptyExpressionText: "Nova regra",
-      page_visibilityText: "tornar a página {0} visível",
-      panel_visibilityText: "tornar painel {0} visível",
-      panel_enableText: "tornar painel {0} ativa",
-      question_visibilityText: "torna questão {0} visível",
-      question_enableText: "tornar questão {0} ativa",
-      question_requireText: "tornar questão {0} obrigatória",
-      column_visibilityText: "tornar coluna {0} da questão {1} visível",
-      column_enableText: "tornar coluna {0} da questão {1} ativa",
-      column_requireText: "torna coluna {0} da questão {1} obrigatória",
+      page_visibilityText: "tornar a página {0} visível", //{0} page name
+      panel_visibilityText: "tornar painel {0} visível", //{0} panel name
+      panel_enableText: "tornar painel {0} ativa", //{0} panel name
+      question_visibilityText: "torna questão {0} visível", //{0} question name
+      question_enableText: "tornar questão {0} ativa", //{0} question name
+      question_requireText: "tornar questão {0} obrigatória", //{0} question name
+      column_visibilityText: "tornar coluna {0} da questão {1} visível", //{0} column name, {1} question name
+      column_enableText: "tornar coluna {0} da questão {1} ativa", //{0} column name, {1} question name
+      column_requireText: "torna coluna {0} da questão {1} obrigatória", //{0} column name, {1} question name
       trigger_completeText: "o questionário fica completo",
-      trigger_setvalueText: "Colocar em questão: {0} valor {1}",
+      trigger_setvalueText: "Colocar em questão: {0} valor {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "valor claro da pergunta: {0}", //{0} question name
-      trigger_copyvalueText: "Copiar a questão: {0} valor da questão {1}",
-      trigger_skipText: "pular para a questão do questionário {0}",
-      trigger_runExpressionText1: "executar expressão: '{0}'",
-      trigger_runExpressionText2: " e colocar seu resultado em questão: {0}",
+      trigger_copyvalueText: "Copiar a questão: {0} valor da questão {1}", //{0} and {1} question names
+      trigger_skipText: "pular para a questão do questionário {0}", //{0} question name
+      trigger_runExpressionText1: "executar expressão: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " e colocar seu resultado em questão: {0}", //{0} question name
       completedHtmlOnConditionText: "mostrar texto costumizado para a 'página de agradecimento'.",
       showAllQuestions: "Todas as Questões",
       showAllActionTypes: "Todos os Tipos de Questões",
@@ -1038,15 +1038,15 @@ var portugueseTranslation = {
     editorShadow: "Efeitos de sombra do elemento de entrada",
     names: {
       default: "Inadimplência",
-      contrast: "Contraste",
+      sharp: "Afiado",
+      borderless: "Sem fronteiras",
+      flat: "Plano",
       plain: "Planície",
-      simple: "Simples",
-      blank: "Em branco",
-      double: "Dobrar",
-      bulk: "Granel",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Brincalhão",
-      ultra: "Ultra"
+      doubleborder: "Borda Dupla",
+      layered: "Camadas",
+      solid: "Sólido",
+      threedimensional: ".3D",
+      contrast: "Contraste"
     },
     colors: {
       teal: "Azul-petróleo",
@@ -1210,3 +1210,10 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // colors.tulip: "Tulip" => "Tulipa"
 // colors.brown: "Brown" => "Marrom"
 // colors.green: "Green" => "Verde"
+// names.sharp: "Sharp" => "Afiado"
+// names.borderless: "Borderless" => "Sem fronteiras"
+// names.flat: "Flat" => "Plano"
+// names.doubleborder: "Double Border" => "Borda Dupla"
+// names.layered: "Layered" => "Camadas"
+// names.solid: "Solid" => "Sólido"
+// names.threedimensional: "3D" => ".3D"

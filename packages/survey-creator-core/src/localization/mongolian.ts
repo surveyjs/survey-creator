@@ -148,7 +148,7 @@ export var mnStrings = {
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
     imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
     imageChooseImage: "Зураг сонгох",
-    addNewTypeQuestion: "{0} нэмэх",
+    addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
     chooseLogoPlaceholder: "[Лого]",
     auto: "автомат",
     choices_Item: "Хэсэг ",
@@ -183,24 +183,24 @@ export var mnStrings = {
       trigger_skipDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд санал асуулга сонгосон асуултыг алгасна / харуулна.",
       trigger_runExpressionDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд хэрэглэгчийн илэрхийллийг ажиллуулна. Та энэ илэрхийллийн үр дүнг  сонгосон асуултын хариулт болгоно.",
       completedHtmlOnConditionDescription: "Хэрэв логик илэрхийлэл биелэгдсэн тохиолдолд үндсэн 'Баярлалаа' хуудас зааж өгсөн хуудсаар солигдоно.",
-      itemExpressionText: "Илэрхийлэл: '{0}' биелсэн бол",
+      itemExpressionText: "Илэрхийлэл: '{0}' биелсэн бол", //{0} - the expression
       itemEmptyExpressionText: "Шинэ дүрэм",
-      page_visibilityText: "Хуудсыг {0} харагддаг болгох",
-      panel_visibilityText: "{0} панелийг харагддаг болгох",
-      panel_enableText: "{0} панелийг идэвхжүүлэх",
-      question_visibilityText: "{0} асуултыг харагддаг болгох",
-      question_enableText: "{0} асуултыг идэвхжүүлэх",
-      question_requireText: "{0} асуултыг заавал бөглөх болгох",
-      column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох",
-      column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх",
-      column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох",
+      page_visibilityText: "Хуудсыг {0} харагддаг болгох", //{0} page name
+      panel_visibilityText: "{0} панелийг харагддаг болгох", //{0} panel name
+      panel_enableText: "{0} панелийг идэвхжүүлэх", //{0} panel name
+      question_visibilityText: "{0} асуултыг харагддаг болгох", //{0} question name
+      question_enableText: "{0} асуултыг идэвхжүүлэх", //{0} question name
+      question_requireText: "{0} асуултыг заавал бөглөх болгох", //{0} question name
+      column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} column name, {1} question name
+      column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} column name, {1} question name
+      column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} column name, {1} question name
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
-      trigger_setvalueText: "{0} Асуултад оруулах утга: {1}",
+      trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "тодорхой асуултын үнэ цэнэ: {0}", //{0} question name
-      trigger_copyvalueText: "{0} Асуулт руу хуулах утга: {1}",
-      trigger_skipText: "{0} Санал асуулгын асуулт руу үсрэх",
-      trigger_runExpressionText1: "'{0}' илэрхийлэлг ажиллуулах: ",
-      trigger_runExpressionText2: " Түүний хариултыг асуултад оруулах: {0}",
+      trigger_copyvalueText: "{0} Асуулт руу хуулах утга: {1}", //{0} and {1} question names
+      trigger_skipText: "{0} Санал асуулгын асуулт руу үсрэх", //{0} question name
+      trigger_runExpressionText1: "'{0}' илэрхийлэлг ажиллуулах: ", //{0} the expression
+      trigger_runExpressionText2: " Түүний хариултыг асуултад оруулах: {0}", //{0} question name
       completedHtmlOnConditionText: "'Баярлалаа' хуудсанд тусгай текст харуулах.",
       showAllQuestions: "Бүх асуулт",
       showAllActionTypes: "Бүх үйлдлийн төрлүүд",
@@ -1038,15 +1038,15 @@ export var mnStrings = {
     editorShadow: "Оролт элементийн сүүдрийн нөлөө",
     names: {
       default: "Дефолт",
-      contrast: "Эсрэг тэсрэг",
+      sharp: "Хурц",
+      borderless: "Хил хязгааргүй",
+      flat: "Хавтгай",
       plain: "Энгийн",
-      simple: "Энгийн",
-      blank: "Хоосон",
-      double: "Хоёр дахин",
-      bulk: "Булк",
-      "pseudo-3d": "Псевдо 3D",
-      playful: "Тоглосон",
-      ultra: "Ультра"
+      doubleborder: "Хоёр хил",
+      layered: "Давхарласан",
+      solid: "Бат бөх",
+      threedimensional: ".3D",
+      contrast: "Эсрэг тэсрэг"
     },
     colors: {
       teal: "Цайл",
@@ -1200,3 +1200,10 @@ editorLocalization.locales["mn"] = mnStrings;
 // colors.tulip: "Tulip" => "Тюлип"
 // colors.brown: "Brown" => "Браун"
 // colors.green: "Green" => "Ногоон"
+// names.sharp: "Sharp" => "Хурц"
+// names.borderless: "Borderless" => "Хил хязгааргүй"
+// names.flat: "Flat" => "Хавтгай"
+// names.doubleborder: "Double Border" => "Хоёр хил"
+// names.layered: "Layered" => "Давхарласан"
+// names.solid: "Solid" => "Бат бөх"
+// names.threedimensional: "3D" => ".3D"

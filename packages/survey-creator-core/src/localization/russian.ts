@@ -183,24 +183,24 @@ export var ruStrings = {
       trigger_skipDescription: "Когда логическое выражение вернет 'true', тогда опрос переходит к/фокусируется на выбранном вопросе.",
       trigger_runExpressionDescription: "Когда логическое выражение возвращает 'true',тогда выполняется пользовательское выражение. Вы можете при желании установить этот результат выражения в выбранный вопрос.",
       completedHtmlOnConditionDescription: "Если логическое выражение возвращает 'true', то текст по умолчанию для 'Страницы благодарности' изменяется на заданный.",
-      itemExpressionText: "Когда выражение: '{0}' возвращает 'true'",
+      itemExpressionText: "Когда выражение: '{0}' возвращает 'true'", //{0} - the expression
       itemEmptyExpressionText: "Новое правило",
-      page_visibilityText: "Сделать страницу {0} видимой",
-      panel_visibilityText: "Сделать панель {0} видимой",
-      panel_enableText: "Сделать панель {0} включенной",
-      question_visibilityText: "Сделать вопрос {0} видимым",
-      question_enableText: "Сделать вопрос {0} включенным",
-      question_requireText: "Сделать вопрос {0} обязательным",
+      page_visibilityText: "Сделать страницу {0} видимой", //{0} page name
+      panel_visibilityText: "Сделать панель {0} видимой", //{0} panel name
+      panel_enableText: "Сделать панель {0} включенной", //{0} panel name
+      question_visibilityText: "Сделать вопрос {0} видимым", //{0} question name
+      question_enableText: "Сделать вопрос {0} включенным", //{0} question name
+      question_requireText: "Сделать вопрос {0} обязательным", //{0} question name
       column_visibilityText: "Сделайте видимым {0} {1} в столбце вопроса", //{0} column name, {1} question name
       column_enableText: "Сделайте столбец {0} вопроса {1} включите", //{0} column name, {1} question name
       column_requireText: "Сделайте {0} вопроса {1} обязательным для заполнения", //{0} column name, {1} question name
       trigger_completeText: "Опрос становится завершенным",
-      trigger_setvalueText: "Установить в вопрос: {0} значение {1}",
+      trigger_setvalueText: "Установить в вопрос: {0} значение {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Четкое значение вопроса: {0}", //{0} question name
-      trigger_copyvalueText: "Копировать в вопрос: {0} значение из вопроса {1}",
-      trigger_skipText: "Опрос переходит к вопросу {0}",
-      trigger_runExpressionText1: "Выполнить выражение: '{0}'",
-      trigger_runExpressionText2: "и установить его результат в вопрос: {0}",
+      trigger_copyvalueText: "Копировать в вопрос: {0} значение из вопроса {1}", //{0} and {1} question names
+      trigger_skipText: "Опрос переходит к вопросу {0}", //{0} question name
+      trigger_runExpressionText1: "Выполнить выражение: '{0}'", //{0} the expression
+      trigger_runExpressionText2: "и установить его результат в вопрос: {0}", //{0} question name
       completedHtmlOnConditionText: "Показывать пользовательский текст для 'Страницы благодарности'.",
       showAllQuestions: "Все вопросы",
       showAllActionTypes: "Все типы действий",
@@ -1038,15 +1038,15 @@ export var ruStrings = {
     editorShadow: "Эффекты тени входного элемента",
     names: {
       default: "По умолчанию",
-      contrast: "Контраст",
+      sharp: "Острый",
+      borderless: "Без границ",
+      flat: "Плоский",
       plain: "Равнина",
-      simple: "Простой",
-      blank: "Пустой",
-      double: "Двойной",
-      bulk: "Масса",
-      "pseudo-3d": "Псевдо 3D",
-      playful: "Игривый",
-      ultra: "Ультра"
+      doubleborder: "Двойная граница",
+      layered: "Слоистый",
+      solid: "Сплошной",
+      threedimensional: ".3D",
+      contrast: "Контраст"
     },
     colors: {
       teal: "Чирок",
@@ -1609,3 +1609,12 @@ editorLocalization.locales["ru"] = ruStrings;
 // colors.tulip: "Tulip" => "Тюльпан"
 // colors.brown: "Brown" => "Коричневый"
 // colors.green: "Green" => "Зеленый"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Острый"
+// names.borderless: "Borderless" => "Без границ"
+// names.flat: "Flat" => "Плоский"
+// names.doubleborder: "Double Border" => "Двойная граница"
+// names.layered: "Layered" => "Слоистый"
+// names.solid: "Solid" => "Сплошной"
+// names.threedimensional: "3D" => ".3D"

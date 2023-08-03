@@ -183,24 +183,24 @@ var frenchTranslation = {
       trigger_skipDescription: "Lorsque l'expression logique renvoie 'vrai', l'enquête passe à la question sélectionnée.",
       trigger_runExpressionDescription: "Lorsque l'expression logique renvoie 'vrai', alors l'expression personnalisée est exécutée. Vous pouvez éventuellement définir ce résultat d'expression dans la question sélectionnée.",
       completedHtmlOnConditionDescription: "Si l'expression logique renvoie 'vrai', le texte par défaut de la page de remerciements est remplacé par celui que vous avez défini.",
-      itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':",
+      itemExpressionText: "Lorsque l'expression: '{0}' renvoie 'vrai':", //{0} - the expression
       itemEmptyExpressionText: "Nouvelle règle",
-      page_visibilityText: "Rendre la page {0} visible",
-      panel_visibilityText: "Rendre le panneau {0} visible",
-      panel_enableText: "Activer le panneau {0}",
-      question_visibilityText: "Rendre la question {0} visible",
-      question_enableText: "Activer la question {0}",
-      question_requireText: "Rendre la question {0} obligatoire",
+      page_visibilityText: "Rendre la page {0} visible", //{0} page name
+      panel_visibilityText: "Rendre le panneau {0} visible", //{0} panel name
+      panel_enableText: "Activer le panneau {0}", //{0} panel name
+      question_visibilityText: "Rendre la question {0} visible", //{0} question name
+      question_enableText: "Activer la question {0}", //{0} question name
+      question_requireText: "Rendre la question {0} obligatoire", //{0} question name
       column_visibilityText: "Rendre visible les {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_enableText: "Activer la {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_requireText: "rendre obligatoire la colonne {0} de la question {1}", //{0} column name, {1} question name
       trigger_completeText: "Le questionnaire devient complété.",
-      trigger_setvalueText: "Définir dans la question: {0} valeur {1}",
+      trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valeur de la question claire : {0}", //{0} question name
-      trigger_copyvalueText: "Copier dans la question: {0} valeur de la question {1}",
-      trigger_skipText: "Dans le questionnaire, passez à la question {0}",
-      trigger_runExpressionText1: "Exécuter l'expression: '{0}'",
-      trigger_runExpressionText2: " et définissez son résultat dans la question: {0}",
+      trigger_copyvalueText: "Copier dans la question: {0} valeur de la question {1}", //{0} and {1} question names
+      trigger_skipText: "Dans le questionnaire, passez à la question {0}", //{0} question name
+      trigger_runExpressionText1: "Exécuter l'expression: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " et définissez son résultat dans la question: {0}", //{0} question name
       completedHtmlOnConditionText: "Affichez un texte personnalisé pour la page de remerciements.",
       showAllQuestions: "Toutes les questions",
       showAllActionTypes: "Tous les types d’action",
@@ -1038,15 +1038,15 @@ var frenchTranslation = {
     editorShadow: "Effets d’ombre de l’élément d’entrée",
     names: {
       default: "Faire défaut",
-      contrast: "Contraste",
+      sharp: "Tranchant",
+      borderless: "Borderless",
+      flat: "Plat",
       plain: "Plaine",
-      simple: "Simple",
-      blank: "Blanc",
-      double: "Double",
-      bulk: "Vrac",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Enjoué",
-      ultra: "Ultra"
+      doubleborder: "Double bordure",
+      layered: "Couches",
+      solid: "Solide",
+      threedimensional: ".3D",
+      contrast: "Contraste"
     },
     colors: {
       teal: "Sarcelle",
@@ -1607,3 +1607,12 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // colors.tulip: "Tulip" => "Tulipe"
 // colors.brown: "Brown" => "Marron"
 // colors.green: "Green" => "Vert"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Tranchant"
+// names.borderless: "Borderless" => "Borderless"
+// names.flat: "Flat" => "Plat"
+// names.doubleborder: "Double Border" => "Double bordure"
+// names.layered: "Layered" => "Couches"
+// names.solid: "Solid" => "Solide"
+// names.threedimensional: "3D" => ".3D"

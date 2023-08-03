@@ -1038,15 +1038,15 @@ var traditionalChineseTranslation = {
     editorShadow: "輸入元素陰影效果",
     names: {
       default: "違約",
-      contrast: "反差",
+      sharp: "鋒利",
+      borderless: "無國界",
+      flat: "平",
       plain: "平原",
-      simple: "簡單",
-      blank: "空白",
-      double: "雙",
-      bulk: "散裝",
-      "pseudo-3d": "偽 3D",
-      playful: "好玩",
-      ultra: "超"
+      doubleborder: "雙邊框",
+      layered: "分層的",
+      solid: "固體",
+      threedimensional: "。.3D",
+      contrast: "反差"
     },
     colors: {
       teal: "水鴨",
@@ -1825,3 +1825,12 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // colors.tulip: "Tulip" => "鬱金香"
 // colors.brown: "Brown" => "棕色"
 // colors.green: "Green" => "綠"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "鋒利"
+// names.borderless: "Borderless" => "無國界"
+// names.flat: "Flat" => "平"
+// names.doubleborder: "Double Border" => "雙邊框"
+// names.layered: "Layered" => "分層的"
+// names.solid: "Solid" => "固體"
+// names.threedimensional: "3D" => "。.3D"

@@ -183,24 +183,24 @@ export var nbStrings = {
       trigger_skipDescription: "Når formelen evalueres til 'sann' vil skjemaet hoppe til/fokusere på valgt spørsmål.",
       trigger_runExpressionDescription: "Når formelen evauleres til 'sann' vil den tilpassede formelen utføres. Du kan valgfritt sette formelens resultat inn i det valgte spørsmålet.",
       completedHtmlOnConditionDescription: "Hvis formelen evalueres til 'sann' vil standardteksten på 'Takk siden' endres til den gitte teksten.",
-      itemExpressionText: "Når formelen: '{0}' evalueres til 'sann':",
+      itemExpressionText: "Når formelen: '{0}' evalueres til 'sann':", //{0} - the expression
       itemEmptyExpressionText: "Ny regel",
-      page_visibilityText: "Gjøre side {0} synlig",
-      panel_visibilityText: "Gjør panel {0} synlig",
-      panel_enableText: "Gjør panel {0} aktivert",
-      question_visibilityText: "Gjør spørsmål {0} synlig",
-      question_enableText: "Gjør spørsmål {0} aktivert",
-      question_requireText: "Gjør spørsmål {0} påkrevd",
+      page_visibilityText: "Gjøre side {0} synlig", //{0} page name
+      panel_visibilityText: "Gjør panel {0} synlig", //{0} panel name
+      panel_enableText: "Gjør panel {0} aktivert", //{0} panel name
+      question_visibilityText: "Gjør spørsmål {0} synlig", //{0} question name
+      question_enableText: "Gjør spørsmål {0} aktivert", //{0} question name
+      question_requireText: "Gjør spørsmål {0} påkrevd", //{0} question name
       column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
       column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
       column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
       trigger_completeText: "Skjemaet blir fullført",
-      trigger_setvalueText: "Sett inn: {0} verdi {1}",
+      trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klar spørsmålsverdi: {0}", //{0} question name
-      trigger_copyvalueText: "Kopier inn: {0} verdi fra spørsmål {1}",
-      trigger_skipText: "Hopp til spørsmål {0}",
-      trigger_runExpressionText1: "Kjør formel: '{0}'",
-      trigger_runExpressionText2: " og sett inn resultatet i spørsmål: {0}",
+      trigger_copyvalueText: "Kopier inn: {0} verdi fra spørsmål {1}", //{0} and {1} question names
+      trigger_skipText: "Hopp til spørsmål {0}", //{0} question name
+      trigger_runExpressionText1: "Kjør formel: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " og sett inn resultatet i spørsmål: {0}", //{0} question name
       completedHtmlOnConditionText: "Vis tilpasset tekst for 'Takk-siden'.",
       showAllQuestions: "Alle spørsmål",
       showAllActionTypes: "Alle handlingstyper",
@@ -1038,15 +1038,15 @@ export var nbStrings = {
     editorShadow: "Skyggeeffekter for inndataelement",
     names: {
       default: "Standard",
-      contrast: "Kontrast",
+      sharp: "Skarp",
+      borderless: "Kantløse",
+      flat: "Flat",
       plain: "Slette",
-      simple: "Enkel",
-      blank: "Blank",
-      double: "Dobbel",
-      bulk: "Bulk",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Leken",
-      ultra: "Ultra"
+      doubleborder: "Dobbel kantlinje",
+      layered: "Lagdelte",
+      solid: "Solid",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Teal",
@@ -1550,3 +1550,12 @@ editorLocalization.locales["nb"] = nbStrings;
 // colors.tulip: "Tulip" => "Tulipan"
 // colors.brown: "Brown" => "Brun"
 // colors.green: "Green" => "Grønn"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Skarp"
+// names.borderless: "Borderless" => "Kantløse"
+// names.flat: "Flat" => "Flat"
+// names.doubleborder: "Double Border" => "Dobbel kantlinje"
+// names.layered: "Layered" => "Lagdelte"
+// names.solid: "Solid" => "Solid"
+// names.threedimensional: "3D" => ".3D"

@@ -1038,15 +1038,15 @@ export var danishStrings = {
     editorShadow: "Skyggeeffekter for inputelement",
     names: {
       default: "Standard",
-      contrast: "Kontrast",
+      sharp: "Skarp",
+      borderless: "Kant",
+      flat: "Flad",
       plain: "Slette",
-      simple: "Simpel",
-      blank: "Hvid",
-      double: "Dobbelt",
-      bulk: "Bulk",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Legende",
-      ultra: "Ultra"
+      doubleborder: "Dobbelt kant",
+      layered: "Lagdelte",
+      solid: "Fast",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Krikand",
@@ -1732,3 +1732,12 @@ editorLocalization.locales["da"] = danishStrings;
 // colors.tulip: "Tulip" => "Tulipan"
 // colors.brown: "Brown" => "Brun"
 // colors.green: "Green" => "Grøn"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Skarp"
+// names.borderless: "Borderless" => "Kant"
+// names.flat: "Flat" => "Flad"
+// names.doubleborder: "Double Border" => "Dobbelt kant"
+// names.layered: "Layered" => "Lagdelte"
+// names.solid: "Solid" => "Fast"
+// names.threedimensional: "3D" => ".3D"

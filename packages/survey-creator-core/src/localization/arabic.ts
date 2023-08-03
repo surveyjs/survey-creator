@@ -148,7 +148,7 @@ export var arStrings = {
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
     imagePlaceHolder: "قم بسحب وإسقاط صورة هنا أو انقر فوق الزر أدناه واختر صورة لتحميلها",
     imageChooseImage: "اختر صورة",
-    addNewTypeQuestion: "Add {0}",
+    addNewTypeQuestion: "Add {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[الشعار]",
     auto: "تلقائي",
     choices_Item: "بند ",
@@ -183,24 +183,24 @@ export var arStrings = {
       trigger_skipDescription: "When the logic expression returns true then the survey skip to / focus the selected question.",
       trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question",
       completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one.",
-      itemExpressionText: "عندما التعبير '{0}' رجع قيمة المنطقية صحيح",
+      itemExpressionText: "عندما التعبير '{0}' رجع قيمة المنطقية صحيح", //{0} - the expression
       itemEmptyExpressionText: "الإرتباط الجديد لم يحدد",
-      page_visibilityText: "جعل الصفحة {0} مرئية",
-      panel_visibilityText: "جعل اللوحة {0} مرئية",
-      panel_enableText: "جعل اللوحة {0} مفعلة",
-      question_visibilityText: "جعل السؤال {0} مرئي",
-      question_enableText: "جعل السؤال {0} مفعل",
-      question_requireText: "جعل السؤال {0} إلزامي",
+      page_visibilityText: "جعل الصفحة {0} مرئية", //{0} page name
+      panel_visibilityText: "جعل اللوحة {0} مرئية", //{0} panel name
+      panel_enableText: "جعل اللوحة {0} مفعلة", //{0} panel name
+      question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
+      question_enableText: "جعل السؤال {0} مفعل", //{0} question name
+      question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
       trigger_completeText: "الإستبيان سيصبح مكتمل",
-      trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}",
+      trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "قيمة سؤال واضحة: {0}", //{0} question name
-      trigger_copyvalueText: "النسخ إلى السؤال: {0} القيمة القادمة من السؤال {1}",
-      trigger_skipText: "التخطي إلى السؤال {0}",
-      trigger_runExpressionText1: "شغل التعبير الرياضي '{0}'",
-      trigger_runExpressionText2: " وثبت نتيجتها إلى السؤال {0}",
+      trigger_copyvalueText: "النسخ إلى السؤال: {0} القيمة القادمة من السؤال {1}", //{0} and {1} question names
+      trigger_skipText: "التخطي إلى السؤال {0}", //{0} question name
+      trigger_runExpressionText1: "شغل التعبير الرياضي '{0}'", //{0} the expression
+      trigger_runExpressionText2: " وثبت نتيجتها إلى السؤال {0}", //{0} question name
       completedHtmlOnConditionText: "عرض نص رسال 'صفحة شكر' مخصصة",
       showAllQuestions: "عرض كل الأسئلة",
       showAllActionTypes: "عرض كل أنواع الإجراءات",
@@ -1038,15 +1038,15 @@ export var arStrings = {
     editorShadow: "تأثيرات ظل عنصر الإدخال",
     names: {
       default: "افتراضي",
-      contrast: "تباين",
+      sharp: "حاد",
+      borderless: "بلا حدود",
+      flat: "وطيء",
       plain: "واضح",
-      simple: "بسيط",
-      blank: "خلبي",
-      double: "مزدوج",
-      bulk: "جرم",
-      "pseudo-3d": "الزائفة 3D",
-      playful: "لعوب",
-      ultra: "الترا"
+      doubleborder: "حدود مزدوجة",
+      layered: "الطبقات",
+      solid: "صلب",
+      threedimensional: ".3D",
+      contrast: "تباين"
     },
     colors: {
       teal: "البط البري",
@@ -1456,3 +1456,12 @@ editorLocalization.locales["ar"] = arStrings;
 // colors.tulip: "Tulip" => "توليب"
 // colors.brown: "Brown" => "أسمر"
 // colors.green: "Green" => "أخضر"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "حاد"
+// names.borderless: "Borderless" => "بلا حدود"
+// names.flat: "Flat" => "وطيء"
+// names.doubleborder: "Double Border" => "حدود مزدوجة"
+// names.layered: "Layered" => "الطبقات"
+// names.solid: "Solid" => "صلب"
+// names.threedimensional: "3D" => ".3D"

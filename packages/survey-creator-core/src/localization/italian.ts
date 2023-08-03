@@ -148,7 +148,7 @@ var italianTranslation = {
     surveyPlaceHolder: "Il questionario è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
     imagePlaceHolder: "Trascina e rilascia un'immagine qui o fai clic sul pulsante qui sotto e scegli un'immagine da caricare",
     imageChooseImage: "Scegli immagine",
-    addNewTypeQuestion: "Aggiungi {0}",
+    addNewTypeQuestion: "Aggiungi {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "Automatico",
     choices_Item: "Articolo ",
@@ -183,24 +183,24 @@ var italianTranslation = {
       trigger_skipDescription: "Quando l'espressione logica restituisce vero, il questionario passa / si focalizza sulla domanda selezionata.",
       trigger_runExpressionDescription: "Quando l'espressione logica restituisce vero, viene eseguita l'espressione personalizzata. È possibile impostare il risultato dell'espressione nella domanda selezionata.",
       completedHtmlOnConditionDescription: "Se l'espressione logica restituisce vero, il testo di default per la 'Pagina di ringraziamento' viene modificato in quello indicato.",
-      itemExpressionText: "Quando l'espressione: '{0}' restituisce vero:",
+      itemExpressionText: "Quando l'espressione: '{0}' restituisce vero:", //{0} - the expression
       itemEmptyExpressionText: "Nuova regola",
-      page_visibilityText: "rendi la pagina {0} visibile",
-      panel_visibilityText: "rendi il pannello {0} visibile",
-      panel_enableText: "rendi il pannello {0} abilitato",
-      question_visibilityText: "rendi la domanda {0} visibile",
-      question_enableText: "rendi la domanda {0} abilitata",
-      question_requireText: "rendi la domanda {0} obbligatoria",
-      column_visibilityText: "rendi la colonna {0} della domanda {1} visibile",
-      column_enableText: "rendi la colonna {0} della domanda {1} abilitata",
-      column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria",
+      page_visibilityText: "rendi la pagina {0} visibile", //{0} page name
+      panel_visibilityText: "rendi il pannello {0} visibile", //{0} panel name
+      panel_enableText: "rendi il pannello {0} abilitato", //{0} panel name
+      question_visibilityText: "rendi la domanda {0} visibile", //{0} question name
+      question_enableText: "rendi la domanda {0} abilitata", //{0} question name
+      question_requireText: "rendi la domanda {0} obbligatoria", //{0} question name
+      column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
+      column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
+      column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
       trigger_completeText: "il questionario viene completato",
-      trigger_setvalueText: "imposta nella domanda: {0} valore {1}",
+      trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valore chiaro della domanda: {0}", //{0} question name
-      trigger_copyvalueText: "copia nella domanda: {0} valore dalla domanda {1}",
-      trigger_skipText: "questionario passa alla domanda {0}",
-      trigger_runExpressionText1: "esegui l'espressione: '{0}'",
-      trigger_runExpressionText2: " e imposta il risultato nella domanda: {0}",
+      trigger_copyvalueText: "copia nella domanda: {0} valore dalla domanda {1}", //{0} and {1} question names
+      trigger_skipText: "questionario passa alla domanda {0}", //{0} question name
+      trigger_runExpressionText1: "esegui l'espressione: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " e imposta il risultato nella domanda: {0}", //{0} question name
       completedHtmlOnConditionText: "mostra il testo personalizzato per la 'Pagina di ringraziamento'.",
       showAllQuestions: "Tutte le Domande",
       showAllActionTypes: "Tutti i Tipi di Azione",
@@ -1038,15 +1038,15 @@ var italianTranslation = {
     editorShadow: "Effetti di ombreggiatura dell'elemento di input",
     names: {
       default: "Default",
-      contrast: "Contrasto",
+      sharp: "Affilato",
+      borderless: "Borderless",
+      flat: "Appartamento",
       plain: "Pianura",
-      simple: "Semplice",
-      blank: "Vuoto",
-      double: "Doppio",
-      bulk: "Massa",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Giocoso",
-      ultra: "Ultra"
+      doubleborder: "Doppio bordo",
+      layered: "Stratificato",
+      solid: "Solido",
+      threedimensional: ".3D",
+      contrast: "Contrasto"
     },
     colors: {
       teal: "Color foglia di tè",
@@ -1302,3 +1302,10 @@ editorLocalization.locales["it"] = italianTranslation;
 // colors.tulip: "Tulip" => "Tulipano"
 // colors.brown: "Brown" => "Marrone"
 // colors.green: "Green" => "Verde"
+// names.sharp: "Sharp" => "Affilato"
+// names.borderless: "Borderless" => "Borderless"
+// names.flat: "Flat" => "Appartamento"
+// names.doubleborder: "Double Border" => "Doppio bordo"
+// names.layered: "Layered" => "Stratificato"
+// names.solid: "Solid" => "Solido"
+// names.threedimensional: "3D" => ".3D"

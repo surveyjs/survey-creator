@@ -148,7 +148,7 @@ var spanishTranslation = {
     surveyPlaceHolder: "La encuesta está vacía. Arrastra una pregunta desde la caja de herramientas o haz click en el botón de abajo.",
     imagePlaceHolder: "Arrastre y suelte una imagen aquí o haga clic en el botón de abajo y elija una imagen para cargar",
     imageChooseImage: "Elegir imagen",
-    addNewTypeQuestion: "Añadir {0}",
+    addNewTypeQuestion: "Añadir {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGOTIPO]",
     auto: "Automático",
     choices_Item: "Artículo ",
@@ -183,24 +183,24 @@ var spanishTranslation = {
       trigger_skipDescription: "Cuando la expresión lógica devuelve 'verdadero', la encuesta salta a la pregunta seleccionada",
       trigger_runExpressionDescription: "Cuando la expresión lógica devuelve 'verdadero', entonces se realiza la expresión personalizada. Es posible que opcionalmente establezca este resultado de expresión en la pregunta seleccionada",
       completedHtmlOnConditionDescription: "Si la expresión lógica devuelve 'verdadero', entonces el texto predeterminado para la 'página de agradecimiento' se cambia por el texto dado",
-      itemExpressionText: "Cuando la expresión: '{0}' devuelve VERDADERO:",
+      itemExpressionText: "Cuando la expresión: '{0}' devuelve VERDADERO:", //{0} - the expression
       itemEmptyExpressionText: "Nueva regla",
-      page_visibilityText: "Hacer la página {0} Visible",
-      panel_visibilityText: "Hacer panel {0} visible",
-      panel_enableText: "Hacer panel {0} habilitar",
-      question_visibilityText: "Hacer Pregunta {0} Visible",
-      question_enableText: "Hacer Pregunta {0} Habilitar",
-      question_requireText: "Hacer la pregunta {0} requerida",
-      column_visibilityText: "hacer la columna {0} de la pregunta {1} visible",
-      column_enableText: "hacer la columna {0} de la pregunta {1} activa",
-      column_requireText: "hacer la columna {0} de la pregunta {1} requerida",
+      page_visibilityText: "Hacer la página {0} Visible", //{0} page name
+      panel_visibilityText: "Hacer panel {0} visible", //{0} panel name
+      panel_enableText: "Hacer panel {0} habilitar", //{0} panel name
+      question_visibilityText: "Hacer Pregunta {0} Visible", //{0} question name
+      question_enableText: "Hacer Pregunta {0} Habilitar", //{0} question name
+      question_requireText: "Hacer la pregunta {0} requerida", //{0} question name
+      column_visibilityText: "hacer la columna {0} de la pregunta {1} visible", //{0} column name, {1} question name
+      column_enableText: "hacer la columna {0} de la pregunta {1} activa", //{0} column name, {1} question name
+      column_requireText: "hacer la columna {0} de la pregunta {1} requerida", //{0} column name, {1} question name
       trigger_completeText: "La encuesta se completa",
-      trigger_setvalueText: "En cuestión: {0} valor {1}",
+      trigger_setvalueText: "En cuestión: {0} valor {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valor de pregunta claro: {0}", //{0} question name
-      trigger_copyvalueText: "Copiar en cuestión: {0} valor de la pregunta {1}",
-      trigger_skipText: "Encuesta salta a la pregunta {0}",
-      trigger_runExpressionText1: "Expresión de ejecución: '{0}'",
-      trigger_runExpressionText2: "y establecer su resultado en cuestión: {0}",
+      trigger_copyvalueText: "Copiar en cuestión: {0} valor de la pregunta {1}", //{0} and {1} question names
+      trigger_skipText: "Encuesta salta a la pregunta {0}", //{0} question name
+      trigger_runExpressionText1: "Expresión de ejecución: '{0}'", //{0} the expression
+      trigger_runExpressionText2: "y establecer su resultado en cuestión: {0}", //{0} question name
       completedHtmlOnConditionText: "Mostrar texto personalizado para la 'gracias página'",
       showAllQuestions: "Todas las preguntas",
       showAllActionTypes: "Todos los tipos de acción",
@@ -1038,15 +1038,15 @@ var spanishTranslation = {
     editorShadow: "Efectos de sombra del elemento de entrada",
     names: {
       default: "Predeterminado",
-      contrast: "Contraste",
+      sharp: "Afilado",
+      borderless: "Sin bordes",
+      flat: "Plano",
       plain: "Llanura",
-      simple: "Sencillo",
-      blank: "Espacio en blanco",
-      double: "Doble",
-      bulk: "Bulto",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Juguetón",
-      ultra: "Ultra"
+      doubleborder: "Doble Borde",
+      layered: "Capas",
+      solid: "Sólido",
+      threedimensional: ".3D",
+      contrast: "Contraste"
     },
     colors: {
       teal: "Cerceta",
@@ -1320,3 +1320,11 @@ editorLocalization.locales["es"] = spanishTranslation;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Marrón"
 // colors.green: "Green" => "Verde"
+// lg.expressionSetup: "" => ""
+// names.sharp: "Sharp" => "Afilado"
+// names.borderless: "Borderless" => "Sin bordes"
+// names.flat: "Flat" => "Plano"
+// names.doubleborder: "Double Border" => "Doble Borde"
+// names.layered: "Layered" => "Capas"
+// names.solid: "Solid" => "Sólido"
+// names.threedimensional: "3D" => ".3D"

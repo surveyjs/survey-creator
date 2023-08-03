@@ -183,24 +183,24 @@ export var skStrings = {
       trigger_skipDescription: "Keď logický výraz vráti hodnotu true, prieskum prejde/nastaví sa na vybratú otázku.",
       trigger_runExpressionDescription: "Keď logický výraz vráti hodnotu true, vykoná sa vlastný výraz. Voliteľne môžete nastaviť tento výraz na vybratú otázku.",
       completedHtmlOnConditionDescription: "Keď logický výraz vráti hodnotu true, predvolený text na stránke s poďakovaním sa zmení na zadaný text.",
-      itemExpressionText: "Keď výraz: „{0}“ vráti hodnotu true:",
+      itemExpressionText: "Keď výraz: „{0}“ vráti hodnotu true:", //{0} - the expression
       itemEmptyExpressionText: "Nové pravidlo",
-      page_visibilityText: "Stránka {0} bude viditeľná",
-      panel_visibilityText: "Panel {0} bude viditeľný",
-      panel_enableText: "Panel {0} bude povolený",
-      question_visibilityText: "Otázka {0} bude viditeľná",
-      question_enableText: "Otázka {0} bude povolená",
-      question_requireText: "Otázka {0} sa bude vyžadovať",
+      page_visibilityText: "Stránka {0} bude viditeľná", //{0} page name
+      panel_visibilityText: "Panel {0} bude viditeľný", //{0} panel name
+      panel_enableText: "Panel {0} bude povolený", //{0} panel name
+      question_visibilityText: "Otázka {0} bude viditeľná", //{0} question name
+      question_enableText: "Otázka {0} bude povolená", //{0} question name
+      question_requireText: "Otázka {0} sa bude vyžadovať", //{0} question name
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
       trigger_completeText: "Prieskum bude dokončený",
-      trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}",
+      trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "jasná hodnota otázky: {0}", //{0} question name
-      trigger_copyvalueText: "Kopírovať do otázky: {0} hodnotu z otázky {1}",
-      trigger_skipText: "V prieskume prejsť na otázku {0}",
-      trigger_runExpressionText1: "Spustiť výraz: „{0}“",
-      trigger_runExpressionText2: " a nastaviť výsledok v otázke: {0}",
+      trigger_copyvalueText: "Kopírovať do otázky: {0} hodnotu z otázky {1}", //{0} and {1} question names
+      trigger_skipText: "V prieskume prejsť na otázku {0}", //{0} question name
+      trigger_runExpressionText1: "Spustiť výraz: „{0}“", //{0} the expression
+      trigger_runExpressionText2: " a nastaviť výsledok v otázke: {0}", //{0} question name
       completedHtmlOnConditionText: "Zobraziť vlastný text pre stránku s poďakovaním.",
       showAllQuestions: "Všetky otázky",
       showAllActionTypes: "Všetky typy akcií",
@@ -1038,15 +1038,15 @@ export var skStrings = {
     editorShadow: "Efekty tieňov vstupného prvku",
     names: {
       default: "Predvolený",
-      contrast: "Kontrast",
+      sharp: "Ostrý",
+      borderless: "Bez okrajov",
+      flat: "Plochý",
       plain: "Obyčajný",
-      simple: "Jednoduchý",
-      blank: "Prázdny",
-      double: "Dvojitý",
-      bulk: "Hromadný",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Hravý",
-      ultra: "Ultra"
+      doubleborder: "Dvojité ohraničenie",
+      layered: "Vrstvené",
+      solid: "Pevný",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Šedozelená",
@@ -1500,3 +1500,12 @@ editorLocalization.locales["sk"] = skStrings;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Hnedý"
 // colors.green: "Green" => "Zelený"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Ostrý"
+// names.borderless: "Borderless" => "Bez okrajov"
+// names.flat: "Flat" => "Plochý"
+// names.doubleborder: "Double Border" => "Dvojité ohraničenie"
+// names.layered: "Layered" => "Vrstvené"
+// names.solid: "Solid" => "Pevný"
+// names.threedimensional: "3D" => ".3D"

@@ -1038,15 +1038,15 @@ var polishStrings = {
     editorShadow: "Efekty cienia elementu wejściowego",
     names: {
       default: "Domyślny",
-      contrast: "Kontrast",
+      sharp: "Ostry",
+      borderless: "Bez obramowania",
+      flat: "Płaski",
       plain: "Równina",
-      simple: "Prosty",
-      blank: "Pusty",
-      double: "Podwójny",
-      bulk: "Wielkość",
-      "pseudo-3d": "Pseudo 3D",
-      playful: "Figlarny",
-      ultra: "Ultra"
+      doubleborder: "Podwójna ramka",
+      layered: "Warstwowe",
+      solid: "Bryła",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
     },
     colors: {
       teal: "Teal",
@@ -1820,3 +1820,12 @@ editorLocalization.locales["pl"] = polishStrings;
 // colors.tulip: "Tulip" => "Tulipan"
 // colors.brown: "Brown" => "Brązowy"
 // colors.green: "Green" => "Zielony"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// names.sharp: "Sharp" => "Ostry"
+// names.borderless: "Borderless" => "Bez obramowania"
+// names.flat: "Flat" => "Płaski"
+// names.doubleborder: "Double Border" => "Podwójna ramka"
+// names.layered: "Layered" => "Warstwowe"
+// names.solid: "Solid" => "Bryła"
+// names.threedimensional: "3D" => ".3D"
