@@ -502,7 +502,6 @@ export var enStrings = {
     hideColumnsIfEmpty: "Hide columns if there are no rows",
     rateValues: "Custom rate values",
     rateCount: "Rate count",
-    rateDisplayMode: "Rate display mode",
     autoGenerate: "How to specify rate values?",
     hideIfChoicesEmpty: "Hide the question if it contains no choices",
     hideNumber: "Hide question number",
@@ -636,12 +635,13 @@ export var enStrings = {
     alternateRows: "Alternate rows",
     columnsVisibleIf: "Columns are visible if",
     rowsVisibleIf: "Rows are visible if",
-    otherPlaceholder: "Comment area placeholder"
+    otherPlaceholder: "Comment area placeholder",
+    rateType: "Rate type" // Auto-generated string
   },
   // Property values
   pv: {
-    true: "true",
-    false: "false",
+    "true": "true",
+    "false": "false",
     inherit: "Inherit",
     show: "Visible",
     hide: "Hidden",
@@ -783,7 +783,9 @@ export var enStrings = {
       buttons: "Buttons",
       dropdown: "Dropdown"
     },
-    rateColorMode: { default: "Default" },
+    rateColorMode: {
+      default: "Default"
+    },
     autoGenerate: {
       "true": "Generate",
       "false": "Enter manually"
@@ -792,7 +794,7 @@ export var enStrings = {
       labels: "Labels",
       stars: "Stars",
       smileys: "Smileys"
-    },
+    }
   },
   // Operators
   op: {
@@ -954,7 +956,21 @@ export var enStrings = {
     runExpression: "Run expression", // Auto-generated string
     showCaption: "Show caption", // Auto-generated string
     iconName: "Icon name", // Auto-generated string
-    iconSize: "Icon size" // Auto-generated string
+    iconSize: "Icon size", // Auto-generated string
+    precision: "Precision", // Auto-generated string
+    matrixDragHandleArea: "Matrix drag handle area", // Auto-generated string
+    backgroundImage: "Background image", // Auto-generated string
+    backgroundImageFit: "Background image fit", // Auto-generated string
+    backgroundImageAttachment: "Background image attachment", // Auto-generated string
+    backgroundOpacity: "Background opacity", // Auto-generated string
+    selectToRankEnabled: "Select to rank enabled", // Auto-generated string
+    selectToRankAreasLayout: "Select to rank areas layout", // Auto-generated string
+    allowCameraAccess: "Allow camera access", // Auto-generated string
+    scaleColorMode: "Scale color mode", // Auto-generated string
+    rateColorMode: "Rate color mode", // Auto-generated string
+    templateTabTitle: "Template tab title", // Auto-generated string
+    templateVisibleIf: "Template visible if", // Auto-generated string
+    copyDisplayValue: "Copy display value" // Auto-generated string
   },
   theme: {
     "--background": "Background color",
@@ -964,26 +980,26 @@ export var enStrings = {
     "--base-unit": "Base unit",
     groupGeneral: "General",
     groupAdvanced: "Advanced",
-    "themeName": "Theme",
-    "themeMode": "Question appearance",
-    "themeModePanels": "Default",
-    "themeModeLightweight": "Without Panels",
-    "themePaletteLight": "Light",
-    "themePaletteDark": "Dark",
+    themeName: "Theme",
+    themeMode: "Question appearance",
+    themeModePanels: "Default",
+    themeModeLightweight: "Without Panels",
+    themePaletteLight: "Light",
+    themePaletteDark: "Dark",
     primaryColor: "Accent color",
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
-    "backgroundDimColor": "Background color",
-    "backgroundImage": "Background image",
-    "backgroundImageFitAuto": "Auto",
-    "backgroundImageFitCover": "Cover",
-    "backgroundImageFitContain": "Contain",
-    "backgroundOpacity": "Opacity",
-    "backgroundImageAttachmentFixed": "Fixed",
-    "backgroundImageAttachmentScroll": "Scroll",
-    "panelBackgroundTransparency": "Panel background opacity",
-    "questionBackgroundTransparency": "Question background opacity",
+    backgroundDimColor: "Background color",
+    backgroundImage: "Background image", // Auto-generated string
+    backgroundImageFitAuto: "Auto",
+    backgroundImageFitCover: "Cover",
+    backgroundImageFitContain: "Contain",
+    backgroundOpacity: "Opacity", // Auto-generated string
+    backgroundImageAttachmentFixed: "Fixed",
+    backgroundImageAttachmentScroll: "Scroll",
+    panelBackgroundTransparency: "Panel background opacity",
+    questionBackgroundTransparency: "Question background opacity",
     questionPanel: "Panel background and corner radius",
     questionTitle: "Question title font",
     questionDescription: "Question description font",
@@ -1023,16 +1039,16 @@ export var enStrings = {
     questionShadow: "Shadow effects",
     editorShadow: "Input element shadow effects",
     names: {
-      "default": "Default",
-      "contrast": "Contrast",
-      "plain": "Plain",
-      "simple": "Simple",
-      "blank": "Blank",
-      "double": "Double",
-      "bulk": "Bulk",
+      default: "Default",
+      contrast: "Contrast",
+      plain: "Plain",
+      simple: "Simple",
+      blank: "Blank",
+      double: "Double",
+      bulk: "Bulk",
       "pseudo-3d": "Pseudo 3D",
-      "playful": "Playful",
-      "ultra": "Ultra"
+      playful: "Playful",
+      ultra: "Ultra"
     },
     colors: {
       teal: "Teal",
@@ -1043,7 +1059,7 @@ export var enStrings = {
       brown: "Brown",
       green: "Green"
     }
-  },
+  }
 };
 
 // Uncomment the line below if you create a custom dictionary.
