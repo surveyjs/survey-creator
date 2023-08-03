@@ -2,6 +2,9 @@
     <div class="svc-creator-tab__content">
         <div class="svc-json-editor-tab__content">
             <div class="svc-json-editor-tab__ace-editor" #inputEl></div>
+            <div class="svc-json-editor-tab__errros_list" [visible]="model.hasErrors">
+                <sv-ng-list [model]="model.errorList"></sv-ng-list>
+            </div>
         </div>
     </div>
 </ng-template>

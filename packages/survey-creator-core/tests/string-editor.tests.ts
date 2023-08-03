@@ -303,6 +303,15 @@ test("Test string editor inplaceEditForValues", (): any => {
   expect(itemValue.value).toEqual("item1");
   expect(itemValue.text).toEqual("newItem");
 
+  var otherItem;
+  const q1 = <QuestionRadiogroupModel>creator.survey.getQuestionByName("q0");
+  otherItem = q1.otherItem;
+  var seChoiceOther = new StringEditorViewModelBase(otherItem.locText, creator);
+  expect(otherItem.text).toEqual("Other (describe)");
+  seChoiceOther.onBlur({ target: { innerText: "Other changed", innerHTML: "Other changed", setAttribute: () => { }, removeAttribute: () => { } } });
+  expect(otherItem.locText.text).toEqual("Other changed");
+  expect(q0.otherText).toEqual("Other changed");
+
   creator.inplaceEditForValues = true;
   seChoice.onBlur({ target: { innerText: "newItemValue", innerHTML: "newItemValue", setAttribute: () => { }, removeAttribute: () => { } } });
   expect(itemValue.locText.text).toEqual("newItem");

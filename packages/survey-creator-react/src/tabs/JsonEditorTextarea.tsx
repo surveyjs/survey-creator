@@ -1,10 +1,28 @@
 import React, { ChangeEvent } from "react";
 import { Base } from "survey-core";
-import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { TextareaJsonEditorModel } from "survey-creator-core";
+import { ReactElementFactory, SurveyElementBase, List } from "survey-react-ui";
+import { TextareaJsonEditorModel, JsonEditorBaseModel } from "survey-creator-core";
 
 interface ITabJsonEditorTextareaComponentProps {
   data: TextareaJsonEditorModel;
+}
+
+interface ITabJsonEditorErrorsProps {
+  data: JsonEditorBaseModel;
+}
+
+export class TabJsonEditorErrorsComponent extends SurveyElementBase<ITabJsonEditorErrorsProps, any> {
+  protected getStateElement(): Base {
+    return this.model;
+  }
+  private get model(): JsonEditorBaseModel {
+    return this.props.data;
+  }
+  renderElement(): JSX.Element {
+    return <div className="svc-json-editor-tab__errros_list" style={{ display: this.model.hasErrors ? "block": "none" }}>
+      <List model={this.model.errorList} />
+    </div>;
+  }
 }
 
 export class TabJsonEditorTextareaComponent extends SurveyElementBase<
@@ -13,7 +31,6 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
 > {
   constructor(props) {
     super(props);
-    this.model.canShowErrors = false;
   }
   protected getStateElement(): Base {
     return this.model;
@@ -22,19 +39,15 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
     return this.props.data;
   }
   renderElement(): JSX.Element {
-    const errors: JSX.Element[] = [];
-    var key = 1;
-    const userFriendlyErrors: any[] = this.model.userFriendlyErrors;
-    for (let i: number = 0; i < userFriendlyErrors.length; i++) {
-      errors.push(<span key={key}><b>Error: </b></span>);
-      key++;
-      errors.push(<span key={key}>{userFriendlyErrors[i]}</span>);
-      key++;
-    }
+    const setControl = (el: HTMLTextAreaElement) => {
+      this.model.textElement = el;
+    };
+    const errors = <TabJsonEditorErrorsComponent data={this.model}/>;
     return (
       <div className="svc-creator-tab__content">
         <div className="svc-json-editor-tab__content">
           <textarea
+            ref={input => (setControl(input))}
             className="svc-json-editor-tab__content-area"
             value={this.model.text}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
@@ -44,13 +57,7 @@ export class TabJsonEditorTextareaComponent extends SurveyElementBase<
             disabled={this.model.readOnly}
             aria-label={this.model.ariaLabel}
           ></textarea>
-          {errors.length > 0 &&
-            <button type="button" className="svc-json-editor-tab__errros_button" onClick={() => this.model.toggleErrors()}>
-              {this.model.errorButtonText}
-            </button>
-          }
-          {this.model.canShowErrors && <div className="svc-json-editor-tab__content-errors">{errors}</div>
-          }
+          {errors}
         </div>
       </div>
     );

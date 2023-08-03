@@ -5,7 +5,6 @@ function createTextWorker(json: any): SurveyTextWorker {
 }
 
 test("SurveyTextWorker, incorrect property name pos", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const textWorker = createTextWorker({
     elements: [
       {
@@ -28,9 +27,14 @@ test("SurveyTextWorker, incorrect property name pos", () => {
   expect(textWorker.text.substring(propNamePos, propNamePos + 5)).toBe("incor");
   expect(error.rowAt).toBe(8);
   expect(error.columnAt).toBe(10);
+  expect(error.isFixable).toBeTruthy();
+  const newJson = JSON.parse(error.fixError(textWorker.text));
+  expect(newJson.elements[1]).toEqual({
+    type: "text",
+    name: "q2"
+  });
 });
 test("SurveyTextWorker, show duplication name errors", () => {
-  SurveyTextWorker.newLineChar = "\n";
   const textWorker = createTextWorker({
     pages: [{
       name: "page1",
@@ -61,4 +65,39 @@ test("SurveyTextWorker, show duplication name errors", () => {
   expect(textWorker.text.substring(propNamePos2, propNamePos2 + 7)).toBe("\"name\":");
   expect(error2.rowAt).toBe(15);
   expect(error2.columnAt).toBe(15);
+
+  expect(error2.isFixable).toBeTruthy();
+  const newJson2 = JSON.parse(error2.fixError(textWorker.text));
+  expect(newJson2.pages[0].elements[2]).toEqual({
+    type: "text",
+    name: "question1"
+  });
+  expect(error1.isFixable).toBeTruthy();
+  const newJson1 = JSON.parse(error1.fixError(textWorker.text));
+  expect(newJson1.pages[0].elements[1]).toEqual({
+    type: "text",
+    name: "question1"
+  });
+});
+test("SurveyTextWorker, required properties", () => {
+  const textWorker = createTextWorker({
+    pages: [{
+      name: "page1",
+      elements: [
+        {
+          type: "text"
+        }
+      ] }
+    ]
+  });
+  expect(textWorker.errors).toHaveLength(1);
+  const error = textWorker.errors[0];
+  const propNamePos = 85;
+  expect(error.at).toBe(propNamePos);
+  expect(error.isFixable).toBeTruthy();
+  const newJson = JSON.parse(error.fixError(textWorker.text));
+  expect(newJson.pages[0].elements[0]).toEqual({
+    type: "text",
+    name: "question1"
+  });
 });

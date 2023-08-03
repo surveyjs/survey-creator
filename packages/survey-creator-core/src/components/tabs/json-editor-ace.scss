@@ -9,6 +9,8 @@ svc-tab-json-editor-ace {
 .svc-json-editor-tab__content {
   position: relative;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .svc-json-editor-tab__ace-editor {

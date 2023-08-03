@@ -3,12 +3,15 @@ import { ClientFunction, Selector } from "testcafe";
 const title = "JSON tab";
 
 const json = {
-  logoPosition: "right",
-  questions: [
+  pages: [
     {
-      type: "text",
-      name: "json_tab_text",
-      title: "Change me"
+      elements: [
+        {
+          type: "text",
+          name: "json_tab_text",
+          title: "Change me"
+        }
+      ]
     }
   ]
 };
@@ -23,38 +26,40 @@ test("Change title of text question", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
-    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 9, 15, 9, 24)
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 8, 15, 8, 24)
     .pressKey("backspace")
     .pressKey("I space a m space c h a n g e d")
 
     .click(getTabbedMenuItemByText(creatorTabDesignerName))
     .expect(Selector("h5").withText("I am changed").exists).ok();
 });
-test("Check show/hide errors button visibility", async (t) => {
+test("Check show/hide errors list visibility", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
-    .expect(Selector("svc-json-editor-tab__errros_button").exists).notOk();
-
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).notOk()
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 4, 7, 4, 7)
+    .pressKey("a")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).ok()
+    .pressKey("backspace")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).notOk();
 });
-test("Check show/hide errors button functionality", async (t) => {
+test("Goto line from error", async (t) => {
   await setJSON(json);
   await t
     .click(getTabbedMenuItemByText("JSON Editor"))
     .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"))
-    .pressKey("backspace")
-    .pressKey("I space a m space e r r o r space s t r i n g )")
-
-    .expect(Selector(".svc-json-editor-tab__errros_button").withText("Show errors").exists).ok()
-    .expect(Selector(".svc-json-editor-tab__content-errors").exists).notOk()
-
-    .click(Selector(".svc-json-editor-tab__errros_button"))
-    .expect(Selector(".svc-json-editor-tab__errros_button").withText("Hide errors").exists).ok()
-    .expect(Selector(".svc-json-editor-tab__content-errors").exists).ok()
-    .expect(Selector(".svc-json-editor-tab__content-errors > span:last-child").withText("Expected 'n' instead of ' '").exists).ok()
-
-    .click(Selector(".svc-json-editor-tab__errros_button"))
-    .expect(Selector(".svc-json-editor-tab__errros_button").withText("Show errors").exists).ok();
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 4, 4, 4, 4)
+    .pressKey("a")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).ok()
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 1, 1, 1, 1)
+    .click(Selector("span").withText("Line: "))
+    .pressKey("delete")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).notOk();
 });
 test("Check deactivating other tabs when json has errros", async (t) => {
   await setJSON(json);

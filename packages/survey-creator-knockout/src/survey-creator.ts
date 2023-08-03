@@ -7,8 +7,7 @@ const template = require("./survey-creator.html");
 
 export class CreatorViewModel {
   constructor(public creator: SurveyCreator, private rootNode: HTMLElement) {
-    this.creator.initKeyboardShortcuts(this.rootNode);
-    this.creator.initResponsivityManager(this.rootNode as HTMLDivElement);
+    this.creator.setRootElement(this.rootNode);
     new ImplementorBase(this.creator.notifier);
     new ImplementorBase(this.creator.toolbox);
     // new ImplementorBase(this.creator.dragDropSurveyElements);
@@ -16,8 +15,7 @@ export class CreatorViewModel {
     new ImplementorBase(this.creator);
   }
   dispose(): void {
-    this.creator.removeKeyboardShortcuts(this.rootNode);
-    this.creator.resetResponsivityManager();
+    this.creator.unsubscribeRootElement();
   }
 }
 

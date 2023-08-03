@@ -82,7 +82,14 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
     return annotations;
   }
   protected setErrors(errors: any[]): void {
+    super.setErrors(errors);
     this.aceEditor.getSession().setAnnotations(this.createAnnotations(errors));
+    setTimeout(() => this.aceEditor.resize());
+  }
+  protected gotoError(at: number, row: number, column: number): void {
+    this.aceEditor.focus();
+    this.aceEditor.renderer.scrollCursorIntoView({ row: row + 1, column: column + 1 }, 0.5);
+    this.aceEditor.gotoLine(row + 1, column + 1);
   }
   public onEditorActivated(): void {
     this.aceEditor.getSession().getUndoManager().markClean();

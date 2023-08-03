@@ -18,7 +18,8 @@ import {
   QuestionSelectBase,
   PopupBaseViewModel,
   surveyLocalization,
-  QuestionTextBase
+  QuestionTextBase,
+  IDialogOptions
 } from "survey-core";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { EditableObject } from "../editable-object";
@@ -1229,29 +1230,31 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if(question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
     }
-    if (!settings.showModal) return surveyPropertyEditor;
+    if (!settings.showDialog) return surveyPropertyEditor;
     const prevCurrentLocale = surveyLocalization.currentLocale;
     const locale = editorLocalization.currentLocale;
     surveyLocalization.currentLocale = locale;
-    const popupModel: PopupBaseViewModel = settings.showModal(
-      "survey",
-      {
-        survey: surveyPropertyEditor.editSurvey,
-        model: surveyPropertyEditor.editSurvey
-      },
-      (): boolean => {
-        this.onModalPropertyEditorClosed(editor, property, question, options, "apply");
-        onClose && onClose("apply");
-        return surveyPropertyEditor.apply();
-      },
-      () => {
-        this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
-        onClose && onClose("cancel");
-      },
-      "sv-property-editor",
-      question.title, options.isMobileView ? "overlay" : "popup"
-    );
-    if(question.isReadOnly) {
+    const popupModel: PopupBaseViewModel = settings.showDialog(
+      <IDialogOptions>{
+        componentName: "survey",
+        data: {
+          survey: surveyPropertyEditor.editSurvey,
+          model: surveyPropertyEditor.editSurvey
+        },
+        onApply: (): boolean => {
+          this.onModalPropertyEditorClosed(editor, property, question, options, "apply");
+          onClose && onClose("apply");
+          return surveyPropertyEditor.apply();
+        },
+        onCancel: () => {
+          this.onModalPropertyEditorClosed(editor, property, question, options, "cancel");
+          onClose && onClose("cancel");
+        },
+        cssClass: "sv-property-editor",
+        title: question.title,
+        displayMode: options.isMobileView ? "overlay" : "popup"
+      }, options.rootElement);
+    if (question.isReadOnly) {
       const applyBtn = popupModel.footerToolbar.getActionById("apply");
       if(!!applyBtn) {
         applyBtn.visible = false;

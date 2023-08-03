@@ -12,6 +12,7 @@ import { assign, parseColor } from "../../src/utils/utils";
 import { ComponentCollection, Question, Serializer, SurveyModel } from "survey-core";
 
 import "survey-core/survey.i18n";
+import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 
 const themeFromFile = {
   "cssVariables": {
@@ -679,7 +680,7 @@ test("Theme builder export value from composite question", (): any => {
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(249, 249, 249, 1)");
   expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
 
-  themeEditor.getQuestionByName("themeName").value = "ultra";
+  themeEditor.getQuestionByName("themeName").value = "contrast";
   expect(questionDimLightBackground.value).toEqual("rgba(255, 216, 77, 1)");
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(255, 216, 77, 1)");
   expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
@@ -864,4 +865,50 @@ test("Theme builder: trigger responsiveness", (): any => {
   expect(log).toBe("->called:true");
   themeEditor.getQuestionByName("commonScale").value = 80;
   expect(log).toBe("->called:true->called:true");
+});
+test("Theme builder restore PG editor", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-corner-radius": "20px",
+      "--sjs-base-unit": "9.6px",
+      "--sjs-font-size": "17.6px",
+    }
+  };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+
+  expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("20px");
+  expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(20);
+  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("9.6px");
+  expect(themeEditor.getQuestionByName("commonScale").value).toEqual(120);
+  expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("17.6px");
+  expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
+});
+
+test("Check background image has conditional max size", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  let themeEditor = (themePlugin.model as ThemeSurveyTabViewModel).themeEditorSurvey;
+
+  expect(themeEditor.getQuestionByName("backgroundImage").maxSize).toEqual(65536);
+
+  themePlugin.deactivate();
+
+  creator.onUploadFile.add((_, options) => {
+    options.callback("success", "test_url");
+  });
+  themePlugin.activate();
+
+  themeEditor = (themePlugin.model as ThemeSurveyTabViewModel).themeEditorSurvey;
+  const question = <QuestionFileEditorModel>themeEditor.getQuestionByName("backgroundImage");
+
+  expect(question.maxSize).toEqual(0);
+  question.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(question.value).toBe("test_url");
 });

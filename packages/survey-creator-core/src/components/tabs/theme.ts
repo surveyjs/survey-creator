@@ -12,7 +12,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
-export const PredefinedThemes = ["default", "contrast", "plain", "simple", "blank", "double", "bulk", "pseudo-3d", "playful", "ultra"];
+export const PredefinedThemes = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
 
 export const PredefinedColors = {
   light: {
@@ -500,9 +500,9 @@ export class ThemeSurveyTabViewModel extends Base {
     this.initializeColorCalculator();
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
-      if(this.blockChanges) return;
+      if (this.blockChanges) return;
 
-      if(options.name.indexOf("--") === 0) {
+      if (options.name.indexOf("--") === 0) {
         this.themeChanges[options.name] = options.value;
       }
 
@@ -530,7 +530,7 @@ export class ThemeSurveyTabViewModel extends Base {
         return;
       }
       this.blockThemeChangedNotifications += 1;
-      if(options.name == "commonScale") {
+      if (options.name == "commonScale") {
         this.survey.triggerResponsiveness(true);
       }
       if (options.name === "--sjs-primary-backcolor") {
@@ -562,6 +562,10 @@ export class ThemeSurveyTabViewModel extends Base {
       this.currentTheme.cssVariables = newTheme;
       this.blockThemeChangedNotifications -= 1;
       this.setThemeToSurvey();
+    });
+    themeEditorSurvey.onUploadFiles.add((_, options) => {
+      const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
+      this.surveyProvider.uploadFiles(options.files, undefined, callback);
     });
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
@@ -600,10 +604,20 @@ export class ThemeSurveyTabViewModel extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
-    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
+
+    if (!!newCssVariables["--sjs-corner-radius"]) {
+      themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
+    }
+    if (!!newCssVariables["--sjs-base-unit"]) {
+      themeEditorSurvey.getQuestionByName("commonScale").value = parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8;
+    }
+    if (!!newCssVariables["--sjs-font-size"]) {
+      themeEditorSurvey.getQuestionByName("commonFontSize").value = parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16;
+    }
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
-      if(["color", "colorsettings"].indexOf(question.getType()) !== -1) {
+      if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
         (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
       }
     });
@@ -614,7 +628,7 @@ export class ThemeSurveyTabViewModel extends Base {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
-    if(this.blockThemeChangedNotifications == 0) {
+    if (this.blockThemeChangedNotifications == 0) {
       this.surveyProvider.raiseThemeChanged();
     }
   }
@@ -622,6 +636,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private getThemeEditorSurveyJSON() {
     const themeEditorSurveyJSON = {
       "clearInvisibleValues": "none",
+      questionErrorLocation: "bottom",
       elements: [{
         type: "panel",
         state: "expanded",
@@ -681,8 +696,10 @@ export class ThemeSurveyTabViewModel extends Base {
                 elements: [
                   {
                     type: "fileedit",
+                    storeDataAsText: false,
                     name: "backgroundImage",
                     titleLocation: "hidden",
+                    maxSize: this.surveyProvider.onUploadFile.isEmpty ? 65536 : undefined,
                     acceptedTypes: "image/*",
                     placeholder: "Browse..."
                   },
@@ -761,7 +778,7 @@ export class ThemeSurveyTabViewModel extends Base {
               },
               {
                 type: "spinedit",
-                name: "--font-size",
+                name: "commonFontSize",
                 title: getLocString("theme.fontSize"),
                 descriptionLocation: "hidden",
                 unit: "%",
@@ -772,7 +789,7 @@ export class ThemeSurveyTabViewModel extends Base {
               {
                 type: "expression",
                 name: "--sjs-font-size",
-                expression: "{--font-size}*16/100+\"px\"",
+                expression: "{commonFontSize}*16/100+\"px\"",
                 visible: false
               },
             ]

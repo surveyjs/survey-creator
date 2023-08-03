@@ -369,7 +369,9 @@ export class StringEditorViewModelBase extends Base {
     if (this.locString.text != clearedText &&
       !(!this.locString.text && clearedText == this.locString.calculatedText)) {
       if (!this.errorText) {
-        if (this.locString.owner instanceof ItemValue && this.creator.inplaceEditForValues) {
+        if (this.locString.owner instanceof ItemValue &&
+          this.creator.inplaceEditForValues &&
+          ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) == -1) {
           const itemValue = <ItemValue>this.locString.owner;
           if(itemValue.value !== clearedText) {
             if(!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
