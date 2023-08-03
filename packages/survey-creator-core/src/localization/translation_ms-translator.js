@@ -29,8 +29,6 @@ if(parameter === "english") {
 }
 let translationKey = arg[3];
 
-//let parameter = "french";
-//let translationKey = "cbeb89370cc3440c91b872c53528f96d";
 const endpoint = "https://api.cognitive.microsofttranslator.com";
 const resource_region = "southcentralus";
 const englishJSON = utils.readJson("english");
