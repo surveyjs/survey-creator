@@ -1,4 +1,3 @@
-// Uncomment the line below if you create a custom dictionary
 import { editorLocalization } from "survey-creator-core";
 
 export var mnStrings = {
@@ -6,8 +5,7 @@ export var mnStrings = {
   survey: {
     edit: "Засах",
     externalHelpLink: "Санал асуулга үүсгэх заавартай танилцах",
-    externalHelpLinkUrl:
-      "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
+    externalHelpLinkUrl: "https://www.youtube.com/channel/UCH2ru9okIcooNZfpIbyq4qQ?view_as=subscriber",
     dropQuestion: "Хэрэглүүрээс асуулт нэмнэ үү",
     addLogicItem: "Санал асуулгын урсгалыг өөрчлөх дүрэм үүсгэнэ үү.",
     copy: "Хуулах",
@@ -17,8 +15,6 @@ export var mnStrings = {
     deleteQuestion: "Асуулт устгах",
     convertTo: "Хувиргах",
     drag: "Чирэх",
-    license:
-      "PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP",
   },
   // Question types
   qt: {
@@ -44,7 +40,7 @@ export var mnStrings = {
     boolean: "Тийм/Үгүй",
     expression: "Илэрхийлэл (зөвхөн унших)",
     signaturepad: "Гарын үсэг",
-    buttongroup: "Багц товч",
+    buttongroup: "Багц товч"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -74,6 +70,7 @@ export var mnStrings = {
     newPanelName: "Панелийн нэр",
     newTextItemName: "Текст",
     testSurvey: "Урьдчилан харах",
+    themeSurvey: "Сэдвүүд",
     defaultV2Theme: "Үндсэн",
     modernTheme: "Орчийн үеийн",
     defaultTheme: "Үндсэн (legacy)",
@@ -127,6 +124,7 @@ export var mnStrings = {
     propertyEditorError: "Алдаа",
     saveError: "Алдаа! Зассан агуулга хадгалагдаагүй байна.",
     translationPropertyGridTitle: "Хэлний тохиргоо",
+    themePropertyGridTitle: "Сэдвийн тохиргоо",
     translationLanguages: "Хэл",
     translationAddLanguage: "Орчуулах хэлийг сонгоно уу",
     translationShowAllStrings: "Бүх текст",
@@ -137,16 +135,20 @@ export var mnStrings = {
     translationImportFromSCVButton: "CSV импорт хийх",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
+    themeExportButton: "Экспорт",
+    themeImportButton: "Импорт",
     bold: "Тод",
     italic: "Налуу",
     underline: "Доогуур зураас",
     addNewQuestion: "Асуулт нэмэх",
     selectPage: "Хуудас сонгох...",
+    carryForwardChoicesCopied: "Сонголтыг хуулбарладаг",
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     panelPlaceHolder: "Энд хэрэглүүрээс асуулт чирнэ үү.",
-    surveyPlaceHolder:
-      "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
-    addNewTypeQuestion: "{0} нэмэх", //{0} is localizable question type
+    surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
+    imagePlaceHolder: "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу",
+    imageChooseImage: "Зураг сонгох",
+    addNewTypeQuestion: "{0} нэмэх",
     chooseLogoPlaceholder: "[Лого]",
     auto: "автомат",
     choices_Item: "Хэсэг ",
@@ -168,51 +170,38 @@ export var mnStrings = {
       trigger_copyvalueName: "Хариулт хуулах",
       trigger_skipName: "Асуулт руу алгасах",
       trigger_runExpressionName: "Илэрхийллийг ажиллуулах",
-      completedHtmlOnConditionName:
-        '"Санал асуулга амжилттай бөглөгдсөн" хуудсын тэмдэглэгээг оруулах',
-      page_visibilityDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд хуудсыг харуулах. Бусад үед нуух.",
-      panel_visibilityDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд панелийг харуулах. Бусад үед нуух.",
-      panel_enableDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд панел ба түүн доторх бүх элементийг идэвхжүүлэх. Бусад үед бүгдийг идэвхгүй байлгах.",
-      question_visibilityDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд асуултыг харуулах. Бусад үед нуух.",
-      question_enableDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд хуудсыг идэвхжүүлэх. Бусад үед идэвхгүй болгох.",
-      question_requireDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд асуулт нь заавал бөглөх болох.",
-      trigger_completeDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд санал асуулга амжилттай бөглөн хэрэглэгч 'Баярлалаа' хуудсыг харна.",
-      trigger_setvalueDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд сонгосон асуултын утгыг тохируулна.",
-      trigger_copyvalueDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд сонгосон асуултын утгыг өөр сонгосон асуултын хариулт болгон харуулна.",
-      trigger_skipDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд санал асуулга сонгосон асуултыг алгасна / харуулна.",
-      trigger_runExpressionDescription:
-        "Логик илэрхийлэл биелэгдсэн тохиолдолд хэрэглэгчийн илэрхийллийг ажиллуулна. Та энэ илэрхийллийн үр дүнг  сонгосон асуултын хариулт болгоно.",
-      completedHtmlOnConditionDescription:
-        "Хэрэв логик илэрхийлэл биелэгдсэн тохиолдолд үндсэн 'Баярлалаа' хуудас зааж өгсөн хуудсаар солигдоно.",
-      itemExpressionText: "Илэрхийлэл: '{0}' биелсэн бол", //{0} - the expression
+      completedHtmlOnConditionName: "\"Санал асуулга амжилттай бөглөгдсөн\" хуудсын тэмдэглэгээг оруулах",
+      page_visibilityDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд хуудсыг харуулах. Бусад үед нуух.",
+      panel_visibilityDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд панелийг харуулах. Бусад үед нуух.",
+      panel_enableDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд панел ба түүн доторх бүх элементийг идэвхжүүлэх. Бусад үед бүгдийг идэвхгүй байлгах.",
+      question_visibilityDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд асуултыг харуулах. Бусад үед нуух.",
+      question_enableDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд хуудсыг идэвхжүүлэх. Бусад үед идэвхгүй болгох.",
+      question_requireDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд асуулт нь заавал бөглөх болох.",
+      trigger_completeDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд санал асуулга амжилттай бөглөн хэрэглэгч 'Баярлалаа' хуудсыг харна.",
+      trigger_setvalueDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд сонгосон асуултын утгыг тохируулна.",
+      trigger_copyvalueDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд сонгосон асуултын утгыг өөр сонгосон асуултын хариулт болгон харуулна.",
+      trigger_skipDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд санал асуулга сонгосон асуултыг алгасна / харуулна.",
+      trigger_runExpressionDescription: "Логик илэрхийлэл биелэгдсэн тохиолдолд хэрэглэгчийн илэрхийллийг ажиллуулна. Та энэ илэрхийллийн үр дүнг  сонгосон асуултын хариулт болгоно.",
+      completedHtmlOnConditionDescription: "Хэрэв логик илэрхийлэл биелэгдсэн тохиолдолд үндсэн 'Баярлалаа' хуудас зааж өгсөн хуудсаар солигдоно.",
+      itemExpressionText: "Илэрхийлэл: '{0}' биелсэн бол",
       itemEmptyExpressionText: "Шинэ дүрэм",
-      page_visibilityText: "Хуудсыг {0} харагддаг болгох", //{0} хуудсын нэр
-      panel_visibilityText: "{0} панелийг харагддаг болгох", //{0} панелийн нэр
-      panel_enableText: "{0} панелийг идэвхжүүлэх", //{0} панелийн нэр
-      question_visibilityText: "{0} асуултыг харагддаг болгох", //{0} асуултын нэр
-      question_enableText: "{0} асуултыг идэвхжүүлэх", //{0} асуултын нэр
-      question_requireText: "{0} асуултыг заавал бөглөх болгох", //{0} асуултын нэр
-      column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} баганы нэр, {1} асуултын нэр
-      column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} баганы нэр, {1} асуултын нэр
-      column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} баганы нэр, {1} асуултын нэр
+      page_visibilityText: "Хуудсыг {0} харагддаг болгох",
+      panel_visibilityText: "{0} панелийг харагддаг болгох",
+      panel_enableText: "{0} панелийг идэвхжүүлэх",
+      question_visibilityText: "{0} асуултыг харагддаг болгох",
+      question_enableText: "{0} асуултыг идэвхжүүлэх",
+      question_requireText: "{0} асуултыг заавал бөглөх болгох",
+      column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох",
+      column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх",
+      column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох",
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
-      trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} асуултын нэр, {1} оруулах утга
-      trigger_copyvalueText: "{0} Асуулт руу хуулах утга: {1}", //{0} ба {1} асуултуудын нэр
-      trigger_skipText: "{0} Санал асуулгын асуулт руу үсрэх", //{0} асуултын нэр
-      trigger_runExpressionText1: "'{0}' илэрхийлэлг ажиллуулах: ", //{0} илэрхийлэл
-      trigger_runExpressionText2: " Түүний хариултыг асуултад оруулах: {0}", //{0} асуултын нэр
-      completedHtmlOnConditionText:
-        "'Баярлалаа' хуудсанд тусгай текст харуулах.",
+      trigger_setvalueText: "{0} Асуултад оруулах утга: {1}",
+      trigger_setvalueEmptyText: "тодорхой асуултын үнэ цэнэ: {0}", //{0} question name
+      trigger_copyvalueText: "{0} Асуулт руу хуулах утга: {1}",
+      trigger_skipText: "{0} Санал асуулгын асуулт руу үсрэх",
+      trigger_runExpressionText1: "'{0}' илэрхийлэлг ажиллуулах: ",
+      trigger_runExpressionText2: " Түүний хариултыг асуултад оруулах: {0}",
+      completedHtmlOnConditionText: "'Баярлалаа' хуудсанд тусгай текст харуулах.",
       showAllQuestions: "Бүх асуулт",
       showAllActionTypes: "Бүх үйлдлийн төрлүүд",
       conditions: "Нөхцөл(үүд)",
@@ -222,18 +211,16 @@ export var mnStrings = {
       deleteAction: "Үйлдлийг устгах",
       addNewAction: "Үйлдэл нэмэх",
       selectedActionCaption: "Үйлдэл сонгох...",
-      expressionInvalid:
-        "Логик илэрхийлэл хоосон эсвэл алдаатай байна. Засна уу.",
+      expressionInvalid: "Логик илэрхийлэл хоосон эсвэл алдаатай байна. Засна уу.",
       noActionError: "Ядаж нэг үйлдэл оруулна уу.",
       actionInvalid: "Үйлдэл(үүд)-ийнхээ асуудлыг шийднэ үү.",
       uncompletedRule_title: "Табыг орхих уу?",
-      uncompletedRule_text:
-        "Нэг эсвэл олон логик дүрэм дутуу бичигдсэн байна. Табыг хаавал, оруулсан засварууд арилна. Та табыг хаахдаа итгэлтэй байна уу?",
+      uncompletedRule_text: "Нэг эсвэл олон логик дүрэм дутуу бичигдсэн байна. Табыг хаавал, оруулсан засварууд арилна. Та табыг хаахдаа итгэлтэй байна уу?",
       uncompletedRule_apply: "Тийм",
       uncompletedRule_cancel: "Үгүй, дүрмийг үргэлжлүүлж бичиж дуусгах.",
       expressionSetup: "",
-      actionsSetup: "",
-    },
+      actionsSetup: ""
+    }
   },
   // Property Editors
   pe: {
@@ -272,8 +259,7 @@ export var mnStrings = {
     fastEntry: "Гараар оруулах",
     fastEntryNonUniqueError: "'{0}' утга давтагдаж байна!",
     fastEntryChoicesCountError: "Хэсгийг {0}-оос {1} хүртэл хязгаарлах",
-    fastEntryPlaceholder:
-      "Та дараах форматын дагуу өгөгдлийг оруулж болно:\nvalue1|text\nvalue2",
+    fastEntryPlaceholder: "Та дараах форматын дагуу өгөгдлийг оруулж болно:\nvalue1|text\nvalue2",
     formEntry: "Маягт оруулах",
     testService: "Үйлчилгээг турших",
     itemSelectorEmpty: "Элемент сонгоно уу",
@@ -282,19 +268,19 @@ export var mnStrings = {
     conditionSelectPage: "Хуудас сонгох...",
     conditionSelectPanel: "Панел сонгох...",
     conditionValueQuestionTitle: "Утга оруулах/сонгох",
-    expressionHelp:
-      "Гоё хаалт ашиглан хариулт харах: `{question1} + {question2}`. Мөн томъёо дараах болон бусад функцийг дэмждэг: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`",
+    expressionHelp: "Гоё хаалт ашиглан хариулт харах: `{question1} + {question2}`. Мөн томъёо дараах болон бусад функцийг дэмждэг: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`",
     aceEditorHelp: "ctrl+space дарж илэрхийлэл биелэгдэх сануулга харах.",
     aceEditorRowTitle: "Тухайн мөр",
     aceEditorPanelTitle: "Тухайн панел",
     showMore: "Дэлгэрэнгүй мэдээллийг баримт бичгээс авна уу.",
     assistantTitle: "Боломжтой асуултууд",
     cellsEmptyRowsColumns: "Багадаа нэг багана эсвэл мөр байх ёстой",
-    showPreviewBeforeComplete:
-      "Санал асуулга явуулхаас өмнө хариултуудыг урьдчилж харах",
+    showPreviewBeforeComplete: "Санал асуулга явуулхаас өмнө хариултуудыг урьдчилж харах",
+    overridingPropertyPrefix: "Дэргэд нь ",
     propertyIsEmpty: "Утга оруулна уу",
     propertyIsNoUnique: "Дахин давтагдахгүй утга оруулна уу",
     propertyNameIsNotUnique: "Өөр нэр оруулна уу",
+    propertyNameIsIncorrect: "\"Item\", \"монгол\", \"panel\", \"row\" гэсэн үгсийн нөөц үгийг бүү хэрэглэ.",
     listIsEmpty: "Одоогоор ямар ч зүйл ороогүй байна",
     "listIsEmpty@choices": "Одоогор ямар ч сонголт ороогүй байна",
     "addNew@choices": "Сонголт оруулах",
@@ -309,7 +295,7 @@ export var mnStrings = {
     path: "Үйлчилгэний хүрээнд өгөгдөлд хүрэх зам",
     valueName: "Хариултыг дараагийн JSON талбарт хадгалах",
     choicesbyurl: {
-      valueName: "Утгуудыг дарагийн JSON талбараас авах",
+      valueName: "Утгуудыг дарагийн JSON талбараас авах"
     },
     titleName: "Үзүүлэн текстүүдийг дараагийн JSON талбараас авах",
     imageLinkName: "Зургийн линкийг дараагийн JSON талбараас",
@@ -407,8 +393,7 @@ export var mnStrings = {
     requiredText: "Шаардлагатай тэмдэг(үүд)",
     questionStartIndex: "Эхлэх индекс (тоо эсвэл үсэг)",
     showQuestionNumbers: "Асуултын дугаарлалт",
-    questionTitleTemplate:
-      "Асуултын гарчигны загвар, үндсэн нь: '{үгүй}. {шаардах} {гарчиг}'",
+    questionTitleTemplate: "Асуултын гарчигны загвар, үндсэн нь: '{үгүй}. {шаардах} {гарчиг}'",
     questionErrorLocation: "Алдааны мэдэгдлийн байршил",
     focusFirstQuestionAutomatic: "Эхний асуултыг шинэ хуудсанд төвлөрүүлэх",
     questionsOrder: "Хуудас дээрх элементийн дараалал",
@@ -416,13 +401,13 @@ export var mnStrings = {
     maxTimeToFinishPage: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
     image: {
       imageHeight: "Зургийн өндөр (CSS хүлээн зөвшөөрсөн утга)",
-      imageWidth: "Зургийн өргөн (CSS хүлээн зөвшөөрсөн утга)",
+      imageWidth: "Зургийн өргөн (CSS хүлээн зөвшөөрсөн утга)"
     },
     page: {
-      maxTimeToFinish: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)",
+      maxTimeToFinish: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)"
     },
     question: {
-      page: "Эх хуудас",
+      page: "Эх хуудас"
     },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
@@ -440,8 +425,7 @@ export var mnStrings = {
     allowAddRows: "Мөр нэмэхийг зөвшөөрөх",
     allowRemoveRows: "Мөр хасахыг зөвшөөрөх",
     allowRowsDragAndDrop: "Мөр чирэхийг зөвшөөрөх",
-    responsiveImageSizeHelp:
-      "Зургийн өндөр, өргөнийг зааж өгсөн үед хамаарахгүй.",
+    responsiveImageSizeHelp: "Зургийн өндөр, өргөнийг зааж өгсөн үед хамаарахгүй.",
     minImageWidth: "Зургийн өргөний хамгийн бага хэмжээ",
     maxImageWidth: "Зургийн өргөний хамгийн их хэмжээ",
     minImageHeight: "Зургийн өндрийн хамгийн бага хэмжээ",
@@ -455,7 +439,7 @@ export var mnStrings = {
     regex: "Тогтмол илэрхийлэл",
     surveyvalidator: {
       text: "Алдаа",
-      expression: "Баталгаажуулах илэрхийлэл",
+      expression: "Баталгаажуулах илэрхийлэл"
     },
     totalText: "Нийт мөр",
     totalType: "Нийт төрөл",
@@ -468,22 +452,20 @@ export var mnStrings = {
     maxTextLength: "Хариултын хамгийн их урт(тэмдэгтээр)",
     maxOthersLength: "Хариултын хамгийн бага урт(тэмдэгтээр)",
     autoGrowComment: "Шаардлагатай үед санал сэтгэгдлийн хэсгийг өргөсгөх",
+    allowResizeComment: "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго",
     textUpdateMode: "Текст асуултын утгыг шинэчлэх",
     focusOnFirstError: "Анхны буруу хариулт руу чиглүүлэх",
     checkErrorsMode: "Баталгаажуулалт ажиллуулах",
     navigateToUrl: "URL-рүү чиглүүлэх",
     navigateToUrlOnCondition: "Динамик URL",
-    completedBeforeHtml:
-      "Хэрэглэгч санал асуулгыг бөглөсөн байх үед харуулах тэмдэглэгээ",
-    completedHtml:
-      "Санал асуулга амжилттай бөглөгдсөн үед харуулах тэмдэглэгээ",
-    completedHtmlOnCondition:
-      "Санал асуулга амжилттай бөглөгдсөн үед харуулах динамик тэмдэглэгээ",
+    completedBeforeHtml: "Хэрэглэгч санал асуулгыг бөглөсөн байх үед харуулах тэмдэглэгээ",
+    completedHtml: "Санал асуулга амжилттай бөглөгдсөн үед харуулах тэмдэглэгээ",
+    completedHtmlOnCondition: "Санал асуулга амжилттай бөглөгдсөн үед харуулах динамик тэмдэглэгээ",
     loadingHtml: "Судалгааны загвар ачааллаж байх үед харуулах тэмдэглэгээ",
     commentText: "Санал сэтгэгдлийн хэсгийн текст",
     autocomplete: "Автоматаар бөглөх төрөл",
-    labelTrue: '"Тийм" шошго',
-    labelFalse: '"Үгүй" шошго',
+    labelTrue: "\"Тийм\" шошго",
+    labelFalse: "\"Үгүй\" шошго",
     allowClear: "Цэвэрлэх товч харуулах",
     displayStyle: "Утга харуулах хэв маяг",
     format: "Хэлбэржүүлсэн текст",
@@ -501,7 +483,7 @@ export var mnStrings = {
     confirmDelete: "Мөр устгахыг батлах",
     confirmDeleteText: "Баталгаажуулах мессеж",
     paneldynamic: {
-      confirmDelete: "Панел устгахыг батлах",
+      confirmDelete: "Панел устгахыг батлах"
     },
     panelCount: "Панелийн эхлэх тоо",
     minPanelCount: "Хамгийн бага панелийн тоо",
@@ -517,6 +499,8 @@ export var mnStrings = {
     hideIfRowsEmpty: "Мөр байхгүй тохиолдолд асуултыг нуух",
     hideColumnsIfEmpty: "Мөр байхгүй тохиолдолд баганыг нуух",
     rateValues: "Хэрэглэгчийн үнэлгээний утгууд",
+    rateCount: "Үнэ тогтоох",
+    autoGenerate: "Үнэ цэнийг хэрхэн тодорхойлох вэ?",
     hideIfChoicesEmpty: "Сонголтгүй бол асуултыг нуух",
     hideNumber: "Асуултын тоог харуулахгүй байх",
     minWidth: "Хамгийн бага өргөн (CSS хүлээн зөвшөөрсөн утга)",
@@ -532,6 +516,7 @@ export var mnStrings = {
     maxErrorText: "Хамгийн их утгаас их байна! алдааны мэдэгдэл",
     otherErrorText: "Хоосон санал хүсэлт! алдааны мэдэгдэл",
     keyDuplicationError: "Давтагдсан утга! алдааны мэдэгдэл",
+    minSelectedChoices: "Хамгийн бага сонгосон сонголт",
     maxSelectedChoices: "Хамгийн ихдээ сонгох боломжийн тоо",
     showClearButton: "Цэвэрлэх товч харуулах",
     showNumber: "Панелийн тоо харуулах",
@@ -539,16 +524,14 @@ export var mnStrings = {
     logoHeight: "Логөны өндөр (CSS хүлээн зөвшөөрсөн утга)",
     readOnly: "Зөвхөн унших",
     enableIf: "Засах боломжтой хэрэв",
-    emptyRowsText: '"Мөр байхгүй байна!" мэдэгдэл',
+    emptyRowsText: "\"Мөр байхгүй байна!\" мэдэгдэл",
     size: "Оролтын хэмжээ (тэмдэгтээр)",
-    separateSpecialChoices:
-      "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
+    separateSpecialChoices: "Тусгай сонголтуудыг салгах (Аль нь ч биш, Бусад, Бүгдийг сонгох)",
     choicesFromQuestion: "Дараах асуултаас сонголтуудыг хуулах.",
     choicesFromQuestionMode: "Аль сонголтуудыг хуулах вэ?",
     showCommentArea: "Санал хүсэлтийн хэсэг харуулах",
     commentPlaceholder: "Санал хүсэлтийн хэсэг",
-    displayRateDescriptionsAsExtremeItems:
-      "Display rate descriptions as extreme values",
+    displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
     rowsOrder: "Мөрний дараалал",
     columnsLayout: "Баганы зохион байгуулалт",
     columnColCount: "Шаталсан баганын тоо",
@@ -558,7 +541,7 @@ export var mnStrings = {
     cells: "Нүдний текст",
     keyName: "Түлхүүр багана",
     itemvalue: {
-      text: "Тайлбар",
+      text: "Тайлбар"
     },
     logoPosition: "Логоны байршил",
     addLogo: "Лого нэмэх...",
@@ -568,7 +551,7 @@ export var mnStrings = {
       left: "Зүүн",
       right: "Баруун",
       top: "Дээр",
-      bottom: "Доор",
+      bottom: "Доор"
     },
     tabs: {
       general: "Ерөнхий",
@@ -604,7 +587,7 @@ export var mnStrings = {
       logo: "Санал асуулгын гарчиг дахь лого",
       slider: "Гулсуулагч",
       expression: "илэрхийлэл",
-      others: "Бусад",
+      others: "Бусад"
     },
     editProperty: "Шинж чанарыг засварлах '{0}'",
     items: "Элементүүд",
@@ -614,7 +597,7 @@ export var mnStrings = {
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     indent: "Догол мөр нэмэх",
     panel: {
-      indent: "Гаднах догол мөр нэмэх",
+      indent: "Гаднах догол мөр нэмэх"
     },
     innerIndent: "Дотоод догол мөр нэмэх",
     defaultValueFromLastRow: "Өмнөх мөрнөөс үндсэн утга авах",
@@ -623,8 +606,7 @@ export var mnStrings = {
     noquestions: "Санал асуулгад асуулт оруулна уу.",
     createtrigger: "Схем устгана уу.",
     titleKeyboardAdornerTip: "Засахын тулд Enter товчийг дарна уу",
-    keyboardAdornerTip:
-      "Засахын тулд Enter товчийг дарна уу, Устгахын тулд Delete товчийг дарна уу, Хөдөлгөхийн тулд alt + дээш сум эсвэл доош сум дарна уу",
+    keyboardAdornerTip: "Засахын тулд Enter товчийг дарна уу, Устгахын тулд Delete товчийг дарна уу, Хөдөлгөхийн тулд alt + дээш сум эсвэл доош сум дарна уу",
     triggerOn: "On ",
     triggerMakePagesVisible: "Хуудсуудыг харуулах",
     triggerMakeQuestionsVisible: "Элементүүдийг харуулах",
@@ -652,11 +634,12 @@ export var mnStrings = {
     columnsVisibleIf: "Баганууд харагдана хэрэв",
     rowsVisibleIf: "Мөрнүүд харагдана хэрэв",
     otherPlaceholder: "Санал асуулгын хэсэг",
+    rateType: "Rate төрөл"
   },
   // Property values
   pv: {
-    true: "Үнэн",
-    false: "Худал",
+    "true": "Үнэн",
+    "false": "Худал",
     inherit: "Удамших",
     show: "Харагдана",
     hide: "Нуусан",
@@ -680,8 +663,8 @@ export var mnStrings = {
     list: "Жагсаалт",
     progressTop: "Панел чиглүүлэгч + Явцын мөр дээд хэсэгт байрлах",
     progressBottom: "Панел чиглүүлэгч + Явцын мөр доод хэсэгт байрлах",
-    progressTopBottom:
-      "Панел чиглүүлэгч + Явцын мөр дээд ба доод хэсэгт байрлах",
+    progressTopBottom: "Панел чиглүүлэгч + Явцын мөр дээд ба доод хэсэгт байрлах",
+    tab: "Табууд",
     horizontal: "Хэвтээ",
     vertical: "Босоо",
     top: "Дээд",
@@ -713,7 +696,22 @@ export var mnStrings = {
     onHidden: "Асуулт нуугдсан үед",
     onHiddenContainer: "Асуулт, панел эсвэл хуудас нуугдсан үед",
     clearInvisibleValues: {
-      none: "Хэзээ ч үгүй",
+      none: "Хэзээ ч үгүй"
+    },
+    inputType: {
+      color: "Өнгө",
+      date: "Огноо",
+      "datetime-local": "Огноо, цаг",
+      email: "И-мэйл",
+      month: "Сар",
+      number: "Тоо хэмжээ",
+      password: "Нууц үг",
+      range: "Хамрах хүрээ",
+      tel: "Утасны дугаар",
+      text: "Текст",
+      time: "Цаг хугацаа",
+      url: "URL",
+      week: "Долоо хоног"
     },
     all: "Бүх",
     page: "Хуудас",
@@ -739,50 +737,62 @@ export var mnStrings = {
     underRow: "Мөрийн доор",
     underRowSingle: "Мөрийн доор, зөвхөн ганц панел харагдана",
     showNavigationButtons: {
-      none: "Нуусан",
+      none: "Нуусан"
     },
     showProgressBar: {
-      off: "Нуусан",
+      off: "Нуусан"
     },
     showTimerPanel: {
-      none: "Нуусан",
+      none: "Нуусан"
     },
     showTimerPanelMode: {
-      all: "Аль аль нь",
+      all: "Аль аль нь"
     },
     detailPanelMode: {
-      none: "Нуусан",
+      none: "Нуусан"
     },
     addRowLocation: {
-      default: "Матрицын загвараас шалтгаалах",
+      default: "Матрицын загвараас шалтгаалах"
     },
     panelsState: {
       default: "Хэрэглэгчид панелийг өргөсгөж багасгаж чадахгүй",
       collapsed: "Бүх панел багассан",
-      expanded: "Бүх панел өргөтгөссөн",
+      expanded: "Бүх панел өргөтгөссөн"
     },
     widthMode: {
       auto: "Автомат",
       static: "Статик",
-      responsive: "Уян хатан",
+      responsive: "Уян хатан"
     },
     imageFit: {
       none: "Аль нь ч биш",
       contain: "Агуулах",
       cover: "Халхлах",
-      fill: "Бөглөх",
+      fill: "Бөглөх"
     },
     contentMode: {
       auto: "Автомат",
       image: "Зураг",
       video: "Видео",
-      youtube: "YouTube",
+      youtube: "YouTube"
     },
     displayMode: {
       auto: "Автомат",
       buttons: "Товчнууд",
-      dropdown: "Доош задрах",
+      dropdown: "Доош задрах"
     },
+    rateColorMode: {
+      default: "Дефолт"
+    },
+    autoGenerate: {
+      "true": "Үүсгэх",
+      "false": "Гараар оруул"
+    },
+    rateType: {
+      labels: "Labels",
+      stars: "Одод",
+      smileys: "Инээмсэглэл"
+    }
   },
   // Operators
   op: {
@@ -799,7 +809,7 @@ export var mnStrings = {
     greaterorequal: "-аас их эсвэл тэнцүү байх",
     lessorequal: "-аас бага эсвэл тэнцүү байх",
     and: "ба",
-    or: "эсвэл",
+    or: "эсвэл"
   },
   // Embed window
   ew: {
@@ -822,13 +832,13 @@ export var mnStrings = {
     loadFromServer: "JSON серверээс санал асуулгыг ачааллуулах",
     titleScript: "Скрипт ба хэв маяг",
     titleHtml: "HTML",
-    titleJavaScript: "JavaScript",
+    titleJavaScript: "JavaScript"
   },
   // Preview (Survey)
   ts: {
     selectPage: "Тест хийх хуудсыг сонгох.",
     showInvisibleElements: "Харагдахгүй элементүүдийг харуулах.",
-    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух.",
+    hideInvisibleElements: "Харагдахгүй элементүүдийг нуух."
   },
   validators: {
     answercountvalidator: "Хариултын тоо",
@@ -836,7 +846,7 @@ export var mnStrings = {
     expressionvalidator: "илэрхийлэл",
     numericvalidator: "Тоо",
     regexvalidator: "Regex",
-    textvalidator: "Текст",
+    textvalidator: "Текст"
   },
   triggers: {
     completetrigger: "Санал асуулга дуусгах.",
@@ -844,31 +854,27 @@ export var mnStrings = {
     copyvaluetrigger: "Хариулт хуулах",
     skiptrigger: "Асуулт руу үсрэх",
     runexpressiontrigger: "илэрхийлэл ажлуулах",
-    visibletrigger: "Харагдах байдлыг өөрчлөх",
+    visibletrigger: "Харагдах байдлыг өөрчлөх"
   },
   pehelp: {
     cookieName: "Хэрэглэгч нэг судалгааг хоёр удаа бөглөхөөс Күүки сэргийлнэ.",
+    size: "Оролт гаралтын талбарын үзэгдэх талбайг дахин тохируулах. Оролтын уртыг <b>хязгаарлахын тулд Validation → Maximum урт</b> тохиргоог ашиглана уу.",
     format: "{0} нь тухайн утгын жишээ болно.",
-    totalText:
-      "Хамгийн багадаа нэг багана Нэмэх төрлийн эвсэл нэмэх үйлдэлтэй үед л харагдах боломжтой.",
-    acceptedTypes:
-      "Атрибутын талаар нэмэлт мэдээллийг үзэхийн тулд [accept](https://www.w3schools.com/tags/att_input_accept.asp)-лүү хандана уу.",
+    totalText: "Хамгийн багадаа нэг багана Нэмэх төрлийн эвсэл нэмэх үйлдэлтэй үед л харагдах боломжтой.",
+    acceptedTypes: "Атрибутын талаар нэмэлт мэдээллийг үзэхийн тулд [accept](https://www.w3schools.com/tags/att_input_accept.asp)-лүү хандана уу.",
     columnColCount: "Зөвхөн олон сонголттой эсвэл Radiogroup -д ашиглана.",
-    autocomplete:
-      "Аттрибутын талаар дэлгэрэнгүй мэдээллийг [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)-ээс авна уу .",
-    valueName:
-      "Хэрэв энэ талбарын утгыг оруулаагүй бол хариулт нь автоматаар Нэр талбарт хадгална.",
+    autocomplete: "Аттрибутын талаар дэлгэрэнгүй мэдээллийг [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)-ээс авна уу .",
+    valueName: "Хэрэв энэ талбарын утгыг оруулаагүй бол хариулт нь автоматаар Нэр талбарт хадгална.",
     choicesbyurl: {
-      valueName: " ",
+      valueName: " "
     },
-    keyName:
-      'Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга "Давтагдсан утга" гэсэн алдааг харуулна.',
+    keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна."
   },
   // Properties
   p: {
     title: {
       name: "Гарчиг",
-      title: "'Нэр'-тэй адилхан бол хоосон орхих.",
+      title: "'Нэр'-тэй адилхан бол хоосон орхих."
     },
     multiSelect: "Олон сонголтыг зөвшөөрөх",
     showLabel: "Зургийн тайлбар харуулах",
@@ -931,6 +937,7 @@ export var mnStrings = {
     navigationDescription: "Чиглүүлэгчийн тайлбар",
     longTap: "Long tap",
     autoGrow: "Автоматаар нэмэх",
+    allowResize: "Дахин сэргээх боломж олго",
     acceptCarriageReturn: "Accept carriage return",
     displayMode: "Дэлгэцийн горим",
     rateType: "Дамжуулах хурд",
@@ -948,10 +955,248 @@ export var mnStrings = {
     showCaption: "Тайлбар харуулах",
     iconName: "Дүрсийн нэр",
     iconSize: "Дүрсийн хэмжээ",
+    precision: "Нарийвчлал",
+    matrixDragHandleArea: "Матриц чирэх бариулын талбай",
+    backgroundImage: "Ар талын зураг",
+    backgroundImageFit: "Ар талын зураг тохирно",
+    backgroundImageAttachment: "Ар талын зургийн хавсралт",
+    backgroundOpacity: "Ар талын харанхуй байдал",
+    selectToRankEnabled: "Боломжтой зэрэглэлийг сонгох",
+    selectToRankAreasLayout: "Бүсүүдийн загварыг сонгох",
+    allowCameraAccess: "Камераар нэвтрэх боломж олгох",
+    scaleColorMode: "Масштабын өнгө загвар",
+    rateColorMode: "Хэмжээ өнгөний хэв маяг",
+    templateTabTitle: "Template tab цол",
+    templateVisibleIf: "Хэрэв Template харагдах",
+    copyDisplayValue: "Copy display value"
   },
+  theme: {
+    "--background": "Ар талын өнгө",
+    "--background-dim-light": "Ар талын бүдэг гэрэл өнгө",
+    "--primary-foreground": "Хүүхдийн хэсгийн өмнөх өнгө",
+    "--foreground": "Өнгөө",
+    "--base-unit": "Үндсэн нэгж",
+    groupGeneral: "Ерөнхий",
+    groupAdvanced: "Өндөр хөгжсөн",
+    themeName: "Сэдэв",
+    themeMode: "Асуулт хариултын төрх",
+    themeModePanels: "Дефолт",
+    themeModeLightweight: "Панелгүйгээр",
+    themePaletteLight: "Гэрэл",
+    themePaletteDark: "Харанхуй",
+    primaryColor: "Акцент өнгө",
+    primaryDefaultColor: "Дефолт",
+    primaryDarkColor: "Ховер",
+    primaryLightColor: "Сонгосон",
+    backgroundDimColor: "Ар талын өнгө",
+    backgroundImage: "Ар талын зураг",
+    backgroundImageFitAuto: "Авто",
+    backgroundImageFitCover: "Хөшиг",
+    backgroundImageFitContain: "Агуулах",
+    backgroundOpacity: "Бүдүүлэг байдал",
+    backgroundImageAttachmentFixed: "Зассан",
+    backgroundImageAttachmentScroll: "Хуйлмал бичиг",
+    panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
+    questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
+    questionPanel: "Панелийн ар талын болон булангийн радиус",
+    questionTitle: "Асуулт нэрийн фонт",
+    questionDescription: "Асуултын тодорхойлолтын фонт",
+    editorPanel: "Оролтын элемент",
+    editorFont: "Оролтын элементийн фонт",
+    backcolor: "Дефолт нөхцөл байдал",
+    hovercolor: "Hover-ийн гарал үүсэл",
+    borderDecoration: "Хилийн чимэг",
+    accentBackground: "Акцентийн гарал үүсэл",
+    accentForeground: "Акцентийн өмнө",
+    primaryForecolor: "Дефолт өнгө",
+    primaryForecolorLight: "Хөгжлийн бэрхшээлтэй хүний өнгө",
+    linesColors: "Бага шугаман өнгө",
+    borderDefault: "Илүү харанхуй",
+    borderLight: "Гэрэлтэй",
+    fontFamily: "Фонтын гэр бүл",
+    fontSize: "Фонтын хэмжээ",
+    color: "Өнгө",
+    size: "Хэмжээ",
+    fontWeightRegular: "Тогтмол",
+    fontWeightHeavy: "Хүнд",
+    fontWeightSemiBold: "Хагас зоригтой",
+    fontWeightBold: "Болд",
+    scale: "Хэмжүүр",
+    cornerRadius: "Булангийн радиус",
+    surveyTitle: "Судалгааны нэрийн фонт",
+    pageTitle: "Хуудасны нэрийн фонт",
+    pageDescription: "Хуудасны дүрслэлийн фонт",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    boxShadowAddRule: "Сүүдрийн эффект нэмэх",
+    opacity: "Бүдүүлэг байдал",
+    boxShadowBlur: "Блур",
+    boxShadowSpread: "Тархалт",
+    boxShadowDrop: "Дусал",
+    boxShadowInner: "Дотоод",
+    questionShadow: "Сүүдрийн нөлөө",
+    editorShadow: "Оролт элементийн сүүдрийн нөлөө",
+    names: {
+      default: "Дефолт",
+      contrast: "Эсрэг тэсрэг",
+      plain: "Энгийн",
+      simple: "Энгийн",
+      blank: "Хоосон",
+      double: "Хоёр дахин",
+      bulk: "Булк",
+      "pseudo-3d": "Псевдо 3D",
+      playful: "Тоглосон",
+      ultra: "Ультра"
+    },
+    colors: {
+      teal: "Цайл",
+      blue: "Цэнхэр",
+      purple: "Пүрвээ",
+      orchid: "Орхон",
+      tulip: "Тюлип",
+      brown: "Браун",
+      green: "Ногоон"
+    }
+  }
 };
 
 // Uncomment the line below if you create a custom dictionary.
 // Replace "en" with a custom locale code (for example, "fr" or "de"),
 // Replace `enStrings` with the name of the variable that contains the custom dictionary.
 editorLocalization.locales["mn"] = mnStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// ed.themeSurvey: "Themes" => "Сэдвүүд"
+// ed.themePropertyGridTitle: "Theme Settings" => "Сэдвийн тохиргоо"
+// ed.themeExportButton: "Export" => "Экспорт"
+// ed.themeImportButton: "Import" => "Импорт"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "Сонголтыг хуулбарладаг"
+// ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "Энд зураг чирж унагаах эсвэл доорх товчийг дарж татаж авах зургийг сонгоно уу"
+// ed.imageChooseImage: "Choose Image" => "Зураг сонгох"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "тодорхой асуултын үнэ цэнэ: {0}"
+// pe.overridingPropertyPrefix: "Set by " => "Дэргэд нь "
+// pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "\"Item\", \"монгол\", \"panel\", \"row\" гэсэн үгсийн нөөц үгийг бүү хэрэглэ."
+// pe.allowResizeComment: "Allow users to resize text areas" => "Хэрэглэгчдэд текстийн газруудыг дахин ашиглах боломж олго"
+// pe.rateCount: "Rate count" => "Үнэ тогтоох"
+// pe.autoGenerate: "How to specify rate values?" => "Үнэ цэнийг хэрхэн тодорхойлох вэ?"
+// pe.minSelectedChoices: "Minimum selected choices" => "Хамгийн бага сонгосон сонголт"
+// pe.rateType: "Rate type" => "Rate төрөл"
+// pv.tab: "Tabs" => "Табууд"
+// inputType.color: "Color" => "Өнгө"
+// inputType.date: "Date" => "Огноо"
+// inputType.datetime-local: "Date and Time" => "Огноо, цаг"
+// inputType.email: "Email" => "И-мэйл"
+// inputType.month: "Month" => "Сар"
+// inputType.number: "Number" => "Тоо хэмжээ"
+// inputType.password: "Password" => "Нууц үг"
+// inputType.range: "Range" => "Хамрах хүрээ"
+// inputType.tel: "Phone Number" => "Утасны дугаар"
+// inputType.text: "Text" => "Текст"
+// inputType.time: "Time" => "Цаг хугацаа"
+// inputType.url: "URL" => "URL"
+// inputType.week: "Week" => "Долоо хоног"
+// rateColorMode.default: "Default" => "Дефолт"
+// autoGenerate.true: "Generate" => "Үүсгэх"
+// autoGenerate.false: "Enter manually" => "Гараар оруул"
+// rateType.labels: "Labels" => "Labels"
+// rateType.stars: "Stars" => "Одод"
+// rateType.smileys: "Smileys" => "Инээмсэглэл"
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Оролт гаралтын талбарын үзэгдэх талбайг дахин тохируулах. Оролтын уртыг <b>хязгаарлахын тулд Validation → Maximum урт</b> тохиргоог ашиглана уу."
+// p.allowResize: "Allow resizing" => "Дахин сэргээх боломж олго"
+// p.precision: "Precision" => "Нарийвчлал"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "Матриц чирэх бариулын талбай"
+// p.backgroundImage: "Background image" => "Ар талын зураг"
+// p.backgroundImageFit: "Background image fit" => "Ар талын зураг тохирно"
+// p.backgroundImageAttachment: "Background image attachment" => "Ар талын зургийн хавсралт"
+// p.backgroundOpacity: "Background opacity" => "Ар талын харанхуй байдал"
+// p.selectToRankEnabled: "Select to rank enabled" => "Боломжтой зэрэглэлийг сонгох"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "Бүсүүдийн загварыг сонгох"
+// p.allowCameraAccess: "Allow camera access" => "Камераар нэвтрэх боломж олгох"
+// p.scaleColorMode: "Scale color mode" => "Масштабын өнгө загвар"
+// p.rateColorMode: "Rate color mode" => "Хэмжээ өнгөний хэв маяг"
+// p.templateTabTitle: "Template tab title" => "Template tab цол"
+// p.templateVisibleIf: "Template visible if" => "Хэрэв Template харагдах"
+// p.copyDisplayValue: "Copy display value" => "Copy display value"
+// theme.--background: "Background color" => "Ар талын өнгө"
+// theme.--background-dim-light: "Background dim light color" => "Ар талын бүдэг гэрэл өнгө"
+// theme.--primary-foreground: "Primary foreground color" => "Хүүхдийн хэсгийн өмнөх өнгө"
+// theme.--foreground: "Foreground color" => "Өнгөө"
+// theme.--base-unit: "Base unit" => "Үндсэн нэгж"
+// theme.groupGeneral: "General" => "Ерөнхий"
+// theme.groupAdvanced: "Advanced" => "Өндөр хөгжсөн"
+// theme.themeName: "Theme" => "Сэдэв"
+// theme.themeMode: "Question appearance" => "Асуулт хариултын төрх"
+// theme.themeModePanels: "Default" => "Дефолт"
+// theme.themeModeLightweight: "Without Panels" => "Панелгүйгээр"
+// theme.themePaletteLight: "Light" => "Гэрэл"
+// theme.themePaletteDark: "Dark" => "Харанхуй"
+// theme.primaryColor: "Accent color" => "Акцент өнгө"
+// theme.primaryDefaultColor: "Default" => "Дефолт"
+// theme.primaryDarkColor: "Hover" => "Ховер"
+// theme.primaryLightColor: "Selected" => "Сонгосон"
+// theme.backgroundDimColor: "Background color" => "Ар талын өнгө"
+// theme.backgroundImage: "Background image" => "Ар талын зураг"
+// theme.backgroundImageFitAuto: "Auto" => "Авто"
+// theme.backgroundImageFitCover: "Cover" => "Хөшиг"
+// theme.backgroundImageFitContain: "Contain" => "Агуулах"
+// theme.backgroundOpacity: "Opacity" => "Бүдүүлэг байдал"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "Зассан"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "Хуйлмал бичиг"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Панелийн ар талын харанхуй байдал"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Асуулт хариултын нөхцөл байдал"
+// theme.questionPanel: "Panel background and corner radius" => "Панелийн ар талын болон булангийн радиус"
+// theme.questionTitle: "Question title font" => "Асуулт нэрийн фонт"
+// theme.questionDescription: "Question description font" => "Асуултын тодорхойлолтын фонт"
+// theme.editorPanel: "Input element" => "Оролтын элемент"
+// theme.editorFont: "Input element font" => "Оролтын элементийн фонт"
+// theme.backcolor: "Default background" => "Дефолт нөхцөл байдал"
+// theme.hovercolor: "Hover background" => "Hover-ийн гарал үүсэл"
+// theme.borderDecoration: "Border decoration" => "Хилийн чимэг"
+// theme.accentBackground: "Accent background" => "Акцентийн гарал үүсэл"
+// theme.accentForeground: "Accent foreground" => "Акцентийн өмнө"
+// theme.primaryForecolor: "Default color" => "Дефолт өнгө"
+// theme.primaryForecolorLight: "Disabled color" => "Хөгжлийн бэрхшээлтэй хүний өнгө"
+// theme.linesColors: "Minor line colors" => "Бага шугаман өнгө"
+// theme.borderDefault: "Darker" => "Илүү харанхуй"
+// theme.borderLight: "Lighter" => "Гэрэлтэй"
+// theme.fontFamily: "Font family" => "Фонтын гэр бүл"
+// theme.fontSize: "Font size" => "Фонтын хэмжээ"
+// theme.color: "Color" => "Өнгө"
+// theme.size: "Size" => "Хэмжээ"
+// theme.fontWeightRegular: "Regular" => "Тогтмол"
+// theme.fontWeightHeavy: "Heavy" => "Хүнд"
+// theme.fontWeightSemiBold: "Semi-bold" => "Хагас зоригтой"
+// theme.fontWeightBold: "Bold" => "Болд"
+// theme.scale: "Scale" => "Хэмжүүр"
+// theme.cornerRadius: "Corner radius" => "Булангийн радиус"
+// theme.surveyTitle: "Survey title font" => "Судалгааны нэрийн фонт"
+// theme.pageTitle: "Page title font" => "Хуудасны нэрийн фонт"
+// theme.pageDescription: "Page description font" => "Хуудасны дүрслэлийн фонт"
+// theme.boxShadowX: "X" => "X"
+// theme.boxShadowY: "Y" => "Y"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "Сүүдрийн эффект нэмэх"
+// theme.opacity: "Opacity" => "Бүдүүлэг байдал"
+// theme.boxShadowBlur: "Blur" => "Блур"
+// theme.boxShadowSpread: "Spread" => "Тархалт"
+// theme.boxShadowDrop: "Drop" => "Дусал"
+// theme.boxShadowInner: "Inner" => "Дотоод"
+// theme.questionShadow: "Shadow effects" => "Сүүдрийн нөлөө"
+// theme.editorShadow: "Input element shadow effects" => "Оролт элементийн сүүдрийн нөлөө"
+// names.default: "Default" => "Дефолт"
+// names.contrast: "Contrast" => "Эсрэг тэсрэг"
+// names.plain: "Plain" => "Энгийн"
+// names.simple: "Simple" => "Энгийн"
+// names.blank: "Blank" => "Хоосон"
+// names.double: "Double" => "Хоёр дахин"
+// names.bulk: "Bulk" => "Булк"
+// names.pseudo-3d: "Pseudo 3D" => "Псевдо 3D"
+// names.playful: "Playful" => "Тоглосон"
+// names.ultra: "Ultra" => "Ультра"
+// colors.teal: "Teal" => "Цайл"
+// colors.blue: "Blue" => "Цэнхэр"
+// colors.purple: "Purple" => "Пүрвээ"
+// colors.orchid: "Orchid" => "Орхон"
+// colors.tulip: "Tulip" => "Тюлип"
+// colors.brown: "Brown" => "Браун"
+// colors.green: "Green" => "Ногоон"

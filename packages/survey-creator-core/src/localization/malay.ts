@@ -1,5 +1,3 @@
-// This dictionary contains 292 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var msStrings = {
@@ -16,7 +14,7 @@ export var msStrings = {
     deletePanel: "Padamkan Panel",
     deleteQuestion: "Padamkan Soalan",
     convertTo: "Tukar kepada",
-    drag: "Seret unsur"
+    drag: "Seret unsur",
   },
   // Question types
   qt: {
@@ -27,7 +25,7 @@ export var msStrings = {
     ranking: "Kedudukan",
     image: "Imej",
     dropdown: "Juntai bawah",
-    // tagbox: "Multi-Select Dropdown",
+    tagbox: "Juntai Bawah Berbilang Pilihan",
     file: "Fail",
     html: "HTML",
     matrix: "Matriks (pilihan tunggal)",
@@ -42,7 +40,7 @@ export var msStrings = {
     boolean: "Yes/No (Boolean)",
     expression: "Ekspresi (baca sahaja)",
     signaturepad: "Pad tandatangan",
-    // buttongroup: "Button Group"
+    buttongroup: "Kumpulan Butang"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -50,17 +48,17 @@ export var msStrings = {
     survey: "Tinjauan",
     settings: "Tetapan Tinjauan",
     settingsTooltip: "Buka tetapan tinjauan",
-    // surveySettings: "Survey Settings",
-    // surveySettingsTooltip: "Open survey settings",
+    surveySettings: "Seting Tinjauan",
+    surveySettingsTooltip: "Buka seting tinjauan",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
-    // prevSelected: "Select previous",
-    // nextSelected: "Select next",
-    // surveyTypeName: "Survey",
-    // pageTypeName: "Page",
-    // panelTypeName: "Panel",
-    // questionTypeName: "Question",
-    // columnTypeName: "Column",
+    prevSelected: "Pilih sebelumnya",
+    nextSelected: "Pilih seterusnya",
+    surveyTypeName: "Kaji selidik",
+    pageTypeName: "Laman",
+    panelTypeName: "Panel",
+    questionTypeName: "Soalan",
+    columnTypeName: "Lajur",
     addNewPage: "Tambahkan Halaman Baharu",
     moveRight: "Tatal ke Kanan",
     moveLeft: "Tatal ke Kiri",
@@ -72,9 +70,10 @@ export var msStrings = {
     newPanelName: "panel",
     newTextItemName: "teks",
     testSurvey: "Uji Tinjauan",
-    // defaultV2Theme: "Default",
-    // modernTheme: "Modern",
-    // defaultTheme: "Default (legacy)",
+    themeSurvey: "Tema",
+    defaultV2Theme: "Lalai",
+    modernTheme: "Moden",
+    defaultTheme: "Lalai (warisan)",
     testSurveyAgain: "Uji Tinjauan Semula",
     testSurveyWidth: "Lebar tinjauan: ",
     navigateToMsg: "Anda perlu navigasi ke:",
@@ -85,14 +84,14 @@ export var msStrings = {
     saveSurveyTooltip: "Simpan Tinjauan",
     designer: "Pereka Bentuk Tinjauan",
     jsonEditor: "Editor JSON",
-    // jsonHideErrors: "Hide errors",
-    // jsonShowErrors: "Show errors",
+    jsonHideErrors: "Sembunyikan ralat",
+    jsonShowErrors: "Tunjukkan ralat",
     undo: "Buat Asal",
     redo: "Buat Semula",
     undoTooltip: "Buat asal perubahan terakhir",
     redoTooltip: "Buat semula perubahan",
-    // showMoreChoices: "Show more",
-    // showLessChoices: "Show less",
+    showMoreChoices: "Tunjuk lebih banyak",
+    showLessChoices: "Tunjukkan kurang",
     copy: "Salin",
     cut: "Potong",
     paste: "Tampal",
@@ -104,13 +103,13 @@ export var msStrings = {
     generateReadableJSON: "Jana JSON yang Boleh Dibaca",
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
-    // propertyGridFilteredTextPlaceholder: "Type to search...",
+    propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
     toolboxGeneralCategory: "Umum",
-    // toolboxChoiceCategory: "Choice Questions",
-    // toolboxTextCategory: "Text Input Questions",
-    // toolboxContainersCategory: "Containers",
-    // toolboxMatrixCategory: "Matrix Questions",
-    // toolboxMiscCategory: "Misc",
+    toolboxChoiceCategory: "Soalan Pilihan",
+    toolboxTextCategory: "Soalan Input Teks",
+    toolboxContainersCategory: "Bekas",
+    toolboxMatrixCategory: "Soalan Matriks",
+    toolboxMiscCategory: "Misc",
     correctJSON: "Pilih JSON yang betul.",
     surveyResults: "Keputusan Tinjauan: ",
     surveyResultsTable: "Sebagai Jadual",
@@ -124,41 +123,48 @@ export var msStrings = {
     saved: "Disimpan",
     propertyEditorError: "Ralat:",
     saveError: "Ralat! Kandungan editor tidak disimpan.",
-    // translationPropertyGridTitle: "Language Settings",
-    // translationLanguages: "Languages",
+    translationPropertyGridTitle: "Seting Bahasa",
+    themePropertyGridTitle: "Seting Tema",
+    translationLanguages: "Bahasa-bahasa",
     translationAddLanguage: "Pilihan bahasa untuk diterjemah",
     translationShowAllStrings: "Tunjukkan semua rentetan",
-    // translationShowUsedStringsOnly: "Used Strings Only",
+    translationShowUsedStringsOnly: "Rentetan yang Digunakan Sahaja",
     translationShowAllPages: "Tunjukkan semua halaman",
     translationNoStrings: "Tiada rentetan untuk diterjemah. Sila ubah penapis.",
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
-    // translationPlaceHolder: "Translation...",
+    translationPlaceHolder: "Penterjemahan...",
+    themeExportButton: "Eksport",
+    themeImportButton: "Import",
     bold: "Tebal",
     italic: "Condong",
     underline: "Garis bawah",
     addNewQuestion: "Tambahkan soalan",
     selectPage: "Pilih halaman...",
-    // htmlPlaceHolder: "HTML content will be here.",
-    // panelPlaceHolder: "Drop a question from the toolbox here.",
-    // surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
-    // addNewTypeQuestion: "Add {0}", //{0} is localizable question type
-    // chooseLogoPlaceholder: "[LOGO]",
-    // auto: "auto",
+    carryForwardChoicesCopied: "Pilihan disalin daripada",
+    htmlPlaceHolder: "Kandungan HTML akan berada di sini.",
+    panelPlaceHolder: "Lepaskan soalan dari kotak alat di sini.",
+    surveyPlaceHolder: "Tinjauan itu kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
+    imagePlaceHolder: "Seret dan lepaskan imej di sini atau klik butang di bawah dan pilih imej untuk dimuat naik",
+    imageChooseImage: "Pilih Imej",
+    addNewTypeQuestion: "Tambah {0}", //{0} is localizable question type
+    chooseLogoPlaceholder: "[LOGO]",
+    auto: "Auto",
+    choices_Item: "Perkara ",
     lg: {
-      // addNewItem: "Add New Rule",
-      // empty_tab: "Create a rule to customize the flow of the survey.",
+      addNewItem: "Tambah peraturan baru",
+      empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
       page_visibilityName: "Kebolehlihatan halaman",
-      // page_enableName: "Enable (disable) page",
+      page_enableName: "Halaman Dayakan (nyahdayakan)",
       panel_visibilityName: "Kebolehlihatan panel",
       panel_enableName: "Dayakan/Lumpuhkan panel",
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
-      // column_visibilityName: "Show (hide) column",
-      // column_enableName: "Enable (disable) column",
-      // column_requireName: "Make column required",
+      column_visibilityName: "Tunjukkan lajur (sembunyikan)",
+      column_enableName: "Mendayakan (nyahdayakan) lajur",
+      column_requireName: "Jadikan lajur diperlukan",
       trigger_completeName: "Lengkapkan tinjauan",
       trigger_setvalueName: "Tetapkan nilai soalan",
       trigger_copyvalueName: "Salin nilai soalan",
@@ -177,26 +183,27 @@ export var msStrings = {
       trigger_skipDescription: "Apabila ekspresi logik mengembalikan nilai benar, maka tinjauan melangkau kepada / fokus pada soalan yang dipilih.",
       trigger_runExpressionDescription: "Apabila ekspresi mengembalikan nilai benar, maka ekspresi tersuai akan dilaksanakan. Anda boleh menetapkan keputusan ekspresi ini kepada soalan yang dipilih secara pilihan",
       completedHtmlOnConditionDescription: "Apabila ekspresi logik mengembalikan nilai benar, maka teks lalai untuk 'Halaman terima kasih' berubah kepada teks yang diberikan.",
-      itemExpressionText: "Apabila ekspresi: '{0}' mengembalikan nilai benar:", //{0} - the expression
-      // itemEmptyExpressionText: "New rule",
-      page_visibilityText: "Jadikan halaman {0} boleh dilihat", //{0} page name
-      panel_visibilityText: "Jadikan panel {0} boleh dilihat", //{0} panel name
-      panel_enableText: "Jadikan panel {0} didayakan", //{0} panel name
-      question_visibilityText: "Jadikan soalan {0} boleh dilihat", //{0} question name
-      question_enableText: "Jadikan soalan {0} didayakan", //{0} question name
-      question_requireText: "Jadikan soalan {0} diperlukan", //{0} question name
-      // column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
-      // column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
-      // column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
+      itemExpressionText: "Apabila ekspresi: '{0}' mengembalikan nilai benar:",
+      itemEmptyExpressionText: "Peraturan baru",
+      page_visibilityText: "Jadikan halaman {0} boleh dilihat",
+      panel_visibilityText: "Jadikan panel {0} boleh dilihat",
+      panel_enableText: "Jadikan panel {0} didayakan",
+      question_visibilityText: "Jadikan soalan {0} boleh dilihat",
+      question_enableText: "Jadikan soalan {0} didayakan",
+      question_requireText: "Jadikan soalan {0} diperlukan",
+      column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
+      column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
+      column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
       trigger_completeText: "Tinjauan dilengkapkan",
-      trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
-      trigger_copyvalueText: "Salin kepada soalan: {0} nilai daripada soalan {1}", //{0} and {1} question names
-      trigger_skipText: "Tinjauan melangkau ke soalan {0}", //{0} question name
-      trigger_runExpressionText1: "Jalankan ekspresi: '{0}'", //{0} the expression
-      trigger_runExpressionText2: " dan tetapkan keputusannya kepada soalan: {0}", //{0} question name
+      trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}",
+      trigger_setvalueEmptyText: "nilai soalan yang jelas: {0}", //{0} question name
+      trigger_copyvalueText: "Salin kepada soalan: {0} nilai daripada soalan {1}",
+      trigger_skipText: "Tinjauan melangkau ke soalan {0}",
+      trigger_runExpressionText1: "Jalankan ekspresi: '{0}'",
+      trigger_runExpressionText2: " dan tetapkan keputusannya kepada soalan: {0}",
       completedHtmlOnConditionText: "Tunjukkan teks tersuai untuk 'Halaman terima kasih'.",
-      // showAllQuestions: "All Questions",
-      // showAllActionTypes: "All Action Types",
+      showAllQuestions: "Semua Soalan",
+      showAllActionTypes: "Semua Jenis Tindakan",
       conditions: "Syarat",
       actions: "Tindakan",
       expressionEditorTitle: "Takrifkan syarat",
@@ -207,6 +214,10 @@ export var msStrings = {
       expressionInvalid: "Ekspresi logik kosong atau tidak sah. Sila betulkannya.",
       noActionError: "Sila tambahkan sekurang-kurangnya satu tindakan.",
       actionInvalid: "Sila baiki masalah dalam tindakan anda.",
+      uncompletedRule_title: "Peraturan logik tidak lengkap",
+      uncompletedRule_text: "Anda belum menyelesaikan beberapa peraturan logik. Jika anda meninggalkan tab sekarang, perubahan akan hilang. Adakah anda masih mahu meninggalkan tab tanpa melengkapkan perubahan?",
+      uncompletedRule_apply: "Ya",
+      uncompletedRule_cancel: "Tidak, saya mahu melengkapkan peraturan",
       // expressionSetup: "",
       // actionsSetup: ""
     }
@@ -216,20 +227,20 @@ export var msStrings = {
     apply: "Guna",
     ok: "OK",
     save: "Simpan",
-    // clear: "Clear",
+    clear: "Jelas",
     saveTooltip: "Simpan",
     cancel: "Batal",
-    // set: "Set",
+    set: "Set",
     reset: "Tetap Semula",
-    // change: "Change",
+    change: "Menukar",
     refresh: "Segar semula",
-    // close: "Close",
+    close: "Tutup",
     delete: "Padam",
     add: "Tambahkan",
     addNew: "Tambah Baharu",
     addItem: "Klik untuk menambahkan item...",
-    // removeItem: "Click to remove the item...",
-    // dragItem: "Drag the item",
+    removeItem: "Klik untuk mengalih keluar item...",
+    dragItem: "Seret item",
     addOther: "Lain-lain",
     addSelectAll: "Pilih Semua",
     addNone: "Tiada",
@@ -239,16 +250,16 @@ export var msStrings = {
     backTooltip: "Kembali tanpa menyimpan",
     saveAndBack: "Simpan dan kembali",
     saveAndBackTooltip: "Simpan dan kembali",
-    // doneEditing: "Done",
+    doneEditing: "Dilakukan",
     editChoices: "Edit Pilihan",
     showChoices: "Tunjukkan Pilihan",
     move: "Alih",
     empty: "<empty>",
-    // emptyValue: "Value is empty",
+    emptyValue: "Nilai kosong",
     fastEntry: "Entri Pantas",
-    // fastEntryNonUniqueError: "Value '{0}' is not unique",
-    // fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
-    // fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
+    fastEntryNonUniqueError: "Nilai '{0}' tidak unik",
+    fastEntryChoicesCountError: "Sila hadkan bilangan item dari {0} hingga {1}",
+    fastEntryPlaceholder: "Anda boleh mengesetkan data dalam format berikut:\nvalue1|text\nnilai2",
     formEntry: "Entri Borang",
     testService: "Uji perkhidmatan",
     itemSelectorEmpty: "Sila pilih elemen",
@@ -264,13 +275,15 @@ export var msStrings = {
     showMore: "Untuk butiran lanjut, sila semak dokumentasi",
     assistantTitle: "Soalan tersedia:",
     cellsEmptyRowsColumns: "Terdapat sekurang-kurangnya satu lajur atau baris",
-    // showPreviewBeforeComplete: "Preview answers before submitting the survey",
+    showPreviewBeforeComplete: "Pratonton jawapan sebelum menyerahkan tinjauan",
+    overridingPropertyPrefix: "Ditetapkan mengikut ",
     propertyIsEmpty: "Sila masukkan nilai",
     propertyIsNoUnique: "Sila masukkan nilai unik",
     propertyNameIsNotUnique: "Sila masukkan nama unik",
+    propertyNameIsIncorrect: "Jangan gunakan perkataan terpelihara: \"item\", \"pilihan\", \"panel\", \"baris\".",
     listIsEmpty: "Tambahkan item baharu",
-    // "listIsEmpty@choices": "No choices have been added yet",
-    // "addNew@choices": "Add a choice",
+    "listIsEmpty@choices": "Tiada pilihan telah ditambah lagi",
+    "addNew@choices": "Tambah pilihan",
     expressionIsEmpty: "Ekspresi kosong",
     value: "Nilai",
     text: "Teks",
@@ -282,10 +295,10 @@ export var msStrings = {
     path: "Laluan",
     valueName: "Nama nilai",
     choicesbyurl: {
-      // valueName: "Get values from the following JSON field"
+      valueName: "Mendapatkan nilai daripada medan JSON berikut"
     },
     titleName: "Nama tajuk",
-    // imageLinkName: "Get image URLs from the following JSON field",
+    imageLinkName: "Dapatkan URL imej daripada medan JSON berikut",
     allowEmptyResponse: "Benarkan respons kosong",
     titlePlaceholder: "Tajuk input di sini",
     surveyTitlePlaceholder: "Tajuk tinjauan input di sini",
@@ -339,24 +352,24 @@ export var msStrings = {
     maxLength: "Panjang maksimum",
     buildExpression: "Bina",
     editExpression: "Edit",
-    // and: "and",
-    // or: "or",
+    and: "Dan",
+    or: "Atau",
     remove: "Alih keluar",
     addCondition: "Tambahkan syarat",
-    // emptyLogicPopupMessage: "Select a question to start configuring conditions.",
-    // if: "If",
-    // then: "then",
-    // setToName: "Target question",
-    // fromName: "Question to copy answer from",
-    // gotoName: "Question to skip to",
-    // ruleIsNotSet: "Rule is incorrect",
-    // includeIntoResult: "Include into survey results",
+    emptyLogicPopupMessage: "Pilih soalan untuk mula mengkonfigurasi syarat.",
+    if: "Jika",
+    then: "Kemudian",
+    setToName: "Soalan sasaran",
+    fromName: "Soalan untuk menyalin jawapan daripada",
+    gotoName: "Soalan untuk melangkau ke",
+    ruleIsNotSet: "Peraturan tidak betul",
+    includeIntoResult: "Dimasukkan ke dalam hasil tinjauan",
     showTitle: "Tunjukkan/sembunyikan tajuk",
     expandCollapseTitle: "Kembangkan/runtuhkan tajuk",
     locale: "Bahasa lalai",
     simulator: "Pilih peranti",
     landscapeOrientation: "Landskap",
-    // portraitOrientation: "Switch to portrait orientation",
+    portraitOrientation: "Bertukar kepada orientasi potret",
     mode: "Mod (edit/baca sahaja)",
     clearInvisibleValues: "Kosongkan nilai tersembunyi",
     cookieName: "Nama kuki (untuk melumpuhkan perlaksanaan tinjauan dua kali secara setempat)",
@@ -386,33 +399,37 @@ export var msStrings = {
     questionsOrder: "Susunan elemen pada halaman",
     maxTimeToFinish: "Masa maksimum untuk menyelesaikan tinjauan",
     maxTimeToFinishPage: "Masa maksimum untuk menyelesaikan halaman dalam tinjauan",
+    image: {
+      imageHeight: "Ketinggian imej (dalam nilai diterima CSS)",
+      imageWidth: "Lebar imej (dalam nilai diterima CSS)"
+    },
     page: {
-      // maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
     },
     question: {
-      // page: "Parent page"
+      page: "Halaman induk"
     },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",
     allowAddPanel: "Benarkan menambahkan panel",
     allowRemovePanel: "Benarkan alih keluar panel",
-    // noEntriesText: "Empty entries text",
+    noEntriesText: "Kosongkan teks entri",
     panelAddText: "Menambahkan teks panel",
     panelRemoveText: "Mengalih keluar teks panel",
     isSinglePage: "Tunjukkan semua elemen pada satu halaman",
     html: "HTML",
     expression: "Ekspresi",
-    // setValue: "Answer",
-    // dataFormat: "Image format",
-    // allowAddRows: "Allow adding rows",
-    // allowRemoveRows: "Allow removing rows",
-    // allowRowsDragAndDrop: "Allow row drag and drop",
-    // responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
-    // minImageWidth: "Minimum image width",
-    // maxImageWidth: "Maximum image width",
-    // minImageHeight: "Minimum image height",
-    // maxImageHeight: "Maximum image height",
+    setValue: "Jawapan",
+    dataFormat: "Format imej",
+    allowAddRows: "Benarkan menambah baris",
+    allowRemoveRows: "Benarkan mengalih keluar baris",
+    allowRowsDragAndDrop: "Benarkan seret dan lepas baris",
+    responsiveImageSizeHelp: "Tidak terpakai jika anda menentukan lebar atau ketinggian imej yang tepat.",
+    minImageWidth: "Lebar imej minimum",
+    maxImageWidth: "Lebar imej maksimum",
+    minImageHeight: "Ketinggian imej minimum",
+    maxImageHeight: "Ketinggian imej maksimum",
     minValue: "Nilai minimum",
     maxValue: "Nilai maksimum",
     minLength: "Panjang minimum",
@@ -421,8 +438,8 @@ export var msStrings = {
     maxCount: "Bilangan maksimum",
     regex: "Ekspresi biasa",
     surveyvalidator: {
-      // text: "Error message",
-      // expression: "Validation expression"
+      text: "Mesej ralat",
+      expression: "Ungkapan pengesahihan"
     },
     totalText: "Jumlah teks",
     totalType: "Jumlah jenis",
@@ -430,97 +447,101 @@ export var msStrings = {
     totalDisplayStyle: "Jumlah gaya paparan",
     totalCurrency: "Jumlah mata wang",
     totalFormat: "Jumlah format",
-    // logo: "Logo (URL or base64-encoded string)",
-    // questionsOnPageMode: "Survey structure",
-    // maxTextLength: "Maximum answer length (in characters)",
-    // maxOthersLength: "Maximum comment length (in characters)",
-    // autoGrowComment: "Auto-expand comment area if necessary",
-    // textUpdateMode: "Update text question value",
-    // focusOnFirstError: "Set focus on the first invalid answer",
-    // checkErrorsMode: "Run validation",
-    // navigateToUrl: "Navigate to URL",
-    // navigateToUrlOnCondition: "Dynamic URL",
-    // completedBeforeHtml: "Markup to show if the user already filled out this survey",
-    // completedHtml: "Survey Complete page markup",
-    // completedHtmlOnCondition: "Dynamic Survey Complete page markup",
-    // loadingHtml: "Markup to show while survey model is loading",
-    // commentText: "Comment area text",
-    // autocomplete: "Autocomplete type",
-    // labelTrue: "\"True\" label",
-    // labelFalse: "\"False\" label",
+    logo: "Logo (URL atau rentetan berkod asas64)",
+    questionsOnPageMode: "Struktur tinjauan",
+    maxTextLength: "Panjang jawapan maksimum (dalam aksara)",
+    maxOthersLength: "Panjang komen maksimum (dalam aksara)",
+    autoGrowComment: "Kembangkan kawasan komen secara automatik jika perlu",
+    allowResizeComment: "Benarkan pengguna mensaiz semula kawasan teks",
+    textUpdateMode: "Mengemas kini nilai soalan teks",
+    focusOnFirstError: "Mengesetkan fokus pada jawapan tidak sah yang pertama",
+    checkErrorsMode: "Jalankan pengesahihan",
+    navigateToUrl: "Navigasi ke URL",
+    navigateToUrlOnCondition: "URL dinamik",
+    completedBeforeHtml: "Penanda untuk menunjukkan sama ada pengguna telah mengisi tinjauan ini",
+    completedHtml: "Tinjauan Penanda halaman lengkap",
+    completedHtmlOnCondition: "Tinjauan Dinamik Lengkapkan penanda halaman",
+    loadingHtml: "Penanda untuk ditunjukkan semasa model tinjauan sedang dimuatkan",
+    commentText: "Teks kawasan komen",
+    autocomplete: "Jenis autolengkap",
+    labelTrue: "Label \"Benar\"",
+    labelFalse: "Label \"Palsu\"",
     allowClear: "Tunjukkan kapsyen pilihan",
-    // displayStyle: "Value display style",
-    // format: "Formatted string",
-    // maximumFractionDigits: "Maximum fractional digits",
-    // minimumFractionDigits: "Minimum fractional digits",
-    // useGrouping: "Display grouping separators",
-    // allowMultiple: "Allow multiple files",
-    // allowImagesPreview: "Preview images",
-    // acceptedTypes: "Accepted file types",
-    // waitForUpload: "Wait for the upload to complete",
-    // needConfirmRemoveFile: "Confirm file deletion",
-    // detailPanelMode: "Detail panel location",
-    // minRowCount: "Minimum row count",
-    // maxRowCount: "Maximum row count",
-    // confirmDelete: "Confirm row deletion",
-    // confirmDeleteText: "Confirmation message",
+    displayStyle: "Gaya paparan nilai",
+    format: "Rentetan yang diformatkan",
+    maximumFractionDigits: "Nombor pecahan maksimum",
+    minimumFractionDigits: "Digit pecahan minimum",
+    useGrouping: "Paparkan pemisah perkumpulan",
+    allowMultiple: "Benarkan berbilang fail",
+    allowImagesPreview: "Pratonton imej",
+    acceptedTypes: "Jenis fail yang diterima",
+    waitForUpload: "Tunggu muat naik selesai",
+    needConfirmRemoveFile: "Sahkan penghapusan fail",
+    detailPanelMode: "Lokasi panel terperinci",
+    minRowCount: "Kiraan baris minimum",
+    maxRowCount: "Kiraan baris maksimum",
+    confirmDelete: "Sahkan pemadaman baris",
+    confirmDeleteText: "Mesej pengesahan",
     paneldynamic: {
-      // confirmDelete: "Confirm panel deletion"
+      confirmDelete: "Sahkan penghapusan panel"
     },
-    // panelCount: "Initial panel count",
-    // minPanelCount: "Minimum panel count",
-    // maxPanelCount: "Maximum panel count",
-    // panelsState: "Inner panel expand state",
-    // templateDescription: "Description template",
-    // templateTitle: "Title template",
-    // panelPrevText: "Previous Panel button tooltip",
-    // panelNextText: "Next Panel button tooltip",
-    // showRangeInProgress: "Show progress bar",
-    // templateTitleLocation: "Question title location",
-    // panelRemoveButtonLocation: "Remove Panel button location",
-    // hideIfRowsEmpty: "Hide the question if there are no rows",
-    // hideColumnsIfEmpty: "Hide columns if there are no rows",
-    // rateValues: "Custom rate values",
-    // hideIfChoicesEmpty: "Hide the question if it contains no choices",
-    // hideNumber: "Hide question number",
-    // minWidth: "Minimum width (in CSS-accepted values)",
-    // maxWidth: "Maximum width (in CSS-accepted values)",
-    // width: "Width (in CSS-accepted values)",
-    // showHeader: "Show column headers",
-    // horizontalScroll: "Show horizontal scrollbar",
-    // columnMinWidth: "Minimum column width (in CSS-accepted values)",
-    // rowTitleWidth: "Row header width (in CSS-accepted values)",
-    // valueTrue: "\"True\" value",
-    // valueFalse: "\"False\" value",
-    // minErrorText: "\"Value is below minimum\" error message",
-    // maxErrorText: "\"Value exceeds maximum\" error message",
-    // otherErrorText: "\"Empty comment\" error message",
-    // keyDuplicationError: "\"Non-unique key value\" error message",
-    // maxSelectedChoices: "Maximum selected choices",
-    // showClearButton: "Show the Clear button",
-    // showNumber: "Show panel number",
-    // logoWidth: "Logo width (in CSS-accepted values)",
-    // logoHeight: "Logo height (in CSS-accepted values)",
-    // readOnly: "Read-only",
-    // enableIf: "Editable if",
-    // emptyRowsText: "\"No rows\" message",
-    // size: "Input size (in characters)",
-    // separateSpecialChoices: "Separate special choices (None, Other, Select All)",
-    // choicesFromQuestion: "Copy choices from the following question",
-    // choicesFromQuestionMode: "Which choices to copy?",
-    // showCommentArea: "Show the comment area",
-    // commentPlaceholder: "Comment area placeholder",
-    // displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
-    // rowsOrder: "Row order",
-    // columnsLayout: "Column layout",
-    // columnColCount: "Nested column count",
-    // state: "Panel expand state",
-    // correctAnswer: "Correct Answer",
-    // defaultPanelValue: "Default Values",
-    // cells: "Cell Texts",
-    // keyName: "Key column",
+    panelCount: "Kiraan panel awal",
+    minPanelCount: "Kiraan panel minimum",
+    maxPanelCount: "Kiraan panel maksimum",
+    panelsState: "Panel dalaman mengembangkan keadaan",
+    templateDescription: "Templat perihalan",
+    templateTitle: "Templat tajuk",
+    panelPrevText: "Petua alat butang Panel Sebelumnya",
+    panelNextText: "Petua alat butang Panel Seterusnya",
+    showRangeInProgress: "Tunjukkan bar kemajuan",
+    templateTitleLocation: "Lokasi tajuk soalan",
+    panelRemoveButtonLocation: "Alih keluar lokasi butang Panel",
+    hideIfRowsEmpty: "Sembunyikan soalan jika tiada baris",
+    hideColumnsIfEmpty: "Menyembunyikan lajur jika tiada baris",
+    rateValues: "Nilai kadar tersuai",
+    rateCount: "Kiraan kadar",
+    autoGenerate: "Bagaimana untuk menentukan nilai kadar?",
+    hideIfChoicesEmpty: "Sembunyikan soalan jika ia tidak mengandungi pilihan",
+    hideNumber: "Sembunyikan nombor soalan",
+    minWidth: "Lebar minimum (dalam nilai diterima CSS)",
+    maxWidth: "Lebar maksimum (dalam nilai diterima CSS)",
+    width: "Lebar (dalam nilai diterima CSS)",
+    showHeader: "Tunjukkan pengepala lajur",
+    horizontalScroll: "Menunjukkan bar skrol mendatar",
+    columnMinWidth: "Lebar lajur minimum (dalam nilai diterima CSS)",
+    rowTitleWidth: "Lebar pengepala baris (dalam nilai diterima CSS)",
+    valueTrue: "Nilai \"Benar\"",
+    valueFalse: "Nilai \"Palsu\"",
+    minErrorText: "Mesej ralat \"Nilai adalah di bawah minimum\"",
+    maxErrorText: "Mesej ralat \"Nilai melebihi maksimum\"",
+    otherErrorText: "Mesej ralat \"komen kosong\"",
+    keyDuplicationError: "Mesej ralat \"Nilai kunci bukan unik\"",
+    minSelectedChoices: "Pilihan minimum yang dipilih",
+    maxSelectedChoices: "Pilihan maksimum yang dipilih",
+    showClearButton: "Tunjukkan butang Kosongkan",
+    showNumber: "Tunjukkan nombor panel",
+    logoWidth: "Lebar logo (dalam nilai diterima CSS)",
+    logoHeight: "Ketinggian logo (dalam nilai diterima CSS)",
+    readOnly: "Baca sahaja",
+    enableIf: "Boleh diedit jika",
+    emptyRowsText: "Mesej \"Tiada baris\"",
+    size: "Saiz medan input (dalam aksara)",
+    separateSpecialChoices: "Pilihan khas berasingan (Tiada, Lain-lain, Pilih Semua)",
+    choicesFromQuestion: "Salin pilihan daripada soalan berikut",
+    choicesFromQuestionMode: "Pilihan mana yang hendak disalin?",
+    showCommentArea: "Tunjukkan kawasan komen",
+    commentPlaceholder: "Ruang letak komen",
+    displayRateDescriptionsAsExtremeItems: "Memaparkan perihalan kadar sebagai nilai melampau",
+    rowsOrder: "Tertib baris",
+    columnsLayout: "Tataletak lajur",
+    columnColCount: "Kiraan lajur tersarang",
+    state: "Panel kembangkan negeri",
+    correctAnswer: "Jawapan yang betul",
+    defaultPanelValue: "Nilai Lalai",
+    cells: "Teks sel",
+    keyName: "Lajur utama",
     itemvalue: {
-      // text: "Alt text"
+      text: "Teks alt"
     },
     logoPosition: "Kedudukan logo",
     addLogo: "Tambahkan logo...",
@@ -565,22 +586,22 @@ export var msStrings = {
       showOnCompleted: "Tunjukkan pada Dilengkapkan",
       logo: "Logo dalam Tajuk Tinjauan",
       slider: "Penggelongsor",
-      // expression: "Expression",
+      expression: "Ungkapan",
       others: "Lain-lain"
     },
     editProperty: "Edit ciri '{0}'",
     items: "[ Item: {0} ]",
-    // choicesVisibleIf: "Choices are visible if",
-    // choicesEnableIf: "Choices are selectable if",
-    // columnsEnableIf: "Columns are visible if",
-    // rowsEnableIf: "Rows are visible if",
-    // indent: "Add indents",
+    choicesVisibleIf: "Pilihan boleh dilihat jika",
+    choicesEnableIf: "Pilihan boleh dipilih jika",
+    columnsEnableIf: "Lajur kelihatan jika",
+    rowsEnableIf: "Baris boleh dilihat jika",
+    indent: "Menambah inden",
     panel: {
-      // indent: "Add outer indents"
+      indent: "Menambah inden luaran"
     },
-    // innerIndent: "Add inner indents",
-    // defaultValueFromLastRow: "Take default values from the last row",
-    // defaultValueFromLastPanel: "Take default values from the last panel",
+    innerIndent: "Menambah inden dalaman",
+    defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
+    defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",
     enterNewValue: "Sila masukkan nilai.",
     noquestions: "Tiada soalan lain dalam tinjauan.",
     createtrigger: "Sila cipta pencetus",
@@ -599,24 +620,26 @@ export var msStrings = {
     triggerGotoName: "Pergi kepada soalan:",
     triggerIsVariable: "Jangan letakkan pemboleh ubah dalam keputusan tinjauan.",
     triggerRunExpressionEmpty: "Sila masukkan ekspresi yang sah",
-    // emptyExpressionPlaceHolder: "Type expression here...",
+    emptyExpressionPlaceHolder: "Taip ungkapan di sini...",
     noFile: "Tiada fail dipilih",
-    // clearIfInvisible: "Clear the value if the question becomes hidden",
-    // valuePropertyName: "Value property name",
-    // searchEnabled: "Enable search",
-    // hideSelectedItems: "Hide selected items",
-    // signatureWidth: "Signature width",
-    // signatureHeight: "Signature height",
-    // verticalAlign: "Vertical alignment",
-    // alternateRows: "Alternate rows",
-    // columnsVisibleIf: "Columns are visible if",
-    // rowsVisibleIf: "Rows are visible if",
-    // otherPlaceholder: "Comment area placeholder"
+    clearIfInvisible: "Kosongkan nilai jika soalan menjadi tersembunyi",
+    valuePropertyName: "Nama sifat nilai",
+    searchEnabled: "Dayakan carian",
+    hideSelectedItems: "Menyembunyikan item terpilih",
+    closeOnSelect: "Menutup juntai bawah selepas pemilihan",
+    signatureWidth: "Lebar tandatangan",
+    signatureHeight: "Ketinggian tandatangan",
+    verticalAlign: "Penjajaran menegak",
+    alternateRows: "Baris alternatif",
+    columnsVisibleIf: "Lajur kelihatan jika",
+    rowsVisibleIf: "Baris boleh dilihat jika",
+    otherPlaceholder: "Ruang letak komen",
+    rateType: "Jenis kadar"
   },
   // Property values
   pv: {
-    // true: "true",
-    // false: "false",
+    "true": "Benar",
+    "false": "Palsu",
     inherit: "warisi",
     show: "tunjukkan",
     hide: "sembunyikan",
@@ -629,18 +652,19 @@ export var msStrings = {
     asc: "tertib menaik",
     desc: "menurun",
     indeterminate: "tidak tentu",
-    // decimal: "decimal",
-    // currency: "currency",
-    // percent: "percent",
+    decimal: "Perpuluhan",
+    currency: "Mata wang",
+    percent: "Peratus",
     firstExpanded: "Pertama dikembangkan",
     off: "mati",
-    // onpanel: "Start on each panel",
+    onpanel: "Mulakan pada setiap panel",
     onPanel: "Pada panel",
     onSurvey: "Pada tinjauan",
     list: "senarai",
     progressTop: "Perkembangan atas",
     progressBottom: "Perkembangan bawah",
     progressTopBottom: "Perkembangan atas bawah",
+    tab: "Tab",
     horizontal: "mendatar",
     vertical: "menegak",
     top: "atas",
@@ -648,21 +672,21 @@ export var msStrings = {
     topBottom: "atas dan bawah",
     both: "kedua-duanya",
     left: "baki",
-    // right: "Right",
-    // color: "color",
-    // date: "date",
-    // datetime: "datetime",
-    // "datetime-local": "datetime-local",
-    // email: "email",
-    // month: "month",
-    // number: "number",
-    // password: "password",
-    // range: "range",
-    // tel: "tel",
-    // text: "text",
-    // time: "time",
-    // url: "url",
-    // week: "week",
+    right: "Kanan",
+    color: "Warna",
+    date: "Tarikh",
+    datetime: "masa tarikh",
+    "datetime-local": "tarikh-tempatan",
+    email: "E-mel",
+    month: "Bulan",
+    number: "Nombor",
+    password: "Kata laluan",
+    range: "Pelbagai",
+    tel: "Tel",
+    text: "Teks",
+    time: "Masa",
+    url: "Url",
+    week: "Minggu",
     hidden: "tersembunyi",
     on: "pada",
     onPage: "Pada halaman",
@@ -670,16 +694,31 @@ export var msStrings = {
     display: "paparan",
     onComplete: "Pada selesai",
     onHidden: "Pada tersembunyi",
-    // onHiddenContainer: "When the question or its panel/page becomes hidden",
+    onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
     clearInvisibleValues: {
-      // none: "Never"
+      none: "Tidak pernah"
+    },
+    inputType: {
+      color: "Warna",
+      date: "Tarikh",
+      "datetime-local": "Tarikh dan Masa",
+      email: "E-mel",
+      month: "Bulan",
+      number: "Nombor",
+      password: "Kata laluan",
+      range: "Pelbagai",
+      tel: "Nombor Telefon",
+      text: "Teks",
+      time: "Masa",
+      url: "URL",
+      week: "Minggu"
     },
     all: "semua",
     page: "halaman",
     survey: "tinjauan",
     onNextPage: "Pada halaman berikutnya",
     onValueChanged: "Pada nilai berubah",
-    // onValueChanging: "Before an answer is changed",
+    onValueChanging: "Sebelum jawapan diubah",
     standard: "standard",
     singlePage: "halaman tunggal",
     questionPerPage: "soalan bagi setiap halaman",
@@ -693,54 +732,66 @@ export var msStrings = {
     buttons: "butang",
     underInput: "input di bawah",
     underTitle: "tajuk di bawah",
-    // onBlur: "On blur",
-    // onTyping: "While typing",
-    // underRow: "Under the row",
-    // underRowSingle: "Under the row, only one panel is visible",
+    onBlur: "Pada kabur",
+    onTyping: "Semasa menaip",
+    underRow: "Di bawah baris",
+    underRowSingle: "Di bawah baris, hanya satu panel boleh dilihat",
     showNavigationButtons: {
-      // none: "Hidden"
+      none: "Tersembunyi"
     },
     showProgressBar: {
-      // off: "Hidden"
+      off: "Tersembunyi"
     },
     showTimerPanel: {
-      // none: "Hidden"
+      none: "Tersembunyi"
     },
     showTimerPanelMode: {
-      // all: "Both"
+      all: "Kedua-duanya"
     },
     detailPanelMode: {
-      // none: "Hidden"
+      none: "Tersembunyi"
     },
     addRowLocation: {
-      // default: "Depends on matrix layout"
+      default: "Bergantung pada tataletak matriks"
     },
     panelsState: {
-      // default: "Users cannot expand or collapse panels",
-      // collapsed: "All panels are collapsed",
-      // expanded: "All panels are expanded"
+      default: "Pengguna tidak boleh mengembangkan atau meruntuhkan panel",
+      collapsed: "Semua panel runtuh",
+      expanded: "Semua panel diperluaskan"
     },
     widthMode: {
-      // auto: "Auto",
-      // static: "Static",
-      // responsive: "Responsive"
+      auto: "Auto",
+      static: "Statik",
+      responsive: "Responsif"
     },
     imageFit: {
-      // none: "None",
-      // contain: "Contain",
-      // cover: "Cover",
-      // fill: "Fill"
+      none: "Tiada",
+      contain: "Mengandungi",
+      cover: "Perlindungan",
+      fill: "Mengisi"
     },
     contentMode: {
-      // auto: "Auto",
-      // image: "Image",
-      // video: "Video",
-      // youtube: "YouTube"
+      auto: "Auto",
+      image: "Imej",
+      video: "Video",
+      youtube: "Youtube"
     },
     displayMode: {
-      // auto: "Auto",
-      // buttons: "Buttons",
-      // dropdown: "Dropdown"
+      auto: "Auto",
+      buttons: "Butang",
+      dropdown: "Dropdown"
+    },
+    rateColorMode: {
+      default: "Lalai"
+    },
+    autoGenerate: {
+      "true": "Menjana",
+      "false": "Masukkan secara manual"
+    },
+    rateType: {
+      labels: "Label",
+      stars: "Bintang",
+      smileys: "Smileys"
     }
   },
   // Operators
@@ -757,8 +808,8 @@ export var msStrings = {
     less: "kurang",
     greaterorequal: "lebih besar atau sama dengan",
     lessorequal: "kurang atau sama dengan",
-    // and: "and",
-    // or: "or"
+    and: "Dan",
+    or: "Atau"
   },
   // Embed window
   ew: {
@@ -787,7 +838,7 @@ export var msStrings = {
   ts: {
     selectPage: "Pilih halaman untuk mengujinya:",
     showInvisibleElements: "Pilih elemen tersembunyi",
-    // hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "Sembunyikan unsur tidak kelihatan"
   },
   validators: {
     answercountvalidator: "kiraan jawapan",
@@ -806,17 +857,18 @@ export var msStrings = {
     visibletrigger: "ubah kebolehlihatan (tidak digunakan lagi)"
   },
   pehelp: {
-    // cookieName: "Cookies prevent users from filling out the same survey twice.",
-    // format: "Use {0} as a placeholder for the actual value.",
-    // totalText: "Visible only when at least one column has Total type or Total expression.",
-    // acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    // columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
-    // autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
-    // valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
+    cookieName: "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali.",
+    size: "Mensaiz semula kawasan medan input yang kelihatan. Sila gunakan <b>Pengesahan →</b> Tetapan panjang maksimum untuk mengehadkan panjang input.",
+    format: "Gunakan {0} sebagai ruang letak untuk nilai sebenar.",
+    totalText: "Boleh dilihat hanya apabila sekurang-kurangnya satu lajur mempunyai jenis Jumlah atau ungkapan Jumlah.",
+    acceptedTypes: "Rujuk perihalan atribut [terima](https://www.w3schools.com/tags/att_input_accept.asp) untuk maklumat lanjut.",
+    columnColCount: "Hanya digunakan untuk jenis sel Kumpulan Radio dan Kotak Semak.",
+    autocomplete: "Rujuk perihalan atribut [autolengkap](https://developer.mozilla.org/en-US/docs/Web/HTML/Atribut/autolengkap) untuk maklumat lanjut.",
+    valueName: "Jika anda tidak menetapkan sifat ini, jawapannya akan disimpan dalam medan yang ditentukan oleh sifat Nama.",
     choicesbyurl: {
-      // valueName: " "
+      valueName: " "
     },
-    // keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\"."
   },
   // Properties
   p: {
@@ -826,48 +878,51 @@ export var msStrings = {
     },
     multiSelect: "Pilih berbilang",
     showLabel: "Tunjukkan label",
-    // value: "Value",
-    visibleIf: "Boleh dilihat jika",
-    // attachOriginalItems: "attachOriginalItems",
-    useDisplayValuesInDynamicTexts: "Guna nilai paparan dalam tajuk",
-    titleLocation: "Lokasi tajuk",
+    value: "Nilai",
+    tabAlign: "Penjajaran tab",
     description: "perihalan",
+    logoFit: "Muat logo",
+    pages: "halaman",
+    questions: "Soalan",
+    triggers: "pencetus",
+    calculatedValues: "Nilai dikira",
+    surveyId: "Id tinjauan",
+    surveyPostId: "Id siaran tinjauan",
+    surveyShowDataSaving: "Tinjauan menunjukkan penjimatan data",
+    questionDescriptionLocation: "Lokasi perihalan soalan",
+    progressBarType: "Jenis bar perkembangan",
+    showTOC: "Tunjukkan TOC",
+    tocLocation: "Lokasi Toc",
+    questionTitlePattern: "Corak tajuk soalan",
+    widthMode: "Mod lebar",
+    showBrandInfo: "Tunjukkan maklumat jenama",
+    useDisplayValuesInDynamicTexts: "Guna nilai paparan dalam tajuk",
+    visibleIf: "Boleh dilihat jika",
+    titleLocation: "Lokasi tajuk",
     descriptionLocation: "Lokasi perihalan",
     defaultValueExpression: "Ekspresi nilai lalai",
     requiredIf: "Diperlukan jika",
     validators: "Pengesah",
     bindings: "ikatan",
-    // renderAs: "renderAs",
-    currency: "mata wang",
-    // cellHint: "cellHint",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalMaximumFractionDigits: "totalMaximumFractionDigits",
-    // totalMinimumFractionDigits: "totalMinimumFractionDigits",
-    columns: "lajur",
-    // detailElements: "detailElements",
+    renderAs: "Render sebagai",
+    attachOriginalItems: "Lampirkan item asal",
     choices: "pilihan",
-    // allowAdaptiveActions: "allowAdaptiveActions",
+    choicesByUrl: "Pilihan melalui URL",
+    currency: "mata wang",
+    cellHint: "Petunjuk sel",
+    isUnique: "Unik",
+    showInMultipleColumns: "Tunjukkan dalam berbilang lajur",
+    totalMaximumFractionDigits: "Jumlah digit pecahan maksimum",
+    totalMinimumFractionDigits: "Jumlah digit pecahan minimum",
+    columns: "lajur",
+    detailElements: "Unsur terperinci",
+    allowAdaptiveActions: "Benarkan tindakan penyesuaian",
     defaultRowValue: "Nilai baris lalai",
     detailPanelShowOnAdding: "Butiran panel tunjukkan pada penambahan",
-    logoFit: "Muat logo",
-    pages: "halaman",
-    // questions: "questions",
-    triggers: "pencetus",
-    calculatedValues: "Nilai dikira",
-    // surveyId: "surveyId",
-    // surveyPostId: "surveyPostId",
-    // surveyShowDataSaving: "surveyShowDataSaving",
-    questionDescriptionLocation: "Lokasi perihalan soalan",
-    progressBarType: "Jenis bar perkembangan",
-    questionTitlePattern: "Corak tajuk soalan",
-    widthMode: "Mod lebar",
-    // showBrandInfo: "showBrandInfo",
-    choicesByUrl: "Pilihan melalui URL",
-    // choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
-    // choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
-    // inputFieldComponent: "inputFieldComponent",
-    // itemComponent: "itemComponent",
+    choicesLazyLoadEnabled: "Pilihan beban malas didayakan",
+    choicesLazyLoadPageSize: "Pilihan malas memuatkan saiz halaman",
+    inputFieldComponent: "Komponen medan input",
+    itemComponent: "Komponen item",
     min: "min",
     max: "maks",
     minValueExpression: "Ekspresi nilai min",
@@ -875,31 +930,573 @@ export var msStrings = {
     step: "langkah",
     dataList: "Senarai data",
     itemSize: "Saiz item",
-    // elements: "elements",
-    // content: "content",
+    elements: "Unsur",
+    content: "Kandungan",
     navigationButtonsVisibility: "Kebolehlihatan butang navigasi",
     navigationTitle: "Tajuk navigasi",
     navigationDescription: "Perihalan navigasi",
-    // closeOnSelect: "closeOnSelect",
-    // longTap: "longTap",
+    longTap: "Ketuk panjang",
     autoGrow: "Auto besarkan",
-    // acceptCarriageReturn: "acceptCarriageReturn",
-    // displayMode: "displayMode",
+    allowResize: "Benarkan pensaizan semula",
+    acceptCarriageReturn: "Terima pulangan pengangkutan",
+    displayMode: "Mod paparan",
+    rateType: "Jenis kadar",
     label: "label",
     contentMode: "Mod kandungan",
     imageFit: "Muat imej",
-    // altText: "altText",
+    altText: "Teks alt",
     height: "tinggi",
     penColor: "Warna pen",
     backgroundColor: "Warna latar belakang",
-    // templateElements: "templateElements",
-    // operator: "operator",
-    // isVariable: "isVariable",
-    // runExpression: "runExpression",
+    templateElements: "Unsur templat",
+    operator: "Pengendali",
+    isVariable: "Adakah pembolehubah",
+    runExpression: "Jalankan ungkapan",
     showCaption: "Tunjukkan kapsyen",
     iconName: "Nama ikon",
-    iconSize: "Saiz ikon"
+    iconSize: "Saiz ikon",
+    precision: "Ketepatan",
+    matrixDragHandleArea: "Kawasan pemegang seretan matriks",
+    backgroundImage: "Imej latar belakang",
+    backgroundImageFit: "Kesesuaian imej latar belakang",
+    backgroundImageAttachment: "Lampiran imej latar belakang",
+    backgroundOpacity: "Kelegapan latar belakang",
+    selectToRankEnabled: "Pilih untuk mendayakan kedudukan",
+    selectToRankAreasLayout: "Pilih untuk menentukan tataletak kawasan",
+    allowCameraAccess: "Benarkan capaian kamera",
+    scaleColorMode: "Mod warna skala",
+    rateColorMode: "Mod warna kadar",
+    templateTabTitle: "Tajuk tab templat",
+    templateVisibleIf: "Templat boleh dilihat jika",
+    copyDisplayValue: "Nilai paparan salin"
+  },
+  theme: {
+    "--background": "Warna latar belakang",
+    "--background-dim-light": "Warna cahaya malap latar belakang",
+    "--primary-foreground": "Warna latar depan utama",
+    "--foreground": "Warna latar depan",
+    "--base-unit": "Unit asas",
+    groupGeneral: "Umum",
+    groupAdvanced: "Lanjutan",
+    themeName: "Tema",
+    themeMode: "Penampilan soalan",
+    themeModePanels: "Lalai",
+    themeModeLightweight: "Tanpa Panel",
+    themePaletteLight: "Cahaya",
+    themePaletteDark: "Gelap",
+    primaryColor: "Warna aksen",
+    primaryDefaultColor: "Lalai",
+    primaryDarkColor: "Hover",
+    primaryLightColor: "Dipilih",
+    backgroundDimColor: "Warna latar belakang",
+    backgroundImage: "Imej latar belakang",
+    backgroundImageFitAuto: "Auto",
+    backgroundImageFitCover: "Perlindungan",
+    backgroundImageFitContain: "Mengandungi",
+    backgroundOpacity: "Kelegapan",
+    backgroundImageAttachmentFixed: "Tetap",
+    backgroundImageAttachmentScroll: "Tatal",
+    panelBackgroundTransparency: "Kelegapan latar belakang panel",
+    questionBackgroundTransparency: "Kelegapan latar belakang soalan",
+    questionPanel: "Latar belakang panel dan jejari sudut",
+    questionTitle: "Fon tajuk soalan",
+    questionDescription: "Fon perihalan soalan",
+    editorPanel: "Unsur input",
+    editorFont: "Fon unsur input",
+    backcolor: "Latar belakang lalai",
+    hovercolor: "Latarbelakang penuding",
+    borderDecoration: "Hiasan sempadan",
+    accentBackground: "Latar belakang aksen",
+    accentForeground: "Aksen latar depan",
+    primaryForecolor: "Warna lalai",
+    primaryForecolorLight: "Warna dinyahdayakan",
+    linesColors: "Warna garis kecil",
+    borderDefault: "Gelap",
+    borderLight: "Lebih ringan",
+    fontFamily: "Keluarga fon",
+    fontSize: "Saiz fon",
+    color: "Warna",
+    size: "Saiz",
+    fontWeightRegular: "Tetap",
+    fontWeightHeavy: "Berat",
+    fontWeightSemiBold: "Separa berani",
+    fontWeightBold: "Berani",
+    scale: "Skala",
+    cornerRadius: "Jejari penjuru",
+    surveyTitle: "Fon tajuk tinjauan",
+    pageTitle: "Fon tajuk halaman",
+    pageDescription: "Fon perihalan halaman",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    boxShadowAddRule: "Menambah Kesan Bayang",
+    opacity: "Kelegapan",
+    boxShadowBlur: "Kabur",
+    boxShadowSpread: "Penyebaran",
+    boxShadowDrop: "Singgah",
+    boxShadowInner: "Dalaman",
+    questionShadow: "Kesan bayang",
+    editorShadow: "Kesan bayang unsur input",
+    names: {
+      default: "Lalai",
+      contrast: "Sebaliknya",
+      plain: "Biasa",
+      simple: "Mudah",
+      blank: "Kosong",
+      double: "Double",
+      bulk: "Pukal",
+      "pseudo-3d": "Pseudo 3D",
+      playful: "Suka bermain",
+      ultra: "Ultra"
+    },
+    colors: {
+      teal: "Teal",
+      blue: "Blue",
+      purple: "Ungu",
+      orchid: "Orchid",
+      tulip: "Tulip",
+      brown: "Brown",
+      green: "Hijau"
+    }
   }
 };
 
 editorLocalization.locales["ms"] = msStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// qt.tagbox: "Multi-Select Dropdown" => "Juntai Bawah Berbilang Pilihan"
+// qt.buttongroup: "Button Group" => "Kumpulan Butang"
+// ed.surveySettings: "Survey Settings" => "Seting Tinjauan"
+// ed.surveySettingsTooltip: "Open survey settings" => "Buka seting tinjauan"
+// ed.prevSelected: "Select previous" => "Pilih sebelumnya"
+// ed.nextSelected: "Select next" => "Pilih seterusnya"
+// ed.surveyTypeName: "Survey" => "Kaji selidik"
+// ed.pageTypeName: "Page" => "Laman"
+// ed.panelTypeName: "Panel" => "Panel"
+// ed.questionTypeName: "Question" => "Soalan"
+// ed.columnTypeName: "Column" => "Lajur"
+// ed.themeSurvey: "Themes" => "Tema"
+// ed.defaultV2Theme: "Default" => "Lalai"
+// ed.modernTheme: "Modern" => "Moden"
+// ed.defaultTheme: "Default (legacy)" => "Lalai (warisan)"
+// ed.jsonHideErrors: "Hide errors" => "Sembunyikan ralat"
+// ed.jsonShowErrors: "Show errors" => "Tunjukkan ralat"
+// ed.showMoreChoices: "Show more" => "Tunjuk lebih banyak"
+// ed.showLessChoices: "Show less" => "Tunjukkan kurang"
+// ed.propertyGridFilteredTextPlaceholder: "Type to search..." => "Taip untuk mencari..."
+// ed.toolboxChoiceCategory: "Choice Questions" => "Soalan Pilihan"
+// ed.toolboxTextCategory: "Text Input Questions" => "Soalan Input Teks"
+// ed.toolboxContainersCategory: "Containers" => "Bekas"
+// ed.toolboxMatrixCategory: "Matrix Questions" => "Soalan Matriks"
+// ed.toolboxMiscCategory: "Misc" => "Misc"
+// ed.translationPropertyGridTitle: "Language Settings" => "Seting Bahasa"
+// ed.themePropertyGridTitle: "Theme Settings" => "Seting Tema"
+// ed.translationLanguages: "Languages" => "Bahasa-bahasa"
+// ed.translationShowUsedStringsOnly: "Used Strings Only" => "Rentetan yang Digunakan Sahaja"
+// ed.translationPlaceHolder: "Translation..." => "Penterjemahan..."
+// ed.themeExportButton: "Export" => "Eksport"
+// ed.themeImportButton: "Import" => "Import"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "Pilihan disalin daripada"
+// ed.htmlPlaceHolder: "HTML content will be here." => "Kandungan HTML akan berada di sini."
+// ed.panelPlaceHolder: "Drop a question from the toolbox here." => "Lepaskan soalan dari kotak alat di sini."
+// ed.surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below." => "Tinjauan itu kosong. Seret elemen dari kotak alat atau klik butang di bawah."
+// ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "Seret dan lepaskan imej di sini atau klik butang di bawah dan pilih imej untuk dimuat naik"
+// ed.imageChooseImage: "Choose Image" => "Pilih Imej"
+// ed.addNewTypeQuestion: "Add {0}" => "Tambah {0}"
+// ed.chooseLogoPlaceholder: "[LOGO]" => "[LOGO]"
+// ed.auto: "auto" => "Auto"
+// ed.choices_Item: "Item " => "Perkara "
+// lg.addNewItem: "Add New Rule" => "Tambah peraturan baru"
+// lg.empty_tab: "Create a rule to customize the flow of the survey." => "Cipta peraturan untuk menyesuaikan aliran tinjauan."
+// lg.page_enableName: "Enable (disable) page" => "Halaman Dayakan (nyahdayakan)"
+// lg.column_visibilityName: "Show (hide) column" => "Tunjukkan lajur (sembunyikan)"
+// lg.column_enableName: "Enable (disable) column" => "Mendayakan (nyahdayakan) lajur"
+// lg.column_requireName: "Make column required" => "Jadikan lajur diperlukan"
+// lg.itemEmptyExpressionText: "New rule" => "Peraturan baru"
+// lg.column_visibilityText: "make column {0} of question {1} visible" => "menjadikan {0} lajur soalan {1} kelihatan"
+// lg.column_enableText: "make column {0} of question {1} enable" => "menjadikan lajur {0} soalan {1} mendayakan"
+// lg.column_requireText: "make column {0} of question {1} required" => "menjadikan lajur {0} soalan {1} diperlukan"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "nilai soalan yang jelas: {0}"
+// lg.showAllQuestions: "All Questions" => "Semua Soalan"
+// lg.showAllActionTypes: "All Action Types" => "Semua Jenis Tindakan"
+// lg.uncompletedRule_title: "Logical rules are incomplete" => "Peraturan logik tidak lengkap"
+// lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Anda belum menyelesaikan beberapa peraturan logik. Jika anda meninggalkan tab sekarang, perubahan akan hilang. Adakah anda masih mahu meninggalkan tab tanpa melengkapkan perubahan?"
+// lg.uncompletedRule_apply: "Yes" => "Ya"
+// lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Tidak, saya mahu melengkapkan peraturan"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.clear: "Clear" => "Jelas"
+// pe.set: "Set" => "Set"
+// pe.change: "Change" => "Menukar"
+// pe.close: "Close" => "Tutup"
+// pe.removeItem: "Click to remove the item..." => "Klik untuk mengalih keluar item..."
+// pe.dragItem: "Drag the item" => "Seret item"
+// pe.doneEditing: "Done" => "Dilakukan"
+// pe.emptyValue: "Value is empty" => "Nilai kosong"
+// pe.fastEntryNonUniqueError: "Value '{0}' is not unique" => "Nilai '{0}' tidak unik"
+// pe.fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}" => "Sila hadkan bilangan item dari {0} hingga {1}"
+// pe.fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2" => "Anda boleh mengesetkan data dalam format berikut:\nvalue1|text\nnilai2"
+// pe.showPreviewBeforeComplete: "Preview answers before submitting the survey" => "Pratonton jawapan sebelum menyerahkan tinjauan"
+// pe.overridingPropertyPrefix: "Set by " => "Ditetapkan mengikut "
+// pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "Jangan gunakan perkataan terpelihara: \"item\", \"pilihan\", \"panel\", \"baris\"."
+// pe.listIsEmpty@choices: "No choices have been added yet" => "Tiada pilihan telah ditambah lagi"
+// pe.addNew@choices: "Add a choice" => "Tambah pilihan"
+// choicesbyurl.valueName: "Get values from the following JSON field" => "Mendapatkan nilai daripada medan JSON berikut"
+// pe.imageLinkName: "Get image URLs from the following JSON field" => "Dapatkan URL imej daripada medan JSON berikut"
+// pe.and: "and" => "Dan"
+// pe.or: "or" => "Atau"
+// pe.emptyLogicPopupMessage: "Select a question to start configuring conditions." => "Pilih soalan untuk mula mengkonfigurasi syarat."
+// pe.if: "If" => "Jika"
+// pe.then: "then" => "Kemudian"
+// pe.setToName: "Target question" => "Soalan sasaran"
+// pe.fromName: "Question to copy answer from" => "Soalan untuk menyalin jawapan daripada"
+// pe.gotoName: "Question to skip to" => "Soalan untuk melangkau ke"
+// pe.ruleIsNotSet: "Rule is incorrect" => "Peraturan tidak betul"
+// pe.includeIntoResult: "Include into survey results" => "Dimasukkan ke dalam hasil tinjauan"
+// pe.portraitOrientation: "Switch to portrait orientation" => "Bertukar kepada orientasi potret"
+// image.imageHeight: "Image height (in CSS-accepted values)" => "Ketinggian imej (dalam nilai diterima CSS)"
+// image.imageWidth: "Image width (in CSS-accepted values)" => "Lebar imej (dalam nilai diterima CSS)"
+// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
+// question.page: "Parent page" => "Halaman induk"
+// pe.noEntriesText: "Empty entries text" => "Kosongkan teks entri"
+// pe.setValue: "Answer" => "Jawapan"
+// pe.dataFormat: "Image format" => "Format imej"
+// pe.allowAddRows: "Allow adding rows" => "Benarkan menambah baris"
+// pe.allowRemoveRows: "Allow removing rows" => "Benarkan mengalih keluar baris"
+// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Benarkan seret dan lepas baris"
+// pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Tidak terpakai jika anda menentukan lebar atau ketinggian imej yang tepat."
+// pe.minImageWidth: "Minimum image width" => "Lebar imej minimum"
+// pe.maxImageWidth: "Maximum image width" => "Lebar imej maksimum"
+// pe.minImageHeight: "Minimum image height" => "Ketinggian imej minimum"
+// pe.maxImageHeight: "Maximum image height" => "Ketinggian imej maksimum"
+// surveyvalidator.text: "Error message" => "Mesej ralat"
+// surveyvalidator.expression: "Validation expression" => "Ungkapan pengesahihan"
+// pe.logo: "Logo (URL or base64-encoded string)" => "Logo (URL atau rentetan berkod asas64)"
+// pe.questionsOnPageMode: "Survey structure" => "Struktur tinjauan"
+// pe.maxTextLength: "Maximum answer length (in characters)" => "Panjang jawapan maksimum (dalam aksara)"
+// pe.maxOthersLength: "Maximum comment length (in characters)" => "Panjang komen maksimum (dalam aksara)"
+// pe.autoGrowComment: "Auto-expand comment area if necessary" => "Kembangkan kawasan komen secara automatik jika perlu"
+// pe.allowResizeComment: "Allow users to resize text areas" => "Benarkan pengguna mensaiz semula kawasan teks"
+// pe.textUpdateMode: "Update text question value" => "Mengemas kini nilai soalan teks"
+// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Mengesetkan fokus pada jawapan tidak sah yang pertama"
+// pe.checkErrorsMode: "Run validation" => "Jalankan pengesahihan"
+// pe.navigateToUrl: "Navigate to URL" => "Navigasi ke URL"
+// pe.navigateToUrlOnCondition: "Dynamic URL" => "URL dinamik"
+// pe.completedBeforeHtml: "Markup to show if the user already filled out this survey" => "Penanda untuk menunjukkan sama ada pengguna telah mengisi tinjauan ini"
+// pe.completedHtml: "Survey Complete page markup" => "Tinjauan Penanda halaman lengkap"
+// pe.completedHtmlOnCondition: "Dynamic Survey Complete page markup" => "Tinjauan Dinamik Lengkapkan penanda halaman"
+// pe.loadingHtml: "Markup to show while survey model is loading" => "Penanda untuk ditunjukkan semasa model tinjauan sedang dimuatkan"
+// pe.commentText: "Comment area text" => "Teks kawasan komen"
+// pe.autocomplete: "Autocomplete type" => "Jenis autolengkap"
+// pe.labelTrue: "\"True\" label" => "Label \"Benar\""
+// pe.labelFalse: "\"False\" label" => "Label \"Palsu\""
+// pe.displayStyle: "Value display style" => "Gaya paparan nilai"
+// pe.format: "Formatted string" => "Rentetan yang diformatkan"
+// pe.maximumFractionDigits: "Maximum fractional digits" => "Nombor pecahan maksimum"
+// pe.minimumFractionDigits: "Minimum fractional digits" => "Digit pecahan minimum"
+// pe.useGrouping: "Display grouping separators" => "Paparkan pemisah perkumpulan"
+// pe.allowMultiple: "Allow multiple files" => "Benarkan berbilang fail"
+// pe.allowImagesPreview: "Preview images" => "Pratonton imej"
+// pe.acceptedTypes: "Accepted file types" => "Jenis fail yang diterima"
+// pe.waitForUpload: "Wait for the upload to complete" => "Tunggu muat naik selesai"
+// pe.needConfirmRemoveFile: "Confirm file deletion" => "Sahkan penghapusan fail"
+// pe.detailPanelMode: "Detail panel location" => "Lokasi panel terperinci"
+// pe.minRowCount: "Minimum row count" => "Kiraan baris minimum"
+// pe.maxRowCount: "Maximum row count" => "Kiraan baris maksimum"
+// pe.confirmDelete: "Confirm row deletion" => "Sahkan pemadaman baris"
+// pe.confirmDeleteText: "Confirmation message" => "Mesej pengesahan"
+// paneldynamic.confirmDelete: "Confirm panel deletion" => "Sahkan penghapusan panel"
+// pe.panelCount: "Initial panel count" => "Kiraan panel awal"
+// pe.minPanelCount: "Minimum panel count" => "Kiraan panel minimum"
+// pe.maxPanelCount: "Maximum panel count" => "Kiraan panel maksimum"
+// pe.panelsState: "Inner panel expand state" => "Panel dalaman mengembangkan keadaan"
+// pe.templateDescription: "Description template" => "Templat perihalan"
+// pe.templateTitle: "Title template" => "Templat tajuk"
+// pe.panelPrevText: "Previous Panel button tooltip" => "Petua alat butang Panel Sebelumnya"
+// pe.panelNextText: "Next Panel button tooltip" => "Petua alat butang Panel Seterusnya"
+// pe.showRangeInProgress: "Show progress bar" => "Tunjukkan bar kemajuan"
+// pe.templateTitleLocation: "Question title location" => "Lokasi tajuk soalan"
+// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Alih keluar lokasi butang Panel"
+// pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Sembunyikan soalan jika tiada baris"
+// pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Menyembunyikan lajur jika tiada baris"
+// pe.rateValues: "Custom rate values" => "Nilai kadar tersuai"
+// pe.rateCount: "Rate count" => "Kiraan kadar"
+// pe.autoGenerate: "How to specify rate values?" => "Bagaimana untuk menentukan nilai kadar?"
+// pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "Sembunyikan soalan jika ia tidak mengandungi pilihan"
+// pe.hideNumber: "Hide question number" => "Sembunyikan nombor soalan"
+// pe.minWidth: "Minimum width (in CSS-accepted values)" => "Lebar minimum (dalam nilai diterima CSS)"
+// pe.maxWidth: "Maximum width (in CSS-accepted values)" => "Lebar maksimum (dalam nilai diterima CSS)"
+// pe.width: "Width (in CSS-accepted values)" => "Lebar (dalam nilai diterima CSS)"
+// pe.showHeader: "Show column headers" => "Tunjukkan pengepala lajur"
+// pe.horizontalScroll: "Show horizontal scrollbar" => "Menunjukkan bar skrol mendatar"
+// pe.columnMinWidth: "Minimum column width (in CSS-accepted values)" => "Lebar lajur minimum (dalam nilai diterima CSS)"
+// pe.rowTitleWidth: "Row header width (in CSS-accepted values)" => "Lebar pengepala baris (dalam nilai diterima CSS)"
+// pe.valueTrue: "\"True\" value" => "Nilai \"Benar\""
+// pe.valueFalse: "\"False\" value" => "Nilai \"Palsu\""
+// pe.minErrorText: "\"Value is below minimum\" error message" => "Mesej ralat \"Nilai adalah di bawah minimum\""
+// pe.maxErrorText: "\"Value exceeds maximum\" error message" => "Mesej ralat \"Nilai melebihi maksimum\""
+// pe.otherErrorText: "\"Empty comment\" error message" => "Mesej ralat \"komen kosong\""
+// pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Mesej ralat \"Nilai kunci bukan unik\""
+// pe.minSelectedChoices: "Minimum selected choices" => "Pilihan minimum yang dipilih"
+// pe.maxSelectedChoices: "Maximum selected choices" => "Pilihan maksimum yang dipilih"
+// pe.showClearButton: "Show the Clear button" => "Tunjukkan butang Kosongkan"
+// pe.showNumber: "Show panel number" => "Tunjukkan nombor panel"
+// pe.logoWidth: "Logo width (in CSS-accepted values)" => "Lebar logo (dalam nilai diterima CSS)"
+// pe.logoHeight: "Logo height (in CSS-accepted values)" => "Ketinggian logo (dalam nilai diterima CSS)"
+// pe.readOnly: "Read-only" => "Baca sahaja"
+// pe.enableIf: "Editable if" => "Boleh diedit jika"
+// pe.emptyRowsText: "\"No rows\" message" => "Mesej \"Tiada baris\""
+// pe.size: "Input field size (in characters)" => "Saiz medan input (dalam aksara)"
+// pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Pilihan khas berasingan (Tiada, Lain-lain, Pilih Semua)"
+// pe.choicesFromQuestion: "Copy choices from the following question" => "Salin pilihan daripada soalan berikut"
+// pe.choicesFromQuestionMode: "Which choices to copy?" => "Pilihan mana yang hendak disalin?"
+// pe.showCommentArea: "Show the comment area" => "Tunjukkan kawasan komen"
+// pe.commentPlaceholder: "Comment area placeholder" => "Ruang letak komen"
+// pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Memaparkan perihalan kadar sebagai nilai melampau"
+// pe.rowsOrder: "Row order" => "Tertib baris"
+// pe.columnsLayout: "Column layout" => "Tataletak lajur"
+// pe.columnColCount: "Nested column count" => "Kiraan lajur tersarang"
+// pe.state: "Panel expand state" => "Panel kembangkan negeri"
+// pe.correctAnswer: "Correct Answer" => "Jawapan yang betul"
+// pe.defaultPanelValue: "Default Values" => "Nilai Lalai"
+// pe.cells: "Cell Texts" => "Teks sel"
+// pe.keyName: "Key column" => "Lajur utama"
+// itemvalue.text: "Alt text" => "Teks alt"
+// tabs.expression: "Expression" => "Ungkapan"
+// pe.choicesVisibleIf: "Choices are visible if" => "Pilihan boleh dilihat jika"
+// pe.choicesEnableIf: "Choices are selectable if" => "Pilihan boleh dipilih jika"
+// pe.columnsEnableIf: "Columns are visible if" => "Lajur kelihatan jika"
+// pe.rowsEnableIf: "Rows are visible if" => "Baris boleh dilihat jika"
+// pe.indent: "Add indents" => "Menambah inden"
+// panel.indent: "Add outer indents" => "Menambah inden luaran"
+// pe.innerIndent: "Add inner indents" => "Menambah inden dalaman"
+// pe.defaultValueFromLastRow: "Take default values from the last row" => "Mengambil nilai lalai daripada baris terakhir"
+// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Mengambil nilai lalai daripada panel terakhir"
+// pe.emptyExpressionPlaceHolder: "Type expression here..." => "Taip ungkapan di sini..."
+// pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Kosongkan nilai jika soalan menjadi tersembunyi"
+// pe.valuePropertyName: "Value property name" => "Nama sifat nilai"
+// pe.searchEnabled: "Enable search" => "Dayakan carian"
+// pe.hideSelectedItems: "Hide selected items" => "Menyembunyikan item terpilih"
+// pe.closeOnSelect: "Close the dropdown after selection" => "Menutup juntai bawah selepas pemilihan"
+// pe.signatureWidth: "Signature width" => "Lebar tandatangan"
+// pe.signatureHeight: "Signature height" => "Ketinggian tandatangan"
+// pe.verticalAlign: "Vertical alignment" => "Penjajaran menegak"
+// pe.alternateRows: "Alternate rows" => "Baris alternatif"
+// pe.columnsVisibleIf: "Columns are visible if" => "Lajur kelihatan jika"
+// pe.rowsVisibleIf: "Rows are visible if" => "Baris boleh dilihat jika"
+// pe.otherPlaceholder: "Comment area placeholder" => "Ruang letak komen"
+// pe.rateType: "Rate type" => "Jenis kadar"
+// pv.true: "true" => "Benar"
+// pv.false: "false" => "Palsu"
+// pv.decimal: "decimal" => "Perpuluhan"
+// pv.currency: "currency" => "Mata wang"
+// pv.percent: "percent" => "Peratus"
+// pv.onpanel: "Start on each panel" => "Mulakan pada setiap panel"
+// pv.tab: "Tabs" => "Tab"
+// pv.right: "Right" => "Kanan"
+// pv.color: "color" => "Warna"
+// pv.date: "date" => "Tarikh"
+// pv.datetime: "datetime" => "masa tarikh"
+// pv.datetime-local: "datetime-local" => "tarikh-tempatan"
+// pv.email: "email" => "E-mel"
+// pv.month: "month" => "Bulan"
+// pv.number: "number" => "Nombor"
+// pv.password: "password" => "Kata laluan"
+// pv.range: "range" => "Pelbagai"
+// pv.tel: "tel" => "Tel"
+// pv.text: "text" => "Teks"
+// pv.time: "time" => "Masa"
+// pv.url: "url" => "Url"
+// pv.week: "week" => "Minggu"
+// pv.onHiddenContainer: "When the question or its panel/page becomes hidden" => "Apabila soalan atau panel/halamannya menjadi tersembunyi"
+// clearInvisibleValues.none: "Never" => "Tidak pernah"
+// inputType.color: "Color" => "Warna"
+// inputType.date: "Date" => "Tarikh"
+// inputType.datetime-local: "Date and Time" => "Tarikh dan Masa"
+// inputType.email: "Email" => "E-mel"
+// inputType.month: "Month" => "Bulan"
+// inputType.number: "Number" => "Nombor"
+// inputType.password: "Password" => "Kata laluan"
+// inputType.range: "Range" => "Pelbagai"
+// inputType.tel: "Phone Number" => "Nombor Telefon"
+// inputType.text: "Text" => "Teks"
+// inputType.time: "Time" => "Masa"
+// inputType.url: "URL" => "URL"
+// inputType.week: "Week" => "Minggu"
+// pv.onValueChanging: "Before an answer is changed" => "Sebelum jawapan diubah"
+// pv.onBlur: "On blur" => "Pada kabur"
+// pv.onTyping: "While typing" => "Semasa menaip"
+// pv.underRow: "Under the row" => "Di bawah baris"
+// pv.underRowSingle: "Under the row, only one panel is visible" => "Di bawah baris, hanya satu panel boleh dilihat"
+// showNavigationButtons.none: "Hidden" => "Tersembunyi"
+// showProgressBar.off: "Hidden" => "Tersembunyi"
+// showTimerPanel.none: "Hidden" => "Tersembunyi"
+// showTimerPanelMode.all: "Both" => "Kedua-duanya"
+// detailPanelMode.none: "Hidden" => "Tersembunyi"
+// addRowLocation.default: "Depends on matrix layout" => "Bergantung pada tataletak matriks"
+// panelsState.default: "Users cannot expand or collapse panels" => "Pengguna tidak boleh mengembangkan atau meruntuhkan panel"
+// panelsState.collapsed: "All panels are collapsed" => "Semua panel runtuh"
+// panelsState.expanded: "All panels are expanded" => "Semua panel diperluaskan"
+// widthMode.auto: "Auto" => "Auto"
+// widthMode.static: "Static" => "Statik"
+// widthMode.responsive: "Responsive" => "Responsif"
+// imageFit.none: "None" => "Tiada"
+// imageFit.contain: "Contain" => "Mengandungi"
+// imageFit.cover: "Cover" => "Perlindungan"
+// imageFit.fill: "Fill" => "Mengisi"
+// contentMode.auto: "Auto" => "Auto"
+// contentMode.image: "Image" => "Imej"
+// contentMode.video: "Video" => "Video"
+// contentMode.youtube: "YouTube" => "Youtube"
+// displayMode.auto: "Auto" => "Auto"
+// displayMode.buttons: "Buttons" => "Butang"
+// displayMode.dropdown: "Dropdown" => "Dropdown"
+// rateColorMode.default: "Default" => "Lalai"
+// autoGenerate.true: "Generate" => "Menjana"
+// autoGenerate.false: "Enter manually" => "Masukkan secara manual"
+// rateType.labels: "Labels" => "Label"
+// rateType.stars: "Stars" => "Bintang"
+// rateType.smileys: "Smileys" => "Smileys"
+// op.and: "and" => "Dan"
+// op.or: "or" => "Atau"
+// ts.hideInvisibleElements: "Hide invisible elements" => "Sembunyikan unsur tidak kelihatan"
+// pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "Kuki menghalang pengguna daripada mengisi tinjauan yang sama dua kali."
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Mensaiz semula kawasan medan input yang kelihatan. Sila gunakan <b>Pengesahan →</b> Tetapan panjang maksimum untuk mengehadkan panjang input."
+// pehelp.format: "Use {0} as a placeholder for the actual value." => "Gunakan {0} sebagai ruang letak untuk nilai sebenar."
+// pehelp.totalText: "Visible only when at least one column has Total type or Total expression." => "Boleh dilihat hanya apabila sekurang-kurangnya satu lajur mempunyai jenis Jumlah atau ungkapan Jumlah."
+// pehelp.acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information." => "Rujuk perihalan atribut [terima](https://www.w3schools.com/tags/att_input_accept.asp) untuk maklumat lanjut."
+// pehelp.columnColCount: "Applicable only to Radiogroup and Checkbox cell types." => "Hanya digunakan untuk jenis sel Kumpulan Radio dan Kotak Semak."
+// pehelp.autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information." => "Rujuk perihalan atribut [autolengkap](https://developer.mozilla.org/en-US/docs/Web/HTML/Atribut/autolengkap) untuk maklumat lanjut."
+// pehelp.valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property." => "Jika anda tidak menetapkan sifat ini, jawapannya akan disimpan dalam medan yang ditentukan oleh sifat Nama."
+// choicesbyurl.valueName: " " => " "
+// pehelp.keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error." => "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\"."
+// p.value: "Value" => "Nilai"
+// p.tabAlign: "Tab alignment" => "Penjajaran tab"
+// p.questions: "Questions" => "Soalan"
+// p.surveyId: "Survey id" => "Id tinjauan"
+// p.surveyPostId: "Survey post id" => "Id siaran tinjauan"
+// p.surveyShowDataSaving: "Survey show data saving" => "Tinjauan menunjukkan penjimatan data"
+// p.showTOC: "Show TOC" => "Tunjukkan TOC"
+// p.tocLocation: "Toc location" => "Lokasi Toc"
+// p.showBrandInfo: "Show brand info" => "Tunjukkan maklumat jenama"
+// p.renderAs: "Render as" => "Render sebagai"
+// p.attachOriginalItems: "Attach original items" => "Lampirkan item asal"
+// p.cellHint: "Cell hint" => "Petunjuk sel"
+// p.isUnique: "Is unique" => "Unik"
+// p.showInMultipleColumns: "Show in multiple columns" => "Tunjukkan dalam berbilang lajur"
+// p.totalMaximumFractionDigits: "Total maximum fraction digits" => "Jumlah digit pecahan maksimum"
+// p.totalMinimumFractionDigits: "Total minimum fraction digits" => "Jumlah digit pecahan minimum"
+// p.detailElements: "Detail elements" => "Unsur terperinci"
+// p.allowAdaptiveActions: "Allow adaptive actions" => "Benarkan tindakan penyesuaian"
+// p.choicesLazyLoadEnabled: "Choices lazy load enabled" => "Pilihan beban malas didayakan"
+// p.choicesLazyLoadPageSize: "Choices lazy load page size" => "Pilihan malas memuatkan saiz halaman"
+// p.inputFieldComponent: "Input field component" => "Komponen medan input"
+// p.itemComponent: "Item component" => "Komponen item"
+// p.elements: "Elements" => "Unsur"
+// p.content: "Content" => "Kandungan"
+// p.longTap: "Long tap" => "Ketuk panjang"
+// p.allowResize: "Allow resizing" => "Benarkan pensaizan semula"
+// p.acceptCarriageReturn: "Accept carriage return" => "Terima pulangan pengangkutan"
+// p.displayMode: "Display mode" => "Mod paparan"
+// p.rateType: "Rate type" => "Jenis kadar"
+// p.altText: "Alt text" => "Teks alt"
+// p.templateElements: "Template elements" => "Unsur templat"
+// p.operator: "Operator" => "Pengendali"
+// p.isVariable: "Is variable" => "Adakah pembolehubah"
+// p.runExpression: "Run expression" => "Jalankan ungkapan"
+// p.precision: "Precision" => "Ketepatan"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "Kawasan pemegang seretan matriks"
+// p.backgroundImage: "Background image" => "Imej latar belakang"
+// p.backgroundImageFit: "Background image fit" => "Kesesuaian imej latar belakang"
+// p.backgroundImageAttachment: "Background image attachment" => "Lampiran imej latar belakang"
+// p.backgroundOpacity: "Background opacity" => "Kelegapan latar belakang"
+// p.selectToRankEnabled: "Select to rank enabled" => "Pilih untuk mendayakan kedudukan"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "Pilih untuk menentukan tataletak kawasan"
+// p.allowCameraAccess: "Allow camera access" => "Benarkan capaian kamera"
+// p.scaleColorMode: "Scale color mode" => "Mod warna skala"
+// p.rateColorMode: "Rate color mode" => "Mod warna kadar"
+// p.templateTabTitle: "Template tab title" => "Tajuk tab templat"
+// p.templateVisibleIf: "Template visible if" => "Templat boleh dilihat jika"
+// p.copyDisplayValue: "Copy display value" => "Nilai paparan salin"
+// theme.--background: "Background color" => "Warna latar belakang"
+// theme.--background-dim-light: "Background dim light color" => "Warna cahaya malap latar belakang"
+// theme.--primary-foreground: "Primary foreground color" => "Warna latar depan utama"
+// theme.--foreground: "Foreground color" => "Warna latar depan"
+// theme.--base-unit: "Base unit" => "Unit asas"
+// theme.groupGeneral: "General" => "Umum"
+// theme.groupAdvanced: "Advanced" => "Lanjutan"
+// theme.themeName: "Theme" => "Tema"
+// theme.themeMode: "Question appearance" => "Penampilan soalan"
+// theme.themeModePanels: "Default" => "Lalai"
+// theme.themeModeLightweight: "Without Panels" => "Tanpa Panel"
+// theme.themePaletteLight: "Light" => "Cahaya"
+// theme.themePaletteDark: "Dark" => "Gelap"
+// theme.primaryColor: "Accent color" => "Warna aksen"
+// theme.primaryDefaultColor: "Default" => "Lalai"
+// theme.primaryDarkColor: "Hover" => "Hover"
+// theme.primaryLightColor: "Selected" => "Dipilih"
+// theme.backgroundDimColor: "Background color" => "Warna latar belakang"
+// theme.backgroundImage: "Background image" => "Imej latar belakang"
+// theme.backgroundImageFitAuto: "Auto" => "Auto"
+// theme.backgroundImageFitCover: "Cover" => "Perlindungan"
+// theme.backgroundImageFitContain: "Contain" => "Mengandungi"
+// theme.backgroundOpacity: "Opacity" => "Kelegapan"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "Tetap"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "Tatal"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Kelegapan latar belakang panel"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Kelegapan latar belakang soalan"
+// theme.questionPanel: "Panel background and corner radius" => "Latar belakang panel dan jejari sudut"
+// theme.questionTitle: "Question title font" => "Fon tajuk soalan"
+// theme.questionDescription: "Question description font" => "Fon perihalan soalan"
+// theme.editorPanel: "Input element" => "Unsur input"
+// theme.editorFont: "Input element font" => "Fon unsur input"
+// theme.backcolor: "Default background" => "Latar belakang lalai"
+// theme.hovercolor: "Hover background" => "Latarbelakang penuding"
+// theme.borderDecoration: "Border decoration" => "Hiasan sempadan"
+// theme.accentBackground: "Accent background" => "Latar belakang aksen"
+// theme.accentForeground: "Accent foreground" => "Aksen latar depan"
+// theme.primaryForecolor: "Default color" => "Warna lalai"
+// theme.primaryForecolorLight: "Disabled color" => "Warna dinyahdayakan"
+// theme.linesColors: "Minor line colors" => "Warna garis kecil"
+// theme.borderDefault: "Darker" => "Gelap"
+// theme.borderLight: "Lighter" => "Lebih ringan"
+// theme.fontFamily: "Font family" => "Keluarga fon"
+// theme.fontSize: "Font size" => "Saiz fon"
+// theme.color: "Color" => "Warna"
+// theme.size: "Size" => "Saiz"
+// theme.fontWeightRegular: "Regular" => "Tetap"
+// theme.fontWeightHeavy: "Heavy" => "Berat"
+// theme.fontWeightSemiBold: "Semi-bold" => "Separa berani"
+// theme.fontWeightBold: "Bold" => "Berani"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Jejari penjuru"
+// theme.surveyTitle: "Survey title font" => "Fon tajuk tinjauan"
+// theme.pageTitle: "Page title font" => "Fon tajuk halaman"
+// theme.pageDescription: "Page description font" => "Fon perihalan halaman"
+// theme.boxShadowX: "X" => "X"
+// theme.boxShadowY: "Y" => "Y"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "Menambah Kesan Bayang"
+// theme.opacity: "Opacity" => "Kelegapan"
+// theme.boxShadowBlur: "Blur" => "Kabur"
+// theme.boxShadowSpread: "Spread" => "Penyebaran"
+// theme.boxShadowDrop: "Drop" => "Singgah"
+// theme.boxShadowInner: "Inner" => "Dalaman"
+// theme.questionShadow: "Shadow effects" => "Kesan bayang"
+// theme.editorShadow: "Input element shadow effects" => "Kesan bayang unsur input"
+// names.default: "Default" => "Lalai"
+// names.contrast: "Contrast" => "Sebaliknya"
+// names.plain: "Plain" => "Biasa"
+// names.simple: "Simple" => "Mudah"
+// names.blank: "Blank" => "Kosong"
+// names.double: "Double" => "Double"
+// names.bulk: "Bulk" => "Pukal"
+// names.pseudo-3d: "Pseudo 3D" => "Pseudo 3D"
+// names.playful: "Playful" => "Suka bermain"
+// names.ultra: "Ultra" => "Ultra"
+// colors.teal: "Teal" => "Teal"
+// colors.blue: "Blue" => "Blue"
+// colors.purple: "Purple" => "Ungu"
+// colors.orchid: "Orchid" => "Orchid"
+// colors.tulip: "Tulip" => "Tulip"
+// colors.brown: "Brown" => "Brown"
+// colors.green: "Green" => "Hijau"

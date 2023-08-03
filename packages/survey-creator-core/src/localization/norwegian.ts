@@ -1,5 +1,3 @@
-// This dictionary contains 342 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization, defaultStrings } from "survey-creator-core";
 
 export var nbStrings = {
@@ -11,12 +9,12 @@ export var nbStrings = {
     dropQuestion: "Dra og slipp et spørsmål her fra Verktøylisten til venstre.",
     addLogicItem: "Opprett en regel for å skreddersy skjemaflyten",
     copy: "Kopier",
-    // duplicate: "Duplicate",
+    duplicate: "Duplikat",
     addToToolbox: "Legg til verktøylisten",
     deletePanel: "Slett panel",
     deleteQuestion: "Slett spørsmål",
     convertTo: "Konverter til",
-    drag: "Dra element"
+    drag: "Dra element",
   },
   // Question types
   qt: {
@@ -24,10 +22,10 @@ export var nbStrings = {
     checkbox: "Sjekkboks",
     comment: "Kommentar",
     imagepicker: "Bildevelger",
-    // ranking: "Ranking",
+    ranking: "Rangering",
     image: "Bilde",
     dropdown: "Nedtrekksliste",
-    // tagbox: "Multi-Select Dropdown",
+    tagbox: "Rullegardinmenyen for flere valg",
     file: "Fil",
     html: "Html",
     matrix: "Matrise (enkelvalg)",
@@ -42,7 +40,7 @@ export var nbStrings = {
     boolean: "Yes/No (Boolean)",
     expression: "Formel",
     signaturepad: "Signatur",
-    // buttongroup: "Button Group"
+    buttongroup: "Knappegruppe"
   },
   // Strings in SurveyJS Creator
   ed: {
@@ -50,17 +48,17 @@ export var nbStrings = {
     survey: "Skjema",
     settings: "Skjemainnstillinger",
     settingsTooltip: "Åpne skjemainnstillinger",
-    // surveySettings: "Survey Settings",
-    // surveySettingsTooltip: "Open survey settings",
+    surveySettings: "Innstillinger for undersøkelse",
+    surveySettingsTooltip: "Åpne innstillinger for evaluering",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
-    // prevSelected: "Select previous",
-    // nextSelected: "Select next",
-    // surveyTypeName: "Survey",
-    // pageTypeName: "Page",
-    // panelTypeName: "Panel",
-    // questionTypeName: "Question",
-    // columnTypeName: "Column",
+    prevSelected: "Velg forrige",
+    nextSelected: "Velg neste",
+    surveyTypeName: "Undersøkelse",
+    pageTypeName: "Side",
+    panelTypeName: "Panel",
+    questionTypeName: "Spørsmål",
+    columnTypeName: "Kolonne",
     addNewPage: "Legg til ny side",
     moveRight: "Bla til høyre",
     moveLeft: "Bla til venstre",
@@ -72,9 +70,10 @@ export var nbStrings = {
     newPanelName: "panel",
     newTextItemName: "tekst",
     testSurvey: "Test skjema",
-    // defaultV2Theme: "Default",
-    // modernTheme: "Modern",
-    // defaultTheme: "Default (legacy)",
+    themeSurvey: "Temaer",
+    defaultV2Theme: "Standard",
+    modernTheme: "Moderne",
+    defaultTheme: "Standard (eldre)",
     testSurveyAgain: "Test skjema igjen",
     testSurveyWidth: "Skjemabredde: ",
     navigateToMsg: "Du måtte navigere til:",
@@ -85,14 +84,14 @@ export var nbStrings = {
     saveSurveyTooltip: "Lagre skjema",
     designer: "Skjemadesigner",
     jsonEditor: "JSON-redigering",
-    // jsonHideErrors: "Hide errors",
-    // jsonShowErrors: "Show errors",
+    jsonHideErrors: "Skjul feil",
+    jsonShowErrors: "Vis feil",
     undo: "Angre",
     redo: "Gjenta",
     undoTooltip: "Angre siste endring",
     redoTooltip: "Gjør om siste endring",
-    // showMoreChoices: "Show more",
-    // showLessChoices: "Show less",
+    showMoreChoices: "Vis mer",
+    showLessChoices: "Vis mindre",
     copy: "Kopier",
     cut: "Kutt",
     paste: "Lim innn",
@@ -104,13 +103,13 @@ export var nbStrings = {
     generateReadableJSON: "Lag lesbar JSON",
     toolbox: "Verktøyliste",
     "property-grid": "Innstillinger",
-    // propertyGridFilteredTextPlaceholder: "Type to search...",
+    propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
     toolboxGeneralCategory: "Generelt",
-    // toolboxChoiceCategory: "Choice Questions",
-    // toolboxTextCategory: "Text Input Questions",
-    // toolboxContainersCategory: "Containers",
-    // toolboxMatrixCategory: "Matrix Questions",
-    // toolboxMiscCategory: "Misc",
+    toolboxChoiceCategory: "Choice Spørsmål",
+    toolboxTextCategory: "Spørsmål om tekstinndata",
+    toolboxContainersCategory: "Beholdere",
+    toolboxMatrixCategory: "Matrise Spørsmål",
+    toolboxMiscCategory: "Misc",
     correctJSON: "Vennligst korriger JSON.",
     surveyResults: "Skjemaresultat: ",
     surveyResultsTable: "Som tabell",
@@ -124,41 +123,48 @@ export var nbStrings = {
     saved: "Lagret",
     propertyEditorError: "Feil:",
     saveError: "Feil! Skjema innhold er ikke lagret.",
-    // translationPropertyGridTitle: "Language Settings",
-    // translationLanguages: "Languages",
+    translationPropertyGridTitle: "Språkinnstillinger",
+    themePropertyGridTitle: "Tema innstillinger",
+    translationLanguages: "Språk",
     translationAddLanguage: "Velg språk for oversetting",
     translationShowAllStrings: "Vis alle strenger",
-    // translationShowUsedStringsOnly: "Used Strings Only",
+    translationShowUsedStringsOnly: "Bare brukte strenger",
     translationShowAllPages: "Vis alle sider",
     translationNoStrings: "Ingen strenger å oversette. Vennligst endre filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
-    // translationPlaceHolder: "Translation...",
+    translationPlaceHolder: "Oversettelse...",
+    themeExportButton: "Eksport",
+    themeImportButton: "Importere",
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
     addNewQuestion: "Legg til spørsmål",
     selectPage: "Velg side...",
-    // htmlPlaceHolder: "HTML content will be here.",
-    // panelPlaceHolder: "Drop a question from the toolbox here.",
-    // surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
-    // addNewTypeQuestion: "Add {0}", //{0} is localizable question type
-    // chooseLogoPlaceholder: "[LOGO]",
-    // auto: "auto",
+    carryForwardChoicesCopied: "Valgene kopieres fra",
+    htmlPlaceHolder: "HTML-innhold vil være her.",
+    panelPlaceHolder: "Slipp et spørsmål fra verktøykassen her.",
+    surveyPlaceHolder: "Undersøkelsen er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
+    imagePlaceHolder: "Dra og slipp et bilde her, eller klikk på knappen nedenfor og velg et bilde du vil laste opp",
+    imageChooseImage: "Velg bilde",
+    addNewTypeQuestion: "Legg til {0}", //{0} is localizable question type
+    chooseLogoPlaceholder: "[LOGO]",
+    auto: "auto",
+    choices_Item: "Vare ",
     lg: {
       addNewItem: "Legg til ny regel",
-      // empty_tab: "Create a rule to customize the flow of the survey.",
+      empty_tab: "Opprett en regel for å tilpasse flyten i evalueringen.",
       page_visibilityName: "Sidesynlighet",
-      // page_enableName: "Enable (disable) page",
+      page_enableName: "Aktivere (deaktivere) side",
       panel_visibilityName: "Panelsynlighet",
       panel_enableName: "Panel aktivere/deaktivere",
       question_visibilityName: "Spørsmålssynlghet",
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
-      // column_visibilityName: "Show (hide) column",
-      // column_enableName: "Enable (disable) column",
-      // column_requireName: "Make column required",
+      column_visibilityName: "Vis kolonne (skjul)",
+      column_enableName: "Aktivere (deaktivere) kolonne",
+      column_requireName: "Gjøre kolonne obligatorisk",
       trigger_completeName: "Fullfør skjema",
       trigger_setvalueName: "Angi spørsmålsnavn",
       trigger_copyvalueName: "Kopier spørsmålsverdi",
@@ -177,26 +183,27 @@ export var nbStrings = {
       trigger_skipDescription: "Når formelen evalueres til 'sann' vil skjemaet hoppe til/fokusere på valgt spørsmål.",
       trigger_runExpressionDescription: "Når formelen evauleres til 'sann' vil den tilpassede formelen utføres. Du kan valgfritt sette formelens resultat inn i det valgte spørsmålet.",
       completedHtmlOnConditionDescription: "Hvis formelen evalueres til 'sann' vil standardteksten på 'Takk siden' endres til den gitte teksten.",
-      itemExpressionText: "Når formelen: '{0}' evalueres til 'sann':", //{0} - the expression
-      // itemEmptyExpressionText: "New rule",
-      page_visibilityText: "Gjøre side {0} synlig", //{0} page name
-      panel_visibilityText: "Gjør panel {0} synlig", //{0} panel name
-      panel_enableText: "Gjør panel {0} aktivert", //{0} panel name
-      question_visibilityText: "Gjør spørsmål {0} synlig", //{0} question name
-      question_enableText: "Gjør spørsmål {0} aktivert", //{0} question name
-      question_requireText: "Gjør spørsmål {0} påkrevd", //{0} question name
-      // column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
-      // column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
-      // column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
+      itemExpressionText: "Når formelen: '{0}' evalueres til 'sann':",
+      itemEmptyExpressionText: "Ny regel",
+      page_visibilityText: "Gjøre side {0} synlig",
+      panel_visibilityText: "Gjør panel {0} synlig",
+      panel_enableText: "Gjør panel {0} aktivert",
+      question_visibilityText: "Gjør spørsmål {0} synlig",
+      question_enableText: "Gjør spørsmål {0} aktivert",
+      question_requireText: "Gjør spørsmål {0} påkrevd",
+      column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
+      column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
+      column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
       trigger_completeText: "Skjemaet blir fullført",
-      trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
-      trigger_copyvalueText: "Kopier inn: {0} verdi fra spørsmål {1}", //{0} and {1} question names
-      trigger_skipText: "Hopp til spørsmål {0}", //{0} question name
-      trigger_runExpressionText1: "Kjør formel: '{0}'", //{0} the expression
-      trigger_runExpressionText2: " og sett inn resultatet i spørsmål: {0}", //{0} question name
+      trigger_setvalueText: "Sett inn: {0} verdi {1}",
+      trigger_setvalueEmptyText: "Klar spørsmålsverdi: {0}", //{0} question name
+      trigger_copyvalueText: "Kopier inn: {0} verdi fra spørsmål {1}",
+      trigger_skipText: "Hopp til spørsmål {0}",
+      trigger_runExpressionText1: "Kjør formel: '{0}'",
+      trigger_runExpressionText2: " og sett inn resultatet i spørsmål: {0}",
       completedHtmlOnConditionText: "Vis tilpasset tekst for 'Takk-siden'.",
-      // showAllQuestions: "All Questions",
-      // showAllActionTypes: "All Action Types",
+      showAllQuestions: "Alle spørsmål",
+      showAllActionTypes: "Alle handlingstyper",
       conditions: "Vilkår",
       actions: "Handling(er)",
       expressionEditorTitle: "Definer vilkår",
@@ -207,6 +214,10 @@ export var nbStrings = {
       expressionInvalid: "Formelen er tom eller ugyldig. Vennligst korriger den.",
       noActionError: "Vennligst legg til minst en handling",
       actionInvalid: "Vennligst korriger problemer med handlingen.",
+      uncompletedRule_title: "Logiske regler er ufullstendige",
+      uncompletedRule_text: "Noen av de logiske reglene har du ikke fullført. Hvis du forlater fanen nå, vil endringene gå tapt. Vil du fortsatt forlate fanen uten å fullføre endringene?",
+      uncompletedRule_apply: "Ja",
+      uncompletedRule_cancel: "Nei, jeg vil fullføre reglene",
       // expressionSetup: "",
       // actionsSetup: ""
     }
@@ -216,20 +227,20 @@ export var nbStrings = {
     apply: "Bruk",
     ok: "OK",
     save: "Lagre",
-    // clear: "Clear",
+    clear: "Klar",
     saveTooltip: "Lagre",
     cancel: "Avbryt",
-    // set: "Set",
+    set: "Sett",
     reset: "Tilbakestill",
-    // change: "Change",
+    change: "Forandre",
     refresh: "Last inn på nytt",
-    // close: "Close",
+    close: "Lukke",
     delete: "Slett",
     add: "Legg til",
     addNew: "Legg til ny",
     addItem: "Klikk for å legge til...",
-    // removeItem: "Click to remove the item...",
-    // dragItem: "Drag the item",
+    removeItem: "Klikk for å fjerne elementet...",
+    dragItem: "Dra elementet",
     addOther: "Annet",
     addSelectAll: "Velg alt",
     addNone: "Ingen",
@@ -239,16 +250,16 @@ export var nbStrings = {
     backTooltip: "Gå tilbake uten å lagre",
     saveAndBack: "Lagre og gå tilbake",
     saveAndBackTooltip: "Lagre og gå tilbake",
-    // doneEditing: "Done",
+    doneEditing: "Gjort",
     editChoices: "Rediger valg",
     showChoices: "Vis valg",
     move: "Flytt",
     empty: "<tom>",
-    // emptyValue: "Value is empty",
+    emptyValue: "Verdien er tom",
     fastEntry: "Rask innfylling",
-    // fastEntryNonUniqueError: "Value '{0}' is not unique",
-    // fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
-    // fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
+    fastEntryNonUniqueError: "Verdien «{0}» er ikke unik",
+    fastEntryChoicesCountError: "Begrens antall varer fra {0} til {1}",
+    fastEntryPlaceholder: "Du kan angi data i følgende format:\nverdi1|tekst\nverdi2",
     formEntry: "Innfylling i skjema",
     testService: "Sjekk tjenesten",
     itemSelectorEmpty: "Vennligst velg elementet",
@@ -264,13 +275,15 @@ export var nbStrings = {
     showMore: "For mer detaljer - se dokumentasjonen",
     assistantTitle: "Tilgjengelige spørsmål:",
     cellsEmptyRowsColumns: "Det må være minst 1 kolonne eller rad",
-    // showPreviewBeforeComplete: "Preview answers before submitting the survey",
+    showPreviewBeforeComplete: "Forhåndsvise svar før du sender inn undersøkelsen",
+    overridingPropertyPrefix: "Sett av ",
     propertyIsEmpty: "Vennligst fyll inn en verdi",
-    // propertyIsNoUnique: "Please enter a unique value",
+    propertyIsNoUnique: "Angi en unik verdi",
     propertyNameIsNotUnique: "Vennligst fyll inn et unikt navn",
+    propertyNameIsIncorrect: "Ikke bruk reserverte ord: \"element\", \"valg\", \"panel\", \"rad\".",
     listIsEmpty: "Legg til nytt element",
-    // "listIsEmpty@choices": "No choices have been added yet",
-    // "addNew@choices": "Add a choice",
+    "listIsEmpty@choices": "Ingen valg er lagt til ennå",
+    "addNew@choices": "Legg til et valg",
     expressionIsEmpty: "Formelen er tom",
     value: "Verdi",
     text: "Tekst",
@@ -282,11 +295,11 @@ export var nbStrings = {
     path: "Sti",
     valueName: "Verdinavn",
     choicesbyurl: {
-      // valueName: "Get values from the following JSON field"
+      valueName: "Hent verdier fra følgende JSON-felt"
     },
     titleName: "Tittelnavn",
-    // imageLinkName: "Get image URLs from the following JSON field",
-    // allowEmptyResponse: "Allow empty response",
+    imageLinkName: "Hent bildenettadresser fra følgende JSON-felt",
+    allowEmptyResponse: "Tillat tom respons",
     titlePlaceholder: "Skriv tittel her",
     surveyTitlePlaceholder: "Skriv skjematittel her",
     pageTitlePlaceholder: "Skriv sidetittel her",
@@ -339,24 +352,24 @@ export var nbStrings = {
     maxLength: "Maksimum lengde",
     buildExpression: "Bygg",
     editExpression: "Rediger",
-    // and: "and",
-    // or: "or",
+    and: "og",
+    or: "eller",
     remove: "Fjern",
     addCondition: "Legg til",
-    // emptyLogicPopupMessage: "Select a question to start configuring conditions.",
-    // if: "If",
-    // then: "then",
-    // setToName: "Target question",
-    // fromName: "Question to copy answer from",
-    // gotoName: "Question to skip to",
-    // ruleIsNotSet: "Rule is incorrect",
-    // includeIntoResult: "Include into survey results",
+    emptyLogicPopupMessage: "Velg et spørsmål for å begynne å konfigurere betingelsene.",
+    if: "Hvis",
+    then: "da",
+    setToName: "Målspørsmål",
+    fromName: "Spørsmål å kopiere svar fra",
+    gotoName: "Spørsmål å hoppe til",
+    ruleIsNotSet: "Regelen er feil",
+    includeIntoResult: "Inkluder i undersøkelsesresultater",
     showTitle: "Vis/skjul tittel",
     expandCollapseTitle: "Utvid/krymp tittel",
     locale: "Standard språk",
     simulator: "Velg enhet",
     landscapeOrientation: "Liggende",
-    // portraitOrientation: "Switch to portrait orientation",
+    portraitOrientation: "Bytte til stående papirretning",
     mode: "Modus (rediger/kun lesbart)",
     clearInvisibleValues: "Fjern usynlige verdier",
     cookieName: "Informasjonskapsel navn (for å hindre bruk av skjema to ganger lokalt)",
@@ -386,33 +399,37 @@ export var nbStrings = {
     questionsOrder: "Rekkefølge på elementer på siden",
     maxTimeToFinish: "Maks tid for å gjøre ferdig skjema",
     maxTimeToFinishPage: "Maks tid til å gjøre ferdig en side i skjema",
+    image: {
+      imageHeight: "Bildehøyde (i CSS-godkjente verdier)",
+      imageWidth: "Bildebredde (i CSS-godkjente verdier)"
+    },
     page: {
-      // maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      maxTimeToFinish: "Tidsbegrensning for å fullføre siden (i sekunder)"
     },
     question: {
-      // page: "Parent page"
+      page: "Overordnet side"
     },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
     renderMode: "Gjengivelse modus",
     allowAddPanel: "Tillat å legge til panel",
     allowRemovePanel: "Tillat å fjerne panel",
-    // noEntriesText: "Empty entries text",
+    noEntriesText: "Tekst med tomme oppføringer",
     panelAddText: "Legg til panel tekst",
     panelRemoveText: "Fjern panel tekst",
     isSinglePage: "Vis alle elementer på en side",
     html: "HTML",
     expression: "Formel",
-    // setValue: "Answer",
-    // dataFormat: "Image format",
-    // allowAddRows: "Allow adding rows",
-    // allowRemoveRows: "Allow removing rows",
-    // allowRowsDragAndDrop: "Allow row drag and drop",
-    // responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
-    // minImageWidth: "Minimum image width",
-    // maxImageWidth: "Maximum image width",
-    // minImageHeight: "Minimum image height",
-    // maxImageHeight: "Maximum image height",
+    setValue: "Svare",
+    dataFormat: "Bildeformat",
+    allowAddRows: "Tillat at rader legges til",
+    allowRemoveRows: "Tillat fjerning av rader",
+    allowRowsDragAndDrop: "Tillat dra og slipp i rad",
+    responsiveImageSizeHelp: "Gjelder ikke hvis du angir nøyaktig bildebredde eller -høyde.",
+    minImageWidth: "Minimum bildebredde",
+    maxImageWidth: "Maksimal bildebredde",
+    minImageHeight: "Minimum bildehøyde",
+    maxImageHeight: "Maksimal bildehøyde",
     minValue: "Minimumsverdi",
     maxValue: "Maksimal verdi",
     minLength: "Minimum lengde",
@@ -421,8 +438,8 @@ export var nbStrings = {
     maxCount: "Maximum count",
     regex: "Regular expression",
     surveyvalidator: {
-      // text: "Error message",
-      // expression: "Validation expression"
+      text: "Feilmelding",
+      expression: "Uttrykk for validering"
     },
     totalText: "Total tekst",
     totalType: "Total type",
@@ -430,97 +447,101 @@ export var nbStrings = {
     totalDisplayStyle: "Total visningsstil",
     totalCurrency: "Total valuta",
     totalFormat: "Total format",
-    // logo: "Logo (URL or base64-encoded string)",
-    // questionsOnPageMode: "Survey structure",
-    // maxTextLength: "Maximum answer length (in characters)",
-    // maxOthersLength: "Maximum comment length (in characters)",
-    // autoGrowComment: "Auto-expand comment area if necessary",
-    // textUpdateMode: "Update text question value",
-    // focusOnFirstError: "Set focus on the first invalid answer",
-    // checkErrorsMode: "Run validation",
-    // navigateToUrl: "Navigate to URL",
-    // navigateToUrlOnCondition: "Dynamic URL",
-    // completedBeforeHtml: "Markup to show if the user already filled out this survey",
-    // completedHtml: "Survey Complete page markup",
-    // completedHtmlOnCondition: "Dynamic Survey Complete page markup",
-    // loadingHtml: "Markup to show while survey model is loading",
-    // commentText: "Comment area text",
-    // autocomplete: "Autocomplete type",
-    // labelTrue: "\"True\" label",
-    // labelFalse: "\"False\" label",
-    // allowClear: "Show the Clear button",
-    // displayStyle: "Value display style",
-    // format: "Formatted string",
-    // maximumFractionDigits: "Maximum fractional digits",
-    // minimumFractionDigits: "Minimum fractional digits",
-    // useGrouping: "Display grouping separators",
-    // allowMultiple: "Allow multiple files",
-    // allowImagesPreview: "Preview images",
-    // acceptedTypes: "Accepted file types",
-    // waitForUpload: "Wait for the upload to complete",
-    // needConfirmRemoveFile: "Confirm file deletion",
-    // detailPanelMode: "Detail panel location",
-    // minRowCount: "Minimum row count",
-    // maxRowCount: "Maximum row count",
-    // confirmDelete: "Confirm row deletion",
-    // confirmDeleteText: "Confirmation message",
+    logo: "Logo (URL eller base64-kodet streng)",
+    questionsOnPageMode: "Undersøkelse struktur",
+    maxTextLength: "Maksimal svarlengde (i tegn)",
+    maxOthersLength: "Maksimal kommentarlengde (i tegn)",
+    autoGrowComment: "Utvid kommentarområdet automatisk om nødvendig",
+    allowResizeComment: "Tillat brukere å endre størrelse på tekstområder",
+    textUpdateMode: "Oppdatere tekstspørsmålsverdi",
+    focusOnFirstError: "Sette fokus på det første ugyldige svaret",
+    checkErrorsMode: "Kjør validering",
+    navigateToUrl: "Naviger til URL",
+    navigateToUrlOnCondition: "Dynamisk URL-adresse",
+    completedBeforeHtml: "Markering for å vise om brukeren allerede har fylt ut denne undersøkelsen",
+    completedHtml: "Sidemarkering for fullført undersøkelse",
+    completedHtmlOnCondition: "Sidemarkering for fullført dynamisk undersøkelse",
+    loadingHtml: "Markering som skal vises mens evalueringsmodellen lastes inn",
+    commentText: "Tekst i kommentarfeltet",
+    autocomplete: "Autofullfør type",
+    labelTrue: "Etiketten «True»",
+    labelFalse: "\"False\" etikett",
+    allowClear: "Vis Fjern-knappen",
+    displayStyle: "Visningsstil for verdi",
+    format: "Formatert streng",
+    maximumFractionDigits: "Maksimalt antall brøksifre",
+    minimumFractionDigits: "Minimum brøksifre",
+    useGrouping: "Skilletegn for skjermgruppering",
+    allowMultiple: "Tillat flere filer",
+    allowImagesPreview: "Forhåndsvis bilder",
+    acceptedTypes: "Godkjente filtyper",
+    waitForUpload: "Vent til opplastingen er fullført",
+    needConfirmRemoveFile: "Bekreft sletting av fil",
+    detailPanelMode: "Plassering av detaljpanelet",
+    minRowCount: "Minimum radantall",
+    maxRowCount: "Maksimalt radantall",
+    confirmDelete: "Bekreft radsletting",
+    confirmDeleteText: "Bekreftelsesmelding",
     paneldynamic: {
-      // confirmDelete: "Confirm panel deletion"
+      confirmDelete: "Bekreft sletting av panel"
     },
-    // panelCount: "Initial panel count",
-    // minPanelCount: "Minimum panel count",
-    // maxPanelCount: "Maximum panel count",
-    // panelsState: "Inner panel expand state",
-    // templateDescription: "Description template",
-    // templateTitle: "Title template",
-    // panelPrevText: "Previous Panel button tooltip",
-    // panelNextText: "Next Panel button tooltip",
-    // showRangeInProgress: "Show progress bar",
-    // templateTitleLocation: "Question title location",
-    // panelRemoveButtonLocation: "Remove Panel button location",
-    // hideIfRowsEmpty: "Hide the question if there are no rows",
-    // hideColumnsIfEmpty: "Hide columns if there are no rows",
-    // rateValues: "Custom rate values",
-    // hideIfChoicesEmpty: "Hide the question if it contains no choices",
-    // hideNumber: "Hide question number",
-    // minWidth: "Minimum width (in CSS-accepted values)",
-    // maxWidth: "Maximum width (in CSS-accepted values)",
-    // width: "Width (in CSS-accepted values)",
-    // showHeader: "Show column headers",
-    // horizontalScroll: "Show horizontal scrollbar",
-    // columnMinWidth: "Minimum column width (in CSS-accepted values)",
-    // rowTitleWidth: "Row header width (in CSS-accepted values)",
-    // valueTrue: "\"True\" value",
-    // valueFalse: "\"False\" value",
-    // minErrorText: "\"Value is below minimum\" error message",
-    // maxErrorText: "\"Value exceeds maximum\" error message",
-    // otherErrorText: "\"Empty comment\" error message",
-    // keyDuplicationError: "\"Non-unique key value\" error message",
-    // maxSelectedChoices: "Maximum selected choices",
-    // showClearButton: "Show the Clear button",
-    // showNumber: "Show panel number",
-    // logoWidth: "Logo width (in CSS-accepted values)",
-    // logoHeight: "Logo height (in CSS-accepted values)",
-    // readOnly: "Read-only",
-    // enableIf: "Editable if",
-    // emptyRowsText: "\"No rows\" message",
-    // size: "Input size (in characters)",
-    // separateSpecialChoices: "Separate special choices (None, Other, Select All)",
-    // choicesFromQuestion: "Copy choices from the following question",
-    // choicesFromQuestionMode: "Which choices to copy?",
-    // showCommentArea: "Show the comment area",
-    // commentPlaceholder: "Comment area placeholder",
-    // displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
-    // rowsOrder: "Row order",
-    // columnsLayout: "Column layout",
-    // columnColCount: "Nested column count",
-    // state: "Panel expand state",
-    // correctAnswer: "Correct Answer",
-    // defaultPanelValue: "Default Values",
-    // cells: "Cell Texts",
-    // keyName: "Key column",
+    panelCount: "Innledende panelopptelling",
+    minPanelCount: "Minimum antall paneler",
+    maxPanelCount: "Maksimalt antall paneler",
+    panelsState: "Utvidelsestilstand for Indre panel",
+    templateDescription: "Mal for beskrivelse",
+    templateTitle: "Tittel mal",
+    panelPrevText: "Verktøytips for forrige panelknapp",
+    panelNextText: "Verktøytips for neste panelknapp",
+    showRangeInProgress: "Vis fremdriftsindikator",
+    templateTitleLocation: "Spørsmål tittel sted",
+    panelRemoveButtonLocation: "Fjern plassering av panelknappen",
+    hideIfRowsEmpty: "Skjul spørsmålet hvis det ikke er noen rader",
+    hideColumnsIfEmpty: "Skjule kolonner hvis det ikke er noen rader",
+    rateValues: "Egendefinerte frekvensverdier",
+    rateCount: "Antall priser",
+    autoGenerate: "Hvordan spesifisere renteverdier?",
+    hideIfChoicesEmpty: "Skjul spørsmålet hvis det ikke inneholder noen valg",
+    hideNumber: "Skjul spørsmålsnummer",
+    minWidth: "Minimumsbredde (i CSS-godkjente verdier)",
+    maxWidth: "Maksimal bredde (i CSS-godkjente verdier)",
+    width: "Bredde (i CSS-godkjente verdier)",
+    showHeader: "Vise kolonneoverskrifter",
+    horizontalScroll: "Vis vannrett rullefelt",
+    columnMinWidth: "Minimum kolonnebredde (i CSS-godkjente verdier)",
+    rowTitleWidth: "Radoverskriftsbredde (i CSS-godtatte verdier)",
+    valueTrue: "\"True\"-verdi",
+    valueFalse: "\"False\" verdi",
+    minErrorText: "Feilmeldingen «Verdien er under minimum»",
+    maxErrorText: "Feilmeldingen \"Verdien overskrider maksimum\"",
+    otherErrorText: "Feilmeldingen «Tom kommentar»",
+    keyDuplicationError: "Feilmeldingen \"Ikke-unik nøkkelverdi\"",
+    minSelectedChoices: "Minimum valgte valg",
+    maxSelectedChoices: "Maksimalt antall merkede valg",
+    showClearButton: "Vis Fjern-knappen",
+    showNumber: "Vis panelnummer",
+    logoWidth: "Logobredde (i CSS-godkjente verdier)",
+    logoHeight: "Logohøyde (i CSS-godkjente verdier)",
+    readOnly: "Skrivebeskyttet",
+    enableIf: "Kan redigeres hvis",
+    emptyRowsText: "Meldingen «Ingen rader»",
+    size: "Størrelse på inndatafelt (i tegn)",
+    separateSpecialChoices: "Skille spesialvalg (Ingen, Annet, Merk alt)",
+    choicesFromQuestion: "Kopier valg fra følgende spørsmål",
+    choicesFromQuestionMode: "Hvilke valg å kopiere?",
+    showCommentArea: "Vis kommentarfeltet",
+    commentPlaceholder: "Plassholder for kommentarområde",
+    displayRateDescriptionsAsExtremeItems: "Vise frekvensbeskrivelser som ekstremverdier",
+    rowsOrder: "Rekkefølge på rad",
+    columnsLayout: "Kolonneoppsett",
+    columnColCount: "Nestet kolonneantall",
+    state: "Utvidelsestilstand for panel",
+    correctAnswer: "Riktig svar",
+    defaultPanelValue: "Standardverdier",
+    cells: "Cell Tekster",
+    keyName: "Nøkkelkolonne",
     itemvalue: {
-      // text: "Alt text"
+      text: "Alternativ tekst"
     },
     logoPosition: "Logo-posisjon",
     addLogo: "Legg til logo...",
@@ -565,22 +586,22 @@ export var nbStrings = {
       showOnCompleted: "Vis når ferdig",
       logo: "Logo i skjematittel",
       slider: "Slider",
-      // expression: "Expression",
+      expression: "Uttrykk",
       others: "Andre"
     },
     editProperty: "Rediger verdi '{0}'",
     items: "[ Elementer: {0} ]",
-    // choicesVisibleIf: "Choices are visible if",
-    // choicesEnableIf: "Choices are selectable if",
-    // columnsEnableIf: "Columns are visible if",
-    // rowsEnableIf: "Rows are visible if",
-    // indent: "Add indents",
+    choicesVisibleIf: "Valgene er synlige hvis",
+    choicesEnableIf: "Valgene kan velges hvis",
+    columnsEnableIf: "Kolonner er synlige hvis",
+    rowsEnableIf: "Rader er synlige hvis:",
+    indent: "Legge til innrykk",
     panel: {
-      // indent: "Add outer indents"
+      indent: "Legge til ytre innrykk"
     },
-    // innerIndent: "Add inner indents",
-    // defaultValueFromLastRow: "Take default values from the last row",
-    // defaultValueFromLastPanel: "Take default values from the last panel",
+    innerIndent: "Legge til indre innrykk",
+    defaultValueFromLastRow: "Ta standardverdier fra den siste raden",
+    defaultValueFromLastPanel: "Ta standardverdier fra det siste panelet",
     enterNewValue: "Vennligst fyll inn verdien.",
     noquestions: "Det er ingen spørsmål i skjemaet.",
     createtrigger: "Vennligst lag en trigger",
@@ -599,24 +620,26 @@ export var nbStrings = {
     triggerGotoName: "Gå til spørsmål:",
     triggerIsVariable: "Ikke legg variabelen i resultatet.",
     triggerRunExpressionEmpty: "Vennligst fyll inn en gyldig formel",
-    // emptyExpressionPlaceHolder: "Type expression here...",
+    emptyExpressionPlaceHolder: "Skriv inn uttrykk her...",
     noFile: "Ingen fil valgt",
-    // clearIfInvisible: "Clear the value if the question becomes hidden",
-    // valuePropertyName: "Value property name",
-    // searchEnabled: "Enable search",
-    // hideSelectedItems: "Hide selected items",
-    // signatureWidth: "Signature width",
-    // signatureHeight: "Signature height",
-    // verticalAlign: "Vertical alignment",
-    // alternateRows: "Alternate rows",
-    // columnsVisibleIf: "Columns are visible if",
-    // rowsVisibleIf: "Rows are visible if",
-    // otherPlaceholder: "Comment area placeholder"
+    clearIfInvisible: "Fjern verdien hvis spørsmålet blir skjult",
+    valuePropertyName: "Navn på egenskap Value",
+    searchEnabled: "Aktivere søk",
+    hideSelectedItems: "Skjule merkede elementer",
+    closeOnSelect: "Lukk rullegardinmenyen etter valget",
+    signatureWidth: "Signatur bredde",
+    signatureHeight: "Signatur høyde",
+    verticalAlign: "Loddrett justering",
+    alternateRows: "Annenhver rad",
+    columnsVisibleIf: "Kolonner er synlige hvis",
+    rowsVisibleIf: "Rader er synlige hvis:",
+    otherPlaceholder: "Plassholder for kommentarområde",
+    rateType: "Type sats"
   },
   // Property values
   pv: {
-    // true: "true",
-    // false: "false",
+    "true": "sann",
+    "false": "falsk",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -629,18 +652,19 @@ export var nbStrings = {
     asc: "ascending",
     desc: "descending",
     indeterminate: "indeterminate",
-    // decimal: "decimal",
-    // currency: "currency",
-    // percent: "percent",
+    decimal: "desimal",
+    currency: "valuta",
+    percent: "prosent",
     firstExpanded: "firstExpanded",
     off: "off",
-    // onpanel: "Start on each panel",
+    onpanel: "Start på hvert panel",
     onPanel: "onPanel",
     onSurvey: "onSurvey",
     list: "list",
     progressTop: "progressTop",
     progressBottom: "progressBottom",
     progressTopBottom: "progressTopBottom",
+    tab: "Kategoriene",
     horizontal: "horizontal",
     vertical: "vertical",
     top: "top",
@@ -648,21 +672,21 @@ export var nbStrings = {
     topBottom: "top and bottom",
     both: "both",
     left: "left",
-    // right: "Right",
-    // color: "color",
-    // date: "date",
-    // datetime: "datetime",
-    // "datetime-local": "datetime-local",
-    // email: "email",
-    // month: "month",
-    // number: "number",
-    // password: "password",
-    // range: "range",
-    // tel: "tel",
-    // text: "text",
-    // time: "time",
-    // url: "url",
-    // week: "week",
+    right: "Høyre",
+    color: "farge",
+    date: "daddel",
+    datetime: "datetime",
+    "datetime-local": "datetime-lokal",
+    email: "E-post",
+    month: "måned",
+    number: "nummer",
+    password: "passord",
+    range: "rekkevidde",
+    tel: "Tel",
+    text: "Tekst",
+    time: "Tid",
+    url: "URL",
+    week: "uke",
     hidden: "hidden",
     on: "on",
     onPage: "onPage",
@@ -670,77 +694,104 @@ export var nbStrings = {
     display: "display",
     onComplete: "onComplete",
     onHidden: "onHidden",
-    // onHiddenContainer: "When the question or its panel/page becomes hidden",
+    onHiddenContainer: "Når spørsmålet eller panelet/siden blir skjult",
     clearInvisibleValues: {
-      // none: "Never"
+      none: "Aldri"
+    },
+    inputType: {
+      color: "Farge",
+      date: "Daddel",
+      "datetime-local": "Dato og klokkeslett",
+      email: "E-post",
+      month: "Måned",
+      number: "Nummer",
+      password: "Passord",
+      range: "Rekkevidde",
+      tel: "Telefonnummer",
+      text: "Tekst",
+      time: "Tid",
+      url: "URL",
+      week: "Uke"
     },
     all: "all",
     page: "page",
     survey: "survey",
     onNextPage: "onNextPage",
     onValueChanged: "onValueChanged",
-    // onValueChanging: "Before an answer is changed",
+    onValueChanging: "Før et svar endres",
     standard: "standard",
     singlePage: "single page",
     questionPerPage: "question per page",
     noPreview: "no preview",
     showAllQuestions: "show preview with all questions",
     showAnsweredQuestions: "show preview with answered questions",
-    // pages: "Completed pages",
-    // questions: "Answered questions",
-    // requiredQuestions: "Answered required questions",
-    // correctQuestions: "Valid answers",
-    // buttons: "Completed pages (button UI)",
-    // underInput: "Under the input",
-    // underTitle: "Under the title",
-    // onBlur: "On blur",
-    // onTyping: "While typing",
-    // underRow: "Under the row",
-    // underRowSingle: "Under the row, only one panel is visible",
+    pages: "Fullførte sider",
+    questions: "Besvarte spørsmål",
+    requiredQuestions: "Besvarte nødvendige spørsmål",
+    correctQuestions: "Gyldige svar",
+    buttons: "Fullførte sider (brukergrensesnitt for knapp)",
+    underInput: "Under inngangen",
+    underTitle: "Under tittelen",
+    onBlur: "På uskarphet",
+    onTyping: "Mens du skriver",
+    underRow: "Under raden",
+    underRowSingle: "Under raden er bare ett panel synlig",
     showNavigationButtons: {
-      // none: "Hidden"
+      none: "Skjult"
     },
     showProgressBar: {
-      // off: "Hidden"
+      off: "Skjult"
     },
     showTimerPanel: {
-      // none: "Hidden"
+      none: "Skjult"
     },
     showTimerPanelMode: {
-      // all: "Both"
+      all: "Begge"
     },
     detailPanelMode: {
-      // none: "Hidden"
+      none: "Skjult"
     },
     addRowLocation: {
-      // default: "Depends on matrix layout"
+      default: "Avhenger av matriseoppsett"
     },
     panelsState: {
-      // default: "Users cannot expand or collapse panels",
-      // collapsed: "All panels are collapsed",
-      // expanded: "All panels are expanded"
+      default: "Brukere kan ikke vise eller skjule paneler",
+      collapsed: "Alle paneler er skjult",
+      expanded: "Alle paneler er utvidet"
     },
     widthMode: {
-      // auto: "Auto",
-      // static: "Static",
-      // responsive: "Responsive"
+      auto: "Auto",
+      static: "Statisk",
+      responsive: "Lydhør"
     },
     imageFit: {
-      // none: "None",
-      // contain: "Contain",
-      // cover: "Cover",
-      // fill: "Fill"
+      none: "Ingen",
+      contain: "Inneholde",
+      cover: "Lokk",
+      fill: "Fylle"
     },
     contentMode: {
-      // auto: "Auto",
-      // image: "Image",
-      // video: "Video",
-      // youtube: "YouTube"
+      auto: "Auto",
+      image: "Bilde",
+      video: "Video",
+      youtube: "YouTube"
     },
     displayMode: {
-      // auto: "Auto",
-      // buttons: "Buttons",
-      // dropdown: "Dropdown"
+      auto: "Auto",
+      buttons: "Knapper",
+      dropdown: "Rullegardinmeny"
+    },
+    rateColorMode: {
+      default: "Standard"
+    },
+    autoGenerate: {
+      "true": "Frembringe",
+      "false": "Angi manuelt"
+    },
+    rateType: {
+      labels: "Etiketter",
+      stars: "Stjerner",
+      smileys: "Smilefjes"
     }
   },
   // Operators
@@ -757,8 +808,8 @@ export var nbStrings = {
     less: "mindre enn",
     greaterorequal: "større eller lik",
     lessorequal: "mindre eller lik",
-    // and: "and",
-    // or: "or"
+    and: "og",
+    or: "eller"
   },
   // Embed window
   ew: {
@@ -768,14 +819,14 @@ export var nbStrings = {
     react: "Bruk React-versjon",
     vue: "Bruk Vue-versjon",
     bootstrap: "For Bootstrap-rammeverk",
-    // modern: "Modern theme",
-    // default: "Default theme",
-    // orange: "Orange theme",
-    // darkblue: "Darkblue theme",
-    // darkrose: "Darkrose theme",
-    // stone: "Stone theme",
-    // winter: "Winter theme",
-    // winterstone: "Winter-Stone theme",
+    modern: "Moderne tema",
+    default: "Standard tema",
+    orange: "Oransje-tema",
+    darkblue: "Mørkeblått-tema",
+    darkrose: "Darkrose-tema",
+    stone: "Stein-tema",
+    winter: "Vinter-tema",
+    winterstone: "Vinterstein-tema",
     showOnPage: "Vis skjema på en side",
     showInWindow: "Vis skjema i et vindu",
     loadFromServer: "Last skjemadefinisjon som JSON fra server",
@@ -787,7 +838,7 @@ export var nbStrings = {
   ts: {
     selectPage: "Velg side:",
     showInvisibleElements: "Vis usynlige elementer",
-    // hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "Skjule usynlige elementer"
   },
   validators: {
     answercountvalidator: "antall svar",
@@ -806,17 +857,18 @@ export var nbStrings = {
     visibletrigger: "endre synlighet (deprecated)"
   },
   pehelp: {
-    // cookieName: "Cookies prevent users from filling out the same survey twice.",
-    // format: "Use {0} as a placeholder for the actual value.",
-    // totalText: "Visible only when at least one column has Total type or Total expression.",
-    // acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    // columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
-    // autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
-    // valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
+    cookieName: "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger.",
+    size: "Endrer størrelsen på det synlige området i inndatafeltet. <b>Bruk innstillingen Validering → maksimal lengde</b> for å begrense inngangslengden.",
+    format: "Bruk {0} som plassholder for den faktiske verdien.",
+    totalText: "Bare synlig når minst én kolonne har Totaltype- eller Total-uttrykk.",
+    acceptedTypes: "Se attributtbeskrivelsen [accept](https://www.w3schools.com/tags/att_input_accept.asp) hvis du vil ha mer informasjon.",
+    columnColCount: "Gjelder bare for celletypene Radiogruppe og Avmerkingsboks.",
+    autocomplete: "Se attributtbeskrivelsen [autofullfør](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) hvis du vil ha mer informasjon.",
+    valueName: "Hvis du ikke angir denne egenskapen, lagres svaret i et felt som er angitt av egenskapen Name.",
     choicesbyurl: {
-      // valueName: " "
+      valueName: " "
     },
-    // keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\"."
   },
   // Properties
   p: {
@@ -824,82 +876,677 @@ export var nbStrings = {
       name: "title",
       title: "La den være tom, dersom den skal være samme som navnet"
     },
-    // multiSelect: "Allow multiple selection",
-    // showLabel: "Show image captions",
-    // value: "Value",
-    visibleIf: "visibleIf",
-    // attachOriginalItems: "attachOriginalItems",
-    // useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
-    titleLocation: "titleLocation",
+    multiSelect: "Tillat flere valg",
+    showLabel: "Vis bildetekster",
+    value: "Verdi",
+    tabAlign: "Justering av tabulatorer",
     description: "description",
-    // descriptionLocation: "descriptionLocation",
-    // defaultValueExpression: "defaultValueExpression",
+    logoFit: "Logo passform",
+    pages: "Sider",
+    questions: "Spørsmål",
+    triggers: "triggers",
+    calculatedValues: "Beregnede verdier",
+    surveyId: "Undersøkelses-ID",
+    surveyPostId: "Post-ID for undersøkelse",
+    surveyShowDataSaving: "Undersøkelse viser datalagring",
+    questionDescriptionLocation: "Spørsmål beskrivelse sted",
+    progressBarType: "Type fremdriftsindikator",
+    showTOC: "Vis innholdsfortegnelse",
+    tocLocation: "Toc-plassering",
+    questionTitlePattern: "Mønster for spørsmålstittel",
+    widthMode: "Bredde, modus",
+    showBrandInfo: "Vis merkeinformasjon",
+    useDisplayValuesInDynamicTexts: "Bruke visningsverdier i dynamiske tekster",
+    visibleIf: "visibleIf",
+    titleLocation: "titleLocation",
+    descriptionLocation: "Beskrivelse plassering",
+    defaultValueExpression: "Uttrykk for standardverdi",
     requiredIf: "requiredIf",
     validators: "validators",
-    // bindings: "bindings",
-    // renderAs: "renderAs",
-    currency: "currency",
-    // cellHint: "cellHint",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalMaximumFractionDigits: "totalMaximumFractionDigits",
-    // totalMinimumFractionDigits: "totalMinimumFractionDigits",
-    columns: "columns",
-    // detailElements: "detailElements",
+    bindings: "Bindinger",
+    renderAs: "Gjengi som",
+    attachOriginalItems: "Legg ved originale elementer",
     choices: "choices",
-    // allowAdaptiveActions: "allowAdaptiveActions",
-    defaultRowValue: "defaultRowValue",
-    // detailPanelShowOnAdding: "detailPanelShowOnAdding",
-    // logoFit: "logoFit",
-    // pages: "pages",
-    // questions: "questions",
-    triggers: "triggers",
-    // calculatedValues: "calculatedValues",
-    // surveyId: "surveyId",
-    // surveyPostId: "surveyPostId",
-    // surveyShowDataSaving: "surveyShowDataSaving",
-    // questionDescriptionLocation: "questionDescriptionLocation",
-    // progressBarType: "progressBarType",
-    // questionTitlePattern: "questionTitlePattern",
-    // widthMode: "widthMode",
-    // showBrandInfo: "showBrandInfo",
     choicesByUrl: "choicesByUrl",
-    // choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
-    // choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
-    // inputFieldComponent: "inputFieldComponent",
-    // itemComponent: "itemComponent",
-    // min: "min",
-    // max: "max",
-    // minValueExpression: "minValueExpression",
-    // maxValueExpression: "maxValueExpression",
-    // step: "step",
-    // dataList: "dataList",
+    currency: "currency",
+    cellHint: "Celle hint",
+    isUnique: "Er unik",
+    showInMultipleColumns: "Vis i flere kolonner",
+    totalMaximumFractionDigits: "Totalt maksimum antall sifre i brøk",
+    totalMinimumFractionDigits: "Totalt antall minimumssifre i brøk",
+    columns: "columns",
+    detailElements: "Detaljelementer",
+    allowAdaptiveActions: "Tillat adaptive handlinger",
+    defaultRowValue: "defaultRowValue",
+    detailPanelShowOnAdding: "Detaljpanelet vises når du legger til",
+    choicesLazyLoadEnabled: "Valg lat belastning aktivert",
+    choicesLazyLoadPageSize: "Valg lat lastesidestørrelse",
+    inputFieldComponent: "Komponent for inntastingsfelt",
+    itemComponent: "Element komponent",
+    min: "Min",
+    max: "Maks",
+    minValueExpression: "Mitt verdiuttrykk",
+    maxValueExpression: "Uttrykk med maksverdi",
+    step: "Skritt",
+    dataList: "Dataliste",
     itemSize: "itemSize",
-    // elements: "elements",
-    // content: "content",
+    elements: "Elementer",
+    content: "Innhold",
     navigationButtonsVisibility: "navigationButtonsVisibility",
-    // navigationTitle: "navigationTitle",
-    // navigationDescription: "navigationDescription",
-    // closeOnSelect: "closeOnSelect",
-    // longTap: "longTap",
-    // autoGrow: "autoGrow",
-    // acceptCarriageReturn: "acceptCarriageReturn",
-    // displayMode: "displayMode",
+    navigationTitle: "Navigasjon tittel",
+    navigationDescription: "Beskrivelse av navigasjon",
+    longTap: "Langt trykk",
+    autoGrow: "Automatisk vekst",
+    allowResize: "Tillat endring av størrelse",
+    acceptCarriageReturn: "Godta retur av frakt",
+    displayMode: "Visningsmodus",
+    rateType: "Type sats",
     label: "label",
-    // contentMode: "contentMode",
-    // imageFit: "imageFit",
-    // altText: "altText",
-    // height: "height",
-    // penColor: "penColor",
-    // backgroundColor: "backgroundColor",
-    // templateElements: "templateElements",
-    // operator: "operator",
-    // isVariable: "isVariable",
-    // runExpression: "runExpression",
-    // showCaption: "showCaption",
-    // iconName: "iconName",
-    // iconSize: "iconSize"
+    contentMode: "Innhold-modus",
+    imageFit: "Tilpasning til bildet",
+    altText: "Alternativ tekst",
+    height: "Høyde",
+    penColor: "Farge på penn",
+    backgroundColor: "Bakgrunnsfarge",
+    templateElements: "Mal elementer",
+    operator: "Operatør",
+    isVariable: "Er variabel",
+    runExpression: "Kjør uttrykk",
+    showCaption: "Vis bildetekst",
+    iconName: "Navn på ikon",
+    iconSize: "Ikon størrelse",
+    precision: "Presisjon",
+    matrixDragHandleArea: "Område for drahåndtak for matrise",
+    backgroundImage: "Bakgrunnsbilde",
+    backgroundImageFit: "Tilpasning til bakgrunnsbilde",
+    backgroundImageAttachment: "Vedlegg til bakgrunnsbilde",
+    backgroundOpacity: "Ugjennomsiktighet i bakgrunnen",
+    selectToRankEnabled: "Velg for å rangere aktivert",
+    selectToRankAreasLayout: "Velg for å rangere områdeoppsettet",
+    allowCameraAccess: "Tillat kameratilgang",
+    scaleColorMode: "Skaler farge, modus",
+    rateColorMode: "Vurder farge, modus",
+    templateTabTitle: "Tittel på Mal-fanen",
+    templateVisibleIf: "Mal synlig hvis",
+    copyDisplayValue: "Kopier visningsverdi"
+  },
+  theme: {
+    "--background": "Bakgrunnsfarge",
+    "--background-dim-light": "Svak lys farge i bakgrunnen",
+    "--primary-foreground": "Primær forgrunnsfarge",
+    "--foreground": "Forgrunnsfarge",
+    "--base-unit": "Basisenhet",
+    groupGeneral: "Generelt",
+    groupAdvanced: "Avansert",
+    themeName: "Tema",
+    themeMode: "Spørsmål utseende",
+    themeModePanels: "Standard",
+    themeModeLightweight: "Uten paneler",
+    themePaletteLight: "Lys",
+    themePaletteDark: "Mørk",
+    primaryColor: "Uthevingsfarge",
+    primaryDefaultColor: "Standard",
+    primaryDarkColor: "Sveve",
+    primaryLightColor: "Utvalgt",
+    backgroundDimColor: "Bakgrunnsfarge",
+    backgroundImage: "Bakgrunnsbilde",
+    backgroundImageFitAuto: "Auto",
+    backgroundImageFitCover: "Lokk",
+    backgroundImageFitContain: "Inneholde",
+    backgroundOpacity: "Ugjennomsiktighet",
+    backgroundImageAttachmentFixed: "Fast",
+    backgroundImageAttachmentScroll: "Bla",
+    panelBackgroundTransparency: "Tetthet i panelbakgrunn",
+    questionBackgroundTransparency: "Spørsmål om bakgrunnstetthet",
+    questionPanel: "Panelbakgrunn og hjørneradius",
+    questionTitle: "Spørsmål tittel skrift",
+    questionDescription: "Skrift for spørsmålsbeskrivelse",
+    editorPanel: "Inndata-element",
+    editorFont: "Skrift for inndataelement",
+    backcolor: "Standard bakgrunn",
+    hovercolor: "Pekerfølsom bakgrunn",
+    borderDecoration: "Grense dekorasjon",
+    accentBackground: "Bakgrunn med aksent",
+    accentForeground: "Uthevingsforgrunn",
+    primaryForecolor: "Standardfarge",
+    primaryForecolorLight: "Deaktivert farge",
+    linesColors: "Mindre linjefarger",
+    borderDefault: "Mørkere",
+    borderLight: "Lekter",
+    fontFamily: "Skriftfamilie",
+    fontSize: "Skriftstørrelse",
+    color: "Farge",
+    size: "Størrelse",
+    fontWeightRegular: "Regelmessig",
+    fontWeightHeavy: "Tung",
+    fontWeightSemiBold: "Halvmodig",
+    fontWeightBold: "Fet",
+    scale: "Skala",
+    cornerRadius: "Hjørne radius",
+    surveyTitle: "Skrift for undersøkelsestittel",
+    pageTitle: "Skrift for sidetittel",
+    pageDescription: "Skrift for sidebeskrivelse",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    boxShadowAddRule: "Legg til skyggeeffekt",
+    opacity: "Ugjennomsiktighet",
+    boxShadowBlur: "Dimme",
+    boxShadowSpread: "Spredning",
+    boxShadowDrop: "Dråpe",
+    boxShadowInner: "Indre",
+    questionShadow: "Skygge effekter",
+    editorShadow: "Skyggeeffekter for inndataelement",
+    names: {
+      default: "Standard",
+      contrast: "Kontrast",
+      plain: "Slette",
+      simple: "Enkel",
+      blank: "Blank",
+      double: "Dobbel",
+      bulk: "Bulk",
+      "pseudo-3d": "Pseudo 3D",
+      playful: "Leken",
+      ultra: "Ultra"
+    },
+    colors: {
+      teal: "Teal",
+      blue: "Blå",
+      purple: "Lilla",
+      orchid: "Orkidé",
+      tulip: "Tulipan",
+      brown: "Brun",
+      green: "Grønn"
+    }
   }
 };
 //Uncomment this line on creating a translation file. You should replace "en" and enStrings with your locale ("fr", "de" and so on) and your variable.
 editorLocalization.locales["nb"] = nbStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// survey.duplicate: "Duplicate" => "Duplikat"
+// qt.ranking: "Ranking" => "Rangering"
+// qt.tagbox: "Multi-Select Dropdown" => "Rullegardinmenyen for flere valg"
+// qt.buttongroup: "Button Group" => "Knappegruppe"
+// ed.surveySettings: "Survey Settings" => "Innstillinger for undersøkelse"
+// ed.surveySettingsTooltip: "Open survey settings" => "Åpne innstillinger for evaluering"
+// ed.prevSelected: "Select previous" => "Velg forrige"
+// ed.nextSelected: "Select next" => "Velg neste"
+// ed.surveyTypeName: "Survey" => "Undersøkelse"
+// ed.pageTypeName: "Page" => "Side"
+// ed.panelTypeName: "Panel" => "Panel"
+// ed.questionTypeName: "Question" => "Spørsmål"
+// ed.columnTypeName: "Column" => "Kolonne"
+// ed.themeSurvey: "Themes" => "Temaer"
+// ed.defaultV2Theme: "Default" => "Standard"
+// ed.modernTheme: "Modern" => "Moderne"
+// ed.defaultTheme: "Default (legacy)" => "Standard (eldre)"
+// ed.jsonHideErrors: "Hide errors" => "Skjul feil"
+// ed.jsonShowErrors: "Show errors" => "Vis feil"
+// ed.showMoreChoices: "Show more" => "Vis mer"
+// ed.showLessChoices: "Show less" => "Vis mindre"
+// ed.propertyGridFilteredTextPlaceholder: "Type to search..." => "Skriv for å søke ..."
+// ed.toolboxChoiceCategory: "Choice Questions" => "Choice Spørsmål"
+// ed.toolboxTextCategory: "Text Input Questions" => "Spørsmål om tekstinndata"
+// ed.toolboxContainersCategory: "Containers" => "Beholdere"
+// ed.toolboxMatrixCategory: "Matrix Questions" => "Matrise Spørsmål"
+// ed.toolboxMiscCategory: "Misc" => "Misc"
+// ed.translationPropertyGridTitle: "Language Settings" => "Språkinnstillinger"
+// ed.themePropertyGridTitle: "Theme Settings" => "Tema innstillinger"
+// ed.translationLanguages: "Languages" => "Språk"
+// ed.translationShowUsedStringsOnly: "Used Strings Only" => "Bare brukte strenger"
+// ed.translationPlaceHolder: "Translation..." => "Oversettelse..."
+// ed.themeExportButton: "Export" => "Eksport"
+// ed.themeImportButton: "Import" => "Importere"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "Valgene kopieres fra"
+// ed.htmlPlaceHolder: "HTML content will be here." => "HTML-innhold vil være her."
+// ed.panelPlaceHolder: "Drop a question from the toolbox here." => "Slipp et spørsmål fra verktøykassen her."
+// ed.surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below." => "Undersøkelsen er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor."
+// ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "Dra og slipp et bilde her, eller klikk på knappen nedenfor og velg et bilde du vil laste opp"
+// ed.imageChooseImage: "Choose Image" => "Velg bilde"
+// ed.addNewTypeQuestion: "Add {0}" => "Legg til {0}"
+// ed.chooseLogoPlaceholder: "[LOGO]" => "[LOGO]"
+// ed.auto: "auto" => "auto"
+// ed.choices_Item: "Item " => "Vare "
+// lg.empty_tab: "Create a rule to customize the flow of the survey." => "Opprett en regel for å tilpasse flyten i evalueringen."
+// lg.page_enableName: "Enable (disable) page" => "Aktivere (deaktivere) side"
+// lg.column_visibilityName: "Show (hide) column" => "Vis kolonne (skjul)"
+// lg.column_enableName: "Enable (disable) column" => "Aktivere (deaktivere) kolonne"
+// lg.column_requireName: "Make column required" => "Gjøre kolonne obligatorisk"
+// lg.itemEmptyExpressionText: "New rule" => "Ny regel"
+// lg.column_visibilityText: "make column {0} of question {1} visible" => "Gjør kolonne {0} av spørsmålet {1} synlig"
+// lg.column_enableText: "make column {0} of question {1} enable" => "Gjør kolonne {0} av spørsmålet {1} aktiver"
+// lg.column_requireText: "make column {0} of question {1} required" => "Gjør kolonne {0} av spørsmålet {1} nødvendig"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "Klar spørsmålsverdi: {0}"
+// lg.showAllQuestions: "All Questions" => "Alle spørsmål"
+// lg.showAllActionTypes: "All Action Types" => "Alle handlingstyper"
+// lg.uncompletedRule_title: "Logical rules are incomplete" => "Logiske regler er ufullstendige"
+// lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Noen av de logiske reglene har du ikke fullført. Hvis du forlater fanen nå, vil endringene gå tapt. Vil du fortsatt forlate fanen uten å fullføre endringene?"
+// lg.uncompletedRule_apply: "Yes" => "Ja"
+// lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nei, jeg vil fullføre reglene"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.clear: "Clear" => "Klar"
+// pe.set: "Set" => "Sett"
+// pe.change: "Change" => "Forandre"
+// pe.close: "Close" => "Lukke"
+// pe.removeItem: "Click to remove the item..." => "Klikk for å fjerne elementet..."
+// pe.dragItem: "Drag the item" => "Dra elementet"
+// pe.doneEditing: "Done" => "Gjort"
+// pe.emptyValue: "Value is empty" => "Verdien er tom"
+// pe.fastEntryNonUniqueError: "Value '{0}' is not unique" => "Verdien «{0}» er ikke unik"
+// pe.fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}" => "Begrens antall varer fra {0} til {1}"
+// pe.fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2" => "Du kan angi data i følgende format:\nverdi1|tekst\nverdi2"
+// pe.showPreviewBeforeComplete: "Preview answers before submitting the survey" => "Forhåndsvise svar før du sender inn undersøkelsen"
+// pe.overridingPropertyPrefix: "Set by " => "Sett av "
+// pe.propertyIsNoUnique: "Please enter a unique value" => "Angi en unik verdi"
+// pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "Ikke bruk reserverte ord: \"element\", \"valg\", \"panel\", \"rad\"."
+// pe.listIsEmpty@choices: "No choices have been added yet" => "Ingen valg er lagt til ennå"
+// pe.addNew@choices: "Add a choice" => "Legg til et valg"
+// choicesbyurl.valueName: "Get values from the following JSON field" => "Hent verdier fra følgende JSON-felt"
+// pe.imageLinkName: "Get image URLs from the following JSON field" => "Hent bildenettadresser fra følgende JSON-felt"
+// pe.allowEmptyResponse: "Allow empty response" => "Tillat tom respons"
+// pe.and: "and" => "og"
+// pe.or: "or" => "eller"
+// pe.emptyLogicPopupMessage: "Select a question to start configuring conditions." => "Velg et spørsmål for å begynne å konfigurere betingelsene."
+// pe.if: "If" => "Hvis"
+// pe.then: "then" => "da"
+// pe.setToName: "Target question" => "Målspørsmål"
+// pe.fromName: "Question to copy answer from" => "Spørsmål å kopiere svar fra"
+// pe.gotoName: "Question to skip to" => "Spørsmål å hoppe til"
+// pe.ruleIsNotSet: "Rule is incorrect" => "Regelen er feil"
+// pe.includeIntoResult: "Include into survey results" => "Inkluder i undersøkelsesresultater"
+// pe.portraitOrientation: "Switch to portrait orientation" => "Bytte til stående papirretning"
+// image.imageHeight: "Image height (in CSS-accepted values)" => "Bildehøyde (i CSS-godkjente verdier)"
+// image.imageWidth: "Image width (in CSS-accepted values)" => "Bildebredde (i CSS-godkjente verdier)"
+// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "Tidsbegrensning for å fullføre siden (i sekunder)"
+// question.page: "Parent page" => "Overordnet side"
+// pe.noEntriesText: "Empty entries text" => "Tekst med tomme oppføringer"
+// pe.setValue: "Answer" => "Svare"
+// pe.dataFormat: "Image format" => "Bildeformat"
+// pe.allowAddRows: "Allow adding rows" => "Tillat at rader legges til"
+// pe.allowRemoveRows: "Allow removing rows" => "Tillat fjerning av rader"
+// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "Tillat dra og slipp i rad"
+// pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "Gjelder ikke hvis du angir nøyaktig bildebredde eller -høyde."
+// pe.minImageWidth: "Minimum image width" => "Minimum bildebredde"
+// pe.maxImageWidth: "Maximum image width" => "Maksimal bildebredde"
+// pe.minImageHeight: "Minimum image height" => "Minimum bildehøyde"
+// pe.maxImageHeight: "Maximum image height" => "Maksimal bildehøyde"
+// surveyvalidator.text: "Error message" => "Feilmelding"
+// surveyvalidator.expression: "Validation expression" => "Uttrykk for validering"
+// pe.logo: "Logo (URL or base64-encoded string)" => "Logo (URL eller base64-kodet streng)"
+// pe.questionsOnPageMode: "Survey structure" => "Undersøkelse struktur"
+// pe.maxTextLength: "Maximum answer length (in characters)" => "Maksimal svarlengde (i tegn)"
+// pe.maxOthersLength: "Maximum comment length (in characters)" => "Maksimal kommentarlengde (i tegn)"
+// pe.autoGrowComment: "Auto-expand comment area if necessary" => "Utvid kommentarområdet automatisk om nødvendig"
+// pe.allowResizeComment: "Allow users to resize text areas" => "Tillat brukere å endre størrelse på tekstområder"
+// pe.textUpdateMode: "Update text question value" => "Oppdatere tekstspørsmålsverdi"
+// pe.focusOnFirstError: "Set focus on the first invalid answer" => "Sette fokus på det første ugyldige svaret"
+// pe.checkErrorsMode: "Run validation" => "Kjør validering"
+// pe.navigateToUrl: "Navigate to URL" => "Naviger til URL"
+// pe.navigateToUrlOnCondition: "Dynamic URL" => "Dynamisk URL-adresse"
+// pe.completedBeforeHtml: "Markup to show if the user already filled out this survey" => "Markering for å vise om brukeren allerede har fylt ut denne undersøkelsen"
+// pe.completedHtml: "Survey Complete page markup" => "Sidemarkering for fullført undersøkelse"
+// pe.completedHtmlOnCondition: "Dynamic Survey Complete page markup" => "Sidemarkering for fullført dynamisk undersøkelse"
+// pe.loadingHtml: "Markup to show while survey model is loading" => "Markering som skal vises mens evalueringsmodellen lastes inn"
+// pe.commentText: "Comment area text" => "Tekst i kommentarfeltet"
+// pe.autocomplete: "Autocomplete type" => "Autofullfør type"
+// pe.labelTrue: "\"True\" label" => "Etiketten «True»"
+// pe.labelFalse: "\"False\" label" => "\"False\" etikett"
+// pe.allowClear: "Show the Clear button" => "Vis Fjern-knappen"
+// pe.displayStyle: "Value display style" => "Visningsstil for verdi"
+// pe.format: "Formatted string" => "Formatert streng"
+// pe.maximumFractionDigits: "Maximum fractional digits" => "Maksimalt antall brøksifre"
+// pe.minimumFractionDigits: "Minimum fractional digits" => "Minimum brøksifre"
+// pe.useGrouping: "Display grouping separators" => "Skilletegn for skjermgruppering"
+// pe.allowMultiple: "Allow multiple files" => "Tillat flere filer"
+// pe.allowImagesPreview: "Preview images" => "Forhåndsvis bilder"
+// pe.acceptedTypes: "Accepted file types" => "Godkjente filtyper"
+// pe.waitForUpload: "Wait for the upload to complete" => "Vent til opplastingen er fullført"
+// pe.needConfirmRemoveFile: "Confirm file deletion" => "Bekreft sletting av fil"
+// pe.detailPanelMode: "Detail panel location" => "Plassering av detaljpanelet"
+// pe.minRowCount: "Minimum row count" => "Minimum radantall"
+// pe.maxRowCount: "Maximum row count" => "Maksimalt radantall"
+// pe.confirmDelete: "Confirm row deletion" => "Bekreft radsletting"
+// pe.confirmDeleteText: "Confirmation message" => "Bekreftelsesmelding"
+// paneldynamic.confirmDelete: "Confirm panel deletion" => "Bekreft sletting av panel"
+// pe.panelCount: "Initial panel count" => "Innledende panelopptelling"
+// pe.minPanelCount: "Minimum panel count" => "Minimum antall paneler"
+// pe.maxPanelCount: "Maximum panel count" => "Maksimalt antall paneler"
+// pe.panelsState: "Inner panel expand state" => "Utvidelsestilstand for Indre panel"
+// pe.templateDescription: "Description template" => "Mal for beskrivelse"
+// pe.templateTitle: "Title template" => "Tittel mal"
+// pe.panelPrevText: "Previous Panel button tooltip" => "Verktøytips for forrige panelknapp"
+// pe.panelNextText: "Next Panel button tooltip" => "Verktøytips for neste panelknapp"
+// pe.showRangeInProgress: "Show progress bar" => "Vis fremdriftsindikator"
+// pe.templateTitleLocation: "Question title location" => "Spørsmål tittel sted"
+// pe.panelRemoveButtonLocation: "Remove Panel button location" => "Fjern plassering av panelknappen"
+// pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Skjul spørsmålet hvis det ikke er noen rader"
+// pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Skjule kolonner hvis det ikke er noen rader"
+// pe.rateValues: "Custom rate values" => "Egendefinerte frekvensverdier"
+// pe.rateCount: "Rate count" => "Antall priser"
+// pe.autoGenerate: "How to specify rate values?" => "Hvordan spesifisere renteverdier?"
+// pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "Skjul spørsmålet hvis det ikke inneholder noen valg"
+// pe.hideNumber: "Hide question number" => "Skjul spørsmålsnummer"
+// pe.minWidth: "Minimum width (in CSS-accepted values)" => "Minimumsbredde (i CSS-godkjente verdier)"
+// pe.maxWidth: "Maximum width (in CSS-accepted values)" => "Maksimal bredde (i CSS-godkjente verdier)"
+// pe.width: "Width (in CSS-accepted values)" => "Bredde (i CSS-godkjente verdier)"
+// pe.showHeader: "Show column headers" => "Vise kolonneoverskrifter"
+// pe.horizontalScroll: "Show horizontal scrollbar" => "Vis vannrett rullefelt"
+// pe.columnMinWidth: "Minimum column width (in CSS-accepted values)" => "Minimum kolonnebredde (i CSS-godkjente verdier)"
+// pe.rowTitleWidth: "Row header width (in CSS-accepted values)" => "Radoverskriftsbredde (i CSS-godtatte verdier)"
+// pe.valueTrue: "\"True\" value" => "\"True\"-verdi"
+// pe.valueFalse: "\"False\" value" => "\"False\" verdi"
+// pe.minErrorText: "\"Value is below minimum\" error message" => "Feilmeldingen «Verdien er under minimum»"
+// pe.maxErrorText: "\"Value exceeds maximum\" error message" => "Feilmeldingen \"Verdien overskrider maksimum\""
+// pe.otherErrorText: "\"Empty comment\" error message" => "Feilmeldingen «Tom kommentar»"
+// pe.keyDuplicationError: "\"Non-unique key value\" error message" => "Feilmeldingen \"Ikke-unik nøkkelverdi\""
+// pe.minSelectedChoices: "Minimum selected choices" => "Minimum valgte valg"
+// pe.maxSelectedChoices: "Maximum selected choices" => "Maksimalt antall merkede valg"
+// pe.showClearButton: "Show the Clear button" => "Vis Fjern-knappen"
+// pe.showNumber: "Show panel number" => "Vis panelnummer"
+// pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobredde (i CSS-godkjente verdier)"
+// pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohøyde (i CSS-godkjente verdier)"
+// pe.readOnly: "Read-only" => "Skrivebeskyttet"
+// pe.enableIf: "Editable if" => "Kan redigeres hvis"
+// pe.emptyRowsText: "\"No rows\" message" => "Meldingen «Ingen rader»"
+// pe.size: "Input field size (in characters)" => "Størrelse på inndatafelt (i tegn)"
+// pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "Skille spesialvalg (Ingen, Annet, Merk alt)"
+// pe.choicesFromQuestion: "Copy choices from the following question" => "Kopier valg fra følgende spørsmål"
+// pe.choicesFromQuestionMode: "Which choices to copy?" => "Hvilke valg å kopiere?"
+// pe.showCommentArea: "Show the comment area" => "Vis kommentarfeltet"
+// pe.commentPlaceholder: "Comment area placeholder" => "Plassholder for kommentarområde"
+// pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "Vise frekvensbeskrivelser som ekstremverdier"
+// pe.rowsOrder: "Row order" => "Rekkefølge på rad"
+// pe.columnsLayout: "Column layout" => "Kolonneoppsett"
+// pe.columnColCount: "Nested column count" => "Nestet kolonneantall"
+// pe.state: "Panel expand state" => "Utvidelsestilstand for panel"
+// pe.correctAnswer: "Correct Answer" => "Riktig svar"
+// pe.defaultPanelValue: "Default Values" => "Standardverdier"
+// pe.cells: "Cell Texts" => "Cell Tekster"
+// pe.keyName: "Key column" => "Nøkkelkolonne"
+// itemvalue.text: "Alt text" => "Alternativ tekst"
+// tabs.expression: "Expression" => "Uttrykk"
+// pe.choicesVisibleIf: "Choices are visible if" => "Valgene er synlige hvis"
+// pe.choicesEnableIf: "Choices are selectable if" => "Valgene kan velges hvis"
+// pe.columnsEnableIf: "Columns are visible if" => "Kolonner er synlige hvis"
+// pe.rowsEnableIf: "Rows are visible if" => "Rader er synlige hvis:"
+// pe.indent: "Add indents" => "Legge til innrykk"
+// panel.indent: "Add outer indents" => "Legge til ytre innrykk"
+// pe.innerIndent: "Add inner indents" => "Legge til indre innrykk"
+// pe.defaultValueFromLastRow: "Take default values from the last row" => "Ta standardverdier fra den siste raden"
+// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "Ta standardverdier fra det siste panelet"
+// pe.emptyExpressionPlaceHolder: "Type expression here..." => "Skriv inn uttrykk her..."
+// pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "Fjern verdien hvis spørsmålet blir skjult"
+// pe.valuePropertyName: "Value property name" => "Navn på egenskap Value"
+// pe.searchEnabled: "Enable search" => "Aktivere søk"
+// pe.hideSelectedItems: "Hide selected items" => "Skjule merkede elementer"
+// pe.closeOnSelect: "Close the dropdown after selection" => "Lukk rullegardinmenyen etter valget"
+// pe.signatureWidth: "Signature width" => "Signatur bredde"
+// pe.signatureHeight: "Signature height" => "Signatur høyde"
+// pe.verticalAlign: "Vertical alignment" => "Loddrett justering"
+// pe.alternateRows: "Alternate rows" => "Annenhver rad"
+// pe.columnsVisibleIf: "Columns are visible if" => "Kolonner er synlige hvis"
+// pe.rowsVisibleIf: "Rows are visible if" => "Rader er synlige hvis:"
+// pe.otherPlaceholder: "Comment area placeholder" => "Plassholder for kommentarområde"
+// pe.rateType: "Rate type" => "Type sats"
+// pv.true: "true" => "sann"
+// pv.false: "false" => "falsk"
+// pv.decimal: "decimal" => "desimal"
+// pv.currency: "currency" => "valuta"
+// pv.percent: "percent" => "prosent"
+// pv.onpanel: "Start on each panel" => "Start på hvert panel"
+// pv.tab: "Tabs" => "Kategoriene"
+// pv.right: "Right" => "Høyre"
+// pv.color: "color" => "farge"
+// pv.date: "date" => "daddel"
+// pv.datetime: "datetime" => "datetime"
+// pv.datetime-local: "datetime-local" => "datetime-lokal"
+// pv.email: "email" => "E-post"
+// pv.month: "month" => "måned"
+// pv.number: "number" => "nummer"
+// pv.password: "password" => "passord"
+// pv.range: "range" => "rekkevidde"
+// pv.tel: "tel" => "Tel"
+// pv.text: "text" => "Tekst"
+// pv.time: "time" => "Tid"
+// pv.url: "url" => "URL"
+// pv.week: "week" => "uke"
+// pv.onHiddenContainer: "When the question or its panel/page becomes hidden" => "Når spørsmålet eller panelet/siden blir skjult"
+// clearInvisibleValues.none: "Never" => "Aldri"
+// inputType.color: "Color" => "Farge"
+// inputType.date: "Date" => "Daddel"
+// inputType.datetime-local: "Date and Time" => "Dato og klokkeslett"
+// inputType.email: "Email" => "E-post"
+// inputType.month: "Month" => "Måned"
+// inputType.number: "Number" => "Nummer"
+// inputType.password: "Password" => "Passord"
+// inputType.range: "Range" => "Rekkevidde"
+// inputType.tel: "Phone Number" => "Telefonnummer"
+// inputType.text: "Text" => "Tekst"
+// inputType.time: "Time" => "Tid"
+// inputType.url: "URL" => "URL"
+// inputType.week: "Week" => "Uke"
+// pv.onValueChanging: "Before an answer is changed" => "Før et svar endres"
+// pv.pages: "Completed pages" => "Fullførte sider"
+// pv.questions: "Answered questions" => "Besvarte spørsmål"
+// pv.requiredQuestions: "Answered required questions" => "Besvarte nødvendige spørsmål"
+// pv.correctQuestions: "Valid answers" => "Gyldige svar"
+// pv.buttons: "Completed pages (button UI)" => "Fullførte sider (brukergrensesnitt for knapp)"
+// pv.underInput: "Under the input" => "Under inngangen"
+// pv.underTitle: "Under the title" => "Under tittelen"
+// pv.onBlur: "On blur" => "På uskarphet"
+// pv.onTyping: "While typing" => "Mens du skriver"
+// pv.underRow: "Under the row" => "Under raden"
+// pv.underRowSingle: "Under the row, only one panel is visible" => "Under raden er bare ett panel synlig"
+// showNavigationButtons.none: "Hidden" => "Skjult"
+// showProgressBar.off: "Hidden" => "Skjult"
+// showTimerPanel.none: "Hidden" => "Skjult"
+// showTimerPanelMode.all: "Both" => "Begge"
+// detailPanelMode.none: "Hidden" => "Skjult"
+// addRowLocation.default: "Depends on matrix layout" => "Avhenger av matriseoppsett"
+// panelsState.default: "Users cannot expand or collapse panels" => "Brukere kan ikke vise eller skjule paneler"
+// panelsState.collapsed: "All panels are collapsed" => "Alle paneler er skjult"
+// panelsState.expanded: "All panels are expanded" => "Alle paneler er utvidet"
+// widthMode.auto: "Auto" => "Auto"
+// widthMode.static: "Static" => "Statisk"
+// widthMode.responsive: "Responsive" => "Lydhør"
+// imageFit.none: "None" => "Ingen"
+// imageFit.contain: "Contain" => "Inneholde"
+// imageFit.cover: "Cover" => "Lokk"
+// imageFit.fill: "Fill" => "Fylle"
+// contentMode.auto: "Auto" => "Auto"
+// contentMode.image: "Image" => "Bilde"
+// contentMode.video: "Video" => "Video"
+// contentMode.youtube: "YouTube" => "YouTube"
+// displayMode.auto: "Auto" => "Auto"
+// displayMode.buttons: "Buttons" => "Knapper"
+// displayMode.dropdown: "Dropdown" => "Rullegardinmeny"
+// rateColorMode.default: "Default" => "Standard"
+// autoGenerate.true: "Generate" => "Frembringe"
+// autoGenerate.false: "Enter manually" => "Angi manuelt"
+// rateType.labels: "Labels" => "Etiketter"
+// rateType.stars: "Stars" => "Stjerner"
+// rateType.smileys: "Smileys" => "Smilefjes"
+// op.and: "and" => "og"
+// op.or: "or" => "eller"
+// ew.modern: "Modern theme" => "Moderne tema"
+// ew.default: "Default theme" => "Standard tema"
+// ew.orange: "Orange theme" => "Oransje-tema"
+// ew.darkblue: "Darkblue theme" => "Mørkeblått-tema"
+// ew.darkrose: "Darkrose theme" => "Darkrose-tema"
+// ew.stone: "Stone theme" => "Stein-tema"
+// ew.winter: "Winter theme" => "Vinter-tema"
+// ew.winterstone: "Winter-Stone theme" => "Vinterstein-tema"
+// ts.hideInvisibleElements: "Hide invisible elements" => "Skjule usynlige elementer"
+// pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "Informasjonskapsler hindrer brukere i å fylle ut den samme undersøkelsen to ganger."
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Endrer størrelsen på det synlige området i inndatafeltet. <b>Bruk innstillingen Validering → maksimal lengde</b> for å begrense inngangslengden."
+// pehelp.format: "Use {0} as a placeholder for the actual value." => "Bruk {0} som plassholder for den faktiske verdien."
+// pehelp.totalText: "Visible only when at least one column has Total type or Total expression." => "Bare synlig når minst én kolonne har Totaltype- eller Total-uttrykk."
+// pehelp.acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information." => "Se attributtbeskrivelsen [accept](https://www.w3schools.com/tags/att_input_accept.asp) hvis du vil ha mer informasjon."
+// pehelp.columnColCount: "Applicable only to Radiogroup and Checkbox cell types." => "Gjelder bare for celletypene Radiogruppe og Avmerkingsboks."
+// pehelp.autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information." => "Se attributtbeskrivelsen [autofullfør](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) hvis du vil ha mer informasjon."
+// pehelp.valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property." => "Hvis du ikke angir denne egenskapen, lagres svaret i et felt som er angitt av egenskapen Name."
+// choicesbyurl.valueName: " " => " "
+// pehelp.keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error." => "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\"."
+// p.multiSelect: "Allow multiple selection" => "Tillat flere valg"
+// p.showLabel: "Show image captions" => "Vis bildetekster"
+// p.value: "Value" => "Verdi"
+// p.tabAlign: "Tab alignment" => "Justering av tabulatorer"
+// p.logoFit: "Logo fit" => "Logo passform"
+// p.pages: "Pages" => "Sider"
+// p.questions: "Questions" => "Spørsmål"
+// p.calculatedValues: "Calculated values" => "Beregnede verdier"
+// p.surveyId: "Survey id" => "Undersøkelses-ID"
+// p.surveyPostId: "Survey post id" => "Post-ID for undersøkelse"
+// p.surveyShowDataSaving: "Survey show data saving" => "Undersøkelse viser datalagring"
+// p.questionDescriptionLocation: "Question description location" => "Spørsmål beskrivelse sted"
+// p.progressBarType: "Progress bar type" => "Type fremdriftsindikator"
+// p.showTOC: "Show TOC" => "Vis innholdsfortegnelse"
+// p.tocLocation: "Toc location" => "Toc-plassering"
+// p.questionTitlePattern: "Question title pattern" => "Mønster for spørsmålstittel"
+// p.widthMode: "Width mode" => "Bredde, modus"
+// p.showBrandInfo: "Show brand info" => "Vis merkeinformasjon"
+// p.useDisplayValuesInDynamicTexts: "Use display values in dynamic texts" => "Bruke visningsverdier i dynamiske tekster"
+// p.descriptionLocation: "Description location" => "Beskrivelse plassering"
+// p.defaultValueExpression: "Default value expression" => "Uttrykk for standardverdi"
+// p.bindings: "Bindings" => "Bindinger"
+// p.renderAs: "Render as" => "Gjengi som"
+// p.attachOriginalItems: "Attach original items" => "Legg ved originale elementer"
+// p.cellHint: "Cell hint" => "Celle hint"
+// p.isUnique: "Is unique" => "Er unik"
+// p.showInMultipleColumns: "Show in multiple columns" => "Vis i flere kolonner"
+// p.totalMaximumFractionDigits: "Total maximum fraction digits" => "Totalt maksimum antall sifre i brøk"
+// p.totalMinimumFractionDigits: "Total minimum fraction digits" => "Totalt antall minimumssifre i brøk"
+// p.detailElements: "Detail elements" => "Detaljelementer"
+// p.allowAdaptiveActions: "Allow adaptive actions" => "Tillat adaptive handlinger"
+// p.detailPanelShowOnAdding: "Detail panel show on adding" => "Detaljpanelet vises når du legger til"
+// p.choicesLazyLoadEnabled: "Choices lazy load enabled" => "Valg lat belastning aktivert"
+// p.choicesLazyLoadPageSize: "Choices lazy load page size" => "Valg lat lastesidestørrelse"
+// p.inputFieldComponent: "Input field component" => "Komponent for inntastingsfelt"
+// p.itemComponent: "Item component" => "Element komponent"
+// p.min: "Min" => "Min"
+// p.max: "Max" => "Maks"
+// p.minValueExpression: "Min value expression" => "Mitt verdiuttrykk"
+// p.maxValueExpression: "Max value expression" => "Uttrykk med maksverdi"
+// p.step: "Step" => "Skritt"
+// p.dataList: "Data list" => "Dataliste"
+// p.elements: "Elements" => "Elementer"
+// p.content: "Content" => "Innhold"
+// p.navigationTitle: "Navigation title" => "Navigasjon tittel"
+// p.navigationDescription: "Navigation description" => "Beskrivelse av navigasjon"
+// p.longTap: "Long tap" => "Langt trykk"
+// p.autoGrow: "Auto grow" => "Automatisk vekst"
+// p.allowResize: "Allow resizing" => "Tillat endring av størrelse"
+// p.acceptCarriageReturn: "Accept carriage return" => "Godta retur av frakt"
+// p.displayMode: "Display mode" => "Visningsmodus"
+// p.rateType: "Rate type" => "Type sats"
+// p.contentMode: "Content mode" => "Innhold-modus"
+// p.imageFit: "Image fit" => "Tilpasning til bildet"
+// p.altText: "Alt text" => "Alternativ tekst"
+// p.height: "Height" => "Høyde"
+// p.penColor: "Pen color" => "Farge på penn"
+// p.backgroundColor: "Background color" => "Bakgrunnsfarge"
+// p.templateElements: "Template elements" => "Mal elementer"
+// p.operator: "Operator" => "Operatør"
+// p.isVariable: "Is variable" => "Er variabel"
+// p.runExpression: "Run expression" => "Kjør uttrykk"
+// p.showCaption: "Show caption" => "Vis bildetekst"
+// p.iconName: "Icon name" => "Navn på ikon"
+// p.iconSize: "Icon size" => "Ikon størrelse"
+// p.precision: "Precision" => "Presisjon"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "Område for drahåndtak for matrise"
+// p.backgroundImage: "Background image" => "Bakgrunnsbilde"
+// p.backgroundImageFit: "Background image fit" => "Tilpasning til bakgrunnsbilde"
+// p.backgroundImageAttachment: "Background image attachment" => "Vedlegg til bakgrunnsbilde"
+// p.backgroundOpacity: "Background opacity" => "Ugjennomsiktighet i bakgrunnen"
+// p.selectToRankEnabled: "Select to rank enabled" => "Velg for å rangere aktivert"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "Velg for å rangere områdeoppsettet"
+// p.allowCameraAccess: "Allow camera access" => "Tillat kameratilgang"
+// p.scaleColorMode: "Scale color mode" => "Skaler farge, modus"
+// p.rateColorMode: "Rate color mode" => "Vurder farge, modus"
+// p.templateTabTitle: "Template tab title" => "Tittel på Mal-fanen"
+// p.templateVisibleIf: "Template visible if" => "Mal synlig hvis"
+// p.copyDisplayValue: "Copy display value" => "Kopier visningsverdi"
+// theme.--background: "Background color" => "Bakgrunnsfarge"
+// theme.--background-dim-light: "Background dim light color" => "Svak lys farge i bakgrunnen"
+// theme.--primary-foreground: "Primary foreground color" => "Primær forgrunnsfarge"
+// theme.--foreground: "Foreground color" => "Forgrunnsfarge"
+// theme.--base-unit: "Base unit" => "Basisenhet"
+// theme.groupGeneral: "General" => "Generelt"
+// theme.groupAdvanced: "Advanced" => "Avansert"
+// theme.themeName: "Theme" => "Tema"
+// theme.themeMode: "Question appearance" => "Spørsmål utseende"
+// theme.themeModePanels: "Default" => "Standard"
+// theme.themeModeLightweight: "Without Panels" => "Uten paneler"
+// theme.themePaletteLight: "Light" => "Lys"
+// theme.themePaletteDark: "Dark" => "Mørk"
+// theme.primaryColor: "Accent color" => "Uthevingsfarge"
+// theme.primaryDefaultColor: "Default" => "Standard"
+// theme.primaryDarkColor: "Hover" => "Sveve"
+// theme.primaryLightColor: "Selected" => "Utvalgt"
+// theme.backgroundDimColor: "Background color" => "Bakgrunnsfarge"
+// theme.backgroundImage: "Background image" => "Bakgrunnsbilde"
+// theme.backgroundImageFitAuto: "Auto" => "Auto"
+// theme.backgroundImageFitCover: "Cover" => "Lokk"
+// theme.backgroundImageFitContain: "Contain" => "Inneholde"
+// theme.backgroundOpacity: "Opacity" => "Ugjennomsiktighet"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "Fast"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "Bla"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "Tetthet i panelbakgrunn"
+// theme.questionBackgroundTransparency: "Question background opacity" => "Spørsmål om bakgrunnstetthet"
+// theme.questionPanel: "Panel background and corner radius" => "Panelbakgrunn og hjørneradius"
+// theme.questionTitle: "Question title font" => "Spørsmål tittel skrift"
+// theme.questionDescription: "Question description font" => "Skrift for spørsmålsbeskrivelse"
+// theme.editorPanel: "Input element" => "Inndata-element"
+// theme.editorFont: "Input element font" => "Skrift for inndataelement"
+// theme.backcolor: "Default background" => "Standard bakgrunn"
+// theme.hovercolor: "Hover background" => "Pekerfølsom bakgrunn"
+// theme.borderDecoration: "Border decoration" => "Grense dekorasjon"
+// theme.accentBackground: "Accent background" => "Bakgrunn med aksent"
+// theme.accentForeground: "Accent foreground" => "Uthevingsforgrunn"
+// theme.primaryForecolor: "Default color" => "Standardfarge"
+// theme.primaryForecolorLight: "Disabled color" => "Deaktivert farge"
+// theme.linesColors: "Minor line colors" => "Mindre linjefarger"
+// theme.borderDefault: "Darker" => "Mørkere"
+// theme.borderLight: "Lighter" => "Lekter"
+// theme.fontFamily: "Font family" => "Skriftfamilie"
+// theme.fontSize: "Font size" => "Skriftstørrelse"
+// theme.color: "Color" => "Farge"
+// theme.size: "Size" => "Størrelse"
+// theme.fontWeightRegular: "Regular" => "Regelmessig"
+// theme.fontWeightHeavy: "Heavy" => "Tung"
+// theme.fontWeightSemiBold: "Semi-bold" => "Halvmodig"
+// theme.fontWeightBold: "Bold" => "Fet"
+// theme.scale: "Scale" => "Skala"
+// theme.cornerRadius: "Corner radius" => "Hjørne radius"
+// theme.surveyTitle: "Survey title font" => "Skrift for undersøkelsestittel"
+// theme.pageTitle: "Page title font" => "Skrift for sidetittel"
+// theme.pageDescription: "Page description font" => "Skrift for sidebeskrivelse"
+// theme.boxShadowX: "X" => "X"
+// theme.boxShadowY: "Y" => "Y"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "Legg til skyggeeffekt"
+// theme.opacity: "Opacity" => "Ugjennomsiktighet"
+// theme.boxShadowBlur: "Blur" => "Dimme"
+// theme.boxShadowSpread: "Spread" => "Spredning"
+// theme.boxShadowDrop: "Drop" => "Dråpe"
+// theme.boxShadowInner: "Inner" => "Indre"
+// theme.questionShadow: "Shadow effects" => "Skygge effekter"
+// theme.editorShadow: "Input element shadow effects" => "Skyggeeffekter for inndataelement"
+// names.default: "Default" => "Standard"
+// names.contrast: "Contrast" => "Kontrast"
+// names.plain: "Plain" => "Slette"
+// names.simple: "Simple" => "Enkel"
+// names.blank: "Blank" => "Blank"
+// names.double: "Double" => "Dobbel"
+// names.bulk: "Bulk" => "Bulk"
+// names.pseudo-3d: "Pseudo 3D" => "Pseudo 3D"
+// names.playful: "Playful" => "Leken"
+// names.ultra: "Ultra" => "Ultra"
+// colors.teal: "Teal" => "Teal"
+// colors.blue: "Blue" => "Blå"
+// colors.purple: "Purple" => "Lilla"
+// colors.orchid: "Orchid" => "Orkidé"
+// colors.tulip: "Tulip" => "Tulipan"
+// colors.brown: "Brown" => "Brun"
+// colors.green: "Green" => "Grønn"
