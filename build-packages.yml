@@ -317,7 +317,7 @@ jobs:
       git pull origin master
       git fetch --tags --force
       git add surveyjs.io/App_Data/DocsEditor
-      git commit -m "updated survey-creator docs"
+      git commit -m "updated survey-creator docs [azurepipelines skip]"
       git pull origin master
       git push origin master
     displayName: 'Git surveyjs/service push updated docs'
