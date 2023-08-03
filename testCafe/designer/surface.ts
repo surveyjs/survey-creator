@@ -73,7 +73,7 @@ test("Check scrollbar is not appear when width mode is responsive", async (t) =>
     .expect(rootOffsetWidth - rootScrollWidth).lte(verticalScrollWidth);
 });
 
-test.only("Check imagepicker add/delete items not raises errors and works fine: #3203", async (t) => {
+test("Check imagepicker add/delete items not raises errors and works fine: #3203", async (t) => {
   await t.resizeWindow(1920, 1080);
   await setJSON({});
   await explicitErrorHandler();
