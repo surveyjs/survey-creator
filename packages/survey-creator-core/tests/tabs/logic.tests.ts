@@ -972,8 +972,8 @@ test("LogicItemEditorUI: check remove row action", () => {
     logic.itemsSurvey.getQuestionByName("items")
   );
   expect(itemsQuestion.rowCount).toEqual(1);
-  expect(itemsQuestion.renderedTable.rows[0].cells).toHaveLength(3);
-  const cell = itemsQuestion.renderedTable.rows[0].cells[2];
+  expect(itemsQuestion.renderedTable.rows[1].cells).toHaveLength(3);
+  const cell = itemsQuestion.renderedTable.rows[1].cells[2];
   expect(cell.isActionsCell).toBeTruthy();
   expect(cell.item.value).toBeTruthy();
   const actions = <AdaptiveActionContainer>cell.item.value;
