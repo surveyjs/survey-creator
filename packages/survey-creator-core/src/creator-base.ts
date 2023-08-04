@@ -665,6 +665,9 @@ export class CreatorBase extends Base
    * A Survey Creator instance that raised the event.
    * - `options.questionName`: `String`\
    * The name of a question for which conditions are displayed.
+   * - `options.questionName`: `String`\
+   * The type of a question for which conditions are displayed.
+   * The name of a question for which conditions are displayed.
    * - `options.operator`: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`\
    * A condition opeator for which the event is raised.
    * - `options.show`: `Boolean`\
@@ -3069,10 +3072,11 @@ export class CreatorBase extends Base
     this.onConditionGetTitle.fire(this, options);
     return options.title;
   }
-  isConditionOperatorEnabled(questionName: string, operator: string, isEnabled: boolean): boolean {
+  isConditionOperatorEnabled(questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean {
     if (this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
+      questionType: questionType,
       operator: operator,
       show: isEnabled
     };
