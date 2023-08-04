@@ -1082,8 +1082,10 @@ test("Change operators via callback", () => {
   });
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
-  options.isConditionOperatorEnabled = (questionName: string, operator: string, isEnabled: boolean): boolean => {
+  let evnt_questionType: string = "";
+  options.isConditionOperatorEnabled = (questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean => {
     if(questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
+    evnt_questionType = questionType;
     return isEnabled;
   };
   const editor = new ConditionEditor(survey, question, options, "visibleIf");
@@ -1093,6 +1095,7 @@ test("Change operators via callback", () => {
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "anyof").isVisible).toBeFalsy();
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "contains").isVisible).toBeFalsy();
   expect(ItemValue.getItemByValue(qOperator.visibleChoices, "equal").isVisible).toBeTruthy();
+  expect(evnt_questionType).toBe("checkbox");
 });
 test("file question type should not set operator to 'equal'", () => {
   var survey = new SurveyModel({
