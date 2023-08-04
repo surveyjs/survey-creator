@@ -1068,8 +1068,8 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.rowCount).toEqual(2);
   expect(itemsQuestion.renderedTable.rows[0].cells[1].question.value).toEqual("notitem1");
   expect(itemsQuestion.renderedTable.rows[0].cells[2].question.value).toEqual("not Item 1");
-  expect(itemsQuestion.renderedTable.rows[1].cells[1].question.value).toEqual("item2");
-  expect(itemsQuestion.renderedTable.rows[1].cells[2].question.value).toEqual("Item 2");
+  expect(itemsQuestion.renderedTable.rows[2].cells[1].question.value).toEqual("item2");
+  expect(itemsQuestion.renderedTable.rows[2].cells[2].question.value).toEqual("Item 2");
 });
 test("check Fast Entry for Rating", () => {
   const question = new QuestionRatingModel("q1");
