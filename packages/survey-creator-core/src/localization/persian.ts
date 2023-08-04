@@ -1,5 +1,3 @@
-// This dictionary contains 291 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 var persianStrings = {
@@ -16,7 +14,7 @@ var persianStrings = {
     deletePanel: "حذف پنل",
     deleteQuestion: "حذف سوال",
     convertTo: "تبدیل به",
-    drag: "المان را بکشید"
+    drag: "المان را بکشید",
   },
   // Question types
   qt: {
@@ -27,7 +25,7 @@ var persianStrings = {
     ranking: "رتبه بندی(رنک)",
     image: "عکس",
     dropdown: "لیست انتخابی",
-    // tagbox: "Multi-Select Dropdown",
+    tagbox: "چند انتخاب کشویی",
     file: "فایل",
     html: "Html",
     matrix: "ماتریس (تک انتخابی)",
@@ -50,8 +48,8 @@ var persianStrings = {
     survey: "نظرسنجی",
     settings: "تنظیمات نظرسنجی",
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
-    // surveySettings: "Survey Settings",
-    // surveySettingsTooltip: "Open survey settings",
+    surveySettings: "تنظیمات نظرسنجی",
+    surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -72,6 +70,7 @@ var persianStrings = {
     newPanelName: "پنل",
     newTextItemName: "متن",
     testSurvey: "آزمایش نظرسنجی",
+    themeSurvey: "تم",
     defaultV2Theme: "پیش فرض",
     modernTheme: "مدرن",
     defaultTheme: "پیش فرض (legacy)",
@@ -106,11 +105,11 @@ var persianStrings = {
     "property-grid": "ویژگی ها",
     propertyGridFilteredTextPlaceholder: "جستجو...",
     toolboxGeneralCategory: "عمومی",
-    // toolboxChoiceCategory: "Choice Questions",
-    // toolboxTextCategory: "Text Input Questions",
-    // toolboxContainersCategory: "Containers",
-    // toolboxMatrixCategory: "Matrix Questions",
-    // toolboxMiscCategory: "Misc",
+    toolboxChoiceCategory: "سوالات انتخاب",
+    toolboxTextCategory: "سوالات ورودی متن",
+    toolboxContainersCategory: "ظروف",
+    toolboxMatrixCategory: "سوالات ماتریکس",
+    toolboxMiscCategory: "متفرقه",
     correctJSON: "لطفا JSON را تصحیح کنید.",
     surveyResults: "نتایج نظرسنجی: ",
     surveyResultsTable: "به صورت جدول",
@@ -125,6 +124,7 @@ var persianStrings = {
     propertyEditorError: "ارور:",
     saveError: "خطا! محتوای ویرایشگر ذخیره نشده است.",
     translationPropertyGridTitle: "تنظیمات زبان",
+    themePropertyGridTitle: "تنظیمات تم",
     translationLanguages: "زبان",
     translationAddLanguage: "زبانی را برای ترجمه انتخاب کنید",
     translationShowAllStrings: "نمایش تمام عبارات",
@@ -135,17 +135,23 @@ var persianStrings = {
     translationImportFromSCVButton: "برون ریزی از CSV",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
+    themeExportButton: "صادرات",
+    themeImportButton: "واردات",
     bold: "پررنگ",
     italic: "مورب",
     underline: "پایین خط",
     addNewQuestion: "اضافه کردن سوال",
     selectPage: "انتخاب صفحه ...",
+    carryForwardChoicesCopied: "انتخاب ها کپی می شوند از",
     htmlPlaceHolder: "محتوای html اینجا خواهد بود",
     panelPlaceHolder: "سوالی را از داخل جعبه ابزار در اینجا قرار دهید",
     surveyPlaceHolder: "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",
+    imagePlaceHolder: "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید",
+    imageChooseImage: "انتخاب تصویر",
     addNewTypeQuestion: "اضافه {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[لوگو]",
-    // auto: "auto",
+    auto: "خودکار",
+    choices_Item: "مورد ",
     lg: {
       addNewItem: "اضافه کردن آیتم جدید",
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
@@ -190,6 +196,7 @@ var persianStrings = {
       column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "ارزش سوال روشن: {0}", //{0} question name
       trigger_copyvalueText: "مقدار سوال {0} را از سوال {1} کپی کنید.", //{0} and {1} question names
       trigger_skipText: "رد کردن نظرسنجی برای سوال {0}", //{0} question name
       trigger_runExpressionText1: "اجرای عبارت '{0}' ", //{0} the expression
@@ -207,6 +214,10 @@ var persianStrings = {
       expressionInvalid: "عبارت منطقی خالی یا نادرست است. لطفا آن را تضحیح کنید",
       noActionError: "لطفا حداقل یک عملکرد را اضافه نمایید",
       actionInvalid: "لطفا مشکلات مربوط به عملکرد(های) خود را برطرف نمایید.",
+      uncompletedRule_title: "قوانین منطقی ناقص هستند",
+      uncompletedRule_text: "شما برخی از قوانین منطقی را تکمیل نکرده اید. اگر اکنون برگه را ترک کنید، تغییرات از بین خواهند رفت. ایا هنوز هم می خواهید برگه را بدون تکمیل تغییرات ترک کنید؟",
+      uncompletedRule_apply: "بله",
+      uncompletedRule_cancel: "نه، من می خواهم قوانین را تکمیل کنم",
       expressionSetup: "تنظیمات عبارت ها",
       actionsSetup: "تنظیمات عملکردها"
     }
@@ -216,20 +227,20 @@ var persianStrings = {
     apply: "اعمال",
     ok: "تایید",
     save: "ذخیره",
-    // clear: "Clear",
+    clear: "روشن",
     saveTooltip: "ذخیره",
     cancel: "لغو",
-    // set: "Set",
+    set: "مجموعه",
     reset: "بازنشانی",
-    // change: "Change",
+    change: "تغییر",
     refresh: "تازه سازی",
     close: "بستن",
     delete: "حذف",
     add: "اضافه کردن",
     addNew: "افزودن",
     addItem: "برای اضافه کردن یک آیتم کلیک کنید...",
-    // removeItem: "Click to remove the item...",
-    // dragItem: "Drag the item",
+    removeItem: "فشار دهید تا مورد حذف شود...",
+    dragItem: "مورد را بکشید",
     addOther: "سایر",
     addSelectAll: "انتخاب همه",
     addNone: "هیچکدام",
@@ -239,16 +250,16 @@ var persianStrings = {
     backTooltip: "بازگشت بدون ذخیره",
     saveAndBack: "ذخیره و بازگشت",
     saveAndBackTooltip: "ذخیره و بازگشت",
-    // doneEditing: "Done",
+    doneEditing: "انجام",
     editChoices: "ویرایش انتخاب ها",
     showChoices: "نمایش انتخاب ها",
     move: "جابجایی",
     empty: "<خالی>",
     emptyValue: "مقدار خالی است",
     fastEntry: "تکمیل سریع",
-    // fastEntryNonUniqueError: "Value '{0}' is not unique",
-    // fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
-    // fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
+    fastEntryNonUniqueError: "مقدار {0}» منحصر به فرد نیست",
+    fastEntryChoicesCountError: "لطفا تعداد موارد را از {0} به {1} محدود کنید",
+    fastEntryPlaceholder: "شما می توانید داده ها را در قالب زیر تنظیم کنید:\nvalue1|متن\nارزش 2",
     formEntry: "تکمیل فرم",
     testService: "بررسی سرویس",
     itemSelectorEmpty: "لطفا یک المان را انتخاب کنید ",
@@ -264,13 +275,15 @@ var persianStrings = {
     showMore: "برای اطلاعات بیشتر لطفا سند راهنما را مطالعه کنید",
     assistantTitle: "سوالات موجود:",
     cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
-    // showPreviewBeforeComplete: "Preview answers before submitting the survey",
+    showPreviewBeforeComplete: "پیش نمایش پاسخ قبل از ارسال نظرسنجی",
+    overridingPropertyPrefix: "تنظیم بر اساس ",
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     propertyIsNoUnique: "لطفاً یک مقدار منحصر به فرد وارد کنید",
     propertyNameIsNotUnique: "لطفاً یک نام منحصر به فرد وارد کنید",
+    propertyNameIsIncorrect: "از کلمات رزرو شده استفاده نکنید: \"item\"، \"choice\"، \"panel\"، \"row\".",
     listIsEmpty: "یک آیتم جدید اضافه کنید",
-    // "listIsEmpty@choices": "No choices have been added yet",
-    // "addNew@choices": "Add a choice",
+    "listIsEmpty@choices": "هنوز هیچ انتخابی اضافه نشده است",
+    "addNew@choices": "اضافه کردن یک انتخاب",
     expressionIsEmpty: "عبارت خالی است",
     value: "مقدار",
     text: "متن",
@@ -282,11 +295,11 @@ var persianStrings = {
     path: "آدرس",
     valueName: "نام مقدار",
     choicesbyurl: {
-      // valueName: "Get values from the following JSON field"
+      valueName: "دریافت مقادیر از فیلد JSON زیر"
     },
     titleName: "نام عنوان",
-    // imageLinkName: "Get image URLs from the following JSON field",
-    // allowEmptyResponse: "Allow empty response",
+    imageLinkName: "URL های تصویر را از فیلد JSON زیر دریافت کنید",
+    allowEmptyResponse: "اجازه دادن پاسخ خالی",
     titlePlaceholder: "عنوان را اینجا وارد کنید",
     surveyTitlePlaceholder: "عنوان نظرسنجی را اینجا وارد کنید",
     pageTitlePlaceholder: "عنوان صفحه را اینجا وارد کنید",
@@ -339,24 +352,24 @@ var persianStrings = {
     maxLength: "ماکزیمم طول",
     buildExpression: "ساختن",
     editExpression: "ویرایش",
-    // and: "and",
-    // or: "or",
+    and: "و",
+    or: "یا",
     remove: "حذف",
     addCondition: "اضافه کردن شرط",
-    // emptyLogicPopupMessage: "Select a question to start configuring conditions.",
-    // if: "If",
-    // then: "then",
-    // setToName: "Target question",
-    // fromName: "Question to copy answer from",
-    // gotoName: "Question to skip to",
-    // ruleIsNotSet: "Rule is incorrect",
-    // includeIntoResult: "Include into survey results",
+    emptyLogicPopupMessage: "یک سؤال برای شروع پیکربندی شرایط انتخاب کنید.",
+    if: "اگر",
+    then: "سپس",
+    setToName: "سوال هدف",
+    fromName: "سوال برای کپی کردن پاسخ از",
+    gotoName: "سؤال برای پرش به",
+    ruleIsNotSet: "قانون نادرست است",
+    includeIntoResult: "شامل نتایج نظرسنجی",
     showTitle: "نمایش/پنهان کردن عنوان",
     expandCollapseTitle: "نمایش/پنهان کردن عنوان",
     locale: "زبان پیش فرض",
     simulator: "انتخاب دستگاه",
     landscapeOrientation: "افقی",
-    // portraitOrientation: "Switch to portrait orientation",
+    portraitOrientation: "تغییر جهت به جهت تصویر",
     mode: "حالت (ویرایش/خواندن)",
     clearInvisibleValues: "پاکسازی مقادیر پنهان",
     cookieName: "نام کوکی (به منظور جلوگیری از اجرای دوباره نظرسنجی)",
@@ -386,33 +399,37 @@ var persianStrings = {
     questionsOrder: "ترتیب المان ها در صفحه",
     maxTimeToFinish: "نهایت زمان برای اتمام نظرسنجی",
     maxTimeToFinishPage: "نهایت زمان برای اتمام این صفحه نظرسنجی",
+    image: {
+      imageHeight: "ارتفاع تصویر (در مقادیر پذیرفته شده توسط CSS)",
+      imageWidth: "عرض تصویر) در مقادیر پذیرفته شده CSS ("
+    },
     page: {
-      // maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      maxTimeToFinish: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
     },
     question: {
-      // page: "Parent page"
+      page: "صفحه اصلی"
     },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
     renderMode: "حالت رندر",
     allowAddPanel: "اجازه افزودن پنل",
     allowRemovePanel: "اجازه حذف پنل",
-    // noEntriesText: "Empty entries text",
+    noEntriesText: "متن مدخلهای خالی",
     panelAddText: "متن افزودن پنل",
     panelRemoveText: "متن حذف پنل",
     isSinglePage: "نمایش تمام المان ها در یک صفحه",
     html: "Html",
     expression: "عبارت",
-    // setValue: "Answer",
-    // dataFormat: "Image format",
-    // allowAddRows: "Allow adding rows",
-    // allowRemoveRows: "Allow removing rows",
-    // allowRowsDragAndDrop: "Allow row drag and drop",
-    // responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
-    // minImageWidth: "Minimum image width",
-    // maxImageWidth: "Maximum image width",
-    // minImageHeight: "Minimum image height",
-    // maxImageHeight: "Maximum image height",
+    setValue: "پاسخ",
+    dataFormat: "قالب تصویر",
+    allowAddRows: "اجازه اضافه کردن سطرها",
+    allowRemoveRows: "اجازه حذف سطرها",
+    allowRowsDragAndDrop: "اجازه دادن به کشیدن و رها کردن ردیف",
+    responsiveImageSizeHelp: "اگر عرض یا ارتفاع تصویر دقیق را مشخص کنید اعمال نمی شود.",
+    minImageWidth: "حداقل عرض تصویر",
+    maxImageWidth: "حداکثر عرض تصویر",
+    minImageHeight: "حداقل ارتفاع تصویر",
+    maxImageHeight: "حداکثر ارتفاع تصویر",
     minValue: "حداقل مقدار",
     maxValue: "حداکثر مقدار",
     minLength: "حداقل طول",
@@ -421,8 +438,8 @@ var persianStrings = {
     maxCount: "حداکثر مقدار",
     regex: "فرمت صحیح عبارت ",
     surveyvalidator: {
-      // text: "Error message",
-      // expression: "Validation expression"
+      text: "پیام خطا",
+      expression: "عبارت اعتبارسنجی"
     },
     totalText: "متن کامل",
     totalType: "نوع کامل",
@@ -430,97 +447,101 @@ var persianStrings = {
     totalDisplayStyle: "سبک نمایش کل",
     totalCurrency: "مجموع ارز",
     totalFormat: "مجموع فرمت",
-    // logo: "Logo (URL or base64-encoded string)",
-    // questionsOnPageMode: "Survey structure",
-    // maxTextLength: "Maximum answer length (in characters)",
-    // maxOthersLength: "Maximum comment length (in characters)",
-    // autoGrowComment: "Auto-expand comment area if necessary",
-    // textUpdateMode: "Update text question value",
-    // focusOnFirstError: "Set focus on the first invalid answer",
-    // checkErrorsMode: "Run validation",
-    // navigateToUrl: "Navigate to URL",
-    // navigateToUrlOnCondition: "Dynamic URL",
-    // completedBeforeHtml: "Markup to show if the user already filled out this survey",
-    // completedHtml: "Survey Complete page markup",
-    // completedHtmlOnCondition: "Dynamic Survey Complete page markup",
-    // loadingHtml: "Markup to show while survey model is loading",
-    // commentText: "Comment area text",
-    // autocomplete: "Autocomplete type",
-    // labelTrue: "\"True\" label",
-    // labelFalse: "\"False\" label",
-    // allowClear: "Show the Clear button",
-    // displayStyle: "Value display style",
-    // format: "Formatted string",
-    // maximumFractionDigits: "Maximum fractional digits",
-    // minimumFractionDigits: "Minimum fractional digits",
-    // useGrouping: "Display grouping separators",
-    // allowMultiple: "Allow multiple files",
-    // allowImagesPreview: "Preview images",
-    // acceptedTypes: "Accepted file types",
-    // waitForUpload: "Wait for the upload to complete",
-    // needConfirmRemoveFile: "Confirm file deletion",
-    // detailPanelMode: "Detail panel location",
-    // minRowCount: "Minimum row count",
-    // maxRowCount: "Maximum row count",
-    // confirmDelete: "Confirm row deletion",
-    // confirmDeleteText: "Confirmation message",
+    logo: "لوگو (URL یا رشته کدگذاری شده base64)",
+    questionsOnPageMode: "ساختار نظرسنجی",
+    maxTextLength: "حداکثر طول پاسخ (در کاراکترها)",
+    maxOthersLength: "حداکثر طول توضیحات (در نویسهها)",
+    autoGrowComment: "گسترش خودکار منطقه نظر در صورت لزوم",
+    allowResizeComment: "اجازه دادن به کاربران برای تغییر اندازه مناطق متن",
+    textUpdateMode: "بههنگامسازی مقدار سؤال متن",
+    focusOnFirstError: "تنظیم تمرکز روی اولین پاسخ نامعتبر",
+    checkErrorsMode: "اجرای اعتبارسنجی",
+    navigateToUrl: "حرکت به نشانی وب",
+    navigateToUrlOnCondition: "نشانی وب پویا",
+    completedBeforeHtml: "نشانهگذاری برای نشان دادن اینکه ایا کاربر قبلا این بررسی را پر کرده است",
+    completedHtml: "بررسی نشانه گذاری صفحه کامل",
+    completedHtmlOnCondition: "بررسی دینامیکی نشانه گذاری صفحه کامل",
+    loadingHtml: "نشانه گذاری برای نشان دادن در حالی که مدل بررسی در حال بارگذاری است",
+    commentText: "متن ناحیه نظر",
+    autocomplete: "نوع تکمیل خودکار",
+    labelTrue: "برچسب \"True\"",
+    labelFalse: "برچسب \"غلط\"",
+    allowClear: "نشان دادن دکمهی Clear",
+    displayStyle: "سبک نمایش ارزش",
+    format: "رشتۀ قالببندی شده",
+    maximumFractionDigits: "بیشینه رقم کسری",
+    minimumFractionDigits: "حداقل رقم کسری",
+    useGrouping: "نمایش جداسازهای گروهبندی",
+    allowMultiple: "اجازه دادن به چندین پرونده",
+    allowImagesPreview: "پیشنمایش تصاویر",
+    acceptedTypes: "انواع فایل های پذیرفته شده",
+    waitForUpload: "منتظر بمانید تا بارگذاری کامل شود",
+    needConfirmRemoveFile: "تایید حذف پرونده",
+    detailPanelMode: "جزئیات محل پانل",
+    minRowCount: "حداقل تعداد سطرها",
+    maxRowCount: "حداکثر تعداد سطرها",
+    confirmDelete: "تایید حذف سطر",
+    confirmDeleteText: "پیام تایید",
     paneldynamic: {
-      // confirmDelete: "Confirm panel deletion"
+      confirmDelete: "تایید حذف پانل"
     },
-    // panelCount: "Initial panel count",
-    // minPanelCount: "Minimum panel count",
-    // maxPanelCount: "Maximum panel count",
-    // panelsState: "Inner panel expand state",
-    // templateDescription: "Description template",
-    // templateTitle: "Title template",
-    // panelPrevText: "Previous Panel button tooltip",
-    // panelNextText: "Next Panel button tooltip",
-    // showRangeInProgress: "Show progress bar",
-    // templateTitleLocation: "Question title location",
-    // panelRemoveButtonLocation: "Remove Panel button location",
-    // hideIfRowsEmpty: "Hide the question if there are no rows",
-    // hideColumnsIfEmpty: "Hide columns if there are no rows",
-    // rateValues: "Custom rate values",
-    // hideIfChoicesEmpty: "Hide the question if it contains no choices",
-    // hideNumber: "Hide question number",
-    // minWidth: "Minimum width (in CSS-accepted values)",
-    // maxWidth: "Maximum width (in CSS-accepted values)",
-    // width: "Width (in CSS-accepted values)",
-    // showHeader: "Show column headers",
-    // horizontalScroll: "Show horizontal scrollbar",
-    // columnMinWidth: "Minimum column width (in CSS-accepted values)",
-    // rowTitleWidth: "Row header width (in CSS-accepted values)",
-    // valueTrue: "\"True\" value",
-    // valueFalse: "\"False\" value",
-    // minErrorText: "\"Value is below minimum\" error message",
-    // maxErrorText: "\"Value exceeds maximum\" error message",
-    // otherErrorText: "\"Empty comment\" error message",
-    // keyDuplicationError: "\"Non-unique key value\" error message",
-    // maxSelectedChoices: "Maximum selected choices",
-    // showClearButton: "Show the Clear button",
-    // showNumber: "Show panel number",
-    // logoWidth: "Logo width (in CSS-accepted values)",
-    // logoHeight: "Logo height (in CSS-accepted values)",
-    // readOnly: "Read-only",
-    // enableIf: "Editable if",
-    // emptyRowsText: "\"No rows\" message",
-    // size: "Input size (in characters)",
-    // separateSpecialChoices: "Separate special choices (None, Other, Select All)",
-    // choicesFromQuestion: "Copy choices from the following question",
-    // choicesFromQuestionMode: "Which choices to copy?",
-    // showCommentArea: "Show the comment area",
-    // commentPlaceholder: "Comment area placeholder",
-    // displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
-    // rowsOrder: "Row order",
-    // columnsLayout: "Column layout",
-    // columnColCount: "Nested column count",
-    // state: "Panel expand state",
-    // correctAnswer: "Correct Answer",
-    // defaultPanelValue: "Default Values",
-    // cells: "Cell Texts",
-    // keyName: "Key column",
+    panelCount: "شمارش اولیه پانل",
+    minPanelCount: "حداقل تعداد پانل",
+    maxPanelCount: "حداکثر تعداد پانل",
+    panelsState: "پانل داخلی گسترش دولت",
+    templateDescription: "قالب شرح",
+    templateTitle: "قالب عنوان",
+    panelPrevText: "قبلی دکمه پنل tooltip",
+    panelNextText: "بعدی دکمه پنل tooltip",
+    showRangeInProgress: "نمایش نوار پیشرفت",
+    templateTitleLocation: "عنوان سوال محل",
+    panelRemoveButtonLocation: "حذف محل دکمه پنل",
+    hideIfRowsEmpty: "مخفی کردن سؤال اگر سطری وجود نداشته باشد",
+    hideColumnsIfEmpty: "مخفی کردن ستونها اگر سطری وجود نداشته باشد",
+    rateValues: "مقادیر نرخ سفارشی",
+    rateCount: "شمارش نرخ",
+    autoGenerate: "چگونه مقادیر نرخ را مشخص کنیم؟",
+    hideIfChoicesEmpty: "مخفی کردن سؤال در صورتی که هیچ انتخابی نداشته باشد",
+    hideNumber: "مخفی کردن شمارۀ سؤال",
+    minWidth: "حداقل عرض (در مقادیر پذیرفته شده CSS)",
+    maxWidth: "حداکثر عرض (در مقادیر پذیرفته شده CSS)",
+    width: "عرض (در مقادیر پذیرفته شده CSS)",
+    showHeader: "نمایش سرایندهای ستون",
+    horizontalScroll: "نمایش میله لغزش افقی",
+    columnMinWidth: "اس",
+    rowTitleWidth: "عرض سرصفحه سطر) در مقادیر پذیرفته شده CSS (",
+    valueTrue: "مقدار » درست",
+    valueFalse: "مقدار » نادرست",
+    minErrorText: "پیام خطای \"مقدار کمتر از حداقل است\"",
+    maxErrorText: "\"مقدار بیش از حداکثر\" پیام خطا",
+    otherErrorText: "پیام خطای \"نظر خالی\"",
+    keyDuplicationError: "پیام خطای \"مقدار کلید غیر منحصر به فرد\"",
+    minSelectedChoices: "حداقل انتخاب های انتخاب شده",
+    maxSelectedChoices: "حداکثر انتخابهای انتخاب شده",
+    showClearButton: "نشان دادن دکمهی Clear",
+    showNumber: "نمایش شماره پانل",
+    logoWidth: "عرض لوگو (در مقادیر پذیرفته شده CSS)",
+    logoHeight: "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)",
+    readOnly: "فقط خواندنی",
+    enableIf: "قابل ویرایش اگر",
+    emptyRowsText: "پیام \"بدون ردیف\"",
+    size: "اندازه فیلد ورودی (در نویسه ها)",
+    separateSpecialChoices: "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)",
+    choicesFromQuestion: "کپی کردن انتخابها از سؤال زیر",
+    choicesFromQuestionMode: "کدام گزینه ها را کپی کنید؟",
+    showCommentArea: "نمایش ناحیهی نظرات",
+    commentPlaceholder: "ذی نفع منطقه نظر",
+    displayRateDescriptionsAsExtremeItems: "نمایش توضیحات نرخ به عنوان مقادیر شدید",
+    rowsOrder: "سفارش ردیف",
+    columnsLayout: "طرحبندی ستون",
+    columnColCount: "تعداد ستون های تو در تو",
+    state: "پنل گسترش دولت",
+    correctAnswer: "پاسخ صحیح",
+    defaultPanelValue: "مقادیر پیشفرض",
+    cells: "متن سلولی",
+    keyName: "ستون کلید",
     itemvalue: {
-      // text: "Alt text"
+      text: "متن دگرساز"
     },
     logoPosition: "محل قرارگیری لوگو",
     addLogo: "اضافه کردن لوگو...",
@@ -565,22 +586,22 @@ var persianStrings = {
       showOnCompleted: "نمایش بدهید تکمیل شده",
       logo: "لوگو در عنوان نظرسنجی",
       slider: "اسلایدر",
-      // expression: "Expression",
+      expression: "بیان",
       others: "باقی موارد"
     },
     editProperty: "ویرایش خصوصیت '{0}'",
     items: "[ آیتم ها: {0} ]",
-    // choicesVisibleIf: "Choices are visible if",
-    // choicesEnableIf: "Choices are selectable if",
-    // columnsEnableIf: "Columns are visible if",
-    // rowsEnableIf: "Rows are visible if",
-    // indent: "Add indents",
+    choicesVisibleIf: "انتخاب ها قابل مشاهده هستند اگر",
+    choicesEnableIf: "انتخاب ها قابل انتخاب هستند اگر",
+    columnsEnableIf: "ستونها مرئی هستند اگر",
+    rowsEnableIf: "سطرها مرئی هستند اگر",
+    indent: "افزودن تورفتهای",
     panel: {
-      // indent: "Add outer indents"
+      indent: "اضافه کردن تورفتات بیرونی"
     },
-    // innerIndent: "Add inner indents",
-    // defaultValueFromLastRow: "Take default values from the last row",
-    // defaultValueFromLastPanel: "Take default values from the last panel",
+    innerIndent: "اضافه کردن تورفتات داخلی",
+    defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
+    defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",
     enterNewValue: "لطفا یک مقدار وارد کنید",
     noquestions: "سوالی در پرسشنامه درج نشده",
     createtrigger: "اجرا کننده ای بسازید",
@@ -599,24 +620,26 @@ var persianStrings = {
     triggerGotoName: "به سوال بروید:",
     triggerIsVariable: "عدم درج متغییر در نتایج پرسشنامه",
     triggerRunExpressionEmpty: "لطفا عبارت معتبری وارد نمایید",
-    // emptyExpressionPlaceHolder: "Type expression here...",
+    emptyExpressionPlaceHolder: "عبارت را در اینجا تایپ کنید...",
     noFile: "هیچ فایلی انتخاب نشده است",
-    // clearIfInvisible: "Clear the value if the question becomes hidden",
-    // valuePropertyName: "Value property name",
-    // searchEnabled: "Enable search",
-    // hideSelectedItems: "Hide selected items",
-    // signatureWidth: "Signature width",
-    // signatureHeight: "Signature height",
-    // verticalAlign: "Vertical alignment",
-    // alternateRows: "Alternate rows",
-    // columnsVisibleIf: "Columns are visible if",
-    // rowsVisibleIf: "Rows are visible if",
-    // otherPlaceholder: "Comment area placeholder"
+    clearIfInvisible: "پاک کردن مقدار اگر سؤال مخفی شود",
+    valuePropertyName: "ارزش نام ملک",
+    searchEnabled: "فعالسازی جستجو",
+    hideSelectedItems: "مخفی کردن فقرههای انتخاب شده",
+    closeOnSelect: "بستن کشویی پس از انتخاب",
+    signatureWidth: "عرض امضا",
+    signatureHeight: "ارتفاع امضا",
+    verticalAlign: "تراز عمودی",
+    alternateRows: "ردیفهای جایگزین",
+    columnsVisibleIf: "ستونها مرئی هستند اگر",
+    rowsVisibleIf: "سطرها مرئی هستند اگر",
+    otherPlaceholder: "ذی نفع منطقه نظر",
+    rateType: "نوع نرخ"
   },
   // Property values
   pv: {
-    // true: "true",
-    // false: "false",
+    "true": "واقعی",
+    "false": "نادرست",
     inherit: "ارث بری",
     show: "آشکار",
     hide: "پنهان",
@@ -629,18 +652,19 @@ var persianStrings = {
     asc: "صعودی",
     desc: "نزولی",
     indeterminate: "نامشخص",
-    // decimal: "decimal",
-    // currency: "currency",
-    // percent: "percent",
+    decimal: "اعشاری",
+    currency: "ارز",
+    percent: "درصد",
     firstExpanded: "گسترش یافته",
     off: "خاموش",
-    // onpanel: "Start on each panel",
+    onpanel: "شروع در هر پنل",
     onPanel: "روی پنل",
     onSurvey: "روی نظرسنجی",
     list: "لیست",
     progressTop: "نوار پیشرفت  بالا",
     progressBottom: "نوار پیشرفت پایین",
     progressTopBottom: "نوار پیشرفت در بالا و پایین",
+    tab: "زبانه",
     horizontal: "افقی",
     vertical: "عمودی",
     top: "بالا",
@@ -648,21 +672,21 @@ var persianStrings = {
     topBottom: "بالا و پایین",
     both: "هر دو",
     left: "چپ",
-    // right: "Right",
-    // color: "color",
-    // date: "date",
-    // datetime: "datetime",
-    // "datetime-local": "datetime-local",
-    // email: "email",
-    // month: "month",
-    // number: "number",
-    // password: "password",
-    // range: "range",
-    // tel: "tel",
-    // text: "text",
-    // time: "time",
-    // url: "url",
-    // week: "week",
+    right: "راست",
+    color: "رنگ",
+    date: "تاریخ",
+    datetime: "تاریخ",
+    "datetime-local": "تاریخ محلی",
+    email: "ایمیل",
+    month: "ماه",
+    number: "شماره",
+    password: "رمز عبور",
+    range: "محدوده",
+    tel: "تلفن",
+    text: "پیامک",
+    time: "زمان",
+    url: "آدرس",
+    week: "هفته",
     hidden: "مخفی",
     on: "روشن",
     onPage: "روی صفحه",
@@ -670,77 +694,104 @@ var persianStrings = {
     display: "نمایش",
     onComplete: "به محض تمام شدن",
     onHidden: "به محض مخفی شدن",
-    // onHiddenContainer: "When the question or its panel/page becomes hidden",
+    onHiddenContainer: "هنگامی که سوال یا پانل / صفحه ان پنهان می شود",
     clearInvisibleValues: {
-      // none: "Never"
+      none: "هرگز"
+    },
+    inputType: {
+      color: "رنگ",
+      date: "تاریخ",
+      "datetime-local": "تاریخ و زمان",
+      email: "ایمیل",
+      month: "ماه",
+      number: "شماره",
+      password: "رمز عبور",
+      range: "محدوده",
+      tel: "شماره تماس",
+      text: "پیامک",
+      time: "زمان",
+      url: "آدرس",
+      week: "هفته"
     },
     all: "تمام",
     page: "صفحه",
     survey: "نظرسنجی",
     onNextPage: "به محض صفحه بعدی",
     onValueChanged: "به محض تغییر مقدار",
-    // onValueChanging: "Before an answer is changed",
+    onValueChanging: "قبل از اینکه پاسخ تغییر کند",
     standard: "استاندارد",
     singlePage: "تک صفحه ای",
     questionPerPage: "سوال در هر صفحه ی مجزا",
     noPreview: "پیش نمایش ندارد",
     showAllQuestions: "فعال سازی پیش نمایش با تمام سوالات",
     showAnsweredQuestions: "فعال سازی پیش نمایش به سوالات پاسخ داده شده",
-    // pages: "Completed pages",
-    // questions: "Answered questions",
-    // requiredQuestions: "Answered required questions",
-    // correctQuestions: "Valid answers",
-    // buttons: "Completed pages (button UI)",
-    // underInput: "Under the input",
-    // underTitle: "Under the title",
-    // onBlur: "On blur",
-    // onTyping: "While typing",
-    // underRow: "Under the row",
-    // underRowSingle: "Under the row, only one panel is visible",
+    pages: "صفحات تکمیل شده",
+    questions: "سوالات پاسخ داده شده",
+    requiredQuestions: "پاسخ به سوالات مورد نیاز",
+    correctQuestions: "پاسخ های معتبر",
+    buttons: "صفحات تکمیل شده(دکمه UI)",
+    underInput: "زیر ورودی",
+    underTitle: "تحت عنوان",
+    onBlur: "در تاری",
+    onTyping: "هنگام تایپ",
+    underRow: "زیر ردیف",
+    underRowSingle: "در زیر ردیف، تنها یک پانل قابل مشاهده است",
     showNavigationButtons: {
-      // none: "Hidden"
+      none: "پنهان"
     },
     showProgressBar: {
-      // off: "Hidden"
+      off: "پنهان"
     },
     showTimerPanel: {
-      // none: "Hidden"
+      none: "پنهان"
     },
     showTimerPanelMode: {
-      // all: "Both"
+      all: "هر دو"
     },
     detailPanelMode: {
-      // none: "Hidden"
+      none: "پنهان"
     },
     addRowLocation: {
-      // default: "Depends on matrix layout"
+      default: "بستگی به طرح ماتریس دارد"
     },
     panelsState: {
-      // default: "Users cannot expand or collapse panels",
-      // collapsed: "All panels are collapsed",
-      // expanded: "All panels are expanded"
+      default: "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند",
+      collapsed: "تمام پانل ها سقوط می کنند",
+      expanded: "تمام پانل ها گسترش یافته اند"
     },
     widthMode: {
-      // auto: "Auto",
-      // static: "Static",
-      // responsive: "Responsive"
+      auto: "خودکار",
+      static: "استاتیک",
+      responsive: "پاسخگو"
     },
     imageFit: {
-      // none: "None",
-      // contain: "Contain",
-      // cover: "Cover",
-      // fill: "Fill"
+      none: "هیچ کدام",
+      contain: "حاوی",
+      cover: "پوشش",
+      fill: "پر کردن"
     },
     contentMode: {
-      // auto: "Auto",
-      // image: "Image",
-      // video: "Video",
-      // youtube: "YouTube"
+      auto: "خودکار",
+      image: "تصویر",
+      video: "ویدئو",
+      youtube: "Youtube"
     },
     displayMode: {
-      // auto: "Auto",
-      // buttons: "Buttons",
-      // dropdown: "Dropdown"
+      auto: "خودکار",
+      buttons: "دکمه",
+      dropdown: "کشویی"
+    },
+    rateColorMode: {
+      default: "پیش فرض"
+    },
+    autoGenerate: {
+      "true": "تولید",
+      "false": "به صورت دستی وارد کنید"
+    },
+    rateType: {
+      labels: "برچسب",
+      stars: "ستاره",
+      smileys: "صورتک"
     }
   },
   // Operators
@@ -757,8 +808,8 @@ var persianStrings = {
     less: "کوچکتر",
     greaterorequal: "بزرگتر یا مساوی",
     lessorequal: "کوچکتر یا مساوی",
-    // and: "and",
-    // or: "or"
+    and: "و",
+    or: "یا"
   },
   // Embed window
   ew: {
@@ -787,7 +838,7 @@ var persianStrings = {
   ts: {
     selectPage: "صفحه ای را برای آزمایش انتخاب کنید:",
     showInvisibleElements: "نمایش المان های مخفی",
-    // hideInvisibleElements: "Hide invisible elements"
+    hideInvisibleElements: "مخفی کردن عناصر نامرئی"
   },
   validators: {
     answercountvalidator: "تعداد پاسخ",
@@ -806,17 +857,18 @@ var persianStrings = {
     visibletrigger: "تغییر وضعیت دیده شدن"
   },
   pehelp: {
-    // cookieName: "Cookies prevent users from filling out the same survey twice.",
-    // format: "Use {0} as a placeholder for the actual value.",
-    // totalText: "Visible only when at least one column has Total type or Total expression.",
-    // acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    // columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
-    // autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
-    // valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
+    cookieName: "کوکی ها کاربران را از پر کردن همان نظرسنجی دو بار جلوگیری می کند.",
+    size: "منطقه قابل مشاهده میدان ورودی را تغییر اندازه می دهد. لطفا از <b>تنظیم حداکثر طول → اعتبار سنجی</b> برای محدود کردن طول ورودی استفاده کنید.",
+    format: "از {0} به عنوان نگهدارنده برای ارزش واقعی استفاده کنید.",
+    totalText: "تنها زمانی قابل مشاهده است که حداقل یک ستون دارای عبارت Total type یا Total باشد.",
+    acceptedTypes: "برای اطلاعات بیشتر به [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description مراجعه کنید.",
+    columnColCount: "فقط برای انواع سلول های Radiogroup و Checkbox قابل اجرا است.",
+    autocomplete: "برای اطلاعات بیشتر به شرح ویژگی [autocomplete] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) مراجعه کنید.",
+    valueName: "اگر این ویژگی را تنظیم نکنید، پاسخ در زمینه ای که توسط ویژگی Name مشخص شده است ذخیره می شود.",
     choicesbyurl: {
-      // valueName: " "
+      valueName: " "
     },
-    // keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند."
   },
   // Properties
   p: {
@@ -824,82 +876,633 @@ var persianStrings = {
       name: "عنوان",
       title: "اگر خالی باشد مانند نام درج می شود"
     },
-    // multiSelect: "Allow multiple selection",
-    // showLabel: "Show image captions",
-    // value: "Value",
-    visibleIf: "آشکار اگر",
-    // attachOriginalItems: "attachOriginalItems",
-    // useDisplayValuesInDynamicTexts: "useDisplayValuesInDynamicTexts",
-    titleLocation: "محل قرارگیری عنوان",
+    multiSelect: "اجازه دادن به چند گزینش",
+    showLabel: "نمایش زیرنویسهای تصویر",
+    value: "ارزش",
+    tabAlign: "ترازبندی زبانه",
     description: "توضیحات",
-    // descriptionLocation: "descriptionLocation",
-    // defaultValueExpression: "defaultValueExpression",
+    logoFit: "لوگو مناسب است",
+    pages: "صفحات",
+    questions: "سوالات",
+    triggers: "فعال سازی",
+    calculatedValues: "مقادیر محاسبه شده",
+    surveyId: "شناسه نظرسنجی",
+    surveyPostId: "شناسه نظرسنجی",
+    surveyShowDataSaving: "نظرسنجی نشان می دهد صرفه جویی در داده ها",
+    questionDescriptionLocation: "توضیحات سوال محل",
+    progressBarType: "نوع نوار پیشرفت",
+    showTOC: "نمایش TOC",
+    tocLocation: "محل Toc",
+    questionTitlePattern: "الگوی عنوان سوال",
+    widthMode: "حالت عرض",
+    showBrandInfo: "نمایش اطلاعات برند",
+    useDisplayValuesInDynamicTexts: "استفاده از مقادیر نمایش در متون پویا",
+    visibleIf: "آشکار اگر",
+    titleLocation: "محل قرارگیری عنوان",
+    descriptionLocation: "شرح محل",
+    defaultValueExpression: "عبارت مقدار پیشفرض",
     requiredIf: "اجبار اگر؟",
     validators: "اعتبارسنج ها",
-    // bindings: "bindings",
-    // renderAs: "renderAs",
-    currency: "ارز",
-    // cellHint: "cellHint",
-    // isUnique: "isUnique",
-    // showInMultipleColumns: "showInMultipleColumns",
-    // totalMaximumFractionDigits: "totalMaximumFractionDigits",
-    // totalMinimumFractionDigits: "totalMinimumFractionDigits",
-    columns: "ستون ها",
-    // detailElements: "detailElements",
+    bindings: "پیوندها",
+    renderAs: "Render به عنوان",
+    attachOriginalItems: "پیوست موارد اصلی",
     choices: "گزینه ها",
-    // allowAdaptiveActions: "allowAdaptiveActions",
-    defaultRowValue: "مقدار پیش فرض سطر",
-    // detailPanelShowOnAdding: "detailPanelShowOnAdding",
-    // logoFit: "logoFit",
-    // pages: "pages",
-    // questions: "questions",
-    triggers: "فعال سازی",
-    // calculatedValues: "calculatedValues",
-    // surveyId: "surveyId",
-    // surveyPostId: "surveyPostId",
-    // surveyShowDataSaving: "surveyShowDataSaving",
-    // questionDescriptionLocation: "questionDescriptionLocation",
-    // progressBarType: "progressBarType",
-    // questionTitlePattern: "questionTitlePattern",
-    // widthMode: "widthMode",
-    // showBrandInfo: "showBrandInfo",
     choicesByUrl: "گزینه ها با لینک",
-    // choicesLazyLoadEnabled: "choicesLazyLoadEnabled",
-    // choicesLazyLoadPageSize: "choicesLazyLoadPageSize",
-    // inputFieldComponent: "inputFieldComponent",
-    // itemComponent: "itemComponent",
-    // min: "min",
-    // max: "max",
-    // minValueExpression: "minValueExpression",
-    // maxValueExpression: "maxValueExpression",
-    // step: "step",
-    // dataList: "dataList",
+    currency: "ارز",
+    cellHint: "راهنمایی سلول",
+    isUnique: "منحصر به فرد است",
+    showInMultipleColumns: "نمایش در ستونهای چندگانه",
+    totalMaximumFractionDigits: "مجموع رقم کسری بیشینه",
+    totalMinimumFractionDigits: "مجموع حداقل رقم کسری",
+    columns: "ستون ها",
+    detailElements: "عناصر جزئیات",
+    allowAdaptiveActions: "اجازه دادن به کنشهای انطباقی",
+    defaultRowValue: "مقدار پیش فرض سطر",
+    detailPanelShowOnAdding: "پانل جزئیات در اضافه کردن نشان می دهد",
+    choicesLazyLoadEnabled: "انتخاب بار تنبل فعال است",
+    choicesLazyLoadPageSize: "انتخاب تنبل بار اندازه صفحه",
+    inputFieldComponent: "مؤلفه فیلد ورودی",
+    itemComponent: "مؤلفۀ مورد",
+    min: "دقیقه",
+    max: "حداکثر",
+    minValueExpression: "بیان مقدار مین",
+    maxValueExpression: "عبارت بیشینه مقدار",
+    step: "گام",
+    dataList: "لیست داده ها",
     itemSize: "ابعاد مورد",
-    // elements: "elements",
-    // content: "content",
+    elements: "عناصر",
+    content: "محتوای",
     navigationButtonsVisibility: "پدیداری دکمه های ناوبری",
-    // navigationTitle: "navigationTitle",
-    // navigationDescription: "navigationDescription",
-    // closeOnSelect: "closeOnSelect",
-    // longTap: "longTap",
-    // autoGrow: "autoGrow",
-    // acceptCarriageReturn: "acceptCarriageReturn",
-    // displayMode: "displayMode",
+    navigationTitle: "عنوان ناوش",
+    navigationDescription: "توضیحات ناوبری",
+    longTap: "ضربه طولانی",
+    autoGrow: "رشد خودکار",
+    allowResize: "اجازه دادن به تغییر اندازه",
+    acceptCarriageReturn: "پذیرش بازگشت کالسکه",
+    displayMode: "حالت نمایش",
+    rateType: "نوع نرخ",
     label: "برچسب",
-    // contentMode: "contentMode",
-    // imageFit: "imageFit",
-    // altText: "altText",
-    // height: "height",
-    // penColor: "penColor",
-    // backgroundColor: "backgroundColor",
-    // templateElements: "templateElements",
-    // operator: "operator",
-    // isVariable: "isVariable",
-    // runExpression: "runExpression",
-    // showCaption: "showCaption",
-    // iconName: "iconName",
-    // iconSize: "iconSize"
+    contentMode: "حالت محتوا",
+    imageFit: "متناسب با تصویر",
+    altText: "متن دگرساز",
+    height: "ارتفاع",
+    penColor: "رنگ قلم",
+    backgroundColor: "رنگ پسزمینه",
+    templateElements: "عناصر قالب",
+    operator: "اپراتور",
+    isVariable: "متغیر است",
+    runExpression: "اجرای عبارت",
+    showCaption: "نمایش عنوان",
+    iconName: "نام شمایل",
+    iconSize: "اندازه شمایل",
+    precision: "دقت",
+    matrixDragHandleArea: "ماتریکس منطقه دسته کشیدن",
+    backgroundImage: "تصویر زمینه",
+    backgroundImageFit: "مناسبسازی تصویر پسزمینه",
+    backgroundImageAttachment: "پیوست تصویر پسزمینه",
+    backgroundOpacity: "تاری پسزمینه",
+    selectToRankEnabled: "انتخاب برای رتبه فعال",
+    selectToRankAreasLayout: "انتخاب برای رتبه بندی طرح مناطق",
+    allowCameraAccess: "اجازه دسترسی به دوربین",
+    scaleColorMode: "مقیاس حالت رنگ",
+    rateColorMode: "نرخ حالت رنگ",
+    templateTabTitle: "عنوان زبانه قالب",
+    templateVisibleIf: "قالب مرئی اگر",
+    copyDisplayValue: "رونوشت مقدار نمایش"
+  },
+  theme: {
+    "--background": "رنگ پسزمینه",
+    "--background-dim-light": "پس زمینه رنگ نور کم",
+    "--primary-foreground": "رنگ پیشزمینه اصلی",
+    "--foreground": "رنگ پیشزمینه",
+    "--base-unit": "واحد پایه",
+    groupGeneral: "عمومی",
+    groupAdvanced: "پیشرفته",
+    themeName: "تم",
+    themeMode: "ظاهر سوال",
+    themeModePanels: "پیش فرض",
+    themeModeLightweight: "بدون پانل",
+    themePaletteLight: "نور",
+    themePaletteDark: "تاریک",
+    primaryColor: "رنگ لهجه",
+    primaryDefaultColor: "پیش فرض",
+    primaryDarkColor: "شناور",
+    primaryLightColor: "انتخاب",
+    backgroundDimColor: "رنگ پسزمینه",
+    backgroundImage: "تصویر زمینه",
+    backgroundImageFitAuto: "خودکار",
+    backgroundImageFitCover: "پوشش",
+    backgroundImageFitContain: "حاوی",
+    backgroundOpacity: "کدورت",
+    backgroundImageAttachmentFixed: "ثابت",
+    backgroundImageAttachmentScroll: "حرکت",
+    panelBackgroundTransparency: "تاری پسزمینه پانل",
+    questionBackgroundTransparency: "تاری پسزمینۀ سؤال",
+    questionPanel: "پس زمینه پنل و شعاع گوشه",
+    questionTitle: "قلم عنوان پرسش",
+    questionDescription: "قلم شرح سؤال",
+    editorPanel: "عنصر ورودی",
+    editorFont: "قلم عنصر ورودی",
+    backcolor: "پسزمینۀ پیشفرض",
+    hovercolor: "پسزمینه شناور",
+    borderDecoration: "دکوراسیون مرزی",
+    accentBackground: "پسزمینۀ لهجه",
+    accentForeground: "پیشزمینه لهجه",
+    primaryForecolor: "رنگ پیشفرض",
+    primaryForecolorLight: "رنگ غیرفعال",
+    linesColors: "رنگهای خط فرعی",
+    borderDefault: "تیره تر",
+    borderLight: "سبکتر",
+    fontFamily: "خانواده قلم",
+    fontSize: "اندازه قلم",
+    color: "رنگ",
+    size: "اندازه",
+    fontWeightRegular: "منظم",
+    fontWeightHeavy: "سنگین",
+    fontWeightSemiBold: "نیمه جسورانه",
+    fontWeightBold: "جسورانه",
+    scale: "مقیاس",
+    cornerRadius: "شعاع گوشه",
+    surveyTitle: "قلم عنوان نظرسنجی",
+    pageTitle: "قلم عنوان صفحه",
+    pageDescription: "قلم توصیف صفحه",
+    boxShadowX: "X",
+    boxShadowY: "Y",
+    boxShadowAddRule: "افزودن جلوهی سایه",
+    opacity: "کدورت",
+    boxShadowBlur: "تیرگی",
+    boxShadowSpread: "گسترش",
+    boxShadowDrop: "قطره",
+    boxShadowInner: "درونی",
+    questionShadow: "جلوه های سایه",
+    editorShadow: "عناصر ورودی اثرات سایه",
+    names: {
+      default: "پیش فرض",
+      sharp: "تیز",
+      borderless: "مرز",
+      flat: "تخت",
+      plain: "ساده",
+      doubleborder: "دو لبه",
+      layered: "لایه",
+      solid: "جامد",
+      threedimensional: ".3D",
+      contrast: "کنتراست"
+    },
+    colors: {
+      teal: "تیل",
+      blue: "آبی",
+      purple: "بنفش",
+      orchid: "ارکیده",
+      tulip: "لاله",
+      brown: "قهوه ای",
+      green: "سبز"
+    }
   }
 };
 
 editorLocalization.locales["fa"] = persianStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// qt.tagbox: "Multi-Select Dropdown" => "چند انتخاب کشویی"
+// ed.surveySettings: "Survey Settings" => "تنظیمات نظرسنجی"
+// ed.surveySettingsTooltip: "Open survey settings" => "باز کردن تنظیمات نظرسنجی"
+// ed.themeSurvey: "Themes" => "تم"
+// ed.toolboxChoiceCategory: "Choice Questions" => "سوالات انتخاب"
+// ed.toolboxTextCategory: "Text Input Questions" => "سوالات ورودی متن"
+// ed.toolboxContainersCategory: "Containers" => "ظروف"
+// ed.toolboxMatrixCategory: "Matrix Questions" => "سوالات ماتریکس"
+// ed.toolboxMiscCategory: "Misc" => "متفرقه"
+// ed.themePropertyGridTitle: "Theme Settings" => "تنظیمات تم"
+// ed.themeExportButton: "Export" => "صادرات"
+// ed.themeImportButton: "Import" => "واردات"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "انتخاب ها کپی می شوند از"
+// ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "یک تصویر را در اینجا بکشید و رها کنید یا روی دکمه زیر کلیک کنید و تصویری را برای اپلود انتخاب کنید"
+// ed.imageChooseImage: "Choose Image" => "انتخاب تصویر"
+// ed.auto: "auto" => "خودکار"
+// ed.choices_Item: "Item " => "مورد "
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "ارزش سوال روشن: {0}"
+// lg.uncompletedRule_title: "Logical rules are incomplete" => "قوانین منطقی ناقص هستند"
+// lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "شما برخی از قوانین منطقی را تکمیل نکرده اید. اگر اکنون برگه را ترک کنید، تغییرات از بین خواهند رفت. ایا هنوز هم می خواهید برگه را بدون تکمیل تغییرات ترک کنید؟"
+// lg.uncompletedRule_apply: "Yes" => "بله"
+// lg.uncompletedRule_cancel: "No, I want to complete the rules" => "نه، من می خواهم قوانین را تکمیل کنم"
+// pe.clear: "Clear" => "روشن"
+// pe.set: "Set" => "مجموعه"
+// pe.change: "Change" => "تغییر"
+// pe.removeItem: "Click to remove the item..." => "فشار دهید تا مورد حذف شود..."
+// pe.dragItem: "Drag the item" => "مورد را بکشید"
+// pe.doneEditing: "Done" => "انجام"
+// pe.fastEntryNonUniqueError: "Value '{0}' is not unique" => "مقدار {0}» منحصر به فرد نیست"
+// pe.fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}" => "لطفا تعداد موارد را از {0} به {1} محدود کنید"
+// pe.fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2" => "شما می توانید داده ها را در قالب زیر تنظیم کنید:\nvalue1|متن\nارزش 2"
+// pe.showPreviewBeforeComplete: "Preview answers before submitting the survey" => "پیش نمایش پاسخ قبل از ارسال نظرسنجی"
+// pe.overridingPropertyPrefix: "Set by " => "تنظیم بر اساس "
+// pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "از کلمات رزرو شده استفاده نکنید: \"item\"، \"choice\"، \"panel\"، \"row\"."
+// pe.listIsEmpty@choices: "No choices have been added yet" => "هنوز هیچ انتخابی اضافه نشده است"
+// pe.addNew@choices: "Add a choice" => "اضافه کردن یک انتخاب"
+// choicesbyurl.valueName: "Get values from the following JSON field" => "دریافت مقادیر از فیلد JSON زیر"
+// pe.imageLinkName: "Get image URLs from the following JSON field" => "URL های تصویر را از فیلد JSON زیر دریافت کنید"
+// pe.allowEmptyResponse: "Allow empty response" => "اجازه دادن پاسخ خالی"
+// pe.and: "and" => "و"
+// pe.or: "or" => "یا"
+// pe.emptyLogicPopupMessage: "Select a question to start configuring conditions." => "یک سؤال برای شروع پیکربندی شرایط انتخاب کنید."
+// pe.if: "If" => "اگر"
+// pe.then: "then" => "سپس"
+// pe.setToName: "Target question" => "سوال هدف"
+// pe.fromName: "Question to copy answer from" => "سوال برای کپی کردن پاسخ از"
+// pe.gotoName: "Question to skip to" => "سؤال برای پرش به"
+// pe.ruleIsNotSet: "Rule is incorrect" => "قانون نادرست است"
+// pe.includeIntoResult: "Include into survey results" => "شامل نتایج نظرسنجی"
+// pe.portraitOrientation: "Switch to portrait orientation" => "تغییر جهت به جهت تصویر"
+// image.imageHeight: "Image height (in CSS-accepted values)" => "ارتفاع تصویر (در مقادیر پذیرفته شده توسط CSS)"
+// image.imageWidth: "Image width (in CSS-accepted values)" => "عرض تصویر) در مقادیر پذیرفته شده CSS ("
+// page.maxTimeToFinish: "Time limit to finish the page (in seconds)" => "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
+// question.page: "Parent page" => "صفحه اصلی"
+// pe.noEntriesText: "Empty entries text" => "متن مدخلهای خالی"
+// pe.setValue: "Answer" => "پاسخ"
+// pe.dataFormat: "Image format" => "قالب تصویر"
+// pe.allowAddRows: "Allow adding rows" => "اجازه اضافه کردن سطرها"
+// pe.allowRemoveRows: "Allow removing rows" => "اجازه حذف سطرها"
+// pe.allowRowsDragAndDrop: "Allow row drag and drop" => "اجازه دادن به کشیدن و رها کردن ردیف"
+// pe.responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height." => "اگر عرض یا ارتفاع تصویر دقیق را مشخص کنید اعمال نمی شود."
+// pe.minImageWidth: "Minimum image width" => "حداقل عرض تصویر"
+// pe.maxImageWidth: "Maximum image width" => "حداکثر عرض تصویر"
+// pe.minImageHeight: "Minimum image height" => "حداقل ارتفاع تصویر"
+// pe.maxImageHeight: "Maximum image height" => "حداکثر ارتفاع تصویر"
+// surveyvalidator.text: "Error message" => "پیام خطا"
+// surveyvalidator.expression: "Validation expression" => "عبارت اعتبارسنجی"
+// pe.logo: "Logo (URL or base64-encoded string)" => "لوگو (URL یا رشته کدگذاری شده base64)"
+// pe.questionsOnPageMode: "Survey structure" => "ساختار نظرسنجی"
+// pe.maxTextLength: "Maximum answer length (in characters)" => "حداکثر طول پاسخ (در کاراکترها)"
+// pe.maxOthersLength: "Maximum comment length (in characters)" => "حداکثر طول توضیحات (در نویسهها)"
+// pe.autoGrowComment: "Auto-expand comment area if necessary" => "گسترش خودکار منطقه نظر در صورت لزوم"
+// pe.allowResizeComment: "Allow users to resize text areas" => "اجازه دادن به کاربران برای تغییر اندازه مناطق متن"
+// pe.textUpdateMode: "Update text question value" => "بههنگامسازی مقدار سؤال متن"
+// pe.focusOnFirstError: "Set focus on the first invalid answer" => "تنظیم تمرکز روی اولین پاسخ نامعتبر"
+// pe.checkErrorsMode: "Run validation" => "اجرای اعتبارسنجی"
+// pe.navigateToUrl: "Navigate to URL" => "حرکت به نشانی وب"
+// pe.navigateToUrlOnCondition: "Dynamic URL" => "نشانی وب پویا"
+// pe.completedBeforeHtml: "Markup to show if the user already filled out this survey" => "نشانهگذاری برای نشان دادن اینکه ایا کاربر قبلا این بررسی را پر کرده است"
+// pe.completedHtml: "Survey Complete page markup" => "بررسی نشانه گذاری صفحه کامل"
+// pe.completedHtmlOnCondition: "Dynamic Survey Complete page markup" => "بررسی دینامیکی نشانه گذاری صفحه کامل"
+// pe.loadingHtml: "Markup to show while survey model is loading" => "نشانه گذاری برای نشان دادن در حالی که مدل بررسی در حال بارگذاری است"
+// pe.commentText: "Comment area text" => "متن ناحیه نظر"
+// pe.autocomplete: "Autocomplete type" => "نوع تکمیل خودکار"
+// pe.labelTrue: "\"True\" label" => "برچسب \"True\""
+// pe.labelFalse: "\"False\" label" => "برچسب \"غلط\""
+// pe.allowClear: "Show the Clear button" => "نشان دادن دکمهی Clear"
+// pe.displayStyle: "Value display style" => "سبک نمایش ارزش"
+// pe.format: "Formatted string" => "رشتۀ قالببندی شده"
+// pe.maximumFractionDigits: "Maximum fractional digits" => "بیشینه رقم کسری"
+// pe.minimumFractionDigits: "Minimum fractional digits" => "حداقل رقم کسری"
+// pe.useGrouping: "Display grouping separators" => "نمایش جداسازهای گروهبندی"
+// pe.allowMultiple: "Allow multiple files" => "اجازه دادن به چندین پرونده"
+// pe.allowImagesPreview: "Preview images" => "پیشنمایش تصاویر"
+// pe.acceptedTypes: "Accepted file types" => "انواع فایل های پذیرفته شده"
+// pe.waitForUpload: "Wait for the upload to complete" => "منتظر بمانید تا بارگذاری کامل شود"
+// pe.needConfirmRemoveFile: "Confirm file deletion" => "تایید حذف پرونده"
+// pe.detailPanelMode: "Detail panel location" => "جزئیات محل پانل"
+// pe.minRowCount: "Minimum row count" => "حداقل تعداد سطرها"
+// pe.maxRowCount: "Maximum row count" => "حداکثر تعداد سطرها"
+// pe.confirmDelete: "Confirm row deletion" => "تایید حذف سطر"
+// pe.confirmDeleteText: "Confirmation message" => "پیام تایید"
+// paneldynamic.confirmDelete: "Confirm panel deletion" => "تایید حذف پانل"
+// pe.panelCount: "Initial panel count" => "شمارش اولیه پانل"
+// pe.minPanelCount: "Minimum panel count" => "حداقل تعداد پانل"
+// pe.maxPanelCount: "Maximum panel count" => "حداکثر تعداد پانل"
+// pe.panelsState: "Inner panel expand state" => "پانل داخلی گسترش دولت"
+// pe.templateDescription: "Description template" => "قالب شرح"
+// pe.templateTitle: "Title template" => "قالب عنوان"
+// pe.panelPrevText: "Previous Panel button tooltip" => "قبلی دکمه پنل tooltip"
+// pe.panelNextText: "Next Panel button tooltip" => "بعدی دکمه پنل tooltip"
+// pe.showRangeInProgress: "Show progress bar" => "نمایش نوار پیشرفت"
+// pe.templateTitleLocation: "Question title location" => "عنوان سوال محل"
+// pe.panelRemoveButtonLocation: "Remove Panel button location" => "حذف محل دکمه پنل"
+// pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "مخفی کردن سؤال اگر سطری وجود نداشته باشد"
+// pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "مخفی کردن ستونها اگر سطری وجود نداشته باشد"
+// pe.rateValues: "Custom rate values" => "مقادیر نرخ سفارشی"
+// pe.rateCount: "Rate count" => "شمارش نرخ"
+// pe.autoGenerate: "How to specify rate values?" => "چگونه مقادیر نرخ را مشخص کنیم؟"
+// pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "مخفی کردن سؤال در صورتی که هیچ انتخابی نداشته باشد"
+// pe.hideNumber: "Hide question number" => "مخفی کردن شمارۀ سؤال"
+// pe.minWidth: "Minimum width (in CSS-accepted values)" => "حداقل عرض (در مقادیر پذیرفته شده CSS)"
+// pe.maxWidth: "Maximum width (in CSS-accepted values)" => "حداکثر عرض (در مقادیر پذیرفته شده CSS)"
+// pe.width: "Width (in CSS-accepted values)" => "عرض (در مقادیر پذیرفته شده CSS)"
+// pe.showHeader: "Show column headers" => "نمایش سرایندهای ستون"
+// pe.horizontalScroll: "Show horizontal scrollbar" => "نمایش میله لغزش افقی"
+// pe.columnMinWidth: "Minimum column width (in CSS-accepted values)" => "اس"
+// pe.rowTitleWidth: "Row header width (in CSS-accepted values)" => "عرض سرصفحه سطر) در مقادیر پذیرفته شده CSS ("
+// pe.valueTrue: "\"True\" value" => "مقدار » درست"
+// pe.valueFalse: "\"False\" value" => "مقدار » نادرست"
+// pe.minErrorText: "\"Value is below minimum\" error message" => "پیام خطای \"مقدار کمتر از حداقل است\""
+// pe.maxErrorText: "\"Value exceeds maximum\" error message" => "\"مقدار بیش از حداکثر\" پیام خطا"
+// pe.otherErrorText: "\"Empty comment\" error message" => "پیام خطای \"نظر خالی\""
+// pe.keyDuplicationError: "\"Non-unique key value\" error message" => "پیام خطای \"مقدار کلید غیر منحصر به فرد\""
+// pe.minSelectedChoices: "Minimum selected choices" => "حداقل انتخاب های انتخاب شده"
+// pe.maxSelectedChoices: "Maximum selected choices" => "حداکثر انتخابهای انتخاب شده"
+// pe.showClearButton: "Show the Clear button" => "نشان دادن دکمهی Clear"
+// pe.showNumber: "Show panel number" => "نمایش شماره پانل"
+// pe.logoWidth: "Logo width (in CSS-accepted values)" => "عرض لوگو (در مقادیر پذیرفته شده CSS)"
+// pe.logoHeight: "Logo height (in CSS-accepted values)" => "ارتفاع لوگو (در مقادیر پذیرفته شده CSS)"
+// pe.readOnly: "Read-only" => "فقط خواندنی"
+// pe.enableIf: "Editable if" => "قابل ویرایش اگر"
+// pe.emptyRowsText: "\"No rows\" message" => "پیام \"بدون ردیف\""
+// pe.size: "Input field size (in characters)" => "اندازه فیلد ورودی (در نویسه ها)"
+// pe.separateSpecialChoices: "Separate special choices (None, Other, Select All)" => "انتخاب های ویژه جداگانه (هیچ کدام، دیگر، همه را انتخاب کنید)"
+// pe.choicesFromQuestion: "Copy choices from the following question" => "کپی کردن انتخابها از سؤال زیر"
+// pe.choicesFromQuestionMode: "Which choices to copy?" => "کدام گزینه ها را کپی کنید؟"
+// pe.showCommentArea: "Show the comment area" => "نمایش ناحیهی نظرات"
+// pe.commentPlaceholder: "Comment area placeholder" => "ذی نفع منطقه نظر"
+// pe.displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values" => "نمایش توضیحات نرخ به عنوان مقادیر شدید"
+// pe.rowsOrder: "Row order" => "سفارش ردیف"
+// pe.columnsLayout: "Column layout" => "طرحبندی ستون"
+// pe.columnColCount: "Nested column count" => "تعداد ستون های تو در تو"
+// pe.state: "Panel expand state" => "پنل گسترش دولت"
+// pe.correctAnswer: "Correct Answer" => "پاسخ صحیح"
+// pe.defaultPanelValue: "Default Values" => "مقادیر پیشفرض"
+// pe.cells: "Cell Texts" => "متن سلولی"
+// pe.keyName: "Key column" => "ستون کلید"
+// itemvalue.text: "Alt text" => "متن دگرساز"
+// tabs.expression: "Expression" => "بیان"
+// pe.choicesVisibleIf: "Choices are visible if" => "انتخاب ها قابل مشاهده هستند اگر"
+// pe.choicesEnableIf: "Choices are selectable if" => "انتخاب ها قابل انتخاب هستند اگر"
+// pe.columnsEnableIf: "Columns are visible if" => "ستونها مرئی هستند اگر"
+// pe.rowsEnableIf: "Rows are visible if" => "سطرها مرئی هستند اگر"
+// pe.indent: "Add indents" => "افزودن تورفتهای"
+// panel.indent: "Add outer indents" => "اضافه کردن تورفتات بیرونی"
+// pe.innerIndent: "Add inner indents" => "اضافه کردن تورفتات داخلی"
+// pe.defaultValueFromLastRow: "Take default values from the last row" => "گرفتن مقادیر پیشفرض از اخرین سطر"
+// pe.defaultValueFromLastPanel: "Take default values from the last panel" => "گرفتن مقادیر پیشفرض از اخرین تابلو"
+// pe.emptyExpressionPlaceHolder: "Type expression here..." => "عبارت را در اینجا تایپ کنید..."
+// pe.clearIfInvisible: "Clear the value if the question becomes hidden" => "پاک کردن مقدار اگر سؤال مخفی شود"
+// pe.valuePropertyName: "Value property name" => "ارزش نام ملک"
+// pe.searchEnabled: "Enable search" => "فعالسازی جستجو"
+// pe.hideSelectedItems: "Hide selected items" => "مخفی کردن فقرههای انتخاب شده"
+// pe.closeOnSelect: "Close the dropdown after selection" => "بستن کشویی پس از انتخاب"
+// pe.signatureWidth: "Signature width" => "عرض امضا"
+// pe.signatureHeight: "Signature height" => "ارتفاع امضا"
+// pe.verticalAlign: "Vertical alignment" => "تراز عمودی"
+// pe.alternateRows: "Alternate rows" => "ردیفهای جایگزین"
+// pe.columnsVisibleIf: "Columns are visible if" => "ستونها مرئی هستند اگر"
+// pe.rowsVisibleIf: "Rows are visible if" => "سطرها مرئی هستند اگر"
+// pe.otherPlaceholder: "Comment area placeholder" => "ذی نفع منطقه نظر"
+// pe.rateType: "Rate type" => "نوع نرخ"
+// pv.true: "true" => "واقعی"
+// pv.false: "false" => "نادرست"
+// pv.decimal: "decimal" => "اعشاری"
+// pv.currency: "currency" => "ارز"
+// pv.percent: "percent" => "درصد"
+// pv.onpanel: "Start on each panel" => "شروع در هر پنل"
+// pv.tab: "Tabs" => "زبانه"
+// pv.right: "Right" => "راست"
+// pv.color: "color" => "رنگ"
+// pv.date: "date" => "تاریخ"
+// pv.datetime: "datetime" => "تاریخ"
+// pv.datetime-local: "datetime-local" => "تاریخ محلی"
+// pv.email: "email" => "ایمیل"
+// pv.month: "month" => "ماه"
+// pv.number: "number" => "شماره"
+// pv.password: "password" => "رمز عبور"
+// pv.range: "range" => "محدوده"
+// pv.tel: "tel" => "تلفن"
+// pv.text: "text" => "پیامک"
+// pv.time: "time" => "زمان"
+// pv.url: "url" => "آدرس"
+// pv.week: "week" => "هفته"
+// pv.onHiddenContainer: "When the question or its panel/page becomes hidden" => "هنگامی که سوال یا پانل / صفحه ان پنهان می شود"
+// clearInvisibleValues.none: "Never" => "هرگز"
+// inputType.color: "Color" => "رنگ"
+// inputType.date: "Date" => "تاریخ"
+// inputType.datetime-local: "Date and Time" => "تاریخ و زمان"
+// inputType.email: "Email" => "ایمیل"
+// inputType.month: "Month" => "ماه"
+// inputType.number: "Number" => "شماره"
+// inputType.password: "Password" => "رمز عبور"
+// inputType.range: "Range" => "محدوده"
+// inputType.tel: "Phone Number" => "شماره تماس"
+// inputType.text: "Text" => "پیامک"
+// inputType.time: "Time" => "زمان"
+// inputType.url: "URL" => "آدرس"
+// inputType.week: "Week" => "هفته"
+// pv.onValueChanging: "Before an answer is changed" => "قبل از اینکه پاسخ تغییر کند"
+// pv.pages: "Completed pages" => "صفحات تکمیل شده"
+// pv.questions: "Answered questions" => "سوالات پاسخ داده شده"
+// pv.requiredQuestions: "Answered required questions" => "پاسخ به سوالات مورد نیاز"
+// pv.correctQuestions: "Valid answers" => "پاسخ های معتبر"
+// pv.buttons: "Completed pages (button UI)" => "صفحات تکمیل شده(دکمه UI)"
+// pv.underInput: "Under the input" => "زیر ورودی"
+// pv.underTitle: "Under the title" => "تحت عنوان"
+// pv.onBlur: "On blur" => "در تاری"
+// pv.onTyping: "While typing" => "هنگام تایپ"
+// pv.underRow: "Under the row" => "زیر ردیف"
+// pv.underRowSingle: "Under the row, only one panel is visible" => "در زیر ردیف، تنها یک پانل قابل مشاهده است"
+// showNavigationButtons.none: "Hidden" => "پنهان"
+// showProgressBar.off: "Hidden" => "پنهان"
+// showTimerPanel.none: "Hidden" => "پنهان"
+// showTimerPanelMode.all: "Both" => "هر دو"
+// detailPanelMode.none: "Hidden" => "پنهان"
+// addRowLocation.default: "Depends on matrix layout" => "بستگی به طرح ماتریس دارد"
+// panelsState.default: "Users cannot expand or collapse panels" => "کاربران نمی توانند پانل ها را گسترش یا سقوط کنند"
+// panelsState.collapsed: "All panels are collapsed" => "تمام پانل ها سقوط می کنند"
+// panelsState.expanded: "All panels are expanded" => "تمام پانل ها گسترش یافته اند"
+// widthMode.auto: "Auto" => "خودکار"
+// widthMode.static: "Static" => "استاتیک"
+// widthMode.responsive: "Responsive" => "پاسخگو"
+// imageFit.none: "None" => "هیچ کدام"
+// imageFit.contain: "Contain" => "حاوی"
+// imageFit.cover: "Cover" => "پوشش"
+// imageFit.fill: "Fill" => "پر کردن"
+// contentMode.auto: "Auto" => "خودکار"
+// contentMode.image: "Image" => "تصویر"
+// contentMode.video: "Video" => "ویدئو"
+// contentMode.youtube: "YouTube" => "Youtube"
+// displayMode.auto: "Auto" => "خودکار"
+// displayMode.buttons: "Buttons" => "دکمه"
+// displayMode.dropdown: "Dropdown" => "کشویی"
+// rateColorMode.default: "Default" => "پیش فرض"
+// autoGenerate.true: "Generate" => "تولید"
+// autoGenerate.false: "Enter manually" => "به صورت دستی وارد کنید"
+// rateType.labels: "Labels" => "برچسب"
+// rateType.stars: "Stars" => "ستاره"
+// rateType.smileys: "Smileys" => "صورتک"
+// op.and: "and" => "و"
+// op.or: "or" => "یا"
+// ts.hideInvisibleElements: "Hide invisible elements" => "مخفی کردن عناصر نامرئی"
+// pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "کوکی ها کاربران را از پر کردن همان نظرسنجی دو بار جلوگیری می کند."
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "منطقه قابل مشاهده میدان ورودی را تغییر اندازه می دهد. لطفا از <b>تنظیم حداکثر طول → اعتبار سنجی</b> برای محدود کردن طول ورودی استفاده کنید."
+// pehelp.format: "Use {0} as a placeholder for the actual value." => "از {0} به عنوان نگهدارنده برای ارزش واقعی استفاده کنید."
+// pehelp.totalText: "Visible only when at least one column has Total type or Total expression." => "تنها زمانی قابل مشاهده است که حداقل یک ستون دارای عبارت Total type یا Total باشد."
+// pehelp.acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information." => "برای اطلاعات بیشتر به [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description مراجعه کنید."
+// pehelp.columnColCount: "Applicable only to Radiogroup and Checkbox cell types." => "فقط برای انواع سلول های Radiogroup و Checkbox قابل اجرا است."
+// pehelp.autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information." => "برای اطلاعات بیشتر به شرح ویژگی [autocomplete] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) مراجعه کنید."
+// pehelp.valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property." => "اگر این ویژگی را تنظیم نکنید، پاسخ در زمینه ای که توسط ویژگی Name مشخص شده است ذخیره می شود."
+// choicesbyurl.valueName: " " => " "
+// pehelp.keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error." => "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند."
+// p.multiSelect: "Allow multiple selection" => "اجازه دادن به چند گزینش"
+// p.showLabel: "Show image captions" => "نمایش زیرنویسهای تصویر"
+// p.value: "Value" => "ارزش"
+// p.tabAlign: "Tab alignment" => "ترازبندی زبانه"
+// p.logoFit: "Logo fit" => "لوگو مناسب است"
+// p.pages: "Pages" => "صفحات"
+// p.questions: "Questions" => "سوالات"
+// p.calculatedValues: "Calculated values" => "مقادیر محاسبه شده"
+// p.surveyId: "Survey id" => "شناسه نظرسنجی"
+// p.surveyPostId: "Survey post id" => "شناسه نظرسنجی"
+// p.surveyShowDataSaving: "Survey show data saving" => "نظرسنجی نشان می دهد صرفه جویی در داده ها"
+// p.questionDescriptionLocation: "Question description location" => "توضیحات سوال محل"
+// p.progressBarType: "Progress bar type" => "نوع نوار پیشرفت"
+// p.showTOC: "Show TOC" => "نمایش TOC"
+// p.tocLocation: "Toc location" => "محل Toc"
+// p.questionTitlePattern: "Question title pattern" => "الگوی عنوان سوال"
+// p.widthMode: "Width mode" => "حالت عرض"
+// p.showBrandInfo: "Show brand info" => "نمایش اطلاعات برند"
+// p.useDisplayValuesInDynamicTexts: "Use display values in dynamic texts" => "استفاده از مقادیر نمایش در متون پویا"
+// p.descriptionLocation: "Description location" => "شرح محل"
+// p.defaultValueExpression: "Default value expression" => "عبارت مقدار پیشفرض"
+// p.bindings: "Bindings" => "پیوندها"
+// p.renderAs: "Render as" => "Render به عنوان"
+// p.attachOriginalItems: "Attach original items" => "پیوست موارد اصلی"
+// p.cellHint: "Cell hint" => "راهنمایی سلول"
+// p.isUnique: "Is unique" => "منحصر به فرد است"
+// p.showInMultipleColumns: "Show in multiple columns" => "نمایش در ستونهای چندگانه"
+// p.totalMaximumFractionDigits: "Total maximum fraction digits" => "مجموع رقم کسری بیشینه"
+// p.totalMinimumFractionDigits: "Total minimum fraction digits" => "مجموع حداقل رقم کسری"
+// p.detailElements: "Detail elements" => "عناصر جزئیات"
+// p.allowAdaptiveActions: "Allow adaptive actions" => "اجازه دادن به کنشهای انطباقی"
+// p.detailPanelShowOnAdding: "Detail panel show on adding" => "پانل جزئیات در اضافه کردن نشان می دهد"
+// p.choicesLazyLoadEnabled: "Choices lazy load enabled" => "انتخاب بار تنبل فعال است"
+// p.choicesLazyLoadPageSize: "Choices lazy load page size" => "انتخاب تنبل بار اندازه صفحه"
+// p.inputFieldComponent: "Input field component" => "مؤلفه فیلد ورودی"
+// p.itemComponent: "Item component" => "مؤلفۀ مورد"
+// p.min: "Min" => "دقیقه"
+// p.max: "Max" => "حداکثر"
+// p.minValueExpression: "Min value expression" => "بیان مقدار مین"
+// p.maxValueExpression: "Max value expression" => "عبارت بیشینه مقدار"
+// p.step: "Step" => "گام"
+// p.dataList: "Data list" => "لیست داده ها"
+// p.elements: "Elements" => "عناصر"
+// p.content: "Content" => "محتوای"
+// p.navigationTitle: "Navigation title" => "عنوان ناوش"
+// p.navigationDescription: "Navigation description" => "توضیحات ناوبری"
+// p.longTap: "Long tap" => "ضربه طولانی"
+// p.autoGrow: "Auto grow" => "رشد خودکار"
+// p.allowResize: "Allow resizing" => "اجازه دادن به تغییر اندازه"
+// p.acceptCarriageReturn: "Accept carriage return" => "پذیرش بازگشت کالسکه"
+// p.displayMode: "Display mode" => "حالت نمایش"
+// p.rateType: "Rate type" => "نوع نرخ"
+// p.contentMode: "Content mode" => "حالت محتوا"
+// p.imageFit: "Image fit" => "متناسب با تصویر"
+// p.altText: "Alt text" => "متن دگرساز"
+// p.height: "Height" => "ارتفاع"
+// p.penColor: "Pen color" => "رنگ قلم"
+// p.backgroundColor: "Background color" => "رنگ پسزمینه"
+// p.templateElements: "Template elements" => "عناصر قالب"
+// p.operator: "Operator" => "اپراتور"
+// p.isVariable: "Is variable" => "متغیر است"
+// p.runExpression: "Run expression" => "اجرای عبارت"
+// p.showCaption: "Show caption" => "نمایش عنوان"
+// p.iconName: "Icon name" => "نام شمایل"
+// p.iconSize: "Icon size" => "اندازه شمایل"
+// p.precision: "Precision" => "دقت"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "ماتریکس منطقه دسته کشیدن"
+// p.backgroundImage: "Background image" => "تصویر زمینه"
+// p.backgroundImageFit: "Background image fit" => "مناسبسازی تصویر پسزمینه"
+// p.backgroundImageAttachment: "Background image attachment" => "پیوست تصویر پسزمینه"
+// p.backgroundOpacity: "Background opacity" => "تاری پسزمینه"
+// p.selectToRankEnabled: "Select to rank enabled" => "انتخاب برای رتبه فعال"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "انتخاب برای رتبه بندی طرح مناطق"
+// p.allowCameraAccess: "Allow camera access" => "اجازه دسترسی به دوربین"
+// p.scaleColorMode: "Scale color mode" => "مقیاس حالت رنگ"
+// p.rateColorMode: "Rate color mode" => "نرخ حالت رنگ"
+// p.templateTabTitle: "Template tab title" => "عنوان زبانه قالب"
+// p.templateVisibleIf: "Template visible if" => "قالب مرئی اگر"
+// p.copyDisplayValue: "Copy display value" => "رونوشت مقدار نمایش"
+// theme.--background: "Background color" => "رنگ پسزمینه"
+// theme.--background-dim-light: "Background dim light color" => "پس زمینه رنگ نور کم"
+// theme.--primary-foreground: "Primary foreground color" => "رنگ پیشزمینه اصلی"
+// theme.--foreground: "Foreground color" => "رنگ پیشزمینه"
+// theme.--base-unit: "Base unit" => "واحد پایه"
+// theme.groupGeneral: "General" => "عمومی"
+// theme.groupAdvanced: "Advanced" => "پیشرفته"
+// theme.themeName: "Theme" => "تم"
+// theme.themeMode: "Question appearance" => "ظاهر سوال"
+// theme.themeModePanels: "Default" => "پیش فرض"
+// theme.themeModeLightweight: "Without Panels" => "بدون پانل"
+// theme.themePaletteLight: "Light" => "نور"
+// theme.themePaletteDark: "Dark" => "تاریک"
+// theme.primaryColor: "Accent color" => "رنگ لهجه"
+// theme.primaryDefaultColor: "Default" => "پیش فرض"
+// theme.primaryDarkColor: "Hover" => "شناور"
+// theme.primaryLightColor: "Selected" => "انتخاب"
+// theme.backgroundDimColor: "Background color" => "رنگ پسزمینه"
+// theme.backgroundImage: "Background image" => "تصویر زمینه"
+// theme.backgroundImageFitAuto: "Auto" => "خودکار"
+// theme.backgroundImageFitCover: "Cover" => "پوشش"
+// theme.backgroundImageFitContain: "Contain" => "حاوی"
+// theme.backgroundOpacity: "Opacity" => "کدورت"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "ثابت"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "حرکت"
+// theme.panelBackgroundTransparency: "Panel background opacity" => "تاری پسزمینه پانل"
+// theme.questionBackgroundTransparency: "Question background opacity" => "تاری پسزمینۀ سؤال"
+// theme.questionPanel: "Panel background and corner radius" => "پس زمینه پنل و شعاع گوشه"
+// theme.questionTitle: "Question title font" => "قلم عنوان پرسش"
+// theme.questionDescription: "Question description font" => "قلم شرح سؤال"
+// theme.editorPanel: "Input element" => "عنصر ورودی"
+// theme.editorFont: "Input element font" => "قلم عنصر ورودی"
+// theme.backcolor: "Default background" => "پسزمینۀ پیشفرض"
+// theme.hovercolor: "Hover background" => "پسزمینه شناور"
+// theme.borderDecoration: "Border decoration" => "دکوراسیون مرزی"
+// theme.accentBackground: "Accent background" => "پسزمینۀ لهجه"
+// theme.accentForeground: "Accent foreground" => "پیشزمینه لهجه"
+// theme.primaryForecolor: "Default color" => "رنگ پیشفرض"
+// theme.primaryForecolorLight: "Disabled color" => "رنگ غیرفعال"
+// theme.linesColors: "Minor line colors" => "رنگهای خط فرعی"
+// theme.borderDefault: "Darker" => "تیره تر"
+// theme.borderLight: "Lighter" => "سبکتر"
+// theme.fontFamily: "Font family" => "خانواده قلم"
+// theme.fontSize: "Font size" => "اندازه قلم"
+// theme.color: "Color" => "رنگ"
+// theme.size: "Size" => "اندازه"
+// theme.fontWeightRegular: "Regular" => "منظم"
+// theme.fontWeightHeavy: "Heavy" => "سنگین"
+// theme.fontWeightSemiBold: "Semi-bold" => "نیمه جسورانه"
+// theme.fontWeightBold: "Bold" => "جسورانه"
+// theme.scale: "Scale" => "مقیاس"
+// theme.cornerRadius: "Corner radius" => "شعاع گوشه"
+// theme.surveyTitle: "Survey title font" => "قلم عنوان نظرسنجی"
+// theme.pageTitle: "Page title font" => "قلم عنوان صفحه"
+// theme.pageDescription: "Page description font" => "قلم توصیف صفحه"
+// theme.boxShadowX: "X" => "X"
+// theme.boxShadowY: "Y" => "Y"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "افزودن جلوهی سایه"
+// theme.opacity: "Opacity" => "کدورت"
+// theme.boxShadowBlur: "Blur" => "تیرگی"
+// theme.boxShadowSpread: "Spread" => "گسترش"
+// theme.boxShadowDrop: "Drop" => "قطره"
+// theme.boxShadowInner: "Inner" => "درونی"
+// theme.questionShadow: "Shadow effects" => "جلوه های سایه"
+// theme.editorShadow: "Input element shadow effects" => "عناصر ورودی اثرات سایه"
+// names.default: "Default" => "پیش فرض"
+// names.contrast: "Contrast" => "کنتراست"
+// names.plain: "Plain" => "ساده"
+// names.simple: "Simple" => "ساده"
+// names.blank: "Blank" => "خالی"
+// names.double: "Double" => "دو"
+// names.bulk: "Bulk" => "فله"
+// names.pseudo-3d: "Pseudo 3D" => "شبه 3D"
+// names.playful: "Playful" => "بازیگوش"
+// names.ultra: "Ultra" => "فوق العاده"
+// colors.teal: "Teal" => "تیل"
+// colors.blue: "Blue" => "آبی"
+// colors.purple: "Purple" => "بنفش"
+// colors.orchid: "Orchid" => "ارکیده"
+// colors.tulip: "Tulip" => "لاله"
+// colors.brown: "Brown" => "قهوه ای"
+// colors.green: "Green" => "سبز"
+// names.sharp: "Sharp" => "تیز"
+// names.borderless: "Borderless" => "مرز"
+// names.flat: "Flat" => "تخت"
+// names.doubleborder: "Double Border" => "دو لبه"
+// names.layered: "Layered" => "لایه"
+// names.solid: "Solid" => "جامد"
+// names.threedimensional: "3D" => ".3D"
