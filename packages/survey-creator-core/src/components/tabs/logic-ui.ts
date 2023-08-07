@@ -485,7 +485,8 @@ export class SurveyLogicUI extends SurveyLogic {
   }
   private updateRowIsAdditionalClasses(index: number, isAdditionalClasses: boolean) {
     if (!!this.matrixItems.renderedTable) {
-      this.matrixItems.renderedTable.rows[index].isAdditionalClasses = isAdditionalClasses;
+      const visibleRows = this.matrixItems.renderedTable.rows.filter(row => row.visible);
+      visibleRows[index].isAdditionalClasses = isAdditionalClasses;
     }
   }
   private updateNewActionState(): void {

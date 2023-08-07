@@ -533,7 +533,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
 
       opt.choices.forEach((choice, index) => {
         let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
-        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, choice.value, isOperatorEnabled);
+        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, qType, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
       });

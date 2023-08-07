@@ -1,5 +1,3 @@
-// This dictionary contains 338 untranslated or inherited localization strings.
-// These strings are commented out. Uncomment and edit them if you want to add your translations.
 import { editorLocalization } from "survey-creator-core";
 
 export var czStrings = {
@@ -17,11 +15,10 @@ export var czStrings = {
     deleteQuestion: "Odstranit otázku",
     convertTo: "Převést na",
     drag: "Přetáhnout prvek",
-    license: "PRO VYUŽÍTÍ NÁVRHHÁŘE PRŮZKUMŮ VE VAŠÍ APLIKACI JE NUTNÉ ZAKOUPIT LICENCI"
   },
   // Question types
   qt: {
-    "default": "Výchozí",
+    default: "Výchozí",
     checkbox: "Zaškrtávací pole",
     comment: "Komentář",
     imagepicker: "Nástroj pro výběr obrázku",
@@ -40,7 +37,7 @@ export var czStrings = {
     radiogroup: "Přepínač",
     rating: "Hodnocení",
     text: "Jeden vstup",
-    "boolean": "Přepínač (Ano/Ne)",
+    boolean: "Přepínač (Ano/Ne)",
     expression: "Výraz (pouze pro čtení)",
     signaturepad: "Podpisová podložka",
     buttongroup: "Skupina tlačítek"
@@ -127,7 +124,7 @@ export var czStrings = {
     propertyEditorError: "Chyba:",
     saveError: "Chyba! Obsah editoru není uložen.",
     translationPropertyGridTitle: "Nastavení jazyka",
-    previewPropertyGridTitle: "Nastavení motivu",
+    themePropertyGridTitle: "Nastavení motivu",
     translationLanguages: "Jazyky",
     translationAddLanguage: "Vyberte jazyk pro překlad",
     translationShowAllStrings: "Zobrazit všechny řetězce",
@@ -138,17 +135,20 @@ export var czStrings = {
     translationImportFromSCVButton: "Import z CSV",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
+    themeExportButton: "Vývoz",
+    themeImportButton: "Dovoz",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
     addNewQuestion: "Přidat otázku",
     selectPage: "Vyberte stránku...",
+    carryForwardChoicesCopied: "Volby jsou zkopírovány z",
     htmlPlaceHolder: "Zde bude HTML obsah.",
     panelPlaceHolder: "Sem přetáhněte otázku z panelu nástrojů.",
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
     imagePlaceHolder: "Obrázek můžete vložit jeho přetažením na toto místo nebo kliknutím na tlačítko níže",
     imageChooseImage: "Vybrat obrázek",
-    addNewTypeQuestion: "Přidat {0}",
+    addNewTypeQuestion: "Přidat {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[LOGO]",
     auto: "automaticky",
     choices_Item: "Položka ",
@@ -183,23 +183,24 @@ export var czStrings = {
       trigger_skipDescription: "Pokud logický výraz vrátí hodnotu true, průzkum přejde na vybranou otázku/zaměří se na ni.",
       trigger_runExpressionDescription: "Pokud logický výraz vrátí hodnotu true, provede se vlastní výraz. Výsledek tohoto výrazu můžete volitelně nastavit do vybrané otázky.",
       completedHtmlOnConditionDescription: "Pokud logický výraz vrátí hodnotu true, změní se výchozí text stránky s poděkováním na zadaný text.",
-      itemExpressionText: "Pokud výraz „{0}“ vrátí hodnotu true:",
+      itemExpressionText: "Pokud výraz „{0}“ vrátí hodnotu true:", //{0} - the expression
       itemEmptyExpressionText: "Nové pravidlo",
-      page_visibilityText: "Zobrazit stránku {0}",
-      panel_visibilityText: "Zobrazit panel {0}",
-      panel_enableText: "Povolit panel {0}",
-      question_visibilityText: "Zobrazit otázku {0}",
-      question_enableText: "Povolit otázku {0}",
-      question_requireText: "Otázka {0} je povinná",
-      column_visibilityText: "zviditelnit sloupec {0} úlohy {1}",
-      column_enableText: "povolit sloupec {0} otázky {1}",
-      column_requireText: "povinný sloupec {0} otázky {1}",
+      page_visibilityText: "Zobrazit stránku {0}", //{0} page name
+      panel_visibilityText: "Zobrazit panel {0}", //{0} panel name
+      panel_enableText: "Povolit panel {0}", //{0} panel name
+      question_visibilityText: "Zobrazit otázku {0}", //{0} question name
+      question_enableText: "Povolit otázku {0}", //{0} question name
+      question_requireText: "Otázka {0} je povinná", //{0} question name
+      column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
+      column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
+      column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
       trigger_completeText: "Průzkum se stává dokončeným",
-      trigger_setvalueText: "Zpochybnit: {0} hodnota {1}",
-      trigger_copyvalueText: "Kopírovat do otázky: {0} hodnota z otázky {1}",
-      trigger_skipText: "Průzkum přeskočí na otázku {0}",
-      trigger_runExpressionText1: "Spustit výraz: „{0}“",
-      trigger_runExpressionText2: " a zpochybnit jeho výsledek: {0}",
+      trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "Jasná hodnota otázky: {0}", //{0} question name
+      trigger_copyvalueText: "Kopírovat do otázky: {0} hodnota z otázky {1}", //{0} and {1} question names
+      trigger_skipText: "Průzkum přeskočí na otázku {0}", //{0} question name
+      trigger_runExpressionText1: "Spustit výraz: „{0}“", //{0} the expression
+      trigger_runExpressionText2: " a zpochybnit jeho výsledek: {0}", //{0} question name
       completedHtmlOnConditionText: "Zobrazit vlastní text pro stránku s poděkováním.",
       showAllQuestions: "Všechny otázky",
       showAllActionTypes: "Všechny typy akcí",
@@ -221,6 +222,7 @@ export var czStrings = {
       actionsSetup: ""
     }
   },
+  // Property Editors
   pe: {
     apply: "Použít",
     ok: "OK",
@@ -233,7 +235,7 @@ export var czStrings = {
     change: "Změnit",
     refresh: "Obnovit",
     close: "Zavřít",
-    "delete": "Smazat",
+    delete: "Smazat",
     add: "Přidat",
     addNew: "Přidat novou",
     addItem: "Kliknutím přidáte položku...",
@@ -274,6 +276,7 @@ export var czStrings = {
     assistantTitle: "Dostupné otázky:",
     cellsEmptyRowsColumns: "Měl by existovat alespoň jeden sloupec nebo řádek.",
     showPreviewBeforeComplete: "Zobrazit náhled odpovědí před odesláním průzkumu",
+    overridingPropertyPrefix: "Nastavit podle ",
     propertyIsEmpty: "Zadejte hodnotu",
     propertyIsNoUnique: "Zadejte jedinečnou hodnotu",
     propertyNameIsNotUnique: "Zadejte jedinečný název",
@@ -354,7 +357,7 @@ export var czStrings = {
     remove: "Odebrat",
     addCondition: "Přidat podmínku",
     emptyLogicPopupMessage: "Pro zahájení konfigurace podmínek vyberte otázku.",
-    "if": "Pokud",
+    if: "Pokud",
     then: "pak",
     setToName: "Cílová otázka",
     fromName: "Otázka, ze které bude zkopírována odpověď",
@@ -497,7 +500,6 @@ export var czStrings = {
     hideColumnsIfEmpty: "Skrýt sloupce, pokud neexistují žádné řádky",
     rateValues: "Vlastní hodnoty kurzu",
     rateCount: "Počet kurzů",
-    rateDisplayMode: "Režim zobrazení kurzu",
     autoGenerate: "Jak určit hodnoty kurzu?",
     hideIfChoicesEmpty: "Skrýt otázku, pokud neobsahuje žádné volby",
     hideNumber: "Skrýt číslo otázky",
@@ -514,6 +516,7 @@ export var czStrings = {
     maxErrorText: "Zpráva pro chybu \"Hodnota překračuje maximum\"",
     otherErrorText: "Zpráva pro chybu \"Prázdný komentář\"",
     keyDuplicationError: "Zpráva pro chybu \"Klíč není unikátní\"",
+    minSelectedChoices: "Minimální vybrané volby",
     maxSelectedChoices: "Maximální počet vybraných možností",
     showClearButton: "Zobrazit tlačítko \"Vymazat\"",
     showNumber: "Zobrazit číslo panelu",
@@ -630,16 +633,17 @@ export var czStrings = {
     alternateRows: "Alternativní řádky",
     columnsVisibleIf: "Sloupce jsou viditelné, pokud",
     rowsVisibleIf: "Řádky jsou viditelné, pokud",
-    otherPlaceholder: "Zástupný text komentáře"
+    otherPlaceholder: "Zástupný text komentáře",
+    rateType: "Typ sazby"
   },
   // Property values
   pv: {
-    true: "pravda",
-    false: "nepravda",
+    "true": "pravda",
+    "false": "nepravda",
     inherit: "zdědit",
     show: "zobrazit",
     hide: "skrýt",
-    "default": "výchozí",
+    default: "výchozí",
     initial: "úvodní",
     random: "náhodný",
     collapsed: "sbalený",
@@ -748,16 +752,16 @@ export var czStrings = {
       none: "Skrytý"
     },
     addRowLocation: {
-      "default": "Závisí na rozložení matice"
+      default: "Závisí na rozložení matice"
     },
     panelsState: {
-      "default": "Uživatelé nemohou rozbalit nebo sbalit panely",
+      default: "Uživatelé nemohou rozbalit nebo sbalit panely",
       collapsed: "Všechny panely jsou sbaleny",
       expanded: "Všechny panely jsou rozbaleny"
     },
     widthMode: {
       auto: "Auto",
-      "static": "Statický",
+      static: "Statický",
       responsive: "Responzivní"
     },
     imageFit: {
@@ -778,11 +782,11 @@ export var czStrings = {
       dropdown: "Rozbalovací nabídka"
     },
     rateColorMode: {
-      "default": "Výchozí"
+      default: "Výchozí"
     },
     autoGenerate: {
-      true: "Generovat",
-      false: "Vložit ručně"
+      "true": "Generovat",
+      "false": "Vložit ručně"
     },
     rateType: {
       labels: "Popisky",
@@ -816,7 +820,7 @@ export var czStrings = {
     vue: "Použít verzi Vue",
     bootstrap: "Pro framework bootstrap",
     modern: "Moderní motiv",
-    "default": "Výchozí motiv",
+    default: "Výchozí motiv",
     orange: "Oranžový motiv",
     darkblue: "Tmavěmodrý motiv",
     darkrose: "Tmavěrůžový motiv",
@@ -854,6 +858,7 @@ export var czStrings = {
   },
   pehelp: {
     cookieName: "Cookies brání uživatelům vyplnit průzkum vícekrát.",
+    size: "Změní velikost viditelné oblasti vstupního pole. <b>Použijte nastavení Ověření → Maximální délka</b> pro omezení vstupní délky.",
     format: "Použít {0} jako zástupný text pro skutečnou hodnotu.",
     totalText: "Viditelné pouze v případě, že alespoň jeden sloupec je typu suma nebo obsahuje sumarizační výraz.",
     acceptedTypes: "Pro více informací viz [accept](https://www.w3schools.com/tags/att_input_accept.asp).",
@@ -949,7 +954,21 @@ export var czStrings = {
     runExpression: "Spustit výraz",
     showCaption: "Zobrazit popis",
     iconName: "Název ikony",
-    iconSize: "Velikost ikony"
+    iconSize: "Velikost ikony",
+    precision: "Přesnost",
+    matrixDragHandleArea: "Oblast úchytu pro přetažení matice",
+    backgroundImage: "Obrázek na pozadí",
+    backgroundImageFit: "Přizpůsobení obrázku na pozadí",
+    backgroundImageAttachment: "Příloha obrázku na pozadí",
+    backgroundOpacity: "Neprůhlednost pozadí",
+    selectToRankEnabled: "Vyberte pro hodnocení povoleno",
+    selectToRankAreasLayout: "Výběrem seřadíte rozvržení oblastí",
+    allowCameraAccess: "Povolit přístup ke kameře",
+    scaleColorMode: "Barevný režim měřítka",
+    rateColorMode: "Barevný režim s ohodnocením",
+    templateTabTitle: "Název karty šablony",
+    templateVisibleIf: "Šablona viditelná, pokud",
+    copyDisplayValue: "Kopírovat zobrazovanou hodnotu"
   },
   theme: {
     "--background": "Barva pozadí",
@@ -975,6 +994,8 @@ export var czStrings = {
     backgroundImageFitCover: "Pokrýt",
     backgroundImageFitContain: "Obsahuje",
     backgroundOpacity: "Průhlednost",
+    backgroundImageAttachmentFixed: "Stabilní",
+    backgroundImageAttachmentScroll: "Svitek",
     panelBackgroundTransparency: "Průhlednost pozadí panelu",
     questionBackgroundTransparency: "Průhlednost pozadí otázek",
     questionPanel: "Panel otázek",
@@ -1007,12 +1028,91 @@ export var czStrings = {
     pageDescription: "Font popisu stránky",
     boxShadowX: "X",
     boxShadowY: "Y",
+    boxShadowAddRule: "Přidat stínový efekt",
     opacity: "Průhlednost",
     boxShadowBlur: "Blur",
     boxShadowSpread: "Rozšíření",
+    boxShadowDrop: "Kapka",
+    boxShadowInner: "Vnitřní",
     questionShadow: "Hrany / stíny panelu",
-    editorShadow: "Hrany / stíny editoru"
+    editorShadow: "Hrany / stíny editoru",
+    names: {
+      default: "Výchozí",
+      sharp: "Ostrý",
+      borderless: "Bez okrajů",
+      flat: "Byt",
+      plain: "Planina",
+      doubleborder: "Dvojitý okraj",
+      layered: "Vrstvený",
+      solid: "Solidní",
+      threedimensional: ".3D",
+      contrast: "Kontrast"
+    },
+    colors: {
+      teal: "Modrozelený",
+      blue: "Modrý",
+      purple: "Nachový",
+      orchid: "Orchidea",
+      tulip: "Tulipán",
+      brown: "Hnědý",
+      green: "Zelený"
+    }
   }
 };
 
 editorLocalization.locales["cs"] = czStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// ed.themePropertyGridTitle: "Theme Settings" => "Nastavení motivu"
+// ed.themeExportButton: "Export" => "Vývoz"
+// ed.themeImportButton: "Import" => "Dovoz"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "Volby jsou zkopírovány z"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "Jasná hodnota otázky: {0}"
+// pe.overridingPropertyPrefix: "Set by " => "Nastavit podle "
+// pe.minSelectedChoices: "Minimum selected choices" => "Minimální vybrané volby"
+// pe.rateType: "Rate type" => "Typ sazby"
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Změní velikost viditelné oblasti vstupního pole. <b>Použijte nastavení Ověření → Maximální délka</b> pro omezení vstupní délky."
+// p.precision: "Precision" => "Přesnost"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "Oblast úchytu pro přetažení matice"
+// p.backgroundImage: "Background image" => "Obrázek na pozadí"
+// p.backgroundImageFit: "Background image fit" => "Přizpůsobení obrázku na pozadí"
+// p.backgroundImageAttachment: "Background image attachment" => "Příloha obrázku na pozadí"
+// p.backgroundOpacity: "Background opacity" => "Neprůhlednost pozadí"
+// p.selectToRankEnabled: "Select to rank enabled" => "Vyberte pro hodnocení povoleno"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "Výběrem seřadíte rozvržení oblastí"
+// p.allowCameraAccess: "Allow camera access" => "Povolit přístup ke kameře"
+// p.scaleColorMode: "Scale color mode" => "Barevný režim měřítka"
+// p.rateColorMode: "Rate color mode" => "Barevný režim s ohodnocením"
+// p.templateTabTitle: "Template tab title" => "Název karty šablony"
+// p.templateVisibleIf: "Template visible if" => "Šablona viditelná, pokud"
+// p.copyDisplayValue: "Copy display value" => "Kopírovat zobrazovanou hodnotu"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "Stabilní"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "Svitek"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "Přidat stínový efekt"
+// theme.boxShadowDrop: "Drop" => "Kapka"
+// theme.boxShadowInner: "Inner" => "Vnitřní"
+// names.default: "Default" => "Výchozí"
+// names.contrast: "Contrast" => "Kontrast"
+// names.plain: "Plain" => "Planina"
+// names.simple: "Simple" => "Jednoduchý"
+// names.blank: "Blank" => "Bianko"
+// names.double: "Double" => "Dvojitý"
+// names.bulk: "Bulk" => "Množství"
+// names.pseudo-3d: "Pseudo 3D" => "Pseudo 3D"
+// names.playful: "Playful" => "Hravý"
+// names.ultra: "Ultra" => "Ultra"
+// colors.teal: "Teal" => "Modrozelený"
+// colors.blue: "Blue" => "Modrý"
+// colors.purple: "Purple" => "Nachový"
+// colors.orchid: "Orchid" => "Orchidea"
+// colors.tulip: "Tulip" => "Tulipán"
+// colors.brown: "Brown" => "Hnědý"
+// colors.green: "Green" => "Zelený"
+// names.sharp: "Sharp" => "Ostrý"
+// names.borderless: "Borderless" => "Bez okrajů"
+// names.flat: "Flat" => "Byt"
+// names.doubleborder: "Double Border" => "Dvojitý okraj"
+// names.layered: "Layered" => "Vrstvený"
+// names.solid: "Solid" => "Solidní"
+// names.threedimensional: "3D" => ".3D"
