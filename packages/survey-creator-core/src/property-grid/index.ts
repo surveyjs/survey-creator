@@ -1328,6 +1328,9 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
   }
   public onCreated(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     question.disableNativeUndoRedo = true;
+    if(prop.name === "title") {
+      question.allowSpaceAsAnswer = true;
+    }
   }
 }
 export class PropertyGridEditorString extends PropertyGridEditorStringBase {
