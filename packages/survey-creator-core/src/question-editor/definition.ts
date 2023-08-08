@@ -212,6 +212,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "separateSpecialChoices", tab: "choices" },
       ]
     },
+    ranking: {
+      properties: [
+        { name: "selectToRankEnabled" },
+        { name: "selectToRankAreasLayout", tab: "layout" },
+        { name: "minSelectedChoices", tab: "choices" },
+        { name: "maxSelectedChoices", tab: "choices" }
+      ]
+    },
     radiogroup: {
       properties: [
         { name: "showClearButton", tab: "choices" },
