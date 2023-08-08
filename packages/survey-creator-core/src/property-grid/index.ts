@@ -973,7 +973,7 @@ export class PropertyGridModel {
   }
   private onValueChanging(options: any) {
     var q = options.question;
-    if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue)) return;
+    if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
     var changingOptions = {
       obj: this.obj,
       propertyName: q.property.name,
@@ -1031,7 +1031,7 @@ export class PropertyGridModel {
       if (!q) continue;
       this.updateDependedPropertiesEditor(q);
       const objValue = dependedsValue(name);
-      if (!Helpers.isTwoValueEquals(q.value, objValue)) {
+      if (!Helpers.isTwoValueEquals(q.value, objValue, false, false, false)) {
         q.value = objValue;
       }
       PropertyGridEditorCollection.onMasterValueChanged(
