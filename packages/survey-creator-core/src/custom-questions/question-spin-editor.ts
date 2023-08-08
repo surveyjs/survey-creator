@@ -93,7 +93,9 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
       this["updateValueOnEvent"](event);
   }
   public onBeforeInput(event: InputEvent) {
-    if(!!event.data && !/[\d.]/.test(event.data)) {
+    const target = <HTMLInputElement>event.target;
+    const regex = target.selectionStart == 0 ? /[\d.-]/ : /[\d.]/;
+    if(!!event.data && !regex.test(event.data)) {
       event.preventDefault();
     }
   }
