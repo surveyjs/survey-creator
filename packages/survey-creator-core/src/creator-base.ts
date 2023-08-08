@@ -2793,6 +2793,9 @@ export class CreatorBase extends Base
     if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
     }
+    if(obj["questions"]) {
+      obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
+    }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
