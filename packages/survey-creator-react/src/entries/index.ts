@@ -53,6 +53,8 @@ export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 
+export * from "../tabs/JsonErrorItem";
+
 //custom questions
 export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorItem";
