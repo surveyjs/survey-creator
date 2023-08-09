@@ -310,3 +310,14 @@ test("Check survey timer", async (t) => {
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });
+test.only("empty survey", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const simulator = Selector(".svd-simulator-content");
+    await t.resizeWindow(800, 600);
+
+    await setJSON({});
+
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await takeElementScreenshot("test-tab-empty-survey.png", simulator, t, comparer);
+  });
+});
