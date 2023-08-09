@@ -4,8 +4,7 @@
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
     <div [class]="adorner.css()" [key2click]
-      (click)="adorner.element.isInteractiveDesignElement ? adorner.select(adorner, $event) : null"
-      [attr.tabindex]="adorner.element.isInteractiveDesignElement ? undefined : -1">
+      (click)="adorner.element.isInteractiveDesignElement ? adorner.select(adorner, $event) : null">
       <div *ngIf="adorner.allowDragging && adorner.element.isInteractiveDesignElement" class="svc-question__drag-area"
         (pointerdown)="adorner.onPointerDown($event)">
         <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
