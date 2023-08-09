@@ -3248,4 +3248,8 @@ test("Allow to enter one space into question title #4416", () => {
   titleQuestion.value = " ";
   expect(question.title).toBe(" ");
   expect(titleQuestion.value).toBe(" ");
+  expect(question.toJSON()).toStrictEqual({ name: "q1", title: " " });
+  const propertyGrid2 = new PropertyGridModelTester(question);
+  const titleQuestion2 = <QuestionMatrixDynamicModel>(propertyGrid2.survey.getQuestionByName("title"));
+  expect(titleQuestion2.value).toBe(" ");
 });
