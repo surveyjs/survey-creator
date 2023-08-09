@@ -1,0 +1,17 @@
+<!-- ko if: $data.item.iconName -->
+<!-- ko component: { name: "sv-svg-icon", params: { iconName: $data.item.iconName, size: $data.item.iconSize, css: 'svc-json-error__icon' } }-->
+<!-- /ko -->
+<!-- /ko -->
+<div class="svc-json-error__container">
+  <div class="svc-json-error__title">
+    <!-- ko template: { name: 'survey-string', data: item.locTitle } --><!-- /ko -->
+  </div>
+  <!-- ko if: item.data.showFixButton -->
+  <button type="button"
+    data-bind="click: item.data.fixError, key2click, clickBubble: false, attr: { title: item.data.fixButtonTitle, 'aria-label': item.data.fixButtonTitle }"
+    class="svc-json-error__fix-button">
+    <!-- ko component: { name: "sv-svg-icon", params: { iconName: item.data.fixButtonIcon, size: "auto" } } -->
+    <!-- /ko -->
+  </button>
+  <!-- /ko -->
+</div>

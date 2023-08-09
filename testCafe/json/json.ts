@@ -79,3 +79,26 @@ test("Check search", async (t) => {
     .pressKey("ctrl+f") //check if there will be no errors
     .expect(getTabbedMenuItemByText("JSON Editor").visible).ok();
 });
+
+test("Check fix error", async (t) => {
+  await setJSON({
+    elements: [{
+      type: "text",
+      name: "q1",
+    },
+    {
+      type: "text",
+      name: "q2",
+    }]
+  });
+  await t
+    .click(getTabbedMenuItemByText("JSON Editor"))
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"))
+    .selectTextAreaContent(Selector(".svc-json-editor-tab__content-area"), 11, 15, 11, 16)
+    .pressKey("1")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).ok()
+    .click(".svc-json-error__fix-button")
+    .wait(1100)
+    .expect(Selector(".svc-json-editor-tab__errros_list").visible).notOk();
+});
