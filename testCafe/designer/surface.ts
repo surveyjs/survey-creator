@@ -119,6 +119,7 @@ test("Focus on new panel added", async (t) => {
     .hover(PanelItem)
     .dragToElement(PanelItem, EmptyPage, { speed: 0.5 });
 
+  await t.wait(1000);
   const panelSelector = Selector(".svc-question__content--panel");
   await t.expect(panelSelector.focused).ok();
 });
