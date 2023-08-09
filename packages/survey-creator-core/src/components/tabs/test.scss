@@ -35,6 +35,7 @@ svc-tab-test {
 
 .svc-test-tab__content-actions {
   position: relative;
+
   .sv-action-bar {
     padding: 0;
     height: calc(6 * #{$base-unit});
@@ -53,6 +54,7 @@ svc-tab-test {
     .sv-action__content {
       padding: 0;
     }
+
     .sv-action-bar-item {
       margin: 0;
     }
@@ -77,5 +79,14 @@ svc-tab-test {
 }
 
 .svc-test-tab__content .sd-body--empty {
-  @include centerText;
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calcSize(2);
+  color: $foreground;
+  text-align: center;
+  overflow: hidden;
+  position: static;
+  display: flex;
+  flex-direction: column;
 }
