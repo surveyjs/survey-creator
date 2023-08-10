@@ -25,6 +25,8 @@ export class SurveyQuestionEditorTabDefinition {
   public properties: Array<SurveyQuestionEditorPropertyDefinition> = [];
 }
 
+const otherTabName = "others";
+
 export class SurveyQuestionProperties {
   private showModeValue: string;
   private properties: Array<Survey.JsonObjectProperty>;
@@ -301,7 +303,7 @@ export class SurveyQuestionProperties {
         if (classRes.tabs) {
           for (var i = 0; i < classRes.tabs.length; i++) {
             hasNonTabProperties =
-              hasNonTabProperties || classRes.tabs[i].name == "others";
+              hasNonTabProperties || classRes.tabs[i].name === otherTabName;
             usedProperties[classRes.tabs[i].name] = true;
           }
         }
@@ -336,14 +338,14 @@ export class SurveyQuestionProperties {
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory
         ? propCategory
-        : tabs.length == 0
+        : tabs.length == 0 || (!!this.parentObj && this.showMode === "form")
           ? settings.propertyGrid.generalTabName
-          : "others";
+          : otherTabName;
       if (tabNames.indexOf(tabName) < 0 && tabName != settings.propertyGrid.generalTabName) {
         tabNames.push(tabName);
         classRes.tabs.push({
           name: tabName,
-          index: tabName == "others" ? 1000 : tabNames.length * 10,
+          index: tabName === otherTabName ? 1000 : tabNames.length * 10,
         });
       }
       if (prop.categoryIndex > -1 && tabNames.indexOf(tabName) > -1) {
