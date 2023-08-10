@@ -175,6 +175,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
   }
+  protected delete(): void {
+    this.creator.deleteElement(this.page);
+  }
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
