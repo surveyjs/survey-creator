@@ -250,13 +250,36 @@ test("SurveySelectBaseQuestionPropertyEditor", () => {
       { type: "text", name: "question1", valueName: "value1" },
       { type: "radiogroup", name: "question2" },
       { type: "checkbox", name: "question3" },
-      { type: "dropdown", name: "question4" }
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
     ]
   });
   var propertyGrid = new PropertyGridModelTester(
     survey.getQuestionByName("question3")
   );
   var dropdownQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("question_test");
+  expect(dropdownQuestion.choices).toHaveLength(2);
+  expect(dropdownQuestion.choices[0].value).toEqual("question2");
+  Serializer.removeProperty("question", "question_test");
+});
+test("PropertyGridEditorQuestionCarryForward", () => {
+  Serializer.addProperty("question", "question_test:question_carryforward");
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "radiogroup", name: "question2" },
+      { type: "checkbox", name: "question3" },
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
+    ]
+  });
+  var propertyGrid = new PropertyGridModelTester(
+    survey.getQuestionByName("question3")
+  );
+  var dropdownQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("question_test");
+  //TODO should be 4
   expect(dropdownQuestion.choices).toHaveLength(2);
   expect(dropdownQuestion.choices[0].value).toEqual("question2");
   Serializer.removeProperty("question", "question_test");

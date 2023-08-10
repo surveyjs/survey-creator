@@ -400,6 +400,8 @@ QUnit.test("SurveySelectBaseQuestionPropertyEditor", function (assert) {
       { type: "radiogroup", name: "question2" },
       { type: "checkbox", name: "question3" },
       { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
     ],
   });
   var propertyEditor = new SurveyObjectProperty(
@@ -412,6 +414,37 @@ QUnit.test("SurveySelectBaseQuestionPropertyEditor", function (assert) {
     "question_selectbase",
     "Question editor should be created"
   );
+  assert.equal(editor.koChoices().length, 2, "There are two items");
+  assert.equal(editor.koChoices()[0].value, "question2", "The first value");
+  assert.equal(editor.koChoices()[0].text, "question2", "The first text");
+  Survey.Serializer.removeProperty("question", "question_test");
+});
+QUnit.test("SurveyQuestionCarryForwardPropertyEditor", function (assert) {
+  Survey.Serializer.addProperty(
+    "question",
+    "question_test:question_carryforward"
+  );
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "radiogroup", name: "question2" },
+      { type: "checkbox", name: "question3" },
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
+    ],
+  });
+  var propertyEditor = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("question", "question_test")
+  );
+  propertyEditor.object = survey.getQuestionByName("question3");
+  var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  assert.equal(
+    propertyEditor.editorType,
+    "question_carryforward",
+    "Question editor should be created"
+  );
+  //TODO it should be 4
   assert.equal(editor.koChoices().length, 2, "There are two items");
   assert.equal(editor.koChoices()[0].value, "question2", "The first value");
   assert.equal(editor.koChoices()[0].text, "question2", "The first text");

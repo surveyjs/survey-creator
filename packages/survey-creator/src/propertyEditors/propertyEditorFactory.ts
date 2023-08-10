@@ -280,8 +280,13 @@ export class SurveyQuestionSelectBasePropertyEditor extends SurveyQuestionProper
     }
     return res;
   }
-  private isSelectBaseQuestion(question: Survey.Question): boolean {
+  protected isSelectBaseQuestion(question: Survey.Question): boolean {
     return Survey.Serializer.isDescendantOf(question.getType(), "selectbase");
+  }
+}
+export class SurveyQuestionCarryForwardPropertyEditor extends SurveyQuestionSelectBasePropertyEditor {
+  public get editorType(): string {
+    return "question_carryforward";
   }
 }
 
@@ -370,6 +375,12 @@ SurveyPropertyEditorFactory.registerEditor(
   "question_selectbase",
   function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
     return new SurveyQuestionSelectBasePropertyEditor(property);
+  }
+);
+SurveyPropertyEditorFactory.registerEditor(
+  "question_carryforward",
+  function (property: Survey.JsonObjectProperty): SurveyPropertyEditorBase {
+    return new SurveyQuestionCarryForwardPropertyEditor(property);
   }
 );
 SurveyPropertyEditorFactory.registerEditor(
