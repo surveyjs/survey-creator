@@ -3239,7 +3239,7 @@ test("Required name property for page", () => {
   let question = panel.getQuestionByName("name");
   expect(question.isRequired).toBeTruthy();
 });
-test("Allow to enter one space into question title, Issue#4416", () => {
+test("Allow to enter one space into question title #4416", () => {
   var question = new QuestionTextModel("q1");
 
   const propertyGrid = new PropertyGridModelTester(question);
