@@ -1709,17 +1709,24 @@ export class PropertyGridEditorQuestionSelectBase extends PropertyGridEditorQues
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question_selectbase";
   }
-
+  protected isQuestionFit(question: Question): boolean {
+    return Serializer.isDescendantOf(question.getType(), "selectbase");
+  }
   protected getQuestions(survey: SurveyModel, obj: Base): Array<Question> {
     let questions = super.getQuestions(survey, obj);
     let res = [];
     for (let i = 0; i < questions.length; i++) {
-      if (questions[i] === obj) continue;
-      if (Serializer.isDescendantOf(questions[i].getType(), "selectbase")) {
-        res.push(questions[i]);
+      const q = questions[i];
+      if (q !== obj && this.isQuestionFit(q)) {
+        res.push(q);
       }
     }
     return res;
+  }
+}
+export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQuestionSelectBase {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "question_carryforward";
   }
 }
 
@@ -1749,6 +1756,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorStringArray());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestion());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
+PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {

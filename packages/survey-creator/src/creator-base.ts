@@ -978,6 +978,9 @@ export class CreatorBase<T extends { [index: string]: any }> implements ISurveyC
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
+    if(obj["questions"]) {
+      obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
+    }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }

@@ -2486,7 +2486,7 @@ export class CreatorBase extends Base
   public focusElement(element: any, focus: string | boolean, selEl: any = null, propertyName: string = null, startEdit: boolean = null) {
     if (!selEl) selEl = this.getSelectedSurveyElement();
     setTimeout(() => {
-      if (focus && !!selEl) {
+      if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
         const el = document.getElementById(selEl.id);
         if (!!el) {
           el.scrollIntoView({ block: "center" });
@@ -2792,6 +2792,9 @@ export class CreatorBase extends Base
     }
     if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
+    }
+    if(obj["questions"]) {
+      obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"]();
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);

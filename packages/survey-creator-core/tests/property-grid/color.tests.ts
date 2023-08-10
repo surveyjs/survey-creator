@@ -29,6 +29,16 @@ test("Check custom color question", () => {
   question.value = "#fea123";
   expect(question.value).toBe("#fea123");
   expect(question.renderedValue).toBe("#FEA123");
+  question.value = "fea123";
+  expect(question.value).toBe("#fea123");
+  expect(question.renderedValue).toBe("#FEA123");
+  question.value = "rea123";
+  expect(question.value).toBe("#000000");
+  expect(question.renderedValue).toBe("#000000");
+  question.value = "#rea123";
+  expect(question.value).toBe("#000000");
+  expect(question.renderedValue).toBe("#000000");
+
   let renderValueChangedLog = "";
   question.onPropertyChanged.add((sender, options) => {
     if(options.name === "_renderedValue") {
