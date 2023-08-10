@@ -529,7 +529,9 @@ test("Matrix dynamic with detail", async (t) => {
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
           detailElements: [{ type: "text", name: "q1" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -549,7 +551,9 @@ test("Matrix dynamic with detail empty", async (t) => {
           rowCount: 2,
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -575,7 +579,9 @@ test("Matrix check title editing (https://github.com/surveyjs/survey-creator/iss
             "Row 1",
             "Row 2"
           ],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -597,7 +603,9 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
           detailElements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
