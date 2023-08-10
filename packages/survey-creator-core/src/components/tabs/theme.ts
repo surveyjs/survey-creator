@@ -951,14 +951,16 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.questionShadow"),
-                defaultValue: {
-                  x: 0,
-                  y: 1,
-                  blur: 2,
-                  spread: 0,
-                  isInset: false,
-                  color: "rgba(0, 0, 0, 0.15)"
-                }
+                defaultValue: [
+                  {
+                    x: 0,
+                    y: 1,
+                    blur: 2,
+                    spread: 0,
+                    isInset: false,
+                    color: "rgba(0, 0, 0, 0.15)"
+                  }
+                ]
               },
               {
                 type: "expression",
@@ -1008,14 +1010,16 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
                 title: getLocString("theme.editorShadow"),
-                defaultValue: {
-                  x: 0,
-                  y: 1,
-                  blur: 2,
-                  spread: 0,
-                  isInset: true,
-                  color: "rgba(0, 0, 0, 0.15)"
-                }
+                defaultValue: [
+                  {
+                    x: 0,
+                    y: 1,
+                    blur: 2,
+                    spread: 0,
+                    isInset: true,
+                    color: "rgba(0, 0, 0, 0.15)"
+                  }
+                ]
               }, {
                 type: "expression",
                 name: "--sjs-general-backcolor-dim-light",

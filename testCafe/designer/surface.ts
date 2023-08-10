@@ -109,3 +109,30 @@ test("Check imagepicker add/delete items style", async (t) => {
     .setFilesToUpload(getVisibleElement(".svc-image-item-value-wrapper").nth(1).find(".svc-choose-file-input"), "./image.jpg")
     .click(".svc-image-item-value-controls__add");
 });
+
+test("Focus on new panel added", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const PanelItem = Selector("[aria-label='Panel toolbox item']");
+
+  await t
+    .hover(PanelItem)
+    .dragToElement(PanelItem, EmptyPage, { speed: 0.5 });
+
+  await t.wait(1000);
+  const panelSelector = Selector(".svc-question__content--panel");
+  await t.expect(panelSelector.focused).ok();
+});
+
+test("Focus on new html question added", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+  const HTMLItem = Selector("[aria-label='HTML toolbox item']");
+
+  await t
+    .hover(HTMLItem)
+    .dragToElement(HTMLItem, EmptyPage, { speed: 0.5 });
+
+  const panelSelector = Selector(".svc-question__content--html");
+  await t.expect(panelSelector.focused).ok();
+});

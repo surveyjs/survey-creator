@@ -1,7 +1,7 @@
 <div class="svc-question__adorner"
   data-bind="css: rootCss(), attr: { 'data-sv-drop-target-survey-element': element.name || null }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
-  <div data-bind="click: $data.element.isInteractiveDesignElement ? koSelect : null, key2click, clickBubble: false, css: css(), 
-  attr: { tabindex: $data.element.isInteractiveDesignElement ? undefined : -1 }">
+  <div
+    data-bind="click: $data.element.isInteractiveDesignElement ? koSelect : null, key2click, clickBubble: false, css: css()">
     <!-- ko if: allowDragging && $data.element.isInteractiveDesignElement -->
     <div class="svc-question__drag-area" data-bind="event: {pointerdown: (model, event)=>{onPointerDown(event)}}">
       <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-question__drag-element', iconName: 'icon-drag-area-indicator_24x16', size: 24 } } -->

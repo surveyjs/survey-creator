@@ -44,10 +44,15 @@ test("Check spin editor question event callbacks", (done) => {
   question.value = 16;
 
   let beforeInputlog = "";
-  question.onBeforeInput(<any>{ data: "5", preventDefault: () => { beforeInputlog += "->5"; } });
-  question.onBeforeInput(<any>{ data: ".", preventDefault: () => { beforeInputlog += "->."; } });
-  question.onBeforeInput(<any>{ data: "t", preventDefault: () => { beforeInputlog += "->t"; } });
+  question.onBeforeInput(<any>{ data: "5", target: { selectionStart: 0 }, preventDefault: () => { beforeInputlog += "->5"; } });
+  question.onBeforeInput(<any>{ data: ".", target: { selectionStart: 0 }, preventDefault: () => { beforeInputlog += "->."; } });
+  question.onBeforeInput(<any>{ data: "t", target: { selectionStart: 0 }, preventDefault: () => { beforeInputlog += "->t"; } });
   expect(beforeInputlog).toBe("->t");
+  beforeInputlog = "";
+  question.onBeforeInput(<any>{ data: "-", target: { selectionStart: 0 }, preventDefault: () => { beforeInputlog += "->-"; } });
+  expect(beforeInputlog).toBe("");
+  question.onBeforeInput(<any>{ data: "-", target: { selectionStart: 1 }, preventDefault: () => { beforeInputlog += "->-"; } });
+  expect(beforeInputlog).toBe("->-");
 
   question.onKeyDown(<any>{ key: "ArrowDown", stopPropagation: () => {}, preventDefault: () => {} });
   expect(question.value).toBe(15);
