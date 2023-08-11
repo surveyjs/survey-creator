@@ -31,7 +31,6 @@ import { TabDesignerPlugin } from "../src/components/tabs/designer-plugin";
 import { TabTestPlugin } from "../src/components/tabs/test-plugin";
 import { TabTranslationPlugin } from "../src/components/tabs/translation-plugin";
 import { TabLogicPlugin } from "../src/components/tabs/logic-plugin";
-import { TabEmbedPlugin } from "../src/components/tabs/embed";
 import { TabJsonEditorTextareaPlugin } from "../src/components/tabs/json-editor-textarea";
 import { TabJsonEditorAcePlugin } from "../src/components/tabs/json-editor-ace";
 import { isTextInput } from "../src/creator-base";
@@ -1675,10 +1674,8 @@ test("Test plug-ins in creator", (): any => {
   const translationPlugin = <TabTranslationPlugin>(
     creator.getPlugin("translation")
   );
-  const embedPlugin = <TabEmbedPlugin>creator.getPlugin("embed");
   expect(logicPlugin.model).toBeFalsy();
   expect(translationPlugin.model).toBeFalsy();
-  expect(embedPlugin.model).toBeFalsy();
 
   creator.makeNewViewActive("logic");
   expect(testPlugin.model).toBeFalsy();
@@ -1688,9 +1685,7 @@ test("Test plug-ins in creator", (): any => {
   expect(translationPlugin.model).toBeTruthy();
   creator.makeNewViewActive("embed");
   expect(translationPlugin.model).toBeFalsy();
-  expect(embedPlugin.model).toBeTruthy();
   creator.makeNewViewActive("designer");
-  expect(embedPlugin.model).toBeFalsy();
   expect(designerPlugin.model).toBeTruthy();
 });
 test("Test plug-ins JSON-Text in creator", (): any => {
@@ -3121,8 +3116,12 @@ test("Add Questions with selection", (): any => {
 });
 test("Add Questions into detail panel", (): any => {
   const creator = new CreatorTester();
-  creator.JSON = { elements: [{ type: "matrixdynamic", name: "matrix", columns: [{ cellType: "text", name: "col1" }],
-    detailPanelMode: "underRow", detailElements: [{ type: "text", name: "question1" }] }] };
+  creator.JSON = {
+    elements: [{
+      type: "matrixdynamic", name: "matrix", columns: [{ cellType: "text", name: "col1" }],
+      detailPanelMode: "underRow", detailElements: [{ type: "text", name: "question1" }]
+    }]
+  };
   const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("matrix");
   const row = matrix.visibleRows[0];
   row.showDetailPanel();
@@ -3359,10 +3358,12 @@ test("allowEdit and onElementAllowOperations", (): any => {
 });
 test("Carry-forward banner", (): any => {
   const creator = new CreatorTester();
-  creator.JSON = { elements: [
-    { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
-    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" },
-  ] };
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3, 4, 5] },
+      { type: "dropdown", name: "q2", choicesFromQuestion: "q1" },
+    ]
+  };
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = creator.survey.getQuestionByName("q2");
   const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
@@ -3675,9 +3676,9 @@ test("creator.onModified, type='ELEMENT_REORDERED'", (): any => {
   };
   let counter = 0, totalCounter = 0, indexFrom, indexTo;
   creator.onModified.add(function (sender, options) {
-    totalCounter ++;
+    totalCounter++;
     if (options.type === "ELEMENT_REORDERED" && options.arrayName === "choices" && options.parent.name === "q1") {
-      counter ++;
+      counter++;
       indexFrom = options.indexFrom;
       indexTo = options.indexTo;
     }
@@ -3948,8 +3949,9 @@ test("Undo/redo question removed from last page", (): any => {
 });
 test("Change column properties, isCorrectProperty", (): any => {
   const creator = new CreatorTester();
-  creator.JSON = { elements: [
-    { type: "matrixdynamic", name: "q", columns: [{ cellType: "expression", name: "col1" }] }]
+  creator.JSON = {
+    elements: [
+      { type: "matrixdynamic", name: "q", columns: [{ cellType: "expression", name: "col1" }] }]
   };
   let propName;
   creator.onModified.add((sender, options) => {
