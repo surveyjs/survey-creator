@@ -146,7 +146,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         visibleIndex: 30,
         iconSize: 16,
         action: () => {
-          this.creator.deleteElement(this.surveyElement);
+          this.delete();
         }
       })
     );
@@ -161,4 +161,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
   }
   protected duplicate(): void { }
+  protected delete(): void {
+    this.creator.deleteElement(this.surveyElement);
+  }
 }
