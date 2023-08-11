@@ -406,6 +406,24 @@ test("itemvalue[] custom dropdown property add showMode as 'form'", () => {
 
   Serializer.removeProperty("itemvalue", "prop1");
 });
+test("itemvalue[] custom add showMode as 'form', create in general category by default", () => {
+  Serializer.addProperty("itemvalue", { name: "prop1", showMode: "form" });
+
+  var question = new QuestionCheckboxModel("q1");
+  question.choices = [1, 2, 3];
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(2);
+  const row = choicesQuestion.visibleRows[0];
+  row.showDetailPanel();
+  expect(row.detailPanel.elements).toHaveLength(3);
+  const thirdElement = row.detailPanel.elements[2];
+  expect(thirdElement.name).toEqual("prop1");
+
+  Serializer.removeProperty("itemvalue", "prop1");
+});
 test("itemvalue[] custom properties with dependsOn", () => {
   Serializer.addProperty("itemvalue", { name: "prop1", choices: ["item1", "item2"] });
   Serializer.addProperty("itemvalue", { name: "prop2", dependsOn: "prop1", visibleIf: (obj: any) => { return obj.prop1 == "item1"; } });
