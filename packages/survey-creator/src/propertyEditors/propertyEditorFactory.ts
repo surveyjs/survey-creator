@@ -274,19 +274,22 @@ export class SurveyQuestionSelectBasePropertyEditor extends SurveyQuestionProper
     var res = [];
     for (var i = 0; i < questions.length; i++) {
       if (questions[i] === this.object) continue;
-      if (this.isSelectBaseQuestion(questions[i])) {
+      if (this.isQuestionFit(questions[i])) {
         res.push(questions[i]);
       }
     }
     return res;
   }
-  protected isSelectBaseQuestion(question: Survey.Question): boolean {
+  protected isQuestionFit(question: Survey.Question): boolean {
     return Survey.Serializer.isDescendantOf(question.getType(), "selectbase");
   }
 }
 export class SurveyQuestionCarryForwardPropertyEditor extends SurveyQuestionSelectBasePropertyEditor {
   public get editorType(): string {
     return "question_carryforward";
+  }
+  protected isQuestionFit(question: Survey.Question): boolean {
+    return question.isValueArray || super.isQuestionFit(question);
   }
 }
 

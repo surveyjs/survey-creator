@@ -40,7 +40,6 @@ export * from "../StringEditor";
 
 export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";
-export * from "../tabs/Embed";
 export * from "../tabs/JsonEditorAce";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";

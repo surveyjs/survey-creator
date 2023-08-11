@@ -182,6 +182,8 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "choicesFromQuestion", tab: "choices" },
         { name: "choicesFromQuestionMode", tab: "choices" },
+        { name: "choiceValuesFromQuestion", tab: "choices" },
+        { name: "choiceTextsFromQuestion", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
         { name: "colCount", tab: "layout" },
         { name: "showOtherItem", tab: "choices" },

@@ -3,7 +3,6 @@ Version = `${process.env.VERSION}`;
 
 export * from "../survey-creator";
 export * from "../tabs/designer";
-export * from "../tabs/embed";
 export * from "../tabs/json-editor-ace";
 export * from "../tabs/json-editor-textarea";
 export * from "../tabs/logic";

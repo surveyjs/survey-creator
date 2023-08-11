@@ -1731,6 +1731,9 @@ export class PropertyGridEditorQuestionCarryForward extends PropertyGridEditorQu
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "question_carryforward";
   }
+  protected isQuestionFit(question: Question): boolean {
+    return question.isValueArray || super.isQuestionFit(question);
+  }
 }
 
 export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion {

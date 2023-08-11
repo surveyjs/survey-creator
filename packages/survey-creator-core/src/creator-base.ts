@@ -18,7 +18,6 @@ import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
-import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
@@ -143,12 +142,6 @@ export class CreatorBase extends Base
    * Default value: `false`
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
-  /**
-   * Specifies whether to display the Embed Survey tab.
-   *
-   * Default value: `false`
-   */
-  @property({ defaultValue: false }) showEmbeddedSurveyTab: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
@@ -1543,9 +1536,6 @@ export class CreatorBase extends Base
         new TabJsonEditorTextareaPlugin(this);
       }
     }
-    if (this.showEmbeddedSurveyTab) {
-      new TabEmbedPlugin(this);
-    }
     if (this.showTranslationTab) {
       new TabTranslationPlugin(this);
     }
@@ -2793,7 +2783,7 @@ export class CreatorBase extends Base
     if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
     }
-    if(obj["questions"]) {
+    if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
     obj["delete"]();

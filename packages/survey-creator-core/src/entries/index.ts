@@ -13,7 +13,6 @@ export { ICreatorOptions } from "../creator-options";
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
 
-export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
