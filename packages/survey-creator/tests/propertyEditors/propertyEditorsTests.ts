@@ -444,10 +444,11 @@ QUnit.test("SurveyQuestionCarryForwardPropertyEditor", function (assert) {
     "question_carryforward",
     "Question editor should be created"
   );
-  //TODO it should be 4
-  assert.equal(editor.koChoices().length, 2, "There are two items");
+  assert.equal(editor.koChoices().length, 4, "There are two items");
   assert.equal(editor.koChoices()[0].value, "question2", "The first value");
   assert.equal(editor.koChoices()[0].text, "question2", "The first text");
+  assert.equal(editor.koChoices()[3].value, "question6", "The third value");
+  assert.equal(editor.koChoices()[3].text, "question6", "The third text");
   Survey.Serializer.removeProperty("question", "question_test");
 });
 QUnit.test("SurveyQuestionValuePropertyEditor - choices", function (assert) {

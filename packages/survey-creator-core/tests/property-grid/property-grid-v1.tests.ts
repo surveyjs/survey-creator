@@ -279,9 +279,9 @@ test("PropertyGridEditorQuestionCarryForward", () => {
     survey.getQuestionByName("question3")
   );
   var dropdownQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("question_test");
-  //TODO should be 4
-  expect(dropdownQuestion.choices).toHaveLength(2);
+  expect(dropdownQuestion.choices).toHaveLength(4);
   expect(dropdownQuestion.choices[0].value).toEqual("question2");
+  expect(dropdownQuestion.choices[3].value).toEqual("question6");
   Serializer.removeProperty("question", "question_test");
 });
 test("SurveyQuestionValuePropertyEditor - choices", () => {
