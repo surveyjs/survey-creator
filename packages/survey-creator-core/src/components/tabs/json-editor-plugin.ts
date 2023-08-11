@@ -48,13 +48,12 @@ export abstract class JsonEditorBaseModel extends Base {
   public get errorList(): ListModel {
     if(!this.errorListValue) {
       this.errorListValue = new ListModel([], (action: Action) => {
-        const error: SurveyTextWorkerError = action.data;
+        const error: SurveyTextWorkerError = action.data.error;
         if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
       }, false);
       this.errorListValue.searchEnabled = false;
       this.errorListValue.cssClasses = {
         item: "svc-json-errors__item",
-        itemIcon: "svc-json-error__icon",
         itemBody: "svc-json-error",
         itemsContainer: "svc-json-errors"
       };
@@ -86,11 +85,21 @@ export abstract class JsonEditorBaseModel extends Base {
       const at = error.at;
       res.push(new Action({
         id: "error_" + counter++,
+        component: "json-error-item",
         title: title,
         tooltip: error.text,
         iconName: "icon-error",
         iconSize: 16,
-        data: error
+        data: {
+          error: error,
+          showFixButton: error.isFixable,
+          fixError: () => {
+            this.text = error.fixError(this.text);
+          },
+          fixButtonIcon: "icon-fix",
+          //todo
+          fixButtonTitle: "Fix error"
+        }
       }));
     });
     return res;
