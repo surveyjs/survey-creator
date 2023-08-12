@@ -2386,8 +2386,10 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
-    this.addNewElementReason = "ELEMENT_COPIED";
-    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    newPage.questions.forEach(q => {
+      this.addNewElementReason = "ELEMENT_COPIED";
+      this.doOnQuestionAdded(q, q.parent);
+    });
     const panels: any = newPage.getPanels();
     if (Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
     this.addNewElementReason = "";
