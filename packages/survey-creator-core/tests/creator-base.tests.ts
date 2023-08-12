@@ -3759,13 +3759,12 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   expect(reason[6]).toEqual("ADDED_FROM_TOOLBOX");
   creator.onDragDropItemStart();
   creator.survey.pages[0].addNewQuestion("text", "qqq1");
-  creator.onDragDropItemEnd();
   expect(reason).toHaveLength(8);
   expect(reason[7]).toEqual("DROPPED_FROM_TOOLBOX");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
-  let survey: SurveyModel = undefined;
+  let survey: SurveyModel;
   const getCategoryName = (): string => {
     if (!survey) return "";
     const panels = survey.getAllPanels();
