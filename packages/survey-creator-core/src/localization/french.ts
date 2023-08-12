@@ -386,7 +386,7 @@ var frenchTranslation = {
     showNavigationButtons: "Afficher les boutons de navigation (navigation par défaut)",
     showPrevButton: "Afficher le bouton précédent (l'utilisateur pourra retourner sur la page précédente)",
     firstPageIsStarted: "La première page du questionnaire est une page de démarrage.",
-    showCompletedPage: "Afficher la page de fin une fois le questionnaire terminé"
+    showCompletedPage: "Afficher la page de fin une fois le questionnaire terminé",
     goNextPageAutomatic: "Aller à la page suivante automatiquement pour toutes les questions",
     showProgressBar: "Afficher la barre de progression",
     questionTitleLocation: "Emplacement du titre de la question",
