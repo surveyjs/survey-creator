@@ -1083,9 +1083,9 @@ test("Change operators via callback", () => {
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
   let evnt_questionType: string = "";
-  options.isConditionOperatorEnabled = (questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean => {
+  options.isConditionOperatorEnabled = (questionName: string, question: Question, operator: string, isEnabled: boolean): boolean => {
     if(questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
-    evnt_questionType = questionType;
+    evnt_questionType = question.getType();
     return isEnabled;
   };
   const editor = new ConditionEditor(survey, question, options, "visibleIf");

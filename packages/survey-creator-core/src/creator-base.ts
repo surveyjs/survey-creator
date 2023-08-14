@@ -3066,11 +3066,12 @@ export class CreatorBase extends Base
     this.onConditionGetTitle.fire(this, options);
     return options.title;
   }
-  isConditionOperatorEnabled(questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean {
+  isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean {
     if (this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
-      questionType: questionType,
+      question: question,
+      questionType: !!question? question.getType(): "",
       operator: operator,
       show: isEnabled
     };
