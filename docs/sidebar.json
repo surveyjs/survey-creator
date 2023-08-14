@@ -39,6 +39,10 @@
       "Title": "Survey Customization"
     },
     {
+      "Name": "theme-editor",
+      "Title": "Theme Editor"
+    },
+    {
       "Name": "localization",
       "Title": "Localization & Globalization"
     },

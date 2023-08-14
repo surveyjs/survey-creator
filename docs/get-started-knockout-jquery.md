@@ -192,16 +192,23 @@ creator.saveSurveyFunc = (saveNo, callback) => {
 
 // If you use a web service:
 function saveSurveyJson(url, json, saveNo, callback) {
-    const request = new XMLHttpRequest();
-    request.open('POST', url);
-    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    request.addEventListener('load', () => {
-        callback(saveNo, true);
-    });
-    request.addEventListener('error', () => {
-        callback(saveNo, false);
-    });
-    request.send(JSON.stringify(json));
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify(json)
+  })
+  .then(response => {
+    if (response.ok) {
+      callback(saveNo, true);
+    } else {
+      callback(saveNo, false);
+    }
+  })
+  .catch(error => {
+    callback(saveNo, false);
+  });
 }
 ```
 
@@ -293,16 +300,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // function saveSurveyJson(url, json, saveNo, callback) {
-//     const request = new XMLHttpRequest();
-//     request.open('POST', url);
-//     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-//     request.addEventListener('load', () => {
-//         callback(saveNo, true);
-//     });
-//     request.addEventListener('error', () => {
-//         callback(saveNo, false);
-//     });
-//     request.send(JSON.stringify(json));
+//   fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=UTF-8'
+//     },
+//     body: JSON.stringify(json)
+//   })
+//   .then(response => {
+//     if (response.ok) {
+//       callback(saveNo, true);
+//     } else {
+//       callback(saveNo, false);
+//     }
+//   })
+//   .catch(error => {
+//     callback(saveNo, false);
+//   });
 // }
 ```
 </details>
