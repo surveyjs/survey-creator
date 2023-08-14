@@ -329,8 +329,7 @@ SurveyJS themes are JSON objects with CSS variables and other theme settings. On
 
 If you already have a theme JSON file and want to continue theme customization, click the Import button and select the file to load into Survey Creator.
 
-<!-- TODO: Add an image -->
-<!-- <img src="images/theme-import.png" alt="SurveyJS Theme Import"> -->
+<img src="images/theme-import.png" alt="SurveyJS Theme Import">
 
 Other capabilities depend on features implemented by your development team. For instance, the following help topic describes how developers can save themes on a server and load them from it: [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes).
 
