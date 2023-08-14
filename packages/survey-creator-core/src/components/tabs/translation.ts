@@ -807,9 +807,11 @@ export class Translation extends Base implements ITranslationLocales {
     group: TranslationGroup,
     parent: TranslationGroup
   ): string {
-    if (parent == null || group.obj.name == group.name)
-      return group.name + "_props";
-    return parent.name + "_" + group.name;
+    let name = group.name + (group.obj.name == group.name || group.isRoot ? "_props" : "");
+    if(!!parent && parent !== this.root) {
+      name = parent.name + "_" + name;
+    }
+    return name;
   }
   private getStringsSurveyData(survey: SurveyModel): any {
     var res = {};
