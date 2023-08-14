@@ -1915,14 +1915,12 @@ export class CreatorBase extends Base
   public onDragDropItemStart(): void {
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
-  public onDragDropItemEnd(): void {
-    this.addNewElementReason = undefined;
-  }
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
     var options = { question: question, page: page, reason: this.addNewElementReason };
+    this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
   }
   @ignoreUndoRedo()
@@ -1930,6 +1928,7 @@ export class CreatorBase extends Base
     var page = this.getPageByElement(panel);
     var options = { panel: panel, page: page, reason: this.addNewElementReason };
     this.onPanelAdded.fire(this, options);
+    this.addNewElementReason = undefined;
   }
   @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
@@ -2387,8 +2386,10 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
-    this.addNewElementReason = "ELEMENT_COPIED";
-    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    newPage.questions.forEach(q => {
+      this.addNewElementReason = "ELEMENT_COPIED";
+      this.doOnQuestionAdded(q, q.parent);
+    });
     const panels: any = newPage.getPanels();
     if (Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
     this.addNewElementReason = "";
