@@ -185,13 +185,6 @@ export class CreatorBase extends Base
   set showSurveyTitle(val: boolean) {
     this.allowEditSurveyTitle = val;
   }
-  /**
-   * Removes the Free Trial bar.
-   *
-   * Default value: `false`
-   *
-   * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
-   */
   public get haveCommercialLicense(): boolean {
     if (!!hasLicense && hasLicense(1)) return true;
     return this.getPropertyValue("haveCommercialLicense", false);
