@@ -199,9 +199,11 @@ export var translationCss = {
     mainRoot: "st-question st-row__question st-scrollable",
     tableWrapper: "st-matrix",
     root: "st-table",
+    noHeader: "st-table--no-header",
     rowError: "st-matrix__row--error",
     cell: "st-table__cell st-matrix__cell",
     headerCell: "st-table__cell st-table__cell--header",
+    rowTextCell: "st-table__cell st-table__cell--row-text",
     label: "st-item st-radio st-matrix__label",
     itemValue: "st-visuallyhidden st-item__control st-radio__control",
     itemChecked: "st-radio--checked",
@@ -216,14 +218,18 @@ export var translationCss = {
   matrixdropdown: {
     mainRoot: "st-question st-row__question st-scrollable",
     root: "st-table",
+    noHeader: "st-table--no-header",
     cell: "st-table__cell",
-    headerCell: "st-table__cell st-table__cell--header"
+    headerCell: "st-table__cell st-table__cell--header",
+    rowTextCell: "st-table__cell st-table__cell--row-text"
   },
   matrixdynamic: {
     mainRoot: "st-question st-row__question st-scrollable",
     root: "st-table st-matrixdynamic",
+    noHeader: "st-table--no-header",
     cell: "st-table__cell",
     headerCell: "st-table__cell st-table__cell--header",
+    rowTextCell: "st-table__cell st-table__cell--row-text",
     button: "st-btn",
     detailRow: "st-table__row st-table__row--detail",
     detailButton: "st-table__cell--detail-button",

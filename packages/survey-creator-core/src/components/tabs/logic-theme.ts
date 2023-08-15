@@ -237,6 +237,7 @@ export var logicCss = {
     tableWrapper: "",
     mainRoot: "sl-question st-row__question st-scrollable",
     root: "sl-table st-matrixdynamic",
+    noHeader: "",
     row: "sl-table__row",
     rowAdditional: "sl-table__row--additional",
     cell: "sl-table__cell",
