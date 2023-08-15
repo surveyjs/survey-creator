@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.103](https://github.com/surveyjs/survey-creator/compare/v1.9.102...v1.9.103) (2023-08-15)
+
+
+### Bug Fixes
+
+* **localization:** update french.ts ([#4447](https://github.com/surveyjs/survey-creator/issues/4447)) ([f82a65e](https://github.com/surveyjs/survey-creator/commit/f82a65ece8d0e04be97293a92d6a1c98b82ec524))
+
 ### [1.9.102](https://github.com/surveyjs/survey-creator/compare/v1.9.101...v1.9.102) (2023-08-08)
 
 ### [1.9.101](https://github.com/surveyjs/survey-creator/compare/v1.9.100...v1.9.101) (2023-08-02)
