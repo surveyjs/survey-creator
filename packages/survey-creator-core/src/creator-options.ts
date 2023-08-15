@@ -43,13 +43,6 @@ export interface ICreatorOptions {
    * Default value: `false`
    */
   showTranslationTab?: boolean;
-  /**
-   * Removes the Free Trial bar.
-   *
-   * Default value: `false`
-   *
-   * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
-   */
   haveCommercialLicense?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.

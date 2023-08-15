@@ -355,6 +355,10 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@checkbox": {
       properties: [
+        { name: "choicesFromQuestion", tab: "choices" },
+        { name: "choicesFromQuestionMode", tab: "choices" },
+        { name: "choiceValuesFromQuestion", tab: "choices" },
+        { name: "choiceTextsFromQuestion", tab: "choices" },
         { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
@@ -375,6 +379,10 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@radiogroup": {
       properties: [
+        { name: "choicesFromQuestion", tab: "choices" },
+        { name: "choicesFromQuestionMode", tab: "choices" },
+        { name: "choiceValuesFromQuestion", tab: "choices" },
+        { name: "choiceTextsFromQuestion", tab: "choices" },
         { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
@@ -391,6 +399,10 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@dropdown": {
       properties: [
+        { name: "choicesFromQuestion", tab: "choices" },
+        { name: "choicesFromQuestionMode", tab: "choices" },
+        { name: "choiceValuesFromQuestion", tab: "choices" },
+        { name: "choiceTextsFromQuestion", tab: "choices" },
         { name: "showOtherItem", tab: "choices" },
         { name: "otherText", tab: "choices" },
         { name: "choicesOrder", tab: "choices" },
