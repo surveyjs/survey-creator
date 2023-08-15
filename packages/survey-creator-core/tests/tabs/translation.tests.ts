@@ -170,7 +170,7 @@ test("stringsSurvey - one question in survey", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(2);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props0");
+  expect(question1Props.name).toEqual("page1_question1_props0");
   expect(question1Props.titleLocation).toEqual("hidden");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
@@ -646,7 +646,7 @@ test("stringsSurvey - text question dataList property, default", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(2);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props0");
+  expect(question1Props.name).toEqual("page1_question1_props0");
   expect(question1Props.columns).toHaveLength(1);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.rows).toHaveLength(1);
@@ -892,7 +892,7 @@ test("empty title placeholders", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props0");
+  expect(question1Props.name).toEqual("page1_question1_props0");
   expect(question1Props.columns).toHaveLength(2);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[1].name).toEqual("da");
@@ -951,7 +951,7 @@ test("init placeholders", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props0");
+  expect(question1Props.name).toEqual("page1_question1_props0");
   expect(question1Props.columns).toHaveLength(2);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[1].name).toEqual("da");
@@ -1105,7 +1105,7 @@ test("init placeholders for dialects", () => {
   const question1 = <PanelModel>pagePanel.elements[0];
   expect(question1.elements).toHaveLength(1);
   const question1Props = <QuestionMatrixDropdownModel>question1.elements[0];
-  expect(question1Props.name).toEqual("question1_props0");
+  expect(question1Props.name).toEqual("page1_question1_props0");
   expect(question1Props.columns).toHaveLength(4);
   expect(question1Props.columns[0].name).toEqual("default");
   expect(question1Props.columns[3].name).toEqual("pt-br");
@@ -1605,4 +1605,48 @@ test("choices with 0 value", () => {
   expect(choicesProps.visibleRows).toHaveLength(1);
   const cellQuestion1 = <QuestionCommentModel>choicesProps.visibleRows[0].cells[0].question;
   expect(cellQuestion1.value).toEqual("Item 1");
+});
+test("Translation doesnt' work with matrix dynamic and matrix dropdown qestion types. Bug #4450", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "matrixdynamic",
+        "name": "question1",
+        "columns": [
+          {
+            "name": "col1",
+            "title": "Column 1"
+          }
+        ]
+      },
+      {
+        "type": "matrixdropdown",
+        "name": "question2",
+        "columns": [
+          {
+            "name": "col1"
+          }
+        ],
+        "rows": [
+          "Row 1",
+          "Row 2"
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(2);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(2);
+  const choicesPanel = <PanelModel>question1.elements[1];
+  const columnsProps = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
+  expect(columnsProps.name).toEqual("question1_col1_props0");
+  expect(columnsProps.visibleRows).toHaveLength(1);
+  const cellQuestion1 = <QuestionCommentModel>columnsProps.visibleRows[0].cells[0].question;
+  expect(cellQuestion1.value).toEqual("Column 1");
 });
