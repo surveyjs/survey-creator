@@ -97,8 +97,14 @@ export class QuestionConverter {
     if(Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
        Serializer.isDescendantOf(convertFromClass, "matrix") &&
        json.columns) {
-      json.columns = json.columns.map(col => <any>{ name: col.value || col, title: col.text });
+      json.columns = json.columns.map(col => <any>{
+        name: QuestionConverter.getColumnName(col.value || col), title: col.text
+      });
     }
+  }
+  private static getColumnName(val: any): string {
+    if(Helpers.isNumber(val)) return "col" + val;
+    return val;
   }
   private static updateJSONForRating(json: any, convertToClass: string, defaultJSON: any): void {
     if(convertToClass === "rating" && json.choices) {

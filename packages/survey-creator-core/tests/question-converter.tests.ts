@@ -416,3 +416,19 @@ test("Remove incorrect validators, Bug#4228", () => {
   const q2_2 = QuestionConverter.convertObject(q2_1, "dropdown");
   expect(q2_2.validators).toHaveLength(0);
 });
+test("Convert matrix into matrixdropdown, Bug#4455", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "matrix", name: "q1",
+        columns: [{ value: 1, text: "Column 1" }],
+        rows: [{ value: 1, text: "Row 1" }]
+      }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+
+  const q1_1 = <QuestionMatrixDropdownModel>QuestionConverter.convertObject(q1, "matrixdropdown");
+  expect(q1_1.columns).toHaveLength(1);
+  expect(q1_1.columns[0].name).toBe("col1");
+  expect(q1_1.columns[0].title).toBe("Column 1");
+});
