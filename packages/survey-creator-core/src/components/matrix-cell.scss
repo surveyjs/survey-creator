@@ -12,8 +12,12 @@
   position: relative;
 }
 
-.sd-table .sd-table__cell--column-title .svc-matrix-cell {
-  padding: calcSize(1.5);
+.svc-question__adorner {
+  .sd-table .sd-table__cell--column-title {
+    .svc-matrix-cell {
+      padding: calcSize(1.5);
+    }
+  }
 }
 
 .svc-matrix-cell--selected {
