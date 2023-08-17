@@ -12,7 +12,7 @@
   position: relative;
 }
 
-.sd-table thead tr th .svc-matrix-cell {
+.sd-table .sd-table__cell--column-title .svc-matrix-cell {
   padding: calcSize(1.5);
 }
 

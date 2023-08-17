@@ -123,6 +123,91 @@ test("Matrix column editor", async (t) => {
   });
 });
 
+test("Matrix column", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "widthMode": "static",
+      "width": "700px",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "m",
+              "columns": [
+                {
+                  "name": "Column 1",
+                  "cellType": "text"
+                }
+              ],
+              "rows": [
+                "Row 1"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const columnCell = Selector(".sd-table__cell--column-title").find(".svc-matrix-cell").filterVisible();
+    const matrix = Selector(".sd-matrixdropdown");
+    await t.hover(columnCell, { speed: 0.5, offsetX: 1, offsetY: 1 });
+    await t.wait(100);
+    await takeElementScreenshot("matrix-column-cell-hover.png", matrix, t, comparer);
+    await t.click(columnCell, { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-column-cell-selected.png", matrix, t, comparer);
+    await t.click(columnCell.find(".svc-string-editor__input"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-column-cell-edit.png", matrix, t, comparer);
+    await t.click(Selector(".svc-string-editor__input").withText("Row 1"));
+    await takeElementScreenshot("matrix-row-cell-edit.png", matrix, t, comparer);
+  });
+});
+
+test("Matrix column vertical", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "widthMode": "static",
+      "width": "700px",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "m",
+              "columnLayout": "vertical",
+              "columns": [
+                {
+                  "name": "Column 1",
+                  "cellType": "text"
+                }
+              ],
+              "rows": [
+                "Row 1"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const columnCell = Selector(".sd-table__cell--column-title").find(".svc-matrix-cell").filterVisible();
+    const matrix = Selector(".sd-matrixdropdown");
+    await t.hover(columnCell, { speed: 0.5, offsetX: 1, offsetY: 1 });
+    await t.wait(100);
+    await takeElementScreenshot("matrix-vertical-column-cell-hover.png", matrix, t, comparer);
+    await t.click(columnCell, { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-vertical-column-cell-selected.png", matrix, t, comparer);
+    await t.click(columnCell.find(".svc-string-editor__input"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-vertical-column-cell-edit.png", matrix, t, comparer);
+    await t.click(Selector(".svc-string-editor__input").withText("Row 1"));
+    await takeElementScreenshot("matrix-vertical-row-cell-edit.png", matrix, t, comparer);
+  });
+});
+
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);

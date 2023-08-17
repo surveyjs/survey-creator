@@ -172,7 +172,7 @@
     width: calcSize(2);
   }
 }
-.sd-table__cell--header {
+.sd-table__cell--column-title {
   .svc-matrix-cell:not(:focus):focus-within {
     .svc-matrix-cell--selected {
       border: calcSize(0.25) solid $primary;
