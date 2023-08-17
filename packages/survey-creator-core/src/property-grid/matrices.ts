@@ -168,6 +168,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     matrix: QuestionMatrixDynamicModel,
     prop: JsonObjectProperty
   ): Base {
+    matrix.visibleRows.forEach(row => row.hideDetailPanel());
     var json: any = {};
     var baseValue = this.getBaseValue(prop);
     var keyPropName = this.getKeyValue();
