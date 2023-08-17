@@ -184,6 +184,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
     this.updateActionVisibilityByProp("isrequired", "isRequired", operationsAllow && options.allowChangeRequired);
     this.updateActionVisibilityByProp("convertInputType", "inputType", options.allowChangeInputType);
+    this.updateActionVisibilityByProp("convertInputType", "rateDisplayMode", options.allowChangeInputType);
   }
   private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
     const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
