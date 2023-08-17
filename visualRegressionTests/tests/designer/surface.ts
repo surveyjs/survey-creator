@@ -140,10 +140,15 @@ test("Matrix column", async (t) => {
                 {
                   "name": "Column 1",
                   "cellType": "text"
+                },
+                {
+                  "name": "Column 2",
+                  "cellType": "text"
                 }
               ],
               "rows": [
-                "Row 1"
+                "Row 1",
+                "Row 2"
               ]
             }
           ]
@@ -183,10 +188,15 @@ test("Matrix column vertical", async (t) => {
                 {
                   "name": "Column 1",
                   "cellType": "text"
+                },
+                {
+                  "name": "Column 2",
+                  "cellType": "text"
                 }
               ],
               "rows": [
-                "Row 1"
+                "Row 1",
+                "Row 2"
               ]
             }
           ]
