@@ -161,7 +161,7 @@ test("Theme builder: survey settings", (): any => {
   expect(backgroundOpacity.value).toEqual(100);
   expect(themeMode.value).toEqual("panels");
 
-  expect(simulatorSurvey.backgroundImage).toEqual("");
+  expect(simulatorSurvey.backgroundImage).toBeFalsy();
   expect(simulatorSurvey.backgroundImageFit).toEqual("cover");
   expect(simulatorSurvey.backgroundOpacity).toEqual(1);
   expect(simulatorSurvey["isCompact"]).toBe(false);
