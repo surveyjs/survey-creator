@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, Action } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, Action, Question, ActionContainer } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -12,14 +12,23 @@ export class PropertyGridViewModel extends Base {
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
   private selectorPopupModel: PopupModel;
+  private currentSearchResultIndex: number;
+  private currentSearchResult: Question;
+  private searchResults: Array<Question> = [];
+  public searchActionBar: ActionContainer = new ActionContainer();
+  public filterStringPlaceholder = getLocString("pe.propertyGridFilteredTextPlaceholder");
 
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
   @property() survey: SurveyModel;
   @property() selectedElementName: string;
+  @property() searchEnabled: boolean;
+  @property() filterString: string;
+  @property() searchResultsText: string;
 
   constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
     super();
+    this.searchEnabled = settings.propertyGrid.enableSearch;
     this.selectedElementName = this.getTitle();
     this.propertyGridModel.objValueChangedCallback = () => {
       this.onSurveyChanged();
@@ -48,6 +57,29 @@ export class PropertyGridViewModel extends Base {
     if (!!this.prevSelectionAction && name === "hasPrev") {
       this.prevSelectionAction.enabled = this.hasPrev;
     }
+    if(name === "filterString") {
+      const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
+      this.searchResults = visibleQuestions.filter(q => q.title.indexOf(newValue) !== -1);
+
+      const newCurrentIndex = this.searchResults.indexOf(this.currentSearchResult);
+      this.focusEditor(newCurrentIndex !== -1 ? 0 : newCurrentIndex);
+    }
+  }
+
+  private focusEditor(index: number) {
+    if(index < 0) {
+      index = this.searchResults.length - 1;
+    }
+    if(index >= this.searchResults.length) {
+      index = 0;
+    }
+    this.currentSearchResultIndex = index;
+    this.currentSearchResult = this.searchResults[index];
+    this.currentSearchResult.focus();
+
+    const count = this.searchResults.length;
+    const value = this.currentSearchResult ? index : "0";
+    this.searchResultsText = [value, count].join("/");
   }
 
   private get selectionController(): SelectionHistory {
@@ -109,6 +141,47 @@ export class PropertyGridViewModel extends Base {
         }
       });
     }
+
+    const searchActions = [];
+    if(!settings.propertyGrid.enableSearch) {
+      searchActions.push(new Action({
+        id: "svd-grid-search-close",
+        iconName: "icon-close",
+        component: "sv-action-bar-item",
+        title: getLocString("ed.close"),
+        showTitle: false,
+        action: () => {
+          this.searchEnabled = false;
+        }
+      }));
+    }
+
+    searchActions.push(new Action({
+      id: "svd-grid-search-prev",
+      iconName: "icon-arrow-left",
+      component: "sv-action-bar-item",
+      title: getLocString("ed.prevFocus"),
+      showTitle: false,
+      action: () => {
+        if(this.searchResults.length > 0) {
+          this.focusEditor(this.currentSearchResultIndex - 1);
+        }
+      }
+    }));
+
+    searchActions.push(new Action({
+      id: "svd-grid-search-next",
+      iconName: "icon-arrow-right",
+      component: "sv-action-bar-item",
+      title: getLocString("ed.nextFocus"),
+      showTitle: false,
+      action: () => {
+        if(this.searchResults.length > 0) {
+          this.focusEditor(this.currentSearchResultIndex + 1);
+        }
+      }
+    }));
+    this.searchActionBar.setItems(searchActions);
 
     const selectorModel = new ObjectSelectorModel(
       this.creator,

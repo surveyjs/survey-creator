@@ -1,4 +1,18 @@
 <!-- ko  -->
-    <!-- ko template: { name: 'survey-content', data: model.survey  } -->
+<div>
+    <!-- ko if: $data.model.searchEnabled -->
+    <div class="filter">
+        <div class="filterIcon">
+            <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-search', size: 'auto' }  } -->
+            <!-- /ko -->
+        </div>
+        <input type="text" class="filterInput"
+            data-bind="textInput: model.filterString, attr: { placeholder: model.filterStringPlaceholder, 'aria-label': model.filterStringPlaceholder }"></input>
+    </div>
+    <!-- ko component: { name: 'sv-action-bar', params: { model: model.searchActionBar } } -->
     <!-- /ko -->
+    <!-- /ko -->
+</div>
+<!-- ko template: { name: 'survey-content', data: model.survey  } -->
+<!-- /ko -->
 <!-- /ko -->

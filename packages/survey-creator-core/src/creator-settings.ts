@@ -83,6 +83,7 @@ export var settings = {
     useButtonGroup: true,
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
+    enableSearch: true,
     maximumColumnsCount: 0,
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
