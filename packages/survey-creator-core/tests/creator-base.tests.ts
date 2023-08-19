@@ -2419,7 +2419,24 @@ test("convertInputType, change inputType for a text question", (): any => {
   expect(action.title).toBe("Password");
   expect(list.selectedItem.id).toEqual("password");
 });
-
+test("convertInputType, hide it for readOnly creator", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  let questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  expect(questionModel.getActionById("convertInputType").visible).toBeTruthy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
+  expect(questionModel.getActionById("convertInputType").visible).toBeTruthy();
+  creator.readOnly = true;
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
+  questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
+  expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
