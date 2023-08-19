@@ -35,6 +35,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "state", tab: "layout" },
         { name: "titleLocation", tab: "layout" },
         { name: "descriptionLocation", tab: "layout" },
+        { name: "errorLocation", tab: "layout" },
         { name: "indent", tab: "layout" },
         { name: "width", tab: "layout" },
         { name: "minWidth", tab: "layout" },
@@ -98,6 +99,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "horizontalScroll", tab: "layout" },
         { name: "columnColCount", tab: "layout" },
         { name: "columnMinWidth", tab: "layout" },
+        { name: "cellsErrorLocation", tab: "layout" },
+        { name: "detailErrorLocation", tab: "layout" }
       ],
       tabs: [
         { name: "columns", index: 10 },
@@ -162,6 +165,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         { name: "colCount", tab: "layout" },
         { name: "itemSize", tab: "layout" },
+        { name: "itemErrorLocation", tab: "layout" }
       ],
       tabs: [{ name: "items", index: 10 }],
     },
@@ -471,6 +475,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "defaultPanelValue", tab: "data" },
         { name: "defaultValueFromLastPanel", tab: "data" },
         { name: "templateTitleLocation", tab: "layout" },
+        { name: "templateErrorLocation", tab: "layout" },
         { name: "panelRemoveButtonLocation", tab: "layout" },
         { name: "keyName", tab: "validation" },
         { name: "keyDuplicationError", tab: "validation" },
@@ -487,6 +492,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
         { name: "questionTitleLocation", tab: "layout" },
+        { name: "questionErrorLocation", tab: "layout" }
       ],
       tabs: [
         { name: "logic", index: 100 },
