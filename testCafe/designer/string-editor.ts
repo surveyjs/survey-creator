@@ -925,3 +925,25 @@ test("Check string editor with html", async (t) => {
 
   await t.expect(htmlMarkupSelector.getStyleProperty("color")).eql("rgb(255, 0, 255)");
 });
+
+test("Check string editor focus does not throw error: #4459", async (t) => {
+  await explicitErrorHandler();
+  await setJSON({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "promoter_features",
+        "choices": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+        ],
+        "colCount": 1
+      }]
+  });
+  await t
+    .click(Selector(".svc-question__content"))
+    .click(Selector(".sv-string-editor").withExactText("Item 4"))
+    .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
+    .expect(Selector(".sv-string-editor").withExactText("Item 5").exists).ok();
+});
