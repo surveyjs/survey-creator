@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, Action, Question, ActionContainer } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, Action, Question, ActionContainer, ComputedUpdater } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -8,15 +8,15 @@ import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 
 export class PropertyGridViewModel extends Base {
+  private searchResultClass = " spg-editor-highlight";
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
   private selectorPopupModel: PopupModel;
   private currentSearchResultIndex: number;
   private currentSearchResult: Question;
-  private searchResults: Array<Question> = [];
   public searchActionBar: ActionContainer = new ActionContainer();
-  public filterStringPlaceholder = getLocString("pe.propertyGridFilteredTextPlaceholder");
+  public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
 
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
@@ -25,6 +25,7 @@ export class PropertyGridViewModel extends Base {
   @property() searchEnabled: boolean;
   @property() filterString: string;
   @property() searchResultsText: string;
+  @property() searchResults: Array<Question> = [];
 
   constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
     super();
@@ -59,27 +60,33 @@ export class PropertyGridViewModel extends Base {
     }
     if(name === "filterString") {
       const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
-      this.searchResults = visibleQuestions.filter(q => q.title.indexOf(newValue) !== -1);
+      this.searchResults = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValue.toLocaleLowerCase()) !== -1);
 
       const newCurrentIndex = this.searchResults.indexOf(this.currentSearchResult);
-      this.focusEditor(newCurrentIndex !== -1 ? 0 : newCurrentIndex);
+      this.updateFoundEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);
     }
   }
 
-  private focusEditor(index: number) {
-    if(index < 0) {
-      index = this.searchResults.length - 1;
-    }
-    if(index >= this.searchResults.length) {
-      index = 0;
-    }
+  private updateFoundEditor(index: number) {
     this.currentSearchResultIndex = index;
+    const prevResult = this.currentSearchResult;
     this.currentSearchResult = this.searchResults[index];
-    this.currentSearchResult.focus();
+    prevResult?.updateElementCss();
+    this.currentSearchResult?.updateElementCss();
+    this.currentSearchResult?.focus();
 
     const count = this.searchResults.length;
-    const value = this.currentSearchResult ? index : "0";
-    this.searchResultsText = [value, count].join("/");
+    const value = this.currentSearchResult ? index + 1 : "0";
+    this.searchResultsText = !!this.filterString ? [value, count].join("/") : "";
+  }
+  private goToEditor(index: number) {
+    if (index < 0) {
+      index = this.searchResults.length - 1;
+    }
+    if (index >= this.searchResults.length) {
+      index = 0;
+    }
+    this.updateFoundEditor(index);
   }
 
   private get selectionController(): SelectionHistory {
@@ -89,9 +96,16 @@ export class PropertyGridViewModel extends Base {
   private onSurveyChanged() {
     this.survey = this.propertyGridModel.survey;
     if (!!this.survey) {
+      const _self = this;
       this.survey.onValueChanged.add((sender: SurveyModel, options: any) => {
         if (options.name == "name" || options.name == "title") {
           this.updateTitle();
+        }
+      });
+      this.survey.onUpdateQuestionCssClasses.add(function (_, options) {
+        const classes = options.cssClasses;
+        if (options.question === _self.currentSearchResult) {
+          classes.mainRoot += _self.searchResultClass;
         }
       });
     }
@@ -143,44 +157,56 @@ export class PropertyGridViewModel extends Base {
     }
 
     const searchActions = [];
-    if(!settings.propertyGrid.enableSearch) {
-      searchActions.push(new Action({
-        id: "svd-grid-search-close",
-        iconName: "icon-close",
-        component: "sv-action-bar-item",
-        title: getLocString("ed.close"),
-        showTitle: false,
-        action: () => {
-          this.searchEnabled = false;
-        }
-      }));
-    }
 
     searchActions.push(new Action({
       id: "svd-grid-search-prev",
-      iconName: "icon-arrow-left",
+      iconName: "icon-previous_16x16",
       component: "sv-action-bar-item",
       title: getLocString("ed.prevFocus"),
       showTitle: false,
+      iconSize: 16,
+      innerCss: "spg-search-editor_bar-item",
+      visible: <any>new ComputedUpdater(() => !!this.filterString),
+      enabled: <any>new ComputedUpdater(() => this.searchResults.length > 0),
       action: () => {
         if(this.searchResults.length > 0) {
-          this.focusEditor(this.currentSearchResultIndex - 1);
+          this.goToEditor(this.currentSearchResultIndex - 1);
         }
       }
     }));
 
     searchActions.push(new Action({
       id: "svd-grid-search-next",
-      iconName: "icon-arrow-right",
+      iconName: "icon-next_16x16",
       component: "sv-action-bar-item",
       title: getLocString("ed.nextFocus"),
       showTitle: false,
+      iconSize: 16,
+      innerCss: "spg-search-editor_bar-item",
+      visible: <any>new ComputedUpdater(() => !!this.filterString),
+      enabled: <any>new ComputedUpdater(() => this.searchResults.length > 0),
       action: () => {
         if(this.searchResults.length > 0) {
-          this.focusEditor(this.currentSearchResultIndex + 1);
+          this.goToEditor(this.currentSearchResultIndex + 1);
         }
       }
     }));
+
+    searchActions.push(new Action({
+      id: "svd-grid-search-close",
+      iconName: "icon-clear_16x16",
+      component: "sv-action-bar-item",
+      title: getLocString("ed.close"),
+      showTitle: false,
+      iconSize: 16,
+      innerCss: "spg-search-editor_bar-item",
+      visible: <any>new ComputedUpdater(() => !!this.filterString),
+      action: () => {
+        // this.searchEnabled = false;
+        this.filterString = "";
+      }
+    }));
+
     this.searchActionBar.setItems(searchActions);
 
     const selectorModel = new ObjectSelectorModel(
