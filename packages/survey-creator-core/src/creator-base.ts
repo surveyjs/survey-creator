@@ -2187,6 +2187,11 @@ export class CreatorBase extends Base
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
+      if(!panel) {
+        while(selectedElement.parent !== null && selectedElement.parent.isPanel) {
+          selectedElement = <IElement><any>selectedElement.parent;
+        }
+      }
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
