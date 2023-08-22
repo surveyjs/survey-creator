@@ -318,6 +318,21 @@ test("fontsettings: fontsettingsFromCssVariable", () => {
   });
 });
 
+test("fontsettings: fontsettingsFromCssVariable - default colors", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "fontsettings", name: "questiontitle" }],
+  });
+  const question = survey.findQuestionByName("questiontitle");
+  expect(question.value).toEqual({});
+
+  fontsettingsFromCssVariable(question, {}, "rgba(0, 0, 0, 0.91)", "rgba(0, 0, 0, 0.45)");
+
+  expect(question.value).toEqual({
+    "color": "rgba(0, 0, 0, 0.91)",
+    "placeholdercolor": "rgba(0, 0, 0, 0.45)",
+  });
+});
+
 test("Theme builder: composite question elementSettings", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };

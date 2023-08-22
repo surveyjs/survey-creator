@@ -1018,6 +1018,7 @@ export var enStrings = {
     fontFamily: "Font family",
     fontSize: "Font size",
     color: "Color",
+    placeholderColor: "Placeholder color",
     size: "Size",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Heavy",
