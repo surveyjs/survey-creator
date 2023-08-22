@@ -99,7 +99,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "horizontalScroll", tab: "layout" },
         { name: "columnColCount", tab: "layout" },
         { name: "columnMinWidth", tab: "layout" },
-        { name: "cellsErrorLocation", tab: "layout" },
+        { name: "cellErrorLocation", tab: "layout" },
         { name: "detailErrorLocation", tab: "layout" }
       ],
       tabs: [
