@@ -1358,7 +1358,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return ["logo", "imageLink"].indexOf(prop.name) > -1;
+    return ["logo", "imageLink", "backgroundImage"].indexOf(prop.name) > -1;
   }
   public getJSON(
     obj: Base,
