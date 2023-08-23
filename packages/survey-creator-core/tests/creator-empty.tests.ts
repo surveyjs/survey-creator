@@ -147,3 +147,17 @@ test("Change clearInvisibleValues  default value, bug#4229", (): any => {
   const survey2 = creator.createSurvey({ clearInvisibleValues: "onHidden" }, "dummy");
   expect(survey2.clearInvisibleValues).toBe("onHidden");
 });
+test("Undo deleting a question that has been just added, bug#4479", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {};
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toBe("question1");
+  let page = creator.survey.pages[0];
+  expect(page.questions).toHaveLength(1);
+  creator.deleteElement(creator.selectedElement);
+  expect(creator.survey.pages).toHaveLength(0);
+  creator.undo();
+  page = creator.survey.pages[0];
+  expect(page.questions).toHaveLength(1);
+  expect(page.questions[0].name).toBe("question1");
+});
