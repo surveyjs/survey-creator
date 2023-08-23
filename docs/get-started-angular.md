@@ -127,7 +127,7 @@ const creatorOptions = {
 export class SurveyCreatorComponent implements OnInit {
   surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
-    const creator = new SurveyCreator(creatorOptions);
+    const creator = new SurveyCreatorModel(creatorOptions);
     this.surveyCreatorModel = creator;
   }
 }
