@@ -17,6 +17,8 @@ export class TabThemePlugin implements ICreatorPlugin {
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
+  private undoAction: Action;
+  private redoAction: Action;
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
@@ -112,6 +114,25 @@ export class TabThemePlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
+
+    this.undoAction = new Action({
+      id: "action-undo-theme",
+      iconName: "icon-undo",
+      locTitleName: "ed.undo",
+      showTitle: false,
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      action: () => this.model.undoRedoManager.undo()
+    });
+    this.redoAction = new Action({
+      id: "action-redo-theme",
+      iconName: "icon-redo",
+      locTitleName: "ed.redo",
+      showTitle: false,
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      action: () => this.model.undoRedoManager.redo()
+    });
+    items.push(this.undoAction);
+    items.push(this.redoAction);
 
     if (this.creator.showSimulatorInTestSurveyTab) {
       const deviceSelectorItems = Object.keys(simulatorDevices)

@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, ArrayChanges } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -8,6 +8,7 @@ import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } 
 import { settings } from "../../creator-settings";
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
+import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
@@ -48,6 +49,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
+  public undoRedoManager = new UndoRedoManager();
   private selectPageAction: Action;
   private themeEditorSurveyValue: SurveyModel;
   private themeChanges = {};
@@ -488,10 +490,48 @@ export class ThemeSurveyTabViewModel extends Base {
       this.currentTheme.cssVariables["--sjs-primary-backcolor-dark"]
     );
   }
+  private onSurveyPropertyValueChangedCallback(
+    name: string,
+    oldValue: any,
+    newValue: any,
+    sender: Base,
+    arrayChanges: ArrayChanges
+  ) {
+    if (!this.undoRedoManager || name !== "value") {
+      return;
+    }
+    const canUndoRedoMerge = this.undoRedoManager.tryMergeTransaction(sender, name, newValue);
+    if (!canUndoRedoMerge) {
+      this.undoRedoManager.startTransaction(name + " changed");
+      this.undoRedoManager.onPropertyValueChanged(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+      this.undoRedoManager.stopTransaction();
+    }
+  }
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
     const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
+    themeEditorSurvey.onPropertyValueChangedCallback = (
+      name: string,
+      oldValue: any,
+      newValue: any,
+      sender: Base,
+      arrayChanges: ArrayChanges
+    ) => {
+      this.onSurveyPropertyValueChangedCallback(
+        name,
+        oldValue,
+        newValue,
+        sender,
+        arrayChanges
+      );
+    };
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
