@@ -25,7 +25,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
   }
   protected renderButtons(): JSX.Element {
     return (
-      <div className={this.questionFile.cssClasses.buttonsContainer}>
+      <div className={this.questionFile.cssClasses.buttonsContainer} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         {this.renderClearButton()}
         {this.renderChooseButton()}
       </div>

@@ -496,6 +496,7 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
+    themeEditorSurvey.enterKeyAction = "loseFocus";
     this.loadThemeIntoPropertyGrid(themeEditorSurvey);
     this.initializeColorCalculator();
 
