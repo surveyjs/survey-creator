@@ -258,11 +258,7 @@ export interface ISurveyCreatorOptions {
     obj: Base,
     editorOptions: any
   );
-  onGetErrorTextOnValidationCallback(
-    propertyName: string,
-    obj: Base,
-    value: any
-  ): string;
+  onGetErrorTextOnValidationCallback(propertyName: string, obj: Base, value: any, error: string): string;
   onValueChangingCallback(options: any);
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
@@ -398,11 +394,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     obj: Base,
     editorOptions: any
   ) { }
-  onGetErrorTextOnValidationCallback(
-    propertyName: string,
-    obj: Base,
-    value: any
-  ): string {
+  onGetErrorTextOnValidationCallback(propertyName: string, obj: Base, value: any, error: string): string {
     return null;
   }
   onValueChangingCallback(options: any) { }

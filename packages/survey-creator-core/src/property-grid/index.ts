@@ -880,6 +880,11 @@ export class PropertyGridModel {
         options.html = parsePropertyDescription(options.text);
       }
     });
+    this.survey.onErrorCustomText.add((sender, options) => {
+      const q = <Question>options.obj;
+      if(!q || !q.name) return;
+      options.text = this.getErrorTextOnValidate(options.text, q.name, q, q.value);
+    });
     this.survey.editingObj = this.obj;
     if (this.objValueChangedCallback) {
       this.objValueChangedCallback();
@@ -954,16 +959,15 @@ export class PropertyGridModel {
   }
   private validateQuestionValue(obj: Base, question: Question, prop: JsonObjectProperty, val: any): string {
     if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"]))
-      return this.getErrorTextOnValidate(
-        editorLocalization.getString("pe.propertyIsEmpty"), prop.name, obj, val);
+      return editorLocalization.getString("pe.propertyIsEmpty");
     if(this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
-      return this.getErrorTextOnValidate(
-        editorLocalization.getString("pe.propertyNameIsIncorrect"), prop.name, obj, val);
+      return editorLocalization.getString("pe.propertyNameIsIncorrect");
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
+    if(!!editorError) return editorError;
     return this.getErrorTextOnValidate(editorError, prop.name, obj, val);
   }
   private getErrorTextOnValidate(defaultError: string, propName: string, obj: Base, val: any): string {
-    const customError = this.options.onGetErrorTextOnValidationCallback(propName, obj, val);
+    const customError = this.options.onGetErrorTextOnValidationCallback(propName, obj, val, defaultError);
     return !!customError ? customError: defaultError;
   }
   private onValidateQuestion(options: any) {

@@ -3003,18 +3003,15 @@ export class CreatorBase extends Base
     };
     this.onSetPropertyEditorOptions.fire(this, options);
   }
-  onGetErrorTextOnValidationCallback(
-    propertyName: string,
-    obj: Base,
-    value: any
-  ): string {
-    var error = this.getErrorOnPropertyChanging(obj, propertyName, value);
-    if (!!error) return error;
+  onGetErrorTextOnValidationCallback(propertyName: string, obj: Base, value: any, error: string): string {
+    if(!error) {
+      error = this.getErrorOnPropertyChanging(obj, propertyName, value);
+    }
     var options = {
       propertyName: propertyName,
       obj: obj,
       value: value,
-      error: ""
+      error: error
     };
     this.onPropertyValidationCustomError.fire(this, options);
     return options.error;

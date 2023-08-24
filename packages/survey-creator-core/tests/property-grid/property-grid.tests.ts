@@ -1367,7 +1367,7 @@ test("options.onGetErrorTextOnValidationCallback", () => {
   options.onGetErrorTextOnValidationCallback = (
     propertyName: string,
     obj: Base,
-    value: any
+    value: any, error: string
   ): string => {
     if (propertyName != "name") return "";
     if (obj.getType() != "dropdown" || value.length != 3) return "No3Letters";
@@ -1416,7 +1416,7 @@ test("options.onGetErrorTextOnValidationCallback in matrix", () => {
   options.onGetErrorTextOnValidationCallback = (
     propertyName: string,
     obj: Base,
-    value: any
+    value: any, error: string
   ): string => {
     if (propertyName != "name") return;
     if (obj.getType() != "matrixdropdowncolumn" || value.length != 5)

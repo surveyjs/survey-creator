@@ -358,7 +358,7 @@ export class StringEditorViewModelBase extends Base {
     this.creator.onValueChangingCallback(changingOptions);
     clearedText = changingOptions.newValue;
 
-    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText);
+    this.errorText = this.creator.onGetErrorTextOnValidationCallback(this.locString.name, owner, clearedText, "");
     if (!this.errorText && !clearedText) {
       const propJSON = owner.getPropertyByName && owner.getPropertyByName(this.locString.name);
       if (propJSON && propJSON.isRequired) {
