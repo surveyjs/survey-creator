@@ -565,7 +565,7 @@ export class PropertyJSONGenerator {
     };
     if(!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
-        overridingQuestion.focus();
+        overridingQuestion.focus(false, true);
       };
     }
     return linkValue;
