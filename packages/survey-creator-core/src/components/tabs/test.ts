@@ -7,6 +7,7 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 
 export class TestSurveyTabViewModel extends Base {
+  static tagRegex = /(<([^>]+)>)/ig;
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -157,7 +158,8 @@ export class TestSurveyTabViewModel extends Base {
     return (this.activePage && this.getPageTitle(this.activePage, "preview-tab:selected-page", "survey-tester-selected")) || getLocString("ts.selectPage");
   }
   private getPageTitle(page: PageModel, area = "preview-tab:page-list", reason = "survey-tester") {
-    let title = this.surveyProvider.getObjectDisplayName(page, area, reason, page.title);
+    const pageTitle = page.title.replace(TestSurveyTabViewModel.tagRegex, "");
+    let title = this.surveyProvider.getObjectDisplayName(page, area, reason, pageTitle);
     if (title === page.name && title.indexOf("page") === 0) {
       const index: number = this.survey.pages.indexOf(page);
       return editorLocalization.getString("ed.pageTypeName") + " " + (index + 1);
