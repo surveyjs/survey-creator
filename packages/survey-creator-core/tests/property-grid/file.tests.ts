@@ -1,4 +1,4 @@
-import { QuestionImageModel, QuestionImagePickerModel, SurveyElement, SurveyModel } from "survey-core";
+import { QuestionImageModel, QuestionImagePickerModel, QuestionSignaturePadModel, SurveyElement, SurveyModel } from "survey-core";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { PropertyGridModelTester } from "./property-grid.tests";
 import {
@@ -114,6 +114,22 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
   expect(questionEditor.value).toBe("test_url");
 });
 
+test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signature pad", () => {
+  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  let uploadCount = 0;
+  const question = new QuestionSignaturePadModel("q1");
+  creator.onUploadFile.add((s, o) => {
+    uploadCount++;
+    o.callback("success", "test_url");
+    expect(o.question.name).toBe("q1");
+  });
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("backgroundImage");
+  questionEditor.loadFiles(<any>[{ type: "image", name: "test_name" }]);
+  expect(uploadCount).toBe(1);
+  expect(questionEditor.value).toBe("test_url");
+});
+
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image item value", () => {
   const creator = new CreatorBase({ enableLinkFileEditor: true });
   let uploadCount = 0;
@@ -148,15 +164,31 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo i
 });
 
 test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
-  const options = new EmptySurveyCreatorOptions();
-  options.enableLinkFileEditor = true;
+  const creator = new CreatorBase({ enableLinkFileEditor: true });
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
-  const propertyGrid = new PropertyGridModelTester(question, options);
+  const propertyGrid = new PropertyGridModelTester(question, creator);
   const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("choices").renderedTable.rows[0].cells[3].question;
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
   question.contentMode = "video";
   expect(questionEditor.acceptedTypes).toBe("video/*");
   question.contentMode = "image";
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
+});
+
+test("Check PropertyGridLinkFileEditor maxSize", () => {
+  const question = new QuestionImageModel("q1");
+  let creator = new CreatorBase({});
+  creator.onUploadFile.add((s, o) => {
+    o.callback("success", "test_url");
+    expect(o.question.name).toBe("q1");
+  });
+  let propertyGrid = new PropertyGridModelTester(question, creator);
+  let questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.maxSize).toBe(0);
+
+  creator = new CreatorBase({});
+  propertyGrid = new PropertyGridModelTester(question, creator);
+  questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  expect(questionEditor.maxSize).toBe(65536);
 });

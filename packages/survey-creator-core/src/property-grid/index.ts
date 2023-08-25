@@ -898,8 +898,8 @@ export class PropertyGridModel {
     });
     this.survey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
-      const obj = options.question.obj.getType() == "image" ? options.question.obj : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : undefined);
-      this.options.uploadFiles(options.files, obj, callback);
+      const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
+      this.options.uploadFiles(options.files, question, callback);
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
@@ -1365,7 +1365,8 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const res: any = { type: "fileedit", storeDataAsText: false, };
+    const maxSize = (<any>options).onUploadFile?.isEmpty ? 65536 : undefined;
+    const res: any = { type: "fileedit", storeDataAsText: false, maxSize };
     return res;
   }
 
