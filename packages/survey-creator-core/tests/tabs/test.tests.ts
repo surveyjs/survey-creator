@@ -251,6 +251,24 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
   expect(selectedPage().title).toEqual("Page 3");
 });
 
+test("pageSelector if page title with markup", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "<i>Page 1</i>", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", questions: [{ type: "text", name: "q2" }] },
+    ]
+  };
+  var model = getTestModel(creator);
+  expect(model.pageListItems).toHaveLength(2);
+  expect(model.pageListItems[0].title).toEqual("Page 1");
+  expect(model.pageListItems[1].title).toEqual("Page 2");
+  const selectedPage: IAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
+  expect(selectedPage.title).toEqual("Page 1");
+  model.survey.nextPage();
+  expect(selectedPage.title).toEqual("Page 2");
+});
+
 test("Simulator view switch", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
