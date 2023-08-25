@@ -2187,6 +2187,11 @@ export class CreatorBase extends Base
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
+      if(!panel) {
+        while(selectedElement.parent !== null && selectedElement.parent.isPanel) {
+          selectedElement = <IElement><any>selectedElement.parent;
+        }
+      }
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
@@ -2395,6 +2400,13 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
+      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+        const page = this.survey.pages[0];
+        if(page.elements.length === 1 && obj === page.elements[0]) {
+          this.deleteObjectCore(page);
+          return;
+        }
+      }
       this.deletePanelOrQuestion(obj);
     }
     this.setModified({

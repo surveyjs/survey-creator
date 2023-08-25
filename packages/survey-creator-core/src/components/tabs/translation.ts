@@ -220,6 +220,7 @@ export interface ITranslationLocales {
 export class TranslationGroup extends TranslationItemBase {
   private isRootValue: boolean = false;
   private itemValues: Array<TranslationItemBase>;
+  private parentValue: TranslationGroup;
   constructor(public name, public obj: any, translation: ITranslationLocales = null, public text: string = "", public hasIndent: boolean = false) {
     super(name, translation);
     if (!this.text) {
@@ -245,6 +246,24 @@ export class TranslationGroup extends TranslationItemBase {
   }
   setAsRoot() {
     this.isRootValue = true;
+  }
+  public setParent(parent: TranslationGroup): void {
+    this.parentValue = parent;
+  }
+  public get parent(): TranslationGroup { return this.parentValue; }
+  public get fullName(): string {
+    const propsName = this.obj.name === this.name || this.isRoot ? "_props": "";
+    const name = this.name + propsName;
+    if(this.isRoot || !this.parent) return name;
+    const parentName = this.parent.getNameForChild();
+    return (!!parentName ? parentName + "_": "") + name;
+  }
+  protected getNameForChild(): string {
+    if(this.isRoot) return "";
+    return this.isFinalNameObj ? this.name : this.fullName;
+  }
+  protected get isFinalNameObj(): boolean {
+    return this.obj.isQuestion || this.obj.isPage || this.obj.isPanel;
   }
   public getItemByName(name: string): TranslationItemBase {
     for (var i = 0; i < this.itemValues.length; i++) {
@@ -336,16 +355,13 @@ export class TranslationGroup extends TranslationItemBase {
       //If ItemValue array?
       if (this.isItemValueArray(value)) {
         if (this.canShowProperty(property, Array.isArray(value) && value.length > 0)) {
-          const group = new TranslationGroup(
+          this.addNewGroup(new TranslationGroup(
             property.name,
             value,
             this.translation,
             editorLocalization.getPropertyName(property.name),
             true
-          );
-          if (group.hasItems) {
-            this.itemValues.push(group);
-          }
+          ));
         }
       } else {
         this.createGroups(value, property);
@@ -445,11 +461,14 @@ export class TranslationGroup extends TranslationItemBase {
           name = property.name + index;
           text = editorLocalization.getPropertyName(property.name) + index;
         }
-        var group = new TranslationGroup(name, obj, this.translation, text);
-        if (group.hasItems) {
-          this.itemValues.push(group);
-        }
+        this.addNewGroup(new TranslationGroup(name, obj, this.translation, text));
       }
+    }
+  }
+  private addNewGroup(group: TranslationGroup): void {
+    group.setParent(this);
+    if (group.hasItems) {
+      this.itemValues.push(group);
     }
   }
   private createItemValuesLocale() {
@@ -700,7 +719,7 @@ export class Translation extends Base implements ITranslationLocales {
     survey.startLoadingFromJson();
     survey.css = translationCss;
     survey.addNewPage("page");
-    this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root, null);
+    this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
     survey.data = this.getStringsSurveyData(survey);
     survey.endLoadingFromJson();
     const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
@@ -763,9 +782,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private addTranslationGroupIntoStringsSurvey(
     panel: PanelModelBase,
-    group: TranslationGroup,
-    parent: TranslationGroup
-  ) {
+    group: TranslationGroup) {
     for (var i = 0; i < group.items.length; i++) {
       if (group.items[i].isGroup) continue;
       let item = <TranslationItem>group.items[i];
@@ -774,7 +791,7 @@ export class Translation extends Base implements ITranslationLocales {
       );
       matrix.cellType = "comment";
       matrix.titleLocation = "hidden";
-      matrix.name = this.getStringsSurveyQuestionName(group, parent) + i;
+      matrix.name = group.fullName + i;
       matrix.showHeader = false;
       panel.addQuestion(matrix);
       this.addLocaleColumns(matrix);
@@ -793,7 +810,7 @@ export class Translation extends Base implements ITranslationLocales {
       if (item.hasIndent) {
         pnl.cssClasses.panel.content += " st-panel-indent";
       }
-      this.addTranslationGroupIntoStringsSurvey(pnl, item, group);
+      this.addTranslationGroupIntoStringsSurvey(pnl, item);
     }
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
@@ -802,16 +819,6 @@ export class Translation extends Base implements ITranslationLocales {
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
     }
-  }
-  private getStringsSurveyQuestionName(
-    group: TranslationGroup,
-    parent: TranslationGroup
-  ): string {
-    let name = group.name + (group.obj.name == group.name || group.isRoot ? "_props" : "");
-    if(!!parent && parent !== this.root) {
-      name = parent.name + "_" + name;
-    }
-    return name;
   }
   private getStringsSurveyData(survey: SurveyModel): any {
     var res = {};
