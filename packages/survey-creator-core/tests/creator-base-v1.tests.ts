@@ -279,22 +279,23 @@ test("onElementDeleting event", () => {
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
   const q2 = page.addNewQuestion("text", "q2");
+  page.addNewQuestion("text", "q3");
 
-  expect(page.questions).toHaveLength(2);
+  expect(page.questions).toHaveLength(3);
   creator.selectElement(creator.survey.getQuestionByName("q2"));
   creator.deleteCurrentElement();
-  expect(page.questions).toHaveLength(1);
+  expect(page.questions).toHaveLength(2);
   expect(counter).toEqual(1);
 
   canRemove = false;
   creator.selectElement(creator.survey.getQuestionByName("q1"));
   creator.deleteCurrentElement();
-  expect(page.questions).toHaveLength(1);
+  expect(page.questions).toHaveLength(2);
   expect(counter).toEqual(2);
 
   canRemove = true;
   creator.deleteCurrentElement();
-  expect(page.questions).toHaveLength(0);
+  expect(page.questions).toHaveLength(1);
   expect(counter).toEqual(3);
 });
 
