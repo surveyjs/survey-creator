@@ -143,10 +143,6 @@
 
   .sv-ranking-item__index {
     background: $background-dim;
-
-    &.sv-ranking-item__index--empty:empty {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAACCAYAAABhYU3QAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAaSURBVHgBjcABDQAACAKwa2X6b1Tghxi8UQEkAAB3NR3N2gAAAABJRU5ErkJggg==);
-    }
   }
 }
 
