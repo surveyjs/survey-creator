@@ -19,8 +19,5 @@ export class ToolboxItemComponent extends BaseAngular<ToolboxToolViewModel> {
   public get item() {
     return this.model;
   }
-  public get ariaLabel(): string {
-    return this.item.tooltip + " " + editorLocalization.getString("toolbox") + " item";
-  }
 }
 AngularComponentFactory.Instance.registerComponent("svc-toolbox-item", ToolboxItemComponent);
