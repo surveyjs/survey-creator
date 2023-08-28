@@ -309,12 +309,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = createDropdownActionModel({
       id: id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: "icon-drop-down-arrow_16x16",
-      iconSize: 16,
+      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName,
+      iconSize: 24,
       title: actionTitle,
       enabled: enabled,
       visibleIndex: index,
-      disableShrink: true,
+      disableShrink: false,
       action: (newType) => {
         newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
       },
