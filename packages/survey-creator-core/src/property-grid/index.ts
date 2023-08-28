@@ -1326,10 +1326,27 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     }
     return json;
   }
-  public onCreated(obj: Base, question: QuestionTextBase, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+  protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
+    if(!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
+      json.type = `${json.type}withreset`;
+    }
+    return json;
+  }
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
     question.disableNativeUndoRedo = true;
     if(prop.name === "title") {
       question.allowSpaceAsAnswer = true;
+    }
+    if(question.getType() == "textwithreset" || question.getType() == "commentwithreset") {
+      question.resetValueAdorner.resetValueCallback = () => {
+        obj.resetPropertyValue(prop.name);
+      };
+      question.resetValueAdorner.caption = editorLocalization.getString("pe.resetToDefaultCaption");
+      const isDefaultValue = () => !prop.isDefaultValue(prop.getValue(obj));
+      question.resetValueAdorner.allowResetValue = isDefaultValue();
+      obj.registerFunctionOnPropertyValueChanged(prop.name, () => {
+        question.resetValueAdorner.allowResetValue = isDefaultValue();
+      });
     }
   }
 }
@@ -1345,7 +1362,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const json = this.updateMaxLength(prop, { type: "text" });
+    const json = this.updateType(prop, obj, this.updateMaxLength(prop, { type: "text" }));
     if (prop.isRequired) {
       json.textUpdateMode = "onBlur";
     }
@@ -1410,7 +1427,8 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorString {
   public isDefault(): boolean {
     return false;
   }
-  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty) {
+  public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
+    super.onCreated(obj, question, prop, options);
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
       const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
       const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
@@ -1432,9 +1450,9 @@ export class PropertyGridEditorText extends PropertyGridEditorStringBase {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return this.updateMaxLength(prop, {
+    return this.updateType(prop, obj, this.updateMaxLength(prop, {
       type: "comment"
-    });
+    }));
   }
 }
 export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
