@@ -120,6 +120,8 @@ export class StringEditorViewModel {
     this.baseModel.blurEditor = undefined;
     this.implementor.dispose();
     this.implementor = undefined;
+    this.baseModel.getEditorElement = undefined;
+    this.baseModel.dispose();
   }
 }
 

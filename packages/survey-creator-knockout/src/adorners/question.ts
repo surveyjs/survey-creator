@@ -27,8 +27,9 @@ export function createQuestionViewModel(
     return model.isEmptyElement;
   });
   model["adornerComponent"] = undefined;
-  new ImplementorBase(model);
+  const implementor = new ImplementorBase(model);
   ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
+    implementor.dispose();
     model.dispose();
   });
   return model;

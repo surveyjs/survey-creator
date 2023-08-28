@@ -69,6 +69,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
+    this.actionContainer.dispose();
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
