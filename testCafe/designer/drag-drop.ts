@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -17,7 +17,6 @@ fixture`${title}`.page`${url}`.clientScripts({ content: `(${explicitErrorHandler
 });
 
 test("Drag Drop Toolbox Item and Empty Page", async (t) => {
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
@@ -46,7 +45,6 @@ test.before(async t => {
   });
   await setOptions();
 })("Drag Drop Toolbox Item and Empty Page ({pageEditMode: 'bypage'})", async (t) => {
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
   await t
@@ -69,26 +67,24 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
-  const CheckboxItem = Selector("[aria-label='Checkboxes toolbox item']");
-  const RadiogroupItem = Selector("[aria-label='Radio Button Group toolbox item']");
-  const DropdownItem = Selector("[aria-label='Dropdown toolbox item']");
-  const CommentItem = Selector("[aria-label='Long Text toolbox item']");
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
-  const RankingItem = Selector("[aria-label='Ranking toolbox item']");
-  const ImagePickerItem = Selector("[aria-label='Image Picker toolbox item']");
-  const BooleanItem = Selector("[aria-label='Yes/No (Boolean) toolbox item']");
-  const ImageItem = Selector("[aria-label='Image toolbox item']");
-  const HtmlItem = Selector("[aria-label='HTML toolbox item']");
-  const SignatureItem = Selector("[aria-label='Signature toolbox item']");
-  const ExpressionItem = Selector("[aria-label='Expression (read-only) toolbox item']");
-  const FileItem = Selector("[aria-label='File Upload toolbox item']");
-  const MatrixSingleChoiceItem = Selector("[aria-label='Single-Select Matrix toolbox item']");
-  const MatrixMultipleChoiceItem = Selector("[aria-label='Multi-Select Matrix toolbox item']");
-  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix toolbox item']");
-  const MultipleTextItem = Selector("[aria-label='Multiple Textboxes toolbox item']");
-  const PanelItem = Selector("[aria-label='Panel toolbox item']");
-  const PanelDynamicItem = Selector("[aria-label='Dynamic Panel toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkboxes']");
+  const RadiogroupItem = Selector("[aria-label='Radio Button Group']");
+  const DropdownItem = Selector("[aria-label='Dropdown']");
+  const CommentItem = Selector("[aria-label='Long Text']");
+  const RankingItem = Selector("[aria-label='Ranking']");
+  const ImagePickerItem = Selector("[aria-label='Image Picker']");
+  const BooleanItem = Selector("[aria-label='Yes/No (Boolean)']");
+  const ImageItem = Selector("[aria-label='Image']");
+  const HtmlItem = Selector("[aria-label='HTML']");
+  const SignatureItem = Selector("[aria-label='Signature']");
+  const ExpressionItem = Selector("[aria-label='Expression (read-only)']");
+  const FileItem = Selector("[aria-label='File Upload']");
+  const MatrixSingleChoiceItem = Selector("[aria-label='Single-Select Matrix']");
+  const MatrixMultipleChoiceItem = Selector("[aria-label='Multi-Select Matrix']");
+  const MatrixDynamicRowsItem = Selector("[aria-label='Dynamic Matrix']");
+  const MultipleTextItem = Selector("[aria-label='Multiple Textboxes']");
+  const PanelItem = Selector("[aria-label='Panel']");
+  const PanelDynamicItem = Selector("[aria-label='Dynamic Panel']");
 
   await t.resizeWindow(2560, 2000);
   await ClientFunction(() => {
@@ -147,8 +143,8 @@ test("Drag Drop Toolbox All Questions", async (t) => {
   await t.expect(pagesLength).eql(7);
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(8);
 
@@ -319,7 +315,6 @@ test("Drag Drop to Panel", async (t) => {
   await setJSON(json);
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
 
   await t
@@ -1041,7 +1036,6 @@ test("Drag Drop to Panel Dynamic Question", async (t) => {
   await setJSON(json);
 
   const DynamicPanel = Selector("[data-sv-drop-target-survey-element=\"paneldynamic1\"]");
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const Question3 = Selector("[data-sv-drop-target-survey-element=\"question3\"]");
   const FirstRow = Selector(".svc-row");
 
@@ -1231,7 +1225,7 @@ test("Drag Drop below the last Panel", async (t) => {
   await setJSON(json);
 
   const LastPanel = Selector("[data-sv-drop-target-survey-element=\"panel2\"]");
-  const PanelToolboxItem = Selector("[aria-label='Panel toolbox item']");
+  const PanelToolboxItem = Selector("[aria-label='Panel']");
 
   await t
     .hover(PanelToolboxItem, { speed: 0.01 })
@@ -1278,7 +1272,6 @@ test("Drag Drop to new page and Undo", async (t) => {
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
   const undoAction = Selector("button[title=Undo]");
 
   await t.resizeWindow(2560, 2000);
@@ -1296,20 +1289,20 @@ test("Drag Drop to new page and Undo", async (t) => {
   let pagesLength;
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, EmptyPage, { speed: 0.5 }); // first time drag to single Empty page, next times drag to ghost page
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(1);
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(2);
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, newGhostPagePage, { speed: 0.5 });
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(3);
 
@@ -1355,7 +1348,6 @@ test("Drag Drop on the right of Panel same row", async (t) => {
   await setJSON(json);
 
   const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
-  const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input toolbox item']");
 
   await t
     .hover(SingleInputToolboxItem, { speed: 0.01 })

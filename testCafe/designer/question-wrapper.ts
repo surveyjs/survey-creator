@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -209,11 +209,10 @@ test("Matrix dropdown with detail panel", async (t) => {
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
   })();
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
   await t
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
     .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok();
 
 });
