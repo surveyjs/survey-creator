@@ -44,17 +44,20 @@ test("Editors, loose focus on enter", async (t) => {
     .click(Selector("div[data-name=--sjs-primary-backcolor] input"))
     .expect(Selector("div[data-name=--sjs-primary-backcolor] input").focused).ok()
     .pressKey("Enter")
+    .wait(200)
     .expect(Selector("div[data-name=--sjs-primary-backcolor] input").focused).notOk();
 
   await t
     .click(Selector("div[data-name=panelBackgroundTransparency] input"))
     .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).ok()
     .pressKey("Enter")
+    .wait(200)
     .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).notOk();
 
   await t
     .click(Selector("div[data-name=backgroundImage] input"))
     .expect(Selector("div[data-name=backgroundImage] input").focused).ok()
     .pressKey("Enter")
+    .wait(200)
     .expect(Selector("div[data-name=backgroundImage] input").focused).notOk();
 });
