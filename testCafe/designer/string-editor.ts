@@ -1,4 +1,4 @@
-import { explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
+import { RatingToolboxItem, explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
