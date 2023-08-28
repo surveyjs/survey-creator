@@ -279,7 +279,7 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "Preview answers before submitting the survey",
     overridingPropertyPrefix: "Set by ",
-    resetToDefaultCaption: "Reset to default value",
+    resetToDefaultCaption: "Reset",
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
