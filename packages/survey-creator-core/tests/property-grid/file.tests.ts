@@ -1,4 +1,4 @@
-import { QuestionImageModel, QuestionImagePickerModel, QuestionSignaturePadModel, SurveyElement, SurveyModel } from "survey-core";
+import { QuestionImageModel, QuestionImagePickerModel, QuestionMatrixDynamicModel, QuestionSignaturePadModel, SurveyElement, SurveyModel } from "survey-core";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { PropertyGridModelTester } from "./property-grid.tests";
 import {
@@ -167,8 +167,12 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
   const creator = new CreatorBase({ enableLinkFileEditor: true });
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
+
   const propertyGrid = new PropertyGridModelTester(question, creator);
-  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("choices").renderedTable.rows[0].cells[3].question;
+  const matrix = <QuestionMatrixDynamicModel>propertyGrid.survey.getQuestionByName("choices");
+  matrix.visibleRows[0].showDetailPanel();
+  const questionEditor = <QuestionFileEditorModel>(matrix.visibleRows[0].detailPanel.getQuestionByName("imageLink"));
+  expect(propertyGrid.survey.getQuestionByName("choices").renderedTable.rows[0].cells[3].question.getType()).toBe("text");
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
   question.contentMode = "video";
   expect(questionEditor.acceptedTypes).toBe("video/*");

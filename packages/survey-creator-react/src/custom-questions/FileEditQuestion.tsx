@@ -17,6 +17,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
           className={this.questionFile.cssClasses.control}
           ref={(input) => (this.setControl(input))}
           autoComplete="off"
+          type="text"
           onBlur={(event) => this.questionFile.onInputBlur(event.nativeEvent) }
           onChange={(event) => this.questionFile.onInputChange(event.nativeEvent)}
         />

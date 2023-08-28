@@ -700,6 +700,9 @@ export class PropertyJSONGenerator {
     if (json.cellType === "buttongroup") {
       json.cellType = "dropdown";
     }
+    if (json.cellType === "fileedit") {
+      json.cellType = "text";
+    }
     if (!!prop.visibleIf) {
       json.visibleIf = "propertyVisibleIf() = true";
     }
@@ -1371,12 +1374,14 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
   }
 
   public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    if(["image"].indexOf(obj.getType()) > -1) {
-      const questionObj = <Question>obj;
-      questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
-        question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
-      });
-      question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+    if(["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
+      const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
+      if(questionObj) {
+        questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
+          question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+        });
+        question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+      }
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
