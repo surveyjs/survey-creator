@@ -200,7 +200,7 @@ export class QuestionToolbox
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.toggleVisibility();
       this.creator?.onDragDropItemStart();
-      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     });
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       if (!this.creator.readOnly) {

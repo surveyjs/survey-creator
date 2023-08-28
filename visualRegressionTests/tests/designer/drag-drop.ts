@@ -346,3 +346,43 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
     await takeElementScreenshot("drag-drop-to-multiline-from-toolbox.png", Page1, t, comparer);
   });
 });
+
+test("Toolbox Custom Component Icon", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(2560, 1440);
+
+    const changeIconRatingForToolbox = ClientFunction((iconName) => {
+      window["creator"].toolbox.getItemByName("rating").iconName = iconName;
+    });
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "panel",
+              name: "panel1"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    await changeIconRatingForToolbox("icon-modernbooleancheckchecked");
+
+    const Panel = Selector("[data-sv-drop-target-survey-element=\"panel1\"]");
+    const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
+
+    await t
+      .hover(RatingToolboxItem)
+      .dragToElement(RatingToolboxItem, Panel, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-toolbox-custom-component-icon.png", Panel, t, comparer);
+
+    await changeIconRatingForToolbox("icon-rating");
+  });
+});
