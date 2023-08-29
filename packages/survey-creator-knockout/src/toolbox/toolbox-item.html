@@ -1,5 +1,5 @@
 <div class="svc-toolbox__item"
-  data-bind="attr: { role: 'button', 'aria-label': item.tooltip, 'title': item.tooltip }, css: item.className, click: (model, event)=>{ $parent.click(event); return true;}, key2click">
+  data-bind="attr: { role: 'button', 'aria-label': item.tooltip, title: item.tooltip }, css: item.className, click: (model, event)=>{ $parent.click(event); return true;}, key2click">
   <span class="svc-toolbox__item-container">
     <sv-svg-icon params="iconName: iconName, size: 24, title: item.tooltip"></sv-svg-icon>
   </span>
