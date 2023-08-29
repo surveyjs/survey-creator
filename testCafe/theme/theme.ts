@@ -40,24 +40,22 @@ test("Editors, loose focus on enter", async (t) => {
 
   await t.click(getTabbedMenuItemByText("Themes"));
 
+  const colorQuestionInputSelector = Selector("div[data-name=--sjs-primary-backcolor] input.spg-color-editor__input");
   await t
-    .click(Selector("div[data-name=--sjs-primary-backcolor] input"))
-    .expect(Selector("div[data-name=--sjs-primary-backcolor] input").focused).ok()
+    .click(colorQuestionInputSelector)
+    .expect(colorQuestionInputSelector.focused).ok()
     .pressKey("enter")
-    .wait(200)
-    .expect(Selector("div[data-name=--sjs-primary-backcolor] input").focused).notOk();
+    .expect(colorQuestionInputSelector.focused).notOk();
 
   await t
     .click(Selector("div[data-name=panelBackgroundTransparency] input"))
     .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).ok()
     .pressKey("enter")
-    .wait(200)
     .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).notOk();
 
   await t
     .click(Selector("div[data-name=backgroundImage] input"))
     .expect(Selector("div[data-name=backgroundImage] input").focused).ok()
     .pressKey("enter")
-    .wait(200)
     .expect(Selector("div[data-name=backgroundImage] input").focused).notOk();
 });
