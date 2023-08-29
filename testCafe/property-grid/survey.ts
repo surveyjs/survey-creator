@@ -89,6 +89,7 @@ test("Check showInMultiple columns editing", async (t) => {
   const controlButton = radioMatrixCell.find(".svc-matrix-cell__question-controls");
   await t
     .click(question)
+    .click(generalGroup)
     .click(columns)
     .click(edit)
     .click(showInMultiple)
