@@ -134,15 +134,19 @@ svc-question {
     min-width: 0;
   }
 
-    #convertInputType .sv-action-bar-item--icon {
-      display: none;
-    }
   .sv-action--convertTo-last {
     margin-inline-end: auto; // margin-right
   }
 .sv-dots {
   width: calcSize(4);
-  width: calcSize(4);
+  margin-left: calcSize(1);
+  margin-right: calcSize(0.5);
+  &.sv-action--hidden {
+    width: 0;
+  }
+  .sv-dots__item {
+    margin-left: 0;
+  }
 }
 
 .sv-dots__item {

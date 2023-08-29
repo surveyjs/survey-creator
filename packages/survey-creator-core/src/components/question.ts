@@ -262,6 +262,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
       });
+    newAction.disableHide = true;
     return newAction;
   }
   private createConvertInputType() {
@@ -281,7 +282,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.surveyElement.setPropertyValue(propName, item.id);
         newAction.title = item.title;
       });
-    newAction.hideFirst = true;
     newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
