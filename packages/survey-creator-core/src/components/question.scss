@@ -134,6 +134,9 @@ svc-question {
     min-width: 0;
   }
 
+    #convertInputType .sv-action-bar-item--icon {
+      display: none;
+    }
   .sv-action--convertTo-last {
     margin-inline-end: auto; // margin-right
   }
