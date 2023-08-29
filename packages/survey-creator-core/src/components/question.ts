@@ -281,6 +281,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.surveyElement.setPropertyValue(propName, item.id);
         newAction.title = item.title;
       });
+    newAction.hideFirst = true;
+    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
