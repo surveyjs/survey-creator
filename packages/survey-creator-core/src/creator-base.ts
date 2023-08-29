@@ -2792,7 +2792,7 @@ export class CreatorBase extends Base
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
-    obj["removeFromParent"]();
+    obj["delete"](false);
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(
