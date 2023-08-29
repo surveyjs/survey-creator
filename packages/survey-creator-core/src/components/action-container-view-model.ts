@@ -70,6 +70,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     super.dispose();
     this.detachElement(this.surveyElement);
     this.actionContainer.dispose();
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
+    this.selectedPropPageFunc = undefined;
+    this.sidebarFlyoutModeChangedFunc = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
