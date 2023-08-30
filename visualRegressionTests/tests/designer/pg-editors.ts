@@ -545,7 +545,7 @@ test("Check overriding property editor", async (t) => {
       ]
     });
     await t.resizeWindow(1920, 1920);
-    await t.click("div[data-sv-drop-target-survey-element='question2']");
+    await t.click("div[data-sv-drop-target-survey-element='question2']", { offsetX: 200, offsetY: 30 });
     await takeElementScreenshot("overriding-property-editor.png", Selector(".spg-row--multiple"), t, comparer);
   });
 });

@@ -52,14 +52,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       matrix.dragDropMatrixRows.onDragEnd.add(() => { options.stopUndoRedoTransaction(); });
     }
   }
-  private initializeAcceptedTypes(obj: any, cellQuestion: Question) {
-    if(obj.getType() === "imagepicker" && cellQuestion.name == "imageLink" && cellQuestion.getType() == "fileedit") {
-      obj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
-        cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(newValue);
-      });
-      cellQuestion.acceptedTypes = getAcceptedTypesByContentMode(obj.contentMode);
-    }
-  }
   private initializePlaceholder(rowObj: any, cellQuestion: Question, propertyName: string) {
     const objType = typeof rowObj.getType === "function" && rowObj.getType();
     if (cellQuestion.getType() === "text" && !!objType) {
@@ -82,7 +74,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (!rowObj) return;
     const q = options.cellQuestion;
     q.obj = rowObj;
-    this.initializeAcceptedTypes(obj, q);
     this.initializePlaceholder(rowObj, q, options.columnName);
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }

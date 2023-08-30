@@ -157,19 +157,19 @@ svc-question {
 }
 
 .svc-dragged-element-shortcut {
-  min-width: 100px;
+  //min-width: 100px;
   height: calcSize(3);
   border-radius: calcSize(12.5);
   background-color: $background;
   color: $foreground;
   padding: calcSize(1) calcSize(1.5);
-  padding-right: calcSize(2);
+  padding-right: calcSize(3.5);
   cursor: grabbing;
   position: absolute;
   z-index: 1000;
   box-shadow: $shadow-large;
   @include disableUserSelect;
-  max-width: 500px;
+  //max-width: 500px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

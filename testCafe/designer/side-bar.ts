@@ -1,7 +1,7 @@
 import {
   setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
-  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation
+  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem
 } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
@@ -86,8 +86,7 @@ test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
-  const CheckboxItem = Selector("[aria-label='Checkboxes toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkboxes']");
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t
@@ -120,8 +119,8 @@ test("toolboxLocation sidebar", async (t) => {
     .expect(toolboxButtonSelector.visible).ok();
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage);
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, EmptyPage);
   await t.expect(await getPagesLength()).eql(1);
 
   await t
