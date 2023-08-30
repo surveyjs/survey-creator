@@ -98,6 +98,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected updateActionVisibility(id: string, isVisible: boolean) {
     var action = this.getActionById(id);
     if (!action) return;
+    if (action.visible == isVisible) return;
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {

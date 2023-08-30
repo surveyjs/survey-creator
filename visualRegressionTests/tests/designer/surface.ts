@@ -1324,3 +1324,59 @@ test("Check carry forward panel ranking", async (t) => {
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
   });
 });
+
+test("Question adorners for different sizes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question",
+              "minWidth": "100px",
+              "maxWidth": "150px",
+              "title": "Q"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const designerTabContent = Selector(".svc-tab-designer");
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    const qDots = Selector(".svc-question__content .sv-dots");
+    const requiredItem = Selector(".sv-list__item").withText("Required");
+    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-tiny.png", pageContent, t, comparer);
+    await t.click(qDots);
+    await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
+    await t.click(requiredItem);
+
+    await t.click(qDots);
+    await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
+    await t.click(requiredItem);
+
+    await ClientFunction(() => {
+      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "200px";
+    })();
+    await takeElementScreenshot("question-small.png", pageContent, t, comparer);
+
+    await ClientFunction(() => {
+      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "400px";
+    })();
+    await takeElementScreenshot("question-medium.png", pageContent, t, comparer);
+
+    await ClientFunction(() => {
+      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "600px";
+    })();
+    await takeElementScreenshot("question-big.png", pageContent, t, comparer);
+  });
+});
