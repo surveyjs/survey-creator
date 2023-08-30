@@ -21,14 +21,6 @@ export class KnockoutToolboxItemViewModel {
     this.iconName(icon);
     this.title(item.title);
   }
-  public get ariaLabel() {
-    return (
-      this.item.tooltip +
-      " " +
-      editorLocalization.getString("toolbox") +
-      " item"
-    );
-  }
 }
 
 ko.components.register("svc-toolbox-item", {

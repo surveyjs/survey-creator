@@ -565,7 +565,8 @@ export class PropertyJSONGenerator {
     };
     if(!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
-        overridingQuestion.focus();
+        //Focus and aways scroll into view
+        overridingQuestion.focus(false, true);
       };
     }
     return linkValue;
@@ -699,6 +700,9 @@ export class PropertyJSONGenerator {
     }
     if (json.cellType === "buttongroup") {
       json.cellType = "dropdown";
+    }
+    if (json.cellType === "fileedit") {
+      json.cellType = "text";
     }
     if (!!prop.visibleIf) {
       json.visibleIf = "propertyVisibleIf() = true";
@@ -903,8 +907,8 @@ export class PropertyGridModel {
     });
     this.survey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
-      const obj = options.question.obj.getType() == "image" ? options.question.obj : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : undefined);
-      this.options.uploadFiles(options.files, obj, callback);
+      const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
+      this.options.uploadFiles(options.files, question, callback);
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
@@ -1369,17 +1373,20 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const res: any = { type: "fileedit", storeDataAsText: false, };
+    const maxSize = (<any>options).onUploadFile?.isEmpty ? 65536 : undefined;
+    const res: any = { type: "fileedit", storeDataAsText: false, maxSize };
     return res;
   }
 
   public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    if(["image"].indexOf(obj.getType()) > -1) {
-      const questionObj = <Question>obj;
-      questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
-        question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
-      });
-      question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+    if(["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
+      const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
+      if(questionObj) {
+        questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
+          question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
+        });
+        question.acceptedTypes = getAcceptedTypesByContentMode(questionObj.contentMode);
+      }
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
