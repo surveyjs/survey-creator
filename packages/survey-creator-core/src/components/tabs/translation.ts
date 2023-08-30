@@ -1,5 +1,5 @@
 import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
-  Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel,
+  Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, FunctionFactory,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
   ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel } from "survey-core";
 import { unparse, parse } from "papaparse";
@@ -11,6 +11,24 @@ require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
+
+function localeEnableIf(params: any): boolean {
+  if(!this.question || !this.question.parentQuestion || !this.row) return true;
+  const index = params[0];
+  if(index === 0) return false;
+  if(!index) return true;
+  const val = this.question.parentQuestion.value;
+  if(!Array.isArray(val)) return true;
+  const rowVal = val[index];
+  if(!rowVal || rowVal.isSelected) return true;
+  let selectedCounter = 0;
+  for(let i = 1; i < val.length; i ++) {
+    if(val[i].isSelected) selectedCounter ++;
+  }
+  return selectedCounter < settings.translation.maximumSelectedLocales;
+}
+
+FunctionFactory.Instance.register("localeEnableIf", localeEnableIf);
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -604,7 +622,11 @@ export class Translation extends Base implements ITranslationLocales {
     }
     if(!this.root) return;
     this.root.deleteLocaleStrings(locale);
+    this.removeLocale(locale);
+    this.updateChooseLanguageActions();
+    this.reset();
   }
+  private removingLocale: string;
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
     setSurveyJSONForPropertyGrid(json);
@@ -614,6 +636,17 @@ export class Translation extends Base implements ITranslationLocales {
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
+      }
+    });
+    res.onMatrixRenderRemoveButton.add((sender, options) => {
+      options.allow = options.rowIndex > 0;
+    });
+    res.onMatrixRowRemoving.add((sender, options) => {
+      this.removingLocale = options.question.value[options.rowIndex].name;
+    });
+    res.onMatrixRowRemoved.add((sender, options) => {
+      if(!!this.removingLocale) {
+        this.deleteLocaleStrings(this.removingLocale);
       }
     });
     res.onGetQuestionTitleActions.add((sender, options) => {
@@ -643,14 +676,15 @@ export class Translation extends Base implements ITranslationLocales {
           type: "matrixdynamic",
           name: "locales",
           title: editorLocalization.getString("ed.translationLanguages"),
+          confirmDelete: true,
+          confirmDeleteText: "You are going to delete all strings for this locale. Are you sure?", //TODO
           columns: [
-            { name: "isSelected", cellType: "boolean", renderAs: "checkbox" },
+            { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf({rowIndex})" },
             { name: "displayName", cellType: "expression", expression: "row.displayName" }
           ],
           showHeader: false,
           allowAddRows: false,
           rowCount: 0
-          //maxSelectedChoices: settings.translation.maximumSelectedLocales
         }
       ]
     };
