@@ -4,9 +4,11 @@
   align-items: flex-start;
   padding: 0px;
 }
+
 .spg-question__header {
   width: 100%;
 }
+
 .spg-question__title {
   width: 100%;
   margin: 0;
@@ -56,14 +58,17 @@
   padding-bottom: calcSize(2);
   white-space: normal;
 }
+
 .spg-row-narrow__question {
   margin-top: calcSize(-2);
 }
+
 .spg-row--multiple {
-  & > div > .spg-row-narrow__question {
+  &>div>.spg-row-narrow__question {
     margin-top: calcSize(-1);
   }
 }
+
 .spg-question--location--left {
   flex-direction: row;
   background: $background;
@@ -82,55 +87,66 @@
   box-sizing: border-box;
   max-width: 50%;
   flex: 1;
+
   .spg-question__title {
     padding: calcSize(1) calcSize(2);
     border-right: 1px solid $border;
     display: inline-block;
   }
+
   display: flex;
   align-items: center;
 }
 
 .spg-question__content--left {
   flex: 2;
+
   .spg-input.spg-input.spg-input {
     background-color: transparent;
+
     &:focus,
     &:focus-within {
       box-shadow: none;
     }
+
     box-shadow: none;
     border: none;
   }
 }
+
 .spg-row--multiple {
   display: flex;
   gap: calcSize(1);
   flex-wrap: wrap;
 
-  & > div {
+  &>div {
     flex-grow: 1;
     min-width: calcSize(25.5);
+
     .spg-question__header--location--left {
       min-width: calcSize(8);
     }
+
     input {
       min-width: calc(max(17 * #{$base-unit}, 100%));
       width: 0;
     }
   }
 }
+
 .spg-question__erbox {
   padding: calcSize(1) calcSize(1.5) calcSize(1) calcSize(1.5);
   color: $foreground;
   background-color: $red-light;
   border-radius: calcSize(0.5);
   line-height: calcSize(3);
-  & > div {
+
+  &>div {
     display: flex;
     gap: calcSize(1);
   }
 }
+
 .spg-question__erbox-icon {
   display: block;
   flex-grow: 0;
@@ -141,8 +157,10 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   line-height: calcSize(3);
+  white-space: normal;
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='20' viewBox='0 0 24 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.0336 15.4803L14.5736 1.45346C13.9936 0.487805 12.9936 0 12.0036 0C11.0136 0 10.0136 0.487805 9.43364 1.45346L0.973642 15.4803C-0.226358 17.4714 1.21364 20 3.54364 20H20.4536C22.7836 20 24.2236 17.4714 23.0236 15.4803H23.0336ZM21.3336 17.5112C21.2436 17.6605 20.9936 18.0189 20.4636 18.0189H3.54364C3.01364 18.0189 2.76364 17.6705 2.67364 17.5112C2.58364 17.3519 2.41364 16.9537 2.68364 16.5057L11.1436 2.47885C11.4036 2.04082 11.8336 1.99104 12.0036 1.99104C12.1736 1.99104 12.5936 2.04082 12.8636 2.47885L21.3136 16.5057C21.5836 16.9537 21.4136 17.3519 21.3236 17.5112H21.3336ZM13.0036 7.05824V12.0358C13.0036 12.5834 12.5536 13.0314 12.0036 13.0314C11.4536 13.0314 11.0036 12.5834 11.0036 12.0358V7.05824C11.0036 6.5107 11.4536 6.06272 12.0036 6.06272C12.5536 6.06272 13.0036 6.5107 13.0036 7.05824ZM13.0036 15.0224C13.0036 15.5699 12.5536 16.0179 12.0036 16.0179C11.4536 16.0179 11.0036 15.5699 11.0036 15.0224C11.0036 14.4749 11.4536 14.0269 12.0036 14.0269C12.5536 14.0269 13.0036 14.4749 13.0036 15.0224Z' fill='%23E60A3E'/%3E%3C/svg%3E");
 }
+
 .spg-question__erbox--location--bottom {
   margin-top: calcSize(1);
 }

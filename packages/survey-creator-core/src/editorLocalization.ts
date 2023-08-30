@@ -13,28 +13,37 @@ export class EditorLocalization {
     this.peHelpByClass = {};
   }
   public getString(strName: string, locale: string = null): string {
-    var loc = this.getLocale(locale);
-    var defaultLocale = this.getLocale("en");
-    var path = strName.split(".");
-    var obj = loc;
-    for (var i = 0; i < path.length; i++) {
-      obj = obj[path[i]];
-      if (!obj && obj !== "") {
-        if (loc === defaultLocale) return path[i];
-        return this.getString(strName, "en");
-      }
+    if(!locale) locale = this.currentLocale;
+    const loc = this.getLocale(locale);
+    const defaultLocale = this.getLocale("en");
+    const locs = [];
+    if(!!loc) locs.push(loc);
+    if(!!locale && locale.indexOf("-") > -1) {
+      const baseLocale = this.getLocale(locale.substring(0, locale.indexOf("-")));
+      if(!!baseLocale) locs.push(baseLocale);
     }
-    return obj;
+    if(locs.length === 0 || locs[locs.length - 1] !== defaultLocale) {
+      locs.push(defaultLocale);
+    }
+    for(let i = 0; i < locs.length; i ++) {
+      const res = this.getStringByLocale(strName, locs[i]);
+      if(!!res || res === "") return res;
+    }
+    const path = strName.split(".");
+    return path[path.length - 1];
   }
   public hasString(strName: string, locale: string = null): boolean {
-    var loc = this.getLocale(locale);
-    var path = strName.split(".");
-    var obj = loc;
-    for (var i = 0; i < path.length; i++) {
+    return this.getStringByLocale(strName, this.getLocale(locale)) !== undefined;
+  }
+  private getStringByLocale(strName: string, loc: any): string {
+    const path = strName.split(".");
+    let obj = loc;
+    for (let i = 0; i < path.length; i++) {
+      if(typeof obj === "string") return undefined;
       obj = obj[path[i]];
-      if (!obj && obj !== "") return false;
+      if (!obj && obj !== "") return undefined;
     }
-    return true;
+    return obj;
   }
   public getLocaleName(loc: string, defaultLocale: string = null): string {
     let localeNames = surveyLocalization["localeNames"];
@@ -192,9 +201,7 @@ export class EditorLocalization {
   private getValueInternal(value: any, prefix: string, locale: string = null): string {
     if (value === "" || value === null || value === undefined) return "";
     value = value.toString();
-    var loc = this.getLocale(locale);
-    var res = loc[prefix] ? loc[prefix][value] : null;
-    if (!res) res = defaultStrings[prefix][value];
+    const res = this.getString(prefix + "." + value, locale);
     if (!!res) return res;
     return this.camelCaseBreaking
       ? this.convertToCamelCase(value, false)
