@@ -580,6 +580,7 @@ export class SurveyQuestionEditorDefinition {
         "cookieName",
         "widthMode",
         "width",
+        "fitToContainer",
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },

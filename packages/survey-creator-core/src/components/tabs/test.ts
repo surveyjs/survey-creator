@@ -82,6 +82,7 @@ export class TestSurveyTabViewModel extends Base {
     } else {
       newSurvey.setCss(theme, false);
     }
+    newSurvey.fitToContainer = true;
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: TestSurveyTabViewModel = this;
