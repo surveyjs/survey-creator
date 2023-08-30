@@ -1437,11 +1437,7 @@ QUnit.test(
     for (var i = 0; i < props.length; i++) {
       var prop = props[i];
       if (prop.editor.editorType == "boolean") continue;
-      assert.equal(
-        prop.editor.showDisplayNameOnTop,
-        true,
-        "It should be shown on top"
-      );
+      assert.equal(prop.editor.showDisplayNameOnTop, true, "It should be shown on top: " + prop.name);
     }
   }
 );

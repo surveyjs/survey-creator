@@ -139,6 +139,7 @@ export var enStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    themeResetButton: "Reset theme settings to default",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",

@@ -861,6 +861,13 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
+
+  themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
+
+  expect(creator.isThemePristine).toBeFalsy();
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(3);
 });
 
 test("Theme builder: trigger responsiveness", (): any => {

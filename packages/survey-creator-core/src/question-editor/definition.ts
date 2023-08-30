@@ -335,6 +335,7 @@ export class SurveyQuestionEditorDefinition {
         "cellType",
         "name",
         "title",
+        "visible",
         "isRequired",
         "readOnly",
         "isUnique",
@@ -579,6 +580,7 @@ export class SurveyQuestionEditorDefinition {
         "cookieName",
         "widthMode",
         "width",
+        "fitToContainer",
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },
