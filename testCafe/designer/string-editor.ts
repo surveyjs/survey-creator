@@ -1,4 +1,4 @@
-import { explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
+import { RatingToolboxItem, explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
@@ -561,7 +561,6 @@ test("Focus on new question", async (t) => {
 
 test("Focus on new question dragged", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   await t
