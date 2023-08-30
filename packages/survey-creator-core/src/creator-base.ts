@@ -2187,8 +2187,8 @@ export class CreatorBase extends Base
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
-      if(!panel) {
-        while(selectedElement.parent !== null && selectedElement.parent.isPanel) {
+      if (!panel) {
+        while (selectedElement.parent !== null && selectedElement.parent.isPanel) {
           selectedElement = <IElement><any>selectedElement.parent;
         }
       }
@@ -2402,7 +2402,7 @@ export class CreatorBase extends Base
     } else {
       if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
         const page = this.survey.pages[0];
-        if(page.elements.length === 1 && obj === page.elements[0]) {
+        if (page.elements.length === 1 && obj === page.elements[0]) {
           this.deleteObjectCore(page);
           return;
         }
@@ -2792,7 +2792,7 @@ export class CreatorBase extends Base
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
-    obj["delete"]();
+    obj["delete"](false);
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(
@@ -3076,7 +3076,7 @@ export class CreatorBase extends Base
     const options = {
       questionName: questionName,
       question: question,
-      questionType: !!question? question.getType(): "",
+      questionType: !!question ? question.getType() : "",
       operator: operator,
       show: isEnabled
     };

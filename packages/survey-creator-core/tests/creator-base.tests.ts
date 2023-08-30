@@ -4005,3 +4005,13 @@ test("Change column properties, isCorrectProperty", (): any => {
   column["expression"] = "today()";
   expect(propName).toBe("expression");
 });
+test("Deleted object shouldn't be disposed", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q" }]
+  };
+  const text = creator.survey.getQuestionByName("q");
+  creator.deleteElement(text);
+  expect(text.isDisposed).toBeFalsy();
+});
