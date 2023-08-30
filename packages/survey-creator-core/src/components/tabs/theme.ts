@@ -97,7 +97,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImage = newValue;
       }
       _target.currentTheme["backgroundImage"] = newValue;
-
+      _target.raiseThemeChanged();
     }
   }) backgroundImage;
 
@@ -107,6 +107,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImageFit = newValue;
       }
       _target.currentTheme["backgroundImageFit"] = newValue;
+      _target.raiseThemeChanged();
     }
   }) backgroundImageFit;
 
@@ -116,7 +117,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImageAttachment = newValue;
       }
       _target.currentTheme["backgroundImageAttachment"] = newValue;
-
+      _target.raiseThemeChanged();
     }
   }) backgroundImageAttachment;
   @property({ defaultValue: "default" }) themeName;
@@ -187,6 +188,7 @@ export class ThemeSurveyTabViewModel extends Base {
   }
 
   private loadTheme(theme: ICreatorTheme) {
+    this.blockThemeChangedNotifications += 1;
     this.themeName = theme.themeName;
     this.themePalette = theme.colorPalette;
     this.themeMode = theme.isPanelless ? "lightweight" : undefined;
@@ -203,6 +205,7 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeVariables = {};
     assign(themeVariables, this.themeVariables, theme.cssVariables);
     theme.cssVariables = themeVariables;
+    this.blockThemeChangedNotifications -= 1;
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
@@ -624,14 +627,18 @@ export class ThemeSurveyTabViewModel extends Base {
     });
   }
 
+  private raiseThemeChanged() {
+    if (this.blockThemeChangedNotifications == 0) {
+      this.surveyProvider.raiseThemeChanged();
+    }
+  }
+
   private setThemeToSurvey(theme?: ITheme) {
     if (!!theme) {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
-    if (this.blockThemeChangedNotifications == 0) {
-      this.surveyProvider.raiseThemeChanged();
-    }
+    this.raiseThemeChanged();
   }
 
   private getThemeEditorSurveyJSON() {

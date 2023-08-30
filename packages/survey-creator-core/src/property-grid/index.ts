@@ -565,7 +565,8 @@ export class PropertyJSONGenerator {
     };
     if(!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
-        overridingQuestion.focus();
+        //Focus and aways scroll into view
+        overridingQuestion.focus(false, true);
       };
     }
     return linkValue;

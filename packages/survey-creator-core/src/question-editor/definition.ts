@@ -335,6 +335,7 @@ export class SurveyQuestionEditorDefinition {
         "cellType",
         "name",
         "title",
+        "visible",
         "isRequired",
         "readOnly",
         "isUnique",

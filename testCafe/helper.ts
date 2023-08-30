@@ -42,6 +42,9 @@ export const getItemValueByIndex = ClientFunction((questionName, index) => {
   return choices[index].value;
 });
 
+export const SingleInputToolboxItem = Selector("[aria-label='Single-Line Input']");
+export const RatingToolboxItem = Selector("[aria-label='Rating Scale']");
+
 export const creatorTabDesignerName = "Designer";
 export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";

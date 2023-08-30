@@ -106,26 +106,24 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
     return this.model;
   }
   render(): JSX.Element {
-    const className =
-      "svc-toolbox__item svc-toolbox__item--" + this.item.iconName;
-    const ariaLabel = this.item.tooltip + " " + editorLocalization.getString("toolbox") + " item";
     return attachKey2click(
       <div
-        className={className}
+        className={this.item.className}
         tabIndex={0}
         role="button"
-        aria-label={ariaLabel}
+        aria-label={this.item.tooltip}
+        title={this.item.tooltip}
         onClick={(event: any) => {
           event.persist();
           this.model.click(event);
         }}
       >
         <span className="svc-toolbox__item-container">
-          <SvgIcon size={24} iconName={this.item.iconName} title={ariaLabel}></SvgIcon>
+          <SvgIcon size={24} iconName={this.item.iconName} title={this.item.tooltip}></SvgIcon>
         </span>
         {(this.props.isCompact ?
           <span className="svc-toolbox__item-banner svc-item__banner">
-            <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={ariaLabel}></SvgIcon>
+            <SvgIcon size={24} iconName={this.item.iconName} className="svc-toolbox__item-icon" title={this.item.tooltip}></SvgIcon>
             <span className="svc-toolbox__item-title">{this.item.title}</span>
           </span>
           :
