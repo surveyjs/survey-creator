@@ -4015,3 +4015,15 @@ test("Deleted object shouldn't be disposed", (): any => {
   creator.deleteElement(text);
   expect(text.isDisposed).toBeFalsy();
 });
+test("Remove carry-forward property on deleting a question", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "dropdown", name: "q1", choices: ["B", "A", "D", "C"] },
+    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" }
+  ] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+  expect(q2.choicesFromQuestion).toBe("q1");
+  creator.deleteElement(q1);
+  expect(q2.choicesFromQuestion).toBeFalsy();
+});
