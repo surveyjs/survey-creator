@@ -143,6 +143,11 @@ svc-question {
   margin-right: calcSize(0.5);
   &.sv-action--hidden {
     width: 0;
+    margin: 0;
+    
+      .sv-action__content {
+        display: none;
+      }
   }
   .sv-dots__item {
     margin-left: 0;
@@ -150,7 +155,7 @@ svc-question {
 }
 
 .sv-dots__item {
-  border-radius: calcSize(0.5);
+  //border-radius: calcSize(0.5);
 
   use {
     fill: $secondary;
@@ -172,6 +177,7 @@ svc-question {
 .svc-creator:not(.svc-creator--mobile) .svc-page .svc-hovered>.svc-question__content:not(.svc-question__content--dragged) {
   &>.svc-question__content-actions {
     display: block;
+
   }
 }
 
@@ -317,7 +323,7 @@ svc-question {
   .sv-action-bar {
     box-sizing: border-box;
     padding: 0;
-    justify-content: flex-end;
+    justify-content: center;
   }
 }
 
