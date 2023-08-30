@@ -93,8 +93,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     };
   }
   public dispose(): void {
-    super.dispose();
     this.detachElement(this.page);
+    super.dispose();
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {

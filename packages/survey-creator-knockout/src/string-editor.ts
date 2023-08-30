@@ -4,25 +4,23 @@ import { LocalizableString } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./string-editor.html");
 
+function getEditorElement(element: HTMLElement) {
+  return (element.nextSibling as any).getElementsByClassName("sv-string-editor")[0];
+};
+
 export class StringEditorViewModel {
   private implementor = undefined;
   private baseModel: StringEditorViewModelBase;
 
-  getEditorElement = (element) => {
-    return element.nextSibling.getElementsByClassName(
-      "sv-string-editor"
-    )[0];
-  };
-
   constructor(public locString: any, private creator: CreatorBase, element: any) {
     this.baseModel = new StringEditorViewModelBase(locString, creator);
-    this.baseModel.getEditorElement = () => this.getEditorElement(element);
+    this.baseModel.getEditorElement = () => getEditorElement(element);
     this.implementor = new ImplementorBase(this.baseModel);
     this.focusEditor = () => {
-      this.getEditorElement(element).focus();
+      getEditorElement(element).focus();
     };
     this.baseModel.blurEditor = () => {
-      const editorElement = this.getEditorElement(element);
+      const editorElement = getEditorElement(element);
       editorElement.blur();
       editorElement.spellcheck = false;
     };
@@ -34,7 +32,7 @@ export class StringEditorViewModel {
     return locString;
   }
 
-  public afterRender = ()=>{
+  public afterRender = () => {
     this.baseModel.afterRender();
   }
 
@@ -52,7 +50,7 @@ export class StringEditorViewModel {
     return this.baseModel.placeholder;
   }
   public get contentEditable(): string {
-    return this.baseModel.contentEditable?"true":"false";
+    return this.baseModel.contentEditable ? "true" : "false";
   }
   public get characterCounter(): any {
     return this.baseModel.characterCounter;
@@ -116,10 +114,12 @@ export class StringEditorViewModel {
   public focusEditor: () => void;
   public dispose(): void {
     this.locString.onSearchChanged = undefined;
+    if (!!this.implementor) {
+      this.implementor.dispose();
+      this.implementor = undefined;
+    }
     this.focusEditor = undefined;
     this.baseModel.blurEditor = undefined;
-    this.implementor.dispose();
-    this.implementor = undefined;
     this.baseModel.getEditorElement = undefined;
     this.baseModel.dispose();
   }
@@ -182,6 +182,7 @@ ko.components.register(editableStringRendererName, {
 
       ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
         subscrib.dispose();
+        model.dispose();
       });
       return model;
     },

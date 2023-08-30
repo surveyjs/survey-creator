@@ -30,7 +30,6 @@ export function createQuestionViewModel(
   const implementor = new ImplementorBase(model);
   ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, () => {
     implementor.dispose();
-    model.dispose();
   });
   return model;
 }
