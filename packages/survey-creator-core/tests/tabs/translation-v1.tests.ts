@@ -88,7 +88,7 @@ test("Survey child groups, #2", () => {
   );
   const translation: Translation = new Translation(survey);
   translation.showAllStrings = true;
-  expect(translation.localesQuestion.value).toHaveLength(0);
+  expect(translation.getSelectedLocales()).toHaveLength(0);
   expect(translation.locales).toHaveLength(1);
   question.locTitle.setLocaleText("de", "Deutch text");
   translation.reset();
@@ -153,13 +153,13 @@ test("get/set the selected locales", () => {
   translation.addLocale("it");
   translation.setSelectedLocales(null);
   expect(translation.getSelectedLocales()).toHaveLength(0);
-  translation.localesQuestion.value = ["fr", "it"];
+  translation.setSelectedLocales(["fr", "it"]);
   expect(translation.getSelectedLocales()).toHaveLength(2);
   expect(translation.getSelectedLocales()[0]).toEqual("fr");
   translation.setSelectedLocales(["de", "it"]);
   expect(translation.getSelectedLocales()).toHaveLength(2);
   expect(translation.getSelectedLocales()[0]).toEqual("de");
-  expect(translation.localesQuestion.value).toHaveLength(2);
+  expect(translation.getSelectedLocales()).toHaveLength(2);
 });
 test("disable locales", () => {
   const survey: SurveyModel = new SurveyModel({
@@ -187,8 +187,8 @@ test("disable locales", () => {
   translation.reset();
   const locales: string[] = translation.locales;
   expect(locales).toHaveLength(4);
-  expect(translation.localesQuestion.choices).toHaveLength(3);
-  expect(translation.localesQuestion.value).toHaveLength(3);
+  expect(translation.localesQuestion.visibleRows).toHaveLength(3 + 1);
+  expect(translation.getSelectedLocales()).toHaveLength(3);
   surveyLocalization.supportedLocales = [];
 });
 test("get/set the selected locales with inactive translation tab", () => {

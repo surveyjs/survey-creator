@@ -1,7 +1,7 @@
 import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, QuestionCheckboxModel,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
-  ComputedUpdater, createDropdownActionModel, Helpers } from "survey-core";
+  ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
@@ -11,7 +11,6 @@ require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { capitalize } from "../../utils/utils";
 
 export class TranslationItemBase extends Base {
   constructor(public name: string, protected translation: ITranslationLocales) {
@@ -594,8 +593,8 @@ export class Translation extends Base implements ITranslationLocales {
   public get settingsSurvey(): SurveyModel {
     return this.settingsSurveyValue;
   }
-  public get localesQuestion(): QuestionCheckboxModel {
-    return <QuestionCheckboxModel>(
+  public get localesQuestion(): QuestionMatrixDynamicModel {
+    return <QuestionMatrixDynamicModel>(
       this.settingsSurvey.getQuestionByName("locales")
     );
   }
@@ -617,10 +616,8 @@ export class Translation extends Base implements ITranslationLocales {
         this.updateLocales();
       }
     });
-    res.onGetPanelTitleActions.add((sender, options) => {
-      if (options.panel.name == "languages") {
-        options.titleActions = [this.addLanguageAction];
-      }
+    res.onGetQuestionTitleActions.add((sender, options) => {
+      options.titleActions = [this.addLanguageAction];
     });
     return res;
   }
@@ -632,41 +629,28 @@ export class Translation extends Base implements ITranslationLocales {
   }
 
   private updateLocales() {
-    if (!this.localesQuestion) return;
     var res = [""];
-    var val = this.localesQuestion.value;
+    var val = this.getSelectedLocales();
     if (!Array.isArray(val)) val = [];
-    for (var i = 0; i < val.length; i++) {
-      res.push(val[i]);
-    }
+    val.forEach(lc => res.push(lc));
     this.locales = res;
     this.canMergeLocaleWithDefault = this.hasLocale(this.defaultLocale);
   }
   private getSettingsSurveyJSON(): any {
-    const defaultLanguageText = this.getLocaleName("");
     return {
       elements: [
         {
-          type: "panel",
-          name: "languages",
-          elements: [
-            {
-              type: "checkbox",
-              name: "defaultLanguage",
-              titleLocation: "hidden",
-              readOnly: true,
-              choices: [defaultLanguageText],
-              defaultValue: [defaultLanguageText]
-            },
-            {
-              type: "checkbox",
-              name: "locales",
-              choicesVisibleIf: "{selLocales} contains {item}",
-              titleLocation: "hidden",
-              maxSelectedChoices: settings.translation.maximumSelectedLocales
-            }
+          type: "matrixdynamic",
+          name: "locales",
+          title: editorLocalization.getString("ed.translationLanguages"),
+          columns: [
+            { name: "isSelected", cellType: "boolean", renderAs: "checkbox" },
+            { name: "displayName", cellType: "expression", expression: "row.displayName" }
           ],
-          title: editorLocalization.getString("ed.translationLanguages")
+          showHeader: false,
+          allowAddRows: false,
+          rowCount: 0
+          //maxSelectedChoices: settings.translation.maximumSelectedLocales
         }
       ]
     };
@@ -682,8 +666,7 @@ export class Translation extends Base implements ITranslationLocales {
     for (var i = 0; i < locales.length; i++) {
       this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
-    locales = this.settingsSurvey.getValue("selLocales");
-    if (!locales) locales = [];
+    locales = this.getVisibleLocales();
     for (var i = 0; i < locales.length; i++) {
       this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
@@ -691,7 +674,6 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateSettingsSurveyLocales() {
     let [choices, locales] = this.getSurveyLocales();
-    this.localesQuestion.choices = choices;
     const selectedLocales = [];
     if (!locales) locales = [];
     for (var i = 0; i < locales.length; i++) {
@@ -702,7 +684,7 @@ export class Translation extends Base implements ITranslationLocales {
     if (maxLocales > 0 && selectedLocales.length > maxLocales) {
       selectedLocales.splice(maxLocales);
     }
-    this.localesQuestion.value = selectedLocales;
+    this.setSelectedLocales(selectedLocales);
   }
   private resetStringsSurvey() {
     if (!this.hasUI) return;
@@ -871,18 +853,17 @@ export class Translation extends Base implements ITranslationLocales {
     choices.push(new ItemValue(loc, this.getLocaleName(loc)));
   }
   private addLocaleIntoValue(loc: string, updateValue: boolean) {
-    this.addLocaleIntoValueCore("selLocales", loc);
-    if (updateValue) {
-      this.addLocaleIntoValueCore("locales", loc);
+    const visLocs = this.getVisibleLocales();
+    if(visLocs.indexOf(loc) < 0) {
+      visLocs.push(loc);
+      this.setVisibleLocales(visLocs);
     }
-  }
-  private addLocaleIntoValueCore(valueName: string, loc: string) {
-    if (!loc) return;
-    var val = this.settingsSurvey.getValue(valueName);
-    if (!Array.isArray(val)) val = [];
-    if (val.indexOf(loc) < 0 && (valueName !== "locales" || val.length < settings.translation.maximumSelectedLocales)) {
-      val.push(loc);
-      this.settingsSurvey.setValue(valueName, val);
+    if (updateValue) {
+      const selLocs = this.getSelectedLocales();
+      if(selLocs.indexOf(loc) < 0 && selLocs.length < settings.translation.maximumSelectedLocales) {
+        selLocs.push(loc);
+        this.setSelectedLocales(selLocs);
+      }
     }
   }
   private isLocaleVisible(locales: string[], locale: string): boolean {
@@ -932,10 +913,10 @@ export class Translation extends Base implements ITranslationLocales {
   }
   public set survey(val: SurveyModel) {
     this.surveyValue = val;
-    this.settingsSurvey.setValue("selLocales", []);
+    this.setVisibleLocales([]);
     this.reset();
   }
-  public reset(resetSelectedLocales: boolean = false): void {
+  public reset(): void {
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.root = new TranslationGroup(rootName, rootObj, this);
@@ -974,11 +955,7 @@ export class Translation extends Base implements ITranslationLocales {
     }
   }
   public hasLocale(locale: string): boolean {
-    var locales = this.locales;
-    for (var i = 0; i < locales.length; i++) {
-      if (locales[i] == locale) return true;
-    }
-    return false;
+    return this.locales.indexOf(locale) > -1;
   }
   public addLocale(locale: string) {
     if (!this.hasLocale(locale)) {
@@ -988,8 +965,7 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private updateChooseLanguageActions(): void {
     const actions = this.chooseLanguageActions;
-    let locales = this.settingsSurvey.getValue("selLocales");
-    if (!locales) locales = [];
+    let locales = this.getVisibleLocales();
     if (Array.isArray(actions)) {
       actions.forEach(item => item.visible = this.isLocaleVisible(locales, item.data.value));
     }
@@ -998,14 +974,43 @@ export class Translation extends Base implements ITranslationLocales {
   public resetLocales(): void {
     var locales = [""];
     this.root.fillLocales(locales);
-    this.setLocales(locales);
+    this.setSelectedAndVisibleLocales(locales, this.getSelectedLocales(), true);
   }
   public getSelectedLocales(): Array<string> {
-    var res = this.localesQuestion.value;
-    return Array.isArray(res) ? res : [];
+    return this.getSelectedLocalesCore(true);
   }
-  public setSelectedLocales(selectedLocales: Array<string>) {
-    this.localesQuestion.value = selectedLocales;
+  public setSelectedLocales(selectedLocales: Array<string>): void {
+    this.setSelectedAndVisibleLocales(this.getVisibleLocales(), selectedLocales, true);
+  }
+  public getVisibleLocales(): Array<string> {
+    return this.getSelectedLocalesCore(false);
+  }
+  public setVisibleLocales(locales: Array<string>): void {
+    this.setSelectedAndVisibleLocales(locales, this.getSelectedLocales(), false);
+  }
+  private getSelectedLocalesCore(isSelected: boolean): Array<string> {
+    if(!this.localesQuestion) return [];
+    const val = this.localesQuestion.value;
+    if(!Array.isArray(val) || val.length === 0) return [];
+    const res = [];
+    val.forEach(item => { if(!!item.name && (!isSelected || item.isSelected)) res.push(item.name); });
+    return res;
+  }
+  private setSelectedAndVisibleLocales(locales: Array<string>, selectedLocales: Array<string>, includeSelected: boolean): void {
+    if(!this.localesQuestion) return;
+    if(!Array.isArray(selectedLocales)) selectedLocales = [];
+    const val = [];
+    if(includeSelected) {
+      selectedLocales.forEach(sl => { if(locales.indexOf(sl) < 0) locales.push(sl); });
+    }
+    const locDefault = this.defaultLocale;
+    val.push({ isSelected: true, name: "", displayName: this.getLocaleName("") });
+    locales.forEach(loc => {
+      if(!!loc) {
+        val.push({ isSelected: loc === locDefault || selectedLocales.indexOf(loc) > -1, name: loc, displayName: this.getLocaleName(loc) });
+      }
+    });
+    this.localesQuestion.value = val;
   }
   public get noStringsText(): string {
     return editorLocalization.getString("ed.translationNoStrings");
@@ -1098,8 +1103,8 @@ export class Translation extends Base implements ITranslationLocales {
   public mergeLocaleWithDefault() {
     if (!this.hasLocale(this.defaultLocale)) return;
     this.root.mergeLocaleWithDefault(this.defaultLocale);
-    this.settingsSurveyValue.setValue("selLocales", []);
-    this.settingsSurveyValue.setValue("locales", []);
+    this.setVisibleLocales([]);
+    this.setSelectedLocales([]);
     this.reset();
   }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
@@ -1144,13 +1149,6 @@ export class Translation extends Base implements ITranslationLocales {
       itemsHash[name + "." + item.name] = item;
     });
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
-  }
-  private setLocales(locs: Array<string>) {
-    this.settingsSurvey.setValue("setLocales", []);
-    this.localesQuestion.value = [];
-    for (var i = 0; i < locs.length; i++) {
-      this.addLocaleIntoValue(locs[i], false);
-    }
   }
   dispose() {
     this.isEmpty = true;
