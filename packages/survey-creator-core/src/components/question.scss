@@ -107,10 +107,9 @@ svc-question {
           margin-inline-start: calcSize(0.5);
           width: calcSize(2);
           height: calcSize(2);
-          vertical-align: middle;
+          vertical-align: bottom;
           background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 11L13 6H3L8 11Z' fill='%23ff9814'/%3E%3C/svg%3E%0A");
         }
-      
       }
       
       .sv-action-bar-item__icon {
@@ -125,7 +124,7 @@ svc-question {
 
     .sv-action-bar-item__title--with-icon {
       margin-inline-start: 0; // margin-left
-      margin-inline-end: calcSize(0.5); // margin-right
+      margin-inline-end: 0; // margin-right
     }
 
   }
