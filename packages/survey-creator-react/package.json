@@ -1,6 +1,6 @@
 {
   "name": "survey-creator-react",
-  "version": "1.9.104",
+  "version": "1.9.105",
   "description": "",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "author": "Devsoft Baltic OU",
@@ -57,7 +57,7 @@
     "@types/react": "17.0.1",
     "@types/react-dom": "17.0.1",
     "@types/react-test-renderer": "^17.0.1",
-    "ajv": "4.11.2",
+    "ajv": "6.12.3",
     "axe-core": "^3.5.6",
     "axe-testcafe": "latest",
     "chalk": "^3.0.0",
