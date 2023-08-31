@@ -13,7 +13,7 @@
   margin-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
 }
 
-.svc-row .sd-row--multiple {
+.svc-row .sd-row.sd-row--multiple {
   overflow: auto;
   width: calc(100% + 2 * var(--sjs-base-unit, var(--base-unit, 8px)));
   flex-wrap: nowrap;
