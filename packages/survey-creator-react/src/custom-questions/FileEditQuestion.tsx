@@ -26,7 +26,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
   }
   protected renderButtons(): JSX.Element {
     return (
-      <div className={this.questionFile.cssClasses.buttonsContainer} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
+      <div className={this.questionFile.cssClasses.buttonsContainer}>
         {this.renderClearButton()}
         {this.renderChooseButton()}
       </div>
@@ -71,7 +71,8 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         onDragEnter={this.questionFile.onDragEnter}
         onDragOver={this.questionFile.onDragOver}
         onDrop={this.questionFile.onDrop}
-        onDragLeave={this.questionFile.onDragLeave}>
+        onDragLeave={this.questionFile.onDragLeave}
+        onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         { this.renderInput() }
         { this.renderButtons() }
       </div>
