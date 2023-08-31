@@ -61,6 +61,7 @@ test("Check showInMultiple columns editing", async (t) => {
       {
         "type": "matrixdropdown",
         "name": "q1",
+        "title": "Question 1",
         "columns": [
           {
             "name": "Column 1",
@@ -81,7 +82,7 @@ test("Check showInMultiple columns editing", async (t) => {
       }]
   };
   await setJSON(json);
-  const question = Selector("[data-name=\"q1\"]");
+  const question = Selector(".sv-string-editor").withText("Question 1");
   const columns = getPropertyGridCategory("Columns");
   const edit = Selector("button[title='Edit']");
   const showInMultiple = Selector("input[aria-label='Show in multiple columns']");
