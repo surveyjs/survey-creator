@@ -320,6 +320,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "name",
         "title",
+        "visible",
         "isRequired",
         "isUnique",
         "readOnly",
