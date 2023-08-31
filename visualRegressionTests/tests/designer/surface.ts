@@ -1325,7 +1325,7 @@ test("Check carry forward panel ranking", async (t) => {
   });
 });
 
-test("Question adorners for different sizes", async (t) => {
+test("Question adorners - popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1767, 900);
     const json = {
@@ -1355,7 +1355,6 @@ test("Question adorners for different sizes", async (t) => {
     const qDots = Selector(".svc-question__content .sv-dots");
     const requiredItem = Selector(".sv-list__item").withText("Required");
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
-    await takeElementScreenshot("question-tiny.png", pageContent, t, comparer);
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
     await t.click(requiredItem);
@@ -1363,17 +1362,68 @@ test("Question adorners for different sizes", async (t) => {
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
     await t.click(requiredItem);
-
-    json.pages[0].elements[0].maxWidth = "200px";
+  });
+});
+test("Question adorners for different sizes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 1900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question",
+              "minWidth": "100px",
+              "maxWidth": "150px",
+              "title": "Q"
+            }
+            ,
+            {
+              "type": "text",
+              "name": "question1",
+              "minWidth": "100px",
+              "maxWidth": "200px",
+              "title": "Q"
+            }
+            ,
+            {
+              "type": "text",
+              "name": "question2",
+              "minWidth": "100px",
+              "maxWidth": "400px",
+              "title": "Q"
+            }
+            ,
+            {
+              "type": "text",
+              "name": "question3",
+              "minWidth": "100px",
+              "maxWidth": "600px",
+              "title": "Q"
+            }
+          ]
+        }
+      ]
+    };
     await setJSON(json);
-    await takeElementScreenshot("question-small.png", pageContent, t, comparer);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const actions = Selector(".svc-question__content-actions");
+    const qContent = Selector(".svc-question__content");
+    await t.click(qContent.nth(0), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-tiny.png", qContent.nth(0), t, comparer);
 
-    json.pages[0].elements[0].maxWidth = "400px";
-    await setJSON(json);
-    await takeElementScreenshot("question-medium.png", pageContent, t, comparer);
+    await t.click(qContent.nth(1), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-small.png", qContent.nth(1), t, comparer);
 
-    json.pages[0].elements[0].maxWidth = "600px";
-    await setJSON(json);
-    await takeElementScreenshot("question-big.png", pageContent, t, comparer);
+    await t.click(qContent.nth(2), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-medium.png", qContent.nth(2), t, comparer);
+
+    await t.click(qContent.nth(3), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-big.png", qContent.nth(3), t, comparer);
   });
 });
