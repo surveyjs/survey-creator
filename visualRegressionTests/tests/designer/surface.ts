@@ -1364,19 +1364,16 @@ test("Question adorners for different sizes", async (t) => {
     await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
     await t.click(requiredItem);
 
-    await ClientFunction(() => {
-      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "200px";
-    })();
+    json.pages[0].elements[0].maxWidth = "200px";
+    await setJSON(json);
     await takeElementScreenshot("question-small.png", pageContent, t, comparer);
 
-    await ClientFunction(() => {
-      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "400px";
-    })();
+    json.pages[0].elements[0].maxWidth = "400px";
+    await setJSON(json);
     await takeElementScreenshot("question-medium.png", pageContent, t, comparer);
 
-    await ClientFunction(() => {
-      (<any>window).creator.survey.getAllQuestions()[0].maxWidth = "600px";
-    })();
+    json.pages[0].elements[0].maxWidth = "600px";
+    await setJSON(json);
     await takeElementScreenshot("question-big.png", pageContent, t, comparer);
   });
 });
