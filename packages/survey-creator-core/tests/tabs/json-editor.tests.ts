@@ -1,6 +1,6 @@
 import { TextareaJsonEditorModel } from "../../src/components/tabs/json-editor-textarea";
-import { SurveyTextWorker } from "../../src/textWorker";
 import { CreatorTester } from "../creator-tester";
+import { JsonEditorBaseModel } from "../../src/components/tabs/json-editor-plugin";
 
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester();
@@ -61,4 +61,33 @@ test("JsonEditor & fixError action", () => {
       }
     ]
   });
+});
+test("JsonEditor & showErrors/errorList", () => {
+  const creator = new CreatorTester({ showJSONEditorTab: true });
+  let modelEditor;
+  creator.onActiveTabChanged.add((sender, options) => {
+    if(options.tabName === "editor") {
+      modelEditor = options.model;
+    }
+  });
+  let allowToPassSomeErrors = false;
+  creator.onActiveTabChanging.add((sender, options) => {
+    if(creator.activeTab === "editor") {
+      if(!options.allow) {
+        options.allow = allowToPassSomeErrors;
+      }
+    }
+  });
+  creator.activeTab = "editor";
+  expect(creator.activeTab).toBe("editor");
+  modelEditor.text = "{ elements: [ { type: \"text\", name: \"q1\", customProp1: \"abc\" } ]}";
+  creator.activeTab = "designer";
+  expect(creator.activeTab).toBe("editor");
+  allowToPassSomeErrors = true;
+  creator.activeTab = "designer";
+  expect(creator.activeTab).toBe("designer");
+  creator.activeTab = "editor";
+  modelEditor.text = "{a: ";
+  creator.activeTab = "designer";
+  expect(creator.activeTab).toBe("editor");
 });

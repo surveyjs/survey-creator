@@ -54,6 +54,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate? : () => boolean|undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -1206,6 +1207,7 @@ export class CreatorBase extends Base
    * The event is called when creator is going to change the active tab.
    *- sender the survey creator object that fires the event
    *- options.tabName the name of new active tab
+   *- options.model the instance of the model of the current active tab
    */
   public onActiveTabChanging: CreatorEvent = new CreatorEvent();
 
@@ -1243,7 +1245,12 @@ export class CreatorBase extends Base
     return this.switchViewType(viewName);
   }
   private switchViewType(viewName: string): boolean {
-    const chaningOptions = { tabName: viewName, allow: true };
+    let allow = true;
+    if(!!this.currentPlugin?.defaultAllowingDeactivate) {
+      allow = this.currentPlugin.defaultAllowingDeactivate();
+      if(allow === undefined) return false;
+    }
+    const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
