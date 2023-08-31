@@ -41,6 +41,8 @@ test("Editors, loose focus on enter", async (t) => {
   await t.click(getTabbedMenuItemByText("Themes"));
 
   const colorQuestionInputSelector = Selector("div[data-name=--sjs-primary-backcolor] input.spg-color-editor__input");
+  const backgroundImageQuestionInputSelector = Selector("div[data-name=backgroundImage] input.spg-input-container__input");
+  const backgroundOpacityInputSelector = Selector("div[data-name=panelBackgroundTransparency] input.spg-input-container__input");
   await t
     .click(colorQuestionInputSelector)
     .expect(colorQuestionInputSelector.focused).ok()
@@ -48,14 +50,14 @@ test("Editors, loose focus on enter", async (t) => {
     .expect(colorQuestionInputSelector.focused).notOk();
 
   await t
-    .click(Selector("div[data-name=panelBackgroundTransparency] input"))
-    .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).ok()
+    .click(backgroundOpacityInputSelector)
+    .expect(backgroundOpacityInputSelector.focused).ok()
     .pressKey("enter")
-    .expect(Selector("div[data-name=panelBackgroundTransparency] input").focused).notOk();
+    .expect(backgroundOpacityInputSelector.focused).notOk();
 
   await t
-    .click(Selector("div[data-name=backgroundImage] input"))
-    .expect(Selector("div[data-name=backgroundImage] input").focused).ok()
+    .click(backgroundImageQuestionInputSelector)
+    .expect(backgroundImageQuestionInputSelector.focused).ok()
     .pressKey("enter")
-    .expect(Selector("div[data-name=backgroundImage] input").focused).notOk();
+    .expect(backgroundImageQuestionInputSelector.focused).notOk();
 });
