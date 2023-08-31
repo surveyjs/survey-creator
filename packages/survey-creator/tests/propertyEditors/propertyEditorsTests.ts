@@ -1436,8 +1436,8 @@ QUnit.test(
     var props = generalTab.editorProperties;
     for (var i = 0; i < props.length; i++) {
       var prop = props[i];
-      if (prop.editor.editorType == "boolean") continue;
-      assert.equal(prop.editor.showDisplayNameOnTop, true, "It should be shown on top: " + prop.name);
+      if (["boolean", "switch"].indexOf(prop.editor.editorType) > -1) continue;
+      assert.equal(prop.editor.showDisplayNameOnTop, true, "It should be shown on top: " + prop.name + ", editorType:" + prop.editor.editorType);
     }
   }
 );
