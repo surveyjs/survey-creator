@@ -868,6 +868,13 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(3);
+
+  themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
+
+  expect(creator.isThemePristine).toBeFalsy();
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(4);
 });
 
 test("Theme builder: trigger responsiveness", (): any => {

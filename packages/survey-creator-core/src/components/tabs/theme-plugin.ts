@@ -48,6 +48,10 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.model.nextPageAction = this.nextPageAction;
     this.model.initialize(this.creator.JSON, options);
 
+    this.updateUndeRedoActions();
+    this.model.undoRedoManager.canUndoRedoCallback = () => {
+      this.updateUndeRedoActions();
+    };
 
     this.model.show();
     this.model.onPropertyChanged.add((sender, options) => {
@@ -88,7 +92,7 @@ export class TabThemePlugin implements ICreatorPlugin {
       locTitleName: "ed.undo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
-      action: () => this.model.undoRedoManager.undo()
+      action: () => this.undo()
     });
     this.redoAction = new Action({
       id: "action-redo-theme",
@@ -96,7 +100,7 @@ export class TabThemePlugin implements ICreatorPlugin {
       locTitleName: "ed.redo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
-      action: () => this.model.undoRedoManager.redo()
+      action: () => this.redo()
     });
     items.push(this.undoAction);
     items.push(this.redoAction);
@@ -180,6 +184,32 @@ export class TabThemePlugin implements ICreatorPlugin {
     items.push(this.exportAction);
 
     return items;
+  }
+
+  public undo() {
+    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    if (!_undoRedoManager) return;
+    _undoRedoManager.suspend();
+    if (_undoRedoManager.canUndo()) {
+      _undoRedoManager.undo();
+    }
+    _undoRedoManager.resume();
+  }
+
+  public redo() {
+    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    if (!_undoRedoManager) return;
+    _undoRedoManager.suspend();
+    if (_undoRedoManager.canRedo()) {
+      _undoRedoManager.redo();
+    }
+    _undoRedoManager.resume();
+  }
+
+  private updateUndeRedoActions() {
+    const _undoRedoManager = this.model.undoRedoManager;
+    this.undoAction.enabled = _undoRedoManager.canUndo();
+    this.redoAction.enabled = _undoRedoManager.canRedo();
   }
 
   public addFooterActions() {
