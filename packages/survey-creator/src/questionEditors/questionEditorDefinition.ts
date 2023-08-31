@@ -320,6 +320,7 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "name",
         "title",
+        "visible",
         "isRequired",
         "isUnique",
         "readOnly",
@@ -539,6 +540,7 @@ export class SurveyQuestionEditorDefinition {
         "cookieName",
         "widthMode",
         "width",
+        "fitToContainer",
 
         { name: "showPreviewBeforeComplete", tab: "navigation" },
         { name: "pagePrevText", tab: "navigation" },

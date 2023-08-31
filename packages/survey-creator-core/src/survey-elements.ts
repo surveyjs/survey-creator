@@ -1,5 +1,6 @@
 import { DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
+import { IQuestionToolboxItem } from "./toolbox";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -66,11 +67,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public startDragToolboxItem(
     event: PointerEvent,
     draggedElementJson: JsonObject,
-    toolboxItemTitle: string
+    toolboxItemModel: IQuestionToolboxItem
   ): void {
     const preventSaveTargetNode = true;
     const draggedElement: any = this.createElementFromJson(draggedElementJson);
-    draggedElement.toolboxItemTitle = toolboxItemTitle;
+    draggedElement.toolboxItemTitle = toolboxItemModel.title;
+    draggedElement.toolboxItemIconName = toolboxItemModel.iconName;
     this.startDrag(event, draggedElement, null, null, preventSaveTargetNode);
   }
 
@@ -101,8 +103,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected createDraggedElementIcon(): HTMLElement {
     const span = document.createElement("span");
-    const type = this.draggedElement.getType();
-    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#icon-${type}"></use></svg>`;
+    const iconName = this.draggedElement.toolboxItemIconName;
+    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
 
     span.className = "svc-dragged-element-shortcut__icon";
     span.innerHTML = svgString;

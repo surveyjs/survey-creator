@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url } from "../helper";
+import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem } from "../helper";
 
 const title = "Add new question";
 
@@ -78,7 +78,6 @@ test("Add New Question and show title editor", async t => {
   await t.expect(title).eql("CDE");
 });
 test("Drag Drop Toolbox Item and show title editor", async (t) => {
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 

@@ -216,6 +216,8 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.resetTheme = new Action({
       id: "resetTheme",
       iconName: "icon-reset",
+      locTitleName: "ed.themeResetButton",
+      locTooltipName: "ed.themeResetButton",
       mode: "small",
       visible: <any>new ComputedUpdater<boolean>(() => {
         return (this.creator.activeTab === "theme");

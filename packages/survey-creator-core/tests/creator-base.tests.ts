@@ -54,6 +54,7 @@ import { ObjectSelector } from "../src/property-grid/object-selector";
 import { PagesController } from "../src/pages-controller";
 import { TabDesignerViewModel } from "../src/components/tabs/designer";
 import { UndoRedoAction } from "../src/plugins/undo-redo/undo-redo-manager";
+import { assert } from "console";
 
 surveySettings.supportCreatorV2 = true;
 
@@ -3153,6 +3154,29 @@ test("Add Questions into detail panel", (): any => {
   expect(question2.name).toBe("question2");
   expect(question2.no).toBeFalsy();
 });
+test("Page add new question when a selected question is inside a panel, Bug#4468", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{
+      type: "panel", name: "panel1",
+      elements: [{ type: "text", name: "question1" }]
+    }]
+  };
+  creator.selectQuestionByName("question1");
+  expect(creator.selectedElementName).toBe("question1");
+  const panel = creator.survey.getPanelByName("panel1");
+  const page = creator.survey.pages[0];
+  expect(panel.elements).toHaveLength(1);
+  expect(page.elements).toHaveLength(1);
+  const pageAdornerModel = new PageAdorner(creator, page);
+  pageAdornerModel.addNewQuestion(pageAdornerModel, null);
+  expect(panel.elements).toHaveLength(1);
+  expect(page.elements).toHaveLength(2);
+  const panelModel: QuestionAdornerViewModel = new QuestionAdornerViewModel(creator, panel, undefined);
+  panelModel.addNewQuestion();
+  expect(panel.elements).toHaveLength(2);
+  expect(page.elements).toHaveLength(2);
+});
 
 test("Creator state, change the same property, isAutoSave=false", () => {
   const creator = new CreatorTester();
@@ -3980,4 +4004,26 @@ test("Change column properties, isCorrectProperty", (): any => {
   expect(propName).toBe("title");
   column["expression"] = "today()";
   expect(propName).toBe("expression");
+});
+test("Deleted object shouldn't be disposed", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q" }]
+  };
+  const text = creator.survey.getQuestionByName("q");
+  creator.deleteElement(text);
+  expect(text.isDisposed).toBeFalsy();
+});
+test("Remove carry-forward property on deleting a question", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [
+    { type: "dropdown", name: "q1", choices: ["B", "A", "D", "C"] },
+    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" }
+  ] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
+  expect(q2.choicesFromQuestion).toBe("q1");
+  creator.deleteElement(q1);
+  expect(q2.choicesFromQuestion).toBeFalsy();
 });

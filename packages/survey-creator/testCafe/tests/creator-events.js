@@ -21,5 +21,5 @@ test(`onPropertyAfterRender event`, async (t) => {
 
   const checkCount = await addEvent();
 
-  assert.equal(checkCount, 8); // 6 default rendered properties
+  assert.equal(checkCount, 9); // 9 default rendered properties
 });

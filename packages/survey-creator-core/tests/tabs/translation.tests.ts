@@ -1650,3 +1650,72 @@ test("Translation doesnt' work with matrix dynamic and matrix dropdown qestion t
   const cellQuestion1 = <QuestionCommentModel>columnsProps.visibleRows[0].cells[0].question;
   expect(cellQuestion1.value).toEqual("Column 1");
 });
+test("Translation doesnt' work with two matrix dropdown & choices. Bug #4473", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "question1",
+        "columns": [
+          {
+            "name": "col1",
+            "cellType": "dropdown",
+            "choices": [
+              {
+                "value": "A",
+                "text": {
+                  "de": "A (german)",
+                  "default": "A"
+                }
+              },
+              {
+                "value": "B",
+                "text": {
+                  "de": "B (German)",
+                  "default": "B"
+                }
+              }
+            ]
+          }
+        ],
+        "rows": [
+          "Row 1"
+        ]
+      },
+      {
+        "type": "matrixdropdown",
+        "name": "question2",
+        "columns": [
+          {
+            "name": "col1",
+            "cellType": "dropdown",
+            "choices": [
+              "A",
+              "B"
+            ]
+          }
+        ],
+        "rows": [
+          "Row 1"
+        ]
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(1);
+  const pagePanel = <PanelModel>page.elements[0];
+  expect(pagePanel.elements).toHaveLength(2);
+  const question1 = <PanelModel>pagePanel.elements[0];
+  expect(question1.elements).toHaveLength(3);
+  const choicesPanel = <PanelModel>question1.elements[1];
+  const columnPanel = <QuestionMatrixDropdownModel>choicesPanel.elements[1];
+  const columnsChoices = <QuestionMatrixDropdownModel>columnPanel.elements[0];
+  expect(columnsChoices.name).toEqual("question1_col1_props_choices0");
+  expect(columnsChoices.visibleRows).toHaveLength(1);
+  const cells = columnsChoices.visibleRows[0].cells;
+  expect(cells[0].question.value).toEqual("A");
+  expect(cells[1].question.value).toEqual("A (german)");
+});
