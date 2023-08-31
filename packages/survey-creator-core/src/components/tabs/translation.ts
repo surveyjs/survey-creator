@@ -11,6 +11,7 @@ require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
+import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
 
 function localeEnableIf(params: any): boolean {
   if(!this.question || !this.question.parentQuestion || !this.row) return true;
@@ -633,6 +634,7 @@ export class Translation extends Base implements ITranslationLocales {
     var res = this.options.createSurvey(json, "translation_settings");
     res.css = propertyGridCss;
     res.css.root += " st-properties";
+    res.rootCss += " st-properties";
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
@@ -651,6 +653,10 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetQuestionTitleActions.add((sender, options) => {
       options.titleActions = [this.addLanguageAction];
+    });
+    res.onGetMatrixRowActions.add((sender, options) => {
+      updateMatrixRemoveAction(options.question, options.actions, options.row);
+      updateMatixActionsClasses(options.actions);
     });
     return res;
   }
@@ -677,6 +683,7 @@ export class Translation extends Base implements ITranslationLocales {
           name: "locales",
           title: editorLocalization.getString("ed.translationLanguages"),
           confirmDelete: true,
+          titleLocation: "top",
           confirmDeleteText: "You are going to delete all strings for this locale. Are you sure?", //TODO
           columns: [
             { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf({rowIndex})" },

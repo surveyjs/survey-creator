@@ -1,4 +1,4 @@
-import { defaultV2Css, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
+import { defaultV2Css, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {

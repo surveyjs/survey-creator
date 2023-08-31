@@ -2,16 +2,19 @@
   cursor: pointer;
   margin-top: calcSize(2);
 }
+
 .spg-checkbox--disabled {
   cursor: default;
 
   .spg-checkbox {
     cursor: default;
   }
+
   .spg-checkbox__caption {
     color: $foreground-light;
   }
 }
+
 .spg-checkbox__caption {
   font-family: $font-family;
   font-size: calcSize(2);
@@ -29,6 +32,7 @@
   // padding: calcSize(0.5);
   padding: 1px 1px;
 }
+
 .spg-checkbox:hover {
   .spg-checkbox__rectangle {
     background-color: $background-dim;
@@ -36,18 +40,22 @@
 }
 
 .spg-checkbox--disabled {
+
+  .spg-checkbox__rectangle,
   .spg-checkbox__rectangle:hover {
-    background: $background;
+    background: $background-dim;
   }
 }
 
-.spg-checkbox__control:focus + .spg-checkbox__rectangle {
+.spg-checkbox__control:focus+.spg-checkbox__rectangle {
   outline: 2px solid $primary;
   outline-offset: -2px;
 }
+
 .spg-checkbox .spg-checkbox__svg {
   display: none;
 }
+
 .spg-checkbox--checked .spg-checkbox__svg {
   display: block;
   width: calcSize(2.5);
@@ -56,9 +64,11 @@
   background-size: calcSize(2) calcSize(2);
   fill: $primary;
 }
+
 .spg-checkbox--disabled.spg-checkbox--checked .spg-checkbox__svg {
   fill: $border;
 }
+
 .spg-checkbox__control {
   position: fixed;
   height: 1px;
@@ -67,6 +77,7 @@
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
 }
+
 //todo: need to hide unneeded icons
 .spg-checkbox__hidden {
   display: none;
@@ -77,6 +88,7 @@
   padding: 0;
   margin: 0;
 }
+
 .spg-selectbase__label {
   display: flex;
   align-items: flex-start;
