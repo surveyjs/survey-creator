@@ -1,5 +1,4 @@
-// Uncomment the line below if you create a custom dictionary
-import { editorLocalization, defaultStrings } from "../editorLocalization";
+import { editorLocalization } from "survey-creator-core";
 
 export var bgStrings = {
   // survey templates
