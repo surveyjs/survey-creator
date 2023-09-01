@@ -92,6 +92,10 @@
   gap: 0;
   height: auto;
 
+  sv-ng-question-comment {
+    height: calcSize(9);
+  }
+
   .spg-input-container__input {
     box-sizing: border-box;
     resize: none;
