@@ -26,3 +26,4 @@ import "../localization/swedish";
 import "../localization/tajik";
 import "../localization/traditional-chinese";
 import "../localization/turkish";
+import "../localization/bulgarian";
