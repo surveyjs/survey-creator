@@ -1204,18 +1204,28 @@ export class CreatorBase extends Base
     this.isRTLValue = value;
   }
   /**
-   * The event is called when creator is going to change the active tab.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
-   *- options.model the instance of the model of the current active tab
+   * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"embed"` | `"logic"` | `"translation"`\
+   * A tab that is going to become active.
+   * - `options.allow`: `Boolean`\
+   * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
    */
   public onActiveTabChanging: CreatorEvent = new CreatorEvent();
 
   /**
-   * The event is called when creator active tab is changed.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
-   *- options.model the instance of the model of the new active tab
+   * An event that is raised after the [active tab](#activeTab) is switched.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"embed"` | `"logic"` | `"translation"`\
+   * A tab that has become active.
    */
   public onActiveTabChanged: CreatorEvent = new CreatorEvent();
   /**
