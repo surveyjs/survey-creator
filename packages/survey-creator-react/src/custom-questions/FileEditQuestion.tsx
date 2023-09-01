@@ -71,7 +71,8 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         onDragEnter={this.questionFile.onDragEnter}
         onDragOver={this.questionFile.onDragOver}
         onDrop={this.questionFile.onDrop}
-        onDragLeave={this.questionFile.onDragLeave}>
+        onDragLeave={this.questionFile.onDragLeave}
+        onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         { this.renderInput() }
         { this.renderButtons() }
       </div>

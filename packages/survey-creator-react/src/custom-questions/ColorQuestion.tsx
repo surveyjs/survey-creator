@@ -33,7 +33,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   }
   protected renderElement(): JSX.Element {
     return (
-      <div className={this.question.cssClasses.root}>
+      <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         { this.renderColorSwatch() }
         { this.renderInput() }
         { this.question.showDropdownAction ? this.renderDropdownAction() : null }

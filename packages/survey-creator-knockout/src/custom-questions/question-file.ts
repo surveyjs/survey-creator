@@ -31,6 +31,10 @@ class QuestionFileEditorImplementor extends QuestionImplementor {
     this.setCallbackFunc("doclean", (data: any, event: any) => {
       this.question.doClean(getOriginalEvent(event));
     });
+    this.setCallbackFunc("koOnKeyDown", (_: any, event: any) => {
+      this.question.onKeyDown(event);
+      return true;
+    });
     this.setCallbackFunc("koOnBeforeInput", (_: any, event: any) => {
       this.question.onInputBlur(event);
       return true;
