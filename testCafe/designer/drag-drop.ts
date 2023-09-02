@@ -91,7 +91,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
     const el: any = document.getElementById("survey-creator");
     el.style.position = "relative";
     el.style.bottom = undefined;
-    el.style.height = "10000px";
+    el.style.height = "15000px";
     const rootEl: any = document.getElementsByTagName("app-root")[0];
     if (!!rootEl) {
       rootEl.style.position = "relative";
