@@ -13,12 +13,16 @@ import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
 import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
 
+let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
-  if(!this.question || !this.question.parentQuestion || !this.row) return true;
-  const index = params[0];
-  if(index === 0) return false;
-  if(!index) return true;
-  const val = this.question.parentQuestion.value;
+  if(isLocaleEnableIfExecuting || !this.question || !this.row) return false;
+  const matrix = this.question.parentQuestion;
+  if(!matrix) return false;
+  isLocaleEnableIfExecuting = true;
+  const index = matrix.visibleRows.indexOf(this.row);
+  isLocaleEnableIfExecuting = false;
+  if(index <= 0) return false;
+  const val = matrix.value;
   if(!Array.isArray(val)) return true;
   const rowVal = val[index];
   if(!rowVal || rowVal.isSelected) return true;
@@ -686,7 +690,7 @@ export class Translation extends Base implements ITranslationLocales {
           titleLocation: "top",
           confirmDeleteText: "You are going to delete all strings for this locale. Are you sure?", //TODO
           columns: [
-            { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf({rowIndex})" },
+            { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf()" },
             { name: "displayName", cellType: "expression", expression: "row.displayName" }
           ],
           showHeader: false,

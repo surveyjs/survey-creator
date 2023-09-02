@@ -1726,6 +1726,18 @@ test("You can't delete or unselect the default locale", () => {
   expect(question.canRemoveRow(rows[0])).toBeFalsy();
   expect(question.canRemoveRow(rows[1])).toBeTruthy();
 });
+test("You can't delete or unselect the default locale, there is only default locale", () => {
+  const survey = new SurveyModel();
+  const translation = new Translation(survey);
+  translation.reset();
+  const question = translation.localesQuestion;
+  const rows = question.visibleRows;
+  expect(rows).toHaveLength(1);
+  const checkQuestion1 = rows[0].cells[0].question;
+  expect(checkQuestion1.value).toBeTruthy();
+  expect(checkQuestion1.isReadOnly).toBeTruthy();
+  expect(question.canRemoveRow(rows[0])).toBeFalsy();
+});
 test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () => {
   const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
   settings.translation.maximumSelectedLocales = 2;
