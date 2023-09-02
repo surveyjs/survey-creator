@@ -549,3 +549,45 @@ test("Check overriding property editor", async (t) => {
     await takeElementScreenshot("overriding-property-editor.png", Selector(".spg-row--multiple"), t, comparer);
   });
 });
+
+test("Check comment editor with reset button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "test:text",
+        default: "default",
+        category: "general",
+        visibleIndex: 0
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='test']");
+    await takeElementScreenshot("comment-with-reset-disabled-button.png", questionSelector, t, comparer);
+    await t.typeText(questionSelector.find("textarea"), "value", { replace: true });
+    await takeElementScreenshot("comment-with-reset-enabled-button.png", questionSelector, t, comparer);
+  });
+});
+
+test("Check text editor with reset button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "test",
+        default: "default",
+        category: "general",
+        visibleIndex: 0
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='test']");
+    await takeElementScreenshot("text-with-reset-disabled-button.png", questionSelector, t, comparer);
+    await t.typeText(questionSelector.find("input"), "value", { replace: true });
+    await takeElementScreenshot("text-with-reset-enabled-button.png", questionSelector, t, comparer);
+  });
+});

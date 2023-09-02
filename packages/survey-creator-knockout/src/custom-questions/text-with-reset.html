@@ -1,0 +1,8 @@
+<div data-bind="css: question.getRootClass()">
+  <!-- ko template: { name: "survey-question-" + question.wrappedQuestionTemplate, data: question, as: 'question', afterRender: question.koQuestionAfterRender } -->
+  <!-- /ko -->
+  <button type="button"
+    data-bind="click: function() { question.resetValueAdorner.resetValue() }, css: question.cssClasses.resetButton, disable: question.resetValueAdorner.isDisabled, attr: { title: question.resetValueAdorner.caption }">
+    <!-- ko component: { name: 'sv-svg-icon', params: {  iconName: question.cssClasses.resetButtonIcon, size: 'auto' } } --><!-- /ko -->
+  </button>
+</div>

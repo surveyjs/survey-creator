@@ -340,6 +340,17 @@ export var propertyGridCss = {
     colorItem: "spg-color-editor__color-item",
     swatchIcon: "icon-color-picker"
   },
+  textwithreset: {
+    root: "spg-input spg-input-container",
+    rootMultiline: "spg-input-container--multiline",
+    control: "spg-input-container__input",
+    controlMultiline: "spg-input-container__input spg-comment",
+    resetButton: "spg-input__edit-button",
+    resetButtonIcon: "icon-reset",
+    content: "spg-question__content spg-text__content",
+    remainingCharacterCounter: "spg-remaining-character-counter",
+    onError: "spg-input--error"
+  },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",
     control: "spg-input-container__input",
