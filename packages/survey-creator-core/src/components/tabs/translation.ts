@@ -688,7 +688,7 @@ export class Translation extends Base implements ITranslationLocales {
           title: editorLocalization.getString("ed.translationLanguages"),
           confirmDelete: true,
           titleLocation: "top",
-          confirmDeleteText: "You are going to delete all strings for this locale. Are you sure?", //TODO
+          confirmDeleteText: editorLocalization.getString("ed.translationDeleteLanguage"),
           columns: [
             { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf()" },
             { name: "displayName", cellType: "expression", expression: "row.displayName" }
