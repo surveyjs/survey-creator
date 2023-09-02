@@ -1,4 +1,4 @@
-<div [class]="model.cssClasses.root">
+<div [class]="model.cssClasses.root" (keydown)="model.onKeyDown($event)">
   <label [class]="model.getSwatchCss()" [style]="model.getSwatchStyle()">
     <svg [iconName]="model.cssClasses.swatchIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     <input type="color" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.colorInput"
