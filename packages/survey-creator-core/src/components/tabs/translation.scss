@@ -29,6 +29,14 @@
         gap: 0;
       }
     }
+
+    .spg-checkbox--disabled {
+
+      .spg-checkbox__rectangle,
+      .spg-checkbox__rectangle:hover {
+        background: $background-dim;
+      }
+    }
   }
 }
 
