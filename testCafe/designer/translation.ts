@@ -23,8 +23,9 @@ fixture(title)
 test("add language", async (t) => {
   const languageHeaderColumnSelector = Selector(".st-strings-header table tr").nth(0).find("th");
   const stringsColumnSelector = Selector(".st-strings table tr").nth(0).find("td");
-  const languagesSelector = Selector(".svc-side-bar__container .spg-item.spg-checkbox");
-  const languageCaptionsSelector = languagesSelector.find(".spg-checkbox__caption");
+  const languagesSelector = Selector(".spg-checkbox");
+  const languageDefaultText = Selector(".spg-table__question-wrapper").withText("Default (English)");
+  const languageDeText = Selector(".spg-table__question-wrapper").withText("Deutsch");
   const checkedClassName = "spg-checkbox--checked";
   const disabledClassName = "spg-checkbox--disabled";
 
@@ -39,25 +40,25 @@ test("add language", async (t) => {
     .expect(languagesSelector.count).eql(1)
     .expect(languagesSelector.nth(0).classNames).contains(disabledClassName)
     .expect(languagesSelector.nth(0).classNames).contains(checkedClassName)
-    .expect(languageCaptionsSelector.nth(0).innerText).eql("Default (English)")
+    .expect(languageDefaultText.exists).ok()
 
-    .click(Selector(".spg-panel__title").withText("Languages").find(".spg-action-button"))
+    .click(Selector(".spg-question__title").withText("Languages").find(".spg-action-button"))
     .click(Selector("span").withText("Deutsch"))
     .expect(languageHeaderColumnSelector.count).eql(2)
     .expect(stringsColumnSelector.count).eql(3)
     .expect(languagesSelector.count).eql(2)
     .expect(languagesSelector.nth(0).classNames).contains(disabledClassName)
     .expect(languagesSelector.nth(0).classNames).contains(checkedClassName)
-    .expect(languageCaptionsSelector.nth(0).innerText).eql("Default (English)")
+    .expect(languageDefaultText.exists).ok()
     .expect(languagesSelector.nth(1).classNames).contains(checkedClassName)
-    .expect(languageCaptionsSelector.nth(1).innerText).eql("Deutsch")
+    .expect(languageDeText.exists).ok()
 
-    .click(languageCaptionsSelector.withText("Deutsch"))
+    .click(languagesSelector.nth(1))
     .expect(languageHeaderColumnSelector.count).eql(1)
     .expect(stringsColumnSelector.count).eql(2)
     .expect(languagesSelector.nth(1).classNames).notContains(checkedClassName)
 
-    .click(languageCaptionsSelector.withText("Deutsch"))
+    .click(languagesSelector.nth(1))
     .expect(languageHeaderColumnSelector.count).eql(2)
     .expect(stringsColumnSelector.count).eql(3)
     .expect(languagesSelector.nth(1).classNames).contains(checkedClassName);
