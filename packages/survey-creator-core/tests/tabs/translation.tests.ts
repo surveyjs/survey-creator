@@ -1817,3 +1817,35 @@ test("Remove locale strings from translation via remove row", () => {
   expect(deLocaleAction.visible).toBeTruthy();
   expect(translation.locales).toHaveLength(1);
 });
+test("Remove locale strings from translation via remove row, unchecked locale", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        }
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.locales[1]).toEqual("de");
+  const question = translation.localesQuestion;
+  expect(question.visibleRows).toHaveLength(2);
+  let matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
+  expect(matrix.columns).toHaveLength(2);
+  question.visibleRows[1].cells[0].question.value = false;
+  matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
+  expect(matrix.columns).toHaveLength(1);
+  question.removeRow(1, false);
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [
+      {
+        name: "page2",
+      }
+    ]
+  });
+  expect(translation.locales).toHaveLength(1);
+});
