@@ -126,6 +126,7 @@ var italianTranslation = {
     translationPropertyGridTitle: "Impostazione della traduzione",
     themePropertyGridTitle: "Impostazioni del tema",
     translationLanguages: "Lingue",
+    translationDeleteLanguage: "Sei sicuro di voler eliminare tutte le stringhe per questa lingua?",
     translationAddLanguage: "Seleziona la lingua da tradurre",
     translationShowAllStrings: "Tutte le stringhe",
     translationShowUsedStringsOnly: "Solo le stringhe usate",
@@ -137,6 +138,7 @@ var italianTranslation = {
     translationPlaceHolder: "Traduzione...",
     themeExportButton: "Esportazione",
     themeImportButton: "Importazione",
+    themeResetButton: "Ripristina le impostazioni del tema predefinite",
     bold: "Grassetto",
     italic: "Corsivo",
     underline: "Sottolineato",
@@ -1016,6 +1018,7 @@ var italianTranslation = {
     fontFamily: "Famiglia di caratteri",
     fontSize: "Dimensione del carattere",
     color: "Colore",
+    placeholderColor: "Colore segnaposto",
     size: "Grandezza",
     fontWeightRegular: "Regolare",
     fontWeightHeavy: "Pesante",
@@ -1309,3 +1312,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // names.layered: "Layered" => "Stratificato"
 // names.solid: "Solid" => "Solido"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Sei sicuro di voler eliminare tutte le stringhe per questa lingua?"
+// ed.themeResetButton: "Reset theme settings to default" => "Ripristina le impostazioni del tema predefinite"
+// theme.placeholderColor: "Placeholder color" => "Colore segnaposto"

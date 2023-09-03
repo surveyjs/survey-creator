@@ -126,6 +126,7 @@ export var koreanStrings = {
     translationPropertyGridTitle: "언어 설정",
     themePropertyGridTitle: "테마 설정",
     translationLanguages: "언어들",
+    translationDeleteLanguage: "이 언어에 대한 모든 문자열을 삭제하시겠습니까?",
     translationAddLanguage: "번역할 언어 선택",
     translationShowAllStrings: "모든 문자열",
     translationShowUsedStringsOnly: "사용된 문자열만",
@@ -137,6 +138,7 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     themeExportButton: "수출",
     themeImportButton: "수입",
+    themeResetButton: "테마 설정을 기본값으로 재설정",
     bold: "대담한",
     italic: "이탤릭체",
     underline: "밑줄",
@@ -1016,6 +1018,7 @@ export var koreanStrings = {
     fontFamily: "글꼴 패밀리",
     fontSize: "글자 크기",
     color: "색",
+    placeholderColor: "자리 표시자 색",
     size: "크기",
     fontWeightRegular: "일반",
     fontWeightHeavy: "무겁다",
@@ -1759,3 +1762,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // names.layered: "Layered" => "계층"
 // names.solid: "Solid" => "고체"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "이 언어에 대한 모든 문자열을 삭제하시겠습니까?"
+// ed.themeResetButton: "Reset theme settings to default" => "테마 설정을 기본값으로 재설정"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "자리 표시자 색"

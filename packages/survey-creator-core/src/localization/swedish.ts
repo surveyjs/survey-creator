@@ -126,6 +126,7 @@ export let svStrings = {
     translationPropertyGridTitle: "Språkinställningar",
     themePropertyGridTitle: "Tema Inställningar",
     translationLanguages: "Språk",
+    translationDeleteLanguage: "Är du säker på att du vill ta bort alla strängar för det här språket?",
     translationAddLanguage: "Välj språk för oversättning",
     translationShowAllStrings: "Visa alla strängar",
     translationShowUsedStringsOnly: "Endast använda strängar",
@@ -137,6 +138,7 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    themeResetButton: "Återställ temainställningarna till standard",
     bold: "Djärv",
     italic: "Kursiv",
     underline: "Understryka",
@@ -1016,6 +1018,7 @@ export let svStrings = {
     fontFamily: "Teckensnitt familj",
     fontSize: "Teckenstorlek",
     color: "Färg",
+    placeholderColor: "Färg på platshållare",
     size: "Storlek",
     fontWeightRegular: "Ordinarie",
     fontWeightHeavy: "Tung",
@@ -1733,3 +1736,8 @@ editorLocalization.locales["sv"] = svStrings;
 // names.layered: "Layered" => "Lager"
 // names.solid: "Solid" => "Solid"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Är du säker på att du vill ta bort alla strängar för det här språket?"
+// ed.themeResetButton: "Reset theme settings to default" => "Återställ temainställningarna till standard"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Färg på platshållare"

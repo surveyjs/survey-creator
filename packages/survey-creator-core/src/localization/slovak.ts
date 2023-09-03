@@ -126,6 +126,7 @@ export var skStrings = {
     translationPropertyGridTitle: "Nastavenia jazyka",
     themePropertyGridTitle: "Nastavenia motívu",
     translationLanguages: "Jazyky",
+    translationDeleteLanguage: "Ste si istý, že chcete odstrániť všetky reťazce pre tento jazyk?",
     translationAddLanguage: "Výber jazyka na preklad",
     translationShowAllStrings: "Zobraziť všetky reťazce",
     translationShowUsedStringsOnly: "Iba použité reťazce",
@@ -137,6 +138,7 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
+    themeResetButton: "Obnovenie predvolených nastavení motívu",
     bold: "Tučné",
     italic: "Kurzíva",
     underline: "Podčiarknutie",
@@ -1016,6 +1018,7 @@ export var skStrings = {
     fontFamily: "Skupina písiem",
     fontSize: "Veľkosť písma",
     color: "Farba",
+    placeholderColor: "Farba zástupného symbolu",
     size: "Veľkosť",
     fontWeightRegular: "Pravidelný",
     fontWeightHeavy: "Ťažký",
@@ -1509,3 +1512,8 @@ editorLocalization.locales["sk"] = skStrings;
 // names.layered: "Layered" => "Vrstvené"
 // names.solid: "Solid" => "Pevný"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Ste si istý, že chcete odstrániť všetky reťazce pre tento jazyk?"
+// ed.themeResetButton: "Reset theme settings to default" => "Obnovenie predvolených nastavení motívu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
