@@ -15,7 +15,6 @@ export var bgStrings = {
     deleteQuestion: "Изтриване на въпрос",
     convertTo: "Преобразуване",
     drag: "Изтегляне на елемент",
-    license: "ЗА ДА МОЖЕ ДА ИЗПОЛЗВАТЕ ПРОГРАМАТА ЗА СЪЗДАВАНЕ НА АНКЕТИ В ПРИЛОЖЕНИЕТО СИ, ТРЯБВА ДА ЗАКУПИТЕ ЛИЦЕНЗ ЗА НЕЯ."
   },
   // Question types
   qt: {
@@ -125,8 +124,9 @@ export var bgStrings = {
     propertyEditorError: "Грешка",
     saveError: "Грешка! Съдържанието на редактора не е запазено.",
     translationPropertyGridTitle: "Езикови настройки",
-    previewPropertyGridTitle: "Настройки на темата",
+    themePropertyGridTitle: "Настройки на тема",
     translationLanguages: "Езици",
+    translationDeleteLanguage: "Сигурни ли сте, че искате да изтриете всички низове за този език?",
     translationAddLanguage: "Изберане на език за превод",
     translationShowAllStrings: "Всички низове",
     translationShowUsedStringsOnly: "Само използвани низове",
@@ -136,11 +136,15 @@ export var bgStrings = {
     translationImportFromSCVButton: "Импортиране от CSV",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
+    themeExportButton: "Износ",
+    themeImportButton: "Внос",
+    themeResetButton: "Връщане на настройките на тема в начално състояние по подразбиране",
     bold: "Удебелен",
     italic: "Курсив",
     underline: "Подчертан",
     addNewQuestion: "Добавяне на въпрос",
     selectPage: "Избиране на страница...",
+    carryForwardChoicesCopied: "Възможностите за избор се копират от",
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     panelPlaceHolder: "Пусни въпроса от кутията с инструменти тук.",
     surveyPlaceHolder: "Анкетата е празна. Плъзни елемент от кутията с инструменти или щракни върху бутона по-долу.",
@@ -194,6 +198,7 @@ export var bgStrings = {
       column_requireText: "направи колона {0} на въпрос {1} задължителна", //{0} column name, {1} question name
       trigger_completeText: "анкетата е завършена",
       trigger_setvalueText: "задай на въпрос: {0} стойност {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "ясна стойност на въпроса: {0}", //{0} question name
       trigger_copyvalueText: "копирай във въпрос: {0} стойност от въпрос {1}", //{0} and {1} question names
       trigger_skipText: "анкетата преминава към въпрос {0}", //{0} question name
       trigger_runExpressionText1: "стартов израз: '{0}'", //{0} the expression
@@ -256,7 +261,7 @@ export var bgStrings = {
     fastEntry: "Ръчно въвеждане",
     fastEntryNonUniqueError: "Стойността '{0}' не е уникална.",
     fastEntryChoicesCountError: "Моля, ограничи броя на елементите от {0} до {1}",
-    fastEntryPlaceholder: "Може да зададеш данни в следния формат:\стойност1|текст\стойност2",
+    fastEntryPlaceholder: "Може да зададеш данни в следния формат:стойност1|текстстойност2",
     formEntry: "Въвеждане на формуляр",
     testService: "Тествай услугата.",
     itemSelectorEmpty: "Моля, избери елемент.",
@@ -273,6 +278,7 @@ export var bgStrings = {
     assistantTitle: "Налични въпроси",
     cellsEmptyRowsColumns: "Трябва да има поне една колона или ред.",
     showPreviewBeforeComplete: "Визуализирай отговорите, преди да изпратиш анкетата.",
+    overridingPropertyPrefix: "Зададено от ",
     propertyIsEmpty: "Моля, въведи стойност.",
     propertyIsNoUnique: "Моля, въведи уникална стойност.",
     propertyNameIsNotUnique: "Моля, въведи уникално име.",
@@ -496,7 +502,6 @@ export var bgStrings = {
     hideColumnsIfEmpty: "Скриване на колони, ако няма редове",
     rateValues: "Персонализирани стойности на оценката",
     rateCount: "Брой на оценките",
-    rateDisplayMode: "Режим за показване на оценката",
     autoGenerate: "Как се задават стойности на оценката?",
     hideIfChoicesEmpty: "Показване въпроса, ако не съдържа избор",
     hideNumber: "Показване номера на въпроса",
@@ -513,6 +518,7 @@ export var bgStrings = {
     maxErrorText: "\"Стойността надвишава максимума.\" съобщение за грешка",
     otherErrorText: "\"Празен коментар\" съобщение за грешка",
     keyDuplicationError: "\"Неуникална стойност на ключ\" съобщение за грешка",
+    minSelectedChoices: "Минимален избор",
     maxSelectedChoices: "Максимален брой избрани",
     showClearButton: "Показване на бутона Изчистване (Clear)",
     showNumber: "Показване на номера на панела",
@@ -629,12 +635,13 @@ export var bgStrings = {
     alternateRows: "Алтернативни редове",
     columnsVisibleIf: "Колоните се виждат, ако",
     rowsVisibleIf: "Редовете се виждат, ако",
-    otherPlaceholder: "Заместител на областта за коментари"
+    otherPlaceholder: "Заместител на областта за коментари",
+    rateType: "Тип на тарифата"
   },
   // Property values
   pv: {
-    true: "вярно",
-    false: "невярно",
+    "true": "вярно",
+    "false": "невярно",
     inherit: "Наследяване",
     show: "Видим",
     hide: "Скрит",
@@ -776,7 +783,9 @@ export var bgStrings = {
       buttons: "Бутони",
       dropdown: "Падащо меню"
     },
-    rateColorMode: { default: "По подразбиране" },
+    rateColorMode: {
+      default: "По подразбиране"
+    },
     autoGenerate: {
       "true": "Генерирай.",
       "false": "Въведи ръчно."
@@ -785,7 +794,7 @@ export var bgStrings = {
       labels: "Етикети",
       stars: "Звезди",
       smileys: "Усмивки"
-    },
+    }
   },
   // Operators
   op: {
@@ -851,6 +860,7 @@ export var bgStrings = {
   },
   pehelp: {
     cookieName: "Бисквитките не позволяват на потребителите да попълнят една и съща анкета два пъти.",
+    size: "Преоразмерява видимата област на входното поле. Моля, използвайте настройката <b>Проверка → максимална</b> дължина, за да ограничите входната дължина.",
     format: "Използвай {0} като контейнер за действителната стойност.",
     totalText: "Вижда се, само когато поне една колона има общ тип или общ израз.",
     acceptedTypes: "Направи справка с (https://www.w3schools.com/tags/att_input_accept.asp) за повече информация.",
@@ -946,7 +956,21 @@ export var bgStrings = {
     runExpression: "Стартиване на израза",
     showCaption: "Показване на надпис",
     iconName: "Име на икона",
-    iconSize: "Размер на иконата"
+    iconSize: "Размер на иконата",
+    precision: "Точност",
+    matrixDragHandleArea: "Област на манипулатора за плъзгане на матрицата",
+    backgroundImage: "Фоново изображение",
+    backgroundImageFit: "Побиране на фоново изображение",
+    backgroundImageAttachment: "Прикачен файл с фоново изображение",
+    backgroundOpacity: "Непрозрачност на фона",
+    selectToRankEnabled: "Изберете за класиране разрешено",
+    selectToRankAreasLayout: "Изберете оформление за класиране на области",
+    allowCameraAccess: "Разреши достъп до камерата",
+    scaleColorMode: "Режим на мащабиране на цветовете",
+    rateColorMode: "Режим на оценяване на цветовете",
+    templateTabTitle: "Заглавие на раздела \"Шаблон\"",
+    templateVisibleIf: "Шаблонът се вижда, ако",
+    copyDisplayValue: "Копиране на показваната стойност"
   },
   theme: {
     "--background": "Цвят на фона",
@@ -956,24 +980,26 @@ export var bgStrings = {
     "--base-unit": "Базова единица",
     groupGeneral: "Общ",
     groupAdvanced: "Разширен",
-    "themeName": "Тема",
-    "themeMode": "Режими",
-    "themeModePanels": "Панели",
-    "themeModeLightweight": "Лек",
-    "themePaletteLight": "Светло",
-    "themePaletteDark": "Тъмно",
+    themeName: "Тема",
+    themeMode: "Режими",
+    themeModePanels: "Панели",
+    themeModeLightweight: "Лек",
+    themePaletteLight: "Светло",
+    themePaletteDark: "Тъмно",
     primaryColor: "Цвят на акцента",
     primaryDefaultColor: "По подразбиране",
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
-    "backgroundDimColor": "Цвят на фона",
-    "backgroundImage": "Фоново изображение",
-    "backgroundImageFitAuto": "Автоматичен",
-    "backgroundImageFitCover": "Корица",
-    "backgroundImageFitContain": "Съдържание",
-    "backgroundOpacity": "Непрозрачност",
-    "panelBackgroundTransparency": "Прозрачност на фона на панела",
-    "questionBackgroundTransparency": "Прозрачност на фона на въпроса",
+    backgroundDimColor: "Цвят на фона",
+    backgroundImage: "Фоново изображение",
+    backgroundImageFitAuto: "Автоматичен",
+    backgroundImageFitCover: "Корица",
+    backgroundImageFitContain: "Съдържание",
+    backgroundOpacity: "Непрозрачност",
+    backgroundImageAttachmentFixed: "Неподвижен",
+    backgroundImageAttachmentScroll: "Свитък",
+    panelBackgroundTransparency: "Прозрачност на фона на панела",
+    questionBackgroundTransparency: "Прозрачност на фона на въпроса",
     questionPanel: "Панел с въпроси",
     questionTitle: "Шрифт на заглавието на въпроса",
     questionDescription: "Шрифт на описанието на въпроса",
@@ -992,8 +1018,10 @@ export var bgStrings = {
     fontFamily: "Шрифтово семейство",
     fontSize: "Размер на шрифта",
     color: "Цвят",
+    placeholderColor: "Цвят на контейнера",
     size: "Размер",
     fontWeightRegular: "Същински (обичаен)",
+    fontWeightHeavy: "Тежък",
     fontWeightSemiBold: "Полудебел",
     fontWeightBold: "Удебелен",
     scale: "Мащаб",
@@ -1003,15 +1031,90 @@ export var bgStrings = {
     pageDescription: "Page Description Font",
     boxShadowX: "X",
     boxShadowY: "Y",
+    boxShadowAddRule: "Добавяне на ефект на сянка",
     opacity: "Непрозрачност",
     boxShadowBlur: "Замъгляване",
     boxShadowSpread: "Разпространение",
+    boxShadowDrop: "Капка",
+    boxShadowInner: "Вътрешен",
     questionShadow: "Граница на панела с въпроси / Сянка",
-    editorShadow: "Граница на редактора / Сянка"
-  },
+    editorShadow: "Граница на редактора / Сянка",
+    names: {
+      default: "По подразбиране",
+      sharp: "Остър",
+      borderless: "Без граници",
+      flat: "Апартамент",
+      plain: "Равнина",
+      doubleborder: "Двойна граница",
+      layered: "Пластове",
+      solid: "Солиден",
+      threedimensional: ".3D",
+      contrast: "Контраст"
+    },
+    colors: {
+      teal: "Тийл",
+      blue: "Син",
+      purple: "Лилав",
+      orchid: "Орхидея",
+      tulip: "Лале",
+      brown: "Кафяв",
+      green: "Зелен"
+    }
+  }
 };
 
 // Uncomment the line below if you create a custom dictionary.
 // Replace "en" with a custom locale code (for example, "fr" or "de"),
 // Replace `enStrings` with the name of the variable that contains the custom dictionary.
 editorLocalization.locales["bg"] = bgStrings;
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// ed.themePropertyGridTitle: "Theme Settings" => "Настройки на тема"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Сигурни ли сте, че искате да изтриете всички низове за този език?"
+// ed.themeExportButton: "Export" => "Износ"
+// ed.themeImportButton: "Import" => "Внос"
+// ed.themeResetButton: "Reset theme settings to default" => "Връщане на настройките на тема в начално състояние по подразбиране"
+// ed.carryForwardChoicesCopied: "Choices are copied from" => "Възможностите за избор се копират от"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "ясна стойност на въпроса: {0}"
+// pe.overridingPropertyPrefix: "Set by " => "Зададено от "
+// pe.minSelectedChoices: "Minimum selected choices" => "Минимален избор"
+// pe.rateType: "Rate type" => "Тип на тарифата"
+// pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Преоразмерява видимата област на входното поле. Моля, използвайте настройката <b>Проверка → максимална</b> дължина, за да ограничите входната дължина."
+// p.precision: "Precision" => "Точност"
+// p.matrixDragHandleArea: "Matrix drag handle area" => "Област на манипулатора за плъзгане на матрицата"
+// p.backgroundImage: "Background image" => "Фоново изображение"
+// p.backgroundImageFit: "Background image fit" => "Побиране на фоново изображение"
+// p.backgroundImageAttachment: "Background image attachment" => "Прикачен файл с фоново изображение"
+// p.backgroundOpacity: "Background opacity" => "Непрозрачност на фона"
+// p.selectToRankEnabled: "Select to rank enabled" => "Изберете за класиране разрешено"
+// p.selectToRankAreasLayout: "Select to rank areas layout" => "Изберете оформление за класиране на области"
+// p.allowCameraAccess: "Allow camera access" => "Разреши достъп до камерата"
+// p.scaleColorMode: "Scale color mode" => "Режим на мащабиране на цветовете"
+// p.rateColorMode: "Rate color mode" => "Режим на оценяване на цветовете"
+// p.templateTabTitle: "Template tab title" => "Заглавие на раздела \"Шаблон\""
+// p.templateVisibleIf: "Template visible if" => "Шаблонът се вижда, ако"
+// p.copyDisplayValue: "Copy display value" => "Копиране на показваната стойност"
+// theme.backgroundImageAttachmentFixed: "Fixed" => "Неподвижен"
+// theme.backgroundImageAttachmentScroll: "Scroll" => "Свитък"
+// theme.placeholderColor: "Placeholder color" => "Цвят на контейнера"
+// theme.fontWeightHeavy: "Heavy" => "Тежък"
+// theme.boxShadowAddRule: "Add Shadow Effect" => "Добавяне на ефект на сянка"
+// theme.boxShadowDrop: "Drop" => "Капка"
+// theme.boxShadowInner: "Inner" => "Вътрешен"
+// names.default: "Default" => "По подразбиране"
+// names.sharp: "Sharp" => "Остър"
+// names.borderless: "Borderless" => "Без граници"
+// names.flat: "Flat" => "Апартамент"
+// names.plain: "Plain" => "Равнина"
+// names.doubleborder: "Double Border" => "Двойна граница"
+// names.layered: "Layered" => "Пластове"
+// names.solid: "Solid" => "Солиден"
+// names.threedimensional: "3D" => ".3D"
+// names.contrast: "Contrast" => "Контраст"
+// colors.teal: "Teal" => "Тийл"
+// colors.blue: "Blue" => "Син"
+// colors.purple: "Purple" => "Лилав"
+// colors.orchid: "Orchid" => "Орхидея"
+// colors.tulip: "Tulip" => "Лале"
+// colors.brown: "Brown" => "Кафяв"
+// colors.green: "Green" => "Зелен"

@@ -126,6 +126,7 @@ var frenchTranslation = {
     translationPropertyGridTitle: "Paramètres de langue",
     themePropertyGridTitle: "Paramètres du thème",
     translationLanguages: "Traduction",
+    translationDeleteLanguage: "Êtes-vous certain de vouloir supprimer toutes les chaînes pour cette langue ?",
     translationAddLanguage: "Choisir langue à traduire",
     translationShowAllStrings: "Afficher tous les termes",
     translationShowUsedStringsOnly: "Termes utilisés uniquement",
@@ -137,6 +138,7 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
+    themeResetButton: "Réinitialiser les paramètres de thème par défaut",
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
@@ -1016,6 +1018,7 @@ var frenchTranslation = {
     fontFamily: "Famille de polices",
     fontSize: "Taille de police",
     color: "Couleur",
+    placeholderColor: "Couleur de l’espace réservé",
     size: "Taille",
     fontWeightRegular: "Régulier",
     fontWeightHeavy: "Lourd",
@@ -1616,3 +1619,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // names.layered: "Layered" => "Couches"
 // names.solid: "Solid" => "Solide"
 // names.threedimensional: "3D" => ".3D"
+
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Êtes-vous certain de vouloir supprimer toutes les chaînes pour cette langue ?"
+// ed.themeResetButton: "Reset theme settings to default" => "Réinitialiser les paramètres de thème par défaut"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"

@@ -126,6 +126,7 @@ export var nlStrings = {
     translationPropertyGridTitle: "Taalinstellingen",
     themePropertyGridTitle: "Thema-instellingen",
     translationLanguages: "Talen",
+    translationDeleteLanguage: "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?",
     translationAddLanguage: "Selecteer de taal om te vertalen",
     translationShowAllStrings: "Toon alle snaren",
     translationShowUsedStringsOnly: "Alleen gebruikte tekenreeksen",
@@ -137,6 +138,7 @@ export var nlStrings = {
     translationPlaceHolder: "Vertaling...",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
+    themeResetButton: "Thema-instellingen terugzetten op de standaardinstellingen",
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
@@ -1016,6 +1018,7 @@ export var nlStrings = {
     fontFamily: "Lettertypefamilie",
     fontSize: "Tekengrootte",
     color: "Kleur",
+    placeholderColor: "Kleur van tijdelijke aanduiding",
     size: "Grootte",
     fontWeightRegular: "Regelmatig",
     fontWeightHeavy: "Zwaar",
@@ -1535,3 +1538,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // names.layered: "Layered" => "Gelaagd"
 // names.solid: "Solid" => "Degelijk"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?"
+// ed.themeResetButton: "Reset theme settings to default" => "Thema-instellingen terugzetten op de standaardinstellingen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Kleur van tijdelijke aanduiding"

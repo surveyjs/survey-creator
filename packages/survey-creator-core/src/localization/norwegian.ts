@@ -126,6 +126,7 @@ export var nbStrings = {
     translationPropertyGridTitle: "Språkinnstillinger",
     themePropertyGridTitle: "Tema innstillinger",
     translationLanguages: "Språk",
+    translationDeleteLanguage: "Er du sikker på at du ønsker å slette alle strenger for dette språket?",
     translationAddLanguage: "Velg språk for oversetting",
     translationShowAllStrings: "Vis alle strenger",
     translationShowUsedStringsOnly: "Bare brukte strenger",
@@ -137,6 +138,7 @@ export var nbStrings = {
     translationPlaceHolder: "Oversettelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
+    themeResetButton: "Tilbakestill temainnstillinger til standard",
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
@@ -1016,6 +1018,7 @@ export var nbStrings = {
     fontFamily: "Skriftfamilie",
     fontSize: "Skriftstørrelse",
     color: "Farge",
+    placeholderColor: "Plassholderfarge",
     size: "Størrelse",
     fontWeightRegular: "Regelmessig",
     fontWeightHeavy: "Tung",
@@ -1559,3 +1562,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // names.layered: "Layered" => "Lagdelte"
 // names.solid: "Solid" => "Solid"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Er du sikker på at du ønsker å slette alle strenger for dette språket?"
+// ed.themeResetButton: "Reset theme settings to default" => "Tilbakestill temainnstillinger til standard"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Plassholderfarge"

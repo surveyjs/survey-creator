@@ -54,3 +54,8 @@ export function updateMatrixRemoveAction(
     question.removeRowUI(row);
   };
 }
+export function updateMatixActionsClasses(actions: Array<IAction>) {
+  actions.forEach(action => {
+    action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
+  });
+}

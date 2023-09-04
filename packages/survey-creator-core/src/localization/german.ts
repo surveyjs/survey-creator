@@ -126,6 +126,7 @@ var germanTranslation = {
     translationPropertyGridTitle: "Übersetzungseinstellungen",
     themePropertyGridTitle: "Theme-Einstellungen",
     translationLanguages: "Sprachen",
+    translationDeleteLanguage: "Sind Sie sicher, dass Sie alle Zeichenfolgen für diese Sprache löschen möchten?",
     translationAddLanguage: "Wählen Sie eine Sprache aus",
     translationShowAllStrings: "Alle Texte anzeigen",
     translationShowUsedStringsOnly: "Verwendete Texte",
@@ -137,6 +138,7 @@ var germanTranslation = {
     translationPlaceHolder: "Übersetzung ...",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
+    themeResetButton: "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
@@ -1016,6 +1018,7 @@ var germanTranslation = {
     fontFamily: "Schriftfamilie",
     fontSize: "Schriftgrad",
     color: "Farbe",
+    placeholderColor: "Farbe des Platzhalters",
     size: "Größe",
     fontWeightRegular: "Regelmäßig",
     fontWeightHeavy: "Schwer",
@@ -1308,3 +1311,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // names.layered: "Layered" => "Stufig"
 // names.solid: "Solid" => "Fest"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Sind Sie sicher, dass Sie alle Zeichenfolgen für diese Sprache löschen möchten?"
+// ed.themeResetButton: "Reset theme settings to default" => "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Farbe des Platzhalters"
