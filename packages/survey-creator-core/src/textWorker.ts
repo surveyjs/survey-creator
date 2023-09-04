@@ -171,7 +171,10 @@ export class SurveyTextWorker {
     return this.surveyValue;
   }
   public get isJsonCorrect(): boolean {
-    return this.errors.length === 0 && this.surveyValue !== null;
+    return !!this.surveyValue;
+  }
+  public get isJsonHasErrors(): boolean {
+    return this.errors.length > 0 || !this.isJsonCorrect;
   }
   protected process() {
     try {
