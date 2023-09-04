@@ -126,6 +126,7 @@ var portugueseTranslation = {
     translationPropertyGridTitle: "Configurações de Idioma",
     themePropertyGridTitle: "Configurações do tema",
     translationLanguages: "Idiomas",
+    translationDeleteLanguage: "Tem certeza de que deseja excluir todas as cadeias de caracteres para este idioma?",
     translationAddLanguage: "Selecione o idioma para traduzir",
     translationShowAllStrings: "Mostrar todos os textos",
     translationShowUsedStringsOnly: "Apenas textos utilizados",
@@ -137,6 +138,7 @@ var portugueseTranslation = {
     translationPlaceHolder: "Tradução...",
     themeExportButton: "Exportação",
     themeImportButton: "Importação",
+    themeResetButton: "Redefinir as configurações do tema para o padrão",
     bold: "Negrito",
     italic: "Itálico",
     underline: "Sublinhado",
@@ -1016,6 +1018,7 @@ var portugueseTranslation = {
     fontFamily: "Família de fontes",
     fontSize: "Tamanho da fonte",
     color: "Cor",
+    placeholderColor: "Cor do espaço reservado",
     size: "Tamanho",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Pesado",
@@ -1217,3 +1220,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // names.layered: "Layered" => "Camadas"
 // names.solid: "Solid" => "Sólido"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Tem certeza de que deseja excluir todas as cadeias de caracteres para este idioma?"
+// ed.themeResetButton: "Reset theme settings to default" => "Redefinir as configurações do tema para o padrão"
+// theme.placeholderColor: "Placeholder color" => "Cor do espaço reservado"

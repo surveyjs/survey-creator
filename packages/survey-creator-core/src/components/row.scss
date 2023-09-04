@@ -13,21 +13,16 @@
   margin-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
 }
 
-.svc-row .sd-row--multiple {
+.svc-row .sd-row.sd-row--multiple {
   overflow: auto;
-  padding: calcSize(1);
-  gap: calcSize(1);
-  margin-top: calcSize(2);
-  margin-left: 0;
-  width: 100%;
+  width: calc(100% + 2 * var(--sjs-base-unit, var(--base-unit, 8px)));
   flex-wrap: nowrap;
-  background: $background;
-  box-shadow: $shadow-small;
-  border-radius: calcCornerRadius(1);
-
-  &>div {
-    padding-left: 0;
-  }
+  margin-top: 0;
+  padding-top: calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  padding-right: 2px;
+  padding-bottom: 2px;
+  margin-right: -2px;
+  margin-bottom: -2px;
 
   .sd-row--multiple {
     overflow: unset;
@@ -36,10 +31,14 @@
 
 .sd-panel .svc-row .sd-row--multiple {
   padding: calcSize(0);
+  & > div {
+    padding: 0;
+  }
   box-shadow: none;
   border-radius: 0;
   padding: 2px; //need for the https://github.com/surveyjs/survey-creator/issues/3288
   margin: -2px; //need for the https://github.com/surveyjs/survey-creator/issues/3288
+  width: 100%;
 }
 
 .svc-row.svc-row--ghost {

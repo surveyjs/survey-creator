@@ -1,4 +1,4 @@
-import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue } from "survey-core";
+import { Serializer, SurveyModel, surveyLocalization, Base, QuestionDropdownModel, PanelModel, QuestionMatrixDropdownModel, QuestionTextModel, QuestionCommentModel, ListModel, Action, IAction, ItemValue, QuestionMatrixDynamicModel } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 import { settings } from "../../src/creator-settings";
@@ -52,19 +52,12 @@ test("settingsSurvey layout", () => {
     ]
   });
   const translation = new Translation(survey);
-  let panel = translation.settingsSurvey.getPanelByName("languages");
-  expect(panel.elements).toHaveLength(2);
-  let elements = panel.elements;
-  expect(elements[0].getType()).toEqual("checkbox");
-  expect(elements[0].name).toEqual("defaultLanguage");
-  expect(elements[0].isReadOnly).toBeTruthy();
-  expect(elements[0]["choices"][0].value).toEqual("Default (English)");
-  expect(elements[0]["defaultValue"][0]).toEqual("Default (English)");
-
-  expect(elements[1].getType()).toEqual("checkbox");
-  expect(elements[1].name).toEqual("locales");
-  expect(elements[1]["choicesVisibleIf"]).toEqual("{selLocales} contains {item}");
-
+  expect(translation.settingsSurvey.getAllPanels()).toHaveLength(0);
+  expect(translation.settingsSurvey.getAllQuestions()).toHaveLength(1);
+  const question = <QuestionMatrixDynamicModel>translation.settingsSurvey.getQuestionByName("locales");
+  expect(question.title).toBe("Languages");
+  expect(question.showHeader).toBeFalsy();
+  expect(question.allowAddRows).toBeFalsy();
 });
 
 test("create available locales", () => {
@@ -91,10 +84,10 @@ test("create available locales", () => {
   surveyLocalization.supportedLocales = ["fr", "de"];
   const translation = new Translation(survey);
   translation.reset();
-  expect(translation.settingsSurvey.getValue("selLocales")).toHaveLength(3);
+  expect(translation.getSelectedLocales()).toHaveLength(3);
   expect(translation.getSurveyLocales()[0]).toHaveLength(4);
   translation.addLocale("de");
-  expect(translation.settingsSurvey.getValue("selLocales")).toHaveLength(4);
+  expect(translation.getSelectedLocales()).toHaveLength(4);
   surveyLocalization.supportedLocales = [];
 });
 test("create locales question", () => {
@@ -124,16 +117,12 @@ test("create locales question", () => {
   const localesQuestion = <QuestionDropdownModel>(
     translation.settingsSurvey.getQuestionByName("locales")
   );
-  expect(localesQuestion.choices).toHaveLength(4);
-  const visChoices = localesQuestion.visibleChoices;
+  expect(translation.locales).toHaveLength(4);
+  const visChoices = translation.getVisibleLocales();
   expect(visChoices).toHaveLength(3);
-  expect(visChoices[0].value).toEqual("fr");
-  expect(visChoices[1].value).toEqual("it");
-  expect(visChoices[2].value).toEqual("es");
-  expect(localesQuestion.value).toHaveLength(3);
-  expect(localesQuestion.value[0]).toEqual("fr");
-  expect(localesQuestion.value[1]).toEqual("it");
-  expect(localesQuestion.value[2]).toEqual("es");
+  expect(visChoices[0]).toEqual("fr");
+  expect(visChoices[1]).toEqual("it");
+  expect(visChoices[2]).toEqual("es");
   surveyLocalization.supportedLocales = [];
 });
 
@@ -1154,10 +1143,11 @@ test("Test settings.translation.maximumSelectedLocales", () => {
   });
   const translation = new Translation(survey);
   translation.reset();
-  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
-  expect(translation.localesQuestion.value).toHaveLength(2);
-  expect(translation.localesQuestion.value[0]).toEqual("de");
-  expect(translation.localesQuestion.value[1]).toEqual("fr");
+  expect(translation.localesQuestion.visibleRows).toHaveLength(4 + 1);
+  const visLocales = translation.getSelectedLocales();
+  expect(visLocales).toHaveLength(2);
+  expect(visLocales[0]).toEqual("de");
+  expect(visLocales[1]).toEqual("fr");
   settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
 });
 test("Translation show All strings and property visibility", () => {
@@ -1183,9 +1173,10 @@ test("Translation show All strings and property visibility", () => {
   const tabTranslation = new TabTranslationPlugin(creator);
   tabTranslation.activate();
   const translation = tabTranslation.model;
-  expect(translation.localesQuestion.visibleChoices).toHaveLength(4);
-  expect(translation.localesQuestion.value).toHaveLength(1);
-  expect(translation.localesQuestion.value[0]).toEqual("de");
+  expect(translation.localesQuestion.visibleRows).toHaveLength(4 + 1);
+  const selLocales = translation.getSelectedLocales();
+  expect(selLocales).toHaveLength(1);
+  expect(selLocales[0]).toEqual("de");
 });
 test("LogicPlugin: creator.readOnly", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
@@ -1220,9 +1211,9 @@ test("Translation check all locale name are capitalized", () => {
   const testLocaleAction = translation.chooseLanguageActions.filter((item: IAction) => item.id === "test_locale")[0];
   expect(testLocaleAction.title).toEqual("Test Locale Name");
   translation.addLocale("test_locale");
-  const testLocaleChoice = translation.localesQuestion.choices.filter((choice: ItemValue) => choice.value === "test_locale")[0];
-  expect(testLocaleChoice.text).toEqual("Test Locale Name");
-  translation.localesQuestion.value = ["test_locale"];
+  const val = translation.localesQuestion.visibleRows[1].cells[1].value;
+  expect(val).toEqual("Test Locale Name");
+  translation.setSelectedLocales(["test_locale"]);
   const testLocaleColumn = (<QuestionMatrixDropdownModel>translation.stringsHeaderSurvey.getAllQuestions()[0]).columns[1];
   expect(testLocaleColumn.title).toEqual("Test Locale Name");
   surveyLocalization.locales["test_locale"] = undefined;
@@ -1283,7 +1274,7 @@ test("Import from array, onTraslationItemImport", () => {
     ["survey.page1.q1.title", "q1 en", "test", "q1 de"]
   ]);
   expect(counter).toEqual(1);
-  expect(translation.localesQuestion.visibleChoices).toHaveLength(1);
+  expect(translation.localesQuestion.visibleRows).toHaveLength(1 + 1);
   const page = creator.survey.pages[0];
   const question = creator.survey.getQuestionByName("q1");
   expect(page.locTitle.getLocaleText("")).toEqual("page en");
@@ -1354,7 +1345,7 @@ test("Reset on changing creator.JSON", () => {
   expect(page1Props.columns).toHaveLength(3);
   translation.removeLocale("fr");
   creator.JSON = json;
-  expect(translation.localesQuestion.value).toHaveLength(0);
+  expect(translation.getSelectedLocales()).toHaveLength(0);
   page = translation.stringsSurvey.pages[0];
   expect(page.elements).toHaveLength(13);
   pagePanel = <PanelModel>page.elements[12];
@@ -1718,4 +1709,143 @@ test("Translation doesnt' work with two matrix dropdown & choices. Bug #4473", (
   const cells = columnsChoices.visibleRows[0].cells;
   expect(cells[0].question.value).toEqual("A");
   expect(cells[1].question.value).toEqual("A (german)");
+});
+test("You can't delete or unselect the default locale", () => {
+  const survey = new SurveyModel();
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.addLocale("de");
+  const question = translation.localesQuestion;
+  const rows = question.visibleRows;
+  const checkQuestion1 = rows[0].cells[0].question;
+  expect(checkQuestion1.value).toBeTruthy();
+  expect(checkQuestion1.isReadOnly).toBeTruthy();
+  const checkQuestion2 = rows[1].cells[0].question;
+  expect(checkQuestion2.value).toBeTruthy();
+  expect(checkQuestion2.isReadOnly).toBeFalsy();
+  expect(question.canRemoveRow(rows[0])).toBeFalsy();
+  expect(question.canRemoveRow(rows[1])).toBeTruthy();
+});
+test("You can't delete or unselect the default locale, there is only default locale", () => {
+  const survey = new SurveyModel();
+  const translation = new Translation(survey);
+  translation.reset();
+  const question = translation.localesQuestion;
+  const rows = question.visibleRows;
+  expect(rows).toHaveLength(1);
+  const checkQuestion1 = rows[0].cells[0].question;
+  expect(checkQuestion1.value).toBeTruthy();
+  expect(checkQuestion1.isReadOnly).toBeTruthy();
+  expect(question.canRemoveRow(rows[0])).toBeFalsy();
+});
+test("Test settings.translation.maximumSelectedLocales in matrix dynamic", () => {
+  const oldMaximumSelectedLocales = settings.translation.maximumSelectedLocales;
+  settings.translation.maximumSelectedLocales = 2;
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          default: "title en",
+          de: "title de",
+          fr: "title fr",
+          es: "title es",
+          it: "title it"
+        }
+      }
+    ]
+  });
+  const translation = new Translation(survey);
+  translation.reset();
+  const question = translation.localesQuestion;
+  expect(question.visibleRows).toHaveLength(4 + 1);
+  const visLocales = translation.getSelectedLocales();
+  expect(visLocales).toHaveLength(2);
+  expect(visLocales[0]).toEqual("de");
+  expect(visLocales[1]).toEqual("fr");
+  const rows = question.visibleRows;
+  const checkQuestion3 = rows[2].cells[0].question;
+  const checkQuestion4 = rows[3].cells[0].question;
+  expect(checkQuestion3.value).toBeTruthy();
+  expect(checkQuestion3.isReadOnly).toBeFalsy();
+  expect(checkQuestion4.value).toBeFalsy();
+  expect(checkQuestion4.isReadOnly).toBeTruthy();
+
+  checkQuestion3.value = false;
+  expect(checkQuestion3.value).toBeFalsy();
+  expect(checkQuestion3.isReadOnly).toBeFalsy();
+  expect(checkQuestion4.value).toBeFalsy();
+  expect(checkQuestion4.isReadOnly).toBeFalsy();
+
+  checkQuestion4.value = true;
+  expect(checkQuestion3.value).toBeFalsy();
+  expect(checkQuestion3.isReadOnly).toBeTruthy();
+  expect(checkQuestion4.value).toBeTruthy();
+  expect(checkQuestion4.isReadOnly).toBeFalsy();
+
+  settings.translation.maximumSelectedLocales = oldMaximumSelectedLocales;
+});
+test("Remove locale strings from translation via remove row", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        }
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.locales[1]).toEqual("de");
+  const question = translation.localesQuestion;
+  expect(question.visibleRows).toHaveLength(2);
+  const deLocaleAction = translation.chooseLanguageActions.filter((item: IAction) => item.id === "de")[0];
+  expect(deLocaleAction.visible).toBeFalsy();
+  question.removeRow(1, false);
+  expect(question.visibleRows).toHaveLength(1);
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [
+      {
+        name: "page2",
+      }
+    ]
+  });
+  expect(deLocaleAction.visible).toBeTruthy();
+  expect(translation.locales).toHaveLength(1);
+});
+test("Remove locale strings from translation via remove row, unchecked locale", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        }
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.reset();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.locales[1]).toEqual("de");
+  const question = translation.localesQuestion;
+  expect(question.visibleRows).toHaveLength(2);
+  let matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
+  expect(matrix.columns).toHaveLength(2);
+  question.visibleRows[1].cells[0].question.value = false;
+  matrix = <QuestionMatrixDropdownModel>(translation.stringsSurvey.getAllQuestions()[0]);
+  expect(matrix.columns).toHaveLength(1);
+  question.removeRow(1, false);
+  expect(survey.toJSON()).toStrictEqual({
+    pages: [
+      {
+        name: "page2",
+      }
+    ]
+  });
+  expect(translation.locales).toHaveLength(1);
 });

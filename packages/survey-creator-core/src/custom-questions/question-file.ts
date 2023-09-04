@@ -73,6 +73,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public getChooseButtonCss(): string {
     return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
   }
+  public onKeyDown = (event: KeyboardEvent) => {
+    this.onTextKeyDownHandler(event);
+  }
 }
 Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");
 

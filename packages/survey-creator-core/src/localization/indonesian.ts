@@ -126,6 +126,7 @@ export var indonesianStrings = {
     translationPropertyGridTitle: "Pengaturan Bahasa",
     themePropertyGridTitle: "Pengaturan Tema",
     translationLanguages: "Bahasa",
+    translationDeleteLanguage: "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?",
     translationAddLanguage: "Pilih bahasa untuk terjemahan",
     translationShowAllStrings: "Tampilkan seluruh string",
     translationShowUsedStringsOnly: "Hanya String yang Digunakan",
@@ -137,6 +138,7 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
+    themeResetButton: "Setel ulang pengaturan tema ke default",
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
@@ -1016,6 +1018,7 @@ export var indonesianStrings = {
     fontFamily: "Keluarga font",
     fontSize: "Ukuran font",
     color: "Warna",
+    placeholderColor: "Warna tempat penampung",
     size: "Tingginya",
     fontWeightRegular: "Biasa",
     fontWeightHeavy: "Berat",
@@ -1710,3 +1713,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // names.layered: "Layered" => "Berlapis"
 // names.solid: "Solid" => "Keras"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?"
+// ed.themeResetButton: "Reset theme settings to default" => "Setel ulang pengaturan tema ke default"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Warna tempat penampung"

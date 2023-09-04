@@ -126,6 +126,7 @@ var polishStrings = {
     translationPropertyGridTitle: "Ustawienia językowe",
     themePropertyGridTitle: "Ustawienia motywu",
     translationLanguages: "Języki",
+    translationDeleteLanguage: "Czy na pewno chcesz usunąć wszystkie ciągi znaków dla tego języka?",
     translationAddLanguage: "Wybierz język do przetłumaczenia",
     translationShowAllStrings: "Wszystkie struny",
     translationShowUsedStringsOnly: "Tylko używane ciągi",
@@ -137,6 +138,7 @@ var polishStrings = {
     translationPlaceHolder: "Tłumaczenie...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    themeResetButton: "Przywracanie domyślnych ustawień motywu",
     bold: "Śmiały",
     italic: "Kursywa",
     underline: "Podkreślać",
@@ -1016,6 +1018,7 @@ var polishStrings = {
     fontFamily: "Rodzina czcionek",
     fontSize: "Rozmiar czcionki",
     color: "Kolor",
+    placeholderColor: "Kolor zastępczy",
     size: "Rozmiar",
     fontWeightRegular: "Regularny",
     fontWeightHeavy: "Ciężki",
@@ -1829,3 +1832,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // names.layered: "Layered" => "Warstwowe"
 // names.solid: "Solid" => "Bryła"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Czy na pewno chcesz usunąć wszystkie ciągi znaków dla tego języka?"
+// ed.themeResetButton: "Reset theme settings to default" => "Przywracanie domyślnych ustawień motywu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Kolor zastępczy"
