@@ -29,6 +29,10 @@ export class QuestionColorImplementor extends QuestionImplementor {
       this.question.onKeyUp(event);
       return true;
     });
+    this.setCallbackFunc("koOnKeyDown", (_: any, event: any) => {
+      this.question.onKeyDown(event);
+      return true;
+    });
     this.setCallbackFunc("koDropdownAction", () => {
       const dropdownAction = this.question.dropdownAction;
       new ImplementorBase(dropdownAction);

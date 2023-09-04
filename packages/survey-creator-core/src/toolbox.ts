@@ -94,7 +94,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit"];
+  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],

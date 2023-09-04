@@ -126,6 +126,7 @@ export var mnStrings = {
     translationPropertyGridTitle: "Хэлний тохиргоо",
     themePropertyGridTitle: "Сэдвийн тохиргоо",
     translationLanguages: "Хэл",
+    translationDeleteLanguage: "Та энэ хэлний бүх уяаг арилгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?",
     translationAddLanguage: "Орчуулах хэлийг сонгоно уу",
     translationShowAllStrings: "Бүх текст",
     translationShowUsedStringsOnly: "Зөвхөн байгаа текстүүд",
@@ -137,6 +138,7 @@ export var mnStrings = {
     translationPlaceHolder: "Орчуулга...",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
+    themeResetButton: "Дахин сэдэвчилсэн тохиргоог default хийх",
     bold: "Тод",
     italic: "Налуу",
     underline: "Доогуур зураас",
@@ -1016,6 +1018,7 @@ export var mnStrings = {
     fontFamily: "Фонтын гэр бүл",
     fontSize: "Фонтын хэмжээ",
     color: "Өнгө",
+    placeholderColor: "Газар эзэмшигчийн өнгө",
     size: "Хэмжээ",
     fontWeightRegular: "Тогтмол",
     fontWeightHeavy: "Хүнд",
@@ -1207,3 +1210,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // names.layered: "Layered" => "Давхарласан"
 // names.solid: "Solid" => "Бат бөх"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Та энэ хэлний бүх уяаг арилгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?"
+// ed.themeResetButton: "Reset theme settings to default" => "Дахин сэдэвчилсэн тохиргоог default хийх"
+// theme.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"

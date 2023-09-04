@@ -263,6 +263,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
       });
+    newAction.disableHide = true;
     return newAction;
   }
   private createConvertInputType() {
@@ -282,6 +283,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.surveyElement.setPropertyValue(propName, item.id);
         newAction.title = item.title;
       });
+    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
@@ -310,12 +312,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = createDropdownActionModel({
       id: id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: "icon-drop-down-arrow_16x16",
-      iconSize: 16,
+      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName,
+      iconSize: 24,
       title: actionTitle,
       enabled: enabled,
       visibleIndex: index,
-      disableShrink: true,
+      disableShrink: false,
       action: (newType) => {
         newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
       },
@@ -335,10 +337,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: this.isRequired ? "sv-action-bar-item--secondary" : "",
+      css: <any>new ComputedUpdater<string>(() => this.isRequired ? "sv-action-bar-item--secondary" : ""),
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
-      iconName: this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
+      iconName: <any>new ComputedUpdater<string>(() => this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16"),
       iconSize: 16,
       action: () => {
         if (
@@ -353,9 +355,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       "isRequired",
-      () => {
-        requiredAction.iconName = this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
-        requiredAction.css = this.isRequired ? "sv-action-bar-item--secondary" : "";
+      (value) => {
+        requiredAction.iconName = value ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
+        requiredAction.css = value ? "sv-action-bar-item--secondary" : "";
+        requiredAction.innerItem.iconName = requiredAction.iconName;
       },
       "isRequiredAdorner"
     );

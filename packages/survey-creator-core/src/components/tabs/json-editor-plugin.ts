@@ -135,6 +135,12 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     }
     return true;
   }
+  public defaultAllowingDeactivate(): boolean {
+    if(!this.model) return true;
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+    if(!textWorker.isJsonCorrect) return undefined;
+    return !textWorker.isJsonHasErrors;
+  }
   protected abstract createModel(
     creator: CreatorBase
   ): JsonEditorBaseModel;

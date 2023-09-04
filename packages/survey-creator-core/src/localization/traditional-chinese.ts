@@ -126,6 +126,7 @@ var traditionalChineseTranslation = {
     translationPropertyGridTitle: "語言設置",
     themePropertyGridTitle: "主題設置",
     translationLanguages: "語言",
+    translationDeleteLanguage: "您確定要刪除此語言的所有字串嗎？",
     translationAddLanguage: "選擇要翻譯的語言",
     translationShowAllStrings: "所有字串",
     translationShowUsedStringsOnly: "僅使用的字串",
@@ -137,6 +138,7 @@ var traditionalChineseTranslation = {
     translationPlaceHolder: "譯本。。。",
     themeExportButton: "出口",
     themeImportButton: "進口",
+    themeResetButton: "將主題設置重置為預設值",
     bold: "大膽",
     italic: "斜體的",
     underline: "下劃線",
@@ -1016,6 +1018,7 @@ var traditionalChineseTranslation = {
     fontFamily: "字體系列",
     fontSize: "字體大小",
     color: "顏色",
+    placeholderColor: "佔位元顏色",
     size: "大小",
     fontWeightRegular: "定期",
     fontWeightHeavy: "重",
@@ -1834,3 +1837,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // names.layered: "Layered" => "分層的"
 // names.solid: "Solid" => "固體"
 // names.threedimensional: "3D" => "。.3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "您確定要刪除此語言的所有字串嗎？"
+// ed.themeResetButton: "Reset theme settings to default" => "將主題設置重置為預設值"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "佔位元顏色"
