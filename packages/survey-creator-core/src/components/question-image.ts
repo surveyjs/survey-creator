@@ -21,7 +21,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.storeDataAsText = false;
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
-      if(!!fileToUpload) {
+      if (!!fileToUpload) {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
         });
@@ -77,5 +77,10 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   public get chooseImageText(): string {
     return getLocString("ed.imageChooseImage");
+  }
+
+  public dispose() {
+    super.dispose();
+    this.questionRoot = undefined;
   }
 }

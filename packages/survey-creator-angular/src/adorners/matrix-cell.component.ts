@@ -47,6 +47,10 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   protected getModel(): MatrixCellWrapperViewModel {
     return this.adorner;
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner.dispose();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-matrix-cell", MatrixCellComponent);
