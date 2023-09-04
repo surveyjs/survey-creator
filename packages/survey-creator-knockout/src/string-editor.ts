@@ -6,7 +6,7 @@ const template = require("./string-editor.html");
 
 function getEditorElement(element: HTMLElement) {
   return (element.nextSibling as any).getElementsByClassName("sv-string-editor")[0];
-};
+}
 
 export class StringEditorViewModel {
   private implementor = undefined;
