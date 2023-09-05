@@ -181,7 +181,7 @@ export class TranslationItem extends TranslationItemBase {
     this.locString.setLocaleText(loc, null);
   }
   public deleteLocaleStrings(locale: string): void {
-    this.setLocText(locale, "");
+    this.setLocText(locale, undefined);
   }
   public getPlaceholder(locale: string): string {
     const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
