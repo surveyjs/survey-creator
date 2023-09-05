@@ -15,7 +15,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
   private updateDragTypeOverMe() {
-    this.dragTypeOverMe = this.page.dragTypeOverMe;
+    this.dragTypeOverMe = this.page?.dragTypeOverMe;
   }
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
