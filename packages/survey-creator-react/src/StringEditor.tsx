@@ -58,12 +58,14 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
+    this.baseModel.setLocString(this.locString);
     this.baseModel.afterRender();
   }
   public componentWillUnmount() {
     super.componentWillUnmount();
     this.baseModel.getEditorElement = undefined;
     this.baseModel.blurEditor = undefined;
+    this.baseModel.dispose();
     if (!this.locString) return;
     this.locString.onStringChanged.remove(this.onChangedHandler);
   }
@@ -122,9 +124,6 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public render(): JSX.Element {
     if (!this.locString) {
       return null;
-    }
-    else {
-      this.baseModel.setLocString(this.locString);
     }
     let control = null;
     if (this.locString.hasHtml) {
