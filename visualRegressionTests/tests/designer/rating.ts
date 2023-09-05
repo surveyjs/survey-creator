@@ -168,9 +168,9 @@ test("Rating in matrix", async (t) => {
         }
       ],
       "widthMode": "static",
-      "width": "900"
+      "width": "1000"
     });
-    await t.resizeWindow(1900, 900);
+    await t.resizeWindow(1900, 1000);
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-in-matrix.png", question, t, comparer);
   });

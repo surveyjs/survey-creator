@@ -44,8 +44,12 @@ import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
 
 function propertyVisibleIf(params: any): boolean {
-  if (!this.question || !this.question.obj || !this.question.property) return false;
-  return this.question.property.visibleIf(this.question.obj);
+  if(!this.question) return false;
+  const obj = this.question.obj;
+  const prop = this.question.property;
+  if (!obj || !prop) return false;
+  if(!Serializer.hasOriginalProperty(obj, prop.name)) return false;
+  return prop.visibleIf(obj);
 }
 function propertyEnableIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;

@@ -10,7 +10,7 @@ import {
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
 } from "./index";
-import { updateMatrixRemoveAction } from "../utils/actions";
+import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
 import { CreatorBase } from "../entries";
 
@@ -89,11 +89,6 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       }
     });
   }
-  private updateMatixActionsClasses(actions: Array<IAction>) {
-    actions.forEach(action => {
-      action.innerCss = `${action.innerCss || ""} spg-action-button--muted`;
-    });
-  }
   public onGetMatrixRowAction(
     obj: Base,
     options: any,
@@ -137,7 +132,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
         showDetailAction.ariaExpanded = row.isDetailPanelShowing;
       };
     }
-    this.updateMatixActionsClasses(actions);
+    updateMatixActionsClasses(actions);
   }
   private getShowDetailActionIconName(row: MatrixDynamicRowModel) {
     return row.isDetailPanelShowing ? "icon-editing-finish" : "icon-edit";

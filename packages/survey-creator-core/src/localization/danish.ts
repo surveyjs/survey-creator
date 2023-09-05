@@ -126,6 +126,7 @@ export var danishStrings = {
     translationPropertyGridTitle: "Sprogindstillinger",
     themePropertyGridTitle: "Temaindstillinger",
     translationLanguages: "Sprog",
+    translationDeleteLanguage: "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?",
     translationAddLanguage: "Vælg et sprog at oversætte",
     translationShowAllStrings: "Vis alle tekststrenge",
     translationShowUsedStringsOnly: "Kun brugte strenge",
@@ -137,6 +138,7 @@ export var danishStrings = {
     translationPlaceHolder: "Oversættelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    themeResetButton: "Nulstil temaindstillinger til standard",
     bold: "Modig",
     italic: "Kursiv",
     underline: "Understrege",
@@ -1016,6 +1018,7 @@ export var danishStrings = {
     fontFamily: "Skrifttypefamilie",
     fontSize: "Skrifttypestørrelse",
     color: "Farve",
+    placeholderColor: "Pladsholderfarve",
     size: "Størrelse",
     fontWeightRegular: "Regelmæssig",
     fontWeightHeavy: "Tung",
@@ -1741,3 +1744,8 @@ editorLocalization.locales["da"] = danishStrings;
 // names.layered: "Layered" => "Lagdelte"
 // names.solid: "Solid" => "Fast"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?"
+// ed.themeResetButton: "Reset theme settings to default" => "Nulstil temaindstillinger til standard"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"

@@ -126,6 +126,7 @@ export var jaStrings = {
     translationPropertyGridTitle: "言語設定",
     themePropertyGridTitle: "テーマ設定",
     translationLanguages: "言語",
+    translationDeleteLanguage: "この言語のすべての文字列を削除してもよろしいですか?",
     translationAddLanguage: "翻訳する言語を選択する",
     translationShowAllStrings: "すべての文字列を表示する",
     translationShowUsedStringsOnly: "使用される文字列のみ",
@@ -137,6 +138,7 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
+    themeResetButton: "テーマ設定をデフォルトにリセットする",
     bold: "太字",
     italic: "イタリック",
     underline: "下線",
@@ -1016,6 +1018,7 @@ export var jaStrings = {
     fontFamily: "フォントファミリ",
     fontSize: "文字サイズ",
     color: "色",
+    placeholderColor: "プレースホルダの色",
     size: "大きさ",
     fontWeightRegular: "レギュラー",
     fontWeightHeavy: "重い",
@@ -1555,3 +1558,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // names.layered: "Layered" => "層状"
 // names.solid: "Solid" => "固体"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "この言語のすべての文字列を削除してもよろしいですか?"
+// ed.themeResetButton: "Reset theme settings to default" => "テーマ設定をデフォルトにリセットする"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "プレースホルダの色"

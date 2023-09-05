@@ -128,6 +128,7 @@ export var enStrings = {
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "Theme Settings",
     translationLanguages: "Languages",
+    translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "All Strings",
     translationShowUsedStringsOnly: "Used Strings Only",

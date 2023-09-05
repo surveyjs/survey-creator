@@ -126,6 +126,7 @@ var spanishTranslation = {
     translationPropertyGridTitle: "Opciones de lenguaje",
     themePropertyGridTitle: "Configuración del tema",
     translationLanguages: "Lenguajes",
+    translationDeleteLanguage: "¿Está seguro de que desea eliminar todas las cadenas de este idioma?",
     translationAddLanguage: "Seleccione el idioma para traducir",
     translationShowAllStrings: "Mostrar todos los textos",
     translationShowUsedStringsOnly: "Sólo textos utilizados",
@@ -137,6 +138,7 @@ var spanishTranslation = {
     translationPlaceHolder: "Traducción...",
     themeExportButton: "Exportar",
     themeImportButton: "Importación",
+    themeResetButton: "Restablecer la configuración predeterminada del tema",
     bold: "Negrita",
     italic: "Itálica",
     underline: "Subrayar",
@@ -1016,6 +1018,7 @@ var spanishTranslation = {
     fontFamily: "Familia de fuentes",
     fontSize: "Tamaño de fuente",
     color: "Color",
+    placeholderColor: "Color del marcador de posición",
     size: "Tamaño",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Pesado",
@@ -1328,3 +1331,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // names.layered: "Layered" => "Capas"
 // names.solid: "Solid" => "Sólido"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "¿Está seguro de que desea eliminar todas las cadenas de este idioma?"
+// ed.themeResetButton: "Reset theme settings to default" => "Restablecer la configuración predeterminada del tema"
+// lg.expressionSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Color del marcador de posición"

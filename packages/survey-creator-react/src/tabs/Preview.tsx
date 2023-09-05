@@ -54,7 +54,7 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
     const tabContentClassName = "svc-creator-tab__content svc-test-tab__content" + (this.model.isPageToolbarVisible ? " svc-creator-tab__content--with-toolbar" : "");
     return (
       <div className={tabContentClassName}>
-        <div className="svc-plugin-tab__content" onScroll={() => this.model.onScroll()}>
+        <div className="svc-plugin-tab__content">
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
           {!this.model.isRunning ? <TabPreviewTestSurveyAgainComponent button={this.model.testAgainAction} /> : null}
           {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}

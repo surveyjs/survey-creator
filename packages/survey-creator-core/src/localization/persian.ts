@@ -126,6 +126,7 @@ var persianStrings = {
     translationPropertyGridTitle: "تنظیمات زبان",
     themePropertyGridTitle: "تنظیمات تم",
     translationLanguages: "زبان",
+    translationDeleteLanguage: "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟",
     translationAddLanguage: "زبانی را برای ترجمه انتخاب کنید",
     translationShowAllStrings: "نمایش تمام عبارات",
     translationShowUsedStringsOnly: "فقط از عبارات استفاده کنید",
@@ -137,6 +138,7 @@ var persianStrings = {
     translationPlaceHolder: "در حال ترجمه...",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
+    themeResetButton: "بازنشانی تنظیمات تم به حالت پیشفرض",
     bold: "پررنگ",
     italic: "مورب",
     underline: "پایین خط",
@@ -1016,6 +1018,7 @@ var persianStrings = {
     fontFamily: "خانواده قلم",
     fontSize: "اندازه قلم",
     color: "رنگ",
+    placeholderColor: "رنگ نگهدارنده",
     size: "اندازه",
     fontWeightRegular: "منظم",
     fontWeightHeavy: "سنگین",
@@ -1506,3 +1509,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // names.layered: "Layered" => "لایه"
 // names.solid: "Solid" => "جامد"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟"
+// ed.themeResetButton: "Reset theme settings to default" => "بازنشانی تنظیمات تم به حالت پیشفرض"
+// theme.placeholderColor: "Placeholder color" => "رنگ نگهدارنده"
