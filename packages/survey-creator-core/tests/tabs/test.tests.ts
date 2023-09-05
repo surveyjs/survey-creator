@@ -682,10 +682,10 @@ test("Check that popups inside survey are closed when scrolling container", (): 
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
   question.dropdownListModel.popupModel.toggleVisibility();
-  expect(model["onScrollCallback"]).toBeDefined();
+  expect(model.survey["onScrollCallback"]).toBeDefined();
   expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
   model.onScroll();
   expect(question.dropdownListModel.popupModel.isVisible).toBeFalsy();
-  expect(model["onScrollCallback"]).toBeUndefined();
+  expect(model.survey["onScrollCallback"]).toBeUndefined();
   model.onScroll();
 });
