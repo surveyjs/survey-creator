@@ -1077,4 +1077,11 @@ export class ThemeSurveyTabViewModel extends Base {
 
     return themeEditorSurveyJSON;
   }
+  public dispose(): void {
+    this.themeEditorSurveyValue?.dispose();
+    if (this.selectPageAction) {
+      this.selectPageAction.dispose();
+    }
+    this.simulator.dispose();
+  }
 }

@@ -91,6 +91,11 @@ export class SidebarModel extends Base {
   private getCurrentHandles(): string {
     return this.creator.sidebarLocation == "right" ? "w" : "e";
   }
+  private sidebarLocationChangedHandler = (sender, options) => {
+    if (options.name === "sidebarLocation" && !!this.resizeManager) {
+      this.resizeManager.setHandles(this.getCurrentHandles());
+    }
+  };
 
   constructor(private creator: CreatorBase) {
     super();
@@ -99,11 +104,7 @@ export class SidebarModel extends Base {
       this.visible = options.show;
     };
     this.creator.onShowSidebarVisibilityChanged.add(this.onSidebarVisibilityChanged);
-    this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "sidebarLocation" && !!this.resizeManager) {
-        this.resizeManager.setHandles(this.getCurrentHandles());
-      }
-    });
+    this.creator.onPropertyChanged.add(this.sidebarLocationChangedHandler);
     this.visible = this.creator.showSidebar;
     this.createActions();
   }
@@ -131,7 +132,10 @@ export class SidebarModel extends Base {
   public dispose() {
     if (!!this.creator && !this.isDisposed) {
       this.creator.onShowSidebarVisibilityChanged.remove(this.onSidebarVisibilityChanged);
+      this.creator.onPropertyChanged.remove(this.sidebarLocationChangedHandler);
+      this.sidebarLocationChangedHandler = undefined;
     }
+    this.resetResizeManager();
     super.dispose();
   }
   public initResizeManager(container: HTMLDivElement): void {

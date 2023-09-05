@@ -33,6 +33,10 @@ export class CreatorSurveyPageComponent extends PageAdorner {
   fixedDispose(): void {
     this.pageUpdater && this.pageUpdater.dispose();
     super.dispose();
+    if(ko.isWritableObservable(this._page)) {
+      (this._page as ko.Observable<PageModel>)(undefined);
+    }
+    this._page = undefined;
   }
 
   dispose(): void {

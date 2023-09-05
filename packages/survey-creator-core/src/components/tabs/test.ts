@@ -307,4 +307,10 @@ export class TestSurveyTabViewModel extends Base {
     this.survey.onScroll();
     return true;
   }
+  public dispose(): void {
+    if (this.selectPageAction) {
+      this.selectPageAction.dispose();
+    }
+    this.simulator.dispose();
+  }
 }

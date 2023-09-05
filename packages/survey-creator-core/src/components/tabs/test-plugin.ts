@@ -111,6 +111,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
+      this.model.dispose();
       this.model = undefined;
     }
     this.languageSelectorAction.visible = false;

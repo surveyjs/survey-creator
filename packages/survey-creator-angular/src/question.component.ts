@@ -47,6 +47,10 @@ export class QuestionDesignerComponent extends CreatorModelComponent<QuestionAdo
     event.stopPropagation();
     this.adorner.addNewQuestion();
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner.dispose();
+  }
   adornerComponent = "";
 }
 
