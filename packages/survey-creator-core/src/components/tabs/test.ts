@@ -85,9 +85,8 @@ export class TestSurveyTabViewModel extends Base {
     newSurvey.fitToContainer = true;
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
-      self.isRunning = false;
+      this.isRunning = false;
     });
 
     if (!!this.survey["onNavigateToUrl"]) {
@@ -105,15 +104,16 @@ export class TestSurveyTabViewModel extends Base {
       });
     }
     this.survey.onStarted.add((sender: SurveyModel) => {
-      self.setActivePageItem(self.simulator.survey.activePage, true);
+      this.setActivePageItem(this.simulator.survey.activePage, true);
     });
     this.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
-      self.activePage = options.newCurrentPage;
-      self.setActivePageItem(options.oldCurrentPage, false);
-      self.setActivePageItem(options.newCurrentPage, true);
+      this.activePage = options.newCurrentPage;
+      this.setActivePageItem(options.oldCurrentPage, false);
+      this.setActivePageItem(options.newCurrentPage, true);
     });
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
-      self.updatePageItem(options.page);
+      this.updatePageItem(options.page);
+      this.updatePrevNextPageActionState();
     });
   }
 
@@ -260,7 +260,9 @@ export class TestSurveyTabViewModel extends Base {
     }
   }
   private getPageItemByPage(page: PageModel): IAction {
-    const items: IAction[] = this.pageListItems;
+    const model = this.selectPageAction.popupModel.contentComponentData.model;
+    if(!model || !Array.isArray(model.actions)) return undefined;
+    const items: IAction[] = model.actions;
     for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];
     }

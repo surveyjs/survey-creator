@@ -129,6 +129,46 @@ test("Check page list state after change page arrows click", (): any => {
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
 });
+test("Enable/disable nextPage action on page visibility change and page actions, Bug4536", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+            visibleIf: "{q1} = 2"
+          }
+        ]
+      }
+    ]
+  };
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  expect(pageList.actions).toHaveLength(2);
+  expect(pageList.actions[0].title).toBe("Page 1");
+  expect(pageList.actions[1].title).toBe("Page 2");
+  expect(pageList.actions[1].enabled).toBeFalsy();
+  const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
+  expect(nextPage.enabled).toBeFalsy();
+  model.survey.setValue("q1", 2);
+  expect(pageList.actions[1].enabled).toBeTruthy();
+  expect(nextPage.enabled).toBeTruthy();
+  model.survey.setValue("q1", 3);
+  expect(pageList.actions[1].enabled).toBeFalsy();
+  expect(nextPage.enabled).toBeFalsy();
+});
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
