@@ -1824,6 +1824,10 @@ test("Remove locale strings from translation via remove row, unchecked locale", 
         name: "page2",
         title: {
           de: "Page title de"
+        },
+        description: {
+          "default": "a",
+          de: ""
         }
       }
     ]
@@ -1843,9 +1847,36 @@ test("Remove locale strings from translation via remove row, unchecked locale", 
   expect(survey.toJSON()).toStrictEqual({
     pages: [
       {
-        name: "page2",
+        name: "page2", description: "a"
       }
     ]
   });
   expect(translation.locales).toHaveLength(1);
+});
+test("Translation update filterPageActiontitle after activated", () => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page2",
+        title: {
+          de: "Page title de"
+        },
+        description: {
+          "default": "a",
+          de: ""
+        }
+      }
+    ]
+  };
+  const tabTranslationPlugin = new TabTranslationPlugin(creator);
+  tabTranslationPlugin.activate();
+  let counter = 0;
+  creator.onModified.add((sender, options) => {
+    counter ++;
+  });
+  const question = tabTranslationPlugin.model.localesQuestion;
+  expect(question.visibleRows).toHaveLength(2);
+  question.removeRow(1, false);
+  expect(counter).toBe(1);
 });

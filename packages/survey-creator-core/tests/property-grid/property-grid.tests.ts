@@ -54,6 +54,7 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+export * from "../../src/custom-questions/question-text-with-reset";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
