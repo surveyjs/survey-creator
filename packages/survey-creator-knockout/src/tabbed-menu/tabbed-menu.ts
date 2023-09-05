@@ -12,16 +12,17 @@ ko.components.register("svc-tabbed-menu", {
     createViewModel: (params: any, componentInfo: any) => {
       const model = params.model;
       const container: HTMLDivElement = componentInfo.element.nextElementSibling;
-      new ActionContainerImplementor(model);
+      const reactivityImplementor = new ActionContainerImplementor(model);
 
       const manager: ResponsivityManager = new ResponsivityManager(
         container,
         model,
         ".svc-tabbed-menu-item-container:not(.sv-dots)>.sv-action__content"
       );
-      ko.utils.domNodeDisposal.addDisposeCallback(container, () =>
-        manager.dispose()
-      );
+      ko.utils.domNodeDisposal.addDisposeCallback(container, () => {
+        manager.dispose();
+        reactivityImplementor.dispose();
+      });
       return model;
     }
   },

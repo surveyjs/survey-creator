@@ -308,13 +308,7 @@ export class TestSurveyTabViewModel extends Base {
     return true;
   }
   public dispose(): void {
-    if(this.prevPageAction) {
-      this.prevPageAction.dispose();
-    }
-    if(this.nextPageAction) {
-      this.nextPageAction.dispose();
-    }
-    if(this.selectPageAction) {
+    if (this.selectPageAction) {
       this.selectPageAction.dispose();
     }
     this.simulator.dispose();
