@@ -157,6 +157,8 @@
   }
   .svc-item-value__item {
     padding-right: 0;
+    flex-grow: 1;
+    width: 0;
   }
 }
 
@@ -171,6 +173,22 @@
 
   .sv-ranking-item__text {
     overflow: visible;
+    flex-grow: 1;
+    width: 0;
+  }
+
+  .svc-string-editor {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .svc-string-editor__content {
+    width: 100%;
+  }
+
+  .sv-string-editor {
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
