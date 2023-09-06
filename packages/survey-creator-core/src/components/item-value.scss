@@ -158,8 +158,12 @@
   .svc-item-value__item {
     padding-right: 0;
     flex-grow: 1;
-    width: 0;
   }
+}
+.svc-question__content .svc-item-value__item .sv-ranking-item__text {
+  flex-grow: 1;
+  width: 0;
+  max-width: fit-content;
 }
 
 .svc-item-value__item {
@@ -173,8 +177,6 @@
 
   .sv-ranking-item__text {
     overflow: visible;
-    flex-grow: 1;
-    width: 0;
   }
 
   .svc-string-editor {
@@ -191,6 +193,8 @@
     overflow: hidden;
   }
 }
+
+
 
 .svc-item-value--ghost {
   .svc-item-value__ghost {
