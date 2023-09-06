@@ -4027,3 +4027,26 @@ test("Remove carry-forward property on deleting a question", (): any => {
   creator.deleteElement(q1);
   expect(q2.choicesFromQuestion).toBeFalsy();
 });
+test("Do not focus title on mobile", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  expect(creator.startEditTitleOnQuestionAdded).toBeTruthy();
+
+  creator.isMobileView = true;
+  expect(creator.startEditTitleOnQuestionAdded).toBeFalsy();
+
+  creator.isMobileView = false;
+  creator.startEditTitleOnQuestionAdded = false;
+
+  expect(creator.startEditTitleOnQuestionAdded).toBeFalsy();
+
+  creator.isMobileView = true;
+  expect(creator.startEditTitleOnQuestionAdded).toBeFalsy();
+
+  creator.startEditTitleOnQuestionAdded = true;
+  expect(creator.startEditTitleOnQuestionAdded).toBeTruthy();
+});
