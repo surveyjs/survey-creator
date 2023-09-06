@@ -190,6 +190,37 @@ test("Choices: Ranking", async (t) => {
   });
 });
 
+// test("Choices: Ranking--Mobile", async (t) => {
+//   await wrapVisualTest(t, async (t, comparer) => {
+//     await t.resizeWindow(390, 844);
+
+//     const json = {
+//       pages: [
+//         {
+//           name: "page1",
+//           elements: [
+//             {
+//               "type": "ranking",
+//               "name": "question1",
+//               "choices": [
+//                 "Item 1",
+//                 "Item 2"
+//               ]
+//             }
+//           ]
+//         }
+//       ]
+//     };
+//     await setJSON(json);
+
+//     await t.debug();
+
+//     const item = Selector(".sv-ranking--mobile .svc-item-value-wrapper").filterVisible();
+
+//     await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", item, t, comparer);
+//   });
+// });
+
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);

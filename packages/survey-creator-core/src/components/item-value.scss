@@ -78,15 +78,13 @@
   }
 }
 
-.sv-ranking--mobile {
+.sv-ranking--mobile.sv-ranking--mobile.sv-ranking--mobile {
   .svc-item-value-controls__drag-icon {
     visibility: visible;
   }
 
   .svc-item-value-wrapper {
-    .svc-item-value-wrapper {
-      margin-left: calcSize(-3);
-    }
+    margin-left: calcSize(-3);
   }
 }
 
