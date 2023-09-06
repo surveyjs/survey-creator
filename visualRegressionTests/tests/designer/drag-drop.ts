@@ -192,8 +192,6 @@ test("Choices: Ranking", async (t) => {
 
 // test("Choices: Ranking--Mobile", async (t) => {
 //   await wrapVisualTest(t, async (t, comparer) => {
-//     await t.resizeWindow(390, 844);
-
 //     const json = {
 //       pages: [
 //         {
@@ -213,11 +211,11 @@ test("Choices: Ranking", async (t) => {
 //     };
 //     await setJSON(json);
 
-//     await t.debug();
+//     const QRoot = Selector(".svc-question__adorner .sd-question__content").filterVisible();
 
-//     const item = Selector(".sv-ranking--mobile .svc-item-value-wrapper").filterVisible();
-
-//     await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", item, t, comparer);
+//     await ClientFunction(() => { document.body.style.maxWidth = "375px"; document.body.style.maxHeight = "667px"; })();
+//     await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", QRoot, t, comparer);
+//     await ClientFunction(() => { document.body.style.removeProperty("maxWidth"); document.body.style.removeProperty("maxHeight"); })();
 //   });
 // });
 
