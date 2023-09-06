@@ -129,6 +129,46 @@ test("Check page list state after change page arrows click", (): any => {
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
 });
+test("Enable/disable nextPage action on page visibility change and page actions, Bug#4536", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+            visibleIf: "{q1} = 2"
+          }
+        ]
+      }
+    ]
+  };
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  expect(pageList.actions).toHaveLength(2);
+  expect(pageList.actions[0].title).toBe("Page 1");
+  expect(pageList.actions[1].title).toBe("Page 2");
+  expect(pageList.actions[1].enabled).toBeFalsy();
+  const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
+  expect(nextPage.enabled).toBeFalsy();
+  model.survey.setValue("q1", 2);
+  expect(pageList.actions[1].enabled).toBeTruthy();
+  expect(nextPage.enabled).toBeTruthy();
+  model.survey.setValue("q1", 3);
+  expect(pageList.actions[1].enabled).toBeFalsy();
+  expect(nextPage.enabled).toBeFalsy();
+});
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
@@ -169,17 +209,19 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
     ]
   };
   var model = getTestModel(creator);
-  expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].enabled).toBeTruthy();
-  expect(model.pageListItems[1].enabled).toBeTruthy();
-  expect(model.pageListItems[2].enabled).toBeFalsy();
-  expect(model.pageListItems[2].visible).toEqual(true);
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  const pagesActions = pageList.actions;
+  expect(pagesActions).toHaveLength(3);
+  expect(pagesActions[0].enabled).toBeTruthy();
+  expect(pagesActions[1].enabled).toBeTruthy();
+  expect(pagesActions[2].enabled).toBeFalsy();
+  expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(model.pageListItems[1].enabled).toBeFalsy();
-  expect(model.pageListItems[1].visible).toEqual(true);
+  expect(pagesActions[1].enabled).toBeFalsy();
+  expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
-  expect(model.pageListItems[1].enabled).toBeTruthy();
-  expect(model.pageListItems[2].visible).toEqual(true);
+  expect(pagesActions[1].enabled).toBeTruthy();
+  expect(pagesActions[2].visible).toEqual(true);
 });
 test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", (): any => {
   var creator = new CreatorTester();

@@ -21,10 +21,6 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   public model: TestSurveyTabViewModel;
 
-  private getSimulatorDevicesTitle(): string {
-    if (!this.model) return "";
-    return simulatorDevices[this.model.simulator.device].title || getLocString("pe.simulator");
-  }
   private setDevice(newVal: string) {
     this.model.simulator.device = newVal;
     this.model.simulator.resetZoomParameters();
