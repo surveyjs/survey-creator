@@ -24,6 +24,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       if(!!fileToUpload) {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
+          o.callback(status, [{ content: link, file: o.files[0] }]);
         });
       }
     });
