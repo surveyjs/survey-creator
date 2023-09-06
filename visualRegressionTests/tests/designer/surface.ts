@@ -1427,3 +1427,47 @@ test("Question adorners for different sizes", async (t) => {
     await takeElementScreenshot("question-big.png", qContent.nth(3), t, comparer);
   });
 });
+
+test("Narrow question placeholder", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "250px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "250px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "minWidth": "100px",
+              "maxWidth": "250px",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const qContent = Selector(".svc-question__content");
+    await takeElementScreenshot("panel-placeholder.png", qContent.nth(0), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
+
+    await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+  });
+});
