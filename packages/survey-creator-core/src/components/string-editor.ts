@@ -25,7 +25,7 @@ export abstract class StringItemsNavigatorBase {
 
   protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
     const createNewItem = (val: any): ItemValue => {
-      if(this.question.createItemValue) return this.question.createItemValue(val);
+      if (this.question.createItemValue) return this.question.createItemValue(val);
       return new ItemValue(val);
     };
     let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => createNewItem(text))).concat(items.slice(startIndex + 1));
@@ -117,7 +117,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
   }
   protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
     const itemValue = creator.createNewItemValue(this.question);
-    if(!!text) itemValue.value = text;
+    if (!!text) itemValue.value = text;
   }
   protected getItemsPropertyName(items: any) {
     return "choices";
@@ -217,9 +217,7 @@ export class StringEditorViewModelBase extends Base {
 
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
-    this.connector = StringEditorConnector.get(locString);
-    this.connector.onDoActivate.add(() => { this.activate(); });
-    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
+    this.setLocString(locString);
   }
 
   public afterRender() {
@@ -228,7 +226,12 @@ export class StringEditorViewModelBase extends Base {
     }
   }
 
-  public activate() {
+  public dispose() {
+    super.dispose();
+    this.connector.onDoActivate.remove(this.activate);
+  }
+
+  public activate = () => {
     const element = this.getEditorElement();
     if (element && element.offsetParent != null) {
       element.focus();
@@ -239,9 +242,11 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public setLocString(locString: LocalizableString) {
+    this.connector?.onDoActivate.clear();
     this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
-    this.connector.onDoActivate.add(() => { this.activate(); });
+    this.connector.onDoActivate.add(this.activate);
+    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
   public checkConstraints(event: any) {
     if (this.maxLength > 0 && event.keyCode >= 32) {
@@ -373,12 +378,12 @@ export class StringEditorViewModelBase extends Base {
           this.creator.inplaceEditForValues &&
           ["noneText", "otherText", "selectAllText"].indexOf(this.locString.name) == -1) {
           const itemValue = <ItemValue>this.locString.owner;
-          if(itemValue.value !== clearedText) {
-            if(!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
+          if (itemValue.value !== clearedText) {
+            if (!!itemValue.locOwner && !!itemValue.ownerPropertyName) {
               const choices = itemValue.locOwner[itemValue.ownerPropertyName];
-              if(Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
+              if (Array.isArray(choices) && !!ItemValue.getItemByValue(choices, clearedText)) {
                 clearedText = getNextItemValue(clearedText, choices);
-                if(!!event && !!event.target) {
+                if (!!event && !!event.target) {
                   event.target.innerText = clearedText;
                 }
               }

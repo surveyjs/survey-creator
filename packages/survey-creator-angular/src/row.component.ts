@@ -28,6 +28,11 @@ export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
   getPropertiesToTrack(): string[] {
     return ["creator", "row"];
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.model.dispose();
+  }
+
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-row", CreatorRowComponent);

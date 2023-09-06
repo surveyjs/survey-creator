@@ -37,6 +37,10 @@ export class QuestionRatingAdornerDesignerComponent extends CreatorModelComponen
   protected getModel(): QuestionRatingAdornerViewModel {
     return this.adorner;
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner.dispose();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-rating-question-content", QuestionRatingAdornerDesignerComponent);
