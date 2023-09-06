@@ -7,7 +7,7 @@
       <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes"
         class="svc-choose-file-input" />
 
-      <ng-container *ngIf="!adorner.isNew">
+      <ng-container *ngIf="!adorner.isNew && !adorner.isUploading">
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
           <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
         </div>
@@ -29,21 +29,25 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="adorner.isNew">
+      <ng-container *ngIf="adorner.isNew || adorner.isUploading">
         <div class="svc-image-item-value__item"
           data-bind="event: { dragover: dragover, drop: drop, dragleave: dragleave }">
           <div class="sd-imagepicker__item sd-imagepicker__item--inline">
             <label class="sd-imagepicker__label">
-              <div [style]="getNewItemStyle()" class="sd-imagepicker__image"></div>
+              <div [style]="getNewItemStyle()" class="sd-imagepicker__image">
+                <div class="svc-image-item-value__loading" *ngIf="adorner.isUploading">
+                  <sv-ng-loading-indicator></sv-ng-loading-indicator>
+                </div>
+              </div>
             </label>
           </div>
         </div>
 
         <div class="svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
-          <span class="svc-context-button svc-image-item-value-controls__add" [key2click]
-            (click)="adorner.chooseNewFile(adorner)" [attr.title]="undefined" [attr.aria-label]="undefined">
-            <svg *ngIf="adorner.allowAdd && !adorner.isUploading" [iconName]="'icon-add-lg'" [size]="24"
-              sv-ng-svg-icon></svg>
+          <span class="svc-context-button svc-image-item-value-controls__add"
+            *ngIf="adorner.allowAdd && !adorner.isUploading" [key2click] (click)="adorner.chooseNewFile(adorner)"
+            [attr.title]="undefined" [attr.aria-label]="undefined">
+            <svg [iconName]="'icon-add-lg'" [size]="24" sv-ng-svg-icon></svg>
           </span>
         </div>
       </ng-container>
