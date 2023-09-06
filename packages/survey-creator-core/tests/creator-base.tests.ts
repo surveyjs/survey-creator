@@ -4048,5 +4048,6 @@ test("Do not focus title on mobile", (): any => {
   expect(creator.startEditTitleOnQuestionAdded).toBeFalsy();
 
   creator.startEditTitleOnQuestionAdded = true;
+  creator.isMobileView = false;
   expect(creator.startEditTitleOnQuestionAdded).toBeTruthy();
 });
