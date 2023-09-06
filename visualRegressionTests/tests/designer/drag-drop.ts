@@ -190,34 +190,33 @@ test("Choices: Ranking", async (t) => {
   });
 });
 
-// test("Choices: Ranking--Mobile", async (t) => {
-//   await wrapVisualTest(t, async (t, comparer) => {
-//     const json = {
-//       pages: [
-//         {
-//           name: "page1",
-//           elements: [
-//             {
-//               "type": "ranking",
-//               "name": "question1",
-//               "choices": [
-//                 "Item 1",
-//                 "Item 2"
-//               ]
-//             }
-//           ]
-//         }
-//       ]
-//     };
-//     await setJSON(json);
+test("Choices: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
 
-//     const QRoot = Selector(".svc-question__adorner .sd-question__content").filterVisible();
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "radiogroup",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
 
-//     await ClientFunction(() => { document.body.style.maxWidth = "375px"; document.body.style.maxHeight = "667px"; })();
-//     await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", QRoot, t, comparer);
-//     await ClientFunction(() => { document.body.style.removeProperty("maxWidth"); document.body.style.removeProperty("maxHeight"); })();
-//   });
-// });
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values--mobile.png", Row, t, comparer);
+  });
+});
 
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
