@@ -17,7 +17,6 @@ export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   public adorner!: PageAdorner;
   protected createModel(): void {
     if (this.model) {
-      this.previousModel?.dispose();
       this.adorner = new PageAdorner(this.creator, this.model);
     }
   }

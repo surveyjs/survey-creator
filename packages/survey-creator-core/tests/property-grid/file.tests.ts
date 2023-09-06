@@ -6,6 +6,7 @@ import {
 } from "../../src/creator-settings";
 import { imageMimeTypes } from "../../src/utils/utils";
 import { CreatorBase } from "../../src/creator-base";
+export * from "../../src/custom-questions/question-text-with-reset";
 
 test("Check file editor value", () => {
   const question = new QuestionFileEditorModel("q1");

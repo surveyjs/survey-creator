@@ -125,12 +125,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       action: () => {
         this.selectSurvey();
       },
-      active: <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.creator.sidebar.activeTab === this.propertyGridTab.id, this.isSurveySelected);
-      }),
-      pressed: <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.creator.sidebar.activeTab === this.propertyGridTab.id, this.isSurveySelected);
-      }),
+      active: this.isSettingsActive,
+      pressed: this.isSettingsActive,
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.surveySettings",
       locTooltipName: "ed.surveySettingsTooltip",

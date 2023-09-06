@@ -90,6 +90,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
+      this.model.dispose();
       this.model = undefined;
     }
     this.sidebarTab.visible = false;
