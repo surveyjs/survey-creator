@@ -214,7 +214,13 @@ export class CreatorBase extends Base
    * - `"portrait"`
    */
   @property({ defaultValue: "landscape" }) previewOrientation: "landscape" | "portrait";
-  public startEditTitleOnQuestionAdded: boolean = true;
+  public set startEditTitleOnQuestionAdded(value: boolean) {
+    this.startEditTitleOnQuestionAddedValue = value;
+  }
+  public get startEditTitleOnQuestionAdded() {
+    return !this.isMobileView && this.startEditTitleOnQuestionAddedValue;
+  }
+  private startEditTitleOnQuestionAddedValue: boolean = true;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
