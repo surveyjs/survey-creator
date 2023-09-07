@@ -108,7 +108,7 @@ export class SurveyCreatorToolboxItem extends CreatorModelElement<
   render(): JSX.Element {
     return attachKey2click(
       <div
-        className={this.item.className}
+        className={"svc-toolbox__item " + this.item.className}
         tabIndex={0}
         role="button"
         aria-label={this.item.tooltip}
