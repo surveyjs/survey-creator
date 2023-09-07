@@ -2,6 +2,7 @@ import { Action, ComputedUpdater, CssClassBuilder, IAction, ItemValue, ListModel
 import { parseColor } from "../utils/utils";
 
 const DEFAULT_COLOR: string = "#000000";
+const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
 export class QuestionColorModel extends QuestionTextModel {
   @property() public unit: string;
 
@@ -57,12 +58,14 @@ export class QuestionColorModel extends QuestionTextModel {
     if(this.value) {
       const color = parseColor(this.value || "");
       this._renderedValue = color.color;
+    } else if (this.value === undefined) {
+      this._renderedValue = "";
     } else {
       this._renderedValue = DEFAULT_COLOR;
     }
   }
   public get renderedValue(): string {
-    if(!this._renderedValue) {
+    if(!this._renderedValue && this._renderedValue !== "") {
       this.updateRenderedValue();
     }
     return this._renderedValue.toUpperCase();
@@ -71,7 +74,10 @@ export class QuestionColorModel extends QuestionTextModel {
     return new CssClassBuilder().append(this.cssClasses.swatch).append(this.cssClasses.swatchDisabled, this.isInputReadOnly).toString();
   }
   public getSwatchStyle(): {[index: string]: string} {
-    return { backgroundColor: this.renderedValue };
+    return { backgroundColor: this.renderedValue || DEFAULT_SWATCH_COLOR };
+  }
+  public get renderedColorValue() {
+    return this.renderedValue || DEFAULT_SWATCH_COLOR;
   }
   public get isInputTextUpdate(): boolean {
     return false;

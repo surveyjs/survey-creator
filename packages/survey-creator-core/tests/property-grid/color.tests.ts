@@ -3,14 +3,14 @@ import { QuestionColorModel } from "../../src/custom-questions/question-color";
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");
-  expect(question.renderedValue).toBe("#000000");
+  expect(question.renderedValue).toBe("");
   expect(question.value).toBe(undefined);
   question.value = undefined;
   expect(question.value).toBe(undefined);
-  expect(question.renderedValue).toBe("#000000");
+  expect(question.renderedValue).toBe("");
   question.value = null;
   expect(question.value).toBe(undefined);
-  expect(question.renderedValue).toBe("#000000");
+  expect(question.renderedValue).toBe("");
   question.value = "incorrect_value";
   expect(question.value).toBe("#000000");
   expect(question.renderedValue).toBe("#000000");
@@ -147,7 +147,7 @@ test("QuestionColorModel renderedValue always HEX (value from survey)", () => {
 test("QuestionColorModel renderedValue when _renderedValue and value are empty", () => {
   let q = new QuestionColorModel("q1");
   q._renderedValue = "";
-  expect(q.renderedValue).toBe("#000000");
+  expect(q.renderedColorValue).toBe("#FFFFFF");
   q = new QuestionColorModel("q1");
   q._renderedValue = "";
   q.value = "";
