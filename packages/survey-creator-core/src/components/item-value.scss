@@ -160,7 +160,13 @@
 
   .svc-item-value__item {
     padding-right: 0;
+    flex-grow: 1;
   }
+}
+.svc-question__content .svc-item-value__item .sv-ranking-item__text {
+  flex-grow: 1;
+  width: 0;
+  max-width: fit-content;
 }
 
 .svc-item-value__item {
@@ -175,7 +181,23 @@
   .sv-ranking-item__text {
     overflow: visible;
   }
+
+  .svc-string-editor {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .svc-string-editor__content {
+    width: 100%;
+  }
+
+  .sv-string-editor {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }
+
+
 
 .svc-item-value--ghost {
   .svc-item-value__ghost {
