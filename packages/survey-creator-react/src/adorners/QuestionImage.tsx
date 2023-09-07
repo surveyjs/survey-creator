@@ -3,7 +3,7 @@ import {
   QuestionAdornerViewModel
 } from "survey-creator-core";
 import React from "react";
-import { attachKey2click, ReactElementFactory, ReactQuestionFactory, SvgIcon } from "survey-react-ui";
+import { attachKey2click, LoadingIndicatorComponent, ReactElementFactory, ReactQuestionFactory, SvgIcon } from "survey-react-ui";
 import {
   QuestionAdornerComponent,
   QuestionAdornerComponentProps
@@ -50,19 +50,26 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
       {super.renderHeader()}
     </React.Fragment>);
   }
-  renderElementPlaceholder(): JSX.Element {
-    return (
-      <div className="svc-image-question-controls">
-        {this.model.allowEdit && !(this.model as QuestionImageAdornerViewModel).isUploading ? attachKey2click(<span
-          className="svc-context-button"
-          onClick={() => this.imageModel.chooseFile(this.imageModel)}
-        >
-          <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-        </span>) : null}
+  renderLoadingPlaceholder(): JSX.Element {
+    return (<div className="svc-image-question__loading-placeholder">
+      <div className="svc-image-question__loading">
+        <LoadingIndicatorComponent></LoadingIndicatorComponent>
       </div>
-    );
+    </div>);
   }
-
+  renderChooseButton(): JSX.Element {
+    return(<div className="svc-image-question-controls">
+      {this.model.allowEdit ? attachKey2click(<span
+        className="svc-context-button"
+        onClick={() => this.imageModel.chooseFile(this.imageModel)}
+      >
+        <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+      </span>) : null}
+    </div>);
+  }
+  renderElementPlaceholder(): JSX.Element {
+    return this.imageModel.isUploading ? this.renderLoadingPlaceholder() : this.renderChooseButton();
+  }
   protected getStateElements(): Array<Base> {
     return [this.model, this.imageModel.filePresentationModel];
   }
