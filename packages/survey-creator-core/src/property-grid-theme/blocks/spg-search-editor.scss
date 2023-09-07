@@ -1,6 +1,32 @@
 .spg-editor-highlight {
-  $secondary: $secondary-forecolor;
-  background-color: $secondary-backcolor-semi-light;
+  .spg-input,
+  .spg-input-container,
+  .spg-question--location--left,
+  .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+    box-shadow: 0 0 0 2px $secondary;
+  }
+  .spg-checkbox__control:focus + .spg-checkbox__rectangle {
+    outline: 2px solid $secondary;
+    outline-offset: -2px;
+  }
+  .spg-matrixdynamic__content.spg-text__content {
+    box-shadow: 0 0 0 2px $secondary;
+
+    .spg-input {
+      box-shadow: none;
+    }
+  }
+  .svc-action-button {
+    background-color: $secondary-light;
+  }
+  .sv-button-group {
+    box-shadow: 0 0 0 1px $secondary;
+    border-color: $secondary;
+  }
+  .spg-checkbox__control + .spg-checkbox__rectangle {
+    outline: 2px solid $secondary;
+    outline-offset: -2px;
+  }
 }
 
 .spg-search-editor_container {
@@ -12,7 +38,6 @@
   width: calc(100% - calc(4 * #{$base-unit}));
   display: flex;
   align-items: center;
-  z-index: 1;
 }
 
 .spg-search-editor_input {

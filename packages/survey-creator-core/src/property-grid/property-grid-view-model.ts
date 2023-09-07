@@ -1,4 +1,4 @@
-import { Base, SurveyModel, property, PopupModel, Action, Question, ActionContainer, ComputedUpdater } from "survey-core";
+import { Base, SurveyModel, property, PopupModel, Action, Question, ActionContainer, ComputedUpdater, IElement } from "survey-core";
 import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
@@ -67,13 +67,27 @@ export class PropertyGridViewModel extends Base {
     }
   }
 
+  private expandAllParents(element: IElement) {
+    if (!element) return;
+    if (element.isCollapsed) {
+      element.expand();
+    }
+    this.expandAllParents((<any>element).parent);
+    this.expandAllParents((<any>element).parentQuestion);
+  }
   private updateFoundEditor(index: number) {
     this.currentSearchResultIndex = index;
     const prevResult = this.currentSearchResult;
     this.currentSearchResult = this.searchResults[index];
     prevResult?.updateElementCss();
-    this.currentSearchResult?.updateElementCss();
-    this.currentSearchResult?.focus();
+    if (!!this.currentSearchResult && prevResult !== this.currentSearchResult) {
+      this.currentSearchResult.updateElementCss();
+      // this.currentSearchResult.focus();
+      this.expandAllParents(this.currentSearchResult);
+      setTimeout(() => {
+        this.currentSearchResult.survey.scrollElementToTop(this.currentSearchResult, this.currentSearchResult, null, this.currentSearchResult.id);
+      }, 10);
+    }
 
     const count = this.searchResults.length;
     const value = this.currentSearchResult ? index + 1 : "0";
