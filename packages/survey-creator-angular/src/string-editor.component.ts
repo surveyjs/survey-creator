@@ -101,6 +101,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     }
   }
   override ngOnDestroy(): void {
+    this.baseModel.blurEditor = undefined as any;
+    this.baseModel.getEditorElement = undefined as any;
+    this.baseModel.dispose();
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
   }

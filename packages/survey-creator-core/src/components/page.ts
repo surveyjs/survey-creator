@@ -15,7 +15,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
   private updateDragTypeOverMe() {
-    this.dragTypeOverMe = this.page.dragTypeOverMe;
+    this.dragTypeOverMe = this.page?.dragTypeOverMe;
   }
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -93,8 +93,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     };
   }
   public dispose(): void {
-    super.dispose();
     this.detachElement(this.page);
+    super.dispose();
     this.onPropertyValueChangedCallback = undefined;
   }
   public get isGhost(): boolean {

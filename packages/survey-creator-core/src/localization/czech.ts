@@ -126,6 +126,7 @@ export var czStrings = {
     translationPropertyGridTitle: "Nastavení jazyka",
     themePropertyGridTitle: "Nastavení motivu",
     translationLanguages: "Jazyky",
+    translationDeleteLanguage: "Jste si jisti, že chcete odstranit všechny řetězce pro tento jazyk?",
     translationAddLanguage: "Vyberte jazyk pro překlad",
     translationShowAllStrings: "Zobrazit všechny řetězce",
     translationShowUsedStringsOnly: "Pouze použité řetězce",
@@ -137,6 +138,7 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
+    themeResetButton: "Obnovení výchozího nastavení motivu",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
@@ -1016,6 +1018,7 @@ export var czStrings = {
     fontFamily: "Font",
     fontSize: "Velikost fontu",
     color: "Barva",
+    placeholderColor: "Zástupná barva",
     size: "Velikost",
     fontWeightRegular: "Běžný",
     fontWeightHeavy: "Těžký",
@@ -1116,3 +1119,6 @@ editorLocalization.locales["cs"] = czStrings;
 // names.layered: "Layered" => "Vrstvený"
 // names.solid: "Solid" => "Solidní"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Jste si jisti, že chcete odstranit všechny řetězce pro tento jazyk?"
+// ed.themeResetButton: "Reset theme settings to default" => "Obnovení výchozího nastavení motivu"
+// theme.placeholderColor: "Placeholder color" => "Zástupná barva"

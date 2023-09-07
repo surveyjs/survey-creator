@@ -126,6 +126,7 @@ export var turkishStrings = {
     translationPropertyGridTitle: "Dil Ayarları",
     themePropertyGridTitle: "Tema Ayarları",
     translationLanguages: "Diller",
+    translationDeleteLanguage: "Bu dil için tüm dizeleri silmek istediğinizden emin misiniz?",
     translationAddLanguage: "Çeviri için dil seçiniz",
     translationShowAllStrings: "Tüm yazıları göster",
     translationShowUsedStringsOnly: "Yalnızca Kullanılan Dizeler",
@@ -137,6 +138,7 @@ export var turkishStrings = {
     translationPlaceHolder: "Çeviri...",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
+    themeResetButton: "Tema ayarlarını varsayılana sıfırla",
     bold: "Kalın",
     italic: "Italik",
     underline: "Alt Çizgi",
@@ -1016,6 +1018,7 @@ export var turkishStrings = {
     fontFamily: "Font ailesi",
     fontSize: "Yazı tipi boyutu",
     color: "Renk",
+    placeholderColor: "Yer tutucu rengi",
     size: "Boyut",
     fontWeightRegular: "Düzenli",
     fontWeightHeavy: "Ağır",
@@ -1551,3 +1554,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // names.layered: "Layered" => "Katmanlı"
 // names.solid: "Solid" => "Katı"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Bu dil için tüm dizeleri silmek istediğinizden emin misiniz?"
+// ed.themeResetButton: "Reset theme settings to default" => "Tema ayarlarını varsayılana sıfırla"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Yer tutucu rengi"

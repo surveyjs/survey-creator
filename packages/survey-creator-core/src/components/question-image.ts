@@ -21,7 +21,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.storeDataAsText = false;
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
-      if(!!fileToUpload) {
+      if (!!fileToUpload) {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
           o.callback(status, [{ content: link, file: o.files[0] }]);
@@ -83,5 +83,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     return new CssClassBuilder()
       .append(super.css())
       .append("svc-question__content--loading", this.isUploading).toString();
+  }
+  public dispose() {
+    super.dispose();
+    this.questionRoot = undefined;
   }
 }

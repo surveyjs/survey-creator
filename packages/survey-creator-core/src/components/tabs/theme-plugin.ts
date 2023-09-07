@@ -23,10 +23,6 @@ export class TabThemePlugin implements ICreatorPlugin {
 
   public model: ThemeSurveyTabViewModel;
 
-  private getSimulatorDevicesTitle(): string {
-    if (!this.model) return "";
-    return simulatorDevices[this.model.simulator.device].title || getLocString("pe.simulator");
-  }
   private setDevice(newVal: string) {
     this.model.simulator.device = newVal;
     this.model.simulator.resetZoomParameters();
@@ -90,6 +86,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
+      this.model.dispose();
       this.model = undefined;
     }
     this.sidebarTab.visible = false;

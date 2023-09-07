@@ -37,6 +37,10 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
   protected getModel(): ItemValueWrapperViewModel {
     return this.adorner;
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.adorner.dispose();
+  }
 }
 
 AngularComponentFactory.Instance.registerComponent("svc-item-value", ItemValueDesignerComponent);

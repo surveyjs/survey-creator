@@ -1,0 +1,7 @@
+<div [class]="model.getRootClass()">
+    <ng-template [component]="{ name: getComponentName(), data: { model } }"></ng-template>
+    <button [class]="model.cssClasses.resetButton" [disabled]="model.resetValueAdorner.isDisabled"
+        (click)="model.resetValueAdorner.resetValue()" [attr.title]="model.resetValueAdorner.caption">
+        <svg [iconName]="model.cssClasses.resetButtonIcon" size="'auto'" sv-ng-svg-icon></svg>
+    </button>
+</div>

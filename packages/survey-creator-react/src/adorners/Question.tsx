@@ -26,6 +26,9 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   protected rootRef: React.RefObject<HTMLDivElement>;
 
   protected createModel(): void {
+    if (this.modelValue) {
+      this.modelValue.dispose();
+    }
     this.modelValue = this.createQuestionViewModel();
   }
   protected createQuestionViewModel(): QuestionAdornerViewModel {
