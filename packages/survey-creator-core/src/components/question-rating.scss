@@ -37,3 +37,23 @@
     padding: calcSize(0.5) calcSize(2.5);
   }
 }
+
+.svc-creator--mobile {
+  .svc-question__content {
+    .sd-rating {
+      margin-inline-start: 0; // margin-left
+      width: 100%;
+    }
+
+
+    legend+.sd-rating__item,
+    legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley,
+    legend+sv-ng-rating-item+.sd-rating__item {
+      margin-inline-start: calc(9 * #{$base-unit} + 2px);
+    }
+
+    legend+.sd-rating__item-text {
+      margin-inline-start: calc(9 * #{$base-unit});
+    }
+  }
+}
