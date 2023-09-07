@@ -14,6 +14,7 @@
     align-items: flex-start;
     min-width: calcSize(28);
   }
+
   .svc-item-value__item {
     padding-right: calcSize(1);
   }
@@ -90,6 +91,7 @@
     fill: $foreground;
   }
 }
+
 .svc-item-value-controls__button--disabled {
   fill: $foreground-light;
   opacity: 0.25;
@@ -155,6 +157,7 @@
     align-items: center;
     min-width: calcSize(27);
   }
+
   .svc-item-value__item {
     padding-right: 0;
   }
@@ -225,4 +228,14 @@
   z-index: 11;
   position: absolute;
   left: 35px;
+}
+
+.svc-creator--mobile .svc-tab-designer {
+  .svc-item-value-controls__drag-icon {
+    visibility: visible;
+  }
+
+  .svc-item-value-wrapper {
+    margin-left: calcSize(-3);
+  }
 }

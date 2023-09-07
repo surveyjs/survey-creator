@@ -190,6 +190,34 @@ test("Choices: Ranking", async (t) => {
   });
 });
 
+test("Choices: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "radiogroup",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values--mobile.png", Row, t, comparer);
+  });
+});
+
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
