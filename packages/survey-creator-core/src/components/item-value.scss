@@ -163,6 +163,7 @@
     flex-grow: 1;
   }
 }
+
 .svc-question__content .svc-item-value__item .sv-ranking-item__text {
   flex-grow: 1;
   width: 0;
@@ -259,5 +260,10 @@
 
   .svc-item-value-wrapper {
     margin-left: calcSize(-3);
+  }
+
+  .svc-item-value-controls__drag {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
