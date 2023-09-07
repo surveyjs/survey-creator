@@ -17,6 +17,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
           className={this.questionFile.cssClasses.control}
           ref={(input) => (this.setControl(input))}
           autoComplete="off"
+          type="text"
           onBlur={(event) => this.questionFile.onInputBlur(event.nativeEvent) }
           onChange={(event) => this.questionFile.onInputChange(event.nativeEvent)}
         />
@@ -70,7 +71,8 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         onDragEnter={this.questionFile.onDragEnter}
         onDragOver={this.questionFile.onDragOver}
         onDrop={this.questionFile.onDrop}
-        onDragLeave={this.questionFile.onDragLeave}>
+        onDragLeave={this.questionFile.onDragLeave}
+        onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         { this.renderInput() }
         { this.renderButtons() }
       </div>

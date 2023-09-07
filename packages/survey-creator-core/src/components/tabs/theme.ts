@@ -97,7 +97,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImage = newValue;
       }
       _target.currentTheme["backgroundImage"] = newValue;
-
+      _target.raiseThemeChanged();
     }
   }) backgroundImage;
 
@@ -107,6 +107,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImageFit = newValue;
       }
       _target.currentTheme["backgroundImageFit"] = newValue;
+      _target.raiseThemeChanged();
     }
   }) backgroundImageFit;
 
@@ -116,7 +117,7 @@ export class ThemeSurveyTabViewModel extends Base {
         _target.survey.backgroundImageAttachment = newValue;
       }
       _target.currentTheme["backgroundImageAttachment"] = newValue;
-
+      _target.raiseThemeChanged();
     }
   }) backgroundImageAttachment;
   @property({ defaultValue: "default" }) themeName;
@@ -187,6 +188,7 @@ export class ThemeSurveyTabViewModel extends Base {
   }
 
   private loadTheme(theme: ICreatorTheme) {
+    this.blockThemeChangedNotifications += 1;
     this.themeName = theme.themeName;
     this.themePalette = theme.colorPalette;
     this.themeMode = theme.isPanelless ? "lightweight" : undefined;
@@ -203,11 +205,13 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeVariables = {};
     assign(themeVariables, this.themeVariables, theme.cssVariables);
     theme.cssVariables = themeVariables;
+    this.blockThemeChangedNotifications -= 1;
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme");
     newSurvey.setCss(theme, false);
+    newSurvey.fitToContainer = true;
     this.simulator.survey = newSurvey;
     this.setThemeToSurvey();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
@@ -496,6 +500,7 @@ export class ThemeSurveyTabViewModel extends Base {
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
     themeEditorSurvey.css = themeBuilderCss;
+    themeEditorSurvey.enterKeyAction = "loseFocus";
     this.loadThemeIntoPropertyGrid(themeEditorSurvey);
     this.initializeColorCalculator();
 
@@ -604,7 +609,7 @@ export class ThemeSurveyTabViewModel extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionDescription"), newCssVariables, newCssVariables["--sjs-general-forecolor-light"]);
-    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
+    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"], newCssVariables["--sjs-general-forecolor-light"]);
 
     if (!!newCssVariables["--sjs-corner-radius"]) {
       themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
@@ -623,14 +628,18 @@ export class ThemeSurveyTabViewModel extends Base {
     });
   }
 
+  private raiseThemeChanged() {
+    if (this.blockThemeChangedNotifications == 0) {
+      this.surveyProvider.raiseThemeChanged();
+    }
+  }
+
   private setThemeToSurvey(theme?: ITheme) {
     if (!!theme) {
       this.surveyProvider.theme = theme;
     }
     this.survey.applyTheme(this.surveyProvider.theme);
-    if (this.blockThemeChangedNotifications == 0) {
-      this.surveyProvider.raiseThemeChanged();
-    }
+    this.raiseThemeChanged();
   }
 
   private getThemeEditorSurveyJSON() {
@@ -1067,5 +1076,12 @@ export class ThemeSurveyTabViewModel extends Base {
     };
 
     return themeEditorSurveyJSON;
+  }
+  public dispose(): void {
+    this.themeEditorSurveyValue?.dispose();
+    if (this.selectPageAction) {
+      this.selectPageAction.dispose();
+    }
+    this.simulator.dispose();
   }
 }

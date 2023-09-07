@@ -126,6 +126,7 @@ export var msStrings = {
     translationPropertyGridTitle: "Seting Bahasa",
     themePropertyGridTitle: "Seting Tema",
     translationLanguages: "Bahasa-bahasa",
+    translationDeleteLanguage: "Adakah anda pasti ingin memadam semua rentetan untuk bahasa ini?",
     translationAddLanguage: "Pilihan bahasa untuk diterjemah",
     translationShowAllStrings: "Tunjukkan semua rentetan",
     translationShowUsedStringsOnly: "Rentetan yang Digunakan Sahaja",
@@ -137,6 +138,7 @@ export var msStrings = {
     translationPlaceHolder: "Penterjemahan...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    themeResetButton: "Mengeset semula seting tema kepada lalai",
     bold: "Tebal",
     italic: "Condong",
     underline: "Garis bawah",
@@ -1016,6 +1018,7 @@ export var msStrings = {
     fontFamily: "Keluarga fon",
     fontSize: "Saiz fon",
     color: "Warna",
+    placeholderColor: "Warna ruang letak",
     size: "Saiz",
     fontWeightRegular: "Tetap",
     fontWeightHeavy: "Berat",
@@ -1509,3 +1512,8 @@ editorLocalization.locales["ms"] = msStrings;
 // names.layered: "Layered" => "Berlapis"
 // names.solid: "Solid" => "Pepejal"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Adakah anda pasti ingin memadam semua rentetan untuk bahasa ini?"
+// ed.themeResetButton: "Reset theme settings to default" => "Mengeset semula seting tema kepada lalai"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Warna ruang letak"

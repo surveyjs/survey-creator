@@ -126,6 +126,7 @@ export var ruStrings = {
     translationPropertyGridTitle: "Языковые настройки",
     themePropertyGridTitle: "Настройки темы",
     translationLanguages: "Языки",
+    translationDeleteLanguage: "Вы уверены, что хотите удалить все строки для этого языка?",
     translationAddLanguage: "Выберите дополнительный язык опросника",
     translationShowAllStrings: "Показывать все строки",
     translationShowUsedStringsOnly: "Используются только строки",
@@ -137,6 +138,7 @@ export var ruStrings = {
     translationPlaceHolder: "Перевод...",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
+    themeResetButton: "Сброс настроек темы по умолчанию",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
@@ -1016,6 +1018,7 @@ export var ruStrings = {
     fontFamily: "Семейство шрифтов",
     fontSize: "Размер шрифта",
     color: "Цвет",
+    placeholderColor: "Цвет заполнителя",
     size: "Размер",
     fontWeightRegular: "Регулярный",
     fontWeightHeavy: "Тяжелый",
@@ -1618,3 +1621,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // names.layered: "Layered" => "Слоистый"
 // names.solid: "Solid" => "Сплошной"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Вы уверены, что хотите удалить все строки для этого языка?"
+// ed.themeResetButton: "Reset theme settings to default" => "Сброс настроек темы по умолчанию"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Цвет заполнителя"

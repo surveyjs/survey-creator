@@ -32,6 +32,8 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       }
     };
     this.actionContainer = new AdaptiveActionContainer();
+    this.actionContainer.dotsItem.iconSize = 16;
+    this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     var actions: Array<Action> = [];
     this.buildActions(actions);
     this.setSurveyElement(surveyElement);
@@ -69,6 +71,10 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
+    this.actionContainer.dispose();
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
+    this.selectedPropPageFunc = undefined;
+    this.sidebarFlyoutModeChangedFunc = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
@@ -96,6 +102,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected updateActionVisibility(id: string, isVisible: boolean) {
     var action = this.getActionById(id);
     if (!action) return;
+    if (action.visible == isVisible) return;
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
@@ -111,7 +118,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
         css: "sv-action-bar-item--secondary",
-        locTitleName: "survey.duplicate",
+        title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
         iconSize: 16,
         action: () => {
@@ -125,7 +132,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "settings",
         iconName: "icon-settings_16x16",
         css: "sv-action-bar-item--secondary",
-        locTitleName: "ed.settings",
+        title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
         iconSize: 16,
@@ -142,7 +149,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconName: "icon-delete_16x16",
         css: "sv-action-bar-item--secondary",
         //needSeparator: items.length > 0,
-        locTitleName: "pe.delete",
+        title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
         iconSize: 16,
         action: () => {

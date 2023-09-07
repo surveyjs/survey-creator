@@ -1,4 +1,4 @@
-import { setJSON, url } from "../helper";
+import { generalGroupName, getPropertyGridCategory, logicGroupName, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid";
 
@@ -25,12 +25,18 @@ export default async function (t) {
   await t.expect(error[0]).notOk();
 }
 
+export const generalGroup = getPropertyGridCategory(generalGroupName);
+export const logicGroup = getPropertyGridCategory(logicGroupName);
+export const dataGroup = getPropertyGridCategory("Data");
+export const choicesGroup = getPropertyGridCategory("Choices");
+export const pagesGroup = getPropertyGridCategory("Pages");
+
 test("Delete second page", async (t) => {
   const deleteButtons = Selector("div[data-name=pages]").find("button[title=Remove]");
   await setJSON(json);
   await t
-    .click(Selector("h4").withExactText("General"))
-    .click(Selector("h4").withExactText("Pages"))
+    .click(generalGroup)
+    .click(pagesGroup)
     .expect(deleteButtons.count).eql(2)
     .click(deleteButtons)
     .expect(deleteButtons.count).eql(1);
@@ -42,8 +48,8 @@ test("Add calculated values", async (t) => {
 
   await setJSON(json);
   await t
-    .click(Selector("h4").withExactText("General"))
-    .click(Selector("h4").withExactText("Logic"))
+    .click(generalGroup)
+    .click(logicGroup)
     .expect(rows.count).eql(0)
     .click(addButton)
     .expect(rows.count).eql(2);
@@ -55,6 +61,7 @@ test("Check showInMultiple columns editing", async (t) => {
       {
         "type": "matrixdropdown",
         "name": "q1",
+        "title": "Question 1",
         "columns": [
           {
             "name": "Column 1",
@@ -75,14 +82,15 @@ test("Check showInMultiple columns editing", async (t) => {
       }]
   };
   await setJSON(json);
-  const question = Selector("[data-name=\"q1\"]");
-  const columns = Selector("h4").withExactText("Columns");
+  const question = Selector(".sv-string-editor").withText("Question 1");
+  const columns = getPropertyGridCategory("Columns");
   const edit = Selector("button[title='Edit']");
   const showInMultiple = Selector("input[aria-label='Show in multiple columns']");
   const radioMatrixCell = Selector("td:nth-of-type(2) .svc-matrix-cell");
   const controlButton = radioMatrixCell.find(".svc-matrix-cell__question-controls");
   await t
     .click(question)
+    .click(generalGroup)
     .click(columns)
     .click(edit)
     .click(showInMultiple)

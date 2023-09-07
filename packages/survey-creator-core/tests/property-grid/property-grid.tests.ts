@@ -54,6 +54,7 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+export * from "../../src/custom-questions/question-text-with-reset";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -1950,6 +1951,36 @@ test("Edit columns in property grid", () => {
   expect(question.columns[0].title).toEqual("New title");
   expect(propertyGrid.survey.getQuestionByName("min")).toBeTruthy();
   expect(propertyGrid.survey.getQuestionByName("min").isVisible).toBeTruthy();
+});
+test("Change checkbox column type into boolean, Bug#4519", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "matrix",
+        "columns": [
+          {
+            "name": "checked",
+            "cellType": "checkbox",
+            "choices": [
+              {
+                "value": "item1",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+  const column = survey.getQuestionByName("matrix").columns[0];
+  const options = new EmptySurveyCreatorOptions();
+  const propertyGrid = new PropertyGridModelTester(column, options);
+  const cellTypeQuestion = propertyGrid.survey.getQuestionByName("cellType");
+  expect(cellTypeQuestion).toBeTruthy();
+  expect(cellTypeQuestion.value).toEqual("checkbox");
+  cellTypeQuestion.value = "boolean";
+  expect(column.cellType).toBe("boolean");
 });
 test("Change cellType in the column in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");

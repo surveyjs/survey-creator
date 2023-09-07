@@ -8,7 +8,8 @@ import {
   QuestionPanelDynamicModel,
   ItemValue,
   QuestionTextModel,
-  ComponentCollection
+  ComponentCollection,
+  QuestionCheckboxModel
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -1723,6 +1724,27 @@ test("Change the default operator", () => {
   var panel = editor.panel.panels[0];
   expect(panel.getQuestionByName("operator").value).toEqual("anyof");
   settings.logic.defaultOperator = "equal";
+});
+test("Remove valuePropertyName", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
+      { type: "text", name: "q2", "visibleIf": "{q1} allof ['apple', 'orange']" }
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  var editor = new ConditionEditor(survey, q2, undefined, "visibleIf");
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("allof");
+  const qValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
+  expect(qValue.valuePropertyName).toBeFalsy();
+  expect(qValue.value).toHaveLength(2);
+  expect(qValue.value[0]).toBe("apple");
+  expect(qValue.value[1]).toBe("orange");
+  qValue.renderedValue = ["banana"];
+  editor.apply();
+  expect(q2.visibleIf).toBe("{q1} allof ['banana']");
 });
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });

@@ -11,14 +11,12 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     super(props);
     this.state = { changed: 0 };
     this.svStringEditorRef = React.createRef();
-    this.baseModel.getEditorElement = () => this.svStringEditorRef.current;
   }
   protected createModel(): void {
+    if (this.baseModel) {
+      this.baseModel.dispose();
+    }
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
-    this.baseModel.blurEditor = () => {
-      this.svStringEditorRef.current.blur();
-      this.svStringEditorRef.current.spellcheck = false;
-    };
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "locString"];
@@ -46,7 +44,11 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public componentDidMount() {
     super.componentDidMount();
     if (!this.locString) return;
-    const self: SurveyLocStringEditor = this;
+    this.baseModel.getEditorElement = () => this.svStringEditorRef.current;
+    this.baseModel.blurEditor = () => {
+      this.svStringEditorRef.current.blur();
+      this.svStringEditorRef.current.spellcheck = false;
+    };
     this.baseModel.afterRender();
     this.locString.onStringChanged.add(this.onChangedHandler);
     if (this.locString["__isEditing"]) {
@@ -56,10 +58,14 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   }
   public componentDidUpdate(prevProps: any, prevState: any): void {
     super.componentDidUpdate(prevProps, prevState);
+    this.baseModel.setLocString(this.locString);
     this.baseModel.afterRender();
   }
   public componentWillUnmount() {
     super.componentWillUnmount();
+    this.baseModel.getEditorElement = undefined;
+    this.baseModel.blurEditor = undefined;
+    this.baseModel.dispose();
     if (!this.locString) return;
     this.locString.onStringChanged.remove(this.onChangedHandler);
   }
@@ -118,9 +124,6 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public render(): JSX.Element {
     if (!this.locString) {
       return null;
-    }
-    else {
-      this.baseModel.setLocString(this.locString);
     }
     let control = null;
     if (this.locString.hasHtml) {

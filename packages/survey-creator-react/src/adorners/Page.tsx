@@ -56,6 +56,7 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
   }
   componentWillUnmount() {
     super.componentWillUnmount();
+    this.model.onPageSelectedCallback = undefined;
     this.model.dispose();
   }
   protected canRender(): boolean {

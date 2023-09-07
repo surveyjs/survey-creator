@@ -126,6 +126,7 @@ export var arStrings = {
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "إعدادات النسق",
     translationLanguages: "Languages",
+    translationDeleteLanguage: "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "Show all strings",
     translationShowUsedStringsOnly: "سلاسل مستعملة فقط",
@@ -137,6 +138,7 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
+    themeResetButton: "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -1016,6 +1018,7 @@ export var arStrings = {
     fontFamily: "عائلة الخط",
     fontSize: "حجم الخط",
     color: "لون",
+    placeholderColor: "لون العنصر النائب",
     size: "حجم",
     fontWeightRegular: "منتظم",
     fontWeightHeavy: "ثقيل",
@@ -1465,3 +1468,8 @@ editorLocalization.locales["ar"] = arStrings;
 // names.layered: "Layered" => "الطبقات"
 // names.solid: "Solid" => "صلب"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟"
+// ed.themeResetButton: "Reset theme settings to default" => "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"

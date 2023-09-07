@@ -1,5 +1,5 @@
-// Uncomment the line below if you create a custom dictionary
-// import { editorLocalization, defaultStrings } from "../editorLocalization";
+// Please, uncomment the line below if you create a custom dictionary
+// import { editorLocalization } from "survey-creator-core";
 
 export var enStrings = {
   // survey templates
@@ -130,6 +130,7 @@ export var enStrings = {
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "Theme Settings",
     translationLanguages: "Languages",
+    translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "All Strings",
     translationShowUsedStringsOnly: "Used Strings Only",
@@ -141,6 +142,7 @@ export var enStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    themeResetButton: "Reset theme settings to default",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -281,6 +283,7 @@ export var enStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "Preview answers before submitting the survey",
     overridingPropertyPrefix: "Set by ",
+    resetToDefaultCaption: "Reset",
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
@@ -1020,6 +1023,7 @@ export var enStrings = {
     fontFamily: "Font family",
     fontSize: "Font size",
     color: "Color",
+    placeholderColor: "Placeholder color",
     size: "Size",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Heavy",

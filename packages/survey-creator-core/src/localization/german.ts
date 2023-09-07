@@ -126,6 +126,7 @@ var germanTranslation = {
     translationPropertyGridTitle: "Übersetzungseinstellungen",
     themePropertyGridTitle: "Theme-Einstellungen",
     translationLanguages: "Sprachen",
+    translationDeleteLanguage: "Sind Sie sicher, dass Sie alle Zeichenfolgen für diese Sprache löschen möchten?",
     translationAddLanguage: "Wählen Sie eine Sprache aus",
     translationShowAllStrings: "Alle Texte anzeigen",
     translationShowUsedStringsOnly: "Verwendete Texte",
@@ -137,6 +138,7 @@ var germanTranslation = {
     translationPlaceHolder: "Übersetzung ...",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
+    themeResetButton: "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
@@ -166,9 +168,9 @@ var germanTranslation = {
       column_enableName: "Spalte aktivieren/deaktivieren",
       column_requireName: "Spalte optional/erforderlich",
       trigger_completeName: "Umfrage abschließen",
-      trigger_setvalueName: "Fragenwert setzen",
-      trigger_copyvalueName: "Fragenwert kopieren",
-      trigger_skipName: "Frage überspringen",
+      trigger_setvalueName: "Antwort setzen",
+      trigger_copyvalueName: "Antwort kopieren",
+      trigger_skipName: "Zu Frage springen",
       trigger_runExpressionName: "Ausdruck ausführen",
       completedHtmlOnConditionName: "Seite nach Abschluss der Umfrage anzeigen",
       page_visibilityDescription: "Mache die Seite sichtbar, wenn der logische Ausdruck wahr ergibt. Andernfalls lass sie unsichtbar.",
@@ -1016,6 +1018,7 @@ var germanTranslation = {
     fontFamily: "Schriftfamilie",
     fontSize: "Schriftgrad",
     color: "Farbe",
+    placeholderColor: "Farbe des Platzhalters",
     size: "Größe",
     fontWeightRegular: "Regelmäßig",
     fontWeightHeavy: "Schwer",
@@ -1308,3 +1311,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // names.layered: "Layered" => "Stufig"
 // names.solid: "Solid" => "Fest"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Sind Sie sicher, dass Sie alle Zeichenfolgen für diese Sprache löschen möchten?"
+// ed.themeResetButton: "Reset theme settings to default" => "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Farbe des Platzhalters"

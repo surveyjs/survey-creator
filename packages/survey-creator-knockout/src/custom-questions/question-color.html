@@ -1,4 +1,4 @@
-<div data-bind="css: question.cssClasses.root">
+<div data-bind="css: question.cssClasses.root, event: { keydown: question.koOnKeyDown }">
   <label data-bind="css: question.getSwatchCss(), style: question.getSwatchStyle()">
     <!-- ko component: { name: 'sv-svg-icon', params: { iconName: question.cssClasses.swatchIcon, size: 'auto' } } --><!-- /ko -->
     <input type="color"

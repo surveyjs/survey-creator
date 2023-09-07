@@ -54,6 +54,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate? : () => boolean|undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -1203,17 +1204,28 @@ export class CreatorBase extends Base
     this.isRTLValue = value;
   }
   /**
-   * The event is called when creator is going to change the active tab.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
+   * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"embed"` | `"logic"` | `"translation"`\
+   * A tab that is going to become active.
+   * - `options.allow`: `Boolean`\
+   * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
    */
   public onActiveTabChanging: CreatorEvent = new CreatorEvent();
 
   /**
-   * The event is called when creator active tab is changed.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
-   *- options.model the instance of the model of the new active tab
+   * An event that is raised after the [active tab](#activeTab) is switched.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"embed"` | `"logic"` | `"translation"`\
+   * A tab that has become active.
    */
   public onActiveTabChanged: CreatorEvent = new CreatorEvent();
   /**
@@ -1243,7 +1255,12 @@ export class CreatorBase extends Base
     return this.switchViewType(viewName);
   }
   private switchViewType(viewName: string): boolean {
-    const chaningOptions = { tabName: viewName, allow: true };
+    let allow = true;
+    if(!!this.currentPlugin?.defaultAllowingDeactivate) {
+      allow = this.currentPlugin.defaultAllowingDeactivate();
+      if(allow === undefined) return false;
+    }
+    const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
@@ -2187,6 +2204,11 @@ export class CreatorBase extends Base
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
+      if (!panel) {
+        while (selectedElement.parent !== null && selectedElement.parent.isPanel) {
+          selectedElement = <IElement><any>selectedElement.parent;
+        }
+      }
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
@@ -2395,6 +2417,13 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
+      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+        const page = this.survey.pages[0];
+        if (page.elements.length === 1 && obj === page.elements[0]) {
+          this.deleteObjectCore(page);
+          return;
+        }
+      }
       this.deletePanelOrQuestion(obj);
     }
     this.setModified({
@@ -2780,7 +2809,7 @@ export class CreatorBase extends Base
     if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
-    obj["delete"]();
+    obj["delete"](false);
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(
@@ -3064,7 +3093,7 @@ export class CreatorBase extends Base
     const options = {
       questionName: questionName,
       question: question,
-      questionType: !!question? question.getType(): "",
+      questionType: !!question ? question.getType() : "",
       operator: operator,
       show: isEnabled
     };
@@ -3412,7 +3441,7 @@ export class CreatorBase extends Base
     });
     super.dispose();
   }
-  @property({ defaultValue: false }) enableLinkFileEditor: boolean;
+  @property({ defaultValue: true }) enableLinkFileEditor: boolean;
 }
 export class SurveyCreatorModel extends CreatorBase { }
 
