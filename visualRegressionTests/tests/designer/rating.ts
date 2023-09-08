@@ -46,9 +46,16 @@ const jsonMulti = {
           "type": "rating",
           "name": "question1",
           "rateMax": 20
+        },
+        {
+          "type": "rating",
+          "name": "question2",
+          "rateMax": 20,
+          "minRateDescription": "Minimum",
+          "maxRateDescription": "Maximum",
         }
       ]
-    }
+    },
   ]
 };
 
@@ -115,8 +122,12 @@ test("Multi row rating adorner", async (t) => {
     const question = Selector("div[data-name=question1]");
     await takeElementScreenshot("rating-multiline.png", question, t, comparer);
 
+    const question2 = Selector("div[data-name=question2]");
+    await takeElementScreenshot("rating-multiline-text.png", question2, t, comparer);
+
     await t.resizeWindow(550, 900);
     await takeElementScreenshot("rating-multiline-mobile.png", question, t, comparer);
+    await takeElementScreenshot("rating-multiline-text-mobile.png", question2, t, comparer);
   });
 });
 
