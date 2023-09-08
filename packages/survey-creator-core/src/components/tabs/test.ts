@@ -207,7 +207,8 @@ export class TestSurveyTabViewModel extends Base {
 
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1) && isRunning;
       });
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
@@ -235,10 +236,13 @@ export class TestSurveyTabViewModel extends Base {
       horizontalPosition: "center"
     });
     pageActions.push(this.selectPageAction);
-
+    this.selectPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+      return this.survey.state === "running";
+    });
     if (this.nextPageAction) {
       this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1) && isRunning;
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
