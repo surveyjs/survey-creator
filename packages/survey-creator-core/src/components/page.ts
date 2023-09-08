@@ -73,7 +73,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
-    this.dragTypeOverMe = null;
+    if(!this.isDisposed) {
+      this.dragTypeOverMe = null;
+    }
   }
 
   protected onElementSelectedChanged(isSelected: boolean) {
