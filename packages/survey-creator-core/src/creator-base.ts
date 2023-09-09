@@ -1713,6 +1713,7 @@ export class CreatorBase extends Base
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = defaultV2Css;
+    survey.setIsMobile(!!this.isMobileView);
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -3396,7 +3397,9 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
-  @property({ defaultValue: false }) isMobileView;
+  @property({ defaultValue: false, onSet: (val, creator: CreatorBase) => {
+    creator.survey.setIsMobile(!!val);
+  } }) isMobileView: boolean;
   /**
    * Specifies Toolbox location.
    * 
