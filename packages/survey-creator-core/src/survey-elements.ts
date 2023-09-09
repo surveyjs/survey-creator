@@ -414,13 +414,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     }
 
-    const isTargetIsContainer = dest.isPanel || dest.isPage;
+    let isTargetIsContainer = dest.isPanel || dest.isPage;
     if(!!src && !!src.parent) {
       (page.survey as SurveyModel).startMovingQuestion();
       let isSamePanel = !(isTargetIsContainer && dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) && !!row && row.panel == src.parent;
       if(isSamePanel) {
         this.moveElementInPanel(row.panel, src, dragged, targetIndex);
         row.panel.updateRows();
+        isTargetIsContainer = false;
         targetIndex = -1;
       } else {
         src.parent.removeElement(src);
