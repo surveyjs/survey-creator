@@ -1,8 +1,10 @@
 @import "../../variables.scss";
+
 .svc-designer-header .sd-container-modern__title {
   gap: 0;
   column-gap: calcSize(6);
 }
+
 .svc-logo-image {
   position: relative;
   justify-content: flex-end;
@@ -10,11 +12,20 @@
   display: flex;
   padding: 0;
   cursor: pointer;
+
   .svc-image-item-value-controls {
     display: block;
     top: calcSize(2.5);
     right: calcSize(1.5);
   }
+}
+
+.svc-logo-image__loading {
+  width: calcSize(8);
+  height: calcSize(8);
+  padding: calcSize(1);
+  box-sizing: border-box;
+  margin-right: calcSize(-2);
 }
 
 .svc-logo-image-placeholder {
@@ -31,13 +42,16 @@
   align-items: center;
   margin-right: calcSize(-2);
   border-radius: calcSize(4);
+
   &:hover {
     background-color: $primary-light;
     opacity: unset;
+
     use {
       fill: $primary;
     }
   }
+
   svg {
     width: calcSize(4);
     height: calcSize(4);
@@ -47,12 +61,15 @@
 .svc-logo-image-placeholder use {
   fill: $foreground-light;
 }
+
 .svc-logo-image-container {
   position: relative;
+
   .sd-logo {
     margin: 0;
   }
 }
+
 .svc-logo-image-controls {
   opacity: 0;
   width: max-content;
@@ -61,14 +78,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .svc-logo-image-container {
   cursor: default;
 }
+
 .svc-logo-image-container:not(.svc-logo-image-container--editable) {
   .svc-logo-image-controls {
     display: none;
   }
 }
+
 .svc-logo-image-container--editable:focus-within,
 .svc-logo-image-container--editable:hover {
   .svc-logo-image-controls {
