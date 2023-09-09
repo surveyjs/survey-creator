@@ -274,6 +274,11 @@
   border-radius: calcSize(0.5);
   padding: calcSize(4) calcSize(5) calcSize(5);
 }
+.sv-popup--overlay {
+  .svc-logic-placeholder {
+    width: initial;
+  }
+}
 
 .svc-logic-placeholder__text {
   font-family: $font-family;
