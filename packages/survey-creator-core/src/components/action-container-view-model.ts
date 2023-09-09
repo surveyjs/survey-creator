@@ -71,7 +71,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
-    this.actionContainer.dispose();
+    if(!this.actionContainer.isDisposed) {
+      this.actionContainer.dispose();
+    }
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.selectedPropPageFunc = undefined;
     this.sidebarFlyoutModeChangedFunc = undefined;
