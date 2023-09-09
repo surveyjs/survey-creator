@@ -1,4 +1,4 @@
-import { DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
 
@@ -275,7 +275,25 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return <HTMLElement>result;
   }
-
+  private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): boolean {
+    if(!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
+    const allowOptions: DragDropAllowEvent = {
+      allow: true,
+      parent: this.parentElement,
+      source: this.draggedElement,
+      target: <IElement>dropTarget,
+      insertAfter: undefined,
+      insertBefore: undefined
+    };
+    if(dragOverLocation === DragTypeOverMeEnum.Bottom || dragOverLocation === DragTypeOverMeEnum.Right) {
+      allowOptions.insertAfter = <IElement>dropTarget;
+    }
+    if(dragOverLocation === DragTypeOverMeEnum.Top || dragOverLocation === DragTypeOverMeEnum.Left) {
+      allowOptions.insertBefore = <IElement>dropTarget;
+    }
+    this.survey.onDragDropAllow.fire(this.survey, allowOptions);
+    return allowOptions.allow;
+  }
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum, isEdge: boolean = false, isSide: boolean = false): void {
     this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.removeDragOverMarker(this.dropTarget);
@@ -291,7 +309,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.parentElement = this.dropTarget.isPage
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
-
+    if(!this.isAllowDragOver(dropTarget, dragOverLocation)) {
+      this.allowDropHere = false;
+      return;
+    }
     const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
     if (!this.isEdge && !this.isSide && this.isDragOverInsideEmptyPanel()) {
       dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
