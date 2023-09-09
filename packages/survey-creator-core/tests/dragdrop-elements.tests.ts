@@ -1026,3 +1026,47 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
     ]
   });
 });
+test("Do not allow to drag inside panel", () => {
+  const json = {
+    "elements": [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              { "type": "text", "name": "q2" }
+            ]
+          },
+          { "type": "text", "name": "q1" }
+        ]
+      },
+      { "type": "text", "name": "q3" }
+    ]
+  };
+  const survey = new SurveyModel(json);
+  const p1 = survey.getPanelByName("panel1");
+  const p2 = survey.getPanelByName("panel2");
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p1;
+
+  const checkAllowDragOverByType = (element: any, en: DragTypeOverMeEnum): void => {
+    ddHelper.dragOverCore(element, en);
+    expect(ddHelper["allowDropHere"]).toBeFalsy();
+  };
+  const checkAllowDragOver = (element: any): void => {
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Top);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Bottom);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Left);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Right);
+  };
+  ddHelper["allowDropHere"] = true;
+  checkAllowDragOver(p2);
+  checkAllowDragOver(q1);
+  checkAllowDragOver(q2);
+});

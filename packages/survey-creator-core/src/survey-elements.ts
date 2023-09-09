@@ -279,7 +279,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum, isEdge: boolean = false, isSide: boolean = false): void {
     this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.removeDragOverMarker(this.dropTarget);
-    if(dropTarget === this.draggedElement) {
+    if(this.isSameElement(dropTarget)) {
       this.allowDropHere = false;
       return;
     }
@@ -304,6 +304,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
     }
+  }
+  private isSameElement(target: ISurveyElement): boolean {
+    while(!!target) {
+      if(target === this.draggedElement) return true;
+      target = target.parent;
+    }
+    return false;
   }
 
   public dragOver(event: PointerEvent): void {
