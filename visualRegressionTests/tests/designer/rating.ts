@@ -128,6 +128,13 @@ test("Multi row rating adorner", async (t) => {
     await t.resizeWindow(550, 900);
     await takeElementScreenshot("rating-multiline-mobile.png", question, t, comparer);
     await takeElementScreenshot("rating-multiline-text-mobile.png", question2, t, comparer);
+
+    await t.click(Selector(".svc-question__adorner").nth(0), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(0).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-mobile-selected.png", question, t, comparer);
+    await t.click(Selector(".svc-question__adorner").nth(1), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(1).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-mobile-text-selected.png", question2, t, comparer);
   });
 });
 
