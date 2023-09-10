@@ -975,7 +975,72 @@ test("Undo/redo question dragged from last page", (): any => {
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
+test("drag drop panel before another panel in left, Bug #4574", () => {
+  const json = {
+    "elements": [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "name": "panel2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const survey = new SurveyModel(json);
+  const p1 = survey.getPanelByName("panel1");
+  const p2 = survey.getPanelByName("panel2");
 
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p2;
+
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Left);
+  ddHelper.doDrop();
+
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          },
+          {
+            "type": "panel",
+            "name": "panel1",
+            "startWithNewLine": false,
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+});
 test("drag drop one empty panel to other empty panel - https://github.com/surveyjs/survey-creator/issues/4390", () => {
   const json = {
     "logoPosition": "right",
