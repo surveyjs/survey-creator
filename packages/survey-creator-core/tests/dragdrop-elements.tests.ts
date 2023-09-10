@@ -1009,7 +1009,6 @@ test("drag drop panel before another panel in left, Bug #4574", () => {
 
   ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Left);
   ddHelper.doDrop();
-
   expect(survey.toJSON()).toStrictEqual({
     "pages": [
       {
@@ -1041,6 +1040,61 @@ test("drag drop panel before another panel in left, Bug #4574", () => {
     ]
   });
 });
+test("Support onDragDropAllow, Bug#4572", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  let counter = 0;
+  let surveyQuestionCount = 0;
+  let targetName = "";
+  let sourceName = "";
+  let parentName = "";
+  creator.onDragDropAllow.add((sender, options) => {
+    counter ++;
+    surveyQuestionCount = options.survey.getAllQuestions().length;
+    targetName = options.target.name;
+    sourceName = options.source.name;
+    parentName = options.parent.name;
+    options.allow = !!options.insertAfter;
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  ddHelper.draggedElement = q2;
+  ddHelper["allowDropHere"] = true;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
+  expect(counter).toBe(1);
+  expect(targetName).toBe("question1");
+  expect(sourceName).toBe("question2");
+  expect(parentName).toBe("page1");
+  expect(ddHelper["allowDropHere"]).toBeFalsy();
+  ddHelper["allowDropHere"] = true;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+  expect(counter).toBe(2);
+  expect(ddHelper["allowDropHere"]).toBeTruthy();
+});
+
 test("drag drop one empty panel to other empty panel - https://github.com/surveyjs/survey-creator/issues/4390", () => {
   const json = {
     "logoPosition": "right",
