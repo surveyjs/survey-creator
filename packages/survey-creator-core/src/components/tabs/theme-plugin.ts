@@ -6,9 +6,7 @@ import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 
 export class TabThemePlugin implements ICreatorPlugin {
   private testAgainAction: Action;
-  private designerAction: Action;
-  private prevPageAction: Action;
-  private nextPageAction: Action;
+  private themeSettingsAction: Action;
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
@@ -32,6 +30,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.themeSettingsAction.visible = true;
     this.resetTheme.visible = true;
     this.importAction.visible = true;
     this.exportAction.visible = true;
@@ -42,8 +41,6 @@ export class TabThemePlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.testAgainAction = this.testAgainAction;
-    this.model.prevPageAction = this.prevPageAction;
-    this.model.nextPageAction = this.nextPageAction;
     this.model.initialize(this.creator.JSON, options);
 
     this.model.show();
@@ -62,6 +59,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     }
     this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
+    this.themeSettingsAction.visible = false;
     this.resetTheme.visible = false;
     this.importAction.visible = false;
     this.exportAction.visible = false;
@@ -79,32 +77,6 @@ export class TabThemePlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
-
-    this.designerAction = new Action({
-      id: "svd-designer",
-      iconName: "icon-preview",
-      needSeparator: true,
-      action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "theme"),
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "theme");
-      }),
-      locTitleName: "ed.designer",
-      showTitle: false
-    });
-
-    this.prevPageAction = new Action({
-      id: "prevPage",
-      iconName: "icon-arrow-left_16x16",
-      visible: false
-    });
-
-    this.nextPageAction = new Action({
-      id: "nextPage",
-      iconName: "icon-arrow-right_16x16",
-      visible: false
-    });
-
     this.resetTheme = new Action({
       id: "resetTheme",
       iconName: "icon-reset",
@@ -119,6 +91,22 @@ export class TabThemePlugin implements ICreatorPlugin {
       }
     });
     items.push(this.resetTheme);
+
+    this.themeSettingsAction = new Action({
+      id: "svc-theme-settings",
+      iconName: "icon-theme",
+      action: () => {
+        if (!this.creator.showSidebar) {
+          this.creator.setShowSidebar(true, true);
+        }
+      },
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
+      locTitleName: "ed.themeSettings",
+      locTooltipName: "ed.themeSettingsTooltip",
+      visible: false,
+      showTitle: false
+    });
+    items.push(this.themeSettingsAction);
 
     this.importAction = new Action({
       id: "svc-theme-import",
@@ -162,9 +150,6 @@ export class TabThemePlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.testAgainAction);
-    this.creator.footerToolbar.actions.push(this.prevPageAction);
-    this.creator.footerToolbar.actions.push(this.nextPageAction);
-    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.creator.footerToolbar.actions.push(this.resetTheme);
   }
 }
