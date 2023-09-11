@@ -36,6 +36,16 @@
     padding-right: 0;
     border: 0;
 
+    .sd-page__title {
+      margin: 0;
+    }
+
+    &.svc-page__content--selected {
+      .sd-page__title {
+        margin: calcSize(2.5) 0 0 0;
+      }
+    }
+
     .sd-page {
       padding: calcSize(1) calcSize(3) calcSize(3);
     }
@@ -86,6 +96,7 @@
   .svc-tab-designer {
     .sd-container-modern {
       min-width: calcSize(46);
+      padding: 0;
     }
   }
 
