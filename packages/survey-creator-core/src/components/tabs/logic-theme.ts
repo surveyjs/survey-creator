@@ -314,6 +314,9 @@ export var logicCss = {
       buttonCollapsed: ""
     }
   },
+  list: {
+    root: "sv-list__container sl-list",
+  },
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
   },
