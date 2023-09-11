@@ -30,5 +30,7 @@ test("check whole layout", async (t) => {
     await t.resizeWindow(500, 900);
     await setJSON(json);
     await takeElementScreenshot("creator-mobile-paddings.png", Selector(".svc-creator"), t, comparer);
+    await t.click(Selector(".svc-page__content"), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("creator-mobile-page-selected-paddings.png", Selector(".svc-creator"), t, comparer);
   });
 });
