@@ -1,11 +1,16 @@
 @import "./variables.scss";
 
 .svc-creator--mobile {
+  .svc-tab-designer {
+    overflow-y: overlay;
+  }
+
   .sd-root-modern {
     --sd-base-padding: calc(3 * #{$base-unit});
     --sd-base-vertical-padding: calc(2 * #{$base-unit});
     --sd-page-vertical-padding: calc(2 * #{$base-unit});
   }
+
   .svc-question__content {
     .sd-question__content {
       .sd-selectbase__column {
@@ -21,40 +26,59 @@
       bottom: calcSize(10);
     }
   }
+
   .svc-page {
     margin-top: calcSize(1);
   }
+
   .svc-page__content {
     padding-left: 0;
     padding-right: 0;
     border: 0;
-    .sd-page {
-      padding: calcSize(1) calcSize(2) calcSize(2);
+
+    .sd-page__title {
+      margin: 0;
     }
+
+    &.svc-page__content--selected {
+      .sd-page__title {
+        margin: calcSize(2.5) 0 0 0;
+      }
+    }
+
+    .sd-page {
+      padding: calcSize(1) calcSize(3) calcSize(3);
+    }
+
     .svc-page__footer {
-      margin-left: calcSize(2);
-      margin-right: calcSize(2);
+      margin-left: calcSize(3);
+      margin-right: calcSize(3);
     }
   }
 
   .svc-question__content {
     padding: calcSize(2) calcSize(3) calcSize(3);
+
     &.svc-question__content--selected {
       padding-bottom: calcSize(8);
     }
   }
+
   .svc-tab-designer {
     justify-content: initial;
+
     .sd-title.sd-container-modern__title {
-      padding: calcSize(2);
+      padding: calcSize(3);
       flex-direction: column-reverse;
       align-items: flex-start;
 
       .svc-logo-image {
         margin-top: 0;
       }
+
       .svc-logo-image-placeholder {
         margin-left: calcSize(-2);
+        margin-top: calcSize(-2);
       }
 
       h3 {
@@ -62,16 +86,20 @@
         font-size: calcSize(3);
         line-height: calcSize(4);
       }
+
       h5 {
         margin: 0;
       }
     }
   }
+
   .svc-tab-designer {
     .sd-container-modern {
       min-width: calcSize(46);
+      padding: 0;
     }
   }
+
   .svc-properties-wrapper {
     width: 100%;
   }
@@ -79,16 +107,20 @@
   .svc-question__content-actions {
     width: calc(100% - 3 * #{$base-unit});
     left: calcSize(2);
+
     .sv-action-bar-item {
       border: 0;
     }
   }
+
   .svc-page__content-actions {
     .sv-action-bar {
       padding-right: calcSize(1);
+
       .sv-action {
         .sv-action__content {
           padding-right: 0;
+
           .sv-action-bar-item__title--with-icon {
             display: none;
           }
