@@ -1352,7 +1352,7 @@ export class CreatorBase extends Base
       this.showToolboxValue = true;
     }
   }
-  private showSidebarValue: boolean = true;
+  @property() showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: CreatorEvent = new CreatorEvent();
   /**
    * Specifies whether to show the sidebar that displays Property Grid.
