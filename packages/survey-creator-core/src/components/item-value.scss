@@ -253,7 +253,13 @@
   left: 35px;
 }
 
-.svc-creator--mobile .svc-tab-designer {
+.svc-creator--mobile .svc-tab-designer,
+.svc-creator--touch .svc-tab-designer {
+  .svc-item-value-controls {
+    min-width: initial;
+    padding-left: calcSize(1);
+  }
+
   .svc-item-value-controls__drag-icon {
     visibility: visible;
   }
