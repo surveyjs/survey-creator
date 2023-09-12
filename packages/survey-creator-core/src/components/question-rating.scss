@@ -37,6 +37,9 @@
       .sv-string-editor {
         text-overflow: ellipsis;
         overflow: hidden;
+        &:focus-within {
+            text-overflow: initial;
+          }
       }
     }
   }
