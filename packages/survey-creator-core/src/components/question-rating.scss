@@ -20,6 +20,28 @@
   .sd-rating {
     margin-inline-start: calcSize(9); // margin-left
     width: calc(100% - 9 * #{$base-unit});
+
+    &.sd-rating--wrappable fieldset {
+      min-width: 0;
+    }
+
+    
+    .sd-rating__item-text {
+      max-width: 100%;
+      .sv-string-editor:focus-within {
+        white-space: nowrap;
+      }
+    }
+    .svc-string-editor__content {
+      width: 100%;
+      .sv-string-editor {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        &:focus-within {
+            text-overflow: initial;
+          }
+      }
+    }
   }
     .sd-question--table .sd-rating {
       margin-inline-start: 0;
