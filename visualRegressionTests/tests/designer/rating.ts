@@ -138,6 +138,60 @@ test("Multi row rating adorner", async (t) => {
   });
 });
 
+test("Multi row rating adorner smileys", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const jNew: any = Object.assign({}, jsonMulti);
+    jNew.pages[0].elements[0].rateType = "smileys";
+    jNew.pages[0].elements[1].rateType = "smileys";
+    await setJSON(jNew);
+    await t.resizeWindow(1200, 900);
+
+    const question = Selector("div[data-name=question1]");
+    await takeElementScreenshot("rating-multiline-smileys.png", question, t, comparer);
+
+    const question2 = Selector("div[data-name=question2]");
+    await takeElementScreenshot("rating-multiline-smileys-text.png", question2, t, comparer);
+
+    await t.resizeWindow(550, 900);
+    await takeElementScreenshot("rating-multiline-smileys-mobile.png", question, t, comparer);
+    await takeElementScreenshot("rating-multiline-smileys-text-mobile.png", question2, t, comparer);
+
+    await t.click(Selector(".svc-question__adorner").nth(0), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(0).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-smileys-mobile-selected.png", question, t, comparer);
+    await t.click(Selector(".svc-question__adorner").nth(1), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(1).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-smileys-mobile-text-selected.png", question2, t, comparer);
+  });
+});
+
+test("Multi row rating adorner stars", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const jNew: any = Object.assign({}, jsonMulti);
+    jNew.pages[0].elements[0].rateType = "stars";
+    jNew.pages[0].elements[1].rateType = "stars";
+    await setJSON(jNew);
+    await t.resizeWindow(1200, 900);
+
+    const question = Selector("div[data-name=question1]");
+    await takeElementScreenshot("rating-multiline-stars.png", question, t, comparer);
+
+    const question2 = Selector("div[data-name=question2]");
+    await takeElementScreenshot("rating-multiline-stars-text.png", question2, t, comparer);
+
+    await t.resizeWindow(550, 900);
+    await takeElementScreenshot("rating-multiline-stars-mobile.png", question, t, comparer);
+    await takeElementScreenshot("rating-multiline-stars-text-mobile.png", question2, t, comparer);
+
+    await t.click(Selector(".svc-question__adorner").nth(0), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(0).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-stars-mobile-selected.png", question, t, comparer);
+    await t.click(Selector(".svc-question__adorner").nth(1), { offsetX: 1, offsetY: 1 });
+    await t.expect(Selector(".svc-question__adorner").nth(1).find(".svc-question__content-actions").visible).ok();
+    await takeElementScreenshot("rating-multiline-stars-mobile-text-selected.png", question2, t, comparer);
+  });
+});
+
 test("Rating editing", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON(json);

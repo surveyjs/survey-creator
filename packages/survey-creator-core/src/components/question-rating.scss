@@ -54,13 +54,14 @@
     }
 
 
-    legend+.sd-rating__item,
-    legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley,
-    legend+sv-ng-rating-item+.sd-rating__item {
+    legend+.sd-rating__item, legend+sv-ng-rating-item+.sd-rating__item,
+    legend+.sd-rating__item-smiley,legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
+    {
       margin-inline-start: calc(9 * #{$base-unit} + 2px);
     }
 
-    legend+.sd-rating__item-text {
+    legend+.sd-rating__item-text,
+    legend+.sd-rating__item-star, legend+sv-ng-rating-item-star+.sd-rating__item-star {
       margin-inline-start: calc(9 * #{$base-unit});
     }
   }
