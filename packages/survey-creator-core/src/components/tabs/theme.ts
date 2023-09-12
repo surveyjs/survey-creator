@@ -841,6 +841,145 @@ export class ThemeSurveyTabViewModel extends Base {
         ]
       }, {
         type: "panel",
+        state: "collapsed",
+        title: getLocString("theme.groupHeader"),
+        elements: [
+          {
+            type: "panel",
+            elements: [
+              {
+                type: "buttongroup",
+                name: "headerView",
+                title: getLocString("theme.headerView"),
+                choices: [
+                  { value: "title", text: getLocString("theme.headerViewTitle") },
+                  { value: "cover", text: getLocString("theme.headerViewCover") }
+                ],
+                defaultValue: "title"
+              },
+              {
+                type: "buttongroup",
+                name: "logoPosition",
+                title: getLocString("theme.logoPosition"),
+                visibleIf: "{headerView} = 'title'",
+                choices: [
+                  { value: "left", text: getLocString("theme.logoPositionLeft") },
+                  { value: "right", text: getLocString("theme.logoPositionRight") }
+                ],
+                defaultValue: "right"
+              },
+              {
+                type: "spinedit",
+                name: "headerHeight",
+                title: getLocString("p.height"),
+                descriptionLocation: "hidden",
+                visibleIf: "{headerView} = 'cover'",
+                unit: "px",
+                // defaultValue: 4,
+                min: 0
+              },
+              {
+                type: "buttongroup",
+                name: "coverAreaWidth",
+                title: getLocString("theme.areaWidth"),
+                choices: [
+                  { value: "survey", text: getLocString("theme.coverAreaWidthSurvey") },
+                  { value: "container", text: getLocString("theme.coverAreaWidthContainer") }
+                ],
+                visibleIf: "{headerView} = 'cover'",
+                defaultValue: "survey"
+              },
+              {
+                type: "spinedit",
+                name: "coverTextWidth",
+                title: getLocString("theme.coverTextWidth"),
+                descriptionLocation: "hidden",
+                visibleIf: "{headerView} = 'cover'",
+                unit: "px",
+                // defaultValue: 4,
+                min: 0
+              }
+            ]
+          }, {
+            type: "panel",
+            visibleIf: "{headerView} = 'cover'",
+            elements: [
+              {
+                type: "buttongroup",
+                name: "coverBackgroundColorSwitch",
+                title: getLocString("theme.coverBackgroundColorSwitch"),
+                choices: [
+                  { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
+                  { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
+                  { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
+                ],
+                defaultValue: "none"
+              },
+              {
+                type: "color",
+                name: "coverBackcolor",
+                enableIf: "{coverBackgroundColorSwitch} = 'custom'",
+                titleLocation: "hidden",
+                descriptionLocation: "hidden",
+                default: undefined
+              },
+              {
+                type: "panel",
+                title: getLocString("theme.backgroundImage"),
+                elements: [
+                  {
+                    type: "fileedit",
+                    storeDataAsText: false,
+                    name: "coverBackgroundImage",
+                    titleLocation: "hidden",
+                    maxSize: this.surveyProvider.onUploadFile.isEmpty ? 65536 : undefined,
+                    acceptedTypes: "image/*",
+                    placeholder: "Browse..."
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "coverBackgroundImageFit",
+                    enableIf: "{coverBackgroundImage} notempty",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "cover", text: getLocString("theme.backgroundImageFitCover") },
+                      { value: "fill", text: getLocString("theme.backgroundImageFitFill") },
+                      { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
+                      { value: "tile", text: getLocString("theme.backgroundImageFitTile") },
+                    ],
+                    defaultValue: "cover"
+                  },
+                  {
+                    type: "spinedit",
+                    name: "coverBackgroundImageOpacity",
+                    enableIf: "{coverBackgroundImage} notempty",
+                    titleLocation: "left",
+                    title: getLocString("theme.backgroundOpacity"),
+                    descriptionLocation: "hidden",
+                    unit: "%",
+                    defaultValue: 100,
+                    min: 0,
+                    max: 100,
+                    step: 5
+                  },
+                ]
+              }
+            ]
+          }, {
+            type: "panel",
+            visibleIf: "{headerView} = 'cover'",
+            elements: [
+              this.getHorizontalAlignment("logoPositionX", getLocString("theme.coverLogoPosition"), "right"),
+              this.getVerticalAlignment("logoPositionY", "top"),
+              this.getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
+              this.getVerticalAlignment("titlePositionY", "bottom"),
+              this.getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
+              this.getVerticalAlignment("descriptionPositionY", "bottom"),
+            ]
+          }
+        ]
+      }, {
+        type: "panel",
         title: getLocString("theme.groupAdvanced"),
         state: "collapsed",
         elements: [
@@ -1076,6 +1215,32 @@ export class ThemeSurveyTabViewModel extends Base {
     };
 
     return themeEditorSurveyJSON;
+  }
+  getHorizontalAlignment(questionName: string, title: string, defaultValue: string) {
+    return {
+      type: "buttongroup",
+      name: questionName,
+      title: title,
+      choices: [
+        { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
+        { value: "center", text: getLocString("theme.horizontalAlignmentCenter") },
+        { value: "right", text: getLocString("theme.horizontalAlignmentRight") },
+      ],
+      defaultValue: defaultValue
+    };
+  }
+  getVerticalAlignment(questionName: string, defaultValue: string) {
+    return {
+      type: "buttongroup",
+      name: questionName,
+      titleLocation: "hidden",
+      choices: [
+        { value: "top", text: getLocString("theme.verticalAlignmentTop") },
+        { value: "middle", text: getLocString("theme.verticalAlignmentMiddle") },
+        { value: "bottom", text: getLocString("theme.verticalAlignmentBottom") },
+      ],
+      defaultValue: defaultValue
+    };
   }
   public dispose(): void {
     this.themeEditorSurveyValue?.dispose();
