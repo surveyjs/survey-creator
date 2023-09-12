@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -12,7 +12,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./
 require("./theme.scss");
 export const Themes = require("../../../imported-themes.json");
 
-export const PredefinedThemes = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
+export const PredefinedThemes: string[] = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
 
 export const PredefinedColors = {
   light: {
@@ -50,6 +50,7 @@ export class ThemeSurveyTabViewModel extends Base {
   private themeChanges = {};
   private colorCalculator = new ColorCalculator();
   private blockChanges = false;
+  private _availableThemes = PredefinedThemes;
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public simulator: SurveySimulatorModel;
@@ -358,6 +359,33 @@ export class ThemeSurveyTabViewModel extends Base {
     this.show();
   }
 
+  public get availableThemes() {
+    return [].concat(this._availableThemes);
+  }
+  public set availableThemes(availebleThemes: string[]) {
+    this._availableThemes = availebleThemes || [];
+    if (this.themeEditorSurvey) {
+      const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+      themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+    }
+  }
+
+  public addTheme(name: string, cssVariables: ICreatorTheme): void {
+    Themes[name] = { cssVariables };
+    if (this._availableThemes.indexOf(name) === -1) {
+      this.availableThemes = this.availableThemes.concat([name]);
+    }
+  }
+  public removeTheme(name: string): void {
+    delete Themes[name];
+    const themeIndex = this._availableThemes.indexOf(name);
+    if (themeIndex !== -1) {
+      const availableThemes = this.availableThemes;
+      availableThemes.splice(themeIndex, 1);
+      this.availableThemes = availableThemes;
+    }
+  }
+
   public buildActions() {
     const pageActions: Array<Action> = [];
     const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
@@ -585,7 +613,7 @@ export class ThemeSurveyTabViewModel extends Base {
                 name: "themeName",
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
-                choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+                choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
                 defaultValue: "default",
                 allowClear: false
               },
