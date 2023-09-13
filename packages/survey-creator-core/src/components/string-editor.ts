@@ -217,7 +217,6 @@ export class StringEditorViewModelBase extends Base {
 
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
-    this.setLocString(locString);
   }
 
   public afterRender() {

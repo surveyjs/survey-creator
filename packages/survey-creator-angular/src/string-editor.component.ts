@@ -93,6 +93,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   override ngOnInit(): void {
     super.ngOnInit();
+    this.baseModel.setLocString(this.locString);
     this.locString?.onStringChanged.add(this.onChangeHandler);
   }
   ngAfterViewInit(): void {
