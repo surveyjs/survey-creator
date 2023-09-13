@@ -254,13 +254,18 @@
 }
 
 .svc-creator--mobile .svc-tab-designer {
-  .svc-item-value-controls__drag-icon {
-    visibility: visible;
+
+  .svc-question__content--ranking,
+  .sd-selectbase {
+    .svc-item-value-controls__drag-icon {
+      visibility: visible;
+    }
+
+    .svc-item-value-wrapper {
+      margin-left: calcSize(-3);
+    }
   }
 
-  .svc-item-value-wrapper {
-    margin-left: calcSize(-3);
-  }
 }
 
 .svc-creator--touch:not(.svc-creator--mobile) .svc-tab-designer {
