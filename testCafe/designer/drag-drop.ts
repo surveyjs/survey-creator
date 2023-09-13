@@ -1454,33 +1454,3 @@ test("Drag Drop on the right of Panel same row", async (t) => {
   const resultJson = await getJSON();
   await t.expect(resultJson).eql(expectedJson);
 });
-
-// test.("Drag Drop (choices): scroll", async (t) => {
-//   await t.resizeWindow(1000, 500);
-
-//   const json = {
-//     pages: [
-//       {
-//         name: "page1",
-//         elements: [
-//           {
-//             type: "radiogroup",
-//             name: "question1",
-//             choices: ["Item 1", "Item 2"]
-//           }
-//         ]
-//       }
-//     ]
-//   };
-//   await setJSON(json);
-
-//   //await patchDragDropToDisableDrop();
-
-//   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
-//   const CheckboxItem = Selector("[aria-label='Checkboxes']");
-//   await t
-//     .hover(CheckboxItem)
-//     .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
-
-//   await t.debug();
-// });

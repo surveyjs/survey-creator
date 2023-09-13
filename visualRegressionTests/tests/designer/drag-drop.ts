@@ -464,3 +464,35 @@ test("Toolbox Custom Component Icon", async (t) => {
     await changeIconRatingForToolbox("icon-rating");
   });
 });
+
+test.only("Drag Drop (choices): scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 500);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "question1",
+              choices: ["Item 1", "Item 2"]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+    const CheckboxItem = Selector("[aria-label='Checkboxes']");
+    await t
+      .hover(CheckboxItem)
+      .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-scroll.png", newGhostPagePage, t, comparer);
+  });
+});
