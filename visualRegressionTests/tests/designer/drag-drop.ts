@@ -465,7 +465,7 @@ test("Toolbox Custom Component Icon", async (t) => {
   });
 });
 
-test.only("Drag Drop (choices): scroll", async (t) => {
+test("Drag Drop (choices): scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 500);
 
