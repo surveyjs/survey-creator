@@ -6,7 +6,7 @@
     <input type="file" aria-hidden="true" tabindex="-1" class="svc-choose-file-input"
       data-bind="attr: { accept: acceptedTypes }" />
 
-    <!-- ko ifnot: isNew -->
+    <!-- ko ifnot: isNew || isUploading -->
     <div class="svc-image-item-value__item">
       <!-- ko component: { name: 'sv-template-renderer', params: { componentData: null, templateData: templateData } } -->
       <!-- /ko -->
@@ -29,11 +29,18 @@
     </div>
     <!-- /ko -->
 
-    <!-- ko if: isNew -->
+    <!-- ko if: isNew || isUploading -->
     <div class="svc-image-item-value__item" data-bind="event: { dragover: dragover, drop: drop, dragleave: dragleave }">
       <div class="sd-imagepicker__item sd-imagepicker__item--inline">
         <label class="sd-imagepicker__label">
-          <div data-bind="style: getNewItemStyle()" class="sd-imagepicker__image"></div>
+          <div data-bind="style: getNewItemStyle()" class="sd-imagepicker__image">
+            <!-- ko if: isUploading -->
+            <div class="svc-image-item-value__loading">
+              <!-- ko component: { name: 'sv-loading-indicator' } -->
+              <!-- /ko -->
+            </div>
+            <!-- /ko -->
+          </div>
         </label>
       </div>
     </div>

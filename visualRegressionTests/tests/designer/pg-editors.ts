@@ -213,6 +213,26 @@ test("Logic popup", async (t) => {
   });
 });
 
+test("Logic popup mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const generalTab = Selector("h4").withExactText("General");
+    const logicTab = Selector("h4").withExactText("Logic");
+
+    await t
+      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 });
+    await t.resizeWindow(500, 870)
+      .click(Selector("button[title='Open settings']").filterVisible(), { offsetX: 25 });
+
+    await t.click(generalTab)
+      .click(logicTab)
+
+      .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
+    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.sv-property-editor.sv-popup--overlay .sv-popup__container"), t, comparer);
+  });
+});
+
 test("Property grid checkbox - all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);

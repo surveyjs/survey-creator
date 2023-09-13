@@ -98,3 +98,43 @@ test("broken imageLink", async (t) => {
     await takeElementScreenshot("image-broken-image-link.png", Selector(".svc-question__content--image"), t, comparer);
   });
 });
+test("Check image loading indicator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(2560, 1440);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "image",
+              "name": "question2",
+              "imageLink": "wrong_url"
+            }
+          ]
+        }
+      ]
+    });
+    await ClientFunction(() => {
+      (window as any).creator.onUploadFile.add((_, opt) => {
+        setTimeout(() => {
+          opt.callback("success", "");
+        }, 1000000);
+      });
+    })();
+    await ClientFunction(() => {
+      (window as any).creator.onOpenFileChooser.add((s, o) => {
+        o.callback([{}]);
+      });
+    })();
+    const root = Selector(".svc-question__content--image");
+    await t.click(root, { offsetX: 5, offsetY: 5 })
+      .click(Selector(".svc-question__content--image .svc-context-button"));
+    await ClientFunction(() => {
+      (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
+    })();
+    await takeElementScreenshot("image-loading.png", Selector(root), t, comparer);
+  });
+});

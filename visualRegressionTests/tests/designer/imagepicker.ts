@@ -101,3 +101,30 @@ test("imagepicker check state when new item is signgle", async (t) => {
     await takeElementScreenshot("image-picker-single-new-item.png", imagePicker, t, comparer);
   });
 });
+
+test("imagepicker check loading indicator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(1920, 1900);
+    await ClientFunction(() => {
+      (window as any).creator.onUploadFile.add((_, opt) => {
+        setTimeout(() => {
+          opt.callback("success", "");
+        }, 1000000);
+      });
+    })();
+    await ClientFunction(() => {
+      (window as any).creator.onOpenFileChooser.add((s, o) => {
+        o.callback([{}]);
+      });
+    })();
+    await setJSON(json);
+    const imagePicker = Selector(".sd-imagepicker");
+    await t.click(imagePicker);
+    await t.click(Selector(".svc-image-item-value-controls__add"));
+    await ClientFunction(() => {
+      (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
+    })();
+    await takeElementScreenshot("imagepicker-loading.png", imagePicker, t, comparer);
+  });
+});

@@ -296,7 +296,7 @@ test("Property grid editor popup", async (t) => {
     .resizeWindow(380, 600)
     .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(mobileCloseButton)
-    .click(question1)
+    .click(question1, { offsetX: 5, offsetY: 5 })
     .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
     .expect(Selector(".sv-popup--overlay").visible).ok();

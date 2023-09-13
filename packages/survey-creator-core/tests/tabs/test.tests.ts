@@ -9,8 +9,8 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
+  creator.activeTab = "test";
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
   return testPlugin.model;
 }
 
@@ -222,6 +222,25 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   model.survey.pages[1].visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
   expect(pagesActions[2].visible).toEqual(true);
+});
+test("Hide page actions if survey is not in running state", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3" }
+    ]
+  };
+  const model = getTestModel(creator);
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
+  model.survey.showPreview();
+  expect(model.pageActions[1].visible).toBeFalsy();
+  expect(model.pageActions[2].visible).toBeFalsy();
+  model.survey.cancelPreview();
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
 });
 test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", (): any => {
   var creator = new CreatorTester();

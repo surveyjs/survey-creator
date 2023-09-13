@@ -975,6 +975,125 @@ test("Undo/redo question dragged from last page", (): any => {
   expect(creator.undoRedoManager.canUndo()).toBeFalsy();
   expect(creator.undoRedoManager.canRedo()).toBeTruthy();
 });
+test("drag drop panel before another panel in left, Bug #4574", () => {
+  const json = {
+    "elements": [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "type": "panel",
+        "name": "panel2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  const survey = new SurveyModel(json);
+  const p1 = survey.getPanelByName("panel1");
+  const p2 = survey.getPanelByName("panel2");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p2;
+
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Left);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "question2"
+              }
+            ]
+          },
+          {
+            "type": "panel",
+            "name": "panel1",
+            "startWithNewLine": false,
+            "elements": [
+              {
+                "type": "text",
+                "name": "question1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+});
+test("Support onDragDropAllow, Bug#4572", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      },
+      {
+        "name": "page2",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ]
+      }
+    ]
+  };
+  let counter = 0;
+  let surveyQuestionCount = 0;
+  let targetName = "";
+  let sourceName = "";
+  let parentName = "";
+  creator.onDragDropAllow.add((sender, options) => {
+    counter ++;
+    surveyQuestionCount = options.survey.getAllQuestions().length;
+    targetName = options.target.name;
+    sourceName = options.source.name;
+    parentName = options.parent.name;
+    options.allow = !!options.insertAfter;
+  });
+  const ddHelper: any = creator.dragDropSurveyElements;
+  const q1 = creator.survey.getQuestionByName("question1");
+  const q2 = creator.survey.getQuestionByName("question2");
+  ddHelper.draggedElement = q2;
+  ddHelper["allowDropHere"] = true;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Top);
+  expect(counter).toBe(1);
+  expect(targetName).toBe("question1");
+  expect(sourceName).toBe("question2");
+  expect(parentName).toBe("page1");
+  expect(ddHelper["allowDropHere"]).toBeFalsy();
+  ddHelper["allowDropHere"] = true;
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+  expect(counter).toBe(2);
+  expect(ddHelper["allowDropHere"]).toBeTruthy();
+});
 
 test("drag drop one empty panel to other empty panel - https://github.com/surveyjs/survey-creator/issues/4390", () => {
   const json = {
@@ -1025,4 +1144,48 @@ test("drag drop one empty panel to other empty panel - https://github.com/survey
       }
     ]
   });
+});
+test("Do not allow to drag inside panel", () => {
+  const json = {
+    "elements": [
+      {
+        "type": "panel",
+        "name": "panel1",
+        "elements": [
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              { "type": "text", "name": "q2" }
+            ]
+          },
+          { "type": "text", "name": "q1" }
+        ]
+      },
+      { "type": "text", "name": "q3" }
+    ]
+  };
+  const survey = new SurveyModel(json);
+  const p1 = survey.getPanelByName("panel1");
+  const p2 = survey.getPanelByName("panel2");
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = p1;
+
+  const checkAllowDragOverByType = (element: any, en: DragTypeOverMeEnum): void => {
+    ddHelper.dragOverCore(element, en);
+    expect(ddHelper["allowDropHere"]).toBeFalsy();
+  };
+  const checkAllowDragOver = (element: any): void => {
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Top);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Bottom);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Left);
+    checkAllowDragOverByType(element, DragTypeOverMeEnum.Right);
+  };
+  ddHelper["allowDropHere"] = true;
+  checkAllowDragOver(p2);
+  checkAllowDragOver(q1);
+  checkAllowDragOver(q2);
 });

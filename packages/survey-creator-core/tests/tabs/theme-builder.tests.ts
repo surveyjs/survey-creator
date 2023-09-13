@@ -1,5 +1,5 @@
 import { CreatorTester } from "../creator-tester";
-import { PredefinedColors, ThemeSurveyTabViewModel, Themes } from "../../src/components/tabs/theme";
+import { PredefinedColors, PredefinedThemes, ThemeSurveyTabViewModel, Themes } from "../../src/components/tabs/theme";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
 export { QuestionColorModel } from "../../src/custom-questions/question-color";
@@ -9,7 +9,7 @@ import { createColor } from "../../src/components/tabs/theme-custom-questions/co
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
 import { TabThemePlugin } from "../../src/components/tabs/theme-plugin";
 import { assign, parseColor } from "../../src/utils/utils";
-import { ComponentCollection, Question, Serializer, SurveyModel } from "survey-core";
+import { ComponentCollection, Question, QuestionDropdownModel, Serializer, SurveyModel } from "survey-core";
 
 import "survey-core/survey.i18n";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -701,7 +701,7 @@ test("Theme builder export value from composite question", (): any => {
   expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
 });
 
-test("import styles from file", ()=> {
+test("import styles from file", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
@@ -933,4 +933,26 @@ test("Check background image has conditional max size", (): any => {
   expect(question.maxSize).toEqual(0);
   question.loadFiles(<any>[{ type: "image", name: "test_name" }]);
   expect(question.value).toBe("test_url");
+});
+
+test("Change available themes", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: TabThemePlugin = <TabThemePlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeSurveyTabViewModel;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const themeChooser = themeEditor.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  expect(themeSurveyTab.availableThemes).toStrictEqual(PredefinedThemes);
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(PredefinedThemes);
+
+  const themes: string[] = [].concat(PredefinedThemes);
+  themeSurveyTab.addTheme("custom", {});
+  expect(themeSurveyTab.availableThemes).toStrictEqual(themes.concat(["custom"]));
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(themes.concat(["custom"]));
+
+  themeSurveyTab.removeTheme("custom");
+  expect(themeSurveyTab.availableThemes).toStrictEqual(PredefinedThemes);
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual(PredefinedThemes);
 });

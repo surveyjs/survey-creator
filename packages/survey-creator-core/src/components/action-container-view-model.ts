@@ -71,7 +71,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
-    this.actionContainer.dispose();
+    if(!this.actionContainer.isDisposed) {
+      this.actionContainer.dispose();
+    }
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
     this.selectedPropPageFunc = undefined;
     this.sidebarFlyoutModeChangedFunc = undefined;
@@ -138,7 +140,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconSize: 16,
         action: () => {
           this.creator.setShowSidebar(true, true);
-          this.creator.propertyGrid.getAllQuestions()[0].focus();
+          if (!this.creator.isMobileView) {
+            this.creator.propertyGrid.getAllQuestions()[0].focus();
+          }
         }
       })
     );
