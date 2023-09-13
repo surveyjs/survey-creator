@@ -4,13 +4,75 @@ import {
   Action,
   SurveyModel,
   SurveyElement,
-  property
+  property,
+  actionModeType
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { settings } from "../creator-settings";
 
+export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  private setActionMode(actionId: string, mode: actionModeType) {
+    const action = this.getActionById(actionId);
+    if (action) action.mode = mode;
+  }
+  public fit(dimension: number, dotsItemSize: number) {
+    if (dimension <= 0) return;
+
+    this.dotsItem.visible = false;
+    const items = this.visibleActions;
+
+    let size = 0;
+    items.forEach(i => size += i.maxDimension);
+    if (dimension >= size) {
+      // all items large
+      items.forEach(i => i.mode = "large");
+      return;
+    }
+
+    const actionsExceptInputType = items.filter(i => i.id != "convertInputType");
+    const actionsExceptTypeAndInputType = items.filter(i => i.id != "convertInputType" && i.id != "convertTo");
+
+    size = 0;
+    actionsExceptInputType.forEach(i => size += i.maxDimension);
+    if (dimension >= size) {
+      // all items large, input type removed
+      actionsExceptInputType.forEach(i => i.mode = "large");
+      this.setActionMode("convertInputType", "removed");
+      return;
+    }
+
+    size = 0;
+    actionsExceptTypeAndInputType.forEach(i => size += i.minDimension);
+    size += this.getActionById("convertTo")?.maxDimension;
+    if (dimension >= size) {
+      // all items small except question type
+      actionsExceptTypeAndInputType.forEach(i => i.mode = "small");
+      this.setActionMode("convertInputType", "removed");
+      this.setActionMode("convertTo", "large");
+      return;
+    }
+
+    size = 0;
+    actionsExceptInputType.forEach(i => size += i.minDimension);
+    if (dimension >= size) {
+      // all items small
+      actionsExceptTypeAndInputType.forEach(i => i.mode = "small");
+      this.setActionMode("convertInputType", "removed");
+      this.setActionMode("convertTo", "small");
+      return;
+    }
+
+    actionsExceptTypeAndInputType.forEach(i => i.mode = "popup");
+    // all items moved to popup except input type
+    this.setActionMode("convertInputType", "removed");
+    this.setActionMode("convertTo", "small");
+    this.dotsItem.visible = true;
+    this.hiddenItemsListModel.setItems(actionsExceptTypeAndInputType.map(i => i.innerItem));
+  }
+}
+
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: AdaptiveActionContainer;
+  public actionContainer: SurveyElementActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
@@ -31,7 +93,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.updateActionsProperties();
       }
     };
-    this.actionContainer = new AdaptiveActionContainer();
+    this.actionContainer = new SurveyElementActionContainer();
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     var actions: Array<Action> = [];
