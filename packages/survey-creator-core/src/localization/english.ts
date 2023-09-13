@@ -1047,6 +1047,9 @@ export var enStrings = {
     boxShadowInner: "Inner",
     questionShadow: "Shadow effects",
     editorShadow: "Input element shadow effects",
+    headerView: "View",
+    headerViewTitle: "Title",
+    headerViewCover: "Cover",
     coverAreaWidth: "Content area width",
     coverAreaWidthSurvey: "Same as survey",
     coverAreaWidthContainer: "Fit to page",
@@ -1061,7 +1064,7 @@ export var enStrings = {
     verticalAlignmentTop: "Top",
     verticalAlignmentMiddle: "Middle",
     verticalAlignmentBottom: "Bottom",
-    coverLogoPosition: "Logo Position",
+    logoPosition: "Logo Position",
     coverTitlePosition: "Title Position",
     coverDescriptionPosition: "Description Position",
     names: {
