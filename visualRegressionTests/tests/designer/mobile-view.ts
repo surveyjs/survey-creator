@@ -34,3 +34,11 @@ test("check whole layout", async (t) => {
     await takeElementScreenshot("creator-mobile-page-selected-paddings.png", Selector(".svc-creator"), t, comparer);
   });
 });
+
+test("smartphone layout", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(375, 900);
+    await setJSON(json);
+    await takeElementScreenshot("creator-smartphone.png", Selector(".svc-creator"), t, comparer);
+  });
+});
