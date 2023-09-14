@@ -422,7 +422,7 @@ test("Check color editor", async (t) => {
   });
 });
 
-test.only("Check color editor with empty value", async (t) => {
+test("Check color editor with empty value", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await ClientFunction(() => {
