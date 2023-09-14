@@ -1,5 +1,6 @@
-import { ItemValue, ListModel, PageModel, SurveyModel } from "survey-core";
+import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
+import { PropertyGridModelTester } from "./property-grid.tests";
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");
@@ -152,4 +153,23 @@ test("QuestionColorModel renderedValue when _renderedValue and value are empty",
   q._renderedValue = "";
   q.value = "";
   expect(q.renderedValue).toBe("#000000");
+});
+
+test("Check signature pad color properties", () => {
+  const question = new QuestionSignaturePadModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const penColorQuestion = propertyGrid.survey.getQuestionByName("penColor");
+  const backgroundColorQuestion = propertyGrid.survey.getQuestionByName("backgroundColor");
+  expect(penColorQuestion.getType()).toBe("color");
+  expect(backgroundColorQuestion.getType()).toBe("color");
+  expect(penColorQuestion.renderedValue).toBe("");
+  expect(backgroundColorQuestion.renderedValue).toBe("");
+  expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  question.penColor = "#f3f3f3";
+  expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
+  expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
+  question.penColor = "#FFF000";
+  expect(penColorQuestion.renderedValue).toBe("#FFF000");
+  expect(penColorQuestion.renderedColorValue).toBe("#FFF000");
 });

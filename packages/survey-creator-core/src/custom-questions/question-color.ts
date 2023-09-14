@@ -4,8 +4,6 @@ import { parseColor } from "../utils/utils";
 const DEFAULT_COLOR: string = "#000000";
 const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
 export class QuestionColorModel extends QuestionTextModel {
-  @property() public unit: string;
-
   constructor(name: string) {
     super(name);
     this.createItemValues("choices");
@@ -147,7 +145,6 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 }
 Serializer.addClass("color", [
-  "unit",
   "choices:itemvalue[]"
 ], () => new QuestionColorModel(""), "text");
 

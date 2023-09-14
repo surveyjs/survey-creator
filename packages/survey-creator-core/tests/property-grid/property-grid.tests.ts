@@ -56,7 +56,6 @@ export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
 export * from "../../src/custom-questions/question-text-with-reset";
-export * from "../../src/custom-questions/question-color";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -2300,7 +2299,7 @@ test("We should not have 'Others' category in our objects", () => {
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
   for (let i = 0; i < allQuestionTypes.length; i++) {
-    if (allQuestionTypes[i].name == "linkvalue")
+    if (["linkvalue", "color"].indexOf(allQuestionTypes[i].name) > -1)
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
     if (!!question) {
@@ -2909,23 +2908,3 @@ test("Allow to enter one space into question title #4416", () => {
   const titleQuestion2 = <QuestionMatrixDynamicModel>(propertyGrid2.survey.getQuestionByName("title"));
   expect(titleQuestion2.value).toBe(" ");
 });
-
-test("Check signature pad color properties", () => {
-  const question = new QuestionSignaturePadModel("q1");
-  const propertyGrid = new PropertyGridModelTester(question);
-  const penColorQuestion = propertyGrid.survey.getQuestionByName("penColor");
-  const backgroundColorQuestion = propertyGrid.survey.getQuestionByName("backgroundColor");
-  expect(penColorQuestion.getType()).toBe("color");
-  expect(backgroundColorQuestion.getType()).toBe("color");
-  expect(penColorQuestion.renderedValue).toBe("");
-  expect(backgroundColorQuestion.renderedValue).toBe("");
-  expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
-  expect(backgroundColorQuestion.renderedColorValue).toBe("#FFFFFF");
-  question.penColor = "#f3f3f3";
-  expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
-  expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
-  question.penColor = "#FFF000";
-  expect(penColorQuestion.renderedValue).toBe("#FFF000");
-  expect(penColorQuestion.renderedColorValue).toBe("#FFF000");
-});
-
