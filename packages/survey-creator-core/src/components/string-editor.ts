@@ -227,7 +227,7 @@ export class StringEditorViewModelBase extends Base {
     }
   }
 
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.connector.onDoActivate.remove(this.activate);
   }

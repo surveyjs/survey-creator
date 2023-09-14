@@ -52,7 +52,7 @@ export class PageNavigatorViewModel extends Base {
     }
     this.buildItems();
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.stopItemsContainerHeightObserver();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
