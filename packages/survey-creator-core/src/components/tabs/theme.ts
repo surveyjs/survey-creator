@@ -1034,5 +1034,6 @@ export class ThemeSurveyTabViewModel extends Base {
   public dispose(): void {
     this.themeEditorSurveyValue?.dispose();
     this.simulator.dispose();
+    super.dispose();
   }
 }

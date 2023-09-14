@@ -3436,7 +3436,7 @@ export class CreatorBase extends Base
     }
   }) isCreatorDisposed: boolean;
 
-  dispose(): void {
+  public dispose(): void {
     this.isCreatorDisposed = true;
     this.tabs = [];
     Object.keys(this.plugins).forEach(pluginName => {

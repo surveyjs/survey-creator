@@ -318,5 +318,6 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.dispose();
     }
     this.simulator.dispose();
+    super.dispose();
   }
 }

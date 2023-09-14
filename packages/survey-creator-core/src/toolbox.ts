@@ -783,5 +783,5 @@ export class QuestionToolbox
     return questions;
   }
 
-  public dispose() { }
+  //public dispose(): void { } Don't we need to dispose toolbox?
 }
