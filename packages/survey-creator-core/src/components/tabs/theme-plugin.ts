@@ -101,6 +101,7 @@ export class TabThemePlugin implements ICreatorPlugin {
         }
       },
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
+      pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
       locTooltipName: "ed.themeSettingsTooltip",
       visible: false,
