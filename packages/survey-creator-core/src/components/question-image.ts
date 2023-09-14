@@ -84,7 +84,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       .append(super.css())
       .append("svc-question__content--loading", this.isUploading).toString();
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.questionRoot = undefined;
   }

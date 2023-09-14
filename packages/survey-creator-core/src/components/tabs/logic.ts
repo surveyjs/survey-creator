@@ -62,7 +62,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.readOnly = this.optionsReadOnly;
     this.update();
   }
-  dispose() {
+  public dispose(): void {
     super.dispose();
     this.onEndEditing();
     this.survey = undefined;
