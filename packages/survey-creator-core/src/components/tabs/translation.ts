@@ -1195,7 +1195,7 @@ export class Translation extends Base implements ITranslationLocales {
     });
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
-  dispose() {
+  public dispose(): void {
     this.isEmpty = true;
     if (!!this.stringsSurvey) {
       this.stringsSurvey.dispose();
@@ -1212,5 +1212,6 @@ export class Translation extends Base implements ITranslationLocales {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
+    super.dispose();
   }
 }
