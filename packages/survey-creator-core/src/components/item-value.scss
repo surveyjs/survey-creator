@@ -257,6 +257,27 @@
 
   .svc-question__content--ranking,
   .sd-selectbase {
+    padding-left: 0;
+    margin-left: 0;
+    overflow: initial;
+
+    [data-sv-drop-target-item-value] .svc-item-value-controls {
+      min-width: initial;
+      gap: calcSize(1);
+    }
+
+    &:not([data-sv-drop-target-item-value]) .svc-item-value-controls {
+      min-width: 56px;
+    }
+
+    .svc-item-value-controls__drag {
+      padding-right: 0;
+    }
+
+    .svc-item-value-controls__button {
+      padding-left: 0;
+    }
+
     .svc-item-value-controls__drag-icon {
       visibility: visible;
     }
