@@ -68,6 +68,7 @@ export * from "../property-grid/property-grid-view-model";
 export * from "../property-grid/object-selector";
 export * from "../property-grid/restfull";
 export * from "../property-grid/values";
+export * from "../property-grid/search-manager";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";

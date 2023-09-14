@@ -1,18 +1,5 @@
 <div class="spg-container" data-bind="css: {'spg-container_search': $data.model.searchEnabled } ">
-    <!-- ko if: $data.model.searchEnabled -->
-    <div class="spg-search-editor_container">
-        <div class="spg-search-editor_search-icon">
-            <!-- ko component: { name: 'sv-svg-icon', params: { iconName: 'icon-search', size: 'auto' }  } -->
-            <!-- /ko -->
-        </div>
-        <input type="text" class="spg-search-editor_input"
-            data-bind="textInput: model.filterString, attr: { placeholder: model.filterStringPlaceholder, 'aria-label': model.filterStringPlaceholder }"></input>
-        <div class="spg-search-editor_toolbar">
-            <div class="spg-search-editor-toolbar_result-count" data-bind="text: model.searchResultsText"></div>
-            <!-- ko component: { name: 'sv-action-bar', params: { model: model.searchActionBar } } -->
-            <!-- /ko -->
-        </div>
-    </div>
+    <!-- ko component: { name: 'svc-search', params: { model: model.searchManager } } -->
     <!-- /ko -->
     <!-- ko template: { name: 'survey-content', data: model.survey  } -->
     <!-- /ko -->
