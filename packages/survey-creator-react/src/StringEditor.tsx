@@ -44,6 +44,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   public componentDidMount() {
     super.componentDidMount();
     if (!this.locString) return;
+    this.baseModel.setLocString(this.locString);
     this.baseModel.getEditorElement = () => this.svStringEditorRef.current;
     this.baseModel.blurEditor = () => {
       this.svStringEditorRef.current.blur();
