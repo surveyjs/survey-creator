@@ -1420,7 +1420,7 @@ export class PropertyGridColorEditor extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const res: any = { type: "color" };
+    const res: any = { type: "color", allowEmptyValue: true };
     return res;
   }
 }

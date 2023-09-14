@@ -3,19 +3,23 @@
   height: 1px;
   width: 1px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   left: 0;
   top: 100%;
   transform: translateY(-50%);
 }
+
 .spg-color-editor__color-item {
   display: flex;
   gap: calcSize(2);
+
   .spg-color-editor__color-swatch {
     margin-left: 0;
   }
 }
+
 .spg-color-editor__color-swatch {
   position: relative;
   flex-shrink: 0;
@@ -26,6 +30,7 @@
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.16);
   margin-left: calcSize(1.5);
+
   .sv-svg-icon {
     position: absolute;
     width: calcSize(2);
@@ -36,11 +41,19 @@
     fill: $background;
   }
 }
+
 .spg-color-editor__color-swatch--disabled {
   .sv-svg-icon {
     opacity: 0.25;
   }
 }
-.spg-color-editor .spg-input__edit-button + * {
+
+.spg-color-editor__color-swatch--default {
+  .sv-svg-icon {
+    opacity: 1;
+  }
+}
+
+.spg-color-editor .spg-input__edit-button+* {
   margin-inline-end: calcSize(-0.5);
 }

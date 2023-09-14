@@ -422,6 +422,36 @@ test("Check color editor", async (t) => {
   });
 });
 
+test.only("Check color editor with empty value", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontColor",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontColor";
+        },
+        getJSON: function (obj, prop, options) {
+          return {
+            type: "color", allowEmptyValue: true, choices: [{ text: "Contrast", value: "#673AB0" }],
+          };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontColor']");
+    await takeElementScreenshot("color-editor-empty.png", questionSelector, t, comparer);
+    await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = true)();
+    await takeElementScreenshot("color-editor-empty-disabled.png", questionSelector, t, comparer);
+  });
+});
+
 test("Check spinedit editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);

@@ -4,14 +4,14 @@ import { PropertyGridModelTester } from "./property-grid.tests";
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");
-  expect(question.renderedValue).toBe("");
+  expect(question.renderedValue).toBe("#000000");
   expect(question.value).toBe(undefined);
   question.value = undefined;
   expect(question.value).toBe(undefined);
-  expect(question.renderedValue).toBe("");
+  expect(question.renderedValue).toBe("#000000");
   question.value = null;
   expect(question.value).toBe(undefined);
-  expect(question.renderedValue).toBe("");
+  expect(question.renderedValue).toBe("#000000");
   question.value = "incorrect_value";
   expect(question.value).toBe("#000000");
   expect(question.renderedValue).toBe("#000000");
@@ -49,6 +49,26 @@ test("Check custom color question", () => {
   question.value = "#fea123123";
   expect(renderValueChangedLog).toBe("-> undefined-> #fea123");
   expect(question.renderedValue).toBe("#FEA123");
+});
+
+test("Check custom color question with allowEmptyValue:true", () => {
+  const question = new QuestionColorModel("q1");
+  question.allowEmptyValue = true;
+  expect(question.renderedValue).toBe("");
+  expect(question.renderedColorValue).toBe("#FFFFFF");
+  expect(question.value).toBe(undefined);
+  question.value = undefined;
+  expect(question.value).toBe(undefined);
+  expect(question.renderedValue).toBe("");
+  expect(question.renderedColorValue).toBe("#FFFFFF");
+  question.value = null;
+  expect(question.value).toBe(undefined);
+  expect(question.renderedValue).toBe("");
+  expect(question.renderedColorValue).toBe("#FFFFFF");
+  question.value = "";
+  expect(question.value).toBe(undefined);
+  expect(question.renderedValue).toBe("");
+  expect(question.renderedColorValue).toBe("#FFFFFF");
 });
 test("Check custom color question event callbacks", () => {
   const question = new QuestionColorModel("q1");
@@ -162,6 +182,27 @@ test("Check signature pad color properties", () => {
   const backgroundColorQuestion = propertyGrid.survey.getQuestionByName("backgroundColor");
   expect(penColorQuestion.getType()).toBe("color");
   expect(backgroundColorQuestion.getType()).toBe("color");
+  expect(penColorQuestion.renderedValue).toBe("");
+  expect(backgroundColorQuestion.renderedValue).toBe("");
+  expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  expect(backgroundColorQuestion.renderedColorValue).toBe("#FFFFFF");
+  question.penColor = "#f3f3f3";
+  expect(penColorQuestion.renderedValue).toBe("#F3F3F3");
+  expect(penColorQuestion.renderedColorValue).toBe("#F3F3F3");
+  question.penColor = "#FFF000";
+  expect(penColorQuestion.renderedValue).toBe("#FFF000");
+  expect(penColorQuestion.renderedColorValue).toBe("#FFF000");
+});
+
+test("Check signature pad color properties", () => {
+  const question = new QuestionSignaturePadModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const penColorQuestion = propertyGrid.survey.getQuestionByName("penColor");
+  const backgroundColorQuestion = propertyGrid.survey.getQuestionByName("backgroundColor");
+  expect(penColorQuestion.getType()).toBe("color");
+  expect(backgroundColorQuestion.getType()).toBe("color");
+  expect(penColorQuestion.allowEmptyValue).toBeTruthy();
+  expect(backgroundColorQuestion.allowEmptyValue).toBeTruthy();
   expect(penColorQuestion.renderedValue).toBe("");
   expect(backgroundColorQuestion.renderedValue).toBe("");
   expect(penColorQuestion.renderedColorValue).toBe("#FFFFFF");
