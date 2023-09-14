@@ -33,7 +33,7 @@ export class SearchManager extends Base {
       // this.currentSearchResult.focus();
       this.expandAllParents(this.currentSearchResult);
       setTimeout(() => {
-        this.currentSearchResult.survey.scrollElementToTop(this.currentSearchResult, this.currentSearchResult, null, this.currentSearchResult.id);
+        this.currentSearchResult.survey.scrollElementToTop(this.currentSearchResult, this.currentSearchResult, null, this.currentSearchResult.id, true);
       }, 10);
     }
 
