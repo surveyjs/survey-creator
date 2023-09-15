@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
@@ -53,10 +53,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         this.testAgainAction.visible = !this.model.isRunning;
       }
     });
+    this.model.onThemeSelected.add((sender, options) => {
+      this.onThemeSelected.fire(this, options);
+    });
+    this.model.onThemeModified.add((sender, options) => {
+      this.onThemeModified.fire(this, options);
+    });
   }
   public deactivate(): boolean {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
+      this.model.onPropertyChanged.clear();
+      this.model.onThemeSelected.clear();
+      this.model.onThemeModified.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
@@ -226,4 +235,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     }
   }
+
+  public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
+  public onThemeModified = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
 }

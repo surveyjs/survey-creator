@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, EventBase } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -124,6 +124,9 @@ export class ThemeBuilder extends Base {
   public get currentTheme(): ITheme {
     return this.surveyProvider.theme;
   }
+
+  public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
+  public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
 
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
@@ -353,17 +356,20 @@ export class ThemeBuilder extends Base {
         }
         this.updateSimulatorTheme();
         this.raiseThemeChanged();
+        this.onThemeSelected.fire(this, { theme: this.currentTheme });
         return;
       }
       if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         this.raiseThemeChanged();
+        this.raiseThemeModified(options);
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.currentTheme.backgroundOpacity = options.value / 100;
         this.survey.backgroundOpacity = options.value / 100;
         this.raiseThemeChanged();
+        this.raiseThemeModified(options);
         return;
       }
 
@@ -404,6 +410,7 @@ export class ThemeBuilder extends Base {
       this.currentTheme.cssVariables = newCssVariables;
       this.blockThemeChangedNotifications -= 1;
       this.updateSimulatorTheme();
+      this.raiseThemeModified(options);
     });
 
     themeEditorSurvey.onUploadFiles.add((_, options) => {
@@ -493,6 +500,11 @@ export class ThemeBuilder extends Base {
   private raiseThemeChanged() {
     if (this.blockThemeChangedNotifications == 0) {
       this.surveyProvider.raiseThemeChanged();
+    }
+  }
+  private raiseThemeModified(options: any) {
+    if (this.blockThemeChangedNotifications == 0) {
+      this.onThemeModified.fire(this, options);
     }
   }
 
