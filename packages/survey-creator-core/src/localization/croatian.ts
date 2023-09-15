@@ -126,6 +126,7 @@ export var hrStrings = {
     translationPropertyGridTitle: "Jezične postavke",
     themePropertyGridTitle: "Postavke teme",
     translationLanguages: "Jezici",
+    translationDeleteLanguage: "Jeste li sigurni da želite izbrisati sve nizove za ovaj jezik?",
     translationAddLanguage: "Odaberite jezik za prevođenje",
     translationShowAllStrings: "Pokažite sve žice",
     translationShowUsedStringsOnly: "Samo korišteni nizovi",
@@ -137,6 +138,7 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
+    themeResetButton: "Vraćanje zadanih postavki teme na zadano",
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
@@ -1016,6 +1018,7 @@ export var hrStrings = {
     fontFamily: "Obitelj fontova",
     fontSize: "Veličina fonta",
     color: "Boja",
+    placeholderColor: "Boja rezerviranog mjesta",
     size: "Veličina",
     fontWeightRegular: "Redovan",
     fontWeightHeavy: "Težak",
@@ -1549,3 +1552,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // names.layered: "Layered" => "Slojevita"
 // names.solid: "Solid" => "Solidan"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Jeste li sigurni da želite izbrisati sve nizove za ovaj jezik?"
+// ed.themeResetButton: "Reset theme settings to default" => "Vraćanje zadanih postavki teme na zadano"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"

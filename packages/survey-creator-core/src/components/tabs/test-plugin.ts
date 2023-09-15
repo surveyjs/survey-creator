@@ -21,10 +21,6 @@ export class TabTestPlugin implements ICreatorPlugin {
 
   public model: TestSurveyTabViewModel;
 
-  private getSimulatorDevicesTitle(): string {
-    if (!this.model) return "";
-    return simulatorDevices[this.model.simulator.device].title || getLocString("pe.simulator");
-  }
   private setDevice(newVal: string) {
     this.model.simulator.device = newVal;
     this.model.simulator.resetZoomParameters();
@@ -111,6 +107,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
+      this.model.dispose();
       this.model = undefined;
     }
     this.languageSelectorAction.visible = false;
@@ -270,10 +267,10 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
-      iconName: "icon-preview",
+      iconName: "icon-config",
       needSeparator: true,
       action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      // active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
       visible: <any>new ComputedUpdater<boolean>(() => {
         return (this.creator.activeTab === "test");
       }),

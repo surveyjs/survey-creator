@@ -1,5 +1,6 @@
 <!-- ko ifnot: creator.isCreatorDisposed -->
-<div class="svc-creator" data-bind="css: {'svc-creator--mobile' : creator.isMobileView }">
+<div class="svc-creator"
+  data-bind="css: {'svc-creator--mobile' : creator.isMobileView, 'svc-creator--touch' : creator.isTouch }">
   <div>
     <!-- ko component: { name: 'svc-svg-bundle'} -->
     <!-- /ko -->

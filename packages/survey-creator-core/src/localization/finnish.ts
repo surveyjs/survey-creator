@@ -126,6 +126,7 @@ export var fiStrings = {
     translationPropertyGridTitle: "Kieliasetukset",
     themePropertyGridTitle: "Teeman asetukset",
     translationLanguages: "Kielet",
+    translationDeleteLanguage: "Oletko varma, että haluat poistaa kaikki merkkijonot tältä kieleltä?",
     translationAddLanguage: "Valitse käännettävä kieli",
     translationShowAllStrings: "Näytä kaikki merkkijonot",
     translationShowUsedStringsOnly: "Vain käytetyt merkkijonot",
@@ -137,6 +138,7 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
+    themeResetButton: "Palauta teema-asetukset oletusasetuksiin",
     bold: "Lihavoitu",
     italic: "Kursiivi",
     underline: "Alleviivaa",
@@ -1016,6 +1018,7 @@ export var fiStrings = {
     fontFamily: "Fonttiperhe",
     fontSize: "Kirjasinkoko",
     color: "Väri",
+    placeholderColor: "Paikkamerkin väri",
     size: "Koko",
     fontWeightRegular: "Säännöllinen",
     fontWeightHeavy: "Raskas",
@@ -1555,3 +1558,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // names.layered: "Layered" => "Kerroksellinen"
 // names.solid: "Solid" => "Kiinteä"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Oletko varma, että haluat poistaa kaikki merkkijonot tältä kieleltä?"
+// ed.themeResetButton: "Reset theme settings to default" => "Palauta teema-asetukset oletusasetuksiin"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Paikkamerkin väri"

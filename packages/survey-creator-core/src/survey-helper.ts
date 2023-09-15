@@ -249,6 +249,7 @@ export class SurveyHelper {
   }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
+    delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
     if (!!questionJson.choices) {
       for (var i = 0; i < questionJson.choices.length; i++) {

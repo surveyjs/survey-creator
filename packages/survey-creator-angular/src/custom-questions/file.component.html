@@ -1,5 +1,5 @@
 <div [class]="model.cssClasses.root" (dragenter)="model.onDragEnter($event)" (dragover)="model.onDragOver($event)"
-  (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)">
+  (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)" (keydown)="model.onKeyDown($event)">
   <input type="text" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.control" [value]="model.value ||''"
     (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)" />
   <div [class]="model.cssClasses.buttonsContainer">

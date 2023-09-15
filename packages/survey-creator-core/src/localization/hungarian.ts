@@ -126,6 +126,7 @@ export var huStrings = {
     translationPropertyGridTitle: "Nyelvi beállítások",
     themePropertyGridTitle: "Téma beállítások",
     translationLanguages: "Nyelvek",
+    translationDeleteLanguage: "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?",
     translationAddLanguage: "Válasszon egy nyelvet a fordításhoz.",
     translationShowAllStrings: "Összes szöveg mutatása",
     translationShowUsedStringsOnly: "Csak használt karakterláncok",
@@ -137,6 +138,7 @@ export var huStrings = {
     translationPlaceHolder: "Fordítás...",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
+    themeResetButton: "Témabeállítások visszaállítása alapértelmezettre",
     bold: "Félkövér",
     italic: "Dőlt",
     underline: "Aláhúzott",
@@ -1016,6 +1018,7 @@ export var huStrings = {
     fontFamily: "Betűcsalád",
     fontSize: "Betűméret",
     color: "Szín",
+    placeholderColor: "Helyőrző színe",
     size: "Méret",
     fontWeightRegular: "Rendszeres",
     fontWeightHeavy: "Nehéz",
@@ -1709,3 +1712,8 @@ editorLocalization.locales["hu"] = huStrings;
 // names.layered: "Layered" => "Rakott"
 // names.solid: "Solid" => "Szilárd"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?"
+// ed.themeResetButton: "Reset theme settings to default" => "Témabeállítások visszaállítása alapértelmezettre"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Helyőrző színe"

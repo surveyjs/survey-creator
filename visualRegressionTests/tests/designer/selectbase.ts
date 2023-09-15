@@ -45,6 +45,37 @@ test("Dropdown adorners", async (t) => {
 test("Select base editing", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "ranking",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "ItemItemItemItemItemItemItemItemItemItemItemItemItemItemItem2",
+                "Item 3"
+              ],
+              "minWidth": "100px",
+              "maxWidth": "220px"
+            }
+          ]
+        }
+      ]
+    });
+
+    const question = Selector(".svc-question__content");
+
+    await takeElementScreenshot("ranking-long-item-text.png", question, t, comparer);
+  });
+});
+
+test("Ranking item text overflow", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
     await setJSON(json);
 
     const question = Selector(".svc-question__content");

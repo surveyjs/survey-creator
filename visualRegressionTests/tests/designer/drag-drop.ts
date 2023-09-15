@@ -190,6 +190,62 @@ test("Choices: Ranking", async (t) => {
   });
 });
 
+test("Choices: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "radiogroup",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values--mobile.png", Row, t, comparer);
+  });
+});
+
+test("Choices: Ranking: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "ranking",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", Row, t, comparer);
+  });
+});
+
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -341,6 +397,63 @@ test("Drag Drop to Multiline from Toolbox", async (t) => {
   });
 });
 
+test("Drag Drop to Multiline styles", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await explicitErrorHandler();
+    await t.resizeWindow(800, 600);
+
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "q1"
+            },
+            {
+              "type": "text",
+              "name": "q2",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Page1 = Selector("[data-sv-drop-target-survey-element='page1']");
+
+    async function setClass(idx: number, suffix: string, remove: "add" | "remove" = "add") {
+      await ClientFunction((idx, suffix, remove) => {
+        const el = document.querySelectorAll(".svc-question__content")[idx];
+        if (remove != "remove") {
+          el.classList.add("svc-question__content--" + suffix);
+        }
+        else {
+          el.classList.remove("svc-question__content--" + suffix);
+        }
+      })(idx, suffix, remove);
+    }
+    await setClass(0, "drag-over-left");
+    await takeElementScreenshot("drag-drop-to-multiline-start.png", Page1, t, comparer);
+    await setClass(0, "drag-over-left", "remove");
+
+    await setClass(0, "drag-over-right");
+    await takeElementScreenshot("drag-drop-to-multiline-middle-1.png", Page1, t, comparer);
+    await setClass(0, "drag-over-right", "remove");
+
+    await setClass(1, "drag-over-left");
+    await takeElementScreenshot("drag-drop-to-multiline-middle-2.png", Page1, t, comparer);
+    await setClass(1, "drag-over-left", "remove");
+
+    await setClass(1, "drag-over-right");
+    await takeElementScreenshot("drag-drop-to-multiline-end.png", Page1, t, comparer);
+    await setClass(1, "drag-over-right", "remove");
+  });
+});
+
 test("Toolbox Custom Component Icon", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -377,5 +490,37 @@ test("Toolbox Custom Component Icon", async (t) => {
     await takeElementScreenshot("drag-drop-toolbox-custom-component-icon.png", Panel, t, comparer);
 
     await changeIconRatingForToolbox("icon-rating");
+  });
+});
+
+test("Drag Drop (choices): scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 500);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "question1",
+              choices: ["Item 1", "Item 2"]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+    const CheckboxItem = Selector("[aria-label='Checkboxes']");
+    await t
+      .hover(CheckboxItem)
+      .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-scroll.png", newGhostPagePage, t, comparer);
   });
 });

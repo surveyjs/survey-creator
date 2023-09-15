@@ -8,6 +8,7 @@ import { notShortCircuitAnd } from "../../utils/utils";
 
 export class TestSurveyTabViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
+  public enableInvisiblePages: boolean = true;
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -82,11 +83,11 @@ export class TestSurveyTabViewModel extends Base {
     } else {
       newSurvey.setCss(theme, false);
     }
+    newSurvey.fitToContainer = true;
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: TestSurveyTabViewModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
-      self.isRunning = false;
+      this.isRunning = false;
     });
 
     if (!!this.survey["onNavigateToUrl"]) {
@@ -104,24 +105,16 @@ export class TestSurveyTabViewModel extends Base {
       });
     }
     this.survey.onStarted.add((sender: SurveyModel) => {
-      self.setActivePageItem(self.simulator.survey.activePage, true);
+      this.setActivePageItem(this.simulator.survey.activePage, true);
     });
     this.survey.onCurrentPageChanged.add((sender: SurveyModel, options) => {
-      self.activePage = options.newCurrentPage;
-      self.setActivePageItem(options.oldCurrentPage, false);
-      self.setActivePageItem(options.newCurrentPage, true);
+      this.activePage = options.newCurrentPage;
+      this.setActivePageItem(options.oldCurrentPage, false);
+      this.setActivePageItem(options.newCurrentPage, true);
     });
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
-      self.updatePageItem(options.page);
-    });
-    this.survey.onPopupVisibleChanged.add((_, options) => {
-      if(options.visible) {
-        this.onScrollCallback = () => {
-          options.popup.toggleVisibility();
-        };
-      } else {
-        this.onScrollCallback = undefined;
-      }
+      this.updatePageItem(options.page);
+      this.updatePrevNextPageActionState();
     });
   }
 
@@ -148,7 +141,7 @@ export class TestSurveyTabViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.enabled = page.isVisible;
+      item.enabled = this.enableInvisiblePages || page.isVisible;
     }
   }
   private getCurrentPageItem(): IAction {
@@ -174,7 +167,7 @@ export class TestSurveyTabViewModel extends Base {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
-        enabled: page.isVisible,
+        enabled: this.enableInvisiblePages || page.isVisible,
         visible: true
       });
     }
@@ -215,7 +208,8 @@ export class TestSurveyTabViewModel extends Base {
 
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1) && isRunning;
       });
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
@@ -243,10 +237,13 @@ export class TestSurveyTabViewModel extends Base {
       horizontalPosition: "center"
     });
     pageActions.push(this.selectPageAction);
-
+    this.selectPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+      return this.survey.state === "running";
+    });
     if (this.nextPageAction) {
       this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1);
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "test", this.pageListItems.length > 1) && isRunning;
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
@@ -268,7 +265,9 @@ export class TestSurveyTabViewModel extends Base {
     }
   }
   private getPageItemByPage(page: PageModel): IAction {
-    const items: IAction[] = this.pageListItems;
+    const model = this.selectPageAction.popupModel.contentComponentData.model;
+    if(!model || !Array.isArray(model.actions)) return undefined;
+    const items: IAction[] = model.actions;
     for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];
     }
@@ -305,16 +304,21 @@ export class TestSurveyTabViewModel extends Base {
     if (!this.prevPageAction || !this.survey) return;
     const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
       || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
-    this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
-    this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
-  private onScrollCallback: () => void;
   public onScroll() {
-    if(this.onScrollCallback)
-      this.onScrollCallback();
+    this.survey.onScroll();
     return true;
+  }
+  public dispose(): void {
+    if (this.selectPageAction) {
+      this.selectPageAction.dispose();
+    }
+    this.simulator.dispose();
+    super.dispose();
   }
 }

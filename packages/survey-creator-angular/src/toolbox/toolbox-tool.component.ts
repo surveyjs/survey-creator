@@ -25,4 +25,8 @@ export class ToolboxToolComponent extends CreatorModelComponent<Action> {
   protected override getPropertiesToUpdateSync(): string[] {
     return ["mode"];
   }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    this.model.dispose();
+  }
 }

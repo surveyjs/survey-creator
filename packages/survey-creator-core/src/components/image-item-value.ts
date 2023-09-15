@@ -17,7 +17,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return new CssClassBuilder()
       .append("svc-image-item-value-wrapper")
       .append("svc-image-item-value")
-      .append("svc-image-item-value--new", this.isNew)
+      .append("svc-image-item-value--new", this.isNew || this.isUploading)
       .append("svc-image-item-value-wrapper--ghost", this.isDragDropGhost)
       .append("svc-image-item-value--file-dragging", this.isFileDragging)
       .append("svc-image-item-value--single", this.getIsNewItemSingle()).toString();

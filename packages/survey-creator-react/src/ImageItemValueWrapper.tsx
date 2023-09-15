@@ -1,7 +1,7 @@
 import { ImageItemValueWrapperViewModel } from "survey-creator-core";
 import React from "react";
 import { QuestionSelectBase, Base, ImageItemValue, QuestionImagePickerModel } from "survey-core";
-import { ReactElementFactory, SvgIcon } from "survey-react-ui";
+import { LoadingIndicatorComponent, ReactElementFactory, SvgIcon } from "survey-react-ui";
 import {
   attachKey2click,
 } from "survey-react-ui";
@@ -58,6 +58,9 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
   preventDragHandler = (e) => {
     e.preventDefault();
   }
+  renderLoadingIndicator() {
+    return <div className="svc-image-item-value__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+  }
 
   render(): JSX.Element {
     // if (this.model.question.isDragged) {
@@ -69,13 +72,14 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     const imageStyle = !this.model.getIsNewItemSingle() ? { width: this.question.renderedImageWidth, height: this.question.renderedImageHeight } : null;
 
     let content = null;
-    if (isNew) {
+    if (isNew || this.model.isUploading) {
       content = (<>
         <div className="svc-image-item-value__item"
           onDrop={this.model.onDrop} onDragOver={this.model.onDragOver} onDragLeave={this.model.onDragLeave}>
           <div className="sd-imagepicker__item sd-imagepicker__item--inline">
             <label className="sd-imagepicker__label">
               <div style={imageStyle} className="sd-imagepicker__image">
+                {this.model.isUploading ? this.renderLoadingIndicator() : null}
               </div>
             </label>
           </div>

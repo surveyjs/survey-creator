@@ -10,7 +10,7 @@
   </div>
   <!-- /ko -->
   <!-- /ko -->
-  <!-- ko if: survey.locLogo.koRenderedHtml -->
+  <!-- ko if: !isUploading && survey.locLogo.koRenderedHtml -->
   <div data-bind="css: containerCss">
     <div class="svc-context-container svc-logo-image-controls">
       <sv-svg-icon class="svc-context-button" data-bind="click: chooseFile, key2click"
@@ -19,6 +19,12 @@
         params="iconName: 'icon-clear', size: 24"></sv-svg-icon>
     </div>
     <!-- ko component: { name: 'sv-logo-image', params: survey } -->
+    <!-- /ko -->
+  </div>
+  <!-- /ko -->
+  <!-- ko if: isUploading -->
+  <div class="svc-logo-image__loading">
+    <!-- ko component: { name: 'sv-loading-indicator' } -->
     <!-- /ko -->
   </div>
   <!-- /ko -->

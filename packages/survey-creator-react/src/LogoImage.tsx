@@ -1,6 +1,6 @@
 import React from "react";
 import { Base } from "survey-core";
-import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click } from "survey-react-ui";
+import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click, LoadingIndicatorComponent } from "survey-react-ui";
 import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
@@ -66,10 +66,16 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
   renderInput() {
     return <input aria-hidden="true" type="file" tabIndex={-1} accept={this.model.acceptedTypes} className="svc-choose-file-input" />;
   }
+  renderLoadingIndicator() {
+    return <div className="svc-logo-image__loading"><LoadingIndicatorComponent></LoadingIndicatorComponent></div>;
+  }
   render(): JSX.Element {
     let content: JSX.Element = null;
-    if (this.model.survey.locLogo.renderedHtml) {
+    if (this.model.survey.locLogo.renderedHtml && !this.model.isUploading) {
       content = this.renderImage();
+    }
+    else if (this.model.isUploading) {
+      content = this.renderLoadingIndicator();
     }
     else {
       content = this.renderPlaceHolder();

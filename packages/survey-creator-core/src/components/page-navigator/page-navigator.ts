@@ -17,6 +17,16 @@ export class PageNavigatorViewModel extends Base {
   };
   private _resizeObserver: ResizeObserver;
 
+  private pcPropertyChangedHandler = (sender, options) => {
+    if (options.name === "toolboxLocation") {
+      if (this.pagesController.creator["toolboxLocation"] == "sidebar") {
+        this.popupModel.horizontalPosition = "right";
+      } else {
+        this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
+      }
+    }
+  }
+
   constructor(private pagesController: PagesController, private pageEditMode: string) {
     super();
     this.icon = "icon-select-page";
@@ -38,23 +48,27 @@ export class PageNavigatorViewModel extends Base {
     };
     this.popupModel.onHide = () => { this.isPopupOpened = false; };
     if (!!this.pagesController.creator["onPropertyChanged"]) {
-      this.pagesController.creator["onPropertyChanged"].add((sender, options) => {
-        if (options.name === "toolboxLocation") {
-          if (this.pagesController.creator["toolboxLocation"] == "sidebar") {
-            this.popupModel.horizontalPosition = "right";
-          } else {
-            this.popupModel.horizontalPosition = this.pagesController.creator["toolboxLocation"];
-          }
-        }
-      });
+      this.pagesController.creator["onPropertyChanged"].add(this.pcPropertyChangedHandler);
     }
     this.buildItems();
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.stopItemsContainerHeightObserver();
     this.pagesController.onPagesChanged.remove(this.pagesChangedFunc);
     this.pagesController.onCurrentPageChanged.remove(this.currentPagesChangedFunc);
+    if (!!this.pagesController.creator["onPropertyChanged"]) {
+      this.pagesController.creator["onPropertyChanged"].remove(this.pcPropertyChangedHandler);
+      this.pcPropertyChangedHandler = undefined;
+    }
+    if(this.pageListModel) {
+      this.pageListModel.dispose();
+    }
+    if(this.popupModel) {
+      this.popupModel.dispose();
+    }
+    this._scrollableContainer = undefined;
+    this._itemsContainer = undefined;
   }
 
   @propertyArray() items: Array<IAction>;

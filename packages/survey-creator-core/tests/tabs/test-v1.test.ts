@@ -1,4 +1,4 @@
-import { SurveyModel } from "survey-core";
+import { SurveyModel, IAction } from "survey-core";
 import { CreatorTester } from "../creator-tester";
 import { TestSurveyTabViewModel } from "../../src/components/tabs/test";
 import { TabTestPlugin } from "../../src/components/tabs/test-plugin";
@@ -51,10 +51,12 @@ test("pages, visibility", (): any => {
   };
   var model = getTestModel(creator);
   var q = model.survey.getQuestionByName("q2");
-  expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[1].enabled).toBeFalsy();
+  const pageList = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  const pagesActions = pageList.actions;
+  expect(pagesActions).toHaveLength(3);
+  expect(pagesActions[1].enabled).toBeTruthy();//TestSurveyTabViewModel.enableInvisiblePages = true
   q.visible = true;
-  expect(model.pageListItems[1].enabled).toBeTruthy();
+  expect(pagesActions[1].enabled).toBeTruthy();
 });
 
 test("Reset options on show, Bug# https://surveyjs.answerdesk.io/ticket/details/T2147", (): any => {

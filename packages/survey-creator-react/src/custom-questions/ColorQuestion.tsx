@@ -33,7 +33,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   }
   protected renderElement(): JSX.Element {
     return (
-      <div className={this.question.cssClasses.root}>
+      <div className={this.question.cssClasses.root} onKeyDown={event => this.question.onKeyDown(event.nativeEvent)}>
         { this.renderColorSwatch() }
         { this.renderInput() }
         { this.question.showDropdownAction ? this.renderDropdownAction() : null }
@@ -46,7 +46,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   protected renderColorSwatch(): JSX.Element {
     return <label className={this.question.getSwatchCss()} style={this.question.getSwatchStyle()}>
       <SvgIcon iconName={this.question.cssClasses.swatchIcon} size={"auto"}></SvgIcon>
-      <input type="color" disabled={this.isDisplayMode} value={this.question.renderedValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
+      <input type="color" disabled={this.isDisplayMode} value={this.question.renderedColorValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
     </label>;
   }
   protected renderDropdownAction(): JSX.Element {

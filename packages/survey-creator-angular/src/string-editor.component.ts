@@ -19,6 +19,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+    this.baseModel.setLocString(this.locString);
     this.baseModel.blurEditor = () => {
       this.container.nativeElement.blur();
       this.container.nativeElement.spellcheck = false;
@@ -101,6 +102,9 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
     }
   }
   override ngOnDestroy(): void {
+    this.baseModel.blurEditor = undefined as any;
+    this.baseModel.getEditorElement = undefined as any;
+    this.baseModel.dispose();
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
   }

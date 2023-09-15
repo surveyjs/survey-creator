@@ -30,7 +30,8 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  QuestionSignaturePadModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -54,6 +55,7 @@ export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/condition";
 export * from "../../src/property-grid/restfull";
+export * from "../../src/custom-questions/question-text-with-reset";
 
 export class PropertyGridModelTester extends PropertyGridModel {
   constructor(obj: Base, options: ISurveyCreatorOptions = null) {
@@ -1951,6 +1953,36 @@ test("Edit columns in property grid", () => {
   expect(propertyGrid.survey.getQuestionByName("min")).toBeTruthy();
   expect(propertyGrid.survey.getQuestionByName("min").isVisible).toBeTruthy();
 });
+test("Change checkbox column type into boolean, Bug#4519", () => {
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "matrix",
+        "columns": [
+          {
+            "name": "checked",
+            "cellType": "checkbox",
+            "choices": [
+              {
+                "value": "item1",
+                "text": " "
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+  const column = survey.getQuestionByName("matrix").columns[0];
+  const options = new EmptySurveyCreatorOptions();
+  const propertyGrid = new PropertyGridModelTester(column, options);
+  const cellTypeQuestion = propertyGrid.survey.getQuestionByName("cellType");
+  expect(cellTypeQuestion).toBeTruthy();
+  expect(cellTypeQuestion.value).toEqual("checkbox");
+  cellTypeQuestion.value = "boolean";
+  expect(column.cellType).toBe("boolean");
+});
 test("Change cellType in the column in property grid", () => {
   var question = new QuestionMatrixDynamicModel("q1");
   question.addColumn("col1");
@@ -2267,7 +2299,7 @@ test("We should not have 'Others' category in our objects", () => {
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
   for (let i = 0; i < allQuestionTypes.length; i++) {
-    if (allQuestionTypes[i].name == "linkvalue")
+    if (["linkvalue", "color"].indexOf(allQuestionTypes[i].name) > -1)
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
     if (!!question) {
