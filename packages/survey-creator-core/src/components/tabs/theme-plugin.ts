@@ -59,6 +59,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model.onThemeModified.add((sender, options) => {
       this.onThemeModified.fire(this, options);
     });
+    this.model.onCanModifyTheme.add((sender, options) => {
+      this.onCanModifyTheme.fire(this, options);
+    });
   }
   public deactivate(): boolean {
     if (this.model) {
@@ -66,6 +69,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.model.onPropertyChanged.clear();
       this.model.onThemeSelected.clear();
       this.model.onThemeModified.clear();
+      this.model.onCanModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
@@ -238,4 +242,5 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
   public onThemeModified = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
+  public onCanModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, canModify: boolean }>();
 }

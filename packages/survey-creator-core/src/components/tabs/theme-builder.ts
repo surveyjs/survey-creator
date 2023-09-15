@@ -127,6 +127,7 @@ export class ThemeBuilder extends Base {
 
   public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
   public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
+  public onCanModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, canModify: boolean }>();
 
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
@@ -461,6 +462,18 @@ export class ThemeBuilder extends Base {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
     themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
     themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+
+    let canModify = !this.surveyProvider.readOnly;
+    const options = {
+      theme: this.currentTheme,
+      canModify
+    }
+    this.onCanModifyTheme.fire(this, options);
+    themeEditorSurvey.getAllQuestions().forEach(q => {
+      if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
+        q.readOnly = !options.canModify;
+      }
+    });
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {

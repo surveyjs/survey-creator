@@ -1135,12 +1135,12 @@ test("onThemeSelected + onThemeModified events", (): any => {
 
   let pluginThemeSelectedCount = 0;
   let pluginThemeModifiedCount = 0;
-  themePlugin.onThemeSelected.add(() => pluginThemeSelectedCount++)
-  themePlugin.onThemeModified.add(() => pluginThemeModifiedCount++)
+  themePlugin.onThemeSelected.add(() => pluginThemeSelectedCount++);
+  themePlugin.onThemeModified.add(() => pluginThemeModifiedCount++);
   let builderThemeSelectedCount = 0;
   let builderThemeModifiedCount = 0;
-  themeBuilder.onThemeSelected.add(() => builderThemeSelectedCount++)
-  themeBuilder.onThemeModified.add(() => builderThemeModifiedCount++)
+  themeBuilder.onThemeSelected.add(() => builderThemeSelectedCount++);
+  themeBuilder.onThemeModified.add(() => builderThemeModifiedCount++);
 
   themeChooser.value = "flat";
   expect(creator.isThemePristine).toBeTruthy();
@@ -1155,4 +1155,32 @@ test("onThemeSelected + onThemeModified events", (): any => {
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(2);
   expect(builderThemeSelectedCount).toBe(1);
+});
+
+test("onCanModifyTheme events + use creator.readOnly", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.readOnly = true;
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.onCanModifyTheme.add((s, o) => {
+    o.canModify = o.theme.themeName === "flat";
+  });
+
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
+  const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
+
+  expect(themeChooser.isReadOnly).toBeFalsy();
+  expect(themePalette.isReadOnly).toBeFalsy();
+  expect(primaryBackColor.isReadOnly).toBeTruthy();
+  expect(backgroundDimColor.isReadOnly).toBeTruthy();
+
+  themeChooser.value = "flat";
+  expect(themeChooser.isReadOnly).toBeFalsy();
+  expect(themePalette.isReadOnly).toBeFalsy();
+  expect(primaryBackColor.isReadOnly).toBeFalsy();
+  expect(backgroundDimColor.isReadOnly).toBeFalsy();
 });
