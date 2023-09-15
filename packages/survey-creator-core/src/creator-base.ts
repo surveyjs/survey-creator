@@ -54,7 +54,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
-  defaultAllowingDeactivate? : () => boolean|undefined;
+  defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -1043,7 +1043,6 @@ export class CreatorBase extends Base
   }
 
   public raiseThemeChanged(): void {
-    this.isThemePristine = false;
     this.hasPendingThemeChanges = true;
     const options = {
       propertyName: "theme",
@@ -1262,9 +1261,9 @@ export class CreatorBase extends Base
   }
   private switchViewType(viewName: string): boolean {
     let allow = true;
-    if(!!this.currentPlugin?.defaultAllowingDeactivate) {
+    if (!!this.currentPlugin?.defaultAllowingDeactivate) {
       allow = this.currentPlugin.defaultAllowingDeactivate();
-      if(allow === undefined) return false;
+      if (allow === undefined) return false;
     }
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
