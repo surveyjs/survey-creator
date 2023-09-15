@@ -35,6 +35,7 @@ export class QuestionRatingAdornerViewModel extends Base {
 
   public addItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowAdd) return;
+    if (!model.enableAdd) return;
     if (!QuestionRatingAdornerViewModel.useRateValues(model.element)) {
       model.element.rateMax += model.element.rateStep;
     } else {
@@ -65,6 +66,7 @@ export class QuestionRatingAdornerViewModel extends Base {
   }
   public removeItem(model: QuestionRatingAdornerViewModel) {
     if (!model.allowRemove) return;
+    if (!model.enableRemove) return;
     const property = Serializer.findProperty(model.element.getType(), "rateValues");
     const itemIndex = model.element.rateValues && model.element.rateValues.length - 1;
     const item = (model.element.rateValues && model.element.rateValues[itemIndex]) || null;
