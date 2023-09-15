@@ -8,6 +8,7 @@ import { notShortCircuitAnd } from "../../utils/utils";
 
 export class TestSurveyTabViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
+  public enableInvisiblePages: boolean = true;
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -140,7 +141,7 @@ export class TestSurveyTabViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.enabled = page.isVisible;
+      item.enabled = this.enableInvisiblePages || page.isVisible;
     }
   }
   private getCurrentPageItem(): IAction {
@@ -166,7 +167,7 @@ export class TestSurveyTabViewModel extends Base {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
-        enabled: page.isVisible,
+        enabled: this.enableInvisiblePages || page.isVisible,
         visible: true
       });
     }
@@ -318,5 +319,6 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.dispose();
     }
     this.simulator.dispose();
+    super.dispose();
   }
 }

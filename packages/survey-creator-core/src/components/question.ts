@@ -162,7 +162,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       onClick: () => { this.creator.selectElement(question); } };
   }
 
-  dispose() {
+  public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {

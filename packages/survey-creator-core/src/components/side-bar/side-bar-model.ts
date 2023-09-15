@@ -129,7 +129,7 @@ export class SidebarModel extends Base {
   public updateHasVisibleTabs() {
     this.hasVisibleTabs = (this.tabs || []).filter(tab => tab.visible).length > 0;
   }
-  public dispose() {
+  public dispose(): void {
     if (!!this.creator && !this.isDisposed) {
       this.creator.onShowSidebarVisibilityChanged.remove(this.onSidebarVisibilityChanged);
       this.creator.onPropertyChanged.remove(this.sidebarLocationChangedHandler);

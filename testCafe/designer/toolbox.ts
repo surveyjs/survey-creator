@@ -226,7 +226,8 @@ test("check toolbox scroll", async (t) => {
 });
 
 test("toolbar responsiveness in compact mode", async (t) => {
-  await t.resizeWindow(1200, 605);
+  await explicitErrorHandler();
+  await t.resizeWindow(1920, 605);
   const addCustomeButtonIntoQuestionToolbar = ClientFunction(() => {
     const customCategoryName = "Custom Questions";
     const customQuestionsData = {};
@@ -264,6 +265,7 @@ test("toolbar responsiveness in compact mode", async (t) => {
   });
   await addCustomeButtonIntoQuestionToolbar();
   await setJSON({
+    widthMode: "responsive",
     "pages": [
       {
         "name": "page1",

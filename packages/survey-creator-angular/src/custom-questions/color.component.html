@@ -2,7 +2,7 @@
   <label [class]="model.getSwatchCss()" [style]="model.getSwatchStyle()">
     <svg [iconName]="model.cssClasses.swatchIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     <input type="color" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.colorInput"
-      [value]="model.renderedValue" (change)="model.onColorInputChange($event)" />
+      [value]="model.renderedColorValue" (change)="model.onColorInputChange($event)" />
   </label>
   <input autocomplete="off" [disabled]="model.isInputReadOnly" [attr.id]="model.inputId"
     [placeholder]="model.renderedPlaceholder" [attr.aria-required]="model.ariaRequired"
