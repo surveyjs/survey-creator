@@ -379,7 +379,7 @@ export class ThemeSurveyTabViewModel extends Base {
 
   public addTheme(theme: ICreatorTheme): string {
     const fullThemeName = getThemeFullName(theme);
-    Themes[fullThemeName] = theme
+    Themes[fullThemeName] = theme;
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
       this.availableThemes = this.availableThemes.concat([theme.themeName]);
     }

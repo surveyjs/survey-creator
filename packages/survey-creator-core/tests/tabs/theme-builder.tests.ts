@@ -758,10 +758,9 @@ test("export theme to file", (done): any => {
       done();
     };
     fileReader.readAsText(blob);
-  }
+  };
   themeSurveyTab.exportToFileUI();
 });
-
 
 test("Theme builder: restore values of elementSettings from file", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
