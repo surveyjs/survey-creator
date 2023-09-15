@@ -35,7 +35,7 @@ import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
-import { TabThemePlugin } from "./components/tabs/theme-plugin";
+import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 
@@ -1541,7 +1541,7 @@ export class CreatorBase extends Base
       new TabTestPlugin(this);
     }
     if (this.showThemeTab) {
-      new TabThemePlugin(this);
+      new ThemeTabPlugin(this);
     }
     if (this.showLogicTab) {
       new TabLogicPlugin(this);

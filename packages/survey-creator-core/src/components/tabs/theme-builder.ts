@@ -8,60 +8,12 @@ import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } 
 import { settings } from "../../creator-settings";
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
-import * as LibraryThemes from "survey-core/themes";
+import { PredefinedColors, PredefinedThemes, Themes, getThemeFullName } from "./themes";
 
-require("./theme.scss");
-export const Themes: { [index: string]: ICreatorTheme } = {};
-export const PredefinedThemes: string[] = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
+require("./theme-builder.scss");
 
-function getThemeFullName(theme: ITheme) {
-  let fullThemeName = theme["themeName"] + "-" + (theme["colorPalette"] || "light");
-  if (theme.isPanelless === true) {
-    fullThemeName += "-panelless";
-  }
-  return fullThemeName;
-}
-
-Object.keys(LibraryThemes).forEach(libraryThemeName => {
-  const libraryTheme: ICreatorTheme = LibraryThemes[libraryThemeName];
-  const creatorThemeVariables = {};
-  const creatorTheme = {};
-  assign(creatorThemeVariables, libraryTheme.cssVariables);
-  assign(creatorTheme, libraryTheme, { cssVariables: creatorThemeVariables });
-  const creatorThemeName = getThemeFullName(libraryTheme);
-  Themes[creatorThemeName] = creatorTheme;
-});
-
-export const PredefinedColors = {
-  light: {
-    teal: "rgba(11, 128, 128, 1)",
-    blue: "rgba(39, 114, 203, 1)",
-    purple: "rgba(122, 70, 187, 1)",
-    orchid: "rgba(178, 61, 153, 1)",
-    tulip: "rgba(191, 76, 97, 1)",
-    brown: "rgba(177, 94, 47, 1)",
-    green: "rgba(11, 134, 75, 1)"
-  },
-  dark: {
-    teal: "rgba(22, 198, 187, 1)",
-    blue: "rgba(109, 183, 252, 1)",
-    purple: "rgba(173, 144, 255, 1)",
-    orchid: "rgba(232, 113, 220, 1)",
-    tulip: "rgba(245, 131, 151, 1)",
-    brown: "rgba(252, 187, 89, 1)",
-    green: "rgba(140, 204, 90, 1)"
-  }
-};
-
-export interface ICreatorTheme extends ITheme {
-  themeName?: string;
-  colorPalette?: string;
-}
-
-export class ThemeSurveyTabViewModel extends Base {
+export class ThemeBuilder extends Base {
   private json: any;
-  public exportToFileUI: any;
-  public importFromFileUI: any;
   public pages: ActionContainer = new ActionContainer();
   public testAgainAction: Action;
   private themeEditorSurveyValue: SurveyModel;
@@ -80,20 +32,20 @@ export class ThemeSurveyTabViewModel extends Base {
   public simulator: SurveySimulatorModel;
   @property({
     defaultValue: false,
-    onSet: (val: boolean, target: ThemeSurveyTabViewModel) => {
+    onSet: (val: boolean, target: ThemeBuilder) => {
       target.simulator.survey.showInvisibleElements = val;
     }
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
   @property({
-    defaultValue: true, onSet: (value: boolean, target: ThemeSurveyTabViewModel) => {
+    defaultValue: true, onSet: (value: boolean, target: ThemeBuilder) => {
       if (!!target.simulator) target.simulator.isRunning = value;
     }
   }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
-    onSet: (val: PageModel, target: ThemeSurveyTabViewModel) => {
+    onSet: (val: PageModel, target: ThemeBuilder) => {
       if (!!val) {
         const survey = target.simulator.survey;
         if (survey.firstPageIsStarted) {
@@ -113,7 +65,7 @@ export class ThemeSurveyTabViewModel extends Base {
   })
   activePage: PageModel;
   @property({
-    onSet: (newValue: string, _target: ThemeSurveyTabViewModel) => {
+    onSet: (newValue: string, _target: ThemeBuilder) => {
       if (!!_target.survey) {
         _target.survey.backgroundImage = newValue;
       }
@@ -122,7 +74,7 @@ export class ThemeSurveyTabViewModel extends Base {
   }) backgroundImage;
 
   @property({
-    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeSurveyTabViewModel) => {
+    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeBuilder) => {
       if (!!_target.survey) {
         _target.survey.backgroundImageFit = newValue;
       }
@@ -131,7 +83,7 @@ export class ThemeSurveyTabViewModel extends Base {
   }) backgroundImageFit;
 
   @property({
-    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeSurveyTabViewModel) => {
+    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeBuilder) => {
       if (!!_target.survey) {
         _target.survey.backgroundImageAttachment = newValue;
       }
@@ -169,7 +121,7 @@ export class ThemeSurveyTabViewModel extends Base {
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
   }
-  public get currentTheme(): ICreatorTheme {
+  public get currentTheme(): ITheme {
     return this.surveyProvider.theme;
   }
 
@@ -178,18 +130,9 @@ export class ThemeSurveyTabViewModel extends Base {
     this.simulator = new SurveySimulatorModel();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.loadTheme(this.surveyProvider.theme);
-    var self = this;
-    this.exportToFileUI = function () {
-      self.exportToFile(settings.theme.exportFileName);
-    };
-    this.importFromFileUI = function (el) {
-      if (el.files.length < 1) return;
-      self.importFromFile(el.files[0]);
-      el.value = "";
-    };
   }
 
-  public loadTheme(theme: ICreatorTheme) {
+  public loadTheme(theme: ITheme) {
     this.blockThemeChangedNotifications += 1;
     try {
       this.themeName = theme.themeName || this.themeName;
@@ -202,7 +145,7 @@ export class ThemeSurveyTabViewModel extends Base {
       const effectiveThemeCssVariables = {};
       assign(effectiveThemeCssVariables, Themes["default-light"].cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
-      const effectiveTheme: ICreatorTheme = {};
+      const effectiveTheme: ITheme = {};
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables });
       this.surveyProvider.theme = effectiveTheme;
 
@@ -214,6 +157,25 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   }
 
+  public resetTheme() {
+    this.setTheme({});
+  }
+
+  public setTheme(theme: ITheme) {
+    this.themeCssVariablesChanges = {};
+    this.loadTheme(theme);
+    this.updateSimulatorTheme();
+    this.surveyProvider.isThemePristine = true;
+  }
+
+  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panelless") {
+    this.themeName = themeName;
+    this.themePalette = themePalette;
+    this.themeMode = themeMode;
+    const theme = this.findSuitableTheme(themeName);
+    this.setTheme(theme);
+  }
+
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme");
     newSurvey.setCss(theme, false);
@@ -221,7 +183,7 @@ export class ThemeSurveyTabViewModel extends Base {
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: ThemeSurveyTabViewModel = this;
+    const self: ThemeBuilder = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
@@ -253,37 +215,6 @@ export class ThemeSurveyTabViewModel extends Base {
     });
   }
 
-  public saveToFileHandler = (fileName: string, blob: Blob) => {
-    if (!window) return;
-    if (window.navigator["msSaveOrOpenBlob"]) {
-      window.navigator["msSaveBlob"](blob, fileName);
-    } else {
-      const elem = window.document.createElement("a");
-      elem.href = window.URL.createObjectURL(blob);
-      elem.download = fileName;
-      document.body.appendChild(elem);
-      elem.click();
-      document.body.removeChild(elem);
-    }
-  }
-
-  public exportToFile(fileName: string) {
-    const themeData = JSON.stringify(this.currentTheme, null, 4);
-    const themeBlob = new Blob([themeData], { type: "application/json" });
-    this.saveToFileHandler(fileName, themeBlob);
-  }
-  public importFromFile(file: File, callback?: (theme: ICreatorTheme) => void) {
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      const theme: ITheme | any = JSON.parse(fileReader.result as string);
-      this.addTheme(theme);
-      this.loadTheme(theme);
-      this.updateSimulatorTheme();
-      callback && callback(theme);
-    };
-    fileReader.readAsText(file);
-  }
-
   public setJSON(json: any, currTheme: any) {
     this.json = json;
     if (json != null) {
@@ -304,8 +235,6 @@ export class ThemeSurveyTabViewModel extends Base {
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
       }
-
-      this.buildActions();
     }
     finally {
       this.blockThemeChangedNotifications -= 1;
@@ -346,13 +275,6 @@ export class ThemeSurveyTabViewModel extends Base {
     this.pageListItems = pages;
   }
 
-  public resetTheme() {
-    this.themeCssVariablesChanges = {};
-    this.loadTheme({});
-    this.surveyProvider.isThemePristine = true;
-    this.updateSimulatorTheme();
-  }
-
   public show() {
     this.showInvisibleElements = false;
     this.activePage = this.survey.activePage;
@@ -377,53 +299,6 @@ export class ThemeSurveyTabViewModel extends Base {
     }
   }
 
-  public addTheme(theme: ICreatorTheme): string {
-    const fullThemeName = getThemeFullName(theme);
-    Themes[fullThemeName] = theme;
-    if (this._availableThemes.indexOf(theme.themeName) === -1) {
-      this.availableThemes = this.availableThemes.concat([theme.themeName]);
-    }
-    return fullThemeName;
-  }
-  public removeTheme(fullThemeName: string): void {
-    const themeToDelete = Themes[fullThemeName];
-    if (!!themeToDelete) {
-      delete Themes[fullThemeName];
-      const registeredThemeNames = Object.keys(Themes);
-      let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
-      if (!themeModificationsExist) {
-        const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
-        if (themeIndex !== -1) {
-          const availableThemes = this.availableThemes;
-          availableThemes.splice(themeIndex, 1);
-          this.availableThemes = availableThemes;
-        }
-      }
-    }
-  }
-
-  public buildActions() {
-    const pageActions: Array<Action> = [];
-    const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
-      const currentIndex: number = this.survey.currentPageNo;
-      const shift: number = isNext ? 1 : -1;
-      let newIndex = currentIndex + shift;
-      if (this.survey.state === "starting" && isNext) {
-        newIndex = 0;
-      }
-      let nearPage: PageModel = this.survey.visiblePages[newIndex];
-      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
-        && this.survey.pages.length > 0) {
-        nearPage = this.survey.pages[0];
-      }
-      const pageIndex: number = this.survey.pages.indexOf(nearPage);
-      this.activePage = this.survey.pages[pageIndex];
-    };
-
-    this.pages.actions = pageActions;
-    this.pages.containerCss = "sv-action-bar--pages";
-  }
-
   private setActivePageItem(page: PageModel, val: boolean) {
     const item: IAction = this.getPageItemByPage(page);
     if (item) {
@@ -436,10 +311,6 @@ export class ThemeSurveyTabViewModel extends Base {
       if (items[i].data === page) return items[i];
     }
     return null;
-  }
-  private updateResultsTemplate(theme: any) {
-    this.simulator.survey.setCss(theme, false);
-    this.simulator.survey.render();
   }
 
   private initializeColorCalculator() {
@@ -545,7 +416,7 @@ export class ThemeSurveyTabViewModel extends Base {
     });
     return themeEditorSurvey;
   }
-  findSuitableTheme(themeName: string): ICreatorTheme {
+  findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
     let suitableTheme = Themes[probeThemeFullName];
     if (!!suitableTheme) {
