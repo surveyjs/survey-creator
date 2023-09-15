@@ -1,10 +1,12 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
-import { ThemeSurveyTabViewModel } from "./theme";
+import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
+import { settings } from "../../creator-settings";
+import { PredefinedThemes, Themes, getThemeFullName } from "./themes";
 
-export class TabThemePlugin implements ICreatorPlugin {
+export class ThemeTabPlugin implements ICreatorPlugin {
   private testAgainAction: Action;
   private themeSettingsAction: Action;
   private resetTheme: Action;
@@ -13,8 +15,9 @@ export class TabThemePlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
+  private _availableThemes = PredefinedThemes;
 
-  public model: ThemeSurveyTabViewModel;
+  public model: ThemeBuilder;
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
@@ -24,7 +27,7 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
   }
   public activate(): void {
-    this.model = new ThemeSurveyTabViewModel(this.creator, this.simulatorTheme);
+    this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
     this.sidebarTab.model = this.model.themeEditorSurvey;
@@ -41,6 +44,7 @@ export class TabThemePlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.testAgainAction = this.testAgainAction;
+    this.model.availableThemes = this.availableThemes;
     this.model.initialize(this.creator.JSON, options);
 
     this.model.show();
@@ -64,6 +68,38 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.importAction.visible = false;
     this.exportAction.visible = false;
     return true;
+  }
+
+  public saveToFileHandler = (fileName: string, blob: Blob) => {
+    if (!window) return;
+    if (window.navigator["msSaveOrOpenBlob"]) {
+      window.navigator["msSaveBlob"](blob, fileName);
+    } else {
+      const elem = window.document.createElement("a");
+      elem.href = window.URL.createObjectURL(blob);
+      elem.download = fileName;
+      document.body.appendChild(elem);
+      elem.click();
+      document.body.removeChild(elem);
+    }
+  }
+
+  public exportToFile(fileName: string) {
+    const themeData = JSON.stringify(this.creator.theme, null, 4);
+    const themeBlob = new Blob([themeData], { type: "application/json" });
+    this.saveToFileHandler(fileName, themeBlob);
+  }
+  public importFromFile(file: File, callback?: (theme: ITheme) => void) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const theme: ITheme | any = JSON.parse(fileReader.result as string);
+      this.addTheme(theme);
+      if (this.model) {
+        this.model.setTheme(theme);
+      }
+      callback && callback(theme);
+    };
+    fileReader.readAsText(file);
   }
 
   public createActions(): Array<Action> {
@@ -125,7 +161,9 @@ export class TabThemePlugin implements ICreatorPlugin {
           this.inputFileElement.type = "file";
           this.inputFileElement.style.display = "none";
           this.inputFileElement.onchange = () => {
-            this.model.importFromFileUI(this.inputFileElement);
+            if (this.inputFileElement.files.length < 1) return;
+            this.importFromFile(this.inputFileElement.files[0]);
+            this.inputFileElement.value = "";
           };
         }
         this.inputFileElement.click();
@@ -142,7 +180,7 @@ export class TabThemePlugin implements ICreatorPlugin {
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.model.exportToFileUI();
+        this.exportToFile(settings.theme.exportFileName);
       }
     });
     items.push(this.exportAction);
@@ -152,5 +190,40 @@ export class TabThemePlugin implements ICreatorPlugin {
 
   public addFooterActions() {
     this.creator.footerToolbar.actions.push(this.resetTheme);
+  }
+
+  public get availableThemes() {
+    return [].concat(this._availableThemes);
+  }
+  public set availableThemes(availebleThemes: string[]) {
+    this._availableThemes = availebleThemes || [];
+    if (!!this.model) {
+      this.model.availableThemes = availebleThemes;
+    }
+  }
+
+  public addTheme(theme: ITheme): string {
+    const fullThemeName = getThemeFullName(theme);
+    Themes[fullThemeName] = theme;
+    if (this._availableThemes.indexOf(theme.themeName) === -1) {
+      this.availableThemes = this.availableThemes.concat([theme.themeName]);
+    }
+    return fullThemeName;
+  }
+  public removeTheme(fullThemeName: string): void {
+    const themeToDelete = Themes[fullThemeName];
+    if (!!themeToDelete) {
+      delete Themes[fullThemeName];
+      const registeredThemeNames = Object.keys(Themes);
+      let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
+      if (!themeModificationsExist) {
+        const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
+        if (themeIndex !== -1) {
+          const availableThemes = this.availableThemes;
+          availableThemes.splice(themeIndex, 1);
+          this.availableThemes = availableThemes;
+        }
+      }
+    }
   }
 }
