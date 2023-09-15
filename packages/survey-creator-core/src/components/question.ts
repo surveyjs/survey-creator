@@ -281,7 +281,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, questionSubType,
       (item: any) => {
         this.surveyElement.setPropertyValue(propName, item.id);
-        newAction.title = item.title;
       });
     newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
@@ -292,7 +291,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const popup = newAction.popupModel;
         const list = popup.contentComponentData.model;
         list.selectedItem = item;
-        newAction.title = item.title;
       },
       "inputTypeAdorner"
     );
