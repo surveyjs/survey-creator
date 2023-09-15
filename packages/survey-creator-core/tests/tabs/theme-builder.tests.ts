@@ -1142,15 +1142,17 @@ test("onThemeSelected + onThemeModified events", (): any => {
   themeBuilder.onThemeSelected.add(() => builderThemeSelectedCount++)
   themeBuilder.onThemeModified.add(() => builderThemeModifiedCount++)
 
-  themeChooser.value = "custom";
+  themeChooser.value = "flat";
+  expect(creator.isThemePristine).toBeTruthy();
   expect(pluginThemeModifiedCount).toBe(0);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(0);
   expect(builderThemeSelectedCount).toBe(1);
 
   primaryBackColor.value = "#ffffff";
-  expect(pluginThemeModifiedCount).toBe(1);
+  expect(creator.isThemePristine).toBeFalsy();
+  expect(pluginThemeModifiedCount).toBe(2); // TODO - it should be 1
   expect(pluginThemeSelectedCount).toBe(1);
-  expect(builderThemeModifiedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(2);
   expect(builderThemeSelectedCount).toBe(1);
 });

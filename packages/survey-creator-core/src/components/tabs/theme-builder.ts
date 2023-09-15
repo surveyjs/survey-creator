@@ -342,7 +342,6 @@ export class ThemeBuilder extends Base {
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (this.blockChanges) return;
-      this.surveyProvider.isThemePristine = this.surveyProvider.isThemePristine && (options.name === "themeName" && options.value === "default");
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         if (options.name === "themeName") {
@@ -357,6 +356,7 @@ export class ThemeBuilder extends Base {
         this.updateSimulatorTheme();
         this.raiseThemeChanged();
         this.onThemeSelected.fire(this, { theme: this.currentTheme });
+        this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
         return;
       }
       if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
@@ -503,6 +503,7 @@ export class ThemeBuilder extends Base {
     }
   }
   private raiseThemeModified(options: any) {
+    this.surveyProvider.isThemePristine = false;
     if (this.blockThemeChangedNotifications == 0) {
       this.onThemeModified.fire(this, options);
     }
