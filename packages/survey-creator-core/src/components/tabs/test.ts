@@ -304,10 +304,10 @@ export class TestSurveyTabViewModel extends Base {
     if (!this.prevPageAction || !this.survey) return;
     const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
       || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
-    this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
-    this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
   public onScroll() {
