@@ -1904,7 +1904,7 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
-    const questions = this.survey.getAllQuestions();
+    const questions = this.getAllQuestions();
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
@@ -2276,17 +2276,18 @@ export class CreatorBase extends Base
     }
   }
 
-  protected getAllQuestions(): Array<any> {
-    const result = SurveyHelper.getAllElements(this.survey, false);
-    SurveyHelper.addElements(this.newPanels, false, result);
-    SurveyHelper.addElements(this.newQuestions, false, result);
-    return result;
+  protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(false, includeNewItems);
   }
-
-  protected getAllPanels(): Array<any> {
-    const result = SurveyHelper.getAllElements(this.survey, true);
-    SurveyHelper.addElements(this.newPanels, true, result);
-    SurveyHelper.addElements(this.newQuestions, true, result);
+  protected getAllPanels(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(true, includeNewItems);
+  }
+  private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
+    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    if(includeNewItems) {
+      SurveyHelper.addElements(this.newPanels, isPanel, result);
+      SurveyHelper.addElements(this.newQuestions, isPanel, result);
+    }
     return result;
   }
   protected getNewName(type: string, isPanel?: boolean): string {
@@ -2849,7 +2850,7 @@ export class CreatorBase extends Base
       if (!options.isUnique) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
-      while (!this.isNameUnique(el, options.name)) {
+      while (!this.isNameUnique(el, options.name, false)) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
       options.isUnique = true;
@@ -2861,11 +2862,11 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
-    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+    if (!this.isNameUniqueInArray(this.getAllPanels(includeNewItems), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(includeNewItems), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,
