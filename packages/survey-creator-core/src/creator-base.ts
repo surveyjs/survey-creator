@@ -2885,7 +2885,7 @@ export class CreatorBase extends Base
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
     if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,

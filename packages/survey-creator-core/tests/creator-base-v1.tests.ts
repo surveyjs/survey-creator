@@ -446,6 +446,33 @@ test("Element name should be unique - property grid + Question Editor", () => {
   expect(questionName.hasErrors()).toBeFalsy();
   expect(question.name).toEqual("question4");
 });
+test("Element name should be unique in panel dynamic - property grid + Question Editor", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "paneldynamic", name: "q1", templateElements: [{ type: "text", name: "q2" }] },
+      { type: "paneldynamic", name: "q3", templateElements: [{ type: "text", name: "q4" }] }
+    ]
+  };
+  const panelQuestion = creator.survey.getQuestionByName("q3");
+  expect(panelQuestion).toBeTruthy();
+  const question = panelQuestion.template.getQuestionByName("q4");
+  expect(question).toBeTruthy();
+  creator.selectElement(question);
+  const questionName = creator["designerPropertyGrid"].survey.getQuestionByName("name");
+  expect(questionName).toBeTruthy();
+  expect(questionName.value).toEqual("q4");
+  questionName.value = "q2";
+  expect(questionName.value).toEqual("q2");
+  expect(questionName.hasErrors()).toBeTruthy();
+  expect(question.name).toEqual("q4");
+  questionName.value = "q4";
+  expect(questionName.hasErrors()).toBeFalsy();
+  expect(question.name).toEqual("q4");
+  questionName.value = "q5";
+  expect(questionName.hasErrors()).toBeFalsy();
+  expect(question.name).toEqual("q5");
+});
 
 test("Validate Selected Element Errors", () => {
   const titleProp = Serializer.findProperty("question", "title");
