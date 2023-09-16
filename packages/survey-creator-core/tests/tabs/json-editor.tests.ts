@@ -62,6 +62,40 @@ test("JsonEditor & fixError action", () => {
     ]
   });
 });
+test("JsonEditor & error question unique in panel dynamic", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [{ type: "text", name: "q2" }]
+      },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [{ type: "text", name: "q2" }]
+      }
+    ]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
+  expect(editor.errorList.actions[0].data.showFixButton).toBeTruthy();
+  editor.errorList.actions[0].data.fixError();
+  expect(editor.hasErrors).toBeFalsy();
+  expect(JSON.parse(editor.text)).toEqual({
+    elements: [
+      {
+        type: "paneldynamic", name: "q1",
+        templateElements: [{ type: "text", name: "q2" }]
+      },
+      {
+        type: "paneldynamic", name: "q3",
+        templateElements: [{ type: "text", name: "question1" }]
+      }
+    ]
+  });
+});
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   let modelEditor;

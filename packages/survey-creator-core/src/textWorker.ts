@@ -259,8 +259,8 @@ export class SurveyTextWorker {
     const res = [];
     const names = {};
     this.survey.pages.forEach(p=> this.checkDuplicatedElement(p, names, res));
-    this.survey.getAllPanels().forEach(p=> this.checkDuplicatedElement(p, names, res));
-    this.survey.getAllQuestions().forEach(q=> this.checkDuplicatedElement(q, names, res));
+    SurveyHelper.getAllElements(this.survey, true).forEach(p=> this.checkDuplicatedElement(p, names, res));
+    SurveyHelper.getAllElements(this.survey, false).forEach(q=> this.checkDuplicatedElement(q, names, res));
     return res;
   }
   private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {

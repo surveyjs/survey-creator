@@ -2277,38 +2277,18 @@ export class CreatorBase extends Base
   }
 
   protected getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
-    }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
+    const result = SurveyHelper.getAllElements(this.survey, false);
+    SurveyHelper.addElements(this.newPanels, false, result);
+    SurveyHelper.addElements(this.newQuestions, false, result);
     return result;
   }
 
   protected getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
+    const result = SurveyHelper.getAllElements(this.survey, true);
+    SurveyHelper.addElements(this.newPanels, true, result);
+    SurveyHelper.addElements(this.newQuestions, true, result);
     return result;
   }
-
-  protected addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     if (isPanel) return this.getNewPanelName();
