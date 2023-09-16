@@ -1905,7 +1905,7 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
-    const questions = this.survey.getAllQuestions();
+    const questions = this.getAllQuestions();
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
@@ -2277,39 +2277,20 @@ export class CreatorBase extends Base
     }
   }
 
-  protected getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
+  protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(false, includeNewItems);
+  }
+  protected getAllPanels(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(true, includeNewItems);
+  }
+  private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
+    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    if(includeNewItems) {
+      SurveyHelper.addElements(this.newPanels, isPanel, result);
+      SurveyHelper.addElements(this.newQuestions, isPanel, result);
     }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
     return result;
   }
-
-  protected getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-
-  protected addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     if (isPanel) return this.getNewPanelName();
@@ -2870,7 +2851,7 @@ export class CreatorBase extends Base
       if (!options.isUnique) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
-      while (!this.isNameUnique(el, options.name)) {
+      while (!this.isNameUnique(el, options.name, false)) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
       options.isUnique = true;
@@ -2882,11 +2863,11 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
-    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+    if (!this.isNameUniqueInArray(this.getAllPanels(includeNewItems), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(includeNewItems), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,
