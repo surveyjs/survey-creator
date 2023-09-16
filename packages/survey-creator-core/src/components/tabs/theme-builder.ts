@@ -467,7 +467,7 @@ export class ThemeBuilder extends Base {
     const options = {
       theme: this.currentTheme,
       canModify
-    }
+    };
     this.onCanModifyTheme.fire(this, options);
     themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
