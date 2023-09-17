@@ -230,7 +230,7 @@ export class SurveyLogicTypes {
         return survey.getAllQuestions().length > 0;
       },
       supportContext(context: Base): boolean {
-        return Array.isArray(context["templateElements"]);
+        return Array.isArray(context["templateElements"]) || Array.isArray(context["detailElements"]);
       },
       getParentElement(element: Base): Base {
         return !!element ? (<Question>element).parentQuestion : null;
@@ -251,6 +251,9 @@ export class SurveyLogicTypes {
           }
           if (q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
             q.templateElements.forEach(el => addElement(el));
+          }
+          if (q instanceof QuestionMatrixDropdownModelBase && (!context || context === q)) {
+            q.detailElements.forEach(el => addElement(el));
           }
         }
         return res;

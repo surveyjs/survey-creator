@@ -13,7 +13,8 @@ import {
   QuestionImageModel,
   Question,
   PageModel,
-  ItemValue
+  ItemValue,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { getNextValue, getNextItemText } from "../src/utils/utils";
 import { editorLocalization } from "../src/editorLocalization";
@@ -984,6 +985,71 @@ test("Update expressions in copyElements", () => {
   expect(newPanel.questions[1].isDesignMode).toBeTruthy();
   expect(newPanel.questions[1].visibleIf).toEqual("{question3} = 'a'");
   expect(newPanel.questions[1].visible).toBeTruthy();
+});
+test("Update expressions on copyElements for panel dynamic", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{panel.question2} = 'a'"
+          }
+        ]
+      }
+    ]
+  };
+  const panel = <QuestionPanelDynamicModel>creator.survey.getQuestionByName("question1");
+  const newPanel = <QuestionPanelDynamicModel>creator.copyElement(panel);
+  expect(newPanel.survey).toBeTruthy();
+  expect(newPanel.isDesignMode).toBeTruthy();
+  expect(newPanel.name).toBe("question4");
+  expect(newPanel.templateElements).toHaveLength(2);
+  expect(newPanel.templateElements[0].name).toBe("question5");
+  expect(newPanel.templateElements[1].name).toBe("question6");
+  expect((<Question>newPanel.templateElements[1]).visibleIf).toEqual("{panel.question5} = 'a'");
+});
+test("Update expressions on copyElements for matrix dynamic in detail panel", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        detailPanelMode: "underRow",
+        detailElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{row.question2} = 'a'"
+          }
+        ],
+        columns: [{ name: "col1", visibleIf: "{row.question2} = 'a'" }]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDynamicModel>creator.survey.getQuestionByName("question1");
+  const newMatrix = <QuestionMatrixDynamicModel>creator.copyElement(matrix);
+  expect(newMatrix.survey).toBeTruthy();
+  expect(newMatrix.isDesignMode).toBeTruthy();
+  expect(newMatrix.name).toBe("question4");
+  expect(newMatrix.detailElements).toHaveLength(2);
+  expect(newMatrix.detailElements[0].name).toBe("question5");
+  expect(newMatrix.detailElements[1].name).toBe("question6");
+  expect((<Question>newMatrix.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
+  expect(newMatrix.columns[0].visibleIf).toBe("{row.question5} = 'a'");
 });
 test("onModified options", () => {
   const creator = new CreatorTester();
