@@ -230,7 +230,8 @@ export class SurveyLogicTypes {
         return survey.getAllQuestions().length > 0;
       },
       supportContext(context: Base): boolean {
-        return Array.isArray(context["templateElements"]) || Array.isArray(context["detailElements"]);
+        return Array.isArray(context["templateElements"]) ||
+        (Array.isArray(context["detailElements"]) && context["detailElements"].length > 0);
       },
       getParentElement(element: Base): Base {
         return !!element ? (<Question>element).parentQuestion : null;
