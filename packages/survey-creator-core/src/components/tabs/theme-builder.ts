@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, EventBase } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -124,6 +124,10 @@ export class ThemeBuilder extends Base {
   public get currentTheme(): ITheme {
     return this.surveyProvider.theme;
   }
+
+  public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
+  public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
+  public onCanModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, canModify: boolean }>();
 
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
@@ -339,7 +343,6 @@ export class ThemeBuilder extends Base {
 
     themeEditorSurvey.onValueChanged.add((sender, options) => {
       if (this.blockChanges) return;
-      this.surveyProvider.isThemePristine = this.surveyProvider.isThemePristine && (options.name === "themeName" && options.value === "default");
 
       if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
         if (options.name === "themeName") {
@@ -353,17 +356,21 @@ export class ThemeBuilder extends Base {
         }
         this.updateSimulatorTheme();
         this.raiseThemeChanged();
+        this.onThemeSelected.fire(this, { theme: this.currentTheme });
+        this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
         return;
       }
       if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
         this[options.name] = options.value;
         this.raiseThemeChanged();
+        this.raiseThemeModified(options);
         return;
       }
       if (options.name === "backgroundOpacity") {
         this.currentTheme.backgroundOpacity = options.value / 100;
         this.survey.backgroundOpacity = options.value / 100;
         this.raiseThemeChanged();
+        this.raiseThemeModified(options);
         return;
       }
 
@@ -404,6 +411,7 @@ export class ThemeBuilder extends Base {
       this.currentTheme.cssVariables = newCssVariables;
       this.blockThemeChangedNotifications -= 1;
       this.updateSimulatorTheme();
+      this.raiseThemeModified(options);
     });
 
     themeEditorSurvey.onUploadFiles.add((_, options) => {
@@ -454,6 +462,18 @@ export class ThemeBuilder extends Base {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
     themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
     themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+
+    let canModify = !this.surveyProvider.readOnly;
+    const options = {
+      theme: this.currentTheme,
+      canModify
+    };
+    this.onCanModifyTheme.fire(this, options);
+    themeEditorSurvey.getAllQuestions().forEach(q => {
+      if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
+        q.readOnly = !options.canModify;
+      }
+    });
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
@@ -493,6 +513,12 @@ export class ThemeBuilder extends Base {
   private raiseThemeChanged() {
     if (this.blockThemeChangedNotifications == 0) {
       this.surveyProvider.raiseThemeChanged();
+    }
+  }
+  private raiseThemeModified(options: any) {
+    this.surveyProvider.isThemePristine = false;
+    if (this.blockThemeChangedNotifications == 0) {
+      this.onThemeModified.fire(this, options);
     }
   }
 
