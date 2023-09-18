@@ -927,6 +927,30 @@ test("SurveyPropertyConditionEditor, set correct locale into internal survey, Bu
   expect(editor.editSurvey.locale).toEqual("de");
   editorLocalization.currentLocale = "";
 });
+test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () => {
+  editorLocalization.currentLocale = "de";
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { name: "q1", type: "text" },
+      {
+        name: "q2",
+        type: "text",
+        visibleIf: "{q1} notempty"
+      }
+    ]
+  };
+  let model;
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if(options.reason === "condition-builder") {
+      model = options.model;
+    }
+  });
+  const question = creator.survey.getQuestionByName("q2");
+  new ConditionEditor(creator.survey, question, creator, "visibleIf");
+  expect(model).toBeTruthy();
+  expect(model.text).toEqual("{q1} notempty");
+});
 
 test("Change names in copyElements", () => {
   const creator = new CreatorTester();

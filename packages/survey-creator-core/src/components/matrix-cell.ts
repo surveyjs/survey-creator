@@ -19,11 +19,11 @@ require("./matrix-cell.scss");
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
   private creator: CreatorBase;
-  constructor(creator: CreatorBase, private cellQuestion: Question) {
+  constructor(creator: CreatorBase, private cellQuestion: Question, model?: Base) {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
-    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor");
+    this.surveyValue = creator.createSurvey({ questions: [questionJSON] }, "modal-question-editor", model);
     this.survey.css = defaultV2Css;
     this.survey.setDesignMode(true);
     (<any>this.survey).isPopupEditorContent = true;
@@ -69,7 +69,7 @@ export class MatrixCellWrapperViewModel extends Base {
   }
 
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
-    const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question);
+    const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, this);
     settings.showDialog(
       <IDialogOptions>{
         componentName: "svc-question-editor-content",

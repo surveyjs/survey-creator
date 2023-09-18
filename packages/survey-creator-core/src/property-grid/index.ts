@@ -108,7 +108,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    return this.options.createSurvey(json, this.getSurveyCreationReason());
+    return this.options.createSurvey(json, this.getSurveyCreationReason(), this);
   }
   protected abstract getSurveyJSON(): any;
   protected abstract getSurveyCreationReason(): string;
@@ -953,7 +953,7 @@ export class PropertyGridModel {
     }
   }
   protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "property-grid");
+    return this.options.createSurvey(json, "property-grid", this);
   }
   protected getSurveyJSON(): any {
     var res = {};
