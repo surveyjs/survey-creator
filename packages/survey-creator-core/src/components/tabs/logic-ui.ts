@@ -46,7 +46,7 @@ export class SurveyLogicUI extends SurveyLogic {
     options: ISurveyCreatorOptions = null
   ) {
     super.update(survey, options);
-    const newItemsSurveyValue = this.options.createSurvey(this.getLogicItemSurveyJSON(), "logic-items");
+    const newItemsSurveyValue = this.options.createSurvey(this.getLogicItemSurveyJSON(), "logic-items", this);
     newItemsSurveyValue.css = logicCss;
     this.itemsSurveyValue = newItemsSurveyValue;
     this.itemsSurvey.onMatrixRowRemoving.add((sender, options) => {

@@ -1714,6 +1714,7 @@ export class CreatorBase extends Base
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = defaultV2Css;
+    survey.setIsMobile(!!this.isMobileView);
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -1905,7 +1906,7 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
-    const questions = this.survey.getAllQuestions();
+    const questions = this.getAllQuestions();
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
@@ -2055,7 +2056,7 @@ export class CreatorBase extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
+  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
@@ -2067,7 +2068,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model: this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
@@ -2277,39 +2278,20 @@ export class CreatorBase extends Base
     }
   }
 
-  protected getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
+  protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(false, includeNewItems);
+  }
+  protected getAllPanels(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(true, includeNewItems);
+  }
+  private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
+    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    if (includeNewItems) {
+      SurveyHelper.addElements(this.newPanels, isPanel, result);
+      SurveyHelper.addElements(this.newQuestions, isPanel, result);
     }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
     return result;
   }
-
-  protected getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-
-  protected addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     if (isPanel) return this.getNewPanelName();
@@ -2334,11 +2316,14 @@ export class CreatorBase extends Base
         this.newPanels.push(element);
       }
       var panel = <PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
+      panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
+      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
+        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
+      if (els) {
+        els.forEach(el => this.setNewNamesCore(el));
+      }
     }
   }
 
@@ -2870,7 +2855,7 @@ export class CreatorBase extends Base
       if (!options.isUnique) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
-      while (!this.isNameUnique(el, options.name)) {
+      while (!this.isNameUnique(el, options.name, false)) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
       options.isUnique = true;
@@ -2882,11 +2867,11 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
-    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+    if (!this.isNameUniqueInArray(this.getAllPanels(includeNewItems), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(includeNewItems), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,
@@ -3397,7 +3382,11 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
-  @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: false, onSet: (val, creator: CreatorBase) => {
+      creator.survey.setIsMobile(!!val);
+    }
+  }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
   /**
    * Specifies Toolbox location.

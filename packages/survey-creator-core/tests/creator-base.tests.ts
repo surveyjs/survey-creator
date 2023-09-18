@@ -4051,3 +4051,27 @@ test("Do not focus title on mobile", (): any => {
   creator.isMobileView = false;
   expect(creator.startEditTitleOnQuestionAdded).toBeTruthy();
 });
+
+test("Set isMobile flag for survey when isMobileView true", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  let question = creator.survey.getAllQuestions()[0];
+  expect(question.isMobile).toBeFalsy();
+
+  creator.isMobileView = true;
+  expect(question.isMobile).toBeTruthy();
+
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: ["item1", "item2"] }
+    ]
+  };
+  question = creator.survey.getAllQuestions()[0];
+  expect(question.isMobile).toBeTruthy();
+  creator.isMobileView = false;
+  expect(question.isMobile).toBeFalsy();
+});

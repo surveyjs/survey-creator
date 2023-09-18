@@ -77,7 +77,7 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this);
     if (this.surveyProvider.showThemeTab) {
       newSurvey.applyTheme(this.surveyProvider.theme);
     } else {

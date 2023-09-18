@@ -2491,6 +2491,59 @@ test("Rename the name for matrices", () => {
   logic.renameQuestion("q3", "question3");
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
 });
+test("Rename the name for panel dynamic", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{panel.question2} = 'a'"
+          }
+        ]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var question1 = <QuestionPanelDynamicModel>survey.getQuestionByName("question1");
+  logic.renameQuestion("question2", "question5");
+  expect((<Question>question1.templateElements[1]).visibleIf).toEqual("{panel.question5} = 'a'");
+});
+test("Rename the name for detail panel in matrix dynamic", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        detailPanelMode: "underRow",
+        detailElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{row.question2} = 'a'"
+          }
+        ],
+        columns: [{ name: "col1", visibleIf: "{row.question2} = 'a'" }]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var question1 = <QuestionMatrixDynamicModel>survey.getQuestionByName("question1");
+  logic.renameQuestion("question2", "question5");
+  expect((<Question>question1.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
+  expect(question1.columns[0].visibleIf).toEqual("{row.question5} = 'a'");
+});
 test("Do not reacreate logic for updating expressions for every change", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

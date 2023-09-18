@@ -107,15 +107,27 @@ export class SurveyHelper {
     if (obj["name"]) return obj["name"];
     return "";
   }
-  public static getElements(
-    element: any,
-    includeHidden: boolean = false
-  ): Array<any> {
+  public static getElements(element: any, includeHidden: boolean = false): Array<any> {
     if (!element) return [];
     if (element.getElementsInDesign)
       return element.getElementsInDesign(includeHidden);
     if (element.elements) return element.elements;
     return [];
+  }
+  public static addElements(elements: Array<any>, isPanel: boolean, result: Array<any>) {
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i].isPanel === isPanel) {
+        result.push(elements[i]);
+      }
+      SurveyHelper.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
+    }
+  }
+  public static getAllElements(survey: SurveyModel, isPanel: boolean): Array<any> {
+    const result = [];
+    for (let i = 0; i < survey.pages.length; i++) {
+      SurveyHelper.addElements(survey.pages[i].elements, isPanel, result);
+    }
+    return result;
   }
   public static isPropertyVisible(
     obj: any,
