@@ -2315,11 +2315,14 @@ export class CreatorBase extends Base
         this.newPanels.push(element);
       }
       var panel = <PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
+      panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
+      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
+        (Array.isArray(element["detailElements"]) ? element["detailElements"]: undefined);
+      if(els) {
+        els.forEach(el => this.setNewNamesCore(el));
+      }
     }
   }
 
