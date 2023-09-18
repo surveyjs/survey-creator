@@ -6,13 +6,13 @@ import {
   SurveyElementBase,
   attachKey2click
 } from "survey-react-ui";
-import { ThemeSurveyTabViewModel } from "survey-creator-core";
+import { ThemeBuilder } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
 import { TabPreviewTestSurveyAgainComponent } from "./Preview";
 
 export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
-  private get model(): ThemeSurveyTabViewModel {
+  private get model(): ThemeBuilder {
     return this.props.data;
   }
   protected getStateElement(): Base {

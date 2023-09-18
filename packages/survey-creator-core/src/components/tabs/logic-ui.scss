@@ -274,6 +274,11 @@
   border-radius: calcSize(0.5);
   padding: calcSize(4) calcSize(5) calcSize(5);
 }
+.sv-popup--overlay {
+  .svc-logic-placeholder {
+    width: initial;
+  }
+}
 
 .svc-logic-placeholder__text {
   font-family: $font-family;
@@ -289,4 +294,13 @@
 
 .svc-logic-tab__leave-apply-button {
   background-color: $red;
+}
+.sl-list {
+  .sv-list__filter {
+    padding-top: 0;
+  }
+
+  .sv-list__filter-icon {
+    top: calc(1.5 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  }
 }

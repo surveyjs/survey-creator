@@ -756,6 +756,37 @@ test("Logo image hover", async (t) => {
     await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
+test("Logo image loading", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1900);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "q1"
+        },
+      ],
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (window as any).creator.onUploadFile.add((_, opt) => {
+        setTimeout(() => {
+          opt.callback("success", "");
+        }, 1000000);
+      });
+    })();
+    await ClientFunction(() => {
+      (window as any).creator.onOpenFileChooser.add((s, o) => {
+        o.callback([{}]);
+      });
+    })();
+    await t.click(Selector(".svc-logo-image"));
+    await ClientFunction(() => {
+      (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
+    })();
+    await takeElementScreenshot("logo-image-loading.png", Selector(".svc-logo-image"), t, comparer);
+  });
+});
 
 test("Logo image adorners", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -1415,21 +1446,27 @@ test("Question adorners for different sizes", async (t) => {
               "type": "text",
               "name": "question1",
               "minWidth": "100px",
-              "maxWidth": "200px",
+              "maxWidth": "300px",
               "title": "Q"
-            }
-            ,
+            },
             {
               "type": "text",
               "name": "question2",
               "minWidth": "100px",
               "maxWidth": "400px",
               "title": "Q"
+            },
+            {
+              "type": "text",
+              "name": "question3",
+              "minWidth": "100px",
+              "maxWidth": "500px",
+              "title": "Q"
             }
             ,
             {
               "type": "text",
-              "name": "question3",
+              "name": "question4",
               "minWidth": "100px",
               "maxWidth": "600px",
               "title": "Q"
@@ -1455,6 +1492,9 @@ test("Question adorners for different sizes", async (t) => {
 
     await t.click(qContent.nth(3), { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("question-big.png", qContent.nth(3), t, comparer);
+
+    await t.click(qContent.nth(4), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-huge.png", qContent.nth(4), t, comparer);
   });
 });
 

@@ -213,6 +213,26 @@ test("Logic popup", async (t) => {
   });
 });
 
+test("Logic popup mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+    const generalTab = Selector("h4").withExactText("General");
+    const logicTab = Selector("h4").withExactText("Logic");
+
+    await t
+      .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
+      .click(getToolboxItemByText("Single-Line Input"), { offsetX: 25 });
+    await t.resizeWindow(500, 870)
+      .click(Selector("button[title='Open settings']").filterVisible(), { offsetX: 25 });
+
+    await t.click(generalTab)
+      .click(logicTab)
+
+      .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"));
+    await takeElementScreenshot("pg-logic-popup-mobile.png", Selector(".sv-popup.sv-property-editor.sv-popup--overlay .sv-popup__container"), t, comparer);
+  });
+});
+
 test("Property grid checkbox - all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -419,6 +439,36 @@ test("Check color editor", async (t) => {
       document.body.focus();
     })();
     await takeElementScreenshot("color-editor-title-location-left.png", questionSelector, t, comparer);
+  });
+});
+
+test("Check color editor with empty value", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+    await ClientFunction(() => {
+      (<any>window).Survey.Serializer.addProperty("survey", {
+        name: "fontColor",
+        category: "general",
+        visibleIndex: 0
+      });
+      (<any>window).SurveyCreatorCore.PropertyGridEditorCollection.register({
+        fit: function (prop) {
+          return prop.name === "fontColor";
+        },
+        getJSON: function (obj, prop, options) {
+          return {
+            type: "color", allowEmptyValue: true, choices: [{ text: "Contrast", value: "#673AB0" }],
+          };
+        }
+      });
+    })();
+    await setJSON({});
+    await t
+      .click(Selector("h4[aria-label=General]"));
+    const questionSelector = Selector("div[data-name='fontColor']");
+    await takeElementScreenshot("color-editor-empty.png", questionSelector, t, comparer);
+    await ClientFunction(() => (window as any).creator.propertyGrid.getAllQuestions()[0].readOnly = true)();
+    await takeElementScreenshot("color-editor-empty-disabled.png", questionSelector, t, comparer);
   });
 });
 

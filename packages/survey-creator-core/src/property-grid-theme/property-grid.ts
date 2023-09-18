@@ -332,6 +332,7 @@ export var propertyGridCss = {
   color: {
     root: "spg-input spg-color-editor spg-input-container",
     swatch: "spg-color-editor__color-swatch",
+    swatchDefault: "spg-color-editor__color-swatch--default",
     swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input spg-input-container__input",

@@ -30,7 +30,8 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  QuestionSignaturePadModel
 } from "survey-core";
 import {
   ISurveyCreatorOptions,
@@ -2298,7 +2299,7 @@ test("We should not have 'Others' category in our objects", () => {
   const objToCheck: Array<Base> = [survey, panel, page];
   const allQuestionTypes = Serializer.getChildrenClasses("question", true);
   for (let i = 0; i < allQuestionTypes.length; i++) {
-    if (allQuestionTypes[i].name == "linkvalue")
+    if (["linkvalue", "color"].indexOf(allQuestionTypes[i].name) > -1)
       continue;
     let question = page.addNewQuestion(allQuestionTypes[i].name, "q" + (i + 1).toString());
     if (!!question) {

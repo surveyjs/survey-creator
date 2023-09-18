@@ -9,8 +9,8 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
+  creator.activeTab = "test";
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
   return testPlugin.model;
 }
 
@@ -159,14 +159,14 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   expect(pageList.actions).toHaveLength(2);
   expect(pageList.actions[0].title).toBe("Page 1");
   expect(pageList.actions[1].title).toBe("Page 2");
-  expect(pageList.actions[1].enabled).toBeFalsy();
+  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
   expect(nextPage.enabled).toBeFalsy();
   model.survey.setValue("q1", 2);
   expect(pageList.actions[1].enabled).toBeTruthy();
   expect(nextPage.enabled).toBeTruthy();
   model.survey.setValue("q1", 3);
-  expect(pageList.actions[1].enabled).toBeFalsy();
+  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   expect(nextPage.enabled).toBeFalsy();
 });
 test("Show/hide device similator", (): any => {
@@ -214,14 +214,33 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
   expect(pagesActions).toHaveLength(3);
   expect(pagesActions[0].enabled).toBeTruthy();
   expect(pagesActions[1].enabled).toBeTruthy();
-  expect(pagesActions[2].enabled).toBeFalsy();
+  expect(pagesActions[2].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(pagesActions[1].enabled).toBeFalsy();
+  expect(pagesActions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
   expect(pagesActions[1].enabled).toBeTruthy();
   expect(pagesActions[2].visible).toEqual(true);
+});
+test("Hide page actions if survey is not in running state", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3" }
+    ]
+  };
+  const model = getTestModel(creator);
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
+  model.survey.showPreview();
+  expect(model.pageActions[1].visible).toBeFalsy();
+  expect(model.pageActions[2].visible).toBeFalsy();
+  model.survey.cancelPreview();
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
 });
 test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", (): any => {
   var creator = new CreatorTester();

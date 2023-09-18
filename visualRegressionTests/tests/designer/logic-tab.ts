@@ -139,6 +139,39 @@ test("Check logic error notifier", async (t) => {
   });
 });
 
+test("Check logic dropdown", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const patchNotifierLifeTime = ClientFunction(() => {
+      window["creator"].notifier.timeout = 30000;
+    });
+    await t.resizeWindow(1920, 900);
+    await patchNotifierLifeTime();
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "q1"
+            },
+            {
+              "type": "text",
+              "name": "q2",
+            },
+          ]
+        }
+      ]
+    });
+    await t
+      .click(getTabbedMenuItemByText(creatorTabLogicName))
+      .click(addNewRuleSelector)
+      .click(Selector(".svc-logic-operator--question"));
+    await takeElementScreenshot("logic-dropdown.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
 test("Check logic Manual Entry", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);

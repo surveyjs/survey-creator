@@ -1,48 +1,23 @@
-import { notShortCircuitAnd } from "../../utils/utils";
-import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization, getLocString } from "../../editorLocalization";
-import { simulatorDevices } from "../simulator";
-import { ThemeSurveyTabViewModel } from "./theme";
+import { editorLocalization } from "../../editorLocalization";
+import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
+import { settings } from "../../creator-settings";
+import { PredefinedThemes, Themes, getThemeFullName } from "./themes";
 
-export class TabThemePlugin implements ICreatorPlugin {
-  private deviceSelectorAction: Action;
-  private orientationSelectorAction: Action;
-  private invisibleToggleAction: Action;
+export class ThemeTabPlugin implements ICreatorPlugin {
   private testAgainAction: Action;
-  private designerAction: Action;
-  private prevPageAction: Action;
-  private nextPageAction: Action;
+  private themeSettingsAction: Action;
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
+  private _availableThemes = PredefinedThemes;
 
-  public model: ThemeSurveyTabViewModel;
-
-  private setDevice(newVal: string) {
-    this.model.simulator.device = newVal;
-    this.model.simulator.resetZoomParameters();
-    let currentType = simulatorDevices[this.model.simulator.device].deviceType;
-    this.orientationSelectorAction.enabled = currentType != "desktop";
-    this.deviceSelectorAction.iconName = "icon-device-" + currentType;
-    this.deviceSelectorAction.title = getLocString("pe.simulator");
-  }
-  private updateActions() {
-    if (this.creator.showSimulatorInTestSurveyTab) {
-      this.setDevice(this.model.simulator.device);
-      this.deviceSelectorAction.data.selectedItem = { id: this.model.simulator.device };
-      this.orientationSelectorAction.title = getLocString("pe.portraitOrientation");
-    }
-
-    if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
-      this.invisibleToggleAction.visible = this.model.isRunning;
-    }
-  }
+  public model: ThemeBuilder;
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
@@ -52,12 +27,13 @@ export class TabThemePlugin implements ICreatorPlugin {
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
   }
   public activate(): void {
-    this.model = new ThemeSurveyTabViewModel(this.creator, this.simulatorTheme);
+    this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
+    this.themeSettingsAction.visible = true;
     this.resetTheme.visible = true;
     this.importAction.visible = true;
     this.exportAction.visible = true;
@@ -68,34 +44,75 @@ export class TabThemePlugin implements ICreatorPlugin {
       showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
     };
     this.model.testAgainAction = this.testAgainAction;
-    this.model.prevPageAction = this.prevPageAction;
-    this.model.nextPageAction = this.nextPageAction;
+    this.model.availableThemes = this.availableThemes;
     this.model.initialize(this.creator.JSON, options);
-
-    this.updateActions();
 
     this.model.show();
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "isRunning") {
-        this.invisibleToggleAction && (this.invisibleToggleAction.visible = this.model.isRunning);
         this.testAgainAction.visible = !this.model.isRunning;
       }
+    });
+    this.model.onThemeSelected.add((sender, options) => {
+      this.onThemeSelected.fire(this, options);
+    });
+    this.model.onThemeModified.add((sender, options) => {
+      this.onThemeModified.fire(this, options);
+    });
+    this.model.onCanModifyTheme.add((sender, options) => {
+      this.onCanModifyTheme.fire(this, options);
     });
   }
   public deactivate(): boolean {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
+      this.model.onPropertyChanged.clear();
+      this.model.onThemeSelected.clear();
+      this.model.onThemeModified.clear();
+      this.model.onCanModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
     }
     this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
+    this.themeSettingsAction.visible = false;
     this.resetTheme.visible = false;
     this.importAction.visible = false;
     this.exportAction.visible = false;
-    this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
+  }
+
+  public saveToFileHandler = (fileName: string, blob: Blob) => {
+    if (!window) return;
+    if (window.navigator["msSaveOrOpenBlob"]) {
+      window.navigator["msSaveBlob"](blob, fileName);
+    } else {
+      const elem = window.document.createElement("a");
+      elem.href = window.URL.createObjectURL(blob);
+      elem.download = fileName;
+      document.body.appendChild(elem);
+      elem.click();
+      document.body.removeChild(elem);
+    }
+  }
+
+  public exportToFile(fileName: string) {
+    const themeData = JSON.stringify(this.creator.theme, null, 4);
+    const themeBlob = new Blob([themeData], { type: "application/json" });
+    this.saveToFileHandler(fileName, themeBlob);
+  }
+  public importFromFile(file: File, callback?: (theme: ITheme) => void) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const theme: ITheme | any = JSON.parse(fileReader.result as string);
+      this.addTheme(theme);
+      if (this.model) {
+        this.model.setTheme(theme);
+      }
+      callback && callback(theme);
+    };
+    fileReader.readAsText(file);
   }
 
   public createActions(): Array<Action> {
@@ -109,86 +126,6 @@ export class TabThemePlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
-
-    if (this.creator.showSimulatorInTestSurveyTab) {
-      const deviceSelectorItems = Object.keys(simulatorDevices)
-        .filter((key) => !!simulatorDevices[key].title)
-        .map((key) => ({ id: key, title: simulatorDevices[key].title }));
-      this.deviceSelectorAction = createDropdownActionModel({
-        id: "deviceSelector",
-        iconName: "icon-device-desktop",
-        mode: "small",
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSimulatorInTestSurveyTab);
-        }),
-      }, {
-        items: deviceSelectorItems,
-        allowSelection: true,
-        onSelectionChanged: (item: any) => { this.setDevice(item.id); },
-        horizontalPosition: "center",
-        onHide: () => { this.deviceSelectorAction.enabled = true; },
-        onShow: () => { this.deviceSelectorAction.enabled = false; }
-      });
-      items.push(this.deviceSelectorAction);
-
-      this.orientationSelectorAction = new Action({
-        id: "orientationSelector",
-        iconName: "icon-device-rotate",
-        mode: "small",
-        visible: <any>new ComputedUpdater<boolean>(() => {
-          return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSimulatorInTestSurveyTab);
-        }),
-        action: () => {
-          this.model.simulator.landscape = !this.model.simulator.landscape;
-          this.orientationSelectorAction.title = getLocString(!this.model.simulator.landscape ? "pe.landscapeOrientation" : "pe.portraitOrientation");
-        }
-      });
-      items.push(this.orientationSelectorAction);
-    }
-    if (this.creator.showInvisibleElementsInTestSurveyTab) {
-      this.invisibleToggleAction = new Action({
-        id: "showInvisible",
-        iconName: "icon-invisible-items",
-        mode: "small",
-        needSeparator: <any>new ComputedUpdater<boolean>(() => {
-          return !this.creator.isMobileView;
-        }),
-        locTitleName: "ts.showInvisibleElements",
-        visible: false,
-        action: () => {
-          this.model.showInvisibleElements = !this.model.showInvisibleElements;
-          this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
-          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
-        }
-      });
-      items.push(this.invisibleToggleAction);
-    }
-
-    this.designerAction = new Action({
-      id: "svd-designer",
-      iconName: "icon-preview",
-      needSeparator: true,
-      action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "theme"),
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "theme");
-      }),
-      locTitleName: "ed.designer",
-      showTitle: false
-    });
-
-    this.prevPageAction = new Action({
-      id: "prevPage",
-      iconName: "icon-arrow-left_16x16",
-      visible: false
-    });
-
-    this.nextPageAction = new Action({
-      id: "nextPage",
-      iconName: "icon-arrow-right_16x16",
-      visible: false
-    });
-
     this.resetTheme = new Action({
       id: "resetTheme",
       iconName: "icon-reset",
@@ -203,6 +140,23 @@ export class TabThemePlugin implements ICreatorPlugin {
       }
     });
     items.push(this.resetTheme);
+
+    this.themeSettingsAction = new Action({
+      id: "svc-theme-settings",
+      iconName: "icon-theme",
+      action: () => {
+        if (!this.creator.showSidebar) {
+          this.creator.setShowSidebar(true, true);
+        }
+      },
+      active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
+      pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
+      locTitleName: "ed.themeSettings",
+      locTooltipName: "ed.themeSettingsTooltip",
+      visible: false,
+      showTitle: false
+    });
+    items.push(this.themeSettingsAction);
 
     this.importAction = new Action({
       id: "svc-theme-import",
@@ -220,7 +174,9 @@ export class TabThemePlugin implements ICreatorPlugin {
           this.inputFileElement.type = "file";
           this.inputFileElement.style.display = "none";
           this.inputFileElement.onchange = () => {
-            this.model.importFromFileUI(this.inputFileElement);
+            if (this.inputFileElement.files.length < 1) return;
+            this.importFromFile(this.inputFileElement.files[0]);
+            this.inputFileElement.value = "";
           };
         }
         this.inputFileElement.click();
@@ -237,7 +193,7 @@ export class TabThemePlugin implements ICreatorPlugin {
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
-        this.model.exportToFileUI();
+        this.exportToFile(settings.theme.exportFileName);
       }
     });
     items.push(this.exportAction);
@@ -246,10 +202,45 @@ export class TabThemePlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.testAgainAction);
-    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
-    this.creator.footerToolbar.actions.push(this.prevPageAction);
-    this.creator.footerToolbar.actions.push(this.nextPageAction);
-    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.creator.footerToolbar.actions.push(this.resetTheme);
   }
+
+  public get availableThemes() {
+    return [].concat(this._availableThemes);
+  }
+  public set availableThemes(availebleThemes: string[]) {
+    this._availableThemes = availebleThemes || [];
+    if (!!this.model) {
+      this.model.availableThemes = availebleThemes;
+    }
+  }
+
+  public addTheme(theme: ITheme): string {
+    const fullThemeName = getThemeFullName(theme);
+    Themes[fullThemeName] = theme;
+    if (this._availableThemes.indexOf(theme.themeName) === -1) {
+      this.availableThemes = this.availableThemes.concat([theme.themeName]);
+    }
+    return fullThemeName;
+  }
+  public removeTheme(fullThemeName: string): void {
+    const themeToDelete = Themes[fullThemeName];
+    if (!!themeToDelete) {
+      delete Themes[fullThemeName];
+      const registeredThemeNames = Object.keys(Themes);
+      let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
+      if (!themeModificationsExist) {
+        const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
+        if (themeIndex !== -1) {
+          const availableThemes = this.availableThemes;
+          availableThemes.splice(themeIndex, 1);
+          this.availableThemes = availableThemes;
+        }
+      }
+    }
+  }
+
+  public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
+  public onThemeModified = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
+  public onCanModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, canModify: boolean }>();
 }

@@ -118,7 +118,8 @@ export class MatrixCellWrapperViewModel extends Base {
       toggleHovered(event, element);
     }
   }
-  public dispose() {
+  public dispose(): void {
     this.creator.onSelectedElementChanged.remove(this.onSelectionChanged);
+    super.dispose();
   }
 }

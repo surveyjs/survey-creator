@@ -271,8 +271,10 @@ export class SurveyLogicItem {
     this.applyExpression(expression, false);
   }
   public renameQuestion(oldName: string, newName: string): void {
-    if (!oldName || !newName) return;
-    this.renameQuestionInExpression(oldName, newName, [settings.logic.closeBracket, ".", "["]);
+    if (!oldName || !newName || oldName === newName) return;
+    ["", "panel.", "row."].forEach(prefix =>
+      this.renameQuestionInExpression(prefix + oldName, prefix + newName, [settings.logic.closeBracket, ".", "["])
+    );
     var ops = this.actions;
     for (var i = 0; i < ops.length; i++) {
       ops[i].renameQuestion(oldName, newName);

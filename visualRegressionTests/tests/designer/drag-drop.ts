@@ -218,6 +218,34 @@ test("Choices: Mobile", async (t) => {
   });
 });
 
+test("Choices: Ranking: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "ranking",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values-ranking--mobile.png", Row, t, comparer);
+  });
+});
+
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
@@ -462,5 +490,37 @@ test("Toolbox Custom Component Icon", async (t) => {
     await takeElementScreenshot("drag-drop-toolbox-custom-component-icon.png", Panel, t, comparer);
 
     await changeIconRatingForToolbox("icon-rating");
+  });
+});
+
+test("Drag Drop (choices): scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 500);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "question1",
+              choices: ["Item 1", "Item 2"]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    await patchDragDropToDisableDrop();
+
+    const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
+    const CheckboxItem = Selector("[aria-label='Checkboxes']");
+    await t
+      .hover(CheckboxItem)
+      .dragToElement(CheckboxItem, newGhostPagePage, { speed: 0.5 });
+
+    await takeElementScreenshot("drag-drop-scroll.png", newGhostPagePage, t, comparer);
   });
 });
