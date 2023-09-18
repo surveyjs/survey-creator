@@ -26,13 +26,11 @@ export class CreatorResponsivityManager {
     this.creator.showTabs = false;
     this.creator.showToolbar = false;
     this.creator.isMobileView = true;
-    this.creator.survey.setIsMobile(true);
   }
   private resetMobileView() {
     this.creator.showTabs = undefined;
     this.creator.showToolbar = undefined;
     this.creator.isMobileView = undefined;
-    this.creator.survey.setIsMobile(false);
   }
   private procesShowToolbox(toolboxVisible: boolean) {
     if (toolboxVisible && !this.creator.showToolbox && this.prevShowToolbox !== undefined) {
