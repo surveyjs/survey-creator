@@ -2056,7 +2056,7 @@ export class CreatorBase extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
+  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
@@ -2068,7 +2068,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model: this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {

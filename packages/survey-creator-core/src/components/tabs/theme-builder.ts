@@ -181,7 +181,7 @@ export class ThemeBuilder extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme");
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this);
     newSurvey.setCss(theme, false);
     newSurvey.fitToContainer = true;
     this.simulator.survey = newSurvey;
@@ -334,7 +334,7 @@ export class ThemeBuilder extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor");
+    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor", this);
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
