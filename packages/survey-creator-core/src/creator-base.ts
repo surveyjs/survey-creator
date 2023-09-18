@@ -1714,6 +1714,7 @@ export class CreatorBase extends Base
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = defaultV2Css;
+    survey.setIsMobile(!!this.isMobileView);
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -2285,7 +2286,7 @@ export class CreatorBase extends Base
   }
   private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
     const result = SurveyHelper.getAllElements(this.survey, isPanel);
-    if(includeNewItems) {
+    if (includeNewItems) {
       SurveyHelper.addElements(this.newPanels, isPanel, result);
       SurveyHelper.addElements(this.newQuestions, isPanel, result);
     }
@@ -2319,8 +2320,8 @@ export class CreatorBase extends Base
     } else {
       this.newQuestions.push(element);
       const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
-        (Array.isArray(element["detailElements"]) ? element["detailElements"]: undefined);
-      if(els) {
+        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
+      if (els) {
         els.forEach(el => this.setNewNamesCore(el));
       }
     }
@@ -3381,7 +3382,11 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
-  @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: false, onSet: (val, creator: CreatorBase) => {
+      creator.survey.setIsMobile(!!val);
+    }
+  }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
   /**
    * Specifies Toolbox location.

@@ -339,6 +339,36 @@ test("Choices (Tagbox): Layout", async (t) => {
     await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
   });
 });
+test("Choices (Checkbox): Layout small screen", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 900);
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4"
+              ],
+              "hasOther": true,
+              "colCount": 2
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-checkbox-layout-small-screen.png", QRoot, t, comparer);
+  });
+});
 
 test("Placeholder", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
