@@ -246,6 +246,34 @@ test("Choices: Ranking: Mobile", async (t) => {
   });
 });
 
+test("Choices: DropDown: Mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(390, 844);
+
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "dropdown",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const Row = Selector(".sd-row").filterVisible();
+    await takeElementScreenshot("drag-drop-item-values-dropdown--mobile.png", Row, t, comparer);
+  });
+});
+
 test("Matrix: Property Grid: Choices", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);

@@ -256,7 +256,8 @@
 .svc-creator--mobile .svc-tab-designer {
 
   .svc-question__content--ranking,
-  .sd-selectbase {
+  .sd-selectbase,
+  .svc-question__dropdown-choices {
     [data-sv-drop-target-item-value] .svc-item-value-controls {
       min-width: initial;
     }
@@ -283,7 +284,8 @@
 .svc-creator--touch:not(.svc-creator--mobile) .svc-tab-designer {
 
   .svc-question__content--ranking,
-  .sd-selectbase {
+  .sd-selectbase,
+  .svc-question__dropdown-choices {
 
     .svc-item-value-controls__drag-icon {
       visibility: visible;
