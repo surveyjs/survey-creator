@@ -186,6 +186,12 @@ export class ThemeBuilder extends Base {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this);
     newSurvey.setCss(theme, false);
     newSurvey.fitToContainer = true;
+    newSurvey.addLayoutElement({
+      id: "complete-customization",
+      container: "completePage" as any,
+      component: "svc-complete-page",
+      data: this
+    });
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);

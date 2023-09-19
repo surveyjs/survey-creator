@@ -2,12 +2,9 @@
 
 .svd-test-results {
   font-family: $font-family;
-  width: 80%;
-  margin: auto;
-  margin-bottom: calcSize(5);
-  background-color: $background;
-  box-shadow: $shadow-small;
   border-radius: 4px;
+  box-shadow: inset 0px 1px 0px 0px var(--sjs-border-inside, var(--border-inside, rgba(0, 0, 0, 0.16)));
+  padding: calc(12 * var(--sjs-base-unit, var(--base-unit, 8px)));
 
   .svd-test-results__header {
     display: flex;
@@ -17,10 +14,12 @@
     font-size: calcSize(2);
     color: $foreground-light;
     border-bottom: 2px solid $border-light;
+    background-color: $background;
 
     .svd-test-results__header-text {
       margin: 0;
     }
+
     .svd-test-results__header-types {
       display: flex;
       gap: calcSize(1);
@@ -34,12 +33,17 @@
     overflow: auto;
     user-select: text;
     white-space: pre-wrap;
+    background-color: $background;
   }
+
   .svd-test-results__table {
+    background-color: $background;
     width: 100%;
+    box-shadow: $shadow-small;
+
     table {
       width: 100%;
-      border-collapse: collapse; 
+      border-collapse: collapse;
 
       .svd-test-results__marker {
         position: absolute;
@@ -55,7 +59,7 @@
 
         &.svd-test-results__marker--expanded .sv-svg-icon {
           transform-origin: center;
-          transform: rotate(90deg) ;
+          transform: rotate(90deg);
         }
       }
 
@@ -84,6 +88,7 @@
           width: 50%;
           font-weight: 600;
         }
+
         &:nth-child(2) {
           width: 50%;
           padding-right: calcSize(3);

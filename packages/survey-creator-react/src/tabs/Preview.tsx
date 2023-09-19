@@ -12,7 +12,7 @@ import { SurveyResults } from "../Results";
 
 export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, any> {
   private get model(): Action {
-    return this.props.button;
+    return this.props.model.testAgainAction;
   }
   protected getStateElement(): Base {
     return this.model;
@@ -35,7 +35,7 @@ export class TabPreviewTestSurveyAgainComponent extends SurveyElementBase<any, a
     </div>);
   }
 }
-ReactElementFactory.Instance.registerElement("svc-tab-preview-test-again", (props) => {
+ReactElementFactory.Instance.registerElement("svc-complete-page", (props) => {
   return React.createElement(TabPreviewTestSurveyAgainComponent, props);
 });
 
@@ -56,7 +56,6 @@ export class TabPreviewSurveyComponent extends SurveyElementBase<any, any> {
       <div className={tabContentClassName}>
         <div className="svc-plugin-tab__content">
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
-          {!this.model.isRunning ? <TabPreviewTestSurveyAgainComponent button={this.model.testAgainAction} /> : null}
           {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}
         </div>
         {this.getBottomToolbar()}
