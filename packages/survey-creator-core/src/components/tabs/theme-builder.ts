@@ -141,7 +141,9 @@ export class ThemeBuilder extends Base {
     try {
       this.themeName = theme.themeName || this.themeName;
       this.themePalette = theme.colorPalette || this.themePalette;
-      this.themeMode = theme.isPanelless === true ? "lightweight" : this.themeMode;
+      if (theme.isPanelless !== undefined) {
+        this.themeMode = theme.isPanelless === true ? "lightweight" : "panels";
+      }
       this.backgroundImage = theme.backgroundImage || this.backgroundImage;
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
