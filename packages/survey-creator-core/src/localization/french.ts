@@ -142,7 +142,7 @@ var frenchTranslation = {
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
-    addNewQuestion: "Ajouter {0}",
+    addNewQuestion: "Ajouter Question",
     selectPage: "Sélectionner une page...",
     carryForwardChoicesCopied: "Les choix sont copiés à partir de",
     htmlPlaceHolder: "Le contenu HTML se trouvera ici.",
