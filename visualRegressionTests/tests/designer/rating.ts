@@ -116,6 +116,8 @@ test("Rating adorners with comment", async (t) => {
 
 test("Multi row rating adorner", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    (jsonMulti as any).pages[0].elements[0].rateType = "labels";
+    (jsonMulti as any).pages[0].elements[1].rateType = "labels";
     await setJSON(jsonMulti);
     await t.resizeWindow(1200, 900);
 
