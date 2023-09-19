@@ -694,45 +694,45 @@ export class CreatorBase extends Base
     * 
     * Depending on the `options.type` value, the `options` object contains parameters listed below:
     * 
-    * `options.type`: `"ADDED_FROM_TOOLBOX"`\
+    * `options.type`: `"ADDED_FROM_TOOLBOX"`
     * - `options.question` - An added question.
     * 
-    * `options.type`: `"PAGE_ADDED"`\
+    * `options.type`: `"PAGE_ADDED"`
     * - `options.newValue` - An added page.
     *
-    * `options.type`: `"PAGE_MOVED"`\
+    * `options.type`: `"PAGE_MOVED"`
     * - `options.page` - A moved page.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"QUESTION_CONVERTED"`\
+    * `options.type`: `"QUESTION_CONVERTED"`
     * - `options.className` - The name of a class to which a question has been converted.
     * - `options.oldValue` - An object of a previous class.
     * - `options.newValue` - An object of a class specified by `options.className`.
     *
-    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`\
+    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
     * - `options.question` - A question that has been edited in a pop-up editor.
     *
-    * `options.type`: `"PROPERTY_CHANGED"`\
+    * `options.type`: `"PROPERTY_CHANGED"`
     * - `options.name` - The name of the changed property.
     * - `options.target` - An object that contains the changed property.
     * - `options.oldValue` - A previous value of the changed property.
     * - `options.newValue` - A new value of the changed property.
     *
-    * `options.type`: `"ELEMENT_REORDERED"`\
+    * `options.type`: `"ELEMENT_REORDERED"`
     * - `options.arrayName` - The name of the changed array.
     * - `options.parent` - An object that contains the changed array.
     * - `options.element` - A reordered element.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"OBJECT_DELETED"`\
+    * `options.type`: `"OBJECT_DELETED"`
     * - `options.target` - A deleted object.
     *
-    * `options.type`: `"VIEW_TYPE_CHANGED"`\
+    * `options.type`: `"VIEW_TYPE_CHANGED"`
     * - `options.newType` - A current view: `"editor"` or `"designer"`.
     *
-    * `options.type`: `"DO_DROP"`\
+    * `options.type`: `"DO_DROP"`
     * - `options.page` - A parent page of the dragged element.
     * - `options.source` - A dragged element.
     * - `options.target` - A drop target.
@@ -2068,7 +2068,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model: this.currentPlugin?.model });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
