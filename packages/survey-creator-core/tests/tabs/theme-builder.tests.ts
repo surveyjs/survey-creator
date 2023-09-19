@@ -1184,3 +1184,29 @@ test("onCanModifyTheme events + use creator.readOnly", (): any => {
   expect(primaryBackColor.isReadOnly).toBeFalsy();
   expect(backgroundDimColor.isReadOnly).toBeFalsy();
 });
+
+test("themeMode is switching to panelless and back", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.readOnly = true;
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  const themeMode = themeEditorSurvey.getQuestionByName("themeMode");
+
+  expect(themeChooser.value).toBe("default");
+  expect(themeMode.value).toBe("panels");
+
+  themeBuilder.loadTheme({ isPanelless: true });
+  expect(themeChooser.value).toBe("default");
+  expect(themeMode.value).toBe("lightweight");
+
+  themeBuilder.loadTheme({ isPanelless: undefined });
+  expect(themeChooser.value).toBe("default");
+  expect(themeMode.value).toBe("lightweight");
+
+  themeBuilder.loadTheme({ isPanelless: false });
+  expect(themeChooser.value).toBe("default");
+  expect(themeMode.value).toBe("panels");
+});
