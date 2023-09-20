@@ -93,13 +93,8 @@ test("Theme builder initialization", (): any => {
   expect(themeEditor.getQuestionByName("backgroundOpacity").value).toEqual(100);
   expect(themeEditor.getQuestionByName("panelBackgroundTransparency").value).toEqual(100);
   expect(themeEditor.getQuestionByName("questionBackgroundTransparency").value).toEqual(100);
-  expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("16px");
-
   expect(themeEditor.getQuestionByName("commonScale").value).toEqual(100);
-  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("8px");
-
   expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(4);
-  expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("4px");
 
   const colorQuestions = themeEditor.getAllQuestions().filter(q => q.getType() === "color");
   expect(colorQuestions[0].choices.length).toEqual(7);
@@ -116,13 +111,13 @@ test("Theme builder panelBackgroundTransparency", (): any => {
   const panelBackgroundTransparency = themeEditor.getQuestionByName("panelBackgroundTransparency");
 
   expect(panelBackgroundTransparency.value).toEqual(100);
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-question-background"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-question-background"]).toBeUndefined();
 
   panelBackgroundTransparency.value = 60;
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-question-background"]).toEqual("rgba(255, 255, 255, 0.6)");
 
   themeEditor.getQuestionByName("questionPanel").contentPanel.getQuestionByName("backcolor").value = "#eeeeee";
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-question-background"]).toEqual("rgba(238, 238, 238, 0.6)");
 });
 
 test("Theme builder questionBackgroundTransparency", (): any => {
@@ -135,13 +130,13 @@ test("Theme builder questionBackgroundTransparency", (): any => {
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
 
   questionBackgroundTransparency.value = 60;
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(249, 249, 249, 0.6)");
 
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 });
 
 test("Theme builder: survey settings", (): any => {
@@ -208,10 +203,10 @@ test("Theme builder: composite question fontSettings", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
 
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("700");
@@ -220,10 +215,10 @@ test("Theme builder: composite question fontSettings", (): any => {
 
   surveyTitleFontSettings.value = { family: "Open Sans", weight: "500", color: "#161616", size: 32 };
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-weight"]).toEqual("500");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("500");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
 
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("500");
@@ -241,36 +236,36 @@ test("Theme builder: composite question values are lost", (): any => {
   const surveyTitleFontSettings = themeEditor.getQuestionByName("surveyTitle");
   const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
   surveyTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#161616", size: 32 };
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
   pageTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#101010", size: 28 };
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-family"]).toEqual("Open Sans");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
 });
 
 test("fontsettings: fontsettingsToCssVariable", () => {
@@ -344,9 +339,9 @@ test("Theme builder: composite question elementSettings", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
 
   expect(questionPanelSettings.contentPanel.getQuestionByName("backcolor").value).toEqual("rgba(255, 255, 255, 1)");
   expect(questionPanelSettings.contentPanel.getQuestionByName("hovercolor").value).toEqual("rgba(248, 248, 248, 1)");
@@ -355,9 +350,9 @@ test("Theme builder: composite question elementSettings", (): any => {
 
   questionPanelSettings.value = { backcolor: "#ff44ff", hovercolor: "#969696", corner: 5 };
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(255, 68, 255, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(150, 150, 150, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(255, 68, 255, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(150, 150, 150, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("5px");
 
   expect(questionPanelSettings.contentPanel.getQuestionByName("backcolor").value).toEqual("rgba(255, 68, 255, 1)");
   expect(questionPanelSettings.contentPanel.getQuestionByName("hovercolor").value).toEqual("rgba(150, 150, 150, 1)");
@@ -418,14 +413,14 @@ test("Theme builder reset to default", (): any => {
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
 
   questionBackgroundTransparency.value = 60;
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
   themeSurveyTab.resetTheme();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();// rgba(249, 249, 249, 1)
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();// rgba(249, 249, 249, 1)
 });
 
 test("Theme builder themeMode not change modified values ", (): any => {
@@ -439,15 +434,15 @@ test("Theme builder themeMode not change modified values ", (): any => {
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   expect(questionBackgroundTransparency.value).toEqual(100);
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
 
   questionBackgroundTransparency.value = 60;
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
   expect(themeMode.value).toEqual("panels");
 
   themeMode.value = "lightweight";
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 });
 
 test("Check createBoxShadow and parseBoxShadow functions", () => {
@@ -695,12 +690,12 @@ test("Theme builder export value from composite question", (): any => {
 
   expect(questionDimLightBackground.value).toEqual("rgba(249, 249, 249, 1)");
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(249, 249, 249, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(249, 249, 249, 1)");
 
   themeEditor.getQuestionByName("themeName").value = "contrast";
   expect(questionDimLightBackground.value).toEqual("rgba(255, 216, 77, 1)");
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value).toBe("rgba(255, 216, 77, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-general-backcolor-dim-light"]).toBe("rgba(255, 216, 77, 1)");
 });
 
 test("import theme from file", (done) => {
@@ -772,9 +767,9 @@ test("Theme builder: restore values of elementSettings from file", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toBeUndefined();
 
   expect(questionPanelSettings.value).toEqual({
     "backcolor": "rgba(255, 255, 255, 1)",
@@ -787,9 +782,9 @@ test("Theme builder: restore values of elementSettings from file", (): any => {
   assign(newTheme, themeFromFile);
   themeSurveyTab.loadTheme(newTheme as any);
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(253, 255, 148, 0.5)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(237, 238, 186, 1)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("6px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-backcolor"]).toEqual("rgba(253, 255, 148, 0.5)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-hovercolor"]).toEqual("rgba(237, 238, 186, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-questionpanel-cornerRadius"]).toEqual("6px");
 
   expect(questionPanelSettings.value).toEqual({
     "backcolor": "rgba(253, 255, 148, 0.5)",
@@ -807,10 +802,10 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
 
   expect(questionTitleFontSettings.value).toEqual({
     "family": "Open Sans",
@@ -823,10 +818,10 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
   assign(newTheme, themeFromFile);
   themeSurveyTab.loadTheme(newTheme as any);
 
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-family"]).toEqual("Verdana, sans-serif");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-weight"]).toEqual("700");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(201, 90, 231, 0.91)");
-  expect(themeSurveyTab.currentTheme.cssVariables["--sjs-font-questiontitle-size"]).toEqual("18px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toEqual("Verdana, sans-serif");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toEqual("700");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toEqual("rgba(201, 90, 231, 0.91)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toEqual("18px");
 
   expect(questionTitleFontSettings.value).toEqual({
     "family": "Verdana, sans-serif",
@@ -883,6 +878,167 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(4);
+
+  themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
+
+  expect(creator.isThemePristine).toBeFalsy();
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(5);
+});
+
+test("Theme undo redo changes", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const question = themeEditor.getQuestionByName("--sjs-general-backcolor-dim");
+  const generalBackcolorDimColorQuestion = themeEditor.getQuestionByName("generalBackcolorDimColor");
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(question.value).toBe("rgba(243, 243, 243, 1)");
+  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
+
+  question.value = "#ff0000";
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(question.value).toBe("#ff0000");
+  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
+
+  themePlugin.undo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(question.value).toBe("#f3f3f3");
+  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
+
+  themePlugin.redo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(question.value).toBe("#ff0000");
+  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
+});
+
+test("Theme undo redo general settings", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const backgroundImageQuestion = themeEditor.getQuestionByName("backgroundImage");
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(backgroundImageQuestion.value).toBe(undefined);
+
+  backgroundImageQuestion.value = "some_url";
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(backgroundImageQuestion.value).toBe("some_url");
+
+  themePlugin.undo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(backgroundImageQuestion.value).toBe(undefined);
+
+  themePlugin.redo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(backgroundImageQuestion.value).toBe("some_url");
+});
+
+test("Theme undo redo calculated questions", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const accentColorQuestion = themeEditor.getQuestionByName("--sjs-primary-backcolor");
+  const accentColorDarkQuestion = themeEditor.getQuestionByName("--sjs-primary-backcolor-dark");
+  const accentColorLightQuestion = themeEditor.getQuestionByName("--sjs-primary-backcolor-light");
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
+  expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
+  expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
+
+  accentColorQuestion.value = "#2772cb";
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(accentColorQuestion.value).toBe("rgba(39, 114, 203, 1)");
+  expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
+  expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
+
+  themePlugin.undo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(accentColorQuestion.value).toBe("rgba(25, 179, 148, 1)");
+  expect(accentColorDarkQuestion.value).toBe("rgba(20, 164, 139, 1)");
+  expect(accentColorLightQuestion.value).toBe("rgba(25, 179, 148, 0.1)");
+
+  themePlugin.redo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(accentColorQuestion.value).toBe("rgba(39, 114, 203, 1)");
+  expect(accentColorDarkQuestion.value).toBe("rgba(36, 106, 188, 1)");
+  expect(accentColorLightQuestion.value).toBe("rgba(39, 114, 203, 0.1)");
+});
+
+test("Theme undo redo expression questions", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const commonFontSizeQuestion = themeEditor.getQuestionByName("commonFontSize");
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(commonFontSizeQuestion.value).toBe(100);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-size"]).toBe(undefined);
+
+  commonFontSizeQuestion.value = 150;
+
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(commonFontSizeQuestion.value).toBe(150);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-size"]).toBe("24px");
+
+  themePlugin.undo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(commonFontSizeQuestion.value).toBe(100);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-size"]).toBe("16px");
+
+  themePlugin.redo();
+  expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
+  expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
+  expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
+  expect(commonFontSizeQuestion.value).toBe(150);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-size"]).toBe("24px");
 });
 
 test("Theme builder: trigger responsiveness", (): any => {
@@ -918,11 +1074,11 @@ test("Theme builder restore PG editor", (): any => {
   const themeSurveyTab = themePlugin.model as ThemeBuilder;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
 
-  expect(themeEditor.getQuestionByName("--sjs-corner-radius").value).toEqual("20px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-corner-radius"]).toEqual("20px");
   expect(themeEditor.getQuestionByName("cornerRadius").value).toEqual(20);
-  expect(themeEditor.getQuestionByName("--sjs-base-unit").value).toEqual("9.6px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-base-unit"]).toEqual("9.6px");
   expect(themeEditor.getQuestionByName("commonScale").value).toEqual(120);
-  expect(themeEditor.getQuestionByName("--sjs-font-size").value).toEqual("17.6px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-size"]).toEqual("17.6px");
   expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
 });
 
@@ -1056,7 +1212,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   primaryBackColor.value = "#fefefe";
 
   expect(themePalette.value).toEqual("light");
-  expect(primaryBackColor.value).toEqual("#fefefe");
+  expect(primaryBackColor.value).toEqual("rgba(254, 254, 254, 1)"); // #fefefe
   expect(backgroundDimColor.value).toEqual("rgba(243, 243, 243, 1)");
   expect(themeBuilder.themeCssCustomizations).toStrictEqual({
     "--sjs-primary-backcolor": "#fefefe",
@@ -1066,7 +1222,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
 
   themePalette.value = "dark";
   expect(themePalette.value).toEqual("dark");
-  expect(primaryBackColor.value).toEqual("#fefefe");
+  expect(primaryBackColor.value).toEqual("rgba(254, 254, 254, 1)");
   expect(backgroundDimColor.value).toEqual("rgba(36, 36, 36, 1)");
   expect(themeBuilder.themeCssCustomizations).toStrictEqual({
     "--sjs-primary-backcolor": "#fefefe",
@@ -1151,9 +1307,9 @@ test("onThemeSelected + onThemeModified events", (): any => {
 
   primaryBackColor.value = "#ffffff";
   expect(creator.isThemePristine).toBeFalsy();
-  expect(pluginThemeModifiedCount).toBe(2); // TODO - it should be 1
+  expect(pluginThemeModifiedCount).toBe(1);
   expect(pluginThemeSelectedCount).toBe(1);
-  expect(builderThemeModifiedCount).toBe(2);
+  expect(builderThemeModifiedCount).toBe(1);
   expect(builderThemeSelectedCount).toBe(1);
 });
 
