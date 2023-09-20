@@ -1,4 +1,4 @@
-import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionDropdownModel, Serializer, SurveyModel } from "survey-core";
+import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, Serializer, SurveyModel } from "survey-core";
 import { ThemeBuilder } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -208,22 +208,22 @@ test("Theme builder: composite question fontSettings", (): any => {
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toBeUndefined();
 
-  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
+  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual(undefined);
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("700");
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(32);
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("family").value).toEqual("Open Sans");
 
-  surveyTitleFontSettings.value = { family: "Open Sans", weight: "500", color: "#161616", size: 32 };
+  surveyTitleFontSettings.value = { family: "Arial, sans-serif", weight: "500", size: 40 };
 
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Arial, sans-serif");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("500");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("40px");
 
-  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
+  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("color").value).toEqual(undefined);
   expect(surveyTitleFontSettings.contentPanel.getQuestionByName("weight").value).toEqual("500");
-  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(32);
-  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("family").value).toEqual("Open Sans");
+  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("size").value).toEqual(40);
+  expect(surveyTitleFontSettings.contentPanel.getQuestionByName("family").value).toEqual("Arial, sans-serif");
 });
 
 test("Theme builder: composite question values are lost", (): any => {
@@ -245,24 +245,24 @@ test("Theme builder: composite question values are lost", (): any => {
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
-  surveyTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#161616", size: 32 };
+  surveyTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
 
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Arial, sans-serif");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(254, 254, 254, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("40px");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 
-  pageTitleFontSettings.value = { family: "Open Sans", weight: "semiBold", color: "#101010", size: 28 };
+  pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#101010", size: 28 };
 
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-family"]).toEqual("Arial, sans-serif");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-weight"]).toEqual("semiBold");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(22, 22, 22, 1)");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("32px");
-  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toEqual("Open Sans");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-color"]).toEqual("rgba(254, 254, 254, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-surveytitle-size"]).toEqual("40px");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toEqual("Arial, sans-serif");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(16, 16, 16, 1)");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toEqual("28px");
@@ -270,20 +270,35 @@ test("Theme builder: composite question values are lost", (): any => {
 
 test("fontsettings: fontsettingsToCssVariable", () => {
   const survey = new SurveyModel({
-    elements: [{ type: "fontsettings", name: "questionTitle" }],
+    elements: [{
+      type: "fontsettings", name: "questionTitle",
+      defaultValue: {
+        family: "Open Sans",
+        color: "rgba(22, 22, 22, 1)",
+        weight: "700",
+        size: 32
+      }
+    }],
   });
   const question = survey.findQuestionByName("questionTitle");
+  let result = {};
+  fontsettingsToCssVariable(question, result);
+  expect(result).toEqual({});
+
+  (<QuestionCompositeModel>question).contentPanel.getQuestionByName("family").value = "Verdana, sans-serif";
+  fontsettingsToCssVariable(question, result);
+  expect(result).toEqual({ "--sjs-font-questiontitle-family": "Verdana, sans-serif" });
+
   question.value = {
     "family": "Verdana, sans-serif",
-    "weight": "700",
+    "weight": "800",
     "color": "rgba(201, 90, 231, 0.91)",
     "size": 18
   };
-  const result = {};
   fontsettingsToCssVariable(question, result);
   expect(result).toEqual({
     "--sjs-font-questiontitle-family": "Verdana, sans-serif",
-    "--sjs-font-questiontitle-weight": "700",
+    "--sjs-font-questiontitle-weight": "800",
     "--sjs-font-questiontitle-color": "rgba(201, 90, 231, 0.91)",
     "--sjs-font-questiontitle-size": "18px",
   });
@@ -362,20 +377,35 @@ test("Theme builder: composite question elementSettings", (): any => {
 
 test("elementSettings: elementSettingsToCssVariable", () => {
   const survey = new SurveyModel({
-    elements: [{ type: "elementsettings", name: "questionpanel" }],
+    elements: [{
+      type: "elementsettings", name: "questionpanel",
+      defaultValue: {
+        backcolor: "rgba(255, 255, 255, 1)",
+        hovercolor: "rgba(248, 248, 248, 1)",
+        corner: 4,
+        cornerRadius: "4px"
+      }
+    }],
   });
   const question = survey.findQuestionByName("questionpanel");
+  let result = {};
+  elementSettingsToCssVariable(question as Question, result);
+  expect(result).toEqual({});
+
+  (<QuestionCompositeModel>question).contentPanel.getQuestionByName("backcolor").value = "rgba(253, 255, 148, 0.5)";
+  elementSettingsToCssVariable(question as Question, result);
+  expect(result).toEqual({ "--sjs-questionpanel-backcolor": "rgba(253, 255, 148, 0.5)" });
+
   question.value = {
     "backcolor": "rgba(253, 255, 148, 0.5)",
     "hovercolor": "rgba(237, 238, 186, 1)",
-    "corner": 4,
+    "corner": 6,
   };
-  const result = {};
   elementSettingsToCssVariable(question as Question, result);
   expect(result).toEqual({
     "--sjs-questionpanel-backcolor": "rgba(253, 255, 148, 0.5)",
     "--sjs-questionpanel-hovercolor": "rgba(237, 238, 186, 1)",
-    "--sjs-questionpanel-cornerRadius": "4px"
+    "--sjs-questionpanel-cornerRadius": "6px"
   });
 });
 
@@ -738,14 +768,9 @@ test("export theme to file", (done): any => {
   themeEditor.getQuestionByName("questionTitle").contentPanel.getQuestionByName("size").value = 19;
 
   const expectations = {};
-  assign(expectations, Themes["default-light"].cssVariables, {
-    "--sjs-font-questiontitle-color": "rgba(0, 0, 0, 0.91)",
-    "--sjs-font-questiontitle-family": "Open Sans",
-    "--sjs-font-questiontitle-size": "19px",
-    "--sjs-font-questiontitle-weight": "600"
-  }
-  );
-  themePlugin.saveToFileHandler = (fileName: string, blob: Blob) => {
+  assign(expectations, Themes["default-light"].cssVariables, { "--sjs-font-questiontitle-size": "19px" });
+
+  themePlugin.saveToFileHandler = async (fileName: string, blob: Blob) => {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       expect(fileName).toBe(settings.theme.exportFileName);

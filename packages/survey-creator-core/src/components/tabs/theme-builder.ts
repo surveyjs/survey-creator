@@ -853,7 +853,6 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 32
                 }
@@ -864,7 +863,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "700",
                   size: 24
                 }
@@ -875,7 +874,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
                 }
@@ -892,6 +891,7 @@ export class ThemeBuilder extends Base {
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
                   hovercolor: "rgba(248, 248, 248, 1)",
+                  cornerRadius: "4px",
                   corner: 4
                 }
               },
@@ -923,7 +923,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "600",
                   size: 16,
                 }
@@ -934,7 +934,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
                 }
@@ -951,6 +951,7 @@ export class ThemeBuilder extends Base {
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
                   hovercolor: "rgba(248, 248, 248, 1)",
+                  cornerRadius: "4px",
                   corner: 4
                 }
               },
@@ -981,7 +982,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "400",
                   size: 16
                 }
