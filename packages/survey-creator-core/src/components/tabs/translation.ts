@@ -1,17 +1,17 @@
 import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, FunctionFactory,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
-  ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel } from "survey-core";
+  ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
+  PopupBaseViewModel, IDialogOptions, settings as surveySettings } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
-
 require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -626,7 +626,7 @@ export class Translation extends Base implements ITranslationLocales {
   public getEditLocale(): string { return this.editLocale; }
   public setEditMode(locale: string): void {
     this.editLocale = locale;
-    this.locales = [locale];
+    this.addLocale(locale);
   }
   public get isEditMode(): boolean { return !!this.editLocale; }
   public applyEditLocale(): void {
@@ -690,6 +690,10 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
+      if(findAction(options.actions, "remove-row")) {
+        const locale = options.question.value[options.row.index].name;
+        options.actions.push(new Action({ title: "Edit", action: () => this.showTranslationEditor(locale) }));
+      }
       updateMatixActionsClasses(options.actions);
     });
     return res;
@@ -872,7 +876,8 @@ export class Translation extends Base implements ITranslationLocales {
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
-    matrix.addColumn("default", this.getLocaleName(""));
+    const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
+    defaultColumn.readOnly = this.isEditMode;
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
     }
@@ -1182,8 +1187,15 @@ export class Translation extends Base implements ITranslationLocales {
     this.setSelectedLocales([]);
     this.reset();
   }
-  public createDialogTranslation(locale: string): TranslationEditor {
-    return new TranslationEditor(this.survey, locale, this.options);
+  public createTranslationEditor(locale: string): TranslationEditor {
+    const res = new TranslationEditor(this.survey, locale, this.options);
+    res.onApply = () => {
+      this.reset();
+    };
+    return res;
+  }
+  public showTranslationEditor(locale: string): void {
+    this.createTranslationEditor(locale).showDialog();
   }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
     if (!this.translateItemAfterRenderCallback) return;
@@ -1251,15 +1263,44 @@ export class Translation extends Base implements ITranslationLocales {
 export class TranslationEditor {
   private survey: SurveyModel;
   private translationValue: Translation;
+  private options: ISurveyCreatorOptions;
+  private locale: string;
+  public onApply: () => void;
   constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions) {
-    //this.survey = options.createSurvey(survey.toJSON(), "translation_dialog", this);
     this.survey = survey;
+    this.locale = locale;
+    this.options = options;
     this.translationValue = new Translation(this.survey, options, true);
     this.translation.setEditMode(locale);
+    this.translation.reset();
   }
   public get translation(): Translation { return this.translationValue; }
+  public showDialog(): void {
+    const popupModel: PopupBaseViewModel = surveySettings.showDialog(
+      <IDialogOptions>{
+        componentName: "survey",
+        data: {
+          survey: this.translation.stringsSurvey,
+          model: this.translation.stringsSurvey
+        },
+        onApply: (): boolean => {
+          this.apply();
+          return true;
+        },
+        onCancel: () => {
+          this.dispose();
+        },
+        cssClass: "sv-property-editor",
+        title: "Untranslated strings: " + this.translation.getLocaleName(this.locale), //TODO
+        displayMode: this.options.isMobileView ? "overlay" : "popup"
+      }, this.options.rootElement);
+    popupModel.locale = editorLocalization.currentLocale;
+  }
   public apply(): void {
     this.translation.applyEditLocale();
+    if(this.onApply) {
+      this.onApply();
+    }
     this.dispose();
   }
   public cancel(): void {
