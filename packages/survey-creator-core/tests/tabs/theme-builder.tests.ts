@@ -1366,3 +1366,20 @@ test("themeMode is switching to panelless and back", (): any => {
   expect(themeChooser.value).toBe("default");
   expect(themeMode.value).toBe("panels");
 });
+
+test("disable irrelevant settings", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const surveyTitle = themeEditorSurvey.getQuestionByName("surveyTitle");
+  const pageTitle = themeEditorSurvey.getQuestionByName("pageTitle");
+  const pageDescription = themeEditorSurvey.getQuestionByName("pageDescription");
+
+  expect(surveyTitle.isReadOnly).toBeTruthy();
+  expect(pageTitle.isReadOnly).toBeTruthy();
+  expect(pageDescription.isReadOnly).toBeTruthy();
+});
