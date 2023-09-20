@@ -48,6 +48,7 @@ export class TranslationItemBase extends Base {
     this.fireOnObjCreating();
   }
   public deleteLocaleStrings(locale: string): void { }
+  public applyEditLocale(locale: string): void { }
   protected fireOnObjCreating(obj: Base = null) {
     if (this.translation) {
       if (!obj) obj = this;
@@ -61,11 +62,12 @@ export class TranslationItemString extends Base {
     super();
     this.text = this.locString.getLocaleText(this.locale);
   }
+  public isReadOnly: boolean;
   @property() text: string;
   @property() placeholder: string;
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "text") {
+    if (!this.isReadOnly && name === "text") {
       this.locString.setLocaleText(this.locale, newValue);
     }
   }
@@ -131,9 +133,16 @@ export class TranslationItem extends TranslationItemBase {
         this.context
       );
   }
+  public applyEditLocale(locale: string): void {
+    const itemStr = this.values(locale);
+    if(!!itemStr && !!itemStr.text) {
+      this.setLocText(locale, itemStr.text);
+    }
+  }
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
       var val = new TranslationItemString(this.locString, loc);
+      val.isReadOnly = !!this.translation?.getEditLocale();
       if (!loc) {
         val.placeholder = this.defaultValue;
       }
@@ -236,6 +245,7 @@ export interface ITranslationLocales {
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
   canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
+  getEditLocale(): string;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
 
@@ -356,6 +366,9 @@ export class TranslationGroup extends TranslationItemBase {
   public deleteLocaleStrings(locale: string): void {
     this.items.forEach(item => item.deleteLocaleStrings(locale));
   }
+  public applyEditLocale(locale: string): void {
+    this.items.forEach(item => item.applyEditLocale(locale));
+  }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValuesLocale();
@@ -435,6 +448,8 @@ export class TranslationGroup extends TranslationItemBase {
     const locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    const editLocale = this.translation?.getEditLocale();
+    if(!!editLocale && !!locStr.getLocaleText(editLocale)) return null;
     if (!this.canShowProperty(property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
@@ -494,10 +509,14 @@ export class TranslationGroup extends TranslationItemBase {
     }
   }
   private createItemValuesLocale() {
+    const editMode = this.translation?.getEditLocale();
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
       var canAdd =
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
+      if(!!editMode && val.locText.getLocaleText(editMode)) {
+        canAdd = false;
+      }
       if (!canAdd) continue;
       var item = new TranslationItem(
         val.value,
@@ -603,6 +622,17 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   @property({ defaultValue: true }) isEmpty: boolean;
+  private editLocale: string;
+  public getEditLocale(): string { return this.editLocale; }
+  public setEditMode(locale: string): void {
+    this.editLocale = locale;
+    this.locales = [locale];
+  }
+  public get isEditMode(): boolean { return !!this.editLocale; }
+  public applyEditLocale(): void {
+    if(!this.isEditMode || !this.root) return;
+    this.root.applyEditLocale(this.editLocale);
+  }
 
   public makeObservable(onBaseObjCreating: (obj: Base) => void) {
     this.onBaseObjCreatingCallback = onBaseObjCreating;
@@ -1152,6 +1182,9 @@ export class Translation extends Base implements ITranslationLocales {
     this.setSelectedLocales([]);
     this.reset();
   }
+  public createDialogTranslation(locale: string): TranslationEditor {
+    return new TranslationEditor(this.survey, locale, this.options);
+  }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
     if (!this.translateItemAfterRenderCallback) return;
     if (Array.isArray(el)) {
@@ -1213,5 +1246,26 @@ export class Translation extends Base implements ITranslationLocales {
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
     super.dispose();
+  }
+}
+export class TranslationEditor {
+  private survey: SurveyModel;
+  private translationValue: Translation;
+  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions) {
+    //this.survey = options.createSurvey(survey.toJSON(), "translation_dialog", this);
+    this.survey = survey;
+    this.translationValue = new Translation(this.survey, options, true);
+    this.translation.setEditMode(locale);
+  }
+  public get translation(): Translation { return this.translationValue; }
+  public apply(): void {
+    this.translation.applyEditLocale();
+    this.dispose();
+  }
+  public cancel(): void {
+    this.dispose();
+  }
+  public dispose(): void {
+    this.translationValue.dispose();
   }
 }
