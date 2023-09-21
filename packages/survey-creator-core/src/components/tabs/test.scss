@@ -24,7 +24,7 @@ svc-tab-test {
     width: calcSize(33);
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 72px;
+    margin-bottom: calcSize(12);
     margin-top: 8px;
   }
 }

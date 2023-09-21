@@ -141,6 +141,8 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+  // border-bottom: 1px solid $border-inside;
+  box-shadow: inset 0px -1px 0px 0px $border-inside;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
