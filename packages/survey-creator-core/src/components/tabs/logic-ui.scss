@@ -295,3 +295,12 @@
 .svc-logic-tab__leave-apply-button {
   background-color: $red;
 }
+.sl-list {
+  .sv-list__filter {
+    padding-top: 0;
+  }
+
+  .sv-list__filter-icon {
+    top: calc(1.5 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  }
+}

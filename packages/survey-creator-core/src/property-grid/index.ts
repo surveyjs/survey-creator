@@ -108,7 +108,7 @@ export abstract class PropertyEditorSetupValue implements IPropertyEditorSetup {
   protected createSurvey(): SurveyModel {
     var json = this.getSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    return this.options.createSurvey(json, this.getSurveyCreationReason());
+    return this.options.createSurvey(json, this.getSurveyCreationReason(), this);
   }
   protected abstract getSurveyJSON(): any;
   protected abstract getSurveyCreationReason(): string;
@@ -953,7 +953,7 @@ export class PropertyGridModel {
     }
   }
   protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "property-grid");
+    return this.options.createSurvey(json, "property-grid", this);
   }
   protected getSurveyJSON(): any {
     var res = {};
@@ -1411,6 +1411,19 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
 
 }
 
+export class PropertyGridColorEditor extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return ["penColor", "backgroundColor"].indexOf(prop.name) > -1;
+  }
+  public getJSON(
+    obj: Base,
+    prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions
+  ): any {
+    const res: any = { type: "color", allowEmptyValue: true };
+    return res;
+  }
+}
 export class PropertyGridEditorNumber extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "number" || prop.type == "responsiveImageSize";
@@ -1793,6 +1806,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
+PropertyGridEditorCollection.register(new PropertyGridColorEditor());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

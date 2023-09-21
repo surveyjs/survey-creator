@@ -403,16 +403,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       ]
     };
   }
-  /*
-  protected createSurvey(): SurveyModel {
-    const res = super.createSurvey();
-    res.onUpdateQuestionCssClasses.add((sender: SurveyModel, options: any) => {
-      if (options.question.name !== "panel") return;
-      options.cssClasses.iconRemove = "svc-creator-condition__editor-remove";
-    });
-    return res;
-  }
-*/
   protected getSurveyCreationReason(): string {
     return "condition-builder";
   }

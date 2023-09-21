@@ -4,13 +4,58 @@ import {
   Action,
   SurveyModel,
   SurveyElement,
-  property
+  property,
+  actionModeType
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { settings } from "../creator-settings";
 
+export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  private setModeForActions(modes: any, defaultMode: actionModeType): void {
+    this.visibleActions.forEach((action) => {
+      action.mode = modes[action.id] || defaultMode;
+    });
+  }
+  private skipInputType(item: Action, dimension) {
+    return item.id != "convertInputType" ? dimension : 0;
+  }
+  private skipQuestionType(item: Action, dimension) {
+    return item.id != "convertInputType" && item.id != "convertTo" ? dimension : 0;
+  }
+  public fit(dimension: number, dotsItemSize: number) {
+    if (dimension <= 0) return;
+
+    this.dotsItem.visible = false;
+    const items = this.visibleActions;
+
+    if (dimension >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+      items.forEach(i => i.mode = "large");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
+      this.setModeForActions({ "convertInputType": "removed" }, "large");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipQuestionType(i, i.minDimension), this.getActionById("convertTo")?.maxDimension)) {
+      this.setModeForActions({ "convertInputType": "removed", "convertTo": "large" }, "small");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.minDimension), 0)) {
+      this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "small");
+      return;
+    }
+
+    this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "popup");
+    this.dotsItem.visible = true;
+    this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
+  }
+}
+
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: AdaptiveActionContainer;
+  public actionContainer: SurveyElementActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
@@ -31,7 +76,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.updateActionsProperties();
       }
     };
-    this.actionContainer = new AdaptiveActionContainer();
+    this.actionContainer = new SurveyElementActionContainer();
     this.actionContainer.dotsItem.iconSize = 16;
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     var actions: Array<Action> = [];
