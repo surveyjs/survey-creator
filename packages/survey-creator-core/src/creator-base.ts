@@ -883,6 +883,19 @@ export class CreatorBase extends Base
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
   /**
+   * Use this event to modify to automatically translate translation by using services as google cloud tranlation or MS translate API.
+   *
+   * The event handler accepts the following arguments:
+   *
+   * - `sender` - A Survey Creator instance that raised the event.
+   * - `options.fromLocale` - Locale for strings your want to translate. It is commonly the default locale.
+   * - `options.toLocale` - The locale you want to translate to
+   * - `options.stringsToTranslate` - A list of strings you need to translate.
+   * - `options.callback: (result: boolean, translatedStrings: Array<strings>)` - A callback function that you have to call after the translation is done. If you can't translate strings, you have to set 'false' as the first parameter. Otherwise you have to set `true` and the second parameter is the list of translated strings.
+   */
+  public onMachineTranslaton: CreatorEvent = new CreatorEvent();
+
+  /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
    * 
    * Parameters:
@@ -3130,6 +3143,15 @@ export class CreatorBase extends Base
     this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
+  getHasMachineTranslation() { return !this.onMachineTranslaton.isEmpty; }
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void {
+    if(!this.getHasMachineTranslation()) {
+      callback(false, undefined);
+    } else {
+      this.onMachineTranslaton.fire(this, { fromLocale: fromLocale, toLocale: toLocale, stringsToTranslate: strings, callback: callback });
+    }
+  }
+
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.

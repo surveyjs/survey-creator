@@ -192,6 +192,13 @@ export class TranslationItem extends TranslationItemBase {
   public deleteLocaleStrings(locale: string): void {
     this.setLocText(locale, undefined);
   }
+  public getDefaultLocaleText(): string {
+    let res = this.locString.getLocaleText("");
+    if(!res) {
+      res = this.getPlaceholder("");
+    }
+    return res;
+  }
   public getPlaceholder(locale: string): string {
     const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
     if (this.context instanceof SurveyModel) {
@@ -692,7 +699,8 @@ export class Translation extends Base implements ITranslationLocales {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
       if(findAction(options.actions, "remove-row")) {
         const locale = options.question.value[options.row.index].name;
-        options.actions.push(new Action({ title: "Edit", action: () => this.showTranslationEditor(locale) }));
+        //TOdo "Edit"
+        options.actions.push(new Action({ title: "Edit", location: "end", action: () => this.showTranslationEditor(locale) }));
       }
       updateMatixActionsClasses(options.actions);
     });
@@ -750,6 +758,19 @@ export class Translation extends Base implements ITranslationLocales {
       this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
     return [usedLocales, locales];
+  }
+  private inputFileElement: HTMLInputElement;
+  public importFromCSVFileDOM(): void {
+    if (!document) return;
+    if (!this.inputFileElement) {
+      this.inputFileElement = document.createElement("input");
+      this.inputFileElement.type = "file";
+      this.inputFileElement.style.display = "none";
+      this.inputFileElement.onchange = () => {
+        this.importFromCSVFileUI(this.inputFileElement);
+      };
+    }
+    this.inputFileElement.click();
   }
   private updateSettingsSurveyLocales() {
     let [choices, locales] = this.getSurveyLocales();
@@ -1273,6 +1294,7 @@ export class TranslationEditor {
     this.translationValue = new Translation(this.survey, options, true);
     this.translation.setEditMode(locale);
     this.translation.reset();
+    this.setupNavigationButtons();
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1296,6 +1318,22 @@ export class TranslationEditor {
       }, this.options.rootElement);
     popupModel.locale = editorLocalization.currentLocale;
   }
+  public doMachineTranslation(): void {
+    let fromLocale = this.translation.defaultLocale;
+    if(!fromLocale) fromLocale = "en";
+    const items = this.createStringsToTranslate();
+    const strings = [];
+    items.forEach(item => {
+      strings.push(item.getDefaultLocaleText());
+    });
+    const callback = (res: boolean, translatedStrings: Array<string>): void => {
+      if(!res || !Array.isArray(translatedStrings)) return;
+      for(let i = 0; i < Math.min(items.length, translatedStrings.length); i ++) {
+        items[i].values(this.locale).text = translatedStrings[i];
+      }
+    };
+    this.options.doMachineTranslation(fromLocale, this.locale, strings, callback);
+  }
   public apply(): void {
     this.translation.applyEditLocale();
     if(this.onApply) {
@@ -1309,4 +1347,61 @@ export class TranslationEditor {
   public dispose(): void {
     this.translationValue.dispose();
   }
+  private setupNavigationButtons(): void {
+    const survey = this.translation.stringsSurvey;
+    const actions = survey.navigationBar.actions;
+    actions.splice(0, actions.length);
+    if(this.options.getHasMachineTranslation()) {
+      survey.addNavigationItem(new Action({
+        id: "svc-translation-machine",
+        iconName: "icon-language",
+        title: "Translate", //TODO
+        mode: "small",
+        component: "sv-action-bar-item",
+        action: () => { this.doMachineTranslation(); }
+      }));
+    }
+    survey.addNavigationItem(createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true));
+    survey.addNavigationItem(createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true));
+    survey.showNavigationButtons = "top";
+  }
+  private createStringsToTranslate(): Array<TranslationItem> {
+    const res = new Array<TranslationItem>();
+    this.addStringsToTranlate(this.translation.root, res);
+    return res;
+  }
+  private addStringsToTranlate(group: TranslationGroup, items: Array<TranslationItem>): void {
+    group.items.forEach(item => {
+      if(item.isGroup) {
+        this.addStringsToTranlate(<TranslationGroup>item, items);
+      } else {
+        if(!!(<TranslationItem>item).getDefaultLocaleText()) {
+          items.push(<TranslationItem>item);
+        }
+      }
+    });
+  }
+}
+export function createImportCSVAction(action: () => void, needSeparator: boolean, isInEditor: boolean = false): Action {
+  return new Action({
+    id: "svc-translation-import",
+    iconName: "icon-load",
+    locTitleName: "ed.translationImportFromSCVButton",
+    locTooltipName: "ed.translationImportFromSCVButton",
+    mode: "small",
+    component: "sv-action-bar-item",
+    needSeparator: needSeparator,
+    action: action
+  });
+}
+export function createExportCSVAction(action: () => void, isInEditor: boolean = false): Action {
+  return new Action({
+    id: "svc-translation-export",
+    iconName: "icon-download",
+    locTitleName: "ed.translationExportToSCVButton",
+    locTooltipName: "ed.translationExportToSCVButton",
+    mode: "small",
+    component: "sv-action-bar-item",
+    action: action
+  });
 }

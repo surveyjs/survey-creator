@@ -294,6 +294,8 @@ export interface ISurveyCreatorOptions {
     question: Question,
     uploadingCallback: (status: string, data: any) => any
   ): void;
+  getHasMachineTranslation(): boolean;
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -313,6 +315,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
   maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  machineTranslationValue: boolean = false;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
@@ -435,6 +438,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     question: Question,
     uploadingCallback: (status: string, data: any) => any
   ): void {}
+  getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void {}
 }
 
 StylesManager.applyTheme("defaultV2");

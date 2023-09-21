@@ -1,6 +1,9 @@
 import { SurveyModel } from "survey-core";
 import { Translation, TranslationItem } from "../../src/components/tabs/translation";
 import "survey-core/survey.i18n";
+import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
+import { CreatorTester } from "../creator-tester";
+import { TabTranslationPlugin } from "../../src/components/tabs/translation-plugin";
 
 test("create locales question for edit translation", () => {
   const survey = new SurveyModel({
@@ -120,4 +123,88 @@ test("Update data in original translation", () => {
   pagePropsGroup2 = originalTranslation.root.groups[0];
   item2 = <TranslationItem>pagePropsGroup2.groups[0].items[0];
   expect(item2.values("fr").text).toBe("Title fr");
+});
+test("Call do machine translation", () => {
+  const survey = new SurveyModel({
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  let func_fromLocale: string = "";
+  let func_toLocale: string = "";
+  let func_strings: Array<string> = [];
+  let func_res = false;
+  let func_translated: Array<string>;
+  options.doMachineTranslation = (fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void => {
+    func_fromLocale = fromLocale;
+    func_toLocale = toLocale;
+    func_strings = strings;
+    callback(func_res, func_translated);
+  };
+  const editor = new Translation(survey, options).createTranslationEditor("fr");
+  editor.doMachineTranslation();
+  expect(func_fromLocale).toBe("en");
+  expect(func_toLocale).toBe("fr");
+  expect(func_strings).toHaveLength(2);
+  expect(func_strings[0]).toBe("q1");
+  expect(func_strings[1]).toBe("desc");
+  editor.apply();
+  expect(q1.locTitle.getLocaleText("fr")).toBeFalsy();
+
+  func_res = true;
+  func_translated = ["Title fr", "desc fr"];
+  editor.doMachineTranslation();
+  expect(q1.locTitle.getLocaleText("fr")).toBeFalsy();
+  editor.apply();
+  expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
+});
+test("Implement machine translation for Creator", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            description: "desc"
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.getHasMachineTranslation()).toBeFalsy();
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  let editor = tabTranslation.model.createTranslationEditor("fr");
+  let actions = editor.translation.stringsSurvey.navigationBar.actions;
+  expect(actions).toHaveLength(2);
+  expect(actions[0].id).toBe("svc-translation-import");
+
+  creator.onMachineTranslaton.add((sender, options) => {
+    options.callback(true, ["Title fr", "Desc fr"]);
+  });
+  expect(creator.getHasMachineTranslation()).toBeTruthy();
+  editor = tabTranslation.model.createTranslationEditor("fr");
+  actions = editor.translation.stringsSurvey.navigationBar.actions;
+  expect(actions).toHaveLength(3);
+  expect(actions[0].id).toBe("svc-translation-machine");
+  actions[0].action();
+  editor.apply();
+  const q1 = creator.survey.getQuestionByName("q1");
+  expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
+  expect(q1.locDescription.getLocaleText("fr")).toBe("Desc fr");
 });
