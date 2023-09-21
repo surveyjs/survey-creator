@@ -260,6 +260,7 @@ export class ThemeBuilder extends Base {
     try {
       this.setJSON(json, this.startThemeClasses);
       this.updatePageList();
+      this.updatePropertyGridEditorsAvailability();
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -522,17 +523,17 @@ export class ThemeBuilder extends Base {
       this.themeEditorSurvey.setValue("themeMode", this.themeMode);
       this.themeEditorSurvey.setValue("themePalette", this.themePalette);
       this.updatePropertyGridEditors(this.themeEditorSurvey);
-      this.updatePropertyGridEditorsAvailability(this.themeEditorSurvey);
+      this.updatePropertyGridEditorsAvailability();
     }
     finally {
       this.blockChanges = false;
     }
   }
 
-  private updatePropertyGridEditorsAvailability(themeEditorSurvey: SurveyModel) {
+  private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
-    themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
-    themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
+    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {
@@ -540,11 +541,17 @@ export class ThemeBuilder extends Base {
       canModify
     };
     this.onCanModifyTheme.fire(this, options);
-    themeEditorSurvey.getAllQuestions().forEach(q => {
+    this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
         q.readOnly = !options.canModify;
       }
     });
+
+    if(!!this.survey) {
+      this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
+      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
+    }
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
