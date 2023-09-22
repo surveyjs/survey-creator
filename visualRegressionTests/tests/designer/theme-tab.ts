@@ -22,3 +22,15 @@ test("Check boxshadow settings", async (t) => {
     await takeElementScreenshot("boxshadow-two-panels.png", root, t, comparer);
   });
 });
+
+test("Check sidebar header", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const json = {};
+    const root = Selector(".svc-side-bar__container-header ").filterVisible();
+    await t.resizeWindow(2000, 2000)
+      .click(getTabbedMenuItemByText("Themes"));
+    await takeElementScreenshot("theme-editor-header.png", root, t, comparer);
+    await ClientFunction(() => { window["creator"].allowCollapseSidebar = false; })();
+    await takeElementScreenshot("theme-editor-header-no-collapse-button.png", root, t, comparer);
+  });
+});

@@ -1,3 +1,8 @@
+---
+title: Survey Creator Localization & Globalization Guide | Translate Surveys & UI
+description: Make your surveys accessible in multiple languages effortlessly. Learn how to localize Survey Creator's user interface and surveys with this comprehensive guide. Discover how to enable localization, switch between locales, override translations, and create custom dictionaries.
+---
+
 # Localization & Globalization
 
 This article describes how to localize the Survey Creator UI and give users the ability to localize their surveys.

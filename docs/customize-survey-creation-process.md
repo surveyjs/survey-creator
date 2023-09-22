@@ -1,3 +1,8 @@
+---
+title: Customize Survey Creation Process | SurveyJS
+description: Tailor your survey design process to your specific needs by implementing some customized functionality in Survey Creator. For example, you can manage the availability of adorners (design-surface controls), perform element customization on creation, or access survey instances within the tool.
+---
+
 # Survey Customization
 
 This help topic describes how you can customize the following aspects of Survey Creator functionality:
@@ -85,8 +90,6 @@ creator.onQuestionAdded.add(function (_, options) {
 [View Demo](https://surveyjs.io/survey-creator/examples/oncreatequestion/ (linkStyle))
 
 ## Access Survey Instances Within Survey Creator
-
-[View Demo](https://surveyjs.io/survey-creator/examples/modifysurveys/reactjs#content-js (linkStyle))
 
 Survey Creator contains different survey instances for design and preview modes. In design mode, survey elements have [adorners](#specify-adorner-availability). In preview mode, the survey is displayed as respondents will see it.
 

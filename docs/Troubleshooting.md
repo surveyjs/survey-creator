@@ -1,3 +1,8 @@
+---
+title: Troubleshooting Survey Creator Issues | Open-Source JavaScript Form Libraries
+description: Learn how to troubleshoot common issues that may occur when using Survey Creator in your application. Find solutions for specific problems, including slow drag-and-drop visualization in React for large surveys.
+---
+
 # Troubleshooting
 
 This help topic describes how to troubleshoot problems that may occur when you use Survey Creator in your application.
