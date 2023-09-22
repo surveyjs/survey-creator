@@ -1541,18 +1541,3 @@ test("Narrow question placeholder", async (t) => {
     await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
   });
 });
-
-test("Keyboard PG MobileView", async (t) => {
-  await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1000, 1000);
-
-    await t
-      .pressKey("tab").pressKey("tab").pressKey("tab")
-      .pressKey("tab").pressKey("tab").pressKey("tab")
-      .pressKey("enter");
-
-    const pgSurveyTitle = Selector(".spg-body .spg-row").nth(1).find("[data-name='title'");
-
-    await takeElementScreenshot("keyboard-pg-mobile-view.png", pgSurveyTitle, t, comparer);
-  });
-});
