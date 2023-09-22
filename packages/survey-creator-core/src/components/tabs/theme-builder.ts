@@ -254,7 +254,7 @@ export class ThemeBuilder extends Base {
     try {
       this.setJSON(json, this.startThemeClasses);
       this.updatePageList();
-      this.updatePropertyGridEditorsAvailability();
+      this.updatePropertyGridEditors(this.themeEditorSurvey);
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -338,6 +338,11 @@ export class ThemeBuilder extends Base {
     return null;
   }
 
+  private getPredefinedColorsItemValues() {
+    return Object.keys(PredefinedColors[this.themePalette]).map(colorName =>
+      new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName))
+    );
+  }
   private initializeColorCalculator() {
     if (!this.currentTheme.cssVariables["--sjs-primary-backcolor"] ||
       !this.currentTheme.cssVariables["--sjs-primary-backcolor-light"] ||
@@ -377,12 +382,17 @@ export class ThemeBuilder extends Base {
     }
     if (options.name === "headerViewContainer") {
       const headerSettings = options.value[0];
+      this.survey.titleView = headerSettings["headerView"];
+      this.surveyProvider.survey.titleView = headerSettings["headerView"];
       if (headerSettings["headerView"] === "title") {
         this.survey.logoPosition = headerSettings["logoPosition"];
-        this.currentTheme.cover = undefined;
+        this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
       } else {
         this.currentTheme.cover = this.getCoverJson(headerSettings);
       }
+      this.updateSimulatorTheme();
+      this.raiseThemeChanged();
+      this.raiseThemeModified(options);
       return true;
     }
     return false;
@@ -554,14 +564,20 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  private updateHeaderViewContainer(themeEditorSurvey: SurveyModel) {
-    const headerViewContainerQuestion = themeEditorSurvey.getQuestionByName("headerViewContainer");
+  private getBackgroundColorSwitchByValue(backgroundColor: string) {
+    if(!backgroundColor) return "none";
+    if(backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
+    return "custom";
+  }
+
+  private updateHeaderViewContainerEditors() {
+    const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
     const panel = headerViewContainerQuestion.panels[0];
-    if (!!this.currentTheme.cover) {
-      panel.getQuestionByName("headerView").value = this.currentTheme.cover.headerView;
-    }
+    panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
+
     if (!!this.survey) {
-      headerViewContainerQuestion.visible = !!this.survey.title || !!this.survey.description || !!this.survey.logo;
+      panel.getQuestionByName("headerView").value = this.survey.titleView;
+      panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
 
       panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
       panel.getQuestionByName("logoPositionY").readOnly = !this.survey.logo;
@@ -572,6 +588,18 @@ export class ThemeBuilder extends Base {
 
       panel.getQuestionByName("descriptionPositionX").readOnly = !this.survey.description;
       panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
+    }
+
+    if(!!this.currentTheme.cover) {
+      Object.keys(this.currentTheme.cover).forEach(key => {
+        const q = panel.getQuestionByName(key);
+        if(!!q && key === "backgroundImageOpacity") {
+          q.value = this.currentTheme.cover[key] * 100;
+        } else if(q) {
+          q.value = this.currentTheme.cover[key];
+        }
+      });
+      panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(this.currentTheme.cover.backgroundColor);
     }
   }
 
@@ -600,6 +628,8 @@ export class ThemeBuilder extends Base {
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
+    this.updateHeaderViewContainerEditors();
+
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
@@ -630,7 +660,7 @@ export class ThemeBuilder extends Base {
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
       if (["color", "colorsettings"].indexOf(question.getType()) !== -1) {
-        (question as any).choices = Object.keys(PredefinedColors[this.themePalette]).map(colorName => new ItemValue(PredefinedColors[this.themePalette][colorName], getLocString("theme.colors." + colorName)));
+        (question as any).choices = this.getPredefinedColorsItemValues();
       }
     });
   }
@@ -859,6 +889,8 @@ export class ThemeBuilder extends Base {
                     "titlePositionY": "bottom",
                     "descriptionPositionX": "left",
                     "descriptionPositionY": "bottom",
+                    "textWidth": 512,
+                    "height": 256
                   }
                 ],
                 "templateElements": [
@@ -873,8 +905,7 @@ export class ThemeBuilder extends Base {
                         choices: [
                           { value: "title", text: getLocString("theme.headerViewTitle") },
                           { value: "cover", text: getLocString("theme.headerViewCover") }
-                        ],
-                        defaultValue: "title"
+                        ]
                       },
                       {
                         type: "buttongroup",
@@ -885,7 +916,6 @@ export class ThemeBuilder extends Base {
                           { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
                           { value: "right", text: getLocString("theme.horizontalAlignmentRight") }
                         ],
-                        defaultValue: "left"
                       },
                       {
                         type: "spinedit",
@@ -894,7 +924,6 @@ export class ThemeBuilder extends Base {
                         descriptionLocation: "hidden",
                         visibleIf: "{panel.headerView} = 'cover'",
                         unit: "px",
-                        // defaultValue: 4,
                         min: 0
                       },
                       {
@@ -906,7 +935,6 @@ export class ThemeBuilder extends Base {
                           { value: "container", text: getLocString("theme.coverAreaWidthContainer") }
                         ],
                         visibleIf: "{panel.headerView} = 'cover'",
-                        defaultValue: "survey"
                       },
                       {
                         type: "spinedit",
@@ -915,7 +943,6 @@ export class ThemeBuilder extends Base {
                         descriptionLocation: "hidden",
                         visibleIf: "{panel.headerView} = 'cover'",
                         unit: "px",
-                        // defaultValue: 4,
                         min: 0
                       }
                     ]
@@ -933,7 +960,6 @@ export class ThemeBuilder extends Base {
                           { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
                           { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
                         ],
-                        defaultValue: "none"
                       },
                       {
                         type: "color",
@@ -966,7 +992,6 @@ export class ThemeBuilder extends Base {
                               { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
                               { value: "tile", text: getLocString("theme.backgroundImageFitTile") },
                             ],
-                            defaultValue: "cover"
                           },
                           {
                             type: "spinedit",
@@ -976,7 +1001,6 @@ export class ThemeBuilder extends Base {
                             title: getLocString("theme.backgroundOpacity"),
                             descriptionLocation: "hidden",
                             unit: "%",
-                            defaultValue: 100,
                             min: 0,
                             max: 100,
                             step: 5
