@@ -3,7 +3,6 @@
     <div class="svc-plugin-tab__content">
       <survey-simulator [model]="model.simulator"></survey-simulator>
       <ng-container *ngIf="!model.isRunning">
-        <survey-test-again [model]="model.testAgainAction"></survey-test-again>
         <survey-results [survey]="model.survey"></survey-results>
       </ng-container>
     </div>

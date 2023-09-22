@@ -1,4 +1,4 @@
-import { ComponentCollection, IQuestion, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, IQuestion, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 ComponentCollection.Instance.add({
@@ -48,7 +48,13 @@ ComponentCollection.Instance.add({
 export function elementSettingsToCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {
     if (key === "corner") return;
-    themeCssVariables[`--sjs-${question.name.toLocaleLowerCase()}-${key}`] = question.value[key];
+
+    const propertyName = `--sjs-${question.name.toLocaleLowerCase()}-${key}`;
+    if (question.value[key] !== (question as Question).defaultValue[key]) {
+      themeCssVariables[propertyName] = question.value[key];
+    } else {
+      delete themeCssVariables[propertyName];
+    }
   });
 }
 

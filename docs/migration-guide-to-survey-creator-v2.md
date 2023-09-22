@@ -1,3 +1,8 @@
+---
+title: "Migration to Survey Creator V2: React, Angular, jQuery, Knockout, and Vue"
+description: Learn how to migrate to Survey Creator V2 with this comprehensive guide. Explore migration steps for React, Angular, jQuery, Knockout, and Vue. Update packages, adapt to constructor changes, customize property editors and adorners, handle localization, and explore other new features.
+---
+
 # Migration to Survey Creator V2
 
 - [Migration in React](#migration-in-react)

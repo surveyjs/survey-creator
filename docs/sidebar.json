@@ -27,15 +27,15 @@
       ]
     },
     {
-      "Name": "property-grid",
+      "Name": "property-grid-customization",
       "Title": "Property Grid Customization"
     },
     {
-      "Name": "toolbox",
+      "Name": "toolbox-customization",
       "Title": "Toolbox Customization"
     },
     {
-      "Name": "survey-customization",
+      "Name": "customize-survey-creation-process",
       "Title": "Survey Customization"
     },
     {
@@ -43,7 +43,7 @@
       "Title": "Theme Editor"
     },
     {
-      "Name": "localization",
+      "Name": "survey-localization-translate-surveys-to-different-languages",
       "Title": "Localization & Globalization"
     },
     {
@@ -63,7 +63,7 @@
           "Title": "What's New in Survey Creator V2"
         },
         {
-          "Name": "Migrate-from-V1-to-V2",
+          "Name": "migration-guide-to-survey-creator-v2",
           "Title": "Migration to Survey Creator V2"
         }
       ]
