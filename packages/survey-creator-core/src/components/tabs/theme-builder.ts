@@ -256,18 +256,19 @@ export class ThemeBuilder extends Base {
 
   private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
-    this.blockThemeChangedNotifications += 1;
+    this.blockChanges = true;
     try {
       this.setJSON(json, this.startThemeClasses);
       this.updatePageList();
       this.updatePropertyGridEditors(this.themeEditorSurvey);
+      this.updatePropertyGridEditorsAvailability();
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
       }
     }
     finally {
-      this.blockThemeChangedNotifications -= 1;
+      this.blockChanges = false;
     }
   }
   private updatePageItem(page: PageModel) {
@@ -545,6 +546,7 @@ export class ThemeBuilder extends Base {
       });
 
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
+
     if (headerSettings["backgroundColorSwitch"] === "accentColor") {
       result["backgroundColor"] = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
     } else if (headerSettings["backgroundColorSwitch"] === "none") {
@@ -598,11 +600,11 @@ export class ThemeBuilder extends Base {
 
     if(!!this.currentTheme.cover) {
       Object.keys(this.currentTheme.cover).forEach(key => {
-        const q = panel.getQuestionByName(key);
-        if(!!q && key === "backgroundImageOpacity") {
-          q.value = this.currentTheme.cover[key] * 100;
-        } else if(q) {
-          q.value = this.currentTheme.cover[key];
+        const question = panel.getQuestionByName(key);
+        if (!!question && key === "backgroundImageOpacity") {
+          question.value = this.currentTheme.cover[key] * 100;
+        } else if (question) {
+          question.value = this.currentTheme.cover[key];
         }
       });
       panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(this.currentTheme.cover.backgroundColor);
