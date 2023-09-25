@@ -14,7 +14,8 @@ import {
   ComputedUpdater,
   DragOrClickHelper,
   QuestionSelectBase,
-  createDropdownActionModel
+  createDropdownActionModel,
+  CssClassBuilder
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -337,10 +338,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: <any>new ComputedUpdater<string>(() => this.isRequired ? "sv-action-bar-item--secondary" : ""),
+      css: "sv-action-bar-item--secondary",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
-      iconName: <any>new ComputedUpdater<string>(() => this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16"),
+      iconName: "icon-required",
       iconSize: 16,
       action: () => {
         if (
@@ -353,15 +354,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }
       }
     });
-    this.surveyElement.registerFunctionOnPropertyValueChanged(
-      "isRequired",
-      (value) => {
-        requiredAction.iconName = value ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
-        requiredAction.css = value ? "sv-action-bar-item--secondary" : "";
-        requiredAction.innerItem.iconName = requiredAction.iconName;
-      },
-      "isRequiredAdorner"
-    );
+    requiredAction.innerCss = <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append("svc-required-action").append("svc-required-action--active", this.isRequired).toString()) as any);
+    requiredAction.innerItem.title = <string>(new ComputedUpdater<string>(() => {
+      return this.isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
+    }) as any);
     return requiredAction;
   }
 
