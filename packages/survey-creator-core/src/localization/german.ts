@@ -501,7 +501,7 @@ var germanTranslation = {
     hideIfRowsEmpty: "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
     rateValues: "Benutzerdefinierte Ratenwerte",
-    rateCount: "Anzahl der Raten",
+    rateCount: "Skalengröße",
     autoGenerate: "Wie lege ich Tarifwerte fest?",
     hideIfChoicesEmpty: "Blenden Sie die Frage aus, wenn sie keine Auswahlmöglichkeiten enthält",
     hideNumber: "Fragenummer ausblenden",
@@ -636,7 +636,7 @@ var germanTranslation = {
     columnsVisibleIf: "Spalten sind sichtbar, wenn",
     rowsVisibleIf: "Zeilen sind sichtbar, wenn",
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
-    rateType: "Art des Tarifs"
+    rateType: "Art der Bewertungssymbole",
   },
   // Property values
   pv: {
@@ -791,7 +791,7 @@ var germanTranslation = {
       "false": "Manuell Eintragen"
     },
     rateType: {
-      labels: "Etiketten",
+      labels: "Nummern",
       stars: "Sterne",
       smileys: "Smileys"
     }
@@ -942,7 +942,7 @@ var germanTranslation = {
     allowResize: "Größenänderung zulassen",
     acceptCarriageReturn: "akzeptieren CarriageReturn",
     displayMode: "Anzeigemodus",
-    rateType: "Art des Tarifs",
+    rateType: "Art der Bewertungssymbole",
     label: "Label",
     contentMode: "Inhaltsmodus",
     imageFit: "Passform des Bildes",
@@ -1095,7 +1095,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Spalten ausblenden, wenn keine Zeilen vorhanden sind"
 // pe.rateValues: "Custom rate values" => "Benutzerdefinierte Ratenwerte"
-// pe.rateCount: "Rate count" => "Anzahl der Raten"
 // pe.autoGenerate: "How to specify rate values?" => "Wie lege ich Tarifwerte fest?"
 // pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "Blenden Sie die Frage aus, wenn sie keine Auswahlmöglichkeiten enthält"
 // pe.hideNumber: "Hide question number" => "Fragenummer ausblenden"
@@ -1136,7 +1135,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.keyName: "Key column" => "Spalte \"Schlüssel\""
 // itemvalue.text: "Alt text" => "Alt-Text"
 // pe.closeOnSelect: "Close the dropdown after selection" => "Schließen Sie das Dropdown-Menü nach der Auswahl"
-// pe.rateType: "Rate type" => "Art des Tarifs"
 // pv.tab: "Tabs" => "Tabulatoren"
 // inputType.color: "Color" => "Farbe"
 // inputType.date: "Date" => "Datum"
@@ -1205,7 +1203,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.inputFieldComponent: "Input field component" => "Eingabefeld-Komponente"
 // p.itemComponent: "Item component" => "Artikelkomponente"
 // p.allowResize: "Allow resizing" => "Größenänderung zulassen"
-// p.rateType: "Rate type" => "Art des Tarifs"
 // p.precision: "Precision" => "Präzision"
 // p.matrixDragHandleArea: "Matrix drag handle area" => "Matrix-Ziehgriffbereich"
 // p.backgroundImage: "Background image" => "Hintergrundbild"
