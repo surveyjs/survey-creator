@@ -263,6 +263,9 @@
   white-space: nowrap;
 }
 
+.sl-list__item-body {
+  padding-block: calcSize(1.5);
+}
 .svc-logic-placeholder {
   width: calcSize(78);
   min-width: 100%;
