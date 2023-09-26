@@ -1,6 +1,6 @@
 import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property } from "survey-core";
 import { getLocString } from "../editorLocalization";
-import { scrollElementIntoView } from "src/utils/utils";
+import { scrollElementIntoView } from "../utils/utils";
 
 export class SearchManager extends Base {
   private searchResultClass = " spg-editor-highlight";
