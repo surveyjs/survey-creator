@@ -136,3 +136,15 @@ test("Focus on new html question added", async (t) => {
   const panelSelector = Selector(".svc-question__content--html");
   await t.expect(panelSelector.focused).ok();
 });
+
+test("Keyboard PG MobileView", async (t) => {
+  await t.resizeWindow(1000, 1000);
+
+  await t
+    .pressKey("tab").pressKey("tab").pressKey("tab")
+    .pressKey("tab").pressKey("tab").pressKey("tab")
+    .pressKey("enter");
+
+  const pgSurveyTitleInput = Selector(".spg-body .spg-row").nth(1).find("[data-name='title'] input");
+  await t.expect(pgSurveyTitleInput.focused).ok();
+});

@@ -635,7 +635,7 @@ export class Translation extends Base implements ITranslationLocales {
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
     setSurveyJSONForPropertyGrid(json);
-    var res = this.options.createSurvey(json, "translation_settings");
+    var res = this.options.createSurvey(json, "translation_settings", this);
     res.css = propertyGridCss;
     res.css.root += " st-properties";
     res.rootCss += " st-properties";
@@ -740,7 +740,7 @@ export class Translation extends Base implements ITranslationLocales {
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
-    var survey: SurveyModel = this.options.createSurvey(json, "translation_strings");
+    var survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this);
     survey.lazyRendering = true;
     survey.skeletonComponentName = "sd-translation-line-skeleton";
     survey.startLoadingFromJson();
@@ -794,7 +794,7 @@ export class Translation extends Base implements ITranslationLocales {
   private createStringsHeaderSurvey() {
     let json = {};
     setSurveyJSONForPropertyGrid(json, false);
-    let survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header");
+    let survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this);
     survey.css = translationCss;
     const newPage = survey.addNewPage("page");
 
@@ -1195,7 +1195,7 @@ export class Translation extends Base implements ITranslationLocales {
     });
     group.groups.forEach((group) => this.fillItemsHash(name, group, itemsHash));
   }
-  dispose() {
+  public dispose(): void {
     this.isEmpty = true;
     if (!!this.stringsSurvey) {
       this.stringsSurvey.dispose();
@@ -1212,5 +1212,6 @@ export class Translation extends Base implements ITranslationLocales {
     this.importFinishedCallback = undefined;
     this.availableTranlationsChangedCallback = undefined;
     this.tranlationChangedCallback = undefined;
+    super.dispose();
   }
 }

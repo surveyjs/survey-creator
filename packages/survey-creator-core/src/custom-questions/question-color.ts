@@ -2,9 +2,9 @@ import { Action, ComputedUpdater, CssClassBuilder, IAction, ItemValue, ListModel
 import { parseColor } from "../utils/utils";
 
 const DEFAULT_COLOR: string = "#000000";
+const DEFAULT_SWATCH_COLOR: string = "#FFFFFF";
 export class QuestionColorModel extends QuestionTextModel {
-  @property() public unit: string;
-
+  @property() allowEmptyValue: boolean = false;
   constructor(name: string) {
     super(name);
     this.createItemValues("choices");
@@ -14,7 +14,7 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 
   private getCorrectedValue(newValue: string): string {
-    if(newValue == undefined || newValue == null) return newValue;
+    if(newValue == undefined || newValue == null || (this.allowEmptyValue && !newValue)) return newValue;
     newValue = parseColor(newValue ?? "").color;
     if(newValue.indexOf("#") < 0) {
       newValue = "#" + newValue;
@@ -57,21 +57,30 @@ export class QuestionColorModel extends QuestionTextModel {
     if(this.value) {
       const color = parseColor(this.value || "");
       this._renderedValue = color.color;
+    } else if (this.allowEmptyValue) {
+      this._renderedValue = "";
     } else {
       this._renderedValue = DEFAULT_COLOR;
     }
   }
   public get renderedValue(): string {
-    if(!this._renderedValue) {
+    if(!this._renderedValue && this._renderedValue !== "") {
       this.updateRenderedValue();
     }
     return this._renderedValue.toUpperCase();
   }
   public getSwatchCss() {
-    return new CssClassBuilder().append(this.cssClasses.swatch).append(this.cssClasses.swatchDisabled, this.isInputReadOnly).toString();
+    return new CssClassBuilder()
+      .append(this.cssClasses.swatch)
+      .append(this.cssClasses.swatchDefault, !this.renderedValue)
+      .append(this.cssClasses.swatchDisabled, this.isInputReadOnly)
+      .toString();
   }
   public getSwatchStyle(): {[index: string]: string} {
-    return { backgroundColor: this.renderedValue };
+    return { backgroundColor: this.renderedValue || DEFAULT_SWATCH_COLOR };
+  }
+  public get renderedColorValue() {
+    return this.renderedValue || DEFAULT_SWATCH_COLOR;
   }
   public get isInputTextUpdate(): boolean {
     return false;
@@ -141,7 +150,10 @@ export class QuestionColorModel extends QuestionTextModel {
   }
 }
 Serializer.addClass("color", [
-  "unit",
+  {
+    name: "allowEmptyValue:boolean",
+    default: false
+  },
   "choices:itemvalue[]"
 ], () => new QuestionColorModel(""), "text");
 

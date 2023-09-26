@@ -8,6 +8,7 @@ import { notShortCircuitAnd } from "../../utils/utils";
 
 export class TestSurveyTabViewModel extends Base {
   static tagRegex = /(<([^>]+)>)/ig;
+  public enableInvisiblePages: boolean = true;
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -76,13 +77,19 @@ export class TestSurveyTabViewModel extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test");
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this);
     if (this.surveyProvider.showThemeTab) {
       newSurvey.applyTheme(this.surveyProvider.theme);
     } else {
       newSurvey.setCss(theme, false);
     }
     newSurvey.fitToContainer = true;
+    newSurvey.addLayoutElement({
+      id: "complete-customization",
+      container: "completePage" as any,
+      component: "svc-complete-page",
+      data: this
+    });
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -140,7 +147,7 @@ export class TestSurveyTabViewModel extends Base {
   private updatePageItem(page: PageModel) {
     const item = this.getPageItemByPage(page);
     if (item) {
-      item.enabled = page.isVisible;
+      item.enabled = this.enableInvisiblePages || page.isVisible;
     }
   }
   private getCurrentPageItem(): IAction {
@@ -166,7 +173,7 @@ export class TestSurveyTabViewModel extends Base {
         id: page.name,
         data: page,
         title: this.getPageTitle(page),
-        enabled: page.isVisible,
+        enabled: this.enableInvisiblePages || page.isVisible,
         visible: true
       });
     }
@@ -265,7 +272,7 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getPageItemByPage(page: PageModel): IAction {
     const model = this.selectPageAction.popupModel.contentComponentData.model;
-    if(!model || !Array.isArray(model.actions)) return undefined;
+    if (!model || !Array.isArray(model.actions)) return undefined;
     const items: IAction[] = model.actions;
     for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];
@@ -303,10 +310,10 @@ export class TestSurveyTabViewModel extends Base {
     if (!this.prevPageAction || !this.survey) return;
     const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting"
       || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
-    this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.prevPageAction.css = isPrevEnabled ? "sv-action-bar-item--secondary" : "";
     this.prevPageAction.enabled = isPrevEnabled;
     const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
-    this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
+    // this.nextPageAction.css = isNextEnabled ? "sv-action-bar-item--secondary" : "";
     this.nextPageAction.enabled = isNextEnabled;
   }
   public onScroll() {
@@ -318,5 +325,6 @@ export class TestSurveyTabViewModel extends Base {
       this.selectPageAction.dispose();
     }
     this.simulator.dispose();
+    super.dispose();
   }
 }

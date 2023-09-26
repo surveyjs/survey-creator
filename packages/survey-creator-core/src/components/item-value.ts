@@ -110,7 +110,7 @@ export class ItemValueWrapperViewModel extends Base {
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged

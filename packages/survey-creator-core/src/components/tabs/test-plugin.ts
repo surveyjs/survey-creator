@@ -267,10 +267,10 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
-      iconName: "icon-preview",
+      iconName: "icon-config",
       needSeparator: true,
       action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
+      // active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
       visible: <any>new ComputedUpdater<boolean>(() => {
         return (this.creator.activeTab === "test");
       }),

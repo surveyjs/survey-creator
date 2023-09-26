@@ -463,6 +463,42 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with no rate valu
   expect(ratingAdorner.element.rateValues.length).toBe(0);
 });
 
+test("QuestionRatingAdornerViewModel disabled add remove", () => {
+  const creator = new CreatorTester();
+  creator.maximumRateValues = 4;
+  creator.JSON = {
+    elements: [{ type: "rating", rateType: "smileys", name: "q1", rateMin: 1, rateMax: 10 }]
+  };
+  const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
+
+  const ratingAdorner = new QuestionRatingAdornerViewModel(
+    creator,
+    question,
+    <any>{}
+  );
+
+  expect(ratingAdorner.enableRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeFalsy();
+
+  ratingAdorner.addItem(ratingAdorner);
+  expect(ratingAdorner.element.rateMax).toBe(10);
+
+  for (let i = 1; i <= 7; i++) ratingAdorner.removeItem(ratingAdorner);
+  expect(ratingAdorner.element.rateMax).toBe(3);
+  expect(ratingAdorner.enableRemove).toBeTruthy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+
+  ratingAdorner.removeItem(ratingAdorner);
+  expect(ratingAdorner.element.rateMax).toBe(2);
+  expect(ratingAdorner.enableRemove).toBeFalsy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+
+  ratingAdorner.removeItem(ratingAdorner);
+  expect(ratingAdorner.element.rateMax).toBe(2);
+  expect(ratingAdorner.enableRemove).toBeFalsy();
+  expect(ratingAdorner.enableAdd).toBeTruthy();
+});
+
 test("QuestionRatingAdornerViewModel respect library limits", () => {
   const creator = new CreatorTester();
   creator.maximumRateValues = 4;

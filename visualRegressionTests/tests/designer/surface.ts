@@ -339,6 +339,36 @@ test("Choices (Tagbox): Layout", async (t) => {
     await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
   });
 });
+test("Choices (Checkbox): Layout small screen", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 900);
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4"
+              ],
+              "hasOther": true,
+              "colCount": 2
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-checkbox-layout-small-screen.png", QRoot, t, comparer);
+  });
+});
 
 test("Placeholder", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -1416,21 +1446,27 @@ test("Question adorners for different sizes", async (t) => {
               "type": "text",
               "name": "question1",
               "minWidth": "100px",
-              "maxWidth": "200px",
+              "maxWidth": "300px",
               "title": "Q"
-            }
-            ,
+            },
             {
               "type": "text",
               "name": "question2",
               "minWidth": "100px",
               "maxWidth": "400px",
               "title": "Q"
+            },
+            {
+              "type": "text",
+              "name": "question3",
+              "minWidth": "100px",
+              "maxWidth": "500px",
+              "title": "Q"
             }
             ,
             {
               "type": "text",
-              "name": "question3",
+              "name": "question4",
               "minWidth": "100px",
               "maxWidth": "600px",
               "title": "Q"
@@ -1456,6 +1492,9 @@ test("Question adorners for different sizes", async (t) => {
 
     await t.click(qContent.nth(3), { offsetX: 5, offsetY: 5 });
     await takeElementScreenshot("question-big.png", qContent.nth(3), t, comparer);
+
+    await t.click(qContent.nth(4), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-huge.png", qContent.nth(4), t, comparer);
   });
 });
 

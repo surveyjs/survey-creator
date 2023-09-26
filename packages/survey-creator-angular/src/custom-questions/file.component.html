@@ -4,7 +4,7 @@
     (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)" />
   <div [class]="model.cssClasses.buttonsContainer">
     <button type="button" [class]="model.cssClasses.clearButton" [disabled]="model.getIsClearButtonDisabled()"
-      (click)="model.doClean($event)">
+      (click)="model.doClean()">
       <svg [iconName]="model.cssClasses.clearButtonIcon" size="'auto'" [title]="model.clearButtonCaption"
         sv-ng-svg-icon></svg>
     </button>

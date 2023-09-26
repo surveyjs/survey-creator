@@ -217,7 +217,8 @@ export class StringEditorViewModelBase extends Base {
 
   constructor(private locString: LocalizableString, private creator: CreatorBase) {
     super();
-    this.setLocString(locString);
+    this.locString = locString;
+    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
   public afterRender() {
@@ -226,7 +227,7 @@ export class StringEditorViewModelBase extends Base {
     }
   }
 
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.connector.onDoActivate.remove(this.activate);
   }
@@ -243,10 +244,8 @@ export class StringEditorViewModelBase extends Base {
 
   public setLocString(locString: LocalizableString) {
     this.connector?.onDoActivate.clear();
-    this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
-    this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
   public checkConstraints(event: any) {
     if (this.maxLength > 0 && event.keyCode >= 32) {
@@ -310,7 +309,7 @@ export class StringEditorViewModelBase extends Base {
     }
     if (this.editAsText && !this.compostionInProgress) {
       const options = { value: event.target?.innerText, cancel: null };
-      this.connector.onTextChanging.fire(this, options);
+      if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
       sanitizeEditableContent(event.target);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {

@@ -51,6 +51,7 @@ export * from "../simulator";
 export * from "../svg-bundle";
 export * from "../survey-renderers/dropdown";
 export * from "../tabs/test";
+export * from "../tabs/test-complete";
 export * from "../tabs/theme";
 export * from "../tabbed-menu/tabbed-menu";
 export * from "../tabbed-menu/tabbed-menu-item";

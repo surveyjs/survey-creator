@@ -1,3 +1,8 @@
+---
+title: Customize Survey Creator Toolbox | Open-Source JavaScript Form Libraries 
+description: Learn to switch between full and compact modes, limit available question and panel types, group items by categories, customize predefined Toolbox items, and even add custom elements.
+---
+
 # Toolbox Customization
 
 The Toolbox contains available question and panel types. Users can click questions and panels or drag and drop them onto the design surface to add them to the survey. This help topic describes how you can customize the Toolbox.

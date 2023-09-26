@@ -6,13 +6,13 @@ import {
   SurveyElementBase,
   attachKey2click
 } from "survey-react-ui";
-import { ThemeSurveyTabViewModel } from "survey-creator-core";
+import { ThemeBuilder } from "survey-creator-core";
 import { SurveySimulator } from "./SurveySimulator";
 import { SurveyResults } from "../Results";
 import { TabPreviewTestSurveyAgainComponent } from "./Preview";
 
 export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
-  private get model(): ThemeSurveyTabViewModel {
+  private get model(): ThemeBuilder {
     return this.props.data;
   }
   protected getStateElement(): Base {
@@ -25,7 +25,6 @@ export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
       <div className={tabContentClassName}>
         <div className="svc-plugin-tab__content">
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
-          {!this.model.isRunning ? <TabPreviewTestSurveyAgainComponent button={this.model.testAgainAction} /> : null}
           {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}
         </div>
         {this.getBottomToolbar()}

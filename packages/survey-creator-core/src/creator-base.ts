@@ -9,6 +9,7 @@ import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from 
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
+import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
 import { QuestionToolbox } from "./toolbox";
@@ -34,7 +35,7 @@ import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
-import { TabThemePlugin } from "./components/tabs/theme-plugin";
+import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 
@@ -54,7 +55,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
-  defaultAllowingDeactivate? : () => boolean|undefined;
+  defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -693,45 +694,45 @@ export class CreatorBase extends Base
     * 
     * Depending on the `options.type` value, the `options` object contains parameters listed below:
     * 
-    * `options.type`: `"ADDED_FROM_TOOLBOX"`\
+    * `options.type`: `"ADDED_FROM_TOOLBOX"`
     * - `options.question` - An added question.
     * 
-    * `options.type`: `"PAGE_ADDED"`\
+    * `options.type`: `"PAGE_ADDED"`
     * - `options.newValue` - An added page.
     *
-    * `options.type`: `"PAGE_MOVED"`\
+    * `options.type`: `"PAGE_MOVED"`
     * - `options.page` - A moved page.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"QUESTION_CONVERTED"`\
+    * `options.type`: `"QUESTION_CONVERTED"`
     * - `options.className` - The name of a class to which a question has been converted.
     * - `options.oldValue` - An object of a previous class.
     * - `options.newValue` - An object of a class specified by `options.className`.
     *
-    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`\
+    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
     * - `options.question` - A question that has been edited in a pop-up editor.
     *
-    * `options.type`: `"PROPERTY_CHANGED"`\
+    * `options.type`: `"PROPERTY_CHANGED"`
     * - `options.name` - The name of the changed property.
     * - `options.target` - An object that contains the changed property.
     * - `options.oldValue` - A previous value of the changed property.
     * - `options.newValue` - A new value of the changed property.
     *
-    * `options.type`: `"ELEMENT_REORDERED"`\
+    * `options.type`: `"ELEMENT_REORDERED"`
     * - `options.arrayName` - The name of the changed array.
     * - `options.parent` - An object that contains the changed array.
     * - `options.element` - A reordered element.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"OBJECT_DELETED"`\
+    * `options.type`: `"OBJECT_DELETED"`
     * - `options.target` - A deleted object.
     *
-    * `options.type`: `"VIEW_TYPE_CHANGED"`\
+    * `options.type`: `"VIEW_TYPE_CHANGED"`
     * - `options.newType` - A current view: `"editor"` or `"designer"`.
     *
-    * `options.type`: `"DO_DROP"`\
+    * `options.type`: `"DO_DROP"`
     * - `options.page` - A parent page of the dragged element.
     * - `options.source` - A dragged element.
     * - `options.target` - A drop target.
@@ -1043,7 +1044,6 @@ export class CreatorBase extends Base
   }
 
   public raiseThemeChanged(): void {
-    this.isThemePristine = false;
     this.hasPendingThemeChanges = true;
     const options = {
       propertyName: "theme",
@@ -1262,9 +1262,9 @@ export class CreatorBase extends Base
   }
   private switchViewType(viewName: string): boolean {
     let allow = true;
-    if(!!this.currentPlugin?.defaultAllowingDeactivate) {
+    if (!!this.currentPlugin?.defaultAllowingDeactivate) {
       allow = this.currentPlugin.defaultAllowingDeactivate();
-      if(allow === undefined) return false;
+      if (allow === undefined) return false;
     }
     const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
@@ -1320,6 +1320,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
@@ -1540,7 +1541,7 @@ export class CreatorBase extends Base
       new TabTestPlugin(this);
     }
     if (this.showThemeTab) {
-      new TabThemePlugin(this);
+      new ThemeTabPlugin(this);
     }
     if (this.showLogicTab) {
       new TabLogicPlugin(this);
@@ -1713,6 +1714,7 @@ export class CreatorBase extends Base
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = defaultV2Css;
+    survey.setIsMobile(!!this.isMobileView);
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -1904,7 +1906,7 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
-    const questions = this.survey.getAllQuestions();
+    const questions = this.getAllQuestions();
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
@@ -2054,7 +2056,7 @@ export class CreatorBase extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
+  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
@@ -2066,7 +2068,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
@@ -2276,39 +2278,20 @@ export class CreatorBase extends Base
     }
   }
 
-  protected getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
+  protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(false, includeNewItems);
+  }
+  protected getAllPanels(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(true, includeNewItems);
+  }
+  private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
+    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    if (includeNewItems) {
+      SurveyHelper.addElements(this.newPanels, isPanel, result);
+      SurveyHelper.addElements(this.newQuestions, isPanel, result);
     }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
     return result;
   }
-
-  protected getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-
-  protected addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     if (isPanel) return this.getNewPanelName();
@@ -2333,11 +2316,14 @@ export class CreatorBase extends Base
         this.newPanels.push(element);
       }
       var panel = <PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
+      panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
+      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
+        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
+      if (els) {
+        els.forEach(el => this.setNewNamesCore(el));
+      }
     }
   }
 
@@ -2869,7 +2855,7 @@ export class CreatorBase extends Base
       if (!options.isUnique) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
-      while (!this.isNameUnique(el, options.name)) {
+      while (!this.isNameUnique(el, options.name, false)) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
       options.isUnique = true;
@@ -2881,11 +2867,11 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
-    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+    if (!this.isNameUniqueInArray(this.getAllPanels(includeNewItems), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(includeNewItems), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,
@@ -3396,7 +3382,12 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
-  @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: false, onSet: (val, creator: CreatorBase) => {
+      creator.survey.setIsMobile(!!val);
+    }
+  }) isMobileView: boolean;
+  @property({ defaultValue: false }) isTouch;
   /**
    * Specifies Toolbox location.
    * 
@@ -3433,7 +3424,7 @@ export class CreatorBase extends Base
     }
   }) isCreatorDisposed: boolean;
 
-  dispose(): void {
+  public dispose(): void {
     this.isCreatorDisposed = true;
     this.tabs = [];
     Object.keys(this.plugins).forEach(pluginName => {

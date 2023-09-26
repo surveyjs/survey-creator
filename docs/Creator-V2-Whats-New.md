@@ -1,3 +1,8 @@
+---
+title: "What's New in Survey Creator V2: UI, UX, and Design Changes | SurveyJS"
+description: "Explore the major changes introduced in Survey Creator Version 2, addressing concerns related to Knockout dependency, and bringing native implementations for React and Angular. Discover significant UI/UX enhancements for improved survey creation experience: redesigned Toolbox and Property Grid, simplified page navigation, and more..."
+---
+
 # What's New in Survey Creator V2
 
 This help topic gives a detailed overview of UI, UX, and internal design changes that we introduced into the latest major update of the Survey Creator.
