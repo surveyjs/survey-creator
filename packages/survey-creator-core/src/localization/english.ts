@@ -647,6 +647,9 @@ export var enStrings = {
   pv: {
     "true": "true",
     "false": "false",
+    "file": "Local files",
+    "camera": "Camera",
+    "file-camera": "Local files or camera",
     inherit: "Inherit",
     show: "Visible",
     hide: "Hidden",
