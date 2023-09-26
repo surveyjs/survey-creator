@@ -70,6 +70,7 @@
     "style-loader": "^1.3.0",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
     "testcafe": "1.18.4",
+    "get-func-name": "2.0.0",
     "@types/lodash": "4.14.186",
     "testcafe-reporter-dashboard": "^0.2.4-rc.1",
     "ts-loader": "^7.0.5",
