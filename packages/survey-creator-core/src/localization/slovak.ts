@@ -50,6 +50,8 @@ export var skStrings = {
     settingsTooltip: "Otvoriť nastavenia prieskumu",
     surveySettings: "Nastavenia prieskumu",
     surveySettingsTooltip: "Otvorenie nastavení prieskumu",
+    themeSettings: "Nastavenia motívu",
+    themeSettingsTooltip: "Otvorenie nastavení motívu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -279,6 +281,7 @@ export var skStrings = {
     cellsEmptyRowsColumns: "K dispozícii má byť aspoň jeden stĺpec alebo riadok",
     showPreviewBeforeComplete: "Pozrite si ukážku odpovedí pred odoslaním prieskumu",
     overridingPropertyPrefix: "Nastaviť ",
+    resetToDefaultCaption: "Vynulovanie",
     propertyIsEmpty: "Zadajte hodnotu",
     propertyIsNoUnique: "Zadajte jedinečnú hodnotu",
     propertyNameIsNotUnique: "Zadajte jedinečný názov",
@@ -642,6 +645,9 @@ export var skStrings = {
   pv: {
     "true": "pravdivý",
     "false": "nepravdivé",
+    file: "Lokálne súbory",
+    camera: "Fotoaparát",
+    "file-camera": "Lokálne súbory alebo fotoaparát",
     inherit: "prevziať",
     show: "zobraziť",
     hide: "skryť",
@@ -1517,3 +1523,11 @@ editorLocalization.locales["sk"] = skStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
+// ed.themeSettings: "Theme Settings" => "Nastavenia motívu"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otvorenie nastavení motívu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Vynulovanie"
+// pv.file: "Local files" => "Lokálne súbory"
+// pv.camera: "Camera" => "Fotoaparát"
+// pv.file-camera: "Local files or camera" => "Lokálne súbory alebo fotoaparát"

@@ -50,6 +50,8 @@ var persianStrings = {
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     surveySettings: "تنظیمات نظرسنجی",
     surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
+    themeSettings: "تنظیمات تم",
+    themeSettingsTooltip: "باز کردن تنظیمات تم",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -279,6 +281,7 @@ var persianStrings = {
     cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
     showPreviewBeforeComplete: "پیش نمایش پاسخ قبل از ارسال نظرسنجی",
     overridingPropertyPrefix: "تنظیم بر اساس ",
+    resetToDefaultCaption: "تنظیم مجدد",
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     propertyIsNoUnique: "لطفاً یک مقدار منحصر به فرد وارد کنید",
     propertyNameIsNotUnique: "لطفاً یک نام منحصر به فرد وارد کنید",
@@ -642,6 +645,9 @@ var persianStrings = {
   pv: {
     "true": "واقعی",
     "false": "نادرست",
+    file: "پروندههای محلی",
+    camera: "دوربین",
+    "file-camera": "فایل های محلی یا دوربین",
     inherit: "ارث بری",
     show: "آشکار",
     hide: "پنهان",
@@ -1512,3 +1518,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟"
 // ed.themeResetButton: "Reset theme settings to default" => "بازنشانی تنظیمات تم به حالت پیشفرض"
 // theme.placeholderColor: "Placeholder color" => "رنگ نگهدارنده"
+// ed.themeSettings: "Theme Settings" => "تنظیمات تم"
+// ed.themeSettingsTooltip: "Open theme settings" => "باز کردن تنظیمات تم"
+// pe.resetToDefaultCaption: "Reset" => "تنظیم مجدد"
+// pv.file: "Local files" => "پروندههای محلی"
+// pv.camera: "Camera" => "دوربین"
+// pv.file-camera: "Local files or camera" => "فایل های محلی یا دوربین"

@@ -50,6 +50,8 @@ export var koreanStrings = {
     settingsTooltip: "설정 열기",
     surveySettings: "설문조사 설정",
     surveySettingsTooltip: "설문조사 설정 열기",
+    themeSettings: "테마 설정",
+    themeSettingsTooltip: "테마 설정 열기",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -279,6 +281,7 @@ export var koreanStrings = {
     cellsEmptyRowsColumns: "최소한 하나의 열 또는 행이 있어야 합니다.",
     showPreviewBeforeComplete: "설문조사를 제출하기 전에 답변 미리 보기",
     overridingPropertyPrefix: "설정 기준 ",
+    resetToDefaultCaption: "재설정",
     propertyIsEmpty: "값을 입력하십시오",
     propertyIsNoUnique: "고유한 값을 입력하십시오.",
     propertyNameIsNotUnique: "고유한 이름을 입력하십시오.",
@@ -642,6 +645,9 @@ export var koreanStrings = {
   pv: {
     "true": "참",
     "false": "거짓",
+    file: "로컬 파일",
+    camera: "사진기",
+    "file-camera": "로컬 파일 또는 카메라",
     inherit: "상속",
     show: "보기",
     hide: "숨기기",
@@ -1767,3 +1773,11 @@ editorLocalization.locales["ko"] = koreanStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "자리 표시자 색"
+// ed.themeSettings: "Theme Settings" => "테마 설정"
+// ed.themeSettingsTooltip: "Open theme settings" => "테마 설정 열기"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "재설정"
+// pv.file: "Local files" => "로컬 파일"
+// pv.camera: "Camera" => "사진기"
+// pv.file-camera: "Local files or camera" => "로컬 파일 또는 카메라"
