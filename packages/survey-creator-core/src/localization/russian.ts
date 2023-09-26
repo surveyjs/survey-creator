@@ -50,6 +50,8 @@ export var ruStrings = {
     settingsTooltip: "Открыть настройки",
     surveySettings: "Настройки опроса",
     surveySettingsTooltip: "Откройте настройки опроса",
+    themeSettings: "Настройки темы",
+    themeSettingsTooltip: "Откройте настройки темы",
     showPanel: "Панель «Показать»",
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
@@ -279,6 +281,7 @@ export var ruStrings = {
     cellsEmptyRowsColumns: "Должен быть хотя бы один столбец или строка",
     showPreviewBeforeComplete: "Предварительный просмотр ответов перед отправкой опроса",
     overridingPropertyPrefix: "Откладывать ",
+    resetToDefaultCaption: "Сброс",
     propertyIsEmpty: "Пожалуйста, введите значение",
     propertyIsNoUnique: "Пожалуйста, введите уникальное значение",
     propertyNameIsNotUnique: "Пожалуйста, введите уникальное имя",
@@ -642,6 +645,9 @@ export var ruStrings = {
   pv: {
     "true": "истинный",
     "false": "ложный",
+    file: "Локальные файлы",
+    camera: "Фотоаппарат",
+    "file-camera": "Локальные файлы или камера",
     inherit: "Наследовать",
     show: "Показать",
     hide: "Скрыть",
@@ -1626,3 +1632,11 @@ editorLocalization.locales["ru"] = ruStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Цвет заполнителя"
+// ed.themeSettings: "Theme Settings" => "Настройки темы"
+// ed.themeSettingsTooltip: "Open theme settings" => "Откройте настройки темы"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Сброс"
+// pv.file: "Local files" => "Локальные файлы"
+// pv.camera: "Camera" => "Фотоаппарат"
+// pv.file-camera: "Local files or camera" => "Локальные файлы или камера"

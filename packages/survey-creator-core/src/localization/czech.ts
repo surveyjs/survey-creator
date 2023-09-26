@@ -50,6 +50,8 @@ export var czStrings = {
     settingsTooltip: "Otevřít nastavení průzkumu",
     surveySettings: "Nastavení průzkumu",
     surveySettingsTooltip: "Otevřít nastavení průzkumu",
+    themeSettings: "Nastavení motivu",
+    themeSettingsTooltip: "Otevření nastavení motivu",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -279,6 +281,7 @@ export var czStrings = {
     cellsEmptyRowsColumns: "Měl by existovat alespoň jeden sloupec nebo řádek.",
     showPreviewBeforeComplete: "Zobrazit náhled odpovědí před odesláním průzkumu",
     overridingPropertyPrefix: "Nastavit podle ",
+    resetToDefaultCaption: "Resetovat",
     propertyIsEmpty: "Zadejte hodnotu",
     propertyIsNoUnique: "Zadejte jedinečnou hodnotu",
     propertyNameIsNotUnique: "Zadejte jedinečný název",
@@ -642,6 +645,9 @@ export var czStrings = {
   pv: {
     "true": "pravda",
     "false": "nepravda",
+    file: "Místní soubory",
+    camera: "Fotoaparát",
+    "file-camera": "Místní soubory nebo fotoaparát",
     inherit: "zdědit",
     show: "zobrazit",
     hide: "skrýt",
@@ -1122,3 +1128,9 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Jste si jisti, že chcete odstranit všechny řetězce pro tento jazyk?"
 // ed.themeResetButton: "Reset theme settings to default" => "Obnovení výchozího nastavení motivu"
 // theme.placeholderColor: "Placeholder color" => "Zástupná barva"
+// ed.themeSettings: "Theme Settings" => "Nastavení motivu"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otevření nastavení motivu"
+// pe.resetToDefaultCaption: "Reset" => "Resetovat"
+// pv.file: "Local files" => "Místní soubory"
+// pv.camera: "Camera" => "Fotoaparát"
+// pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"

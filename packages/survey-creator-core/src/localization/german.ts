@@ -50,6 +50,8 @@ var germanTranslation = {
     settingsTooltip: "Umfrageeinstellungen öffnen",
     surveySettings: "Umfrage Einstellungen",
     surveySettingsTooltip: "Umfrage Einstellungen öffnen",
+    themeSettings: "Theme-Einstellungen",
+    themeSettingsTooltip: "Öffnen Sie die Theme-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -279,6 +281,7 @@ var germanTranslation = {
     cellsEmptyRowsColumns: "Es sollte mindestens eine Spalte oder Zeile geben",
     showPreviewBeforeComplete: "Vorschau der Antworten vor dem Absenden anzeigen",
     overridingPropertyPrefix: "Gesetzt von ",
+    resetToDefaultCaption: "Zurücksetzen",
     propertyIsEmpty: "Bitte geben Sie einen Wert ein",
     propertyIsNoUnique: "Bitte geben Sie einen eindeutigen Wert ein",
     propertyNameIsNotUnique: "Bitte geben Sie einen eindeutigen Wert ein",
@@ -642,6 +645,9 @@ var germanTranslation = {
   pv: {
     "true": "wahr",
     "false": "falsch",
+    file: "Lokale Dateien",
+    camera: "Kamera",
+    "file-camera": "Lokale Dateien oder Kamera",
     inherit: "vererbt",
     show: "anzeigen",
     hide: "verstecken",
@@ -1316,3 +1322,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Farbe des Platzhalters"
+// ed.themeSettings: "Theme Settings" => "Theme-Einstellungen"
+// ed.themeSettingsTooltip: "Open theme settings" => "Öffnen Sie die Theme-Einstellungen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Zurücksetzen"
+// pv.file: "Local files" => "Lokale Dateien"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokale Dateien oder Kamera"

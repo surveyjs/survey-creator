@@ -50,6 +50,8 @@ export var huStrings = {
     settingsTooltip: "Nyissa meg a beállításokat",
     surveySettings: "Földmérési beállítások",
     surveySettingsTooltip: "Nyissa meg a felmérési beállításokat",
+    themeSettings: "Téma beállítások",
+    themeSettingsTooltip: "Nyissa meg a témabeállításokat",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -279,6 +281,7 @@ export var huStrings = {
     cellsEmptyRowsColumns: "Legalább egy sornak vagy egy oszlopnak lennie kell",
     showPreviewBeforeComplete: "A válaszok előnézete a felmérés elküldése előtt",
     overridingPropertyPrefix: "Állítsa be ",
+    resetToDefaultCaption: "Átszed",
     propertyIsEmpty: "Kérem adjon meg egy értéket",
     propertyIsNoUnique: "Kérjük, adjon meg egy egyedi értéket",
     propertyNameIsNotUnique: "Kérjük, adjon meg egy egyedi nevet",
@@ -642,6 +645,9 @@ export var huStrings = {
   pv: {
     "true": "igaz",
     "false": "téves",
+    file: "Helyi fájlok",
+    camera: "Fényképezőgép",
+    "file-camera": "Helyi fájlok vagy kamera",
     inherit: "öröklött",
     show: "mutatás",
     hide: "elrejtés",
@@ -1717,3 +1723,11 @@ editorLocalization.locales["hu"] = huStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Helyőrző színe"
+// ed.themeSettings: "Theme Settings" => "Téma beállítások"
+// ed.themeSettingsTooltip: "Open theme settings" => "Nyissa meg a témabeállításokat"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Átszed"
+// pv.file: "Local files" => "Helyi fájlok"
+// pv.camera: "Camera" => "Fényképezőgép"
+// pv.file-camera: "Local files or camera" => "Helyi fájlok vagy kamera"

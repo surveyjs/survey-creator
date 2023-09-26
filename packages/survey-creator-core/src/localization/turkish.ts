@@ -50,6 +50,8 @@ export var turkishStrings = {
     settingsTooltip: "Anket ayarlarını aç",
     surveySettings: "Anket Ayarları",
     surveySettingsTooltip: "Anket ayarlarını açma",
+    themeSettings: "Tema Ayarları",
+    themeSettingsTooltip: "Tema ayarlarını açma",
     showPanel: "Paneli Göster",
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
@@ -279,6 +281,7 @@ export var turkishStrings = {
     cellsEmptyRowsColumns: "En az bir kolon veya satır olmalı",
     showPreviewBeforeComplete: "Tamamlanmadan önce önizlemeyi göster",
     overridingPropertyPrefix: "Ayarlayan ",
+    resetToDefaultCaption: "Sıfırlama",
     propertyIsEmpty: "Lütfen değer giriniz",
     propertyIsNoUnique: "Lütfen benzersiz bir değer girin",
     propertyNameIsNotUnique: "Lütfen benzersiz bir isim giriniz",
@@ -642,6 +645,9 @@ export var turkishStrings = {
   pv: {
     "true": "doğru",
     "false": "yanlış",
+    file: "Yerel dosyalar",
+    camera: "Kamera",
+    "file-camera": "Yerel dosyalar veya kamera",
     inherit: "Başlangıç",
     show: "Göster",
     hide: "Gizle",
@@ -1559,3 +1565,11 @@ editorLocalization.locales["tr"] = turkishStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Yer tutucu rengi"
+// ed.themeSettings: "Theme Settings" => "Tema Ayarları"
+// ed.themeSettingsTooltip: "Open theme settings" => "Tema ayarlarını açma"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Sıfırlama"
+// pv.file: "Local files" => "Yerel dosyalar"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Yerel dosyalar veya kamera"

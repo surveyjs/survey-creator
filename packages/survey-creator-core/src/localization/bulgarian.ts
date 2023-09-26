@@ -50,6 +50,8 @@ export var bgStrings = {
     settingsTooltip: "Отваряне на настройките",
     surveySettings: "Настройки на анкетата",
     surveySettingsTooltip: "Отваряне настройките на анкетата",
+    themeSettings: "Настройки на тема",
+    themeSettingsTooltip: "Отваряне на настройките на тема",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -279,6 +281,7 @@ export var bgStrings = {
     cellsEmptyRowsColumns: "Трябва да има поне една колона или ред.",
     showPreviewBeforeComplete: "Визуализирай отговорите, преди да изпратиш анкетата.",
     overridingPropertyPrefix: "Зададено от ",
+    resetToDefaultCaption: "Проучване",
     propertyIsEmpty: "Моля, въведи стойност.",
     propertyIsNoUnique: "Моля, въведи уникална стойност.",
     propertyNameIsNotUnique: "Моля, въведи уникално име.",
@@ -642,6 +645,9 @@ export var bgStrings = {
   pv: {
     "true": "вярно",
     "false": "невярно",
+    file: "Локални файлове",
+    camera: "Фотоапарат",
+    "file-camera": "Локални файлове или камера",
     inherit: "Наследяване",
     show: "Видим",
     hide: "Скрит",
@@ -1118,3 +1124,9 @@ editorLocalization.locales["bg"] = bgStrings;
 // colors.tulip: "Tulip" => "Лале"
 // colors.brown: "Brown" => "Кафяв"
 // colors.green: "Green" => "Зелен"
+// ed.themeSettings: "Theme Settings" => "Настройки на тема"
+// ed.themeSettingsTooltip: "Open theme settings" => "Отваряне на настройките на тема"
+// pe.resetToDefaultCaption: "Reset" => "Проучване"
+// pv.file: "Local files" => "Локални файлове"
+// pv.camera: "Camera" => "Фотоапарат"
+// pv.file-camera: "Local files or camera" => "Локални файлове или камера"
