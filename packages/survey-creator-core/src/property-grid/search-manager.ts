@@ -1,5 +1,6 @@
 import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property } from "survey-core";
 import { getLocString } from "../editorLocalization";
+import { scrollElementIntoView } from "src/utils/utils";
 
 export class SearchManager extends Base {
   private searchResultClass = " spg-editor-highlight";
@@ -30,10 +31,10 @@ export class SearchManager extends Base {
     prevResult?.updateElementCss();
     if (!!this.currentSearchResult && prevResult !== this.currentSearchResult) {
       this.currentSearchResult.updateElementCss();
-      // this.currentSearchResult.focus();
       this.expandAllParents(this.currentSearchResult);
       setTimeout(() => {
-        this.currentSearchResult.survey.scrollElementToTop(this.currentSearchResult, this.currentSearchResult, null, this.currentSearchResult.id, true);
+        const elementId = this.currentSearchResult.id;
+        scrollElementIntoView(elementId);
       }, 10);
     }
 
