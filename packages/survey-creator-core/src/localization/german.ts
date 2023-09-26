@@ -501,7 +501,7 @@ var germanTranslation = {
     hideIfRowsEmpty: "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind",
     hideColumnsIfEmpty: "Spalten ausblenden, wenn keine Zeilen vorhanden sind",
     rateValues: "Benutzerdefinierte Ratenwerte",
-    rateCount: "Anzahl der Raten",
+    rateCount: "Skalengröße",
     autoGenerate: "Wie lege ich Tarifwerte fest?",
     hideIfChoicesEmpty: "Blenden Sie die Frage aus, wenn sie keine Auswahlmöglichkeiten enthält",
     hideNumber: "Fragenummer ausblenden",
@@ -636,7 +636,7 @@ var germanTranslation = {
     columnsVisibleIf: "Spalten sind sichtbar, wenn",
     rowsVisibleIf: "Zeilen sind sichtbar, wenn",
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
-    rateType: "Art des Tarifs"
+    rateType: "Ansicht der Bewertungssymbole",
   },
   // Property values
   pv: {
@@ -791,7 +791,7 @@ var germanTranslation = {
       "false": "Manuell Eintragen"
     },
     rateType: {
-      labels: "Etiketten",
+      labels: "Beschriftung",
       stars: "Sterne",
       smileys: "Smileys"
     }
@@ -914,8 +914,8 @@ var germanTranslation = {
     cellHint: "Hinweis auf die Zelle",
     isUnique: "Ist einzigartig",
     showInMultipleColumns: "In mehreren Spalten anzeigen",
-    totalMaximumFractionDigits: "Maximale Bruchstellen insgesamt",
-    totalMinimumFractionDigits: "Minimale Bruchstellen insgesamt",
+    totalMaximumFractionDigits: "Maximale Nachkommastellen insgesamt",
+    totalMinimumFractionDigits: "Minimale Nachkommastellen insgesamt",
     columns: "Spalten",
     detailElements: "Detail-Elemente",
     allowAdaptiveActions: "Adaptive Aktionen zulassen",
@@ -942,7 +942,7 @@ var germanTranslation = {
     allowResize: "Größenänderung zulassen",
     acceptCarriageReturn: "akzeptieren CarriageReturn",
     displayMode: "Anzeigemodus",
-    rateType: "Art des Tarifs",
+    rateType: "Ansicht der Bewertungssymbole",
     label: "Label",
     contentMode: "Inhaltsmodus",
     imageFit: "Passform des Bildes",
@@ -1067,14 +1067,10 @@ editorLocalization.locales["de"] = germanTranslation;
 
 // The following strings have been translated by a machine translation service
 // Remove those strings that you have corrected manually
-// qt.tagbox: "Multi-Select Dropdown" => "Dropdown-Menü mit Mehrfachauswahl"
 // ed.themeSurvey: "Themes" => "Themen"
 // ed.themePropertyGridTitle: "Theme Settings" => "Theme-Einstellungen"
-// ed.themeExportButton: "Export" => "Exportieren"
-// ed.themeImportButton: "Import" => "Importieren"
 // ed.carryForwardChoicesCopied: "Choices are copied from" => "Auswahlmöglichkeiten werden kopiert von"
 // ed.imagePlaceHolder: "Drag and drop an image here or click the button below and choose an image to upload" => "Ziehen Sie ein Bild per Drag & Drop hierher oder klicken Sie auf die Schaltfläche unten und wählen Sie ein Bild zum Hochladen aus"
-// ed.imageChooseImage: "Choose Image" => "Bild auswählen"
 // ed.choices_Item: "Item " => "Artikel "
 // lg.trigger_setvalueEmptyText: "clear question value: {0}" => "Klarer Fragewert: {0}"
 // lg.uncompletedRule_title: "Logical rules are incomplete" => "Logische Regeln sind unvollständig"
@@ -1087,15 +1083,12 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "Verwenden Sie keine reservierten Wörter: \"Element\", \"Auswahl\", \"Panel\", \"Zeile\"."
 // image.imageHeight: "Image height (in CSS-accepted values)" => "Bildhöhe (in CSS-akzeptierten Werten)"
 // image.imageWidth: "Image width (in CSS-accepted values)" => "Bildbreite (in CSS-akzeptierten Werten)"
-// pe.minImageHeight: "Minimum image height" => "Minimale Bildhöhe"
-// pe.maxImageHeight: "Maximum image height" => "Maximale Bildhöhe"
 // pe.allowResizeComment: "Allow users to resize text areas" => "Benutzern erlauben, die Größe von Textbereichen zu ändern"
 // pe.templateTitleLocation: "Question title location" => "Position des Fragetitels"
 // pe.panelRemoveButtonLocation: "Remove Panel button location" => "Position der Panel-Schaltfläche entfernen"
 // pe.hideIfRowsEmpty: "Hide the question if there are no rows" => "Blenden Sie die Frage aus, wenn keine Zeilen vorhanden sind"
 // pe.hideColumnsIfEmpty: "Hide columns if there are no rows" => "Spalten ausblenden, wenn keine Zeilen vorhanden sind"
 // pe.rateValues: "Custom rate values" => "Benutzerdefinierte Ratenwerte"
-// pe.rateCount: "Rate count" => "Anzahl der Raten"
 // pe.autoGenerate: "How to specify rate values?" => "Wie lege ich Tarifwerte fest?"
 // pe.hideIfChoicesEmpty: "Hide the question if it contains no choices" => "Blenden Sie die Frage aus, wenn sie keine Auswahlmöglichkeiten enthält"
 // pe.hideNumber: "Hide question number" => "Fragenummer ausblenden"
@@ -1118,7 +1111,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.showNumber: "Show panel number" => "Panel-Nummer anzeigen"
 // pe.logoWidth: "Logo width (in CSS-accepted values)" => "Logobreite (in CSS-akzeptierten Werten)"
 // pe.logoHeight: "Logo height (in CSS-accepted values)" => "Logohöhe (in CSS-akzeptierten Werten)"
-// pe.readOnly: "Read-only" => "Schreibgeschützt"
 // pe.enableIf: "Editable if" => "Bearbeitbar, wenn"
 // pe.emptyRowsText: "\"No rows\" message" => "Meldung \"Keine Zeilen\""
 // pe.size: "Input field size (in characters)" => "Größe des Eingabefeldes (in Zeichen)"
@@ -1136,19 +1128,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.keyName: "Key column" => "Spalte \"Schlüssel\""
 // itemvalue.text: "Alt text" => "Alt-Text"
 // pe.closeOnSelect: "Close the dropdown after selection" => "Schließen Sie das Dropdown-Menü nach der Auswahl"
-// pe.rateType: "Rate type" => "Art des Tarifs"
 // pv.tab: "Tabs" => "Tabulatoren"
-// inputType.color: "Color" => "Farbe"
-// inputType.date: "Date" => "Datum"
 // inputType.datetime-local: "Date and Time" => "Datum und Uhrzeit"
-// inputType.email: "Email" => "E-Mail"
-// inputType.month: "Month" => "Monat"
-// inputType.number: "Number" => "Zahl"
-// inputType.password: "Password" => "Passwort"
 // inputType.range: "Range" => "Bereich"
-// inputType.tel: "Phone Number" => "Telefonnummer"
-// inputType.text: "Text" => "Text"
-// inputType.time: "Time" => "Zeit"
 // inputType.url: "URL" => "Web-URL"
 // inputType.week: "Week" => "Woche"
 // pv.onBlur: "On blur" => "Bei Unschärfe"
@@ -1166,16 +1148,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // imageFit.cover: "Cover" => "Deckel"
 // imageFit.fill: "Fill" => "Füllen"
 // contentMode.auto: "Auto" => "Auto"
-// contentMode.image: "Image" => "Bild"
-// contentMode.video: "Video" => "Video"
 // contentMode.youtube: "YouTube" => "YouTube (Englisch)"
 // displayMode.auto: "Auto" => "Auto"
 // displayMode.buttons: "Buttons" => "Tasten"
 // displayMode.dropdown: "Dropdown" => "Dropdown-Liste"
 // rateColorMode.default: "Default" => "Vorgabe"
-// rateType.labels: "Labels" => "Etiketten"
-// rateType.stars: "Stars" => "Sterne"
-// rateType.smileys: "Smileys" => "Smileys"
 // pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen."
 // pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Ändert die Größe des sichtbaren Bereichs des Eingabefelds. Bitte verwenden Sie die Einstellung <b>Validierung → Maximale Länge</b>, um die Eingabelänge zu begrenzen."
 // pehelp.format: "Use {0} as a placeholder for the actual value." => "Verwenden Sie {0} als Platzhalter für den tatsächlichen Wert."
@@ -1188,7 +1165,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error." => "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus."
 // p.value: "Value" => "Wert"
 // p.tabAlign: "Tab alignment" => "Ausrichtung der Registerkarten"
-// p.showTOC: "Show TOC" => "Inhaltsverzeichnis anzeigen"
 // p.tocLocation: "Toc location" => "Toc-Standort"
 // p.showBrandInfo: "Show brand info" => "Markeninfo anzeigen"
 // p.renderAs: "Render as" => "Rendern als"
@@ -1196,8 +1172,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.cellHint: "Cell hint" => "Hinweis auf die Zelle"
 // p.isUnique: "Is unique" => "Ist einzigartig"
 // p.showInMultipleColumns: "Show in multiple columns" => "In mehreren Spalten anzeigen"
-// p.totalMaximumFractionDigits: "Total maximum fraction digits" => "Maximale Bruchstellen insgesamt"
-// p.totalMinimumFractionDigits: "Total minimum fraction digits" => "Minimale Bruchstellen insgesamt"
 // p.detailElements: "Detail elements" => "Detail-Elemente"
 // p.allowAdaptiveActions: "Allow adaptive actions" => "Adaptive Aktionen zulassen"
 // p.choicesLazyLoadEnabled: "Choices lazy load enabled" => "Auswahlmöglichkeiten Lazy Load aktiviert"
@@ -1205,7 +1179,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.inputFieldComponent: "Input field component" => "Eingabefeld-Komponente"
 // p.itemComponent: "Item component" => "Artikelkomponente"
 // p.allowResize: "Allow resizing" => "Größenänderung zulassen"
-// p.rateType: "Rate type" => "Art des Tarifs"
 // p.precision: "Precision" => "Präzision"
 // p.matrixDragHandleArea: "Matrix drag handle area" => "Matrix-Ziehgriffbereich"
 // p.backgroundImage: "Background image" => "Hintergrundbild"
@@ -1296,12 +1269,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // names.playful: "Playful" => "Verspielt"
 // names.ultra: "Ultra" => "Ultra"
 // colors.teal: "Teal" => "Krickente"
-// colors.blue: "Blue" => "Blau"
-// colors.purple: "Purple" => "Lila"
 // colors.orchid: "Orchid" => "Orchidee"
 // colors.tulip: "Tulip" => "Tulpe"
-// colors.brown: "Brown" => "Braun"
-// colors.green: "Green" => "Grün"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Scharf"
