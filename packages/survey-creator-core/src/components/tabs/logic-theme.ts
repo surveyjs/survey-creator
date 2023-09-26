@@ -316,6 +316,7 @@ export var logicCss = {
   },
   list: {
     root: "sv-list__container sl-list",
+    itemBody: "sv-list__item-body sl-list__item-body"
   },
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"
