@@ -646,7 +646,7 @@ export var bgStrings = {
     "true": "вярно",
     "false": "невярно",
     file: "Локални файлове",
-    camera: "Фотоапарат",
+    camera: "Камера",
     "file-camera": "Локални файлове или камера",
     inherit: "Наследяване",
     show: "Видим",

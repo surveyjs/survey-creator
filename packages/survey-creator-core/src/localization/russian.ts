@@ -646,7 +646,7 @@ export var ruStrings = {
     "true": "истинный",
     "false": "ложный",
     file: "Локальные файлы",
-    camera: "Фотоаппарат",
+    camera: "Камера",
     "file-camera": "Локальные файлы или камера",
     inherit: "Наследовать",
     show: "Показать",
