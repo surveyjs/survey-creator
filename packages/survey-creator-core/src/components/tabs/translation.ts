@@ -714,8 +714,11 @@ export class Translation extends Base implements ITranslationLocales {
         const q = options.question;
         const rowIndex = q.visibleRows.indexOf(options.row);
         const locale = q.value[rowIndex].name;
-        //TODO "Edit"
-        options.actions.push(new Action({ title: "Edit", location: "end", action: () => this.showTranslationEditor(locale) }));
+        options.actions.splice(0, 0, new Action({
+          iconName: "icon-language",
+          tooltip: "Translate",
+          location: "end",
+          action: () => this.showTranslationEditor(locale) }));
       }
       updateMatixActionsClasses(options.actions);
     });

@@ -246,5 +246,8 @@ test("Show Edit action only if doMachineTranslation is set", () => {
   expect(cell.isActionsCell).toBeFalsy();
   cell = rows[3].cells[2];
   expect(cell.isActionsCell).toBeTruthy();
-  expect(cell.item.value.actions).toHaveLength(2);
+  const actions = cell.item.value.actions;
+  expect(actions).toHaveLength(2);
+  expect(actions[0].iconName).toBe("icon-language");
+  expect(actions[1].iconName).toBe("icon-delete");
 });
