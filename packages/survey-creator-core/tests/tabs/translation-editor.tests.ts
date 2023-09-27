@@ -196,7 +196,6 @@ test("Implement machine translation for Creator", () => {
   let actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toBe("svc-translation-import");
-
   creator.onMachineTranslaton.add((sender, options) => {
     options.callback(true, ["Title fr", "Desc fr"]);
   });

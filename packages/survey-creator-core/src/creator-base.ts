@@ -3143,7 +3143,9 @@ export class CreatorBase extends Base
     this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
-  getHasMachineTranslation() { return !this.onMachineTranslaton.isEmpty; }
+  getHasMachineTranslation(): boolean {
+    return !this.onMachineTranslaton.isEmpty;
+  }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void {
     if(!this.getHasMachineTranslation()) {
       callback(false, undefined);

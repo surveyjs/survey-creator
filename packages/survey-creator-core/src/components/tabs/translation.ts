@@ -716,7 +716,7 @@ export class Translation extends Base implements ITranslationLocales {
         const locale = q.value[rowIndex].name;
         options.actions.splice(0, 0, new Action({
           iconName: "icon-language",
-          tooltip: "Translate",
+          locTooltipName: "ed.translateUsigAI",
           location: "end",
           action: () => this.showTranslationEditor(locale) }));
       }
@@ -1322,6 +1322,23 @@ export class TranslationEditor {
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
+    const dialogTitle = editorLocalization.getString("ed.translationDialogTitle") + " (" + this.translation.getLocaleName(this.locale) + ")";
+
+    if(this.translation.stringsSurvey.getAllQuestions(true).length === 0) {
+      const locStr = new LocalizableString(this.translation.stringsSurvey);
+      locStr.text = editorLocalization.getString("ed.translationNoStrings");
+      const popup = surveySettings.showDialog(<IDialogOptions>{
+        componentName: "sv-string-viewer",
+        data: { locStr: locStr, locString: locStr, model: locStr },
+        onApply: (): boolean => { return true; },
+        title: dialogTitle,
+        displayMode: "popup"
+      }, this.options.rootElement);
+      const actions = popup.footerToolbar.actions;
+      actions.splice(1, actions.length - 1);
+      actions[0].title = "OK";
+      return;
+    }
     const popupModel: PopupBaseViewModel = surveySettings.showDialog(
       <IDialogOptions>{
         componentName: "survey",
@@ -1337,7 +1354,7 @@ export class TranslationEditor {
           this.dispose();
         },
         cssClass: "sv-property-editor",
-        title: "Untranslated strings: " + this.translation.getLocaleName(this.locale), //TODO
+        title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);
     popupModel.locale = editorLocalization.currentLocale;
@@ -1377,10 +1394,10 @@ export class TranslationEditor {
     const actions = survey.navigationBar.actions;
     actions.splice(0, actions.length);
     if(this.options.getHasMachineTranslation()) {
-      survey.addNavigationItem(new Action({
+      const action = survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
-        title: "Translate", //TODO
+        locTitleName: "ed.translateUsigAI",
         mode: "small",
         component: "sv-action-bar-item",
         action: () => { this.doMachineTranslation(); }
