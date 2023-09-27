@@ -45,6 +45,7 @@ require("./creator-theme/creator.scss");
 
 export interface IKeyboardShortcut {
   name?: string;
+  affectedTab?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
@@ -2766,11 +2767,12 @@ export class CreatorBase extends Base
     }
   }
   protected onKeyDownHandler = (event: KeyboardEvent) => {
-    let shortcut;
-    let hotKey;
-    Object.keys(this.shortcuts || {}).forEach((key) => {
-      shortcut = this.shortcuts[key + this.activeTab];
-      hotKey = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
+    const availableShortcuts = Object.keys(this.shortcuts || {})
+      .map((key) => this.shortcuts[key])
+      .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
+
+    availableShortcuts.forEach((shortcut: IKeyboardShortcut) => {
+      const hotKey: { ctrlKey?: boolean, shiftKey?: boolean, keyCode: number } = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
       if (!hotKey) return;
 
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
@@ -2781,11 +2783,11 @@ export class CreatorBase extends Base
     });
   }
   private shortcuts: { [index: string]: IKeyboardShortcut } = {};
-  public registerShortcut(name: string, shortcut: IKeyboardShortcut, affectedTab = "designer") {
-    this.shortcuts[name + affectedTab] = shortcut;
+  public registerShortcut(name: string, shortcut: IKeyboardShortcut) {
+    this.shortcuts[name] = shortcut;
   }
-  public unRegisterShortcut(name: string, affectedTab = "designer") {
-    delete this.shortcuts[name + affectedTab];
+  public unRegisterShortcut(name: string) {
+    delete this.shortcuts[name];
   }
 
   protected deletePanelOrQuestion(obj: Base): void {

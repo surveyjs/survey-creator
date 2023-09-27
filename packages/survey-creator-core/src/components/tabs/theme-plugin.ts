@@ -27,7 +27,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
-    creator.registerShortcut("undo", {
+    creator.registerShortcut("undo_theme", {
+      name: "undo",
+      affectedTab: "theme",
       hotKey: {
         ctrlKey: true,
         keyCode: 90,
@@ -36,8 +38,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         keyCode: 90,
       },
       execute: () => this.undo()
-    }, "theme");
-    creator.registerShortcut("redo", {
+    });
+    creator.registerShortcut("redo_theme", {
+      name: "redo",
+      affectedTab: "theme",
       hotKey: {
         ctrlKey: true,
         keyCode: 89,
@@ -46,7 +50,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         keyCode: 89,
       },
       execute: () => this.redo()
-    }, "theme");
+    });
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
