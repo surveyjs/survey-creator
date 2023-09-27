@@ -153,7 +153,7 @@ test("Call do machine translation", () => {
     func_strings = strings;
     callback(func_res, func_translated);
   };
-  const editor = new Translation(survey, options).createTranslationEditor("fr");
+  let editor = new Translation(survey, options).createTranslationEditor("fr");
   editor.doMachineTranslation();
   expect(func_fromLocale).toBe("en");
   expect(func_toLocale).toBe("fr");
@@ -162,11 +162,14 @@ test("Call do machine translation", () => {
   expect(func_strings[1]).toBe("desc");
   editor.apply();
   expect(q1.locTitle.getLocaleText("fr")).toBeFalsy();
-
+  editor = new Translation(survey, options).createTranslationEditor("fr");
   func_res = true;
   func_translated = ["Title fr", "desc fr"];
   editor.doMachineTranslation();
   expect(q1.locTitle.getLocaleText("fr")).toBeFalsy();
+  const matrix = editor.translation.stringsSurvey.getAllQuestions()[0];
+  const row = matrix.visibleRows[0];
+  expect(row.cells[1].question.value).toBe("Title fr");
   editor.apply();
   expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
 });
@@ -207,4 +210,41 @@ test("Implement machine translation for Creator", () => {
   const q1 = creator.survey.getQuestionByName("q1");
   expect(q1.locTitle.getLocaleText("fr")).toBe("Title fr");
   expect(q1.locDescription.getLocaleText("fr")).toBe("Desc fr");
+});
+test("Show Edit action only if doMachineTranslation is set", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "text",
+        name: "q1",
+      }
+    ]
+  });
+  let translation = new Translation(survey);
+  translation.addLocale("fr");
+  let matrix = translation.localesQuestion;
+  expect(matrix.visibleRows).toHaveLength(2);
+  let rows = matrix.renderedTable.rows;
+  expect(rows).toHaveLength(2 * 2);
+  expect(rows[1].cells).toHaveLength(3);
+  let cell = rows[1].cells[2];
+  expect(cell.isActionsCell).toBeFalsy();
+  cell = rows[3].cells[2];
+  expect(cell.isActionsCell).toBeTruthy();
+  expect(cell.item.value.actions).toHaveLength(1);
+
+  const options = new EmptySurveyCreatorOptions();
+  options.machineTranslationValue = true;
+  translation = new Translation(survey, options);
+  translation.addLocale("fr");
+  matrix = translation.localesQuestion;
+  expect(matrix.visibleRows).toHaveLength(2);
+  rows = matrix.renderedTable.rows;
+  expect(rows).toHaveLength(2 * 2);
+  expect(rows[1].cells).toHaveLength(3);
+  cell = rows[1].cells[2];
+  expect(cell.isActionsCell).toBeFalsy();
+  cell = rows[3].cells[2];
+  expect(cell.isActionsCell).toBeTruthy();
+  expect(cell.item.value.actions).toHaveLength(2);
 });

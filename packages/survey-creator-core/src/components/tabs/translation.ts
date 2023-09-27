@@ -166,6 +166,19 @@ export class TranslationItem extends TranslationItemBase {
   }
   public toJSON(): any {
     var json = this.locString.getJson();
+    const keys = Object.keys(this.hashValues);
+    if(keys.length > 0) {
+      keys.forEach(loc => {
+        const text = this.hashValues[loc].text;
+        if(!!text) {
+          if(!json) json = {};
+          if(typeof json === "string") {
+            json = { default: json };
+          }
+          json[loc] = text;
+        }
+      });
+    }
     json = this.correctJSON(json);
     if (!json || typeof json === "string") return { default: json };
     return json;
@@ -697,9 +710,11 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
-      if(findAction(options.actions, "remove-row")) {
-        const locale = options.question.value[options.row.index].name;
-        //TOdo "Edit"
+      if(this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row")) {
+        const q = options.question;
+        const rowIndex = q.visibleRows.indexOf(options.row);
+        const locale = q.value[rowIndex].name;
+        //TODO "Edit"
         options.actions.push(new Action({ title: "Edit", location: "end", action: () => this.showTranslationEditor(locale) }));
       }
       updateMatixActionsClasses(options.actions);
@@ -912,6 +927,12 @@ export class Translation extends Base implements ITranslationLocales {
       );
     }
     return res;
+  }
+  public updateStringsSurveyData(): void {
+    const survey = this.stringsSurvey;
+    if(survey) {
+      survey.data = this.getStringsSurveyData(survey);
+    }
   }
   private getStringsQuestionData(matrix: QuestionMatrixDropdownModel): any {
     var res = {};
@@ -1331,6 +1352,7 @@ export class TranslationEditor {
       for(let i = 0; i < Math.min(items.length, translatedStrings.length); i ++) {
         items[i].values(this.locale).text = translatedStrings[i];
       }
+      this.translation.updateStringsSurveyData();
     };
     this.options.doMachineTranslation(fromLocale, this.locale, strings, callback);
   }
