@@ -27,6 +27,30 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+    creator.registerShortcut("undo_theme", {
+      name: "undo",
+      affectedTab: "theme",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 90,
+      },
+      macOsHotkey: {
+        keyCode: 90,
+      },
+      execute: () => this.undo()
+    });
+    creator.registerShortcut("redo_theme", {
+      name: "redo",
+      affectedTab: "theme",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 89,
+      },
+      macOsHotkey: {
+        keyCode: 89,
+      },
+      execute: () => this.redo()
+    });
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);

@@ -50,6 +50,8 @@ var frenchTranslation = {
     settingsTooltip: "Ouvrir paramètres",
     surveySettings: "Paramètres du sondage",
     surveySettingsTooltip: "Ouvrir paramètres du sondage",
+    themeSettings: "Paramètres du thème",
+    themeSettingsTooltip: "Ouvrir les paramètres du thème",
     showPanel: "Afficher le panneau",
     hidePanel: "Masquer le panneau",
     prevSelected: "Sélectionnez précédent",
@@ -279,6 +281,7 @@ var frenchTranslation = {
     cellsEmptyRowsColumns: "Ajoutez au minimum une ligne ou une colonne",
     showPreviewBeforeComplete: "Prévisualiser les réponses avant d'envoyer le sondage",
     overridingPropertyPrefix: "Défini par ",
+    resetToDefaultCaption: "Réinitialisation",
     propertyIsEmpty: "Veuillez entrer une valeur",
     propertyIsNoUnique: "Veuillez saisir une valeur unique",
     propertyNameIsNotUnique: "Veuillez saisir une variable unique",
@@ -642,6 +645,9 @@ var frenchTranslation = {
   pv: {
     "true": "vrai",
     "false": "faux",
+    file: "Fichiers locaux",
+    camera: "Caméra",
+    "file-camera": "Fichiers locaux ou caméra",
     inherit: "Hérité",
     show: "Afficher",
     hide: "Masquer",
@@ -1625,3 +1631,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"
+// ed.themeSettings: "Theme Settings" => "Paramètres du thème"
+// ed.themeSettingsTooltip: "Open theme settings" => "Ouvrir les paramètres du thème"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Réinitialisation"
+// pv.file: "Local files" => "Fichiers locaux"
+// pv.camera: "Camera" => "Caméra"
+// pv.file-camera: "Local files or camera" => "Fichiers locaux ou caméra"

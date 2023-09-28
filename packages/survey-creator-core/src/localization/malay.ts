@@ -50,6 +50,8 @@ export var msStrings = {
     settingsTooltip: "Buka tetapan tinjauan",
     surveySettings: "Seting Tinjauan",
     surveySettingsTooltip: "Buka seting tinjauan",
+    themeSettings: "Seting Tema",
+    themeSettingsTooltip: "Buka seting tema",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -279,6 +281,7 @@ export var msStrings = {
     cellsEmptyRowsColumns: "Terdapat sekurang-kurangnya satu lajur atau baris",
     showPreviewBeforeComplete: "Pratonton jawapan sebelum menyerahkan tinjauan",
     overridingPropertyPrefix: "Ditetapkan mengikut ",
+    resetToDefaultCaption: "Set semula",
     propertyIsEmpty: "Sila masukkan nilai",
     propertyIsNoUnique: "Sila masukkan nilai unik",
     propertyNameIsNotUnique: "Sila masukkan nama unik",
@@ -642,6 +645,9 @@ export var msStrings = {
   pv: {
     "true": "Benar",
     "false": "Palsu",
+    file: "Fail tempatan",
+    camera: "Kamera",
+    "file-camera": "Fail atau kamera tempatan",
     inherit: "warisi",
     show: "tunjukkan",
     hide: "sembunyikan",
@@ -1517,3 +1523,11 @@ editorLocalization.locales["ms"] = msStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Warna ruang letak"
+// ed.themeSettings: "Theme Settings" => "Seting Tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Buka seting tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Set semula"
+// pv.file: "Local files" => "Fail tempatan"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Fail atau kamera tempatan"

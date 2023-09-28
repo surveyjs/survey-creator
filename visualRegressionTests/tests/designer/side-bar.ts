@@ -37,3 +37,28 @@ test("object selector with search and selected item", async (t) => {
     await t.resizeWindow(1920, 900);
   });
 });
+test("object selector with large object's name", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const sideBarActionsContainer = Selector(".svc-side-bar__container-actions");
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "very_long_long_long_long_long_long_long_long_name"
+            }
+          ]
+        }
+      ]
+    });
+    await t
+      .resizeWindow(1920, 1080)
+      .click(Selector(".svc-question__content"), { offsetX: 10, offsetY: 10, })
+      .click(Selector(".svc-question__content"), { offsetX: 10, offsetY: 10, });
+
+    await takeElementScreenshot("side-bar-object-selector-with-big-name.png", sideBarActionsContainer, t, comparer);
+    await t.resizeWindow(1920, 900);
+  });
+});

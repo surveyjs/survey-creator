@@ -329,6 +329,8 @@ export var enStrings = {
     choicesOrder: "Choices sort order",
     visible: "Visible",
     isRequired: "Required",
+    markRequired: "Mark as required",
+    removeRequiredMark: "Remove the required mark",
     isAllRowRequired: "Require answer for all rows",
     requiredErrorText: "\"Required\" error message",
     startWithNewLine: "Display the question on a new line",
@@ -647,6 +649,9 @@ export var enStrings = {
   pv: {
     "true": "true",
     "false": "false",
+    "file": "Local files",
+    "camera": "Camera",
+    "file-camera": "Local files or camera",
     inherit: "Inherit",
     show: "Visible",
     hide: "Hidden",

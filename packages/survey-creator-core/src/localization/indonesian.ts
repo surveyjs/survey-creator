@@ -50,6 +50,8 @@ export var indonesianStrings = {
     settingsTooltip: "Buka pengaturan",
     surveySettings: "Pengaturan Survei",
     surveySettingsTooltip: "Buka pengaturan survei",
+    themeSettings: "Pengaturan Tema",
+    themeSettingsTooltip: "Buka pengaturan tema",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -279,6 +281,7 @@ export var indonesianStrings = {
     cellsEmptyRowsColumns: "Harus ada setidaknya satu kolom atau baris",
     showPreviewBeforeComplete: "Melihat pratinjau jawaban sebelum mengirimkan survei",
     overridingPropertyPrefix: "Ditetapkan oleh ",
+    resetToDefaultCaption: "Reset",
     propertyIsEmpty: "Silahkan masukkan nilai",
     propertyIsNoUnique: "Silakan masukkan nilai unik",
     propertyNameIsNotUnique: "Silakan masukkan nama yang unik",
@@ -642,6 +645,9 @@ export var indonesianStrings = {
   pv: {
     "true": "benar",
     "false": "palsu",
+    file: "File lokal",
+    camera: "Kamera",
+    "file-camera": "File atau kamera lokal",
     inherit: "inherit",
     show: "tampilkan",
     hide: "sembunyikan",
@@ -1718,3 +1724,11 @@ editorLocalization.locales["id"] = indonesianStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Warna tempat penampung"
+// ed.themeSettings: "Theme Settings" => "Pengaturan Tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Buka pengaturan tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Reset"
+// pv.file: "Local files" => "File lokal"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "File atau kamera lokal"

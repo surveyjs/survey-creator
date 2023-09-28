@@ -9,6 +9,7 @@ export class UndoRedoPlugin implements ICreatorPlugin {
     this.model = new UndoRedoController(creator);
     this.model.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("undo", {
+      affectedTab: "designer",
       hotKey: {
         ctrlKey: true,
         keyCode: 90,
@@ -19,6 +20,7 @@ export class UndoRedoPlugin implements ICreatorPlugin {
       execute: () => this.model.undo()
     });
     creator.registerShortcut("redo", {
+      affectedTab: "designer",
       hotKey: {
         ctrlKey: true,
         keyCode: 89,

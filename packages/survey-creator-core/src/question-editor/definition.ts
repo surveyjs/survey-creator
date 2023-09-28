@@ -73,6 +73,7 @@ export class SurveyQuestionEditorDefinition {
     },
     file: {
       properties: [
+        "sourceType",
         "allowMultiple",
         "allowImagesPreview",
         "acceptedTypes",

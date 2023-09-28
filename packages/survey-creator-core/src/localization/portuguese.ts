@@ -50,6 +50,8 @@ var portugueseTranslation = {
     settingsTooltip: "Configurações",
     surveySettings: "Configurações de Questionários",
     surveySettingsTooltip: "Configurações",
+    themeSettings: "Configurações do tema",
+    themeSettingsTooltip: "Abrir configurações de tema",
     showPanel: "Mostrar Painel",
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
@@ -279,6 +281,7 @@ var portugueseTranslation = {
     cellsEmptyRowsColumns: "Deve haver ao menos uma coluna ou linha",
     showPreviewBeforeComplete: "Visualize as respostas antes de submeter o questionário",
     overridingPropertyPrefix: "Definido por ",
+    resetToDefaultCaption: "Repor",
     propertyIsEmpty: "Por favor informe um valor na propriedade",
     propertyIsNoUnique: "Insira um valor exclusivo.",
     propertyNameIsNotUnique: "Insira um nome único",
@@ -642,6 +645,9 @@ var portugueseTranslation = {
   pv: {
     "true": "verdadeiro",
     "false": "falso",
+    file: "Arquivos locais",
+    camera: "Câmera",
+    "file-camera": "Arquivos locais ou câmera",
     inherit: "herdar",
     show: "mostrar",
     hide: "ocultar",
@@ -1223,3 +1229,9 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Tem certeza de que deseja excluir todas as cadeias de caracteres para este idioma?"
 // ed.themeResetButton: "Reset theme settings to default" => "Redefinir as configurações do tema para o padrão"
 // theme.placeholderColor: "Placeholder color" => "Cor do espaço reservado"
+// ed.themeSettings: "Theme Settings" => "Configurações do tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Abrir configurações de tema"
+// pe.resetToDefaultCaption: "Reset" => "Repor"
+// pv.file: "Local files" => "Arquivos locais"
+// pv.camera: "Camera" => "Câmera"
+// pv.file-camera: "Local files or camera" => "Arquivos locais ou câmera"

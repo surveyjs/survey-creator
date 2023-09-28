@@ -50,6 +50,8 @@ export let svStrings = {
     settingsTooltip: "Öppna inställningar",
     surveySettings: "Inställningar för undersökning",
     surveySettingsTooltip: "Öppna undersökningsinställningar",
+    themeSettings: "Tema Inställningar",
+    themeSettingsTooltip: "Öppna temainställningar",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -279,6 +281,7 @@ export let svStrings = {
     cellsEmptyRowsColumns: "Det bör vara minst 1 kolumn eller rad",
     showPreviewBeforeComplete: "Förhandsgranska svar innan du skickar in undersökningen",
     overridingPropertyPrefix: "Inställd av ",
+    resetToDefaultCaption: "Nollställa",
     propertyIsEmpty: "Vänligen fyll i ett värde",
     propertyIsNoUnique: "Ange ett unikt värde",
     propertyNameIsNotUnique: "Ange ett unikt namn",
@@ -642,6 +645,9 @@ export let svStrings = {
   pv: {
     "true": "sann",
     "false": "falsk",
+    file: "Lokala filer",
+    camera: "Kamera",
+    "file-camera": "Lokala filer eller kamera",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -1741,3 +1747,11 @@ editorLocalization.locales["sv"] = svStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Färg på platshållare"
+// ed.themeSettings: "Theme Settings" => "Tema Inställningar"
+// ed.themeSettingsTooltip: "Open theme settings" => "Öppna temainställningar"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Nollställa"
+// pv.file: "Local files" => "Lokala filer"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokala filer eller kamera"

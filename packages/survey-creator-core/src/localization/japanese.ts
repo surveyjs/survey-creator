@@ -50,6 +50,8 @@ export var jaStrings = {
     settingsTooltip: "アンケートの設定を開く",
     surveySettings: "アンケート設定",
     surveySettingsTooltip: "アンケート設定を開く",
+    themeSettings: "テーマ設定",
+    themeSettingsTooltip: "テーマ設定を開く",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -279,6 +281,7 @@ export var jaStrings = {
     cellsEmptyRowsColumns: "少なくとも1つの列または行を含む必要があります",
     showPreviewBeforeComplete: "アンケートを送信する前に回答をプレビューする",
     overridingPropertyPrefix: "設定者",
+    resetToDefaultCaption: "リセット",
     propertyIsEmpty: "値を入力してください",
     propertyIsNoUnique: "固有値を入力してください",
     propertyNameIsNotUnique: "固有名を入力してください",
@@ -642,6 +645,9 @@ export var jaStrings = {
   pv: {
     "true": "真",
     "false": "偽",
+    file: "ローカルファイル",
+    camera: "カメラ",
+    "file-camera": "ローカルファイルまたはカメラ",
     inherit: "継承する",
     show: "表示する",
     hide: "非表示にする",
@@ -1563,3 +1569,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "プレースホルダの色"
+// ed.themeSettings: "Theme Settings" => "テーマ設定"
+// ed.themeSettingsTooltip: "Open theme settings" => "テーマ設定を開く"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "リセット"
+// pv.file: "Local files" => "ローカルファイル"
+// pv.camera: "Camera" => "カメラ"
+// pv.file-camera: "Local files or camera" => "ローカルファイルまたはカメラ"

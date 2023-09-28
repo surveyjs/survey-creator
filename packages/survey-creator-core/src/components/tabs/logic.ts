@@ -8,6 +8,8 @@ require("./logic.scss");
 export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.isFocusedContent = true;
   question.popupModel.setWidthByTarget = false;
+  question.popupModel.positionMode = "flex";
+  question.popupModel.showPointer = true;
   question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
 }
 
