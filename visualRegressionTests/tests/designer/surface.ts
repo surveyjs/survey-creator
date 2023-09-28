@@ -1414,15 +1414,16 @@ test("Question adorners - popup", async (t) => {
     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
     const qContent = Selector(".svc-question__content");
     const qDots = Selector(".svc-question__content .sv-dots");
-    const requiredItem = Selector(".sv-list__item").withText("Required");
+    const markRequiredItem = Selector(".sv-list__item").withText("Mark as required");
+    const removeRequiredItem = Selector(".sv-list__item").withText("Remove the required mark");
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
-    await t.click(requiredItem);
+    await t.click(markRequiredItem);
 
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
-    await t.click(requiredItem);
+    await t.click(removeRequiredItem);
   });
 });
 test("Question adorners for different sizes", async (t) => {
