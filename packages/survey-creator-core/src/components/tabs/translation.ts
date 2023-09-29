@@ -1368,8 +1368,8 @@ export class TranslationEditor {
     items.forEach(item => {
       strings.push(item.getDefaultLocaleText());
     });
-    const callback = (res: boolean, translatedStrings: Array<string>): void => {
-      if(!res || !Array.isArray(translatedStrings)) return;
+    const callback = (translatedStrings: Array<string>): void => {
+      if(!Array.isArray(translatedStrings)) return;
       for(let i = 0; i < Math.min(items.length, translatedStrings.length); i ++) {
         items[i].values(this.locale).text = translatedStrings[i];
       }

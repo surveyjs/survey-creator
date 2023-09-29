@@ -295,7 +295,7 @@ export interface ISurveyCreatorOptions {
     uploadingCallback: (status: string, data: any) => any
   ): void;
   getHasMachineTranslation(): boolean;
-  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void;
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -439,7 +439,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     uploadingCallback: (status: string, data: any) => any
   ): void {}
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
-  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void {}
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {}
 }
 
 StylesManager.applyTheme("defaultV2");

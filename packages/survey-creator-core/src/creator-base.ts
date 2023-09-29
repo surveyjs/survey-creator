@@ -890,10 +890,10 @@ export class CreatorBase extends Base
    * - `sender` - A Survey Creator instance that raised the event.
    * - `options.fromLocale` - Locale for strings your want to translate. It is commonly the default locale.
    * - `options.toLocale` - The locale you want to translate to
-   * - `options.stringsToTranslate` - A list of strings you need to translate.
-   * - `options.callback: (result: boolean, translatedStrings: Array<strings>)` - A callback function that you have to call after the translation is done. If you can't translate strings, you have to set 'false' as the first parameter. Otherwise you have to set `true` and the second parameter is the list of translated strings.
+   * - `options.strings` - A list of strings you need to translate.
+   * - `options.callback: (strings: Array<strings>)` - A callback function that you have to call after the translation is done. If you can't translate strings, you have to set 'false' as the first parameter. Otherwise you have to set `true` and the second parameter is the list of translated strings.
    */
-  public onMachineTranslaton: CreatorEvent = new CreatorEvent();
+  public onMachineTranslation: CreatorEvent = new CreatorEvent();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -3144,13 +3144,13 @@ export class CreatorBase extends Base
     return options.text;
   }
   getHasMachineTranslation(): boolean {
-    return !this.onMachineTranslaton.isEmpty;
+    return !this.onMachineTranslation.isEmpty;
   }
-  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void {
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {
     if(!this.getHasMachineTranslation()) {
-      callback(false, undefined);
+      callback(undefined);
     } else {
-      this.onMachineTranslaton.fire(this, { fromLocale: fromLocale, toLocale: toLocale, stringsToTranslate: strings, callback: callback });
+      this.onMachineTranslation.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
     }
   }
 

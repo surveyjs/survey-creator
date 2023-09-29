@@ -147,11 +147,11 @@ test("Call do machine translation", () => {
   let func_strings: Array<string> = [];
   let func_res = false;
   let func_translated: Array<string>;
-  options.doMachineTranslation = (fromLocale: string, toLocale: string, strings: Array<string>, callback: (result: boolean, translated: Array<string>) => void): void => {
+  options.doMachineTranslation = (fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void => {
     func_fromLocale = fromLocale;
     func_toLocale = toLocale;
     func_strings = strings;
-    callback(func_res, func_translated);
+    callback(func_res ? func_translated : []);
   };
   let editor = new Translation(survey, options).createTranslationEditor("fr");
   editor.doMachineTranslation();
@@ -196,8 +196,8 @@ test("Implement machine translation for Creator", () => {
   let actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toBe("svc-translation-import");
-  creator.onMachineTranslaton.add((sender, options) => {
-    options.callback(true, ["Title fr", "Desc fr"]);
+  creator.onMachineTranslation.add((sender, options) => {
+    options.callback(["Title fr", "Desc fr"]);
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();
   editor = tabTranslation.model.createTranslationEditor("fr");
