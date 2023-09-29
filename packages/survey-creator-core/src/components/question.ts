@@ -238,8 +238,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return true;
   }
   public getConvertToTypesActions(): Array<IAction> {
+    const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
+    const itemNames = [];
+    availableItems.forEach(item => itemNames.push(item.typeName));
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      this.currentType, this.creator.toolbox.itemNames, true
+      this.currentType, itemNames, true
     );
     const res = [];
     let lastItem = null;
@@ -389,11 +392,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-    (type) => {
-      this.currentAddQuestionType = type;
-    },
-    this.surveyElement instanceof PanelModelBase ? this.surveyElement : null
-  );
+    (type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");
