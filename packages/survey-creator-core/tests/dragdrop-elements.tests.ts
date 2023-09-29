@@ -300,6 +300,38 @@ test("SurveyElements: isDropTargetValid", () => {
   expect(ddHelper.isDropTargetValid(pd)).toBe(true); // "dropTarget is valid"
   expect(ddHelper.isDropTargetValid(pd.template)).toBe(true); // "dropTarget is valid (pd template)"
 });
+test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        type: "panel",
+        name: "panel1",
+        elements: [
+          { type: "text", name: "q2" }
+        ]
+      },
+      {
+        type: "text",
+        name: "q1",
+      },
+      {
+        type: "panel",
+        name: "panel2",
+      }
+    ],
+  });
+  const pd = survey.getPanelByName("panel2");
+  const ddHelper: any = new DragDropSurveyElements(survey);
+
+  ddHelper.draggedElement = pd;
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
+  ddHelper.maxNestedPanels = 0;
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(false);
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
+  ddHelper.isEdge = true;
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
+});
 
 // test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
 //   const survey = new SurveyModel({

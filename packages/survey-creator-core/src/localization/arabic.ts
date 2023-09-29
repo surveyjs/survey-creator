@@ -50,6 +50,8 @@ export var arStrings = {
     settingsTooltip: "Open survey settings",
     surveySettings: "إعدادات الاستطلاع",
     surveySettingsTooltip: "افتح إعدادات الاستطلاع",
+    themeSettings: "إعدادات النسق",
+    themeSettingsTooltip: "فتح إعدادات النسق",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -279,6 +281,7 @@ export var arStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "معاينة الإجابات قبل إرسال الاستطلاع",
     overridingPropertyPrefix: "تم تعيينه بواسطة ",
+    resetToDefaultCaption: "اعاده تعيين",
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
@@ -642,6 +645,9 @@ export var arStrings = {
   pv: {
     "true": "صحيح",
     "false": "خطأ",
+    file: "الملفات المحلية",
+    camera: "كاميرا",
+    "file-camera": "الملفات المحلية أو الكاميرا",
     inherit: "يَرث",
     show: "إظهار",
     hide: "إخفاء",
@@ -1473,3 +1479,11 @@ editorLocalization.locales["ar"] = arStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// ed.themeSettings: "Theme Settings" => "إعدادات النسق"
+// ed.themeSettingsTooltip: "Open theme settings" => "فتح إعدادات النسق"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "اعاده تعيين"
+// pv.file: "Local files" => "الملفات المحلية"
+// pv.camera: "Camera" => "كاميرا"
+// pv.file-camera: "Local files or camera" => "الملفات المحلية أو الكاميرا"

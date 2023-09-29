@@ -50,6 +50,8 @@ var simplifiedChineseTranslation = {
     settingsTooltip: "打开设置",
     surveySettings: "调查设置",
     surveySettingsTooltip: "打开调查设置",
+    themeSettings: "主题设置",
+    themeSettingsTooltip: "打开主题设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -279,6 +281,7 @@ var simplifiedChineseTranslation = {
     cellsEmptyRowsColumns: "至少有1行",
     showPreviewBeforeComplete: "在提交调查之前预览答案",
     overridingPropertyPrefix: "设置者",
+    resetToDefaultCaption: "重置",
     propertyIsEmpty: "请为该属性设定一个值",
     propertyIsNoUnique: "请输入唯一值",
     propertyNameIsNotUnique: "请输入唯一名称",
@@ -642,6 +645,9 @@ var simplifiedChineseTranslation = {
   pv: {
     "true": "真",
     "false": "假",
+    file: "本地文件",
+    camera: "照相机",
+    "file-camera": "本地文件或相机",
     inherit: "继承",
     show: "显示",
     hide: "隐藏",
@@ -1706,3 +1712,11 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "占位符颜色"
+// ed.themeSettings: "Theme Settings" => "主题设置"
+// ed.themeSettingsTooltip: "Open theme settings" => "打开主题设置"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "重置"
+// pv.file: "Local files" => "本地文件"
+// pv.camera: "Camera" => "照相机"
+// pv.file-camera: "Local files or camera" => "本地文件或相机"

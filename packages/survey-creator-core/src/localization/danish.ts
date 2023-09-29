@@ -50,6 +50,8 @@ export var danishStrings = {
     settingsTooltip: "Åbn indstillinger",
     surveySettings: "Indstillinger for undersøgelse",
     surveySettingsTooltip: "Åbn undersøgelsesindstillinger",
+    themeSettings: "Temaindstillinger",
+    themeSettingsTooltip: "Åbn temaindstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -279,6 +281,7 @@ export var danishStrings = {
     cellsEmptyRowsColumns: "Der skal være mindst én kolonne eller række",
     showPreviewBeforeComplete: "Få vist et eksempel på svarene, før du indsender undersøgelsen",
     overridingPropertyPrefix: "Indstillet af ",
+    resetToDefaultCaption: "Nulstille",
     propertyIsEmpty: "Indtast en værdi",
     propertyIsNoUnique: "Indtast en unik værdi",
     propertyNameIsNotUnique: "Indtast et unikt navn",
@@ -642,6 +645,9 @@ export var danishStrings = {
   pv: {
     "true": "sand",
     "false": "falsk",
+    file: "Lokale filer",
+    camera: "Kamera",
+    "file-camera": "Lokale filer eller kamera",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -1749,3 +1755,11 @@ editorLocalization.locales["da"] = danishStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// ed.themeSettings: "Theme Settings" => "Temaindstillinger"
+// ed.themeSettingsTooltip: "Open theme settings" => "Åbn temaindstillinger"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Nulstille"
+// pv.file: "Local files" => "Lokale filer"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"

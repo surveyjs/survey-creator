@@ -1,5 +1,5 @@
 {
-  "folders": [ ],
+  "folders": [],
   "rename": {
     "create-specialized-question-types": "customize-question-types",
     "create-composite-question-types": "customize-question-types",
@@ -10,7 +10,13 @@
     "customize-question-types-create-composite-question-types": "customize-question-types",
     "customize-question-types-create-custom-widgets": "customize-question-types",
     "customize-question-types-third-party-component-integration-react": "customize-question-types",
-    "customize-question-types-third-party-component-integration-angular": "customize-question-types"
+    "customize-question-types-third-party-component-integration-angular": "customize-question-types",
+    "localization": "survey-localization-translate-surveys-to-different-languages",
+    "migrate-from-v1-to-v2": "migration-guide-to-survey-creator-v2",
+    "toolbox": "toolbox-customization",
+    "survey-customization": "customize-survey-creation-process",
+    "property-grid": "property-grid-customization",
+    "troubleshooting": "overview"
   },
   "classRename": {
     "surveyeditor": "survey-creator",

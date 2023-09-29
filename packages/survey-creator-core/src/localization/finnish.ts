@@ -50,6 +50,8 @@ export var fiStrings = {
     settingsTooltip: "Avaa kyselyn asetukset",
     surveySettings: "Kyselyn asetukset",
     surveySettingsTooltip: "Avaa kyselyn asetukset",
+    themeSettings: "Teeman asetukset",
+    themeSettingsTooltip: "Avaa teema-asetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -279,6 +281,7 @@ export var fiStrings = {
     cellsEmptyRowsColumns: "Sarakkeita tai rivejä on oltava vähintään yksi",
     showPreviewBeforeComplete: "Esikatsele vastauksia ennen kyselyn lähettämistä",
     overridingPropertyPrefix: "Asettaja ",
+    resetToDefaultCaption: "Nollata",
     propertyIsEmpty: "Anna arvo",
     propertyIsNoUnique: "Anna yksilöllinen arvo",
     propertyNameIsNotUnique: "Anna yksilöllinen nimi",
@@ -642,6 +645,9 @@ export var fiStrings = {
   pv: {
     "true": "tosi",
     "false": "väärä",
+    file: "Paikalliset tiedostot",
+    camera: "Kamera",
+    "file-camera": "Paikalliset tiedostot tai kamera",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -1563,3 +1569,11 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Paikkamerkin väri"
+// ed.themeSettings: "Theme Settings" => "Teeman asetukset"
+// ed.themeSettingsTooltip: "Open theme settings" => "Avaa teema-asetukset"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Nollata"
+// pv.file: "Local files" => "Paikalliset tiedostot"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Paikalliset tiedostot tai kamera"

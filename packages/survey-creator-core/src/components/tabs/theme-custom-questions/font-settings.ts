@@ -1,4 +1,4 @@
-import { ComponentCollection, IQuestion, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, IQuestion, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 export const DefaultFonts = [
@@ -80,7 +80,12 @@ ComponentCollection.Instance.add({
 export function fontsettingsToCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {
     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
-    themeCssVariables[`--sjs-font-${question.name.toLocaleLowerCase()}-${key}`] = question.value[key] + (innerQ.unit?.toString() || "");
+    const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
+    if (question.value[key] !== (question as Question).defaultValue[key]) {
+      themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
+    } else {
+      delete themeCssVariables[propertyName];
+    }
   });
 }
 

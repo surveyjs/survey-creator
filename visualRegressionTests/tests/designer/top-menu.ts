@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "Top Menu Screenshot";
@@ -40,5 +40,19 @@ test("Top menu on designer tab", async (t) => {
       .click(Selector("#action-undo .sv-action-bar-item"))
       .click(Selector(".svc-side-bar .spg-row").nth(1));
     await takeElementScreenshot("top-menu-redo-active.png", topBarElement, t, comparer);
+  });
+});
+test("Top menu with single item", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({ pages: [{ name: "page1" }] });
+    await t.resizeWindow(1920, 1080);
+
+    const topBarElement = Selector(".svc-top-bar");
+
+    await ClientFunction(() => {
+      window["creator"].toolbarItems.forEach(a => a.visible = a.id == "svd-settings");
+    })();
+
+    await takeElementScreenshot("top-menu-designer-tab-single-item.png", topBarElement, t, comparer);
   });
 });

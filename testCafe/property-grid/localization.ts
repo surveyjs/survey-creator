@@ -39,7 +39,7 @@ test("visibleIf property in de localization", async (t) => {
   const editVisibleIf = Selector("button").withExactText("Bearbeiten");
   const popup = Selector(".sv-popup__body-content");
   const chooseQuestion = popup.find(".sl-dropdown__value");
-  const chooseQuestion2 = popup.find(".sd-list__item-body");
+  const chooseQuestion2 = popup.find(".sl-list__item-body");
   const question2Text = popup.find(".sd-input");
   const applyBtn = Selector("button").withExactText("Anwenden");
   await t

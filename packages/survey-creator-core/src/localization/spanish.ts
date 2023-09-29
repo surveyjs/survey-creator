@@ -50,6 +50,8 @@ var spanishTranslation = {
     settingsTooltip: "Configuración de encuesta abierta",
     surveySettings: "Opciones encuesta",
     surveySettingsTooltip: "Abrir opciones encuesta",
+    themeSettings: "Configuración del tema",
+    themeSettingsTooltip: "Abrir la configuración del tema",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -279,6 +281,7 @@ var spanishTranslation = {
     cellsEmptyRowsColumns: "Debe haber al menos una columna o fila",
     showPreviewBeforeComplete: "Previsualizar respuestas entes de enviar la encuesta",
     overridingPropertyPrefix: "Establecido por ",
+    resetToDefaultCaption: "Restablecimiento",
     propertyIsEmpty: "Porfavor introduzca un valor",
     propertyIsNoUnique: "Por favor ingrese un valor único",
     propertyNameIsNotUnique: "Por favor ingrese un nombre único",
@@ -642,6 +645,9 @@ var spanishTranslation = {
   pv: {
     "true": "verdadero",
     "false": "falso",
+    file: "Archivos locales",
+    camera: "Cámara",
+    "file-camera": "Archivos locales o cámara",
     inherit: "heredar",
     show: "mostrar",
     hide: "esconder",
@@ -1335,3 +1341,10 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.themeResetButton: "Reset theme settings to default" => "Restablecer la configuración predeterminada del tema"
 // lg.expressionSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Color del marcador de posición"
+// ed.themeSettings: "Theme Settings" => "Configuración del tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Abrir la configuración del tema"
+// lg.expressionSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Restablecimiento"
+// pv.file: "Local files" => "Archivos locales"
+// pv.camera: "Camera" => "Cámara"
+// pv.file-camera: "Local files or camera" => "Archivos locales o cámara"
