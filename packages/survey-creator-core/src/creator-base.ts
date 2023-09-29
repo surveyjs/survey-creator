@@ -12,7 +12,7 @@ import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
-import { QuestionToolbox } from "./toolbox";
+import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
@@ -1001,6 +1001,7 @@ export class CreatorBase extends Base
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  public maximumNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.
    */
@@ -1801,6 +1802,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
+      this.dragDropSurveyElements.maximumNestedPanels = this.maximumNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -3250,9 +3252,22 @@ export class CreatorBase extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
-
-  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
-    var availableTypes = this.toolbox.items.map((item) => {
+  public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
+    const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
+    if(!element || this.maximumNestedPanels < 0) return res;
+    if(!isAddNew && element.isPanel) return res;
+    if(this.maximumNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+      for(let i = res.length - 1; i >= 0; i--) {
+        if(res[i].isPanel) {
+          res.splice(i, 1);
+        }
+      }
+    }
+    return res;
+  }
+  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
+    let panel = !!element && element.isPanel ? <PanelModel>element : null;
+    var availableTypes = this.getAvailableToolboxItems(element).map((item) => {
       return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
     });
     const listModel = new ListModel(
