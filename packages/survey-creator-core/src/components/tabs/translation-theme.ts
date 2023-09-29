@@ -11,6 +11,7 @@ export var translationCss = {
   logoImage: "st-logo__image",
   headerText: "st-header__text",
   navigationButton: "",
+  bodyNavigationButton: "st-navigation-btn",
   completedPage: "st-completedpage",
   navigation: {
     complete: "st-btn st-footer__complete-btn",

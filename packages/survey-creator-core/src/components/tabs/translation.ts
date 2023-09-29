@@ -818,6 +818,7 @@ export class Translation extends Base implements ITranslationLocales {
     survey.skeletonComponentName = "sd-translation-line-skeleton";
     survey.startLoadingFromJson();
     survey.css = translationCss;
+    survey.css.root += " st-translation-dialog__survey";
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
     survey.data = this.getStringsSurveyData(survey);
@@ -1353,7 +1354,7 @@ export class TranslationEditor {
         onCancel: () => {
           this.dispose();
         },
-        cssClass: "sv-property-editor",
+        cssClass: "sv-property-editor st-translation-dialog",
         title: dialogTitle,
         displayMode: this.options.isMobileView ? "overlay" : "popup"
       }, this.options.rootElement);
@@ -1394,11 +1395,11 @@ export class TranslationEditor {
     const actions = survey.navigationBar.actions;
     actions.splice(0, actions.length);
     if(this.options.getHasMachineTranslation()) {
-      const action = survey.addNavigationItem(new Action({
+      survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",
+        css: "svc-translation-machine",
         locTitleName: "ed.translateUsigAI",
-        mode: "small",
         component: "sv-action-bar-item",
         action: () => { this.doMachineTranslation(); }
       }));
@@ -1430,7 +1431,7 @@ export function createImportCSVAction(action: () => void, needSeparator: boolean
     iconName: "icon-load",
     locTitleName: "ed.translationImportFromSCVButton",
     locTooltipName: "ed.translationImportFromSCVButton",
-    mode: "small",
+    mode: isInEditor ? "large" : "small",
     component: "sv-action-bar-item",
     needSeparator: needSeparator,
     action: action
@@ -1442,7 +1443,7 @@ export function createExportCSVAction(action: () => void, isInEditor: boolean = 
     iconName: "icon-download",
     locTitleName: "ed.translationExportToSCVButton",
     locTooltipName: "ed.translationExportToSCVButton",
-    mode: "small",
+    mode: isInEditor ? "large" : "small",
     component: "sv-action-bar-item",
     action: action
   });
