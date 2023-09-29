@@ -300,7 +300,7 @@ test("SurveyElements: isDropTargetValid", () => {
   expect(ddHelper.isDropTargetValid(pd)).toBe(true); // "dropTarget is valid"
   expect(ddHelper.isDropTargetValid(pd.template)).toBe(true); // "dropTarget is valid (pd template)"
 });
-test("SurveyElements: isDropTargetValid && maximumNestedPanels", () => {
+test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
   const survey = new SurveyModel({
     elements: [
       {
@@ -325,7 +325,7 @@ test("SurveyElements: isDropTargetValid && maximumNestedPanels", () => {
 
   ddHelper.draggedElement = pd;
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
-  ddHelper.maximumNestedPanels = 0;
+  ddHelper.maxNestedPanels = 0;
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(false);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);

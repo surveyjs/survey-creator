@@ -1001,7 +1001,7 @@ export class CreatorBase extends Base
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
-  public maximumNestedPanels: number = -1;
+  public maxNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.
    */
@@ -1802,7 +1802,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      this.dragDropSurveyElements.maximumNestedPanels = this.maximumNestedPanels;
+      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -3254,9 +3254,9 @@ export class CreatorBase extends Base
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
-    if(!element || this.maximumNestedPanels < 0) return res;
+    if(!element || this.maxNestedPanels < 0) return res;
     if(!isAddNew && element.isPanel) return res;
-    if(this.maximumNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+    if(this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
       for(let i = res.length - 1; i >= 0; i--) {
         if(res[i].isPanel) {
           res.splice(i, 1);
