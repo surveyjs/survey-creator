@@ -387,22 +387,22 @@ export class ThemeBuilder extends Base {
       this.raiseThemeModified(options);
       return true;
     }
-    if (options.name === "headerViewContainer") {
-      const headerSettings = options.value[0];
-      this.survey.titleView = headerSettings["headerView"];
-      this.surveyProvider.survey.titleView = headerSettings["headerView"];
-      if (headerSettings["headerView"] === "title") {
-        this.survey.logoPosition = headerSettings["logoPosition"];
-        this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
-      } else {
-        this.currentTheme.cover = this.getCoverJson(headerSettings);
-      }
-      this.updateSimulatorTheme();
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
-      return true;
-    }
     return false;
+  }
+  private headerViewContainerPropertiesChanged(options: ValueChangedEvent) {
+    const headerSettings = options.value[0];
+    this.survey.titleView = headerSettings["headerView"];
+    this.surveyProvider.survey.titleView = headerSettings["headerView"];
+    if (headerSettings["headerView"] === "title") {
+      this.survey.logoPosition = headerSettings["logoPosition"];
+      this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
+    } else {
+      this.currentTheme.cover = this.getCoverJson(headerSettings);
+      this.setCoverCssVariables(headerSettings);
+    }
+    this.updateSimulatorTheme();
+    this.raiseThemeChanged();
+    this.raiseThemeModified(options);
   }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
     if (options.name.indexOf("--") === 0) {
@@ -493,6 +493,9 @@ export class ThemeBuilder extends Base {
         return;
       }
 
+      if (options.name === "headerViewContainer") {
+        this.headerViewContainerPropertiesChanged(options);
+      }
       this.cssVariablePropertiesChanged(options);
 
       this.blockThemeChangedNotifications += 1;
@@ -546,14 +549,20 @@ export class ThemeBuilder extends Base {
       });
 
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
-
-    if (headerSettings["backgroundColorSwitch"] === "accentColor") {
-      result["backgroundColor"] = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
-    } else if (headerSettings["backgroundColorSwitch"] === "none") {
-      delete result["backgroundColor"];
-    }
-
     return result;
+  }
+  private setCoverCssVariables(headerSettings: any) {
+    let coverBackgroundColorValue = "trasparent";
+    if (headerSettings["backgroundColorSwitch"] === "accentColor") {
+      coverBackgroundColorValue = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
+    } else if (headerSettings["backgroundColorSwitch"] === "custom") {
+      coverBackgroundColorValue = headerSettings.backgroundColor;
+    }
+    this.themeCssVariablesChanges["--sjs-cover-backcolor"] = coverBackgroundColorValue;
+
+    if (!!headerSettings["titleForecolor"]) {
+      this.themeCssVariablesChanges["--sjs-cover-title-forecolor"] = headerSettings.titleForecolor;
+    }
   }
 
   private loadThemeIntoPropertyGrid() {
@@ -573,12 +582,12 @@ export class ThemeBuilder extends Base {
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if(!backgroundColor) return "none";
-    if(backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
+    if (!backgroundColor) return "none";
+    if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
     return "custom";
   }
 
-  private updateHeaderViewContainerEditors() {
+  private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
@@ -598,7 +607,7 @@ export class ThemeBuilder extends Base {
       panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
     }
 
-    if(!!this.currentTheme.cover) {
+    if (!!this.currentTheme.cover) {
       Object.keys(this.currentTheme.cover).forEach(key => {
         const question = panel.getQuestionByName(key);
         if (!!question && key === "backgroundImageOpacity") {
@@ -607,7 +616,17 @@ export class ThemeBuilder extends Base {
           question.value = this.currentTheme.cover[key];
         }
       });
-      panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(this.currentTheme.cover.backgroundColor);
+      const titleForecolorQuestion = panel.getQuestionByName("titleForecolor");
+      const titleForecolorValue = themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"];
+      if (!!titleForecolorQuestion && !!titleForecolorValue) {
+        titleForecolorQuestion.value = titleForecolorValue;
+      }
+      const backgroundColorQuestion = panel.getQuestionByName("backgroundColor");
+      const backgroundColorValue = themeCssVariables["--sjs-cover-backcolor"];
+      if (!!backgroundColorQuestion && !!backgroundColorValue) {
+        backgroundColorQuestion.value = backgroundColorValue;
+        panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+      }
     }
   }
 
@@ -636,8 +655,6 @@ export class ThemeBuilder extends Base {
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
-    this.updateHeaderViewContainerEditors();
-
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
@@ -646,6 +663,7 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
     themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
+    this.updateHeaderViewContainerEditors(newCssVariables);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
 
@@ -891,6 +909,7 @@ export class ThemeBuilder extends Base {
                     "backgroundColorSwitch": "none",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,
+                    "overlap": false,
                     "logoPositionX": "right",
                     "logoPositionY": "top",
                     "titlePositionX": "left",
@@ -1014,6 +1033,20 @@ export class ThemeBuilder extends Base {
                             step: 5
                           },
                         ]
+                      },
+                      {
+                        type: "color",
+                        name: "titleForecolor",
+                        title: getLocString("theme.coverTitleForecolor"),
+                        descriptionLocation: "hidden",
+                      },
+                      {
+                        type: "boolean",
+                        name: "overlap",
+                        renderAs: "checkbox",
+                        title: getLocString("theme.coverOverlap"),
+                        titleLocation: "hidden",
+                        descriptionLocation: "hidden",
                       }
                     ]
                   }, {

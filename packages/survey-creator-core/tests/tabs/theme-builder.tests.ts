@@ -1423,6 +1423,7 @@ test("headerViewContainer init state", (): any => {
     "headerView": "title",
     "logoPosition": "left",
     "areaWidth": "survey",
+    "overlap": false,
     "backgroundColorSwitch": "none",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
@@ -1457,6 +1458,8 @@ test("set headerViewContainer", (): any => {
   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
   headerViewContainer.getElementByName("backgroundImageOpacity").value = 50;
+  headerViewContainer.getElementByName("titleForecolor").value = "#FBFF24";
+  headerViewContainer.getElementByName("overlap").value = true;
   headerViewContainer.getElementByName("logoPositionX").value = "center";
   headerViewContainer.getElementByName("logoPositionY").value = "middle";
   headerViewContainer.getElementByName("titlePositionX").value = "center";
@@ -1468,7 +1471,7 @@ test("set headerViewContainer", (): any => {
     "height": 300,
     "areaWidth": "container",
     "textWidth": 600,
-    "backgroundColor": "#5094ed",
+    "overlap": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageOpacity": 0.5,
     "backgroundImageFit": "fill",
@@ -1479,6 +1482,8 @@ test("set headerViewContainer", (): any => {
     "descriptionPositionX": "center",
     "descriptionPositionY": "middle"
   });
+  expect(creator.theme.cssVariables["--sjs-cover-backcolor"]).toBe("#5094ed");
+  expect(creator.theme.cssVariables["--sjs-cover-title-forecolor"]).toBe("#FBFF24");
 });
 
 test("restore headerViewContainer values", (): any => {
@@ -1489,15 +1494,17 @@ test("restore headerViewContainer values", (): any => {
       "--sjs-corner-radius": "20px",
       "--sjs-base-unit": "9.6px",
       "--sjs-font-size": "17.6px",
+      "--sjs-cover-backcolor": "#5094ed",
+      "--sjs-cover-title-forecolor": "#FBFF24",
     },
     "cover": {
       "height": 300,
       "areaWidth": "container",
       "textWidth": 600,
-      "backgroundColor": "#5094ed",
       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
       "backgroundImageOpacity": 0.5,
       "backgroundImageFit": "fill",
+      "overlap": true,
       "logoPositionX": "center",
       "logoPositionY": "middle",
       "titlePositionX": "center",
@@ -1516,11 +1523,13 @@ test("restore headerViewContainer values", (): any => {
     "headerView": "title",
     "logoPosition": "left",
     "areaWidth": "container",
+    "titleForecolor": "#FBFF24",
     "backgroundColor": "#5094ed",
     "backgroundColorSwitch": "custom",
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageFit": "fill",
     "backgroundImageOpacity": 50,
+    "overlap": true,
     "logoPositionX": "center",
     "logoPositionY": "middle",
     "titlePositionX": "center",

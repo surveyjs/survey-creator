@@ -1001,6 +1001,8 @@ export var enStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
+    coverTitleForecolor: "Title forecolor",
+    coverOverlap: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string
     backgroundImageFitAuto: "Auto",
