@@ -36,7 +36,7 @@ if (!window["%hammerhead%"]) {
   // });
 
   let creator = new SurveyCreator.SurveyCreator(options);
-  creator.onMachineTranslaton.add((sender, options) => {
+  creator.onMachineTranslation.add((sender, options) => {
     options.callback(false, []);
   });
 
