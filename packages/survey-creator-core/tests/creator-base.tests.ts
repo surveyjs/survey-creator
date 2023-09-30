@@ -2240,6 +2240,67 @@ test("ConvertTo, show it for a panel", (): any => {
   creator.convertCurrentQuestion("paneldynamic");
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
+test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "panel", name: "panel1",
+        elements: [
+          { type: "panel", name: "panel3",
+            elements: [
+              { type: "panel", name: "panel5" },
+              { type: "paneldynamic", name: "panel6" }
+            ]
+          },
+          { type: "paneldynamic", name: "panel4" }
+        ]
+      },
+      { type: "paneldynamic", name: "panel2" }
+    ]
+  };
+  const panel1 = creator.survey.getPanelByName("panel1");
+  const panel2 = creator.survey.getQuestionByName("panel2");
+  const panel3 = creator.survey.getPanelByName("panel3");
+  const panel4 = creator.survey.getQuestionByName("panel4");
+  const panel5 = creator.survey.getPanelByName("panel5");
+  const panel6 = creator.survey.getQuestionByName("panel6");
+  const itemCount = creator.getAvailableToolboxItems().length;
+  const panel6Model = new QuestionAdornerViewModel(creator, panel6, undefined);
+  const panel5Model = new QuestionAdornerViewModel(creator, panel5, undefined);
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  creator.maxNestedPanels = 3;
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  creator.maxNestedPanels = 2;
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  creator.maxNestedPanels = 1;
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+  creator.maxNestedPanels = 0;
+  expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
+  expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
+  expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
+  expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel4)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount - 1);
+  expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
+  expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
+});
+
 test("Has one item type in convertTo", (): any => {
   CustomWidgetCollection.Instance.add({
     name: "text",

@@ -55,6 +55,13 @@
       padding: 0 calcSize(1);
       justify-content: flex-end;
     }
+    
+    .sv-action-bar-separator {
+      display: none;
+    }
+    .sv-action-bar > .sv-action:not(.sv-action--hidden) ~ .sv-action .sv-action-bar-separator {
+      display: inline-block;
+    }
 
     .sv-action .sv-action-bar-item {
       margin: 0 calcSize(1);

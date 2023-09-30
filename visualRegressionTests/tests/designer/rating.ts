@@ -116,6 +116,8 @@ test("Rating adorners with comment", async (t) => {
 
 test("Multi row rating adorner", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    (jsonMulti as any).pages[0].elements[0].rateType = "labels";
+    (jsonMulti as any).pages[0].elements[1].rateType = "labels";
     await setJSON(jsonMulti);
     await t.resizeWindow(1200, 900);
 
@@ -195,7 +197,7 @@ test("Multi row rating adorner stars", async (t) => {
 test("Rating editing", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON(json);
-
+    await t.resizeWindow(1900, 1000);
     const question = Selector("div[data-name=question1]");
     await t.click(question.find("span").withText("3"));
     await takeElementScreenshot("rating-editing.png", question, t, comparer);

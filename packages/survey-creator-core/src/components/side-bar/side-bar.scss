@@ -33,6 +33,7 @@
   // text-align: right;
   line-height: calcSize(3);
   display: flex;
+  height: calcSize(8);
 }
 
 .svc-side-bar__container-content {
@@ -66,6 +67,7 @@
 
 .svc-side-bar__container-actions {
   width: 100%;
+  box-sizing: border-box;
   padding: calcSize(1.5) calcSize(1);
 
   .sv-action-bar {
@@ -112,6 +114,19 @@
     display: inline-block;
     height: 100%;
     max-width: 100%;
+  }
+}
+
+.sv-action--object-selector {
+  max-width: 70%;
+
+  .sv-action-bar-item {
+    flex-shrink: 1;
+  }
+
+  .sv-action-bar-item__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

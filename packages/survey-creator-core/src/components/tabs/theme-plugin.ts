@@ -12,6 +12,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
+  private undoAction: Action;
+  private redoAction: Action;
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
@@ -25,6 +27,30 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+    creator.registerShortcut("undo_theme", {
+      name: "undo",
+      affectedTab: "theme",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 90,
+      },
+      macOsHotkey: {
+        keyCode: 90,
+      },
+      execute: () => this.undo()
+    });
+    creator.registerShortcut("redo_theme", {
+      name: "redo",
+      affectedTab: "theme",
+      hotKey: {
+        ctrlKey: true,
+        keyCode: 89,
+      },
+      macOsHotkey: {
+        keyCode: 89,
+      },
+      execute: () => this.redo()
+    });
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
@@ -46,6 +72,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model.testAgainAction = this.testAgainAction;
     this.model.availableThemes = this.availableThemes;
     this.model.initialize(this.creator.JSON, options);
+
+    this.updateUndeRedoActions();
+    this.model.undoRedoManager.canUndoRedoCallback = () => {
+      this.updateUndeRedoActions();
+    };
 
     this.model.show();
     this.model.onPropertyChanged.add((sender, options) => {
@@ -126,6 +157,26 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         this.model.testAgain();
       }
     });
+
+    this.undoAction = new Action({
+      id: "action-undo-theme",
+      iconName: "icon-undo",
+      locTitleName: "ed.undo",
+      showTitle: false,
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      action: () => this.undo()
+    });
+    this.redoAction = new Action({
+      id: "action-redo-theme",
+      iconName: "icon-redo",
+      locTitleName: "ed.redo",
+      showTitle: false,
+      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      action: () => this.redo()
+    });
+    items.push(this.undoAction);
+    items.push(this.redoAction);
+
     this.resetTheme = new Action({
       id: "resetTheme",
       iconName: "icon-reset",
@@ -201,7 +252,34 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return items;
   }
 
+  public undo() {
+    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    if (!_undoRedoManager) return;
+    _undoRedoManager.suspend();
+    if (_undoRedoManager.canUndo()) {
+      _undoRedoManager.undo();
+    }
+    _undoRedoManager.resume();
+  }
+
+  public redo() {
+    const _undoRedoManager = this.model && this.model.undoRedoManager;
+    if (!_undoRedoManager) return;
+    _undoRedoManager.suspend();
+    if (_undoRedoManager.canRedo()) {
+      _undoRedoManager.redo();
+    }
+    _undoRedoManager.resume();
+  }
+
+  private updateUndeRedoActions() {
+    const _undoRedoManager = this.model.undoRedoManager;
+    this.undoAction.enabled = _undoRedoManager.canUndo();
+    this.redoAction.enabled = _undoRedoManager.canRedo();
+  }
+
   public addFooterActions() {
+    this.creator.footerToolbar.actions.push(this.testAgainAction);
     this.creator.footerToolbar.actions.push(this.resetTheme);
   }
 

@@ -50,6 +50,8 @@ export var nlStrings = {
     settingsTooltip: "Open enquête-instellingen",
     surveySettings: "Enquête-instellingen",
     surveySettingsTooltip: "Enquête-instellingen openen",
+    themeSettings: "Thema-instellingen",
+    themeSettingsTooltip: "Thema-instellingen openen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -279,6 +281,7 @@ export var nlStrings = {
     cellsEmptyRowsColumns: "Er moet minimaal één kolom of rij zijn",
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
     overridingPropertyPrefix: "Ingesteld door ",
+    resetToDefaultCaption: "Terugstellen",
     propertyIsEmpty: "Voer alstublieft een waarde in",
     propertyIsNoUnique: "Voer een unieke waarde in",
     propertyNameIsNotUnique: "Voer een unieke naam in",
@@ -642,6 +645,9 @@ export var nlStrings = {
   pv: {
     "true": "waar",
     "false": "vals",
+    file: "Lokale bestanden",
+    camera: "Fototoestel",
+    "file-camera": "Lokale bestanden of camera",
     inherit: "Erven",
     show: "Tonen",
     hide: "Zich verstoppen",
@@ -1543,3 +1549,11 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Kleur van tijdelijke aanduiding"
+// ed.themeSettings: "Theme Settings" => "Thema-instellingen"
+// ed.themeSettingsTooltip: "Open theme settings" => "Thema-instellingen openen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Terugstellen"
+// pv.file: "Local files" => "Lokale bestanden"
+// pv.camera: "Camera" => "Fototoestel"
+// pv.file-camera: "Local files or camera" => "Lokale bestanden of camera"

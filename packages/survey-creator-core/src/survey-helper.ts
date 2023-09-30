@@ -4,7 +4,7 @@ import {
   ISurveyElement,
   ItemValue,
   JsonObjectProperty,
-  PageModel,
+  SurveyElement,
   Serializer,
   SurveyModel,
 } from "survey-core";
@@ -355,5 +355,13 @@ export class SurveyHelper {
       if (Serializer.isDescendantOf(type, supportedTypes[i])) return true;
     }
     return false;
+  }
+  public static getElementDeepLength(element: SurveyElement): number {
+    let res: number = 0;
+    while(!!element) {
+      if(element.isPanel) res ++;
+      element = <SurveyElement><any>element.parent;
+    }
+    return res;
   }
 }

@@ -84,6 +84,12 @@ export class TestSurveyTabViewModel extends Base {
       newSurvey.setCss(theme, false);
     }
     newSurvey.fitToContainer = true;
+    newSurvey.addLayoutElement({
+      id: "complete-customization",
+      container: "completePage" as any,
+      component: "svc-complete-page",
+      data: this
+    });
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -266,7 +272,7 @@ export class TestSurveyTabViewModel extends Base {
   }
   private getPageItemByPage(page: PageModel): IAction {
     const model = this.selectPageAction.popupModel.contentComponentData.model;
-    if(!model || !Array.isArray(model.actions)) return undefined;
+    if (!model || !Array.isArray(model.actions)) return undefined;
     const items: IAction[] = model.actions;
     for (let i = 0; i < items.length; i++) {
       if (items[i].data === page) return items[i];

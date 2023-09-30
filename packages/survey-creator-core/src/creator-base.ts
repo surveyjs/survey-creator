@@ -12,7 +12,7 @@ import { DragDropChoices } from "survey-core";
 import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
-import { QuestionToolbox } from "./toolbox";
+import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
@@ -45,6 +45,7 @@ require("./creator-theme/creator.scss");
 
 export interface IKeyboardShortcut {
   name?: string;
+  affectedTab?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
@@ -694,45 +695,45 @@ export class CreatorBase extends Base
     * 
     * Depending on the `options.type` value, the `options` object contains parameters listed below:
     * 
-    * `options.type`: `"ADDED_FROM_TOOLBOX"`\
+    * `options.type`: `"ADDED_FROM_TOOLBOX"`
     * - `options.question` - An added question.
     * 
-    * `options.type`: `"PAGE_ADDED"`\
+    * `options.type`: `"PAGE_ADDED"`
     * - `options.newValue` - An added page.
     *
-    * `options.type`: `"PAGE_MOVED"`\
+    * `options.type`: `"PAGE_MOVED"`
     * - `options.page` - A moved page.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"QUESTION_CONVERTED"`\
+    * `options.type`: `"QUESTION_CONVERTED"`
     * - `options.className` - The name of a class to which a question has been converted.
     * - `options.oldValue` - An object of a previous class.
     * - `options.newValue` - An object of a class specified by `options.className`.
     *
-    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`\
+    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
     * - `options.question` - A question that has been edited in a pop-up editor.
     *
-    * `options.type`: `"PROPERTY_CHANGED"`\
+    * `options.type`: `"PROPERTY_CHANGED"`
     * - `options.name` - The name of the changed property.
     * - `options.target` - An object that contains the changed property.
     * - `options.oldValue` - A previous value of the changed property.
     * - `options.newValue` - A new value of the changed property.
     *
-    * `options.type`: `"ELEMENT_REORDERED"`\
+    * `options.type`: `"ELEMENT_REORDERED"`
     * - `options.arrayName` - The name of the changed array.
     * - `options.parent` - An object that contains the changed array.
     * - `options.element` - A reordered element.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"OBJECT_DELETED"`\
+    * `options.type`: `"OBJECT_DELETED"`
     * - `options.target` - A deleted object.
     *
-    * `options.type`: `"VIEW_TYPE_CHANGED"`\
+    * `options.type`: `"VIEW_TYPE_CHANGED"`
     * - `options.newType` - A current view: `"editor"` or `"designer"`.
     *
-    * `options.type`: `"DO_DROP"`\
+    * `options.type`: `"DO_DROP"`
     * - `options.page` - A parent page of the dragged element.
     * - `options.source` - A dragged element.
     * - `options.target` - A drop target.
@@ -1013,6 +1014,7 @@ export class CreatorBase extends Base
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  public maxNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.
    */
@@ -1813,6 +1815,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
+      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -2081,7 +2084,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model: this.currentPlugin?.model });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
@@ -2779,11 +2782,12 @@ export class CreatorBase extends Base
     }
   }
   protected onKeyDownHandler = (event: KeyboardEvent) => {
-    let shortcut;
-    let hotKey;
-    Object.keys(this.shortcuts || {}).forEach((key) => {
-      shortcut = this.shortcuts[key];
-      hotKey = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
+    const availableShortcuts = Object.keys(this.shortcuts || {})
+      .map((key) => this.shortcuts[key])
+      .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
+
+    availableShortcuts.forEach((shortcut: IKeyboardShortcut) => {
+      const hotKey: { ctrlKey?: boolean, shiftKey?: boolean, keyCode: number } = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
       if (!hotKey) return;
 
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
@@ -3272,9 +3276,22 @@ export class CreatorBase extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
-
-  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
-    var availableTypes = this.toolbox.items.map((item) => {
+  public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
+    const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
+    if(!element || this.maxNestedPanels < 0) return res;
+    if(!isAddNew && element.isPanel) return res;
+    if(this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+      for(let i = res.length - 1; i >= 0; i--) {
+        if(res[i].isPanel) {
+          res.splice(i, 1);
+        }
+      }
+    }
+    return res;
+  }
+  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
+    let panel = !!element && element.isPanel ? <PanelModel>element : null;
+    var availableTypes = this.getAvailableToolboxItems(element).map((item) => {
       return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
     });
     const listModel = new ListModel(

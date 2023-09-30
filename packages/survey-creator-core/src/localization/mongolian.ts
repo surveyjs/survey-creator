@@ -50,6 +50,8 @@ export var mnStrings = {
     settingsTooltip: "Тохиргоог нээх",
     surveySettings: "Санал асуулгын тохиргоо",
     surveySettingsTooltip: "Санал асуулгын тохиргоог нээх",
+    themeSettings: "Сэдвийн тохиргоо",
+    themeSettingsTooltip: "Нээлттэй сэдвийн тохиргоо",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -279,6 +281,7 @@ export var mnStrings = {
     cellsEmptyRowsColumns: "Багадаа нэг багана эсвэл мөр байх ёстой",
     showPreviewBeforeComplete: "Санал асуулга явуулхаас өмнө хариултуудыг урьдчилж харах",
     overridingPropertyPrefix: "Дэргэд нь ",
+    resetToDefaultCaption: "Дахин тохируулах",
     propertyIsEmpty: "Утга оруулна уу",
     propertyIsNoUnique: "Дахин давтагдахгүй утга оруулна уу",
     propertyNameIsNotUnique: "Өөр нэр оруулна уу",
@@ -642,6 +645,9 @@ export var mnStrings = {
   pv: {
     "true": "Үнэн",
     "false": "Худал",
+    file: "Орон нутгийн файлууд",
+    camera: "Камер",
+    "file-camera": "Орон нутгийн файлууд эсвэл камер",
     inherit: "Удамших",
     show: "Харагдана",
     hide: "Нуусан",
@@ -1213,3 +1219,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Та энэ хэлний бүх уяаг арилгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?"
 // ed.themeResetButton: "Reset theme settings to default" => "Дахин сэдэвчилсэн тохиргоог default хийх"
 // theme.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"
+// ed.themeSettings: "Theme Settings" => "Сэдвийн тохиргоо"
+// ed.themeSettingsTooltip: "Open theme settings" => "Нээлттэй сэдвийн тохиргоо"
+// pe.resetToDefaultCaption: "Reset" => "Дахин тохируулах"
+// pv.file: "Local files" => "Орон нутгийн файлууд"
+// pv.camera: "Camera" => "Камер"
+// pv.file-camera: "Local files or camera" => "Орон нутгийн файлууд эсвэл камер"

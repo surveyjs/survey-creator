@@ -67,6 +67,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("delete", {
+      affectedTab: "designer",
       hotKey: {
         keyCode: 46,
       },
@@ -124,6 +125,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       }),
       action: () => {
         this.selectSurvey();
+        if (!this.creator.isMobileView) {
+          this.creator.propertyGrid.getAllQuestions()[0].focus();
+        }
       },
       active: this.isSettingsActive,
       pressed: this.isSettingsActive,

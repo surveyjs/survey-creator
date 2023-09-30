@@ -1,6 +1,7 @@
 import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
 import { IQuestionToolboxItem } from "./toolbox";
+import { SurveyHelper } from "./survey-helper";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -60,6 +61,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return "survey-element";
   }
   protected isDraggedElementSelected: boolean = false;
+  public maxNestedPanels: number = -1;
 
   // private isRight: boolean;
   // protected prevIsRight: boolean;
@@ -228,6 +230,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     if (this.draggedElement.getType() === "paneldynamic" && dropTarget === this.draggedElement.template) {
       return false;
+    }
+    if(this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+      let len = SurveyHelper.getElementDeepLength(dropTarget);
+      if(this.isEdge && dropTarget.isPanel) len--;
+      if(this.maxNestedPanels < len) return false;
     }
 
     if (

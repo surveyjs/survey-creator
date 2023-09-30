@@ -50,6 +50,8 @@ var italianTranslation = {
     settingsTooltip: "Apri le impostazioni del sondaggio",
     surveySettings: "Impostazioni del sondaggio",
     surveySettingsTooltip: "Apri le impostazioni del sondaggio",
+    themeSettings: "Impostazioni del tema",
+    themeSettingsTooltip: "Apri le impostazioni del tema",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -279,6 +281,7 @@ var italianTranslation = {
     cellsEmptyRowsColumns: "Dovrebbe esserci almeno una colonna o riga",
     showPreviewBeforeComplete: "Vedi l'anteprima delle risposte prima di inviare il sondaggio",
     overridingPropertyPrefix: "Impostato da ",
+    resetToDefaultCaption: "Resettare",
     propertyIsEmpty: "Per favore, inserisci un valore",
     propertyIsNoUnique: "Inserisci un valore univoco",
     propertyNameIsNotUnique: "Inserisci un nome univoco",
@@ -642,6 +645,9 @@ var italianTranslation = {
   pv: {
     "true": "vero",
     "false": "falso",
+    file: "File locali",
+    camera: "Macchina fotografica",
+    "file-camera": "File locali o fotocamera",
     inherit: "Default",
     show: "Visibile",
     hide: "Nascosto",
@@ -1315,3 +1321,9 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Sei sicuro di voler eliminare tutte le stringhe per questa lingua?"
 // ed.themeResetButton: "Reset theme settings to default" => "Ripristina le impostazioni del tema predefinite"
 // theme.placeholderColor: "Placeholder color" => "Colore segnaposto"
+// ed.themeSettings: "Theme Settings" => "Impostazioni del tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Apri le impostazioni del tema"
+// pe.resetToDefaultCaption: "Reset" => "Resettare"
+// pv.file: "Local files" => "File locali"
+// pv.camera: "Camera" => "Macchina fotografica"
+// pv.file-camera: "Local files or camera" => "File locali o fotocamera"

@@ -50,6 +50,8 @@ var polishStrings = {
     settingsTooltip: "Otwórz ustawienia",
     surveySettings: "Ustawienia ankiety",
     surveySettingsTooltip: "Otwórz ustawienia ankiety",
+    themeSettings: "Ustawienia motywu",
+    themeSettingsTooltip: "Otwórz ustawienia motywu",
     showPanel: "Pokaż panel",
     hidePanel: "Panel Ukryj",
     prevSelected: "Wybierz poprzedni",
@@ -279,6 +281,7 @@ var polishStrings = {
     cellsEmptyRowsColumns: "Powinna istnieć co najmniej jedna kolumna lub wiersz",
     showPreviewBeforeComplete: "Podgląd odpowiedzi przed wysłaniem ankiety",
     overridingPropertyPrefix: "Ustaw przez ",
+    resetToDefaultCaption: "Resetować",
     propertyIsEmpty: "Podaj wartość",
     propertyIsNoUnique: "Podaj unikatową wartość",
     propertyNameIsNotUnique: "Podaj unikalną nazwę",
@@ -642,6 +645,9 @@ var polishStrings = {
   pv: {
     "true": "prawdziwy",
     "false": "fałszywy",
+    file: "Pliki lokalne",
+    camera: "Kamera",
+    "file-camera": "Pliki lokalne lub aparat",
     inherit: "Odziedziczyć",
     show: "Widoczny",
     hide: "Ukryty",
@@ -1837,3 +1843,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Kolor zastępczy"
+// ed.themeSettings: "Theme Settings" => "Ustawienia motywu"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otwórz ustawienia motywu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Resetować"
+// pv.file: "Local files" => "Pliki lokalne"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Pliki lokalne lub aparat"

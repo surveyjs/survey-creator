@@ -50,6 +50,8 @@ export var hrStrings = {
     settingsTooltip: "Otvaranje postavki ankete",
     surveySettings: "Postavke upitnika",
     surveySettingsTooltip: "Otvaranje postavki upitnika",
+    themeSettings: "Postavke teme",
+    themeSettingsTooltip: "Otvaranje postavki teme",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -279,6 +281,7 @@ export var hrStrings = {
     cellsEmptyRowsColumns: "Trebao bi postojati barem jedan stupac ili red",
     showPreviewBeforeComplete: "Pregled odgovora prije slanja ankete",
     overridingPropertyPrefix: "Postavio ",
+    resetToDefaultCaption: "Brisanje",
     propertyIsEmpty: "Unesite vrijednost",
     propertyIsNoUnique: "Unesite jedinstvenu vrijednost",
     propertyNameIsNotUnique: "Unesite jedinstveno ime",
@@ -642,6 +645,9 @@ export var hrStrings = {
   pv: {
     "true": "istinit",
     "false": "lažan",
+    file: "Lokalne datoteke",
+    camera: "Kamera",
+    "file-camera": "Lokalne datoteke ili kamera",
     inherit: "naslijediti",
     show: "pokazati",
     hide: "sakrij",
@@ -1557,3 +1563,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
+// ed.themeSettings: "Theme Settings" => "Postavke teme"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otvaranje postavki teme"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Brisanje"
+// pv.file: "Local files" => "Lokalne datoteke"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokalne datoteke ili kamera"

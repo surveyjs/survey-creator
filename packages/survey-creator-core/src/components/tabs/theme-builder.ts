@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, EventBase } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -8,6 +8,7 @@ import { ColorCalculator, assign, ingectAlpha, notShortCircuitAnd, parseColor } 
 import { settings } from "../../creator-settings";
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
+import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, getThemeFullName } from "./themes";
 
 require("./theme-builder.scss");
@@ -16,11 +17,15 @@ export class ThemeBuilder extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public testAgainAction: Action;
+  public nextPageAction: Action;
+  public undoRedoManager: UndoRedoManager;
   private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
   private blockChanges = false;
   private _availableThemes = PredefinedThemes;
+  private prevQuestionValues: { [index: string]: any } = {};
+
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public get themeCssCustomizations() {
@@ -90,6 +95,14 @@ export class ThemeBuilder extends Base {
       _target.currentTheme["backgroundImageAttachment"] = newValue;
     }
   }) backgroundImageAttachment;
+  @property({
+    onSet: (newValue: number, _target: ThemeBuilder) => {
+      if (!!_target.survey) {
+        _target.survey.backgroundOpacity = newValue / 100;
+      }
+      _target.currentTheme["backgroundOpacity"] = newValue / 100;
+    }
+  }) backgroundOpacity;
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
@@ -124,6 +137,9 @@ export class ThemeBuilder extends Base {
   public get currentTheme(): ITheme {
     return this.surveyProvider.theme;
   }
+  public get currentThemeCssVariables(): { [index: string]: string } {
+    return this.currentTheme.cssVariables || {};
+  }
 
   public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
   public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
@@ -134,6 +150,7 @@ export class ThemeBuilder extends Base {
     this.simulator = new SurveySimulatorModel();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.loadTheme(this.surveyProvider.theme);
+    this.undoRedoManager = new UndoRedoManager();
   }
 
   public loadTheme(theme: ITheme) {
@@ -141,7 +158,9 @@ export class ThemeBuilder extends Base {
     try {
       this.themeName = theme.themeName || this.themeName;
       this.themePalette = theme.colorPalette || this.themePalette;
-      this.themeMode = theme.isPanelless === true ? "lightweight" : this.themeMode;
+      if (theme.isPanelless !== undefined) {
+        this.themeMode = theme.isPanelless === true ? "lightweight" : "panels";
+      }
       this.backgroundImage = theme.backgroundImage || this.backgroundImage;
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
@@ -184,6 +203,12 @@ export class ThemeBuilder extends Base {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this);
     newSurvey.setCss(theme, false);
     newSurvey.fitToContainer = true;
+    newSurvey.addLayoutElement({
+      id: "complete-customization",
+      container: "completePage" as any,
+      component: "svc-complete-page",
+      data: this
+    });
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
@@ -235,6 +260,7 @@ export class ThemeBuilder extends Base {
     try {
       this.setJSON(json, this.startThemeClasses);
       this.updatePageList();
+      this.updatePropertyGridEditorsAvailability();
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -331,6 +357,89 @@ export class ThemeBuilder extends Base {
     );
   }
 
+  private generalPropertiesChanged(options: ValueChangedEvent): boolean {
+    if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
+      if (options.name === "themeName") {
+        this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value });
+      }
+      if (options.name === "themeMode") {
+        this.loadTheme({ isPanelless: options.value === "lightweight" });
+      }
+      if (options.name === "themePalette") {
+        this.loadTheme({ colorPalette: options.value });
+      }
+      this.updateSimulatorTheme();
+      this.raiseThemeChanged();
+      this.onThemeSelected.fire(this, { theme: this.currentTheme });
+      this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
+      return true;
+    }
+    if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
+      this[options.name] = options.value;
+      this.raiseThemeChanged();
+      this.raiseThemeModified(options);
+      return true;
+    }
+    return false;
+  }
+  private cssVariablePropertiesChanged(options: ValueChangedEvent) {
+    if (options.name.indexOf("--") === 0) {
+      this.setThemeCssVariablesChanges(options.name, options.value, options.question);
+    }
+    if (options.name == "commonScale") {
+      this.survey.triggerResponsiveness(true);
+      this.setThemeCssVariablesChanges("--sjs-base-unit", (options.value * 8 / 100) + "px", options.question);
+    }
+    if (options.name == "commonFontSize") {
+      this.setThemeCssVariablesChanges("--sjs-font-size", (options.value * 16 / 100) + "px", options.question);
+    }
+    if (options.name == "cornerRadius") {
+      this.setThemeCssVariablesChanges("--sjs-corner-radius", options.value + "px", options.question);
+    }
+    if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
+      let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light")).color;
+      let questionBackgroundTransparencyValue = this.themeEditorSurvey.getValue("questionBackgroundTransparency");
+      this.setThemeCssVariablesChanges("--sjs-editor-background", ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100), options.question);
+    }
+    if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
+      let baseColor = parseColor(this.themeEditorSurvey.getValue("--sjs-general-backcolor")).color;
+      let panelBackgroundTransparencyValue = this.themeEditorSurvey.getValue("panelBackgroundTransparency");
+      this.setThemeCssVariablesChanges("--sjs-question-background", ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100), options.question);
+    }
+    if (options.question?.getType() === "fontsettings") {
+      fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+      this.raiseThemeChanged();
+      this.raiseThemeModified(options);
+    }
+    if (options.question?.getType() === "elementsettings") {
+      elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
+      this.raiseThemeChanged();
+      this.raiseThemeModified(options);
+    }
+  }
+  private updateDependentQuestionValues(options: ValueChangedEvent) {
+    if (options.name === "generalBackcolorDimColor") {
+      this.themeEditorSurvey.setValue("--sjs-general-backcolor-dim", options.value);
+    }
+    if (options.name === "--sjs-general-backcolor-dim") {
+      this.themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = options.value;
+    }
+    if (options.name === "generalPrimaryColor") {
+      this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
+    }
+    if (options.name === "--sjs-primary-backcolor") {
+      this.colorCalculator.calculateColors(options.value);
+      this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
+      this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
+      this.themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = options.value;
+    }
+  }
+  private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
+    this.themeCssVariablesChanges[variableName] = value;
+    this.raiseThemeChanged();
+    this.raiseThemeModified({ name: variableName, value: value, question: question });
+  }
+
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
@@ -341,77 +450,40 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.css = themeBuilderCss;
     themeEditorSurvey.enterKeyAction = "loseFocus";
 
-    themeEditorSurvey.onValueChanged.add((sender, options) => {
+    themeEditorSurvey.onValueChanging.add((sender, options: ValueChangingEvent) => {
       if (this.blockChanges) return;
 
-      if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
-        if (options.name === "themeName") {
-          this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value });
-        }
-        if (options.name === "themeMode") {
-          this.loadTheme({ isPanelless: options.value === "lightweight" });
-        }
-        if (options.name === "themePalette") {
-          this.loadTheme({ colorPalette: options.value });
-        }
-        this.updateSimulatorTheme();
-        this.raiseThemeChanged();
-        this.onThemeSelected.fire(this, { theme: this.currentTheme });
-        this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
-        return;
-      }
-      if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment"].indexOf(options.name) !== -1) {
-        this[options.name] = options.value;
-        this.raiseThemeChanged();
-        this.raiseThemeModified(options);
-        return;
-      }
-      if (options.name === "backgroundOpacity") {
-        this.currentTheme.backgroundOpacity = options.value / 100;
-        this.survey.backgroundOpacity = options.value / 100;
-        this.raiseThemeChanged();
-        this.raiseThemeModified(options);
-        return;
-      }
+      this.prevQuestionValues[options.name] = options.oldValue;
+    });
 
-      if (options.name.indexOf("--") === 0) {
-        this.themeCssVariablesChanges[options.name] = options.value;
-        this.raiseThemeChanged();
+    themeEditorSurvey.onValueChanged.add((sender, options: ValueChangedEvent) => {
+      if (this.blockChanges) return;
+
+      if (this.blockThemeChangedNotifications == 0) {
+        this.undoRedoManager.startTransaction(options.name + " changed");
       }
+      this.undoRedoManager.onPropertyValueChanged("value", this.prevQuestionValues[options.name], options.value, options.question, undefined);
+
+      if (this.generalPropertiesChanged(options)) {
+        if (this.blockThemeChangedNotifications == 0) {
+          this.undoRedoManager.stopTransaction();
+        }
+        return;
+      }
+      this.cssVariablePropertiesChanged(options);
+
       this.blockThemeChangedNotifications += 1;
-      if (options.name == "commonScale") {
-        this.survey.triggerResponsiveness(true);
-      }
-      if (options.name === "--sjs-primary-backcolor") {
-        this.colorCalculator.calculateColors(options.value);
-        this.themeCssVariablesChanges["--sjs-primary-backcolor"] = options.value;
-        this.themeCssVariablesChanges["--sjs-primary-backcolor-light"] = this.colorCalculator.colorSettings.newColorLight;
-        this.themeCssVariablesChanges["--sjs-primary-backcolor-dark"] = this.colorCalculator.colorSettings.newColorDark;
-        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
-        this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      }
-      if (options.name === "questionBackgroundTransparency" || options.name === "editorPanel") {
-        let baseColor = parseColor(themeEditorSurvey.getValue("--sjs-general-backcolor-dim-light")).color;
-        let questionBackgroundTransparencyValue = themeEditorSurvey.getValue("questionBackgroundTransparency");
-        this.themeCssVariablesChanges["--sjs-editor-background"] = ingectAlpha(baseColor, questionBackgroundTransparencyValue / 100);
-      }
-      if (options.name === "panelBackgroundTransparency" || options.name === "questionPanel") {
-        let baseColor = parseColor(themeEditorSurvey.getValue("--sjs-general-backcolor")).color;
-        let panelBackgroundTransparencyValue = themeEditorSurvey.getValue("panelBackgroundTransparency");
-        this.themeCssVariablesChanges["--sjs-question-background"] = ingectAlpha(baseColor, panelBackgroundTransparencyValue / 100);
-      }
-      if (options.question?.getType() === "fontsettings") {
-        fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      }
-      if (options.question?.getType() === "elementsettings") {
-        elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      }
+      this.updateDependentQuestionValues(options);
+
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
       this.currentTheme.cssVariables = newCssVariables;
-      this.blockThemeChangedNotifications -= 1;
       this.updateSimulatorTheme();
-      this.raiseThemeModified(options);
+
+      this.blockThemeChangedNotifications -= 1;
+      if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
+        this.undoRedoManager.stopTransaction();
+      }
     });
 
     themeEditorSurvey.onUploadFiles.add((_, options) => {
@@ -451,17 +523,17 @@ export class ThemeBuilder extends Base {
       this.themeEditorSurvey.setValue("themeMode", this.themeMode);
       this.themeEditorSurvey.setValue("themePalette", this.themePalette);
       this.updatePropertyGridEditors(this.themeEditorSurvey);
-      this.updatePropertyGridEditorsAvailability(this.themeEditorSurvey);
+      this.updatePropertyGridEditorsAvailability();
     }
     finally {
       this.blockChanges = false;
     }
   }
 
-  private updatePropertyGridEditorsAvailability(themeEditorSurvey: SurveyModel) {
+  private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
-    themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
-    themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
+    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {
@@ -469,11 +541,17 @@ export class ThemeBuilder extends Base {
       canModify
     };
     this.onCanModifyTheme.fire(this, options);
-    themeEditorSurvey.getAllQuestions().forEach(q => {
+    this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
         q.readOnly = !options.canModify;
       }
     });
+
+    if(!!this.survey) {
+      this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
+      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
+    }
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
@@ -482,6 +560,8 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
+    themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
+    themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
@@ -572,13 +652,13 @@ export class ThemeBuilder extends Base {
             elements: [
               {
                 type: "color",
-                name: "--sjs-primary-backcolor",
+                name: "generalPrimaryColor",
                 title: getLocString("theme.primaryColor"),
                 descriptionLocation: "hidden",
               },
               {
                 type: "color",
-                name: "--sjs-general-backcolor-dim",
+                name: "generalBackcolorDimColor",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
               },
@@ -679,12 +759,6 @@ export class ThemeBuilder extends Base {
                 min: 0,
                 step: 5
               },
-              {
-                type: "expression",
-                name: "--sjs-font-size",
-                expression: "{commonFontSize}*16/100+\"px\"",
-                visible: false
-              },
             ]
           }, {
             type: "panel",
@@ -700,12 +774,6 @@ export class ThemeBuilder extends Base {
                 step: 5
               },
               {
-                type: "expression",
-                name: "--sjs-base-unit",
-                expression: "{commonScale}*8/100+\"px\"",
-                visible: false
-              },
-              {
                 type: "spinedit",
                 name: "cornerRadius",
                 title: getLocString("theme.cornerRadius"),
@@ -713,12 +781,6 @@ export class ThemeBuilder extends Base {
                 unit: "px",
                 defaultValue: 4,
                 min: 0
-              },
-              {
-                type: "expression",
-                name: "--sjs-corner-radius",
-                expression: "{cornerRadius}+\"px\"",
-                visible: false
               },
             ]
           }
@@ -797,7 +859,6 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
                   weight: "700",
                   size: 32
                 }
@@ -808,7 +869,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "700",
                   size: 24
                 }
@@ -819,7 +880,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
                 }
@@ -836,6 +897,7 @@ export class ThemeBuilder extends Base {
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
                   hovercolor: "rgba(248, 248, 248, 1)",
+                  cornerRadius: "4px",
                   corner: 4
                 }
               },
@@ -867,7 +929,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "600",
                   size: 16,
                 }
@@ -878,7 +940,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.45)",
                   weight: "400",
                   size: 16
                 }
@@ -895,6 +957,7 @@ export class ThemeBuilder extends Base {
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
                   hovercolor: "rgba(248, 248, 248, 1)",
+                  cornerRadius: "4px",
                   corner: 4
                 }
               },
@@ -925,7 +988,7 @@ export class ThemeBuilder extends Base {
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
-                  color: "rgba(22, 22, 22, 1)",
+                  color: "rgba(0, 0, 0, 0.91)",
                   weight: "400",
                   size: 16
                 }
