@@ -166,9 +166,11 @@ export var fiStrings = {
       question_visibilityName: "Kysymyksen näkyvyys",
       question_enableName: "Kysymys käytössä/Ei käytössä",
       question_requireName: "Kysymys valinnainen vaaditaan",
+      question_resetValue: "Palauta kysymyksen arvo",
       column_visibilityName: "Näytä (piilota) -sarake",
       column_enableName: "Ota käyttöön (poista käytöstä) sarake",
       column_requireName: "Tee sarakkeesta pakollinen",
+      column_resetValue: "Palauta sarakkeen arvo",
       trigger_completeName: "Valmis kysely",
       trigger_setvalueName: "Aseta kysymyksen arvo",
       trigger_copyvalueName: "Kopioi kysymyksen arvo",
@@ -327,6 +329,8 @@ export var fiStrings = {
     choicesOrder: "Valitse valintojen järjestys",
     visible: "On näkyvä?",
     isRequired: "On vaadittu?",
+    markRequired: "Merkitse pakollisesti",
+    removeRequiredMark: "Poista vaadittu merkki",
     isAllRowRequired: "Vaadi vastaus kaikille riveille",
     requiredErrorText: "Vaadittu virheteksti",
     startWithNewLine: "Onko aloitus uudella rivillä?",
@@ -910,6 +914,7 @@ export var fiStrings = {
     descriptionLocation: "Kuvaus, sijainti",
     defaultValueExpression: "Oletusarvon lauseke",
     requiredIf: "requiredIf",
+    resetValueIf: "Nollaa arvo, jos",
     validators: "validators",
     bindings: "Siteet",
     renderAs: "Hahmonna muodossa",
@@ -1577,3 +1582,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // pv.file: "Local files" => "Paikalliset tiedostot"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Paikalliset tiedostot tai kamera"
+// lg.question_resetValue: "Reset question value" => "Palauta kysymyksen arvo"
+// lg.column_resetValue: "Reset column value" => "Palauta sarakkeen arvo"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Merkitse pakollisesti"
+// pe.removeRequiredMark: "Remove the required mark" => "Poista vaadittu merkki"
+// p.resetValueIf: "Reset value if" => "Nollaa arvo, jos"

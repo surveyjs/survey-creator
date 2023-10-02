@@ -336,7 +336,7 @@ export class SurveyLogicTypes {
       propertyName: "requiredIf",
     },
     {
-      name: "question_reset_value",
+      name: "question_resetValue",
       baseClass: "question",
       propertyName: "resetValueIf",
     },
@@ -356,7 +356,7 @@ export class SurveyLogicTypes {
       propertyName: "requiredIf",
     },
     {
-      name: "column_reset_value",
+      name: "column_resetValue",
       baseClass: "matrixdropdowncolumn",
       propertyName: "resetValueIf",
     },

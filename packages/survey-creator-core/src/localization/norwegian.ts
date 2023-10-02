@@ -166,9 +166,11 @@ export var nbStrings = {
       question_visibilityName: "Spørsmålssynlghet",
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
+      question_resetValue: "Tilbakestille spørsmålsverdien",
       column_visibilityName: "Vis kolonne (skjul)",
       column_enableName: "Aktivere (deaktivere) kolonne",
       column_requireName: "Gjøre kolonne obligatorisk",
+      column_resetValue: "Tilbakestille kolonneverdi",
       trigger_completeName: "Fullfør skjema",
       trigger_setvalueName: "Angi spørsmålsnavn",
       trigger_copyvalueName: "Kopier spørsmålsverdi",
@@ -327,6 +329,8 @@ export var nbStrings = {
     choicesOrder: "Velg rekkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er nødvendig?",
+    markRequired: "Merk etter behov",
+    removeRequiredMark: "Fjern ønsket merke",
     isAllRowRequired: "Nødvendig svar for alle rader",
     requiredErrorText: "Nødvendig feilmelding",
     startWithNewLine: "Må starte med ny linje?",
@@ -910,6 +914,7 @@ export var nbStrings = {
     descriptionLocation: "Beskrivelse plassering",
     defaultValueExpression: "Uttrykk for standardverdi",
     requiredIf: "requiredIf",
+    resetValueIf: "Tilbakestill verdien hvis",
     validators: "validators",
     bindings: "Bindinger",
     renderAs: "Gjengi som",
@@ -1581,3 +1586,10 @@ editorLocalization.locales["nb"] = nbStrings;
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// lg.question_resetValue: "Reset question value" => "Tilbakestille spørsmålsverdien"
+// lg.column_resetValue: "Reset column value" => "Tilbakestille kolonneverdi"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Merk etter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern ønsket merke"
+// p.resetValueIf: "Reset value if" => "Tilbakestill verdien hvis"

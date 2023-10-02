@@ -166,9 +166,11 @@ export var hrStrings = {
       question_visibilityName: "Vidljivost pitanja",
       question_enableName: "Pitanje omogućuje/onesposobljava",
       question_requireName: "Pitanje nije obavezno",
+      question_resetValue: "Vrati izvornu vrijednost pitanja",
       column_visibilityName: "Pokaži (sakrij) stupac",
       column_enableName: "Omogući (onemogući stupac)",
       column_requireName: "Učini stupac obaveznim",
+      column_resetValue: "Vraćanje izvorne vrijednosti stupca",
       trigger_completeName: "Potpuna anketa",
       trigger_setvalueName: "Postavite vrijednost pitanja",
       trigger_copyvalueName: "Kopiranje vrijednosti pitanja",
@@ -327,6 +329,8 @@ export var hrStrings = {
     choicesOrder: "Odaberite redoslijed izbora",
     visible: "Je li vidljivo?",
     isRequired: "Je potrebno?",
+    markRequired: "Označi kao obavezno",
+    removeRequiredMark: "Uklanjanje potrebne oznake",
     isAllRowRequired: "Zahtijevati odgovor za sve redove",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
@@ -910,6 +914,7 @@ export var hrStrings = {
     descriptionLocation: "Mjesto opisa",
     defaultValueExpression: "Zadani izraz vrijednosti",
     requiredIf: "requiredIf",
+    resetValueIf: "Vrati izvornu vrijednost ako",
     validators: "validators",
     bindings: "Vezovi",
     renderAs: "Iscrtaj kao",
@@ -1571,3 +1576,10 @@ editorLocalization.locales["hr"] = hrStrings;
 // pv.file: "Local files" => "Lokalne datoteke"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokalne datoteke ili kamera"
+// lg.question_resetValue: "Reset question value" => "Vrati izvornu vrijednost pitanja"
+// lg.column_resetValue: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Označi kao obavezno"
+// pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"
+// p.resetValueIf: "Reset value if" => "Vrati izvornu vrijednost ako"

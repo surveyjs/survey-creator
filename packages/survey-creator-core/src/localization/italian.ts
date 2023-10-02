@@ -166,9 +166,11 @@ var italianTranslation = {
       question_visibilityName: "Mostra (nascondi) domanda",
       question_enableName: "Abilita (disabilita) domanda",
       question_requireName: "Rendi la domanda obbligatoria",
+      question_resetValue: "Reimpostare il valore della domanda",
       column_visibilityName: "Mostra (nascondi) colonna",
       column_enableName: "Abilita (disabilita) colonna",
       column_requireName: "Rendi la colonna obbligatoria",
+      column_resetValue: "Reimposta valore colonna",
       trigger_completeName: "Completa sondaggio",
       trigger_setvalueName: "Imposta la risposta",
       trigger_copyvalueName: "Copia la risposta",
@@ -327,6 +329,8 @@ var italianTranslation = {
     choicesOrder: "Ordinamento delle scelte",
     visible: "Visibile",
     isRequired: "Obbligatoria",
+    markRequired: "Contrassegna come richiesto",
+    removeRequiredMark: "Rimuovere il segno richiesto",
     isAllRowRequired: "Richiedi risposta per tutte le righe",
     requiredErrorText: "\"Obbligatoria\" messaggio di errore",
     startWithNewLine: "Visualizza la domanda su una nuova riga",
@@ -910,6 +914,7 @@ var italianTranslation = {
     descriptionLocation: "Posizione della descrizione",
     defaultValueExpression: "Espressione valore predefinito",
     requiredIf: "Obbligatoria Se",
+    resetValueIf: "Reimposta valore se",
     validators: "Validatori",
     bindings: "Collegamenti",
     renderAs: "Esegui il rendering come",
@@ -1327,3 +1332,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // pv.file: "Local files" => "File locali"
 // pv.camera: "Camera" => "Macchina fotografica"
 // pv.file-camera: "Local files or camera" => "File locali o fotocamera"
+// lg.question_resetValue: "Reset question value" => "Reimpostare il valore della domanda"
+// lg.column_resetValue: "Reset column value" => "Reimposta valore colonna"
+// pe.markRequired: "Mark as required" => "Contrassegna come richiesto"
+// pe.removeRequiredMark: "Remove the required mark" => "Rimuovere il segno richiesto"
+// p.resetValueIf: "Reset value if" => "Reimposta valore se"

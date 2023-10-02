@@ -166,9 +166,11 @@ export var mnStrings = {
       question_visibilityName: "Асуулт харуулах (нуух)",
       question_enableName: "Асуулт идэвхжүүлэх (идэвхгүй болгох)",
       question_requireName: "Асуултыг заавал бөглөөөөх болгох",
+      question_resetValue: "Асуултын үнэ цэнийг дахин тогтоох",
       column_visibilityName: "Багана харуулах (нуух).",
       column_enableName: "Багана идэвхжүүлэх (идэвхгүй болгох).",
       column_requireName: "Баганыг заавал бөглөөөөх болгох",
+      column_resetValue: "Reset баганын үнэ цэнэ",
       trigger_completeName: "Санал асуулга дуусгах",
       trigger_setvalueName: "Хариулт оруулах",
       trigger_copyvalueName: "Хариулт хуулах",
@@ -327,6 +329,8 @@ export var mnStrings = {
     choicesOrder: "Сонголтыг эрэмбэлэх дараалал",
     visible: "Харагдана",
     isRequired: "Заавал бөглөх",
+    markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
+    removeRequiredMark: "Шаардлагатай тэмдэглэгээг хасах",
     isAllRowRequired: "Бүх мөрөнд хариулт шаардах",
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
@@ -910,6 +914,7 @@ export var mnStrings = {
     descriptionLocation: "Тайлбарын байршил",
     defaultValueExpression: "Үндсэн утгын илэрхийлэл",
     requiredIf: "Заавал бөглөх хэрэв",
+    resetValueIf: "Хэрэв үнэ цэнээ дахин тогтоох",
     validators: "Батлагч",
     bindings: "Холбогч",
     renderAs: "руу хөрвүүлэх",
@@ -1225,3 +1230,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // pv.file: "Local files" => "Орон нутгийн файлууд"
 // pv.camera: "Camera" => "Камер"
 // pv.file-camera: "Local files or camera" => "Орон нутгийн файлууд эсвэл камер"
+// lg.question_resetValue: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
+// lg.column_resetValue: "Reset column value" => "Reset баганын үнэ цэнэ"
+// pe.markRequired: "Mark as required" => "Шаардлагын дагуу тэмдэглэгээ хийх"
+// pe.removeRequiredMark: "Remove the required mark" => "Шаардлагатай тэмдэглэгээг хасах"
+// p.resetValueIf: "Reset value if" => "Хэрэв үнэ цэнээ дахин тогтоох"

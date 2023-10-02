@@ -166,9 +166,11 @@ var simplifiedChineseTranslation = {
       question_visibilityName: "显示（隐藏）问题",
       question_enableName: "启用（禁用）问题",
       question_requireName: "提出必填题",
+      question_resetValue: "重置问题值",
       column_visibilityName: "显示（隐藏）列",
       column_enableName: "启用（禁用）列",
       column_requireName: "使列成为必填项",
+      column_resetValue: "重置列值",
       trigger_completeName: "完成调查",
       trigger_setvalueName: "设置答案",
       trigger_copyvalueName: "复制答案",
@@ -327,6 +329,8 @@ var simplifiedChineseTranslation = {
     choicesOrder: "设置选项顺序",
     visible: "是否可见?",
     isRequired: "是否为必填项?",
+    markRequired: "标记为必填",
+    removeRequiredMark: "删除所需的标记",
     isAllRowRequired: "要求所有行都回答",
     requiredErrorText: "错误文字",
     startWithNewLine: "问题是否新起一行?",
@@ -910,6 +914,7 @@ var simplifiedChineseTranslation = {
     descriptionLocation: "描述位置",
     defaultValueExpression: "默认值表达式",
     requiredIf: "是否必选",
+    resetValueIf: "如果出现以下情况，则重置值",
     validators: "有效性",
     bindings: "绑定",
     renderAs: "渲染为",
@@ -1720,3 +1725,10 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pv.file: "Local files" => "本地文件"
 // pv.camera: "Camera" => "照相机"
 // pv.file-camera: "Local files or camera" => "本地文件或相机"
+// lg.question_resetValue: "Reset question value" => "重置问题值"
+// lg.column_resetValue: "Reset column value" => "重置列值"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "标记为必填"
+// pe.removeRequiredMark: "Remove the required mark" => "删除所需的标记"
+// p.resetValueIf: "Reset value if" => "如果出现以下情况，则重置值"

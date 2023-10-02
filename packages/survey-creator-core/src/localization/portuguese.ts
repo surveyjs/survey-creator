@@ -166,9 +166,11 @@ var portugueseTranslation = {
       question_visibilityName: "Mostrar (esconder) questão",
       question_enableName: "Ativar (desativar) questão",
       question_requireName: "Tornar a pergunta obrigatória",
+      question_resetValue: "Redefinir o valor da pergunta",
       column_visibilityName: "Mostrar (esconder) coluna",
       column_enableName: "Ativar (desativar) coluna",
       column_requireName: "Tornar a coluna obrigatória",
+      column_resetValue: "Redefinir o valor da coluna",
       trigger_completeName: "Completar questionário",
       trigger_setvalueName: "Definir resposta",
       trigger_copyvalueName: "Copiar resposta",
@@ -327,6 +329,8 @@ var portugueseTranslation = {
     choicesOrder: "Selecione a ordem das alternativas",
     visible: "É visível?",
     isRequired: "É obrigatório?",
+    markRequired: "Marcar conforme necessário",
+    removeRequiredMark: "Remover a marca necessária",
     isAllRowRequired: "Exigir resposta para todas as linhas",
     requiredErrorText: "\"Obrigatório\" mensagem de erro",
     startWithNewLine: "Começa com uma nova linha?",
@@ -910,6 +914,7 @@ var portugueseTranslation = {
     descriptionLocation: "Descrição de localização",
     defaultValueExpression: "Valor de expressão pré-definida",
     requiredIf: "Obrigatório se",
+    resetValueIf: "Redefinir valor se",
     validators: "Validadores",
     bindings: "ligações",
     renderAs: "renderizar como",
@@ -1235,3 +1240,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pv.file: "Local files" => "Arquivos locais"
 // pv.camera: "Camera" => "Câmera"
 // pv.file-camera: "Local files or camera" => "Arquivos locais ou câmera"
+// lg.question_resetValue: "Reset question value" => "Redefinir o valor da pergunta"
+// lg.column_resetValue: "Reset column value" => "Redefinir o valor da coluna"
+// pe.markRequired: "Mark as required" => "Marcar conforme necessário"
+// pe.removeRequiredMark: "Remove the required mark" => "Remover a marca necessária"
+// p.resetValueIf: "Reset value if" => "Redefinir valor se"
