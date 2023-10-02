@@ -7,6 +7,7 @@ import { parse } from "papaparse";
 import "survey-core/survey.i18n";
 import { editorLocalization } from "../../src/editorLocalization";
 export * from "../../src/localization/russian";
+export * from "../../src/localization/french";
 
 test("Fire callback on base objects creation", () => {
   const survey = new SurveyModel();
@@ -1068,6 +1069,34 @@ test("localize placeholders", () => {
   expect(surveyCell2.placeholder).toEqual("Редактирование");
   expect(surveyCell2.value).toEqual(null);
 });
+test("localize placeholders, default locale is 'fr'", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ]
+      }
+    ]
+  });
+  const prevLoc = surveyLocalization.defaultLocale;
+  surveyLocalization.defaultLocale = "fr";
+  const translation = new Translation(survey);
+  translation.reset();
+  translation.showAllStrings = true;
+  expect(translation.stringsSurvey.pages).toHaveLength(1);
+  const page = translation.stringsSurvey.pages[0];
+  expect(page.elements).toHaveLength(13);
+  const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
+  expect(surveyProps.name).toEqual("survey_props0");
+  expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Traduction...");
+  surveyLocalization.defaultLocale = prevLoc;
+});
+
 test("init placeholders for dialects", () => {
   const survey = new SurveyModel({
     "elements": [
