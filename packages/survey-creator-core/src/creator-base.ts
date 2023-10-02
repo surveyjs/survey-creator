@@ -886,20 +886,20 @@ export class CreatorBase extends Base
   /**
    * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
    * 
-   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass `false` instead.
+   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass an empty array or call this function without arguments.
    * 
    * Parameters:
    *
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.fromLocale`: `String`\
+   * - `options.fromLocale`: `string`\
    * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
-   * - `options.toLocale`: `String`\
+   * - `options.toLocale`: `string`\
    * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
-   * - `options.strings`: `Array<String>`\
+   * - `options.strings`: `Array<string>`\
    * Strings to translate.
-   * - `options.callback: (strings: Array<String> | false)`: `Function`\
-   * A callback function that accepts translated strings. If the translation failed, pass `false` instead.
+   * - `options.callback: (strings: Array<string>)`: `Function`\
+   * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
    * 
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    */
