@@ -213,7 +213,8 @@ export class TranslationItem extends TranslationItemBase {
     return res;
   }
   public getPlaceholder(locale: string): string {
-    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
+    const textLocale = !!locale && locale !== "default" ? locale : surveyLocalization.defaultLocale;
+    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", textLocale);
     if (this.context instanceof SurveyModel) {
       return surveyLocalization.getString(this.name, locale) || placeholderText;
     }

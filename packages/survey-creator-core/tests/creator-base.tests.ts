@@ -2499,6 +2499,20 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
 });
+test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "checkbox", name: "q1", choices: ["item1", "item2"] }]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  creator.minimumChoicesCount = 2;
+  let itemValue = new ItemValueWrapperViewModel(creator, q1, q1.choices[0]);
+  expect(itemValue.allowRemove).toBeFalsy();
+  q1.choices.push(new ItemValue("item3"));
+  expect(itemValue.allowRemove).toBeTruthy();
+  q1.choices.splice(2, 1);
+  expect(itemValue.allowRemove).toBeFalsy();
+});
 test("QuestionAdornerViewModel for selectbase and creator.maximumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

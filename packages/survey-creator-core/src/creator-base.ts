@@ -1003,6 +1003,13 @@ export class CreatorBase extends Base
   public maximumChoicesCount: number =
     settings.propertyGrid.maximumChoicesCount;
   /**
+   * Limits the number of choices that users can delete in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   *
+   * Default value: 0 (all choices can be deleted, taken from `settings.propertyGrid.minimumChoicesCount`)
+   */
+  public minimumChoicesCount: number =
+    settings.propertyGrid.minimumChoicesCount;
+  /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)

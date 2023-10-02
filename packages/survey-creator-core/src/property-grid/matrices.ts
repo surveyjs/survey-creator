@@ -375,7 +375,11 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     if (this.getShowDetailPanelOnAdding()) {
       res.detailPanelShowOnAdding = true;
     }
-    var maxRowCount = this.getMaximumRowCount(obj, prop, options);
+    const minRowCount = this.getMinimumRowCount(obj, prop, options);
+    const maxRowCount = this.getMaximumRowCount(obj, prop, options);
+    if(minRowCount > 0) {
+      res.minRowCount = minRowCount;
+    }
     if (maxRowCount > 0) {
       res.maxRowCount = maxRowCount;
     }
@@ -389,11 +393,10 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     return editorLocalization.getString(locName);
   }
-  protected getMaximumRowCount(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): number {
+  protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
+    return -1;
+  }
+  protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
     return -1;
   }
   protected filterPropertyNames(propNames: Array<string>) {
@@ -533,11 +536,11 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
     if (prop.name === "rateValues" && res.columns[0].name == "icon") res.showHeader = res.columns > 3;
     return res;
   }
-  protected getMaximumRowCount(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): number {
+  protected getMinimumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
+    if (prop.name === "choices") return options.minimumChoicesCount;
+    return super.getMaximumRowCount(obj, prop, options);
+  }
+  protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
     if (prop.name === "choices") return options.maximumChoicesCount;
     if (prop.name === "rows") return options.maximumRowsCount;
     if (prop.name === "columns") return options.maximumColumnsCount;
