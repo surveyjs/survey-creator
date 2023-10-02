@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector
 } from "../helper";
 const title = "Responsiveness";
 
@@ -179,7 +179,6 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 
 test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
-  const mobilePropertGridTitle = Selector(".svc-side-bar__container-title");
 
   await t
     .resizeWindow(750, 500)
@@ -190,12 +189,12 @@ test("property grid for mobile devices", async (t) => {
 
     .click(getBarItemByTitle("Open survey settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
-    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
     .click(Selector(".svd-grid-hide"))
     .click(Selector("span").withText("Add Question"))
     .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
-    .expect(mobilePropertGridTitle.textContent).eql("question1")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
     .resizeWindow(1920, 900)
     .expect(mobilePropertGrid.exists).notOk()
