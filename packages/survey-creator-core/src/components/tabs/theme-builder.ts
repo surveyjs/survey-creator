@@ -16,6 +16,7 @@ require("./theme-builder.scss");
 export class ThemeBuilder extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
+  public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
   public undoRedoManager: UndoRedoManager;
@@ -261,6 +262,7 @@ export class ThemeBuilder extends Base {
       this.setJSON(json, this.startThemeClasses);
       this.updatePageList();
       this.updatePropertyGridEditorsAvailability();
+      this.buildActions();
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -316,6 +318,65 @@ export class ThemeBuilder extends Base {
     this.setJSON(this.json, this.simulator.survey.css);
     this.updatePageList();
     this.show();
+  }
+
+  public buildActions() {
+    const pageActions: Array<Action> = [];
+    const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
+      const currentIndex: number = this.survey.currentPageNo;
+      const shift: number = isNext ? 1 : -1;
+      let newIndex = currentIndex + shift;
+      if (this.survey.state === "starting" && isNext) {
+        newIndex = 0;
+      }
+      let nearPage: PageModel = this.survey.visiblePages[newIndex];
+      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
+        && this.survey.pages.length > 0) {
+        nearPage = this.survey.pages[0];
+      }
+      const pageIndex: number = this.survey.pages.indexOf(nearPage);
+      this.activePage = this.survey.pages[pageIndex];
+    };
+
+    if (this.prevPageAction) {
+      this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "theme", this.pageListItems.length > 1) && isRunning;
+      });
+      this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
+      });
+      this.prevPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
+      this.prevPageAction.action = () => setNearPage(false);
+      pageActions.push(this.prevPageAction);
+    }
+
+    if (this.nextPageAction) {
+      this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const isRunning = this.survey.state === "running";
+        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "theme", this.pageListItems.length > 1) && isRunning;
+      });
+      this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
+      });
+      this.nextPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
+      this.nextPageAction.action = () => setNearPage(true);
+      pageActions.push(this.nextPageAction);
+    }
+    this.pages.actions = pageActions;
+    this.pages.containerCss = "sv-action-bar--pages";
+    this.updatePrevNextPageActionState();
+  }
+  private updatePrevNextPageActionState() {
+    if (!this.prevPageAction || !this.survey) return;
+    const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting" || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
+    this.prevPageAction.enabled = isPrevEnabled;
+    const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
+    this.nextPageAction.enabled = isNextEnabled;
   }
 
   public get availableThemes() {
@@ -547,7 +608,7 @@ export class ThemeBuilder extends Base {
       }
     });
 
-    if(!!this.survey) {
+    if (!!this.survey) {
       this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
       this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
       this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);

@@ -4150,3 +4150,27 @@ test("Set isMobile flag for survey when isMobileView true", (): any => {
   creator.isMobileView = false;
   expect(question.isMobile).toBeFalsy();
 });
+
+test("Creator footer action bar: only designer tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "action-undo", "action-redo", "svd-settings"].join("|");
+  const creator = new CreatorTester({ showPreviewTab: false, showThemeTab: false, showLogicTab: true });
+  creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2"] }] };
+  expect(creator.activeTab).toEqual("designer");
+  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+
+  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
