@@ -112,7 +112,6 @@ test("tranlation property grid", async (t) => {
       .click(Selector(".spg-action-button"))
       .click(Selector("span").withText("Català"))
       .click(Selector("button[title='Auto-translate All']"));
-    await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("translation-auto-translate-popup.png", Selector(".st-translation-dialog"), t, comparer);
   });
 });

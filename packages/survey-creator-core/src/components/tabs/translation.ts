@@ -819,7 +819,6 @@ export class Translation extends Base implements ITranslationLocales {
     survey.skeletonComponentName = "sd-translation-line-skeleton";
     survey.startLoadingFromJson();
     survey.css = translationCss;
-    survey.css.root += " st-translation-dialog__survey";
     survey.addNewPage("page");
     this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
     survey.data = this.getStringsSurveyData(survey);
@@ -858,6 +857,11 @@ export class Translation extends Base implements ITranslationLocales {
           if (colName === "default" || cell.column.name.indexOf(colName + "-") === 0)
             this.setPlaceHolder(<QuestionCommentModel>cell.question, item, cell.column.name);
         });
+      }
+    });
+    survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
+      if(options.panel["__translationHasIndent"]) {
+        options.cssClasses.panel.content += " st-panel-indent";
       }
     });
     survey.currentPage = survey.pages[0];
@@ -910,7 +914,7 @@ export class Translation extends Base implements ITranslationLocales {
       panel.addElement(pnl);
       pnl.title = item.text;
       if (item.hasIndent) {
-        pnl.cssClasses.panel.content += " st-panel-indent";
+        pnl["__translationHasIndent"] = true;
       }
       this.addTranslationGroupIntoStringsSurvey(pnl, item);
     }
