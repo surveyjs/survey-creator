@@ -177,6 +177,12 @@ export interface ICreatorOptions {
    */
   maximumColumnsCount?: number;
   /**
+   * Limits the number of choices that users can delete [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   *
+   * Default value: 0 (all choices can be deleted, taken from `settings.propertyGrid.minimumChoicesCount`)
+   */
+  minimumChoicesCount?: number;
+  /**
    * Limits the number of choices that users can add to [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumChoicesCount`)
