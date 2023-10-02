@@ -589,6 +589,9 @@ export class ThemeBuilder extends Base {
 
   private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
+    headerViewContainerQuestion.visible = settings.theme.allowEditHeaderSettings;
+    if (!headerViewContainerQuestion.visible) return;
+
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
