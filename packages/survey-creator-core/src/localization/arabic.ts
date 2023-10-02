@@ -166,9 +166,11 @@ export var arStrings = {
       question_visibilityName: "إظهار (إخفاء) سؤال",
       question_enableName: "تفعيل (تعطيل) سؤال",
       question_requireName: "جعل السؤال إلزامي",
+      question_resetValue: "إعادة تعيين قيمة السؤال",
       column_visibilityName: "إظهار (إخفاء) العمود",
       column_enableName: "تمكين (تعطيل) العمود",
       column_requireName: "جعل العمود مطلوبا",
+      column_resetValue: "إعادة تعيين قيمة العمود",
       trigger_completeName: "أنهي الإستبيان",
       trigger_setvalueName: "تحديد قيمة السؤال",
       trigger_copyvalueName: "نسخ قيمة السؤال",
@@ -327,6 +329,8 @@ export var arStrings = {
     choicesOrder: "إختر ترتيب الإختيارات",
     visible: "مرئي؟",
     isRequired: "مطلوب؟",
+    markRequired: "وضع علامة كمطلوب",
+    removeRequiredMark: "إزالة العلامة المطلوبة",
     isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
@@ -910,6 +914,7 @@ export var arStrings = {
     descriptionLocation: "موقع وصف السؤال",
     defaultValueExpression: "العملية الحسابية الإفتراضية",
     requiredIf: "مطلوب عندما",
+    resetValueIf: "إعادة تعيين القيمة إذا",
     validators: "المدققات",
     bindings: "الإرتباطات",
     renderAs: "عرض ك",
@@ -1487,3 +1492,10 @@ editorLocalization.locales["ar"] = arStrings;
 // pv.file: "Local files" => "الملفات المحلية"
 // pv.camera: "Camera" => "كاميرا"
 // pv.file-camera: "Local files or camera" => "الملفات المحلية أو الكاميرا"
+// lg.question_resetValue: "Reset question value" => "إعادة تعيين قيمة السؤال"
+// lg.column_resetValue: "Reset column value" => "إعادة تعيين قيمة العمود"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
+// pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"
+// p.resetValueIf: "Reset value if" => "إعادة تعيين القيمة إذا"

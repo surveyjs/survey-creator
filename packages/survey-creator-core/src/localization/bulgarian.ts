@@ -166,9 +166,11 @@ export var bgStrings = {
       question_visibilityName: "Показване (скриване) на въпрос",
       question_enableName: "Активиране (деактивиране) на въпрос",
       question_requireName: "Задай въпроса като задължителен.",
+      question_resetValue: "Нулиране на стойността на въпроса",
       column_visibilityName: "Показване (скриване) на колона",
       column_enableName: "Активиране (деактивиране) на колона",
       column_requireName: "Задай колоната като задължителна.",
+      column_resetValue: "Нулиране на стойността на колона",
       trigger_completeName: "Попълнена анкета",
       trigger_setvalueName: "Задаване на отговор",
       trigger_copyvalueName: "Копиране на отговор",
@@ -327,6 +329,8 @@ export var bgStrings = {
     choicesOrder: "Ред на сортиране на избора",
     visible: "Видим",
     isRequired: "Задължителен",
+    markRequired: "Маркирай както се изисква",
+    removeRequiredMark: "Премахване на необходимия знак",
     isAllRowRequired: "Изискване за отговор на всички редове",
     requiredErrorText: "\"Задължително\" съобщение за грешка",
     startWithNewLine: "Показване на въпроса на нов ред",
@@ -910,6 +914,7 @@ export var bgStrings = {
     descriptionLocation: "Описание на местоположението",
     defaultValueExpression: "Стойност по подразбиране на израза",
     requiredIf: "Задължителен, ако",
+    resetValueIf: "Нулиране на стойността, ако",
     validators: "Валидатори",
     bindings: "Обвързване",
     renderAs: "Представяне като",
@@ -1130,3 +1135,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // pv.file: "Local files" => "Локални файлове"
 // pv.camera: "Camera" => "Фотоапарат"
 // pv.file-camera: "Local files or camera" => "Локални файлове или камера"
+// lg.question_resetValue: "Reset question value" => "Нулиране на стойността на въпроса"
+// lg.column_resetValue: "Reset column value" => "Нулиране на стойността на колона"
+// pe.markRequired: "Mark as required" => "Маркирай както се изисква"
+// pe.removeRequiredMark: "Remove the required mark" => "Премахване на необходимия знак"
+// p.resetValueIf: "Reset value if" => "Нулиране на стойността, ако"

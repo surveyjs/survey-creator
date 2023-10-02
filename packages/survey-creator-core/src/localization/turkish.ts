@@ -166,9 +166,11 @@ export var turkishStrings = {
       question_visibilityName: "Soru görüürse",
       question_enableName: "Soru aktif/pasifse",
       question_requireName: "Soru isteğe bağlı zorunluysa",
+      question_resetValue: "Soru değerini sıfırla",
       column_visibilityName: "Göster (gizle) sütunu",
       column_enableName: "Etkinleştir (devre dışı bırak) sütunu",
       column_requireName: "Sütunu gerekli kıl",
+      column_resetValue: "Sütun değerini sıfırla",
       trigger_completeName: "Anketi tamamla",
       trigger_setvalueName: "Soru değerini güncelle",
       trigger_copyvalueName: "Soru değerini kopyala",
@@ -327,6 +329,8 @@ export var turkishStrings = {
     choicesOrder: "Seçenek sırasını seç",
     visible: "Görünür?",
     isRequired: "Zorunlu?",
+    markRequired: "Gerektiği gibi işaretleyin",
+    removeRequiredMark: "Gerekli işareti kaldırın",
     isAllRowRequired: "Tüm satırlar zorunlu",
     requiredErrorText: "Zorunlu hata yazısı",
     startWithNewLine: "Yeni satırla başla?",
@@ -910,6 +914,7 @@ export var turkishStrings = {
     descriptionLocation: "Açıklama konumu",
     defaultValueExpression: "Varsayılan değer ifadesi",
     requiredIf: "Eğer gerekli mi?",
+    resetValueIf: "Sıfırlama değeri",
     validators: "Doğrulayıcılar",
     bindings: "Bağlama",
     renderAs: "Farklı işle",
@@ -1573,3 +1578,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pv.file: "Local files" => "Yerel dosyalar"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Yerel dosyalar veya kamera"
+// lg.question_resetValue: "Reset question value" => "Soru değerini sıfırla"
+// lg.column_resetValue: "Reset column value" => "Sütun değerini sıfırla"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Gerektiği gibi işaretleyin"
+// pe.removeRequiredMark: "Remove the required mark" => "Gerekli işareti kaldırın"
+// p.resetValueIf: "Reset value if" => "Sıfırlama değeri"

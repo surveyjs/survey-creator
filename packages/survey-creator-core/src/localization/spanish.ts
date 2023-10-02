@@ -166,9 +166,11 @@ var spanishTranslation = {
       question_visibilityName: "Pregunta visibilidad",
       question_enableName: "Pregunta habilitar / deshabilitar",
       question_requireName: "Pregunta opcional requerida",
+      question_resetValue: "Restablecer valor de pregunta",
       column_visibilityName: "Mostrar (ocultar) columna",
       column_enableName: "Habilitar (deshabilitar) columna",
       column_requireName: "Hacer columna requerida",
+      column_resetValue: "Restablecer el valor de la columna",
       trigger_completeName: "Encuesta completa",
       trigger_setvalueName: "Establecer valor de la pregunta",
       trigger_copyvalueName: "Copiar valor de la pregunta",
@@ -327,6 +329,8 @@ var spanishTranslation = {
     choicesOrder: "Seleccione el orden de las opciones",
     visible: "¿Es visible?",
     isRequired: "¿Se requiere?",
+    markRequired: "Marcar según sea necesario",
+    removeRequiredMark: "Quitar la marca requerida",
     isAllRowRequired: "Requerir respuesta para todas las filas",
     requiredErrorText: "Texto de error requerido",
     startWithNewLine: "¿Empieza con la nueva línea?",
@@ -910,6 +914,7 @@ var spanishTranslation = {
     descriptionLocation: "Descripción ubicación",
     defaultValueExpression: "Expresión de valor predeterminada",
     requiredIf: "Requerido si",
+    resetValueIf: "Restablecer valor si",
     validators: "Validadores",
     bindings: "Enlaces",
     renderAs: "Renderizar como",
@@ -1348,3 +1353,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pv.file: "Local files" => "Archivos locales"
 // pv.camera: "Camera" => "Cámara"
 // pv.file-camera: "Local files or camera" => "Archivos locales o cámara"
+// lg.question_resetValue: "Reset question value" => "Restablecer valor de pregunta"
+// lg.column_resetValue: "Reset column value" => "Restablecer el valor de la columna"
+// lg.expressionSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Marcar según sea necesario"
+// pe.removeRequiredMark: "Remove the required mark" => "Quitar la marca requerida"
+// p.resetValueIf: "Reset value if" => "Restablecer valor si"

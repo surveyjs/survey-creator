@@ -166,9 +166,11 @@ export var nlStrings = {
       question_visibilityName: "Vraag zichtbaarheid",
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
+      question_resetValue: "Vraagwaarde opnieuw instellen",
       column_visibilityName: "Kolom weergeven (verbergen)",
       column_enableName: "Kolom Inschakelen (uitschakelen)",
       column_requireName: "Kolom verplicht maken",
+      column_resetValue: "Kolomwaarde opnieuw instellen",
       trigger_completeName: "Volledige enquête",
       trigger_setvalueName: "Stel vraagwaarde in",
       trigger_copyvalueName: "Kopieer de vraagwaarde",
@@ -327,6 +329,8 @@ export var nlStrings = {
     choicesOrder: "Volgorde opties",
     visible: "Is zichtbaar?",
     isRequired: "Is verplicht?",
+    markRequired: "Markeren zoals vereist",
+    removeRequiredMark: "Verwijder de vereiste markering",
     isAllRowRequired: "Antwoord vereisen voor alle rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
     startWithNewLine: "Beginnen met een nieuwe regel?",
@@ -910,6 +914,7 @@ export var nlStrings = {
     descriptionLocation: "Plek omschrijving",
     defaultValueExpression: "Standaardwaarde-expressie",
     requiredIf: "Vereist als",
+    resetValueIf: "Waarde opnieuw instellen als",
     validators: "Validators",
     bindings: "Bindings",
     renderAs: "Renderen als",
@@ -1557,3 +1562,10 @@ editorLocalization.locales["nl"] = nlStrings;
 // pv.file: "Local files" => "Lokale bestanden"
 // pv.camera: "Camera" => "Fototoestel"
 // pv.file-camera: "Local files or camera" => "Lokale bestanden of camera"
+// lg.question_resetValue: "Reset question value" => "Vraagwaarde opnieuw instellen"
+// lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Markeren zoals vereist"
+// pe.removeRequiredMark: "Remove the required mark" => "Verwijder de vereiste markering"
+// p.resetValueIf: "Reset value if" => "Waarde opnieuw instellen als"

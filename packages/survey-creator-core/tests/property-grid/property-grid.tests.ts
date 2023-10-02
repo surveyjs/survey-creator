@@ -1841,6 +1841,18 @@ test("Support maximumColumnsCount option", () => {
   question.columns.splice(2, 1);
   expect(updater()).toBeTruthy();
 });
+test("Support minimumChoicesCount option", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices.push(new ItemValue("item1"));
+  question.choices.push(new ItemValue("item2"));
+  var options = new EmptySurveyCreatorOptions();
+  options.minimumChoicesCount = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(editQuestion.minRowCount).toEqual(3);
+});
 test("Support maximumChoicesCount option", () => {
   var question = new QuestionDropdownModel("q1");
   question.choices.push(new ItemValue("item1"));

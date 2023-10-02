@@ -166,9 +166,11 @@ export var koreanStrings = {
       question_visibilityName: "질문 표시(숨기기)",
       question_enableName: "사용(사용 안 함) 질문",
       question_requireName: "질문 필수 항목 만들기",
+      question_resetValue: "질문 값 재설정",
       column_visibilityName: "열 표시(숨기기)",
       column_enableName: "사용(사용 안 함) 열",
       column_requireName: "열을 필수로 설정",
+      column_resetValue: "열 값 재설정",
       trigger_completeName: "설문 조사 완료",
       trigger_setvalueName: "정답 설정",
       trigger_copyvalueName: "답변 복사",
@@ -327,6 +329,8 @@ export var koreanStrings = {
     choicesOrder: "항목 순서 선택",
     visible: "보입니까??",
     isRequired: "필수입니까?",
+    markRequired: "필요에 따라 표시",
+    removeRequiredMark: "필요한 표시를 제거하십시오",
     isAllRowRequired: "모든 행에 대한 응답 필요",
     requiredErrorText: "\"필수\" 오류 메시지",
     startWithNewLine: "새 줄로 시작하겠습니까?",
@@ -910,6 +914,7 @@ export var koreanStrings = {
     descriptionLocation: "설명 위치",
     defaultValueExpression: "기본값 표현식",
     requiredIf: "다음과 같은 경우 필수입니다.",
+    resetValueIf: "다음과 같은 경우 값을 재설정합니다.",
     validators: "유효성 검사기",
     bindings: "바인딩",
     renderAs: "렌더링 형식",
@@ -1781,3 +1786,10 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pv.file: "Local files" => "로컬 파일"
 // pv.camera: "Camera" => "사진기"
 // pv.file-camera: "Local files or camera" => "로컬 파일 또는 카메라"
+// lg.question_resetValue: "Reset question value" => "질문 값 재설정"
+// lg.column_resetValue: "Reset column value" => "열 값 재설정"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "필요에 따라 표시"
+// pe.removeRequiredMark: "Remove the required mark" => "필요한 표시를 제거하십시오"
+// p.resetValueIf: "Reset value if" => "다음과 같은 경우 값을 재설정합니다."

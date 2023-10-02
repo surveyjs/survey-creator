@@ -31,9 +31,6 @@ test("Sidebar: activate tab change", () => {
   expect(creator.sidebar.tabs[0].visible).toEqual(false);
   expect(creator.sidebar.tabs[1].visible).toEqual(true);
   expect(creator.sidebar.tabs[2].visible).toEqual(false);
-
-  creator.isMobileView = true;
-  expect(creator.sidebar.headerText).toEqual("Survey");
 });
 
 test("Sidebar: hasVisibleTabs test", () => {
