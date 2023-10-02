@@ -34,7 +34,7 @@ test("create locales question for edit translation", () => {
   const root = translation.root;
   expect(root.groups).toHaveLength(1);
   expect(root.items).toHaveLength(1);
-  const pagePropsGroup =root.groups[0];
+  const pagePropsGroup = root.groups[0];
   expect(pagePropsGroup.groups).toHaveLength(1);
   expect(pagePropsGroup.items).toHaveLength(1);
   const qGroup = pagePropsGroup.groups[0];
@@ -196,7 +196,7 @@ test("Implement machine translation for Creator", () => {
   let actions = editor.translation.stringsSurvey.navigationBar.actions;
   expect(actions).toHaveLength(2);
   expect(actions[0].id).toBe("svc-translation-import");
-  creator.onMachineTranslation.add((sender, options) => {
+  creator.onMachineTranslate.add((sender, options) => {
     options.callback(["Title fr", "Desc fr"]);
   });
   expect(creator.getHasMachineTranslation()).toBeTruthy();

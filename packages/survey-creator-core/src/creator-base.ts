@@ -884,17 +884,26 @@ export class CreatorBase extends Base
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
   /**
-   * Use this event to modify to automatically translate translation by using services as google cloud tranlation or MS translate API.
+   * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
+   * 
+   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass `false` instead.
+   * 
+   * Parameters:
    *
-   * The event handler accepts the following arguments:
-   *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.fromLocale` - Locale for strings your want to translate. It is commonly the default locale.
-   * - `options.toLocale` - The locale you want to translate to
-   * - `options.strings` - A list of strings you need to translate.
-   * - `options.callback: (strings: Array<strings>)` - A callback function that you have to call after the translation is done. If you can't translate strings, you have to set 'false' as the first parameter. Otherwise you have to set `true` and the second parameter is the list of translated strings.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.fromLocale`: `String`\
+   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.toLocale`: `String`\
+   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.strings`: `Array<String>`\
+   * Strings to translate.
+   * - `options.callback: (strings: Array<String> | false)`: `Function`\
+   * A callback function that accepts translated strings. If the translation failed, pass `false` instead.
+   * 
+   * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    */
-  public onMachineTranslation: CreatorEvent = new CreatorEvent();
+  public onMachineTranslate: CreatorEvent = new CreatorEvent();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -3155,13 +3164,13 @@ export class CreatorBase extends Base
     return options.text;
   }
   getHasMachineTranslation(): boolean {
-    return !this.onMachineTranslation.isEmpty;
+    return !this.onMachineTranslate.isEmpty;
   }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {
-    if(!this.getHasMachineTranslation()) {
+    if (!this.getHasMachineTranslation()) {
       callback(undefined);
     } else {
-      this.onMachineTranslation.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
+      this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
     }
   }
 
@@ -3285,11 +3294,11 @@ export class CreatorBase extends Base
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
-    if(!element || this.maxNestedPanels < 0) return res;
-    if(!isAddNew && element.isPanel) return res;
-    if(this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
-      for(let i = res.length - 1; i >= 0; i--) {
-        if(res[i].isPanel) {
+    if (!element || this.maxNestedPanels < 0) return res;
+    if (!isAddNew && element.isPanel) return res;
+    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+      for (let i = res.length - 1; i >= 0; i--) {
+        if (res[i].isPanel) {
           res.splice(i, 1);
         }
       }

@@ -81,7 +81,7 @@ test("tranlation property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
     await ClientFunction(() => {
-      (window as any).creator.onMachineTranslation.add((sender, options) => { });
+      (window as any).creator.onMachineTranslate.add((sender, options) => { });
     })();
     await setJSON({
       "logoPosition": "right",
