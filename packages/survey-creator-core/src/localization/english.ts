@@ -265,6 +265,7 @@ export var enStrings = {
     fastEntry: "Manual Entry",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
+    fastEntryChoicesMinCountError: "Please enter at least {0} items",
     fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -412,8 +413,12 @@ export var enStrings = {
       imageHeight: "Image height (in CSS-accepted values)",
       imageWidth: "Image width (in CSS-accepted values)"
     },
+    survey: {
+      title: "Title"
+    },
     page: {
-      maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      title: "Title",
+      maxTimeToFinish: "Time limit to finish the page (in seconds)",
     },
     question: {
       page: "Parent page"

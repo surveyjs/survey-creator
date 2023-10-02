@@ -408,8 +408,12 @@ var frenchTranslation = {
       imageHeight: "Hauteur de l’image (en valeurs acceptées par CSS)",
       imageWidth: "Largeur de l’image (en valeurs acceptées par CSS)"
     },
+    survey: {
+      title: "Titre du questionnaire"
+    },
     page: {
-      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)"
+      title: "Titre",
+      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)",
     },
     question: {
       page: "Page parent"

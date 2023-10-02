@@ -990,18 +990,31 @@ export class CreatorBase extends Base
   public maximumChoicesCount: number =
     settings.propertyGrid.maximumChoicesCount;
   /**
+   * Limits the number of choices that users can delete in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   *
+   * Default value: 0 (all choices can be deleted, taken from `settings.propertyGrid.minimumChoicesCount`)
+   */
+  public minimumChoicesCount: number =
+    settings.propertyGrid.minimumChoicesCount;
+  /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
    */
   public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   /**
-   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
-  public maximumNestedPanels: number = -1;
+
+  /**
+   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * 
+   * Default value: -1 (unlimited)
+   */
+  public maxNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.
    */
@@ -1802,7 +1815,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      this.dragDropSurveyElements.maximumNestedPanels = this.maximumNestedPanels;
+      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -3254,9 +3267,9 @@ export class CreatorBase extends Base
   }
   public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
     const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
-    if(!element || this.maximumNestedPanels < 0) return res;
+    if(!element || this.maxNestedPanels < 0) return res;
     if(!isAddNew && element.isPanel) return res;
-    if(this.maximumNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+    if(this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
       for(let i = res.length - 1; i >= 0; i--) {
         if(res[i].isPanel) {
           res.splice(i, 1);
