@@ -166,9 +166,11 @@ var polishStrings = {
       question_visibilityName: "Pokaż (ukryj) pytanie",
       question_enableName: "Włącz (wyłącz) pytanie",
       question_requireName: "Zadbaj o pytanie wymagane",
+      question_resetValue: "Zresetuj wartość pytania",
       column_visibilityName: "Pokaż (ukryj) kolumnę",
       column_enableName: "Włącz (wyłącz) kolumnę",
       column_requireName: "Ustaw kolumnę jako wymaganą",
+      column_resetValue: "Resetowanie wartości kolumny",
       trigger_completeName: "Wypełnij ankietę",
       trigger_setvalueName: "Ustaw odpowiedź",
       trigger_copyvalueName: "Kopiuj odpowiedź",
@@ -327,6 +329,8 @@ var polishStrings = {
     choicesOrder: "Kolejność odpowiedzi",
     visible: "Czy widoczne?",
     isRequired: "Czy wymagalne?",
+    markRequired: "Oznacz jako wymagane",
+    removeRequiredMark: "Usuń wymagany znacznik",
     isAllRowRequired: "Wymagaj odpowiedzi dla wszystkich wierszy",
     requiredErrorText: "Komunikat o błędzie \"Wymagane\"",
     startWithNewLine: "Czy rozpoczyna się nową linią?",
@@ -910,6 +914,7 @@ var polishStrings = {
     descriptionLocation: "Opis lokalizacji",
     defaultValueExpression: "Wyrażenie wartości domyślnej",
     requiredIf: "Wymagane, jeśli:",
+    resetValueIf: "Zresetuj wartość, jeśli",
     validators: "Walidatory",
     bindings: "Powiązania",
     renderAs: "Renderuj jako",
@@ -1851,3 +1856,10 @@ editorLocalization.locales["pl"] = polishStrings;
 // pv.file: "Local files" => "Pliki lokalne"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Pliki lokalne lub aparat"
+// lg.question_resetValue: "Reset question value" => "Zresetuj wartość pytania"
+// lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Oznacz jako wymagane"
+// pe.removeRequiredMark: "Remove the required mark" => "Usuń wymagany znacznik"
+// p.resetValueIf: "Reset value if" => "Zresetuj wartość, jeśli"

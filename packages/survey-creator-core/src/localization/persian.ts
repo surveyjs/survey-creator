@@ -166,9 +166,11 @@ var persianStrings = {
       question_visibilityName: " قابلیت رویت سوال",
       question_enableName: "فعال/غیرفعال کردن سوال ",
       question_requireName: "سوال اختیاری موردنیاز",
+      question_resetValue: "بازنشانی مقدار سؤال",
       column_visibilityName: "نمایش/پنهان کردن ستون",
       column_enableName: "فعال/غیرفعال کردن ستون",
       column_requireName: "ستون مورد نیاز است",
+      column_resetValue: "بازنشانی مقدار ستون",
       trigger_completeName: "تکمیل نظرسنجی",
       trigger_setvalueName: "تنظیم عنوان سوال",
       trigger_copyvalueName: "کپی مقدار سوال",
@@ -327,6 +329,8 @@ var persianStrings = {
     choicesOrder: "ترتیب گزینه را انتخاب کنید",
     visible: "نمایش داده شود؟",
     isRequired: "ضروری است؟",
+    markRequired: "علامت گذاری به عنوان مورد نیاز",
+    removeRequiredMark: "حذف علامت مورد نیاز",
     isAllRowRequired: "نیاز به پاسخ برای همه سطرها",
     requiredErrorText: "متن خطای موردنیاز",
     startWithNewLine: "با سطر جدید شروع شود؟",
@@ -910,6 +914,7 @@ var persianStrings = {
     descriptionLocation: "شرح محل",
     defaultValueExpression: "عبارت مقدار پیشفرض",
     requiredIf: "اجبار اگر؟",
+    resetValueIf: "بازنشانی مقدار اگر",
     validators: "اعتبارسنج ها",
     bindings: "پیوندها",
     renderAs: "Render به عنوان",
@@ -1524,3 +1529,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // pv.file: "Local files" => "پروندههای محلی"
 // pv.camera: "Camera" => "دوربین"
 // pv.file-camera: "Local files or camera" => "فایل های محلی یا دوربین"
+// lg.question_resetValue: "Reset question value" => "بازنشانی مقدار سؤال"
+// lg.column_resetValue: "Reset column value" => "بازنشانی مقدار ستون"
+// pe.markRequired: "Mark as required" => "علامت گذاری به عنوان مورد نیاز"
+// pe.removeRequiredMark: "Remove the required mark" => "حذف علامت مورد نیاز"
+// p.resetValueIf: "Reset value if" => "بازنشانی مقدار اگر"
