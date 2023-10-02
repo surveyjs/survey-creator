@@ -84,6 +84,7 @@ export var settings = {
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
     maximumColumnsCount: 0,
+    minimumChoicesCount: 0,
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
     maximumRateValues: 0,
@@ -184,10 +185,11 @@ export interface ISurveyCreatorOptions {
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
+  minimumChoicesCount: number;
   maximumChoicesCount: number;
   maximumRowsCount: number;
   maximumRateValues: number;
-  maximumNestedPanels: number;
+  maxNestedPanels: number;
   enableLinkFileEditor: boolean;
   rootElement?: HTMLElement;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
@@ -311,10 +313,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
+  minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
   maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
   maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
-  maximumNestedPanels: number = -1;
+  maxNestedPanels: number = -1;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
