@@ -412,8 +412,12 @@ export var enStrings = {
       imageHeight: "Image height (in CSS-accepted values)",
       imageWidth: "Image width (in CSS-accepted values)"
     },
+    survey: {
+      title: "Title"
+    },
     page: {
-      maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      title: "Title",
+      maxTimeToFinish: "Time limit to finish the page (in seconds)",
     },
     question: {
       page: "Parent page"
