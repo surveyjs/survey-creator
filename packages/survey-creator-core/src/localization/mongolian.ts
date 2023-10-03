@@ -136,6 +136,8 @@ export var mnStrings = {
     translationNoStrings: "Орчуулах зүйл байхгүй. Шүүлтийг өөрчилнө үү.",
     translationExportToSCVButton: "CSV экспорт хийх",
     translationImportFromSCVButton: "CSV импорт хийх",
+    translateUsigAI: "Авто-орчуулга Бүгд",
+    translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
     themeExportButton: "Экспорт",
@@ -265,6 +267,7 @@ export var mnStrings = {
     fastEntry: "Гараар оруулах",
     fastEntryNonUniqueError: "'{0}' утга давтагдаж байна!",
     fastEntryChoicesCountError: "Хэсгийг {0}-оос {1} хүртэл хязгаарлах",
+    fastEntryChoicesMinCountError: "Наад зах нь {0} зүйлс оруулна уу",
     fastEntryPlaceholder: "Та дараах форматын дагуу өгөгдлийг оруулж болно:\nvalue1|text\nvalue2",
     formEntry: "Маягт оруулах",
     testService: "Үйлчилгээг турших",
@@ -1230,6 +1233,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // pv.file: "Local files" => "Орон нутгийн файлууд"
 // pv.camera: "Camera" => "Камер"
 // pv.file-camera: "Local files or camera" => "Орон нутгийн файлууд эсвэл камер"
+// ed.translateUsigAI: "Auto-translate All" => "Авто-орчуулга Бүгд"
+// ed.translationDialogTitle: "Untranslated strings" => "Огт орчуулагдаагүй уяанууд"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Наад зах нь {0} зүйлс оруулна уу"
 // lg.question_resetValue: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
 // lg.column_resetValue: "Reset column value" => "Reset баганын үнэ цэнэ"
 // pe.markRequired: "Mark as required" => "Шаардлагын дагуу тэмдэглэгээ хийх"

@@ -136,6 +136,8 @@ export var koreanStrings = {
     translationNoStrings: "번역할 문자열이 없습니다. 필터를 교체하십시오.",
     translationExportToSCVButton: "CSV로 내보내기",
     translationImportFromSCVButton: "CSV에서 가져오기",
+    translateUsigAI: "모두 자동 번역",
+    translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
     themeExportButton: "수출",
@@ -265,6 +267,7 @@ export var koreanStrings = {
     fastEntry: "빠른 입력",
     fastEntryNonUniqueError: "'{0}' 값은 고유하지 않습니다.",
     fastEntryChoicesCountError: "항목 수를 {0}개에서 {1}개로 제한하십시오.",
+    fastEntryChoicesMinCountError: "최소 {0} 항목을 입력하십시오.",
     fastEntryPlaceholder: "다음 형식으로 데이터를 설정할 수 있습니다.\nvalue1|텍스트\n값2",
     formEntry: "양식 입력",
     testService: "서비스 테스트",
@@ -1786,6 +1789,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pv.file: "Local files" => "로컬 파일"
 // pv.camera: "Camera" => "사진기"
 // pv.file-camera: "Local files or camera" => "로컬 파일 또는 카메라"
+// ed.translateUsigAI: "Auto-translate All" => "모두 자동 번역"
+// ed.translationDialogTitle: "Untranslated strings" => "번역되지 않은 문자열"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "최소 {0} 항목을 입력하십시오."
 // lg.question_resetValue: "Reset question value" => "질문 값 재설정"
 // lg.column_resetValue: "Reset column value" => "열 값 재설정"
 // lg.expressionSetup: "" => ""

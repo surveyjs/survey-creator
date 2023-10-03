@@ -136,6 +136,8 @@ export var huStrings = {
     translationNoStrings: "Nincs fordítható szöveg. Kérem változtasson a szűrési feltételeken.",
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
+    translateUsigAI: "Összes automatikus fordítása",
+    translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
     themeExportButton: "Kivitel",
@@ -265,6 +267,7 @@ export var huStrings = {
     fastEntry: "Gyors felvétel",
     fastEntryNonUniqueError: "A \"{0}\" érték nem egyedi",
     fastEntryChoicesCountError: "Kérjük, korlátozza a tételek számát {0} és {1} között",
+    fastEntryChoicesMinCountError: "Kérjük, adjon meg legalább {0} elemet",
     fastEntryPlaceholder: "Az adatokat a következő formátumban állíthatja be:\nérték1|szöveg\nérték2",
     formEntry: "Felvétel űrlappal",
     testService: "Szolgáltatás tesztelése",
@@ -1736,6 +1739,9 @@ editorLocalization.locales["hu"] = huStrings;
 // pv.file: "Local files" => "Helyi fájlok"
 // pv.camera: "Camera" => "Fényképezőgép"
 // pv.file-camera: "Local files or camera" => "Helyi fájlok vagy kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Összes automatikus fordítása"
+// ed.translationDialogTitle: "Untranslated strings" => "Lefordítatlan karakterláncok"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
 // lg.question_resetValue: "Reset question value" => "Kérdés értékének visszaállítása"
 // lg.column_resetValue: "Reset column value" => "Oszlopérték visszaállítása"
 // lg.expressionSetup: "" => ""

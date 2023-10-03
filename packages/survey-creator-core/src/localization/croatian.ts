@@ -136,6 +136,8 @@ export var hrStrings = {
     translationNoStrings: "Nema žica za prevođenje. Promijenite filtar.",
     translationExportToSCVButton: "Izvoz u CSV",
     translationImportFromSCVButton: "Uvoz iz CSV",
+    translateUsigAI: "Automatski prevedi sve",
+    translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
@@ -265,6 +267,7 @@ export var hrStrings = {
     fastEntry: "Brzi unos",
     fastEntryNonUniqueError: "Vrijednost '{0}' nije jedinstvena",
     fastEntryChoicesCountError: "Ograničite broj stavki s {0} na {1}",
+    fastEntryChoicesMinCountError: "Unesite najmanje {0} stavki",
     fastEntryPlaceholder: "Podatke možete postaviti u sljedećem obliku:\nvrijednost1|tekst\nvrijednost2",
     formEntry: "Unos obrasca",
     testService: "Testirajte uslugu",
@@ -1576,6 +1579,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // pv.file: "Local files" => "Lokalne datoteke"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokalne datoteke ili kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Automatski prevedi sve"
+// ed.translationDialogTitle: "Untranslated strings" => "Neprevedeni nizovi"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Unesite najmanje {0} stavki"
 // lg.question_resetValue: "Reset question value" => "Vrati izvornu vrijednost pitanja"
 // lg.column_resetValue: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
 // lg.expressionSetup: "" => ""
@@ -1583,3 +1589,4 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.markRequired: "Mark as required" => "Označi kao obavezno"
 // pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"
 // p.resetValueIf: "Reset value if" => "Vrati izvornu vrijednost ako"
+

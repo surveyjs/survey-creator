@@ -136,6 +136,8 @@ var polishStrings = {
     translationNoStrings: "Brak ciągów do przetłumaczenia. Proszę zmienić filtr.",
     translationExportToSCVButton: "Eksport do pliku CSV",
     translationImportFromSCVButton: "Importowanie z pliku CSV",
+    translateUsigAI: "Automatycznie tłumacz wszystko",
+    translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
     themeExportButton: "Eksport",
@@ -265,6 +267,7 @@ var polishStrings = {
     fastEntry: "Szybkie wprowadzanie",
     fastEntryNonUniqueError: "Wartość \"{0}\" nie jest unikalna",
     fastEntryChoicesCountError: "Ogranicz liczbę przedmiotów od {0} do {1}",
+    fastEntryChoicesMinCountError: "Podaj co najmniej {0} przedmiotów",
     fastEntryPlaceholder: "Dane można ustawić w następującym formacie:\nwartość1|tekst\nwartość2",
     formEntry: "Formularz",
     testService: "Testuj usługę",
@@ -1856,6 +1859,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // pv.file: "Local files" => "Pliki lokalne"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Pliki lokalne lub aparat"
+// ed.translateUsigAI: "Auto-translate All" => "Automatycznie tłumacz wszystko"
+// ed.translationDialogTitle: "Untranslated strings" => "Nieprzetłumaczone ciągi znaków"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
 // lg.question_resetValue: "Reset question value" => "Zresetuj wartość pytania"
 // lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
 // lg.expressionSetup: "" => ""

@@ -136,6 +136,8 @@ var italianTranslation = {
     translationNoStrings: "Nessuna stringa da tradurre. Cambia il filtro.",
     translationExportToSCVButton: "Esporta in CSV",
     translationImportFromSCVButton: "Importa da CSV",
+    translateUsigAI: "Traduzione automatica di tutto",
+    translationDialogTitle: "Stringhe non tradotte",
     translationMergeLocaleWithDefault: "Unisci {0} con il predefinito",
     translationPlaceHolder: "Traduzione...",
     themeExportButton: "Esportazione",
@@ -265,6 +267,7 @@ var italianTranslation = {
     fastEntry: "Inserimento manuale",
     fastEntryNonUniqueError: "Il valore '{0}' non è univoco",
     fastEntryChoicesCountError: "Limita il numero di opzioni da {0} a {1}",
+    fastEntryChoicesMinCountError: "Inserisci almeno {0} elementi",
     fastEntryPlaceholder: "È possibile impostare i dati nel seguente formato:\nvalore1|testo\nvalore2",
     formEntry: "Inserimento dati",
     testService: "Prova il servizio",
@@ -1332,6 +1335,9 @@ editorLocalization.locales["it"] = italianTranslation;
 // pv.file: "Local files" => "File locali"
 // pv.camera: "Camera" => "Macchina fotografica"
 // pv.file-camera: "Local files or camera" => "File locali o fotocamera"
+// ed.translateUsigAI: "Auto-translate All" => "Traduzione automatica di tutto"
+// ed.translationDialogTitle: "Untranslated strings" => "Stringhe non tradotte"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Inserisci almeno {0} elementi"
 // lg.question_resetValue: "Reset question value" => "Reimpostare il valore della domanda"
 // lg.column_resetValue: "Reset column value" => "Reimposta valore colonna"
 // pe.markRequired: "Mark as required" => "Contrassegna come richiesto"

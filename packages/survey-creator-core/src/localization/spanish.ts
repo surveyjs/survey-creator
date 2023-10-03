@@ -136,6 +136,8 @@ var spanishTranslation = {
     translationNoStrings: "Sin cuerdas para traducir. Por favor, cambie el filtro",
     translationExportToSCVButton: "Exportar a CSV",
     translationImportFromSCVButton: "Importación de CSV",
+    translateUsigAI: "Traducir automáticamente todo",
+    translationDialogTitle: "Cadenas sin traducir",
     translationMergeLocaleWithDefault: "Merge {0} con lugar predeterminado",
     translationPlaceHolder: "Traducción...",
     themeExportButton: "Exportar",
@@ -265,6 +267,7 @@ var spanishTranslation = {
     fastEntry: "Entrada rápida",
     fastEntryNonUniqueError: "Valor '{0}' no es único",
     fastEntryChoicesCountError: "Por favor, limita el númeror de elementos de {0} a {1}",
+    fastEntryChoicesMinCountError: "Introduce al menos {0} artículos",
     fastEntryPlaceholder: "Puedes introducir datos en el siguiente formato:\nvalue1|text\nvalue2",
     formEntry: "Entrada de forma",
     testService: "Probar el servicio",
@@ -1353,6 +1356,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pv.file: "Local files" => "Archivos locales"
 // pv.camera: "Camera" => "Cámara"
 // pv.file-camera: "Local files or camera" => "Archivos locales o cámara"
+// ed.translateUsigAI: "Auto-translate All" => "Traducir automáticamente todo"
+// ed.translationDialogTitle: "Untranslated strings" => "Cadenas sin traducir"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Introduce al menos {0} artículos"
 // lg.question_resetValue: "Reset question value" => "Restablecer valor de pregunta"
 // lg.column_resetValue: "Reset column value" => "Restablecer el valor de la columna"
 // lg.expressionSetup: "" => ""

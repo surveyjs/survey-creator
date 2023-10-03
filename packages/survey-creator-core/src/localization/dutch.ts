@@ -136,6 +136,8 @@ export var nlStrings = {
     translationNoStrings: "Geen verplichtingen om te vertalen. Vervang alstublieft het filter.",
     translationExportToSCVButton: "Exporteren naar CSV",
     translationImportFromSCVButton: "Importeren vanuit CSV",
+    translateUsigAI: "Alles automatisch vertalen",
+    translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
     themeExportButton: "Exporteren",
@@ -265,6 +267,7 @@ export var nlStrings = {
     fastEntry: "Snelle toegang",
     fastEntryNonUniqueError: "Waarde '{0}' is niet uniek",
     fastEntryChoicesCountError: "Beperk het aantal objecten van {0} tot {1}",
+    fastEntryChoicesMinCountError: "Voer ten minste {0} objecten in",
     fastEntryPlaceholder: "U kunt gegevens instellen in de volgende indeling:\nwaarde1|tekst\nwaarde2",
     formEntry: "Formulierinvoer",
     testService: "Test de service",
@@ -1562,6 +1565,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // pv.file: "Local files" => "Lokale bestanden"
 // pv.camera: "Camera" => "Fototoestel"
 // pv.file-camera: "Local files or camera" => "Lokale bestanden of camera"
+// ed.translateUsigAI: "Auto-translate All" => "Alles automatisch vertalen"
+// ed.translationDialogTitle: "Untranslated strings" => "Onvertaalde tekenreeksen"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
 // lg.question_resetValue: "Reset question value" => "Vraagwaarde opnieuw instellen"
 // lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
 // lg.expressionSetup: "" => ""

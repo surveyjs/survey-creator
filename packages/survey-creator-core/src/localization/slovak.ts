@@ -136,6 +136,8 @@ export var skStrings = {
     translationNoStrings: "Žiadne reťazce na preklad. Zmeňte filter.",
     translationExportToSCVButton: "Exportovať do CSV",
     translationImportFromSCVButton: "Importovať z CSV",
+    translateUsigAI: "Automatický preklad všetkého",
+    translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
     themeExportButton: "Vývoz",
@@ -265,6 +267,7 @@ export var skStrings = {
     fastEntry: "Rýchle zadanie",
     fastEntryNonUniqueError: "Hodnota \"{0}\" nie je jedinečná",
     fastEntryChoicesCountError: "Obmedzte počet položiek od {0} do {1}",
+    fastEntryChoicesMinCountError: "Zadajte aspoň {0} položiek",
     fastEntryPlaceholder: "Údaje môžete nastaviť v nasledujúcom formáte:\nhodnota1|text\nhodnota2",
     formEntry: "Zadanie formulára",
     testService: "Test služby",
@@ -1536,6 +1539,9 @@ editorLocalization.locales["sk"] = skStrings;
 // pv.file: "Local files" => "Lokálne súbory"
 // pv.camera: "Camera" => "Fotoaparát"
 // pv.file-camera: "Local files or camera" => "Lokálne súbory alebo fotoaparát"
+// ed.translateUsigAI: "Auto-translate All" => "Automatický preklad všetkého"
+// ed.translationDialogTitle: "Untranslated strings" => "Nepreložené reťazce"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadajte aspoň {0} položiek"
 // lg.question_resetValue: "Reset question value" => "Obnoviť hodnotu otázky"
 // lg.column_resetValue: "Reset column value" => "Obnovenie hodnoty stĺpca"
 // lg.expressionSetup: "" => ""

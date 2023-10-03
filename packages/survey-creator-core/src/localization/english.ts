@@ -138,6 +138,8 @@ export var enStrings = {
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
+    translateUsigAI: "Auto-translate All",
+    translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
     themeExportButton: "Export",
