@@ -114,8 +114,8 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin smallBold {
-  --small-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
-  font-family: var(--font-family, $font-family);
+  --small-bold-font-size: #($font-size);
+  font-family: $font-family;
   font-style: normal;
   font-weight: 600;
   font-size: calc(0.75 * var(--small-bold-font-size));
@@ -123,8 +123,8 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin defaultBold {
-  --default-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
-  font-family: var(--font-family, $font-family);
+  --default-bold-font-size: #($font-size);
+  font-family: $font-family;
   font-style: normal;
   font-weight: 600;
   font-size: var(--default-bold-font-size);
@@ -132,15 +132,15 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin defaultFont {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
-  font-family: var(--font-family, $font-family);
+  --default-font-size: #($font-size);
+  font-family: $font-family;
   font-style: normal;
   font-size: var(--default-font-size);
   line-height: calc(1.5 * var(--default-font-size));
 }
 
 @mixin borderLight {
-  --border-light-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --border-light-font-size: #{$base-unit};
   border: calc(0.25 * var(--border-light-font-size)) solid $border-light;
   border-radius: calcCornerRadius(1);
 }
@@ -150,7 +150,7 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 $tab-min-height: var(--tab-min-height, auto);
 
 @mixin mediumBold {
-  --medium-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --medium-bold-font-size: #{$base-unit};
   font-family: $font-family;
   font-style: normal;
   font-weight: bold;
@@ -172,7 +172,7 @@ $tab-min-height: var(--tab-min-height, auto);
 }
 
 @mixin centerText {
-  --center-text-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --center-text-font-size: #{$base-unit};
   font-family: $font-family;
   font-style: normal;
   font-weight: 400;
