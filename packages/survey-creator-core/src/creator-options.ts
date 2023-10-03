@@ -177,9 +177,9 @@ export interface ICreatorOptions {
    */
   maximumColumnsCount?: number;
   /**
-   * Limits the number of choices that users can delete [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
-   * Default value: 0 (all choices can be deleted, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
    */
   minimumChoicesCount?: number;
   /**
@@ -195,7 +195,7 @@ export interface ICreatorOptions {
    */
   maximumRowsCount?: number;
   /**
-   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
@@ -206,6 +206,13 @@ export interface ICreatorOptions {
    * Default value: -1 (unlimited)
    */
   maxLogicItemsInCondition?: number;
+
+  /**
+   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * 
+   * Default value: -1 (unlimited)
+   */
+  maxNestedPanels?: number;
   /**
    * Specifies whether users can switch between UI themes in the Preview tab.
    *
@@ -223,7 +230,7 @@ export interface ICreatorOptions {
    */
   previewOrientation?: "landscape" | "portrait";
   /**
-   * Limits question and panels types available in the Toolbox and Add Question menu.
+   * Limits question and panel types available in the Toolbox and Add Question menu.
    * 
    * Refer to the [Limit Available Question and Panel Types](https://surveyjs.io/Documentation/Survey-Creator?id=toolbox#limit-available-question-and-panel-types) help topic for more information.
    */

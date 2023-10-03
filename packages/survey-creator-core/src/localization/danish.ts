@@ -166,9 +166,11 @@ export var danishStrings = {
       question_visibilityName: "Vis (skjul) spørgsmål",
       question_enableName: "Aktivér (deaktiver) spørgsmål",
       question_requireName: "Gør spørgsmål påkrævet",
+      question_resetValue: "Nulstil spørgsmålsværdi",
       column_visibilityName: "Vis (skjul) kolonne",
       column_enableName: "Aktivér (deaktiver) kolonne",
       column_requireName: "Gør kolonne påkrævet",
+      column_resetValue: "Nulstil kolonneværdi",
       trigger_completeName: "Komplet undersøgelse",
       trigger_setvalueName: "Indstil svar",
       trigger_copyvalueName: "Kopier svar",
@@ -327,6 +329,8 @@ export var danishStrings = {
     choicesOrder: "Vælg rækkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er påkrævet?",
+    markRequired: "Markér efter behov",
+    removeRequiredMark: "Fjern det påkrævede mærke",
     isAllRowRequired: "Kræv svar for alle rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
@@ -910,6 +914,7 @@ export var danishStrings = {
     descriptionLocation: "Beskrivelse placering",
     defaultValueExpression: "Standardværdiudtryk",
     requiredIf: "Påkrævet, hvis",
+    resetValueIf: "Nulstil værdi, hvis",
     validators: "validators",
     bindings: "Bindings",
     renderAs: "Gengiv som",
@@ -1763,3 +1768,10 @@ editorLocalization.locales["da"] = danishStrings;
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// lg.question_resetValue: "Reset question value" => "Nulstil spørgsmålsværdi"
+// lg.column_resetValue: "Reset column value" => "Nulstil kolonneværdi"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Markér efter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern det påkrævede mærke"
+// p.resetValueIf: "Reset value if" => "Nulstil værdi, hvis"

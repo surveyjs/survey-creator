@@ -166,9 +166,11 @@ export let svStrings = {
       question_visibilityName: "Visa (dölj) fråga",
       question_enableName: "Aktivera (inaktivera) fråga",
       question_requireName: "Gör frågan obligatorisk",
+      question_resetValue: "Återställ frågevärde",
       column_visibilityName: "Visa (dölj) kolumn",
       column_enableName: "Aktivera (inaktivera) kolumn",
       column_requireName: "Gör kolumnen obligatorisk",
+      column_resetValue: "Återställ kolumnvärde",
       trigger_completeName: "Fullständig undersökning",
       trigger_setvalueName: "Ställ in svar",
       trigger_copyvalueName: "Kopiera svar",
@@ -327,6 +329,8 @@ export let svStrings = {
     choicesOrder: "Välj ordning på valet",
     visible: "Synlig?",
     isRequired: "Nödvändig?",
+    markRequired: "Markera efter behov",
+    removeRequiredMark: "Ta bort det obligatoriska märket",
     isAllRowRequired: "Kräv svar för alla rader",
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
     startWithNewLine: "Starta på en ny rad?",
@@ -910,6 +914,7 @@ export let svStrings = {
     descriptionLocation: "Beskrivning plats",
     defaultValueExpression: "Uttryck för standardvärde",
     requiredIf: "Obligatoriskt om",
+    resetValueIf: "Återställ värde om",
     validators: "validators",
     bindings: "Bindningar",
     renderAs: "Återge som",
@@ -1755,3 +1760,10 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.file: "Local files" => "Lokala filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokala filer eller kamera"
+// lg.question_resetValue: "Reset question value" => "Återställ frågevärde"
+// lg.column_resetValue: "Reset column value" => "Återställ kolumnvärde"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Markera efter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Ta bort det obligatoriska märket"
+// p.resetValueIf: "Reset value if" => "Återställ värde om"

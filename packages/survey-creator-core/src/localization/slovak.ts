@@ -166,9 +166,11 @@ export var skStrings = {
       question_visibilityName: "Viditeľnosť otázky",
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
+      question_resetValue: "Obnoviť hodnotu otázky",
       column_visibilityName: "Zobraziť (skryť) stĺpec",
       column_enableName: "Povoliť (zakázať) stĺpec",
       column_requireName: "Nastavenie povinného stĺpca",
+      column_resetValue: "Obnovenie hodnoty stĺpca",
       trigger_completeName: "Dokončiť prieskum",
       trigger_setvalueName: "Nastaviť hodnotu otázky",
       trigger_copyvalueName: "Kopírovať hodnotu otázky",
@@ -327,6 +329,8 @@ export var skStrings = {
     choicesOrder: "Poradie vybratých možností",
     visible: "Je viditeľné?",
     isRequired: "Vyžaduje sa?",
+    markRequired: "Označiť podľa potreby",
+    removeRequiredMark: "Odstráňte požadovanú značku",
     isAllRowRequired: "Vyžadovať odpoveď pre všetky riadky",
     requiredErrorText: "Text chyby pri povinných položkách",
     startWithNewLine: "Začína sa novým riadkom?",
@@ -910,6 +914,7 @@ export var skStrings = {
     descriptionLocation: "poloha opisu",
     defaultValueExpression: "predvolený výraz hodnoty",
     requiredIf: "Povinné ak",
+    resetValueIf: "Obnoviť hodnotu, ak",
     validators: "overovatelia",
     bindings: "väzby",
     renderAs: "Vykresliť ako",
@@ -1531,3 +1536,10 @@ editorLocalization.locales["sk"] = skStrings;
 // pv.file: "Local files" => "Lokálne súbory"
 // pv.camera: "Camera" => "Fotoaparát"
 // pv.file-camera: "Local files or camera" => "Lokálne súbory alebo fotoaparát"
+// lg.question_resetValue: "Reset question value" => "Obnoviť hodnotu otázky"
+// lg.column_resetValue: "Reset column value" => "Obnovenie hodnoty stĺpca"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Označiť podľa potreby"
+// pe.removeRequiredMark: "Remove the required mark" => "Odstráňte požadovanú značku"
+// p.resetValueIf: "Reset value if" => "Obnoviť hodnotu, ak"

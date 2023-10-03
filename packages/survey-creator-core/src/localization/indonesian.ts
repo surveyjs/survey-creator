@@ -166,9 +166,11 @@ export var indonesianStrings = {
       question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
+      question_resetValue: "Mereset nilai pertanyaan",
       column_visibilityName: "Perlihatkan (sembunyikan) kolom",
       column_enableName: "Mengaktifkan (menonaktifkan) kolom",
       column_requireName: "Buat kolom diperlukan",
+      column_resetValue: "Mereset nilai kolom",
       trigger_completeName: "Survei lengkap",
       trigger_setvalueName: "Tetapkan jawaban",
       trigger_copyvalueName: "Salin jawaban",
@@ -327,6 +329,8 @@ export var indonesianStrings = {
     choicesOrder: "Tentukan urutan pilihan",
     visible: "Terlihat?",
     isRequired: "Wajib?",
+    markRequired: "Tandai sesuai kebutuhan",
+    removeRequiredMark: "Hapus tanda yang diperlukan",
     isAllRowRequired: "Memerlukan jawaban untuk semua baris",
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
     startWithNewLine: "Mulai dengan baris baru?",
@@ -910,6 +914,7 @@ export var indonesianStrings = {
     descriptionLocation: "Deskripsi lokasi",
     defaultValueExpression: "Ekspresi nilai default",
     requiredIf: "wajib jika",
+    resetValueIf: "Reset nilai jika",
     validators: "validator",
     bindings: "Binding",
     renderAs: "Render sebagai",
@@ -1732,3 +1737,10 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pv.file: "Local files" => "File lokal"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "File atau kamera lokal"
+// lg.question_resetValue: "Reset question value" => "Mereset nilai pertanyaan"
+// lg.column_resetValue: "Reset column value" => "Mereset nilai kolom"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
+// pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"
+// p.resetValueIf: "Reset value if" => "Reset nilai jika"

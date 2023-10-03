@@ -166,9 +166,11 @@ export var ruStrings = {
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
       question_requireName: "Вопрос обязательный",
+      question_resetValue: "Сбросить значение вопроса",
       column_visibilityName: "Показать (скрыть) столбец",
       column_enableName: "Включить (отключить) столбец",
       column_requireName: "Сделать столбец обязательным",
+      column_resetValue: "Сброс значения столбца",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",
@@ -327,6 +329,8 @@ export var ruStrings = {
     choicesOrder: "Выбрать порядок отбора",
     visible: "Отображать?",
     isRequired: "Обязательный?",
+    markRequired: "Отметьте как обязательный",
+    removeRequiredMark: "Снимите нужную отметку",
     isAllRowRequired: "Все строки обязательны для заполнения",
     requiredErrorText: "Это поле обязательное для заполнения",
     startWithNewLine: "Начинать с новой строки?",
@@ -910,6 +914,7 @@ export var ruStrings = {
     descriptionLocation: "Описание местоположения",
     defaultValueExpression: "Выражение значения по умолчанию",
     requiredIf: "Обязателен если",
+    resetValueIf: "Сбросьте значение, если",
     validators: "Валидаторы",
     bindings: "Привязки",
     renderAs: "Рендеринг как",
@@ -1640,3 +1645,10 @@ editorLocalization.locales["ru"] = ruStrings;
 // pv.file: "Local files" => "Локальные файлы"
 // pv.camera: "Camera" => "Фотоаппарат"
 // pv.file-camera: "Local files or camera" => "Локальные файлы или камера"
+// lg.question_resetValue: "Reset question value" => "Сбросить значение вопроса"
+// lg.column_resetValue: "Reset column value" => "Сброс значения столбца"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Отметьте как обязательный"
+// pe.removeRequiredMark: "Remove the required mark" => "Снимите нужную отметку"
+// p.resetValueIf: "Reset value if" => "Сбросьте значение, если"

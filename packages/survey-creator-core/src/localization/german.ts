@@ -166,9 +166,11 @@ var germanTranslation = {
       question_visibilityName: "Frage anzeigen/verstecken",
       question_enableName: "Frage aktivieren/deaktivieren",
       question_requireName: "Frage optional/erforderlich",
+      question_resetValue: "Fragewert zurücksetzen",
       column_visibilityName: "Spalte anzeigen/verstecken",
       column_enableName: "Spalte aktivieren/deaktivieren",
       column_requireName: "Spalte optional/erforderlich",
+      column_resetValue: "Spaltenwert zurücksetzen",
       trigger_completeName: "Umfrage abschließen",
       trigger_setvalueName: "Antwort setzen",
       trigger_copyvalueName: "Antwort kopieren",
@@ -327,6 +329,8 @@ var germanTranslation = {
     choicesOrder: "Auswahlreihenfolge",
     visible: "Sichtbar?",
     isRequired: "Erforderlich?",
+    markRequired: "Als erforderlich markieren",
+    removeRequiredMark: "Entfernen Sie die erforderliche Markierung",
     isAllRowRequired: "Ist eine Antwort für alle Zeilen erforderlich?",
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
     startWithNewLine: "Starte mit einer neuen Zeile",
@@ -639,7 +643,7 @@ var germanTranslation = {
     columnsVisibleIf: "Spalten sind sichtbar, wenn",
     rowsVisibleIf: "Zeilen sind sichtbar, wenn",
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
-    rateType: "Ansicht der Bewertungssymbole",
+    rateType: "Ansicht der Bewertungssymbole"
   },
   // Property values
   pv: {
@@ -910,6 +914,7 @@ var germanTranslation = {
     descriptionLocation: "Position der Beschreibung",
     defaultValueExpression: "Ausdruck für Standardwerte",
     requiredIf: "Erforderlich wenn ...",
+    resetValueIf: "Wert zurücksetzen, wenn",
     validators: "Validierungen",
     bindings: "Bindings",
     renderAs: "Rendern als",
@@ -1299,3 +1304,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // pv.file: "Local files" => "Lokale Dateien"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale Dateien oder Kamera"
+
+// lg.question_resetValue: "Reset question value" => "Fragewert zurücksetzen"
+// lg.column_resetValue: "Reset column value" => "Spaltenwert zurücksetzen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Als erforderlich markieren"
+// pe.removeRequiredMark: "Remove the required mark" => "Entfernen Sie die erforderliche Markierung"
+// p.resetValueIf: "Reset value if" => "Wert zurücksetzen, wenn"

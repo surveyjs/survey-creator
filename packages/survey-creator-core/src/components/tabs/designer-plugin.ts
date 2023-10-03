@@ -25,9 +25,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
   }
-  private updatePropertyGridTabCaption() {
-    this.propertyGridTab.caption = this.creator.isMobileView ? this.propertyGrid.selectedElementName : "";
-  }
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("designer", this);
@@ -51,19 +48,11 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.toolboxTab = this.creator.sidebar.addTab("toolbox", "svc-toolbox", creator);
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "isMobileView") {
-        this.updatePropertyGridTabCaption();
-      }
       if (options.name === "toolboxLocation") {
         if (this.toolboxTab.visible && options.newVal !== "sidebar") {
           this.propertyGridTab.visible = true;
         }
         this.toolboxTab.visible = options.newVal === "sidebar";
-      }
-    });
-    this.propertyGrid.onPropertyChanged.add((sender, options) => {
-      if (options.name === "selectedElementName") {
-        this.updatePropertyGridTabCaption();
       }
     });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));

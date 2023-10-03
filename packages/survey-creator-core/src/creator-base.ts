@@ -990,9 +990,9 @@ export class CreatorBase extends Base
   public maximumChoicesCount: number =
     settings.propertyGrid.maximumChoicesCount;
   /**
-   * Limits the number of choices that users can delete in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions.
+   * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
    *
-   * Default value: 0 (all choices can be deleted, taken from `settings.propertyGrid.minimumChoicesCount`)
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
    */
   public minimumChoicesCount: number =
     settings.propertyGrid.minimumChoicesCount;
@@ -1003,11 +1003,17 @@ export class CreatorBase extends Base
    */
   public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   /**
-   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+
+  /**
+   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * 
+   * Default value: -1 (unlimited)
+   */
   public maxNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.

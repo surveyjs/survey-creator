@@ -27,7 +27,8 @@ export var settings = {
   },
   theme: {
     exportFileName: "survey_theme.json",
-    fontFamily: "Open Sans"
+    fontFamily: "Open Sans",
+    allowEditHeaderSettings: false,
   },
   operators: {
     empty: [],
