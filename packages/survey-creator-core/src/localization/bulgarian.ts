@@ -168,9 +168,11 @@ export var bgStrings = {
       question_visibilityName: "Показване (скриване) на въпрос",
       question_enableName: "Активиране (деактивиране) на въпрос",
       question_requireName: "Задай въпроса като задължителен.",
+      question_resetValue: "Нулиране на стойността на въпроса",
       column_visibilityName: "Показване (скриване) на колона",
       column_enableName: "Активиране (деактивиране) на колона",
       column_requireName: "Задай колоната като задължителна.",
+      column_resetValue: "Нулиране на стойността на колона",
       trigger_completeName: "Попълнена анкета",
       trigger_setvalueName: "Задаване на отговор",
       trigger_copyvalueName: "Копиране на отговор",
@@ -915,6 +917,7 @@ export var bgStrings = {
     descriptionLocation: "Описание на местоположението",
     defaultValueExpression: "Стойност по подразбиране на израза",
     requiredIf: "Задължителен, ако",
+    resetValueIf: "Нулиране на стойността, ако",
     validators: "Валидатори",
     bindings: "Обвързване",
     renderAs: "Представяне като",
@@ -1138,5 +1141,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Автоматичен превод на всички"
 // ed.translationDialogTitle: "Untranslated strings" => "Непреведени низове"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Моля, въведете поне {0} артикула"
+// lg.question_resetValue: "Reset question value" => "Нулиране на стойността на въпроса"
+// lg.column_resetValue: "Reset column value" => "Нулиране на стойността на колона"
 // pe.markRequired: "Mark as required" => "Маркирай както се изисква"
 // pe.removeRequiredMark: "Remove the required mark" => "Премахване на необходимия знак"
+// p.resetValueIf: "Reset value if" => "Нулиране на стойността, ако"

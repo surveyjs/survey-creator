@@ -168,9 +168,11 @@ export var nlStrings = {
       question_visibilityName: "Vraag zichtbaarheid",
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
+      question_resetValue: "Vraagwaarde opnieuw instellen",
       column_visibilityName: "Kolom weergeven (verbergen)",
       column_enableName: "Kolom Inschakelen (uitschakelen)",
       column_requireName: "Kolom verplicht maken",
+      column_resetValue: "Kolomwaarde opnieuw instellen",
       trigger_completeName: "Volledige enquête",
       trigger_setvalueName: "Stel vraagwaarde in",
       trigger_copyvalueName: "Kopieer de vraagwaarde",
@@ -915,6 +917,7 @@ export var nlStrings = {
     descriptionLocation: "Plek omschrijving",
     defaultValueExpression: "Standaardwaarde-expressie",
     requiredIf: "Vereist als",
+    resetValueIf: "Waarde opnieuw instellen als",
     validators: "Validators",
     bindings: "Bindings",
     renderAs: "Renderen als",
@@ -1564,8 +1567,11 @@ editorLocalization.locales["nl"] = nlStrings;
 // pv.file-camera: "Local files or camera" => "Lokale bestanden of camera"
 // ed.translateUsigAI: "Auto-translate All" => "Alles automatisch vertalen"
 // ed.translationDialogTitle: "Untranslated strings" => "Onvertaalde tekenreeksen"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
+// lg.question_resetValue: "Reset question value" => "Vraagwaarde opnieuw instellen"
+// lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
 // pe.markRequired: "Mark as required" => "Markeren zoals vereist"
 // pe.removeRequiredMark: "Remove the required mark" => "Verwijder de vereiste markering"
+// p.resetValueIf: "Reset value if" => "Waarde opnieuw instellen als"

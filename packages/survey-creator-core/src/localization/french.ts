@@ -168,9 +168,11 @@ var frenchTranslation = {
       question_visibilityName: "Afficher/masquer la question",
       question_enableName: "Activer/désactiver la question",
       question_requireName: "Rendre la question obligatoire",
+      question_resetValue: "Réinitialiser la valeur de la question",
       column_visibilityName: "Afficher/masquer la colonne",
       column_enableName: "Activer/désactiver la colonne",
       column_requireName: "Rendre la colonne obligatoire",
+      column_resetValue: "Réinitialiser la valeur de la colonne",
       trigger_completeName: "Terminer le sondage",
       trigger_setvalueName: "Définir la valeur de la question",
       trigger_copyvalueName: "Copier la valeur de la question",
@@ -413,8 +415,12 @@ var frenchTranslation = {
       imageHeight: "Hauteur de l’image (en valeurs acceptées par CSS)",
       imageWidth: "Largeur de l’image (en valeurs acceptées par CSS)"
     },
+    survey: {
+      title: "Titre du questionnaire"
+    },
     page: {
-      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)"
+      title: "Titre",
+      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)",
     },
     question: {
       page: "Page parent"
@@ -915,6 +921,7 @@ var frenchTranslation = {
     descriptionLocation: "Description de l’emplacement",
     defaultValueExpression: "Expression de valeur par défaut",
     requiredIf: "Obligatoire si",
+    resetValueIf: "Réinitialiser la valeur si",
     validators: "Validateurs",
     bindings: "Liaisons",
     renderAs: "Rendre en tant que",
@@ -1646,8 +1653,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pv.file-camera: "Local files or camera" => "Fichiers locaux ou caméra"
 // ed.translateUsigAI: "Auto-translate All" => "Traduire automatiquement tout"
 // ed.translationDialogTitle: "Untranslated strings" => "Chaînes non traduites"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Veuillez saisir au moins {0} éléments"
+// lg.question_resetValue: "Reset question value" => "Réinitialiser la valeur de la question"
+// lg.column_resetValue: "Reset column value" => "Réinitialiser la valeur de la colonne"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Veuillez saisir au moins {0} éléments"
 // pe.markRequired: "Mark as required" => "Marquer au besoin"
 // pe.removeRequiredMark: "Remove the required mark" => "Supprimer la marque requise"
+// p.resetValueIf: "Reset value if" => "Réinitialiser la valeur si"

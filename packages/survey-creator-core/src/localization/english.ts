@@ -170,9 +170,11 @@ export var enStrings = {
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",
+      question_resetValue: "Reset question value",
       column_visibilityName: "Show (hide) column",
       column_enableName: "Enable (disable) column",
       column_requireName: "Make column required",
+      column_resetValue: "Reset column value",
       trigger_completeName: "Complete survey",
       trigger_setvalueName: "Set answer",
       trigger_copyvalueName: "Copy answer",
@@ -415,8 +417,12 @@ export var enStrings = {
       imageHeight: "Image height (in CSS-accepted values)",
       imageWidth: "Image width (in CSS-accepted values)"
     },
+    survey: {
+      title: "Title"
+    },
     page: {
-      maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      title: "Title",
+      maxTimeToFinish: "Time limit to finish the page (in seconds)",
     },
     question: {
       page: "Parent page"
@@ -917,6 +923,7 @@ export var enStrings = {
     descriptionLocation: "Description location", // Auto-generated string
     defaultValueExpression: "Default value expression", // Auto-generated string
     requiredIf: "Required if", // Auto-generated string
+    resetValueIf: "Reset value if", // Auto-generated string
     validators: "Validators", // Auto-generated string
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
@@ -993,6 +1000,7 @@ export var enStrings = {
     "--base-unit": "Base unit",
     groupGeneral: "General",
     groupAdvanced: "Advanced",
+    groupHeader: "Header",
     themeName: "Theme",
     themeMode: "Question appearance",
     themeModePanels: "Default",
@@ -1003,11 +1011,15 @@ export var enStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
+    coverTitleForecolor: "Title forecolor",
+    coverOverlap: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Cover",
     backgroundImageFitContain: "Contain",
+    backgroundImageFitFill: "Fill",
+    backgroundImageFitTile: "Tile",
     backgroundOpacity: "Opacity", // Auto-generated string
     backgroundImageAttachmentFixed: "Fixed",
     backgroundImageAttachmentScroll: "Scroll",
@@ -1052,6 +1064,26 @@ export var enStrings = {
     boxShadowInner: "Inner",
     questionShadow: "Shadow effects",
     editorShadow: "Input element shadow effects",
+    headerView: "View",
+    headerViewTitle: "Title",
+    headerViewCover: "Cover",
+    coverAreaWidth: "Content area width",
+    coverAreaWidthSurvey: "Same as survey",
+    coverAreaWidthContainer: "Fit to page",
+    coverTextWidth: "Text width",
+    coverBackgroundColorSwitch: "Background color",
+    coverBackgroundColorNone: "None",
+    coverBackgroundColorAccentColor: "Accent color",
+    coverBackgroundColorCustom: "Custom",
+    horizontalAlignmentLeft: "Left",
+    horizontalAlignmentCenter: "Center",
+    horizontalAlignmentRight: "Right",
+    verticalAlignmentTop: "Top",
+    verticalAlignmentMiddle: "Middle",
+    verticalAlignmentBottom: "Bottom",
+    logoPosition: "Logo Position",
+    coverTitlePosition: "Title Position",
+    coverDescriptionPosition: "Description Position",
     names: {
       "default": "Default",
       "sharp": "Sharp",

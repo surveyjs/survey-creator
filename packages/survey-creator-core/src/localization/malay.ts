@@ -168,9 +168,11 @@ export var msStrings = {
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
+      question_resetValue: "Mengeset semula nilai soalan",
       column_visibilityName: "Tunjukkan lajur (sembunyikan)",
       column_enableName: "Mendayakan (nyahdayakan) lajur",
       column_requireName: "Jadikan lajur diperlukan",
+      column_resetValue: "Mengeset semula nilai lajur",
       trigger_completeName: "Lengkapkan tinjauan",
       trigger_setvalueName: "Tetapkan nilai soalan",
       trigger_copyvalueName: "Salin nilai soalan",
@@ -915,6 +917,7 @@ export var msStrings = {
     descriptionLocation: "Lokasi perihalan",
     defaultValueExpression: "Ekspresi nilai lalai",
     requiredIf: "Diperlukan jika",
+    resetValueIf: "Mengeset semula nilai jika",
     validators: "Pengesah",
     bindings: "ikatan",
     renderAs: "Render sebagai",
@@ -1538,8 +1541,11 @@ editorLocalization.locales["ms"] = msStrings;
 // pv.file-camera: "Local files or camera" => "Fail atau kamera tempatan"
 // ed.translateUsigAI: "Auto-translate All" => "Terjemahkan Secara automatik Semua"
 // ed.translationDialogTitle: "Untranslated strings" => "Rentetan tidak diterjemahkan"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
+// lg.question_resetValue: "Reset question value" => "Mengeset semula nilai soalan"
+// lg.column_resetValue: "Reset column value" => "Mengeset semula nilai lajur"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
 // pe.markRequired: "Mark as required" => "Tandakan mengikut keperluan"
 // pe.removeRequiredMark: "Remove the required mark" => "Mengalih keluar tanda yang diperlukan"
+// p.resetValueIf: "Reset value if" => "Mengeset semula nilai jika"

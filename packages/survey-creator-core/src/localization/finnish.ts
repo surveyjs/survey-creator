@@ -168,9 +168,11 @@ export var fiStrings = {
       question_visibilityName: "Kysymyksen näkyvyys",
       question_enableName: "Kysymys käytössä/Ei käytössä",
       question_requireName: "Kysymys valinnainen vaaditaan",
+      question_resetValue: "Palauta kysymyksen arvo",
       column_visibilityName: "Näytä (piilota) -sarake",
       column_enableName: "Ota käyttöön (poista käytöstä) sarake",
       column_requireName: "Tee sarakkeesta pakollinen",
+      column_resetValue: "Palauta sarakkeen arvo",
       trigger_completeName: "Valmis kysely",
       trigger_setvalueName: "Aseta kysymyksen arvo",
       trigger_copyvalueName: "Kopioi kysymyksen arvo",
@@ -915,6 +917,7 @@ export var fiStrings = {
     descriptionLocation: "Kuvaus, sijainti",
     defaultValueExpression: "Oletusarvon lauseke",
     requiredIf: "requiredIf",
+    resetValueIf: "Nollaa arvo, jos",
     validators: "validators",
     bindings: "Siteet",
     renderAs: "Hahmonna muodossa",
@@ -1584,8 +1587,11 @@ editorLocalization.locales["fi"] = fiStrings;
 // pv.file-camera: "Local files or camera" => "Paikalliset tiedostot tai kamera"
 // ed.translateUsigAI: "Auto-translate All" => "Käännä kaikki automaattisesti"
 // ed.translationDialogTitle: "Untranslated strings" => "Kääntämättömät merkkijonot"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
+// lg.question_resetValue: "Reset question value" => "Palauta kysymyksen arvo"
+// lg.column_resetValue: "Reset column value" => "Palauta sarakkeen arvo"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
 // pe.markRequired: "Mark as required" => "Merkitse pakollisesti"
 // pe.removeRequiredMark: "Remove the required mark" => "Poista vaadittu merkki"
+// p.resetValueIf: "Reset value if" => "Nollaa arvo, jos"

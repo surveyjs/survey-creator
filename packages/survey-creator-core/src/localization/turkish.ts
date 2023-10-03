@@ -168,9 +168,11 @@ export var turkishStrings = {
       question_visibilityName: "Soru görüürse",
       question_enableName: "Soru aktif/pasifse",
       question_requireName: "Soru isteğe bağlı zorunluysa",
+      question_resetValue: "Soru değerini sıfırla",
       column_visibilityName: "Göster (gizle) sütunu",
       column_enableName: "Etkinleştir (devre dışı bırak) sütunu",
       column_requireName: "Sütunu gerekli kıl",
+      column_resetValue: "Sütun değerini sıfırla",
       trigger_completeName: "Anketi tamamla",
       trigger_setvalueName: "Soru değerini güncelle",
       trigger_copyvalueName: "Soru değerini kopyala",
@@ -915,6 +917,7 @@ export var turkishStrings = {
     descriptionLocation: "Açıklama konumu",
     defaultValueExpression: "Varsayılan değer ifadesi",
     requiredIf: "Eğer gerekli mi?",
+    resetValueIf: "Sıfırlama değeri",
     validators: "Doğrulayıcılar",
     bindings: "Bağlama",
     renderAs: "Farklı işle",
@@ -1580,8 +1583,11 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pv.file-camera: "Local files or camera" => "Yerel dosyalar veya kamera"
 // ed.translateUsigAI: "Auto-translate All" => "Tümünü Otomatik Çevir"
 // ed.translationDialogTitle: "Untranslated strings" => "Çevrilmemiş dizeler"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Lütfen en az {0} ürün girin"
+// lg.question_resetValue: "Reset question value" => "Soru değerini sıfırla"
+// lg.column_resetValue: "Reset column value" => "Sütun değerini sıfırla"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Lütfen en az {0} ürün girin"
 // pe.markRequired: "Mark as required" => "Gerektiği gibi işaretleyin"
 // pe.removeRequiredMark: "Remove the required mark" => "Gerekli işareti kaldırın"
+// p.resetValueIf: "Reset value if" => "Sıfırlama değeri"

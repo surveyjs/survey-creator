@@ -168,9 +168,11 @@ export var jaStrings = {
       question_visibilityName: "質問の可視性",
       question_enableName: "質問の有効化/無効化",
       question_requireName: "質問オプションが必要",
+      question_resetValue: "質問値のリセット",
       column_visibilityName: "列を表示 (非表示)",
       column_enableName: "有効 (無効) 列",
       column_requireName: "列を必須にする",
+      column_resetValue: "列の値をリセット",
       trigger_completeName: "アンケートを完了する",
       trigger_setvalueName: "質問の値を設定する",
       trigger_copyvalueName: "質問の値をコピーする",
@@ -915,6 +917,7 @@ export var jaStrings = {
     descriptionLocation: "説明の場所",
     defaultValueExpression: "デフォルト値式",
     requiredIf: "次の場合に必要",
+    resetValueIf: "次の場合に値をリセット",
     validators: "バリデータ",
     bindings: "バインド",
     renderAs: "レンダリング形式",
@@ -1584,8 +1587,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // pv.file-camera: "Local files or camera" => "ローカルファイルまたはカメラ"
 // ed.translateUsigAI: "Auto-translate All" => "すべて自動翻訳"
 // ed.translationDialogTitle: "Untranslated strings" => "未翻訳の文字列"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
+// lg.question_resetValue: "Reset question value" => "質問値のリセット"
+// lg.column_resetValue: "Reset column value" => "列の値をリセット"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
 // pe.markRequired: "Mark as required" => "必須としてマーク"
 // pe.removeRequiredMark: "Remove the required mark" => "必要なマークを削除する"
+// p.resetValueIf: "Reset value if" => "次の場合に値をリセット"

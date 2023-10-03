@@ -168,9 +168,11 @@ export var mnStrings = {
       question_visibilityName: "Асуулт харуулах (нуух)",
       question_enableName: "Асуулт идэвхжүүлэх (идэвхгүй болгох)",
       question_requireName: "Асуултыг заавал бөглөөөөх болгох",
+      question_resetValue: "Асуултын үнэ цэнийг дахин тогтоох",
       column_visibilityName: "Багана харуулах (нуух).",
       column_enableName: "Багана идэвхжүүлэх (идэвхгүй болгох).",
       column_requireName: "Баганыг заавал бөглөөөөх болгох",
+      column_resetValue: "Reset баганын үнэ цэнэ",
       trigger_completeName: "Санал асуулга дуусгах",
       trigger_setvalueName: "Хариулт оруулах",
       trigger_copyvalueName: "Хариулт хуулах",
@@ -915,6 +917,7 @@ export var mnStrings = {
     descriptionLocation: "Тайлбарын байршил",
     defaultValueExpression: "Үндсэн утгын илэрхийлэл",
     requiredIf: "Заавал бөглөх хэрэв",
+    resetValueIf: "Хэрэв үнэ цэнээ дахин тогтоох",
     validators: "Батлагч",
     bindings: "Холбогч",
     renderAs: "руу хөрвүүлэх",
@@ -1233,5 +1236,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Авто-орчуулга Бүгд"
 // ed.translationDialogTitle: "Untranslated strings" => "Огт орчуулагдаагүй уяанууд"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Наад зах нь {0} зүйлс оруулна уу"
+// lg.question_resetValue: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
+// lg.column_resetValue: "Reset column value" => "Reset баганын үнэ цэнэ"
 // pe.markRequired: "Mark as required" => "Шаардлагын дагуу тэмдэглэгээ хийх"
 // pe.removeRequiredMark: "Remove the required mark" => "Шаардлагатай тэмдэглэгээг хасах"
+// p.resetValueIf: "Reset value if" => "Хэрэв үнэ цэнээ дахин тогтоох"

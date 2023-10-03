@@ -1408,3 +1408,135 @@ test("disable irrelevant settings", (): any => {
   expect(pageTitle.isReadOnly).toBeTruthy();
   expect(pageDescription.isReadOnly).toBeTruthy();
 });
+
+test("headerViewContainer init state", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
+
+  expect(headerViewContainer.value[0]).toEqual({
+    "headerView": "title",
+    "logoPosition": "left",
+    "areaWidth": "survey",
+    "overlap": false,
+    "backgroundColorSwitch": "none",
+    "backgroundImageFit": "cover",
+    "backgroundImageOpacity": 100,
+    "logoPositionX": "right",
+    "logoPositionY": "top",
+    "titlePositionX": "left",
+    "titlePositionY": "bottom",
+    "descriptionPositionX": "left",
+    "descriptionPositionY": "bottom",
+    "textWidth": 512,
+    "height": 256
+  });
+});
+
+test("set headerViewContainer", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  headerViewContainer.getElementByName("logoPosition").value = "right";
+  headerViewContainer.getElementByName("headerView").value = "cover";
+  headerViewContainer.getElementByName("height").value = 300;
+  headerViewContainer.getElementByName("areaWidth").value = "container";
+  headerViewContainer.getElementByName("textWidth").value = 600;
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
+  headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
+  headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
+  headerViewContainer.getElementByName("backgroundImageOpacity").value = 50;
+  headerViewContainer.getElementByName("titleForecolor").value = "#FBFF24";
+  headerViewContainer.getElementByName("overlap").value = true;
+  headerViewContainer.getElementByName("logoPositionX").value = "center";
+  headerViewContainer.getElementByName("logoPositionY").value = "middle";
+  headerViewContainer.getElementByName("titlePositionX").value = "center";
+  headerViewContainer.getElementByName("titlePositionY").value = "middle";
+  headerViewContainer.getElementByName("descriptionPositionX").value = "center";
+  headerViewContainer.getElementByName("descriptionPositionY").value = "middle";
+
+  expect(creator.theme.cover).toEqual({
+    "height": 300,
+    "areaWidth": "container",
+    "textWidth": 600,
+    "overlap": true,
+    "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+    "backgroundImageOpacity": 0.5,
+    "backgroundImageFit": "fill",
+    "logoPositionX": "center",
+    "logoPositionY": "middle",
+    "titlePositionX": "center",
+    "titlePositionY": "middle",
+    "descriptionPositionX": "center",
+    "descriptionPositionY": "middle"
+  });
+  expect(creator.theme.cssVariables["--sjs-cover-backcolor"]).toBe("#5094ed");
+  expect(creator.theme.cssVariables["--sjs-cover-title-forecolor"]).toBe("#FBFF24");
+});
+
+test("restore headerViewContainer values", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-corner-radius": "20px",
+      "--sjs-base-unit": "9.6px",
+      "--sjs-font-size": "17.6px",
+      "--sjs-cover-backcolor": "#5094ed",
+      "--sjs-cover-title-forecolor": "#FBFF24",
+    },
+    "cover": {
+      "height": 300,
+      "areaWidth": "container",
+      "textWidth": 600,
+      "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+      "backgroundImageOpacity": 0.5,
+      "backgroundImageFit": "fill",
+      "overlap": true,
+      "logoPositionX": "center",
+      "logoPositionY": "middle",
+      "titlePositionX": "center",
+      "titlePositionY": "middle",
+      "descriptionPositionX": "center",
+      "descriptionPositionY": "middle"
+    }
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
+
+  expect(headerViewContainer.value[0]).toEqual({
+    "headerView": "title",
+    "logoPosition": "left",
+    "areaWidth": "container",
+    "titleForecolor": "#FBFF24",
+    "backgroundColor": "#5094ed",
+    "backgroundColorSwitch": "custom",
+    "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
+    "backgroundImageFit": "fill",
+    "backgroundImageOpacity": 50,
+    "overlap": true,
+    "logoPositionX": "center",
+    "logoPositionY": "middle",
+    "titlePositionX": "center",
+    "titlePositionY": "middle",
+    "descriptionPositionX": "center",
+    "descriptionPositionY": "middle",
+    "textWidth": 600,
+    "height": 300
+  });
+});

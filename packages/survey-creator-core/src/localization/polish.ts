@@ -168,9 +168,11 @@ var polishStrings = {
       question_visibilityName: "Pokaż (ukryj) pytanie",
       question_enableName: "Włącz (wyłącz) pytanie",
       question_requireName: "Zadbaj o pytanie wymagane",
+      question_resetValue: "Zresetuj wartość pytania",
       column_visibilityName: "Pokaż (ukryj) kolumnę",
       column_enableName: "Włącz (wyłącz) kolumnę",
       column_requireName: "Ustaw kolumnę jako wymaganą",
+      column_resetValue: "Resetowanie wartości kolumny",
       trigger_completeName: "Wypełnij ankietę",
       trigger_setvalueName: "Ustaw odpowiedź",
       trigger_copyvalueName: "Kopiuj odpowiedź",
@@ -915,6 +917,7 @@ var polishStrings = {
     descriptionLocation: "Opis lokalizacji",
     defaultValueExpression: "Wyrażenie wartości domyślnej",
     requiredIf: "Wymagane, jeśli:",
+    resetValueIf: "Zresetuj wartość, jeśli",
     validators: "Walidatory",
     bindings: "Powiązania",
     renderAs: "Renderuj jako",
@@ -1858,8 +1861,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // pv.file-camera: "Local files or camera" => "Pliki lokalne lub aparat"
 // ed.translateUsigAI: "Auto-translate All" => "Automatycznie tłumacz wszystko"
 // ed.translationDialogTitle: "Untranslated strings" => "Nieprzetłumaczone ciągi znaków"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
+// lg.question_resetValue: "Reset question value" => "Zresetuj wartość pytania"
+// lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
 // pe.markRequired: "Mark as required" => "Oznacz jako wymagane"
 // pe.removeRequiredMark: "Remove the required mark" => "Usuń wymagany znacznik"
+// p.resetValueIf: "Reset value if" => "Zresetuj wartość, jeśli"

@@ -168,9 +168,11 @@ export var skStrings = {
       question_visibilityName: "Viditeľnosť otázky",
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
+      question_resetValue: "Obnoviť hodnotu otázky",
       column_visibilityName: "Zobraziť (skryť) stĺpec",
       column_enableName: "Povoliť (zakázať) stĺpec",
       column_requireName: "Nastavenie povinného stĺpca",
+      column_resetValue: "Obnovenie hodnoty stĺpca",
       trigger_completeName: "Dokončiť prieskum",
       trigger_setvalueName: "Nastaviť hodnotu otázky",
       trigger_copyvalueName: "Kopírovať hodnotu otázky",
@@ -915,6 +917,7 @@ export var skStrings = {
     descriptionLocation: "poloha opisu",
     defaultValueExpression: "predvolený výraz hodnoty",
     requiredIf: "Povinné ak",
+    resetValueIf: "Obnoviť hodnotu, ak",
     validators: "overovatelia",
     bindings: "väzby",
     renderAs: "Vykresliť ako",
@@ -1538,8 +1541,11 @@ editorLocalization.locales["sk"] = skStrings;
 // pv.file-camera: "Local files or camera" => "Lokálne súbory alebo fotoaparát"
 // ed.translateUsigAI: "Auto-translate All" => "Automatický preklad všetkého"
 // ed.translationDialogTitle: "Untranslated strings" => "Nepreložené reťazce"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadajte aspoň {0} položiek"
+// lg.question_resetValue: "Reset question value" => "Obnoviť hodnotu otázky"
+// lg.column_resetValue: "Reset column value" => "Obnovenie hodnoty stĺpca"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadajte aspoň {0} položiek"
 // pe.markRequired: "Mark as required" => "Označiť podľa potreby"
 // pe.removeRequiredMark: "Remove the required mark" => "Odstráňte požadovanú značku"
+// p.resetValueIf: "Reset value if" => "Obnoviť hodnotu, ak"

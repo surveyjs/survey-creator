@@ -168,9 +168,11 @@ export var huStrings = {
       question_visibilityName: "Kérdés megjelenítése (elrejtése)",
       question_enableName: "Kérdés engedélyezése (letiltása)",
       question_requireName: "Kérdés feltevése kötelező",
+      question_resetValue: "Kérdés értékének visszaállítása",
       column_visibilityName: "Oszlop megjelenítése (elrejtése)",
       column_enableName: "Oszlop engedélyezése (letiltása)",
       column_requireName: "Oszlop kötelezővé tétele",
+      column_resetValue: "Oszlopérték visszaállítása",
       trigger_completeName: "Teljes felmérés",
       trigger_setvalueName: "Válasz beállítása",
       trigger_copyvalueName: "Válasz másolása",
@@ -915,6 +917,7 @@ export var huStrings = {
     descriptionLocation: "Leírás, hely",
     defaultValueExpression: "Alapértelmezett értékkifejezés",
     requiredIf: "Kötelező ha",
+    resetValueIf: "Érték visszaállítása, ha",
     validators: "Validátorok",
     bindings: "Kötések",
     renderAs: "Renderelés mint",
@@ -1738,8 +1741,11 @@ editorLocalization.locales["hu"] = huStrings;
 // pv.file-camera: "Local files or camera" => "Helyi fájlok vagy kamera"
 // ed.translateUsigAI: "Auto-translate All" => "Összes automatikus fordítása"
 // ed.translationDialogTitle: "Untranslated strings" => "Lefordítatlan karakterláncok"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
+// lg.question_resetValue: "Reset question value" => "Kérdés értékének visszaállítása"
+// lg.column_resetValue: "Reset column value" => "Oszlopérték visszaállítása"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
 // pe.markRequired: "Mark as required" => "Megjelölés kötelezőként"
 // pe.removeRequiredMark: "Remove the required mark" => "Távolítsa el a szükséges jelet"
+// p.resetValueIf: "Reset value if" => "Érték visszaállítása, ha"

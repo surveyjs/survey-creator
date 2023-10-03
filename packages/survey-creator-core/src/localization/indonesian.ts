@@ -168,9 +168,11 @@ export var indonesianStrings = {
       question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
+      question_resetValue: "Mereset nilai pertanyaan",
       column_visibilityName: "Perlihatkan (sembunyikan) kolom",
       column_enableName: "Mengaktifkan (menonaktifkan) kolom",
       column_requireName: "Buat kolom diperlukan",
+      column_resetValue: "Mereset nilai kolom",
       trigger_completeName: "Survei lengkap",
       trigger_setvalueName: "Tetapkan jawaban",
       trigger_copyvalueName: "Salin jawaban",
@@ -915,6 +917,7 @@ export var indonesianStrings = {
     descriptionLocation: "Deskripsi lokasi",
     defaultValueExpression: "Ekspresi nilai default",
     requiredIf: "wajib jika",
+    resetValueIf: "Reset nilai jika",
     validators: "validator",
     bindings: "Binding",
     renderAs: "Render sebagai",
@@ -1739,8 +1742,11 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pv.file-camera: "Local files or camera" => "File atau kamera lokal"
 // ed.translateUsigAI: "Auto-translate All" => "Terjemahkan otomatis Semua"
 // ed.translationDialogTitle: "Untranslated strings" => "String yang tidak diterjemahkan"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
+// lg.question_resetValue: "Reset question value" => "Mereset nilai pertanyaan"
+// lg.column_resetValue: "Reset column value" => "Mereset nilai kolom"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
 // pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
 // pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"
+// p.resetValueIf: "Reset value if" => "Reset nilai jika"

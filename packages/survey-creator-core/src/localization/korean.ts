@@ -168,9 +168,11 @@ export var koreanStrings = {
       question_visibilityName: "질문 표시(숨기기)",
       question_enableName: "사용(사용 안 함) 질문",
       question_requireName: "질문 필수 항목 만들기",
+      question_resetValue: "질문 값 재설정",
       column_visibilityName: "열 표시(숨기기)",
       column_enableName: "사용(사용 안 함) 열",
       column_requireName: "열을 필수로 설정",
+      column_resetValue: "열 값 재설정",
       trigger_completeName: "설문 조사 완료",
       trigger_setvalueName: "정답 설정",
       trigger_copyvalueName: "답변 복사",
@@ -915,6 +917,7 @@ export var koreanStrings = {
     descriptionLocation: "설명 위치",
     defaultValueExpression: "기본값 표현식",
     requiredIf: "다음과 같은 경우 필수입니다.",
+    resetValueIf: "다음과 같은 경우 값을 재설정합니다.",
     validators: "유효성 검사기",
     bindings: "바인딩",
     renderAs: "렌더링 형식",
@@ -1788,8 +1791,11 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pv.file-camera: "Local files or camera" => "로컬 파일 또는 카메라"
 // ed.translateUsigAI: "Auto-translate All" => "모두 자동 번역"
 // ed.translationDialogTitle: "Untranslated strings" => "번역되지 않은 문자열"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "최소 {0} 항목을 입력하십시오."
+// lg.question_resetValue: "Reset question value" => "질문 값 재설정"
+// lg.column_resetValue: "Reset column value" => "열 값 재설정"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "최소 {0} 항목을 입력하십시오."
 // pe.markRequired: "Mark as required" => "필요에 따라 표시"
 // pe.removeRequiredMark: "Remove the required mark" => "필요한 표시를 제거하십시오"
+// p.resetValueIf: "Reset value if" => "다음과 같은 경우 값을 재설정합니다."

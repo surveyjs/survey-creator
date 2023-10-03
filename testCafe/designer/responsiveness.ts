@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector
 } from "../helper";
 const title = "Responsiveness";
 
@@ -179,8 +179,6 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 
 test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
-  const mobileCloseButton = Selector(".svc-side-bar__container-close");
-  const mobilePropertGridTitle = Selector(".svc-side-bar__container-title");
 
   await t
     .resizeWindow(750, 500)
@@ -191,12 +189,12 @@ test("property grid for mobile devices", async (t) => {
 
     .click(getBarItemByTitle("Open survey settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
-    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .click(mobileCloseButton)
+    .click(Selector(".svd-grid-hide"))
     .click(Selector("span").withText("Add Question"))
     .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
-    .expect(mobilePropertGridTitle.textContent).eql("question1")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
     .resizeWindow(1920, 900)
     .expect(mobilePropertGrid.exists).notOk()
@@ -283,7 +281,6 @@ test("Property grid editor popup", async (t) => {
   await setJSON(json);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const mobileCloseButton = Selector(".svc-side-bar__container-close");
 
   await t
     .resizeWindow(1920, 900)
@@ -295,7 +292,7 @@ test("Property grid editor popup", async (t) => {
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
     .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
-    .click(mobileCloseButton)
+    .click(Selector(".svd-grid-hide"))
     .click(question1, { offsetX: 5, offsetY: 5 })
     .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))

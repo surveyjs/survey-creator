@@ -1939,7 +1939,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actio
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(4);
   expect(logicTypeName.value).toEqual("column_visibility");
 
   questionName.value = "q2";
@@ -1964,7 +1964,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(4);
 });
 test("LogicUI: edit matrix column visibleIf. Two matrices with the same expression", () => {
   const survey = new SurveyModel({
@@ -1988,7 +1988,7 @@ test("LogicUI: edit matrix column visibleIf. Two matrices with the same expressi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(4);
 
   logic.editItem(logic.items[1]);
   itemEditor = logic.itemEditor;
@@ -2127,7 +2127,7 @@ test("LogicUI: edit panel dynamic question visibleIf. Filter logic types and del
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(4);
   expect(logicTypeName.value).toEqual("question_visibility");
 
   questionName.value = "q2";
@@ -2189,7 +2189,7 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(4);
 });
 test("LogicUI: edit visibleIf property for panel dynamic question template when question is located in the panel", () => {
   const survey = new SurveyModel({

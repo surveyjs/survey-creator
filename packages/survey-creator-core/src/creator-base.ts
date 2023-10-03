@@ -1025,11 +1025,17 @@ export class CreatorBase extends Base
    */
   public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   /**
-   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+
+  /**
+   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * 
+   * Default value: -1 (unlimited)
+   */
   public maxNestedPanels: number = -1;
   /**
    * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.

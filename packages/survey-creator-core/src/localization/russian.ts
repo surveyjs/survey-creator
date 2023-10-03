@@ -168,9 +168,11 @@ export var ruStrings = {
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
       question_requireName: "Вопрос обязательный",
+      question_resetValue: "Сбросить значение вопроса",
       column_visibilityName: "Показать (скрыть) столбец",
       column_enableName: "Включить (отключить) столбец",
       column_requireName: "Сделать столбец обязательным",
+      column_resetValue: "Сброс значения столбца",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",
@@ -915,6 +917,7 @@ export var ruStrings = {
     descriptionLocation: "Описание местоположения",
     defaultValueExpression: "Выражение значения по умолчанию",
     requiredIf: "Обязателен если",
+    resetValueIf: "Сбросьте значение, если",
     validators: "Валидаторы",
     bindings: "Привязки",
     renderAs: "Рендеринг как",
@@ -1647,8 +1650,11 @@ editorLocalization.locales["ru"] = ruStrings;
 // pv.file-camera: "Local files or camera" => "Локальные файлы или камера"
 // ed.translateUsigAI: "Auto-translate All" => "Автоматический перевод всех"
 // ed.translationDialogTitle: "Untranslated strings" => "Непереведенные строки"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
+// lg.question_resetValue: "Reset question value" => "Сбросить значение вопроса"
+// lg.column_resetValue: "Reset column value" => "Сброс значения столбца"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
 // pe.markRequired: "Mark as required" => "Отметьте как обязательный"
 // pe.removeRequiredMark: "Remove the required mark" => "Снимите нужную отметку"
+// p.resetValueIf: "Reset value if" => "Сбросьте значение, если"

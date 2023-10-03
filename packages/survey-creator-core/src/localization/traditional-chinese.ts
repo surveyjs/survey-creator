@@ -168,9 +168,11 @@ var traditionalChineseTranslation = {
       question_visibilityName: "顯示（隱藏）問題",
       question_enableName: "啟用（禁用）問題",
       question_requireName: "提出必填題",
+      question_resetValue: "重置問題值",
       column_visibilityName: "顯示（隱藏）列",
       column_enableName: "啟用（禁用）列",
       column_requireName: "使列成為必填項",
+      column_resetValue: "重置列值",
       trigger_completeName: "完成調查",
       trigger_setvalueName: "設置答案",
       trigger_copyvalueName: "複製答案",
@@ -915,6 +917,7 @@ var traditionalChineseTranslation = {
     descriptionLocation: "描述位置",
     defaultValueExpression: "預設值表達式",
     requiredIf: "在以下情況下是必需的",
+    resetValueIf: "如果出現以下情況，則重置值",
     validators: "驗證者",
     bindings: "綁定",
     renderAs: "渲染為",
@@ -1863,8 +1866,11 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pv.file-camera: "Local files or camera" => "本地檔或相機"
 // ed.translateUsigAI: "Auto-translate All" => "自動翻譯全部"
 // ed.translationDialogTitle: "Untranslated strings" => "未翻譯的字串"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
+// lg.question_resetValue: "Reset question value" => "重置問題值"
+// lg.column_resetValue: "Reset column value" => "重置列值"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
 // pe.markRequired: "Mark as required" => "標記為必填"
 // pe.removeRequiredMark: "Remove the required mark" => "刪除所需的標記"
+// p.resetValueIf: "Reset value if" => "如果出現以下情況，則重置值"

@@ -168,9 +168,11 @@ export var danishStrings = {
       question_visibilityName: "Vis (skjul) spørgsmål",
       question_enableName: "Aktivér (deaktiver) spørgsmål",
       question_requireName: "Gør spørgsmål påkrævet",
+      question_resetValue: "Nulstil spørgsmålsværdi",
       column_visibilityName: "Vis (skjul) kolonne",
       column_enableName: "Aktivér (deaktiver) kolonne",
       column_requireName: "Gør kolonne påkrævet",
+      column_resetValue: "Nulstil kolonneværdi",
       trigger_completeName: "Komplet undersøgelse",
       trigger_setvalueName: "Indstil svar",
       trigger_copyvalueName: "Kopier svar",
@@ -915,6 +917,7 @@ export var danishStrings = {
     descriptionLocation: "Beskrivelse placering",
     defaultValueExpression: "Standardværdiudtryk",
     requiredIf: "Påkrævet, hvis",
+    resetValueIf: "Nulstil værdi, hvis",
     validators: "validators",
     bindings: "Bindings",
     renderAs: "Gengiv som",
@@ -1770,8 +1773,11 @@ editorLocalization.locales["da"] = danishStrings;
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
 // ed.translateUsigAI: "Auto-translate All" => "Oversæt automatisk alle"
 // ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenge"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Indtast mindst {0} punkter"
+// lg.question_resetValue: "Reset question value" => "Nulstil spørgsmålsværdi"
+// lg.column_resetValue: "Reset column value" => "Nulstil kolonneværdi"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
-// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Indtast mindst {0} punkter"
 // pe.markRequired: "Mark as required" => "Markér efter behov"
 // pe.removeRequiredMark: "Remove the required mark" => "Fjern det påkrævede mærke"
+// p.resetValueIf: "Reset value if" => "Nulstil værdi, hvis"

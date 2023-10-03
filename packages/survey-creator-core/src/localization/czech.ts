@@ -168,9 +168,11 @@ export var czStrings = {
       question_visibilityName: "Viditelnost otázky",
       question_enableName: "Zapnutí/vypnutí otázky",
       question_requireName: "Povinné vyplnění otázky",
+      question_resetValue: "Obnovit hodnotu otázky",
       column_visibilityName: "Zobrazit (skrýt) sloupec",
       column_enableName: "Zapnout (vypnout) sloupec",
       column_requireName: "Povinný sloupec",
+      column_resetValue: "Obnovit hodnotu sloupce",
       trigger_completeName: "Dokončení průzkumu",
       trigger_setvalueName: "Nastavení hodnoty otázky",
       trigger_copyvalueName: "Kopírovat hodnotu otázky",
@@ -915,6 +917,7 @@ export var czStrings = {
     descriptionLocation: "Umístění popisku",
     defaultValueExpression: "Výraz pro výchozí hodnotu",
     requiredIf: "Povinná, pokud",
+    resetValueIf: "Resetovat hodnotu, pokud",
     validators: "Validátory",
     bindings: "Vazby",
     renderAs: "Vykreslit jako",
@@ -1139,8 +1142,10 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.file: "Local files" => "Místní soubory"
 // pv.camera: "Camera" => "Fotoaparát"
 // pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"
-// ed.translateUsigAI: "Auto-translate All" => "Automatický překlad Vše"
 // ed.translationDialogTitle: "Untranslated strings" => "Nepřeložené řetězce"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadejte alespoň {0} položek"
+// lg.question_resetValue: "Reset question value" => "Obnovit hodnotu otázky"
+// lg.column_resetValue: "Reset column value" => "Obnovit hodnotu sloupce"
 // pe.markRequired: "Mark as required" => "Označit podle potřeby"
 // pe.removeRequiredMark: "Remove the required mark" => "Odstraňte požadovanou značku"
+// p.resetValueIf: "Reset value if" => "Resetovat hodnotu, pokud"

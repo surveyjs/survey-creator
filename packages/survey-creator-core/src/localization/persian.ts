@@ -168,9 +168,11 @@ var persianStrings = {
       question_visibilityName: " قابلیت رویت سوال",
       question_enableName: "فعال/غیرفعال کردن سوال ",
       question_requireName: "سوال اختیاری موردنیاز",
+      question_resetValue: "بازنشانی مقدار سؤال",
       column_visibilityName: "نمایش/پنهان کردن ستون",
       column_enableName: "فعال/غیرفعال کردن ستون",
       column_requireName: "ستون مورد نیاز است",
+      column_resetValue: "بازنشانی مقدار ستون",
       trigger_completeName: "تکمیل نظرسنجی",
       trigger_setvalueName: "تنظیم عنوان سوال",
       trigger_copyvalueName: "کپی مقدار سوال",
@@ -915,6 +917,7 @@ var persianStrings = {
     descriptionLocation: "شرح محل",
     defaultValueExpression: "عبارت مقدار پیشفرض",
     requiredIf: "اجبار اگر؟",
+    resetValueIf: "بازنشانی مقدار اگر",
     validators: "اعتبارسنج ها",
     bindings: "پیوندها",
     renderAs: "Render به عنوان",
@@ -1532,5 +1535,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.translateUsigAI: "Auto-translate All" => "ترجمه خودکار همه"
 // ed.translationDialogTitle: "Untranslated strings" => "رشتههای ترجمهنشده"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "لطفا حداقل {0} مورد را وارد کنید"
+// lg.question_resetValue: "Reset question value" => "بازنشانی مقدار سؤال"
+// lg.column_resetValue: "Reset column value" => "بازنشانی مقدار ستون"
 // pe.markRequired: "Mark as required" => "علامت گذاری به عنوان مورد نیاز"
 // pe.removeRequiredMark: "Remove the required mark" => "حذف علامت مورد نیاز"
+// p.resetValueIf: "Reset value if" => "بازنشانی مقدار اگر"
