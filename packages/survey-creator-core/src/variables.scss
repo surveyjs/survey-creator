@@ -114,21 +114,21 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin smallBold {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --small-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
   font-family: var(--font-family, $font-family);
   font-style: normal;
   font-weight: 600;
-  font-size: calc(0.75 * var(--default-font-size));
-  line-height: var(--default-font-size);
+  font-size: calc(0.75 * var(--small-bold-font-size));
+  line-height: var(--small-bold-font-size);
 }
 
 @mixin defaultBold {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --default-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
   font-family: var(--font-family, $font-family);
   font-style: normal;
   font-weight: 600;
-  font-size: var(--default-font-size);
-  line-height: calc(1.5 * var(--default-font-size));
+  font-size: var(--default-bold-font-size);
+  line-height: calc(1.5 * var(--default-bold-font-size));
 }
 
 @mixin defaultFont {
@@ -140,8 +140,8 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin borderLight {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
-  border: calc(0.25 * var(--default-font-size)) solid $border-light;
+  --border-light-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  border: calc(0.25 * var(--border-light-font-size)) solid $border-light;
   border-radius: calcCornerRadius(1);
 }
 
@@ -150,12 +150,12 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 $tab-min-height: var(--tab-min-height, auto);
 
 @mixin mediumBold {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --medium-bold-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
   font-family: $font-family;
   font-style: normal;
   font-weight: bold;
-  font-size: calc(3 * var(--default-font-size));
-  line-height: calc(4 * var(--default-font-size));
+  font-size: calc(3 * var(--medium-bold-font-size));
+  line-height: calc(4 * var(--medium-bold-font-size));
 }
 
 @mixin textEllipsis {
@@ -172,11 +172,11 @@ $tab-min-height: var(--tab-min-height, auto);
 }
 
 @mixin centerText {
-  --default-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
+  --center-text-font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
   font-family: $font-family;
   font-style: normal;
   font-weight: 400;
-  font-size: calc(2 * var(--default-font-size));
+  font-size: calc(2 * var(--center-text-font-size));
   color: $foreground;
   width: 100%;
   position: absolute;
