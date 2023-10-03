@@ -136,6 +136,8 @@ export let svStrings = {
     translationNoStrings: "Inga strängar är översatta. Vänligen ändra filtret.",
     translationExportToSCVButton: "Exportera till CSV",
     translationImportFromSCVButton: "Importera från CSV",
+    translateUsigAI: "Översätt alla automatiskt",
+    translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
     themeExportButton: "Export",
@@ -263,6 +265,7 @@ export let svStrings = {
     fastEntry: "Snabb ifyllning",
     fastEntryNonUniqueError: "Värdet \"{0}\" är inte unikt",
     fastEntryChoicesCountError: "Begränsa antalet artiklar från {0} till {1}",
+    fastEntryChoicesMinCountError: "Ange minst {0} artiklar",
     fastEntryPlaceholder: "Du kan ange data i följande format:\nvärde1|text\nvärde2",
     formEntry: "Ifyllning i enkäten",
     testService: "Testa tjänsten",
@@ -327,6 +330,8 @@ export let svStrings = {
     choicesOrder: "Välj ordning på valet",
     visible: "Synlig?",
     isRequired: "Nödvändig?",
+    markRequired: "Markera efter behov",
+    removeRequiredMark: "Ta bort det obligatoriska märket",
     isAllRowRequired: "Kräv svar för alla rader",
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
     startWithNewLine: "Starta på en ny rad?",
@@ -1755,3 +1760,10 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.file: "Local files" => "Lokala filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokala filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Översätt alla automatiskt"
+// ed.translationDialogTitle: "Untranslated strings" => "Oöversatta strängar"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Ange minst {0} artiklar"
+// pe.markRequired: "Mark as required" => "Markera efter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Ta bort det obligatoriska märket"

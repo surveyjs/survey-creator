@@ -136,6 +136,8 @@ export var danishStrings = {
     translationNoStrings: "Ingen tekststrenge at oversætte. Ret filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
+    translateUsigAI: "Oversæt automatisk alle",
+    translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
     themeExportButton: "Eksport",
@@ -263,6 +265,7 @@ export var danishStrings = {
     fastEntry: "Fast Entry",
     fastEntryNonUniqueError: "Værdien '{0}' er ikke unik",
     fastEntryChoicesCountError: "Begræns antallet af varer fra {0} til {1}",
+    fastEntryChoicesMinCountError: "Indtast mindst {0} punkter",
     fastEntryPlaceholder: "Du kan indstille data i følgende format:\nværdi1|tekst\nværdi2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -327,6 +330,8 @@ export var danishStrings = {
     choicesOrder: "Vælg rækkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er påkrævet?",
+    markRequired: "Markér efter behov",
+    removeRequiredMark: "Fjern det påkrævede mærke",
     isAllRowRequired: "Kræv svar for alle rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
@@ -1763,3 +1768,10 @@ editorLocalization.locales["da"] = danishStrings;
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Oversæt automatisk alle"
+// ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenge"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Indtast mindst {0} punkter"
+// pe.markRequired: "Mark as required" => "Markér efter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern det påkrævede mærke"

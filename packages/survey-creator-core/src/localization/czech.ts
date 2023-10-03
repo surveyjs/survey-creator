@@ -136,6 +136,8 @@ export var czStrings = {
     translationNoStrings: "Žádné řetězce k překladu. Změňte filtr.",
     translationExportToSCVButton: "Export do CSV",
     translationImportFromSCVButton: "Import z CSV",
+    translateUsigAI: "Automatický překlad Vše",
+    translationDialogTitle: "Nepřeložené řetězce",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
     themeExportButton: "Vývoz",
@@ -263,6 +265,7 @@ export var czStrings = {
     fastEntry: "Rychlý vstup",
     fastEntryNonUniqueError: "Hodnota \"{0}\" není unikátní",
     fastEntryChoicesCountError: "Prosím, omezte počet položek od {0} do {1}",
+    fastEntryChoicesMinCountError: "Zadejte alespoň {0} položek",
     fastEntryPlaceholder: "Data můžete nastavit v následujícím formátu:\nhodnota1|text\nhodnota2",
     formEntry: "Vstupní formulář",
     testService: "Testování služby",
@@ -327,6 +330,8 @@ export var czStrings = {
     choicesOrder: "Vyberte pořadí voleb",
     visible: "Viditelná?",
     isRequired: "Povinná?",
+    markRequired: "Označit podle potřeby",
+    removeRequiredMark: "Odstraňte požadovanou značku",
     isAllRowRequired: "Povinná odpověď pro všechny řádky",
     requiredErrorText: "Text chyby pro povinnou otázku",
     startWithNewLine: "Začátek s novým řádkem?",
@@ -1134,3 +1139,8 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.file: "Local files" => "Místní soubory"
 // pv.camera: "Camera" => "Fotoaparát"
 // pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"
+// ed.translateUsigAI: "Auto-translate All" => "Automatický překlad Vše"
+// ed.translationDialogTitle: "Untranslated strings" => "Nepřeložené řetězce"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadejte alespoň {0} položek"
+// pe.markRequired: "Mark as required" => "Označit podle potřeby"
+// pe.removeRequiredMark: "Remove the required mark" => "Odstraňte požadovanou značku"

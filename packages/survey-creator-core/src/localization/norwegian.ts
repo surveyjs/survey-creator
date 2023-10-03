@@ -136,6 +136,8 @@ export var nbStrings = {
     translationNoStrings: "Ingen strenger å oversette. Vennligst endre filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
+    translateUsigAI: "Oversett alle automatisk",
+    translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
     themeExportButton: "Eksport",
@@ -263,6 +265,7 @@ export var nbStrings = {
     fastEntry: "Rask innfylling",
     fastEntryNonUniqueError: "Verdien «{0}» er ikke unik",
     fastEntryChoicesCountError: "Begrens antall varer fra {0} til {1}",
+    fastEntryChoicesMinCountError: "Vennligst skriv inn minst {0} elementer",
     fastEntryPlaceholder: "Du kan angi data i følgende format:\nverdi1|tekst\nverdi2",
     formEntry: "Innfylling i skjema",
     testService: "Sjekk tjenesten",
@@ -327,6 +330,8 @@ export var nbStrings = {
     choicesOrder: "Velg rekkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er nødvendig?",
+    markRequired: "Merk etter behov",
+    removeRequiredMark: "Fjern ønsket merke",
     isAllRowRequired: "Nødvendig svar for alle rader",
     requiredErrorText: "Nødvendig feilmelding",
     startWithNewLine: "Må starte med ny linje?",
@@ -1581,3 +1586,10 @@ editorLocalization.locales["nb"] = nbStrings;
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Oversett alle automatisk"
+// ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenger"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Vennligst skriv inn minst {0} elementer"
+// pe.markRequired: "Mark as required" => "Merk etter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern ønsket merke"

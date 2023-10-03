@@ -136,6 +136,8 @@ var portugueseTranslation = {
     translationNoStrings: "Nenhum texto para traduzir. Por favor, altere o filtro.",
     translationExportToSCVButton: "Exportar para CSV",
     translationImportFromSCVButton: "Importar de CSV",
+    translateUsigAI: "Tradução automática de todos",
+    translationDialogTitle: "Cadeias de caracteres não traduzidas",
     translationMergeLocaleWithDefault: "Combinar {0} com o idioma pré-definido",
     translationPlaceHolder: "Tradução...",
     themeExportButton: "Exportação",
@@ -263,6 +265,7 @@ var portugueseTranslation = {
     fastEntry: "Entrada Rápida",
     fastEntryNonUniqueError: "Valor '{0}' não é o único",
     fastEntryChoicesCountError: "Limite o número de itens de {0} a {1}",
+    fastEntryChoicesMinCountError: "Por favor, insira pelo menos {0} itens",
     fastEntryPlaceholder: "Pode definir dados no seguinte formato:\nvalor1|texto\nvalor2",
     formEntry: "Entrada com formulário",
     testService: "Testar o serviço",
@@ -327,6 +330,8 @@ var portugueseTranslation = {
     choicesOrder: "Selecione a ordem das alternativas",
     visible: "É visível?",
     isRequired: "É obrigatório?",
+    markRequired: "Marcar conforme necessário",
+    removeRequiredMark: "Remover a marca necessária",
     isAllRowRequired: "Exigir resposta para todas as linhas",
     requiredErrorText: "\"Obrigatório\" mensagem de erro",
     startWithNewLine: "Começa com uma nova linha?",
@@ -1235,3 +1240,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pv.file: "Local files" => "Arquivos locais"
 // pv.camera: "Camera" => "Câmera"
 // pv.file-camera: "Local files or camera" => "Arquivos locais ou câmera"
+// ed.translateUsigAI: "Auto-translate All" => "Tradução automática de todos"
+// ed.translationDialogTitle: "Untranslated strings" => "Cadeias de caracteres não traduzidas"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Por favor, insira pelo menos {0} itens"
+// pe.markRequired: "Mark as required" => "Marcar conforme necessário"
+// pe.removeRequiredMark: "Remove the required mark" => "Remover a marca necessária"

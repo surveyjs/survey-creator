@@ -136,6 +136,8 @@ var polishStrings = {
     translationNoStrings: "Brak ciągów do przetłumaczenia. Proszę zmienić filtr.",
     translationExportToSCVButton: "Eksport do pliku CSV",
     translationImportFromSCVButton: "Importowanie z pliku CSV",
+    translateUsigAI: "Automatycznie tłumacz wszystko",
+    translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
     themeExportButton: "Eksport",
@@ -263,6 +265,7 @@ var polishStrings = {
     fastEntry: "Szybkie wprowadzanie",
     fastEntryNonUniqueError: "Wartość \"{0}\" nie jest unikalna",
     fastEntryChoicesCountError: "Ogranicz liczbę przedmiotów od {0} do {1}",
+    fastEntryChoicesMinCountError: "Podaj co najmniej {0} przedmiotów",
     fastEntryPlaceholder: "Dane można ustawić w następującym formacie:\nwartość1|tekst\nwartość2",
     formEntry: "Formularz",
     testService: "Testuj usługę",
@@ -327,6 +330,8 @@ var polishStrings = {
     choicesOrder: "Kolejność odpowiedzi",
     visible: "Czy widoczne?",
     isRequired: "Czy wymagalne?",
+    markRequired: "Oznacz jako wymagane",
+    removeRequiredMark: "Usuń wymagany znacznik",
     isAllRowRequired: "Wymagaj odpowiedzi dla wszystkich wierszy",
     requiredErrorText: "Komunikat o błędzie \"Wymagane\"",
     startWithNewLine: "Czy rozpoczyna się nową linią?",
@@ -1851,3 +1856,10 @@ editorLocalization.locales["pl"] = polishStrings;
 // pv.file: "Local files" => "Pliki lokalne"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Pliki lokalne lub aparat"
+// ed.translateUsigAI: "Auto-translate All" => "Automatycznie tłumacz wszystko"
+// ed.translationDialogTitle: "Untranslated strings" => "Nieprzetłumaczone ciągi znaków"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
+// pe.markRequired: "Mark as required" => "Oznacz jako wymagane"
+// pe.removeRequiredMark: "Remove the required mark" => "Usuń wymagany znacznik"

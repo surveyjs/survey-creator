@@ -136,6 +136,8 @@ export var jaStrings = {
     translationNoStrings: "翻訳する文字列がありません。フィルターを変更してください。",
     translationExportToSCVButton: "CSVにエクスポートする",
     translationImportFromSCVButton: "CSVからインポートする",
+    translateUsigAI: "すべて自動翻訳",
+    translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
     themeExportButton: "輸出",
@@ -263,6 +265,7 @@ export var jaStrings = {
     fastEntry: "高速入力",
     fastEntryNonUniqueError: "値 '{0}' は一意ではありません",
     fastEntryChoicesCountError: "アイテムの数は{0}から{1}に制限してください",
+    fastEntryChoicesMinCountError: "{0}項目以上入力してください",
     fastEntryPlaceholder: "次の形式でデータを設定できます。\n値 1|テキスト\n値 2",
     formEntry: "フォーム入力",
     testService: "サービスをテスト",
@@ -327,6 +330,8 @@ export var jaStrings = {
     choicesOrder: "選択順",
     visible: "表示",
     isRequired: "必須",
+    markRequired: "必須としてマーク",
+    removeRequiredMark: "必要なマークを削除する",
     isAllRowRequired: "全ての列で回答必須",
     requiredErrorText: "必要なエラーテキスト",
     startWithNewLine: "ニューラインで開始",
@@ -1577,3 +1582,10 @@ editorLocalization.locales["ja"] = jaStrings;
 // pv.file: "Local files" => "ローカルファイル"
 // pv.camera: "Camera" => "カメラ"
 // pv.file-camera: "Local files or camera" => "ローカルファイルまたはカメラ"
+// ed.translateUsigAI: "Auto-translate All" => "すべて自動翻訳"
+// ed.translationDialogTitle: "Untranslated strings" => "未翻訳の文字列"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
+// pe.markRequired: "Mark as required" => "必須としてマーク"
+// pe.removeRequiredMark: "Remove the required mark" => "必要なマークを削除する"

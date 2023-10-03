@@ -136,6 +136,8 @@ export var huStrings = {
     translationNoStrings: "Nincs fordítható szöveg. Kérem változtasson a szűrési feltételeken.",
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
+    translateUsigAI: "Összes automatikus fordítása",
+    translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
     themeExportButton: "Kivitel",
@@ -263,6 +265,7 @@ export var huStrings = {
     fastEntry: "Gyors felvétel",
     fastEntryNonUniqueError: "A \"{0}\" érték nem egyedi",
     fastEntryChoicesCountError: "Kérjük, korlátozza a tételek számát {0} és {1} között",
+    fastEntryChoicesMinCountError: "Kérjük, adjon meg legalább {0} elemet",
     fastEntryPlaceholder: "Az adatokat a következő formátumban állíthatja be:\nérték1|szöveg\nérték2",
     formEntry: "Felvétel űrlappal",
     testService: "Szolgáltatás tesztelése",
@@ -327,6 +330,8 @@ export var huStrings = {
     choicesOrder: "Válassza ki a lehetőséget rendezését",
     visible: "Látható?",
     isRequired: "Kötelező?",
+    markRequired: "Megjelölés kötelezőként",
+    removeRequiredMark: "Távolítsa el a szükséges jelet",
     isAllRowRequired: "Válasz kérése minden sorhoz",
     requiredErrorText: "\"Kötelező\" hibaüzenet",
     startWithNewLine: "Új sorban kezdődik?",
@@ -1731,3 +1736,10 @@ editorLocalization.locales["hu"] = huStrings;
 // pv.file: "Local files" => "Helyi fájlok"
 // pv.camera: "Camera" => "Fényképezőgép"
 // pv.file-camera: "Local files or camera" => "Helyi fájlok vagy kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Összes automatikus fordítása"
+// ed.translationDialogTitle: "Untranslated strings" => "Lefordítatlan karakterláncok"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
+// pe.markRequired: "Mark as required" => "Megjelölés kötelezőként"
+// pe.removeRequiredMark: "Remove the required mark" => "Távolítsa el a szükséges jelet"

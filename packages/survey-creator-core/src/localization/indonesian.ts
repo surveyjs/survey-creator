@@ -136,6 +136,8 @@ export var indonesianStrings = {
     translationNoStrings: "Tidak ada string diterjemahkan. Silahkan ganti penyaring.",
     translationExportToSCVButton: "Eksport ke CSV",
     translationImportFromSCVButton: "Import dari CSV",
+    translateUsigAI: "Terjemahkan otomatis Semua",
+    translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
     themeExportButton: "Ekspor",
@@ -263,6 +265,7 @@ export var indonesianStrings = {
     fastEntry: "Entri Cepat",
     fastEntryNonUniqueError: "Nilai '{0}' tidak unik",
     fastEntryChoicesCountError: "Harap batasi jumlah item dari {0} ke {1}",
+    fastEntryChoicesMinCountError: "Harap masukkan setidaknya {0} item",
     fastEntryPlaceholder: "Anda dapat mengatur data dalam format berikut:\nvalue1|text\nnilai2",
     formEntry: "Entri Form",
     testService: "Coba layanan",
@@ -327,6 +330,8 @@ export var indonesianStrings = {
     choicesOrder: "Tentukan urutan pilihan",
     visible: "Terlihat?",
     isRequired: "Wajib?",
+    markRequired: "Tandai sesuai kebutuhan",
+    removeRequiredMark: "Hapus tanda yang diperlukan",
     isAllRowRequired: "Memerlukan jawaban untuk semua baris",
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
     startWithNewLine: "Mulai dengan baris baru?",
@@ -1732,3 +1737,10 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pv.file: "Local files" => "File lokal"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "File atau kamera lokal"
+// ed.translateUsigAI: "Auto-translate All" => "Terjemahkan otomatis Semua"
+// ed.translationDialogTitle: "Untranslated strings" => "String yang tidak diterjemahkan"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
+// pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
+// pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"

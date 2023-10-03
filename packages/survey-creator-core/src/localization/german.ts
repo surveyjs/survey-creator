@@ -136,6 +136,8 @@ var germanTranslation = {
     translationNoStrings: "Keine Texte zum Übersetzen. Bitte den Filter anpassen.",
     translationExportToSCVButton: "Export (CSV)",
     translationImportFromSCVButton: "Import (CSV)",
+    translateUsigAI: "Alle automatisch übersetzen",
+    translationDialogTitle: "Nicht übersetzte Zeichenketten",
     translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache",
     translationPlaceHolder: "Übersetzung ...",
     themeExportButton: "Exportieren",
@@ -263,6 +265,7 @@ var germanTranslation = {
     fastEntry: "Schnelleintrag",
     fastEntryNonUniqueError: "Wert '{0}' ist nicht eindeutig",
     fastEntryChoicesCountError: "Bitte begrenze die Anzahl der Elemente von {0} bis {1}",
+    fastEntryChoicesMinCountError: "Bitte geben Sie mindestens {0} Artikel ein",
     fastEntryPlaceholder: "Daten im folgenden Format setzen:\nwert1|text\nwert2",
     formEntry: "Formulareintrag",
     testService: "Service testen",
@@ -327,6 +330,8 @@ var germanTranslation = {
     choicesOrder: "Auswahlreihenfolge",
     visible: "Sichtbar?",
     isRequired: "Erforderlich?",
+    markRequired: "Als erforderlich markieren",
+    removeRequiredMark: "Entfernen Sie die erforderliche Markierung",
     isAllRowRequired: "Ist eine Antwort für alle Zeilen erforderlich?",
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
     startWithNewLine: "Starte mit einer neuen Zeile",
@@ -639,7 +644,7 @@ var germanTranslation = {
     columnsVisibleIf: "Spalten sind sichtbar, wenn",
     rowsVisibleIf: "Zeilen sind sichtbar, wenn",
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
-    rateType: "Ansicht der Bewertungssymbole",
+    rateType: "Ansicht der Bewertungssymbole"
   },
   // Property values
   pv: {
@@ -1299,3 +1304,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // pv.file: "Local files" => "Lokale Dateien"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale Dateien oder Kamera"
+
+// ed.translateUsigAI: "Auto-translate All" => "Alle automatisch übersetzen"
+// ed.translationDialogTitle: "Untranslated strings" => "Nicht übersetzte Zeichenketten"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Bitte geben Sie mindestens {0} Artikel ein"
+// pe.markRequired: "Mark as required" => "Als erforderlich markieren"
+// pe.removeRequiredMark: "Remove the required mark" => "Entfernen Sie die erforderliche Markierung"

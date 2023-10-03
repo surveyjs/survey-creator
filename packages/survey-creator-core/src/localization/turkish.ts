@@ -136,6 +136,8 @@ export var turkishStrings = {
     translationNoStrings: "Çevrilecek yazı yok. Lütfen, filtreyi değiştirin.",
     translationExportToSCVButton: "CSV dışa çıkart",
     translationImportFromSCVButton: "CSV içe aktar",
+    translateUsigAI: "Tümünü Otomatik Çevir",
+    translationDialogTitle: "Çevrilmemiş dizeler",
     translationMergeLocaleWithDefault: "{0} varsayılan çeviri ile sıkıştır",
     translationPlaceHolder: "Çeviri...",
     themeExportButton: "Ihracat",
@@ -263,6 +265,7 @@ export var turkishStrings = {
     fastEntry: "Hızlı Giriş",
     fastEntryNonUniqueError: "'{0}' değeri benzersiz değil",
     fastEntryChoicesCountError: "Lütfen öğe sayısını {0}'den {1}'ye sınırlayın",
+    fastEntryChoicesMinCountError: "Lütfen en az {0} ürün girin",
     fastEntryPlaceholder: "Verileri aşağıdaki biçimde ayarlayabilirsiniz:\ndeğer1|metin\ndeğer2",
     formEntry: "Form Girişi",
     testService: "Servisi test et",
@@ -327,6 +330,8 @@ export var turkishStrings = {
     choicesOrder: "Seçenek sırasını seç",
     visible: "Görünür?",
     isRequired: "Zorunlu?",
+    markRequired: "Gerektiği gibi işaretleyin",
+    removeRequiredMark: "Gerekli işareti kaldırın",
     isAllRowRequired: "Tüm satırlar zorunlu",
     requiredErrorText: "Zorunlu hata yazısı",
     startWithNewLine: "Yeni satırla başla?",
@@ -1573,3 +1578,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pv.file: "Local files" => "Yerel dosyalar"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Yerel dosyalar veya kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Tümünü Otomatik Çevir"
+// ed.translationDialogTitle: "Untranslated strings" => "Çevrilmemiş dizeler"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Lütfen en az {0} ürün girin"
+// pe.markRequired: "Mark as required" => "Gerektiği gibi işaretleyin"
+// pe.removeRequiredMark: "Remove the required mark" => "Gerekli işareti kaldırın"

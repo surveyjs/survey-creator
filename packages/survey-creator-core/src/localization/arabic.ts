@@ -136,6 +136,8 @@ export var arStrings = {
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
+    translateUsigAI: "ترجمة تلقائية للكل",
+    translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
     themeExportButton: "تصدير",
@@ -263,6 +265,7 @@ export var arStrings = {
     fastEntry: "إدخالات سريعة",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
+    fastEntryChoicesMinCountError: "الرجاء إدخال {0} العناصر على الأقل",
     fastEntryPlaceholder: "يمكنك تعيين البيانات بالتنسيق التالي:\nالقيمة1|النص\nقيمة2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -327,6 +330,8 @@ export var arStrings = {
     choicesOrder: "إختر ترتيب الإختيارات",
     visible: "مرئي؟",
     isRequired: "مطلوب؟",
+    markRequired: "وضع علامة كمطلوب",
+    removeRequiredMark: "إزالة العلامة المطلوبة",
     isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
@@ -1487,3 +1492,10 @@ editorLocalization.locales["ar"] = arStrings;
 // pv.file: "Local files" => "الملفات المحلية"
 // pv.camera: "Camera" => "كاميرا"
 // pv.file-camera: "Local files or camera" => "الملفات المحلية أو الكاميرا"
+// ed.translateUsigAI: "Auto-translate All" => "ترجمة تلقائية للكل"
+// ed.translationDialogTitle: "Untranslated strings" => "النصوص غير المترجمة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "الرجاء إدخال {0} العناصر على الأقل"
+// pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
+// pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"

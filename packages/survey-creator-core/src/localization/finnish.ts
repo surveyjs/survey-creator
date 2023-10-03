@@ -136,6 +136,8 @@ export var fiStrings = {
     translationNoStrings: "Ei merkkijonoja käännettäväksi. Vaihda suodatin.",
     translationExportToSCVButton: "Vie (CSV)",
     translationImportFromSCVButton: "Tuo (CSV)",
+    translateUsigAI: "Käännä kaikki automaattisesti",
+    translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
     themeExportButton: "Vienti",
@@ -263,6 +265,7 @@ export var fiStrings = {
     fastEntry: "Nopea pääsy",
     fastEntryNonUniqueError: "Arvo \"{0}\" ei ole ainutkertainen",
     fastEntryChoicesCountError: "Rajoita tuotteiden määrä {0} {1}",
+    fastEntryChoicesMinCountError: "Anna vähintään {0} kohdetta",
     fastEntryPlaceholder: "Voit asettaa tiedot seuraavassa muodossa:\narvo1|teksti\narvo2",
     formEntry: "Lomakkeen pääsy",
     testService: "Testaa palvelu",
@@ -327,6 +330,8 @@ export var fiStrings = {
     choicesOrder: "Valitse valintojen järjestys",
     visible: "On näkyvä?",
     isRequired: "On vaadittu?",
+    markRequired: "Merkitse pakollisesti",
+    removeRequiredMark: "Poista vaadittu merkki",
     isAllRowRequired: "Vaadi vastaus kaikille riveille",
     requiredErrorText: "Vaadittu virheteksti",
     startWithNewLine: "Onko aloitus uudella rivillä?",
@@ -1577,3 +1582,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // pv.file: "Local files" => "Paikalliset tiedostot"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Paikalliset tiedostot tai kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Käännä kaikki automaattisesti"
+// ed.translationDialogTitle: "Untranslated strings" => "Kääntämättömät merkkijonot"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
+// pe.markRequired: "Mark as required" => "Merkitse pakollisesti"
+// pe.removeRequiredMark: "Remove the required mark" => "Poista vaadittu merkki"

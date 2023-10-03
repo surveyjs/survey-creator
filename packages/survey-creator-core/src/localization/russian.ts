@@ -136,6 +136,8 @@ export var ruStrings = {
     translationNoStrings: "Нет строк для перевода. Пожалуйста, измените фильтр.",
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
+    translateUsigAI: "Автоматический перевод всех",
+    translationDialogTitle: "Непереведенные строки",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
     translationPlaceHolder: "Перевод...",
     themeExportButton: "Экспорт",
@@ -263,6 +265,7 @@ export var ruStrings = {
     fastEntry: "Быстрый вход",
     fastEntryNonUniqueError: "Значение «{0}» не уникально",
     fastEntryChoicesCountError: "Пожалуйста, ограничьте количество предметов от {0} до {1}",
+    fastEntryChoicesMinCountError: "Пожалуйста, введите не менее {0} пунктов",
     fastEntryPlaceholder: "Вы можете задать данные в следующем формате:\nзначение1|текст\nзначение2",
     formEntry: "Форма входа",
     testService: "Тест услуги",
@@ -327,6 +330,8 @@ export var ruStrings = {
     choicesOrder: "Выбрать порядок отбора",
     visible: "Отображать?",
     isRequired: "Обязательный?",
+    markRequired: "Отметьте как обязательный",
+    removeRequiredMark: "Снимите нужную отметку",
     isAllRowRequired: "Все строки обязательны для заполнения",
     requiredErrorText: "Это поле обязательное для заполнения",
     startWithNewLine: "Начинать с новой строки?",
@@ -1640,3 +1645,10 @@ editorLocalization.locales["ru"] = ruStrings;
 // pv.file: "Local files" => "Локальные файлы"
 // pv.camera: "Camera" => "Фотоаппарат"
 // pv.file-camera: "Local files or camera" => "Локальные файлы или камера"
+// ed.translateUsigAI: "Auto-translate All" => "Автоматический перевод всех"
+// ed.translationDialogTitle: "Untranslated strings" => "Непереведенные строки"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
+// pe.markRequired: "Mark as required" => "Отметьте как обязательный"
+// pe.removeRequiredMark: "Remove the required mark" => "Снимите нужную отметку"

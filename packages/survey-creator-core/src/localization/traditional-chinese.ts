@@ -136,6 +136,8 @@ var traditionalChineseTranslation = {
     translationNoStrings: "沒有要翻譯的字串。請更換過濾器。",
     translationExportToSCVButton: "匯出為CSV",
     translationImportFromSCVButton: "從 CSV 導入",
+    translateUsigAI: "自動翻譯全部",
+    translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
     themeExportButton: "出口",
@@ -263,6 +265,7 @@ var traditionalChineseTranslation = {
     fastEntry: "快速輸入",
     fastEntryNonUniqueError: "值“{0}”不是唯一的",
     fastEntryChoicesCountError: "請將項目數量限制在{0}到{1}",
+    fastEntryChoicesMinCountError: "請輸入至少{0}專案",
     fastEntryPlaceholder: "您可以按以下格式設定資料：\n值 1|文本\n值2",
     formEntry: "表單輸入",
     testService: "測試服務",
@@ -327,6 +330,8 @@ var traditionalChineseTranslation = {
     choicesOrder: "設置選項順序",
     visible: "是否可見?",
     isRequired: "是否為必填項?",
+    markRequired: "標記為必填",
+    removeRequiredMark: "刪除所需的標記",
     isAllRowRequired: "要求所有行都回答",
     requiredErrorText: "“必需”錯誤消息",
     startWithNewLine: "問題是否新起一行?",
@@ -1856,3 +1861,10 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pv.file: "Local files" => "本地檔"
 // pv.camera: "Camera" => "照相機"
 // pv.file-camera: "Local files or camera" => "本地檔或相機"
+// ed.translateUsigAI: "Auto-translate All" => "自動翻譯全部"
+// ed.translationDialogTitle: "Untranslated strings" => "未翻譯的字串"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
+// pe.markRequired: "Mark as required" => "標記為必填"
+// pe.removeRequiredMark: "Remove the required mark" => "刪除所需的標記"

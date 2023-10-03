@@ -136,6 +136,8 @@ export var bgStrings = {
     translationNoStrings: "Няма низове за превод. Моля, промени филтъра.",
     translationExportToSCVButton: "Експортиране в CSV",
     translationImportFromSCVButton: "Импортиране от CSV",
+    translateUsigAI: "Автоматичен превод на всички",
+    translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
     themeExportButton: "Износ",
@@ -263,6 +265,7 @@ export var bgStrings = {
     fastEntry: "Ръчно въвеждане",
     fastEntryNonUniqueError: "Стойността '{0}' не е уникална.",
     fastEntryChoicesCountError: "Моля, ограничи броя на елементите от {0} до {1}",
+    fastEntryChoicesMinCountError: "Моля, въведете поне {0} артикула",
     fastEntryPlaceholder: "Може да зададеш данни в следния формат:стойност1|текстстойност2",
     formEntry: "Въвеждане на формуляр",
     testService: "Тествай услугата.",
@@ -327,6 +330,8 @@ export var bgStrings = {
     choicesOrder: "Ред на сортиране на избора",
     visible: "Видим",
     isRequired: "Задължителен",
+    markRequired: "Маркирай както се изисква",
+    removeRequiredMark: "Премахване на необходимия знак",
     isAllRowRequired: "Изискване за отговор на всички редове",
     requiredErrorText: "\"Задължително\" съобщение за грешка",
     startWithNewLine: "Показване на въпроса на нов ред",
@@ -1130,3 +1135,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // pv.file: "Local files" => "Локални файлове"
 // pv.camera: "Camera" => "Фотоапарат"
 // pv.file-camera: "Local files or camera" => "Локални файлове или камера"
+// ed.translateUsigAI: "Auto-translate All" => "Автоматичен превод на всички"
+// ed.translationDialogTitle: "Untranslated strings" => "Непреведени низове"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Моля, въведете поне {0} артикула"
+// pe.markRequired: "Mark as required" => "Маркирай както се изисква"
+// pe.removeRequiredMark: "Remove the required mark" => "Премахване на необходимия знак"

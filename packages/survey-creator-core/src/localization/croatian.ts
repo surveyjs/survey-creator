@@ -136,6 +136,8 @@ export var hrStrings = {
     translationNoStrings: "Nema žica za prevođenje. Promijenite filtar.",
     translationExportToSCVButton: "Izvoz u CSV",
     translationImportFromSCVButton: "Uvoz iz CSV",
+    translateUsigAI: "Automatski prevedi sve",
+    translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
@@ -263,6 +265,7 @@ export var hrStrings = {
     fastEntry: "Brzi unos",
     fastEntryNonUniqueError: "Vrijednost '{0}' nije jedinstvena",
     fastEntryChoicesCountError: "Ograničite broj stavki s {0} na {1}",
+    fastEntryChoicesMinCountError: "Unesite najmanje {0} stavki",
     fastEntryPlaceholder: "Podatke možete postaviti u sljedećem obliku:\nvrijednost1|tekst\nvrijednost2",
     formEntry: "Unos obrasca",
     testService: "Testirajte uslugu",
@@ -327,6 +330,8 @@ export var hrStrings = {
     choicesOrder: "Odaberite redoslijed izbora",
     visible: "Je li vidljivo?",
     isRequired: "Je potrebno?",
+    markRequired: "Označi kao obavezno",
+    removeRequiredMark: "Uklanjanje potrebne oznake",
     isAllRowRequired: "Zahtijevati odgovor za sve redove",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
@@ -1571,3 +1576,10 @@ editorLocalization.locales["hr"] = hrStrings;
 // pv.file: "Local files" => "Lokalne datoteke"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokalne datoteke ili kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Automatski prevedi sve"
+// ed.translationDialogTitle: "Untranslated strings" => "Neprevedeni nizovi"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Unesite najmanje {0} stavki"
+// pe.markRequired: "Mark as required" => "Označi kao obavezno"
+// pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"

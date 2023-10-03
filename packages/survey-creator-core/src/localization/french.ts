@@ -136,6 +136,8 @@ var frenchTranslation = {
     translationNoStrings: "Aucun terme à traduire. Veuillez modifier le filtre.",
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
+    translateUsigAI: "Traduire automatiquement tout",
+    translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
     themeExportButton: "Exportation",
@@ -263,6 +265,7 @@ var frenchTranslation = {
     fastEntry: "Ajout rapide",
     fastEntryNonUniqueError: "La valeur '{0}' n’est pas unique",
     fastEntryChoicesCountError: "Veuillez limiter le nombre d'éléments de {0} à {1}",
+    fastEntryChoicesMinCountError: "Veuillez saisir au moins {0} éléments",
     fastEntryPlaceholder: "Vous pouvez définir les données au format suivant :\nvaleur1|texte\nvaleur2",
     formEntry: "Ajout via formulaire",
     testService: "Tester le service",
@@ -327,6 +330,8 @@ var frenchTranslation = {
     choicesOrder: "Sélectionner l'ordre des choix",
     visible: "Est visible ?",
     isRequired: "Est obligatoire ?",
+    markRequired: "Marquer au besoin",
+    removeRequiredMark: "Supprimer la marque requise",
     isAllRowRequired: "Réponse obligatoire pour toutes les lignes",
     requiredErrorText: "Message d'erreur lorsque obligatoire",
     startWithNewLine: "Afficher la question sur une nouvelle ligne",
@@ -1639,3 +1644,10 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pv.file: "Local files" => "Fichiers locaux"
 // pv.camera: "Camera" => "Caméra"
 // pv.file-camera: "Local files or camera" => "Fichiers locaux ou caméra"
+// ed.translateUsigAI: "Auto-translate All" => "Traduire automatiquement tout"
+// ed.translationDialogTitle: "Untranslated strings" => "Chaînes non traduites"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Veuillez saisir au moins {0} éléments"
+// pe.markRequired: "Mark as required" => "Marquer au besoin"
+// pe.removeRequiredMark: "Remove the required mark" => "Supprimer la marque requise"
