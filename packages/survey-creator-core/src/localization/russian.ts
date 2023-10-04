@@ -1068,7 +1068,7 @@ export var ruStrings = {
       contrast: "Контрастная"
     },
     colors: {
-      teal: "Чирок",
+      teal: "Бирюзовый",
       blue: "Синий",
       purple: "Пурпурный",
       orchid: "Орхидея",
