@@ -781,9 +781,9 @@ export var ruStrings = {
     },
     imageFit: {
       none: "Никакой",
-      contain: "Содержать",
-      cover: "Крышка",
-      fill: "Заполнять"
+      contain: "По размеру",
+      cover: "Заполнение",
+      fill: "Растянуть"
     },
     contentMode: {
       auto: "Авто",
@@ -1007,11 +1007,13 @@ export var ruStrings = {
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
     backgroundImageFitAuto: "Авто",
-    backgroundImageFitCover: "Крышка",
-    backgroundImageFitContain: "Содержать",
+    backgroundImageFitCover: "Заполнение",
+    backgroundImageFitContain: "По размеру",
+    backgroundImageFitFill: "Растянуть",
+    backgroundImageFitTile: "Замостить",
     backgroundOpacity: "Непрозрачность",
-    backgroundImageAttachmentFixed: "Неподвижный",
-    backgroundImageAttachmentScroll: "Свиток",
+    backgroundImageAttachmentFixed: "Зафиксировать",
+    backgroundImageAttachmentScroll: "Прокручивать",
     panelBackgroundTransparency: "Непрозрачность фона панели",
     questionBackgroundTransparency: "Непрозрачность фона вопроса",
     questionPanel: "Фон панели и радиус угла",
@@ -1055,15 +1057,15 @@ export var ruStrings = {
     editorShadow: "Эффекты тени входного элемента",
     names: {
       default: "По умолчанию",
-      sharp: "Острый",
+      sharp: "Чёткая",
       borderless: "Без границ",
-      flat: "Плоский",
-      plain: "Равнина",
-      doubleborder: "Двойная граница",
-      layered: "Слоистый",
-      solid: "Сплошной",
-      threedimensional: ".3D",
-      contrast: "Контраст"
+      flat: "Плоская",
+      plain: "Простая",
+      doubleborder: "Удвоенные границы",
+      layered: "Многослойная",
+      solid: "Монолитная",
+      threedimensional: "Трёхмерная",
+      contrast: "Контрастная"
     },
     colors: {
       teal: "Чирок",

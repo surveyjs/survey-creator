@@ -1018,7 +1018,7 @@ export var enStrings = {
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Cover",
     backgroundImageFitContain: "Contain",
-    backgroundImageFitFill: "Fill",
+    backgroundImageFitFill: "Stretch",
     backgroundImageFitTile: "Tile",
     backgroundOpacity: "Opacity", // Auto-generated string
     backgroundImageAttachmentFixed: "Fixed",
