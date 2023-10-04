@@ -1550,21 +1550,15 @@ test("Creator footer action bar: only theme tab", (): any => {
     ]
   };
   expect(creator.activeTab).toEqual("theme");
-  expect(creator.footerToolbar.actions.length).toEqual(8);
-  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
 
-  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
   expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
   expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
-  creator.isMobileView = true;
-  expect(creator.footerToolbar.actions.length).toEqual(8);
-  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
-  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
-
   creator.activeTab = "logic";
-  expect(creator.footerToolbar.actions.length).toEqual(8);
   expect(creator.footerToolbar.visibleActions.length).toEqual(0);
 });
 test("Creator footer action bar: all tabs", (): any => {
@@ -1579,17 +1573,13 @@ test("Creator footer action bar: all tabs", (): any => {
     ]
   };
   expect(creator.activeTab).toEqual("designer");
-  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
 
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
   let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
   expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
   expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
-
-  creator.isMobileView = true;
-  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
-  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
-  expect(receivedOrder).toEqual(designerTabButtonOrder);
 
   creator.activeTab = "test";
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);

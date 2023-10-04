@@ -147,7 +147,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       visible: this.createVisibleUpdater(),
       active: true,
       locTitleName: "ed.designer",
-      showTitle: false
+      showTitle: false,
+      action: () => { }
     });
 
     this.previewAction = new Action({

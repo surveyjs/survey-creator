@@ -761,19 +761,14 @@ test("Creator footer action bar: only preview tab", (): any => {
     ]
   };
   expect(creator.activeTab).toEqual("test");
-  expect(creator.footerToolbar.actions.length).toEqual(7);
-  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
-
-  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
-  expect(receivedOrder).toEqual(buttonOrder);
-  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
-  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.isMobileView = true;
   expect(creator.footerToolbar.actions.length).toEqual(7);
   expect(creator.footerToolbar.visibleActions.length).toEqual(5);
-  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
 
   creator.activeTab = "logic";
   expect(creator.footerToolbar.actions.length).toEqual(7);

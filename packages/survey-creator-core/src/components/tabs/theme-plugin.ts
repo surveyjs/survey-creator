@@ -171,6 +171,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
       visible: false
     });
 
@@ -186,7 +189,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.testSurvey",
-      showTitle: false
+      showTitle: false,
+      action: () => { }
     });
 
     this.testAgainAction = new Action({

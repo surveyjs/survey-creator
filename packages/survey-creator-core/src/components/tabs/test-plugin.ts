@@ -284,12 +284,16 @@ export class TabTestPlugin implements ICreatorPlugin {
       active: true,
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.testSurvey",
-      showTitle: false
+      showTitle: false,
+      action: () => { }
     });
 
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
       visible: false
     });
 

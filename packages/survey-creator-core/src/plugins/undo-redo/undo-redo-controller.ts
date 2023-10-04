@@ -163,6 +163,9 @@ export class UndoRedoController extends Base {
       locTitleName: "ed.undo",
       showTitle: false,
       visible: <any>new ComputedUpdater(() => this.creator.activeTab === "designer"),
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
       action: () => this.undo()
     });
     this.redoAction = new Action({

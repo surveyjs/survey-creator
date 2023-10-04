@@ -130,7 +130,8 @@ export class ThemeBuilder extends Base {
     return this.pages.actions;
   }
   public get isPageToolbarVisible(): boolean {
-    return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
+    // return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
+    return false;
   }
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
@@ -343,7 +344,8 @@ export class ThemeBuilder extends Base {
     if (this.prevPageAction) {
       this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
         const isRunning = this.survey.state === "running";
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "theme", this.pageListItems.length > 1) && isRunning;
+        const isActiveTab = this.surveyProvider.activeTab === "theme";
+        return this.surveyProvider.isMobileView && notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
       });
       this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
@@ -358,7 +360,8 @@ export class ThemeBuilder extends Base {
     if (this.nextPageAction) {
       this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
         const isRunning = this.survey.state === "running";
-        return notShortCircuitAnd(this.isRunning, this.surveyProvider.activeTab === "theme", this.pageListItems.length > 1) && isRunning;
+        const isActiveTab = this.surveyProvider.activeTab === "theme";
+        return this.surveyProvider.isMobileView && notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
       });
       this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
         return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
