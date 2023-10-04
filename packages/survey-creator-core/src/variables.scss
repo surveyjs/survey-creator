@@ -123,7 +123,7 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin defaultBold {
-  --default-bold-font-size: #($font-size);
+  --default-bold-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
   font-family: $font-family;
   font-style: normal;
   font-weight: 600;
@@ -132,7 +132,7 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 }
 
 @mixin defaultFont {
-  --default-font-size: #($font-size);
+  --default-font-size: var(--sjs-font-size, calc(2 * #{$base-unit}));
   font-family: $font-family;
   font-style: normal;
   font-size: $font-size;
