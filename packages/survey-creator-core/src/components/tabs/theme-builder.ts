@@ -67,6 +67,7 @@ export class ThemeBuilder extends Base {
           survey.currentPage = val;
         }
       }
+      target.updatePrevNextPageActionState();
     }
   })
   activePage: PageModel;
@@ -243,6 +244,7 @@ export class ThemeBuilder extends Base {
     });
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
+      this.updatePrevNextPageActionState();
     });
   }
 
