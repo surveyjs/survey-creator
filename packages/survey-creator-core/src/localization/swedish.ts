@@ -136,6 +136,8 @@ export let svStrings = {
     translationNoStrings: "Inga strängar är översatta. Vänligen ändra filtret.",
     translationExportToSCVButton: "Exportera till CSV",
     translationImportFromSCVButton: "Importera från CSV",
+    translateUsigAI: "Översätt alla automatiskt",
+    translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
     themeExportButton: "Export",
@@ -265,6 +267,7 @@ export let svStrings = {
     fastEntry: "Snabb ifyllning",
     fastEntryNonUniqueError: "Värdet \"{0}\" är inte unikt",
     fastEntryChoicesCountError: "Begränsa antalet artiklar från {0} till {1}",
+    fastEntryChoicesMinCountError: "Ange minst {0} artiklar",
     fastEntryPlaceholder: "Du kan ange data i följande format:\nvärde1|text\nvärde2",
     formEntry: "Ifyllning i enkäten",
     testService: "Testa tjänsten",
@@ -1760,6 +1763,9 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.file: "Local files" => "Lokala filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokala filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Översätt alla automatiskt"
+// ed.translationDialogTitle: "Untranslated strings" => "Oöversatta strängar"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Ange minst {0} artiklar"
 // lg.question_resetValue: "Reset question value" => "Återställ frågevärde"
 // lg.column_resetValue: "Reset column value" => "Återställ kolumnvärde"
 // lg.expressionSetup: "" => ""

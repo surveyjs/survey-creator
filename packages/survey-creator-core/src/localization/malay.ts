@@ -136,6 +136,8 @@ export var msStrings = {
     translationNoStrings: "Tiada rentetan untuk diterjemah. Sila ubah penapis.",
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
+    translateUsigAI: "Terjemahkan Secara automatik Semua",
+    translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
     themeExportButton: "Eksport",
@@ -265,6 +267,7 @@ export var msStrings = {
     fastEntry: "Entri Pantas",
     fastEntryNonUniqueError: "Nilai '{0}' tidak unik",
     fastEntryChoicesCountError: "Sila hadkan bilangan item dari {0} hingga {1}",
+    fastEntryChoicesMinCountError: "Sila masukkan sekurang-kurangnya {0} item",
     fastEntryPlaceholder: "Anda boleh mengesetkan data dalam format berikut:\nvalue1|text\nnilai2",
     formEntry: "Entri Borang",
     testService: "Uji perkhidmatan",
@@ -1536,6 +1539,9 @@ editorLocalization.locales["ms"] = msStrings;
 // pv.file: "Local files" => "Fail tempatan"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Fail atau kamera tempatan"
+// ed.translateUsigAI: "Auto-translate All" => "Terjemahkan Secara automatik Semua"
+// ed.translationDialogTitle: "Untranslated strings" => "Rentetan tidak diterjemahkan"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
 // lg.question_resetValue: "Reset question value" => "Mengeset semula nilai soalan"
 // lg.column_resetValue: "Reset column value" => "Mengeset semula nilai lajur"
 // lg.expressionSetup: "" => ""

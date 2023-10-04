@@ -136,6 +136,8 @@ var persianStrings = {
     translationNoStrings: "هیچ عبارتی برای ترجمه نیست، لطفا فیلتر را عوض کنید.",
     translationExportToSCVButton: "برون بری به CSV",
     translationImportFromSCVButton: "برون ریزی از CSV",
+    translateUsigAI: "ترجمه خودکار همه",
+    translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
     themeExportButton: "صادرات",
@@ -265,6 +267,7 @@ var persianStrings = {
     fastEntry: "تکمیل سریع",
     fastEntryNonUniqueError: "مقدار {0}» منحصر به فرد نیست",
     fastEntryChoicesCountError: "لطفا تعداد موارد را از {0} به {1} محدود کنید",
+    fastEntryChoicesMinCountError: "لطفا حداقل {0} مورد را وارد کنید",
     fastEntryPlaceholder: "شما می توانید داده ها را در قالب زیر تنظیم کنید:\nvalue1|متن\nارزش 2",
     formEntry: "تکمیل فرم",
     testService: "بررسی سرویس",
@@ -1529,6 +1532,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // pv.file: "Local files" => "پروندههای محلی"
 // pv.camera: "Camera" => "دوربین"
 // pv.file-camera: "Local files or camera" => "فایل های محلی یا دوربین"
+// ed.translateUsigAI: "Auto-translate All" => "ترجمه خودکار همه"
+// ed.translationDialogTitle: "Untranslated strings" => "رشتههای ترجمهنشده"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "لطفا حداقل {0} مورد را وارد کنید"
 // lg.question_resetValue: "Reset question value" => "بازنشانی مقدار سؤال"
 // lg.column_resetValue: "Reset column value" => "بازنشانی مقدار ستون"
 // pe.markRequired: "Mark as required" => "علامت گذاری به عنوان مورد نیاز"

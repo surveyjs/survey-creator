@@ -2,7 +2,7 @@ import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel,
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
-import { Translation } from "./translation";
+import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
 
 export class TabTranslationPlugin implements ICreatorPlugin {
   private filterStringsAction: Action;
@@ -10,7 +10,6 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   private mergeLocaleWithDefaultAction: Action;
   private importCsvAction: Action;
   private exportCsvAction: Action;
-  private inputFileElement: HTMLInputElement;
   private sidebarTab: SidebarTabModel;
 
   public model: Translation;
@@ -150,42 +149,12 @@ export class TabTranslationPlugin implements ICreatorPlugin {
     });
     items.push(this.mergeLocaleWithDefaultAction);
 
-    this.importCsvAction = new Action({
-      id: "svc-translation-import",
-      iconName: "icon-load",
-      locTitleName: "ed.translationImportFromSCVButton",
-      locTooltipName: "ed.translationImportFromSCVButton",
-      visible: false,
-      mode: "small",
-      component: "sv-action-bar-item",
-      needSeparator: true,
-      action: () => {
-        if (!document) return;
-        if (!this.inputFileElement) {
-          this.inputFileElement = document.createElement("input");
-          this.inputFileElement.type = "file";
-          this.inputFileElement.style.display = "none";
-          this.inputFileElement.onchange = () => {
-            this.model.importFromCSVFileUI(this.inputFileElement);
-          };
-        }
-        this.inputFileElement.click();
-      }
-    });
+    this.importCsvAction = createImportCSVAction(() => { this.model.importFromCSVFileDOM(); }, true);
+    this.importCsvAction.visible = false;
     items.push(this.importCsvAction);
 
-    this.exportCsvAction = new Action({
-      id: "svc-translation-export",
-      iconName: "icon-download",
-      locTitleName: "ed.translationExportToSCVButton",
-      locTooltipName: "ed.translationExportToSCVButton",
-      visible: false,
-      mode: "small",
-      component: "sv-action-bar-item",
-      action: () => {
-        this.model.exportToCSVFileUI();
-      }
-    });
+    this.exportCsvAction = createExportCSVAction(() => { this.model.exportToCSVFileUI(); });
+    this.exportCsvAction.visible = false;
     items.push(this.exportCsvAction);
 
     return items;

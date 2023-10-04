@@ -36,6 +36,9 @@ if (!window["%hammerhead%"]) {
   // });
 
   let creator = new SurveyCreator.SurveyCreator(options);
+  creator.onMachineTranslate.add((sender, options) => {
+    options.callback(false, []);
+  });
 
   creator.saveSurveyFunc = (no, callback) => {
     setTimeout(function () {

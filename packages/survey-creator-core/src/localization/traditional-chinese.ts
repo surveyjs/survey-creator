@@ -136,6 +136,8 @@ var traditionalChineseTranslation = {
     translationNoStrings: "沒有要翻譯的字串。請更換過濾器。",
     translationExportToSCVButton: "匯出為CSV",
     translationImportFromSCVButton: "從 CSV 導入",
+    translateUsigAI: "自動翻譯全部",
+    translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
     themeExportButton: "出口",
@@ -265,6 +267,7 @@ var traditionalChineseTranslation = {
     fastEntry: "快速輸入",
     fastEntryNonUniqueError: "值“{0}”不是唯一的",
     fastEntryChoicesCountError: "請將項目數量限制在{0}到{1}",
+    fastEntryChoicesMinCountError: "請輸入至少{0}專案",
     fastEntryPlaceholder: "您可以按以下格式設定資料：\n值 1|文本\n值2",
     formEntry: "表單輸入",
     testService: "測試服務",
@@ -1861,6 +1864,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pv.file: "Local files" => "本地檔"
 // pv.camera: "Camera" => "照相機"
 // pv.file-camera: "Local files or camera" => "本地檔或相機"
+// ed.translateUsigAI: "Auto-translate All" => "自動翻譯全部"
+// ed.translationDialogTitle: "Untranslated strings" => "未翻譯的字串"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
 // lg.question_resetValue: "Reset question value" => "重置問題值"
 // lg.column_resetValue: "Reset column value" => "重置列值"
 // lg.expressionSetup: "" => ""

@@ -884,6 +884,28 @@ export class CreatorBase extends Base
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
   /**
+   * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
+   * 
+   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass an empty array or call this function without arguments.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.fromLocale`: `string`\
+   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.toLocale`: `string`\
+   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.strings`: `Array<string>`\
+   * Strings to translate.
+   * - `options.callback: (strings: Array<string>)`: `Function`\
+   * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
+   * 
+   * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
+   */
+  public onMachineTranslate: CreatorEvent = new CreatorEvent();
+
+  /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
    * 
    * Parameters:
@@ -3147,6 +3169,17 @@ export class CreatorBase extends Base
     this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
+  getHasMachineTranslation(): boolean {
+    return !this.onMachineTranslate.isEmpty;
+  }
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {
+    if (!this.getHasMachineTranslation()) {
+      callback(undefined);
+    } else {
+      this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
+    }
+  }
+
   /**
    * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
    * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.

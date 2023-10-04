@@ -136,6 +136,8 @@ export var nbStrings = {
     translationNoStrings: "Ingen strenger å oversette. Vennligst endre filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
+    translateUsigAI: "Oversett alle automatisk",
+    translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
     themeExportButton: "Eksport",
@@ -265,6 +267,7 @@ export var nbStrings = {
     fastEntry: "Rask innfylling",
     fastEntryNonUniqueError: "Verdien «{0}» er ikke unik",
     fastEntryChoicesCountError: "Begrens antall varer fra {0} til {1}",
+    fastEntryChoicesMinCountError: "Vennligst skriv inn minst {0} elementer",
     fastEntryPlaceholder: "Du kan angi data i følgende format:\nverdi1|tekst\nverdi2",
     formEntry: "Innfylling i skjema",
     testService: "Sjekk tjenesten",
@@ -1586,6 +1589,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Oversett alle automatisk"
+// ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenger"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Vennligst skriv inn minst {0} elementer"
 // lg.question_resetValue: "Reset question value" => "Tilbakestille spørsmålsverdien"
 // lg.column_resetValue: "Reset column value" => "Tilbakestille kolonneverdi"
 // lg.expressionSetup: "" => ""

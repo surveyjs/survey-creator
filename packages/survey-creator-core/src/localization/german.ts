@@ -136,6 +136,8 @@ var germanTranslation = {
     translationNoStrings: "Keine Texte zum Übersetzen. Bitte den Filter anpassen.",
     translationExportToSCVButton: "Export (CSV)",
     translationImportFromSCVButton: "Import (CSV)",
+    translateUsigAI: "Alle automatisch übersetzen",
+    translationDialogTitle: "Nicht übersetzte Zeichenketten",
     translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache",
     translationPlaceHolder: "Übersetzung ...",
     themeExportButton: "Exportieren",
@@ -265,6 +267,7 @@ var germanTranslation = {
     fastEntry: "Schnelleintrag",
     fastEntryNonUniqueError: "Wert '{0}' ist nicht eindeutig",
     fastEntryChoicesCountError: "Bitte begrenze die Anzahl der Elemente von {0} bis {1}",
+    fastEntryChoicesMinCountError: "Bitte geben Sie mindestens {0} Artikel ein",
     fastEntryPlaceholder: "Daten im folgenden Format setzen:\nwert1|text\nwert2",
     formEntry: "Formulareintrag",
     testService: "Service testen",
@@ -1305,6 +1308,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // pv.camera: "Camera" => "Kamera"
 // pv.file-camera: "Local files or camera" => "Lokale Dateien oder Kamera"
 
+// ed.translateUsigAI: "Auto-translate All" => "Alle automatisch übersetzen"
+// ed.translationDialogTitle: "Untranslated strings" => "Nicht übersetzte Zeichenketten"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Bitte geben Sie mindestens {0} Artikel ein"
 // lg.question_resetValue: "Reset question value" => "Fragewert zurücksetzen"
 // lg.column_resetValue: "Reset column value" => "Spaltenwert zurücksetzen"
 // lg.expressionSetup: "" => ""
