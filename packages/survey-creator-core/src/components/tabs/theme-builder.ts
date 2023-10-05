@@ -391,9 +391,9 @@ export class ThemeBuilder extends Base {
   }
   private headerViewContainerPropertiesChanged(options: ValueChangedEvent) {
     const headerSettings = options.value[0];
-    this.survey.titleView = headerSettings["headerView"];
-    this.surveyProvider.survey.titleView = headerSettings["headerView"];
-    if (headerSettings["headerView"] === "title") {
+    this.survey.headerView = headerSettings["headerView"];
+    this.surveyProvider.survey.headerView = headerSettings["headerView"];
+    if (headerSettings["headerView"] === "basic") {
       this.survey.logoPosition = headerSettings["logoPosition"];
       this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
     } else {
@@ -595,7 +595,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
-      panel.getQuestionByName("headerView").value = this.survey.titleView;
+      panel.getQuestionByName("headerView").value = this.survey.headerView;
       panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
 
       panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
@@ -905,20 +905,20 @@ export class ThemeBuilder extends Base {
                 "panelCount": 1,
                 "defaultValue": [
                   {
-                    "headerView": "title",
+                    "headerView": "basic",
                     "logoPosition": "right",
-                    "areaWidth": "survey",
+                    "inheritWidthFrom": "survey",
                     "backgroundColorSwitch": "none",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,
-                    "overlap": false,
+                    "overlapEnabled": false,
                     "logoPositionX": "right",
                     "logoPositionY": "top",
                     "titlePositionX": "left",
                     "titlePositionY": "bottom",
                     "descriptionPositionX": "left",
                     "descriptionPositionY": "bottom",
-                    "textWidth": 512,
+                    "textAreaWidth": 512,
                     "height": 256
                   }
                 ],
@@ -932,15 +932,15 @@ export class ThemeBuilder extends Base {
                         name: "headerView",
                         title: getLocString("theme.headerView"),
                         choices: [
-                          { value: "title", text: getLocString("theme.headerViewTitle") },
-                          { value: "cover", text: getLocString("theme.headerViewCover") }
+                          { value: "basic", text: getLocString("theme.headerViewBasic") },
+                          { value: "advanced", text: getLocString("theme.headerViewAdvanced") }
                         ]
                       },
                       {
                         type: "buttongroup",
                         name: "logoPosition",
                         title: getLocString("theme.logoPosition"),
-                        visibleIf: "{panel.headerView} = 'title'",
+                        visibleIf: "{panel.headerView} = 'basic'",
                         choices: [
                           { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
                           { value: "right", text: getLocString("theme.horizontalAlignmentRight") }
@@ -951,26 +951,26 @@ export class ThemeBuilder extends Base {
                         name: "height",
                         title: getLocString("p.height"),
                         descriptionLocation: "hidden",
-                        visibleIf: "{panel.headerView} = 'cover'",
+                        visibleIf: "{panel.headerView} = 'advanced'",
                         unit: "px",
                         min: 0
                       },
                       {
                         type: "buttongroup",
-                        name: "areaWidth",
-                        title: getLocString("theme.coverAreaWidth"),
+                        name: "inheritWidthFrom",
+                        title: getLocString("theme.coverInheritWidthFrom"),
                         choices: [
-                          { value: "survey", text: getLocString("theme.coverAreaWidthSurvey") },
-                          { value: "container", text: getLocString("theme.coverAreaWidthContainer") }
+                          { value: "survey", text: getLocString("theme.coverInheritWidthFromSurvey") },
+                          { value: "page", text: getLocString("theme.coverInheritWidthFromPage") }
                         ],
-                        visibleIf: "{panel.headerView} = 'cover'",
+                        visibleIf: "{panel.headerView} = 'advanced'",
                       },
                       {
                         type: "spinedit",
-                        name: "textWidth",
-                        title: getLocString("theme.coverTextWidth"),
+                        name: "textAreaWidth",
+                        title: getLocString("theme.coverTextAreaWidth"),
                         descriptionLocation: "hidden",
-                        visibleIf: "{panel.headerView} = 'cover'",
+                        visibleIf: "{panel.headerView} = 'advanced'",
                         unit: "px",
                         min: 0
                       }
@@ -978,7 +978,7 @@ export class ThemeBuilder extends Base {
                   }, {
                     type: "panel",
                     questionTitleLocation: "top",
-                    visibleIf: "{panel.headerView} = 'cover'",
+                    visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
                       {
                         type: "buttongroup",
@@ -1044,9 +1044,9 @@ export class ThemeBuilder extends Base {
                       },
                       {
                         type: "boolean",
-                        name: "overlap",
+                        name: "overlapEnabled",
                         renderAs: "checkbox",
-                        title: getLocString("theme.coverOverlap"),
+                        title: getLocString("theme.coverOverlapEnabled"),
                         titleLocation: "hidden",
                         descriptionLocation: "hidden",
                       }
@@ -1054,7 +1054,7 @@ export class ThemeBuilder extends Base {
                   }, {
                     type: "panel",
                     questionTitleLocation: "top",
-                    visibleIf: "{panel.headerView} = 'cover'",
+                    visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
                       this.getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
                       this.getVerticalAlignment("logoPositionY", "top"),
