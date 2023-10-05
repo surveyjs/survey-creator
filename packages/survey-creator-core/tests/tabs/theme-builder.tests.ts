@@ -1603,3 +1603,18 @@ test("Creator footer action bar: all tabs", (): any => {
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
+test("Mobile mode: hide advanced settings in property grid ", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isMobileView = true;
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(3);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeFalsy();
+});
