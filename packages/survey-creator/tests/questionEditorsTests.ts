@@ -210,7 +210,7 @@ QUnit.test("Question Editor, show errors on apply", function (assert) {
   const creator = new SurveyCreator();
   creator.onPropertyValidationCustomError.add(function (sender, options) {
     if (options.propertyName !== "description") return;
-    if(!!options.obj.title && !options.value) {
+    if (!!options.obj.title && !options.value) {
       options.error = "Error.";
     }
   });
@@ -1254,7 +1254,7 @@ QUnit.test("Add property into existing cagetory", function (assert) {
   Survey.Serializer.addProperty("question", {
     name: "visibleIf2",
     category: "logic",
-    visibleIndex: 10,
+    visibleIndex: 15,
   });
   Survey.Serializer.addProperty("question", {
     name: "enableIf2",
