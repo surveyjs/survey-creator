@@ -1420,10 +1420,10 @@ test("headerViewContainer init state", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "title",
+    "headerView": "basic",
     "logoPosition": "left",
-    "areaWidth": "survey",
-    "overlap": false,
+    "inheritWidthFrom": "survey",
+    "overlapEnabled": false,
     "backgroundColorSwitch": "none",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
@@ -1433,7 +1433,7 @@ test("headerViewContainer init state", (): any => {
     "titlePositionY": "bottom",
     "descriptionPositionX": "left",
     "descriptionPositionY": "bottom",
-    "textWidth": 512,
+    "textAreaWidth": 512,
     "height": 256
   });
 });
@@ -1449,17 +1449,17 @@ test("set headerViewContainer", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
-  headerViewContainer.getElementByName("headerView").value = "cover";
+  headerViewContainer.getElementByName("headerView").value = "advanced";
   headerViewContainer.getElementByName("height").value = 300;
-  headerViewContainer.getElementByName("areaWidth").value = "container";
-  headerViewContainer.getElementByName("textWidth").value = 600;
+  headerViewContainer.getElementByName("inheritWidthFrom").value = "page";
+  headerViewContainer.getElementByName("textAreaWidth").value = 600;
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
   headerViewContainer.getElementByName("backgroundImageOpacity").value = 50;
   headerViewContainer.getElementByName("titleForecolor").value = "#FBFF24";
-  headerViewContainer.getElementByName("overlap").value = true;
+  headerViewContainer.getElementByName("overlapEnabled").value = true;
   headerViewContainer.getElementByName("logoPositionX").value = "center";
   headerViewContainer.getElementByName("logoPositionY").value = "middle";
   headerViewContainer.getElementByName("titlePositionX").value = "center";
@@ -1469,9 +1469,9 @@ test("set headerViewContainer", (): any => {
 
   expect(creator.theme.cover).toEqual({
     "height": 300,
-    "areaWidth": "container",
-    "textWidth": 600,
-    "overlap": true,
+    "inheritWidthFrom": "page",
+    "textAreaWidth": 600,
+    "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageOpacity": 0.5,
     "backgroundImageFit": "fill",
@@ -1499,12 +1499,12 @@ test("restore headerViewContainer values", (): any => {
     },
     "cover": {
       "height": 300,
-      "areaWidth": "container",
-      "textWidth": 600,
+      "inheritWidthFrom": "page",
+      "textAreaWidth": 600,
       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
       "backgroundImageOpacity": 0.5,
       "backgroundImageFit": "fill",
-      "overlap": true,
+      "overlapEnabled": true,
       "logoPositionX": "center",
       "logoPositionY": "middle",
       "titlePositionX": "center",
@@ -1520,23 +1520,23 @@ test("restore headerViewContainer values", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "title",
+    "headerView": "basic",
     "logoPosition": "left",
-    "areaWidth": "container",
+    "inheritWidthFrom": "page",
     "titleForecolor": "#FBFF24",
     "backgroundColor": "#5094ed",
     "backgroundColorSwitch": "custom",
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageFit": "fill",
     "backgroundImageOpacity": 50,
-    "overlap": true,
+    "overlapEnabled": true,
     "logoPositionX": "center",
     "logoPositionY": "middle",
     "titlePositionX": "center",
     "titlePositionY": "middle",
     "descriptionPositionX": "center",
     "descriptionPositionY": "middle",
-    "textWidth": 600,
+    "textAreaWidth": 600,
     "height": 300
   });
 });
