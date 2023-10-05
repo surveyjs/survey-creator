@@ -1578,7 +1578,7 @@ test("getQuestionContentWrapperComponentName for component", (): any => {
   const creator = new CreatorTester();
   const survey = creator.createSurvey({ questions: [{ type: "test", name: "q1" }] });
   const qCustom = <QuestionCompositeModel>survey.getAllQuestions()[0];
-  const q = qCustom.panelWrapper.questions[0];
+  const q = qCustom.contentPanel.questions[0];
   expect(q.name).toBe("rate1");
   expect(survey.getQuestionContentWrapperComponentName(q)).toEqual("sv-template-renderer");
   ComponentCollection.Instance.clear();
@@ -1622,7 +1622,7 @@ test("getElementWrapperComponentName for inner component elements", () => {
     }]
   });
   const qCustom = <QuestionCustomModel>survey.getAllQuestions()[0];
-  const q = <QuestionPanelDynamicModel>qCustom.questionWrapper;
+  const q = <QuestionPanelDynamicModel>qCustom.contentQuestion;
   expect(q.name).toBe("myPanel1");
 
   const panel = q.panels[0] as PanelModel;
