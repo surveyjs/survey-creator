@@ -1,7 +1,7 @@
 <div
   data-bind="css: question.cssClasses.root, event: { keydown: question.koOnKeyDown, dragenter: question.ondragenter, dragover: question.ondragover, drop: question.ondrop, dragleave: question.ondragleave }">
   <input type="text"
-    data-bind="css: question.cssClasses.control, value: question.koReadOnlyValue, disable: question.isInputReadOnly, event: { change: question.koOnInputChange, blur: question.koOnInputBlur }">
+    data-bind="css: question.cssClasses.control, value: question.koReadOnlyValue, disable: question.isInputReadOnly, attr: { placeholder: question.placeholder }, event: { change: question.koOnInputChange, blur: question.koOnInputBlur }">
   <div data-bind="css: question.cssClasses.buttonsContainer">
     <button type="button"
       data-bind="css: question.cssClasses.clearButton, disable: question.getIsClearButtonDisabled(), click: question.doclean">

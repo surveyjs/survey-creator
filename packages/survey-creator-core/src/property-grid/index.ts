@@ -1390,8 +1390,7 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const maxSize = (<any>options).onUploadFile?.isEmpty ? 65536 : undefined;
-    const res: any = { type: "fileedit", storeDataAsText: false, maxSize };
+    const res: any = { type: "fileedit", storeDataAsText: false };
     return res;
   }
 

@@ -775,7 +775,6 @@ export class ThemeBuilder extends Base {
                     storeDataAsText: false,
                     name: "backgroundImage",
                     titleLocation: "hidden",
-                    maxSize: this.surveyProvider.onUploadFile.isEmpty ? 65536 : undefined,
                     acceptedTypes: "image/*",
                     placeholder: "Browse..."
                   },
@@ -1006,7 +1005,6 @@ export class ThemeBuilder extends Base {
                             storeDataAsText: false,
                             name: "backgroundImage",
                             titleLocation: "hidden",
-                            maxSize: this.surveyProvider.onUploadFile.isEmpty ? 65536 : undefined,
                             acceptedTypes: "image/*",
                             placeholder: "Browse..."
                           },
