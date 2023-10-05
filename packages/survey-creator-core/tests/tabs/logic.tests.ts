@@ -34,6 +34,8 @@ import exp from "constants";
 
 export * from "../../src/components/link-value";
 
+const questionLogicTypeLength = 5;
+
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
     pages: [
@@ -840,6 +842,28 @@ test("Create setValue trigger in logic", () => {
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
+});
+
+test("Setup setValueIf property in logic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", readOnly: true }
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  var panel = logic.itemEditor.panels[0];
+  panel.getQuestionByName("logicTypeName").value = "question_setValue";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  expect(panel.getQuestionByName("setValueExpression").visible).toBeTruthy();
+  panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
+  logic.itemEditor.apply();
+  logic.editableItem.apply("{q1} = 1");
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  //expect(q2.setValueExpression).toBe("{q1} + 1"); TODO
 });
 
 test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {
@@ -1939,7 +1963,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actio
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(4);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
   expect(logicTypeName.value).toEqual("column_visibility");
 
   questionName.value = "q2";
@@ -1964,7 +1988,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(4);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 });
 test("LogicUI: edit matrix column visibleIf. Two matrices with the same expression", () => {
   const survey = new SurveyModel({
@@ -1988,7 +2012,7 @@ test("LogicUI: edit matrix column visibleIf. Two matrices with the same expressi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(4);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 
   logic.editItem(logic.items[1]);
   itemEditor = logic.itemEditor;
@@ -2127,7 +2151,7 @@ test("LogicUI: edit panel dynamic question visibleIf. Filter logic types and del
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(4);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
   expect(logicTypeName.value).toEqual("question_visibility");
 
   questionName.value = "q2";
@@ -2189,7 +2213,7 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.choices.length).toEqual(4);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 });
 test("LogicUI: edit visibleIf property for panel dynamic question template when question is located in the panel", () => {
   const survey = new SurveyModel({

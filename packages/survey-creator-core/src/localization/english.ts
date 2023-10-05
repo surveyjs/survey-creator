@@ -170,11 +170,13 @@ export var enStrings = {
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",
-      question_resetValue: "Reset question value",
+      question_resetValueName: "Reset question value",
+      question_setValueName: "Set question value",
       column_visibilityName: "Show (hide) column",
       column_enableName: "Enable (disable) column",
       column_requireName: "Make column required",
-      column_resetValue: "Reset column value",
+      column_resetValueName: "Reset column value",
+      column_setValueName: "Set column value",
       trigger_completeName: "Complete survey",
       trigger_setvalueName: "Set answer",
       trigger_copyvalueName: "Copy answer",
@@ -924,6 +926,7 @@ export var enStrings = {
     defaultValueExpression: "Default value expression", // Auto-generated string
     requiredIf: "Required if", // Auto-generated string
     resetValueIf: "Reset value if", // Auto-generated string
+    setValueIf: "Set value if", // Auto-generated string
     validators: "Validators", // Auto-generated string
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string

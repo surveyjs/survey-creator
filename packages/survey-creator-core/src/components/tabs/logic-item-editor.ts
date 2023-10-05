@@ -164,6 +164,13 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               visible: false
             },
             {
+              name: "setValueExpression",
+              type: "comment",
+              titleLocation: "hidden",
+              startWithNewLine: false,
+              visible: false
+            },
+            {
               name: "triggerQuestionsPanel",
               type: "panel",
               startWithNewLine: false,

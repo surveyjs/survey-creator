@@ -11,6 +11,8 @@ export class LogicActionModelBase {
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
+      if(logicType.name.indexOf("setValue") > -1)
+        return new LogicActionSetValueModel(panel, logicAction, logicType, selectorElementsHash);
       return new LogicActionModel(panel, logicAction, logicType, selectorElementsHash);
     } else {
       return new LogicActionTriggerModel(panel, logicAction, logicType);
@@ -78,6 +80,14 @@ export class LogicActionModel extends LogicActionModelBase {
   public getSelectedElement(): string {
     const question = <QuestionDropdownModel>this.panel.getQuestionByName("elementSelector");
     return question.value;
+  }
+}
+
+export class LogicActionSetValueModel extends LogicActionModel {
+  public updatePanelElements(selectedElement: string, choices: Array<ItemValue>): void {
+    super.updatePanelElements(selectedElement, choices);
+    const question = <QuestionDropdownModel>this.panel.getQuestionByName("setValueExpression");
+    question.visible = true;
   }
 }
 
