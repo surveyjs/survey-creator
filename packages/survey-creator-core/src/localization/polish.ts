@@ -168,7 +168,7 @@ var polishStrings = {
       question_visibilityName: "Pokaż (ukryj) pytanie",
       question_enableName: "Włącz (wyłącz) pytanie",
       question_requireName: "Zadbaj o pytanie wymagane",
-      question_resetValue: "Zresetuj wartość pytania",
+      question_resetValueName: "Zresetuj wartość pytania",
       column_visibilityName: "Pokaż (ukryj) kolumnę",
       column_enableName: "Włącz (wyłącz) kolumnę",
       column_requireName: "Ustaw kolumnę jako wymaganą",
@@ -1862,7 +1862,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Automatycznie tłumacz wszystko"
 // ed.translationDialogTitle: "Untranslated strings" => "Nieprzetłumaczone ciągi znaków"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
-// lg.question_resetValue: "Reset question value" => "Zresetuj wartość pytania"
+// lg.question_resetValueName: "Reset question value" => "Zresetuj wartość pytania"
 // lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

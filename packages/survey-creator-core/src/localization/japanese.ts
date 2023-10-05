@@ -168,7 +168,7 @@ export var jaStrings = {
       question_visibilityName: "質問の可視性",
       question_enableName: "質問の有効化/無効化",
       question_requireName: "質問オプションが必要",
-      question_resetValue: "質問値のリセット",
+      question_resetValueName: "質問値のリセット",
       column_visibilityName: "列を表示 (非表示)",
       column_enableName: "有効 (無効) 列",
       column_requireName: "列を必須にする",
@@ -1588,7 +1588,7 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.translateUsigAI: "Auto-translate All" => "すべて自動翻訳"
 // ed.translationDialogTitle: "Untranslated strings" => "未翻訳の文字列"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
-// lg.question_resetValue: "Reset question value" => "質問値のリセット"
+// lg.question_resetValueName: "Reset question value" => "質問値のリセット"
 // lg.column_resetValue: "Reset column value" => "列の値をリセット"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

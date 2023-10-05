@@ -168,7 +168,7 @@ export var ruStrings = {
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
       question_requireName: "Вопрос обязательный",
-      question_resetValue: "Сбросить значение вопроса",
+      question_resetValueName: "Сбросить значение вопроса",
       column_visibilityName: "Показать (скрыть) столбец",
       column_enableName: "Включить (отключить) столбец",
       column_requireName: "Сделать столбец обязательным",
@@ -1653,7 +1653,7 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Автоматический перевод всех"
 // ed.translationDialogTitle: "Untranslated strings" => "Непереведенные строки"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
-// lg.question_resetValue: "Reset question value" => "Сбросить значение вопроса"
+// lg.question_resetValueName: "Reset question value" => "Сбросить значение вопроса"
 // lg.column_resetValue: "Reset column value" => "Сброс значения столбца"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

@@ -168,7 +168,7 @@ export var nbStrings = {
       question_visibilityName: "Spørsmålssynlghet",
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
-      question_resetValue: "Tilbakestille spørsmålsverdien",
+      question_resetValueName: "Tilbakestille spørsmålsverdien",
       column_visibilityName: "Vis kolonne (skjul)",
       column_enableName: "Aktivere (deaktivere) kolonne",
       column_requireName: "Gjøre kolonne obligatorisk",
@@ -1592,7 +1592,7 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Oversett alle automatisk"
 // ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenger"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Vennligst skriv inn minst {0} elementer"
-// lg.question_resetValue: "Reset question value" => "Tilbakestille spørsmålsverdien"
+// lg.question_resetValueName: "Reset question value" => "Tilbakestille spørsmålsverdien"
 // lg.column_resetValue: "Reset column value" => "Tilbakestille kolonneverdi"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

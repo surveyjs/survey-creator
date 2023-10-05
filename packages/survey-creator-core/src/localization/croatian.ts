@@ -168,7 +168,7 @@ export var hrStrings = {
       question_visibilityName: "Vidljivost pitanja",
       question_enableName: "Pitanje omogućuje/onesposobljava",
       question_requireName: "Pitanje nije obavezno",
-      question_resetValue: "Vrati izvornu vrijednost pitanja",
+      question_resetValueName: "Vrati izvornu vrijednost pitanja",
       column_visibilityName: "Pokaži (sakrij) stupac",
       column_enableName: "Omogući (onemogući stupac)",
       column_requireName: "Učini stupac obaveznim",
@@ -1582,7 +1582,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Automatski prevedi sve"
 // ed.translationDialogTitle: "Untranslated strings" => "Neprevedeni nizovi"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Unesite najmanje {0} stavki"
-// lg.question_resetValue: "Reset question value" => "Vrati izvornu vrijednost pitanja"
+// lg.question_resetValueName: "Reset question value" => "Vrati izvornu vrijednost pitanja"
 // lg.column_resetValue: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

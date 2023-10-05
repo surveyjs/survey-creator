@@ -168,7 +168,7 @@ export let svStrings = {
       question_visibilityName: "Visa (dölj) fråga",
       question_enableName: "Aktivera (inaktivera) fråga",
       question_requireName: "Gör frågan obligatorisk",
-      question_resetValue: "Återställ frågevärde",
+      question_resetValueName: "Återställ frågevärde",
       column_visibilityName: "Visa (dölj) kolumn",
       column_enableName: "Aktivera (inaktivera) kolumn",
       column_requireName: "Gör kolumnen obligatorisk",
@@ -1766,7 +1766,7 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Översätt alla automatiskt"
 // ed.translationDialogTitle: "Untranslated strings" => "Oöversatta strängar"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Ange minst {0} artiklar"
-// lg.question_resetValue: "Reset question value" => "Återställ frågevärde"
+// lg.question_resetValueName: "Reset question value" => "Återställ frågevärde"
 // lg.column_resetValue: "Reset column value" => "Återställ kolumnvärde"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

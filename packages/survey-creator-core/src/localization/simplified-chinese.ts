@@ -168,7 +168,7 @@ var simplifiedChineseTranslation = {
       question_visibilityName: "显示（隐藏）问题",
       question_enableName: "启用（禁用）问题",
       question_requireName: "提出必填题",
-      question_resetValue: "重置问题值",
+      question_resetValueName: "重置问题值",
       column_visibilityName: "显示（隐藏）列",
       column_enableName: "启用（禁用）列",
       column_requireName: "使列成为必填项",
@@ -1731,7 +1731,7 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.translateUsigAI: "Auto-translate All" => "自动翻译全部"
 // ed.translationDialogTitle: "Untranslated strings" => "未翻译的字符串"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "请输入至少{0}项目"
-// lg.question_resetValue: "Reset question value" => "重置问题值"
+// lg.question_resetValueName: "Reset question value" => "重置问题值"
 // lg.column_resetValue: "Reset column value" => "重置列值"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

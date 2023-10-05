@@ -168,7 +168,7 @@ export var koreanStrings = {
       question_visibilityName: "질문 표시(숨기기)",
       question_enableName: "사용(사용 안 함) 질문",
       question_requireName: "질문 필수 항목 만들기",
-      question_resetValue: "질문 값 재설정",
+      question_resetValueName: "질문 값 재설정",
       column_visibilityName: "열 표시(숨기기)",
       column_enableName: "사용(사용 안 함) 열",
       column_requireName: "열을 필수로 설정",
@@ -1792,7 +1792,7 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.translateUsigAI: "Auto-translate All" => "모두 자동 번역"
 // ed.translationDialogTitle: "Untranslated strings" => "번역되지 않은 문자열"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "최소 {0} 항목을 입력하십시오."
-// lg.question_resetValue: "Reset question value" => "질문 값 재설정"
+// lg.question_resetValueName: "Reset question value" => "질문 값 재설정"
 // lg.column_resetValue: "Reset column value" => "열 값 재설정"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

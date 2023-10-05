@@ -168,7 +168,7 @@ export var huStrings = {
       question_visibilityName: "Kérdés megjelenítése (elrejtése)",
       question_enableName: "Kérdés engedélyezése (letiltása)",
       question_requireName: "Kérdés feltevése kötelező",
-      question_resetValue: "Kérdés értékének visszaállítása",
+      question_resetValueName: "Kérdés értékének visszaállítása",
       column_visibilityName: "Oszlop megjelenítése (elrejtése)",
       column_enableName: "Oszlop engedélyezése (letiltása)",
       column_requireName: "Oszlop kötelezővé tétele",
@@ -1742,7 +1742,7 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Összes automatikus fordítása"
 // ed.translationDialogTitle: "Untranslated strings" => "Lefordítatlan karakterláncok"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
-// lg.question_resetValue: "Reset question value" => "Kérdés értékének visszaállítása"
+// lg.question_resetValueName: "Reset question value" => "Kérdés értékének visszaállítása"
 // lg.column_resetValue: "Reset column value" => "Oszlopérték visszaállítása"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

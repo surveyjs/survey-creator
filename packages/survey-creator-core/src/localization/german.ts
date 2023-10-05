@@ -168,7 +168,7 @@ var germanTranslation = {
       question_visibilityName: "Frage anzeigen/verstecken",
       question_enableName: "Frage aktivieren/deaktivieren",
       question_requireName: "Frage optional/erforderlich",
-      question_resetValue: "Fragewert zurücksetzen",
+      question_resetValueName: "Fragewert zurücksetzen",
       column_visibilityName: "Spalte anzeigen/verstecken",
       column_enableName: "Spalte aktivieren/deaktivieren",
       column_requireName: "Spalte optional/erforderlich",
@@ -1311,7 +1311,7 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.translateUsigAI: "Auto-translate All" => "Alle automatisch übersetzen"
 // ed.translationDialogTitle: "Untranslated strings" => "Nicht übersetzte Zeichenketten"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Bitte geben Sie mindestens {0} Artikel ein"
-// lg.question_resetValue: "Reset question value" => "Fragewert zurücksetzen"
+// lg.question_resetValueName: "Reset question value" => "Fragewert zurücksetzen"
 // lg.column_resetValue: "Reset column value" => "Spaltenwert zurücksetzen"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

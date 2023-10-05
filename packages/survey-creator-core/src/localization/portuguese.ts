@@ -168,7 +168,7 @@ var portugueseTranslation = {
       question_visibilityName: "Mostrar (esconder) questão",
       question_enableName: "Ativar (desativar) questão",
       question_requireName: "Tornar a pergunta obrigatória",
-      question_resetValue: "Redefinir o valor da pergunta",
+      question_resetValueName: "Redefinir o valor da pergunta",
       column_visibilityName: "Mostrar (esconder) coluna",
       column_enableName: "Ativar (desativar) coluna",
       column_requireName: "Tornar a coluna obrigatória",
@@ -1246,7 +1246,7 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.translateUsigAI: "Auto-translate All" => "Tradução automática de todos"
 // ed.translationDialogTitle: "Untranslated strings" => "Cadeias de caracteres não traduzidas"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Por favor, insira pelo menos {0} itens"
-// lg.question_resetValue: "Reset question value" => "Redefinir o valor da pergunta"
+// lg.question_resetValueName: "Reset question value" => "Redefinir o valor da pergunta"
 // lg.column_resetValue: "Reset column value" => "Redefinir o valor da coluna"
 // pe.markRequired: "Mark as required" => "Marcar conforme necessário"
 // pe.removeRequiredMark: "Remove the required mark" => "Remover a marca necessária"

@@ -168,7 +168,7 @@ export var fiStrings = {
       question_visibilityName: "Kysymyksen näkyvyys",
       question_enableName: "Kysymys käytössä/Ei käytössä",
       question_requireName: "Kysymys valinnainen vaaditaan",
-      question_resetValue: "Palauta kysymyksen arvo",
+      question_resetValueName: "Palauta kysymyksen arvo",
       column_visibilityName: "Näytä (piilota) -sarake",
       column_enableName: "Ota käyttöön (poista käytöstä) sarake",
       column_requireName: "Tee sarakkeesta pakollinen",
@@ -1588,7 +1588,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Käännä kaikki automaattisesti"
 // ed.translationDialogTitle: "Untranslated strings" => "Kääntämättömät merkkijonot"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
-// lg.question_resetValue: "Reset question value" => "Palauta kysymyksen arvo"
+// lg.question_resetValueName: "Reset question value" => "Palauta kysymyksen arvo"
 // lg.column_resetValue: "Reset column value" => "Palauta sarakkeen arvo"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

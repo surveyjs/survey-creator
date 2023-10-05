@@ -168,7 +168,7 @@ export var arStrings = {
       question_visibilityName: "إظهار (إخفاء) سؤال",
       question_enableName: "تفعيل (تعطيل) سؤال",
       question_requireName: "جعل السؤال إلزامي",
-      question_resetValue: "إعادة تعيين قيمة السؤال",
+      question_resetValueName: "إعادة تعيين قيمة السؤال",
       column_visibilityName: "إظهار (إخفاء) العمود",
       column_enableName: "تمكين (تعطيل) العمود",
       column_requireName: "جعل العمود مطلوبا",
@@ -1502,6 +1502,6 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "الرجاء إدخال {0} العناصر على الأقل"
 // pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
 // pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"
-// lg.question_resetValue: "Reset question value" => "إعادة تعيين قيمة السؤال"
+// lg.question_resetValueName: "Reset question value" => "إعادة تعيين قيمة السؤال"
 // lg.column_resetValue: "Reset column value" => "إعادة تعيين قيمة العمود"
 // p.resetValueIf: "Reset value if" => "إعادة تعيين القيمة إذا"

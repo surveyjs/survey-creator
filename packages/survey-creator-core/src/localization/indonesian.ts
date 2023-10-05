@@ -168,7 +168,7 @@ export var indonesianStrings = {
       question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
-      question_resetValue: "Mereset nilai pertanyaan",
+      question_resetValueName: "Mereset nilai pertanyaan",
       column_visibilityName: "Perlihatkan (sembunyikan) kolom",
       column_enableName: "Mengaktifkan (menonaktifkan) kolom",
       column_requireName: "Buat kolom diperlukan",
@@ -1743,7 +1743,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Terjemahkan otomatis Semua"
 // ed.translationDialogTitle: "Untranslated strings" => "String yang tidak diterjemahkan"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
-// lg.question_resetValue: "Reset question value" => "Mereset nilai pertanyaan"
+// lg.question_resetValueName: "Reset question value" => "Mereset nilai pertanyaan"
 // lg.column_resetValue: "Reset column value" => "Mereset nilai kolom"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

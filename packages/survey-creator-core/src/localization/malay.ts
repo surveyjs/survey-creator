@@ -168,7 +168,7 @@ export var msStrings = {
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
-      question_resetValue: "Mengeset semula nilai soalan",
+      question_resetValueName: "Mengeset semula nilai soalan",
       column_visibilityName: "Tunjukkan lajur (sembunyikan)",
       column_enableName: "Mendayakan (nyahdayakan) lajur",
       column_requireName: "Jadikan lajur diperlukan",
@@ -1542,7 +1542,7 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Terjemahkan Secara automatik Semua"
 // ed.translationDialogTitle: "Untranslated strings" => "Rentetan tidak diterjemahkan"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
-// lg.question_resetValue: "Reset question value" => "Mengeset semula nilai soalan"
+// lg.question_resetValueName: "Reset question value" => "Mengeset semula nilai soalan"
 // lg.column_resetValue: "Reset column value" => "Mengeset semula nilai lajur"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

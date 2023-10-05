@@ -168,7 +168,7 @@ export var turkishStrings = {
       question_visibilityName: "Soru görüürse",
       question_enableName: "Soru aktif/pasifse",
       question_requireName: "Soru isteğe bağlı zorunluysa",
-      question_resetValue: "Soru değerini sıfırla",
+      question_resetValueName: "Soru değerini sıfırla",
       column_visibilityName: "Göster (gizle) sütunu",
       column_enableName: "Etkinleştir (devre dışı bırak) sütunu",
       column_requireName: "Sütunu gerekli kıl",
@@ -1584,7 +1584,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Tümünü Otomatik Çevir"
 // ed.translationDialogTitle: "Untranslated strings" => "Çevrilmemiş dizeler"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Lütfen en az {0} ürün girin"
-// lg.question_resetValue: "Reset question value" => "Soru değerini sıfırla"
+// lg.question_resetValueName: "Reset question value" => "Soru değerini sıfırla"
 // lg.column_resetValue: "Reset column value" => "Sütun değerini sıfırla"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

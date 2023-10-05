@@ -168,7 +168,7 @@ export var nlStrings = {
       question_visibilityName: "Vraag zichtbaarheid",
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
-      question_resetValue: "Vraagwaarde opnieuw instellen",
+      question_resetValueName: "Vraagwaarde opnieuw instellen",
       column_visibilityName: "Kolom weergeven (verbergen)",
       column_enableName: "Kolom Inschakelen (uitschakelen)",
       column_requireName: "Kolom verplicht maken",
@@ -1568,7 +1568,7 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Alles automatisch vertalen"
 // ed.translationDialogTitle: "Untranslated strings" => "Onvertaalde tekenreeksen"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
-// lg.question_resetValue: "Reset question value" => "Vraagwaarde opnieuw instellen"
+// lg.question_resetValueName: "Reset question value" => "Vraagwaarde opnieuw instellen"
 // lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

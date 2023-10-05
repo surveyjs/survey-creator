@@ -168,7 +168,7 @@ export var skStrings = {
       question_visibilityName: "Viditeľnosť otázky",
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
-      question_resetValue: "Obnoviť hodnotu otázky",
+      question_resetValueName: "Obnoviť hodnotu otázky",
       column_visibilityName: "Zobraziť (skryť) stĺpec",
       column_enableName: "Povoliť (zakázať) stĺpec",
       column_requireName: "Nastavenie povinného stĺpca",
@@ -1542,7 +1542,7 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Automatický preklad všetkého"
 // ed.translationDialogTitle: "Untranslated strings" => "Nepreložené reťazce"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadajte aspoň {0} položiek"
-// lg.question_resetValue: "Reset question value" => "Obnoviť hodnotu otázky"
+// lg.question_resetValueName: "Reset question value" => "Obnoviť hodnotu otázky"
 // lg.column_resetValue: "Reset column value" => "Obnovenie hodnoty stĺpca"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""

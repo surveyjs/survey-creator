@@ -168,7 +168,7 @@ export var czStrings = {
       question_visibilityName: "Viditelnost otázky",
       question_enableName: "Zapnutí/vypnutí otázky",
       question_requireName: "Povinné vyplnění otázky",
-      question_resetValue: "Obnovit hodnotu otázky",
+      question_resetValueName: "Obnovit hodnotu otázky",
       column_visibilityName: "Zobrazit (skrýt) sloupec",
       column_enableName: "Zapnout (vypnout) sloupec",
       column_requireName: "Povinný sloupec",
@@ -1144,7 +1144,7 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"
 // ed.translationDialogTitle: "Untranslated strings" => "Nepřeložené řetězce"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadejte alespoň {0} položek"
-// lg.question_resetValue: "Reset question value" => "Obnovit hodnotu otázky"
+// lg.question_resetValueName: "Reset question value" => "Obnovit hodnotu otázky"
 // lg.column_resetValue: "Reset column value" => "Obnovit hodnotu sloupce"
 // pe.markRequired: "Mark as required" => "Označit podle potřeby"
 // pe.removeRequiredMark: "Remove the required mark" => "Odstraňte požadovanou značku"

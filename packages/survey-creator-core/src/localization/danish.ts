@@ -168,7 +168,7 @@ export var danishStrings = {
       question_visibilityName: "Vis (skjul) spørgsmål",
       question_enableName: "Aktivér (deaktiver) spørgsmål",
       question_requireName: "Gør spørgsmål påkrævet",
-      question_resetValue: "Nulstil spørgsmålsværdi",
+      question_resetValueName: "Nulstil spørgsmålsværdi",
       column_visibilityName: "Vis (skjul) kolonne",
       column_enableName: "Aktivér (deaktiver) kolonne",
       column_requireName: "Gør kolonne påkrævet",
@@ -1774,7 +1774,7 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Oversæt automatisk alle"
 // ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenge"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Indtast mindst {0} punkter"
-// lg.question_resetValue: "Reset question value" => "Nulstil spørgsmålsværdi"
+// lg.question_resetValueName: "Reset question value" => "Nulstil spørgsmålsværdi"
 // lg.column_resetValue: "Reset column value" => "Nulstil kolonneværdi"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
