@@ -1516,6 +1516,70 @@ test("restore headerViewContainer values", (): any => {
     "height": 300
   });
 });
+test("Get theme changes only", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+
+  const fullTheme = creator.getCurrentTheme();
+  const themeChanges = creator.getCurrentTheme("changes");
+  expect(Object.keys(fullTheme).length).toBe(4);
+  expect(Object.keys(fullTheme)).toStrictEqual([
+    "cssVariables",
+    "backgroundImage",
+    "backgroundImageFit",
+    "backgroundImageAttachment",
+  ]);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(85);
+  expect(Object.keys(themeChanges).length).toBe(6);
+  expect(Object.keys(themeChanges)).toStrictEqual([
+    "cssVariables",
+    "backgroundImageFit",
+    "backgroundImageAttachment",
+    "themeName",
+    "colorPalette",
+    "isPanelless",
+  ]);
+  expect(Object.keys(themeChanges.cssVariables).length).toBe(0);
+
+  questionBackgroundTransparency.value = 60;
+  themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+
+  const fullModifiedTheme = creator.getCurrentTheme();
+  const modifiedThemeChanges = creator.getCurrentTheme("changes");
+  expect(Object.keys(fullModifiedTheme).length).toBe(4);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
+  expect(Object.keys(modifiedThemeChanges).length).toBe(6);
+  expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
+  expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
+    "--sjs-general-backcolor-dim-light",
+    "--sjs-editor-background",
+    "--sjs-editorpanel-backcolor",
+    "--sjs-editorpanel-hovercolor",
+  ]);
+
+  themeSurveyTab.resetTheme();
+  const fullThemeReset = creator.getCurrentTheme();
+  const themeChangesReset = creator.getCurrentTheme("changes");
+  expect(Object.keys(fullThemeReset).length).toBe(1);
+  expect(Object.keys(fullThemeReset)).toStrictEqual([
+    "cssVariables",
+  ]);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(85);
+  expect(Object.keys(themeChangesReset).length).toBe(4);
+  expect(Object.keys(themeChangesReset)).toStrictEqual([
+    "cssVariables",
+    "themeName",
+    "colorPalette",
+    "isPanelless"
+  ]);
+  expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
+});
 test("Creator footer action bar: only theme tab", (): any => {
   const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
   const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
@@ -1594,3 +1658,4 @@ test("Mobile mode: hide advanced settings in property grid ", (): any => {
   expect(propertyGridGroups[1].visible).toBeFalsy();
   expect(propertyGridGroups[2].visible).toBeFalsy();
 });
+

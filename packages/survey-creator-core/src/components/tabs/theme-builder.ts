@@ -9,7 +9,7 @@ import { settings } from "../../creator-settings";
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
-import { PredefinedColors, PredefinedThemes, Themes, getThemeFullName } from "./themes";
+import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
 
 require("./theme-builder.scss");
 
@@ -598,20 +598,7 @@ export class ThemeBuilder extends Base {
   }
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
-    let suitableTheme = Themes[probeThemeFullName];
-    if (!!suitableTheme) {
-      return suitableTheme;
-    }
-    const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName) === 0);
-    for (let fullThemeName of appropriateThemeNames) {
-      if (fullThemeName.indexOf(themeName + "-" + this.themePalette) === 0) {
-        probeThemeFullName = themeName + "-" + this.themePalette;
-      }
-      if (fullThemeName.indexOf(themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "")) === 0) {
-        probeThemeFullName = themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "");
-      }
-    }
-    return Themes[probeThemeFullName] || Themes[appropriateThemeNames[0]];
+    return findSuitableTheme(themeName, probeThemeFullName);
   }
 
   private getCoverJson(headerSettings: any) {

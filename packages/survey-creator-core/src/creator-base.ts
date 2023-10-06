@@ -1079,6 +1079,15 @@ export class CreatorBase extends Base
     this._theme = newTheme;
     this.raiseThemeChanged();
   }
+  public getCurrentTheme(content: "full" | "changes" = "full") {
+    if (content === "full") {
+      return this.theme;
+    }
+    const themePlugin = this.getPlugin("theme") as ThemeTabPlugin;
+    if (!!themePlugin) {
+      return themePlugin.getThemeChanges();
+    }
+  }
 
   public raiseThemeChanged(): void {
     this.hasPendingThemeChanges = true;

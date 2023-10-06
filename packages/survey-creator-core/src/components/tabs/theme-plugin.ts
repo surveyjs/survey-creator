@@ -4,7 +4,21 @@ import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../creator-settings";
-import { PredefinedThemes, Themes, getThemeFullName } from "./themes";
+import { PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+
+function getObjectDiffs(obj1: any, obj2: any = {}): any {
+  const result: any = {};
+  Object.keys(obj1).forEach(key => {
+    if (typeof obj1[key] === "object") {
+      result[key] = getObjectDiffs(obj1[key], obj2[key]);
+    } else {
+      if (obj1[key] !== undefined && obj1[key] != obj2[key]) {
+        result[key] = obj1[key];
+      }
+    }
+  });
+  return result;
+}
 
 export class ThemeTabPlugin implements ICreatorPlugin {
   private previewAction: Action;
@@ -376,6 +390,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         }
       }
     }
+  }
+  public getThemeChanges() {
+    const fullTheme = this.creator.theme;
+    let probeThemeFullName = getThemeFullName(fullTheme);
+    const baseTheme = findSuitableTheme(fullTheme.themeName, probeThemeFullName);
+    const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
+    themeChanges.themeName = fullTheme.themeName || "default";
+    themeChanges.colorPalette = fullTheme.colorPalette || "light";
+    themeChanges.isPanelless = !!fullTheme.isPanelless;
+    return themeChanges;
   }
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
