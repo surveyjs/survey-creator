@@ -169,10 +169,12 @@ export var skStrings = {
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
       question_resetValueName: "Obnoviť hodnotu otázky",
+      question_setValueName: "Nastavenie hodnoty otázky",
       column_visibilityName: "Zobraziť (skryť) stĺpec",
       column_enableName: "Povoliť (zakázať) stĺpec",
       column_requireName: "Nastavenie povinného stĺpca",
-      column_resetValue: "Obnovenie hodnoty stĺpca",
+      column_resetValueName: "Obnovenie hodnoty stĺpca",
+      column_setValueName: "Nastavenie hodnoty stĺpca",
       trigger_completeName: "Dokončiť prieskum",
       trigger_setvalueName: "Nastaviť hodnotu otázky",
       trigger_copyvalueName: "Kopírovať hodnotu otázky",
@@ -202,6 +204,7 @@ export var skStrings = {
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
       trigger_completeText: "Prieskum bude dokončený",
       trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "jasná hodnota otázky: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var skStrings = {
       imageHeight: "Výška snímky (v hodnotách akceptovaných šablónou CSS)",
       imageWidth: "Šírka obrázka (v akceptovaných hodnotách CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titul"
+    },
     page: {
+      title: "Titul",
       maxTimeToFinish: "Časový limit na dokončenie stránky (v sekundách)"
     },
     question: {
@@ -918,6 +926,7 @@ export var skStrings = {
     defaultValueExpression: "predvolený výraz hodnoty",
     requiredIf: "Povinné ak",
     resetValueIf: "Obnoviť hodnotu, ak",
+    setValueIf: "Nastaviť hodnotu, ak",
     validators: "overovatelia",
     bindings: "väzby",
     renderAs: "Vykresliť ako",
@@ -994,6 +1003,7 @@ export var skStrings = {
     "--base-unit": "Základná jednotka",
     groupGeneral: "Všeobecné",
     groupAdvanced: "Pokročilý",
+    groupHeader: "Hlavička",
     themeName: "Téma",
     themeMode: "Vzhľad otázky",
     themeModePanels: "Predvolený",
@@ -1004,11 +1014,15 @@ export var skStrings = {
     primaryDefaultColor: "Predvolený",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
+    coverTitleForecolor: "Predná farba názvu",
+    coverOverlapEnabled: "Presahovať",
     backgroundDimColor: "Farba pozadia",
     backgroundImage: "Obrázok na pozadí",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Prikryť",
     backgroundImageFitContain: "Obsahovať",
+    backgroundImageFitFill: "Natiahnuť",
+    backgroundImageFitTile: "Dlaždica",
     backgroundOpacity: "Neprehľadnosť",
     backgroundImageAttachmentFixed: "Stabilný",
     backgroundImageAttachmentScroll: "Zvitok",
@@ -1053,6 +1067,26 @@ export var skStrings = {
     boxShadowInner: "Vnútorný",
     questionShadow: "Efekty tieňov",
     editorShadow: "Efekty tieňov vstupného prvku",
+    headerView: "Pohľad",
+    headerViewBasic: "Základný",
+    headerViewAdvanced: "Pokročilý",
+    coverInheritWidthFrom: "Šírka oblasti obsahu",
+    coverInheritWidthFromSurvey: "Rovnaké ako prieskum",
+    coverInheritWidthFromPage: "Prispôsobiť na stranu",
+    coverTextAreaWidth: "Šírka textu",
+    coverBackgroundColorSwitch: "Farba pozadia",
+    coverBackgroundColorNone: "Žiadny",
+    coverBackgroundColorAccentColor: "Farba akcentu",
+    coverBackgroundColorCustom: "Zvyk",
+    horizontalAlignmentLeft: "Vľavo",
+    horizontalAlignmentCenter: "Centrum",
+    horizontalAlignmentRight: "Doprava",
+    verticalAlignmentTop: "Vrchol",
+    verticalAlignmentMiddle: "Stred",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Umiestnenie loga",
+    coverTitlePosition: "Titulná pozícia",
+    coverDescriptionPosition: "Popisná pozícia",
     names: {
       default: "Predvolený",
       sharp: "Ostrý",
@@ -1549,3 +1583,37 @@ editorLocalization.locales["sk"] = skStrings;
 // pe.markRequired: "Mark as required" => "Označiť podľa potreby"
 // pe.removeRequiredMark: "Remove the required mark" => "Odstráňte požadovanú značku"
 // p.resetValueIf: "Reset value if" => "Obnoviť hodnotu, ak"
+// lg.question_setValueName: "Set question value" => "Nastavenie hodnoty otázky"
+// lg.column_resetValueName: "Reset column value" => "Obnovenie hodnoty stĺpca"
+// lg.column_setValueName: "Set column value" => "Nastavenie hodnoty stĺpca"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Výraz, ktorého výsledok bude priradený k cieľovej otázke."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titul"
+// page.title: "Title" => "Titul"
+// p.setValueIf: "Set value if" => "Nastaviť hodnotu, ak"
+// theme.groupHeader: "Header" => "Hlavička"
+// theme.coverTitleForecolor: "Title forecolor" => "Predná farba názvu"
+// theme.coverOverlapEnabled: "Overlap" => "Presahovať"
+// theme.backgroundImageFitFill: "Stretch" => "Natiahnuť"
+// theme.backgroundImageFitTile: "Tile" => "Dlaždica"
+// theme.headerView: "View" => "Pohľad"
+// theme.headerViewBasic: "Basic" => "Základný"
+// theme.headerViewAdvanced: "Advanced" => "Pokročilý"
+// theme.coverInheritWidthFrom: "Content area width" => "Šírka oblasti obsahu"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Rovnaké ako prieskum"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Prispôsobiť na stranu"
+// theme.coverTextAreaWidth: "Text width" => "Šírka textu"
+// theme.coverBackgroundColorSwitch: "Background color" => "Farba pozadia"
+// theme.coverBackgroundColorNone: "None" => "Žiadny"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Farba akcentu"
+// theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.horizontalAlignmentLeft: "Left" => "Vľavo"
+// theme.horizontalAlignmentCenter: "Center" => "Centrum"
+// theme.horizontalAlignmentRight: "Right" => "Doprava"
+// theme.verticalAlignmentTop: "Top" => "Vrchol"
+// theme.verticalAlignmentMiddle: "Middle" => "Stred"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Umiestnenie loga"
+// theme.coverTitlePosition: "Title Position" => "Titulná pozícia"
+// theme.coverDescriptionPosition: "Description Position" => "Popisná pozícia"

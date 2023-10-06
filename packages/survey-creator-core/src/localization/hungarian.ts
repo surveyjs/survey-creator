@@ -169,10 +169,12 @@ export var huStrings = {
       question_enableName: "Kérdés engedélyezése (letiltása)",
       question_requireName: "Kérdés feltevése kötelező",
       question_resetValueName: "Kérdés értékének visszaállítása",
+      question_setValueName: "Kérdésérték beállítása",
       column_visibilityName: "Oszlop megjelenítése (elrejtése)",
       column_enableName: "Oszlop engedélyezése (letiltása)",
       column_requireName: "Oszlop kötelezővé tétele",
-      column_resetValue: "Oszlopérték visszaállítása",
+      column_resetValueName: "Oszlopérték visszaállítása",
+      column_setValueName: "Oszlopérték beállítása",
       trigger_completeName: "Teljes felmérés",
       trigger_setvalueName: "Válasz beállítása",
       trigger_copyvalueName: "Válasz másolása",
@@ -202,6 +204,7 @@ export var huStrings = {
       column_visibilityText: "A {1}. kérdés {0} oszlopának láthatóvá tétele", //{0} column name, {1} question name
       column_enableText: "A kérdés {0} oszlopának engedélyezése {1} engedélyezése", //{0} column name, {1} question name
       column_requireText: "Tegye kötelezővé a kérdés {0} oszlopát {1}", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Egyértelmű kérdésérték: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var huStrings = {
       imageHeight: "Képmagasság (CSS által elfogadott értékekben)",
       imageWidth: "Képszélesség (CSS által elfogadott értékekben)"
     },
+    // survey templates
+    survey: {
+      title: "Cím"
+    },
     page: {
+      title: "Cím",
       maxTimeToFinish: "Az oldal befejezésének határideje (másodpercben)"
     },
     question: {
@@ -918,6 +926,7 @@ export var huStrings = {
     defaultValueExpression: "Alapértelmezett értékkifejezés",
     requiredIf: "Kötelező ha",
     resetValueIf: "Érték visszaállítása, ha",
+    setValueIf: "Érték beállítása, ha",
     validators: "Validátorok",
     bindings: "Kötések",
     renderAs: "Renderelés mint",
@@ -994,6 +1003,7 @@ export var huStrings = {
     "--base-unit": "Alapegység",
     groupGeneral: "Általános",
     groupAdvanced: "Haladó",
+    groupHeader: "Fejléc",
     themeName: "Téma",
     themeMode: "Kérdés megjelenése",
     themeModePanels: "Alapértelmezett",
@@ -1004,11 +1014,15 @@ export var huStrings = {
     primaryDefaultColor: "Alapértelmezett",
     primaryDarkColor: "Lebeg",
     primaryLightColor: "Kiválasztott",
+    coverTitleForecolor: "Cím előszíne",
+    coverOverlapEnabled: "Átfed",
     backgroundDimColor: "Háttérszín",
     backgroundImage: "Háttérkép",
     backgroundImageFitAuto: "Kocsi",
     backgroundImageFitCover: "Fedő",
     backgroundImageFitContain: "Tartalmaz",
+    backgroundImageFitFill: "Nyúlik",
+    backgroundImageFitTile: "Cserép",
     backgroundOpacity: "Átlátszatlanság",
     backgroundImageAttachmentFixed: "Fix",
     backgroundImageAttachmentScroll: "Kézirattekercs",
@@ -1053,6 +1067,26 @@ export var huStrings = {
     boxShadowInner: "Belső",
     questionShadow: "Árnyék effektusok",
     editorShadow: "Bemeneti elem árnyékeffektusai",
+    headerView: "Nézet",
+    headerViewBasic: "Alapvető",
+    headerViewAdvanced: "Haladó",
+    coverInheritWidthFrom: "Tartalomterület szélessége",
+    coverInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
+    coverInheritWidthFromPage: "Laphoz igazítás",
+    coverTextAreaWidth: "Szöveg szélessége",
+    coverBackgroundColorSwitch: "Háttérszín",
+    coverBackgroundColorNone: "Egyik sem",
+    coverBackgroundColorAccentColor: "Kiemelő szín",
+    coverBackgroundColorCustom: "Szokás",
+    horizontalAlignmentLeft: "Balra",
+    horizontalAlignmentCenter: "Központ",
+    horizontalAlignmentRight: "Jobbra",
+    verticalAlignmentTop: "Felső",
+    verticalAlignmentMiddle: "Középső",
+    verticalAlignmentBottom: "Fenék",
+    logoPosition: "Logó pozíciója",
+    coverTitlePosition: "Cím pozíciója",
+    coverDescriptionPosition: "Leírás Pozíció",
     names: {
       default: "Alapértelmezett",
       sharp: "Éles",
@@ -1749,3 +1783,37 @@ editorLocalization.locales["hu"] = huStrings;
 // pe.markRequired: "Mark as required" => "Megjelölés kötelezőként"
 // pe.removeRequiredMark: "Remove the required mark" => "Távolítsa el a szükséges jelet"
 // p.resetValueIf: "Reset value if" => "Érték visszaállítása, ha"
+// lg.question_setValueName: "Set question value" => "Kérdésérték beállítása"
+// lg.column_resetValueName: "Reset column value" => "Oszlopérték visszaállítása"
+// lg.column_setValueName: "Set column value" => "Oszlopérték beállítása"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Cím"
+// page.title: "Title" => "Cím"
+// p.setValueIf: "Set value if" => "Érték beállítása, ha"
+// theme.groupHeader: "Header" => "Fejléc"
+// theme.coverTitleForecolor: "Title forecolor" => "Cím előszíne"
+// theme.coverOverlapEnabled: "Overlap" => "Átfed"
+// theme.backgroundImageFitFill: "Stretch" => "Nyúlik"
+// theme.backgroundImageFitTile: "Tile" => "Cserép"
+// theme.headerView: "View" => "Nézet"
+// theme.headerViewBasic: "Basic" => "Alapvető"
+// theme.headerViewAdvanced: "Advanced" => "Haladó"
+// theme.coverInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
+// theme.coverTextAreaWidth: "Text width" => "Szöveg szélessége"
+// theme.coverBackgroundColorSwitch: "Background color" => "Háttérszín"
+// theme.coverBackgroundColorNone: "None" => "Egyik sem"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
+// theme.coverBackgroundColorCustom: "Custom" => "Szokás"
+// theme.horizontalAlignmentLeft: "Left" => "Balra"
+// theme.horizontalAlignmentCenter: "Center" => "Központ"
+// theme.horizontalAlignmentRight: "Right" => "Jobbra"
+// theme.verticalAlignmentTop: "Top" => "Felső"
+// theme.verticalAlignmentMiddle: "Middle" => "Középső"
+// theme.verticalAlignmentBottom: "Bottom" => "Fenék"
+// theme.logoPosition: "Logo Position" => "Logó pozíciója"
+// theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
+// theme.coverDescriptionPosition: "Description Position" => "Leírás Pozíció"

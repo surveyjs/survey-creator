@@ -169,10 +169,12 @@ var simplifiedChineseTranslation = {
       question_enableName: "启用（禁用）问题",
       question_requireName: "提出必填题",
       question_resetValueName: "重置问题值",
+      question_setValueName: "设置问题值",
       column_visibilityName: "显示（隐藏）列",
       column_enableName: "启用（禁用）列",
       column_requireName: "使列成为必填项",
-      column_resetValue: "重置列值",
+      column_resetValueName: "重置列值",
+      column_setValueName: "设置列值",
       trigger_completeName: "完成调查",
       trigger_setvalueName: "设置答案",
       trigger_copyvalueName: "复制答案",
@@ -202,6 +204,7 @@ var simplifiedChineseTranslation = {
       column_visibilityText: "使问题{1}的列{0}可见", //{0} column name, {1} question name
       column_enableText: "使问题{1}列{0}启用", //{0} column name, {1} question name
       column_requireText: "{0}将问题{1}列为必填项", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: "其结果将分配给目标问题的表达式。",
       trigger_completeText: "调查完成",
       trigger_setvalueText: "受到质疑：{0}价值{1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "明确问题值：{0}", //{0} question name
@@ -415,7 +418,12 @@ var simplifiedChineseTranslation = {
       imageHeight: "图片高度（以 CSS 接受的值为单位）",
       imageWidth: "图像宽度（以 CSS 接受的值为单位）"
     },
+    // survey templates
+    survey: {
+      title: "标题"
+    },
     page: {
+      title: "标题",
       maxTimeToFinish: "完成页面的时间限制（以秒为单位）"
     },
     question: {
@@ -918,6 +926,7 @@ var simplifiedChineseTranslation = {
     defaultValueExpression: "默认值表达式",
     requiredIf: "是否必选",
     resetValueIf: "如果出现以下情况，则重置值",
+    setValueIf: "设置值，如果",
     validators: "有效性",
     bindings: "绑定",
     renderAs: "渲染为",
@@ -994,6 +1003,7 @@ var simplifiedChineseTranslation = {
     "--base-unit": "基本单元",
     groupGeneral: "常规",
     groupAdvanced: "高深",
+    groupHeader: "页眉",
     themeName: "主题",
     themeMode: "问题外观",
     themeModePanels: "违约",
@@ -1004,11 +1014,15 @@ var simplifiedChineseTranslation = {
     primaryDefaultColor: "违约",
     primaryDarkColor: "悬停",
     primaryLightColor: "选择",
+    coverTitleForecolor: "标题前彩",
+    coverOverlapEnabled: "重叠",
     backgroundDimColor: "背景色",
     backgroundImage: "背景图片",
     backgroundImageFitAuto: "自动",
     backgroundImageFitCover: "盖",
     backgroundImageFitContain: "包含",
+    backgroundImageFitFill: "伸展",
+    backgroundImageFitTile: "瓦",
     backgroundOpacity: "不透明度",
     backgroundImageAttachmentFixed: "固定",
     backgroundImageAttachmentScroll: "滚动",
@@ -1053,6 +1067,26 @@ var simplifiedChineseTranslation = {
     boxShadowInner: "内",
     questionShadow: "阴影效果",
     editorShadow: "输入元素阴影效果",
+    headerView: "视图",
+    headerViewBasic: "基本",
+    headerViewAdvanced: "高深",
+    coverInheritWidthFrom: "内容区域宽度",
+    coverInheritWidthFromSurvey: "与调查相同",
+    coverInheritWidthFromPage: "适合页面",
+    coverTextAreaWidth: "文本宽度",
+    coverBackgroundColorSwitch: "背景色",
+    coverBackgroundColorNone: "没有",
+    coverBackgroundColorAccentColor: "强调文字颜色",
+    coverBackgroundColorCustom: "习惯",
+    horizontalAlignmentLeft: "左",
+    horizontalAlignmentCenter: "中心",
+    horizontalAlignmentRight: "右",
+    verticalAlignmentTop: "返回页首",
+    verticalAlignmentMiddle: "中间",
+    verticalAlignmentBottom: "底",
+    logoPosition: "徽标位置",
+    coverTitlePosition: "标题位置",
+    coverDescriptionPosition: "描述位置",
     names: {
       default: "违约",
       sharp: "锋利",
@@ -1738,3 +1772,37 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pe.markRequired: "Mark as required" => "标记为必填"
 // pe.removeRequiredMark: "Remove the required mark" => "删除所需的标记"
 // p.resetValueIf: "Reset value if" => "如果出现以下情况，则重置值"
+// lg.question_setValueName: "Set question value" => "设置问题值"
+// lg.column_resetValueName: "Reset column value" => "重置列值"
+// lg.column_setValueName: "Set column value" => "设置列值"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "其结果将分配给目标问题的表达式。"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "标题"
+// page.title: "Title" => "标题"
+// p.setValueIf: "Set value if" => "设置值，如果"
+// theme.groupHeader: "Header" => "页眉"
+// theme.coverTitleForecolor: "Title forecolor" => "标题前彩"
+// theme.coverOverlapEnabled: "Overlap" => "重叠"
+// theme.backgroundImageFitFill: "Stretch" => "伸展"
+// theme.backgroundImageFitTile: "Tile" => "瓦"
+// theme.headerView: "View" => "视图"
+// theme.headerViewBasic: "Basic" => "基本"
+// theme.headerViewAdvanced: "Advanced" => "高深"
+// theme.coverInheritWidthFrom: "Content area width" => "内容区域宽度"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "与调查相同"
+// theme.coverInheritWidthFromPage: "Fit to page" => "适合页面"
+// theme.coverTextAreaWidth: "Text width" => "文本宽度"
+// theme.coverBackgroundColorSwitch: "Background color" => "背景色"
+// theme.coverBackgroundColorNone: "None" => "没有"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "强调文字颜色"
+// theme.coverBackgroundColorCustom: "Custom" => "习惯"
+// theme.horizontalAlignmentLeft: "Left" => "左"
+// theme.horizontalAlignmentCenter: "Center" => "中心"
+// theme.horizontalAlignmentRight: "Right" => "右"
+// theme.verticalAlignmentTop: "Top" => "返回页首"
+// theme.verticalAlignmentMiddle: "Middle" => "中间"
+// theme.verticalAlignmentBottom: "Bottom" => "底"
+// theme.logoPosition: "Logo Position" => "徽标位置"
+// theme.coverTitlePosition: "Title Position" => "标题位置"
+// theme.coverDescriptionPosition: "Description Position" => "描述位置"

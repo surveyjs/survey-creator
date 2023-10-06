@@ -169,10 +169,12 @@ export var indonesianStrings = {
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
       question_resetValueName: "Mereset nilai pertanyaan",
+      question_setValueName: "Tetapkan nilai pertanyaan",
       column_visibilityName: "Perlihatkan (sembunyikan) kolom",
       column_enableName: "Mengaktifkan (menonaktifkan) kolom",
       column_requireName: "Buat kolom diperlukan",
-      column_resetValue: "Mereset nilai kolom",
+      column_resetValueName: "Mereset nilai kolom",
+      column_setValueName: "Mengatur nilai kolom",
       trigger_completeName: "Survei lengkap",
       trigger_setvalueName: "Tetapkan jawaban",
       trigger_copyvalueName: "Salin jawaban",
@@ -202,6 +204,7 @@ export var indonesianStrings = {
       column_visibilityText: "Membuat kolom {0} pertanyaan {1} terlihat", //{0} column name, {1} question name
       column_enableText: "Buat kolom {0} pertanyaan {1} aktifkan", //{0} column name, {1} question name
       column_requireText: "membuat kolom {0} pertanyaan {1} diperlukan", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
       trigger_completeText: "Survei menjadi selesai",
       trigger_setvalueText: "Pertanyaan: {0} nilai {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Nilai Pertanyaan yang Jelas: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var indonesianStrings = {
       imageHeight: "Tinggi gambar (dalam nilai yang diterima CSS)",
       imageWidth: "Lebar gambar (dalam nilai yang diterima CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Batas waktu untuk menyelesaikan halaman (dalam detik)"
     },
     question: {
@@ -918,6 +926,7 @@ export var indonesianStrings = {
     defaultValueExpression: "Ekspresi nilai default",
     requiredIf: "wajib jika",
     resetValueIf: "Reset nilai jika",
+    setValueIf: "Tetapkan nilai jika",
     validators: "validator",
     bindings: "Binding",
     renderAs: "Render sebagai",
@@ -994,6 +1003,7 @@ export var indonesianStrings = {
     "--base-unit": "Unit dasar",
     groupGeneral: "Umum",
     groupAdvanced: "Maju",
+    groupHeader: "Header",
     themeName: "Tema",
     themeMode: "Penampilan pertanyaan",
     themeModePanels: "Default",
@@ -1004,11 +1014,15 @@ export var indonesianStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
+    coverTitleForecolor: "Warna depan judul",
+    coverOverlapEnabled: "Tumpang tindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Gambar latar belakang",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Menutupi",
     backgroundImageFitContain: "Mengandung",
+    backgroundImageFitFill: "Merentangkan",
+    backgroundImageFitTile: "Ubin",
     backgroundOpacity: "Opacity",
     backgroundImageAttachmentFixed: "Tetap",
     backgroundImageAttachmentScroll: "Gulir",
@@ -1053,6 +1067,26 @@ export var indonesianStrings = {
     boxShadowInner: "Batin",
     questionShadow: "Efek bayangan",
     editorShadow: "Efek bayangan elemen input",
+    headerView: "Melihat",
+    headerViewBasic: "Dasar",
+    headerViewAdvanced: "Maju",
+    coverInheritWidthFrom: "Lebar area konten",
+    coverInheritWidthFromSurvey: "Sama seperti survei",
+    coverInheritWidthFromPage: "Paskan dengan halaman",
+    coverTextAreaWidth: "Lebar teks",
+    coverBackgroundColorSwitch: "Warna latar belakang",
+    coverBackgroundColorNone: "Tidak",
+    coverBackgroundColorAccentColor: "Warna aksen",
+    coverBackgroundColorCustom: "Adat",
+    horizontalAlignmentLeft: "Kiri",
+    horizontalAlignmentCenter: "Pusat",
+    horizontalAlignmentRight: "Kanan",
+    verticalAlignmentTop: "Puncak",
+    verticalAlignmentMiddle: "Tengah",
+    verticalAlignmentBottom: "Dasar",
+    logoPosition: "Posisi Logo",
+    coverTitlePosition: "Posisi Judul",
+    coverDescriptionPosition: "Deskripsi Posisi",
     names: {
       default: "Default",
       sharp: "Tajam",
@@ -1750,3 +1784,37 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
 // pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"
 // p.resetValueIf: "Reset value if" => "Reset nilai jika"
+// lg.question_setValueName: "Set question value" => "Tetapkan nilai pertanyaan"
+// lg.column_resetValueName: "Reset column value" => "Mereset nilai kolom"
+// lg.column_setValueName: "Set column value" => "Mengatur nilai kolom"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Tetapkan nilai jika"
+// theme.groupHeader: "Header" => "Header"
+// theme.coverTitleForecolor: "Title forecolor" => "Warna depan judul"
+// theme.coverOverlapEnabled: "Overlap" => "Tumpang tindih"
+// theme.backgroundImageFitFill: "Stretch" => "Merentangkan"
+// theme.backgroundImageFitTile: "Tile" => "Ubin"
+// theme.headerView: "View" => "Melihat"
+// theme.headerViewBasic: "Basic" => "Dasar"
+// theme.headerViewAdvanced: "Advanced" => "Maju"
+// theme.coverInheritWidthFrom: "Content area width" => "Lebar area konten"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama seperti survei"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Paskan dengan halaman"
+// theme.coverTextAreaWidth: "Text width" => "Lebar teks"
+// theme.coverBackgroundColorSwitch: "Background color" => "Warna latar belakang"
+// theme.coverBackgroundColorNone: "None" => "Tidak"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Warna aksen"
+// theme.coverBackgroundColorCustom: "Custom" => "Adat"
+// theme.horizontalAlignmentLeft: "Left" => "Kiri"
+// theme.horizontalAlignmentCenter: "Center" => "Pusat"
+// theme.horizontalAlignmentRight: "Right" => "Kanan"
+// theme.verticalAlignmentTop: "Top" => "Puncak"
+// theme.verticalAlignmentMiddle: "Middle" => "Tengah"
+// theme.verticalAlignmentBottom: "Bottom" => "Dasar"
+// theme.logoPosition: "Logo Position" => "Posisi Logo"
+// theme.coverTitlePosition: "Title Position" => "Posisi Judul"
+// theme.coverDescriptionPosition: "Description Position" => "Deskripsi Posisi"

@@ -169,10 +169,12 @@ var germanTranslation = {
       question_enableName: "Frage aktivieren/deaktivieren",
       question_requireName: "Frage optional/erforderlich",
       question_resetValueName: "Fragewert zurücksetzen",
+      question_setValueName: "Festlegen des Fragewerts",
       column_visibilityName: "Spalte anzeigen/verstecken",
       column_enableName: "Spalte aktivieren/deaktivieren",
       column_requireName: "Spalte optional/erforderlich",
-      column_resetValue: "Spaltenwert zurücksetzen",
+      column_resetValueName: "Spaltenwert zurücksetzen",
+      column_setValueName: "Festlegen des Spaltenwerts",
       trigger_completeName: "Umfrage abschließen",
       trigger_setvalueName: "Antwort setzen",
       trigger_copyvalueName: "Antwort kopieren",
@@ -202,6 +204,7 @@ var germanTranslation = {
       column_visibilityText: "Mache die Spalte {0} von Frage {1} sichtbar", //{0} column name, {1} question name
       column_enableText: "Aktiviere die Spalte {0} von Frage {1}", //{0} column name, {1} question name
       column_requireText: "Mache die Spalte {0} von Frage {1} erforderlich", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Ein Ausdruck, dessen Ergebnis der Zielfrage zugewiesen wird.",
       trigger_completeText: "Umfrage abschließen",
       trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klarer Fragewert: {0}", //{0} question name
@@ -415,7 +418,12 @@ var germanTranslation = {
       imageHeight: "Bildhöhe (in CSS-akzeptierten Werten)",
       imageWidth: "Bildbreite (in CSS-akzeptierten Werten)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Zeitlimit zum Beenden der Seite (in Sekunden)"
     },
     question: {
@@ -918,6 +926,7 @@ var germanTranslation = {
     defaultValueExpression: "Ausdruck für Standardwerte",
     requiredIf: "Erforderlich wenn ...",
     resetValueIf: "Wert zurücksetzen, wenn",
+    setValueIf: "Wert setzen, wenn",
     validators: "Validierungen",
     bindings: "Bindings",
     renderAs: "Rendern als",
@@ -994,6 +1003,7 @@ var germanTranslation = {
     "--base-unit": "Basiseinheit",
     groupGeneral: "Allgemein",
     groupAdvanced: "Fortgeschritten",
+    groupHeader: "Kopfball",
     themeName: "Thema",
     themeMode: "Erscheinungsbild der Frage",
     themeModePanels: "Vorgabe",
@@ -1004,11 +1014,15 @@ var germanTranslation = {
     primaryDefaultColor: "Vorgabe",
     primaryDarkColor: "Schweben",
     primaryLightColor: "Ausgewählt",
+    coverTitleForecolor: "Vorfarbe des Titels",
+    coverOverlapEnabled: "Überlappung",
     backgroundDimColor: "Hintergrundfarbe",
     backgroundImage: "Hintergrundbild",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Deckel",
     backgroundImageFitContain: "Enthalten",
+    backgroundImageFitFill: "Strecken",
+    backgroundImageFitTile: "Fliese",
     backgroundOpacity: "Undurchsichtigkeit",
     backgroundImageAttachmentFixed: "Fest",
     backgroundImageAttachmentScroll: "Schriftrolle",
@@ -1053,6 +1067,26 @@ var germanTranslation = {
     boxShadowInner: "Inner",
     questionShadow: "Schatteneffekte",
     editorShadow: "Schatteneffekte von Eingabeelementen",
+    headerView: "Ansehen",
+    headerViewBasic: "Grundlegend",
+    headerViewAdvanced: "Fortgeschritten",
+    coverInheritWidthFrom: "Breite des Inhaltsbereichs",
+    coverInheritWidthFromSurvey: "Wie Umfrage",
+    coverInheritWidthFromPage: "An Seite anpassen",
+    coverTextAreaWidth: "Textbreite",
+    coverBackgroundColorSwitch: "Hintergrundfarbe",
+    coverBackgroundColorNone: "Nichts",
+    coverBackgroundColorAccentColor: "Akzentfarbe",
+    coverBackgroundColorCustom: "Gewohnheit",
+    horizontalAlignmentLeft: "Links",
+    horizontalAlignmentCenter: "Mitte",
+    horizontalAlignmentRight: "Rechts",
+    verticalAlignmentTop: "Nach oben",
+    verticalAlignmentMiddle: "Mitte",
+    verticalAlignmentBottom: "Unteres",
+    logoPosition: "Position des Logos",
+    coverTitlePosition: "Position des Titels",
+    coverDescriptionPosition: "Beschreibung Position",
     names: {
       default: "Vorgabe",
       sharp: "Scharf",
@@ -1318,3 +1352,37 @@ editorLocalization.locales["de"] = germanTranslation;
 // pe.markRequired: "Mark as required" => "Als erforderlich markieren"
 // pe.removeRequiredMark: "Remove the required mark" => "Entfernen Sie die erforderliche Markierung"
 // p.resetValueIf: "Reset value if" => "Wert zurücksetzen, wenn"
+// lg.question_setValueName: "Set question value" => "Festlegen des Fragewerts"
+// lg.column_resetValueName: "Reset column value" => "Spaltenwert zurücksetzen"
+// lg.column_setValueName: "Set column value" => "Festlegen des Spaltenwerts"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ein Ausdruck, dessen Ergebnis der Zielfrage zugewiesen wird."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Wert setzen, wenn"
+// theme.groupHeader: "Header" => "Kopfball"
+// theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
+// theme.coverOverlapEnabled: "Overlap" => "Überlappung"
+// theme.backgroundImageFitFill: "Stretch" => "Strecken"
+// theme.backgroundImageFitTile: "Tile" => "Fliese"
+// theme.headerView: "View" => "Ansehen"
+// theme.headerViewBasic: "Basic" => "Grundlegend"
+// theme.headerViewAdvanced: "Advanced" => "Fortgeschritten"
+// theme.coverInheritWidthFrom: "Content area width" => "Breite des Inhaltsbereichs"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Wie Umfrage"
+// theme.coverInheritWidthFromPage: "Fit to page" => "An Seite anpassen"
+// theme.coverTextAreaWidth: "Text width" => "Textbreite"
+// theme.coverBackgroundColorSwitch: "Background color" => "Hintergrundfarbe"
+// theme.coverBackgroundColorNone: "None" => "Nichts"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Akzentfarbe"
+// theme.coverBackgroundColorCustom: "Custom" => "Gewohnheit"
+// theme.horizontalAlignmentLeft: "Left" => "Links"
+// theme.horizontalAlignmentCenter: "Center" => "Mitte"
+// theme.horizontalAlignmentRight: "Right" => "Rechts"
+// theme.verticalAlignmentTop: "Top" => "Nach oben"
+// theme.verticalAlignmentMiddle: "Middle" => "Mitte"
+// theme.verticalAlignmentBottom: "Bottom" => "Unteres"
+// theme.logoPosition: "Logo Position" => "Position des Logos"
+// theme.coverTitlePosition: "Title Position" => "Position des Titels"
+// theme.coverDescriptionPosition: "Description Position" => "Beschreibung Position"

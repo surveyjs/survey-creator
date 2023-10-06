@@ -169,10 +169,12 @@ export var nlStrings = {
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
       question_resetValueName: "Vraagwaarde opnieuw instellen",
+      question_setValueName: "Vraagwaarde instellen",
       column_visibilityName: "Kolom weergeven (verbergen)",
       column_enableName: "Kolom Inschakelen (uitschakelen)",
       column_requireName: "Kolom verplicht maken",
-      column_resetValue: "Kolomwaarde opnieuw instellen",
+      column_resetValueName: "Kolomwaarde opnieuw instellen",
+      column_setValueName: "Kolomwaarde instellen",
       trigger_completeName: "Volledige enquête",
       trigger_setvalueName: "Stel vraagwaarde in",
       trigger_copyvalueName: "Kopieer de vraagwaarde",
@@ -202,6 +204,7 @@ export var nlStrings = {
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", //{0} column name, {1} question name
       column_enableText: "Kolom {0} van vraag maken {1} inschakelen", //{0} column name, {1} question name
       column_requireText: "Kolom {0} met vraag {1} verplicht maken", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "duidelijke vraagwaarde: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var nlStrings = {
       imageHeight: "Afbeeldingshoogte (in css-geaccepteerde waarden)",
       imageWidth: "Afbeeldingsbreedte (in css-geaccepteerde waarden)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Tijdslimiet om de pagina te voltooien (in seconden)"
     },
     question: {
@@ -918,6 +926,7 @@ export var nlStrings = {
     defaultValueExpression: "Standaardwaarde-expressie",
     requiredIf: "Vereist als",
     resetValueIf: "Waarde opnieuw instellen als",
+    setValueIf: "Stel de waarde in als",
     validators: "Validators",
     bindings: "Bindings",
     renderAs: "Renderen als",
@@ -994,6 +1003,7 @@ export var nlStrings = {
     "--base-unit": "Basiseenheid",
     groupGeneral: "Algemeen",
     groupAdvanced: "Geavanceerd",
+    groupHeader: "Rubriek",
     themeName: "Thema",
     themeMode: "Uiterlijk van de vraag",
     themeModePanels: "Verstek",
@@ -1004,11 +1014,15 @@ export var nlStrings = {
     primaryDefaultColor: "Verstek",
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
+    coverTitleForecolor: "Voorkleur titel",
+    coverOverlapEnabled: "Overlappen",
     backgroundDimColor: "Achtergrondkleur",
     backgroundImage: "Achtergrondafbeelding",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Bedekken",
     backgroundImageFitContain: "Bevatten",
+    backgroundImageFitFill: "Strekken",
+    backgroundImageFitTile: "Tegel",
     backgroundOpacity: "Dekking",
     backgroundImageAttachmentFixed: "Vast",
     backgroundImageAttachmentScroll: "Scrollen",
@@ -1053,6 +1067,26 @@ export var nlStrings = {
     boxShadowInner: "Binnenste",
     questionShadow: "Schaduweffecten",
     editorShadow: "Schaduweffecten van invoerelementen",
+    headerView: "Bekijken",
+    headerViewBasic: "Basisch",
+    headerViewAdvanced: "Geavanceerd",
+    coverInheritWidthFrom: "Breedte van het inhoudsgebied",
+    coverInheritWidthFromSurvey: "Hetzelfde als enquête",
+    coverInheritWidthFromPage: "Aanpassen aan pagina",
+    coverTextAreaWidth: "Tekstbreedte",
+    coverBackgroundColorSwitch: "Achtergrondkleur",
+    coverBackgroundColorNone: "Geen",
+    coverBackgroundColorAccentColor: "Accentkleur",
+    coverBackgroundColorCustom: "Gewoonte",
+    horizontalAlignmentLeft: "Links",
+    horizontalAlignmentCenter: "Middelpunt",
+    horizontalAlignmentRight: "Rechts",
+    verticalAlignmentTop: "Boven",
+    verticalAlignmentMiddle: "Midden",
+    verticalAlignmentBottom: "Bodem",
+    logoPosition: "Logo positie",
+    coverTitlePosition: "Titel positie",
+    coverDescriptionPosition: "Beschrijving Positie",
     names: {
       default: "Verstek",
       sharp: "Scherp",
@@ -1575,3 +1609,37 @@ editorLocalization.locales["nl"] = nlStrings;
 // pe.markRequired: "Mark as required" => "Markeren zoals vereist"
 // pe.removeRequiredMark: "Remove the required mark" => "Verwijder de vereiste markering"
 // p.resetValueIf: "Reset value if" => "Waarde opnieuw instellen als"
+// lg.question_setValueName: "Set question value" => "Vraagwaarde instellen"
+// lg.column_resetValueName: "Reset column value" => "Kolomwaarde opnieuw instellen"
+// lg.column_setValueName: "Set column value" => "Kolomwaarde instellen"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Stel de waarde in als"
+// theme.groupHeader: "Header" => "Rubriek"
+// theme.coverTitleForecolor: "Title forecolor" => "Voorkleur titel"
+// theme.coverOverlapEnabled: "Overlap" => "Overlappen"
+// theme.backgroundImageFitFill: "Stretch" => "Strekken"
+// theme.backgroundImageFitTile: "Tile" => "Tegel"
+// theme.headerView: "View" => "Bekijken"
+// theme.headerViewBasic: "Basic" => "Basisch"
+// theme.headerViewAdvanced: "Advanced" => "Geavanceerd"
+// theme.coverInheritWidthFrom: "Content area width" => "Breedte van het inhoudsgebied"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Hetzelfde als enquête"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Aanpassen aan pagina"
+// theme.coverTextAreaWidth: "Text width" => "Tekstbreedte"
+// theme.coverBackgroundColorSwitch: "Background color" => "Achtergrondkleur"
+// theme.coverBackgroundColorNone: "None" => "Geen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentkleur"
+// theme.coverBackgroundColorCustom: "Custom" => "Gewoonte"
+// theme.horizontalAlignmentLeft: "Left" => "Links"
+// theme.horizontalAlignmentCenter: "Center" => "Middelpunt"
+// theme.horizontalAlignmentRight: "Right" => "Rechts"
+// theme.verticalAlignmentTop: "Top" => "Boven"
+// theme.verticalAlignmentMiddle: "Middle" => "Midden"
+// theme.verticalAlignmentBottom: "Bottom" => "Bodem"
+// theme.logoPosition: "Logo Position" => "Logo positie"
+// theme.coverTitlePosition: "Title Position" => "Titel positie"
+// theme.coverDescriptionPosition: "Description Position" => "Beschrijving Positie"

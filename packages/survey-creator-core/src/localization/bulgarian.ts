@@ -169,10 +169,12 @@ export var bgStrings = {
       question_enableName: "Активиране (деактивиране) на въпрос",
       question_requireName: "Задай въпроса като задължителен.",
       question_resetValueName: "Нулиране на стойността на въпроса",
+      question_setValueName: "Задаване на стойност на въпрос",
       column_visibilityName: "Показване (скриване) на колона",
       column_enableName: "Активиране (деактивиране) на колона",
       column_requireName: "Задай колоната като задължителна.",
-      column_resetValue: "Нулиране на стойността на колона",
+      column_resetValueName: "Нулиране на стойността на колона",
+      column_setValueName: "Задаване на стойност на колона",
       trigger_completeName: "Попълнена анкета",
       trigger_setvalueName: "Задаване на отговор",
       trigger_copyvalueName: "Копиране на отговор",
@@ -202,6 +204,7 @@ export var bgStrings = {
       column_visibilityText: "направи колона {0} на въпрос {1} видима", //{0} column name, {1} question name
       column_enableText: "направи колона {0} на въпрос {1} активна", //{0} column name, {1} question name
       column_requireText: "направи колона {0} на въпрос {1} задължителна", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
       trigger_completeText: "анкетата е завършена",
       trigger_setvalueText: "задай на въпрос: {0} стойност {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "ясна стойност на въпроса: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var bgStrings = {
       imageHeight: "Височина на изображението (в стойности, допустими от CSS)",
       imageWidth: "Вирочина на изображението (в стойности, допустими от CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Заглавие"
+    },
     page: {
+      title: "Заглавие",
       maxTimeToFinish: "Времево ограничение за завършване на страницата (в секунди)"
     },
     question: {
@@ -918,6 +926,7 @@ export var bgStrings = {
     defaultValueExpression: "Стойност по подразбиране на израза",
     requiredIf: "Задължителен, ако",
     resetValueIf: "Нулиране на стойността, ако",
+    setValueIf: "Задайте стойност, ако",
     validators: "Валидатори",
     bindings: "Обвързване",
     renderAs: "Представяне като",
@@ -994,6 +1003,7 @@ export var bgStrings = {
     "--base-unit": "Базова единица",
     groupGeneral: "Общ",
     groupAdvanced: "Разширен",
+    groupHeader: "Заглавка",
     themeName: "Тема",
     themeMode: "Режими",
     themeModePanels: "Панели",
@@ -1004,11 +1014,15 @@ export var bgStrings = {
     primaryDefaultColor: "По подразбиране",
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
+    coverTitleForecolor: "Цвят на предния план на заглавието",
+    coverOverlapEnabled: "Припокриване",
     backgroundDimColor: "Цвят на фона",
     backgroundImage: "Фоново изображение",
     backgroundImageFitAuto: "Автоматичен",
     backgroundImageFitCover: "Корица",
     backgroundImageFitContain: "Съдържание",
+    backgroundImageFitFill: "Участък",
+    backgroundImageFitTile: "Плочки",
     backgroundOpacity: "Непрозрачност",
     backgroundImageAttachmentFixed: "Неподвижен",
     backgroundImageAttachmentScroll: "Свитък",
@@ -1053,6 +1067,26 @@ export var bgStrings = {
     boxShadowInner: "Вътрешен",
     questionShadow: "Граница на панела с въпроси / Сянка",
     editorShadow: "Граница на редактора / Сянка",
+    headerView: "Изглед",
+    headerViewBasic: "Основен",
+    headerViewAdvanced: "Напреднал",
+    coverInheritWidthFrom: "Ширина на областта на съдържанието",
+    coverInheritWidthFromSurvey: "Същото като проучването",
+    coverInheritWidthFromPage: "Побери в страницата",
+    coverTextAreaWidth: "Ширина на текста",
+    coverBackgroundColorSwitch: "Цвят на фона",
+    coverBackgroundColorNone: "Никой",
+    coverBackgroundColorAccentColor: "Цвят за акцентиране",
+    coverBackgroundColorCustom: "Обичай",
+    horizontalAlignmentLeft: "Ляво",
+    horizontalAlignmentCenter: "Център",
+    horizontalAlignmentRight: "Дясно",
+    verticalAlignmentTop: "Връх",
+    verticalAlignmentMiddle: "Среда",
+    verticalAlignmentBottom: "Дъно",
+    logoPosition: "Позиция на емблемата",
+    coverTitlePosition: "Позиция на заглавието",
+    coverDescriptionPosition: "Описание Позиция",
     names: {
       default: "По подразбиране",
       sharp: "Остър",
@@ -1146,3 +1180,36 @@ editorLocalization.locales["bg"] = bgStrings;
 // pe.markRequired: "Mark as required" => "Маркирай както се изисква"
 // pe.removeRequiredMark: "Remove the required mark" => "Премахване на необходимия знак"
 // p.resetValueIf: "Reset value if" => "Нулиране на стойността, ако"
+
+// lg.question_setValueName: "Set question value" => "Задаване на стойност на въпрос"
+// lg.column_resetValueName: "Reset column value" => "Нулиране на стойността на колона"
+// lg.column_setValueName: "Set column value" => "Задаване на стойност на колона"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Израз, чийто резултат ще бъде присвоен на целевия въпрос."
+// survey.title: "Title" => "Заглавие"
+// page.title: "Title" => "Заглавие"
+// p.setValueIf: "Set value if" => "Задайте стойност, ако"
+// theme.groupHeader: "Header" => "Заглавка"
+// theme.coverTitleForecolor: "Title forecolor" => "Цвят на предния план на заглавието"
+// theme.coverOverlapEnabled: "Overlap" => "Припокриване"
+// theme.backgroundImageFitFill: "Stretch" => "Участък"
+// theme.backgroundImageFitTile: "Tile" => "Плочки"
+// theme.headerView: "View" => "Изглед"
+// theme.headerViewBasic: "Basic" => "Основен"
+// theme.headerViewAdvanced: "Advanced" => "Напреднал"
+// theme.coverInheritWidthFrom: "Content area width" => "Ширина на областта на съдържанието"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Същото като проучването"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Побери в страницата"
+// theme.coverTextAreaWidth: "Text width" => "Ширина на текста"
+// theme.coverBackgroundColorSwitch: "Background color" => "Цвят на фона"
+// theme.coverBackgroundColorNone: "None" => "Никой"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Цвят за акцентиране"
+// theme.coverBackgroundColorCustom: "Custom" => "Обичай"
+// theme.horizontalAlignmentLeft: "Left" => "Ляво"
+// theme.horizontalAlignmentCenter: "Center" => "Център"
+// theme.horizontalAlignmentRight: "Right" => "Дясно"
+// theme.verticalAlignmentTop: "Top" => "Връх"
+// theme.verticalAlignmentMiddle: "Middle" => "Среда"
+// theme.verticalAlignmentBottom: "Bottom" => "Дъно"
+// theme.logoPosition: "Logo Position" => "Позиция на емблемата"
+// theme.coverTitlePosition: "Title Position" => "Позиция на заглавието"
+// theme.coverDescriptionPosition: "Description Position" => "Описание Позиция"

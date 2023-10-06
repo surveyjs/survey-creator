@@ -169,10 +169,12 @@ var spanishTranslation = {
       question_enableName: "Pregunta habilitar / deshabilitar",
       question_requireName: "Pregunta opcional requerida",
       question_resetValueName: "Restablecer valor de pregunta",
+      question_setValueName: "Establecer el valor de la pregunta",
       column_visibilityName: "Mostrar (ocultar) columna",
       column_enableName: "Habilitar (deshabilitar) columna",
       column_requireName: "Hacer columna requerida",
-      column_resetValue: "Restablecer el valor de la columna",
+      column_resetValueName: "Restablecer valor de columna",
+      column_setValueName: "Establecer el valor de la columna",
       trigger_completeName: "Encuesta completa",
       trigger_setvalueName: "Establecer valor de la pregunta",
       trigger_copyvalueName: "Copiar valor de la pregunta",
@@ -202,6 +204,7 @@ var spanishTranslation = {
       column_visibilityText: "hacer la columna {0} de la pregunta {1} visible", //{0} column name, {1} question name
       column_enableText: "hacer la columna {0} de la pregunta {1} activa", //{0} column name, {1} question name
       column_requireText: "hacer la columna {0} de la pregunta {1} requerida", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Una expresión cuyo resultado se asignará a la pregunta de destino.",
       trigger_completeText: "La encuesta se completa",
       trigger_setvalueText: "En cuestión: {0} valor {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valor de pregunta claro: {0}", //{0} question name
@@ -415,7 +418,12 @@ var spanishTranslation = {
       imageHeight: "Altura de la imagen (en valores aceptados por CSS)",
       imageWidth: "Ancho de imagen (en valores aceptados por CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Título"
+    },
     page: {
+      title: "Título",
       maxTimeToFinish: "Tiempo límite para finalizar la página (en segundos)"
     },
     question: {
@@ -918,6 +926,7 @@ var spanishTranslation = {
     defaultValueExpression: "Expresión de valor predeterminada",
     requiredIf: "Requerido si",
     resetValueIf: "Restablecer valor si",
+    setValueIf: "Establezca el valor si",
     validators: "Validadores",
     bindings: "Enlaces",
     renderAs: "Renderizar como",
@@ -994,6 +1003,7 @@ var spanishTranslation = {
     "--base-unit": "Unidad base",
     groupGeneral: "General",
     groupAdvanced: "Avanzado",
+    groupHeader: "Encabezado",
     themeName: "Tema",
     themeMode: "Apariencia de la pregunta",
     themeModePanels: "Predeterminado",
@@ -1004,11 +1014,15 @@ var spanishTranslation = {
     primaryDefaultColor: "Predeterminado",
     primaryDarkColor: "Cernerse",
     primaryLightColor: "Seleccionado",
+    coverTitleForecolor: "Título de color anterior",
+    coverOverlapEnabled: "Solapar",
     backgroundDimColor: "Color de fondo",
     backgroundImage: "Imagen de fondo",
     backgroundImageFitAuto: "Automático",
     backgroundImageFitCover: "Cubrir",
     backgroundImageFitContain: "Contener",
+    backgroundImageFitFill: "Elasticidad",
+    backgroundImageFitTile: "Teja",
     backgroundOpacity: "Opacidad",
     backgroundImageAttachmentFixed: "Fijo",
     backgroundImageAttachmentScroll: "Pergamino",
@@ -1053,6 +1067,26 @@ var spanishTranslation = {
     boxShadowInner: "Interior",
     questionShadow: "Efectos de sombra",
     editorShadow: "Efectos de sombra del elemento de entrada",
+    headerView: "Vista",
+    headerViewBasic: "Básico",
+    headerViewAdvanced: "Avanzado",
+    coverInheritWidthFrom: "Ancho del área de contenido",
+    coverInheritWidthFromSurvey: "Igual que la encuesta",
+    coverInheritWidthFromPage: "Ajustar a la página",
+    coverTextAreaWidth: "Ancho del texto",
+    coverBackgroundColorSwitch: "Color de fondo",
+    coverBackgroundColorNone: "Ninguno",
+    coverBackgroundColorAccentColor: "Color de acento",
+    coverBackgroundColorCustom: "Costumbre",
+    horizontalAlignmentLeft: "Izquierda",
+    horizontalAlignmentCenter: "Centro",
+    horizontalAlignmentRight: "Derecha",
+    verticalAlignmentTop: "Arriba",
+    verticalAlignmentMiddle: "Medio",
+    verticalAlignmentBottom: "Fondo",
+    logoPosition: "Posición del logotipo",
+    coverTitlePosition: "Posición del título",
+    coverDescriptionPosition: "Descripción Posición",
     names: {
       default: "Predeterminado",
       sharp: "Afilado",
@@ -1365,3 +1399,36 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pe.markRequired: "Mark as required" => "Marcar según sea necesario"
 // pe.removeRequiredMark: "Remove the required mark" => "Quitar la marca requerida"
 // p.resetValueIf: "Reset value if" => "Restablecer valor si"
+// lg.question_setValueName: "Set question value" => "Establecer el valor de la pregunta"
+// lg.column_resetValueName: "Reset column value" => "Restablecer valor de columna"
+// lg.column_setValueName: "Set column value" => "Establecer el valor de la columna"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Una expresión cuyo resultado se asignará a la pregunta de destino."
+// lg.expressionSetup: "" => ""
+// survey.title: "Title" => "Título"
+// page.title: "Title" => "Título"
+// p.setValueIf: "Set value if" => "Establezca el valor si"
+// theme.groupHeader: "Header" => "Encabezado"
+// theme.coverTitleForecolor: "Title forecolor" => "Título de color anterior"
+// theme.coverOverlapEnabled: "Overlap" => "Solapar"
+// theme.backgroundImageFitFill: "Stretch" => "Elasticidad"
+// theme.backgroundImageFitTile: "Tile" => "Teja"
+// theme.headerView: "View" => "Vista"
+// theme.headerViewBasic: "Basic" => "Básico"
+// theme.headerViewAdvanced: "Advanced" => "Avanzado"
+// theme.coverInheritWidthFrom: "Content area width" => "Ancho del área de contenido"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Igual que la encuesta"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar a la página"
+// theme.coverTextAreaWidth: "Text width" => "Ancho del texto"
+// theme.coverBackgroundColorSwitch: "Background color" => "Color de fondo"
+// theme.coverBackgroundColorNone: "None" => "Ninguno"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Color de acento"
+// theme.coverBackgroundColorCustom: "Custom" => "Costumbre"
+// theme.horizontalAlignmentLeft: "Left" => "Izquierda"
+// theme.horizontalAlignmentCenter: "Center" => "Centro"
+// theme.horizontalAlignmentRight: "Right" => "Derecha"
+// theme.verticalAlignmentTop: "Top" => "Arriba"
+// theme.verticalAlignmentMiddle: "Middle" => "Medio"
+// theme.verticalAlignmentBottom: "Bottom" => "Fondo"
+// theme.logoPosition: "Logo Position" => "Posición del logotipo"
+// theme.coverTitlePosition: "Title Position" => "Posición del título"
+// theme.coverDescriptionPosition: "Description Position" => "Descripción Posición"

@@ -169,10 +169,12 @@ export var koreanStrings = {
       question_enableName: "사용(사용 안 함) 질문",
       question_requireName: "질문 필수 항목 만들기",
       question_resetValueName: "질문 값 재설정",
+      question_setValueName: "질문 값 설정",
       column_visibilityName: "열 표시(숨기기)",
       column_enableName: "사용(사용 안 함) 열",
       column_requireName: "열을 필수로 설정",
-      column_resetValue: "열 값 재설정",
+      column_resetValueName: "열 값 재설정",
+      column_setValueName: "열 값 설정",
       trigger_completeName: "설문 조사 완료",
       trigger_setvalueName: "정답 설정",
       trigger_copyvalueName: "답변 복사",
@@ -202,6 +204,7 @@ export var koreanStrings = {
       column_visibilityText: "질문의 열 {0} {1} 표시", //{0} column name, {1} question name
       column_enableText: "질문의 열 {0} {1} 사용하도록 설정", //{0} column name, {1} question name
       column_requireText: "질문의 열 {0} {1} 필수", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " 결과가 대상 질문에 할당되는 식입니다.",
       trigger_completeText: "조사가 완료됩니다",
       trigger_setvalueText: "질문으로 설정: {0} 값 {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "명확한 질문 값: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var koreanStrings = {
       imageHeight: "이미지 높이(CSS에서 허용하는 값)",
       imageWidth: "이미지 너비(CSS에서 허용하는 값)"
     },
+    // survey templates
+    survey: {
+      title: "타이틀"
+    },
     page: {
+      title: "타이틀",
       maxTimeToFinish: "페이지 완료 시간 제한(초)"
     },
     question: {
@@ -918,6 +926,7 @@ export var koreanStrings = {
     defaultValueExpression: "기본값 표현식",
     requiredIf: "다음과 같은 경우 필수입니다.",
     resetValueIf: "다음과 같은 경우 값을 재설정합니다.",
+    setValueIf: "다음과 같은 경우 값을 설정합니다.",
     validators: "유효성 검사기",
     bindings: "바인딩",
     renderAs: "렌더링 형식",
@@ -994,6 +1003,7 @@ export var koreanStrings = {
     "--base-unit": "베이스 유닛",
     groupGeneral: "일반",
     groupAdvanced: "고급",
+    groupHeader: "머리글",
     themeName: "주제",
     themeMode: "질문 모양",
     themeModePanels: "기본값",
@@ -1004,11 +1014,15 @@ export var koreanStrings = {
     primaryDefaultColor: "기본값",
     primaryDarkColor: "호버",
     primaryLightColor: "선택한",
+    coverTitleForecolor: "제목 forecolor",
+    coverOverlapEnabled: "겹침",
     backgroundDimColor: "배경색",
     backgroundImage: "배경 이미지",
     backgroundImageFitAuto: "자동",
     backgroundImageFitCover: "표지",
     backgroundImageFitContain: "포함하다",
+    backgroundImageFitFill: "뻗다",
+    backgroundImageFitTile: "타일",
     backgroundOpacity: "불투명도",
     backgroundImageAttachmentFixed: "부정하게 결정된",
     backgroundImageAttachmentScroll: "스크롤",
@@ -1053,6 +1067,26 @@ export var koreanStrings = {
     boxShadowInner: "내부",
     questionShadow: "그림자 효과",
     editorShadow: "입력 요소 그림자 효과",
+    headerView: "보기",
+    headerViewBasic: "기초의",
+    headerViewAdvanced: "고급",
+    coverInheritWidthFrom: "콘텐츠 영역 너비",
+    coverInheritWidthFromSurvey: "설문조사와 동일",
+    coverInheritWidthFromPage: "페이지에 맞추기",
+    coverTextAreaWidth: "텍스트 너비",
+    coverBackgroundColorSwitch: "배경색",
+    coverBackgroundColorNone: "없음",
+    coverBackgroundColorAccentColor: "강조 색상",
+    coverBackgroundColorCustom: "관습",
+    horizontalAlignmentLeft: "왼쪽",
+    horizontalAlignmentCenter: "중",
+    horizontalAlignmentRight: "오른쪽",
+    verticalAlignmentTop: "맨 위로",
+    verticalAlignmentMiddle: "중간",
+    verticalAlignmentBottom: "밑바닥",
+    logoPosition: "로고 위치",
+    coverTitlePosition: "타이틀 포지션",
+    coverDescriptionPosition: "설명 위치",
     names: {
       default: "기본값",
       sharp: "날카로운",
@@ -1799,3 +1833,38 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pe.markRequired: "Mark as required" => "필요에 따라 표시"
 // pe.removeRequiredMark: "Remove the required mark" => "필요한 표시를 제거하십시오"
 // p.resetValueIf: "Reset value if" => "다음과 같은 경우 값을 재설정합니다."
+
+// lg.question_setValueName: "Set question value" => "질문 값 설정"
+// lg.column_resetValueName: "Reset column value" => "열 값 재설정"
+// lg.column_setValueName: "Set column value" => "열 값 설정"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " 결과가 대상 질문에 할당되는 식입니다."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "타이틀"
+// page.title: "Title" => "타이틀"
+// p.setValueIf: "Set value if" => "다음과 같은 경우 값을 설정합니다."
+// theme.groupHeader: "Header" => "머리글"
+// theme.coverTitleForecolor: "Title forecolor" => "제목 forecolor"
+// theme.coverOverlapEnabled: "Overlap" => "겹침"
+// theme.backgroundImageFitFill: "Stretch" => "뻗다"
+// theme.backgroundImageFitTile: "Tile" => "타일"
+// theme.headerView: "View" => "보기"
+// theme.headerViewBasic: "Basic" => "기초의"
+// theme.headerViewAdvanced: "Advanced" => "고급"
+// theme.coverInheritWidthFrom: "Content area width" => "콘텐츠 영역 너비"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "설문조사와 동일"
+// theme.coverInheritWidthFromPage: "Fit to page" => "페이지에 맞추기"
+// theme.coverTextAreaWidth: "Text width" => "텍스트 너비"
+// theme.coverBackgroundColorSwitch: "Background color" => "배경색"
+// theme.coverBackgroundColorNone: "None" => "없음"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "강조 색상"
+// theme.coverBackgroundColorCustom: "Custom" => "관습"
+// theme.horizontalAlignmentLeft: "Left" => "왼쪽"
+// theme.horizontalAlignmentCenter: "Center" => "중"
+// theme.horizontalAlignmentRight: "Right" => "오른쪽"
+// theme.verticalAlignmentTop: "Top" => "맨 위로"
+// theme.verticalAlignmentMiddle: "Middle" => "중간"
+// theme.verticalAlignmentBottom: "Bottom" => "밑바닥"
+// theme.logoPosition: "Logo Position" => "로고 위치"
+// theme.coverTitlePosition: "Title Position" => "타이틀 포지션"
+// theme.coverDescriptionPosition: "Description Position" => "설명 위치"

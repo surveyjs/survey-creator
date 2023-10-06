@@ -169,10 +169,12 @@ export var nbStrings = {
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
       question_resetValueName: "Tilbakestille spørsmålsverdien",
+      question_setValueName: "Angi spørsmålsverdi",
       column_visibilityName: "Vis kolonne (skjul)",
       column_enableName: "Aktivere (deaktivere) kolonne",
       column_requireName: "Gjøre kolonne obligatorisk",
-      column_resetValue: "Tilbakestille kolonneverdi",
+      column_resetValueName: "Tilbakestille kolonneverdi",
+      column_setValueName: "Angi kolonneverdi",
       trigger_completeName: "Fullfør skjema",
       trigger_setvalueName: "Angi spørsmålsnavn",
       trigger_copyvalueName: "Kopier spørsmålsverdi",
@@ -202,6 +204,7 @@ export var nbStrings = {
       column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
       column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
       column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Et uttrykk der resultatet tilordnes målspørsmålet.",
       trigger_completeText: "Skjemaet blir fullført",
       trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klar spørsmålsverdi: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var nbStrings = {
       imageHeight: "Bildehøyde (i CSS-godkjente verdier)",
       imageWidth: "Bildebredde (i CSS-godkjente verdier)"
     },
+    // survey templates
+    survey: {
+      title: "Tittel"
+    },
     page: {
+      title: "Tittel",
       maxTimeToFinish: "Tidsbegrensning for å fullføre siden (i sekunder)"
     },
     question: {
@@ -918,6 +926,7 @@ export var nbStrings = {
     defaultValueExpression: "Uttrykk for standardverdi",
     requiredIf: "requiredIf",
     resetValueIf: "Tilbakestill verdien hvis",
+    setValueIf: "Angi verdi hvis",
     validators: "validators",
     bindings: "Bindinger",
     renderAs: "Gjengi som",
@@ -994,6 +1003,7 @@ export var nbStrings = {
     "--base-unit": "Basisenhet",
     groupGeneral: "Generelt",
     groupAdvanced: "Avansert",
+    groupHeader: "Topptekst",
     themeName: "Tema",
     themeMode: "Spørsmål utseende",
     themeModePanels: "Standard",
@@ -1004,11 +1014,15 @@ export var nbStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sveve",
     primaryLightColor: "Utvalgt",
+    coverTitleForecolor: "Tittel forfarge",
+    coverOverlapEnabled: "Overlappe",
     backgroundDimColor: "Bakgrunnsfarge",
     backgroundImage: "Bakgrunnsbilde",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Lokk",
     backgroundImageFitContain: "Inneholde",
+    backgroundImageFitFill: "Strekning",
+    backgroundImageFitTile: "Flis",
     backgroundOpacity: "Ugjennomsiktighet",
     backgroundImageAttachmentFixed: "Fast",
     backgroundImageAttachmentScroll: "Bla",
@@ -1053,6 +1067,26 @@ export var nbStrings = {
     boxShadowInner: "Indre",
     questionShadow: "Skygge effekter",
     editorShadow: "Skyggeeffekter for inndataelement",
+    headerView: "Utsikt",
+    headerViewBasic: "Grunnleggende",
+    headerViewAdvanced: "Avansert",
+    coverInheritWidthFrom: "Bredde på innholdsområdet",
+    coverInheritWidthFromSurvey: "Samme som undersøkelse",
+    coverInheritWidthFromPage: "Tilpass til side",
+    coverTextAreaWidth: "Tekstbredde",
+    coverBackgroundColorSwitch: "Bakgrunnsfarge",
+    coverBackgroundColorNone: "Ingen",
+    coverBackgroundColorAccentColor: "Uthevingsfarge",
+    coverBackgroundColorCustom: "Skikk",
+    horizontalAlignmentLeft: "Venstre",
+    horizontalAlignmentCenter: "Sentrum",
+    horizontalAlignmentRight: "Høyre",
+    verticalAlignmentTop: "Topp",
+    verticalAlignmentMiddle: "Midt",
+    verticalAlignmentBottom: "Bunn",
+    logoPosition: "Logo Posisjon",
+    coverTitlePosition: "Tittel Posisjon",
+    coverDescriptionPosition: "Beskrivelse Posisjon",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1599,3 +1633,37 @@ editorLocalization.locales["nb"] = nbStrings;
 // pe.markRequired: "Mark as required" => "Merk etter behov"
 // pe.removeRequiredMark: "Remove the required mark" => "Fjern ønsket merke"
 // p.resetValueIf: "Reset value if" => "Tilbakestill verdien hvis"
+// lg.question_setValueName: "Set question value" => "Angi spørsmålsverdi"
+// lg.column_resetValueName: "Reset column value" => "Tilbakestille kolonneverdi"
+// lg.column_setValueName: "Set column value" => "Angi kolonneverdi"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Et uttrykk der resultatet tilordnes målspørsmålet."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Tittel"
+// page.title: "Title" => "Tittel"
+// p.setValueIf: "Set value if" => "Angi verdi hvis"
+// theme.groupHeader: "Header" => "Topptekst"
+// theme.coverTitleForecolor: "Title forecolor" => "Tittel forfarge"
+// theme.coverOverlapEnabled: "Overlap" => "Overlappe"
+// theme.backgroundImageFitFill: "Stretch" => "Strekning"
+// theme.backgroundImageFitTile: "Tile" => "Flis"
+// theme.headerView: "View" => "Utsikt"
+// theme.headerViewBasic: "Basic" => "Grunnleggende"
+// theme.headerViewAdvanced: "Advanced" => "Avansert"
+// theme.coverInheritWidthFrom: "Content area width" => "Bredde på innholdsområdet"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøkelse"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpass til side"
+// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrunnsfarge"
+// theme.coverBackgroundColorNone: "None" => "Ingen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Uthevingsfarge"
+// theme.coverBackgroundColorCustom: "Custom" => "Skikk"
+// theme.horizontalAlignmentLeft: "Left" => "Venstre"
+// theme.horizontalAlignmentCenter: "Center" => "Sentrum"
+// theme.horizontalAlignmentRight: "Right" => "Høyre"
+// theme.verticalAlignmentTop: "Top" => "Topp"
+// theme.verticalAlignmentMiddle: "Middle" => "Midt"
+// theme.verticalAlignmentBottom: "Bottom" => "Bunn"
+// theme.logoPosition: "Logo Position" => "Logo Posisjon"
+// theme.coverTitlePosition: "Title Position" => "Tittel Posisjon"
+// theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Posisjon"

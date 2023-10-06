@@ -169,10 +169,12 @@ var frenchTranslation = {
       question_enableName: "Activer/désactiver la question",
       question_requireName: "Rendre la question obligatoire",
       question_resetValueName: "Réinitialiser la valeur de la question",
+      question_setValueName: "Définir la valeur de la question",
       column_visibilityName: "Afficher/masquer la colonne",
       column_enableName: "Activer/désactiver la colonne",
       column_requireName: "Rendre la colonne obligatoire",
-      column_resetValue: "Réinitialiser la valeur de la colonne",
+      column_resetValueName: "Réinitialiser la valeur de la colonne",
+      column_setValueName: "Définition de la valeur de colonne",
       trigger_completeName: "Terminer le sondage",
       trigger_setvalueName: "Définir la valeur de la question",
       trigger_copyvalueName: "Copier la valeur de la question",
@@ -202,6 +204,7 @@ var frenchTranslation = {
       column_visibilityText: "Rendre visible les {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_enableText: "Activer la {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_requireText: "rendre obligatoire la colonne {0} de la question {1}", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Expression dont le résultat sera affecté à la question cible.",
       trigger_completeText: "Le sondage se termine.",
       trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valeur de la question claire : {0}", //{0} question name
@@ -415,12 +418,13 @@ var frenchTranslation = {
       imageHeight: "Hauteur de l’image (en valeurs acceptées par CSS)",
       imageWidth: "Largeur de l’image (en valeurs acceptées par CSS)"
     },
+    // survey templates
     survey: {
       title: "Titre du questionnaire"
     },
     page: {
       title: "Titre",
-      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)",
+      maxTimeToFinish: "Limite de temps pour terminer la page (en secondes)"
     },
     question: {
       page: "Page parent"
@@ -922,6 +926,7 @@ var frenchTranslation = {
     defaultValueExpression: "Expression de valeur par défaut",
     requiredIf: "Obligatoire si",
     resetValueIf: "Réinitialiser la valeur si",
+    setValueIf: "Définir la valeur si",
     validators: "Validateurs",
     bindings: "Liaisons",
     renderAs: "Rendre en tant que",
@@ -998,6 +1003,7 @@ var frenchTranslation = {
     "--base-unit": "Unité de base",
     groupGeneral: "Généralités",
     groupAdvanced: "Avancé",
+    groupHeader: "En-tête",
     themeName: "Thème",
     themeMode: "Apparence de la question",
     themeModePanels: "Par défaut",
@@ -1008,11 +1014,15 @@ var frenchTranslation = {
     primaryDefaultColor: "Faire défaut",
     primaryDarkColor: "Au survol",
     primaryLightColor: "Sélectionné",
+    coverTitleForecolor: "Précouleur du titre",
+    coverOverlapEnabled: "Chevauchement",
     backgroundDimColor: "Couleur d’arrière-plan",
     backgroundImage: "Image d’arrière-plan",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Remplir",
     backgroundImageFitContain: "Ajuster",
+    backgroundImageFitFill: "Étirer",
+    backgroundImageFitTile: "Carreau",
     backgroundOpacity: "Opacité",
     backgroundImageAttachmentFixed: "Fixe",
     backgroundImageAttachmentScroll: "Défilable",
@@ -1057,6 +1067,26 @@ var frenchTranslation = {
     boxShadowInner: "Intérieur",
     questionShadow: "Effets d’ombre",
     editorShadow: "Effets d’ombre du champ de réponse",
+    headerView: "Vue",
+    headerViewBasic: "Basique",
+    headerViewAdvanced: "Avancé",
+    coverInheritWidthFrom: "Largeur de la zone de contenu",
+    coverInheritWidthFromSurvey: "Identique à l’enquête",
+    coverInheritWidthFromPage: "Ajuster à la page",
+    coverTextAreaWidth: "Largeur du texte",
+    coverBackgroundColorSwitch: "Couleur d’arrière-plan",
+    coverBackgroundColorNone: "Aucun",
+    coverBackgroundColorAccentColor: "Couleur d’accentuation",
+    coverBackgroundColorCustom: "Coutume",
+    horizontalAlignmentLeft: "Gauche",
+    horizontalAlignmentCenter: "Centre",
+    horizontalAlignmentRight: "Droite",
+    verticalAlignmentTop: "Retour au début",
+    verticalAlignmentMiddle: "Milieu",
+    verticalAlignmentBottom: "Fond",
+    logoPosition: "Logo Position",
+    coverTitlePosition: "Position du titre",
+    coverDescriptionPosition: "Description du poste",
     names: {
       default: "Par défaut",
       sharp: "Tranchant",
@@ -1661,3 +1691,35 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pe.markRequired: "Mark as required" => "Marquer au besoin"
 // pe.removeRequiredMark: "Remove the required mark" => "Supprimer la marque requise"
 // p.resetValueIf: "Reset value if" => "Réinitialiser la valeur si"
+// lg.question_setValueName: "Set question value" => "Définir la valeur de la question"
+// lg.column_resetValueName: "Reset column value" => "Réinitialiser la valeur de la colonne"
+// lg.column_setValueName: "Set column value" => "Définition de la valeur de colonne"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Expression dont le résultat sera affecté à la question cible."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// p.setValueIf: "Set value if" => "Définir la valeur si"
+// theme.groupHeader: "Header" => "En-tête"
+// theme.coverTitleForecolor: "Title forecolor" => "Précouleur du titre"
+// theme.coverOverlapEnabled: "Overlap" => "Chevauchement"
+// theme.backgroundImageFitFill: "Stretch" => "Étirer"
+// theme.backgroundImageFitTile: "Tile" => "Carreau"
+// theme.headerView: "View" => "Vue"
+// theme.headerViewBasic: "Basic" => "Basique"
+// theme.headerViewAdvanced: "Advanced" => "Avancé"
+// theme.coverInheritWidthFrom: "Content area width" => "Largeur de la zone de contenu"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Identique à l’enquête"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Ajuster à la page"
+// theme.coverTextAreaWidth: "Text width" => "Largeur du texte"
+// theme.coverBackgroundColorSwitch: "Background color" => "Couleur d’arrière-plan"
+// theme.coverBackgroundColorNone: "None" => "Aucun"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Couleur d’accentuation"
+// theme.coverBackgroundColorCustom: "Custom" => "Coutume"
+// theme.horizontalAlignmentLeft: "Left" => "Gauche"
+// theme.horizontalAlignmentCenter: "Center" => "Centre"
+// theme.horizontalAlignmentRight: "Right" => "Droite"
+// theme.verticalAlignmentTop: "Top" => "Retour au début"
+// theme.verticalAlignmentMiddle: "Middle" => "Milieu"
+// theme.verticalAlignmentBottom: "Bottom" => "Fond"
+// theme.logoPosition: "Logo Position" => "Logo Position"
+// theme.coverTitlePosition: "Title Position" => "Position du titre"
+// theme.coverDescriptionPosition: "Description Position" => "Description du poste"
