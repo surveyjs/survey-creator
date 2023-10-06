@@ -206,7 +206,7 @@ export var enStrings = {
       column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
       column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
-      setValueExpressionPlaceholder: "Expression result set to the target question",
+      setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question.",
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name

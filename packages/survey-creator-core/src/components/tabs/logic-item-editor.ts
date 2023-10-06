@@ -164,17 +164,6 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               visible: false
             },
             {
-              name: "setValueIfPanel",
-              type: "panel",
-              elements: [{
-                name: "setValueExpression",
-                type: "comment",
-                titleLocation: "hidden",
-                startWithNewLine: false,
-                visible: false
-              }]
-            },
-            {
               name: "triggerQuestionsPanel",
               type: "panel",
               startWithNewLine: false,
@@ -195,6 +184,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               name: "triggerEditorPanel",
               type: "panel",
               visible: false
+            },
+            {
+              name: "setValueIfPanel",
+              visible: false,
+              type: "panel",
+              elements: [{
+                name: "setValueExpression",
+                type: "comment",
+                titleLocation: "hidden"
+              }]
             },
           ]
         }

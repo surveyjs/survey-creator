@@ -855,10 +855,11 @@ test("Setup setValueIf property in logic", () => {
   const logic = new SurveyLogicUI(survey);
   logic.addNew();
   logic.expressionEditor.text = "{q1} = 1";
-  var panel = logic.itemEditor.panels[0];
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
   panel.getQuestionByName("logicTypeName").value = "question_setValue";
   panel.getQuestionByName("elementSelector").value = "q2";
-  expect(panel.getQuestionByName("setValueExpression").visible).toBeTruthy();
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
   expect(panel.getQuestionByName("setValueExpression").placeholder).toBe("Expression result set to the target question");
   panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
   logic.itemEditor.apply();
@@ -876,21 +877,21 @@ test("Setup setValueExpression comment value", () => {
   const logic = new SurveyLogicUI(survey);
   logic.editItem(logic.items[0]);
   expect(logic.expressionEditor.text).toBe("{q1} = 1");
-  var panel = logic.itemEditor.panels[0];
+  const panel = logic.itemEditor.panels[0];
   expect(panel.getQuestionByName("logicTypeName").value).toBe("question_setValue");
   expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
-  expect(panel.getQuestionByName("setValueExpression").visible).toBeTruthy();
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
   expect(panel.getQuestionByName("setValueExpression").value).toBe("{q1} + 1");
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
   expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
-  expect(panel.getQuestionByName("setValueExpression").visible).toBeFalsy();
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
   expect(panel.getQuestionByName("setValueExpression").value).toBeFalsy();
   panel.getQuestionByName("logicTypeName").value = "question_setValue";
   expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
-  expect(panel.getQuestionByName("setValueExpression").visible).toBeTruthy();
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
   panel.getQuestionByName("logicTypeName").value = "question_resetValue";
   expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
-  expect(panel.getQuestionByName("setValueExpression").visible).toBeFalsy();
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
 });
 
 test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {

@@ -86,10 +86,9 @@ export class LogicActionModel extends LogicActionModelBase {
 export class LogicActionSetValueModel extends LogicActionModel {
   public updatePanelElements(selectedElement: string, choices: Array<ItemValue>): void {
     super.updatePanelElements(selectedElement, choices);
-    const question = this.panel.getQuestionByName("setValueExpression");
-    question.placeholder = editorLocalization.getString("ed.lg.setValueExpressionPlaceholder");
-    question.visible = true;
-    this.setValueExpressionValue(question);
+    this.getValueIfQuestion().placeholder = editorLocalization.getString("ed.lg.setValueExpressionPlaceholder");
+    this.getValueIfPanel().visible = true;
+    this.setValueExpressionValue();
   }
   public afterUpdateInitialLogicAction(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
@@ -97,17 +96,18 @@ export class LogicActionSetValueModel extends LogicActionModel {
       (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
     }
   }
-  private setValueExpressionValue(question: Question): void {
+  private setValueExpressionValue(): void {
     const selectedElement = this.getElementBySelectorName(this.panel);
     if(!!selectedElement) {
-      question.value = (<any>selectedElement).setValueExpression;
+      this.getValueIfQuestion().value = (<any>selectedElement).setValueExpression;
     }
   }
+  private getValueIfPanel(): IElement { return this.panel.getElementByName("setValueIfPanel"); }
+  private getValueIfQuestion(): Question { return this.panel.getQuestionByName("setValueExpression"); }
   public resetElements(): void {
     super.resetElements();
-    const question = this.panel.getQuestionByName("setValueExpression");
-    question.visible = false;
-    question.clearValue();
+    this.getValueIfPanel().visible = false;
+    this.getValueIfQuestion().clearValue();
   }
 }
 
