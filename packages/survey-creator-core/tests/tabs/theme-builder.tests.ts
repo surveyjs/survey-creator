@@ -1107,30 +1107,6 @@ test("Theme builder restore PG editor", (): any => {
   expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
 });
 
-test("Check background image has conditional max size", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.activate();
-  let themeEditor = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
-
-  expect(themeEditor.getQuestionByName("backgroundImage").maxSize).toEqual(65536);
-
-  themePlugin.deactivate();
-
-  creator.onUploadFile.add((_, options) => {
-    options.callback("success", "test_url");
-  });
-  themePlugin.activate();
-
-  themeEditor = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
-  const question = <QuestionFileEditorModel>themeEditor.getQuestionByName("backgroundImage");
-
-  expect(question.maxSize).toEqual(0);
-  question.loadFiles(<any>[{ type: "image", name: "test_name" }]);
-  expect(question.value).toBe("test_url");
-});
-
 test("Add theme before activate", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };

@@ -9,12 +9,16 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
   protected get questionFile(): QuestionFileEditorModel {
     return this.questionBase as QuestionFileEditorModel;
   }
+  protected getValueCore() {
+    return this.question.renderedValue;
+  }
   protected renderInput() {
     return (
       <>
         <input
           disabled={this.isDisplayMode}
           className={this.questionFile.cssClasses.control}
+          placeholder={this.questionFile.placeholder}
           ref={(input) => (this.setControl(input))}
           autoComplete="off"
           type="text"
