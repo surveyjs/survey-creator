@@ -1411,9 +1411,9 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
 
 }
 
-export class PropertyGridColorEditor extends PropertyGridEditor {
+export class PropertyGridEditorColor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return ["penColor", "backgroundColor"].indexOf(prop.name) > -1;
+    return prop.type == "color";
   }
   public getJSON(
     obj: Base,
@@ -1491,18 +1491,6 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     return this.updateMaxLength(prop, {
       type: "comment"
     });
-  }
-}
-export class PropertyGridEditorColor extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "color";
-  }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
-    return { type: "text", inputType: "color" };
   }
 }
 export class PropertyGridEditorStringArray extends PropertyGridEditor {
@@ -1794,7 +1782,6 @@ export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion 
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
-PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
@@ -1806,7 +1793,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-PropertyGridEditorCollection.register(new PropertyGridColorEditor());
+PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);
