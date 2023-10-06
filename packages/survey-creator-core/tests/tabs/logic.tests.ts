@@ -860,7 +860,7 @@ test("Setup setValueIf property in logic", () => {
   panel.getQuestionByName("logicTypeName").value = "question_setValue";
   panel.getQuestionByName("elementSelector").value = "q2";
   expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
-  expect(panel.getQuestionByName("setValueExpression").placeholder).toBe("Expression result set to the target question");
+  expect(panel.getQuestionByName("setValueExpression").placeholder).toBe("An expression whose result will be assigned to the target question.");
   panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
   logic.itemEditor.apply();
   logic.editableItem.apply("{q1} = 1");
