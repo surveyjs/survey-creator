@@ -168,11 +168,13 @@ var persianStrings = {
       question_visibilityName: " قابلیت رویت سوال",
       question_enableName: "فعال/غیرفعال کردن سوال ",
       question_requireName: "سوال اختیاری موردنیاز",
-      question_resetValue: "بازنشانی مقدار سؤال",
+      question_resetValueName: "بازنشانی مقدار سؤال",
+      question_setValueName: "تنظیم مقدار سؤال",
       column_visibilityName: "نمایش/پنهان کردن ستون",
       column_enableName: "فعال/غیرفعال کردن ستون",
       column_requireName: "ستون مورد نیاز است",
-      column_resetValue: "بازنشانی مقدار ستون",
+      column_resetValueName: "بازنشانی مقدار ستون",
+      column_setValueName: "تنظیم مقدار ستون",
       trigger_completeName: "تکمیل نظرسنجی",
       trigger_setvalueName: "تنظیم عنوان سوال",
       trigger_copyvalueName: "کپی مقدار سوال",
@@ -202,6 +204,7 @@ var persianStrings = {
       column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", //{0} column name, {1} question name
       column_enableText: "ستون {0} سوال {1} را فعال کنید", //{0} column name, {1} question name
       column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد.",
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "ارزش سوال روشن: {0}", //{0} question name
@@ -415,7 +418,12 @@ var persianStrings = {
       imageHeight: "ارتفاع تصویر (در مقادیر پذیرفته شده توسط CSS)",
       imageWidth: "عرض تصویر) در مقادیر پذیرفته شده CSS ("
     },
+    // survey templates
+    survey: {
+      title: "عنوان"
+    },
     page: {
+      title: "عنوان",
       maxTimeToFinish: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
     },
     question: {
@@ -918,6 +926,7 @@ var persianStrings = {
     defaultValueExpression: "عبارت مقدار پیشفرض",
     requiredIf: "اجبار اگر؟",
     resetValueIf: "بازنشانی مقدار اگر",
+    setValueIf: "تنظیم مقدار اگر",
     validators: "اعتبارسنج ها",
     bindings: "پیوندها",
     renderAs: "Render به عنوان",
@@ -994,6 +1003,7 @@ var persianStrings = {
     "--base-unit": "واحد پایه",
     groupGeneral: "عمومی",
     groupAdvanced: "پیشرفته",
+    groupHeader: "هدر",
     themeName: "تم",
     themeMode: "ظاهر سوال",
     themeModePanels: "پیش فرض",
@@ -1004,11 +1014,15 @@ var persianStrings = {
     primaryDefaultColor: "پیش فرض",
     primaryDarkColor: "شناور",
     primaryLightColor: "انتخاب",
+    coverTitleForecolor: "پیش زمینه عنوانcolor",
+    coverOverlapEnabled: "همپوشانی",
     backgroundDimColor: "رنگ پسزمینه",
     backgroundImage: "تصویر زمینه",
     backgroundImageFitAuto: "خودکار",
     backgroundImageFitCover: "پوشش",
     backgroundImageFitContain: "حاوی",
+    backgroundImageFitFill: "کشش",
+    backgroundImageFitTile: "کاشی",
     backgroundOpacity: "کدورت",
     backgroundImageAttachmentFixed: "ثابت",
     backgroundImageAttachmentScroll: "حرکت",
@@ -1053,6 +1067,26 @@ var persianStrings = {
     boxShadowInner: "درونی",
     questionShadow: "جلوه های سایه",
     editorShadow: "عناصر ورودی اثرات سایه",
+    headerView: "مشاهده",
+    headerViewBasic: "اساسی",
+    headerViewAdvanced: "پیشرفته",
+    coverInheritWidthFrom: "عرض منطقه محتوا",
+    coverInheritWidthFromSurvey: "همانند نظرسنجی",
+    coverInheritWidthFromPage: "متناسب با صفحه",
+    coverTextAreaWidth: "عرض متن",
+    coverBackgroundColorSwitch: "رنگ پسزمینه",
+    coverBackgroundColorNone: "هیچ کدام",
+    coverBackgroundColorAccentColor: "رنگ لهجه",
+    coverBackgroundColorCustom: "سفارشی",
+    horizontalAlignmentLeft: "چپ",
+    horizontalAlignmentCenter: "مرکز",
+    horizontalAlignmentRight: "راست",
+    verticalAlignmentTop: "بالا",
+    verticalAlignmentMiddle: "میانه",
+    verticalAlignmentBottom: "پایین",
+    logoPosition: "موقعیت لوگو",
+    coverTitlePosition: "موقعیت عنوان",
+    coverDescriptionPosition: "شرح موقعیت",
     names: {
       default: "پیش فرض",
       sharp: "تیز",
@@ -1535,8 +1569,40 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.translateUsigAI: "Auto-translate All" => "ترجمه خودکار همه"
 // ed.translationDialogTitle: "Untranslated strings" => "رشتههای ترجمهنشده"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "لطفا حداقل {0} مورد را وارد کنید"
-// lg.question_resetValue: "Reset question value" => "بازنشانی مقدار سؤال"
+// lg.question_resetValueName: "Reset question value" => "بازنشانی مقدار سؤال"
 // lg.column_resetValue: "Reset column value" => "بازنشانی مقدار ستون"
 // pe.markRequired: "Mark as required" => "علامت گذاری به عنوان مورد نیاز"
 // pe.removeRequiredMark: "Remove the required mark" => "حذف علامت مورد نیاز"
 // p.resetValueIf: "Reset value if" => "بازنشانی مقدار اگر"
+// lg.question_setValueName: "Set question value" => "تنظیم مقدار سؤال"
+// lg.column_resetValueName: "Reset column value" => "بازنشانی مقدار ستون"
+// lg.column_setValueName: "Set column value" => "تنظیم مقدار ستون"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد."
+// survey.title: "Title" => "عنوان"
+// page.title: "Title" => "عنوان"
+// p.setValueIf: "Set value if" => "تنظیم مقدار اگر"
+// theme.groupHeader: "Header" => "هدر"
+// theme.coverTitleForecolor: "Title forecolor" => "پیش زمینه عنوانcolor"
+// theme.coverOverlapEnabled: "Overlap" => "همپوشانی"
+// theme.backgroundImageFitFill: "Stretch" => "کشش"
+// theme.backgroundImageFitTile: "Tile" => "کاشی"
+// theme.headerView: "View" => "مشاهده"
+// theme.headerViewBasic: "Basic" => "اساسی"
+// theme.headerViewAdvanced: "Advanced" => "پیشرفته"
+// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقه محتوا"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "همانند نظرسنجی"
+// theme.coverInheritWidthFromPage: "Fit to page" => "متناسب با صفحه"
+// theme.coverTextAreaWidth: "Text width" => "عرض متن"
+// theme.coverBackgroundColorSwitch: "Background color" => "رنگ پسزمینه"
+// theme.coverBackgroundColorNone: "None" => "هیچ کدام"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "رنگ لهجه"
+// theme.coverBackgroundColorCustom: "Custom" => "سفارشی"
+// theme.horizontalAlignmentLeft: "Left" => "چپ"
+// theme.horizontalAlignmentCenter: "Center" => "مرکز"
+// theme.horizontalAlignmentRight: "Right" => "راست"
+// theme.verticalAlignmentTop: "Top" => "بالا"
+// theme.verticalAlignmentMiddle: "Middle" => "میانه"
+// theme.verticalAlignmentBottom: "Bottom" => "پایین"
+// theme.logoPosition: "Logo Position" => "موقعیت لوگو"
+// theme.coverTitlePosition: "Title Position" => "موقعیت عنوان"
+// theme.coverDescriptionPosition: "Description Position" => "شرح موقعیت"

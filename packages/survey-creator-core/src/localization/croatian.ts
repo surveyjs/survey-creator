@@ -168,11 +168,13 @@ export var hrStrings = {
       question_visibilityName: "Vidljivost pitanja",
       question_enableName: "Pitanje omogućuje/onesposobljava",
       question_requireName: "Pitanje nije obavezno",
-      question_resetValue: "Vrati izvornu vrijednost pitanja",
+      question_resetValueName: "Vrati izvornu vrijednost pitanja",
+      question_setValueName: "Postavljanje vrijednosti pitanja",
       column_visibilityName: "Pokaži (sakrij) stupac",
       column_enableName: "Omogući (onemogući stupac)",
       column_requireName: "Učini stupac obaveznim",
-      column_resetValue: "Vraćanje izvorne vrijednosti stupca",
+      column_resetValueName: "Vraćanje izvorne vrijednosti stupca",
+      column_setValueName: "Postavljanje vrijednosti stupca",
       trigger_completeName: "Potpuna anketa",
       trigger_setvalueName: "Postavite vrijednost pitanja",
       trigger_copyvalueName: "Kopiranje vrijednosti pitanja",
@@ -202,6 +204,7 @@ export var hrStrings = {
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       trigger_completeText: "Anketa se dovrša",
       trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Očisti vrijednost pitanja: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var hrStrings = {
       imageHeight: "Visina slike (u CSS-prihvaćenim vrijednostima)",
       imageWidth: "Širina slike (u CSS-prihvaćenim vrijednostima)"
     },
+    // survey templates
+    survey: {
+      title: "Naslov"
+    },
     page: {
+      title: "Naslov",
       maxTimeToFinish: "Vremensko ograničenje za dovršetak stranice (u sekundama)"
     },
     question: {
@@ -918,6 +926,7 @@ export var hrStrings = {
     defaultValueExpression: "Zadani izraz vrijednosti",
     requiredIf: "requiredIf",
     resetValueIf: "Vrati izvornu vrijednost ako",
+    setValueIf: "Postavi vrijednost ako",
     validators: "validators",
     bindings: "Vezovi",
     renderAs: "Iscrtaj kao",
@@ -994,6 +1003,7 @@ export var hrStrings = {
     "--base-unit": "Osnovna jedinica",
     groupGeneral: "Općenito",
     groupAdvanced: "Napredan",
+    groupHeader: "Zaglavlje",
     themeName: "Tema",
     themeMode: "Izgled pitanja",
     themeModePanels: "Propust",
@@ -1004,11 +1014,15 @@ export var hrStrings = {
     primaryDefaultColor: "Propust",
     primaryDarkColor: "Lebdjeti",
     primaryLightColor: "Odabrani",
+    coverTitleForecolor: "Naslovna prednja strana",
+    coverOverlapEnabled: "Preklapanje",
     backgroundDimColor: "Boja pozadine",
     backgroundImage: "Pozadinska slika",
     backgroundImageFitAuto: "Automobil",
     backgroundImageFitCover: "Pokriti",
     backgroundImageFitContain: "Sadržavati",
+    backgroundImageFitFill: "Parcela",
+    backgroundImageFitTile: "Crijep",
     backgroundOpacity: "Neprozirnost",
     backgroundImageAttachmentFixed: "Fiksirane",
     backgroundImageAttachmentScroll: "Svitak",
@@ -1053,6 +1067,26 @@ export var hrStrings = {
     boxShadowInner: "Unutarnji",
     questionShadow: "Efekti sjene",
     editorShadow: "Efekti sjene ulaznog elementa",
+    headerView: "Pogled",
+    headerViewBasic: "Osnovni",
+    headerViewAdvanced: "Napredan",
+    coverInheritWidthFrom: "Širina područja sadržaja",
+    coverInheritWidthFromSurvey: "Isto kao i anketa",
+    coverInheritWidthFromPage: "Prilagodi stranici",
+    coverTextAreaWidth: "Širina teksta",
+    coverBackgroundColorSwitch: "Boja pozadine",
+    coverBackgroundColorNone: "Nijedan",
+    coverBackgroundColorAccentColor: "Boja isticanja",
+    coverBackgroundColorCustom: "Običaj",
+    horizontalAlignmentLeft: "Lijevo",
+    horizontalAlignmentCenter: "Središte",
+    horizontalAlignmentRight: "Desno",
+    verticalAlignmentTop: "Vrh",
+    verticalAlignmentMiddle: "Sredina",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Položaj logotipa",
+    coverTitlePosition: "Položaj naslova",
+    coverDescriptionPosition: "Položaj opisa",
     names: {
       default: "Propust",
       sharp: "Oštar",
@@ -1582,11 +1616,44 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Automatski prevedi sve"
 // ed.translationDialogTitle: "Untranslated strings" => "Neprevedeni nizovi"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Unesite najmanje {0} stavki"
-// lg.question_resetValue: "Reset question value" => "Vrati izvornu vrijednost pitanja"
+// lg.question_resetValueName: "Reset question value" => "Vrati izvornu vrijednost pitanja"
 // lg.column_resetValue: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Označi kao obavezno"
 // pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"
 // p.resetValueIf: "Reset value if" => "Vrati izvornu vrijednost ako"
-
+// lg.question_setValueName: "Set question value" => "Postavljanje vrijednosti pitanja"
+// lg.column_resetValueName: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
+// lg.column_setValueName: "Set column value" => "Postavljanje vrijednosti stupca"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Naslov"
+// page.title: "Title" => "Naslov"
+// p.setValueIf: "Set value if" => "Postavi vrijednost ako"
+// theme.groupHeader: "Header" => "Zaglavlje"
+// theme.coverTitleForecolor: "Title forecolor" => "Naslovna prednja strana"
+// theme.coverOverlapEnabled: "Overlap" => "Preklapanje"
+// theme.backgroundImageFitFill: "Stretch" => "Parcela"
+// theme.backgroundImageFitTile: "Tile" => "Crijep"
+// theme.headerView: "View" => "Pogled"
+// theme.headerViewBasic: "Basic" => "Osnovni"
+// theme.headerViewAdvanced: "Advanced" => "Napredan"
+// theme.coverInheritWidthFrom: "Content area width" => "Širina područja sadržaja"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Isto kao i anketa"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Prilagodi stranici"
+// theme.coverTextAreaWidth: "Text width" => "Širina teksta"
+// theme.coverBackgroundColorSwitch: "Background color" => "Boja pozadine"
+// theme.coverBackgroundColorNone: "None" => "Nijedan"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Boja isticanja"
+// theme.coverBackgroundColorCustom: "Custom" => "Običaj"
+// theme.horizontalAlignmentLeft: "Left" => "Lijevo"
+// theme.horizontalAlignmentCenter: "Center" => "Središte"
+// theme.horizontalAlignmentRight: "Right" => "Desno"
+// theme.verticalAlignmentTop: "Top" => "Vrh"
+// theme.verticalAlignmentMiddle: "Middle" => "Sredina"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Položaj logotipa"
+// theme.coverTitlePosition: "Title Position" => "Položaj naslova"
+// theme.coverDescriptionPosition: "Description Position" => "Položaj opisa"

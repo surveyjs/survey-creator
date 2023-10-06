@@ -168,11 +168,13 @@ var polishStrings = {
       question_visibilityName: "Pokaż (ukryj) pytanie",
       question_enableName: "Włącz (wyłącz) pytanie",
       question_requireName: "Zadbaj o pytanie wymagane",
-      question_resetValue: "Zresetuj wartość pytania",
+      question_resetValueName: "Zresetuj wartość pytania",
+      question_setValueName: "Ustawianie wartości pytania",
       column_visibilityName: "Pokaż (ukryj) kolumnę",
       column_enableName: "Włącz (wyłącz) kolumnę",
       column_requireName: "Ustaw kolumnę jako wymaganą",
-      column_resetValue: "Resetowanie wartości kolumny",
+      column_resetValueName: "Resetowanie wartości kolumny",
+      column_setValueName: "Ustawianie wartości kolumny",
       trigger_completeName: "Wypełnij ankietę",
       trigger_setvalueName: "Ustaw odpowiedź",
       trigger_copyvalueName: "Kopiuj odpowiedź",
@@ -202,6 +204,7 @@ var polishStrings = {
       column_visibilityText: "Uwidocznienie {0}  {1}pytania", //{0} column name, {1} question name
       column_enableText: "Ustaw kolumnę {0} pytania{1} włączyć", //{0} column name, {1} question name
       column_requireText: "Ustaw kolumnę {0} pytania {1} wymagane", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
       trigger_completeText: "Ankieta zostaje zakończona",
       trigger_setvalueText: "Ustaw pod znakiem zapytania: {0} wartość {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Wyczyść wartość pytania: {0}", //{0} question name
@@ -415,7 +418,12 @@ var polishStrings = {
       imageHeight: "Wysokość obrazu (w wartościach akceptowanych przez CSS)",
       imageWidth: "Szerokość obrazu (w wartościach akceptowanych przez CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Tytuł"
+    },
     page: {
+      title: "Tytuł",
       maxTimeToFinish: "Limit czasu na zakończenie strony (w sekundach)"
     },
     question: {
@@ -918,6 +926,7 @@ var polishStrings = {
     defaultValueExpression: "Wyrażenie wartości domyślnej",
     requiredIf: "Wymagane, jeśli:",
     resetValueIf: "Zresetuj wartość, jeśli",
+    setValueIf: "Ustaw wartość, jeśli",
     validators: "Walidatory",
     bindings: "Powiązania",
     renderAs: "Renderuj jako",
@@ -994,6 +1003,7 @@ var polishStrings = {
     "--base-unit": "Jednostka bazowa",
     groupGeneral: "Ogólne",
     groupAdvanced: "Zaawansowany",
+    groupHeader: "Nagłówek",
     themeName: "Kompozycja",
     themeMode: "Wygląd pytania",
     themeModePanels: "Domyślny",
@@ -1004,11 +1014,15 @@ var polishStrings = {
     primaryDefaultColor: "Domyślny",
     primaryDarkColor: "Hover",
     primaryLightColor: "Wybrany",
+    coverTitleForecolor: "Kolor przedniego tytułu",
+    coverOverlapEnabled: "Zachodzić na siebie",
     backgroundDimColor: "Kolor tła",
     backgroundImage: "Obraz tła",
     backgroundImageFitAuto: "Automatycznie",
     backgroundImageFitCover: "Pokryć",
     backgroundImageFitContain: "Zawierać",
+    backgroundImageFitFill: "Rozciągnąć",
+    backgroundImageFitTile: "Kafelek",
     backgroundOpacity: "Nieprzezroczystość",
     backgroundImageAttachmentFixed: "Stały",
     backgroundImageAttachmentScroll: "Przewijać",
@@ -1053,6 +1067,26 @@ var polishStrings = {
     boxShadowInner: "Wewnętrzny",
     questionShadow: "Efekty cienia",
     editorShadow: "Efekty cienia elementu wejściowego",
+    headerView: "Widok",
+    headerViewBasic: "Podstawowy",
+    headerViewAdvanced: "Zaawansowany",
+    coverInheritWidthFrom: "Szerokość obszaru zawartości",
+    coverInheritWidthFromSurvey: "Tak samo jak ankieta",
+    coverInheritWidthFromPage: "Dopasuj do strony",
+    coverTextAreaWidth: "Szerokość tekstu",
+    coverBackgroundColorSwitch: "Kolor tła",
+    coverBackgroundColorNone: "Żaden",
+    coverBackgroundColorAccentColor: "Kolor wiodący",
+    coverBackgroundColorCustom: "Zwyczaj",
+    horizontalAlignmentLeft: "Lewy",
+    horizontalAlignmentCenter: "Centrum",
+    horizontalAlignmentRight: "Prawy",
+    verticalAlignmentTop: "Do góry",
+    verticalAlignmentMiddle: "Środek",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Pozycja logo",
+    coverTitlePosition: "Pozycja tytułu",
+    coverDescriptionPosition: "Opis Pozycja",
     names: {
       default: "Domyślny",
       sharp: "Ostry",
@@ -1862,10 +1896,44 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Automatycznie tłumacz wszystko"
 // ed.translationDialogTitle: "Untranslated strings" => "Nieprzetłumaczone ciągi znaków"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
-// lg.question_resetValue: "Reset question value" => "Zresetuj wartość pytania"
+// lg.question_resetValueName: "Reset question value" => "Zresetuj wartość pytania"
 // lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Oznacz jako wymagane"
 // pe.removeRequiredMark: "Remove the required mark" => "Usuń wymagany znacznik"
 // p.resetValueIf: "Reset value if" => "Zresetuj wartość, jeśli"
+// lg.question_setValueName: "Set question value" => "Ustawianie wartości pytania"
+// lg.column_resetValueName: "Reset column value" => "Resetowanie wartości kolumny"
+// lg.column_setValueName: "Set column value" => "Ustawianie wartości kolumny"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Tytuł"
+// page.title: "Title" => "Tytuł"
+// p.setValueIf: "Set value if" => "Ustaw wartość, jeśli"
+// theme.groupHeader: "Header" => "Nagłówek"
+// theme.coverTitleForecolor: "Title forecolor" => "Kolor przedniego tytułu"
+// theme.coverOverlapEnabled: "Overlap" => "Zachodzić na siebie"
+// theme.backgroundImageFitFill: "Stretch" => "Rozciągnąć"
+// theme.backgroundImageFitTile: "Tile" => "Kafelek"
+// theme.headerView: "View" => "Widok"
+// theme.headerViewBasic: "Basic" => "Podstawowy"
+// theme.headerViewAdvanced: "Advanced" => "Zaawansowany"
+// theme.coverInheritWidthFrom: "Content area width" => "Szerokość obszaru zawartości"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Tak samo jak ankieta"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Dopasuj do strony"
+// theme.coverTextAreaWidth: "Text width" => "Szerokość tekstu"
+// theme.coverBackgroundColorSwitch: "Background color" => "Kolor tła"
+// theme.coverBackgroundColorNone: "None" => "Żaden"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Kolor wiodący"
+// theme.coverBackgroundColorCustom: "Custom" => "Zwyczaj"
+// theme.horizontalAlignmentLeft: "Left" => "Lewy"
+// theme.horizontalAlignmentCenter: "Center" => "Centrum"
+// theme.horizontalAlignmentRight: "Right" => "Prawy"
+// theme.verticalAlignmentTop: "Top" => "Do góry"
+// theme.verticalAlignmentMiddle: "Middle" => "Środek"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Pozycja logo"
+// theme.coverTitlePosition: "Title Position" => "Pozycja tytułu"
+// theme.coverDescriptionPosition: "Description Position" => "Opis Pozycja"

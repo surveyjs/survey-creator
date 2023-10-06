@@ -168,11 +168,13 @@ export var msStrings = {
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
-      question_resetValue: "Mengeset semula nilai soalan",
+      question_resetValueName: "Mengeset semula nilai soalan",
+      question_setValueName: "Mengesetkan nilai soalan",
       column_visibilityName: "Tunjukkan lajur (sembunyikan)",
       column_enableName: "Mendayakan (nyahdayakan) lajur",
       column_requireName: "Jadikan lajur diperlukan",
-      column_resetValue: "Mengeset semula nilai lajur",
+      column_resetValueName: "Mengeset semula nilai lajur",
+      column_setValueName: "Mengesetkan nilai lajur",
       trigger_completeName: "Lengkapkan tinjauan",
       trigger_setvalueName: "Tetapkan nilai soalan",
       trigger_copyvalueName: "Salin nilai soalan",
@@ -202,6 +204,7 @@ export var msStrings = {
       column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
       column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
       column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran.",
       trigger_completeText: "Tinjauan dilengkapkan",
       trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "nilai soalan yang jelas: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var msStrings = {
       imageHeight: "Ketinggian imej (dalam nilai diterima CSS)",
       imageWidth: "Lebar imej (dalam nilai diterima CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Tajuk"
+    },
     page: {
+      title: "Tajuk",
       maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
     },
     question: {
@@ -918,6 +926,7 @@ export var msStrings = {
     defaultValueExpression: "Ekspresi nilai lalai",
     requiredIf: "Diperlukan jika",
     resetValueIf: "Mengeset semula nilai jika",
+    setValueIf: "Setkan nilai jika",
     validators: "Pengesah",
     bindings: "ikatan",
     renderAs: "Render sebagai",
@@ -994,6 +1003,7 @@ export var msStrings = {
     "--base-unit": "Unit asas",
     groupGeneral: "Umum",
     groupAdvanced: "Lanjutan",
+    groupHeader: "Pengepala",
     themeName: "Tema",
     themeMode: "Penampilan soalan",
     themeModePanels: "Lalai",
@@ -1004,11 +1014,15 @@ export var msStrings = {
     primaryDefaultColor: "Lalai",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
+    coverTitleForecolor: "Warna tajuk",
+    coverOverlapEnabled: "Bertindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Imej latar belakang",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Perlindungan",
     backgroundImageFitContain: "Mengandungi",
+    backgroundImageFitFill: "Regangan",
+    backgroundImageFitTile: "Jubin",
     backgroundOpacity: "Kelegapan",
     backgroundImageAttachmentFixed: "Tetap",
     backgroundImageAttachmentScroll: "Tatal",
@@ -1053,6 +1067,26 @@ export var msStrings = {
     boxShadowInner: "Dalaman",
     questionShadow: "Kesan bayang",
     editorShadow: "Kesan bayang unsur input",
+    headerView: "Lihat",
+    headerViewBasic: "Asas",
+    headerViewAdvanced: "Lanjutan",
+    coverInheritWidthFrom: "Lebar kawasan kandungan",
+    coverInheritWidthFromSurvey: "Sama seperti tinjauan",
+    coverInheritWidthFromPage: "Muat ke halaman",
+    coverTextAreaWidth: "Lebar teks",
+    coverBackgroundColorSwitch: "Warna latar belakang",
+    coverBackgroundColorNone: "Tiada",
+    coverBackgroundColorAccentColor: "Warna aksen",
+    coverBackgroundColorCustom: "Tersuai",
+    horizontalAlignmentLeft: "Kiri",
+    horizontalAlignmentCenter: "Pusat",
+    horizontalAlignmentRight: "Kanan",
+    verticalAlignmentTop: "Atas",
+    verticalAlignmentMiddle: "Tengah",
+    verticalAlignmentBottom: "Bawah",
+    logoPosition: "Kedudukan Logo",
+    coverTitlePosition: "Kedudukan Tajuk",
+    coverDescriptionPosition: "Kedudukan Penerangan",
     names: {
       default: "Lalai",
       sharp: "Tajam",
@@ -1542,10 +1576,44 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Terjemahkan Secara automatik Semua"
 // ed.translationDialogTitle: "Untranslated strings" => "Rentetan tidak diterjemahkan"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
-// lg.question_resetValue: "Reset question value" => "Mengeset semula nilai soalan"
+// lg.question_resetValueName: "Reset question value" => "Mengeset semula nilai soalan"
 // lg.column_resetValue: "Reset column value" => "Mengeset semula nilai lajur"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Tandakan mengikut keperluan"
 // pe.removeRequiredMark: "Remove the required mark" => "Mengalih keluar tanda yang diperlukan"
 // p.resetValueIf: "Reset value if" => "Mengeset semula nilai jika"
+// lg.question_setValueName: "Set question value" => "Mengesetkan nilai soalan"
+// lg.column_resetValueName: "Reset column value" => "Mengeset semula nilai lajur"
+// lg.column_setValueName: "Set column value" => "Mengesetkan nilai lajur"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Tajuk"
+// page.title: "Title" => "Tajuk"
+// p.setValueIf: "Set value if" => "Setkan nilai jika"
+// theme.groupHeader: "Header" => "Pengepala"
+// theme.coverTitleForecolor: "Title forecolor" => "Warna tajuk"
+// theme.coverOverlapEnabled: "Overlap" => "Bertindih"
+// theme.backgroundImageFitFill: "Stretch" => "Regangan"
+// theme.backgroundImageFitTile: "Tile" => "Jubin"
+// theme.headerView: "View" => "Lihat"
+// theme.headerViewBasic: "Basic" => "Asas"
+// theme.headerViewAdvanced: "Advanced" => "Lanjutan"
+// theme.coverInheritWidthFrom: "Content area width" => "Lebar kawasan kandungan"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama seperti tinjauan"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Muat ke halaman"
+// theme.coverTextAreaWidth: "Text width" => "Lebar teks"
+// theme.coverBackgroundColorSwitch: "Background color" => "Warna latar belakang"
+// theme.coverBackgroundColorNone: "None" => "Tiada"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Warna aksen"
+// theme.coverBackgroundColorCustom: "Custom" => "Tersuai"
+// theme.horizontalAlignmentLeft: "Left" => "Kiri"
+// theme.horizontalAlignmentCenter: "Center" => "Pusat"
+// theme.horizontalAlignmentRight: "Right" => "Kanan"
+// theme.verticalAlignmentTop: "Top" => "Atas"
+// theme.verticalAlignmentMiddle: "Middle" => "Tengah"
+// theme.verticalAlignmentBottom: "Bottom" => "Bawah"
+// theme.logoPosition: "Logo Position" => "Kedudukan Logo"
+// theme.coverTitlePosition: "Title Position" => "Kedudukan Tajuk"
+// theme.coverDescriptionPosition: "Description Position" => "Kedudukan Penerangan"

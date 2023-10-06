@@ -168,11 +168,13 @@ export var mnStrings = {
       question_visibilityName: "Асуулт харуулах (нуух)",
       question_enableName: "Асуулт идэвхжүүлэх (идэвхгүй болгох)",
       question_requireName: "Асуултыг заавал бөглөөөөх болгох",
-      question_resetValue: "Асуултын үнэ цэнийг дахин тогтоох",
+      question_resetValueName: "Асуултын үнэ цэнийг дахин тогтоох",
+      question_setValueName: "Асуултын үнэ цэнийг тогтоох",
       column_visibilityName: "Багана харуулах (нуух).",
       column_enableName: "Багана идэвхжүүлэх (идэвхгүй болгох).",
       column_requireName: "Баганыг заавал бөглөөөөх болгох",
-      column_resetValue: "Reset баганын үнэ цэнэ",
+      column_resetValueName: "Reset баганын үнэ цэнэ",
+      column_setValueName: "Баганын үнэ цэнийг тогтоох",
       trigger_completeName: "Санал асуулга дуусгах",
       trigger_setvalueName: "Хариулт оруулах",
       trigger_copyvalueName: "Хариулт хуулах",
@@ -202,6 +204,7 @@ export var mnStrings = {
       column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} column name, {1} question name
       column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} column name, {1} question name
       column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл.",
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "тодорхой асуултын үнэ цэнэ: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var mnStrings = {
       imageHeight: "Зургийн өндөр (CSS хүлээн зөвшөөрсөн утга)",
       imageWidth: "Зургийн өргөн (CSS хүлээн зөвшөөрсөн утга)"
     },
+    // survey templates
+    survey: {
+      title: "Нүүр"
+    },
     page: {
+      title: "Нүүр",
       maxTimeToFinish: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)"
     },
     question: {
@@ -918,6 +926,7 @@ export var mnStrings = {
     defaultValueExpression: "Үндсэн утгын илэрхийлэл",
     requiredIf: "Заавал бөглөх хэрэв",
     resetValueIf: "Хэрэв үнэ цэнээ дахин тогтоох",
+    setValueIf: "Хэрэв үнэ цэнийг тогтоо",
     validators: "Батлагч",
     bindings: "Холбогч",
     renderAs: "руу хөрвүүлэх",
@@ -994,6 +1003,7 @@ export var mnStrings = {
     "--base-unit": "Үндсэн нэгж",
     groupGeneral: "Ерөнхий",
     groupAdvanced: "Өндөр хөгжсөн",
+    groupHeader: "Толгойлогч",
     themeName: "Сэдэв",
     themeMode: "Асуулт хариултын төрх",
     themeModePanels: "Дефолт",
@@ -1004,11 +1014,15 @@ export var mnStrings = {
     primaryDefaultColor: "Дефолт",
     primaryDarkColor: "Ховер",
     primaryLightColor: "Сонгосон",
+    coverTitleForecolor: "Нүүр Forecolor",
+    coverOverlapEnabled: "Давхар",
     backgroundDimColor: "Ар талын өнгө",
     backgroundImage: "Ар талын зураг",
     backgroundImageFitAuto: "Авто",
     backgroundImageFitCover: "Хөшиг",
     backgroundImageFitContain: "Агуулах",
+    backgroundImageFitFill: "Сэнгэрч",
+    backgroundImageFitTile: "Тил",
     backgroundOpacity: "Бүдүүлэг байдал",
     backgroundImageAttachmentFixed: "Зассан",
     backgroundImageAttachmentScroll: "Хуйлмал бичиг",
@@ -1053,6 +1067,26 @@ export var mnStrings = {
     boxShadowInner: "Дотоод",
     questionShadow: "Сүүдрийн нөлөө",
     editorShadow: "Оролт элементийн сүүдрийн нөлөө",
+    headerView: "Үзэх",
+    headerViewBasic: "Үндсэн",
+    headerViewAdvanced: "Өндөр хөгжсөн",
+    coverInheritWidthFrom: "Агуулгын бүсийн өргөн",
+    coverInheritWidthFromSurvey: "Судалгаатай адил",
+    coverInheritWidthFromPage: "Хуудсанд тохирсон",
+    coverTextAreaWidth: "Текстийн өргөн",
+    coverBackgroundColorSwitch: "Ар талын өнгө",
+    coverBackgroundColorNone: "Хэн ч биш",
+    coverBackgroundColorAccentColor: "Акцент өнгө",
+    coverBackgroundColorCustom: "Үйлчилгээ",
+    horizontalAlignmentLeft: "Зүүн",
+    horizontalAlignmentCenter: "Төв",
+    horizontalAlignmentRight: "Баруун талд",
+    verticalAlignmentTop: "Дээд",
+    verticalAlignmentMiddle: "Дунд",
+    verticalAlignmentBottom: "Доод",
+    logoPosition: "Лого байрлал",
+    coverTitlePosition: "Нүүр Байршил",
+    coverDescriptionPosition: "Тодорхойлолтын байрлал",
     names: {
       default: "Дефолт",
       sharp: "Хурц",
@@ -1236,8 +1270,40 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Авто-орчуулга Бүгд"
 // ed.translationDialogTitle: "Untranslated strings" => "Огт орчуулагдаагүй уяанууд"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Наад зах нь {0} зүйлс оруулна уу"
-// lg.question_resetValue: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
+// lg.question_resetValueName: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
 // lg.column_resetValue: "Reset column value" => "Reset баганын үнэ цэнэ"
 // pe.markRequired: "Mark as required" => "Шаардлагын дагуу тэмдэглэгээ хийх"
 // pe.removeRequiredMark: "Remove the required mark" => "Шаардлагатай тэмдэглэгээг хасах"
 // p.resetValueIf: "Reset value if" => "Хэрэв үнэ цэнээ дахин тогтоох"
+// lg.question_setValueName: "Set question value" => "Асуултын үнэ цэнийг тогтоох"
+// lg.column_resetValueName: "Reset column value" => "Reset баганын үнэ цэнэ"
+// lg.column_setValueName: "Set column value" => "Баганын үнэ цэнийг тогтоох"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл."
+// survey.title: "Title" => "Нүүр"
+// page.title: "Title" => "Нүүр"
+// p.setValueIf: "Set value if" => "Хэрэв үнэ цэнийг тогтоо"
+// theme.groupHeader: "Header" => "Толгойлогч"
+// theme.coverTitleForecolor: "Title forecolor" => "Нүүр Forecolor"
+// theme.coverOverlapEnabled: "Overlap" => "Давхар"
+// theme.backgroundImageFitFill: "Stretch" => "Сэнгэрч"
+// theme.backgroundImageFitTile: "Tile" => "Тил"
+// theme.headerView: "View" => "Үзэх"
+// theme.headerViewBasic: "Basic" => "Үндсэн"
+// theme.headerViewAdvanced: "Advanced" => "Өндөр хөгжсөн"
+// theme.coverInheritWidthFrom: "Content area width" => "Агуулгын бүсийн өргөн"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Судалгаатай адил"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Хуудсанд тохирсон"
+// theme.coverTextAreaWidth: "Text width" => "Текстийн өргөн"
+// theme.coverBackgroundColorSwitch: "Background color" => "Ар талын өнгө"
+// theme.coverBackgroundColorNone: "None" => "Хэн ч биш"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Акцент өнгө"
+// theme.coverBackgroundColorCustom: "Custom" => "Үйлчилгээ"
+// theme.horizontalAlignmentLeft: "Left" => "Зүүн"
+// theme.horizontalAlignmentCenter: "Center" => "Төв"
+// theme.horizontalAlignmentRight: "Right" => "Баруун талд"
+// theme.verticalAlignmentTop: "Top" => "Дээд"
+// theme.verticalAlignmentMiddle: "Middle" => "Дунд"
+// theme.verticalAlignmentBottom: "Bottom" => "Доод"
+// theme.logoPosition: "Logo Position" => "Лого байрлал"
+// theme.coverTitlePosition: "Title Position" => "Нүүр Байршил"
+// theme.coverDescriptionPosition: "Description Position" => "Тодорхойлолтын байрлал"

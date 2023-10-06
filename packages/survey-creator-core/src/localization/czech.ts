@@ -168,11 +168,13 @@ export var czStrings = {
       question_visibilityName: "Viditelnost otázky",
       question_enableName: "Zapnutí/vypnutí otázky",
       question_requireName: "Povinné vyplnění otázky",
-      question_resetValue: "Obnovit hodnotu otázky",
+      question_resetValueName: "Obnovit hodnotu otázky",
+      question_setValueName: "Nastavit hodnotu otázky",
       column_visibilityName: "Zobrazit (skrýt) sloupec",
       column_enableName: "Zapnout (vypnout) sloupec",
       column_requireName: "Povinný sloupec",
-      column_resetValue: "Obnovit hodnotu sloupce",
+      column_resetValueName: "Obnovit hodnotu sloupce",
+      column_setValueName: "Nastavit hodnotu sloupce",
       trigger_completeName: "Dokončení průzkumu",
       trigger_setvalueName: "Nastavení hodnoty otázky",
       trigger_copyvalueName: "Kopírovat hodnotu otázky",
@@ -202,6 +204,7 @@ export var czStrings = {
       column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
       column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
       column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Výraz, jehož výsledek bude přiřazen cílové otázce.",
       trigger_completeText: "Průzkum se stává dokončeným",
       trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Jasná hodnota otázky: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var czStrings = {
       imageHeight: "Výška obrázku (v hodnotách akceptovaných CSS)",
       imageWidth: "Výška obrázku (v hodnotách akceptovaných CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titul"
+    },
     page: {
+      title: "Titul",
       maxTimeToFinish: "Časový limit pro dokončení stránky (v sekundách)"
     },
     question: {
@@ -918,6 +926,7 @@ export var czStrings = {
     defaultValueExpression: "Výraz pro výchozí hodnotu",
     requiredIf: "Povinná, pokud",
     resetValueIf: "Resetovat hodnotu, pokud",
+    setValueIf: "Nastavte hodnotu, pokud",
     validators: "Validátory",
     bindings: "Vazby",
     renderAs: "Vykreslit jako",
@@ -994,6 +1003,7 @@ export var czStrings = {
     "--base-unit": "Základní jednotka",
     groupGeneral: "Obecné",
     groupAdvanced: "Pokročilé",
+    groupHeader: "Záhlaví",
     themeName: "Motivy",
     themeMode: "Režimy",
     themeModePanels: "Panely",
@@ -1004,11 +1014,15 @@ export var czStrings = {
     primaryDefaultColor: "Výchozí",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
+    coverTitleForecolor: "Nadpis křestní barvy",
+    coverOverlapEnabled: "Překrytí",
     backgroundDimColor: "Barva pozadí",
     backgroundImage: "Obrázek na pozadí",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Pokrýt",
     backgroundImageFitContain: "Obsahuje",
+    backgroundImageFitFill: "Natáhnout",
+    backgroundImageFitTile: "Dlaždice",
     backgroundOpacity: "Průhlednost",
     backgroundImageAttachmentFixed: "Stabilní",
     backgroundImageAttachmentScroll: "Svitek",
@@ -1053,6 +1067,26 @@ export var czStrings = {
     boxShadowInner: "Vnitřní",
     questionShadow: "Hrany / stíny panelu",
     editorShadow: "Hrany / stíny editoru",
+    headerView: "Pohled",
+    headerViewBasic: "Základní",
+    headerViewAdvanced: "Pokročilý",
+    coverInheritWidthFrom: "Šířka oblasti obsahu",
+    coverInheritWidthFromSurvey: "Stejné jako průzkum",
+    coverInheritWidthFromPage: "Přizpůsobit stránce",
+    coverTextAreaWidth: "Šířka textu",
+    coverBackgroundColorSwitch: "Barva pozadí",
+    coverBackgroundColorNone: "Žádný",
+    coverBackgroundColorAccentColor: "Barva zvýraznění",
+    coverBackgroundColorCustom: "Zvyk",
+    horizontalAlignmentLeft: "Vlevo",
+    horizontalAlignmentCenter: "Střed",
+    horizontalAlignmentRight: "Vpravo",
+    verticalAlignmentTop: "Vrchol",
+    verticalAlignmentMiddle: "Prostřední",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Pozice loga",
+    coverTitlePosition: "Titulní pozice",
+    coverDescriptionPosition: "Popis Poloha",
     names: {
       default: "Výchozí",
       sharp: "Ostrý",
@@ -1144,8 +1178,41 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"
 // ed.translationDialogTitle: "Untranslated strings" => "Nepřeložené řetězce"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadejte alespoň {0} položek"
-// lg.question_resetValue: "Reset question value" => "Obnovit hodnotu otázky"
+// lg.question_resetValueName: "Reset question value" => "Obnovit hodnotu otázky"
 // lg.column_resetValue: "Reset column value" => "Obnovit hodnotu sloupce"
 // pe.markRequired: "Mark as required" => "Označit podle potřeby"
 // pe.removeRequiredMark: "Remove the required mark" => "Odstraňte požadovanou značku"
 // p.resetValueIf: "Reset value if" => "Resetovat hodnotu, pokud"
+
+// lg.question_setValueName: "Set question value" => "Nastavit hodnotu otázky"
+// lg.column_resetValueName: "Reset column value" => "Obnovit hodnotu sloupce"
+// lg.column_setValueName: "Set column value" => "Nastavit hodnotu sloupce"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Výraz, jehož výsledek bude přiřazen cílové otázce."
+// survey.title: "Title" => "Titul"
+// page.title: "Title" => "Titul"
+// p.setValueIf: "Set value if" => "Nastavte hodnotu, pokud"
+// theme.groupHeader: "Header" => "Záhlaví"
+// theme.coverTitleForecolor: "Title forecolor" => "Nadpis křestní barvy"
+// theme.coverOverlapEnabled: "Overlap" => "Překrytí"
+// theme.backgroundImageFitFill: "Stretch" => "Natáhnout"
+// theme.backgroundImageFitTile: "Tile" => "Dlaždice"
+// theme.headerView: "View" => "Pohled"
+// theme.headerViewBasic: "Basic" => "Základní"
+// theme.headerViewAdvanced: "Advanced" => "Pokročilý"
+// theme.coverInheritWidthFrom: "Content area width" => "Šířka oblasti obsahu"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Stejné jako průzkum"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Přizpůsobit stránce"
+// theme.coverTextAreaWidth: "Text width" => "Šířka textu"
+// theme.coverBackgroundColorSwitch: "Background color" => "Barva pozadí"
+// theme.coverBackgroundColorNone: "None" => "Žádný"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Barva zvýraznění"
+// theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.horizontalAlignmentLeft: "Left" => "Vlevo"
+// theme.horizontalAlignmentCenter: "Center" => "Střed"
+// theme.horizontalAlignmentRight: "Right" => "Vpravo"
+// theme.verticalAlignmentTop: "Top" => "Vrchol"
+// theme.verticalAlignmentMiddle: "Middle" => "Prostřední"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Pozice loga"
+// theme.coverTitlePosition: "Title Position" => "Titulní pozice"
+// theme.coverDescriptionPosition: "Description Position" => "Popis Poloha"

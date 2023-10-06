@@ -168,11 +168,13 @@ export var arStrings = {
       question_visibilityName: "إظهار (إخفاء) سؤال",
       question_enableName: "تفعيل (تعطيل) سؤال",
       question_requireName: "جعل السؤال إلزامي",
-      question_resetValue: "إعادة تعيين قيمة السؤال",
+      question_resetValueName: "إعادة تعيين قيمة السؤال",
+      question_setValueName: "تعيين قيمة السؤال",
       column_visibilityName: "إظهار (إخفاء) العمود",
       column_enableName: "تمكين (تعطيل) العمود",
       column_requireName: "جعل العمود مطلوبا",
-      column_resetValue: "إعادة تعيين قيمة العمود",
+      column_resetValueName: "إعادة تعيين قيمة العمود",
+      column_setValueName: "تعيين قيمة العمود",
       trigger_completeName: "أنهي الإستبيان",
       trigger_setvalueName: "تحديد قيمة السؤال",
       trigger_copyvalueName: "نسخ قيمة السؤال",
@@ -202,6 +204,7 @@ export var arStrings = {
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "قيمة سؤال واضحة: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var arStrings = {
       imageHeight: "ارتفاع الصورة (بالقيم المقبولة من CSS)",
       imageWidth: "عرض الصورة (بالقيم المقبولة من CSS)"
     },
+    // survey templates
+    survey: {
+      title: "عنوان"
+    },
     page: {
+      title: "عنوان",
       maxTimeToFinish: "الحد الزمني لإنهاء الصفحة (بالثواني)"
     },
     question: {
@@ -918,6 +926,7 @@ export var arStrings = {
     defaultValueExpression: "العملية الحسابية الإفتراضية",
     requiredIf: "مطلوب عندما",
     resetValueIf: "إعادة تعيين القيمة إذا",
+    setValueIf: "تعيين قيمة إذا",
     validators: "المدققات",
     bindings: "الإرتباطات",
     renderAs: "عرض ك",
@@ -994,6 +1003,7 @@ export var arStrings = {
     "--base-unit": "وحدة القاعدة",
     groupGeneral: "عام",
     groupAdvanced: "متقدم",
+    groupHeader: "راس",
     themeName: "موضوع",
     themeMode: "مظهر السؤال",
     themeModePanels: "افتراضي",
@@ -1004,11 +1014,15 @@ export var arStrings = {
     primaryDefaultColor: "افتراضي",
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
+    coverTitleForecolor: "اللون الأمامي للعنوان",
+    coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
     backgroundImage: "صورة الخلفية",
     backgroundImageFitAuto: "تلقائي",
     backgroundImageFitCover: "غطاء",
     backgroundImageFitContain: "احتوى",
+    backgroundImageFitFill: "مد",
+    backgroundImageFitTile: "بلاط",
     backgroundOpacity: "العتامه",
     backgroundImageAttachmentFixed: "ثابت",
     backgroundImageAttachmentScroll: "طومار",
@@ -1053,6 +1067,26 @@ export var arStrings = {
     boxShadowInner: "باطن",
     questionShadow: "تأثيرات الظل",
     editorShadow: "تأثيرات ظل عنصر الإدخال",
+    headerView: "منظر",
+    headerViewBasic: "أساسي",
+    headerViewAdvanced: "متقدم",
+    coverInheritWidthFrom: "عرض منطقة المحتوى",
+    coverInheritWidthFromSurvey: "نفس المسح",
+    coverInheritWidthFromPage: "ملائمة للصفحة",
+    coverTextAreaWidth: "عرض النص",
+    coverBackgroundColorSwitch: "لون الخلفية",
+    coverBackgroundColorNone: "اي",
+    coverBackgroundColorAccentColor: "لون التمييز",
+    coverBackgroundColorCustom: "تقليد",
+    horizontalAlignmentLeft: "يسار",
+    horizontalAlignmentCenter: "مركز",
+    horizontalAlignmentRight: "يمين",
+    verticalAlignmentTop: "أعلى",
+    verticalAlignmentMiddle: "وسط",
+    verticalAlignmentBottom: "قاع",
+    logoPosition: "موضع الشعار",
+    coverTitlePosition: "منصب العنوان",
+    coverDescriptionPosition: "وصف الوظيفة الحالية",
     names: {
       default: "افتراضي",
       sharp: "حاد",
@@ -1502,6 +1536,41 @@ editorLocalization.locales["ar"] = arStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "الرجاء إدخال {0} العناصر على الأقل"
 // pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
 // pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"
-// lg.question_resetValue: "Reset question value" => "إعادة تعيين قيمة السؤال"
+// lg.question_resetValueName: "Reset question value" => "إعادة تعيين قيمة السؤال"
 // lg.column_resetValue: "Reset column value" => "إعادة تعيين قيمة العمود"
 // p.resetValueIf: "Reset value if" => "إعادة تعيين القيمة إذا"
+
+// lg.question_setValueName: "Set question value" => "تعيين قيمة السؤال"
+// lg.column_resetValueName: "Reset column value" => "إعادة تعيين قيمة العمود"
+// lg.column_setValueName: "Set column value" => "تعيين قيمة العمود"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " تعبير سيتم تعيين نتيجته للسؤال الهدف."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "عنوان"
+// page.title: "Title" => "عنوان"
+// p.setValueIf: "Set value if" => "تعيين قيمة إذا"
+// theme.groupHeader: "Header" => "راس"
+// theme.coverTitleForecolor: "Title forecolor" => "اللون الأمامي للعنوان"
+// theme.coverOverlapEnabled: "Overlap" => "التداخل"
+// theme.backgroundImageFitFill: "Stretch" => "مد"
+// theme.backgroundImageFitTile: "Tile" => "بلاط"
+// theme.headerView: "View" => "منظر"
+// theme.headerViewBasic: "Basic" => "أساسي"
+// theme.headerViewAdvanced: "Advanced" => "متقدم"
+// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
+// theme.coverInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
+// theme.coverTextAreaWidth: "Text width" => "عرض النص"
+// theme.coverBackgroundColorSwitch: "Background color" => "لون الخلفية"
+// theme.coverBackgroundColorNone: "None" => "اي"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "لون التمييز"
+// theme.coverBackgroundColorCustom: "Custom" => "تقليد"
+// theme.horizontalAlignmentLeft: "Left" => "يسار"
+// theme.horizontalAlignmentCenter: "Center" => "مركز"
+// theme.horizontalAlignmentRight: "Right" => "يمين"
+// theme.verticalAlignmentTop: "Top" => "أعلى"
+// theme.verticalAlignmentMiddle: "Middle" => "وسط"
+// theme.verticalAlignmentBottom: "Bottom" => "قاع"
+// theme.logoPosition: "Logo Position" => "موضع الشعار"
+// theme.coverTitlePosition: "Title Position" => "منصب العنوان"
+// theme.coverDescriptionPosition: "Description Position" => "وصف الوظيفة الحالية"

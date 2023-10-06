@@ -168,11 +168,13 @@ var italianTranslation = {
       question_visibilityName: "Mostra (nascondi) domanda",
       question_enableName: "Abilita (disabilita) domanda",
       question_requireName: "Rendi la domanda obbligatoria",
-      question_resetValue: "Reimpostare il valore della domanda",
+      question_resetValueName: "Reimpostare il valore della domanda",
+      question_setValueName: "Impostare il valore della domanda",
       column_visibilityName: "Mostra (nascondi) colonna",
       column_enableName: "Abilita (disabilita) colonna",
       column_requireName: "Rendi la colonna obbligatoria",
-      column_resetValue: "Reimposta valore colonna",
+      column_resetValueName: "Reimposta valore colonna",
+      column_setValueName: "Impostare il valore della colonna",
       trigger_completeName: "Completa sondaggio",
       trigger_setvalueName: "Imposta la risposta",
       trigger_copyvalueName: "Copia la risposta",
@@ -202,6 +204,7 @@ var italianTranslation = {
       column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
       column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
       column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Espressione il cui risultato verrà assegnato alla domanda di destinazione.",
       trigger_completeText: "il sondaggio viene completato",
       trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Valore chiaro della domanda: {0}", //{0} question name
@@ -415,7 +418,12 @@ var italianTranslation = {
       imageHeight: "Altezza immagine (in valori accettati da CSS)",
       imageWidth: "Larghezza immagine (in valori accettati da CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titolo"
+    },
     page: {
+      title: "Titolo",
       maxTimeToFinish: "Tempo massimo per terminare la pagina (in secondi)"
     },
     question: {
@@ -918,6 +926,7 @@ var italianTranslation = {
     defaultValueExpression: "Espressione valore predefinito",
     requiredIf: "Obbligatoria Se",
     resetValueIf: "Reimposta valore se",
+    setValueIf: "Imposta valore se",
     validators: "Validatori",
     bindings: "Collegamenti",
     renderAs: "Esegui il rendering come",
@@ -994,6 +1003,7 @@ var italianTranslation = {
     "--base-unit": "Unità base",
     groupGeneral: "Generale",
     groupAdvanced: "Avanzato",
+    groupHeader: "Intestazione",
     themeName: "Tema",
     themeMode: "Aspetto della domanda",
     themeModePanels: "Default",
@@ -1004,11 +1014,15 @@ var italianTranslation = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Fluttuare",
     primaryLightColor: "Selezionato",
+    coverTitleForecolor: "Precolore del titolo",
+    coverOverlapEnabled: "Sovrapposizione",
     backgroundDimColor: "Colore di sfondo",
     backgroundImage: "Immagine di sfondo",
     backgroundImageFitAuto: "Automatico",
     backgroundImageFitCover: "Coprire",
     backgroundImageFitContain: "Contenere",
+    backgroundImageFitFill: "Stendere",
+    backgroundImageFitTile: "Tegola",
     backgroundOpacity: "Opacità",
     backgroundImageAttachmentFixed: "Fissato",
     backgroundImageAttachmentScroll: "Scorrere",
@@ -1053,6 +1067,26 @@ var italianTranslation = {
     boxShadowInner: "Interno",
     questionShadow: "Effetti ombra",
     editorShadow: "Effetti di ombreggiatura dell'elemento di input",
+    headerView: "Vista",
+    headerViewBasic: "Basico",
+    headerViewAdvanced: "Avanzato",
+    coverInheritWidthFrom: "Larghezza dell'area di contenuto",
+    coverInheritWidthFromSurvey: "Come il sondaggio",
+    coverInheritWidthFromPage: "Adatta alla pagina",
+    coverTextAreaWidth: "Larghezza del testo",
+    coverBackgroundColorSwitch: "Colore di sfondo",
+    coverBackgroundColorNone: "Nessuno",
+    coverBackgroundColorAccentColor: "Colore principale",
+    coverBackgroundColorCustom: "Costume",
+    horizontalAlignmentLeft: "A sinistra",
+    horizontalAlignmentCenter: "Centro",
+    horizontalAlignmentRight: "A destra",
+    verticalAlignmentTop: "In alto",
+    verticalAlignmentMiddle: "Mezzo",
+    verticalAlignmentBottom: "Fondoschiena",
+    logoPosition: "Posizione del logo",
+    coverTitlePosition: "Posizione del titolo",
+    coverDescriptionPosition: "Descrizione Posizione",
     names: {
       default: "Default",
       sharp: "Affilato",
@@ -1338,8 +1372,40 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.translateUsigAI: "Auto-translate All" => "Traduzione automatica di tutto"
 // ed.translationDialogTitle: "Untranslated strings" => "Stringhe non tradotte"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Inserisci almeno {0} elementi"
-// lg.question_resetValue: "Reset question value" => "Reimpostare il valore della domanda"
+// lg.question_resetValueName: "Reset question value" => "Reimpostare il valore della domanda"
 // lg.column_resetValue: "Reset column value" => "Reimposta valore colonna"
 // pe.markRequired: "Mark as required" => "Contrassegna come richiesto"
 // pe.removeRequiredMark: "Remove the required mark" => "Rimuovere il segno richiesto"
 // p.resetValueIf: "Reset value if" => "Reimposta valore se"
+// lg.question_setValueName: "Set question value" => "Impostare il valore della domanda"
+// lg.column_resetValueName: "Reset column value" => "Reimposta valore colonna"
+// lg.column_setValueName: "Set column value" => "Impostare il valore della colonna"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Espressione il cui risultato verrà assegnato alla domanda di destinazione."
+// survey.title: "Title" => "Titolo"
+// page.title: "Title" => "Titolo"
+// p.setValueIf: "Set value if" => "Imposta valore se"
+// theme.groupHeader: "Header" => "Intestazione"
+// theme.coverTitleForecolor: "Title forecolor" => "Precolore del titolo"
+// theme.coverOverlapEnabled: "Overlap" => "Sovrapposizione"
+// theme.backgroundImageFitFill: "Stretch" => "Stendere"
+// theme.backgroundImageFitTile: "Tile" => "Tegola"
+// theme.headerView: "View" => "Vista"
+// theme.headerViewBasic: "Basic" => "Basico"
+// theme.headerViewAdvanced: "Advanced" => "Avanzato"
+// theme.coverInheritWidthFrom: "Content area width" => "Larghezza dell'area di contenuto"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Come il sondaggio"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Adatta alla pagina"
+// theme.coverTextAreaWidth: "Text width" => "Larghezza del testo"
+// theme.coverBackgroundColorSwitch: "Background color" => "Colore di sfondo"
+// theme.coverBackgroundColorNone: "None" => "Nessuno"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Colore principale"
+// theme.coverBackgroundColorCustom: "Custom" => "Costume"
+// theme.horizontalAlignmentLeft: "Left" => "A sinistra"
+// theme.horizontalAlignmentCenter: "Center" => "Centro"
+// theme.horizontalAlignmentRight: "Right" => "A destra"
+// theme.verticalAlignmentTop: "Top" => "In alto"
+// theme.verticalAlignmentMiddle: "Middle" => "Mezzo"
+// theme.verticalAlignmentBottom: "Bottom" => "Fondoschiena"
+// theme.logoPosition: "Logo Position" => "Posizione del logo"
+// theme.coverTitlePosition: "Title Position" => "Posizione del titolo"
+// theme.coverDescriptionPosition: "Description Position" => "Descrizione Posizione"
