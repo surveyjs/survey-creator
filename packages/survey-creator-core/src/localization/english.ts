@@ -170,11 +170,13 @@ export var enStrings = {
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",
-      question_resetValue: "Reset question value",
+      question_resetValueName: "Reset question value",
+      question_setValueName: "Set question value",
       column_visibilityName: "Show (hide) column",
       column_enableName: "Enable (disable) column",
       column_requireName: "Make column required",
-      column_resetValue: "Reset column value",
+      column_resetValueName: "Reset column value",
+      column_setValueName: "Set column value",
       trigger_completeName: "Complete survey",
       trigger_setvalueName: "Set answer",
       trigger_copyvalueName: "Copy answer",
@@ -204,6 +206,7 @@ export var enStrings = {
       column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
       column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: "An expression whose result will be assigned to the target question.",
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name
@@ -924,6 +927,7 @@ export var enStrings = {
     defaultValueExpression: "Default value expression", // Auto-generated string
     requiredIf: "Required if", // Auto-generated string
     resetValueIf: "Reset value if", // Auto-generated string
+    setValueIf: "Set value if", // Auto-generated string
     validators: "Validators", // Auto-generated string
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
@@ -1012,7 +1016,7 @@ export var enStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
     coverTitleForecolor: "Title forecolor",
-    coverOverlap: "Overlap",
+    coverOverlapEnabled: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string
     backgroundImageFitAuto: "Auto",
@@ -1065,12 +1069,12 @@ export var enStrings = {
     questionShadow: "Shadow effects",
     editorShadow: "Input element shadow effects",
     headerView: "View",
-    headerViewTitle: "Title",
-    headerViewCover: "Cover",
-    coverAreaWidth: "Content area width",
-    coverAreaWidthSurvey: "Same as survey",
-    coverAreaWidthContainer: "Fit to page",
-    coverTextWidth: "Text width",
+    headerViewBasic: "Basic",
+    headerViewAdvanced: "Advanced",
+    coverInheritWidthFrom: "Content area width",
+    coverInheritWidthFromSurvey: "Same as survey",
+    coverInheritWidthFromPage: "Fit to page",
+    coverTextAreaWidth: "Text width",
     coverBackgroundColorSwitch: "Background color",
     coverBackgroundColorNone: "None",
     coverBackgroundColorAccentColor: "Accent color",

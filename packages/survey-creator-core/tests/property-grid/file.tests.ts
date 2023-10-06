@@ -181,19 +181,37 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
 });
 
-test("Check PropertyGridLinkFileEditor maxSize", () => {
-  const question = new QuestionImageModel("q1");
-  let creator = new CreatorBase({});
-  creator.onUploadFile.add((s, o) => {
-    o.callback("success", "test_url");
-    expect(o.question.name).toBe("q1");
+test("Check file editor placeholder and renderedValue", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        name: "q1",
+        type: "fileedit",
+        storeDataAsText: false
+      }
+    ]
   });
-  let propertyGrid = new PropertyGridModelTester(question, creator);
-  let questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
-  expect(questionEditor.maxSize).toBe(0);
+  const question: QuestionFileEditorModel = <QuestionFileEditorModel>survey.getAllQuestions()[0];
+  const base64Url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII";
+  const url = "some_url";
 
-  creator = new CreatorBase({});
-  propertyGrid = new PropertyGridModelTester(question, creator);
-  questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
-  expect(questionEditor.maxSize).toBe(65536);
+  question.value = url;
+  expect(question.value).toBe("some_url");
+  expect(question.placeholder).toBe("");
+  expect(question.renderedValue).toBe("some_url");
+
+  question.value = base64Url;
+  expect(question.value).toBe(base64Url);
+  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedValue).toBe("");
+
+  survey.setValue("q1", url);
+  expect(question.value).toBe("some_url");
+  expect(question.placeholder).toBe("");
+  expect(question.renderedValue).toBe("some_url");
+
+  survey.setValue("q1", base64Url);
+  expect(question.value).toBe(base64Url);
+  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedValue).toBe("");
 });

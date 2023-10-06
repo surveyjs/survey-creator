@@ -1107,30 +1107,6 @@ test("Theme builder restore PG editor", (): any => {
   expect(themeEditor.getQuestionByName("commonFontSize").value).toEqual(110);
 });
 
-test("Check background image has conditional max size", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.activate();
-  let themeEditor = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
-
-  expect(themeEditor.getQuestionByName("backgroundImage").maxSize).toEqual(65536);
-
-  themePlugin.deactivate();
-
-  creator.onUploadFile.add((_, options) => {
-    options.callback("success", "test_url");
-  });
-  themePlugin.activate();
-
-  themeEditor = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
-  const question = <QuestionFileEditorModel>themeEditor.getQuestionByName("backgroundImage");
-
-  expect(question.maxSize).toEqual(0);
-  question.loadFiles(<any>[{ type: "image", name: "test_name" }]);
-  expect(question.value).toBe("test_url");
-});
-
 test("Add theme before activate", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -1420,10 +1396,10 @@ test("headerViewContainer init state", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "title",
+    "headerView": "basic",
     "logoPosition": "left",
-    "areaWidth": "survey",
-    "overlap": false,
+    "inheritWidthFrom": "survey",
+    "overlapEnabled": false,
     "backgroundColorSwitch": "none",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
@@ -1433,7 +1409,7 @@ test("headerViewContainer init state", (): any => {
     "titlePositionY": "bottom",
     "descriptionPositionX": "left",
     "descriptionPositionY": "bottom",
-    "textWidth": 512,
+    "textAreaWidth": 512,
     "height": 256
   });
 });
@@ -1449,17 +1425,17 @@ test("set headerViewContainer", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   headerViewContainer.getElementByName("logoPosition").value = "right";
-  headerViewContainer.getElementByName("headerView").value = "cover";
+  headerViewContainer.getElementByName("headerView").value = "advanced";
   headerViewContainer.getElementByName("height").value = 300;
-  headerViewContainer.getElementByName("areaWidth").value = "container";
-  headerViewContainer.getElementByName("textWidth").value = 600;
+  headerViewContainer.getElementByName("inheritWidthFrom").value = "page";
+  headerViewContainer.getElementByName("textAreaWidth").value = 600;
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
   headerViewContainer.getElementByName("backgroundImage").value = "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg";
   headerViewContainer.getElementByName("backgroundImageFit").value = "fill";
   headerViewContainer.getElementByName("backgroundImageOpacity").value = 50;
   headerViewContainer.getElementByName("titleForecolor").value = "#FBFF24";
-  headerViewContainer.getElementByName("overlap").value = true;
+  headerViewContainer.getElementByName("overlapEnabled").value = true;
   headerViewContainer.getElementByName("logoPositionX").value = "center";
   headerViewContainer.getElementByName("logoPositionY").value = "middle";
   headerViewContainer.getElementByName("titlePositionX").value = "center";
@@ -1469,9 +1445,9 @@ test("set headerViewContainer", (): any => {
 
   expect(creator.theme.cover).toEqual({
     "height": 300,
-    "areaWidth": "container",
-    "textWidth": 600,
-    "overlap": true,
+    "inheritWidthFrom": "page",
+    "textAreaWidth": 600,
+    "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageOpacity": 0.5,
     "backgroundImageFit": "fill",
@@ -1499,12 +1475,12 @@ test("restore headerViewContainer values", (): any => {
     },
     "cover": {
       "height": 300,
-      "areaWidth": "container",
-      "textWidth": 600,
+      "inheritWidthFrom": "page",
+      "textAreaWidth": 600,
       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
       "backgroundImageOpacity": 0.5,
       "backgroundImageFit": "fill",
-      "overlap": true,
+      "overlapEnabled": true,
       "logoPositionX": "center",
       "logoPositionY": "middle",
       "titlePositionX": "center",
@@ -1520,27 +1496,26 @@ test("restore headerViewContainer values", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "title",
+    "headerView": "basic",
     "logoPosition": "left",
-    "areaWidth": "container",
+    "inheritWidthFrom": "page",
     "titleForecolor": "#FBFF24",
     "backgroundColor": "#5094ed",
     "backgroundColorSwitch": "custom",
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
     "backgroundImageFit": "fill",
     "backgroundImageOpacity": 50,
-    "overlap": true,
+    "overlapEnabled": true,
     "logoPositionX": "center",
     "logoPositionY": "middle",
     "titlePositionX": "center",
     "titlePositionY": "middle",
     "descriptionPositionX": "center",
     "descriptionPositionY": "middle",
-    "textWidth": 600,
+    "textAreaWidth": 600,
     "height": 300
   });
 });
-
 test("Get theme changes only", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -1605,3 +1580,82 @@ test("Get theme changes only", (): any => {
   ]);
   expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
 });
+test("Creator footer action bar: only theme tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("theme");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+test("Creator footer action bar: all tabs", (): any => {
+  const designerTabButtonOrder = ["svd-designer", "svd-preview", "action-undo", "action-redo", "svd-settings"].join("|");
+  const testTabButtonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible"].join("|");
+  const themeTabButtonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: true, showPreviewTab: true, showThemeTab: true, showLogicTab: true, showJSONEditorTab: true, showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("designer");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+
+  creator.activeTab = "test";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(testTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "theme";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(themeTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+
+  creator.activeTab = "designer";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
+});
+test("Mobile mode: hide advanced settings in property grid ", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isMobileView = true;
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(3);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeFalsy();
+});
+

@@ -1606,7 +1606,7 @@ export class CreatorBase extends Base
   private initFooterToolbar(): void {
     if (!this.footerToolbar) {
       this.footerToolbar = new ActionContainer();
-      ["undoredo", "designer", "test"].forEach((pluginKey: string) => {
+      ["designer", "undoredo", "test", "theme"].forEach((pluginKey: string) => {
         const plugin = this.getPlugin(pluginKey);
         if (!!plugin && !!plugin["addFooterActions"]) {
           plugin["addFooterActions"]();

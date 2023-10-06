@@ -168,11 +168,13 @@ export var fiStrings = {
       question_visibilityName: "Kysymyksen näkyvyys",
       question_enableName: "Kysymys käytössä/Ei käytössä",
       question_requireName: "Kysymys valinnainen vaaditaan",
-      question_resetValue: "Palauta kysymyksen arvo",
+      question_resetValueName: "Palauta kysymyksen arvo",
+      question_setValueName: "Aseta kysymyksen arvo",
       column_visibilityName: "Näytä (piilota) -sarake",
       column_enableName: "Ota käyttöön (poista käytöstä) sarake",
       column_requireName: "Tee sarakkeesta pakollinen",
-      column_resetValue: "Palauta sarakkeen arvo",
+      column_resetValueName: "Palauta sarakkeen arvo",
+      column_setValueName: "Sarakkeen arvon määrittäminen",
       trigger_completeName: "Valmis kysely",
       trigger_setvalueName: "Aseta kysymyksen arvo",
       trigger_copyvalueName: "Kopioi kysymyksen arvo",
@@ -202,6 +204,7 @@ export var fiStrings = {
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
       column_requireText: "Tee kysymyksen sarake {0} {1} pakollinen", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Lauseke, jonka tulos määritetään kohdekysymykselle.",
       trigger_completeText: "Kyselystä tulee täytetty",
       trigger_setvalueText: "Laita arvo {1} kysymykseen {0}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Selkeän kysymyksen arvo: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var fiStrings = {
       imageHeight: "Kuvan korkeus (CSS:n hyväksymissä arvoissa)",
       imageWidth: "Kuvan leveys (CSS-hyväksytyissä arvoissa)"
     },
+    // survey templates
+    survey: {
+      title: "Nimike"
+    },
     page: {
+      title: "Nimike",
       maxTimeToFinish: "Sivun viimeistelyn aikaraja (sekunteina)"
     },
     question: {
@@ -918,6 +926,7 @@ export var fiStrings = {
     defaultValueExpression: "Oletusarvon lauseke",
     requiredIf: "requiredIf",
     resetValueIf: "Nollaa arvo, jos",
+    setValueIf: "Aseta arvo, jos",
     validators: "validators",
     bindings: "Siteet",
     renderAs: "Hahmonna muodossa",
@@ -994,6 +1003,7 @@ export var fiStrings = {
     "--base-unit": "Perusyksikkö",
     groupGeneral: "Yleiset",
     groupAdvanced: "Edistynyt",
+    groupHeader: "Otsikko",
     themeName: "Teema",
     themeMode: "Kysymyksen ulkonäkö",
     themeModePanels: "Laiminlyönti",
@@ -1004,11 +1014,15 @@ export var fiStrings = {
     primaryDefaultColor: "Laiminlyönti",
     primaryDarkColor: "Häilyä",
     primaryLightColor: "Valittu",
+    coverTitleForecolor: "Otsikon etuväri",
+    coverOverlapEnabled: "Limittyä",
     backgroundDimColor: "Taustaväri",
     backgroundImage: "Taustakuvan",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Kansi",
     backgroundImageFitContain: "Sisältää",
+    backgroundImageFitFill: "Venyä",
+    backgroundImageFitTile: "Laatta",
     backgroundOpacity: "Läpikuultamattomuus",
     backgroundImageAttachmentFixed: "Kiinteä",
     backgroundImageAttachmentScroll: "Vierittää",
@@ -1053,6 +1067,26 @@ export var fiStrings = {
     boxShadowInner: "Sisäinen",
     questionShadow: "Varjo-tehosteet",
     editorShadow: "Syöttöelementin varjotehosteet",
+    headerView: "Näkymä",
+    headerViewBasic: "Emäksinen",
+    headerViewAdvanced: "Edistynyt",
+    coverInheritWidthFrom: "Sisältöalueen leveys",
+    coverInheritWidthFromSurvey: "Sama kuin kyselyssä",
+    coverInheritWidthFromPage: "Sovita sivulle",
+    coverTextAreaWidth: "Tekstin leveys",
+    coverBackgroundColorSwitch: "Taustaväri",
+    coverBackgroundColorNone: "Ei lainkaan",
+    coverBackgroundColorAccentColor: "Korostusväri",
+    coverBackgroundColorCustom: "Tapa",
+    horizontalAlignmentLeft: "Vasen",
+    horizontalAlignmentCenter: "Keskus",
+    horizontalAlignmentRight: "Oikea",
+    verticalAlignmentTop: "Huippu",
+    verticalAlignmentMiddle: "Keskus",
+    verticalAlignmentBottom: "Pohja",
+    logoPosition: "Logon sijainti",
+    coverTitlePosition: "Otsikon sijainti",
+    coverDescriptionPosition: "Kuvaus Sijainti",
     names: {
       default: "Laiminlyönti",
       sharp: "Terävä",
@@ -1588,10 +1622,44 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Käännä kaikki automaattisesti"
 // ed.translationDialogTitle: "Untranslated strings" => "Kääntämättömät merkkijonot"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
-// lg.question_resetValue: "Reset question value" => "Palauta kysymyksen arvo"
+// lg.question_resetValueName: "Reset question value" => "Palauta kysymyksen arvo"
 // lg.column_resetValue: "Reset column value" => "Palauta sarakkeen arvo"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Merkitse pakollisesti"
 // pe.removeRequiredMark: "Remove the required mark" => "Poista vaadittu merkki"
 // p.resetValueIf: "Reset value if" => "Nollaa arvo, jos"
+// lg.question_setValueName: "Set question value" => "Aseta kysymyksen arvo"
+// lg.column_resetValueName: "Reset column value" => "Palauta sarakkeen arvo"
+// lg.column_setValueName: "Set column value" => "Sarakkeen arvon määrittäminen"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Lauseke, jonka tulos määritetään kohdekysymykselle."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Nimike"
+// page.title: "Title" => "Nimike"
+// p.setValueIf: "Set value if" => "Aseta arvo, jos"
+// theme.groupHeader: "Header" => "Otsikko"
+// theme.coverTitleForecolor: "Title forecolor" => "Otsikon etuväri"
+// theme.coverOverlapEnabled: "Overlap" => "Limittyä"
+// theme.backgroundImageFitFill: "Stretch" => "Venyä"
+// theme.backgroundImageFitTile: "Tile" => "Laatta"
+// theme.headerView: "View" => "Näkymä"
+// theme.headerViewBasic: "Basic" => "Emäksinen"
+// theme.headerViewAdvanced: "Advanced" => "Edistynyt"
+// theme.coverInheritWidthFrom: "Content area width" => "Sisältöalueen leveys"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama kuin kyselyssä"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Sovita sivulle"
+// theme.coverTextAreaWidth: "Text width" => "Tekstin leveys"
+// theme.coverBackgroundColorSwitch: "Background color" => "Taustaväri"
+// theme.coverBackgroundColorNone: "None" => "Ei lainkaan"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Korostusväri"
+// theme.coverBackgroundColorCustom: "Custom" => "Tapa"
+// theme.horizontalAlignmentLeft: "Left" => "Vasen"
+// theme.horizontalAlignmentCenter: "Center" => "Keskus"
+// theme.horizontalAlignmentRight: "Right" => "Oikea"
+// theme.verticalAlignmentTop: "Top" => "Huippu"
+// theme.verticalAlignmentMiddle: "Middle" => "Keskus"
+// theme.verticalAlignmentBottom: "Bottom" => "Pohja"
+// theme.logoPosition: "Logo Position" => "Logon sijainti"
+// theme.coverTitlePosition: "Title Position" => "Otsikon sijainti"
+// theme.coverDescriptionPosition: "Description Position" => "Kuvaus Sijainti"

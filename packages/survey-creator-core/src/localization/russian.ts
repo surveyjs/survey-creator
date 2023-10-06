@@ -168,11 +168,13 @@ export var ruStrings = {
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
       question_requireName: "Вопрос обязательный",
-      question_resetValue: "Сбросить значение вопроса",
+      question_resetValueName: "Сбросить значение вопроса",
+      question_setValueName: "Задать значение вопроса",
       column_visibilityName: "Показать (скрыть) столбец",
       column_enableName: "Включить (отключить) столбец",
       column_requireName: "Сделать столбец обязательным",
-      column_resetValue: "Сброс значения столбца",
+      column_resetValueName: "Сброс значения столбца",
+      column_setValueName: "Задание значения столбца",
       trigger_completeName: "Опрос завершен",
       trigger_setvalueName: "Установить значение вопроса",
       trigger_copyvalueName: "Копировать значение вопроса",
@@ -202,6 +204,7 @@ export var ruStrings = {
       column_visibilityText: "Сделайте видимым {0} {1} в столбце вопроса", //{0} column name, {1} question name
       column_enableText: "Сделайте столбец {0} вопроса {1} включите", //{0} column name, {1} question name
       column_requireText: "Сделайте {0} вопроса {1} обязательным для заполнения", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Выражение, результат которого будет присвоен целевому вопросу.",
       trigger_completeText: "Опрос становится завершенным",
       trigger_setvalueText: "Установить в вопрос: {0} значение {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Четкое значение вопроса: {0}", //{0} question name
@@ -415,7 +418,12 @@ export var ruStrings = {
       imageHeight: "Высота изображения (в значениях, принимаемых CSS)",
       imageWidth: "Ширина изображения (в значениях, принимаемых CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Титул"
+    },
     page: {
+      title: "Титул",
       maxTimeToFinish: "Ограничение по времени завершения страницы (в секундах)"
     },
     question: {
@@ -918,6 +926,7 @@ export var ruStrings = {
     defaultValueExpression: "Выражение значения по умолчанию",
     requiredIf: "Обязателен если",
     resetValueIf: "Сбросьте значение, если",
+    setValueIf: "Установите значение, если",
     validators: "Валидаторы",
     bindings: "Привязки",
     renderAs: "Рендеринг как",
@@ -994,6 +1003,7 @@ export var ruStrings = {
     "--base-unit": "Базовый блок",
     groupGeneral: "Общее",
     groupAdvanced: "Продвинутый",
+    groupHeader: "Заголовок",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
@@ -1004,6 +1014,8 @@ export var ruStrings = {
     primaryDefaultColor: "По умолчанию",
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
+    coverTitleForecolor: "Цвет заголовка",
+    coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
     backgroundImageFitAuto: "Авто",
@@ -1055,6 +1067,26 @@ export var ruStrings = {
     boxShadowInner: "Внутренний",
     questionShadow: "Эффекты тени",
     editorShadow: "Эффекты тени входного элемента",
+    headerView: "Вид",
+    headerViewBasic: "Основной",
+    headerViewAdvanced: "Продвинутый",
+    coverInheritWidthFrom: "Ширина области содержимого",
+    coverInheritWidthFromSurvey: "То же, что и опрос",
+    coverInheritWidthFromPage: "По размеру страницы",
+    coverTextAreaWidth: "Ширина текста",
+    coverBackgroundColorSwitch: "Цвет фона",
+    coverBackgroundColorNone: "Никакой",
+    coverBackgroundColorAccentColor: "Акцентный цвет",
+    coverBackgroundColorCustom: "Обычай",
+    horizontalAlignmentLeft: "Налево",
+    horizontalAlignmentCenter: "Центр",
+    horizontalAlignmentRight: "Правильно",
+    verticalAlignmentTop: "Вверх",
+    verticalAlignmentMiddle: "Середина",
+    verticalAlignmentBottom: "Дно",
+    logoPosition: "Положение логотипа",
+    coverTitlePosition: "Титульная позиция",
+    coverDescriptionPosition: "Описание Должность",
     names: {
       default: "По умолчанию",
       sharp: "Чёткая",
@@ -1653,10 +1685,43 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Автоматический перевод всех"
 // ed.translationDialogTitle: "Untranslated strings" => "Непереведенные строки"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
-// lg.question_resetValue: "Reset question value" => "Сбросить значение вопроса"
+// lg.question_resetValueName: "Reset question value" => "Сбросить значение вопроса"
 // lg.column_resetValue: "Reset column value" => "Сброс значения столбца"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Отметьте как обязательный"
 // pe.removeRequiredMark: "Remove the required mark" => "Снимите нужную отметку"
 // p.resetValueIf: "Reset value if" => "Сбросьте значение, если"
+
+// lg.question_setValueName: "Set question value" => "Задать значение вопроса"
+// lg.column_resetValueName: "Reset column value" => "Сброс значения столбца"
+// lg.column_setValueName: "Set column value" => "Задание значения столбца"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Выражение, результат которого будет присвоен целевому вопросу."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Титул"
+// page.title: "Title" => "Титул"
+// p.setValueIf: "Set value if" => "Установите значение, если"
+// theme.groupHeader: "Header" => "Заголовок"
+// theme.coverTitleForecolor: "Title forecolor" => "Цвет заголовка"
+// theme.coverOverlapEnabled: "Overlap" => "Перекрытие"
+// theme.headerView: "View" => "Вид"
+// theme.headerViewBasic: "Basic" => "Основной"
+// theme.headerViewAdvanced: "Advanced" => "Продвинутый"
+// theme.coverInheritWidthFrom: "Content area width" => "Ширина области содержимого"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "То же, что и опрос"
+// theme.coverInheritWidthFromPage: "Fit to page" => "По размеру страницы"
+// theme.coverTextAreaWidth: "Text width" => "Ширина текста"
+// theme.coverBackgroundColorSwitch: "Background color" => "Цвет фона"
+// theme.coverBackgroundColorNone: "None" => "Никакой"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Акцентный цвет"
+// theme.coverBackgroundColorCustom: "Custom" => "Обычай"
+// theme.horizontalAlignmentLeft: "Left" => "Налево"
+// theme.horizontalAlignmentCenter: "Center" => "Центр"
+// theme.horizontalAlignmentRight: "Right" => "Правильно"
+// theme.verticalAlignmentTop: "Top" => "Вверх"
+// theme.verticalAlignmentMiddle: "Middle" => "Середина"
+// theme.verticalAlignmentBottom: "Bottom" => "Дно"
+// theme.logoPosition: "Logo Position" => "Положение логотипа"
+// theme.coverTitlePosition: "Title Position" => "Титульная позиция"
+// theme.coverDescriptionPosition: "Description Position" => "Описание Должность"

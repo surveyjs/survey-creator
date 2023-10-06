@@ -23,8 +23,6 @@ $background-dark: var(--sjs-questionpanel-hovercolor, var(--sjs-general-backcolo
 $background-dim-dark: var(--sjs-editorpanel-hovercolor, var(--sjs-general-backcolor-dim-dark, rgb(243, 243, 243)));
 
 $corner-radius: var(--sjs-corner-radius, 4px);
-$editor-corner-radius: var(--sjs-editorpanel-cornerRadius, var(--sjs-corner-radius, 4px));
-$panel-corner-radius: var(--sjs-questionpanel-cornerRadius, var(--sjs-corner-radius, 4px));
 
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
 $foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
@@ -55,38 +53,6 @@ $blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
 $font-family: var(--font-family);
 $font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
-
-$font-surveytitle-family: var(--sjs-font-surveytitle-family, $font-family);
-$font-surveytitle-weight: var(--sjs-font-surveytitle-weight, 700);
-$font-surveytitle-size: var(--sjs-font-surveytitle-size, calc(2 * ($font-size)));
-
-$font-pagetitle-family: var(--sjs-font-pagetitle-family, $font-family);
-$font-pagetitle-weight: var(--sjs-font-pagetitle-weight, 700);
-$font-pagetitle-color: var(--sjs-font-pagetitle-color, var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91)));
-$font-pagetitle-size: var(--sjs-font-pagetitle-size, calc(1.5 * ($font-size)));
-
-$font-pagedescription-family: var(--sjs-font-pagedescription-family, $font-family);
-$font-pagedescription-weight: var(--sjs-font-pagedescription-weight, 400);
-$font-pagedescription-color: var(--sjs-font-pagedescription-color,
-    var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45)));
-$font-pagedescription-size: var(--sjs-font-pagedescription-size, $font-size);
-
-$font-questiontitle-family: var(--sjs-font-questiontitle-family, $font-family);
-$font-questiontitle-weight: var(--sjs-font-questiontitle-weight, 600);
-$font-questiontitle-color: var(--sjs-font-questiontitle-color,
-    var(--sjs-general-forecolor, var(--foreground, #161616)));
-$font-questiontitle-size: var(--sjs-font-questiontitle-size, $font-size);
-
-$font-questiondescription-family: var(--sjs-font-questiondescription-family, $font-family);
-$font-questiondescription-weight: var(--sjs-font-questiondescription-weight, 400);
-$font-questiondescription-color: var(--sjs-font-questiondescription-color,
-    var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45)));
-$font-questiondescription-size: var(--sjs-font-questiondescription-size, $font-size);
-
-$font-editorfont-family: var(--sjs-font-editorfont-family, $font-family);
-$font-editorfont-weight: var(--sjs-font-editorfont-weight, 400);
-$font-editorfont-color: var(--sjs-font-editorfont-color, var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91)));
-$font-editorfont-size: var(--sjs-font-editorfont-size, $font-size);
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
 @function calcSize($multiplier) {
@@ -97,18 +63,6 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
   @else {
     $result: calc(#{$multiplier} * (#{$base-unit}));
-    @return $result;
-  }
-}
-
-@function calcCornerRadius($multiplier) {
-  @if $multiplier ==1 {
-    $result: #{$corner-radius};
-    @return $result;
-  }
-
-  @else {
-    $result: calc(#{$multiplier} * (#{$corner-radius}));
     @return $result;
   }
 }
@@ -142,7 +96,7 @@ $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 @mixin borderLight {
   --border-light-font-size: #{$base-unit};
   border: calc(0.25 * var(--border-light-font-size)) solid $border-light;
-  border-radius: calcCornerRadius(1);
+  border-radius: $corner-radius;
 }
 
 // creator variables

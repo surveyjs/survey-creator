@@ -185,6 +185,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               type: "panel",
               visible: false
             },
+            {
+              name: "setValueIfPanel",
+              visible: false,
+              type: "panel",
+              elements: [{
+                name: "setValueExpression",
+                type: "comment",
+                titleLocation: "hidden"
+              }]
+            },
           ]
         }
       ]
@@ -260,10 +270,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if (options.panel.name === "triggerEditorPanel") {
+    const name = options.panel.name;
+    if (name === "triggerEditorPanel" || name === "setValueIfPanel") {
       options.cssClasses.panel.container += " svc-logic_trigger-editor";
     }
-    if (options.panel.name === "triggerQuestionsPanel") {
+    if (name === "triggerQuestionsPanel") {
       options.panel.allowRootStyle = false;
       options.cssClasses.panel.container += " svc-logic_trigger-questions";
     }

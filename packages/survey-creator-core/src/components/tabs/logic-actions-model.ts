@@ -11,6 +11,8 @@ export class LogicActionModelBase {
 
   static createActionModel(panel: PanelModel, logicAction: SurveyLogicAction, logicType: SurveyLogicType, selectorElementsHash): LogicActionModelBase {
     if (!!logicType && logicType.hasSelectorChoices) {
+      if(logicType.name.indexOf("_setValue") > -1)
+        return new LogicActionSetValueModel(panel, logicAction, logicType, selectorElementsHash);
       return new LogicActionModel(panel, logicAction, logicType, selectorElementsHash);
     } else {
       return new LogicActionTriggerModel(panel, logicAction, logicType);
@@ -46,7 +48,7 @@ export class LogicActionModel extends LogicActionModelBase {
     const optionsCaptionName = elementType == "page" ? "pe.conditionSelectPage" : (elementType == "panel" ? "pe.conditionSelectPanel" : "pe.conditionSelectQuestion");
     return editorLocalization.getString(optionsCaptionName);
   }
-  private getElementBySelectorName(panel: PanelModel): Base {
+  protected getElementBySelectorName(panel: PanelModel): Base {
     const value = panel.getQuestionByName("elementSelector").value;
     if (!value) return null;
     return this.selectorElementsHash[value];
@@ -78,6 +80,34 @@ export class LogicActionModel extends LogicActionModelBase {
   public getSelectedElement(): string {
     const question = <QuestionDropdownModel>this.panel.getQuestionByName("elementSelector");
     return question.value;
+  }
+}
+
+export class LogicActionSetValueModel extends LogicActionModel {
+  public updatePanelElements(selectedElement: string, choices: Array<ItemValue>): void {
+    super.updatePanelElements(selectedElement, choices);
+    this.getValueIfQuestion().placeholder = editorLocalization.getString("ed.lg.setValueExpressionPlaceholder");
+    this.getValueIfPanel().visible = true;
+    this.setValueExpressionValue();
+  }
+  public afterUpdateInitialLogicAction(): void {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    if(!!selectedElement) {
+      (<any>selectedElement).setValueExpression = this.panel.getQuestionByName("setValueExpression").value;
+    }
+  }
+  private setValueExpressionValue(): void {
+    const selectedElement = this.getElementBySelectorName(this.panel);
+    if(!!selectedElement) {
+      this.getValueIfQuestion().value = (<any>selectedElement).setValueExpression;
+    }
+  }
+  private getValueIfPanel(): IElement { return this.panel.getElementByName("setValueIfPanel"); }
+  private getValueIfQuestion(): Question { return this.panel.getQuestionByName("setValueExpression"); }
+  public resetElements(): void {
+    super.resetElements();
+    this.getValueIfPanel().visible = false;
+    this.getValueIfQuestion().clearValue();
   }
 }
 

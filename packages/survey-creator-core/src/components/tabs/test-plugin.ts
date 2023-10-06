@@ -15,6 +15,7 @@ export class TabTestPlugin implements ICreatorPlugin {
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
   private designerAction: Action;
+  private previewAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
@@ -68,6 +69,9 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
   private setPreviewTheme(themeName: string): void {
     this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
+  }
+  private createVisibleUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
   }
 
   constructor(private creator: CreatorBase) {
@@ -268,19 +272,28 @@ export class TabTestPlugin implements ICreatorPlugin {
     this.designerAction = new Action({
       id: "svd-designer",
       iconName: "icon-config",
-      needSeparator: true,
       action: () => { this.creator.makeNewViewActive("designer"); },
-      // active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "test");
-      }),
+      visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false
+    });
+
+    this.previewAction = new Action({
+      id: "svd-preview",
+      iconName: "icon-preview",
+      active: true,
+      visible: this.createVisibleUpdater(),
+      locTitleName: "ed.testSurvey",
+      showTitle: false,
+      action: () => { }
     });
 
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
       visible: false
     });
 
@@ -293,11 +306,11 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.testAgainAction);
-    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
-    this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
+    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.creator.footerToolbar.actions.push(this.previewAction);
     this.creator.footerToolbar.actions.push(this.prevPageAction);
     this.creator.footerToolbar.actions.push(this.nextPageAction);
-    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
+    // this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
   }
 }

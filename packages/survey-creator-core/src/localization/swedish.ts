@@ -168,11 +168,13 @@ export let svStrings = {
       question_visibilityName: "Visa (dölj) fråga",
       question_enableName: "Aktivera (inaktivera) fråga",
       question_requireName: "Gör frågan obligatorisk",
-      question_resetValue: "Återställ frågevärde",
+      question_resetValueName: "Återställ frågevärde",
+      question_setValueName: "Ange frågevärde",
       column_visibilityName: "Visa (dölj) kolumn",
       column_enableName: "Aktivera (inaktivera) kolumn",
       column_requireName: "Gör kolumnen obligatorisk",
-      column_resetValue: "Återställ kolumnvärde",
+      column_resetValueName: "Återställ kolumnvärde",
+      column_setValueName: "Ange kolumnvärde",
       trigger_completeName: "Fullständig undersökning",
       trigger_setvalueName: "Ställ in svar",
       trigger_copyvalueName: "Kopiera svar",
@@ -202,6 +204,7 @@ export let svStrings = {
       column_visibilityText: "Synliggör kolumn {0} av fråga {1}", //{0} column name, {1} question name
       column_enableText: "Gör kolumn {0} av fråga {1} aktivera", //{0} column name, {1} question name
       column_requireText: "Gör kolumn {0} av fråga {1} krävs", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Ett uttryck vars resultat kommer att tilldelas målfrågan.",
       trigger_completeText: "Undersökningen blir slutförd",
       trigger_setvalueText: "ifrågasätts: {0} värde {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Tydligt frågevärde: {0}", //{0} question name
@@ -415,7 +418,12 @@ export let svStrings = {
       imageHeight: "Bildhöjd (i CSS-accepterade värden)",
       imageWidth: "Bildbredd (i CSS-godkända värden)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Tidsgräns för att avsluta sidan (i sekunder)"
     },
     question: {
@@ -918,6 +926,7 @@ export let svStrings = {
     defaultValueExpression: "Uttryck för standardvärde",
     requiredIf: "Obligatoriskt om",
     resetValueIf: "Återställ värde om",
+    setValueIf: "Ange värde om",
     validators: "validators",
     bindings: "Bindningar",
     renderAs: "Återge som",
@@ -994,6 +1003,7 @@ export let svStrings = {
     "--base-unit": "Basenhet",
     groupGeneral: "Allmänt",
     groupAdvanced: "Avancerad",
+    groupHeader: "Rubrik",
     themeName: "Tema",
     themeMode: "Fråga utseende",
     themeModePanels: "Standard",
@@ -1004,11 +1014,15 @@ export let svStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sväva",
     primaryLightColor: "Vald",
+    coverTitleForecolor: "Titel förfärg",
+    coverOverlapEnabled: "Överlappa",
     backgroundDimColor: "Bakgrundsfärg",
     backgroundImage: "Bakgrundsbild",
     backgroundImageFitAuto: "Bil",
     backgroundImageFitCover: "Täcka",
     backgroundImageFitContain: "Innehålla",
+    backgroundImageFitFill: "Tänja",
+    backgroundImageFitTile: "Kakel",
     backgroundOpacity: "Ogenomskinlighet",
     backgroundImageAttachmentFixed: "Fast",
     backgroundImageAttachmentScroll: "Rulla",
@@ -1053,6 +1067,26 @@ export let svStrings = {
     boxShadowInner: "Inre",
     questionShadow: "Skuggeffekter",
     editorShadow: "Skuggeffekter för indataelement",
+    headerView: "Utsikt",
+    headerViewBasic: "Grundläggande",
+    headerViewAdvanced: "Avancerad",
+    coverInheritWidthFrom: "Innehållets bredd",
+    coverInheritWidthFromSurvey: "Samma som undersökning",
+    coverInheritWidthFromPage: "Anpassa till sida",
+    coverTextAreaWidth: "Textens bredd",
+    coverBackgroundColorSwitch: "Bakgrundsfärg",
+    coverBackgroundColorNone: "Ingen",
+    coverBackgroundColorAccentColor: "Accentfärg",
+    coverBackgroundColorCustom: "Sed",
+    horizontalAlignmentLeft: "Vänster",
+    horizontalAlignmentCenter: "Centrum",
+    horizontalAlignmentRight: "Höger",
+    verticalAlignmentTop: "Topp",
+    verticalAlignmentMiddle: "Mitt",
+    verticalAlignmentBottom: "Botten",
+    logoPosition: "Logotypens placering",
+    coverTitlePosition: "Titel Position",
+    coverDescriptionPosition: "Beskrivning Position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1766,10 +1800,44 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.translateUsigAI: "Auto-translate All" => "Översätt alla automatiskt"
 // ed.translationDialogTitle: "Untranslated strings" => "Oöversatta strängar"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Ange minst {0} artiklar"
-// lg.question_resetValue: "Reset question value" => "Återställ frågevärde"
+// lg.question_resetValueName: "Reset question value" => "Återställ frågevärde"
 // lg.column_resetValue: "Reset column value" => "Återställ kolumnvärde"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Markera efter behov"
 // pe.removeRequiredMark: "Remove the required mark" => "Ta bort det obligatoriska märket"
 // p.resetValueIf: "Reset value if" => "Återställ värde om"
+// lg.question_setValueName: "Set question value" => "Ange frågevärde"
+// lg.column_resetValueName: "Reset column value" => "Återställ kolumnvärde"
+// lg.column_setValueName: "Set column value" => "Ange kolumnvärde"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ett uttryck vars resultat kommer att tilldelas målfrågan."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Ange värde om"
+// theme.groupHeader: "Header" => "Rubrik"
+// theme.coverTitleForecolor: "Title forecolor" => "Titel förfärg"
+// theme.coverOverlapEnabled: "Overlap" => "Överlappa"
+// theme.backgroundImageFitFill: "Stretch" => "Tänja"
+// theme.backgroundImageFitTile: "Tile" => "Kakel"
+// theme.headerView: "View" => "Utsikt"
+// theme.headerViewBasic: "Basic" => "Grundläggande"
+// theme.headerViewAdvanced: "Advanced" => "Avancerad"
+// theme.coverInheritWidthFrom: "Content area width" => "Innehållets bredd"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samma som undersökning"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Anpassa till sida"
+// theme.coverTextAreaWidth: "Text width" => "Textens bredd"
+// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrundsfärg"
+// theme.coverBackgroundColorNone: "None" => "Ingen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentfärg"
+// theme.coverBackgroundColorCustom: "Custom" => "Sed"
+// theme.horizontalAlignmentLeft: "Left" => "Vänster"
+// theme.horizontalAlignmentCenter: "Center" => "Centrum"
+// theme.horizontalAlignmentRight: "Right" => "Höger"
+// theme.verticalAlignmentTop: "Top" => "Topp"
+// theme.verticalAlignmentMiddle: "Middle" => "Mitt"
+// theme.verticalAlignmentBottom: "Bottom" => "Botten"
+// theme.logoPosition: "Logo Position" => "Logotypens placering"
+// theme.coverTitlePosition: "Title Position" => "Titel Position"
+// theme.coverDescriptionPosition: "Description Position" => "Beskrivning Position"

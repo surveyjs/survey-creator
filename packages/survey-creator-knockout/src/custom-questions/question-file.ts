@@ -43,7 +43,7 @@ class QuestionFileEditorImplementor extends QuestionImplementor {
       this.question.onInputChange(event);
       return true;
     });
-    this.setObservaleObj("koReadOnlyValue", ko.computed(() => this.question.value));
+    this.setObservaleObj("koReadOnlyValue", ko.computed(() => this.question.renderedValue));
   }
 }
 

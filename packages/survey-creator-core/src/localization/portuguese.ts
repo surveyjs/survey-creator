@@ -168,11 +168,13 @@ var portugueseTranslation = {
       question_visibilityName: "Mostrar (esconder) questão",
       question_enableName: "Ativar (desativar) questão",
       question_requireName: "Tornar a pergunta obrigatória",
-      question_resetValue: "Redefinir o valor da pergunta",
+      question_resetValueName: "Redefinir o valor da pergunta",
+      question_setValueName: "Definir o valor da pergunta",
       column_visibilityName: "Mostrar (esconder) coluna",
       column_enableName: "Ativar (desativar) coluna",
       column_requireName: "Tornar a coluna obrigatória",
-      column_resetValue: "Redefinir o valor da coluna",
+      column_resetValueName: "Redefinir o valor da coluna",
+      column_setValueName: "Definir valor de coluna",
       trigger_completeName: "Completar questionário",
       trigger_setvalueName: "Definir resposta",
       trigger_copyvalueName: "Copiar resposta",
@@ -202,6 +204,7 @@ var portugueseTranslation = {
       column_visibilityText: "tornar coluna {0} da questão {1} visível", //{0} column name, {1} question name
       column_enableText: "tornar coluna {0} da questão {1} ativa", //{0} column name, {1} question name
       column_requireText: "torna coluna {0} da questão {1} obrigatória", //{0} column name, {1} question name
+      setValueExpressionPlaceholder: " Uma expressão cujo resultado será atribuído à pergunta de destino.",
       trigger_completeText: "o questionário fica completo",
       trigger_setvalueText: "Colocar em questão: {0} valor {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "valor claro da pergunta: {0}", //{0} question name
@@ -415,7 +418,12 @@ var portugueseTranslation = {
       imageHeight: "Altura da imagem (em valores aceitos por CSS)",
       imageWidth: "Largura da imagem (em valores aceitos por CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Título"
+    },
     page: {
+      title: "Título",
       maxTimeToFinish: "Tempo limite para finalizar esta página (em segundos)"
     },
     question: {
@@ -918,6 +926,7 @@ var portugueseTranslation = {
     defaultValueExpression: "Valor de expressão pré-definida",
     requiredIf: "Obrigatório se",
     resetValueIf: "Redefinir valor se",
+    setValueIf: "Defina o valor se",
     validators: "Validadores",
     bindings: "ligações",
     renderAs: "renderizar como",
@@ -994,6 +1003,7 @@ var portugueseTranslation = {
     "--base-unit": "Unidade base",
     groupGeneral: "Geral",
     groupAdvanced: "Avançado",
+    groupHeader: "Cabeçalho",
     themeName: "Tema",
     themeMode: "Aparência da pergunta",
     themeModePanels: "Inadimplência",
@@ -1004,11 +1014,15 @@ var portugueseTranslation = {
     primaryDefaultColor: "Inadimplência",
     primaryDarkColor: "Pairar",
     primaryLightColor: "Selecionado",
+    coverTitleForecolor: "Precolor do título",
+    coverOverlapEnabled: "Sobrepor",
     backgroundDimColor: "Cor de fundo",
     backgroundImage: "Imagem de fundo",
     backgroundImageFitAuto: "Automático",
     backgroundImageFitCover: "Cobrir",
     backgroundImageFitContain: "Conter",
+    backgroundImageFitFill: "Esticar",
+    backgroundImageFitTile: "Telha",
     backgroundOpacity: "Opacidade",
     backgroundImageAttachmentFixed: "Fixo",
     backgroundImageAttachmentScroll: "Rolar",
@@ -1053,6 +1067,26 @@ var portugueseTranslation = {
     boxShadowInner: "Interno",
     questionShadow: "Efeitos de sombra",
     editorShadow: "Efeitos de sombra do elemento de entrada",
+    headerView: "Vista",
+    headerViewBasic: "Básico",
+    headerViewAdvanced: "Avançado",
+    coverInheritWidthFrom: "Largura da área de conteúdo",
+    coverInheritWidthFromSurvey: "O mesmo que pesquisa",
+    coverInheritWidthFromPage: "Ajustar à página",
+    coverTextAreaWidth: "Largura do texto",
+    coverBackgroundColorSwitch: "Cor de fundo",
+    coverBackgroundColorNone: "Nenhum",
+    coverBackgroundColorAccentColor: "Cor de destaque",
+    coverBackgroundColorCustom: "Costume",
+    horizontalAlignmentLeft: "Esquerda",
+    horizontalAlignmentCenter: "Centro",
+    horizontalAlignmentRight: "Direita",
+    verticalAlignmentTop: "Início",
+    verticalAlignmentMiddle: "Meio",
+    verticalAlignmentBottom: "Fundo",
+    logoPosition: "Posição do logotipo",
+    coverTitlePosition: "Posição do Título",
+    coverDescriptionPosition: "Descrição Posição",
     names: {
       default: "Inadimplência",
       sharp: "Afiado",
@@ -1246,8 +1280,40 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.translateUsigAI: "Auto-translate All" => "Tradução automática de todos"
 // ed.translationDialogTitle: "Untranslated strings" => "Cadeias de caracteres não traduzidas"
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Por favor, insira pelo menos {0} itens"
-// lg.question_resetValue: "Reset question value" => "Redefinir o valor da pergunta"
+// lg.question_resetValueName: "Reset question value" => "Redefinir o valor da pergunta"
 // lg.column_resetValue: "Reset column value" => "Redefinir o valor da coluna"
 // pe.markRequired: "Mark as required" => "Marcar conforme necessário"
 // pe.removeRequiredMark: "Remove the required mark" => "Remover a marca necessária"
 // p.resetValueIf: "Reset value if" => "Redefinir valor se"
+// lg.question_setValueName: "Set question value" => "Definir o valor da pergunta"
+// lg.column_resetValueName: "Reset column value" => "Redefinir o valor da coluna"
+// lg.column_setValueName: "Set column value" => "Definir valor de coluna"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Uma expressão cujo resultado será atribuído à pergunta de destino."
+// survey.title: "Title" => "Título"
+// page.title: "Title" => "Título"
+// p.setValueIf: "Set value if" => "Defina o valor se"
+// theme.groupHeader: "Header" => "Cabeçalho"
+// theme.coverTitleForecolor: "Title forecolor" => "Precolor do título"
+// theme.coverOverlapEnabled: "Overlap" => "Sobrepor"
+// theme.backgroundImageFitFill: "Stretch" => "Esticar"
+// theme.backgroundImageFitTile: "Tile" => "Telha"
+// theme.headerView: "View" => "Vista"
+// theme.headerViewBasic: "Basic" => "Básico"
+// theme.headerViewAdvanced: "Advanced" => "Avançado"
+// theme.coverInheritWidthFrom: "Content area width" => "Largura da área de conteúdo"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "O mesmo que pesquisa"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar à página"
+// theme.coverTextAreaWidth: "Text width" => "Largura do texto"
+// theme.coverBackgroundColorSwitch: "Background color" => "Cor de fundo"
+// theme.coverBackgroundColorNone: "None" => "Nenhum"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Cor de destaque"
+// theme.coverBackgroundColorCustom: "Custom" => "Costume"
+// theme.horizontalAlignmentLeft: "Left" => "Esquerda"
+// theme.horizontalAlignmentCenter: "Center" => "Centro"
+// theme.horizontalAlignmentRight: "Right" => "Direita"
+// theme.verticalAlignmentTop: "Top" => "Início"
+// theme.verticalAlignmentMiddle: "Middle" => "Meio"
+// theme.verticalAlignmentBottom: "Bottom" => "Fundo"
+// theme.logoPosition: "Logo Position" => "Posição do logotipo"
+// theme.coverTitlePosition: "Title Position" => "Posição do Título"
+// theme.coverDescriptionPosition: "Description Position" => "Descrição Posição"

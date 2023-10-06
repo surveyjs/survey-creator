@@ -1,6 +1,6 @@
 import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
-import { editorLocalization } from "../../editorLocalization";
+import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../creator-settings";
@@ -21,7 +21,12 @@ function getObjectDiffs(obj1: any, obj2: any = {}): any {
 }
 
 export class ThemeTabPlugin implements ICreatorPlugin {
+  private previewAction: Action;
+  private invisibleToggleAction: Action;
   private testAgainAction: Action;
+  private designerAction: Action;
+  private prevPageAction: Action;
+  private nextPageAction: Action;
   private themeSettingsAction: Action;
   private resetTheme: Action;
   private importAction: Action;
@@ -34,6 +39,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private _availableThemes = PredefinedThemes;
 
   public model: ThemeBuilder;
+
+  private createVisibleUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
+  }
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
@@ -73,10 +82,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
-    this.themeSettingsAction.visible = true;
-    this.resetTheme.visible = true;
-    this.importAction.visible = true;
-    this.exportAction.visible = true;
   }
   public update(): void {
     if (!this.model) return;
@@ -85,7 +90,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     };
     this.model.testAgainAction = this.testAgainAction;
     this.model.availableThemes = this.availableThemes;
+    this.model.prevPageAction = this.prevPageAction;
+    this.model.nextPageAction = this.nextPageAction;
     this.model.initialize(this.creator.JSON, options);
+
+    if (this.creator.showInvisibleElementsInTestSurveyTab) {
+      this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+      this.invisibleToggleAction.visible = this.model.isRunning;
+    }
 
     this.updateUndeRedoActions();
     this.model.undoRedoManager.canUndoRedoCallback = () => {
@@ -95,6 +107,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model.show();
     this.model.onPropertyChanged.add((sender, options) => {
       if (options.name === "isRunning") {
+        this.invisibleToggleAction && (this.invisibleToggleAction.visible = this.model.isRunning);
         this.testAgainAction.visible = !this.model.isRunning;
       }
     });
@@ -121,10 +134,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
     this.sidebarTab.visible = false;
     this.testAgainAction.visible = false;
-    this.themeSettingsAction.visible = false;
-    this.resetTheme.visible = false;
-    this.importAction.visible = false;
-    this.exportAction.visible = false;
+    this.invisibleToggleAction && (this.invisibleToggleAction.visible = false);
     return true;
   }
 
@@ -163,6 +173,40 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public createActions(): Array<Action> {
     const items: Array<Action> = [];
 
+    this.designerAction = new Action({
+      id: "svd-designer",
+      iconName: "icon-config",
+      action: () => { this.creator.makeNewViewActive("designer"); },
+      visible: this.createVisibleUpdater(),
+      locTitleName: "ed.designer",
+      showTitle: false
+    });
+
+    this.prevPageAction = new Action({
+      id: "prevPage",
+      iconName: "icon-arrow-left_16x16",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
+      visible: false
+    });
+
+    this.nextPageAction = new Action({
+      id: "nextPage",
+      iconName: "icon-arrow-right_16x16",
+      visible: false
+    });
+
+    this.previewAction = new Action({
+      id: "svd-preview",
+      iconName: "icon-preview",
+      active: true,
+      visible: this.createVisibleUpdater(),
+      locTitleName: "ed.testSurvey",
+      showTitle: false,
+      action: () => { }
+    });
+
     this.testAgainAction = new Action({
       id: "testSurveyAgain",
       visible: false,
@@ -177,7 +221,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-undo",
       locTitleName: "ed.undo",
       showTitle: false,
-      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      visible: this.createVisibleUpdater(),
       action: () => this.undo()
     });
     this.redoAction = new Action({
@@ -185,7 +229,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-redo",
       locTitleName: "ed.redo",
       showTitle: false,
-      visible: <any>new ComputedUpdater(() => this.creator.activeTab === "theme"),
+      visible: this.createVisibleUpdater(),
       action: () => this.redo()
     });
     items.push(this.undoAction);
@@ -197,9 +241,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       locTitleName: "ed.themeResetButton",
       locTooltipName: "ed.themeResetButton",
       mode: "small",
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "theme");
-      }),
+      visible: this.createVisibleUpdater(),
       action: () => {
         this.model.resetTheme();
       }
@@ -214,21 +256,20 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           this.creator.setShowSidebar(true, true);
         }
       },
+      visible: this.createVisibleUpdater(),
       active: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       pressed: <any>new ComputedUpdater<boolean>(() => this.creator.showSidebar),
       locTitleName: "ed.themeSettings",
       locTooltipName: "ed.themeSettingsTooltip",
-      visible: false,
       showTitle: false
     });
-    items.push(this.themeSettingsAction);
 
     this.importAction = new Action({
       id: "svc-theme-import",
       iconName: "icon-load",
       locTitleName: "ed.themeImportButton",
       locTooltipName: "ed.themeImportButton",
-      visible: false,
+      visible: this.createVisibleUpdater(),
       mode: "small",
       component: "sv-action-bar-item",
       needSeparator: true,
@@ -254,7 +295,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       iconName: "icon-download",
       locTitleName: "ed.themeExportButton",
       locTooltipName: "ed.themeExportButton",
-      visible: false,
+      visible: this.createVisibleUpdater(),
       mode: "small",
       component: "sv-action-bar-item",
       action: () => {
@@ -262,6 +303,21 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     items.push(this.exportAction);
+
+    if (this.creator.showInvisibleElementsInTestSurveyTab) {
+      this.invisibleToggleAction = new Action({
+        id: "showInvisible",
+        iconName: "icon-invisible-items",
+        mode: "small",
+        locTitleName: "ts.showInvisibleElements",
+        visible: false,
+        action: () => {
+          this.model.showInvisibleElements = !this.model.showInvisibleElements;
+          this.invisibleToggleAction.css = this.model.showInvisibleElements ? "sv-action-bar-item--active" : "";
+          this.invisibleToggleAction.title = getLocString(!this.model.showInvisibleElements ? "ts.showInvisibleElements" : "ts.hideInvisibleElements");
+        }
+      });
+    }
 
     return items;
   }
@@ -293,8 +349,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.testAgainAction);
-    this.creator.footerToolbar.actions.push(this.resetTheme);
+    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.creator.footerToolbar.actions.push(this.previewAction);
+    this.creator.footerToolbar.actions.push(this.prevPageAction);
+    this.creator.footerToolbar.actions.push(this.nextPageAction);
+    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
+    this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
   public get availableThemes() {

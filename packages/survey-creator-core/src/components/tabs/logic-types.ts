@@ -341,6 +341,17 @@ export class SurveyLogicTypes {
       propertyName: "resetValueIf",
     },
     {
+      name: "question_setValue",
+      baseClass: "question",
+      propertyName: "setValueIf",
+    },
+    {
+      name: "question_setValueExpression",
+      baseClass: "question",
+      propertyName: "setValueExpression",
+      showInUI: false,
+    },
+    {
       name: "column_visibility",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
@@ -359,6 +370,17 @@ export class SurveyLogicTypes {
       name: "column_resetValue",
       baseClass: "matrixdropdowncolumn",
       propertyName: "resetValueIf",
+    },
+    {
+      name: "column_setValue",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "setValueIf",
+    },
+    {
+      name: "column_setValueExpression",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "setValueExpression",
+      showInUI: false,
     },
     {
       name: "expression_expression",
