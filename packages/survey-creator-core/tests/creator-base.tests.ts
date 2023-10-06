@@ -4227,3 +4227,23 @@ test("Creator footer action bar: add custom action", (): any => {
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
+test("Theme passed to preview (test) survey tab", (): any => {
+  const creator = new CreatorTester();
+  creator.theme = {
+    cssVariables: {
+      "a": "s"
+    }
+  };
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const testPlugin = <TabTestPlugin>creator.getPlugin("test");
+  expect(creator.survey.themeVariables.a).toBeUndefined();
+  testPlugin.activate();
+  expect(testPlugin.model.survey.themeVariables.a).toBe("s");
+});
