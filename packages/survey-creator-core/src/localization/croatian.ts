@@ -1623,8 +1623,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // pe.markRequired: "Mark as required" => "Označi kao obavezno"
 // pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"
 // p.resetValueIf: "Reset value if" => "Vrati izvornu vrijednost ako"
-
-
 // lg.question_setValueName: "Set question value" => "Postavljanje vrijednosti pitanja"
 // lg.column_resetValueName: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
 // lg.column_setValueName: "Set column value" => "Postavljanje vrijednosti stupca"
