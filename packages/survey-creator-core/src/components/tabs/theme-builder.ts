@@ -16,6 +16,7 @@ require("./theme-builder.scss");
 export class ThemeBuilder extends Base {
   private json: any;
   public pages: ActionContainer = new ActionContainer();
+  public prevPageAction: Action;
   public testAgainAction: Action;
   public nextPageAction: Action;
   public undoRedoManager: UndoRedoManager;
@@ -66,6 +67,7 @@ export class ThemeBuilder extends Base {
           survey.currentPage = val;
         }
       }
+      target.updatePrevNextPageActionState();
     }
   })
   activePage: PageModel;
@@ -129,7 +131,8 @@ export class ThemeBuilder extends Base {
     return this.pages.actions;
   }
   public get isPageToolbarVisible(): boolean {
-    return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
+    // return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
+    return false;
   }
   public get themeEditorSurvey(): SurveyModel {
     return this.themeEditorSurveyValue;
@@ -151,6 +154,9 @@ export class ThemeBuilder extends Base {
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.loadTheme(this.surveyProvider.theme);
     this.undoRedoManager = new UndoRedoManager();
+    this.surveyProvider.onPropertyChanged.add((sender, options) => {
+      this.creatorPropertyChanged(sender, options);
+    });
   }
 
   public loadTheme(theme: ITheme) {
@@ -241,6 +247,7 @@ export class ThemeBuilder extends Base {
     });
     this.survey.onPageVisibleChanged.add((sender: SurveyModel, options) => {
       self.updatePageItem(options.page);
+      this.updatePrevNextPageActionState();
     });
   }
 
@@ -254,6 +261,11 @@ export class ThemeBuilder extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
+  private creatorPropertyChanged(sender, options) {
+    if (options.name === "isMobileView") {
+      this.updateVisibilityOfPropertyGridGroups();
+    }
+  }
   private blockThemeChangedNotifications = 0;
   public initialize(json: any, options: any) {
     this.blockChanges = true;
@@ -262,6 +274,7 @@ export class ThemeBuilder extends Base {
       this.updatePageList();
       this.updatePropertyGridEditors(this.themeEditorSurvey);
       this.updatePropertyGridEditorsAvailability();
+      this.buildActions();
 
       if (options.showPagesInTestSurveyTab !== undefined) {
         this.showPagesInTestSurveyTab = options.showPagesInTestSurveyTab;
@@ -318,6 +331,67 @@ export class ThemeBuilder extends Base {
     this.updatePageList();
     this.updatePropertyGridEditors(this.themeEditorSurvey);
     this.show();
+  }
+
+  public buildActions() {
+    const pageActions: Array<Action> = [];
+    const setNearPage: (isNext: boolean) => void = (isNext: boolean) => {
+      const currentIndex: number = this.survey.currentPageNo;
+      const shift: number = isNext ? 1 : -1;
+      let newIndex = currentIndex + shift;
+      if (this.survey.state === "starting" && isNext) {
+        newIndex = 0;
+      }
+      let nearPage: PageModel = this.survey.visiblePages[newIndex];
+      if (!isNext && currentIndex === 0 && this.survey.firstPageIsStarted
+        && this.survey.pages.length > 0) {
+        nearPage = this.survey.pages[0];
+      }
+      const pageIndex: number = this.survey.pages.indexOf(nearPage);
+      this.activePage = this.survey.pages[pageIndex];
+    };
+
+    if (this.prevPageAction) {
+      this.prevPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const isRunning = this.survey.state === "running";
+        const isActiveTab = this.surveyProvider.activeTab === "theme";
+        return this.surveyProvider.isMobileView && notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
+      });
+      this.prevPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-left" : "icon-arrow-left_16x16";
+      });
+      this.prevPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
+      this.prevPageAction.action = () => setNearPage(false);
+      pageActions.push(this.prevPageAction);
+    }
+
+    if (this.nextPageAction) {
+      this.nextPageAction.visible = <any>new ComputedUpdater<boolean>(() => {
+        const isRunning = this.survey.state === "running";
+        const isActiveTab = this.surveyProvider.activeTab === "theme";
+        return this.surveyProvider.isMobileView && notShortCircuitAnd(this.isRunning, isActiveTab, this.pageListItems.length > 1) && isRunning;
+      });
+      this.nextPageAction.iconName = <any>new ComputedUpdater<string>(() => {
+        return this.surveyProvider.isMobileView ? "icon-arrow-right" : "icon-arrow-right_16x16";
+      });
+      this.nextPageAction.iconSize = <any>new ComputedUpdater<number>(() => {
+        return this.surveyProvider.isMobileView ? 24 : 16;
+      });
+      this.nextPageAction.action = () => setNearPage(true);
+      pageActions.push(this.nextPageAction);
+    }
+    this.pages.actions = pageActions;
+    this.pages.containerCss = "sv-action-bar--pages";
+    this.updatePrevNextPageActionState();
+  }
+  private updatePrevNextPageActionState() {
+    if (!this.prevPageAction || !this.survey) return;
+    const isPrevEnabled = this.survey.firstPageIsStarted && this.survey.state !== "starting" || (!this.survey.firstPageIsStarted && !this.survey.isFirstPage);
+    this.prevPageAction.enabled = isPrevEnabled;
+    const isNextEnabled = this.survey && this.survey.visiblePages.indexOf(this.activePage) !== this.survey.visiblePages.length - 1;
+    this.nextPageAction.enabled = isNextEnabled;
   }
 
   public get availableThemes() {
@@ -586,11 +660,15 @@ export class ThemeBuilder extends Base {
     if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
     return "custom";
   }
-
+  private updateVisibilityOfPropertyGridGroups() {
+    const page = this.themeEditorSurvey.pages[0];
+    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
+  }
   private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
-    const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
-    headerViewContainerQuestion.visible = settings.theme.allowEditHeaderSettings;
+    this.updateVisibilityOfPropertyGridGroups();
 
+    const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
@@ -649,7 +727,7 @@ export class ThemeBuilder extends Base {
       }
     });
 
-    if(!!this.survey) {
+    if (!!this.survey) {
       this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
       this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
       this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
@@ -715,6 +793,7 @@ export class ThemeBuilder extends Base {
       questionErrorLocation: "bottom",
       elements: [{
         type: "panel",
+        name: "groupGeneral",
         state: "expanded",
         title: getLocString("theme.groupGeneral"),
         elements: [
@@ -890,6 +969,7 @@ export class ThemeBuilder extends Base {
         ]
       }, {
         type: "panel",
+        name: "groupHeader",
         state: "collapsed",
         title: getLocString("theme.groupHeader"),
         elements: [
@@ -1071,6 +1151,7 @@ export class ThemeBuilder extends Base {
         ]
       }, {
         type: "panel",
+        name: "groupAdvanced",
         title: getLocString("theme.groupAdvanced"),
         state: "collapsed",
         elements: [

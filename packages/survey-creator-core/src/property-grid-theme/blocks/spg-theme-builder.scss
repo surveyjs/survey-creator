@@ -97,3 +97,10 @@
     }
   }
 }
+
+.sv-mobile-side-bar .spg-theme-builder-root {
+  .spg-panel__content .spg-panel__content::after {
+    width: calc(4 * var(--sjs-base-unit, var(--base-unit, 8px)) + 100%);
+    left: calc(-2 * var(--sjs-base-unit, var(--base-unit, 8px)));
+  }
+}

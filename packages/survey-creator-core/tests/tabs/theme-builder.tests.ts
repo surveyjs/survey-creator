@@ -1540,3 +1540,81 @@ test("restore headerViewContainer values", (): any => {
     "height": 300
   });
 });
+test("Creator footer action bar: only theme tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("theme");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+test("Creator footer action bar: all tabs", (): any => {
+  const designerTabButtonOrder = ["svd-designer", "svd-preview", "action-undo", "action-redo", "svd-settings"].join("|");
+  const testTabButtonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible"].join("|");
+  const themeTabButtonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: true, showPreviewTab: true, showThemeTab: true, showLogicTab: true, showJSONEditorTab: true, showTranslationTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("designer");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+
+  creator.activeTab = "test";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(testTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "theme";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(themeTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+
+  creator.activeTab = "designer";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
+});
+test("Mobile mode: hide advanced settings in property grid ", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isMobileView = true;
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(3);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeFalsy();
+});

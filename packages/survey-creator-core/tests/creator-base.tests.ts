@@ -20,7 +20,8 @@ import {
   ComponentCollection,
   QuestionCompositeModel,
   QuestionCustomModel,
-  PageModel
+  PageModel,
+  ComputedUpdater
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -4149,4 +4150,80 @@ test("Set isMobile flag for survey when isMobileView true", (): any => {
   expect(question.isMobile).toBeTruthy();
   creator.isMobileView = false;
   expect(question.isMobile).toBeFalsy();
+});
+
+test("Creator footer action bar: only designer tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "action-undo", "action-redo", "svd-settings"].join("|");
+  const creator = new CreatorTester({ showPreviewTab: false, showThemeTab: false, showLogicTab: true });
+  creator.JSON = { elements: [{ type: "radiogroup", name: "q1", choices: ["item1", "item2"] }] };
+  expect(creator.activeTab).toEqual("designer");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.actions.length).toEqual(5);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+test("Creator footer action bar: add custom action", (): any => {
+  function addClearButtonIntoToolbar(creator) {
+    const clearButton = new Action({
+      id: "clear-survey",
+      visible: new ComputedUpdater(function () { return creator.activeTab == "designer"; }),
+      enabled: new ComputedUpdater(function () { return !creator.survey.isEmpty; }),
+      iconName: "icon-clear",
+      iconSize: 24,
+      title: "Clear Survey",
+      showTitle: false,
+      action: function () {
+        if (confirm("You are going to delete all elements in this survey. Do you want to proceed?") == true) {
+          creator.JSON = {};
+        }
+      }
+    });
+    const settingsButton = creator.toolbarItems.filter(function (item) { return item.id === "svd-settings"; })[0];
+    settingsButton.needSeparator = false;
+    const clearButtonIndex = creator.toolbarItems.indexOf(settingsButton);
+    creator.toolbarItems.splice(clearButtonIndex, 0, clearButton);
+    creator.footerToolbar.actions.splice(4, 0, clearButton);
+  }
+
+  const designerTabButtonOrder = ["svd-designer", "svd-preview", "action-undo", "action-redo", "clear-survey", "svd-settings"].join("|");
+  const testTabButtonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: true, showPreviewTab: true, showThemeTab: false, showLogicTab: true });
+  addClearButtonIntoToolbar(creator);
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("designer");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  let receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeTruthy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeFalsy();
+
+  creator.activeTab = "test";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(testTabButtonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+
+  creator.activeTab = "designer";
+  expect(creator.footerToolbar.visibleActions.length).toEqual(6);
+  receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
