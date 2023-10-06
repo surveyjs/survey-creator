@@ -1029,12 +1029,12 @@ test("localize placeholders", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(13);
+  expect(page.elements).toHaveLength(12);
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
   expect(surveyProps.name).toEqual("survey_props0");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Translation...");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[1].question).placeholder).toEqual("Перевод...");
-  const pagePanel = <PanelModel>page.elements[12];
+  const pagePanel = <PanelModel>page.elements[11];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");
   expect(pagePanel.elements[4].name).toEqual("question1");
@@ -1058,7 +1058,7 @@ test("localize placeholders", () => {
   expect(survey_props0.columns[1].name).toEqual("ru");
   expect(survey_props0.rows).toHaveLength(1);
   expect(survey_props0.rows[0].value).toEqual("title");
-  const survey_props11 = <QuestionMatrixDropdownModel>page.elements[11];
+  const survey_props11 = <QuestionMatrixDropdownModel>page.elements[10];
   expect(survey_props11.rows).toHaveLength(1);
   expect(survey_props11.rows[0].value).toEqual("editText");
 
@@ -1090,7 +1090,7 @@ test("localize placeholders, default locale is 'fr'", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   const page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(13);
+  expect(page.elements).toHaveLength(12);
   const surveyProps = <QuestionMatrixDropdownModel>page.elements[0];
   expect(surveyProps.name).toEqual("survey_props0");
   expect((<QuestionCommentModel>surveyProps.visibleRows[0].cells[0].question).placeholder).toEqual("Traduction...");
@@ -1352,8 +1352,8 @@ test("Reset on changing creator.JSON", () => {
   translation.showAllStrings = true;
   expect(translation.stringsSurvey.pages).toHaveLength(1);
   let page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(13);
-  let pagePanel = <PanelModel>page.elements[12];
+  expect(page.elements).toHaveLength(12);
+  let pagePanel = <PanelModel>page.elements[11];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");
   expect(pagePanel.elements[4].name).toEqual("q1");
@@ -1376,8 +1376,8 @@ test("Reset on changing creator.JSON", () => {
   creator.JSON = json;
   expect(translation.getSelectedLocales()).toHaveLength(0);
   page = translation.stringsSurvey.pages[0];
-  expect(page.elements).toHaveLength(13);
-  pagePanel = <PanelModel>page.elements[12];
+  expect(page.elements).toHaveLength(12);
+  pagePanel = <PanelModel>page.elements[11];
   expect(pagePanel.elements).toHaveLength(5);
   expect(pagePanel.elements[0].name).toEqual("page1_props0");
   expect(pagePanel.elements[4].name).toEqual("q1");
