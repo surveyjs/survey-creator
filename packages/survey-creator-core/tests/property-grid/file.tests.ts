@@ -202,7 +202,7 @@ test("Check file editor placeholder and renderedValue", () => {
 
   question.value = base64Url;
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png...");
+  expect(question.placeholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 
   survey.setValue("q1", url);
@@ -212,6 +212,6 @@ test("Check file editor placeholder and renderedValue", () => {
 
   survey.setValue("q1", base64Url);
   expect(question.value).toBe(base64Url);
-  expect(question.placeholder).toBe("data:image/png...");
+  expect(question.placeholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
 });

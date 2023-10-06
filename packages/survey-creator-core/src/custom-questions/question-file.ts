@@ -55,9 +55,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   @property() public placeholder: string = "";
 
   protected updateRenderedValue(value: string) {
-    const matchBase64 = !!value ? value.match(/^(data:((?:\w+\/(?:(?!;).)+)?))/) : null;
+    const matchBase64 = !!value ? value.match(/^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),/) : null;
     if(matchBase64) {
-      this.placeholder = matchBase64[1] + "...";
+      this.placeholder = matchBase64[0] + "...";
       this._renderedValue = "";
     } else {
       this.placeholder = "";
