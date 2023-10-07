@@ -1,6 +1,6 @@
 import { QuestionImageModel, QuestionImagePickerModel, QuestionMatrixDynamicModel, QuestionSignaturePadModel, SurveyElement, SurveyModel } from "survey-core";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
-import { PropertyGridModelTester } from "./property-grid.tests";
+import { PropertyGridModelTester } from "./property-grid.base";
 import {
   EmptySurveyCreatorOptions,
 } from "../../src/creator-settings";

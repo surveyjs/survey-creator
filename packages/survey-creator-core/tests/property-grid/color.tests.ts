@@ -1,6 +1,6 @@
 import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
-import { PropertyGridModelTester } from "./property-grid.tests";
+import { PropertyGridModelTester } from "./property-grid.base";
 
 test("Check custom color question", () => {
   const question = new QuestionColorModel("q1");

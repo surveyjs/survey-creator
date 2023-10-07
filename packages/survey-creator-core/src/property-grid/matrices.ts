@@ -78,16 +78,18 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     q.property = Serializer.findProperty(rowObj.getType(), options.columnName);
   }
   public onMatrixCellValueChanged(obj: Base, options: any) {
-    const column = options.question.getColumnByName(options.columnName);
-    if(!column || !column.isUnique) return;
-    options.question.visibleRows.forEach(row => {
-      if(row !== options.row) {
-        const q = row.getQuestionByColumnName(options.columnName);
-        if(!!q && q.errors.length > 0) {
-          q.hasErrors();
+    const matrix = options.question;
+    const column = options.column;
+    if(matrix && column && column.isUnique) {
+      matrix.visibleRows.forEach(row => {
+        if(row !== options.row) {
+          const question = <Question>row.getQuestionByColumnName(options.columnName);
+          if(question && question.errors.length > 0 && !question.isEmpty()) {
+            matrix.checkIfValueInRowDuplicated(row, question);
+          }
         }
-      }
-    });
+      });
+    }
   }
   public onGetMatrixRowAction(
     obj: Base,
