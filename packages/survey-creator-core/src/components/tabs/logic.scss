@@ -5,6 +5,7 @@
   width: 50%;
   margin: 0 25%;
 }
+
 .sl-table__row {
   position: relative;
 }
@@ -13,6 +14,7 @@
   margin-top: calcSize(-0.5);
   padding-right: calcSize(4);
 }
+
 .sl-table .sl-table__detail-button.sl-table__detail-button {
   width: calcSize(6);
   height: calcSize(6);
@@ -51,6 +53,7 @@
 .sl-table__cell .sv-action-bar-item__icon {
   display: none;
 }
+
 .sl-table__row:hover .sl-table__cell .sv-action-bar-item__icon,
 .sl-table__cell .sv-action-bar-item.sv-focused--by-key .sv-action-bar-item__icon {
   display: block;
@@ -62,10 +65,12 @@
     width: calcSize(5);
     height: calcSize(5);
   }
+
   .sv-action-bar-item__icon use {
     fill: $red;
   }
 }
+
 .sl-table__row.sl-table__row--additional .sl-table__cell .svc-action-button {
   color: $secondary;
 }
@@ -164,6 +169,7 @@
       }
     }
   }
+
   td,
   th {
     &:last-of-type {
@@ -178,9 +184,11 @@
   .sv-action {
     width: 100%;
   }
+
   .sv-action__content {
     width: 100%;
   }
+
   button.sl-panel__done-button {
     width: 100%;
     margin: calcSize(2) 0 calcSize(10) 0;
@@ -198,6 +206,7 @@
 
     user-select: none;
   }
+
   button:hover:enabled {
     background-color: $primary;
     color: $primary-foreground;
@@ -222,24 +231,29 @@
   align-items: center;
   margin-top: calcSize(2);
 }
+
 .sl-row {
   display: flex;
   align-items: flex-start;
   flex-flow: row wrap;
 }
+
 .sl-row--multiple {
   .sl-panel {
     padding-bottom: 0;
   }
 }
+
 .sl-question__header--left {
   margin-right: calcSize(1);
 }
+
 .sl-row {
   .sd-scrollable-container:not(.sd-scrollable-container--compact) {
     overflow-x: auto;
   }
 }
+
 .sl-question__title {
   color: $foreground;
   font-size: calcSize(2);
@@ -247,13 +261,15 @@
   margin: 0;
   font-weight: 600;
 
-  span + span {
+  span+span {
     display: none;
   }
 }
+
 .sl-row--multiple .sl-question {
   padding-right: calcSize(1);
 }
+
 .svc-logic-question-value {
   --sd-base-padding: calc(5 * #{$base-unit});
   --sd-base-vertical-padding: calc(4 * #{$base-unit});
@@ -262,9 +278,14 @@
   margin-top: calcSize(2);
 }
 
+.svc-logic-trigger-panel-question {
+  margin-bottom: calcSize(2);
+}
+
 .svc-logic_trigger-editor {
   margin-top: calcSize(2);
 }
+
 .svc-logic_trigger-editor .svc-logic-question-value {
   margin-top: 0;
 }
@@ -274,6 +295,7 @@
     flex-flow: nowrap;
   }
 }
+
 .spg-comment.sl-comment {
   height: calcSize(17);
 }
