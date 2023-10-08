@@ -239,16 +239,12 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
-    if (question.name === "elementSelector" || question.name === "setToName" || question.name === "fromName" || question.name === "gotoName") {
-      question.allowRootStyle = false;
-      cssClasses.control += " svc-logic-operator svc-logic-operator--question";
-      cssClasses.error.root = "svc-logic-operator__error";
-      cssClasses.onError = "svc-logic-operator--error";
-    }
-    if (question.name === "setToName" || question.name === "fromName") {
+    const selectorsNames = ["elementSelector", "setToName", "fromName", "gotoName"];
+    if (selectorsNames.indexOf(question.name) > -1) {
       question.allowRootStyle = false;
       question.titleLocation = "left";
       question.startWithNewLine = false;
+      cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
@@ -264,7 +260,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
-      if(qType !== "comment" || question.name.toLowerCase().indexOf("expression") < 0) {
+      const els = question.parent.elements.filter(el => selectorsNames.indexOf(el.name) < 0 && el.name !== "expression");
+      if((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
         cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       }
     }

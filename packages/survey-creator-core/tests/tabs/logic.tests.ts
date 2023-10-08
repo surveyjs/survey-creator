@@ -3146,6 +3146,45 @@ test("SurveyLogicItem,  setValue css", () => {
   expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
   ComponentCollection.Instance.clear();
 });
+test("Test questions css in an action panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q1} = 2",
+        setToName: "q2", setValue: 5
+      },
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ],
+    completedHtmlOnCondition: [
+      { expression: "{q1} = 4", html: "Custom html" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(4);
+  const checkFunc = (rowIndex: number, logicTypeName: string, questionName: string, hasFrame: boolean): void => {
+    const row = logic.matrixItems.visibleRows[rowIndex];
+    row.showDetailPanel();
+    let panel = logic.itemEditor.panels[0];
+    expect(panel.getQuestionByName("logicTypeName").value).toBe(logicTypeName);
+    let panelQuestion = panel.getQuestionByName(questionName);
+    expect(panelQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame") > -1).toBe(hasFrame);
+    expect(panelQuestion.getControlClass().indexOf("sd-question")).toBeTruthy();
+  };
+  checkFunc(0, "question_setValue", "setValueExpression", false);
+  checkFunc(1, "trigger_setvalue", "setValue", true);
+  checkFunc(2, "trigger_runExpression", "runExpression", false);
+  checkFunc(3, "completedHtmlOnCondition", "html", false);
+});
+
 test("Custom trigger in logic", () => {
   Serializer.addClass(
     "incrementcountertrigger",
@@ -3175,7 +3214,7 @@ test("Custom trigger in logic", () => {
     triggers: [
       {
         type: "incrementcounter",
-        expression: "{q1} = 4",
+        expression: "{q1} = 1",
         initialNumber: "21",
         targetCounter: "q2"
       }
