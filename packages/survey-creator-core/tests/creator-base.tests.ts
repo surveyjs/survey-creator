@@ -1317,14 +1317,14 @@ test("Undo converting question type", (): any => {
 test("Convert checkbox into rating", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
-    elements: [{ type: "checkbox", name: "question1", choices: [1, 2] }]
+    elements: [{ type: "checkbox", name: "question1", choices: [1, 2, 3, 4] }]
   };
   let q = creator.survey.getQuestionByName("question1");
   creator.selectElement(q);
   creator.convertCurrentQuestion("rating");
   let el = <QuestionRatingModel>creator.selectedElement;
   expect(el.getType()).toEqual("rating");
-  expect(el.rateValues).toHaveLength(2);
+  expect(el.rateValues).toHaveLength(4);
   expect(el.rateValues[0].value).toEqual(1);
   creator.clickToolboxItem(creator.toolbox.getItemByName("checkbox").json);
   expect(creator.selectedElement.getType()).toEqual("checkbox");
