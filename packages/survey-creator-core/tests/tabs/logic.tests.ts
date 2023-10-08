@@ -3193,9 +3193,9 @@ test("Custom trigger in logic", () => {
   const initialNumberQuestion = <QuestionTextWithResetModel>triggerEditorPanel.getQuestionByName("initialNumber");
   expect(initialNumberQuestion.value).toBe(21);
 
-  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("svc-logic-trigger-panel-question")).toBeTruthy();
+  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
   expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeTruthy();
-  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("svc-logic-trigger-panel-question")).toBeTruthy();
+  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
   expect(initialNumberQuestion.getControlClass().indexOf("spg-input-container__input")).toBeTruthy();
 
   delete SurveyLogic.types["increment_counter"];

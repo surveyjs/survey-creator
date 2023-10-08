@@ -264,8 +264,8 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
-      if(question.parent.elements.length > 1) {
-        cssClasses.mainRoot += " svc-logic-trigger-panel-question";
+      if(qType !== "comment" || question.name.toLowerCase().indexOf("expression") < 0) {
+        cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
       }
     }
     if (question.name === "removeAction") {
