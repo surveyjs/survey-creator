@@ -344,6 +344,9 @@ export class SurveyLogicTypes {
       name: "question_setValue",
       baseClass: "question",
       propertyName: "setValueIf",
+      getDisplayText: (element: Base, formatStr: string, lt: SurveyLogicType): string => {
+        return getDisplayTextForSetValueIf(element, formatStr, lt);
+      }
     },
     {
       name: "question_setValueExpression",
@@ -375,6 +378,9 @@ export class SurveyLogicTypes {
       name: "column_setValue",
       baseClass: "matrixdropdowncolumn",
       propertyName: "setValueIf",
+      getDisplayText: (element: Base, formatStr: string, lt: SurveyLogicType): string => {
+        return getDisplayTextForSetValueIf(element, formatStr, lt);
+      }
     },
     {
       name: "column_setValueExpression",
@@ -538,4 +544,12 @@ export class SurveyLogicTypes {
       showInUI: false,
     },
   ];
+}
+function getDisplayTextForSetValueIf(element: Base, formatStr: string, lt: SurveyLogicType): string {
+  const name = lt.formatElName(element["name"]);
+  let exp = element["setValueExpression"];
+  if(!exp) {
+    return getLogicString("trigger_setvalueEmptyText")["format"](name);
+  }
+  return formatStr["format"](name, exp);
 }

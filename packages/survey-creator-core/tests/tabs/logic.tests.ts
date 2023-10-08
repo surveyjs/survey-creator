@@ -894,6 +894,21 @@ test("Setup setValueExpression comment value", () => {
   expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
 });
 
+test("Show resetValueIf & setValueIf text in main matrix", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", title: "Quesiton1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", resetValueIf: "{q1} = 1" },
+      { type: "text", name: "q3", setValueIf: "{q1} = 2", setValueExpression: "{q1} + 1" },
+      { type: "text", name: "q4", setValueIf: "{q1} = 3" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, reset question value: 'q2'");
+  expect(logic.items[1].getDisplayText()).toBe("If 'q1' == 2, set into question 'q3' value expression: 'q1' + 1");
+  expect(logic.items[2].getDisplayText()).toBe("If 'q1' == 3, clear question value: 'q4'");
+});
+
 test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {
   const survey = new SurveyModel({
     elements: [
