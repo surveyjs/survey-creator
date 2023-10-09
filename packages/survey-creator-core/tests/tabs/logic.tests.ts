@@ -904,8 +904,8 @@ test("Show resetValueIf & setValueIf text in main matrix", () => {
     ]
   });
   const logic = new SurveyLogicUI(survey);
-  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, reset question value: 'q2'");
-  expect(logic.items[1].getDisplayText()).toBe("If 'q1' == 2, set into question 'q3' value expression: 'q1' + 1");
+  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, reset value for question: 'q2'");
+  expect(logic.items[1].getDisplayText()).toBe("If 'q1' == 2, assign value: 'q1' + 1 to question: 'q3'");
   expect(logic.items[2].getDisplayText()).toBe("If 'q1' == 3, clear question value: 'q4'");
 });
 

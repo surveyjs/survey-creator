@@ -201,9 +201,13 @@ export var arStrings = {
       question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
       question_enableText: "جعل السؤال {0} مفعل", //{0} question name
       question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
+      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}",
+      question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
+      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}",
+      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}",
       setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
@@ -1574,3 +1578,9 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.logoPosition: "Logo Position" => "موضع الشعار"
 // theme.coverTitlePosition: "Title Position" => "منصب العنوان"
 // theme.coverDescriptionPosition: "Description Position" => "وصف الوظيفة الحالية"
+// lg.question_resetValueText: "reset value for question: {0}" => "إعادة تعيين قيمة السؤال: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "تعيين قيمة: {1} السؤال: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "إعادة تعيين قيمة الخلية للعمود: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "تعيين قيمة الخلية: {1} إلى العمود: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

@@ -201,9 +201,13 @@ export var msStrings = {
       question_visibilityText: "Jadikan soalan {0} boleh dilihat", //{0} question name
       question_enableText: "Jadikan soalan {0} didayakan", //{0} question name
       question_requireText: "Jadikan soalan {0} diperlukan", //{0} question name
+      question_resetValueText: "Tetapkan semula nilai untuk soalan: {0}",
+      question_setValueText: "Berikan nilai: {1} kepada soalan: {0}",
       column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
       column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
       column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
+      column_resetValueText: "Set semula nilai sel untuk lajur: {0}",
+      column_setValueText: "Peruntukkan nilai sel: {1} kepada lajur: {0}",
       setValueExpressionPlaceholder: " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran.",
       trigger_completeText: "Tinjauan dilengkapkan",
       trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
@@ -1617,3 +1621,9 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.logoPosition: "Logo Position" => "Kedudukan Logo"
 // theme.coverTitlePosition: "Title Position" => "Kedudukan Tajuk"
 // theme.coverDescriptionPosition: "Description Position" => "Kedudukan Penerangan"
+// lg.question_resetValueText: "reset value for question: {0}" => "Tetapkan semula nilai untuk soalan: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Berikan nilai: {1} kepada soalan: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Set semula nilai sel untuk lajur: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Peruntukkan nilai sel: {1} kepada lajur: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

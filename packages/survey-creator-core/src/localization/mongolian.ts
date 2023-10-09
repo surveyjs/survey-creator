@@ -201,9 +201,13 @@ export var mnStrings = {
       question_visibilityText: "{0} асуултыг харагддаг болгох", //{0} question name
       question_enableText: "{0} асуултыг идэвхжүүлэх", //{0} question name
       question_requireText: "{0} асуултыг заавал бөглөх болгох", //{0} question name
+      question_resetValueText: "асуултын үнэ цэнийг дахин тогтоох нь: {0}",
+      question_setValueText: "үнэ цэнийг даалгах нь: {1} асуулт: {0}",
       column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} column name, {1} question name
       column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} column name, {1} question name
       column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} column name, {1} question name
+      column_resetValueText: "баганын эсийн үнэ цэнийг дахин тогтоох: {0}",
+      column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}",
       setValueExpressionPlaceholder: " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл.",
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} question name, {1} setValue
@@ -1307,3 +1311,7 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.logoPosition: "Logo Position" => "Лого байрлал"
 // theme.coverTitlePosition: "Title Position" => "Нүүр Байршил"
 // theme.coverDescriptionPosition: "Description Position" => "Тодорхойлолтын байрлал"
+// lg.question_resetValueText: "reset value for question: {0}" => "асуултын үнэ цэнийг дахин тогтоох нь: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "үнэ цэнийг даалгах нь: {1} асуулт: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "баганын эсийн үнэ цэнийг дахин тогтоох: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "эсийн үнэ цэнийг хуваарил: {1} багана: {0}"

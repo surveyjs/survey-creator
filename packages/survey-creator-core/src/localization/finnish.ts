@@ -201,9 +201,13 @@ export var fiStrings = {
       question_visibilityText: "Tee kysymys {0} näkyväksi", //{0} question name
       question_enableText: "Ota kysymys {0} käyttöön", //{0} question name
       question_requireText: "Tee kysymyksestä {0} pakollinen", //{0} question name
+      question_resetValueText: "nollaa kysymyksen arvo: {0}",
+      question_setValueText: "Määritä arvo: {1} kysymykseen: {0}",
       column_visibilityText: "Tee kysymyksen {1} sarakkeesta {0} näkyvä", //{0} column name, {1} question name
       column_enableText: "Ota kysymyksen sarake {0} {1} käyttöön", //{0} column name, {1} question name
       column_requireText: "Tee kysymyksen sarake {0} {1} pakollinen", //{0} column name, {1} question name
+      column_resetValueText: "Palauta sarakkeen soluarvo: {0}",
+      column_setValueText: "Määritä solun arvo: {1} sarakkeeseen: {0}",
       setValueExpressionPlaceholder: " Lauseke, jonka tulos määritetään kohdekysymykselle.",
       trigger_completeText: "Kyselystä tulee täytetty",
       trigger_setvalueText: "Laita arvo {1} kysymykseen {0}", //{0} question name, {1} setValue
@@ -1663,3 +1667,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.logoPosition: "Logo Position" => "Logon sijainti"
 // theme.coverTitlePosition: "Title Position" => "Otsikon sijainti"
 // theme.coverDescriptionPosition: "Description Position" => "Kuvaus Sijainti"
+// lg.question_resetValueText: "reset value for question: {0}" => "nollaa kysymyksen arvo: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Määritä arvo: {1} kysymykseen: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Palauta sarakkeen soluarvo: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Määritä solun arvo: {1} sarakkeeseen: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

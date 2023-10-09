@@ -201,9 +201,13 @@ export var nlStrings = {
       question_visibilityText: "Maak vraag {0} zichtbaar", //{0} question name
       question_enableText: "Schakel vraag {0} in", //{0} question name
       question_requireText: "Stel vraag {0} verplicht", //{0} question name
+      question_resetValueText: "Resetwaarde voor vraag: {0}",
+      question_setValueText: "Waarde: {1} toewijzen aan vraag: {0}",
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", //{0} column name, {1} question name
       column_enableText: "Kolom {0} van vraag maken {1} inschakelen", //{0} column name, {1} question name
       column_requireText: "Kolom {0} met vraag {1} verplicht maken", //{0} column name, {1} question name
+      column_resetValueText: "Celwaarde voor kolom opnieuw instellen: {0}",
+      column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}",
       setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
@@ -1643,3 +1647,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.logoPosition: "Logo Position" => "Logo positie"
 // theme.coverTitlePosition: "Title Position" => "Titel positie"
 // theme.coverDescriptionPosition: "Description Position" => "Beschrijving Positie"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetwaarde voor vraag: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Waarde: {1} toewijzen aan vraag: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Celwaarde voor kolom opnieuw instellen: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Celwaarde: {1} toewijzen aan kolom: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

@@ -201,9 +201,13 @@ export var danishStrings = {
       question_visibilityText: "Gør spørgsmål {0} synlige", //{0} question name
       question_enableText: "Foretag spørgsmål{0} aktiver", //{0} question name
       question_requireText: "Gør spørgsmål {0} påkrævet", //{0} question name
+      question_resetValueText: "Nulstil værdi for spørgsmål: {0}",
+      question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}",
       column_visibilityText: "Gør kolonne {0} af spørgsmål {1} synlig", //{0} column name, {1} question name
       column_enableText: "Få kolonne {0} af spørgsmål {1} aktivere", //{0} column name, {1} question name
       column_requireText: "Gøre kolonne {0} af spørgsmål {1} påkrævet", //{0} column name, {1} question name
+      column_resetValueText: "Nulstil celleværdi for kolonne: {0}",
+      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}",
       setValueExpressionPlaceholder: " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet.",
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       trigger_setvalueText: "Sæt spørgsmålstegn ved: {0} værdi {1}", //{0} question name, {1} setValue
@@ -1849,3 +1853,9 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.logoPosition: "Logo Position" => "Logo Position"
 // theme.coverTitlePosition: "Title Position" => "Titel Position"
 // theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Position"
+// lg.question_resetValueText: "reset value for question: {0}" => "Nulstil værdi for spørgsmål: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Tildel værdi: {1} til spørgsmål: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Nulstil celleværdi for kolonne: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tildel celleværdi: {1} til kolonne: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

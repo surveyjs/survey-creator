@@ -201,9 +201,13 @@ export var skStrings = {
       question_visibilityText: "Otázka {0} bude viditeľná", //{0} question name
       question_enableText: "Otázka {0} bude povolená", //{0} question name
       question_requireText: "Otázka {0} sa bude vyžadovať", //{0} question name
+      question_resetValueText: "Resetovať hodnotu pre otázku: {0}",
+      question_setValueText: "Priradiť hodnotu: {1} otázku: {0}",
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
+      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}",
+      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}",
       setValueExpressionPlaceholder: " Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
       trigger_completeText: "Prieskum bude dokončený",
       trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
@@ -1617,3 +1621,9 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.logoPosition: "Logo Position" => "Umiestnenie loga"
 // theme.coverTitlePosition: "Title Position" => "Titulná pozícia"
 // theme.coverDescriptionPosition: "Description Position" => "Popisná pozícia"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetovať hodnotu pre otázku: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Priradiť hodnotu: {1} otázku: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Obnoviť hodnotu bunky pre stĺpec: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Priradenie hodnoty bunky: {1} do stĺpca: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
