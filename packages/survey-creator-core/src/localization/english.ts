@@ -1005,6 +1005,8 @@ export var enStrings = {
     groupGeneral: "General",
     groupAdvanced: "Advanced",
     groupHeader: "Header",
+    groupBackground: "Background",
+    groupAppearance: "Appearance",
     themeName: "Theme",
     themeMode: "Question appearance",
     themeModePanels: "Default",
@@ -1016,6 +1018,7 @@ export var enStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
     coverTitleForecolor: "Title forecolor",
+    coverDescriptionForecolor: "Description forecolor",
     coverOverlapEnabled: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string

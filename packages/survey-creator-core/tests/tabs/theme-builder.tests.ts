@@ -1472,6 +1472,7 @@ test("restore headerViewContainer values", (): any => {
       "--sjs-font-size": "17.6px",
       "--sjs-cover-backcolor": "#5094ed",
       "--sjs-cover-title-forecolor": "#FBFF24",
+      "--sjs-cover-description-forecolor": "#88b9e3",
     },
     "cover": {
       "height": 300,
@@ -1500,6 +1501,7 @@ test("restore headerViewContainer values", (): any => {
     "logoPosition": "left",
     "inheritWidthFrom": "page",
     "titleForecolor": "#FBFF24",
+    "descriptionForecolor": "rgba(136, 185, 227, 1)",
     "backgroundColor": "#5094ed",
     "backgroundColorSwitch": "custom",
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
@@ -1653,9 +1655,11 @@ test("Mobile mode: hide advanced settings in property grid ", (): any => {
   const themeBuilder = themePlugin.model as ThemeBuilder;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const propertyGridGroups = themeEditorSurvey.pages[0].elements;
-  expect(propertyGridGroups.length).toBe(3);
+  expect(propertyGridGroups.length).toBe(5);
   expect(propertyGridGroups[0].visible).toBeTruthy();
   expect(propertyGridGroups[1].visible).toBeFalsy();
-  expect(propertyGridGroups[2].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+  expect(propertyGridGroups[4].visible).toBeFalsy();
 });
 
