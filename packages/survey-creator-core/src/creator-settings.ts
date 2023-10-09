@@ -322,7 +322,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
   machineTranslationValue: boolean = false;
-  inplaceEditForValues: boolean = true;
+  inplaceEditForValues: boolean = false;
   maxNestedPanels: number = -1;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
