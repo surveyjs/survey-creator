@@ -195,7 +195,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
                 type: "comment",
                 titleLocation: "hidden"
               }]
-            },
+            }
           ]
         }
       ]
@@ -242,10 +242,10 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     const selectorsNames = ["elementSelector", "setToName", "fromName", "gotoName"];
     if (selectorsNames.indexOf(question.name) > -1) {
       question.allowRootStyle = false;
-      if(question.titleLocation !== "hidden") {
+      if (question.name === "setToName" || question.name === "fromName") {
         question.titleLocation = "left";
+        question.startWithNewLine = false;
       }
-      question.startWithNewLine = false;
       cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
