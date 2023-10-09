@@ -401,7 +401,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
   protected getMaximumRowCount(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): number {
     return -1;
   }
-  protected filterPropertyNames(propNames: Array<string>) {
+  protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions):Array<string> {
     return propNames;
   }
   protected getColumnsJSON(
@@ -416,7 +416,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     }
     var res = new PropertyJSONGenerator(obj, options).createColumnsJSON(
       className,
-      this.filterPropertyNames(propNames)
+      this.filterPropertyNames(propNames, options)
     );
     for (var i = 0; i < res.length; i++) {
       if (res[i].cellType == "comment") {
@@ -468,8 +468,12 @@ export class PropertyGridEditorMatrixItemValues extends PropertyGridEditorMatrix
       prop.isArray && Serializer.isDescendantOf(prop.className, "itemvalue") && prop.name != "rateValues"
     );
   }
-  protected filterPropertyNames(propNames: Array<string>) {
-    return propNames.filter(p => p != "icon");
+  protected excludeTextPropertyName(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
+    const hideText = options?.inplaceEditForValues;
+    return !!hideText ? propNames.filter(p => p !== "text") : propNames;
+  }
+  protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
+    return this.excludeTextPropertyName(propNames, options).filter(p => p != "icon");
   }
   public isPropertyEditorSetupEnabled(
     obj: Base,
@@ -623,8 +627,8 @@ export class PropertyGridEditorMatrixRateValues extends PropertyGridEditorMatrix
     super.onGetQuestionTitleActions(obj, options);
   }
 
-  protected filterPropertyNames(propNames: Array<string>) {
-    return propNames;
+  protected filterPropertyNames(propNames: Array<string>, options: ISurveyCreatorOptions): Array<string> {
+    return this.excludeTextPropertyName(propNames, options);
   }
 }
 
