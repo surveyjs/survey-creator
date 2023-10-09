@@ -201,9 +201,13 @@ var polishStrings = {
       question_visibilityText: "Uczyń {0} pytań widocznymi", //{0} question name
       question_enableText: "Utwórz pytanie {0} włącz", //{0} question name
       question_requireText: "Pytanie {0} wymagane", //{0} question name
+      question_resetValueText: "Zresetuj wartość dla pytania: {0}",
+      question_setValueText: "Przypisz wartość: {1} do pytania: {0}",
       column_visibilityText: "Uwidocznienie {0}  {1}pytania", //{0} column name, {1} question name
       column_enableText: "Ustaw kolumnę {0} pytania{1} włączyć", //{0} column name, {1} question name
       column_requireText: "Ustaw kolumnę {0} pytania {1} wymagane", //{0} column name, {1} question name
+      column_resetValueText: "Zresetuj wartość komórki dla kolumny: {0}",
+      column_setValueText: "Przypisz wartość komórki: {1} do kolumny: {0}",
       setValueExpressionPlaceholder: " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego.",
       trigger_completeText: "Ankieta zostaje zakończona",
       trigger_setvalueText: "Ustaw pod znakiem zapytania: {0} wartość {1}", //{0} question name, {1} setValue
@@ -1937,3 +1941,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.logoPosition: "Logo Position" => "Pozycja logo"
 // theme.coverTitlePosition: "Title Position" => "Pozycja tytułu"
 // theme.coverDescriptionPosition: "Description Position" => "Opis Pozycja"
+// lg.question_resetValueText: "reset value for question: {0}" => "Zresetuj wartość dla pytania: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Przypisz wartość: {1} do pytania: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Zresetuj wartość komórki dla kolumny: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Przypisz wartość komórki: {1} do kolumny: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

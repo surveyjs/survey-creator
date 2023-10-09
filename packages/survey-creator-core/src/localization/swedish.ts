@@ -201,9 +201,13 @@ export let svStrings = {
       question_visibilityText: "Gör frågan {0} synlig", //{0} question name
       question_enableText: "Gör frågan {0} aktivera", //{0} question name
       question_requireText: "Gör frågan {0} krävs", //{0} question name
+      question_resetValueText: "Återställ värde för fråga: {0}",
+      question_setValueText: "Tilldela värde: {1} till fråga: {0}",
       column_visibilityText: "Synliggör kolumn {0} av fråga {1}", //{0} column name, {1} question name
       column_enableText: "Gör kolumn {0} av fråga {1} aktivera", //{0} column name, {1} question name
       column_requireText: "Gör kolumn {0} av fråga {1} krävs", //{0} column name, {1} question name
+      column_resetValueText: "Återställ cellvärde för kolumn: {0}",
+      column_setValueText: "Tilldela cellvärde: {1} till kolumn: {0}",
       setValueExpressionPlaceholder: " Ett uttryck vars resultat kommer att tilldelas målfrågan.",
       trigger_completeText: "Undersökningen blir slutförd",
       trigger_setvalueText: "ifrågasätts: {0} värde {1}", //{0} question name, {1} setValue
@@ -1841,3 +1845,9 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.logoPosition: "Logo Position" => "Logotypens placering"
 // theme.coverTitlePosition: "Title Position" => "Titel Position"
 // theme.coverDescriptionPosition: "Description Position" => "Beskrivning Position"
+// lg.question_resetValueText: "reset value for question: {0}" => "Återställ värde för fråga: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Tilldela värde: {1} till fråga: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Återställ cellvärde för kolumn: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilldela cellvärde: {1} till kolumn: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

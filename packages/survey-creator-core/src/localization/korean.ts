@@ -201,9 +201,13 @@ export var koreanStrings = {
       question_visibilityText: "질문 {0} 표시", //{0} question name
       question_enableText: "질문 {0} 사용 설정", //{0} question name
       question_requireText: "질문 {0} 필수", //{0} question name
+      question_resetValueText: "질문에 대한 재설정 값: {0}",
+      question_setValueText: "할당 값: {1} 질문: {0}",
       column_visibilityText: "질문의 열 {0} {1} 표시", //{0} column name, {1} question name
       column_enableText: "질문의 열 {0} {1} 사용하도록 설정", //{0} column name, {1} question name
       column_requireText: "질문의 열 {0} {1} 필수", //{0} column name, {1} question name
+      column_resetValueText: "열의 셀 값 재설정: {0}",
+      column_setValueText: "셀 값 할당 : {1} 열 : {0}",
       setValueExpressionPlaceholder: " 결과가 대상 질문에 할당되는 식입니다.",
       trigger_completeText: "조사가 완료됩니다",
       trigger_setvalueText: "질문으로 설정: {0} 값 {1}", //{0} question name, {1} setValue
@@ -1868,3 +1872,9 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.logoPosition: "Logo Position" => "로고 위치"
 // theme.coverTitlePosition: "Title Position" => "타이틀 포지션"
 // theme.coverDescriptionPosition: "Description Position" => "설명 위치"
+// lg.question_resetValueText: "reset value for question: {0}" => "질문에 대한 재설정 값: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "할당 값: {1} 질문: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "열의 셀 값 재설정: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "셀 값 할당 : {1} 열 : {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

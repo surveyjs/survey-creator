@@ -201,9 +201,13 @@ export var bgStrings = {
       question_visibilityText: "направи въпрос {0} видим", //{0} question name
       question_enableText: "направи въпрос {0} активен", //{0} question name
       question_requireText: "направи въпрос {0} задължителен", //{0} question name
+      question_resetValueText: "нулиране на стойността за въпрос: {0}",
+      question_setValueText: "присвояване на стойност: {1} на въпрос: {0}",
       column_visibilityText: "направи колона {0} на въпрос {1} видима", //{0} column name, {1} question name
       column_enableText: "направи колона {0} на въпрос {1} активна", //{0} column name, {1} question name
       column_requireText: "направи колона {0} на въпрос {1} задължителна", //{0} column name, {1} question name
+      column_resetValueText: "Нулиране на стойността на клетката за колона: {0}",
+      column_setValueText: "Присвояване на стойност на клетка: {1} на колона: {0}",
       setValueExpressionPlaceholder: " Израз, чийто резултат ще бъде присвоен на целевия въпрос.",
       trigger_completeText: "анкетата е завършена",
       trigger_setvalueText: "задай на въпрос: {0} стойност {1}", //{0} question name, {1} setValue
@@ -1213,3 +1217,7 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.logoPosition: "Logo Position" => "Позиция на емблемата"
 // theme.coverTitlePosition: "Title Position" => "Позиция на заглавието"
 // theme.coverDescriptionPosition: "Description Position" => "Описание Позиция"
+// lg.question_resetValueText: "reset value for question: {0}" => "нулиране на стойността за въпрос: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "присвояване на стойност: {1} на въпрос: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Нулиране на стойността на клетката за колона: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвояване на стойност на клетка: {1} на колона: {0}"

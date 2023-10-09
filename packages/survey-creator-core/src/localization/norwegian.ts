@@ -201,9 +201,13 @@ export var nbStrings = {
       question_visibilityText: "Gjør spørsmål {0} synlig", //{0} question name
       question_enableText: "Gjør spørsmål {0} aktivert", //{0} question name
       question_requireText: "Gjør spørsmål {0} påkrevd", //{0} question name
+      question_resetValueText: "Tilbakestill verdi for spørsmål: {0}",
+      question_setValueText: "tilordne verdi: {1} til spørsmålet: {0}",
       column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
       column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
       column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
+      column_resetValueText: "Tilbakestill celleverdi for kolonne: {0}",
+      column_setValueText: "Tilordne celleverdi: {1} til kolonne: {0}",
       setValueExpressionPlaceholder: " Et uttrykk der resultatet tilordnes målspørsmålet.",
       trigger_completeText: "Skjemaet blir fullført",
       trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
@@ -1667,3 +1671,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.logoPosition: "Logo Position" => "Logo Posisjon"
 // theme.coverTitlePosition: "Title Position" => "Tittel Posisjon"
 // theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Posisjon"
+// lg.question_resetValueText: "reset value for question: {0}" => "Tilbakestill verdi for spørsmål: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "tilordne verdi: {1} til spørsmålet: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Tilbakestill celleverdi for kolonne: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilordne celleverdi: {1} til kolonne: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

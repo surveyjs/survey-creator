@@ -201,9 +201,13 @@ var italianTranslation = {
       question_visibilityText: "rendi la domanda {0} visibile", //{0} question name
       question_enableText: "rendi la domanda {0} abilitata", //{0} question name
       question_requireText: "rendi la domanda {0} obbligatoria", //{0} question name
+      question_resetValueText: "Valore di ripristino per la domanda: {0}",
+      question_setValueText: "Assegna valore: {1} alla domanda: {0}",
       column_visibilityText: "rendi la colonna {0} della domanda {1} visibile", //{0} column name, {1} question name
       column_enableText: "rendi la colonna {0} della domanda {1} abilitata", //{0} column name, {1} question name
       column_requireText: "rendi la colonna {0} della domanda {1} obbligatoria", //{0} column name, {1} question name
+      column_resetValueText: "Reimposta il valore della cella per la colonna: {0}",
+      column_setValueText: "Assegna valore cella: {1} alla colonna: {0}",
       setValueExpressionPlaceholder: " Espressione il cui risultato verrà assegnato alla domanda di destinazione.",
       trigger_completeText: "il sondaggio viene completato",
       trigger_setvalueText: "imposta nella domanda: {0} valore {1}", //{0} question name, {1} setValue
@@ -1409,3 +1413,7 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.logoPosition: "Logo Position" => "Posizione del logo"
 // theme.coverTitlePosition: "Title Position" => "Posizione del titolo"
 // theme.coverDescriptionPosition: "Description Position" => "Descrizione Posizione"
+// lg.question_resetValueText: "reset value for question: {0}" => "Valore di ripristino per la domanda: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Assegna valore: {1} alla domanda: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Reimposta il valore della cella per la colonna: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Assegna valore cella: {1} alla colonna: {0}"

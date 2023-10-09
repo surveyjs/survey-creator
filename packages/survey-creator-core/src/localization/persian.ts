@@ -201,9 +201,13 @@ var persianStrings = {
       question_visibilityText: "سوال {0} را قابل مشاهده کنید.", //{0} question name
       question_enableText: "فعال کردن سوال {0}", //{0} question name
       question_requireText: "ایجاد سوال {0} اجباری", //{0} question name
+      question_resetValueText: "بازنشانی مقدار برای سوال: {0}",
+      question_setValueText: "اختصاص مقدار: {1} به سوال: {0}",
       column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", //{0} column name, {1} question name
       column_enableText: "ستون {0} سوال {1} را فعال کنید", //{0} column name, {1} question name
       column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
+      column_resetValueText: "تنظیم مجدد مقدار سلول برای ستون: {0}",
+      column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}",
       setValueExpressionPlaceholder: " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد.",
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
@@ -1606,3 +1610,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.logoPosition: "Logo Position" => "موقعیت لوگو"
 // theme.coverTitlePosition: "Title Position" => "موقعیت عنوان"
 // theme.coverDescriptionPosition: "Description Position" => "شرح موقعیت"
+// lg.question_resetValueText: "reset value for question: {0}" => "بازنشانی مقدار برای سوال: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "اختصاص مقدار: {1} به سوال: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "تنظیم مجدد مقدار سلول برای ستون: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "اختصاص مقدار سلول: {1} به ستون: {0}"

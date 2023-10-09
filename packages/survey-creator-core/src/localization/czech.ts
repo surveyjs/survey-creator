@@ -201,9 +201,13 @@ export var czStrings = {
       question_visibilityText: "Zobrazit otázku {0}", //{0} question name
       question_enableText: "Povolit otázku {0}", //{0} question name
       question_requireText: "Otázka {0} je povinná", //{0} question name
+      question_resetValueText: "Resetovat hodnotu pro otázku: {0}",
+      question_setValueText: "přiřadit hodnotu: {1} na otázku: {0}",
       column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
       column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
       column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
+      column_resetValueText: "Obnovit hodnotu buňky pro sloupec: {0}",
+      column_setValueText: "Přiřaďte hodnotu buňky: {1} sloupci: {0}",
       setValueExpressionPlaceholder: " Výraz, jehož výsledek bude přiřazen cílové otázce.",
       trigger_completeText: "Průzkum se stává dokončeným",
       trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
@@ -1216,3 +1220,7 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.logoPosition: "Logo Position" => "Pozice loga"
 // theme.coverTitlePosition: "Title Position" => "Titulní pozice"
 // theme.coverDescriptionPosition: "Description Position" => "Popis Poloha"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetovat hodnotu pro otázku: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Přiřaďte hodnotu buňky: {1} sloupci: {0}"

@@ -201,9 +201,13 @@ var simplifiedChineseTranslation = {
       question_visibilityText: "使问题{0}可见", //{0} question name
       question_enableText: "使问题{0}启用", //{0} question name
       question_requireText: "将问题{0}为必填项", //{0} question name
+      question_resetValueText: "重置问题的值：{0}",
+      question_setValueText: "分配值：{1}问题：{0}",
       column_visibilityText: "使问题{1}的列{0}可见", //{0} column name, {1} question name
       column_enableText: "使问题{1}列{0}启用", //{0} column name, {1} question name
       column_requireText: "{0}将问题{1}列为必填项", //{0} column name, {1} question name
+      column_resetValueText: "重置列的单元格值：{0}",
+      column_setValueText: "将单元格值：{1}分配给列：{0}",
       setValueExpressionPlaceholder: "其结果将分配给目标问题的表达式。",
       trigger_completeText: "调查完成",
       trigger_setvalueText: "受到质疑：{0}价值{1}", //{0} question name, {1} setValue
@@ -1806,3 +1810,9 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.logoPosition: "Logo Position" => "徽标位置"
 // theme.coverTitlePosition: "Title Position" => "标题位置"
 // theme.coverDescriptionPosition: "Description Position" => "描述位置"
+// lg.question_resetValueText: "reset value for question: {0}" => "重置问题的值：{0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "分配值：{1}问题：{0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "重置列的单元格值：{0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "将单元格值：{1}分配给列：{0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
