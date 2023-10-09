@@ -3,7 +3,7 @@ import {
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
-  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme
+  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -2190,7 +2190,8 @@ export class CreatorBase extends Base
   }
 
   protected convertQuestion(obj: Question, className: string): Question {
-    var newQuestion = <Question>QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
+    var newQuestion = <Question>QuestionConverter.convertObject(obj, className,
+      this.getDefaultElementJSON(obj.getType()), this.getDefaultElementJSON(className));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -2201,8 +2202,8 @@ export class CreatorBase extends Base
   }
   private getDefaultElementJSON(elType: string): any {
     if (!this.toolbox) return null;
-    const item = this.toolbox.getItemByName(elType);
-    return !!item ? item.json : null;
+    const json = this.toolbox.getItemByName(elType)?.json;
+    return !!json ? Helpers.createCopy(json): null;
   }
   private singlePageJSON(json: any) {
     if (this.pageEditMode === "single") {
