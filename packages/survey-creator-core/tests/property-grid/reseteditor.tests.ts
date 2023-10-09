@@ -1,5 +1,5 @@
 import { QuestionTextModel, Serializer, SurveyModel } from "survey-core";
-import { PropertyGridModelTester } from "./property-grid.tests";
+import { PropertyGridModelTester } from "./property-grid.base";
 import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 import "../../src/custom-questions/question-text-with-reset";
 import { editorLocalization } from "../../src/editorLocalization";

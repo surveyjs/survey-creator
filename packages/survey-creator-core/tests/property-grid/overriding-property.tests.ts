@@ -1,19 +1,8 @@
 import { QuestionTextModel, Base, Serializer, PanelModel } from "survey-core";
-import { PropertyGridModel, PropertyGridEditorCollection } from "../../src/property-grid";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
-} from "../../src/creator-settings";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
+import { PropertyGridModelTester } from "./property-grid.base";
 
 const linkDummy = new QuestionLinkValueModel("q");
-
-export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base, options: ISurveyCreatorOptions = undefined) {
-    PropertyGridEditorCollection.clearHash();
-    super(obj, options);
-  }
-}
 
 test("Enable/disable visible property editor on changing visibleIf", () => {
   expect(Serializer.findProperty("question", "visible").overridingProperty).toBe("visibleIf");
