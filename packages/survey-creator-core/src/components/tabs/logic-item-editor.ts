@@ -255,7 +255,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
     const parentName = question.parent.name;
-    if (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel") {
+    if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
       assignDefaultV2Classes(cssClasses, qType);
       if(!defaultV2Css[qType]) {
