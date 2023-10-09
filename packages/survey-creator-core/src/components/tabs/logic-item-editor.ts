@@ -242,7 +242,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     const selectorsNames = ["elementSelector", "setToName", "fromName", "gotoName"];
     if (selectorsNames.indexOf(question.name) > -1) {
       question.allowRootStyle = false;
-      question.titleLocation = "left";
+      if(question.titleLocation !== "hidden") {
+        question.titleLocation = "left";
+      }
       question.startWithNewLine = false;
       cssClasses.control += " svc-logic-operator svc-logic-operator--question";
       cssClasses.error.root = "svc-logic-operator__error";
