@@ -441,7 +441,7 @@ export class TranslationGroup extends TranslationItemBase {
     var properties = Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if (!property.isSerializable || !property.isLocalizable) continue;
+      if (!property.isSerializable || !property.isLocalizable || property.type === "url") continue;
       if (property.readOnly || !property.visible) continue;
       res.push(property);
     }
@@ -752,7 +752,7 @@ export class Translation extends Base implements ITranslationLocales {
           confirmDeleteText: editorLocalization.getString("ed.translationDeleteLanguage"),
           columns: [
             { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf()" },
-            { name: "displayName", cellType: "expression", expression: "row.displayName" }
+            { name: "displayName", cellType: "expression", expression: "{row.displayName}" }
           ],
           showHeader: false,
           allowAddRows: false,

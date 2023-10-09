@@ -664,3 +664,9 @@ test("check LocalizableStrings/dataList property", () => {
   expect(item.name).toEqual("dataList");
   expect(item.values("").text).toEqual("en1\nen2");
 });
+test("Do not translate url properties", () => {
+  const survey = new SurveyModel();
+  const group: TranslationGroup = new TranslationGroup("root", survey);
+  const logo =group.items.find(item => item.name === "logo");
+  expect(logo).toBeFalsy();
+});
