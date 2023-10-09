@@ -339,6 +339,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "conjunction",
               type: "dropdown",
               renderAs: "logicoperator",
+              searchEnabled: false,
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
