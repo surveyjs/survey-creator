@@ -77,6 +77,15 @@ const themeFromFile = {
   }
 };
 
+test("assign function", (): any => {
+  const result = {};
+  assign(result, { name1: "name1" });
+  expect(result).toEqual({ name1: "name1" });
+
+  assign(result, { name1: undefined });
+  expect(result).toEqual({ });
+});
+
 test("Theme builder initialization", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -345,7 +354,7 @@ test("fontsettings: fontsettingsFromCssVariable - default colors", () => {
   });
 });
 
-test.only("fontsettings: set default value", () => {
+test("fontsettings: set default value", () => {
   const survey = new SurveyModel({
     elements: [{
       type: "fontsettings", name: "questionTitle",
@@ -370,10 +379,10 @@ test.only("fontsettings: set default value", () => {
 
   colorQuestion.value = "rgba(22, 22, 22, 1)";
   fontsettingsToCssVariable(question, result);
-  expect(result).toEqual({ "--sjs-font-questiontitle-color": "rgba(22, 22, 22, 1)" });
+  expect(result).toEqual({});
 });
 
-test.only("Theme builder: composite question values set default value", (): any => {
+test("Theme builder: composite question values set default value", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -1581,8 +1590,8 @@ test("Get theme changes only", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
-  const fullTheme = creator.getCurrentTheme();
-  const themeChanges = creator.getCurrentTheme("changes");
+  const fullTheme = creator.getCurrentTheme() || {};
+  const themeChanges = creator.getCurrentTheme("changes") || {};
   expect(Object.keys(fullTheme).length).toBe(7);
   expect(Object.keys(fullTheme)).toStrictEqual([
     "cssVariables",
@@ -1609,8 +1618,8 @@ test("Get theme changes only", (): any => {
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
-  const fullModifiedTheme = creator.getCurrentTheme();
-  const modifiedThemeChanges = creator.getCurrentTheme("changes");
+  const fullModifiedTheme = creator.getCurrentTheme() || {};
+  const modifiedThemeChanges = creator.getCurrentTheme("changes") || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(7);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);

@@ -53,7 +53,7 @@ export function elementSettingsToCssVariable(question: IQuestion, themeCssVariab
     if (question.value[key] !== (question as Question).defaultValue[key]) {
       themeCssVariables[propertyName] = question.value[key];
     } else {
-      delete themeCssVariables[propertyName];
+      themeCssVariables[propertyName] = undefined;
     }
   });
 }
@@ -62,7 +62,7 @@ export function elementSettingsFromCssVariable(question: IQuestion, themeCssVari
   const result = {};
   Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1).forEach(key => {
     const propertyName = key.split("-").pop();
-    if(propertyName === "cornerRadius") {
+    if(propertyName === "cornerRadius" && themeCssVariables[key] !== undefined) {
       result["corner"] = parseFloat(themeCssVariables[key].toString());
     } else {
       result[propertyName] = themeCssVariables[key];

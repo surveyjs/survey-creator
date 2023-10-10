@@ -577,7 +577,7 @@ export class ThemeBuilder extends Base {
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.currentTheme.cssVariables = newCssVariables;
+      this.setCssVariablesIntoCurrentTheme(newCssVariables);
       this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
@@ -776,6 +776,15 @@ export class ThemeBuilder extends Base {
     if (this.blockThemeChangedNotifications == 0) {
       this.onThemeModified.fire(this, options);
     }
+  }
+
+  private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
+    Object.keys(newCssVariables).forEach(key => {
+      if(newCssVariables[key] === undefined || newCssVariables[key]=== null) {
+        delete newCssVariables[key];
+      }
+    });
+    this.currentTheme.cssVariables = newCssVariables;
   }
 
   private updateSimulatorTheme() {
