@@ -169,6 +169,8 @@ export class CreatorBase extends Base
    * Allows users to edit choice values instead of choice texts on the design surface.
    * 
    * Default value: `false` (users edit choice texts)
+   * 
+   * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
    * @see showObjectTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
@@ -821,6 +823,8 @@ export class CreatorBase extends Base
    * A survey to be displayed in the Designer tab.
    * 
    * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
   public onDesignerSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
@@ -834,6 +838,8 @@ export class CreatorBase extends Base
    * A survey to be displayed in the Preview tab.
    * 
    * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
   public onPreviewSurveyCreated: CreatorEvent = new CreatorEvent();
   public onTestSurveyCreated: CreatorEvent = this.onPreviewSurveyCreated;
