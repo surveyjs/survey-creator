@@ -1497,7 +1497,7 @@ test("set headerViewContainer", (): any => {
   headerViewContainer.getElementByName("descriptionPositionX").value = "center";
   headerViewContainer.getElementByName("descriptionPositionY").value = "middle";
 
-  expect(creator.theme.cover).toEqual({
+  expect(creator.theme.header).toEqual({
     "height": 300,
     "inheritWidthFrom": "page",
     "textAreaWidth": 600,
@@ -1528,7 +1528,7 @@ test("restore headerViewContainer values", (): any => {
       "--sjs-cover-title-forecolor": "#FBFF24",
       "--sjs-cover-description-forecolor": "#88b9e3",
     },
-    "cover": {
+    "header": {
       "height": 300,
       "inheritWidthFrom": "page",
       "textAreaWidth": 600,
@@ -1583,12 +1583,15 @@ test("Get theme changes only", (): any => {
 
   const fullTheme = creator.getCurrentTheme();
   const themeChanges = creator.getCurrentTheme("changes");
-  expect(Object.keys(fullTheme).length).toBe(4);
+  expect(Object.keys(fullTheme).length).toBe(7);
   expect(Object.keys(fullTheme)).toStrictEqual([
     "cssVariables",
     "backgroundImage",
     "backgroundImageFit",
     "backgroundImageAttachment",
+    "themeName",
+    "colorPalette",
+    "isPanelless",
   ]);
   expect(Object.keys(fullTheme.cssVariables).length).toBe(85);
   expect(Object.keys(themeChanges).length).toBe(6);
@@ -1608,7 +1611,7 @@ test("Get theme changes only", (): any => {
 
   const fullModifiedTheme = creator.getCurrentTheme();
   const modifiedThemeChanges = creator.getCurrentTheme("changes");
-  expect(Object.keys(fullModifiedTheme).length).toBe(4);
+  expect(Object.keys(fullModifiedTheme).length).toBe(7);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
@@ -1622,9 +1625,12 @@ test("Get theme changes only", (): any => {
   themeSurveyTab.resetTheme();
   const fullThemeReset = creator.getCurrentTheme();
   const themeChangesReset = creator.getCurrentTheme("changes");
-  expect(Object.keys(fullThemeReset).length).toBe(1);
+  expect(Object.keys(fullThemeReset).length).toBe(4);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "cssVariables",
+    "themeName",
+    "colorPalette",
+    "isPanelless"
   ]);
   expect(Object.keys(fullThemeReset.cssVariables).length).toBe(85);
   expect(Object.keys(themeChangesReset).length).toBe(4);
@@ -1699,7 +1705,7 @@ test("Creator footer action bar: all tabs", (): any => {
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
-test("Mobile mode: hide advanced settings in property grid ", (): any => {
+test("Mobile mode: hide advanced settings in property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.isMobileView = true;
@@ -1716,4 +1722,20 @@ test("Mobile mode: hide advanced settings in property grid ", (): any => {
   expect(propertyGridGroups[3].visible).toBeTruthy();
   expect(propertyGridGroups[4].visible).toBeFalsy();
 });
+test("loadTheme fill all theme parameters: name, mode and compactness", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
 
+  themeBuilder.setTheme(<any>{ isPanelless: true });
+  expect(creator.theme.themeName).toBe("default");
+  expect(creator.theme.colorPalette).toBe("light");
+  expect(creator.theme.isPanelless).toBe(true);
+
+  themeBuilder.setTheme(<any>{ colorPalette: "dark" });
+  expect(creator.theme.themeName).toBe("default");
+  expect(creator.theme.colorPalette).toBe("dark");
+  expect(creator.theme.isPanelless).toBe(true);
+});

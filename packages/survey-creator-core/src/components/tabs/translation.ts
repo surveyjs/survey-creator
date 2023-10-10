@@ -441,7 +441,7 @@ export class TranslationGroup extends TranslationItemBase {
     var properties = Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if (!property.isSerializable || !property.isLocalizable || property.type === "url") continue;
+      if (!property.isSerializable || !property.isLocalizable || property.type === "url" || property.type === "file") continue;
       if (property.readOnly || !property.visible) continue;
       res.push(property);
     }

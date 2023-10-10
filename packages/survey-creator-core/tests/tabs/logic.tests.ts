@@ -14,7 +14,9 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMatrixModel,
   QuestionCommentModel,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  SurveyTrigger,
+  Serializer
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -30,9 +32,10 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
-import exp from "constants";
 
 export * from "../../src/components/link-value";
+export * from "../../src/custom-questions/question-text-with-reset";
+import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
 
 const questionLogicTypeLength = 5;
 
@@ -3158,3 +3161,117 @@ test("SurveyLogicItem,  setValue css", () => {
   expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
   ComponentCollection.Instance.clear();
 });
+test("Test questions css in an action panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q1} = 2",
+        setToName: "q2", setValue: 5
+      },
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ],
+    completedHtmlOnCondition: [
+      { expression: "{q1} = 4", html: "Custom html" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(4);
+  const checkFunc = (rowIndex: number, logicTypeName: string, questionName: string, hasFrame: boolean): void => {
+    const row = logic.matrixItems.visibleRows[rowIndex];
+    row.showDetailPanel();
+    let panel = logic.itemEditor.panels[0];
+    expect(panel.getQuestionByName("logicTypeName").value).toBe(logicTypeName);
+    let panelQuestion = panel.getQuestionByName(questionName);
+    expect(panelQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame") > -1).toBe(hasFrame);
+    expect(panelQuestion.getControlClass().indexOf("sd-question")).toBeTruthy();
+  };
+  checkFunc(0, "question_setValue", "setValueExpression", false);
+  checkFunc(1, "trigger_setvalue", "setValue", true);
+  checkFunc(2, "trigger_runExpression", "runExpression", false);
+  checkFunc(3, "completedHtmlOnCondition", "html", false);
+});
+
+test("Custom trigger in logic", () => {
+  Serializer.addClass(
+    "incrementcountertrigger",
+    [
+      {
+        name: "initialNumber:number",
+        default: 0
+      },
+      "targetCounter:questionvalue"
+    ],
+    function () {
+      return new IncrementCounterTrigger();
+    },
+    "surveytrigger"
+  );
+  SurveyLogic.types.push({
+    name: "increment_counter",
+    baseClass: "incrementcountertrigger",
+    propertyName: "expression"
+  });
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "incrementcounter",
+        expression: "{q1} = 1",
+        initialNumber: "21",
+        targetCounter: "q2"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(1);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("increment_counter");
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const targetCounterQuestion = triggerEditorPanel.getQuestionByName("targetCounter");
+  expect(targetCounterQuestion.value).toBe("q2");
+  const initialNumberQuestion = <QuestionTextWithResetModel>triggerEditorPanel.getQuestionByName("initialNumber");
+  expect(initialNumberQuestion.value).toBe(21);
+
+  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
+  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeTruthy();
+  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
+  expect(initialNumberQuestion.getControlClass().indexOf("spg-input-container__input")).toBeTruthy();
+
+  delete SurveyLogic.types["increment_counter"];
+  Serializer.removeClass("incrementcountertrigger");
+});
+
+class IncrementCounterTrigger extends SurveyTrigger {
+
+  public getType():string {
+    return "incrementcountertrigger";
+  }
+  public get targetCounter(): string {
+    return this.getPropertyValue("targetCounter");
+  }
+  public set targetCounter(val: string) {
+    this.setPropertyValue("targetCounter", val);
+  }
+  public get initialNumber(): number {
+    return this.getPropertyValue("initialNumber");
+  }
+  public set initialNumber(val: number) {
+    this.setPropertyValue("initialNumber", val);
+  }
+
+}
