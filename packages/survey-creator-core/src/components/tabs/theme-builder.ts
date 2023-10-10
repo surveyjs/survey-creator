@@ -471,7 +471,7 @@ export class ThemeBuilder extends Base {
       this.survey.logoPosition = headerSettings["logoPosition"];
       this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
     } else {
-      this.currentTheme.cover = this.getCoverJson(headerSettings);
+      this.currentTheme.header = this.getCoverJson(headerSettings);
       this.setCoverCssVariables(headerSettings);
     }
     this.updateSimulatorTheme();
@@ -685,13 +685,13 @@ export class ThemeBuilder extends Base {
       this.setCoverPropertiesFromSurvey(panel);
     }
 
-    if (!!this.currentTheme.cover) {
-      Object.keys(this.currentTheme.cover).forEach(key => {
+    if (!!this.currentTheme.header) {
+      Object.keys(this.currentTheme.header).forEach(key => {
         const question = panel.getQuestionByName(key);
         if (!!question && key === "backgroundImageOpacity") {
-          question.value = this.currentTheme.cover[key] * 100;
+          question.value = this.currentTheme.header[key] * 100;
         } else if (question) {
-          question.value = this.currentTheme.cover[key];
+          question.value = this.currentTheme.header[key];
         }
       });
       this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
