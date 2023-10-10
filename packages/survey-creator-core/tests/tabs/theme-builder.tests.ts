@@ -1443,7 +1443,7 @@ test("set headerViewContainer", (): any => {
   headerViewContainer.getElementByName("descriptionPositionX").value = "center";
   headerViewContainer.getElementByName("descriptionPositionY").value = "middle";
 
-  expect(creator.theme.cover).toEqual({
+  expect(creator.theme.header).toEqual({
     "height": 300,
     "inheritWidthFrom": "page",
     "textAreaWidth": 600,
@@ -1474,7 +1474,7 @@ test("restore headerViewContainer values", (): any => {
       "--sjs-cover-title-forecolor": "#FBFF24",
       "--sjs-cover-description-forecolor": "#88b9e3",
     },
-    "cover": {
+    "header": {
       "height": 300,
       "inheritWidthFrom": "page",
       "textAreaWidth": 600,
