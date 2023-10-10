@@ -175,7 +175,7 @@ export class ThemeBuilder extends Base {
       assign(effectiveThemeCssVariables, Themes["default-light"].cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {};
-      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables });
+      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
 
       this.initializeColorCalculator();
