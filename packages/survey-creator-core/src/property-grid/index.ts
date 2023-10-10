@@ -1383,7 +1383,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type === "url";
+    return prop.type === "url" || prop.type === "file";
   }
   public getJSON(
     obj: Base,
