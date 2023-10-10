@@ -1016,7 +1016,7 @@ export class ThemeBuilder extends Base {
       }, {
         type: "panel",
         name: "groupBackground",
-        state: "expanded",
+        state: "collapsed",
         title: getLocString("theme.groupBackground"),
         elements: [
           {
@@ -1085,7 +1085,7 @@ export class ThemeBuilder extends Base {
       }, {
         type: "panel",
         name: "groupAppearance",
-        state: "expanded",
+        state: "collapsed",
         title: getLocString("theme.groupAppearance"),
         elements: [
           {
