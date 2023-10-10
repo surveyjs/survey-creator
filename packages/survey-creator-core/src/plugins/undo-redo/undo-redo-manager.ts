@@ -2,7 +2,8 @@ import {
   ArrayChanges,
   Base,
   JsonObjectProperty,
-  Serializer
+  Serializer,
+  SurveyModel
 } from "survey-core";
 import { EditableObject } from "../../editable-object";
 
@@ -245,6 +246,7 @@ export class UndoRedoAction implements IUndoRedoAction {
 }
 
 export class UndoRedoArrayAction implements IUndoRedoAction {
+  private survey: SurveyModel;
   private _index: number = 0;
   private _itemsToAdd: any[] = [];
   private _deletedItems: any[] = [];
@@ -254,6 +256,7 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
     private _sender: Base,
     arrayChanges: ArrayChanges
   ) {
+    this.survey = <SurveyModel>_sender.getSurvey();
     this._index = arrayChanges.index;
     this._itemsToAdd = arrayChanges.itemsToAdd;
     this._deletedItems = arrayChanges.deletedItems;
@@ -262,10 +265,12 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
     this.rollback();
   }
   rollback(): void {
+    this._sender = this.getSenderElement();
+    if(!this._sender) return;
     const array = this._sender[this._propertyName];
     const index = this._index;
     const deleteCount = this._itemsToAdd.length;
-    const itemsToAdd = [].concat(this._deletedItems);
+    const itemsToAdd = this.getItemsToAdd();
 
     this._deletedItems = array.splice.apply(
       array,
@@ -291,5 +296,26 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
   }
   tryMerge(sender: Base, propertyName: string, newValue: any): boolean {
     return false;
+  }
+  private getSenderElement(): Base {
+    if(!this._sender.isDisposed || !this.survey) return this._sender;
+    const name = this._sender["name"];
+    if(this._sender["isPage"] === true) return this.survey.getPageByName(name);
+    if(this._sender["isPanel"] === true) return this.survey.getPanelByName(name);
+    if(this._sender["isQuestion"] === true) return this.survey.getQuestionByName(name);
+    return this._sender;
+  }
+  private getItemsToAdd(): Array<any> {
+    const res = [];
+    for(let i = 0; i < this._deletedItems.length; i ++) {
+      let obj = this._deletedItems[i];
+      if(obj.isDisposed && obj.getType()) {
+        const json = obj.toJSON();
+        obj = Serializer.createClass(obj.getType());
+        obj.fromJSON(json);
+      }
+      res.push(obj);
+    }
+    return res;
   }
 }
