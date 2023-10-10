@@ -39,6 +39,8 @@ test("Editors, loose focus on enter", async (t) => {
   await setJSON(json);
 
   await t.click(getTabbedMenuItemByText("Themes"));
+  await t.click(Selector("h4").withExactText("Background"));
+  await t.click(Selector("h4").withExactText("Appearance"));
 
   const colorQuestionInputSelector = Selector("div[data-name=generalPrimaryColor] input.spg-color-editor__input");
   const backgroundImageQuestionInputSelector = Selector("div[data-name=backgroundImage] input.spg-input-container__input");
