@@ -309,7 +309,7 @@ export class UndoRedoArrayAction implements IUndoRedoAction {
     const res = [];
     for(let i = 0; i < this._deletedItems.length; i ++) {
       let obj = this._deletedItems[i];
-      if(obj.isDisposed && obj.getType()) {
+      if(obj.isDisposed && obj.getType) {
         const json = obj.toJSON();
         obj = Serializer.createClass(obj.getType());
         obj.fromJSON(json);
