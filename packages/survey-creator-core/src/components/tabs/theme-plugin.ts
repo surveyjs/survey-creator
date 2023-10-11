@@ -5,6 +5,7 @@ import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../creator-settings";
 import { PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { saveToFileHandler } from "../../utils/utils";
 
 function getObjectDiffs(obj1: any, obj2: any = {}): any {
   const result: any = {};
@@ -138,19 +139,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return true;
   }
 
-  public saveToFileHandler = (fileName: string, blob: Blob) => {
-    if (!window) return;
-    if (window.navigator["msSaveOrOpenBlob"]) {
-      window.navigator["msSaveBlob"](blob, fileName);
-    } else {
-      const elem = window.document.createElement("a");
-      elem.href = window.URL.createObjectURL(blob);
-      elem.download = fileName;
-      document.body.appendChild(elem);
-      elem.click();
-      document.body.removeChild(elem);
-    }
-  }
+  public saveToFileHandler = saveToFileHandler;
 
   public exportToFile(fileName: string) {
     const themeData = JSON.stringify(this.creator.theme, null, 4);
