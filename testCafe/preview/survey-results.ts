@@ -121,7 +121,7 @@ test("Check dropdowns inside survey are hided when scrolling container", async (
     .expect(Selector(".sv-popup__container").filterVisible().exists).notOk();
 });
 
-test.only("Test survey results not visible on mobile", async (t) => {
+test("Test survey results not visible on mobile", async (t) => {
   await setJSON(json);
 
   await t
