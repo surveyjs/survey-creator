@@ -160,6 +160,9 @@ export class ThemeBuilder extends Base {
   public get isMobileView() {
     return this.surveyProvider.isMobileView;
   }
+  public get showResults() {
+    return !this.isRunning && !this.isMobileView;
+  }
 
   public loadTheme(theme: ITheme) {
     this.blockThemeChangedNotifications += 1;
