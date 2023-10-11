@@ -84,7 +84,7 @@ export function fontsettingsToCssVariable(question: IQuestion, themeCssVariables
     if (question.value[key] !== (question as Question).defaultValue[key]) {
       themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
     } else {
-      delete themeCssVariables[propertyName];
+      themeCssVariables[propertyName] = undefined;
     }
   });
 }
