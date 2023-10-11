@@ -2,7 +2,7 @@
   <div class="svc-creator-tab__content svc-test-tab__content" [class.svc-creator-tab__content--with-toolbar]="model.isPageToolbarVisible">
     <div class="svc-plugin-tab__content">
       <survey-simulator [model]="model.simulator"></survey-simulator>
-      <ng-container *ngIf="!model.isRunning">
+      <ng-container *ngIf="!(model.isRunning || model.isMobileView)">
         <survey-results [survey]="model.survey"></survey-results>
       </ng-container>
     </div>

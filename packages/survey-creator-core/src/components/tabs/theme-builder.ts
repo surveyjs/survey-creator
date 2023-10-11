@@ -154,9 +154,11 @@ export class ThemeBuilder extends Base {
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.loadTheme(this.surveyProvider.theme);
     this.undoRedoManager = new UndoRedoManager();
-    this.surveyProvider.onPropertyChanged.add((sender, options) => {
-      this.creatorPropertyChanged(sender, options);
-    });
+    this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
+  }
+
+  public get isMobileView() {
+    return this.surveyProvider.isMobileView;
   }
 
   public loadTheme(theme: ITheme) {
@@ -261,7 +263,7 @@ export class ThemeBuilder extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
-  private creatorPropertyChanged(sender, options) {
+  private creatorPropertyChanged = (sender, options) => {
     if (options.name === "isMobileView") {
       this.updateVisibilityOfPropertyGridGroups();
     }
@@ -1437,6 +1439,7 @@ export class ThemeBuilder extends Base {
   }
 
   public dispose(): void {
+    this.surveyProvider.onPropertyChanged.remove(this.creatorPropertyChanged);
     this.themeEditorSurveyValue?.dispose();
     this.simulator.dispose();
     super.dispose();

@@ -76,6 +76,10 @@ export class TestSurveyTabViewModel extends Base {
     this.simulator = new SurveySimulatorModel();
   }
 
+  public get isMobileView() {
+    return this.surveyProvider.isMobileView;
+  }
+
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this);
     newSurvey.applyTheme(this.surveyProvider.theme);

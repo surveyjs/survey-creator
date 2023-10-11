@@ -25,7 +25,7 @@ export class TabThemeSurveyComponent extends SurveyElementBase<any, any> {
       <div className={tabContentClassName}>
         <div className="svc-plugin-tab__content">
           <SurveySimulator model={this.model.simulator}></SurveySimulator>
-          {!this.model.isRunning ? <SurveyResults survey={this.model.simulator.survey} /> : null}
+          {!(this.model.isRunning || this.model.isMobileView) ? <SurveyResults survey={this.model.simulator.survey} /> : null}
         </div>
         {this.getBottomToolbar()}
       </div>
