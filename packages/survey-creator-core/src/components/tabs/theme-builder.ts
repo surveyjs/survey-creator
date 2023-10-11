@@ -10,6 +10,7 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { QuestionFileEditorModel } from "src/entries";
 
 require("./theme-builder.scss");
 
@@ -590,6 +591,9 @@ export class ThemeBuilder extends Base {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       this.surveyProvider.uploadFiles(options.files, undefined, callback);
     });
+    (<QuestionFileEditorModel>themeEditorSurvey.getQuestionByName("backgroundImage")).onChooseFilesCallback = (input, onFilesChosen) => {
+      this.surveyProvider.chooseFiles(input, onFilesChosen);
+    };
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;

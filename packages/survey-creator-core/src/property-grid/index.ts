@@ -42,6 +42,7 @@ import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
+import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if(!this.question) return false;
@@ -1406,6 +1407,10 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
+    const creator = <CreatorBase>options;
+    question.onChooseFilesCallback = ((input, onFilesChosen) => {
+      creator.chooseFiles(input, onFilesChosen);
+    });
   }
 
 }
