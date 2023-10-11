@@ -1805,7 +1805,7 @@ test("SurveyPropertyDefaultValueEditor: Default Value Title", () => {
   expect(editorLocalization.getString("pe.defaultValue")).toEqual(defaultValueQuestion.title);
 });
 
-test("SurveyHelper convertTextToItemValues", () => {
+test("Setup choices from FastEntryEditor", () => {
   var choices = new Array<ItemValue>();
   var editor = new FastEntryEditor(choices);
   editor.comment.value = "1|One\n2|Two";
@@ -1815,6 +1815,15 @@ test("SurveyHelper convertTextToItemValues", () => {
   expect(choices[0].text).toEqual("One");
   expect(choices[1].value).toEqual("2");
   expect(choices[1].text).toEqual("Two");
+});
+test("Empty choices from FastEntryEditor, Bug#4733", () => {
+  var choices = new Array<ItemValue>();
+  choices.push(new ItemValue(1));
+  choices.push(new ItemValue(2));
+  var editor = new FastEntryEditor(choices);
+  editor.comment.value = "";
+  editor.apply();
+  expect(choices).toHaveLength(0);
 });
 test("SurveyHelper convertTextToItemValues", () => {
   var choices = new Array<ItemValue>();
