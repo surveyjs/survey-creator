@@ -1433,8 +1433,7 @@ test("isStringEditable for matrix dynamic", (): any => {
 test("Test plug-ins in creator", (): any => {
   const creator = new CreatorTester({
     showTranslationTab: true,
-    showLogicTab: true,
-    showEmbeddedSurveyTab: true
+    showLogicTab: true
   });
   expect(creator.viewType).toEqual("designer");
   const designerPlugin = <TabDesignerPlugin>(
