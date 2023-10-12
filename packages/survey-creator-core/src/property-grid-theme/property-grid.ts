@@ -34,6 +34,7 @@ export var propertyGridCss = {
     requiredText: "spg-panel__required-text"
   },
   paneldynamic: {
+    mainRoot: "spg-question spg-row__question",
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
     title: "spg-title spg-question__title",

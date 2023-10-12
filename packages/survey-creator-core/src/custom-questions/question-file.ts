@@ -1,4 +1,4 @@
-import { CssClassBuilder, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
+import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
@@ -99,6 +99,25 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
   public onKeyDown = (event: KeyboardEvent) => {
     this.onTextKeyDownHandler(event);
+  }
+  public onFileInputChange = (event: Event) => {
+    if(!this.onChooseFilesCallback) {
+      this.doChange(event);
+      return true;
+    }
+  }
+  public onChooseFilesCallback: (input: HTMLInputElement, onFilesChosen: (files: File[]) => void) => void;
+  chooseFiles(event: Event) {
+    if(this.isInputReadOnly || !this.onChooseFilesCallback) {
+      return true;
+    } else {
+      event.preventDefault();
+      event.stopPropagation();
+      const input = this["rootElement"].querySelectorAll("input[type='file']")[0];
+      this.onChooseFilesCallback(input, (files) => {
+        this.loadFiles(files);
+      });
+    }
   }
 }
 Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");

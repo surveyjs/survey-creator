@@ -25,8 +25,8 @@ class QuestionFileEditorImplementor extends QuestionImplementor {
     this.setCallbackFunc("ondragleave", (data: any, event: any) => {
       this.question.onDragLeave(getOriginalEvent(event));
     });
-    this.setCallbackFunc("dochange", (data: any, event: any) => {
-      this.question.doChange(getOriginalEvent(event));
+    this.setCallbackFunc("doFileInputChange", (data: any, event: any) => {
+      this.question.onFileInputChange(getOriginalEvent(event));
     });
     this.setCallbackFunc("doclean", (data: any, event: any) => {
       this.question.doClean(getOriginalEvent(event));
