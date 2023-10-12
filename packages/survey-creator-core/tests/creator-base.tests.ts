@@ -2275,6 +2275,19 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
 });
+test("convertInputType, check locale", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  creator.locale = "de";
+  const questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  const action: any = questionModel.getActionById("convertInputType");
+  expect(action.data.locOwner.locale).toBe("de");
+});
 test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
