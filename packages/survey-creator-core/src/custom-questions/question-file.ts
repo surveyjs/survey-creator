@@ -100,6 +100,12 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   public onKeyDown = (event: KeyboardEvent) => {
     this.onTextKeyDownHandler(event);
   }
+  public onFileInputChange = (event: Event) => {
+    if(!this.onChooseFilesCallback) {
+      this.doChange(event);
+      return true;
+    }
+  }
   public onChooseFilesCallback: (input: HTMLInputElement, onFilesChosen: (files: File[]) => void) => void;
   chooseFiles(event: Event) {
     if(this.isInputReadOnly || !this.onChooseFilesCallback) {
