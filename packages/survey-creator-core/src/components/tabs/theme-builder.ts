@@ -704,7 +704,12 @@ export class ThemeBuilder extends Base {
       }
     }
   }
-
+  private updatePropertyGridEditorAvailablesFromSurveyElement() {
+    let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+    this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+    this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
+    this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
+  }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
     this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
@@ -723,9 +728,7 @@ export class ThemeBuilder extends Base {
     });
 
     if (!!this.survey) {
-      this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
-      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
-      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
+      this.updatePropertyGridEditorAvailablesFromSurveyElement();
     }
   }
 
