@@ -80,6 +80,10 @@ const json = {
 })
 export class ExampleComponent {
   constructor() {
+    // this.creator.onOpenFileChooser.add((_, opt) => {
+    //   alert("fefef");
+    //   opt.callback([]);
+    // });
     this.creator.JSON = json;
     (<any>window).creator = this.creator;
     (<any>window).Survey = Survey;
