@@ -332,6 +332,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       selectedItem: selItem,
       horizontalPosition: "center"
     });
+    newAction.data.locOwner = this.creator;
     return newAction;
   }
 
