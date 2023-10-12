@@ -10,6 +10,7 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { QuestionFileEditorModel } from "src/entries";
 
 require("./theme-builder.scss");
 
@@ -590,6 +591,7 @@ export class ThemeBuilder extends Base {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       this.surveyProvider.uploadFiles(options.files, undefined, callback);
     });
+    this.patchFileEditors(themeEditorSurvey);
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
@@ -599,6 +601,10 @@ export class ThemeBuilder extends Base {
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
     return findSuitableTheme(themeName, probeThemeFullName);
+  }
+  private patchFileEditors(survey: SurveyModel) {
+    const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
+    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
   }
 
   private getCoverJson(headerSettings: any) {
