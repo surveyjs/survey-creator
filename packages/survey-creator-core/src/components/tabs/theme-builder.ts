@@ -15,6 +15,7 @@ import { QuestionFileEditorModel } from "src/entries";
 require("./theme-builder.scss");
 
 export class ThemeBuilder extends Base {
+  public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -74,36 +75,22 @@ export class ThemeBuilder extends Base {
   activePage: PageModel;
   @property({
     onSet: (newValue: string, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImage = newValue;
-      }
-      _target.currentTheme["backgroundImage"] = newValue;
+      _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
-
   @property({
     defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImageFit = newValue;
-      }
-      _target.currentTheme["backgroundImageFit"] = newValue;
+      _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
-
   @property({
     defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImageAttachment = newValue;
-      }
-      _target.currentTheme["backgroundImageAttachment"] = newValue;
+      _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
     onSet: (newValue: number, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundOpacity = newValue / 100;
-      }
-      _target.currentTheme["backgroundOpacity"] = newValue / 100;
+      _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
   @property({ defaultValue: "default" }) themeName;
@@ -153,6 +140,10 @@ export class ThemeBuilder extends Base {
     super();
     this.simulator = new SurveySimulatorModel();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
+    this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
+    this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
+    this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
+    this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add((sender, options) => {
@@ -172,10 +163,16 @@ export class ThemeBuilder extends Base {
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
-      const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, Themes["default-light"].cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
+      const effectiveThemeCssVariables = {
+      };
+      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
-      const effectiveTheme: ITheme = {};
+      const effectiveTheme: ITheme = {
+        backgroundImage: this.backgroundImage,
+        backgroundImageFit: this.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment,
+        backgroundOpacity: this.backgroundOpacity / 100,
+      };
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
 
@@ -193,6 +190,10 @@ export class ThemeBuilder extends Base {
 
   public setTheme(theme: ITheme) {
     this.themeCssVariablesChanges = {};
+    this.backgroundImage = "";
+    this.backgroundImageFit = "";
+    this.backgroundImageAttachment = "";
+    this.backgroundOpacity = 100;
     this.loadTheme(theme);
     this.updateSimulatorTheme();
     this.surveyProvider.isThemePristine = true;
@@ -458,6 +459,7 @@ export class ThemeBuilder extends Base {
     }
     if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
       this[options.name] = options.value;
+      this.updateSimulatorTheme();
       this.raiseThemeChanged();
       this.raiseThemeModified(options);
       return true;
@@ -744,6 +746,7 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
+    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.backgroundOpacity;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
     themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
@@ -789,7 +792,7 @@ export class ThemeBuilder extends Base {
 
   private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
     Object.keys(newCssVariables).forEach(key => {
-      if(newCssVariables[key] === undefined || newCssVariables[key]=== null) {
+      if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
         delete newCssVariables[key];
       }
     });
