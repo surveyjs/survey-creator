@@ -1437,15 +1437,98 @@ test("disable irrelevant settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
-  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  const surveyTitle = themeEditorSurvey.getQuestionByName("surveyTitle");
-  const pageTitle = themeEditorSurvey.getQuestionByName("pageTitle");
-  const pageDescription = themeEditorSurvey.getQuestionByName("pageDescription");
+  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
 
-  expect(surveyTitle.isReadOnly).toBeTruthy();
-  expect(pageTitle.isReadOnly).toBeTruthy();
-  expect(pageDescription.isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+  };
+
+  themePlugin.activate();
+  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable page settings if single page mode", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(creator.survey.isSinglePage).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+    "questionsOnPageMode": "singlePage",
+  };
+
+  themePlugin.activate();
+  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(creator.survey.isSinglePage).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
 
 test("headerViewContainer init state", (): any => {
