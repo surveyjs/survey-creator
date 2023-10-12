@@ -609,7 +609,7 @@ export class ThemeBuilder extends Base {
     questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
   }
 
-  private getCoverJson(headerSettings: any) {
+  private getCoverJson(headerSettings: any): any {
     const result = {};
     Serializer.getProperties("cover").map(pr => pr.name)
       .filter(key => headerSettings[key] !== undefined && headerSettings[key] !== null)
