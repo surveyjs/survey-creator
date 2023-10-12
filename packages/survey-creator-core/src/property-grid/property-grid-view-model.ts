@@ -131,7 +131,7 @@ export class PropertyGridViewModel extends Base {
       component: "sv-action-bar-item-dropdown",
       disableHide: true,
       action: () => {
-        this.selectorPopupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
+        this.selectorPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
         selectorModel.show(
           this.selectionController.creator.survey,
           this.propertyGridModel.obj,
