@@ -922,7 +922,6 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
 test("Theme onModified and saveThemeFunc", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.isAutoSave = true;
-  creator.autoSaveDelay = 0;
   let modificationsLog = "";
   creator.onModified.add((s, o) => {
     modificationsLog += "->" + o.type;

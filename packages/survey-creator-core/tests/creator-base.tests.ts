@@ -3089,7 +3089,6 @@ test("Creator notify state, change the same property, isAutoSave=false", () => {
 test("Creator state, change the same property, isAutoSave=true", () => {
   const creator = new CreatorTester();
   creator.isAutoSave = true;
-  creator.autoSaveDelay = 0;
   var counter = 0;
   var saveNo = 0;
   creator.saveSurveyFunc = function (
