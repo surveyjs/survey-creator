@@ -168,7 +168,8 @@ export var settings = {
     allowCollapseSidebar: true
   },
   jsonEditor: {
-    indentation: 1
+    indentation: 1,
+    exportFileName: "survey.json"
   }
 };
 export interface ICollectionItemAllowOperations {
@@ -445,9 +446,9 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     files: File[],
     question: Question,
     uploadingCallback: (status: string, data: any) => any
-  ): void {}
+  ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
-  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {}
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

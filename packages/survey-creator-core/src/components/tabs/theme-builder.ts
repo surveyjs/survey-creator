@@ -578,7 +578,7 @@ export class ThemeBuilder extends Base {
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.currentTheme.cssVariables = newCssVariables;
+      this.setCssVariablesIntoCurrentTheme(newCssVariables);
       this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
@@ -708,7 +708,12 @@ export class ThemeBuilder extends Base {
       }
     }
   }
-
+  private updatePropertyGridEditorAvailablesFromSurveyElement() {
+    let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+    this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+    this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
+    this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
+  }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
     this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
@@ -727,9 +732,7 @@ export class ThemeBuilder extends Base {
     });
 
     if (!!this.survey) {
-      this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
-      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
-      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
+      this.updatePropertyGridEditorAvailablesFromSurveyElement();
     }
   }
 
@@ -780,6 +783,15 @@ export class ThemeBuilder extends Base {
     if (this.blockThemeChangedNotifications == 0) {
       this.onThemeModified.fire(this, options);
     }
+  }
+
+  private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
+    Object.keys(newCssVariables).forEach(key => {
+      if(newCssVariables[key] === undefined || newCssVariables[key]=== null) {
+        delete newCssVariables[key];
+      }
+    });
+    this.currentTheme.cssVariables = newCssVariables;
   }
 
   private updateSimulatorTheme() {

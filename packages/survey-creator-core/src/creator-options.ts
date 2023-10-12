@@ -32,12 +32,6 @@ export interface ICreatorOptions {
    */
   showLogicTab?: boolean;
   /**
-   * Specifies whether to display the Embed Survey tab.
-   *
-   * Default value: `false`
-   */
-  showEmbeddedSurveyTab?: boolean;
-  /**
    * Specifies whether to display the Translation tab.
    *
    * Default value: `false`

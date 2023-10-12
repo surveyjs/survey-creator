@@ -77,6 +77,15 @@ const themeFromFile = {
   }
 };
 
+test("assign function", (): any => {
+  const result = {};
+  assign(result, { name1: "name1" });
+  expect(result).toEqual({ name1: "name1" });
+
+  assign(result, { name1: undefined });
+  expect(result).toEqual({ });
+});
+
 test("Theme builder initialization", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -343,6 +352,60 @@ test("fontsettings: fontsettingsFromCssVariable - default colors", () => {
     "color": "rgba(0, 0, 0, 0.91)",
     "placeholdercolor": "rgba(0, 0, 0, 0.45)",
   });
+});
+
+test("fontsettings: set default value", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "fontsettings", name: "questionTitle",
+      defaultValue: {
+        family: "Open Sans",
+        color: "rgba(22, 22, 22, 1)",
+        weight: "700",
+        size: 32
+      }
+    }],
+  });
+  const question = survey.findQuestionByName("questionTitle") as QuestionCompositeModel;
+  const colorQuestion = question.contentPanel.getQuestionByName("color");
+  expect(colorQuestion.value).toEqual("rgba(22, 22, 22, 1)");
+  let result = {};
+  fontsettingsToCssVariable(question, result);
+  expect(result).toEqual({});
+
+  colorQuestion.value = "rgba(201, 90, 231, 0.91)";
+  fontsettingsToCssVariable(question, result);
+  expect(result).toEqual({ "--sjs-font-questiontitle-color": "rgba(201, 90, 231, 0.91)" });
+
+  colorQuestion.value = "rgba(22, 22, 22, 1)";
+  fontsettingsToCssVariable(question, result);
+  expect(result).toEqual({});
+});
+
+test("Theme builder: composite question values set default value", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
+
+  pageTitleFontSettings.value = { family: "Arial, sans-serif", weight: "semiBold", color: "#fefefe", size: 40 };
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toEqual("Arial, sans-serif");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toEqual("semiBold");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toEqual("rgba(254, 254, 254, 1)");
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toEqual("40px");
+
+  pageTitleFontSettings.value = { family: "Open Sans", color: "rgba(0, 0, 0, 0.91)", weight: "700", size: 24 };
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-weight"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-color"]).toBeUndefined();
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-size"]).toBeUndefined();
 });
 
 test("Theme builder: composite question elementSettings", (): any => {
@@ -1374,15 +1437,98 @@ test("disable irrelevant settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
-  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  const surveyTitle = themeEditorSurvey.getQuestionByName("surveyTitle");
-  const pageTitle = themeEditorSurvey.getQuestionByName("pageTitle");
-  const pageDescription = themeEditorSurvey.getQuestionByName("pageDescription");
+  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
 
-  expect(surveyTitle.isReadOnly).toBeTruthy();
-  expect(pageTitle.isReadOnly).toBeTruthy();
-  expect(pageDescription.isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+  };
+
+  themePlugin.activate();
+  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
+});
+
+test("disable page settings if single page mode", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  themePlugin.activate();
+  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(creator.survey.isSinglePage).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeTruthy();
+
+  creator.activeTab = "designer";
+  creator.JSON = {
+    "title": "Survey Title",
+    "description": "Survey Description",
+    "pages": [
+      {
+        "name": "page1",
+        "title": "page 1",
+        "description": "page 1 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question1"
+          }
+        ],
+      },
+      {
+        "name": "page2",
+        "title": "page 2",
+        "description": "page 2 description",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2"
+          }
+        ],
+      }
+    ],
+    "questionsOnPageMode": "singlePage",
+  };
+
+  themePlugin.activate();
+  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  expect(creator.survey.isSinglePage).toBeTruthy();
+  expect(themeEditorSurvey.getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
+  expect(themeEditorSurvey.getQuestionByName("pageDescription").isReadOnly).toBeFalsy();
 });
 
 test("headerViewContainer init state", (): any => {
@@ -1527,8 +1673,8 @@ test("Get theme changes only", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
-  const fullTheme = creator.getCurrentTheme();
-  const themeChanges = creator.getCurrentTheme("changes");
+  const fullTheme = creator.getCurrentTheme() || {};
+  const themeChanges = creator.getCurrentTheme("changes") || {};
   expect(Object.keys(fullTheme).length).toBe(7);
   expect(Object.keys(fullTheme)).toStrictEqual([
     "cssVariables",
@@ -1555,8 +1701,8 @@ test("Get theme changes only", (): any => {
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
-  const fullModifiedTheme = creator.getCurrentTheme();
-  const modifiedThemeChanges = creator.getCurrentTheme("changes");
+  const fullModifiedTheme = creator.getCurrentTheme() || {};
+  const modifiedThemeChanges = creator.getCurrentTheme("changes") || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(7);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
   expect(Object.keys(modifiedThemeChanges).length).toBe(6);
