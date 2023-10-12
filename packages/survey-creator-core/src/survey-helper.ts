@@ -13,19 +13,19 @@ import { ISurveyCreatorOptions } from "./creator-settings";
 import { wrapTextByCurlyBraces } from "./utils/utils";
 
 export enum ObjType {
-  Unknown,
-  Survey,
-  Page,
-  Panel,
-  Question,
-  Column
+  Unknown = "unknown",
+  Survey = "survey",
+  Page = "page",
+  Panel = "panel",
+  Question = "question",
+  Column = "column"
 }
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
     const survey: SurveyModel = (<any>el).getSurvey();
-    if(!survey) return el.name;
-    if(el.isPage) return this.getNewPageName(survey.pages);
-    if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
+    if (!survey) return el.name;
+    if (el.isPage) return this.getNewPageName(survey.pages);
+    if (el.isPanel) return this.getNewPanelName(survey.getAllPanels());
     return this.getNewQuestionName(survey.getAllQuestions());
   }
   public static getNewPageName(objs: Array<any>) {
@@ -358,8 +358,8 @@ export class SurveyHelper {
   }
   public static getElementDeepLength(element: SurveyElement): number {
     let res: number = 0;
-    while(!!element) {
-      if(element.isPanel) res ++;
+    while (!!element) {
+      if (element.isPanel) res++;
       element = <SurveyElement><any>element.parent;
     }
     return res;
