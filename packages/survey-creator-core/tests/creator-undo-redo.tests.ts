@@ -385,3 +385,19 @@ test("Undo on removing questions in deleted two pages", (): any => {
   expect(survey.pages[1].questions).toHaveLength(1);
   expect(survey.pages[1].questions[0].name).toBe("question2");
 });
+test("Undo changing property on deleting question", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", title: "Question 1" }
+    ]
+  };
+  let question = creator.survey.getQuestionByName("q1");
+  creator.selectElement(question);
+  question.title = "";
+  creator.deleteCurrentElement();
+  creator.undo();
+  creator.undo();
+  question = creator.survey.getQuestionByName("q1");
+  expect(question.title).toBe("Question 1");
+});

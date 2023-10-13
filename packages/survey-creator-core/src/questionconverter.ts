@@ -74,8 +74,12 @@ export class QuestionConverter {
     let panel = <PanelModelBase>obj.parent;
     let index = panel.elements.indexOf(obj);
     (<any>panel).isConverting = true;
+    var isSameLine = index + 1 < panel.elements.length ? panel.elements[index + 1].startWithNewLine === false : false;
     panel.removeElement(obj);
     panel.addElement(newQuestion, index);
+    if(isSameLine) {
+      panel.elements[index + 1].startWithNewLine = false;
+    }
     delete (<any>panel).isConverting;
     newQuestion.onSurveyLoad();
     return newQuestion;

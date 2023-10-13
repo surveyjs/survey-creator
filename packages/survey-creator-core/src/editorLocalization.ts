@@ -61,7 +61,7 @@ export class EditorLocalization {
     var obj = this.getProperty(strName, defaultName);
     var name = obj["name"];
     if (!!name) {
-      if (name != strName) return name;
+      if (this.stringsDiff(name, strName)) return name;
       return this.getAutoPropertyName(name, defaultName);
     }
     return obj;
@@ -76,7 +76,7 @@ export class EditorLocalization {
     if(!obj) {
       obj = this.getString("pe." + propName);
     }
-    if (obj !== propName) return obj;
+    if (this.stringsDiff(obj, propName)) return obj;
     return this.getPropertyName(propName, defaultName);
   }
   public getPropertyHelpInEditor(typeName: string, propName: string, propType: string = undefined): string {
@@ -97,7 +97,8 @@ export class EditorLocalization {
       peClass = this.getObjInEditorByType(typeName, peInfoByClass, postFix);
     }
     while(!!peClass) {
-      if(!!peClass.props[propName]) return peClass.props[propName];
+      const res = peClass.props[propName];
+      if(!!res && typeof res !== "function") return peClass.props[propName];
       peClass = peClass.parent;
     }
     return undefined;
@@ -131,12 +132,12 @@ export class EditorLocalization {
   }
   public getProperty(strName: string, defaultName: string = null): string {
     var obj = this.getString("p." + strName);
-    if (obj !== strName) return obj;
+    if (this.stringsDiff(obj, strName)) return obj;
     var pos = strName.indexOf("_");
     if (pos < -1) return this.getAutoPropertyName(obj, defaultName);
     strName = strName.substring(pos + 1);
     obj = this.getString("p." + strName);
-    if (obj !== strName) return obj;
+    if (this.stringsDiff(obj, strName)) return obj;
     return this.getAutoPropertyName(obj, defaultName);
   }
   public convertToCamelCase(value: string, toLowCase: boolean = false): string {
@@ -214,6 +215,10 @@ export class EditorLocalization {
       res.push(key);
     }
     return res;
+  }
+  private stringsDiff(str1: any, str2: any): boolean {
+    if(typeof str1 === "function" || typeof str2 === "function") return false;
+    return str1 !== str2;
   }
 }
 

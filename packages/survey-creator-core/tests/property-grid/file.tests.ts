@@ -6,6 +6,7 @@ import {
 } from "../../src/creator-settings";
 import { imageMimeTypes } from "../../src/utils/utils";
 import { CreatorBase } from "../../src/creator-base";
+import { CreatorTester } from "../creator-tester";
 export * from "../../src/custom-questions/question-text-with-reset";
 
 test("Check file editor value", () => {
@@ -214,4 +215,32 @@ test("Check file editor placeholder and renderedValue", () => {
   expect(question.value).toBe(base64Url);
   expect(question.placeholder).toBe("data:image/png;base64,...");
   expect(question.renderedValue).toBe("");
+});
+
+test("Check onOpenFileChooser called", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = creator.survey.getAllQuestions()[0];
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  questionEditor["rootElement"] = <any>{ querySelectorAll: () => [{}] };
+  let uploadCount = 0;
+  let log = "";
+  creator.onOpenFileChooser.add((s, o) => {
+    log += "->openedFileChooser";
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    log += "->uploadFile";
+    uploadCount++;
+    o.callback("success", "url");
+  });
+  expect(uploadCount).toBe(0);
+  expect(log).toBe("");
+  questionEditor.chooseFiles(<any>{ preventDefault: () => {}, stopPropagation: () => {} });
+  expect(uploadCount).toBe(1);
+  expect(log).toBe("->openedFileChooser->uploadFile");
+  expect(questionEditor.value).toBe("url");
 });

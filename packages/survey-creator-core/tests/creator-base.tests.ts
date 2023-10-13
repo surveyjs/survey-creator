@@ -2018,9 +2018,11 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
-      { type: "panel", name: "panel1",
+      {
+        type: "panel", name: "panel1",
         elements: [
-          { type: "panel", name: "panel3",
+          {
+            type: "panel", name: "panel3",
             elements: [
               { type: "panel", name: "panel5" },
               { type: "paneldynamic", name: "panel6" }
@@ -2272,6 +2274,19 @@ test("convertInputType, hide it for readOnly creator", (): any => {
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
   questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q2"), undefined);
   expect(questionModel.getActionById("convertInputType").visible).toBeFalsy();
+});
+test("convertInputType, check locale", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "rating", name: "q1" },
+      { type: "text", name: "q2" },
+    ]
+  };
+  creator.locale = "de";
+  const questionModel = new QuestionAdornerViewModel(creator, creator.selectQuestionByName("q1"), undefined);
+  const action: any = questionModel.getActionById("convertInputType");
+  expect(action.data.locOwner.locale).toBe("de");
 });
 test("QuestionAdornerViewModel for selectbase and creator.minimumChoicesCount", (): any => {
   const creator = new CreatorTester();
@@ -3074,7 +3089,6 @@ test("Creator notify state, change the same property, isAutoSave=false", () => {
 test("Creator state, change the same property, isAutoSave=true", () => {
   const creator = new CreatorTester();
   creator.isAutoSave = true;
-  creator.autoSaveDelay = 0;
   var counter = 0;
   var saveNo = 0;
   creator.saveSurveyFunc = function (
@@ -3762,10 +3776,12 @@ test("Deleted object shouldn't be disposed", (): any => {
 });
 test("Remove carry-forward property on deleting a question", (): any => {
   const creator = new CreatorTester();
-  creator.JSON = { elements: [
-    { type: "dropdown", name: "q1", choices: ["B", "A", "D", "C"] },
-    { type: "dropdown", name: "q2", choicesFromQuestion: "q1" }
-  ] };
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "q1", choices: ["B", "A", "D", "C"] },
+      { type: "dropdown", name: "q2", choicesFromQuestion: "q1" }
+    ]
+  };
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = <QuestionDropdownModel>creator.survey.getQuestionByName("q2");
   expect(q2.choicesFromQuestion).toBe("q1");
@@ -3915,4 +3931,19 @@ test("Theme passed to preview (test) survey tab", (): any => {
   expect(creator.survey.themeVariables.a).toBeUndefined();
   testPlugin.activate();
   expect(testPlugin.model.survey.themeVariables.a).toBe("s");
+});
+test("onElementDeleting: options.elementType contains cryptic numbers #4740", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  creator.onElementDeleting.add((_, options) => {
+    expect(options.elementType).toBe("question");
+  });
+  creator.deleteElement(creator.survey.getAllQuestions()[0]);
 });

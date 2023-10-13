@@ -286,6 +286,8 @@ export function copyCssClasses(dest: any, source: any) {
 export function assignDefaultV2Classes(destination: any, questionType: string) {
   copyCssClasses(destination, defaultV2Css.question);
   copyCssClasses(destination, defaultV2Css[questionType]);
+  destination.hasErrorTop = "";
+  destination.hasErrorBottom = "";
 }
 
 export function wrapTextByCurlyBraces(text: string) {
