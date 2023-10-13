@@ -81,13 +81,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!model.surveyElement.isInteractiveDesignElement) {
       return;
     }
+    const creator = model.creator;
+    const selEl = model.surveyElement;
     const el: any = document?.activeElement;
-    if(!!el && !!el.blur && el.tagName.toLocaleLowerCase() === "input") {
+    if(creator.selectedElement !== selEl && !!el && !!el.blur && el.tagName.toLocaleLowerCase() === "input") {
       el.blur();
     }
     event.stopPropagation();
     event.cancelBubble = true;
-    model.creator.selectElement(model.surveyElement, undefined, false);
+    creator.selectElement(selEl, undefined, false);
     return true;
   }
 
