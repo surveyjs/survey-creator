@@ -1121,6 +1121,7 @@ export class CreatorBase extends Base
   public get theme(): ITheme { return this._theme; }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
+    this.updatePlugin(this.activeTab);
     this.raiseThemeChanged();
   }
   public getCurrentTheme(content: "full" | "changes" = "full") {
@@ -2254,7 +2255,7 @@ export class CreatorBase extends Base
   private getDefaultElementJSON(elType: string): any {
     if (!this.toolbox) return null;
     const json = this.toolbox.getItemByName(elType)?.json;
-    return !!json ? Helpers.createCopy(json): null;
+    return !!json ? Helpers.createCopy(json) : null;
   }
   private singlePageJSON(json: any) {
     if (this.pageEditMode === "single") {
