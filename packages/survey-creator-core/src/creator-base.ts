@@ -1558,15 +1558,8 @@ export class CreatorBase extends Base
    * @see onBeforeUndo
    */
   public onBeforeRedo: CreatorEvent = new CreatorEvent();
-  /**
-   * The event is called after undo happens.
-   *- options.state is an undo/redo item.
-   */
+
   public onAfterUndo: CreatorEvent = new CreatorEvent();
-  /**
-   * The event is called after redo happens.
-   *- options.state is an undo/redo item.
-   */
   public onAfterRedo: CreatorEvent = new CreatorEvent();
 
   public get undoRedoManager(): UndoRedoManager {
@@ -1577,15 +1570,9 @@ export class CreatorBase extends Base
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model;
   }
-  /**
-   * This method starts undo/redo transaction: all changes will be stored as one undo/redo item.
-   */
   startUndoRedoTransaction(name: string = "") {
     this.undoRedoController && this.undoRedoController.startTransaction(name);
   }
-  /**
-   * This method stops undo/redo transaction.
-   */
   stopUndoRedoTransaction() {
     this.undoRedoController && this.undoRedoController.stopTransaction();
   }
