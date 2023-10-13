@@ -3247,7 +3247,7 @@ export class CreatorBase extends Base
   public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
   protected doAutoSave() {
-    const saveFunc = () => this.doSave()
+    const saveFunc = () => this.doSave();
     if (this.autoSaveDelay <= 0) {
       saveFunc();
       return;
