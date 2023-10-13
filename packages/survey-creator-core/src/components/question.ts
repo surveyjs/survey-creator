@@ -83,7 +83,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }
     event.stopPropagation();
     event.cancelBubble = true;
-    model.creator.selectElement(model.surveyElement, undefined, false);
+    setTimeout(() => { model.creator.selectElement(model.surveyElement, undefined, false); }, 150);
     return true;
   }
 
