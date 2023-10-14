@@ -200,8 +200,7 @@ export class ThemeBuilder extends Base {
     this.backgroundImageAttachment = "";
     this.backgroundOpacity = 100;
     this.loadTheme(theme);
-    this.updateSimulatorTheme();
-    this.surveyProvider.isThemePristine = true;
+    this.themeModified({ theme });
   }
 
   public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panelless") {
@@ -456,17 +455,12 @@ export class ThemeBuilder extends Base {
       if (options.name === "themePalette") {
         this.loadTheme({ colorPalette: options.value });
       }
-      this.updateSimulatorTheme();
-      this.raiseThemeChanged();
-      this.onThemeSelected.fire(this, { theme: this.currentTheme });
-      this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
+      this.themeModified({ theme: this.currentTheme });
       return true;
     }
     if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
       this[options.name] = options.value;
-      this.updateSimulatorTheme();
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
       return true;
     }
     return false;
@@ -482,9 +476,7 @@ export class ThemeBuilder extends Base {
       this.currentTheme.header = this.getCoverJson(headerSettings);
       this.setCoverCssVariables(headerSettings);
     }
-    this.updateSimulatorTheme();
-    this.raiseThemeChanged();
-    this.raiseThemeModified(options);
+    this.themeModified(options);
   }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
     if (options.name.indexOf("--") === 0) {
@@ -512,13 +504,11 @@ export class ThemeBuilder extends Base {
     }
     if (options.question?.getType() === "fontsettings") {
       fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
     }
     if (options.question?.getType() === "elementsettings") {
       elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
     }
   }
   private updateDependentQuestionValues(options: ValueChangedEvent) {
@@ -540,8 +530,7 @@ export class ThemeBuilder extends Base {
   }
   private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
     this.themeCssVariablesChanges[variableName] = value;
-    this.raiseThemeChanged();
-    this.raiseThemeModified({ name: variableName, value: value, question: question });
+    this.themeModified({ name: variableName, value: value, question: question } as any);
   }
 
   protected createThemeEditorSurvey(): SurveyModel {
@@ -783,18 +772,6 @@ export class ThemeBuilder extends Base {
     });
   }
 
-  private raiseThemeChanged() {
-    if (this.blockThemeChangedNotifications == 0) {
-      this.surveyProvider.raiseThemeChanged();
-    }
-  }
-  private raiseThemeModified(options: any) {
-    this.surveyProvider.isThemePristine = false;
-    if (this.blockThemeChangedNotifications == 0) {
-      this.onThemeModified.fire(this, options);
-    }
-  }
-
   private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
     Object.keys(newCssVariables).forEach(key => {
       if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
@@ -806,6 +783,58 @@ export class ThemeBuilder extends Base {
 
   private updateSimulatorTheme() {
     this.survey.applyTheme(this.currentTheme);
+  }
+
+  private _saveThemeFuncValue: (
+    no: number,
+    onSaveCallback: (no: number, isSuccess: boolean) => void
+  ) => void;
+  /**
+   * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   */
+  public get saveThemeFunc() {
+    return this._saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this._saveThemeFuncValue = value;
+  }
+
+  private autoSaveTimerId = null;
+  protected processAutoSave() {
+    let saveThemeFunc = this.saveThemeFunc;
+    if (!saveThemeFunc && this.surveyProvider.saveThemeFunc) {
+      saveThemeFunc = () => this.surveyProvider.doSaveTheme();
+    }
+    if (!saveThemeFunc) {
+      return;
+    }
+    if (this.surveyProvider.autoSaveDelay <= 0) {
+      saveThemeFunc();
+      return;
+    }
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+    }
+    this.autoSaveTimerId = setTimeout(() => {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+      saveThemeFunc && saveThemeFunc();
+    }, this.surveyProvider.autoSaveDelay);
+  }
+  protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
+    this.updateSimulatorTheme();
+    if (this.blockThemeChangedNotifications == 0) {
+      if (!!options["theme"]) {
+        this.onThemeSelected.fire(this, options as { theme: ITheme });
+      } else {
+        this.onThemeModified.fire(this, options as { name: string, value: any });
+      }
+    }
+    if (this.surveyProvider.isAutoSave) {
+      this.processAutoSave();
+    }
   }
 
   private getThemeEditorSurveyJSON() {

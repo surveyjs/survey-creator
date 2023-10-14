@@ -922,10 +922,7 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
 test("Theme onModified and saveThemeFunc", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.isAutoSave = true;
-  let modificationsLog = "";
-  creator.onModified.add((s, o) => {
-    modificationsLog += "->" + o.type;
-  });
+  creator.autoSaveDelay = 0;
   let saveCount = 0;
   creator.saveSurveyFunc = () => {
     saveCount++;
@@ -936,42 +933,44 @@ test("Theme onModified and saveThemeFunc", (): any => {
   };
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let modificationsLog = "";
+  themePlugin.onThemeSelected.add((s, o) => {
+    modificationsLog += "->THEME_SELECTED";
+  });
+  themePlugin.onThemeModified.add((s, o) => {
+    modificationsLog += "->THEME_MODIFIED";
+  });
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeBuilder.themeEditorSurvey;
 
-  expect(creator.isThemePristine).toBeTruthy();
+  expect(modificationsLog).toBe("");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(0);
+
+  themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
+
   expect(modificationsLog).toBe("->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(1);
 
-  themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
+  themeBuilder.resetTheme();
 
-  expect(creator.isThemePristine).toBeFalsy();
-  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED");
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
 
-  themeSurveyTab.resetTheme();
+  themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
 
-  expect(creator.isThemePristine).toBeTruthy();
-  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(3);
 
-  themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
-
-  expect(creator.isThemePristine).toBeFalsy();
-  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
-  expect(saveCount).toBe(0);
-  expect(saveThemeCount).toBe(4);
-
   themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
 
-  expect(creator.isThemePristine).toBeFalsy();
-  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
-  expect(saveThemeCount).toBe(5);
+  expect(saveThemeCount).toBe(4);
 });
 
 test("Theme undo redo changes", (): any => {
@@ -1362,14 +1361,12 @@ test("onThemeSelected + onThemeModified events", (): any => {
   themeBuilder.onThemeModified.add(() => builderThemeModifiedCount++);
 
   themeChooser.value = "flat";
-  expect(creator.isThemePristine).toBeTruthy();
   expect(pluginThemeModifiedCount).toBe(0);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(0);
   expect(builderThemeSelectedCount).toBe(1);
 
   primaryBackColor.value = "#ffffff";
-  expect(creator.isThemePristine).toBeFalsy();
   expect(pluginThemeModifiedCount).toBe(1);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(1);
@@ -1923,4 +1920,41 @@ test("Keep background image in theme modifications", (): any => {
   expect(themeBuilder.backgroundImage).toBe(lionImage);
   expect(themeEditorSurvey.getQuestionByName("backgroundImage").value).toBe(lionImage);
   expect(themeBuilder.survey.backgroundImage).toBe(lionImage);
+});
+test("Keep theme modifications between edit sessions", (): any => {
+  let creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  let savedTheme = {};
+  creator.saveThemeFunc = () => {
+    savedTheme = creator.theme;
+  };
+  creator.JSON = {
+    questions: [{ type: "text", name: "q1" }]
+  };
+  let themePlugin: ThemeTabPlugin = creator.getPlugin<ThemeTabPlugin>("theme");
+  themePlugin.activate();
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  let primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  themeChooser.value = "layered";
+  primaryBackColor.value = "#0000ff";
+  expect(savedTheme.cssVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
+
+  creator = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    questions: [{ type: "text", name: "q1" }]
+  };
+  creator.theme = savedTheme;
+  themePlugin = creator.getPlugin<ThemeTabPlugin>("theme");
+  themePlugin.activate();
+  themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  expect(themeChooser.value).toBe("layered");
+  expect(primaryBackColor.value).toBe("rgba(0, 0, 255, 1)");
+  expect(themeBuilder.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
 });
