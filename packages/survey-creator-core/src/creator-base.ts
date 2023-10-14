@@ -2312,8 +2312,13 @@ export class CreatorBase extends Base
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
       if (!panel) {
-        while (selectedElement.parent !== null && selectedElement.parent.isPanel) {
-          selectedElement = <IElement><any>selectedElement.parent;
+        while (!!selectedElement.parent && selectedElement.parent.isPanel) {
+          if(!!(<any>selectedElement).parentQuestion) {
+            selectedElement = <IElement>(<any>selectedElement).parentQuestion;
+          }
+          else {
+            selectedElement = <IElement><any>selectedElement.parent;
+          }
         }
       }
       parent = selectedElement.parent;

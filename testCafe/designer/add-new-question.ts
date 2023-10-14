@@ -110,3 +110,22 @@ test("Drag Drop Toolbox Item and show title editor", async (t) => {
   title = await getQuestionTitle(1);
   await t.expect(title).eql("question2");
 });
+test("Add question when a question in dynamic panel is selected", async (t) => {
+
+  await setJSON({
+    elements: [
+      {
+        type: "paneldynamic", name: "panel1",
+        templateElements: [
+          { type: "text", name: "question1" }
+        ]
+      }
+    ]
+  });
+  await t.maximizeWindow();
+
+  await t
+    .click(Selector(".sv-string-editor").withText("question1"))
+    .click(Selector(".svc-page__add-new-question").nth(0))
+    .expect(Selector("[data-name=\"question2\"]").exists).ok();
+});
