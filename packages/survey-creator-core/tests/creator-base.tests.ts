@@ -2949,6 +2949,23 @@ test("Add new question to Panel and Page", (): any => {
   panelAdornerModel3.addNewQuestion();
   expect(creator.survey.getAllQuestions().map(q => q.getType())).toEqual(["text", "rating", "rating", "text", "ranking", "ranking", "comment", "comment", "html", "html", "text", "text"]);
 });
+test("Add new question from Page on selecting question in panel dynamic", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "paneldynamic", name: "panel1",
+        templateElements: [
+          { type: "text", name: "question1" }
+        ]
+      }
+    ]
+  };
+
+  const pageAdornerModel = new PageAdorner(creator, creator.survey.pages[0]);
+  creator.selectElement(creator.survey.getQuestionByName("question1"));
+  pageAdornerModel.addNewQuestion(pageAdornerModel, null);
+  expect(creator.selectedElementName).toBe("question2");
+});
 test("Use settings.designer.defaultAddQuestionType", (): any => {
   const creator = new CreatorTester();
   creator.JSON = { elements: [{ type: "panel", name: "panel1" }] };

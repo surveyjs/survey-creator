@@ -1114,17 +1114,31 @@ export class CreatorBase extends Base
    */
   public themeForPreview: string = "defaultV2";
 
-  @property({ defaultValue: false }) hasPendingThemeChanges: boolean;
-  @property({ defaultValue: true }) isThemePristine: boolean;
+  //#region Theme
+
+  /**
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * @see showThemeTab
+   * @see saveSurveyFunc
+   */
+  public get saveThemeFunc() {
+    return this.saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this.saveThemeFuncValue = value;
+  }
 
   private _theme: ITheme = { cssVariables: {} };
-  public get theme(): ITheme { return this._theme; }
+  public get theme(): ITheme {
+    return this._theme;
+  }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
-    this.raiseThemeChanged();
   }
   public getCurrentTheme(content: "full" | "changes" = "full") {
     if (content === "full") {
@@ -1136,16 +1150,25 @@ export class CreatorBase extends Base
     }
   }
 
-  public raiseThemeChanged(): void {
-    this.hasPendingThemeChanges = true;
-    const options = {
-      propertyName: "theme",
-      obj: this,
-      value: this.theme,
-      type: "THEME_MODIFIED"
-    };
-    this.setModified(options);
+  public doSaveTheme() {
+    this.setState("saving");
+    if (this.saveThemeFunc) {
+      this.saveNo++;
+      this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
+        if (this.saveNo !== no) return;
+        if (isSuccess) {
+          this.setState("saved");
+        } else {
+          this.setState("modified");
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"), "error");
+          }
+        }
+      });
+    }
   }
+
+  //#endregion Theme
 
   private _allowModifyPages = true;
   /**
@@ -2208,7 +2231,7 @@ export class CreatorBase extends Base
   public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
-    this.isAutoSave && this.doAutoSave(options.type === "THEME_MODIFIED" ? () => this.doSaveTheme() : () => this.doSave());
+    this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -2315,8 +2338,13 @@ export class CreatorBase extends Base
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
       if (!panel) {
-        while (selectedElement.parent !== null && selectedElement.parent.isPanel) {
-          selectedElement = <IElement><any>selectedElement.parent;
+        while (!!selectedElement.parent && selectedElement.parent.isPanel) {
+          if(!!(<any>selectedElement).parentQuestion) {
+            selectedElement = <IElement>(<any>selectedElement).parentQuestion;
+          }
+          else {
+            selectedElement = <IElement><any>selectedElement.parent;
+          }
         }
       }
       parent = selectedElement.parent;
@@ -3218,7 +3246,7 @@ export class CreatorBase extends Base
   }
 
   /**
-   * A delay between changing survey or theme settings and saving the survey or theme JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
+   * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
    * 
    * Default value: 500 (taken from `settings.autoSave.delay`)
    * 
@@ -3226,7 +3254,8 @@ export class CreatorBase extends Base
    */
   public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
-  protected doAutoSave(saveFunc = () => this.doSave()) {
+  protected doAutoSave() {
+    const saveFunc = () => this.doSave();
     if (this.autoSaveDelay <= 0) {
       saveFunc();
       return;
@@ -3258,38 +3287,6 @@ export class CreatorBase extends Base
         }
       });
     }
-  }
-  public doSaveTheme() {
-    this.setState("saving");
-    if (this.hasPendingThemeChanges && this.saveThemeFunc) {
-      this.saveNo++;
-      this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
-        if (this.saveNo !== no) return;
-        if (isSuccess) {
-          this.setState("saved");
-          this.hasPendingThemeChanges = false;
-        } else {
-          this.setState("modified");
-          if (this.showErrorOnFailedSave) {
-            this.notify(this.getLocString("ed.saveError"), "error");
-          }
-        }
-      });
-    }
-  }
-
-  /**
-   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
-   * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
-   * @see showThemeTab
-   * @see saveSurveyFunc
-   */
-  public get saveThemeFunc() {
-    return this.saveThemeFuncValue;
-  }
-  public set saveThemeFunc(value: any) {
-    this.saveThemeFuncValue = value;
   }
 
   /**
