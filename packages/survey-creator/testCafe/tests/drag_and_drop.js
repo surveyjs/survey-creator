@@ -259,20 +259,23 @@ test("check move question from survey to panel", async (t) => {
 
 test("check change order of questions in panel", async (t) => {
   await t.click("[title=Panel]");
+  await t.wait(100);
   await t.dragToElement(
     `[title=Boolean]`,
     ".svd_questions_editor .panel_actions"
   );
+  await t.wait(100);
   await t.dragToElement(
     `[title=Boolean]`,
     ".svd_questions_editor .panel_actions",
     dragToBottomConfig
   );
+  await t.wait(100);
   await t.dragToElement(
     ".svd_questions_editor [data-name=question1]",
     ".svd_questions_editor .panel_actions",
     dragToBottomConfig
   );
-
+  await t.wait(100);
   assert.deepEqual(await getQuestionsInPanel(), ["question2", "question1"]);
 });
