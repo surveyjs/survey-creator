@@ -201,9 +201,13 @@ export var ruStrings = {
       question_visibilityText: "Сделать вопрос {0} видимым", //{0} question name
       question_enableText: "Сделать вопрос {0} включенным", //{0} question name
       question_requireText: "Сделать вопрос {0} обязательным", //{0} question name
+      question_resetValueText: "Сброс значения для вопроса: {0}",
+      question_setValueText: "присвоить значение: {1} к вопросу: {0}",
       column_visibilityText: "Сделайте видимым {0} {1} в столбце вопроса", //{0} column name, {1} question name
       column_enableText: "Сделайте столбец {0} вопроса {1} включите", //{0} column name, {1} question name
       column_requireText: "Сделайте {0} вопроса {1} обязательным для заполнения", //{0} column name, {1} question name
+      column_resetValueText: "Сброс значения ячейки для столбца: {0}",
+      column_setValueText: "Присвойте значение ячейки: {1} столбцу: {0}",
       setValueExpressionPlaceholder: " Выражение, результат которого будет присвоен целевому вопросу.",
       trigger_completeText: "Опрос становится завершенным",
       trigger_setvalueText: "Установить в вопрос: {0} значение {1}", //{0} question name, {1} setValue
@@ -1725,3 +1729,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.logoPosition: "Logo Position" => "Положение логотипа"
 // theme.coverTitlePosition: "Title Position" => "Титульная позиция"
 // theme.coverDescriptionPosition: "Description Position" => "Описание Должность"
+// lg.question_resetValueText: "reset value for question: {0}" => "Сброс значения для вопроса: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "присвоить значение: {1} к вопросу: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Сброс значения ячейки для столбца: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвойте значение ячейки: {1} столбцу: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

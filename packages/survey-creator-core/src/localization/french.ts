@@ -201,9 +201,13 @@ var frenchTranslation = {
       question_visibilityText: "Rendre la question {0} visible", //{0} question name
       question_enableText: "Activer la question {0}", //{0} question name
       question_requireText: "Rendre la question {0} obligatoire", //{0} question name
+      question_resetValueText: "Réinitialisez la valeur pour la question : {0}",
+      question_setValueText: "Attribuer une valeur : {1} à la question : {0}",
       column_visibilityText: "Rendre visible les {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_enableText: "Activer la {0} de la colonne de questions {1}", //{0} column name, {1} question name
       column_requireText: "rendre obligatoire la colonne {0} de la question {1}", //{0} column name, {1} question name
+      column_resetValueText: "Réinitialiser la valeur de la cellule pour la colonne : {0}",
+      column_setValueText: "Affecter la valeur de la cellule : {1} à la colonne : {0}",
       setValueExpressionPlaceholder: " Expression dont le résultat sera affecté à la question cible.",
       trigger_completeText: "Le sondage se termine.",
       trigger_setvalueText: "Définir dans la question: {0} valeur {1}", //{0} question name, {1} setValue
@@ -1723,3 +1727,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.logoPosition: "Logo Position" => "Logo Position"
 // theme.coverTitlePosition: "Title Position" => "Position du titre"
 // theme.coverDescriptionPosition: "Description Position" => "Description du poste"
+// lg.question_resetValueText: "reset value for question: {0}" => "Réinitialisez la valeur pour la question : {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Attribuer une valeur : {1} à la question : {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Réinitialiser la valeur de la cellule pour la colonne : {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Affecter la valeur de la cellule : {1} à la colonne : {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

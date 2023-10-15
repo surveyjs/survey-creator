@@ -201,9 +201,13 @@ var spanishTranslation = {
       question_visibilityText: "Hacer Pregunta {0} Visible", //{0} question name
       question_enableText: "Hacer Pregunta {0} Habilitar", //{0} question name
       question_requireText: "Hacer la pregunta {0} requerida", //{0} question name
+      question_resetValueText: "Restablecer valor para la pregunta: {0}",
+      question_setValueText: "Asignar valor: {1} a la pregunta: {0}",
       column_visibilityText: "hacer la columna {0} de la pregunta {1} visible", //{0} column name, {1} question name
       column_enableText: "hacer la columna {0} de la pregunta {1} activa", //{0} column name, {1} question name
       column_requireText: "hacer la columna {0} de la pregunta {1} requerida", //{0} column name, {1} question name
+      column_resetValueText: "Restablecer el valor de celda de la columna: {0}",
+      column_setValueText: "Asignar valor de celda: {1} a columna: {0}",
       setValueExpressionPlaceholder: " Una expresión cuyo resultado se asignará a la pregunta de destino.",
       trigger_completeText: "La encuesta se completa",
       trigger_setvalueText: "En cuestión: {0} valor {1}", //{0} question name, {1} setValue
@@ -1432,3 +1436,8 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.logoPosition: "Logo Position" => "Posición del logotipo"
 // theme.coverTitlePosition: "Title Position" => "Posición del título"
 // theme.coverDescriptionPosition: "Description Position" => "Descripción Posición"
+// lg.question_resetValueText: "reset value for question: {0}" => "Restablecer valor para la pregunta: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Asignar valor: {1} a la pregunta: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Restablecer el valor de celda de la columna: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Asignar valor de celda: {1} a columna: {0}"
+// lg.expressionSetup: "" => ""

@@ -201,9 +201,13 @@ export var indonesianStrings = {
       question_visibilityText: "Buat pertanyaan {0} terlihat", //{0} question name
       question_enableText: "Buat pertanyaan {0} aktifkan", //{0} question name
       question_requireText: "Buat pertanyaan {0} diperlukan", //{0} question name
+      question_resetValueText: "reset nilai untuk pertanyaan: {0}",
+      question_setValueText: "Tetapkan nilai: {1} pertanyaan: {0}",
       column_visibilityText: "Membuat kolom {0} pertanyaan {1} terlihat", //{0} column name, {1} question name
       column_enableText: "Buat kolom {0} pertanyaan {1} aktifkan", //{0} column name, {1} question name
       column_requireText: "membuat kolom {0} pertanyaan {1} diperlukan", //{0} column name, {1} question name
+      column_resetValueText: "Setel ulang nilai sel untuk kolom: {0}",
+      column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}",
       setValueExpressionPlaceholder: " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
       trigger_completeText: "Survei menjadi selesai",
       trigger_setvalueText: "Pertanyaan: {0} nilai {1}", //{0} question name, {1} setValue
@@ -1818,3 +1822,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.logoPosition: "Logo Position" => "Posisi Logo"
 // theme.coverTitlePosition: "Title Position" => "Posisi Judul"
 // theme.coverDescriptionPosition: "Description Position" => "Deskripsi Posisi"
+// lg.question_resetValueText: "reset value for question: {0}" => "reset nilai untuk pertanyaan: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Tetapkan nilai: {1} pertanyaan: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Setel ulang nilai sel untuk kolom: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Menetapkan nilai sel: {1} ke kolom: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

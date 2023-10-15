@@ -8,7 +8,8 @@ if (!window["%hammerhead%"]) {
     showLogicTab: true,
     showTranslationTab: true,
     showEmbeddedSurveyTab: true,
-    isAutoSave: true
+    isAutoSave: true,
+    inplaceEditForValues: true
   };
 
   // const propertyGridTemplate = "<div><button data-bind='click: btnClick, style: btnStyle'>Click me...</button><!-- ko template: { name: 'survey-content', data: model  } --><!-- /ko --></div>";

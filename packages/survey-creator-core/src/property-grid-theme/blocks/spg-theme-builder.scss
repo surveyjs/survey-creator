@@ -21,7 +21,9 @@
       min-width: auto;
     }
     & > div {
-      flex: 1 1 calc(50% - #{$base-unit} * 0.5);
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: calc(50% - #{$base-unit} * 0.5);
       min-width: auto;
       input {
         min-width: 0;

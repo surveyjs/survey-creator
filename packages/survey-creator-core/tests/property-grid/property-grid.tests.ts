@@ -906,7 +906,7 @@ test("restfull property editor and options.onCanShowPropertyCallback", () => {
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean => {
-    return property.name == "choicesByUrl" || property.name == "url";
+    return property.name == "choicesByUrl" || property.name == "url" || property.name == "file";
   };
   var question = new QuestionDropdownModel("q1");
   question.choicesByUrl.url = "myUrl";

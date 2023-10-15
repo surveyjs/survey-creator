@@ -201,9 +201,13 @@ export var huStrings = {
       question_visibilityText: "tegye láthatóvá a {0} kérdést", //{0} question name
       question_enableText: "Kérdés {0} engedélyezése", //{0} question name
       question_requireText: "Tegye fel a kérdést {0} szükséges", //{0} question name
+      question_resetValueText: "Kérdés visszaállítási értéke: {0}",
+      question_setValueText: "Érték hozzárendelése: {1} a kérdéshez: {0}",
       column_visibilityText: "A {1}. kérdés {0} oszlopának láthatóvá tétele", //{0} column name, {1} question name
       column_enableText: "A kérdés {0} oszlopának engedélyezése {1} engedélyezése", //{0} column name, {1} question name
       column_requireText: "Tegye kötelezővé a kérdés {0} oszlopát {1}", //{0} column name, {1} question name
+      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}",
+      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}",
       setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
@@ -1817,3 +1821,9 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.logoPosition: "Logo Position" => "Logó pozíciója"
 // theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
 // theme.coverDescriptionPosition: "Description Position" => "Leírás Pozíció"
+// lg.question_resetValueText: "reset value for question: {0}" => "Kérdés visszaállítási értéke: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Érték hozzárendelése: {1} a kérdéshez: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Az oszlop cellaértékének visszaállítása: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Cellaérték hozzárendelése: {1} oszlophoz: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

@@ -144,6 +144,9 @@ export var enStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Export",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Copy to clipboard",
     themeResetButton: "Reset theme settings to default",
     bold: "Bold",
     italic: "Italic",
@@ -203,9 +206,13 @@ export var enStrings = {
       question_visibilityText: "make question {0} visible", //{0} question name
       question_enableText: "make question {0} enable", //{0} question name
       question_requireText: "make question {0} required", //{0} question name
+      question_resetValueText: "reset value for question: {0}", //{0} question name.
+      question_setValueText: "assign value: {1} to question: {0}", //{0} question name and {1} setValueExpression
       column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
       column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
+      column_resetValueText: "reset cell value for column: {0}", //{0} column name
+      column_setValueText: "assign cell value: {1} to column: {0}", //{0} column name and {1} setValueExpression
       setValueExpressionPlaceholder: "An expression whose result will be assigned to the target question.",
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
@@ -1005,6 +1012,8 @@ export var enStrings = {
     groupGeneral: "General",
     groupAdvanced: "Advanced",
     groupHeader: "Header",
+    groupBackground: "Background",
+    groupAppearance: "Appearance",
     themeName: "Theme",
     themeMode: "Question appearance",
     themeModePanels: "Default",
@@ -1016,6 +1025,7 @@ export var enStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
     coverTitleForecolor: "Title forecolor",
+    coverDescriptionForecolor: "Description forecolor",
     coverOverlapEnabled: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string

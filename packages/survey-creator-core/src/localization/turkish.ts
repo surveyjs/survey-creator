@@ -201,9 +201,13 @@ export var turkishStrings = {
       question_visibilityText: "{0} soruyu görünür yap", //{0} question name
       question_enableText: "{0} soruyu aktif yap", //{0} question name
       question_requireText: "{0} cevabı zorunlu yap", //{0} question name
+      question_resetValueText: "Soru için sıfırlama değeri: {0}",
+      question_setValueText: "Değer atayın: Soruya {1}: {0}",
       column_visibilityText: "Soru {1} sütununu {0} görünür hale getirme", //{0} column name, {1} question name
       column_enableText: "Sütunun {0} soru {1} etkinleştirin", //{0} column name, {1} question name
       column_requireText: "Sütun {0} soru {1} gerekli hale getirmek", //{0} column name, {1} question name
+      column_resetValueText: "Sütun için hücre değerini sıfırla: {0}",
+      column_setValueText: "Hücre değeri atayın: Sütuna {1}: {0}",
       setValueExpressionPlaceholder: " Sonucu hedef soruya atanacak bir ifade.",
       trigger_completeText: "Anket tamamlandı",
       trigger_setvalueText: "Sorunun içine: {0} değer {1}", //{0} question name, {1} setValue
@@ -1659,3 +1663,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.logoPosition: "Logo Position" => "Logo Konumu"
 // theme.coverTitlePosition: "Title Position" => "Unvan Pozisyonu"
 // theme.coverDescriptionPosition: "Description Position" => "Açıklama Pozisyon"
+// lg.question_resetValueText: "reset value for question: {0}" => "Soru için sıfırlama değeri: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Değer atayın: Soruya {1}: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Sütun için hücre değerini sıfırla: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Hücre değeri atayın: Sütuna {1}: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

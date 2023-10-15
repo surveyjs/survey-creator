@@ -201,9 +201,13 @@ var germanTranslation = {
       question_visibilityText: "Mache die Frage {0} sichtbar", //{0} question name
       question_enableText: "Aktiviere die Frage {0}", //{0} question name
       question_requireText: "Mache die Frage {0} erforderlich", //{0} question name
+      question_resetValueText: "Reset-Wert für Frage: {0}",
+      question_setValueText: "Wert zuweisen: {1} zu fragen: {0}",
       column_visibilityText: "Mache die Spalte {0} von Frage {1} sichtbar", //{0} column name, {1} question name
       column_enableText: "Aktiviere die Spalte {0} von Frage {1}", //{0} column name, {1} question name
       column_requireText: "Mache die Spalte {0} von Frage {1} erforderlich", //{0} column name, {1} question name
+      column_resetValueText: "Zellenwert für Spalte zurücksetzen: {0}",
+      column_setValueText: "Zellenwert zuweisen: {1} zur Spalte: {0}",
       setValueExpressionPlaceholder: " Ein Ausdruck, dessen Ergebnis der Zielfrage zugewiesen wird.",
       trigger_completeText: "Umfrage abschließen",
       trigger_setvalueText: "Setze in Frage {0} den Wert {1} ein", //{0} question name, {1} setValue
@@ -1386,3 +1390,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.logoPosition: "Logo Position" => "Position des Logos"
 // theme.coverTitlePosition: "Title Position" => "Position des Titels"
 // theme.coverDescriptionPosition: "Description Position" => "Beschreibung Position"
+// lg.question_resetValueText: "reset value for question: {0}" => "Reset-Wert für Frage: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Wert zuweisen: {1} zu fragen: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Zellenwert für Spalte zurücksetzen: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Zellenwert zuweisen: {1} zur Spalte: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

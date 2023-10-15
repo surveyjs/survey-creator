@@ -446,3 +446,18 @@ test("Convert matrix into matrixdropdown, Bug#4455", () => {
   expect(q1_1.columns[0].name).toBe("col1");
   expect(q1_1.columns[0].title).toBe("Column 1");
 });
+test("Keep startWithNewLine property value for next question, Bug#4729", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", startWithNewLine: false }
+    ]
+  });
+  let q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  expect(q2.startWithNewLine).toBeFalsy();
+  QuestionConverter.convertObject(q1, "boolean");
+  q1 = survey.getQuestionByName("q1");
+  expect(q1.getType()).toBe("boolean");
+  expect(q2.startWithNewLine).toBeFalsy();
+});

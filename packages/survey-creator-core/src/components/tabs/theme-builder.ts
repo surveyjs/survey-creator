@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -10,10 +10,12 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { QuestionFileEditorModel } from "src/entries";
 
 require("./theme-builder.scss");
 
 export class ThemeBuilder extends Base {
+  public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
   public prevPageAction: Action;
@@ -73,36 +75,22 @@ export class ThemeBuilder extends Base {
   activePage: PageModel;
   @property({
     onSet: (newValue: string, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImage = newValue;
-      }
-      _target.currentTheme["backgroundImage"] = newValue;
+      _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
-
   @property({
     defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImageFit = newValue;
-      }
-      _target.currentTheme["backgroundImageFit"] = newValue;
+      _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
-
   @property({
     defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundImageAttachment = newValue;
-      }
-      _target.currentTheme["backgroundImageAttachment"] = newValue;
+      _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
     onSet: (newValue: number, _target: ThemeBuilder) => {
-      if (!!_target.survey) {
-        _target.survey.backgroundOpacity = newValue / 100;
-      }
-      _target.currentTheme["backgroundOpacity"] = newValue / 100;
+      _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
   @property({ defaultValue: "default" }) themeName;
@@ -152,11 +140,20 @@ export class ThemeBuilder extends Base {
     super();
     this.simulator = new SurveySimulatorModel();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
+    this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
+    this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
+    this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
+    this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
     this.undoRedoManager = new UndoRedoManager();
-    this.surveyProvider.onPropertyChanged.add((sender, options) => {
-      this.creatorPropertyChanged(sender, options);
-    });
+    this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
+  }
+
+  public get isMobileView() {
+    return this.surveyProvider.isMobileView;
+  }
+  public get showResults() {
+    return !this.isRunning && !this.isMobileView;
   }
 
   public loadTheme(theme: ITheme) {
@@ -171,11 +168,17 @@ export class ThemeBuilder extends Base {
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
-      const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, Themes["default-light"].cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
+      const effectiveThemeCssVariables = {
+      };
+      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
-      const effectiveTheme: ITheme = {};
-      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables });
+      const effectiveTheme: ITheme = {
+        backgroundImage: this.backgroundImage,
+        backgroundImageFit: this.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment,
+        backgroundOpacity: this.backgroundOpacity / 100,
+      };
+      assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
 
       this.initializeColorCalculator();
@@ -192,9 +195,12 @@ export class ThemeBuilder extends Base {
 
   public setTheme(theme: ITheme) {
     this.themeCssVariablesChanges = {};
+    this.backgroundImage = "";
+    this.backgroundImageFit = "";
+    this.backgroundImageAttachment = "";
+    this.backgroundOpacity = 100;
     this.loadTheme(theme);
-    this.updateSimulatorTheme();
-    this.surveyProvider.isThemePristine = true;
+    this.themeModified({ theme });
   }
 
   public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panelless") {
@@ -261,7 +267,7 @@ export class ThemeBuilder extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
-  private creatorPropertyChanged(sender, options) {
+  private creatorPropertyChanged = (sender, options) => {
     if (options.name === "isMobileView") {
       this.updateVisibilityOfPropertyGridGroups();
     }
@@ -449,16 +455,12 @@ export class ThemeBuilder extends Base {
       if (options.name === "themePalette") {
         this.loadTheme({ colorPalette: options.value });
       }
-      this.updateSimulatorTheme();
-      this.raiseThemeChanged();
-      this.onThemeSelected.fire(this, { theme: this.currentTheme });
-      this.surveyProvider.isThemePristine = Object.keys(this.themeCssVariablesChanges).length === 0;
+      this.themeModified({ theme: this.currentTheme });
       return true;
     }
     if (["backgroundImage", "backgroundImageFit", "backgroundImageAttachment", "backgroundOpacity"].indexOf(options.name) !== -1) {
       this[options.name] = options.value;
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
       return true;
     }
     return false;
@@ -471,12 +473,10 @@ export class ThemeBuilder extends Base {
       this.survey.logoPosition = headerSettings["logoPosition"];
       this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
     } else {
-      this.currentTheme.cover = this.getCoverJson(headerSettings);
+      this.currentTheme.header = this.getCoverJson(headerSettings);
       this.setCoverCssVariables(headerSettings);
     }
-    this.updateSimulatorTheme();
-    this.raiseThemeChanged();
-    this.raiseThemeModified(options);
+    this.themeModified(options);
   }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
     if (options.name.indexOf("--") === 0) {
@@ -504,13 +504,11 @@ export class ThemeBuilder extends Base {
     }
     if (options.question?.getType() === "fontsettings") {
       fontsettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
     }
     if (options.question?.getType() === "elementsettings") {
       elementSettingsToCssVariable(options.question, this.themeCssVariablesChanges);
-      this.raiseThemeChanged();
-      this.raiseThemeModified(options);
+      this.themeModified(options);
     }
   }
   private updateDependentQuestionValues(options: ValueChangedEvent) {
@@ -532,8 +530,7 @@ export class ThemeBuilder extends Base {
   }
   private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
     this.themeCssVariablesChanges[variableName] = value;
-    this.raiseThemeChanged();
-    this.raiseThemeModified({ name: variableName, value: value, question: question });
+    this.themeModified({ name: variableName, value: value, question: question } as any);
   }
 
   protected createThemeEditorSurvey(): SurveyModel {
@@ -577,7 +574,7 @@ export class ThemeBuilder extends Base {
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.currentTheme.cssVariables = newCssVariables;
+      this.setCssVariablesIntoCurrentTheme(newCssVariables);
       this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
@@ -590,6 +587,7 @@ export class ThemeBuilder extends Base {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       this.surveyProvider.uploadFiles(options.files, undefined, callback);
     });
+    this.patchFileEditors(themeEditorSurvey);
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
@@ -600,8 +598,12 @@ export class ThemeBuilder extends Base {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
     return findSuitableTheme(themeName, probeThemeFullName);
   }
+  private patchFileEditors(survey: SurveyModel) {
+    const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
+    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
+  }
 
-  private getCoverJson(headerSettings: any) {
+  private getCoverJson(headerSettings: any): any {
     const result = {};
     Serializer.getProperties("cover").map(pr => pr.name)
       .filter(key => headerSettings[key] !== undefined && headerSettings[key] !== null)
@@ -623,6 +625,9 @@ export class ThemeBuilder extends Base {
 
     if (!!headerSettings["titleForecolor"]) {
       this.themeCssVariablesChanges["--sjs-cover-title-forecolor"] = headerSettings.titleForecolor;
+    }
+    if (!!headerSettings["descriptionForecolor"]) {
+      this.themeCssVariablesChanges["--sjs-cover-description-forecolor"] = headerSettings.descriptionForecolor;
     }
   }
 
@@ -652,6 +657,25 @@ export class ThemeBuilder extends Base {
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
     page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
   }
+  private setCoverPropertiesFromSurvey(panel) {
+    panel.getQuestionByName("headerView").value = this.survey.headerView;
+    panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
+
+    panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
+    panel.getQuestionByName("logoPositionY").readOnly = !this.survey.logo;
+    panel.getQuestionByName("logoPosition").readOnly = !this.survey.logo;
+
+    panel.getQuestionByName("titlePositionX").readOnly = !this.survey.title;
+    panel.getQuestionByName("titlePositionY").readOnly = !this.survey.title;
+
+    panel.getQuestionByName("descriptionPositionX").readOnly = !this.survey.description;
+    panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
+  }
+  private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
+    if (!!question && !!cssVariable) {
+      question.value = cssVariable;
+    }
+  }
   private updateHeaderViewContainerEditors(themeCssVariables: { [index: string]: string }) {
     this.updateVisibilityOfPropertyGridGroups();
 
@@ -660,43 +684,34 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
-      panel.getQuestionByName("headerView").value = this.survey.headerView;
-      panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
-
-      panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
-      panel.getQuestionByName("logoPositionY").readOnly = !this.survey.logo;
-      panel.getQuestionByName("logoPosition").readOnly = !this.survey.logo;
-
-      panel.getQuestionByName("titlePositionX").readOnly = !this.survey.title;
-      panel.getQuestionByName("titlePositionY").readOnly = !this.survey.title;
-
-      panel.getQuestionByName("descriptionPositionX").readOnly = !this.survey.description;
-      panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
+      this.setCoverPropertiesFromSurvey(panel);
     }
 
-    if (!!this.currentTheme.cover) {
-      Object.keys(this.currentTheme.cover).forEach(key => {
+    if (!!this.currentTheme.header) {
+      Object.keys(this.currentTheme.header).forEach(key => {
         const question = panel.getQuestionByName(key);
         if (!!question && key === "backgroundImageOpacity") {
-          question.value = this.currentTheme.cover[key] * 100;
+          question.value = this.currentTheme.header[key] * 100;
         } else if (question) {
-          question.value = this.currentTheme.cover[key];
+          question.value = this.currentTheme.header[key];
         }
       });
-      const titleForecolorQuestion = panel.getQuestionByName("titleForecolor");
-      const titleForecolorValue = themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"];
-      if (!!titleForecolorQuestion && !!titleForecolorValue) {
-        titleForecolorQuestion.value = titleForecolorValue;
-      }
-      const backgroundColorQuestion = panel.getQuestionByName("backgroundColor");
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-cover-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-cover-backcolor"]);
+
       const backgroundColorValue = themeCssVariables["--sjs-cover-backcolor"];
-      if (!!backgroundColorQuestion && !!backgroundColorValue) {
-        backgroundColorQuestion.value = backgroundColorValue;
+      if (!!backgroundColorValue) {
         panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       }
     }
   }
-
+  private updatePropertyGridEditorAvailablesFromSurveyElement() {
+    let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+    this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+    this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
+    this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
+  }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
     this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
@@ -715,9 +730,7 @@ export class ThemeBuilder extends Base {
     });
 
     if (!!this.survey) {
-      this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
-      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !this.survey.pages.some(p => !!p.title);
-      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !this.survey.pages.some(p => !!p.description);
+      this.updatePropertyGridEditorAvailablesFromSurveyElement();
     }
   }
 
@@ -727,6 +740,7 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
     themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
+    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.backgroundOpacity;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
     themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
@@ -758,20 +772,69 @@ export class ThemeBuilder extends Base {
     });
   }
 
-  private raiseThemeChanged() {
-    if (this.blockThemeChangedNotifications == 0) {
-      this.surveyProvider.raiseThemeChanged();
-    }
-  }
-  private raiseThemeModified(options: any) {
-    this.surveyProvider.isThemePristine = false;
-    if (this.blockThemeChangedNotifications == 0) {
-      this.onThemeModified.fire(this, options);
-    }
+  private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
+    Object.keys(newCssVariables).forEach(key => {
+      if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
+        delete newCssVariables[key];
+      }
+    });
+    this.currentTheme.cssVariables = newCssVariables;
   }
 
   private updateSimulatorTheme() {
     this.survey.applyTheme(this.currentTheme);
+  }
+
+  private _saveThemeFuncValue: (
+    no: number,
+    onSaveCallback: (no: number, isSuccess: boolean) => void
+  ) => void;
+  /**
+   * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   */
+  public get saveThemeFunc() {
+    return this._saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this._saveThemeFuncValue = value;
+  }
+
+  private autoSaveTimerId = null;
+  protected processAutoSave() {
+    let saveThemeFunc = this.saveThemeFunc;
+    if (!saveThemeFunc && this.surveyProvider.saveThemeFunc) {
+      saveThemeFunc = () => this.surveyProvider.doSaveTheme();
+    }
+    if (!saveThemeFunc) {
+      return;
+    }
+    if (this.surveyProvider.autoSaveDelay <= 0) {
+      saveThemeFunc();
+      return;
+    }
+    if (!!this.autoSaveTimerId) {
+      clearTimeout(this.autoSaveTimerId);
+    }
+    this.autoSaveTimerId = setTimeout(() => {
+      clearTimeout(this.autoSaveTimerId);
+      this.autoSaveTimerId = null;
+      saveThemeFunc && saveThemeFunc();
+    }, this.surveyProvider.autoSaveDelay);
+  }
+  protected themeModified(options: { theme: ITheme } | { name: string, value: any }) {
+    this.updateSimulatorTheme();
+    if (this.blockThemeChangedNotifications == 0) {
+      if (!!options["theme"]) {
+        this.onThemeSelected.fire(this, options as { theme: ITheme });
+      } else {
+        this.onThemeModified.fire(this, options as { name: string, value: any });
+      }
+    }
+    if (this.surveyProvider.isAutoSave) {
+      this.processAutoSave();
+    }
   }
 
   private getThemeEditorSurveyJSON() {
@@ -815,141 +878,6 @@ export class ThemeBuilder extends Base {
                   { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
                 defaultValue: "panels"
               }
-            ]
-          }, {
-            type: "panel",
-            elements: [
-              {
-                type: "color",
-                name: "generalPrimaryColor",
-                title: getLocString("theme.primaryColor"),
-                descriptionLocation: "hidden",
-              },
-              {
-                type: "color",
-                name: "generalBackcolorDimColor",
-                title: getLocString("theme.backgroundDimColor"),
-                descriptionLocation: "hidden",
-              },
-              {
-                type: "panel",
-                name: "background",
-                title: getLocString("theme.backgroundImage"),
-                elements: [
-                  {
-                    type: "fileedit",
-                    storeDataAsText: false,
-                    name: "backgroundImage",
-                    titleLocation: "hidden",
-                    acceptedTypes: "image/*",
-                    placeholder: "Browse..."
-                  },
-                  {
-                    type: "buttongroup",
-                    name: "backgroundImageFit",
-                    enableIf: "{backgroundImage} notempty",
-                    titleLocation: "hidden",
-                    choices: [
-                      { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
-                      { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
-                      { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
-                    ],
-                    defaultValue: "cover"
-                  },
-                  {
-                    type: "buttongroup",
-                    name: "backgroundImageAttachment",
-                    enableIf: "{backgroundImage} notempty",
-                    titleLocation: "hidden",
-                    choices: [
-                      { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
-                      { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
-                    ],
-                    defaultValue: "scroll"
-                  },
-                  {
-                    type: "spinedit",
-                    name: "backgroundOpacity",
-                    enableIf: "{backgroundImage} notempty",
-                    titleLocation: "left",
-                    title: getLocString("theme.backgroundOpacity"),
-                    descriptionLocation: "hidden",
-                    unit: "%",
-                    defaultValue: 100,
-                    min: 0,
-                    max: 100,
-                    step: 5
-                  },
-                ]
-              },
-              {
-                type: "spinedit",
-                name: "panelBackgroundTransparency",
-                title: getLocString("theme.panelBackgroundTransparency"),
-                descriptionLocation: "hidden",
-                unit: "%",
-                defaultValue: 100,
-                min: 0,
-                max: 100,
-                step: 5
-              },
-              {
-                type: "spinedit",
-                name: "questionBackgroundTransparency",
-                title: getLocString("theme.questionBackgroundTransparency"),
-                descriptionLocation: "hidden",
-                unit: "%",
-                defaultValue: 100,
-                min: 0,
-                max: 100,
-                step: 5
-              }
-            ]
-          }, {
-            type: "panel",
-            elements: [
-              {
-                type: "dropdown",
-                name: "--font-family",
-                title: getLocString("theme.fontFamily"),
-                descriptionLocation: "hidden",
-                choices: [].concat(DefaultFonts),
-                defaultValue: "Open Sans",
-                allowClear: false
-              },
-              {
-                type: "spinedit",
-                name: "commonFontSize",
-                title: getLocString("theme.fontSize"),
-                descriptionLocation: "hidden",
-                unit: "%",
-                defaultValue: 100,
-                min: 0,
-                step: 5
-              },
-            ]
-          }, {
-            type: "panel",
-            elements: [
-              {
-                type: "spinedit",
-                name: "commonScale",
-                title: getLocString("theme.scale"),
-                descriptionLocation: "hidden",
-                unit: "%",
-                defaultValue: 100,
-                min: 0,
-                step: 5
-              },
-              {
-                type: "spinedit",
-                name: "cornerRadius",
-                title: getLocString("theme.cornerRadius"),
-                descriptionLocation: "hidden",
-                unit: "px",
-                defaultValue: 4,
-                min: 0
-              },
             ]
           }
         ]
@@ -1108,6 +1036,12 @@ export class ThemeBuilder extends Base {
                         descriptionLocation: "hidden",
                       },
                       {
+                        type: "colorsettings",
+                        name: "descriptionForecolor",
+                        title: getLocString("theme.coverDescriptionForecolor"),
+                        descriptionLocation: "hidden",
+                      },
+                      {
                         type: "boolean",
                         name: "overlapEnabled",
                         renderAs: "checkbox",
@@ -1131,6 +1065,161 @@ export class ThemeBuilder extends Base {
                   }
                 ]
               }
+            ]
+          }
+        ]
+      }, {
+        type: "panel",
+        name: "groupBackground",
+        state: "collapsed",
+        title: getLocString("theme.groupBackground"),
+        elements: [
+          {
+            type: "panel",
+            elements: [
+              {
+                type: "color",
+                name: "generalBackcolorDimColor",
+                title: getLocString("theme.backgroundDimColor"),
+                descriptionLocation: "hidden",
+              },
+              {
+                type: "panel",
+                name: "background",
+                title: getLocString("theme.backgroundImage"),
+                elements: [
+                  {
+                    type: "fileedit",
+                    storeDataAsText: false,
+                    name: "backgroundImage",
+                    titleLocation: "hidden",
+                    acceptedTypes: "image/*",
+                    placeholder: "Browse..."
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "backgroundImageFit",
+                    enableIf: "{backgroundImage} notempty",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
+                      { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
+                      { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
+                    ],
+                    defaultValue: "cover"
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "backgroundImageAttachment",
+                    enableIf: "{backgroundImage} notempty",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
+                      { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
+                    ],
+                    defaultValue: "scroll"
+                  },
+                  {
+                    type: "spinedit",
+                    name: "backgroundOpacity",
+                    enableIf: "{backgroundImage} notempty",
+                    titleLocation: "left",
+                    title: getLocString("theme.backgroundOpacity"),
+                    descriptionLocation: "hidden",
+                    unit: "%",
+                    defaultValue: 100,
+                    min: 0,
+                    max: 100,
+                    step: 5
+                  },
+                ]
+              }
+            ]
+          }
+        ]
+      }, {
+        type: "panel",
+        name: "groupAppearance",
+        state: "collapsed",
+        title: getLocString("theme.groupAppearance"),
+        elements: [
+          {
+            type: "panel",
+            elements: [
+              {
+                type: "color",
+                name: "generalPrimaryColor",
+                title: getLocString("theme.primaryColor"),
+                descriptionLocation: "hidden",
+              },
+              {
+                type: "spinedit",
+                name: "panelBackgroundTransparency",
+                title: getLocString("theme.panelBackgroundTransparency"),
+                descriptionLocation: "hidden",
+                unit: "%",
+                defaultValue: 100,
+                min: 0,
+                max: 100,
+                step: 5
+              },
+              {
+                type: "spinedit",
+                name: "questionBackgroundTransparency",
+                title: getLocString("theme.questionBackgroundTransparency"),
+                descriptionLocation: "hidden",
+                unit: "%",
+                defaultValue: 100,
+                min: 0,
+                max: 100,
+                step: 5
+              }
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "dropdown",
+                name: "--font-family",
+                title: getLocString("theme.fontFamily"),
+                descriptionLocation: "hidden",
+                choices: [].concat(DefaultFonts),
+                defaultValue: "Open Sans",
+                allowClear: false
+              },
+              {
+                type: "spinedit",
+                name: "commonFontSize",
+                title: getLocString("theme.fontSize"),
+                descriptionLocation: "hidden",
+                unit: "%",
+                defaultValue: 100,
+                min: 0,
+                step: 5
+              },
+            ]
+          }, {
+            type: "panel",
+            elements: [
+              {
+                type: "spinedit",
+                name: "commonScale",
+                title: getLocString("theme.scale"),
+                descriptionLocation: "hidden",
+                unit: "%",
+                defaultValue: 100,
+                min: 0,
+                step: 5
+              },
+              {
+                type: "spinedit",
+                name: "cornerRadius",
+                title: getLocString("theme.cornerRadius"),
+                descriptionLocation: "hidden",
+                unit: "px",
+                defaultValue: 4,
+                min: 0
+              },
             ]
           }
         ]
@@ -1403,6 +1492,7 @@ export class ThemeBuilder extends Base {
   }
 
   public dispose(): void {
+    this.surveyProvider.onPropertyChanged.remove(this.creatorPropertyChanged);
     this.themeEditorSurveyValue?.dispose();
     this.simulator.dispose();
     super.dispose();

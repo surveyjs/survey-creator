@@ -220,7 +220,7 @@ export class FastEntryEditor extends FastEntryEditorBase {
   }
 
   public apply(): boolean {
-    if (this.comment.isEmpty()) return false;
+    //if (this.comment.isEmpty()) return false;
     if (this.editSurvey.hasErrors(true)) return false;
     const items = this.convertTextToItemValues(this.comment.value);
     FastEntryEditor.applyItemValueArray(<any>this.choices, items, this.names);

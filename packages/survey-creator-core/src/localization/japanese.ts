@@ -201,9 +201,13 @@ export var jaStrings = {
       question_visibilityText: "質問{0}を表示にする", //{0} question name
       question_enableText: "質問{0}を有効にする", //{0} question name
       question_requireText: "質問{0}を必須にする", //{0} question name
+      question_resetValueText: "質問のリセット値:{0}",
+      question_setValueText: "値の割り当て: 質問への{1}: {0}",
       column_visibilityText: "質問{1}の列{0}を表示する", //{0} column name, {1} question name
       column_enableText: "質問の列{0}を有効にする{1}", //{0} column name, {1} question name
       column_requireText: "質問{1}の列{0}を必須にする", //{0} column name, {1} question name
+      column_resetValueText: "列のセル値をリセット:{0}",
+      column_setValueText: "セル値の割り当て:列への{1}:{0}",
       setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
       trigger_completeText: "アンケートが完了する",
       trigger_setvalueText: "質問：{0}値{1}に設定する", //{0} question name, {1} setValue
@@ -1664,3 +1668,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.logoPosition: "Logo Position" => "ロゴの位置"
 // theme.coverTitlePosition: "Title Position" => "タイトル位置"
 // theme.coverDescriptionPosition: "Description Position" => "説明位置"
+// lg.question_resetValueText: "reset value for question: {0}" => "質問のリセット値:{0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "値の割り当て: 質問への{1}: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "列のセル値をリセット:{0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "セル値の割り当て:列への{1}:{0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

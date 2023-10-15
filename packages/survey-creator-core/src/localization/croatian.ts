@@ -201,9 +201,13 @@ export var hrStrings = {
       question_visibilityText: "Učinite pitanje {0} vidljivim", //{0} question name
       question_enableText: "Omogući pitanje {0}", //{0} question name
       question_requireText: "Neka pitanje {0} bude potrebno", //{0} question name
+      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}",
+      question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}",
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
+      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}",
+      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}",
       setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       trigger_completeText: "Anketa se dovrša",
       trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
@@ -1657,3 +1661,9 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.logoPosition: "Logo Position" => "Položaj logotipa"
 // theme.coverTitlePosition: "Title Position" => "Položaj naslova"
 // theme.coverDescriptionPosition: "Description Position" => "Položaj opisa"
+// lg.question_resetValueText: "reset value for question: {0}" => "Vrati izvornu vrijednost za pitanje: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Dodijeli vrijednost: {1} pitanje: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Vrati izvornu vrijednost ćelije za stupac: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Dodijeli vrijednost ćelije: {1} stupcu: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

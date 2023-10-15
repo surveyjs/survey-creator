@@ -42,6 +42,7 @@ import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
+import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if(!this.question) return false;
@@ -1383,7 +1384,7 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return prop.type === "url";
+    return prop.type === "url" || prop.type === "file";
   }
   public getJSON(
     obj: Base,
@@ -1406,6 +1407,9 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
+    question.onChooseFilesCallback = ((input, onFilesChosen) => {
+      options.chooseFiles(input, onFilesChosen);
+    });
   }
 
 }
