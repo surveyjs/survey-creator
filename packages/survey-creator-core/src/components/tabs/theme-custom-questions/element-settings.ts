@@ -58,23 +58,6 @@ export function elementSettingsToCssVariable(question: Question, themeCssVariabl
   });
 }
 
-/*
- const compositeQuestion = <QuestionCompositeModel>question;
-  const fontSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
-  fontSettingsFromTheme.forEach(key => {
-    const propertyName = key.split("-").pop();
-    compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
-  });
-
-  if(fontSettingsFromTheme.length === 0) {
-    if (!!defaultColorVariable) {
-      compositeQuestion.contentPanel.getQuestionByName("color").value = defaultColorVariable;
-    }
-    if (!!defaultPlaceholderColorVariable) {
-      compositeQuestion.contentPanel.getQuestionByName("placeholdercolor").value = defaultPlaceholderColorVariable;
-    }
-  }
-   */
 export function elementSettingsFromCssVariable(question: Question, themeCssVariables: {[index: string]: string}, defaultBackcolorVariable: string, defaultHovercolorVariable: string): void {
   const compositeQuestion = <QuestionCompositeModel>question;
   const elementSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
