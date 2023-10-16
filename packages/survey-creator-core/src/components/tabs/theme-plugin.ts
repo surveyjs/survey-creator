@@ -252,6 +252,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       locTooltipName: "ed.themeSettingsTooltip",
       showTitle: false
     });
+    items.push(this.themeSettingsAction);
 
     this.importAction = new Action({
       id: "svc-theme-import",
