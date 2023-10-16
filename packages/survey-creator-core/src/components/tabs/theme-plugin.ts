@@ -37,7 +37,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
-  private _availableThemes = PredefinedThemes;
+  private _availableThemes = [].concat(PredefinedThemes);
 
   public model: ThemeBuilder;
 
@@ -78,6 +78,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
+    this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
     this.sidebarTab.model = this.model.themeEditorSurvey;

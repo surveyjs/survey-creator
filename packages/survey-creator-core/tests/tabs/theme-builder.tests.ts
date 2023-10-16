@@ -2029,6 +2029,7 @@ test("Set and use custom default theme", (): any => {
 
   themePlugin.removeTheme(customTheme);
   expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
+  expect(themePlugin.availableThemes[0]).toBe("default");
   expect(themePlugin.availableThemes).toStrictEqual(themes);
   expect(themeChooser.value).toBe("default");
   expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
