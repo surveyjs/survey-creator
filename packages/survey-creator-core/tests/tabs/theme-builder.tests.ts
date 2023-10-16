@@ -1660,6 +1660,31 @@ test("restore headerViewContainer values", (): any => {
     "height": 300
   });
 });
+
+test("headerViewContainer: restore backgroundColorSwitch", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("none");
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-cover-backcolor"]).toBe("trasparent");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeBuilder;
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("none");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBeUndefined();
+});
+
 test("Get theme changes only", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
