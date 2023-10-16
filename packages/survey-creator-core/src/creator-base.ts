@@ -1136,6 +1136,9 @@ export class CreatorBase extends Base
   }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
+    if (this.activeTab !== "theme") {
+      this.updatePlugin(this.activeTab);
+    }
   }
   public getCurrentTheme(content: "full" | "changes" = "full") {
     if (content === "full") {
