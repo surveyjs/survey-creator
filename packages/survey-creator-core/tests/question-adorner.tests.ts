@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, settings } from "survey-core";
+import { Action, _setIsTouch, settings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 
 settings.supportCreatorV2 = true;
@@ -29,4 +29,36 @@ test("Check required action", (): any => {
   expect(requiredActionInPopup.title).toBe("Mark as required");
   question.isRequired = true;
   expect(requiredActionInPopup.title).toBe("Remove the required mark");
+});
+
+test("Check question adorners popups display mode", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  let convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertInputTypeAction.popupModel.displayMode).toBe("popup");
+  expect(convertToAction.popupModel.displayMode).toBe("popup");
+  creator.isTouch = true;
+  questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertInputTypeAction.popupModel.displayMode).toBe("overlay");
+  expect(convertToAction.popupModel.displayMode).toBe("overlay");
+  _setIsTouch(false);
 });

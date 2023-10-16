@@ -3367,12 +3367,12 @@ export class CreatorBase extends Base
       "bottom",
       "center"
     );
+    popupModel.displayMode = this.isTouch ? "overlay" : "popup";
 
     return <any>{
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
       action: () => {
-        popupModel.displayMode = this.isTouch ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel

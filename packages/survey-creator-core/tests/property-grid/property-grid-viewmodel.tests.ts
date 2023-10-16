@@ -4,7 +4,8 @@ import {
   PanelModel,
   PopupModel,
   IAction,
-  QuestionMatrixDynamicModel
+  QuestionMatrixDynamicModel,
+  _setIsTouch
 } from "survey-core";
 import { PropertyGridViewModel } from "../../src/property-grid/property-grid-view-model";
 export { PropertyGridEditorMatrix } from "../../src/property-grid/matrices";
@@ -149,4 +150,17 @@ test("settings.showNavigation", () => {
   expect(model.nextSelectionAction).toBeFalsy();
 
   settings.propertyGrid.showNavigationButtons = false;
+});
+test("Check object selector popup's display mode", () => {
+  let creator = new CreatorTester();
+  let propertyGrid = creator["designerPropertyGrid"];
+  let model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.objectSelectionAction.popupModel.displayMode).toEqual("popup");
+  _setIsTouch(true);
+  creator = new CreatorTester();
+  creator.isTouch = true;
+  propertyGrid = creator["designerPropertyGrid"];
+  model = new PropertyGridViewModel(propertyGrid, creator);
+  expect(model.objectSelectionAction.popupModel.displayMode).toEqual("overlay");
+  _setIsTouch(false);
 });
