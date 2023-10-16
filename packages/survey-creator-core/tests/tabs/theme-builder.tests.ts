@@ -1569,7 +1569,7 @@ test("set headerViewContainer", (): any => {
   headerViewContainer.getElementByName("logoPosition").value = "right";
   headerViewContainer.getElementByName("headerView").value = "advanced";
   headerViewContainer.getElementByName("height").value = 300;
-  headerViewContainer.getElementByName("inheritWidthFrom").value = "page";
+  headerViewContainer.getElementByName("inheritWidthFrom").value = "container";
   headerViewContainer.getElementByName("textAreaWidth").value = 600;
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
@@ -1587,7 +1587,7 @@ test("set headerViewContainer", (): any => {
 
   expect(creator.theme.header).toEqual({
     "height": 300,
-    "inheritWidthFrom": "page",
+    "inheritWidthFrom": "container",
     "textAreaWidth": 600,
     "overlapEnabled": true,
     "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
@@ -1618,7 +1618,7 @@ test("restore headerViewContainer values", (): any => {
     },
     "header": {
       "height": 300,
-      "inheritWidthFrom": "page",
+      "inheritWidthFrom": "container",
       "textAreaWidth": 600,
       "backgroundImage": "https://t4.ftcdn.net/jpg/02/83/13/61/360_F_283136113_b3VRHNiOPFMOluzYJPpfuoH8Czh9c743.jpg",
       "backgroundImageOpacity": 0.5,
@@ -1641,7 +1641,7 @@ test("restore headerViewContainer values", (): any => {
   expect(headerViewContainer.value[0]).toEqual({
     "headerView": "basic",
     "logoPosition": "left",
-    "inheritWidthFrom": "page",
+    "inheritWidthFrom": "container",
     "titleForecolor": "#FBFF24",
     "descriptionForecolor": "rgba(136, 185, 227, 1)",
     "backgroundColor": "#5094ed",

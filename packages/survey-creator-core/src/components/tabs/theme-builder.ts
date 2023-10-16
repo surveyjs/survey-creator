@@ -955,7 +955,7 @@ export class ThemeBuilder extends Base {
                         title: getLocString("theme.coverInheritWidthFrom"),
                         choices: [
                           { value: "survey", text: getLocString("theme.coverInheritWidthFromSurvey") },
-                          { value: "page", text: getLocString("theme.coverInheritWidthFromPage") }
+                          { value: "container", text: getLocString("theme.coverInheritWidthFromContainer") }
                         ],
                         visibleIf: "{panel.headerView} = 'advanced'",
                       },
