@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
@@ -380,15 +380,35 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     }
   }
+  public getCurrentTheme(content: "full" | "changes" = "full") {
+    if (content === "full") {
+      return this.creator.theme;
+    }
+    return this.getThemeChanges();
+  }
   public getThemeChanges() {
     const fullTheme = this.creator.theme;
     let probeThemeFullName = getThemeFullName(fullTheme);
     const baseTheme = findSuitableTheme(fullTheme.themeName, probeThemeFullName);
     const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
+    Object.keys(themeChanges).forEach(propertyName => {
+      if (propertyName.toLowerCase().indexOf("background") !== -1) {
+        if (themeChanges[propertyName] === "" || themeChanges[propertyName] === Serializer.findProperty("survey", propertyName).defaultValue) {
+          delete themeChanges[propertyName];
+        }
+      }
+    });
     themeChanges.themeName = fullTheme.themeName || "default";
     themeChanges.colorPalette = fullTheme.colorPalette || "light";
     themeChanges.isPanelless = !!fullTheme.isPanelless;
     return themeChanges;
+  }
+  public get isThemePristine(): boolean {
+    const currentThemeChanges = this.getThemeChanges();
+    const hasCssModifications = Object.keys(currentThemeChanges.cssVariables).length > 0;
+    const hasBackgroundModifications = Object.keys(currentThemeChanges).some(propertyName => propertyName.toLowerCase().indexOf("background") !== -1);
+    const hasHeaderModifications = !!currentThemeChanges.header && Object.keys(currentThemeChanges.header).length === 0;
+    return !(hasCssModifications || hasBackgroundModifications || hasHeaderModifications);
   }
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();

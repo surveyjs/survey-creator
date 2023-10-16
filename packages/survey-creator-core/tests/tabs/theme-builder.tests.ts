@@ -928,8 +928,9 @@ test("Theme onModified and saveThemeFunc", (): any => {
     saveCount++;
   };
   let saveThemeCount = 0;
-  creator.saveThemeFunc = () => {
+  creator.saveThemeFunc = (saveNo, callback) => {
     saveThemeCount++;
+    callback(saveNo, "success");
   };
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
@@ -947,30 +948,40 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(0);
+  expect(creator.isThemeModified).toBeFalsy();
+  expect(themePlugin.isThemePristine).toBeTruthy();
 
   themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(1);
+  expect(creator.isThemeModified).toBeFalsy();
+  expect(themePlugin.isThemePristine).toBeFalsy();
 
   themeBuilder.resetTheme();
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
+  expect(creator.isThemeModified).toBeFalsy();
+  expect(themePlugin.isThemePristine).toBeTruthy();
 
   themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(3);
+  expect(creator.isThemeModified).toBeFalsy();
+  expect(themePlugin.isThemePristine).toBeFalsy();
 
   themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(4);
+  expect(creator.isThemeModified).toBeFalsy();
+  expect(themePlugin.isThemePristine).toBeFalsy();
 });
 
 test("Theme undo redo changes", (): any => {
@@ -1669,8 +1680,8 @@ test("Get theme changes only", (): any => {
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
-  const fullTheme = creator.getCurrentTheme() || {};
-  const themeChanges = creator.getCurrentTheme("changes") || {};
+  const fullTheme = themePlugin.getCurrentTheme() || {};
+  const themeChanges = themePlugin.getCurrentTheme("changes") || {};
   expect(Object.keys(fullTheme).length).toBe(8);
   expect(Object.keys(fullTheme)).toStrictEqual([
     "backgroundImage",
@@ -1683,11 +1694,8 @@ test("Get theme changes only", (): any => {
     "isPanelless",
   ]);
   expect(Object.keys(fullTheme.cssVariables).length).toBe(85);
-  expect(Object.keys(themeChanges).length).toBe(7);
+  expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
-    "backgroundImageFit",
-    "backgroundImageAttachment",
-    "backgroundOpacity",
     "cssVariables",
     "themeName",
     "colorPalette",
@@ -1699,11 +1707,11 @@ test("Get theme changes only", (): any => {
   themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
-  const fullModifiedTheme = creator.getCurrentTheme() || {};
-  const modifiedThemeChanges = creator.getCurrentTheme("changes") || {};
+  const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
+  const modifiedThemeChanges = themePlugin.getCurrentTheme("changes") || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
-  expect(Object.keys(modifiedThemeChanges).length).toBe(7);
+  expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
     "--sjs-general-backcolor-dim-light",
@@ -1713,8 +1721,8 @@ test("Get theme changes only", (): any => {
   ]);
 
   themeSurveyTab.resetTheme();
-  const fullThemeReset = creator.getCurrentTheme();
-  const themeChangesReset = creator.getCurrentTheme("changes");
+  const fullThemeReset = themePlugin.getCurrentTheme();
+  const themeChangesReset = themePlugin.getCurrentTheme("changes");
   expect(Object.keys(fullThemeReset).length).toBe(8);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "backgroundImage",
@@ -1727,12 +1735,8 @@ test("Get theme changes only", (): any => {
     "isPanelless"
   ]);
   expect(Object.keys(fullThemeReset.cssVariables).length).toBe(85);
-  expect(Object.keys(themeChangesReset).length).toBe(8);
+  expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
-    "backgroundImage",
-    "backgroundImageFit",
-    "backgroundImageAttachment",
-    "backgroundOpacity",
     "cssVariables",
     "themeName",
     "colorPalette",

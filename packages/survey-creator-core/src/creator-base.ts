@@ -1130,21 +1130,14 @@ export class CreatorBase extends Base
     this.saveThemeFuncValue = value;
   }
 
+  public isThemeModified: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
   public get theme(): ITheme {
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
-  }
-  public getCurrentTheme(content: "full" | "changes" = "full") {
-    if (content === "full") {
-      return this.theme;
-    }
-    const themePlugin = this.getPlugin("theme") as ThemeTabPlugin;
-    if (!!themePlugin) {
-      return themePlugin.getThemeChanges();
-    }
+    this.isThemeModified = true;
   }
 
   public doSaveTheme() {
@@ -1155,6 +1148,7 @@ export class CreatorBase extends Base
         if (this.saveNo !== no) return;
         if (isSuccess) {
           this.setState("saved");
+          this.isThemeModified = false;
         } else {
           this.setState("modified");
           if (this.showErrorOnFailedSave) {
@@ -2336,7 +2330,7 @@ export class CreatorBase extends Base
       (<any>selectedElement !== <any>panel)) {
       if (!panel) {
         while (!!selectedElement.parent && selectedElement.parent.isPanel) {
-          if(!!(<any>selectedElement).parentQuestion) {
+          if (!!(<any>selectedElement).parentQuestion) {
             selectedElement = <IElement>(<any>selectedElement).parentQuestion;
           }
           else {
