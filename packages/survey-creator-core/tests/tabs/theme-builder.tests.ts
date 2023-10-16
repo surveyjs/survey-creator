@@ -1693,7 +1693,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(fullTheme.cssVariables).length).toBe(85);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(80);
   expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
@@ -1710,7 +1710,7 @@ test("Get theme changes only", (): any => {
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   const modifiedThemeChanges = themePlugin.getCurrentTheme("changes") || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(88);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
@@ -1734,7 +1734,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless"
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(85);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(80);
   expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
@@ -1743,6 +1743,28 @@ test("Get theme changes only", (): any => {
     "isPanelless"
   ]);
   expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
+});
+test("Creator top action bar: only theme tab", (): any => {
+  const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "resetTheme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
+  const logicTabButtonOrder = ["svc-logic-filter-question", "svc-logic-filter-actiontype", "svc-logic-fast-entry"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("theme");
+
+  expect(creator.toolbar.visibleActions.length).toEqual(6);
+  let receivedOrder = creator.toolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(themeBuilderButtonOrder);
+  expect(creator.toolbar.visibleActions[3].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.toolbar.visibleActions.length).toEqual(3);
+  receivedOrder = creator.toolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(logicTabButtonOrder);
 });
 test("Creator footer action bar: only theme tab", (): any => {
   const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible", "svc-theme-settings"].join("|");
