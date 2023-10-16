@@ -89,10 +89,10 @@ test("Test question type converter (mobile)", async (t) => {
         }
       ]
     };
-    await setJSON(surveyJSON);
     await ClientFunction(() => {
       (window as any).creator.isTouch = true;
     })();
+    await setJSON(surveyJSON);
     await t
       .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
       .expect(Selector("#convertTo").visible).ok()
