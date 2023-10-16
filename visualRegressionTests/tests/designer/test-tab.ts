@@ -307,7 +307,7 @@ test("Check survey timer", async (t) => {
     await setJSON(json);
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(Selector(".sd-navigation__start-btn"));
-    await t.hover(Selector("body"), { offsetX: 0, offsetY: 0 });
+    await resetHoverToCreator(t);
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });
