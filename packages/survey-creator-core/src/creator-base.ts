@@ -1585,9 +1585,6 @@ export class CreatorBase extends Base
    */
   public onBeforeRedo: CreatorEvent = new CreatorEvent();
 
-  public onAfterUndo: CreatorEvent = new CreatorEvent();
-  public onAfterRedo: CreatorEvent = new CreatorEvent();
-
   public get undoRedoManager(): UndoRedoManager {
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
     return plugin && plugin.model.undoRedoManager;

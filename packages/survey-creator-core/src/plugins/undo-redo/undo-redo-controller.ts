@@ -129,9 +129,7 @@ export class UndoRedoController extends Base {
     this.onBeforeUndo.fire(this.creator, options);
     this.creator.onBeforeUndo.fire(this.creator, options);
     if (options.canUndo) {
-      var item = this.undoRedoManager.undo();
-      this.onAfterUndo.fire(this.creator, { state: item });
-      this.creator.onAfterUndo.fire(this.creator, { state: item });
+      this.undoRedoManager.undo();
       this.selectElementAfterUndo();
     }
     this.undoRedoManager.resume();
@@ -143,8 +141,6 @@ export class UndoRedoController extends Base {
     this.creator.onBeforeRedo.fire(this.creator, options);
     if (options.canRedo) {
       const item = this.undoRedoManager.redo();
-      this.onAfterRedo.fire(this.creator, { state: item });
-      this.creator.onAfterRedo.fire(this.creator, { state: item });
       this.selectElementAfterUndo();
     }
   }
@@ -196,14 +192,4 @@ export class UndoRedoController extends Base {
     * options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
   public onBeforeRedo: CreatorEvent = new CreatorEvent();
-  /**
-    * The event is called after undo happens.
-    * options.state is an undo/redo item.
-    */
-  public onAfterUndo: CreatorEvent = new CreatorEvent();
-  /**
-    * The event is called after redo happens.
-    * options.state is an undo/redo item.
-    */
-  public onAfterRedo: CreatorEvent = new CreatorEvent();
 }
