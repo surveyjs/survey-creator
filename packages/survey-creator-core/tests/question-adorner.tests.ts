@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { Action, _setIsTouch, settings } from "survey-core";
+import { Action, settings } from "survey-core";
 import { CreatorTester } from "./creator-tester";
 
 settings.supportCreatorV2 = true;
@@ -60,5 +60,4 @@ test("Check question adorners popups display mode", (): any => {
   convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
   expect(convertInputTypeAction.popupModel.displayMode).toBe("overlay");
   expect(convertToAction.popupModel.displayMode).toBe("overlay");
-  _setIsTouch(false);
 });

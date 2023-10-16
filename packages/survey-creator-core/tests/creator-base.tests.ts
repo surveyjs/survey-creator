@@ -22,7 +22,6 @@ import {
   QuestionCustomModel,
   PageModel,
   ComputedUpdater,
-  _setIsTouch
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
