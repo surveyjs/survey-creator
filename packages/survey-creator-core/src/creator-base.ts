@@ -493,7 +493,7 @@ export class CreatorBase extends Base
    */
   public onDefineElementMenuItems: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised when Survey Creator adds a property to a survey element. Handle this event if you cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
+   * An event that is raised when Survey Creator adds properties to a survey element selected on the design surface. Handle this event if you cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
    * 
    * Parameters:
    * 
