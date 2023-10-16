@@ -92,6 +92,10 @@
 <script setup lang="ts">
 import type { CreatorBase } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
+import { computed, toRaw } from "vue";
 const props = defineProps<{ model: CreatorBase }>();
-useBase(() => props.model);
+const model = computed(() => {
+  return toRaw(props.model);
+});
+useBase(() => model.value);
 </script>

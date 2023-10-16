@@ -10,8 +10,17 @@ import SideBarTab from "./side-bar/SideBarTab.vue";
 import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
 
+import ActionButton from "./components/ActionButton.vue";
 import SvgBundle from "./SvgBundle.vue";
+import Simulator from "./tabs/preview/Simulator.vue";
+import Test from "./tabs/preview/Test.vue";
+
+import TestAgain from "./tabs/preview/TestAgain.vue";
+import SurveyResults from "./tabs/preview/SurveyResults.vue";
+import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
+
 function registerComponents(app: App) {
+  app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
   app.component("svc-svg-bundle", SvgBundle);
 
@@ -25,7 +34,14 @@ function registerComponents(app: App) {
   app.component("svc-property-grid", PropertyGrid);
   app.component("svc-object-selector", ObjectSelector);
 
-  app.use(surveyPlugin);
+  app.component("svc-action-button", ActionButton);
+
+  app.component("survey-widget", app._context.components["SurveyComponent"]);
+  app.component("survey-simulator", Simulator);
+  app.component("svc-tab-test", Test);
+  app.component("survey-test-again", TestAgain);
+  app.component("survey-results", SurveyResults);
+  app.component("survey-results-table-row", SurveyResultsRow);
 }
 
 export const surveyCreatorPlugin = {

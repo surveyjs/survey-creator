@@ -2,7 +2,7 @@
   <div
     class="svc-side-bar"
     :class="{ 'svc-flyout-side-bar': model.flyoutPanelMode }"
-    :v-show="model.hasVisibleTabs"
+    v-show="model.hasVisibleTabs"
   >
     <div
       class="svc-side-bar__shadow"

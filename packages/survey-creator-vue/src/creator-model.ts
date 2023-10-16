@@ -1,19 +1,25 @@
+import type { Base } from "survey-core";
+import { useBase } from "survey-vue3-ui";
 import { onBeforeUnmount, shallowRef, type ShallowRef, watch } from "vue";
 
-export function useCreatorModel<T>(
+export function useCreatorModel<T extends Base>(
+  createModel: () => T | undefined,
   props: any,
-  createModel: () => T,
   getUpdatedModelProps: () => Array<string>
-): ShallowRef<T> {
-  const model = shallowRef<T>(undefined as T);
+): ShallowRef<T | undefined> {
+  const model = shallowRef<T>();
   const stopWatch = watch(
     getUpdatedModelProps().map((propName) => () => props[propName]),
     () => {
       model.value = createModel();
+    },
+    {
+      immediate: true,
     }
   );
+  useBase(() => model.value as T);
   onBeforeUnmount(() => {
     stopWatch();
   });
-  return model;
+  return model as ShallowRef<T>;
 }
