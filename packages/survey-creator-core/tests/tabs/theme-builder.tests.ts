@@ -354,6 +354,32 @@ test("fontsettings: fontsettingsFromCssVariable - default colors", () => {
   });
 });
 
+test("fontsettings: fontsettingsFromCssVariable - default values", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "fontsettings",
+      name: "questiontitle",
+      defaultValue: {
+        family: "Open Sans",
+        color: "rgba(22, 22, 22, 1)",
+        weight: "600",
+        size: 16
+      }
+    }],
+  });
+  const question = survey.getQuestionByName("questiontitle");
+  expect(question.getQuestionByName("family").value).toEqual("Open Sans");
+  expect(question.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
+  expect(question.getQuestionByName("weight").value).toEqual("600");
+  expect(question.getQuestionByName("size").value).toEqual(16);
+
+  fontsettingsFromCssVariable(question, { "--sjs-font-questiontitle-size": "18px" }, "#000000", "#000000");
+  expect(question.getQuestionByName("family").value).toEqual("Open Sans");
+  expect(question.getQuestionByName("color").value).toEqual("rgba(22, 22, 22, 1)");
+  expect(question.getQuestionByName("weight").value).toEqual("600");
+  expect(question.getQuestionByName("size").value).toEqual(18);
+});
+
 test("fontsettings: set default value", () => {
   const survey = new SurveyModel({
     elements: [{
@@ -494,6 +520,31 @@ test("elementSettings: elementSettingsFromCssVariable", () => {
     "cornerRadius": "6px",
     "corner": 6,
   });
+});
+
+test("elementSettings: elementSettingsFromCssVariable - default values", () => {
+  const survey = new SurveyModel({
+    elements: [{
+      type: "elementsettings",
+      name: "questionpanel",
+      defaultValue: {
+        backcolor: "rgba(255, 255, 255, 1)",
+        hovercolor: "rgba(248, 248, 248, 1)",
+        cornerRadius: "4px",
+        corner: 4
+      } }],
+  });
+  const question = survey.getQuestionByName("questionpanel");
+  expect(question.getQuestionByName("backcolor").value).toEqual("rgba(255, 255, 255, 1)");
+  expect(question.getQuestionByName("hovercolor").value).toEqual("rgba(248, 248, 248, 1)");
+  expect(question.getQuestionByName("cornerRadius").value).toEqual("4px");
+  expect(question.getQuestionByName("corner").value).toEqual(4);
+
+  elementSettingsFromCssVariable(question, { "--sjs-questionpanel-cornerRadius": "6px" }, "#000000", "#000000");
+  expect(question.getQuestionByName("backcolor").value).toEqual("rgba(255, 255, 255, 1)");
+  expect(question.getQuestionByName("hovercolor").value).toEqual("rgba(248, 248, 248, 1)");
+  expect(question.getQuestionByName("cornerRadius").value).toEqual("6px");
+  expect(question.getQuestionByName("corner").value).toEqual(6);
 });
 
 test("Theme builder reset to default", (): any => {
@@ -916,6 +967,43 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
     "weight": "700",
     "color": "rgba(201, 90, 231, 0.91)",
     "size": 18
+  });
+});
+
+test("Theme builder: restore questionTitle switch tabs", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  creator.activeTab = "theme";
+  let themeSurveyTab = themePlugin.model as ThemeBuilder;
+  let questionTitleFontSettings = themeSurveyTab.themeEditorSurvey.getQuestionByName("questionTitle");
+  expect(questionTitleFontSettings.getQuestionByName("family").value).toEqual("Open Sans");
+  expect(questionTitleFontSettings.getQuestionByName("color").value).toEqual("rgba(0, 0, 0, 0.91)");
+  expect(questionTitleFontSettings.getQuestionByName("weight").value).toEqual("600");
+  expect(questionTitleFontSettings.getQuestionByName("size").value).toEqual(16);
+
+  questionTitleFontSettings.getQuestionByName("color").value = "rgba(201, 90, 231, 0.91)";
+  expect(questionTitleFontSettings.value).toEqual({
+    "family": "Open Sans",
+    "weight": "600",
+    "color": "rgba(201, 90, 231, 0.91)",
+    "size": 16
+  });
+
+  creator.activeTab = "designer";
+  creator.activeTab = "theme";
+  themeSurveyTab = themePlugin.model as ThemeBuilder;
+  questionTitleFontSettings = themeSurveyTab.themeEditorSurvey.getQuestionByName("questionTitle");
+
+  expect(questionTitleFontSettings.getQuestionByName("family").value).toEqual("Open Sans");
+  expect(questionTitleFontSettings.getQuestionByName("color").value).toEqual("rgba(201, 90, 231, 0.91)");
+  expect(questionTitleFontSettings.getQuestionByName("weight").value).toEqual("600");
+  expect(questionTitleFontSettings.getQuestionByName("size").value).toEqual(16);
+  expect(questionTitleFontSettings.value).toEqual({
+    "family": "Open Sans",
+    "weight": "600",
+    "color": "rgba(201, 90, 231, 0.91)",
+    "size": 16
   });
 });
 
