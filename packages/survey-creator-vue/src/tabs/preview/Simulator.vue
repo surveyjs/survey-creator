@@ -1,7 +1,7 @@
 <template>
   <div
     :class="model.getRootCss()"
-    @keydown="model.tryToZoom($event, $event)"
+    @keydown="model.tryToZoom(undefined, $event)"
     @mouseover="activateZoom()"
     @mouseout="deactivateZoom()"
   >
@@ -32,12 +32,12 @@
         }"
       >
         <div class="svd-simulator-content">
-          <survey-widget :model="model.survey"></survey-widget>
+          <SurveyComponent :model="model.survey"></SurveyComponent>
         </div>
       </div>
     </div>
     <div v-if="!model.hasFrame" class="svd-simulator-content">
-      <survey-widget :model="model.survey"></survey-widget>
+      <SurveyComponent :model="model.survey"></SurveyComponent>
     </div>
   </div>
 </template>

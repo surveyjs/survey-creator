@@ -35,14 +35,13 @@
         type="button"
         :class="question.cssClasses.clearButton"
         :disabled="question.getIsClearButtonDisabled()"
-        @click="question.doClean()"
+        @click="question.doClean"
       >
-        <svg
+        <sv-svg-icon
           :iconName="question.cssClasses.clearButtonIcon"
-          size="'auto'"
+          :size="'auto'"
           :title="question.clearButtonCaption"
-          sv-ng-svg-icon
-        ></svg>
+        ></sv-svg-icon>
       </button>
       <label
         role="button"

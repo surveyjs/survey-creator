@@ -1,5 +1,5 @@
 <template>
-  <div :class="question.cssClasses.root" @keydown="question.onKeyDown($event)">
+  <div :class="question.cssClasses.root" @keydown="question.onKeyDown">
     <label :class="question.getSwatchCss()" :style="question.getSwatchStyle()">
       <sv-svg-icon
         :iconName="question.cssClasses.swatchIcon"
@@ -10,7 +10,7 @@
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.colorInput"
         :value="question.renderedColorValue"
-        @change="question.onColorInputChange($event)"
+        @change="question.onColorInputChange"
       />
     </label>
     <input

@@ -1,5 +1,5 @@
 <template>
-  <tr @click="model.toggle()" v-key2click>
+  <tr @click="model.toggle" v-key2click>
     <td
       class="svd-dark-border-color"
       :style="{ paddingLeft: model.textMargin }"
@@ -8,13 +8,9 @@
         v-if="model.isNode"
         class="svd-test-results__marker"
         :class="{ 'svd-test-results__marker--expanded': !model.collapsed }"
-        :style="{ left: model.textMargin }"
+        :style="{ left: model.markerMargin }"
       >
-        <sv-svg-icon
-          :iconName="'icon-expand_16x16'"
-          :size="16"
-          sv-ng-svg-icon
-        ></sv-svg-icon>
+        <sv-svg-icon :iconName="'icon-expand_16x16'" :size="16"></sv-svg-icon>
       </span>
       <span>{{ model.title }}</span>
     </td>
