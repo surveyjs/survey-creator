@@ -288,6 +288,12 @@ jobs:
       publishLocation: 'Container'
     displayName: 'publish artifact SurveyJSCreatorV2BuildCore-$(Build.BuildId) for next jobs'
 
+- task: PublishCodeCoverageResults@1
+  inputs: 
+    codeCoverageTool: Cobertura # or JaCoCo
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/*coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage'
+    
   - script: |
       mkdir $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/docs
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
