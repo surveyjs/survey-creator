@@ -532,7 +532,8 @@ test("elementSettings: elementSettingsFromCssVariable - default values", () => {
         hovercolor: "rgba(248, 248, 248, 1)",
         cornerRadius: "4px",
         corner: 4
-      } }],
+      }
+    }],
   });
   const question = survey.getQuestionByName("questionpanel");
   expect(question.getQuestionByName("backcolor").value).toEqual("rgba(255, 255, 255, 1)");
@@ -2146,9 +2147,9 @@ test("Set and use custom default theme", (): any => {
 
   themePlugin.removeTheme(customTheme);
   expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
-  expect(themePlugin.availableThemes[0]).toBe("default");
-  expect(themePlugin.availableThemes).toStrictEqual(themes);
   expect(themeChooser.value).toBe("default");
   expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
   expect(themeBuilder.survey.themeVariables["--a-var"]).toBe(undefined);
+  expect(themePlugin.availableThemes[0]).toBe("default");
+  expect(themePlugin.availableThemes).toStrictEqual(themes);
 });
