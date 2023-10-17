@@ -86,6 +86,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
       this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
       this.actionContainer.setItems(actions);
+      this.updateActionsProperties();
     }
     this.setShowAddQuestionButton(true);
   }
