@@ -29,6 +29,9 @@ import LogicOperator from "./questions/LogicOperator.vue";
 import EmbeddedSurvey from "./questions/EmbeddedSurvey.vue";
 import LinkValue from "./questions/LinkValue.vue";
 
+import Translation from "./tabs/translation/Translation.vue";
+import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
+
 function registerComponents(app: App) {
   app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
@@ -60,6 +63,9 @@ function registerComponents(app: App) {
   app.component("json-error-item", JsonEditorErrorItem);
   app.component("svc-tab-json-editor-textarea", JsonEditorTextArea);
   app.component("svc-tab-json-editor-ace", JsonEditorAce);
+
+  app.component("svc-tab-translation", Translation);
+  app.component("sd-translation-line-skeleton", TranslationLineSkeleton);
 
   app.component("svc-tab-logic", Logic);
 }

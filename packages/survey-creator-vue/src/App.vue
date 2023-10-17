@@ -10,7 +10,10 @@ StylesManager.applyTheme("defaultV2");
 export default defineComponent({
   name: "App",
   data() {
-    const creator = new SurveyCreatorModel({ showLogicTab: true });
+    const creator = new SurveyCreatorModel({
+      showLogicTab: true,
+      showTranslationTab: true,
+    });
     creator.JSON = {
       elements: [
         {
