@@ -13,6 +13,7 @@ export default defineComponent({
     const creator = new SurveyCreatorModel({
       showLogicTab: true,
       showTranslationTab: true,
+      showThemeTab: true,
     });
     creator.JSON = {
       elements: [

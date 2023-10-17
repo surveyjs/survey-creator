@@ -32,6 +32,8 @@ import LinkValue from "./questions/LinkValue.vue";
 import Translation from "./tabs/translation/Translation.vue";
 import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
 
+import Theme from "./tabs/theme/Theme.vue";
+
 function registerComponents(app: App) {
   app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
@@ -68,6 +70,8 @@ function registerComponents(app: App) {
   app.component("sd-translation-line-skeleton", TranslationLineSkeleton);
 
   app.component("svc-tab-logic", Logic);
+
+  app.component("svc-tab-theme", Theme);
 }
 
 export const surveyCreatorPlugin = {
