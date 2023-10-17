@@ -8,6 +8,8 @@ require("./logic.scss");
 export function initLogicOperator(question: QuestionDropdownModel) {
   question.popupModel.isFocusedContent = true;
   question.popupModel.setWidthByTarget = false;
+  question.popupModel.positionMode = "flex";
+  question.popupModel.showPointer = true;
   question.dropdownListModel["listModel"].searchEnabled = question.searchEnabled;
 }
 
@@ -62,7 +64,7 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     this.readOnly = this.optionsReadOnly;
     this.update();
   }
-  dispose() {
+  public dispose(): void {
     super.dispose();
     this.onEndEditing();
     this.survey = undefined;

@@ -50,6 +50,8 @@ export var danishStrings = {
     settingsTooltip: "Åbn indstillinger",
     surveySettings: "Indstillinger for undersøgelse",
     surveySettingsTooltip: "Åbn undersøgelsesindstillinger",
+    themeSettings: "Temaindstillinger",
+    themeSettingsTooltip: "Åbn temaindstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -126,6 +128,7 @@ export var danishStrings = {
     translationPropertyGridTitle: "Sprogindstillinger",
     themePropertyGridTitle: "Temaindstillinger",
     translationLanguages: "Sprog",
+    translationDeleteLanguage: "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?",
     translationAddLanguage: "Vælg et sprog at oversætte",
     translationShowAllStrings: "Vis alle tekststrenge",
     translationShowUsedStringsOnly: "Kun brugte strenge",
@@ -133,10 +136,13 @@ export var danishStrings = {
     translationNoStrings: "Ingen tekststrenge at oversætte. Ret filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
+    translateUsigAI: "Oversæt automatisk alle",
+    translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    themeResetButton: "Nulstil temaindstillinger til standard",
     bold: "Modig",
     italic: "Kursiv",
     underline: "Understrege",
@@ -162,9 +168,13 @@ export var danishStrings = {
       question_visibilityName: "Vis (skjul) spørgsmål",
       question_enableName: "Aktivér (deaktiver) spørgsmål",
       question_requireName: "Gør spørgsmål påkrævet",
+      question_resetValueName: "Nulstil spørgsmålsværdi",
+      question_setValueName: "Angiv spørgsmålsværdi",
       column_visibilityName: "Vis (skjul) kolonne",
       column_enableName: "Aktivér (deaktiver) kolonne",
       column_requireName: "Gør kolonne påkrævet",
+      column_resetValueName: "Nulstil kolonneværdi",
+      column_setValueName: "Angiv kolonneværdi",
       trigger_completeName: "Komplet undersøgelse",
       trigger_setvalueName: "Indstil svar",
       trigger_copyvalueName: "Kopier svar",
@@ -191,9 +201,14 @@ export var danishStrings = {
       question_visibilityText: "Gør spørgsmål {0} synlige", //{0} question name
       question_enableText: "Foretag spørgsmål{0} aktiver", //{0} question name
       question_requireText: "Gør spørgsmål {0} påkrævet", //{0} question name
+      question_resetValueText: "Nulstil værdi for spørgsmål: {0}",
+      question_setValueText: "Tildel værdi: {1} til spørgsmål: {0}",
       column_visibilityText: "Gør kolonne {0} af spørgsmål {1} synlig", //{0} column name, {1} question name
       column_enableText: "Få kolonne {0} af spørgsmål {1} aktivere", //{0} column name, {1} question name
       column_requireText: "Gøre kolonne {0} af spørgsmål {1} påkrævet", //{0} column name, {1} question name
+      column_resetValueText: "Nulstil celleværdi for kolonne: {0}",
+      column_setValueText: "Tildel celleværdi: {1} til kolonne: {0}",
+      setValueExpressionPlaceholder: " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet.",
       trigger_completeText: "Undersøgelsen bliver afsluttet",
       trigger_setvalueText: "Sæt spørgsmålstegn ved: {0} værdi {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klar spørgsmålsværdi: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var danishStrings = {
     fastEntry: "Fast Entry",
     fastEntryNonUniqueError: "Værdien '{0}' er ikke unik",
     fastEntryChoicesCountError: "Begræns antallet af varer fra {0} til {1}",
+    fastEntryChoicesMinCountError: "Indtast mindst {0} punkter",
     fastEntryPlaceholder: "Du kan indstille data i følgende format:\nværdi1|tekst\nværdi2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -277,6 +293,7 @@ export var danishStrings = {
     cellsEmptyRowsColumns: "Der skal være mindst én kolonne eller række",
     showPreviewBeforeComplete: "Få vist et eksempel på svarene, før du indsender undersøgelsen",
     overridingPropertyPrefix: "Indstillet af ",
+    resetToDefaultCaption: "Nulstille",
     propertyIsEmpty: "Indtast en værdi",
     propertyIsNoUnique: "Indtast en unik værdi",
     propertyNameIsNotUnique: "Indtast et unikt navn",
@@ -322,6 +339,8 @@ export var danishStrings = {
     choicesOrder: "Vælg rækkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er påkrævet?",
+    markRequired: "Markér efter behov",
+    removeRequiredMark: "Fjern det påkrævede mærke",
     isAllRowRequired: "Kræv svar for alle rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
@@ -403,7 +422,12 @@ export var danishStrings = {
       imageHeight: "Billedhøjde (i CSS-accepterede værdier)",
       imageWidth: "Billedbredde (i CSS-accepterede værdier)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Tidsgrænse for at afslutte siden (i sekunder)"
     },
     question: {
@@ -640,6 +664,9 @@ export var danishStrings = {
   pv: {
     "true": "sand",
     "false": "falsk",
+    file: "Lokale filer",
+    camera: "Kamera",
+    "file-camera": "Lokale filer eller kamera",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -902,6 +929,8 @@ export var danishStrings = {
     descriptionLocation: "Beskrivelse placering",
     defaultValueExpression: "Standardværdiudtryk",
     requiredIf: "Påkrævet, hvis",
+    resetValueIf: "Nulstil værdi, hvis",
+    setValueIf: "Angiv værdi, hvis",
     validators: "validators",
     bindings: "Bindings",
     renderAs: "Gengiv som",
@@ -978,6 +1007,7 @@ export var danishStrings = {
     "--base-unit": "Basisenhed",
     groupGeneral: "Generel",
     groupAdvanced: "Avanceret",
+    groupHeader: "Header",
     themeName: "Tema",
     themeMode: "Spørgsmål udseende",
     themeModePanels: "Standard",
@@ -988,11 +1018,15 @@ export var danishStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Hover",
     primaryLightColor: "Valgte",
+    coverTitleForecolor: "Titel forfarve",
+    coverOverlapEnabled: "Overlapning",
     backgroundDimColor: "Baggrundsfarve",
     backgroundImage: "Baggrundsbillede",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Dække",
     backgroundImageFitContain: "Indeholde",
+    backgroundImageFitFill: "Stræk",
+    backgroundImageFitTile: "Flise",
     backgroundOpacity: "Opacitet",
     backgroundImageAttachmentFixed: "Fast",
     backgroundImageAttachmentScroll: "Rulle",
@@ -1016,6 +1050,7 @@ export var danishStrings = {
     fontFamily: "Skrifttypefamilie",
     fontSize: "Skrifttypestørrelse",
     color: "Farve",
+    placeholderColor: "Pladsholderfarve",
     size: "Størrelse",
     fontWeightRegular: "Regelmæssig",
     fontWeightHeavy: "Tung",
@@ -1036,6 +1071,26 @@ export var danishStrings = {
     boxShadowInner: "Indre",
     questionShadow: "Skyggeeffekter",
     editorShadow: "Skyggeeffekter for inputelement",
+    headerView: "Udsigt",
+    headerViewBasic: "Grundlæggende",
+    headerViewAdvanced: "Avanceret",
+    coverInheritWidthFrom: "Bredde på indholdsområde",
+    coverInheritWidthFromSurvey: "Samme som undersøgelse",
+    coverInheritWidthFromPage: "Tilpas til side",
+    coverTextAreaWidth: "Tekstbredde",
+    coverBackgroundColorSwitch: "Baggrundsfarve",
+    coverBackgroundColorNone: "Ingen",
+    coverBackgroundColorAccentColor: "Accent farve",
+    coverBackgroundColorCustom: "Sædvane",
+    horizontalAlignmentLeft: "Venstre",
+    horizontalAlignmentCenter: "Midte",
+    horizontalAlignmentRight: "Højre",
+    verticalAlignmentTop: "Top",
+    verticalAlignmentMiddle: "Midte",
+    verticalAlignmentBottom: "Bund",
+    logoPosition: "Logo Position",
+    coverTitlePosition: "Titel Position",
+    coverDescriptionPosition: "Beskrivelse Position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1741,3 +1796,66 @@ editorLocalization.locales["da"] = danishStrings;
 // names.layered: "Layered" => "Lagdelte"
 // names.solid: "Solid" => "Fast"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Er du sikker på, at du ønsker at slette alle strenge for dette sprog?"
+// ed.themeResetButton: "Reset theme settings to default" => "Nulstil temaindstillinger til standard"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Pladsholderfarve"
+// ed.themeSettings: "Theme Settings" => "Temaindstillinger"
+// ed.themeSettingsTooltip: "Open theme settings" => "Åbn temaindstillinger"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Nulstille"
+// pv.file: "Local files" => "Lokale filer"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Oversæt automatisk alle"
+// ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenge"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Indtast mindst {0} punkter"
+// lg.question_resetValueName: "Reset question value" => "Nulstil spørgsmålsværdi"
+// lg.column_resetValue: "Reset column value" => "Nulstil kolonneværdi"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Markér efter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern det påkrævede mærke"
+// p.resetValueIf: "Reset value if" => "Nulstil værdi, hvis"
+// lg.question_setValueName: "Set question value" => "Angiv spørgsmålsværdi"
+// lg.column_resetValueName: "Reset column value" => "Nulstil kolonneværdi"
+// lg.column_setValueName: "Set column value" => "Angiv kolonneværdi"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Et udtryk, hvis resultat vil blive tildelt målspørgsmålet."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Angiv værdi, hvis"
+// theme.groupHeader: "Header" => "Header"
+// theme.coverTitleForecolor: "Title forecolor" => "Titel forfarve"
+// theme.coverOverlapEnabled: "Overlap" => "Overlapning"
+// theme.backgroundImageFitFill: "Stretch" => "Stræk"
+// theme.backgroundImageFitTile: "Tile" => "Flise"
+// theme.headerView: "View" => "Udsigt"
+// theme.headerViewBasic: "Basic" => "Grundlæggende"
+// theme.headerViewAdvanced: "Advanced" => "Avanceret"
+// theme.coverInheritWidthFrom: "Content area width" => "Bredde på indholdsområde"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøgelse"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpas til side"
+// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.coverBackgroundColorSwitch: "Background color" => "Baggrundsfarve"
+// theme.coverBackgroundColorNone: "None" => "Ingen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Accent farve"
+// theme.coverBackgroundColorCustom: "Custom" => "Sædvane"
+// theme.horizontalAlignmentLeft: "Left" => "Venstre"
+// theme.horizontalAlignmentCenter: "Center" => "Midte"
+// theme.horizontalAlignmentRight: "Right" => "Højre"
+// theme.verticalAlignmentTop: "Top" => "Top"
+// theme.verticalAlignmentMiddle: "Middle" => "Midte"
+// theme.verticalAlignmentBottom: "Bottom" => "Bund"
+// theme.logoPosition: "Logo Position" => "Logo Position"
+// theme.coverTitlePosition: "Title Position" => "Titel Position"
+// theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Position"
+// lg.question_resetValueText: "reset value for question: {0}" => "Nulstil værdi for spørgsmål: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Tildel værdi: {1} til spørgsmål: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Nulstil celleværdi for kolonne: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tildel celleværdi: {1} til kolonne: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

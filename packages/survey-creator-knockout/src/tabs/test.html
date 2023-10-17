@@ -1,13 +1,8 @@
 <div class="svc-creator-tab__content svc-test-tab__content"
   data-bind="css: { 'svc-creator-tab__content--with-toolbar' : isPageToolbarVisible }">
-  <div class="svc-plugin-tab__content" data-bind="event: { scroll: $data.onScroll }">
+  <div class="svc-plugin-tab__content">
     <survey-simulator params="model: simulator"></survey-simulator>
-    <!-- ko ifnot: isRunning -->
-    <div role="button" class="svc-preview__test-again svc-btn"
-      data-bind="click: testAgainAction.action, key2click, clickBubble: false">
-      <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: testAgainAction.title">
-      </span>
-    </div>
+    <!-- ko if: showResults -->
     <survey-results params="survey: survey"></survey-results>
     <!-- /ko -->
   </div>

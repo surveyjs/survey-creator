@@ -107,7 +107,7 @@ export class ResizeManager {
     return resizer;
   }
 
-  dispose() {
+  public dispose(): void {
     this.eastResizer.removeEventListener(this.getMouseEvent("mousedown"), this.onMouseDownListener);
     this.eastResizer.remove();
     this.eastResizer = undefined;

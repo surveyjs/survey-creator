@@ -1,4 +1,4 @@
-import { defaultV2Css, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
+import { defaultV2Css, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
@@ -47,10 +47,10 @@ export function getNextItemValue(prefix: string, choices: ItemValue[]): string |
 }
 export function getNextItemText(choices: ItemValue[]): string {
   const ln = choices.length;
-  if(ln === 0) return "";
-  if(!choices[ln - 1].text || choices[ln - 1].text === choices[ln - 1].value) return "";
+  if (ln === 0) return "";
+  if (!choices[ln - 1].text || choices[ln - 1].text === choices[ln - 1].value) return "";
   const values = [];
-  choices.forEach(item => { if(item.hasText) values.push(item.text); });
+  choices.forEach(item => { if (item.hasText) values.push(item.text); });
   choices.map((item: ItemValue) => item.text);
   const nextValue = getNextValue("", values);
   return !!nextValue ? nextValue.toString() : "";
@@ -90,7 +90,7 @@ export function getNextValue(prefix: string, values: any[]): string | number {
     } while (hasValueInArray(values, newValue));
     return newValue;
   }
-  if(!prefix) {
+  if (!prefix) {
     prefix = values[values.length - 1];
   }
   return prefix + 1;
@@ -286,6 +286,8 @@ export function copyCssClasses(dest: any, source: any) {
 export function assignDefaultV2Classes(destination: any, questionType: string) {
   copyCssClasses(destination, defaultV2Css.question);
   copyCssClasses(destination, defaultV2Css[questionType]);
+  destination.hasErrorTop = "";
+  destination.hasErrorBottom = "";
 }
 
 export function wrapTextByCurlyBraces(text: string) {
@@ -307,7 +309,7 @@ export function notShortCircuitAnd(...args: Array<boolean>): boolean {
 export const imageMimeTypes = "image/png, image/gif, image/jpeg, image/apng, image/avif, image/svg+xml, image/webp";
 
 export function getAcceptedTypesByContentMode(contentMode: string) {
-  if(["auto", "image"].indexOf(contentMode) > -1) {
+  if (["auto", "image"].indexOf(contentMode) > -1) {
     return imageMimeTypes;
   }
   else if (contentMode == "video") {
@@ -323,7 +325,7 @@ export function getQuestionFromObj(obj: SurveyElement): Question {
 }
 
 export function ingectAlpha(baseColor: any, alpha: number): any {
-  if(!!baseColor && alpha !== undefined) {
+  if (!!baseColor && alpha !== undefined) {
     const r = parseInt(baseColor.slice(1, 3), 16);
     const g = parseInt(baseColor.slice(3, 5), 16);
     const b = parseInt(baseColor.slice(5, 7), 16);
@@ -332,13 +334,13 @@ export function ingectAlpha(baseColor: any, alpha: number): any {
   }
 }
 
-export function convertRgbaToString (rgbValues: Array<number>, alpha: number): string {
+export function convertRgbaToString(rgbValues: Array<number>, alpha: number): string {
   return `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, ${alpha})`;
 }
 
 export function parseRgbaFromString(value: string): Array<number> {
   const matchRgb = value.match(/\((.*)\)/);
-  if(matchRgb) {
+  if (matchRgb) {
     return matchRgb[1].split(",").map(i => parseFloat(i));
   } else {
     return [];
@@ -347,9 +349,9 @@ export function parseRgbaFromString(value: string): Array<number> {
 
 export function parseColor(value: string): { color: string, opacity: number } {
   const rgbValues = parseRgbaFromString(value);
-  if(rgbValues.length !== 0) {
+  if (rgbValues.length !== 0) {
     let opacity = 1;
-    if(rgbValues.length == 4) {
+    if (rgbValues.length == 4) {
       opacity = rgbValues.pop();
     }
     const color = rgbValues.reduce((res: string, color: number) => {
@@ -383,14 +385,14 @@ export function RGBToHSB(r, g, b) {
 
 export function assign(...inputs: Array<any>) {
   const objects = (inputs || []).filter(obj => !!obj);
-  if(objects.length <= 1) {
+  if (objects.length <= 1) {
     return;
   }
-  if(objects.length == 2) {
+  if (objects.length == 2) {
     Object.keys(objects[1]).forEach(key => objects[0][key] = objects[1][key]);
     return;
   }
-  for(let i = 1; i < objects.length; i++) {
+  for (let i = 1; i < objects.length; i++) {
     assign(objects[0], objects[i]);
   }
 }
@@ -425,5 +427,19 @@ export class ColorCalculator {
 
     this.colorSettings.newColorLight = convertRgbaToString(newPrimaryColorLightRGB, this.colorSettings.lightColorAlpha);
     this.colorSettings.newColorDark = convertRgbaToString(newPrimaryColorDarkRGB, this.colorSettings.darkColorAlpha);
+  }
+}
+
+export function saveToFileHandler(fileName: string, blob: Blob) {
+  if (!window) return;
+  if (window.navigator["msSaveOrOpenBlob"]) {
+    window.navigator["msSaveBlob"](blob, fileName);
+  } else {
+    const elem = window.document.createElement("a");
+    elem.href = window.URL.createObjectURL(blob);
+    elem.download = fileName;
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
   }
 }

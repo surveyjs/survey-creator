@@ -79,3 +79,22 @@ test.page(urlByPage)("By page edit mode", async (t) => {
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").exists).notOk()
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 3']").exists).ok();
 });
+test.page(urlByPage)("By page edit mode - delete second page", async (t) => {
+  const pageToolbarActions = Selector(".svc-page__content-actions").filterVisible().find(".sv-action").filterVisible();
+  const deleteActionButton = pageToolbarActions.find('button[title="Delete"]');
+  await t
+    .maximizeWindow()
+
+    .click(getAddNewQuestionButton())
+    .expect(Selector("span").withText("question1").visible).ok()
+    .click(Selector(".svc-page-navigator-item-content").withText("page2"))
+    .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 2']").visible).ok()
+    .click(getAddNewQuestionButton())
+    .click(Selector(".svc-page-navigator-item-content").withText("page1"))
+    .expect(Selector("span").withText("question1").visible).ok()
+    .click(Selector(".svc-page-navigator-item-content").withText("page2"))
+    .expect(Selector("span").withText("question2").visible).ok()
+    .click(deleteActionButton)
+    .expect(Selector(".svc-page-navigator-item-content").withText("page1").visible).ok()
+    .expect(Selector("span").withText("question1").visible).ok();
+});

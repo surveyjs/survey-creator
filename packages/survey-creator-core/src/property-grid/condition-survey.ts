@@ -339,6 +339,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
               name: "conjunction",
               type: "dropdown",
               renderAs: "logicoperator",
+              searchEnabled: false,
               titleLocation: "hidden",
               showOptionsCaption: false,
               visibleIf: "{panelIndex} > 0",
@@ -403,16 +404,6 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       ]
     };
   }
-  /*
-  protected createSurvey(): SurveyModel {
-    const res = super.createSurvey();
-    res.onUpdateQuestionCssClasses.add((sender: SurveyModel, options: any) => {
-      if (options.question.name !== "panel") return;
-      options.cssClasses.iconRemove = "svc-creator-condition__editor-remove";
-    });
-    return res;
-  }
-*/
   protected getSurveyCreationReason(): string {
     return "condition-builder";
   }
@@ -530,10 +521,10 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       const questionName = panel.getQuestionByName("questionName").value;
       const json = this.getQuestionConditionJson(questionName);
       const qType = !!json ? json.type : null;
-
+      const condQuestion = this.getConditionQuestion(questionName);
       opt.choices.forEach((choice, index) => {
         let isOperatorEnabled = ConditionEditor.isOperatorEnabled(qType, settings.operators[choice.value]);
-        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, qType, choice.value, isOperatorEnabled);
+        isOperatorEnabled = this.options.isConditionOperatorEnabled(questionName, condQuestion, choice.value, isOperatorEnabled);
         choice.setIsEnabled(isOperatorEnabled);
         choice.setIsVisible(isOperatorEnabled);
       });

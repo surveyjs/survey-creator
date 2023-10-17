@@ -1,7 +1,7 @@
 import {
   setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
-  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation
+  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem
 } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
@@ -86,8 +86,7 @@ test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
-  const CheckboxItem = Selector("[aria-label='Checkboxes toolbox item']");
+  const CheckboxItem = Selector("[aria-label='Checkboxes']");
 
   await setJSON({ pages: [{ name: "page1" }] });
   await t
@@ -120,8 +119,8 @@ test("toolboxLocation sidebar", async (t) => {
     .expect(toolboxButtonSelector.visible).ok();
 
   await t
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, EmptyPage);
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, EmptyPage);
   await t.expect(await getPagesLength()).eql(1);
 
   await t
@@ -221,16 +220,16 @@ test("tablet size click outside", async (t) => {
   const shadowArea = Selector(".svc-side-bar__shadow");
 
   let isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).notOk;
+  await t.expect(isSidebarOpen).notOk();
 
   await t.click(showSidebarButton);
   isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).ok;
+  await t.expect(isSidebarOpen).ok();
 
   await t.click(shadowArea, { offsetX: 10 });
 
   isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).notOk;
+  await t.expect(isSidebarOpen).notOk();
 });
 
 test("Focus in Property grid", async (t) => {
@@ -249,17 +248,34 @@ test("Focus in Property grid", async (t) => {
   const hideSidebarButton = Selector("[title='Hide Panel']");
 
   let isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).notOk;
+  await t.expect(isSidebarOpen).notOk();
 
   await t.click(Selector(".svc-question__adorner"), { offsetX: 5, offsetY: 5 });
   await t.expect(Selector(".svc-question__adorner button").withText("Settings").visible).ok();
   await t.click(Selector(".svc-question__adorner button").withText("Settings"));
   isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).ok;
-  await t.expect(Selector("input").withText("test_q").focused).ok;
+  await t.expect(isSidebarOpen).ok();
+  await t.expect(Selector(".spg-question[data-name=name] input").focused).ok();
 
   await t.click(hideSidebarButton);
   isSidebarOpen = await getSidebarOpen();
-  await t.expect(isSidebarOpen).notOk;
-  await t.expect(Selector(".svc-question__content").focused).ok;
+  await t.expect(isSidebarOpen).notOk();
+  await t.expect(Selector(".svc-question__content").focused).ok();
+});
+
+test("No Focus on open Property grid Mobile", async (t) => {
+  await setJSON({
+    questions: [
+      {
+        type: "text",
+        name: "test_q"
+      }
+    ]
+  });
+  await t.resizeWindow(500, 800);
+
+  await t.click(Selector(".svc-question__adorner"), { offsetX: 5, offsetY: 5 });
+  await t.expect(Selector(".svc-question__adorner button[title='Open settings']").visible).ok();
+  await t.click(Selector(".svc-question__adorner button[title='Open settings']"));
+  await t.expect(Selector(".spg-question[data-name=name] input").focused).notOk();
 });

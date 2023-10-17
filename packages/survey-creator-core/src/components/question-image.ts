@@ -1,5 +1,5 @@
 
-import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer } from "survey-core";
+import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -21,9 +21,10 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.storeDataAsText = false;
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
-      if(!!fileToUpload) {
+      if (!!fileToUpload) {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
+          o.callback(status, [{ content: link, file: o.files[0] }]);
         });
       }
     });
@@ -77,5 +78,14 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
 
   public get chooseImageText(): string {
     return getLocString("ed.imageChooseImage");
+  }
+  public css() {
+    return new CssClassBuilder()
+      .append(super.css())
+      .append("svc-question__content--loading", this.isUploading).toString();
+  }
+  public dispose(): void {
+    super.dispose();
+    this.questionRoot = undefined;
   }
 }

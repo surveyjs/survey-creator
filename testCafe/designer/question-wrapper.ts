@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -163,13 +163,13 @@ test("Single input question wrapper action change require", async (t) => {
   let title = await questionTitle.innerText;
   await t
     .expect(normalize(title)).eql("1. question1")
-    .expect(requiredActionButton.parent(".sv-action").hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(requiredActionButton.hasClass("svc-required-action--active")).notOk()
 
     .click(requiredActionButton);
   title = await questionTitle.innerText;
   await t
     .expect(normalize(title)).eql("1. question1 *")
-    .expect(requiredActionButton.parent(".sv-action").hasClass("sv-action-bar-item--secondary")).ok();
+    .expect(requiredActionButton.hasClass("svc-required-action--active")).ok();
 });
 
 test("Single input question wrapper action delete", async (t) => {
@@ -209,11 +209,10 @@ test("Matrix dropdown with detail panel", async (t) => {
   await ClientFunction(() => {
     window["creator"].survey.getQuestionByName("question1").detailPanelMode = "underRow";
   })();
-  const SingleInputItem = Selector("[aria-label='Single-Line Input toolbox item']");
   await t
     .expect(Selector(".sd-question[data-name=question1] .svc-panel__placeholder").withText("Drop a question").visible).ok()
-    .hover(SingleInputItem)
-    .dragToElement(SingleInputItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
+    .hover(SingleInputToolboxItem)
+    .dragToElement(SingleInputToolboxItem, Selector(".sd-question[data-name=question1] .svc-panel__placeholder_frame"), { speed: 0.5 })
     .expect((Selector(".sd-question[data-name=question1] .sd-table__row").nth(1).find("#convertTo").withText("Single-Line Input").visible)).ok();
 
 });
@@ -244,12 +243,9 @@ test("Rating question required property", async (t) => {
     .hover(getToolboxItemByText("Rating Scale"))
     .click(getToolboxItemByText("Rating Scale"))
     .expect(isrequiredButton.visible).ok()
-    .expect(isrequiredButton.classNames).notContains("sv-action-bar-item--secondary")
-    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-inactive_16x16")
-
+    .expect(isrequiredButton.find(".svc-required-action").classNames).notContains("svc-required-action--active")
     .click(isrequiredButton)
-    .expect(isrequiredButton.classNames).contains("sv-action-bar-item--secondary")
-    .expect(isrequiredButton.find("use").getAttribute("xlink:href")).eql("#icon-switch-active_16x16");
+    .expect(isrequiredButton.find(".svc-required-action").classNames).contains("svc-required-action--active");
 });
 
 fixture`${title}`.page`${urlDropdownCollapseView}`.beforeEach(async (t) => {

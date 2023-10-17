@@ -50,6 +50,8 @@ var persianStrings = {
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     surveySettings: "تنظیمات نظرسنجی",
     surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
+    themeSettings: "تنظیمات تم",
+    themeSettingsTooltip: "باز کردن تنظیمات تم",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -126,6 +128,7 @@ var persianStrings = {
     translationPropertyGridTitle: "تنظیمات زبان",
     themePropertyGridTitle: "تنظیمات تم",
     translationLanguages: "زبان",
+    translationDeleteLanguage: "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟",
     translationAddLanguage: "زبانی را برای ترجمه انتخاب کنید",
     translationShowAllStrings: "نمایش تمام عبارات",
     translationShowUsedStringsOnly: "فقط از عبارات استفاده کنید",
@@ -133,10 +136,13 @@ var persianStrings = {
     translationNoStrings: "هیچ عبارتی برای ترجمه نیست، لطفا فیلتر را عوض کنید.",
     translationExportToSCVButton: "برون بری به CSV",
     translationImportFromSCVButton: "برون ریزی از CSV",
+    translateUsigAI: "ترجمه خودکار همه",
+    translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
+    themeResetButton: "بازنشانی تنظیمات تم به حالت پیشفرض",
     bold: "پررنگ",
     italic: "مورب",
     underline: "پایین خط",
@@ -162,9 +168,13 @@ var persianStrings = {
       question_visibilityName: " قابلیت رویت سوال",
       question_enableName: "فعال/غیرفعال کردن سوال ",
       question_requireName: "سوال اختیاری موردنیاز",
+      question_resetValueName: "بازنشانی مقدار سؤال",
+      question_setValueName: "تنظیم مقدار سؤال",
       column_visibilityName: "نمایش/پنهان کردن ستون",
       column_enableName: "فعال/غیرفعال کردن ستون",
       column_requireName: "ستون مورد نیاز است",
+      column_resetValueName: "بازنشانی مقدار ستون",
+      column_setValueName: "تنظیم مقدار ستون",
       trigger_completeName: "تکمیل نظرسنجی",
       trigger_setvalueName: "تنظیم عنوان سوال",
       trigger_copyvalueName: "کپی مقدار سوال",
@@ -191,9 +201,14 @@ var persianStrings = {
       question_visibilityText: "سوال {0} را قابل مشاهده کنید.", //{0} question name
       question_enableText: "فعال کردن سوال {0}", //{0} question name
       question_requireText: "ایجاد سوال {0} اجباری", //{0} question name
+      question_resetValueText: "بازنشانی مقدار برای سوال: {0}",
+      question_setValueText: "اختصاص مقدار: {1} به سوال: {0}",
       column_visibilityText: "ستون {0} سوال {1} را قابل مشاهده کنید", //{0} column name, {1} question name
       column_enableText: "ستون {0} سوال {1} را فعال کنید", //{0} column name, {1} question name
       column_requireText: "ستون {0} سوال {1} را الزامی کنید", //{0} column name, {1} question name
+      column_resetValueText: "تنظیم مجدد مقدار سلول برای ستون: {0}",
+      column_setValueText: "اختصاص مقدار سلول: {1} به ستون: {0}",
+      setValueExpressionPlaceholder: " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد.",
       trigger_completeText: "بررسی نظرسنجی تمام شد",
       trigger_setvalueText: "در سوال {0} مقدار {1} را قرار دهید", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "ارزش سوال روشن: {0}", //{0} question name
@@ -259,6 +274,7 @@ var persianStrings = {
     fastEntry: "تکمیل سریع",
     fastEntryNonUniqueError: "مقدار {0}» منحصر به فرد نیست",
     fastEntryChoicesCountError: "لطفا تعداد موارد را از {0} به {1} محدود کنید",
+    fastEntryChoicesMinCountError: "لطفا حداقل {0} مورد را وارد کنید",
     fastEntryPlaceholder: "شما می توانید داده ها را در قالب زیر تنظیم کنید:\nvalue1|متن\nارزش 2",
     formEntry: "تکمیل فرم",
     testService: "بررسی سرویس",
@@ -277,6 +293,7 @@ var persianStrings = {
     cellsEmptyRowsColumns: "حداقل باید یک سطر یا ستون وجود داشته باشد.",
     showPreviewBeforeComplete: "پیش نمایش پاسخ قبل از ارسال نظرسنجی",
     overridingPropertyPrefix: "تنظیم بر اساس ",
+    resetToDefaultCaption: "تنظیم مجدد",
     propertyIsEmpty: "لطفا یک مقدار وارد کنید",
     propertyIsNoUnique: "لطفاً یک مقدار منحصر به فرد وارد کنید",
     propertyNameIsNotUnique: "لطفاً یک نام منحصر به فرد وارد کنید",
@@ -322,6 +339,8 @@ var persianStrings = {
     choicesOrder: "ترتیب گزینه را انتخاب کنید",
     visible: "نمایش داده شود؟",
     isRequired: "ضروری است؟",
+    markRequired: "علامت گذاری به عنوان مورد نیاز",
+    removeRequiredMark: "حذف علامت مورد نیاز",
     isAllRowRequired: "نیاز به پاسخ برای همه سطرها",
     requiredErrorText: "متن خطای موردنیاز",
     startWithNewLine: "با سطر جدید شروع شود؟",
@@ -403,7 +422,12 @@ var persianStrings = {
       imageHeight: "ارتفاع تصویر (در مقادیر پذیرفته شده توسط CSS)",
       imageWidth: "عرض تصویر) در مقادیر پذیرفته شده CSS ("
     },
+    // survey templates
+    survey: {
+      title: "عنوان"
+    },
     page: {
+      title: "عنوان",
       maxTimeToFinish: "محدودیت زمانی برای تمام کردن صفحه (به ثانیه)"
     },
     question: {
@@ -640,6 +664,9 @@ var persianStrings = {
   pv: {
     "true": "واقعی",
     "false": "نادرست",
+    file: "پروندههای محلی",
+    camera: "دوربین",
+    "file-camera": "فایل های محلی یا دوربین",
     inherit: "ارث بری",
     show: "آشکار",
     hide: "پنهان",
@@ -902,6 +929,8 @@ var persianStrings = {
     descriptionLocation: "شرح محل",
     defaultValueExpression: "عبارت مقدار پیشفرض",
     requiredIf: "اجبار اگر؟",
+    resetValueIf: "بازنشانی مقدار اگر",
+    setValueIf: "تنظیم مقدار اگر",
     validators: "اعتبارسنج ها",
     bindings: "پیوندها",
     renderAs: "Render به عنوان",
@@ -978,6 +1007,7 @@ var persianStrings = {
     "--base-unit": "واحد پایه",
     groupGeneral: "عمومی",
     groupAdvanced: "پیشرفته",
+    groupHeader: "هدر",
     themeName: "تم",
     themeMode: "ظاهر سوال",
     themeModePanels: "پیش فرض",
@@ -988,11 +1018,15 @@ var persianStrings = {
     primaryDefaultColor: "پیش فرض",
     primaryDarkColor: "شناور",
     primaryLightColor: "انتخاب",
+    coverTitleForecolor: "پیش زمینه عنوانcolor",
+    coverOverlapEnabled: "همپوشانی",
     backgroundDimColor: "رنگ پسزمینه",
     backgroundImage: "تصویر زمینه",
     backgroundImageFitAuto: "خودکار",
     backgroundImageFitCover: "پوشش",
     backgroundImageFitContain: "حاوی",
+    backgroundImageFitFill: "کشش",
+    backgroundImageFitTile: "کاشی",
     backgroundOpacity: "کدورت",
     backgroundImageAttachmentFixed: "ثابت",
     backgroundImageAttachmentScroll: "حرکت",
@@ -1016,6 +1050,7 @@ var persianStrings = {
     fontFamily: "خانواده قلم",
     fontSize: "اندازه قلم",
     color: "رنگ",
+    placeholderColor: "رنگ نگهدارنده",
     size: "اندازه",
     fontWeightRegular: "منظم",
     fontWeightHeavy: "سنگین",
@@ -1036,6 +1071,26 @@ var persianStrings = {
     boxShadowInner: "درونی",
     questionShadow: "جلوه های سایه",
     editorShadow: "عناصر ورودی اثرات سایه",
+    headerView: "مشاهده",
+    headerViewBasic: "اساسی",
+    headerViewAdvanced: "پیشرفته",
+    coverInheritWidthFrom: "عرض منطقه محتوا",
+    coverInheritWidthFromSurvey: "همانند نظرسنجی",
+    coverInheritWidthFromPage: "متناسب با صفحه",
+    coverTextAreaWidth: "عرض متن",
+    coverBackgroundColorSwitch: "رنگ پسزمینه",
+    coverBackgroundColorNone: "هیچ کدام",
+    coverBackgroundColorAccentColor: "رنگ لهجه",
+    coverBackgroundColorCustom: "سفارشی",
+    horizontalAlignmentLeft: "چپ",
+    horizontalAlignmentCenter: "مرکز",
+    horizontalAlignmentRight: "راست",
+    verticalAlignmentTop: "بالا",
+    verticalAlignmentMiddle: "میانه",
+    verticalAlignmentBottom: "پایین",
+    logoPosition: "موقعیت لوگو",
+    coverTitlePosition: "موقعیت عنوان",
+    coverDescriptionPosition: "شرح موقعیت",
     names: {
       default: "پیش فرض",
       sharp: "تیز",
@@ -1506,3 +1561,56 @@ editorLocalization.locales["fa"] = persianStrings;
 // names.layered: "Layered" => "لایه"
 // names.solid: "Solid" => "جامد"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "ایا مطمئن هستید که می خواهید تمام رشته ها را برای این زبان حذف کنید؟"
+// ed.themeResetButton: "Reset theme settings to default" => "بازنشانی تنظیمات تم به حالت پیشفرض"
+// theme.placeholderColor: "Placeholder color" => "رنگ نگهدارنده"
+// ed.themeSettings: "Theme Settings" => "تنظیمات تم"
+// ed.themeSettingsTooltip: "Open theme settings" => "باز کردن تنظیمات تم"
+// pe.resetToDefaultCaption: "Reset" => "تنظیم مجدد"
+// pv.file: "Local files" => "پروندههای محلی"
+// pv.camera: "Camera" => "دوربین"
+// pv.file-camera: "Local files or camera" => "فایل های محلی یا دوربین"
+// ed.translateUsigAI: "Auto-translate All" => "ترجمه خودکار همه"
+// ed.translationDialogTitle: "Untranslated strings" => "رشتههای ترجمهنشده"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "لطفا حداقل {0} مورد را وارد کنید"
+// lg.question_resetValueName: "Reset question value" => "بازنشانی مقدار سؤال"
+// lg.column_resetValue: "Reset column value" => "بازنشانی مقدار ستون"
+// pe.markRequired: "Mark as required" => "علامت گذاری به عنوان مورد نیاز"
+// pe.removeRequiredMark: "Remove the required mark" => "حذف علامت مورد نیاز"
+// p.resetValueIf: "Reset value if" => "بازنشانی مقدار اگر"
+// lg.question_setValueName: "Set question value" => "تنظیم مقدار سؤال"
+// lg.column_resetValueName: "Reset column value" => "بازنشانی مقدار ستون"
+// lg.column_setValueName: "Set column value" => "تنظیم مقدار ستون"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " یک عبارت که نتیجه ان به سوال هدف اختصاص داده خواهد شد."
+// survey.title: "Title" => "عنوان"
+// page.title: "Title" => "عنوان"
+// p.setValueIf: "Set value if" => "تنظیم مقدار اگر"
+// theme.groupHeader: "Header" => "هدر"
+// theme.coverTitleForecolor: "Title forecolor" => "پیش زمینه عنوانcolor"
+// theme.coverOverlapEnabled: "Overlap" => "همپوشانی"
+// theme.backgroundImageFitFill: "Stretch" => "کشش"
+// theme.backgroundImageFitTile: "Tile" => "کاشی"
+// theme.headerView: "View" => "مشاهده"
+// theme.headerViewBasic: "Basic" => "اساسی"
+// theme.headerViewAdvanced: "Advanced" => "پیشرفته"
+// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقه محتوا"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "همانند نظرسنجی"
+// theme.coverInheritWidthFromPage: "Fit to page" => "متناسب با صفحه"
+// theme.coverTextAreaWidth: "Text width" => "عرض متن"
+// theme.coverBackgroundColorSwitch: "Background color" => "رنگ پسزمینه"
+// theme.coverBackgroundColorNone: "None" => "هیچ کدام"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "رنگ لهجه"
+// theme.coverBackgroundColorCustom: "Custom" => "سفارشی"
+// theme.horizontalAlignmentLeft: "Left" => "چپ"
+// theme.horizontalAlignmentCenter: "Center" => "مرکز"
+// theme.horizontalAlignmentRight: "Right" => "راست"
+// theme.verticalAlignmentTop: "Top" => "بالا"
+// theme.verticalAlignmentMiddle: "Middle" => "میانه"
+// theme.verticalAlignmentBottom: "Bottom" => "پایین"
+// theme.logoPosition: "Logo Position" => "موقعیت لوگو"
+// theme.coverTitlePosition: "Title Position" => "موقعیت عنوان"
+// theme.coverDescriptionPosition: "Description Position" => "شرح موقعیت"
+// lg.question_resetValueText: "reset value for question: {0}" => "بازنشانی مقدار برای سوال: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "اختصاص مقدار: {1} به سوال: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "تنظیم مجدد مقدار سلول برای ستون: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "اختصاص مقدار سلول: {1} به ستون: {0}"

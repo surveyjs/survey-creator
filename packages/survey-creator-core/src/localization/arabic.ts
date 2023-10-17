@@ -50,6 +50,8 @@ export var arStrings = {
     settingsTooltip: "Open survey settings",
     surveySettings: "إعدادات الاستطلاع",
     surveySettingsTooltip: "افتح إعدادات الاستطلاع",
+    themeSettings: "إعدادات النسق",
+    themeSettingsTooltip: "فتح إعدادات النسق",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -126,6 +128,7 @@ export var arStrings = {
     translationPropertyGridTitle: "Language Settings",
     themePropertyGridTitle: "إعدادات النسق",
     translationLanguages: "Languages",
+    translationDeleteLanguage: "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟",
     translationAddLanguage: "Select language to translate",
     translationShowAllStrings: "Show all strings",
     translationShowUsedStringsOnly: "سلاسل مستعملة فقط",
@@ -133,10 +136,13 @@ export var arStrings = {
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
+    translateUsigAI: "ترجمة تلقائية للكل",
+    translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
+    themeResetButton: "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -162,9 +168,13 @@ export var arStrings = {
       question_visibilityName: "إظهار (إخفاء) سؤال",
       question_enableName: "تفعيل (تعطيل) سؤال",
       question_requireName: "جعل السؤال إلزامي",
+      question_resetValueName: "إعادة تعيين قيمة السؤال",
+      question_setValueName: "تعيين قيمة السؤال",
       column_visibilityName: "إظهار (إخفاء) العمود",
       column_enableName: "تمكين (تعطيل) العمود",
       column_requireName: "جعل العمود مطلوبا",
+      column_resetValueName: "إعادة تعيين قيمة العمود",
+      column_setValueName: "تعيين قيمة العمود",
       trigger_completeName: "أنهي الإستبيان",
       trigger_setvalueName: "تحديد قيمة السؤال",
       trigger_copyvalueName: "نسخ قيمة السؤال",
@@ -191,9 +201,14 @@ export var arStrings = {
       question_visibilityText: "جعل السؤال {0} مرئي", //{0} question name
       question_enableText: "جعل السؤال {0} مفعل", //{0} question name
       question_requireText: "جعل السؤال {0} إلزامي", //{0} question name
+      question_resetValueText: "إعادة تعيين قيمة السؤال: {0}",
+      question_setValueText: "تعيين قيمة: {1} السؤال: {0}",
       column_visibilityText: "جعل العمود {0} السؤال {1} مرئيا", //{0} column name, {1} question name
       column_enableText: "تمكين {0} عمود السؤال {1}", //{0} column name, {1} question name
       column_requireText: "جعل العمود {0} السؤال {1} مطلوبا", //{0} column name, {1} question name
+      column_resetValueText: "إعادة تعيين قيمة الخلية للعمود: {0}",
+      column_setValueText: "تعيين قيمة الخلية: {1} إلى العمود: {0}",
+      setValueExpressionPlaceholder: " تعبير سيتم تعيين نتيجته للسؤال الهدف.",
       trigger_completeText: "الإستبيان سيصبح مكتمل",
       trigger_setvalueText: "تثبيت إلى السؤال: {0} القيمة {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "قيمة سؤال واضحة: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var arStrings = {
     fastEntry: "إدخالات سريعة",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
+    fastEntryChoicesMinCountError: "الرجاء إدخال {0} العناصر على الأقل",
     fastEntryPlaceholder: "يمكنك تعيين البيانات بالتنسيق التالي:\nالقيمة1|النص\nقيمة2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -277,6 +293,7 @@ export var arStrings = {
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "معاينة الإجابات قبل إرسال الاستطلاع",
     overridingPropertyPrefix: "تم تعيينه بواسطة ",
+    resetToDefaultCaption: "اعاده تعيين",
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
@@ -322,6 +339,8 @@ export var arStrings = {
     choicesOrder: "إختر ترتيب الإختيارات",
     visible: "مرئي؟",
     isRequired: "مطلوب؟",
+    markRequired: "وضع علامة كمطلوب",
+    removeRequiredMark: "إزالة العلامة المطلوبة",
     isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
@@ -403,7 +422,12 @@ export var arStrings = {
       imageHeight: "ارتفاع الصورة (بالقيم المقبولة من CSS)",
       imageWidth: "عرض الصورة (بالقيم المقبولة من CSS)"
     },
+    // survey templates
+    survey: {
+      title: "عنوان"
+    },
     page: {
+      title: "عنوان",
       maxTimeToFinish: "الحد الزمني لإنهاء الصفحة (بالثواني)"
     },
     question: {
@@ -640,6 +664,9 @@ export var arStrings = {
   pv: {
     "true": "صحيح",
     "false": "خطأ",
+    file: "الملفات المحلية",
+    camera: "كاميرا",
+    "file-camera": "الملفات المحلية أو الكاميرا",
     inherit: "يَرث",
     show: "إظهار",
     hide: "إخفاء",
@@ -902,6 +929,8 @@ export var arStrings = {
     descriptionLocation: "موقع وصف السؤال",
     defaultValueExpression: "العملية الحسابية الإفتراضية",
     requiredIf: "مطلوب عندما",
+    resetValueIf: "إعادة تعيين القيمة إذا",
+    setValueIf: "تعيين قيمة إذا",
     validators: "المدققات",
     bindings: "الإرتباطات",
     renderAs: "عرض ك",
@@ -978,6 +1007,7 @@ export var arStrings = {
     "--base-unit": "وحدة القاعدة",
     groupGeneral: "عام",
     groupAdvanced: "متقدم",
+    groupHeader: "راس",
     themeName: "موضوع",
     themeMode: "مظهر السؤال",
     themeModePanels: "افتراضي",
@@ -988,11 +1018,15 @@ export var arStrings = {
     primaryDefaultColor: "افتراضي",
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
+    coverTitleForecolor: "اللون الأمامي للعنوان",
+    coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
     backgroundImage: "صورة الخلفية",
     backgroundImageFitAuto: "تلقائي",
     backgroundImageFitCover: "غطاء",
     backgroundImageFitContain: "احتوى",
+    backgroundImageFitFill: "مد",
+    backgroundImageFitTile: "بلاط",
     backgroundOpacity: "العتامه",
     backgroundImageAttachmentFixed: "ثابت",
     backgroundImageAttachmentScroll: "طومار",
@@ -1016,6 +1050,7 @@ export var arStrings = {
     fontFamily: "عائلة الخط",
     fontSize: "حجم الخط",
     color: "لون",
+    placeholderColor: "لون العنصر النائب",
     size: "حجم",
     fontWeightRegular: "منتظم",
     fontWeightHeavy: "ثقيل",
@@ -1036,6 +1071,26 @@ export var arStrings = {
     boxShadowInner: "باطن",
     questionShadow: "تأثيرات الظل",
     editorShadow: "تأثيرات ظل عنصر الإدخال",
+    headerView: "منظر",
+    headerViewBasic: "أساسي",
+    headerViewAdvanced: "متقدم",
+    coverInheritWidthFrom: "عرض منطقة المحتوى",
+    coverInheritWidthFromSurvey: "نفس المسح",
+    coverInheritWidthFromPage: "ملائمة للصفحة",
+    coverTextAreaWidth: "عرض النص",
+    coverBackgroundColorSwitch: "لون الخلفية",
+    coverBackgroundColorNone: "اي",
+    coverBackgroundColorAccentColor: "لون التمييز",
+    coverBackgroundColorCustom: "تقليد",
+    horizontalAlignmentLeft: "يسار",
+    horizontalAlignmentCenter: "مركز",
+    horizontalAlignmentRight: "يمين",
+    verticalAlignmentTop: "أعلى",
+    verticalAlignmentMiddle: "وسط",
+    verticalAlignmentBottom: "قاع",
+    logoPosition: "موضع الشعار",
+    coverTitlePosition: "منصب العنوان",
+    coverDescriptionPosition: "وصف الوظيفة الحالية",
     names: {
       default: "افتراضي",
       sharp: "حاد",
@@ -1465,3 +1520,67 @@ editorLocalization.locales["ar"] = arStrings;
 // names.layered: "Layered" => "الطبقات"
 // names.solid: "Solid" => "صلب"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟"
+// ed.themeResetButton: "Reset theme settings to default" => "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
+// ed.themeSettings: "Theme Settings" => "إعدادات النسق"
+// ed.themeSettingsTooltip: "Open theme settings" => "فتح إعدادات النسق"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "اعاده تعيين"
+// pv.file: "Local files" => "الملفات المحلية"
+// pv.camera: "Camera" => "كاميرا"
+// pv.file-camera: "Local files or camera" => "الملفات المحلية أو الكاميرا"
+// ed.translateUsigAI: "Auto-translate All" => "ترجمة تلقائية للكل"
+// ed.translationDialogTitle: "Untranslated strings" => "النصوص غير المترجمة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "الرجاء إدخال {0} العناصر على الأقل"
+// pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
+// pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"
+// lg.question_resetValueName: "Reset question value" => "إعادة تعيين قيمة السؤال"
+// lg.column_resetValue: "Reset column value" => "إعادة تعيين قيمة العمود"
+// p.resetValueIf: "Reset value if" => "إعادة تعيين القيمة إذا"
+
+// lg.question_setValueName: "Set question value" => "تعيين قيمة السؤال"
+// lg.column_resetValueName: "Reset column value" => "إعادة تعيين قيمة العمود"
+// lg.column_setValueName: "Set column value" => "تعيين قيمة العمود"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " تعبير سيتم تعيين نتيجته للسؤال الهدف."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "عنوان"
+// page.title: "Title" => "عنوان"
+// p.setValueIf: "Set value if" => "تعيين قيمة إذا"
+// theme.groupHeader: "Header" => "راس"
+// theme.coverTitleForecolor: "Title forecolor" => "اللون الأمامي للعنوان"
+// theme.coverOverlapEnabled: "Overlap" => "التداخل"
+// theme.backgroundImageFitFill: "Stretch" => "مد"
+// theme.backgroundImageFitTile: "Tile" => "بلاط"
+// theme.headerView: "View" => "منظر"
+// theme.headerViewBasic: "Basic" => "أساسي"
+// theme.headerViewAdvanced: "Advanced" => "متقدم"
+// theme.coverInheritWidthFrom: "Content area width" => "عرض منطقة المحتوى"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "نفس المسح"
+// theme.coverInheritWidthFromPage: "Fit to page" => "ملائمة للصفحة"
+// theme.coverTextAreaWidth: "Text width" => "عرض النص"
+// theme.coverBackgroundColorSwitch: "Background color" => "لون الخلفية"
+// theme.coverBackgroundColorNone: "None" => "اي"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "لون التمييز"
+// theme.coverBackgroundColorCustom: "Custom" => "تقليد"
+// theme.horizontalAlignmentLeft: "Left" => "يسار"
+// theme.horizontalAlignmentCenter: "Center" => "مركز"
+// theme.horizontalAlignmentRight: "Right" => "يمين"
+// theme.verticalAlignmentTop: "Top" => "أعلى"
+// theme.verticalAlignmentMiddle: "Middle" => "وسط"
+// theme.verticalAlignmentBottom: "Bottom" => "قاع"
+// theme.logoPosition: "Logo Position" => "موضع الشعار"
+// theme.coverTitlePosition: "Title Position" => "منصب العنوان"
+// theme.coverDescriptionPosition: "Description Position" => "وصف الوظيفة الحالية"
+// lg.question_resetValueText: "reset value for question: {0}" => "إعادة تعيين قيمة السؤال: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "تعيين قيمة: {1} السؤال: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "إعادة تعيين قيمة الخلية للعمود: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "تعيين قيمة الخلية: {1} إلى العمود: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

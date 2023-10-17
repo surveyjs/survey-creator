@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url } from "../helper";
+import { setJSON, getAddNewQuestionButton, getToolboxItemByText, getVisibleElement, url, RatingToolboxItem } from "../helper";
 
 const title = "Add new question";
 
@@ -78,7 +78,6 @@ test("Add New Question and show title editor", async t => {
   await t.expect(title).eql("CDE");
 });
 test("Drag Drop Toolbox Item and show title editor", async (t) => {
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
   const newGhostPagePage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
 
@@ -110,4 +109,23 @@ test("Drag Drop Toolbox Item and show title editor", async (t) => {
     .pressKey("Enter");
   title = await getQuestionTitle(1);
   await t.expect(title).eql("question2");
+});
+test("Add question when a question in dynamic panel is selected", async (t) => {
+
+  await setJSON({
+    elements: [
+      {
+        type: "paneldynamic", name: "panel1",
+        templateElements: [
+          { type: "text", name: "question1" }
+        ]
+      }
+    ]
+  });
+  await t.maximizeWindow();
+
+  await t
+    .click(Selector(".sv-string-editor").withText("question1"))
+    .click(Selector(".svc-page__add-new-question").nth(0))
+    .expect(Selector("[data-name=\"question2\"]").exists).ok();
 });

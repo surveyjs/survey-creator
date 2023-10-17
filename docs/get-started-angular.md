@@ -127,7 +127,7 @@ const creatorOptions = {
 export class SurveyCreatorComponent implements OnInit {
   surveyCreatorModel: SurveyCreatorModel;
   ngOnInit() {
-    const creator = new SurveyCreator(creatorOptions);
+    const creator = new SurveyCreatorModel(creatorOptions);
     this.surveyCreatorModel = creator;
   }
 }
@@ -276,17 +276,24 @@ export class SurveyCreatorComponent implements OnInit {
 }
 
 // If you use a web service:
-function saveSurveyJson(url, json, saveNo, callback) {
-  const request = new XMLHttpRequest();
-  request.open('POST', url);
-  request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  request.addEventListener('load', () => {
+function saveSurveyJson(url: string | URL, json: object, saveNo: number, callback: Function) {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify(json)
+  })
+  .then(response => {
+    if (response.ok) {
       callback(saveNo, true);
-  });
-  request.addEventListener('error', () => {
+    } else {
       callback(saveNo, false);
+    }
+  })
+  .catch(error => {
+    callback(saveNo, false);
   });
-  request.send(JSON.stringify(json));
 }
 ```
 
@@ -385,16 +392,23 @@ export class SurveyCreatorComponent implements OnInit {
 }
 
 // function saveSurveyJson(url: string | URL, json: object, saveNo: number, callback: Function) {
-//   const request = new XMLHttpRequest();
-//   request.open('POST', url);
-//   request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-//   request.addEventListener('load', () => {
+//   fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=UTF-8'
+//     },
+//     body: JSON.stringify(json)
+//   })
+//   .then(response => {
+//     if (response.ok) {
 //       callback(saveNo, true);
-//   });
-//   request.addEventListener('error', () => {
+//     } else {
 //       callback(saveNo, false);
+//     }
+//   })
+//   .catch(error => {
+//     callback(saveNo, false);
 //   });
-//   request.send(JSON.stringify(json));
 // }
 ```
 

@@ -50,6 +50,8 @@ export var nbStrings = {
     settingsTooltip: "Åpne skjemainnstillinger",
     surveySettings: "Innstillinger for undersøkelse",
     surveySettingsTooltip: "Åpne innstillinger for evaluering",
+    themeSettings: "Tema innstillinger",
+    themeSettingsTooltip: "Åpne temainnstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
@@ -126,6 +128,7 @@ export var nbStrings = {
     translationPropertyGridTitle: "Språkinnstillinger",
     themePropertyGridTitle: "Tema innstillinger",
     translationLanguages: "Språk",
+    translationDeleteLanguage: "Er du sikker på at du ønsker å slette alle strenger for dette språket?",
     translationAddLanguage: "Velg språk for oversetting",
     translationShowAllStrings: "Vis alle strenger",
     translationShowUsedStringsOnly: "Bare brukte strenger",
@@ -133,10 +136,13 @@ export var nbStrings = {
     translationNoStrings: "Ingen strenger å oversette. Vennligst endre filteret.",
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
+    translateUsigAI: "Oversett alle automatisk",
+    translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
+    themeResetButton: "Tilbakestill temainnstillinger til standard",
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
@@ -162,9 +168,13 @@ export var nbStrings = {
       question_visibilityName: "Spørsmålssynlghet",
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
+      question_resetValueName: "Tilbakestille spørsmålsverdien",
+      question_setValueName: "Angi spørsmålsverdi",
       column_visibilityName: "Vis kolonne (skjul)",
       column_enableName: "Aktivere (deaktivere) kolonne",
       column_requireName: "Gjøre kolonne obligatorisk",
+      column_resetValueName: "Tilbakestille kolonneverdi",
+      column_setValueName: "Angi kolonneverdi",
       trigger_completeName: "Fullfør skjema",
       trigger_setvalueName: "Angi spørsmålsnavn",
       trigger_copyvalueName: "Kopier spørsmålsverdi",
@@ -191,9 +201,14 @@ export var nbStrings = {
       question_visibilityText: "Gjør spørsmål {0} synlig", //{0} question name
       question_enableText: "Gjør spørsmål {0} aktivert", //{0} question name
       question_requireText: "Gjør spørsmål {0} påkrevd", //{0} question name
+      question_resetValueText: "Tilbakestill verdi for spørsmål: {0}",
+      question_setValueText: "tilordne verdi: {1} til spørsmålet: {0}",
       column_visibilityText: "Gjør kolonne {0} av spørsmålet {1} synlig", //{0} column name, {1} question name
       column_enableText: "Gjør kolonne {0} av spørsmålet {1} aktiver", //{0} column name, {1} question name
       column_requireText: "Gjør kolonne {0} av spørsmålet {1} nødvendig", //{0} column name, {1} question name
+      column_resetValueText: "Tilbakestill celleverdi for kolonne: {0}",
+      column_setValueText: "Tilordne celleverdi: {1} til kolonne: {0}",
+      setValueExpressionPlaceholder: " Et uttrykk der resultatet tilordnes målspørsmålet.",
       trigger_completeText: "Skjemaet blir fullført",
       trigger_setvalueText: "Sett inn: {0} verdi {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Klar spørsmålsverdi: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var nbStrings = {
     fastEntry: "Rask innfylling",
     fastEntryNonUniqueError: "Verdien «{0}» er ikke unik",
     fastEntryChoicesCountError: "Begrens antall varer fra {0} til {1}",
+    fastEntryChoicesMinCountError: "Vennligst skriv inn minst {0} elementer",
     fastEntryPlaceholder: "Du kan angi data i følgende format:\nverdi1|tekst\nverdi2",
     formEntry: "Innfylling i skjema",
     testService: "Sjekk tjenesten",
@@ -277,6 +293,7 @@ export var nbStrings = {
     cellsEmptyRowsColumns: "Det må være minst 1 kolonne eller rad",
     showPreviewBeforeComplete: "Forhåndsvise svar før du sender inn undersøkelsen",
     overridingPropertyPrefix: "Sett av ",
+    resetToDefaultCaption: "Nullstille",
     propertyIsEmpty: "Vennligst fyll inn en verdi",
     propertyIsNoUnique: "Angi en unik verdi",
     propertyNameIsNotUnique: "Vennligst fyll inn et unikt navn",
@@ -322,6 +339,8 @@ export var nbStrings = {
     choicesOrder: "Velg rekkefølge på valg",
     visible: "Er synlig?",
     isRequired: "Er nødvendig?",
+    markRequired: "Merk etter behov",
+    removeRequiredMark: "Fjern ønsket merke",
     isAllRowRequired: "Nødvendig svar for alle rader",
     requiredErrorText: "Nødvendig feilmelding",
     startWithNewLine: "Må starte med ny linje?",
@@ -403,7 +422,12 @@ export var nbStrings = {
       imageHeight: "Bildehøyde (i CSS-godkjente verdier)",
       imageWidth: "Bildebredde (i CSS-godkjente verdier)"
     },
+    // survey templates
+    survey: {
+      title: "Tittel"
+    },
     page: {
+      title: "Tittel",
       maxTimeToFinish: "Tidsbegrensning for å fullføre siden (i sekunder)"
     },
     question: {
@@ -640,6 +664,9 @@ export var nbStrings = {
   pv: {
     "true": "sann",
     "false": "falsk",
+    file: "Lokale filer",
+    camera: "Kamera",
+    "file-camera": "Lokale filer eller kamera",
     inherit: "inherit",
     show: "show",
     hide: "hide",
@@ -902,6 +929,8 @@ export var nbStrings = {
     descriptionLocation: "Beskrivelse plassering",
     defaultValueExpression: "Uttrykk for standardverdi",
     requiredIf: "requiredIf",
+    resetValueIf: "Tilbakestill verdien hvis",
+    setValueIf: "Angi verdi hvis",
     validators: "validators",
     bindings: "Bindinger",
     renderAs: "Gjengi som",
@@ -978,6 +1007,7 @@ export var nbStrings = {
     "--base-unit": "Basisenhet",
     groupGeneral: "Generelt",
     groupAdvanced: "Avansert",
+    groupHeader: "Topptekst",
     themeName: "Tema",
     themeMode: "Spørsmål utseende",
     themeModePanels: "Standard",
@@ -988,11 +1018,15 @@ export var nbStrings = {
     primaryDefaultColor: "Standard",
     primaryDarkColor: "Sveve",
     primaryLightColor: "Utvalgt",
+    coverTitleForecolor: "Tittel forfarge",
+    coverOverlapEnabled: "Overlappe",
     backgroundDimColor: "Bakgrunnsfarge",
     backgroundImage: "Bakgrunnsbilde",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Lokk",
     backgroundImageFitContain: "Inneholde",
+    backgroundImageFitFill: "Strekning",
+    backgroundImageFitTile: "Flis",
     backgroundOpacity: "Ugjennomsiktighet",
     backgroundImageAttachmentFixed: "Fast",
     backgroundImageAttachmentScroll: "Bla",
@@ -1016,6 +1050,7 @@ export var nbStrings = {
     fontFamily: "Skriftfamilie",
     fontSize: "Skriftstørrelse",
     color: "Farge",
+    placeholderColor: "Plassholderfarge",
     size: "Størrelse",
     fontWeightRegular: "Regelmessig",
     fontWeightHeavy: "Tung",
@@ -1036,6 +1071,26 @@ export var nbStrings = {
     boxShadowInner: "Indre",
     questionShadow: "Skygge effekter",
     editorShadow: "Skyggeeffekter for inndataelement",
+    headerView: "Utsikt",
+    headerViewBasic: "Grunnleggende",
+    headerViewAdvanced: "Avansert",
+    coverInheritWidthFrom: "Bredde på innholdsområdet",
+    coverInheritWidthFromSurvey: "Samme som undersøkelse",
+    coverInheritWidthFromPage: "Tilpass til side",
+    coverTextAreaWidth: "Tekstbredde",
+    coverBackgroundColorSwitch: "Bakgrunnsfarge",
+    coverBackgroundColorNone: "Ingen",
+    coverBackgroundColorAccentColor: "Uthevingsfarge",
+    coverBackgroundColorCustom: "Skikk",
+    horizontalAlignmentLeft: "Venstre",
+    horizontalAlignmentCenter: "Sentrum",
+    horizontalAlignmentRight: "Høyre",
+    verticalAlignmentTop: "Topp",
+    verticalAlignmentMiddle: "Midt",
+    verticalAlignmentBottom: "Bunn",
+    logoPosition: "Logo Posisjon",
+    coverTitlePosition: "Tittel Posisjon",
+    coverDescriptionPosition: "Beskrivelse Posisjon",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1559,3 +1614,66 @@ editorLocalization.locales["nb"] = nbStrings;
 // names.layered: "Layered" => "Lagdelte"
 // names.solid: "Solid" => "Solid"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Er du sikker på at du ønsker å slette alle strenger for dette språket?"
+// ed.themeResetButton: "Reset theme settings to default" => "Tilbakestill temainnstillinger til standard"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Plassholderfarge"
+// ed.themeSettings: "Theme Settings" => "Tema innstillinger"
+// ed.themeSettingsTooltip: "Open theme settings" => "Åpne temainnstillinger"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Nullstille"
+// pv.file: "Local files" => "Lokale filer"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokale filer eller kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Oversett alle automatisk"
+// ed.translationDialogTitle: "Untranslated strings" => "Uoversatte strenger"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Vennligst skriv inn minst {0} elementer"
+// lg.question_resetValueName: "Reset question value" => "Tilbakestille spørsmålsverdien"
+// lg.column_resetValue: "Reset column value" => "Tilbakestille kolonneverdi"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Merk etter behov"
+// pe.removeRequiredMark: "Remove the required mark" => "Fjern ønsket merke"
+// p.resetValueIf: "Reset value if" => "Tilbakestill verdien hvis"
+// lg.question_setValueName: "Set question value" => "Angi spørsmålsverdi"
+// lg.column_resetValueName: "Reset column value" => "Tilbakestille kolonneverdi"
+// lg.column_setValueName: "Set column value" => "Angi kolonneverdi"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Et uttrykk der resultatet tilordnes målspørsmålet."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Tittel"
+// page.title: "Title" => "Tittel"
+// p.setValueIf: "Set value if" => "Angi verdi hvis"
+// theme.groupHeader: "Header" => "Topptekst"
+// theme.coverTitleForecolor: "Title forecolor" => "Tittel forfarge"
+// theme.coverOverlapEnabled: "Overlap" => "Overlappe"
+// theme.backgroundImageFitFill: "Stretch" => "Strekning"
+// theme.backgroundImageFitTile: "Tile" => "Flis"
+// theme.headerView: "View" => "Utsikt"
+// theme.headerViewBasic: "Basic" => "Grunnleggende"
+// theme.headerViewAdvanced: "Advanced" => "Avansert"
+// theme.coverInheritWidthFrom: "Content area width" => "Bredde på innholdsområdet"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Samme som undersøkelse"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Tilpass til side"
+// theme.coverTextAreaWidth: "Text width" => "Tekstbredde"
+// theme.coverBackgroundColorSwitch: "Background color" => "Bakgrunnsfarge"
+// theme.coverBackgroundColorNone: "None" => "Ingen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Uthevingsfarge"
+// theme.coverBackgroundColorCustom: "Custom" => "Skikk"
+// theme.horizontalAlignmentLeft: "Left" => "Venstre"
+// theme.horizontalAlignmentCenter: "Center" => "Sentrum"
+// theme.horizontalAlignmentRight: "Right" => "Høyre"
+// theme.verticalAlignmentTop: "Top" => "Topp"
+// theme.verticalAlignmentMiddle: "Middle" => "Midt"
+// theme.verticalAlignmentBottom: "Bottom" => "Bunn"
+// theme.logoPosition: "Logo Position" => "Logo Posisjon"
+// theme.coverTitlePosition: "Title Position" => "Tittel Posisjon"
+// theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Posisjon"
+// lg.question_resetValueText: "reset value for question: {0}" => "Tilbakestill verdi for spørsmål: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "tilordne verdi: {1} til spørsmålet: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Tilbakestill celleverdi for kolonne: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilordne celleverdi: {1} til kolonne: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

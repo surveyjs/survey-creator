@@ -1,4 +1,4 @@
-import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement } from "survey-core";
+import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultV2Css } from "survey-core";
 import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
@@ -6,9 +6,10 @@ import { SurveyLogicType, getLogicString } from "./logic-types";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyHelper } from "../../survey-helper";
 import { logicCss } from "./logic-theme";
-import { assignDefaultV2Classes } from "../../utils/utils";
+import { assignDefaultV2Classes, copyCssClasses } from "../../utils/utils";
 import { QuestionLinkValueModel } from "../../components/link-value";
 import { LogicActionModelBase, LogicActionModel, LogicActionTriggerModel } from "./logic-actions-model";
+import { propertyGridCss } from "../../property-grid-theme/property-grid";
 
 function logicTypeVisibleIf(params: any): boolean {
   if (!this.question || !this.question.parentQuestion || params.length != 1)
@@ -185,6 +186,16 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
               type: "panel",
               visible: false
             },
+            {
+              name: "setValueIfPanel",
+              visible: false,
+              type: "panel",
+              elements: [{
+                name: "setValueExpression",
+                type: "comment",
+                titleLocation: "hidden"
+              }]
+            }
           ]
         }
       ]
@@ -228,16 +239,14 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
-    if (question.name === "elementSelector" || question.name === "setToName" || question.name === "fromName" || question.name === "gotoName") {
+    const selectorsNames = ["elementSelector", "setToName", "fromName", "gotoName"];
+    if (selectorsNames.indexOf(question.name) > -1) {
       question.allowRootStyle = false;
+      if (question.name === "setToName" || question.name === "fromName") {
+        question.titleLocation = "left";
+        question.startWithNewLine = false;
+      }
       cssClasses.control += " svc-logic-operator svc-logic-operator--question";
-      cssClasses.error.root = "svc-logic-operator__error";
-      cssClasses.onError = "svc-logic-operator--error";
-    }
-    if (question.name === "setToName" || question.name === "fromName") {
-      question.allowRootStyle = false;
-      question.titleLocation = "left";
-      question.startWithNewLine = false;
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
@@ -245,11 +254,23 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       assignDefaultV2Classes(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
+    const parentName = question.parent.name;
+    if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
+      const qType = question.getType();
+      assignDefaultV2Classes(cssClasses, qType);
+      if(!defaultV2Css[qType]) {
+        copyCssClasses(cssClasses, propertyGridCss.question);
+        copyCssClasses(cssClasses, propertyGridCss[qType]);
+      }
+      const els = question.parent.elements.filter(el => selectorsNames.indexOf(el.name) < 0 && el.name !== "expression");
+      if((question.name !== "runExpression" && qType !== "comment") || (Array.isArray(els) && els.length > 1)) {
+        cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
+      }
+    }
     if (question.name === "removeAction") {
       question.allowRootStyle = false;
       cssClasses.mainRoot += " svc-logic-condition-remove-question";
     }
-    // cssClasses.mainRoot = "sd-question sd-row__question";
     if (question.name === "panel") {
       cssClasses.root += " svc-logic-paneldynamic";
       cssClasses.buttonAdd += " svc-logic-operator--action ";
@@ -260,10 +281,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private onUpdatePanelCssClasses(options: any) {
-    if (options.panel.name === "triggerEditorPanel") {
+    const name = options.panel.name;
+    if (name === "triggerEditorPanel" || name === "setValueIfPanel") {
       options.cssClasses.panel.container += " svc-logic_trigger-editor";
     }
-    if (options.panel.name === "triggerQuestionsPanel") {
+    if (name === "triggerQuestionsPanel") {
       options.panel.allowRootStyle = false;
       options.cssClasses.panel.container += " svc-logic_trigger-questions";
     }

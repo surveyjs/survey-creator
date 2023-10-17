@@ -1,3 +1,8 @@
+---
+title: End-User Documentation | JavaScript Survey Creator by SurveyJS
+description: Help your end users quickly get started with the Survey Creator component and ensure its proper usage.
+---
+
 # End-User Documentation for Survey Creator
 
 This document illustrates how to perform basic tasks in the Survey Creator component. The component's UI is organized in multiple tabs. Each section in this document describes an individual tab.
@@ -5,11 +10,12 @@ This document illustrates how to perform basic tasks in the Survey Creator compo
 <img src="images/survey-creator-tabs.png" alt="Survey Creator - Tabs" width="100%" usemap="#tabs-map">
 
 <map name="tabs-map">
-    <area alt="Designer Tab" title="Designer Tab" href="#designer-tab" coords="16,54,91,86" shape="rect">
-    <area alt="Preview Tab" title="Preview Tab" href="#preview-tab" coords="120,54,185,86" shape="rect">
-    <area alt="Logic Tab" title="Logic Tab" href="#logic-tab" coords="210,54,255,86" shape="rect">
-    <area alt="JSON Editor Tab" title="JSON Editor Tab" href="#json-editor-tab" coords="290,54,370,86" shape="rect">
-    <area alt="Translation Tab" title="Translation Tab" href="#translation-tab" coords="400,54,490,86" shape="rect">
+    <area alt="Designer Tab" title="Designer Tab" href="#designer-tab" coords="5,56,147,126" shape="rect">
+    <area alt="Preview Tab" title="Preview Tab" href="#preview-tab" coords="150,56,278,126" shape="rect">
+    <area alt="Themes Tab" title="Themes Tab" href="#themes-tab" coords="280,55,413,127" shape="rect">
+    <area alt="Logic Tab" title="Logic Tab" href="#logic-tab" coords="415,57,525,126" shape="rect">
+    <area alt="JSON Editor Tab" title="JSON Editor Tab" href="#json-editor-tab"" coords="529,57,678,124" shape="rect">
+    <area alt="Translation Tab" title="Translation Tab" href="#translation-tab" coords="689,55,849,126" shape="rect">
 </map>
 
 ## Designer Tab
@@ -308,6 +314,24 @@ After you complete the survey, you can see the survey results in the table or JS
 Click the **Device** icon and select the desired device from the drop-down menu. You can also click the **Orientation** icon to switch between the landscape and portrait orientations:
 
 <img src="images/survey-creator-preview-different-devices.png" alt="Survey Creator - Preview the survey on different devices" width="75%">
+
+## Themes Tab
+
+The Themes tab enables you to customize the applied UI theme. You can change colors, sizes, fonts, shadow effects, and other survey appearance parameters in a user-friendly interface.
+
+<img src="images/theme-editor.png" alt="Survey Creator - The Themes tab" width="100%">
+
+### How to: Save a Custom Theme
+
+SurveyJS themes are JSON objects with CSS variables and other theme settings. Once you finish customization, click the Export button to download a JSON object with your custom theme.
+
+<img src="images/theme-export.png" alt="SurveyJS Theme Export">
+
+If you already have a theme JSON file and want to continue theme customization, click the Import button and select the file to load into Survey Creator.
+
+<img src="images/theme-import.png" alt="SurveyJS Theme Import">
+
+Other capabilities depend on features implemented by your development team. For instance, the following help topic describes how developers can save themes on a server and load them from it: [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes).
 
 ## Logic Tab
 

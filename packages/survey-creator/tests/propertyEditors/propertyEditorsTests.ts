@@ -400,6 +400,8 @@ QUnit.test("SurveySelectBaseQuestionPropertyEditor", function (assert) {
       { type: "radiogroup", name: "question2" },
       { type: "checkbox", name: "question3" },
       { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
     ],
   });
   var propertyEditor = new SurveyObjectProperty(
@@ -415,6 +417,38 @@ QUnit.test("SurveySelectBaseQuestionPropertyEditor", function (assert) {
   assert.equal(editor.koChoices().length, 2, "There are two items");
   assert.equal(editor.koChoices()[0].value, "question2", "The first value");
   assert.equal(editor.koChoices()[0].text, "question2", "The first text");
+  Survey.Serializer.removeProperty("question", "question_test");
+});
+QUnit.test("SurveyQuestionCarryForwardPropertyEditor", function (assert) {
+  Survey.Serializer.addProperty(
+    "question",
+    "question_test:question_carryforward"
+  );
+  var survey = new Survey.Survey({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "radiogroup", name: "question2" },
+      { type: "checkbox", name: "question3" },
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
+    ],
+  });
+  var propertyEditor = new SurveyObjectProperty(
+    Survey.Serializer.findProperty("question", "question_test")
+  );
+  propertyEditor.object = survey.getQuestionByName("question3");
+  var editor = <SurveyDropdownPropertyEditor>propertyEditor.editor;
+  assert.equal(
+    propertyEditor.editorType,
+    "question_carryforward",
+    "Question editor should be created"
+  );
+  assert.equal(editor.koChoices().length, 4, "There are two items");
+  assert.equal(editor.koChoices()[0].value, "question2", "The first value");
+  assert.equal(editor.koChoices()[0].text, "question2", "The first text");
+  assert.equal(editor.koChoices()[3].value, "question6", "The third value");
+  assert.equal(editor.koChoices()[3].text, "question6", "The third text");
   Survey.Serializer.removeProperty("question", "question_test");
 });
 QUnit.test("SurveyQuestionValuePropertyEditor - choices", function (assert) {
@@ -1402,12 +1436,8 @@ QUnit.test(
     var props = generalTab.editorProperties;
     for (var i = 0; i < props.length; i++) {
       var prop = props[i];
-      if (prop.editor.editorType == "boolean") continue;
-      assert.equal(
-        prop.editor.showDisplayNameOnTop,
-        true,
-        "It should be shown on top"
-      );
+      if (["boolean", "switch"].indexOf(prop.editor.editorType) > -1) continue;
+      assert.equal(prop.editor.showDisplayNameOnTop, true, "It should be shown on top: " + prop.name + ", editorType:" + prop.editor.editorType);
     }
   }
 );

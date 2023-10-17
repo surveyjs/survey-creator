@@ -34,6 +34,7 @@ export var propertyGridCss = {
     requiredText: "spg-panel__required-text"
   },
   paneldynamic: {
+    mainRoot: "spg-question spg-row__question",
     root: "spg-paneldynamic",
     navigation: "spg-paneldynamic__navigation",
     title: "spg-title spg-question__title",
@@ -332,6 +333,7 @@ export var propertyGridCss = {
   color: {
     root: "spg-input spg-color-editor spg-input-container",
     swatch: "spg-color-editor__color-swatch",
+    swatchDefault: "spg-color-editor__color-swatch--default",
     swatchDisabled: "spg-color-editor__color-swatch--disabled",
     colorInput: "spg-color-editor__color-input",
     control: "spg-color-editor__input spg-input-container__input",
@@ -339,6 +341,17 @@ export var propertyGridCss = {
     colorDropdownIcon: "icon-drop-down-arrow",
     colorItem: "spg-color-editor__color-item",
     swatchIcon: "icon-color-picker"
+  },
+  textwithreset: {
+    root: "spg-input spg-input-container",
+    rootMultiline: "spg-input-container--multiline",
+    control: "spg-input-container__input",
+    controlMultiline: "spg-input-container__input spg-comment",
+    resetButton: "spg-input__edit-button",
+    resetButtonIcon: "icon-reset",
+    content: "spg-question__content spg-text__content",
+    remainingCharacterCounter: "spg-remaining-character-counter",
+    onError: "spg-input--error"
   },
   fileedit: {
     root: "spg-input spg-input-container spg-file-edit",

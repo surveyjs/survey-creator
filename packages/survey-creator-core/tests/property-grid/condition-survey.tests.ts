@@ -8,7 +8,8 @@ import {
   QuestionPanelDynamicModel,
   ItemValue,
   QuestionTextModel,
-  ComponentCollection
+  ComponentCollection,
+  QuestionCheckboxModel
 } from "survey-core";
 import { ConditionEditor, ConditionEditorItemsBuilder } from "../../src/property-grid/condition-survey";
 import { settings, EmptySurveyCreatorOptions } from "../../src/creator-settings";
@@ -1083,9 +1084,9 @@ test("Change operators via callback", () => {
   const question = survey.getQuestionByName("q1");
   const options = new EmptySurveyCreatorOptions();
   let evnt_questionType: string = "";
-  options.isConditionOperatorEnabled = (questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean => {
-    if(questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
-    evnt_questionType = questionType;
+  options.isConditionOperatorEnabled = (questionName: string, question: Question, operator: string, isEnabled: boolean): boolean => {
+    if (questionName === "q2" && ["contains", "anyof"].indexOf(operator) > -1) return false;
+    evnt_questionType = question.getType();
     return isEnabled;
   };
   const editor = new ConditionEditor(survey, question, options, "visibleIf");
@@ -1724,6 +1725,27 @@ test("Change the default operator", () => {
   expect(panel.getQuestionByName("operator").value).toEqual("anyof");
   settings.logic.defaultOperator = "equal";
 });
+test("Remove valuePropertyName", () => {
+  var survey = new SurveyModel({
+    questions: [
+      { type: "checkbox", name: "q1", choices: ["apple", "banana", "orange"], valuePropertyName: "fruit" },
+      { type: "text", name: "q2", "visibleIf": "{q1} allof ['apple', 'orange']" }
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  var editor = new ConditionEditor(survey, q2, undefined, "visibleIf");
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").value).toEqual("allof");
+  const qValue = <QuestionCheckboxModel>panel.getQuestionByName("questionValue");
+  expect(qValue.valuePropertyName).toBeFalsy();
+  expect(qValue.value).toHaveLength(2);
+  expect(qValue.value[0]).toBe("apple");
+  expect(qValue.value[1]).toBe("orange");
+  qValue.renderedValue = ["banana"];
+  editor.apply();
+  expect(q2.visibleIf).toBe("{q1} allof ['banana']");
+});
 test("Condition editor and question value cssClasses", () => {
   ComponentCollection.Instance.add({ name: "comp1", questionJSON: { "type": "dropdown", name: "q", choices: [1, 2, 3] } });
   const survey = new SurveyModel({
@@ -1746,4 +1768,33 @@ test("Condition editor and question value cssClasses", () => {
   expect(comp.contentQuestion).toBeTruthy();
   expect(comp.contentQuestion.cssClasses.content).toContain("sd-question__content");
   ComponentCollection.Instance.clear();
+});
+test("Hide search for conjunction", () => {
+  var survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3] },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3] },
+      { name: "q4", type: "text" }
+    ]
+  });
+  var question = survey.getQuestionByName("q4");
+  var editor = new ConditionEditor(survey, question);
+  expect(editor.panel.panels).toHaveLength(1);
+  var panel = editor.panel.panels[0];
+  expect(panel.getQuestionByName("operator").searchEnable).toBeFalsy();
+  expect(panel.getQuestionByName("operator").dropdownListModel.listModel.searchEnabled).toBeFalsy();
+  expect(panel.getQuestionByName("questionValue").isReadOnly).toBeTruthy();
+  panel.getQuestionByName("questionName").value = "q1";
+  panel.getQuestionByName("questionValue").value = "abc";
+  expect(editor.text).toEqual("{q1} = 'abc'");
+  expect(panel.getQuestionByName("conjunction").isVisible).toBeFalsy();
+  editor.panel.addPanel();
+  panel = editor.panel.panels[1];
+  expect(panel.getQuestionByName("operator").searchEnable).toBeFalsy();
+  expect(panel.getQuestionByName("operator").dropdownListModel.listModel.searchEnabled).toBeFalsy();
+  expect(panel.getQuestionByName("conjunction").isVisible).toBeTruthy();
+  expect(panel.getQuestionByName("conjunction").choices).toHaveLength(2);
+  expect(panel.getQuestionByName("conjunction").searchEnable).toBeFalsy();
+  expect(panel.getQuestionByName("conjunction").dropdownListModel.listModel.searchEnabled).toBeFalsy();
 });

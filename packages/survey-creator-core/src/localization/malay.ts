@@ -50,6 +50,8 @@ export var msStrings = {
     settingsTooltip: "Buka tetapan tinjauan",
     surveySettings: "Seting Tinjauan",
     surveySettingsTooltip: "Buka seting tinjauan",
+    themeSettings: "Seting Tema",
+    themeSettingsTooltip: "Buka seting tema",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -126,6 +128,7 @@ export var msStrings = {
     translationPropertyGridTitle: "Seting Bahasa",
     themePropertyGridTitle: "Seting Tema",
     translationLanguages: "Bahasa-bahasa",
+    translationDeleteLanguage: "Adakah anda pasti ingin memadam semua rentetan untuk bahasa ini?",
     translationAddLanguage: "Pilihan bahasa untuk diterjemah",
     translationShowAllStrings: "Tunjukkan semua rentetan",
     translationShowUsedStringsOnly: "Rentetan yang Digunakan Sahaja",
@@ -133,10 +136,13 @@ export var msStrings = {
     translationNoStrings: "Tiada rentetan untuk diterjemah. Sila ubah penapis.",
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
+    translateUsigAI: "Terjemahkan Secara automatik Semua",
+    translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    themeResetButton: "Mengeset semula seting tema kepada lalai",
     bold: "Tebal",
     italic: "Condong",
     underline: "Garis bawah",
@@ -162,9 +168,13 @@ export var msStrings = {
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
+      question_resetValueName: "Mengeset semula nilai soalan",
+      question_setValueName: "Mengesetkan nilai soalan",
       column_visibilityName: "Tunjukkan lajur (sembunyikan)",
       column_enableName: "Mendayakan (nyahdayakan) lajur",
       column_requireName: "Jadikan lajur diperlukan",
+      column_resetValueName: "Mengeset semula nilai lajur",
+      column_setValueName: "Mengesetkan nilai lajur",
       trigger_completeName: "Lengkapkan tinjauan",
       trigger_setvalueName: "Tetapkan nilai soalan",
       trigger_copyvalueName: "Salin nilai soalan",
@@ -191,9 +201,14 @@ export var msStrings = {
       question_visibilityText: "Jadikan soalan {0} boleh dilihat", //{0} question name
       question_enableText: "Jadikan soalan {0} didayakan", //{0} question name
       question_requireText: "Jadikan soalan {0} diperlukan", //{0} question name
+      question_resetValueText: "Tetapkan semula nilai untuk soalan: {0}",
+      question_setValueText: "Berikan nilai: {1} kepada soalan: {0}",
       column_visibilityText: "menjadikan {0} lajur soalan {1} kelihatan", //{0} column name, {1} question name
       column_enableText: "menjadikan lajur {0} soalan {1} mendayakan", //{0} column name, {1} question name
       column_requireText: "menjadikan lajur {0} soalan {1} diperlukan", //{0} column name, {1} question name
+      column_resetValueText: "Set semula nilai sel untuk lajur: {0}",
+      column_setValueText: "Peruntukkan nilai sel: {1} kepada lajur: {0}",
+      setValueExpressionPlaceholder: " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran.",
       trigger_completeText: "Tinjauan dilengkapkan",
       trigger_setvalueText: "Tetapkan kepada soalan: {0} nilai {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "nilai soalan yang jelas: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var msStrings = {
     fastEntry: "Entri Pantas",
     fastEntryNonUniqueError: "Nilai '{0}' tidak unik",
     fastEntryChoicesCountError: "Sila hadkan bilangan item dari {0} hingga {1}",
+    fastEntryChoicesMinCountError: "Sila masukkan sekurang-kurangnya {0} item",
     fastEntryPlaceholder: "Anda boleh mengesetkan data dalam format berikut:\nvalue1|text\nnilai2",
     formEntry: "Entri Borang",
     testService: "Uji perkhidmatan",
@@ -277,6 +293,7 @@ export var msStrings = {
     cellsEmptyRowsColumns: "Terdapat sekurang-kurangnya satu lajur atau baris",
     showPreviewBeforeComplete: "Pratonton jawapan sebelum menyerahkan tinjauan",
     overridingPropertyPrefix: "Ditetapkan mengikut ",
+    resetToDefaultCaption: "Set semula",
     propertyIsEmpty: "Sila masukkan nilai",
     propertyIsNoUnique: "Sila masukkan nilai unik",
     propertyNameIsNotUnique: "Sila masukkan nama unik",
@@ -322,6 +339,8 @@ export var msStrings = {
     choicesOrder: "Pilih susunan pilihan",
     visible: "Boleh dilihat?",
     isRequired: "Diperlukan?",
+    markRequired: "Tandakan mengikut keperluan",
+    removeRequiredMark: "Mengalih keluar tanda yang diperlukan",
     isAllRowRequired: "Perlukan jawapan untuk semua baris",
     requiredErrorText: "Teks ralat diperlukan",
     startWithNewLine: "Mulakan dengan baris baharu?",
@@ -403,7 +422,12 @@ export var msStrings = {
       imageHeight: "Ketinggian imej (dalam nilai diterima CSS)",
       imageWidth: "Lebar imej (dalam nilai diterima CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Tajuk"
+    },
     page: {
+      title: "Tajuk",
       maxTimeToFinish: "Had masa untuk menyelesaikan halaman (dalam beberapa saat)"
     },
     question: {
@@ -640,6 +664,9 @@ export var msStrings = {
   pv: {
     "true": "Benar",
     "false": "Palsu",
+    file: "Fail tempatan",
+    camera: "Kamera",
+    "file-camera": "Fail atau kamera tempatan",
     inherit: "warisi",
     show: "tunjukkan",
     hide: "sembunyikan",
@@ -902,6 +929,8 @@ export var msStrings = {
     descriptionLocation: "Lokasi perihalan",
     defaultValueExpression: "Ekspresi nilai lalai",
     requiredIf: "Diperlukan jika",
+    resetValueIf: "Mengeset semula nilai jika",
+    setValueIf: "Setkan nilai jika",
     validators: "Pengesah",
     bindings: "ikatan",
     renderAs: "Render sebagai",
@@ -978,6 +1007,7 @@ export var msStrings = {
     "--base-unit": "Unit asas",
     groupGeneral: "Umum",
     groupAdvanced: "Lanjutan",
+    groupHeader: "Pengepala",
     themeName: "Tema",
     themeMode: "Penampilan soalan",
     themeModePanels: "Lalai",
@@ -988,11 +1018,15 @@ export var msStrings = {
     primaryDefaultColor: "Lalai",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
+    coverTitleForecolor: "Warna tajuk",
+    coverOverlapEnabled: "Bertindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Imej latar belakang",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Perlindungan",
     backgroundImageFitContain: "Mengandungi",
+    backgroundImageFitFill: "Regangan",
+    backgroundImageFitTile: "Jubin",
     backgroundOpacity: "Kelegapan",
     backgroundImageAttachmentFixed: "Tetap",
     backgroundImageAttachmentScroll: "Tatal",
@@ -1016,6 +1050,7 @@ export var msStrings = {
     fontFamily: "Keluarga fon",
     fontSize: "Saiz fon",
     color: "Warna",
+    placeholderColor: "Warna ruang letak",
     size: "Saiz",
     fontWeightRegular: "Tetap",
     fontWeightHeavy: "Berat",
@@ -1036,6 +1071,26 @@ export var msStrings = {
     boxShadowInner: "Dalaman",
     questionShadow: "Kesan bayang",
     editorShadow: "Kesan bayang unsur input",
+    headerView: "Lihat",
+    headerViewBasic: "Asas",
+    headerViewAdvanced: "Lanjutan",
+    coverInheritWidthFrom: "Lebar kawasan kandungan",
+    coverInheritWidthFromSurvey: "Sama seperti tinjauan",
+    coverInheritWidthFromPage: "Muat ke halaman",
+    coverTextAreaWidth: "Lebar teks",
+    coverBackgroundColorSwitch: "Warna latar belakang",
+    coverBackgroundColorNone: "Tiada",
+    coverBackgroundColorAccentColor: "Warna aksen",
+    coverBackgroundColorCustom: "Tersuai",
+    horizontalAlignmentLeft: "Kiri",
+    horizontalAlignmentCenter: "Pusat",
+    horizontalAlignmentRight: "Kanan",
+    verticalAlignmentTop: "Atas",
+    verticalAlignmentMiddle: "Tengah",
+    verticalAlignmentBottom: "Bawah",
+    logoPosition: "Kedudukan Logo",
+    coverTitlePosition: "Kedudukan Tajuk",
+    coverDescriptionPosition: "Kedudukan Penerangan",
     names: {
       default: "Lalai",
       sharp: "Tajam",
@@ -1509,3 +1564,66 @@ editorLocalization.locales["ms"] = msStrings;
 // names.layered: "Layered" => "Berlapis"
 // names.solid: "Solid" => "Pepejal"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Adakah anda pasti ingin memadam semua rentetan untuk bahasa ini?"
+// ed.themeResetButton: "Reset theme settings to default" => "Mengeset semula seting tema kepada lalai"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Warna ruang letak"
+// ed.themeSettings: "Theme Settings" => "Seting Tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Buka seting tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Set semula"
+// pv.file: "Local files" => "Fail tempatan"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Fail atau kamera tempatan"
+// ed.translateUsigAI: "Auto-translate All" => "Terjemahkan Secara automatik Semua"
+// ed.translationDialogTitle: "Untranslated strings" => "Rentetan tidak diterjemahkan"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Sila masukkan sekurang-kurangnya {0} item"
+// lg.question_resetValueName: "Reset question value" => "Mengeset semula nilai soalan"
+// lg.column_resetValue: "Reset column value" => "Mengeset semula nilai lajur"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Tandakan mengikut keperluan"
+// pe.removeRequiredMark: "Remove the required mark" => "Mengalih keluar tanda yang diperlukan"
+// p.resetValueIf: "Reset value if" => "Mengeset semula nilai jika"
+// lg.question_setValueName: "Set question value" => "Mengesetkan nilai soalan"
+// lg.column_resetValueName: "Reset column value" => "Mengeset semula nilai lajur"
+// lg.column_setValueName: "Set column value" => "Mengesetkan nilai lajur"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ungkapan yang hasilnya akan diberikan kepada soalan sasaran."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Tajuk"
+// page.title: "Title" => "Tajuk"
+// p.setValueIf: "Set value if" => "Setkan nilai jika"
+// theme.groupHeader: "Header" => "Pengepala"
+// theme.coverTitleForecolor: "Title forecolor" => "Warna tajuk"
+// theme.coverOverlapEnabled: "Overlap" => "Bertindih"
+// theme.backgroundImageFitFill: "Stretch" => "Regangan"
+// theme.backgroundImageFitTile: "Tile" => "Jubin"
+// theme.headerView: "View" => "Lihat"
+// theme.headerViewBasic: "Basic" => "Asas"
+// theme.headerViewAdvanced: "Advanced" => "Lanjutan"
+// theme.coverInheritWidthFrom: "Content area width" => "Lebar kawasan kandungan"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama seperti tinjauan"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Muat ke halaman"
+// theme.coverTextAreaWidth: "Text width" => "Lebar teks"
+// theme.coverBackgroundColorSwitch: "Background color" => "Warna latar belakang"
+// theme.coverBackgroundColorNone: "None" => "Tiada"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Warna aksen"
+// theme.coverBackgroundColorCustom: "Custom" => "Tersuai"
+// theme.horizontalAlignmentLeft: "Left" => "Kiri"
+// theme.horizontalAlignmentCenter: "Center" => "Pusat"
+// theme.horizontalAlignmentRight: "Right" => "Kanan"
+// theme.verticalAlignmentTop: "Top" => "Atas"
+// theme.verticalAlignmentMiddle: "Middle" => "Tengah"
+// theme.verticalAlignmentBottom: "Bottom" => "Bawah"
+// theme.logoPosition: "Logo Position" => "Kedudukan Logo"
+// theme.coverTitlePosition: "Title Position" => "Kedudukan Tajuk"
+// theme.coverDescriptionPosition: "Description Position" => "Kedudukan Penerangan"
+// lg.question_resetValueText: "reset value for question: {0}" => "Tetapkan semula nilai untuk soalan: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Berikan nilai: {1} kepada soalan: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Set semula nilai sel untuk lajur: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Peruntukkan nilai sel: {1} kepada lajur: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

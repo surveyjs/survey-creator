@@ -1,19 +1,8 @@
-import { QuestionTextModel, Base, Serializer } from "survey-core";
-import { PropertyGridModel, PropertyGridEditorCollection } from "../../src/property-grid";
-import {
-  ISurveyCreatorOptions,
-  EmptySurveyCreatorOptions
-} from "../../src/creator-settings";
+import { QuestionTextModel, Base, Serializer, PanelModel } from "survey-core";
 import { QuestionLinkValueModel } from "../../src/components/link-value";
+import { PropertyGridModelTester } from "./property-grid.base";
 
 const linkDummy = new QuestionLinkValueModel("q");
-
-export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base, options: ISurveyCreatorOptions = undefined) {
-    PropertyGridEditorCollection.clearHash();
-    super(obj, options);
-  }
-}
 
 test("Enable/disable visible property editor on changing visibleIf", () => {
   expect(Serializer.findProperty("question", "visible").overridingProperty).toBe("visibleIf");
@@ -64,4 +53,23 @@ test("Check boolean question support grouping event with overridigng property", 
   let propertyGrid = new PropertyGridModelTester(question);
   question.visibleIf = "{q1} = false";
   expect(propertyGrid.survey.getQuestionByName("isRequired").cssClasses.mainRoot.includes("spg-row-narrow__question")).toBeTruthy();
+});
+test("Show/hide go to visibleIf link for panel", () => {
+  const panel = new PanelModel("q");
+  let propertyGrid = new PropertyGridModelTester(panel);
+  const visibleIfGoQuestion = <QuestionLinkValueModel>propertyGrid.survey.getQuestionByName("visible_overridingProperty");
+  const logicPanel = propertyGrid.survey.getPanelByName("logic");
+  expect(logicPanel.isExpanded).toBeFalsy();
+  expect(visibleIfGoQuestion).toBeTruthy();
+  expect(visibleIfGoQuestion.linkValueText).toBe("Set by Visible if");
+  expect(visibleIfGoQuestion.startWithNewLine).toBeFalsy();
+  expect(visibleIfGoQuestion.isVisible).toBe(false);
+  panel.visibleIf = "{q1} = false";
+  expect(visibleIfGoQuestion.isVisible).toBe(true);
+  panel.visibleIf = "";
+  expect(visibleIfGoQuestion.isVisible).toBe(false);
+  panel.visibleIf = "{q1} = false";
+  expect(visibleIfGoQuestion.isVisible).toBe(true);
+  visibleIfGoQuestion.doLinkClick();
+  expect(logicPanel.isExpanded).toBeTruthy();
 });

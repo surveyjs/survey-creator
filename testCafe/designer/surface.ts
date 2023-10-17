@@ -113,7 +113,7 @@ test("Check imagepicker add/delete items style", async (t) => {
 test("Focus on new panel added", async (t) => {
   await t.resizeWindow(1920, 1080);
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
-  const PanelItem = Selector("[aria-label='Panel toolbox item']");
+  const PanelItem = Selector("[aria-label='Panel']");
 
   await t
     .hover(PanelItem)
@@ -127,7 +127,7 @@ test("Focus on new panel added", async (t) => {
 test("Focus on new html question added", async (t) => {
   await t.resizeWindow(1920, 1080);
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
-  const HTMLItem = Selector("[aria-label='HTML toolbox item']");
+  const HTMLItem = Selector("[aria-label='HTML']");
 
   await t
     .hover(HTMLItem)
@@ -135,4 +135,16 @@ test("Focus on new html question added", async (t) => {
 
   const panelSelector = Selector(".svc-question__content--html");
   await t.expect(panelSelector.focused).ok();
+});
+
+test("Keyboard PG MobileView", async (t) => {
+  await t.resizeWindow(1000, 1000);
+
+  await t
+    .pressKey("tab").pressKey("tab").pressKey("tab")
+    .pressKey("tab").pressKey("tab").pressKey("tab")
+    .pressKey("enter");
+
+  const pgSurveyTitleInput = Selector(".spg-body .spg-row").nth(1).find("[data-name='title'] input");
+  await t.expect(pgSurveyTitleInput.focused).ok();
 });

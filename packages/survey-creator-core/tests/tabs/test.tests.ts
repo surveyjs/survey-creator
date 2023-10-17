@@ -9,8 +9,8 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
+  creator.activeTab = "test";
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
-  testPlugin.activate();
   return testPlugin.model;
 }
 
@@ -129,6 +129,46 @@ test("Check page list state after change page arrows click", (): any => {
   prevPage.action();
   expect(pageList.selectedItem.data).toEqual(model.activePage);
 });
+test("Enable/disable nextPage action on page visibility change and page actions, Bug#4536", (): any => {
+  const creator: CreatorTester = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+            visibleIf: "{q1} = 2"
+          }
+        ]
+      }
+    ]
+  };
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  expect(pageList.actions).toHaveLength(2);
+  expect(pageList.actions[0].title).toBe("Page 1");
+  expect(pageList.actions[1].title).toBe("Page 2");
+  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  const nextPage: IAction = model.pageActions.filter((item: IAction) => item.id === "nextPage")[0];
+  expect(nextPage.enabled).toBeFalsy();
+  model.survey.setValue("q1", 2);
+  expect(pageList.actions[1].enabled).toBeTruthy();
+  expect(nextPage.enabled).toBeTruthy();
+  model.survey.setValue("q1", 3);
+  expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(nextPage.enabled).toBeFalsy();
+});
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();
   creator.JSON = {
@@ -169,17 +209,38 @@ test("pages, PageListItems, makes items enable/disable and do not touch visibili
     ]
   };
   var model = getTestModel(creator);
-  expect(model.pageListItems).toHaveLength(3);
-  expect(model.pageListItems[0].enabled).toBeTruthy();
-  expect(model.pageListItems[1].enabled).toBeTruthy();
-  expect(model.pageListItems[2].enabled).toBeFalsy();
-  expect(model.pageListItems[2].visible).toEqual(true);
+  const pageList: ListModel = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0].popupModel.contentComponentData.model;
+  const pagesActions = pageList.actions;
+  expect(pagesActions).toHaveLength(3);
+  expect(pagesActions[0].enabled).toBeTruthy();
+  expect(pagesActions[1].enabled).toBeTruthy();
+  expect(pagesActions[2].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[2].visible).toEqual(true);
   model.survey.pages[1].visible = false;
-  expect(model.pageListItems[1].enabled).toBeFalsy();
-  expect(model.pageListItems[1].visible).toEqual(true);
+  expect(pagesActions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
+  expect(pagesActions[1].visible).toEqual(true);
   model.survey.pages[1].visible = true;
-  expect(model.pageListItems[1].enabled).toBeTruthy();
-  expect(model.pageListItems[2].visible).toEqual(true);
+  expect(pagesActions[1].enabled).toBeTruthy();
+  expect(pagesActions[2].visible).toEqual(true);
+});
+test("Hide page actions if survey is not in running state", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", questions: [{ type: "text", name: "q2" }] },
+      { name: "page3" }
+    ]
+  };
+  const model = getTestModel(creator);
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
+  model.survey.showPreview();
+  expect(model.pageActions[1].visible).toBeFalsy();
+  expect(model.pageActions[2].visible).toBeFalsy();
+  model.survey.cancelPreview();
+  expect(model.pageActions[1].visible).toBeTruthy();
+  expect(model.pageActions[2].visible).toBeTruthy();
 });
 test("pages, PageListItems, pageSelector and settings.getObjectDisplayName", (): any => {
   var creator = new CreatorTester();
@@ -249,6 +310,24 @@ test("pages, PageListItems, pageSelector: check page titles", (): any => {
 
   model.survey.nextPage();
   expect(selectedPage().title).toEqual("Page 3");
+});
+
+test("pageSelector if page title with markup", (): any => {
+  var creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      { name: "page1", title: "<i>Page 1</i>", questions: [{ type: "text", name: "q1" }] },
+      { name: "page2", title: "<i>Page 2</i>", questions: [{ type: "text", name: "q2" }] },
+    ]
+  };
+  var model = getTestModel(creator);
+  expect(model.pageListItems).toHaveLength(2);
+  expect(model.pageListItems[0].title).toEqual("Page 1");
+  expect(model.pageListItems[1].title).toEqual("Page 2");
+  const selectedPage: IAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
+  expect(selectedPage.title).toEqual("Page 1");
+  model.survey.nextPage();
+  expect(selectedPage.title).toEqual("Page 2");
 });
 
 test("Simulator view switch", (): any => {
@@ -664,10 +743,52 @@ test("Check that popups inside survey are closed when scrolling container", (): 
   const model: TestSurveyTabViewModel = testPlugin.model;
   const question = <QuestionDropdownModel>model.survey.getAllQuestions()[0];
   question.dropdownListModel.popupModel.toggleVisibility();
-  expect(model["onScrollCallback"]).toBeDefined();
+  expect(model.survey["onScrollCallback"]).toBeDefined();
   expect(question.dropdownListModel.popupModel.isVisible).toBeTruthy();
   model.onScroll();
   expect(question.dropdownListModel.popupModel.isVisible).toBeFalsy();
-  expect(model["onScrollCallback"]).toBeUndefined();
+  expect(model.survey["onScrollCallback"]).toBeUndefined();
   model.onScroll();
+});
+
+test("Creator footer action bar: only preview tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showThemeTab: false, showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("test");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.actions.length).toEqual(7);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.actions.length).toEqual(7);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+
+test("Update theme in active test/preview tab", (): any => {
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showJSONEditorTab: false, showThemeTab: false, showLogicTab: false });
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  creator.theme = {
+    cssVariables: {
+      test: "testVarValue"
+    },
+  };
+  expect(creator.activeTab).toEqual("test");
+  expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
 });

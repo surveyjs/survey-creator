@@ -1,4 +1,4 @@
-import { SurveyModel, IAction, Base, Serializer, QuestionFactory } from "survey-core";
+import { SurveyModel, IAction, Base, Question } from "survey-core";
 import { CreatorBase, isStringEditable } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
@@ -10,6 +10,7 @@ const dummyQuestion = new QuestionLinkValueModel("q1");
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     super(options, options2);
+    this.autoSaveDelay = 0;
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
     }
@@ -27,6 +28,11 @@ export class CreatorTester extends CreatorBase {
     const name = this.selectedElement["name"];
     if (!!name) return name;
     return this.selectedElement.getType();
+  }
+  public selectQuestionByName(name: string): Question {
+    const q = this.survey.getQuestionByName(name);
+    if(!!q) this.selectElement(q);
+    return q;
   }
   public getActionBarItem(id: string): IAction {
     return this.getActionBarItemByActions(this.toolbarItems, id);

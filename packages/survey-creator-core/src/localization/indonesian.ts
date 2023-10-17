@@ -50,6 +50,8 @@ export var indonesianStrings = {
     settingsTooltip: "Buka pengaturan",
     surveySettings: "Pengaturan Survei",
     surveySettingsTooltip: "Buka pengaturan survei",
+    themeSettings: "Pengaturan Tema",
+    themeSettingsTooltip: "Buka pengaturan tema",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -126,6 +128,7 @@ export var indonesianStrings = {
     translationPropertyGridTitle: "Pengaturan Bahasa",
     themePropertyGridTitle: "Pengaturan Tema",
     translationLanguages: "Bahasa",
+    translationDeleteLanguage: "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?",
     translationAddLanguage: "Pilih bahasa untuk terjemahan",
     translationShowAllStrings: "Tampilkan seluruh string",
     translationShowUsedStringsOnly: "Hanya String yang Digunakan",
@@ -133,10 +136,13 @@ export var indonesianStrings = {
     translationNoStrings: "Tidak ada string diterjemahkan. Silahkan ganti penyaring.",
     translationExportToSCVButton: "Eksport ke CSV",
     translationImportFromSCVButton: "Import dari CSV",
+    translateUsigAI: "Terjemahkan otomatis Semua",
+    translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
+    themeResetButton: "Setel ulang pengaturan tema ke default",
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
@@ -162,9 +168,13 @@ export var indonesianStrings = {
       question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
+      question_resetValueName: "Mereset nilai pertanyaan",
+      question_setValueName: "Tetapkan nilai pertanyaan",
       column_visibilityName: "Perlihatkan (sembunyikan) kolom",
       column_enableName: "Mengaktifkan (menonaktifkan) kolom",
       column_requireName: "Buat kolom diperlukan",
+      column_resetValueName: "Mereset nilai kolom",
+      column_setValueName: "Mengatur nilai kolom",
       trigger_completeName: "Survei lengkap",
       trigger_setvalueName: "Tetapkan jawaban",
       trigger_copyvalueName: "Salin jawaban",
@@ -191,9 +201,14 @@ export var indonesianStrings = {
       question_visibilityText: "Buat pertanyaan {0} terlihat", //{0} question name
       question_enableText: "Buat pertanyaan {0} aktifkan", //{0} question name
       question_requireText: "Buat pertanyaan {0} diperlukan", //{0} question name
+      question_resetValueText: "reset nilai untuk pertanyaan: {0}",
+      question_setValueText: "Tetapkan nilai: {1} pertanyaan: {0}",
       column_visibilityText: "Membuat kolom {0} pertanyaan {1} terlihat", //{0} column name, {1} question name
       column_enableText: "Buat kolom {0} pertanyaan {1} aktifkan", //{0} column name, {1} question name
       column_requireText: "membuat kolom {0} pertanyaan {1} diperlukan", //{0} column name, {1} question name
+      column_resetValueText: "Setel ulang nilai sel untuk kolom: {0}",
+      column_setValueText: "Menetapkan nilai sel: {1} ke kolom: {0}",
+      setValueExpressionPlaceholder: " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target.",
       trigger_completeText: "Survei menjadi selesai",
       trigger_setvalueText: "Pertanyaan: {0} nilai {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Nilai Pertanyaan yang Jelas: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var indonesianStrings = {
     fastEntry: "Entri Cepat",
     fastEntryNonUniqueError: "Nilai '{0}' tidak unik",
     fastEntryChoicesCountError: "Harap batasi jumlah item dari {0} ke {1}",
+    fastEntryChoicesMinCountError: "Harap masukkan setidaknya {0} item",
     fastEntryPlaceholder: "Anda dapat mengatur data dalam format berikut:\nvalue1|text\nnilai2",
     formEntry: "Entri Form",
     testService: "Coba layanan",
@@ -277,6 +293,7 @@ export var indonesianStrings = {
     cellsEmptyRowsColumns: "Harus ada setidaknya satu kolom atau baris",
     showPreviewBeforeComplete: "Melihat pratinjau jawaban sebelum mengirimkan survei",
     overridingPropertyPrefix: "Ditetapkan oleh ",
+    resetToDefaultCaption: "Reset",
     propertyIsEmpty: "Silahkan masukkan nilai",
     propertyIsNoUnique: "Silakan masukkan nilai unik",
     propertyNameIsNotUnique: "Silakan masukkan nama yang unik",
@@ -322,6 +339,8 @@ export var indonesianStrings = {
     choicesOrder: "Tentukan urutan pilihan",
     visible: "Terlihat?",
     isRequired: "Wajib?",
+    markRequired: "Tandai sesuai kebutuhan",
+    removeRequiredMark: "Hapus tanda yang diperlukan",
     isAllRowRequired: "Memerlukan jawaban untuk semua baris",
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
     startWithNewLine: "Mulai dengan baris baru?",
@@ -403,7 +422,12 @@ export var indonesianStrings = {
       imageHeight: "Tinggi gambar (dalam nilai yang diterima CSS)",
       imageWidth: "Lebar gambar (dalam nilai yang diterima CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Batas waktu untuk menyelesaikan halaman (dalam detik)"
     },
     question: {
@@ -640,6 +664,9 @@ export var indonesianStrings = {
   pv: {
     "true": "benar",
     "false": "palsu",
+    file: "File lokal",
+    camera: "Kamera",
+    "file-camera": "File atau kamera lokal",
     inherit: "inherit",
     show: "tampilkan",
     hide: "sembunyikan",
@@ -902,6 +929,8 @@ export var indonesianStrings = {
     descriptionLocation: "Deskripsi lokasi",
     defaultValueExpression: "Ekspresi nilai default",
     requiredIf: "wajib jika",
+    resetValueIf: "Reset nilai jika",
+    setValueIf: "Tetapkan nilai jika",
     validators: "validator",
     bindings: "Binding",
     renderAs: "Render sebagai",
@@ -978,6 +1007,7 @@ export var indonesianStrings = {
     "--base-unit": "Unit dasar",
     groupGeneral: "Umum",
     groupAdvanced: "Maju",
+    groupHeader: "Header",
     themeName: "Tema",
     themeMode: "Penampilan pertanyaan",
     themeModePanels: "Default",
@@ -988,11 +1018,15 @@ export var indonesianStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
+    coverTitleForecolor: "Warna depan judul",
+    coverOverlapEnabled: "Tumpang tindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Gambar latar belakang",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Menutupi",
     backgroundImageFitContain: "Mengandung",
+    backgroundImageFitFill: "Merentangkan",
+    backgroundImageFitTile: "Ubin",
     backgroundOpacity: "Opacity",
     backgroundImageAttachmentFixed: "Tetap",
     backgroundImageAttachmentScroll: "Gulir",
@@ -1016,6 +1050,7 @@ export var indonesianStrings = {
     fontFamily: "Keluarga font",
     fontSize: "Ukuran font",
     color: "Warna",
+    placeholderColor: "Warna tempat penampung",
     size: "Tingginya",
     fontWeightRegular: "Biasa",
     fontWeightHeavy: "Berat",
@@ -1036,6 +1071,26 @@ export var indonesianStrings = {
     boxShadowInner: "Batin",
     questionShadow: "Efek bayangan",
     editorShadow: "Efek bayangan elemen input",
+    headerView: "Melihat",
+    headerViewBasic: "Dasar",
+    headerViewAdvanced: "Maju",
+    coverInheritWidthFrom: "Lebar area konten",
+    coverInheritWidthFromSurvey: "Sama seperti survei",
+    coverInheritWidthFromPage: "Paskan dengan halaman",
+    coverTextAreaWidth: "Lebar teks",
+    coverBackgroundColorSwitch: "Warna latar belakang",
+    coverBackgroundColorNone: "Tidak",
+    coverBackgroundColorAccentColor: "Warna aksen",
+    coverBackgroundColorCustom: "Adat",
+    horizontalAlignmentLeft: "Kiri",
+    horizontalAlignmentCenter: "Pusat",
+    horizontalAlignmentRight: "Kanan",
+    verticalAlignmentTop: "Puncak",
+    verticalAlignmentMiddle: "Tengah",
+    verticalAlignmentBottom: "Dasar",
+    logoPosition: "Posisi Logo",
+    coverTitlePosition: "Posisi Judul",
+    coverDescriptionPosition: "Deskripsi Posisi",
     names: {
       default: "Default",
       sharp: "Tajam",
@@ -1710,3 +1765,66 @@ editorLocalization.locales["id"] = indonesianStrings;
 // names.layered: "Layered" => "Berlapis"
 // names.solid: "Solid" => "Keras"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?"
+// ed.themeResetButton: "Reset theme settings to default" => "Setel ulang pengaturan tema ke default"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Warna tempat penampung"
+// ed.themeSettings: "Theme Settings" => "Pengaturan Tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Buka pengaturan tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Reset"
+// pv.file: "Local files" => "File lokal"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "File atau kamera lokal"
+// ed.translateUsigAI: "Auto-translate All" => "Terjemahkan otomatis Semua"
+// ed.translationDialogTitle: "Untranslated strings" => "String yang tidak diterjemahkan"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
+// lg.question_resetValueName: "Reset question value" => "Mereset nilai pertanyaan"
+// lg.column_resetValue: "Reset column value" => "Mereset nilai kolom"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
+// pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"
+// p.resetValueIf: "Reset value if" => "Reset nilai jika"
+// lg.question_setValueName: "Set question value" => "Tetapkan nilai pertanyaan"
+// lg.column_resetValueName: "Reset column value" => "Mereset nilai kolom"
+// lg.column_setValueName: "Set column value" => "Mengatur nilai kolom"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Tetapkan nilai jika"
+// theme.groupHeader: "Header" => "Header"
+// theme.coverTitleForecolor: "Title forecolor" => "Warna depan judul"
+// theme.coverOverlapEnabled: "Overlap" => "Tumpang tindih"
+// theme.backgroundImageFitFill: "Stretch" => "Merentangkan"
+// theme.backgroundImageFitTile: "Tile" => "Ubin"
+// theme.headerView: "View" => "Melihat"
+// theme.headerViewBasic: "Basic" => "Dasar"
+// theme.headerViewAdvanced: "Advanced" => "Maju"
+// theme.coverInheritWidthFrom: "Content area width" => "Lebar area konten"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Sama seperti survei"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Paskan dengan halaman"
+// theme.coverTextAreaWidth: "Text width" => "Lebar teks"
+// theme.coverBackgroundColorSwitch: "Background color" => "Warna latar belakang"
+// theme.coverBackgroundColorNone: "None" => "Tidak"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Warna aksen"
+// theme.coverBackgroundColorCustom: "Custom" => "Adat"
+// theme.horizontalAlignmentLeft: "Left" => "Kiri"
+// theme.horizontalAlignmentCenter: "Center" => "Pusat"
+// theme.horizontalAlignmentRight: "Right" => "Kanan"
+// theme.verticalAlignmentTop: "Top" => "Puncak"
+// theme.verticalAlignmentMiddle: "Middle" => "Tengah"
+// theme.verticalAlignmentBottom: "Bottom" => "Dasar"
+// theme.logoPosition: "Logo Position" => "Posisi Logo"
+// theme.coverTitlePosition: "Title Position" => "Posisi Judul"
+// theme.coverDescriptionPosition: "Description Position" => "Deskripsi Posisi"
+// lg.question_resetValueText: "reset value for question: {0}" => "reset nilai untuk pertanyaan: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Tetapkan nilai: {1} pertanyaan: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Setel ulang nilai sel untuk kolom: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Menetapkan nilai sel: {1} ke kolom: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

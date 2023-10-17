@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText, resetHoverToCreator } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -307,6 +307,7 @@ test("Check survey timer", async (t) => {
     await setJSON(json);
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(Selector(".sd-navigation__start-btn"));
+    await resetHoverToCreator(t);
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });

@@ -14,7 +14,8 @@ import {
   ComputedUpdater,
   DragOrClickHelper,
   QuestionSelectBase,
-  createDropdownActionModel
+  createDropdownActionModel,
+  CssClassBuilder
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -80,9 +81,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!model.surveyElement.isInteractiveDesignElement) {
       return;
     }
+    const creator = model.creator;
+    const selEl = model.surveyElement;
+    const el: any = document?.activeElement;
+    if(creator.selectedElement !== selEl && !!el && !!el.blur && el.tagName.toLocaleLowerCase() === "input") {
+      el.blur();
+    }
     event.stopPropagation();
     event.cancelBubble = true;
-    model.creator.selectElement(model.surveyElement, undefined, false);
+    creator.selectElement(selEl, undefined, false);
     return true;
   }
 
@@ -162,12 +169,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       onClick: () => { this.creator.selectElement(question); } };
   }
 
-  dispose() {
+  public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
     if (!!this.surveyElement["setCanShowOptionItemCallback"]) {
       (<any>this.surveyElement).setCanShowOptionItemCallback(undefined);
     }
+    super.dispose();
   }
   get isDraggable() {
     return true;
@@ -184,6 +192,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
     this.updateActionVisibilityByProp("isrequired", "isRequired", operationsAllow && options.allowChangeRequired);
     this.updateActionVisibilityByProp("convertInputType", "inputType", options.allowChangeInputType);
+    this.updateActionVisibilityByProp("convertInputType", "rateDisplayMode", options.allowChangeInputType);
   }
   private updateActionVisibilityByProp(actionName: string, propName: string, allow: boolean): void {
     const prop = Serializer.findProperty(this.surveyElement.getType(), propName);
@@ -235,8 +244,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return true;
   }
   public getConvertToTypesActions(): Array<IAction> {
+    const availableItems = this.creator.getAvailableToolboxItems(this.element, false);
+    const itemNames = [];
+    availableItems.forEach(item => itemNames.push(item.typeName));
     const convertClasses: string[] = QuestionConverter.getConvertToClasses(
-      this.currentType, this.creator.toolbox.itemNames, true
+      this.currentType, itemNames, true
     );
     const res = [];
     let lastItem = null;
@@ -261,6 +273,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       (item: any) => {
         this.creator.convertCurrentQuestion(item.id);
       });
+    newAction.disableHide = true;
     return newAction;
   }
   private createConvertInputType() {
@@ -280,6 +293,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         this.surveyElement.setPropertyValue(propName, item.id);
         newAction.title = item.title;
       });
+    newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
       propName,
       () => {
@@ -308,12 +322,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = createDropdownActionModel({
       id: id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: "icon-drop-down-arrow_16x16",
-      iconSize: 16,
+      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName,
+      iconSize: 24,
       title: actionTitle,
       enabled: enabled,
       visibleIndex: index,
-      disableShrink: true,
+      disableShrink: false,
       action: (newType) => {
         newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
       },
@@ -324,6 +338,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       selectedItem: selItem,
       horizontalPosition: "center"
     });
+    newAction.data.locOwner = this.creator;
     return newAction;
   }
 
@@ -333,10 +348,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       id: "isrequired",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.isRequired),
       ariaRole: "checkbox",
-      css: this.isRequired ? "sv-action-bar-item--secondary" : "",
+      css: "sv-action-bar-item--secondary",
       title: this.creator.getLocString("pe.isRequired"),
       visibleIndex: 20,
-      iconName: this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
+      iconName: "icon-required",
       iconSize: 16,
       action: () => {
         if (
@@ -349,14 +364,10 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         }
       }
     });
-    this.surveyElement.registerFunctionOnPropertyValueChanged(
-      "isRequired",
-      () => {
-        requiredAction.iconName = this.isRequired ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
-        requiredAction.css = this.isRequired ? "sv-action-bar-item--secondary" : "";
-      },
-      "isRequiredAdorner"
-    );
+    requiredAction.innerCss = <string>(new ComputedUpdater<string>(() => new CssClassBuilder().append("svc-required-action").append("svc-required-action--active", this.isRequired).toString()) as any);
+    requiredAction.innerItem.title = <string>(new ComputedUpdater<string>(() => {
+      return this.isRequired ? this.creator.getLocString("pe.removeRequiredMark") : this.creator.getLocString("pe.markRequired");
+    }) as any);
     return requiredAction;
   }
 
@@ -388,11 +399,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       this.currentAddQuestionType || settings.designer.defaultAddQuestionType);
   }
   questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(
-    (type) => {
-      this.currentAddQuestionType = type;
-    },
-    this.surveyElement instanceof PanelModelBase ? this.surveyElement : null
-  );
+    (type) => { this.currentAddQuestionType = type; }, this.surveyElement);
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)
       return this.creator.getLocString("ed.addNewQuestion");

@@ -14,7 +14,9 @@ import {
   QuestionMatrixDropdownModel,
   QuestionMatrixModel,
   QuestionCommentModel,
-  QuestionRadiogroupModel
+  QuestionRadiogroupModel,
+  SurveyTrigger,
+  Serializer
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -30,9 +32,12 @@ import { TabLogicPlugin } from "../../src/components/tabs/logic-plugin";
 import { wrapTextByCurlyBraces } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { editorLocalization } from "../../src/editorLocalization";
-import exp from "constants";
 
 export * from "../../src/components/link-value";
+export * from "../../src/custom-questions/question-text-with-reset";
+import { QuestionTextWithResetModel } from "../../src/custom-questions/question-text-with-reset";
+
+const questionLogicTypeLength = 5;
 
 test("SurveyLogicItem, logicType and logicType name", () => {
   var survey = new SurveyModel({
@@ -840,6 +845,71 @@ test("Create setValue trigger in logic", () => {
   panel.getQuestionByName("logicTypeName").value = "trigger_setvalue";
   expect(getSetToNameQuestion().value).toBeFalsy();
   expect(getSetValueQuestion().value).toBeFalsy();
+});
+
+test("Setup setValueIf property in logic", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", readOnly: true }
+    ]
+  });
+  const q2 = survey.getQuestionByName("q2");
+  const logic = new SurveyLogicUI(survey);
+  logic.addNew();
+  logic.expressionEditor.text = "{q1} = 1";
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
+  panel.getQuestionByName("logicTypeName").value = "question_setValue";
+  panel.getQuestionByName("elementSelector").value = "q2";
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
+  expect(panel.getQuestionByName("setValueExpression").placeholder).toBe("An expression whose result will be assigned to the target question.");
+  panel.getQuestionByName("setValueExpression").value = "{q1} + 1";
+  logic.itemEditor.apply();
+  logic.editableItem.apply("{q1} = 1");
+  expect(q2.setValueIf).toBe("{q1} = 1");
+  expect(q2.setValueExpression).toBe("{q1} + 1");
+});
+test("Setup setValueExpression comment value", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", readOnly: true, setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  logic.editItem(logic.items[0]);
+  expect(logic.expressionEditor.text).toBe("{q1} = 1");
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("question_setValue");
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
+  expect(panel.getQuestionByName("setValueExpression").value).toBe("{q1} + 1");
+  panel.getQuestionByName("logicTypeName").value = "question_visibility";
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
+  expect(panel.getQuestionByName("setValueExpression").value).toBeFalsy();
+  panel.getQuestionByName("logicTypeName").value = "question_setValue";
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeTruthy();
+  panel.getQuestionByName("logicTypeName").value = "question_resetValue";
+  expect(panel.getQuestionByName("elementSelector").value).toBe("q2");
+  expect(panel.getElementByName("setValueIfPanel").visible).toBeFalsy();
+});
+
+test("Show resetValueIf & setValueIf text in main matrix", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "dropdown", name: "q1", title: "Quesiton1", choices: [1, 2, 3] },
+      { type: "text", name: "q2", resetValueIf: "{q1} = 1" },
+      { type: "text", name: "q3", setValueIf: "{q1} = 2", setValueExpression: "{q1} + 1" },
+      { type: "text", name: "q4", setValueIf: "{q1} = 3" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items[0].getDisplayText()).toBe("If 'q1' == 1, reset value for question: 'q2'");
+  expect(logic.items[1].getDisplayText()).toBe("If 'q1' == 2, assign value: 'q1' + 1 to question: 'q3'");
+  expect(logic.items[2].getDisplayText()).toBe("If 'q1' == 3, clear question value: 'q4'");
 });
 
 test("LogicItemEditorUI: Manual Entry edit and change expressionEditorCanShowBuilder", () => {
@@ -1939,7 +2009,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types and delete actio
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
   expect(logicTypeName.value).toEqual("column_visibility");
 
   questionName.value = "q2";
@@ -1964,7 +2034,7 @@ test("LogicUI: edit matrix column visibleIf. Filter logic types by context initi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 });
 test("LogicUI: edit matrix column visibleIf. Two matrices with the same expression", () => {
   const survey = new SurveyModel({
@@ -1988,7 +2058,7 @@ test("LogicUI: edit matrix column visibleIf. Two matrices with the same expressi
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("column_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 
   logic.editItem(logic.items[1]);
   itemEditor = logic.itemEditor;
@@ -2127,7 +2197,7 @@ test("LogicUI: edit panel dynamic question visibleIf. Filter logic types and del
   expect(itemEditor.panels).toHaveLength(1);
   actionPanel = itemEditor.panels[0];
   logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
   expect(logicTypeName.value).toEqual("question_visibility");
 
   questionName.value = "q2";
@@ -2189,7 +2259,7 @@ test("LogicUI: panel dynamic question visibleIf. Filter logic types by context i
   let actionPanel = itemEditor.panels[0];
   let logicTypeName = <QuestionDropdownModel>actionPanel.getQuestionByName("logicTypeName");
   expect(logicTypeName.value).toEqual("question_visibility");
-  expect(logicTypeName.choices.length).toEqual(3);
+  expect(logicTypeName.choices.length).toEqual(questionLogicTypeLength);
 });
 test("LogicUI: edit visibleIf property for panel dynamic question template when question is located in the panel", () => {
   const survey = new SurveyModel({
@@ -2490,6 +2560,59 @@ test("Rename the name for matrices", () => {
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {q3[0].col1} < 2");
   logic.renameQuestion("q3", "question3");
   expect(q1.visibleIf).toEqual("{question2.row1.col1} > 2 and {question3[0].col1} < 2");
+});
+test("Rename the name for panel dynamic", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "paneldynamic",
+        name: "question1",
+        templateElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{panel.question2} = 'a'"
+          }
+        ]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var question1 = <QuestionPanelDynamicModel>survey.getQuestionByName("question1");
+  logic.renameQuestion("question2", "question5");
+  expect((<Question>question1.templateElements[1]).visibleIf).toEqual("{panel.question5} = 'a'");
+});
+test("Rename the name for detail panel in matrix dynamic", () => {
+  var survey = new SurveyModel({
+    elements: [
+      {
+        type: "matrixdynamic",
+        name: "question1",
+        detailPanelMode: "underRow",
+        detailElements: [
+          {
+            type: "text",
+            name: "question2"
+          },
+          {
+            type: "text",
+            name: "question3",
+            visibleIf: "{row.question2} = 'a'"
+          }
+        ],
+        columns: [{ name: "col1", visibleIf: "{row.question2} = 'a'" }]
+      }
+    ]
+  });
+  var logic = new SurveyLogic(survey);
+  var question1 = <QuestionMatrixDynamicModel>survey.getQuestionByName("question1");
+  logic.renameQuestion("question2", "question5");
+  expect((<Question>question1.detailElements[1]).visibleIf).toEqual("{row.question5} = 'a'");
+  expect(question1.columns[0].visibleIf).toEqual("{row.question5} = 'a'");
 });
 test("Do not reacreate logic for updating expressions for every change", (): any => {
   const creator = new CreatorTester();
@@ -3038,3 +3161,117 @@ test("SurveyLogicItem,  setValue css", () => {
   expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
   ComponentCollection.Instance.clear();
 });
+test("Test questions css in an action panel", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }
+    ],
+    triggers: [
+      {
+        type: "setvalue",
+        expression: "{q1} = 2",
+        setToName: "q2", setValue: 5
+      },
+      {
+        type: "runexpression",
+        expression: "{q1} = 3",
+        runExpression: "{q1} + 3"
+      }
+    ],
+    completedHtmlOnCondition: [
+      { expression: "{q1} = 4", html: "Custom html" },
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(4);
+  const checkFunc = (rowIndex: number, logicTypeName: string, questionName: string, hasFrame: boolean): void => {
+    const row = logic.matrixItems.visibleRows[rowIndex];
+    row.showDetailPanel();
+    let panel = logic.itemEditor.panels[0];
+    expect(panel.getQuestionByName("logicTypeName").value).toBe(logicTypeName);
+    let panelQuestion = panel.getQuestionByName(questionName);
+    expect(panelQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame") > -1).toBe(hasFrame);
+    expect(panelQuestion.getControlClass().indexOf("sd-question")).toBeTruthy();
+  };
+  checkFunc(0, "question_setValue", "setValueExpression", false);
+  checkFunc(1, "trigger_setvalue", "setValue", true);
+  checkFunc(2, "trigger_runExpression", "runExpression", false);
+  checkFunc(3, "completedHtmlOnCondition", "html", false);
+});
+
+test("Custom trigger in logic", () => {
+  Serializer.addClass(
+    "incrementcountertrigger",
+    [
+      {
+        name: "initialNumber:number",
+        default: 0
+      },
+      "targetCounter:questionvalue"
+    ],
+    function () {
+      return new IncrementCounterTrigger();
+    },
+    "surveytrigger"
+  );
+  SurveyLogic.types.push({
+    name: "increment_counter",
+    baseClass: "incrementcountertrigger",
+    propertyName: "expression"
+  });
+
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2" }
+    ],
+    triggers: [
+      {
+        type: "incrementcounter",
+        expression: "{q1} = 1",
+        initialNumber: "21",
+        targetCounter: "q2"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.matrixItems.visibleRows).toHaveLength(1);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const panel = logic.itemEditor.panels[0];
+  expect(panel.getQuestionByName("logicTypeName").value).toBe("increment_counter");
+  const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
+  const targetCounterQuestion = triggerEditorPanel.getQuestionByName("targetCounter");
+  expect(targetCounterQuestion.value).toBe("q2");
+  const initialNumberQuestion = <QuestionTextWithResetModel>triggerEditorPanel.getQuestionByName("initialNumber");
+  expect(initialNumberQuestion.value).toBe(21);
+
+  expect(targetCounterQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
+  expect(targetCounterQuestion.getControlClass().indexOf("sd-dropdown")).toBeTruthy();
+  expect(initialNumberQuestion.cssClasses.mainRoot.indexOf("sd-element--with-frame")).toBeTruthy();
+  expect(initialNumberQuestion.getControlClass().indexOf("spg-input-container__input")).toBeTruthy();
+
+  delete SurveyLogic.types["increment_counter"];
+  Serializer.removeClass("incrementcountertrigger");
+});
+
+class IncrementCounterTrigger extends SurveyTrigger {
+
+  public getType():string {
+    return "incrementcountertrigger";
+  }
+  public get targetCounter(): string {
+    return this.getPropertyValue("targetCounter");
+  }
+  public set targetCounter(val: string) {
+    this.setPropertyValue("targetCounter", val);
+  }
+  public get initialNumber(): number {
+    return this.getPropertyValue("initialNumber");
+  }
+  public set initialNumber(val: number) {
+    this.setPropertyValue("initialNumber", val);
+  }
+
+}

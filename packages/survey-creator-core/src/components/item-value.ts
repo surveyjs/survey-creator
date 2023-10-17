@@ -110,7 +110,7 @@ export class ItemValueWrapperViewModel extends Base {
   private get dragDropHelper(): DragDropChoices {
     return this.creator.dragDropChoices;
   }
-  public dispose() {
+  public dispose(): void {
     super.dispose();
     this.dragDropHelper.onGhostPositionChanged.remove(
       this.handleDragDropGhostPositionChanged
@@ -218,6 +218,8 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   get allowRemove() {
+    const minChoices = this.creator.minimumChoicesCount;
+    if(minChoices > 0 && minChoices >= this.question.choices.length) return false;
     const isNew = !this.question.isItemInList(this.item);
     return !this.creator.readOnly && this.canTouchItems && (this.allowItemOperations.allowDelete) && !isNew;
   }

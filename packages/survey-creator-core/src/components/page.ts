@@ -15,7 +15,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   @property({ defaultValue: "" }) currentAddQuestionType: string;
   @property({ defaultValue: null }) dragTypeOverMe: DragTypeOverMeEnum;
   private updateDragTypeOverMe() {
-    this.dragTypeOverMe = this.page.dragTypeOverMe;
+    if (!this.isDisposed) {
+      this.dragTypeOverMe = this.page?.dragTypeOverMe;
+    }
   }
   constructor(creator: CreatorBase, page: PageModel) {
     super(creator, page);
@@ -37,7 +39,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement["surveyChangedCallback"] = () => {
         this.isPageLive = !!surveyElement.survey;
       };
-      if (this.isGhost) {
+      if (this.calcIsGhostPage(surveyElement)) {
         this.updateActionsProperties();
         surveyElement.registerFunctionOnPropertiesValueChanged(
           ["title", "description"],
@@ -73,7 +75,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
-    this.dragTypeOverMe = null;
+    if (!this.isDisposed) {
+      this.dragTypeOverMe = null;
+    }
   }
 
   protected onElementSelectedChanged(isSelected: boolean) {
@@ -93,12 +97,15 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     };
   }
   public dispose(): void {
-    super.dispose();
     this.detachElement(this.page);
+    super.dispose();
     this.onPropertyValueChangedCallback = undefined;
   }
+  protected calcIsGhostPage(page: PageModel) {
+    return this.creator.survey.pages.indexOf(page) < 0;
+  }
   public get isGhost(): boolean {
-    return this.creator.survey.pages.indexOf(this.page) < 0;
+    return this.calcIsGhostPage(this.page);
   }
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single" && this.creator.allowModifyPages;
@@ -174,6 +181,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected duplicate() {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
+  }
+  protected delete(): void {
+    this.creator.deleteElement(this.page);
   }
   public get addNewQuestionText(): string {
     if (!this.currentAddQuestionType && this.creator)

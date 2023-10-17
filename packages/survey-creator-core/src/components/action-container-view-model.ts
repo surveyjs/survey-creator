@@ -4,13 +4,58 @@ import {
   Action,
   SurveyModel,
   SurveyElement,
-  property
+  property,
+  actionModeType
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { settings } from "../creator-settings";
 
+export class SurveyElementActionContainer extends AdaptiveActionContainer {
+  private setModeForActions(modes: any, defaultMode: actionModeType): void {
+    this.visibleActions.forEach((action) => {
+      action.mode = modes[action.id] || defaultMode;
+    });
+  }
+  private skipInputType(item: Action, dimension) {
+    return item.id != "convertInputType" ? dimension : 0;
+  }
+  private skipQuestionType(item: Action, dimension) {
+    return item.id != "convertInputType" && item.id != "convertTo" ? dimension : 0;
+  }
+  public fit(dimension: number, dotsItemSize: number) {
+    if (dimension <= 0) return;
+
+    this.dotsItem.visible = false;
+    const items = this.visibleActions;
+
+    if (dimension >= items.reduce((sum, i) => sum += i.maxDimension, 0)) {
+      items.forEach(i => i.mode = "large");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
+      this.setModeForActions({ "convertInputType": "removed" }, "large");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipQuestionType(i, i.minDimension), this.getActionById("convertTo")?.maxDimension)) {
+      this.setModeForActions({ "convertInputType": "removed", "convertTo": "large" }, "small");
+      return;
+    }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.minDimension), 0)) {
+      this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "small");
+      return;
+    }
+
+    this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "popup");
+    this.dotsItem.visible = true;
+    this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
+  }
+}
+
 export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> extends Base {
-  public actionContainer: AdaptiveActionContainer;
+  public actionContainer: SurveyElementActionContainer;
   @property({ defaultValue: true }) allowDragging: boolean;
   private allowEditOption: boolean;
   private selectedPropPageFunc: (sender: Base, options: any) => void;
@@ -31,7 +76,9 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         this.updateActionsProperties();
       }
     };
-    this.actionContainer = new AdaptiveActionContainer();
+    this.actionContainer = new SurveyElementActionContainer();
+    this.actionContainer.dotsItem.iconSize = 16;
+    this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     var actions: Array<Action> = [];
     this.buildActions(actions);
     this.setSurveyElement(surveyElement);
@@ -69,6 +116,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
+    if(!this.actionContainer.isDisposed) {
+      this.actionContainer.dispose();
+    }
+    this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
+    this.selectedPropPageFunc = undefined;
+    this.sidebarFlyoutModeChangedFunc = undefined;
   }
   protected onElementSelectedChanged(isSelected: boolean): void {
     if (!isSelected) return;
@@ -96,6 +149,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   protected updateActionVisibility(id: string, isVisible: boolean) {
     var action = this.getActionById(id);
     if (!action) return;
+    if (action.visible == isVisible) return;
     action.visible = isVisible;
   }
   public getActionById(id: string): Action {
@@ -111,7 +165,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "duplicate",
         iconName: "icon-duplicate_16x16",
         css: "sv-action-bar-item--secondary",
-        locTitleName: "survey.duplicate",
+        title: this.creator.getLocString("survey.duplicate"),
         visibleIndex: 10,
         iconSize: 16,
         action: () => {
@@ -125,13 +179,15 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         id: "settings",
         iconName: "icon-settings_16x16",
         css: "sv-action-bar-item--secondary",
-        locTitleName: "ed.settings",
+        title: this.creator.getLocString("ed.settings"),
         locTooltipName: "ed.settingsTooltip",
         visibleIndex: 20,
         iconSize: 16,
         action: () => {
           this.creator.setShowSidebar(true, true);
-          this.creator.propertyGrid.getAllQuestions()[0].focus();
+          if (!this.creator.isMobileView) {
+            this.creator.propertyGrid.getAllQuestions()[0].focus();
+          }
         }
       })
     );
@@ -142,11 +198,11 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
         iconName: "icon-delete_16x16",
         css: "sv-action-bar-item--secondary",
         //needSeparator: items.length > 0,
-        locTitleName: "pe.delete",
+        title: this.creator.getLocString("pe.delete"),
         visibleIndex: 30,
         iconSize: 16,
         action: () => {
-          this.creator.deleteElement(this.surveyElement);
+          this.delete();
         }
       })
     );
@@ -161,4 +217,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.setPropertyValue("showAddQuestionButton", val && this.allowEdit && settings.designer.showAddQuestionButton);
   }
   protected duplicate(): void { }
+  protected delete(): void {
+    this.creator.deleteElement(this.surveyElement);
+  }
 }

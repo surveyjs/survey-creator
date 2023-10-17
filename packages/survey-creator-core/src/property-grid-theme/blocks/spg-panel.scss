@@ -17,17 +17,22 @@
   font-weight: 400;
   margin: 0;
 }
+
 .spg-panel__title:disabled,
 .spg-panel__title:disabled:hover {
   color: $foreground;
   opacity: 0.25;
   cursor: default;
 }
+
 .spg-panel__title--expandable:not(.spg-panel__title[aria-expanded=true]) {
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     background-color: $background-dim;
   }
 }
+
 .spg-panel__title[aria-expanded=true],
 .spg-panel__title--expanded {
   color: $foreground;
@@ -44,17 +49,27 @@
   background: $background-dim;
   box-shadow: inset 0px -1px 0px $border;
 }
+
 .spg-panel__content {
   .spg-row {
     width: 100%;
     margin-top: calcSize(2);
   }
+
   .spg-row--multiple {
     margin-top: calcSize(1);
   }
 }
+
 .sv-mobile-side-bar {
   .spg-panel__content {
     padding: 0 calcSize(2) calcSize(5);
+  }
+}
+
+.spg-question__nopadding {
+  .spg-panel__content {
+    padding: 0px;
+    box-shadow: unset;
   }
 }

@@ -13,7 +13,6 @@ export { ICreatorOptions } from "../creator-options";
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
 
-export * from "../components/tabs/embed";
 export * from "../components/tabs/json-editor-ace";
 export * from "../components/tabs/json-editor-plugin";
 export * from "../components/tabs/json-editor-textarea";
@@ -23,7 +22,8 @@ export * from "../components/tabs/theme-custom-questions/color-settings";
 export * from "../components/tabs/theme-custom-questions/boxshadow-settings";
 export * from "../components/tabs/theme-custom-questions/font-settings";
 export * from "../components/tabs/theme-custom-questions/element-settings";
-export * from "../components/tabs/theme";
+export * from "../components/tabs/themes";
+export * from "../components/tabs/theme-builder";
 export * from "../components/tabs/theme-plugin";
 export * from "../components/tabs/logic";
 export * from "../components/tabs/translation";
@@ -59,6 +59,7 @@ export * from "../json5";
 export * from "../custom-questions/question-spin-editor";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/question-file";
+export * from "../custom-questions/question-text-with-reset";
 
 export * from "../property-grid";
 export * from "../property-grid/condition";

@@ -40,7 +40,6 @@ export * from "../StringEditor";
 
 export * from "../tabs/logic-operator";
 export * from "../tabs/Designer";
-export * from "../tabs/Embed";
 export * from "../tabs/JsonEditorAce";
 export * from "../tabs/JsonEditorTextarea";
 export * from "../tabs/Logic";
@@ -53,11 +52,14 @@ export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
 
+export * from "../tabs/JsonErrorItem";
+
 //custom questions
 export * from "../custom-questions/SpinEditor";
 export * from "../custom-questions/ColorItem";
 export * from "../custom-questions/ColorQuestion";
 export * from "../custom-questions/FileEditQuestion";
+export * from "../custom-questions/TextWithResetQuestion";
 
 export { editorLocalization, localization } from "survey-creator-core";
 export { settings } from "survey-creator-core";

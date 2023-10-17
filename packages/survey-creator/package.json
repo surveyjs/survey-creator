@@ -1,5 +1,5 @@
 {
-  "version": "1.9.102",
+  "version": "1.9.112",
   "name": "survey-creator",
   "homepage": "https://surveyjs.io/Overview/Survey-Creator",
   "license": "SEE LICENSE IN LICENSE",
@@ -39,7 +39,7 @@
     "@types/papaparse": "^5.0.4",
     "@types/qunit": "2.0.31",
     "ace-builds": "1.2.2",
-    "ajv": "4.11.2",
+    "ajv": "6.12.3",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-preset-latest": "6.22.0",
@@ -70,6 +70,7 @@
     "style-loader": "^1.3.0",
     "surveyjs-doc-generator": "git+https://github.com/surveyjs/surveyjs-doc-generator.git",
     "testcafe": "1.18.4",
+    "get-func-name": "2.0.0",
     "@types/lodash": "4.14.186",
     "testcafe-reporter-dashboard": "^0.2.4-rc.1",
     "ts-loader": "^7.0.5",

@@ -1,4 +1,4 @@
-import { CssClassBuilder, Helpers, QuestionFactory, QuestionFileModel, Serializer } from "survey-core";
+import { CssClassBuilder, EventBase, Helpers, QuestionFactory, QuestionFileModel, Serializer, property } from "survey-core";
 
 export class QuestionFileEditorModel extends QuestionFileModel {
   protected loadedFilesValue: any;
@@ -12,6 +12,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       this.loadedFilesValue = newValue;
       newValue = this.previewValue[0].content;
     }
+    this.updateRenderedValue(newValue);
     super.setNewValue(newValue);
   }
   protected loadPreview(newValue: any): void {
@@ -49,12 +50,35 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       callback();
     }
   }
+
+  @property() private _renderedValue: string = "";
+  @property() public placeholder: string = "";
+
+  protected updateRenderedValue(value: string) {
+    const matchBase64 = !!value ? value.match(/^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),/) : null;
+    if(matchBase64) {
+      this.placeholder = matchBase64[0] + "...";
+      this._renderedValue = "";
+    } else {
+      this.placeholder = "";
+      this._renderedValue = value;
+    }
+  }
+
+  public get renderedValue(): string {
+    return this._renderedValue;
+  }
+
   protected updateValueFromInputEvent(event: Event) {
     if(!Helpers.isTwoValueEquals((<HTMLInputElement>event.target).value, this.value)) {
       this.clear(undefined, false);
       this.loadedFilesValue = undefined;
       this.value = (<HTMLInputElement>event.target).value;
     }
+  }
+  public onSurveyValueChanged(newValue: any): void {
+    super.onSurveyValueChanged(newValue);
+    this.updateRenderedValue(newValue);
   }
   public onInputChange(event: Event) {
     if(event.target !== document.activeElement) {
@@ -72,6 +96,28 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
   public getChooseButtonCss(): string {
     return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
+  }
+  public onKeyDown = (event: KeyboardEvent) => {
+    this.onTextKeyDownHandler(event);
+  }
+  public onFileInputChange = (event: Event) => {
+    if(!this.onChooseFilesCallback) {
+      this.doChange(event);
+      return true;
+    }
+  }
+  public onChooseFilesCallback: (input: HTMLInputElement, onFilesChosen: (files: File[]) => void) => void;
+  chooseFiles(event: Event) {
+    if(this.isInputReadOnly || !this.onChooseFilesCallback) {
+      return true;
+    } else {
+      event.preventDefault();
+      event.stopPropagation();
+      const input = this["rootElement"].querySelectorAll("input[type='file']")[0];
+      this.onChooseFilesCallback(input, (files) => {
+        this.loadFiles(files);
+      });
+    }
   }
 }
 Serializer.addClass("fileedit", [], () => new QuestionFileEditorModel(""), "file");

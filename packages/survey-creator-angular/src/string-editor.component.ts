@@ -9,7 +9,7 @@ import { AngularComponentFactory } from "survey-angular-ui";
   templateUrl: "./string-editor.component.html",
   styles: [":host { display: none; }"]
 })
-export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> {
+export class StringEditorComponent extends CreatorModelComponent<StringEditorViewModelBase> implements AfterViewInit {
   public baseModel!: StringEditorViewModelBase;
   private justFocused: boolean = false;
   @Input() model!: any;
@@ -19,6 +19,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   public createModel(): void {
     this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+    this.baseModel.setLocString(this.locString);
     this.baseModel.blurEditor = () => {
       this.container.nativeElement.blur();
       this.container.nativeElement.spellcheck = false;
@@ -93,12 +94,17 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   }
   override ngOnInit(): void {
     super.ngOnInit();
+    this.locString?.onStringChanged.add(this.onChangeHandler);
+  }
+  ngAfterViewInit(): void {
     if ((<any>this.locString).__isEditing) {
       this.container.nativeElement.focus();
     }
-    this.locString?.onStringChanged.add(this.onChangeHandler);
   }
   override ngOnDestroy(): void {
+    this.baseModel.blurEditor = undefined as any;
+    this.baseModel.getEditorElement = undefined as any;
+    this.baseModel.dispose();
     this.locString?.onStringChanged.remove(this.onChangeHandler);
     super.ngOnDestroy();
   }

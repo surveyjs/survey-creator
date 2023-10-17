@@ -50,6 +50,8 @@ export var nlStrings = {
     settingsTooltip: "Open enquête-instellingen",
     surveySettings: "Enquête-instellingen",
     surveySettingsTooltip: "Enquête-instellingen openen",
+    themeSettings: "Thema-instellingen",
+    themeSettingsTooltip: "Thema-instellingen openen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -126,6 +128,7 @@ export var nlStrings = {
     translationPropertyGridTitle: "Taalinstellingen",
     themePropertyGridTitle: "Thema-instellingen",
     translationLanguages: "Talen",
+    translationDeleteLanguage: "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?",
     translationAddLanguage: "Selecteer de taal om te vertalen",
     translationShowAllStrings: "Toon alle snaren",
     translationShowUsedStringsOnly: "Alleen gebruikte tekenreeksen",
@@ -133,10 +136,13 @@ export var nlStrings = {
     translationNoStrings: "Geen verplichtingen om te vertalen. Vervang alstublieft het filter.",
     translationExportToSCVButton: "Exporteren naar CSV",
     translationImportFromSCVButton: "Importeren vanuit CSV",
+    translateUsigAI: "Alles automatisch vertalen",
+    translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
+    themeResetButton: "Thema-instellingen terugzetten op de standaardinstellingen",
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
@@ -162,9 +168,13 @@ export var nlStrings = {
       question_visibilityName: "Vraag zichtbaarheid",
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
+      question_resetValueName: "Vraagwaarde opnieuw instellen",
+      question_setValueName: "Vraagwaarde instellen",
       column_visibilityName: "Kolom weergeven (verbergen)",
       column_enableName: "Kolom Inschakelen (uitschakelen)",
       column_requireName: "Kolom verplicht maken",
+      column_resetValueName: "Kolomwaarde opnieuw instellen",
+      column_setValueName: "Kolomwaarde instellen",
       trigger_completeName: "Volledige enquête",
       trigger_setvalueName: "Stel vraagwaarde in",
       trigger_copyvalueName: "Kopieer de vraagwaarde",
@@ -191,9 +201,14 @@ export var nlStrings = {
       question_visibilityText: "Maak vraag {0} zichtbaar", //{0} question name
       question_enableText: "Schakel vraag {0} in", //{0} question name
       question_requireText: "Stel vraag {0} verplicht", //{0} question name
+      question_resetValueText: "Resetwaarde voor vraag: {0}",
+      question_setValueText: "Waarde: {1} toewijzen aan vraag: {0}",
       column_visibilityText: "Kolom {0} van vraag {1} zichtbaar maken", //{0} column name, {1} question name
       column_enableText: "Kolom {0} van vraag maken {1} inschakelen", //{0} column name, {1} question name
       column_requireText: "Kolom {0} met vraag {1} verplicht maken", //{0} column name, {1} question name
+      column_resetValueText: "Celwaarde voor kolom opnieuw instellen: {0}",
+      column_setValueText: "Celwaarde: {1} toewijzen aan kolom: {0}",
+      setValueExpressionPlaceholder: " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag.",
       trigger_completeText: "Enquête wordt voltooid",
       trigger_setvalueText: "Stel de vraag: {0} waarde {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "duidelijke vraagwaarde: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var nlStrings = {
     fastEntry: "Snelle toegang",
     fastEntryNonUniqueError: "Waarde '{0}' is niet uniek",
     fastEntryChoicesCountError: "Beperk het aantal objecten van {0} tot {1}",
+    fastEntryChoicesMinCountError: "Voer ten minste {0} objecten in",
     fastEntryPlaceholder: "U kunt gegevens instellen in de volgende indeling:\nwaarde1|tekst\nwaarde2",
     formEntry: "Formulierinvoer",
     testService: "Test de service",
@@ -277,6 +293,7 @@ export var nlStrings = {
     cellsEmptyRowsColumns: "Er moet minimaal één kolom of rij zijn",
     showPreviewBeforeComplete: "Voorbeeldweergave voor afronden",
     overridingPropertyPrefix: "Ingesteld door ",
+    resetToDefaultCaption: "Terugstellen",
     propertyIsEmpty: "Voer alstublieft een waarde in",
     propertyIsNoUnique: "Voer een unieke waarde in",
     propertyNameIsNotUnique: "Voer een unieke naam in",
@@ -322,6 +339,8 @@ export var nlStrings = {
     choicesOrder: "Volgorde opties",
     visible: "Is zichtbaar?",
     isRequired: "Is verplicht?",
+    markRequired: "Markeren zoals vereist",
+    removeRequiredMark: "Verwijder de vereiste markering",
     isAllRowRequired: "Antwoord vereisen voor alle rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
     startWithNewLine: "Beginnen met een nieuwe regel?",
@@ -403,7 +422,12 @@ export var nlStrings = {
       imageHeight: "Afbeeldingshoogte (in css-geaccepteerde waarden)",
       imageWidth: "Afbeeldingsbreedte (in css-geaccepteerde waarden)"
     },
+    // survey templates
+    survey: {
+      title: "Titel"
+    },
     page: {
+      title: "Titel",
       maxTimeToFinish: "Tijdslimiet om de pagina te voltooien (in seconden)"
     },
     question: {
@@ -640,6 +664,9 @@ export var nlStrings = {
   pv: {
     "true": "waar",
     "false": "vals",
+    file: "Lokale bestanden",
+    camera: "Fototoestel",
+    "file-camera": "Lokale bestanden of camera",
     inherit: "Erven",
     show: "Tonen",
     hide: "Zich verstoppen",
@@ -902,6 +929,8 @@ export var nlStrings = {
     descriptionLocation: "Plek omschrijving",
     defaultValueExpression: "Standaardwaarde-expressie",
     requiredIf: "Vereist als",
+    resetValueIf: "Waarde opnieuw instellen als",
+    setValueIf: "Stel de waarde in als",
     validators: "Validators",
     bindings: "Bindings",
     renderAs: "Renderen als",
@@ -978,6 +1007,7 @@ export var nlStrings = {
     "--base-unit": "Basiseenheid",
     groupGeneral: "Algemeen",
     groupAdvanced: "Geavanceerd",
+    groupHeader: "Rubriek",
     themeName: "Thema",
     themeMode: "Uiterlijk van de vraag",
     themeModePanels: "Verstek",
@@ -988,11 +1018,15 @@ export var nlStrings = {
     primaryDefaultColor: "Verstek",
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
+    coverTitleForecolor: "Voorkleur titel",
+    coverOverlapEnabled: "Overlappen",
     backgroundDimColor: "Achtergrondkleur",
     backgroundImage: "Achtergrondafbeelding",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Bedekken",
     backgroundImageFitContain: "Bevatten",
+    backgroundImageFitFill: "Strekken",
+    backgroundImageFitTile: "Tegel",
     backgroundOpacity: "Dekking",
     backgroundImageAttachmentFixed: "Vast",
     backgroundImageAttachmentScroll: "Scrollen",
@@ -1016,6 +1050,7 @@ export var nlStrings = {
     fontFamily: "Lettertypefamilie",
     fontSize: "Tekengrootte",
     color: "Kleur",
+    placeholderColor: "Kleur van tijdelijke aanduiding",
     size: "Grootte",
     fontWeightRegular: "Regelmatig",
     fontWeightHeavy: "Zwaar",
@@ -1036,6 +1071,26 @@ export var nlStrings = {
     boxShadowInner: "Binnenste",
     questionShadow: "Schaduweffecten",
     editorShadow: "Schaduweffecten van invoerelementen",
+    headerView: "Bekijken",
+    headerViewBasic: "Basisch",
+    headerViewAdvanced: "Geavanceerd",
+    coverInheritWidthFrom: "Breedte van het inhoudsgebied",
+    coverInheritWidthFromSurvey: "Hetzelfde als enquête",
+    coverInheritWidthFromPage: "Aanpassen aan pagina",
+    coverTextAreaWidth: "Tekstbreedte",
+    coverBackgroundColorSwitch: "Achtergrondkleur",
+    coverBackgroundColorNone: "Geen",
+    coverBackgroundColorAccentColor: "Accentkleur",
+    coverBackgroundColorCustom: "Gewoonte",
+    horizontalAlignmentLeft: "Links",
+    horizontalAlignmentCenter: "Middelpunt",
+    horizontalAlignmentRight: "Rechts",
+    verticalAlignmentTop: "Boven",
+    verticalAlignmentMiddle: "Midden",
+    verticalAlignmentBottom: "Bodem",
+    logoPosition: "Logo positie",
+    coverTitlePosition: "Titel positie",
+    coverDescriptionPosition: "Beschrijving Positie",
     names: {
       default: "Verstek",
       sharp: "Scherp",
@@ -1535,3 +1590,66 @@ editorLocalization.locales["nl"] = nlStrings;
 // names.layered: "Layered" => "Gelaagd"
 // names.solid: "Solid" => "Degelijk"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?"
+// ed.themeResetButton: "Reset theme settings to default" => "Thema-instellingen terugzetten op de standaardinstellingen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Kleur van tijdelijke aanduiding"
+// ed.themeSettings: "Theme Settings" => "Thema-instellingen"
+// ed.themeSettingsTooltip: "Open theme settings" => "Thema-instellingen openen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Terugstellen"
+// pv.file: "Local files" => "Lokale bestanden"
+// pv.camera: "Camera" => "Fototoestel"
+// pv.file-camera: "Local files or camera" => "Lokale bestanden of camera"
+// ed.translateUsigAI: "Auto-translate All" => "Alles automatisch vertalen"
+// ed.translationDialogTitle: "Untranslated strings" => "Onvertaalde tekenreeksen"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
+// lg.question_resetValueName: "Reset question value" => "Vraagwaarde opnieuw instellen"
+// lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Markeren zoals vereist"
+// pe.removeRequiredMark: "Remove the required mark" => "Verwijder de vereiste markering"
+// p.resetValueIf: "Reset value if" => "Waarde opnieuw instellen als"
+// lg.question_setValueName: "Set question value" => "Vraagwaarde instellen"
+// lg.column_resetValueName: "Reset column value" => "Kolomwaarde opnieuw instellen"
+// lg.column_setValueName: "Set column value" => "Kolomwaarde instellen"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titel"
+// page.title: "Title" => "Titel"
+// p.setValueIf: "Set value if" => "Stel de waarde in als"
+// theme.groupHeader: "Header" => "Rubriek"
+// theme.coverTitleForecolor: "Title forecolor" => "Voorkleur titel"
+// theme.coverOverlapEnabled: "Overlap" => "Overlappen"
+// theme.backgroundImageFitFill: "Stretch" => "Strekken"
+// theme.backgroundImageFitTile: "Tile" => "Tegel"
+// theme.headerView: "View" => "Bekijken"
+// theme.headerViewBasic: "Basic" => "Basisch"
+// theme.headerViewAdvanced: "Advanced" => "Geavanceerd"
+// theme.coverInheritWidthFrom: "Content area width" => "Breedte van het inhoudsgebied"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Hetzelfde als enquête"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Aanpassen aan pagina"
+// theme.coverTextAreaWidth: "Text width" => "Tekstbreedte"
+// theme.coverBackgroundColorSwitch: "Background color" => "Achtergrondkleur"
+// theme.coverBackgroundColorNone: "None" => "Geen"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Accentkleur"
+// theme.coverBackgroundColorCustom: "Custom" => "Gewoonte"
+// theme.horizontalAlignmentLeft: "Left" => "Links"
+// theme.horizontalAlignmentCenter: "Center" => "Middelpunt"
+// theme.horizontalAlignmentRight: "Right" => "Rechts"
+// theme.verticalAlignmentTop: "Top" => "Boven"
+// theme.verticalAlignmentMiddle: "Middle" => "Midden"
+// theme.verticalAlignmentBottom: "Bottom" => "Bodem"
+// theme.logoPosition: "Logo Position" => "Logo positie"
+// theme.coverTitlePosition: "Title Position" => "Titel positie"
+// theme.coverDescriptionPosition: "Description Position" => "Beschrijving Positie"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetwaarde voor vraag: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Waarde: {1} toewijzen aan vraag: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Celwaarde voor kolom opnieuw instellen: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Celwaarde: {1} toewijzen aan kolom: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

@@ -15,16 +15,13 @@ export class TabTestPlugin implements ICreatorPlugin {
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
   private designerAction: Action;
+  private previewAction: Action;
   private prevPageAction: Action;
   private nextPageAction: Action;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
 
   public model: TestSurveyTabViewModel;
 
-  private getSimulatorDevicesTitle(): string {
-    if (!this.model) return "";
-    return simulatorDevices[this.model.simulator.device].title || getLocString("pe.simulator");
-  }
   private setDevice(newVal: string) {
     this.model.simulator.device = newVal;
     this.model.simulator.resetZoomParameters();
@@ -73,6 +70,9 @@ export class TabTestPlugin implements ICreatorPlugin {
   private setPreviewTheme(themeName: string): void {
     this.simulatorTheme = surveyCss[themeName] || surveyCss[defaultV2ThemeName];
   }
+  private createVisibleUpdater() {
+    return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
+  }
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("test", this, "ed.testSurvey");
@@ -111,6 +111,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     if (this.model) {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onSurveyCreatedCallback = undefined;
+      this.model.dispose();
       this.model = undefined;
     }
     this.languageSelectorAction.visible = false;
@@ -270,20 +271,29 @@ export class TabTestPlugin implements ICreatorPlugin {
 
     this.designerAction = new Action({
       id: "svd-designer",
-      iconName: "icon-preview",
-      needSeparator: true,
+      iconName: "icon-config",
       action: () => { this.creator.makeNewViewActive("designer"); },
-      active: <any>new ComputedUpdater<boolean>(() => this.creator.activeTab === "test"),
-      visible: <any>new ComputedUpdater<boolean>(() => {
-        return (this.creator.activeTab === "test");
-      }),
+      visible: this.createVisibleUpdater(),
       locTitleName: "ed.designer",
       showTitle: false
+    });
+
+    this.previewAction = new Action({
+      id: "svd-preview",
+      iconName: "icon-preview",
+      active: true,
+      visible: this.createVisibleUpdater(),
+      locTitleName: "ed.testSurvey",
+      showTitle: false,
+      action: () => { }
     });
 
     this.prevPageAction = new Action({
       id: "prevPage",
       iconName: "icon-arrow-left_16x16",
+      needSeparator: <any>new ComputedUpdater<boolean>(() => {
+        return this.creator.isMobileView;
+      }),
       visible: false
     });
 
@@ -296,11 +306,11 @@ export class TabTestPlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.testAgainAction);
-    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
-    this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
+    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.creator.footerToolbar.actions.push(this.previewAction);
     this.creator.footerToolbar.actions.push(this.prevPageAction);
     this.creator.footerToolbar.actions.push(this.nextPageAction);
-    this.creator.footerToolbar.actions.push(this.designerAction);
+    this.invisibleToggleAction && (this.creator.footerToolbar.actions.push(this.invisibleToggleAction));
+    // this.languageSelectorAction && (this.creator.footerToolbar.actions.push(this.languageSelectorAction));
   }
 }

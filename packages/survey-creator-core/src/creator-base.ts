@@ -3,22 +3,22 @@ import {
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
-  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme
+  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers
 } from "survey-core";
 import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
+import { IsTouch } from "survey-core";
 import { QuestionConverter } from "./questionconverter";
 import { SurveyTextWorker } from "./textWorker";
-import { QuestionToolbox } from "./toolbox";
+import { QuestionToolbox, QuestionToolboxItem } from "./toolbox";
 import { getNextItemValue, getNextItemText } from "./utils/utils";
 import { PropertyGridModel } from "./property-grid";
 import { ObjType, SurveyHelper } from "./survey-helper";
 import { ICreatorSelectionOwner } from "./selection-owner";
 import { SelectionHistory } from "./selection-history";
 
-import { TabEmbedPlugin } from "./components/tabs/embed";
 import { TabJsonEditorAcePlugin } from "./components/tabs/json-editor-ace";
 import { TabJsonEditorTextareaPlugin } from "./components/tabs/json-editor-textarea";
 import { TabTestPlugin } from "./components/tabs/test-plugin";
@@ -35,7 +35,7 @@ import { SidebarModel } from "./components/side-bar/side-bar-model";
 import { ICreatorOptions } from "./creator-options";
 import { Translation } from "../src/components/tabs/translation";
 import { StringEditorConnector } from "./components/string-editor";
-import { TabThemePlugin } from "./components/tabs/theme-plugin";
+import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
 
@@ -45,6 +45,7 @@ require("./creator-theme/creator.scss");
 
 export interface IKeyboardShortcut {
   name?: string;
+  affectedTab?: string;
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
@@ -55,6 +56,7 @@ export interface ICreatorPlugin {
   update?: () => void;
   deactivate?: () => boolean;
   canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate?: () => boolean | undefined;
   dispose?: () => void;
   onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
   model: Base;
@@ -117,23 +119,25 @@ export class CreatorBase extends Base
    * Specifies whether to display the Designer tab.
    *
    * Default value: `true`
+   * @see activeTab
+   * @see onDesignerSurveyCreated
    */
   @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
    * Specifies whether to display the JSON Editor tab.
    *
    * Default value: `true`
+   * @see activeTab
    */
   @property({ defaultValue: true }) showJSONEditorTab: boolean;
-  /**
-   * Obsolete. Please use showPreviewTab property
-   * @see showPreviewTab
-   */
+
   @property({ defaultValue: true }) showTestSurveyTab: boolean;
   /**
    * Specifies whether to display the Preview tab.
    *
    * Default value: `true`
+   * @see activeTab
+   * @see onPreviewSurveyCreated
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
@@ -141,38 +145,35 @@ export class CreatorBase extends Base
    * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
+   * @see activeTab
+   * @see saveThemeFunc
    */
   @property({ defaultValue: false }) showThemeTab: boolean;
-  /**
-   * Specifies whether to display the Embed Survey tab.
-   *
-   * Default value: `false`
-   */
-  @property({ defaultValue: false }) showEmbeddedSurveyTab: boolean;
   /**
    * Specifies whether to display the Translation tab.
    *
    * Default value: `false`
+   * @see activeTab
    */
   @property({ defaultValue: false }) showTranslationTab: boolean;
   /**
    * Specifies whether to display the Logic tab.
    *
    * Default value: `false`
+   * @see activeTab
    */
   @property({ defaultValue: false }) showLogicTab: boolean;
   @property({ defaultValue: false }) useTableViewInLogicTab: boolean;
-  /**
-   * Set delay for page hover
-   */
   @property({ defaultValue: 200 }) pageHoverDelay: number;
   /**
-   * You need to set this property to true if you want to inplace edit item values instead of texts.
+   * Allows users to edit choice values instead of choice texts on the design surface.
+   * 
+   * Default value: `false` (users edit choice texts)
+   * 
+   * If you enable this property, users cannot edit choice texts because the Property Grid hides the Text column for choices, rate values, columns and rows in [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model), and rows in [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) questions.
+   * @see showObjectTitles
    */
   @property({ defaultValue: false }) inplaceEditForValues: boolean;
-  /**
-  * Obsolete. Use the [`showSurveyTitle`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showSurveyTitle) property instead.
-  */
   get allowEditSurveyTitle(): boolean {
     return this.getPropertyValue("allowEditSurveyTitle", true);
   }
@@ -182,7 +183,7 @@ export class CreatorBase extends Base
     this.designerPropertyGrid && this.designerPropertyGrid.refresh();
   }
   /**
-   * Specifies whether users can see and edit the survey title and related survey properties.
+   * Specifies whether users can see and edit the survey header and related survey properties.
    *
    * Default value: `true`
    */
@@ -192,13 +193,6 @@ export class CreatorBase extends Base
   set showSurveyTitle(val: boolean) {
     this.allowEditSurveyTitle = val;
   }
-  /**
-   * Removes the Free Trial bar.
-   *
-   * Default value: `false`
-   *
-   * > You can enable this property only if you have a Survey Creator commercial license. It is illegal to enable this property without a license.
-   */
   public get haveCommercialLicense(): boolean {
     if (!!hasLicense && hasLicense(1)) return true;
     return this.getPropertyValue("haveCommercialLicense", false);
@@ -210,9 +204,11 @@ export class CreatorBase extends Base
     return this.getLocString("survey.license");
   }
   /**
-   * Specifies whether to call the [saveSurveyFunc](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) each time survey settings are changed.
-   *
+   * Specifies whether to automatically save a survey or theme JSON schema each time survey or theme settings are changed.
+   * 
    * Default value: `false`
+   * 
+   * If you enable this property, Survey Creator calls the [`saveSurveyFunc`](#saveSurveyFunc) or [`saveThemeFunc`](#saveThemeFunc) function to save the survey or theme JSON schema. The schemas are saved with a 500-millisecond delay after users change settings. You can specify the [`autoSaveDelay`](#autoSaveDelay) property to increase or descrease the delay.
    */
   @property({ defaultValue: false }) isAutoSave: boolean;
   @property() showOptions: boolean;
@@ -227,7 +223,13 @@ export class CreatorBase extends Base
    * - `"portrait"`
    */
   @property({ defaultValue: "landscape" }) previewOrientation: "landscape" | "portrait";
-  public startEditTitleOnQuestionAdded: boolean = true;
+  public set startEditTitleOnQuestionAdded(value: boolean) {
+    this.startEditTitleOnQuestionAddedValue = value;
+  }
+  public get startEditTitleOnQuestionAdded() {
+    return !this.isMobileView && this.startEditTitleOnQuestionAddedValue;
+  }
+  private startEditTitleOnQuestionAddedValue: boolean = true;
   private isRTLValue: boolean = false;
   private alwaySaveTextInPropertyEditorsValue: boolean = false;
   private toolbarValue: ActionContainer;
@@ -243,7 +245,19 @@ export class CreatorBase extends Base
 
   private pageEditModeValue: "standard" | "single" | "bypage" = "standard";
   /**
-   * Contains the value of the [`pageEditMode`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#pageEditMode) property specified in the constructor.
+   * Specifies how Survey Creator users edit survey pages.
+   * 
+   * Accepted values:
+   * 
+   * - `"standard"` (default)       
+   * Questions and panels are divided between pages. Users can scroll the design surface to reach a required page.
+   * 
+   * - `"single"`       
+   * All questions and panels belong to a single page. Users cannot add or remove pages.
+   * 
+   * - `"bypage"`       
+   * Questions and panels are divided between pages. Users can use the page navigator to switch to a required page.
+   * @see allowModifyPages
    */
   public get pageEditMode(): "standard" | "single" | "bypage" {
     return this.pageEditModeValue;
@@ -288,16 +302,6 @@ export class CreatorBase extends Base
 
   @property() viewType: string;
 
-  /**
-   * Returns the current show view name. The possible returns values are:
-   * "designer", "editor", "test", "embed", "logic" and "translation".
-   * @see showDesigner
-   * @see showPreview
-   * @see showJsonEditor
-   * @see showLogicEditor
-   * @see showTranslationEditor
-   * @see showEmbedEditor
-   */
   public get showingViewName(): string {
     return this.activeTab;
   }
@@ -666,7 +670,6 @@ export class CreatorBase extends Base
    * - `options.questionName`: `String`\
    * The name of a question for which conditions are displayed.
    * - `options.questionName`: `String`\
-   * The type of a question for which conditions are displayed.
    * The name of a question for which conditions are displayed.
    * - `options.operator`: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`\
    * A condition opeator for which the event is raised.
@@ -700,45 +703,45 @@ export class CreatorBase extends Base
     * 
     * Depending on the `options.type` value, the `options` object contains parameters listed below:
     * 
-    * `options.type`: `"ADDED_FROM_TOOLBOX"`\
+    * `options.type`: `"ADDED_FROM_TOOLBOX"`
     * - `options.question` - An added question.
     * 
-    * `options.type`: `"PAGE_ADDED"`\
+    * `options.type`: `"PAGE_ADDED"`
     * - `options.newValue` - An added page.
     *
-    * `options.type`: `"PAGE_MOVED"`\
+    * `options.type`: `"PAGE_MOVED"`
     * - `options.page` - A moved page.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"QUESTION_CONVERTED"`\
+    * `options.type`: `"QUESTION_CONVERTED"`
     * - `options.className` - The name of a class to which a question has been converted.
     * - `options.oldValue` - An object of a previous class.
     * - `options.newValue` - An object of a class specified by `options.className`.
     *
-    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`\
+    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
     * - `options.question` - A question that has been edited in a pop-up editor.
     *
-    * `options.type`: `"PROPERTY_CHANGED"`\
+    * `options.type`: `"PROPERTY_CHANGED"`
     * - `options.name` - The name of the changed property.
     * - `options.target` - An object that contains the changed property.
     * - `options.oldValue` - A previous value of the changed property.
     * - `options.newValue` - A new value of the changed property.
     *
-    * `options.type`: `"ELEMENT_REORDERED"`\
+    * `options.type`: `"ELEMENT_REORDERED"`
     * - `options.arrayName` - The name of the changed array.
     * - `options.parent` - An object that contains the changed array.
     * - `options.element` - A reordered element.
     * - `options.indexFrom` - A previous index.
     * - `options.indexTo` - A current index.
     *
-    * `options.type`: `"OBJECT_DELETED"`\
+    * `options.type`: `"OBJECT_DELETED"`
     * - `options.target` - A deleted object.
     *
-    * `options.type`: `"VIEW_TYPE_CHANGED"`\
+    * `options.type`: `"VIEW_TYPE_CHANGED"`
     * - `options.newType` - A current view: `"editor"` or `"designer"`.
     *
-    * `options.type`: `"DO_DROP"`\
+    * `options.type`: `"DO_DROP"`
     * - `options.page` - A parent page of the dragged element.
     * - `options.source` - A dragged element.
     * - `options.target` - A drop target.
@@ -746,24 +749,50 @@ export class CreatorBase extends Base
     */
   public onModified: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called on adding a new question into the survey. Typically, when a user dropped a Question from the Question Toolbox into designer Survey area.
-   *- sender the survey creator object that fires the event
-   *- options.question a new added survey question. Survey.Question object
-   *- options.page the survey Page object where question has been added.
-   *- options.reason how question has been added via UI: ADDED_FROM_TOOLBOX, ADDED_FROM_PAGEBUTTON, ELEMENT_COPIED.
+   * An event that is raised when users add a question to the survey. Use this event to customize the question.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * The question users added.
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
+   * A page to which the question was added.
+   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`\
+   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
+   * 
+   * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
   public onQuestionAdded: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called on adding a new panel into the survey.  Typically, when a user dropped a Panel from the Question Toolbox into designer Survey area.
-   *- sender the survey creator object that fires the event
-   *- options.panel a new added survey panel. Survey.Panel object
-   *- options.page the survey Page object where question has been added.
+   * An event that is raised when users add a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element to the survey. Use this event to customize the panel.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.panel`: [`PanelModel`](https://surveyjs.io/form-library/documentation/api-reference/panel-model)\
+   * The panel users added.
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
+   * A page to which the panel was added.
+   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`\
+   * A value that indicates how the panel was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
+   * 
+   * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
   public onPanelAdded: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called on adding a new page into the survey.
-   *- sender the survey creator object that fires the event
-   *- options.page the new survey Page object.
+   * An event that is raised when a new page is added to the survey. Use this event to customize the page.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
+   * The page users added.
+   * 
+   * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
   public onPageAdded: CreatorEvent = new CreatorEvent();
 
@@ -784,21 +813,35 @@ export class CreatorBase extends Base
   public onGetPageActions: CreatorEvent = new CreatorEvent();
 
   /**
-   * The event is fired when the survey creator is initialized and a survey object (Survey.Survey) is created.
-   *- sender the survey creator object that fires the event
-   *- options.survey  the survey object showing in the creator.
+   * An event that is raised when Survey Creator instantiates a survey for the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide#designer-tab) tab. Use this event to customize the survey.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
+   * A survey to be displayed in the Designer tab.
+   * 
+   * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
   public onDesignerSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
-   * The event is fired when the survey creator creates survey in Preview tab for testing.
-   *- sender the survey creator object that fires the event
-   *- options.survey  the survey object showing in the "Preview" tab.
+   * An event that is raised when Survey Creator instantiates a survey for the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide#preview-tab) tab. Use this event to customize the survey.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
+   * A survey to be displayed in the Preview tab.
+   * 
+   * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
   public onPreviewSurveyCreated: CreatorEvent = new CreatorEvent();
-  /**
-    * Obsolete. Please use onPreviewSurveyCreated event.
-    * @see onPreviewSurveyCreated
-    */
   public onTestSurveyCreated: CreatorEvent = this.onPreviewSurveyCreated;
   /**
    * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
@@ -887,6 +930,28 @@ export class CreatorBase extends Base
    * - `options.text` - A text string to be exported. The string is taken from the current locale. Redefine this property if you want to export a different string.
    */
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
+
+  /**
+   * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
+   * 
+   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass an empty array or call this function without arguments.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.fromLocale`: `string`\
+   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.toLocale`: `string`\
+   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * - `options.strings`: `Array<string>`\
+   * Strings to translate.
+   * - `options.callback: (strings: Array<string>)`: `Function`\
+   * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
+   * 
+   * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
+   */
+  public onMachineTranslate: CreatorEvent = new CreatorEvent();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -995,35 +1060,44 @@ export class CreatorBase extends Base
   public maximumChoicesCount: number =
     settings.propertyGrid.maximumChoicesCount;
   /**
+   * Limits the minimum number of choices in [Checkbox](https://surveyjs.io/Documentation/Library?id=questioncheckboxmodel), [Dropdown](https://surveyjs.io/Documentation/Library?id=questiondropdownmodel), and [Radiogroup](https://surveyjs.io/Documentation/Library?id=questionradiogroupmodel) questions. Set this property if users should not delete choices below the specified limit.
+   *
+   * Default value: 0 (unlimited, taken from `settings.propertyGrid.minimumChoicesCount`)
+   */
+  public minimumChoicesCount: number =
+    settings.propertyGrid.minimumChoicesCount;
+  /**
    * Limits the number of rows that users can add to [Matrix](https://surveyjs.io/Documentation/Library?id=questionmatrixmodel) and [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRowsCount`)
    */
   public maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   /**
-   * Limits the number of rate value that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
+   * Limits the number of rate values that users can add to [Rating](https://surveyjs.io/Documentation/Library?id=questionratingmodel) questions.
    *
    * Default value: 0 (unlimited, taken from `settings.propertyGrid.maximumRateValues`)
    */
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+
   /**
-   * Obsolete. Use the [`showPagesInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showPagesInPreviewTab) property instead.
+   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * 
+   * Default value: -1 (unlimited)
    */
+  public maxNestedPanels: number = -1;
+
   public showPagesInTestSurveyTab = true;
   /**
-   * Specifies whether to show the page selector at the bottom of the Preview tab.
+   * Specifies whether to show a page selector at the bottom of the Preview tab.
    *
    * Default value: `true`
    */
   public get showPagesInPreviewTab(): boolean { return this.showPagesInTestSurveyTab; }
   public set showPagesInPreviewTab(val: boolean) { this.showPagesInTestSurveyTab = val; }
 
-  /**
-   * Obsolete. Use the [`showSimulatorInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showSimulatorInPreviewTab) property instead.
-   */
   public showSimulatorInTestSurveyTab = true;
   /**
-   * Specifies whether the Preview tab displays the Device button that allows users to preview the survey on different device types.
+   * Specifies whether the Preview tab displays a Device button that allows users to preview the survey on different device types.
    *
    * Default value: `true`
    */
@@ -1036,36 +1110,72 @@ export class CreatorBase extends Base
    * Accepted values: `"modern"`, `"default"`, `"defaultV2"`
    *
    * Default value: `"defaultV2"`
+   * @see allowChangeThemeInPreview
    */
   public themeForPreview: string = "defaultV2";
 
-  @property({ defaultValue: false }) hasPendingThemeChanges: boolean;
-  @property({ defaultValue: true }) isThemePristine: boolean;
+  //#region Theme
+
+  /**
+   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
+   * 
+   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * @see showThemeTab
+   * @see saveSurveyFunc
+   */
+  public get saveThemeFunc() {
+    return this.saveThemeFuncValue;
+  }
+  public set saveThemeFunc(value: any) {
+    this.saveThemeFuncValue = value;
+  }
 
   private _theme: ITheme = { cssVariables: {} };
-  public get theme(): ITheme { return this._theme; }
+  public get theme(): ITheme {
+    return this._theme;
+  }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
-    this.raiseThemeChanged();
+    if (this.activeTab !== "theme") {
+      this.updatePlugin(this.activeTab);
+    }
+  }
+  public getCurrentTheme(content: "full" | "changes" = "full") {
+    if (content === "full") {
+      return this.theme;
+    }
+    const themePlugin = this.getPlugin("theme") as ThemeTabPlugin;
+    if (!!themePlugin) {
+      return themePlugin.getThemeChanges();
+    }
   }
 
-  public raiseThemeChanged(): void {
-    this.isThemePristine = false;
-    this.hasPendingThemeChanges = true;
-    const options = {
-      propertyName: "theme",
-      obj: this,
-      value: this.theme,
-      type: "THEME_MODIFIED"
-    };
-    this.setModified(options);
+  public doSaveTheme() {
+    this.setState("saving");
+    if (this.saveThemeFunc) {
+      this.saveNo++;
+      this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
+        if (this.saveNo !== no) return;
+        if (isSuccess) {
+          this.setState("saved");
+        } else {
+          this.setState("modified");
+          if (this.showErrorOnFailedSave) {
+            this.notify(this.getLocString("ed.saveError"), "error");
+          }
+        }
+      });
+    }
   }
+
+  //#endregion Theme
 
   private _allowModifyPages = true;
   /**
    * Specifies whether users can add, edit, and delete survey pages.
    *
    * Default value: `true`
+   * @see pageEditMode
    */
   public get allowModifyPages() {
     return this._allowModifyPages;
@@ -1075,12 +1185,9 @@ export class CreatorBase extends Base
     this.changePageModifications(val);
   }
 
-  /**
-   * Obsolete. Use the [`showDefaultLanguageInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showDefaultLanguageInPreviewTab) property instead.
-   */
   public showDefaultLanguageInTestSurveyTab: boolean | string = "auto";
   /**
-   * Specifies whether the Preview tab displays the language selector.
+   * Specifies whether the Preview tab displays a language selector.
    *
    * Accepted values:
    *
@@ -1088,7 +1195,7 @@ export class CreatorBase extends Base
    * Display the language selector only if the survey is translated into more than one language.
    *
    * - `true`       
-   * Always display the language selector regardless of how many languages are used in the survey.
+   * Always display the language selector regardless of how many languages the survey uses.
    *
    * - `false`        
    * Never display the language selector.
@@ -1096,17 +1203,14 @@ export class CreatorBase extends Base
    * - `"all"`        
    * Always display the language selector with [all supported languages](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization).
    *
-   * **See also**: [Localization & Globalization](https://surveyjs.io/Documentation/Survey-Creator?id=localization)
+   * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
    */
   public get showDefaultLanguageInPreviewTab(): boolean | string { return this.showDefaultLanguageInTestSurveyTab; }
   public set showDefaultLanguageInPreviewTab(val: boolean | string) { this.showDefaultLanguageInTestSurveyTab = val; }
 
-  /**
-   * Obsolete. Use the [`showInvisibleElementsInPreviewTab`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#showInvisibleElementsInPreviewTab) property instead.
-   */
   public showInvisibleElementsInTestSurveyTab = true;
   /**
-   * Specifies whether the Preview tab displays a checkbox that allows users to show or hide invisible survey elements.
+   * Specifies whether the Preview tab displays a toggle that allows users to show or hide invisible survey elements.
    *
    * Default value: `true`
    */
@@ -1124,6 +1228,7 @@ export class CreatorBase extends Base
    * Default value: `true`
    *
    * [View Demo](https://surveyjs.io/Examples/Creator?id=theme-switcher (linkStyle))
+   * @see themeForPreview
    */
   public allowChangeThemeInPreview = true;
 
@@ -1217,23 +1322,44 @@ export class CreatorBase extends Base
     this.isRTLValue = value;
   }
   /**
-   * The event is called when creator is going to change the active tab.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
+   * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"`\
+   * A tab that is going to become active.
+   * - `options.allow`: `Boolean`\
+   * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
+   * @see makeNewViewActive
    */
   public onActiveTabChanging: CreatorEvent = new CreatorEvent();
 
   /**
-   * The event is called when creator active tab is changed.
-   *- sender the survey creator object that fires the event
-   *- options.tabName the name of new active tab
-   *- options.model the instance of the model of the new active tab
+   * An event that is raised after the [active tab](#activeTab) is switched.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"`\
+   * A tab that has become active.
+   * @see makeNewViewActive
    */
   public onActiveTabChanged: CreatorEvent = new CreatorEvent();
   /**
-   * Get/set the active tab.
-   * The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
-   * Please note, not all tabs are visible.
+   * Gets or sets the currently displayed tab.
+   * 
+   * Possible values:
+   * 
+   * - [`"designer"`](#showDesignerTab)
+   * - [`"test"`](#showPreviewTab)
+   * - [`"theme"`](#showThemeTab)
+   * - [`"editor"`](#showJSONEditorTab)
+   * - [`"logic"`](#showLogicTab)
+   * - [`"translation"`](#showLogicTab)
+   * @see makeNewViewActive
    */
   public get activeTab(): string {
     return this.viewType;
@@ -1242,22 +1368,28 @@ export class CreatorBase extends Base
     this.makeNewViewActive(val);
   }
   /**
-   * Change the active view/tab. It will return false if it can't change the current tab.
-   * @param viewName name of new active view (tab). The following values are available: "designer", "editor", "test", "embed", "logic" and "translation".
+   * Switches the [active tab](#activeTab). Returns `false` if the tab cannot be switched.
+   * @param tabName A tab that you want to make active: `"designer"`, `"test"`, `"theme"`, `"editor"`, `"logic"`, or `"translation"`.
+   * @returns `false` if the active tab cannot be switched, `true` otherwise.
    */
-  public makeNewViewActive(viewName: string): boolean {
-    if (viewName == this.viewType) return false;
+  public makeNewViewActive(tabName: string): boolean {
+    if (tabName == this.viewType) return false;
     const plugin: ICreatorPlugin = this.currentPlugin;
     if (!!plugin && !!plugin.canDeactivateAsync) {
       plugin.canDeactivateAsync(() => {
-        this.switchViewType(viewName);
+        this.switchViewType(tabName);
       });
       return undefined;
     }
-    return this.switchViewType(viewName);
+    return this.switchViewType(tabName);
   }
   private switchViewType(viewName: string): boolean {
-    const chaningOptions = { tabName: viewName, allow: true };
+    let allow = true;
+    if (!!this.currentPlugin?.defaultAllowingDeactivate) {
+      allow = this.currentPlugin.defaultAllowingDeactivate();
+      if (allow === undefined) return false;
+    }
+    const chaningOptions = { tabName: viewName, allow: allow, model: this.currentPlugin?.model };
     this.onActiveTabChanging.fire(this, chaningOptions);
     if (!chaningOptions.allow) return;
     if (!this.canSwitchViewType()) return false;
@@ -1311,6 +1443,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
@@ -1343,7 +1476,7 @@ export class CreatorBase extends Base
       this.showToolboxValue = true;
     }
   }
-  private showSidebarValue: boolean = true;
+  @property() showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: CreatorEvent = new CreatorEvent();
   /**
    * Specifies whether to show the sidebar that displays Property Grid.
@@ -1398,7 +1531,7 @@ export class CreatorBase extends Base
   public leftContainerActiveItem(name: string) {
     SurveyHelper.warnNonSupported("leftContainerActiveItem");
   }
-  //#endregion Obsolete properties and functins
+  //#endregion Obsolete properties and functions
 
   //#region Undo/Redo
   /**
@@ -1531,7 +1664,7 @@ export class CreatorBase extends Base
       new TabTestPlugin(this);
     }
     if (this.showThemeTab) {
-      new TabThemePlugin(this);
+      new ThemeTabPlugin(this);
     }
     if (this.showLogicTab) {
       new TabLogicPlugin(this);
@@ -1543,9 +1676,6 @@ export class CreatorBase extends Base
         new TabJsonEditorTextareaPlugin(this);
       }
     }
-    if (this.showEmbeddedSurveyTab) {
-      new TabEmbedPlugin(this);
-    }
     if (this.showTranslationTab) {
       new TabTranslationPlugin(this);
     }
@@ -1553,7 +1683,7 @@ export class CreatorBase extends Base
   private initFooterToolbar(): void {
     if (!this.footerToolbar) {
       this.footerToolbar = new ActionContainer();
-      ["undoredo", "designer", "test"].forEach((pluginKey: string) => {
+      ["designer", "undoredo", "test", "theme"].forEach((pluginKey: string) => {
         const plugin = this.getPlugin(pluginKey);
         if (!!plugin && !!plugin["addFooterActions"]) {
           plugin["addFooterActions"]();
@@ -1707,6 +1837,7 @@ export class CreatorBase extends Base
     this.existingPages = {};
     const survey = this.createSurvey({});
     survey.css = defaultV2Css;
+    survey.setIsMobile(!!this.isMobileView);
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
@@ -1792,6 +1923,7 @@ export class CreatorBase extends Base
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
+      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -1898,7 +2030,7 @@ export class CreatorBase extends Base
     this.surveyLogicRenaming = false;
   }
   private updateChoicesFromQuestionOnColumnNameChanged(oldName: string, newName: string) {
-    const questions = this.survey.getAllQuestions();
+    const questions = this.getAllQuestions();
     questions.forEach(q => {
       if (q.choicesFromQuestion === oldName) {
         q.choicesFromQuestion = newName;
@@ -1925,14 +2057,12 @@ export class CreatorBase extends Base
   public onDragDropItemStart(): void {
     this.addNewElementReason = "DROPPED_FROM_TOOLBOX";
   }
-  public onDragDropItemEnd(): void {
-    this.addNewElementReason = undefined;
-  }
   @ignoreUndoRedo()
   private doOnQuestionAdded(question: Question, parentPanel: any) {
     question.name = this.generateUniqueName(question, question.name);
     var page = this.getPageByElement(question);
     var options = { question: question, page: page, reason: this.addNewElementReason };
+    this.addNewElementReason = undefined;
     this.onQuestionAdded.fire(this, options);
   }
   @ignoreUndoRedo()
@@ -1940,6 +2070,7 @@ export class CreatorBase extends Base
     var page = this.getPageByElement(panel);
     var options = { panel: panel, page: page, reason: this.addNewElementReason };
     this.onPanelAdded.fire(this, options);
+    this.addNewElementReason = undefined;
   }
   @ignoreUndoRedo()
   private doOnPageAdded(page: PageModel) {
@@ -2049,7 +2180,7 @@ export class CreatorBase extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer"): SurveyModel {
+  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
@@ -2061,7 +2192,7 @@ export class CreatorBase extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason });
+    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
     return survey;
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
@@ -2100,7 +2231,7 @@ export class CreatorBase extends Base
   public setModified(options: any = null): void {
     this.setState("modified");
     this.onModified.fire(this, options);
-    this.isAutoSave && this.doAutoSave(options.type === "THEME_MODIFIED" ? () => this.doSaveTheme() : () => this.doSave());
+    this.isAutoSave && this.doAutoSave();
   }
   public notifySurveyPropertyChanged(options: any): void {
     this.clearSurveyLogicForUpdate(options.target, options.name, options.newValue);
@@ -2136,7 +2267,8 @@ export class CreatorBase extends Base
   }
 
   protected convertQuestion(obj: Question, className: string): Question {
-    var newQuestion = <Question>QuestionConverter.convertObject(obj, className, this.getDefaultElementJSON(obj.getType()));
+    var newQuestion = <Question>QuestionConverter.convertObject(obj, className,
+      this.getDefaultElementJSON(obj.getType()), this.getDefaultElementJSON(className));
     this.setModified({
       type: "QUESTION_CONVERTED",
       className: className,
@@ -2147,8 +2279,8 @@ export class CreatorBase extends Base
   }
   private getDefaultElementJSON(elType: string): any {
     if (!this.toolbox) return null;
-    const item = this.toolbox.getItemByName(elType);
-    return !!item ? item.json : null;
+    const json = this.toolbox.getItemByName(elType)?.json;
+    return !!json ? Helpers.createCopy(json) : null;
   }
   private singlePageJSON(json: any) {
     if (this.pageEditMode === "single") {
@@ -2205,6 +2337,16 @@ export class CreatorBase extends Base
     var selectedElement = this.getSelectedSurveyElement();
     if (selectedElement && selectedElement.parent && selectedElement["page"] == parent &&
       (<any>selectedElement !== <any>panel)) {
+      if (!panel) {
+        while (!!selectedElement.parent && selectedElement.parent.isPanel) {
+          if(!!(<any>selectedElement).parentQuestion) {
+            selectedElement = <IElement>(<any>selectedElement).parentQuestion;
+          }
+          else {
+            selectedElement = <IElement><any>selectedElement.parent;
+          }
+        }
+      }
       parent = selectedElement.parent;
       if (index < 0) {
         index = parent.elements.indexOf(selectedElement);
@@ -2266,39 +2408,20 @@ export class CreatorBase extends Base
     }
   }
 
-  protected getAllQuestions(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, false, result);
+  protected getAllQuestions(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(false, includeNewItems);
+  }
+  protected getAllPanels(includeNewItems: boolean = true): Array<any> {
+    return this.getAllElements(true, includeNewItems);
+  }
+  private getAllElements(isPanel: boolean, includeNewItems: boolean): Array<any> {
+    const result = SurveyHelper.getAllElements(this.survey, isPanel);
+    if (includeNewItems) {
+      SurveyHelper.addElements(this.newPanels, isPanel, result);
+      SurveyHelper.addElements(this.newQuestions, isPanel, result);
     }
-    this.addElements(this.newPanels, false, result);
-    this.addElements(this.newQuestions, false, result);
     return result;
   }
-
-  protected getAllPanels(): Array<any> {
-    var result = [];
-    for (var i = 0; i < this.survey.pages.length; i++) {
-      this.addElements(this.survey.pages[i].elements, true, result);
-    }
-    this.addElements(this.newPanels, true, result);
-    this.addElements(this.newQuestions, true, result);
-    return result;
-  }
-
-  protected addElements(
-    elements: Array<any>,
-    isPanel: boolean,
-    result: Array<any>
-  ) {
-    for (var i = 0; i < elements.length; i++) {
-      if (elements[i].isPanel === isPanel) {
-        result.push(elements[i]);
-      }
-      this.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
-    }
-  }
-
   protected getNewName(type: string, isPanel?: boolean): string {
     if (type == "page") return SurveyHelper.getNewPageName(this.survey.pages);
     if (isPanel) return this.getNewPanelName();
@@ -2323,11 +2446,14 @@ export class CreatorBase extends Base
         this.newPanels.push(element);
       }
       var panel = <PanelModelBase>(<any>element);
-      for (var i = 0; i < panel.elements.length; i++) {
-        this.setNewNamesCore(panel.elements[i]);
-      }
+      panel.elements.forEach(el => this.setNewNamesCore(el));
     } else {
       this.newQuestions.push(element);
+      const els = Array.isArray(element["templateElements"]) ? element["templateElements"] :
+        (Array.isArray(element["detailElements"]) ? element["detailElements"] : undefined);
+      if (els) {
+        els.forEach(el => this.setNewNamesCore(el));
+      }
     }
   }
 
@@ -2397,8 +2523,10 @@ export class CreatorBase extends Base
     } else {
       this.survey.pages.push(newPage);
     }
-    this.addNewElementReason = "ELEMENT_COPIED";
-    newPage.questions.forEach(q => this.doOnQuestionAdded(q, q.parent));
+    newPage.questions.forEach(q => {
+      this.addNewElementReason = "ELEMENT_COPIED";
+      this.doOnQuestionAdded(q, q.parent);
+    });
     const panels: any = newPage.getPanels();
     if (Array.isArray(panels)) panels.forEach(p => this.doOnPanelAdded(p, p.parent));
     this.addNewElementReason = "";
@@ -2411,6 +2539,13 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
+      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+        const page = this.survey.pages[0];
+        if (page.elements.length === 1 && obj === page.elements[0]) {
+          this.deleteObjectCore(page);
+          return;
+        }
+      }
       this.deletePanelOrQuestion(obj);
     }
     this.setModified({
@@ -2523,11 +2658,9 @@ export class CreatorBase extends Base
     return this.designerPropertyGrid.survey;
   }
   /**
-   * Collapse certain property editor tab (category) in properties panel/grid
-   * name - tab category name
-   * @see collapseAllPropertyGridCategories
+   * Collapses a specified category in Property Grid.
+   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
    * @see expandPropertyGridCategory
-   * @see expandAllPropertyGridCategories
    */
   public collapsePropertyGridCategory(name: string) {
     if (!!this.designerPropertyGrid) {
@@ -2535,11 +2668,9 @@ export class CreatorBase extends Base
     }
   }
   /**
-   * Expand certain property editor tab (category) in properties panel/grid
-   * name - tab category name
+   * Expands a specified category in Property Grid.
+   * @param name A [category name](https://surveyjs.io/survey-creator/documentation/property-grid-customization#category).
    * @see collapsePropertyGridCategory
-   * @see collapseAllPropertyGridCategories
-   * @see expandAllPropertyGridCategories
    */
   public expandPropertyGridCategory(name: string) {
     if (!!this.designerPropertyGrid) {
@@ -2547,9 +2678,7 @@ export class CreatorBase extends Base
     }
   }
   /**
-   * Expand all property editor tabs (categories) in properties panel/grid
-   * @see collapsePropertyGridCategory
-   * @see expandPropertyGridCategory
+   * Collapses all categories in Property Grid.
    * @see expandAllPropertyGridCategories
    */
   public collapseAllPropertyGridCategories() {
@@ -2558,44 +2687,23 @@ export class CreatorBase extends Base
     }
   }
   /**
-   * Expand all property editor tabs (categories) in properties panel/grid
-   * @see collapsePropertyGridCategory
+   * Expands all categories in Property Grid.
    * @see collapseAllPropertyGridCategories
-   * @see expandPropertyGridCategory
    */
   public expandAllPropertyGridCategories() {
     if (!!this.designerPropertyGrid) {
       this.designerPropertyGrid.expandAllCategories();
     }
   }
-  /**
-   * @Deprecated Obsolete. Collapse all property editor tabs (categories) in properties panel/grid
-   * @see collapseAllPropertyGridCategories
-   *
-   */
   public collapseAllPropertyTabs(): void {
     this.collapseAllPropertyGridCategories();
   }
-  /**
-   * @Deprecated Obsolete. Expand all property editor tabs (categories) in properties panel/grid
-   * @see expandAllPropertyGridCategories
-   */
   public expandAllPropertyTabs(): void {
     this.expandAllPropertyGridCategories();
   }
-  /**
-   * @Deprecated Obsolete. Expand certain property editor tab (category) in properties panel/grid
-   * name - tab category name
-   * @see expandPropertyGridCategory
-   */
   public expandPropertyTab(name: string): void {
     this.expandPropertyGridCategory(name);
   }
-  /**
-   * @Deprecated Obsolete. Collapse certain property editor tab (category) in properties panel/grid
-   * name - tab category name
-   * @see collapsePropertyGridCategory
-   */
   public collapsePropertyTab(name: string): void {
     this.collapsePropertyGridCategory(name);
   }
@@ -2761,11 +2869,12 @@ export class CreatorBase extends Base
     }
   }
   protected onKeyDownHandler = (event: KeyboardEvent) => {
-    let shortcut;
-    let hotKey;
-    Object.keys(this.shortcuts || {}).forEach((key) => {
-      shortcut = this.shortcuts[key];
-      hotKey = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
+    const availableShortcuts = Object.keys(this.shortcuts || {})
+      .map((key) => this.shortcuts[key])
+      .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
+
+    availableShortcuts.forEach((shortcut: IKeyboardShortcut) => {
+      const hotKey: { ctrlKey?: boolean, shiftKey?: boolean, keyCode: number } = event.metaKey ? shortcut.macOsHotkey : shortcut.hotKey;
       if (!hotKey) return;
 
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
@@ -2793,10 +2902,10 @@ export class CreatorBase extends Base
     if (this.pageEditMode === "single" && parent.getType() === "page") {
       parent = this.survey;
     }
-    if(obj["questions"]) {
+    if (obj["questions"]) {
       obj["questions"].forEach(q => this.updateConditionsOnRemove(q));
     }
-    obj["delete"]();
+    obj["delete"](false);
     this.selectElement(objIndex > -1 ? elements[objIndex] : parent);
   }
   protected onCanShowObjectProperty(
@@ -2850,7 +2959,7 @@ export class CreatorBase extends Base
       if (!options.isUnique) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
-      while (!this.isNameUnique(el, options.name)) {
+      while (!this.isNameUnique(el, options.name, false)) {
         options.name = SurveyHelper.generateNewName(options.name);
       }
       options.isUnique = true;
@@ -2862,11 +2971,11 @@ export class CreatorBase extends Base
     } while (!options.isUnique);
     return options.name;
   }
-  protected isNameUnique(el: Base, newName: string): boolean {
+  protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
-    if (!this.isNameUniqueInArray(this.survey.getAllPanels(), el, newName))
+    if (!this.isNameUniqueInArray(this.getAllPanels(includeNewItems), el, newName))
       return false;
-    return this.isNameUniqueInArray(this.survey.getAllQuestions(), el, newName);
+    return this.isNameUniqueInArray(this.getAllQuestions(includeNewItems), el, newName);
   }
   private isNameUniqueInArray(
     elements: Array<any>,
@@ -3075,11 +3184,12 @@ export class CreatorBase extends Base
     this.onConditionGetTitle.fire(this, options);
     return options.title;
   }
-  isConditionOperatorEnabled(questionName: string, questionType: string, operator: string, isEnabled: boolean): boolean {
+  isConditionOperatorEnabled(questionName: string, question: Question, operator: string, isEnabled: boolean): boolean {
     if (this.onGetConditionOperator.isEmpty) return isEnabled;
     const options = {
       questionName: questionName,
-      questionType: questionType,
+      question: question,
+      questionType: !!question ? question.getType() : "",
       operator: operator,
       show: isEnabled
     };
@@ -3124,14 +3234,28 @@ export class CreatorBase extends Base
     this.onTranslationExportItem.fire(this, options);
     return options.text;
   }
+  getHasMachineTranslation(): boolean {
+    return !this.onMachineTranslate.isEmpty;
+  }
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void {
+    if (!this.getHasMachineTranslation()) {
+      callback(undefined);
+    } else {
+      this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
+    }
+  }
+
   /**
-   * The delay on saving survey JSON on autoSave in ms. It is 500 ms by default.
-   * If during this period of time an end-user modify survey, then the last version will be saved only. Set to 0 to save immediately.
-   * @see isAutoSave
+   * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
+   * 
+   * Default value: 500 (taken from `settings.autoSave.delay`)
+   * 
+   * If a user changes the settings once again during the delay, only the latest version will be saved.
    */
   public autoSaveDelay: number = settings.autoSave.delay;
   private autoSaveTimerId = null;
-  protected doAutoSave(saveFunc = () => this.doSave()) {
+  protected doAutoSave() {
+    const saveFunc = () => this.doSave();
     if (this.autoSaveDelay <= 0) {
       saveFunc();
       return;
@@ -3163,38 +3287,6 @@ export class CreatorBase extends Base
         }
       });
     }
-  }
-  public doSaveTheme() {
-    this.setState("saving");
-    if (this.hasPendingThemeChanges && this.saveThemeFunc) {
-      this.saveNo++;
-      this.saveThemeFunc(this.saveNo, (no: number, isSuccess: boolean) => {
-        if (this.saveNo !== no) return;
-        if (isSuccess) {
-          this.setState("saved");
-          this.hasPendingThemeChanges = false;
-        } else {
-          this.setState("modified");
-          if (this.showErrorOnFailedSave) {
-            this.notify(this.getLocString("ed.saveError"), "error");
-          }
-        }
-      });
-    }
-  }
-
-  /**
-   * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
-   * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
-   * @see showThemeTab
-   * @see saveSurveyFunc
-   */
-  public get saveThemeFunc() {
-    return this.saveThemeFuncValue;
-  }
-  public set saveThemeFunc(value: any) {
-    this.saveThemeFuncValue = value;
   }
 
   /**
@@ -3242,9 +3334,22 @@ export class CreatorBase extends Base
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
-
-  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, panel: IPanel = null) {
-    var availableTypes = this.toolbox.items.map((item) => {
+  public getAvailableToolboxItems(element?: SurveyElement, isAddNew: boolean = true): Array<QuestionToolboxItem> {
+    const res: Array<QuestionToolboxItem> = [].concat(this.toolbox.items);
+    if (!element || this.maxNestedPanels < 0) return res;
+    if (!isAddNew && element.isPanel) return res;
+    if (this.maxNestedPanels < SurveyHelper.getElementDeepLength(element)) {
+      for (let i = res.length - 1; i >= 0; i--) {
+        if (res[i].isPanel) {
+          res.splice(i, 1);
+        }
+      }
+    }
+    return res;
+  }
+  public getQuestionTypeSelectorModel(beforeAdd: (type: string) => void, element?: SurveyElement) {
+    let panel = !!element && element.isPanel ? <PanelModel>element : null;
+    var availableTypes = this.getAvailableToolboxItems(element).map((item) => {
       return this.createIActionBarItemByClass(item.name, item.title, item.iconName, item.needSeparator);
     });
     const listModel = new ListModel(
@@ -3376,7 +3481,12 @@ export class CreatorBase extends Base
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;
-  @property({ defaultValue: false }) isMobileView;
+  @property({
+    defaultValue: false, onSet: (val, creator: CreatorBase) => {
+      creator.survey.setIsMobile(!!val);
+    }
+  }) isMobileView: boolean;
+  @property({ defaultValue: false }) isTouch;
   /**
    * Specifies Toolbox location.
    * 
@@ -3413,7 +3523,7 @@ export class CreatorBase extends Base
     }
   }) isCreatorDisposed: boolean;
 
-  dispose(): void {
+  public dispose(): void {
     this.isCreatorDisposed = true;
     this.tabs = [];
     Object.keys(this.plugins).forEach(pluginName => {
@@ -3427,7 +3537,7 @@ export class CreatorBase extends Base
     });
     super.dispose();
   }
-  @property({ defaultValue: false }) enableLinkFileEditor: boolean;
+  @property({ defaultValue: true }) enableLinkFileEditor: boolean;
 }
 export class SurveyCreatorModel extends CreatorBase { }
 

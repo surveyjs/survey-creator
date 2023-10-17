@@ -40,6 +40,7 @@ export interface IQuestionToolboxItem extends IAction {
    * Toolbox item title
    */
   title: string;
+  className: string;
   /**
    * Toolbox item tooltip. It equals to title if it is empty
    */
@@ -75,6 +76,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   constructor(private item: IQuestionToolboxItem) {
     super(item);
   }
+  className: string;
   iconName: string;
   name: string;
   json: any;
@@ -84,6 +86,14 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   toJSON() {
     return this.item;
   }
+  get typeName(): string {
+    if(!!this.json && !!this.json.type) return this.json.type;
+    return this.name;
+  }
+  get isPanel(): boolean {
+    const type = this.typeName;
+    return !!type && Serializer.isDescendantOf(type, "panelbase");
+  }
 }
 
 /**
@@ -92,7 +102,7 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
 export class QuestionToolbox
   extends AdaptiveActionContainer<QuestionToolboxItem>
   implements IQuestionToolbox {
-  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit"];
+  static hiddenTypes = ["buttongroup", "linkvalue", "embeddedsurvey", "spinedit", "color", "fileedit", "textwithreset", "commentwithreset"];
   static defaultIconName = "icon-default";
   static defaultCategories = {
     toolboxChoiceCategory: ["radiogroup", "rating", "checkbox", "dropdown", "tagbox", "boolean", "file", "imagepicker", "ranking"],
@@ -199,7 +209,8 @@ export class QuestionToolbox
     this.dragOrClickHelper = new DragOrClickHelper((pointerDownEvent: PointerEvent, currentTarget: HTMLElement, itemModel: any) => {
       const json = this.creator.getJSONForNewElement(itemModel.json);
       this.dotsItem.popupModel.toggleVisibility();
-      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel.title);
+      this.creator?.onDragDropItemStart();
+      this.dragDropHelper.startDragToolboxItem(pointerDownEvent, json, itemModel);
     });
     this.hiddenItemsListModel.onPointerDown = (pointerDownEvent: PointerEvent, item: any) => {
       if (!this.creator.readOnly) {
@@ -271,7 +282,7 @@ export class QuestionToolbox
   public get itemNames(): Array<string> {
     const res: string[] = [];
     for (let i: number = 0; i < this.items.length; i++) {
-      res.push(this.items[i].name);
+      res.push(this.items[i].typeName);
     }
     return res;
   }
@@ -312,13 +323,15 @@ export class QuestionToolbox
     const name: string = !!options.name ? options.name : question.name;
     const title: string = !!options.title ? options.title : name;
     const tooltip: string = !!options.tooltip ? options.tooltip : title;
+    const iconName = !!options.iconName ? options.iconName : QuestionToolbox.defaultIconName;
     const item: IQuestionToolboxItem = {
       id: name,
       name: name,
       title: title,
       tooltip: tooltip,
+      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
       isCopied: options.isCopied !== false,
-      iconName: !!options.iconName ? options.iconName : QuestionToolbox.defaultIconName,
+      iconName: iconName,
       json: !!options.json ? options.json : this.getQuestionJSON(question),
       category: !!options.category ? options.category : ""
     };
@@ -659,12 +672,14 @@ export class QuestionToolbox
       }
       var json = this.getQuestionJSON(question);
       var title = editorLocalization.getString("qt." + name);
+      const iconName = "icon-" + name;
       const item: IQuestionToolboxItem = {
         id: name,
         name: name,
-        iconName: "icon-" + name,
+        iconName: iconName,
         title: title,
         tooltip: title,
+        className: "svc-toolbox__item svc-toolbox__item--" + iconName,
         json: json,
         isCopied: false,
         category: (defaultCategories[name] || "")
@@ -776,5 +791,5 @@ export class QuestionToolbox
     return questions;
   }
 
-  public dispose() { }
+  //public dispose(): void { } Don't we need to dispose toolbox?
 }

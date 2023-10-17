@@ -3,7 +3,6 @@ Version = `${process.env.VERSION}`;
 
 export * from "../survey-creator";
 export * from "../tabs/designer";
-export * from "../tabs/embed";
 export * from "../tabs/json-editor-ace";
 export * from "../tabs/json-editor-textarea";
 export * from "../tabs/logic";
@@ -31,11 +30,14 @@ export * from "../adorners/cell-question";
 export * from "../adorners/cell-question-dropdown";
 export * from "../action-button";
 
+export * from "../tabs/json-error-item";
+
 //custom questions for property grid
 export * from "../custom-questions/color-item";
 export * from "../custom-questions/question-color";
 export * from "../custom-questions/spin-editor";
 export * from "../custom-questions/question-file";
+export * from "../custom-questions/text-with-reset";
 
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
@@ -48,6 +50,7 @@ export * from "../simulator";
 export * from "../svg-bundle";
 export * from "../survey-renderers/dropdown";
 export * from "../tabs/test";
+export * from "../tabs/test-complete";
 export * from "../tabs/theme";
 export * from "../tabbed-menu/tabbed-menu";
 export * from "../tabbed-menu/tabbed-menu-item";

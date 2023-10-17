@@ -42,6 +42,7 @@ import { ConditionEditor } from "../../src/property-grid/condition-survey";
 import { DefaultValueEditor } from "../../src/property-grid/values-survey";
 import { PropertyGridValueEditor } from "../../src/property-grid/values";
 import { FastEntryEditor } from "../../src/property-grid/fast-entry";
+import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 
 export * from "../../src/property-grid/bindings";
 export * from "../../src/property-grid/matrices";
@@ -49,12 +50,6 @@ export * from "../../src/property-grid/restfull";
 export * from "../../src/property-grid/fast-entry";
 export * from "../../src/components/link-value";
 
-export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base, options: ISurveyCreatorOptions = null) {
-    PropertyGridEditorCollection.clearHash();
-    super(obj, options);
-  }
-}
 class BindingsTester extends Base {
   private survey: SurveyModel;
   constructor() {
@@ -139,13 +134,6 @@ function createSurvey(): SurveyModel {
       }
     ]
   });
-}
-
-function findSetupAction(actions: Array<any>): any {
-  for (var i = 0; i < actions.length; i++) {
-    if (actions[i].id === "property-grid-setup") return actions[i];
-  }
-  return null;
 }
 
 test("Create correct questions for property editors", () => {
@@ -250,7 +238,9 @@ test("SurveySelectBaseQuestionPropertyEditor", () => {
       { type: "text", name: "question1", valueName: "value1" },
       { type: "radiogroup", name: "question2" },
       { type: "checkbox", name: "question3" },
-      { type: "dropdown", name: "question4" }
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
     ]
   });
   var propertyGrid = new PropertyGridModelTester(
@@ -259,6 +249,27 @@ test("SurveySelectBaseQuestionPropertyEditor", () => {
   var dropdownQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("question_test");
   expect(dropdownQuestion.choices).toHaveLength(2);
   expect(dropdownQuestion.choices[0].value).toEqual("question2");
+  Serializer.removeProperty("question", "question_test");
+});
+test("PropertyGridEditorQuestionCarryForward", () => {
+  Serializer.addProperty("question", "question_test:question_carryforward");
+  var survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "question1", valueName: "value1" },
+      { type: "radiogroup", name: "question2" },
+      { type: "checkbox", name: "question3" },
+      { type: "dropdown", name: "question4" },
+      { type: "matrixdynamic", name: "question5" },
+      { type: "paneldynamic", name: "question6" },
+    ]
+  });
+  var propertyGrid = new PropertyGridModelTester(
+    survey.getQuestionByName("question3")
+  );
+  var dropdownQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("question_test");
+  expect(dropdownQuestion.choices).toHaveLength(4);
+  expect(dropdownQuestion.choices[0].value).toEqual("question2");
+  expect(dropdownQuestion.choices[3].value).toEqual("question6");
   Serializer.removeProperty("question", "question_test");
 });
 test("SurveyQuestionValuePropertyEditor - choices", () => {
@@ -1794,7 +1805,7 @@ test("SurveyPropertyDefaultValueEditor: Default Value Title", () => {
   expect(editorLocalization.getString("pe.defaultValue")).toEqual(defaultValueQuestion.title);
 });
 
-test("SurveyHelper convertTextToItemValues", () => {
+test("Setup choices from FastEntryEditor", () => {
   var choices = new Array<ItemValue>();
   var editor = new FastEntryEditor(choices);
   editor.comment.value = "1|One\n2|Two";
@@ -1804,6 +1815,15 @@ test("SurveyHelper convertTextToItemValues", () => {
   expect(choices[0].text).toEqual("One");
   expect(choices[1].value).toEqual("2");
   expect(choices[1].text).toEqual("Two");
+});
+test("Empty choices from FastEntryEditor, Bug#4733", () => {
+  var choices = new Array<ItemValue>();
+  choices.push(new ItemValue(1));
+  choices.push(new ItemValue(2));
+  var editor = new FastEntryEditor(choices);
+  editor.comment.value = "";
+  editor.apply();
+  expect(choices).toHaveLength(0);
 });
 test("SurveyHelper convertTextToItemValues", () => {
   var choices = new Array<ItemValue>();

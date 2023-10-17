@@ -237,6 +237,7 @@ export var logicCss = {
     tableWrapper: "",
     mainRoot: "sl-question st-row__question st-scrollable",
     root: "sl-table st-matrixdynamic",
+    noHeader: "",
     row: "sl-table__row",
     rowAdditional: "sl-table__row--additional",
     cell: "sl-table__cell",
@@ -312,6 +313,10 @@ export var logicCss = {
       buttonExpanded: "",
       buttonCollapsed: ""
     }
+  },
+  list: {
+    root: "sv-list__container sl-list",
+    itemBody: "sv-list__item-body sl-list__item-body"
   },
   embeddedsurvey: {
     mainRoot: "sl-embedded-survey"

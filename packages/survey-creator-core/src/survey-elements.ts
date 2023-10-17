@@ -1,5 +1,7 @@
-import { DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
+import { DragDropAllowEvent, DragDropCore, DragTypeOverMeEnum, IElement, IPanel, IShortcutText, ISurveyElement, JsonObject, PageModel, PanelModelBase, QuestionRowModel, Serializer, SurveyModel } from "survey-core";
 import { settings } from "./creator-settings";
+import { IQuestionToolboxItem } from "./toolbox";
+import { SurveyHelper } from "./survey-helper";
 
 export function calculateIsEdge(dropTargetNode: HTMLElement, clientY: number) {
   const rect = dropTargetNode.getBoundingClientRect();
@@ -59,6 +61,7 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return "survey-element";
   }
   protected isDraggedElementSelected: boolean = false;
+  public maxNestedPanels: number = -1;
 
   // private isRight: boolean;
   // protected prevIsRight: boolean;
@@ -66,11 +69,12 @@ export class DragDropSurveyElements extends DragDropCore<any> {
   public startDragToolboxItem(
     event: PointerEvent,
     draggedElementJson: JsonObject,
-    toolboxItemTitle: string
+    toolboxItemModel: IQuestionToolboxItem
   ): void {
     const preventSaveTargetNode = true;
     const draggedElement: any = this.createElementFromJson(draggedElementJson);
-    draggedElement.toolboxItemTitle = toolboxItemTitle;
+    draggedElement.toolboxItemTitle = toolboxItemModel.title;
+    draggedElement.toolboxItemIconName = toolboxItemModel.iconName;
     this.startDrag(event, draggedElement, null, null, preventSaveTargetNode);
   }
 
@@ -101,8 +105,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
   protected createDraggedElementIcon(): HTMLElement {
     const span = document.createElement("span");
-    const type = this.draggedElement.getType();
-    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#icon-${type}"></use></svg>`;
+    const iconName = this.draggedElement.toolboxItemIconName;
+    const svgString = `<svg class="sv-svg-icon" role="img" style="width: 24px; height: 24px;"><use xlink:href="#${iconName}"></use></svg>`;
 
     span.className = "svc-dragged-element-shortcut__icon";
     span.innerHTML = svgString;
@@ -227,6 +231,11 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     if (this.draggedElement.getType() === "paneldynamic" && dropTarget === this.draggedElement.template) {
       return false;
     }
+    if(this.maxNestedPanels >= 0 && this.draggedElement.isPanel) {
+      let len = SurveyHelper.getElementDeepLength(dropTarget);
+      if(this.isEdge && dropTarget.isPanel) len--;
+      if(this.maxNestedPanels < len) return false;
+    }
 
     if (
       DragDropSurveyElements.restrictDragQuestionBetweenPages &&
@@ -273,11 +282,29 @@ export class DragDropSurveyElements extends DragDropCore<any> {
 
     return <HTMLElement>result;
   }
-
+  private isAllowDragOver(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum): boolean {
+    if(!this.survey || this.survey.onDragDropAllow.isEmpty) return true;
+    const allowOptions: DragDropAllowEvent = {
+      allow: true,
+      parent: this.parentElement,
+      source: this.draggedElement,
+      target: <IElement>dropTarget,
+      insertAfter: undefined,
+      insertBefore: undefined
+    };
+    if(dragOverLocation === DragTypeOverMeEnum.Bottom || dragOverLocation === DragTypeOverMeEnum.Right) {
+      allowOptions.insertAfter = <IElement>dropTarget;
+    }
+    if(dragOverLocation === DragTypeOverMeEnum.Top || dragOverLocation === DragTypeOverMeEnum.Left) {
+      allowOptions.insertBefore = <IElement>dropTarget;
+    }
+    this.survey.onDragDropAllow.fire(this.survey, allowOptions);
+    return allowOptions.allow;
+  }
   public dragOverCore(dropTarget: ISurveyElement, dragOverLocation: DragTypeOverMeEnum, isEdge: boolean = false, isSide: boolean = false): void {
     this.removeDragOverMarker(this.dragOverIndicatorElement);
     this.removeDragOverMarker(this.dropTarget);
-    if(dropTarget === this.draggedElement) {
+    if(this.isSameElement(dropTarget)) {
       this.allowDropHere = false;
       return;
     }
@@ -289,7 +316,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     this.parentElement = this.dropTarget.isPage
       ? this.dropTarget
       : ((<any>this.dropTarget).page || (<any>this.dropTarget).__page);
-
+    if(!this.isAllowDragOver(dropTarget, dragOverLocation)) {
+      this.allowDropHere = false;
+      return;
+    }
     const dragOverIndicator = this.dragOverIndicatorElement || this.dropTarget;
     if (!this.isEdge && !this.isSide && this.isDragOverInsideEmptyPanel()) {
       dragOverIndicator.dragTypeOverMe = DragTypeOverMeEnum.InsideEmptyPanel;
@@ -302,6 +332,13 @@ export class DragDropSurveyElements extends DragDropCore<any> {
         dragOverIndicator.dragTypeOverMe = this.dragOverLocation;
       }
     }
+  }
+  private isSameElement(target: ISurveyElement): boolean {
+    while(!!target) {
+      if(target === this.draggedElement) return true;
+      target = target.parent;
+    }
+    return false;
   }
 
   public dragOver(event: PointerEvent): void {
@@ -412,13 +449,14 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     }
 
-    const isTargetIsContainer = dest.isPanel || dest.isPage;
+    let isTargetIsContainer = dest.isPanel || dest.isPage;
     if(!!src && !!src.parent) {
       (page.survey as SurveyModel).startMovingQuestion();
       let isSamePanel = !(isTargetIsContainer && dragOverLocation === DragTypeOverMeEnum.InsideEmptyPanel) && !!row && row.panel == src.parent;
       if(isSamePanel) {
         this.moveElementInPanel(row.panel, src, dragged, targetIndex);
         row.panel.updateRows();
+        isTargetIsContainer = false;
         targetIndex = -1;
       } else {
         src.parent.removeElement(src);

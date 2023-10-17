@@ -1,6 +1,7 @@
 import { SurveyModel, JsonError, Base, ISurveyElement } from "survey-core";
 import { SurveyHelper } from "./survey-helper";
 import { SurveyJSON5 } from "./json5";
+import { settings } from "./creator-settings";
 
 class SurveyForTextWorker extends SurveyModel {
   constructor(jsonObj: any) {
@@ -62,8 +63,23 @@ class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase 
   protected updatedJsonObjOnFix(json: any): void {
   }
   protected replaceJson(text: string, start: number, end: number, json: any): string {
-    const newContent = JSON.stringify(json);
+    let newContent = JSON.stringify(json, null, settings.jsonEditor.indentation);
+    newContent = this.addLeftIndentIntoContent(text, newContent, start - 1);
     return text.substring(0, start) + newContent + text.substring(end + 1);
+  }
+  private addLeftIndentIntoContent(text: string, content: string, index: number): string {
+    if(index <= 0) return content;
+    let indent = "";
+    while(index > 0 && (text[index] === " " || text[index] === "\t")) {
+      indent += text[index];
+      index --;
+    }
+    if(!indent) return content;
+    const lines = content.split("\n");
+    for(let i = 1; i < lines.length; i++) {
+      lines[i] = indent + lines[i];
+    }
+    return lines.join("\n");
   }
 }
 
@@ -71,16 +87,10 @@ class SurveyTextWorkerJsonUnknownPropertyErrorFixer extends SurveyTextWorkerJson
   public constructor(protected element: Base, protected jsonObj: any, private propertyName: string) {
     super(element, jsonObj);
   }
-  public get isFixable(): boolean { return !!this.propertyName; }
   public getCorrectAt(text: string, at: number, end: number): number {
     const propName = this.propertyName;
     if(!propName) return at;
     return this.getNewIndex(text, this.propertyName, at, end);
-  }
-  protected updatedJsonObjOnFix(json: any): void {
-    if(!!this.propertyName) {
-      delete json[this.propertyName];
-    }
   }
 }
 class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonErrorFixer {
@@ -161,7 +171,10 @@ export class SurveyTextWorker {
     return this.surveyValue;
   }
   public get isJsonCorrect(): boolean {
-    return this.errors.length === 0 && this.surveyValue !== null;
+    return !!this.surveyValue;
+  }
+  public get isJsonHasErrors(): boolean {
+    return this.errors.length > 0 || !this.isJsonCorrect;
   }
   protected process() {
     try {
@@ -246,8 +259,8 @@ export class SurveyTextWorker {
     const res = [];
     const names = {};
     this.survey.pages.forEach(p=> this.checkDuplicatedElement(p, names, res));
-    this.survey.getAllPanels().forEach(p=> this.checkDuplicatedElement(p, names, res));
-    this.survey.getAllQuestions().forEach(q=> this.checkDuplicatedElement(q, names, res));
+    SurveyHelper.getAllElements(this.survey, true).forEach(p=> this.checkDuplicatedElement(p, names, res));
+    SurveyHelper.getAllElements(this.survey, false).forEach(q=> this.checkDuplicatedElement(q, names, res));
     return res;
   }
   private checkDuplicatedElement(el: any, names: any, duplicates: Array<Base>): void {

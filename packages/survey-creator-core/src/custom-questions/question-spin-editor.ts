@@ -87,6 +87,7 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
         event.preventDefault();
         break;
     }
+    this.onTextKeyDownHandler(event);
   }
   public onInputKeyDown = (event: KeyboardEvent) => {
     if(event.key == "ArrowUp" || event.key == "ArrowDown")

@@ -230,7 +230,8 @@ export class SurveyLogicTypes {
         return survey.getAllQuestions().length > 0;
       },
       supportContext(context: Base): boolean {
-        return Array.isArray(context["templateElements"]);
+        return Array.isArray(context["templateElements"]) ||
+        (Array.isArray(context["detailElements"]) && context["detailElements"].length > 0);
       },
       getParentElement(element: Base): Base {
         return !!element ? (<Question>element).parentQuestion : null;
@@ -251,6 +252,9 @@ export class SurveyLogicTypes {
           }
           if (q instanceof QuestionPanelDynamicModel && (!context || context === q)) {
             q.templateElements.forEach(el => addElement(el));
+          }
+          if (q instanceof QuestionMatrixDropdownModelBase && (!context || context === q)) {
+            q.detailElements.forEach(el => addElement(el));
           }
         }
         return res;
@@ -332,6 +336,25 @@ export class SurveyLogicTypes {
       propertyName: "requiredIf",
     },
     {
+      name: "question_resetValue",
+      baseClass: "question",
+      propertyName: "resetValueIf",
+    },
+    {
+      name: "question_setValue",
+      baseClass: "question",
+      propertyName: "setValueIf",
+      getDisplayText: (element: Base, formatStr: string, lt: SurveyLogicType): string => {
+        return getDisplayTextForSetValueIf(element, formatStr, lt);
+      }
+    },
+    {
+      name: "question_setValueExpression",
+      baseClass: "question",
+      propertyName: "setValueExpression",
+      showInUI: false,
+    },
+    {
       name: "column_visibility",
       baseClass: "matrixdropdowncolumn",
       propertyName: "visibleIf",
@@ -345,6 +368,25 @@ export class SurveyLogicTypes {
       name: "column_require",
       baseClass: "matrixdropdowncolumn",
       propertyName: "requiredIf",
+    },
+    {
+      name: "column_resetValue",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "resetValueIf",
+    },
+    {
+      name: "column_setValue",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "setValueIf",
+      getDisplayText: (element: Base, formatStr: string, lt: SurveyLogicType): string => {
+        return getDisplayTextForSetValueIf(element, formatStr, lt);
+      }
+    },
+    {
+      name: "column_setValueExpression",
+      baseClass: "matrixdropdowncolumn",
+      propertyName: "setValueExpression",
+      showInUI: false,
     },
     {
       name: "expression_expression",
@@ -502,4 +544,12 @@ export class SurveyLogicTypes {
       showInUI: false,
     },
   ];
+}
+function getDisplayTextForSetValueIf(element: Base, formatStr: string, lt: SurveyLogicType): string {
+  const name = lt.formatElName(element["name"]);
+  let exp = element["setValueExpression"];
+  if(!exp) {
+    return getLogicString("trigger_setvalueEmptyText")["format"](name);
+  }
+  return formatStr["format"](name, exp);
 }

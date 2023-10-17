@@ -1,4 +1,4 @@
-import { explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
+import { RatingToolboxItem, explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
@@ -561,7 +561,6 @@ test("Focus on new question", async (t) => {
 
 test("Focus on new question dragged", async (t) => {
   await setJSON({ pages: [{ name: "page1" }] });
-  const RatingToolboxItem = Selector("[aria-label='Rating Scale toolbox item']");
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='page1']");
 
   await t
@@ -924,4 +923,26 @@ test("Check string editor with html", async (t) => {
   const htmlMarkupSelector = Selector(".sv-string-editor--html #markup_html").withText("Test");
 
   await t.expect(htmlMarkupSelector.getStyleProperty("color")).eql("rgb(255, 0, 255)");
+});
+
+test("Check string editor focus does not throw error: #4459", async (t) => {
+  await explicitErrorHandler();
+  await setJSON({
+    "elements": [
+      {
+        "type": "checkbox",
+        "name": "promoter_features",
+        "choices": [
+          "Item 1",
+          "Item 2",
+          "Item 3",
+        ],
+        "colCount": 1
+      }]
+  });
+  await t
+    .click(Selector(".svc-question__content"))
+    .click(Selector(".sv-string-editor").withExactText("Item 4"))
+    .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
+    .expect(Selector(".sv-string-editor").withExactText("Item 5").exists).ok();
 });

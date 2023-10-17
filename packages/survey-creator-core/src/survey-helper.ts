@@ -4,7 +4,7 @@ import {
   ISurveyElement,
   ItemValue,
   JsonObjectProperty,
-  PageModel,
+  SurveyElement,
   Serializer,
   SurveyModel,
 } from "survey-core";
@@ -13,12 +13,12 @@ import { ISurveyCreatorOptions } from "./creator-settings";
 import { wrapTextByCurlyBraces } from "./utils/utils";
 
 export enum ObjType {
-  Unknown,
-  Survey,
-  Page,
-  Panel,
-  Question,
-  Column
+  Unknown = "unknown",
+  Survey = "survey",
+  Page = "page",
+  Panel = "panel",
+  Question = "question",
+  Column = "column"
 }
 export class SurveyHelper {
   public static getNewElementName(el: ISurveyElement): string {
@@ -26,7 +26,7 @@ export class SurveyHelper {
     if(!survey) return el.name;
     if(el.isPage) return this.getNewPageName(survey.pages);
     if(el.isPanel) return this.getNewPanelName(survey.getAllPanels());
-    return this.getNewQuestionName(survey.getAllQuestions());
+    return this.getNewQuestionName(survey.getAllQuestions(false, false, true));
   }
   public static getNewPageName(objs: Array<any>) {
     return SurveyHelper.getNewName(
@@ -107,15 +107,27 @@ export class SurveyHelper {
     if (obj["name"]) return obj["name"];
     return "";
   }
-  public static getElements(
-    element: any,
-    includeHidden: boolean = false
-  ): Array<any> {
+  public static getElements(element: any, includeHidden: boolean = false): Array<any> {
     if (!element) return [];
     if (element.getElementsInDesign)
       return element.getElementsInDesign(includeHidden);
     if (element.elements) return element.elements;
     return [];
+  }
+  public static addElements(elements: Array<any>, isPanel: boolean, result: Array<any>) {
+    for (var i = 0; i < elements.length; i++) {
+      if (elements[i].isPanel === isPanel) {
+        result.push(elements[i]);
+      }
+      SurveyHelper.addElements(SurveyHelper.getElements(elements[i]), isPanel, result);
+    }
+  }
+  public static getAllElements(survey: SurveyModel, isPanel: boolean): Array<any> {
+    const result = [];
+    for (let i = 0; i < survey.pages.length; i++) {
+      SurveyHelper.addElements(survey.pages[i].elements, isPanel, result);
+    }
+    return result;
   }
   public static isPropertyVisible(
     obj: any,
@@ -249,6 +261,7 @@ export class SurveyHelper {
   }
   public static updateQuestionJson(questionJson: any) {
     questionJson.storeOthersAsComment = false;
+    delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
     if (!!questionJson.choices) {
       for (var i = 0; i < questionJson.choices.length; i++) {
@@ -342,5 +355,13 @@ export class SurveyHelper {
       if (Serializer.isDescendantOf(type, supportedTypes[i])) return true;
     }
     return false;
+  }
+  public static getElementDeepLength(element: SurveyElement): number {
+    let res: number = 0;
+    while (!!element) {
+      if (element.isPanel) res++;
+      element = <SurveyElement><any>element.parent;
+    }
+    return res;
   }
 }

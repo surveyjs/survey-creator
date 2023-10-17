@@ -1,6 +1,8 @@
-import { Base, property, ListModel, Action } from "survey-core";
+import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
 import { ICreatorPlugin, CreatorBase } from "../../creator-base";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
+import { saveToFileHandler } from "../../utils/utils";
+import { settings } from "../../creator-settings";
 
 const maxErrorLength = 150;
 export abstract class JsonEditorBaseModel extends Base {
@@ -35,7 +37,7 @@ export abstract class JsonEditorBaseModel extends Base {
       this.jsonEditorChangedTimeoutId = -1;
     } else {
       const self: JsonEditorBaseModel = this;
-      if(!!window) {
+      if (!!window) {
         this.jsonEditorChangedTimeoutId = window.setTimeout(() => {
           self.jsonEditorChangedTimeoutId = -1;
           self.processErrors(self.text);
@@ -46,15 +48,14 @@ export abstract class JsonEditorBaseModel extends Base {
 
   private errorListValue: ListModel;
   public get errorList(): ListModel {
-    if(!this.errorListValue) {
+    if (!this.errorListValue) {
       this.errorListValue = new ListModel([], (action: Action) => {
-        const error: SurveyTextWorkerError = action.data;
-        if(!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
+        const error: SurveyTextWorkerError = action.data.error;
+        if (!!error) this.gotoError(error.at, error.rowAt, error.columnAt);
       }, false);
       this.errorListValue.searchEnabled = false;
       this.errorListValue.cssClasses = {
         item: "svc-json-errors__item",
-        itemIcon: "svc-json-error__icon",
         itemBody: "svc-json-error",
         itemsContainer: "svc-json-errors"
       };
@@ -65,32 +66,42 @@ export abstract class JsonEditorBaseModel extends Base {
 
   protected setErrors(errors: Array<SurveyTextWorkerError>): void {
     let hasErrors = errors.length > 0;
-    if(hasErrors) {
+    if (hasErrors) {
       const actions = [];
       this.createErrorActions(errors).forEach(action => actions.push(action));
       this.errorList.setItems(actions);
     }
     this.hasErrors = hasErrors;
   }
-  protected gotoError(at: number, row: number, column: number): void {}
+  protected gotoError(at: number, row: number, column: number): void { }
   private createErrorActions(errors: Array<SurveyTextWorkerError>): Array<Action> {
     const res = [];
     let counter = 1;
     errors.forEach(error => {
       const line = error.rowAt > -1 ? "Line: " + (error.rowAt + 1) + ". " : "";
       let title = error.text;
-      if(title.length > maxErrorLength + 3) {
+      if (title.length > maxErrorLength + 3) {
         title = title.substring(0, maxErrorLength) + "...";
       }
       title = line + title;
       const at = error.at;
       res.push(new Action({
         id: "error_" + counter++,
+        component: "json-error-item",
         title: title,
         tooltip: error.text,
         iconName: "icon-error",
         iconSize: 16,
-        data: error
+        data: {
+          error: error,
+          showFixButton: error.isFixable,
+          fixError: () => {
+            this.text = error.fixError(this.text);
+          },
+          fixButtonIcon: "icon-fix",
+          //todo
+          fixButtonTitle: "Fix error"
+        }
       }));
     });
     return res;
@@ -105,8 +116,101 @@ export abstract class JsonEditorBaseModel extends Base {
 }
 
 export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
+  private inputFileElement: HTMLInputElement;
+  private importAction: Action;
+  private exportAction: Action;
+  private copyAction: Action;
+
+  constructor(private creator: CreatorBase) {
+    this.createActions().forEach(action => creator.toolbar.actions.push(action));
+  }
+
+  public saveToFileHandler = saveToFileHandler;
+
+  public exportToFile(fileName: string) {
+    if (this.model) {
+      const jsonBlob = new Blob([this.model.text], { type: "application/json" });
+      this.saveToFileHandler(fileName, jsonBlob);
+    }
+  }
+  public importFromFile(file: File, callback?: (json: string) => void) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const surveyJSONText = fileReader.result as string;
+      if (this.model) {
+        this.model.text = surveyJSONText;
+      }
+      callback && callback(surveyJSONText);
+    };
+    fileReader.readAsText(file);
+  }
+  public copyToClipboard() {
+    if (this.model) {
+      navigator.clipboard.writeText(this.model.text);
+    }
+  }
+
+  protected createActions(): Array<Action> {
+    const items: Array<Action> = [];
+
+    this.importAction = new Action({
+      id: "svc-json-import",
+      iconName: "icon-load",
+      locTitleName: "ed.surveyJsonImportButton",
+      locTooltipName: "ed.surveyJsonImportButton",
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      mode: "small",
+      component: "sv-action-bar-item",
+      needSeparator: true,
+      action: () => {
+        if (!document) return;
+        if (!this.inputFileElement) {
+          this.inputFileElement = document.createElement("input");
+          this.inputFileElement.type = "file";
+          this.inputFileElement.style.display = "none";
+          this.inputFileElement.onchange = () => {
+            if (this.inputFileElement.files.length < 1) return;
+            this.importFromFile(this.inputFileElement.files[0]);
+            this.inputFileElement.value = "";
+          };
+        }
+        this.inputFileElement.click();
+      }
+    });
+    items.push(this.importAction);
+
+    this.exportAction = new Action({
+      id: "svc-json-export",
+      iconName: "icon-download",
+      locTitleName: "ed.surveyJsonExportButton",
+      locTooltipName: "ed.surveyJsonExportButton",
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      mode: "small",
+      component: "sv-action-bar-item",
+      action: () => {
+        this.exportToFile(settings.jsonEditor.exportFileName);
+      }
+    });
+    items.push(this.exportAction);
+
+    this.copyAction = new Action({
+      id: "svc-json-copy",
+      iconName: "icon-copy",
+      locTitleName: "ed.surveyJsonCopyButton",
+      locTooltipName: "ed.surveyJsonCopyButton",
+      visible: <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "editor"; }),
+      mode: "small",
+      component: "sv-action-bar-item",
+      action: () => {
+        this.copyToClipboard();
+      }
+    });
+    items.push(this.copyAction);
+
+    return items;
+  }
+
   public model: JsonEditorBaseModel;
-  constructor(private creator: CreatorBase) { }
   public activate(): void {
     this.model = this.createModel(this.creator);
   }
@@ -125,6 +229,12 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       this.model = undefined;
     }
     return true;
+  }
+  public defaultAllowingDeactivate(): boolean {
+    if (!this.model) return true;
+    const textWorker: SurveyTextWorker = new SurveyTextWorker(this.model.text);
+    if (!textWorker.isJsonCorrect) return undefined;
+    return !textWorker.isJsonHasErrors;
   }
   protected abstract createModel(
     creator: CreatorBase

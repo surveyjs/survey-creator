@@ -50,6 +50,8 @@ export var huStrings = {
     settingsTooltip: "Nyissa meg a beállításokat",
     surveySettings: "Földmérési beállítások",
     surveySettingsTooltip: "Nyissa meg a felmérési beállításokat",
+    themeSettings: "Téma beállítások",
+    themeSettingsTooltip: "Nyissa meg a témabeállításokat",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -126,6 +128,7 @@ export var huStrings = {
     translationPropertyGridTitle: "Nyelvi beállítások",
     themePropertyGridTitle: "Téma beállítások",
     translationLanguages: "Nyelvek",
+    translationDeleteLanguage: "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?",
     translationAddLanguage: "Válasszon egy nyelvet a fordításhoz.",
     translationShowAllStrings: "Összes szöveg mutatása",
     translationShowUsedStringsOnly: "Csak használt karakterláncok",
@@ -133,10 +136,13 @@ export var huStrings = {
     translationNoStrings: "Nincs fordítható szöveg. Kérem változtasson a szűrési feltételeken.",
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
+    translateUsigAI: "Összes automatikus fordítása",
+    translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
+    themeResetButton: "Témabeállítások visszaállítása alapértelmezettre",
     bold: "Félkövér",
     italic: "Dőlt",
     underline: "Aláhúzott",
@@ -162,9 +168,13 @@ export var huStrings = {
       question_visibilityName: "Kérdés megjelenítése (elrejtése)",
       question_enableName: "Kérdés engedélyezése (letiltása)",
       question_requireName: "Kérdés feltevése kötelező",
+      question_resetValueName: "Kérdés értékének visszaállítása",
+      question_setValueName: "Kérdésérték beállítása",
       column_visibilityName: "Oszlop megjelenítése (elrejtése)",
       column_enableName: "Oszlop engedélyezése (letiltása)",
       column_requireName: "Oszlop kötelezővé tétele",
+      column_resetValueName: "Oszlopérték visszaállítása",
+      column_setValueName: "Oszlopérték beállítása",
       trigger_completeName: "Teljes felmérés",
       trigger_setvalueName: "Válasz beállítása",
       trigger_copyvalueName: "Válasz másolása",
@@ -191,9 +201,14 @@ export var huStrings = {
       question_visibilityText: "tegye láthatóvá a {0} kérdést", //{0} question name
       question_enableText: "Kérdés {0} engedélyezése", //{0} question name
       question_requireText: "Tegye fel a kérdést {0} szükséges", //{0} question name
+      question_resetValueText: "Kérdés visszaállítási értéke: {0}",
+      question_setValueText: "Érték hozzárendelése: {1} a kérdéshez: {0}",
       column_visibilityText: "A {1}. kérdés {0} oszlopának láthatóvá tétele", //{0} column name, {1} question name
       column_enableText: "A kérdés {0} oszlopának engedélyezése {1} engedélyezése", //{0} column name, {1} question name
       column_requireText: "Tegye kötelezővé a kérdés {0} oszlopát {1}", //{0} column name, {1} question name
+      column_resetValueText: "Az oszlop cellaértékének visszaállítása: {0}",
+      column_setValueText: "Cellaérték hozzárendelése: {1} oszlophoz: {0}",
+      setValueExpressionPlaceholder: " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve.",
       trigger_completeText: "A felmérés befejeződött",
       trigger_setvalueText: "Kérdéses érték: {0} érték {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Egyértelmű kérdésérték: {0}", //{0} question name
@@ -259,6 +274,7 @@ export var huStrings = {
     fastEntry: "Gyors felvétel",
     fastEntryNonUniqueError: "A \"{0}\" érték nem egyedi",
     fastEntryChoicesCountError: "Kérjük, korlátozza a tételek számát {0} és {1} között",
+    fastEntryChoicesMinCountError: "Kérjük, adjon meg legalább {0} elemet",
     fastEntryPlaceholder: "Az adatokat a következő formátumban állíthatja be:\nérték1|szöveg\nérték2",
     formEntry: "Felvétel űrlappal",
     testService: "Szolgáltatás tesztelése",
@@ -277,6 +293,7 @@ export var huStrings = {
     cellsEmptyRowsColumns: "Legalább egy sornak vagy egy oszlopnak lennie kell",
     showPreviewBeforeComplete: "A válaszok előnézete a felmérés elküldése előtt",
     overridingPropertyPrefix: "Állítsa be ",
+    resetToDefaultCaption: "Átszed",
     propertyIsEmpty: "Kérem adjon meg egy értéket",
     propertyIsNoUnique: "Kérjük, adjon meg egy egyedi értéket",
     propertyNameIsNotUnique: "Kérjük, adjon meg egy egyedi nevet",
@@ -322,6 +339,8 @@ export var huStrings = {
     choicesOrder: "Válassza ki a lehetőséget rendezését",
     visible: "Látható?",
     isRequired: "Kötelező?",
+    markRequired: "Megjelölés kötelezőként",
+    removeRequiredMark: "Távolítsa el a szükséges jelet",
     isAllRowRequired: "Válasz kérése minden sorhoz",
     requiredErrorText: "\"Kötelező\" hibaüzenet",
     startWithNewLine: "Új sorban kezdődik?",
@@ -403,7 +422,12 @@ export var huStrings = {
       imageHeight: "Képmagasság (CSS által elfogadott értékekben)",
       imageWidth: "Képszélesség (CSS által elfogadott értékekben)"
     },
+    // survey templates
+    survey: {
+      title: "Cím"
+    },
     page: {
+      title: "Cím",
       maxTimeToFinish: "Az oldal befejezésének határideje (másodpercben)"
     },
     question: {
@@ -640,6 +664,9 @@ export var huStrings = {
   pv: {
     "true": "igaz",
     "false": "téves",
+    file: "Helyi fájlok",
+    camera: "Fényképezőgép",
+    "file-camera": "Helyi fájlok vagy kamera",
     inherit: "öröklött",
     show: "mutatás",
     hide: "elrejtés",
@@ -902,6 +929,8 @@ export var huStrings = {
     descriptionLocation: "Leírás, hely",
     defaultValueExpression: "Alapértelmezett értékkifejezés",
     requiredIf: "Kötelező ha",
+    resetValueIf: "Érték visszaállítása, ha",
+    setValueIf: "Érték beállítása, ha",
     validators: "Validátorok",
     bindings: "Kötések",
     renderAs: "Renderelés mint",
@@ -978,6 +1007,7 @@ export var huStrings = {
     "--base-unit": "Alapegység",
     groupGeneral: "Általános",
     groupAdvanced: "Haladó",
+    groupHeader: "Fejléc",
     themeName: "Téma",
     themeMode: "Kérdés megjelenése",
     themeModePanels: "Alapértelmezett",
@@ -988,11 +1018,15 @@ export var huStrings = {
     primaryDefaultColor: "Alapértelmezett",
     primaryDarkColor: "Lebeg",
     primaryLightColor: "Kiválasztott",
+    coverTitleForecolor: "Cím előszíne",
+    coverOverlapEnabled: "Átfed",
     backgroundDimColor: "Háttérszín",
     backgroundImage: "Háttérkép",
     backgroundImageFitAuto: "Kocsi",
     backgroundImageFitCover: "Fedő",
     backgroundImageFitContain: "Tartalmaz",
+    backgroundImageFitFill: "Nyúlik",
+    backgroundImageFitTile: "Cserép",
     backgroundOpacity: "Átlátszatlanság",
     backgroundImageAttachmentFixed: "Fix",
     backgroundImageAttachmentScroll: "Kézirattekercs",
@@ -1016,6 +1050,7 @@ export var huStrings = {
     fontFamily: "Betűcsalád",
     fontSize: "Betűméret",
     color: "Szín",
+    placeholderColor: "Helyőrző színe",
     size: "Méret",
     fontWeightRegular: "Rendszeres",
     fontWeightHeavy: "Nehéz",
@@ -1036,6 +1071,26 @@ export var huStrings = {
     boxShadowInner: "Belső",
     questionShadow: "Árnyék effektusok",
     editorShadow: "Bemeneti elem árnyékeffektusai",
+    headerView: "Nézet",
+    headerViewBasic: "Alapvető",
+    headerViewAdvanced: "Haladó",
+    coverInheritWidthFrom: "Tartalomterület szélessége",
+    coverInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
+    coverInheritWidthFromPage: "Laphoz igazítás",
+    coverTextAreaWidth: "Szöveg szélessége",
+    coverBackgroundColorSwitch: "Háttérszín",
+    coverBackgroundColorNone: "Egyik sem",
+    coverBackgroundColorAccentColor: "Kiemelő szín",
+    coverBackgroundColorCustom: "Szokás",
+    horizontalAlignmentLeft: "Balra",
+    horizontalAlignmentCenter: "Központ",
+    horizontalAlignmentRight: "Jobbra",
+    verticalAlignmentTop: "Felső",
+    verticalAlignmentMiddle: "Középső",
+    verticalAlignmentBottom: "Fenék",
+    logoPosition: "Logó pozíciója",
+    coverTitlePosition: "Cím pozíciója",
+    coverDescriptionPosition: "Leírás Pozíció",
     names: {
       default: "Alapértelmezett",
       sharp: "Éles",
@@ -1709,3 +1764,66 @@ editorLocalization.locales["hu"] = huStrings;
 // names.layered: "Layered" => "Rakott"
 // names.solid: "Solid" => "Szilárd"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?"
+// ed.themeResetButton: "Reset theme settings to default" => "Témabeállítások visszaállítása alapértelmezettre"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.placeholderColor: "Placeholder color" => "Helyőrző színe"
+// ed.themeSettings: "Theme Settings" => "Téma beállítások"
+// ed.themeSettingsTooltip: "Open theme settings" => "Nyissa meg a témabeállításokat"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Átszed"
+// pv.file: "Local files" => "Helyi fájlok"
+// pv.camera: "Camera" => "Fényképezőgép"
+// pv.file-camera: "Local files or camera" => "Helyi fájlok vagy kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Összes automatikus fordítása"
+// ed.translationDialogTitle: "Untranslated strings" => "Lefordítatlan karakterláncok"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
+// lg.question_resetValueName: "Reset question value" => "Kérdés értékének visszaállítása"
+// lg.column_resetValue: "Reset column value" => "Oszlopérték visszaállítása"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Megjelölés kötelezőként"
+// pe.removeRequiredMark: "Remove the required mark" => "Távolítsa el a szükséges jelet"
+// p.resetValueIf: "Reset value if" => "Érték visszaállítása, ha"
+// lg.question_setValueName: "Set question value" => "Kérdésérték beállítása"
+// lg.column_resetValueName: "Reset column value" => "Oszlopérték visszaállítása"
+// lg.column_setValueName: "Set column value" => "Oszlopérték beállítása"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Cím"
+// page.title: "Title" => "Cím"
+// p.setValueIf: "Set value if" => "Érték beállítása, ha"
+// theme.groupHeader: "Header" => "Fejléc"
+// theme.coverTitleForecolor: "Title forecolor" => "Cím előszíne"
+// theme.coverOverlapEnabled: "Overlap" => "Átfed"
+// theme.backgroundImageFitFill: "Stretch" => "Nyúlik"
+// theme.backgroundImageFitTile: "Tile" => "Cserép"
+// theme.headerView: "View" => "Nézet"
+// theme.headerViewBasic: "Basic" => "Alapvető"
+// theme.headerViewAdvanced: "Advanced" => "Haladó"
+// theme.coverInheritWidthFrom: "Content area width" => "Tartalomterület szélessége"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Ugyanaz, mint a felmérés"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Laphoz igazítás"
+// theme.coverTextAreaWidth: "Text width" => "Szöveg szélessége"
+// theme.coverBackgroundColorSwitch: "Background color" => "Háttérszín"
+// theme.coverBackgroundColorNone: "None" => "Egyik sem"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Kiemelő szín"
+// theme.coverBackgroundColorCustom: "Custom" => "Szokás"
+// theme.horizontalAlignmentLeft: "Left" => "Balra"
+// theme.horizontalAlignmentCenter: "Center" => "Központ"
+// theme.horizontalAlignmentRight: "Right" => "Jobbra"
+// theme.verticalAlignmentTop: "Top" => "Felső"
+// theme.verticalAlignmentMiddle: "Middle" => "Középső"
+// theme.verticalAlignmentBottom: "Bottom" => "Fenék"
+// theme.logoPosition: "Logo Position" => "Logó pozíciója"
+// theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
+// theme.coverDescriptionPosition: "Description Position" => "Leírás Pozíció"
+// lg.question_resetValueText: "reset value for question: {0}" => "Kérdés visszaállítási értéke: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Érték hozzárendelése: {1} a kérdéshez: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Az oszlop cellaértékének visszaállítása: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Cellaérték hozzárendelése: {1} oszlophoz: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""

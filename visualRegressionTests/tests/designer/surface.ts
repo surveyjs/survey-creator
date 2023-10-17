@@ -123,6 +123,101 @@ test("Matrix column editor", async (t) => {
   });
 });
 
+test("Matrix column", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "widthMode": "static",
+      "width": "700px",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "m",
+              "columns": [
+                {
+                  "name": "Column 1",
+                  "cellType": "text"
+                },
+                {
+                  "name": "Column 2",
+                  "cellType": "text"
+                }
+              ],
+              "rows": [
+                "Row 1",
+                "Row 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const columnCell = Selector(".sd-table__cell--column-title").find(".svc-matrix-cell").filterVisible();
+    const matrix = Selector(".sd-matrixdropdown");
+    await t.hover(columnCell, { speed: 0.5, offsetX: 1, offsetY: 1 });
+    await t.wait(100);
+    await takeElementScreenshot("matrix-column-cell-hover.png", matrix, t, comparer);
+    await t.click(columnCell, { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-column-cell-selected.png", matrix, t, comparer);
+    await t.click(columnCell.find(".svc-string-editor__input"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-column-cell-edit.png", matrix, t, comparer);
+    await t.click(Selector(".svc-string-editor__input").withText("Row 1"));
+    await takeElementScreenshot("matrix-row-cell-edit.png", matrix, t, comparer);
+  });
+});
+
+test("Matrix column vertical", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const surveyJSON = {
+      "widthMode": "static",
+      "width": "700px",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "matrixdropdown",
+              "name": "m",
+              "columnLayout": "vertical",
+              "columns": [
+                {
+                  "name": "Column 1",
+                  "cellType": "text"
+                },
+                {
+                  "name": "Column 2",
+                  "cellType": "text"
+                }
+              ],
+              "rows": [
+                "Row 1",
+                "Row 2"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+    const columnCell = Selector(".sd-table__cell--column-title").find(".svc-matrix-cell").filterVisible();
+    const matrix = Selector(".sd-matrixdropdown");
+    await t.hover(columnCell, { speed: 0.5, offsetX: 1, offsetY: 1 });
+    await t.wait(100);
+    await takeElementScreenshot("matrix-vertical-column-cell-hover.png", matrix, t, comparer);
+    await t.click(columnCell, { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-vertical-column-cell-selected.png", matrix, t, comparer);
+    await t.click(columnCell.find(".svc-string-editor__input"), { offsetX: 1, offsetY: 1 });
+    await takeElementScreenshot("matrix-vertical-column-cell-edit.png", matrix, t, comparer);
+    await t.click(Selector(".svc-string-editor__input").withText("Row 1"));
+    await takeElementScreenshot("matrix-vertical-row-cell-edit.png", matrix, t, comparer);
+  });
+});
+
 test("Matrix column editor boolean", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
@@ -242,6 +337,36 @@ test("Choices (Tagbox): Layout", async (t) => {
 
     const QRoot = Selector(".svc-question__adorner").filterVisible();
     await takeElementScreenshot("surface-tagbox-default-layout.png", QRoot, t, comparer);
+  });
+});
+test("Choices (Checkbox): Layout small screen", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(500, 900);
+    const json = {
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              "type": "checkbox",
+              "name": "question1",
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4"
+              ],
+              "hasOther": true,
+              "colCount": 2
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+
+    const QRoot = Selector(".svc-question__adorner").filterVisible();
+    await takeElementScreenshot("surface-checkbox-layout-small-screen.png", QRoot, t, comparer);
   });
 });
 
@@ -529,7 +654,9 @@ test("Matrix dynamic with detail", async (t) => {
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
           detailElements: [{ type: "text", name: "q1" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -549,7 +676,9 @@ test("Matrix dynamic with detail empty", async (t) => {
           rowCount: 2,
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -575,7 +704,9 @@ test("Matrix check title editing (https://github.com/surveyjs/survey-creator/iss
             "Row 1",
             "Row 2"
           ],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -597,7 +728,9 @@ test("Matrix dynamic with detail two questions + select", async (t) => {
           detailPanelMode: "underRow",
           columns: [{ name: "col1" }, { name: "col2" }, { name: "col3" }],
           detailElements: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }],
-          width: "800px"
+          width: "800px",
+          minWidth: "800px",
+          maxWidth: "800px"
         },
       ],
     };
@@ -621,6 +754,37 @@ test("Logo image hover", async (t) => {
     await setJSON(json);
     await t.hover(".svc-logo-image");
     await takeElementScreenshot("logo-image-hover.png", Selector(".svc-logo-image"), t, comparer);
+  });
+});
+test("Logo image loading", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1900);
+    const json = {
+      elements: [
+        {
+          type: "text",
+          name: "q1"
+        },
+      ],
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (window as any).creator.onUploadFile.add((_, opt) => {
+        setTimeout(() => {
+          opt.callback("success", "");
+        }, 1000000);
+      });
+    })();
+    await ClientFunction(() => {
+      (window as any).creator.onOpenFileChooser.add((s, o) => {
+        o.callback([{}]);
+      });
+    })();
+    await t.click(Selector(".svc-logo-image"));
+    await ClientFunction(() => {
+      (<HTMLElement>document.querySelector(".sd-loading-indicator .sv-svg-icon")).style.animation = "none";
+    })();
+    await takeElementScreenshot("logo-image-loading.png", Selector(".svc-logo-image"), t, comparer);
   });
 });
 
@@ -1219,5 +1383,162 @@ test("Check carry forward panel ranking", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const rootSelector = Selector(".svc-question__adorner").nth(1);
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
+  });
+});
+
+test("Question adorners - popup", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question",
+              "minWidth": "100px",
+              "maxWidth": "150px",
+              "title": "Q"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const designerTabContent = Selector(".svc-tab-designer");
+    const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
+    const qContent = Selector(".svc-question__content");
+    const qDots = Selector(".svc-question__content .sv-dots");
+    const markRequiredItem = Selector(".sv-list__item").withText("Mark as required");
+    const removeRequiredItem = Selector(".sv-list__item").withText("Remove the required mark");
+    await t.click(qContent, { offsetX: 5, offsetY: 5 });
+    await t.click(qDots);
+    await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
+    await t.click(markRequiredItem);
+
+    await t.click(qDots);
+    await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
+    await t.click(removeRequiredItem);
+  });
+});
+test("Question adorners for different sizes", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1767, 1900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question",
+              "minWidth": "100px",
+              "maxWidth": "150px",
+              "title": "Q"
+            }
+            ,
+            {
+              "type": "text",
+              "name": "question1",
+              "minWidth": "100px",
+              "maxWidth": "300px",
+              "title": "Q"
+            },
+            {
+              "type": "text",
+              "name": "question2",
+              "minWidth": "100px",
+              "maxWidth": "400px",
+              "title": "Q"
+            },
+            {
+              "type": "text",
+              "name": "question3",
+              "minWidth": "100px",
+              "maxWidth": "500px",
+              "title": "Q"
+            }
+            ,
+            {
+              "type": "text",
+              "name": "question4",
+              "minWidth": "100px",
+              "maxWidth": "600px",
+              "title": "Q"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const actions = Selector(".svc-question__content-actions");
+    const qContent = Selector(".svc-question__content");
+    await t.click(qContent.nth(0), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-tiny.png", qContent.nth(0), t, comparer);
+
+    await t.click(qContent.nth(1), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-small.png", qContent.nth(1), t, comparer);
+
+    await t.click(qContent.nth(2), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-medium.png", qContent.nth(2), t, comparer);
+
+    await t.click(qContent.nth(3), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-big.png", qContent.nth(3), t, comparer);
+
+    await t.click(qContent.nth(4), { offsetX: 5, offsetY: 5 });
+    await takeElementScreenshot("question-huge.png", qContent.nth(4), t, comparer);
+  });
+});
+
+test("Narrow question placeholder", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "250px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "250px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "minWidth": "100px",
+              "maxWidth": "250px",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const qContent = Selector(".svc-question__content");
+    await takeElementScreenshot("panel-placeholder.png", qContent.nth(0), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
+
+    await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
   });
 });

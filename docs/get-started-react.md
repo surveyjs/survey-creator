@@ -162,16 +162,23 @@ export function SurveyCreatorWidget() {
 
 // If you use a web service:
 function saveSurveyJson(url, json, saveNo, callback) {
-  const request = new XMLHttpRequest();
-  request.open('POST', url);
-  request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  request.addEventListener('load', () => {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify(json)
+  })
+  .then(response => {
+    if (response.ok) {
       callback(saveNo, true);
-  });
-  request.addEventListener('error', () => {
+    } else {
       callback(saveNo, false);
+    }
+  })
+  .catch(error => {
+    callback(saveNo, false);
   });
-  request.send(JSON.stringify(json));
 }
 ```
 
@@ -251,16 +258,23 @@ export function SurveyCreatorWidget() {
 }
 
 // function saveSurveyJson(url, json, saveNo, callback) {
-//   const request = new XMLHttpRequest();
-//   request.open('POST', url);
-//   request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-//   request.addEventListener('load', () => {
+//   fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=UTF-8'
+//     },
+//     body: JSON.stringify(json)
+//   })
+//   .then(response => {
+//     if (response.ok) {
 //       callback(saveNo, true);
-//   });
-//   request.addEventListener('error', () => {
+//     } else {
 //       callback(saveNo, false);
+//     }
+//   })
+//   .catch(error => {
+//     callback(saveNo, false);
 //   });
-//   request.send(JSON.stringify(json));
 // }
 ```
 </details>

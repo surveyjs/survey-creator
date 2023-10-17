@@ -50,6 +50,8 @@ var portugueseTranslation = {
     settingsTooltip: "Configurações",
     surveySettings: "Configurações de Questionários",
     surveySettingsTooltip: "Configurações",
+    themeSettings: "Configurações do tema",
+    themeSettingsTooltip: "Abrir configurações de tema",
     showPanel: "Mostrar Painel",
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
@@ -126,6 +128,7 @@ var portugueseTranslation = {
     translationPropertyGridTitle: "Configurações de Idioma",
     themePropertyGridTitle: "Configurações do tema",
     translationLanguages: "Idiomas",
+    translationDeleteLanguage: "Tem certeza de que deseja excluir todas as cadeias de caracteres para este idioma?",
     translationAddLanguage: "Selecione o idioma para traduzir",
     translationShowAllStrings: "Mostrar todos os textos",
     translationShowUsedStringsOnly: "Apenas textos utilizados",
@@ -133,10 +136,13 @@ var portugueseTranslation = {
     translationNoStrings: "Nenhum texto para traduzir. Por favor, altere o filtro.",
     translationExportToSCVButton: "Exportar para CSV",
     translationImportFromSCVButton: "Importar de CSV",
+    translateUsigAI: "Tradução automática de todos",
+    translationDialogTitle: "Cadeias de caracteres não traduzidas",
     translationMergeLocaleWithDefault: "Combinar {0} com o idioma pré-definido",
     translationPlaceHolder: "Tradução...",
     themeExportButton: "Exportação",
     themeImportButton: "Importação",
+    themeResetButton: "Redefinir as configurações do tema para o padrão",
     bold: "Negrito",
     italic: "Itálico",
     underline: "Sublinhado",
@@ -162,9 +168,13 @@ var portugueseTranslation = {
       question_visibilityName: "Mostrar (esconder) questão",
       question_enableName: "Ativar (desativar) questão",
       question_requireName: "Tornar a pergunta obrigatória",
+      question_resetValueName: "Redefinir o valor da pergunta",
+      question_setValueName: "Definir o valor da pergunta",
       column_visibilityName: "Mostrar (esconder) coluna",
       column_enableName: "Ativar (desativar) coluna",
       column_requireName: "Tornar a coluna obrigatória",
+      column_resetValueName: "Redefinir o valor da coluna",
+      column_setValueName: "Definir valor de coluna",
       trigger_completeName: "Completar questionário",
       trigger_setvalueName: "Definir resposta",
       trigger_copyvalueName: "Copiar resposta",
@@ -191,9 +201,14 @@ var portugueseTranslation = {
       question_visibilityText: "torna questão {0} visível", //{0} question name
       question_enableText: "tornar questão {0} ativa", //{0} question name
       question_requireText: "tornar questão {0} obrigatória", //{0} question name
+      question_resetValueText: "redefinir valor da pergunta: {0}",
+      question_setValueText: "atribuir valor: {1} à pergunta: {0}",
       column_visibilityText: "tornar coluna {0} da questão {1} visível", //{0} column name, {1} question name
       column_enableText: "tornar coluna {0} da questão {1} ativa", //{0} column name, {1} question name
       column_requireText: "torna coluna {0} da questão {1} obrigatória", //{0} column name, {1} question name
+      column_resetValueText: "Redefinir o valor da célula para a coluna: {0}",
+      column_setValueText: "Atribuir valor de célula: {1} à coluna: {0}",
+      setValueExpressionPlaceholder: " Uma expressão cujo resultado será atribuído à pergunta de destino.",
       trigger_completeText: "o questionário fica completo",
       trigger_setvalueText: "Colocar em questão: {0} valor {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "valor claro da pergunta: {0}", //{0} question name
@@ -259,6 +274,7 @@ var portugueseTranslation = {
     fastEntry: "Entrada Rápida",
     fastEntryNonUniqueError: "Valor '{0}' não é o único",
     fastEntryChoicesCountError: "Limite o número de itens de {0} a {1}",
+    fastEntryChoicesMinCountError: "Por favor, insira pelo menos {0} itens",
     fastEntryPlaceholder: "Pode definir dados no seguinte formato:\nvalor1|texto\nvalor2",
     formEntry: "Entrada com formulário",
     testService: "Testar o serviço",
@@ -277,6 +293,7 @@ var portugueseTranslation = {
     cellsEmptyRowsColumns: "Deve haver ao menos uma coluna ou linha",
     showPreviewBeforeComplete: "Visualize as respostas antes de submeter o questionário",
     overridingPropertyPrefix: "Definido por ",
+    resetToDefaultCaption: "Repor",
     propertyIsEmpty: "Por favor informe um valor na propriedade",
     propertyIsNoUnique: "Insira um valor exclusivo.",
     propertyNameIsNotUnique: "Insira um nome único",
@@ -322,6 +339,8 @@ var portugueseTranslation = {
     choicesOrder: "Selecione a ordem das alternativas",
     visible: "É visível?",
     isRequired: "É obrigatório?",
+    markRequired: "Marcar conforme necessário",
+    removeRequiredMark: "Remover a marca necessária",
     isAllRowRequired: "Exigir resposta para todas as linhas",
     requiredErrorText: "\"Obrigatório\" mensagem de erro",
     startWithNewLine: "Começa com uma nova linha?",
@@ -403,7 +422,12 @@ var portugueseTranslation = {
       imageHeight: "Altura da imagem (em valores aceitos por CSS)",
       imageWidth: "Largura da imagem (em valores aceitos por CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Título"
+    },
     page: {
+      title: "Título",
       maxTimeToFinish: "Tempo limite para finalizar esta página (em segundos)"
     },
     question: {
@@ -640,6 +664,9 @@ var portugueseTranslation = {
   pv: {
     "true": "verdadeiro",
     "false": "falso",
+    file: "Arquivos locais",
+    camera: "Câmera",
+    "file-camera": "Arquivos locais ou câmera",
     inherit: "herdar",
     show: "mostrar",
     hide: "ocultar",
@@ -902,6 +929,8 @@ var portugueseTranslation = {
     descriptionLocation: "Descrição de localização",
     defaultValueExpression: "Valor de expressão pré-definida",
     requiredIf: "Obrigatório se",
+    resetValueIf: "Redefinir valor se",
+    setValueIf: "Defina o valor se",
     validators: "Validadores",
     bindings: "ligações",
     renderAs: "renderizar como",
@@ -978,6 +1007,7 @@ var portugueseTranslation = {
     "--base-unit": "Unidade base",
     groupGeneral: "Geral",
     groupAdvanced: "Avançado",
+    groupHeader: "Cabeçalho",
     themeName: "Tema",
     themeMode: "Aparência da pergunta",
     themeModePanels: "Inadimplência",
@@ -988,11 +1018,15 @@ var portugueseTranslation = {
     primaryDefaultColor: "Inadimplência",
     primaryDarkColor: "Pairar",
     primaryLightColor: "Selecionado",
+    coverTitleForecolor: "Precolor do título",
+    coverOverlapEnabled: "Sobrepor",
     backgroundDimColor: "Cor de fundo",
     backgroundImage: "Imagem de fundo",
     backgroundImageFitAuto: "Automático",
     backgroundImageFitCover: "Cobrir",
     backgroundImageFitContain: "Conter",
+    backgroundImageFitFill: "Esticar",
+    backgroundImageFitTile: "Telha",
     backgroundOpacity: "Opacidade",
     backgroundImageAttachmentFixed: "Fixo",
     backgroundImageAttachmentScroll: "Rolar",
@@ -1016,6 +1050,7 @@ var portugueseTranslation = {
     fontFamily: "Família de fontes",
     fontSize: "Tamanho da fonte",
     color: "Cor",
+    placeholderColor: "Cor do espaço reservado",
     size: "Tamanho",
     fontWeightRegular: "Regular",
     fontWeightHeavy: "Pesado",
@@ -1036,6 +1071,26 @@ var portugueseTranslation = {
     boxShadowInner: "Interno",
     questionShadow: "Efeitos de sombra",
     editorShadow: "Efeitos de sombra do elemento de entrada",
+    headerView: "Vista",
+    headerViewBasic: "Básico",
+    headerViewAdvanced: "Avançado",
+    coverInheritWidthFrom: "Largura da área de conteúdo",
+    coverInheritWidthFromSurvey: "O mesmo que pesquisa",
+    coverInheritWidthFromPage: "Ajustar à página",
+    coverTextAreaWidth: "Largura do texto",
+    coverBackgroundColorSwitch: "Cor de fundo",
+    coverBackgroundColorNone: "Nenhum",
+    coverBackgroundColorAccentColor: "Cor de destaque",
+    coverBackgroundColorCustom: "Costume",
+    horizontalAlignmentLeft: "Esquerda",
+    horizontalAlignmentCenter: "Centro",
+    horizontalAlignmentRight: "Direita",
+    verticalAlignmentTop: "Início",
+    verticalAlignmentMiddle: "Meio",
+    verticalAlignmentBottom: "Fundo",
+    logoPosition: "Posição do logotipo",
+    coverTitlePosition: "Posição do Título",
+    coverDescriptionPosition: "Descrição Posição",
     names: {
       default: "Inadimplência",
       sharp: "Afiado",
@@ -1217,3 +1272,56 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // names.layered: "Layered" => "Camadas"
 // names.solid: "Solid" => "Sólido"
 // names.threedimensional: "3D" => ".3D"
+// ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Tem certeza de que deseja excluir todas as cadeias de caracteres para este idioma?"
+// ed.themeResetButton: "Reset theme settings to default" => "Redefinir as configurações do tema para o padrão"
+// theme.placeholderColor: "Placeholder color" => "Cor do espaço reservado"
+// ed.themeSettings: "Theme Settings" => "Configurações do tema"
+// ed.themeSettingsTooltip: "Open theme settings" => "Abrir configurações de tema"
+// pe.resetToDefaultCaption: "Reset" => "Repor"
+// pv.file: "Local files" => "Arquivos locais"
+// pv.camera: "Camera" => "Câmera"
+// pv.file-camera: "Local files or camera" => "Arquivos locais ou câmera"
+// ed.translateUsigAI: "Auto-translate All" => "Tradução automática de todos"
+// ed.translationDialogTitle: "Untranslated strings" => "Cadeias de caracteres não traduzidas"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Por favor, insira pelo menos {0} itens"
+// lg.question_resetValueName: "Reset question value" => "Redefinir o valor da pergunta"
+// lg.column_resetValue: "Reset column value" => "Redefinir o valor da coluna"
+// pe.markRequired: "Mark as required" => "Marcar conforme necessário"
+// pe.removeRequiredMark: "Remove the required mark" => "Remover a marca necessária"
+// p.resetValueIf: "Reset value if" => "Redefinir valor se"
+// lg.question_setValueName: "Set question value" => "Definir o valor da pergunta"
+// lg.column_resetValueName: "Reset column value" => "Redefinir o valor da coluna"
+// lg.column_setValueName: "Set column value" => "Definir valor de coluna"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Uma expressão cujo resultado será atribuído à pergunta de destino."
+// survey.title: "Title" => "Título"
+// page.title: "Title" => "Título"
+// p.setValueIf: "Set value if" => "Defina o valor se"
+// theme.groupHeader: "Header" => "Cabeçalho"
+// theme.coverTitleForecolor: "Title forecolor" => "Precolor do título"
+// theme.coverOverlapEnabled: "Overlap" => "Sobrepor"
+// theme.backgroundImageFitFill: "Stretch" => "Esticar"
+// theme.backgroundImageFitTile: "Tile" => "Telha"
+// theme.headerView: "View" => "Vista"
+// theme.headerViewBasic: "Basic" => "Básico"
+// theme.headerViewAdvanced: "Advanced" => "Avançado"
+// theme.coverInheritWidthFrom: "Content area width" => "Largura da área de conteúdo"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "O mesmo que pesquisa"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Ajustar à página"
+// theme.coverTextAreaWidth: "Text width" => "Largura do texto"
+// theme.coverBackgroundColorSwitch: "Background color" => "Cor de fundo"
+// theme.coverBackgroundColorNone: "None" => "Nenhum"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Cor de destaque"
+// theme.coverBackgroundColorCustom: "Custom" => "Costume"
+// theme.horizontalAlignmentLeft: "Left" => "Esquerda"
+// theme.horizontalAlignmentCenter: "Center" => "Centro"
+// theme.horizontalAlignmentRight: "Right" => "Direita"
+// theme.verticalAlignmentTop: "Top" => "Início"
+// theme.verticalAlignmentMiddle: "Middle" => "Meio"
+// theme.verticalAlignmentBottom: "Bottom" => "Fundo"
+// theme.logoPosition: "Logo Position" => "Posição do logotipo"
+// theme.coverTitlePosition: "Title Position" => "Posição do Título"
+// theme.coverDescriptionPosition: "Description Position" => "Descrição Posição"
+// lg.question_resetValueText: "reset value for question: {0}" => "redefinir valor da pergunta: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "atribuir valor: {1} à pergunta: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Redefinir o valor da célula para a coluna: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Atribuir valor de célula: {1} à coluna: {0}"

@@ -1,4 +1,4 @@
-import { ComponentCollection, IQuestion, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, IQuestion, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 export const DefaultFonts = [
@@ -48,6 +48,14 @@ ComponentCollection.Instance.add({
       descriptionLocation: "hidden"
     },
     {
+      type: "colorsettings",
+      name: "placeholdercolor",
+      colorTitle: getLocString("theme.placeholderColor"),
+      colorTitleLocation: "left",
+      titleLocation: "hidden",
+      descriptionLocation: "hidden"
+    },
+    {
       type: "spinedit",
       name: "size",
       title: getLocString("theme.size"),
@@ -62,6 +70,8 @@ ComponentCollection.Instance.add({
   onCreated(question) {
     const color = question.contentPanel.getQuestionByName("color");
     color.visible = question.name !== "surveyTitle";
+    const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
+    placeholderColor.visible = question.name === "editorFont";
   },
   onValueChanged(question, name, newValue) {
   },
@@ -70,11 +80,16 @@ ComponentCollection.Instance.add({
 export function fontsettingsToCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {
     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
-    themeCssVariables[`--sjs-font-${question.name.toLocaleLowerCase()}-${key}`] = question.value[key] + (innerQ.unit?.toString() || "");
+    const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
+    if (question.value[key] !== (question as Question).defaultValue[key]) {
+      themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
+    } else {
+      themeCssVariables[propertyName] = undefined;
+    }
   });
 }
 
-export function fontsettingsFromCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}, defaultColorVariable?: string): any {
+export function fontsettingsFromCssVariable(question: IQuestion, themeCssVariables: { [index: string]: string }, defaultColorVariable?: string, defaultPlaceholderColorVariable?: string): any {
   const result = {};
   Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1).forEach(key => {
     const propertyName = key.split("-").pop();
@@ -83,8 +98,13 @@ export function fontsettingsFromCssVariable(question: IQuestion, themeCssVariabl
 
   if(Object.keys(result).length !== 0) {
     question.value = result;
-  } else if(!!defaultColorVariable) {
-    (<QuestionCompositeModel>question).contentPanel.getQuestionByName("color").value = defaultColorVariable;
+  } else {
+    if (!!defaultColorVariable) {
+      (<QuestionCompositeModel>question).contentPanel.getQuestionByName("color").value = defaultColorVariable;
+    }
+    if (!!defaultPlaceholderColorVariable) {
+      (<QuestionCompositeModel>question).contentPanel.getQuestionByName("placeholdercolor").value = defaultPlaceholderColorVariable;
+    }
   }
   return result;
 }

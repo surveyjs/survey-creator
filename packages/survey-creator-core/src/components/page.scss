@@ -44,7 +44,7 @@ svc-page {
 .svc-creator .svc-page .svc-page__content--selected:focus,
 .svc-hovered {
   &.svc-page__content--selected {
-    box-shadow: 0 0 0 2px $secondary;
+    box-shadow: 0 0 0 2px inset $secondary;
     background: $secondary-backcolor-semi-light;
 
     .svc-page__content-actions {
