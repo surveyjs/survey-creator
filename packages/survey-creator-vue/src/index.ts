@@ -23,6 +23,12 @@ import JsonEditorAce from "./tabs/json/JsonEditorAce.vue";
 import JsonEditorTextArea from "./tabs/json/JsonEditorTextArea.vue";
 import JsonEditorErrorItem from "./tabs/json/JsonEditorErrorItem.vue";
 
+import Logic from "./tabs/logic/Logic.vue";
+
+import LogicOperator from "./questions/LogicOperator.vue";
+import EmbeddedSurvey from "./questions/EmbeddedSurvey.vue";
+import LinkValue from "./questions/LinkValue.vue";
+
 function registerComponents(app: App) {
   app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
@@ -40,6 +46,10 @@ function registerComponents(app: App) {
 
   app.component("svc-action-button", ActionButton);
 
+  app.component("survey-embeddedsurvey", EmbeddedSurvey);
+  app.component("sv-logic-operator", LogicOperator);
+  app.component("survey-linkvalue", LinkValue);
+
   app.component("survey-widget", app._context.components["SurveyComponent"]);
   app.component("survey-simulator", Simulator);
   app.component("svc-tab-test", Test);
@@ -50,6 +60,8 @@ function registerComponents(app: App) {
   app.component("json-error-item", JsonEditorErrorItem);
   app.component("svc-tab-json-editor-textarea", JsonEditorTextArea);
   app.component("svc-tab-json-editor-ace", JsonEditorAce);
+
+  app.component("svc-tab-logic", Logic);
 }
 
 export const surveyCreatorPlugin = {
