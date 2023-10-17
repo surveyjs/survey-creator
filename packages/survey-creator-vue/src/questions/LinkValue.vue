@@ -1,22 +1,24 @@
 <template>
-  <svc-action-button
-    :text="question.linkValueText"
-    :click="question.doLinkClick.bind(question)"
-    :selected="question.isSelected"
-    :disabled="!question.isClickable"
-    :classes="question.linkSetButtonCssClasses"
-    :title="question.tooltip"
-  >
-  </svc-action-button>
-  <svc-action-button
-    v-if="!question.isReadOnly && question.showClear"
-    :text="clearCaption"
-    :click="question.doClearClick.bind(question)"
-    :selected="question.isSelected"
-    :disabled="false"
-    :classes="question.linkClearButtonCssClasses"
-  >
-  </svc-action-button>
+  <template>
+    <svc-action-button
+      :text="question.linkValueText"
+      :click="question.doLinkClick.bind(question)"
+      :selected="question.isSelected"
+      :disabled="!question.isClickable"
+      :classes="question.linkSetButtonCssClasses"
+      :title="question.tooltip"
+    >
+    </svc-action-button>
+    <svc-action-button
+      v-if="!question.isReadOnly && question.showClear"
+      :text="clearCaption"
+      :click="question.doClearClick.bind(question)"
+      :selected="question.isSelected"
+      :disabled="false"
+      :classes="question.linkClearButtonCssClasses"
+    >
+    </svc-action-button>
+  </template>
 </template>
 <script lang="ts" setup>
 import {
