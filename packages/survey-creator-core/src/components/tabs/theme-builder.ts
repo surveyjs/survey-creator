@@ -648,7 +648,7 @@ export class ThemeBuilder extends Base {
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "none";
+    if (!backgroundColor || backgroundColor === "trasparent") return "none";
     if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
     return "custom";
   }
@@ -672,7 +672,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-    if (!!question && !!cssVariable) {
+    if (!!question && !!cssVariable && cssVariable !== "trasparent") {
       question.value = cssVariable;
     }
   }
