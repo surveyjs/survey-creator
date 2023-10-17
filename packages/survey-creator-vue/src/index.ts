@@ -66,6 +66,7 @@ function registerComponents(app: App) {
   app.component("survey-spinedit", SpinEditor);
   app.component("survey-textwithreset", TextWithReset);
   app.component("survey-commentwithreset", TextWithReset);
+  app.component("survey-widget", app._context.components["SurveyComponent"]);
   app.component("survey-simulator", Simulator);
   app.component("svc-tab-test", Test);
   app.component("survey-test-again", TestAgain);

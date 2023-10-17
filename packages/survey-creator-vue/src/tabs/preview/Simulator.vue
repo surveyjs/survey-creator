@@ -32,12 +32,12 @@
         }"
       >
         <div class="svd-simulator-content">
-          <SurveyComponent :model="model.survey"></SurveyComponent>
+          <survey-widget :model="model.survey"></survey-widget>
         </div>
       </div>
     </div>
     <div v-if="!model.hasFrame" class="svd-simulator-content">
-      <SurveyComponent :model="model.survey"></SurveyComponent>
+      <survey-widget :model="model.survey"></survey-widget>
     </div>
   </div>
 </template>
