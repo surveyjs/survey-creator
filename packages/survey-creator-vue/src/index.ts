@@ -33,6 +33,11 @@ import Translation from "./tabs/translation/Translation.vue";
 import TranslationLineSkeleton from "./tabs/translation/TranslationLineSkeleton.vue";
 
 import Theme from "./tabs/theme/Theme.vue";
+import Color from "./custom-questions/Color.vue";
+import ColorItem from "./custom-questions/ColorItem.vue";
+import File from "./custom-questions/File.vue";
+import SpinEditor from "./custom-questions/SpinEditor.vue";
+import TextWithReset from "./custom-questions/TextWithReset.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -54,6 +59,13 @@ function registerComponents(app: App) {
   app.component("survey-embeddedsurvey", EmbeddedSurvey);
   app.component("sv-logic-operator", LogicOperator);
   app.component("survey-linkvalue", LinkValue);
+
+  app.component("survey-color", Color);
+  app.component("color-item", ColorItem);
+  app.component("survey-fileedit", File);
+  app.component("survey-spinedit", SpinEditor);
+  app.component("survey-textwithreset", TextWithReset);
+  app.component("survey-commentwithreset", TextWithReset);
 
   app.component("survey-widget", app._context.components["SurveyComponent"]);
   app.component("survey-simulator", Simulator);
