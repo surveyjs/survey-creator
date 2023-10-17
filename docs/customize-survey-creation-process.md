@@ -23,7 +23,6 @@ You can control the visibility of adorners using the `onElementAllowOperations` 
 
 | Property | Description    |
 | ---------------------- | -------------------------------------------------------------------------------------------- |
-| `allowAddToToolbox`    | Shows or hides the adorner that saves the current survey element configuration in the Toolbox. |
 | `allowChangeRequired`  | Shows or hides the adorner that makes the question required. |
 | `allowChangeType`      | Shows or hides the adorner that changes the survey element type.      |
 | `allowChangeInputType` | Shows or hides the adorner that changes the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions.    |

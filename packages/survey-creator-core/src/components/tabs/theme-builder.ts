@@ -146,6 +146,7 @@ export class ThemeBuilder extends Base {
     this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
     this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
+    this.surveyProvider.isThemeModified = false;
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
   }
@@ -197,8 +198,8 @@ export class ThemeBuilder extends Base {
   public setTheme(theme: ITheme) {
     this.themeCssVariablesChanges = {};
     this.backgroundImage = "";
-    this.backgroundImageFit = "";
-    this.backgroundImageAttachment = "";
+    this.backgroundImageFit = "cover";
+    this.backgroundImageAttachment = "scroll";
     this.backgroundOpacity = 100;
     this.loadTheme(theme);
     this.themeModified({ theme });
@@ -652,7 +653,7 @@ export class ThemeBuilder extends Base {
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "none";
+    if (!backgroundColor || backgroundColor === "trasparent") return "none";
     if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
     return "custom";
   }
@@ -676,7 +677,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-    if (!!question && !!cssVariable) {
+    if (!!question && !!cssVariable && cssVariable !== "trasparent") {
       question.value = cssVariable;
     }
   }
@@ -833,6 +834,7 @@ export class ThemeBuilder extends Base {
       if (!!options["theme"]) {
         this.onThemeSelected.fire(this, options as { theme: ITheme });
       } else {
+        this.surveyProvider.isThemeModified = true;
         this.onThemeModified.fire(this, options as { name: string, value: any });
       }
     }
@@ -959,7 +961,7 @@ export class ThemeBuilder extends Base {
                         title: getLocString("theme.coverInheritWidthFrom"),
                         choices: [
                           { value: "survey", text: getLocString("theme.coverInheritWidthFromSurvey") },
-                          { value: "page", text: getLocString("theme.coverInheritWidthFromPage") }
+                          { value: "container", text: getLocString("theme.coverInheritWidthFromContainer") }
                         ],
                         visibleIf: "{panel.headerView} = 'advanced'",
                       },

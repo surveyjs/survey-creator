@@ -21,7 +21,7 @@ import {
   QuestionCompositeModel,
   QuestionCustomModel,
   PageModel,
-  ComputedUpdater
+  ComputedUpdater,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -1283,6 +1283,15 @@ test("Question type selector localization", (): any => {
   expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
+});
+
+test("Question type selector popup displayMode", (): any => {
+  let creator = new CreatorTester();
+  let selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.popupModel.displayMode).toBe("popup");
+  creator.isTouch = true;
+  selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.popupModel.displayMode).toBe("overlay");
 });
 
 test("Add question with default choices", (): any => {

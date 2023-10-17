@@ -1083,7 +1083,7 @@ export var enStrings = {
     headerViewAdvanced: "Advanced",
     coverInheritWidthFrom: "Content area width",
     coverInheritWidthFromSurvey: "Same as survey",
-    coverInheritWidthFromPage: "Fit to page",
+    coverInheritWidthFromContainer: "Fit to container",
     coverTextAreaWidth: "Text width",
     coverBackgroundColorSwitch: "Background color",
     coverBackgroundColorNone: "None",

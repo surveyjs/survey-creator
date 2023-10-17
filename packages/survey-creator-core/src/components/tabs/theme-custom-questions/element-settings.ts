@@ -1,4 +1,4 @@
-import { ComponentCollection, IQuestion, Question, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 ComponentCollection.Instance.add({
@@ -45,7 +45,7 @@ ComponentCollection.Instance.add({
   },
 });
 
-export function elementSettingsToCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}) {
+export function elementSettingsToCssVariable(question: Question, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {
     if (key === "corner") return;
 
@@ -58,22 +58,22 @@ export function elementSettingsToCssVariable(question: IQuestion, themeCssVariab
   });
 }
 
-export function elementSettingsFromCssVariable(question: IQuestion, themeCssVariables: {[index: string]: string}, defaultBackcolorVariable: string, defaultHovercolorVariable: string): any {
-  const result = {};
-  Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1).forEach(key => {
+export function elementSettingsFromCssVariable(question: Question, themeCssVariables: {[index: string]: string}, defaultBackcolorVariable: string, defaultHovercolorVariable: string): void {
+  const compositeQuestion = <QuestionCompositeModel>question;
+  const elementSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
+
+  elementSettingsFromTheme.forEach(key => {
     const propertyName = key.split("-").pop();
+
     if(propertyName === "cornerRadius" && themeCssVariables[key] !== undefined) {
-      result["corner"] = parseFloat(themeCssVariables[key].toString());
+      compositeQuestion.contentPanel.getQuestionByName("corner").value = parseFloat(themeCssVariables[key].toString());
     } else {
-      result[propertyName] = themeCssVariables[key];
+      compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
     }
   });
 
-  if(Object.keys(result).length === 0) {
+  if(elementSettingsFromTheme.length === 0) {
     (<QuestionCompositeModel>question).contentPanel.getQuestionByName("backcolor").value = defaultBackcolorVariable;
     (<QuestionCompositeModel>question).contentPanel.getQuestionByName("hovercolor").value = defaultHovercolorVariable;
-  } else {
-    question.value = result;
   }
-  return result;
 }
