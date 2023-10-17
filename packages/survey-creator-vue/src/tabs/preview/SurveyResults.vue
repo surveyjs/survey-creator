@@ -56,7 +56,6 @@ import { SurveyResultsModel } from "survey-creator-core";
 const props = defineProps<{ survey?: SurveyModel }>();
 const model = useCreatorModel(
   () => (props.survey ? new SurveyResultsModel(props.survey) : undefined),
-  props,
-  () => ["survey"]
+  () => [() => props.survey]
 );
 </script>

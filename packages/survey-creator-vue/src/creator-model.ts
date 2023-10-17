@@ -4,13 +4,12 @@ import { onBeforeUnmount, shallowRef, type ShallowRef, watch } from "vue";
 
 export function useCreatorModel<T extends Base>(
   createModel: () => T | undefined,
-  props: any,
-  getUpdatedModelProps: () => Array<string>,
+  getUpdatedModelProps: () => Array<() => any>,
   clean?: (value: T) => void
 ): ShallowRef<T | undefined> {
   const model = shallowRef<T>();
   const stopWatch = watch(
-    getUpdatedModelProps().map((propName) => () => props[propName]),
+    getUpdatedModelProps().map((propFunc) => () => propFunc()),
     () => {
       model.value = createModel();
     },
