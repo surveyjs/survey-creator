@@ -37,7 +37,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
-  private _availableThemes = PredefinedThemes;
+  private _availableThemes = [].concat(PredefinedThemes);
 
   public model: ThemeBuilder;
 
@@ -78,6 +78,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
+    this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
     this.sidebarTab.model = this.model.themeEditorSurvey;
@@ -357,18 +358,27 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
-  public addTheme(theme: ITheme): string {
+  public addTheme(theme: ITheme, setAsDefault = false): string {
     const fullThemeName = getThemeFullName(theme);
     Themes[fullThemeName] = theme;
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
-      this.availableThemes = this.availableThemes.concat([theme.themeName]);
+      if (setAsDefault) {
+        this.availableThemes = [theme.themeName].concat(this.availableThemes);
+        ThemeBuilder.DefaultTheme = theme;
+      } else {
+        this.availableThemes = this.availableThemes.concat([theme.themeName]);
+      }
     }
     return fullThemeName;
   }
-  public removeTheme(fullThemeName: string): void {
-    const themeToDelete = Themes[fullThemeName];
+  public removeTheme(themeAccessor: string | ITheme): void {
+    const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
+    const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
       delete Themes[fullThemeName];
+      if (ThemeBuilder.DefaultTheme === themeToDelete) {
+        ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+      }
       const registeredThemeNames = Object.keys(Themes);
       let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
       if (!themeModificationsExist) {
@@ -399,7 +409,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         }
       }
     });
-    themeChanges.themeName = fullTheme.themeName || "default";
+    themeChanges.themeName = fullTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
     themeChanges.colorPalette = fullTheme.colorPalette || "light";
     themeChanges.isPanelless = !!fullTheme.isPanelless;
     return themeChanges;

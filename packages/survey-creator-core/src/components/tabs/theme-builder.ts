@@ -139,6 +139,7 @@ export class ThemeBuilder extends Base {
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
+    this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
     this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
@@ -409,6 +410,9 @@ export class ThemeBuilder extends Base {
     if (this.themeEditorSurvey) {
       const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
       themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+      if (availebleThemes.indexOf(themeChooser.value) === -1) {
+        themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
+      }
     }
   }
 
@@ -858,7 +862,7 @@ export class ThemeBuilder extends Base {
                 title: getLocString("theme.themeName"),
                 descriptionLocation: "hidden",
                 choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-                defaultValue: "default",
+                defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
                 allowClear: false
               },
               {

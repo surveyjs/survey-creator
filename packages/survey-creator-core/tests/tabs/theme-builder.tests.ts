@@ -289,7 +289,7 @@ test("fontsettings: fontsettingsToCssVariable", () => {
       }
     }],
   });
-  const question = survey.findQuestionByName("questionTitle");
+  const question = survey.findQuestionByName("questionTitle") as Question;
   let result = {};
   fontsettingsToCssVariable(question, result);
   expect(result).toEqual({});
@@ -532,7 +532,8 @@ test("elementSettings: elementSettingsFromCssVariable - default values", () => {
         hovercolor: "rgba(248, 248, 248, 1)",
         cornerRadius: "4px",
         corner: 4
-      } }],
+      }
+    }],
   });
   const question = survey.getQuestionByName("questionpanel");
   expect(question.getQuestionByName("backcolor").value).toEqual("rgba(255, 255, 255, 1)");
@@ -1351,6 +1352,7 @@ test("Disable/hide properties in theme property grid", (): any => {
   expect(themeMode.isReadOnly).toBeFalsy();
   expect(themePalette.value).toBe("dark");
   expect(themePalette.isReadOnly).toBeFalsy();
+  themePlugin.removeTheme(fullThemeName);
 });
 
 test("Keep theme css changes throgh the different themes choosen", (): any => {
@@ -1408,10 +1410,11 @@ test("findSuitableTheme", (): any => {
   expect(themeBuilder.findSuitableTheme("default").colorPalette).toEqual("light");
   expect(themeBuilder.findSuitableTheme("default").isPanelless).toEqual(false);
 
-  themePlugin.addTheme({ themeName: "custom", isPanelless: true, "colorPalette": "dark" });
+  const fullThemeName = themePlugin.addTheme({ themeName: "custom", isPanelless: true, "colorPalette": "dark" });
   expect(themeBuilder.findSuitableTheme("custom").themeName).toEqual("custom");
   expect(themeBuilder.findSuitableTheme("custom").colorPalette).toEqual("dark");
   expect(themeBuilder.findSuitableTheme("custom").isPanelless).toEqual(true);
+  themePlugin.removeTheme(fullThemeName);
 });
 
 test("selectTheme", (): any => {
@@ -2096,4 +2099,59 @@ test("Keep theme modifications between edit sessions", (): any => {
   expect(themeChooser.value).toBe("layered");
   expect(primaryBackColor.value).toBe("rgba(0, 0, 255, 1)");
   expect(themeBuilder.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
+});
+test("Set and use custom default theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
+
+  const themes: string[] = [].concat(PredefinedThemes);
+  expect(themePlugin.availableThemes).toStrictEqual(themes);
+
+  const customTheme = { themeName: "custom", cssVariables: { "--a-var": "aVal" } };
+  const fullThemeName = themePlugin.addTheme(customTheme, true);
+  expect(Themes[fullThemeName]).toEqual(customTheme);
+  expect(ThemeBuilder.DefaultTheme).toEqual(customTheme);
+  expect(themePlugin.availableThemes).toStrictEqual(["custom"].concat(themes));
+
+  themePlugin.activate();
+  let themeBuilder = themePlugin.model;
+  let themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  expect(themeChooser.value).toBe("custom");
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
+  expect(themeBuilder.survey.themeVariables["--a-var"]).toBe("aVal");
+
+  let primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  primaryBackColor.value = "#0000ff";
+  expect(creator.theme.cssVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
+  expect(themeBuilder.survey.themeVariables["--sjs-primary-backcolor"]).toBe("#0000ff");
+
+  themeBuilder.resetTheme();
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
+  expect(themeBuilder.survey.themeVariables["--a-var"]).toBe("aVal");
+  expect(creator.theme.cssVariables["--sjs-primary-backcolor"]).toBe(undefined);
+  expect(themeBuilder.survey.themeVariables["--sjs-primary-backcolor"]).toBe(undefined);
+
+  themePlugin.deactivate();
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
+
+  themePlugin.activate();
+  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  expect(themeChooser.value).toBe("custom");
+  expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
+  expect(themeBuilder.survey.themeVariables["--a-var"]).toBe("aVal");
+
+  themePlugin.removeTheme(customTheme);
+  expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
+  expect(themeChooser.value).toBe("default");
+  expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
+  expect(themeBuilder.survey.themeVariables["--a-var"]).toBe(undefined);
+  expect(themePlugin.availableThemes[0]).toBe("default");
+  expect(themePlugin.availableThemes).toStrictEqual(themes);
 });
