@@ -289,7 +289,7 @@ test("fontsettings: fontsettingsToCssVariable", () => {
       }
     }],
   });
-  const question = survey.findQuestionByName("questionTitle");
+  const question = survey.findQuestionByName("questionTitle") as Question;
   let result = {};
   fontsettingsToCssVariable(question, result);
   expect(result).toEqual({});
@@ -1352,6 +1352,7 @@ test("Disable/hide properties in theme property grid", (): any => {
   expect(themeMode.isReadOnly).toBeFalsy();
   expect(themePalette.value).toBe("dark");
   expect(themePalette.isReadOnly).toBeFalsy();
+  themePlugin.removeTheme(fullThemeName);
 });
 
 test("Keep theme css changes throgh the different themes choosen", (): any => {
@@ -1409,10 +1410,11 @@ test("findSuitableTheme", (): any => {
   expect(themeBuilder.findSuitableTheme("default").colorPalette).toEqual("light");
   expect(themeBuilder.findSuitableTheme("default").isPanelless).toEqual(false);
 
-  themePlugin.addTheme({ themeName: "custom", isPanelless: true, "colorPalette": "dark" });
+  const fullThemeName = themePlugin.addTheme({ themeName: "custom", isPanelless: true, "colorPalette": "dark" });
   expect(themeBuilder.findSuitableTheme("custom").themeName).toEqual("custom");
   expect(themeBuilder.findSuitableTheme("custom").colorPalette).toEqual("dark");
   expect(themeBuilder.findSuitableTheme("custom").isPanelless).toEqual(true);
+  themePlugin.removeTheme(fullThemeName);
 });
 
 test("selectTheme", (): any => {
