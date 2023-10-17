@@ -5,7 +5,8 @@ import { onBeforeUnmount, shallowRef, type ShallowRef, watch } from "vue";
 export function useCreatorModel<T extends Base>(
   createModel: () => T | undefined,
   props: any,
-  getUpdatedModelProps: () => Array<string>
+  getUpdatedModelProps: () => Array<string>,
+  clean?: (value: T) => void
 ): ShallowRef<T | undefined> {
   const model = shallowRef<T>();
   const stopWatch = watch(
@@ -17,7 +18,7 @@ export function useCreatorModel<T extends Base>(
       immediate: true,
     }
   );
-  useBase(() => model.value as T);
+  useBase(() => model.value as T, undefined, clean);
   onBeforeUnmount(() => {
     stopWatch();
   });
