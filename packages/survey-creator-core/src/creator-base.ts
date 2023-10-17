@@ -3400,12 +3400,12 @@ export class CreatorBase extends Base
       "bottom",
       "center"
     );
+    popupModel.displayMode = this.isTouch ? "overlay" : "popup";
 
     return <any>{
       iconName: "icon-more",
       title: this.getLocString("ed.addNewQuestion"),
       action: () => {
-        popupModel.displayMode = this.isMobileView ? "overlay" : "popup";
         popupModel.toggleVisibility();
       },
       popupModel: popupModel
@@ -3440,7 +3440,7 @@ export class CreatorBase extends Base
     const action = new Action({
       title: title,
       id: className,
-      iconName: iconName
+      iconName: iconName,
     });
     action.needSeparator = needSeparator;
     return action;
