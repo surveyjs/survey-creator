@@ -19,6 +19,10 @@ import TestAgain from "./tabs/preview/TestAgain.vue";
 import SurveyResults from "./tabs/preview/SurveyResults.vue";
 import SurveyResultsRow from "./tabs/preview/SurveyResultsRow.vue";
 
+import JsonEditorAce from "./tabs/json/JsonEditorAce.vue";
+import JsonEditorTextArea from "./tabs/json/JsonEditorTextArea.vue";
+import JsonEditorErrorItem from "./tabs/json/JsonEditorErrorItem.vue";
+
 function registerComponents(app: App) {
   app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
@@ -42,6 +46,10 @@ function registerComponents(app: App) {
   app.component("survey-test-again", TestAgain);
   app.component("survey-results", SurveyResults);
   app.component("survey-results-table-row", SurveyResultsRow);
+
+  app.component("json-error-item", JsonEditorErrorItem);
+  app.component("svc-tab-json-editor-textarea", JsonEditorTextArea);
+  app.component("svc-tab-json-editor-ace", JsonEditorAce);
 }
 
 export const surveyCreatorPlugin = {
