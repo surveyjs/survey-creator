@@ -145,6 +145,7 @@ export class ThemeBuilder extends Base {
     this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
     this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
+    this.surveyProvider.isThemeModified = false;
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
   }
@@ -196,8 +197,8 @@ export class ThemeBuilder extends Base {
   public setTheme(theme: ITheme) {
     this.themeCssVariablesChanges = {};
     this.backgroundImage = "";
-    this.backgroundImageFit = "";
-    this.backgroundImageAttachment = "";
+    this.backgroundImageFit = "cover";
+    this.backgroundImageAttachment = "scroll";
     this.backgroundOpacity = 100;
     this.loadTheme(theme);
     this.themeModified({ theme });
@@ -829,6 +830,7 @@ export class ThemeBuilder extends Base {
       if (!!options["theme"]) {
         this.onThemeSelected.fire(this, options as { theme: ITheme });
       } else {
+        this.surveyProvider.isThemeModified = true;
         this.onThemeModified.fire(this, options as { name: string, value: any });
       }
     }
