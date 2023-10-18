@@ -148,6 +148,7 @@ export var enStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Copy to clipboard",
     themeResetButton: "Reset theme settings to default",
+    themeResetConfirmation: "Do you want to reset theme customizations?",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
