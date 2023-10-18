@@ -242,7 +242,7 @@ test("Check survey timer", async (t) => {
 
     await t.resizeWindow(1920, 1080);
     const json = {
-      focusFirstQuestionAutomatic: true,
+      "focusFirstQuestionAutomatic": true,
       "title": "American History",
       "showTimerPanel": "bottom",
       "showTimerPanelMode": "survey",
