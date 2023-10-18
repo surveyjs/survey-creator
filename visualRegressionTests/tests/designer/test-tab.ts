@@ -208,6 +208,7 @@ test("Hidden Question Issue: #3298", async (t) => {
 });
 
 const json3 = {
+  focusFirstQuestionAutomatic: true,
   "width": "755px",
   "widthMode": "static",
   "pages": [
@@ -241,6 +242,7 @@ test("Check survey timer", async (t) => {
 
     await t.resizeWindow(1920, 1080);
     const json = {
+      "focusFirstQuestionAutomatic": true,
       "title": "American History",
       "showTimerPanel": "bottom",
       "showTimerPanelMode": "survey",
