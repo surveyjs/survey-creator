@@ -477,9 +477,13 @@ export class ThemeBuilder extends Base {
     if (headerSettings["headerView"] === "basic") {
       this.survey.logoPosition = headerSettings["logoPosition"];
       this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyDescription"), this.themeCssVariablesChanges);
     } else {
       this.currentTheme.header = this.getCoverJson(headerSettings);
-      this.setCoverCssVariables(headerSettings);
+      this.setHeaderBackgroundColorCssVariable(headerSettings);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
     this.themeModified(options);
   }
@@ -619,21 +623,14 @@ export class ThemeBuilder extends Base {
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
     return result;
   }
-  private setCoverCssVariables(headerSettings: any) {
-    let coverBackgroundColorValue = "trasparent";
+  private setHeaderBackgroundColorCssVariable(headerSettings: any) {
+    let headerBackgroundColorValue = "trasparent";
     if (headerSettings["backgroundColorSwitch"] === "accentColor") {
-      coverBackgroundColorValue = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
+      headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
     } else if (headerSettings["backgroundColorSwitch"] === "custom") {
-      coverBackgroundColorValue = headerSettings.backgroundColor;
+      headerBackgroundColorValue = headerSettings.backgroundColor;
     }
-    this.themeCssVariablesChanges["--sjs-cover-backcolor"] = coverBackgroundColorValue;
-
-    if (!!headerSettings["titleForecolor"]) {
-      this.themeCssVariablesChanges["--sjs-cover-title-forecolor"] = headerSettings.titleForecolor;
-    }
-    if (!!headerSettings["descriptionForecolor"]) {
-      this.themeCssVariablesChanges["--sjs-cover-description-forecolor"] = headerSettings.descriptionForecolor;
-    }
+    this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
 
   private loadThemeIntoPropertyGrid() {
@@ -662,7 +659,12 @@ export class ThemeBuilder extends Base {
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
     page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
   }
-  private setCoverPropertiesFromSurvey(panel) {
+  private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
+    panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables);
+    panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables);
+
     panel.getQuestionByName("headerView").value = this.survey.headerView;
     panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
 
@@ -689,7 +691,19 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
-      this.setCoverPropertiesFromSurvey(panel);
+      this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
+      panel.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
+      panel.getQuestionByName("surveyDescription").readOnly = !this.survey.hasDescription;
+      fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
+
+      fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("surveyDescription"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("headerTitle"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("headerDescription"), this.themeCssVariablesChanges);
+
+      // this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-header-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
+      // this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-header-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);
     }
 
     if (!!this.currentTheme.header) {
@@ -701,21 +715,15 @@ export class ThemeBuilder extends Base {
           question.value = this.currentTheme.header[key];
         }
       });
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-cover-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-cover-backcolor"]);
+      /*this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-header-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-header-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);*/
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
 
-      const backgroundColorValue = themeCssVariables["--sjs-cover-backcolor"];
+      const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
       if (!!backgroundColorValue) {
         panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       }
     }
-  }
-  private updatePropertyGridEditorAvailablesFromSurveyElement() {
-    let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
-    this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
-    this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
-    this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
   }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
@@ -735,7 +743,9 @@ export class ThemeBuilder extends Base {
     });
 
     if (!!this.survey) {
-      this.updatePropertyGridEditorAvailablesFromSurveyElement();
+      let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
+      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
     }
   }
 
@@ -753,7 +763,6 @@ export class ThemeBuilder extends Base {
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
 
-    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("surveyTitle"), newCssVariables);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageTitle"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
@@ -919,7 +928,11 @@ export class ThemeBuilder extends Base {
                     "descriptionPositionX": "left",
                     "descriptionPositionY": "bottom",
                     "textAreaWidth": 512,
-                    "height": 256
+                    "height": 256,
+                    surveyTitle: { family: settings.theme.fontFamily, weight: "700", size: 32 },
+                    surveyDescription: { family: settings.theme.fontFamily, weight: "400", size: 16 },
+                    headerTitle: { family: settings.theme.fontFamily, weight: "700", color: "rgba(0, 0, 0, 0.91)", size: 32 },
+                    headerDescription: { family: settings.theme.fontFamily, weight: "400", color: "rgba(0, 0, 0, 0.45)", size: 16 }
                   }
                 ],
                 "templateElements": [
@@ -945,6 +958,20 @@ export class ThemeBuilder extends Base {
                           { value: "left", text: getLocString("theme.horizontalAlignmentLeft") },
                           { value: "right", text: getLocString("theme.horizontalAlignmentRight") }
                         ],
+                      },
+                      {
+                        type: "fontSettings",
+                        name: "surveyTitle",
+                        title: getLocString("theme.surveyTitle"),
+                        visibleIf: "{panel.headerView} = 'basic'",
+                        descriptionLocation: "hidden"
+                      },
+                      {
+                        type: "fontSettings",
+                        name: "surveyDescription",
+                        title: getLocString("theme.surveyDescription"),
+                        visibleIf: "{panel.headerView} = 'basic'",
+                        descriptionLocation: "hidden",
                       },
                       {
                         type: "spinedit",
@@ -1036,15 +1063,15 @@ export class ThemeBuilder extends Base {
                         ]
                       },
                       {
-                        type: "color",
-                        name: "titleForecolor",
-                        title: getLocString("theme.coverTitleForecolor"),
-                        descriptionLocation: "hidden",
+                        type: "fontSettings",
+                        name: "headerTitle",
+                        title: getLocString("theme.surveyTitle"),
+                        descriptionLocation: "hidden"
                       },
                       {
-                        type: "colorsettings",
-                        name: "descriptionForecolor",
-                        title: getLocString("theme.coverDescriptionForecolor"),
+                        type: "fontSettings",
+                        name: "headerDescription",
+                        title: getLocString("theme.surveyDescription"),
                         descriptionLocation: "hidden",
                       },
                       {
@@ -1298,16 +1325,6 @@ export class ThemeBuilder extends Base {
             type: "panel",
             elements: [
               {
-                type: "fontSettings",
-                name: "surveyTitle",
-                title: getLocString("theme.surveyTitle"),
-                descriptionLocation: "hidden",
-                defaultValue: {
-                  family: settings.theme.fontFamily,
-                  weight: "700",
-                  size: 32
-                }
-              }, {
                 type: "fontSettings",
                 name: "pageTitle",
                 title: getLocString("theme.pageTitle"),
