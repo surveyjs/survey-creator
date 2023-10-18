@@ -2162,7 +2162,7 @@ test("Reset theme action calls confitmation dialog", (): any => {
     message = text;
     callback(true);
     return true;
-  }
+  };
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
