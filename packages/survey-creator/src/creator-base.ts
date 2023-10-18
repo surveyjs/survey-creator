@@ -9,9 +9,6 @@ import { SurveyLogic } from "./tabs/logic";
 import { ISurveyCreatorOptions, settings } from "./settings";
 import { EditableObject } from "./propertyEditors/editableObject";
 
-//TODO remove
-Survey.Serializer.findProperty("survey", "focusFirstQuestionAutomatic").defaultValue = false;
-
 export interface ICreatorOptions {
   [index: string]: any;
 }

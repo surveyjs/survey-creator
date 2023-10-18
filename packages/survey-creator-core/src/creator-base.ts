@@ -43,9 +43,6 @@ require("./components/creator.scss");
 require("./components/string-editor.scss");
 require("./creator-theme/creator.scss");
 
-//TODO remove
-Serializer.findProperty("survey", "focusFirstQuestionAutomatic").defaultValue = false;
-
 export interface IKeyboardShortcut {
   name?: string;
   affectedTab?: string;
