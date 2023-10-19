@@ -142,6 +142,9 @@ export var msStrings = {
     translationPlaceHolder: "Penterjemahan...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Eksport",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Salin ke papan keratan",
     themeResetButton: "Mengeset semula seting tema kepada lalai",
     bold: "Tebal",
     italic: "Condong",
@@ -658,6 +661,9 @@ export var msStrings = {
     columnsVisibleIf: "Lajur kelihatan jika",
     rowsVisibleIf: "Baris boleh dilihat jika",
     otherPlaceholder: "Ruang letak komen",
+    filePlaceholder: "Teks ruang letak fail",
+    photoPlaceholder: "Teks ruang letak foto",
+    fileOrPhotoPlaceholder: "Teks ruang letak fail atau foto",
     rateType: "Jenis kadar"
   },
   // Property values
@@ -895,7 +901,10 @@ export var msStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\"."
+    keyName: "Jika lajur yang ditentukan mengandungi nilai yang sama, tinjauan akan membuang ralat \"Nilai kunci bukan unik\".",
+    filePlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail tempatan\" atau apabila kamera tidak tersedia",
+    photoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Kamera\".",
+    fileOrPhotoPlaceholder: "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var msStrings = {
     groupGeneral: "Umum",
     groupAdvanced: "Lanjutan",
     groupHeader: "Pengepala",
+    groupBackground: "Latar belakang",
+    groupAppearance: "Penampilan",
     themeName: "Tema",
     themeMode: "Penampilan soalan",
     themeModePanels: "Lalai",
@@ -1019,6 +1030,7 @@ export var msStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
     coverTitleForecolor: "Warna tajuk",
+    coverDescriptionForecolor: "Penerangan forecolor",
     coverOverlapEnabled: "Bertindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Imej latar belakang",
@@ -1627,3 +1639,17 @@ editorLocalization.locales["ms"] = msStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Peruntukkan nilai sel: {1} kepada lajur: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Eksport"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Salin ke papan keratan"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Teks ruang letak fail"
+// pe.photoPlaceholder: "Photo placeholder text" => "Teks ruang letak foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Teks ruang letak fail atau foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Digunakan apabila \"Jenis sumber\" ialah \"Fail tempatan\" atau apabila kamera tidak tersedia"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Digunakan apabila \"Jenis sumber\" ialah \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Digunakan apabila \"Jenis sumber\" ialah \"Fail atau kamera tempatan\"."
+// theme.groupBackground: "Background" => "Latar belakang"
+// theme.groupAppearance: "Appearance" => "Penampilan"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Penerangan forecolor"

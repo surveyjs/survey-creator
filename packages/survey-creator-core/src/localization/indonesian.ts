@@ -142,6 +142,9 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
+    surveyJsonExportButton: "Ekspor",
+    surveyJsonImportButton: "Mengimpor",
+    surveyJsonCopyButton: "Salin ke papan klip",
     themeResetButton: "Setel ulang pengaturan tema ke default",
     bold: "Tebal",
     italic: "Miring",
@@ -658,6 +661,9 @@ export var indonesianStrings = {
     columnsVisibleIf: "Kolom terlihat jika",
     rowsVisibleIf: "Baris terlihat jika",
     otherPlaceholder: "Tempat penampung area komentar",
+    filePlaceholder: "Teks tempat penampung file",
+    photoPlaceholder: "Teks placeholder foto",
+    fileOrPhotoPlaceholder: "Teks placeholder file atau foto",
     rateType: "Jenis tarif"
   },
   // Property values
@@ -895,7 +901,10 @@ export var indonesianStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\"."
+    keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\".",
+    filePlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia",
+    photoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\".",
+    fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var indonesianStrings = {
     groupGeneral: "Umum",
     groupAdvanced: "Maju",
     groupHeader: "Header",
+    groupBackground: "Latar",
+    groupAppearance: "Rupa",
     themeName: "Tema",
     themeMode: "Penampilan pertanyaan",
     themeModePanels: "Default",
@@ -1019,6 +1030,7 @@ export var indonesianStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
     coverTitleForecolor: "Warna depan judul",
+    coverDescriptionForecolor: "Deskripsi forecolor",
     coverOverlapEnabled: "Tumpang tindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Gambar latar belakang",
@@ -1828,3 +1840,17 @@ editorLocalization.locales["id"] = indonesianStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Menetapkan nilai sel: {1} ke kolom: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Ekspor"
+// ed.surveyJsonImportButton: "Import" => "Mengimpor"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Salin ke papan klip"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Teks tempat penampung file"
+// pe.photoPlaceholder: "Photo placeholder text" => "Teks placeholder foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Teks placeholder file atau foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
+// theme.groupBackground: "Background" => "Latar"
+// theme.groupAppearance: "Appearance" => "Rupa"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"

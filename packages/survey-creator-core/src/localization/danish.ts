@@ -142,6 +142,9 @@ export var danishStrings = {
     translationPlaceHolder: "Oversættelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Eksport",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopier til udklipsholder",
     themeResetButton: "Nulstil temaindstillinger til standard",
     bold: "Modig",
     italic: "Kursiv",
@@ -658,6 +661,9 @@ export var danishStrings = {
     columnsVisibleIf: "Kolonner er synlige, hvis",
     rowsVisibleIf: "Rækker er synlige, hvis",
     otherPlaceholder: "Pladsholder til kommentarområde",
+    filePlaceholder: "Filpladsholdertekst",
+    photoPlaceholder: "Eksempeltekst til billeder",
+    fileOrPhotoPlaceholder: "Arkiv- eller fotopladsholdertekst",
     rateType: "Sats type"
   },
   // Property values
@@ -895,7 +901,10 @@ export var danishStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\"."
+    keyName: "Hvis den angivne kolonne indeholder identiske værdier, kaster undersøgelsen fejlen \"Ikke-unik nøgleværdi\".",
+    filePlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt",
+    photoPlaceholder: "Gælder, når \"Kildetype\" er \"Kamera\".",
+    fileOrPhotoPlaceholder: "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var danishStrings = {
     groupGeneral: "Generel",
     groupAdvanced: "Avanceret",
     groupHeader: "Header",
+    groupBackground: "Baggrund",
+    groupAppearance: "Udseende",
     themeName: "Tema",
     themeMode: "Spørgsmål udseende",
     themeModePanels: "Standard",
@@ -1019,6 +1030,7 @@ export var danishStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Valgte",
     coverTitleForecolor: "Titel forfarve",
+    coverDescriptionForecolor: "Beskrivelse forfarve",
     coverOverlapEnabled: "Overlapning",
     backgroundDimColor: "Baggrundsfarve",
     backgroundImage: "Baggrundsbillede",
@@ -1859,3 +1871,17 @@ editorLocalization.locales["da"] = danishStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tildel celleværdi: {1} til kolonne: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Eksport"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopier til udklipsholder"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Filpladsholdertekst"
+// pe.photoPlaceholder: "Photo placeholder text" => "Eksempeltekst til billeder"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Arkiv- eller fotopladsholdertekst"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gælder, når \"Kildetype\" er \"Lokale filer\", eller når kameraet ikke er tilgængeligt"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gælder, når \"Kildetype\" er \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gælder, når \"Kildetype\" er \"Lokale filer eller kamera\"."
+// theme.groupBackground: "Background" => "Baggrund"
+// theme.groupAppearance: "Appearance" => "Udseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"

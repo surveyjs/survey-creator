@@ -142,6 +142,9 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
+    surveyJsonExportButton: "輸出",
+    surveyJsonImportButton: "輸入",
+    surveyJsonCopyButton: "クリップボードにコピー",
     themeResetButton: "テーマ設定をデフォルトにリセットする",
     bold: "太字",
     italic: "イタリック",
@@ -658,6 +661,9 @@ export var jaStrings = {
     columnsVisibleIf: "列は次の場合に表示されます。",
     rowsVisibleIf: "行は次の場合に表示されます。",
     otherPlaceholder: "コメント領域のプレースホルダー",
+    filePlaceholder: "ファイル プレースホルダー テキスト",
+    photoPlaceholder: "写真の代替テキスト",
+    fileOrPhotoPlaceholder: "ファイルまたは写真のプレースホルダーテキスト",
     rateType: "レートタイプ"
   },
   // Property values
@@ -895,7 +901,10 @@ export var jaStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。"
+    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
+    filePlaceholder: "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます",
+    photoPlaceholder: "「ソースタイプ」が「カメラ」の場合に適用されます。",
+    fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var jaStrings = {
     groupGeneral: "全般",
     groupAdvanced: "アドバンスド",
     groupHeader: "ヘッダ",
+    groupBackground: "バックグラウンド",
+    groupAppearance: "様子",
     themeName: "テーマ",
     themeMode: "質問の外観",
     themeModePanels: "デフォルト",
@@ -1019,6 +1030,7 @@ export var jaStrings = {
     primaryDarkColor: "ホバー",
     primaryLightColor: "入選",
     coverTitleForecolor: "タイトル前色",
+    coverDescriptionForecolor: "説明前色",
     coverOverlapEnabled: "オーバーラップ",
     backgroundDimColor: "背景色",
     backgroundImage: "背景画像",
@@ -1674,3 +1686,17 @@ editorLocalization.locales["ja"] = jaStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "セル値の割り当て:列への{1}:{0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "輸出"
+// ed.surveyJsonImportButton: "Import" => "輸入"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "クリップボードにコピー"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "ファイル プレースホルダー テキスト"
+// pe.photoPlaceholder: "Photo placeholder text" => "写真の代替テキスト"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "ファイルまたは写真のプレースホルダーテキスト"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "「ソースタイプ」が「カメラ」の場合に適用されます。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"

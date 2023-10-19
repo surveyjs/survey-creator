@@ -142,6 +142,9 @@ export var huStrings = {
     translationPlaceHolder: "Fordítás...",
     themeExportButton: "Kivitel",
     themeImportButton: "Importál",
+    surveyJsonExportButton: "Kivitel",
+    surveyJsonImportButton: "Importál",
+    surveyJsonCopyButton: "Másolás a vágólapra",
     themeResetButton: "Témabeállítások visszaállítása alapértelmezettre",
     bold: "Félkövér",
     italic: "Dőlt",
@@ -658,6 +661,9 @@ export var huStrings = {
     columnsVisibleIf: "Az oszlopok akkor láthatók, ha",
     rowsVisibleIf: "A sorok akkor láthatók, ha",
     otherPlaceholder: "Megjegyzés terület helyőrzője",
+    filePlaceholder: "Fájl helyőrző szövege",
+    photoPlaceholder: "Fénykép helyőrző szövege",
+    fileOrPhotoPlaceholder: "Fájl vagy fénykép helyőrző szövege",
     rateType: "Ár típusa"
   },
   // Property values
@@ -895,7 +901,10 @@ export var huStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ha a megadott oszlop azonos értékeket tartalmaz, a felmérés a \"Nem egyedi kulcsérték\" hibát adja vissza."
+    keyName: "Ha a megadott oszlop azonos értékeket tartalmaz, a felmérés a \"Nem egyedi kulcsérték\" hibát adja vissza.",
+    filePlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" \"Helyi fájlok\", vagy ha a kamera nem érhető el",
+    photoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" a \"Kamera\".",
+    fileOrPhotoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var huStrings = {
     groupGeneral: "Általános",
     groupAdvanced: "Haladó",
     groupHeader: "Fejléc",
+    groupBackground: "Háttér",
+    groupAppearance: "Megjelenés",
     themeName: "Téma",
     themeMode: "Kérdés megjelenése",
     themeModePanels: "Alapértelmezett",
@@ -1019,6 +1030,7 @@ export var huStrings = {
     primaryDarkColor: "Lebeg",
     primaryLightColor: "Kiválasztott",
     coverTitleForecolor: "Cím előszíne",
+    coverDescriptionForecolor: "Leírás előszín",
     coverOverlapEnabled: "Átfed",
     backgroundDimColor: "Háttérszín",
     backgroundImage: "Háttérkép",
@@ -1827,3 +1839,17 @@ editorLocalization.locales["hu"] = huStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Cellaérték hozzárendelése: {1} oszlophoz: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Kivitel"
+// ed.surveyJsonImportButton: "Import" => "Importál"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Másolás a vágólapra"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Fájl helyőrző szövege"
+// pe.photoPlaceholder: "Photo placeholder text" => "Fénykép helyőrző szövege"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Fájl vagy fénykép helyőrző szövege"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Akkor érvényes, ha a \"Forrás típusa\" \"Helyi fájlok\", vagy ha a kamera nem érhető el"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" a \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\"."
+// theme.groupBackground: "Background" => "Háttér"
+// theme.groupAppearance: "Appearance" => "Megjelenés"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"

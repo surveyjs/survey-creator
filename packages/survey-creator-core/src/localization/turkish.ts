@@ -142,6 +142,9 @@ export var turkishStrings = {
     translationPlaceHolder: "Çeviri...",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
+    surveyJsonExportButton: "Ihracat",
+    surveyJsonImportButton: "Ithalat",
+    surveyJsonCopyButton: "Panoya kopyala",
     themeResetButton: "Tema ayarlarını varsayılana sıfırla",
     bold: "Kalın",
     italic: "Italik",
@@ -658,6 +661,9 @@ export var turkishStrings = {
     columnsVisibleIf: "Sütunlar şu durumlarda görünür:",
     rowsVisibleIf: "Satırlar şu durumlarda görünür:",
     otherPlaceholder: "Yorum alanı yer tutucusu",
+    filePlaceholder: "Dosya yer tutucu metni",
+    photoPlaceholder: "Fotoğraf yer tutucu metni",
+    fileOrPhotoPlaceholder: "Dosya veya fotoğraf yer tutucu metni",
     rateType: "Fiyat türü"
   },
   // Property values
@@ -895,7 +901,10 @@ export var turkishStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar."
+    keyName: "Belirtilen sütun aynı değerleri içeriyorsa, anket \"Benzersiz olmayan anahtar değeri\" hatasını atar.",
+    filePlaceholder: "\"Kaynak türü\" \"Yerel dosyalar\" olduğunda veya fotoğraf makinesi kullanılamadığında geçerlidir",
+    photoPlaceholder: "\"Kaynak türü\" \"Kamera\" olduğunda geçerlidir.",
+    fileOrPhotoPlaceholder: "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var turkishStrings = {
     groupGeneral: "Genel",
     groupAdvanced: "İleri",
     groupHeader: "Üstbilgi",
+    groupBackground: "Arka plan",
+    groupAppearance: "Görünüş",
     themeName: "Tema",
     themeMode: "Soru görünümü",
     themeModePanels: "Temerrüt",
@@ -1019,6 +1030,7 @@ export var turkishStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Seçilmiş",
     coverTitleForecolor: "Başlık ön rengi",
+    coverDescriptionForecolor: "Açıklama ön renk",
     coverOverlapEnabled: "Örtüş",
     backgroundDimColor: "Arka plan rengi",
     backgroundImage: "Arka plan resmi",
@@ -1669,3 +1681,17 @@ editorLocalization.locales["tr"] = turkishStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Hücre değeri atayın: Sütuna {1}: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Ihracat"
+// ed.surveyJsonImportButton: "Import" => "Ithalat"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Panoya kopyala"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Dosya yer tutucu metni"
+// pe.photoPlaceholder: "Photo placeholder text" => "Fotoğraf yer tutucu metni"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Dosya veya fotoğraf yer tutucu metni"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"Kaynak türü\" \"Yerel dosyalar\" olduğunda veya fotoğraf makinesi kullanılamadığında geçerlidir"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"Kaynak türü\" \"Kamera\" olduğunda geçerlidir."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"Kaynak türü\" \"Yerel dosyalar veya kamera\" olduğunda geçerlidir."
+// theme.groupBackground: "Background" => "Arka plan"
+// theme.groupAppearance: "Appearance" => "Görünüş"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"

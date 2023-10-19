@@ -142,6 +142,9 @@ var traditionalChineseTranslation = {
     translationPlaceHolder: "譯本。。。",
     themeExportButton: "出口",
     themeImportButton: "進口",
+    surveyJsonExportButton: "出口",
+    surveyJsonImportButton: "進口",
+    surveyJsonCopyButton: "複製到剪貼板",
     themeResetButton: "將主題設置重置為預設值",
     bold: "大膽",
     italic: "斜體的",
@@ -658,6 +661,9 @@ var traditionalChineseTranslation = {
     columnsVisibleIf: "在以下情況下，列可見",
     rowsVisibleIf: "在以下情況下，行可見",
     otherPlaceholder: "註釋區佔位元",
+    filePlaceholder: "檔佔位元文本",
+    photoPlaceholder: "照片占位元文本",
+    fileOrPhotoPlaceholder: "檔或照片佔位元文字",
     rateType: "費率類型"
   },
   // Property values
@@ -895,7 +901,10 @@ var traditionalChineseTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。"
+    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
+    filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
+    photoPlaceholder: "當「源類型」為「相機」時適用。",
+    fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。"
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ var traditionalChineseTranslation = {
     groupGeneral: "常規",
     groupAdvanced: "高深",
     groupHeader: "頁眉",
+    groupBackground: "背景",
+    groupAppearance: "外觀",
     themeName: "主題",
     themeMode: "問題外觀",
     themeModePanels: "違約",
@@ -1019,6 +1030,7 @@ var traditionalChineseTranslation = {
     primaryDarkColor: "懸停",
     primaryLightColor: "選擇",
     coverTitleForecolor: "標題前彩",
+    coverDescriptionForecolor: "描述前彩",
     coverOverlapEnabled: "重疊",
     backgroundDimColor: "背景色",
     backgroundImage: "背景圖片",
@@ -1952,3 +1964,17 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "將儲存格值：{1}分配給列：{0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "出口"
+// ed.surveyJsonImportButton: "Import" => "進口"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "複製到剪貼板"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "檔佔位元文本"
+// pe.photoPlaceholder: "Photo placeholder text" => "照片占位元文本"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "檔或照片佔位元文字"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "當「源類型」為「本地檔」或相機不可用時適用"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "當「源類型」為「相機」時適用。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "當「源類型」為「本地檔或相機」時適用。"
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外觀"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"

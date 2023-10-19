@@ -142,6 +142,9 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopírovanie do schránky",
     themeResetButton: "Obnovenie predvolených nastavení motívu",
     bold: "Tučné",
     italic: "Kurzíva",
@@ -658,6 +661,9 @@ export var skStrings = {
     columnsVisibleIf: "Stĺpce sú viditeľné, ak",
     rowsVisibleIf: "Riadky sú viditeľné, ak",
     otherPlaceholder: "Zástupný symbol oblasti komentárov",
+    filePlaceholder: "Zástupný text súboru",
+    photoPlaceholder: "Zástupný text fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text súboru alebo fotografie",
     rateType: "Typ sadzby"
   },
   // Property values
@@ -895,7 +901,10 @@ export var skStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\"."
+    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
+    filePlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii",
+    photoPlaceholder: "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export var skStrings = {
     groupGeneral: "Všeobecné",
     groupAdvanced: "Pokročilý",
     groupHeader: "Hlavička",
+    groupBackground: "Pozadie",
+    groupAppearance: "Vzhľad",
     themeName: "Téma",
     themeMode: "Vzhľad otázky",
     themeModePanels: "Predvolený",
@@ -1019,6 +1030,7 @@ export var skStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
     coverTitleForecolor: "Predná farba názvu",
+    coverDescriptionForecolor: "Popis predná farba",
     coverOverlapEnabled: "Presahovať",
     backgroundDimColor: "Farba pozadia",
     backgroundImage: "Obrázok na pozadí",
@@ -1627,3 +1639,17 @@ editorLocalization.locales["sk"] = skStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Priradenie hodnoty bunky: {1} do stĺpca: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopírovanie do schránky"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Zástupný text súboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Zástupný text fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text súboru alebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"

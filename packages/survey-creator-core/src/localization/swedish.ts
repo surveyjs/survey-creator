@@ -142,6 +142,9 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Export",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopiera till Urklipp",
     themeResetButton: "Återställ temainställningarna till standard",
     bold: "Djärv",
     italic: "Kursiv",
@@ -658,6 +661,9 @@ export let svStrings = {
     columnsVisibleIf: "Kolumner visas om",
     rowsVisibleIf: "Raderna visas om",
     otherPlaceholder: "Platshållare för kommentarsområde",
+    filePlaceholder: "Text för filplatshållare",
+    photoPlaceholder: "Text för platshållare för foton",
+    fileOrPhotoPlaceholder: "Platshållartext för fil eller foto",
     rateType: "Typ av hastighet"
   },
   // Property values
@@ -895,7 +901,10 @@ export let svStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\"."
+    keyName: "Om den angivna kolumnen innehåller identiska värden genereras felet \"Icke-unikt nyckelvärde\".",
+    filePlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig",
+    photoPlaceholder: "Gäller när \"Källtyp\" är \"Kamera\".",
+    fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ export let svStrings = {
     groupGeneral: "Allmänt",
     groupAdvanced: "Avancerad",
     groupHeader: "Rubrik",
+    groupBackground: "Bakgrund",
+    groupAppearance: "Utseende",
     themeName: "Tema",
     themeMode: "Fråga utseende",
     themeModePanels: "Standard",
@@ -1019,6 +1030,7 @@ export let svStrings = {
     primaryDarkColor: "Sväva",
     primaryLightColor: "Vald",
     coverTitleForecolor: "Titel förfärg",
+    coverDescriptionForecolor: "Beskrivning förfärg",
     coverOverlapEnabled: "Överlappa",
     backgroundDimColor: "Bakgrundsfärg",
     backgroundImage: "Bakgrundsbild",
@@ -1851,3 +1863,17 @@ editorLocalization.locales["sv"] = svStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilldela cellvärde: {1} till kolumn: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Export"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiera till Urklipp"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Text för filplatshållare"
+// pe.photoPlaceholder: "Photo placeholder text" => "Text för platshållare för foton"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Platshållartext för fil eller foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gäller när \"Källtyp\" är \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\"."
+// theme.groupBackground: "Background" => "Bakgrund"
+// theme.groupAppearance: "Appearance" => "Utseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"

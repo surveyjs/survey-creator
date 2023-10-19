@@ -142,6 +142,9 @@ var persianStrings = {
     translationPlaceHolder: "در حال ترجمه...",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
+    surveyJsonExportButton: "صادرات",
+    surveyJsonImportButton: "واردات",
+    surveyJsonCopyButton: "رونوشت در تخته یادداشت",
     themeResetButton: "بازنشانی تنظیمات تم به حالت پیشفرض",
     bold: "پررنگ",
     italic: "مورب",
@@ -658,6 +661,9 @@ var persianStrings = {
     columnsVisibleIf: "ستونها مرئی هستند اگر",
     rowsVisibleIf: "سطرها مرئی هستند اگر",
     otherPlaceholder: "ذی نفع منطقه نظر",
+    filePlaceholder: "متن نگهدارنده پرونده",
+    photoPlaceholder: "متن نگهدارنده عکس",
+    fileOrPhotoPlaceholder: "متن جایدار پرونده یا عکس",
     rateType: "نوع نرخ"
   },
   // Property values
@@ -895,7 +901,10 @@ var persianStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند."
+    keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
+    filePlaceholder: "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست",
+    photoPlaceholder: "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود.",
+    fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
   },
   // Properties
   p: {
@@ -1008,6 +1017,8 @@ var persianStrings = {
     groupGeneral: "عمومی",
     groupAdvanced: "پیشرفته",
     groupHeader: "هدر",
+    groupBackground: "پس زمینه",
+    groupAppearance: "ظاهر",
     themeName: "تم",
     themeMode: "ظاهر سوال",
     themeModePanels: "پیش فرض",
@@ -1019,6 +1030,7 @@ var persianStrings = {
     primaryDarkColor: "شناور",
     primaryLightColor: "انتخاب",
     coverTitleForecolor: "پیش زمینه عنوانcolor",
+    coverDescriptionForecolor: "توصیف پیشرنگ",
     coverOverlapEnabled: "همپوشانی",
     backgroundDimColor: "رنگ پسزمینه",
     backgroundImage: "تصویر زمینه",
@@ -1614,3 +1626,15 @@ editorLocalization.locales["fa"] = persianStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "اختصاص مقدار: {1} به سوال: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "تنظیم مجدد مقدار سلول برای ستون: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "اختصاص مقدار سلول: {1} به ستون: {0}"
+// ed.surveyJsonExportButton: "Export" => "صادرات"
+// ed.surveyJsonImportButton: "Import" => "واردات"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "رونوشت در تخته یادداشت"
+// pe.filePlaceholder: "File placeholder text" => "متن نگهدارنده پرونده"
+// pe.photoPlaceholder: "Photo placeholder text" => "متن نگهدارنده عکس"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "متن جایدار پرونده یا عکس"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
+// theme.groupBackground: "Background" => "پس زمینه"
+// theme.groupAppearance: "Appearance" => "ظاهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
