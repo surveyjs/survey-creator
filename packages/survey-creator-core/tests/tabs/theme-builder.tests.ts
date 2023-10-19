@@ -2183,6 +2183,6 @@ test("Reset theme action calls confitmation dialog", (): any => {
   expect(questionBackgroundTransparency.value).toEqual(100);
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
 
-  expect(message).toBe("Do you want to reset theme customizations?");
+  expect(message).toBe("Do you really want to reset the theme? All your customizations will be lost.");
   surveySettings.confirmActionAsync = originalCallback;
 });
