@@ -1,4 +1,4 @@
-import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel, settings as surveySerrings } from "survey-core";
+import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel, settings as surveySettings } from "survey-core";
 import { ThemeBuilder } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -2156,9 +2156,9 @@ test("Set and use custom default theme", (): any => {
   expect(themePlugin.availableThemes).toStrictEqual(themes);
 });
 test("Reset theme action calls confitmation dialog", (): any => {
-  const originalCallback = surveySerrings.confirmActionAsync;
+  const originalCallback = surveySettings.confirmActionAsync;
   let message = "";
-  surveySerrings.confirmActionAsync = (text, callback) => {
+  surveySettings.confirmActionAsync = (text, callback) => {
     message = text;
     callback(true);
     return true;
@@ -2184,5 +2184,5 @@ test("Reset theme action calls confitmation dialog", (): any => {
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
 
   expect(message).toBe("Do you want to reset theme customizations?");
-  surveySerrings.confirmActionAsync = originalCallback;
+  surveySettings.confirmActionAsync = originalCallback;
 });

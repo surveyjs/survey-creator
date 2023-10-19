@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySerrings } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
@@ -233,7 +233,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       mode: "small",
       visible: this.createVisibleUpdater(),
       action: () => {
-        surveySerrings.confirmActionAsync(getLocString("ed.themeResetConfirmation"), (confirm) => {
+        surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"), (confirm) => {
           if (confirm) {
             this.model.resetTheme();
           }
