@@ -237,7 +237,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           if (confirm) {
             this.model.resetTheme();
           }
-        });
+        }, getLocString("ed.themeResetConfirmationOk"));
       }
     });
     items.push(this.resetTheme);
