@@ -1,3 +1,9 @@
 .spg-link {
   display: flex;
 }
+
+.sv-string-viewer {
+  .spg-link {
+    display: initial;
+  }
+}
