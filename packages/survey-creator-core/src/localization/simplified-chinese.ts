@@ -142,7 +142,12 @@ var simplifiedChineseTranslation = {
     translationPlaceHolder: "译本。。。",
     themeExportButton: "出口",
     themeImportButton: "进口",
+    surveyJsonExportButton: "出口",
+    surveyJsonImportButton: "进口",
+    surveyJsonCopyButton: "复制到剪贴板",
     themeResetButton: "将主题设置重置为默认值",
+    themeResetConfirmation: "你真的要重置主题吗？您的所有自定义项都将丢失。",
+    themeResetConfirmationOk: "是，重置主题",
     bold: "加粗",
     italic: "斜体",
     underline: "下划线",
@@ -1008,6 +1013,8 @@ var simplifiedChineseTranslation = {
     groupGeneral: "常规",
     groupAdvanced: "高深",
     groupHeader: "页眉",
+    groupBackground: "背景",
+    groupAppearance: "外观",
     themeName: "主题",
     themeMode: "问题外观",
     themeModePanels: "违约",
@@ -1019,6 +1026,7 @@ var simplifiedChineseTranslation = {
     primaryDarkColor: "悬停",
     primaryLightColor: "选择",
     coverTitleForecolor: "标题前彩",
+    coverDescriptionForecolor: "描述前彩",
     coverOverlapEnabled: "重叠",
     backgroundDimColor: "背景色",
     backgroundImage: "背景图片",
@@ -1076,7 +1084,7 @@ var simplifiedChineseTranslation = {
     headerViewAdvanced: "高深",
     coverInheritWidthFrom: "内容区域宽度",
     coverInheritWidthFromSurvey: "与调查相同",
-    coverInheritWidthFromPage: "适合页面",
+    coverInheritWidthFromContainer: "适合容器",
     coverTextAreaWidth: "文本宽度",
     coverBackgroundColorSwitch: "背景色",
     coverBackgroundColorNone: "没有",
@@ -1816,3 +1824,14 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "将单元格值：{1}分配给列：{0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "出口"
+// ed.surveyJsonImportButton: "Import" => "进口"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "复制到剪贴板"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主题吗？您的所有自定义项都将丢失。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主题"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外观"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "适合容器"

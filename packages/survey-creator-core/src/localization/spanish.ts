@@ -142,7 +142,12 @@ var spanishTranslation = {
     translationPlaceHolder: "Traducción...",
     themeExportButton: "Exportar",
     themeImportButton: "Importación",
+    surveyJsonExportButton: "Exportar",
+    surveyJsonImportButton: "Importación",
+    surveyJsonCopyButton: "Copiar en el portapapeles",
     themeResetButton: "Restablecer la configuración predeterminada del tema",
+    themeResetConfirmation: "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán.",
+    themeResetConfirmationOk: "Sí, restablece el tema",
     bold: "Negrita",
     italic: "Itálica",
     underline: "Subrayar",
@@ -1008,6 +1013,8 @@ var spanishTranslation = {
     groupGeneral: "General",
     groupAdvanced: "Avanzado",
     groupHeader: "Encabezado",
+    groupBackground: "Fondo",
+    groupAppearance: "Apariencia",
     themeName: "Tema",
     themeMode: "Apariencia de la pregunta",
     themeModePanels: "Predeterminado",
@@ -1019,6 +1026,7 @@ var spanishTranslation = {
     primaryDarkColor: "Cernerse",
     primaryLightColor: "Seleccionado",
     coverTitleForecolor: "Título de color anterior",
+    coverDescriptionForecolor: "Descripción forecolor",
     coverOverlapEnabled: "Solapar",
     backgroundDimColor: "Color de fondo",
     backgroundImage: "Imagen de fondo",
@@ -1076,7 +1084,7 @@ var spanishTranslation = {
     headerViewAdvanced: "Avanzado",
     coverInheritWidthFrom: "Ancho del área de contenido",
     coverInheritWidthFromSurvey: "Igual que la encuesta",
-    coverInheritWidthFromPage: "Ajustar a la página",
+    coverInheritWidthFromContainer: "Ajuste al contenedor",
     coverTextAreaWidth: "Ancho del texto",
     coverBackgroundColorSwitch: "Color de fondo",
     coverBackgroundColorNone: "Ninguno",
@@ -1441,3 +1449,13 @@ editorLocalization.locales["es"] = spanishTranslation;
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Restablecer el valor de celda de la columna: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Asignar valor de celda: {1} a columna: {0}"
 // lg.expressionSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exportar"
+// ed.surveyJsonImportButton: "Import" => "Importación"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Copiar en el portapapeles"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sí, restablece el tema"
+// lg.expressionSetup: "" => ""
+// theme.groupBackground: "Background" => "Fondo"
+// theme.groupAppearance: "Appearance" => "Apariencia"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"

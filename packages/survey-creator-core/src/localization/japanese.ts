@@ -142,7 +142,12 @@ export var jaStrings = {
     translationPlaceHolder: "翻訳。。。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
+    surveyJsonExportButton: "輸出",
+    surveyJsonImportButton: "輸入",
+    surveyJsonCopyButton: "クリップボードにコピー",
     themeResetButton: "テーマ設定をデフォルトにリセットする",
+    themeResetConfirmation: "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。",
+    themeResetConfirmationOk: "はい、テーマをリセットします",
     bold: "太字",
     italic: "イタリック",
     underline: "下線",
@@ -1008,6 +1013,8 @@ export var jaStrings = {
     groupGeneral: "全般",
     groupAdvanced: "アドバンスド",
     groupHeader: "ヘッダ",
+    groupBackground: "バックグラウンド",
+    groupAppearance: "様子",
     themeName: "テーマ",
     themeMode: "質問の外観",
     themeModePanels: "デフォルト",
@@ -1019,6 +1026,7 @@ export var jaStrings = {
     primaryDarkColor: "ホバー",
     primaryLightColor: "入選",
     coverTitleForecolor: "タイトル前色",
+    coverDescriptionForecolor: "説明前色",
     coverOverlapEnabled: "オーバーラップ",
     backgroundDimColor: "背景色",
     backgroundImage: "背景画像",
@@ -1076,7 +1084,7 @@ export var jaStrings = {
     headerViewAdvanced: "アドバンスド",
     coverInheritWidthFrom: "コンテンツ領域の幅",
     coverInheritWidthFromSurvey: "調査と同じ",
-    coverInheritWidthFromPage: "ページに合わせる",
+    coverInheritWidthFromContainer: "コンテナに合わせる",
     coverTextAreaWidth: "テキスト幅",
     coverBackgroundColorSwitch: "背景色",
     coverBackgroundColorNone: "何一つ",
@@ -1674,3 +1682,14 @@ editorLocalization.locales["ja"] = jaStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "セル値の割り当て:列への{1}:{0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "輸出"
+// ed.surveyJsonImportButton: "Import" => "輸入"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "クリップボードにコピー"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"

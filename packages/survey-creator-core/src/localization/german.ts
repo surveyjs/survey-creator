@@ -142,7 +142,12 @@ var germanTranslation = {
     translationPlaceHolder: "Übersetzung ...",
     themeExportButton: "Exportieren",
     themeImportButton: "Importieren",
+    surveyJsonExportButton: "Exportieren",
+    surveyJsonImportButton: "Importieren",
+    surveyJsonCopyButton: "In Zwischenablage kopieren",
     themeResetButton: "Theme-Einstellungen auf die Standardeinstellungen zurücksetzen",
+    themeResetConfirmation: "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren.",
+    themeResetConfirmationOk: "Ja, setzen Sie das Design zurück",
     bold: "Fett",
     italic: "Kursiv",
     underline: "Unterstrichen",
@@ -1008,6 +1013,8 @@ var germanTranslation = {
     groupGeneral: "Allgemein",
     groupAdvanced: "Fortgeschritten",
     groupHeader: "Kopfball",
+    groupBackground: "Hintergrund",
+    groupAppearance: "Aussehen",
     themeName: "Thema",
     themeMode: "Erscheinungsbild der Frage",
     themeModePanels: "Vorgabe",
@@ -1019,6 +1026,7 @@ var germanTranslation = {
     primaryDarkColor: "Schweben",
     primaryLightColor: "Ausgewählt",
     coverTitleForecolor: "Vorfarbe des Titels",
+    coverDescriptionForecolor: "Beschreibung Vorfarbe",
     coverOverlapEnabled: "Überlappung",
     backgroundDimColor: "Hintergrundfarbe",
     backgroundImage: "Hintergrundbild",
@@ -1076,7 +1084,7 @@ var germanTranslation = {
     headerViewAdvanced: "Fortgeschritten",
     coverInheritWidthFrom: "Breite des Inhaltsbereichs",
     coverInheritWidthFromSurvey: "Wie Umfrage",
-    coverInheritWidthFromPage: "An Seite anpassen",
+    coverInheritWidthFromContainer: "Passend zum Behälter",
     coverTextAreaWidth: "Textbreite",
     coverBackgroundColorSwitch: "Hintergrundfarbe",
     coverBackgroundColorNone: "Nichts",
@@ -1396,3 +1404,14 @@ editorLocalization.locales["de"] = germanTranslation;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Zellenwert zuweisen: {1} zur Spalte: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exportieren"
+// ed.surveyJsonImportButton: "Import" => "Importieren"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "In Zwischenablage kopieren"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, setzen Sie das Design zurück"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Hintergrund"
+// theme.groupAppearance: "Appearance" => "Aussehen"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Passend zum Behälter"

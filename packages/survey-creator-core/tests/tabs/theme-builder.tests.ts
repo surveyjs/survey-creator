@@ -1,4 +1,4 @@
-import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel } from "survey-core";
+import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel, settings as surveySettings } from "survey-core";
 import { ThemeBuilder } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -2280,4 +2280,35 @@ test("Set and use custom default theme", (): any => {
   expect(themeBuilder.survey.themeVariables["--a-var"]).toBe(undefined);
   expect(themePlugin.availableThemes[0]).toBe("default");
   expect(themePlugin.availableThemes).toStrictEqual(themes);
+});
+test("Reset theme action calls confitmation dialog", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  let message = "";
+  surveySettings.confirmActionAsync = (text, callback) => {
+    message = text;
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
+
+  expect(questionBackgroundTransparency.value).toEqual(100);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+
+  questionBackgroundTransparency.value = 60;
+  themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").value = "#f7f7f7";
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
+
+  themePlugin["resetTheme"].action();
+
+  expect(questionBackgroundTransparency.value).toEqual(100);
+  expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toBeUndefined();
+
+  expect(message).toBe("Do you really want to reset the theme? All your customizations will be lost.");
+  surveySettings.confirmActionAsync = originalCallback;
 });

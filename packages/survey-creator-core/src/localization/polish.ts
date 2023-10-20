@@ -142,7 +142,12 @@ var polishStrings = {
     translationPlaceHolder: "Tłumaczenie...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Eksport",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopiuj do schowka",
     themeResetButton: "Przywracanie domyślnych ustawień motywu",
+    themeResetConfirmation: "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone.",
+    themeResetConfirmationOk: "Tak, zresetuj motyw",
     bold: "Śmiały",
     italic: "Kursywa",
     underline: "Podkreślać",
@@ -1008,6 +1013,8 @@ var polishStrings = {
     groupGeneral: "Ogólne",
     groupAdvanced: "Zaawansowany",
     groupHeader: "Nagłówek",
+    groupBackground: "Tło",
+    groupAppearance: "Wygląd",
     themeName: "Kompozycja",
     themeMode: "Wygląd pytania",
     themeModePanels: "Domyślny",
@@ -1019,6 +1026,7 @@ var polishStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Wybrany",
     coverTitleForecolor: "Kolor przedniego tytułu",
+    coverDescriptionForecolor: "Opis przedbarwy",
     coverOverlapEnabled: "Zachodzić na siebie",
     backgroundDimColor: "Kolor tła",
     backgroundImage: "Obraz tła",
@@ -1076,7 +1084,7 @@ var polishStrings = {
     headerViewAdvanced: "Zaawansowany",
     coverInheritWidthFrom: "Szerokość obszaru zawartości",
     coverInheritWidthFromSurvey: "Tak samo jak ankieta",
-    coverInheritWidthFromPage: "Dopasuj do strony",
+    coverInheritWidthFromContainer: "Pasuje do pojemnika",
     coverTextAreaWidth: "Szerokość tekstu",
     coverBackgroundColorSwitch: "Kolor tła",
     coverBackgroundColorNone: "Żaden",
@@ -1947,3 +1955,14 @@ editorLocalization.locales["pl"] = polishStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Przypisz wartość komórki: {1} do kolumny: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Eksport"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiuj do schowka"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Tło"
+// theme.groupAppearance: "Appearance" => "Wygląd"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
