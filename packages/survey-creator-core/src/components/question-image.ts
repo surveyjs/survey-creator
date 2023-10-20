@@ -15,7 +15,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     const surveyModel = new SurveyModel();
     this.filePresentationModel.setSurveyImpl(surveyModel);
     this.filePresentationModel.forceIsInputReadOnly = !this.creator.isCanModifyProperty(this.question, "imageLink");
-    this.filePresentationModel.dragAreaPlaceholder = this.placeholderText;
+    this.filePresentationModel.filePlaceholder = this.placeholderText;
     this.filePresentationModel.chooseButtonCaption = this.chooseImageText;
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
