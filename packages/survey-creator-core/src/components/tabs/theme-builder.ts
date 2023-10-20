@@ -701,9 +701,6 @@ export class ThemeBuilder extends Base {
       fontsettingsFromCssVariable(panel.getElementByName("surveyDescription"), this.themeCssVariablesChanges);
       fontsettingsFromCssVariable(panel.getElementByName("headerTitle"), this.themeCssVariablesChanges);
       fontsettingsFromCssVariable(panel.getElementByName("headerDescription"), this.themeCssVariablesChanges);
-
-      // this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-header-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
-      // this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-header-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);
     }
 
     if (!!this.currentTheme.header) {
@@ -715,8 +712,6 @@ export class ThemeBuilder extends Base {
           question.value = this.currentTheme.header[key];
         }
       });
-      /*this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-header-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-header-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);*/
       this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
 
       const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
