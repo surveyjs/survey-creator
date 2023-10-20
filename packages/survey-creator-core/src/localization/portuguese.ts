@@ -142,7 +142,12 @@ var portugueseTranslation = {
     translationPlaceHolder: "Tradução...",
     themeExportButton: "Exportação",
     themeImportButton: "Importação",
+    surveyJsonExportButton: "Exportação",
+    surveyJsonImportButton: "Importação",
+    surveyJsonCopyButton: "Copiar para área de transferência",
     themeResetButton: "Redefinir as configurações do tema para o padrão",
+    themeResetConfirmation: "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas.",
+    themeResetConfirmationOk: "Sim, redefinir o tema",
     bold: "Negrito",
     italic: "Itálico",
     underline: "Sublinhado",
@@ -1008,6 +1013,8 @@ var portugueseTranslation = {
     groupGeneral: "Geral",
     groupAdvanced: "Avançado",
     groupHeader: "Cabeçalho",
+    groupBackground: "Fundo",
+    groupAppearance: "Aparência",
     themeName: "Tema",
     themeMode: "Aparência da pergunta",
     themeModePanels: "Inadimplência",
@@ -1019,6 +1026,7 @@ var portugueseTranslation = {
     primaryDarkColor: "Pairar",
     primaryLightColor: "Selecionado",
     coverTitleForecolor: "Precolor do título",
+    coverDescriptionForecolor: "Descrição forecolor",
     coverOverlapEnabled: "Sobrepor",
     backgroundDimColor: "Cor de fundo",
     backgroundImage: "Imagem de fundo",
@@ -1076,7 +1084,7 @@ var portugueseTranslation = {
     headerViewAdvanced: "Avançado",
     coverInheritWidthFrom: "Largura da área de conteúdo",
     coverInheritWidthFromSurvey: "O mesmo que pesquisa",
-    coverInheritWidthFromPage: "Ajustar à página",
+    coverInheritWidthFromContainer: "Ajuste ao contêiner",
     coverTextAreaWidth: "Largura do texto",
     coverBackgroundColorSwitch: "Cor de fundo",
     coverBackgroundColorNone: "Nenhum",
@@ -1325,3 +1333,12 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "atribuir valor: {1} à pergunta: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Redefinir o valor da célula para a coluna: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Atribuir valor de célula: {1} à coluna: {0}"
+// ed.surveyJsonExportButton: "Export" => "Exportação"
+// ed.surveyJsonImportButton: "Import" => "Importação"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Copiar para área de transferência"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sim, redefinir o tema"
+// theme.groupBackground: "Background" => "Fundo"
+// theme.groupAppearance: "Appearance" => "Aparência"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste ao contêiner"

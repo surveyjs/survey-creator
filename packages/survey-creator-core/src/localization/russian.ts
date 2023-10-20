@@ -142,7 +142,12 @@ export var ruStrings = {
     translationPlaceHolder: "Перевод...",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
+    surveyJsonExportButton: "Экспорт",
+    surveyJsonImportButton: "Импорт",
+    surveyJsonCopyButton: "Копировать в буфер",
     themeResetButton: "Сброс настроек темы по умолчанию",
+    themeResetConfirmation: "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны.",
+    themeResetConfirmationOk: "Да, сбросьте тему",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
@@ -1008,6 +1013,8 @@ export var ruStrings = {
     groupGeneral: "Общее",
     groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
+    groupBackground: "Фон",
+    groupAppearance: "Внешность",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
@@ -1019,6 +1026,7 @@ export var ruStrings = {
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
     coverTitleForecolor: "Цвет заголовка",
+    coverDescriptionForecolor: "Описание форколора",
     coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
@@ -1076,7 +1084,7 @@ export var ruStrings = {
     headerViewAdvanced: "Продвинутый",
     coverInheritWidthFrom: "Ширина области содержимого",
     coverInheritWidthFromSurvey: "То же, что и опрос",
-    coverInheritWidthFromPage: "По размеру страницы",
+    coverInheritWidthFromContainer: "Подходит для контейнера",
     coverTextAreaWidth: "Ширина текста",
     coverBackgroundColorSwitch: "Цвет фона",
     coverBackgroundColorNone: "Никакой",
@@ -1735,3 +1743,14 @@ editorLocalization.locales["ru"] = ruStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвойте значение ячейки: {1} столбцу: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Экспорт"
+// ed.surveyJsonImportButton: "Import" => "Импорт"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Копировать в буфер"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, сбросьте тему"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Внешность"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"

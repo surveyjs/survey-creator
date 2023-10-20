@@ -142,7 +142,12 @@ export var nbStrings = {
     translationPlaceHolder: "Oversettelse...",
     themeExportButton: "Eksport",
     themeImportButton: "Importere",
+    surveyJsonExportButton: "Eksport",
+    surveyJsonImportButton: "Importere",
+    surveyJsonCopyButton: "Kopiere til utklippstavlen",
     themeResetButton: "Tilbakestill temainnstillinger til standard",
+    themeResetConfirmation: "Vil du virkelig tilbakestille temaet? Alle tilpasningene dine vil gå tapt.",
+    themeResetConfirmationOk: "Ja, tilbakestill temaet",
     bold: "Fet",
     italic: "Kursiv",
     underline: "Underlinjet",
@@ -1008,6 +1013,8 @@ export var nbStrings = {
     groupGeneral: "Generelt",
     groupAdvanced: "Avansert",
     groupHeader: "Topptekst",
+    groupBackground: "Bakgrunn",
+    groupAppearance: "Utseende",
     themeName: "Tema",
     themeMode: "Spørsmål utseende",
     themeModePanels: "Standard",
@@ -1019,6 +1026,7 @@ export var nbStrings = {
     primaryDarkColor: "Sveve",
     primaryLightColor: "Utvalgt",
     coverTitleForecolor: "Tittel forfarge",
+    coverDescriptionForecolor: "Beskrivelse forfarge",
     coverOverlapEnabled: "Overlappe",
     backgroundDimColor: "Bakgrunnsfarge",
     backgroundImage: "Bakgrunnsbilde",
@@ -1076,7 +1084,7 @@ export var nbStrings = {
     headerViewAdvanced: "Avansert",
     coverInheritWidthFrom: "Bredde på innholdsområdet",
     coverInheritWidthFromSurvey: "Samme som undersøkelse",
-    coverInheritWidthFromPage: "Tilpass til side",
+    coverInheritWidthFromContainer: "Tilpass til container",
     coverTextAreaWidth: "Tekstbredde",
     coverBackgroundColorSwitch: "Bakgrunnsfarge",
     coverBackgroundColorNone: "Ingen",
@@ -1677,3 +1685,14 @@ editorLocalization.locales["nb"] = nbStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilordne celleverdi: {1} til kolonne: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Eksport"
+// ed.surveyJsonImportButton: "Import" => "Importere"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiere til utklippstavlen"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig tilbakestille temaet? Alle tilpasningene dine vil gå tapt."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, tilbakestill temaet"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Bakgrunn"
+// theme.groupAppearance: "Appearance" => "Utseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Tilpass til container"

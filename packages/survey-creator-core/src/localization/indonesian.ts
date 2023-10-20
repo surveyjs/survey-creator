@@ -142,7 +142,12 @@ export var indonesianStrings = {
     translationPlaceHolder: "Terjemahan...",
     themeExportButton: "Ekspor",
     themeImportButton: "Mengimpor",
+    surveyJsonExportButton: "Ekspor",
+    surveyJsonImportButton: "Mengimpor",
+    surveyJsonCopyButton: "Salin ke papan klip",
     themeResetButton: "Setel ulang pengaturan tema ke default",
+    themeResetConfirmation: "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang.",
+    themeResetConfirmationOk: "Ya, atur ulang tema",
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
@@ -1008,6 +1013,8 @@ export var indonesianStrings = {
     groupGeneral: "Umum",
     groupAdvanced: "Maju",
     groupHeader: "Header",
+    groupBackground: "Latar",
+    groupAppearance: "Rupa",
     themeName: "Tema",
     themeMode: "Penampilan pertanyaan",
     themeModePanels: "Default",
@@ -1019,6 +1026,7 @@ export var indonesianStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Dipilih",
     coverTitleForecolor: "Warna depan judul",
+    coverDescriptionForecolor: "Deskripsi forecolor",
     coverOverlapEnabled: "Tumpang tindih",
     backgroundDimColor: "Warna latar belakang",
     backgroundImage: "Gambar latar belakang",
@@ -1076,7 +1084,7 @@ export var indonesianStrings = {
     headerViewAdvanced: "Maju",
     coverInheritWidthFrom: "Lebar area konten",
     coverInheritWidthFromSurvey: "Sama seperti survei",
-    coverInheritWidthFromPage: "Paskan dengan halaman",
+    coverInheritWidthFromContainer: "Sesuai dengan kontainer",
     coverTextAreaWidth: "Lebar teks",
     coverBackgroundColorSwitch: "Warna latar belakang",
     coverBackgroundColorNone: "Tidak",
@@ -1828,3 +1836,14 @@ editorLocalization.locales["id"] = indonesianStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Menetapkan nilai sel: {1} ke kolom: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Ekspor"
+// ed.surveyJsonImportButton: "Import" => "Mengimpor"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Salin ke papan klip"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, atur ulang tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Latar"
+// theme.groupAppearance: "Appearance" => "Rupa"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"

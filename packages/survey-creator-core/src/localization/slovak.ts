@@ -142,7 +142,12 @@ export var skStrings = {
     translationPlaceHolder: "Preklad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopírovanie do schránky",
     themeResetButton: "Obnovenie predvolených nastavení motívu",
+    themeResetConfirmation: "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia.",
+    themeResetConfirmationOk: "Áno, obnoviť motív",
     bold: "Tučné",
     italic: "Kurzíva",
     underline: "Podčiarknutie",
@@ -1008,6 +1013,8 @@ export var skStrings = {
     groupGeneral: "Všeobecné",
     groupAdvanced: "Pokročilý",
     groupHeader: "Hlavička",
+    groupBackground: "Pozadie",
+    groupAppearance: "Vzhľad",
     themeName: "Téma",
     themeMode: "Vzhľad otázky",
     themeModePanels: "Predvolený",
@@ -1019,6 +1026,7 @@ export var skStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
     coverTitleForecolor: "Predná farba názvu",
+    coverDescriptionForecolor: "Popis predná farba",
     coverOverlapEnabled: "Presahovať",
     backgroundDimColor: "Farba pozadia",
     backgroundImage: "Obrázok na pozadí",
@@ -1076,7 +1084,7 @@ export var skStrings = {
     headerViewAdvanced: "Pokročilý",
     coverInheritWidthFrom: "Šírka oblasti obsahu",
     coverInheritWidthFromSurvey: "Rovnaké ako prieskum",
-    coverInheritWidthFromPage: "Prispôsobiť na stranu",
+    coverInheritWidthFromContainer: "Vhodné na kontajner",
     coverTextAreaWidth: "Šírka textu",
     coverBackgroundColorSwitch: "Farba pozadia",
     coverBackgroundColorNone: "Žiadny",
@@ -1627,3 +1635,14 @@ editorLocalization.locales["sk"] = skStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Priradenie hodnoty bunky: {1} do stĺpca: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopírovanie do schránky"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Áno, obnoviť motív"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"

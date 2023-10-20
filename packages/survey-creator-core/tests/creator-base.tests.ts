@@ -3973,3 +3973,36 @@ test("onElementDeleting: options.elementType contains cryptic numbers #4740", ()
   });
   creator.deleteElement(creator.survey.getAllQuestions()[0]);
 });
+test("Creator bypage edit mode & onElementAllowOperations", (): any => {
+  const creator = new CreatorTester();
+  creator.pageEditMode = "bypage";
+  creator.onElementAllowOperations.add(function (creator, options) {
+    var obj = options.obj;
+    if (!obj) return;
+    if (obj.getType() == "page") {
+      options.allowDelete = creator.survey.pages.indexOf(obj) % 2 === 1;
+    }
+  });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] },
+      { elements: [{ type: "text", name: "question3" }] },
+      { elements: [{ type: "text", name: "question4" }] }
+    ]
+  };
+  const pages = creator.survey.pages;
+
+  expect(pages).toHaveLength(4);
+  let pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeFalsy();
+  creator.selectElement(creator.survey.pages[1]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
+  creator.selectElement(creator.survey.pages[2]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeFalsy();
+  creator.selectElement(creator.survey.pages[3]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
+});

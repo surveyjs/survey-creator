@@ -142,7 +142,12 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
+    surveyJsonExportButton: "Izvoz",
+    surveyJsonImportButton: "Uvoz",
+    surveyJsonCopyButton: "Kopiraj u međuspremnik",
     themeResetButton: "Vraćanje zadanih postavki teme na zadano",
+    themeResetConfirmation: "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene.",
+    themeResetConfirmationOk: "Da, resetirajte temu",
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
@@ -1008,6 +1013,8 @@ export var hrStrings = {
     groupGeneral: "Općenito",
     groupAdvanced: "Napredan",
     groupHeader: "Zaglavlje",
+    groupBackground: "Pozadina",
+    groupAppearance: "Izgled",
     themeName: "Tema",
     themeMode: "Izgled pitanja",
     themeModePanels: "Propust",
@@ -1019,6 +1026,7 @@ export var hrStrings = {
     primaryDarkColor: "Lebdjeti",
     primaryLightColor: "Odabrani",
     coverTitleForecolor: "Naslovna prednja strana",
+    coverDescriptionForecolor: "Opis prednje boje",
     coverOverlapEnabled: "Preklapanje",
     backgroundDimColor: "Boja pozadine",
     backgroundImage: "Pozadinska slika",
@@ -1076,7 +1084,7 @@ export var hrStrings = {
     headerViewAdvanced: "Napredan",
     coverInheritWidthFrom: "Širina područja sadržaja",
     coverInheritWidthFromSurvey: "Isto kao i anketa",
-    coverInheritWidthFromPage: "Prilagodi stranici",
+    coverInheritWidthFromContainer: "Prilagodi spremniku",
     coverTextAreaWidth: "Širina teksta",
     coverBackgroundColorSwitch: "Boja pozadine",
     coverBackgroundColorNone: "Nijedan",
@@ -1667,3 +1675,14 @@ editorLocalization.locales["hr"] = hrStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Dodijeli vrijednost ćelije: {1} stupcu: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Izvoz"
+// ed.surveyJsonImportButton: "Import" => "Uvoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiraj u međuspremnik"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
