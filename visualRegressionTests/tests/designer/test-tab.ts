@@ -357,9 +357,9 @@ test("dropdown popup in simulator", async (t) => {
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(Selector('[title="Select device type"]'));
-    await t.click(Selector('span').withText("iPhone X"));
+    await t.click(Selector("span").withText("iPhone X"));
     await t.click(Selector('[data-name="nps-score"]'));
-    await t.click(Selector('li.sv-list__item.sd-list__item span').withText("2"));
+    await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
     await t.click(Selector('[data-name="nps-score"]'));
     await takeElementScreenshot("test-tab-opened-dropdown.png", simulator, t, comparer);
   });
