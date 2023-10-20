@@ -904,7 +904,7 @@ export var ruStrings = {
       valueName: " "
     },
     keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа».",
-    filePlaceholder: "Применяется, когда \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна",
+    filePlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна",
     photoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Камера\".",
     fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\"."
   },
@@ -1020,7 +1020,7 @@ export var ruStrings = {
     groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
     groupBackground: "Фон",
-    groupAppearance: "Внешность",
+    groupAppearance: "Внешний вид",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
@@ -1032,7 +1032,7 @@ export var ruStrings = {
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
     coverTitleForecolor: "Цвет заголовка",
-    coverDescriptionForecolor: "Описание форколора",
+    coverDescriptionForecolor: "Цвет описания",
     coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
