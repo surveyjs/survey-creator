@@ -1030,7 +1030,7 @@ export var ruStrings = {
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
     coverTitleForecolor: "Цвет заголовка",
-    coverDescriptionForecolor: "Описание форколора",
+    coverDescriptionForecolor: "Цвет описания",
     coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
