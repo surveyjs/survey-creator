@@ -146,6 +146,8 @@ export var jaStrings = {
     surveyJsonImportButton: "輸入",
     surveyJsonCopyButton: "クリップボードにコピー",
     themeResetButton: "テーマ設定をデフォルトにリセットする",
+    themeResetConfirmation: "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。",
+    themeResetConfirmationOk: "はい、テーマをリセットします",
     bold: "太字",
     italic: "イタリック",
     underline: "下線",
@@ -1088,7 +1090,7 @@ export var jaStrings = {
     headerViewAdvanced: "アドバンスド",
     coverInheritWidthFrom: "コンテンツ領域の幅",
     coverInheritWidthFromSurvey: "調査と同じ",
-    coverInheritWidthFromPage: "ページに合わせる",
+    coverInheritWidthFromContainer: "コンテナに合わせる",
     coverTextAreaWidth: "テキスト幅",
     coverBackgroundColorSwitch: "背景色",
     coverBackgroundColorNone: "何一つ",
@@ -1700,3 +1702,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.groupBackground: "Background" => "バックグラウンド"
 // theme.groupAppearance: "Appearance" => "様子"
 // theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"

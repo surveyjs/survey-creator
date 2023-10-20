@@ -146,6 +146,8 @@ var portugueseTranslation = {
     surveyJsonImportButton: "Importação",
     surveyJsonCopyButton: "Copiar para área de transferência",
     themeResetButton: "Redefinir as configurações do tema para o padrão",
+    themeResetConfirmation: "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas.",
+    themeResetConfirmationOk: "Sim, redefinir o tema",
     bold: "Negrito",
     italic: "Itálico",
     underline: "Sublinhado",
@@ -1088,7 +1090,7 @@ var portugueseTranslation = {
     headerViewAdvanced: "Avançado",
     coverInheritWidthFrom: "Largura da área de conteúdo",
     coverInheritWidthFromSurvey: "O mesmo que pesquisa",
-    coverInheritWidthFromPage: "Ajustar à página",
+    coverInheritWidthFromContainer: "Ajuste ao contêiner",
     coverTextAreaWidth: "Largura do texto",
     coverBackgroundColorSwitch: "Cor de fundo",
     coverBackgroundColorNone: "Nenhum",
@@ -1349,3 +1351,9 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.groupBackground: "Background" => "Fundo"
 // theme.groupAppearance: "Appearance" => "Aparência"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sim, redefinir o tema"
+// theme.groupBackground: "Background" => "Fundo"
+// theme.groupAppearance: "Appearance" => "Aparência"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste ao contêiner"

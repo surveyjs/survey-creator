@@ -329,7 +329,6 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       visibleIndex: index,
       disableShrink: false,
       action: (newType) => {
-        newAction.popupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
       },
     }, {
       items: actions,
@@ -338,6 +337,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       selectedItem: selItem,
       horizontalPosition: "center"
     });
+    newAction.popupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
     newAction.data.locOwner = this.creator;
     return newAction;
   }

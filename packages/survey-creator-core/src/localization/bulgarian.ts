@@ -146,6 +146,8 @@ export var bgStrings = {
     surveyJsonImportButton: "Внос",
     surveyJsonCopyButton: "Копиране в системния буфер",
     themeResetButton: "Връщане на настройките на тема в начално състояние по подразбиране",
+    themeResetConfirmation: "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени.",
+    themeResetConfirmationOk: "Да, нулирайте темата",
     bold: "Удебелен",
     italic: "Курсив",
     underline: "Подчертан",
@@ -1088,7 +1090,7 @@ export var bgStrings = {
     headerViewAdvanced: "Напреднал",
     coverInheritWidthFrom: "Ширина на областта на съдържанието",
     coverInheritWidthFromSurvey: "Същото като проучването",
-    coverInheritWidthFromPage: "Побери в страницата",
+    coverInheritWidthFromContainer: "Побиране в контейнера",
     coverTextAreaWidth: "Ширина на текста",
     coverBackgroundColorSwitch: "Цвят на фона",
     coverBackgroundColorNone: "Никой",
@@ -1245,3 +1247,9 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.groupBackground: "Background" => "Фон"
 // theme.groupAppearance: "Appearance" => "Външен вид"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, нулирайте темата"
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Външен вид"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"

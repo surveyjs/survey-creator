@@ -146,6 +146,8 @@ export var nlStrings = {
     surveyJsonImportButton: "Importeren",
     surveyJsonCopyButton: "Naar klembord kopiëren",
     themeResetButton: "Thema-instellingen terugzetten op de standaardinstellingen",
+    themeResetConfirmation: "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren.",
+    themeResetConfirmationOk: "Ja, reset het thema",
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
@@ -1088,7 +1090,7 @@ export var nlStrings = {
     headerViewAdvanced: "Geavanceerd",
     coverInheritWidthFrom: "Breedte van het inhoudsgebied",
     coverInheritWidthFromSurvey: "Hetzelfde als enquête",
-    coverInheritWidthFromPage: "Aanpassen aan pagina",
+    coverInheritWidthFromContainer: "Geschikt voor containers",
     coverTextAreaWidth: "Tekstbreedte",
     coverBackgroundColorSwitch: "Achtergrondkleur",
     coverBackgroundColorNone: "Geen",
@@ -1679,3 +1681,11 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.groupBackground: "Background" => "Achtergrond"
 // theme.groupAppearance: "Appearance" => "Uiterlijk"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Achtergrond"
+// theme.groupAppearance: "Appearance" => "Uiterlijk"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"

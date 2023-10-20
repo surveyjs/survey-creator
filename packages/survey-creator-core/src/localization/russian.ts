@@ -146,6 +146,8 @@ export var ruStrings = {
     surveyJsonImportButton: "Импорт",
     surveyJsonCopyButton: "Копировать в буфер",
     themeResetButton: "Сброс настроек темы по умолчанию",
+    themeResetConfirmation: "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны.",
+    themeResetConfirmationOk: "Да, сбросьте тему",
     bold: "Жирный",
     italic: "Курсив",
     underline: "Подчеркивание",
@@ -1088,7 +1090,7 @@ export var ruStrings = {
     headerViewAdvanced: "Продвинутый",
     coverInheritWidthFrom: "Ширина области содержимого",
     coverInheritWidthFromSurvey: "То же, что и опрос",
-    coverInheritWidthFromPage: "По размеру страницы",
+    coverInheritWidthFromContainer: "Подходит для контейнера",
     coverTextAreaWidth: "Ширина текста",
     coverBackgroundColorSwitch: "Цвет фона",
     coverBackgroundColorNone: "Никакой",
@@ -1761,3 +1763,11 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.groupBackground: "Background" => "Фон"
 // theme.groupAppearance: "Appearance" => "Внешность"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, сбросьте тему"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Внешность"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"

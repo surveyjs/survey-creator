@@ -146,6 +146,8 @@ export var skStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Kopírovanie do schránky",
     themeResetButton: "Obnovenie predvolených nastavení motívu",
+    themeResetConfirmation: "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia.",
+    themeResetConfirmationOk: "Áno, obnoviť motív",
     bold: "Tučné",
     italic: "Kurzíva",
     underline: "Podčiarknutie",
@@ -1088,7 +1090,7 @@ export var skStrings = {
     headerViewAdvanced: "Pokročilý",
     coverInheritWidthFrom: "Šírka oblasti obsahu",
     coverInheritWidthFromSurvey: "Rovnaké ako prieskum",
-    coverInheritWidthFromPage: "Prispôsobiť na stranu",
+    coverInheritWidthFromContainer: "Vhodné na kontajner",
     coverTextAreaWidth: "Šírka textu",
     coverBackgroundColorSwitch: "Farba pozadia",
     coverBackgroundColorNone: "Žiadny",
@@ -1653,3 +1655,11 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.groupBackground: "Background" => "Pozadie"
 // theme.groupAppearance: "Appearance" => "Vzhľad"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Áno, obnoviť motív"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"

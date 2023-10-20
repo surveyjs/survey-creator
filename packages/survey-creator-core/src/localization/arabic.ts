@@ -146,6 +146,8 @@ export var arStrings = {
     surveyJsonImportButton: "استورد",
     surveyJsonCopyButton: "نسخ إلى الحافظة",
     themeResetButton: "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي",
+    themeResetConfirmation: "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك.",
+    themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -1088,7 +1090,7 @@ export var arStrings = {
     headerViewAdvanced: "متقدم",
     coverInheritWidthFrom: "عرض منطقة المحتوى",
     coverInheritWidthFromSurvey: "نفس المسح",
-    coverInheritWidthFromPage: "ملائمة للصفحة",
+    coverInheritWidthFromContainer: "يصلح للحاوية",
     coverTextAreaWidth: "عرض النص",
     coverBackgroundColorSwitch: "لون الخلفية",
     coverBackgroundColorNone: "اي",
@@ -1610,3 +1612,11 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.groupBackground: "Background" => "خلفية"
 // theme.groupAppearance: "Appearance" => "مظهر"
 // theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "خلفية"
+// theme.groupAppearance: "Appearance" => "مظهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"

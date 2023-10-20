@@ -1152,7 +1152,7 @@ test("creator getMenuItems should respect property readOnly - https://github.com
   });
   let questionAdorner = new QuestionAdornerViewModel(creator, question, undefined);
   expect(questionAdorner.getActionById("isrequired")).toBeTruthy();
-  expect(questionAdorner.getActionById("isrequired").visible).toBeTruthy();
+  expect(questionAdorner.getActionById("isrequired").visible).toBeFalsy();
 });
 
 test("addQuestion into the QuestionPanelDynamic into second page", () => {

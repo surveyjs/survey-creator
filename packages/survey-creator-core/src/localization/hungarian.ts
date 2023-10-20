@@ -146,6 +146,8 @@ export var huStrings = {
     surveyJsonImportButton: "Importál",
     surveyJsonCopyButton: "Másolás a vágólapra",
     themeResetButton: "Témabeállítások visszaállítása alapértelmezettre",
+    themeResetConfirmation: "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész.",
+    themeResetConfirmationOk: "Igen, állítsa vissza a témát",
     bold: "Félkövér",
     italic: "Dőlt",
     underline: "Aláhúzott",
@@ -1088,7 +1090,7 @@ export var huStrings = {
     headerViewAdvanced: "Haladó",
     coverInheritWidthFrom: "Tartalomterület szélessége",
     coverInheritWidthFromSurvey: "Ugyanaz, mint a felmérés",
-    coverInheritWidthFromPage: "Laphoz igazítás",
+    coverInheritWidthFromContainer: "Tárolóhoz igazítás",
     coverTextAreaWidth: "Szöveg szélessége",
     coverBackgroundColorSwitch: "Háttérszín",
     coverBackgroundColorNone: "Egyik sem",
@@ -1853,3 +1855,11 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.groupBackground: "Background" => "Háttér"
 // theme.groupAppearance: "Appearance" => "Megjelenés"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Igen, állítsa vissza a témát"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Háttér"
+// theme.groupAppearance: "Appearance" => "Megjelenés"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"

@@ -146,6 +146,8 @@ var traditionalChineseTranslation = {
     surveyJsonImportButton: "進口",
     surveyJsonCopyButton: "複製到剪貼板",
     themeResetButton: "將主題設置重置為預設值",
+    themeResetConfirmation: "你真的要重置主題嗎？您的所有自定義項都將丟失。",
+    themeResetConfirmationOk: "是，重置主題",
     bold: "大膽",
     italic: "斜體的",
     underline: "下劃線",
@@ -1088,7 +1090,7 @@ var traditionalChineseTranslation = {
     headerViewAdvanced: "高深",
     coverInheritWidthFrom: "內容區域寬度",
     coverInheritWidthFromSurvey: "與調查相同",
-    coverInheritWidthFromPage: "適合頁面",
+    coverInheritWidthFromContainer: "適合容器",
     coverTextAreaWidth: "文本寬度",
     coverBackgroundColorSwitch: "背景色",
     coverBackgroundColorNone: "沒有",
@@ -1978,3 +1980,11 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.groupBackground: "Background" => "背景"
 // theme.groupAppearance: "Appearance" => "外觀"
 // theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主題嗎？您的所有自定義項都將丟失。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主題"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外觀"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "適合容器"

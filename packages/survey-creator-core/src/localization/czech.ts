@@ -146,6 +146,8 @@ export var czStrings = {
     surveyJsonImportButton: "Dovoz",
     surveyJsonCopyButton: "Zkopírovat do schránky",
     themeResetButton: "Obnovení výchozího nastavení motivu",
+    themeResetConfirmation: "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena.",
+    themeResetConfirmationOk: "Ano, resetovat motiv",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
@@ -1088,7 +1090,7 @@ export var czStrings = {
     headerViewAdvanced: "Pokročilý",
     coverInheritWidthFrom: "Šířka oblasti obsahu",
     coverInheritWidthFromSurvey: "Stejné jako průzkum",
-    coverInheritWidthFromPage: "Přizpůsobit stránce",
+    coverInheritWidthFromContainer: "Vhodné pro kontejner",
     coverTextAreaWidth: "Šířka textu",
     coverBackgroundColorSwitch: "Barva pozadí",
     coverBackgroundColorNone: "Žádný",
@@ -1248,3 +1250,9 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.groupBackground: "Background" => "Pozadí"
 // theme.groupAppearance: "Appearance" => "Vzhled"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"

@@ -146,6 +146,8 @@ export var hrStrings = {
     surveyJsonImportButton: "Uvoz",
     surveyJsonCopyButton: "Kopiraj u međuspremnik",
     themeResetButton: "Vraćanje zadanih postavki teme na zadano",
+    themeResetConfirmation: "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene.",
+    themeResetConfirmationOk: "Da, resetirajte temu",
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
@@ -1088,7 +1090,7 @@ export var hrStrings = {
     headerViewAdvanced: "Napredan",
     coverInheritWidthFrom: "Širina područja sadržaja",
     coverInheritWidthFromSurvey: "Isto kao i anketa",
-    coverInheritWidthFromPage: "Prilagodi stranici",
+    coverInheritWidthFromContainer: "Prilagodi spremniku",
     coverTextAreaWidth: "Širina teksta",
     coverBackgroundColorSwitch: "Boja pozadine",
     coverBackgroundColorNone: "Nijedan",
@@ -1693,3 +1695,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.groupBackground: "Background" => "Pozadina"
 // theme.groupAppearance: "Appearance" => "Izgled"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"

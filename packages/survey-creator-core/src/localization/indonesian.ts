@@ -146,6 +146,8 @@ export var indonesianStrings = {
     surveyJsonImportButton: "Mengimpor",
     surveyJsonCopyButton: "Salin ke papan klip",
     themeResetButton: "Setel ulang pengaturan tema ke default",
+    themeResetConfirmation: "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang.",
+    themeResetConfirmationOk: "Ya, atur ulang tema",
     bold: "Tebal",
     italic: "Miring",
     underline: "Garis Bawah",
@@ -1088,7 +1090,7 @@ export var indonesianStrings = {
     headerViewAdvanced: "Maju",
     coverInheritWidthFrom: "Lebar area konten",
     coverInheritWidthFromSurvey: "Sama seperti survei",
-    coverInheritWidthFromPage: "Paskan dengan halaman",
+    coverInheritWidthFromContainer: "Sesuai dengan kontainer",
     coverTextAreaWidth: "Lebar teks",
     coverBackgroundColorSwitch: "Warna latar belakang",
     coverBackgroundColorNone: "Tidak",
@@ -1854,3 +1856,11 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.groupBackground: "Background" => "Latar"
 // theme.groupAppearance: "Appearance" => "Rupa"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, atur ulang tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Latar"
+// theme.groupAppearance: "Appearance" => "Rupa"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"

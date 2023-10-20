@@ -146,6 +146,8 @@ export var turkishStrings = {
     surveyJsonImportButton: "Ithalat",
     surveyJsonCopyButton: "Panoya kopyala",
     themeResetButton: "Tema ayarlarını varsayılana sıfırla",
+    themeResetConfirmation: "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak.",
+    themeResetConfirmationOk: "Evet, temayı sıfırlayın",
     bold: "Kalın",
     italic: "Italik",
     underline: "Alt Çizgi",
@@ -1088,7 +1090,7 @@ export var turkishStrings = {
     headerViewAdvanced: "İleri",
     coverInheritWidthFrom: "İçerik alanı genişliği",
     coverInheritWidthFromSurvey: "Anketle aynı",
-    coverInheritWidthFromPage: "Sayfaya sığdır",
+    coverInheritWidthFromContainer: "Konteynere sığdır",
     coverTextAreaWidth: "Metin genişliği",
     coverBackgroundColorSwitch: "Arka plan rengi",
     coverBackgroundColorNone: "Hiç kimse",
@@ -1695,3 +1697,11 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.groupBackground: "Background" => "Arka plan"
 // theme.groupAppearance: "Appearance" => "Görünüş"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Evet, temayı sıfırlayın"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Arka plan"
+// theme.groupAppearance: "Appearance" => "Görünüş"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"

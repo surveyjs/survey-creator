@@ -146,6 +146,8 @@ var polishStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Kopiuj do schowka",
     themeResetButton: "Przywracanie domyślnych ustawień motywu",
+    themeResetConfirmation: "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone.",
+    themeResetConfirmationOk: "Tak, zresetuj motyw",
     bold: "Śmiały",
     italic: "Kursywa",
     underline: "Podkreślać",
@@ -1088,7 +1090,7 @@ var polishStrings = {
     headerViewAdvanced: "Zaawansowany",
     coverInheritWidthFrom: "Szerokość obszaru zawartości",
     coverInheritWidthFromSurvey: "Tak samo jak ankieta",
-    coverInheritWidthFromPage: "Dopasuj do strony",
+    coverInheritWidthFromContainer: "Pasuje do pojemnika",
     coverTextAreaWidth: "Szerokość tekstu",
     coverBackgroundColorSwitch: "Kolor tła",
     coverBackgroundColorNone: "Żaden",
@@ -1973,3 +1975,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.groupBackground: "Background" => "Tło"
 // theme.groupAppearance: "Appearance" => "Wygląd"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Tło"
+// theme.groupAppearance: "Appearance" => "Wygląd"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"

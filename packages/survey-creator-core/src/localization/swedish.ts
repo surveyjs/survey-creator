@@ -146,6 +146,8 @@ export let svStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Kopiera till Urklipp",
     themeResetButton: "Återställ temainställningarna till standard",
+    themeResetConfirmation: "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade.",
+    themeResetConfirmationOk: "Ja, återställ temat",
     bold: "Djärv",
     italic: "Kursiv",
     underline: "Understryka",
@@ -1088,7 +1090,7 @@ export let svStrings = {
     headerViewAdvanced: "Avancerad",
     coverInheritWidthFrom: "Innehållets bredd",
     coverInheritWidthFromSurvey: "Samma som undersökning",
-    coverInheritWidthFromPage: "Anpassa till sida",
+    coverInheritWidthFromContainer: "Passa till behållare",
     coverTextAreaWidth: "Textens bredd",
     coverBackgroundColorSwitch: "Bakgrundsfärg",
     coverBackgroundColorNone: "Ingen",
@@ -1877,3 +1879,11 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.groupBackground: "Background" => "Bakgrund"
 // theme.groupAppearance: "Appearance" => "Utseende"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, återställ temat"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Bakgrund"
+// theme.groupAppearance: "Appearance" => "Utseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"

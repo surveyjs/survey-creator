@@ -146,6 +146,8 @@ var frenchTranslation = {
     surveyJsonImportButton: "Importation",
     surveyJsonCopyButton: "Copier dans le Presse-papiers",
     themeResetButton: "Réinitialiser les paramètres de thème par défaut",
+    themeResetConfirmation: "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues.",
+    themeResetConfirmationOk: "Oui, réinitialisez le thème",
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
@@ -1088,7 +1090,7 @@ var frenchTranslation = {
     headerViewAdvanced: "Avancé",
     coverInheritWidthFrom: "Largeur de la zone de contenu",
     coverInheritWidthFromSurvey: "Identique à l’enquête",
-    coverInheritWidthFromPage: "Ajuster à la page",
+    coverInheritWidthFromContainer: "S’adapte au conteneur",
     coverTextAreaWidth: "Largeur du texte",
     coverBackgroundColorSwitch: "Couleur d’arrière-plan",
     coverBackgroundColorNone: "Aucun",
@@ -1759,3 +1761,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.groupBackground: "Background" => "Arrière-plan"
 // theme.groupAppearance: "Appearance" => "Apparence"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Arrière-plan"
+// theme.groupAppearance: "Appearance" => "Apparence"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"

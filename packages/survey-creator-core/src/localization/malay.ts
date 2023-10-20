@@ -146,6 +146,8 @@ export var msStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Salin ke papan keratan",
     themeResetButton: "Mengeset semula seting tema kepada lalai",
+    themeResetConfirmation: "Adakah anda benar-benar mahu menetapkan semula tema? Semua penyesuaian anda akan hilang.",
+    themeResetConfirmationOk: "Ya, tetapkan semula tema",
     bold: "Tebal",
     italic: "Condong",
     underline: "Garis bawah",
@@ -1088,7 +1090,7 @@ export var msStrings = {
     headerViewAdvanced: "Lanjutan",
     coverInheritWidthFrom: "Lebar kawasan kandungan",
     coverInheritWidthFromSurvey: "Sama seperti tinjauan",
-    coverInheritWidthFromPage: "Muat ke halaman",
+    coverInheritWidthFromContainer: "Muat ke bekas",
     coverTextAreaWidth: "Lebar teks",
     coverBackgroundColorSwitch: "Warna latar belakang",
     coverBackgroundColorNone: "Tiada",
@@ -1653,3 +1655,11 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.groupBackground: "Background" => "Latar belakang"
 // theme.groupAppearance: "Appearance" => "Penampilan"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Penerangan forecolor"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Adakah anda benar-benar mahu menetapkan semula tema? Semua penyesuaian anda akan hilang."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, tetapkan semula tema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Latar belakang"
+// theme.groupAppearance: "Appearance" => "Penampilan"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Penerangan forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Muat ke bekas"

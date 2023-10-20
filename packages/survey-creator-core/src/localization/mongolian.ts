@@ -146,6 +146,8 @@ export var mnStrings = {
     surveyJsonImportButton: "Импорт",
     surveyJsonCopyButton: "Хавчуургыг хуулах",
     themeResetButton: "Дахин сэдэвчилсэн тохиргоог default хийх",
+    themeResetConfirmation: "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно.",
+    themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     bold: "Тод",
     italic: "Налуу",
     underline: "Доогуур зураас",
@@ -1088,7 +1090,7 @@ export var mnStrings = {
     headerViewAdvanced: "Өндөр хөгжсөн",
     coverInheritWidthFrom: "Агуулгын бүсийн өргөн",
     coverInheritWidthFromSurvey: "Судалгаатай адил",
-    coverInheritWidthFromPage: "Хуудсанд тохирсон",
+    coverInheritWidthFromContainer: "Сав баглаа боодолд тохирно",
     coverTextAreaWidth: "Текстийн өргөн",
     coverBackgroundColorSwitch: "Ар талын өнгө",
     coverBackgroundColorNone: "Хэн ч биш",
@@ -1339,3 +1341,9 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.groupBackground: "Background" => "Ар талын"
 // theme.groupAppearance: "Appearance" => "Харагдах байдал"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Тийм ээ, сэдвийг дахин тохируулах"
+// theme.groupBackground: "Background" => "Ар талын"
+// theme.groupAppearance: "Appearance" => "Харагдах байдал"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Сав баглаа боодолд тохирно"

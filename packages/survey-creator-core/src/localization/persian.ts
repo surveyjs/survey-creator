@@ -146,6 +146,8 @@ var persianStrings = {
     surveyJsonImportButton: "واردات",
     surveyJsonCopyButton: "رونوشت در تخته یادداشت",
     themeResetButton: "بازنشانی تنظیمات تم به حالت پیشفرض",
+    themeResetConfirmation: "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت.",
+    themeResetConfirmationOk: "بله، موضوع را تنظیم مجدد کنید",
     bold: "پررنگ",
     italic: "مورب",
     underline: "پایین خط",
@@ -1088,7 +1090,7 @@ var persianStrings = {
     headerViewAdvanced: "پیشرفته",
     coverInheritWidthFrom: "عرض منطقه محتوا",
     coverInheritWidthFromSurvey: "همانند نظرسنجی",
-    coverInheritWidthFromPage: "متناسب با صفحه",
+    coverInheritWidthFromContainer: "مناسب برای ظرف",
     coverTextAreaWidth: "عرض متن",
     coverBackgroundColorSwitch: "رنگ پسزمینه",
     coverBackgroundColorNone: "هیچ کدام",
@@ -1638,3 +1640,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.groupBackground: "Background" => "پس زمینه"
 // theme.groupAppearance: "Appearance" => "ظاهر"
 // theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "بله، موضوع را تنظیم مجدد کنید"
+// theme.groupBackground: "Background" => "پس زمینه"
+// theme.groupAppearance: "Appearance" => "ظاهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "مناسب برای ظرف"
