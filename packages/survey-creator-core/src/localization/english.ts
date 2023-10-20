@@ -1066,6 +1066,7 @@ export var enStrings = {
     scale: "Scale",
     cornerRadius: "Corner radius",
     surveyTitle: "Survey title font",
+    surveyDescription: "Survey description font",
     pageTitle: "Page title font",
     pageDescription: "Page description font",
     boxShadowX: "X",

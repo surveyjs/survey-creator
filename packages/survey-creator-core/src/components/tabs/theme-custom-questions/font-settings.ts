@@ -69,7 +69,7 @@ ComponentCollection.Instance.add({
   },
   onCreated(question) {
     const color = question.contentPanel.getQuestionByName("color");
-    color.visible = question.name !== "surveyTitle";
+    color.visible = question.name !== "surveyTitle" && question.name !== "surveyDescription";
     const placeholderColor = question.contentPanel.getQuestionByName("placeholdercolor");
     placeholderColor.visible = question.name === "editorFont";
   },
@@ -81,7 +81,7 @@ export function fontsettingsToCssVariable(question: Question, themeCssVariables:
   Object.keys(question.value).forEach(key => {
     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
     const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
-    if (question.value[key] !== (question as Question).defaultValue[key]) {
+    if (!question.defaultValue || question.value[key] !== question.defaultValue[key]) {
       themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
     } else {
       themeCssVariables[propertyName] = undefined;
