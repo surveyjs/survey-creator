@@ -663,6 +663,10 @@ var polishStrings = {
     columnsVisibleIf: "Kolumny są widoczne, jeśli",
     rowsVisibleIf: "Wiersze są widoczne, jeśli",
     otherPlaceholder: "Symbol zastępczy obszaru komentarza",
+    signaturepad: {
+      showPlaceholder: "Pokazywanie symbolu zastępczego",
+      placeholder: "Tekst zastępczy"
+    },
     rateType: "Rodzaj stawki"
   },
   // Property values
@@ -1067,6 +1071,7 @@ var polishStrings = {
     scale: "Skala",
     cornerRadius: "Promień narożnika",
     surveyTitle: "Czcionka tytułu ankiety",
+    surveyDescription: "Czcionka opisu ankiety",
     pageTitle: "Czcionka tytułu strony",
     pageDescription: "Czcionka opisu strony",
     boxShadowX: "X",
@@ -1966,3 +1971,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.groupAppearance: "Appearance" => "Wygląd"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Pokazywanie symbolu zastępczego"
+// signaturepad.placeholder: "Placeholder text" => "Tekst zastępczy"
+// theme.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"

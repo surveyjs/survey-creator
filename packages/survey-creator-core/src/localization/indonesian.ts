@@ -663,6 +663,10 @@ export var indonesianStrings = {
     columnsVisibleIf: "Kolom terlihat jika",
     rowsVisibleIf: "Baris terlihat jika",
     otherPlaceholder: "Tempat penampung area komentar",
+    signaturepad: {
+      showPlaceholder: "Memperlihatkan tempat penampung",
+      placeholder: "Teks tempat penampung"
+    },
     rateType: "Jenis tarif"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var indonesianStrings = {
     scale: "Sisik",
     cornerRadius: "Radius sudut",
     surveyTitle: "Font judul survei",
+    surveyDescription: "Font deskripsi survei",
     pageTitle: "Font judul halaman",
     pageDescription: "Font deskripsi halaman",
     boxShadowX: "X",
@@ -1847,3 +1852,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.groupAppearance: "Appearance" => "Rupa"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Memperlihatkan tempat penampung"
+// signaturepad.placeholder: "Placeholder text" => "Teks tempat penampung"
+// theme.surveyDescription: "Survey description font" => "Font deskripsi survei"

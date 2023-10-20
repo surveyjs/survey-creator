@@ -663,6 +663,10 @@ var spanishTranslation = {
     columnsVisibleIf: "Columnas son visibles si",
     rowsVisibleIf: "Filas son visibes si",
     otherPlaceholder: "Marcador de posición del área de comentarios",
+    signaturepad: {
+      showPlaceholder: "Mostrar el marcador de posición",
+      placeholder: "Texto de marcador de posición"
+    },
     rateType: "Tipo de tarifa"
   },
   // Property values
@@ -1067,6 +1071,7 @@ var spanishTranslation = {
     scale: "Escama",
     cornerRadius: "Radio de esquina",
     surveyTitle: "Fuente del título de la encuesta",
+    surveyDescription: "Fuente de descripción de la encuesta",
     pageTitle: "Fuente del título de la página",
     pageDescription: "Fuente de descripción de la página",
     boxShadowX: "X",
@@ -1459,3 +1464,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.groupAppearance: "Appearance" => "Apariencia"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
+// lg.expressionSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar el marcador de posición"
+// signaturepad.placeholder: "Placeholder text" => "Texto de marcador de posición"
+// theme.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"

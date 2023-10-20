@@ -663,6 +663,10 @@ export var msStrings = {
     columnsVisibleIf: "Lajur kelihatan jika",
     rowsVisibleIf: "Baris boleh dilihat jika",
     otherPlaceholder: "Ruang letak komen",
+    signaturepad: {
+      showPlaceholder: "Menunjukkan ruang letak",
+      placeholder: "Teks ruang letak"
+    },
     rateType: "Jenis kadar"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var msStrings = {
     scale: "Skala",
     cornerRadius: "Jejari penjuru",
     surveyTitle: "Fon tajuk tinjauan",
+    surveyDescription: "Fon perihalan tinjauan",
     pageTitle: "Fon tajuk halaman",
     pageDescription: "Fon perihalan halaman",
     boxShadowX: "X",
@@ -1646,3 +1651,8 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.groupAppearance: "Appearance" => "Penampilan"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Penerangan forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Muat ke bekas"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Menunjukkan ruang letak"
+// signaturepad.placeholder: "Placeholder text" => "Teks ruang letak"
+// theme.surveyDescription: "Survey description font" => "Fon perihalan tinjauan"

@@ -663,6 +663,10 @@ var simplifiedChineseTranslation = {
     columnsVisibleIf: "在以下情况下，列可见",
     rowsVisibleIf: "在以下情况下，行可见",
     otherPlaceholder: "注释区占位符",
+    signaturepad: {
+      showPlaceholder: "显示占位符",
+      placeholder: "占位符文本"
+    },
     rateType: "费率类型"
   },
   // Property values
@@ -1067,6 +1071,7 @@ var simplifiedChineseTranslation = {
     scale: "规模",
     cornerRadius: "拐角半径",
     surveyTitle: "调查标题字体",
+    surveyDescription: "调查描述字体",
     pageTitle: "页面标题字体",
     pageDescription: "页面描述字体",
     boxShadowX: "X",
@@ -1835,3 +1840,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.groupAppearance: "Appearance" => "外观"
 // theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "适合容器"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "显示占位符"
+// signaturepad.placeholder: "Placeholder text" => "占位符文本"
+// theme.surveyDescription: "Survey description font" => "调查描述字体"

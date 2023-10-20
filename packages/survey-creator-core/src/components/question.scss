@@ -71,6 +71,11 @@ svc-question {
     color: $foreground;
     opacity: 0.25;
   }
+
+  .sjs_sp_placeholder {
+    user-select: all;
+    pointer-events: all;
+  }
 }
 
 .svc-question__content>div {

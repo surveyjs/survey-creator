@@ -663,6 +663,10 @@ var italianTranslation = {
     columnsVisibleIf: "Colonne visibili se",
     rowsVisibleIf: "Righe visibili se",
     otherPlaceholder: "Testo segnaposto area commenti",
+    signaturepad: {
+      showPlaceholder: "Visualizzare il segnaposto",
+      placeholder: "Testo segnaposto"
+    },
     rateType: "Tipo di tariffa"
   },
   // Property values
@@ -1067,6 +1071,7 @@ var italianTranslation = {
     scale: "Scala",
     cornerRadius: "Raggio d'angolo",
     surveyTitle: "Carattere del titolo del sondaggio",
+    surveyDescription: "Carattere della descrizione dell'indagine",
     pageTitle: "Carattere del titolo della pagina",
     pageDescription: "Carattere della descrizione della pagina",
     boxShadowX: "X",
@@ -1434,3 +1439,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.groupAppearance: "Appearance" => "Apparenza"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Adatto al contenitore"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Visualizzare il segnaposto"
+// signaturepad.placeholder: "Placeholder text" => "Testo segnaposto"
+// theme.surveyDescription: "Survey description font" => "Carattere della descrizione dell'indagine"

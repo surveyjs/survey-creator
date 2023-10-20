@@ -663,6 +663,10 @@ export var jaStrings = {
     columnsVisibleIf: "列は次の場合に表示されます。",
     rowsVisibleIf: "行は次の場合に表示されます。",
     otherPlaceholder: "コメント領域のプレースホルダー",
+    signaturepad: {
+      showPlaceholder: "プレースホルダーを表示する",
+      placeholder: "プレースホルダテキスト"
+    },
     rateType: "レートタイプ"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var jaStrings = {
     scale: "規模",
     cornerRadius: "コーナー半径",
     surveyTitle: "アンケートタイトルのフォント",
+    surveyDescription: "調査の説明フォント",
     pageTitle: "ページタイトルのフォント",
     pageDescription: "ページ記述フォント",
     boxShadowX: "X",
@@ -1693,3 +1698,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.groupAppearance: "Appearance" => "様子"
 // theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "プレースホルダーを表示する"
+// signaturepad.placeholder: "Placeholder text" => "プレースホルダテキスト"
+// theme.surveyDescription: "Survey description font" => "調査の説明フォント"

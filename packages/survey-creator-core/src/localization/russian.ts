@@ -663,6 +663,10 @@ export var ruStrings = {
     columnsVisibleIf: "Столбцы видны, если",
     rowsVisibleIf: "Строки видны, если",
     otherPlaceholder: "Заполнитель области комментариев",
+    signaturepad: {
+      showPlaceholder: "Показать заполнитель",
+      placeholder: "Замещающий текст"
+    },
     rateType: "Тип тарифа"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var ruStrings = {
     scale: "Шкала",
     cornerRadius: "Радиус угла",
     surveyTitle: "Шрифт заголовка опроса",
+    surveyDescription: "Шрифт описания опроса",
     pageTitle: "Шрифт заголовка страницы",
     pageDescription: "Шрифт описания страницы",
     boxShadowX: "X",
@@ -1754,3 +1759,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.groupAppearance: "Appearance" => "Внешность"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Показать заполнитель"
+// signaturepad.placeholder: "Placeholder text" => "Замещающий текст"
+// theme.surveyDescription: "Survey description font" => "Шрифт описания опроса"

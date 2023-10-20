@@ -663,6 +663,10 @@ export var huStrings = {
     columnsVisibleIf: "Az oszlopok akkor láthatók, ha",
     rowsVisibleIf: "A sorok akkor láthatók, ha",
     otherPlaceholder: "Megjegyzés terület helyőrzője",
+    signaturepad: {
+      showPlaceholder: "A helyőrző megjelenítése",
+      placeholder: "Helyőrző szöveg"
+    },
     rateType: "Ár típusa"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var huStrings = {
     scale: "Hangsor",
     cornerRadius: "Sarok sugara",
     surveyTitle: "Felmérés címének betűtípusa",
+    surveyDescription: "Felmérés leírásának betűtípusa",
     pageTitle: "Oldalcím betűtípusa",
     pageDescription: "Oldalleíró betűtípus",
     boxShadowX: "X",
@@ -1846,3 +1851,8 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.groupAppearance: "Appearance" => "Megjelenés"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "A helyőrző megjelenítése"
+// signaturepad.placeholder: "Placeholder text" => "Helyőrző szöveg"
+// theme.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"

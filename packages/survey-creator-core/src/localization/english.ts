@@ -664,6 +664,10 @@ export var enStrings = {
     columnsVisibleIf: "Columns are visible if",
     rowsVisibleIf: "Rows are visible if",
     otherPlaceholder: "Comment area placeholder",
+    signaturepad: {
+      showPlaceholder: "Show the placeholder",
+      placeholder: "Placeholder text"
+    },
     rateType: "Rate type" // Auto-generated string
   },
   // Property values

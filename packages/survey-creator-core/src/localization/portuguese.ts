@@ -663,6 +663,10 @@ var portugueseTranslation = {
     columnsVisibleIf: "Colunas estão visíveis se",
     rowsVisibleIf: "As linhas são visíveis se",
     otherPlaceholder: "Espaço reservado para área de comentários",
+    signaturepad: {
+      showPlaceholder: "Mostrar o espaço reservado",
+      placeholder: "Texto de espaço reservado"
+    },
     rateType: "Tipo de tarifa"
   },
   // Property values
@@ -1067,6 +1071,7 @@ var portugueseTranslation = {
     scale: "Escala",
     cornerRadius: "Raio de canto",
     surveyTitle: "Fonte do título do questionário",
+    surveyDescription: "Fonte da descrição da pesquisa",
     pageTitle: "Fonte do título da página",
     pageDescription: "Fonte da descrição da página",
     boxShadowX: "X",
@@ -1342,3 +1347,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.groupAppearance: "Appearance" => "Aparência"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste ao contêiner"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar o espaço reservado"
+// signaturepad.placeholder: "Placeholder text" => "Texto de espaço reservado"
+// theme.surveyDescription: "Survey description font" => "Fonte da descrição da pesquisa"

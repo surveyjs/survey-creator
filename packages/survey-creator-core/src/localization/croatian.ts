@@ -663,6 +663,10 @@ export var hrStrings = {
     columnsVisibleIf: "Stupci su vidljivi ako",
     rowsVisibleIf: "Reci su vidljivi ako",
     otherPlaceholder: "Rezervirano mjesto područja komentara",
+    signaturepad: {
+      showPlaceholder: "Pokaži rezervirano mjesto",
+      placeholder: "Tekst rezerviranog mjesta"
+    },
     rateType: "Vrsta stope"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var hrStrings = {
     scale: "Vaga",
     cornerRadius: "Kutni radijus",
     surveyTitle: "Font naslova upitnika",
+    surveyDescription: "Font opisa upitnika",
     pageTitle: "Font naslova stranice",
     pageDescription: "Font opisa stranice",
     boxShadowX: "X",
@@ -1686,3 +1691,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.groupAppearance: "Appearance" => "Izgled"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Pokaži rezervirano mjesto"
+// signaturepad.placeholder: "Placeholder text" => "Tekst rezerviranog mjesta"
+// theme.surveyDescription: "Survey description font" => "Font opisa upitnika"

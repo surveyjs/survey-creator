@@ -663,6 +663,10 @@ export var koreanStrings = {
     columnsVisibleIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsVisibleIf: "다음과 같은 경우 행이 표시됩니다.",
     otherPlaceholder: "주석 영역 자리 표시자",
+    signaturepad: {
+      showPlaceholder: "자리 표시자 표시",
+      placeholder: "자리 표시자 텍스트"
+    },
     rateType: "비율 유형"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var koreanStrings = {
     scale: "저울",
     cornerRadius: "코너 반경",
     surveyTitle: "설문조사 제목 글꼴",
+    surveyDescription: "설문조사 설명 글꼴",
     pageTitle: "페이지 제목 글꼴",
     pageDescription: "페이지 설명 글꼴",
     boxShadowX: "X",
@@ -1897,3 +1902,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.groupAppearance: "Appearance" => "외관"
 // theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "자리 표시자 표시"
+// signaturepad.placeholder: "Placeholder text" => "자리 표시자 텍스트"
+// theme.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"

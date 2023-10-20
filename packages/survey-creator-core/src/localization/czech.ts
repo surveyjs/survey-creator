@@ -663,6 +663,10 @@ export var czStrings = {
     columnsVisibleIf: "Sloupce jsou viditelné, pokud",
     rowsVisibleIf: "Řádky jsou viditelné, pokud",
     otherPlaceholder: "Zástupný text komentáře",
+    signaturepad: {
+      showPlaceholder: "Zobrazení zástupného symbolu",
+      placeholder: "Zástupný text"
+    },
     rateType: "Typ sazby"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var czStrings = {
     scale: "Škála",
     cornerRadius: "Poloměr rohu",
     surveyTitle: "Font nadpisu průzkumu",
+    surveyDescription: "Písmo popisu průzkumu",
     pageTitle: "Font nadpisu stránky",
     pageDescription: "Font popisu stránky",
     boxShadowX: "X",
@@ -1241,3 +1246,6 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.groupAppearance: "Appearance" => "Vzhled"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
+// signaturepad.placeholder: "Placeholder text" => "Zástupný text"
+// theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"

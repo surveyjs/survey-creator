@@ -663,6 +663,10 @@ export var nlStrings = {
     columnsVisibleIf: "Kolommen zijn zichtbaar als",
     rowsVisibleIf: "Rijen zijn zichtbaar als",
     otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
+    signaturepad: {
+      showPlaceholder: "De tijdelijke aanduiding weergeven",
+      placeholder: "Tijdelijke aanduiding voor tekst"
+    },
     rateType: "Type tarief"
   },
   // Property values
@@ -1067,6 +1071,7 @@ export var nlStrings = {
     scale: "Schub",
     cornerRadius: "Hoekradius",
     surveyTitle: "Lettertype voor enquêtetitel",
+    surveyDescription: "Lettertype met enquêtebeschrijving",
     pageTitle: "Lettertype voor paginatitel",
     pageDescription: "Lettertype paginabeschrijving",
     boxShadowX: "X",
@@ -1672,3 +1677,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.groupAppearance: "Appearance" => "Uiterlijk"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "De tijdelijke aanduiding weergeven"
+// signaturepad.placeholder: "Placeholder text" => "Tijdelijke aanduiding voor tekst"
+// theme.surveyDescription: "Survey description font" => "Lettertype met enquêtebeschrijving"
