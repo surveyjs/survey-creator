@@ -142,7 +142,12 @@ export var nlStrings = {
     translationPlaceHolder: "Vertaling...",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
+    surveyJsonExportButton: "Exporteren",
+    surveyJsonImportButton: "Importeren",
+    surveyJsonCopyButton: "Naar klembord kopiëren",
     themeResetButton: "Thema-instellingen terugzetten op de standaardinstellingen",
+    themeResetConfirmation: "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren.",
+    themeResetConfirmationOk: "Ja, reset het thema",
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
@@ -1008,6 +1013,8 @@ export var nlStrings = {
     groupGeneral: "Algemeen",
     groupAdvanced: "Geavanceerd",
     groupHeader: "Rubriek",
+    groupBackground: "Achtergrond",
+    groupAppearance: "Uiterlijk",
     themeName: "Thema",
     themeMode: "Uiterlijk van de vraag",
     themeModePanels: "Verstek",
@@ -1019,6 +1026,7 @@ export var nlStrings = {
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
     coverTitleForecolor: "Voorkleur titel",
+    coverDescriptionForecolor: "Beschrijving voorkleur",
     coverOverlapEnabled: "Overlappen",
     backgroundDimColor: "Achtergrondkleur",
     backgroundImage: "Achtergrondafbeelding",
@@ -1076,7 +1084,7 @@ export var nlStrings = {
     headerViewAdvanced: "Geavanceerd",
     coverInheritWidthFrom: "Breedte van het inhoudsgebied",
     coverInheritWidthFromSurvey: "Hetzelfde als enquête",
-    coverInheritWidthFromPage: "Aanpassen aan pagina",
+    coverInheritWidthFromContainer: "Geschikt voor containers",
     coverTextAreaWidth: "Tekstbreedte",
     coverBackgroundColorSwitch: "Achtergrondkleur",
     coverBackgroundColorNone: "Geen",
@@ -1653,3 +1661,14 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Celwaarde: {1} toewijzen aan kolom: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exporteren"
+// ed.surveyJsonImportButton: "Import" => "Importeren"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Naar klembord kopiëren"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Achtergrond"
+// theme.groupAppearance: "Appearance" => "Uiterlijk"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"

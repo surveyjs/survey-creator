@@ -142,7 +142,12 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     themeExportButton: "수출",
     themeImportButton: "수입",
+    surveyJsonExportButton: "수출",
+    surveyJsonImportButton: "수입",
+    surveyJsonCopyButton: "클립보드에 복사",
     themeResetButton: "테마 설정을 기본값으로 재설정",
+    themeResetConfirmation: "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다.",
+    themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     bold: "대담한",
     italic: "이탤릭체",
     underline: "밑줄",
@@ -1008,6 +1013,8 @@ export var koreanStrings = {
     groupGeneral: "일반",
     groupAdvanced: "고급",
     groupHeader: "머리글",
+    groupBackground: "배경",
+    groupAppearance: "외관",
     themeName: "주제",
     themeMode: "질문 모양",
     themeModePanels: "기본값",
@@ -1019,6 +1026,7 @@ export var koreanStrings = {
     primaryDarkColor: "호버",
     primaryLightColor: "선택한",
     coverTitleForecolor: "제목 forecolor",
+    coverDescriptionForecolor: "설명 forecolor",
     coverOverlapEnabled: "겹침",
     backgroundDimColor: "배경색",
     backgroundImage: "배경 이미지",
@@ -1076,7 +1084,7 @@ export var koreanStrings = {
     headerViewAdvanced: "고급",
     coverInheritWidthFrom: "콘텐츠 영역 너비",
     coverInheritWidthFromSurvey: "설문조사와 동일",
-    coverInheritWidthFromPage: "페이지에 맞추기",
+    coverInheritWidthFromContainer: "콘테이너에 적합",
     coverTextAreaWidth: "텍스트 너비",
     coverBackgroundColorSwitch: "배경색",
     coverBackgroundColorNone: "없음",
@@ -1878,3 +1886,14 @@ editorLocalization.locales["ko"] = koreanStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "셀 값 할당 : {1} 열 : {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "수출"
+// ed.surveyJsonImportButton: "Import" => "수입"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "클립보드에 복사"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "예, 테마를 재설정합니다."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "배경"
+// theme.groupAppearance: "Appearance" => "외관"
+// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"

@@ -142,7 +142,12 @@ export var turkishStrings = {
     translationPlaceHolder: "Çeviri...",
     themeExportButton: "Ihracat",
     themeImportButton: "Ithalat",
+    surveyJsonExportButton: "Ihracat",
+    surveyJsonImportButton: "Ithalat",
+    surveyJsonCopyButton: "Panoya kopyala",
     themeResetButton: "Tema ayarlarını varsayılana sıfırla",
+    themeResetConfirmation: "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak.",
+    themeResetConfirmationOk: "Evet, temayı sıfırlayın",
     bold: "Kalın",
     italic: "Italik",
     underline: "Alt Çizgi",
@@ -1008,6 +1013,8 @@ export var turkishStrings = {
     groupGeneral: "Genel",
     groupAdvanced: "İleri",
     groupHeader: "Üstbilgi",
+    groupBackground: "Arka plan",
+    groupAppearance: "Görünüş",
     themeName: "Tema",
     themeMode: "Soru görünümü",
     themeModePanels: "Temerrüt",
@@ -1019,6 +1026,7 @@ export var turkishStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Seçilmiş",
     coverTitleForecolor: "Başlık ön rengi",
+    coverDescriptionForecolor: "Açıklama ön renk",
     coverOverlapEnabled: "Örtüş",
     backgroundDimColor: "Arka plan rengi",
     backgroundImage: "Arka plan resmi",
@@ -1076,7 +1084,7 @@ export var turkishStrings = {
     headerViewAdvanced: "İleri",
     coverInheritWidthFrom: "İçerik alanı genişliği",
     coverInheritWidthFromSurvey: "Anketle aynı",
-    coverInheritWidthFromPage: "Sayfaya sığdır",
+    coverInheritWidthFromContainer: "Konteynere sığdır",
     coverTextAreaWidth: "Metin genişliği",
     coverBackgroundColorSwitch: "Arka plan rengi",
     coverBackgroundColorNone: "Hiç kimse",
@@ -1669,3 +1677,14 @@ editorLocalization.locales["tr"] = turkishStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Hücre değeri atayın: Sütuna {1}: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Ihracat"
+// ed.surveyJsonImportButton: "Import" => "Ithalat"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Panoya kopyala"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Evet, temayı sıfırlayın"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Arka plan"
+// theme.groupAppearance: "Appearance" => "Görünüş"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"

@@ -142,7 +142,12 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Dovoz",
+    surveyJsonCopyButton: "Zkopírovat do schránky",
     themeResetButton: "Obnovení výchozího nastavení motivu",
+    themeResetConfirmation: "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena.",
+    themeResetConfirmationOk: "Ano, resetovat motiv",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
@@ -1008,6 +1013,8 @@ export var czStrings = {
     groupGeneral: "Obecné",
     groupAdvanced: "Pokročilé",
     groupHeader: "Záhlaví",
+    groupBackground: "Pozadí",
+    groupAppearance: "Vzhled",
     themeName: "Motivy",
     themeMode: "Režimy",
     themeModePanels: "Panely",
@@ -1019,6 +1026,7 @@ export var czStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
     coverTitleForecolor: "Nadpis křestní barvy",
+    coverDescriptionForecolor: "Popis předbarvení",
     coverOverlapEnabled: "Překrytí",
     backgroundDimColor: "Barva pozadí",
     backgroundImage: "Obrázek na pozadí",
@@ -1076,7 +1084,7 @@ export var czStrings = {
     headerViewAdvanced: "Pokročilý",
     coverInheritWidthFrom: "Šířka oblasti obsahu",
     coverInheritWidthFromSurvey: "Stejné jako průzkum",
-    coverInheritWidthFromPage: "Přizpůsobit stránce",
+    coverInheritWidthFromContainer: "Vhodné pro kontejner",
     coverTextAreaWidth: "Šířka textu",
     coverBackgroundColorSwitch: "Barva pozadí",
     coverBackgroundColorNone: "Žádný",
@@ -1224,3 +1232,12 @@ editorLocalization.locales["cs"] = czStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Přiřaďte hodnotu buňky: {1} sloupci: {0}"
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Dovoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Zkopírovat do schránky"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"

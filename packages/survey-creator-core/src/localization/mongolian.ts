@@ -142,7 +142,12 @@ export var mnStrings = {
     translationPlaceHolder: "Орчуулга...",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
+    surveyJsonExportButton: "Экспорт",
+    surveyJsonImportButton: "Импорт",
+    surveyJsonCopyButton: "Хавчуургыг хуулах",
     themeResetButton: "Дахин сэдэвчилсэн тохиргоог default хийх",
+    themeResetConfirmation: "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно.",
+    themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     bold: "Тод",
     italic: "Налуу",
     underline: "Доогуур зураас",
@@ -1008,6 +1013,8 @@ export var mnStrings = {
     groupGeneral: "Ерөнхий",
     groupAdvanced: "Өндөр хөгжсөн",
     groupHeader: "Толгойлогч",
+    groupBackground: "Ар талын",
+    groupAppearance: "Харагдах байдал",
     themeName: "Сэдэв",
     themeMode: "Асуулт хариултын төрх",
     themeModePanels: "Дефолт",
@@ -1019,6 +1026,7 @@ export var mnStrings = {
     primaryDarkColor: "Ховер",
     primaryLightColor: "Сонгосон",
     coverTitleForecolor: "Нүүр Forecolor",
+    coverDescriptionForecolor: "Дүрслэлийн форс",
     coverOverlapEnabled: "Давхар",
     backgroundDimColor: "Ар талын өнгө",
     backgroundImage: "Ар талын зураг",
@@ -1076,7 +1084,7 @@ export var mnStrings = {
     headerViewAdvanced: "Өндөр хөгжсөн",
     coverInheritWidthFrom: "Агуулгын бүсийн өргөн",
     coverInheritWidthFromSurvey: "Судалгаатай адил",
-    coverInheritWidthFromPage: "Хуудсанд тохирсон",
+    coverInheritWidthFromContainer: "Сав баглаа боодолд тохирно",
     coverTextAreaWidth: "Текстийн өргөн",
     coverBackgroundColorSwitch: "Ар талын өнгө",
     coverBackgroundColorNone: "Хэн ч биш",
@@ -1315,3 +1323,12 @@ editorLocalization.locales["mn"] = mnStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "үнэ цэнийг даалгах нь: {1} асуулт: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "баганын эсийн үнэ цэнийг дахин тогтоох: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "эсийн үнэ цэнийг хуваарил: {1} багана: {0}"
+// ed.surveyJsonExportButton: "Export" => "Экспорт"
+// ed.surveyJsonImportButton: "Import" => "Импорт"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Хавчуургыг хуулах"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Тийм ээ, сэдвийг дахин тохируулах"
+// theme.groupBackground: "Background" => "Ар талын"
+// theme.groupAppearance: "Appearance" => "Харагдах байдал"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Сав баглаа боодолд тохирно"

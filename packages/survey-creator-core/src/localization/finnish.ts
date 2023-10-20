@@ -142,7 +142,12 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
+    surveyJsonExportButton: "Vienti",
+    surveyJsonImportButton: "Tuoda",
+    surveyJsonCopyButton: "Kopioi leikepöydälle",
     themeResetButton: "Palauta teema-asetukset oletusasetuksiin",
+    themeResetConfirmation: "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään.",
+    themeResetConfirmationOk: "Kyllä, nollaa teema",
     bold: "Lihavoitu",
     italic: "Kursiivi",
     underline: "Alleviivaa",
@@ -1008,6 +1013,8 @@ export var fiStrings = {
     groupGeneral: "Yleiset",
     groupAdvanced: "Edistynyt",
     groupHeader: "Otsikko",
+    groupBackground: "Tausta",
+    groupAppearance: "Ulkonäkö",
     themeName: "Teema",
     themeMode: "Kysymyksen ulkonäkö",
     themeModePanels: "Laiminlyönti",
@@ -1019,6 +1026,7 @@ export var fiStrings = {
     primaryDarkColor: "Häilyä",
     primaryLightColor: "Valittu",
     coverTitleForecolor: "Otsikon etuväri",
+    coverDescriptionForecolor: "Kuvaus etuväri",
     coverOverlapEnabled: "Limittyä",
     backgroundDimColor: "Taustaväri",
     backgroundImage: "Taustakuvan",
@@ -1076,7 +1084,7 @@ export var fiStrings = {
     headerViewAdvanced: "Edistynyt",
     coverInheritWidthFrom: "Sisältöalueen leveys",
     coverInheritWidthFromSurvey: "Sama kuin kyselyssä",
-    coverInheritWidthFromPage: "Sovita sivulle",
+    coverInheritWidthFromContainer: "Sovita konttiin",
     coverTextAreaWidth: "Tekstin leveys",
     coverBackgroundColorSwitch: "Taustaväri",
     coverBackgroundColorNone: "Ei lainkaan",
@@ -1673,3 +1681,14 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Määritä solun arvo: {1} sarakkeeseen: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Vienti"
+// ed.surveyJsonImportButton: "Import" => "Tuoda"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopioi leikepöydälle"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Kyllä, nollaa teema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Tausta"
+// theme.groupAppearance: "Appearance" => "Ulkonäkö"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Sovita konttiin"

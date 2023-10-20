@@ -142,7 +142,12 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
+    surveyJsonExportButton: "تصدير",
+    surveyJsonImportButton: "استورد",
+    surveyJsonCopyButton: "نسخ إلى الحافظة",
     themeResetButton: "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي",
+    themeResetConfirmation: "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك.",
+    themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -1008,6 +1013,8 @@ export var arStrings = {
     groupGeneral: "عام",
     groupAdvanced: "متقدم",
     groupHeader: "راس",
+    groupBackground: "خلفية",
+    groupAppearance: "مظهر",
     themeName: "موضوع",
     themeMode: "مظهر السؤال",
     themeModePanels: "افتراضي",
@@ -1019,6 +1026,7 @@ export var arStrings = {
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
     coverTitleForecolor: "اللون الأمامي للعنوان",
+    coverDescriptionForecolor: "وصف التلوين الأمامي",
     coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
     backgroundImage: "صورة الخلفية",
@@ -1076,7 +1084,7 @@ export var arStrings = {
     headerViewAdvanced: "متقدم",
     coverInheritWidthFrom: "عرض منطقة المحتوى",
     coverInheritWidthFromSurvey: "نفس المسح",
-    coverInheritWidthFromPage: "ملائمة للصفحة",
+    coverInheritWidthFromContainer: "يصلح للحاوية",
     coverTextAreaWidth: "عرض النص",
     coverBackgroundColorSwitch: "لون الخلفية",
     coverBackgroundColorNone: "اي",
@@ -1584,3 +1592,14 @@ editorLocalization.locales["ar"] = arStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "تعيين قيمة الخلية: {1} إلى العمود: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "تصدير"
+// ed.surveyJsonImportButton: "Import" => "استورد"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "نسخ إلى الحافظة"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "خلفية"
+// theme.groupAppearance: "Appearance" => "مظهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"

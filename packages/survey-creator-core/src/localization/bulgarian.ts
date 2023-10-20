@@ -142,7 +142,12 @@ export var bgStrings = {
     translationPlaceHolder: "Превод...",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
+    surveyJsonExportButton: "Износ",
+    surveyJsonImportButton: "Внос",
+    surveyJsonCopyButton: "Копиране в системния буфер",
     themeResetButton: "Връщане на настройките на тема в начално състояние по подразбиране",
+    themeResetConfirmation: "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени.",
+    themeResetConfirmationOk: "Да, нулирайте темата",
     bold: "Удебелен",
     italic: "Курсив",
     underline: "Подчертан",
@@ -1008,6 +1013,8 @@ export var bgStrings = {
     groupGeneral: "Общ",
     groupAdvanced: "Разширен",
     groupHeader: "Заглавка",
+    groupBackground: "Фон",
+    groupAppearance: "Външен вид",
     themeName: "Тема",
     themeMode: "Режими",
     themeModePanels: "Панели",
@@ -1019,6 +1026,7 @@ export var bgStrings = {
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
     coverTitleForecolor: "Цвят на предния план на заглавието",
+    coverDescriptionForecolor: "Описание цвят на предния цвят",
     coverOverlapEnabled: "Припокриване",
     backgroundDimColor: "Цвят на фона",
     backgroundImage: "Фоново изображение",
@@ -1076,7 +1084,7 @@ export var bgStrings = {
     headerViewAdvanced: "Напреднал",
     coverInheritWidthFrom: "Ширина на областта на съдържанието",
     coverInheritWidthFromSurvey: "Същото като проучването",
-    coverInheritWidthFromPage: "Побери в страницата",
+    coverInheritWidthFromContainer: "Побиране в контейнера",
     coverTextAreaWidth: "Ширина на текста",
     coverBackgroundColorSwitch: "Цвят на фона",
     coverBackgroundColorNone: "Никой",
@@ -1221,3 +1229,12 @@ editorLocalization.locales["bg"] = bgStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "присвояване на стойност: {1} на въпрос: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Нулиране на стойността на клетката за колона: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвояване на стойност на клетка: {1} на колона: {0}"
+// ed.surveyJsonExportButton: "Export" => "Износ"
+// ed.surveyJsonImportButton: "Import" => "Внос"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Копиране в системния буфер"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, нулирайте темата"
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Външен вид"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"

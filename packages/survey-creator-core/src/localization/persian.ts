@@ -142,7 +142,12 @@ var persianStrings = {
     translationPlaceHolder: "در حال ترجمه...",
     themeExportButton: "صادرات",
     themeImportButton: "واردات",
+    surveyJsonExportButton: "صادرات",
+    surveyJsonImportButton: "واردات",
+    surveyJsonCopyButton: "رونوشت در تخته یادداشت",
     themeResetButton: "بازنشانی تنظیمات تم به حالت پیشفرض",
+    themeResetConfirmation: "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت.",
+    themeResetConfirmationOk: "بله، موضوع را تنظیم مجدد کنید",
     bold: "پررنگ",
     italic: "مورب",
     underline: "پایین خط",
@@ -1008,6 +1013,8 @@ var persianStrings = {
     groupGeneral: "عمومی",
     groupAdvanced: "پیشرفته",
     groupHeader: "هدر",
+    groupBackground: "پس زمینه",
+    groupAppearance: "ظاهر",
     themeName: "تم",
     themeMode: "ظاهر سوال",
     themeModePanels: "پیش فرض",
@@ -1019,6 +1026,7 @@ var persianStrings = {
     primaryDarkColor: "شناور",
     primaryLightColor: "انتخاب",
     coverTitleForecolor: "پیش زمینه عنوانcolor",
+    coverDescriptionForecolor: "توصیف پیشرنگ",
     coverOverlapEnabled: "همپوشانی",
     backgroundDimColor: "رنگ پسزمینه",
     backgroundImage: "تصویر زمینه",
@@ -1076,7 +1084,7 @@ var persianStrings = {
     headerViewAdvanced: "پیشرفته",
     coverInheritWidthFrom: "عرض منطقه محتوا",
     coverInheritWidthFromSurvey: "همانند نظرسنجی",
-    coverInheritWidthFromPage: "متناسب با صفحه",
+    coverInheritWidthFromContainer: "مناسب برای ظرف",
     coverTextAreaWidth: "عرض متن",
     coverBackgroundColorSwitch: "رنگ پسزمینه",
     coverBackgroundColorNone: "هیچ کدام",
@@ -1614,3 +1622,12 @@ editorLocalization.locales["fa"] = persianStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "اختصاص مقدار: {1} به سوال: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "تنظیم مجدد مقدار سلول برای ستون: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "اختصاص مقدار سلول: {1} به ستون: {0}"
+// ed.surveyJsonExportButton: "Export" => "صادرات"
+// ed.surveyJsonImportButton: "Import" => "واردات"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "رونوشت در تخته یادداشت"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "بله، موضوع را تنظیم مجدد کنید"
+// theme.groupBackground: "Background" => "پس زمینه"
+// theme.groupAppearance: "Appearance" => "ظاهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "مناسب برای ظرف"

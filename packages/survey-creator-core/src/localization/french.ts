@@ -142,7 +142,12 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
+    surveyJsonExportButton: "Exportation",
+    surveyJsonImportButton: "Importation",
+    surveyJsonCopyButton: "Copier dans le Presse-papiers",
     themeResetButton: "Réinitialiser les paramètres de thème par défaut",
+    themeResetConfirmation: "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues.",
+    themeResetConfirmationOk: "Oui, réinitialisez le thème",
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
@@ -1008,6 +1013,8 @@ var frenchTranslation = {
     groupGeneral: "Généralités",
     groupAdvanced: "Avancé",
     groupHeader: "En-tête",
+    groupBackground: "Arrière-plan",
+    groupAppearance: "Apparence",
     themeName: "Thème",
     themeMode: "Apparence de la question",
     themeModePanels: "Par défaut",
@@ -1019,6 +1026,7 @@ var frenchTranslation = {
     primaryDarkColor: "Au survol",
     primaryLightColor: "Sélectionné",
     coverTitleForecolor: "Précouleur du titre",
+    coverDescriptionForecolor: "Description de la couleur avant",
     coverOverlapEnabled: "Chevauchement",
     backgroundDimColor: "Couleur d’arrière-plan",
     backgroundImage: "Image d’arrière-plan",
@@ -1076,7 +1084,7 @@ var frenchTranslation = {
     headerViewAdvanced: "Avancé",
     coverInheritWidthFrom: "Largeur de la zone de contenu",
     coverInheritWidthFromSurvey: "Identique à l’enquête",
-    coverInheritWidthFromPage: "Ajuster à la page",
+    coverInheritWidthFromContainer: "S’adapte au conteneur",
     coverTextAreaWidth: "Largeur du texte",
     coverBackgroundColorSwitch: "Couleur d’arrière-plan",
     coverBackgroundColorNone: "Aucun",
@@ -1733,3 +1741,14 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Affecter la valeur de la cellule : {1} à la colonne : {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exportation"
+// ed.surveyJsonImportButton: "Import" => "Importation"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Copier dans le Presse-papiers"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Arrière-plan"
+// theme.groupAppearance: "Appearance" => "Apparence"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"

@@ -142,7 +142,12 @@ export let svStrings = {
     translationPlaceHolder: "Översättning...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Export",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopiera till Urklipp",
     themeResetButton: "Återställ temainställningarna till standard",
+    themeResetConfirmation: "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade.",
+    themeResetConfirmationOk: "Ja, återställ temat",
     bold: "Djärv",
     italic: "Kursiv",
     underline: "Understryka",
@@ -1008,6 +1013,8 @@ export let svStrings = {
     groupGeneral: "Allmänt",
     groupAdvanced: "Avancerad",
     groupHeader: "Rubrik",
+    groupBackground: "Bakgrund",
+    groupAppearance: "Utseende",
     themeName: "Tema",
     themeMode: "Fråga utseende",
     themeModePanels: "Standard",
@@ -1019,6 +1026,7 @@ export let svStrings = {
     primaryDarkColor: "Sväva",
     primaryLightColor: "Vald",
     coverTitleForecolor: "Titel förfärg",
+    coverDescriptionForecolor: "Beskrivning förfärg",
     coverOverlapEnabled: "Överlappa",
     backgroundDimColor: "Bakgrundsfärg",
     backgroundImage: "Bakgrundsbild",
@@ -1076,7 +1084,7 @@ export let svStrings = {
     headerViewAdvanced: "Avancerad",
     coverInheritWidthFrom: "Innehållets bredd",
     coverInheritWidthFromSurvey: "Samma som undersökning",
-    coverInheritWidthFromPage: "Anpassa till sida",
+    coverInheritWidthFromContainer: "Passa till behållare",
     coverTextAreaWidth: "Textens bredd",
     coverBackgroundColorSwitch: "Bakgrundsfärg",
     coverBackgroundColorNone: "Ingen",
@@ -1851,3 +1859,14 @@ editorLocalization.locales["sv"] = svStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilldela cellvärde: {1} till kolumn: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Export"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiera till Urklipp"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, återställ temat"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Bakgrund"
+// theme.groupAppearance: "Appearance" => "Utseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
