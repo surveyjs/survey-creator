@@ -50,7 +50,7 @@ export function elementSettingsToCssVariable(question: Question, themeCssVariabl
     if (key === "corner") return;
 
     const propertyName = `--sjs-${question.name.toLocaleLowerCase()}-${key}`;
-    if (question.value[key] !== (question as Question).defaultValue[key]) {
+    if (!question.defaultValue || question.value[key] !== (question as Question).defaultValue[key]) {
       themeCssVariables[propertyName] = question.value[key];
     } else {
       themeCssVariables[propertyName] = undefined;
