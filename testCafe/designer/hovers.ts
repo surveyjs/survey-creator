@@ -120,7 +120,7 @@ test("Question hover and events", async t => {
 
   await ClientFunction(() => {
     window["creator"].__creatorNotAllowDelete = true;
-    window["creator"].updateSelectedElement();
+    window["creator"].refreshDesigner();
   })();
 
   await t

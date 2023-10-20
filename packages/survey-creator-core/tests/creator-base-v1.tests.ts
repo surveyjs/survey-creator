@@ -942,7 +942,7 @@ test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () =>
   };
   let model;
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.reason === "condition-builder") {
+    if (options.reason === "condition-builder") {
       model = options.model;
     }
   });
@@ -1152,7 +1152,7 @@ test("creator getMenuItems should respect property readOnly - https://github.com
   });
   let questionAdorner = new QuestionAdornerViewModel(creator, question, undefined);
   expect(questionAdorner.getActionById("isrequired")).toBeTruthy();
-  expect(questionAdorner.getActionById("isrequired").visible).toBeTruthy();
+  expect(questionAdorner.getActionById("isrequired").visible).toBeFalsy();
 });
 
 test("addQuestion into the QuestionPanelDynamic into second page", () => {

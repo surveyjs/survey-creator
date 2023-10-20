@@ -2520,10 +2520,9 @@ export class CreatorBase extends Base
   public set selectedElement(val: Base) {
     this.selectElement(val);
   }
-  public updateSelectedElement(): void {
-    const prevSelected = this.selectedElement;
-    this.selectElement(undefined);
-    this.selectElement(prevSelected);
+  public refreshDesigner(): void {
+    if (this.activeTab !== "designer") return;
+    this.changeText(this.text);
   }
   public deleteCurrentObject() {
     this.deleteCurrentElement();
