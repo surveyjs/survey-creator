@@ -81,7 +81,7 @@ export function fontsettingsToCssVariable(question: Question, themeCssVariables:
   Object.keys(question.value).forEach(key => {
     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
     const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
-    if (question.value[key] !== question.defaultValue[key]) {
+    if (!question.defaultValue || question.value[key] !== question.defaultValue[key]) {
       themeCssVariables[propertyName] = question.value[key] + (innerQ.unit?.toString() || "");
     } else {
       themeCssVariables[propertyName] = undefined;

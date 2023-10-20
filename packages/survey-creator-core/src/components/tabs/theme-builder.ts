@@ -852,6 +852,21 @@ export class ThemeBuilder extends Base {
     }
   }
 
+  private getDefaultTitleSetting(isAdvanced?: boolean) {
+    const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
+    if(isAdvanced) {
+      result["color"] = "rgba(0, 0, 0, 0.91)";
+    }
+    return result;
+  }
+  private getDefaultDescriptionSetting(isAdvanced?: boolean) {
+    const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
+    if(isAdvanced) {
+      result["color"] = "rgba(0, 0, 0, 0.45)";
+    }
+    return result;
+  }
+
   private getThemeEditorSurveyJSON() {
     const themeEditorSurveyJSON = {
       "clearInvisibleValues": "none",
@@ -929,10 +944,10 @@ export class ThemeBuilder extends Base {
                     "descriptionPositionY": "bottom",
                     "textAreaWidth": 512,
                     "height": 256,
-                    surveyTitle: { family: settings.theme.fontFamily, weight: "700", size: 32 },
-                    surveyDescription: { family: settings.theme.fontFamily, weight: "400", size: 16 },
-                    headerTitle: { family: settings.theme.fontFamily, weight: "700", color: "rgba(0, 0, 0, 0.91)", size: 32 },
-                    headerDescription: { family: settings.theme.fontFamily, weight: "400", color: "rgba(0, 0, 0, 0.45)", size: 16 }
+                    surveyTitle: this.getDefaultTitleSetting(),
+                    surveyDescription: this.getDefaultDescriptionSetting(),
+                    headerTitle: this.getDefaultTitleSetting(true),
+                    headerDescription: this.getDefaultDescriptionSetting(true)
                   }
                 ],
                 "templateElements": [
@@ -964,7 +979,8 @@ export class ThemeBuilder extends Base {
                         name: "surveyTitle",
                         title: getLocString("theme.surveyTitle"),
                         visibleIf: "{panel.headerView} = 'basic'",
-                        descriptionLocation: "hidden"
+                        descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultTitleSetting(),
                       },
                       {
                         type: "fontSettings",
@@ -972,6 +988,7 @@ export class ThemeBuilder extends Base {
                         title: getLocString("theme.surveyDescription"),
                         visibleIf: "{panel.headerView} = 'basic'",
                         descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultDescriptionSetting()
                       },
                       {
                         type: "spinedit",
@@ -1066,13 +1083,15 @@ export class ThemeBuilder extends Base {
                         type: "fontSettings",
                         name: "headerTitle",
                         title: getLocString("theme.surveyTitle"),
-                        descriptionLocation: "hidden"
+                        descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultTitleSetting(true)
                       },
                       {
                         type: "fontSettings",
                         name: "headerDescription",
                         title: getLocString("theme.surveyDescription"),
                         descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultDescriptionSetting(true)
                       },
                       {
                         type: "boolean",
