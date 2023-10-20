@@ -1018,7 +1018,7 @@ export var ruStrings = {
     groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
     groupBackground: "Фон",
-    groupAppearance: "Внешность",
+    groupAppearance: "Внешний вид",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
