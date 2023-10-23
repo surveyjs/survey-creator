@@ -61,6 +61,7 @@ const jsonMulti = {
 
 test("Rating adorners", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
     await setJSON(json);
 
     const question = Selector("div[data-name=question1]");
