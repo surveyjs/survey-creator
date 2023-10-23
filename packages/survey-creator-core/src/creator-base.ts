@@ -3088,7 +3088,7 @@ export class CreatorBase extends Base
     collection: Array<Base>,
     item: Base
   ): boolean {
-    if((<any>item).isPage && !this.checkOnElementDeleting(item)) return false;
+    if((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
     if (this.onCollectionItemDeleting.isEmpty) return true;
     const options = {
       obj: obj,
