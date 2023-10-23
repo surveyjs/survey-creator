@@ -324,3 +324,43 @@ test("empty survey", async (t) => {
     await takeElementScreenshot("test-tab-empty-survey.png", simulator, t, comparer);
   });
 });
+test("dropdown popup in simulator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const simulator = Selector(".svd-simulator-content");
+    await t.resizeWindow(1800, 600);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "nps-score",
+              "rateCount": 11,
+              "rateMin": 0,
+              "rateMax": 10,
+              "minRateDescription": "Very unlikely",
+              "maxRateDescription": "Very likely"
+            },
+            {
+              "type": "comment",
+              "name": "disappointing-experience",
+              "visible": false,
+              "visibleIf": "{nps-score} <= 5",
+              "maxLength": 300
+            }
+          ]
+        }
+      ]
+    });
+
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(Selector('[title="Select device type"]'));
+    await t.click(Selector("span").withText("iPhone X"));
+    await t.click(Selector('[data-name="nps-score"]'));
+    await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
+    await t.click(Selector('[data-name="nps-score"]'));
+    await takeElementScreenshot("test-tab-opened-dropdown.png", simulator, t, comparer);
+  });
+});
