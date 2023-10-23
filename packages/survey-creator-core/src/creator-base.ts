@@ -195,10 +195,10 @@ export class CreatorBase extends Base
   }
   public get haveCommercialLicense(): boolean {
     if (!!hasLicense && hasLicense(1)) return true;
+    return this.getPropertyValue("haveCommercialLicense", false);
   }
   public set haveCommercialLicense(val: boolean) {
-    // eslint-disable-next-line no-console
-    console.error("Please use setLicenseKey function. Go to https://surveyjs.io/remove-alert-banner for more information");
+    this.setPropertyValue("haveCommercialLicense", val);
   }
   public get licenseText(): string {
     return this.getLocString("survey.license");

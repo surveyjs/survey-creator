@@ -37,6 +37,7 @@ export interface ICreatorOptions {
    * Default value: `false`
    */
   showTranslationTab?: boolean;
+  haveCommercialLicense?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.
    *
