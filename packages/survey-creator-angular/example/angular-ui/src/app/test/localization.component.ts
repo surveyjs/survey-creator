@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { CreatorBase, localization } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
+import * as Survey from "survey-core";
+
+Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
 
 @Component({
   selector: "test-by-page",
@@ -12,6 +15,6 @@ export class TestLocalizationComponent extends TestDefaultComponent {
     const loc = localization.getLocale("de");
     loc.ed.logic = "Miner Logik";
     localization.currentLocale = "de";
-    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
+    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
   }
 }

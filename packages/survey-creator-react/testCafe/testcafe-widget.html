@@ -37,6 +37,7 @@
   <script src="https://unpkg.com/inputmask@5.0.3/dist/inputmask.js"></script>
   <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
   <script src="https://unpkg.com/jquery-bar-rating"></script>
+  <script src="./sc.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- Themes -->
   <link rel="stylesheet" href="https://unpkg.com/jquery-bar-rating@1.2.2/dist/themes/bars-1to10.css" />
@@ -57,7 +58,7 @@
   <div id="survey-creator" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"></div>
 </body>
 <script>
-  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
+  const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
   window.creator = creator;
   ReactDOM.render(
     React.createElement(
