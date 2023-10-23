@@ -38,6 +38,9 @@ import ColorItem from "./custom-questions/ColorItem.vue";
 import File from "./custom-questions/File.vue";
 import SpinEditor from "./custom-questions/SpinEditor.vue";
 import TextWithReset from "./custom-questions/TextWithReset.vue";
+import { editableStringRendererName } from "survey-creator-core";
+
+import StringEditor from "./StringEditor.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -83,6 +86,8 @@ function registerComponents(app: App) {
   app.component("svc-tab-logic", Logic);
 
   app.component("svc-tab-theme", Theme);
+
+  app.component(editableStringRendererName, StringEditor);
 }
 
 export const surveyCreatorPlugin = {
