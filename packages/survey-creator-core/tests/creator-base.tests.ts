@@ -3375,7 +3375,8 @@ test("Test options, setting some of them can generate errors", () => {
     showPagesToolbox: true,
     allowControlSurveyTitleVisibility: false,
     showState: true,
-    showTitle: true
+    showTitle: true,
+    haveCommercialLicense: true
   };
   const creator = new CreatorTester(options);
   expect(creator.sidebar.visible).toBeTruthy();
