@@ -932,15 +932,6 @@ export class CreatorBase extends Base
    * A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
   public onTranslationStringVisibility: CreatorEvent = new CreatorEvent();
-  /**
-   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
-   *
-   * The event handler accepts the following arguments:
-   *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.locale` - the locale name, like 'en', 'de' and so on.
-   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
-   */
   public onTranslationLocaleInitiallySelected: CreatorEvent = new CreatorEvent();
   /**
    * An event that is raised before a translated string is imported from a CSV file. Use this event to modify the string to be imported or cancel the import.
