@@ -380,14 +380,22 @@ export class CreatorBase extends Base
   public onElementDeleting: CreatorEvent = new CreatorEvent();
 
   /**
-   * The event is called on setting a readOnly property of the property editor. By default the property.readOnly property is used.
-   * You may changed it and make the property editor read only or enabled for a particular object.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object, Survey, Page, Panel or Question
-   *- options.property the object property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties.
-   *- options.readOnly a boolean value. It has value equals to options.readOnly property by default. You may change it.
-   *- options.parentObj the parent object. It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is a question (dropdown, radigroup, checkbox, matrices and so on).
-   *- options.parentProperty the parent property (Survey.JsonObjectProperty object). It is null for non-nested properties. It is not null for itemvalue or column objects. The parent object is choices, columns, rows, triggers and so on.
+   * An event that is raised when Survey Creator sets the read-only status for a survey element property. Use this event to change the read-only status for individual properties.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.property`: `JsonObjectProperty`\
+   * A property whose read-only status you can change.
+   * - `options.parentProperty`: `JsonObjectProperty`\
+   * A property that nests `options.property` (`choices` for an item value, `columns` for a matrix column, `rows` for a matrix row etc.). `options.parentProperty` has a value only for nested properties.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (question, panel, page, or the survey itself) for which you can change the read-only status.
+   * - `options.parentObj`: `any`\
+   * A survey element that contains `options.parentProperty`. `options.parentObj` has a value only for nested properties.
+   * - `options.readOnly`: `boolean`\
+   * A Boolean value that specifies the property's read-only status.
    */
   public onGetPropertyReadOnly: CreatorEvent = new CreatorEvent();
 
@@ -402,14 +410,16 @@ export class CreatorBase extends Base
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    * 
-   * Handle this event to replace survey element names in the UI with custom display texts.
-   * If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
+   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
    * 
-   * The event handler accepts the following arguments:
+   * Parameters:
    * 
-   * - `sender`- A Survey Creator instance that raised the event.
-   * - `options.obj` - The instance of a survey element (survey, page, question, or panel) whose name has been requested.
-   * - `options.area` - A Survey Creator UI element that requests the display name.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.element`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, question, or panel) whose name has been requested.
+   * - `options.area`: `string`\
+   * A Survey Creator UI element that requests the display name. Contains one of the following values:
    *   - `"page-selector"` - Page selector on the design surface
    *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
    *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
@@ -420,15 +430,8 @@ export class CreatorBase extends Base
    *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid
    *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid
    *   - `"translation-tab"` - Translation tab
-   * - `options.displayName` - Modify this property to set a custom display text for the survey element.
-   * - `options.reason` - Obsolete. Use the `options.area` property instead.
-   *   - `"condition"` - Use the `"condition-editor"` value of `options.area` instead.
-   *   - `"survey-tester"` - Use the `"preview-tab:page-list"` value of `options.area` instead.
-   *   - `"survey-tester-selected"` - Use the `"preview-tab:selected-page"` value of `options.area` instead.
-   *   - `"survey-translation"` - Use the `"translation-tab"` value of `options.area` instead.
-   *   - `"property-editor"` - Use the `"property-grid:property-editor"` value of `options.area` instead.
-   *   - `"property-grid"` - Use the `"property-grid-header:element-list"` value of `options.area` instead.
-   *   - `"property-grid-title"` - Use the `"property-grid-header:selected-element"` value of `options.area` instead.
+   * - `options.displayName`: `string`\
+   * A survey element's display text. Modify this property to set a custom display text for the survey element.
    */
   public onGetObjectDisplayName: CreatorEvent = new CreatorEvent();
 
@@ -608,36 +611,56 @@ export class CreatorBase extends Base
    */
   public onGenerateNewName: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to show a custom error in the Question Editor on pressing Apply or OK buttons, if the values are not set correctly. The error will be displayed under the property editor.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object which property is edited in the Property Editor.
-   *- options.propertyName  the name of the edited property.
-   *- options.value the property value.
-   *- options.error the error you want to display. Set the empty string (the default value) or null if there is no errors.
+   * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) whose property is being validated.
+   * - `options.propertyName`: `string`\
+   * The name of a property being validated.
+   * - `options.value`: `any`\
+   * The property value.
+   * - `options.error`: `string`\
+   * An error message you want to display. If `options.value` is valid, this parameter contains an empty string.
    * @see onPropertyValueChanging
+   * @see onSurveyPropertyValueChanged
    */
   public onPropertyValidationCustomError: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised each time a user modifies a survey object property. Use this event to validate or correct a property value while the user enters it.
+   * An event that is raised each time a user modifies a survey element property. Use this event to validate or correct a property value while the user changes it.
    *
-   * The event handler accepts the following arguments:
+   * Parameters:
    *
-   * - `sender`- A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (question or panel) whose property is being edited.
-   * - `options.propertyName` - The name of the property.
-   * - `options.value` - An old property value.
-   * - `options.newValue` - A new property value. Specify this field if you want to override the entered value.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   * - `options.propertyName`: `string`\
+   * The name of a property being modified.
+   * - `options.value`: `any`\
+   * An old property value.
+   * - `options.newValue`: `any`\
+   * A new property value. Modify this parameter if you want to override the property value.
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */
   public onPropertyValueChanging: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised after a property in a survey object has changed.
+   * An event that is raised after a survey element property has changed.
    *
-   * - `sender`- A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (question or panel) whose property has changed.
-   * - `options.propertyName` - The name of the property.
-   * - `options.value` - A new property value.
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (question, panel, page, or the survey itself) whose property is has changed.
+   * - `options.propertyName`: `string`\
+   * The name of the modified property.
+   * - `options.value`: `any`\
+   * A new property value.
    * @see onPropertyValidationCustomError
    * @see onPropertyValueChanging
    */
@@ -666,13 +689,13 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.questionName`: `String`\
+   * - `options.questionName`: `string`\
    * The name of a question for which conditions are displayed.
-   * - `options.questionName`: `String`\
+   * - `options.questionName`: `string`\
    * The name of a question for which conditions are displayed.
    * - `options.operator`: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`\
    * A condition opeator for which the event is raised.
-   * - `options.show`: `Boolean`\
+   * - `options.show`: `boolean`\
    * A Boolean property that you can set to `false` if you want to hide the condition operator.
    * 
    */
@@ -850,7 +873,7 @@ export class CreatorBase extends Base
    */
   public onNotify: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised before a survey element (a question, panel, page, or the survey itself) is focused. Use this event to move focus to a different survey element.
+   * An event that is raised before a survey element (question, panel, page, or the survey itself) is focused. Use this event to move focus to a different survey element.
    * 
    * Parameters:
    * 
@@ -895,61 +918,72 @@ export class CreatorBase extends Base
    */
   public onUploadFile: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to modify the list of the strings available in the Translation tab.
+   * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
    *
-   * The event handler accepts the following arguments:
+   * Parameters:
    *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being edited in the Translation tab.
-   * - `options.propertyName` - The name of a property being translated.
-   * - `options.visible` - A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) whose string translations are edited in the Translation tab.
+   * - `options.propertyName`: `string`\
+   * The name of a property being translated.
+   * - `options.visible`: `boolean`\
+   * A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
   public onTranslationStringVisibility: CreatorEvent = new CreatorEvent();
-  /**
-   * Use this event to define is the locale initially selected (default value) and ready for translaion or it is unselected.
-   *
-   * The event handler accepts the following arguments:
-   *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.locale` - the locale name, like 'en', 'de' and so on.
-   * - `options.isSelected` - it is true by default. Set it to false to make the translation unselected.
-   */
   public onTranslationLocaleInitiallySelected: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to modify the imported localizable text. To block importing a particular localization text, set the options.text into undefined.
+   * An event that is raised before a translated string is imported from a CSV file. Use this event to modify the string to be imported or cancel the import.
    *
-   * The event handler accepts the following arguments:
+   * Parameters:
    *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.locale` - the locale name, like 'en', 'de' and so on.
-   * - `options.name` - The full name of the localizable string, it can be: "survey.page1.question2.title"
-   * - `options.text` - The imported text for the locale for this item. Set it to undefined or empty string to block importing for this item
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.locale`: `string`\
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * - `options.name`: `string`\
+   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   * - `options.text`: `string`\
+   * A text string to be imported. You can modify this property to import a different string or set this property to `undefined` to cancel the import.
+   * @see onTranslationExportItem
+   * @see onTranslationImported
    */
   public onTranslationImportItem: CreatorEvent = new CreatorEvent();
   /**
-  * The event is called when the translation from csv file is imported.
-  * @see translation
-  * @see showTranslationTab
-  */
+   * An event that is raised after all translated strings are imported from a CSV file.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * @see onTranslationImportItem
+   * @see onTranslationExportItem
+   */
   public onTranslationImported: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to modify a translated string before it is exported to CSV.
+   * An event that is raised before a translated string is exported to a CSV file. Use this event to modify the string to be exported.
    *
-   * The event handler accepts the following arguments:
+   * Parameters:
    *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.obj` - A survey object instance (survey, page, panel, question) whose string translations are being exported to CSV.
-   * - `options.locale` - The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
-   * - `options.name` - A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
-   * - `options.locString` - A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
-   * - `options.text` - A text string to be exported. The string is taken from the current locale. Redefine this property if you want to export a different string.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) whose string translations are being exported to CSV.
+   * - `options.locale`: `string`\
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * - `options.name`: `string`\
+   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   * - `options.locString`: `LocalizableString`\
+   * A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   * - `options.text`: `string`\
+   * A text string to be exported. The string is taken from the current locale. You can modify this property to export a different string.
+   * @see onTranslationImportItem
    */
   public onTranslationExportItem: CreatorEvent = new CreatorEvent();
 
   /**
    * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
-   * 
-   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. If the translation failed, pass an empty array or call this function without arguments.
    * 
    * Parameters:
    *
@@ -964,6 +998,50 @@ export class CreatorBase extends Base
    * - `options.callback: (strings: Array<string>)`: `Function`\
    * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
    * 
+   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. The following code shows how to integrate the Microsoft Translator service into Survey Creator:
+   * 
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = { ... };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * 
+   * const apiKey = "<your-microsoft-translator-api-key>";
+   * const resourceRegion = "<your-azure-region>";
+   * const endpoint = "https://api.cognitive.microsofttranslator.com/";
+   * creator.onMachineTranslate.add((_, options) => {
+   *   // Prepare strings for Microsoft Translator as an array of objects: [{ Text: "text to translate" }]
+   *   const data = [];
+   *   options.strings.forEach(str => { data.push({ Text: str }); });
+   *   // Include required locales in the URL
+   *   const params = "api-version=3.0&from=" + options.fromLocale + "&to=" + options.toLocale;
+   *   const url = endpoint + "/translate?" + params;
+   *   fetch(url, {
+   *     method: "POST",
+   *     headers: {
+   *       "Content-Type": "application/json",
+   *       "Ocp-Apim-Subscription-Key": apiKey,
+   *       "Ocp-Apim-Subscription-Region": resourceRegion,
+   *       "X-ClientTraceId": crypto.randomUUID()
+   *     },
+   *     body: JSON.stringify(data)
+   *   }).then(response => response.json())
+   *     .then(data => {
+   *       // Convert data received from Microsoft Translator to a flat array
+   *       const translatedStrings = [];
+   *       for (let i = 0; i < data.length; i++) {
+   *         translatedStrings.push(data[i].translations[0].text);
+   *       }
+   *       // Pass translated strings to Survey Creator
+   *       options.callback(translatedStrings);
+   * 
+   *     }).catch(error => {
+   *       // If translation was unsuccessful:
+   *       options.callback();
+   *       alert("Could not translate strings to the " + options.toLocale + " locale");
+   *     });
+   * });
+   * ```
+   * 
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    */
   public onMachineTranslate: CreatorEvent = new CreatorEvent();
@@ -976,12 +1054,12 @@ export class CreatorBase extends Base
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
    * - `options.obj`: `any`\
-   * A survey object instance (survey, page, panel, question) whose string translation is being changed.
-   * - `options.locale`: `String`\
+   * A survey element instance (survey, page, panel, question) whose string translation is being changed.
+   * - `options.locale`: `string`\
    * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    * - `options.locString`: `LocalizableString`\
    * An object that you can use to manipulate a localization string. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
-   * - `options.newText`: `String`\
+   * - `options.newText`: `string`\
    * A new value for the string translation.
    * 
    * Refer to the following help topics for more information on localization:
@@ -1033,10 +1111,9 @@ export class CreatorBase extends Base
   public maxLogicItemsInCondition: number = -1;
 
   /**
-   * Specifies whether UI elements display survey, page, and question titles instead of their names.
+   * Specifies whether drop-down menus and other UI elements display survey, page, and question titles instead of their names.
    *
    * Default value: `false`
-   *
    * @see onGetObjectDisplayName
    */
   public showObjectTitles = false;
@@ -1054,6 +1131,8 @@ export class CreatorBase extends Base
    * Specifies whether to display question titles instead of names when users edit logical expressions.
    *
    * Default value: `false`
+   * @see showObjectTitles
+   * @see onGetObjectDisplayName
    */
   public showTitlesInExpressions = false;
   /**
@@ -1346,7 +1425,7 @@ export class CreatorBase extends Base
    * A Survey Creator instance that raised the event.
    * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"`\
    * A tab that is going to become active.
-   * - `options.allow`: `Boolean`\
+   * - `options.allow`: `boolean`\
    * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
    * @see makeNewViewActive
    */
@@ -1630,15 +1709,15 @@ export class CreatorBase extends Base
     this.survey.currentPage = value;
   }
   /**
-   * An event that is raised before a new page is added to the survey.
+   * An event that is raised before a new page is added to the survey. Handle this event if you do not want to add the page. 
    * 
    * Parameters:
    *
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
    * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * An added page.
-   * - `options.allow`: `Boolean`\
+   * A page to be added.
+   * - `options.allow`: `boolean`\
    * Set this property to `false` if you do not want to add the page.
    */
   public onPageAdding: CreatorEvent = new CreatorEvent();
@@ -2168,8 +2247,9 @@ export class CreatorBase extends Base
   }
 
   /**
-   * The Survey JSON as a text. Use it to get Survey JSON or change it.
-   * @see JSON
+   * A survey JSON schema as a string.
+   * 
+   * This property allows you to get or set the JSON schema of a survey being configured. Alternatively, you can use the [`JSON`](#JSON) property.
    */
   public get text(): string {
     if (!!this.getSurveyJSONTextCallback) {
@@ -2322,8 +2402,9 @@ export class CreatorBase extends Base
     return json;
   }
   /**
-   * The Survey JSON. Use it to get Survey JSON or change it.
-   * @see text
+   * A survey JSON schema.
+   * 
+   * This property allows you to get or set the JSON schema of a survey being configured. Alternatively, you can use the [`text`](#text) property.
    */
   public get JSON(): any {
     const json = (<any>this.survey).toJSON();
