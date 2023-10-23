@@ -2312,3 +2312,31 @@ test("Reset theme action calls confitmation dialog", (): any => {
   expect(message).toBe("Do you really want to reset the theme? All your customizations will be lost.");
   surveySettings.confirmActionAsync = originalCallback;
 });
+test("Kepp background image on reset theme action", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const customTheme = { themeName: "custom", backgroundImage: "image.png" };
+  const fullThemeName = themePlugin.addTheme(customTheme);
+  creator.theme = customTheme;
+
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const backgroundImage = themeEditor.getQuestionByName("backgroundImage");
+
+  expect(backgroundImage.value).toEqual("image.png");
+  expect(themeSurveyTab.survey.backgroundImage).toEqual("image.png");
+
+  themePlugin["resetTheme"].action();
+  expect(backgroundImage.value).toEqual("image.png");
+  expect(themeSurveyTab.survey.backgroundImage).toEqual("image.png");
+
+  surveySettings.confirmActionAsync = originalCallback;
+  themePlugin.removeTheme(customTheme);
+});
