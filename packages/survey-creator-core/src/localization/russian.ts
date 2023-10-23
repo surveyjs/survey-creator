@@ -664,7 +664,7 @@ export var ruStrings = {
     rowsVisibleIf: "Строки видны, если",
     otherPlaceholder: "Заполнитель области комментариев",
     signaturepad: {
-      showPlaceholder: "Показать заполнитель",
+      showPlaceholder: "Показать замещающий текст",
       placeholder: "Замещающий текст"
     },
     rateType: "Тип тарифа"
