@@ -194,11 +194,11 @@ export class CreatorBase extends Base
     this.allowEditSurveyTitle = val;
   }
   public get haveCommercialLicense(): boolean {
-    if (!!hasLicense && hasLicense(1)) return true;
-    return this.getPropertyValue("haveCommercialLicense", false);
+    return !!hasLicense && hasLicense(1);
   }
   public set haveCommercialLicense(val: boolean) {
-    this.setPropertyValue("haveCommercialLicense", val);
+    // eslint-disable-next-line no-console
+    console.warn("As of v1.9.101, the haveCommercialLicense property is not supported. To activate your license, use the setLicenseKey(key) method as shown on the following page: https://surveyjs.io/remove-alert-banner");
   }
   public get licenseText(): string {
     return this.getLocString("survey.license");
