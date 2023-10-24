@@ -290,8 +290,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     });
     const newAction = this.createDropdownModel("convertInputType", availableTypes, true, 1, questionSubType,
       (item: any) => {
-        this.surveyElement.setPropertyValue(propName, item.id);
-        newAction.title = item.title;
+        const newValue = this.getUpdatedPropertyValue(propName, item.id);
+        this.surveyElement.setPropertyValue(propName, newValue);
+        let title = item.title;
+        if(newValue !== item.id) {
+          const popup = newAction.popupModel;
+          const list = popup.contentComponentData.model;
+          const newItem = list.getActionById(newValue);
+          if(newItem) {
+            title = newItem.title;
+          }
+        }
+        newAction.title = title;
       });
     newAction.disableShrink = true;
     this.surveyElement.registerFunctionOnPropertyValueChanged(
@@ -360,7 +370,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
             "isRequired"
           )
         ) {
-          this.isRequired = !this.isRequired;
+          this.isRequired = this.getUpdatedPropertyValue("isRequired", !this.isRequired);
         }
       }
     });
@@ -370,7 +380,17 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     }) as any);
     return requiredAction;
   }
-
+  protected getUpdatedPropertyValue(propName: string, newValue: any): any {
+    const options = {
+      obj: this.element,
+      propertyName: propName,
+      value: this.element[propName],
+      newValue: newValue,
+      doValidation: false
+    };
+    this.creator.onValueChangingCallback(options);
+    return options.newValue;
+  }
   protected buildActions(items: Array<Action>): void {
     super.buildActions(items);
     let element = this.surveyElement;
