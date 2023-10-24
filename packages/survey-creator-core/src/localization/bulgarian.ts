@@ -663,6 +663,9 @@ export var bgStrings = {
     columnsVisibleIf: "Колоните се виждат, ако",
     rowsVisibleIf: "Редовете се виждат, ако",
     otherPlaceholder: "Заместител на областта за коментари",
+    filePlaceholder: "Текст в контейнер за файл",
+    photoPlaceholder: "Текст в контейнер за снимка",
+    fileOrPhotoPlaceholder: "Текст в контейнер за файл или снимка",
     rateType: "Тип на тарифата"
   },
   // Property values
@@ -900,7 +903,10 @@ export var bgStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка."
+    keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка.",
+    filePlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична",
+    photoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Камера\".",
+    fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
   },
   // Properties
   p: {
@@ -1232,6 +1238,15 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.surveyJsonExportButton: "Export" => "Износ"
 // ed.surveyJsonImportButton: "Import" => "Внос"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Копиране в системния буфер"
+// pe.filePlaceholder: "File placeholder text" => "Текст в контейнер за файл"
+// pe.photoPlaceholder: "Photo placeholder text" => "Текст в контейнер за снимка"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Текст в контейнер за файл или снимка"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Прилага се, когато \"Тип източник\" е \"Камера\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Външен вид"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, нулирайте темата"
 // theme.groupBackground: "Background" => "Фон"

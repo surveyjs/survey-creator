@@ -663,6 +663,9 @@ export var nlStrings = {
     columnsVisibleIf: "Kolommen zijn zichtbaar als",
     rowsVisibleIf: "Rijen zijn zichtbaar als",
     otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
+    filePlaceholder: "Tijdelijke tekst voor bestanden",
+    photoPlaceholder: "Tijdelijke tekst voor foto's",
+    fileOrPhotoPlaceholder: "Tijdelijke tekst voor bestanden of foto's",
     rateType: "Type tarief"
   },
   // Property values
@@ -900,7 +903,10 @@ export var nlStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'."
+    keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
+    filePlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is",
+    photoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Camera\" is.",
+    fileOrPhotoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
   },
   // Properties
   p: {
@@ -1664,6 +1670,17 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.surveyJsonExportButton: "Export" => "Exporteren"
 // ed.surveyJsonImportButton: "Import" => "Importeren"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Naar klembord kopiëren"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tijdelijke tekst voor bestanden"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tijdelijke tekst voor foto's"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tijdelijke tekst voor bestanden of foto's"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Van toepassing wanneer \"Brontype\" \"Camera\" is."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
+// theme.groupBackground: "Background" => "Achtergrond"
+// theme.groupAppearance: "Appearance" => "Uiterlijk"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
 // lg.expressionSetup: "" => ""

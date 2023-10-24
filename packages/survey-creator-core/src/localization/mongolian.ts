@@ -663,6 +663,9 @@ export var mnStrings = {
     columnsVisibleIf: "Баганууд харагдана хэрэв",
     rowsVisibleIf: "Мөрнүүд харагдана хэрэв",
     otherPlaceholder: "Санал асуулгын хэсэг",
+    filePlaceholder: "Файл байршуулагчийн текст",
+    photoPlaceholder: "Гэрэл зураг байршуулагч бичвэр",
+    fileOrPhotoPlaceholder: "Файл эсвэл гэрэл зураг байршуулагч текст",
     rateType: "Rate төрөл"
   },
   // Property values
@@ -900,7 +903,10 @@ export var mnStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна."
+    keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна.",
+    filePlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна",
+    photoPlaceholder: "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна.",
+    fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна."
   },
   // Properties
   p: {
@@ -1326,6 +1332,15 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.surveyJsonExportButton: "Export" => "Экспорт"
 // ed.surveyJsonImportButton: "Import" => "Импорт"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Хавчуургыг хуулах"
+// pe.filePlaceholder: "File placeholder text" => "Файл байршуулагчийн текст"
+// pe.photoPlaceholder: "Photo placeholder text" => "Гэрэл зураг байршуулагч бичвэр"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Файл эсвэл гэрэл зураг байршуулагч текст"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна."
+// theme.groupBackground: "Background" => "Ар талын"
+// theme.groupAppearance: "Appearance" => "Харагдах байдал"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Тийм ээ, сэдвийг дахин тохируулах"
 // theme.groupBackground: "Background" => "Ар талын"

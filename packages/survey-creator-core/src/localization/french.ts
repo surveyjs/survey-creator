@@ -663,6 +663,9 @@ var frenchTranslation = {
     columnsVisibleIf: "Les colonnes sont visibles si",
     rowsVisibleIf: "Les lignes sont visibles si",
     otherPlaceholder: "Espace réservé pour la zone de commentaires",
+    filePlaceholder: "Texte de l’espace réservé au fichier",
+    photoPlaceholder: "Texte de l’espace réservé à la photo",
+    fileOrPhotoPlaceholder: "Texte de l’espace réservé au fichier ou à la photo",
     rateType: "Type de notation"
   },
   // Property values
@@ -900,7 +903,10 @@ var frenchTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique »."
+    keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
+    filePlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible",
+    photoPlaceholder: "S’applique lorsque le « Type de source » est « Appareil photo ».",
+    fileOrPhotoPlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux ou appareil photo »."
   },
   // Properties
   p: {
@@ -1744,6 +1750,17 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.surveyJsonExportButton: "Export" => "Exportation"
 // ed.surveyJsonImportButton: "Import" => "Importation"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copier dans le Presse-papiers"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Texte de l’espace réservé au fichier"
+// pe.photoPlaceholder: "Photo placeholder text" => "Texte de l’espace réservé à la photo"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texte de l’espace réservé au fichier ou à la photo"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "S’applique lorsque le «Type de source» est «Appareil photo»."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "S’applique lorsque le «Type de source» est «Fichiers locaux ou appareil photo»."
+// theme.groupBackground: "Background" => "Arrière-plan"
+// theme.groupAppearance: "Appearance" => "Apparence"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
 // lg.expressionSetup: "" => ""

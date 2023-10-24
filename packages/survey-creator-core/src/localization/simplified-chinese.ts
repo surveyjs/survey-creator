@@ -663,6 +663,9 @@ var simplifiedChineseTranslation = {
     columnsVisibleIf: "在以下情况下，列可见",
     rowsVisibleIf: "在以下情况下，行可见",
     otherPlaceholder: "注释区占位符",
+    filePlaceholder: "文件占位符文本",
+    photoPlaceholder: "照片占位符文本",
+    fileOrPhotoPlaceholder: "文件或照片占位符文本",
     rateType: "费率类型"
   },
   // Property values
@@ -900,7 +903,10 @@ var simplifiedChineseTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。"
+    keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
+    filePlaceholder: "当“源类型”为“本地文件”或相机不可用时适用",
+    photoPlaceholder: "当“源类型”为“相机”时适用。",
+    fileOrPhotoPlaceholder: "当“源类型”为“本地文件或相机”时适用。"
   },
   // Properties
   p: {
@@ -1827,6 +1833,17 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.surveyJsonExportButton: "Export" => "出口"
 // ed.surveyJsonImportButton: "Import" => "进口"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "复制到剪贴板"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "文件占位符文本"
+// pe.photoPlaceholder: "Photo placeholder text" => "照片占位符文本"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "文件或照片占位符文本"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "当“源类型”为“本地文件”或相机不可用时适用"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "当“源类型”为“相机”时适用。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "当“源类型”为“本地文件或相机”时适用。"
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外观"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主题吗？您的所有自定义项都将丢失。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主题"
 // lg.expressionSetup: "" => ""

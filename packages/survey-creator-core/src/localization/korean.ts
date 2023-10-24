@@ -663,6 +663,9 @@ export var koreanStrings = {
     columnsVisibleIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsVisibleIf: "다음과 같은 경우 행이 표시됩니다.",
     otherPlaceholder: "주석 영역 자리 표시자",
+    filePlaceholder: "파일 자리 표시자 텍스트",
+    photoPlaceholder: "사진 자리 표시자 텍스트",
+    fileOrPhotoPlaceholder: "파일 또는 사진 자리 표시자 텍스트",
     rateType: "비율 유형"
   },
   // Property values
@@ -900,7 +903,10 @@ export var koreanStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다."
+    keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
+    filePlaceholder: "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다.",
+    photoPlaceholder: "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다.",
+    fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
   },
   // Properties
   p: {
@@ -1889,6 +1895,17 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.surveyJsonExportButton: "Export" => "수출"
 // ed.surveyJsonImportButton: "Import" => "수입"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "클립보드에 복사"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "파일 자리 표시자 텍스트"
+// pe.photoPlaceholder: "Photo placeholder text" => "사진 자리 표시자 텍스트"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "파일 또는 사진 자리 표시자 텍스트"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다."
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
+// theme.groupBackground: "Background" => "배경"
+// theme.groupAppearance: "Appearance" => "외관"
+// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "예, 테마를 재설정합니다."
 // lg.expressionSetup: "" => ""

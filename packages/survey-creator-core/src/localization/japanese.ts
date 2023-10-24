@@ -663,6 +663,9 @@ export var jaStrings = {
     columnsVisibleIf: "列は次の場合に表示されます。",
     rowsVisibleIf: "行は次の場合に表示されます。",
     otherPlaceholder: "コメント領域のプレースホルダー",
+    filePlaceholder: "ファイル プレースホルダー テキスト",
+    photoPlaceholder: "写真の代替テキスト",
+    fileOrPhotoPlaceholder: "ファイルまたは写真のプレースホルダーテキスト",
     rateType: "レートタイプ"
   },
   // Property values
@@ -900,7 +903,10 @@ export var jaStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。"
+    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
+    filePlaceholder: "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます",
+    photoPlaceholder: "「ソースタイプ」が「カメラ」の場合に適用されます。",
+    fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
   },
   // Properties
   p: {
@@ -1685,6 +1691,17 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.surveyJsonExportButton: "Export" => "輸出"
 // ed.surveyJsonImportButton: "Import" => "輸入"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "クリップボードにコピー"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "ファイル プレースホルダー テキスト"
+// pe.photoPlaceholder: "Photo placeholder text" => "写真の代替テキスト"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "ファイルまたは写真のプレースホルダーテキスト"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "「ソースタイプ」が「カメラ」の場合に適用されます。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
 // lg.expressionSetup: "" => ""

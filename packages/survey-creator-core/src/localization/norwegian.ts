@@ -663,6 +663,9 @@ export var nbStrings = {
     columnsVisibleIf: "Kolonner er synlige hvis",
     rowsVisibleIf: "Rader er synlige hvis:",
     otherPlaceholder: "Plassholder for kommentarområde",
+    filePlaceholder: "Plassholdertekst for fil",
+    photoPlaceholder: "Tekst for plassholdere for bilde",
+    fileOrPhotoPlaceholder: "Plassholdertekst for fil eller bilde",
     rateType: "Type sats"
   },
   // Property values
@@ -900,7 +903,10 @@ export var nbStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\"."
+    keyName: "Hvis den angitte kolonnen inneholder identiske verdier, gir undersøkelsen feilen \"Ikke-unik nøkkelverdi\".",
+    filePlaceholder: "Gjelder når \"Kildetype\" er \"Lokale filer\" eller når kameraet er utilgjengelig",
+    photoPlaceholder: "Gjelder når \"Kildetype\" er \"Kamera\".",
+    fileOrPhotoPlaceholder: "Gjelder når \"Kildetype\" er \"Lokale filer eller kamera\"."
   },
   // Properties
   p: {
@@ -1688,6 +1694,17 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.surveyJsonExportButton: "Export" => "Eksport"
 // ed.surveyJsonImportButton: "Import" => "Importere"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiere til utklippstavlen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Plassholdertekst for fil"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst for plassholdere for bilde"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Plassholdertekst for fil eller bilde"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gjelder når \"Kildetype\" er \"Lokale filer\" eller når kameraet er utilgjengelig"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gjelder når \"Kildetype\" er \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gjelder når \"Kildetype\" er \"Lokale filer eller kamera\"."
+// theme.groupBackground: "Background" => "Bakgrunn"
+// theme.groupAppearance: "Appearance" => "Utseende"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig tilbakestille temaet? Alle tilpasningene dine vil gå tapt."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, tilbakestill temaet"
 // lg.expressionSetup: "" => ""
