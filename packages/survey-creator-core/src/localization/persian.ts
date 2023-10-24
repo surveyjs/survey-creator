@@ -663,6 +663,10 @@ var persianStrings = {
     columnsVisibleIf: "ستونها مرئی هستند اگر",
     rowsVisibleIf: "سطرها مرئی هستند اگر",
     otherPlaceholder: "ذی نفع منطقه نظر",
+    signaturepad: {
+      showPlaceholder: "نشان دادن نگهدارندهی مکان",
+      placeholder: "متن ذی نفع"
+    },
     filePlaceholder: "متن نگهدارنده پرونده",
     photoPlaceholder: "متن نگهدارنده عکس",
     fileOrPhotoPlaceholder: "متن جایدار پرونده یا عکس",
@@ -1073,6 +1077,7 @@ var persianStrings = {
     scale: "مقیاس",
     cornerRadius: "شعاع گوشه",
     surveyTitle: "قلم عنوان نظرسنجی",
+    surveyDescription: "قلم توصیف نظرسنجی",
     pageTitle: "قلم عنوان صفحه",
     pageDescription: "قلم توصیف صفحه",
     boxShadowX: "X",
@@ -1646,3 +1651,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.groupAppearance: "Appearance" => "ظاهر"
 // theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "مناسب برای ظرف"
+// signaturepad.showPlaceholder: "Show the placeholder" => "نشان دادن نگهدارندهی مکان"
+// signaturepad.placeholder: "Placeholder text" => "متن ذی نفع"
+// theme.surveyDescription: "Survey description font" => "قلم توصیف نظرسنجی"

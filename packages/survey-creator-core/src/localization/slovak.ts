@@ -663,6 +663,10 @@ export var skStrings = {
     columnsVisibleIf: "Stĺpce sú viditeľné, ak",
     rowsVisibleIf: "Riadky sú viditeľné, ak",
     otherPlaceholder: "Zástupný symbol oblasti komentárov",
+    signaturepad: {
+      showPlaceholder: "Zobrazenie zástupného symbolu",
+      placeholder: "Zástupný text"
+    },
     filePlaceholder: "Zástupný text súboru",
     photoPlaceholder: "Zástupný text fotografie",
     fileOrPhotoPlaceholder: "Zástupný text súboru alebo fotografie",
@@ -1073,6 +1077,7 @@ export var skStrings = {
     scale: "Stupnica",
     cornerRadius: "Polomer rohov",
     surveyTitle: "Písmo názvu prieskumu",
+    surveyDescription: "Písmo popisu prieskumu",
     pageTitle: "Písmo názvu stránky",
     pageDescription: "Písmo popisu stránky",
     boxShadowX: "X",
@@ -1663,3 +1668,8 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.groupAppearance: "Appearance" => "Vzhľad"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazenie zástupného symbolu"
+// signaturepad.placeholder: "Placeholder text" => "Zástupný text"
+// theme.surveyDescription: "Survey description font" => "Písmo popisu prieskumu"

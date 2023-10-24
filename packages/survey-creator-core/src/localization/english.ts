@@ -664,6 +664,10 @@ export var enStrings = {
     columnsVisibleIf: "Columns are visible if",
     rowsVisibleIf: "Rows are visible if",
     otherPlaceholder: "Comment area placeholder",
+    signaturepad: {
+      showPlaceholder: "Show the placeholder",
+      placeholder: "Placeholder text"
+    },
     filePlaceholder: "File placeholder text",
     photoPlaceholder: "Photo placeholder text",
     fileOrPhotoPlaceholder: "File or photo placeholder text",

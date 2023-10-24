@@ -663,6 +663,10 @@ export var danishStrings = {
     columnsVisibleIf: "Kolonner er synlige, hvis",
     rowsVisibleIf: "Rækker er synlige, hvis",
     otherPlaceholder: "Pladsholder til kommentarområde",
+    signaturepad: {
+      showPlaceholder: "Vis pladsholderen",
+      placeholder: "Pladsholdertekst"
+    },
     filePlaceholder: "Filpladsholdertekst",
     photoPlaceholder: "Eksempeltekst til billeder",
     fileOrPhotoPlaceholder: "Arkiv- eller fotopladsholdertekst",
@@ -1073,6 +1077,7 @@ export var danishStrings = {
     scale: "Skæl",
     cornerRadius: "Hjørne radius",
     surveyTitle: "Skrifttype for undersøgelsestitel",
+    surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
     pageTitle: "Sidetitel skrifttype",
     pageDescription: "Sidebeskrivelse skrifttype",
     boxShadowX: "X",
@@ -1895,3 +1900,8 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.groupAppearance: "Appearance" => "Udseende"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarve"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Passer til beholder"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Vis pladsholderen"
+// signaturepad.placeholder: "Placeholder text" => "Pladsholdertekst"
+// theme.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"

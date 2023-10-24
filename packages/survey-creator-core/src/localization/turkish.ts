@@ -663,6 +663,10 @@ export var turkishStrings = {
     columnsVisibleIf: "Sütunlar şu durumlarda görünür:",
     rowsVisibleIf: "Satırlar şu durumlarda görünür:",
     otherPlaceholder: "Yorum alanı yer tutucusu",
+    signaturepad: {
+      showPlaceholder: "Yer tutucuyu gösterme",
+      placeholder: "Yer tutucu metin"
+    },
     filePlaceholder: "Dosya yer tutucu metni",
     photoPlaceholder: "Fotoğraf yer tutucu metni",
     fileOrPhotoPlaceholder: "Dosya veya fotoğraf yer tutucu metni",
@@ -1073,6 +1077,7 @@ export var turkishStrings = {
     scale: "Ölçeklemek",
     cornerRadius: "Köşe yarıçapı",
     surveyTitle: "Anket başlığı yazı tipi",
+    surveyDescription: "Anket açıklaması yazı tipi",
     pageTitle: "Sayfa başlığı yazı tipi",
     pageDescription: "Sayfa açıklaması yazı tipi",
     boxShadowX: "X",
@@ -1705,3 +1710,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.groupAppearance: "Appearance" => "Görünüş"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Yer tutucuyu gösterme"
+// signaturepad.placeholder: "Placeholder text" => "Yer tutucu metin"
+// theme.surveyDescription: "Survey description font" => "Anket açıklaması yazı tipi"

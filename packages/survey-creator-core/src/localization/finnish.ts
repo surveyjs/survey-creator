@@ -663,6 +663,10 @@ export var fiStrings = {
     columnsVisibleIf: "Sarakkeet ovat näkyvissä, jos",
     rowsVisibleIf: "Rivit ovat näkyvissä, jos",
     otherPlaceholder: "Kommenttialueen paikkamerkki",
+    signaturepad: {
+      showPlaceholder: "Paikkamerkin näyttäminen",
+      placeholder: "Paikkamerkkiteksti"
+    },
     filePlaceholder: "Tiedoston paikkamerkkiteksti",
     photoPlaceholder: "Valokuvan paikkamerkkiteksti",
     fileOrPhotoPlaceholder: "Tiedoston tai valokuvan paikkamerkkiteksti",
@@ -1073,6 +1077,7 @@ export var fiStrings = {
     scale: "Mittakaava",
     cornerRadius: "Kulman säde",
     surveyTitle: "Kyselyn otsikon fontti",
+    surveyDescription: "Kyselyn kuvauksen fontti",
     pageTitle: "Sivun otsikon fontti",
     pageDescription: "Sivun kuvauksen fontti",
     boxShadowX: "X",
@@ -1709,3 +1714,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.groupAppearance: "Appearance" => "Ulkonäkö"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Sovita konttiin"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Paikkamerkin näyttäminen"
+// signaturepad.placeholder: "Placeholder text" => "Paikkamerkkiteksti"
+// theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"r

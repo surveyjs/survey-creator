@@ -663,6 +663,10 @@ var germanTranslation = {
     columnsVisibleIf: "Spalten sind sichtbar, wenn",
     rowsVisibleIf: "Zeilen sind sichtbar, wenn",
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
+    signaturepad: {
+      showPlaceholder: "Platzhalter anzeigen",
+      placeholder: "Platzhaltertext"
+    },
     filePlaceholder: "Platzhaltertext für Dateien",
     photoPlaceholder: "Platzhaltertext für Fotos",
     fileOrPhotoPlaceholder: "Datei- oder Foto-Platzhaltertext",
@@ -1073,6 +1077,7 @@ var germanTranslation = {
     scale: "Maßstab",
     cornerRadius: "Eckenradius",
     surveyTitle: "Schriftart für den Umfragetitel",
+    surveyDescription: "Schriftart der Umfragebeschreibung",
     pageTitle: "Schriftart des Seitentitels",
     pageDescription: "Schriftart für die Seitenbeschreibung",
     boxShadowX: "X",
@@ -1432,3 +1437,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.groupAppearance: "Appearance" => "Aussehen"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Passend zum Behälter"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Platzhalter anzeigen"
+// signaturepad.placeholder: "Placeholder text" => "Platzhaltertext"
+// theme.surveyDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"

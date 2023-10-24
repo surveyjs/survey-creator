@@ -663,6 +663,10 @@ export let svStrings = {
     columnsVisibleIf: "Kolumner visas om",
     rowsVisibleIf: "Raderna visas om",
     otherPlaceholder: "Platshållare för kommentarsområde",
+    signaturepad: {
+      showPlaceholder: "Visa platshållaren",
+      placeholder: "Platshållartext"
+    },
     filePlaceholder: "Text för filplatshållare",
     photoPlaceholder: "Text för platshållare för foton",
     fileOrPhotoPlaceholder: "Platshållartext för fil eller foto",
@@ -1073,6 +1077,7 @@ export let svStrings = {
     scale: "Skala",
     cornerRadius: "Hörnradie",
     surveyTitle: "Teckensnitt för undersökningstitel",
+    surveyDescription: "Teckensnitt för undersökningsbeskrivning",
     pageTitle: "Teckensnitt för sidtitel",
     pageDescription: "Teckensnitt för sidbeskrivning",
     boxShadowX: "X",
@@ -1887,3 +1892,8 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.groupAppearance: "Appearance" => "Utseende"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Visa platshållaren"
+// signaturepad.placeholder: "Placeholder text" => "Platshållartext"
+// theme.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"

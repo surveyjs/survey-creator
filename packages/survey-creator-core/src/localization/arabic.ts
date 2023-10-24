@@ -663,6 +663,10 @@ export var arStrings = {
     columnsVisibleIf: "تكون الأعمدة مرئية إذا",
     rowsVisibleIf: "تكون الصفوف مرئية إذا",
     otherPlaceholder: "العنصر النائب لمنطقة التعليق",
+    signaturepad: {
+      showPlaceholder: "إظهار العنصر النائب",
+      placeholder: "نص العنصر النائب"
+    },
     filePlaceholder: "نص العنصر النائب للملف",
     photoPlaceholder: "نص العنصر النائب للصورة",
     fileOrPhotoPlaceholder: "نص العنصر النائب للملف أو الصورة",
@@ -1073,6 +1077,7 @@ export var arStrings = {
     scale: "مِيزَان",
     cornerRadius: "نصف قطر الزاوية",
     surveyTitle: "خط عنوان الاستطلاع",
+    surveyDescription: "خط وصف الاستطلاع",
     pageTitle: "خط عنوان الصفحة",
     pageDescription: "خط وصف الصفحة",
     boxShadowX: "X",
@@ -1620,3 +1625,8 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.groupAppearance: "Appearance" => "مظهر"
 // theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
+// signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
+// theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"

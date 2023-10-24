@@ -663,6 +663,10 @@ var traditionalChineseTranslation = {
     columnsVisibleIf: "在以下情況下，列可見",
     rowsVisibleIf: "在以下情況下，行可見",
     otherPlaceholder: "註釋區佔位元",
+    signaturepad: {
+      showPlaceholder: "顯示佔位元",
+      placeholder: "佔位元文本"
+    },
     filePlaceholder: "檔佔位元文本",
     photoPlaceholder: "照片占位元文本",
     fileOrPhotoPlaceholder: "檔或照片佔位元文字",
@@ -1073,6 +1077,7 @@ var traditionalChineseTranslation = {
     scale: "規模",
     cornerRadius: "拐角半徑",
     surveyTitle: "調查標題字體",
+    surveyDescription: "調查描述字體",
     pageTitle: "頁面標題字體",
     pageDescription: "頁面描述字體",
     boxShadowX: "X",
@@ -1988,3 +1993,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.groupAppearance: "Appearance" => "外觀"
 // theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "適合容器"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "顯示佔位元"
+// signaturepad.placeholder: "Placeholder text" => "佔位元文本"
+// theme.surveyDescription: "Survey description font" => "調查描述字體"

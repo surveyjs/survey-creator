@@ -663,6 +663,10 @@ export var bgStrings = {
     columnsVisibleIf: "Колоните се виждат, ако",
     rowsVisibleIf: "Редовете се виждат, ако",
     otherPlaceholder: "Заместител на областта за коментари",
+    signaturepad: {
+      showPlaceholder: "Показване на контейнера",
+      placeholder: "Текст в контейнер"
+    },
     filePlaceholder: "Текст в контейнер за файл",
     photoPlaceholder: "Текст в контейнер за снимка",
     fileOrPhotoPlaceholder: "Текст в контейнер за файл или снимка",
@@ -1073,6 +1077,7 @@ export var bgStrings = {
     scale: "Мащаб",
     cornerRadius: "Радиус на ъгъла",
     surveyTitle: "Шрифт на заглавието на анкетата",
+    surveyDescription: "Шрифт за описание на проучването",
     pageTitle: "Шрифт на заглавието на страницата",
     pageDescription: "Page Description Font",
     boxShadowX: "X",
@@ -1253,3 +1258,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.groupAppearance: "Appearance" => "Външен вид"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Показване на контейнера"
+// signaturepad.placeholder: "Placeholder text" => "Текст в контейнер"
+// theme.surveyDescription: "Survey description font" => "Шрифт за описание на проучването"

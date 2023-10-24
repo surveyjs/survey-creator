@@ -663,6 +663,10 @@ export var mnStrings = {
     columnsVisibleIf: "Баганууд харагдана хэрэв",
     rowsVisibleIf: "Мөрнүүд харагдана хэрэв",
     otherPlaceholder: "Санал асуулгын хэсэг",
+    signaturepad: {
+      showPlaceholder: "Эзэмшигчийг үзүүл",
+      placeholder: "Placeholder текст"
+    },
     filePlaceholder: "Файл байршуулагчийн текст",
     photoPlaceholder: "Гэрэл зураг байршуулагч бичвэр",
     fileOrPhotoPlaceholder: "Файл эсвэл гэрэл зураг байршуулагч текст",
@@ -1073,6 +1077,7 @@ export var mnStrings = {
     scale: "Хэмжүүр",
     cornerRadius: "Булангийн радиус",
     surveyTitle: "Судалгааны нэрийн фонт",
+    surveyDescription: "Судалгааны тодорхойлолтын фонт",
     pageTitle: "Хуудасны нэрийн фонт",
     pageDescription: "Хуудасны дүрслэлийн фонт",
     boxShadowX: "X",
@@ -1347,3 +1352,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.groupAppearance: "Appearance" => "Харагдах байдал"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Сав баглаа боодолд тохирно"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Эзэмшигчийг үзүүл"
+// signaturepad.placeholder: "Placeholder text" => "Placeholder текст"
+// theme.surveyDescription: "Survey description font" => "Судалгааны тодорхойлолтын фонт"
