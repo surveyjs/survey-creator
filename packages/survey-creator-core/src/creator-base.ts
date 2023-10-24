@@ -2670,13 +2670,7 @@ export class CreatorBase extends Base
   }
   @undoRedoTransaction()
   protected deleteObject(obj: any) {
-    var options = {
-      element: obj,
-      elementType: SurveyHelper.getObjectType(obj),
-      allowing: true
-    };
-    this.onElementDeleting.fire(this, options);
-    if (!options.allowing) return;
+    if (!this.checkOnElementDeleting(obj)) return;
     this.deleteObjectCore(obj);
   }
   protected updateConditionsOnRemove(obj: any) {
@@ -2693,7 +2687,15 @@ export class CreatorBase extends Base
       logic.removeQuestion(questions[i].getValueName());
     }
   }
-
+  private checkOnElementDeleting(obj: any): boolean {
+    const options = {
+      element: obj,
+      elementType: SurveyHelper.getObjectType(obj),
+      allowing: true
+    };
+    this.onElementDeleting.fire(this, options);
+    return options.allowing;
+  }
   public isElementSelected(element: Base): boolean {
     if (!element || element.isDisposed) return false;
     return element.getPropertyValue("isSelectedInDesigner");
@@ -3167,8 +3169,9 @@ export class CreatorBase extends Base
     collection: Array<Base>,
     item: Base
   ): boolean {
+    if((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
     if (this.onCollectionItemDeleting.isEmpty) return true;
-    var options = {
+    const options = {
       obj: obj,
       property: property,
       propertyName: property.name,
