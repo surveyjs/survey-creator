@@ -1648,7 +1648,7 @@ test("headerViewContainer init state", (): any => {
     "logoPosition": "left",
     "inheritWidthFrom": "survey",
     "overlapEnabled": false,
-    "backgroundColorSwitch": "none",
+    "backgroundColorSwitch": "accentColor",
     "backgroundImageFit": "cover",
     "backgroundImageOpacity": 100,
     "logoPositionX": "right",
@@ -1899,7 +1899,10 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   headerViewContainer.getElementByName("headerView").value = "advanced";
-  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("none");
+  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("accentColor");
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "none";
   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
 
   creator.activeTab = "designer";
@@ -1911,6 +1914,30 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
 
   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("none");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBeUndefined();
+});
+
+test("headerViewContainer: background color", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toBe("accentColor");
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "none";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("trasparent");
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "accentColor";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 });
 
 test("Get theme changes only", (): any => {
