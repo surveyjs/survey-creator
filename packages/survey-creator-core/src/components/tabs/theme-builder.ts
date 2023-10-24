@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -172,14 +172,20 @@ export class ThemeBuilder extends Base {
 
       const effectiveThemeCssVariables = {
       };
-      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
+      const suitableTheme = this.findSuitableTheme(this.themeName);
+      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, suitableTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       const effectiveTheme: ITheme = {
-        backgroundImage: this.backgroundImage,
-        backgroundImageFit: this.backgroundImageFit,
-        backgroundImageAttachment: this.backgroundImageAttachment,
-        backgroundOpacity: this.backgroundOpacity / 100,
+        backgroundImage: this.backgroundImage || suitableTheme.backgroundImage || "",
+        backgroundImageFit: this.backgroundImageFit || suitableTheme.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment || suitableTheme.backgroundImageAttachment,
+        backgroundOpacity: (this.backgroundOpacity / 100) || suitableTheme.backgroundOpacity,
       };
+      const headerSettings: IHeader = {} as any;
+      assign(headerSettings, suitableTheme.header || {});
+      if (Object.keys(headerSettings).length > 0) {
+        effectiveTheme.header = headerSettings;
+      }
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
 
@@ -747,10 +753,10 @@ export class ThemeBuilder extends Base {
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
-    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
-    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
-    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
-    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.backgroundOpacity;
+    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.currentTheme.backgroundImage;
+    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.currentTheme.backgroundImageFit;
+    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
+    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
     themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
@@ -849,14 +855,14 @@ export class ThemeBuilder extends Base {
 
   private getDefaultTitleSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
-    if(isAdvanced) {
+    if (isAdvanced) {
       result["color"] = "rgba(0, 0, 0, 0.91)";
     }
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
-    if(isAdvanced) {
+    if (isAdvanced) {
       result["color"] = "rgba(0, 0, 0, 0.45)";
     }
     return result;
