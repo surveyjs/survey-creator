@@ -667,6 +667,9 @@ export var hrStrings = {
       showPlaceholder: "Pokaži rezervirano mjesto",
       placeholder: "Tekst rezerviranog mjesta"
     },
+    filePlaceholder: "Tekst rezerviranog mjesta datoteke",
+    photoPlaceholder: "Tekst rezerviranog mjesta za fotografije",
+    fileOrPhotoPlaceholder: "Tekst rezerviranog mjesta za datoteku ili fotografiju",
     rateType: "Vrsta stope"
   },
   // Property values
@@ -904,7 +907,10 @@ export var hrStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\"."
+    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
+    filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
+    photoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\".",
+    fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
   },
   // Properties
   p: {
@@ -1683,6 +1689,17 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.surveyJsonExportButton: "Export" => "Izvoz"
 // ed.surveyJsonImportButton: "Import" => "Uvoz"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiraj u međuspremnik"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tekst rezerviranog mjesta datoteke"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst rezerviranog mjesta za fotografije"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst rezerviranog mjesta za datoteku ili fotografiju"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
 // lg.expressionSetup: "" => ""

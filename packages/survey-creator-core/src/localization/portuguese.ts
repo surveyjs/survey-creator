@@ -667,6 +667,9 @@ var portugueseTranslation = {
       showPlaceholder: "Mostrar o espaço reservado",
       placeholder: "Texto de espaço reservado"
     },
+    filePlaceholder: "Texto do espaço reservado para arquivo",
+    photoPlaceholder: "Texto do espaço reservado para foto",
+    fileOrPhotoPlaceholder: "Texto de espaço reservado para arquivo ou foto",
     rateType: "Tipo de tarifa"
   },
   // Property values
@@ -904,7 +907,10 @@ var portugueseTranslation = {
     choicesbyurl: {
       valueName: "Nome"
     },
-    keyName: "Se a coluna especifica contiver valores idênticos, o questionário lançará o \"Valor de chave não exclusivo\" erro."
+    keyName: "Se a coluna especifica contiver valores idênticos, o questionário lançará o \"Valor de chave não exclusivo\" erro.",
+    filePlaceholder: "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais\" ou quando a câmera não está disponível",
+    photoPlaceholder: "Aplica-se quando \"Tipo de origem\" é \"Câmera\".",
+    fileOrPhotoPlaceholder: "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais ou câmera\"."
   },
   // Properties
   p: {
@@ -1341,6 +1347,15 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.surveyJsonExportButton: "Export" => "Exportação"
 // ed.surveyJsonImportButton: "Import" => "Importação"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copiar para área de transferência"
+// pe.filePlaceholder: "File placeholder text" => "Texto do espaço reservado para arquivo"
+// pe.photoPlaceholder: "Photo placeholder text" => "Texto do espaço reservado para foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texto de espaço reservado para arquivo ou foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais\" ou quando a câmera não está disponível"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Aplica-se quando \"Tipo de origem\" é \"Câmera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Aplica-se quando \"Tipo de origem\" é \"Arquivos locais ou câmera\"."
+// theme.groupBackground: "Background" => "Fundo"
+// theme.groupAppearance: "Appearance" => "Aparência"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrição forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Você realmente quer redefinir o tema? Todas as suas personalizações serão perdidas."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sim, redefinir o tema"
 // theme.groupBackground: "Background" => "Fundo"

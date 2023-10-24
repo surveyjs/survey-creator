@@ -667,6 +667,9 @@ export var indonesianStrings = {
       showPlaceholder: "Memperlihatkan tempat penampung",
       placeholder: "Teks tempat penampung"
     },
+    filePlaceholder: "Teks tempat penampung file",
+    photoPlaceholder: "Teks placeholder foto",
+    fileOrPhotoPlaceholder: "Teks placeholder file atau foto",
     rateType: "Jenis tarif"
   },
   // Property values
@@ -904,7 +907,10 @@ export var indonesianStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\"."
+    keyName: "Jika kolom yang ditentukan berisi nilai yang identik, survei akan memunculkan kesalahan \"Nilai kunci tidak unik\".",
+    filePlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia",
+    photoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\".",
+    fileOrPhotoPlaceholder: "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
   },
   // Properties
   p: {
@@ -1844,6 +1850,17 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.surveyJsonExportButton: "Export" => "Ekspor"
 // ed.surveyJsonImportButton: "Import" => "Mengimpor"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Salin ke papan klip"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Teks tempat penampung file"
+// pe.photoPlaceholder: "Photo placeholder text" => "Teks placeholder foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Teks placeholder file atau foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Berlaku ketika \"Jenis sumber\" adalah \"File lokal\" atau ketika kamera tidak tersedia"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Berlaku ketika \"Jenis sumber\" adalah \"File atau kamera lokal\"."
+// theme.groupBackground: "Background" => "Latar"
+// theme.groupAppearance: "Appearance" => "Rupa"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, atur ulang tema"
 // lg.expressionSetup: "" => ""

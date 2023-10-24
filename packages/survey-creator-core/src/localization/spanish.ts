@@ -667,6 +667,9 @@ var spanishTranslation = {
       showPlaceholder: "Mostrar el marcador de posición",
       placeholder: "Texto de marcador de posición"
     },
+    filePlaceholder: "Texto del marcador de posición del archivo",
+    photoPlaceholder: "Texto del marcador de posición de la foto",
+    fileOrPhotoPlaceholder: "Texto de marcador de posición de archivo o foto",
     rateType: "Tipo de tarifa"
   },
   // Property values
@@ -904,7 +907,10 @@ var spanishTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Si la columna especificada contiene valores idénticos, la encuesta arroja el error \"Valor de clave no única\"."
+    keyName: "Si la columna especificada contiene valores idénticos, la encuesta arroja el error \"Valor de clave no única\".",
+    filePlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales\" o cuando la cámara no está disponible",
+    photoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Cámara\".",
+    fileOrPhotoPlaceholder: "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\"."
   },
   // Properties
   p: {
@@ -1457,6 +1463,16 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.surveyJsonExportButton: "Export" => "Exportar"
 // ed.surveyJsonImportButton: "Import" => "Importación"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copiar en el portapapeles"
+// lg.expressionSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Texto del marcador de posición del archivo"
+// pe.photoPlaceholder: "Photo placeholder text" => "Texto del marcador de posición de la foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texto de marcador de posición de archivo o foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales\" o cuando la cámara no está disponible"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Cámara\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Se aplica cuando \"Tipo de fuente\" es \"Archivos locales o cámara\"."
+// theme.groupBackground: "Background" => "Fondo"
+// theme.groupAppearance: "Appearance" => "Apariencia"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sí, restablece el tema"
 // lg.expressionSetup: "" => ""

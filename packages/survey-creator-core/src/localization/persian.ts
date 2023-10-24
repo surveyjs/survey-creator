@@ -667,6 +667,9 @@ var persianStrings = {
       showPlaceholder: "نشان دادن نگهدارندهی مکان",
       placeholder: "متن ذی نفع"
     },
+    filePlaceholder: "متن نگهدارنده پرونده",
+    photoPlaceholder: "متن نگهدارنده عکس",
+    fileOrPhotoPlaceholder: "متن جایدار پرونده یا عکس",
     rateType: "نوع نرخ"
   },
   // Property values
@@ -904,7 +907,10 @@ var persianStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند."
+    keyName: "اگر ستون مشخص شده حاوی مقادیر یکسان باشد، نظرسنجی خطای \"مقدار کلیدی غیر منحصر به فرد\" را پرتاب می کند.",
+    filePlaceholder: "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست",
+    photoPlaceholder: "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود.",
+    fileOrPhotoPlaceholder: "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
   },
   // Properties
   p: {
@@ -1630,6 +1636,15 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.surveyJsonExportButton: "Export" => "صادرات"
 // ed.surveyJsonImportButton: "Import" => "واردات"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "رونوشت در تخته یادداشت"
+// pe.filePlaceholder: "File placeholder text" => "متن نگهدارنده پرونده"
+// pe.photoPlaceholder: "Photo placeholder text" => "متن نگهدارنده عکس"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "متن جایدار پرونده یا عکس"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "اعمال می شود زمانی که \"نوع منبع\" است \"فایل های محلی\" و یا زمانی که دوربین در دسترس نیست"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "هنگامی که \"نوع منبع\" \"دوربین\" است، اعمال می شود."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "زمانی اعمال می شود که \"نوع منبع\" \"فایل های محلی یا دوربین\" باشد."
+// theme.groupBackground: "Background" => "پس زمینه"
+// theme.groupAppearance: "Appearance" => "ظاهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "توصیف پیشرنگ"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "ایا واقعا می خواهید موضوع را دوباره تنظیم کنید؟ تمام سفارشی سازی های شما از دست خواهد رفت."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "بله، موضوع را تنظیم مجدد کنید"
 // theme.groupBackground: "Background" => "پس زمینه"

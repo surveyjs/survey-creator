@@ -668,6 +668,9 @@ export var enStrings = {
       showPlaceholder: "Show the placeholder",
       placeholder: "Placeholder text"
     },
+    filePlaceholder: "File placeholder text",
+    photoPlaceholder: "Photo placeholder text",
+    fileOrPhotoPlaceholder: "File or photo placeholder text",
     rateType: "Rate type" // Auto-generated string
   },
   // Property values
@@ -905,7 +908,10 @@ export var enStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
+    filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable",
+    photoPlaceholder: "Applies when \"Source type\" is \"Camera\".",
+    fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"."
   },
   // Properties
   p: {

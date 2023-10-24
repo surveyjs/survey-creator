@@ -667,6 +667,9 @@ export var fiStrings = {
       showPlaceholder: "Paikkamerkin näyttäminen",
       placeholder: "Paikkamerkkiteksti"
     },
+    filePlaceholder: "Tiedoston paikkamerkkiteksti",
+    photoPlaceholder: "Valokuvan paikkamerkkiteksti",
+    fileOrPhotoPlaceholder: "Tiedoston tai valokuvan paikkamerkkiteksti",
     rateType: "Hinnan tyyppi"
   },
   // Property values
@@ -904,7 +907,10 @@ export var fiStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen."
+    keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen.",
+    filePlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä",
+    photoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\".",
+    fileOrPhotoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\"."
   },
   // Properties
   p: {
@@ -1689,6 +1695,17 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.surveyJsonExportButton: "Export" => "Vienti"
 // ed.surveyJsonImportButton: "Import" => "Tuoda"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopioi leikepöydälle"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tiedoston paikkamerkkiteksti"
+// pe.photoPlaceholder: "Photo placeholder text" => "Valokuvan paikkamerkkiteksti"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tiedoston tai valokuvan paikkamerkkiteksti"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\"."
+// theme.groupBackground: "Background" => "Tausta"
+// theme.groupAppearance: "Appearance" => "Ulkonäkö"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Kyllä, nollaa teema"
 // lg.expressionSetup: "" => ""
@@ -1701,4 +1718,4 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Paikkamerkin näyttäminen"
 // signaturepad.placeholder: "Placeholder text" => "Paikkamerkkiteksti"
-// theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"
+// theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"r

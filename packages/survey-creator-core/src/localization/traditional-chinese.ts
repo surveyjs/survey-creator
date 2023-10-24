@@ -667,6 +667,9 @@ var traditionalChineseTranslation = {
       showPlaceholder: "顯示佔位元",
       placeholder: "佔位元文本"
     },
+    filePlaceholder: "檔佔位元文本",
+    photoPlaceholder: "照片占位元文本",
+    fileOrPhotoPlaceholder: "檔或照片佔位元文字",
     rateType: "費率類型"
   },
   // Property values
@@ -904,7 +907,10 @@ var traditionalChineseTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。"
+    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
+    filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
+    photoPlaceholder: "當「源類型」為「相機」時適用。",
+    fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。"
   },
   // Properties
   p: {
@@ -1968,6 +1974,17 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.surveyJsonExportButton: "Export" => "出口"
 // ed.surveyJsonImportButton: "Import" => "進口"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "複製到剪貼板"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "檔佔位元文本"
+// pe.photoPlaceholder: "Photo placeholder text" => "照片占位元文本"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "檔或照片佔位元文字"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "當「源類型」為「本地檔」或相機不可用時適用"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "當「源類型」為「相機」時適用。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "當「源類型」為「本地檔或相機」時適用。"
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外觀"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主題嗎？您的所有自定義項都將丟失。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主題"
 // lg.expressionSetup: "" => ""

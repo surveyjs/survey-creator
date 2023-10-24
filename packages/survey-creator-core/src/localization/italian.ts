@@ -667,6 +667,9 @@ var italianTranslation = {
       showPlaceholder: "Visualizzare il segnaposto",
       placeholder: "Testo segnaposto"
     },
+    filePlaceholder: "Testo segnaposto del file",
+    photoPlaceholder: "Testo segnaposto foto",
+    fileOrPhotoPlaceholder: "Testo segnaposto per file o foto",
     rateType: "Tipo di tariffa"
   },
   // Property values
@@ -904,7 +907,10 @@ var italianTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Se la colonna specificata contiene valori identici, il sondaggio produce l'errore \"Valore chiave non univoco\"."
+    keyName: "Se la colonna specificata contiene valori identici, il sondaggio produce l'errore \"Valore chiave non univoco\".",
+    filePlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile",
+    photoPlaceholder: "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\".",
+    fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
   },
   // Properties
   p: {
@@ -1433,6 +1439,15 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.surveyJsonExportButton: "Export" => "Esportazione"
 // ed.surveyJsonImportButton: "Import" => "Importazione"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copia negli Appunti"
+// pe.filePlaceholder: "File placeholder text" => "Testo segnaposto del file"
+// pe.photoPlaceholder: "Photo placeholder text" => "Testo segnaposto foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Testo segnaposto per file o foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
+// theme.groupBackground: "Background" => "Sfondo"
+// theme.groupAppearance: "Appearance" => "Apparenza"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vuoi davvero resettare il tema? Tutte le tue personalizzazioni andranno perse."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sì, reimposta il tema"
 // theme.groupBackground: "Background" => "Sfondo"

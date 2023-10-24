@@ -667,6 +667,9 @@ export var arStrings = {
       showPlaceholder: "إظهار العنصر النائب",
       placeholder: "نص العنصر النائب"
     },
+    filePlaceholder: "نص العنصر النائب للملف",
+    photoPlaceholder: "نص العنصر النائب للصورة",
+    fileOrPhotoPlaceholder: "نص العنصر النائب للملف أو الصورة",
     rateType: "نوع السعر"
   },
   // Property values
@@ -904,7 +907,10 @@ export var arStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\"."
+    keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
+    filePlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة",
+    photoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\".",
+    fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
   },
   // Properties
   p: {
@@ -1600,6 +1606,17 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.surveyJsonExportButton: "Export" => "تصدير"
 // ed.surveyJsonImportButton: "Import" => "استورد"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "نسخ إلى الحافظة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "نص العنصر النائب للملف"
+// pe.photoPlaceholder: "Photo placeholder text" => "نص العنصر النائب للصورة"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "نص العنصر النائب للملف أو الصورة"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
+// theme.groupBackground: "Background" => "خلفية"
+// theme.groupAppearance: "Appearance" => "مظهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
 // lg.expressionSetup: "" => ""

@@ -71,11 +71,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     draggedElementJson: JsonObject,
     toolboxItemModel: IQuestionToolboxItem
   ): void {
-    const preventSaveTargetNode = true;
     const draggedElement: any = this.createElementFromJson(draggedElementJson);
     draggedElement.toolboxItemTitle = toolboxItemModel.title;
     draggedElement.toolboxItemIconName = toolboxItemModel.iconName;
-    this.startDrag(event, draggedElement, null, null, preventSaveTargetNode);
+    this.startDrag(event, draggedElement);
   }
 
   public startDragSurveyElement(

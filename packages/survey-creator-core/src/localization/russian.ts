@@ -667,6 +667,9 @@ export var ruStrings = {
       showPlaceholder: "Показать заполнитель",
       placeholder: "Замещающий текст"
     },
+    filePlaceholder: "Замещающий текст файла",
+    photoPlaceholder: "Замещающий текст фотографии",
+    fileOrPhotoPlaceholder: "Замещающий текст файла или фотографии",
     rateType: "Тип тарифа"
   },
   // Property values
@@ -904,7 +907,10 @@ export var ruStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа»."
+    keyName: "Если указанный столбец содержит одинаковые значения, опрос выдает ошибку «Неуникальное значение ключа».",
+    filePlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна",
+    photoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Камера\".",
+    fileOrPhotoPlaceholder: "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\"."
   },
   // Properties
   p: {
@@ -1018,7 +1024,7 @@ export var ruStrings = {
     groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
     groupBackground: "Фон",
-    groupAppearance: "Внешность",
+    groupAppearance: "Внешний вид",
     themeName: "Тема",
     themeMode: "Внешний вид вопроса",
     themeModePanels: "По умолчанию",
@@ -1030,7 +1036,7 @@ export var ruStrings = {
     primaryDarkColor: "Парить",
     primaryLightColor: "Выбранный",
     coverTitleForecolor: "Цвет заголовка",
-    coverDescriptionForecolor: "Описание форколора",
+    coverDescriptionForecolor: "Цвет описания",
     coverOverlapEnabled: "Перекрытие",
     backgroundDimColor: "Цвет фона",
     backgroundImage: "Фоновое изображение",
@@ -1751,6 +1757,17 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.surveyJsonExportButton: "Export" => "Экспорт"
 // ed.surveyJsonImportButton: "Import" => "Импорт"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Копировать в буфер"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Замещающий текст файла"
+// pe.photoPlaceholder: "Photo placeholder text" => "Замещающий текст фотографии"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Замещающий текст файла или фотографии"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Применяется, когда \"Тип источника\" имеет значение \"Локальные файлы\" или когда камера недоступна"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Применяется, если \"Тип источника\" имеет значение \"Камера\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Применяется, если \"Тип источника\" имеет значение \"Локальные файлы или камера\"."
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Внешность"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, сбросьте тему"
 // lg.expressionSetup: "" => ""

@@ -1,5 +1,7 @@
 import { Action, IAction } from "survey-core";
 import { SurveyElementActionContainer } from "../src/components/action-container-view-model";
+import { CreatorTester } from "./creator-tester";
+import { QuestionAdornerViewModel } from "../src/components/question";
 
 test("SurveyElementActionContainer with subtypes fit", () => {
   const actionContainer = new SurveyElementActionContainer();
@@ -169,4 +171,34 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.getActionById("delete").mode).toBe("popup");
   expect(actionContainer.dotsItem.visible).toBeTruthy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(3);
+});
+
+test("actions and creator.onPropertyValueChanging", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  let isRequiredNewValue = false;
+  creator.onPropertyValueChanging.add((sender, options) => {
+    if(options.propertyName === "isRequired") {
+      options.newValue = isRequiredNewValue;
+    }
+    if(options.propertyName === "inputType" && options.newValue === "tel") {
+      options.newValue = "date";
+    }
+  });
+  const q1 = creator.survey.getQuestionByName("q1");
+  const q1Adapter = new QuestionAdornerViewModel(creator, q1, <any>undefined);
+  q1Adapter.actionContainer.getActionById("isrequired").action();
+  expect(q1.isRequired).toBeFalsy();
+  isRequiredNewValue = true;
+  q1Adapter.actionContainer.getActionById("isrequired").action();
+  expect(q1.isRequired).toBeTruthy();
+
+  let action = q1Adapter.getActionById("convertInputType");
+  expect(action).toBeTruthy();
+  const popup = action.popupModel;
+  expect(popup).toBeTruthy();
+  const list = popup.contentComponentData.model;
+  list.onSelectionChanged(list.actions.filter(item => item.id === "tel")[0]);
+  expect(q1.inputType).toBe("date");
+  expect(action.title).toBe("Date");
 });

@@ -667,6 +667,9 @@ export var czStrings = {
       showPlaceholder: "Zobrazení zástupného symbolu",
       placeholder: "Zástupný text"
     },
+    filePlaceholder: "Text zástupného symbolu souboru",
+    photoPlaceholder: "Text zástupného symbolu fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text souboru nebo fotografie",
     rateType: "Typ sazby"
   },
   // Property values
@@ -904,7 +907,10 @@ export var czStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“."
+    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“.",
+    filePlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná",
+    photoPlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
   },
   // Properties
   p: {
@@ -1240,6 +1246,15 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.surveyJsonExportButton: "Export" => "Vývoz"
 // ed.surveyJsonImportButton: "Import" => "Dovoz"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Zkopírovat do schránky"
+// pe.filePlaceholder: "File placeholder text" => "Text zástupného symbolu souboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Text zástupného symbolu fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text souboru nebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
 // theme.groupBackground: "Background" => "Pozadí"
@@ -1249,3 +1264,4 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
 // theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
+

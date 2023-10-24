@@ -667,6 +667,9 @@ var polishStrings = {
       showPlaceholder: "Pokazywanie symbolu zastępczego",
       placeholder: "Tekst zastępczy"
     },
+    filePlaceholder: "Tekst zastępczy pliku",
+    photoPlaceholder: "Tekst zastępczy zdjęcia",
+    fileOrPhotoPlaceholder: "Tekst zastępczy pliku lub zdjęcia",
     rateType: "Rodzaj stawki"
   },
   // Property values
@@ -904,7 +907,10 @@ var polishStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\"."
+    keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\".",
+    filePlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna",
+    photoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\".",
+    fileOrPhotoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\"."
   },
   // Properties
   p: {
@@ -1963,6 +1969,17 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.surveyJsonExportButton: "Export" => "Eksport"
 // ed.surveyJsonImportButton: "Import" => "Import"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiuj do schowka"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tekst zastępczy pliku"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst zastępczy zdjęcia"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst zastępczy pliku lub zdjęcia"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\"."
+// theme.groupBackground: "Background" => "Tło"
+// theme.groupAppearance: "Appearance" => "Wygląd"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
 // lg.expressionSetup: "" => ""

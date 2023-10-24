@@ -51,7 +51,7 @@ $blue: var(--sjs-special-blue, #437fd9);
 $blue-light: var(--sjs-special-blue-light, var(--blue-light, rgba(67, 127, 217, 0.1)));
 $blue-forecolor: var(--sjs-special-blue-forecolor, #ffffff);
 
-$font-family: var(--font-family);
+$font-family: var(--sjs-font-family, var(--font-family));
 $font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 

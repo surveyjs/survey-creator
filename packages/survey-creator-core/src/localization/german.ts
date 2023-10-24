@@ -667,6 +667,9 @@ var germanTranslation = {
       showPlaceholder: "Platzhalter anzeigen",
       placeholder: "Platzhaltertext"
     },
+    filePlaceholder: "Platzhaltertext für Dateien",
+    photoPlaceholder: "Platzhaltertext für Fotos",
+    fileOrPhotoPlaceholder: "Datei- oder Foto-Platzhaltertext",
     rateType: "Ansicht der Bewertungssymbole"
   },
   // Property values
@@ -904,7 +907,10 @@ var germanTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus."
+    keyName: "Wenn die angegebene Spalte identische Werte enthält, löst die Umfrage den Fehler \"Nicht eindeutiger Schlüsselwert\" aus.",
+    filePlaceholder: "Gilt, wenn \"Quelltyp\" \"Lokale Dateien\" ist oder wenn die Kamera nicht verfügbar ist",
+    photoPlaceholder: "Gilt, wenn der \"Quellentyp\" auf \"Kamera\" festgelegt ist.",
+    fileOrPhotoPlaceholder: "Gilt, wenn \"Quelltyp\" \"Lokale Dateien oder Kamera\" ist."
   },
   // Properties
   p: {
@@ -1412,6 +1418,17 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.surveyJsonExportButton: "Export" => "Exportieren"
 // ed.surveyJsonImportButton: "Import" => "Importieren"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "In Zwischenablage kopieren"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Platzhaltertext für Dateien"
+// pe.photoPlaceholder: "Photo placeholder text" => "Platzhaltertext für Fotos"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Datei- oder Foto-Platzhaltertext"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Gilt, wenn \"Quelltyp\" \"Lokale Dateien\" ist oder wenn die Kamera nicht verfügbar ist"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gilt, wenn der \"Quellentyp\" auf \"Kamera\" festgelegt ist."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gilt, wenn \"Quelltyp\" \"Lokale Dateien oder Kamera\" ist."
+// theme.groupBackground: "Background" => "Hintergrund"
+// theme.groupAppearance: "Appearance" => "Aussehen"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, setzen Sie das Design zurück"
 // lg.expressionSetup: "" => ""

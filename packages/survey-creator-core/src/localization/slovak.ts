@@ -667,6 +667,9 @@ export var skStrings = {
       showPlaceholder: "Zobrazenie zástupného symbolu",
       placeholder: "Zástupný text"
     },
+    filePlaceholder: "Zástupný text súboru",
+    photoPlaceholder: "Zástupný text fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text súboru alebo fotografie",
     rateType: "Typ sadzby"
   },
   // Property values
@@ -904,7 +907,10 @@ export var skStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\"."
+    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
+    filePlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii",
+    photoPlaceholder: "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
   },
   // Properties
   p: {
@@ -1643,6 +1649,17 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.surveyJsonExportButton: "Export" => "Vývoz"
 // ed.surveyJsonImportButton: "Import" => "Import"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopírovanie do schránky"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Zástupný text súboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Zástupný text fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text súboru alebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Áno, obnoviť motív"
 // lg.expressionSetup: "" => ""
