@@ -3,8 +3,6 @@ import { CreatorBase } from "survey-creator-core";
 import * as SurveyCreatorCore from "survey-creator-core";
 import * as Survey from "survey-core";
 
-Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
-
 @Component({
   selector: "test-default",
   templateUrl: "./test.component.html",
@@ -18,7 +16,11 @@ export class TestDefaultComponent implements OnInit {
     (<any>window).Survey = Survey;
     (<any>window).SurveyCreatorCore = SurveyCreatorCore;
   }
+  protected getSlk(): boolean { return true; }
   protected createCreator(): void {
+    if (this.getSlk()) {
+      Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
+    }
     this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
   }
 }
