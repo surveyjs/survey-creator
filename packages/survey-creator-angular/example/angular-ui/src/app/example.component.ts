@@ -3,8 +3,6 @@ import { SurveyModel } from "survey-core";
 import { CreatorBase } from "survey-creator-core";
 import * as Survey from "survey-core";
 
-Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
-
 const json = {
   "logoPosition": "right",
   "completedHtml": "<h3>Thank you for your feedback.</h3><h5>Your thoughts and ideas will help us to create a great product!</h5>",
