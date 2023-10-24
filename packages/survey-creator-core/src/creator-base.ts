@@ -1220,7 +1220,7 @@ export class CreatorBase extends Base
   /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
    * @see saveSurveyFunc
    */
@@ -3169,7 +3169,7 @@ export class CreatorBase extends Base
     collection: Array<Base>,
     item: Base
   ): boolean {
-    if((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
+    if ((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
     if (this.onCollectionItemDeleting.isEmpty) return true;
     const options = {
       obj: obj,
