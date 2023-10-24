@@ -1227,7 +1227,7 @@ export class ThemeBuilder extends Base {
             elements: [
               {
                 type: "dropdown",
-                name: "--font-family",
+                name: "--sjs-font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
                 choices: [].concat(DefaultFonts),
