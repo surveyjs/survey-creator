@@ -942,7 +942,7 @@ test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () =>
   };
   let model;
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.reason === "condition-builder") {
+    if (options.reason === "condition-builder") {
       model = options.model;
     }
   });

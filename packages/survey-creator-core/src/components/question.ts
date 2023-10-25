@@ -84,7 +84,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const creator = model.creator;
     const selEl = model.surveyElement;
     const el: any = document?.activeElement;
-    if(creator.selectedElement !== selEl && !!el && !!el.blur && el.tagName.toLocaleLowerCase() === "input") {
+    if (creator.selectedElement !== selEl && !!el && !!el.blur && el.tagName.toLocaleLowerCase() === "input") {
       el.blur();
     }
     event.stopPropagation();
@@ -160,13 +160,15 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return (<any>this.element)?.isUsingCarryForward;
   }
   public createCarryForwardParams(): QuestionCarryForwardParams {
-    if(!this.isUsingCarryForward) return null;
+    if (!this.isUsingCarryForward) return null;
     const name = (<any>this.element)?.choicesFromQuestion;
-    if(!name) return null;
+    if (!name) return null;
     const question = this.creator.survey.getQuestionByName(name);
-    if(!question) return null;
-    return { question: question, text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
-      onClick: () => { this.creator.selectElement(question); } };
+    if (!question) return null;
+    return {
+      question: question, text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
+      onClick: () => { this.creator.selectElement(question); }
+    };
   }
 
   public dispose(): void {
@@ -184,7 +186,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (!this.surveyElement.isInteractiveDesignElement) {
       return;
     }
-    this.updateActionsProperties();
+    //this.updateActionsProperties();
     toggleHovered(event, element);
   }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
