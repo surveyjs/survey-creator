@@ -1,10 +1,8 @@
 import { getLocString } from "../../../editorLocalization";
 import { ComponentCollection, QuestionCustomModel, QuestionPanelDynamicModel } from "survey-core";
 
-ComponentCollection.Instance.add({
-  name: "boxshadowsettings",
-  showInToolbox: false,
-  questionJSON: {
+function getQuestionJSON() {
+  return {
     "type": "paneldynamic",
     "minPanelCount": 1,
     "panelAddText": getLocString("theme.boxShadowAddRule"),
@@ -53,13 +51,24 @@ ComponentCollection.Instance.add({
         "choices": [{ text: getLocString("theme.boxShadowDrop"), value: false }, { text: getLocString("theme.boxShadowInner"), value: true }]
       }
     ]
-  },
+  };
+}
+
+ComponentCollection.Instance.add({
+  name: "boxshadowsettings",
+  showInToolbox: false,
+  questionJSON: getQuestionJSON(),
   onCreated(question: QuestionCustomModel) {
     question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;
     question.valueToDataCallback = (value: string | Array<Object>): string => !!value ? (typeof value == "string" ? value : createBoxShadow(Array.isArray(value) ? value : [value])) : "";
     (<QuestionPanelDynamicModel>question.contentQuestion).panels.forEach(p => p.questions.forEach(q => q.allowRootStyle = false));
   },
 });
+
+export function updateBoxShadowSettingsJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("boxshadowsettings");
+  config.json.questionJSON = getQuestionJSON();
+}
 
 export function createBoxShadow(value: Array<any>): string {
   return value.map((val => `${val.isInset == true ? "inset " : ""}${val.x ?? 0}px ${val.y ?? 0}px ${val.blur ?? 0}px ${val.spread ?? 0}px ${val.color ?? "#000000"}`

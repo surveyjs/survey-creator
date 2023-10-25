@@ -15,6 +15,7 @@ import { settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
 
 import "survey-core/survey.i18n";
+import { editorLocalization } from "../../src/editorLocalization";
 
 const themeFromFile = {
   "cssVariables": {
@@ -2366,4 +2367,28 @@ test("Kepp background image on reset theme action", (): any => {
 
   surveySettings.confirmActionAsync = originalCallback;
   themePlugin.removeTheme(customTheme);
+});
+
+test("Check Theme builder's custom questions respect creator locale", (): any => {
+  editorLocalization.currentLocale = "test";
+  editorLocalization.locales["test"] = {
+    theme: {
+      opacity: "opacity_test",
+      boxShadowX: "boxShadowX_test",
+      backcolor: "backcolor_test",
+      fontFamily: "fontFamily_test"
+    }
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.locale = "test";
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  expect(themeEditor.getQuestionByName("--sjs-primary-backcolor").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
+  expect(themeEditor.getQuestionByName("--sjs-shadow-small").contentQuestion.panels[0].getQuestionByName("x").title).toBe("boxShadowX_test");
+  expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").colorTitle).toBe("backcolor_test");
+  expect(themeEditor.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
+  editorLocalization.currentLocale = "en";
 });

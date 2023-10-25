@@ -14,10 +14,8 @@ export const DefaultFonts = [
   "Verdana, sans-serif",
 ];
 
-ComponentCollection.Instance.add({
-  name: "fontsettings",
-  showInToolbox: false,
-  elementsJSON: [
+function getElementsJSON() {
+  return [
     {
       type: "dropdown",
       name: "family",
@@ -64,7 +62,13 @@ ComponentCollection.Instance.add({
       unit: "px",
       min: 0,
     }
-  ],
+  ];
+}
+
+ComponentCollection.Instance.add({
+  name: "fontsettings",
+  showInToolbox: false,
+  elementsJSON: getElementsJSON(),
   onInit() {
   },
   onCreated(question) {
@@ -76,6 +80,11 @@ ComponentCollection.Instance.add({
   onValueChanged(question, name, newValue) {
   },
 });
+
+export function updateFontSettingsJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("fontsettings");
+  config.json.elementsJSON = getElementsJSON();
+}
 
 export function fontsettingsToCssVariable(question: Question, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {

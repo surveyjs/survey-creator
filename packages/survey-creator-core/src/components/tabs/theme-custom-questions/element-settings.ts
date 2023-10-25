@@ -1,10 +1,8 @@
 import { ComponentCollection, Question, QuestionCompositeModel } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
-ComponentCollection.Instance.add({
-  name: "elementsettings",
-  showInToolbox: false,
-  elementsJSON: [
+function getElementsJSON() {
+  return [
     {
       type: "colorsettings",
       name: "backcolor",
@@ -36,7 +34,13 @@ ComponentCollection.Instance.add({
       expression: "iif({composite.corner} notempty, {composite.corner} + 'px', '')",
       visible: false
     }
-  ],
+  ];
+}
+
+ComponentCollection.Instance.add({
+  name: "elementsettings",
+  showInToolbox: false,
+  elementsJSON: getElementsJSON(),
   onInit() {
   },
   onCreated(question) {
@@ -44,6 +48,11 @@ ComponentCollection.Instance.add({
   onValueChanged(question, name, newValue) {
   },
 });
+
+export function updateElementSettingsJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("elementsettings");
+  config.json.elementsJSON = getElementsJSON();
+}
 
 export function elementSettingsToCssVariable(question: Question, themeCssVariables: {[index: string]: string}) {
   Object.keys(question.value).forEach(key => {

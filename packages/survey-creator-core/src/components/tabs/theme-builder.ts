@@ -11,6 +11,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
+import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 
 require("./theme-builder.scss");
 
@@ -140,6 +141,7 @@ export class ThemeBuilder extends Base {
     super();
     this.simulator = new SurveySimulatorModel();
     this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
+    updateCustomQuestionJSONs();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
     this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
