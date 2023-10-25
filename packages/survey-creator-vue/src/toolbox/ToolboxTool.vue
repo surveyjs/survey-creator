@@ -10,12 +10,6 @@
         v-if="item.needSeparator && !creator.toolbox.showCategoryTitles"
       ></div>
       <component
-        v-if="isDotsItem"
-        :is="item.component || 'svc-toolbox-item'"
-        :item="item"
-      ></component>
-      <component
-        v-else
         :viewModel="model"
         :is="item.component || 'svc-toolbox-item'"
         :item="item"
@@ -47,6 +41,4 @@ const toolboxCss = computed(
     (props.item.css + " " ?? "") +
     (!props.item.isVisible ? "sv-action--hidden" : "")
 );
-//to surpass warning
-const isDotsItem = computed(() => props.item.id.includes("dotsItem"));
 </script>
