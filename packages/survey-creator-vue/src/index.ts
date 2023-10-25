@@ -41,6 +41,11 @@ import TextWithReset from "./custom-questions/TextWithReset.vue";
 import { editableStringRendererName } from "survey-creator-core";
 
 import StringEditor from "./StringEditor.vue";
+import AdaptiveToolbox from "./toolbox/AdaptiveToolbox.vue";
+import ToolboxTool from "./toolbox/ToolboxTool.vue";
+import ToolboxItem from "./toolbox/ToolboxItem.vue";
+import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
+import Toolbox from "./toolbox/Toolbox.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -86,6 +91,12 @@ function registerComponents(app: App) {
   app.component("svc-tab-logic", Logic);
 
   app.component("svc-tab-theme", Theme);
+
+  app.component("svc-adaptive-toolbox", AdaptiveToolbox);
+  app.component("svc-toolbox", Toolbox);
+  app.component("svc-toolbox-category", ToolboxCategory);
+  app.component("svc-toolbox-tool", ToolboxTool);
+  app.component("svc-toolbox-item", ToolboxItem);
 
   app.component(editableStringRendererName, StringEditor);
 }
