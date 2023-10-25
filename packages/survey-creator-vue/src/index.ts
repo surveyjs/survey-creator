@@ -47,6 +47,10 @@ import ToolboxItem from "./toolbox/ToolboxItem.vue";
 import ToolboxCategory from "./toolbox/ToolboxCategory.vue";
 import Toolbox from "./toolbox/Toolbox.vue";
 
+import Designer from "./tabs/designer/Designer.vue";
+import Page from "./tabs/designer/Page.vue";
+import PageAddQuestion from "./tabs/designer/PageAddQuestion.vue";
+
 function registerComponents(app: App) {
   app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
@@ -99,6 +103,10 @@ function registerComponents(app: App) {
   app.component("svc-toolbox-item", ToolboxItem);
 
   app.component(editableStringRendererName, StringEditor);
+
+  app.component("svc-tab-designer", Designer);
+  app.component("svc-page", Page);
+  app.component("svc-add-new-question-btn", PageAddQuestion);
 }
 
 export const surveyCreatorPlugin = {
