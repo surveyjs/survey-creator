@@ -11,6 +11,7 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 - [Configure Survey Creator](#configure-survey-creator)
 - [Render Survey Creator](#render-survey-creator)
 - [Save and Load Survey Model Schemas](#save-and-load-survey-model-schemas)
+- [Manage Image Uploads](#manage-image-uploads)
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
@@ -299,7 +300,6 @@ function saveSurveyJson(url: string | URL, json: object, saveNo: number, callbac
 
 To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
-
 ```js
 const defaultJson = {
   pages: [{
@@ -328,8 +328,6 @@ export class SurveyCreatorComponent implements OnInit {
   }
 }
 ```
-
-To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 <details>
   <summary>View Full Code</summary>
@@ -444,6 +442,185 @@ import { SurveyCreatorComponent } from './survey-creator/survey-creator.componen
 export class AppModule { }
 ```
 </details>
+
+## Manage Image Uploads
+
+When survey authors design a form or questionnaire, they can add images to use as a survey [logo](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#logo) or [background](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#backgroundImage), in the survey header, or within [Image](https://surveyjs.io/form-library/examples/add-image-and-video-to-survey/) and [Image Picker](https://surveyjs.io/form-library/examples/image-picker-question/) questions. Those images are embedded in the survey and theme JSON schemas as Base64 URLs. However, this technique increases the schema size. To avoid this, you can upload images to a server and save only image links in the JSON schemas.
+
+To implement image upload, handle the [`onUploadFile`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onUploadFile) event. Its `options.files` parameter stores the images you should send to your server. Once the server responds with an image link, call the `options.callback(status, imageLink)` method. Pass `"success"` as the `status` parameter and a link to the uploaded image as the `imageLink` parameter.
+
+```js
+// ...
+@Component({
+  // ...
+})
+export class SurveyCreatorComponent implements OnInit {
+  ngOnInit() {
+    // ...
+    creator.onUploadFile.add((_, options) => {
+      const formData = new FormData();
+      options.files.forEach((file: File) => {
+        formData.append(file.name, file);
+      });
+      fetch("https://example.com/uploadFiles", {
+        method: "post",
+        body: formData
+      }).then(response => response.json())
+        .then(result => {
+          options.callback(
+            "success",
+            // A link to the uploaded file
+            "https://example.com/files?name=" + result[options.files[0].name]
+          );
+        })
+        .catch(error => {
+          options.callback('error');
+        });
+    });
+    // ...
+  }
+}
+```
+
+<details>
+  <summary>View Full Code</summary>
+
+```html
+<!-- survey-creator.component.html -->
+<div id="surveyCreator">
+  <survey-creator [model]="surveyCreatorModel"></survey-creator>
+</div>
+```
+
+```js
+// survey-creator.component.ts
+import { Component, OnInit } from "@angular/core";
+import { SurveyCreatorModel } from "survey-creator-core";
+
+const creatorOptions = {
+  showLogicTab: true,
+  isAutoSave: true
+};
+
+const defaultJson = {
+  pages: [{
+    name: "Name",
+    elements: [{
+      name: "FirstName",
+      title: "Enter your first name:",
+      type: "text"
+    }, {
+      name: "LastName",
+      title: "Enter your last name:",
+      type: "text"
+    }]
+  }]
+};
+
+@Component({
+  selector: 'survey-creator-component',
+  templateUrl: './survey-creator.component.html',
+  styleUrls: ['./survey-creator.component.css']
+})
+export class SurveyCreatorComponent implements OnInit {
+  surveyCreatorModel: SurveyCreatorModel;
+  ngOnInit() {
+    const creator = new SurveyCreatorModel(creatorOptions);
+    creator.text = window.localStorage.getItem("survey-json") || JSON.stringify(defaultJson);
+
+    creator.saveSurveyFunc = (saveNo: number, callback: Function) => { 
+      window.localStorage.setItem("survey-json", creator.text);
+      callback(saveNo, true);
+      // saveSurveyJson(
+      //     "https://your-web-service.com/",
+      //     creator.JSON,
+      //     saveNo,
+      //     callback
+      // );
+    };
+
+    // creator.onUploadFile.add((_, options) => {
+    //   const formData = new FormData();
+    //   options.files.forEach((file: File) => {
+    //     formData.append(file.name, file);
+    //   });
+    //   fetch("https://example.com/uploadFiles", {
+    //     method: "post",
+    //     body: formData
+    //   }).then(response => response.json())
+    //     .then(result => {
+    //       options.callback(
+    //         "success",
+    //         // A link to the uploaded file
+    //         "https://example.com/files?name=" + result[options.files[0].name]
+    //       );
+    //     })
+    //     .catch(error => {
+    //       options.callback('error');
+    //     });
+    // });
+
+    this.surveyCreatorModel = creator;
+  }
+}
+
+// function saveSurveyJson(url: string | URL, json: object, saveNo: number, callback: Function) {
+//   fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json;charset=UTF-8'
+//     },
+//     body: JSON.stringify(json)
+//   })
+//   .then(response => {
+//     if (response.ok) {
+//       callback(saveNo, true);
+//     } else {
+//       callback(saveNo, false);
+//     }
+//   })
+//   .catch(error => {
+//     callback(saveNo, false);
+//   });
+// }
+```
+
+```css
+/* survey-creator.component.css */
+#surveyCreator {
+    height: 100vh;
+    width: 100vw;
+}
+```
+
+```js
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { SurveyCreatorModule } from 'survey-creator-angular';
+
+import { AppComponent } from './app.component';
+import { SurveyCreatorComponent } from './survey-creator/survey-creator.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    SurveyCreatorComponent
+  ],
+  imports: [
+    BrowserModule,
+    SurveyCreatorModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+</details>
+
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))
+
+To view the application, run `ng serve` in a command line and open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/angular (linkStyle))
 
