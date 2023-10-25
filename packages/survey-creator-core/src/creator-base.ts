@@ -2520,6 +2520,11 @@ export class CreatorBase extends Base
   public set selectedElement(val: Base) {
     this.selectElement(val);
   }
+  /**
+   * Refreshes the Designer tab.
+   * 
+   * `refreshDesigner()` is useful if the Designer tab UI depends on an external variable. Call this method each time this variable changes to update the UI.
+   */
   public refreshDesigner(): void {
     if (this.activeTab !== "designer") return;
     this.changeText(this.text);
