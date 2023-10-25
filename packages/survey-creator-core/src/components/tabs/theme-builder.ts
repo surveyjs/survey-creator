@@ -175,6 +175,7 @@ export class ThemeBuilder extends Base {
       const suitableTheme = this.findSuitableTheme(this.themeName);
       assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, suitableTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
+      this.trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
         backgroundImage: this.backgroundImage || suitableTheme.backgroundImage || "",
         backgroundImageFit: this.backgroundImageFit || suitableTheme.backgroundImageFit,
@@ -589,7 +590,8 @@ export class ThemeBuilder extends Base {
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.setCssVariablesIntoCurrentTheme(newCssVariables);
+      this.trimCssVariables(newCssVariables);
+      this.currentTheme.cssVariables = newCssVariables;
       this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
@@ -630,9 +632,9 @@ export class ThemeBuilder extends Base {
     return result;
   }
   private setHeaderBackgroundColorCssVariable(headerSettings: any) {
-    let headerBackgroundColorValue = "trasparent";
-    if (headerSettings["backgroundColorSwitch"] === "accentColor") {
-      headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
+    let headerBackgroundColorValue = undefined;
+    if (headerSettings["backgroundColorSwitch"] === "none") {
+      headerBackgroundColorValue = "trasparent";
     } else if (headerSettings["backgroundColorSwitch"] === "custom") {
       headerBackgroundColorValue = headerSettings.backgroundColor;
     }
@@ -656,8 +658,8 @@ export class ThemeBuilder extends Base {
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor || backgroundColor === "trasparent") return "none";
-    if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
+    if (!backgroundColor) return "accentColor";
+    if (backgroundColor === "trasparent") return "none";
     return "custom";
   }
   private updateVisibilityOfPropertyGridGroups() {
@@ -787,13 +789,12 @@ export class ThemeBuilder extends Base {
     });
   }
 
-  private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
+  private trimCssVariables(newCssVariables: { [index: string]: string }): void {
     Object.keys(newCssVariables).forEach(key => {
       if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
         delete newCssVariables[key];
       }
     });
-    this.currentTheme.cssVariables = newCssVariables;
   }
 
   private updateSimulatorTheme() {
@@ -933,7 +934,7 @@ export class ThemeBuilder extends Base {
                     "headerView": "basic",
                     "logoPosition": "right",
                     "inheritWidthFrom": "survey",
-                    "backgroundColorSwitch": "none",
+                    "backgroundColorSwitch": "accentColor",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,
                     "overlapEnabled": false,
