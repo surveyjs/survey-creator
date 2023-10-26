@@ -328,7 +328,7 @@ export function scrollElementIntoView(elementId: string) {
   if (!elementId || typeof surveySettings.environment.root === "undefined") return;
   const el = surveySettings.environment.root.getElementById(elementId);
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+  el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
 }
 
 export function ingectAlpha(baseColor: any, alpha: number): any {

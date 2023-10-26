@@ -99,7 +99,6 @@ export class SearchManager extends Base {
       innerCss: "spg-search-editor_bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),
       action: () => {
-        // this.searchEnabled = false;
         this.filterString = "";
       }
     }));
@@ -128,8 +127,9 @@ export class SearchManager extends Base {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
     if (name === "filterString") {
+      let newValueInLow = newValue.toLocaleLowerCase();
       const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
-      this.searchResults = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValue.toLocaleLowerCase()) !== -1);
+      this.searchResults = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
 
       const newCurrentIndex = this.searchResults.indexOf(this.currentSearchResult);
       this.updateFoundEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);

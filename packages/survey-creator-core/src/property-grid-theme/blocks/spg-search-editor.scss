@@ -42,10 +42,10 @@
   color: $foreground;
 
   font-family: $font-family;
-  font-size: calcFontSize(0.75);
+  font-size: calcSize(1.5);
   font-style: normal;
   font-weight: 600;
-  line-height: calcLineHeight(1);
+  line-height: calcSize(2);
 
   border: none;
   -webkit-appearance: none;
@@ -82,10 +82,10 @@
   color: $foreground-light;
 
   font-family: $font-family;
-  font-size: calcFontSize(0.75);
   font-style: normal;
   font-weight: 600;
-  line-height: calcLineHeight(1);
+  font-size: calcSize(1.5);
+  line-height: calcSize(2);
 }
 
 .spg-search-editor_search-icon {

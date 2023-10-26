@@ -25,7 +25,7 @@ $background-dim-dark: var(--sjs-editorpanel-hovercolor, var(--sjs-general-backco
 $corner-radius: var(--sjs-corner-radius, 4px);
 
 $foreground: var(--sjs-general-forecolor, var(--foreground, #161616));
-$foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, #909090));
+$foreground-light: var(--sjs-general-forecolor-light, var(--foreground-light, rgba(0, 0, 0, 0.45)));
 $foreground-dim: var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91));
 $foreground-dim-light: var(--sjs-general-dim-forecolor-light, rgba(0, 0, 0, 0.45));
 
