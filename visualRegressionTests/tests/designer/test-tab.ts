@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText } from "../../helper";
+import { url, setJSON, getTabbedMenuItemByText, takeElementScreenshot, creatorTabPreviewName, explicitErrorHandler, urlPreviewThemeSwitcher, wrapVisualTest, getListItemByText, resetHoverToCreator } from "../../helper";
 
 const title = "Test tab Screenshot";
 
@@ -208,6 +208,7 @@ test("Hidden Question Issue: #3298", async (t) => {
 });
 
 const json3 = {
+  focusFirstQuestionAutomatic: true,
   "width": "755px",
   "widthMode": "static",
   "pages": [
@@ -241,6 +242,7 @@ test("Check survey timer", async (t) => {
 
     await t.resizeWindow(1920, 1080);
     const json = {
+      "focusFirstQuestionAutomatic": true,
       "title": "American History",
       "showTimerPanel": "bottom",
       "showTimerPanelMode": "survey",
@@ -307,6 +309,7 @@ test("Check survey timer", async (t) => {
     await setJSON(json);
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(Selector(".sd-navigation__start-btn"));
+    await resetHoverToCreator(t);
     await takeElementScreenshot("survey-timer.png", Selector(".svc-creator__content-wrapper"), t, comparer);
   });
 });
@@ -319,5 +322,45 @@ test("empty survey", async (t) => {
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await takeElementScreenshot("test-tab-empty-survey.png", simulator, t, comparer);
+  });
+});
+test("dropdown popup in simulator", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const simulator = Selector(".svd-simulator-content");
+    await t.resizeWindow(1800, 600);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "nps-score",
+              "rateCount": 11,
+              "rateMin": 0,
+              "rateMax": 10,
+              "minRateDescription": "Very unlikely",
+              "maxRateDescription": "Very likely"
+            },
+            {
+              "type": "comment",
+              "name": "disappointing-experience",
+              "visible": false,
+              "visibleIf": "{nps-score} <= 5",
+              "maxLength": 300
+            }
+          ]
+        }
+      ]
+    });
+
+    await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
+    await t.click(Selector('[title="Select device type"]'));
+    await t.click(Selector("span").withText("iPhone X"));
+    await t.click(Selector('[data-name="nps-score"]'));
+    await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
+    await t.click(Selector('[data-name="nps-score"]'));
+    await takeElementScreenshot("test-tab-opened-dropdown.png", simulator, t, comparer);
   });
 });

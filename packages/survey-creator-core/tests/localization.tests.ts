@@ -38,6 +38,8 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty2")).toEqual("Question2");
   expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty3")).toEqual("Question3");
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty3")).toEqual("Question3");
+
+  expect(editorLocalization.getPropertyNameInEditor("expression", "format")).toEqual("Formatted string");
 });
 test("Get property description from peHelp. based on class name", () => {
   const peHelp: any = defaultStrings.pehelp;
@@ -160,6 +162,7 @@ test("Change Creator locale property", (): any => {
     },
     pe: {
       title: "Titel",
+      format: "Format de"
     },
     qt: {
       text: "Text"
@@ -167,18 +170,22 @@ test("Change Creator locale property", (): any => {
   };
   editorLocalization.locales["de"] = deutschStrings;
   const creator = new CreatorTester({ showLogicTab: true, showTranslationTab: true });
-  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }] }] };
+  creator.JSON = { pages: [{ name: "page1", elements: [{ type: "text", name: "q1" }, { type: "expression", name: "q2" }] }] };
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");
   const tabButton = creator.tabs.filter(item => item.title === "Logic")[0];
   const tabPreview = creator.tabs.filter(item => item.title === "Preview")[0];
   const textQuestion = creator.toolbox.actions.filter(item => item.title === "Single-Line Input")[0];
   const saveAction = creator.toolbar.actions.filter(item => item.title === "Save Survey")[0];
   expect(tabPreview).toBeTruthy();
+
   creator.locale = "de";
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Titel");
   expect(tabButton.title).toEqual("Logik");
   expect(textQuestion.title).toEqual("Text");
   expect(saveAction.locTitle.text).toEqual("Umfrage speichern");
+  creator.selectElement(creator.survey.getQuestionByName("q2"));
+  expect(creator.propertyGrid.getQuestionByName("format").title).toEqual("Format de");
+  creator.selectElement(creator.survey);
 
   creator.locale = "";
   expect(creator.propertyGrid.getQuestionByName("title").title).toEqual("Title");

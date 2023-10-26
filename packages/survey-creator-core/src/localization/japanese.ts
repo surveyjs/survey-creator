@@ -50,6 +50,8 @@ export var jaStrings = {
     settingsTooltip: "アンケートの設定を開く",
     surveySettings: "アンケート設定",
     surveySettingsTooltip: "アンケート設定を開く",
+    themeSettings: "テーマ設定",
+    themeSettingsTooltip: "テーマ設定を開く",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -134,11 +136,18 @@ export var jaStrings = {
     translationNoStrings: "翻訳する文字列がありません。フィルターを変更してください。",
     translationExportToSCVButton: "CSVにエクスポートする",
     translationImportFromSCVButton: "CSVからインポートする",
+    translateUsigAI: "すべて自動翻訳",
+    translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
     themeExportButton: "輸出",
     themeImportButton: "輸入",
+    surveyJsonExportButton: "輸出",
+    surveyJsonImportButton: "輸入",
+    surveyJsonCopyButton: "クリップボードにコピー",
     themeResetButton: "テーマ設定をデフォルトにリセットする",
+    themeResetConfirmation: "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。",
+    themeResetConfirmationOk: "はい、テーマをリセットします",
     bold: "太字",
     italic: "イタリック",
     underline: "下線",
@@ -164,9 +173,13 @@ export var jaStrings = {
       question_visibilityName: "質問の可視性",
       question_enableName: "質問の有効化/無効化",
       question_requireName: "質問オプションが必要",
+      question_resetValueName: "質問値のリセット",
+      question_setValueName: "質問値の設定",
       column_visibilityName: "列を表示 (非表示)",
       column_enableName: "有効 (無効) 列",
       column_requireName: "列を必須にする",
+      column_resetValueName: "列の値をリセット",
+      column_setValueName: "列の値を設定する",
       trigger_completeName: "アンケートを完了する",
       trigger_setvalueName: "質問の値を設定する",
       trigger_copyvalueName: "質問の値をコピーする",
@@ -193,9 +206,14 @@ export var jaStrings = {
       question_visibilityText: "質問{0}を表示にする", //{0} question name
       question_enableText: "質問{0}を有効にする", //{0} question name
       question_requireText: "質問{0}を必須にする", //{0} question name
+      question_resetValueText: "質問のリセット値:{0}",
+      question_setValueText: "値の割り当て: 質問への{1}: {0}",
       column_visibilityText: "質問{1}の列{0}を表示する", //{0} column name, {1} question name
       column_enableText: "質問の列{0}を有効にする{1}", //{0} column name, {1} question name
       column_requireText: "質問{1}の列{0}を必須にする", //{0} column name, {1} question name
+      column_resetValueText: "列のセル値をリセット:{0}",
+      column_setValueText: "セル値の割り当て:列への{1}:{0}",
+      setValueExpressionPlaceholder: "結果が対象の質問に割り当てられる式。",
       trigger_completeText: "アンケートが完了する",
       trigger_setvalueText: "質問：{0}値{1}に設定する", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "明確な質問値:{0}", //{0} question name
@@ -261,6 +279,7 @@ export var jaStrings = {
     fastEntry: "高速入力",
     fastEntryNonUniqueError: "値 '{0}' は一意ではありません",
     fastEntryChoicesCountError: "アイテムの数は{0}から{1}に制限してください",
+    fastEntryChoicesMinCountError: "{0}項目以上入力してください",
     fastEntryPlaceholder: "次の形式でデータを設定できます。\n値 1|テキスト\n値 2",
     formEntry: "フォーム入力",
     testService: "サービスをテスト",
@@ -279,6 +298,7 @@ export var jaStrings = {
     cellsEmptyRowsColumns: "少なくとも1つの列または行を含む必要があります",
     showPreviewBeforeComplete: "アンケートを送信する前に回答をプレビューする",
     overridingPropertyPrefix: "設定者",
+    resetToDefaultCaption: "リセット",
     propertyIsEmpty: "値を入力してください",
     propertyIsNoUnique: "固有値を入力してください",
     propertyNameIsNotUnique: "固有名を入力してください",
@@ -324,6 +344,8 @@ export var jaStrings = {
     choicesOrder: "選択順",
     visible: "表示",
     isRequired: "必須",
+    markRequired: "必須としてマーク",
+    removeRequiredMark: "必要なマークを削除する",
     isAllRowRequired: "全ての列で回答必須",
     requiredErrorText: "必要なエラーテキスト",
     startWithNewLine: "ニューラインで開始",
@@ -405,7 +427,12 @@ export var jaStrings = {
       imageHeight: "画像の高さ (CSS で受け入れられる値)",
       imageWidth: "画像の幅 (CSS で受け入れられる値)"
     },
+    // survey templates
+    survey: {
+      title: "タイトル"
+    },
     page: {
+      title: "タイトル",
       maxTimeToFinish: "ページを終了するための制限時間 (秒単位)"
     },
     question: {
@@ -636,12 +663,22 @@ export var jaStrings = {
     columnsVisibleIf: "列は次の場合に表示されます。",
     rowsVisibleIf: "行は次の場合に表示されます。",
     otherPlaceholder: "コメント領域のプレースホルダー",
+    signaturepad: {
+      showPlaceholder: "プレースホルダーを表示する",
+      placeholder: "プレースホルダテキスト"
+    },
+    filePlaceholder: "ファイル プレースホルダー テキスト",
+    photoPlaceholder: "写真の代替テキスト",
+    fileOrPhotoPlaceholder: "ファイルまたは写真のプレースホルダーテキスト",
     rateType: "レートタイプ"
   },
   // Property values
   pv: {
     "true": "真",
     "false": "偽",
+    file: "ローカルファイル",
+    camera: "カメラ",
+    "file-camera": "ローカルファイルまたはカメラ",
     inherit: "継承する",
     show: "表示する",
     hide: "非表示にする",
@@ -870,7 +907,10 @@ export var jaStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。"
+    keyName: "指定した列に同じ値が含まれている場合、調査は「一意でないキー値」エラーをスローします。",
+    filePlaceholder: "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます",
+    photoPlaceholder: "「ソースタイプ」が「カメラ」の場合に適用されます。",
+    fileOrPhotoPlaceholder: "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ export var jaStrings = {
     descriptionLocation: "説明の場所",
     defaultValueExpression: "デフォルト値式",
     requiredIf: "次の場合に必要",
+    resetValueIf: "次の場合に値をリセット",
+    setValueIf: "次の場合に値を設定します",
     validators: "バリデータ",
     bindings: "バインド",
     renderAs: "レンダリング形式",
@@ -980,6 +1022,9 @@ export var jaStrings = {
     "--base-unit": "ベースユニット",
     groupGeneral: "全般",
     groupAdvanced: "アドバンスド",
+    groupHeader: "ヘッダ",
+    groupBackground: "バックグラウンド",
+    groupAppearance: "様子",
     themeName: "テーマ",
     themeMode: "質問の外観",
     themeModePanels: "デフォルト",
@@ -990,11 +1035,16 @@ export var jaStrings = {
     primaryDefaultColor: "デフォルト",
     primaryDarkColor: "ホバー",
     primaryLightColor: "入選",
+    coverTitleForecolor: "タイトル前色",
+    coverDescriptionForecolor: "説明前色",
+    coverOverlapEnabled: "オーバーラップ",
     backgroundDimColor: "背景色",
     backgroundImage: "背景画像",
     backgroundImageFitAuto: "自動",
     backgroundImageFitCover: "覆う",
     backgroundImageFitContain: "含む",
+    backgroundImageFitFill: "伸ばす",
+    backgroundImageFitTile: "瓦",
     backgroundOpacity: "不透明",
     backgroundImageAttachmentFixed: "付け",
     backgroundImageAttachmentScroll: "スクロール",
@@ -1027,6 +1077,7 @@ export var jaStrings = {
     scale: "規模",
     cornerRadius: "コーナー半径",
     surveyTitle: "アンケートタイトルのフォント",
+    surveyDescription: "調査の説明フォント",
     pageTitle: "ページタイトルのフォント",
     pageDescription: "ページ記述フォント",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ export var jaStrings = {
     boxShadowInner: "内的",
     questionShadow: "シャドウ効果",
     editorShadow: "入力要素の影の効果",
+    headerView: "眺める",
+    headerViewBasic: "基本的な",
+    headerViewAdvanced: "アドバンスド",
+    coverInheritWidthFrom: "コンテンツ領域の幅",
+    coverInheritWidthFromSurvey: "調査と同じ",
+    coverInheritWidthFromContainer: "コンテナに合わせる",
+    coverTextAreaWidth: "テキスト幅",
+    coverBackgroundColorSwitch: "背景色",
+    coverBackgroundColorNone: "何一つ",
+    coverBackgroundColorAccentColor: "アクセントカラー",
+    coverBackgroundColorCustom: "習慣",
+    horizontalAlignmentLeft: "左",
+    horizontalAlignmentCenter: "センター",
+    horizontalAlignmentRight: "右",
+    verticalAlignmentTop: "ページのトップへ",
+    verticalAlignmentMiddle: "中央",
+    verticalAlignmentBottom: "底",
+    logoPosition: "ロゴの位置",
+    coverTitlePosition: "タイトル位置",
+    coverDescriptionPosition: "説明位置",
     names: {
       default: "デフォルト",
       sharp: "鋭い",
@@ -1563,3 +1634,89 @@ editorLocalization.locales["ja"] = jaStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "プレースホルダの色"
+// ed.themeSettings: "Theme Settings" => "テーマ設定"
+// ed.themeSettingsTooltip: "Open theme settings" => "テーマ設定を開く"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "リセット"
+// pv.file: "Local files" => "ローカルファイル"
+// pv.camera: "Camera" => "カメラ"
+// pv.file-camera: "Local files or camera" => "ローカルファイルまたはカメラ"
+// ed.translateUsigAI: "Auto-translate All" => "すべて自動翻訳"
+// ed.translationDialogTitle: "Untranslated strings" => "未翻訳の文字列"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
+// lg.question_resetValueName: "Reset question value" => "質問値のリセット"
+// lg.column_resetValue: "Reset column value" => "列の値をリセット"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "必須としてマーク"
+// pe.removeRequiredMark: "Remove the required mark" => "必要なマークを削除する"
+// p.resetValueIf: "Reset value if" => "次の場合に値をリセット"
+
+// lg.question_setValueName: "Set question value" => "質問値の設定"
+// lg.column_resetValueName: "Reset column value" => "列の値をリセット"
+// lg.column_setValueName: "Set column value" => "列の値を設定する"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "結果が対象の質問に割り当てられる式。"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "タイトル"
+// page.title: "Title" => "タイトル"
+// p.setValueIf: "Set value if" => "次の場合に値を設定します"
+// theme.groupHeader: "Header" => "ヘッダ"
+// theme.coverTitleForecolor: "Title forecolor" => "タイトル前色"
+// theme.coverOverlapEnabled: "Overlap" => "オーバーラップ"
+// theme.backgroundImageFitFill: "Stretch" => "伸ばす"
+// theme.backgroundImageFitTile: "Tile" => "瓦"
+// theme.headerView: "View" => "眺める"
+// theme.headerViewBasic: "Basic" => "基本的な"
+// theme.headerViewAdvanced: "Advanced" => "アドバンスド"
+// theme.coverInheritWidthFrom: "Content area width" => "コンテンツ領域の幅"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "調査と同じ"
+// theme.coverInheritWidthFromPage: "Fit to page" => "ページに合わせる"
+// theme.coverTextAreaWidth: "Text width" => "テキスト幅"
+// theme.coverBackgroundColorSwitch: "Background color" => "背景色"
+// theme.coverBackgroundColorNone: "None" => "何一つ"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "アクセントカラー"
+// theme.coverBackgroundColorCustom: "Custom" => "習慣"
+// theme.horizontalAlignmentLeft: "Left" => "左"
+// theme.horizontalAlignmentCenter: "Center" => "センター"
+// theme.horizontalAlignmentRight: "Right" => "右"
+// theme.verticalAlignmentTop: "Top" => "ページのトップへ"
+// theme.verticalAlignmentMiddle: "Middle" => "中央"
+// theme.verticalAlignmentBottom: "Bottom" => "底"
+// theme.logoPosition: "Logo Position" => "ロゴの位置"
+// theme.coverTitlePosition: "Title Position" => "タイトル位置"
+// theme.coverDescriptionPosition: "Description Position" => "説明位置"
+// lg.question_resetValueText: "reset value for question: {0}" => "質問のリセット値:{0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "値の割り当て: 質問への{1}: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "列のセル値をリセット:{0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "セル値の割り当て:列への{1}:{0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "輸出"
+// ed.surveyJsonImportButton: "Import" => "輸入"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "クリップボードにコピー"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "ファイル プレースホルダー テキスト"
+// pe.photoPlaceholder: "Photo placeholder text" => "写真の代替テキスト"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "ファイルまたは写真のプレースホルダーテキスト"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "「ソースタイプ」が「ローカルファイル」の場合、またはカメラが利用できない場合に適用されます"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "「ソースタイプ」が「カメラ」の場合に適用されます。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "「ソースタイプ」が「ローカルファイルまたはカメラ」の場合に適用されます。"
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "バックグラウンド"
+// theme.groupAppearance: "Appearance" => "様子"
+// theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "プレースホルダーを表示する"
+// signaturepad.placeholder: "Placeholder text" => "プレースホルダテキスト"
+// theme.surveyDescription: "Survey description font" => "調査の説明フォント"

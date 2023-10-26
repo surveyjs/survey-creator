@@ -297,7 +297,7 @@ test("Rename the name", () => {
       {
         name: "page2",
         visibleIf: "{Q1} != 1 and {q1} < 1",
-        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1" }]
+        elements: [{ type: "text", name: "q2", requiredIf: "{q1} < 1", resetValueIf: "{q1} > 1", setValueIf: "{q1} = 1", setValueExpression: "{q1} + 1" }]
       },
       {
         name: "page3",
@@ -337,6 +337,9 @@ test("Rename the name", () => {
                 visibleIf: "{q1} = 1",
                 enableIf: "{q2} = 2",
                 requiredIf: "{q1} = 1",
+                resetValueIf: "{q1} > 1",
+                setValueIf: "{q1} = 1",
+                setValueExpression: "{q1} + 1",
                 totalExpression: "{q1} + {q2}"
               }
             ]
@@ -425,12 +428,18 @@ test("Rename the name", () => {
   );
   expect(q1.enableIf).toEqual("{question2} > 2");
   expect(q2.requiredIf).toEqual("{question1} < 1");
+  expect(q2.resetValueIf).toEqual("{question1} > 1");
+  expect(q2.setValueIf).toEqual("{question1} = 1");
+  expect(q2.setValueExpression).toEqual("{question1} + 1");
   expect(panel1.visibleIf).toEqual("{question1} = 1");
   expect(panel1.enableIf).toEqual("{question2} = 2");
   expect(q4.expression).toEqual("{question1} + {question2}");
   expect(q5col1.visibleIf).toEqual("{question1} = 1");
   expect(q5col1.enableIf).toEqual("{question2} = 2");
   expect(q5col1.requiredIf).toEqual("{question1} = 1");
+  expect(q5col1.resetValueIf).toEqual("{question1} > 1");
+  expect(q5col1.setValueIf).toEqual("{question1} = 1");
+  expect(q5col1.setValueExpression).toEqual("{question1} + 1");
   expect(q5col1.totalExpression).toEqual("{question1} + {question2}");
   expect(trigger1.expression).toEqual("{question1} = 1");
   expect(trigger1.runExpression).toEqual("{question2} + 1");

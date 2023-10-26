@@ -34,3 +34,19 @@ test("Check sidebar header", async (t) => {
     await takeElementScreenshot("theme-editor-header-no-collapse-button.png", root, t, comparer);
   });
 });
+
+test("toolbar view", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1280, 900);
+    await setJSON({
+      pages: [
+        { elements: [{ type: "text", name: "question1" }] },
+        { elements: [{ type: "text", name: "question2" }] }
+      ]
+    });
+    await t.click(getTabbedMenuItemByText("Themes"));
+
+    await t.resizeWindow(380, 600);
+    await takeElementScreenshot("theme-tab-toolbar_responsive.png", Selector(".svc-footer-bar .svc-toolbar-wrapper"), t, comparer);
+  });
+});

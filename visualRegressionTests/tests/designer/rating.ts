@@ -61,6 +61,7 @@ const jsonMulti = {
 
 test("Rating adorners", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
     await setJSON(json);
 
     const question = Selector("div[data-name=question1]");
@@ -75,6 +76,7 @@ test("Rating adorners", async (t) => {
 
 test("Rating adorners - disabled buttons", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
     await setJSON({
       elements: [
         {
@@ -102,6 +104,7 @@ test("Rating adorners - disabled buttons", async (t) => {
 
 test("Rating adorners with comment", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
     await setJSON(jsonComment);
 
     const question = Selector("div[data-name=question1]");

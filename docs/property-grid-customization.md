@@ -41,8 +41,6 @@ creator.onShowingProperty.add(function (_, options) {
 });
 ```
 
-<div id="addproperties"></div>
-
 [View Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
 
 ## Override Default Property Values
@@ -56,6 +54,49 @@ Survey.Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
 // In modular applications:
 import { Serializer } from "survey-core";
 Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+```
+
+## Add Help Texts to Property Editors
+
+Property editors can display hints or tooltips that help survey authors specify correct property values. For example, the following image illustrates a hint for the [`acceptedTypes`](https://surveyjs.io/form-library/documentation/api-reference/file-model#acceptedTypes) property editor in a [File Upload](https://surveyjs.io/form-library/examples/file-upload/) question: 
+
+<img src="./images/property-grid-hint.png" alt="Survey Creator: Hints in the Property Grid">
+
+Hints are stored in the `pehelp` object (stand for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
+
+```js
+// Get current locale translations
+const translations = SurveyCreator.localization.getLocale("");
+// In modular applications
+import { localization } from "survey-creator-core";
+const translations = localization.getLocale("");
+
+translations.pehelp.title = "A hint for the Title property editor";
+```
+
+You can specify different help texts for properties that belong to questions, pages, and the survey itself:
+
+```js
+translations.pehelp.survey = { 
+  title: "A hint for the Title property editor of the survey"
+};
+translations.pehelp.page = { 
+  title: "A hint for the Title property editor of all pages"
+};
+translations.pehelp.question = { 
+  title: "A hint for the Title property editor of all questions"
+};
+```
+
+You can also set specific help texts for properties that belong to a certain [question type](https://surveyjs.io/form-library/documentation/api-reference/question#getType):
+
+```js
+translations.pehelp.file = { 
+  title: "A hint for the Title property editor in File Upload questions"
+};
+translations.pehelp.comment = { 
+  title: "A hint for the Title property editor in Long Text questions"
+};
 ```
 
 ## Add Custom Properties to the Property Grid
@@ -82,18 +123,20 @@ A string value that specifies the property name. It is the only required propert
 
 A string value that specifies the property type. Accepts one of the values described in the table below. Each type produces a different property editor.
 
-| `type`               | Property Editor                                      | Description                                                                                                                                                                                                                                                                                                             |
-| -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `"string"` (default) | Text input                                           | Use this type for short string values.                                                                                                                                                                                                                                                                                  |
-| `"boolean"`          | Checkbox                                             | Use this type for Boolean values.                                                                                                                                                                                                                                                                                       |
-| `"condition"`        | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enableIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
-| `"expression"`       | Multi-line text input with a hint icon               | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions).                                                                                                                                                                                  |
-| `"number"`           | Text input                                           | Use this type for numeric values.                                                                                                                                                                                                                                                                                       |
-| `"text"`             | Multi-line text input                                | Use this type for multi-line text values.                                                                                                                                                                                                                                                                               |
-| `"html"`             | Multi-line text input                                | Use this type for HTML markup.                                                                                                                                                                                                                                                                                          |
-| `"itemvalues"`       | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkbox, and Radiogroup questions use this type for the [`choices`](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choices) property.                                        |
-| `"value"`            | Button that opens a dialog window                    | The dialog window displays the survey element and allows users to set the element's default value.                                                                                                                                                                                                                      |
-| `"multiplevalues"`   | A group of checkboxes with a Select All checkbox     | Use this type to allow respondents to select more than one predefined value. Requires a defined [`choices`](#choices) array.                                                                                                                                                                                            |
+| `type` | Property Editor | Description |
+| ------ | --------------- | ----------- |
+| `"string"` (default) | Text input | Use this type for short string values. |
+| `"boolean"` | Checkbox | Use this type for Boolean values. |
+| `"condition"` | Multi-line text input with an optional dialog window | Use this type for [Boolean expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#conditional-visibility) similar to [`visibleIf`](https://surveyjs.io/Documentation/Library?id=Question#visibleIf) or [`enableIf`](https://surveyjs.io/Documentation/Library?id=Question#enableIf). |
+| `"expression"` | Multi-line text input with a hint icon | Use this type for non-Boolean [expressions](https://surveyjs.io/Documentation/Library?id=design-survey-conditional-logic#expressions). |
+| `"number"` | Text input | Use this type for numeric values. |
+| `"text"` | Multi-line text input | Use this type for multi-line text values. |
+| `"file"` | Text input with a button that opens a Select File dialog window | Use this type to allow respondents to select a file or enter a file URL. |
+| `"color"` | Color picker | Use this type for color values. |
+| `"html"` | Multi-line text input | Use this type for HTML markup. |
+| `"itemvalues"` | Customized text inputs for entering value-text pairs | Use this type for arrays of objects with the following structure: `{ value: any, text: string }`. For example, Dropdown, Checkbox, and Radiogroup questions use this type for the [`choices`](https://surveyjs.io/Documentation/Library?id=QuestionSelectBase#choices) property. |
+| `"value"` | Button that opens a dialog window  | The dialog window displays the survey element and allows users to set the element's default value. |
+| `"multiplevalues"` | A group of checkboxes with a Select All checkbox | Use this type to allow respondents to select more than one predefined value. Requires a defined [`choices`](#choices) array. |
 
 `type` can also accept custom values. In this case, you need to register a property editor for the custom type in the `PropertyGridEditorCollection` and specify a standard JSON object that the custom type should produce. For example, the following code configures a `"shortname"` property that has a custom `"shorttext"` type: 
 

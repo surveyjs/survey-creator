@@ -14,6 +14,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   private surveySettingsAction: Action;
   private saveSurveyAction: Action;
   public previewAction: Action;
+  private designerAction: Action;
 
   private get isSurveySelected(): boolean {
     return this.creator.isElementSelected(<any>this.creator.survey);
@@ -23,9 +24,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
-  }
-  private updatePropertyGridTabCaption() {
-    this.propertyGridTab.caption = this.creator.isMobileView ? this.propertyGrid.selectedElementName : "";
   }
 
   constructor(private creator: CreatorBase) {
@@ -50,9 +48,6 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     });
     this.toolboxTab = this.creator.sidebar.addTab("toolbox", "svc-toolbox", creator);
     this.creator.onPropertyChanged.add((sender, options) => {
-      if (options.name === "isMobileView") {
-        this.updatePropertyGridTabCaption();
-      }
       if (options.name === "toolboxLocation") {
         if (this.toolboxTab.visible && options.newVal !== "sidebar") {
           this.propertyGridTab.visible = true;
@@ -60,13 +55,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
         this.toolboxTab.visible = options.newVal === "sidebar";
       }
     });
-    this.propertyGrid.onPropertyChanged.add((sender, options) => {
-      if (options.name === "selectedElementName") {
-        this.updatePropertyGridTabCaption();
-      }
-    });
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("delete", {
+      affectedTab: "designer",
       hotKey: {
         keyCode: 46,
       },
@@ -150,12 +141,21 @@ export class TabDesignerPlugin implements ICreatorPlugin {
       showTitle: false
     });
 
+    this.designerAction = new Action({
+      id: "svd-designer",
+      iconName: "icon-config",
+      visible: this.createVisibleUpdater(),
+      active: true,
+      locTitleName: "ed.designer",
+      showTitle: false,
+      action: () => { }
+    });
+
     this.previewAction = new Action({
       id: "svd-preview",
       iconName: "icon-preview",
-      needSeparator: true,
       action: () => {
-        this.creator.makeNewViewActive("test");
+        this.creator.makeNewViewActive(this.creator.showThemeTab ? "theme" : "test");
       },
       visible: this.createVisibleUpdater(),
       locTitleName: "ed.testSurvey",
@@ -184,7 +184,8 @@ export class TabDesignerPlugin implements ICreatorPlugin {
   }
 
   public addFooterActions() {
-    this.creator.footerToolbar.actions.push(this.surveySettingsAction);
+    this.creator.footerToolbar.actions.push(this.designerAction);
     this.creator.footerToolbar.actions.push(this.previewAction);
+    this.creator.footerToolbar.actions.push(this.surveySettingsAction);
   }
 }

@@ -42,6 +42,7 @@ import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
+import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if(!this.question) return false;
@@ -1383,15 +1384,14 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
 
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return ["logo", "imageLink", "backgroundImage"].indexOf(prop.name) > -1;
+    return prop.type === "url" || prop.type === "file";
   }
   public getJSON(
     obj: Base,
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    const maxSize = (<any>options).onUploadFile?.isEmpty ? 65536 : undefined;
-    const res: any = { type: "fileedit", storeDataAsText: false, maxSize };
+    const res: any = { type: "fileedit", storeDataAsText: false };
     return res;
   }
 
@@ -1407,13 +1407,16 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
+    question.onChooseFilesCallback = ((input, onFilesChosen) => {
+      options.chooseFiles(input, onFilesChosen);
+    });
   }
 
 }
 
-export class PropertyGridColorEditor extends PropertyGridEditor {
+export class PropertyGridEditorColor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return ["penColor", "backgroundColor"].indexOf(prop.name) > -1;
+    return prop.type == "color";
   }
   public getJSON(
     obj: Base,
@@ -1491,18 +1494,6 @@ export class PropertyGridEditorHtml extends PropertyGridEditorStringBase {
     return this.updateMaxLength(prop, {
       type: "comment"
     });
-  }
-}
-export class PropertyGridEditorColor extends PropertyGridEditor {
-  public fit(prop: JsonObjectProperty): boolean {
-    return prop.type == "color";
-  }
-  public getJSON(
-    obj: Base,
-    prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
-  ): any {
-    return { type: "text", inputType: "color" };
   }
 }
 export class PropertyGridEditorStringArray extends PropertyGridEditor {
@@ -1794,7 +1785,6 @@ export class PropertyGridEditorQuestionValue extends PropertyGridEditorQuestion 
 PropertyGridEditorCollection.register(new PropertyGridEditorBoolean());
 PropertyGridEditorCollection.register(new PropertyGridEditorString());
 PropertyGridEditorCollection.register(new PropertyGridEditorNumber());
-PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 PropertyGridEditorCollection.register(new PropertyGridEditorText());
 PropertyGridEditorCollection.register(new PropertyGridEditorHtml());
 PropertyGridEditorCollection.register(new PropertyGridEditorDropdown());
@@ -1806,7 +1796,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionValue());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase());
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
-PropertyGridEditorCollection.register(new PropertyGridColorEditor());
+PropertyGridEditorCollection.register(new PropertyGridEditorColor());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

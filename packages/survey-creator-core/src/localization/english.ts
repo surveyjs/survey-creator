@@ -140,11 +140,18 @@ export var enStrings = {
     translationNoStrings: "No strings to translate. Please, change the filter.",
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
+    translateUsigAI: "Auto-translate All",
+    translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
     themeExportButton: "Export",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Export",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Copy to clipboard",
     themeResetButton: "Reset theme settings to default",
+    themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
+    themeResetConfirmationOk: "Yes, reset the theme",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -170,9 +177,13 @@ export var enStrings = {
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",
+      question_resetValueName: "Reset question value",
+      question_setValueName: "Set question value",
       column_visibilityName: "Show (hide) column",
       column_enableName: "Enable (disable) column",
       column_requireName: "Make column required",
+      column_resetValueName: "Reset column value",
+      column_setValueName: "Set column value",
       trigger_completeName: "Complete survey",
       trigger_setvalueName: "Set answer",
       trigger_copyvalueName: "Copy answer",
@@ -199,9 +210,14 @@ export var enStrings = {
       question_visibilityText: "make question {0} visible", //{0} question name
       question_enableText: "make question {0} enable", //{0} question name
       question_requireText: "make question {0} required", //{0} question name
+      question_resetValueText: "reset value for question: {0}", //{0} question name.
+      question_setValueText: "assign value: {1} to question: {0}", //{0} question name and {1} setValueExpression
       column_visibilityText: "make column {0} of question {1} visible", //{0} column name, {1} question name
       column_enableText: "make column {0} of question {1} enable", //{0} column name, {1} question name
       column_requireText: "make column {0} of question {1} required", //{0} column name, {1} question name
+      column_resetValueText: "reset cell value for column: {0}", //{0} column name
+      column_setValueText: "assign cell value: {1} to column: {0}", //{0} column name and {1} setValueExpression
+      setValueExpressionPlaceholder: "An expression whose result will be assigned to the target question.",
       trigger_completeText: "survey becomes completed",
       trigger_setvalueText: "set into question: {0} value {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "clear question value: {0}", //{0} question name
@@ -267,6 +283,7 @@ export var enStrings = {
     fastEntry: "Manual Entry",
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
+    fastEntryChoicesMinCountError: "Please enter at least {0} items",
     fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
     formEntry: "Form Entry",
     testService: "Test the service",
@@ -331,6 +348,8 @@ export var enStrings = {
     choicesOrder: "Choices sort order",
     visible: "Visible",
     isRequired: "Required",
+    markRequired: "Mark as required",
+    removeRequiredMark: "Remove the required mark",
     isAllRowRequired: "Require answer for all rows",
     requiredErrorText: "\"Required\" error message",
     startWithNewLine: "Display the question on a new line",
@@ -412,8 +431,12 @@ export var enStrings = {
       imageHeight: "Image height (in CSS-accepted values)",
       imageWidth: "Image width (in CSS-accepted values)"
     },
+    survey: {
+      title: "Title"
+    },
     page: {
-      maxTimeToFinish: "Time limit to finish the page (in seconds)"
+      title: "Title",
+      maxTimeToFinish: "Time limit to finish the page (in seconds)",
     },
     question: {
       page: "Parent page"
@@ -643,12 +666,22 @@ export var enStrings = {
     columnsVisibleIf: "Columns are visible if",
     rowsVisibleIf: "Rows are visible if",
     otherPlaceholder: "Comment area placeholder",
+    signaturepad: {
+      showPlaceholder: "Show the placeholder",
+      placeholder: "Placeholder text"
+    },
+    filePlaceholder: "File placeholder text",
+    photoPlaceholder: "Photo placeholder text",
+    fileOrPhotoPlaceholder: "File or photo placeholder text",
     rateType: "Rate type" // Auto-generated string
   },
   // Property values
   pv: {
     "true": "true",
     "false": "false",
+    "file": "Local files",
+    "camera": "Camera",
+    "file-camera": "Local files or camera",
     inherit: "Inherit",
     show: "Visible",
     hide: "Hidden",
@@ -877,7 +910,10 @@ export var enStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
+    filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable",
+    photoPlaceholder: "Applies when \"Source type\" is \"Camera\".",
+    fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"."
   },
   // Properties
   p: {
@@ -911,6 +947,8 @@ export var enStrings = {
     descriptionLocation: "Description location", // Auto-generated string
     defaultValueExpression: "Default value expression", // Auto-generated string
     requiredIf: "Required if", // Auto-generated string
+    resetValueIf: "Reset value if", // Auto-generated string
+    setValueIf: "Set value if", // Auto-generated string
     validators: "Validators", // Auto-generated string
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
@@ -987,6 +1025,9 @@ export var enStrings = {
     "--base-unit": "Base unit",
     groupGeneral: "General",
     groupAdvanced: "Advanced",
+    groupHeader: "Header",
+    groupBackground: "Background",
+    groupAppearance: "Appearance",
     themeName: "Theme",
     themeMode: "Question appearance",
     themeModePanels: "Default",
@@ -997,11 +1038,16 @@ export var enStrings = {
     primaryDefaultColor: "Default",
     primaryDarkColor: "Hover",
     primaryLightColor: "Selected",
+    coverTitleForecolor: "Title forecolor",
+    coverDescriptionForecolor: "Description forecolor",
+    coverOverlapEnabled: "Overlap",
     backgroundDimColor: "Background color",
     backgroundImage: "Background image", // Auto-generated string
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Cover",
     backgroundImageFitContain: "Contain",
+    backgroundImageFitFill: "Stretch",
+    backgroundImageFitTile: "Tile",
     backgroundOpacity: "Opacity", // Auto-generated string
     backgroundImageAttachmentFixed: "Fixed",
     backgroundImageAttachmentScroll: "Scroll",
@@ -1034,6 +1080,7 @@ export var enStrings = {
     scale: "Scale",
     cornerRadius: "Corner radius",
     surveyTitle: "Survey title font",
+    surveyDescription: "Survey description font",
     pageTitle: "Page title font",
     pageDescription: "Page description font",
     boxShadowX: "X",
@@ -1046,6 +1093,26 @@ export var enStrings = {
     boxShadowInner: "Inner",
     questionShadow: "Shadow effects",
     editorShadow: "Input element shadow effects",
+    headerView: "View",
+    headerViewBasic: "Basic",
+    headerViewAdvanced: "Advanced",
+    coverInheritWidthFrom: "Content area width",
+    coverInheritWidthFromSurvey: "Same as survey",
+    coverInheritWidthFromContainer: "Fit to container",
+    coverTextAreaWidth: "Text width",
+    coverBackgroundColorSwitch: "Background color",
+    coverBackgroundColorNone: "None",
+    coverBackgroundColorAccentColor: "Accent color",
+    coverBackgroundColorCustom: "Custom",
+    horizontalAlignmentLeft: "Left",
+    horizontalAlignmentCenter: "Center",
+    horizontalAlignmentRight: "Right",
+    verticalAlignmentTop: "Top",
+    verticalAlignmentMiddle: "Middle",
+    verticalAlignmentBottom: "Bottom",
+    logoPosition: "Logo Position",
+    coverTitlePosition: "Title Position",
+    coverDescriptionPosition: "Description Position",
     names: {
       "default": "Default",
       "sharp": "Sharp",

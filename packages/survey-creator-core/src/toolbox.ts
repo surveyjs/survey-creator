@@ -86,6 +86,14 @@ export class QuestionToolboxItem extends Action implements IQuestionToolboxItem 
   toJSON() {
     return this.item;
   }
+  get typeName(): string {
+    if(!!this.json && !!this.json.type) return this.json.type;
+    return this.name;
+  }
+  get isPanel(): boolean {
+    const type = this.typeName;
+    return !!type && Serializer.isDescendantOf(type, "panelbase");
+  }
 }
 
 /**
@@ -274,7 +282,7 @@ export class QuestionToolbox
   public get itemNames(): Array<string> {
     const res: string[] = [];
     for (let i: number = 0; i < this.items.length; i++) {
-      res.push(this.items[i].name);
+      res.push(this.items[i].typeName);
     }
     return res;
   }

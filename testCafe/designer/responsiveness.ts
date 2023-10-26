@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector
 } from "../helper";
 const title = "Responsiveness";
 
@@ -168,7 +168,7 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
     .resizeWindow(370, 400)
     .expect(topToolBar.visible).notOk()
     .expect(footerToolBar.visible).ok()
-    .expect(footerToolBar.find(".sv-action").filterVisible().count).eql(4)
+    .expect(footerToolBar.find(".sv-action").filterVisible().count).eql(5)
 
     .resizeWindow(1920, 900)
     .click(collapseButtonSelector)
@@ -179,8 +179,6 @@ test("Responsive creator: designer tab for mobile devices", async (t) => {
 
 test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
-  const mobileCloseButton = Selector(".svc-side-bar__container-close");
-  const mobilePropertGridTitle = Selector(".svc-side-bar__container-title");
 
   await t
     .resizeWindow(750, 500)
@@ -191,12 +189,12 @@ test("property grid for mobile devices", async (t) => {
 
     .click(getBarItemByTitle("Open survey settings").filterVisible())
     .expect(mobilePropertGrid.visible).ok()
-    .expect(mobilePropertGridTitle.textContent).eql("Survey")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
-    .click(mobileCloseButton)
+    .click(Selector(".svd-grid-hide"))
     .click(Selector("span").withText("Add Question"))
     .click(getBarItemByTitle("Open settings").filterVisible().nth(0))
-    .expect(mobilePropertGridTitle.textContent).eql("question1")
+    .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
 
     .resizeWindow(1920, 900)
     .expect(mobilePropertGrid.exists).notOk()
@@ -222,9 +220,10 @@ test("test tab for mobile devices", async (t) => {
 
     .resizeWindow(370, 400)
     .expect(testTabToolbar.exists).notOk()
-    .expect(creatorFooterToolbarActions.count).eql(2)
-    .expect(creatorFooterToolbarActions.nth(0).id).eql("showInvisible")
-    .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-designer")
+    .expect(creatorFooterToolbarActions.count).eql(3)
+    .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
+    .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-preview")
+    .expect(creatorFooterToolbarActions.nth(2).id).eql("showInvisible")
 
     .resizeWindow(1920, 900)
     .expect(testTabToolbar.exists).notOk()
@@ -239,21 +238,22 @@ test("test tab for mobile devices", async (t) => {
 
     .resizeWindow(370, 400)
     .expect(testTabToolbar.exists).notOk()
-    .expect(creatorFooterToolbarActions.count).eql(4)
-    .expect(creatorFooterToolbarActions.nth(0).id).eql("showInvisible")
-    .expect(creatorFooterToolbarActions.nth(1).id).eql("prevPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(1).hasAttribute("disabled")).eql(true)
-    //.expect(creatorFooterToolbarActions.nth(1).hasClass("sv-action-bar-item--secondary")).notOk()
-    .expect(creatorFooterToolbarActions.nth(2).id).eql("nextPage")
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).ok()
-    .expect(creatorFooterToolbarActions.nth(3).id).eql("svd-designer")
-
-    .click(creatorFooterToolbarActions.nth(2))
-    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(1).hasAttribute("disabled")).eql(false)
-    //.expect(creatorFooterToolbarActions.nth(1).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.count).eql(5)
+    .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
+    .expect(creatorFooterToolbarActions.nth(1).id).eql("svd-preview")
+    .expect(creatorFooterToolbarActions.nth(2).id).eql("prevPage")
     .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(true)
     //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).notOk()
+    .expect(creatorFooterToolbarActions.nth(3).id).eql("nextPage")
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(false)
+    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.nth(4).id).eql("showInvisible")
+
+    .click(creatorFooterToolbarActions.nth(3))
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(2).hasAttribute("disabled")).eql(false)
+    //.expect(creatorFooterToolbarActions.nth(2).hasClass("sv-action-bar-item--secondary")).ok()
+    .expect(creatorFooterToolbarActions.find(".sv-action-bar-item").nth(3).hasAttribute("disabled")).eql(true)
+    //.expect(creatorFooterToolbarActions.nth(3).hasClass("sv-action-bar-item--secondary")).notOk()
 
     .resizeWindow(1920, 900)
     .expect(testTabToolbar.exists).ok()
@@ -283,7 +283,6 @@ test("Property grid editor popup", async (t) => {
   await setJSON(json);
 
   const question1 = Selector("[data-name=\"question1\"]");
-  const mobileCloseButton = Selector(".svc-side-bar__container-close");
 
   await t
     .resizeWindow(1920, 900)
@@ -295,7 +294,7 @@ test("Property grid editor popup", async (t) => {
     .click(Selector("button").withExactText("Cancel"))
     .resizeWindow(380, 600)
     .click(Selector(".sv-action-bar-item[title=\"Open settings\"]").filterVisible())
-    .click(mobileCloseButton)
+    .click(Selector(".svd-grid-hide"))
     .click(question1, { offsetX: 5, offsetY: 5 })
     .click(Selector(".svc-question__content-actions .sv-action-bar-item[title=\"Open settings\"]").filterVisible())
     .click(Selector("span").withExactText("Set Default Answer"))
@@ -314,12 +313,21 @@ test("Question type popup - wide", async (t) => {
 
 test("Question type popup - narrow", async (t) => {
   const json = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
   };
+  await ClientFunction(() => {
+    (window as any).creator.isTouch = true;
+  })();
   await setJSON(json);
   await t
     .resizeWindow(380, 600)
     .click(Selector("button.svc-page__question-type-selector"))
-    .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single-Line Input").visible).ok();
+    .expect(Selector(".sv-popup.sv-popup--overlay li").withText("Single-Line Input").filterVisible().exists).ok();
 });
 
 test("Responsive creator: property grid - click the shadow", async (t) => {

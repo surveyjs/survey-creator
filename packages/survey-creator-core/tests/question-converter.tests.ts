@@ -142,33 +142,50 @@ test("Do not convert default choices", () => {
   expect(dest.rateValues).toHaveLength(0);
 });
 test("Convert text question to image", () => {
-  settings.toolbox.defaultJSON["image"]["imageLink"] = "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg";
-  var survey = new SurveyModel();
-  var page = survey.addNewPage();
-  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
-  QuestionConverter.convertObject(q1, "image");
-  expect((<Base>(<any>page.elements[0])).getType()).toEqual("image");
-  var newQ1 = <QuestionImageModel>page.elements[0];
+  const survey = new SurveyModel();
+  const page = survey.addNewPage();
+  const q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  QuestionConverter.convertObject(q1, "image", {}, { imageLink: "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg" });
+  expect(page.questions[0].getType()).toEqual("image");
+  const newQ1 = <QuestionImageModel>page.questions[0];
   expect(newQ1.imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
-  delete settings.toolbox.defaultJSON["image"]["imageLink"];
 });
 test("Convert text and radio question to image picker", () => {
-  var survey = new SurveyModel();
-  var page = survey.addNewPage();
-  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
-  var q2 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
-  QuestionConverter.convertObject(q1, "imagepicker");
-  QuestionConverter.convertObject(q2, "imagepicker");
-  expect((<Base>(<any>page.elements[0])).getType()).toEqual("imagepicker");
-  expect((<Base>(<any>page.elements[1])).getType()).toEqual("imagepicker");
-  var newQ1 = <QuestionImagePickerModel>page.elements[0];
-  var newQ2 = <QuestionImagePickerModel>page.elements[1];
+  const survey = new SurveyModel();
+  const page = survey.addNewPage();
+  const q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  const q2 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
+  const q3 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
+  const q4 = <QuestionRadiogroupModel>page.addNewQuestion("radiogroup");
+  q2.choices = ["item1", "item2"];
+  q4.choices = [];
+  const defaultJSON = settings.toolbox.defaultJSON.imagepicker;
+  const defaultObjJSON = settings.toolbox.defaultJSON.radiogroup;
+  q3.choices = defaultObjJSON.choices;
+  QuestionConverter.convertObject(q1, "imagepicker", undefined, defaultJSON);
+  QuestionConverter.convertObject(q2, "imagepicker", defaultObjJSON, defaultJSON);
+  QuestionConverter.convertObject(q3, "imagepicker", defaultObjJSON, defaultJSON);
+  QuestionConverter.convertObject(q4, "imagepicker", defaultObjJSON, defaultJSON);
+  expect(page.questions[0].getType()).toEqual("imagepicker");
+  expect(page.questions[1].getType()).toEqual("imagepicker");
+  expect(page.questions[2].getType()).toEqual("imagepicker");
+  expect(page.questions[3].getType()).toEqual("imagepicker");
+  const newQ1 = <QuestionImagePickerModel>page.questions[0];
+  const newQ2 = <QuestionImagePickerModel>page.questions[1];
+  const newQ3 = <QuestionImagePickerModel>page.questions[2];
+  const newQ4 = <QuestionImagePickerModel>page.questions[3];
   expect(newQ1.choices).toHaveLength(4);
   expect(newQ1.choices[0].value).toEqual("Image 1");
   expect(newQ1.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
-  expect(newQ2.choices).toHaveLength(3);
+  expect(newQ2.choices).toHaveLength(2);
   expect(newQ2.choices[0].value).toEqual("item1");
   expect(newQ2.choices[0].imageLink).toBeFalsy();
+  expect(newQ3.choices).toHaveLength(4);
+  expect(newQ3.choices[0].value).toEqual("Image 1");
+  expect(newQ3.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
+  expect(newQ4.choices).toHaveLength(4);
+  expect(newQ4.choices[0].value).toEqual("Image 1");
+  expect(newQ4.choices[0].imageLink).toEqual("https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg");
 });
 test("Convert matrix question", () => {
   var survey = new SurveyModel();
@@ -260,24 +277,21 @@ test("Convert matrix question", () => {
   expect(newQ2.columns[1].name).toEqual("Column 2");
 });
 test("Convert text to radio with unset default questions", () => {
-  var survey = new SurveyModel();
-  var page = survey.addNewPage();
-  var q1 = <QuestionRadiogroupModel>page.addNewQuestion("text");
-  QuestionConverter.convertObject(q1, "radiogroup");
-  expect((<Base>(<any>page.elements[0])).getType()).toEqual("radiogroup");
-  var newQ1 = <QuestionImagePickerModel>page.elements[0];
+  const survey = new SurveyModel();
+  const page = survey.addNewPage();
+  const q1 = page.addNewQuestion("text");
+  QuestionConverter.convertObject(q1, "radiogroup", {}, { choices: ["Item 1", "Item 2", "Item 3"] });
+  expect(page.questions[0].getType()).toEqual("radiogroup");
+  const newQ1 = <QuestionRadiogroupModel>page.questions[0];
   expect(newQ1.choices).toHaveLength(3);
   expect(newQ1.choices[0].value).toEqual("Item 1");
 
-  var oldChoices = settings.toolbox.defaultJSON["radiogroup"].choices;
-  settings.toolbox.defaultJSON["radiogroup"].choices = <any>null;
-  var q2 = <QuestionRadiogroupModel>page.addNewQuestion("text");
+  const q2 = page.addNewQuestion("text");
   QuestionConverter.convertObject(q2, "radiogroup");
   expect((<Base>(<any>page.elements[1])).getType()).toEqual("radiogroup");
-  var newQ1 = <QuestionImagePickerModel>page.elements[1];
-  expect(newQ1.choices).toHaveLength(3);
-  expect(newQ1.choices[0].value).toEqual("item1");
-  settings.toolbox.defaultJSON["radiogroup"].choices = oldChoices;
+  var newQ2 = <QuestionImagePickerModel>page.questions[1];
+  expect(newQ2.choices).toHaveLength(3);
+  expect(newQ2.choices[0].value).toEqual("item1");
 });
 test("Convert matrix to matrix dropdown and back", () => {
   var survey = new SurveyModel({
@@ -431,4 +445,19 @@ test("Convert matrix into matrixdropdown, Bug#4455", () => {
   expect(q1_1.columns).toHaveLength(1);
   expect(q1_1.columns[0].name).toBe("col1");
   expect(q1_1.columns[0].title).toBe("Column 1");
+});
+test("Keep startWithNewLine property value for next question, Bug#4729", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" },
+      { type: "text", name: "q2", startWithNewLine: false }
+    ]
+  });
+  let q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  expect(q2.startWithNewLine).toBeFalsy();
+  QuestionConverter.convertObject(q1, "boolean");
+  q1 = survey.getQuestionByName("q1");
+  expect(q1.getType()).toBe("boolean");
+  expect(q2.startWithNewLine).toBeFalsy();
 });

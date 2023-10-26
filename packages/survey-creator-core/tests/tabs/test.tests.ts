@@ -750,3 +750,45 @@ test("Check that popups inside survey are closed when scrolling container", (): 
   expect(model.survey["onScrollCallback"]).toBeUndefined();
   model.onScroll();
 });
+
+test("Creator footer action bar: only preview tab", (): any => {
+  const buttonOrder = ["svd-designer", "svd-preview", "prevPage", "nextPage", "showInvisible"].join("|");
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showThemeTab: false, showLogicTab: true });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  expect(creator.activeTab).toEqual("test");
+
+  creator.isMobileView = true;
+  expect(creator.footerToolbar.actions.length).toEqual(7);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(5);
+  const receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
+  expect(receivedOrder).toEqual(buttonOrder);
+  expect(creator.footerToolbar.visibleActions[0].active).toBeFalsy();
+  expect(creator.footerToolbar.visibleActions[1].active).toBeTruthy();
+
+  creator.activeTab = "logic";
+  expect(creator.footerToolbar.actions.length).toEqual(7);
+  expect(creator.footerToolbar.visibleActions.length).toEqual(0);
+});
+
+test("Update theme in active test/preview tab", (): any => {
+  const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: true, showJSONEditorTab: false, showThemeTab: false, showLogicTab: false });
+  const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] }
+    ]
+  };
+  creator.theme = {
+    cssVariables: {
+      test: "testVarValue"
+    },
+  };
+  expect(creator.activeTab).toEqual("test");
+  expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
+});

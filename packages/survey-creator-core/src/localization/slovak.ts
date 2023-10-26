@@ -50,6 +50,8 @@ export var skStrings = {
     settingsTooltip: "Otvoriť nastavenia prieskumu",
     surveySettings: "Nastavenia prieskumu",
     surveySettingsTooltip: "Otvorenie nastavení prieskumu",
+    themeSettings: "Nastavenia motívu",
+    themeSettingsTooltip: "Otvorenie nastavení motívu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -134,11 +136,18 @@ export var skStrings = {
     translationNoStrings: "Žiadne reťazce na preklad. Zmeňte filter.",
     translationExportToSCVButton: "Exportovať do CSV",
     translationImportFromSCVButton: "Importovať z CSV",
+    translateUsigAI: "Automatický preklad všetkého",
+    translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopírovanie do schránky",
     themeResetButton: "Obnovenie predvolených nastavení motívu",
+    themeResetConfirmation: "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia.",
+    themeResetConfirmationOk: "Áno, obnoviť motív",
     bold: "Tučné",
     italic: "Kurzíva",
     underline: "Podčiarknutie",
@@ -164,9 +173,13 @@ export var skStrings = {
       question_visibilityName: "Viditeľnosť otázky",
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
+      question_resetValueName: "Obnoviť hodnotu otázky",
+      question_setValueName: "Nastavenie hodnoty otázky",
       column_visibilityName: "Zobraziť (skryť) stĺpec",
       column_enableName: "Povoliť (zakázať) stĺpec",
       column_requireName: "Nastavenie povinného stĺpca",
+      column_resetValueName: "Obnovenie hodnoty stĺpca",
+      column_setValueName: "Nastavenie hodnoty stĺpca",
       trigger_completeName: "Dokončiť prieskum",
       trigger_setvalueName: "Nastaviť hodnotu otázky",
       trigger_copyvalueName: "Kopírovať hodnotu otázky",
@@ -193,9 +206,14 @@ export var skStrings = {
       question_visibilityText: "Otázka {0} bude viditeľná", //{0} question name
       question_enableText: "Otázka {0} bude povolená", //{0} question name
       question_requireText: "Otázka {0} sa bude vyžadovať", //{0} question name
+      question_resetValueText: "Resetovať hodnotu pre otázku: {0}",
+      question_setValueText: "Priradiť hodnotu: {1} otázku: {0}",
       column_visibilityText: "Zviditeľnenie stĺpcových {0} otázok {1}", //{0} column name, {1} question name
       column_enableText: "Nastavenie {0}  otázky {1} povolenie", //{0} column name, {1} question name
       column_requireText: "Urobiť stĺpec {0} otázky {1} povinné", //{0} column name, {1} question name
+      column_resetValueText: "Obnoviť hodnotu bunky pre stĺpec: {0}",
+      column_setValueText: "Priradenie hodnoty bunky: {1} do stĺpca: {0}",
+      setValueExpressionPlaceholder: " Výraz, ktorého výsledok bude priradený k cieľovej otázke.",
       trigger_completeText: "Prieskum bude dokončený",
       trigger_setvalueText: "Nastaviť v otázke: {0} hodnotu {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "jasná hodnota otázky: {0}", //{0} question name
@@ -261,6 +279,7 @@ export var skStrings = {
     fastEntry: "Rýchle zadanie",
     fastEntryNonUniqueError: "Hodnota \"{0}\" nie je jedinečná",
     fastEntryChoicesCountError: "Obmedzte počet položiek od {0} do {1}",
+    fastEntryChoicesMinCountError: "Zadajte aspoň {0} položiek",
     fastEntryPlaceholder: "Údaje môžete nastaviť v nasledujúcom formáte:\nhodnota1|text\nhodnota2",
     formEntry: "Zadanie formulára",
     testService: "Test služby",
@@ -279,6 +298,7 @@ export var skStrings = {
     cellsEmptyRowsColumns: "K dispozícii má byť aspoň jeden stĺpec alebo riadok",
     showPreviewBeforeComplete: "Pozrite si ukážku odpovedí pred odoslaním prieskumu",
     overridingPropertyPrefix: "Nastaviť ",
+    resetToDefaultCaption: "Vynulovanie",
     propertyIsEmpty: "Zadajte hodnotu",
     propertyIsNoUnique: "Zadajte jedinečnú hodnotu",
     propertyNameIsNotUnique: "Zadajte jedinečný názov",
@@ -324,6 +344,8 @@ export var skStrings = {
     choicesOrder: "Poradie vybratých možností",
     visible: "Je viditeľné?",
     isRequired: "Vyžaduje sa?",
+    markRequired: "Označiť podľa potreby",
+    removeRequiredMark: "Odstráňte požadovanú značku",
     isAllRowRequired: "Vyžadovať odpoveď pre všetky riadky",
     requiredErrorText: "Text chyby pri povinných položkách",
     startWithNewLine: "Začína sa novým riadkom?",
@@ -405,7 +427,12 @@ export var skStrings = {
       imageHeight: "Výška snímky (v hodnotách akceptovaných šablónou CSS)",
       imageWidth: "Šírka obrázka (v akceptovaných hodnotách CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titul"
+    },
     page: {
+      title: "Titul",
       maxTimeToFinish: "Časový limit na dokončenie stránky (v sekundách)"
     },
     question: {
@@ -636,12 +663,22 @@ export var skStrings = {
     columnsVisibleIf: "Stĺpce sú viditeľné, ak",
     rowsVisibleIf: "Riadky sú viditeľné, ak",
     otherPlaceholder: "Zástupný symbol oblasti komentárov",
+    signaturepad: {
+      showPlaceholder: "Zobrazenie zástupného symbolu",
+      placeholder: "Zástupný text"
+    },
+    filePlaceholder: "Zástupný text súboru",
+    photoPlaceholder: "Zástupný text fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text súboru alebo fotografie",
     rateType: "Typ sadzby"
   },
   // Property values
   pv: {
     "true": "pravdivý",
     "false": "nepravdivé",
+    file: "Lokálne súbory",
+    camera: "Fotoaparát",
+    "file-camera": "Lokálne súbory alebo fotoaparát",
     inherit: "prevziať",
     show: "zobraziť",
     hide: "skryť",
@@ -870,7 +907,10 @@ export var skStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\"."
+    keyName: "Ak zadaný stĺpec obsahuje rovnaké hodnoty, prieskum vyhodí chybu \"Nejedinečná hodnota kľúča\".",
+    filePlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii",
+    photoPlaceholder: "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ export var skStrings = {
     descriptionLocation: "poloha opisu",
     defaultValueExpression: "predvolený výraz hodnoty",
     requiredIf: "Povinné ak",
+    resetValueIf: "Obnoviť hodnotu, ak",
+    setValueIf: "Nastaviť hodnotu, ak",
     validators: "overovatelia",
     bindings: "väzby",
     renderAs: "Vykresliť ako",
@@ -980,6 +1022,9 @@ export var skStrings = {
     "--base-unit": "Základná jednotka",
     groupGeneral: "Všeobecné",
     groupAdvanced: "Pokročilý",
+    groupHeader: "Hlavička",
+    groupBackground: "Pozadie",
+    groupAppearance: "Vzhľad",
     themeName: "Téma",
     themeMode: "Vzhľad otázky",
     themeModePanels: "Predvolený",
@@ -990,11 +1035,16 @@ export var skStrings = {
     primaryDefaultColor: "Predvolený",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
+    coverTitleForecolor: "Predná farba názvu",
+    coverDescriptionForecolor: "Popis predná farba",
+    coverOverlapEnabled: "Presahovať",
     backgroundDimColor: "Farba pozadia",
     backgroundImage: "Obrázok na pozadí",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Prikryť",
     backgroundImageFitContain: "Obsahovať",
+    backgroundImageFitFill: "Natiahnuť",
+    backgroundImageFitTile: "Dlaždica",
     backgroundOpacity: "Neprehľadnosť",
     backgroundImageAttachmentFixed: "Stabilný",
     backgroundImageAttachmentScroll: "Zvitok",
@@ -1027,6 +1077,7 @@ export var skStrings = {
     scale: "Stupnica",
     cornerRadius: "Polomer rohov",
     surveyTitle: "Písmo názvu prieskumu",
+    surveyDescription: "Písmo popisu prieskumu",
     pageTitle: "Písmo názvu stránky",
     pageDescription: "Písmo popisu stránky",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ export var skStrings = {
     boxShadowInner: "Vnútorný",
     questionShadow: "Efekty tieňov",
     editorShadow: "Efekty tieňov vstupného prvku",
+    headerView: "Pohľad",
+    headerViewBasic: "Základný",
+    headerViewAdvanced: "Pokročilý",
+    coverInheritWidthFrom: "Šírka oblasti obsahu",
+    coverInheritWidthFromSurvey: "Rovnaké ako prieskum",
+    coverInheritWidthFromContainer: "Vhodné na kontajner",
+    coverTextAreaWidth: "Šírka textu",
+    coverBackgroundColorSwitch: "Farba pozadia",
+    coverBackgroundColorNone: "Žiadny",
+    coverBackgroundColorAccentColor: "Farba akcentu",
+    coverBackgroundColorCustom: "Zvyk",
+    horizontalAlignmentLeft: "Vľavo",
+    horizontalAlignmentCenter: "Centrum",
+    horizontalAlignmentRight: "Doprava",
+    verticalAlignmentTop: "Vrchol",
+    verticalAlignmentMiddle: "Stred",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Umiestnenie loga",
+    coverTitlePosition: "Titulná pozícia",
+    coverDescriptionPosition: "Popisná pozícia",
     names: {
       default: "Predvolený",
       sharp: "Ostrý",
@@ -1517,3 +1588,88 @@ editorLocalization.locales["sk"] = skStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Farba zástupného symbolu"
+// ed.themeSettings: "Theme Settings" => "Nastavenia motívu"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otvorenie nastavení motívu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Vynulovanie"
+// pv.file: "Local files" => "Lokálne súbory"
+// pv.camera: "Camera" => "Fotoaparát"
+// pv.file-camera: "Local files or camera" => "Lokálne súbory alebo fotoaparát"
+// ed.translateUsigAI: "Auto-translate All" => "Automatický preklad všetkého"
+// ed.translationDialogTitle: "Untranslated strings" => "Nepreložené reťazce"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadajte aspoň {0} položiek"
+// lg.question_resetValueName: "Reset question value" => "Obnoviť hodnotu otázky"
+// lg.column_resetValue: "Reset column value" => "Obnovenie hodnoty stĺpca"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Označiť podľa potreby"
+// pe.removeRequiredMark: "Remove the required mark" => "Odstráňte požadovanú značku"
+// p.resetValueIf: "Reset value if" => "Obnoviť hodnotu, ak"
+// lg.question_setValueName: "Set question value" => "Nastavenie hodnoty otázky"
+// lg.column_resetValueName: "Reset column value" => "Obnovenie hodnoty stĺpca"
+// lg.column_setValueName: "Set column value" => "Nastavenie hodnoty stĺpca"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Výraz, ktorého výsledok bude priradený k cieľovej otázke."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Titul"
+// page.title: "Title" => "Titul"
+// p.setValueIf: "Set value if" => "Nastaviť hodnotu, ak"
+// theme.groupHeader: "Header" => "Hlavička"
+// theme.coverTitleForecolor: "Title forecolor" => "Predná farba názvu"
+// theme.coverOverlapEnabled: "Overlap" => "Presahovať"
+// theme.backgroundImageFitFill: "Stretch" => "Natiahnuť"
+// theme.backgroundImageFitTile: "Tile" => "Dlaždica"
+// theme.headerView: "View" => "Pohľad"
+// theme.headerViewBasic: "Basic" => "Základný"
+// theme.headerViewAdvanced: "Advanced" => "Pokročilý"
+// theme.coverInheritWidthFrom: "Content area width" => "Šírka oblasti obsahu"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Rovnaké ako prieskum"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Prispôsobiť na stranu"
+// theme.coverTextAreaWidth: "Text width" => "Šírka textu"
+// theme.coverBackgroundColorSwitch: "Background color" => "Farba pozadia"
+// theme.coverBackgroundColorNone: "None" => "Žiadny"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Farba akcentu"
+// theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.horizontalAlignmentLeft: "Left" => "Vľavo"
+// theme.horizontalAlignmentCenter: "Center" => "Centrum"
+// theme.horizontalAlignmentRight: "Right" => "Doprava"
+// theme.verticalAlignmentTop: "Top" => "Vrchol"
+// theme.verticalAlignmentMiddle: "Middle" => "Stred"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Umiestnenie loga"
+// theme.coverTitlePosition: "Title Position" => "Titulná pozícia"
+// theme.coverDescriptionPosition: "Description Position" => "Popisná pozícia"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetovať hodnotu pre otázku: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Priradiť hodnotu: {1} otázku: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Obnoviť hodnotu bunky pre stĺpec: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Priradenie hodnoty bunky: {1} do stĺpca: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopírovanie do schránky"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Zástupný text súboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Zástupný text fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text súboru alebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory\" alebo keď fotoaparát nie je k dispozícii"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Používa sa, keď \"Typ zdroja\" je \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Použije, keď \"Typ zdroja\" je \"Lokálne súbory alebo fotoaparát\"."
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Naozaj chcete resetovať tému? Všetky vaše prispôsobenia sa stratia."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Áno, obnoviť motív"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadie"
+// theme.groupAppearance: "Appearance" => "Vzhľad"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis predná farba"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné na kontajner"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazenie zástupného symbolu"
+// signaturepad.placeholder: "Placeholder text" => "Zástupný text"
+// theme.surveyDescription: "Survey description font" => "Písmo popisu prieskumu"

@@ -76,13 +76,17 @@ export class TestSurveyTabViewModel extends Base {
     this.simulator = new SurveySimulatorModel();
   }
 
+  public get isMobileView() {
+    return this.surveyProvider.isMobileView;
+  }
+  public get showResults() {
+    return !this.isRunning && !this.isMobileView;
+  }
+
   public updateSimulatorSurvey(json: any, theme: any) {
     const newSurvey = this.surveyProvider.createSurvey(json || {}, "test", this);
-    if (this.surveyProvider.showThemeTab) {
-      newSurvey.applyTheme(this.surveyProvider.theme);
-    } else {
-      newSurvey.setCss(theme, false);
-    }
+    newSurvey.applyTheme(this.surveyProvider.theme);
+    newSurvey.setCss(theme, false);
     newSurvey.fitToContainer = true;
     newSurvey.addLayoutElement({
       id: "complete-customization",

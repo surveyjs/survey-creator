@@ -21,7 +21,9 @@
       min-width: auto;
     }
     & > div {
-      flex: 1 1 calc(50% - #{$base-unit} * 0.5);
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: calc(50% - #{$base-unit} * 0.5);
       min-width: auto;
       input {
         min-width: 0;
@@ -95,5 +97,12 @@
         }
       }
     }
+  }
+}
+
+.sv-mobile-side-bar .spg-theme-builder-root {
+  .spg-panel__content .spg-panel__content::after {
+    width: calc(4 * var(--sjs-base-unit, var(--base-unit, 8px)) + 100%);
+    left: calc(-2 * var(--sjs-base-unit, var(--base-unit, 8px)));
   }
 }

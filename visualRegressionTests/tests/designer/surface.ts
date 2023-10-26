@@ -69,6 +69,39 @@ test("Test question type converter", async (t) => {
   });
 });
 
+test("Test question type converter (mobile)", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(600, 900);
+
+    const surveyJSON = {
+      "showQuestionNumbers": "off",
+      "widthMode": "static",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1",
+              title: "Question 1",
+            }
+          ]
+        }
+      ]
+    };
+    await ClientFunction(() => {
+      (window as any).creator.isTouch = true;
+    })();
+    await setJSON(surveyJSON);
+    await t
+      .click(Selector(".svc-question__content"), { offsetX: 5, offsetY: 5 })
+      .expect(Selector("#convertTo").visible).ok()
+      .click(Selector("#convertTo"))
+      .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await takeElementScreenshot("convert-to-popup-mobile.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
 test("Test question type selector", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
@@ -1414,15 +1447,16 @@ test("Question adorners - popup", async (t) => {
     const pageContent = Selector(".svc-page__content:not(.svc-page__content--new)");
     const qContent = Selector(".svc-question__content");
     const qDots = Selector(".svc-question__content .sv-dots");
-    const requiredItem = Selector(".sv-list__item").withText("Required");
+    const markRequiredItem = Selector(".sv-list__item").withText("Mark as required");
+    const removeRequiredItem = Selector(".sv-list__item").withText("Remove the required mark");
     await t.click(qContent, { offsetX: 5, offsetY: 5 });
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup.png", pageContent, t, comparer);
-    await t.click(requiredItem);
+    await t.click(markRequiredItem);
 
     await t.click(qDots);
     await takeElementScreenshot("question-tiny-dots-popup-required.png", pageContent, t, comparer);
-    await t.click(requiredItem);
+    await t.click(removeRequiredItem);
   });
 });
 test("Question adorners for different sizes", async (t) => {

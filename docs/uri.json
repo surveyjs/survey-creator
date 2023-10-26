@@ -15,7 +15,8 @@
     "migrate-from-v1-to-v2": "migration-guide-to-survey-creator-v2",
     "toolbox": "toolbox-customization",
     "survey-customization": "customize-survey-creation-process",
-    "property-grid": "property-grid-customization"
+    "property-grid": "property-grid-customization",
+    "troubleshooting": "overview"
   },
   "classRename": {
     "surveyeditor": "survey-creator",

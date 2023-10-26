@@ -1,17 +1,17 @@
 import { property, Base, propertyArray, SurveyModel, HashTable, LocalizableString, JsonObjectProperty,
   Serializer, PageModel, surveyLocalization, ILocalizableString, ItemValue, FunctionFactory,
   PanelModelBase, QuestionMatrixDropdownModel, PanelModel, Action, IAction, QuestionCommentModel,
-  ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel } from "survey-core";
+  ComputedUpdater, createDropdownActionModel, Helpers, QuestionMatrixDynamicModel,
+  PopupBaseViewModel, IDialogOptions, settings as surveySettings } from "survey-core";
 import { unparse, parse } from "papaparse";
 import { editorLocalization } from "../../editorLocalization";
 import { EmptySurveyCreatorOptions, ISurveyCreatorOptions, settings } from "../../creator-settings";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid/index";
-
 require("./translation.scss");
 import { SurveyHelper } from "../../survey-helper";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
 import { translationCss } from "./translation-theme";
-import { updateMatrixRemoveAction, updateMatixActionsClasses } from "../../utils/actions";
+import { updateMatrixRemoveAction, updateMatixActionsClasses, findAction } from "../../utils/actions";
 
 let isLocaleEnableIfExecuting: boolean;
 function localeEnableIf(params: any): boolean {
@@ -48,6 +48,7 @@ export class TranslationItemBase extends Base {
     this.fireOnObjCreating();
   }
   public deleteLocaleStrings(locale: string): void { }
+  public applyEditLocale(locale: string): void { }
   protected fireOnObjCreating(obj: Base = null) {
     if (this.translation) {
       if (!obj) obj = this;
@@ -61,11 +62,12 @@ export class TranslationItemString extends Base {
     super();
     this.text = this.locString.getLocaleText(this.locale);
   }
+  public isReadOnly: boolean;
   @property() text: string;
   @property() placeholder: string;
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
-    if (name === "text") {
+    if (!this.isReadOnly && name === "text") {
       this.locString.setLocaleText(this.locale, newValue);
     }
   }
@@ -131,9 +133,16 @@ export class TranslationItem extends TranslationItemBase {
         this.context
       );
   }
+  public applyEditLocale(locale: string): void {
+    const itemStr = this.values(locale);
+    if(!!itemStr && !!itemStr.text) {
+      this.setLocText(locale, itemStr.text);
+    }
+  }
   public values(loc: string): TranslationItemString {
     if (!this.hashValues[loc]) {
       var val = new TranslationItemString(this.locString, loc);
+      val.isReadOnly = !!this.translation?.getEditLocale();
       if (!loc) {
         val.placeholder = this.defaultValue;
       }
@@ -157,6 +166,19 @@ export class TranslationItem extends TranslationItemBase {
   }
   public toJSON(): any {
     var json = this.locString.getJson();
+    const keys = Object.keys(this.hashValues);
+    if(keys.length > 0) {
+      keys.forEach(loc => {
+        const text = this.hashValues[loc].text;
+        if(!!text) {
+          if(!json) json = {};
+          if(typeof json === "string") {
+            json = { default: json };
+          }
+          json[loc] = text;
+        }
+      });
+    }
     json = this.correctJSON(json);
     if (!json || typeof json === "string") return { default: json };
     return json;
@@ -183,8 +205,16 @@ export class TranslationItem extends TranslationItemBase {
   public deleteLocaleStrings(locale: string): void {
     this.setLocText(locale, undefined);
   }
+  public getDefaultLocaleText(): string {
+    let res = this.locString.getLocaleText("");
+    if(!res) {
+      res = this.getPlaceholder("");
+    }
+    return res;
+  }
   public getPlaceholder(locale: string): string {
-    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", locale);
+    const textLocale = !!locale && locale !== "default" ? locale : surveyLocalization.defaultLocale;
+    const placeholderText = editorLocalization.getString("ed.translationPlaceHolder", textLocale);
     if (this.context instanceof SurveyModel) {
       return surveyLocalization.getString(this.name, locale) || placeholderText;
     }
@@ -236,6 +266,7 @@ export interface ITranslationLocales {
   fireOnObjCreating(obj: Base);
   removeLocale(loc: string): void;
   canShowProperty(obj: Base, prop: JsonObjectProperty, isEmpty: boolean): boolean;
+  getEditLocale(): string;
   getProcessedTranslationItemText(locale: string, name: ILocalizableString, newValue: string, context: any): string;
 }
 
@@ -356,6 +387,9 @@ export class TranslationGroup extends TranslationItemBase {
   public deleteLocaleStrings(locale: string): void {
     this.items.forEach(item => item.deleteLocaleStrings(locale));
   }
+  public applyEditLocale(locale: string): void {
+    this.items.forEach(item => item.applyEditLocale(locale));
+  }
   private fillItems() {
     if (this.isItemValueArray(this.obj)) {
       this.createItemValuesLocale();
@@ -407,7 +441,7 @@ export class TranslationGroup extends TranslationItemBase {
     var properties = Serializer.getPropertiesByObj(obj);
     for (var i = 0; i < properties.length; i++) {
       var property = properties[i];
-      if (!property.isSerializable || !property.isLocalizable) continue;
+      if (!property.isSerializable || !property.isLocalizable || property.type === "url" || property.type === "file") continue;
       if (property.readOnly || !property.visible) continue;
       res.push(property);
     }
@@ -435,6 +469,8 @@ export class TranslationGroup extends TranslationItemBase {
     const locStr = <LocalizableString>obj[property.serializationProperty];
     if (!locStr) return null;
     if (!this.showAllStrings && !defaultValue && locStr.isEmpty) return null;
+    const editLocale = this.translation?.getEditLocale();
+    if(!!editLocale && !!locStr.getLocaleText(editLocale)) return null;
     if (!this.canShowProperty(property, locStr.isEmpty)) return null;
     return new TranslationItem(
       property.name,
@@ -494,10 +530,14 @@ export class TranslationGroup extends TranslationItemBase {
     }
   }
   private createItemValuesLocale() {
+    const editMode = this.translation?.getEditLocale();
     for (var i = 0; i < this.obj.length; i++) {
       var val = this.obj[i];
       var canAdd =
         this.showAllStrings || !val.locText.isEmpty || isNaN(val.value);
+      if(!!editMode && val.locText.getLocaleText(editMode)) {
+        canAdd = false;
+      }
       if (!canAdd) continue;
       var item = new TranslationItem(
         val.value,
@@ -603,6 +643,17 @@ export class Translation extends Base implements ITranslationLocales {
   @property() stringsSurvey: SurveyModel;
   @property() stringsHeaderSurvey: SurveyModel;
   @property({ defaultValue: true }) isEmpty: boolean;
+  private editLocale: string;
+  public getEditLocale(): string { return this.editLocale; }
+  public setEditMode(locale: string): void {
+    this.editLocale = locale;
+    this.addLocale(locale);
+  }
+  public get isEditMode(): boolean { return !!this.editLocale; }
+  public applyEditLocale(): void {
+    if(!this.isEditMode || !this.root) return;
+    this.root.applyEditLocale(this.editLocale);
+  }
 
   public makeObservable(onBaseObjCreating: (obj: Base) => void) {
     this.onBaseObjCreatingCallback = onBaseObjCreating;
@@ -660,6 +711,16 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
+      if(this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row")) {
+        const q = options.question;
+        const rowIndex = q.visibleRows.indexOf(options.row);
+        const locale = q.value[rowIndex].name;
+        options.actions.splice(0, 0, new Action({
+          iconName: "icon-language",
+          locTooltipName: "ed.translateUsigAI",
+          location: "end",
+          action: () => this.showTranslationEditor(locale) }));
+      }
       updateMatixActionsClasses(options.actions);
     });
     return res;
@@ -691,7 +752,7 @@ export class Translation extends Base implements ITranslationLocales {
           confirmDeleteText: editorLocalization.getString("ed.translationDeleteLanguage"),
           columns: [
             { name: "isSelected", cellType: "boolean", renderAs: "checkbox", enableIf: "localeEnableIf()" },
-            { name: "displayName", cellType: "expression", expression: "row.displayName" }
+            { name: "displayName", cellType: "expression", expression: "{row.displayName}" }
           ],
           showHeader: false,
           allowAddRows: false,
@@ -716,6 +777,19 @@ export class Translation extends Base implements ITranslationLocales {
       this.addLocaleIntoChoices(locales[i], usedLocales, addedLocales);
     }
     return [usedLocales, locales];
+  }
+  private inputFileElement: HTMLInputElement;
+  public importFromCSVFileDOM(): void {
+    if (!document) return;
+    if (!this.inputFileElement) {
+      this.inputFileElement = document.createElement("input");
+      this.inputFileElement.type = "file";
+      this.inputFileElement.style.display = "none";
+      this.inputFileElement.onchange = () => {
+        this.importFromCSVFileUI(this.inputFileElement);
+      };
+    }
+    this.inputFileElement.click();
   }
   private updateSettingsSurveyLocales() {
     let [choices, locales] = this.getSurveyLocales();
@@ -785,6 +859,11 @@ export class Translation extends Base implements ITranslationLocales {
         });
       }
     });
+    survey.onUpdatePanelCssClasses.add((sender: SurveyModel, options) => {
+      if(options.panel["__translationHasIndent"]) {
+        options.cssClasses.panel.content += " st-panel-indent";
+      }
+    });
     survey.currentPage = survey.pages[0];
     return survey;
   }
@@ -835,14 +914,15 @@ export class Translation extends Base implements ITranslationLocales {
       panel.addElement(pnl);
       pnl.title = item.text;
       if (item.hasIndent) {
-        pnl.cssClasses.panel.content += " st-panel-indent";
+        pnl["__translationHasIndent"] = true;
       }
       this.addTranslationGroupIntoStringsSurvey(pnl, item);
     }
   }
   private addLocaleColumns(matrix: QuestionMatrixDropdownModel) {
     var locs = this.getSelectedLocales();
-    matrix.addColumn("default", this.getLocaleName(""));
+    const defaultColumn = matrix.addColumn("default", this.getLocaleName(""));
+    defaultColumn.readOnly = this.isEditMode;
     for (var i = 0; i < locs.length; i++) {
       matrix.addColumn(locs[i], this.getLocaleName(locs[i]));
     }
@@ -856,6 +936,12 @@ export class Translation extends Base implements ITranslationLocales {
       );
     }
     return res;
+  }
+  public updateStringsSurveyData(): void {
+    const survey = this.stringsSurvey;
+    if(survey) {
+      survey.data = this.getStringsSurveyData(survey);
+    }
   }
   private getStringsQuestionData(matrix: QuestionMatrixDropdownModel): any {
     var res = {};
@@ -1152,6 +1238,16 @@ export class Translation extends Base implements ITranslationLocales {
     this.setSelectedLocales([]);
     this.reset();
   }
+  public createTranslationEditor(locale: string): TranslationEditor {
+    const res = new TranslationEditor(this.survey, locale, this.options);
+    res.onApply = () => {
+      this.reset();
+    };
+    return res;
+  }
+  public showTranslationEditor(locale: string): void {
+    this.createTranslationEditor(locale).showDialog();
+  }
   translateItemAfterRender(item: TranslationItem, el: any, locale: string) {
     if (!this.translateItemAfterRenderCallback) return;
     if (Array.isArray(el)) {
@@ -1214,4 +1310,146 @@ export class Translation extends Base implements ITranslationLocales {
     this.tranlationChangedCallback = undefined;
     super.dispose();
   }
+}
+export class TranslationEditor {
+  private survey: SurveyModel;
+  private translationValue: Translation;
+  private options: ISurveyCreatorOptions;
+  private locale: string;
+  public onApply: () => void;
+  constructor(survey: SurveyModel, locale: string, options: ISurveyCreatorOptions) {
+    this.survey = survey;
+    this.locale = locale;
+    this.options = options;
+    this.translationValue = new Translation(this.survey, options, true);
+    this.translation.setEditMode(locale);
+    this.translation.reset();
+    this.setupNavigationButtons();
+  }
+  public get translation(): Translation { return this.translationValue; }
+  public showDialog(): void {
+    const dialogTitle = editorLocalization.getString("ed.translationDialogTitle") + " (" + this.translation.getLocaleName(this.locale) + ")";
+
+    if(this.translation.stringsSurvey.getAllQuestions(true).length === 0) {
+      const locStr = new LocalizableString(this.translation.stringsSurvey);
+      locStr.text = editorLocalization.getString("ed.translationNoStrings");
+      const popup = surveySettings.showDialog(<IDialogOptions>{
+        componentName: "sv-string-viewer",
+        data: { locStr: locStr, locString: locStr, model: locStr },
+        onApply: (): boolean => { return true; },
+        title: dialogTitle,
+        displayMode: "popup"
+      }, this.options.rootElement);
+      const actions = popup.footerToolbar.actions;
+      actions.splice(1, actions.length - 1);
+      actions[0].title = "OK";
+      return;
+    }
+    const popupModel: PopupBaseViewModel = surveySettings.showDialog(
+      <IDialogOptions>{
+        componentName: "survey",
+        data: {
+          survey: this.translation.stringsSurvey,
+          model: this.translation.stringsSurvey
+        },
+        onApply: (): boolean => {
+          this.apply();
+          return true;
+        },
+        onCancel: () => {
+          this.dispose();
+        },
+        cssClass: "sv-property-editor st-translation-dialog",
+        title: dialogTitle,
+        displayMode: this.options.isMobileView ? "overlay" : "popup"
+      }, this.options.rootElement);
+    popupModel.locale = editorLocalization.currentLocale;
+  }
+  public doMachineTranslation(): void {
+    let fromLocale = this.translation.defaultLocale;
+    if(!fromLocale) fromLocale = "en";
+    const items = this.createStringsToTranslate();
+    const strings = [];
+    items.forEach(item => {
+      strings.push(item.getDefaultLocaleText());
+    });
+    const callback = (translatedStrings: Array<string>): void => {
+      if(!Array.isArray(translatedStrings)) return;
+      for(let i = 0; i < Math.min(items.length, translatedStrings.length); i ++) {
+        items[i].values(this.locale).text = translatedStrings[i];
+      }
+      this.translation.updateStringsSurveyData();
+    };
+    this.options.doMachineTranslation(fromLocale, this.locale, strings, callback);
+  }
+  public apply(): void {
+    this.translation.applyEditLocale();
+    if(this.onApply) {
+      this.onApply();
+    }
+    this.dispose();
+  }
+  public cancel(): void {
+    this.dispose();
+  }
+  public dispose(): void {
+    this.translationValue.dispose();
+  }
+  private setupNavigationButtons(): void {
+    const survey = this.translation.stringsSurvey;
+    const actions = survey.navigationBar.actions;
+    actions.splice(0, actions.length);
+    if(this.options.getHasMachineTranslation()) {
+      survey.addNavigationItem(new Action({
+        id: "svc-translation-machine",
+        iconName: "icon-language",
+        css: "svc-translation-machine",
+        locTitleName: "ed.translateUsigAI",
+        component: "sv-action-bar-item",
+        action: () => { this.doMachineTranslation(); }
+      }));
+    }
+    survey.addNavigationItem(createImportCSVAction(() => { this.translation.importFromCSVFileDOM(); }, false, true));
+    survey.addNavigationItem(createExportCSVAction(() => { this.translation.exportToCSVFileUI(); }, true));
+    survey.showNavigationButtons = "top";
+  }
+  private createStringsToTranslate(): Array<TranslationItem> {
+    const res = new Array<TranslationItem>();
+    this.addStringsToTranlate(this.translation.root, res);
+    return res;
+  }
+  private addStringsToTranlate(group: TranslationGroup, items: Array<TranslationItem>): void {
+    group.items.forEach(item => {
+      if(item.isGroup) {
+        this.addStringsToTranlate(<TranslationGroup>item, items);
+      } else {
+        if(!!(<TranslationItem>item).getDefaultLocaleText()) {
+          items.push(<TranslationItem>item);
+        }
+      }
+    });
+  }
+}
+export function createImportCSVAction(action: () => void, needSeparator: boolean, isInEditor: boolean = false): Action {
+  return new Action({
+    id: "svc-translation-import",
+    iconName: "icon-load",
+    locTitleName: "ed.translationImportFromSCVButton",
+    locTooltipName: "ed.translationImportFromSCVButton",
+    mode: isInEditor ? "large" : "small",
+    component: "sv-action-bar-item",
+    needSeparator: needSeparator,
+    action: action
+  });
+}
+export function createExportCSVAction(action: () => void, isInEditor: boolean = false): Action {
+  return new Action({
+    id: "svc-translation-export",
+    iconName: "icon-download",
+    locTitleName: "ed.translationExportToSCVButton",
+    locTooltipName: "ed.translationExportToSCVButton",
+    mode: isInEditor ? "large" : "small",
+    component: "sv-action-bar-item",
+    action: action
+  });
 }

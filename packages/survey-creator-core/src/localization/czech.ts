@@ -50,6 +50,8 @@ export var czStrings = {
     settingsTooltip: "Otevřít nastavení průzkumu",
     surveySettings: "Nastavení průzkumu",
     surveySettingsTooltip: "Otevřít nastavení průzkumu",
+    themeSettings: "Nastavení motivu",
+    themeSettingsTooltip: "Otevření nastavení motivu",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -134,11 +136,18 @@ export var czStrings = {
     translationNoStrings: "Žádné řetězce k překladu. Změňte filtr.",
     translationExportToSCVButton: "Export do CSV",
     translationImportFromSCVButton: "Import z CSV",
+    translateUsigAI: "Automatický překlad Vše",
+    translationDialogTitle: "Nepřeložené řetězce",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Dovoz",
+    surveyJsonCopyButton: "Zkopírovat do schránky",
     themeResetButton: "Obnovení výchozího nastavení motivu",
+    themeResetConfirmation: "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena.",
+    themeResetConfirmationOk: "Ano, resetovat motiv",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
@@ -164,9 +173,13 @@ export var czStrings = {
       question_visibilityName: "Viditelnost otázky",
       question_enableName: "Zapnutí/vypnutí otázky",
       question_requireName: "Povinné vyplnění otázky",
+      question_resetValueName: "Obnovit hodnotu otázky",
+      question_setValueName: "Nastavit hodnotu otázky",
       column_visibilityName: "Zobrazit (skrýt) sloupec",
       column_enableName: "Zapnout (vypnout) sloupec",
       column_requireName: "Povinný sloupec",
+      column_resetValueName: "Obnovit hodnotu sloupce",
+      column_setValueName: "Nastavit hodnotu sloupce",
       trigger_completeName: "Dokončení průzkumu",
       trigger_setvalueName: "Nastavení hodnoty otázky",
       trigger_copyvalueName: "Kopírovat hodnotu otázky",
@@ -193,9 +206,14 @@ export var czStrings = {
       question_visibilityText: "Zobrazit otázku {0}", //{0} question name
       question_enableText: "Povolit otázku {0}", //{0} question name
       question_requireText: "Otázka {0} je povinná", //{0} question name
+      question_resetValueText: "Resetovat hodnotu pro otázku: {0}",
+      question_setValueText: "přiřadit hodnotu: {1} na otázku: {0}",
       column_visibilityText: "zviditelnit sloupec {0} úlohy {1}", //{0} column name, {1} question name
       column_enableText: "povolit sloupec {0} otázky {1}", //{0} column name, {1} question name
       column_requireText: "povinný sloupec {0} otázky {1}", //{0} column name, {1} question name
+      column_resetValueText: "Obnovit hodnotu buňky pro sloupec: {0}",
+      column_setValueText: "Přiřaďte hodnotu buňky: {1} sloupci: {0}",
+      setValueExpressionPlaceholder: " Výraz, jehož výsledek bude přiřazen cílové otázce.",
       trigger_completeText: "Průzkum se stává dokončeným",
       trigger_setvalueText: "Zpochybnit: {0} hodnota {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Jasná hodnota otázky: {0}", //{0} question name
@@ -261,6 +279,7 @@ export var czStrings = {
     fastEntry: "Rychlý vstup",
     fastEntryNonUniqueError: "Hodnota \"{0}\" není unikátní",
     fastEntryChoicesCountError: "Prosím, omezte počet položek od {0} do {1}",
+    fastEntryChoicesMinCountError: "Zadejte alespoň {0} položek",
     fastEntryPlaceholder: "Data můžete nastavit v následujícím formátu:\nhodnota1|text\nhodnota2",
     formEntry: "Vstupní formulář",
     testService: "Testování služby",
@@ -279,6 +298,7 @@ export var czStrings = {
     cellsEmptyRowsColumns: "Měl by existovat alespoň jeden sloupec nebo řádek.",
     showPreviewBeforeComplete: "Zobrazit náhled odpovědí před odesláním průzkumu",
     overridingPropertyPrefix: "Nastavit podle ",
+    resetToDefaultCaption: "Resetovat",
     propertyIsEmpty: "Zadejte hodnotu",
     propertyIsNoUnique: "Zadejte jedinečnou hodnotu",
     propertyNameIsNotUnique: "Zadejte jedinečný název",
@@ -324,6 +344,8 @@ export var czStrings = {
     choicesOrder: "Vyberte pořadí voleb",
     visible: "Viditelná?",
     isRequired: "Povinná?",
+    markRequired: "Označit podle potřeby",
+    removeRequiredMark: "Odstraňte požadovanou značku",
     isAllRowRequired: "Povinná odpověď pro všechny řádky",
     requiredErrorText: "Text chyby pro povinnou otázku",
     startWithNewLine: "Začátek s novým řádkem?",
@@ -405,7 +427,12 @@ export var czStrings = {
       imageHeight: "Výška obrázku (v hodnotách akceptovaných CSS)",
       imageWidth: "Výška obrázku (v hodnotách akceptovaných CSS)"
     },
+    // survey templates
+    survey: {
+      title: "Titul"
+    },
     page: {
+      title: "Titul",
       maxTimeToFinish: "Časový limit pro dokončení stránky (v sekundách)"
     },
     question: {
@@ -636,12 +663,22 @@ export var czStrings = {
     columnsVisibleIf: "Sloupce jsou viditelné, pokud",
     rowsVisibleIf: "Řádky jsou viditelné, pokud",
     otherPlaceholder: "Zástupný text komentáře",
+    signaturepad: {
+      showPlaceholder: "Zobrazení zástupného symbolu",
+      placeholder: "Zástupný text"
+    },
+    filePlaceholder: "Text zástupného symbolu souboru",
+    photoPlaceholder: "Text zástupného symbolu fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text souboru nebo fotografie",
     rateType: "Typ sazby"
   },
   // Property values
   pv: {
     "true": "pravda",
     "false": "nepravda",
+    file: "Místní soubory",
+    camera: "Fotoaparát",
+    "file-camera": "Místní soubory nebo fotoaparát",
     inherit: "zdědit",
     show: "zobrazit",
     hide: "skrýt",
@@ -870,7 +907,10 @@ export var czStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“."
+    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“.",
+    filePlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná",
+    photoPlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ export var czStrings = {
     descriptionLocation: "Umístění popisku",
     defaultValueExpression: "Výraz pro výchozí hodnotu",
     requiredIf: "Povinná, pokud",
+    resetValueIf: "Resetovat hodnotu, pokud",
+    setValueIf: "Nastavte hodnotu, pokud",
     validators: "Validátory",
     bindings: "Vazby",
     renderAs: "Vykreslit jako",
@@ -980,6 +1022,9 @@ export var czStrings = {
     "--base-unit": "Základní jednotka",
     groupGeneral: "Obecné",
     groupAdvanced: "Pokročilé",
+    groupHeader: "Záhlaví",
+    groupBackground: "Pozadí",
+    groupAppearance: "Vzhled",
     themeName: "Motivy",
     themeMode: "Režimy",
     themeModePanels: "Panely",
@@ -990,11 +1035,16 @@ export var czStrings = {
     primaryDefaultColor: "Výchozí",
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
+    coverTitleForecolor: "Nadpis křestní barvy",
+    coverDescriptionForecolor: "Popis předbarvení",
+    coverOverlapEnabled: "Překrytí",
     backgroundDimColor: "Barva pozadí",
     backgroundImage: "Obrázek na pozadí",
     backgroundImageFitAuto: "Auto",
     backgroundImageFitCover: "Pokrýt",
     backgroundImageFitContain: "Obsahuje",
+    backgroundImageFitFill: "Natáhnout",
+    backgroundImageFitTile: "Dlaždice",
     backgroundOpacity: "Průhlednost",
     backgroundImageAttachmentFixed: "Stabilní",
     backgroundImageAttachmentScroll: "Svitek",
@@ -1027,6 +1077,7 @@ export var czStrings = {
     scale: "Škála",
     cornerRadius: "Poloměr rohu",
     surveyTitle: "Font nadpisu průzkumu",
+    surveyDescription: "Písmo popisu průzkumu",
     pageTitle: "Font nadpisu stránky",
     pageDescription: "Font popisu stránky",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ export var czStrings = {
     boxShadowInner: "Vnitřní",
     questionShadow: "Hrany / stíny panelu",
     editorShadow: "Hrany / stíny editoru",
+    headerView: "Pohled",
+    headerViewBasic: "Základní",
+    headerViewAdvanced: "Pokročilý",
+    coverInheritWidthFrom: "Šířka oblasti obsahu",
+    coverInheritWidthFromSurvey: "Stejné jako průzkum",
+    coverInheritWidthFromContainer: "Vhodné pro kontejner",
+    coverTextAreaWidth: "Šířka textu",
+    coverBackgroundColorSwitch: "Barva pozadí",
+    coverBackgroundColorNone: "Žádný",
+    coverBackgroundColorAccentColor: "Barva zvýraznění",
+    coverBackgroundColorCustom: "Zvyk",
+    horizontalAlignmentLeft: "Vlevo",
+    horizontalAlignmentCenter: "Střed",
+    horizontalAlignmentRight: "Vpravo",
+    verticalAlignmentTop: "Vrchol",
+    verticalAlignmentMiddle: "Prostřední",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Pozice loga",
+    coverTitlePosition: "Titulní pozice",
+    coverDescriptionPosition: "Popis Poloha",
     names: {
       default: "Výchozí",
       sharp: "Ostrý",
@@ -1122,3 +1193,75 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Jste si jisti, že chcete odstranit všechny řetězce pro tento jazyk?"
 // ed.themeResetButton: "Reset theme settings to default" => "Obnovení výchozího nastavení motivu"
 // theme.placeholderColor: "Placeholder color" => "Zástupná barva"
+// ed.themeSettings: "Theme Settings" => "Nastavení motivu"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otevření nastavení motivu"
+// pe.resetToDefaultCaption: "Reset" => "Resetovat"
+// pv.file: "Local files" => "Místní soubory"
+// pv.camera: "Camera" => "Fotoaparát"
+// pv.file-camera: "Local files or camera" => "Místní soubory nebo fotoaparát"
+// ed.translationDialogTitle: "Untranslated strings" => "Nepřeložené řetězce"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Zadejte alespoň {0} položek"
+// lg.question_resetValueName: "Reset question value" => "Obnovit hodnotu otázky"
+// lg.column_resetValue: "Reset column value" => "Obnovit hodnotu sloupce"
+// pe.markRequired: "Mark as required" => "Označit podle potřeby"
+// pe.removeRequiredMark: "Remove the required mark" => "Odstraňte požadovanou značku"
+// p.resetValueIf: "Reset value if" => "Resetovat hodnotu, pokud"
+
+// lg.question_setValueName: "Set question value" => "Nastavit hodnotu otázky"
+// lg.column_resetValueName: "Reset column value" => "Obnovit hodnotu sloupce"
+// lg.column_setValueName: "Set column value" => "Nastavit hodnotu sloupce"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Výraz, jehož výsledek bude přiřazen cílové otázce."
+// survey.title: "Title" => "Titul"
+// page.title: "Title" => "Titul"
+// p.setValueIf: "Set value if" => "Nastavte hodnotu, pokud"
+// theme.groupHeader: "Header" => "Záhlaví"
+// theme.coverTitleForecolor: "Title forecolor" => "Nadpis křestní barvy"
+// theme.coverOverlapEnabled: "Overlap" => "Překrytí"
+// theme.backgroundImageFitFill: "Stretch" => "Natáhnout"
+// theme.backgroundImageFitTile: "Tile" => "Dlaždice"
+// theme.headerView: "View" => "Pohled"
+// theme.headerViewBasic: "Basic" => "Základní"
+// theme.headerViewAdvanced: "Advanced" => "Pokročilý"
+// theme.coverInheritWidthFrom: "Content area width" => "Šířka oblasti obsahu"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Stejné jako průzkum"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Přizpůsobit stránce"
+// theme.coverTextAreaWidth: "Text width" => "Šířka textu"
+// theme.coverBackgroundColorSwitch: "Background color" => "Barva pozadí"
+// theme.coverBackgroundColorNone: "None" => "Žádný"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Barva zvýraznění"
+// theme.coverBackgroundColorCustom: "Custom" => "Zvyk"
+// theme.horizontalAlignmentLeft: "Left" => "Vlevo"
+// theme.horizontalAlignmentCenter: "Center" => "Střed"
+// theme.horizontalAlignmentRight: "Right" => "Vpravo"
+// theme.verticalAlignmentTop: "Top" => "Vrchol"
+// theme.verticalAlignmentMiddle: "Middle" => "Prostřední"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Pozice loga"
+// theme.coverTitlePosition: "Title Position" => "Titulní pozice"
+// theme.coverDescriptionPosition: "Description Position" => "Popis Poloha"
+// lg.question_resetValueText: "reset value for question: {0}" => "Resetovat hodnotu pro otázku: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Přiřaďte hodnotu buňky: {1} sloupci: {0}"
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Dovoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Zkopírovat do schránky"
+// pe.filePlaceholder: "File placeholder text" => "Text zástupného symbolu souboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Text zástupného symbolu fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text souboru nebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
+// signaturepad.placeholder: "Placeholder text" => "Zástupný text"
+// theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
+

@@ -1,5 +1,4 @@
 import {
-  PropertyGridModel,
   PropertyGridEditorCollection,
   PropertyJSONGenerator,
   PropertyGridEditorBoolean,
@@ -30,11 +29,9 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
-  QuestionImagePickerModel,
-  QuestionSignaturePadModel
+  QuestionImagePickerModel
 } from "survey-core";
 import {
-  ISurveyCreatorOptions,
   EmptySurveyCreatorOptions,
   ICollectionItemAllowOperations,
   settings
@@ -50,25 +47,7 @@ import {
 import { PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
-
-export * from "../../src/property-grid/matrices";
-export * from "../../src/property-grid/bindings";
-export * from "../../src/property-grid/condition";
-export * from "../../src/property-grid/restfull";
-export * from "../../src/custom-questions/question-text-with-reset";
-
-export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base, options: ISurveyCreatorOptions = null) {
-    PropertyGridEditorCollection.clearHash();
-    super(obj, options);
-  }
-}
-function findSetupAction(actions: Array<any>): any {
-  for (var i = 0; i < actions.length; i++) {
-    if (actions[i].id === "property-grid-setup") return actions[i];
-  }
-  return null;
-}
+import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -927,7 +906,7 @@ test("restfull property editor and options.onCanShowPropertyCallback", () => {
     parentObj: any,
     parentProperty: JsonObjectProperty
   ): boolean => {
-    return property.name == "choicesByUrl" || property.name == "url";
+    return property.name == "choicesByUrl" || property.name == "url" || property.name == "file";
   };
   var question = new QuestionDropdownModel("q1");
   question.choicesByUrl.url = "myUrl";
@@ -1840,6 +1819,18 @@ test("Support maximumColumnsCount option", () => {
   expect(updater()).toBeFalsy();
   question.columns.splice(2, 1);
   expect(updater()).toBeTruthy();
+});
+test("Support minimumChoicesCount option", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choices.push(new ItemValue("item1"));
+  question.choices.push(new ItemValue("item2"));
+  var options = new EmptySurveyCreatorOptions();
+  options.minimumChoicesCount = 3;
+  var propertyGrid = new PropertyGridModelTester(question, options);
+  var editQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(editQuestion.minRowCount).toEqual(3);
 });
 test("Support maximumChoicesCount option", () => {
   var question = new QuestionDropdownModel("q1");
@@ -2861,25 +2852,6 @@ test("PropertyEditor for question name", () => {
     expect(panel.name).toEqual(erroredName);
     expect(nameQuestion.errors).toHaveLength(0);
   }
-});
-test("editor base check for unique property value and correct error in another editor, Bug#4165", () => {
-  var question = new QuestionMatrixDropdownModel("q1");
-  question.addColumn("column1");
-  question.addColumn("column2");
-  question.addColumn("column3");
-
-  const propertyGrid = new PropertyGridModelTester(question);
-  const columnsQuestion = <QuestionMatrixDynamicModel>(
-    propertyGrid.survey.getQuestionByName("columns")
-  );
-  const rows = columnsQuestion.visibleRows;
-
-  const column1Name = rows[0].getQuestionByColumnName("name");
-  const column2Name = rows[1].getQuestionByColumnName("name");
-  column2Name.value = "column1";
-  expect(column2Name.errors).toHaveLength(1);
-  column1Name.value = "column5";
-  expect(column2Name.errors).toHaveLength(0);
 });
 test("Required name property for page", () => {
   const survey = new SurveyModel({

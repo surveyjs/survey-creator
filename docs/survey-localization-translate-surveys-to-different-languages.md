@@ -23,7 +23,7 @@ You can also create new dictionaries for unsupported languages. Use English as a
 
 ### Enable Localization and Switch Between Locales
 
-The localization engine that works with dictionaries is available as a separate script/module. Reference this script in the `<head>` tag of your page or import this module into the component that renders Survey Creator:
+The localization engine that works with dictionaries is available as a separate script/module. This script/module imports dictionaries for all languages. Reference this script in the `<head>` tag of your page or import this module into the component that renders Survey Creator:
 
 ```html
 <script src="https://unpkg.com/survey-creator-core/survey-creator-core.i18n.min.js"></script>
@@ -33,6 +33,20 @@ The localization engine that works with dictionaries is available as a separate 
 import "survey-creator-core/survey-creator-core.i18n";
 ```
 
+Since Survey Creator v1.9.112, you may reference or import only the languages you need, as shown below:
+
+```html
+<script src="https://unpkg.com/survey-creator-core/i18n/french.js"></script>
+<script src="https://unpkg.com/survey-creator-core/i18n/german.js"></script>
+<script src="https://unpkg.com/survey-creator-core/i18n/italian.js"></script>
+```
+
+```js
+import "survey-creator-core/i18n/french";
+import "survey-creator-core/i18n/german";
+import "survey-creator-core/i18n/italian";
+```
+
 The default language for UI elements is English. To select another language, set the `currentLocale` property. For example, the following code translates the Survey Creator UI to French:
 
 ```js
@@ -40,6 +54,7 @@ SurveyCreator.localization.currentLocale = "fr";
 
 // In modular applications:
 import { localization } from "survey-creator-core";
+import "survey-creator-core/i18n/french";
 localization.currentLocale = "fr";
 ```
 
@@ -97,17 +112,7 @@ editorLocalization.defaultLocale = "fr";
 
 ## Localize Survey Contents
 
-If you want your users to create multi-language surveys, add the following script to the `<head>` tag of your page or import the following module in the component that renders Survey Creator:
-
-```html
-<script src="https://unpkg.com/survey-core/survey.i18n.min.js"></script>
-```
-
-```js
-import "survey-core/survey.i18n";
-```
-
-This script/module allows Survey Creator users to select a default language different from English:
+If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select a default language different from English:
 
 <img src="./images/survey-creator-default-language-dropdown.png" alt="Survey Creator - Default Language dropdown" width="50%">
 

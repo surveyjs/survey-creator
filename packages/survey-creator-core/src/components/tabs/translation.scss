@@ -159,3 +159,28 @@ td.st-table__cell:first-of-type {
   min-height: calcSize(5);
   background-color: $background-dim;
 }
+
+.st-navigation-btn {
+  padding-left: calcSize(3);
+  padding-right: calcSize(2);
+}
+
+.svc-translation-machine {
+  margin-right: auto;
+}
+
+.st-body__footer {
+  padding: calcSize(2) calcSize(2);
+  background: $background;
+  border-bottom: 1px solid $border-light;
+}
+
+.st-translation-dialog .sv-popup__body-header {
+  margin-bottom: calcSize(4);
+}
+
+.st-translation-dialog .st-root-modern>.sd-root-modern__wrapper {
+  border-radius: 4px;
+  box-shadow: $shadow-small;
+  overflow: hidden;
+}

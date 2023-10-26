@@ -10,6 +10,7 @@ const dummyQuestion = new QuestionLinkValueModel("q1");
 export class CreatorTester extends CreatorBase {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     super(options, options2);
+    this.autoSaveDelay = 0;
     if (setOldDefaultNewSurveyJSON) {
       creatorSetting.defaultNewSurveyJSON = { pages: [{ name: "page1" }] };
     }

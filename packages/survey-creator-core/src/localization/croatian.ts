@@ -50,6 +50,8 @@ export var hrStrings = {
     settingsTooltip: "Otvaranje postavki ankete",
     surveySettings: "Postavke upitnika",
     surveySettingsTooltip: "Otvaranje postavki upitnika",
+    themeSettings: "Postavke teme",
+    themeSettingsTooltip: "Otvaranje postavki teme",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -134,11 +136,18 @@ export var hrStrings = {
     translationNoStrings: "Nema žica za prevođenje. Promijenite filtar.",
     translationExportToSCVButton: "Izvoz u CSV",
     translationImportFromSCVButton: "Uvoz iz CSV",
+    translateUsigAI: "Automatski prevedi sve",
+    translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
+    surveyJsonExportButton: "Izvoz",
+    surveyJsonImportButton: "Uvoz",
+    surveyJsonCopyButton: "Kopiraj u međuspremnik",
     themeResetButton: "Vraćanje zadanih postavki teme na zadano",
+    themeResetConfirmation: "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene.",
+    themeResetConfirmationOk: "Da, resetirajte temu",
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
@@ -164,9 +173,13 @@ export var hrStrings = {
       question_visibilityName: "Vidljivost pitanja",
       question_enableName: "Pitanje omogućuje/onesposobljava",
       question_requireName: "Pitanje nije obavezno",
+      question_resetValueName: "Vrati izvornu vrijednost pitanja",
+      question_setValueName: "Postavljanje vrijednosti pitanja",
       column_visibilityName: "Pokaži (sakrij) stupac",
       column_enableName: "Omogući (onemogući stupac)",
       column_requireName: "Učini stupac obaveznim",
+      column_resetValueName: "Vraćanje izvorne vrijednosti stupca",
+      column_setValueName: "Postavljanje vrijednosti stupca",
       trigger_completeName: "Potpuna anketa",
       trigger_setvalueName: "Postavite vrijednost pitanja",
       trigger_copyvalueName: "Kopiranje vrijednosti pitanja",
@@ -193,9 +206,14 @@ export var hrStrings = {
       question_visibilityText: "Učinite pitanje {0} vidljivim", //{0} question name
       question_enableText: "Omogući pitanje {0}", //{0} question name
       question_requireText: "Neka pitanje {0} bude potrebno", //{0} question name
+      question_resetValueText: "Vrati izvornu vrijednost za pitanje: {0}",
+      question_setValueText: "Dodijeli vrijednost: {1} pitanje: {0}",
       column_visibilityText: "učiniti stupac {0} pitanja vidljivim {1}", //{0} column name, {1} question name
       column_enableText: "{1} omogućivanje stupca {0} pitanja", //{0} column name, {1} question name
       column_requireText: "Učinite stupac {0} pitanja {1} potrebnim", //{0} column name, {1} question name
+      column_resetValueText: "Vrati izvornu vrijednost ćelije za stupac: {0}",
+      column_setValueText: "Dodijeli vrijednost ćelije: {1} stupcu: {0}",
+      setValueExpressionPlaceholder: " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju.",
       trigger_completeText: "Anketa se dovrša",
       trigger_setvalueText: "Postavljeno u pitanje: {0} vrijednost {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "Očisti vrijednost pitanja: {0}", //{0} question name
@@ -261,6 +279,7 @@ export var hrStrings = {
     fastEntry: "Brzi unos",
     fastEntryNonUniqueError: "Vrijednost '{0}' nije jedinstvena",
     fastEntryChoicesCountError: "Ograničite broj stavki s {0} na {1}",
+    fastEntryChoicesMinCountError: "Unesite najmanje {0} stavki",
     fastEntryPlaceholder: "Podatke možete postaviti u sljedećem obliku:\nvrijednost1|tekst\nvrijednost2",
     formEntry: "Unos obrasca",
     testService: "Testirajte uslugu",
@@ -279,6 +298,7 @@ export var hrStrings = {
     cellsEmptyRowsColumns: "Trebao bi postojati barem jedan stupac ili red",
     showPreviewBeforeComplete: "Pregled odgovora prije slanja ankete",
     overridingPropertyPrefix: "Postavio ",
+    resetToDefaultCaption: "Brisanje",
     propertyIsEmpty: "Unesite vrijednost",
     propertyIsNoUnique: "Unesite jedinstvenu vrijednost",
     propertyNameIsNotUnique: "Unesite jedinstveno ime",
@@ -324,6 +344,8 @@ export var hrStrings = {
     choicesOrder: "Odaberite redoslijed izbora",
     visible: "Je li vidljivo?",
     isRequired: "Je potrebno?",
+    markRequired: "Označi kao obavezno",
+    removeRequiredMark: "Uklanjanje potrebne oznake",
     isAllRowRequired: "Zahtijevati odgovor za sve redove",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
@@ -405,7 +427,12 @@ export var hrStrings = {
       imageHeight: "Visina slike (u CSS-prihvaćenim vrijednostima)",
       imageWidth: "Širina slike (u CSS-prihvaćenim vrijednostima)"
     },
+    // survey templates
+    survey: {
+      title: "Naslov"
+    },
     page: {
+      title: "Naslov",
       maxTimeToFinish: "Vremensko ograničenje za dovršetak stranice (u sekundama)"
     },
     question: {
@@ -636,12 +663,22 @@ export var hrStrings = {
     columnsVisibleIf: "Stupci su vidljivi ako",
     rowsVisibleIf: "Reci su vidljivi ako",
     otherPlaceholder: "Rezervirano mjesto područja komentara",
+    signaturepad: {
+      showPlaceholder: "Pokaži rezervirano mjesto",
+      placeholder: "Tekst rezerviranog mjesta"
+    },
+    filePlaceholder: "Tekst rezerviranog mjesta datoteke",
+    photoPlaceholder: "Tekst rezerviranog mjesta za fotografije",
+    fileOrPhotoPlaceholder: "Tekst rezerviranog mjesta za datoteku ili fotografiju",
     rateType: "Vrsta stope"
   },
   // Property values
   pv: {
     "true": "istinit",
     "false": "lažan",
+    file: "Lokalne datoteke",
+    camera: "Kamera",
+    "file-camera": "Lokalne datoteke ili kamera",
     inherit: "naslijediti",
     show: "pokazati",
     hide: "sakrij",
@@ -870,7 +907,10 @@ export var hrStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\"."
+    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
+    filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
+    photoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\".",
+    fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ export var hrStrings = {
     descriptionLocation: "Mjesto opisa",
     defaultValueExpression: "Zadani izraz vrijednosti",
     requiredIf: "requiredIf",
+    resetValueIf: "Vrati izvornu vrijednost ako",
+    setValueIf: "Postavi vrijednost ako",
     validators: "validators",
     bindings: "Vezovi",
     renderAs: "Iscrtaj kao",
@@ -980,6 +1022,9 @@ export var hrStrings = {
     "--base-unit": "Osnovna jedinica",
     groupGeneral: "Općenito",
     groupAdvanced: "Napredan",
+    groupHeader: "Zaglavlje",
+    groupBackground: "Pozadina",
+    groupAppearance: "Izgled",
     themeName: "Tema",
     themeMode: "Izgled pitanja",
     themeModePanels: "Propust",
@@ -990,11 +1035,16 @@ export var hrStrings = {
     primaryDefaultColor: "Propust",
     primaryDarkColor: "Lebdjeti",
     primaryLightColor: "Odabrani",
+    coverTitleForecolor: "Naslovna prednja strana",
+    coverDescriptionForecolor: "Opis prednje boje",
+    coverOverlapEnabled: "Preklapanje",
     backgroundDimColor: "Boja pozadine",
     backgroundImage: "Pozadinska slika",
     backgroundImageFitAuto: "Automobil",
     backgroundImageFitCover: "Pokriti",
     backgroundImageFitContain: "Sadržavati",
+    backgroundImageFitFill: "Parcela",
+    backgroundImageFitTile: "Crijep",
     backgroundOpacity: "Neprozirnost",
     backgroundImageAttachmentFixed: "Fiksirane",
     backgroundImageAttachmentScroll: "Svitak",
@@ -1027,6 +1077,7 @@ export var hrStrings = {
     scale: "Vaga",
     cornerRadius: "Kutni radijus",
     surveyTitle: "Font naslova upitnika",
+    surveyDescription: "Font opisa upitnika",
     pageTitle: "Font naslova stranice",
     pageDescription: "Font opisa stranice",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ export var hrStrings = {
     boxShadowInner: "Unutarnji",
     questionShadow: "Efekti sjene",
     editorShadow: "Efekti sjene ulaznog elementa",
+    headerView: "Pogled",
+    headerViewBasic: "Osnovni",
+    headerViewAdvanced: "Napredan",
+    coverInheritWidthFrom: "Širina područja sadržaja",
+    coverInheritWidthFromSurvey: "Isto kao i anketa",
+    coverInheritWidthFromContainer: "Prilagodi spremniku",
+    coverTextAreaWidth: "Širina teksta",
+    coverBackgroundColorSwitch: "Boja pozadine",
+    coverBackgroundColorNone: "Nijedan",
+    coverBackgroundColorAccentColor: "Boja isticanja",
+    coverBackgroundColorCustom: "Običaj",
+    horizontalAlignmentLeft: "Lijevo",
+    horizontalAlignmentCenter: "Središte",
+    horizontalAlignmentRight: "Desno",
+    verticalAlignmentTop: "Vrh",
+    verticalAlignmentMiddle: "Sredina",
+    verticalAlignmentBottom: "Dno",
+    logoPosition: "Položaj logotipa",
+    coverTitlePosition: "Položaj naslova",
+    coverDescriptionPosition: "Položaj opisa",
     names: {
       default: "Propust",
       sharp: "Oštar",
@@ -1557,3 +1628,88 @@ editorLocalization.locales["hr"] = hrStrings;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Boja rezerviranog mjesta"
+// ed.themeSettings: "Theme Settings" => "Postavke teme"
+// ed.themeSettingsTooltip: "Open theme settings" => "Otvaranje postavki teme"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "Brisanje"
+// pv.file: "Local files" => "Lokalne datoteke"
+// pv.camera: "Camera" => "Kamera"
+// pv.file-camera: "Local files or camera" => "Lokalne datoteke ili kamera"
+// ed.translateUsigAI: "Auto-translate All" => "Automatski prevedi sve"
+// ed.translationDialogTitle: "Untranslated strings" => "Neprevedeni nizovi"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Unesite najmanje {0} stavki"
+// lg.question_resetValueName: "Reset question value" => "Vrati izvornu vrijednost pitanja"
+// lg.column_resetValue: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "Označi kao obavezno"
+// pe.removeRequiredMark: "Remove the required mark" => "Uklanjanje potrebne oznake"
+// p.resetValueIf: "Reset value if" => "Vrati izvornu vrijednost ako"
+// lg.question_setValueName: "Set question value" => "Postavljanje vrijednosti pitanja"
+// lg.column_resetValueName: "Reset column value" => "Vraćanje izvorne vrijednosti stupca"
+// lg.column_setValueName: "Set column value" => "Postavljanje vrijednosti stupca"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Izraz čiji će rezultat biti dodijeljen ciljnom pitanju."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "Naslov"
+// page.title: "Title" => "Naslov"
+// p.setValueIf: "Set value if" => "Postavi vrijednost ako"
+// theme.groupHeader: "Header" => "Zaglavlje"
+// theme.coverTitleForecolor: "Title forecolor" => "Naslovna prednja strana"
+// theme.coverOverlapEnabled: "Overlap" => "Preklapanje"
+// theme.backgroundImageFitFill: "Stretch" => "Parcela"
+// theme.backgroundImageFitTile: "Tile" => "Crijep"
+// theme.headerView: "View" => "Pogled"
+// theme.headerViewBasic: "Basic" => "Osnovni"
+// theme.headerViewAdvanced: "Advanced" => "Napredan"
+// theme.coverInheritWidthFrom: "Content area width" => "Širina područja sadržaja"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Isto kao i anketa"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Prilagodi stranici"
+// theme.coverTextAreaWidth: "Text width" => "Širina teksta"
+// theme.coverBackgroundColorSwitch: "Background color" => "Boja pozadine"
+// theme.coverBackgroundColorNone: "None" => "Nijedan"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Boja isticanja"
+// theme.coverBackgroundColorCustom: "Custom" => "Običaj"
+// theme.horizontalAlignmentLeft: "Left" => "Lijevo"
+// theme.horizontalAlignmentCenter: "Center" => "Središte"
+// theme.horizontalAlignmentRight: "Right" => "Desno"
+// theme.verticalAlignmentTop: "Top" => "Vrh"
+// theme.verticalAlignmentMiddle: "Middle" => "Sredina"
+// theme.verticalAlignmentBottom: "Bottom" => "Dno"
+// theme.logoPosition: "Logo Position" => "Položaj logotipa"
+// theme.coverTitlePosition: "Title Position" => "Položaj naslova"
+// theme.coverDescriptionPosition: "Description Position" => "Položaj opisa"
+// lg.question_resetValueText: "reset value for question: {0}" => "Vrati izvornu vrijednost za pitanje: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "Dodijeli vrijednost: {1} pitanje: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "Vrati izvornu vrijednost ćelije za stupac: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Dodijeli vrijednost ćelije: {1} stupcu: {0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Izvoz"
+// ed.surveyJsonImportButton: "Import" => "Uvoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiraj u međuspremnik"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tekst rezerviranog mjesta datoteke"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst rezerviranog mjesta za fotografije"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst rezerviranog mjesta za datoteku ili fotografiju"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Pokaži rezervirano mjesto"
+// signaturepad.placeholder: "Placeholder text" => "Tekst rezerviranog mjesta"
+// theme.surveyDescription: "Survey description font" => "Font opisa upitnika"

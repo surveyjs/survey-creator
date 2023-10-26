@@ -132,14 +132,14 @@ export class PropertyGridViewModel extends Base {
       "center"
     );
     this.selectorPopupModel.cssClass += " svc-object-selector";
-
+    this.selectorPopupModel.displayMode = this.creator.isTouch ? "overlay" : "popup";
     this.objectSelectionAction = new Action({
       id: "svd-grid-object-selector",
       title: this.selectedElementName,
       css: "sv-action--object-selector sv-action-bar-item--secondary",
       component: "sv-action-bar-item-dropdown",
+      disableHide: true,
       action: () => {
-        this.selectorPopupModel.displayMode = this.creator.isMobileView ? "overlay" : "popup";
         selectorModel.show(
           this.selectionController.creator.survey,
           this.propertyGridModel.obj,

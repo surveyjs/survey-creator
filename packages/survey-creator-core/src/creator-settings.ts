@@ -27,7 +27,8 @@ export var settings = {
   },
   theme: {
     exportFileName: "survey_theme.json",
-    fontFamily: "Open Sans"
+    fontFamily: "Open Sans",
+    allowEditHeaderSettings: true,
   },
   operators: {
     empty: [],
@@ -85,6 +86,7 @@ export var settings = {
     showNavigationButtons: false,
     enableSearch: true,
     maximumColumnsCount: 0,
+    minimumChoicesCount: 0,
     maximumChoicesCount: 0,
     maximumRowsCount: 0,
     maximumRateValues: 0,
@@ -167,7 +169,8 @@ export var settings = {
     allowCollapseSidebar: true
   },
   jsonEditor: {
-    indentation: 1
+    indentation: 1,
+    exportFileName: "survey.json"
   }
 };
 export interface ICollectionItemAllowOperations {
@@ -185,10 +188,13 @@ export interface ISurveyCreatorOptions {
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean;
   maximumColumnsCount: number;
+  minimumChoicesCount: number;
   maximumChoicesCount: number;
   maximumRowsCount: number;
   maximumRateValues: number;
+  maxNestedPanels: number;
   enableLinkFileEditor: boolean;
+  inplaceEditForValues: boolean;
   rootElement?: HTMLElement;
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string;
   onCanShowPropertyCallback(
@@ -295,6 +301,11 @@ export interface ISurveyCreatorOptions {
     question: Question,
     uploadingCallback: (status: string, data: any) => any
   ): void;
+  getHasMachineTranslation(): boolean;
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
+  chooseFiles(
+    input: HTMLInputElement,
+    onFilesChosen: (files: File[]) => void): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -311,9 +322,13 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   showObjectTitles: boolean;
   allowEditExpressionsInTextEditor: boolean = true;
   maximumColumnsCount: number = settings.propertyGrid.maximumColumnsCount;
+  minimumChoicesCount: number = settings.propertyGrid.minimumChoicesCount;
   maximumChoicesCount: number = settings.propertyGrid.maximumChoicesCount;
   maximumRowsCount: number = settings.propertyGrid.maximumRowsCount;
   maximumRateValues: number = settings.propertyGrid.maximumRateValues;
+  machineTranslationValue: boolean = false;
+  inplaceEditForValues: boolean = false;
+  maxNestedPanels: number = -1;
 
   getObjectDisplayName(obj: Base, area: string, reason: string, displayName: string): string {
     return displayName;
@@ -435,7 +450,10 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
     files: File[],
     question: Question,
     uploadingCallback: (status: string, data: any) => any
-  ): void {}
+  ): void { }
+  getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
+  doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
+  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void): void {}
 }
 
 StylesManager.applyTheme("defaultV2");

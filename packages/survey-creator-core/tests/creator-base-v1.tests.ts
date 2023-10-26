@@ -704,10 +704,10 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
 test("generate element name based on another survey", () => {
   const creator = new CreatorTester();
   creator.onGenerateNewName.add(function (sender, options) {
-    if (options.name == "question3") {
-      options.isUnique = false;
+    if (options.name === "question3") {
+      options.name = "question4";
     }
-    if (options.name == "question5") {
+    if (options.name === "question5") {
       options.name = "question9";
     }
   });
@@ -942,7 +942,7 @@ test("creator.onSurveyInstanceCreated, can pass ConditionEditor as model", () =>
   };
   let model;
   creator.onSurveyInstanceCreated.add((sender, options) => {
-    if(options.reason === "condition-builder") {
+    if (options.reason === "condition-builder") {
       model = options.model;
     }
   });
@@ -1152,7 +1152,7 @@ test("creator getMenuItems should respect property readOnly - https://github.com
   });
   let questionAdorner = new QuestionAdornerViewModel(creator, question, undefined);
   expect(questionAdorner.getActionById("isrequired")).toBeTruthy();
-  expect(questionAdorner.getActionById("isrequired").visible).toBeTruthy();
+  expect(questionAdorner.getActionById("isrequired").visible).toBeFalsy();
 });
 
 test("addQuestion into the QuestionPanelDynamic into second page", () => {

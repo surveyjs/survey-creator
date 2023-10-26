@@ -641,3 +641,25 @@ test("Check text editor with reset button", async (t) => {
     await takeElementScreenshot("text-with-reset-enabled-button.png", questionSelector, t, comparer);
   });
 });
+
+test("Check accepted file types hint link", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "file",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await t.resizeWindow(1900, 1000);
+    await t.click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 });
+    await t.click(Selector("[data-name='acceptedTypes'] button"));
+    await takeElementScreenshot("file-accepted-types-hint.png", Selector("[data-name='acceptedTypes']"), t, comparer);
+  });
+});

@@ -50,6 +50,8 @@ var simplifiedChineseTranslation = {
     settingsTooltip: "打开设置",
     surveySettings: "调查设置",
     surveySettingsTooltip: "打开调查设置",
+    themeSettings: "主题设置",
+    themeSettingsTooltip: "打开主题设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -134,11 +136,18 @@ var simplifiedChineseTranslation = {
     translationNoStrings: "未翻译，重新选",
     translationExportToSCVButton: "导出CSV",
     translationImportFromSCVButton: "导入CSV",
+    translateUsigAI: "自动翻译全部",
+    translationDialogTitle: "未翻译的字符串",
     translationMergeLocaleWithDefault: "同默认合并 {0} ",
     translationPlaceHolder: "译本。。。",
     themeExportButton: "出口",
     themeImportButton: "进口",
+    surveyJsonExportButton: "出口",
+    surveyJsonImportButton: "进口",
+    surveyJsonCopyButton: "复制到剪贴板",
     themeResetButton: "将主题设置重置为默认值",
+    themeResetConfirmation: "你真的要重置主题吗？您的所有自定义项都将丢失。",
+    themeResetConfirmationOk: "是，重置主题",
     bold: "加粗",
     italic: "斜体",
     underline: "下划线",
@@ -164,9 +173,13 @@ var simplifiedChineseTranslation = {
       question_visibilityName: "显示（隐藏）问题",
       question_enableName: "启用（禁用）问题",
       question_requireName: "提出必填题",
+      question_resetValueName: "重置问题值",
+      question_setValueName: "设置问题值",
       column_visibilityName: "显示（隐藏）列",
       column_enableName: "启用（禁用）列",
       column_requireName: "使列成为必填项",
+      column_resetValueName: "重置列值",
+      column_setValueName: "设置列值",
       trigger_completeName: "完成调查",
       trigger_setvalueName: "设置答案",
       trigger_copyvalueName: "复制答案",
@@ -193,9 +206,14 @@ var simplifiedChineseTranslation = {
       question_visibilityText: "使问题{0}可见", //{0} question name
       question_enableText: "使问题{0}启用", //{0} question name
       question_requireText: "将问题{0}为必填项", //{0} question name
+      question_resetValueText: "重置问题的值：{0}",
+      question_setValueText: "分配值：{1}问题：{0}",
       column_visibilityText: "使问题{1}的列{0}可见", //{0} column name, {1} question name
       column_enableText: "使问题{1}列{0}启用", //{0} column name, {1} question name
       column_requireText: "{0}将问题{1}列为必填项", //{0} column name, {1} question name
+      column_resetValueText: "重置列的单元格值：{0}",
+      column_setValueText: "将单元格值：{1}分配给列：{0}",
+      setValueExpressionPlaceholder: "其结果将分配给目标问题的表达式。",
       trigger_completeText: "调查完成",
       trigger_setvalueText: "受到质疑：{0}价值{1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "明确问题值：{0}", //{0} question name
@@ -261,6 +279,7 @@ var simplifiedChineseTranslation = {
     fastEntry: "快速输入",
     fastEntryNonUniqueError: "值“{0}”不是唯一的",
     fastEntryChoicesCountError: "请将项目数量限制在{0}到{1}",
+    fastEntryChoicesMinCountError: "请输入至少{0}项目",
     fastEntryPlaceholder: "您可以按以下格式设置数据：\n值 1|文本\n值2",
     formEntry: "表单输入",
     testService: "测试服务",
@@ -279,6 +298,7 @@ var simplifiedChineseTranslation = {
     cellsEmptyRowsColumns: "至少有1行",
     showPreviewBeforeComplete: "在提交调查之前预览答案",
     overridingPropertyPrefix: "设置者",
+    resetToDefaultCaption: "重置",
     propertyIsEmpty: "请为该属性设定一个值",
     propertyIsNoUnique: "请输入唯一值",
     propertyNameIsNotUnique: "请输入唯一名称",
@@ -324,6 +344,8 @@ var simplifiedChineseTranslation = {
     choicesOrder: "设置选项顺序",
     visible: "是否可见?",
     isRequired: "是否为必填项?",
+    markRequired: "标记为必填",
+    removeRequiredMark: "删除所需的标记",
     isAllRowRequired: "要求所有行都回答",
     requiredErrorText: "错误文字",
     startWithNewLine: "问题是否新起一行?",
@@ -405,7 +427,12 @@ var simplifiedChineseTranslation = {
       imageHeight: "图片高度（以 CSS 接受的值为单位）",
       imageWidth: "图像宽度（以 CSS 接受的值为单位）"
     },
+    // survey templates
+    survey: {
+      title: "标题"
+    },
     page: {
+      title: "标题",
       maxTimeToFinish: "完成页面的时间限制（以秒为单位）"
     },
     question: {
@@ -636,12 +663,22 @@ var simplifiedChineseTranslation = {
     columnsVisibleIf: "在以下情况下，列可见",
     rowsVisibleIf: "在以下情况下，行可见",
     otherPlaceholder: "注释区占位符",
+    signaturepad: {
+      showPlaceholder: "显示占位符",
+      placeholder: "占位符文本"
+    },
+    filePlaceholder: "文件占位符文本",
+    photoPlaceholder: "照片占位符文本",
+    fileOrPhotoPlaceholder: "文件或照片占位符文本",
     rateType: "费率类型"
   },
   // Property values
   pv: {
     "true": "真",
     "false": "假",
+    file: "本地文件",
+    camera: "照相机",
+    "file-camera": "本地文件或相机",
     inherit: "继承",
     show: "显示",
     hide: "隐藏",
@@ -870,7 +907,10 @@ var simplifiedChineseTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。"
+    keyName: "如果指定的列包含相同的值，则调查将引发“非唯一键值”错误。",
+    filePlaceholder: "当“源类型”为“本地文件”或相机不可用时适用",
+    photoPlaceholder: "当“源类型”为“相机”时适用。",
+    fileOrPhotoPlaceholder: "当“源类型”为“本地文件或相机”时适用。"
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ var simplifiedChineseTranslation = {
     descriptionLocation: "描述位置",
     defaultValueExpression: "默认值表达式",
     requiredIf: "是否必选",
+    resetValueIf: "如果出现以下情况，则重置值",
+    setValueIf: "设置值，如果",
     validators: "有效性",
     bindings: "绑定",
     renderAs: "渲染为",
@@ -980,6 +1022,9 @@ var simplifiedChineseTranslation = {
     "--base-unit": "基本单元",
     groupGeneral: "常规",
     groupAdvanced: "高深",
+    groupHeader: "页眉",
+    groupBackground: "背景",
+    groupAppearance: "外观",
     themeName: "主题",
     themeMode: "问题外观",
     themeModePanels: "违约",
@@ -990,11 +1035,16 @@ var simplifiedChineseTranslation = {
     primaryDefaultColor: "违约",
     primaryDarkColor: "悬停",
     primaryLightColor: "选择",
+    coverTitleForecolor: "标题前彩",
+    coverDescriptionForecolor: "描述前彩",
+    coverOverlapEnabled: "重叠",
     backgroundDimColor: "背景色",
     backgroundImage: "背景图片",
     backgroundImageFitAuto: "自动",
     backgroundImageFitCover: "盖",
     backgroundImageFitContain: "包含",
+    backgroundImageFitFill: "伸展",
+    backgroundImageFitTile: "瓦",
     backgroundOpacity: "不透明度",
     backgroundImageAttachmentFixed: "固定",
     backgroundImageAttachmentScroll: "滚动",
@@ -1027,6 +1077,7 @@ var simplifiedChineseTranslation = {
     scale: "规模",
     cornerRadius: "拐角半径",
     surveyTitle: "调查标题字体",
+    surveyDescription: "调查描述字体",
     pageTitle: "页面标题字体",
     pageDescription: "页面描述字体",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ var simplifiedChineseTranslation = {
     boxShadowInner: "内",
     questionShadow: "阴影效果",
     editorShadow: "输入元素阴影效果",
+    headerView: "视图",
+    headerViewBasic: "基本",
+    headerViewAdvanced: "高深",
+    coverInheritWidthFrom: "内容区域宽度",
+    coverInheritWidthFromSurvey: "与调查相同",
+    coverInheritWidthFromContainer: "适合容器",
+    coverTextAreaWidth: "文本宽度",
+    coverBackgroundColorSwitch: "背景色",
+    coverBackgroundColorNone: "没有",
+    coverBackgroundColorAccentColor: "强调文字颜色",
+    coverBackgroundColorCustom: "习惯",
+    horizontalAlignmentLeft: "左",
+    horizontalAlignmentCenter: "中心",
+    horizontalAlignmentRight: "右",
+    verticalAlignmentTop: "返回页首",
+    verticalAlignmentMiddle: "中间",
+    verticalAlignmentBottom: "底",
+    logoPosition: "徽标位置",
+    coverTitlePosition: "标题位置",
+    coverDescriptionPosition: "描述位置",
     names: {
       default: "违约",
       sharp: "锋利",
@@ -1706,3 +1777,88 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "占位符颜色"
+// ed.themeSettings: "Theme Settings" => "主题设置"
+// ed.themeSettingsTooltip: "Open theme settings" => "打开主题设置"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.resetToDefaultCaption: "Reset" => "重置"
+// pv.file: "Local files" => "本地文件"
+// pv.camera: "Camera" => "照相机"
+// pv.file-camera: "Local files or camera" => "本地文件或相机"
+// ed.translateUsigAI: "Auto-translate All" => "自动翻译全部"
+// ed.translationDialogTitle: "Untranslated strings" => "未翻译的字符串"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "请输入至少{0}项目"
+// lg.question_resetValueName: "Reset question value" => "重置问题值"
+// lg.column_resetValue: "Reset column value" => "重置列值"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.markRequired: "Mark as required" => "标记为必填"
+// pe.removeRequiredMark: "Remove the required mark" => "删除所需的标记"
+// p.resetValueIf: "Reset value if" => "如果出现以下情况，则重置值"
+// lg.question_setValueName: "Set question value" => "设置问题值"
+// lg.column_resetValueName: "Reset column value" => "重置列值"
+// lg.column_setValueName: "Set column value" => "设置列值"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "其结果将分配给目标问题的表达式。"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// survey.title: "Title" => "标题"
+// page.title: "Title" => "标题"
+// p.setValueIf: "Set value if" => "设置值，如果"
+// theme.groupHeader: "Header" => "页眉"
+// theme.coverTitleForecolor: "Title forecolor" => "标题前彩"
+// theme.coverOverlapEnabled: "Overlap" => "重叠"
+// theme.backgroundImageFitFill: "Stretch" => "伸展"
+// theme.backgroundImageFitTile: "Tile" => "瓦"
+// theme.headerView: "View" => "视图"
+// theme.headerViewBasic: "Basic" => "基本"
+// theme.headerViewAdvanced: "Advanced" => "高深"
+// theme.coverInheritWidthFrom: "Content area width" => "内容区域宽度"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "与调查相同"
+// theme.coverInheritWidthFromPage: "Fit to page" => "适合页面"
+// theme.coverTextAreaWidth: "Text width" => "文本宽度"
+// theme.coverBackgroundColorSwitch: "Background color" => "背景色"
+// theme.coverBackgroundColorNone: "None" => "没有"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "强调文字颜色"
+// theme.coverBackgroundColorCustom: "Custom" => "习惯"
+// theme.horizontalAlignmentLeft: "Left" => "左"
+// theme.horizontalAlignmentCenter: "Center" => "中心"
+// theme.horizontalAlignmentRight: "Right" => "右"
+// theme.verticalAlignmentTop: "Top" => "返回页首"
+// theme.verticalAlignmentMiddle: "Middle" => "中间"
+// theme.verticalAlignmentBottom: "Bottom" => "底"
+// theme.logoPosition: "Logo Position" => "徽标位置"
+// theme.coverTitlePosition: "Title Position" => "标题位置"
+// theme.coverDescriptionPosition: "Description Position" => "描述位置"
+// lg.question_resetValueText: "reset value for question: {0}" => "重置问题的值：{0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "分配值：{1}问题：{0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "重置列的单元格值：{0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "将单元格值：{1}分配给列：{0}"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "出口"
+// ed.surveyJsonImportButton: "Import" => "进口"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "复制到剪贴板"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "文件占位符文本"
+// pe.photoPlaceholder: "Photo placeholder text" => "照片占位符文本"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "文件或照片占位符文本"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "当“源类型”为“本地文件”或相机不可用时适用"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "当“源类型”为“相机”时适用。"
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "当“源类型”为“本地文件或相机”时适用。"
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外观"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主题吗？您的所有自定义项都将丢失。"
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主题"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "背景"
+// theme.groupAppearance: "Appearance" => "外观"
+// theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "适合容器"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "显示占位符"
+// signaturepad.placeholder: "Placeholder text" => "占位符文本"
+// theme.surveyDescription: "Survey description font" => "调查描述字体"

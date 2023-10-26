@@ -6,7 +6,8 @@ export const Themes: { [index: string]: ITheme } = {};
 export const PredefinedThemes: string[] = ["default", "sharp", "borderless", "flat", "plain", "doubleborder", "layered", "solid", "threedimensional", "contrast"];
 
 export function getThemeFullName(theme: ITheme) {
-  let fullThemeName = theme["themeName"] + "-" + (theme["colorPalette"] || "light");
+  const themeName = theme.themeName || "default";
+  let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
   if (theme.isPanelless === true) {
     fullThemeName += "-panelless";
   }
@@ -44,3 +45,20 @@ export const PredefinedColors = {
   }
 };
 
+export function findSuitableTheme(themeName: string, probeThemeFullName: string) {
+  let suitableTheme = Themes[probeThemeFullName];
+  if (!!suitableTheme) {
+    return suitableTheme;
+  }
+  const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName) === 0);
+  for (let fullThemeName of appropriateThemeNames) {
+    if (fullThemeName.indexOf(themeName + "-" + this.themePalette) === 0) {
+      probeThemeFullName = themeName + "-" + this.themePalette;
+    }
+    if (fullThemeName.indexOf(themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "")) === 0) {
+      probeThemeFullName = themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "");
+    }
+  }
+  return Themes[probeThemeFullName] || Themes[appropriateThemeNames[0]];
+
+}

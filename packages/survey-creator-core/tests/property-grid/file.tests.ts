@@ -1,11 +1,12 @@
 import { QuestionImageModel, QuestionImagePickerModel, QuestionMatrixDynamicModel, QuestionSignaturePadModel, SurveyElement, SurveyModel } from "survey-core";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
-import { PropertyGridModelTester } from "./property-grid.tests";
+import { PropertyGridModelTester } from "./property-grid.base";
 import {
   EmptySurveyCreatorOptions,
 } from "../../src/creator-settings";
 import { imageMimeTypes } from "../../src/utils/utils";
 import { CreatorBase } from "../../src/creator-base";
+import { CreatorTester } from "../creator-tester";
 export * from "../../src/custom-questions/question-text-with-reset";
 
 test("Check file editor value", () => {
@@ -181,19 +182,65 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
   expect(questionEditor.acceptedTypes).toBe(imageMimeTypes);
 });
 
-test("Check PropertyGridLinkFileEditor maxSize", () => {
-  const question = new QuestionImageModel("q1");
-  let creator = new CreatorBase({});
-  creator.onUploadFile.add((s, o) => {
-    o.callback("success", "test_url");
-    expect(o.question.name).toBe("q1");
+test("Check file editor placeholder and renderedValue", () => {
+  const survey = new SurveyModel({
+    elements: [
+      {
+        name: "q1",
+        type: "fileedit",
+        storeDataAsText: false
+      }
+    ]
   });
-  let propertyGrid = new PropertyGridModelTester(question, creator);
-  let questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
-  expect(questionEditor.maxSize).toBe(0);
+  const question: QuestionFileEditorModel = <QuestionFileEditorModel>survey.getAllQuestions()[0];
+  const base64Url = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII";
+  const url = "some_url";
 
-  creator = new CreatorBase({});
-  propertyGrid = new PropertyGridModelTester(question, creator);
-  questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
-  expect(questionEditor.maxSize).toBe(65536);
+  question.value = url;
+  expect(question.value).toBe("some_url");
+  expect(question.placeholder).toBe("");
+  expect(question.renderedValue).toBe("some_url");
+
+  question.value = base64Url;
+  expect(question.value).toBe(base64Url);
+  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedValue).toBe("");
+
+  survey.setValue("q1", url);
+  expect(question.value).toBe("some_url");
+  expect(question.placeholder).toBe("");
+  expect(question.renderedValue).toBe("some_url");
+
+  survey.setValue("q1", base64Url);
+  expect(question.value).toBe(base64Url);
+  expect(question.placeholder).toBe("data:image/png;base64,...");
+  expect(question.renderedValue).toBe("");
+});
+
+test("Check onOpenFileChooser called", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  const question = creator.survey.getAllQuestions()[0];
+  const propertyGrid = new PropertyGridModelTester(question, creator);
+  const questionEditor = <QuestionFileEditorModel>propertyGrid.survey.getQuestionByName("imageLink");
+  questionEditor["rootElement"] = <any>{ querySelectorAll: () => [{}] };
+  let uploadCount = 0;
+  let log = "";
+  creator.onOpenFileChooser.add((s, o) => {
+    log += "->openedFileChooser";
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    log += "->uploadFile";
+    uploadCount++;
+    o.callback("success", "url");
+  });
+  expect(uploadCount).toBe(0);
+  expect(log).toBe("");
+  questionEditor.chooseFiles(<any>{ preventDefault: () => {}, stopPropagation: () => {} });
+  expect(uploadCount).toBe(1);
+  expect(log).toBe("->openedFileChooser->uploadFile");
+  expect(questionEditor.value).toBe("url");
 });

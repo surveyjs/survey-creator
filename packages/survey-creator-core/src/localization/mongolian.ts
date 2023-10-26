@@ -50,6 +50,8 @@ export var mnStrings = {
     settingsTooltip: "Тохиргоог нээх",
     surveySettings: "Санал асуулгын тохиргоо",
     surveySettingsTooltip: "Санал асуулгын тохиргоог нээх",
+    themeSettings: "Сэдвийн тохиргоо",
+    themeSettingsTooltip: "Нээлттэй сэдвийн тохиргоо",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -134,11 +136,18 @@ export var mnStrings = {
     translationNoStrings: "Орчуулах зүйл байхгүй. Шүүлтийг өөрчилнө үү.",
     translationExportToSCVButton: "CSV экспорт хийх",
     translationImportFromSCVButton: "CSV импорт хийх",
+    translateUsigAI: "Авто-орчуулга Бүгд",
+    translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
     themeExportButton: "Экспорт",
     themeImportButton: "Импорт",
+    surveyJsonExportButton: "Экспорт",
+    surveyJsonImportButton: "Импорт",
+    surveyJsonCopyButton: "Хавчуургыг хуулах",
     themeResetButton: "Дахин сэдэвчилсэн тохиргоог default хийх",
+    themeResetConfirmation: "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно.",
+    themeResetConfirmationOk: "Тийм ээ, сэдвийг дахин тохируулах",
     bold: "Тод",
     italic: "Налуу",
     underline: "Доогуур зураас",
@@ -164,9 +173,13 @@ export var mnStrings = {
       question_visibilityName: "Асуулт харуулах (нуух)",
       question_enableName: "Асуулт идэвхжүүлэх (идэвхгүй болгох)",
       question_requireName: "Асуултыг заавал бөглөөөөх болгох",
+      question_resetValueName: "Асуултын үнэ цэнийг дахин тогтоох",
+      question_setValueName: "Асуултын үнэ цэнийг тогтоох",
       column_visibilityName: "Багана харуулах (нуух).",
       column_enableName: "Багана идэвхжүүлэх (идэвхгүй болгох).",
       column_requireName: "Баганыг заавал бөглөөөөх болгох",
+      column_resetValueName: "Reset баганын үнэ цэнэ",
+      column_setValueName: "Баганын үнэ цэнийг тогтоох",
       trigger_completeName: "Санал асуулга дуусгах",
       trigger_setvalueName: "Хариулт оруулах",
       trigger_copyvalueName: "Хариулт хуулах",
@@ -193,9 +206,14 @@ export var mnStrings = {
       question_visibilityText: "{0} асуултыг харагддаг болгох", //{0} question name
       question_enableText: "{0} асуултыг идэвхжүүлэх", //{0} question name
       question_requireText: "{0} асуултыг заавал бөглөх болгох", //{0} question name
+      question_resetValueText: "асуултын үнэ цэнийг дахин тогтоох нь: {0}",
+      question_setValueText: "үнэ цэнийг даалгах нь: {1} асуулт: {0}",
       column_visibilityText: "{0} баганын {1} асуултыг харагддаг болгох", //{0} column name, {1} question name
       column_enableText: "{0} баганын {1} асуултыг идэвхжүүлэх", //{0} column name, {1} question name
       column_requireText: "{0} баганын {1} асуултыг заавал бөглөх болгох", //{0} column name, {1} question name
+      column_resetValueText: "баганын эсийн үнэ цэнийг дахин тогтоох: {0}",
+      column_setValueText: "эсийн үнэ цэнийг хуваарил: {1} багана: {0}",
+      setValueExpressionPlaceholder: " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл.",
       trigger_completeText: "Санал асуулга амжилттай бөглөсөн.",
       trigger_setvalueText: "{0} Асуултад оруулах утга: {1}", //{0} question name, {1} setValue
       trigger_setvalueEmptyText: "тодорхой асуултын үнэ цэнэ: {0}", //{0} question name
@@ -261,6 +279,7 @@ export var mnStrings = {
     fastEntry: "Гараар оруулах",
     fastEntryNonUniqueError: "'{0}' утга давтагдаж байна!",
     fastEntryChoicesCountError: "Хэсгийг {0}-оос {1} хүртэл хязгаарлах",
+    fastEntryChoicesMinCountError: "Наад зах нь {0} зүйлс оруулна уу",
     fastEntryPlaceholder: "Та дараах форматын дагуу өгөгдлийг оруулж болно:\nvalue1|text\nvalue2",
     formEntry: "Маягт оруулах",
     testService: "Үйлчилгээг турших",
@@ -279,6 +298,7 @@ export var mnStrings = {
     cellsEmptyRowsColumns: "Багадаа нэг багана эсвэл мөр байх ёстой",
     showPreviewBeforeComplete: "Санал асуулга явуулхаас өмнө хариултуудыг урьдчилж харах",
     overridingPropertyPrefix: "Дэргэд нь ",
+    resetToDefaultCaption: "Дахин тохируулах",
     propertyIsEmpty: "Утга оруулна уу",
     propertyIsNoUnique: "Дахин давтагдахгүй утга оруулна уу",
     propertyNameIsNotUnique: "Өөр нэр оруулна уу",
@@ -324,6 +344,8 @@ export var mnStrings = {
     choicesOrder: "Сонголтыг эрэмбэлэх дараалал",
     visible: "Харагдана",
     isRequired: "Заавал бөглөх",
+    markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
+    removeRequiredMark: "Шаардлагатай тэмдэглэгээг хасах",
     isAllRowRequired: "Бүх мөрөнд хариулт шаардах",
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
@@ -405,7 +427,12 @@ export var mnStrings = {
       imageHeight: "Зургийн өндөр (CSS хүлээн зөвшөөрсөн утга)",
       imageWidth: "Зургийн өргөн (CSS хүлээн зөвшөөрсөн утга)"
     },
+    // survey templates
+    survey: {
+      title: "Нүүр"
+    },
     page: {
+      title: "Нүүр",
       maxTimeToFinish: "Нэг хуудас бөглөж дуусах хугацаа (секундээр)"
     },
     question: {
@@ -636,12 +663,22 @@ export var mnStrings = {
     columnsVisibleIf: "Баганууд харагдана хэрэв",
     rowsVisibleIf: "Мөрнүүд харагдана хэрэв",
     otherPlaceholder: "Санал асуулгын хэсэг",
+    signaturepad: {
+      showPlaceholder: "Эзэмшигчийг үзүүл",
+      placeholder: "Placeholder текст"
+    },
+    filePlaceholder: "Файл байршуулагчийн текст",
+    photoPlaceholder: "Гэрэл зураг байршуулагч бичвэр",
+    fileOrPhotoPlaceholder: "Файл эсвэл гэрэл зураг байршуулагч текст",
     rateType: "Rate төрөл"
   },
   // Property values
   pv: {
     "true": "Үнэн",
     "false": "Худал",
+    file: "Орон нутгийн файлууд",
+    camera: "Камер",
+    "file-camera": "Орон нутгийн файлууд эсвэл камер",
     inherit: "Удамших",
     show: "Харагдана",
     hide: "Нуусан",
@@ -870,7 +907,10 @@ export var mnStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна."
+    keyName: "Хэрэв өгөгдсөн багана адил утгатай бол санал асуулга \"Давтагдсан утга\" гэсэн алдааг харуулна.",
+    filePlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна",
+    photoPlaceholder: "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна.",
+    fileOrPhotoPlaceholder: "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна."
   },
   // Properties
   p: {
@@ -904,6 +944,8 @@ export var mnStrings = {
     descriptionLocation: "Тайлбарын байршил",
     defaultValueExpression: "Үндсэн утгын илэрхийлэл",
     requiredIf: "Заавал бөглөх хэрэв",
+    resetValueIf: "Хэрэв үнэ цэнээ дахин тогтоох",
+    setValueIf: "Хэрэв үнэ цэнийг тогтоо",
     validators: "Батлагч",
     bindings: "Холбогч",
     renderAs: "руу хөрвүүлэх",
@@ -980,6 +1022,9 @@ export var mnStrings = {
     "--base-unit": "Үндсэн нэгж",
     groupGeneral: "Ерөнхий",
     groupAdvanced: "Өндөр хөгжсөн",
+    groupHeader: "Толгойлогч",
+    groupBackground: "Ар талын",
+    groupAppearance: "Харагдах байдал",
     themeName: "Сэдэв",
     themeMode: "Асуулт хариултын төрх",
     themeModePanels: "Дефолт",
@@ -990,11 +1035,16 @@ export var mnStrings = {
     primaryDefaultColor: "Дефолт",
     primaryDarkColor: "Ховер",
     primaryLightColor: "Сонгосон",
+    coverTitleForecolor: "Нүүр Forecolor",
+    coverDescriptionForecolor: "Дүрслэлийн форс",
+    coverOverlapEnabled: "Давхар",
     backgroundDimColor: "Ар талын өнгө",
     backgroundImage: "Ар талын зураг",
     backgroundImageFitAuto: "Авто",
     backgroundImageFitCover: "Хөшиг",
     backgroundImageFitContain: "Агуулах",
+    backgroundImageFitFill: "Сэнгэрч",
+    backgroundImageFitTile: "Тил",
     backgroundOpacity: "Бүдүүлэг байдал",
     backgroundImageAttachmentFixed: "Зассан",
     backgroundImageAttachmentScroll: "Хуйлмал бичиг",
@@ -1027,6 +1077,7 @@ export var mnStrings = {
     scale: "Хэмжүүр",
     cornerRadius: "Булангийн радиус",
     surveyTitle: "Судалгааны нэрийн фонт",
+    surveyDescription: "Судалгааны тодорхойлолтын фонт",
     pageTitle: "Хуудасны нэрийн фонт",
     pageDescription: "Хуудасны дүрслэлийн фонт",
     boxShadowX: "X",
@@ -1039,6 +1090,26 @@ export var mnStrings = {
     boxShadowInner: "Дотоод",
     questionShadow: "Сүүдрийн нөлөө",
     editorShadow: "Оролт элементийн сүүдрийн нөлөө",
+    headerView: "Үзэх",
+    headerViewBasic: "Үндсэн",
+    headerViewAdvanced: "Өндөр хөгжсөн",
+    coverInheritWidthFrom: "Агуулгын бүсийн өргөн",
+    coverInheritWidthFromSurvey: "Судалгаатай адил",
+    coverInheritWidthFromContainer: "Сав баглаа боодолд тохирно",
+    coverTextAreaWidth: "Текстийн өргөн",
+    coverBackgroundColorSwitch: "Ар талын өнгө",
+    coverBackgroundColorNone: "Хэн ч биш",
+    coverBackgroundColorAccentColor: "Акцент өнгө",
+    coverBackgroundColorCustom: "Үйлчилгээ",
+    horizontalAlignmentLeft: "Зүүн",
+    horizontalAlignmentCenter: "Төв",
+    horizontalAlignmentRight: "Баруун талд",
+    verticalAlignmentTop: "Дээд",
+    verticalAlignmentMiddle: "Дунд",
+    verticalAlignmentBottom: "Доод",
+    logoPosition: "Лого байрлал",
+    coverTitlePosition: "Нүүр Байршил",
+    coverDescriptionPosition: "Тодорхойлолтын байрлал",
     names: {
       default: "Дефолт",
       sharp: "Хурц",
@@ -1213,3 +1284,74 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Та энэ хэлний бүх уяаг арилгахыг хүсэж байгаа гэдэгтээ итгэлтэй байна уу?"
 // ed.themeResetButton: "Reset theme settings to default" => "Дахин сэдэвчилсэн тохиргоог default хийх"
 // theme.placeholderColor: "Placeholder color" => "Газар эзэмшигчийн өнгө"
+// ed.themeSettings: "Theme Settings" => "Сэдвийн тохиргоо"
+// ed.themeSettingsTooltip: "Open theme settings" => "Нээлттэй сэдвийн тохиргоо"
+// pe.resetToDefaultCaption: "Reset" => "Дахин тохируулах"
+// pv.file: "Local files" => "Орон нутгийн файлууд"
+// pv.camera: "Camera" => "Камер"
+// pv.file-camera: "Local files or camera" => "Орон нутгийн файлууд эсвэл камер"
+// ed.translateUsigAI: "Auto-translate All" => "Авто-орчуулга Бүгд"
+// ed.translationDialogTitle: "Untranslated strings" => "Огт орчуулагдаагүй уяанууд"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Наад зах нь {0} зүйлс оруулна уу"
+// lg.question_resetValueName: "Reset question value" => "Асуултын үнэ цэнийг дахин тогтоох"
+// lg.column_resetValue: "Reset column value" => "Reset баганын үнэ цэнэ"
+// pe.markRequired: "Mark as required" => "Шаардлагын дагуу тэмдэглэгээ хийх"
+// pe.removeRequiredMark: "Remove the required mark" => "Шаардлагатай тэмдэглэгээг хасах"
+// p.resetValueIf: "Reset value if" => "Хэрэв үнэ цэнээ дахин тогтоох"
+// lg.question_setValueName: "Set question value" => "Асуултын үнэ цэнийг тогтоох"
+// lg.column_resetValueName: "Reset column value" => "Reset баганын үнэ цэнэ"
+// lg.column_setValueName: "Set column value" => "Баганын үнэ цэнийг тогтоох"
+// lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Үр дүн нь ямар байгааг байгсад асуултад хариулах илэрхийлэл."
+// survey.title: "Title" => "Нүүр"
+// page.title: "Title" => "Нүүр"
+// p.setValueIf: "Set value if" => "Хэрэв үнэ цэнийг тогтоо"
+// theme.groupHeader: "Header" => "Толгойлогч"
+// theme.coverTitleForecolor: "Title forecolor" => "Нүүр Forecolor"
+// theme.coverOverlapEnabled: "Overlap" => "Давхар"
+// theme.backgroundImageFitFill: "Stretch" => "Сэнгэрч"
+// theme.backgroundImageFitTile: "Tile" => "Тил"
+// theme.headerView: "View" => "Үзэх"
+// theme.headerViewBasic: "Basic" => "Үндсэн"
+// theme.headerViewAdvanced: "Advanced" => "Өндөр хөгжсөн"
+// theme.coverInheritWidthFrom: "Content area width" => "Агуулгын бүсийн өргөн"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "Судалгаатай адил"
+// theme.coverInheritWidthFromPage: "Fit to page" => "Хуудсанд тохирсон"
+// theme.coverTextAreaWidth: "Text width" => "Текстийн өргөн"
+// theme.coverBackgroundColorSwitch: "Background color" => "Ар талын өнгө"
+// theme.coverBackgroundColorNone: "None" => "Хэн ч биш"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "Акцент өнгө"
+// theme.coverBackgroundColorCustom: "Custom" => "Үйлчилгээ"
+// theme.horizontalAlignmentLeft: "Left" => "Зүүн"
+// theme.horizontalAlignmentCenter: "Center" => "Төв"
+// theme.horizontalAlignmentRight: "Right" => "Баруун талд"
+// theme.verticalAlignmentTop: "Top" => "Дээд"
+// theme.verticalAlignmentMiddle: "Middle" => "Дунд"
+// theme.verticalAlignmentBottom: "Bottom" => "Доод"
+// theme.logoPosition: "Logo Position" => "Лого байрлал"
+// theme.coverTitlePosition: "Title Position" => "Нүүр Байршил"
+// theme.coverDescriptionPosition: "Description Position" => "Тодорхойлолтын байрлал"
+// lg.question_resetValueText: "reset value for question: {0}" => "асуултын үнэ цэнийг дахин тогтоох нь: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "үнэ цэнийг даалгах нь: {1} асуулт: {0}"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "баганын эсийн үнэ цэнийг дахин тогтоох: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "эсийн үнэ цэнийг хуваарил: {1} багана: {0}"
+// ed.surveyJsonExportButton: "Export" => "Экспорт"
+// ed.surveyJsonImportButton: "Import" => "Импорт"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Хавчуургыг хуулах"
+// pe.filePlaceholder: "File placeholder text" => "Файл байршуулагчийн текст"
+// pe.photoPlaceholder: "Photo placeholder text" => "Гэрэл зураг байршуулагч бичвэр"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Файл эсвэл гэрэл зураг байршуулагч текст"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд\" эсвэл камер байхгүй үед хамаарна"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"Эх сурвалжийн төрөл\" \"Камер\" байхад хамаарна."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"Эх сурвалжийн төрөл\" нь \"Орон нутгийн файлууд буюу камер\" байхад хамаарна."
+// theme.groupBackground: "Background" => "Ар талын"
+// theme.groupAppearance: "Appearance" => "Харагдах байдал"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Та сэдвийг дахин хөндөхийг үнэхээр хүсэж байна уу? Таны бүх тохируулга үгүй болно."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Тийм ээ, сэдвийг дахин тохируулах"
+// theme.groupBackground: "Background" => "Ар талын"
+// theme.groupAppearance: "Appearance" => "Харагдах байдал"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Дүрслэлийн форс"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Сав баглаа боодолд тохирно"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Эзэмшигчийг үзүүл"
+// signaturepad.placeholder: "Placeholder text" => "Placeholder текст"
+// theme.surveyDescription: "Survey description font" => "Судалгааны тодорхойлолтын фонт"
