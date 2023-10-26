@@ -1,6 +1,5 @@
 <ng-template #template>
-  <div class="svc-page-navigator" #container>
-    <ng-container *ngIf="model.visible">
+  <div class="svc-page-navigator" #container [visible]="model.visible">
       <div class="svc-page-navigator__selector"
           (click)="model.togglePageSelector($event)" [key2click] [attr.title]="model.pageSelectorCaption" [class.svc-page-navigator__selector--opened]="model.isPopupOpened">
           <svg class="svc-page-navigator__navigator-icon" [iconName]="model.icon" [size]="24" sv-ng-svg-icon></svg>
@@ -9,6 +8,5 @@
       <div>
         <svc-page-navigator-item *ngFor="let item of model.visibleItems" [model]="item"></svc-page-navigator-item>
       </div>
-    </ng-container>
   </div>
 </ng-template>
