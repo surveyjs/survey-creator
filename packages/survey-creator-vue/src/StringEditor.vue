@@ -89,9 +89,9 @@ const baseModel = useCreatorModel(
         root.value.blur();
         root.value.spellcheck = false;
       }
-      baseModel.getEditorElement = () => root.value as HTMLElement;
-      setTimeout(() => baseModel.afterRender());
     };
+    baseModel.getEditorElement = () => root.value as HTMLElement;
+    setTimeout(() => baseModel.afterRender());
     return baseModel;
   },
   [() => creator.value, () => locString.value],
