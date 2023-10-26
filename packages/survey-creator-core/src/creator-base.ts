@@ -607,7 +607,6 @@ export class CreatorBase extends Base
    *- sender the survey creator object that fires the event
    *- options.element a new created survey element. It can be question, panel or page
    *- options.name a new suggested name, that is unique for the current survey. You can suggest your own name. If it is unique, creator will assign it to the element.
-   *- options.isUnique a boolean property, set this property to false, if you want to ask Creator to generate another name
    */
   public onGenerateNewName: CreatorEvent = new CreatorEvent();
   /**
@@ -3073,22 +3072,33 @@ export class CreatorBase extends Base
     return hasError ? this.getLocString("pe.propertyNameIsNotUnique") : null;
   }
   protected generateUniqueName(el: Base, newName: string): string {
-    var options = { element: el, name: newName, isUnique: true };
+    const options = { element: el, name: newName, isDone: true };
+    const list = [];
     do {
-      if (!options.isUnique) {
-        options.name = SurveyHelper.generateNewName(options.name);
+      this.generateUniqueNameCore(options);
+      if(!options.isDone && list.indexOf(options.name) > -1) {
+        options.name = this.checkForUniqueName(el, options.name);
+        break;
       }
-      while (!this.isNameUnique(el, options.name, false)) {
-        options.name = SurveyHelper.generateNewName(options.name);
-      }
-      options.isUnique = true;
-      var oldName = options.name;
-      this.onGenerateNewName.fire(this, options);
-      if (oldName != options.name) {
-        options.isUnique = this.isNameUnique(el, options.name);
-      }
-    } while (!options.isUnique);
+      list.push(options.name);
+    } while(!options.isDone);
     return options.name;
+  }
+  protected generateUniqueNameCore(options: any): void {
+    options.name = this.checkForUniqueName(options.element, options.name);
+    const evnOptions = { element: options.element, name: options.name };
+    this.onGenerateNewName.fire(this, evnOptions);
+    if (options.name !== evnOptions.name) {
+      options.name = evnOptions.name;
+      options.name = this.checkForUniqueName(options.element, options.name);
+      options.isDone = options.name === evnOptions.name;
+    }
+  }
+  private checkForUniqueName(el: Base, newName: string): string {
+    while (!this.isNameUnique(el, newName, false)) {
+      newName = SurveyHelper.generateNewName(newName);
+    }
+    return newName;
   }
   protected isNameUnique(el: Base, newName: string, includeNewItems: boolean = true): boolean {
     if (!this.isNameUniqueInArray(this.survey.pages, el, newName)) return false;
@@ -3178,7 +3188,7 @@ export class CreatorBase extends Base
     collection: Array<Base>,
     item: Base
   ): boolean {
-    if((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
+    if ((<any>item)?.isPage && !this.checkOnElementDeleting(item)) return false;
     if (this.onCollectionItemDeleting.isEmpty) return true;
     const options = {
       obj: obj,

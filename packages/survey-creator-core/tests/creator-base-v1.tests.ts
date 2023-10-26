@@ -704,10 +704,10 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
 test("generate element name based on another survey", () => {
   const creator = new CreatorTester();
   creator.onGenerateNewName.add(function (sender, options) {
-    if (options.name == "question3") {
-      options.isUnique = false;
+    if (options.name === "question3") {
+      options.name = "question4";
     }
-    if (options.name == "question5") {
+    if (options.name === "question5") {
       options.name = "question9";
     }
   });
