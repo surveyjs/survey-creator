@@ -3873,3 +3873,9 @@ export function registerAdorner(name, adorner) {
 export function removeAdorners(names: string[] = undefined) {
   SurveyHelper.warnNonSupported("removeAdorners", "This functionality is no longer supported.");
 }
+
+//TODO remove
+const prop1 = Serializer.findProperty("multipletextitem", "defaultValueExpression");
+if(prop1) {
+  prop1.visible = true;
+}
