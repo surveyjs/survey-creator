@@ -41,8 +41,6 @@ creator.onShowingProperty.add(function (_, options) {
 });
 ```
 
-<div id="addproperties"></div>
-
 [View Demo](https://surveyjs.io/survey-creator/examples/removeproperties/ (linkStyle))
 
 ## Override Default Property Values
@@ -56,6 +54,49 @@ Survey.Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
 // In modular applications:
 import { Serializer } from "survey-core";
 Serializer.getProperty("matrix", "isAllRowRequired").defaultValue = true;
+```
+
+## Add Help Texts to Property Editors
+
+Property editors can display hints or tooltips that help survey authors specify correct property values. For example, the following image illustrates a hint for the [`acceptedTypes`](https://surveyjs.io/form-library/documentation/api-reference/file-model#acceptedTypes) property editor in a [File Upload](https://surveyjs.io/form-library/examples/file-upload/) question: 
+
+<img src="./images/property-grid-hint.png" alt="Survey Creator: Hints in the Property Grid">
+
+Hints are stored in the `pehelp` object (stand for "property editor help") within [localization dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). You can use [localization API](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages#override-individual-translations) to specify or override help texts within this object. For instance, the code below specifies a hint for the [`title`](https://surveyjs.io/form-library/documentation/api-reference/question#title) property editor.
+
+```js
+// Get current locale translations
+const translations = SurveyCreator.localization.getLocale("");
+// In modular applications
+import { localization } from "survey-creator-core";
+const translations = localization.getLocale("");
+
+translations.pehelp.title = "A hint for the Title property editor";
+```
+
+You can specify different help texts for properties that belong to questions, pages, and the survey itself:
+
+```js
+translations.pehelp.survey = { 
+  title: "A hint for the Title property editor of the survey"
+};
+translations.pehelp.page = { 
+  title: "A hint for the Title property editor of all pages"
+};
+translations.pehelp.question = { 
+  title: "A hint for the Title property editor of all questions"
+};
+```
+
+You can also set specific help texts for properties that belong to a certain [question type](https://surveyjs.io/form-library/documentation/api-reference/question#getType):
+
+```js
+translations.pehelp.file = { 
+  title: "A hint for the Title property editor in File Upload questions"
+};
+translations.pehelp.comment = { 
+  title: "A hint for the Title property editor in Long Text questions"
+};
 ```
 
 ## Add Custom Properties to the Property Grid
