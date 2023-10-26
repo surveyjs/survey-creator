@@ -11,6 +11,9 @@ import * as Survey from "survey-core";
 export class TestDefaultComponent implements OnInit {
   public creator!: CreatorBase;
   ngOnInit(): void {
+    if (this.getSlk()) {
+      Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
+    }
     this.createCreator();
     (<any>window).creator = this.creator;
     (<any>window).Survey = Survey;
@@ -18,9 +21,6 @@ export class TestDefaultComponent implements OnInit {
   }
   protected getSlk(): boolean { return true; }
   protected createCreator(): void {
-    if (this.getSlk()) {
-      Survey.slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
-    }
     this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
   }
 }
