@@ -50,6 +50,7 @@ import Toolbox from "./toolbox/Toolbox.vue";
 import Designer from "./tabs/designer/Designer.vue";
 import Page from "./tabs/designer/Page.vue";
 import PageAddQuestion from "./tabs/designer/PageAddQuestion.vue";
+import QuestionAdorner from "./adorners/Question.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -107,6 +108,7 @@ function registerComponents(app: App) {
   app.component("svc-tab-designer", Designer);
   app.component("svc-page", Page);
   app.component("svc-add-new-question-btn", PageAddQuestion);
+  app.component("svc-question", QuestionAdorner);
 }
 
 export const surveyCreatorPlugin = {

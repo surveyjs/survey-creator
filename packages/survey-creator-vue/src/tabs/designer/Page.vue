@@ -1,5 +1,5 @@
 <template>
-  <div v-if="model.page" class="svc-page__content" :class="model.css"
+  <div v-if="model.page" :id="model.page.id" class="svc-page__content" :class="model.css" v-on:click="e => { model.select(model, e); e.stopPropagation(); }" v-on:mouseover="e => model.hover(e, e.currentTarget)" v-on:mouseleave="e => model.hover(e, e.currentTarget)"
     data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }">
     <div class="svc-page__content-actions">
       <sv-action-bar :model="model.actionContainer"></sv-action-bar>
