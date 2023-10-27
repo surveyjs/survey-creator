@@ -50,6 +50,7 @@ test.before(async t => {
   await t
     .hover(RatingToolboxItem)
     .dragToElement(RatingToolboxItem, newGhostPagePage, { speed: 0.5 })
+    .click(Selector(".svc-page-navigator__selector"))
     .click(Selector("[title='page2']"));
 
   await t
