@@ -37,7 +37,9 @@ export class SearchManager extends Base {
         scrollElementIntoView(elementId);
       }, 10);
     }
-
+    this.updatedMatchCounterText(index);
+  }
+  private updatedMatchCounterText(index: number) {
     const count = this.allMatches.length;
     const value = this.currentMatch ? index + 1 : "0";
     this.matchCounterText = !!this.filterString ? [value, count].join("/") : "";
@@ -50,6 +52,29 @@ export class SearchManager extends Base {
       index = 0;
     }
     this.switchHighlightedEditor(index);
+  }
+  private setFiterString(newValue: string) {
+    if(!newValue) {
+      this.reset();
+      return;
+    }
+    let newValueInLow = newValue.toLocaleLowerCase();
+    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
+    this.allMatches = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
+    if(this.allMatches.length === 0) {
+      this.reset();
+      return;
+    }
+
+    const newCurrentIndex = this.allMatches.indexOf(this.currentMatch);
+    this.switchHighlightedEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);
+  }
+  private reset() {
+    this.allMatches = [];
+    this.currentMatchIndex = -1;
+    this.currentMatch?.updateElementCss();
+    this.currentMatch = undefined;
+    this.updatedMatchCounterText(-1);
   }
 
   initActionBar() {
@@ -121,14 +146,6 @@ export class SearchManager extends Base {
         }
       });
     }
-  }
-  public setFiterString(newValue: string) {
-    let newValueInLow = newValue.toLocaleLowerCase();
-    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
-    this.allMatches = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
-
-    const newCurrentIndex = this.allMatches.indexOf(this.currentMatch);
-    this.switchHighlightedEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
