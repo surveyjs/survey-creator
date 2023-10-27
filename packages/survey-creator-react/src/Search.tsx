@@ -41,7 +41,7 @@ export class SearchComponent extends SurveyElementBase<ISearchComponentProps, an
           value={this.state.filterString}
           onChange={onChange}></input>
         <div className="spg-search-editor_toolbar">
-          <div className="spg-search-editor-toolbar_result-count">{this.model.searchResultsText}</div>
+          <div className="spg-search-editor_toolbar-counter">{this.model.matchCounterText}</div>
           <SurveyActionBar model={this.model.searchActionBar}></SurveyActionBar>
         </div>
       </div>);

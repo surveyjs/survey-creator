@@ -7,7 +7,7 @@
     <input type="text" class="spg-search-editor_input"
         data-bind="textInput: model.filterString, attr: { placeholder: model.filterStringPlaceholder, 'aria-label': model.filterStringPlaceholder }"></input>
     <div class="spg-search-editor_toolbar">
-        <div class="spg-search-editor-toolbar_result-count" data-bind="text: model.searchResultsText"></div>
+        <div class="spg-search-editor_toolbar-counter" data-bind="text: model.matchCounterText"></div>
         <!-- ko component: { name: 'sv-action-bar', params: { model: model.searchActionBar } } -->
         <!-- /ko -->
     </div>

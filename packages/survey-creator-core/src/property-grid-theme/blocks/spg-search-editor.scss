@@ -1,4 +1,4 @@
-.spg-editor-highlight {
+.spg-editor--highlighted {
   .spg-input,
   .spg-input-container,
   .spg-question--location--left,
@@ -78,7 +78,7 @@
   margin: 0;
 }
 
-.spg-search-editor-toolbar_result-count {
+.spg-search-editor_toolbar-counter {
   color: $foreground-light;
 
   font-family: $font-family;

@@ -3,18 +3,18 @@ import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
 
 export class SearchManager extends Base {
-  private searchResultClass = " spg-editor-highlight";
+  private highlightedEditorClass = " spg-editor--highlighted";
 
-  private currentSearchResultIndex: number;
-  private currentSearchResult: Question;
+  private currentMatchIndex: number;
+  private currentMatch: Question;
   public searchActionBar: ActionContainer = new ActionContainer();
   public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
   @property() filterString: string;
-  @property() searchResultsText: string;
-  @property() searchResults: Array<Question> = [];
+  @property() matchCounterText: string;
+  @property() allMatches: Array<Question> = [];
 
   private expandAllParents(element: IElement) {
     if (!element) return;
@@ -24,32 +24,32 @@ export class SearchManager extends Base {
     this.expandAllParents((<any>element).parent);
     this.expandAllParents((<any>element).parentQuestion);
   }
-  private updateFoundEditor(index: number) {
-    this.currentSearchResultIndex = index;
-    const prevResult = this.currentSearchResult;
-    this.currentSearchResult = this.searchResults[index];
-    prevResult?.updateElementCss();
-    if (!!this.currentSearchResult && prevResult !== this.currentSearchResult) {
-      this.currentSearchResult.updateElementCss();
-      this.expandAllParents(this.currentSearchResult);
+  private switchHighlightedEditor(index: number) {
+    this.currentMatchIndex = index;
+    const prevMatch = this.currentMatch;
+    this.currentMatch = this.allMatches[index];
+    prevMatch?.updateElementCss();
+    if (!!this.currentMatch && prevMatch !== this.currentMatch) {
+      this.currentMatch.updateElementCss();
+      this.expandAllParents(this.currentMatch);
       setTimeout(() => {
-        const elementId = this.currentSearchResult.id;
+        const elementId = this.currentMatch.id;
         scrollElementIntoView(elementId);
       }, 10);
     }
 
-    const count = this.searchResults.length;
-    const value = this.currentSearchResult ? index + 1 : "0";
-    this.searchResultsText = !!this.filterString ? [value, count].join("/") : "";
+    const count = this.allMatches.length;
+    const value = this.currentMatch ? index + 1 : "0";
+    this.matchCounterText = !!this.filterString ? [value, count].join("/") : "";
   }
-  private goToEditor(index: number) {
+  private navigateToEditor(index: number) {
     if (index < 0) {
-      index = this.searchResults.length - 1;
+      index = this.allMatches.length - 1;
     }
-    if (index >= this.searchResults.length) {
+    if (index >= this.allMatches.length) {
       index = 0;
     }
-    this.updateFoundEditor(index);
+    this.switchHighlightedEditor(index);
   }
 
   initActionBar() {
@@ -64,10 +64,10 @@ export class SearchManager extends Base {
       iconSize: 16,
       innerCss: "spg-search-editor_bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),
-      enabled: <any>new ComputedUpdater(() => this.searchResults.length > 0),
+      enabled: <any>new ComputedUpdater(() => this.allMatches.length > 0),
       action: () => {
-        if (this.searchResults.length > 0) {
-          this.goToEditor(this.currentSearchResultIndex - 1);
+        if (this.allMatches.length > 0) {
+          this.navigateToEditor(this.currentMatchIndex - 1);
         }
       }
     }));
@@ -81,10 +81,10 @@ export class SearchManager extends Base {
       iconSize: 16,
       innerCss: "spg-search-editor_bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),
-      enabled: <any>new ComputedUpdater(() => this.searchResults.length > 0),
+      enabled: <any>new ComputedUpdater(() => this.allMatches.length > 0),
       action: () => {
-        if (this.searchResults.length > 0) {
-          this.goToEditor(this.currentSearchResultIndex + 1);
+        if (this.allMatches.length > 0) {
+          this.navigateToEditor(this.currentMatchIndex + 1);
         }
       }
     }));
@@ -116,23 +116,26 @@ export class SearchManager extends Base {
       const _self = this;
       this.survey.onUpdateQuestionCssClasses.add(function (_, options) {
         const classes = options.cssClasses;
-        if (options.question === _self.currentSearchResult) {
-          classes.mainRoot += _self.searchResultClass;
+        if (options.question === _self.currentMatch) {
+          classes.mainRoot += _self.highlightedEditorClass;
         }
       });
     }
+  }
+  public setFiterString(newValue: string) {
+    let newValueInLow = newValue.toLocaleLowerCase();
+    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
+    this.allMatches = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
+
+    const newCurrentIndex = this.allMatches.indexOf(this.currentMatch);
+    this.switchHighlightedEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
     super.onPropertyValueChanged(name, oldValue, newValue);
 
     if (name === "filterString") {
-      let newValueInLow = newValue.toLocaleLowerCase();
-      const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
-      this.searchResults = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
-
-      const newCurrentIndex = this.searchResults.indexOf(this.currentSearchResult);
-      this.updateFoundEditor(newCurrentIndex === -1 ? 0 : newCurrentIndex);
+      this.setFiterString(newValue);
     }
   }
 
