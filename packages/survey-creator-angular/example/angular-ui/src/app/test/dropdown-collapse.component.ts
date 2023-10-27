@@ -7,6 +7,7 @@ import { TestDefaultComponent } from "./default.component";
   encapsulation: ViewEncapsulation.None
 })
 export class TestDropdownCollapseComponent extends TestDefaultComponent {
+  protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
     this.creator = new CreatorBase({ maxVisibleChoices: 5 });
   }
