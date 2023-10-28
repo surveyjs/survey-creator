@@ -181,7 +181,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     event["__svc_question_processed"] = true;
   }
 
-  protected duplicate() {
+  protected duplicate(): void {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
   }
