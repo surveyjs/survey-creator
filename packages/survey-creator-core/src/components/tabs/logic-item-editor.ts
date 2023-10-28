@@ -250,11 +250,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
-    if (question.name === "setValue" || question.isContentElement) {
+    if (question.isContentElement || this.isSetValueInternalQuestion(question)) {
       assignDefaultV2Classes(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
-    const parentName = question.parent.name;
+    const parentName = question.parent?.name;
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
       assignDefaultV2Classes(cssClasses, qType);
@@ -279,6 +279,13 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.buttonRemoveRight = "svc-logic-paneldynamic__remove-btn--right";
       cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
+  }
+  private isSetValueInternalQuestion(question: Question): boolean {
+    const setValueName = "setValue";
+    if(question.name === setValueName) return true;
+    if(question.parentQuestion && question.parentQuestion.name === setValueName) return true;
+    const parent: any = question.parent;
+    return parent && parent.parentQuestion && parent.parentQuestion.name === setValueName;
   }
   private onUpdatePanelCssClasses(options: any) {
     const name = options.panel.name;
