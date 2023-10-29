@@ -281,20 +281,28 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     }
   }
   private isSetValueInternalQuestion(question: Question): boolean {
-    const setValueName = "setValue";
-    if(question.name === setValueName) return true;
-    if(question.parentQuestion && question.parentQuestion.name === setValueName) return true;
+    if(this.isSetValueInternalQuestionCore(question)) return true;
+    if(this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
     const parent: any = question.parent;
-    return parent && parent.parentQuestion && parent.parentQuestion.name === setValueName;
+    return parent && this.isSetValueInternalQuestionCore(parent.parentQuestion);
+  }
+  private isSetValueInternalQuestionCore(question: Question): boolean {
+    const setValueName = "setValue";
+    return question?.name === setValueName;
   }
   private onUpdatePanelCssClasses(options: any) {
-    const name = options.panel.name;
+    const panel = options.panel;
+    const cssClasses = options.cssClasses;
+    const name = panel.name;
     if (name === "triggerEditorPanel" || name === "setValueIfPanel") {
-      options.cssClasses.panel.container += " svc-logic_trigger-editor";
+      cssClasses.panel.container += " svc-logic_trigger-editor";
     }
     if (name === "triggerQuestionsPanel") {
-      options.panel.allowRootStyle = false;
-      options.cssClasses.panel.container += " svc-logic_trigger-questions";
+      panel.allowRootStyle = false;
+      cssClasses.panel.container += " svc-logic_trigger-questions";
+    }
+    if(this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
+      assignDefaultV2Classes(cssClasses, panel.getType());
     }
   }
   private onValueChanged(options: any) {
