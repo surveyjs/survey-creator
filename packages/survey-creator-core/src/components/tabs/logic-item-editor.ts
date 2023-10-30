@@ -250,11 +250,11 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.error.root = "svc-logic-operator__error";
       cssClasses.onError = "svc-logic-operator--error";
     }
-    if (question.name === "setValue" || question.isContentElement) {
+    if (question.isContentElement || this.isSetValueInternalQuestion(question)) {
       assignDefaultV2Classes(cssClasses, question.getType());
       cssClasses.mainRoot += " svc-logic-question-value sd-element--with-frame";
     }
-    const parentName = question.parent.name;
+    const parentName = question.parent?.name;
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
       assignDefaultV2Classes(cssClasses, qType);
@@ -280,14 +280,29 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       cssClasses.buttonRemoveText = "svc-logic-paneldynamic__button-remove-text";
     }
   }
+  private isSetValueInternalQuestion(question: Question): boolean {
+    if(this.isSetValueInternalQuestionCore(question)) return true;
+    if(this.isSetValueInternalQuestionCore(question.parentQuestion)) return true;
+    const parent: any = question.parent;
+    return parent && this.isSetValueInternalQuestionCore(parent.parentQuestion);
+  }
+  private isSetValueInternalQuestionCore(question: Question): boolean {
+    const setValueName = "setValue";
+    return question?.name === setValueName;
+  }
   private onUpdatePanelCssClasses(options: any) {
-    const name = options.panel.name;
+    const panel = options.panel;
+    const cssClasses = options.cssClasses;
+    const name = panel.name;
     if (name === "triggerEditorPanel" || name === "setValueIfPanel") {
-      options.cssClasses.panel.container += " svc-logic_trigger-editor";
+      cssClasses.panel.container += " svc-logic_trigger-editor";
     }
     if (name === "triggerQuestionsPanel") {
-      options.panel.allowRootStyle = false;
-      options.cssClasses.panel.container += " svc-logic_trigger-questions";
+      panel.allowRootStyle = false;
+      cssClasses.panel.container += " svc-logic_trigger-questions";
+    }
+    if(this.isSetValueInternalQuestionCore(panel.parentQuestion)) {
+      assignDefaultV2Classes(cssClasses, panel.getType());
     }
   }
   private onValueChanged(options: any) {
