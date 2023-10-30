@@ -1,4 +1,4 @@
-import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property } from "survey-core";
+import { Action, ActionContainer, Base, ComputedUpdater, IElement, Question, SurveyModel, property, settings } from "survey-core";
 import { getLocString } from "../editorLocalization";
 import { scrollElementIntoView } from "../utils/utils";
 
@@ -53,14 +53,27 @@ export class SearchManager extends Base {
     }
     this.switchHighlightedEditor(index);
   }
+  private getAllMatches(newFilter: string) {
+    const normalize = settings.comparator.normalizeTextCallback;
+    let newValueInLow = normalize(newFilter, "search");
+    newValueInLow.toLocaleLowerCase().trim();
+    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
+    return visibleQuestions.filter(q => {
+      let questionTitle = q.title;
+      if(!!questionTitle) {
+        questionTitle = normalize(questionTitle, "search");
+        questionTitle.toLocaleLowerCase().trim();
+      }
+      return questionTitle.indexOf(newValueInLow) !== -1;
+    });
+  }
   private setFiterString(newValue: string) {
     if(!newValue) {
       this.reset();
       return;
     }
-    let newValueInLow = newValue.toLocaleLowerCase();
-    const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
-    this.allMatches = visibleQuestions.filter(q => (q.title.toLocaleLowerCase()).indexOf(newValueInLow) !== -1);
+
+    this.allMatches = this.getAllMatches(newValue);
     if(this.allMatches.length === 0) {
       this.reset();
       return;
