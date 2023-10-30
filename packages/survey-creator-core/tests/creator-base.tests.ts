@@ -926,6 +926,20 @@ test("fast copy tests, copy a question and check the index", (): any => {
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
+      { type: "text", name: "question2", startWithNewLine: false },
+      { type: "text", name: "question3" }
+    ]
+  };
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  expect(creator.survey.pages[0].questions).toHaveLength(4);
+  const question = creator.survey.getQuestionByName("question4");
+  expect(question.startWithNewLine).toBeFalsy();
+});
+test("fast copy tests, copy a question and check the index", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
     ]

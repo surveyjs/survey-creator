@@ -2586,6 +2586,12 @@ export class CreatorBase extends Base
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
       : -1;
+    if(index > -1) {
+      const elements = (<any>question).parent.elements;
+      if(index < elements.length && elements[index].startWithNewLine === false) {
+        newElement.startWithNewLine = false;
+      }
+    }
     this.doClickQuestionCore(newElement, "ELEMENT_COPIED", index, question["parent"]);
     return newElement;
   }
