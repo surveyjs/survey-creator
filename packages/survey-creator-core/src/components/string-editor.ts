@@ -23,12 +23,18 @@ export abstract class StringItemsNavigatorBase {
     return null;
   }
 
-  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
-    const createNewItem = (val: any): ItemValue => {
-      if (this.question.createItemValue) return this.question.createItemValue(val);
-      return new ItemValue(val);
+  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
+    let newItems = items.slice();
+    const createNewItem = (text: any): ItemValue => {
+      const val = creator.inplaceEditForValues ? text : getNextItemValue(creator.getChoicesItemBaseTitle(), newItems);
+      if (this.question.createItemValue) return this.question.createItemValue(val, text);
+      return new ItemValue(val, text);
     };
-    let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => createNewItem(text))).concat(items.slice(startIndex + 1));
+
+    newItems.splice(startIndex, 1);
+    itemsToAdd.forEach((item, offset) => {
+      newItems.splice(startIndex + offset, 0, createNewItem(item));
+    });
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
   private setEventsForItem(creator: CreatorBase, items: any[], item: any) {
@@ -68,7 +74,7 @@ export abstract class StringItemsNavigatorBase {
       if (lines.length <= 1) return;
       options.cancel = true;
       const itemIndex = items.indexOf(item);
-      this.addNewItems(items, itemIndex, lines);
+      this.addNewItems(creator, items, itemIndex, lines);
       let focusedItemIndex = itemIndex + lines.length;
       if (focusedItemIndex >= items.length) focusedItemIndex = items.length - 1;
       StringEditorConnector.get(this.getItemLocString(items, items[focusedItemIndex])).setAutoFocus();
@@ -137,7 +143,7 @@ class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
   protected getItemsPropertyName(items: any) {
     return "items";
   }
-  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
+  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MultipleTextItemModel(text))).concat(items.slice(startIndex + 1));
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
@@ -163,13 +169,13 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) return item.locTitle;
     return item.locText;
   }
-  protected addNewItems(items: any, startIndex: number, itemsToAdd: string[]) {
+  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
     if (items == this.question.columns) {
       let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MatrixDropdownColumn(text))).concat(items.slice(startIndex + 1));
       this.question[this.getItemsPropertyName(items)] = newItems;
     }
     else {
-      super.addNewItems(items, startIndex, itemsToAdd);
+      super.addNewItems(creator, items, startIndex, itemsToAdd);
     }
   }
 }

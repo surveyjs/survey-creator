@@ -148,3 +148,16 @@ test("Keyboard PG MobileView", async (t) => {
   const pgSurveyTitleInput = Selector(".spg-body .spg-row").nth(1).find("[data-name='title'] input");
   await t.expect(pgSurveyTitleInput.focused).ok();
 });
+test("Check page navigator is visually hidden", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        name: "q1",
+        type: "text"
+      }
+    ]
+  };
+  await setJSON(json);
+  await t.expect(Selector(".svc-tab-designer__page-navigator").visible).notOk();
+});

@@ -447,6 +447,7 @@ export class SurveyQuestionEditorDefinition {
         "placeholder",
         "requiredErrorText",
         "validators",
+        { name: "defaultValueExpression", tab: "logic" },
         { name: "minValueExpression", tab: "logic" },
         { name: "maxValueExpression", tab: "logic" },
       ],

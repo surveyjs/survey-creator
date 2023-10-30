@@ -17,7 +17,7 @@ test("Continious (ordinary) page mode", async (t) => {
     .click(getAddNewQuestionButton())
     .expect(Selector("span").withText("question1").visible).ok()
     .expect(Selector(".svc-tab-designer__page-navigator").exists).ok()
-    .expect(Selector(".svc-tab-designer__page-navigator").visible).ok()
+    .expect(Selector(".svc-tab-designer__page-navigator").visible).notOk()
     //.expect(Selector(".svc-page-navigator-item-content").count).eql(0)
     .expect(getAddNewQuestionButton().count).eql(2)
     .expect(Selector("h4.sd-page__title span[aria-placeholder='Page 1']").visible).ok()

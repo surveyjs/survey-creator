@@ -12,6 +12,6 @@ export class TestLocalizationComponent extends TestDefaultComponent {
     const loc = localization.getLocale("de");
     loc.ed.logic = "Miner Logik";
     localization.currentLocale = "de";
-    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
+    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
   }
 }

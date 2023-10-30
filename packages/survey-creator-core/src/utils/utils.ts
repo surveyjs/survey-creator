@@ -269,7 +269,7 @@ export function copyObject(dst: any, src: any) {
     let source = src[key];
     if (typeof source === "object") {
       source = {};
-      this.copyObject(source, src[key]);
+      copyObject(source, src[key]);
     }
     dst[key] = source;
   }
