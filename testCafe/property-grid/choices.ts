@@ -132,3 +132,60 @@ test("Load choices by custom button in fast edit", async (t) => {
     .expect(item5Text.exists).ok()
     .expect(item5Text.value).eql("Item 3");
 });
+test("Enter image link after choice added via property grid", async (t) => {
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "Image 1",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              },
+              {
+                "value": "Image 2",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
+              },
+              {
+                "value": "Image 3",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
+              },
+              {
+                "value": "Image 4",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
+              }
+            ],
+            "imageFit": "cover"
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  const question1 = Selector("[data-name=\"question1\"]");
+  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabContent = choicesTabTitle.parent().nextSibling();
+  const addButton = choicesTabContent.find(".spg-action-button[title='Add a choice']");
+  const input = choicesTabContent.find("input").nth(14);
+
+  await t
+    .click(question1)
+    .click(choicesTabTitle)
+    .click(addButton)
+    .expect(Selector(" .sd-imagepicker__no-image").exists).ok()
+    // .debug()
+    // .click(choicesTabContent.find("input").nth(2))
+    // .pressKey("ctrl+a")
+    // .pressKey("ctrl+c")
+    // .click(input)
+    .typeText(input, "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg")
+    // .pressKey("ctrl+v")
+    // .click(choicesTabContent.find("input").nth(13))
+    // .debug()
+    .expect(Selector(" .sd-imagepicker__no-image").exists).notOk();
+});
