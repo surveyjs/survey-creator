@@ -61,16 +61,17 @@ export class PageNavigatorViewModel extends Base {
       this.pagesController.creator["onPropertyChanged"].remove(this.pcPropertyChangedHandler);
       this.pcPropertyChangedHandler = undefined;
     }
-    if(this.pageListModel) {
+    if (this.pageListModel) {
       this.pageListModel.dispose();
     }
-    if(this.popupModel) {
+    if (this.popupModel) {
       this.popupModel.dispose();
     }
     this._scrollableContainer = undefined;
     this._itemsContainer = undefined;
   }
 
+  @property({ defaultValue: true }) hasScrolling: boolean;
   @propertyArray() items: Array<IAction>;
   @property({ defaultValue: false }) visible: boolean;
   @property({ defaultValue: false }) isPopupOpened: boolean;
@@ -83,7 +84,7 @@ export class PageNavigatorViewModel extends Base {
   private setItems(items: Array<IAction>) {
     this.items = items;
     this.pageListModel.setItems(items);
-    this.visible = items.length > 1 || this.pageEditMode === "bypage";
+    this.updateVisibility();
   }
   private buildItems() {
     this.currentPage = this.pagesController.currentPage || this.pagesController.pages[0];
@@ -137,7 +138,7 @@ export class PageNavigatorViewModel extends Base {
     const el: any = document.getElementById(page.id);
     if (!!el) {
       const isLastPage = this.pagesController.pages.indexOf(page) === (this.pagesController.pages.length - 1);
-      if(!!this._scrollableContainer) {
+      if (!!this._scrollableContainer) {
         // const y = el.offsetTop - (this._scrollableContainer.clientHeight / 4);
         this._scrollableContainer.scrollTo(this._scrollableContainer.scrollLeft, el.offsetTop - 20);
         this.patchContainerOffset(el);
@@ -222,7 +223,7 @@ export class PageNavigatorViewModel extends Base {
       if (navigator.visibleItemsStartIndex !== newVisibleItemsStartIndex) {
         if (navigator.visible && !!navigator._itemsContainer) {
           const itemsHolder = navigator._itemsContainer.querySelectorAll(".svc-page-navigator__selector + div")[0];
-          if(!!itemsHolder) {
+          if (!!itemsHolder) {
             const cssClass = "svc-page-navigator__items--" + (navigator.visibleItemsStartIndex < newVisibleItemsStartIndex ? "up" : "down");
             itemsHolder.className = cssClass;
             setTimeout(() => {
@@ -243,7 +244,7 @@ export class PageNavigatorViewModel extends Base {
       this._resizeObserver.disconnect();
       this._resizeObserver = undefined;
     }
-    if(!this.isDisposed) {
+    if (!this.isDisposed) {
       this.visibleItemsStartIndex = 0;
       this.visibleItemsCount = Number.MAX_VALUE;
     }
@@ -264,6 +265,7 @@ export class PageNavigatorViewModel extends Base {
   public static PAGE_NAVIGATION_MENU_ITEM_HEIGHT = 44;
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
   protected updateVisibleItems(allAvailableHeight: number): void {
+    this.updateVisibility();
     const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
     this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
 
@@ -273,6 +275,16 @@ export class PageNavigatorViewModel extends Base {
       visibleStart = this.items.length - currantPageIndex - 1 < this.visibleItemsCount / 2 ? this.items.length - this.visibleItemsCount : currantPageIndex - Math.floor(this.visibleItemsCount / 2);
     }
     this.visibleItemsStartIndex = visibleStart;
+  }
+  private _updateVisibility() {
+    this.hasScrolling = !this._scrollableContainer || (this._scrollableContainer.scrollHeight > this._scrollableContainer.clientHeight);
+    this.visible = this.hasScrolling && (this.items.length > 1 || this.pageEditMode === "bypage");
+  }
+  private updateVisibility() {
+    this._updateVisibility();
+    setTimeout(() => {
+      this._updateVisibility();
+    }, 10);
   }
   public get visibleItems() {
     if (this.items.length <= this.visibleItemsCount) {

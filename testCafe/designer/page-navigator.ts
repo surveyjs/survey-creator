@@ -2,6 +2,10 @@ import { addQuestionByAddQuestionButton, url, selectedObjectTextSelector } from 
 import { ClientFunction, Selector } from "testcafe";
 const title = "Page navigator";
 
+export function getAddNewQuestionButton(n = 0) {
+  return Selector(".svc-page__add-new-question > span").withText("Add Question").nth(n);
+}
+
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.resizeWindow(1920, 900);
 });
@@ -61,4 +65,26 @@ test("Check page navigator track scrolling", async (t) => {
     .scroll(Selector(".svc-tab-designer--with-page-navigator"), "bottomRight")
     .expect(Selector(firstPageNavigatorItem).exists).notOk()
     .expect(Selector(lastPageNavigatorItem).exists).ok();
+});
+
+test("PageNavigator shown if scrolling exists", async t => {
+  await t.resizeWindow(1600, 1300);
+  await t
+    .expect(getAddNewQuestionButton().visible).ok()
+    .click(getAddNewQuestionButton())
+    .expect(Selector("span").withText("question1").visible).ok()
+    .expect(Selector(".svc-page-navigator").visible).notOk()
+    .click(getAddNewQuestionButton(1))
+    .expect(Selector("span").withText("question2").visible).ok()
+    .expect(Selector(".svc-page-navigator").visible).notOk()
+    .click(getAddNewQuestionButton(2))
+    .expect(Selector("span").withText("question3").visible).ok()
+    .expect(Selector(".svc-page-navigator").visible).ok()
+    .resizeWindow(1600, 1700)
+    .expect(Selector(".svc-page-navigator").visible).notOk()
+    .resizeWindow(1600, 1300)
+    .expect(Selector(".svc-page-navigator").visible).ok()
+    .click(Selector(".svc-question__content--selected span").withText("Delete"))
+    .expect(Selector("span").withText("question3").visible).notOk()
+    .expect(Selector(".svc-page-navigator").visible).notOk()
 });
