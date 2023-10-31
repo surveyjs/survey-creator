@@ -161,3 +161,15 @@ test("Undo deleting a question that has been just added, bug#4479", (): any => {
   expect(page.questions).toHaveLength(1);
   expect(page.questions[0].name).toBe("question1");
 });
+test("Create last question, delete page and select survey in property grid", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {};
+  creator.clickToolboxItem({ type: "text" });
+  expect(creator.selectedElementName).toBe("question1");
+  let page = creator.survey.pages[0];
+  expect(page.questions).toHaveLength(1);
+  creator.deleteElement(creator.selectedElement);
+  expect(creator.survey.pages).toHaveLength(0);
+  expect(creator.selectedElement.getType()).toBe("survey");
+  expect(creator.propertyGrid.editingObj.getType()).toBe("survey");
+});
