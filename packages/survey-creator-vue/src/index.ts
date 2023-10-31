@@ -51,6 +51,9 @@ import Designer from "./tabs/designer/Designer.vue";
 import Page from "./tabs/designer/Page.vue";
 import PageAddQuestion from "./tabs/designer/PageAddQuestion.vue";
 import QuestionAdorner from "./adorners/Question.vue";
+import QuestionImageAdorner from "./adorners/QuestionImage.vue";
+import ImageAdorner from "./adorners/Image.vue";
+import RatingAdorner from "./adorners/Rating.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -109,6 +112,10 @@ function registerComponents(app: App) {
   app.component("svc-page", Page);
   app.component("svc-add-new-question-btn", PageAddQuestion);
   app.component("svc-question", QuestionAdorner);
+  app.component("svc-rating-question", QuestionAdorner);
+  app.component("svc-rating-question-content", RatingAdorner);
+  app.component("svc-image-question", QuestionImageAdorner);
+  app.component("svc-image-question-adorner", ImageAdorner);
 }
 
 export const surveyCreatorPlugin = {
