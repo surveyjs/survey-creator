@@ -281,7 +281,7 @@ export class PageNavigatorViewModel extends Base {
     this.visible = this.hasScrolling && (this.items.length > 1 || this.pageEditMode === "bypage");
   }
   private updateVisibility() {
-    this._updateVisibility();
+    // this._updateVisibility();
     setTimeout(() => {
       this._updateVisibility();
     }, 10);
