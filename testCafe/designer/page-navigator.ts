@@ -86,5 +86,5 @@ test("PageNavigator shown if scrolling exists", async t => {
     .expect(Selector(".svc-page-navigator").visible).ok()
     .click(Selector(".svc-question__content--selected span").withText("Delete"))
     .expect(Selector("span").withText("question3").visible).notOk()
-    .expect(Selector(".svc-page-navigator").visible).notOk()
+    .expect(Selector(".svc-page-navigator").visible).notOk();
 });
