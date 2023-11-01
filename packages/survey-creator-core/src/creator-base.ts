@@ -3879,3 +3879,7 @@ export function registerAdorner(name, adorner) {
 export function removeAdorners(names: string[] = undefined) {
   SurveyHelper.warnNonSupported("removeAdorners", "This functionality is no longer supported.");
 }
+
+//TODO remove
+Serializer.findProperty("matrixdropdowncolumn", "setValueExpression").visibleIf = undefined;
+Serializer.findProperty("question", "setValueExpression").visibleIf = undefined;
