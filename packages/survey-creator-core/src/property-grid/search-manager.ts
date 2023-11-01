@@ -56,13 +56,13 @@ export class SearchManager extends Base {
   private getAllMatches(newFilter: string) {
     const normalize = settings.comparator.normalizeTextCallback;
     let newValueInLow = normalize(newFilter, "search");
-    newValueInLow.toLocaleLowerCase().trim();
+    newValueInLow = newValueInLow.toLocaleLowerCase().trim();
     const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
     return visibleQuestions.filter(q => {
       let questionTitle = q.title;
       if(!!questionTitle) {
         questionTitle = normalize(questionTitle, "search");
-        questionTitle.toLocaleLowerCase().trim();
+        questionTitle = questionTitle.toLocaleLowerCase().trim();
       }
       return questionTitle.indexOf(newValueInLow) !== -1;
     });
@@ -85,8 +85,9 @@ export class SearchManager extends Base {
   private reset() {
     this.allMatches = [];
     this.currentMatchIndex = -1;
-    this.currentMatch?.updateElementCss();
+    const prevMatch = this.currentMatch;
     this.currentMatch = undefined;
+    prevMatch?.updateElementCss();
     this.updatedMatchCounterText(-1);
   }
 
