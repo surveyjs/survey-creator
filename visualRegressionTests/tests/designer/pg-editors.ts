@@ -236,7 +236,6 @@ test("Logic popup mobile", async (t) => {
 test("Property grid checkbox - all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
-    await ClientFunction(() => (window as any).creator.propertyGrid.searchEnabled = false)();
     await setJSON({});
 
     const setCheckboxProperty = ClientFunction((prop, value) => {
@@ -292,7 +291,6 @@ test("Property grid checkbox - all states", async (t) => {
 test("Property grid input all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(2560, 1440);
-    await ClientFunction(() => (window as any).creator.propertyGrid.searchEnabled = false)();
     await setJSON({});
     const setInputProperty = ClientFunction((prop, value) => {
       window["creator"].designerPropertyGrid.survey.getQuestionByName("title")[prop] = value;

@@ -30,7 +30,6 @@ test("Check section", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
 
-    await ClientFunction(() => (window as any).creator.propertyGrid.searchEnabled = false)();
     await setJSON(json);
     // await t.click(Selector(".svd-grid-expand"));
     await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
