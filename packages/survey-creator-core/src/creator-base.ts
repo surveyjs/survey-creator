@@ -2586,9 +2586,9 @@ export class CreatorBase extends Base
     var index = !!question["parent"]
       ? question["parent"].elements.indexOf(question) + 1
       : -1;
-    if(index > -1) {
+    if (index > -1) {
       const elements = (<any>question).parent.elements;
-      if(index < elements.length && elements[index].startWithNewLine === false) {
+      if (index < elements.length && elements[index].startWithNewLine === false) {
         newElement.startWithNewLine = false;
       }
     }
@@ -2716,7 +2716,7 @@ export class CreatorBase extends Base
   }
 
   public selectElement(element: any, propertyName?: string, focus: boolean | string = true, startEdit = false) {
-    if (!!element && (element.isDisposed || ((element.isQuestion || element.isPanel) && !element.parent))) return;
+    if (!!element && (element.isDisposed || !element.getSurvey() || ((element.isQuestion || element.isPanel) && !element.parent))) return;
     var oldValue = this.selectedElement;
     if (oldValue !== element) {
       this.selectedElementValue = this.onSelectingElement(element);
@@ -3082,12 +3082,12 @@ export class CreatorBase extends Base
     const list = [];
     do {
       this.generateUniqueNameCore(options);
-      if(!options.isDone && list.indexOf(options.name) > -1) {
+      if (!options.isDone && list.indexOf(options.name) > -1) {
         options.name = this.checkForUniqueName(el, options.name);
         break;
       }
       list.push(options.name);
-    } while(!options.isDone);
+    } while (!options.isDone);
     return options.name;
   }
   protected generateUniqueNameCore(options: any): void {

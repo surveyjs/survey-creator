@@ -84,13 +84,25 @@ class SurveyTextWorkerJsonErrorFixer extends SurveyTextWorkerJsonErrorFixerBase 
 }
 
 class SurveyTextWorkerJsonUnknownPropertyErrorFixer extends SurveyTextWorkerJsonErrorFixer {
-  public constructor(protected element: Base, protected jsonObj: any, private propertyName: string) {
+  public constructor(protected element: Base, protected jsonObj: any, protected propertyName: string) {
     super(element, jsonObj);
   }
   public getCorrectAt(text: string, at: number, end: number): number {
     const propName = this.propertyName;
     if(!propName) return at;
     return this.getNewIndex(text, this.propertyName, at, end);
+  }
+}
+class SurveyTextWorkerJsonArrayPropertyErrorFixer extends SurveyTextWorkerJsonUnknownPropertyErrorFixer {
+  public constructor(protected element: Base, protected jsonObj: any, protected propertyName: string) {
+    super(element, jsonObj, propertyName);
+  }
+  public get isFixable(): boolean { return true; }
+  protected updatedJsonObjOnFix(json: any): void {
+    const obj = json[this.propertyName];
+    if(obj && !Array.isArray(obj)) {
+      json[this.propertyName] = [obj];
+    }
   }
 }
 class SurveyTextWorkerJsonDuplicateNameErrorFixer extends SurveyTextWorkerJsonErrorFixer {
@@ -135,6 +147,8 @@ export class SurveyTextWorkerJsonError extends SurveyTextWorkerError {
   protected createFixer(): SurveyTextWorkerJsonErrorFixerBase {
     if(this.errorType === "unknownproperty")
       return new SurveyTextWorkerJsonUnknownPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
+    if(this.errorType === "arrayproperty")
+      return new SurveyTextWorkerJsonArrayPropertyErrorFixer(this.element, this.jsonObj, this.propertyName);
     if(this.errorType === "duplicatename")
       return new SurveyTextWorkerJsonDuplicateNameErrorFixer(this.element, this.jsonObj);
     if(this.errorType === "requiredproperty")
