@@ -32,7 +32,7 @@ const json = {
 
 test("On the right side (default)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 400);
     await setJSON({ pages: [{ name: "page1" }] });
 
     await setJSON(json);
@@ -50,7 +50,7 @@ test("On the right side (default)", async (t) => {
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 400);
     await setJSON(json);
 
     await t.click(".svc-page-navigator__selector");
@@ -63,7 +63,7 @@ test("On the right side opened popup", async (t) => {
 
 test("On the left side", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 400);
     await setJSON({ pages: [{ name: "page1" }] });
 
     await setJSON(json);
@@ -82,7 +82,7 @@ test("On the left side", async (t) => {
 
 test("On the left side (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 400);
     await ClientFunction(() => {
       document.body.setAttribute("dir", "rtl");
     })();
