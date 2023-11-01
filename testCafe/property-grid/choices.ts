@@ -178,14 +178,6 @@ test("Enter image link after choice added via property grid", async (t) => {
     .click(choicesTabTitle)
     .click(addButton)
     .expect(Selector(" .sd-imagepicker__no-image").exists).ok()
-    // .debug()
-    // .click(choicesTabContent.find("input").nth(2))
-    // .pressKey("ctrl+a")
-    // .pressKey("ctrl+c")
-    // .click(input)
     .typeText(input, "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg")
-    // .pressKey("ctrl+v")
-    // .click(choicesTabContent.find("input").nth(13))
-    // .debug()
     .expect(Selector(" .sd-imagepicker__no-image").exists).notOk();
 });
