@@ -62,3 +62,26 @@ test("object selector with large object's name", async (t) => {
     await t.resizeWindow(1920, 900);
   });
 });
+test("property grid search", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "elements": [
+        {
+          "type": "text",
+          "name": "q1",
+          "title": "First"
+        }
+      ]
+    });
+    await t
+      .resizeWindow(1920, 900)
+      .typeText(".spg-search-editor_input", "des");
+    await takeElementScreenshot("side-bar-search-editor.png", ".spg-container_search .spg-search-editor_container", t, comparer);
+    await takeElementScreenshot("side-bar-search-general-group.png", Selector(".spg-container_search"), t, comparer);
+
+    await t.click(".spg-search-editor_bar-item");
+    await takeElementScreenshot("side-bar-search-question-group.png", Selector(".spg-container_search"), t, comparer);
+
+    await t.resizeWindow(1920, 900);
+  });
+});
