@@ -10,7 +10,8 @@ import {
   QuestionRadiogroupModel,
   SurveyTriggerRunExpression,
   SurveyTriggerCopyValue,
-  ItemValue
+  ItemValue,
+  Base
 } from "survey-core";
 import { SurveyLogic } from "../../src/components/tabs/logic";
 import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
@@ -478,9 +479,36 @@ test("Delete the question", () => {
   var q3 = survey.getQuestionByName("q3");
   var logic = new SurveyLogic(survey);
   q3.delete();
-  logic.removeQuestion(q3.name);
+  logic.removeQuestion(q3);
   expect(q1.visibleIf).toBeFalsy();
   expect(q2.visibleIf).toEqual("(({q1} == 1) or ({q1} == 2))");
+});
+test("Delete the question and do not change expression", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3} > 2" },
+      {
+        type: "text",
+        name: "q2",
+        visibleIf: "{q1} = 1 and {q3} < 2 or {q1} = 2"
+      },
+      { type: "text", name: "q3" }
+    ]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q3 = survey.getQuestionByName("q3");
+  const options = new EmptySurveyCreatorOptions();
+  options.updateExpressionOnAction = (element: Base, reason: string, oldExpression: string, newExpression: string): string =>
+  {
+    if(reason === "ELEMENT_DELETED" && (<any>element).name === "q3") return oldExpression;
+    return newExpression;
+  };
+  const logic = new SurveyLogic(survey, options);
+  q3.delete();
+  logic.removeQuestion(q3);
+  expect(q1.visibleIf).toEqual("{q3} > 2");
+  expect(q2.visibleIf).toEqual("{q1} = 1 and {q3} < 2 or {q1} = 2");
 });
 
 test("Add new trigger", () => {

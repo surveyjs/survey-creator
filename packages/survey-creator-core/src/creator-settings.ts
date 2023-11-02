@@ -305,6 +305,7 @@ export interface ISurveyCreatorOptions {
   chooseFiles(
     input: HTMLInputElement,
     onFilesChosen: (files: File[]) => void): void;
+  updateExpressionOnAction(element: Base, reason: string, oldExpression: string, newExpression: string): string;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -453,6 +454,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
   chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void): void {}
+  updateExpressionOnAction(element: Base, reason: string, oldExpression: string, newExpression: string): string { return newExpression; }
 }
 
 StylesManager.applyTheme("defaultV2");

@@ -1045,6 +1045,13 @@ export class CreatorBase extends Base
    */
   public onMachineTranslate: CreatorEvent = new CreatorEvent();
 
+  /*
+  * element: Base,
+  * reason: ELEMENT_RENAMED" | "ELEMENT_DELETED",
+  * oldExpression
+  * newExpression
+  */
+  public onUpdateExpression: CreatorEvent = new CreatorEvent();
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
    * 
@@ -2697,9 +2704,7 @@ export class CreatorBase extends Base
     }
     if (!questions) return;
     var logic = new SurveyLogic(<any>this.survey, <any>this);
-    for (var i = 0; i < questions.length; i++) {
-      logic.removeQuestion(questions[i].getValueName());
-    }
+    questions.forEach(q => logic.removeQuestion(q));
   }
   private checkOnElementDeleting(obj: any): boolean {
     const options = {
@@ -3379,6 +3384,16 @@ export class CreatorBase extends Base
     } else {
       this.onMachineTranslate.fire(this, { fromLocale: fromLocale, toLocale: toLocale, strings: strings, callback: callback });
     }
+  }
+  updateExpressionOnAction(element: Base, reason: string, oldExpression: string, newExpression: string): string {
+    const options = {
+      element: element,
+      reason: reason,
+      oldExpression: oldExpression,
+      newExpression: newExpression
+    };
+    this.onUpdateExpression.fire(this, options);
+    return options.newExpression;
   }
 
   /**

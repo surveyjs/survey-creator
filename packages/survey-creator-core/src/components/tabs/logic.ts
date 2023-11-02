@@ -183,9 +183,9 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     const owner: any = item.locOwner;
     return owner.isQuestion ? owner : null;
   }
-  public removeQuestion(name: string) {
-    this.removeQuestionCore(name, this.items);
-    this.removeQuestionCore(name, this.invisibleItems);
+  public removeQuestion(question: Question) {
+    this.removeQuestionCore(question, this.items);
+    this.removeQuestionCore(question, this.invisibleItems);
   }
   public hasError(): boolean {
     if (!this.editableItem) return false;
@@ -250,10 +250,8 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
     return [];
   }
   protected onReadOnlyChanged(): void { }
-  private removeQuestionCore(name: string, items: Array<SurveyLogicItem>) {
-    for (var i = 0; i < items.length; i++) {
-      items[i].removeQuestion(name);
-    }
+  private removeQuestionCore(question: Question, items: Array<SurveyLogicItem>) {
+    items.forEach(item => item.removeQuestion(question));
   }
   public addNew() {
     !!this.options && this.options.startUndoRedoTransaction();
@@ -321,6 +319,10 @@ export class SurveyLogic extends Base implements ISurveyLogicItemOwner {
       }
     }
     return res;
+  }
+  public getExpressionOnDeleting(element: Base, oldExpression: string, newExpression: string): string {
+    if(!this.options) return newExpression;
+    return this.options.updateExpressionOnAction(element, "ELEMENT_DELETED", oldExpression, newExpression);
   }
   public removeAction(action: SurveyLogicAction) {
     if (!this.editableItem) return;

@@ -147,6 +147,7 @@ export interface ISurveyLogicItemOwner {
   removeItem(item: SurveyLogicItem);
   getExpressionAsDisplayText(expression: string): string;
   getVisibleLogicTypes(): Array<SurveyLogicType>;
+  getExpressionOnDeleting(element: Base, oldExpression: string, newExpression: string): string;
 }
 
 export class SurveyLogicItem {
@@ -359,8 +360,8 @@ export class SurveyLogicItem {
     }
     return valName;
   }
-  public removeQuestion(name: string): void {
-    this.removeQuestionInExpression(name);
+  public removeQuestion(question: Question): void {
+    this.removeQuestionInExpression(question);
   }
   public getQuestionNames(): string[] {
     const res = [];
@@ -450,11 +451,13 @@ export class SurveyLogicItem {
     }
     return expression;
   }
-  private removeQuestionInExpression(name: string) {
+  private removeQuestionInExpression(question: Question) {
     if (!this.expression) return;
-    var expR = new ExpressionRemoveVariable();
-    var newExpression = expR.remove(this.expression, name);
-    if (newExpression != this.expression) {
+    const expR = new ExpressionRemoveVariable();
+    let newExpression = expR.remove(this.expression, question.getValueName());
+    if(newExpression === this.expression) return;
+    newExpression = this.owner.getExpressionOnDeleting(question, this.expression, newExpression);
+    if (newExpression !== this.expression) {
       this.applyExpression(newExpression, true);
     }
   }
