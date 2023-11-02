@@ -13,4 +13,4 @@ export class SearchComponent extends BaseAngular<SearchManager> {
     return this.model;
   }
 }
-AngularComponentFactory.Instance.registerComponent("svc-property-grid", SearchComponent);
+AngularComponentFactory.Instance.registerComponent("svc-search", SearchComponent);
