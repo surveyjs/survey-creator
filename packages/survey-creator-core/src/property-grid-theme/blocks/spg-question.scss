@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.spg-question__title {
+@mixin question_tile {
   width: 100%;
   margin: 0;
   padding: calcSize(1) 0;
@@ -19,6 +19,10 @@
   color: $foreground-light;
   font-weight: normal;
   box-sizing: border-box;
+}
+
+.spg-question__title {
+  @include question_tile;
 }
 
 .spg-question__content {

@@ -41,6 +41,7 @@ export var propertyGridCss = {
     button: "spg-action-button spg-action-button--text",
     buttonRemove: "spg-action-button--danger",
     buttonAdd: "spg-paneldynamic__add-btn",
+    panelWrapper: "spg-paneldynamic__panel-wrapper",
     progressTop: "spg-paneldynamic__progress spg-paneldynamic__progress--top",
     progressBottom:
       "spg-paneldynamic__progress spg-paneldynamic__progress--bottom",
