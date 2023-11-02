@@ -98,7 +98,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
   }
   public onKeyDown = (event: KeyboardEvent) => {
-    this.onTextKeyDownHandler(event);
+    if((<HTMLElement>event.target).tagName === "INPUT") {
+      this.onTextKeyDownHandler(event);
+    }
   }
   public onFileInputChange = (event: Event) => {
     if(!this.onChooseFilesCallback) {
