@@ -2688,6 +2688,7 @@ export class CreatorBase extends Base
     this.deleteObjectCore(obj);
   }
   protected updateConditionsOnRemove(obj: any) {
+    if(!settings.logic.updateExpressionsOnDeleting.question) return;
     var objType = SurveyHelper.getObjectType(obj);
     var questions;
     if (objType == ObjType.Question) {
