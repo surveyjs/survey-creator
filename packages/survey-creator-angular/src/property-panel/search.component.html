@@ -3,7 +3,7 @@
         <div class="spg-search-editor_search-icon">
             <svg [iconName]="'icon-search'" [size]="'auto'" sv-ng-svg-icon></svg>
         </div>
-        <input type="text" class="spg-search-editor_input" [value]="model.filterString"
+        <input type="text" class="spg-search-editor_input" [(ngModel)]="model.filterString"
             [attr.aria-label]="model.filterStringPlaceholder" [attr.placeholder]="model.filterStringPlaceholder" />
         <div class="spg-search-editor_toolbar">
             <div class="spg-search-editor_toolbar-counter">{{model.matchCounterText}}</div>
