@@ -42,6 +42,7 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
                   ReactElementFactory.Instance.createElement(
                     this.dropdownModel.itemComponent,
                     {
+                      key: item.value,
                       question: this.question,
                       cssClasses: this.question.cssClasses,
                       isDisplayMode: true,
