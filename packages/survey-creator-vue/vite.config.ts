@@ -8,7 +8,7 @@ const packageJson = require("./package.json");
 json.version = packageJson.version;
 // json.dependencies["survey-core"] = json.version;
 
-const libraryName = "survey-vue3-ui";
+const libraryName = "survey-creator-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
 
   build: {
     // Output compiled files to /dist.
-    outDir: "../../build/survey-vue3-ui",
+    outDir: "./build",
     lib: {
       // Set the entry point (file that contains our components exported).
       entry: resolve(__dirname, "src/index.ts"),
@@ -41,6 +41,7 @@ export default defineConfig({
         globals: {
           vue: "Vue",
           "survey-core": "Survey",
+          "survey-creator-core": "SurveyCreatorCore",
           "survey-vue3-ui": "SurveyVue",
         },
       },
