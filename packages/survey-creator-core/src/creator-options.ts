@@ -201,7 +201,7 @@ export interface ICreatorOptions {
   maxLogicItemsInCondition?: number;
 
   /**
-   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
    * 
    * Default value: -1 (unlimited)
    */
