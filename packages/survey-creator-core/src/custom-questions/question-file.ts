@@ -70,7 +70,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
 
   protected updateValueFromInputEvent(event: Event) {
-    if(!Helpers.isTwoValueEquals((<HTMLInputElement>event.target).value, this.value)) {
+    const value = (<HTMLInputElement>event.target).value;
+    if(!!this.placeholder && !value) return;
+    if(!Helpers.isTwoValueEquals(value, this.value)) {
       this.clear(undefined, false);
       this.loadedFilesValue = undefined;
       this.value = (<HTMLInputElement>event.target).value;
