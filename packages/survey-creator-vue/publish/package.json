@@ -7,7 +7,7 @@
     "JavaScript",
     "Bootstrap",
     "Library",
-    "knockout"
+    "Vue"
   ],
   "homepage": "https://surveyjs.io/",
   "license": "MIT",
@@ -22,6 +22,8 @@
     "vue": "^3.2.41"
   },
   "dependencies": {
-    "survey-core": "*"
+    "survey-core": "*",
+    "survey-creator-core": "*",
+    "survey-vue3-ui": "*"
   }
 }
