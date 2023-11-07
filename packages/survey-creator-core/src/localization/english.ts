@@ -86,6 +86,8 @@ export var enStrings = {
     translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
+    saveTheme: "Save Theme",
+    saveThemeTooltip: "Save Theme",
     designer: "Designer",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
