@@ -666,7 +666,10 @@ export var enStrings = {
     otherPlaceholder: "Comment area placeholder",
     signaturepad: {
       showPlaceholder: "Show the placeholder",
-      placeholder: "Placeholder text"
+      placeholder: "Placeholder text",
+      signatureWidth: "Signature area width",
+      signatureHeight: "Signature area height",
+      signatureAutoScaleEnabled: "Auto-scale the signature area",
     },
     filePlaceholder: "File placeholder text",
     photoPlaceholder: "Photo placeholder text",
