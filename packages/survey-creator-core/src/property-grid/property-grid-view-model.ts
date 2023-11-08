@@ -6,20 +6,28 @@ import { ObjectSelectorModel } from "./object-selector";
 import { CreatorBase } from "../creator-base";
 import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
+import { SearchManager } from "./search-manager";
 
 export class PropertyGridViewModel extends Base {
   public nextSelectionAction: Action;
   public prevSelectionAction: Action;
   public objectSelectionAction: Action;
+  public searchManager = new SearchManager();
   private selectorPopupModel: PopupModel;
 
   @property() hasPrev: boolean;
   @property() hasNext: boolean;
   @property() survey: SurveyModel;
   @property() selectedElementName: string;
+  @property({
+    onSet: (newValue: boolean, target: PropertyGridViewModel) => {
+      target.searchManager.isVisible = newValue;
+    }
+  }) searchEnabled: boolean;
 
   constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
     super();
+    this.searchEnabled = settings.propertyGrid.enableSearch;
     this.selectedElementName = this.getTitle();
     this.propertyGridModel.objValueChangedCallback = () => {
       this.onSurveyChanged();
@@ -56,6 +64,7 @@ export class PropertyGridViewModel extends Base {
 
   private onSurveyChanged() {
     this.survey = this.propertyGridModel.survey;
+    this.searchManager.setSurvey(this.survey);
     if (!!this.survey) {
       this.survey.onValueChanged.add((sender: SurveyModel, options: any) => {
         if (options.name == "name" || options.name == "title") {
@@ -144,5 +153,14 @@ export class PropertyGridViewModel extends Base {
       },
       popupModel: this.selectorPopupModel
     });
+  }
+
+  dispose() {
+    this.searchManager.dispose();
+    this.nextSelectionAction.dispose();
+    this.prevSelectionAction.dispose();
+    this.objectSelectionAction.dispose();
+    this.selectorPopupModel.dispose();
+    super.dispose();
   }
 }

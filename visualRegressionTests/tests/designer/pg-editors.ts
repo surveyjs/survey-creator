@@ -235,6 +235,7 @@ test("Logic popup mobile", async (t) => {
 
 test("Property grid checkbox - all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false)();
     await t.resizeWindow(2560, 1440);
     await setJSON({});
 
@@ -290,6 +291,7 @@ test("Property grid checkbox - all states", async (t) => {
 
 test("Property grid input all states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false)();
     await t.resizeWindow(2560, 1440);
     await setJSON({});
     const setInputProperty = ClientFunction((prop, value) => {
@@ -397,6 +399,7 @@ test("Check question with error", async (t) => {
 
 test("Check color editor", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false)();
     await t.resizeWindow(1920, 1920);
     await ClientFunction(() => {
       (<any>window).Survey.Serializer.addProperty("survey", {

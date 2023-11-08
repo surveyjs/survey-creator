@@ -42,6 +42,7 @@ export * from "../custom-questions/text-with-reset";
 export * from "../page-navigator/page-navigator";
 export * from "../page-navigator/page-navigator-item";
 export * from "../property-panel/object-selector";
+export * from "../property-panel/search";
 export * from "../property-panel/property-grid";
 export * from "../side-bar/side-bar";
 export * from "../side-bar/side-bar-tab";

@@ -15,12 +15,28 @@
 @import "blocks/spg-link";
 @import "blocks/spg-theme-builder.scss";
 @import "blocks/spg-overriding.scss";
+@import "blocks/spg-search-editor.scss";
 
 .spg-root-modern {
   position: relative;
   width: 100%;
   border-right: 1px solid $border;
   box-sizing: border-box;
+}
+
+.spg-container {
+  width: 100%;
+}
+
+.spg-container.spg-container_search {
+  height: 100%;
+}
+
+.spg-container_search .spg-root-modern {
+  top: calcSize(7);
+  margin-top: 1px;
+  height: calc(100% - 1px - calcSize(7));
+  overflow: auto;
 }
 
 .sv-popup--modal {
