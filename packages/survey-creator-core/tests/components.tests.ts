@@ -1,5 +1,7 @@
-import { Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
-  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum } from "survey-core";
+import {
+  Base, ImageItemValue, ItemValue, Model, QuestionCheckboxModel, JsonObjectProperty,
+  QuestionImageModel, QuestionImagePickerModel, QuestionRatingModel, Serializer, settings, SurveyModel, DragTypeOverMeEnum
+} from "survey-core";
 import { ImageItemValueWrapperViewModel } from "../src/components/image-item-value";
 import { ItemValueWrapperViewModel } from "../src/components/item-value";
 import { QuestionImageAdornerViewModel } from "../src/components/question-image";
@@ -575,11 +577,13 @@ test("QuestionRatingAdornerViewModel respect maximumRateValues with rate values"
   const creator = new CreatorTester();
   creator.maximumRateValues = 4;
   creator.JSON = {
-    elements: [{ type: "rating", name: "q1", "rateValues": [
-      "item1",
-      "item2",
-      "item3"
-    ] }]
+    elements: [{
+      type: "rating", name: "q1", "rateValues": [
+        "item1",
+        "item2",
+        "item3"
+      ]
+    }]
   };
   const question = <QuestionRatingModel>creator.survey.getAllQuestions()[0];
 
@@ -873,4 +877,28 @@ test("calculateDragOverLocation", () => {
   creatorSettings.dragDrop.allowDragToTheSameLine = true;
   location = calculateDragOverLocation(350, 170, <any>{ getBoundingClientRect: () => ({ x: 100, y: 100, width: 300, height: 100 }) });
   expect(location).toBe(DragTypeOverMeEnum.Right);
+});
+
+test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const rootElement = document.createElement("div");
+  rootElement.innerHTML = "<input type='file' class='svc-choose-file-input' />";
+  const imageItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.choices[0], undefined, rootElement);
+
+  let context: any = undefined;
+  creator.onOpenFileChooser.add((s, o) => {
+    context = o.context;
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    o.callback({}, "success");
+  });
+  imageItemAdorner.chooseFile(imageItemAdorner);
+  expect(context).toBeDefined();
+  expect(context.question).toBe(question);
+  expect(context.item).toBe(question.choices[0]);
 });

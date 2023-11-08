@@ -311,7 +311,9 @@ export interface ISurveyCreatorOptions {
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void): void;
+    onFilesChosen: (files: File[]) => void,
+    context?: { question: Question; item?: ItemValue }
+  ): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -459,7 +461,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void): void {}
+  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void): void { }
 }
 
 StylesManager.applyTheme("defaultV2");
