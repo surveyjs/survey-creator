@@ -61,21 +61,11 @@
 
           <template v-if="model.creator.pageEditMode !== 'bypage'">
             <svc-page
-              v-for="(page, index) in model.creator.survey.pages"
-              :key="index"
-              class="svc-page"
-              data-bind="attr: { 'data-sv-drop-target-survey-element': $data.name, 'data-sv-drop-target-page': $data.name }"
+              v-for="page in pages"
+              :key="page.id"
               :survey="model.creator.survey"
               :creator="model.creator"
               :page="page"
-            ></svc-page>
-            <svc-page
-              v-if="model.showNewPage"
-              class="svc-page"
-              data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
-              :survey="model.creator.survey"
-              :creator="model.creator"
-              :page="model.newPage"
             ></svc-page>
           </template>
 
@@ -111,6 +101,13 @@
 <script lang="ts" setup>
 import type { TabDesignerViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
+import { computed } from "vue";
 const props = defineProps<{ model: TabDesignerViewModel }>();
 useBase(() => props.model);
+const pages = computed(() => {
+  const model = props.model;
+  return model.creator.survey.pages.concat(
+    model.showNewPage ? [model.newPage] : []
+  );
+});
 </script>
