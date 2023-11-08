@@ -2,9 +2,9 @@
   <div
     class="svc-page"
     :data-sv-drop-target-survey-element="
-      model.isGhost ? page.name : 'newGhostPage'
+      !model.isGhost ? page.name : 'newGhostPage'
     "
-    :data-sv-drop-target-page="model.isGhost ? page.name : ''"
+    :data-sv-drop-target-page="!model.isGhost ? page.name : ''"
   >
     <div
       v-if="model.page"
