@@ -84,7 +84,7 @@
 </template>
 <script lang="ts" setup>
 import type { QuestionAdornerViewModel } from "survey-creator-core";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 defineProps<{
   model: QuestionAdornerViewModel;
   element: any;
