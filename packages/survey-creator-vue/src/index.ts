@@ -50,12 +50,14 @@ import Toolbox from "./toolbox/Toolbox.vue";
 import Designer from "./tabs/designer/Designer.vue";
 import Page from "./tabs/designer/Page.vue";
 import PageAddQuestion from "./tabs/designer/PageAddQuestion.vue";
+import Row from "./tabs/designer/Row.vue";
 import QuestionAdorner from "./adorners/Question.vue";
 import QuestionImageAdorner from "./adorners/QuestionImage.vue";
 import ImageAdorner from "./adorners/Image.vue";
 import RatingAdorner from "./adorners/Rating.vue";
 import MatrixCell from "./adorners/MatrixCell.vue";
 import CellQuestion from "./adorners/CellQuestion.vue";
+import Panel from "./adorners/Panel.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 
@@ -114,6 +116,7 @@ function registerComponents(app: App) {
 
   app.component("svc-tab-designer", Designer);
   app.component("svc-page", Page);
+  app.component("svc-row", Row);
   app.component("svc-add-new-question-btn", PageAddQuestion);
   app.component("svc-question", QuestionAdorner);
   app.component("svc-rating-question", QuestionAdorner);
@@ -124,6 +127,7 @@ function registerComponents(app: App) {
   app.component("svc-cell-question", CellQuestion);
   app.component("svc-question-editor-content", QuestionEditor);
   app.component("svc-logo-image", Logo);
+  app.component("svc-panel", Panel);
 }
 
 export const surveyCreatorPlugin = {
