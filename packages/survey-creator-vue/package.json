@@ -1,5 +1,5 @@
 {
-  "name": "survey-vue3-ui",
+  "name": "survey-creator-vue",
   "version": "1.9.102",
   "scripts": {
     "dev": "vite",

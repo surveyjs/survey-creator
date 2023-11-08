@@ -57,6 +57,7 @@ import RatingAdorner from "./adorners/Rating.vue";
 import MatrixCell from "./adorners/MatrixCell.vue";
 import CellQuestion from "./adorners/CellQuestion.vue";
 import QuestionEditor from "./QuestionEditor.vue";
+import Logo from "./header/Logo.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -122,6 +123,7 @@ function registerComponents(app: App) {
   app.component("svc-matrix-cell", MatrixCell);
   app.component("svc-cell-question", CellQuestion);
   app.component("svc-question-editor-content", QuestionEditor);
+  app.component("svc-logo-image", Logo);
 }
 
 export const surveyCreatorPlugin = {
