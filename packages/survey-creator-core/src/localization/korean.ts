@@ -142,7 +142,12 @@ export var koreanStrings = {
     translationPlaceHolder: "번역...",
     themeExportButton: "수출",
     themeImportButton: "수입",
+    surveyJsonExportButton: "수출",
+    surveyJsonImportButton: "수입",
+    surveyJsonCopyButton: "클립보드에 복사",
     themeResetButton: "테마 설정을 기본값으로 재설정",
+    themeResetConfirmation: "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다.",
+    themeResetConfirmationOk: "예, 테마를 재설정합니다.",
     bold: "대담한",
     italic: "이탤릭체",
     underline: "밑줄",
@@ -658,6 +663,13 @@ export var koreanStrings = {
     columnsVisibleIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsVisibleIf: "다음과 같은 경우 행이 표시됩니다.",
     otherPlaceholder: "주석 영역 자리 표시자",
+    signaturepad: {
+      showPlaceholder: "자리 표시자 표시",
+      placeholder: "자리 표시자 텍스트"
+    },
+    filePlaceholder: "파일 자리 표시자 텍스트",
+    photoPlaceholder: "사진 자리 표시자 텍스트",
+    fileOrPhotoPlaceholder: "파일 또는 사진 자리 표시자 텍스트",
     rateType: "비율 유형"
   },
   // Property values
@@ -895,7 +907,10 @@ export var koreanStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다."
+    keyName: "지정된 열에 동일한 값이 포함되어 있으면 현장조사에서 \"고유하지 않은 키 값\" 오류가 발생합니다.",
+    filePlaceholder: "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다.",
+    photoPlaceholder: "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다.",
+    fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var koreanStrings = {
     groupGeneral: "일반",
     groupAdvanced: "고급",
     groupHeader: "머리글",
+    groupBackground: "배경",
+    groupAppearance: "외관",
     themeName: "주제",
     themeMode: "질문 모양",
     themeModePanels: "기본값",
@@ -1019,6 +1036,7 @@ export var koreanStrings = {
     primaryDarkColor: "호버",
     primaryLightColor: "선택한",
     coverTitleForecolor: "제목 forecolor",
+    coverDescriptionForecolor: "설명 forecolor",
     coverOverlapEnabled: "겹침",
     backgroundDimColor: "배경색",
     backgroundImage: "배경 이미지",
@@ -1059,6 +1077,7 @@ export var koreanStrings = {
     scale: "저울",
     cornerRadius: "코너 반경",
     surveyTitle: "설문조사 제목 글꼴",
+    surveyDescription: "설문조사 설명 글꼴",
     pageTitle: "페이지 제목 글꼴",
     pageDescription: "페이지 설명 글꼴",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var koreanStrings = {
     headerViewAdvanced: "고급",
     coverInheritWidthFrom: "콘텐츠 영역 너비",
     coverInheritWidthFromSurvey: "설문조사와 동일",
-    coverInheritWidthFromPage: "페이지에 맞추기",
+    coverInheritWidthFromContainer: "콘테이너에 적합",
     coverTextAreaWidth: "텍스트 너비",
     coverBackgroundColorSwitch: "배경색",
     coverBackgroundColorNone: "없음",
@@ -1878,3 +1897,30 @@ editorLocalization.locales["ko"] = koreanStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "셀 값 할당 : {1} 열 : {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "수출"
+// ed.surveyJsonImportButton: "Import" => "수입"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "클립보드에 복사"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "파일 자리 표시자 텍스트"
+// pe.photoPlaceholder: "Photo placeholder text" => "사진 자리 표시자 텍스트"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "파일 또는 사진 자리 표시자 텍스트"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다."
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
+// theme.groupBackground: "Background" => "배경"
+// theme.groupAppearance: "Appearance" => "외관"
+// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "테마를 재설정 하시겠습니까? 모든 사용자 지정이 손실됩니다."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "예, 테마를 재설정합니다."
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "배경"
+// theme.groupAppearance: "Appearance" => "외관"
+// theme.coverDescriptionForecolor: "Description forecolor" => "설명 forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "콘테이너에 적합"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "자리 표시자 표시"
+// signaturepad.placeholder: "Placeholder text" => "자리 표시자 텍스트"
+// theme.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"

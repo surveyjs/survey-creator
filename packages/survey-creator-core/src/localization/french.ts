@@ -142,7 +142,12 @@ var frenchTranslation = {
     translationPlaceHolder: "Traduction...",
     themeExportButton: "Exportation",
     themeImportButton: "Importation",
+    surveyJsonExportButton: "Exportation",
+    surveyJsonImportButton: "Importation",
+    surveyJsonCopyButton: "Copier dans le Presse-papiers",
     themeResetButton: "Réinitialiser les paramètres de thème par défaut",
+    themeResetConfirmation: "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues.",
+    themeResetConfirmationOk: "Oui, réinitialisez le thème",
     bold: "Gras",
     italic: "Italique",
     underline: "Souligné",
@@ -658,6 +663,13 @@ var frenchTranslation = {
     columnsVisibleIf: "Les colonnes sont visibles si",
     rowsVisibleIf: "Les lignes sont visibles si",
     otherPlaceholder: "Espace réservé pour la zone de commentaires",
+    signaturepad: {
+      showPlaceholder: "Afficher l’espace réservé",
+      placeholder: "Texte d’espace réservé"
+    },
+    filePlaceholder: "Texte de l’espace réservé au fichier",
+    photoPlaceholder: "Texte de l’espace réservé à la photo",
+    fileOrPhotoPlaceholder: "Texte de l’espace réservé au fichier ou à la photo",
     rateType: "Type de notation"
   },
   // Property values
@@ -895,7 +907,10 @@ var frenchTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique »."
+    keyName: "Si la colonne spécifiée contient des valeurs identiques, le sondage renvoie l’erreur « Valeur de clé non unique ».",
+    filePlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible",
+    photoPlaceholder: "S’applique lorsque le « Type de source » est « Appareil photo ».",
+    fileOrPhotoPlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux ou appareil photo »."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ var frenchTranslation = {
     groupGeneral: "Généralités",
     groupAdvanced: "Avancé",
     groupHeader: "En-tête",
+    groupBackground: "Arrière-plan",
+    groupAppearance: "Apparence",
     themeName: "Thème",
     themeMode: "Apparence de la question",
     themeModePanels: "Par défaut",
@@ -1019,6 +1036,7 @@ var frenchTranslation = {
     primaryDarkColor: "Au survol",
     primaryLightColor: "Sélectionné",
     coverTitleForecolor: "Précouleur du titre",
+    coverDescriptionForecolor: "Description de la couleur avant",
     coverOverlapEnabled: "Chevauchement",
     backgroundDimColor: "Couleur d’arrière-plan",
     backgroundImage: "Image d’arrière-plan",
@@ -1059,6 +1077,7 @@ var frenchTranslation = {
     scale: "Échelle",
     cornerRadius: "Angle",
     surveyTitle: "Police du titre du sondage",
+    surveyDescription: "Police de description de l’enquête",
     pageTitle: "Police du titre de la page",
     pageDescription: "Police de la description de page",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ var frenchTranslation = {
     headerViewAdvanced: "Avancé",
     coverInheritWidthFrom: "Largeur de la zone de contenu",
     coverInheritWidthFromSurvey: "Identique à l’enquête",
-    coverInheritWidthFromPage: "Ajuster à la page",
+    coverInheritWidthFromContainer: "S’adapte au conteneur",
     coverTextAreaWidth: "Largeur du texte",
     coverBackgroundColorSwitch: "Couleur d’arrière-plan",
     coverBackgroundColorNone: "Aucun",
@@ -1733,3 +1752,30 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Affecter la valeur de la cellule : {1} à la colonne : {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exportation"
+// ed.surveyJsonImportButton: "Import" => "Importation"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Copier dans le Presse-papiers"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Texte de l’espace réservé au fichier"
+// pe.photoPlaceholder: "Photo placeholder text" => "Texte de l’espace réservé à la photo"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texte de l’espace réservé au fichier ou à la photo"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "S’applique lorsque le «Type de source» est «Appareil photo»."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "S’applique lorsque le «Type de source» est «Fichiers locaux ou appareil photo»."
+// theme.groupBackground: "Background" => "Arrière-plan"
+// theme.groupAppearance: "Appearance" => "Apparence"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Arrière-plan"
+// theme.groupAppearance: "Appearance" => "Apparence"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Afficher l’espace réservé"
+// signaturepad.placeholder: "Placeholder text" => "Texte d’espace réservé"
+// theme.surveyDescription: "Survey description font" => "Police de description de l’enquête"

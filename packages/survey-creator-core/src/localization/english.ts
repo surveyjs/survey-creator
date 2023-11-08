@@ -86,6 +86,8 @@ export var enStrings = {
     translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
+    saveTheme: "Save Theme",
+    saveThemeTooltip: "Save Theme",
     designer: "Designer",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
@@ -148,6 +150,8 @@ export var enStrings = {
     surveyJsonImportButton: "Import",
     surveyJsonCopyButton: "Copy to clipboard",
     themeResetButton: "Reset theme settings to default",
+    themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost.",
+    themeResetConfirmationOk: "Yes, reset the theme",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -662,6 +666,18 @@ export var enStrings = {
     columnsVisibleIf: "Columns are visible if",
     rowsVisibleIf: "Rows are visible if",
     otherPlaceholder: "Comment area placeholder",
+    signaturepad: {
+      showPlaceholder: "Show the placeholder",
+      placeholder: "Placeholder text",
+      signatureWidth: "Signature area width",
+      signatureHeight: "Signature area height",
+      signatureAutoScaleEnabled: "Auto-scale the signature area",
+      penMinWidth: "Minimum pen width",
+      penMaxWidth: "Maximum pen width",
+    },
+    filePlaceholder: "File placeholder text",
+    photoPlaceholder: "Photo placeholder text",
+    fileOrPhotoPlaceholder: "File or photo placeholder text",
     rateType: "Rate type" // Auto-generated string
   },
   // Property values
@@ -899,7 +915,10 @@ export var enStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error."
+    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
+    filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable",
+    photoPlaceholder: "Applies when \"Source type\" is \"Camera\".",
+    fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"."
   },
   // Properties
   p: {
@@ -1066,6 +1085,7 @@ export var enStrings = {
     scale: "Scale",
     cornerRadius: "Corner radius",
     surveyTitle: "Survey title font",
+    surveyDescription: "Survey description font",
     pageTitle: "Page title font",
     pageDescription: "Page description font",
     boxShadowX: "X",
@@ -1083,7 +1103,7 @@ export var enStrings = {
     headerViewAdvanced: "Advanced",
     coverInheritWidthFrom: "Content area width",
     coverInheritWidthFromSurvey: "Same as survey",
-    coverInheritWidthFromPage: "Fit to page",
+    coverInheritWidthFromContainer: "Fit to container",
     coverTextAreaWidth: "Text width",
     coverBackgroundColorSwitch: "Background color",
     coverBackgroundColorNone: "None",

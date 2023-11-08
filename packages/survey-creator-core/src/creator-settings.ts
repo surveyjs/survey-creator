@@ -28,7 +28,7 @@ export var settings = {
   theme: {
     exportFileName: "survey_theme.json",
     fontFamily: "Open Sans",
-    allowEditHeaderSettings: false,
+    allowEditHeaderSettings: true,
   },
   operators: {
     empty: [],
@@ -74,6 +74,12 @@ export var settings = {
       questionName: true,
       columnName: true,
       choiceValue: true
+    },
+    /**
+     * Set these properties to false if you don't want to update expressions on deleting question
+     */
+    updateExpressionsOnDeleting: {
+      question: true
     }
   },
   /**

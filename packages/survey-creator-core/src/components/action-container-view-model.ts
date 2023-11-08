@@ -81,30 +81,33 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.actionContainer.dotsItem.popupModel.horizontalPosition = "center";
     var actions: Array<Action> = [];
     this.buildActions(actions);
-    this.setSurveyElement(surveyElement);
-    if(this.surveyElement) {
+    this.setSurveyElement(surveyElement, false);
+    if (this.surveyElement) {
       this.creator.sidebar.onPropertyChanged.add(this.sidebarFlyoutModeChangedFunc);
       this.creator.onElementMenuItemsChanged(this.surveyElement, actions);
       this.actionContainer.setItems(actions);
+      this.updateActionsProperties();
     }
     this.setShowAddQuestionButton(true);
   }
 
   protected detachElement(surveyElement: T): void {
-    if(surveyElement) {
+    if (surveyElement) {
       surveyElement.onPropertyChanged.remove(this.selectedPropPageFunc);
     }
   }
   protected attachElement(surveyElement: T): void {
-    if(surveyElement) {
+    if (surveyElement) {
       surveyElement.onPropertyChanged.add(this.selectedPropPageFunc);
     }
   }
-  protected setSurveyElement(surveyElement: T): void {
+  protected setSurveyElement(surveyElement: T, updateActions: boolean = true): void {
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    this.updateActionsProperties();
+    if(updateActions) {
+      this.updateActionsProperties();
+    }
   }
 
   protected checkActionProperties(): void {
@@ -116,7 +119,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   public dispose(): void {
     super.dispose();
     this.detachElement(this.surveyElement);
-    if(!this.actionContainer.isDisposed) {
+    if (!this.actionContainer.isDisposed) {
       this.actionContainer.dispose();
     }
     this.creator.sidebar.onPropertyChanged.remove(this.sidebarFlyoutModeChangedFunc);
@@ -128,7 +131,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.updateActionsProperties();
   }
   protected updateActionsProperties(): void {
-    if(this.isDisposed) return;
+    if (this.isDisposed) return;
     this.updateElementAllowOptions(
       this.creator.getElementAllowOperations(this.surveyElement),
       this.isOperationsAllow()

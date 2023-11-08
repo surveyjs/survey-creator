@@ -37,7 +37,6 @@ export interface ICreatorOptions {
    * Default value: `false`
    */
   showTranslationTab?: boolean;
-  haveCommercialLicense?: boolean;
   /**
    * Specifies whether to call the [`saveSurveyFunc`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions each time survey or theme settings are changed.
    *
@@ -202,7 +201,7 @@ export interface ICreatorOptions {
   maxLogicItemsInCondition?: number;
 
   /**
-   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
    * 
    * Default value: -1 (unlimited)
    */

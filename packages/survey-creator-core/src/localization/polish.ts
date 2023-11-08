@@ -142,7 +142,12 @@ var polishStrings = {
     translationPlaceHolder: "Tłumaczenie...",
     themeExportButton: "Eksport",
     themeImportButton: "Import",
+    surveyJsonExportButton: "Eksport",
+    surveyJsonImportButton: "Import",
+    surveyJsonCopyButton: "Kopiuj do schowka",
     themeResetButton: "Przywracanie domyślnych ustawień motywu",
+    themeResetConfirmation: "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone.",
+    themeResetConfirmationOk: "Tak, zresetuj motyw",
     bold: "Śmiały",
     italic: "Kursywa",
     underline: "Podkreślać",
@@ -658,6 +663,13 @@ var polishStrings = {
     columnsVisibleIf: "Kolumny są widoczne, jeśli",
     rowsVisibleIf: "Wiersze są widoczne, jeśli",
     otherPlaceholder: "Symbol zastępczy obszaru komentarza",
+    signaturepad: {
+      showPlaceholder: "Pokazywanie symbolu zastępczego",
+      placeholder: "Tekst zastępczy"
+    },
+    filePlaceholder: "Tekst zastępczy pliku",
+    photoPlaceholder: "Tekst zastępczy zdjęcia",
+    fileOrPhotoPlaceholder: "Tekst zastępczy pliku lub zdjęcia",
     rateType: "Rodzaj stawki"
   },
   // Property values
@@ -895,7 +907,10 @@ var polishStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\"."
+    keyName: "Jeśli określona kolumna zawiera identyczne wartości, ankieta zgłasza błąd \"Nieunikalna wartość klucza\".",
+    filePlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna",
+    photoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\".",
+    fileOrPhotoPlaceholder: "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ var polishStrings = {
     groupGeneral: "Ogólne",
     groupAdvanced: "Zaawansowany",
     groupHeader: "Nagłówek",
+    groupBackground: "Tło",
+    groupAppearance: "Wygląd",
     themeName: "Kompozycja",
     themeMode: "Wygląd pytania",
     themeModePanels: "Domyślny",
@@ -1019,6 +1036,7 @@ var polishStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Wybrany",
     coverTitleForecolor: "Kolor przedniego tytułu",
+    coverDescriptionForecolor: "Opis przedbarwy",
     coverOverlapEnabled: "Zachodzić na siebie",
     backgroundDimColor: "Kolor tła",
     backgroundImage: "Obraz tła",
@@ -1059,6 +1077,7 @@ var polishStrings = {
     scale: "Skala",
     cornerRadius: "Promień narożnika",
     surveyTitle: "Czcionka tytułu ankiety",
+    surveyDescription: "Czcionka opisu ankiety",
     pageTitle: "Czcionka tytułu strony",
     pageDescription: "Czcionka opisu strony",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ var polishStrings = {
     headerViewAdvanced: "Zaawansowany",
     coverInheritWidthFrom: "Szerokość obszaru zawartości",
     coverInheritWidthFromSurvey: "Tak samo jak ankieta",
-    coverInheritWidthFromPage: "Dopasuj do strony",
+    coverInheritWidthFromContainer: "Pasuje do pojemnika",
     coverTextAreaWidth: "Szerokość tekstu",
     coverBackgroundColorSwitch: "Kolor tła",
     coverBackgroundColorNone: "Żaden",
@@ -1947,3 +1966,30 @@ editorLocalization.locales["pl"] = polishStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Przypisz wartość komórki: {1} do kolumny: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Eksport"
+// ed.surveyJsonImportButton: "Import" => "Import"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiuj do schowka"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tekst zastępczy pliku"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst zastępczy zdjęcia"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst zastępczy pliku lub zdjęcia"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne\" lub gdy kamera jest niedostępna"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Ma zastosowanie, gdy \"Typ źródła\" to \"Pliki lokalne lub kamera\"."
+// theme.groupBackground: "Background" => "Tło"
+// theme.groupAppearance: "Appearance" => "Wygląd"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Tło"
+// theme.groupAppearance: "Appearance" => "Wygląd"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Pokazywanie symbolu zastępczego"
+// signaturepad.placeholder: "Placeholder text" => "Tekst zastępczy"
+// theme.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"

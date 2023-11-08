@@ -142,7 +142,12 @@ export var nlStrings = {
     translationPlaceHolder: "Vertaling...",
     themeExportButton: "Exporteren",
     themeImportButton: "Importeren",
+    surveyJsonExportButton: "Exporteren",
+    surveyJsonImportButton: "Importeren",
+    surveyJsonCopyButton: "Naar klembord kopiëren",
     themeResetButton: "Thema-instellingen terugzetten op de standaardinstellingen",
+    themeResetConfirmation: "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren.",
+    themeResetConfirmationOk: "Ja, reset het thema",
     bold: "Vetgedrukt",
     italic: "Cursief",
     underline: "Onderstrepen",
@@ -658,6 +663,13 @@ export var nlStrings = {
     columnsVisibleIf: "Kolommen zijn zichtbaar als",
     rowsVisibleIf: "Rijen zijn zichtbaar als",
     otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
+    signaturepad: {
+      showPlaceholder: "De tijdelijke aanduiding weergeven",
+      placeholder: "Tijdelijke aanduiding voor tekst"
+    },
+    filePlaceholder: "Tijdelijke tekst voor bestanden",
+    photoPlaceholder: "Tijdelijke tekst voor foto's",
+    fileOrPhotoPlaceholder: "Tijdelijke tekst voor bestanden of foto's",
     rateType: "Type tarief"
   },
   // Property values
@@ -895,7 +907,10 @@ export var nlStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'."
+    keyName: "Als de opgegeven kolom identieke waarden bevat, genereert de enquête de fout 'Niet-unieke sleutelwaarde'.",
+    filePlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is",
+    photoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Camera\" is.",
+    fileOrPhotoPlaceholder: "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var nlStrings = {
     groupGeneral: "Algemeen",
     groupAdvanced: "Geavanceerd",
     groupHeader: "Rubriek",
+    groupBackground: "Achtergrond",
+    groupAppearance: "Uiterlijk",
     themeName: "Thema",
     themeMode: "Uiterlijk van de vraag",
     themeModePanels: "Verstek",
@@ -1019,6 +1036,7 @@ export var nlStrings = {
     primaryDarkColor: "Zweven",
     primaryLightColor: "Uitverkoren",
     coverTitleForecolor: "Voorkleur titel",
+    coverDescriptionForecolor: "Beschrijving voorkleur",
     coverOverlapEnabled: "Overlappen",
     backgroundDimColor: "Achtergrondkleur",
     backgroundImage: "Achtergrondafbeelding",
@@ -1059,6 +1077,7 @@ export var nlStrings = {
     scale: "Schub",
     cornerRadius: "Hoekradius",
     surveyTitle: "Lettertype voor enquêtetitel",
+    surveyDescription: "Lettertype met enquêtebeschrijving",
     pageTitle: "Lettertype voor paginatitel",
     pageDescription: "Lettertype paginabeschrijving",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var nlStrings = {
     headerViewAdvanced: "Geavanceerd",
     coverInheritWidthFrom: "Breedte van het inhoudsgebied",
     coverInheritWidthFromSurvey: "Hetzelfde als enquête",
-    coverInheritWidthFromPage: "Aanpassen aan pagina",
+    coverInheritWidthFromContainer: "Geschikt voor containers",
     coverTextAreaWidth: "Tekstbreedte",
     coverBackgroundColorSwitch: "Achtergrondkleur",
     coverBackgroundColorNone: "Geen",
@@ -1653,3 +1672,30 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Celwaarde: {1} toewijzen aan kolom: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Exporteren"
+// ed.surveyJsonImportButton: "Import" => "Importeren"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Naar klembord kopiëren"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tijdelijke tekst voor bestanden"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tijdelijke tekst voor foto's"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tijdelijke tekst voor bestanden of foto's"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden\" is of wanneer de camera niet beschikbaar is"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Van toepassing wanneer \"Brontype\" \"Camera\" is."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Van toepassing wanneer \"Brontype\" \"Lokale bestanden of camera\" is."
+// theme.groupBackground: "Background" => "Achtergrond"
+// theme.groupAppearance: "Appearance" => "Uiterlijk"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Achtergrond"
+// theme.groupAppearance: "Appearance" => "Uiterlijk"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "De tijdelijke aanduiding weergeven"
+// signaturepad.placeholder: "Placeholder text" => "Tijdelijke aanduiding voor tekst"
+// theme.surveyDescription: "Survey description font" => "Lettertype met enquêtebeschrijving"

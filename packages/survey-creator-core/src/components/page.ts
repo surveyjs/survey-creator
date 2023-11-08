@@ -83,6 +83,9 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
+    if(isSelected && this.creator.pageEditMode === "bypage") {
+      this.setSurveyElement(<PageModel>this.creator.selectedElement);
+    }
     if (isSelected && !!this.onPageSelectedCallback) {
       this.onPageSelectedCallback();
     }
@@ -178,7 +181,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     event["__svc_question_processed"] = true;
   }
 
-  protected duplicate() {
+  protected duplicate(): void {
     var newElement = this.creator.copyPage(this.page);
     this.creator.selectElement(newElement);
   }

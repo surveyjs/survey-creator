@@ -1,11 +1,11 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../creator-settings";
 import { PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
-import { saveToFileHandler } from "../../utils/utils";
+import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 function getObjectDiffs(obj1: any, obj2: any = {}): any {
   const result: any = {};
@@ -29,6 +29,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private prevPageAction: Action;
   private nextPageAction: Action;
   private themeSettingsAction: Action;
+  private saveThemeAction: Action;
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
@@ -37,7 +38,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private inputFileElement: HTMLInputElement;
   private simulatorTheme: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
-  private _availableThemes = PredefinedThemes;
+  private _availableThemes = [].concat(PredefinedThemes);
 
   public model: ThemeBuilder;
 
@@ -78,6 +79,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
+    this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
     this.sidebarTab.model = this.model.themeEditorSurvey;
@@ -113,9 +115,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.model.onThemeSelected.add((sender, options) => {
+      this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
     this.model.onThemeModified.add((sender, options) => {
+      this.saveThemeAction.enabled = true;
       this.onThemeModified.fire(this, options);
     });
     this.model.onCanModifyTheme.add((sender, options) => {
@@ -224,6 +228,24 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     items.push(this.undoAction);
     items.push(this.redoAction);
 
+    this.saveThemeAction = new Action({
+      id: "svd-save",
+      iconName: "icon-save",
+      action: () => {
+        this.creator.doSaveTheme();
+        this.saveThemeAction.enabled = false;
+      },
+      active: false,
+      enabled: false,
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSaveButton);
+      }),
+      locTitleName: "ed.saveTheme",
+      locTooltipName: "ed.saveThemeTooltip",
+      showTitle: false
+    });
+    items.push(this.saveThemeAction);
+
     this.resetTheme = new Action({
       id: "resetTheme",
       iconName: "icon-reset",
@@ -232,7 +254,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       mode: "small",
       visible: this.createVisibleUpdater(),
       action: () => {
-        this.model.resetTheme();
+        surveySettings.confirmActionAsync(getLocString("ed.themeResetConfirmation"), (confirm) => {
+          if (confirm) {
+            this.model.resetTheme();
+          }
+        }, getLocString("ed.themeResetConfirmationOk"));
       }
     });
     items.push(this.resetTheme);
@@ -357,18 +383,27 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
   }
 
-  public addTheme(theme: ITheme): string {
+  public addTheme(theme: ITheme, setAsDefault = false): string {
     const fullThemeName = getThemeFullName(theme);
     Themes[fullThemeName] = theme;
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
-      this.availableThemes = this.availableThemes.concat([theme.themeName]);
+      if (setAsDefault) {
+        this.availableThemes = [theme.themeName].concat(this.availableThemes);
+        ThemeBuilder.DefaultTheme = theme;
+      } else {
+        this.availableThemes = this.availableThemes.concat([theme.themeName]);
+      }
     }
     return fullThemeName;
   }
-  public removeTheme(fullThemeName: string): void {
-    const themeToDelete = Themes[fullThemeName];
+  public removeTheme(themeAccessor: string | ITheme): void {
+    const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
+    const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
       delete Themes[fullThemeName];
+      if (ThemeBuilder.DefaultTheme === themeToDelete) {
+        ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+      }
       const registeredThemeNames = Object.keys(Themes);
       let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
       if (!themeModificationsExist) {
@@ -381,15 +416,35 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     }
   }
+  public getCurrentTheme(content: "full" | "changes" = "full") {
+    if (content === "full") {
+      return this.creator.theme;
+    }
+    return this.getThemeChanges();
+  }
   public getThemeChanges() {
     const fullTheme = this.creator.theme;
     let probeThemeFullName = getThemeFullName(fullTheme);
     const baseTheme = findSuitableTheme(fullTheme.themeName, probeThemeFullName);
     const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
-    themeChanges.themeName = fullTheme.themeName || "default";
+    Object.keys(themeChanges).forEach(propertyName => {
+      if (propertyName.toLowerCase().indexOf("background") !== -1) {
+        if (themeChanges[propertyName] === "" || themeChanges[propertyName] === Serializer.findProperty("survey", propertyName).defaultValue) {
+          delete themeChanges[propertyName];
+        }
+      }
+    });
+    themeChanges.themeName = fullTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
     themeChanges.colorPalette = fullTheme.colorPalette || "light";
     themeChanges.isPanelless = !!fullTheme.isPanelless;
     return themeChanges;
+  }
+  public get isThemePristine(): boolean {
+    const currentThemeChanges = this.getThemeChanges();
+    const hasCssModifications = Object.keys(currentThemeChanges.cssVariables).length > 0;
+    const hasBackgroundModifications = Object.keys(currentThemeChanges).some(propertyName => propertyName.toLowerCase().indexOf("background") !== -1);
+    const hasHeaderModifications = !!currentThemeChanges.header && Object.keys(currentThemeChanges.header).length === 0;
+    return !(hasCssModifications || hasBackgroundModifications || hasHeaderModifications);
   }
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();

@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -11,6 +11,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
+import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 
 require("./theme-builder.scss");
 
@@ -139,12 +140,15 @@ export class ThemeBuilder extends Base {
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
+    this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
+    updateCustomQuestionJSONs();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
     this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
     this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
     this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
+    this.surveyProvider.isThemeModified = false;
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
   }
@@ -170,14 +174,21 @@ export class ThemeBuilder extends Base {
 
       const effectiveThemeCssVariables = {
       };
-      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, this.findSuitableTheme(this.themeName).cssVariables || {});
+      const suitableTheme = this.findSuitableTheme(this.themeName);
+      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, suitableTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
+      this.trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
-        backgroundImage: this.backgroundImage,
-        backgroundImageFit: this.backgroundImageFit,
-        backgroundImageAttachment: this.backgroundImageAttachment,
-        backgroundOpacity: this.backgroundOpacity / 100,
+        backgroundImage: this.backgroundImage || suitableTheme.backgroundImage || "",
+        backgroundImageFit: this.backgroundImageFit || suitableTheme.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment || suitableTheme.backgroundImageAttachment,
+        backgroundOpacity: (this.backgroundOpacity / 100) || suitableTheme.backgroundOpacity,
       };
+      const headerSettings: IHeader = {} as any;
+      assign(headerSettings, suitableTheme.header || {});
+      if (Object.keys(headerSettings).length > 0) {
+        effectiveTheme.header = headerSettings;
+      }
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
 
@@ -196,8 +207,8 @@ export class ThemeBuilder extends Base {
   public setTheme(theme: ITheme) {
     this.themeCssVariablesChanges = {};
     this.backgroundImage = "";
-    this.backgroundImageFit = "";
-    this.backgroundImageAttachment = "";
+    this.backgroundImageFit = "cover";
+    this.backgroundImageAttachment = "scroll";
     this.backgroundOpacity = 100;
     this.loadTheme(theme);
     this.themeModified({ theme });
@@ -408,6 +419,9 @@ export class ThemeBuilder extends Base {
     if (this.themeEditorSurvey) {
       const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
       themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+      if (availebleThemes.indexOf(themeChooser.value) === -1) {
+        themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
+      }
     }
   }
 
@@ -472,9 +486,13 @@ export class ThemeBuilder extends Base {
     if (headerSettings["headerView"] === "basic") {
       this.survey.logoPosition = headerSettings["logoPosition"];
       this.surveyProvider.survey.logoPosition = headerSettings["logoPosition"];
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("surveyDescription"), this.themeCssVariablesChanges);
     } else {
       this.currentTheme.header = this.getCoverJson(headerSettings);
-      this.setCoverCssVariables(headerSettings);
+      this.setHeaderBackgroundColorCssVariable(headerSettings);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
+      fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
     this.themeModified(options);
   }
@@ -574,7 +592,8 @@ export class ThemeBuilder extends Base {
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
-      this.setCssVariablesIntoCurrentTheme(newCssVariables);
+      this.trimCssVariables(newCssVariables);
+      this.currentTheme.cssVariables = newCssVariables;
       this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
@@ -591,6 +610,26 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
+    });
+    themeEditorSurvey.onGetPanelFooterActions.add((sender, opt) => {
+      if(opt.question && opt.question.name == "headerViewContainer") {
+        opt.actions = [];
+      }
+    });
+    themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
+      if(options.panel.hasParent) {
+        const parent = (options.panel.parent ?? options.panel.parentQuestion);
+        if(!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
+          options.cssClasses.panel.container = "spg-panel-group";
+          options.cssClasses.panel.content = "spg-panel-group__content";
+          options.cssClasses.panel.title = "spg-panel-group__title";
+        }
+        else {
+          options.cssClasses.panel.container = "spg-nested-panel";
+          options.cssClasses.panel.content = "spg-nested-panel__content";
+          options.cssClasses.panel.title = "spg-nested-panel__title";
+        }
+      }
     });
     return themeEditorSurvey;
   }
@@ -614,21 +653,14 @@ export class ThemeBuilder extends Base {
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
     return result;
   }
-  private setCoverCssVariables(headerSettings: any) {
-    let coverBackgroundColorValue = "trasparent";
-    if (headerSettings["backgroundColorSwitch"] === "accentColor") {
-      coverBackgroundColorValue = this.currentTheme.cssVariables["--sjs-primary-backcolor"];
+  private setHeaderBackgroundColorCssVariable(headerSettings: any) {
+    let headerBackgroundColorValue = undefined;
+    if (headerSettings["backgroundColorSwitch"] === "none") {
+      headerBackgroundColorValue = "trasparent";
     } else if (headerSettings["backgroundColorSwitch"] === "custom") {
-      coverBackgroundColorValue = headerSettings.backgroundColor;
+      headerBackgroundColorValue = headerSettings.backgroundColor;
     }
-    this.themeCssVariablesChanges["--sjs-cover-backcolor"] = coverBackgroundColorValue;
-
-    if (!!headerSettings["titleForecolor"]) {
-      this.themeCssVariablesChanges["--sjs-cover-title-forecolor"] = headerSettings.titleForecolor;
-    }
-    if (!!headerSettings["descriptionForecolor"]) {
-      this.themeCssVariablesChanges["--sjs-cover-description-forecolor"] = headerSettings.descriptionForecolor;
-    }
+    this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
 
   private loadThemeIntoPropertyGrid() {
@@ -648,8 +680,8 @@ export class ThemeBuilder extends Base {
   }
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
-    if (!backgroundColor) return "none";
-    if (backgroundColor === this.currentTheme.cssVariables["--sjs-primary-backcolor"]) return "accentColor";
+    if (!backgroundColor) return "accentColor";
+    if (backgroundColor === "trasparent") return "none";
     return "custom";
   }
   private updateVisibilityOfPropertyGridGroups() {
@@ -657,7 +689,12 @@ export class ThemeBuilder extends Base {
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
     page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
   }
-  private setCoverPropertiesFromSurvey(panel) {
+  private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
+    panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables);
+    panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables);
+
     panel.getQuestionByName("headerView").value = this.survey.headerView;
     panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
 
@@ -672,7 +709,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-    if (!!question && !!cssVariable) {
+    if (!!question && !!cssVariable && cssVariable !== "trasparent") {
       question.value = cssVariable;
     }
   }
@@ -684,7 +721,16 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
-      this.setCoverPropertiesFromSurvey(panel);
+      this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
+      panel.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
+      panel.getQuestionByName("surveyDescription").readOnly = !this.survey.hasDescription;
+      fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
+
+      fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("surveyDescription"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("headerTitle"), this.themeCssVariablesChanges);
+      fontsettingsFromCssVariable(panel.getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
 
     if (!!this.currentTheme.header) {
@@ -696,21 +742,13 @@ export class ThemeBuilder extends Base {
           question.value = this.currentTheme.header[key];
         }
       });
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("titleForecolor"), themeCssVariables["--sjs-cover-title-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor"]);
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("descriptionForecolor"), themeCssVariables["--sjs-cover-description-forecolor"] || themeCssVariables["--sjs-general-dim-forecolor-light"]);
-      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-cover-backcolor"]);
+      this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
 
-      const backgroundColorValue = themeCssVariables["--sjs-cover-backcolor"];
+      const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
       if (!!backgroundColorValue) {
         panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
       }
     }
-  }
-  private updatePropertyGridEditorAvailablesFromSurveyElement() {
-    let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
-    this.themeEditorSurvey.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
-    this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
-    this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
   }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
@@ -730,17 +768,19 @@ export class ThemeBuilder extends Base {
     });
 
     if (!!this.survey) {
-      this.updatePropertyGridEditorAvailablesFromSurveyElement();
+      let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
+      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
+      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
     }
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
-    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.backgroundImage;
-    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.backgroundImageFit;
-    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.backgroundImageAttachment;
-    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.backgroundOpacity;
+    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.currentTheme.backgroundImage;
+    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.currentTheme.backgroundImageFit;
+    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
+    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
     themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
@@ -748,7 +788,6 @@ export class ThemeBuilder extends Base {
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor-dim-light"], newCssVariables["--sjs-general-backcolor-dim-dark"]);
 
-    fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("surveyTitle"), newCssVariables);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageTitle"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("pageDescription"), newCssVariables, newCssVariables["--sjs-general-dim-forecolor-light"]);
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionTitle"), newCssVariables, newCssVariables["--sjs-general-forecolor"]);
@@ -772,13 +811,12 @@ export class ThemeBuilder extends Base {
     });
   }
 
-  private setCssVariablesIntoCurrentTheme(newCssVariables: { [index: string]: string }) {
+  private trimCssVariables(newCssVariables: { [index: string]: string }): void {
     Object.keys(newCssVariables).forEach(key => {
       if (newCssVariables[key] === undefined || newCssVariables[key] === null) {
         delete newCssVariables[key];
       }
     });
-    this.currentTheme.cssVariables = newCssVariables;
   }
 
   private updateSimulatorTheme() {
@@ -792,7 +830,7 @@ export class ThemeBuilder extends Base {
   /**
    * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    */
   public get saveThemeFunc() {
     return this._saveThemeFuncValue;
@@ -829,12 +867,28 @@ export class ThemeBuilder extends Base {
       if (!!options["theme"]) {
         this.onThemeSelected.fire(this, options as { theme: ITheme });
       } else {
+        this.surveyProvider.isThemeModified = true;
         this.onThemeModified.fire(this, options as { name: string, value: any });
       }
     }
     if (this.surveyProvider.isAutoSave) {
       this.processAutoSave();
     }
+  }
+
+  private getDefaultTitleSetting(isAdvanced?: boolean) {
+    const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
+    if (isAdvanced) {
+      result["color"] = "rgba(0, 0, 0, 0.91)";
+    }
+    return result;
+  }
+  private getDefaultDescriptionSetting(isAdvanced?: boolean) {
+    const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
+    if (isAdvanced) {
+      result["color"] = "rgba(0, 0, 0, 0.45)";
+    }
+    return result;
   }
 
   private getThemeEditorSurveyJSON() {
@@ -851,23 +905,28 @@ export class ThemeBuilder extends Base {
             type: "panel",
             elements: [
               {
-                type: "dropdown",
-                name: "themeName",
-                title: getLocString("theme.themeName"),
-                descriptionLocation: "hidden",
-                choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-                defaultValue: "default",
-                allowClear: false
-              },
-              {
-                type: "buttongroup",
-                name: "themePalette",
-                titleLocation: "hidden",
-                choices: [
-                  { value: "light", text: getLocString("theme.themePaletteLight") },
-                  { value: "dark", text: getLocString("theme.themePaletteDark") }
-                ],
-                defaultValue: "light"
+                type: "panel",
+                elements: [
+                  {
+                    type: "dropdown",
+                    name: "themeName",
+                    title: getLocString("theme.themeName"),
+                    descriptionLocation: "hidden",
+                    choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+                    defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
+                    allowClear: false
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "themePalette",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "light", text: getLocString("theme.themePaletteLight") },
+                      { value: "dark", text: getLocString("theme.themePaletteDark") }
+                    ],
+                    defaultValue: "light"
+                  },
+                ]
               },
               {
                 type: "buttongroup",
@@ -902,7 +961,7 @@ export class ThemeBuilder extends Base {
                     "headerView": "basic",
                     "logoPosition": "right",
                     "inheritWidthFrom": "survey",
-                    "backgroundColorSwitch": "none",
+                    "backgroundColorSwitch": "accentColor",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,
                     "overlapEnabled": false,
@@ -913,7 +972,11 @@ export class ThemeBuilder extends Base {
                     "descriptionPositionX": "left",
                     "descriptionPositionY": "bottom",
                     "textAreaWidth": 512,
-                    "height": 256
+                    "height": 256,
+                    surveyTitle: this.getDefaultTitleSetting(),
+                    surveyDescription: this.getDefaultDescriptionSetting(),
+                    headerTitle: this.getDefaultTitleSetting(true),
+                    headerDescription: this.getDefaultDescriptionSetting(true)
                   }
                 ],
                 "templateElements": [
@@ -941,6 +1004,22 @@ export class ThemeBuilder extends Base {
                         ],
                       },
                       {
+                        type: "fontSettings",
+                        name: "surveyTitle",
+                        title: getLocString("theme.surveyTitle"),
+                        visibleIf: "{panel.headerView} = 'basic'",
+                        descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultTitleSetting(),
+                      },
+                      {
+                        type: "fontSettings",
+                        name: "surveyDescription",
+                        title: getLocString("theme.surveyDescription"),
+                        visibleIf: "{panel.headerView} = 'basic'",
+                        descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultDescriptionSetting()
+                      },
+                      {
                         type: "spinedit",
                         name: "height",
                         title: getLocString("p.height"),
@@ -955,7 +1034,7 @@ export class ThemeBuilder extends Base {
                         title: getLocString("theme.coverInheritWidthFrom"),
                         choices: [
                           { value: "survey", text: getLocString("theme.coverInheritWidthFromSurvey") },
-                          { value: "page", text: getLocString("theme.coverInheritWidthFromPage") }
+                          { value: "container", text: getLocString("theme.coverInheritWidthFromContainer") }
                         ],
                         visibleIf: "{panel.headerView} = 'advanced'",
                       },
@@ -975,21 +1054,26 @@ export class ThemeBuilder extends Base {
                     visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
                       {
-                        type: "buttongroup",
-                        name: "backgroundColorSwitch",
-                        title: getLocString("theme.coverBackgroundColorSwitch"),
-                        choices: [
-                          { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
-                          { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
-                          { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
-                        ],
-                      },
-                      {
-                        type: "color",
-                        name: "backgroundColor",
-                        enableIf: "{panel.backgroundColorSwitch} = 'custom'",
-                        titleLocation: "hidden",
-                        descriptionLocation: "hidden",
+                        type: "panel",
+                        elements: [
+                          {
+                            type: "buttongroup",
+                            name: "backgroundColorSwitch",
+                            title: getLocString("theme.coverBackgroundColorSwitch"),
+                            choices: [
+                              { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
+                              { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
+                              { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
+                            ],
+                          },
+                          {
+                            type: "color",
+                            name: "backgroundColor",
+                            enableIf: "{panel.backgroundColorSwitch} = 'custom'",
+                            titleLocation: "hidden",
+                            descriptionLocation: "hidden",
+                          },
+                        ]
                       },
                       {
                         type: "panel",
@@ -1030,16 +1114,18 @@ export class ThemeBuilder extends Base {
                         ]
                       },
                       {
-                        type: "color",
-                        name: "titleForecolor",
-                        title: getLocString("theme.coverTitleForecolor"),
+                        type: "fontSettings",
+                        name: "headerTitle",
+                        title: getLocString("theme.surveyTitle"),
                         descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultTitleSetting(true)
                       },
                       {
-                        type: "colorsettings",
-                        name: "descriptionForecolor",
-                        title: getLocString("theme.coverDescriptionForecolor"),
+                        type: "fontSettings",
+                        name: "headerDescription",
+                        title: getLocString("theme.surveyDescription"),
                         descriptionLocation: "hidden",
+                        defaultValue: this.getDefaultDescriptionSetting(true)
                       },
                       {
                         type: "boolean",
@@ -1055,12 +1141,27 @@ export class ThemeBuilder extends Base {
                     questionTitleLocation: "top",
                     visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
-                      this.getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
-                      this.getVerticalAlignment("logoPositionY", "top"),
-                      this.getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
-                      this.getVerticalAlignment("titlePositionY", "bottom"),
-                      this.getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
-                      this.getVerticalAlignment("descriptionPositionY", "bottom"),
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
+                          this.getVerticalAlignment("logoPositionY", "top"),
+                        ]
+                      },
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
+                          this.getVerticalAlignment("titlePositionY", "bottom"),
+                        ]
+                      },
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
+                          this.getVerticalAlignment("descriptionPositionY", "bottom"),
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -1180,7 +1281,7 @@ export class ThemeBuilder extends Base {
             elements: [
               {
                 type: "dropdown",
-                name: "--font-family",
+                name: "--sjs-font-family",
                 title: getLocString("theme.fontFamily"),
                 descriptionLocation: "hidden",
                 choices: [].concat(DefaultFonts),
@@ -1292,16 +1393,6 @@ export class ThemeBuilder extends Base {
             type: "panel",
             elements: [
               {
-                type: "fontSettings",
-                name: "surveyTitle",
-                title: getLocString("theme.surveyTitle"),
-                descriptionLocation: "hidden",
-                defaultValue: {
-                  family: settings.theme.fontFamily,
-                  weight: "700",
-                  size: 32
-                }
-              }, {
                 type: "fontSettings",
                 name: "pageTitle",
                 title: getLocString("theme.pageTitle"),

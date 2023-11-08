@@ -21,7 +21,7 @@ import {
   QuestionCompositeModel,
   QuestionCustomModel,
   PageModel,
-  ComputedUpdater
+  ComputedUpdater,
 } from "survey-core";
 import { PageAdorner } from "../src/components/page";
 import { QuestionAdornerViewModel } from "../src/components/question";
@@ -926,6 +926,20 @@ test("fast copy tests, copy a question and check the index", (): any => {
   creator.JSON = {
     elements: [
       { type: "text", name: "question1" },
+      { type: "text", name: "question2", startWithNewLine: false },
+      { type: "text", name: "question3" }
+    ]
+  };
+  creator.fastCopyQuestion(creator.survey.getQuestionByName("question1"));
+  expect(creator.survey.pages[0].questions).toHaveLength(4);
+  const question = creator.survey.getQuestionByName("question4");
+  expect(question.startWithNewLine).toBeFalsy();
+});
+test("fast copy tests, copy a question and check the index", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "question1" },
       { type: "text", name: "question2" },
       { type: "text", name: "question3" }
     ]
@@ -1283,6 +1297,15 @@ test("Question type selector localization", (): any => {
   expect(creator.addNewQuestionText).toEqual("Add New Rating Scale");
   locStrings.ed.addNewQuestion = oldAddNewQuestion;
   locStrings.ed.addNewTypeQuestion = oldAddNewTypeQuestion;
+});
+
+test("Question type selector popup displayMode", (): any => {
+  let creator = new CreatorTester();
+  let selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.popupModel.displayMode).toBe("popup");
+  creator.isTouch = true;
+  selectorModel = creator.getQuestionTypeSelectorModel(() => { });
+  expect(selectorModel.popupModel.displayMode).toBe("overlay");
 });
 
 test("Add question with default choices", (): any => {
@@ -3366,8 +3389,7 @@ test("Test options, setting some of them can generate errors", () => {
     showPagesToolbox: true,
     allowControlSurveyTitleVisibility: false,
     showState: true,
-    showTitle: true,
-    haveCommercialLicense: true
+    showTitle: true
   };
   const creator = new CreatorTester(options);
   expect(creator.sidebar.visible).toBeTruthy();
@@ -3963,4 +3985,37 @@ test("onElementDeleting: options.elementType contains cryptic numbers #4740", ()
     expect(options.elementType).toBe("question");
   });
   creator.deleteElement(creator.survey.getAllQuestions()[0]);
+});
+test("Creator bypage edit mode & onElementAllowOperations", (): any => {
+  const creator = new CreatorTester();
+  creator.pageEditMode = "bypage";
+  creator.onElementAllowOperations.add(function (creator, options) {
+    var obj = options.obj;
+    if (!obj) return;
+    if (obj.getType() == "page") {
+      options.allowDelete = creator.survey.pages.indexOf(obj) % 2 === 1;
+    }
+  });
+  creator.JSON = {
+    pages: [
+      { elements: [{ type: "text", name: "question1" }] },
+      { elements: [{ type: "text", name: "question2" }] },
+      { elements: [{ type: "text", name: "question3" }] },
+      { elements: [{ type: "text", name: "question4" }] }
+    ]
+  };
+  const pages = creator.survey.pages;
+
+  expect(pages).toHaveLength(4);
+  let pageAdorner = new PageAdorner(creator, creator.survey.pages[0]);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeFalsy();
+  creator.selectElement(creator.survey.pages[1]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
+  creator.selectElement(creator.survey.pages[2]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeFalsy();
+  creator.selectElement(creator.survey.pages[3]);
+  pageAdorner["onElementSelectedChanged"](true);
+  expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
 });

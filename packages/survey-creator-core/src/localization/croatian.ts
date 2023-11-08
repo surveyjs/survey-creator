@@ -142,7 +142,12 @@ export var hrStrings = {
     translationPlaceHolder: "Prevođenje...",
     themeExportButton: "Izvoz",
     themeImportButton: "Uvoz",
+    surveyJsonExportButton: "Izvoz",
+    surveyJsonImportButton: "Uvoz",
+    surveyJsonCopyButton: "Kopiraj u međuspremnik",
     themeResetButton: "Vraćanje zadanih postavki teme na zadano",
+    themeResetConfirmation: "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene.",
+    themeResetConfirmationOk: "Da, resetirajte temu",
     bold: "podebljano",
     italic: "kurziv",
     underline: "podcrtavanje",
@@ -658,6 +663,13 @@ export var hrStrings = {
     columnsVisibleIf: "Stupci su vidljivi ako",
     rowsVisibleIf: "Reci su vidljivi ako",
     otherPlaceholder: "Rezervirano mjesto područja komentara",
+    signaturepad: {
+      showPlaceholder: "Pokaži rezervirano mjesto",
+      placeholder: "Tekst rezerviranog mjesta"
+    },
+    filePlaceholder: "Tekst rezerviranog mjesta datoteke",
+    photoPlaceholder: "Tekst rezerviranog mjesta za fotografije",
+    fileOrPhotoPlaceholder: "Tekst rezerviranog mjesta za datoteku ili fotografiju",
     rateType: "Vrsta stope"
   },
   // Property values
@@ -895,7 +907,10 @@ export var hrStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\"."
+    keyName: "Ako navedeni stupac sadrži identične vrijednosti, anketa odbacuje pogrešku \"Nejedinstvena vrijednost ključa\".",
+    filePlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna",
+    photoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\".",
+    fileOrPhotoPlaceholder: "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var hrStrings = {
     groupGeneral: "Općenito",
     groupAdvanced: "Napredan",
     groupHeader: "Zaglavlje",
+    groupBackground: "Pozadina",
+    groupAppearance: "Izgled",
     themeName: "Tema",
     themeMode: "Izgled pitanja",
     themeModePanels: "Propust",
@@ -1019,6 +1036,7 @@ export var hrStrings = {
     primaryDarkColor: "Lebdjeti",
     primaryLightColor: "Odabrani",
     coverTitleForecolor: "Naslovna prednja strana",
+    coverDescriptionForecolor: "Opis prednje boje",
     coverOverlapEnabled: "Preklapanje",
     backgroundDimColor: "Boja pozadine",
     backgroundImage: "Pozadinska slika",
@@ -1059,6 +1077,7 @@ export var hrStrings = {
     scale: "Vaga",
     cornerRadius: "Kutni radijus",
     surveyTitle: "Font naslova upitnika",
+    surveyDescription: "Font opisa upitnika",
     pageTitle: "Font naslova stranice",
     pageDescription: "Font opisa stranice",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var hrStrings = {
     headerViewAdvanced: "Napredan",
     coverInheritWidthFrom: "Širina područja sadržaja",
     coverInheritWidthFromSurvey: "Isto kao i anketa",
-    coverInheritWidthFromPage: "Prilagodi stranici",
+    coverInheritWidthFromContainer: "Prilagodi spremniku",
     coverTextAreaWidth: "Širina teksta",
     coverBackgroundColorSwitch: "Boja pozadine",
     coverBackgroundColorNone: "Nijedan",
@@ -1667,3 +1686,30 @@ editorLocalization.locales["hr"] = hrStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Dodijeli vrijednost ćelije: {1} stupcu: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Izvoz"
+// ed.surveyJsonImportButton: "Import" => "Uvoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiraj u međuspremnik"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tekst rezerviranog mjesta datoteke"
+// pe.photoPlaceholder: "Photo placeholder text" => "Tekst rezerviranog mjesta za fotografije"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst rezerviranog mjesta za datoteku ili fotografiju"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke\" ili kada kamera nije dostupna"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Primjenjuje se kada je \"Vrsta izvora\" \"Lokalne datoteke ili kamera\"."
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Želite li zaista resetirati temu? Sve prilagodbe bit će izgubljene."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Da, resetirajte temu"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Pozadina"
+// theme.groupAppearance: "Appearance" => "Izgled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Opis prednje boje"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Prilagodi spremniku"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Pokaži rezervirano mjesto"
+// signaturepad.placeholder: "Placeholder text" => "Tekst rezerviranog mjesta"
+// theme.surveyDescription: "Survey description font" => "Font opisa upitnika"

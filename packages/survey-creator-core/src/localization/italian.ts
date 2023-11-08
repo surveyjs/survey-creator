@@ -142,7 +142,12 @@ var italianTranslation = {
     translationPlaceHolder: "Traduzione...",
     themeExportButton: "Esportazione",
     themeImportButton: "Importazione",
+    surveyJsonExportButton: "Esportazione",
+    surveyJsonImportButton: "Importazione",
+    surveyJsonCopyButton: "Copia negli Appunti",
     themeResetButton: "Ripristina le impostazioni del tema predefinite",
+    themeResetConfirmation: "Vuoi davvero resettare il tema? Tutte le tue personalizzazioni andranno perse.",
+    themeResetConfirmationOk: "Sì, reimposta il tema",
     bold: "Grassetto",
     italic: "Corsivo",
     underline: "Sottolineato",
@@ -658,6 +663,13 @@ var italianTranslation = {
     columnsVisibleIf: "Colonne visibili se",
     rowsVisibleIf: "Righe visibili se",
     otherPlaceholder: "Testo segnaposto area commenti",
+    signaturepad: {
+      showPlaceholder: "Visualizzare il segnaposto",
+      placeholder: "Testo segnaposto"
+    },
+    filePlaceholder: "Testo segnaposto del file",
+    photoPlaceholder: "Testo segnaposto foto",
+    fileOrPhotoPlaceholder: "Testo segnaposto per file o foto",
     rateType: "Tipo di tariffa"
   },
   // Property values
@@ -895,7 +907,10 @@ var italianTranslation = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Se la colonna specificata contiene valori identici, il sondaggio produce l'errore \"Valore chiave non univoco\"."
+    keyName: "Se la colonna specificata contiene valori identici, il sondaggio produce l'errore \"Valore chiave non univoco\".",
+    filePlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile",
+    photoPlaceholder: "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\".",
+    fileOrPhotoPlaceholder: "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ var italianTranslation = {
     groupGeneral: "Generale",
     groupAdvanced: "Avanzato",
     groupHeader: "Intestazione",
+    groupBackground: "Sfondo",
+    groupAppearance: "Apparenza",
     themeName: "Tema",
     themeMode: "Aspetto della domanda",
     themeModePanels: "Default",
@@ -1019,6 +1036,7 @@ var italianTranslation = {
     primaryDarkColor: "Fluttuare",
     primaryLightColor: "Selezionato",
     coverTitleForecolor: "Precolore del titolo",
+    coverDescriptionForecolor: "Descrizione forecolor",
     coverOverlapEnabled: "Sovrapposizione",
     backgroundDimColor: "Colore di sfondo",
     backgroundImage: "Immagine di sfondo",
@@ -1059,6 +1077,7 @@ var italianTranslation = {
     scale: "Scala",
     cornerRadius: "Raggio d'angolo",
     surveyTitle: "Carattere del titolo del sondaggio",
+    surveyDescription: "Carattere della descrizione dell'indagine",
     pageTitle: "Carattere del titolo della pagina",
     pageDescription: "Carattere della descrizione della pagina",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ var italianTranslation = {
     headerViewAdvanced: "Avanzato",
     coverInheritWidthFrom: "Larghezza dell'area di contenuto",
     coverInheritWidthFromSurvey: "Come il sondaggio",
-    coverInheritWidthFromPage: "Adatta alla pagina",
+    coverInheritWidthFromContainer: "Adatto al contenitore",
     coverTextAreaWidth: "Larghezza del testo",
     coverBackgroundColorSwitch: "Colore di sfondo",
     coverBackgroundColorNone: "Nessuno",
@@ -1417,3 +1436,24 @@ editorLocalization.locales["it"] = italianTranslation;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Assegna valore: {1} alla domanda: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Reimposta il valore della cella per la colonna: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Assegna valore cella: {1} alla colonna: {0}"
+// ed.surveyJsonExportButton: "Export" => "Esportazione"
+// ed.surveyJsonImportButton: "Import" => "Importazione"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Copia negli Appunti"
+// pe.filePlaceholder: "File placeholder text" => "Testo segnaposto del file"
+// pe.photoPlaceholder: "Photo placeholder text" => "Testo segnaposto foto"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Testo segnaposto per file o foto"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Si applica quando \"Tipo di origine\" è \"File locali\" o quando la fotocamera non è disponibile"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Si applica quando \"Tipo di sorgente\" è \"Fotocamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Si applica quando \"Tipo di origine\" è \"File locali o fotocamera\"."
+// theme.groupBackground: "Background" => "Sfondo"
+// theme.groupAppearance: "Appearance" => "Apparenza"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vuoi davvero resettare il tema? Tutte le tue personalizzazioni andranno perse."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sì, reimposta il tema"
+// theme.groupBackground: "Background" => "Sfondo"
+// theme.groupAppearance: "Appearance" => "Apparenza"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Descrizione forecolor"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Adatto al contenitore"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Visualizzare il segnaposto"
+// signaturepad.placeholder: "Placeholder text" => "Testo segnaposto"
+// theme.surveyDescription: "Survey description font" => "Carattere della descrizione dell'indagine"

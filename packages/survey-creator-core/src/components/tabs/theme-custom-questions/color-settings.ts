@@ -1,11 +1,8 @@
 import { ComponentCollection, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 import { ingectAlpha, parseColor, parseRgbaFromString } from "../../../utils/utils";
-
-ComponentCollection.Instance.add({
-  name: "colorsettings",
-  showInToolbox: false,
-  elementsJSON: [
+function getElementsJSON() {
+  return [
     {
       name: "color",
       type: "color",
@@ -21,7 +18,13 @@ ComponentCollection.Instance.add({
       unit: "%",
       titleLocation: "left"
     }
-  ],
+  ];
+}
+
+ComponentCollection.Instance.add({
+  name: "colorsettings",
+  showInToolbox: false,
+  elementsJSON: getElementsJSON(),
   onInit() {
     Serializer.addProperties("colorsettings", [{
       name: "choices:itemvalue[]",
@@ -53,6 +56,11 @@ ComponentCollection.Instance.add({
     question.contentPanel.questions.forEach(q => q.allowRootStyle = false);
   }
 });
+
+export function updateColorSettingsJSON() {
+  const config = ComponentCollection.Instance.getCustomQuestionByName("colorsettings");
+  config.json.elementsJSON = getElementsJSON();
+}
 
 function syncPropertiesFromCompositeToColor(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[0];

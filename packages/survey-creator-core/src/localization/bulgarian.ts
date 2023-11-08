@@ -142,7 +142,12 @@ export var bgStrings = {
     translationPlaceHolder: "Превод...",
     themeExportButton: "Износ",
     themeImportButton: "Внос",
+    surveyJsonExportButton: "Износ",
+    surveyJsonImportButton: "Внос",
+    surveyJsonCopyButton: "Копиране в системния буфер",
     themeResetButton: "Връщане на настройките на тема в начално състояние по подразбиране",
+    themeResetConfirmation: "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени.",
+    themeResetConfirmationOk: "Да, нулирайте темата",
     bold: "Удебелен",
     italic: "Курсив",
     underline: "Подчертан",
@@ -658,6 +663,13 @@ export var bgStrings = {
     columnsVisibleIf: "Колоните се виждат, ако",
     rowsVisibleIf: "Редовете се виждат, ако",
     otherPlaceholder: "Заместител на областта за коментари",
+    signaturepad: {
+      showPlaceholder: "Показване на контейнера",
+      placeholder: "Текст в контейнер"
+    },
+    filePlaceholder: "Текст в контейнер за файл",
+    photoPlaceholder: "Текст в контейнер за снимка",
+    fileOrPhotoPlaceholder: "Текст в контейнер за файл или снимка",
     rateType: "Тип на тарифата"
   },
   // Property values
@@ -895,7 +907,10 @@ export var bgStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка."
+    keyName: "Ако указаната колона съдържа идентични стойности, анкетата отговаря с \"Неуникална стойност на ключ\" грешка.",
+    filePlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична",
+    photoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Камера\".",
+    fileOrPhotoPlaceholder: "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var bgStrings = {
     groupGeneral: "Общ",
     groupAdvanced: "Разширен",
     groupHeader: "Заглавка",
+    groupBackground: "Фон",
+    groupAppearance: "Външен вид",
     themeName: "Тема",
     themeMode: "Режими",
     themeModePanels: "Панели",
@@ -1019,6 +1036,7 @@ export var bgStrings = {
     primaryDarkColor: "Върху",
     primaryLightColor: "Селектиран",
     coverTitleForecolor: "Цвят на предния план на заглавието",
+    coverDescriptionForecolor: "Описание цвят на предния цвят",
     coverOverlapEnabled: "Припокриване",
     backgroundDimColor: "Цвят на фона",
     backgroundImage: "Фоново изображение",
@@ -1059,6 +1077,7 @@ export var bgStrings = {
     scale: "Мащаб",
     cornerRadius: "Радиус на ъгъла",
     surveyTitle: "Шрифт на заглавието на анкетата",
+    surveyDescription: "Шрифт за описание на проучването",
     pageTitle: "Шрифт на заглавието на страницата",
     pageDescription: "Page Description Font",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var bgStrings = {
     headerViewAdvanced: "Напреднал",
     coverInheritWidthFrom: "Ширина на областта на съдържанието",
     coverInheritWidthFromSurvey: "Същото като проучването",
-    coverInheritWidthFromPage: "Побери в страницата",
+    coverInheritWidthFromContainer: "Побиране в контейнера",
     coverTextAreaWidth: "Ширина на текста",
     coverBackgroundColorSwitch: "Цвят на фона",
     coverBackgroundColorNone: "Никой",
@@ -1221,3 +1240,24 @@ editorLocalization.locales["bg"] = bgStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "присвояване на стойност: {1} на въпрос: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Нулиране на стойността на клетката за колона: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвояване на стойност на клетка: {1} на колона: {0}"
+// ed.surveyJsonExportButton: "Export" => "Износ"
+// ed.surveyJsonImportButton: "Import" => "Внос"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Копиране в системния буфер"
+// pe.filePlaceholder: "File placeholder text" => "Текст в контейнер за файл"
+// pe.photoPlaceholder: "Photo placeholder text" => "Текст в контейнер за снимка"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Текст в контейнер за файл или снимка"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Прилага се, когато \"Тип източник\" е \"Локални файлове\" или когато камерата не е налична"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Прилага се, когато \"Тип източник\" е \"Камера\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Прилага се, когато \"Тип източник\" е \"Локални файлове или камера\"."
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Външен вид"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Наистина ли искате да нулирате темата? Всички ваши персонализации ще бъдат загубени."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, нулирайте темата"
+// theme.groupBackground: "Background" => "Фон"
+// theme.groupAppearance: "Appearance" => "Външен вид"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Описание цвят на предния цвят"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Побиране в контейнера"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Показване на контейнера"
+// signaturepad.placeholder: "Placeholder text" => "Текст в контейнер"
+// theme.surveyDescription: "Survey description font" => "Шрифт за описание на проучването"

@@ -142,7 +142,12 @@ export var czStrings = {
     translationPlaceHolder: "Překlad...",
     themeExportButton: "Vývoz",
     themeImportButton: "Dovoz",
+    surveyJsonExportButton: "Vývoz",
+    surveyJsonImportButton: "Dovoz",
+    surveyJsonCopyButton: "Zkopírovat do schránky",
     themeResetButton: "Obnovení výchozího nastavení motivu",
+    themeResetConfirmation: "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena.",
+    themeResetConfirmationOk: "Ano, resetovat motiv",
     bold: "Tučně",
     italic: "Kurzíva",
     underline: "Podtržení",
@@ -658,6 +663,13 @@ export var czStrings = {
     columnsVisibleIf: "Sloupce jsou viditelné, pokud",
     rowsVisibleIf: "Řádky jsou viditelné, pokud",
     otherPlaceholder: "Zástupný text komentáře",
+    signaturepad: {
+      showPlaceholder: "Zobrazení zástupného symbolu",
+      placeholder: "Zástupný text"
+    },
+    filePlaceholder: "Text zástupného symbolu souboru",
+    photoPlaceholder: "Text zástupného symbolu fotografie",
+    fileOrPhotoPlaceholder: "Zástupný text souboru nebo fotografie",
     rateType: "Typ sazby"
   },
   // Property values
@@ -895,7 +907,10 @@ export var czStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“."
+    keyName: "Pokud zadaný sloupec obsahuje totožné hodnoty, průzkum vyhodí chybu „Klíč není unikátní“.",
+    filePlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná",
+    photoPlaceholder: "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\".",
+    fileOrPhotoPlaceholder: "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var czStrings = {
     groupGeneral: "Obecné",
     groupAdvanced: "Pokročilé",
     groupHeader: "Záhlaví",
+    groupBackground: "Pozadí",
+    groupAppearance: "Vzhled",
     themeName: "Motivy",
     themeMode: "Režimy",
     themeModePanels: "Panely",
@@ -1019,6 +1036,7 @@ export var czStrings = {
     primaryDarkColor: "Hover",
     primaryLightColor: "Vybraný",
     coverTitleForecolor: "Nadpis křestní barvy",
+    coverDescriptionForecolor: "Popis předbarvení",
     coverOverlapEnabled: "Překrytí",
     backgroundDimColor: "Barva pozadí",
     backgroundImage: "Obrázek na pozadí",
@@ -1059,6 +1077,7 @@ export var czStrings = {
     scale: "Škála",
     cornerRadius: "Poloměr rohu",
     surveyTitle: "Font nadpisu průzkumu",
+    surveyDescription: "Písmo popisu průzkumu",
     pageTitle: "Font nadpisu stránky",
     pageDescription: "Font popisu stránky",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var czStrings = {
     headerViewAdvanced: "Pokročilý",
     coverInheritWidthFrom: "Šířka oblasti obsahu",
     coverInheritWidthFromSurvey: "Stejné jako průzkum",
-    coverInheritWidthFromPage: "Přizpůsobit stránce",
+    coverInheritWidthFromContainer: "Vhodné pro kontejner",
     coverTextAreaWidth: "Šířka textu",
     coverBackgroundColorSwitch: "Barva pozadí",
     coverBackgroundColorNone: "Žádný",
@@ -1224,3 +1243,25 @@ editorLocalization.locales["cs"] = czStrings;
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Přiřaďte hodnotu buňky: {1} sloupci: {0}"
+// ed.surveyJsonExportButton: "Export" => "Vývoz"
+// ed.surveyJsonImportButton: "Import" => "Dovoz"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Zkopírovat do schránky"
+// pe.filePlaceholder: "File placeholder text" => "Text zástupného symbolu souboru"
+// pe.photoPlaceholder: "Photo placeholder text" => "Text zástupného symbolu fotografie"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Zástupný text souboru nebo fotografie"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Platí, když je \"Typ zdroje\" nastaven na \"Místní soubory\" nebo když je kamera nedostupná"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Platí, když je \"Typ zdroje\" nastaven na \"Fotoaparát\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Platí, když \"Typ zdroje\" je \"Místní soubory nebo kamera\"."
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Opravdu chcete resetovat motiv? Všechna vaše přizpůsobení budou ztracena."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ano, resetovat motiv"
+// theme.groupBackground: "Background" => "Pozadí"
+// theme.groupAppearance: "Appearance" => "Vzhled"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Popis předbarvení"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Vhodné pro kontejner"
+// signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
+// signaturepad.placeholder: "Placeholder text" => "Zástupný text"
+// theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
+

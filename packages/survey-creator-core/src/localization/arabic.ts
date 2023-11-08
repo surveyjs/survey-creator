@@ -142,7 +142,12 @@ export var arStrings = {
     translationPlaceHolder: "Translation...",
     themeExportButton: "تصدير",
     themeImportButton: "استورد",
+    surveyJsonExportButton: "تصدير",
+    surveyJsonImportButton: "استورد",
+    surveyJsonCopyButton: "نسخ إلى الحافظة",
     themeResetButton: "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي",
+    themeResetConfirmation: "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك.",
+    themeResetConfirmationOk: "نعم ، إعادة تعيين السمة",
     bold: "Bold",
     italic: "Italic",
     underline: "Underline",
@@ -658,6 +663,13 @@ export var arStrings = {
     columnsVisibleIf: "تكون الأعمدة مرئية إذا",
     rowsVisibleIf: "تكون الصفوف مرئية إذا",
     otherPlaceholder: "العنصر النائب لمنطقة التعليق",
+    signaturepad: {
+      showPlaceholder: "إظهار العنصر النائب",
+      placeholder: "نص العنصر النائب"
+    },
+    filePlaceholder: "نص العنصر النائب للملف",
+    photoPlaceholder: "نص العنصر النائب للصورة",
+    fileOrPhotoPlaceholder: "نص العنصر النائب للملف أو الصورة",
     rateType: "نوع السعر"
   },
   // Property values
@@ -895,7 +907,10 @@ export var arStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\"."
+    keyName: "إذا كان العمود المحدد يحتوي على قيم متطابقة ، فإن الاستطلاع يلقي الخطأ \"قيمة مفتاح غير فريدة\".",
+    filePlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة",
+    photoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\".",
+    fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var arStrings = {
     groupGeneral: "عام",
     groupAdvanced: "متقدم",
     groupHeader: "راس",
+    groupBackground: "خلفية",
+    groupAppearance: "مظهر",
     themeName: "موضوع",
     themeMode: "مظهر السؤال",
     themeModePanels: "افتراضي",
@@ -1019,6 +1036,7 @@ export var arStrings = {
     primaryDarkColor: "حم",
     primaryLightColor: "المحدد",
     coverTitleForecolor: "اللون الأمامي للعنوان",
+    coverDescriptionForecolor: "وصف التلوين الأمامي",
     coverOverlapEnabled: "التداخل",
     backgroundDimColor: "لون الخلفية",
     backgroundImage: "صورة الخلفية",
@@ -1059,6 +1077,7 @@ export var arStrings = {
     scale: "مِيزَان",
     cornerRadius: "نصف قطر الزاوية",
     surveyTitle: "خط عنوان الاستطلاع",
+    surveyDescription: "خط وصف الاستطلاع",
     pageTitle: "خط عنوان الصفحة",
     pageDescription: "خط وصف الصفحة",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var arStrings = {
     headerViewAdvanced: "متقدم",
     coverInheritWidthFrom: "عرض منطقة المحتوى",
     coverInheritWidthFromSurvey: "نفس المسح",
-    coverInheritWidthFromPage: "ملائمة للصفحة",
+    coverInheritWidthFromContainer: "يصلح للحاوية",
     coverTextAreaWidth: "عرض النص",
     coverBackgroundColorSwitch: "لون الخلفية",
     coverBackgroundColorNone: "اي",
@@ -1584,3 +1603,30 @@ editorLocalization.locales["ar"] = arStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "تعيين قيمة الخلية: {1} إلى العمود: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "تصدير"
+// ed.surveyJsonImportButton: "Import" => "استورد"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "نسخ إلى الحافظة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "نص العنصر النائب للملف"
+// pe.photoPlaceholder: "Photo placeholder text" => "نص العنصر النائب للصورة"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "نص العنصر النائب للملف أو الصورة"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
+// theme.groupBackground: "Background" => "خلفية"
+// theme.groupAppearance: "Appearance" => "مظهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "خلفية"
+// theme.groupAppearance: "Appearance" => "مظهر"
+// theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
+// signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
+// theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"

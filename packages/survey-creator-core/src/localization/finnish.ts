@@ -142,7 +142,12 @@ export var fiStrings = {
     translationPlaceHolder: "Käännös...",
     themeExportButton: "Vienti",
     themeImportButton: "Tuoda",
+    surveyJsonExportButton: "Vienti",
+    surveyJsonImportButton: "Tuoda",
+    surveyJsonCopyButton: "Kopioi leikepöydälle",
     themeResetButton: "Palauta teema-asetukset oletusasetuksiin",
+    themeResetConfirmation: "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään.",
+    themeResetConfirmationOk: "Kyllä, nollaa teema",
     bold: "Lihavoitu",
     italic: "Kursiivi",
     underline: "Alleviivaa",
@@ -658,6 +663,13 @@ export var fiStrings = {
     columnsVisibleIf: "Sarakkeet ovat näkyvissä, jos",
     rowsVisibleIf: "Rivit ovat näkyvissä, jos",
     otherPlaceholder: "Kommenttialueen paikkamerkki",
+    signaturepad: {
+      showPlaceholder: "Paikkamerkin näyttäminen",
+      placeholder: "Paikkamerkkiteksti"
+    },
+    filePlaceholder: "Tiedoston paikkamerkkiteksti",
+    photoPlaceholder: "Valokuvan paikkamerkkiteksti",
+    fileOrPhotoPlaceholder: "Tiedoston tai valokuvan paikkamerkkiteksti",
     rateType: "Hinnan tyyppi"
   },
   // Property values
@@ -895,7 +907,10 @@ export var fiStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen."
+    keyName: "Jos määritetty sarake sisältää samat arvot, kysely heittää \"Ei-yksilöllinen avainarvo\" -virheen.",
+    filePlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä",
+    photoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\".",
+    fileOrPhotoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\"."
   },
   // Properties
   p: {
@@ -1008,6 +1023,8 @@ export var fiStrings = {
     groupGeneral: "Yleiset",
     groupAdvanced: "Edistynyt",
     groupHeader: "Otsikko",
+    groupBackground: "Tausta",
+    groupAppearance: "Ulkonäkö",
     themeName: "Teema",
     themeMode: "Kysymyksen ulkonäkö",
     themeModePanels: "Laiminlyönti",
@@ -1019,6 +1036,7 @@ export var fiStrings = {
     primaryDarkColor: "Häilyä",
     primaryLightColor: "Valittu",
     coverTitleForecolor: "Otsikon etuväri",
+    coverDescriptionForecolor: "Kuvaus etuväri",
     coverOverlapEnabled: "Limittyä",
     backgroundDimColor: "Taustaväri",
     backgroundImage: "Taustakuvan",
@@ -1059,6 +1077,7 @@ export var fiStrings = {
     scale: "Mittakaava",
     cornerRadius: "Kulman säde",
     surveyTitle: "Kyselyn otsikon fontti",
+    surveyDescription: "Kyselyn kuvauksen fontti",
     pageTitle: "Sivun otsikon fontti",
     pageDescription: "Sivun kuvauksen fontti",
     boxShadowX: "X",
@@ -1076,7 +1095,7 @@ export var fiStrings = {
     headerViewAdvanced: "Edistynyt",
     coverInheritWidthFrom: "Sisältöalueen leveys",
     coverInheritWidthFromSurvey: "Sama kuin kyselyssä",
-    coverInheritWidthFromPage: "Sovita sivulle",
+    coverInheritWidthFromContainer: "Sovita konttiin",
     coverTextAreaWidth: "Tekstin leveys",
     coverBackgroundColorSwitch: "Taustaväri",
     coverBackgroundColorNone: "Ei lainkaan",
@@ -1673,3 +1692,30 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Määritä solun arvo: {1} sarakkeeseen: {0}"
 // lg.expressionSetup: "" => ""
 // lg.actionsSetup: "" => ""
+// ed.surveyJsonExportButton: "Export" => "Vienti"
+// ed.surveyJsonImportButton: "Import" => "Tuoda"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopioi leikepöydälle"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// pe.filePlaceholder: "File placeholder text" => "Tiedoston paikkamerkkiteksti"
+// pe.photoPlaceholder: "Photo placeholder text" => "Valokuvan paikkamerkkiteksti"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tiedoston tai valokuvan paikkamerkkiteksti"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\"."
+// theme.groupBackground: "Background" => "Tausta"
+// theme.groupAppearance: "Appearance" => "Ulkonäkö"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "Kyllä, nollaa teema"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// theme.groupBackground: "Background" => "Tausta"
+// theme.groupAppearance: "Appearance" => "Ulkonäkö"
+// theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "Sovita konttiin"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.showPlaceholder: "Show the placeholder" => "Paikkamerkin näyttäminen"
+// signaturepad.placeholder: "Placeholder text" => "Paikkamerkkiteksti"
+// theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"r

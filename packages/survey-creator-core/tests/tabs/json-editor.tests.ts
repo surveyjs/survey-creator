@@ -131,6 +131,33 @@ test("JsonEditor & error question unique in panel dynamic, #2", () => {
     ]
   });
 });
+test("JsonEditor & fixError action with object to array", () => {
+  const creator = new CreatorTester();
+  const editor = new TextareaJsonEditorModel(creator);
+  editor.text = JSON.stringify({
+    pages: [{
+      questions: {
+        type: "text",
+        name: "q1",
+      }
+    }]
+  }, null, 3);
+  editor.processErrors(editor.text);
+  expect(editor.hasErrors).toBeTruthy();
+  expect(editor.errorList.actions).toHaveLength(1);
+  expect(editor.errorList.actions[0].data.showFixButton).toBeTruthy();
+  editor.errorList.actions[0].data.fixError();
+  expect(editor.hasErrors).toBeFalsy();
+  expect(JSON.parse(editor.text)).toEqual({
+    pages: [{
+      questions: [
+        {
+          type: "text",
+          name: "q1",
+        }
+      ] }]
+  });
+});
 test("JsonEditor & showErrors/errorList", () => {
   const creator = new CreatorTester({ showJSONEditorTab: true });
   let modelEditor;

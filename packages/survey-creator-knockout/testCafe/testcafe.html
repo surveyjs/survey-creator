@@ -16,6 +16,7 @@
   <script src="../node_modules/survey-knockout-ui/survey-knockout-ui.js"></script>
   -->
   <script src="../build/survey-creator-knockout.js"></script>
+  <script src="./sc.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
   </div>
   <script>
     window.surveyJSFramework = "ko";
-    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, haveCommercialLicense: true });
+    const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
     window.creator = creator;
     ko.applyBindings({ creator: creator });
   </script>

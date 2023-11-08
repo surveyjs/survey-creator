@@ -77,16 +77,24 @@ export class SurveyQuestionEditorDefinition {
     file: {
       properties: [
         "sourceType",
+        "visible",
+        "isRequired",
+        "readOnly",
+        "showCommentArea",
         "allowMultiple",
-        "allowImagesPreview",
-        "acceptedTypes",
         { name: "showPreview" },
+        "allowImagesPreview",
+        "waitForUpload",
+        "needConfirmRemoveFile",
         { name: "storeDataAsText" },
+        "allowCameraAccess",
+        "acceptedTypes",
         "maxSize",
         "imageHeight",
         "imageWidth",
-        "waitForUpload",
-        "needConfirmRemoveFile"
+        "filePlaceholder",
+        "photoPlaceholder",
+        "fileOrPhotoPlaceholder"
       ]
     },
     html: {
@@ -487,6 +495,7 @@ export class SurveyQuestionEditorDefinition {
         "placeholder",
         "requiredErrorText",
         "validators",
+        { name: "defaultValueExpression", tab: "logic" },
         { name: "minValueExpression", tab: "logic" },
         { name: "maxValueExpression", tab: "logic" },
       ]
