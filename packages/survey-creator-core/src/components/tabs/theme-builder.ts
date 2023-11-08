@@ -611,6 +611,26 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.onQuestionCreated.add((_, opt) => {
       opt.question.allowRootStyle = false;
     });
+    themeEditorSurvey.onGetPanelFooterActions.add((sender, opt) => {
+      if(opt.question && opt.question.name == "headerViewContainer") {
+        opt.actions = [];
+      }
+    });
+    themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
+      if(options.panel.hasParent) {
+        const parent = (options.panel.parent ?? options.panel.parentQuestion);
+        if(!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
+          options.cssClasses.panel.container = "spg-panel-group";
+          options.cssClasses.panel.content = "spg-panel-group__content";
+          options.cssClasses.panel.title = "spg-panel-group__title";
+        }
+        else {
+          options.cssClasses.panel.container = "spg-nested-panel";
+          options.cssClasses.panel.content = "spg-nested-panel__content";
+          options.cssClasses.panel.title = "spg-nested-panel__title";
+        }
+      }
+    });
     return themeEditorSurvey;
   }
   findSuitableTheme(themeName: string): ITheme {
@@ -810,7 +830,7 @@ export class ThemeBuilder extends Base {
   /**
    * A function that is called [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    */
   public get saveThemeFunc() {
     return this._saveThemeFuncValue;
@@ -885,23 +905,28 @@ export class ThemeBuilder extends Base {
             type: "panel",
             elements: [
               {
-                type: "dropdown",
-                name: "themeName",
-                title: getLocString("theme.themeName"),
-                descriptionLocation: "hidden",
-                choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-                defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
-                allowClear: false
-              },
-              {
-                type: "buttongroup",
-                name: "themePalette",
-                titleLocation: "hidden",
-                choices: [
-                  { value: "light", text: getLocString("theme.themePaletteLight") },
-                  { value: "dark", text: getLocString("theme.themePaletteDark") }
-                ],
-                defaultValue: "light"
+                type: "panel",
+                elements: [
+                  {
+                    type: "dropdown",
+                    name: "themeName",
+                    title: getLocString("theme.themeName"),
+                    descriptionLocation: "hidden",
+                    choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
+                    defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
+                    allowClear: false
+                  },
+                  {
+                    type: "buttongroup",
+                    name: "themePalette",
+                    titleLocation: "hidden",
+                    choices: [
+                      { value: "light", text: getLocString("theme.themePaletteLight") },
+                      { value: "dark", text: getLocString("theme.themePaletteDark") }
+                    ],
+                    defaultValue: "light"
+                  },
+                ]
               },
               {
                 type: "buttongroup",
@@ -1029,21 +1054,26 @@ export class ThemeBuilder extends Base {
                     visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
                       {
-                        type: "buttongroup",
-                        name: "backgroundColorSwitch",
-                        title: getLocString("theme.coverBackgroundColorSwitch"),
-                        choices: [
-                          { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
-                          { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
-                          { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
-                        ],
-                      },
-                      {
-                        type: "color",
-                        name: "backgroundColor",
-                        enableIf: "{panel.backgroundColorSwitch} = 'custom'",
-                        titleLocation: "hidden",
-                        descriptionLocation: "hidden",
+                        type: "panel",
+                        elements: [
+                          {
+                            type: "buttongroup",
+                            name: "backgroundColorSwitch",
+                            title: getLocString("theme.coverBackgroundColorSwitch"),
+                            choices: [
+                              { value: "none", text: getLocString("theme.coverBackgroundColorNone") },
+                              { value: "accentColor", text: getLocString("theme.coverBackgroundColorAccentColor") },
+                              { value: "custom", text: getLocString("theme.coverBackgroundColorCustom") },
+                            ],
+                          },
+                          {
+                            type: "color",
+                            name: "backgroundColor",
+                            enableIf: "{panel.backgroundColorSwitch} = 'custom'",
+                            titleLocation: "hidden",
+                            descriptionLocation: "hidden",
+                          },
+                        ]
                       },
                       {
                         type: "panel",
@@ -1111,12 +1141,27 @@ export class ThemeBuilder extends Base {
                     questionTitleLocation: "top",
                     visibleIf: "{panel.headerView} = 'advanced'",
                     elements: [
-                      this.getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
-                      this.getVerticalAlignment("logoPositionY", "top"),
-                      this.getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
-                      this.getVerticalAlignment("titlePositionY", "bottom"),
-                      this.getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
-                      this.getVerticalAlignment("descriptionPositionY", "bottom"),
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("logoPositionX", getLocString("theme.logoPosition"), "right"),
+                          this.getVerticalAlignment("logoPositionY", "top"),
+                        ]
+                      },
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("titlePositionX", getLocString("theme.coverTitlePosition"), "left"),
+                          this.getVerticalAlignment("titlePositionY", "bottom"),
+                        ]
+                      },
+                      {
+                        type: "panel",
+                        elements: [
+                          this.getHorizontalAlignment("descriptionPositionX", getLocString("theme.coverDescriptionPosition"), "left"),
+                          this.getVerticalAlignment("descriptionPositionY", "bottom"),
+                        ]
+                      }
                     ]
                   }
                 ]

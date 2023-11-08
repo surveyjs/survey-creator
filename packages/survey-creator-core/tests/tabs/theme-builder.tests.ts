@@ -2392,3 +2392,32 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   expect(themeEditor.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
   editorLocalization.currentLocale = "en";
 });
+test("saveTheme action", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  let saveCount = 0;
+  creator.saveSurveyFunc = () => {
+    saveCount++;
+  };
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = (saveNo, callback) => {
+    saveThemeCount++;
+    callback(saveNo, "success");
+  };
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(0);
+  expect(themePlugin["saveThemeAction"].visible).toBeFalsy();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  creator.activeTab = "theme";
+  expect(themePlugin["saveThemeAction"].visible).toBeTruthy();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "some val";
+  expect(themePlugin["saveThemeAction"].enabled).toBeTruthy();
+  themePlugin["saveThemeAction"].action();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(1);
+});

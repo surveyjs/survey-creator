@@ -824,12 +824,12 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.actions`: [`IAction[]`](/form-library/documentation/api-reference/iaction)\
+   * - `options.actions`: [`IAction[]`](https://surveyjs.io/form-library/documentation/api-reference/iaction)\
    * An array of actions. You can add, modify, or remove actions from this array.
-   * - `options.page`: [`PageModel`](/form-library/documentation/api-reference/page-model)\
+   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
    * A page for which the event is raised.
    * - `options.addNewQuestion(type)`: Method\
-   * Adds a new question of a specified [`type`](/form-library/documentation/api-reference/question#getType) to the page.
+   * Adds a new question of a specified [`type`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to the page.
    * @see onDefineElementMenuItems
    */
   public onGetPageActions: CreatorEvent = new CreatorEvent();
@@ -1180,7 +1180,7 @@ export class CreatorBase extends Base
   public maximumRateValues: number = settings.propertyGrid.maximumRateValues;
 
   /**
-   * Limits the number of nested panels within a [Panel](/form-library/documentation/api-reference/panel-model) element.
+   * Limits the number of nested panels within a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element.
    * 
    * Default value: -1 (unlimited)
    */
@@ -1219,7 +1219,7 @@ export class CreatorBase extends Base
   /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
-   * For more information, refer to the [Save and Load Custom Themes](/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
+   * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
    * @see saveSurveyFunc
    */
@@ -2688,6 +2688,7 @@ export class CreatorBase extends Base
     this.deleteObjectCore(obj);
   }
   protected updateConditionsOnRemove(obj: any) {
+    if(!settings.logic.updateExpressionsOnDeleting.question) return;
     var objType = SurveyHelper.getObjectType(obj);
     var questions;
     if (objType == ObjType.Question) {

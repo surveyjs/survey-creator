@@ -2811,6 +2811,29 @@ test("Use settings to disable updating expressions on changing name and choices"
   expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['item1']");
   expect(matrix.columns[1].visibleIf).toEqual("{row.col1} = 1");
 });
+test("Delete the question && settings.logic.updateExpressionsOnDeleting", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3} > 2" },
+      {
+        type: "text",
+        name: "q2",
+        visibleIf: "{q1} = 1 and {q3} < 2 or {q1} = 2"
+      },
+      { type: "text", name: "q3" }
+    ]
+  };
+  settings.logic.updateExpressionsOnDeleting.question = false;
+  const survey = creator.survey;
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q3 = survey.getQuestionByName("q3");
+  creator.deleteElement(q3);
+  expect(q1.visibleIf).toEqual("{q3} > 2");
+  expect(q2.visibleIf).toEqual("{q1} = 1 and {q3} < 2 or {q1} = 2");
+  settings.logic.updateExpressionsOnDeleting.question = true;
+});
 test("Update expression on changing column name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
