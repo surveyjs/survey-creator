@@ -2924,7 +2924,7 @@ export class CreatorBase extends Base
   public chooseFiles(
     input: HTMLInputElement,
     onFilesChosen: (files: File[]) => void,
-    context?: { question: Question; item?: ItemValue }
+    context?: { question: Question, item?: ItemValue }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
       if (!window || !window["FileReader"]) return;

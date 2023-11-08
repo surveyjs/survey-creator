@@ -312,7 +312,7 @@ export interface ISurveyCreatorOptions {
   chooseFiles(
     input: HTMLInputElement,
     onFilesChosen: (files: File[]) => void,
-    context?: { question: Question; item?: ItemValue }
+    context?: { question: Question, item?: ItemValue }
   ): void;
 }
 
