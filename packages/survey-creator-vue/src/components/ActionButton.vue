@@ -7,13 +7,12 @@
     >{{ text }}</span
   >
   <span
-    v-if="!disabled"
     role="button"
     class="svc-action-button"
     @click="onClick"
     v-key2click
+    :class="getButtonCss()"
     :title="title"
-    :class="{ 'svc-action-button--selected': selected, classes }"
     >{{ text }}</span
   >
 </template>
@@ -33,5 +32,8 @@ const onClick = (event: Event) => {
   if (!props.allowBubble) {
     event.stopPropagation();
   }
+};
+const getButtonCss = () => {
+  return props.classes + (props.selected ? " svc-action-button--selected" : "");
 };
 </script>
