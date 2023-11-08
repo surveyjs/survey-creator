@@ -65,6 +65,7 @@
               :key="page.id"
               :survey="model.creator.survey"
               :creator="model.creator"
+              :isGhost="page == model.newPage"
               :page="page"
             ></svc-page>
           </template>

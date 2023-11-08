@@ -1,25 +1,23 @@
 <template>
   <div
     class="svc-page"
-    :data-sv-drop-target-survey-element="
-      !model.isGhost ? page.name : 'newGhostPage'
-    "
-    :data-sv-drop-target-page="!model.isGhost ? page.name : ''"
+    :data-sv-drop-target-survey-element="!isGhost ? page.name : 'newGhostPage'"
+    :data-sv-drop-target-page="!isGhost ? page.name : ''"
   >
     <div
       v-if="model.page"
       :id="model.page.id"
       class="svc-page__content"
       :class="model.css"
-      v-on:click="
+      v-key2click
+      @click="
         (e) => {
           model.select(model, e);
           e.stopPropagation();
         }
       "
-      v-on:mouseover="(e) => model.hover(e, e.currentTarget)"
-      v-on:mouseleave="(e) => model.hover(e, e.currentTarget)"
-      data-bind="click: select, key2click, clickBubble: false, css: css, attr: { id: page.id }, event: { mouseover: function(m, e) { hover(e, $element); }, mouseleave: function(m, e) { hover(e, $element); } }"
+      @mouseover="hover"
+      @mouseleave="hover"
     >
       <div class="svc-page__content-actions">
         <sv-action-bar :model="model.actionContainer"></sv-action-bar>
@@ -41,6 +39,7 @@ const props = defineProps<{
   creator: CreatorBase;
   survey: SurveyModel;
   page: PageModel;
+  isGhost?: boolean;
 }>();
 const model = useCreatorModel(
   () => new PageAdorner(props.creator, props.page),
@@ -49,4 +48,7 @@ const model = useCreatorModel(
     value.dispose();
   }
 );
+const hover = (event: MouseEvent) => {
+  model.value.hover(event, event.currentTarget);
+};
 </script>
