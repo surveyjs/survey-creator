@@ -24,6 +24,7 @@ function getElementsJSON() {
 ComponentCollection.Instance.add({
   name: "colorsettings",
   showInToolbox: false,
+  internal: true,
   elementsJSON: getElementsJSON(),
   onInit() {
     Serializer.addProperties("colorsettings", [{

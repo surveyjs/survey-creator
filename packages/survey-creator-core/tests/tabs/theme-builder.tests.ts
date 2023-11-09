@@ -695,6 +695,17 @@ test("Check boxshadowsettings question", () => {
   question.contentQuestion.panels[0].getQuestionByName("color").contentPanel.getQuestionByName("opacity").value = 7;
   expect(survey.data).toEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
 });
+test("boxshadowsettings should exists after ComponentCollection.Instance.clear()", () => {
+  ComponentCollection.Instance.clear();
+  const survey = new SurveyModel({
+    elements: [{
+      type: "boxshadowsettings",
+      name: "test",
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+  expect(question.getType()).toBe("boxshadowsettings");
+});
 
 test("Check parseColor and createColor functions", () => {
   let color = "#673241";
