@@ -11,9 +11,12 @@
     "test": "vitest --no-threads tests/test.spec.ts",
     "test:single": "vitest --no-watch --no-threads tests/test.spec.ts",
     "release": "commit-and-tag-version --message \"Release: %s [azurepipelines skip]\" ",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "testcafe:ci": "testcafe -c 4 -q attemptLimit=5,successThreshold=1 chrome:headless ../../testCafe/ --app \"npm run preview --prefix ./example\" --selector-timeout 1500 --reporter minimal",
+    "testcafe": "testcafe chrome ../../testCafe/ --app \"npm run preview --prefix ./example \" --selector-timeout 1500 --reporter minimal"
   },
   "devDependencies": {
+    "testcafe": "3.3.0",
     "@babel/types": "^7.20.2",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^16.11.68",
