@@ -6,6 +6,7 @@
       :class="{
         'svc-creator--mobile': model.isMobileView,
       }"
+      ref="root"
     >
       <div>
         <svc-svg-bundle></svc-svg-bundle>
@@ -92,10 +93,19 @@
 <script setup lang="ts">
 import type { CreatorBase } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, toRaw } from "vue";
+import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
 const props = defineProps<{ model: CreatorBase }>();
 const model = computed(() => {
   return toRaw(props.model);
 });
+const root = ref<HTMLDivElement>();
 useBase(() => model.value);
+onMounted(() => {
+  if (root.value) {
+    props.model.setRootElement(root.value);
+  }
+});
+onUnmounted(() => {
+  props.model.unsubscribeRootElement();
+});
 </script>
