@@ -3,9 +3,10 @@ import { editorLocalization } from "../editorLocalization";
 import { PropertyGridEditor, PropertyGridEditorCollection } from ".";
 import { ISurveyCreatorOptions } from "../creator-settings";
 
-var json = {
+const json = {
   name: "propertygrid_bindings",
   showInToolbox: false,
+  internal: true,
   createElements: function () {
     //tell ComponentCollection that it is composite question
   }

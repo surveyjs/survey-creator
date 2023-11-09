@@ -2688,7 +2688,7 @@ export class CreatorBase extends Base
     this.deleteObjectCore(obj);
   }
   protected updateConditionsOnRemove(obj: any) {
-    if(!settings.logic.updateExpressionsOnDeleting.question) return;
+    if (!settings.logic.updateExpressionsOnDeleting.question) return;
     var objType = SurveyHelper.getObjectType(obj);
     var questions;
     if (objType == ObjType.Question) {
@@ -2923,7 +2923,8 @@ export class CreatorBase extends Base
    */
   public chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void
+    onFilesChosen: (files: File[]) => void,
+    context?: { element: SurveyElement, item?: ItemValue }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
       if (!window || !window["FileReader"]) return;
@@ -2941,6 +2942,8 @@ export class CreatorBase extends Base
     } else {
       this.onOpenFileChooser.fire(this, {
         input: input,
+        element: context && context.element || this.survey,
+        item: context && context.item,
         callback: onFilesChosen
       });
     }

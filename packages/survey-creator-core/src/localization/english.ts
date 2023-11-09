@@ -58,6 +58,8 @@ export var enStrings = {
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
     nextSelected: "Select next",
+    prevFocus: "Focus previous",
+    nextFocus: "Focus next",
     surveyTypeName: "Survey",
     pageTypeName: "Page",
     panelTypeName: "Panel",
@@ -616,7 +618,7 @@ export var enStrings = {
       validation: "Validation",
       cells: "Cell Texts",
       showOnCompleted: "Survey Complete",
-      logo: "Logo in Survey Title",
+      logo: "Logo in Survey Header",
       slider: "Slider",
       expression: "Expression",
       others: "Others"

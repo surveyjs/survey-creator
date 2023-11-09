@@ -46,7 +46,7 @@ export class SurveyQuestionColor extends SurveyQuestionText {
   protected renderColorSwatch(): JSX.Element {
     return <label className={this.question.getSwatchCss()} style={this.question.getSwatchStyle()}>
       <SvgIcon iconName={this.question.cssClasses.swatchIcon} size={"auto"}></SvgIcon>
-      <input type="color" disabled={this.isDisplayMode} value={this.question.renderedColorValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)}/>
+      <input type="color" disabled={this.isDisplayMode} value={this.question.renderedColorValue} className={this.question.cssClasses.colorInput} onChange={(event) => this.question.onColorInputChange(event.nativeEvent)} tabIndex={-1}/>
     </label>;
   }
   protected renderDropdownAction(): JSX.Element {

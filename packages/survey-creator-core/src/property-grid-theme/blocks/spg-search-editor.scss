@@ -1,0 +1,103 @@
+.spg-editor--highlighted {
+  .spg-input,
+  .spg-input-container,
+  .spg-question--location--left,
+  .spg-table__cell:not(.spg-table__cell--detail-panel) .spg-input {
+    box-shadow: 0 0 0 2px $secondary;
+  }
+  .spg-checkbox__control:focus + .spg-checkbox__rectangle,
+  .spg-matrixdynamic__content.spg-text__content {
+    outline: 2px solid $secondary;
+    outline-offset: -2px;
+
+    .spg-input {
+      box-shadow: none;
+    }
+  }
+  .svc-action-button {
+    background-color: $secondary-light;
+  }
+  .sv-button-group {
+    box-shadow: 0 0 0 1px $secondary;
+    border-color: $secondary;
+  }
+  .spg-checkbox__control + .spg-checkbox__rectangle {
+    outline: 2px solid $secondary;
+    outline-offset: -2px;
+  }
+}
+
+.spg-search-editor_container {
+  position: absolute;
+  border-bottom: 1px solid $border;
+  background: $background-dim;
+  padding: calcSize(2);
+  height: calcSize(3);
+  width: calc(100% - calc(4 * #{$base-unit}));
+  display: flex;
+  align-items: center;
+}
+
+.spg-search-editor_input {
+  color: $foreground;
+
+  font-family: $font-family;
+  font-size: calcSize(1.5);
+  font-style: normal;
+  font-weight: 600;
+  line-height: calcSize(2);
+
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  display: block;
+  background: transparent;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  padding-inline-start: calcSize(1);
+  padding-inline-end: calcSize(1);
+}
+
+.spg-search-editor_toolbar {
+  display: flex;
+  gap: calcSize(0.5);
+  justify-content: flex-end;
+  align-items: center;
+}
+.spg-search-editor_toolbar .sv-action-bar {
+  gap: calcSize(0.5);
+  margin: 0;
+}
+
+.spg-search-editor_toolbar .spg-search-editor_bar-item {
+  padding: calcSize(0.5);
+  height: min-content;
+  margin: 0;
+}
+
+.spg-search-editor_toolbar-counter {
+  color: $foreground-light;
+
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: 600;
+  font-size: calcSize(1.5);
+  line-height: calcSize(2);
+}
+
+.spg-search-editor_search-icon {
+  width: calcSize(3);
+  height: calcSize(3);
+
+  .sv-svg-icon {
+    width: calcSize(3);
+    height: calcSize(3);
+
+    use {
+      fill: $foreground-light;
+    }
+  }
+}

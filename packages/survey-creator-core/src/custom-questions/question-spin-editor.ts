@@ -101,7 +101,22 @@ export class QuestionSpinEditorModel extends QuestionTextModel {
     }
   }
   public onFocus = (event: Event) => {
-    this._showUnitsInEditor = false;
+    if((<HTMLElement>event.target).tagName == "INPUT") {
+      queueMicrotask(() => {
+        const inputElement = <HTMLInputElement>event.target;
+        const selectStart = inputElement.selectionStart;
+        const selectEnd = inputElement.selectionEnd;
+        const selectDirection = inputElement.selectionDirection;
+        this._showUnitsInEditor = false;
+        queueMicrotask(() => {
+          if(Math.abs(selectEnd - selectStart) > 0) {
+            inputElement.setSelectionRange(0, this.renderedValue.length, selectDirection);
+          } else {
+            inputElement.setSelectionRange(this.renderedValue.length, this.renderedValue.length);
+          }
+        });
+      });
+    }
   }
   public onBlur = (event: Event) => {
     this._showUnitsInEditor = true;

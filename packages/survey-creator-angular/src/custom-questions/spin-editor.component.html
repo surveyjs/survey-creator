@@ -9,12 +9,12 @@
   <span [class]="model.cssClasses.buttonsContainer">
     <button [disabled]="model.isInputReadOnly" [class]="model.cssClasses.arrowButton"
       (mousedown)="model.onDownButtonMouseDown()" (mouseup)="model.onButtonMouseUp()"
-      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
+      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)" tabindex="-1">
       <svg [iconName]="model.cssClasses.decreaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     </button>
     <button [disabled]="model.isInputReadOnly" [class]="model.cssClasses.arrowButton"
       (mousedown)="model.onUpButtonMouseDown()" (mouseup)="model.onButtonMouseUp()"
-      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)">
+      (mouseleave)="model.onButtonMouseLeave()" (blur)="model.onBlur($event)" (focus)="model.onFocus($event)" tabindex="-1">
       <svg [iconName]="model.cssClasses.increaseButtonIcon" [size]="'auto'" sv-ng-svg-icon></svg>
     </button>
   </span>

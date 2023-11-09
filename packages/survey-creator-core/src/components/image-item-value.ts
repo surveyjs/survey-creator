@@ -35,13 +35,13 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         model.item.imageLink = link;
         model.isUploading = false;
       });
-    });
+    }, { element: model.question, item: model.item });
   }
 
   public uploadFiles(files) {
     this.isUploading = true;
     this.creator.uploadFiles(files, this.question, (_, link) => {
-      this.creator.createNewItemValue(this.question, this.isChoosingNewFile, (res : ItemValue): void => {
+      this.creator.createNewItemValue(this.question, this.isChoosingNewFile, (res: ItemValue): void => {
         (<ImageItemValue>res).imageLink = link;
       });
       this.isChoosingNewFile = false;
@@ -54,7 +54,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       this.isChoosingNewFile = true;
       model.uploadFiles(files);
-    });
+    }, { element: model.question, item: model.item });
   }
   onDragOver = (event: any) => {
     this.isFileDragging = true;
@@ -75,7 +75,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   onDragLeave = (event: any) => {
     this.isFileDragging = false;
   }
-  get acceptedTypes () {
+  get acceptedTypes() {
     return getAcceptedTypesByContentMode(this.question.contentMode);
   }
 }

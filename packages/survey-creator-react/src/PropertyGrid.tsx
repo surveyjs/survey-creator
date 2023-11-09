@@ -1,7 +1,8 @@
 import React from "react";
-import { PropertyGridViewModel } from "survey-creator-core";
-import { Base, SurveyModel } from "survey-core";
-import { Survey, SurveyElementBase, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory } from "survey-react-ui";
+import { PropertyGridViewModel, SearchManager } from "survey-creator-core";
+import { Base, SurveyModel, settings } from "survey-core";
+import { Survey, SurveyElementBase, ReactQuestionFactory, SurveyQuestionButtonGroup, ReactElementFactory, SvgIcon, SurveyActionBar } from "survey-react-ui";
+import { SearchComponent } from "./Search";
 
 interface IPropertyGridComponentProps {
   model: PropertyGridViewModel;
@@ -23,8 +24,12 @@ export class PropertyGridComponent extends SurveyElementBase<IPropertyGridCompon
   }
 
   renderElement() {
+    const rootClassName = this.model.searchEnabled ? "spg-container spg-container_search" : "spg-container";
     return (
-      <Survey model={this.model.survey}></Survey>
+      <div className={rootClassName}>
+        <SearchComponent model={this.model.searchManager}></SearchComponent>
+        <Survey model={this.model.survey}></Survey>
+      </div>
     );
   }
 }

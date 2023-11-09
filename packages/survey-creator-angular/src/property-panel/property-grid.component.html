@@ -1,3 +1,6 @@
 <ng-template #template>
-    <survey-content *ngIf="!!model.survey" [model]="model.survey"></survey-content>
+    <div class="spg-container" [class.spg-container_search]="model.searchEnabled">
+        <svc-search [model]="model.searchManager"></svc-search>
+        <survey-content *ngIf="!!model.survey" [model]="model.survey"></survey-content>
+    </div>
 </ng-template>
