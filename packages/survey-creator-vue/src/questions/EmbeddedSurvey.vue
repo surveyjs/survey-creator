@@ -1,7 +1,9 @@
 <template>
-  <template v-if="!!question && !!survey && survey.currentPage">
-    <survey-page :page="survey.currentPage" :survey="survey"></survey-page>
-  </template>
+  <survey-page
+    v-if="!!question && !!survey && survey.currentPage"
+    :page="survey.currentPage"
+    :survey="survey"
+  ></survey-page>
 </template>
 <script lang="ts" setup>
 import type { QuestionEmbeddedSurveyModel } from "survey-creator-core";

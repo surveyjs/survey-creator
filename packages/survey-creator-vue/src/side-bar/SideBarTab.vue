@@ -1,7 +1,9 @@
 <template>
-  <template v-if="model.visible">
-    <component :is="model.componentName" :model="model.model"></component>
-  </template>
+  <component
+    v-if="model.visible"
+    :is="model.componentName"
+    :model="model.model"
+  ></component>
 </template>
 
 <script lang="ts" setup>
