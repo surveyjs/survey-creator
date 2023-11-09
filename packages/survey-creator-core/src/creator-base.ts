@@ -2924,7 +2924,7 @@ export class CreatorBase extends Base
   public chooseFiles(
     input: HTMLInputElement,
     onFilesChosen: (files: File[]) => void,
-    context?: { question: Question, item?: ItemValue }
+    context?: { element: SurveyElement, item?: ItemValue }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
       if (!window || !window["FileReader"]) return;
@@ -2942,7 +2942,8 @@ export class CreatorBase extends Base
     } else {
       this.onOpenFileChooser.fire(this, {
         input: input,
-        context: context,
+        element: context && context.element || this.survey,
+        item: context && context.item,
         callback: onFilesChosen
       });
     }

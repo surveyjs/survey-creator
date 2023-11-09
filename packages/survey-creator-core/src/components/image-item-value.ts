@@ -35,7 +35,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         model.item.imageLink = link;
         model.isUploading = false;
       });
-    }, { question: model.question, item: model.item });
+    }, { element: model.question, item: model.item });
   }
 
   public uploadFiles(files) {
@@ -54,7 +54,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       this.isChoosingNewFile = true;
       model.uploadFiles(files);
-    }, { question: model.question, item: model.item });
+    }, { element: model.question, item: model.item });
   }
   onDragOver = (event: any) => {
     this.isFileDragging = true;
