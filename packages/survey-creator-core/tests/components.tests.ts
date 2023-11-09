@@ -891,7 +891,10 @@ test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", (
 
   let context: any = undefined;
   creator.onOpenFileChooser.add((s, o) => {
-    context = o.context;
+    context = {
+      element: o.element,
+      item: o.item
+    };
     o.callback([{}]);
   });
   creator.onUploadFile.add((s, o) => {
@@ -899,6 +902,6 @@ test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", (
   });
   imageItemAdorner.chooseFile(imageItemAdorner);
   expect(context).toBeDefined();
-  expect(context.question).toBe(question);
+  expect(context.element).toBe(question);
   expect(context.item).toBe(question.choices[0]);
 });
