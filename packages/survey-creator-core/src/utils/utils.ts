@@ -1,4 +1,4 @@
-import { defaultV2Css, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement } from "survey-core";
+import { defaultV2Css, IAction, ItemValue, MatrixDropdownColumn, Question, Serializer, SurveyElement, settings as surveySettings } from "survey-core";
 import { settings } from "../creator-settings";
 
 function getNumericFromString(str: string): string {
@@ -322,6 +322,13 @@ export function getAcceptedTypesByContentMode(contentMode: string) {
 
 export function getQuestionFromObj(obj: SurveyElement): Question {
   return (obj instanceof MatrixDropdownColumn) ? obj.templateQuestion : (obj as Question);
+}
+
+export function scrollElementIntoView(elementId: string) {
+  if (!elementId || typeof surveySettings.environment.root === "undefined") return;
+  const el = surveySettings.environment.root.getElementById(elementId);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
 }
 
 export function ingectAlpha(baseColor: any, alpha: number): any {

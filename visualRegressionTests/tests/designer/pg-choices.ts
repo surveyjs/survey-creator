@@ -28,6 +28,7 @@ const json = {
 
 test("Check section", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => window["creator"].currentPlugin.propertyGrid.searchEnabled = false)();
     await t.resizeWindow(1920, 1080);
 
     await setJSON(json);

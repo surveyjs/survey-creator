@@ -155,7 +155,8 @@ test("JsonEditor & fixError action with object to array", () => {
           type: "text",
           name: "q1",
         }
-      ] }]
+      ]
+    }]
   });
 });
 test("JsonEditor & showErrors/errorList", () => {
@@ -210,8 +211,10 @@ test("import json from file", (done) => {
 
   const data = JSON.stringify({ questions: [{ type: "text", name: "q1" }, { type: "text", name: "q2" }] } as any, null, 4);
   const blob = new Blob([data], { type: "application/json" });
+  expect(editorPlugin.model.isJSONChanged).toBeFalsy();
   editorPlugin.importFromFile(blob as any, () => {
     expect(editorPlugin.model.text).toEqual(data);
+    expect(editorPlugin.model.isJSONChanged).toBeTruthy();
     done();
   });
 });

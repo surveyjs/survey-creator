@@ -139,6 +139,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
       const surveyJSONText = fileReader.result as string;
       if (this.model) {
         this.model.text = surveyJSONText;
+        this.model.isJSONChanged = true;
       }
       callback && callback(surveyJSONText);
     };

@@ -10,6 +10,7 @@ export * from "./side-bar/side-bar.component";
 export * from "./side-bar/side-bar-tab.component";
 export * from "./property-panel/object-selector.component";
 export * from "./property-panel/property-grid.component";
+export * from "./property-panel/search.component";
 export * from "./tabs/json/json-editor-textarea.component";
 export * from "./tabs/json/json-editor-ace.component";
 export * from "./tabs/logic/logic.component";
