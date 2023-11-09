@@ -53,7 +53,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         (<QuestionImageModel>model.surveyElement).imageLink = link;
         model.isUploading = false;
       });
-    });
+    }, { element: model.question });
   }
   public get acceptedTypes(): string {
     return getAcceptedTypesByContentMode((this.surveyElement as QuestionImageModel).contentMode);
