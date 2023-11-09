@@ -1,33 +1,27 @@
 <template>
   <div
-    class="svc-page"
-    :data-sv-drop-target-survey-element="!isGhost ? page.name : 'newGhostPage'"
-    :data-sv-drop-target-page="!isGhost ? page.name : ''"
+    v-if="model.page"
+    :id="model.page.id"
+    class="svc-page__content"
+    :class="model.css"
+    v-key2click
+    @click="
+      (e) => {
+        model.select(model, e);
+        e.stopPropagation();
+      }
+    "
+    @mouseover="hover"
+    @mouseleave="hover"
   >
-    <div
-      v-if="model.page"
-      :id="model.page.id"
-      class="svc-page__content"
-      :class="model.css"
-      v-key2click
-      @click="
-        (e) => {
-          model.select(model, e);
-          e.stopPropagation();
-        }
-      "
-      @mouseover="hover"
-      @mouseleave="hover"
-    >
-      <div class="svc-page__content-actions">
-        <sv-action-bar :model="model.actionContainer"></sv-action-bar>
-      </div>
-      <survey-page
-        :survey="model.creator.survey"
-        :page="model.page"
-      ></survey-page>
-      <sv-action-bar :model="model.footerActionsBar"></sv-action-bar>
+    <div class="svc-page__content-actions">
+      <sv-action-bar :model="model.actionContainer"></sv-action-bar>
     </div>
+    <survey-page
+      :survey="model.creator.survey"
+      :page="model.page"
+    ></survey-page>
+    <sv-action-bar :model="model.footerActionsBar"></sv-action-bar>
   </div>
 </template>
 <script lang="ts" setup>

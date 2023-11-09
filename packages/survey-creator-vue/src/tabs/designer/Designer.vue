@@ -6,7 +6,7 @@
   <div
     class="svc-tab-designer"
     :class="model.getRootCss()"
-    data-bind="css: getRootCss(), click: clickDesigner"
+    @click="model.clickDesigner"
   >
     <div class="svc-tab-designer_content">
       <template v-if="model.showPlaceholder">
@@ -23,12 +23,10 @@
         </div>
         <div
           class="svc-designer__placeholder-container"
-          data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage' }"
+          :data-sv-drop-target-survey-element="'newGhostPage'"
         >
-          <span
-            class="svc-designer-placeholder-text svc-text svc-text--normal"
-            data-bind="text: placeholderText"
-          >
+          <span class="svc-designer-placeholder-text svc-text svc-text--normal">
+            {{ model.placeholderText }}
           </span>
           <svc-page
             class="svc-designer-placeholder-page"
@@ -60,14 +58,22 @@
           <!-- /ko -->
 
           <template v-if="model.creator.pageEditMode !== 'bypage'">
-            <svc-page
+            <div
               v-for="page in pages"
               :key="page.id"
-              :survey="model.creator.survey"
-              :creator="model.creator"
-              :isGhost="page == model.newPage"
-              :page="page"
-            ></svc-page>
+              class="svc-page"
+              :data-sv-drop-target-survey-element="
+                page == model.newPage ? page.name : 'newGhostPage'
+              "
+              :data-sv-drop-target-page="page != model.newPage ? page.name : ''"
+            >
+              <svc-page
+                :survey="model.creator.survey"
+                :creator="model.creator"
+                :isGhost="page == model.newPage"
+                :page="page"
+              ></svc-page>
+            </div>
           </template>
 
           <svc-page
