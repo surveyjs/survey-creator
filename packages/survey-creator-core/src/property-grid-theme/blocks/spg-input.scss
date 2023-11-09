@@ -51,6 +51,7 @@
   padding: calcSize(1);
   line-height: 0;
 
+  &:focus,
   &:hover {
     background: $background-dim;
   }
