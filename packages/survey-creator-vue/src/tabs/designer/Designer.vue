@@ -63,7 +63,7 @@
               :key="page.id"
               class="svc-page"
               :data-sv-drop-target-survey-element="
-                page == model.newPage ? page.name : 'newGhostPage'
+                page != model.newPage ? page.name : 'newGhostPage'
               "
               :data-sv-drop-target-page="page != model.newPage ? page.name : ''"
             >
