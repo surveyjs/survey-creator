@@ -618,7 +618,7 @@ export var enStrings = {
       validation: "Validation",
       cells: "Cell Texts",
       showOnCompleted: "Survey Complete",
-      logo: "Logo in Survey Title",
+      logo: "Logo in Survey Header",
       slider: "Slider",
       expression: "Expression",
       others: "Others"
