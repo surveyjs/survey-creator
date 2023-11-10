@@ -10,6 +10,7 @@
         :disabled="question.isInputReadOnly"
         :class="question.cssClasses.colorInput"
         :value="question.renderedColorValue"
+        tabindex="-1"
         @change="question.onColorInputChange"
       />
     </label>

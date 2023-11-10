@@ -27,6 +27,7 @@
         @mouseleave="question.onButtonMouseLeave"
         @blur="question.onBlur"
         @focus="question.onFocus"
+        tabindex="-1"
       >
         <sv-svg-icon
           :iconName="question.cssClasses.decreaseButtonIcon"
@@ -41,6 +42,7 @@
         @mouseleave="question.onButtonMouseLeave"
         @blur="question.onBlur"
         @focus="question.onFocus"
+        tabindex="-1"
       >
         <sv-svg-icon
           :iconName="question.cssClasses.increaseButtonIcon"

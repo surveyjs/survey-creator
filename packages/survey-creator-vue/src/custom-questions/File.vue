@@ -27,6 +27,7 @@
       :aria-describedby="question.ariaDescribedBy"
       :multiple="false"
       :title="question.inputTitle"
+      :tabindex="-1"
       :accept="question.acceptedTypes"
       @change="question.onFileInputChange"
     />
@@ -34,6 +35,7 @@
       <button
         type="button"
         :class="question.cssClasses.clearButton"
+        v-key2click
         :disabled="question.getIsClearButtonDisabled()"
         @click="question.doClean"
       >
