@@ -1275,8 +1275,6 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazení zástupného symbolu"
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
 // theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
-
-
 // ed.prevFocus: "Focus previous" => "Zaostřeno předchozí"
 // ed.nextFocus: "Focus next" => "Zaostřit na další"
 // ed.saveTheme: "Save Theme" => "Uložit motiv"
