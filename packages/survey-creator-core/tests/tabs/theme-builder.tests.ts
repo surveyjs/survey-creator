@@ -1464,6 +1464,8 @@ test("onThemeSelected + onThemeModified events", (): any => {
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
+  const generalBackcolorDimColor = themeEditorSurvey.getQuestionByName("generalBackcolorDimColor");
+  const generalPrimaryColor = themeEditorSurvey.getQuestionByName("generalPrimaryColor");
 
   let pluginThemeSelectedCount = 0;
   let pluginThemeModifiedCount = 0;
@@ -1484,6 +1486,18 @@ test("onThemeSelected + onThemeModified events", (): any => {
   expect(pluginThemeModifiedCount).toBe(1);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(1);
+  expect(builderThemeSelectedCount).toBe(1);
+
+  generalBackcolorDimColor.value = "#7a46bb";
+  expect(pluginThemeModifiedCount).toBe(2);
+  expect(pluginThemeSelectedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(2);
+  expect(builderThemeSelectedCount).toBe(1);
+
+  generalPrimaryColor.value = "#7a46bb";
+  expect(pluginThemeModifiedCount).toBe(3);
+  expect(pluginThemeSelectedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(3);
   expect(builderThemeSelectedCount).toBe(1);
 });
 
