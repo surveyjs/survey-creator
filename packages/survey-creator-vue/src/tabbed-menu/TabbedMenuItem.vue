@@ -6,7 +6,7 @@
       'svc-tabbed-menu-item--disabled': item.disabled,
     }"
     @click="item.action"
-    key2click
+    v-key2click
   >
     <span
       class="svc-text svc-text--normal svc-tabbed-menu-item__text"
