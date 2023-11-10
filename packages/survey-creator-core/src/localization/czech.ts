@@ -56,6 +56,8 @@ export var czStrings = {
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
     nextSelected: "Vybrat další",
+    prevFocus: "Zaostřeno předchozí",
+    nextFocus: "Zaostřit na další",
     surveyTypeName: "Průzkum",
     pageTypeName: "Stránka",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var czStrings = {
     translation: "Překlad",
     saveSurvey: "Uložit průzkum",
     saveSurveyTooltip: "Uložit průzkum",
+    saveTheme: "Uložit motiv",
+    saveThemeTooltip: "Uložit motiv",
     designer: "Návrhář průzkumů",
     jsonEditor: "Editor JSON",
     jsonHideErrors: "Skrýt chyby",
@@ -168,8 +172,10 @@ export var czStrings = {
       empty_tab: "Vytvořte pravidlo pro přizpůsobení průběhu průzkumu.",
       page_visibilityName: "Viditelnost stránky",
       page_enableName: "Zapnutí (vypnutí) stránky",
+      page_requireName: "Nastavit stránku jako povinné",
       panel_visibilityName: "Viditelnost panelu",
       panel_enableName: "Zapnutí/vypnutí panelu",
+      panel_requireName: "Nastavit stránku jako povinné",
       question_visibilityName: "Viditelnost otázky",
       question_enableName: "Zapnutí/vypnutí otázky",
       question_requireName: "Povinné vyplnění otázky",
@@ -665,7 +671,12 @@ export var czStrings = {
     otherPlaceholder: "Zástupný text komentáře",
     signaturepad: {
       showPlaceholder: "Zobrazení zástupného symbolu",
-      placeholder: "Zástupný text"
+      placeholder: "Zástupný text",
+      signatureWidth: "Šířka oblasti podpisu",
+      signatureHeight: "Výška signatury",
+      signatureAutoScaleEnabled: "Automatické škálování oblasti podpisu",
+      penMinWidth: "Minimální šířka pera",
+      penMaxWidth: "Maximální šířka pera"
     },
     filePlaceholder: "Text zástupného symbolu souboru",
     photoPlaceholder: "Text zástupného symbolu fotografie",
@@ -1265,3 +1276,15 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
 // theme.surveyDescription: "Survey description font" => "Písmo popisu průzkumu"
 
+
+// ed.prevFocus: "Focus previous" => "Zaostřeno předchozí"
+// ed.nextFocus: "Focus next" => "Zaostřit na další"
+// ed.saveTheme: "Save Theme" => "Uložit motiv"
+// ed.saveThemeTooltip: "Save Theme" => "Uložit motiv"
+// lg.page_requireName: "Make page required" => "Nastavit stránku jako povinné"
+// lg.panel_requireName: "Make page required" => "Nastavit stránku jako povinné"
+// signaturepad.signatureWidth: "Signature area width" => "Šířka oblasti podpisu"
+// signaturepad.signatureHeight: "Signature area height" => "Výška signatury"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatické škálování oblasti podpisu"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimální šířka pera"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximální šířka pera"

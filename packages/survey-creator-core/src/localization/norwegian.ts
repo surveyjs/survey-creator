@@ -56,6 +56,8 @@ export var nbStrings = {
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
     nextSelected: "Velg neste",
+    prevFocus: "Fokus forrige",
+    nextFocus: "Fokus neste",
     surveyTypeName: "Undersøkelse",
     pageTypeName: "Side",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var nbStrings = {
     translation: "Oversettelse",
     saveSurvey: "Lagre skjema",
     saveSurveyTooltip: "Lagre skjema",
+    saveTheme: "Lagre tema",
+    saveThemeTooltip: "Lagre tema",
     designer: "Skjemadesigner",
     jsonEditor: "JSON-redigering",
     jsonHideErrors: "Skjul feil",
@@ -168,8 +172,10 @@ export var nbStrings = {
       empty_tab: "Opprett en regel for å tilpasse flyten i evalueringen.",
       page_visibilityName: "Sidesynlighet",
       page_enableName: "Aktivere (deaktivere) side",
+      page_requireName: "Gjøre siden obligatorisk",
       panel_visibilityName: "Panelsynlighet",
       panel_enableName: "Panel aktivere/deaktivere",
+      panel_requireName: "Gjøre siden obligatorisk",
       question_visibilityName: "Spørsmålssynlghet",
       question_enableName: "Spørsmål aktivere/deaktivere",
       question_requireName: "Spørsmål valgfritt/påkrevd",
@@ -665,7 +671,12 @@ export var nbStrings = {
     otherPlaceholder: "Plassholder for kommentarområde",
     signaturepad: {
       showPlaceholder: "Vise plassholderen",
-      placeholder: "Plassholdertekst"
+      placeholder: "Plassholdertekst",
+      signatureWidth: "Bredde på signaturområde",
+      signatureHeight: "Høyde på signaturområdet",
+      signatureAutoScaleEnabled: "Skalere signaturområdet automatisk",
+      penMinWidth: "Minimum pennebredde",
+      penMaxWidth: "Maksimal pennebredde"
     },
     filePlaceholder: "Plassholdertekst for fil",
     photoPlaceholder: "Tekst for plassholdere for bilde",
@@ -1723,3 +1734,17 @@ editorLocalization.locales["nb"] = nbStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vise plassholderen"
 // signaturepad.placeholder: "Placeholder text" => "Plassholdertekst"
 // theme.surveyDescription: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
+
+// ed.prevFocus: "Focus previous" => "Fokus forrige"
+// ed.nextFocus: "Focus next" => "Fokus neste"
+// ed.saveTheme: "Save Theme" => "Lagre tema"
+// ed.saveThemeTooltip: "Save Theme" => "Lagre tema"
+// lg.page_requireName: "Make page required" => "Gjøre siden obligatorisk"
+// lg.panel_requireName: "Make page required" => "Gjøre siden obligatorisk"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Bredde på signaturområde"
+// signaturepad.signatureHeight: "Signature area height" => "Høyde på signaturområdet"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skalere signaturområdet automatisk"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimum pennebredde"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal pennebredde"

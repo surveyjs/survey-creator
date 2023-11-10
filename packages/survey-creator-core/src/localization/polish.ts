@@ -56,6 +56,8 @@ var polishStrings = {
     hidePanel: "Panel Ukryj",
     prevSelected: "Wybierz poprzedni",
     nextSelected: "Wybierz następny",
+    prevFocus: "Fokus poprzedni",
+    nextFocus: "Ostrość następna",
     surveyTypeName: "Sondaż",
     pageTypeName: "Strona",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ var polishStrings = {
     translation: "Tłumaczenie",
     saveSurvey: "Zapisz ankietę",
     saveSurveyTooltip: "Zapisz ankietę",
+    saveTheme: "Zapisz motyw",
+    saveThemeTooltip: "Zapisz motyw",
     designer: "Projektant ankiety",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Ukryj błędy",
@@ -168,8 +172,10 @@ var polishStrings = {
       empty_tab: "Utwórz regułę, aby dostosować przepływ ankiety.",
       page_visibilityName: "Pokaż (ukryj) stronę",
       page_enableName: "Włącz (wyłącz) stronę",
+      page_requireName: "Ustaw stronę jako wymaganą",
       panel_visibilityName: "Pokaż (ukryj) panel",
       panel_enableName: "Włącz (wyłącz) panel",
+      panel_requireName: "Ustaw stronę jako wymaganą",
       question_visibilityName: "Pokaż (ukryj) pytanie",
       question_enableName: "Włącz (wyłącz) pytanie",
       question_requireName: "Zadbaj o pytanie wymagane",
@@ -665,7 +671,12 @@ var polishStrings = {
     otherPlaceholder: "Symbol zastępczy obszaru komentarza",
     signaturepad: {
       showPlaceholder: "Pokazywanie symbolu zastępczego",
-      placeholder: "Tekst zastępczy"
+      placeholder: "Tekst zastępczy",
+      signatureWidth: "Szerokość obszaru podpisu",
+      signatureHeight: "Wysokość obszaru podpisu",
+      signatureAutoScaleEnabled: "Automatyczne skalowanie obszaru podpisu",
+      penMinWidth: "Minimalna szerokość pisaka",
+      penMaxWidth: "Maksymalna szerokość pisaka"
     },
     filePlaceholder: "Tekst zastępczy pliku",
     photoPlaceholder: "Tekst zastępczy zdjęcia",
@@ -1993,3 +2004,17 @@ editorLocalization.locales["pl"] = polishStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Pokazywanie symbolu zastępczego"
 // signaturepad.placeholder: "Placeholder text" => "Tekst zastępczy"
 // theme.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"
+
+// ed.prevFocus: "Focus previous" => "Fokus poprzedni"
+// ed.nextFocus: "Focus next" => "Ostrość następna"
+// ed.saveTheme: "Save Theme" => "Zapisz motyw"
+// ed.saveThemeTooltip: "Save Theme" => "Zapisz motyw"
+// lg.page_requireName: "Make page required" => "Ustaw stronę jako wymaganą"
+// lg.panel_requireName: "Make page required" => "Ustaw stronę jako wymaganą"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Szerokość obszaru podpisu"
+// signaturepad.signatureHeight: "Signature area height" => "Wysokość obszaru podpisu"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatyczne skalowanie obszaru podpisu"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimalna szerokość pisaka"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maksymalna szerokość pisaka"

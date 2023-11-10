@@ -56,6 +56,8 @@ var frenchTranslation = {
     hidePanel: "Masquer le panneau",
     prevSelected: "Sélectionnez précédent",
     nextSelected: "Sélectionnez Suivant",
+    prevFocus: "Mise au point précédente",
+    nextFocus: "Focus suivant",
     surveyTypeName: "Sondage",
     pageTypeName: "Page",
     panelTypeName: "Panneau",
@@ -84,6 +86,8 @@ var frenchTranslation = {
     translation: "Traduction",
     saveSurvey: "Sauvegarder le sondage",
     saveSurveyTooltip: "Enregistrer le sondage",
+    saveTheme: "Enregistrer le thème",
+    saveThemeTooltip: "Enregistrer le thème",
     designer: "Éditeur de sondage",
     jsonEditor: "Éditeur JSON",
     jsonHideErrors: "Masquer les erreurs",
@@ -168,8 +172,10 @@ var frenchTranslation = {
       empty_tab: "Créez une règle pour personnaliser le déroulement du sondage.",
       page_visibilityName: "Afficher/masquer la page",
       page_enableName: "Activer (désactiver) la page",
+      page_requireName: "Rendre la page obligatoire",
       panel_visibilityName: "Afficher/masquer le panneau",
       panel_enableName: "Activer/désactiver le panneau",
+      panel_requireName: "Rendre la page obligatoire",
       question_visibilityName: "Afficher/masquer la question",
       question_enableName: "Activer/désactiver la question",
       question_requireName: "Rendre la question obligatoire",
@@ -665,7 +671,12 @@ var frenchTranslation = {
     otherPlaceholder: "Espace réservé pour la zone de commentaires",
     signaturepad: {
       showPlaceholder: "Afficher l’espace réservé",
-      placeholder: "Texte d’espace réservé"
+      placeholder: "Texte d’espace réservé",
+      signatureWidth: "Largeur de la zone de signature",
+      signatureHeight: "Hauteur de la zone de signature",
+      signatureAutoScaleEnabled: "Mise à l’échelle automatique de la zone de signature",
+      penMinWidth: "Largeur minimale du stylo",
+      penMaxWidth: "Largeur maximale du stylo"
     },
     filePlaceholder: "Texte de l’espace réservé au fichier",
     photoPlaceholder: "Texte de l’espace réservé à la photo",
@@ -1779,3 +1790,17 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Afficher l’espace réservé"
 // signaturepad.placeholder: "Placeholder text" => "Texte d’espace réservé"
 // theme.surveyDescription: "Survey description font" => "Police de description de l’enquête"
+
+// ed.prevFocus: "Focus previous" => "Mise au point précédente"
+// ed.nextFocus: "Focus next" => "Focus suivant"
+// ed.saveTheme: "Save Theme" => "Enregistrer le thème"
+// ed.saveThemeTooltip: "Save Theme" => "Enregistrer le thème"
+// lg.page_requireName: "Make page required" => "Rendre la page obligatoire"
+// lg.panel_requireName: "Make page required" => "Rendre la page obligatoire"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Largeur de la zone de signature"
+// signaturepad.signatureHeight: "Signature area height" => "Hauteur de la zone de signature"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Mise à l’échelle automatique de la zone de signature"
+// signaturepad.penMinWidth: "Minimum pen width" => "Largeur minimale du stylo"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Largeur maximale du stylo"

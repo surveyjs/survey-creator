@@ -56,6 +56,8 @@ export let svStrings = {
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
     nextSelected: "Välj nästa",
+    prevFocus: "Fokus föregående",
+    nextFocus: "Fokus nästa",
     surveyTypeName: "Undersökning",
     pageTypeName: "Sida",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export let svStrings = {
     translation: "Översättning",
     saveSurvey: "Spara Enkät",
     saveSurveyTooltip: "Spara undersökning",
+    saveTheme: "Spara tema",
+    saveThemeTooltip: "Spara tema",
     designer: "Enkät Designer",
     jsonEditor: "JSON Redigering",
     jsonHideErrors: "Dölj fel",
@@ -168,8 +172,10 @@ export let svStrings = {
       empty_tab: "Skapa en regel för att anpassa undersökningens flöde.",
       page_visibilityName: "Visa (dölj) sida",
       page_enableName: "Aktivera (inaktivera) sida",
+      page_requireName: "Gör sidan obligatorisk",
       panel_visibilityName: "Visa (dölj) panelen",
       panel_enableName: "Aktivera (inaktivera) panelen",
+      panel_requireName: "Gör sidan obligatorisk",
       question_visibilityName: "Visa (dölj) fråga",
       question_enableName: "Aktivera (inaktivera) fråga",
       question_requireName: "Gör frågan obligatorisk",
@@ -665,7 +671,12 @@ export let svStrings = {
     otherPlaceholder: "Platshållare för kommentarsområde",
     signaturepad: {
       showPlaceholder: "Visa platshållaren",
-      placeholder: "Platshållartext"
+      placeholder: "Platshållartext",
+      signatureWidth: "Signaturområdets bredd",
+      signatureHeight: "Signaturområdets höjd",
+      signatureAutoScaleEnabled: "Skala signaturområdet automatiskt",
+      penMinWidth: "Minsta pennbredd",
+      penMaxWidth: "Maximal pennbredd"
     },
     filePlaceholder: "Text för filplatshållare",
     photoPlaceholder: "Text för platshållare för foton",
@@ -1897,3 +1908,16 @@ editorLocalization.locales["sv"] = svStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visa platshållaren"
 // signaturepad.placeholder: "Placeholder text" => "Platshållartext"
 // theme.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
+// ed.prevFocus: "Focus previous" => "Fokus föregående"
+// ed.nextFocus: "Focus next" => "Fokus nästa"
+// ed.saveTheme: "Save Theme" => "Spara tema"
+// ed.saveThemeTooltip: "Save Theme" => "Spara tema"
+// lg.page_requireName: "Make page required" => "Gör sidan obligatorisk"
+// lg.panel_requireName: "Make page required" => "Gör sidan obligatorisk"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Signaturområdets bredd"
+// signaturepad.signatureHeight: "Signature area height" => "Signaturområdets höjd"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skala signaturområdet automatiskt"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minsta pennbredd"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"

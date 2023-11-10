@@ -56,6 +56,8 @@ export var huStrings = {
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
     nextSelected: "Válassza a következőt",
+    prevFocus: "Fókusz előző",
+    nextFocus: "Fókusz következő",
     surveyTypeName: "Felmérés",
     pageTypeName: "Oldal",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var huStrings = {
     translation: "Fordítás",
     saveSurvey: "Kérdőív mentése",
     saveSurveyTooltip: "Felmérés mentése",
+    saveTheme: "Téma mentése",
+    saveThemeTooltip: "Téma mentése",
     designer: "Kérdőívtervező",
     jsonEditor: "JSON szerkesztő",
     jsonHideErrors: "Hibák elrejtése",
@@ -168,8 +172,10 @@ export var huStrings = {
       empty_tab: "Hozzon létre egy szabályt a felmérés folyamatának testreszabásához.",
       page_visibilityName: "Oldal megjelenítése (elrejtése)",
       page_enableName: "Oldal engedélyezése (letiltása)",
+      page_requireName: "Az oldal kötelezővé tétele",
       panel_visibilityName: "Panel megjelenítése (elrejtése)",
       panel_enableName: "Panel engedélyezése (letiltása)",
+      panel_requireName: "Az oldal kötelezővé tétele",
       question_visibilityName: "Kérdés megjelenítése (elrejtése)",
       question_enableName: "Kérdés engedélyezése (letiltása)",
       question_requireName: "Kérdés feltevése kötelező",
@@ -665,7 +671,12 @@ export var huStrings = {
     otherPlaceholder: "Megjegyzés terület helyőrzője",
     signaturepad: {
       showPlaceholder: "A helyőrző megjelenítése",
-      placeholder: "Helyőrző szöveg"
+      placeholder: "Helyőrző szöveg",
+      signatureWidth: "Aláírási terület szélessége",
+      signatureHeight: "Aláírási terület magassága",
+      signatureAutoScaleEnabled: "Az aláírási terület automatikus méretezése",
+      penMinWidth: "Tollszélesség minimális",
+      penMaxWidth: "Maximális tollszélesség"
     },
     filePlaceholder: "Fájl helyőrző szövege",
     photoPlaceholder: "Fénykép helyőrző szövege",
@@ -1873,3 +1884,17 @@ editorLocalization.locales["hu"] = huStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "A helyőrző megjelenítése"
 // signaturepad.placeholder: "Placeholder text" => "Helyőrző szöveg"
 // theme.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
+
+// ed.prevFocus: "Focus previous" => "Fókusz előző"
+// ed.nextFocus: "Focus next" => "Fókusz következő"
+// ed.saveTheme: "Save Theme" => "Téma mentése"
+// ed.saveThemeTooltip: "Save Theme" => "Téma mentése"
+// lg.page_requireName: "Make page required" => "Az oldal kötelezővé tétele"
+// lg.panel_requireName: "Make page required" => "Az oldal kötelezővé tétele"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Aláírási terület szélessége"
+// signaturepad.signatureHeight: "Signature area height" => "Aláírási terület magassága"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Az aláírási terület automatikus méretezése"
+// signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"

@@ -56,6 +56,8 @@ export var msStrings = {
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
     nextSelected: "Pilih seterusnya",
+    prevFocus: "Fokus sebelum ini",
+    nextFocus: "Fokus seterusnya",
     surveyTypeName: "Kaji selidik",
     pageTypeName: "Laman",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var msStrings = {
     translation: "Terjemahan",
     saveSurvey: "Simpan Tinjauan",
     saveSurveyTooltip: "Simpan Tinjauan",
+    saveTheme: "Simpan Tema",
+    saveThemeTooltip: "Simpan Tema",
     designer: "Pereka Bentuk Tinjauan",
     jsonEditor: "Editor JSON",
     jsonHideErrors: "Sembunyikan ralat",
@@ -168,8 +172,10 @@ export var msStrings = {
       empty_tab: "Cipta peraturan untuk menyesuaikan aliran tinjauan.",
       page_visibilityName: "Kebolehlihatan halaman",
       page_enableName: "Halaman Dayakan (nyahdayakan)",
+      page_requireName: "Buat halaman diperlukan",
       panel_visibilityName: "Kebolehlihatan panel",
       panel_enableName: "Dayakan/Lumpuhkan panel",
+      panel_requireName: "Buat halaman diperlukan",
       question_visibilityName: "Kebolehlihatan soalan",
       question_enableName: "Dayakan/Lumpuhkan soalan",
       question_requireName: "Pilihan soalan diperlukan",
@@ -665,7 +671,12 @@ export var msStrings = {
     otherPlaceholder: "Ruang letak komen",
     signaturepad: {
       showPlaceholder: "Menunjukkan ruang letak",
-      placeholder: "Teks ruang letak"
+      placeholder: "Teks ruang letak",
+      signatureWidth: "Lebar kawasan tandatangan",
+      signatureHeight: "Ketinggian kawasan tandatangan",
+      signatureAutoScaleEnabled: "Menskalakan kawasan tandatangan secara automatik",
+      penMinWidth: "Lebar pen minimum",
+      penMaxWidth: "Lebar pen maksimum"
     },
     filePlaceholder: "Teks ruang letak fail",
     photoPlaceholder: "Teks ruang letak foto",
@@ -1673,3 +1684,17 @@ editorLocalization.locales["ms"] = msStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Menunjukkan ruang letak"
 // signaturepad.placeholder: "Placeholder text" => "Teks ruang letak"
 // theme.surveyDescription: "Survey description font" => "Fon perihalan tinjauan"
+
+// ed.prevFocus: "Focus previous" => "Fokus sebelum ini"
+// ed.nextFocus: "Focus next" => "Fokus seterusnya"
+// ed.saveTheme: "Save Theme" => "Simpan Tema"
+// ed.saveThemeTooltip: "Save Theme" => "Simpan Tema"
+// lg.page_requireName: "Make page required" => "Buat halaman diperlukan"
+// lg.panel_requireName: "Make page required" => "Buat halaman diperlukan"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Lebar kawasan tandatangan"
+// signaturepad.signatureHeight: "Signature area height" => "Ketinggian kawasan tandatangan"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Menskalakan kawasan tandatangan secara automatik"
+// signaturepad.penMinWidth: "Minimum pen width" => "Lebar pen minimum"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Lebar pen maksimum"
