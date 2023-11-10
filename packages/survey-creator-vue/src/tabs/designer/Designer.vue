@@ -65,7 +65,7 @@
               :data-sv-drop-target-survey-element="
                 page != model.newPage ? page.name : 'newGhostPage'
               "
-              :data-sv-drop-target-page="page != model.newPage ? page.name : ''"
+              :data-sv-drop-target-page="page.name"
             >
               <svc-page
                 :survey="model.creator.survey"
