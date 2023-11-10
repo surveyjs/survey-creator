@@ -16,13 +16,12 @@
         }
       "
       :class="model.css()"
-      data-bind="click: koSelect, key2click, clickBubble: false, css: css()"
+      v-key2click
     >
       <div
         v-if="model.allowDragging"
         class="svc-question__drag-area"
         v-on:pointerdown="(e) => model.onPointerDown(e)"
-        data-bind="event: {pointerdown: (model, event)=>{onPointerDown(event)}}"
       >
         <sv-svg-icon
           class="svc-question__drag-element"
