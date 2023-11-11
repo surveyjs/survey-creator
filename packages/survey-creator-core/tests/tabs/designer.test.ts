@@ -1,4 +1,4 @@
-import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel } from "survey-core";
+import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator } from "survey-core";
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
@@ -169,7 +169,6 @@ test("StringEditorViewModelBase skip undo/redo hot keys", () => {
   editor.checkConstraints(event);
   expect(result).toBe("->ip->pd->ip->pd");
 });
-/*
 test("Property Grid and logic tab, Bug#4877", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   creator.selectElement(creator.survey);
@@ -188,4 +187,15 @@ test("Property Grid and logic tab, Bug#4877", () => {
   logic.itemEditor.apply();
   expect(triggersQuestion.visibleRows).toHaveLength(1);
 });
-*/
+test("Property Grid and adding a validator in the code, Bug#4882", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  creator.selectElement(q1);
+  const validatorPanel = creator.propertyGrid.getPanelByName("validation");
+  validatorPanel.expand();
+  const validatorsQuestion = <QuestionMatrixDynamicModel>validatorPanel.getQuestionByName("validators");
+  expect(validatorsQuestion.visibleRows).toHaveLength(0);
+  q1.validators.push(new RegexValidator(""));
+  expect(validatorsQuestion.visibleRows).toHaveLength(1);
+});
