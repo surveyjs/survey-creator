@@ -1,5 +1,11 @@
 <template>
-  <survey v-if="!!model.survey" :survey="model.survey"></survey>
+  <div
+    class="spg-container"
+    :class="{ 'spg-container_search': model.searchEnabled }"
+  >
+    <svc-search :model="model.searchManager"></svc-search>
+    <survey v-if="!!model.survey" :survey="model.survey"></survey>
+  </div>
 </template>
 <script lang="ts" setup>
 import type { PropertyGridViewModel } from "survey-creator-core";

@@ -60,6 +60,7 @@ import CellQuestion from "./adorners/CellQuestion.vue";
 import Panel from "./adorners/Panel.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
+import Search from "./property-panel/Search.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -75,6 +76,7 @@ function registerComponents(app: App) {
 
   app.component("svc-property-grid", PropertyGrid);
   app.component("svc-object-selector", ObjectSelector);
+  app.component("svc-search", Search);
 
   app.component("svc-action-button", ActionButton);
 
