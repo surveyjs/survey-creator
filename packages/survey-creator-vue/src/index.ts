@@ -58,11 +58,16 @@ import RatingAdorner from "./adorners/Rating.vue";
 import MatrixCell from "./adorners/MatrixCell.vue";
 import CellQuestion from "./adorners/CellQuestion.vue";
 import Panel from "./adorners/Panel.vue";
+import ItemValue from "./adorners/ItemValue.vue";
+import ImageItemValue from "./adorners/ImageItemValue.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./property-panel/Search.vue";
 import PageNavigator from "./page-navigator/PageNavigator.vue";
 import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
+import Dropdown from "./adorners/Dropdown.vue";
+import QuestionDropdown from "./adorners/QuestionDropdown.vue";
+import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -131,9 +136,14 @@ function registerComponents(app: App) {
   app.component("svc-image-question-adorner", ImageAdorner);
   app.component("svc-matrix-cell", MatrixCell);
   app.component("svc-cell-question", CellQuestion);
+  app.component("svc-cell-dropdown-question", CellQuestionDropdownVue);
   app.component("svc-question-editor-content", QuestionEditor);
   app.component("svc-logo-image", Logo);
   app.component("svc-panel", Panel);
+  app.component("svc-item-value", ItemValue);
+  app.component("svc-image-item-value", ImageItemValue);
+  app.component("svc-dropdown-question", QuestionDropdown);
+  app.component("svc-dropdown-question-adorner", Dropdown);
 }
 
 export const surveyCreatorPlugin = {
