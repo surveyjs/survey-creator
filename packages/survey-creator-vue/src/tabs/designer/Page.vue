@@ -33,7 +33,6 @@ const props = defineProps<{
   creator: CreatorBase;
   survey: SurveyModel;
   page: PageModel;
-  isGhost?: boolean;
 }>();
 const model = useCreatorModel(
   () => new PageAdorner(props.creator, props.page),

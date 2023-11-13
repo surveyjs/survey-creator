@@ -18,8 +18,6 @@
           class="svc-designer-header"
         >
           <survey-header :survey="model.creator.survey"></survey-header>
-          <!-- ko template: { name: 'survey-header', data: survey } -->
-          <!-- /ko -->
         </div>
         <div
           class="svc-designer__placeholder-container"
@@ -48,8 +46,6 @@
             class="svc-designer-header"
           >
             <survey-header :survey="model.creator.survey"></survey-header>
-            <!-- ko template: { name: 'survey-header', data: survey } -->
-            <!-- /ko -->
           </div>
 
           <!-- ko if: survey.isShowProgressBarOnTop -->
@@ -70,22 +66,24 @@
               <svc-page
                 :survey="model.creator.survey"
                 :creator="model.creator"
-                :isGhost="page == model.newPage"
                 :page="page"
               ></svc-page>
             </div>
           </template>
-
-          <svc-page
+          <div
             v-if="
               model.pagesController.page2Display &&
               model.creator.pageEditMode === 'bypage'
             "
             class="svc-page"
-            data-bind="attr: { 'data-sv-drop-target-survey-element': 'newGhostPage', 'data-sv-drop-target-page': pagesController.page2Display.name }"
-            params="survey: survey, page: pagesController.page2Display, creator: creator"
-          ></svc-page>
-
+            :data-sv-drop-target-survey-element="'newGhostPage'"
+            :data-sv-drop-target-page="model.pagesController.page2Display.name"
+          >
+            <svc-page
+              :page="model.pagesController.page2Display"
+              :creator="model.creator"
+            ></svc-page>
+          </div>
           <!-- ko if: survey.isShowProgressBarOnBottom -->
           <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
           <!-- /ko -->
@@ -96,7 +94,7 @@
           class="svc-tab-designer__page-navigator"
         >
           <svc-page-navigator
-            :controller="model.pagesController"
+            :pagesController="model.pagesController"
             :pageEditMode="model.creator.pageEditMode"
           >
           </svc-page-navigator>

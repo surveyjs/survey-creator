@@ -61,6 +61,8 @@ import Panel from "./adorners/Panel.vue";
 import QuestionEditor from "./QuestionEditor.vue";
 import Logo from "./header/Logo.vue";
 import Search from "./property-panel/Search.vue";
+import PageNavigator from "./page-navigator/PageNavigator.vue";
+import PageNavigatorItem from "./page-navigator/PageNavigatorItem.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -117,6 +119,8 @@ function registerComponents(app: App) {
   app.component(editableStringRendererName, StringEditor);
 
   app.component("svc-tab-designer", Designer);
+  app.component("svc-page-navigator", PageNavigator);
+  app.component("svc-page-navigator-item", PageNavigatorItem);
   app.component("svc-page", Page);
   app.component("svc-row", Row);
   app.component("svc-add-new-question-btn", PageAddQuestion);
