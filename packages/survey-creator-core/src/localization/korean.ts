@@ -56,6 +56,8 @@ export var koreanStrings = {
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
     nextSelected: "다음을 선택합니다",
+    prevFocus: "포커스 이전",
+    nextFocus: "다음 초점",
     surveyTypeName: "조사",
     pageTypeName: "페이지",
     panelTypeName: "패널",
@@ -84,6 +86,8 @@ export var koreanStrings = {
     translation: "번역",
     saveSurvey: "설문지 저장",
     saveSurveyTooltip: "설문조사 저장",
+    saveTheme: "테마 저장",
+    saveThemeTooltip: "테마 저장",
     designer: "설문지 디자인",
     jsonEditor: "JSON 편집기",
     jsonHideErrors: "오류 숨기기",
@@ -168,8 +172,10 @@ export var koreanStrings = {
       empty_tab: "설문 조사의 흐름을 사용자 지정하는 규칙을 만듭니다.",
       page_visibilityName: "페이지 표시(숨기기)",
       page_enableName: "사용(사용 안 함) 페이지",
+      page_requireName: "페이지를 필수로 설정",
       panel_visibilityName: "표시(숨기기) 패널",
       panel_enableName: "활성화(비활성화) 패널",
+      panel_requireName: "페이지를 필수로 설정",
       question_visibilityName: "질문 표시(숨기기)",
       question_enableName: "사용(사용 안 함) 질문",
       question_requireName: "질문 필수 항목 만들기",
@@ -665,7 +671,12 @@ export var koreanStrings = {
     otherPlaceholder: "주석 영역 자리 표시자",
     signaturepad: {
       showPlaceholder: "자리 표시자 표시",
-      placeholder: "자리 표시자 텍스트"
+      placeholder: "자리 표시자 텍스트",
+      signatureWidth: "서명 영역 너비",
+      signatureHeight: "서명 영역 높이",
+      signatureAutoScaleEnabled: "서명 영역 자동 크기 조정",
+      penMinWidth: "최소 펜 너비",
+      penMaxWidth: "최대 펜 너비"
     },
     filePlaceholder: "파일 자리 표시자 텍스트",
     photoPlaceholder: "사진 자리 표시자 텍스트",
@@ -1924,3 +1935,17 @@ editorLocalization.locales["ko"] = koreanStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "자리 표시자 표시"
 // signaturepad.placeholder: "Placeholder text" => "자리 표시자 텍스트"
 // theme.surveyDescription: "Survey description font" => "설문조사 설명 글꼴"
+
+// ed.prevFocus: "Focus previous" => "포커스 이전"
+// ed.nextFocus: "Focus next" => "다음 초점"
+// ed.saveTheme: "Save Theme" => "테마 저장"
+// ed.saveThemeTooltip: "Save Theme" => "테마 저장"
+// lg.page_requireName: "Make page required" => "페이지를 필수로 설정"
+// lg.panel_requireName: "Make page required" => "페이지를 필수로 설정"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "서명 영역 너비"
+// signaturepad.signatureHeight: "Signature area height" => "서명 영역 높이"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "서명 영역 자동 크기 조정"
+// signaturepad.penMinWidth: "Minimum pen width" => "최소 펜 너비"
+// signaturepad.penMaxWidth: "Maximum pen width" => "최대 펜 너비"

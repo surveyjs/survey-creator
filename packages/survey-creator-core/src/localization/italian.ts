@@ -56,6 +56,8 @@ var italianTranslation = {
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
     nextSelected: "Seleziona seguente",
+    prevFocus: "Focus precedente",
+    nextFocus: "Focus successivo",
     surveyTypeName: "Sondaggio",
     pageTypeName: "Pagina",
     panelTypeName: "Pannello",
@@ -84,6 +86,8 @@ var italianTranslation = {
     translation: "Traduzione",
     saveSurvey: "Salva sondaggio",
     saveSurveyTooltip: "Salva sondaggio",
+    saveTheme: "Salva tema",
+    saveThemeTooltip: "Salva tema",
     designer: "Progetta il sondaggio",
     jsonEditor: "Modifica JSON",
     jsonHideErrors: "Nascondi gli errori",
@@ -168,8 +172,10 @@ var italianTranslation = {
       empty_tab: "Crea una regola per personalizzare il percorso del sondaggio.",
       page_visibilityName: "Mostra (nascondi) pagina",
       page_enableName: "Abilita (disabilita) pagina",
+      page_requireName: "Rendi la pagina obbligatoria",
       panel_visibilityName: "Mostra (nascondi) pannello",
       panel_enableName: "Abilita (disabilita) pannello",
+      panel_requireName: "Rendi la pagina obbligatoria",
       question_visibilityName: "Mostra (nascondi) domanda",
       question_enableName: "Abilita (disabilita) domanda",
       question_requireName: "Rendi la domanda obbligatoria",
@@ -665,7 +671,12 @@ var italianTranslation = {
     otherPlaceholder: "Testo segnaposto area commenti",
     signaturepad: {
       showPlaceholder: "Visualizzare il segnaposto",
-      placeholder: "Testo segnaposto"
+      placeholder: "Testo segnaposto",
+      signatureWidth: "Larghezza dell'area della firma",
+      signatureHeight: "Altezza dell'area della firma",
+      signatureAutoScaleEnabled: "Ridimensionamento automatico dell'area della firma",
+      penMinWidth: "Larghezza minima della penna",
+      penMaxWidth: "Larghezza massima della penna"
     },
     filePlaceholder: "Testo segnaposto del file",
     photoPlaceholder: "Testo segnaposto foto",
@@ -1457,3 +1468,15 @@ editorLocalization.locales["it"] = italianTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visualizzare il segnaposto"
 // signaturepad.placeholder: "Placeholder text" => "Testo segnaposto"
 // theme.surveyDescription: "Survey description font" => "Carattere della descrizione dell'indagine"
+
+// ed.prevFocus: "Focus previous" => "Focus precedente"
+// ed.nextFocus: "Focus next" => "Focus successivo"
+// ed.saveTheme: "Save Theme" => "Salva tema"
+// ed.saveThemeTooltip: "Save Theme" => "Salva tema"
+// lg.page_requireName: "Make page required" => "Rendi la pagina obbligatoria"
+// lg.panel_requireName: "Make page required" => "Rendi la pagina obbligatoria"
+// signaturepad.signatureWidth: "Signature area width" => "Larghezza dell'area della firma"
+// signaturepad.signatureHeight: "Signature area height" => "Altezza dell'area della firma"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Ridimensionamento automatico dell'area della firma"
+// signaturepad.penMinWidth: "Minimum pen width" => "Larghezza minima della penna"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Larghezza massima della penna"

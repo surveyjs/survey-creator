@@ -56,6 +56,8 @@ export var jaStrings = {
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
     nextSelected: "[次へ] を選択します。",
+    prevFocus: "前に焦点を合わせる",
+    nextFocus: "次の焦点",
     surveyTypeName: "アンケート",
     pageTypeName: "ページ",
     panelTypeName: "パネル",
@@ -84,6 +86,8 @@ export var jaStrings = {
     translation: "翻訳",
     saveSurvey: "アンケートを保存する",
     saveSurveyTooltip: "アンケートを保存する",
+    saveTheme: "テーマを保存",
+    saveThemeTooltip: "テーマを保存",
     designer: "アンケートの設計者",
     jsonEditor: "JSONエディタ",
     jsonHideErrors: "エラーを隠す",
@@ -168,8 +172,10 @@ export var jaStrings = {
       empty_tab: "調査のフローをカスタマイズするルールを作成します。",
       page_visibilityName: "ページの可視性",
       page_enableName: "有効 (無効) ページ",
+      page_requireName: "ページを必須にする",
       panel_visibilityName: "パネルの可視性",
       panel_enableName: "パネルの有効化/無効化",
+      panel_requireName: "ページを必須にする",
       question_visibilityName: "質問の可視性",
       question_enableName: "質問の有効化/無効化",
       question_requireName: "質問オプションが必要",
@@ -665,7 +671,12 @@ export var jaStrings = {
     otherPlaceholder: "コメント領域のプレースホルダー",
     signaturepad: {
       showPlaceholder: "プレースホルダーを表示する",
-      placeholder: "プレースホルダテキスト"
+      placeholder: "プレースホルダテキスト",
+      signatureWidth: "署名領域の幅",
+      signatureHeight: "署名領域の高さ",
+      signatureAutoScaleEnabled: "署名領域の自動スケーリング",
+      penMinWidth: "最小ペン幅",
+      penMaxWidth: "ペンの最大幅"
     },
     filePlaceholder: "ファイル プレースホルダー テキスト",
     photoPlaceholder: "写真の代替テキスト",
@@ -1720,3 +1731,17 @@ editorLocalization.locales["ja"] = jaStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "プレースホルダーを表示する"
 // signaturepad.placeholder: "Placeholder text" => "プレースホルダテキスト"
 // theme.surveyDescription: "Survey description font" => "調査の説明フォント"
+
+// ed.prevFocus: "Focus previous" => "前に焦点を合わせる"
+// ed.nextFocus: "Focus next" => "次の焦点"
+// ed.saveTheme: "Save Theme" => "テーマを保存"
+// ed.saveThemeTooltip: "Save Theme" => "テーマを保存"
+// lg.page_requireName: "Make page required" => "ページを必須にする"
+// lg.panel_requireName: "Make page required" => "ページを必須にする"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "署名領域の幅"
+// signaturepad.signatureHeight: "Signature area height" => "署名領域の高さ"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "署名領域の自動スケーリング"
+// signaturepad.penMinWidth: "Minimum pen width" => "最小ペン幅"
+// signaturepad.penMaxWidth: "Maximum pen width" => "ペンの最大幅"

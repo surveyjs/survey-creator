@@ -56,6 +56,8 @@ export var skStrings = {
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
     nextSelected: "Vyberte položku Ďalej",
+    prevFocus: "Zameranie predchádzajúce",
+    nextFocus: "Zameranie ďalej",
     surveyTypeName: "Prieskum",
     pageTypeName: "Strana",
     panelTypeName: "Bledý.",
@@ -84,6 +86,8 @@ export var skStrings = {
     translation: "Preklad",
     saveSurvey: "Uložiť prieskum",
     saveSurveyTooltip: "Uložiť prieskum",
+    saveTheme: "Uložiť motív",
+    saveThemeTooltip: "Uložiť motív",
     designer: "Návrhár prieskumov",
     jsonEditor: "Editor JSON",
     jsonHideErrors: "Skryť chyby",
@@ -168,8 +172,10 @@ export var skStrings = {
       empty_tab: "Vytvorte pravidlo na prispôsobenie toku prieskumu.",
       page_visibilityName: "Viditeľnosť strany",
       page_enableName: "Povoliť (zakázať) stránku",
+      page_requireName: "Nastavenie požadovanej strany",
       panel_visibilityName: "Viditeľnosť panela",
       panel_enableName: "Panel povoliť/zakázať",
+      panel_requireName: "Nastavenie požadovanej strany",
       question_visibilityName: "Viditeľnosť otázky",
       question_enableName: "Otázku povoliť/zakázať",
       question_requireName: "Vyžaduje sa voliteľná otázka",
@@ -665,7 +671,12 @@ export var skStrings = {
     otherPlaceholder: "Zástupný symbol oblasti komentárov",
     signaturepad: {
       showPlaceholder: "Zobrazenie zástupného symbolu",
-      placeholder: "Zástupný text"
+      placeholder: "Zástupný text",
+      signatureWidth: "Šírka oblasti podpisu",
+      signatureHeight: "Výška oblasti podpisu",
+      signatureAutoScaleEnabled: "Automatická zmena mierky oblasti podpisu",
+      penMinWidth: "Minimálna šírka pera",
+      penMaxWidth: "Maximálna šírka pera"
     },
     filePlaceholder: "Zástupný text súboru",
     photoPlaceholder: "Zástupný text fotografie",
@@ -1673,3 +1684,17 @@ editorLocalization.locales["sk"] = skStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Zobrazenie zástupného symbolu"
 // signaturepad.placeholder: "Placeholder text" => "Zástupný text"
 // theme.surveyDescription: "Survey description font" => "Písmo popisu prieskumu"
+
+// ed.prevFocus: "Focus previous" => "Zameranie predchádzajúce"
+// ed.nextFocus: "Focus next" => "Zameranie ďalej"
+// ed.saveTheme: "Save Theme" => "Uložiť motív"
+// ed.saveThemeTooltip: "Save Theme" => "Uložiť motív"
+// lg.page_requireName: "Make page required" => "Nastavenie požadovanej strany"
+// lg.panel_requireName: "Make page required" => "Nastavenie požadovanej strany"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Šírka oblasti podpisu"
+// signaturepad.signatureHeight: "Signature area height" => "Výška oblasti podpisu"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatická zmena mierky oblasti podpisu"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimálna šírka pera"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximálna šírka pera"

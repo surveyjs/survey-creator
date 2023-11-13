@@ -56,6 +56,8 @@ export var bgStrings = {
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
     nextSelected: "Избиране на следващ",
+    prevFocus: "Фокус предишен",
+    nextFocus: "Фокусирай се върху следващия",
     surveyTypeName: "Анкета",
     pageTypeName: "Страница",
     panelTypeName: "Паниел",
@@ -84,6 +86,8 @@ export var bgStrings = {
     translation: "Превод",
     saveSurvey: "Запазване на анкетата",
     saveSurveyTooltip: "Запазване на анкетата",
+    saveTheme: "Запиши темата",
+    saveThemeTooltip: "Запиши темата",
     designer: "Дизайнер",
     jsonEditor: "JSON редактор",
     jsonHideErrors: "Скриване на грешки",
@@ -168,8 +172,10 @@ export var bgStrings = {
       empty_tab: "Създай правило за персонализиране на анкетата.",
       page_visibilityName: "Показване (скриване) на страница",
       page_enableName: "Активиране (деактивиране) на страница",
+      page_requireName: "Направи страницата задължителна",
       panel_visibilityName: "Показване (скриване) на панел",
       panel_enableName: "Активиране (деактивиране) на панел",
+      panel_requireName: "Направи страницата задължителна",
       question_visibilityName: "Показване (скриване) на въпрос",
       question_enableName: "Активиране (деактивиране) на въпрос",
       question_requireName: "Задай въпроса като задължителен.",
@@ -665,7 +671,12 @@ export var bgStrings = {
     otherPlaceholder: "Заместител на областта за коментари",
     signaturepad: {
       showPlaceholder: "Показване на контейнера",
-      placeholder: "Текст в контейнер"
+      placeholder: "Текст в контейнер",
+      signatureWidth: "Ширина на областта за подпис",
+      signatureHeight: "Височина на областта за подпис",
+      signatureAutoScaleEnabled: "Автоматично мащабиране на областта за подписи",
+      penMinWidth: "Минимална ширина на писалката",
+      penMaxWidth: "Максимална ширина на перото"
     },
     filePlaceholder: "Текст в контейнер за файл",
     photoPlaceholder: "Текст в контейнер за снимка",
@@ -1261,3 +1272,14 @@ editorLocalization.locales["bg"] = bgStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Показване на контейнера"
 // signaturepad.placeholder: "Placeholder text" => "Текст в контейнер"
 // theme.surveyDescription: "Survey description font" => "Шрифт за описание на проучването"
+// ed.prevFocus: "Focus previous" => "Фокус предишен"
+// ed.nextFocus: "Focus next" => "Фокусирай се върху следващия"
+// ed.saveTheme: "Save Theme" => "Запиши темата"
+// ed.saveThemeTooltip: "Save Theme" => "Запиши темата"
+// lg.page_requireName: "Make page required" => "Направи страницата задължителна"
+// lg.panel_requireName: "Make page required" => "Направи страницата задължителна"
+// signaturepad.signatureWidth: "Signature area width" => "Ширина на областта за подпис"
+// signaturepad.signatureHeight: "Signature area height" => "Височина на областта за подпис"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Автоматично мащабиране на областта за подписи"
+// signaturepad.penMinWidth: "Minimum pen width" => "Минимална ширина на писалката"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Максимална ширина на перото"

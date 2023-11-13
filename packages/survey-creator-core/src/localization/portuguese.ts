@@ -56,6 +56,8 @@ var portugueseTranslation = {
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
     nextSelected: "Selecionar próximo",
+    prevFocus: "Foco anterior",
+    nextFocus: "Foco a seguir",
     surveyTypeName: "Questionário",
     pageTypeName: "Página",
     panelTypeName: "Painel",
@@ -84,6 +86,8 @@ var portugueseTranslation = {
     translation: "Tradução",
     saveSurvey: "Salvar Questionário",
     saveSurveyTooltip: "Gravar Questionário",
+    saveTheme: "Salvar tema",
+    saveThemeTooltip: "Salvar tema",
     designer: "Designer de Questionário",
     jsonEditor: "Editor de JSON",
     jsonHideErrors: "Esconder erros",
@@ -168,8 +172,10 @@ var portugueseTranslation = {
       empty_tab: "Crie uma regra para personalizar o fluxo do questionário.",
       page_visibilityName: "Mostrar (esconder) página",
       page_enableName: "Ativar (desativar) página",
+      page_requireName: "Tornar a página obrigatória",
       panel_visibilityName: "Mostrar (esconder) painel",
       panel_enableName: "Ativar (desativar) painel",
+      panel_requireName: "Tornar a página obrigatória",
       question_visibilityName: "Mostrar (esconder) questão",
       question_enableName: "Ativar (desativar) questão",
       question_requireName: "Tornar a pergunta obrigatória",
@@ -665,7 +671,12 @@ var portugueseTranslation = {
     otherPlaceholder: "Espaço reservado para área de comentários",
     signaturepad: {
       showPlaceholder: "Mostrar o espaço reservado",
-      placeholder: "Texto de espaço reservado"
+      placeholder: "Texto de espaço reservado",
+      signatureWidth: "Largura da área de assinatura",
+      signatureHeight: "Altura da área de assinatura",
+      signatureAutoScaleEnabled: "Dimensionar automaticamente a área de assinatura",
+      penMinWidth: "Largura mínima da caneta",
+      penMaxWidth: "Largura máxima da caneta"
     },
     filePlaceholder: "Texto do espaço reservado para arquivo",
     photoPlaceholder: "Texto do espaço reservado para foto",
@@ -1365,3 +1376,15 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar o espaço reservado"
 // signaturepad.placeholder: "Placeholder text" => "Texto de espaço reservado"
 // theme.surveyDescription: "Survey description font" => "Fonte da descrição da pesquisa"
+
+// ed.prevFocus: "Focus previous" => "Foco anterior"
+// ed.nextFocus: "Focus next" => "Foco a seguir"
+// ed.saveTheme: "Save Theme" => "Salvar tema"
+// ed.saveThemeTooltip: "Save Theme" => "Salvar tema"
+// lg.page_requireName: "Make page required" => "Tornar a página obrigatória"
+// lg.panel_requireName: "Make page required" => "Tornar a página obrigatória"
+// signaturepad.signatureWidth: "Signature area width" => "Largura da área de assinatura"
+// signaturepad.signatureHeight: "Signature area height" => "Altura da área de assinatura"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Dimensionar automaticamente a área de assinatura"
+// signaturepad.penMinWidth: "Minimum pen width" => "Largura mínima da caneta"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Largura máxima da caneta"

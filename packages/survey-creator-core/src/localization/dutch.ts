@@ -56,6 +56,8 @@ export var nlStrings = {
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
     nextSelected: "Selecteer volgende",
+    prevFocus: "Focus vorige",
+    nextFocus: "Focus volgende",
     surveyTypeName: "Enquête",
     pageTypeName: "Bladzijde",
     panelTypeName: "Paneel",
@@ -84,6 +86,8 @@ export var nlStrings = {
     translation: "Vertaling",
     saveSurvey: "Enquête opslaan",
     saveSurveyTooltip: "Enquête opslaan",
+    saveTheme: "Thema opslaan",
+    saveThemeTooltip: "Thema opslaan",
     designer: "Enquête-ontwerper",
     jsonEditor: "JSON-editor",
     jsonHideErrors: "Fouten verbergen",
@@ -168,8 +172,10 @@ export var nlStrings = {
       empty_tab: "Maak een regel om de stroom van de enquête aan te passen.",
       page_visibilityName: "Pagina zichtbaarheid",
       page_enableName: "Pagina inschakelen (uitschakelen)",
+      page_requireName: "Pagina verplicht maken",
       panel_visibilityName: "Paneel zichtbaarheid",
       panel_enableName: "Paneel inschakelen/uitschakelen",
+      panel_requireName: "Pagina verplicht maken",
       question_visibilityName: "Vraag zichtbaarheid",
       question_enableName: "Vraag inschakelen/uitschakelen",
       question_requireName: "Vraag optioneel vereist",
@@ -665,7 +671,12 @@ export var nlStrings = {
     otherPlaceholder: "Tijdelijke aanduiding voor het opmerkingengebied",
     signaturepad: {
       showPlaceholder: "De tijdelijke aanduiding weergeven",
-      placeholder: "Tijdelijke aanduiding voor tekst"
+      placeholder: "Tijdelijke aanduiding voor tekst",
+      signatureWidth: "Breedte van het handtekeninggebied",
+      signatureHeight: "Hoogte van het handtekeninggebied",
+      signatureAutoScaleEnabled: "Het handtekeninggebied automatisch schalen",
+      penMinWidth: "Minimale penbreedte",
+      penMaxWidth: "Maximale breedte van het hok"
     },
     filePlaceholder: "Tijdelijke tekst voor bestanden",
     photoPlaceholder: "Tijdelijke tekst voor foto's",
@@ -1699,3 +1710,17 @@ editorLocalization.locales["nl"] = nlStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "De tijdelijke aanduiding weergeven"
 // signaturepad.placeholder: "Placeholder text" => "Tijdelijke aanduiding voor tekst"
 // theme.surveyDescription: "Survey description font" => "Lettertype met enquêtebeschrijving"
+
+// ed.prevFocus: "Focus previous" => "Focus vorige"
+// ed.nextFocus: "Focus next" => "Focus volgende"
+// ed.saveTheme: "Save Theme" => "Thema opslaan"
+// ed.saveThemeTooltip: "Save Theme" => "Thema opslaan"
+// lg.page_requireName: "Make page required" => "Pagina verplicht maken"
+// lg.panel_requireName: "Make page required" => "Pagina verplicht maken"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Breedte van het handtekeninggebied"
+// signaturepad.signatureHeight: "Signature area height" => "Hoogte van het handtekeninggebied"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Het handtekeninggebied automatisch schalen"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimale penbreedte"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximale breedte van het hok"

@@ -3307,6 +3307,34 @@ test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   expect(dpQuestion.getType()).toBe("text");
   expect(dpQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
 });
+test("Include panel and page requiredIf into logic items", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2",
+            "requiredIf": "{question1} = 'Item 1'"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ],
+        "requiredIf": "{question1} = 'Item 2'"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+});
 
 class IncrementCounterTrigger extends SurveyTrigger {
 
@@ -3325,5 +3353,4 @@ class IncrementCounterTrigger extends SurveyTrigger {
   public set initialNumber(val: number) {
     this.setPropertyValue("initialNumber", val);
   }
-
 }
