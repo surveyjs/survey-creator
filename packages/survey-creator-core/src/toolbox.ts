@@ -146,7 +146,7 @@ export class QuestionToolbox
   /**
    * Contains toolbox categories and allows you to modify them.
    * 
-   * [View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories)
+   * [View Demo](https://surveyjs.io/Examples/Survey-Creator?id=toolboxcategories (linkStyle))
    */
   @propertyArray() categories: Array<QuestionToolboxCategory>;
   /**

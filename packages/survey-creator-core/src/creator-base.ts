@@ -416,7 +416,7 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.element`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
    * A survey element (survey, page, question, or panel) whose name has been requested.
    * - `options.area`: `string`\
    * A Survey Creator UI element that requests the display name. Contains one of the following values:
