@@ -2,13 +2,12 @@
   <span :class="className">
     <span class="svc-string-editor__content">
       <div class="svc-string-editor__border">
-        <svg
+        <sv-svg-icon
           class="svc-string-editor__button svc-string-editor__button--edit"
-          sv-ng-svg-icon
           @click="edit"
           :iconName="'icon-edit'"
           :size="16"
-        ></svg>
+        ></sv-svg-icon>
       </div>
       <span class="svc-string-editor__input">
         <span
@@ -42,7 +41,7 @@
           @click="edit"
           :aria-placeholder="placeholder"
           :contenteditable="contentEditable"
-          :innerHtml="editValue"
+          v-html="editValue"
           ref="root"
         ></span>
         <sv-character-counter
