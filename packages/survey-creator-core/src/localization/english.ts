@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP"
+    license: "To use our library in your app, a developer license is necessary. If you currently hold an activated license, ensure you're using the latest version available."
   },
   // Question types
   qt: {
