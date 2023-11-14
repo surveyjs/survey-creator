@@ -532,19 +532,24 @@ export class ThemeBuilder extends Base {
   private updateDependentQuestionValues(options: ValueChangedEvent) {
     if (options.name === "generalBackcolorDimColor") {
       this.themeEditorSurvey.setValue("--sjs-general-backcolor-dim", options.value);
+      return true;
     }
     if (options.name === "--sjs-general-backcolor-dim") {
       this.themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = options.value;
+      return false;
     }
     if (options.name === "generalPrimaryColor") {
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
+      return true;
     }
     if (options.name === "--sjs-primary-backcolor") {
       this.colorCalculator.calculateColors(options.value);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
       this.themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = options.value;
+      return false;
     }
+    return false;
   }
   private setThemeCssVariablesChanges(variableName: string, value: any, question: any) {
     this.themeCssVariablesChanges[variableName] = value;
@@ -588,17 +593,22 @@ export class ThemeBuilder extends Base {
       this.cssVariablePropertiesChanged(options);
 
       this.blockThemeChangedNotifications += 1;
-      this.updateDependentQuestionValues(options);
+      const hasUpdatedDependentValues = this.updateDependentQuestionValues(options);
 
       const newCssVariables = {};
       assign(newCssVariables, this.currentTheme.cssVariables, this.themeCssVariablesChanges);
       this.trimCssVariables(newCssVariables);
       this.currentTheme.cssVariables = newCssVariables;
-      this.updateSimulatorTheme();
 
       this.blockThemeChangedNotifications -= 1;
       if (!!this.undoRedoManager && this.blockThemeChangedNotifications == 0) {
         this.undoRedoManager.stopTransaction();
+      }
+
+      if (hasUpdatedDependentValues) {
+        this.themeModified(options);
+      } else {
+        this.updateSimulatorTheme();
       }
     });
 
@@ -612,14 +622,14 @@ export class ThemeBuilder extends Base {
       opt.question.allowRootStyle = false;
     });
     themeEditorSurvey.onGetPanelFooterActions.add((sender, opt) => {
-      if(opt.question && opt.question.name == "headerViewContainer") {
+      if (opt.question && opt.question.name == "headerViewContainer") {
         opt.actions = [];
       }
     });
     themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
-      if(options.panel.hasParent) {
+      if (options.panel.hasParent) {
         const parent = (options.panel.parent ?? options.panel.parentQuestion);
-        if(!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
+        if (!parent || parent.hasParent && !(parent.name === "headerViewContainer" || parent.parentQuestion?.name === "headerViewContainer")) {
           options.cssClasses.panel.container = "spg-panel-group";
           options.cssClasses.panel.content = "spg-panel-group__content";
           options.cssClasses.panel.title = "spg-panel-group__title";
@@ -870,9 +880,9 @@ export class ThemeBuilder extends Base {
         this.surveyProvider.isThemeModified = true;
         this.onThemeModified.fire(this, options as { name: string, value: any });
       }
-    }
-    if (this.surveyProvider.isAutoSave) {
-      this.processAutoSave();
+      if (this.surveyProvider.isAutoSave) {
+        this.processAutoSave();
+      }
     }
   }
 
