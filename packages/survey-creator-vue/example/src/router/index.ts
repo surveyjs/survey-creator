@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import  Default from "../components/test/Default.vue"
-import  ThemeSwitcher from "../components/test/Default.vue"
-import  ThemePreview from "../components/test/Default.vue"
+import Default from "../components/test/Default.vue"
+import ThemeSwitcher from "../components/test/ThemeSwitcher.vue"
+import ThemePreview from "../components/test/ThemePreview.vue"
 import Localization from "../components/test/Localization.vue";
 import ThemeTab from "../components/test/ThemeTab.vue";
 import ByPage from "../components/test/ByPage.vue";
