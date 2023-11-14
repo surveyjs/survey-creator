@@ -19,7 +19,7 @@ export default defineConfig(({ command }) => {
     },
     optimizeDeps: {
       exclude: ["survey-creator-vue", "survey-vue3-ui"],
-      include: ["survey-creator-core", "survey-core"]
+      include: ["survey-creator-core", "survey-core", "survey-creator-core/survey-creator-core.i18n", "survey-core/survey.i18n"]
     },
     resolve: {
       preserveSymlinks: command == "serve" ? false : true,
