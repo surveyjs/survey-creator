@@ -1,7 +1,7 @@
 import {
   StylesManager, Base, IAction, ItemValue,
   JsonObjectProperty, MatrixDropdownColumn, Question,
-  SurveyModel, ILocalizableString, PopupBaseViewModel
+  SurveyModel, ILocalizableString, PopupBaseViewModel, SurveyElement
 } from "survey-core";
 
 /**
@@ -74,6 +74,12 @@ export var settings = {
       questionName: true,
       columnName: true,
       choiceValue: true
+    },
+    /**
+     * Set these properties to false if you don't want to update expressions on deleting question
+     */
+    updateExpressionsOnDeleting: {
+      question: true
     }
   },
   /**
@@ -84,6 +90,7 @@ export var settings = {
     useButtonGroup: true,
     maxCharsInButtonGroup: 25,
     showNavigationButtons: false,
+    enableSearch: true,
     maximumColumnsCount: 0,
     minimumChoicesCount: 0,
     maximumChoicesCount: 0,
@@ -304,7 +311,9 @@ export interface ISurveyCreatorOptions {
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void): void;
+    onFilesChosen: (files: File[]) => void,
+    context?: { element: SurveyElement, item?: ItemValue }
+  ): void;
 }
 
 export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
@@ -452,7 +461,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void): void {}
+  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

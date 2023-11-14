@@ -56,6 +56,8 @@ var persianStrings = {
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
     nextSelected: "بعدی",
+    prevFocus: "تمرکز قبلی",
+    nextFocus: "تمرکز بعدی",
     surveyTypeName: "نظرسنجی",
     pageTypeName: "صفحه",
     panelTypeName: "پنل",
@@ -84,6 +86,8 @@ var persianStrings = {
     translation: "ترجمه",
     saveSurvey: "ذخیره نظرسنجی",
     saveSurveyTooltip: "ذخیره نظرسنجی",
+    saveTheme: "ذخیرۀ تم",
+    saveThemeTooltip: "ذخیرۀ تم",
     designer: "طراح نظرسنجی",
     jsonEditor: "ویرایشگر JSON",
     jsonHideErrors: "پنهان کردن خطاها",
@@ -168,8 +172,10 @@ var persianStrings = {
       empty_tab: "یک آیتم را برای سفارشی کردن جریان نظرسنجی انتخاب کنید",
       page_visibilityName: "قابلیت رویت صفحه ",
       page_enableName: "فعال/غیرفعال کردن صفحه",
+      page_requireName: "ایجاد صفحه مورد نیاز است",
       panel_visibilityName: "قابلیت رویت پنل",
       panel_enableName: "فعال/غیرفعال کردن پنل ",
+      panel_requireName: "ایجاد صفحه مورد نیاز است",
       question_visibilityName: " قابلیت رویت سوال",
       question_enableName: "فعال/غیرفعال کردن سوال ",
       question_requireName: "سوال اختیاری موردنیاز",
@@ -665,7 +671,12 @@ var persianStrings = {
     otherPlaceholder: "ذی نفع منطقه نظر",
     signaturepad: {
       showPlaceholder: "نشان دادن نگهدارندهی مکان",
-      placeholder: "متن ذی نفع"
+      placeholder: "متن ذی نفع",
+      signatureWidth: "عرض منطقه امضا",
+      signatureHeight: "ارتفاع منطقه امضا",
+      signatureAutoScaleEnabled: "مقیاس خودکار منطقه امضا",
+      penMinWidth: "حداقل عرض قلم",
+      penMaxWidth: "حداکثر عرض قلم"
     },
     filePlaceholder: "متن نگهدارنده پرونده",
     photoPlaceholder: "متن نگهدارنده عکس",
@@ -1654,3 +1665,15 @@ editorLocalization.locales["fa"] = persianStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "نشان دادن نگهدارندهی مکان"
 // signaturepad.placeholder: "Placeholder text" => "متن ذی نفع"
 // theme.surveyDescription: "Survey description font" => "قلم توصیف نظرسنجی"
+
+// ed.prevFocus: "Focus previous" => "تمرکز قبلی"
+// ed.nextFocus: "Focus next" => "تمرکز بعدی"
+// ed.saveTheme: "Save Theme" => "ذخیرۀ تم"
+// ed.saveThemeTooltip: "Save Theme" => "ذخیرۀ تم"
+// lg.page_requireName: "Make page required" => "ایجاد صفحه مورد نیاز است"
+// lg.panel_requireName: "Make page required" => "ایجاد صفحه مورد نیاز است"
+// signaturepad.signatureWidth: "Signature area width" => "عرض منطقه امضا"
+// signaturepad.signatureHeight: "Signature area height" => "ارتفاع منطقه امضا"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "مقیاس خودکار منطقه امضا"
+// signaturepad.penMinWidth: "Minimum pen width" => "حداقل عرض قلم"
+// signaturepad.penMaxWidth: "Maximum pen width" => "حداکثر عرض قلم"

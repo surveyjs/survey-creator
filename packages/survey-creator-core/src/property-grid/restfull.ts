@@ -15,6 +15,7 @@ import { ISurveyCreatorOptions } from "../creator-settings";
 var json = {
   name: "propertygrid_restfull",
   showInToolbox: false,
+  internal: true,
   createElements: function (panel) {
     //tell ComponentCollection that it is composite question
   }

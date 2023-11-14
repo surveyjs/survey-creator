@@ -56,6 +56,8 @@ export var ruStrings = {
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
     nextSelected: "Выберите далее",
+    prevFocus: "Фокусировка предыдущая",
+    nextFocus: "Сосредоточьтесь на следующем",
     surveyTypeName: "Обзор",
     pageTypeName: "Страница",
     panelTypeName: "Панель",
@@ -84,6 +86,8 @@ export var ruStrings = {
     translation: "Перевод",
     saveSurvey: "Сохранить опросник",
     saveSurveyTooltip: "Сохранить опрос",
+    saveTheme: "Сохранить тему",
+    saveThemeTooltip: "Сохранить тему",
     designer: "Обзор конструктора",
     jsonEditor: "JSON редактор",
     jsonHideErrors: "Скрыть ошибки",
@@ -168,8 +172,10 @@ export var ruStrings = {
       empty_tab: "Создайте правило для настройки потока опроса.",
       page_visibilityName: "Видимость страницы",
       page_enableName: "Включить (отключить) страницу",
+      page_requireName: "Сделать страницу обязательной",
       panel_visibilityName: "Видимость панели",
       panel_enableName: "Панель включена/выключена",
+      panel_requireName: "Сделать страницу обязательной",
       question_visibilityName: "Видимость вопроса",
       question_enableName: "Вопрос включен/выключен",
       question_requireName: "Вопрос обязательный",
@@ -665,7 +671,12 @@ export var ruStrings = {
     otherPlaceholder: "Заполнитель области комментариев",
     signaturepad: {
       showPlaceholder: "Показать замещающий текст",
-      placeholder: "Замещающий текст"
+      placeholder: "Замещающий текст",
+      signatureWidth: "Ширина области подписи",
+      signatureHeight: "Высота области подписи",
+      signatureAutoScaleEnabled: "Автоматическое масштабирование области подписи",
+      penMinWidth: "Минимальная ширина пера",
+      penMaxWidth: "Максимальная ширина пера"
     },
     filePlaceholder: "Замещающий текст файла",
     photoPlaceholder: "Замещающий текст фотографии",
@@ -1781,3 +1792,17 @@ editorLocalization.locales["ru"] = ruStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Показать заполнитель"
 // signaturepad.placeholder: "Placeholder text" => "Замещающий текст"
 // theme.surveyDescription: "Survey description font" => "Шрифт описания опроса"
+
+// ed.prevFocus: "Focus previous" => "Фокусировка предыдущая"
+// ed.nextFocus: "Focus next" => "Сосредоточьтесь на следующем"
+// ed.saveTheme: "Save Theme" => "Сохранить тему"
+// ed.saveThemeTooltip: "Save Theme" => "Сохранить тему"
+// lg.page_requireName: "Make page required" => "Сделать страницу обязательной"
+// lg.panel_requireName: "Make page required" => "Сделать страницу обязательной"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Ширина области подписи"
+// signaturepad.signatureHeight: "Signature area height" => "Высота области подписи"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Автоматическое масштабирование области подписи"
+// signaturepad.penMinWidth: "Minimum pen width" => "Минимальная ширина пера"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Максимальная ширина пера"

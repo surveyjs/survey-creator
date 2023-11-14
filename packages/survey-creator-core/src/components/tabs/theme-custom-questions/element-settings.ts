@@ -40,6 +40,7 @@ function getElementsJSON() {
 ComponentCollection.Instance.add({
   name: "elementsettings",
   showInToolbox: false,
+  internal: true,
   elementsJSON: getElementsJSON(),
   onInit() {
   },

@@ -695,6 +695,17 @@ test("Check boxshadowsettings question", () => {
   question.contentQuestion.panels[0].getQuestionByName("color").contentPanel.getQuestionByName("opacity").value = 7;
   expect(survey.data).toEqual({ "test": "inset 5px 10px 6px 8px rgba(103, 63, 255, 0.07)" });
 });
+test("boxshadowsettings should exists after ComponentCollection.Instance.clear()", () => {
+  ComponentCollection.Instance.clear();
+  const survey = new SurveyModel({
+    elements: [{
+      type: "boxshadowsettings",
+      name: "test",
+    }]
+  });
+  const question = survey.getAllQuestions()[0];
+  expect(question.getType()).toBe("boxshadowsettings");
+});
 
 test("Check parseColor and createColor functions", () => {
   let color = "#673241";
@@ -1453,6 +1464,8 @@ test("onThemeSelected + onThemeModified events", (): any => {
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
+  const generalBackcolorDimColor = themeEditorSurvey.getQuestionByName("generalBackcolorDimColor");
+  const generalPrimaryColor = themeEditorSurvey.getQuestionByName("generalPrimaryColor");
 
   let pluginThemeSelectedCount = 0;
   let pluginThemeModifiedCount = 0;
@@ -1473,6 +1486,18 @@ test("onThemeSelected + onThemeModified events", (): any => {
   expect(pluginThemeModifiedCount).toBe(1);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(1);
+  expect(builderThemeSelectedCount).toBe(1);
+
+  generalBackcolorDimColor.value = "#7a46bb";
+  expect(pluginThemeModifiedCount).toBe(2);
+  expect(pluginThemeSelectedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(2);
+  expect(builderThemeSelectedCount).toBe(1);
+
+  generalPrimaryColor.value = "#7a46bb";
+  expect(pluginThemeModifiedCount).toBe(3);
+  expect(pluginThemeSelectedCount).toBe(1);
+  expect(builderThemeModifiedCount).toBe(3);
   expect(builderThemeSelectedCount).toBe(1);
 });
 
@@ -2391,4 +2416,33 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   expect(themeEditor.getQuestionByName("editorPanel").contentPanel.getQuestionByName("backcolor").colorTitle).toBe("backcolor_test");
   expect(themeEditor.getQuestionByName("editorFont").contentPanel.getQuestionByName("family").title).toBe("fontFamily_test");
   editorLocalization.currentLocale = "en";
+});
+test("saveTheme action", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  let saveCount = 0;
+  creator.saveSurveyFunc = () => {
+    saveCount++;
+  };
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = (saveNo, callback) => {
+    saveThemeCount++;
+    callback(saveNo, "success");
+  };
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(0);
+  expect(themePlugin["saveThemeAction"].visible).toBeFalsy();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  creator.activeTab = "theme";
+  expect(themePlugin["saveThemeAction"].visible).toBeTruthy();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "some val";
+  expect(themePlugin["saveThemeAction"].enabled).toBeTruthy();
+  themePlugin["saveThemeAction"].action();
+  expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
+  expect(saveCount).toBe(0);
+  expect(saveThemeCount).toBe(1);
 });

@@ -41,6 +41,7 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
         aria-describedby={this.questionFile.ariaDescribedBy}
         multiple={false} title={this.questionFile.inputTitle}
         accept={this.questionFile.acceptedTypes}
+        tabIndex={-1}
         onChange={(event) => this.questionFile.onFileInputChange(event.nativeEvent) }/>
     );
   }
@@ -53,14 +54,14 @@ export class SurveyQuestionFileEditor extends SurveyQuestionText {
     );
   }
   protected renderClearButton(): JSX.Element {
-    return (
+    return attachKey2click((
       <button type="button"
         className={this.questionFile.cssClasses.clearButton}
         disabled={this.questionFile.getIsClearButtonDisabled()}
         onClick={ this.questionFile.doClean}>
         <SvgIcon iconName={this.questionFile.cssClasses.clearButtonIcon} size={"auto"} title={this.questionFile.clearButtonCaption}></SvgIcon>
       </button>
-    );
+    ));
   }
   protected renderChooseButton(): JSX.Element {
     return (

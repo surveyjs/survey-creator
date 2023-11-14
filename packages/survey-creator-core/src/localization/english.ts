@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP"
+    license: "To use our library in your app, a developer license is necessary. If you currently hold an activated license, ensure you're using the latest version available."
   },
   // Question types
   qt: {
@@ -58,6 +58,8 @@ export var enStrings = {
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
     nextSelected: "Select next",
+    prevFocus: "Focus previous",
+    nextFocus: "Focus next",
     surveyTypeName: "Survey",
     pageTypeName: "Page",
     panelTypeName: "Panel",
@@ -86,6 +88,8 @@ export var enStrings = {
     translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
+    saveTheme: "Save Theme",
+    saveThemeTooltip: "Save Theme",
     designer: "Designer",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
@@ -170,8 +174,10 @@ export var enStrings = {
       empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show (hide) page",
       page_enableName: "Enable (disable) page",
+      page_requireName: "Make page required",
       panel_visibilityName: "Show (hide) panel",
       panel_enableName: "Enable (disable) panel",
+      panel_requireName: "Make page required",
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",
@@ -614,7 +620,7 @@ export var enStrings = {
       validation: "Validation",
       cells: "Cell Texts",
       showOnCompleted: "Survey Complete",
-      logo: "Logo in Survey Title",
+      logo: "Logo in Survey Header",
       slider: "Slider",
       expression: "Expression",
       others: "Others"
@@ -666,7 +672,12 @@ export var enStrings = {
     otherPlaceholder: "Comment area placeholder",
     signaturepad: {
       showPlaceholder: "Show the placeholder",
-      placeholder: "Placeholder text"
+      placeholder: "Placeholder text",
+      signatureWidth: "Signature area width",
+      signatureHeight: "Signature area height",
+      signatureAutoScaleEnabled: "Auto-scale the signature area",
+      penMinWidth: "Minimum pen width",
+      penMaxWidth: "Maximum pen width",
     },
     filePlaceholder: "File placeholder text",
     photoPlaceholder: "Photo placeholder text",

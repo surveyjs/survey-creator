@@ -800,6 +800,7 @@ export abstract class PropertyGridEditorMatrixMultipleTypes extends PropertyGrid
   }
   public onMatrixCellCreated(obj: Base, options: any) {
     super.onMatrixCellCreated(obj, options);
+    if(!options.row.editingObj) return;
     const q = options.cellQuestion;
     if (options.columnName === this.getObjTypeName()) {
       q.showOptionsCaption = false;

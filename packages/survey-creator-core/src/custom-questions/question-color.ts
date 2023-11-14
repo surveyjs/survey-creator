@@ -104,6 +104,15 @@ export class QuestionColorModel extends QuestionTextModel {
   public set choices(newValue: Array<ItemValue>) {
     this.setPropertyValue("choices", newValue);
   }
+  protected onTextKeyDownHandler(event: any): void {
+    const popupModel = <PopupModel>this.dropdownAction.popupModel;
+    if(event.key === "ArrowDown") {
+      (popupModel).isVisible = true;
+    }
+    if(!popupModel.isVisible) {
+      super.onTextKeyDownHandler(event);
+    }
+  }
 
   public get showDropdownAction() {
     return !this.isValueEmpty(this.choices);
@@ -120,6 +129,7 @@ export class QuestionColorModel extends QuestionTextModel {
       verticalPosition: "bottom",
       horizontalPosition: "center"
     });
+    action.disableTabStop = true;
     const popupModel = <PopupModel>action.popupModel;
     const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
     popupModel.setWidthByTarget = true;

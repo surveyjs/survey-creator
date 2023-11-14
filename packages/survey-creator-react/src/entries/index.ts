@@ -51,6 +51,7 @@ export * from "../tabs/SurveySimulator";
 export * from "../events";
 export * from "../ObjectSelector";
 export * from "../PropertyGrid";
+export * from "../Search";
 
 export * from "../tabs/JsonErrorItem";
 

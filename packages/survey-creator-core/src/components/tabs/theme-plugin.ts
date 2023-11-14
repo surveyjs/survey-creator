@@ -5,7 +5,7 @@ import { ThemeBuilder } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { settings } from "../../creator-settings";
 import { PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
-import { saveToFileHandler } from "../../utils/utils";
+import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 function getObjectDiffs(obj1: any, obj2: any = {}): any {
   const result: any = {};
@@ -29,6 +29,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private prevPageAction: Action;
   private nextPageAction: Action;
   private themeSettingsAction: Action;
+  private saveThemeAction: Action;
   private resetTheme: Action;
   private importAction: Action;
   private exportAction: Action;
@@ -114,9 +115,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.model.onThemeSelected.add((sender, options) => {
+      this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
     this.model.onThemeModified.add((sender, options) => {
+      this.saveThemeAction.enabled = true;
       this.onThemeModified.fire(this, options);
     });
     this.model.onCanModifyTheme.add((sender, options) => {
@@ -224,6 +227,24 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
     items.push(this.undoAction);
     items.push(this.redoAction);
+
+    this.saveThemeAction = new Action({
+      id: "svd-save",
+      iconName: "icon-save",
+      action: () => {
+        this.creator.doSaveTheme();
+        this.saveThemeAction.enabled = false;
+      },
+      active: false,
+      enabled: false,
+      visible: <any>new ComputedUpdater<boolean>(() => {
+        return notShortCircuitAnd(this.creator.activeTab === "theme", this.creator.showSaveButton);
+      }),
+      locTitleName: "ed.saveTheme",
+      locTooltipName: "ed.saveThemeTooltip",
+      showTitle: false
+    });
+    items.push(this.saveThemeAction);
 
     this.resetTheme = new Action({
       id: "resetTheme",

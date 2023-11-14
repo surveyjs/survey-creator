@@ -74,6 +74,8 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
       </>
     );
 
+    const itemkey = this.props.element.key + (this.model.allowAdd ? "_new" : "");
+
     return (
       <div
         className={
@@ -84,7 +86,7 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
           (this.model.isDragDropMoveDown ? " svc-item-value--movedown" : "") +
           (this.model.isDragDropMoveUp ? " svc-item-value--moveup" : "")
         }
-        key={this.props.element.key}
+        key={itemkey}
         data-sv-drop-target-item-value={
           this.model.isDraggable ? this.model.item.value : undefined
         }

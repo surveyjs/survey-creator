@@ -431,6 +431,36 @@ test("Dropdown question inplace editor", async (t) => {
     .expect(items.count).eql(6); // Choice editors are visible if another question is selected
 });
 
+test("Dropdown question inplace editor after add", async (t) => {
+  const json = {
+    "logoPosition": "right",
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "dropdown",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+  await t
+    .hover(getToolboxItemByText("Dropdown"))
+    .dragToElement(getToolboxItemByText("Dropdown"), Selector(".svc-question__content"), { destinationOffsetY: 5, speed: 0.5 })
+    .expect(Selector(".svc-question__content").nth(0).visible).ok()
+    .expect(Selector(".svc-question__content").nth(1).visible).ok()
+    .click(items.nth(3).find(".svc-item-value-controls__add"))
+    .expect(Selector(".svc-item-value-wrapper span").withText("Item 4").withAttribute("contenteditable", "true").visible).ok();
+});
+
 test("Tag Box question inplace editor default values", async (t) => {
   await t
     .expect(getVisibleElement(".svc-question__content").exists).notOk()

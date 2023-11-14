@@ -48,6 +48,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
     return (
       <span className={this.question.cssClasses.buttonsContainer}>
         <button
+          tabIndex={-1}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
           onMouseDown={this.question.onDownButtonMouseDown}
@@ -58,6 +59,7 @@ export class SurveyQuestionSpinEditor extends SurveyQuestionText {
           <SvgIcon iconName={this.question.cssClasses.decreaseButtonIcon} size={"auto"}></SvgIcon>
         </button>
         <button
+          tabIndex={-1}
           className={this.question.cssClasses.arrowButton}
           disabled={this.isDisplayMode}
           onMouseDown={this.question.onUpButtonMouseDown}

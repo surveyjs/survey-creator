@@ -56,6 +56,8 @@ export var indonesianStrings = {
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
     nextSelected: "Pilih selanjutnya",
+    prevFocus: "Fokus sebelumnya",
+    nextFocus: "Fokus berikutnya",
     surveyTypeName: "Survei",
     pageTypeName: "Halaman",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var indonesianStrings = {
     translation: "Terjemahan",
     saveSurvey: "Simpan Survei",
     saveSurveyTooltip: "Simpan Survei",
+    saveTheme: "Simpan Tema",
+    saveThemeTooltip: "Simpan Tema",
     designer: "Rancangan Survei",
     jsonEditor: "Pengubah JSON",
     jsonHideErrors: "Menyembunyikan kesalahan",
@@ -168,8 +172,10 @@ export var indonesianStrings = {
       empty_tab: "Buat aturan untuk menyesuaikan alur survei.",
       page_visibilityName: "Tampilkan (sembunyikan) halaman",
       page_enableName: "Aktifkan (nonaktifkan) halaman",
+      page_requireName: "Buat halaman diperlukan",
       panel_visibilityName: "Tampilkan (sembunyikan) panel",
       panel_enableName: "Aktifkan (nonaktifkan) panel",
+      panel_requireName: "Buat halaman diperlukan",
       question_visibilityName: "Tampilkan (sembunyikan) pertanyaan",
       question_enableName: "Aktifkan (nonaktifkan) pertanyaan",
       question_requireName: "Buat pertanyaan diperlukan",
@@ -665,7 +671,12 @@ export var indonesianStrings = {
     otherPlaceholder: "Tempat penampung area komentar",
     signaturepad: {
       showPlaceholder: "Memperlihatkan tempat penampung",
-      placeholder: "Teks tempat penampung"
+      placeholder: "Teks tempat penampung",
+      signatureWidth: "Lebar area tanda tangan",
+      signatureHeight: "Tinggi area tanda tangan",
+      signatureAutoScaleEnabled: "Menskalakan area tanda tangan secara otomatis",
+      penMinWidth: "Lebar pena minimum",
+      penMaxWidth: "Lebar pena maksimum"
     },
     filePlaceholder: "Teks tempat penampung file",
     photoPlaceholder: "Teks placeholder foto",
@@ -1874,3 +1885,17 @@ editorLocalization.locales["id"] = indonesianStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Memperlihatkan tempat penampung"
 // signaturepad.placeholder: "Placeholder text" => "Teks tempat penampung"
 // theme.surveyDescription: "Survey description font" => "Font deskripsi survei"
+
+// ed.prevFocus: "Focus previous" => "Fokus sebelumnya"
+// ed.nextFocus: "Focus next" => "Fokus berikutnya"
+// ed.saveTheme: "Save Theme" => "Simpan Tema"
+// ed.saveThemeTooltip: "Save Theme" => "Simpan Tema"
+// lg.page_requireName: "Make page required" => "Buat halaman diperlukan"
+// lg.panel_requireName: "Make page required" => "Buat halaman diperlukan"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Lebar area tanda tangan"
+// signaturepad.signatureHeight: "Signature area height" => "Tinggi area tanda tangan"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Menskalakan area tanda tangan secara otomatis"
+// signaturepad.penMinWidth: "Minimum pen width" => "Lebar pena minimum"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Lebar pena maksimum"

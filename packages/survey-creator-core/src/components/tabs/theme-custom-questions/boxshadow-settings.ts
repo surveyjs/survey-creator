@@ -57,6 +57,7 @@ function getQuestionJSON() {
 ComponentCollection.Instance.add({
   name: "boxshadowsettings",
   showInToolbox: false,
+  internal: true,
   questionJSON: getQuestionJSON(),
   onCreated(question: QuestionCustomModel) {
     question.valueFromDataCallback = (value: string | Array<Object>): Array<Object> => typeof value == "string" ? parseBoxShadow(value) : value;

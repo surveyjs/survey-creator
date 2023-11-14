@@ -70,7 +70,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
   }
 
   protected updateValueFromInputEvent(event: Event) {
-    if(!Helpers.isTwoValueEquals((<HTMLInputElement>event.target).value, this.value)) {
+    const value = (<HTMLInputElement>event.target).value;
+    if(!!this.placeholder && !value) return;
+    if(!Helpers.isTwoValueEquals(value, this.value)) {
       this.clear(undefined, false);
       this.loadedFilesValue = undefined;
       this.value = (<HTMLInputElement>event.target).value;
@@ -98,7 +100,9 @@ export class QuestionFileEditorModel extends QuestionFileModel {
     return new CssClassBuilder().append(this.cssClasses.chooseButton).append(this.cssClasses.chooseButtonDisabled, this.isInputReadOnly).toString();
   }
   public onKeyDown = (event: KeyboardEvent) => {
-    this.onTextKeyDownHandler(event);
+    if((<HTMLElement>event.target).tagName === "INPUT") {
+      this.onTextKeyDownHandler(event);
+    }
   }
   public onFileInputChange = (event: Event) => {
     if(!this.onChooseFilesCallback) {

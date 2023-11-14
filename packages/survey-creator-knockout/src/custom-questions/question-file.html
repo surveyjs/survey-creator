@@ -7,11 +7,11 @@
     tabindex="-1">
   <div data-bind="css: question.cssClasses.buttonsContainer">
     <button type="button"
-      data-bind="css: question.cssClasses.clearButton, disable: question.getIsClearButtonDisabled(), click: question.doclean">
+      data-bind="css: question.cssClasses.clearButton, disable: question.getIsClearButtonDisabled(), click: question.doclean, key2click">
       <!-- ko component: { name: 'sv-svg-icon', params: { iconName: question.cssClasses.clearButtonIcon, size: 'auto', title: question.clearButtonCaption } } --><!-- /ko -->
     </button>
     <label role="button"
-      data-bind="click: (_, event) => question.chooseFiles(event), key2click, css: question.getChooseButtonCss(), attr: { for: question.inputId, 'aria-label': question.chooseButtonCaption }"
+      data-bind="click: (_, event) => question.chooseFiles(event), css: question.getChooseButtonCss(), attr: { for: question.inputId, 'aria-label': question.chooseButtonCaption }, key2click"
       tabindex="0">
       <!-- ko component: { name: 'sv-svg-icon', params: { title: question.chooseButtonCaption, iconName: question.cssClasses.chooseButtonIcon, size: 'auto' } } --><!-- /ko -->
     </label>

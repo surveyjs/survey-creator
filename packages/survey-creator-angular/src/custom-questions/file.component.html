@@ -2,14 +2,14 @@
   (drop)="model.onDrop($event)" (dragleave)="model.onDragLeave($event)" (keydown)="model.onKeyDown($event)">
   <input type="text" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.control"
     [value]="model.renderedValue ||''" (change)="model.onInputChange($event)" (blur)="model.onInputBlur($event)"
-    [attr.placeholder]="model.placeholder" />
+    [attr.placeholder]="model.placeholder"/>
   <input type="file" [disabled]="model.isInputReadOnly" [class]="model.cssClasses.fileInput" [attr.id]="model.inputId"
     [attr.aria-required]="model.ariaRequired" [attr.aria-label]="model.ariaLabel"
     [attr.aria-invalid]="model.ariaInvalid" [attr.aria-describedby]="model.ariaDescribedBy" [attr.multiple]="false"
-    [title]="model.inputTitle" [accept]="model.acceptedTypes" (change)="model.onFileInputChange($event)">
+    [title]="model.inputTitle" [accept]="model.acceptedTypes" (change)="model.onFileInputChange($event)" tabindex="-1">
   <div [class]="model.cssClasses.buttonsContainer">
     <button type="button" [class]="model.cssClasses.clearButton" [disabled]="model.getIsClearButtonDisabled()"
-      (click)="model.doClean()">
+      (click)="model.doClean()" [key2click]>
       <svg [iconName]="model.cssClasses.clearButtonIcon" size="'auto'" [title]="model.clearButtonCaption"
         sv-ng-svg-icon></svg>
     </button>

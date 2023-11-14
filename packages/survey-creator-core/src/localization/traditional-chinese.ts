@@ -56,6 +56,8 @@ var traditionalChineseTranslation = {
     hidePanel: "“隱藏”面板",
     prevSelected: "選擇上一個",
     nextSelected: "選擇下一步",
+    prevFocus: "焦點 上一頁",
+    nextFocus: "接下來的重點",
     surveyTypeName: "調查",
     pageTypeName: "頁",
     panelTypeName: "面板",
@@ -84,6 +86,8 @@ var traditionalChineseTranslation = {
     translation: "譯本",
     saveSurvey: "保存問卷",
     saveSurveyTooltip: "保存調查",
+    saveTheme: "保存主題",
+    saveThemeTooltip: "保存主題",
     designer: "問卷設計器",
     jsonEditor: "JSON 編輯器",
     jsonHideErrors: "隱藏錯誤",
@@ -168,8 +172,10 @@ var traditionalChineseTranslation = {
       empty_tab: "創建規則以自定義調查流。",
       page_visibilityName: "顯示（隱藏）頁面",
       page_enableName: "啟用（禁用）頁面",
+      page_requireName: "將頁面設為必填項",
       panel_visibilityName: "“顯示（隱藏）”面板",
       panel_enableName: "啟用（禁用）面板",
+      panel_requireName: "將頁面設為必填項",
       question_visibilityName: "顯示（隱藏）問題",
       question_enableName: "啟用（禁用）問題",
       question_requireName: "提出必填題",
@@ -665,7 +671,12 @@ var traditionalChineseTranslation = {
     otherPlaceholder: "註釋區佔位元",
     signaturepad: {
       showPlaceholder: "顯示佔位元",
-      placeholder: "佔位元文本"
+      placeholder: "佔位元文本",
+      signatureWidth: "簽名區域寬度",
+      signatureHeight: "簽名區域高度",
+      signatureAutoScaleEnabled: "自動縮放簽名區域",
+      penMinWidth: "最小筆寬",
+      penMaxWidth: "最大筆寬"
     },
     filePlaceholder: "檔佔位元文本",
     photoPlaceholder: "照片占位元文本",
@@ -1998,3 +2009,16 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "顯示佔位元"
 // signaturepad.placeholder: "Placeholder text" => "佔位元文本"
 // theme.surveyDescription: "Survey description font" => "調查描述字體"
+// ed.prevFocus: "Focus previous" => "焦點 上一頁"
+// ed.nextFocus: "Focus next" => "接下來的重點"
+// ed.saveTheme: "Save Theme" => "保存主題"
+// ed.saveThemeTooltip: "Save Theme" => "保存主題"
+// lg.page_requireName: "Make page required" => "將頁面設為必填項"
+// lg.panel_requireName: "Make page required" => "將頁面設為必填項"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "簽名區域寬度"
+// signaturepad.signatureHeight: "Signature area height" => "簽名區域高度"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "自動縮放簽名區域"
+// signaturepad.penMinWidth: "Minimum pen width" => "最小筆寬"
+// signaturepad.penMaxWidth: "Maximum pen width" => "最大筆寬"

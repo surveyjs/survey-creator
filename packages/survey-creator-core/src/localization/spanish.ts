@@ -56,6 +56,8 @@ var spanishTranslation = {
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
     nextSelected: "Seleccionar siguiente",
+    prevFocus: "Enfoque anterior",
+    nextFocus: "Enfoque siguiente",
     surveyTypeName: "Encuesta",
     pageTypeName: "Página",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ var spanishTranslation = {
     translation: "Traducción",
     saveSurvey: "Guardar la encuesta",
     saveSurveyTooltip: "Guardar la encuesta",
+    saveTheme: "Guardar tema",
+    saveThemeTooltip: "Guardar tema",
     designer: "Diseñador de la encuesta",
     jsonEditor: "Editor de JSON",
     jsonHideErrors: "Ocultar errores",
@@ -168,8 +172,10 @@ var spanishTranslation = {
       empty_tab: "Crea una regla para personalizar el flujo de la encuesta.",
       page_visibilityName: "Visibilidad de la pagina",
       page_enableName: "Habilitar (deshabilitar) página",
+      page_requireName: "Hacer que la página sea obligatoria",
       panel_visibilityName: "Visibilidad del panel",
       panel_enableName: "Panel habilitar / deshabilitar",
+      panel_requireName: "Hacer que la página sea obligatoria",
       question_visibilityName: "Pregunta visibilidad",
       question_enableName: "Pregunta habilitar / deshabilitar",
       question_requireName: "Pregunta opcional requerida",
@@ -665,7 +671,12 @@ var spanishTranslation = {
     otherPlaceholder: "Marcador de posición del área de comentarios",
     signaturepad: {
       showPlaceholder: "Mostrar el marcador de posición",
-      placeholder: "Texto de marcador de posición"
+      placeholder: "Texto de marcador de posición",
+      signatureWidth: "Ancho del área de firma",
+      signatureHeight: "Altura del área de firma",
+      signatureAutoScaleEnabled: "Escalado automático del área de firma",
+      penMinWidth: "Ancho mínimo del lápiz",
+      penMaxWidth: "Ancho máximo del lápiz"
     },
     filePlaceholder: "Texto del marcador de posición del archivo",
     photoPlaceholder: "Texto del marcador de posición de la foto",
@@ -1484,3 +1495,16 @@ editorLocalization.locales["es"] = spanishTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar el marcador de posición"
 // signaturepad.placeholder: "Placeholder text" => "Texto de marcador de posición"
 // theme.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"
+
+// ed.prevFocus: "Focus previous" => "Enfoque anterior"
+// ed.nextFocus: "Focus next" => "Enfoque siguiente"
+// ed.saveTheme: "Save Theme" => "Guardar tema"
+// ed.saveThemeTooltip: "Save Theme" => "Guardar tema"
+// lg.page_requireName: "Make page required" => "Hacer que la página sea obligatoria"
+// lg.panel_requireName: "Make page required" => "Hacer que la página sea obligatoria"
+// lg.expressionSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Ancho del área de firma"
+// signaturepad.signatureHeight: "Signature area height" => "Altura del área de firma"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Escalado automático del área de firma"
+// signaturepad.penMinWidth: "Minimum pen width" => "Ancho mínimo del lápiz"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Ancho máximo del lápiz"

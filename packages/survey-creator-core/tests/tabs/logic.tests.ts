@@ -2811,6 +2811,29 @@ test("Use settings to disable updating expressions on changing name and choices"
   expect(creator.survey.getQuestionByName("q4").visibleIf).toEqual("{q2} = ['item1']");
   expect(matrix.columns[1].visibleIf).toEqual("{row.col1} = 1");
 });
+test("Delete the question && settings.logic.updateExpressionsOnDeleting", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1", visibleIf: "{q3} > 2" },
+      {
+        type: "text",
+        name: "q2",
+        visibleIf: "{q1} = 1 and {q3} < 2 or {q1} = 2"
+      },
+      { type: "text", name: "q3" }
+    ]
+  };
+  settings.logic.updateExpressionsOnDeleting.question = false;
+  const survey = creator.survey;
+  const q1 = survey.getQuestionByName("q1");
+  const q2 = survey.getQuestionByName("q2");
+  const q3 = survey.getQuestionByName("q3");
+  creator.deleteElement(q3);
+  expect(q1.visibleIf).toEqual("{q3} > 2");
+  expect(q2.visibleIf).toEqual("{q1} = 1 and {q3} < 2 or {q1} = 2");
+  settings.logic.updateExpressionsOnDeleting.question = true;
+});
 test("Update expression on changing column name", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -3284,6 +3307,34 @@ test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   expect(dpQuestion.getType()).toBe("text");
   expect(dpQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
 });
+test("Include panel and page requiredIf into logic items", () => {
+  const survey = new SurveyModel({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "text",
+            "name": "question2",
+            "requiredIf": "{question1} = 'Item 1'"
+          },
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ],
+        "requiredIf": "{question1} = 'Item 2'"
+      }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  expect(logic.items).toHaveLength(2);
+});
 
 class IncrementCounterTrigger extends SurveyTrigger {
 
@@ -3302,5 +3353,4 @@ class IncrementCounterTrigger extends SurveyTrigger {
   public set initialNumber(val: number) {
     this.setPropertyValue("initialNumber", val);
   }
-
 }

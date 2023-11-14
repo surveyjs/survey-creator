@@ -68,6 +68,7 @@ function getElementsJSON() {
 ComponentCollection.Instance.add({
   name: "fontsettings",
   showInToolbox: false,
+  internal: true,
   elementsJSON: getElementsJSON(),
   onInit() {
   },

@@ -13,6 +13,7 @@ import { SidebarComponent } from "./side-bar/side-bar.component";
 import { SidebarTabComponent } from "./side-bar/side-bar-tab.component";
 import { ObjectSelectorComponent } from "./property-panel/object-selector.component";
 import { PropertyGridComponent } from "./property-panel/property-grid.component";
+import { SearchComponent } from "./property-panel/search.component";
 import { TextareaJsonEditorComponent } from "./tabs/json/json-editor-textarea.component";
 import { AceJsonEditorComponent } from "./tabs/json/json-editor-ace.component";
 import { LogicTabComponent } from "./tabs/logic/logic.component";
@@ -64,7 +65,7 @@ import { QuestionCarryForwardComponent } from "./question-carryforward.component
 import { JsonErrorItemComponent } from "./tabs/json/json-error-item.component";
 
 @NgModule({
-  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
+  declarations: [CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
@@ -74,7 +75,7 @@ import { JsonErrorItemComponent } from "./tabs/json/json-error-item.component";
     CommonModule, FormsModule, SurveyModule
   ],
   exports: [
-    CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
+    CreatorComponent, DesignerTabComponent, PageDesignerComponent, QuestionDesignerComponent, PanelDesignerComponent, SvgBundleComponent, TabbledMenuComponent, TabbedMenuItemComponent, TabbedMenuItemWrapperComponent, SidebarComponent, SidebarTabComponent, ObjectSelectorComponent, PropertyGridComponent, SearchComponent, TextareaJsonEditorComponent, AceJsonEditorComponent, LogicTabComponent, LogicAddButtonComponent, ActionButtonComponent, LinkValueQuestionComponent, EmbeddedSurveyQuestionComponent, TranslationTabComponent, TranslationSkeletonComponent, SimulatorComponent, TestTabComponent, TestAgainActionComponent, SurveyResultsComponent, SurveyResultsTableRowComponent, ThemeTabComponent,
     AdaptiveToolboxComponent, ToolboxToolComponent, ToolboxItemComponent, ToolboxCategoryComponent, StringEditorComponent, PageNavigatorComponent, PageNavigatorItemComponent,
     QuestionDropdownDesignerComponent, QuestionDropdownAdornerDesignerComponent, QuestionImageDesignerComponent, QuestionImageAdornerDesignerComponent,
     ItemValueDesignerComponent, ImageItemValueDesignerComponent, LogicOperatorComponent, MatrixCellComponent, QuestionEditorComponent, CellQuestionDropdownComponent, CreatorRowComponent, DesignerPagesComponent, DesignerSurveyComponent, CellQuestionComponent, QuestionWidgetDesignerComponent, ToolboxComponent, CreatorLogoImageComponent,
