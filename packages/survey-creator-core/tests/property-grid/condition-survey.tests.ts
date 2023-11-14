@@ -1471,6 +1471,18 @@ test("questionName choices", () => {
   expect(choices[2].text).toEqual("question 10");
   expect(choices[3].text).toEqual("question 11");
 });
+test("questionName choices and calculated values", () => {
+  const survey = new SurveyModel({
+    elements: [{ type: "text", name: "q1" }],
+    calculatedValues: [{ name: "defaultSetValue", expression: "false" }]
+  });
+  const question = survey.getQuestionByName("q1");
+  const editor = new ConditionEditor(survey, question);
+  const panel = editor.panel.panels[0];
+  const choices = panel.getQuestionByName("questionName").choices;
+  expect(choices).toHaveLength(1);
+  expect(choices[0].text).toEqual("defaultSetValue");
+});
 test("questionName title visibility", () => {
   const survey = new SurveyModel({
     elements: [
