@@ -69,6 +69,7 @@ import Dropdown from "./adorners/Dropdown.vue";
 import QuestionDropdown from "./adorners/QuestionDropdown.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
+import CarryForward from "./adorners/CarryForward.vue";
 
 function registerComponents(app: App) {
   app.use(surveyPlugin);
@@ -146,6 +147,7 @@ function registerComponents(app: App) {
   app.component("svc-dropdown-question", QuestionDropdown);
   app.component("svc-dropdown-question-adorner", Dropdown);
   app.component("svc-widget-question", CustomWidget);
+  app.component("svc-question-carryforward", CarryForward);
 }
 
 export const surveyCreatorPlugin = {

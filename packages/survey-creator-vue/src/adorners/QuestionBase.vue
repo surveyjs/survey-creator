@@ -67,11 +67,10 @@
         :model="model"
         :element="element"
       />
-
-      <!-- ko if: isUsingCarryForward -->
-      <!-- ko component: { name: 'svc-question-carryforward', params: $data } -->
-      <!-- /ko -->
-      <!-- /ko -->
+      <svc-question-carryforward
+        v-if="model.isUsingCarryForward"
+        :model="carryForwardParams"
+      ></svc-question-carryforward>
       <div class="svc-question__content-actions">
         <sv-action-bar
           :model="model.actionContainer"
@@ -83,8 +82,8 @@
 </template>
 <script lang="ts" setup>
 import type { QuestionAdornerViewModel } from "survey-creator-core";
-import { ref } from "vue";
-defineProps<{
+import { computed, ref } from "vue";
+const props = defineProps<{
   model: QuestionAdornerViewModel;
   element: any;
   adornerComponent?: string;
@@ -98,4 +97,9 @@ const root = ref();
 defineExpose({
   questionRoot: root,
 });
+const carryForwardParams = computed(() =>
+  props.model.isUsingCarryForward
+    ? props.model.createCarryForwardParams()
+    : null
+);
 </script>
