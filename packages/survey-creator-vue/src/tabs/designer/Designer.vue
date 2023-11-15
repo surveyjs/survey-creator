@@ -1,8 +1,10 @@
 <template>
-  <svc-adaptive-toolbox
-    v-if="model.isToolboxVisible"
-    :creator="model.creator"
-  ></svc-adaptive-toolbox>
+  <div class="svc-flex-column">
+    <svc-adaptive-toolbox
+      v-if="model.isToolboxVisible"
+      :creator="model.creator"
+    ></svc-adaptive-toolbox>
+  </div>
   <div
     class="svc-tab-designer"
     :class="model.getRootCss()"
