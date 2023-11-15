@@ -111,6 +111,7 @@ import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
 const props = defineProps<{ model: TabDesignerViewModel }>();
 useBase(() => props.model);
+useBase(() => props.model.survey);
 const pages = computed(() => {
   const model = props.model;
   return model.creator.survey.pages.concat(
