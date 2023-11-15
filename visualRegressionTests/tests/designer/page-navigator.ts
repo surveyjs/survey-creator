@@ -33,9 +33,8 @@ const json = {
 test("On the right side (default)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 400);
-    await setJSON({ pages: [{ name: "page1" }] });
-
     await setJSON(json);
+    await t.wait(500);
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
     await t.expect(pageNavigatorElement.visible).ok();
@@ -64,9 +63,9 @@ test("On the right side opened popup", async (t) => {
 test("On the left side", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 400);
-    await setJSON({ pages: [{ name: "page1" }] });
-
     await setJSON(json);
+    await t.wait(500);
+
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
     await changeToolboxLocation("right");
 
@@ -88,6 +87,7 @@ test("On the left side (rtl)", async (t) => {
     })();
 
     await setJSON(json);
+    await t.wait(500);
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
     await t.expect(pageNavigatorElement.visible).ok();
