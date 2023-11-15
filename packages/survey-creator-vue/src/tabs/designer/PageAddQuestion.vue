@@ -7,16 +7,12 @@
         e.stopPropagation();
       }
     "
-    v-on:mouseleave="(e) => item.data.hoverStopper(e, e.currentTarget)"
-    data-bind="click: addNewQuestion, key2click, clickBubble: false, event: { mouseover: function(m, e) { hoverStopper(e, $element); }}"
+    v-key2click
+    v-on:mouseover="(e) => item.data.hoverStopper(e, e.currentTarget)"
   >
-    <span
-      class="svc-text svc-text--normal svc-text--bold"
-      data-bind="text: $data.addNewQuestionText"
-    >
+    <span class="svc-text svc-text--normal svc-text--bold">
       {{ item.data.addNewQuestionText }}
     </span>
-    <!-- ko with: questionTypeSelectorModel -->
     <button
       type="button"
       v-on:click="
@@ -25,7 +21,9 @@
           e.stopPropagation();
         }
       "
-      data-bind="click: action, key2click, clickBubble: false, attr: { title: title, 'aria-label': title }"
+      :title="item.title"
+      v-key2click
+      :aria-label="item.title"
       class="svc-page__question-type-selector"
     >
       <sv-svg-icon
@@ -40,12 +38,12 @@
         :model="item.data.questionTypeSelectorModel.popupModel"
       ></sv-popup>
     </button>
-    <!-- /ko -->
   </div>
 </template>
 <script lang="ts" setup>
+import type { Action } from "survey-core";
 import type {} from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ item: any }>();
+const props = defineProps<{ item: Action }>();
 useBase(() => props.item);
 </script>
