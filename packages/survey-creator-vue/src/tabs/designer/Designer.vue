@@ -41,7 +41,7 @@
       <template v-if="!model.showPlaceholder">
         <div
           :class="model.designerCss"
-          data-bind="css: designerCss, style:{maxWidth: survey.renderedWidth}"
+          :style="{ maxWidth: model.survey.renderedWidth }"
         >
           <div
             v-if="model.creator.allowEditSurveyTitle"
