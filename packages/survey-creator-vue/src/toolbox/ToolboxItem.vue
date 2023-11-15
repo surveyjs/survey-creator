@@ -35,12 +35,10 @@ import type {
   IQuestionToolboxItem,
   ToolboxToolViewModel,
 } from "survey-creator-core";
-import { useBase } from "survey-vue3-ui";
-const props = defineProps<{
+defineProps<{
   creator: CreatorBase;
   item: IQuestionToolboxItem;
   isCompact: boolean;
   viewModel: ToolboxToolViewModel;
 }>();
-useBase(() => props.viewModel);
 </script>

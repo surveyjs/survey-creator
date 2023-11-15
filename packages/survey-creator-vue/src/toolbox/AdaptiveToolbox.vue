@@ -30,7 +30,7 @@
       >
         <div class="svc-toolbox__category">
           <svc-toolbox-tool
-            v-for="(item, index) in toolbox.renderedActions"
+            v-for="(item, index) in renderedActions"
             :creator="creator"
             :key="index"
             :item="item"
@@ -65,4 +65,5 @@ onMounted(() => {
 onUnmounted(() => {
   responsivityManager?.dispose();
 });
+const renderedActions = computed(() => toolbox.value.renderedActions);
 </script>

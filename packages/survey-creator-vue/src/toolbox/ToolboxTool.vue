@@ -24,6 +24,7 @@ import { ToolboxToolViewModel, type CreatorBase } from "survey-creator-core";
 import type { Action } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
 import { computed } from "vue";
+import { useBase } from "survey-vue3-ui";
 const props = defineProps<{
   creator: CreatorBase;
   item: Action;
@@ -36,6 +37,7 @@ const model = useCreatorModel(
     model.dispose();
   }
 );
+useBase(() => props.item);
 const toolboxCss = computed(
   () =>
     (props.item.css + " " ?? "") +
