@@ -394,7 +394,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
     } else {
-      this.availableThemes = this.availableThemes
+      // eslint-disable-next-line no-self-assign
+      this.availableThemes = this.availableThemes;
     }
     return fullThemeName;
   }

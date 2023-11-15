@@ -3477,7 +3477,7 @@ export class CreatorBase extends Base
           this._updateSaveActions();
         });
       }
-    }
+    };
     if (this.state === "modified") {
       this._doSaveCore(() => {
         themeSaveHandler();
