@@ -281,6 +281,10 @@ export class CreatorBase extends Base
   public get toolbar(): ActionContainer {
     return this.toolbarValue;
   }
+  protected _findAction(id: string): Action {
+    return this.toolbarItems.filter(a => a.id === id)[0];
+  }
+
   public dragDropSurveyElements: DragDropSurveyElements;
   public dragDropChoices: DragDropChoices;
 
@@ -1252,7 +1256,7 @@ export class CreatorBase extends Base
     }
   }
 
-  public doSaveTheme() {
+  private _doSaveThemeCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveThemeFunc) {
       this.saveNo++;
@@ -1267,7 +1271,15 @@ export class CreatorBase extends Base
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
+    }
+  }
+  public doSaveTheme() {
+    if (this.saveSurveyAndTheme) {
+      this.doSaveSurveyAndTheme();
+    } else {
+      this._doSaveThemeCore();
     }
   }
 
@@ -1546,6 +1558,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.saveSurveyAndTheme = this.options.saveSurveyAndTheme;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
@@ -2325,11 +2338,7 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
-      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
-      if (Array.isArray(actions) && actions.length > 0) {
-        actions[0].enabled = this.state === "modified";
-        actions[0].active = this.state === "modified";
-      }
+      this._updateSaveActions();
     }
   }
   public onStateChanged: CreatorEvent = new CreatorEvent();
@@ -3420,7 +3429,7 @@ export class CreatorBase extends Base
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
-  public doSave() {
+  private _doSaveCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -3434,9 +3443,78 @@ export class CreatorBase extends Base
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
     }
   }
+  public doSave() {
+    if (this.saveSurveyAndTheme) {
+      this.doSaveSurveyAndTheme();
+    } else {
+      this._doSaveCore();
+    }
+  }
+
+  private _updateSaveActions() {
+    const action = this._findAction("svd-save");
+    if (action) {
+      action.enabled = this.state === "modified";
+      action.active = this.state === "modified";
+    }
+    if (this.saveSurveyAndTheme) {
+      const action = this._findAction("svd-save-theme");
+      if (action) {
+        action.enabled = this.isThemeModified;
+        action.active = this.isThemeModified;
+      }
+    }
+  }
+
+  public doSaveSurveyAndTheme() {
+    const themeSaveHandler = () => {
+      if (this.isThemeModified) {
+        this._doSaveThemeCore(() => {
+          this._updateSaveActions();
+        });
+      }
+    }
+    if (this.state === "modified") {
+      this._doSaveCore(() => {
+        themeSaveHandler();
+      });
+    } else themeSaveHandler();
+  }
+
+  protected _syncSaveActions = (sender: any, options: any) => {
+    const saveAction = this._findAction("svd-save");
+    const saveThemeAction = this._findAction("svd-save-theme");
+    if (!saveAction || !saveThemeAction) {
+      return;
+    }
+    if (sender === this) {
+      saveThemeAction.enabled = saveAction.enabled;
+    } else {
+      saveAction.enabled = saveThemeAction.enabled;
+    }
+  }
+
+  @property({
+    defaultValue: false, onSet(val, target: CreatorBase) {
+      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
+      if (!themeTabPlugin) {
+        return;
+      }
+      if (val) {
+        target.onModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemeModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.add(target._syncSaveActions);
+      } else {
+        target.onModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemeModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
+      }
+    },
+  }) saveSurveyAndTheme: boolean;
 
   /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).

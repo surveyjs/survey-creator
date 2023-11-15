@@ -229,7 +229,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     items.push(this.redoAction);
 
     this.saveThemeAction = new Action({
-      id: "svd-save",
+      id: "svd-save-theme",
       iconName: "icon-save",
       action: () => {
         this.creator.doSaveTheme();
@@ -393,6 +393,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       } else {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
+    } else {
+      this.availableThemes = this.availableThemes
     }
     return fullThemeName;
   }
