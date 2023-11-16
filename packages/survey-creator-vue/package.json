@@ -16,6 +16,8 @@
     "test:single": "vitest --no-watch --no-threads tests/test.spec.ts",
     "release": "commit-and-tag-version --message \"Release: %s [azurepipelines skip]\" ",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "visual-regression-tests:ci": "testcafe chrome:headless -c 4 -q attemptLimit=5,successThreshold=1 --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
+    "visual-regression-tests": "testcafe chrome -c 4 -q attemptLimit=5,successThreshold=1 --disable-font-subpixel-positioning ../../visualRegressionTests/  --app \"npm run serve:example:prod\" --screenshots ../../ --selector-timeout 1500 --reporter minimal",
     "testcafe:ci": "testcafe -c 4 -q attemptLimit=5,successThreshold=1 chrome:headless ../../testCafe/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --reporter minimal",
     "testcafe": "testcafe chrome ../../testCafe/ --app \"npm run serve:example:prod\" --selector-timeout 1500 --reporter minimal"
   },
