@@ -399,7 +399,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
     return fullThemeName;
   }
-  public removeTheme(themeAccessor: string | ITheme): void {
+  public removeTheme(themeAccessor: string | ITheme, withModifications = false): void {
     const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
@@ -408,8 +408,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
       }
       const registeredThemeNames = Object.keys(Themes);
-      let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
-      if (!themeModificationsExist) {
+      let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
+      if (withModifications && themeModifications.length > 0) {
+        themeModifications.forEach(themeModificationFullName => delete Themes[themeModificationFullName]);
+      }
+      if (withModifications || themeModifications.length === 0) {
         const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
         if (themeIndex !== -1) {
           const availableThemes = this.availableThemes;
@@ -426,9 +429,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return this.getThemeChanges();
   }
   public getThemeChanges() {
-    const fullTheme = this.creator.theme;
+    const fullTheme: ITheme = this.creator.theme;
     let probeThemeFullName = getThemeFullName(fullTheme);
-    const baseTheme = findSuitableTheme(fullTheme.themeName, probeThemeFullName);
+    const baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
     const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
     Object.keys(themeChanges).forEach(propertyName => {
       if (propertyName.toLowerCase().indexOf("background") !== -1) {

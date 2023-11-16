@@ -45,18 +45,18 @@ export const PredefinedColors = {
   }
 };
 
-export function findSuitableTheme(themeName: string, probeThemeFullName: string) {
+export function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
   let suitableTheme = Themes[probeThemeFullName];
   if (!!suitableTheme) {
     return suitableTheme;
   }
-  const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName) === 0);
+  const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName + "-") === 0);
   for (let fullThemeName of appropriateThemeNames) {
-    if (fullThemeName.indexOf(themeName + "-" + this.themePalette) === 0) {
-      probeThemeFullName = themeName + "-" + this.themePalette;
+    if (fullThemeName.indexOf(themeName + "-" + themePalette) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette;
     }
-    if (fullThemeName.indexOf(themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "")) === 0) {
-      probeThemeFullName = themeName + "-" + this.themePalette + (this.themeMode === "lightweight" ? "-panelless" : "");
+    if (fullThemeName.indexOf(themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "")) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "");
     }
   }
   return Themes[probeThemeFullName] || Themes[appropriateThemeNames[0]];

@@ -646,7 +646,7 @@ export class ThemeBuilder extends Base {
   }
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
-    return findSuitableTheme(themeName, probeThemeFullName);
+    return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");

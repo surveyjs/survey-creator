@@ -2533,6 +2533,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
 
   const fullThemeName = themePlugin.addTheme({ "themeName": "custom", isPanelless: true, "colorPalette": "dark", cssVariables: {} });
   expect(fullThemeName).toBe("custom-dark-panelless");
+  expect(Themes[fullThemeName]).toBeDefined();
   expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
     "default",
     "sharp",
@@ -2557,6 +2558,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
 
   const fullPanellessThemeName = themePlugin.addTheme({ "themeName": "custom", isPanelless: false, "colorPalette": "dark", cssVariables: {} });
   expect(fullPanellessThemeName).toBe("custom-dark");
+  expect(Themes[fullPanellessThemeName]).toBeDefined();
   expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
     "default",
     "sharp",
@@ -2577,6 +2579,19 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
   expect(themePalette.value).toBe("dark");
   expect(themePalette.isReadOnly).toBeTruthy();
 
-  themePlugin.removeTheme(fullThemeName);
-  themePlugin.removeTheme(fullPanellessThemeName);
+  themePlugin.removeTheme(fullThemeName, true);
+  expect(Themes[fullThemeName]).toBeUndefined();
+  expect(Themes[fullPanellessThemeName]).toBeUndefined();
+  expect(themeChooser.choices.map(c => c.value)).toStrictEqual([
+    "default",
+    "sharp",
+    "borderless",
+    "flat",
+    "plain",
+    "doubleborder",
+    "layered",
+    "solid",
+    "threedimensional",
+    "contrast"
+  ]);
 });
