@@ -311,6 +311,17 @@ export class SurveyLogicTypes {
       }
     },
     {
+      name: "page_require",
+      baseClass: "page",
+      propertyName: "requiredIf",
+      showIf: function (survey: SurveyModel): boolean {
+        return survey.pages.length > 1;
+      },
+      getSelectorChoices(survey: SurveyModel, context: Question): Array<SurveyElement<any>> {
+        return survey.pages;
+      }
+    },
+    {
       name: "panel_visibility",
       baseClass: "panel",
       propertyName: "visibleIf",
@@ -319,6 +330,11 @@ export class SurveyLogicTypes {
       name: "panel_enable",
       baseClass: "panel",
       propertyName: "enableIf",
+    },
+    {
+      name: "panel_require",
+      baseClass: "panel",
+      propertyName: "requiredIf",
     },
     {
       name: "question_visibility",

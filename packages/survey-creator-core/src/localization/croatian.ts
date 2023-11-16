@@ -56,6 +56,8 @@ export var hrStrings = {
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
     nextSelected: "Odaberi sljedeće",
+    prevFocus: "Fokusiraj prethodno",
+    nextFocus: "Usredotoči se sljedeće",
     surveyTypeName: "Anketa",
     pageTypeName: "Stranica",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var hrStrings = {
     translation: "Prijevod",
     saveSurvey: "Spremi anketu",
     saveSurveyTooltip: "Spremi anketu",
+    saveTheme: "Spremi temu",
+    saveThemeTooltip: "Spremi temu",
     designer: "Dizajner ankete",
     jsonEditor: "JSON urednik",
     jsonHideErrors: "Sakrij pogreške",
@@ -168,8 +172,10 @@ export var hrStrings = {
       empty_tab: "Stvorite pravilo za prilagodbu tijeka upitnika.",
       page_visibilityName: "Vidljivost stranice",
       page_enableName: "Omogući (onemogući stranicu)",
+      page_requireName: "Učini stranicu obaveznom",
       panel_visibilityName: "Vidljivost panela",
       panel_enableName: "Omogući/onemogući panel",
+      panel_requireName: "Učini stranicu obaveznom",
       question_visibilityName: "Vidljivost pitanja",
       question_enableName: "Pitanje omogućuje/onesposobljava",
       question_requireName: "Pitanje nije obavezno",
@@ -665,7 +671,12 @@ export var hrStrings = {
     otherPlaceholder: "Rezervirano mjesto područja komentara",
     signaturepad: {
       showPlaceholder: "Pokaži rezervirano mjesto",
-      placeholder: "Tekst rezerviranog mjesta"
+      placeholder: "Tekst rezerviranog mjesta",
+      signatureWidth: "Širina područja potpisa",
+      signatureHeight: "Visina područja potpisa",
+      signatureAutoScaleEnabled: "Automatsko mijenjanje područja potpisa",
+      penMinWidth: "Minimalna širina olovke",
+      penMaxWidth: "Maksimalna širina olovke"
     },
     filePlaceholder: "Tekst rezerviranog mjesta datoteke",
     photoPlaceholder: "Tekst rezerviranog mjesta za fotografije",
@@ -1713,3 +1724,17 @@ editorLocalization.locales["hr"] = hrStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Pokaži rezervirano mjesto"
 // signaturepad.placeholder: "Placeholder text" => "Tekst rezerviranog mjesta"
 // theme.surveyDescription: "Survey description font" => "Font opisa upitnika"
+
+// ed.prevFocus: "Focus previous" => "Fokusiraj prethodno"
+// ed.nextFocus: "Focus next" => "Usredotoči se sljedeće"
+// ed.saveTheme: "Save Theme" => "Spremi temu"
+// ed.saveThemeTooltip: "Save Theme" => "Spremi temu"
+// lg.page_requireName: "Make page required" => "Učini stranicu obaveznom"
+// lg.panel_requireName: "Make page required" => "Učini stranicu obaveznom"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Širina područja potpisa"
+// signaturepad.signatureHeight: "Signature area height" => "Visina područja potpisa"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatsko mijenjanje područja potpisa"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimalna širina olovke"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maksimalna širina olovke"

@@ -56,6 +56,8 @@ export var turkishStrings = {
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
     nextSelected: "İleri'yi seçin",
+    prevFocus: "Öncesine odaklan",
+    nextFocus: "Sonrakine odaklan",
     surveyTypeName: "Anket",
     pageTypeName: "Sayfa",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ export var turkishStrings = {
     translation: "Çeviri",
     saveSurvey: "Anketi Kaydet",
     saveSurveyTooltip: "Anketi Kaydet",
+    saveTheme: "Temayı Kaydet",
+    saveThemeTooltip: "Temayı Kaydet",
     designer: "Anket Tasarımı",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hataları gizleme",
@@ -168,8 +172,10 @@ export var turkishStrings = {
       empty_tab: "Anketin akışını özelleştirmek için bir kural oluşturun.",
       page_visibilityName: "Sayfa görünürse",
       page_enableName: "Sayfayı etkinleştir (devre dışı bırak)",
+      page_requireName: "Sayfayı gerekli hale getirme",
       panel_visibilityName: "Panel görünürse",
       panel_enableName: "Panel aktif/pasif ise",
+      panel_requireName: "Sayfayı gerekli hale getirme",
       question_visibilityName: "Soru görüürse",
       question_enableName: "Soru aktif/pasifse",
       question_requireName: "Soru isteğe bağlı zorunluysa",
@@ -665,7 +671,12 @@ export var turkishStrings = {
     otherPlaceholder: "Yorum alanı yer tutucusu",
     signaturepad: {
       showPlaceholder: "Yer tutucuyu gösterme",
-      placeholder: "Yer tutucu metin"
+      placeholder: "Yer tutucu metin",
+      signatureWidth: "İmza alanı genişliği",
+      signatureHeight: "İmza alanı yüksekliği",
+      signatureAutoScaleEnabled: "İmza alanını otomatik ölçeklendirme",
+      penMinWidth: "Minimum kalem genişliği",
+      penMaxWidth: "Maksimum kalem genişliği"
     },
     filePlaceholder: "Dosya yer tutucu metni",
     photoPlaceholder: "Fotoğraf yer tutucu metni",
@@ -1715,3 +1726,16 @@ editorLocalization.locales["tr"] = turkishStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Yer tutucuyu gösterme"
 // signaturepad.placeholder: "Placeholder text" => "Yer tutucu metin"
 // theme.surveyDescription: "Survey description font" => "Anket açıklaması yazı tipi"
+// ed.prevFocus: "Focus previous" => "Öncesine odaklan"
+// ed.nextFocus: "Focus next" => "Sonrakine odaklan"
+// ed.saveTheme: "Save Theme" => "Temayı Kaydet"
+// ed.saveThemeTooltip: "Save Theme" => "Temayı Kaydet"
+// lg.page_requireName: "Make page required" => "Sayfayı gerekli hale getirme"
+// lg.panel_requireName: "Make page required" => "Sayfayı gerekli hale getirme"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "İmza alanı genişliği"
+// signaturepad.signatureHeight: "Signature area height" => "İmza alanı yüksekliği"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "İmza alanını otomatik ölçeklendirme"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimum kalem genişliği"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maksimum kalem genişliği"

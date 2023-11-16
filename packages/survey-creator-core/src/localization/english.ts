@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP"
+    license: "To use our library in your app, a developer license is necessary. If you currently hold an activated license, ensure you're using the latest version available."
   },
   // Question types
   qt: {
@@ -174,8 +174,10 @@ export var enStrings = {
       empty_tab: "Create a rule to customize the flow of the survey.",
       page_visibilityName: "Show (hide) page",
       page_enableName: "Enable (disable) page",
+      page_requireName: "Make page required",
       panel_visibilityName: "Show (hide) panel",
       panel_enableName: "Enable (disable) panel",
+      panel_requireName: "Make page required",
       question_visibilityName: "Show (hide) question",
       question_enableName: "Enable (disable) question",
       question_requireName: "Make question required",

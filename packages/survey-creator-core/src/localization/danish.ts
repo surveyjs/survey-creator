@@ -56,6 +56,8 @@ export var danishStrings = {
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
     nextSelected: "Vælg næste",
+    prevFocus: "Fokus forrige",
+    nextFocus: "Fokuser næste",
     surveyTypeName: "Spørgeundersøgelse",
     pageTypeName: "Side",
     panelTypeName: "Panelet",
@@ -84,6 +86,8 @@ export var danishStrings = {
     translation: "Oversættelse",
     saveSurvey: "Gem undersøgelse",
     saveSurveyTooltip: "Gem undersøgelse",
+    saveTheme: "Gem tema",
+    saveThemeTooltip: "Gem tema",
     designer: "Undersøgelsesdesigner",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Skjul fejl",
@@ -168,8 +172,10 @@ export var danishStrings = {
       empty_tab: "Opret en regel for at tilpasse undersøgelsens flow.",
       page_visibilityName: "Vis (skjul) side",
       page_enableName: "Aktivér (deaktiver) side",
+      page_requireName: "Gør siden påkrævet",
       panel_visibilityName: "Panelet Vis (skjul)",
       panel_enableName: "Aktivér (deaktiver) panel",
+      panel_requireName: "Gør siden påkrævet",
       question_visibilityName: "Vis (skjul) spørgsmål",
       question_enableName: "Aktivér (deaktiver) spørgsmål",
       question_requireName: "Gør spørgsmål påkrævet",
@@ -665,7 +671,12 @@ export var danishStrings = {
     otherPlaceholder: "Pladsholder til kommentarområde",
     signaturepad: {
       showPlaceholder: "Vis pladsholderen",
-      placeholder: "Pladsholdertekst"
+      placeholder: "Pladsholdertekst",
+      signatureWidth: "Bredde på signaturområde",
+      signatureHeight: "Højde på signaturområde",
+      signatureAutoScaleEnabled: "Skaler signaturområdet automatisk",
+      penMinWidth: "Mindste bredde på pennen",
+      penMaxWidth: "Maksimal bredde på pennen"
     },
     filePlaceholder: "Filpladsholdertekst",
     photoPlaceholder: "Eksempeltekst til billeder",
@@ -1905,3 +1916,16 @@ editorLocalization.locales["da"] = danishStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vis pladsholderen"
 // signaturepad.placeholder: "Placeholder text" => "Pladsholdertekst"
 // theme.surveyDescription: "Survey description font" => "Skrifttype til undersøgelsesbeskrivelse"
+// ed.prevFocus: "Focus previous" => "Fokus forrige"
+// ed.nextFocus: "Focus next" => "Fokuser næste"
+// ed.saveTheme: "Save Theme" => "Gem tema"
+// ed.saveThemeTooltip: "Save Theme" => "Gem tema"
+// lg.page_requireName: "Make page required" => "Gør siden påkrævet"
+// lg.panel_requireName: "Make page required" => "Gør siden påkrævet"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Bredde på signaturområde"
+// signaturepad.signatureHeight: "Signature area height" => "Højde på signaturområde"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skaler signaturområdet automatisk"
+// signaturepad.penMinWidth: "Minimum pen width" => "Mindste bredde på pennen"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal bredde på pennen"

@@ -416,7 +416,7 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.element`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
    * A survey element (survey, page, question, or panel) whose name has been requested.
    * - `options.area`: `string`\
    * A Survey Creator UI element that requests the display name. Contains one of the following values:
@@ -897,11 +897,20 @@ export class CreatorBase extends Base
    */
   public onSelectedElementChanged: CreatorEvent = new CreatorEvent();
   /**
-   * The event is fired then one need to choose files.
+   * An event that is raised when Survey Creator opens a dialog window for users to select files.
    * 
-   * - `sender` - the survey creator object that fires the event
-   * - `options.input` - file input HTML element
-   * - `options.callback` - need to be called after files has been chosen
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.input`: [`HTMLInputElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)\
+   * A file input HTML element.
+   * - `options.element`: [`SurveyElement`](https://surveyjs.io/form-library/documentation/api-reference/surveyelement) | [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
+   * A question, panel, page, or survey for which this event is raised. 
+   * - `options.item`: `ItemValue`\
+   * A choice item for which the event is raised. This parameter has a value only when the dialog window is opened to select images for an [Image Picker](https://surveyjs.io/form-library/documentation/api-reference/image-picker-question-model) question.
+   * - `options.callback: (files: Array<File>)`: `Function`\
+   * A callback function to which you should pass selected files.
    * @see uploadFiles
    */
   public onOpenFileChooser: CreatorEvent = new CreatorEvent();

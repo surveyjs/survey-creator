@@ -56,6 +56,8 @@ export var mnStrings = {
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
     nextSelected: "Дараагийнхыг сонгох",
+    prevFocus: "Өмнөх анхаарлаа төвлөрүүлэх",
+    nextFocus: "Дараа нь анхаарлаа төвлөрүүл",
     surveyTypeName: "Санал асуулга",
     pageTypeName: "Хуудас",
     panelTypeName: "Панел",
@@ -84,6 +86,8 @@ export var mnStrings = {
     translation: "Орчуулга",
     saveSurvey: "Санал асуулга хадгалах",
     saveSurveyTooltip: "Санал асуулга хадгалах",
+    saveTheme: "Сэдэв хадгалах",
+    saveThemeTooltip: "Сэдэв хадгалах",
     designer: "Удирдлага",
     jsonEditor: "JSON засварлагч",
     jsonHideErrors: "Алдааг нуух",
@@ -168,8 +172,10 @@ export var mnStrings = {
       empty_tab: "Санал асуулгын урсгалыг өөрчлөх дүрэм үүсгэнэ үү.",
       page_visibilityName: "Хуудас харуулах (нуух)",
       page_enableName: "Хуудас идэвхжүүлэх (идэвхгүй болгох)",
+      page_requireName: "Шаардлагатай хуудас хийх",
       panel_visibilityName: "Панел (нуух) харуулах",
       panel_enableName: "Панел (идэвхгүй болгох) идэвхжүүлэх",
+      panel_requireName: "Шаардлагатай хуудас хийх",
       question_visibilityName: "Асуулт харуулах (нуух)",
       question_enableName: "Асуулт идэвхжүүлэх (идэвхгүй болгох)",
       question_requireName: "Асуултыг заавал бөглөөөөх болгох",
@@ -665,7 +671,12 @@ export var mnStrings = {
     otherPlaceholder: "Санал асуулгын хэсэг",
     signaturepad: {
       showPlaceholder: "Эзэмшигчийг үзүүл",
-      placeholder: "Placeholder текст"
+      placeholder: "Placeholder текст",
+      signatureWidth: "Гарын үсэг зурах хэсгийн өргөн",
+      signatureHeight: "Гарын үсэг зурах хэсгийн өндөр",
+      signatureAutoScaleEnabled: "Авто замын тэмдэг тэмдэглэгээний талбай",
+      penMinWidth: "Хамгийн бага үзэгний өргөн",
+      penMaxWidth: "Хамгийн их үзэгний өргөн"
     },
     filePlaceholder: "Файл байршуулагчийн текст",
     photoPlaceholder: "Гэрэл зураг байршуулагч бичвэр",
@@ -1355,3 +1366,15 @@ editorLocalization.locales["mn"] = mnStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Эзэмшигчийг үзүүл"
 // signaturepad.placeholder: "Placeholder text" => "Placeholder текст"
 // theme.surveyDescription: "Survey description font" => "Судалгааны тодорхойлолтын фонт"
+
+// ed.prevFocus: "Focus previous" => "Өмнөх анхаарлаа төвлөрүүлэх"
+// ed.nextFocus: "Focus next" => "Дараа нь анхаарлаа төвлөрүүл"
+// ed.saveTheme: "Save Theme" => "Сэдэв хадгалах"
+// ed.saveThemeTooltip: "Save Theme" => "Сэдэв хадгалах"
+// lg.page_requireName: "Make page required" => "Шаардлагатай хуудас хийх"
+// lg.panel_requireName: "Make page required" => "Шаардлагатай хуудас хийх"
+// signaturepad.signatureWidth: "Signature area width" => "Гарын үсэг зурах хэсгийн өргөн"
+// signaturepad.signatureHeight: "Signature area height" => "Гарын үсэг зурах хэсгийн өндөр"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Авто замын тэмдэг тэмдэглэгээний талбай"
+// signaturepad.penMinWidth: "Minimum pen width" => "Хамгийн бага үзэгний өргөн"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Хамгийн их үзэгний өргөн"

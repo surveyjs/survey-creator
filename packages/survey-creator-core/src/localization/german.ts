@@ -56,6 +56,8 @@ var germanTranslation = {
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
     nextSelected: "Nächstes auswählen",
+    prevFocus: "Fokus zurück",
+    nextFocus: "Weiter fokussieren",
     surveyTypeName: "Umfrage",
     pageTypeName: "Seite",
     panelTypeName: "Panel",
@@ -84,6 +86,8 @@ var germanTranslation = {
     translation: "Übersetzung",
     saveSurvey: "Umfrage speichern",
     saveSurveyTooltip: "Umfrage speichern",
+    saveTheme: "Theme speichern",
+    saveThemeTooltip: "Theme speichern",
     designer: "Designer",
     jsonEditor: "JSON",
     jsonHideErrors: "Fehler verstecken",
@@ -168,8 +172,10 @@ var germanTranslation = {
       empty_tab: "Erstelle eine Regel erstellen, um den Fluss der Umfrage anzupassen.",
       page_visibilityName: "Seite anzeigen/verstecken",
       page_enableName: "Seite aktivieren/deaktivieren",
+      page_requireName: "Als Seite erforderlich festlegen",
       panel_visibilityName: "Panel anzeigen/verstecken",
       panel_enableName: "Panel aktivieren/deaktivieren",
+      panel_requireName: "Als Seite erforderlich festlegen",
       question_visibilityName: "Frage anzeigen/verstecken",
       question_enableName: "Frage aktivieren/deaktivieren",
       question_requireName: "Frage optional/erforderlich",
@@ -665,7 +671,12 @@ var germanTranslation = {
     otherPlaceholder: "Platzhalter für den Kommentarbereich",
     signaturepad: {
       showPlaceholder: "Platzhalter anzeigen",
-      placeholder: "Platzhaltertext"
+      placeholder: "Platzhaltertext",
+      signatureWidth: "Breite des Signaturbereichs",
+      signatureHeight: "Höhe des Signaturbereichs",
+      signatureAutoScaleEnabled: "Automatisches Skalieren des Signaturbereichs",
+      penMinWidth: "Minimale Stiftbreite",
+      penMaxWidth: "Maximale Stiftbreite"
     },
     filePlaceholder: "Platzhaltertext für Dateien",
     photoPlaceholder: "Platzhaltertext für Fotos",
@@ -1442,3 +1453,17 @@ editorLocalization.locales["de"] = germanTranslation;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Platzhalter anzeigen"
 // signaturepad.placeholder: "Placeholder text" => "Platzhaltertext"
 // theme.surveyDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"
+
+// ed.prevFocus: "Focus previous" => "Fokus zurück"
+// ed.nextFocus: "Focus next" => "Weiter fokussieren"
+// ed.saveTheme: "Save Theme" => "Theme speichern"
+// ed.saveThemeTooltip: "Save Theme" => "Theme speichern"
+// lg.page_requireName: "Make page required" => "Als Seite erforderlich festlegen"
+// lg.panel_requireName: "Make page required" => "Als Seite erforderlich festlegen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Breite des Signaturbereichs"
+// signaturepad.signatureHeight: "Signature area height" => "Höhe des Signaturbereichs"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatisches Skalieren des Signaturbereichs"
+// signaturepad.penMinWidth: "Minimum pen width" => "Minimale Stiftbreite"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Maximale Stiftbreite"

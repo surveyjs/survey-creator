@@ -1,9 +1,11 @@
-import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty } from "survey-core";
+import { SurveyModel, ILocalizableOwner, LocalizableString, Serializer, JsonObjectProperty, QuestionMatrixDynamicModel, RegexValidator } from "survey-core";
 import { editorLocalization } from "../../src/editorLocalization";
 import { StringEditorViewModelBase } from "../../src/components/string-editor";
 import { CreatorTester } from "../creator-tester";
 import { TabDesignerPlugin } from "../../src/components/tabs/designer-plugin";
 import { LogoImageViewModel } from "../../src/components/header/logo-image";
+import { SurveyLogicUI } from "../../src/components/tabs/logic-ui";
+export * from "../../src/property-grid/matrices";
 
 test("Survey/page title/description placeholders text", () => {
   new CreatorTester();
@@ -154,8 +156,8 @@ test("StringEditorViewModelBase skip undo/redo hot keys", () => {
   const event = {
     keyCode: 70,
     ctrlKey: true,
-    stopImmediatePropagation: () => result+="->ip",
-    preventDefault: () => result+="->pd"
+    stopImmediatePropagation: () => result += "->ip",
+    preventDefault: () => result += "->pd"
   };
   expect(result).toBe("");
   editor.checkConstraints(event);
@@ -166,4 +168,34 @@ test("StringEditorViewModelBase skip undo/redo hot keys", () => {
   event.keyCode = 90;
   editor.checkConstraints(event);
   expect(result).toBe("->ip->pd->ip->pd");
+});
+test("Property Grid and logic tab, Bug#4877", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.selectElement(creator.survey);
+  const logicPanel = creator.propertyGrid.getPanelByName("logic");
+  logicPanel.expand();
+  const triggersQuestion = <QuestionMatrixDynamicModel>logicPanel.getQuestionByName("triggers");
+  expect(triggersQuestion.visibleRows).toHaveLength(0);
+  const logic = new SurveyLogicUI(creator.survey);
+  logic.addNew();
+  const expressionEditor = logic.expressionEditor;
+  const itemEditor = logic.itemEditor;
+  const actionPanel = itemEditor.panels[0];
+  const logicTypeName = actionPanel.getQuestionByName("logicTypeName");
+  logicTypeName.value = "trigger_complete";
+  expressionEditor.text = "{var1} = 1";
+  logic.itemEditor.apply();
+  expect(triggersQuestion.visibleRows).toHaveLength(1);
+});
+test("Property Grid and adding a validator in the code, Bug#4882", () => {
+  const creator = new CreatorTester({ showLogicTab: true });
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q1 = creator.survey.getQuestionByName("q1");
+  creator.selectElement(q1);
+  const validatorPanel = creator.propertyGrid.getPanelByName("validation");
+  validatorPanel.expand();
+  const validatorsQuestion = <QuestionMatrixDynamicModel>validatorPanel.getQuestionByName("validators");
+  expect(validatorsQuestion.visibleRows).toHaveLength(0);
+  q1.validators.push(new RegexValidator(""));
+  expect(validatorsQuestion.visibleRows).toHaveLength(1);
 });

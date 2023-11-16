@@ -56,6 +56,8 @@ export var arStrings = {
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
     nextSelected: "Select next",
+    prevFocus: "التركيز السابق",
+    nextFocus: "التركيز التالي",
     surveyTypeName: "الإستبيان",
     pageTypeName: "الصفحة",
     panelTypeName: "اللوحة",
@@ -84,6 +86,8 @@ export var arStrings = {
     translation: "Translation",
     saveSurvey: "Save Survey",
     saveSurveyTooltip: "Save Survey",
+    saveTheme: "حفظ السمة",
+    saveThemeTooltip: "حفظ السمة",
     designer: "تصميم الإستبيان",
     jsonEditor: "JSON Editor",
     jsonHideErrors: "Hide errors",
@@ -168,8 +172,10 @@ export var arStrings = {
       empty_tab: "قم بإنشاء إرتباط لتخصيص تدفق الإستبيان",
       page_visibilityName: "إظهار (إخفاء) صفحة",
       page_enableName: "تمكين (تعطيل) الصفحة",
+      page_requireName: "اجعل الصفحة مطلوبة",
       panel_visibilityName: "إظهار (إخفاء) لوحة",
       panel_enableName: "تفعيل (تعطيل) لوحة",
+      panel_requireName: "اجعل الصفحة مطلوبة",
       question_visibilityName: "إظهار (إخفاء) سؤال",
       question_enableName: "تفعيل (تعطيل) سؤال",
       question_requireName: "جعل السؤال إلزامي",
@@ -665,7 +671,12 @@ export var arStrings = {
     otherPlaceholder: "العنصر النائب لمنطقة التعليق",
     signaturepad: {
       showPlaceholder: "إظهار العنصر النائب",
-      placeholder: "نص العنصر النائب"
+      placeholder: "نص العنصر النائب",
+      signatureWidth: "عرض منطقة التوقيع",
+      signatureHeight: "ارتفاع منطقة التوقيع",
+      signatureAutoScaleEnabled: "تغيير حجم منطقة التوقيع تلقائيا",
+      penMinWidth: "الحد الأدنى لعرض القلم",
+      penMaxWidth: "الحد الأقصى لعرض القلم"
     },
     filePlaceholder: "نص العنصر النائب للملف",
     photoPlaceholder: "نص العنصر النائب للصورة",
@@ -1630,3 +1641,16 @@ editorLocalization.locales["ar"] = arStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
 // signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
 // theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
+// ed.prevFocus: "Focus previous" => "التركيز السابق"
+// ed.nextFocus: "Focus next" => "التركيز التالي"
+// ed.saveTheme: "Save Theme" => "حفظ السمة"
+// ed.saveThemeTooltip: "Save Theme" => "حفظ السمة"
+// lg.page_requireName: "Make page required" => "اجعل الصفحة مطلوبة"
+// lg.panel_requireName: "Make page required" => "اجعل الصفحة مطلوبة"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "عرض منطقة التوقيع"
+// signaturepad.signatureHeight: "Signature area height" => "ارتفاع منطقة التوقيع"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "تغيير حجم منطقة التوقيع تلقائيا"
+// signaturepad.penMinWidth: "Minimum pen width" => "الحد الأدنى لعرض القلم"
+// signaturepad.penMaxWidth: "Maximum pen width" => "الحد الأقصى لعرض القلم"

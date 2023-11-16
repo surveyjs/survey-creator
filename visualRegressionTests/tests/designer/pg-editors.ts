@@ -370,9 +370,8 @@ test("Check triggers question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await t
-      .click(Selector("h4[aria-label=General]"))
       .click(Selector("h4[aria-label=Logic]"))
-      .click(Selector("div[data-name='triggers'] .spg-action-button__icon[aria-label='Add New']"));
+      .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add New']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[aria-label='triggerType'] input").focus())();
     await resetHoverToCreator(t);

@@ -195,7 +195,7 @@ test("Change Creator locale property", (): any => {
 });
 test("Check creator license localization", (): any => {
   const creator = new CreatorTester({});
-  expect(creator.licenseText).toBe("PLEASE PURCHASE A DEVELOPER LICENSE TO BE ABLE TO USE SURVEY CREATOR IN YOUR APP");
+  expect(creator.licenseText).toBe(editorLocalization.locales["en"].survey.license);
 });
 test("getPropertyValue autoGenerate and boolean", () => {
   expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generate");

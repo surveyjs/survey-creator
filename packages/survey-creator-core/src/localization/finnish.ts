@@ -56,6 +56,8 @@ export var fiStrings = {
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
     nextSelected: "Valitse seuraava",
+    prevFocus: "Keskity edelliseen",
+    nextFocus: "Keskity seuraavaksi",
     surveyTypeName: "Tutkimus",
     pageTypeName: "Sivu",
     panelTypeName: "Paneeli",
@@ -84,6 +86,8 @@ export var fiStrings = {
     translation: "Käännös",
     saveSurvey: "Tallenna kysely",
     saveSurveyTooltip: "Tallenna kysely",
+    saveTheme: "Tallenna teema",
+    saveThemeTooltip: "Tallenna teema",
     designer: "Kyselyn suunnittelija",
     jsonEditor: "JSON Editori",
     jsonHideErrors: "Piilota virheet",
@@ -168,8 +172,10 @@ export var fiStrings = {
       empty_tab: "Luo sääntö kyselyn kulun mukauttamista varten.",
       page_visibilityName: "Sivun näkyvyys",
       page_enableName: "Ota käyttöön (poista käytöstä) sivu",
+      page_requireName: "Tee sivusta pakollinen",
       panel_visibilityName: "Panelin näkyvyys",
       panel_enableName: "Paneeli käytössä/Ei käytössä",
+      panel_requireName: "Tee sivusta pakollinen",
       question_visibilityName: "Kysymyksen näkyvyys",
       question_enableName: "Kysymys käytössä/Ei käytössä",
       question_requireName: "Kysymys valinnainen vaaditaan",
@@ -665,7 +671,12 @@ export var fiStrings = {
     otherPlaceholder: "Kommenttialueen paikkamerkki",
     signaturepad: {
       showPlaceholder: "Paikkamerkin näyttäminen",
-      placeholder: "Paikkamerkkiteksti"
+      placeholder: "Paikkamerkkiteksti",
+      signatureWidth: "Allekirjoitusalueen leveys",
+      signatureHeight: "Allekirjoitusalueen korkeus",
+      signatureAutoScaleEnabled: "Allekirjoitusalueen automaattinen skaalaus",
+      penMinWidth: "Kynän vähimmäisleveys",
+      penMaxWidth: "Kynän enimmäisleveys"
     },
     filePlaceholder: "Tiedoston paikkamerkkiteksti",
     photoPlaceholder: "Valokuvan paikkamerkkiteksti",
@@ -1719,3 +1730,17 @@ editorLocalization.locales["fi"] = fiStrings;
 // signaturepad.showPlaceholder: "Show the placeholder" => "Paikkamerkin näyttäminen"
 // signaturepad.placeholder: "Placeholder text" => "Paikkamerkkiteksti"
 // theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"r
+
+// ed.prevFocus: "Focus previous" => "Keskity edelliseen"
+// ed.nextFocus: "Focus next" => "Keskity seuraavaksi"
+// ed.saveTheme: "Save Theme" => "Tallenna teema"
+// ed.saveThemeTooltip: "Save Theme" => "Tallenna teema"
+// lg.page_requireName: "Make page required" => "Tee sivusta pakollinen"
+// lg.panel_requireName: "Make page required" => "Tee sivusta pakollinen"
+// lg.expressionSetup: "" => ""
+// lg.actionsSetup: "" => ""
+// signaturepad.signatureWidth: "Signature area width" => "Allekirjoitusalueen leveys"
+// signaturepad.signatureHeight: "Signature area height" => "Allekirjoitusalueen korkeus"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Allekirjoitusalueen automaattinen skaalaus"
+// signaturepad.penMinWidth: "Minimum pen width" => "Kynän vähimmäisleveys"
+// signaturepad.penMaxWidth: "Maximum pen width" => "Kynän enimmäisleveys"
