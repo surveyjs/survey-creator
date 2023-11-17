@@ -702,7 +702,11 @@ export class ConditionEditor extends PropertyEditorSetupValue {
   }
   private addSurveyCalculatedValues(names: Array<any>) {
     this.survey.calculatedValues.forEach(item => {
-      if(names.indexOf(item.name) < 0) names.push(item.name);
+      const index = names.indexOf(item.name.toLowerCase());
+      if(index > -1) {
+        names.splice(index, 1);
+      }
+      names.push(item.name);
     });
   }
   private calculatedValueQuestion: Question = null;
