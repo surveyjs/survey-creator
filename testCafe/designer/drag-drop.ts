@@ -908,6 +908,44 @@ test("Drag Drop ImagePicker (choices)", async (t) => {
   //   .dragToElement(Item1, Item2, { speed: 0.1 });
 });
 
+test("Drag Drop ImagePicker (choices) - check controls exists", async (t) => {
+  // see https://github.com/surveyjs/survey-creator/issues/4888
+  await t.resizeWindow(2560, 1440);
+
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            "type": "imagepicker",
+            "name": "question1",
+            "choices": [
+              {
+                "value": "lion",
+                "imageLink": "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  await setJSON(json);
+
+  const Question1 = Selector("[data-name=\"question1\"]");
+  const LionItem = Selector("[data-sv-drop-target-item-value=\"lion\"]");
+  const DragZoneLionItem = LionItem.find(".svc-image-item-value-controls__drag-area-indicator").filterVisible();
+  const SomeOutsideArea = Selector(".svc-toolbox");
+  const ControlsNode = LionItem.find(".svc-image-item-value-controls").filterVisible();
+
+  await t
+    .click(Question1, { speed: 0.1 })
+    .hover(LionItem, { speed: 0.1 })
+    .dragToElement(DragZoneLionItem, SomeOutsideArea, { speed: 0.1 })
+    .hover(ControlsNode, { speed: 0.1 });
+});
+
 test("Drag Drop MatrixRows (property grid)", async (t) => {
   const json = {
     pages: [
