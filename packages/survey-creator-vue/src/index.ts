@@ -102,7 +102,7 @@ function registerComponents(app: App) {
   app.component("survey-widget", app._context.components["SurveyComponent"]);
   app.component("survey-simulator", Simulator);
   app.component("svc-tab-test", Test);
-  app.component("survey-test-again", TestAgain);
+  app.component("svc-complete-page", TestAgain);
   app.component("survey-results", SurveyResults);
   app.component("survey-results-table-row", SurveyResultsRow);
 

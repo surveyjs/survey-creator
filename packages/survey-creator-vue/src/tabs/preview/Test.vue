@@ -8,7 +8,6 @@
     <div class="svc-plugin-tab__content" @scroll="model.onScroll()">
       <survey-simulator :model="model.simulator"></survey-simulator>
       <template v-if="model.showResults">
-        <survey-test-again :model="model.testAgainAction"></survey-test-again>
         <survey-results :survey="model.survey"></survey-results>
       </template>
     </div>

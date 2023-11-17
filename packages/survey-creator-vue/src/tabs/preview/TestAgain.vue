@@ -2,17 +2,20 @@
   <div
     role="button"
     class="svc-preview__test-again svc-btn"
-    @click="model.action()"
+    @click="action.action()"
     v-key2click
   >
     <span class="svc-text svc-text--normal svc-text--bold">
-      {{ model.title }}
+      {{ action.title }}
     </span>
   </div>
 </template>
 <script lang="ts" setup>
 import type { Action } from "survey-core";
 import { useBase } from "survey-vue3-ui";
-const props = defineProps<{ model: Action }>();
-useBase(() => props.model);
+import { computed } from "vue";
+defineOptions({ inheritAttrs: false });
+const props = defineProps<{ model: { testAgainAction: Action } }>();
+const action = computed(() => props.model.testAgainAction);
+useBase(() => action.value);
 </script>
