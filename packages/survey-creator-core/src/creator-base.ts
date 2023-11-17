@@ -3017,7 +3017,7 @@ export class CreatorBase extends Base
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
       if (!!hotKey.shiftKey !== !!event.shiftKey) return;
       if (hotKey.keyCode !== event.keyCode) return;
-      if (hotKey.keyCode < 48 && isTextInput(event.target)) return;
+      if ((hotKey.keyCode < 48 || hotKey.keyCode == 89 || hotKey.keyCode == 90) && isTextInput(event.target)) return;
       shortcut.execute(this.selectElement);
     });
   }
