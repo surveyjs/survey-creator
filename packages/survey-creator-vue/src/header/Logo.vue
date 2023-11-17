@@ -7,7 +7,7 @@
       :accept="model.acceptedTypes"
       class="svc-choose-file-input"
     />
-    <template v-if="!locLogo">
+    <template v-if="!logoRenderedHtml">
       <template v-if="model.allowEdit && !model.isUploading">
         <div
           class="svc-logo-image-placeholder"
@@ -20,7 +20,7 @@
         </div>
       </template>
     </template>
-    <template v-if="locLogo && !model.isUploading">
+    <template v-if="logoRenderedHtml && !model.isUploading">
       <div :class="model.containerCss">
         <div class="svc-context-container svc-logo-image-controls">
           <span
@@ -70,13 +70,14 @@ const model = useCreatorModel(
   () => new LogoImageViewModel(creator.value, null as any),
   [() => creator.value]
 );
-const locLogo = ref<string>();
+const logoRenderedHtml = ref<string>();
 const onStringChangedCallback = () => {
-  locLogo.value = survey.value.locLogo.renderedHtml;
+  logoRenderedHtml.value = survey.value.locLogo.renderedHtml;
 };
 watch(
   () => survey.value.locLogo,
   (value, oldValue) => {
+    onStringChangedCallback();
     if (value) value.onStringChanged.add(onStringChangedCallback);
     if (oldValue) value.onStringChanged.remove(onStringChangedCallback);
   },
