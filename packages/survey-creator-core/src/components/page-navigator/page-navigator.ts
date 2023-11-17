@@ -278,7 +278,7 @@ export class PageNavigatorViewModel extends Base {
   }
   private _updateVisibility() {
     this.hasScrolling = !this._scrollableContainer || (this._scrollableContainer.scrollHeight > this._scrollableContainer.clientHeight);
-    this.visible = this.hasScrolling && (this.items.length > 1 || this.pageEditMode === "bypage");
+    this.visible = this.items.length > 1 && (this.hasScrolling || this.pagesController.creator["pageEditMode"] === "bypage");
   }
   private updateVisibility() {
     // this._updateVisibility();
