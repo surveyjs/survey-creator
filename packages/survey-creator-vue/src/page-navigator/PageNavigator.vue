@@ -11,7 +11,6 @@
         class="svc-page-navigator__navigator-icon"
         :iconName="model.icon"
         :size="24"
-        sv-ng-svg-icon
       ></sv-svg-icon>
       <sv-popup :model="model.popupModel"></sv-popup>
     </div>

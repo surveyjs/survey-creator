@@ -24,12 +24,11 @@
         class="svc-question__drag-area"
         @pointerdown="adorner.onPointerDown($event)"
       >
-        <svg
+        <sv-svg-icon
           class="svc-question__drag-element"
           :iconName="'icon-drag-area-indicator_24x16'"
           :size="24"
-          sv-ng-svg-icon
-        ></svg>
+        ></sv-svg-icon>
       </div>
       <component :is="componentName" v-bind="componentData"></component>
       <div v-if="adorner.isEmptyElement" class="svc-panel__placeholder_frame">

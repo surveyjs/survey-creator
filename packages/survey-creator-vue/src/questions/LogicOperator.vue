@@ -28,13 +28,12 @@
           @click="clear"
           v-show="!question.isEmpty()"
         >
-          <svg
+          <sv-svg-icon
             :class="question.cssClasses.cleanButtonSvg"
             :iconName="question.cssClasses.cleanButtonIconId"
             :size="'auto'"
             :title="question.clearCaption"
-            sv-ng-svg-icon
-          ></svg>
+          ></sv-svg-icon>
         </div>
       </div>
       <sv-popup :model="question.popupModel"></sv-popup>

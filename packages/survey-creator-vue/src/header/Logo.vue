@@ -30,11 +30,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon
-              :iconName="'icon-file'"
-              :size="24"
-              sv-ng-svg-icon
-            ></sv-svg-icon>
+            <sv-svg-icon :iconName="'icon-file'" :size="24"></sv-svg-icon>
           </span>
           <span
             class="svc-context-button svc-context-button--danger"
@@ -43,11 +39,7 @@
             :title="undefined"
             :aria-label="undefined"
           >
-            <sv-svg-icon
-              :iconName="'icon-clear'"
-              :size="24"
-              sv-ng-svg-icon
-            ></sv-svg-icon>
+            <sv-svg-icon :iconName="'icon-clear'" :size="24"></sv-svg-icon>
           </span>
         </div>
         <sv-logo-image :data="survey"></sv-logo-image>
