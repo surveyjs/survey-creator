@@ -56,13 +56,13 @@ test("Test survey results table expand/collapse", async (t) => {
 
   await t
     .click(tableRows.nth(0))
-    .expect(Selector("td span").withText("srow_3").visible).ok()
+    .expect(Selector("td span").withText("row 1").visible).ok()
     .click(tableRows.nth(1))
     .expect(Selector("td span").withText("Column 1").visible).ok()
     .click(tableRows.nth(2))
     .expect(Selector("td span").withText("Choice").visible).ok()
     .click(tableRows.nth(0))
-    .expect(Selector("td span").withText("srow_3").visible).notOk();
+    .expect(Selector("td span").withText("row 1").visible).notOk();
 });
 
 test("Check dropdowns inside survey are hided when scrolling container", async (t) => {

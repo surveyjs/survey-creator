@@ -365,7 +365,6 @@ test("Check bindings question", async (t) => {
     await takeElementScreenshot("bindings-editor.png", Selector(".spg-question[data-name='bindings']"), t, comparer);
   });
 });
-
 test("Check triggers question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
@@ -373,7 +372,7 @@ test("Check triggers question", async (t) => {
       .click(Selector("h4[aria-label=Logic]"))
       .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add New']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
-    await ClientFunction(() => (<any>document).querySelector("[aria-label='triggerType'] input").focus())();
+    await ClientFunction(() => (<any>document).querySelector("[aria-label='row 1, column triggerType'] input").focus())();
     await resetHoverToCreator(t);
     await takeElementScreenshot("triggers-editor-focused.png", Selector("div[data-name='triggers']"), t, comparer);
   });

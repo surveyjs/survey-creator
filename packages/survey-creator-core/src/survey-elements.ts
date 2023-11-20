@@ -287,6 +287,9 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       allow: true,
       parent: this.parentElement,
       source: this.draggedElement,
+      toElement: this.parentElement,
+      draggedElement: this.draggedElement,
+      fromElement: this.draggedElement.parent,
       target: <IElement>dropTarget,
       insertAfter: undefined,
       insertBefore: undefined
