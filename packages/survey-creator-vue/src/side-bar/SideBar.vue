@@ -23,14 +23,6 @@
             <svc-side-bar-tab :model="tab"></svc-side-bar-tab>
           </template>
         </div>
-        <div class="svc-side-bar__container-close">
-          <div
-            class="sd-btn sd-btn--action svc-side-bar__container-close-button"
-            @click="() => model.collapseSidebar()"
-          >
-            {{ model.closeText }}
-          </div>
-        </div>
       </div>
     </div>
   </div>
