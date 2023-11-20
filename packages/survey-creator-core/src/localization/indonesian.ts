@@ -243,9 +243,7 @@ export var indonesianStrings = {
       uncompletedRule_title: "Aturan logis tidak lengkap",
       uncompletedRule_text: "Anda belum menyelesaikan beberapa aturan logis. Jika Anda meninggalkan tab sekarang, perubahan akan hilang. Apakah Anda masih ingin meninggalkan tab tanpa menyelesaikan perubahan?",
       uncompletedRule_apply: "Ya",
-      uncompletedRule_cancel: "Tidak, saya ingin menyelesaikan aturan",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Tidak, saya ingin menyelesaikan aturan"
     }
   },
   // Property Editors
@@ -1118,9 +1116,9 @@ export var indonesianStrings = {
     verticalAlignmentTop: "Puncak",
     verticalAlignmentMiddle: "Tengah",
     verticalAlignmentBottom: "Dasar",
-    logoPosition: "Posisi Logo",
-    coverTitlePosition: "Posisi Judul",
-    coverDescriptionPosition: "Deskripsi Posisi",
+    logoPosition: "Posisi logo",
+    coverTitlePosition: "Posisi judul",
+    coverDescriptionPosition: "Deskripsi posisi",
     names: {
       default: "Default",
       sharp: "Tajam",
@@ -1279,8 +1277,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Anda belum menyelesaikan beberapa aturan logis. Jika Anda meninggalkan tab sekarang, perubahan akan hilang. Apakah Anda masih ingin meninggalkan tab tanpa menyelesaikan perubahan?"
 // lg.uncompletedRule_apply: "Yes" => "Ya"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Tidak, saya ingin menyelesaikan aturan"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.save: "Save" => "Simpan"
 // pe.clear: "Clear" => "Jelas"
 // pe.saveTooltip: "Save" => "Simpan"
@@ -1786,8 +1782,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // colors.tulip: "Tulip" => "Tulip"
 // colors.brown: "Brown" => "Coklat"
 // colors.green: "Green" => "Hijau"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Tajam"
 // names.borderless: "Borderless" => "Tanpa batas"
 // names.flat: "Flat" => "Rata"
@@ -1797,13 +1791,9 @@ editorLocalization.locales["id"] = indonesianStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Apakah Anda yakin ingin menghapus semua string untuk bahasa ini?"
 // ed.themeResetButton: "Reset theme settings to default" => "Setel ulang pengaturan tema ke default"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Warna tempat penampung"
 // ed.themeSettings: "Theme Settings" => "Pengaturan Tema"
 // ed.themeSettingsTooltip: "Open theme settings" => "Buka pengaturan tema"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Reset"
 // pv.file: "Local files" => "File lokal"
 // pv.camera: "Camera" => "Kamera"
@@ -1813,8 +1803,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Harap masukkan setidaknya {0} item"
 // lg.question_resetValueName: "Reset question value" => "Mereset nilai pertanyaan"
 // lg.column_resetValue: "Reset column value" => "Mereset nilai kolom"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Tandai sesuai kebutuhan"
 // pe.removeRequiredMark: "Remove the required mark" => "Hapus tanda yang diperlukan"
 // p.resetValueIf: "Reset value if" => "Reset nilai jika"
@@ -1822,8 +1810,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // lg.column_resetValueName: "Reset column value" => "Mereset nilai kolom"
 // lg.column_setValueName: "Set column value" => "Mengatur nilai kolom"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ekspresi yang hasilnya akan ditetapkan ke pertanyaan target."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Tetapkan nilai jika"
@@ -1849,20 +1835,13 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.verticalAlignmentTop: "Top" => "Puncak"
 // theme.verticalAlignmentMiddle: "Middle" => "Tengah"
 // theme.verticalAlignmentBottom: "Bottom" => "Dasar"
-// theme.logoPosition: "Logo Position" => "Posisi Logo"
-// theme.coverTitlePosition: "Title Position" => "Posisi Judul"
-// theme.coverDescriptionPosition: "Description Position" => "Deskripsi Posisi"
 // lg.question_resetValueText: "reset value for question: {0}" => "reset nilai untuk pertanyaan: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Tetapkan nilai: {1} pertanyaan: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Setel ulang nilai sel untuk kolom: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Menetapkan nilai sel: {1} ke kolom: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Ekspor"
 // ed.surveyJsonImportButton: "Import" => "Mengimpor"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Salin ke papan klip"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Teks tempat penampung file"
 // pe.photoPlaceholder: "Photo placeholder text" => "Teks placeholder foto"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Teks placeholder file atau foto"
@@ -1874,28 +1853,24 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Apakah Anda benar-benar ingin mengatur ulang tema? Semua penyesuaian Anda akan hilang."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ya, atur ulang tema"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Latar"
 // theme.groupAppearance: "Appearance" => "Rupa"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Deskripsi forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Sesuai dengan kontainer"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Memperlihatkan tempat penampung"
 // signaturepad.placeholder: "Placeholder text" => "Teks tempat penampung"
 // theme.surveyDescription: "Survey description font" => "Font deskripsi survei"
-
 // ed.prevFocus: "Focus previous" => "Fokus sebelumnya"
 // ed.nextFocus: "Focus next" => "Fokus berikutnya"
 // ed.saveTheme: "Save Theme" => "Simpan Tema"
 // ed.saveThemeTooltip: "Save Theme" => "Simpan Tema"
 // lg.page_requireName: "Make page required" => "Buat halaman diperlukan"
 // lg.panel_requireName: "Make page required" => "Buat halaman diperlukan"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Lebar area tanda tangan"
 // signaturepad.signatureHeight: "Signature area height" => "Tinggi area tanda tangan"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Menskalakan area tanda tangan secara otomatis"
 // signaturepad.penMinWidth: "Minimum pen width" => "Lebar pena minimum"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Lebar pena maksimum"
+// theme.logoPosition: "Logo position" => "Posisi logo"
+// theme.coverTitlePosition: "Title position" => "Posisi judul"
+// theme.coverDescriptionPosition: "Description position" => "Deskripsi posisi"

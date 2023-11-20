@@ -243,9 +243,7 @@ export var fiStrings = {
       uncompletedRule_title: "Loogiset säännöt ovat epätäydellisiä",
       uncompletedRule_text: "Et ole suorittanut joitakin loogisia sääntöjä. Jos poistut välilehdestä nyt, muutokset menetetään. Haluatko silti poistua välilehdeltä suorittamatta muutoksia?",
       uncompletedRule_apply: "Kyllä",
-      uncompletedRule_cancel: "Ei, haluan täyttää säännöt",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Ei, haluan täyttää säännöt"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ export var fiStrings = {
     verticalAlignmentBottom: "Pohja",
     logoPosition: "Logon sijainti",
     coverTitlePosition: "Otsikon sijainti",
-    coverDescriptionPosition: "Kuvaus Sijainti",
+    coverDescriptionPosition: "Kuvauksen sijainti",
     names: {
       default: "Laiminlyönti",
       sharp: "Terävä",
@@ -1208,8 +1206,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Et ole suorittanut joitakin loogisia sääntöjä. Jos poistut välilehdestä nyt, muutokset menetetään. Haluatko silti poistua välilehdeltä suorittamatta muutoksia?"
 // lg.uncompletedRule_apply: "Yes" => "Kyllä"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Ei, haluan täyttää säännöt"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Selvä"
 // pe.set: "Set" => "Joukko"
 // pe.change: "Change" => "Muuttaa"
@@ -1631,8 +1627,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // colors.tulip: "Tulip" => "Tulppaani"
 // colors.brown: "Brown" => "Ruskea"
 // colors.green: "Green" => "Vihreä"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Terävä"
 // names.borderless: "Borderless" => "Reunukseton"
 // names.flat: "Flat" => "Tasainen"
@@ -1642,13 +1636,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Oletko varma, että haluat poistaa kaikki merkkijonot tältä kieleltä?"
 // ed.themeResetButton: "Reset theme settings to default" => "Palauta teema-asetukset oletusasetuksiin"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Paikkamerkin väri"
 // ed.themeSettings: "Theme Settings" => "Teeman asetukset"
 // ed.themeSettingsTooltip: "Open theme settings" => "Avaa teema-asetukset"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Nollata"
 // pv.file: "Local files" => "Paikalliset tiedostot"
 // pv.camera: "Camera" => "Kamera"
@@ -1658,8 +1648,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Anna vähintään {0} kohdetta"
 // lg.question_resetValueName: "Reset question value" => "Palauta kysymyksen arvo"
 // lg.column_resetValue: "Reset column value" => "Palauta sarakkeen arvo"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Merkitse pakollisesti"
 // pe.removeRequiredMark: "Remove the required mark" => "Poista vaadittu merkki"
 // p.resetValueIf: "Reset value if" => "Nollaa arvo, jos"
@@ -1667,8 +1655,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // lg.column_resetValueName: "Reset column value" => "Palauta sarakkeen arvo"
 // lg.column_setValueName: "Set column value" => "Sarakkeen arvon määrittäminen"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Lauseke, jonka tulos määritetään kohdekysymykselle."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Nimike"
 // page.title: "Title" => "Nimike"
 // p.setValueIf: "Set value if" => "Aseta arvo, jos"
@@ -1696,18 +1682,13 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Pohja"
 // theme.logoPosition: "Logo Position" => "Logon sijainti"
 // theme.coverTitlePosition: "Title Position" => "Otsikon sijainti"
-// theme.coverDescriptionPosition: "Description Position" => "Kuvaus Sijainti"
 // lg.question_resetValueText: "reset value for question: {0}" => "nollaa kysymyksen arvo: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Määritä arvo: {1} kysymykseen: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Palauta sarakkeen soluarvo: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Määritä solun arvo: {1} sarakkeeseen: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Vienti"
 // ed.surveyJsonImportButton: "Import" => "Tuoda"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopioi leikepöydälle"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Tiedoston paikkamerkkiteksti"
 // pe.photoPlaceholder: "Photo placeholder text" => "Valokuvan paikkamerkkiteksti"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tiedoston tai valokuvan paikkamerkkiteksti"
@@ -1719,14 +1700,10 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Haluatko todella nollata teeman? Kaikki mukautuksesi menetetään."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Kyllä, nollaa teema"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Tausta"
 // theme.groupAppearance: "Appearance" => "Ulkonäkö"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Kuvaus etuväri"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Sovita konttiin"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Paikkamerkin näyttäminen"
 // signaturepad.placeholder: "Placeholder text" => "Paikkamerkkiteksti"
 // theme.surveyDescription: "Survey description font" => "Kyselyn kuvauksen fontti"r
@@ -1737,10 +1714,9 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.saveThemeTooltip: "Save Theme" => "Tallenna teema"
 // lg.page_requireName: "Make page required" => "Tee sivusta pakollinen"
 // lg.panel_requireName: "Make page required" => "Tee sivusta pakollinen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Allekirjoitusalueen leveys"
 // signaturepad.signatureHeight: "Signature area height" => "Allekirjoitusalueen korkeus"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Allekirjoitusalueen automaattinen skaalaus"
 // signaturepad.penMinWidth: "Minimum pen width" => "Kynän vähimmäisleveys"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Kynän enimmäisleveys"
+// theme.coverDescriptionPosition: "Description position" => "Kuvauksen sijainti"

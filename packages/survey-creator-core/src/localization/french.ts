@@ -243,9 +243,7 @@ var frenchTranslation = {
       uncompletedRule_title: "Les règles logiques sont incomplètes",
       uncompletedRule_text: "Vous n’avez pas terminé certaines des règles logiques. Si vous quittez l’onglet maintenant, les modifications seront perdues. Voulez-vous toujours quitter sans sauvegarder ?",
       uncompletedRule_apply: "Oui",
-      uncompletedRule_cancel: "Non, je veux compléter les règles",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Non, je veux compléter les règles"
     }
   },
   // Property Editors
@@ -1118,7 +1116,7 @@ var frenchTranslation = {
     verticalAlignmentTop: "Retour au début",
     verticalAlignmentMiddle: "Milieu",
     verticalAlignmentBottom: "Fond",
-    logoPosition: "Logo Position",
+    logoPosition: "Position du logo",
     coverTitlePosition: "Position du titre",
     coverDescriptionPosition: "Description du poste",
     names: {
@@ -1232,8 +1230,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Vous n’avez pas terminé certaines des règles logiques. Si vous quittez l’onglet maintenant, les modifications seront perdues. Voulez-vous toujours quitter l’onglet sans terminer les modifications?"
 // lg.uncompletedRule_apply: "Yes" => "Oui"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Non, je veux compléter les règles"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Clair"
 // pe.saveTooltip: "Save" => "Sauvegarder"
 // pe.set: "Set" => "Poser"
@@ -1692,8 +1688,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // colors.tulip: "Tulip" => "Tulipe"
 // colors.brown: "Brown" => "Marron"
 // colors.green: "Green" => "Vert"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Tranchant"
 // names.borderless: "Borderless" => "Borderless"
 // names.flat: "Flat" => "Plat"
@@ -1704,13 +1698,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Êtes-vous certain de vouloir supprimer toutes les chaînes pour cette langue ?"
 // ed.themeResetButton: "Reset theme settings to default" => "Réinitialiser les paramètres de thème par défaut"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Couleur de l’espace réservé"
 // ed.themeSettings: "Theme Settings" => "Paramètres du thème"
 // ed.themeSettingsTooltip: "Open theme settings" => "Ouvrir les paramètres du thème"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Réinitialisation"
 // pv.file: "Local files" => "Fichiers locaux"
 // pv.camera: "Camera" => "Caméra"
@@ -1720,8 +1710,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Veuillez saisir au moins {0} éléments"
 // lg.question_resetValueName: "Reset question value" => "Réinitialiser la valeur de la question"
 // lg.column_resetValue: "Reset column value" => "Réinitialiser la valeur de la colonne"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Marquer au besoin"
 // pe.removeRequiredMark: "Remove the required mark" => "Supprimer la marque requise"
 // p.resetValueIf: "Reset value if" => "Réinitialiser la valeur si"
@@ -1729,8 +1717,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // lg.column_resetValueName: "Reset column value" => "Réinitialiser la valeur de la colonne"
 // lg.column_setValueName: "Set column value" => "Définition de la valeur de colonne"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Expression dont le résultat sera affecté à la question cible."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // p.setValueIf: "Set value if" => "Définir la valeur si"
 // theme.groupHeader: "Header" => "En-tête"
 // theme.coverTitleForecolor: "Title forecolor" => "Précouleur du titre"
@@ -1754,20 +1740,15 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.verticalAlignmentTop: "Top" => "Retour au début"
 // theme.verticalAlignmentMiddle: "Middle" => "Milieu"
 // theme.verticalAlignmentBottom: "Bottom" => "Fond"
-// theme.logoPosition: "Logo Position" => "Logo Position"
 // theme.coverTitlePosition: "Title Position" => "Position du titre"
 // theme.coverDescriptionPosition: "Description Position" => "Description du poste"
 // lg.question_resetValueText: "reset value for question: {0}" => "Réinitialisez la valeur pour la question : {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Attribuer une valeur : {1} à la question : {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Réinitialiser la valeur de la cellule pour la colonne : {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Affecter la valeur de la cellule : {1} à la colonne : {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Exportation"
 // ed.surveyJsonImportButton: "Import" => "Importation"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copier dans le Presse-papiers"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Texte de l’espace réservé au fichier"
 // pe.photoPlaceholder: "Photo placeholder text" => "Texte de l’espace réservé à la photo"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texte de l’espace réservé au fichier ou à la photo"
@@ -1779,14 +1760,10 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Voulez-vous vraiment réinitialiser le thème ? Toutes vos personnalisations seront perdues."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Oui, réinitialisez le thème"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Arrière-plan"
 // theme.groupAppearance: "Appearance" => "Apparence"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Description de la couleur avant"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "S’adapte au conteneur"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Afficher l’espace réservé"
 // signaturepad.placeholder: "Placeholder text" => "Texte d’espace réservé"
 // theme.surveyDescription: "Survey description font" => "Police de description de l’enquête"
@@ -1797,10 +1774,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.saveThemeTooltip: "Save Theme" => "Enregistrer le thème"
 // lg.page_requireName: "Make page required" => "Rendre la page obligatoire"
 // lg.panel_requireName: "Make page required" => "Rendre la page obligatoire"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Largeur de la zone de signature"
 // signaturepad.signatureHeight: "Signature area height" => "Hauteur de la zone de signature"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Mise à l’échelle automatique de la zone de signature"
 // signaturepad.penMinWidth: "Minimum pen width" => "Largeur minimale du stylo"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Largeur maximale du stylo"
+// theme.logoPosition: "Logo position" => "Position du logo"

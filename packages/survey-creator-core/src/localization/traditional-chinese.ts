@@ -243,9 +243,7 @@ var traditionalChineseTranslation = {
       uncompletedRule_title: "邏輯規則不完整",
       uncompletedRule_text: "您尚未完成某些邏輯規則。如果現在離開該選項卡，更改將丟失。是否仍要離開選項卡而不完成更改？",
       uncompletedRule_apply: "是的",
-      uncompletedRule_cancel: "不，我想完成規則",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "不，我想完成規則"
     }
   },
   // Property Editors
@@ -1119,7 +1117,7 @@ var traditionalChineseTranslation = {
     verticalAlignmentMiddle: "中間",
     verticalAlignmentBottom: "底",
     logoPosition: "徽標位置",
-    coverTitlePosition: "標題位置",
+    coverTitlePosition: "職稱位置",
     coverDescriptionPosition: "描述位置",
     names: {
       default: "違約",
@@ -1309,8 +1307,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "您尚未完成某些邏輯規則。如果現在離開該選項卡，更改將丟失。是否仍要離開選項卡而不完成更改？"
 // lg.uncompletedRule_apply: "Yes" => "是的"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "不，我想完成規則"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.save: "Save" => "救"
 // pe.clear: "Clear" => "清楚"
 // pe.saveTooltip: "Save" => "救"
@@ -1910,8 +1906,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // colors.tulip: "Tulip" => "鬱金香"
 // colors.brown: "Brown" => "棕色"
 // colors.green: "Green" => "綠"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "鋒利"
 // names.borderless: "Borderless" => "無國界"
 // names.flat: "Flat" => "平"
@@ -1921,13 +1915,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // names.threedimensional: "3D" => "。.3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "您確定要刪除此語言的所有字串嗎？"
 // ed.themeResetButton: "Reset theme settings to default" => "將主題設置重置為預設值"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "佔位元顏色"
 // ed.themeSettings: "Theme Settings" => "主題設置"
 // ed.themeSettingsTooltip: "Open theme settings" => "打開主題設置"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "重置"
 // pv.file: "Local files" => "本地檔"
 // pv.camera: "Camera" => "照相機"
@@ -1937,8 +1927,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "請輸入至少{0}專案"
 // lg.question_resetValueName: "Reset question value" => "重置問題值"
 // lg.column_resetValue: "Reset column value" => "重置列值"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "標記為必填"
 // pe.removeRequiredMark: "Remove the required mark" => "刪除所需的標記"
 // p.resetValueIf: "Reset value if" => "如果出現以下情況，則重置值"
@@ -1946,8 +1934,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // lg.column_resetValueName: "Reset column value" => "重置列值"
 // lg.column_setValueName: "Set column value" => "設置列值"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "其結果將分配給目標問題的表達式。"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "標題"
 // page.title: "Title" => "標題"
 // p.setValueIf: "Set value if" => "設置值，如果"
@@ -1973,20 +1959,13 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.verticalAlignmentTop: "Top" => "返回頁首"
 // theme.verticalAlignmentMiddle: "Middle" => "中間"
 // theme.verticalAlignmentBottom: "Bottom" => "底"
-// theme.logoPosition: "Logo Position" => "徽標位置"
-// theme.coverTitlePosition: "Title Position" => "標題位置"
-// theme.coverDescriptionPosition: "Description Position" => "描述位置"
 // lg.question_resetValueText: "reset value for question: {0}" => "重置問題的值：{0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "分配值：{1}問題：{0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "重置列的儲存格值：{0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "將儲存格值：{1}分配給列：{0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "出口"
 // ed.surveyJsonImportButton: "Import" => "進口"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "複製到剪貼板"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "檔佔位元文本"
 // pe.photoPlaceholder: "Photo placeholder text" => "照片占位元文本"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "檔或照片佔位元文字"
@@ -1998,14 +1977,10 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "你真的要重置主題嗎？您的所有自定義項都將丟失。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "是，重置主題"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "背景"
 // theme.groupAppearance: "Appearance" => "外觀"
 // theme.coverDescriptionForecolor: "Description forecolor" => "描述前彩"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "適合容器"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "顯示佔位元"
 // signaturepad.placeholder: "Placeholder text" => "佔位元文本"
 // theme.surveyDescription: "Survey description font" => "調查描述字體"
@@ -2015,10 +1990,11 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.saveThemeTooltip: "Save Theme" => "保存主題"
 // lg.page_requireName: "Make page required" => "將頁面設為必填項"
 // lg.panel_requireName: "Make page required" => "將頁面設為必填項"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "簽名區域寬度"
 // signaturepad.signatureHeight: "Signature area height" => "簽名區域高度"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "自動縮放簽名區域"
 // signaturepad.penMinWidth: "Minimum pen width" => "最小筆寬"
 // signaturepad.penMaxWidth: "Maximum pen width" => "最大筆寬"
+// theme.logoPosition: "Logo position" => "徽標位置"
+// theme.coverTitlePosition: "Title position" => "職稱位置"
+// theme.coverDescriptionPosition: "Description position" => "描述位置"

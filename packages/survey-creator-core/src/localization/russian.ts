@@ -243,9 +243,7 @@ export var ruStrings = {
       uncompletedRule_title: "Логические правила неполны",
       uncompletedRule_text: "Вы не выполнили некоторые логические правила. Если вы покинете вкладку сейчас, изменения будут потеряны. Вы все еще хотите покинуть вкладку, не завершив изменения?",
       uncompletedRule_apply: "Да",
-      uncompletedRule_cancel: "Нет, я хочу дополнить правила",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Нет, я хочу дополнить правила"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ export var ruStrings = {
     verticalAlignmentBottom: "Дно",
     logoPosition: "Положение логотипа",
     coverTitlePosition: "Титульная позиция",
-    coverDescriptionPosition: "Описание Должность",
+    coverDescriptionPosition: "Описание позиции",
     names: {
       default: "По умолчанию",
       sharp: "Чёткая",
@@ -1235,8 +1233,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Вы не выполнили некоторые логические правила. Если вы покинете вкладку сейчас, изменения будут потеряны. Вы все еще хотите покинуть вкладку, не завершив изменения?"
 // lg.uncompletedRule_apply: "Yes" => "Да"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Нет, я хочу дополнить правила"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Ясный"
 // pe.saveTooltip: "Save" => "Спасать"
 // pe.set: "Set" => "Набор"
@@ -1694,8 +1690,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // colors.tulip: "Tulip" => "Тюльпан"
 // colors.brown: "Brown" => "Коричневый"
 // colors.green: "Green" => "Зеленый"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Острый"
 // names.borderless: "Borderless" => "Без границ"
 // names.flat: "Flat" => "Плоский"
@@ -1705,13 +1699,9 @@ editorLocalization.locales["ru"] = ruStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Вы уверены, что хотите удалить все строки для этого языка?"
 // ed.themeResetButton: "Reset theme settings to default" => "Сброс настроек темы по умолчанию"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Цвет заполнителя"
 // ed.themeSettings: "Theme Settings" => "Настройки темы"
 // ed.themeSettingsTooltip: "Open theme settings" => "Откройте настройки темы"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Сброс"
 // pv.file: "Local files" => "Локальные файлы"
 // pv.camera: "Camera" => "Фотоаппарат"
@@ -1721,18 +1711,13 @@ editorLocalization.locales["ru"] = ruStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Пожалуйста, введите не менее {0} пунктов"
 // lg.question_resetValueName: "Reset question value" => "Сбросить значение вопроса"
 // lg.column_resetValue: "Reset column value" => "Сброс значения столбца"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Отметьте как обязательный"
 // pe.removeRequiredMark: "Remove the required mark" => "Снимите нужную отметку"
 // p.resetValueIf: "Reset value if" => "Сбросьте значение, если"
-
 // lg.question_setValueName: "Set question value" => "Задать значение вопроса"
 // lg.column_resetValueName: "Reset column value" => "Сброс значения столбца"
 // lg.column_setValueName: "Set column value" => "Задание значения столбца"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Выражение, результат которого будет присвоен целевому вопросу."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Титул"
 // page.title: "Title" => "Титул"
 // p.setValueIf: "Set value if" => "Установите значение, если"
@@ -1758,18 +1743,13 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Дно"
 // theme.logoPosition: "Logo Position" => "Положение логотипа"
 // theme.coverTitlePosition: "Title Position" => "Титульная позиция"
-// theme.coverDescriptionPosition: "Description Position" => "Описание Должность"
 // lg.question_resetValueText: "reset value for question: {0}" => "Сброс значения для вопроса: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "присвоить значение: {1} к вопросу: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Сброс значения ячейки для столбца: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Присвойте значение ячейки: {1} столбцу: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Экспорт"
 // ed.surveyJsonImportButton: "Import" => "Импорт"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Копировать в буфер"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Замещающий текст файла"
 // pe.photoPlaceholder: "Photo placeholder text" => "Замещающий текст фотографии"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Замещающий текст файла или фотографии"
@@ -1781,28 +1761,22 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Вы действительно хотите сбросить тему? Все ваши настройки будут потеряны."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Да, сбросьте тему"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Фон"
 // theme.groupAppearance: "Appearance" => "Внешность"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Описание форколора"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Подходит для контейнера"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Показать заполнитель"
 // signaturepad.placeholder: "Placeholder text" => "Замещающий текст"
 // theme.surveyDescription: "Survey description font" => "Шрифт описания опроса"
-
 // ed.prevFocus: "Focus previous" => "Фокусировка предыдущая"
 // ed.nextFocus: "Focus next" => "Сосредоточьтесь на следующем"
 // ed.saveTheme: "Save Theme" => "Сохранить тему"
 // ed.saveThemeTooltip: "Save Theme" => "Сохранить тему"
 // lg.page_requireName: "Make page required" => "Сделать страницу обязательной"
 // lg.panel_requireName: "Make page required" => "Сделать страницу обязательной"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Ширина области подписи"
 // signaturepad.signatureHeight: "Signature area height" => "Высота области подписи"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Автоматическое масштабирование области подписи"
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимальная ширина пера"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимальная ширина пера"
+// theme.coverDescriptionPosition: "Description position" => "Описание позиции"

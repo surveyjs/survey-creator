@@ -243,9 +243,7 @@ var spanishTranslation = {
       uncompletedRule_title: "Las reglas lógicas están incompletas",
       uncompletedRule_text: "No ha completado algunas de las reglas lógicas. Si deja la pestaña ahora, los cambios se perderán. ¿Aún desea salir de la pestaña sin completar los cambios?",
       uncompletedRule_apply: "Sí",
-      uncompletedRule_cancel: "No, quiero completar las reglas",
-      // expressionSetup: "",
-      actionsSetup: " "
+      uncompletedRule_cancel: "No, quiero completar las reglas"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ var spanishTranslation = {
     verticalAlignmentBottom: "Fondo",
     logoPosition: "Posición del logotipo",
     coverTitlePosition: "Posición del título",
-    coverDescriptionPosition: "Descripción Posición",
+    coverDescriptionPosition: "Descripción posición",
     names: {
       default: "Predeterminado",
       sharp: "Afilado",
@@ -1170,7 +1168,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "No ha completado algunas de las reglas lógicas. Si deja la pestaña ahora, los cambios se perderán. ¿Aún desea salir de la pestaña sin completar los cambios?"
 // lg.uncompletedRule_apply: "Yes" => "Sí"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "No, quiero completar las reglas"
-// lg.expressionSetup: "" => ""
 // pe.set: "Set" => "Poner"
 // pe.overridingPropertyPrefix: "Set by " => "Establecido por "
 // pe.propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\"." => "No utilice palabras reservadas: \"elemento\", \"elección\", \"panel\", \"fila\"."
@@ -1405,7 +1402,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Marrón"
 // colors.green: "Green" => "Verde"
-// lg.expressionSetup: "" => ""
 // names.sharp: "Sharp" => "Afilado"
 // names.borderless: "Borderless" => "Sin bordes"
 // names.flat: "Flat" => "Plano"
@@ -1415,11 +1411,9 @@ editorLocalization.locales["es"] = spanishTranslation;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "¿Está seguro de que desea eliminar todas las cadenas de este idioma?"
 // ed.themeResetButton: "Reset theme settings to default" => "Restablecer la configuración predeterminada del tema"
-// lg.expressionSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Color del marcador de posición"
 // ed.themeSettings: "Theme Settings" => "Configuración del tema"
 // ed.themeSettingsTooltip: "Open theme settings" => "Abrir la configuración del tema"
-// lg.expressionSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Restablecimiento"
 // pv.file: "Local files" => "Archivos locales"
 // pv.camera: "Camera" => "Cámara"
@@ -1429,7 +1423,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Introduce al menos {0} artículos"
 // lg.question_resetValueName: "Reset question value" => "Restablecer valor de pregunta"
 // lg.column_resetValue: "Reset column value" => "Restablecer el valor de la columna"
-// lg.expressionSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Marcar según sea necesario"
 // pe.removeRequiredMark: "Remove the required mark" => "Quitar la marca requerida"
 // p.resetValueIf: "Reset value if" => "Restablecer valor si"
@@ -1437,7 +1430,6 @@ editorLocalization.locales["es"] = spanishTranslation;
 // lg.column_resetValueName: "Reset column value" => "Restablecer valor de columna"
 // lg.column_setValueName: "Set column value" => "Establecer el valor de la columna"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Una expresión cuyo resultado se asignará a la pregunta de destino."
-// lg.expressionSetup: "" => ""
 // survey.title: "Title" => "Título"
 // page.title: "Title" => "Título"
 // p.setValueIf: "Set value if" => "Establezca el valor si"
@@ -1465,16 +1457,13 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.verticalAlignmentBottom: "Bottom" => "Fondo"
 // theme.logoPosition: "Logo Position" => "Posición del logotipo"
 // theme.coverTitlePosition: "Title Position" => "Posición del título"
-// theme.coverDescriptionPosition: "Description Position" => "Descripción Posición"
 // lg.question_resetValueText: "reset value for question: {0}" => "Restablecer valor para la pregunta: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Asignar valor: {1} a la pregunta: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Restablecer el valor de celda de la columna: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Asignar valor de celda: {1} a columna: {0}"
-// lg.expressionSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Exportar"
 // ed.surveyJsonImportButton: "Import" => "Importación"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Copiar en el portapapeles"
-// lg.expressionSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Texto del marcador de posición del archivo"
 // pe.photoPlaceholder: "Photo placeholder text" => "Texto del marcador de posición de la foto"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Texto de marcador de posición de archivo o foto"
@@ -1486,25 +1475,22 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "¿Realmente quieres resetear el tema? Todas tus personalizaciones se perderán."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Sí, restablece el tema"
-// lg.expressionSetup: "" => ""
 // theme.groupBackground: "Background" => "Fondo"
 // theme.groupAppearance: "Appearance" => "Apariencia"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Descripción forecolor"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Ajuste al contenedor"
-// lg.expressionSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Mostrar el marcador de posición"
 // signaturepad.placeholder: "Placeholder text" => "Texto de marcador de posición"
 // theme.surveyDescription: "Survey description font" => "Fuente de descripción de la encuesta"
-
 // ed.prevFocus: "Focus previous" => "Enfoque anterior"
 // ed.nextFocus: "Focus next" => "Enfoque siguiente"
 // ed.saveTheme: "Save Theme" => "Guardar tema"
 // ed.saveThemeTooltip: "Save Theme" => "Guardar tema"
 // lg.page_requireName: "Make page required" => "Hacer que la página sea obligatoria"
 // lg.panel_requireName: "Make page required" => "Hacer que la página sea obligatoria"
-// lg.expressionSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Ancho del área de firma"
 // signaturepad.signatureHeight: "Signature area height" => "Altura del área de firma"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Escalado automático del área de firma"
 // signaturepad.penMinWidth: "Minimum pen width" => "Ancho mínimo del lápiz"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Ancho máximo del lápiz"
+// theme.coverDescriptionPosition: "Description position" => "Descripción posición"

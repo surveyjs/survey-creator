@@ -245,9 +245,7 @@ export var enStrings = {
       uncompletedRule_title: "Logical rules are incomplete",
       uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?",
       uncompletedRule_apply: "Yes",
-      uncompletedRule_cancel: "No, I want to complete the rules",
-      expressionSetup: "",
-      actionsSetup: ""
+      uncompletedRule_cancel: "No, I want to complete the rules"
     }
   },
   // Property Editors

@@ -243,9 +243,7 @@ export var nlStrings = {
       uncompletedRule_title: "Logische regels zijn onvolledig",
       uncompletedRule_text: "U hebt een aantal van de logische regels niet voltooid. Als u het tabblad nu verlaat, gaan de wijzigingen verloren. Wilt u het tabblad nog steeds verlaten zonder de wijzigingen te voltooien?",
       uncompletedRule_apply: "Ja",
-      uncompletedRule_cancel: "Nee, ik wil de regels invullen",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Nee, ik wil de regels invullen"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ export var nlStrings = {
     verticalAlignmentBottom: "Bodem",
     logoPosition: "Logo positie",
     coverTitlePosition: "Titel positie",
-    coverDescriptionPosition: "Beschrijving Positie",
+    coverDescriptionPosition: "Beschrijving positie",
     names: {
       default: "Verstek",
       sharp: "Scherp",
@@ -1210,8 +1208,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "U hebt een aantal van de logische regels niet voltooid. Als u het tabblad nu verlaat, gaan de wijzigingen verloren. Wilt u het tabblad nog steeds verlaten zonder de wijzigingen te voltooien?"
 // lg.uncompletedRule_apply: "Yes" => "Ja"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nee, ik wil de regels invullen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Duidelijk"
 // pe.set: "Set" => "Set"
 // pe.change: "Change" => "Veranderen"
@@ -1611,8 +1607,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // colors.tulip: "Tulip" => "Tulp"
 // colors.brown: "Brown" => "Bruin"
 // colors.green: "Green" => "Groen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Scherp"
 // names.borderless: "Borderless" => "Grenzeloos"
 // names.flat: "Flat" => "Plat"
@@ -1622,13 +1616,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Weet u zeker dat u alle tekenreeksen voor deze taal wilt verwijderen?"
 // ed.themeResetButton: "Reset theme settings to default" => "Thema-instellingen terugzetten op de standaardinstellingen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Kleur van tijdelijke aanduiding"
 // ed.themeSettings: "Theme Settings" => "Thema-instellingen"
 // ed.themeSettingsTooltip: "Open theme settings" => "Thema-instellingen openen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Terugstellen"
 // pv.file: "Local files" => "Lokale bestanden"
 // pv.camera: "Camera" => "Fototoestel"
@@ -1638,8 +1628,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Voer ten minste {0} objecten in"
 // lg.question_resetValueName: "Reset question value" => "Vraagwaarde opnieuw instellen"
 // lg.column_resetValue: "Reset column value" => "Kolomwaarde opnieuw instellen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Markeren zoals vereist"
 // pe.removeRequiredMark: "Remove the required mark" => "Verwijder de vereiste markering"
 // p.resetValueIf: "Reset value if" => "Waarde opnieuw instellen als"
@@ -1647,8 +1635,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // lg.column_resetValueName: "Reset column value" => "Kolomwaarde opnieuw instellen"
 // lg.column_setValueName: "Set column value" => "Kolomwaarde instellen"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Een expressie waarvan het resultaat wordt toegewezen aan de doelvraag."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Stel de waarde in als"
@@ -1676,18 +1662,13 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Bodem"
 // theme.logoPosition: "Logo Position" => "Logo positie"
 // theme.coverTitlePosition: "Title Position" => "Titel positie"
-// theme.coverDescriptionPosition: "Description Position" => "Beschrijving Positie"
 // lg.question_resetValueText: "reset value for question: {0}" => "Resetwaarde voor vraag: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Waarde: {1} toewijzen aan vraag: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Celwaarde voor kolom opnieuw instellen: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Celwaarde: {1} toewijzen aan kolom: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Exporteren"
 // ed.surveyJsonImportButton: "Import" => "Importeren"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Naar klembord kopiëren"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Tijdelijke tekst voor bestanden"
 // pe.photoPlaceholder: "Photo placeholder text" => "Tijdelijke tekst voor foto's"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tijdelijke tekst voor bestanden of foto's"
@@ -1699,14 +1680,10 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Wil je het thema echt resetten? Al uw aanpassingen gaan verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, reset het thema"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Achtergrond"
 // theme.groupAppearance: "Appearance" => "Uiterlijk"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschrijving voorkleur"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Geschikt voor containers"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "De tijdelijke aanduiding weergeven"
 // signaturepad.placeholder: "Placeholder text" => "Tijdelijke aanduiding voor tekst"
 // theme.surveyDescription: "Survey description font" => "Lettertype met enquêtebeschrijving"
@@ -1717,10 +1694,9 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.saveThemeTooltip: "Save Theme" => "Thema opslaan"
 // lg.page_requireName: "Make page required" => "Pagina verplicht maken"
 // lg.panel_requireName: "Make page required" => "Pagina verplicht maken"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Breedte van het handtekeninggebied"
 // signaturepad.signatureHeight: "Signature area height" => "Hoogte van het handtekeninggebied"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Het handtekeninggebied automatisch schalen"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimale penbreedte"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximale breedte van het hok"
+// theme.coverDescriptionPosition: "Description position" => "Beschrijving positie"
