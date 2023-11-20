@@ -23,7 +23,8 @@ export var propertyGridCss = {
   panel: {
     title: "spg-title spg-panel__title",
     titleExpandable: "spg-panel__title--expandable",
-    titleOnExpand: "spg-panel__title--expanded",
+    titleExpanded: "spg-panel__title--expanded",
+    titleCollapsed: "spg-panel__title--collapsed",
     titleOnError: "spg-panel__title--error",
     description: "spg-description spg-panel__description",
     container: "spg-panel spg-row__panel",

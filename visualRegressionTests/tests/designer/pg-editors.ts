@@ -664,3 +664,22 @@ test("Check accepted file types hint link", async (t) => {
     await takeElementScreenshot("file-accepted-types-hint.png", Selector("[data-name='acceptedTypes']"), t, comparer);
   });
 });
+
+test("Check property grid panel' header states", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({});
+    await t.resizeWindow(1920, 1920);
+    const headerSelector = Selector("h4[aria-label=General]").nth(0);
+    await t
+      .click(headerSelector);
+    await takeElementScreenshot("pg-panel-header-expanded-focused.png", headerSelector, t, comparer);
+    await t.pressKey("tab");
+    await takeElementScreenshot("pg-panel-header-expanded.png", headerSelector, t, comparer);
+    await t
+      .click(headerSelector);
+    await takeElementScreenshot("pg-panel-header-collapsed-focused.png", headerSelector, t, comparer);
+    await t.pressKey("tab");
+    await resetHoverToCreator(t);
+    await takeElementScreenshot("pg-panel-header-collapsed.png", headerSelector, t, comparer);
+  });
+});
