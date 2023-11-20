@@ -1119,9 +1119,9 @@ export var enStrings = {
     verticalAlignmentTop: "Top",
     verticalAlignmentMiddle: "Middle",
     verticalAlignmentBottom: "Bottom",
-    logoPosition: "Logo Position",
-    coverTitlePosition: "Title Position",
-    coverDescriptionPosition: "Description Position",
+    logoPosition: "Logo position",
+    coverTitlePosition: "Title position",
+    coverDescriptionPosition: "Description position",
     names: {
       "default": "Default",
       "sharp": "Sharp",
