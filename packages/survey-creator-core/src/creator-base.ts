@@ -2342,6 +2342,7 @@ export class CreatorBase extends Base
 
   notifier = new Notifier({
     root: "svc-notifier",
+    rootWithButtons: "",
     info: "svc-notifier--info",
     error: "svc-notifier--error",
     success: "svc-notifier--success",
