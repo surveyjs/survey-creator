@@ -1084,20 +1084,26 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.target`: `IElement`\
+   * - `options.draggedElement`: `IElement`\
    * A survey element being dragged.
-   * - `options.source`: `IElement`\
-   * A survey element from which `target` is being dragged. This parameter is `null` if `target` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   * - `options.fromElement`: `IElement`\
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   * - `options.toElement`: `IElement`\
+   * A survey element to which `draggedElement` is being dragged.
    * - `options.insertBefore`: `IElement`\
-   * A survey element before which the target element will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if the target element will be placed below all other elements within the container.
+   * A survey element before which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed below all other elements within the container.
    * - `options.insertAfter`: `IElement`\
-   * A survey element after which `target` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `target` will be placed above all other elements within the container.
+   * A survey element after which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed above all other elements within the container.
    * - `options.parent`: `ISurveyElement`\
-   * A parent container (page or panel) within which `target` will be placed.
+   * A parent container (page or panel) within which `draggedElement` will be placed.
    * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
    * A survey within which the drag and drop operation occured.
    * - `options.allow`: `boolean`\
    * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
+   * - `options.target`: `IElement`\
+   * Obsolete. Use `options.draggedElement` instead.
+   * - `options.source`: `IElement`\
+   * Obsolete. Use `options.toElement` instead.
    * @see onDragStart
    * @see onDragEnd
    */
@@ -2005,7 +2011,7 @@ export class CreatorBase extends Base
    * - `options.draggedElement`: `any`\
    * A survey element being dragged.
    * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` is being dragged.
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
    * - `options.toElement`: `any`\
    * A survey element to which `draggedElement` is being dragged.
    * @see onDragEnd
@@ -2023,7 +2029,7 @@ export class CreatorBase extends Base
    * - `options.draggedElement`: `any`\
    * A survey element that was dragged.
    * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` was dragged.
+   * A survey element from which `draggedElement` was dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
    * - `options.toElement`: `any`\
    * A survey element to which `draggedElement` was dragged.
    * @see onDragStart
