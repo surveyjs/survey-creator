@@ -1342,8 +1342,23 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     return json;
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    question.disableNativeUndoRedo = true;
-    if(prop.name === "title") {
+    if (question instanceof QuestionTextBase) {
+      question.onKeyDownPreprocess = (event: KeyboardEvent) => {
+        if ((event.ctrlKey || event.metaKey) && [89, 90].indexOf(event.keyCode) !== -1) {
+          if (question.isInputTextUpdate) {
+            (options as any).findSuitableShortcuts(event).forEach((shortcut: any) => {
+              shortcut.execute((options as any).selectedElement);
+            });
+            event.preventDefault();
+          } else if ((event.target as HTMLInputElement).value == question.value) {
+            (options as any).findSuitableShortcuts(event).forEach((shortcut: any) => {
+              shortcut.execute((options as any).selectedElement);
+            });
+          }
+        }
+      }
+    }
+    if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
     if(question.getType() == "textwithreset" || question.getType() == "commentwithreset") {

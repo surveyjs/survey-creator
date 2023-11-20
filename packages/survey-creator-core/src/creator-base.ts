@@ -3005,7 +3005,8 @@ export class CreatorBase extends Base
       rootNode.removeEventListener("keydown", this.onKeyDownHandler);
     }
   }
-  protected onKeyDownHandler = (event: KeyboardEvent) => {
+  public findSuitableShortcuts(event: KeyboardEvent): IKeyboardShortcut[] {
+    const shortcuts: IKeyboardShortcut[] = [];
     const availableShortcuts = Object.keys(this.shortcuts || {})
       .map((key) => this.shortcuts[key])
       .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
@@ -3017,8 +3018,14 @@ export class CreatorBase extends Base
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
       if (!!hotKey.shiftKey !== !!event.shiftKey) return;
       if (hotKey.keyCode !== event.keyCode) return;
-      if ((hotKey.keyCode < 48 || hotKey.keyCode == 89 || hotKey.keyCode == 90) && isTextInput(event.target)) return;
-      shortcut.execute(this.selectElement);
+      shortcuts.push(shortcut);
+    });
+    return shortcuts;
+  }
+  protected onKeyDownHandler = (event: KeyboardEvent) => {
+    this.findSuitableShortcuts(event).forEach((shortcut: IKeyboardShortcut) => {
+      if ((event.keyCode < 48 || event.keyCode == 89 || event.keyCode == 90) && isTextInput(event.target)) return;
+      shortcut.execute(this.selectedElement);
     });
   }
   private shortcuts: { [index: string]: IKeyboardShortcut } = {};
