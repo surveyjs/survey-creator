@@ -243,9 +243,7 @@ export var czStrings = {
       uncompletedRule_title: "Opustit záložku?",
       uncompletedRule_text: "Jedno nebo více logických pravidel není dokončeno. Opuštěním záložky dojde ke ztrátě všech neaplikovatelných změn. Jste si jisti, že chcete odejít?",
       uncompletedRule_apply: "Ano",
-      uncompletedRule_cancel: "Ne, chci pravidla dokončit",
-      expressionSetup: "",
-      actionsSetup: ""
+      uncompletedRule_cancel: "Ne, chci pravidla dokončit"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ export var czStrings = {
     verticalAlignmentBottom: "Dno",
     logoPosition: "Pozice loga",
     coverTitlePosition: "Titulní pozice",
-    coverDescriptionPosition: "Popis Poloha",
+    coverDescriptionPosition: "Popis pozice",
     names: {
       default: "Výchozí",
       sharp: "Ostrý",
@@ -1249,7 +1247,6 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Pozice loga"
 // theme.coverTitlePosition: "Title Position" => "Titulní pozice"
-// theme.coverDescriptionPosition: "Description Position" => "Popis Poloha"
 // lg.question_resetValueText: "reset value for question: {0}" => "Resetovat hodnotu pro otázku: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "přiřadit hodnotu: {1} na otázku: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Obnovit hodnotu buňky pro sloupec: {0}"
@@ -1286,3 +1283,4 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatické škálování oblasti podpisu"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimální šířka pera"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximální šířka pera"
+// theme.coverDescriptionPosition: "Description position" => "Popis pozice"

@@ -243,9 +243,7 @@ export let svStrings = {
       uncompletedRule_title: "Logiska regler är ofullständiga",
       uncompletedRule_text: "Du har inte slutfört några av de logiska reglerna. Om du lämnar fliken nu kommer ändringarna att gå förlorade. Vill du fortfarande lämna fliken utan att slutföra ändringarna?",
       uncompletedRule_apply: "Ja",
-      uncompletedRule_cancel: "Nej, jag vill komplettera reglerna",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Nej, jag vill komplettera reglerna"
     }
   },
   // Property Editors
@@ -1119,8 +1117,8 @@ export let svStrings = {
     verticalAlignmentMiddle: "Mitt",
     verticalAlignmentBottom: "Botten",
     logoPosition: "Logotypens placering",
-    coverTitlePosition: "Titel Position",
-    coverDescriptionPosition: "Beskrivning Position",
+    coverTitlePosition: "Titel position",
+    coverDescriptionPosition: "Beskrivning position",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1284,8 +1282,6 @@ editorLocalization.locales["sv"] = svStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Du har inte slutfört några av de logiska reglerna. Om du lämnar fliken nu kommer ändringarna att gå förlorade. Vill du fortfarande lämna fliken utan att slutföra ändringarna?"
 // lg.uncompletedRule_apply: "Yes" => "Ja"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nej, jag vill komplettera reglerna"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.save: "Save" => "Spara"
 // pe.clear: "Clear" => "Klar"
 // pe.saveTooltip: "Save" => "Spara"
@@ -1809,8 +1805,6 @@ editorLocalization.locales["sv"] = svStrings;
 // colors.tulip: "Tulip" => "Tulpan"
 // colors.brown: "Brown" => "Brun"
 // colors.green: "Green" => "Grön"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Skarp"
 // names.borderless: "Borderless" => "Marginalfri"
 // names.flat: "Flat" => "Flat"
@@ -1820,13 +1814,9 @@ editorLocalization.locales["sv"] = svStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Är du säker på att du vill ta bort alla strängar för det här språket?"
 // ed.themeResetButton: "Reset theme settings to default" => "Återställ temainställningarna till standard"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Färg på platshållare"
 // ed.themeSettings: "Theme Settings" => "Tema Inställningar"
 // ed.themeSettingsTooltip: "Open theme settings" => "Öppna temainställningar"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Nollställa"
 // pv.file: "Local files" => "Lokala filer"
 // pv.camera: "Camera" => "Kamera"
@@ -1836,8 +1826,6 @@ editorLocalization.locales["sv"] = svStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Ange minst {0} artiklar"
 // lg.question_resetValueName: "Reset question value" => "Återställ frågevärde"
 // lg.column_resetValue: "Reset column value" => "Återställ kolumnvärde"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Markera efter behov"
 // pe.removeRequiredMark: "Remove the required mark" => "Ta bort det obligatoriska märket"
 // p.resetValueIf: "Reset value if" => "Återställ värde om"
@@ -1845,8 +1833,6 @@ editorLocalization.locales["sv"] = svStrings;
 // lg.column_resetValueName: "Reset column value" => "Återställ kolumnvärde"
 // lg.column_setValueName: "Set column value" => "Ange kolumnvärde"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Ett uttryck vars resultat kommer att tilldelas målfrågan."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Ange värde om"
@@ -1873,19 +1859,13 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Mitt"
 // theme.verticalAlignmentBottom: "Bottom" => "Botten"
 // theme.logoPosition: "Logo Position" => "Logotypens placering"
-// theme.coverTitlePosition: "Title Position" => "Titel Position"
-// theme.coverDescriptionPosition: "Description Position" => "Beskrivning Position"
 // lg.question_resetValueText: "reset value for question: {0}" => "Återställ värde för fråga: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Tilldela värde: {1} till fråga: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Återställ cellvärde för kolumn: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilldela cellvärde: {1} till kolumn: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Export"
 // ed.surveyJsonImportButton: "Import" => "Import"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiera till Urklipp"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Text för filplatshållare"
 // pe.photoPlaceholder: "Photo placeholder text" => "Text för platshållare för foton"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Platshållartext för fil eller foto"
@@ -1897,14 +1877,10 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vill du verkligen återställa temat? Alla dina anpassningar kommer att gå förlorade."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, återställ temat"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Bakgrund"
 // theme.groupAppearance: "Appearance" => "Utseende"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivning förfärg"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Passa till behållare"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Visa platshållaren"
 // signaturepad.placeholder: "Placeholder text" => "Platshållartext"
 // theme.surveyDescription: "Survey description font" => "Teckensnitt för undersökningsbeskrivning"
@@ -1914,10 +1890,10 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.saveThemeTooltip: "Save Theme" => "Spara tema"
 // lg.page_requireName: "Make page required" => "Gör sidan obligatorisk"
 // lg.panel_requireName: "Make page required" => "Gör sidan obligatorisk"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Signaturområdets bredd"
 // signaturepad.signatureHeight: "Signature area height" => "Signaturområdets höjd"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skala signaturområdet automatiskt"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minsta pennbredd"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"
+// theme.coverTitlePosition: "Title position" => "Titel position"
+// theme.coverDescriptionPosition: "Description position" => "Beskrivning position"

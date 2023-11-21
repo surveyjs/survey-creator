@@ -243,9 +243,7 @@ var persianStrings = {
       uncompletedRule_title: "قوانین منطقی ناقص هستند",
       uncompletedRule_text: "شما برخی از قوانین منطقی را تکمیل نکرده اید. اگر اکنون برگه را ترک کنید، تغییرات از بین خواهند رفت. ایا هنوز هم می خواهید برگه را بدون تکمیل تغییرات ترک کنید؟",
       uncompletedRule_apply: "بله",
-      uncompletedRule_cancel: "نه، من می خواهم قوانین را تکمیل کنم",
-      expressionSetup: "تنظیمات عبارت ها",
-      actionsSetup: "تنظیمات عملکردها"
+      uncompletedRule_cancel: "نه، من می خواهم قوانین را تکمیل کنم"
     }
   },
   // Property Editors
@@ -1637,9 +1635,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.verticalAlignmentTop: "Top" => "بالا"
 // theme.verticalAlignmentMiddle: "Middle" => "میانه"
 // theme.verticalAlignmentBottom: "Bottom" => "پایین"
-// theme.logoPosition: "Logo Position" => "موقعیت لوگو"
-// theme.coverTitlePosition: "Title Position" => "موقعیت عنوان"
-// theme.coverDescriptionPosition: "Description Position" => "شرح موقعیت"
 // lg.question_resetValueText: "reset value for question: {0}" => "بازنشانی مقدار برای سوال: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "اختصاص مقدار: {1} به سوال: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "تنظیم مجدد مقدار سلول برای ستون: {0}"
@@ -1677,3 +1672,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "مقیاس خودکار منطقه امضا"
 // signaturepad.penMinWidth: "Minimum pen width" => "حداقل عرض قلم"
 // signaturepad.penMaxWidth: "Maximum pen width" => "حداکثر عرض قلم"
+// theme.logoPosition: "Logo position" => "موقعیت لوگو"
+// theme.coverTitlePosition: "Title position" => "موقعیت عنوان"
+// theme.coverDescriptionPosition: "Description position" => "شرح موقعیت"

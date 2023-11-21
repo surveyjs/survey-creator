@@ -206,9 +206,7 @@ export var tgStrings = {
       // selectedActionCaption: "Select action...",
       expressionInvalid: "Ифодаи мантиқӣ холӣ ё беэътибор мебошад. Илтимос, ислоҳ кунед.",
       // noActionError: "Please, add at least one action.",
-      // actionInvalid: "Please, fix problems in your action(s).",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      // actionInvalid: "Please, fix problems in your action(s)."
     }
   },
   // Property Editors
