@@ -146,14 +146,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public saveToFileHandler = saveToFileHandler;
 
   public exportToFile(fileName: string) {
-    const themeData = JSON.stringify(this.creator.theme, null, 4);
+    const themeCopy = JSON.parse(JSON.stringify(this.creator.theme));
+    themeCopy.themeName = themeCopy.themeName + "_exported";
+    const themeData = JSON.stringify(themeCopy, null, 4);
     const themeBlob = new Blob([themeData], { type: "application/json" });
     this.saveToFileHandler(fileName, themeBlob);
   }
   public importFromFile(file: File, callback?: (theme: ITheme) => void) {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      const theme: ITheme | any = JSON.parse(fileReader.result as string);
+      const theme: ITheme = JSON.parse(fileReader.result as string);
       this.addTheme(theme);
       if (this.model) {
         this.model.setTheme(theme);
