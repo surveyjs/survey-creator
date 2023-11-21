@@ -243,9 +243,7 @@ export var mnStrings = {
       uncompletedRule_title: "Табыг орхих уу?",
       uncompletedRule_text: "Нэг эсвэл олон логик дүрэм дутуу бичигдсэн байна. Табыг хаавал, оруулсан засварууд арилна. Та табыг хаахдаа итгэлтэй байна уу?",
       uncompletedRule_apply: "Тийм",
-      uncompletedRule_cancel: "Үгүй, дүрмийг үргэлжлүүлж бичиж дуусгах.",
-      expressionSetup: "",
-      actionsSetup: ""
+      uncompletedRule_cancel: "Үгүй, дүрмийг үргэлжлүүлж бичиж дуусгах."
     }
   },
   // Property Editors
@@ -1119,7 +1117,7 @@ export var mnStrings = {
     verticalAlignmentMiddle: "Дунд",
     verticalAlignmentBottom: "Доод",
     logoPosition: "Лого байрлал",
-    coverTitlePosition: "Нүүр Байршил",
+    coverTitlePosition: "Нүүр албан тушаал",
     coverDescriptionPosition: "Тодорхойлолтын байрлал",
     names: {
       default: "Дефолт",
@@ -1339,7 +1337,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.verticalAlignmentMiddle: "Middle" => "Дунд"
 // theme.verticalAlignmentBottom: "Bottom" => "Доод"
 // theme.logoPosition: "Logo Position" => "Лого байрлал"
-// theme.coverTitlePosition: "Title Position" => "Нүүр Байршил"
 // theme.coverDescriptionPosition: "Description Position" => "Тодорхойлолтын байрлал"
 // lg.question_resetValueText: "reset value for question: {0}" => "асуултын үнэ цэнийг дахин тогтоох нь: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "үнэ цэнийг даалгах нь: {1} асуулт: {0}"
@@ -1378,3 +1375,4 @@ editorLocalization.locales["mn"] = mnStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Авто замын тэмдэг тэмдэглэгээний талбай"
 // signaturepad.penMinWidth: "Minimum pen width" => "Хамгийн бага үзэгний өргөн"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Хамгийн их үзэгний өргөн"
+// theme.coverTitlePosition: "Title position" => "Нүүр албан тушаал"

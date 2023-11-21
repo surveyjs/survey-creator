@@ -243,9 +243,7 @@ export var huStrings = {
       uncompletedRule_title: "A logikai szabályok hiányosak",
       uncompletedRule_text: "Nem teljesített néhány logikai szabályt. Ha most elhagyja a lapot, a módosítások elvesznek. Továbbra is el akarja hagyni a lapot a módosítások végrehajtása nélkül?",
       uncompletedRule_apply: "Igen",
-      uncompletedRule_cancel: "Nem, szeretném kiegészíteni a szabályokat",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Nem, szeretném kiegészíteni a szabályokat"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ export var huStrings = {
     verticalAlignmentBottom: "Fenék",
     logoPosition: "Logó pozíciója",
     coverTitlePosition: "Cím pozíciója",
-    coverDescriptionPosition: "Leírás Pozíció",
+    coverDescriptionPosition: "Leírás pozíciója",
     names: {
       default: "Alapértelmezett",
       sharp: "Éles",
@@ -1277,8 +1275,6 @@ editorLocalization.locales["hu"] = huStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Nem teljesített néhány logikai szabályt. Ha most elhagyja a lapot, a módosítások elvesznek. Továbbra is el akarja hagyni a lapot a módosítások végrehajtása nélkül?"
 // lg.uncompletedRule_apply: "Yes" => "Igen"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nem, szeretném kiegészíteni a szabályokat"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.save: "Save" => "Megment"
 // pe.clear: "Clear" => "Világos"
 // pe.saveTooltip: "Save" => "Megment"
@@ -1785,8 +1781,6 @@ editorLocalization.locales["hu"] = huStrings;
 // colors.tulip: "Tulip" => "Tulipán"
 // colors.brown: "Brown" => "Barna"
 // colors.green: "Green" => "Zöld"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Éles"
 // names.borderless: "Borderless" => "Szegély nélküli"
 // names.flat: "Flat" => "Lapos"
@@ -1796,13 +1790,9 @@ editorLocalization.locales["hu"] = huStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Biztos benne, hogy törölni szeretné az összes karakterláncot ehhez a nyelvhez?"
 // ed.themeResetButton: "Reset theme settings to default" => "Témabeállítások visszaállítása alapértelmezettre"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Helyőrző színe"
 // ed.themeSettings: "Theme Settings" => "Téma beállítások"
 // ed.themeSettingsTooltip: "Open theme settings" => "Nyissa meg a témabeállításokat"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Átszed"
 // pv.file: "Local files" => "Helyi fájlok"
 // pv.camera: "Camera" => "Fényképezőgép"
@@ -1812,8 +1802,6 @@ editorLocalization.locales["hu"] = huStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Kérjük, adjon meg legalább {0} elemet"
 // lg.question_resetValueName: "Reset question value" => "Kérdés értékének visszaállítása"
 // lg.column_resetValue: "Reset column value" => "Oszlopérték visszaállítása"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Megjelölés kötelezőként"
 // pe.removeRequiredMark: "Remove the required mark" => "Távolítsa el a szükséges jelet"
 // p.resetValueIf: "Reset value if" => "Érték visszaállítása, ha"
@@ -1821,8 +1809,6 @@ editorLocalization.locales["hu"] = huStrings;
 // lg.column_resetValueName: "Reset column value" => "Oszlopérték visszaállítása"
 // lg.column_setValueName: "Set column value" => "Oszlopérték beállítása"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Olyan kifejezés, amelynek eredménye a célkérdéshez lesz rendelve."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Cím"
 // page.title: "Title" => "Cím"
 // p.setValueIf: "Set value if" => "Érték beállítása, ha"
@@ -1850,18 +1836,13 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Fenék"
 // theme.logoPosition: "Logo Position" => "Logó pozíciója"
 // theme.coverTitlePosition: "Title Position" => "Cím pozíciója"
-// theme.coverDescriptionPosition: "Description Position" => "Leírás Pozíció"
 // lg.question_resetValueText: "reset value for question: {0}" => "Kérdés visszaállítási értéke: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Érték hozzárendelése: {1} a kérdéshez: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Az oszlop cellaértékének visszaállítása: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Cellaérték hozzárendelése: {1} oszlophoz: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Kivitel"
 // ed.surveyJsonImportButton: "Import" => "Importál"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Másolás a vágólapra"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Fájl helyőrző szövege"
 // pe.photoPlaceholder: "Photo placeholder text" => "Fénykép helyőrző szövege"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Fájl vagy fénykép helyőrző szövege"
@@ -1873,28 +1854,22 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Tényleg vissza akarja állítani a témát? Az összes testreszabás elvész."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Igen, állítsa vissza a témát"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Háttér"
 // theme.groupAppearance: "Appearance" => "Megjelenés"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Leírás előszín"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Tárolóhoz igazítás"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "A helyőrző megjelenítése"
 // signaturepad.placeholder: "Placeholder text" => "Helyőrző szöveg"
 // theme.surveyDescription: "Survey description font" => "Felmérés leírásának betűtípusa"
-
 // ed.prevFocus: "Focus previous" => "Fókusz előző"
 // ed.nextFocus: "Focus next" => "Fókusz következő"
 // ed.saveTheme: "Save Theme" => "Téma mentése"
 // ed.saveThemeTooltip: "Save Theme" => "Téma mentése"
 // lg.page_requireName: "Make page required" => "Az oldal kötelezővé tétele"
 // lg.panel_requireName: "Make page required" => "Az oldal kötelezővé tétele"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Aláírási terület szélessége"
 // signaturepad.signatureHeight: "Signature area height" => "Aláírási terület magassága"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Az aláírási terület automatikus méretezése"
 // signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"
+// theme.coverDescriptionPosition: "Description position" => "Leírás pozíciója"

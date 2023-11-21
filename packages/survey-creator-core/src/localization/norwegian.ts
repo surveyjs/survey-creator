@@ -243,9 +243,7 @@ export var nbStrings = {
       uncompletedRule_title: "Logiske regler er ufullstendige",
       uncompletedRule_text: "Noen av de logiske reglene har du ikke fullført. Hvis du forlater fanen nå, vil endringene gå tapt. Vil du fortsatt forlate fanen uten å fullføre endringene?",
       uncompletedRule_apply: "Ja",
-      uncompletedRule_cancel: "Nei, jeg vil fullføre reglene",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Nei, jeg vil fullføre reglene"
     }
   },
   // Property Editors
@@ -1118,9 +1116,9 @@ export var nbStrings = {
     verticalAlignmentTop: "Topp",
     verticalAlignmentMiddle: "Midt",
     verticalAlignmentBottom: "Bunn",
-    logoPosition: "Logo Posisjon",
-    coverTitlePosition: "Tittel Posisjon",
-    coverDescriptionPosition: "Beskrivelse Posisjon",
+    logoPosition: "Logo posisjon",
+    coverTitlePosition: "Tittelposisjon",
+    coverDescriptionPosition: "Beskrivelse posisjon",
     names: {
       default: "Standard",
       sharp: "Skarp",
@@ -1209,8 +1207,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Noen av de logiske reglene har du ikke fullført. Hvis du forlater fanen nå, vil endringene gå tapt. Vil du fortsatt forlate fanen uten å fullføre endringene?"
 // lg.uncompletedRule_apply: "Yes" => "Ja"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nei, jeg vil fullføre reglene"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Klar"
 // pe.set: "Set" => "Sett"
 // pe.change: "Change" => "Forandre"
@@ -1635,8 +1631,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // colors.tulip: "Tulip" => "Tulipan"
 // colors.brown: "Brown" => "Brun"
 // colors.green: "Green" => "Grønn"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Skarp"
 // names.borderless: "Borderless" => "Kantløse"
 // names.flat: "Flat" => "Flat"
@@ -1646,13 +1640,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Er du sikker på at du ønsker å slette alle strenger for dette språket?"
 // ed.themeResetButton: "Reset theme settings to default" => "Tilbakestill temainnstillinger til standard"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Plassholderfarge"
 // ed.themeSettings: "Theme Settings" => "Tema innstillinger"
 // ed.themeSettingsTooltip: "Open theme settings" => "Åpne temainnstillinger"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Nullstille"
 // pv.file: "Local files" => "Lokale filer"
 // pv.camera: "Camera" => "Kamera"
@@ -1662,8 +1652,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Vennligst skriv inn minst {0} elementer"
 // lg.question_resetValueName: "Reset question value" => "Tilbakestille spørsmålsverdien"
 // lg.column_resetValue: "Reset column value" => "Tilbakestille kolonneverdi"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Merk etter behov"
 // pe.removeRequiredMark: "Remove the required mark" => "Fjern ønsket merke"
 // p.resetValueIf: "Reset value if" => "Tilbakestill verdien hvis"
@@ -1671,8 +1659,6 @@ editorLocalization.locales["nb"] = nbStrings;
 // lg.column_resetValueName: "Reset column value" => "Tilbakestille kolonneverdi"
 // lg.column_setValueName: "Set column value" => "Angi kolonneverdi"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Et uttrykk der resultatet tilordnes målspørsmålet."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Tittel"
 // page.title: "Title" => "Tittel"
 // p.setValueIf: "Set value if" => "Angi verdi hvis"
@@ -1698,20 +1684,13 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.verticalAlignmentTop: "Top" => "Topp"
 // theme.verticalAlignmentMiddle: "Middle" => "Midt"
 // theme.verticalAlignmentBottom: "Bottom" => "Bunn"
-// theme.logoPosition: "Logo Position" => "Logo Posisjon"
-// theme.coverTitlePosition: "Title Position" => "Tittel Posisjon"
-// theme.coverDescriptionPosition: "Description Position" => "Beskrivelse Posisjon"
 // lg.question_resetValueText: "reset value for question: {0}" => "Tilbakestill verdi for spørsmål: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "tilordne verdi: {1} til spørsmålet: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Tilbakestill celleverdi for kolonne: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Tilordne celleverdi: {1} til kolonne: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Eksport"
 // ed.surveyJsonImportButton: "Import" => "Importere"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiere til utklippstavlen"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Plassholdertekst for fil"
 // pe.photoPlaceholder: "Photo placeholder text" => "Tekst for plassholdere for bilde"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Plassholdertekst for fil eller bilde"
@@ -1723,28 +1702,24 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Vil du virkelig tilbakestille temaet? Alle tilpasningene dine vil gå tapt."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, tilbakestill temaet"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Bakgrunn"
 // theme.groupAppearance: "Appearance" => "Utseende"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beskrivelse forfarge"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Tilpass til container"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Vise plassholderen"
 // signaturepad.placeholder: "Placeholder text" => "Plassholdertekst"
 // theme.surveyDescription: "Survey description font" => "Skrift for undersøkelsesbeskrivelse"
-
 // ed.prevFocus: "Focus previous" => "Fokus forrige"
 // ed.nextFocus: "Focus next" => "Fokus neste"
 // ed.saveTheme: "Save Theme" => "Lagre tema"
 // ed.saveThemeTooltip: "Save Theme" => "Lagre tema"
 // lg.page_requireName: "Make page required" => "Gjøre siden obligatorisk"
 // lg.panel_requireName: "Make page required" => "Gjøre siden obligatorisk"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Bredde på signaturområde"
 // signaturepad.signatureHeight: "Signature area height" => "Høyde på signaturområdet"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Skalere signaturområdet automatisk"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimum pennebredde"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimal pennebredde"
+// theme.logoPosition: "Logo position" => "Logo posisjon"
+// theme.coverTitlePosition: "Title position" => "Tittelposisjon"
+// theme.coverDescriptionPosition: "Description position" => "Beskrivelse posisjon"

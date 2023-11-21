@@ -422,6 +422,7 @@ export class ThemeBuilder extends Base {
       if (availebleThemes.indexOf(themeChooser.value) === -1) {
         themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
       }
+      this.updatePropertyGridEditorsAvailability();
     }
   }
 
@@ -645,7 +646,7 @@ export class ThemeBuilder extends Base {
   }
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
-    return findSuitableTheme(themeName, probeThemeFullName);
+    return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
@@ -762,8 +763,24 @@ export class ThemeBuilder extends Base {
   }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
-    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
-    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+    let customThemeHasModeVariations = false;
+    let customThemeHasPaletteVariations = false;
+    if (isCustomTheme) {
+      const registeredThemes = Object.keys(Themes);
+      let themeLight = this.themeName + "-light";
+      let themeDark = this.themeName + "-dark";
+      if (this.themeMode !== "panels") {
+        themeLight += "-panelless";
+        themeDark += "-panelless";
+      }
+      customThemeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
+
+      let themePanels = this.themeName + "-" + this.themePalette;
+      let themePanelless = themePanels + "-panelless";
+      customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
+    }
+    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme && !customThemeHasModeVariations;
+    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme && !customThemeHasPaletteVariations;
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {

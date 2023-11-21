@@ -243,9 +243,7 @@ export var arStrings = {
       uncompletedRule_title: "القواعد المنطقية غير مكتملة",
       uncompletedRule_text: "لم تكمل بعض القواعد المنطقية. إذا تركت علامة التبويب الآن ، فستفقد التغييرات. هل ما زلت تريد مغادرة علامة التبويب دون إكمال التغييرات؟",
       uncompletedRule_apply: "نعم",
-      uncompletedRule_cancel: "لا، أريد إكمال القواعد",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "لا، أريد إكمال القواعد"
     }
   },
   // Property Editors
@@ -1119,8 +1117,8 @@ export var arStrings = {
     verticalAlignmentMiddle: "وسط",
     verticalAlignmentBottom: "قاع",
     logoPosition: "موضع الشعار",
-    coverTitlePosition: "منصب العنوان",
-    coverDescriptionPosition: "وصف الوظيفة الحالية",
+    coverTitlePosition: "موضع العنوان",
+    coverDescriptionPosition: "موقف الوصف",
     names: {
       default: "افتراضي",
       sharp: "حاد",
@@ -1186,8 +1184,6 @@ editorLocalization.locales["ar"] = arStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "لم تكمل بعض القواعد المنطقية. إذا تركت علامة التبويب الآن ، فستفقد التغييرات. هل ما زلت تريد مغادرة علامة التبويب دون إكمال التغييرات؟"
 // lg.uncompletedRule_apply: "Yes" => "نعم"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "لا، أريد إكمال القواعد"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2" => "يمكنك تعيين البيانات بالتنسيق التالي:\nالقيمة1|النص\nقيمة2"
 // pe.showPreviewBeforeComplete: "Preview answers before submitting the survey" => "معاينة الإجابات قبل إرسال الاستطلاع"
 // pe.overridingPropertyPrefix: "Set by " => "تم تعيينه بواسطة "
@@ -1541,8 +1537,6 @@ editorLocalization.locales["ar"] = arStrings;
 // colors.tulip: "Tulip" => "توليب"
 // colors.brown: "Brown" => "أسمر"
 // colors.green: "Green" => "أخضر"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "حاد"
 // names.borderless: "Borderless" => "بلا حدود"
 // names.flat: "Flat" => "وطيء"
@@ -1552,21 +1546,15 @@ editorLocalization.locales["ar"] = arStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "هل أنت متأكد من أنك ترغب في حذف جميع السلاسل لهذه اللغة؟"
 // ed.themeResetButton: "Reset theme settings to default" => "إعادة تعيين إعدادات النسق إلى الوضع الافتراضي"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "لون العنصر النائب"
 // ed.themeSettings: "Theme Settings" => "إعدادات النسق"
 // ed.themeSettingsTooltip: "Open theme settings" => "فتح إعدادات النسق"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "اعاده تعيين"
 // pv.file: "Local files" => "الملفات المحلية"
 // pv.camera: "Camera" => "كاميرا"
 // pv.file-camera: "Local files or camera" => "الملفات المحلية أو الكاميرا"
 // ed.translateUsigAI: "Auto-translate All" => "ترجمة تلقائية للكل"
 // ed.translationDialogTitle: "Untranslated strings" => "النصوص غير المترجمة"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "الرجاء إدخال {0} العناصر على الأقل"
 // pe.markRequired: "Mark as required" => "وضع علامة كمطلوب"
 // pe.removeRequiredMark: "Remove the required mark" => "إزالة العلامة المطلوبة"
@@ -1578,8 +1566,6 @@ editorLocalization.locales["ar"] = arStrings;
 // lg.column_resetValueName: "Reset column value" => "إعادة تعيين قيمة العمود"
 // lg.column_setValueName: "Set column value" => "تعيين قيمة العمود"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " تعبير سيتم تعيين نتيجته للسؤال الهدف."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "عنوان"
 // page.title: "Title" => "عنوان"
 // p.setValueIf: "Set value if" => "تعيين قيمة إذا"
@@ -1605,20 +1591,13 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.verticalAlignmentTop: "Top" => "أعلى"
 // theme.verticalAlignmentMiddle: "Middle" => "وسط"
 // theme.verticalAlignmentBottom: "Bottom" => "قاع"
-// theme.logoPosition: "Logo Position" => "موضع الشعار"
-// theme.coverTitlePosition: "Title Position" => "منصب العنوان"
-// theme.coverDescriptionPosition: "Description Position" => "وصف الوظيفة الحالية"
 // lg.question_resetValueText: "reset value for question: {0}" => "إعادة تعيين قيمة السؤال: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "تعيين قيمة: {1} السؤال: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "إعادة تعيين قيمة الخلية للعمود: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "تعيين قيمة الخلية: {1} إلى العمود: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "تصدير"
 // ed.surveyJsonImportButton: "Import" => "استورد"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "نسخ إلى الحافظة"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "نص العنصر النائب للملف"
 // pe.photoPlaceholder: "Photo placeholder text" => "نص العنصر النائب للصورة"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "نص العنصر النائب للملف أو الصورة"
@@ -1630,14 +1609,10 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "هل تريد حقا إعادة تعيين السمة؟ ستفقد جميع تخصيصاتك."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "نعم ، إعادة تعيين السمة"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "خلفية"
 // theme.groupAppearance: "Appearance" => "مظهر"
 // theme.coverDescriptionForecolor: "Description forecolor" => "وصف التلوين الأمامي"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "يصلح للحاوية"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "إظهار العنصر النائب"
 // signaturepad.placeholder: "Placeholder text" => "نص العنصر النائب"
 // theme.surveyDescription: "Survey description font" => "خط وصف الاستطلاع"
@@ -1647,10 +1622,11 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.saveThemeTooltip: "Save Theme" => "حفظ السمة"
 // lg.page_requireName: "Make page required" => "اجعل الصفحة مطلوبة"
 // lg.panel_requireName: "Make page required" => "اجعل الصفحة مطلوبة"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "عرض منطقة التوقيع"
 // signaturepad.signatureHeight: "Signature area height" => "ارتفاع منطقة التوقيع"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "تغيير حجم منطقة التوقيع تلقائيا"
 // signaturepad.penMinWidth: "Minimum pen width" => "الحد الأدنى لعرض القلم"
 // signaturepad.penMaxWidth: "Maximum pen width" => "الحد الأقصى لعرض القلم"
+// theme.logoPosition: "Logo position" => "موضع الشعار"
+// theme.coverTitlePosition: "Title position" => "موضع العنوان"
+// theme.coverDescriptionPosition: "Description position" => "موقف الوصف"

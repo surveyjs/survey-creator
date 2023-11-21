@@ -64,9 +64,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   }
   public componentWillUnmount() {
     super.componentWillUnmount();
-    this.baseModel.getEditorElement = undefined;
-    this.baseModel.blurEditor = undefined;
-    this.baseModel.dispose();
+    this.baseModel.detachFromUI();
     if (!this.locString) return;
     this.locString.onStringChanged.remove(this.onChangedHandler);
   }
