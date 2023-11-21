@@ -45,11 +45,11 @@ import { QuestionLinkValueModel } from "../components/link-value";
 import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
-  if(!this.question) return false;
+  if (!this.question) return false;
   const obj = this.question.obj;
   const prop = this.question.property;
   if (!obj || !prop) return false;
-  if(!Serializer.hasOriginalProperty(obj, prop.name)) return false;
+  if (!Serializer.hasOriginalProperty(obj, prop.name)) return false;
   return prop.visibleIf(obj);
 }
 function propertyEnableIf(params: any): boolean {
@@ -514,11 +514,11 @@ export class PropertyJSONGenerator {
       if (!!prop.visibleIf && eventVisibility) {
         q.visibleIf = "propertyVisibleIf() = true";
       }
-      if(!!prop.overridingProperty && q.visible) {
+      if (!!prop.overridingProperty && q.visible) {
         q.onUpdateCssClassesCallback = (css: any) => {
           css.questionWrapper = "spg-boolean-wrapper--overriding";
         };
-        if(!eventReadOnly) {
+        if (!eventReadOnly) {
           q.enableIf = "propertyEnableIf() = true";
         }
         const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
@@ -568,7 +568,7 @@ export class PropertyJSONGenerator {
     linkValue.onUpdateCssClassesCallback = (css: any) => {
       css.questionWrapper = "spg-link-wrapper--overriding";
     };
-    if(!!overridingQuestion) {
+    if (!!overridingQuestion) {
       linkValue.linkClickCallback = () => {
         //Focus and aways scroll into view
         overridingQuestion.focus(false, true);
@@ -757,7 +757,7 @@ export class PropertyGridModel {
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
   ) {
     this.options = options;
-    if(this.options.enableLinkFileEditor) {
+    if (this.options.enableLinkFileEditor) {
       PropertyGridEditorCollection.register(new PropertyGridLinkEditor());
     }
     this.obj = obj;
@@ -965,7 +965,7 @@ export class PropertyGridModel {
     if (question.isRequired && (Helpers.isValueEmpty(val) || question["valueChangingEmpty"]))
       return this.getErrorTextOnValidate(
         editorLocalization.getString("pe.propertyIsEmpty"), prop.name, obj, val);
-    if(this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
+    if (this.isPropNameInValid(obj, prop, val) || question["nameHasError"])
       return this.getErrorTextOnValidate(
         editorLocalization.getString("pe.propertyNameIsIncorrect"), prop.name, obj, val);
     const editorError = PropertyGridEditorCollection.validateValue(obj, question, prop, val);
@@ -973,7 +973,7 @@ export class PropertyGridModel {
   }
   private getErrorTextOnValidate(defaultError: string, propName: string, obj: Base, val: any): string {
     const customError = this.options.onGetErrorTextOnValidationCallback(propName, obj, val);
-    return !!customError ? customError: defaultError;
+    return !!customError ? customError : defaultError;
   }
   private onValidateQuestion(options: any) {
     var q = options.question;
@@ -1000,7 +1000,7 @@ export class PropertyGridModel {
     q["nameHasError"] = isPropertyNameInValid;
   }
   private isPropNameInValid(obj: Base, prop: JsonObjectProperty, val: any): boolean {
-    if(obj["isQuestion"] && prop.name === "name" && !!val) {
+    if (obj["isQuestion"] && prop.name === "name" && !!val) {
       val = (<string>val).toLowerCase();
       return ["item", "choice", "row", "panel"].indexOf(val) > -1;
     }
@@ -1236,7 +1236,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
     if (property.type !== "condition") {
       surveyPropertyEditor.editSurvey.css = defaultV2Css;
     }
-    if(question.isReadOnly) {
+    if (question.isReadOnly) {
       surveyPropertyEditor.editSurvey.mode = "display";
     }
     if (!settings.showDialog) return surveyPropertyEditor;
@@ -1265,7 +1265,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
       }, options.rootElement);
     if (question.isReadOnly) {
       const applyBtn = popupModel.footerToolbar.getActionById("apply");
-      if(!!applyBtn) {
+      if (!!applyBtn) {
         applyBtn.visible = false;
       }
     }
@@ -1302,7 +1302,7 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   }
   onUpdateQuestionCssClasses(obj: Base, options: any) {
     if (!this.isSupportGrouping()) return;
-    if(this.hasPreviousElementForGrouping(options.question)) {
+    if (this.hasPreviousElementForGrouping(options.question)) {
       options.cssClasses.mainRoot += " spg-row-narrow__question";
     }
   }
@@ -1336,17 +1336,32 @@ export abstract class PropertyGridEditorStringBase extends PropertyGridEditor {
     return json;
   }
   protected updateType(prop: JsonObjectProperty, obj: Base, json: any) {
-    if(!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
+    if (!json.maxLength && obj.hasDefaultPropertyValue(prop.name)) {
       json.type = `${json.type}withreset`;
     }
     return json;
   }
   public onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    question.disableNativeUndoRedo = true;
-    if(prop.name === "title") {
+    if (question instanceof QuestionTextBase) {
+      question.onKeyDownPreprocess = (event: KeyboardEvent) => {
+        if ((event.ctrlKey || event.metaKey) && [89, 90].indexOf(event.keyCode) !== -1) {
+          if (question.isInputTextUpdate) {
+            (options as any).findSuitableShortcuts(event).forEach((shortcut: any) => {
+              shortcut.execute((options as any).selectedElement);
+            });
+            event.preventDefault();
+          } else if ((event.target as HTMLInputElement).value == question.value) {
+            (options as any).findSuitableShortcuts(event).forEach((shortcut: any) => {
+              shortcut.execute((options as any).selectedElement);
+            });
+          }
+        }
+      };
+    }
+    if (prop.name === "title") {
       question.allowSpaceAsAnswer = true;
     }
-    if(question.getType() == "textwithreset" || question.getType() == "commentwithreset") {
+    if (question.getType() == "textwithreset" || question.getType() == "commentwithreset") {
       question.resetValueAdorner.resetValueCallback = () => {
         obj.resetPropertyValue(prop.name);
       };
@@ -1396,9 +1411,9 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
   }
 
   public onCreated(obj: Base, question: QuestionFileEditorModel, prop: JsonObjectProperty, options: ISurveyCreatorOptions) {
-    if(["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
+    if (["image", "imageitemvalue"].indexOf(obj.getType()) > -1) {
       const questionObj = obj.getType() == "imageitemvalue" ? (<any>obj).locOwner : <Question>obj;
-      if(questionObj) {
+      if (questionObj) {
         questionObj.registerFunctionOnPropertyValueChanged("contentMode", (newValue: string) => {
           question.acceptedTypes = getAcceptedTypesByContentMode(newValue);
         });
@@ -1459,7 +1474,7 @@ export class PropertyGridEditorImageSize extends PropertyGridEditorString {
     const isDefaultValue = (imageHeight: number, imageWidth: number) => {
       const imageHeightProperty = Serializer.findProperty(obj.getType(), "imageHeight");
       const imageWidthProperty = Serializer.findProperty(obj.getType(), "imageWidth");
-      if(!imageHeightProperty && !imageWidthProperty) return false;
+      if (!imageHeightProperty && !imageWidthProperty) return false;
       return imageHeightProperty.isDefaultValue(imageHeight) && imageWidthProperty.isDefaultValue(imageWidth);
     };
     question.valueFromDataCallback = function (value: any): any {

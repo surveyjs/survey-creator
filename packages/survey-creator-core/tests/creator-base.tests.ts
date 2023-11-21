@@ -2780,6 +2780,38 @@ test("process shortcut for text inputs", (): any => {
   expect(log).toEqual("->execute->execute->execute");
 });
 
+test("process undo-redo shortcut for text inputs", (): any => {
+  const creator = new CreatorTester({ showDesignerTab: false });
+  let log = "";
+  creator.registerShortcut("undo_test", {
+    hotKey: {
+      keyCode: 90,
+    },
+    macOsHotkey: {
+      keyCode: 90,
+    },
+    execute: () => log += "->execute"
+  });
+  creator.registerShortcut("redo_test", {
+    hotKey: {
+      keyCode: 89,
+    },
+    macOsHotkey: {
+      keyCode: 89,
+    },
+    execute: () => log += "->execute"
+  });
+  expect(log).toEqual("");
+  creator["onKeyDownHandler"](<any>{ keyCode: 90, target: { tagName: "span" } });
+  expect(log).toEqual("->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 89, target: { tagName: "div" } });
+  expect(log).toEqual("->execute->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 89, target: { tagName: "input" } });
+  expect(log).toEqual("->execute->execute");
+  creator["onKeyDownHandler"](<any>{ keyCode: 90, target: { tagName: "input" } });
+  expect(log).toEqual("->execute->execute");
+});
+
 test("doClickQuestionCore", () => {
   const creator = new CreatorTester({ showLogicTab: true });
   creator.JSON = {
@@ -2976,7 +3008,8 @@ test("Add new question from Page on selecting question in panel dynamic", (): an
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
-      { type: "paneldynamic", name: "panel1",
+      {
+        type: "paneldynamic", name: "panel1",
         templateElements: [
           { type: "text", name: "question1" }
         ]
