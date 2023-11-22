@@ -11,6 +11,7 @@ This article describes how to localize the Survey Creator UI and give users the 
   - [Available Languages](#available-languages)
   - [Enable Localization and Switch Between Locales](#enable-localization-and-switch-between-locales)
   - [Override Individual Translations](#override-individual-translations)
+  - [Create a Custom Locale](#create-a-custom-locale)
 - [Localize Survey Contents](#localize-survey-contents)
 
 ## Localize Survey Creator UI
@@ -79,35 +80,33 @@ translations.ed.jsonEditor = "Edit As Text";
 
 [View Demo](https://surveyjs.io/Examples/Survey-Creator/?id=localization (linkStyle))
 
+### Create a Custom Locale
 
-You can also create a custom locale to apply multiple translations in a batch. Declare an object with your translations and assign it to the `locales["localeName"]` property. The following code shows how to do it in a separate TypeScript translation file (dictionary):
+A custom locale allows you to change multiple translations in a batch or localize the Survey Creator UI to a new language. To create a custom locale, copy one of the [existing dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) and modify required translations in it. Add an object with translations to the `editorLocalization.locales` object under a custom ID (`"customlocale"` in the code below):
 
 ```js
 // custom-locale.ts
 import { editorLocalization } from 'survey-creator-core';
 
 const customLocaleStrings = {
-  ed: {
-    addNewQuestion: "New Question",
-    deletePage: "Remove Page"
-  }
+  // ...
+  // Your translations go here
+  // ...
 };
 
 editorLocalization.locales["customlocale"] = customLocaleStrings;
 ```
 
+To apply a custom locale, import the dictionary file and assign the locale's ID to the `editorLocalization.currentLocale` property or Survey Creator's [`locale`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#locale) property:
+
 ```js
 import './localization/custom-locale.ts'
-import { localization } from "survey-creator-core";
+import { editorLocalization } from "survey-creator-core";
 // ...
 // Activate the custom locale
-localization.currentLocale = "customlocale";
-```
-
-If any translation strings are missing in your custom locale, they will be taken from the default English locale. You can specify the `defaultLocale` property to use another locale as default:
-
-```js
-editorLocalization.defaultLocale = "fr";
+editorLocalization.currentLocale = "customlocale";
+// ----- or -----
+creator.locale = "customlocale";
 ```
 
 ## Localize Survey Contents
