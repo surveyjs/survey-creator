@@ -72,7 +72,6 @@ import CustomWidget from "./adorners/CustomWidget.vue";
 import CarryForward from "./adorners/CarryForward.vue";
 
 function registerComponents(app: App) {
-  app.use(surveyPlugin);
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
   app.component("svc-svg-bundle", SvgBundle);
 
