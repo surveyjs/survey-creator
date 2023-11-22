@@ -663,3 +663,17 @@ test("Check accepted file types hint link", async (t) => {
     await takeElementScreenshot("file-accepted-types-hint.png", Selector("[data-name='acceptedTypes']"), t, comparer);
   });
 });
+
+test("Dropdown input in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+
+    await t
+      .click(Selector("button[title='Open survey settings'"))
+      .click(Selector(".spg-dropdown[aria-label='Survey language']"))
+      .pressKey("ali");
+
+    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
+  });
+});
+
