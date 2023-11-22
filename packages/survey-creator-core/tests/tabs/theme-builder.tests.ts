@@ -1687,13 +1687,13 @@ test("headerViewContainer init state", (): any => {
     "textAreaWidth": 512,
     "height": 256,
     "headerDescription": {
-      "color": "rgba(0, 0, 0, 0.45)",
+      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 16,
-      "weight": "400",
+      "weight": "600",
     },
     "headerTitle": {
-      "color": "rgba(0, 0, 0, 0.91)",
+      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 32,
       "weight": "700",
