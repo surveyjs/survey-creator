@@ -18,9 +18,7 @@ This article describes how to localize the Survey Creator UI and give users the 
 
 ### Available Languages
 
-Survey Creator UI is translated into over 30 languages. We ship translated strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). They are supported by the community and may contain untranslated strings. To fill the gap, these strings are translated by <a href="https://learn.microsoft.com/en-us/azure/ai-services/translator/" target="_blank">Azure AI Translator by Microsoft</a>. Each dictionary file contains a log of machine translations at the end. You can use it to find individual machine-translated strings and revise them if required. Delete revised strings from the log to exclude them from machine translation.
-
-You can also create new dictionaries for unsupported languages. Use English as a base dictionary: copy the file, replace English translations in it, and submit a pull request with the resulting file to the [survey-creator](https://github.com/surveyjs/survey-creator) repository.
+Survey Creator UI is translated into over 30 languages. We ship translated strings as [dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization). They are supported by the community and may contain untranslated strings. To fill the gap, these strings are translated by <a href="https://learn.microsoft.com/en-us/azure/ai-services/translator/" target="_blank">Azure AI Translator by Microsoft</a>. Each dictionary file contains a log of machine translations at the end. You can use it to find individual machine-translated strings and revise them if required. Delete revised strings from the log to exclude them from machine translation. You can also [create new dictionaries](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization#add-a-new-dictionary) for unsupported languages.
 
 ### Enable Localization and Switch Between Locales
 
@@ -54,9 +52,9 @@ The default language for UI elements is English. To select another language, set
 SurveyCreator.localization.currentLocale = "fr";
 
 // In modular applications:
-import { localization } from "survey-creator-core";
+import { editorLocalization } from "survey-creator-core";
 import "survey-creator-core/i18n/french";
-localization.currentLocale = "fr";
+editorLocalization.currentLocale = "fr";
 ```
 
 ### Override Individual Translations
@@ -67,8 +65,8 @@ You can modify individual translation strings. Call the `getLocale(locale)` meth
 // Get current locale translations
 const translations = SurveyCreator.localization.getLocale("");
 // In modular applications
-import { localization } from "survey-creator-core";
-const translations = localization.getLocale("");
+import { editorLocalization } from "survey-creator-core";
+const translations = editorLocalization.getLocale("");
 
 // Change text for the `visible` property in Property Grid
 translations.p.visible = "Is visible";
@@ -82,25 +80,11 @@ translations.ed.jsonEditor = "Edit As Text";
 
 ### Create a Custom Locale
 
-A custom locale allows you to change multiple translations in a batch or localize the Survey Creator UI to a new language. To create a custom locale, copy one of the [existing dictionary files](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization) and modify required translations in it. Add an object with translations to the `editorLocalization.locales` object under a custom ID (`"customlocale"` in the code below):
+A custom locale allows you to change multiple translations in a batch or translate the Survey Creator UI to a new language. To create a custom locale, use the following instructions: [Add a New Dictionary](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core/src/localization#add-a-new-dictionary).
+
+To apply a custom locale, assign the locale's ID to the `currentLocale` property or Survey Creator's [`locale`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#locale) property:
 
 ```js
-// custom-locale.ts
-import { editorLocalization } from 'survey-creator-core';
-
-const customLocaleStrings = {
-  // ...
-  // Your translations go here
-  // ...
-};
-
-editorLocalization.locales["customlocale"] = customLocaleStrings;
-```
-
-To apply a custom locale, import the dictionary file and assign the locale's ID to the `editorLocalization.currentLocale` property or Survey Creator's [`locale`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#locale) property:
-
-```js
-import './localization/custom-locale.ts'
 import { editorLocalization } from "survey-creator-core";
 // ...
 // Activate the custom locale
