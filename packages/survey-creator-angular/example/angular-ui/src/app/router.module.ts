@@ -10,14 +10,14 @@ import { TestLocalizationComponent } from "./test/localization.component";
 import { ThemeTabComponent } from "./test/test-theme-tab.component";
 
 const routes = [
-  { path: "testCafe/testcafe.html", component: TestDefaultComponent },
-  { path: "testCafe/preview-theme-switcher.html", component: TestThemeSwitcherComponent },
-  { path: "testCafe/theme-for-preview-option.html", component: ThemePreviewComponent },
-  { path: "testCafe/by-page.html", component: TestByPageComponent },
-  { path: "testCafe/testcafe-widget.html", component: TestCustomWidgetComponent },
-  { path: "testCafe/testcafe_localized_ui.html", component: TestLocalizationComponent },
-  { path: "testCafe/dropdown-collapse-view.html", component: TestDropdownCollapseComponent },
-  { path: "testCafe/testcafe-theme-tab.html", component: ThemeTabComponent }
+  { path: "testCafe/testcafe", component: TestDefaultComponent },
+  { path: "testCafe/preview-theme-switcher", component: TestThemeSwitcherComponent },
+  { path: "testCafe/theme-for-preview-option", component: ThemePreviewComponent },
+  { path: "testCafe/by-page", component: TestByPageComponent },
+  { path: "testCafe/testcafe-widget", component: TestCustomWidgetComponent },
+  { path: "testCafe/testcafe_localized_ui", component: TestLocalizationComponent },
+  { path: "testCafe/dropdown-collapse-view", component: TestDropdownCollapseComponent },
+  { path: "testCafe/testcafe-theme-tab", component: ThemeTabComponent }
 ];
 
 @NgModule({
