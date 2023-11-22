@@ -860,6 +860,11 @@ jobs:
       rm node_modules/survey-vue3-ui
     displayName: 'npm install'
 
+  - script: |
+     cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+     npm run remove-package-lock
+    displayName: 'npm run remove-package-lock'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-vue3-ui'
