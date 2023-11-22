@@ -129,6 +129,7 @@ test("Drag Drop Toolbox All Questions", async (t) => {
     .dragToElement(CommentItem, newGhostPagePage, { speed: 0.5 });
   pagesLength = await getPagesLength();
   await t.expect(pagesLength).eql(5);
+  await t.scrollIntoView(newGhostPagePage);
 
   await t
     .hover(RatingToolboxItem)

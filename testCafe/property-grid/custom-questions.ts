@@ -41,6 +41,7 @@ test("Check color editor key navigation", async (t) => {
     .expect(t.eval(() => document.activeElement == document.querySelector("[data-name='fontColor1'] .spg-input-container__input"))).ok()
     .expect(Selector("div[data-name='fontColor1'] .sv-popup").visible).notOk()
     .pressKey("down")
+    .wait(1000)
     .expect(Selector("div[data-name='fontColor1'] .sv-popup").visible).ok()
     .pressKey("down")
     .pressKey("down")

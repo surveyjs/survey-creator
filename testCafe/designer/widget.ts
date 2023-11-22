@@ -1,7 +1,7 @@
 import { setJSON } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Check Empty Survey JSON";
-const url = "http://127.0.0.1:8080/testCafe/testcafe-widget.html";
+const url = "http://127.0.0.1:8080/testCafe/testcafe-widget";
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
