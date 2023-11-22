@@ -1,6 +1,6 @@
 import { resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
-import { ConfigEnv, defineConfig } from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import generatePackageJson from "rollup-plugin-generate-package-json";
 const json = require("./publish/package.json");
