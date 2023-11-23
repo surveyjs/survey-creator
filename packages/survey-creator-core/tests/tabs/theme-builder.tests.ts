@@ -1873,7 +1873,7 @@ test("restore headerViewContainer values", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "basic",
+    "headerView": "advanced",
     "logoPosition": "left",
     "inheritWidthFrom": "container",
     "backgroundColor": "#5094ed",
