@@ -1953,12 +1953,10 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  private isInitialSurveyEmptyValue: boolean;
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
    */
-  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     if (!json) {
       json = { "logoPosition": "right" };
@@ -1971,7 +1969,6 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
-    this.isInitialSurveyEmptyValue = survey.isEmpty;
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
@@ -2684,9 +2681,9 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
-      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+      if (this.survey.pageCount === 1) {
         const page = this.survey.pages[0];
-        if (page.elements.length === 1 && obj === page.elements[0]) {
+        if (page.elements.length === 1 && obj === page.elements[0] && !SurveyHelper.isPagePropertiesAreModified(page)) {
           this.deleteObjectCore(page);
           return;
         }

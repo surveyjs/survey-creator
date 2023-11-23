@@ -306,6 +306,7 @@ test("Delete object and selectedElement property", () => {
     pages: [
       {
         name: "page1",
+        title: "Page 1",
         elements: [
           { type: "text", name: "q1" },
           { type: "text", name: "q2" },
@@ -341,6 +342,11 @@ test("Delete object and selectedElement property", () => {
   expect(creator.selectedElementName).toEqual("q1");
   creator.deleteCurrentObject();
   expect(creator.selectedElementName).toEqual("page1");
+  const newQuestion = creator.survey.pages[0].addNewQuestion("text");
+  creator.survey.pages[0].title = "";
+  creator.selectElement(newQuestion);
+  creator.deleteCurrentObject();
+  expect(creator.selectedElementName).toEqual("survey");
 });
 
 test("fast copy tests, copy a question", () => {
