@@ -906,14 +906,15 @@ export class ThemeBuilder extends Base {
   private getDefaultTitleSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
     if (isAdvanced) {
-      result["color"] = "rgba(0, 0, 0, 0.91)";
+      result["color"] = "rgba(255, 255, 255, 1)";
     }
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
     if (isAdvanced) {
-      result["color"] = "rgba(0, 0, 0, 0.45)";
+      result["color"] = "rgba(255, 255, 255, 1)";
+      result["weight"] = "600";
     }
     return result;
   }
