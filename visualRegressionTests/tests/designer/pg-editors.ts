@@ -671,7 +671,7 @@ test("Dropdown input in property grid", async (t) => {
     await t
       .click(Selector("button[title='Open survey settings'"))
       .click(Selector(".spg-dropdown[aria-label='Survey language']"))
-      .pressKey("ali");
+      .pressKey("a l i");
 
     await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
   });
