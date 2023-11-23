@@ -2573,7 +2573,7 @@ export class CreatorBase extends Base
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;
     }
-    if (element.isPanel || elType == "page") {
+    if (element.isPanel || element.isPage) {
       if (element.isPanel) {
         this.newPanels.push(element);
       }
@@ -3059,7 +3059,7 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (this.pageEditMode === "single" && parent.getType() === "page") {
+    if (this.pageEditMode === "single" && parent.isPage) {
       parent = this.survey;
     }
     if (obj["questions"]) {

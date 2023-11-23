@@ -81,11 +81,11 @@ export class SurveyHelper {
   }
   public static getObjectType(obj: any): ObjType {
     if (!obj || !obj["getType"]) return ObjType.Unknown;
-    if (obj.getType() == "page") return ObjType.Page;
-    if (obj.getType() == "panel") return ObjType.Panel;
+    if (obj.isPage) return ObjType.Page;
+    if (obj.isPanel) return ObjType.Panel;
     if (obj.getType() == "survey") return ObjType.Survey;
     if (obj.getType() == "matrixdropdowncolumn") return ObjType.Column;
-    if (obj["name"]) return ObjType.Question;
+    if (obj.isQuestion) return ObjType.Question;
     return ObjType.Unknown;
   }
   public static getObjectTypeStr(obj: any): string {

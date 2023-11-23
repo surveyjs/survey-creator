@@ -490,7 +490,7 @@ export class TranslationGroup extends TranslationItemBase {
       var locStr = <LocalizableString>obj[property.serializationProperty];
       if (
         !!locStr &&
-        obj.getType() != "page" &&
+        !obj.isPage &&
         (!!locStr.onGetTextCallback || locStr["onRenderedHtmlCallback"])
       )
         return obj["name"];
