@@ -1,21 +1,24 @@
 {
   "name": "survey-creator-vue",
   "version": "1.9.53",
-  "description": "survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.",
+  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
   "keywords": [
     "Survey",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
     "JavaScript",
-    "Library",
-    "Vue"
+    "TypeScript"
   ],
-  "homepage": "https://surveyjs.io/",
-  "license": "MIT",
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
   "main": "survey-creator-vue.umd.js",
   "module": "survey-creator-vue.es.js",
   "types": "types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surveyjs/surveyjs.git"
+    "url": "https://github.com/surveyjs/survey-creator.git"
   },
   "peerDependencies": {
     "vue": "^3.2.41"
