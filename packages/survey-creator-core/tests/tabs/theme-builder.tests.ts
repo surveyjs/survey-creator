@@ -1507,7 +1507,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   creator.readOnly = true;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.onAllowModifyTheme.add((s, o) => {
-    o.canModify = o.theme.themeName === "flat";
+    o.allow = o.theme.themeName === "flat";
   });
 
   themePlugin.activate();
