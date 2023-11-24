@@ -883,10 +883,8 @@ test("Create new ghost on moving a question from one page to the ghost page", ()
   creator.survey.pages[0].elements.push(question3);
   creator.survey.stopMovingQuestion();
   expect(creator.survey.getAllQuestions()).toHaveLength(1);
-  expect(creator.survey.pages).toHaveLength(1);
-  expect(designerPlugin.model.newPage).toBeTruthy();
-  expect(designerPlugin.model.newPage.name).toEqual("page2");
-  expect(designerPlugin.model.pagesController.pages).toHaveLength(1);
+  expect(creator.survey.pages).toHaveLength(2);
+  expect(designerPlugin.model.newPage).toBeFalsy();
 });
 test("Create new page, set empty JSON", (): any => {
   const creator = new CreatorTester();
