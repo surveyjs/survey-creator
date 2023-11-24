@@ -118,12 +118,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
-    this.model.onThemeModified.add((sender, options) => {
+    this.model.onThemePropertyChanged.add((sender, options) => {
       this.saveThemeAction.enabled = true;
-      this.onThemeModified.fire(this, options);
+      this.onThemePropertyChanged.fire(this, options);
     });
-    this.model.onCanModifyTheme.add((sender, options) => {
-      this.onCanModifyTheme.fire(this, options);
+    this.model.onAllowModifyTheme.add((sender, options) => {
+      this.onAllowModifyTheme.fire(this, options);
     });
   }
   public deactivate(): boolean {
@@ -131,8 +131,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onPropertyChanged.clear();
       this.model.onThemeSelected.clear();
-      this.model.onThemeModified.clear();
-      this.model.onCanModifyTheme.clear();
+      this.model.onThemePropertyChanged.clear();
+      this.model.onAllowModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
@@ -234,7 +234,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "svd-save-theme",
       iconName: "icon-save",
       action: () => {
-        this.creator.doSaveTheme();
+        this.creator.saveTheme();
         this.saveThemeAction.enabled = false;
       },
       active: false,
@@ -401,7 +401,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
     return fullThemeName;
   }
-  public removeTheme(themeAccessor: string | ITheme, withModifications = false): void {
+  public removeTheme(themeAccessor: string | ITheme, includeModifications = false): void {
     const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
@@ -411,10 +411,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
-      if (withModifications && themeModifications.length > 0) {
+      if (includeModifications && themeModifications.length > 0) {
         themeModifications.forEach(themeModificationFullName => delete Themes[themeModificationFullName]);
       }
-      if (withModifications || themeModifications.length === 0) {
+      if (includeModifications || themeModifications.length === 0) {
         const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
         if (themeIndex !== -1) {
           const availableThemes = this.availableThemes;
@@ -424,8 +424,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     }
   }
-  public getCurrentTheme(content: "full" | "changes" = "full") {
-    if (content === "full") {
+  public getCurrentTheme(changesOnly = false) {
+    if (!changesOnly) {
       return this.creator.theme;
     }
     return this.getThemeChanges();
@@ -456,6 +456,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
-  public onThemeModified = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
-  public onCanModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, canModify: boolean }>();
+  public onThemePropertyChanged = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
 }

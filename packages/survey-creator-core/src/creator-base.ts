@@ -1235,6 +1235,10 @@ export class CreatorBase extends Base
 
   //#region Theme
 
+  get themeEditor(): ThemeTabPlugin {
+    return this.getPlugin<ThemeTabPlugin>("theme");
+  }
+
   /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
@@ -1281,9 +1285,9 @@ export class CreatorBase extends Base
       });
     }
   }
-  public doSaveTheme() {
+  public saveTheme() {
     if (this.saveSurveyAndTheme) {
-      this.doSaveSurveyAndTheme();
+      this.save();
     } else {
       this._doSaveThemeCore();
     }
@@ -3458,9 +3462,12 @@ export class CreatorBase extends Base
       });
     }
   }
+  public saveSurvey() {
+    this.doSave();
+  }
   public doSave() {
     if (this.saveSurveyAndTheme) {
-      this.doSaveSurveyAndTheme();
+      this.save();
     } else {
       this._doSaveCore();
     }
@@ -3481,7 +3488,7 @@ export class CreatorBase extends Base
     }
   }
 
-  public doSaveSurveyAndTheme() {
+  public save() {
     const themeSaveHandler = () => {
       if (this.isThemeModified) {
         this._doSaveThemeCore(() => {
@@ -3517,11 +3524,11 @@ export class CreatorBase extends Base
       }
       if (val) {
         target.onModified.add(target._syncSaveActions);
-        themeTabPlugin.onThemeModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.add(target._syncSaveActions);
         themeTabPlugin.onThemeSelected.add(target._syncSaveActions);
       } else {
         target.onModified.remove(target._syncSaveActions);
-        themeTabPlugin.onThemeModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.remove(target._syncSaveActions);
         themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
       }
     },

@@ -134,8 +134,8 @@ export class ThemeBuilder extends Base {
   }
 
   public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
-  public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
-  public onCanModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, canModify: boolean }>();
+  public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
 
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
@@ -785,12 +785,12 @@ export class ThemeBuilder extends Base {
     let canModify = !this.surveyProvider.readOnly;
     const options = {
       theme: this.currentTheme,
-      canModify
+      allow: canModify
     };
-    this.onCanModifyTheme.fire(this, options);
+    this.onAllowModifyTheme.fire(this, options);
     this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
-        q.readOnly = !options.canModify;
+        q.readOnly = !options.allow;
       }
     });
 
@@ -870,7 +870,7 @@ export class ThemeBuilder extends Base {
   protected processAutoSave() {
     let saveThemeFunc = this.saveThemeFunc;
     if (!saveThemeFunc && this.surveyProvider.saveThemeFunc) {
-      saveThemeFunc = () => this.surveyProvider.doSaveTheme();
+      saveThemeFunc = () => this.surveyProvider.saveTheme();
     }
     if (!saveThemeFunc) {
       return;
@@ -895,7 +895,7 @@ export class ThemeBuilder extends Base {
         this.onThemeSelected.fire(this, options as { theme: ITheme });
       } else {
         this.surveyProvider.isThemeModified = true;
-        this.onThemeModified.fire(this, options as { name: string, value: any });
+        this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
       }
       if (this.surveyProvider.isAutoSave) {
         this.processAutoSave();
