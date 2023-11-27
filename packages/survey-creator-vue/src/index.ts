@@ -11,7 +11,6 @@ import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
 
 import ActionButton from "./components/ActionButton.vue";
-import SvgBundle from "./SvgBundle.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import Test from "./tabs/preview/Test.vue";
 
