@@ -988,7 +988,7 @@ export class ThemeBuilder extends Base {
                   {
                     "headerView": "basic",
                     "logoPosition": "right",
-                    "inheritWidthFrom": "survey",
+                    "inheritWidthFrom": "container",
                     "backgroundColorSwitch": "accentColor",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,
