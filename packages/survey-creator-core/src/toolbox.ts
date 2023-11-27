@@ -513,7 +513,7 @@ export class QuestionToolbox
     this.actions.forEach(item => {
       item.visible = false;
     });
-    const actionList = new Array<IQuestionToolboxItem>;
+    const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
       if(!Array.isArray(category.items)) return;
       category.items.forEach(name => {
