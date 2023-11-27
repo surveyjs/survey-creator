@@ -243,9 +243,7 @@ var italianTranslation = {
       uncompletedRule_title: "Le regole logiche sono incomplete",
       uncompletedRule_text: "Alcune regole logiche non sono state completate. Se lasci la scheda ora, le modifiche andranno perse. Vuoi comunque uscire dalla scheda senza completare le modifiche?",
       uncompletedRule_apply: "Sì",
-      uncompletedRule_cancel: "No, voglio completare le regole",
-      expressionSetup: "Impostazione espressione",
-      actionsSetup: "Impostazione azioni"
+      uncompletedRule_cancel: "No, voglio completare le regole"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ var italianTranslation = {
     verticalAlignmentBottom: "Fondoschiena",
     logoPosition: "Posizione del logo",
     coverTitlePosition: "Posizione del titolo",
-    coverDescriptionPosition: "Descrizione Posizione",
+    coverDescriptionPosition: "Descrizione posizione",
     names: {
       default: "Default",
       sharp: "Affilato",
@@ -1442,7 +1440,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.verticalAlignmentBottom: "Bottom" => "Fondoschiena"
 // theme.logoPosition: "Logo Position" => "Posizione del logo"
 // theme.coverTitlePosition: "Title Position" => "Posizione del titolo"
-// theme.coverDescriptionPosition: "Description Position" => "Descrizione Posizione"
 // lg.question_resetValueText: "reset value for question: {0}" => "Valore di ripristino per la domanda: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Assegna valore: {1} alla domanda: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Reimposta il valore della cella per la colonna: {0}"
@@ -1480,3 +1477,4 @@ editorLocalization.locales["it"] = italianTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Ridimensionamento automatico dell'area della firma"
 // signaturepad.penMinWidth: "Minimum pen width" => "Larghezza minima della penna"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Larghezza massima della penna"
+// theme.coverDescriptionPosition: "Description position" => "Descrizione posizione"

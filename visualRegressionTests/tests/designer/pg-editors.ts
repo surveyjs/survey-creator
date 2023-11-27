@@ -664,7 +664,6 @@ test("Check accepted file types hint link", async (t) => {
     await takeElementScreenshot("file-accepted-types-hint.png", Selector("[data-name='acceptedTypes']"), t, comparer);
   });
 });
-
 test("Check property grid panel' header states", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({});
@@ -681,5 +680,17 @@ test("Check property grid panel' header states", async (t) => {
     await t.pressKey("tab");
     await resetHoverToCreator(t);
     await takeElementScreenshot("pg-panel-header-collapsed.png", headerSelector, t, comparer);
+  });
+});
+test("Dropdown input in property grid", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+
+    await t
+      .click(Selector("button[title='Open survey settings'"))
+      .click(Selector(".spg-dropdown[aria-label='Survey language']"))
+      .pressKey("a l i");
+
+    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
   });
 });

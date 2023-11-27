@@ -243,9 +243,7 @@ var polishStrings = {
       uncompletedRule_title: "Reguły logiczne są niekompletne",
       uncompletedRule_text: "Nie ukończyłeś niektórych reguł logicznych. Jeśli opuścisz kartę teraz, zmiany zostaną utracone. Czy nadal chcesz opuścić kartę bez dokończenia zmian?",
       uncompletedRule_apply: "Tak",
-      uncompletedRule_cancel: "Nie, chcę wypełnić zasady",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Nie, chcę wypełnić zasady"
     }
   },
   // Property Editors
@@ -1120,7 +1118,7 @@ var polishStrings = {
     verticalAlignmentBottom: "Dno",
     logoPosition: "Pozycja logo",
     coverTitlePosition: "Pozycja tytułu",
-    coverDescriptionPosition: "Opis Pozycja",
+    coverDescriptionPosition: "Opis pozycja",
     names: {
       default: "Domyślny",
       sharp: "Ostry",
@@ -1309,8 +1307,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Nie ukończyłeś niektórych reguł logicznych. Jeśli opuścisz kartę teraz, zmiany zostaną utracone. Czy nadal chcesz opuścić kartę bez dokończenia zmian?"
 // lg.uncompletedRule_apply: "Yes" => "Tak"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Nie, chcę wypełnić zasady"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.save: "Save" => "Zapisać"
 // pe.clear: "Clear" => "Jasny"
 // pe.saveTooltip: "Save" => "Zapisać"
@@ -1905,8 +1901,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // colors.tulip: "Tulip" => "Tulipan"
 // colors.brown: "Brown" => "Brązowy"
 // colors.green: "Green" => "Zielony"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Ostry"
 // names.borderless: "Borderless" => "Bez obramowania"
 // names.flat: "Flat" => "Płaski"
@@ -1916,13 +1910,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Czy na pewno chcesz usunąć wszystkie ciągi znaków dla tego języka?"
 // ed.themeResetButton: "Reset theme settings to default" => "Przywracanie domyślnych ustawień motywu"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Kolor zastępczy"
 // ed.themeSettings: "Theme Settings" => "Ustawienia motywu"
 // ed.themeSettingsTooltip: "Open theme settings" => "Otwórz ustawienia motywu"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Resetować"
 // pv.file: "Local files" => "Pliki lokalne"
 // pv.camera: "Camera" => "Kamera"
@@ -1932,8 +1922,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Podaj co najmniej {0} przedmiotów"
 // lg.question_resetValueName: "Reset question value" => "Zresetuj wartość pytania"
 // lg.column_resetValue: "Reset column value" => "Resetowanie wartości kolumny"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Oznacz jako wymagane"
 // pe.removeRequiredMark: "Remove the required mark" => "Usuń wymagany znacznik"
 // p.resetValueIf: "Reset value if" => "Zresetuj wartość, jeśli"
@@ -1941,8 +1929,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // lg.column_resetValueName: "Reset column value" => "Resetowanie wartości kolumny"
 // lg.column_setValueName: "Set column value" => "Ustawianie wartości kolumny"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Wyrażenie, którego wynik zostanie przypisany do pytania docelowego."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Tytuł"
 // page.title: "Title" => "Tytuł"
 // p.setValueIf: "Set value if" => "Ustaw wartość, jeśli"
@@ -1970,18 +1956,13 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.verticalAlignmentBottom: "Bottom" => "Dno"
 // theme.logoPosition: "Logo Position" => "Pozycja logo"
 // theme.coverTitlePosition: "Title Position" => "Pozycja tytułu"
-// theme.coverDescriptionPosition: "Description Position" => "Opis Pozycja"
 // lg.question_resetValueText: "reset value for question: {0}" => "Zresetuj wartość dla pytania: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Przypisz wartość: {1} do pytania: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Zresetuj wartość komórki dla kolumny: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Przypisz wartość komórki: {1} do kolumny: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Eksport"
 // ed.surveyJsonImportButton: "Import" => "Import"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Kopiuj do schowka"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Tekst zastępczy pliku"
 // pe.photoPlaceholder: "Photo placeholder text" => "Tekst zastępczy zdjęcia"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Tekst zastępczy pliku lub zdjęcia"
@@ -1993,28 +1974,22 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Czy naprawdę chcesz zresetować motyw? Wszystkie Twoje dostosowania zostaną utracone."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Tak, zresetuj motyw"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Tło"
 // theme.groupAppearance: "Appearance" => "Wygląd"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Opis przedbarwy"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Pasuje do pojemnika"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Pokazywanie symbolu zastępczego"
 // signaturepad.placeholder: "Placeholder text" => "Tekst zastępczy"
 // theme.surveyDescription: "Survey description font" => "Czcionka opisu ankiety"
-
 // ed.prevFocus: "Focus previous" => "Fokus poprzedni"
 // ed.nextFocus: "Focus next" => "Ostrość następna"
 // ed.saveTheme: "Save Theme" => "Zapisz motyw"
 // ed.saveThemeTooltip: "Save Theme" => "Zapisz motyw"
 // lg.page_requireName: "Make page required" => "Ustaw stronę jako wymaganą"
 // lg.panel_requireName: "Make page required" => "Ustaw stronę jako wymaganą"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "Szerokość obszaru podpisu"
 // signaturepad.signatureHeight: "Signature area height" => "Wysokość obszaru podpisu"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatyczne skalowanie obszaru podpisu"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimalna szerokość pisaka"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksymalna szerokość pisaka"
+// theme.coverDescriptionPosition: "Description position" => "Opis pozycja"

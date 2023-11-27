@@ -281,6 +281,10 @@ export class CreatorBase extends Base
   public get toolbar(): ActionContainer {
     return this.toolbarValue;
   }
+  protected _findAction(id: string): Action {
+    return this.toolbarItems.filter(a => a.id === id)[0];
+  }
+
   public dragDropSurveyElements: DragDropSurveyElements;
   public dragDropChoices: DragDropChoices;
 
@@ -1258,7 +1262,7 @@ export class CreatorBase extends Base
     }
   }
 
-  public doSaveTheme() {
+  private _doSaveThemeCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveThemeFunc) {
       this.saveNo++;
@@ -1273,7 +1277,15 @@ export class CreatorBase extends Base
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
+    }
+  }
+  public doSaveTheme() {
+    if (this.saveSurveyAndTheme) {
+      this.doSaveSurveyAndTheme();
+    } else {
+      this._doSaveThemeCore();
     }
   }
 
@@ -1552,6 +1564,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.saveSurveyAndTheme = this.options.saveSurveyAndTheme;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
@@ -1940,12 +1953,10 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  private isInitialSurveyEmptyValue: boolean;
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
    */
-  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     if (!json) {
       json = { "logoPosition": "right" };
@@ -1958,7 +1969,6 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
-    this.isInitialSurveyEmptyValue = survey.isEmpty;
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
@@ -2331,11 +2341,7 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
-      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
-      if (Array.isArray(actions) && actions.length > 0) {
-        actions[0].enabled = this.state === "modified";
-        actions[0].active = this.state === "modified";
-      }
+      this._updateSaveActions();
     }
   }
   public onStateChanged: CreatorEvent = new CreatorEvent();
@@ -2564,7 +2570,7 @@ export class CreatorBase extends Base
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;
     }
-    if (element.isPanel || elType == "page") {
+    if (element.isPanel || element.isPage) {
       if (element.isPanel) {
         this.newPanels.push(element);
       }
@@ -2675,9 +2681,9 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
-      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+      if (this.survey.pageCount === 1) {
         const page = this.survey.pages[0];
-        if (page.elements.length === 1 && obj === page.elements[0]) {
+        if (page.elements.length === 1 && obj === page.elements[0] && !SurveyHelper.isPagePropertiesAreModified(page)) {
           this.deleteObjectCore(page);
           return;
         }
@@ -3012,7 +3018,8 @@ export class CreatorBase extends Base
       rootNode.removeEventListener("keydown", this.onKeyDownHandler);
     }
   }
-  protected onKeyDownHandler = (event: KeyboardEvent) => {
+  public findSuitableShortcuts(event: KeyboardEvent): IKeyboardShortcut[] {
+    const shortcuts: IKeyboardShortcut[] = [];
     const availableShortcuts = Object.keys(this.shortcuts || {})
       .map((key) => this.shortcuts[key])
       .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
@@ -3024,8 +3031,14 @@ export class CreatorBase extends Base
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
       if (!!hotKey.shiftKey !== !!event.shiftKey) return;
       if (hotKey.keyCode !== event.keyCode) return;
-      if (hotKey.keyCode < 48 && isTextInput(event.target)) return;
-      shortcut.execute(this.selectElement);
+      shortcuts.push(shortcut);
+    });
+    return shortcuts;
+  }
+  protected onKeyDownHandler = (event: KeyboardEvent) => {
+    this.findSuitableShortcuts(event).forEach((shortcut: IKeyboardShortcut) => {
+      if ((event.keyCode < 48 || event.keyCode == 89 || event.keyCode == 90) && isTextInput(event.target)) return;
+      shortcut.execute(this.selectedElement);
     });
   }
   private shortcuts: { [index: string]: IKeyboardShortcut } = {};
@@ -3043,7 +3056,7 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (this.pageEditMode === "single" && parent.getType() === "page") {
+    if (this.pageEditMode === "single" && parent.isPage) {
       parent = this.survey;
     }
     if (obj["questions"]) {
@@ -3427,7 +3440,7 @@ export class CreatorBase extends Base
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
-  public doSave() {
+  private _doSaveCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -3441,9 +3454,78 @@ export class CreatorBase extends Base
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
     }
   }
+  public doSave() {
+    if (this.saveSurveyAndTheme) {
+      this.doSaveSurveyAndTheme();
+    } else {
+      this._doSaveCore();
+    }
+  }
+
+  private _updateSaveActions() {
+    const action = this._findAction("svd-save");
+    if (action) {
+      action.enabled = this.state === "modified";
+      action.active = this.state === "modified";
+    }
+    if (this.saveSurveyAndTheme) {
+      const action = this._findAction("svd-save-theme");
+      if (action) {
+        action.enabled = this.isThemeModified;
+        action.active = this.isThemeModified;
+      }
+    }
+  }
+
+  public doSaveSurveyAndTheme() {
+    const themeSaveHandler = () => {
+      if (this.isThemeModified) {
+        this._doSaveThemeCore(() => {
+          this._updateSaveActions();
+        });
+      }
+    };
+    if (this.state === "modified") {
+      this._doSaveCore(() => {
+        themeSaveHandler();
+      });
+    } else themeSaveHandler();
+  }
+
+  protected _syncSaveActions = (sender: any, options: any) => {
+    const saveAction = this._findAction("svd-save");
+    const saveThemeAction = this._findAction("svd-save-theme");
+    if (!saveAction || !saveThemeAction) {
+      return;
+    }
+    if (sender === this) {
+      saveThemeAction.enabled = saveAction.enabled;
+    } else {
+      saveAction.enabled = saveThemeAction.enabled;
+    }
+  }
+
+  @property({
+    defaultValue: false, onSet(val, target: CreatorBase) {
+      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
+      if (!themeTabPlugin) {
+        return;
+      }
+      if (val) {
+        target.onModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemeModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.add(target._syncSaveActions);
+      } else {
+        target.onModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemeModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
+      }
+    },
+  }) saveSurveyAndTheme: boolean;
 
   /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).

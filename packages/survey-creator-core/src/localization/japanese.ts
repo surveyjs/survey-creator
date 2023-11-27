@@ -243,9 +243,7 @@ export var jaStrings = {
       uncompletedRule_title: "論理ルールが不完全です",
       uncompletedRule_text: "一部の論理ルールが完了していません。ここでタブを離れると、変更は失われます。変更を完了せずにタブを離れますか?",
       uncompletedRule_apply: "はい",
-      uncompletedRule_cancel: "いいえ、ルールを完成させたい",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "いいえ、ルールを完成させたい"
     }
   },
   // Property Editors
@@ -1119,8 +1117,8 @@ export var jaStrings = {
     verticalAlignmentMiddle: "中央",
     verticalAlignmentBottom: "底",
     logoPosition: "ロゴの位置",
-    coverTitlePosition: "タイトル位置",
-    coverDescriptionPosition: "説明位置",
+    coverTitlePosition: "タイトルの位置",
+    coverDescriptionPosition: "記述の位置",
     names: {
       default: "デフォルト",
       sharp: "鋭い",
@@ -1207,8 +1205,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "一部の論理ルールが完了していません。ここでタブを離れると、変更は失われます。変更を完了せずにタブを離れますか?"
 // lg.uncompletedRule_apply: "Yes" => "はい"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "いいえ、ルールを完成させたい"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "クリア"
 // pe.set: "Set" => "セット"
 // pe.change: "Change" => "変える"
@@ -1631,8 +1627,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // colors.tulip: "Tulip" => "チューリップ"
 // colors.brown: "Brown" => "褐色"
 // colors.green: "Green" => "緑"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "鋭い"
 // names.borderless: "Borderless" => "ボーダレス"
 // names.flat: "Flat" => "平"
@@ -1642,13 +1636,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "この言語のすべての文字列を削除してもよろしいですか?"
 // ed.themeResetButton: "Reset theme settings to default" => "テーマ設定をデフォルトにリセットする"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "プレースホルダの色"
 // ed.themeSettings: "Theme Settings" => "テーマ設定"
 // ed.themeSettingsTooltip: "Open theme settings" => "テーマ設定を開く"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "リセット"
 // pv.file: "Local files" => "ローカルファイル"
 // pv.camera: "Camera" => "カメラ"
@@ -1658,18 +1648,13 @@ editorLocalization.locales["ja"] = jaStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "{0}項目以上入力してください"
 // lg.question_resetValueName: "Reset question value" => "質問値のリセット"
 // lg.column_resetValue: "Reset column value" => "列の値をリセット"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "必須としてマーク"
 // pe.removeRequiredMark: "Remove the required mark" => "必要なマークを削除する"
 // p.resetValueIf: "Reset value if" => "次の場合に値をリセット"
-
 // lg.question_setValueName: "Set question value" => "質問値の設定"
 // lg.column_resetValueName: "Reset column value" => "列の値をリセット"
 // lg.column_setValueName: "Set column value" => "列の値を設定する"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => "結果が対象の質問に割り当てられる式。"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "タイトル"
 // page.title: "Title" => "タイトル"
 // p.setValueIf: "Set value if" => "次の場合に値を設定します"
@@ -1695,20 +1680,13 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.verticalAlignmentTop: "Top" => "ページのトップへ"
 // theme.verticalAlignmentMiddle: "Middle" => "中央"
 // theme.verticalAlignmentBottom: "Bottom" => "底"
-// theme.logoPosition: "Logo Position" => "ロゴの位置"
-// theme.coverTitlePosition: "Title Position" => "タイトル位置"
-// theme.coverDescriptionPosition: "Description Position" => "説明位置"
 // lg.question_resetValueText: "reset value for question: {0}" => "質問のリセット値:{0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "値の割り当て: 質問への{1}: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "列のセル値をリセット:{0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "セル値の割り当て:列への{1}:{0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "輸出"
 // ed.surveyJsonImportButton: "Import" => "輸入"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "クリップボードにコピー"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "ファイル プレースホルダー テキスト"
 // pe.photoPlaceholder: "Photo placeholder text" => "写真の代替テキスト"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "ファイルまたは写真のプレースホルダーテキスト"
@@ -1720,28 +1698,24 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "本当にテーマをリセットしますか?すべてのカスタマイズが失われます。"
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "はい、テーマをリセットします"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "バックグラウンド"
 // theme.groupAppearance: "Appearance" => "様子"
 // theme.coverDescriptionForecolor: "Description forecolor" => "説明前色"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "コンテナに合わせる"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "プレースホルダーを表示する"
 // signaturepad.placeholder: "Placeholder text" => "プレースホルダテキスト"
 // theme.surveyDescription: "Survey description font" => "調査の説明フォント"
-
 // ed.prevFocus: "Focus previous" => "前に焦点を合わせる"
 // ed.nextFocus: "Focus next" => "次の焦点"
 // ed.saveTheme: "Save Theme" => "テーマを保存"
 // ed.saveThemeTooltip: "Save Theme" => "テーマを保存"
 // lg.page_requireName: "Make page required" => "ページを必須にする"
 // lg.panel_requireName: "Make page required" => "ページを必須にする"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "署名領域の幅"
 // signaturepad.signatureHeight: "Signature area height" => "署名領域の高さ"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "署名領域の自動スケーリング"
 // signaturepad.penMinWidth: "Minimum pen width" => "最小ペン幅"
 // signaturepad.penMaxWidth: "Maximum pen width" => "ペンの最大幅"
+// theme.logoPosition: "Logo position" => "ロゴの位置"
+// theme.coverTitlePosition: "Title position" => "タイトルの位置"
+// theme.coverDescriptionPosition: "Description position" => "記述の位置"

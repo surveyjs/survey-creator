@@ -146,14 +146,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public saveToFileHandler = saveToFileHandler;
 
   public exportToFile(fileName: string) {
-    const themeData = JSON.stringify(this.creator.theme, null, 4);
+    const themeCopy = JSON.parse(JSON.stringify(this.creator.theme));
+    themeCopy.themeName = themeCopy.themeName + "_exported";
+    const themeData = JSON.stringify(themeCopy, null, 4);
     const themeBlob = new Blob([themeData], { type: "application/json" });
     this.saveToFileHandler(fileName, themeBlob);
   }
   public importFromFile(file: File, callback?: (theme: ITheme) => void) {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      const theme: ITheme | any = JSON.parse(fileReader.result as string);
+      const theme: ITheme = JSON.parse(fileReader.result as string);
       this.addTheme(theme);
       if (this.model) {
         this.model.setTheme(theme);
@@ -229,7 +231,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     items.push(this.redoAction);
 
     this.saveThemeAction = new Action({
-      id: "svd-save",
+      id: "svd-save-theme",
       iconName: "icon-save",
       action: () => {
         this.creator.doSaveTheme();
@@ -393,10 +395,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       } else {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
+    } else {
+      // eslint-disable-next-line no-self-assign
+      this.availableThemes = this.availableThemes;
     }
     return fullThemeName;
   }
-  public removeTheme(themeAccessor: string | ITheme): void {
+  public removeTheme(themeAccessor: string | ITheme, withModifications = false): void {
     const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
@@ -405,8 +410,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
         ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
       }
       const registeredThemeNames = Object.keys(Themes);
-      let themeModificationsExist = registeredThemeNames.some(themeName => themeName.indexOf(themeToDelete.themeName) === 0);
-      if (!themeModificationsExist) {
+      let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
+      if (withModifications && themeModifications.length > 0) {
+        themeModifications.forEach(themeModificationFullName => delete Themes[themeModificationFullName]);
+      }
+      if (withModifications || themeModifications.length === 0) {
         const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
         if (themeIndex !== -1) {
           const availableThemes = this.availableThemes;
@@ -423,9 +431,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return this.getThemeChanges();
   }
   public getThemeChanges() {
-    const fullTheme = this.creator.theme;
+    const fullTheme: ITheme = this.creator.theme;
     let probeThemeFullName = getThemeFullName(fullTheme);
-    const baseTheme = findSuitableTheme(fullTheme.themeName, probeThemeFullName);
+    const baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
     const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
     Object.keys(themeChanges).forEach(propertyName => {
       if (propertyName.toLowerCase().indexOf("background") !== -1) {

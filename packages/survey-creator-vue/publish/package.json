@@ -1,0 +1,31 @@
+{
+  "name": "survey-creator-vue",
+  "version": "1.9.53",
+  "description": "Use SurveyJS Creator to create or edit JSON for SurveyJS Form Library.",
+  "keywords": [
+    "Survey",
+    "Survey Creator",
+    "Form Builder",
+    "Survey Maker",
+    "SurveyJS",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "homepage": "https://surveyjs.io/Overview/Survey-Creator",
+  "license": "https://surveyjs.io/Licenses#SurveyCreator",
+  "main": "survey-creator-vue.umd.js",
+  "module": "survey-creator-vue.es.js",
+  "types": "types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surveyjs/survey-creator.git"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.41"
+  },
+  "dependencies": {
+    "survey-core": "*",
+    "survey-creator-core": "*",
+    "survey-vue3-ui": "*"
+  }
+}

@@ -173,7 +173,7 @@ This new internal design also prompted us to extend the Library with new feature
 
 Since Survey Creator UI elements are surveys, you can customize them as you would customize surveys. For example, the Property Grid is a one-page survey in which every property is a question. To introduce a new or override an existing property editor, you need to define a custom question JSON configuration and implement functions that survey events call internally.
 
-[View Demo](https://surveyjs.io/Examples/Survey-Creator?id=custompropertyeditor&platform=ReactjsV2#content-js (linkStyle))
+[View Demo](https://surveyjs.io/survey-creator/examples/customize-property-editors/reactjs#content-code (linkStyle))
 
 ### Lazy Rendering
 

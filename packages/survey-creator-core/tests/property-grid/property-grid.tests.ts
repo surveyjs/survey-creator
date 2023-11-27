@@ -532,7 +532,7 @@ test("surveypages property editor and onCollectionItemAllowingCallback", () => {
     item: Base,
     options: ICollectionItemAllowOperations
   ): void => {
-    if(property.name !== "pages") return;
+    if (property.name !== "pages") return;
     const name = (<any>item).name;
     options.allowDelete = name !== "page2";
     options.allowEdit = name !== "page2";
@@ -2016,7 +2016,7 @@ test("Required properties restore on change to empty value", (): any => {
   var question = new QuestionTextModel("q1");
   question.title = "q1Title";
   var options = new EmptySurveyCreatorOptions();
-  options["survey"] = { getAllQuestions: ()=> [question] };
+  options["survey"] = { getAllQuestions: () => [question] };
   var propertyGrid = new PropertyGridModelTester(question, options);
   var titleQuestion = propertyGrid.survey.getQuestionByName("title") as QuestionTextModel;
   titleQuestion.value = "q1t";
@@ -2829,7 +2829,7 @@ test("PropertyEditor for question name", () => {
   const checkedData = ["Row", "panel", "choice", "Item"];
   const errorText = "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".";
   let prevName = question.name;
-  for(let i = 0; i < checkedData.length; i ++) {
+  for (let i = 0; i < checkedData.length; i++) {
     const erroredName = checkedData[i];
     const validName = "q" + (i + 1).toString();
     nameQuestion.value = erroredName;
@@ -2845,7 +2845,7 @@ test("PropertyEditor for question name", () => {
   const panel = new PanelModel("p");
   propertyGrid = new PropertyGridModelTester(panel);
   nameQuestion = propertyGrid.survey.getQuestionByName("name");
-  for(let i = 0; i < checkedData.length; i ++) {
+  for (let i = 0; i < checkedData.length; i++) {
     const erroredName = checkedData[i];
     nameQuestion.value = erroredName;
     expect(nameQuestion.value).toBe(erroredName);
