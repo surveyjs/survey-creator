@@ -73,8 +73,6 @@ import CarryForward from "./adorners/CarryForward.vue";
 
 function registerComponents(app: App) {
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
-  app.component("svc-svg-bundle", SvgBundle);
-
   app.component("svc-tabbed-menu", TabbedMenu);
   app.component("svc-tabbed-menu-item-wrapper", TabbedMenuItemWrapper);
   app.component("svc-tabbed-menu-item", TabbedMenuItem);

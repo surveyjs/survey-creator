@@ -9,7 +9,7 @@
       ref="root"
     >
       <div>
-        <svc-svg-bundle></svc-svg-bundle>
+        <sv-svg-bundle></sv-svg-bundle>
       </div>
       <div
         class="svc-full-container svc-creator__area svc-flex-column"
