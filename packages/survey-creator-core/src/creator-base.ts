@@ -145,6 +145,8 @@ export class CreatorBase extends Base
    * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
+   * 
+   * Use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) object to manage UI themes available in the Themes tab.
    * @see activeTab
    * @see saveThemeFunc
    */
@@ -1235,6 +1237,11 @@ export class CreatorBase extends Base
 
   //#region Theme
 
+  /**
+   * An object that enables you to manage UI themes. Refer to the following API section for information on available properties, methods, and events: [`ThemeTabPlugin`](https://surveyjs.io/survey-creator/documentation/api-reference/themetabplugin).
+   * @see showThemeTab
+   * @see saveThemeFunc
+   */
   get themeEditor(): ThemeTabPlugin {
     return this.getPlugin<ThemeTabPlugin>("theme");
   }
@@ -1244,6 +1251,7 @@ export class CreatorBase extends Base
    * 
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
+   * @see themeEditor
    * @see saveSurveyFunc
    */
   public get saveThemeFunc() {
@@ -1285,6 +1293,11 @@ export class CreatorBase extends Base
       });
     }
   }
+  /**
+   * Calls the [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function to save the theme JSON schema.
+   * @see saveSurvey
+   * @see save
+   */
   public saveTheme() {
     if (this.saveSurveyAndTheme) {
       this.save();
@@ -3462,6 +3475,11 @@ export class CreatorBase extends Base
       });
     }
   }
+  /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function to save the survey JSON schema.
+   * @see saveTheme
+   * @see save
+   */
   public saveSurvey() {
     this.doSave();
   }
@@ -3488,6 +3506,11 @@ export class CreatorBase extends Base
     }
   }
 
+  /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions to save the survey and theme JSON schemas.
+   * @see saveSurvey
+   * @see saveTheme
+   */
   public save() {
     const themeSaveHandler = () => {
       if (this.isThemeModified) {
@@ -3516,6 +3539,16 @@ export class CreatorBase extends Base
     }
   }
 
+  /**
+   * Specifies whether to synchronize [Save buttons](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) in the Designer and Themes tabs.
+   * 
+   * Default value: `false`
+   * 
+   * When this property is disabled, the Save button in the Designer tab saves only the survey JSON schema, while the Save button in the Themes tab saves only the theme JSON schema. If you enable this property, both buttons will save both JSON schemas.
+   * @see saveSurveyFunc
+   * @see saveThemeFunc
+   * @see save
+   */
   @property({
     defaultValue: false, onSet(val, target: CreatorBase) {
       let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
@@ -3536,7 +3569,10 @@ export class CreatorBase extends Base
 
   /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
+   * 
+   * Default value: `false`
    * @see isAutoSave
+   * @see syncSaveButtons
    */
   @property({ defaultValue: false }) showSaveButton: boolean;
 
