@@ -49,11 +49,11 @@
           >
             <survey-header :survey="model.creator.survey"></survey-header>
           </div>
-
-          <!-- ko if: survey.isShowProgressBarOnTop -->
-          <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
-          <!-- /ko -->
-          <!-- /ko -->
+          <component
+            v-if="survey.isShowProgressBarOnTop"
+            :is="model.creator.survey.getProgressTypeComponent()"
+            :survey="model.creator.survey"
+          ></component>
 
           <template v-if="model.creator.pageEditMode !== 'bypage'">
             <div
@@ -86,10 +86,11 @@
               :creator="model.creator"
             ></svc-page>
           </div>
-          <!-- ko if: survey.isShowProgressBarOnBottom -->
-          <!-- ko component: { name: survey.getProgressTypeComponent(), params: { model: survey } } -->
-          <!-- /ko -->
-          <!-- /ko -->
+          <component
+            v-if="survey.isShowProgressBarOnBottom"
+            :is="model.creator.survey.getProgressTypeComponent()"
+            :survey="model.creator.survey"
+          ></component>
         </div>
         <div
           v-if="model.creator.showPageNavigator"
@@ -110,12 +111,11 @@ import type { TabDesignerViewModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
 const props = defineProps<{ model: TabDesignerViewModel }>();
+const survey = computed(() => props.model.survey);
 useBase(() => props.model);
-useBase(() => props.model.survey);
+useBase(() => survey.value);
 const pages = computed(() => {
   const model = props.model;
-  return model.creator.survey.pages.concat(
-    model.showNewPage ? [model.newPage] : []
-  );
+  return survey.value.pages.concat(model.showNewPage ? [model.newPage] : []);
 });
 </script>
