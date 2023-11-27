@@ -59,6 +59,11 @@ export interface IQuestionToolbox {
   toggleCategoryState(name: string);
 }
 
+export interface IDefineToolboxCategory {
+  category: string;
+  items: Array<string>;
+}
+
 export class QuestionToolboxCategory extends Base {
   constructor(private toolbox: IQuestionToolbox) {
     super();
@@ -503,6 +508,35 @@ export class QuestionToolbox
     }
     this.onItemsChanged();
   }
+  public defineCategories(categories: Array<IDefineToolboxCategory>, displayMisc: boolean = false): void {
+    if(!Array.isArray(categories)) return;
+    this.actions.forEach(item => {
+      item.visible = false;
+    });
+    const actionList = new Array<IQuestionToolboxItem>;
+    categories.forEach(category => {
+      if(!Array.isArray(category.items)) return;
+      category.items.forEach(name => {
+        const item = this.getItemByName(name);
+        if(item) {
+          item.category = category.category;
+          item.visible = true;
+          actionList.push(item);
+        }
+      });
+    });
+    this.actions.forEach(item => {
+      if(!item.visible) {
+        if(displayMisc) {
+          item.visible = true;
+          item.category = "misc"; //TODO
+        }
+        actionList.push(item);
+      }
+    });
+    this.setItems(actionList);
+    this.onItemsChanged(false);
+  }
 
   /**
    * Removes categories from the Toolbox.
@@ -584,15 +618,16 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged() {
+  protected onItemsChanged(changeActions: boolean = true) {
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
-    for (var i = 0; i < this.actions.length; i++) {
-      var item = this.actions[i];
-      var categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
+    for (let i = 0; i < this.actions.length; i++) {
+      const item = this.actions[i];
+      if(item.visible === false) continue;
+      const categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
       if (!categoriesHash[categoryName]) {
-        var category = this.createCategory();
+        const category = this.createCategory();
         category.name = categoryName;
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
@@ -614,13 +649,13 @@ export class QuestionToolbox
         }
       }
     }
-
-    let newItems = [];
-    this.categories.forEach((cat) => {
-      newItems = newItems.concat(cat.items);
-    });
-    this.actions = newItems;
-
+    if(changeActions) {
+      let newItems = [];
+      this.categories.forEach((cat) => {
+        newItems = newItems.concat(cat.items);
+      });
+      this.actions = newItems;
+    }
     this.hasCategories = categories.length > 1;
     //this.updateCategoriesState();
     this.updateItemSeparators();

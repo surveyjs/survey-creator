@@ -302,6 +302,55 @@ test("toolbox categories + keepAllCategoriesExpanded property + remove item, Bug
   expect(toolbox.categories[0].collapsed).toBeFalsy();
   expect(toolbox.categories[1].collapsed).toBeFalsy();
 });
+test("toolbox categories defineCategories, #2", (): any => {
+  var toolbox = new QuestionToolbox([
+    "text",
+    "dropdown",
+    "checkbox",
+    "radiogroup",
+    "comment",
+    "matrix",
+    "rating"
+  ]);
+  toolbox.defineCategories([
+    { category: "select", items: ["dropdown", "checkbox", "radiogroup"] },
+    { category: "text", items: ["text", "comment"] }
+  ]);
+  expect(toolbox.categories).toHaveLength(2);
+  expect(toolbox.categories[0].name).toBe("select");
+  expect(toolbox.categories[1].name).toBe("text");
+  let items = toolbox.categories[0].items;
+  expect(items).toHaveLength(3);
+  expect(items[0].name).toBe("dropdown");
+  expect(items[1].name).toBe("checkbox");
+  expect(items[2].name).toBe("radiogroup");
+  items = toolbox.categories[1].items;
+  expect(items).toHaveLength(2);
+  expect(items[0].name).toBe("text");
+  expect(items[1].name).toBe("comment");
+
+  toolbox.defineCategories([
+    { category: "text", items: ["text", "comment"] },
+    { category: "select", items: ["dropdown", "checkbox", "radiogroup"] },
+  ], true);
+  expect(toolbox.categories).toHaveLength(3);
+  expect(toolbox.categories[0].name).toBe("text");
+  expect(toolbox.categories[1].name).toBe("select");
+  expect(toolbox.categories[2].name).toBe("misc");
+  items = toolbox.categories[0].items;
+  expect(items).toHaveLength(2);
+  expect(items[0].name).toBe("text");
+  expect(items[1].name).toBe("comment");
+  items = toolbox.categories[1].items;
+  expect(items).toHaveLength(3);
+  expect(items[0].name).toBe("dropdown");
+  expect(items[1].name).toBe("checkbox");
+  expect(items[2].name).toBe("radiogroup");
+  items = toolbox.categories[2].items;
+  expect(items).toHaveLength(2);
+  expect(items[0].name).toBe("rating");
+  expect(items[1].name).toBe("matrix");
+});
 
 test("toolbox copied questions", (): any => {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);
