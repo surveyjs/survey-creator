@@ -1,4 +1,4 @@
-import { Selector } from "testcafe";
+import { ClientFunction, Selector } from "testcafe";
 import { url, setJSON, getPropertyGridCategory, generalGroupName, wrapVisualTest, takeElementScreenshot } from "../../helper";
 
 const title = "MultipleText Screenshot";
@@ -38,6 +38,7 @@ test("Multiple text items", async (t) => {
     await t
       .click(Selector(".sd-question"))
       .click(getPropertyGridCategory("Items"));
+    await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("multiple-text-items.png", Selector(".svc-side-bar .spg-panel").nth(1), t, comparer);
   });
 });

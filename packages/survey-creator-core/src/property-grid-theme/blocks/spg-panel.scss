@@ -25,15 +25,11 @@
   cursor: default;
 }
 
-.spg-panel__title--expandable:not(.spg-panel__title[aria-expanded=true]) {
-
-  &:hover,
-  &:focus {
-    background-color: $background-dim;
-  }
+.spg-panel__title--collapsed:hover,
+.spg-panel__title--expandable:focus {
+  background-color: $background-dim;
 }
 
-.spg-panel__title[aria-expanded=true],
 .spg-panel__title--expanded {
   color: $foreground;
   font-weight: 600;
