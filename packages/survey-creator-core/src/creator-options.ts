@@ -1,8 +1,15 @@
 /**
- * Survey Creator configuration. Pass it as an argument to the `SurveyCreator` constructor:
+ * Survey Creator configuration. Pass it as an argument to the `SurveyCreator`/`SurveyCreatorModel` constructor:
  *
  * ```js
+ * const creatorOptions = { ... };
  * const creator = new SurveyCreator.SurveyCreator(creatorOptions);
+ * 
+ * // In modular applications:
+ * import { SurveyCreatorModel } from "survey-creator-core";
+ * 
+ * const creatorOptions = { ... };
+ * const creator = new SurveyCreatorModel(creatorOptions);
  * ```
  */
 export interface ICreatorOptions {
