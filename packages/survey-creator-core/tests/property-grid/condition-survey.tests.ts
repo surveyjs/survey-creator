@@ -1810,3 +1810,30 @@ test("Hide search for conjunction", () => {
   expect(panel.getQuestionByName("conjunction").searchEnable).toBeFalsy();
   expect(panel.getQuestionByName("conjunction").dropdownListModel.listModel.searchEnabled).toBeFalsy();
 });
+test("Do not show comment for other if storeOthersAsComment is true", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { name: "q1", type: "text" },
+      { name: "q2", type: "radiogroup", choices: [1, 2, 3], showOtherItem: true },
+      { name: "q3", type: "checkbox", choices: [1, 2, 3], showOtherItem: true },
+      { name: "q4", type: "text", visibleIf: "{q2} = 'other' and {q3} = ['other']" }
+    ]
+  });
+  const question = survey.getQuestionByName("q4");
+  const conditionEditor = new ConditionEditor(survey, question, undefined, "visibleIf");
+  expect(conditionEditor.panel.panelCount).toBe(2);
+  const radioQuestion = <QuestionRadiogroupModel>conditionEditor.panel.panels[0].getQuestionByName("questionValue");
+  const checkQuestion = <QuestionCheckboxModel>conditionEditor.panel.panels[1].getQuestionByName("questionValue");
+  expect(radioQuestion.value).toBe("other");
+  expect(radioQuestion.choices).toHaveLength(4);
+  expect(radioQuestion.choices[3].value).toBe("other");
+  expect(radioQuestion.otherItem.value).toBe("#other#");
+  expect(radioQuestion.showOtherItem).toBeFalsy();
+
+  expect(checkQuestion.value).toHaveLength(1);
+  expect(checkQuestion.value[0]).toBe("other");
+  expect(checkQuestion.choices).toHaveLength(4);
+  expect(checkQuestion.choices[3].value).toBe("other");
+  expect(checkQuestion.otherItem.value).toBe("#other#");
+  expect(checkQuestion.showOtherItem).toBeFalsy();
+});
