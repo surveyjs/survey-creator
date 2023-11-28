@@ -1261,14 +1261,14 @@ export class CreatorBase extends Base
     this.saveThemeFuncValue = value;
   }
 
-  public isThemeModified: boolean = false;
+  public hasPendingThemeChanges: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
   public get theme(): ITheme {
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
-    this.isThemeModified = true;
+    this.hasPendingThemeChanges = true;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
@@ -1282,7 +1282,7 @@ export class CreatorBase extends Base
         if (this.saveNo !== no) return;
         if (isSuccess) {
           this.setState("saved");
-          this.isThemeModified = false;
+          this.hasPendingThemeChanges = false;
         } else {
           this.setState("modified");
           if (this.showErrorOnFailedSave) {
@@ -3506,8 +3506,8 @@ export class CreatorBase extends Base
     if (this.syncSaveButtons) {
       const action = this._findAction("svd-save-theme");
       if (action) {
-        action.enabled = this.isThemeModified;
-        action.active = this.isThemeModified;
+        action.enabled = this.hasPendingThemeChanges;
+        action.active = this.hasPendingThemeChanges;
       }
     }
   }
@@ -3519,7 +3519,7 @@ export class CreatorBase extends Base
    */
   public save() {
     const themeSaveHandler = () => {
-      if (this.isThemeModified) {
+      if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
           this._updateSaveActions();
         });

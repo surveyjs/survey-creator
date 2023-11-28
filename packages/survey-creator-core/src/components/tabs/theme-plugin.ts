@@ -496,7 +496,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * @see [`creator.saveTheme()`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveTheme)
    * @see [`creator.saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc)
    */
-  public get hasPendingChanges(): boolean {
+  public get isModified(): boolean {
     const currentThemeChanges = this.getThemeChanges();
     const hasCssModifications = Object.keys(currentThemeChanges.cssVariables).length > 0;
     const hasBackgroundModifications = Object.keys(currentThemeChanges).some(propertyName => propertyName.toLowerCase().indexOf("background") !== -1);
