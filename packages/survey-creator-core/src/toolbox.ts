@@ -61,7 +61,7 @@ export interface IQuestionToolbox {
 
 export interface IDefineToolboxCategory {
   category: string;
-  items: Array<string>;
+  items: Array<string | { name: string, title?: string }>;
 }
 
 export class QuestionToolboxCategory extends Base {
@@ -424,6 +424,7 @@ export class QuestionToolbox
    * @param name
    */
   public getItemByName(name: string): IQuestionToolboxItem {
+    if(!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
   }
@@ -516,11 +517,22 @@ export class QuestionToolbox
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
       if(!Array.isArray(category.items)) return;
-      category.items.forEach(name => {
+      category.items.forEach(obj => {
+        let name = undefined;
+        let title = undefined;
+        if(typeof obj === "string") {
+          name = obj;
+        } else {
+          name = obj.name;
+          title = obj.title;
+        }
         const item = this.getItemByName(name);
         if(item) {
           item.category = category.category;
           item.visible = true;
+          if(!!title) {
+            item.title = title;
+          }
           actionList.push(item);
         }
       });
@@ -529,7 +541,7 @@ export class QuestionToolbox
       if(!item.visible) {
         if(displayMisc) {
           item.visible = true;
-          item.category = "misc"; //TODO
+          item.category = editorLocalization.getString("ed.toolboxMiscCategory");
         }
         actionList.push(item);
       }
