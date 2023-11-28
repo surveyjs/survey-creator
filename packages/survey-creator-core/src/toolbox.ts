@@ -59,7 +59,7 @@ export interface IQuestionToolbox {
   toggleCategoryState(name: string);
 }
 
-export interface IDefineToolboxCategory {
+export interface IToolboxCategoryDefinition {
   category: string;
   items: Array<string | { name: string, title?: string }>;
 }
@@ -509,28 +509,56 @@ export class QuestionToolbox
     }
     this.onItemsChanged();
   }
-  public defineCategories(categories: Array<IDefineToolboxCategory>, displayMisc: boolean = false): void {
-    if(!Array.isArray(categories)) return;
+  /**
+   * Defines toolbox categories from scratch.
+   * 
+   * This method accepts an array of objects as the `categories` parameter. Each object defines a single category and lists items included into it. Unlisted items can be collected in the Misc category if you pass `true` as the `displayMisc` parameter. Optionally, you can override display titles for individual items.
+   * 
+   * The following code defines two toolbox categories: Dropdowns and Text Input. Items that do not fall into either category are collected in Misc. The `"comment"` item has a custom display title.
+   * 
+   * ```
+   * creator.toolbox.defineCategories([{
+   *   category: "Dropdowns",
+   *   items: [
+   *     "dropdown",
+   *     "tagbox"
+   *   ]
+   * }, {
+   *   category: "Text Input",
+   *   items: [
+   *     "text",
+   *     // Override the display title
+   *     { name: "comment", title: "Multi-Line Input" }
+   *   ]
+   * }], true);
+   * ```
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
+   * @param categories An array of new categories.
+   * @param displayMisc Pass `true` if you want to collect unlisted toolbox items in the Misc category. Default value: `false`.
+   */
+  public defineCategories(categories: Array<IToolboxCategoryDefinition>, displayMisc: boolean = false): void {
+    if (!Array.isArray(categories)) return;
     this.actions.forEach(item => {
       item.visible = false;
     });
     const actionList = new Array<IQuestionToolboxItem>();
     categories.forEach(category => {
-      if(!Array.isArray(category.items)) return;
+      if (!Array.isArray(category.items)) return;
       category.items.forEach(obj => {
         let name = undefined;
         let title = undefined;
-        if(typeof obj === "string") {
+        if (typeof obj === "string") {
           name = obj;
         } else {
           name = obj.name;
           title = obj.title;
         }
         const item = this.getItemByName(name);
-        if(item) {
+        if (item) {
           item.category = category.category;
           item.visible = true;
-          if(!!title) {
+          if (!!title) {
             item.title = title;
           }
           actionList.push(item);
