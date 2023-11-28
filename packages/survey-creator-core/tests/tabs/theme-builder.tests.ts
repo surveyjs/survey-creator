@@ -1051,7 +1051,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(0);
   expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeTruthy();
+  expect(themePlugin.hasPendingChanges).toBeFalsy();
 
   themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
 
@@ -1059,7 +1059,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(1);
   expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(themePlugin.hasPendingChanges).toBeTruthy();
 
   themeBuilder.resetTheme();
 
@@ -1067,7 +1067,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
   expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeTruthy();
+  expect(themePlugin.hasPendingChanges).toBeFalsy();
 
   themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
 
@@ -1075,7 +1075,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(3);
   expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(themePlugin.hasPendingChanges).toBeTruthy();
 
   themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
 
@@ -1083,7 +1083,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(4);
   expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(themePlugin.hasPendingChanges).toBeTruthy();
 });
 
 test("Theme undo redo changes", (): any => {

@@ -447,12 +447,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     themeChanges.isPanelless = !!fullTheme.isPanelless;
     return themeChanges;
   }
-  public get isThemePristine(): boolean {
+  public get hasPendingChanges(): boolean {
     const currentThemeChanges = this.getThemeChanges();
     const hasCssModifications = Object.keys(currentThemeChanges.cssVariables).length > 0;
     const hasBackgroundModifications = Object.keys(currentThemeChanges).some(propertyName => propertyName.toLowerCase().indexOf("background") !== -1);
     const hasHeaderModifications = !!currentThemeChanges.header && Object.keys(currentThemeChanges.header).length === 0;
-    return !(hasCssModifications || hasBackgroundModifications || hasHeaderModifications);
+    return hasCssModifications || hasBackgroundModifications || hasHeaderModifications;
   }
 
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
