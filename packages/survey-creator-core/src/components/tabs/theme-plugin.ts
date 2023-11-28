@@ -492,7 +492,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return themeChanges;
   }
   /**
-   * Indicates whether the current theme has unsaved changes.
+   * Indicates whether the selected theme has been modified.
    * @see [`creator.saveTheme()`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveTheme)
    * @see [`creator.saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc)
    */
