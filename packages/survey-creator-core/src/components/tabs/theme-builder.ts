@@ -105,14 +105,6 @@ export class ThemeBuilder extends Base {
     return (_themeName || this.themeName) + "-" + this.themePalette;
   }
 
-  public get activeLanguage(): string {
-    return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
-  }
-  public set activeLanguage(val: string) {
-    if (val === this.activeLanguage) return;
-    this.setPropertyValue("activeLanguage", val);
-    this.survey.locale = val;
-  }
   public get survey(): SurveyModel {
     return this.simulator.survey;
   }
@@ -232,6 +224,7 @@ export class ThemeBuilder extends Base {
       component: "svc-complete-page",
       data: this
     });
+    newSurvey.locale = json.locale;
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
@@ -339,7 +332,6 @@ export class ThemeBuilder extends Base {
   public show() {
     this.showInvisibleElements = false;
     this.activePage = this.survey.activePage;
-    this.survey.locale = this.activeLanguage;
     this.isRunning = true;
   }
 

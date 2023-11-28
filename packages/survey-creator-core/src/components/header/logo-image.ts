@@ -1,4 +1,4 @@
-import { Base, CssClassBuilder, property, SurveyModel } from "survey-core";
+import { Base, CssClassBuilder, property, Serializer, SurveyModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { getAcceptedTypesByContentMode } from "../../utils/utils";
 require("./logo-image.scss");
@@ -8,7 +8,9 @@ export class LogoImageViewModel extends Base {
     super();
   }
   public get allowEdit() {
-    return !this.creator.readOnly;
+    const survey = this.creator.survey;
+    const property = Serializer.findProperty(survey.getType(), "logo");
+    return !this.creator.readOnly && (!property.overridingProperty || !survey[property.overridingProperty]);
   }
   public get containerCss() {
     return new CssClassBuilder()
@@ -28,9 +30,9 @@ export class LogoImageViewModel extends Base {
     });
   }
   public chooseFile(model: LogoImageViewModel) {
-    if(this.allowEdit) {
+    if (this.allowEdit) {
       const fileInput: HTMLInputElement =
-      <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
+        <HTMLInputElement>model.root.getElementsByClassName("svc-choose-file-input")[0];
       if (fileInput.files.length === 0) {
         model.creator.chooseFiles(fileInput, (files: File[]) => {
           model.uploadFile(model, fileInput, files);

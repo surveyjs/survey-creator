@@ -2596,3 +2596,34 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
     "contrast"
   ]);
 });
+
+test("Simulator survey should respect survey current locale", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = {
+    "locale": "fr",
+    "logo": {
+      "fr": "FR logo",
+    },
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "radiogroup",
+            "name": "question1",
+            "choices": [
+              "Item 1",
+              "Item 2",
+              "Item 3"
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  expect(themeBuilder.simulator.survey.locale).toBe(creator.survey.locale);
+  expect(themeBuilder.simulator.survey.locLogo.renderedHtml).toBe("FR logo");
+});
