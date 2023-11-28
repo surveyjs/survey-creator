@@ -21,6 +21,22 @@ function getObjectDiffs(obj1: any, obj2: any = {}): any {
   return result;
 }
 
+/**
+ * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
+ * 
+ * ```js
+ * const creatorOptions = { ... };
+ * const creator = new SurveyCreator.SurveyCreator(creatorOptions);
+ * creator.themeEditor.settingName = "value";
+ * 
+ * // In modular applications:
+ * import { SurveyCreatorModel } from "survey-creator-core";
+ * 
+ * const creatorOptions = { ... };
+ * const creator = new SurveyCreatorModel(creatorOptions);
+ * creator.themeEditor.settingName = "value";
+ * ```
+ */
 export class ThemeTabPlugin implements ICreatorPlugin {
   private previewAction: Action;
   private invisibleToggleAction: Action;
@@ -118,12 +134,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
-    this.model.onThemeModified.add((sender, options) => {
+    this.model.onThemePropertyChanged.add((sender, options) => {
       this.saveThemeAction.enabled = true;
-      this.onThemeModified.fire(this, options);
+      this.onThemePropertyChanged.fire(this, options);
     });
-    this.model.onCanModifyTheme.add((sender, options) => {
-      this.onCanModifyTheme.fire(this, options);
+    this.model.onAllowModifyTheme.add((sender, options) => {
+      this.onAllowModifyTheme.fire(this, options);
     });
   }
   public deactivate(): boolean {
@@ -131,8 +147,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       this.simulatorTheme = this.model.simulator.survey.css;
       this.model.onPropertyChanged.clear();
       this.model.onThemeSelected.clear();
-      this.model.onThemeModified.clear();
-      this.model.onCanModifyTheme.clear();
+      this.model.onThemePropertyChanged.clear();
+      this.model.onAllowModifyTheme.clear();
       this.model.onSurveyCreatedCallback = undefined;
       this.model.dispose();
       this.model = undefined;
@@ -234,7 +250,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "svd-save-theme",
       iconName: "icon-save",
       action: () => {
-        this.creator.doSaveTheme();
+        this.creator.saveThemeActionHandler();
         this.saveThemeAction.enabled = false;
       },
       active: false,
@@ -375,16 +391,29 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.creator.footerToolbar.actions.push(this.themeSettingsAction);
   }
 
+  /**
+   * A list of UI themes from which users can select. You can sort this list if you want to reorder themes in Theme Editor.
+   * @see addTheme
+   * @see removeTheme 
+   */
   public get availableThemes() {
     return [].concat(this._availableThemes);
   }
-  public set availableThemes(availebleThemes: string[]) {
-    this._availableThemes = availebleThemes || [];
+  public set availableThemes(availableThemes: string[]) {
+    this._availableThemes = availableThemes || [];
     if (!!this.model) {
-      this.model.availableThemes = availebleThemes;
+      this.model.availableThemes = availableThemes;
     }
   }
 
+  /**
+   * Adds a new UI theme to Theme Editor.
+   * @param theme A [UI theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) to add.
+   * @param setAsDefault For internal use.
+   * @returns An identifier of the added theme, which is a concatenation of the [`themeName`](https://surveyjs.io/form-library/documentation/api-reference/itheme#themeName), [`colorPalette`](https://surveyjs.io/form-library/documentation/api-reference/itheme#colorPalette), and [`isPanelless`](https://surveyjs.io/form-library/documentation/api-reference/itheme#isPanelless) settings (for example, `"default-dark-panelless"`).
+   * @see removeTheme
+   * @see getCurrentTheme
+   */
   public addTheme(theme: ITheme, setAsDefault = false): string {
     const fullThemeName = getThemeFullName(theme);
     Themes[fullThemeName] = theme;
@@ -401,7 +430,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     }
     return fullThemeName;
   }
-  public removeTheme(themeAccessor: string | ITheme, withModifications = false): void {
+  /**
+   * Removes a UI theme from Theme Editor.
+   * @param themeAccessor A [UI theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) to delete or a theme identifier, which is a concatenation of the [`themeName`](https://surveyjs.io/form-library/documentation/api-reference/itheme#themeName), [`colorPalette`](https://surveyjs.io/form-library/documentation/api-reference/itheme#colorPalette), and [`isPanelless`](https://surveyjs.io/form-library/documentation/api-reference/itheme#isPanelless) settings (for example, `"default-dark-panelless"`).
+   * @param includeModifications Pass `true` to delete not only the specified UI theme, but also all other themes with the same `themeName` value (dark/light and panelless modifications).
+   * @see addTheme
+   * @see getCurrentTheme
+   */
+  public removeTheme(themeAccessor: string | ITheme, includeModifications = false): void {
     const themeToDelete = typeof themeAccessor === "string" ? Themes[themeAccessor] : themeAccessor;
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
@@ -411,10 +447,10 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
-      if (withModifications && themeModifications.length > 0) {
+      if (includeModifications && themeModifications.length > 0) {
         themeModifications.forEach(themeModificationFullName => delete Themes[themeModificationFullName]);
       }
-      if (withModifications || themeModifications.length === 0) {
+      if (includeModifications || themeModifications.length === 0) {
         const themeIndex = this._availableThemes.indexOf(themeToDelete.themeName);
         if (themeIndex !== -1) {
           const availableThemes = this.availableThemes;
@@ -424,8 +460,16 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     }
   }
-  public getCurrentTheme(content: "full" | "changes" = "full") {
-    if (content === "full") {
+  /**
+   * Returns a JSON object that describes the currently applied UI theme.
+   * @param changesOnly Pass `true` to get a JSON object that contains only changed theme settings instead of a full theme JSON schema.
+   * @returns A currently applied [theme JSON schema](https://surveyjs.io/form-library/documentation/api-reference/itheme).
+   * @see availableThemes
+   * @see addTheme
+   * @see removeTheme
+   */
+  public getCurrentTheme(changesOnly = false) {
+    if (!changesOnly) {
       return this.creator.theme;
     }
     return this.getThemeChanges();
@@ -447,15 +491,57 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     themeChanges.isPanelless = !!fullTheme.isPanelless;
     return themeChanges;
   }
-  public get isThemePristine(): boolean {
+  /**
+   * Indicates whether the selected theme has been modified.
+   * @see [`creator.saveTheme()`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveTheme)
+   * @see [`creator.saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc)
+   */
+  public get isModified(): boolean {
     const currentThemeChanges = this.getThemeChanges();
     const hasCssModifications = Object.keys(currentThemeChanges.cssVariables).length > 0;
     const hasBackgroundModifications = Object.keys(currentThemeChanges).some(propertyName => propertyName.toLowerCase().indexOf("background") !== -1);
     const hasHeaderModifications = !!currentThemeChanges.header && Object.keys(currentThemeChanges.header).length === 0;
-    return !(hasCssModifications || hasBackgroundModifications || hasHeaderModifications);
+    return hasCssModifications || hasBackgroundModifications || hasHeaderModifications;
   }
 
+  /**
+   * An event that is raised when users select a UI theme from a drop-down list, choose a dark or light color palette, and switch between regular and panelless theme modifications.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `ThemeTabPlugin`\
+   * A `ThemeTabPlugin` instance that raised the event.
+   * - `options.theme`: [`ITheme`](https://surveyjs.io/form-library/documentation/api-reference/itheme)\
+   * A selected theme.
+   * @see availableThemes
+   * @see addTheme
+   * @see removeTheme
+   */
   public onThemeSelected = new EventBase<ThemeTabPlugin, { theme: ITheme }>();
-  public onThemeModified = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
-  public onCanModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, canModify: boolean }>();
+  /**
+   * An event that is raised when the value of a property or CSS variable in a theme JSON schema has changed.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `ThemeTabPlugin`\
+   * A `ThemeTabPlugin` instance that raised the event.
+   * - `options.name`: `string`\
+   * The name of the changed property or CSS variable.
+   * - `options.value`: `any`\
+   * A new value of the property or CSS variable.
+   */
+  public onThemePropertyChanged = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
+  /**
+   * An event that is raised when Theme Editor renders Property Grid. Use this event to switch the current theme to read-only mode.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `ThemeTabPlugin`\
+   * A `ThemeTabPlugin` instance that raised the event.
+   * - `options.theme`: [`ITheme`](https://surveyjs.io/form-library/documentation/api-reference/itheme)\
+   * The current theme.
+   * - `options.allow`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to disallow theme modifications.
+   */
+  public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
 }

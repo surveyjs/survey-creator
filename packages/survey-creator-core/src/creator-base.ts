@@ -145,6 +145,8 @@ export class CreatorBase extends Base
    * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
+   * 
+   * Use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) object to manage UI themes available in the Themes tab.
    * @see activeTab
    * @see saveThemeFunc
    */
@@ -1236,10 +1238,20 @@ export class CreatorBase extends Base
   //#region Theme
 
   /**
+   * An object that enables you to manage UI themes. Refer to the following API section for information on available properties, methods, and events: [`ThemeTabPlugin`](https://surveyjs.io/survey-creator/documentation/api-reference/themetabplugin).
+   * @see showThemeTab
+   * @see saveThemeFunc
+   */
+  get themeEditor(): ThemeTabPlugin {
+    return this.getPlugin<ThemeTabPlugin>("theme");
+  }
+
+  /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
+   * @see themeEditor
    * @see saveSurveyFunc
    */
   public get saveThemeFunc() {
@@ -1249,14 +1261,14 @@ export class CreatorBase extends Base
     this.saveThemeFuncValue = value;
   }
 
-  public isThemeModified: boolean = false;
+  public hasPendingThemeChanges: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
   public get theme(): ITheme {
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
-    this.isThemeModified = true;
+    this.hasPendingThemeChanges = true;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
@@ -1270,7 +1282,7 @@ export class CreatorBase extends Base
         if (this.saveNo !== no) return;
         if (isSuccess) {
           this.setState("saved");
-          this.isThemeModified = false;
+          this.hasPendingThemeChanges = false;
         } else {
           this.setState("modified");
           if (this.showErrorOnFailedSave) {
@@ -1281,11 +1293,19 @@ export class CreatorBase extends Base
       });
     }
   }
-  public doSaveTheme() {
-    if (this.saveSurveyAndTheme) {
-      this.doSaveSurveyAndTheme();
+  /**
+   * Calls the [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function to save the theme JSON schema.
+   * @see saveSurvey
+   * @see save
+   */
+  public saveTheme() {
+    this._doSaveThemeCore();
+  }
+  public saveThemeActionHandler() {
+    if (this.syncSaveButtons) {
+      this.save();
     } else {
-      this._doSaveThemeCore();
+      this.saveTheme();
     }
   }
 
@@ -1564,7 +1584,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
-    this.saveSurveyAndTheme = this.options.saveSurveyAndTheme;
+    this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
@@ -3458,11 +3478,22 @@ export class CreatorBase extends Base
       });
     }
   }
+  /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function to save the survey JSON schema.
+   * @see saveTheme
+   * @see save
+   */
+  public saveSurvey() {
+    this._doSaveCore();
+  }
   public doSave() {
-    if (this.saveSurveyAndTheme) {
-      this.doSaveSurveyAndTheme();
+    this._doSaveCore();
+  }
+  public saveSurveyActionHandler() {
+    if (this.syncSaveButtons) {
+      this.save();
     } else {
-      this._doSaveCore();
+      this.saveSurvey();
     }
   }
 
@@ -3472,18 +3503,23 @@ export class CreatorBase extends Base
       action.enabled = this.state === "modified";
       action.active = this.state === "modified";
     }
-    if (this.saveSurveyAndTheme) {
+    if (this.syncSaveButtons) {
       const action = this._findAction("svd-save-theme");
       if (action) {
-        action.enabled = this.isThemeModified;
-        action.active = this.isThemeModified;
+        action.enabled = this.hasPendingThemeChanges;
+        action.active = this.hasPendingThemeChanges;
       }
     }
   }
 
-  public doSaveSurveyAndTheme() {
+  /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions to save the survey and theme JSON schemas.
+   * @see saveSurvey
+   * @see saveTheme
+   */
+  public save() {
     const themeSaveHandler = () => {
-      if (this.isThemeModified) {
+      if (this.hasPendingThemeChanges) {
         this._doSaveThemeCore(() => {
           this._updateSaveActions();
         });
@@ -3509,6 +3545,16 @@ export class CreatorBase extends Base
     }
   }
 
+  /**
+   * Specifies whether to synchronize [Save buttons](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) in the Designer and Themes tabs.
+   * 
+   * Default value: `false`
+   * 
+   * When this property is disabled, the Save button in the Designer tab saves only the survey JSON schema, while the Save button in the Themes tab saves only the theme JSON schema. If you enable this property, both buttons will save both JSON schemas.
+   * @see saveSurveyFunc
+   * @see saveThemeFunc
+   * @see save
+   */
   @property({
     defaultValue: false, onSet(val, target: CreatorBase) {
       let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
@@ -3517,19 +3563,22 @@ export class CreatorBase extends Base
       }
       if (val) {
         target.onModified.add(target._syncSaveActions);
-        themeTabPlugin.onThemeModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.add(target._syncSaveActions);
         themeTabPlugin.onThemeSelected.add(target._syncSaveActions);
       } else {
         target.onModified.remove(target._syncSaveActions);
-        themeTabPlugin.onThemeModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.remove(target._syncSaveActions);
         themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
       }
     },
-  }) saveSurveyAndTheme: boolean;
+  }) syncSaveButtons: boolean;
 
   /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
+   * 
+   * Default value: `false`
    * @see isAutoSave
+   * @see syncSaveButtons
    */
   @property({ defaultValue: false }) showSaveButton: boolean;
 

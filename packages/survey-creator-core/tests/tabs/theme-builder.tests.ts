@@ -1040,7 +1040,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
   themePlugin.onThemeSelected.add((s, o) => {
     modificationsLog += "->THEME_SELECTED";
   });
-  themePlugin.onThemeModified.add((s, o) => {
+  themePlugin.onThemePropertyChanged.add((s, o) => {
     modificationsLog += "->THEME_MODIFIED";
   });
   themePlugin.activate();
@@ -1050,40 +1050,40 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(modificationsLog).toBe("");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(0);
-  expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeTruthy();
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeFalsy();
 
   themeEditor.getQuestionByName("--sjs-border-default").value = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(1);
-  expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 
   themeBuilder.resetTheme();
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(2);
-  expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeTruthy();
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeFalsy();
 
   themeEditor.getQuestionByName("backgroundImage").value = [{ name: "pic1.png", type: "", content: "http://site.org/images/pic1.png" }];
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(3);
-  expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 
   themeEditor.getQuestionByName("--sjs-general-backcolor-dim").value = "#ff0000";
 
   expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED");
   expect(saveCount).toBe(0);
   expect(saveThemeCount).toBe(4);
-  expect(creator.isThemeModified).toBeFalsy();
-  expect(themePlugin.isThemePristine).toBeFalsy();
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 });
 
 test("Theme undo redo changes", (): any => {
@@ -1455,7 +1455,7 @@ test("selectTheme", (): any => {
   expect(themeBuilder.themeCssCustomizations).toStrictEqual({});
 });
 
-test("onThemeSelected + onThemeModified events", (): any => {
+test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
@@ -1471,11 +1471,11 @@ test("onThemeSelected + onThemeModified events", (): any => {
   let pluginThemeSelectedCount = 0;
   let pluginThemeModifiedCount = 0;
   themePlugin.onThemeSelected.add(() => pluginThemeSelectedCount++);
-  themePlugin.onThemeModified.add(() => pluginThemeModifiedCount++);
+  themePlugin.onThemePropertyChanged.add(() => pluginThemeModifiedCount++);
   let builderThemeSelectedCount = 0;
   let builderThemeModifiedCount = 0;
   themeBuilder.onThemeSelected.add(() => builderThemeSelectedCount++);
-  themeBuilder.onThemeModified.add(() => builderThemeModifiedCount++);
+  themeBuilder.onThemePropertyChanged.add(() => builderThemeModifiedCount++);
 
   themeChooser.value = "flat";
   expect(pluginThemeModifiedCount).toBe(0);
@@ -1502,12 +1502,12 @@ test("onThemeSelected + onThemeModified events", (): any => {
   expect(builderThemeSelectedCount).toBe(1);
 });
 
-test("onCanModifyTheme events + use creator.readOnly", (): any => {
+test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.readOnly = true;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.onCanModifyTheme.add((s, o) => {
-    o.canModify = o.theme.themeName === "flat";
+  themePlugin.onAllowModifyTheme.add((s, o) => {
+    o.allow = o.theme.themeName === "flat";
   });
 
   themePlugin.activate();
@@ -1977,7 +1977,7 @@ test("Get theme changes only", (): any => {
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
   const fullTheme = themePlugin.getCurrentTheme() || {};
-  const themeChanges = themePlugin.getCurrentTheme("changes") || {};
+  const themeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullTheme).length).toBe(8);
   expect(Object.keys(fullTheme)).toStrictEqual([
     "backgroundImage",
@@ -2004,7 +2004,7 @@ test("Get theme changes only", (): any => {
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-editor-background"]).toEqual("rgba(247, 247, 247, 0.6)");
 
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
-  const modifiedThemeChanges = themePlugin.getCurrentTheme("changes") || {};
+  const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
   expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
@@ -2018,7 +2018,7 @@ test("Get theme changes only", (): any => {
 
   themeSurveyTab.resetTheme();
   const fullThemeReset = themePlugin.getCurrentTheme();
-  const themeChangesReset = themePlugin.getCurrentTheme("changes");
+  const themeChangesReset = themePlugin.getCurrentTheme(true);
   expect(Object.keys(fullThemeReset).length).toBe(8);
   expect(Object.keys(fullThemeReset)).toStrictEqual([
     "backgroundImage",
