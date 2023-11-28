@@ -1286,7 +1286,7 @@ export class CreatorBase extends Base
     }
   }
   public saveTheme() {
-    if (this.saveSurveyAndTheme) {
+    if (this.syncSaveButtons) {
       this.save();
     } else {
       this._doSaveThemeCore();
@@ -1568,7 +1568,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
-    this.saveSurveyAndTheme = this.options.saveSurveyAndTheme;
+    this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
@@ -3466,7 +3466,7 @@ export class CreatorBase extends Base
     this.doSave();
   }
   public doSave() {
-    if (this.saveSurveyAndTheme) {
+    if (this.syncSaveButtons) {
       this.save();
     } else {
       this._doSaveCore();
@@ -3479,7 +3479,7 @@ export class CreatorBase extends Base
       action.enabled = this.state === "modified";
       action.active = this.state === "modified";
     }
-    if (this.saveSurveyAndTheme) {
+    if (this.syncSaveButtons) {
       const action = this._findAction("svd-save-theme");
       if (action) {
         action.enabled = this.isThemeModified;
@@ -3532,7 +3532,7 @@ export class CreatorBase extends Base
         themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
       }
     },
-  }) saveSurveyAndTheme: boolean;
+  }) syncSaveButtons: boolean;
 
   /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
