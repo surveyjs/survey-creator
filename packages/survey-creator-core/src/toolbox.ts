@@ -59,6 +59,11 @@ export interface IQuestionToolbox {
   toggleCategoryState(name: string);
 }
 
+export interface IToolboxCategoryDefinition {
+  category: string;
+  items: Array<string | { name: string, title?: string }>;
+}
+
 export class QuestionToolboxCategory extends Base {
   constructor(private toolbox: IQuestionToolbox) {
     super();
@@ -419,6 +424,7 @@ export class QuestionToolbox
    * @param name
    */
   public getItemByName(name: string): IQuestionToolboxItem {
+    if(!name) return null;
     const index: number = this.indexOf(name);
     return index > -1 ? this.actions[index] : null;
   }
@@ -503,6 +509,74 @@ export class QuestionToolbox
     }
     this.onItemsChanged();
   }
+  /**
+   * Defines toolbox categories from scratch.
+   * 
+   * This method accepts an array of objects as the `categories` parameter. Each object defines a single category and lists items included into it. Unlisted items can be collected in the Misc category if you pass `true` as the `displayMisc` parameter. Optionally, you can override display titles for individual items.
+   * 
+   * The following code defines two toolbox categories: Dropdowns and Text Input. Items that do not fall into either category are collected in Misc. The `"comment"` item has a custom display title.
+   * 
+   * ```
+   * creator.toolbox.defineCategories([{
+   *   category: "Dropdowns",
+   *   items: [
+   *     "dropdown",
+   *     "tagbox"
+   *   ]
+   * }, {
+   *   category: "Text Input",
+   *   items: [
+   *     "text",
+   *     // Override the display title
+   *     { name: "comment", title: "Multi-Line Input" }
+   *   ]
+   * }], true);
+   * ```
+   * 
+   * [View Demo](https://surveyjs.io/survey-creator/examples/survey-toolbox-categories/ (linkStyle))
+   * @param categories An array of new categories.
+   * @param displayMisc Pass `true` if you want to collect unlisted toolbox items in the Misc category. Default value: `false`.
+   */
+  public defineCategories(categories: Array<IToolboxCategoryDefinition>, displayMisc: boolean = false): void {
+    if (!Array.isArray(categories)) return;
+    this.actions.forEach(item => {
+      item.visible = false;
+    });
+    const actionList = new Array<IQuestionToolboxItem>();
+    categories.forEach(category => {
+      if (!Array.isArray(category.items)) return;
+      category.items.forEach(obj => {
+        let name = undefined;
+        let title = undefined;
+        if (typeof obj === "string") {
+          name = obj;
+        } else {
+          name = obj.name;
+          title = obj.title;
+        }
+        const item = this.getItemByName(name);
+        if (item) {
+          item.category = category.category;
+          item.visible = true;
+          if (!!title) {
+            item.title = title;
+          }
+          actionList.push(item);
+        }
+      });
+    });
+    this.actions.forEach(item => {
+      if(!item.visible) {
+        if(displayMisc) {
+          item.visible = true;
+          item.category = editorLocalization.getString("ed.toolboxMiscCategory");
+        }
+        actionList.push(item);
+      }
+    });
+    this.setItems(actionList);
+    this.onItemsChanged(false);
+  }
 
   /**
    * Removes categories from the Toolbox.
@@ -584,15 +658,16 @@ export class QuestionToolbox
     }
     return null;
   }
-  protected onItemsChanged() {
+  protected onItemsChanged(changeActions: boolean = true) {
     var categories = new Array<QuestionToolboxCategory>();
     var categoriesHash = {};
     var prevActiveCategory = this.activeCategory;
-    for (var i = 0; i < this.actions.length; i++) {
-      var item = this.actions[i];
-      var categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
+    for (let i = 0; i < this.actions.length; i++) {
+      const item = this.actions[i];
+      if(item.visible === false) continue;
+      const categoryName = item.category ? item.category : editorLocalization.getString("ed.toolboxGeneralCategory");
       if (!categoriesHash[categoryName]) {
-        var category = this.createCategory();
+        const category = this.createCategory();
         category.name = categoryName;
         category.collapsed = categoryName !== prevActiveCategory && !this.keepAllCategoriesExpanded;
         categoriesHash[categoryName] = category;
@@ -614,13 +689,13 @@ export class QuestionToolbox
         }
       }
     }
-
-    let newItems = [];
-    this.categories.forEach((cat) => {
-      newItems = newItems.concat(cat.items);
-    });
-    this.actions = newItems;
-
+    if(changeActions) {
+      let newItems = [];
+      this.categories.forEach((cat) => {
+        newItems = newItems.concat(cat.items);
+      });
+      this.actions = newItems;
+    }
     this.hasCategories = categories.length > 1;
     //this.updateCategoriesState();
     this.updateItemSeparators();
