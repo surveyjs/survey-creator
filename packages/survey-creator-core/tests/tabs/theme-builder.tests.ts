@@ -1673,7 +1673,7 @@ test("headerViewContainer init state", (): any => {
   expect(headerViewContainer.value[0]).toEqual({
     "headerView": "basic",
     "logoPosition": "left",
-    "inheritWidthFrom": "survey",
+    "inheritWidthFrom": "container",
     "overlapEnabled": false,
     "backgroundColorSwitch": "accentColor",
     "backgroundImageFit": "cover",
