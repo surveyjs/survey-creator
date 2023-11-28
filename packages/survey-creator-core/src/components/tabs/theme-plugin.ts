@@ -234,7 +234,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       id: "svd-save-theme",
       iconName: "icon-save",
       action: () => {
-        this.creator.saveTheme();
+        this.creator.saveThemeActionHandler();
         this.saveThemeAction.enabled = false;
       },
       active: false,

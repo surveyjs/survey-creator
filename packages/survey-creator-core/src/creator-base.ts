@@ -1286,10 +1286,13 @@ export class CreatorBase extends Base
     }
   }
   public saveTheme() {
+    this._doSaveThemeCore();
+  }
+  public saveThemeActionHandler() {
     if (this.syncSaveButtons) {
       this.save();
     } else {
-      this._doSaveThemeCore();
+      this.saveTheme();
     }
   }
 
@@ -3463,13 +3466,16 @@ export class CreatorBase extends Base
     }
   }
   public saveSurvey() {
-    this.doSave();
+    this._doSaveCore();
   }
   public doSave() {
+    this._doSaveCore();
+  }
+  public saveSurveyActionHandler() {
     if (this.syncSaveButtons) {
       this.save();
     } else {
-      this._doSaveCore();
+      this.saveSurvey();
     }
   }
 
