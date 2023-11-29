@@ -28,6 +28,11 @@
 }
 
 .spg-search-editor_container {
+  --sjs-general-forecolor: rgba(0, 0, 0, 0.91);
+  --sjs-general-forecolor-light: rgba(0, 0, 0, 0.45);
+}
+
+.spg-search-editor_container {
   position: absolute;
   border-bottom: 1px solid $border;
   background: $background-dim;
@@ -39,6 +44,7 @@
 }
 
 .spg-search-editor_input {
+  @include textEllipsis;
   color: $foreground;
 
   font-family: $font-family;
@@ -61,15 +67,25 @@
   padding-inline-end: calcSize(1);
 }
 
+.spg-search-editor_input::placeholder {
+  color: $foreground-light;
+}
+
 .spg-search-editor_toolbar {
   display: flex;
-  gap: calcSize(0.5);
+  gap: calcSize(1.5);
   justify-content: flex-end;
   align-items: center;
+  flex-shrink: 0;
 }
 .spg-search-editor_toolbar .sv-action-bar {
   gap: calcSize(0.5);
   margin: 0;
+  flex-shrink: 0;
+}
+
+.spg-search-editor_toolbar .sv-action--hidden {
+  display: none;
 }
 
 .spg-search-editor_toolbar .spg-search-editor_bar-item {
@@ -86,6 +102,8 @@
   font-weight: 600;
   font-size: calcSize(1.5);
   line-height: calcSize(2);
+  display: flex;
+  flex-shrink: 0;
 }
 
 .spg-search-editor_search-icon {

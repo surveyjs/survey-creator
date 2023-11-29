@@ -112,6 +112,7 @@ export var enStrings = {
     toolbox: "Toolbox",
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
+    propertyGridNoResultsFound: "No results found.",
     toolboxGeneralCategory: "General",
     toolboxChoiceCategory: "Choice Questions",
     toolboxTextCategory: "Text Input Questions",

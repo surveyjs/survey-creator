@@ -9,6 +9,7 @@ export class SearchManager extends Base {
   private currentMatch: Question;
   public searchActionBar: ActionContainer = new ActionContainer();
   public filterStringPlaceholder = getLocString("ed.propertyGridFilteredTextPlaceholder");
+  public propertyGridNoResultsFound = getLocString("ed.propertyGridNoResultsFound");
 
   @property() survey: SurveyModel;
   @property() isVisible: boolean;
@@ -41,8 +42,14 @@ export class SearchManager extends Base {
   }
   private updatedMatchCounterText(index: number) {
     const count = this.allMatches.length;
-    const value = this.currentMatch ? index + 1 : "0";
-    this.matchCounterText = !!this.filterString ? [value, count].join("/") : "";
+    if(count === 1) {
+      this.matchCounterText = "";
+    } else if(this.currentMatch) {
+      const value = index + 1;
+      this.matchCounterText = [value, count].join("/");
+    } else {
+      this.matchCounterText = !!this.filterString ? this.propertyGridNoResultsFound : "";
+    }
   }
   private navigateToEditor(index: number) {
     if (index < 0) {
@@ -102,8 +109,7 @@ export class SearchManager extends Base {
       showTitle: false,
       iconSize: 16,
       innerCss: "spg-search-editor_bar-item",
-      visible: <any>new ComputedUpdater(() => !!this.filterString),
-      enabled: <any>new ComputedUpdater(() => this.allMatches.length > 0),
+      visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
         if (this.allMatches.length > 0) {
           this.navigateToEditor(this.currentMatchIndex - 1);
@@ -119,8 +125,7 @@ export class SearchManager extends Base {
       showTitle: false,
       iconSize: 16,
       innerCss: "spg-search-editor_bar-item",
-      visible: <any>new ComputedUpdater(() => !!this.filterString),
-      enabled: <any>new ComputedUpdater(() => this.allMatches.length > 0),
+      visible: <any>new ComputedUpdater(() => this.allMatches.length > 1),
       action: () => {
         if (this.allMatches.length > 0) {
           this.navigateToEditor(this.currentMatchIndex + 1);
@@ -138,7 +143,7 @@ export class SearchManager extends Base {
       innerCss: "spg-search-editor_bar-item",
       visible: <any>new ComputedUpdater(() => !!this.filterString),
       action: () => {
-        this.filterString = "";
+        this.clearFilterString();
       }
     }));
 
@@ -150,6 +155,7 @@ export class SearchManager extends Base {
     this.initActionBar();
   }
   public setSurvey(newSurvey: SurveyModel) {
+    this.clearFilterString();
     this.survey = newSurvey;
     if (!!this.survey) {
       const _self = this;
@@ -160,6 +166,9 @@ export class SearchManager extends Base {
         }
       });
     }
+  }
+  public clearFilterString(): void {
+    this.filterString = "";
   }
 
   protected onPropertyValueChanged(name: string, oldValue: any, newValue: any) {
