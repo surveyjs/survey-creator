@@ -172,11 +172,10 @@
 
 .svc-logic-tab__content {
   &.svc-logic-tab__empty {
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    position: absolute;
-    top: 35%;
+    justify-content: center;
 
     .svc-logic-tab__content-action {
       width: calcSize(33);
