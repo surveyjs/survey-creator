@@ -22,7 +22,7 @@ function createSurvey(): SurveyModel {
     ]
   });
 }
-function getHighlightedEditors (survey: SurveyModel) {
+function getHighlightedEditors(survey: SurveyModel) {
   const highlightedEditorClass = "spg-editor--highlighted";
   return survey.getAllQuestions().filter(q => q.getRootCss().indexOf(highlightedEditorClass) !== -1);
 }
@@ -124,7 +124,7 @@ test("SearchManager: enabled searchActionBar items", () => {
   expect(prevAction.visible).toBeFalsy();
   expect(nextAction.visible).toBeFalsy();
   expect(clearAction.visible).toBeTruthy();
-  expect(searchManager.matchCounterText).toBe("No results found.");
+  expect(searchManager.matchCounterText).toBe("No results found");
 
   searchManager.filterString = "First";
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
