@@ -91,7 +91,7 @@ export function SurveyCreatorWidget() {
 
 ## Render Survey Creator
 
-To render a survey, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute:
+To render a survey creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute:
 
 ```js
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
