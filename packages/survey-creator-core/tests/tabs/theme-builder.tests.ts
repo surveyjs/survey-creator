@@ -78,6 +78,10 @@ const themeFromFile = {
   }
 };
 
+beforeEach(() => {
+  ThemeBuilder.DefaultTheme = Themes["default-light"];
+});
+
 test("assign function", (): any => {
   const result = {};
   assign(result, { name1: "name1" });
@@ -1407,9 +1411,9 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   });
 
   themeBuilder.resetTheme();
-  expect(themePalette.value).toEqual("dark");
-  expect(primaryBackColor.value).toEqual("rgba(255, 152, 20, 1)");
-  expect(backgroundDimColor.value).toEqual("rgba(36, 36, 36, 1)");
+  expect(themePalette.value).toEqual("light");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+  expect(backgroundDimColor.value).toEqual("rgba(243, 243, 243, 1)");
   expect(themeBuilder.themeCssCustomizations).toStrictEqual({});
 });
 
@@ -1874,7 +1878,7 @@ test("restore headerViewContainer values", (): any => {
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
   expect(headerViewContainer.value[0]).toEqual({
-    "headerView": "advanced",
+    "headerView": "basic",
     "logoPosition": "left",
     "inheritWidthFrom": "container",
     "backgroundColor": "#5094ed",
@@ -2025,10 +2029,10 @@ test("Get theme changes only", (): any => {
     "backgroundImageFit",
     "backgroundImageAttachment",
     "backgroundOpacity",
-    "cssVariables",
     "themeName",
+    "isPanelless",
     "colorPalette",
-    "isPanelless"
+    "cssVariables"
   ]);
   expect(Object.keys(fullThemeReset.cssVariables).length).toBe(80);
   expect(Object.keys(themeChangesReset).length).toBe(4);
@@ -2041,7 +2045,7 @@ test("Get theme changes only", (): any => {
   expect(Object.keys(themeChangesReset.cssVariables).length).toBe(0);
 });
 test("Creator top action bar: only theme tab", (): any => {
-  const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "resetTheme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
+  const themeBuilderButtonOrder = ["action-undo-theme", "action-redo-theme", "svc-reset-theme", "svc-theme-settings", "svc-theme-import", "svc-theme-export"].join("|");
   const logicTabButtonOrder = ["svc-logic-filter-question", "svc-logic-filter-actiontype", "svc-logic-fast-entry"].join("|");
   const creator = new CreatorTester({ showDesignerTab: false, showPreviewTab: false, showThemeTab: true, showLogicTab: true });
   creator.JSON = {
@@ -2366,7 +2370,7 @@ test("Reset theme action calls confitmation dialog", (): any => {
   expect(message).toBe("Do you really want to reset the theme? All your customizations will be lost.");
   surveySettings.confirmActionAsync = originalCallback;
 });
-test("Kepp background image on reset theme action", (): any => {
+test("Keep background image on reset theme action for default session theme", (): any => {
   const originalCallback = surveySettings.confirmActionAsync;
   surveySettings.confirmActionAsync = (text, callback) => {
     callback(true);
@@ -2380,16 +2384,58 @@ test("Kepp background image on reset theme action", (): any => {
   creator.theme = customTheme;
 
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
-  const backgroundImage = themeEditor.getQuestionByName("backgroundImage");
+  const themeBuilder = themePlugin.model as ThemeBuilder;
 
+  expect(themeBuilder.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
+  themeBuilder.defaultSessionTheme = creator.theme;
+
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  const backgroundImage = themeEditorSurvey.getQuestionByName("backgroundImage");
+
+  expect(themeChooser.value).toEqual("custom");
   expect(backgroundImage.value).toEqual("image.png");
-  expect(themeSurveyTab.survey.backgroundImage).toEqual("image.png");
+  expect(themeBuilder.survey.backgroundImage).toEqual("image.png");
 
   themePlugin["resetTheme"].action();
+  expect(themeChooser.value).toEqual("custom");
   expect(backgroundImage.value).toEqual("image.png");
-  expect(themeSurveyTab.survey.backgroundImage).toEqual("image.png");
+  expect(themeBuilder.survey.backgroundImage).toEqual("image.png");
+
+  surveySettings.confirmActionAsync = originalCallback;
+  themePlugin.removeTheme(customTheme);
+});
+
+test("Reset theme to default one", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const customTheme = { themeName: "custom", backgroundImage: "image.png" };
+  const fullThemeName = themePlugin.addTheme(customTheme);
+  creator.theme = customTheme;
+
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+
+  expect(themeBuilder.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
+
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  const backgroundImage = themeEditorSurvey.getQuestionByName("backgroundImage");
+
+  expect(themeChooser.value).toEqual("custom");
+  expect(backgroundImage.value).toEqual("image.png");
+  expect(themeBuilder.survey.backgroundImage).toEqual("image.png");
+
+  themePlugin["resetTheme"].action();
+  expect(themeChooser.value).toEqual("default");
+  expect(backgroundImage.value).toEqual(undefined);
+  expect(themeBuilder.survey.backgroundImage).toEqual("");
 
   surveySettings.confirmActionAsync = originalCallback;
   themePlugin.removeTheme(customTheme);
@@ -2626,4 +2672,59 @@ test("Simulator survey should respect survey current locale", (): any => {
   const themeBuilder = themePlugin.model as ThemeBuilder;
   expect(themeBuilder.simulator.survey.locale).toBe(creator.survey.locale);
   expect(themeBuilder.simulator.survey.locLogo.renderedHtml).toBe("FR logo");
+});
+
+test("Reset theme action availability", (): any => {
+  const originalCallback = surveySettings.confirmActionAsync;
+  surveySettings.confirmActionAsync = (text, callback) => {
+    callback(true);
+    return true;
+  };
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  const resetThemeAction = themePlugin["resetTheme"];
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
+  const themePalette = themeEditorSurvey.getQuestionByName("themePalette") as QuestionButtonGroupModel;
+  const backgroundImage = themeEditorSurvey.getQuestionByName("backgroundImage");
+  const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+
+  expect(themeChooser.value).toBe("default");
+  expect(resetThemeAction.enabled).toBeFalsy();
+
+  themeChooser.value = "flat";
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(themeChooser.value).toBe("default");
+
+  themeMode.value = "lightweight";
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(themeMode.value).toBe("panels");
+
+  themePalette.value = "dark";
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(themePalette.value).toBe("light");
+
+  backgroundImage.value = "image.png";
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(backgroundImage.value).toBe(undefined);
+
+  primaryBackColor.value = "red";
+  expect(resetThemeAction.enabled).toBeTruthy();
+  resetThemeAction.action();
+  expect(resetThemeAction.enabled).toBeFalsy();
+  expect(primaryBackColor.value).toBe("rgba(25, 179, 148, 1)");
+
+  surveySettings.confirmActionAsync = originalCallback;
 });

@@ -192,8 +192,16 @@ export class ThemeBuilder extends Base {
     }
   }
 
+  private _defaultSessionTheme = ThemeBuilder.DefaultTheme;
+  public get defaultSessionTheme() {
+    return this._defaultSessionTheme;
+  }
+  public set defaultSessionTheme(theme: ITheme) {
+    this._defaultSessionTheme = theme;
+  }
+
   public resetTheme() {
-    this.setTheme({});
+    this.setTheme({ themeName: this.defaultSessionTheme.themeName, isPanelless: this.defaultSessionTheme.isPanelless, colorPalette: this.defaultSessionTheme.colorPalette });
   }
 
   public setTheme(theme: ITheme) {
@@ -206,7 +214,7 @@ export class ThemeBuilder extends Base {
     this.themeModified({ theme });
   }
 
-  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panelless") {
+  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panels") {
     this.themeName = themeName;
     this.themePalette = themePalette;
     this.themeMode = themeMode;

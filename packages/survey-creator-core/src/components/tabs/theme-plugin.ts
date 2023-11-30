@@ -131,10 +131,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.model.onThemeSelected.add((sender, options) => {
+      this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
     this.model.onThemePropertyChanged.add((sender, options) => {
+      this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
     });
@@ -265,7 +267,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     items.push(this.saveThemeAction);
 
     this.resetTheme = new Action({
-      id: "resetTheme",
+      id: "svc-reset-theme",
       iconName: "icon-reset",
       locTitleName: "ed.themeResetButton",
       locTooltipName: "ed.themeResetButton",
