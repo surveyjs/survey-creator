@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
@@ -19,6 +19,13 @@ function getObjectDiffs(obj1: any, obj2: any = {}): any {
     }
   });
   return result;
+}
+
+export interface IPropertyGridSurveyCreatedEvent {
+  getGroupByName: (name: string) => IElement;
+  removeEditorFromPropertyGrid: (questionName: string) => void;
+  addEditorIntoPropertyGridGroup: (groupName: string, element: IElement) => void;
+  addEditorIntoPropertyGridAfterQuestion: (question: Question, insertAfterQuestion: string) => void;
 }
 
 /**
@@ -98,6 +105,15 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model.availableThemes = this.availableThemes;
     this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.update();
+    if (!!this.model.themeEditorSurvey) {
+      const options = <IPropertyGridSurveyCreatedEvent>{
+        getGroupByName: (name: string) => { return this.model.getPropertyGridGroup(name); },
+        addEditorIntoPropertyGridGroup: (groupName: string, element: IElement) => { this.model.addEditorIntoPropertyGridGroup(groupName, element); },
+        addEditorIntoPropertyGridAfterQuestion: (question: Question, insertAfterQuestion: string) => { this.model.addEditorIntoPropertyGridAfterQuestion(question, insertAfterQuestion); },
+        removeEditorFromPropertyGrid: (questionName: string) => { this.model.removeEditorFromPropertyGrid(questionName); },
+      };
+      this.onPropertyGridSurveyCreated.fire(this, options);
+    }
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
@@ -544,4 +560,5 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A Boolean property that you can set to `false` if you want to disallow theme modifications.
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
+  public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();
 }

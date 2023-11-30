@@ -8,7 +8,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "..
 import { fontsettingsToCssVariable, fontsettingsFromCssVariable } from "../../src/components/tabs/theme-custom-questions/font-settings";
 import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
-import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
+import { IPropertyGridSurveyCreatedEvent, ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { assign, parseColor } from "../../src/utils/utils";
 import { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 import { settings } from "../../src/creator-settings";
@@ -2626,4 +2626,45 @@ test("Simulator survey should respect survey current locale", (): any => {
   const themeBuilder = themePlugin.model as ThemeBuilder;
   expect(themeBuilder.simulator.survey.locale).toBe(creator.survey.locale);
   expect(themeBuilder.simulator.survey.locLogo.renderedHtml).toBe("FR logo");
+});
+
+test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
+    const defaultValueElement = sender.model.themeEditorSurvey.findQuestionByName("questionTitle")["defaultValue"];
+
+    const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
+    options.addEditorIntoPropertyGridAfterQuestion(newFontSettings, "questionTitle");
+    newFontSettings.title = "Question title font";
+    newFontSettings.value = defaultValueElement;
+
+    options.removeEditorFromPropertyGrid("questionTitle");
+
+    const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
+    options.addEditorIntoPropertyGridAfterQuestion(newMatrixFontSettings, "questionDescription");
+    newMatrixFontSettings.title = "Matrix title font";
+    newMatrixFontSettings.value = defaultValueElement;
+  });
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeBuilder.themeEditorSurvey;
+
+  const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
+  expect(questionTitleFontSettings).toBeNull();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-family"]).toBe("Open Sans");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-weight"]).toBe("600");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-color"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-size"]).toBe("16px");
+
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-family"]).toBe("Open Sans");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-weight"]).toBe("600");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-color"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-size"]).toBe("16px");
 });

@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, IElement, PanelModel } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -269,6 +269,34 @@ export class ThemeBuilder extends Base {
       }
     }
     this.updateSimulatorSurvey(json, currTheme);
+  }
+
+  public getPropertyGridGroup(groupName: string): IElement | undefined {
+    const themeEditorGroups = this.themeEditorSurvey.getPage(0).elements;
+    const group = themeEditorGroups.filter(group => group.name === groupName)[0];
+    return group;
+  }
+
+  public removeEditorFromPropertyGrid(questionName: string): void {
+    const element = this.themeEditorSurvey.findQuestionByName(questionName);
+    if (!!element) {
+      this.themeEditorSurvey.getPage(0).removeElement(element);
+    }
+  }
+
+  public addEditorIntoPropertyGridGroup(groupName: string, element: IElement): void {
+    const group = this.getPropertyGridGroup(groupName) as PanelModel;
+    if (!!group && !!element) {
+      group.addElement(element);
+    }
+  }
+
+  public addEditorIntoPropertyGridAfterQuestion(element: IElement, insertAfterQuestion: string): void {
+    const prevElement = this.themeEditorSurvey.findQuestionByName(insertAfterQuestion);
+    if (!!prevElement && !!element) {
+      const prevElementIndex = prevElement.parent.elements.indexOf(prevElement);
+      prevElement.parent.addElement(element, prevElementIndex + 1);
+    }
   }
 
   private creatorPropertyChanged = (sender, options) => {
