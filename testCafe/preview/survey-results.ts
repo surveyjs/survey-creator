@@ -138,7 +138,7 @@ test("Test survey results not visible on mobile", async (t) => {
     .expect(tableRows.visible).notOk();
 });
 
-test.only("Test markdown is processed in result question titles", async (t) => {
+test("Test markdown is processed in result question titles", async (t) => {
   await setJSON(json);
   await ClientFunction(() => {
     window["creator"].onSurveyInstanceCreated.add((s, o) => {
