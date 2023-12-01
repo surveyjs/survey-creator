@@ -22,7 +22,7 @@ function createSurvey(): SurveyModel {
     ]
   });
 }
-function getHighlightedEditors (survey: SurveyModel) {
+function getHighlightedEditors(survey: SurveyModel) {
   const highlightedEditorClass = "spg-editor--highlighted";
   return survey.getAllQuestions().filter(q => q.getRootCss().indexOf(highlightedEditorClass) !== -1);
 }
@@ -86,8 +86,8 @@ test("SearchManager: matchCounterText", () => {
   const nextAction = searchManager.searchActionBar.visibleActions[1];
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
-  expect(prevAction.enabled).toBeTruthy();
-  expect(nextAction.enabled).toBeTruthy();
+  expect(prevAction.visible).toBeTruthy();
+  expect(nextAction.visible).toBeTruthy();
   expect(searchManager.matchCounterText).toBe("1/3");
 
   nextAction.action();
@@ -114,24 +114,24 @@ test("SearchManager: enabled searchActionBar items", () => {
   const clearAction = searchManager.searchActionBar.visibleActions[2];
   expect(searchManager.searchActionBar.actions).toHaveLength(3);
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
-  expect(prevAction.enabled).toBeTruthy();
-  expect(nextAction.enabled).toBeTruthy();
+  expect(prevAction.visible).toBeTruthy();
+  expect(nextAction.visible).toBeTruthy();
   expect(clearAction.visible).toBeTruthy();
   expect(searchManager.matchCounterText).toBe("1/3");
 
   searchManager.filterString = "aaa";
-  expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
-  expect(prevAction.enabled).toBeFalsy();
-  expect(nextAction.enabled).toBeFalsy();
+  expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
+  expect(prevAction.visible).toBeFalsy();
+  expect(nextAction.visible).toBeFalsy();
   expect(clearAction.visible).toBeTruthy();
-  expect(searchManager.matchCounterText).toBe("0/0");
+  expect(searchManager.matchCounterText).toBe("No results found");
 
   searchManager.filterString = "First";
-  expect(searchManager.searchActionBar.visibleActions).toHaveLength(3);
-  expect(prevAction.enabled).toBeTruthy();
-  expect(nextAction.enabled).toBeTruthy();
+  expect(searchManager.searchActionBar.visibleActions).toHaveLength(1);
+  expect(prevAction.visible).toBeFalsy();
+  expect(nextAction.visible).toBeFalsy();
   expect(clearAction.visible).toBeTruthy();
-  expect(searchManager.matchCounterText).toBe("1/1");
+  expect(searchManager.matchCounterText).toBe("");
 
   clearAction.action();
   expect(searchManager.searchActionBar.visibleActions).toHaveLength(0);
