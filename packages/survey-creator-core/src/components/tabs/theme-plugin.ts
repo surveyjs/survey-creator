@@ -143,6 +143,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model.onAllowModifyTheme.add((sender, options) => {
       this.onAllowModifyTheme.fire(this, options);
     });
+    this.resetTheme.enabled = getThemeFullName(this.model.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
   }
   public deactivate(): boolean {
     if (this.model) {
