@@ -12,7 +12,8 @@
       >
         <sv-svg-icon :iconName="'icon-expand_16x16'" :size="16"></sv-svg-icon>
       </span>
-      <span>{{ model.title }}</span>
+      <survey-string v-if="model.question" :locString="model.question.locTitle"></survey-string>
+      <span v-else>{{ model.title }}</span>
     </td>
     <td
       :class="{
