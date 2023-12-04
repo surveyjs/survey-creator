@@ -147,16 +147,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       }
     });
     this.model.onThemeSelected.add((sender, options) => {
+      this.resetTheme.enabled = getThemeFullName(sender.defaultSessionTheme) !== getThemeFullName(options.theme);
       this.saveThemeAction.enabled = true;
       this.onThemeSelected.fire(this, options);
     });
     this.model.onThemePropertyChanged.add((sender, options) => {
+      this.resetTheme.enabled = true;
       this.saveThemeAction.enabled = true;
       this.onThemePropertyChanged.fire(this, options);
     });
     this.model.onAllowModifyTheme.add((sender, options) => {
       this.onAllowModifyTheme.fire(this, options);
     });
+    this.resetTheme.enabled = getThemeFullName(this.model.defaultSessionTheme) !== getThemeFullName(this.creator.theme) || this.isModified;
   }
   public deactivate(): boolean {
     if (this.model) {
@@ -281,7 +284,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     items.push(this.saveThemeAction);
 
     this.resetTheme = new Action({
-      id: "resetTheme",
+      id: "svc-reset-theme",
       iconName: "icon-reset",
       locTitleName: "ed.themeResetButton",
       locTooltipName: "ed.themeResetButton",
