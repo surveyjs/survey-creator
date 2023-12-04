@@ -123,6 +123,33 @@ test("item hasNone, hasOther, hasSelectAll change trigger updateIsNew and behave
   expect(noneItemAdorner.allowAdd).toBeFalsy();
   expect(noneItemAdorner.allowRemove).toBeTruthy();
 });
+test("Allow remove for choices and generated choices", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "dropdown", name: "q1", choices: [1, 2, "item4"], choicesMin: 3, choicesMax: 10 }]
+  };
+  const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+
+  const choiceItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.choices[0]
+  );
+  const generatedItemAdorner = new ItemValueWrapperViewModel(
+    creator,
+    question,
+    question.visibleChoices[4]
+  );
+  expect(choiceItemAdorner.item.value).toBe(1);
+  expect(choiceItemAdorner.isNew).toBeFalsy();
+  expect(choiceItemAdorner.allowAdd).toBeFalsy();
+  expect(choiceItemAdorner.allowRemove).toBeTruthy();
+
+  expect(generatedItemAdorner.item.value).toBe(4);
+  expect(generatedItemAdorner.isNew).toBeFalsy();
+  expect(generatedItemAdorner.allowAdd).toBeFalsy();
+  expect(generatedItemAdorner.allowRemove).toBeFalsy();
+});
 
 test("item value allowRemove on events", () => {
   const creator = new CreatorTester();
