@@ -462,14 +462,17 @@ test("column[] property editor, store column title if it was entered an equals t
   const row = columnsQuestion.visibleRows[0];
   expect(row.cells[0].value).toEqual("col1");
   expect(row.cells[1].value).toBeFalsy();
-  let json = question.toJSON();
-  expect(json).toEqual({
+  expect(question.toJSON()).toEqual({
     name: "q1",
     columns: [{ name: "col1" }]
   });
+  row.cells[1].value = "Column 1";
+  expect(question.toJSON()).toEqual({
+    name: "q1",
+    columns: [{ name: "col1", title: "Column 1" }]
+  });
   row.cells[1].value = "col1";
-  json = question.toJSON();
-  expect(json).toEqual({
+  expect(question.toJSON()).toEqual({
     name: "q1",
     columns: [{ name: "col1", title: "col1" }]
   });
