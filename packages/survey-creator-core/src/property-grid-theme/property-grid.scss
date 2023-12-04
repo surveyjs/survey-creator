@@ -53,6 +53,10 @@
       margin: 0;
       padding: 0;
     }
+
+    .sv-components-column--expandable {
+      min-width: calcSize(78);
+    }
   }
 
   .sv-popup__footer {

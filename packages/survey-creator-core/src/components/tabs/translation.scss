@@ -184,3 +184,9 @@ td.st-table__cell:first-of-type {
   box-shadow: $shadow-small;
   overflow: hidden;
 }
+
+.st-container-modern {
+  .sv-components-column--expandable {
+    width: auto;
+  }
+}

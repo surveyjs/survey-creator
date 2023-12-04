@@ -595,3 +595,80 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular
       npm run testcafe:ci
     displayName: 'Functional test CreatorV2 Angular'
+
+- job: CreatorV2Vue
+  dependsOn: CreatorV2Core
+  steps:
+  - checkout: self
+  - checkout: EmptyRepo
+    persistCredentials: true
+    clean: true
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '16.x'
+    displayName: 'Install Node.js'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuild'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSCreatorV2BuildCore-$(Build.BuildId)
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npm i
+      rm node_modules/survey-vue3-ui
+    displayName: 'npm install'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-vue3-ui'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/node_modules/survey-vue3-ui'
+      OverWrite: true
+    displayName: 'copy survey-vue3-ui in node_modules'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npm run build
+    displayName: 'Build CreatorV2 Vue'
+  
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/example
+      npm i
+    displayName: 'npm install in example project'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npm run build:example:prod
+    displayName: 'build example'
+
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue
+      npm run testcafe:ci
+    displayName: 'Functional test CreatorV2 Vue'

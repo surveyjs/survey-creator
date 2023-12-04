@@ -1,7 +1,7 @@
 import React from "react";
 import { Base, SurveyModel } from "survey-core";
 import { SurveyResultsItemModel, SurveyResultsModel } from "survey-creator-core";
-import { attachKey2click, SvgIcon } from "survey-react-ui";
+import { attachKey2click, SurveyLocStringViewer, SvgIcon } from "survey-react-ui";
 import { ActionButton } from "./ActionButton";
 import { CreatorModelElement } from "./ModelElement";
 
@@ -121,7 +121,7 @@ export class SurveyResultsByRow extends CreatorModelElement<any, any> {
               </span>
             ) : null}
 
-            <span>{this.row.title}</span>
+            {this.row.question ? <SurveyLocStringViewer locStr={this.row.question.locTitle} /> : <span>{this.row.title}</span>}
           </td>
           <td key={2} className={this.row.isNode ? "svd-test-results__node-value" : "svd-dark-border-color"}>
             {this.row.getString(this.row.displayValue)}

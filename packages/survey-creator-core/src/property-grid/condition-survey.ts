@@ -729,8 +729,8 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     if (!!panel.getQuestionByName("questionValue")) {
       panel.getQuestionByName("questionValue").clearValue();
     }
-    let json = this.getQuestionConditionJson(
-      panel.getQuestionByName("questionName").value,
+    const qName = panel.getQuestionByName("questionName").value;
+    let json = this.getQuestionConditionJson(qName,
       panel.getQuestionByName("operator").value
     );
     if (!json) {
@@ -759,6 +759,15 @@ export class ConditionEditor extends PropertyEditorSetupValue {
       newQuestion.description = "";
       newQuestion.titleLocation = "top";
       newQuestion.hasComment = false;
+      if(newQuestion.showOtherItem) {
+        const question = this.getConditionQuestion(qName);
+        if(question && question.getStoreOthersAsComment && question.getStoreOthersAsComment()) {
+          const other = newQuestion.otherItem;
+          newQuestion.choices.push(new ItemValue(other.value, other.title));
+          other.value = "#" + other.value + "#";
+          newQuestion.showOtherItem = false;
+        }
+      }
       panel.addElement(newQuestion);
     }
   }

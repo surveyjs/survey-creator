@@ -243,9 +243,7 @@ export var bgStrings = {
       uncompletedRule_title: "Сигурен ли си, че искаш да напуснеш раздела?",
       uncompletedRule_text: "Едно или повече логически правила са незавършени. Ако напуснеш раздела, тези промени, които не може да бъдат приложени, ще изчезнат. Сигурен ли си, че искаш да напуснеш раздела?",
       uncompletedRule_apply: "Да",
-      uncompletedRule_cancel: "Не, искам да попълня правилата.",
-      expressionSetup: "",
-      actionsSetup: ""
+      uncompletedRule_cancel: "Не, искам да попълня правилата."
     }
   },
   // Property Editors
@@ -1118,9 +1116,9 @@ export var bgStrings = {
     verticalAlignmentTop: "Връх",
     verticalAlignmentMiddle: "Среда",
     verticalAlignmentBottom: "Дъно",
-    logoPosition: "Позиция на емблемата",
+    logoPosition: "Позиция на логото",
     coverTitlePosition: "Позиция на заглавието",
-    coverDescriptionPosition: "Описание Позиция",
+    coverDescriptionPosition: "Описание позиция",
     names: {
       default: "По подразбиране",
       sharp: "Остър",
@@ -1244,9 +1242,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.verticalAlignmentTop: "Top" => "Връх"
 // theme.verticalAlignmentMiddle: "Middle" => "Среда"
 // theme.verticalAlignmentBottom: "Bottom" => "Дъно"
-// theme.logoPosition: "Logo Position" => "Позиция на емблемата"
-// theme.coverTitlePosition: "Title Position" => "Позиция на заглавието"
-// theme.coverDescriptionPosition: "Description Position" => "Описание Позиция"
 // lg.question_resetValueText: "reset value for question: {0}" => "нулиране на стойността за въпрос: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "присвояване на стойност: {1} на въпрос: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Нулиране на стойността на клетката за колона: {0}"
@@ -1283,3 +1278,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Автоматично мащабиране на областта за подписи"
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимална ширина на писалката"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимална ширина на перото"
+// theme.logoPosition: "Logo position" => "Позиция на логото"
+// theme.coverTitlePosition: "Title position" => "Позиция на заглавието"
+// theme.coverDescriptionPosition: "Description position" => "Описание позиция"

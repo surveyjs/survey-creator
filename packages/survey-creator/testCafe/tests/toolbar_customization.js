@@ -12,7 +12,7 @@ const initModifyToolbar = ClientFunction(() => {
     id: "custom-preview",
     visible: true,
     title: "Survey Preview",
-    action: function() {
+    action: function () {
       var testSurveyModel = new Survey.Model(creator.getSurveyJSON());
       testSurveyModel.render("surveyContainerInPopup");
       $("#modalSurvey").modal("show");
@@ -27,7 +27,7 @@ fixture`General: ${title}`.page`${url}`.beforeEach(async ctx => {
 });
 
 test(`check custom survey preview`, async t => {
-  const emptySurveyPlaceholder = "The survey doesn't contain visible pages or questions.";
+  const emptySurveyPlaceholder = "The survey doesn't contain any visible elements.";
 
   await t
     .expect(Selector("div").withText(emptySurveyPlaceholder).visible).notOk()

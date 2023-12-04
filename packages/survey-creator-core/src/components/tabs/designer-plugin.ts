@@ -130,7 +130,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.saveSurveyAction = new Action({
       id: "svd-save",
       iconName: "icon-save",
-      action: () => this.creator.doSave(),
+      action: () => this.creator.saveSurveyActionHandler(),
       active: false,
       enabled: false,
       visible: <any>new ComputedUpdater<boolean>(() => {

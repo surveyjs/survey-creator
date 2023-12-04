@@ -9,11 +9,14 @@ export class SurveyResultsItemModel extends Base {
   @property({ defaultValue: 0 }) lvl: number;
   @property() items: Array<any>;
 
-  constructor(private _data: any, private _lvl: number) {
+  constructor(private survey: Survey.SurveyModel, private _data: any, private _lvl: number) {
     super();
-    this.items = addCollapsed(_data.data, _lvl + 1);
+    this.question = survey.getQuestionByName(this.name);
+    this.items = addCollapsed(survey, _data.data, _lvl + 1);
     this.lvl = _lvl;
   }
+
+  public question: Survey.Question;
 
   get data(): Array<any> {
     return this.items;
@@ -25,7 +28,7 @@ export class SurveyResultsItemModel extends Base {
   public get isNode(): boolean {
     return this._data.isNode;
   }
-  public get name(): boolean {
+  public get name(): string {
     return this._data.name;
   }
   public get title(): string {
@@ -50,9 +53,9 @@ export class SurveyResultsItemModel extends Base {
   }
 }
 
-function addCollapsed(items: any[] = [], initLvl: number) {
+function addCollapsed(survey: Survey.SurveyModel, items: any[] = [], initLvl: number) {
   return items.filter((item) => !!item).map((item: any) => {
-    return new SurveyResultsItemModel(item, initLvl);
+    return new SurveyResultsItemModel(survey, item, initLvl);
   });
 }
 
@@ -61,7 +64,7 @@ export class SurveyResultsModel extends Base {
     super();
     this.resultText = JSON.stringify(survey.data, null, 4);
     var plainData = survey.getPlainData({ includeEmpty: false, includeValues: true });
-    this.resultData = addCollapsed(plainData, 0);
+    this.resultData = addCollapsed(survey, plainData, 0);
   }
 
   @property({ defaultValue: "table" }) resultViewType: string;

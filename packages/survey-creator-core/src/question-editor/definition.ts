@@ -97,6 +97,12 @@ export class SurveyQuestionEditorDefinition {
         "fileOrPhotoPlaceholder"
       ]
     },
+    signaturepad: {
+      properties: [
+        "waitForUpload",
+        { name: "storeDataAsText" },
+      ]
+    },
     html: {
       properties: ["html"]
     },

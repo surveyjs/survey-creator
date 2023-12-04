@@ -29,6 +29,9 @@ export class SurveyPageNavigator extends CreatorModelElement<
     this.containerRef = React.createRef();
   }
   protected createModel(): void {
+    if (this.model) {
+      this.model.dispose();
+    }
     this.model = new PageNavigatorViewModel(
       this.props.pagesController,
       this.props.pageEditMode
@@ -67,9 +70,9 @@ export class SurveyPageNavigator extends CreatorModelElement<
     const el = this.containerRef.current;
     if (!!el) {
       el.parentElement.parentElement.parentElement.onscroll = undefined;
-      this.model.stopItemsContainerHeightObserver();
     }
-    this.model.dispose();
+    this.model.stopItemsContainerHeightObserver();
+    this.model.setScrollableContainer(undefined);
   }
   renderElement(): JSX.Element {
     let className = "svc-page-navigator__selector";

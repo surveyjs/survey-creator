@@ -112,6 +112,7 @@ export var enStrings = {
     toolbox: "Toolbox",
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
+    propertyGridNoResultsFound: "No results found",
     toolboxGeneralCategory: "General",
     toolboxChoiceCategory: "Choice Questions",
     toolboxTextCategory: "Text Input Questions",
@@ -245,9 +246,7 @@ export var enStrings = {
       uncompletedRule_title: "Logical rules are incomplete",
       uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?",
       uncompletedRule_apply: "Yes",
-      uncompletedRule_cancel: "No, I want to complete the rules",
-      expressionSetup: "",
-      actionsSetup: ""
+      uncompletedRule_cancel: "No, I want to complete the rules"
     }
   },
   // Property Editors
@@ -1119,9 +1118,9 @@ export var enStrings = {
     verticalAlignmentTop: "Top",
     verticalAlignmentMiddle: "Middle",
     verticalAlignmentBottom: "Bottom",
-    logoPosition: "Logo Position",
-    coverTitlePosition: "Title Position",
-    coverDescriptionPosition: "Description Position",
+    logoPosition: "Logo position",
+    coverTitlePosition: "Title position",
+    coverDescriptionPosition: "Description position",
     names: {
       "default": "Default",
       "sharp": "Sharp",

@@ -199,3 +199,30 @@ test("Property Grid and adding a validator in the code, Bug#4882", () => {
   q1.validators.push(new RegexValidator(""));
   expect(validatorsQuestion.visibleRows).toHaveLength(1);
 });
+test("overridingProperty affects LogoImageViewModel allowEdit", () => {
+  Serializer.addProperty("survey", {
+    name: "logoToggle:boolean",
+    category: "logo",
+    visibleIndex: 0
+  });
+  Serializer.findProperty("survey", "logo").overridingProperty = "logoToggle";
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const logoEditor = new LogoImageViewModel(creator, null as any);
+
+  expect(creator.survey["logoToggle"]).toBeFalsy();
+  expect(logoEditor.allowEdit).toBeTruthy();
+
+  creator.survey["logoToggle"] = true;
+  expect(logoEditor.allowEdit).toBeFalsy();
+
+  Serializer.findProperty("survey", "logo").overridingProperty = "";
+
+  expect(creator.survey["logoToggle"]).toBeTruthy();
+  expect(logoEditor.allowEdit).toBeTruthy();
+
+  creator.readOnly = true;
+  expect(logoEditor.allowEdit).toBeFalsy();
+
+  Serializer.removeProperty("survey", "logoToggle");
+});

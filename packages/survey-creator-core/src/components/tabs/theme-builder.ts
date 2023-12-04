@@ -105,14 +105,6 @@ export class ThemeBuilder extends Base {
     return (_themeName || this.themeName) + "-" + this.themePalette;
   }
 
-  public get activeLanguage(): string {
-    return this.getPropertyValue("activeLanguage", this.survey.locale || surveyLocalization.defaultLocale);
-  }
-  public set activeLanguage(val: string) {
-    if (val === this.activeLanguage) return;
-    this.setPropertyValue("activeLanguage", val);
-    this.survey.locale = val;
-  }
   public get survey(): SurveyModel {
     return this.simulator.survey;
   }
@@ -134,8 +126,8 @@ export class ThemeBuilder extends Base {
   }
 
   public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
-  public onThemeModified = new EventBase<ThemeBuilder, { name: string, value: any }>();
-  public onCanModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, canModify: boolean }>();
+  public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
 
   constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
     super();
@@ -148,7 +140,7 @@ export class ThemeBuilder extends Base {
     this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
     this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
     this.loadTheme(this.surveyProvider.theme);
-    this.surveyProvider.isThemeModified = false;
+    this.surveyProvider.hasPendingThemeChanges = false;
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
   }
@@ -200,8 +192,16 @@ export class ThemeBuilder extends Base {
     }
   }
 
+  private _defaultSessionTheme = ThemeBuilder.DefaultTheme;
+  public get defaultSessionTheme() {
+    return this._defaultSessionTheme;
+  }
+  public set defaultSessionTheme(theme: ITheme) {
+    this._defaultSessionTheme = theme;
+  }
+
   public resetTheme() {
-    this.setTheme({});
+    this.setTheme({ themeName: this.defaultSessionTheme.themeName, isPanelless: this.defaultSessionTheme.isPanelless, colorPalette: this.defaultSessionTheme.colorPalette });
   }
 
   public setTheme(theme: ITheme) {
@@ -214,7 +214,7 @@ export class ThemeBuilder extends Base {
     this.themeModified({ theme });
   }
 
-  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panelless") {
+  public selectTheme(themeName: string, themePalette: string = "light", themeMode: string = "panels") {
     this.themeName = themeName;
     this.themePalette = themePalette;
     this.themeMode = themeMode;
@@ -232,6 +232,7 @@ export class ThemeBuilder extends Base {
       component: "svc-complete-page",
       data: this
     });
+    newSurvey.locale = json.locale;
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
@@ -339,7 +340,6 @@ export class ThemeBuilder extends Base {
   public show() {
     this.showInvisibleElements = false;
     this.activePage = this.survey.activePage;
-    this.survey.locale = this.activeLanguage;
     this.isRunning = true;
   }
 
@@ -422,6 +422,7 @@ export class ThemeBuilder extends Base {
       if (availebleThemes.indexOf(themeChooser.value) === -1) {
         themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
       }
+      this.updatePropertyGridEditorsAvailability();
     }
   }
 
@@ -645,7 +646,7 @@ export class ThemeBuilder extends Base {
   }
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
-    return findSuitableTheme(themeName, probeThemeFullName);
+    return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
@@ -762,18 +763,34 @@ export class ThemeBuilder extends Base {
   }
   private updatePropertyGridEditorsAvailability() {
     const isCustomTheme = PredefinedThemes.indexOf(this.themeName) === -1;
-    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme;
-    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme;
+    let customThemeHasModeVariations = false;
+    let customThemeHasPaletteVariations = false;
+    if (isCustomTheme) {
+      const registeredThemes = Object.keys(Themes);
+      let themeLight = this.themeName + "-light";
+      let themeDark = this.themeName + "-dark";
+      if (this.themeMode !== "panels") {
+        themeLight += "-panelless";
+        themeDark += "-panelless";
+      }
+      customThemeHasPaletteVariations = registeredThemes.indexOf(themeLight) !== -1 && registeredThemes.indexOf(themeDark) !== -1;
+
+      let themePanels = this.themeName + "-" + this.themePalette;
+      let themePanelless = themePanels + "-panelless";
+      customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
+    }
+    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme && !customThemeHasModeVariations;
+    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme && !customThemeHasPaletteVariations;
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {
       theme: this.currentTheme,
-      canModify
+      allow: canModify
     };
-    this.onCanModifyTheme.fire(this, options);
+    this.onAllowModifyTheme.fire(this, options);
     this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
-        q.readOnly = !options.canModify;
+        q.readOnly = !options.allow;
       }
     });
 
@@ -853,7 +870,7 @@ export class ThemeBuilder extends Base {
   protected processAutoSave() {
     let saveThemeFunc = this.saveThemeFunc;
     if (!saveThemeFunc && this.surveyProvider.saveThemeFunc) {
-      saveThemeFunc = () => this.surveyProvider.doSaveTheme();
+      saveThemeFunc = () => this.surveyProvider.saveTheme();
     }
     if (!saveThemeFunc) {
       return;
@@ -877,8 +894,8 @@ export class ThemeBuilder extends Base {
       if (!!options["theme"]) {
         this.onThemeSelected.fire(this, options as { theme: ITheme });
       } else {
-        this.surveyProvider.isThemeModified = true;
-        this.onThemeModified.fire(this, options as { name: string, value: any });
+        this.surveyProvider.hasPendingThemeChanges = true;
+        this.onThemePropertyChanged.fire(this, options as { name: string, value: any });
       }
       if (this.surveyProvider.isAutoSave) {
         this.processAutoSave();
@@ -889,14 +906,15 @@ export class ThemeBuilder extends Base {
   private getDefaultTitleSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
     if (isAdvanced) {
-      result["color"] = "rgba(0, 0, 0, 0.91)";
+      result["color"] = "rgba(255, 255, 255, 1)";
     }
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
     if (isAdvanced) {
-      result["color"] = "rgba(0, 0, 0, 0.45)";
+      result["color"] = "rgba(255, 255, 255, 1)";
+      result["weight"] = "600";
     }
     return result;
   }
@@ -970,7 +988,7 @@ export class ThemeBuilder extends Base {
                   {
                     "headerView": "basic",
                     "logoPosition": "right",
-                    "inheritWidthFrom": "survey",
+                    "inheritWidthFrom": "container",
                     "backgroundColorSwitch": "accentColor",
                     "backgroundImageFit": "cover",
                     "backgroundImageOpacity": 100,

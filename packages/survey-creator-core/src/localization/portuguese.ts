@@ -243,9 +243,7 @@ var portugueseTranslation = {
       uncompletedRule_title: "As regras lógicas estão incompletas",
       uncompletedRule_text: "Você não concluiu algumas das regras lógicas. Se você sair da guia agora, as alterações serão perdidas. Você ainda deseja sair da guia sem concluir as alterações?",
       uncompletedRule_apply: "Sim",
-      uncompletedRule_cancel: "Não, quero completar as regras",
-      expressionSetup: "configuração de expressão",
-      actionsSetup: "configuração de ação"
+      uncompletedRule_cancel: "Não, quero completar as regras"
     }
   },
   // Property Editors
@@ -1119,8 +1117,8 @@ var portugueseTranslation = {
     verticalAlignmentMiddle: "Meio",
     verticalAlignmentBottom: "Fundo",
     logoPosition: "Posição do logotipo",
-    coverTitlePosition: "Posição do Título",
-    coverDescriptionPosition: "Descrição Posição",
+    coverTitlePosition: "Posição do título",
+    coverDescriptionPosition: "Descrição da posição",
     names: {
       default: "Inadimplência",
       sharp: "Afiado",
@@ -1349,8 +1347,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // theme.verticalAlignmentMiddle: "Middle" => "Meio"
 // theme.verticalAlignmentBottom: "Bottom" => "Fundo"
 // theme.logoPosition: "Logo Position" => "Posição do logotipo"
-// theme.coverTitlePosition: "Title Position" => "Posição do Título"
-// theme.coverDescriptionPosition: "Description Position" => "Descrição Posição"
 // lg.question_resetValueText: "reset value for question: {0}" => "redefinir valor da pergunta: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "atribuir valor: {1} à pergunta: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Redefinir o valor da célula para a coluna: {0}"
@@ -1388,3 +1384,5 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Dimensionar automaticamente a área de assinatura"
 // signaturepad.penMinWidth: "Minimum pen width" => "Largura mínima da caneta"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Largura máxima da caneta"
+// theme.coverTitlePosition: "Title position" => "Posição do título"
+// theme.coverDescriptionPosition: "Description position" => "Descrição da posição"

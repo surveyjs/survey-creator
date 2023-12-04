@@ -100,6 +100,10 @@
         {
           "Name": "iquestiontoolboxitem",
           "Title": "Toolbox Item"
+        },
+        {
+          "Name": "themetabplugin",
+          "Title": "ThemeTabPlugin"
         }
       ]
     }

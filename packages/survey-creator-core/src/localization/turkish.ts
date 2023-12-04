@@ -243,9 +243,7 @@ export var turkishStrings = {
       uncompletedRule_title: "Mantıksal kurallar eksik",
       uncompletedRule_text: "Bazı mantıksal kuralları tamamlamadınız. Sekmeyi şimdi bırakırsanız, değişiklikler kaybolur. Yine de değişiklikleri tamamlamadan sekmeden çıkmak istiyor musunuz?",
       uncompletedRule_apply: "Evet",
-      uncompletedRule_cancel: "Hayır, kuralları tamamlamak istiyorum",
-      // expressionSetup: "",
-      // actionsSetup: ""
+      uncompletedRule_cancel: "Hayır, kuralları tamamlamak istiyorum"
     }
   },
   // Property Editors
@@ -1118,9 +1116,9 @@ export var turkishStrings = {
     verticalAlignmentTop: "Sayfanın Üstü",
     verticalAlignmentMiddle: "Orta",
     verticalAlignmentBottom: "Dip",
-    logoPosition: "Logo Konumu",
-    coverTitlePosition: "Unvan Pozisyonu",
-    coverDescriptionPosition: "Açıklama Pozisyon",
+    logoPosition: "Logo konumu",
+    coverTitlePosition: "Unvan pozisyonu",
+    coverDescriptionPosition: "Açıklama konumu",
     names: {
       default: "Temerrüt",
       sharp: "Keskin",
@@ -1218,8 +1216,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "Bazı mantıksal kuralları tamamlamadınız. Sekmeyi şimdi bırakırsanız, değişiklikler kaybolur. Yine de değişiklikleri tamamlamadan sekmeden çıkmak istiyor musunuz?"
 // lg.uncompletedRule_apply: "Yes" => "Evet"
 // lg.uncompletedRule_cancel: "No, I want to complete the rules" => "Hayır, kuralları tamamlamak istiyorum"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.clear: "Clear" => "Berrak"
 // pe.saveTooltip: "Save" => "Kurtarmak"
 // pe.set: "Set" => "Ayarlamak"
@@ -1627,8 +1623,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // colors.tulip: "Tulip" => "Lale"
 // colors.brown: "Brown" => "Kahverengi"
 // colors.green: "Green" => "Yeşil"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // names.sharp: "Sharp" => "Keskin"
 // names.borderless: "Borderless" => "Kenarlıksız"
 // names.flat: "Flat" => "Düz"
@@ -1638,13 +1632,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // names.threedimensional: "3D" => ".3D"
 // ed.translationDeleteLanguage: "Are you certain you wish to delete all strings for this language?" => "Bu dil için tüm dizeleri silmek istediğinizden emin misiniz?"
 // ed.themeResetButton: "Reset theme settings to default" => "Tema ayarlarını varsayılana sıfırla"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.placeholderColor: "Placeholder color" => "Yer tutucu rengi"
 // ed.themeSettings: "Theme Settings" => "Tema Ayarları"
 // ed.themeSettingsTooltip: "Open theme settings" => "Tema ayarlarını açma"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.resetToDefaultCaption: "Reset" => "Sıfırlama"
 // pv.file: "Local files" => "Yerel dosyalar"
 // pv.camera: "Camera" => "Kamera"
@@ -1654,8 +1644,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "Lütfen en az {0} ürün girin"
 // lg.question_resetValueName: "Reset question value" => "Soru değerini sıfırla"
 // lg.column_resetValue: "Reset column value" => "Sütun değerini sıfırla"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.markRequired: "Mark as required" => "Gerektiği gibi işaretleyin"
 // pe.removeRequiredMark: "Remove the required mark" => "Gerekli işareti kaldırın"
 // p.resetValueIf: "Reset value if" => "Sıfırlama değeri"
@@ -1663,8 +1651,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // lg.column_resetValueName: "Reset column value" => "Sütun değerini sıfırla"
 // lg.column_setValueName: "Set column value" => "Sütun değerini ayarla"
 // lg.setValueExpressionPlaceholder: " An expression whose result will be assigned to the target question." => " Sonucu hedef soruya atanacak bir ifade."
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // survey.title: "Title" => "Başlık"
 // page.title: "Title" => "Başlık"
 // p.setValueIf: "Set value if" => "Değeri ayarla"
@@ -1690,20 +1676,13 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.verticalAlignmentTop: "Top" => "Sayfanın Üstü"
 // theme.verticalAlignmentMiddle: "Middle" => "Orta"
 // theme.verticalAlignmentBottom: "Bottom" => "Dip"
-// theme.logoPosition: "Logo Position" => "Logo Konumu"
-// theme.coverTitlePosition: "Title Position" => "Unvan Pozisyonu"
-// theme.coverDescriptionPosition: "Description Position" => "Açıklama Pozisyon"
 // lg.question_resetValueText: "reset value for question: {0}" => "Soru için sıfırlama değeri: {0}"
 // lg.question_setValueText: "assign value: {1} to question: {0}" => "Değer atayın: Soruya {1}: {0}"
 // lg.column_resetValueText: "reset cell value for column: {0}" => "Sütun için hücre değerini sıfırla: {0}"
 // lg.column_setValueText: "assign cell value: {1} to column: {0}" => "Hücre değeri atayın: Sütuna {1}: {0}"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // ed.surveyJsonExportButton: "Export" => "Ihracat"
 // ed.surveyJsonImportButton: "Import" => "Ithalat"
 // ed.surveyJsonCopyButton: "Copy to clipboard" => "Panoya kopyala"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // pe.filePlaceholder: "File placeholder text" => "Dosya yer tutucu metni"
 // pe.photoPlaceholder: "Photo placeholder text" => "Fotoğraf yer tutucu metni"
 // pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "Dosya veya fotoğraf yer tutucu metni"
@@ -1715,14 +1694,10 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Temayı gerçekten sıfırlamak istiyor musunuz? Tüm özelleştirmeleriniz kaybolacak."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Evet, temayı sıfırlayın"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // theme.groupBackground: "Background" => "Arka plan"
 // theme.groupAppearance: "Appearance" => "Görünüş"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Açıklama ön renk"
 // theme.coverInheritWidthFromContainer: "Fit to container" => "Konteynere sığdır"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.showPlaceholder: "Show the placeholder" => "Yer tutucuyu gösterme"
 // signaturepad.placeholder: "Placeholder text" => "Yer tutucu metin"
 // theme.surveyDescription: "Survey description font" => "Anket açıklaması yazı tipi"
@@ -1732,10 +1707,11 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.saveThemeTooltip: "Save Theme" => "Temayı Kaydet"
 // lg.page_requireName: "Make page required" => "Sayfayı gerekli hale getirme"
 // lg.panel_requireName: "Make page required" => "Sayfayı gerekli hale getirme"
-// lg.expressionSetup: "" => ""
-// lg.actionsSetup: "" => ""
 // signaturepad.signatureWidth: "Signature area width" => "İmza alanı genişliği"
 // signaturepad.signatureHeight: "Signature area height" => "İmza alanı yüksekliği"
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "İmza alanını otomatik ölçeklendirme"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimum kalem genişliği"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimum kalem genişliği"
+// theme.logoPosition: "Logo position" => "Logo konumu"
+// theme.coverTitlePosition: "Title position" => "Unvan pozisyonu"
+// theme.coverDescriptionPosition: "Description position" => "Açıklama konumu"

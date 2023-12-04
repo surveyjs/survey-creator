@@ -145,6 +145,8 @@ export class CreatorBase extends Base
    * Specifies whether to display the Themes tab.
    *
    * Default value: `false`
+   * 
+   * Use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) object to manage UI themes available in the Themes tab.
    * @see activeTab
    * @see saveThemeFunc
    */
@@ -281,6 +283,10 @@ export class CreatorBase extends Base
   public get toolbar(): ActionContainer {
     return this.toolbarValue;
   }
+  protected _findAction(id: string): Action {
+    return this.toolbarItems.filter(a => a.id === id)[0];
+  }
+
   public dragDropSurveyElements: DragDropSurveyElements;
   public dragDropChoices: DragDropChoices;
 
@@ -1084,20 +1090,26 @@ export class CreatorBase extends Base
    * 
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
-   * - `options.target`: `IElement`\
+   * - `options.draggedElement`: `IElement`\
    * A survey element being dragged.
-   * - `options.source`: `IElement`\
-   * A survey element from which `target` is being dragged. This parameter is `null` if `target` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   * - `options.fromElement`: `IElement`\
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   * - `options.toElement`: `IElement`\
+   * A survey element to which `draggedElement` is being dragged.
    * - `options.insertBefore`: `IElement`\
-   * A survey element before which the target element will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if the target element will be placed below all other elements within the container.
+   * A survey element before which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed below all other elements within the container.
    * - `options.insertAfter`: `IElement`\
-   * A survey element after which `target` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `target` will be placed above all other elements within the container.
+   * A survey element after which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed above all other elements within the container.
    * - `options.parent`: `ISurveyElement`\
-   * A parent container (page or panel) within which `target` will be placed.
+   * A parent container (page or panel) within which `draggedElement` will be placed.
    * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
    * A survey within which the drag and drop operation occured.
    * - `options.allow`: `boolean`\
    * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
+   * - `options.target`: `IElement`\
+   * Obsolete. Use `options.draggedElement` instead.
+   * - `options.source`: `IElement`\
+   * Obsolete. Use `options.toElement` instead.
    * @see onDragStart
    * @see onDragEnd
    */
@@ -1226,10 +1238,20 @@ export class CreatorBase extends Base
   //#region Theme
 
   /**
+   * An object that enables you to manage UI themes. Refer to the following API section for information on available properties, methods, and events: [`ThemeTabPlugin`](https://surveyjs.io/survey-creator/documentation/api-reference/themetabplugin).
+   * @see showThemeTab
+   * @see saveThemeFunc
+   */
+  get themeEditor(): ThemeTabPlugin {
+    return this.getPlugin<ThemeTabPlugin>("theme");
+  }
+
+  /**
    * A function that is called each time users click the [Save button](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) or [auto-save](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#isAutoSave) is triggered to save a theme JSON object.
    * 
    * For more information, refer to the [Save and Load Custom Themes](https://surveyjs.io/survey-creator/documentation/theme-editor#save-and-load-custom-themes) help topic.
    * @see showThemeTab
+   * @see themeEditor
    * @see saveSurveyFunc
    */
   public get saveThemeFunc() {
@@ -1239,20 +1261,20 @@ export class CreatorBase extends Base
     this.saveThemeFuncValue = value;
   }
 
-  public isThemeModified: boolean = false;
+  public hasPendingThemeChanges: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
   public get theme(): ITheme {
     return this._theme;
   }
   public set theme(newTheme: ITheme) {
     this._theme = newTheme;
-    this.isThemeModified = true;
+    this.hasPendingThemeChanges = true;
     if (this.activeTab !== "theme") {
       this.updatePlugin(this.activeTab);
     }
   }
 
-  public doSaveTheme() {
+  private _doSaveThemeCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveThemeFunc) {
       this.saveNo++;
@@ -1260,14 +1282,30 @@ export class CreatorBase extends Base
         if (this.saveNo !== no) return;
         if (isSuccess) {
           this.setState("saved");
-          this.isThemeModified = false;
+          this.hasPendingThemeChanges = false;
         } else {
           this.setState("modified");
           if (this.showErrorOnFailedSave) {
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
+    }
+  }
+  /**
+   * Calls the [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function to save the theme JSON schema.
+   * @see saveSurvey
+   * @see save
+   */
+  public saveTheme() {
+    this._doSaveThemeCore();
+  }
+  public saveThemeActionHandler() {
+    if (this.syncSaveButtons) {
+      this.save();
+    } else {
+      this.saveTheme();
     }
   }
 
@@ -1546,6 +1584,7 @@ export class CreatorBase extends Base
     this.updateToolboxIsCompact();
     this.initTabs();
     this.initDragDrop();
+    this.syncSaveButtons = this.options.saveSurveyAndTheme !== undefined ? this.options.saveSurveyAndTheme : this.options.syncSaveButtons;
     this.isTouch = IsTouch;
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
@@ -1934,12 +1973,10 @@ export class CreatorBase extends Base
     return this.surveyValue;
   }
   private existingPages: {};
-  private isInitialSurveyEmptyValue: boolean;
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.
    * @returns true if initial survey doesn't have any elements or properties
    */
-  public get isInitialSurveyEmpty(): boolean { return this.isInitialSurveyEmptyValue; }
   protected initSurveyWithJSON(json: any, clearState: boolean): void {
     if (!json) {
       json = { "logoPosition": "right" };
@@ -1952,7 +1989,6 @@ export class CreatorBase extends Base
     survey.setDesignMode(true);
     survey.lazyRendering = true;
     survey.setJsonObject(json);
-    this.isInitialSurveyEmptyValue = survey.isEmpty;
     if (survey.isEmpty) {
       survey.setJsonObject(this.getDefaultSurveyJson());
     }
@@ -2005,7 +2041,7 @@ export class CreatorBase extends Base
    * - `options.draggedElement`: `any`\
    * A survey element being dragged.
    * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` is being dragged.
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
    * - `options.toElement`: `any`\
    * A survey element to which `draggedElement` is being dragged.
    * @see onDragEnd
@@ -2023,7 +2059,7 @@ export class CreatorBase extends Base
    * - `options.draggedElement`: `any`\
    * A survey element that was dragged.
    * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` was dragged.
+   * A survey element from which `draggedElement` was dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
    * - `options.toElement`: `any`\
    * A survey element to which `draggedElement` was dragged.
    * @see onDragStart
@@ -2325,17 +2361,14 @@ export class CreatorBase extends Base
     this.onStateChanged.fire(this, { val: value });
     if (!!value) {
       this.notify(this.getLocString("ed." + value));
-      const actions = this.toolbarItems.filter(a => a.id === "svd-save");
-      if (Array.isArray(actions) && actions.length > 0) {
-        actions[0].enabled = this.state === "modified";
-        actions[0].active = this.state === "modified";
-      }
+      this._updateSaveActions();
     }
   }
   public onStateChanged: CreatorEvent = new CreatorEvent();
 
   notifier = new Notifier({
     root: "svc-notifier",
+    rootWithButtons: "",
     info: "svc-notifier--info",
     error: "svc-notifier--error",
     success: "svc-notifier--success",
@@ -2557,7 +2590,7 @@ export class CreatorBase extends Base
       this.newQuestionChangedNames[element.name] = newName;
       element.name = newName;
     }
-    if (element.isPanel || elType == "page") {
+    if (element.isPanel || element.isPage) {
       if (element.isPanel) {
         this.newPanels.push(element);
       }
@@ -2668,9 +2701,9 @@ export class CreatorBase extends Base
       this.survey.removePage(obj);
       this.selectElement(!!newPage ? newPage : this.survey);
     } else {
-      if (this.isInitialSurveyEmpty && this.survey.pageCount === 1) {
+      if (this.survey.pageCount === 1) {
         const page = this.survey.pages[0];
-        if (page.elements.length === 1 && obj === page.elements[0]) {
+        if (page.elements.length === 1 && obj === page.elements[0] && !SurveyHelper.isPagePropertiesAreModified(page)) {
           this.deleteObjectCore(page);
           return;
         }
@@ -3005,7 +3038,8 @@ export class CreatorBase extends Base
       rootNode.removeEventListener("keydown", this.onKeyDownHandler);
     }
   }
-  protected onKeyDownHandler = (event: KeyboardEvent) => {
+  public findSuitableShortcuts(event: KeyboardEvent): IKeyboardShortcut[] {
+    const shortcuts: IKeyboardShortcut[] = [];
     const availableShortcuts = Object.keys(this.shortcuts || {})
       .map((key) => this.shortcuts[key])
       .filter((shortcut: IKeyboardShortcut) => !shortcut.affectedTab || shortcut.affectedTab === this.activeTab);
@@ -3017,8 +3051,14 @@ export class CreatorBase extends Base
       if (!!hotKey.ctrlKey !== !!event.ctrlKey) return;
       if (!!hotKey.shiftKey !== !!event.shiftKey) return;
       if (hotKey.keyCode !== event.keyCode) return;
-      if (hotKey.keyCode < 48 && isTextInput(event.target)) return;
-      shortcut.execute(this.selectElement);
+      shortcuts.push(shortcut);
+    });
+    return shortcuts;
+  }
+  protected onKeyDownHandler = (event: KeyboardEvent) => {
+    this.findSuitableShortcuts(event).forEach((shortcut: IKeyboardShortcut) => {
+      if ((event.keyCode < 48 || event.keyCode == 89 || event.keyCode == 90) && isTextInput(event.target)) return;
+      shortcut.execute(this.selectedElement);
     });
   }
   private shortcuts: { [index: string]: IKeyboardShortcut } = {};
@@ -3036,7 +3076,7 @@ export class CreatorBase extends Base
     if (objIndex == elements.length - 1) {
       objIndex--;
     }
-    if (this.pageEditMode === "single" && parent.getType() === "page") {
+    if (this.pageEditMode === "single" && parent.isPage) {
       parent = this.survey;
     }
     if (obj["questions"]) {
@@ -3420,7 +3460,7 @@ export class CreatorBase extends Base
     }, this.autoSaveDelay);
   }
   saveNo: number = 0;
-  public doSave() {
+  private _doSaveCore(onSaveComplete?: () => void) {
     this.setState("saving");
     if (this.saveSurveyFunc) {
       this.saveNo++;
@@ -3434,13 +3474,111 @@ export class CreatorBase extends Base
             this.notify(this.getLocString("ed.saveError"), "error");
           }
         }
+        onSaveComplete && onSaveComplete();
       });
+    }
+  }
+  /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) function to save the survey JSON schema.
+   * @see saveTheme
+   * @see save
+   */
+  public saveSurvey() {
+    this._doSaveCore();
+  }
+  public doSave() {
+    this._doSaveCore();
+  }
+  public saveSurveyActionHandler() {
+    if (this.syncSaveButtons) {
+      this.save();
+    } else {
+      this.saveSurvey();
+    }
+  }
+
+  private _updateSaveActions() {
+    const action = this._findAction("svd-save");
+    if (action) {
+      action.enabled = this.state === "modified";
+      action.active = this.state === "modified";
+    }
+    if (this.syncSaveButtons) {
+      const action = this._findAction("svd-save-theme");
+      if (action) {
+        action.enabled = this.hasPendingThemeChanges;
+        action.active = this.hasPendingThemeChanges;
+      }
     }
   }
 
   /**
+   * Calls the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) and [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) functions to save the survey and theme JSON schemas.
+   * @see saveSurvey
+   * @see saveTheme
+   */
+  public save() {
+    const themeSaveHandler = () => {
+      if (this.hasPendingThemeChanges) {
+        this._doSaveThemeCore(() => {
+          this._updateSaveActions();
+        });
+      }
+    };
+    if (this.state === "modified") {
+      this._doSaveCore(() => {
+        themeSaveHandler();
+      });
+    } else themeSaveHandler();
+  }
+
+  protected _syncSaveActions = (sender: any, options: any) => {
+    const saveAction = this._findAction("svd-save");
+    const saveThemeAction = this._findAction("svd-save-theme");
+    if (!saveAction || !saveThemeAction) {
+      return;
+    }
+    if (sender === this) {
+      saveThemeAction.enabled = saveAction.enabled;
+    } else {
+      saveAction.enabled = saveThemeAction.enabled;
+    }
+  }
+
+  /**
+   * Specifies whether to synchronize [Save buttons](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSaveButton) in the Designer and Themes tabs.
+   * 
+   * Default value: `false`
+   * 
+   * When this property is disabled, the Save button in the Designer tab saves only the survey JSON schema, while the Save button in the Themes tab saves only the theme JSON schema. If you enable this property, both buttons will save both JSON schemas.
+   * @see saveSurveyFunc
+   * @see saveThemeFunc
+   * @see save
+   */
+  @property({
+    defaultValue: false, onSet(val, target: CreatorBase) {
+      let themeTabPlugin: ThemeTabPlugin = target.getPlugin<ThemeTabPlugin>("theme");
+      if (!themeTabPlugin) {
+        return;
+      }
+      if (val) {
+        target.onModified.add(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.add(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.add(target._syncSaveActions);
+      } else {
+        target.onModified.remove(target._syncSaveActions);
+        themeTabPlugin.onThemePropertyChanged.remove(target._syncSaveActions);
+        themeTabPlugin.onThemeSelected.remove(target._syncSaveActions);
+      }
+    },
+  }) syncSaveButtons: boolean;
+
+  /**
    * Specifies whether to display a button that saves the survey or theme (executes the [`saveSurveyFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveSurveyFunc) or [`saveThemeFunc`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#saveThemeFunc) function).
+   * 
+   * Default value: `false`
    * @see isAutoSave
+   * @see syncSaveButtons
    */
   @property({ defaultValue: false }) showSaveButton: boolean;
 

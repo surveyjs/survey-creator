@@ -7,7 +7,9 @@
                          [style.left]="model.markerMargin">
             <svg [iconName]="'icon-expand_16x16'" [size]="16" sv-ng-svg-icon></svg>
         </span>
-        <span >{{model.title}}</span></td>
+        <sv-ng-string *ngIf="model.question" [model]="model.question.locTitle"></sv-ng-string>
+        <span *ngIf="!model.question">{{model.title}}</span>
+    </td>
     <td [class.svd-test-results__node-value]="model.isNode" [class.svd-dark-border-color]="!model.isNode">
       {{model.getString(model.displayValue)}}
     </td>

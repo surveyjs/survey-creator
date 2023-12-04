@@ -185,7 +185,7 @@ class StringItemsNavigatorMatrixDynamic extends StringItemsNavigatorMatrixDropdo
   }
 }
 
-export class StringEditorConnector extends Base {
+export class StringEditorConnector {
   public static get(locString: LocalizableString): StringEditorConnector {
     if (!locString["_stringEditorConnector"]) locString["_stringEditorConnector"] = new StringEditorConnector(locString);
     return locString["_stringEditorConnector"];
@@ -203,7 +203,6 @@ export class StringEditorConnector extends Base {
   public onEditComplete: EventBase<StringEditorViewModelBase, any> = new EventBase<StringEditorViewModelBase, any>();
   public onBackspaceEmptyString: EventBase<StringEditorViewModelBase, any> = new EventBase<StringEditorViewModelBase, any>();
   constructor(private locString: LocalizableString) {
-    super();
   }
 }
 export class StringEditorViewModelBase extends Base {
@@ -233,9 +232,15 @@ export class StringEditorViewModelBase extends Base {
     }
   }
 
+  public detachFromUI() {
+    this.connector?.onDoActivate.remove(this.activate);
+    this.getEditorElement = undefined;
+    this.blurEditor = undefined;
+  }
+
   public dispose(): void {
     super.dispose();
-    this.connector.onDoActivate.remove(this.activate);
+    this.detachFromUI();
   }
 
   public activate = () => {
@@ -249,7 +254,8 @@ export class StringEditorViewModelBase extends Base {
   }
 
   public setLocString(locString: LocalizableString) {
-    this.connector?.onDoActivate.clear();
+    this.connector?.onDoActivate.remove(this.activate);
+    this.locString = locString;
     this.connector = StringEditorConnector.get(locString);
     this.connector.onDoActivate.add(this.activate);
   }

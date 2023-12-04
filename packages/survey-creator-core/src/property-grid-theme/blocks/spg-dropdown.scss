@@ -2,7 +2,7 @@
     border-radius: 0;
     display: flex;
     padding-right: calcSize(5.5);
-    line-height: normal;
+    line-height: calcSize(3);
     background-position: right calcSize(1.625) top 50%, 0 0;
 }
 
