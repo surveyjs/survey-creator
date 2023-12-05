@@ -2883,3 +2883,22 @@ test("Allow to enter one space into question title #4416", () => {
   const titleQuestion2 = <QuestionMatrixDynamicModel>(propertyGrid2.survey.getQuestionByName("title"));
   expect(titleQuestion2.value).toBe(" ");
 });
+test("Do not allow to enter undefined or '' to number type", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choicesMin = 1;
+  question.choicesMax = 5;
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const choicesMinQuestion = <QuestionTextModel>(propertyGrid.survey.getQuestionByName("choicesMin"));
+  expect(choicesMinQuestion.inputType).toBe("number");
+  expect(choicesMinQuestion.value).toBe(1);
+  choicesMinQuestion.value = undefined;
+  expect(question.choicesMin).toBe(0);
+  expect(choicesMinQuestion.value).toBe(0);
+  choicesMinQuestion.value = 2;
+  expect(question.choicesMin).toBe(2);
+  expect(choicesMinQuestion.value).toBe(2);
+  choicesMinQuestion.value = "";
+  expect(question.choicesMin).toBe(0);
+  expect(choicesMinQuestion.value).toBe(0);
+});
