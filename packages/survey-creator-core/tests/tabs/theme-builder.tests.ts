@@ -2679,17 +2679,17 @@ test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
-    const defaultValueElement = sender.model.themeEditorSurvey.findQuestionByName("questionTitle")["defaultValue"];
+    const defaultValueElement = options.themeEditorSurvey.findQuestionByName("questionTitle")["defaultValue"];
 
     const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
-    options.addEditorIntoPropertyGridAfterQuestion(newFontSettings, "questionTitle");
+    options.themeBuilder.addEditorIntoPropertyGridAfterQuestion(newFontSettings, "questionTitle");
     newFontSettings.title = "Question title font";
     newFontSettings.value = defaultValueElement;
 
-    options.removeEditorFromPropertyGrid("questionTitle");
+    options.themeBuilder.removeEditorFromPropertyGrid("questionTitle");
 
     const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
-    options.addEditorIntoPropertyGridAfterQuestion(newMatrixFontSettings, "questionDescription");
+    options.themeBuilder.addEditorIntoPropertyGridAfterQuestion(newMatrixFontSettings, "questionDescription");
     newMatrixFontSettings.title = "Matrix title font";
     newMatrixFontSettings.value = defaultValueElement;
   });

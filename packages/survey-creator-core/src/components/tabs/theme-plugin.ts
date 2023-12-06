@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel } from "survey-core";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder } from "./theme-builder";
@@ -22,10 +22,8 @@ function getObjectDiffs(obj1: any, obj2: any = {}): any {
 }
 
 export interface IPropertyGridSurveyCreatedEvent {
-  getGroupByName: (name: string) => IElement;
-  removeEditorFromPropertyGrid: (questionName: string) => void;
-  addEditorIntoPropertyGridGroup: (groupName: string, element: IElement) => void;
-  addEditorIntoPropertyGridAfterQuestion: (question: Question, insertAfterQuestion: string) => void;
+  themeBuilder: ThemeBuilder;
+  themeEditorSurvey: SurveyModel;
 }
 
 /**
@@ -107,10 +105,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.update();
     if (!!this.model.themeEditorSurvey) {
       const options = <IPropertyGridSurveyCreatedEvent>{
-        getGroupByName: (name: string) => { return this.model.getPropertyGridGroup(name); },
-        addEditorIntoPropertyGridGroup: (groupName: string, element: IElement) => { this.model.addEditorIntoPropertyGridGroup(groupName, element); },
-        addEditorIntoPropertyGridAfterQuestion: (question: Question, insertAfterQuestion: string) => { this.model.addEditorIntoPropertyGridAfterQuestion(question, insertAfterQuestion); },
-        removeEditorFromPropertyGrid: (questionName: string) => { this.model.removeEditorFromPropertyGrid(questionName); },
+        themeBuilder: this.model,
+        themeEditorSurvey: this.model.themeEditorSurvey
       };
       this.onPropertyGridSurveyCreated.fire(this, options);
     }
