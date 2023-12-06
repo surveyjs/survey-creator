@@ -34,7 +34,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       model.creator.uploadFiles(files, model.question, (_, link) => {
         model.item.imageLink = link;
         model.isUploading = false;
-      });
+      }, { object: model.item, propertyName: "imageLink" });
     }, { element: model.question, item: model.item });
   }
 
@@ -46,7 +46,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
       });
       this.isChoosingNewFile = false;
       this.isUploading = false;
-    });
+    }, { object: this.item, propertyName: "imageLink" });
   }
 
   chooseNewFile(model: ImageItemValueWrapperViewModel) {

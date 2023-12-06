@@ -916,7 +916,7 @@ export class PropertyGridModel {
     this.survey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       const question = options.question.obj.getType() == "survey" ? undefined : (options.question.obj.getType() == "imageitemvalue" ? options.question.obj.locOwner : options.question.obj);
-      this.options.uploadFiles(options.files, question, callback);
+      this.options.uploadFiles(options.files, question, callback, { object: question, propertyName: "value" });
     });
     this.survey.getAllQuestions().map(q => q.allowRootStyle = false);
     this.survey.onQuestionCreated.add((_, opt) => {
@@ -1470,8 +1470,8 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     return res;
   }
   public onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any): void {
-    if(!options.value && options.value !== 0) {
-      if(prop.defaultValue !== undefined) {
+    if (!options.value && options.value !== 0) {
+      if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
         options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;

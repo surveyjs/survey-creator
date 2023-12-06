@@ -932,6 +932,17 @@ export class CreatorBase extends Base
    */
   public onUploadFile: CreatorEvent = new CreatorEvent();
   /**
+   * The event is fired on uploading the files.
+   * 
+   * - `sender` - the survey creator object that fires the event
+   * - `options.files` - the Javascript File objects array
+   * - `options.callback(status, imageLink)` - called on upload complete
+   * 
+   *  [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))   
+   * @see uploadFiles
+   */
+  public onRemoveFile: CreatorEvent = new CreatorEvent();
+  /**
    * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
    *
    * Parameters:
@@ -2998,7 +3009,8 @@ export class CreatorBase extends Base
   public uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    uploadingCallback: (status: string, data: any) => any,
+    context?: { object: any, propertyName: string }
   ) {
     if (this.onUploadFile.isEmpty) {
       let fileReader = new FileReader();
@@ -3010,7 +3022,33 @@ export class CreatorBase extends Base
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
-        callback: uploadingCallback
+        callback: (status, data) => {
+          if (status === "success" && !!context && !!context.object) {
+            const prevFilesValue = context.object[context.propertyName];
+            if (!!prevFilesValue) {
+              this.removeFiles(Array.isArray(prevFilesValue) ? prevFilesValue : [prevFilesValue], question, () => { });
+            }
+          }
+          uploadingCallback(status, data);
+        }
+      });
+    }
+  }
+  /**
+   * Remove the files from, a server
+   * @param fileURIs file URIs to remove
+   * @param removeCallback a call back function to get the status on removing the file
+   */
+  public removeFiles(
+    fileURIs: string[],
+    question: Question,
+    removeCallback: (status: string) => any
+  ) {
+    if (!this.onRemoveFile.isEmpty) {
+      this.onRemoveFile.fire(this, {
+        question: question,
+        files: fileURIs || [],
+        callback: removeCallback
       });
     }
   }

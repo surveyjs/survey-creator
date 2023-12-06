@@ -25,7 +25,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
         this.creator.uploadFiles(o.files, this.question, (status, link) => {
           this.question.imageLink = link;
           o.callback(status, [{ content: link, file: o.files[0] }]);
-        });
+        }, { object: this.question, propertyName: "imageLink" });
       }
     });
   }
@@ -52,7 +52,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
       model.creator.uploadFiles(files, model.surveyElement as QuestionImageModel, (_, link) => {
         (<QuestionImageModel>model.surveyElement).imageLink = link;
         model.isUploading = false;
-      });
+      }, { object: model.surveyElement, propertyName: "imageLink" });
     }, { element: model.question });
   }
   public get acceptedTypes(): string {

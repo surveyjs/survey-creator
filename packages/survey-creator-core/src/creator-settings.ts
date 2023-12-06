@@ -305,7 +305,8 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    uploadingCallback: (status: string, data: any) => any,
+    context?: { object: any, propertyName: string }
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
@@ -457,7 +458,8 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    uploadingCallback: (status: string, data: any) => any,
+    context?: { object: any, propertyName: string }
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }

@@ -615,7 +615,7 @@ export class ThemeBuilder extends Base {
 
     themeEditorSurvey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
-      this.surveyProvider.uploadFiles(options.files, undefined, callback);
+      this.surveyProvider.uploadFiles(options.files, undefined, callback, { object: options.question, propertyName: "value" });
     });
     this.patchFileEditors(themeEditorSurvey);
     themeEditorSurvey.getAllQuestions().forEach(q => q.allowRootStyle = false);
