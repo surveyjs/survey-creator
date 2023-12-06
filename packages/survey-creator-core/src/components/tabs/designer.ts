@@ -49,7 +49,7 @@ export class TabDesignerViewModel extends Base {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
     if (this.creator.pageEditMode === "bypage") return true;
     const pages: PageModel[] = this.survey.pages;
-    return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
+    return pages.length === 0 || Object.keys(pages[pages.length - 1].toJSON()).length > 1;
   }
 
   constructor(creator: CreatorBase) {

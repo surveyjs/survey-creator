@@ -815,6 +815,29 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
+test("Modified page without elements", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    "pages": [
+      {
+        "name": "page1",
+        "title": "Page1"
+      }
+    ]
+  };
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
+  expect(creator.survey.pages).toHaveLength(1);
+
+  let pageModel = new PageAdorner(creator, creator.survey.pages[0]);
+  expect(pageModel.isGhost).toBeFalsy();
+  expect(pageModel.showPlaceholder).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+
+  creator.survey.pages[0].addNewQuestion("text", "q2");
+  expect(pageModel.isGhost).toBeTruthy();
+  expect(pageModel.showPlaceholder).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+});
 test("Create new page on changing title/description in ghost PageAdorner resets isGhost", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

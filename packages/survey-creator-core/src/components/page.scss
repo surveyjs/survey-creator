@@ -111,3 +111,14 @@ svc-page {
   width: calc(100% - 48px);
   height: 2px;
 }
+
+.svc-page__placeholder_frame {
+  min-width: auto;
+  max-width: 100%;
+  padding: 0 calcSize(3) calcSize(2);
+
+  .svc-panel__placeholder_frame {
+    padding: calcSize(6) calcSize(8);
+    height: auto;
+  }
+}

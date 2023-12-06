@@ -1575,3 +1575,19 @@ test("Narrow question placeholder", async (t) => {
     await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
   });
 });
+
+test("Page placeholder without elements", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(770, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "title": "Page1"
+        }
+      ]
+    });
+
+    await takeElementScreenshot("page-placeholder-without-elements.png", Selector(".svc-page"), t, comparer);
+  });
+});

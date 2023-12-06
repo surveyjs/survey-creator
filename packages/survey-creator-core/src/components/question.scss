@@ -86,6 +86,11 @@ svc-question {
   color: $foreground-light;
   text-wrap: wrap;
   text-align: center;
+
+  font-size: calcSize(2);
+  font-style: normal;
+  font-weight: 400;
+  line-height: calcSize(3);
 }
 
 .svc-question__content-actions {
