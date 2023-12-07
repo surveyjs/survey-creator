@@ -158,6 +158,7 @@ jobs:
   - checkout: Service
     persistCredentials: true
     clean: true
+    fetchDepth: 1
 
   - task: NodeTool@0
     inputs:
@@ -318,9 +319,9 @@ jobs:
   # https://stackoverflow.com/questions/58485585/azure-pipeline-powershell-and-git-on-windows-server-2019-gives-error-in-output
   - powershell: |
       cd $(Build.SourcesDirectory)/service
-      git checkout master
       git pull origin master
-      git fetch --tags --force
+      git fetch origin master --tags --force
+      git checkout master
       git add surveyjs.io/App_Data/DocsEditor
       git commit -m "updated survey-creator docs [azurepipelines skip]"
       git pull origin master
