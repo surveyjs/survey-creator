@@ -364,3 +364,42 @@ test("dropdown popup in simulator", async (t) => {
     await takeElementScreenshot("test-tab-opened-dropdown.png", simulator, t, comparer);
   });
 });
+
+test("dropdown popup in simulator - mobile", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["Survey"]._setIsTouch(true);
+    })();
+    const simulator = Selector(".svd-simulator-content");
+    await t.resizeWindow(400, 600);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "nps-score",
+              "rateCount": 11,
+              "rateMin": 0,
+              "rateMax": 10,
+              "minRateDescription": "Very unlikely",
+              "maxRateDescription": "Very likely"
+            },
+            {
+              "type": "comment",
+              "name": "disappointing-experience",
+              "visible": false,
+              "visibleIf": "{nps-score} <= 5",
+              "maxLength": 300
+            }
+          ]
+        }
+      ]
+    });
+    await t.click(Selector('[title="Preview"]'));
+    await t.click(Selector('[data-name="nps-score"]'));
+    await takeElementScreenshot("test-tab-opened-dropdown-mobile.png", simulator, t, comparer);
+  });
+});
