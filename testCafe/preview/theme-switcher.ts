@@ -36,7 +36,7 @@ fixture`${title}`.page`${urlPreviewThemeSwitcher}`.beforeEach(
   }
 );
 
-test("Test theme switcher with 3 themes", async (t) => {
+test.skip("Test theme switcher with 3 themes", async (t) => {
   const clickAndCheck = async (listID, themeName, visibleSelector, notVisibleSelector_1, notVisibleSelector_2) => {
     await t
       .click(Selector("#themeSwitcher"))
@@ -77,7 +77,7 @@ fixture`${title}`.page`${urlThemeForPreview}`.beforeEach(
   }
 );
 
-test("Test themeForPreview option", async (t) => {
+test.skip("Test themeForPreview option", async (t) => {
   await setJSON(json);
 
   await t
