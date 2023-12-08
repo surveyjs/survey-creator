@@ -58,14 +58,14 @@ test("SurveyElementActionContainer with subtypes fit", () => {
 
   actionContainer.fit(432, 32);
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
-  expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
-  expect(actionContainer.getActionById("duplicate").mode).toBe("large");
-  expect(actionContainer.getActionById("isrequired").mode).toBe("large");
-  expect(actionContainer.getActionById("delete").mode).toBe("large");
+  expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
+  expect(actionContainer.getActionById("duplicate").mode).toBe("small");
+  expect(actionContainer.getActionById("isrequired").mode).toBe("small");
+  expect(actionContainer.getActionById("delete").mode).toBe("small");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(304, 32);
+  actionContainer.fit(250, 32);
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");

@@ -33,8 +33,13 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
-      this.setModeForActions({ "convertInputType": "removed" }, "large");
+    // if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.maxDimension), 0)) {
+    //   this.setModeForActions({ "convertInputType": "removed" }, "large");
+    //   return;
+    // }
+
+    if (dimension >= items.reduce((sum, i) => sum += this.skipQuestionType(i, i.minDimension), this.getActionById("convertTo")?.maxDimension + this.getActionById("convertInputType")?.maxDimension)) {
+      this.setModeForActions({ "convertInputType": "large", "convertTo": "large" }, "small");
       return;
     }
 
