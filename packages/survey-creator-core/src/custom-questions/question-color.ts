@@ -33,6 +33,10 @@ export class QuestionColorModel extends QuestionTextModel {
     }
     return newValue;
   }
+  protected isNewValueEqualsToValue(newValue: any): boolean {
+    if (super.isNewValueEqualsToValue(newValue) || this.isTwoValueEquals(newValue, this.value, true, true)) return true;
+    else return false;
+  }
   protected setNewValue(newValue: string): void {
     this.resetRenderedValue();
     super.setNewValue(this.getCorrectedValue(newValue));

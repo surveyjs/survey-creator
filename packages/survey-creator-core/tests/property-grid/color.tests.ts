@@ -214,3 +214,24 @@ test("Check signature pad color properties", () => {
   expect(penColorQuestion.renderedValue).toBe("#FFF000");
   expect(penColorQuestion.renderedColorValue).toBe("#FFF000");
 });
+
+test("Do not fire on value changed if color is not changed", () => {
+  const survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+  }] });
+  const q = survey.getQuestionByName("q1");
+  let log = "";
+  survey.onValueChanged.add((sender, options) => {
+    log+= "->changed";
+  });
+  q.value = "#FFF000";
+  expect(log).toBe("->changed");
+  log = "";
+  q.value = "#FFF000 ";
+  expect(log).toBe("");
+  q.value = "#fff000";
+  expect(log).toBe("");
+  q.value = "#ffffff";
+  expect(log).toBe("->changed");
+});
