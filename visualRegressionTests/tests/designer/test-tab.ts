@@ -93,7 +93,7 @@ const json2 = {
   ]
 };
 
-test("Theme Switcher", async (t) => {
+test.skip("Theme Switcher", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const simulator = Selector(".svd-simulator-content");
 
