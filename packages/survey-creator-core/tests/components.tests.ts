@@ -932,3 +932,29 @@ test("ImageItemValueWrapperViewModel pass context to onOpenFileChooser event", (
   expect(context.element).toBe(question);
   expect(context.item).toBe(question.choices[0]);
 });
+
+test("ImageItemValueWrapperViewModel shouldn't override existing image if upload fails", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "imagepicker", name: "q1", choices: [1, 2, 3] }]
+  };
+  const question = <QuestionImagePickerModel>creator.survey.getAllQuestions()[0];
+  const rootElement = document.createElement("div");
+  rootElement.innerHTML = "<input type='file' class='svc-choose-file-input' />";
+  const imageItemAdorner = new ImageItemValueWrapperViewModel(creator, question, question.choices[0], undefined, rootElement);
+
+  const successFile = "image1.png";
+  const errorFile = "image2.png";
+  let isSuccess = true;
+  creator.onOpenFileChooser.add((s, o) => {
+    o.callback([{}]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    o.callback(isSuccess ? "success" : "error", isSuccess ? successFile : errorFile);
+  });
+  imageItemAdorner.chooseFile(imageItemAdorner);
+  expect(question.choices[0].imageLink).toBe(successFile);
+  isSuccess = false;
+  imageItemAdorner.chooseFile(imageItemAdorner);
+  expect(question.choices[0].imageLink).toBe(successFile);
+});
