@@ -11,17 +11,32 @@ import { CreatorBase } from "../creator-base";
 import { settings } from "../creator-settings";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
-  private setModeForActions(modes: any, defaultMode: actionModeType): void {
-    this.visibleActions.forEach((action) => {
-      action.mode = modes[action.id] || defaultMode;
+  private needToShrink(item: Action, shrinkStart: boolean, shrinkEnd: boolean) {
+    return (item.innerItem.location == "start" && shrinkStart || item.innerItem.location != "start" && shrinkEnd);
+  }
+  private setModeForActions(shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []): void {
+    this.visibleActions.forEach((item) => {
+      if (exclude.indexOf(item.id) != -1) {
+        item.mode = "removed";
+        return;
+      }
+
+      if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
+        item.mode = item.innerItem.iconName ? "small" : "removed";
+        return;
+      }
+      item.mode = "large";
     });
   }
-  private skipInputType(item: Action, dimension) {
-    return item.id != "convertInputType" ? dimension : 0;
+  private calcItemSize(item: Action, shrinkStart: boolean, shrinkEnd: boolean, exclude: string[] = []) {
+    if (exclude.indexOf(item.id) != -1) return 0;
+    if (this.needToShrink(item, shrinkStart, shrinkEnd)) {
+      if (!item.innerItem.iconName) return 0;
+      return item.minDimension;
+    }
+    return item.maxDimension;
   }
-  private skipQuestionType(item: Action, dimension) {
-    return item.id != "convertInputType" && item.id != "convertTo" ? dimension : 0;
-  }
+
   public fit(dimension: number, dotsItemSize: number) {
     if (dimension <= 0) return;
 
@@ -38,22 +53,32 @@ export class SurveyElementActionContainer extends AdaptiveActionContainer {
     //   return;
     // }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.skipQuestionType(i, i.minDimension), this.getActionById("convertTo")?.maxDimension + this.getActionById("convertInputType")?.maxDimension)) {
-      this.setModeForActions({ "convertInputType": "large", "convertTo": "large" }, "small");
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true), 0)) {
+      this.setModeForActions(false, true);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.skipQuestionType(i, i.minDimension), this.getActionById("convertTo")?.maxDimension)) {
-      this.setModeForActions({ "convertInputType": "removed", "convertTo": "large" }, "small");
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, false, true, ["convertInputType"]), 0)) {
+      this.setModeForActions(false, true, ["convertInputType"]);
       return;
     }
 
-    if (dimension >= items.reduce((sum, i) => sum += this.skipInputType(i, i.minDimension), 0)) {
-      this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "small");
+    if (dimension >= items.reduce((sum, i) => sum += this.calcItemSize(i, true, true), 0)) {
+      this.setModeForActions(true, true);
       return;
     }
 
-    this.setModeForActions({ "convertInputType": "removed", "convertTo": "small" }, "popup");
+    this.visibleActions.forEach((item) => {
+      if (item.id == "convertTo") {
+        item.mode = "small";
+        return;
+      }
+      if (item.id == "convertInputType") {
+        item.mode = "removed";
+        return;
+      }
+      item.mode = "popup";
+    });
     this.dotsItem.visible = true;
     this.hiddenItemsListModel.setItems(items.filter(i => i.mode == "popup").map(i => i.innerItem));
   }

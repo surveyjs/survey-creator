@@ -189,6 +189,16 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     //this.updateActionsProperties();
     toggleHovered(event, element);
   }
+  protected updateActionsProperties(): void {
+    if (this.isDisposed) return;
+    super.updateActionsProperties();
+    const actions = this.actionContainer.visibleActions;
+    let switchToStartLocation = false;
+    for (var i = actions.length - 1; i >= 0; i--) {
+      if (actions[i].id === "convertTo") switchToStartLocation = true;
+      if (!actions[i].innerItem.location) actions[i].innerItem.location = switchToStartLocation ? "start" : "end";
+    }
+  }
   protected updateElementAllowOptions(options: any, operationsAllow: boolean) {
     super.updateElementAllowOptions(options, operationsAllow);
     this.updateActionVisibility("convertTo", operationsAllow && options.allowChangeType);
@@ -334,12 +344,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const newAction = createDropdownActionModel({
       id: id,
       css: "sv-action--convertTo sv-action-bar-item--secondary",
-      iconName: this.creator.toolbox.getItemByName(this.element.getType())?.iconName,
+      iconName: id == "convertTo" ? this.creator.toolbox.getItemByName(this.element.getType())?.iconName : undefined,
       iconSize: 24,
       title: actionTitle,
       enabled: enabled,
       visibleIndex: index,
       disableShrink: false,
+      location: "start",
       action: (newType) => {
       },
     }, {
