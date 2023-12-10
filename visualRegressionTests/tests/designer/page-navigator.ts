@@ -40,6 +40,7 @@ test("On the right side (default)", async (t) => {
     await t.expect(pageNavigatorElement.visible).ok();
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right.png", pageNavigatorElement, t, comparer);
+
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, t, comparer);
@@ -80,7 +81,7 @@ test("On the left side", async (t) => {
 
 test("On the left side (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 400);
+    await t.resizeWindow(1920, 500);
     await ClientFunction(() => {
       document.body.setAttribute("dir", "rtl");
     })();
