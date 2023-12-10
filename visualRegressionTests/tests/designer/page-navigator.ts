@@ -32,7 +32,7 @@ const json = {
 
 test("On the right side (default)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 400);
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
     await t.wait(500);
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
@@ -40,7 +40,6 @@ test("On the right side (default)", async (t) => {
     await t.expect(pageNavigatorElement.visible).ok();
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right.png", pageNavigatorElement, t, comparer);
-
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, t, comparer);
@@ -62,7 +61,7 @@ test("On the right side opened popup", async (t) => {
 
 test("On the left side", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 400);
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
     await t.wait(500);
 
