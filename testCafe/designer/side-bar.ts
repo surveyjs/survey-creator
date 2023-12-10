@@ -236,7 +236,7 @@ test("Focus in Property grid", async (t) => {
   await setJSON({
     questions: [
       {
-        type: "text",
+        type: "boolean",
         name: "test_q"
       }
     ]
