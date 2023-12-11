@@ -290,3 +290,29 @@ test("Rating long item", async (t) => {
     await takeElementScreenshot("rating-long-item-edit.png", question, t, comparer);
   });
 });
+
+test("Rating top labels", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionsPosition": "top"
+            }
+          ]
+        }
+      ],
+      "widthMode": "static"
+    });
+    await t.resizeWindow(1900, 1000);
+    const question = Selector(".svc-rating-question-content");
+    await takeElementScreenshot("rating-top-labels.png", question, t, comparer);
+  });
+});

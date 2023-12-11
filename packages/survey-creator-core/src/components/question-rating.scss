@@ -15,11 +15,14 @@
     display: flex;
   }
 }
+.svc-rating-question-controls.svc-rating-question-controls--labels-top {
+  margin-top: calcSize(5.5);
+}
 
 .svc-question__content {
   .sd-rating {
     margin-inline-start: calcSize(9); // margin-left
-    width: calc(100% - 9 * #{$base-unit});
+    max-width: calc(100% - 9 * #{$base-unit});
 
     &.sd-rating--wrappable fieldset {
       min-width: 0;
