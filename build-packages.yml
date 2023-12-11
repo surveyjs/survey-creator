@@ -461,7 +461,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-core'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
       OverWrite: true
@@ -469,7 +469,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
       OverWrite: true
@@ -653,7 +653,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildKnockout/packages/survey-core'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
       OverWrite: true
@@ -661,7 +661,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildKnockout/packages/survey-knockout-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
       OverWrite: true
