@@ -59,12 +59,12 @@ jobs:
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/packages'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -169,7 +169,7 @@ jobs:
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
+      artifactName: 'SurveyJSLibraryBuildReact'
       downloadPath: '$(System.ArtifactsDirectory)'
   
   - task: DownloadBuildArtifacts@0
@@ -181,7 +181,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -249,7 +249,7 @@ jobs:
     displayName: 'npm run remove-package-lock'
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
       OverWrite: true
@@ -257,7 +257,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-react-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildReact/packages/survey-react-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-react-ui'
       OverWrite: true
@@ -341,7 +341,7 @@ jobs:
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
+      artifactName: 'SurveyJSLibraryBuildKnockout'
       downloadPath: '$(System.ArtifactsDirectory)'
   
   - task: DownloadBuildArtifacts@0
@@ -353,7 +353,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildKnockout/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -415,7 +415,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-core'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
       OverWrite: true
@@ -423,7 +423,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-knockout-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildKnockout/packages/survey-knockout-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-knockout-ui'
       OverWrite: true
@@ -484,7 +484,7 @@ jobs:
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
+      artifactName: 'SurveyJSLibraryBuildAngular'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: DownloadBuildArtifacts@0
@@ -496,7 +496,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildAngular/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -523,7 +523,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-angular-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildAngular/packages/survey-angular-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-angular/node_modules/survey-angular-ui'
       OverWrite: true
@@ -594,7 +594,7 @@ jobs:
       specificBuildWithTriggering: true
       buildVersionToDownload: 'latest'
       downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuild'
+      artifactName: 'SurveyJSLibraryBuildVue3'
       downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: DownloadBuildArtifacts@0
@@ -606,7 +606,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildVue3/packages'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
       OverWrite: true
@@ -633,7 +633,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuild/build/survey-vue3-ui'
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildVue3/packages/survey-vue3-ui'
       Contents: '**'
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-vue/node_modules/survey-vue3-ui'
       OverWrite: true
