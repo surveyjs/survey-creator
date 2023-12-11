@@ -62,7 +62,7 @@ test("Check question adorners popups display mode", (): any => {
   expect(convertToAction.popupModel.displayMode).toBe("overlay");
 });
 
-test("Check question adorners popups display mode", (): any => {
+test("Check question adorners icons", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
@@ -82,7 +82,7 @@ test("Check question adorners popups display mode", (): any => {
   expect(convertInputTypeAction.innerItem.iconName).toBe(undefined);
 });
 
-test("Check question adorners popups display mode", (): any => {
+test("Check question adorners location", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
     elements: [
