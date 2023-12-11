@@ -19,7 +19,10 @@ export class AdaptiveToolbox extends Toolbox {
     this.manager = new VerticalResponsivityManager(
       container,
       this.toolbox,
-      ".svc-toolbox__tool:not(.sv-dots)"
+      ".svc-toolbox__tool:not(.sv-dots)",
+      null,
+      undefined,
+      (callback) => setTimeout(callback)
     );
   }
   componentWillUnmount() {
