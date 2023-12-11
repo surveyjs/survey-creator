@@ -429,9 +429,20 @@ jobs:
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'remove symlinks from node_modules'
 
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -621,9 +632,20 @@ jobs:
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
     displayName: 'remove symlinks from node_modules'
 
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.SourcesDirectory)/survey-library/build/survey-core
+      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -745,6 +767,24 @@ jobs:
 
   - task: DownloadBuildArtifacts@0
     inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
       buildType: 'current'
       downloadType: 'single'
       artifactName: 'SurveyJSCreatorV2BuildCore-$(Build.BuildId)'
@@ -847,6 +887,24 @@ jobs:
       downloadType: 'single'
       artifactName: 'SurveyJSLibraryBuildVue3'
       downloadPath: '$(System.ArtifactsDirectory)'
+  
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
 
   - task: DownloadBuildArtifacts@0
     inputs:
