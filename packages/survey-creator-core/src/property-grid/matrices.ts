@@ -61,7 +61,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
           return rowObj.text;
         });
       }
-      if (propertyName === "title" && objType === "matrixdropdowncolumn") {
+      if (propertyName === "title" && (objType === "matrixdropdowncolumn" || objType === "multipletextitem")) {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
           if(!!rowObj.name) return rowObj.name;
           return rowObj.title;
@@ -775,7 +775,7 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
     const editor = options.row.editingObj.editor;
     if (!!editor && !!q.property) {
       editor.registerFunctionOnPropertyValueChanged(q.property.name, () => {
-        q.value = editor[q.property.name];
+        q.value = Serializer.getObjPropertyValue(editor, q.property.name);
       });
     }
   }

@@ -403,6 +403,25 @@ test("check multiple text items editing by Manual Entry", () => {
   expect(itemsQuestion.renderedTable.rows[2].cells[1].question.value).toEqual("item2");
   expect(itemsQuestion.renderedTable.rows[2].cells[2].question.value).toEqual("Item 2");
 });
+test("QuestionMultipleTextModel items property editor + validators editor", () => {
+  var multipleQuestion = new QuestionMultipleTextModel("q1");
+  var textItem = multipleQuestion.addItem("item1");
+  var propertyGrid = new PropertyGridModelTester(multipleQuestion);
+  var itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy();
+  const row = itemsQuestion.visibleRows[0];
+  const cell = row.cells[1];
+  expect(cell.question.value).toBeFalsy();
+  expect(cell.question.placeholder).toBe("item1");
+  row.showDetailPanel();
+  expect(cell.question.value).toBeFalsy();
+  expect(cell.question.placeholder).toBe("item1");
+  row.hideDetailPanel();
+  expect(cell.question.value).toBeFalsy();
+  expect(cell.question.placeholder).toBe("item1");
+});
 test("Triggers property editor, Bug #4454", () => {
   var survey = new SurveyModel();
   const completeTrigger = new SurveyTriggerComplete();

@@ -78,8 +78,8 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         {this.renderHeader()}
         {content}
         {this.renderFooter()}
-      </div>
-    );
+      </div>,
+      undefined, { disableTabStop: true });
   }
   protected renderHeader(): JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });

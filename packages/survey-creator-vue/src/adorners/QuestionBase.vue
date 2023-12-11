@@ -16,7 +16,7 @@
         }
       "
       :class="model.css()"
-      v-key2click
+      v-key2click="{ disableTabStop: true }"
     >
       <div
         v-if="model.allowDragging"

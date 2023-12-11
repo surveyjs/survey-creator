@@ -14,7 +14,8 @@ import {
   ReactQuestionFactory,
   SurveyElementBase,
   SurveyLocStringViewer,
-  Survey
+  Survey,
+  SvgBundleComponent
 } from "survey-react-ui";
 import {
   ICreatorOptions,
@@ -22,7 +23,6 @@ import {
   ITabbedMenuItem
 } from "survey-creator-core";
 import { TabbedMenuComponent } from "./TabbedMenu";
-import { SvgBundleComponent } from "./SvgBundle";
 
 interface ISurveyCreatorComponentProps {
   creator: SurveyCreator;

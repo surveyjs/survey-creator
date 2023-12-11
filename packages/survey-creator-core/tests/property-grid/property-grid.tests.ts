@@ -462,14 +462,17 @@ test("column[] property editor, store column title if it was entered an equals t
   const row = columnsQuestion.visibleRows[0];
   expect(row.cells[0].value).toEqual("col1");
   expect(row.cells[1].value).toBeFalsy();
-  let json = question.toJSON();
-  expect(json).toEqual({
+  expect(question.toJSON()).toEqual({
     name: "q1",
     columns: [{ name: "col1" }]
   });
+  row.cells[1].value = "Column 1";
+  expect(question.toJSON()).toEqual({
+    name: "q1",
+    columns: [{ name: "col1", title: "Column 1" }]
+  });
   row.cells[1].value = "col1";
-  json = question.toJSON();
-  expect(json).toEqual({
+  expect(question.toJSON()).toEqual({
     name: "q1",
     columns: [{ name: "col1", title: "col1" }]
   });
@@ -2879,4 +2882,23 @@ test("Allow to enter one space into question title #4416", () => {
   const propertyGrid2 = new PropertyGridModelTester(question);
   const titleQuestion2 = <QuestionMatrixDynamicModel>(propertyGrid2.survey.getQuestionByName("title"));
   expect(titleQuestion2.value).toBe(" ");
+});
+test("Do not allow to enter undefined or '' to number type", () => {
+  var question = new QuestionDropdownModel("q1");
+  question.choicesMin = 1;
+  question.choicesMax = 5;
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const choicesMinQuestion = <QuestionTextModel>(propertyGrid.survey.getQuestionByName("choicesMin"));
+  expect(choicesMinQuestion.inputType).toBe("number");
+  expect(choicesMinQuestion.value).toBe(1);
+  choicesMinQuestion.value = undefined;
+  expect(question.choicesMin).toBe(0);
+  expect(choicesMinQuestion.value).toBe(0);
+  choicesMinQuestion.value = 2;
+  expect(question.choicesMin).toBe(2);
+  expect(choicesMinQuestion.value).toBe(2);
+  choicesMinQuestion.value = "";
+  expect(question.choicesMin).toBe(0);
+  expect(choicesMinQuestion.value).toBe(0);
 });
