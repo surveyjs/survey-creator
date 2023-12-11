@@ -442,7 +442,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
@@ -645,7 +645,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(Build.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
       TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout/node_modules/survey-core'
       OverWrite: true
     condition: ne(variables.NPM_CACHE_RESTORED, 'false')
