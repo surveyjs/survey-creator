@@ -25,8 +25,11 @@ test("Check custom color question", () => {
   expect(question.value).toBe("#fe0000");
   expect(question.renderedValue).toBe("#FE0000");
   question.value = "#fea";
-  expect(question.value).toBe("#feafea");
-  expect(question.renderedValue).toBe("#FEAFEA");
+  expect(question.value).toBe("#ffeeaa");
+  expect(question.renderedValue).toBe("#FFEEAA");
+  question.value = "#13b";
+  expect(question.value).toBe("#1133bb");
+  expect(question.renderedValue).toBe("#1133BB");
   question.value = "#fea123";
   expect(question.value).toBe("#fea123");
   expect(question.renderedValue).toBe("#FEA123");

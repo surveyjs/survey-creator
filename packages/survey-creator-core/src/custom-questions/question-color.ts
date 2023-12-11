@@ -21,9 +21,11 @@ export class QuestionColorModel extends QuestionTextModel {
     }
     newValue = (newValue.match(/#([0-9a-fA-F]){1,6}/) || [DEFAULT_COLOR])[0];
     if(newValue.length === 4) {
+      let value = newValue.slice(0, 1);
       for(let i = 1; i < 4; i++) {
-        newValue += newValue[i];
+        value += newValue[i] + newValue[i];
       }
+      newValue = value;
     }
     if(newValue.length < 7) {
       const length = newValue.length;
