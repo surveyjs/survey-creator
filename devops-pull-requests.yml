@@ -570,6 +570,25 @@ jobs:
       artifactName: 'SurveyJSLibraryBuildAngular'
       downloadPath: '$(System.ArtifactsDirectory)'
 
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'current'
@@ -651,6 +670,24 @@ jobs:
       downloadType: 'single'
       artifactName: 'SurveyJSLibraryBuildVue3'
       downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
 
   - task: DownloadBuildArtifacts@0
     inputs:
