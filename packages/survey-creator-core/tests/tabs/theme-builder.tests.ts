@@ -1937,7 +1937,7 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
 
   creator.activeTab = "designer";
-  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("trasparent");
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
   creator.activeTab = "theme";
   themeBuilder = themePlugin.model as ThemeBuilder;
@@ -1961,9 +1961,11 @@ test("headerViewContainer: background color", (): any => {
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBeUndefined();
 
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "none";
-  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("trasparent");
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
   headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
+
   headerViewContainer.getElementByName("backgroundColor").value = "#5094ed";
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 
