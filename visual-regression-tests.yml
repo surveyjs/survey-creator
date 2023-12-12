@@ -226,6 +226,15 @@ jobs:
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
+  # update 'file' npm dependencies in case of cache
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
+
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
@@ -237,7 +246,6 @@ jobs:
       artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
       downloadPath: '$(System.ArtifactsDirectory)'
 
-  # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
     inputs:
       SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
@@ -272,17 +280,6 @@ jobs:
       cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
       npm run remove-package-lock
     displayName: 'npm run remove-package-lock'
-
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '56'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
-      downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
-      downloadPath: '$(System.ArtifactsDirectory)'
 
   - task: CopyFiles@2
     inputs:
