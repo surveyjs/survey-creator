@@ -226,15 +226,6 @@ jobs:
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
 
-  # update 'file' npm dependencies in case of cache
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
-      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
-      OverWrite: true
-    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
-    displayName: 'copy survey-core in case of npm cache'
-
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
@@ -245,6 +236,15 @@ jobs:
       downloadType: 'single'
       artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
       downloadPath: '$(System.ArtifactsDirectory)'
+
+  # update 'file' npm dependencies in case of cache
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages/survey-core
+      TargetFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react/node_modules/survey-core'
+      OverWrite: true
+    condition: ne(variables.NPM_CACHE_RESTORED, 'false')
+    displayName: 'copy survey-core in case of npm cache'
 
   - task: CopyFiles@2
     inputs:
