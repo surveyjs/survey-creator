@@ -61,3 +61,53 @@ test("Check question adorners popups display mode", (): any => {
   expect(convertInputTypeAction.popupModel.displayMode).toBe("overlay");
   expect(convertToAction.popupModel.displayMode).toBe("overlay");
 });
+
+test("Check question adorners icons", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  let convertToAction = questionAdorner.actionContainer.getActionById("convertTo");
+  let convertInputTypeAction = questionAdorner.actionContainer.getActionById("convertInputType");
+  expect(convertToAction.innerItem.iconName).toBe("icon-text");
+  expect(convertInputTypeAction.innerItem.iconName).toBe(undefined);
+});
+
+test("Check question adorners location", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "text", name: "q1" },
+    ]
+  };
+  creator.onDefineElementMenuItems.add(function (editor, options) {
+    if (options.obj.isPage) return;
+    const objToAdd = options.obj;
+    options.items.unshift({
+      id: "addtosharedrepo"
+    });
+  });
+
+  const question = creator.survey.getQuestionByName("q1");
+  let questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  expect(questionAdorner.actionContainer.getActionById("addtosharedrepo").innerItem.location).toBe("start");
+  expect(questionAdorner.actionContainer.getActionById("convertTo").innerItem.location).toBe("start");
+  expect(questionAdorner.actionContainer.getActionById("convertInputType").innerItem.location).toBe("start");
+  expect(questionAdorner.actionContainer.getActionById("isrequired").innerItem.location).toBe("end");
+  expect(questionAdorner.actionContainer.getActionById("delete").innerItem.location).toBe("end");
+  expect(questionAdorner.actionContainer.getActionById("duplicate").innerItem.location).toBe("end");
+});
