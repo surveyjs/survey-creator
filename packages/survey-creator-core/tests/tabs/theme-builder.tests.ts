@@ -2748,7 +2748,7 @@ test("Custom theme assigned to creator", (): any => {
     cssVariables: {
       "--sjs-primary-backcolor": "rgba(255, 0, 0, 1)"
     }
-  }
+  };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
   const themeBuilder = themePlugin.model as ThemeBuilder;
