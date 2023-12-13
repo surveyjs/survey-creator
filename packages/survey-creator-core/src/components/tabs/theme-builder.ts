@@ -664,12 +664,13 @@ export class ThemeBuilder extends Base {
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
     return result;
   }
+
   private setHeaderBackgroundColorCssVariable(headerSettings: any) {
     let headerBackgroundColorValue = undefined;
     if (headerSettings["backgroundColorSwitch"] === "none") {
-      headerBackgroundColorValue = "trasparent";
+      headerBackgroundColorValue = "transparent";
     } else if (headerSettings["backgroundColorSwitch"] === "custom") {
-      headerBackgroundColorValue = headerSettings.backgroundColor;
+      headerBackgroundColorValue = headerSettings.backgroundColor ?? "transparent";
     }
     this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
@@ -692,7 +693,7 @@ export class ThemeBuilder extends Base {
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
     if (!backgroundColor) return "accentColor";
-    if (backgroundColor === "trasparent") return "none";
+    if (backgroundColor === "transparent") return "none";
     return "custom";
   }
   private updateVisibilityOfPropertyGridGroups() {
@@ -720,7 +721,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-    if (!!question && !!cssVariable && cssVariable !== "trasparent") {
+    if (!!question && !!cssVariable && cssVariable !== "transparent") {
       question.value = cssVariable;
     }
   }
@@ -1097,6 +1098,7 @@ export class ThemeBuilder extends Base {
                           {
                             type: "color",
                             name: "backgroundColor",
+                            allowEmptyValue: true,
                             enableIf: "{panel.backgroundColorSwitch} = 'custom'",
                             titleLocation: "hidden",
                             descriptionLocation: "hidden",
