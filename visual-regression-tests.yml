@@ -183,6 +183,24 @@ jobs:
 
   - task: DownloadBuildArtifacts@0
     inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
+
+  - task: DownloadBuildArtifacts@0
+    inputs:
       buildType: 'current'
       downloadType: 'single'
       artifactName: 'SurveyJSCreatorV2Build-VRT-Core-$(Build.BuildId)'
@@ -225,17 +243,6 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-react
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '56'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
-      downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
-      downloadPath: '$(System.ArtifactsDirectory)'
 
   # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
@@ -376,6 +383,24 @@ jobs:
       downloadType: 'single'
       artifactName: 'SurveyJSLibraryBuildKnockout'
       downloadPath: '$(System.ArtifactsDirectory)'
+      
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'specific'
+      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
+      pipeline: '56'
+      specificBuildWithTriggering: true
+      buildVersionToDownload: 'latest'
+      downloadType: 'single'
+      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.ArtifactsDirectory)/SurveyJSLibraryBuildCoreAngularJquery/packages'
+      Contents: '**'
+      TargetFolder: '$(Build.SourcesDirectory)/survey-library/build'
+      OverWrite: true
 
   - task: DownloadBuildArtifacts@0
     inputs:
@@ -413,17 +438,6 @@ jobs:
       verbose: false
       workingDir: $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-knockout
     condition: ne(variables.NPM_CACHE_RESTORED, 'true')
-
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'specific'
-      project: 'af2804d2-859a-4705-9ef5-cdf46d1d5d4f'
-      pipeline: '56'
-      specificBuildWithTriggering: true
-      buildVersionToDownload: 'latest'
-      downloadType: 'single'
-      artifactName: 'SurveyJSLibraryBuildCoreAngularJquery'
-      downloadPath: '$(System.ArtifactsDirectory)'
 
   # update 'file' npm dependencies in case of cache
   - task: CopyFiles@2
