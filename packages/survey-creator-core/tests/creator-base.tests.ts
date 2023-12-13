@@ -2057,6 +2057,8 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   };
   expect(creator.maxNestedPanels).toBe(0);
   expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  creator.maxNestedPanels = -1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
