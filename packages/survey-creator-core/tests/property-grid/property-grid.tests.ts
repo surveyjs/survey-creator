@@ -2902,3 +2902,16 @@ test("Do not allow to enter undefined or '' to number type", () => {
   expect(question.choicesMin).toBe(0);
   expect(choicesMinQuestion.value).toBe(0);
 });
+test("Allow delete all pages by default", () => {
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  survey.currentPage = survey.pages[0];
+  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
+  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
+});

@@ -1087,7 +1087,7 @@ test("SurveyPropertyPagesEditor koCanDeleteItem + options.", () => {
   ) => {
     if (item.getType() !== "page") return allowDelete;
     if (allowDeleteAll) return true;
-    return allowDelete;
+    return item !== survey.currentPage;
   };
   var propertyGrid = new PropertyGridModelTester(survey, options);
   var pagesQuestion = <QuestionMatrixDynamicModel>(

@@ -3239,6 +3239,10 @@ export class CreatorBase extends Base
     item: Base,
     allowDelete: boolean
   ): boolean {
+    if(!!item && item["isPage"]) {
+      if(this.pageEditMode === "bypage") return item !== this.survey.currentPage;
+      if(this.pageEditMode === "single") return false;
+    }
     return this.canDeleteItem(object, item, allowDelete);
   }
   onCollectionItemDeletingCallback(

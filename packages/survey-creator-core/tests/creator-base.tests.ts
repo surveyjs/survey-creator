@@ -4050,3 +4050,22 @@ test("Creator bypage edit mode & onElementAllowOperations", (): any => {
   pageAdorner["onElementSelectedChanged"](true);
   expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
 });
+test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
+  const creator = new CreatorTester();
+  const survey = creator.survey;
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  survey.currentPageNo = 1;
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "bypage";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "single";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeFalsy();
+});
