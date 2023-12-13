@@ -2071,9 +2071,9 @@ export class CreatorBase extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
