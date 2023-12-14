@@ -199,6 +199,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
         { name: "maxRateDescription", tab: "rateValues" },
+        { name: "rateDescriptionLocation", tab: "rateValues" },
         { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
       ],
       tabs: [{ name: "rateValues", index: 10 }]
