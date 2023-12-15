@@ -57,9 +57,10 @@
   }
 
   .svc-question__content {
-    padding: calcSize(3) calcSize(3) calcSize(3);
+    padding: calcSize(2) calcSize(3) calcSize(3);
 
     &.svc-question__content--selected {
+      padding-top: calcSize(3);
       padding-bottom: calcSize(8);
     }
   }
