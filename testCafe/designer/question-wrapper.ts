@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -332,4 +332,16 @@ test("Carryforward banner", async (t) => {
     .expect(Selector("span").withText("Copy choices from").exists).ok()
     .click(Selector(".svc-carry-forward-panel").find(".svc-action-button").withText("question1"))
     .expect(getSelectedElementName()).eql("question1");
+});
+test.only("No tab stop in dynamic panel", async (t) => {
+  await setJSON({
+    elements: [
+      {
+        type: "paneldynamic", name: "panel1"
+      }
+    ]
+  });
+  await t
+    .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").count).eql(1)
+    .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").withText("Add Question").exists).ok();
 });
