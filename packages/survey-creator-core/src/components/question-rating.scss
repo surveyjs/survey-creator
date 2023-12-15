@@ -50,6 +50,7 @@
       margin-inline-start: 0;
       width: fit-content;
       margin: auto;
+      max-width: fit-content;
     }
   .svc-rating-question-controls {
     display: flex;
@@ -76,6 +77,7 @@
     .sd-rating {
       margin-inline-start: 0; // margin-left
       width: 100%;
+      max-width: 100%;
     }
 
 
