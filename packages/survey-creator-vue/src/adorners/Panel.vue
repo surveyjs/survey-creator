@@ -10,7 +10,7 @@
   >
     <div
       :class="adorner.css()"
-      v-key2click="{ disableTabStop: true }"
+      v-key2click="{ disableTabStop: !adorner.element.isInteractiveDesignElement }"
       @click="
         adorner.element.isInteractiveDesignElement
           ? adorner.select(adorner, $event)

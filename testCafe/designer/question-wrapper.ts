@@ -333,15 +333,20 @@ test("Carryforward banner", async (t) => {
     .click(Selector(".svc-carry-forward-panel").find(".svc-action-button").withText("question1"))
     .expect(getSelectedElementName()).eql("question1");
 });
-test.only("No tab stop in dynamic panel", async (t) => {
+test("No tab stop in dynamic panel", async (t) => {
   await setJSON({
     elements: [
       {
         type: "paneldynamic", name: "panel1"
+      },
+      {
+        type: "panel", name: "panel2"
       }
     ]
   });
   await t
     .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").count).eql(1)
     .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").withText("Add Question").exists).ok();
+  await t
+    .expect(Selector(".svc-question__content--panel[tabindex=\"0\"]").count).eql(1);
 });
