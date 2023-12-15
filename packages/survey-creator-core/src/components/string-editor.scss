@@ -157,8 +157,9 @@
 .sd-rating {
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
-  }
-  &:not(.sd-rating__min-text) {
+
+    &:not(.sd-rating__min-text),
+    &:not(.sd-rating__max-text) {
     .svc-string-editor:focus-within {
       .svc-string-editor__border {
         display: none;
@@ -166,6 +167,8 @@
     }
   }
 }
+}
+
 .sd-table__cell--actions,
 .sd-matrixdynamic__add-btn {
   .svc-string-editor__button--done {

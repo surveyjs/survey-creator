@@ -207,6 +207,33 @@ test("Rating editing", async (t) => {
   });
 });
 
+test("Rating min/max editing", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "min",
+              "maxRateDescription": "max"
+            }
+          ]
+        }
+      ]
+    }
+    );
+    await t.resizeWindow(1900, 1000);
+    const question = Selector("div[data-name=question1]");
+    await t.click(question.find("span").withText("min"));
+    await takeElementScreenshot("rating-editing-min.png", question, t, comparer);
+    await t.click(question.find("span").withText("max"));
+    await takeElementScreenshot("rating-editing-max.png", question, t, comparer);
+  });
+});
+
 test("Rating in matrix", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
