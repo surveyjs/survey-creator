@@ -34,7 +34,7 @@ export class QuestionRatingAdornerComponent extends CreatorModelElement<Question
     const model = this.ratingModel;
     return (<>
       <div className="svc-rating-question-content">
-        <div className="svc-rating-question-controls svc-item-value-controls">
+        <div className={model.controlsClassNames}>
           {model.allowRemove ? attachKey2click(<span
             className={model.removeClassNames}
             aria-label={model.removeTooltip}
