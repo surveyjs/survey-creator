@@ -136,7 +136,7 @@ export class QuestionRatingAdornerViewModel extends Base {
     return new CssClassBuilder()
       .append("svc-rating-question-controls")
       .append("svc-item-value-controls")
-      .append("svc-rating-question-controls--labels-top", this.element.rateDescriptionLocation == "top").toString();
+      .append("svc-rating-question-controls--labels-top", this.element.rateDescriptionLocation == "top" || this.element.rateDescriptionLocation == "topBottom").toString();
   }
   get addTooltip() {
     return getLocString("pe.addItem");

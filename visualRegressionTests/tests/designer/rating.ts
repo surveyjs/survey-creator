@@ -291,7 +291,7 @@ test("Rating long item", async (t) => {
   });
 });
 
-test("Rating top labels", async (t) => {
+test("Rating labels location", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
       "logoPosition": "right",
@@ -304,7 +304,21 @@ test("Rating top labels", async (t) => {
               "name": "question1",
               "minRateDescription": "Bad",
               "maxRateDescription": "Good",
-              "rateDescriptionsPosition": "top"
+              "rateDescriptionLocation": "top"
+            },
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionLocation": "bottom"
+            },
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionLocation": "topBottom"
             }
           ]
         }
@@ -313,6 +327,8 @@ test("Rating top labels", async (t) => {
     });
     await t.resizeWindow(1900, 1000);
     const question = Selector(".svc-rating-question-content");
-    await takeElementScreenshot("rating-top-labels.png", question, t, comparer);
+    await takeElementScreenshot("rating-top-labels.png", question.nth(0), t, comparer);
+    await takeElementScreenshot("rating-bottom-labels.png", question.nth(1), t, comparer);
+    await takeElementScreenshot("rating-top-bottom-labels.png", question.nth(2), t, comparer);
   });
 });
