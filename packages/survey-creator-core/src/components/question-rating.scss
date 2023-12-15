@@ -15,11 +15,14 @@
     display: flex;
   }
 }
+.svc-rating-question-controls.svc-rating-question-controls--labels-top {
+  margin-top: calcSize(5.5);
+}
 
 .svc-question__content {
   .sd-rating {
     margin-inline-start: calcSize(9); // margin-left
-    width: calc(100% - 9 * #{$base-unit});
+    max-width: calc(100% - 9 * #{$base-unit});
 
     &.sd-rating--wrappable fieldset {
       min-width: 0;
@@ -47,6 +50,7 @@
       margin-inline-start: 0;
       width: fit-content;
       margin: auto;
+      max-width: fit-content;
     }
   .svc-rating-question-controls {
     display: flex;
@@ -73,6 +77,7 @@
     .sd-rating {
       margin-inline-start: 0; // margin-left
       width: 100%;
+      max-width: 100%;
     }
 
 
