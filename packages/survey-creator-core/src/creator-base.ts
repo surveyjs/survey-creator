@@ -2071,9 +2071,9 @@ export class CreatorBase extends Base
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
     this.dragDropSurveyElements = new DragDropSurveyElements(null, this);
+    this.dragDropSurveyElements.onGetMaxNestedPanels = (): number => { return this.maxNestedPanels; };
     let isDraggedFromToolbox = false;
     this.dragDropSurveyElements.onDragStart.add((sender, options) => {
-      this.dragDropSurveyElements.maxNestedPanels = this.maxNestedPanels;
       isDraggedFromToolbox = !sender.draggedElement.parent;
       this.onDragStart.fire(sender, options);
       this.startUndoRedoTransaction("drag drop");
@@ -3239,6 +3239,10 @@ export class CreatorBase extends Base
     item: Base,
     allowDelete: boolean
   ): boolean {
+    if(!!item && item["isPage"]) {
+      if(this.pageEditMode === "bypage") return item !== this.survey.currentPage;
+      if(this.pageEditMode === "single") return false;
+    }
     return this.canDeleteItem(object, item, allowDelete);
   }
   onCollectionItemDeletingCallback(

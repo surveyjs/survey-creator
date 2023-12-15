@@ -61,7 +61,8 @@ export class DragDropSurveyElements extends DragDropCore<any> {
     return "survey-element";
   }
   protected isDraggedElementSelected: boolean = false;
-  public maxNestedPanels: number = -1;
+  public onGetMaxNestedPanels: () => number;
+  public get maxNestedPanels(): number { return this.onGetMaxNestedPanels ? this.onGetMaxNestedPanels() : -1; }
 
   // private isRight: boolean;
   // protected prevIsRight: boolean;

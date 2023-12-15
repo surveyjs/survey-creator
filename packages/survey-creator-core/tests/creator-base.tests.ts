@@ -2036,7 +2036,7 @@ test("ConvertTo, show it for a panel", (): any => {
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
 test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
       {
@@ -2055,6 +2055,10 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
       { type: "paneldynamic", name: "panel2" }
     ]
   };
+  expect(creator.maxNestedPanels).toBe(0);
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  creator.maxNestedPanels = -1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
@@ -2067,11 +2071,13 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   creator.maxNestedPanels = 3;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(3);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
   creator.maxNestedPanels = 2;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
@@ -2079,6 +2085,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   creator.maxNestedPanels = 1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
@@ -2087,6 +2094,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxNestedPanels = 0;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
@@ -4049,4 +4057,23 @@ test("Creator bypage edit mode & onElementAllowOperations", (): any => {
   creator.selectElement(creator.survey.pages[3]);
   pageAdorner["onElementSelectedChanged"](true);
   expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
+});
+test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
+  const creator = new CreatorTester();
+  const survey = creator.survey;
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  survey.currentPageNo = 1;
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "bypage";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "single";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeFalsy();
 });

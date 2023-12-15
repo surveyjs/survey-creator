@@ -25,8 +25,11 @@ test("Check custom color question", () => {
   expect(question.value).toBe("#fe0000");
   expect(question.renderedValue).toBe("#FE0000");
   question.value = "#fea";
-  expect(question.value).toBe("#feafea");
-  expect(question.renderedValue).toBe("#FEAFEA");
+  expect(question.value).toBe("#ffeeaa");
+  expect(question.renderedValue).toBe("#FFEEAA");
+  question.value = "#13b";
+  expect(question.value).toBe("#1133bb");
+  expect(question.renderedValue).toBe("#1133BB");
   question.value = "#fea123";
   expect(question.value).toBe("#fea123");
   expect(question.renderedValue).toBe("#FEA123");
@@ -213,4 +216,25 @@ test("Check signature pad color properties", () => {
   question.penColor = "#FFF000";
   expect(penColorQuestion.renderedValue).toBe("#FFF000");
   expect(penColorQuestion.renderedColorValue).toBe("#FFF000");
+});
+
+test("Do not fire on value changed if color is not changed", () => {
+  const survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+  }] });
+  const q = survey.getQuestionByName("q1");
+  let log = "";
+  survey.onValueChanged.add((sender, options) => {
+    log+= "->changed";
+  });
+  q.value = "#FFF000";
+  expect(log).toBe("->changed");
+  log = "";
+  q.value = "#FFF000 ";
+  expect(log).toBe("");
+  q.value = "#fff000";
+  expect(log).toBe("");
+  q.value = "#ffffff";
+  expect(log).toBe("->changed");
 });
