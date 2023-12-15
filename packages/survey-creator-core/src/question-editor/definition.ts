@@ -199,7 +199,6 @@ export class SurveyQuestionEditorDefinition {
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
         { name: "maxRateDescription", tab: "rateValues" },
-        { name: "rateDescriptionLocation", tab: "rateValues" },
         { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
       ],
       tabs: [{ name: "rateValues", index: 10 }]
@@ -481,7 +480,6 @@ export class SurveyQuestionEditorDefinition {
         { name: "rateColorMode", tab: "rateValues" },
         { name: "scaleColorMode", tab: "rateValues" },
         { name: "autoGenerate", tab: "rateValues" },
-        { name: "rateDescriptionLocation", tab: "rateValues" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
