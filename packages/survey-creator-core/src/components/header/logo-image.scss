@@ -12,7 +12,10 @@
   display: flex;
   padding: 0;
   cursor: pointer;
-
+  max-width: 50%;
+  .sd-logo__image {
+    max-width: 100%;
+  }
   .svc-image-item-value-controls {
     display: block;
     top: calcSize(2.5);
