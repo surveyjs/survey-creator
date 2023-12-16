@@ -675,6 +675,40 @@ test("Panel multi-question row", async (t) => {
   });
 });
 
+test("Panel (small) with questions in row", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                },
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "startWithNewLine": false
+                }
+              ],
+              "maxWidth": "500px"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await takeElementScreenshot("surface-panel-row.png", Selector(".svc-question__content--panel"), t, comparer);
+  });
+});
+
 test("Matrix dynamic with detail", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 900);
