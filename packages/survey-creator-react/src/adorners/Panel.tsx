@@ -69,8 +69,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
               ></SvgIcon>
             </span>
             <Popup model={this.model.questionTypeSelectorModel.popupModel}></Popup>
-          </button>,
-          undefined, { disableTabStop: true })}
+          </button>)}
         </div>) : null}
 
       {super.renderFooter()}
