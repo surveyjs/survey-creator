@@ -3923,6 +3923,12 @@ function isContentElement(element: any) {
   }
   return false;
 }
+function getQuestionFromElement(element: any): any {
+  if(!element) return null;
+  if(!!element.row) return element.row.data;
+  if(!!element.column) return element.column.colOwner;
+  return null;
+}
 
 export const editableStringRendererName = "svc-string-editor";
 export function getElementWrapperComponentName(element: any, reason: string, isPopupEditorContent: boolean): string {
@@ -3930,6 +3936,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
     return "svc-logo-image";
   }
   if (reason === "cell" || reason === "column-header" || reason === "row-header") {
+    if(isContentElement(getQuestionFromElement(element))) return undefined;
     return "svc-matrix-cell";
   }
   if (!isContentElement(element)) {
@@ -4015,8 +4022,10 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  const parentIsMatrix = !!element.data && element.parentQuestion instanceof QuestionMatrixDropdownModelBase;
-  return !parentIsMatrix && (!isContentElement(element) || element.isEditableTemplateElement);
+  if(element.parentQuestion instanceof QuestionMatrixDropdownModelBase) {
+    if(!!element.data || isContentElement(element.parentQuestion)) return false;
+  }
+  return !isContentElement(element) || element.isEditableTemplateElement;
 }
 export function isTextInput(target: any): boolean {
   if (!target.tagName) return false;
