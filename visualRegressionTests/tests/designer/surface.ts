@@ -475,6 +475,7 @@ test("Question borders in panels", async (t) => {
     await t.resizeWindow(1767, 1500);
     const json = {
       "logoPosition": "right",
+      "width": "800px",
       "pages": [
         {
           "name": "page1",
