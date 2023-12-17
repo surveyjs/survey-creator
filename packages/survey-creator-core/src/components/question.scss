@@ -80,7 +80,11 @@ svc-question {
 
 .svc-question__content>div {
   overflow: visible;
+  &.sd-panel {
+    overflow: auto;
+  }
 }
+
 
 .svc-panel__placeholder {
   color: $foreground-light;

@@ -475,6 +475,7 @@ test("Question borders in panels", async (t) => {
     await t.resizeWindow(1767, 1500);
     const json = {
       "logoPosition": "right",
+      "width": "800px",
       "pages": [
         {
           "name": "page1",
@@ -672,6 +673,40 @@ test("Panel multi-question row", async (t) => {
     await resetHoverToCreator(t);
 
     await takeElementScreenshot("surface-panel-multi-row-question-selected.png", Selector(".svc-question__content"), t, comparer);
+  });
+});
+
+test("Panel (small) with questions in row", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 900);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                },
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "startWithNewLine": false
+                }
+              ],
+              "maxWidth": "500px"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await takeElementScreenshot("surface-panel-row.png", Selector(".svc-question__content--panel"), t, comparer);
   });
 });
 
