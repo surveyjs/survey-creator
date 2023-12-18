@@ -40,7 +40,7 @@ console.log(creator.toolbox.isCompact);
 
 ## Limit Available Question and Panel Types
 
-All available question and panel types are listed in the [`getType()`](https://surveyjs.io/Documentation/Library?id=Question#getType) method description. If you need to show only a part of these types, specify them in the Survey Creator's [`questionTypes`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#questionTypes) array:
+All available question and panel types are listed in the [`getType()`](https://surveyjs.io/Documentation/Library?id=Question#getType) method description. If you need to show only a part of these types, specify them in the Survey Creator's [`questionTypes`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#questionTypes) array:
 
 ```js
 const creatorOptions = {
