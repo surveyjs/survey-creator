@@ -1,5 +1,9 @@
 # Survey Creator Model (Platform-Independent Part)
 
+
+https://github.com/surveyjs/survey-creator/assets/22315929/797eb5bb-7828-4c5e-a22b-b69dd3d9b35d
+
+
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
