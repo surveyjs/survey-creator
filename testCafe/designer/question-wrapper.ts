@@ -335,18 +335,39 @@ test("Carryforward banner", async (t) => {
 });
 test("No tab stop in dynamic panel", async (t) => {
   await setJSON({
-    elements: [
+    "pages": [
       {
-        type: "paneldynamic", name: "panel1"
-      },
-      {
-        type: "panel", name: "panel2"
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "q2"
+              }
+            ]
+          }
+        ]
       }
     ]
   });
   await t
-    .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").count).eql(1)
-    .expect(Selector(".sd-paneldynamic__panel-wrapper div[tabindex=\"0\"]").withText("Add Question").exists).ok();
-  await t
-    .expect(Selector(".svc-question__content--panel[tabindex=\"0\"]").count).eql(1);
+    .click(Selector(".sv-string-editor").withText("panel1"))
+    .expect(Selector(".sv-string-editor").withText("panel1").focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".svc-action-button").withText("Add Question").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel").focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".sv-string-editor").withText("q2").focused).ok();
 });
