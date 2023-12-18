@@ -54,7 +54,7 @@ export class SurveyCreatorToolboxTool extends CreatorModelElement<
 
   render(): JSX.Element {
     const item = ((this.item as any) as Action);
-    const className = "svc-toolbox__tool " + item.css + (item.isVisible ? "" : " sv-action--hidden");
+    const className = "svc-toolbox__tool " + (item.css || "") + (item.isVisible ? "" : " sv-action--hidden");
     const itemComponent = ReactElementFactory.Instance.createElement(
       this.item.component || "svc-toolbox-item",
       {
