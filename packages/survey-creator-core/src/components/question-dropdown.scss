@@ -19,10 +19,19 @@
   opacity: 0.75;
 }
 
-.svc-question__dropdown-choices--wrapper .svc-action-button {
-  margin-left: calcSize(6.75);
-  margin-top: calcSize(1);
+.svc-question__content>.svc-question__dropdown-choices--wrapper {
+  width: 100%;
+  overflow-x: auto;
 
-  cursor: pointer;
+  &>div {
+    display: inline-block;
+    min-width: calcSize(20);
+  }
+
+  .svc-action-button {
+    margin-left: calcSize(6.75);
+    margin-top: calcSize(1);
+
+    cursor: pointer;
+  }
 }
-

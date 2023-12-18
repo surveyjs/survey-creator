@@ -12,7 +12,6 @@
 .sd-selectbase {
   .svc-item-value-wrapper {
     align-items: flex-start;
-    min-width: calcSize(28);
   }
 
   .svc-item-value__item {
@@ -153,7 +152,7 @@
     background: $background-dim;
 
     svg {
-        fill: $foreground-light;
+      fill: $foreground-light;
     }
   }
 }
@@ -161,7 +160,6 @@
 .sv-ranking {
   .svc-item-value-wrapper {
     align-items: center;
-    min-width: calcSize(27);
   }
 
   .svc-item-value__item {
@@ -192,10 +190,6 @@
   .svc-string-editor {
     width: 100%;
     display: inline-block;
-  }
-
-  .svc-string-editor__content {
-    width: 100%;
   }
 
   .sv-string-editor {

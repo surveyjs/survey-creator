@@ -138,7 +138,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         onDragStart={this.preventDragHandler}
       >
         <div className={"svc-image-item-value-wrapper__ghost"} style={imageStyle}></div>
-        <div className={"svc-image-item-value-wrapper__content"}>
+        <div className={"svc-image-item-value-wrapper__content"} style={imageStyle}>
           <input
             type="file"
             aria-hidden="true"

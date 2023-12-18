@@ -31,42 +31,44 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
     return (
       <div
         className="svc-question__dropdown-choices--wrapper">
-        <div className="svc-question__dropdown-choices">
-          {(this.dropdownModel.getRenderedItems() || []).map(
-            (item: ItemValue, index: number) => (
-              <div
-                className={this.dropdownModel.getChoiceCss()}
-                key={`editable_choice_${index}`}
-              >
-                {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,
-                  ReactElementFactory.Instance.createElement(
-                    this.dropdownModel.itemComponent,
-                    {
-                      key: item.value,
-                      question: this.question,
-                      cssClasses: this.question.cssClasses,
-                      isDisplayMode: true,
-                      item: item,
-                      textStyle: textStyle,
-                      index: index,
-                      isChecked: this.question.value === item.value
-                    }
-                  ),
-                  this.question,
-                  item
-                )}
-              </div>
-            )
-          )}
+        <div>
+          <div className="svc-question__dropdown-choices">
+            {(this.dropdownModel.getRenderedItems() || []).map(
+              (item: ItemValue, index: number) => (
+                <div
+                  className={this.dropdownModel.getChoiceCss()}
+                  key={`editable_choice_${index}`}
+                >
+                  {ReactSurveyElementsWrapper.wrapItemValue(this.question.survey as SurveyModel,
+                    ReactElementFactory.Instance.createElement(
+                      this.dropdownModel.itemComponent,
+                      {
+                        key: item.value,
+                        question: this.question,
+                        cssClasses: this.question.cssClasses,
+                        isDisplayMode: true,
+                        item: item,
+                        textStyle: textStyle,
+                        index: index,
+                        isChecked: this.question.value === item.value
+                      }
+                    ),
+                    this.question,
+                    item
+                  )}
+                </div>
+              )
+            )}
+          </div>
+          {this.dropdownModel.needToCollapse ?
+            <ActionButton
+              click={this.dropdownModel.switchCollapse}
+              text={this.dropdownModel.getButtonText()}
+              allowBubble={true}
+            ></ActionButton> :
+            null
+          }
         </div>
-        {this.dropdownModel.needToCollapse ?
-          <ActionButton
-            click={this.dropdownModel.switchCollapse}
-            text={this.dropdownModel.getButtonText()}
-            allowBubble={true}
-          ></ActionButton> :
-          null
-        }
       </div>
     );
   }

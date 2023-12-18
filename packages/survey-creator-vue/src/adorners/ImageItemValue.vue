@@ -10,7 +10,7 @@
       :style="newItemStyle"
     ></div>
 
-    <div class="svc-image-item-value-wrapper__content">
+    <div class="svc-image-item-value-wrapper__content" :style="newItemStyle">
       <input
         type="file"
         aria-hidden="true"

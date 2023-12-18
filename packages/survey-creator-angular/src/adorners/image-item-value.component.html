@@ -3,7 +3,7 @@
     [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? this.item.value : null" #container>
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
-    <div class="svc-image-item-value-wrapper__content">
+    <div class="svc-image-item-value-wrapper__content" [style]="getNewItemStyle()">
       <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes"
         class="svc-choose-file-input" />
 

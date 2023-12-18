@@ -1,18 +1,16 @@
 <ng-template #template>
   <div class="svc-question__dropdown-choices--wrapper">
-    <div class="svc-question__dropdown-choices">
-      <div *ngFor="let item of adorner.getRenderedItems()" [class]="adorner.getChoiceCss()"
-        data-bind="css: $parent.getChoiceCss()">
-        <ng-template [component]="{ name: getItemValueComponentName(item), data: getItemValueComponentData(item) }">
-        </ng-template>
+    <div>
+      <div class="svc-question__dropdown-choices">
+        <div *ngFor="let item of adorner.getRenderedItems()" [class]="adorner.getChoiceCss()"
+          data-bind="css: $parent.getChoiceCss()">
+          <ng-template [component]="{ name: getItemValueComponentName(item), data: getItemValueComponentData(item) }">
+          </ng-template>
+        </div>
       </div>
+      <svc-action-button *ngIf="adorner.needToCollapse" [text]="adorner.getButtonText()"
+        [click]="adorner.switchCollapse.bind(adorner)" [allowBubble]="true">
+      </svc-action-button>
     </div>
-    <svc-action-button *ngIf="adorner.needToCollapse" [text]="adorner.getButtonText()"
-      [click]="adorner.switchCollapse.bind(adorner)" [allowBubble]="true"> 
-    </svc-action-button>
-    <!-- ko if: needToCollapse -->
-    <!-- <svc-action-button params="text: getButtonText(), click: switchCollapse, allowBubble: true">
-    </svc-action-button> -->
-    <!-- /ko -->
   </div>
 </ng-template>

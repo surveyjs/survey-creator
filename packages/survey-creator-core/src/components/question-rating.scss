@@ -15,6 +15,7 @@
     display: flex;
   }
 }
+
 .svc-rating-question-controls.svc-rating-question-controls--labels-top {
   margin-top: calcSize(5.5);
 }
@@ -28,36 +29,41 @@
       min-width: 0;
     }
 
-    
+
     .sd-rating__item-text {
       max-width: 100%;
+
       .sv-string-editor:focus-within {
         white-space: nowrap;
       }
     }
+
     .svc-string-editor__content {
-      width: 100%;
       .sv-string-editor {
         text-overflow: ellipsis;
         overflow: hidden;
+
         &:focus-within {
-            text-overflow: initial;
-          }
+          text-overflow: initial;
+        }
       }
     }
   }
-    .sd-question--table .sd-rating {
-      margin-inline-start: 0;
-      width: fit-content;
-      margin: auto;
-      max-width: fit-content;
-    }
+
+  .sd-question--table .sd-rating {
+    margin-inline-start: 0;
+    width: fit-content;
+    margin: auto;
+    max-width: fit-content;
+  }
+
   .svc-rating-question-controls {
     display: flex;
     width: calcSize(8);
     min-width: auto;
     justify-content: flex-start;
   }
+
   .sd-rating__item--fixed-size:focus-within {
     width: unset;
     padding: calcSize(0.5) calcSize(2.5);
@@ -68,11 +74,12 @@
   .svc-rating-question-content {
     position: relative;
   }
+
   .svc-rating-question-controls {
     position: absolute;
     top: 0;
   }
- 
+
   .svc-question__content {
     .sd-rating {
       margin-inline-start: 0; // margin-left
@@ -81,14 +88,16 @@
     }
 
 
-    legend+.sd-rating__item, legend+sv-ng-rating-item+.sd-rating__item,
-    legend+.sd-rating__item-smiley,legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
-    {
+    legend+.sd-rating__item,
+    legend+sv-ng-rating-item+.sd-rating__item,
+    legend+.sd-rating__item-smiley,
+    legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley {
       margin-inline-start: calc(9 * #{$base-unit} + 2px);
     }
 
     legend+.sd-rating__item-text,
-    legend+.sd-rating__item-star, legend+sv-ng-rating-item-star+.sd-rating__item-star {
+    legend+.sd-rating__item-star,
+    legend+sv-ng-rating-item-star+.sd-rating__item-star {
       margin-inline-start: calc(9 * #{$base-unit});
     }
   }
