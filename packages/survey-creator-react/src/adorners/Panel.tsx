@@ -37,6 +37,9 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
       </div>
     );
   }
+  protected disableTabStop() {
+    return !this.model.element.isInteractiveDesignElement;
+  }
   protected renderFooter(): JSX.Element {
     return (<React.Fragment>
       {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? attachKey2click(

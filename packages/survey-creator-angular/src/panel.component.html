@@ -3,7 +3,7 @@
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
-    <div [class]="adorner.css()" [key2click]
+    <div [class]="adorner.css()" [key2click]="{ disableTabStop: !adorner.element.isInteractiveDesignElement }"
       (click)="adorner.element.isInteractiveDesignElement ? adorner.select(adorner, $event) : null">
       <div *ngIf="adorner.allowDragging && adorner.element.isInteractiveDesignElement" class="svc-question__drag-area"
         (pointerdown)="adorner.onPointerDown($event)">
