@@ -225,6 +225,10 @@ test("check toolbox scroll", async (t) => {
   }
 });
 
+test("check toolbox css", async (t) => {
+  await t.expect(Selector(".svc-toolbox__tool.undefined").exists).notOk();
+});
+
 test("toolbar responsiveness in compact mode", async (t) => {
   await explicitErrorHandler();
   await t.resizeWindow(1920, 605);
