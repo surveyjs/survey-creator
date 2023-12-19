@@ -98,12 +98,14 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "rmodal": "^1.0.36",
     "survey-core": "../../../survey-library/build/survey-core",
     "survey-creator-core": "../survey-creator-core/build",
     "survey-react-ui": "../../../survey-library/build/survey-react-ui"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "standard-version": {
     "skip": {
