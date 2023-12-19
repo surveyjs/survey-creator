@@ -43,6 +43,12 @@
   width: 100%;
 }
 
+.svc-matrix-cell {
+  .svc-string-editor__content {
+    width: auto;
+  }
+}
+
 .svc-string-editor__content:focus-within .svc-remaining-character-counter {
   display: inline-block;
 }

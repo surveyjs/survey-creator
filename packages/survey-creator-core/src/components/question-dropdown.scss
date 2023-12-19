@@ -20,12 +20,14 @@
 }
 
 .svc-question__content>.svc-question__dropdown-choices--wrapper {
-  width: 100%;
+  width: calc(100% + calcSize(8));
   overflow-x: auto;
+  margin: 0 calcSize(-4);
 
   &>div {
     display: inline-block;
     min-width: calcSize(20);
+    margin: 0 calcSize(4);
   }
 
   .svc-action-button {
