@@ -7,20 +7,6 @@ import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
-function getObjectDiffs(obj1: any, obj2: any = {}): any {
-  const result: any = {};
-  Object.keys(obj1).forEach(key => {
-    if (typeof obj1[key] === "object") {
-      result[key] = getObjectDiffs(obj1[key], obj2[key]);
-    } else {
-      if (obj1[key] !== undefined && obj1[key] != obj2[key]) {
-        result[key] = obj1[key];
-      }
-    }
-  });
-  return result;
-}
-
 export interface IPropertyGridSurveyCreatedEvent {
   themeBuilder: ThemeBuilder;
   themeEditorSurvey: SurveyModel;
