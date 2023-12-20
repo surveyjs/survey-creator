@@ -32,10 +32,9 @@ const json = {
 
 test("On the right side (default)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
-    await setJSON({ pages: [{ name: "page1" }] });
-
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
+    await t.wait(500);
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
     await t.expect(pageNavigatorElement.visible).ok();
@@ -45,12 +44,16 @@ test("On the right side (default)", async (t) => {
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-right-hovered.png", pageNavigatorElement, t, comparer);
+
+    await t.resizeWindow(1920, 1080);
+    await t.wait(1000);
+    await t.expect(pageNavigatorElement.visible).notOk();
   });
 });
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 400);
     await setJSON(json);
 
     await t.click(".svc-page-navigator__selector");
@@ -63,10 +66,10 @@ test("On the right side opened popup", async (t) => {
 
 test("On the left side", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
-    await setJSON({ pages: [{ name: "page1" }] });
-
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
+    await t.wait(500);
+
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
     await changeToolboxLocation("right");
 
@@ -77,17 +80,22 @@ test("On the left side", async (t) => {
     await t.hover(Selector(".svc-page-navigator-item-content:not(.svc-page-navigator-item--selected)"));
     await t.wait(1000);
     await takeElementScreenshot("page-navigator-left-hovered.png", pageNavigatorElement, t, comparer);
+
+    await t.resizeWindow(1920, 1080);
+    await t.wait(1000);
+    await t.expect(pageNavigatorElement.visible).notOk();
   });
 });
 
 test("On the left side (rtl)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
+    await t.resizeWindow(1920, 500);
     await ClientFunction(() => {
       document.body.setAttribute("dir", "rtl");
     })();
 
     await setJSON(json);
+    await t.wait(500);
     const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
     await t.expect(pageNavigatorElement.visible).ok();

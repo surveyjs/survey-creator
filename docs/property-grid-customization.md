@@ -24,7 +24,7 @@ import { Serializer } from "survey-core";
 Serializer.getProperty("boolean", "title").visible = false;
 ```
 
-If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
 
 ```js
 const blackList = [ "visible", "isRequired" ];

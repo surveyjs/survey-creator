@@ -1,7 +1,8 @@
 <div class="svc-rating-question-content">
-  <div class="svc-rating-question-controls svc-item-value-controls">
+  <div data-bind="class: controlsClassNames">
     <!-- ko if: allowRemove -->
-    <sv-svg-icon data-bind="class: removeClassNames, click: removeItem, key2click, attr: { 'aria-label': removeTooltip }"
+    <sv-svg-icon
+      data-bind="class: removeClassNames, click: removeItem, key2click, attr: { 'aria-label': removeTooltip }"
       params="iconName: 'icon-remove_16x16', size: 16, title: removeTooltip">
     </sv-svg-icon>
     <!-- /ko -->

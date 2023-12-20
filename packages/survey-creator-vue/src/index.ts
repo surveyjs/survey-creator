@@ -11,7 +11,6 @@ import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
 
 import ActionButton from "./components/ActionButton.vue";
-import SvgBundle from "./SvgBundle.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import Test from "./tabs/preview/Test.vue";
 
@@ -73,8 +72,6 @@ import CarryForward from "./adorners/CarryForward.vue";
 
 function registerComponents(app: App) {
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
-  app.component("svc-svg-bundle", SvgBundle);
-
   app.component("svc-tabbed-menu", TabbedMenu);
   app.component("svc-tabbed-menu-item-wrapper", TabbedMenuItemWrapper);
   app.component("svc-tabbed-menu-item", TabbedMenuItem);

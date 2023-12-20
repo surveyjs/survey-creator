@@ -1,6 +1,6 @@
 <ng-template #template>
   <div class="svc-rating-question-content">
-    <div class="svc-rating-question-controls svc-item-value-controls">
+    <div [class]="adorner.controlsClassNames">
       <svg *ngIf="adorner.allowRemove" [iconName]="'icon-remove_16x16'" [size]="16" [key2click] (click)="adorner.removeItem(adorner)"
       [class]="adorner.removeClassNames" [attr.title]="adorner.removeTooltip" [attr.aria-label]="adorner.removeTooltip" sv-ng-svg-icon></svg>
       <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add_16x16'" [size]="16" [key2click] (click)="adorner.addItem(adorner)"

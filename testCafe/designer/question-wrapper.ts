@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -332,4 +332,42 @@ test("Carryforward banner", async (t) => {
     .expect(Selector("span").withText("Copy choices from").exists).ok()
     .click(Selector(".svc-carry-forward-panel").find(".svc-action-button").withText("question1"))
     .expect(getSelectedElementName()).eql("question1");
+});
+test("No tab stop in dynamic panel", async (t) => {
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "q2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+  await t
+    .click(Selector(".sv-string-editor").withText("panel1"))
+    .expect(Selector(".sv-string-editor").withText("panel1").focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".svc-action-button").withText("Add Question").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel").focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".sv-string-editor").withText("q2").focused).ok();
 });

@@ -1351,6 +1351,137 @@ test("getElementWrapperComponentName", (): any => {
   const panelDynamictemplateQuestion = panelDynamic.template.addNewQuestion("dropdown", "q1_q1");
   expect(getElementWrapperComponentName(panelDynamictemplateQuestion, "", false)).toEqual("svc-dropdown-question");
 });
+test("getElementWrapperComponentName for cells for component and for matrices", (): any => {
+  ComponentCollection
+    .Instance
+    .add(<any>{
+      name: "matrix_comp",
+      questionJSON: {
+        "type": "matrixdropdown",
+        "name": "question",
+        "rows": ["row1"],
+        "columns": [
+          { name: "col1", cellType: "dropdown" }
+        ]
+      }
+    });
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrix_comp", name: "q1" },
+      {
+        "type": "matrixdropdown",
+        "name": "q2",
+        "rows": ["row1"],
+        "columns": [
+          { name: "col1", cellType: "dropdown" }
+        ]
+      },
+      {
+        type: "paneldynamic", name: "panel1",
+        templateElements: [
+          {
+            "type": "matrixdropdown",
+            "name": "q3",
+            "rows": ["row1"],
+            "columns": [
+              { name: "col1", cellType: "dropdown" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const table1 = creator.survey.getQuestionByName("q1").contentQuestion.renderedTable;
+  const table2 = creator.survey.getQuestionByName("q2").renderedTable;
+  const table3 = creator.survey.getQuestionByName("panel1").panels[0].getQuestionByName("q3").renderedTable;
+  expect(table1.headerRow.cells).toHaveLength(2);
+  expect(table2.headerRow.cells).toHaveLength(2);
+  expect(table1.rows).toHaveLength(2);
+  expect(table2.rows).toHaveLength(2);
+  expect(table1.rows[0].cells).toHaveLength(2);
+  expect(table2.rows[0].cells).toHaveLength(2);
+
+  expect(getElementWrapperComponentName(table2.headerRow.cells[1], "row-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table2.headerRow.cells[1], "row-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table2.rows[1].cells[0], "row-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table2.rows[1].cells[0], "row-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table2.rows[1].cells[1], "cell", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table2.rows[1].cells[1], "cell", true)).toEqual("svc-matrix-cell");
+
+  expect(getElementWrapperComponentName(table1.headerRow.cells[1], "row-header", false)).toBeFalsy();
+  expect(getElementWrapperComponentName(table1.headerRow.cells[1], "row-header", true)).toBeFalsy();
+  expect(getElementWrapperComponentName(table1.rows[1].cells[0], "row-header", false)).toBeFalsy();
+  expect(getElementWrapperComponentName(table1.rows[1].cells[0], "row-header", true)).toBeFalsy();
+  expect(getElementWrapperComponentName(table1.rows[1].cells[1], "cell", false)).toBeFalsy();
+  expect(getElementWrapperComponentName(table1.rows[1].cells[1], "cell", true)).toBeFalsy();
+
+  expect(getElementWrapperComponentName(table3.headerRow.cells[1], "row-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table3.headerRow.cells[1], "row-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table3.rows[1].cells[0], "row-header", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table3.rows[1].cells[0], "row-header", true)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table3.rows[1].cells[1], "cell", false)).toEqual("svc-matrix-cell");
+  expect(getElementWrapperComponentName(table3.rows[1].cells[1], "cell", true)).toEqual("svc-matrix-cell");
+
+  ComponentCollection.Instance.remove("matrix_comp");
+});
+test("isStringEditable for cells for component and for matrices", (): any => {
+  ComponentCollection
+    .Instance
+    .add(<any>{
+      name: "matrix_comp",
+      questionJSON: {
+        "type": "matrixdropdown",
+        "name": "question",
+        "rows": ["row1"],
+        "columns": [
+          { name: "col1", cellType: "dropdown" }
+        ]
+      }
+    });
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "matrix_comp", name: "q1" },
+      {
+        "type": "matrixdropdown",
+        "name": "q2",
+        "rows": ["row1"],
+        "columns": [
+          { name: "col1", cellType: "dropdown" }
+        ]
+      },
+      {
+        type: "paneldynamic", name: "panel1",
+        templateElements: [
+          {
+            "type": "matrixdropdown",
+            "name": "q3",
+            "rows": ["row1"],
+            "columns": [
+              { name: "col1", cellType: "dropdown" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+  const table1 = creator.survey.getQuestionByName("q1").contentQuestion.renderedTable;
+  const table2 = creator.survey.getQuestionByName("q2").renderedTable;
+  const table3 = creator.survey.getQuestionByName("panel1").panels[0].getQuestionByName("q3").renderedTable;
+
+  const titleOwner1 = table1.headerRow.cells[1].locTitle.owner;
+  const titleOwner2 = table2.headerRow.cells[1].locTitle.owner;
+  const titleOwner3 = table3.headerRow.cells[1].locTitle.owner;
+  expect(titleOwner1.isQuestion).toBeTruthy();
+  expect(titleOwner2.isQuestion).toBeTruthy();
+  expect(titleOwner2.isQuestion).toBeTruthy();
+  expect(isStringEditable(titleOwner1, "title")).toBeFalsy();
+  expect(isStringEditable(titleOwner2, "title")).toBeTruthy();
+  expect(isStringEditable(titleOwner3, "title")).toBeTruthy();
+
+  ComponentCollection.Instance.remove("matrix_comp");
+});
 test("getElementWrapperComponentName for new class", (): any => {
   class QuestionDropdownModel2 extends QuestionDropdownModel {
     getType() { return "dropdown2"; }
@@ -2036,7 +2167,7 @@ test("ConvertTo, show it for a panel", (): any => {
   expect((<any>creator.selectedElement).getType()).toEqual("paneldynamic");
 });
 test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
-  const creator = new CreatorTester();
+  const creator = new CreatorTester({ maxNestedPanels: 0 });
   creator.JSON = {
     elements: [
       {
@@ -2055,6 +2186,10 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
       { type: "paneldynamic", name: "panel2" }
     ]
   };
+  expect(creator.maxNestedPanels).toBe(0);
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
+  creator.maxNestedPanels = -1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(-1);
   const panel1 = creator.survey.getPanelByName("panel1");
   const panel2 = creator.survey.getQuestionByName("panel2");
   const panel3 = creator.survey.getPanelByName("panel3");
@@ -2067,11 +2202,13 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   creator.maxNestedPanels = 3;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(3);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount);
   expect(panel5Model.getConvertToTypesActions()).toHaveLength(2);
   creator.maxNestedPanels = 2;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(2);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount);
@@ -2079,6 +2216,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel2)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   creator.maxNestedPanels = 1;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(1);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel3)).toHaveLength(itemCount - 1);
@@ -2087,6 +2225,7 @@ test("ConvertTo & addNewQuestion for panel & maxNestedPanels ", (): any => {
   expect(creator.getAvailableToolboxItems(panel1)).toHaveLength(itemCount);
   expect(creator.getAvailableToolboxItems()).toHaveLength(itemCount);
   creator.maxNestedPanels = 0;
+  expect(creator.dragDropSurveyElements.maxNestedPanels).toBe(0);
   expect(creator.getAvailableToolboxItems(panel5)).toHaveLength(itemCount - 1);
   expect(creator.getAvailableToolboxItems(panel6)).toHaveLength(itemCount - 1);
   expect(panel6Model.getConvertToTypesActions()).toHaveLength(itemCount - 1);
@@ -4049,4 +4188,23 @@ test("Creator bypage edit mode & onElementAllowOperations", (): any => {
   creator.selectElement(creator.survey.pages[3]);
   pageAdorner["onElementSelectedChanged"](true);
   expect(pageAdorner.actionContainer.getActionById("delete").visible).toBeTruthy();
+});
+test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
+  const creator = new CreatorTester();
+  const survey = creator.survey;
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  survey.addNewPage("page3");
+  survey.currentPageNo = 1;
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "bypage";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeTruthy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeTruthy();
+  creator.pageEditMode = "single";
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
+  expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeFalsy();
 });

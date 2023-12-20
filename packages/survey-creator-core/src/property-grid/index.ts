@@ -165,6 +165,8 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ) => void;
+  onValueChanged?: (obj: Base, prop: JsonObjectProperty, question: Question) => void;
+  onValueChanging?: (obj: Base, prop: JsonObjectProperty, question: Question, options: any) => void;
   onMasterValueChanged?: (
     obj: Base,
     prop: JsonObjectProperty,
@@ -315,6 +317,12 @@ export var PropertyGridEditorCollection = {
     var res = this.getEditor(prop);
     if (!!res && !!res.onValueChanged) {
       res.onValueChanged(obj, prop, question);
+    }
+  },
+  onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any) {
+    var res = this.getEditor(prop);
+    if (!!res && !!res.onValueChanging) {
+      res.onValueChanging(obj, prop, question, options);
     }
   },
   onMasterValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
@@ -983,6 +991,7 @@ export class PropertyGridModel {
   private onValueChanging(options: any) {
     var q = options.question;
     if (!q || !q.property || Helpers.isTwoValueEquals(options.value, options.oldValue, false, false, false)) return;
+    PropertyGridEditorCollection.onValueChanging(this.obj, q.property, q, options);
     var changingOptions = {
       obj: this.obj,
       propertyName: q.property.name,
@@ -1459,6 +1468,15 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
       res.max = prop.maxValue;
     }
     return res;
+  }
+  public onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any): void {
+    if(!options.value && options.value !== 0) {
+      if(prop.defaultValue !== undefined) {
+        options.value = prop.defaultValue;
+      } else {
+        options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
+      }
+    }
   }
 }
 

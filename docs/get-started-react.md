@@ -34,18 +34,14 @@ import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
 ```
 
-Note that although standalone surveys support [multiple predefined themes](https://surveyjs.io/form-library/documentation/get-started-react#configure-styles), surveys within Survey Creator apply only one theme ("Default V2"). However, you can use the survey configuration (JSON object) produced by Survey Creator to build a standalone survey and apply any theme to it. You can also customize Survey Creator theme colors as shown in the following example:
-
-[View Demo](https://surveyjs.io/survey-creator/examples/edit-user-interface-theme-with-custom-css/reactjs (linkStyle))
-
 ## Configure Survey Creator
 
-To configure the Survey Creator component, specify [its properties](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions) in a configuration object. In this tutorial, the object enables the following properties:
+To configure the Survey Creator component, specify [its properties](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions) in a configuration object. In this tutorial, the object enables the following properties:
 
-- [`showLogicTab`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#showLogicTab)        
+- [`showLogicTab`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#showLogicTab)        
 Displays the Logic tab in the tab panel.
 
-- [`isAutoSave`](https://surveyjs.io/Documentation/Survey-Creator?id=ICreatorOptions#isAutoSave)        
+- [`isAutoSave`](https://surveyjs.io/survey-creator/documentation/api-reference/icreatoroptions#isAutoSave)        
 Automatically saves the survey JSON schema on every change.
 
 ```js
@@ -183,7 +179,7 @@ function saveSurveyJson(url, json, saveNo, callback) {
 }
 ```
 
-To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#JSON) or [`text`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
+To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:
 
 
 ```js
@@ -311,6 +307,8 @@ export function SurveyCreatorWidget() {
 }
 ```
 
+To view the application, run `npm run start` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
+
 <details>
   <summary>View Full Code</summary>
 
@@ -399,9 +397,7 @@ export function SurveyCreatorWidget() {
 ```
 </details>
 
-[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))
-
-To view the application, run `npm run start` in a command line and open [http://localhost:3000/](http://localhost:3000/) in your browser.
+[View Demo](https://surveyjs.io/survey-creator/examples/file-upload/reactjs (linkStyle))
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 

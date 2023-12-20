@@ -946,3 +946,50 @@ test("Check string editor focus does not throw error: #4459", async (t) => {
     .click(Selector(".svc-item-value-controls__add").filterVisible().nth(1))
     .expect(Selector(".sv-string-editor").withExactText("Item 5").exists).ok();
 });
+
+test("Check string editor composition update events", async (t) => {
+  await ClientFunction(() => {
+    const property = window["Survey"].Serializer.findProperty("question", "title");
+    property.maxLength = 2;
+  })();
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q",
+        "maxLength": 1
+      }]
+  });
+  var editor = Selector(".svc-question__content .svc-string-editor .sv-string-editor");
+  await t
+    .click(editor)
+    .pressKey("a")
+    .expect(editor.withExactText("a").exists).ok()
+    .pressKey("b")
+    .expect(editor.withExactText("ab").exists).ok()
+    .pressKey("c")
+    .expect(editor.withExactText("ab").exists).ok()
+    .pressKey("esc");
+
+  const options = Object.assign({
+    eventConstructor: "CompositionEvent"
+  });
+
+  await t.dispatchEvent(editor, "compositionstart", options);
+
+  await t
+    .click(editor)
+    .pressKey("a")
+    .expect(editor.withExactText("a").exists).ok()
+    .pressKey("b")
+    .expect(editor.withExactText("ab").exists).ok()
+    .pressKey("c")
+    .expect(editor.withExactText("abc").exists).ok();
+
+  await t.dispatchEvent(editor, "compositionend", options);
+
+  await ClientFunction(() => {
+    const property = window["Survey"].Serializer.findProperty("question", "title");
+    property.maxLength = undefined;
+  })();
+});

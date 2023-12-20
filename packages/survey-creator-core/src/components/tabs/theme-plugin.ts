@@ -1,10 +1,10 @@
 import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel } from "survey-core";
+import { settings } from "../../creator-settings";
 import { CreatorBase, ICreatorPlugin } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { ThemeBuilder } from "./theme-builder";
+import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
-import { settings } from "../../creator-settings";
-import { PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 function getObjectDiffs(obj1: any, obj2: any = {}): any {
@@ -43,6 +43,7 @@ export interface IPropertyGridSurveyCreatedEvent {
  * ```
  */
 export class ThemeTabPlugin implements ICreatorPlugin {
+  public static DefaultTheme = Themes["default-light"];
   private previewAction: Action;
   private invisibleToggleAction: Action;
   private testAgainAction: Action;
@@ -57,7 +58,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private undoAction: Action;
   private redoAction: Action;
   private inputFileElement: HTMLInputElement;
-  private simulatorTheme: any = surveyCss[defaultV2ThemeName];
+  private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
   private _availableThemes = [].concat(PredefinedThemes);
 
@@ -69,7 +70,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   constructor(private creator: CreatorBase) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
-    this.simulatorTheme = surveyCss[defaultV2ThemeName];
+    this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
@@ -99,9 +100,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
   }
   public activate(): void {
-    this.model = new ThemeBuilder(this.creator, this.simulatorTheme);
-    this.model.availableThemes = this.availableThemes;
-    this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
+    this.model = new ThemeBuilder(this.creator, this.simulatorCssClasses);
     this.update();
     if (!!this.model.themeEditorSurvey) {
       const options = <IPropertyGridSurveyCreatedEvent>{
@@ -116,13 +115,15 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public update(): void {
     if (!this.model) return;
-    const options = {
-      showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
-    };
+    this.model.availableThemes = this.availableThemes;
+    this.model.simulator.landscape = this.creator.previewOrientation != "portrait";
     this.model.testAgainAction = this.testAgainAction;
     this.model.availableThemes = this.availableThemes;
     this.model.prevPageAction = this.prevPageAction;
     this.model.nextPageAction = this.nextPageAction;
+    const options = {
+      showPagesInTestSurveyTab: this.creator.showPagesInTestSurveyTab,
+    };
     this.model.initialize(this.creator.JSON, options);
 
     if (this.creator.showInvisibleElementsInTestSurveyTab) {
@@ -159,7 +160,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   }
   public deactivate(): boolean {
     if (this.model) {
-      this.simulatorTheme = this.model.simulator.survey.css;
+      this.simulatorCssClasses = this.model.simulator.survey.css;
       this.model.onPropertyChanged.clear();
       this.model.onThemeSelected.clear();
       this.model.onThemePropertyChanged.clear();
@@ -178,7 +179,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   public exportToFile(fileName: string) {
     const themeCopy = JSON.parse(JSON.stringify(this.creator.theme));
-    themeCopy.themeName = themeCopy.themeName + "_exported";
     const themeData = JSON.stringify(themeCopy, null, 4);
     const themeBlob = new Blob([themeData], { type: "application/json" });
     this.saveToFileHandler(fileName, themeBlob);
@@ -187,9 +187,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       const theme: ITheme = JSON.parse(fileReader.result as string);
-      this.addTheme(theme);
-      if (this.model) {
-        this.model.setTheme(theme);
+      if (!!this.model) {
+        this.model.loadTheme(theme);
       }
       callback && callback(theme);
     };
@@ -490,21 +489,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return this.getThemeChanges();
   }
   public getThemeChanges() {
-    const fullTheme: ITheme = this.creator.theme;
-    let probeThemeFullName = getThemeFullName(fullTheme);
-    const baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
-    const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
-    Object.keys(themeChanges).forEach(propertyName => {
-      if (propertyName.toLowerCase().indexOf("background") !== -1) {
-        if (themeChanges[propertyName] === "" || themeChanges[propertyName] === Serializer.findProperty("survey", propertyName).defaultValue) {
-          delete themeChanges[propertyName];
-        }
-      }
-    });
-    themeChanges.themeName = fullTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
-    themeChanges.colorPalette = fullTheme.colorPalette || "light";
-    themeChanges.isPanelless = !!fullTheme.isPanelless;
-    return themeChanges;
+    return getThemeChanges(this.creator.theme);
   }
   /**
    * Indicates whether the selected theme has been modified.

@@ -260,7 +260,7 @@ export class StringEditorViewModelBase extends Base {
     this.connector.onDoActivate.add(this.activate);
   }
   public checkConstraints(event: any) {
-    if (this.maxLength > 0 && event.keyCode >= 32) {
+    if (!this.compostionInProgress && this.maxLength > 0 && event.keyCode >= 32) {
       var text: string = (event.target as any).innerText || "";
 
       if (text.length >= this.maxLength) {

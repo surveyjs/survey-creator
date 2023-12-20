@@ -1,46 +1,61 @@
-# survey-vue3-ui
+# Survey Creator / Form Builder for Vue 3
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+https://github.com/surveyjs/survey-creator/assets/22315929/21812f7a-c07e-4fa0-a541-6caa4e274a44
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
+[![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
+<a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+A visual designer that enables you and your users to create and modify surveys and forms in your Vue 3 application.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+[Try Survey Creator / Form Builder](https://surveyjs.io/create-survey)
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Get Started
 
-## Customize configuration
+To get started with Survey Creator / Form Builder for Vue 3, refer to the following tutorial: [Add Survey Creator / Form Builder to a Vue 3 Application](https://surveyjs.io/survey-creator/documentation/get-started-vue#add-survey-creator-to-a-vue-3-application).
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Resources
 
-## Project Setup
+- [Website](https://surveyjs.io/)
+- [Documentation](https://surveyjs.io/Documentation/Survey-Creator)
+- [Live Examples](https://surveyjs.io/Examples/Survey-Creator)
+- [What's New](https://surveyjs.io/WhatsNew)
 
-```sh
-npm install
-```
+## Build Survey Creator / Form Builder for Vue 3 from Sources
 
-### Compile and Hot-Reload for Development
+If you want to build the library yourself, do the following:
 
-```sh
-npm run dev
-```
+1. **Build `survey-library` and `survey-creator-core`**\
+    Refer to the following instructions:
 
-### Type-Check, Compile and Minify for Production
+    - [Build the SurveyJS Form Library from Sources](https://github.com/surveyjs/survey-library#build-the-surveyjs-form-library-from-sources)
+    - [Build the Survey Creator Model from Sources](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core#build-the-survey-creator-model-from-sources)
 
-```sh
-npm run build
-```
+    > NOTE: Make sure that folders with cloned `survey-library` and `survey-creator` repositories are in the same directory.
 
-### Lint with [ESLint](https://eslint.org/)
+1.  **Install build dependencies for Survey Creator / Form Builder for Vue 3**
 
-```sh
-npm run lint
-```
+    ```
+    cd survey-creator/packages/survey-creator-vue
+    npm install
+    ```
+
+1.  **Build the library**
+
+    ```
+    npm run build
+    ```
+
+    You can find the built library in the "build" directory.
+
+1.  **Run unit tests**
+
+    ```
+    npm test
+    ```
+    This command runs unit tests using [Karma](https://karma-runner.github.io/0.13/index.html).
+
+## Licensing
+
+Survey Creator is **not available for free commercial usage**. If you want to integrate it into your application, you must purchase a [commercial license](https://surveyjs.io/licensing). However, you can [use Survey Creator online](https://surveyjs.io/create-survey) to produce survey JSON configurations and run them with [SurveyJS Form Library](https://surveyjs.io/form-library/documentation/overview) in your application free of charge.

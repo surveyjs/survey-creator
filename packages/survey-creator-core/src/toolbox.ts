@@ -811,6 +811,7 @@ export class QuestionToolbox
       iconName: iconName,
       title: title,
       tooltip: title,
+      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
       json: elementJson,
       isCopied: false,
       category: category

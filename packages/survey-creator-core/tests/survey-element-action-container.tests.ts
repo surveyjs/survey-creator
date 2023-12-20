@@ -10,33 +10,40 @@ test("SurveyElementActionContainer with subtypes fit", () => {
     {
       "id": "convertTo",
       "minDimension": 56,
-      "maxDimension": 110
+      "maxDimension": 110,
+      "location": "start",
+      "iconName": "convertTo"
     },
     {
       "id": "convertInputType",
       "minDimension": 56,
-      "maxDimension": 81
+      "maxDimension": 81,
+      "location": "start"
     },
     {
       "id": "duplicate",
       "minDimension": 40,
-      "maxDimension": 99
+      "maxDimension": 99,
+      "iconName": "duplicate"
     },
     {
       "id": "settings",
       "minDimension": 40,
       "maxDimension": 91,
-      hidden: true
+      hidden: true,
+      "iconName": "settings"
     },
     {
       "id": "isrequired",
       "minDimension": 40,
-      "maxDimension": 97
+      "maxDimension": 97,
+      "iconName": "isrequired"
     },
     {
       "id": "delete",
       "minDimension": 40,
-      "maxDimension": 82
+      "maxDimension": 82,
+      "iconName": "delete"
     }
   ];
 
@@ -45,6 +52,8 @@ test("SurveyElementActionContainer with subtypes fit", () => {
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
     action.visible = !a.hidden;
+    action.innerItem.iconName = a.iconName;
+    action.innerItem.location = a.location;
     return action;
   }));
 
@@ -58,14 +67,14 @@ test("SurveyElementActionContainer with subtypes fit", () => {
 
   actionContainer.fit(432, 32);
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
-  expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
-  expect(actionContainer.getActionById("duplicate").mode).toBe("large");
-  expect(actionContainer.getActionById("isrequired").mode).toBe("large");
-  expect(actionContainer.getActionById("delete").mode).toBe("large");
+  expect(actionContainer.getActionById("convertInputType").mode).toBe("large");
+  expect(actionContainer.getActionById("duplicate").mode).toBe("small");
+  expect(actionContainer.getActionById("isrequired").mode).toBe("small");
+  expect(actionContainer.getActionById("delete").mode).toBe("small");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
   expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
-  actionContainer.fit(304, 32);
+  actionContainer.fit(250, 32);
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");
   expect(actionContainer.getActionById("convertInputType").mode).toBe("removed");
   expect(actionContainer.getActionById("duplicate").mode).toBe("small");
@@ -100,28 +109,40 @@ test("SurveyElementActionContainer without subtypes fit", () => {
     {
       "id": "convertTo",
       "minDimension": 56,
-      "maxDimension": 110
+      "maxDimension": 110,
+      "location": "start",
+      "iconName": "convertTo"
+    },
+    {
+      "id": "convertInputType",
+      "minDimension": 56,
+      "maxDimension": 81,
+      "location": "start"
     },
     {
       "id": "duplicate",
       "minDimension": 40,
-      "maxDimension": 99
+      "maxDimension": 99,
+      "iconName": "duplicate"
     },
     {
       "id": "settings",
       "minDimension": 40,
       "maxDimension": 91,
-      hidden: true
+      hidden: true,
+      "iconName": "settings"
     },
     {
       "id": "isrequired",
       "minDimension": 40,
-      "maxDimension": 97
+      "maxDimension": 97,
+      "iconName": "isrequired"
     },
     {
       "id": "delete",
       "minDimension": 40,
-      "maxDimension": 82
+      "maxDimension": 82,
+      "iconName": "delete"
     }
   ];
 
@@ -130,6 +151,8 @@ test("SurveyElementActionContainer without subtypes fit", () => {
     action.minDimension = a.minDimension;
     action.maxDimension = a.maxDimension;
     action.visible = !a.hidden;
+    action.innerItem.iconName = a.iconName;
+    action.innerItem.location = a.location;
     return action;
   }));
 
@@ -139,14 +162,6 @@ test("SurveyElementActionContainer without subtypes fit", () => {
   expect(actionContainer.getActionById("isrequired").mode).toBe("large");
   expect(actionContainer.getActionById("delete").mode).toBe("large");
   expect(actionContainer.dotsItem.visible).toBeFalsy();
-
-  actionContainer.fit(432, 32);
-  expect(actionContainer.getActionById("convertTo").mode).toBe("large");
-  expect(actionContainer.getActionById("duplicate").mode).toBe("large");
-  expect(actionContainer.getActionById("isrequired").mode).toBe("large");
-  expect(actionContainer.getActionById("delete").mode).toBe("large");
-  expect(actionContainer.dotsItem.visible).toBeFalsy();
-  expect(actionContainer.hiddenItemsListModel.actions.length).toBe(0);
 
   actionContainer.fit(304, 32);
   expect(actionContainer.getActionById("convertTo").mode).toBe("large");

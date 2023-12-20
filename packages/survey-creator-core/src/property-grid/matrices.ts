@@ -61,7 +61,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
           return rowObj.text;
         });
       }
-      if (propertyName === "title" && objType === "matrixdropdowncolumn") {
+      if (propertyName === "title" && (objType === "matrixdropdowncolumn" || objType === "multipletextitem")) {
         (<any>cellQuestion).placeholder = new ComputedUpdater<string>(() => {
           if(!!rowObj.name) return rowObj.name;
           return rowObj.title;
@@ -662,13 +662,6 @@ export class PropertyGridEditorMatrixPages extends PropertyGridEditorMatrix {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "surveypages";
   }
-  public onMatrixAllowRemoveRow(obj: Base, row: MatrixDynamicRowModel): boolean {
-    var page: any = row.editingObj;
-    if (!page || !page.survey) {
-      return;
-    }
-    return page.survey.currentPage !== page;
-  }
   protected getColumnClassName(obj: Base, prop: JsonObjectProperty): string {
     return "page@" + obj.getType();
   }
@@ -775,7 +768,7 @@ export class PropertyGridEditorMatrixMutlipleTextItems extends PropertyGridEdito
     const editor = options.row.editingObj.editor;
     if (!!editor && !!q.property) {
       editor.registerFunctionOnPropertyValueChanged(q.property.name, () => {
-        q.value = editor[q.property.name];
+        q.value = Serializer.getObjPropertyValue(editor, q.property.name);
       });
     }
   }

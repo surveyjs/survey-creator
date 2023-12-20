@@ -723,6 +723,7 @@ export var enStrings = {
     both: "Both",
     left: "Left",
     right: "Right",
+    leftRight: "Left and right",
     color: "color",
     date: "date",
     datetime: "datetime",

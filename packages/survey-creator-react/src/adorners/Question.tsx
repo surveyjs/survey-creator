@@ -67,6 +67,9 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       </div>
     );
   }
+  protected disableTabStop() {
+    return true;
+  }
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
     if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
@@ -78,8 +81,8 @@ export class QuestionAdornerComponent extends CreatorModelElement<
         {this.renderHeader()}
         {content}
         {this.renderFooter()}
-      </div>
-    );
+      </div>,
+      undefined, { disableTabStop: this.disableTabStop() });
   }
   protected renderHeader(): JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });

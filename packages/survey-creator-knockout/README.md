@@ -1,5 +1,9 @@
 # Survey Creator / Form Builder for Knockout
 
+
+https://github.com/surveyjs/survey-creator/assets/22315929/0bf6911e-d2c5-455f-b97b-7a17cc7f9d2f
+
+
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
 <a href="https://www.npmjs.com/package/survey-creator"><img alt="NPM Version" src="https://img.shields.io/npm/v/survey-creator.svg" data-canonical-src="https://img.shields.io/npm/v/survey-creator.svg" style="max-width:100%;"></a>
 

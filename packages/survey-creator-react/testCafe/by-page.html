@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/react@latest/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-core/defaultV2.css" />
   <link rel="stylesheet" type="text/css" href="../node_modules/survey-creator-core/survey-creator-core.css" />
   <!-- <link rel="stylesheet" type="text/css" href="../build/survey-creator-react.min.css" /> -->
@@ -25,14 +25,12 @@
   window.surveyJSFramework = "react";
   const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
   window.creator = creator;
-  ReactDOM.render(
-    React.createElement(
-      SurveyCreator.SurveyCreatorComponent,
-      { creator: creator },
-      null
-    ),
-    document.getElementById("survey-creator")
-  );
+  const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
+  root.render(React.createElement(
+    SurveyCreator.SurveyCreatorComponent,
+    { creator: creator },
+    null
+  ),);
 </script>
 
 </html>
