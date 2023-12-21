@@ -1381,7 +1381,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Wert setzen, wenn"
-// theme.groupHeader: "Header" => "Titelzeile"
 // theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
 // theme.coverOverlapEnabled: "Overlap" => "Überlappung"
 // theme.backgroundImageFitFill: "Stretch" => "Strecken"
