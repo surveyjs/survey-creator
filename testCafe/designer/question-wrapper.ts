@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON, unselectedQuestionToolbarActions } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -95,7 +95,7 @@ test("Single input question wrapper action convert inputType", async (t) => {
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
+  const convertActionButton = unselectedQuestionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()

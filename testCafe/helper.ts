@@ -62,6 +62,7 @@ export const selectedObjectTextSelector = ".svc-side-bar__container-header #svd-
 
 export const questions = Selector(".svc-question__content");
 export const questionToolbarActions = Selector(".svc-question__content--selected .svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
+export const unselectedQuestionToolbarActions = Selector(".svc-question__content-actions").filterVisible().find(".sv-action").filterVisible();
 
 export const pageNavigator = Selector(".svc-page-navigator__selector").filterVisible();
 export const toolbox = Selector(".svc-toolbox");
