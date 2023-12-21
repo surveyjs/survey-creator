@@ -1431,6 +1431,22 @@ test("Check carry forward panel", async (t) => {
               "name": "question2",
               "choicesFromQuestion": "question1",
               "choicesFromQuestionMode": "selected"
+            },
+            {
+              "type": "checkbox",
+              "name": "question3",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+            },
+            {
+              "type": "checkbox",
+              "name": "question4",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "maxWidth": "400px",
+              "minWidth": "400px",
             }
           ]
         }
@@ -1440,6 +1456,8 @@ test("Check carry forward panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const rootSelector = Selector(".svc-question__adorner").nth(1);
     await takeElementScreenshot("carry-forward-panel.png", rootSelector, t, comparer);
+    await takeElementScreenshot("carry-forward-panel-small.png", Selector(".svc-question__adorner").nth(2), t, comparer);
+    await takeElementScreenshot("carry-forward-panel-medium.png", Selector(".svc-question__adorner").nth(3), t, comparer);
   });
 });
 
@@ -1602,20 +1620,43 @@ test("Narrow question placeholder", async (t) => {
             {
               "type": "panel",
               "name": "question1",
-              "maxWidth": "250px"
+              "maxWidth": "200px",
+              "minWidth": "200px"
             },
             {
               "type": "paneldynamic",
               "name": "panel1",
-              "maxWidth": "250px",
+              "maxWidth": "200px",
+              "minWidth": "200px",
               "startWithNewLine": false,
               "isRequired": true
             },
             {
               "type": "html",
               "name": "question2",
-              "minWidth": "100px",
-              "maxWidth": "250px",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "startWithNewLine": false
+            },
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "400px",
+              "minWidth": "400px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "maxWidth": "400px",
+              "minWidth": "400px",
               "startWithNewLine": false
             }
           ]
@@ -1632,5 +1673,85 @@ test("Narrow question placeholder", async (t) => {
     await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
 
     await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+
+    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(3), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(4), t, comparer);
+
+    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(5), t, comparer);
+
+  });
+});
+test("Narrow carry-forward choices panel", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "200px",
+              "minWidth": "200px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "startWithNewLine": false
+            },
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "400px",
+              "minWidth": "400px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    const qContent = Selector(".svc-question__content");
+    await takeElementScreenshot("panel-placeholder.png", qContent.nth(0), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
+
+    await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+
+    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(3), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(4), t, comparer);
+
+    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(5), t, comparer);
+
   });
 });
