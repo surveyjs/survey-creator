@@ -42,7 +42,7 @@
         </button>
       </div>
 
-      <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions">
+      <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event as any)">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
     </div>

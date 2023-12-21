@@ -78,7 +78,7 @@
       <div
         v-if="adorner.element.isInteractiveDesignElement"
         class="svc-question__content-actions"
-        @focusin="adorner.select(adorner, $event)"
+        @focusin="adorner.select(adorner, $event as any)"
       >
         <sv-action-bar
           :model="adorner.actionContainer"
