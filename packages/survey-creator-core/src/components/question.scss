@@ -12,8 +12,11 @@ svc-question {
 
 .svc-question__adorner {
   position: relative;
-  height: 100%;
+  height: auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+    justify-content: stretch;
 
   .sv-action-bar {
     overflow: visible;
@@ -38,6 +41,7 @@ svc-question {
   position: relative;
   width: 100%;
   height: auto;
+  flex-grow: 1;
   border-radius: calcSize(0.5);
   box-sizing: border-box;
   padding: calcSize(4) calcSize(5) calcSize(8);
