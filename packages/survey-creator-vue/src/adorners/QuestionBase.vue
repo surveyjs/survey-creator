@@ -74,7 +74,7 @@
       <div class="svc-question__content-actions" 
       v-on:focusin="
         (e) => {
-          model.select(model, e as any);
+          model.select(model, e);
           e.stopPropagation();
         }">
         <sv-action-bar

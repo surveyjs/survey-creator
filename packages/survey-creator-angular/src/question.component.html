@@ -23,7 +23,7 @@
         [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
       </ng-template>
 
-      <div class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event as any)">
+      <div class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event)">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
     </div>

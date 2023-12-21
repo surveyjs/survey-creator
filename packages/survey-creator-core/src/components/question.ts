@@ -20,7 +20,7 @@ import {
 import { CreatorBase } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
-import { IPortableDragEvent, IPortableMouseEvent } from "../utils/events";
+import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
 import {
   isPropertyVisible,
   propertyExists,
@@ -77,7 +77,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.surveyElement;
   }
 
-  select(model: QuestionAdornerViewModel, event: IPortableMouseEvent) {
+  select(model: QuestionAdornerViewModel, event: IPortableEvent) {
     if (!model.surveyElement.isInteractiveDesignElement) {
       return;
     }
