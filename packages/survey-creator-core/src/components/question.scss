@@ -671,6 +671,13 @@ svc-question,
   }
 }
 
+.svc-question__content--radiogroup,
+.svc-question__content--checkbox {
+  .sd-question__content {
+    overflow-x: auto;
+  }
+}
+
 .svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:hover,
 .svc-required-action--active:not(.sv-action-bar-item--pressed):enabled:focus,
 .svc-required-action--active {
