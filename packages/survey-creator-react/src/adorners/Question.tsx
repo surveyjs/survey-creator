@@ -88,7 +88,9 @@ export class QuestionAdornerComponent extends CreatorModelElement<
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
   protected renderFooter(): JSX.Element {
-    return ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model });
+    const allowInteractions = this.model.element
+      .isInteractiveDesignElement;
+    return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
   }
   protected renderCarryForwardBanner(): JSX.Element {
     if (!this.model.isUsingCarryForward) return null;

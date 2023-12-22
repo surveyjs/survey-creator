@@ -1031,7 +1031,7 @@ var germanTranslation = {
     "--base-unit": "Basiseinheit",
     groupGeneral: "Allgemein",
     groupAdvanced: "Fortgeschritten",
-    groupHeader: "Kopfball",
+    groupHeader: "Titelzeile",
     groupBackground: "Hintergrund",
     groupAppearance: "Aussehen",
     themeName: "Thema",
@@ -1381,7 +1381,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Wert setzen, wenn"
-// theme.groupHeader: "Header" => "Kopfball"
 // theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
 // theme.coverOverlapEnabled: "Overlap" => "Überlappung"
 // theme.backgroundImageFitFill: "Stretch" => "Strecken"
