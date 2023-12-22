@@ -8,8 +8,13 @@ import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 export interface IPropertyGridSurveyCreatedEvent {
-  themeBuilder: ThemeBuilder;
-  params: { survey: SurveyModel };
+  survey: SurveyModel;
+}
+export interface IPropertyGridEditorAdditingOptions {
+  element: IElement;
+  category?: string;
+  insertAfter?: string;
+  insertBefore?: string;
 }
 
 /**
@@ -89,10 +94,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.model = new ThemeBuilder(this.creator, this.simulatorCssClasses);
     this.update();
     if (!!this.model.themeEditorSurvey) {
-      const options = <IPropertyGridSurveyCreatedEvent>{
-        themeBuilder: this.model,
-        params: { survey: this.model.themeEditorSurvey }
-      };
+      const options = <IPropertyGridSurveyCreatedEvent>{ survey: this.model.themeEditorSurvey };
       this.onPropertyGridSurveyCreated.fire(this, options);
     }
     this.sidebarTab.model = this.model.themeEditorSurvey;
@@ -531,4 +533,19 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
   public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();
+
+  public getPropertyGridCategory(categoryName: string): IElement {
+    if (!this.model) return;
+    return this.model.getPropertyGridCategory(categoryName);
+  }
+
+  public removePropertyGridEditor(name: string): void {
+    if (!this.model) return;
+    this.model.removePropertyGridEditor(name);
+  }
+
+  public addPropertyGridEditor(params: IPropertyGridEditorAdditingOptions): void {
+    if (!this.model) return;
+    this.model.addPropertyGridEditor(params);
+  }
 }

@@ -10,9 +10,11 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { QuestionFileEditorModel, SurveyHelper } from "../../entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
+import { QuestionFileEditorModel } from "../../custom-questions/question-file";
+import { SurveyHelper } from "../../survey-helper";
+import { IPropertyGridEditorAdditingOptions } from "./theme-plugin";
 
 require("./theme-builder.scss");
 
@@ -371,12 +373,7 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  public addPropertyGridEditor(params: {
-    element: IElement,
-    category?: string,
-    insertAfter?: string,
-    insertBefore?: string,
-  }): void {
+  public addPropertyGridEditor(params: IPropertyGridEditorAdditingOptions): void {
 
     let category;
     let sibling;

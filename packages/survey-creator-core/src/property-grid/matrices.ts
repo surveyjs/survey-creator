@@ -12,7 +12,6 @@ import {
 } from "./index";
 import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
-import { CreatorBase } from "../entries";
 
 Serializer.addProperty("itemvalue",
   {
