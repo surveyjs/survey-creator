@@ -10,7 +10,7 @@
   >
     <div
       :class="adorner.css()"
-      v-key2click="{ disableTabStop: !adorner.element.isInteractiveDesignElement }"
+      v-key2click="{ disableTabStop: true }"
       @click="
         adorner.element.isInteractiveDesignElement
           ? adorner.select(adorner, $event)
@@ -78,6 +78,7 @@
       <div
         v-if="adorner.element.isInteractiveDesignElement"
         class="svc-question__content-actions"
+        @focusin="adorner.select(adorner, $event)"
       >
         <sv-action-bar
           :model="adorner.actionContainer"

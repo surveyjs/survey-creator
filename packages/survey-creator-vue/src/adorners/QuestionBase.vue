@@ -71,7 +71,12 @@
         v-if="model.isUsingCarryForward"
         :model="carryForwardParams"
       ></svc-question-carryforward>
-      <div class="svc-question__content-actions">
+      <div class="svc-question__content-actions" 
+      v-on:focusin="
+        (e) => {
+          model.select(model, e);
+          e.stopPropagation();
+        }">
         <sv-action-bar
           :model="model.actionContainer"
           :handleClick="false"
