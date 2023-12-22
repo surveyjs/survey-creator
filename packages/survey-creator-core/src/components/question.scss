@@ -16,7 +16,7 @@ svc-question {
   width: 100%;
   display: flex;
   flex-direction: column;
-    justify-content: stretch;
+  justify-content: stretch;
 
   .sv-action-bar {
     overflow: visible;
@@ -103,9 +103,11 @@ svc-question {
 .svc-question__content-actions {
   position: absolute;
   opacity: 0;
+
   &:focus-within {
     opacity: 1;
   }
+
   bottom: calcSize(2);
   inset-inline-start: calcSize(4); // left
   inset-inline-end: calcSize(3.5); // right
@@ -483,6 +485,17 @@ svc-question,
   .svc-question__content.svc-question__content--selected:not(.svc-question__content--dragged) {
     border: 1px solid $secondary;
     box-shadow: 0 0 0 1px $secondary inset;
+  }
+}
+
+.svc-question__content {
+  .sd-table-wrapper {
+    margin-right: 0;
+    min-width: calc(100% + var(--sd-base-padding));
+  }
+
+  .sd-table-wrapper::after {
+    width: 0;
   }
 }
 
