@@ -1931,6 +1931,41 @@ test("restore headerViewContainer values", (): any => {
   });
 });
 
+test("headerViewContainer get color values from theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
+    },
+    "header": {
+      "backgroundImage": "",
+      "height": 256,
+      "inheritWidthFrom": "container",
+      "textAreaWidth": 512,
+      "overlapEnabled": false,
+      "backgroundImageOpacity": 1,
+      "backgroundImageFit": "cover",
+      "logoPositionX": "right",
+      "logoPositionY": "top",
+      "titlePositionX": "left",
+      "titlePositionY": "bottom",
+      "descriptionPositionX": "left",
+      "descriptionPositionY": "bottom"
+    }
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+
+  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+});
+
 test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
