@@ -2690,24 +2690,23 @@ test("Simulator survey should respect survey current locale", (): any => {
 test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
-    const defaultValueElement = options.themeEditorSurvey.findQuestionByName("questionTitle")["defaultValue"];
+  creator.themeEditor.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
+    const defaultValueElement = options.params.survey.findQuestionByName("questionTitle")["defaultValue"];
 
     const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
-    options.themeBuilder.addEditorIntoPropertyGridAfterQuestion(newFontSettings, "questionTitle");
+    options.themeBuilder.addPropertyGridEditor({ element: newFontSettings, insertBefore: "questionTitle" });
     newFontSettings.title = "Question title font";
     newFontSettings.value = defaultValueElement;
 
-    options.themeBuilder.removeEditorFromPropertyGrid("questionTitle");
-
     const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
-    options.themeBuilder.addEditorIntoPropertyGridAfterQuestion(newMatrixFontSettings, "questionDescription");
+    options.themeBuilder.addPropertyGridEditor({ element: newMatrixFontSettings, insertAfter: "questionTitle" });
     newMatrixFontSettings.title = "Matrix title font";
     newMatrixFontSettings.value = defaultValueElement;
+
+    options.themeBuilder.removePropertyGridEditor("questionTitle");
   });
-  themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  creator.themeEditor.activate();
+  const themeBuilder = creator.themeEditor.model as ThemeBuilder;
   const themeEditor = themeBuilder.themeEditorSurvey;
 
   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");

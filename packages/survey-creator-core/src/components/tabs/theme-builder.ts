@@ -10,7 +10,7 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { QuestionFileEditorModel } from "src/entries";
+import { QuestionFileEditorModel, SurveyHelper } from "../../entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
 
@@ -358,31 +358,56 @@ export class ThemeBuilder extends Base {
     this.updateSimulatorSurvey(json, currTheme);
   }
 
-  public getPropertyGridGroup(groupName: string): IElement | undefined {
+  public getPropertyGridCategory(categoryName: string): IElement | undefined {
     const themeEditorGroups = this.themeEditorSurvey.getPage(0).elements;
-    const group = themeEditorGroups.filter(group => group.name === groupName)[0];
+    const group = themeEditorGroups.filter(group => group.name === categoryName)[0];
     return group;
   }
 
-  public removeEditorFromPropertyGrid(questionName: string): void {
-    const element = this.themeEditorSurvey.findQuestionByName(questionName);
+  public removePropertyGridEditor(name: string): void {
+    const element = this.themeEditorSurvey.findQuestionByName(name);
     if (!!element) {
       this.themeEditorSurvey.getPage(0).removeElement(element);
     }
   }
 
-  public addEditorIntoPropertyGridGroup(groupName: string, element: IElement): void {
-    const group = this.getPropertyGridGroup(groupName) as PanelModel;
-    if (!!group && !!element) {
-      group.addElement(element);
-    }
-  }
+  public addPropertyGridEditor(params: {
+    element: IElement,
+    category?: string,
+    insertAfter?: string,
+    insertBefore?: string,
+  }): void {
 
-  public addEditorIntoPropertyGridAfterQuestion(element: IElement, insertAfterQuestion: string): void {
-    const prevElement = this.themeEditorSurvey.findQuestionByName(insertAfterQuestion);
-    if (!!prevElement && !!element) {
-      const prevElementIndex = prevElement.parent.elements.indexOf(prevElement);
-      prevElement.parent.addElement(element, prevElementIndex + 1);
+    let category;
+    let sibling;
+    let insertIndex = -1;
+
+    if(!!params.category) {
+      category = this.getPropertyGridCategory(params.category) as PanelModel;
+    }
+
+    if(!!params.insertBefore) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertBefore);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) - 1;
+      }
+    }
+
+    if(!!params.insertAfter) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertAfter);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) + 1;
+      }
+    }
+
+    if (!!params.element) {
+      if (!!sibling) {
+        sibling.parent.addElement(params.element, insertIndex);
+      } else if(!!category) {
+        category.addElement(params.element);
+      } else {
+        SurveyHelper.warnText("No source found to add.");
+      }
     }
   }
 

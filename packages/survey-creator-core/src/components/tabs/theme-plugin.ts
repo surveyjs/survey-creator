@@ -9,7 +9,7 @@ import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 export interface IPropertyGridSurveyCreatedEvent {
   themeBuilder: ThemeBuilder;
-  themeEditorSurvey: SurveyModel;
+  params: { survey: SurveyModel };
 }
 
 /**
@@ -91,7 +91,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (!!this.model.themeEditorSurvey) {
       const options = <IPropertyGridSurveyCreatedEvent>{
         themeBuilder: this.model,
-        themeEditorSurvey: this.model.themeEditorSurvey
+        params: { survey: this.model.themeEditorSurvey }
       };
       this.onPropertyGridSurveyCreated.fire(this, options);
     }
