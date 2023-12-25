@@ -1,7 +1,13 @@
+@import "../variables.scss";
+
+.svc-carry-forward-panel-wrapper {
+  width: 100%;
+  container-type: inline-size;
+}
 .svc-carry-forward-panel {
   box-sizing: border-box;
   width: 100%;
-  padding: calcSize(4) calcSize(3);
+  padding: calcSize(4) calcSize(8);
   border-radius: calcSize(1);
   background-color: #F8F8F8;
   text-align: center;
@@ -9,18 +15,17 @@
   font-size: calcSize(2);
   line-height: calcSize(3);
   color: rgba(0, 0, 0, 0.45);
-  display: none;
-  }
+}
   
-  @container (min-width: 256px) {
+@container (max-width: #{$sd-panel-medium-min-width}) {
     .svc-carry-forward-panel {
-      display: block;
+      display: none;
     }
   }
   
-  @container (min-width: 576px) {
+@container (max-width: #{$sd-panel-normal-min-width}) {
     .svc-carry-forward-panel {
-      padding: calcSize(4) calcSize(8);
+      padding: calcSize(4) calcSize(3);
     }
 }
 .svc-carry-forward-panel__link {

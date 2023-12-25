@@ -546,7 +546,7 @@ svc-question,
 
   border: none;
   box-shadow: none;
-  padding: calcSize(0.5);
+  padding: calcSize(0.5) calcSize(2);
   &:hover {
     outline: none;
   }
