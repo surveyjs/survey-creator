@@ -76,15 +76,28 @@ export function createBoxShadow(value: Array<any>): string {
   )).join(", ");
 }
 
+export function createBoxShadowReset(value: string): string {
+  const resetValue: any = parseBoxShadow(value);
+
+  resetValue.forEach((valueItem) => {
+    valueItem.x = 0;
+    valueItem.y = 0;
+    valueItem.blur = 0;
+    valueItem.spread = 0;
+  });
+
+  return createBoxShadow(resetValue);
+}
+
 export function parseBoxShadow(value: string): Array<Object> {
   return value.split(/,(?![^(]*\))/).map(value => {
     const color = value.match(/#[a-zA-Z0-9]+|rgba?\(.*?\)/);
     const isInset = value.indexOf("inset") > -1;
     const res: Object = {};
-    if(isInset) {
+    if (isInset) {
       value = value.replace("inset", "");
     }
-    if(!!color) {
+    if (!!color) {
       res["color"] = color[0];
     }
     const values = value.replace(/\s+/g, " ").replace(/^\s|\s$/g, "").split(" ");

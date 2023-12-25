@@ -671,12 +671,13 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.activeTab = "theme";
-  const cssVariables: any = creator?.theme?.cssVariables;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   let themeBuilder = themePlugin.model as ThemeBuilder;
   let shadowSmallEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-small");
   let shadowInnerEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-inner");
+  let cssVariables: any;
 
+  cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
@@ -690,6 +691,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
+  cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
 
   shadowInnerEditor.value = [
@@ -702,6 +704,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
+  cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
@@ -714,6 +717,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
       color: "rgba(0, 0, 0, 0.15)"
     }
   ];
+  cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
@@ -735,6 +739,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
     }
   ];
 
+  cssVariables = creator?.theme?.cssVariables;
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 });
 
@@ -2112,7 +2117,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(fullTheme.cssVariables).length).toBe(80);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(81);
   expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
@@ -2129,7 +2134,7 @@ test("Get theme changes only", (): any => {
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(84);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
@@ -2153,7 +2158,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "cssVariables"
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(80);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(81);
   expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",

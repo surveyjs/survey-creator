@@ -13,6 +13,8 @@ import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
+import { forEach } from "lodash";
+import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 
 require("./theme-builder.scss");
 
@@ -576,6 +578,11 @@ export class ThemeBuilder extends Base {
     }
     this.themeModified(options);
   }
+  private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
+    const { name, value } = options;
+    this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
+    this.themeModified(options);
+  }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
     if (options.name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(options.name, options.value, options.question);
@@ -670,6 +677,11 @@ export class ThemeBuilder extends Base {
       if (options.name === "headerViewContainer") {
         this.headerViewContainerPropertiesChanged(options);
       }
+
+      if (options.name === "--sjs-shadow-inner") {
+        this.shadowInnerPropertiesChanged(options);
+      }
+
       this.cssVariablePropertiesChanged(options);
 
       this.blockThemeChangedNotifications += 1;
@@ -1612,23 +1624,6 @@ export class ThemeBuilder extends Base {
                     x: 0,
                     y: 1,
                     blur: 2,
-                    spread: 0,
-                    isInset: true,
-                    color: "rgba(0, 0, 0, 0.15)"
-                  }
-                ]
-              },
-              {
-                type: "boxshadowsettings",
-                name: "--sjs-shadow-inner-reset",
-                descriptionLocation: "hidden",
-                titleLocation: "hidden",
-                //visible: false,
-                defaultValue: [
-                  {
-                    x: 0,
-                    y: 0,
-                    blur: 0,
                     spread: 0,
                     isInset: true,
                     color: "rgba(0, 0, 0, 0.15)"
