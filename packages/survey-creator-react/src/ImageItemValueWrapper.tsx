@@ -69,7 +69,9 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;
-    const imageStyle = !this.model.getIsNewItemSingle() ? { width: this.question.renderedImageWidth, height: this.question.renderedImageHeight } : null;
+    const bottomPadding = !isNew && this.question.showLabel ? 40 : 0;
+    const height = !this.model.getIsNewItemSingle() ? (this.question.renderedImageHeight + bottomPadding) : undefined;
+    const imageStyle = !this.model.getIsNewItemSingle() ? { width: this.question.renderedImageWidth, height: height } : null;
 
     let content = null;
     if (isNew || this.model.isUploading) {

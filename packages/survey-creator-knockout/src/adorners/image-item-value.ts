@@ -39,18 +39,20 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
     event.stopPropagation();
   }
 
-  dragleave = (_, event)=> {
+  dragleave = (_, event) => {
     this.onDragLeave(event);
   }
-  drop = (_, event)=> {
+  drop = (_, event) => {
     this.onDrop(event);
   }
-  dragover = (_, event)=> {
+  dragover = (_, event) => {
     this.onDragOver(event);
   }
   getNewItemStyle() {
     const needStyle = !this.getIsNewItemSingle();
-    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
+    const bottomPadding = !this.isNew && this.question.showLabel ? 40 : 0;
+    const height = needStyle ? (this.question.renderedImageHeight + bottomPadding) : undefined;
+    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: height };
   }
 }
 
