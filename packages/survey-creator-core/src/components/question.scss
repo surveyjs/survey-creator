@@ -44,7 +44,6 @@ svc-question {
   background: $background;
   box-shadow: $shadow-small;
   outline: none;
-  container-type: inline-size;
 }
 
 .svc-question__content {
@@ -91,7 +90,6 @@ svc-question {
   color: $foreground-light;
   text-wrap: wrap;
   text-align: center;
-  display: none;
 }
 
 .svc-question__content-actions {
@@ -505,6 +503,15 @@ svc-question,
   }
 }
 
+.svc-question__content--empty,
+.svc-question__content--empty-template {
+
+  &.svc-question__content--panel,
+  &.svc-question__content--paneldynamic,
+  &.svc-question__content--html {
+    container-type: inline-size;
+  }
+}
 .svc-panel__placeholder_frame {
   border: 1px dashed $border;
   width: 100%;
@@ -513,7 +520,7 @@ svc-question,
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: calcSize(10) calcSize(3) calcSize(10);
+  padding: calcSize(11) calcSize(8) calcSize(10);
   flex-grow: 1;
 }
 
@@ -545,7 +552,7 @@ svc-question,
   }
 
   .svc-text {
-    display: none;
+    display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
@@ -557,41 +564,39 @@ svc-question,
 }
 .svc-panel__add-new-question-icon {
   margin: calcSize(0.5);
+  display: none;
 
   use {
     fill: $primary
   }
 }
 
-@container (min-width: 256px) {
-  .svc-panel__placeholder {
-    display: block;
-  }
-
+@container (max-width: 576px) {
   .svc-panel__placeholder_frame {
     padding: calcSize(11) calcSize(3) calcSize(10);
-
-    .svc-panel__add-new-question-icon {
-      display: none;
-
-      .svc-text {
-        display: flex;
-      }
-    }
-
-    .svc-panel__add-new-question {
-      padding: calcSize(0.5) calcSize(2);
-
-      .svc-text {
-        display: flex;
-      }
-    }
   }
 }
 
-@container (min-width: 576px) {
+@container (max-width: 256px) {
+  .svc-panel__placeholder {
+    display: none;
+  }
+
   .svc-panel__placeholder_frame {
-    padding: calcSize(11) calcSize(8) calcSize(10);
+    padding: calcSize(10) calcSize(3) calcSize(10);
+
+    .svc-panel__add-new-question-icon {
+      display: block;
+    }
+
+    .svc-panel__add-new-question {
+      padding: calcSize(0.5) calcSize(0.5);
+        margin: 0;
+
+      .svc-text {
+        display: none;
+      }
+                }
   }
 }
 

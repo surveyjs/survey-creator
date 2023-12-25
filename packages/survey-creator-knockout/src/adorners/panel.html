@@ -18,6 +18,8 @@
       <!-- ko if: showAddQuestionButton -->
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
+        <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 24 } } -->
+        <!-- /ko -->
         <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
         </span>
       </div>
@@ -34,6 +36,8 @@
     <div class="svc-panel__add-new-question-container">
       <div class="svc-panel__add-new-question svc-action-button"
         data-bind="click: addNewQuestion, key2click, clickBubble: false">
+        <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 24 } } -->
+        <!-- /ko -->
         <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
         </span>
       </div>

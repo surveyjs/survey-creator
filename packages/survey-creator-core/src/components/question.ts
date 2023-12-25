@@ -15,7 +15,8 @@ import {
   DragOrClickHelper,
   QuestionSelectBase,
   createDropdownActionModel,
-  CssClassBuilder
+  CssClassBuilder,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -108,6 +109,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
 
     if (this.isEmptyElement) {
       result += " svc-question__content--empty";
+    }
+    if (this.isEmptyTemplate) {
+      result += " svc-question__content--empty-template";
     }
 
     if (this.isDragMe) {
@@ -224,6 +228,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       );
     }
 
+    return false;
+  }
+  public get isEmptyTemplate(): boolean {
+    if (this.surveyElement instanceof QuestionPanelDynamicModel) {
+      return this.surveyElement.templateElements.length == 0;
+    }
     return false;
   }
 
