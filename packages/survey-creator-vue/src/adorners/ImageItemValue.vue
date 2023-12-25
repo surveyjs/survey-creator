@@ -139,9 +139,11 @@ const newItemStyle = computed(() => {
     const needStyle = !adorner.value.getIsNewItemSingle();
     const bottomPadding = !adorner.isNew && question.showLabel ? 40 : 0;
     const height = needStyle ? (question.renderedImageHeight + bottomPadding + "px") : undefined;
-    width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
-    height: height,
-  };
+    return {
+      width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
+      height: height,
+    };
+  }
 });
 
 onMounted(() => {

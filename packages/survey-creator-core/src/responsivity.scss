@@ -30,6 +30,7 @@
       margin: 0 calcSize(-3);
 
       &>div {
+        width: calc(100% - calcSize(6));
         margin: 0 calcSize(3);
       }
     }
