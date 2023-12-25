@@ -674,6 +674,10 @@ svc-question,
 
   .sd-question__content {
     min-width: calcSize(8);
+    margin-left: calcSize(-5);
+    margin-right: calcSize(-5);
+    padding-left: calcSize(5);
+    padding-right: calcSize(5);
     overflow-x: auto;
   }
 }

@@ -13,6 +13,11 @@
 
   .svc-question__content {
     .sd-question__content {
+      margin-left: calcSize(-3);
+      margin-right: calcSize(-3);
+      padding-left: calcSize(3);
+      padding-right: calcSize(3);
+
       .sd-selectbase__column {
         max-width: initial;
         display: block;
