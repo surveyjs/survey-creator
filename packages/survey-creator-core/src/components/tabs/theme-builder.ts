@@ -1617,7 +1617,25 @@ export class ThemeBuilder extends Base {
                     color: "rgba(0, 0, 0, 0.15)"
                   }
                 ]
-              }, {
+              },
+              {
+                type: "boxshadowsettings",
+                name: "--sjs-shadow-inner-reset",
+                descriptionLocation: "hidden",
+                titleLocation: "hidden",
+                //visible: false,
+                defaultValue: [
+                  {
+                    x: 0,
+                    y: 0,
+                    blur: 0,
+                    spread: 0,
+                    isInset: true,
+                    color: "rgba(0, 0, 0, 0.15)"
+                  }
+                ]
+              },
+              {
                 type: "expression",
                 name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",

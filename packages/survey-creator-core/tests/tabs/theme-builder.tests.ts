@@ -667,6 +667,77 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
 
 });
 
+test("Check reset for sjs-shadow-inner due to animation", () => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.activeTab = "theme";
+  const cssVariables: any = creator?.theme?.cssVariables;
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let shadowSmallEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-small");
+  let shadowInnerEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-inner");
+
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowSmallEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: true,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    },
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: true,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+});
+
 test("Check boxshadowsettings question", () => {
   const survey = new SurveyModel({
     elements: [{
