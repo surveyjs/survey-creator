@@ -240,18 +240,10 @@ test("Do not fire on value changed if color is not changed", () => {
 });
 
 test("Check color question popup's display mode", () => {
-  let survey = new SurveyModel({ elements: [{
-    type: "color",
-    name: "q1",
-  }] });
-  let q = <QuestionColorModel>survey.getQuestionByName("q1");
-  expect(q.dropdownAction.popupModel.displayMode).toBe("popup");
+  const question = new QuestionColorModel("q1");
+  expect(question.dropdownAction.popupModel.displayMode).toBe("popup");
   _setIsTouch(true);
-  survey = new SurveyModel({ elements: [{
-    type: "color",
-    name: "q1",
-  }] });
-  q = <QuestionColorModel>survey.getQuestionByName("q1");
-  expect(q.dropdownAction.popupModel.displayMode).toBe("overlay");
+  question["_dropdownAction"] = undefined as any;
+  expect(question.dropdownAction.popupModel.displayMode).toBe("overlay");
   _setIsTouch(false);
 });
