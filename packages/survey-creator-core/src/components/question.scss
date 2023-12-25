@@ -571,13 +571,13 @@ svc-question,
   }
 }
 
-@container (max-width: 576px) {
+@container (max-width: #{$sd-panel-normal-min-width}) {
   .svc-panel__placeholder_frame {
     padding: calcSize(11) calcSize(3) calcSize(10);
   }
 }
 
-@container (max-width: 256px) {
+@container (max-width: #{$sd-panel-medium-min-width}) {
   .svc-panel__placeholder {
     display: none;
   }
@@ -596,7 +596,7 @@ svc-question,
       .svc-text {
         display: none;
       }
-                }
+    }
   }
 }
 
