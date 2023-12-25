@@ -137,8 +137,8 @@ const adorner = useCreatorModel(
 
 const newItemStyle = computed(() => {
   const needStyle = !adorner.value.getIsNewItemSingle();
-  const bottomPadding = !adorner.isNew && question.showLabel ? 40 : 0;
-  const height = needStyle ? (question.renderedImageHeight + bottomPadding + "px") : undefined;
+  const bottomPadding = !adorner.value.isNew && question.value.showLabel ? 40 : 0;
+  const height = needStyle ? (question.value.renderedImageHeight + bottomPadding + "px") : undefined;
   return {
     width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
     height: height,
