@@ -51,6 +51,11 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
               this.model.addNewQuestion();
             }}
           >
+            <SvgIcon
+              className={"svc-panel__add-new-question-icon"}
+              iconName={"icon-add_24x24"}
+              size={24}
+            ></SvgIcon>
             <span className="svc-text svc-text--normal svc-text--bold">
               {this.model.addNewQuestionText}
             </span>
@@ -67,7 +72,7 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
           >
             <span className="svc-panel__question-type-selector-icon">
               <SvgIcon
-                iconName={this.model.questionTypeSelectorModel.iconName}
+                className={this.model.questionTypeSelectorModel.iconName}
                 size={24}
               ></SvgIcon>
             </span>
