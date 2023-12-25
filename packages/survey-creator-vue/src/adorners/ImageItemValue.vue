@@ -136,14 +136,13 @@ const adorner = useCreatorModel(
 );
 
 const newItemStyle = computed(() => {
-    const needStyle = !adorner.value.getIsNewItemSingle();
-    const bottomPadding = !adorner.isNew && question.showLabel ? 40 : 0;
-    const height = needStyle ? (question.renderedImageHeight + bottomPadding + "px") : undefined;
-    return {
-      width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
-      height: height,
-    };
-  }
+  const needStyle = !adorner.value.getIsNewItemSingle();
+  const bottomPadding = !adorner.isNew && question.showLabel ? 40 : 0;
+  const height = needStyle ? (question.renderedImageHeight + bottomPadding + "px") : undefined;
+  return {
+    width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
+    height: height,
+  };
 });
 
 onMounted(() => {
