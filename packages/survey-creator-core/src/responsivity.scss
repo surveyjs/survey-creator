@@ -19,6 +19,15 @@
         margin-left: 0;
       }
     }
+
+    &>.svc-question__dropdown-choices--wrapper {
+      width: calc(100% + calcSize(6));
+      margin: 0 calcSize(-3);
+
+      &>div {
+        margin: 0 calcSize(3);
+      }
+    }
   }
 
   .svc-question__content--selected {
