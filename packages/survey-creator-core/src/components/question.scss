@@ -62,6 +62,10 @@ svc-question {
     margin-left: 0;
   }
 
+  .sd-question.sd-question--table {
+    overflow-x: initial;
+  }
+
   .sd-multipletext__item-title {
     color: $foreground;
   }
