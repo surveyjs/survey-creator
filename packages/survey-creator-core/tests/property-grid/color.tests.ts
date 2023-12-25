@@ -1,4 +1,4 @@
-import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel } from "survey-core";
+import { ItemValue, ListModel, PageModel, QuestionSignaturePadModel, SurveyModel, _setIsTouch } from "survey-core";
 import { QuestionColorModel } from "../../src/custom-questions/question-color";
 import { PropertyGridModelTester } from "./property-grid.base";
 
@@ -237,4 +237,21 @@ test("Do not fire on value changed if color is not changed", () => {
   expect(log).toBe("");
   q.value = "#ffffff";
   expect(log).toBe("->changed");
+});
+
+test("Check color question popup's display mode", () => {
+  let survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+  }] });
+  let q = <QuestionColorModel>survey.getQuestionByName("q1");
+  expect(q.dropdownAction.popupModel.displayMode).toBe("popup");
+  _setIsTouch(true);
+  survey = new SurveyModel({ elements: [{
+    type: "color",
+    name: "q1",
+  }] });
+  q = <QuestionColorModel>survey.getQuestionByName("q1");
+  expect(q.dropdownAction.popupModel.displayMode).toBe("overlay");
+  _setIsTouch(false);
 });
