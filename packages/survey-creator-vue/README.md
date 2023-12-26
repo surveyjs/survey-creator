@@ -1,7 +1,7 @@
 # Survey Creator / Form Builder for Vue 3
 
 
-https://github.com/surveyjs/survey-creator/assets/22315929/21812f7a-c07e-4fa0-a541-6caa4e274a44
+<video src="https://github.com/surveyjs/survey-creator/assets/22315929/884eeb5b-68e6-4d38-a8f9-d2483e6ce386"></video>
 
 
 [![Build Status](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_apis/build/status/SurveyJS%20Creator?branchName=master)](https://dev.azure.com/SurveyJS/SurveyJS%20Integration%20Tests/_build/latest?definitionId=8&branchName=master)
