@@ -512,6 +512,23 @@ svc-question,
     container-type: inline-size;
   }
 }
+.svc-question__content--empty-template {
+
+  .sd-question--paneldynamic,
+  .sd-question__content,
+  .sd-paneldynamic,
+  .sd-paneldynamic__panel-wrapper,
+  .svc-question__adorner,
+  .svc-question__adorner>div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .svc-panel__placeholder_frame {
+      flex-grow: 1;
+    }
+  }
+}
 .svc-panel__placeholder_frame {
   border: 1px dashed $border;
   width: 100%;
