@@ -110,6 +110,7 @@ var traditionalChineseTranslation = {
     toolbox: "工具箱",
     "property-grid": "性能",
     propertyGridFilteredTextPlaceholder: "鍵入以搜尋...",
+    propertyGridNoResultsFound: "未找到結果",
     toolboxGeneralCategory: "常規",
     toolboxChoiceCategory: "選擇題",
     toolboxTextCategory: "文本輸入問題",
@@ -721,6 +722,7 @@ var traditionalChineseTranslation = {
     both: "雙",
     left: "左",
     right: "右",
+    leftRight: "左和右",
     color: "顏色",
     date: "日期",
     datetime: "日期時間",
@@ -931,6 +933,9 @@ var traditionalChineseTranslation = {
     showLabel: "顯示圖像標題",
     value: "價值",
     tabAlign: "製表元對齊方式",
+    sourceType: "源類型",
+    fitToContainer: "適合容器",
+    setValueExpression: "設置值表達式",
     description: "說明",
     logoFit: "徽標合身",
     pages: "頁面",
@@ -1998,3 +2003,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.logoPosition: "Logo position" => "徽標位置"
 // theme.coverTitlePosition: "Title position" => "職稱位置"
 // theme.coverDescriptionPosition: "Description position" => "描述位置"
+// ed.propertyGridNoResultsFound: "No results found" => "未找到結果"
+// pv.leftRight: "Left and right" => "左和右"
+// p.sourceType: "Source type" => "源類型"
+// p.fitToContainer: "Fit to container" => "適合容器"
+// p.setValueExpression: "Set value expression" => "設置值表達式"

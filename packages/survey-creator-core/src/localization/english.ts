@@ -934,6 +934,9 @@ export var enStrings = {
     showLabel: "Show image captions",
     value: "Value",
     tabAlign: "Tab alignment",
+    sourceType: "Source type",
+    fitToContainer: "Fit to container",
+    setValueExpression: "Set value expression",
     description: "Description", // Auto-generated string
     logoFit: "Logo fit", // Auto-generated string
     pages: "Pages", // Auto-generated string

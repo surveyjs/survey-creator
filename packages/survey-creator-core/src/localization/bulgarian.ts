@@ -110,6 +110,7 @@ export var bgStrings = {
     toolbox: "Кутия с инструменти",
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
+    propertyGridNoResultsFound: "Няма намерени резултати",
     toolboxGeneralCategory: "Общ",
     toolboxChoiceCategory: "Въпроси за избор",
     toolboxTextCategory: "Въпроси с въвеждане на текст",
@@ -721,6 +722,7 @@ export var bgStrings = {
     both: "И двете",
     left: "Вляво",
     right: "Отдясно",
+    leftRight: "Наляво и надясно",
     color: "цвят",
     date: "дата",
     datetime: "Време за среща",
@@ -931,6 +933,9 @@ export var bgStrings = {
     showLabel: "Показване на надписи на изображения",
     value: "Стойност",
     tabAlign: "Подравняване на раздели",
+    sourceType: "Тип източник",
+    fitToContainer: "Побиране в контейнера",
+    setValueExpression: "Задаване на израз за стойност",
     description: "Описание",
     logoFit: "Подходящо за лого",
     pages: "Страници",
@@ -1281,3 +1286,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.logoPosition: "Logo position" => "Позиция на логото"
 // theme.coverTitlePosition: "Title position" => "Позиция на заглавието"
 // theme.coverDescriptionPosition: "Description position" => "Описание позиция"
+// ed.propertyGridNoResultsFound: "No results found" => "Няма намерени резултати"
+// pv.leftRight: "Left and right" => "Наляво и надясно"
+// p.sourceType: "Source type" => "Тип източник"
+// p.fitToContainer: "Fit to container" => "Побиране в контейнера"
+// p.setValueExpression: "Set value expression" => "Задаване на израз за стойност"

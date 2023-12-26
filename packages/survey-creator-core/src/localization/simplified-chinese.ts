@@ -110,6 +110,7 @@ var simplifiedChineseTranslation = {
     toolbox: "工具箱",
     "property-grid": "性能",
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
+    propertyGridNoResultsFound: "未找到结果",
     toolboxGeneralCategory: "一般",
     toolboxChoiceCategory: "选择题",
     toolboxTextCategory: "文本输入问题",
@@ -721,6 +722,7 @@ var simplifiedChineseTranslation = {
     both: "双",
     left: "左",
     right: "右",
+    leftRight: "左和右",
     color: "颜色",
     date: "日期",
     datetime: "日期时间",
@@ -931,6 +933,9 @@ var simplifiedChineseTranslation = {
     showLabel: "显示图像标题",
     value: "价值",
     tabAlign: "制表符对齐方式",
+    sourceType: "源类型",
+    fitToContainer: "适合容器",
+    setValueExpression: "设置值表达式",
     description: "说明",
     logoFit: "徽标合身",
     pages: "页面",
@@ -1862,3 +1867,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.logoPosition: "Logo position" => "徽标位置"
 // theme.coverTitlePosition: "Title position" => "职称位置"
 // theme.coverDescriptionPosition: "Description position" => "描述位置"
+// ed.propertyGridNoResultsFound: "No results found" => "未找到结果"
+// pv.leftRight: "Left and right" => "左和右"
+// p.sourceType: "Source type" => "源类型"
+// p.fitToContainer: "Fit to container" => "适合容器"
+// p.setValueExpression: "Set value expression" => "设置值表达式"

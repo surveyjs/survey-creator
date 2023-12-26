@@ -110,6 +110,7 @@ export var mnStrings = {
     toolbox: "Хэрэглүүр",
     "property-grid": "Өмнөх",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
+    propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     toolboxGeneralCategory: "Ерөнхий",
     toolboxChoiceCategory: "Сонголттой асуултууд",
     toolboxTextCategory: "Хариулт бичих асуултууд",
@@ -721,6 +722,7 @@ export var mnStrings = {
     both: "Аль аль нь",
     left: "Зүүн",
     right: "Баруун",
+    leftRight: "Зүүн, баруун",
     color: "өнгө",
     date: "огноо",
     datetime: "datetime",
@@ -931,6 +933,9 @@ export var mnStrings = {
     showLabel: "Зургийн тайлбар харуулах",
     value: "Утга",
     tabAlign: "Хавтас байрлуулах",
+    sourceType: "Эх сурвалжийн төрөл",
+    fitToContainer: "Сав баглаа боодолд тохирно",
+    setValueExpression: "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо",
     description: "Тайлбар",
     logoFit: "Лого",
     pages: "Хуудаснууд",
@@ -1376,3 +1381,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Хамгийн бага үзэгний өргөн"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Хамгийн их үзэгний өргөн"
 // theme.coverTitlePosition: "Title position" => "Нүүр албан тушаал"
+// ed.propertyGridNoResultsFound: "No results found" => "Ямар ч үр дүн олдсонгүй"
+// pv.leftRight: "Left and right" => "Зүүн, баруун"
+// p.sourceType: "Source type" => "Эх сурвалжийн төрөл"
+// p.fitToContainer: "Fit to container" => "Сав баглаа боодолд тохирно"
+// p.setValueExpression: "Set value expression" => "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо"
