@@ -27,7 +27,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     return this.isNew && this.question.choices.length === 0;
   }
   public get canRenderControls() {
-    return this.getIsNewItemSingle() || !this.question.renderedImageHeight || this.question.renderedImageHeight > 150;
+    return this.getIsNewItemSingle() || !this.question.renderedImageWidth || this.question.renderedImageWidth > 150;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
