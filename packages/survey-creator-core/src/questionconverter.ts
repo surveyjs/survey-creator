@@ -94,13 +94,17 @@ export class QuestionConverter {
     if(Serializer.isDescendantOf(convertToClass, "matrix") &&
        Serializer.isDescendantOf(convertFromClass, "matrixdropdownbase") &&
        json.columns) {
-      json.columns = json.columns.map(col => col.title ? { value: col.name, text: col.title } : col.name);
+      let num = 0;
+      json.columns = json.columns.map(col => {
+        const name = col.name ? col.name : (typeof col === "string" ? col : "col" + (num ++));
+        return col.title ? { value: name, text: col.title } : name;
+      });
     }
     if(Serializer.isDescendantOf(convertToClass, "matrixdropdownbase") &&
        Serializer.isDescendantOf(convertFromClass, "matrix") &&
        json.columns) {
       json.columns = json.columns.map(col => <any>{
-        name: QuestionConverter.getColumnName(col.value || col), title: col.text
+        name: QuestionConverter.getColumnName(col.name || col.value || col), title: col.text
       });
     }
   }
