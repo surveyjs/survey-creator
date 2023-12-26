@@ -133,7 +133,7 @@ const json = {
   "width": "860"
 };
 
-test.only("Small questions should look good - https://github.com/surveyjs/survey-creator/issues/4862", async (t) => {
+test("Small questions should look good - https://github.com/surveyjs/survey-creator/issues/4862", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await setJSON(json);
