@@ -13,7 +13,6 @@ import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
-import { forEach } from "lodash";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 
 require("./theme-builder.scss");
@@ -579,7 +578,8 @@ export class ThemeBuilder extends Base {
     this.themeModified(options);
   }
   private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
-    const { name, value } = options;
+    const name = options.name;
+    const value = options.value;
     this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
     this.themeModified(options);
   }
