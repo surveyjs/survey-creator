@@ -1700,6 +1700,94 @@ test("Narrow question placeholder", async (t) => {
 
   });
 });
+
+test("Narrow panel add question button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1",
+                  "title": "Q1"
+                }
+              ],
+              "minWidth": "200px",
+              "maxWidth": "250px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel2",
+              "minWidth": "200px",
+              "maxWidth": "250px",
+              "startWithNewLine": false,
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "title": "Q2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    await takeElementScreenshot("panel-narrow-add.png", Selector(".svc-question__content--panel"), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-narrow-add.png", Selector(".svc-question__content--paneldynamic"), t, comparer);
+  });
+});
+
+test("Dynamic panels in multi-line", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "startWithNewLine": false
+            },
+            {
+              "type": "checkbox",
+              "name": "question2",
+              "startWithNewLine": false,
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4",
+                "Item 5",
+                "Item 6"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    await takeElementScreenshot("panel-dynamic-in-multiline.png", Selector(".svc-row"), t, comparer);
+  });
+});
+
 test("Narrow carry-forward choices panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1000, 1000);
