@@ -3,7 +3,9 @@ import {
   JsonObjectProperty,
   ComponentCollection,
   QuestionDropdownModel,
-  Question
+  Question,
+  PanelModel,
+  ChoicesRestful
 } from "survey-core";
 import {
   PropertyGridEditorCollection,
@@ -40,7 +42,23 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
     };
   }
   onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
-    new PropertyJSONGenerator(obj[prop.name], options, obj, prop).setupObjPanel(question["contentPanel"], true);
+    const panel = <PanelModel>question["contentPanel"];
+    const choicesByUrl = obj[prop.name];
+    new PropertyJSONGenerator(choicesByUrl, options, obj, prop).setupObjPanel(panel, true);
+    const test = <QuestionDropdownModel>panel.addNewQuestion("dropdown", "test");
+    test.choices = [];
+    this.updateTestQuestion(test, choicesByUrl);
+  }
+  onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
+    if(prop.name !== "choicesByUrl") return;
+    const panel = <PanelModel>question["contentPanel"];
+    const test = <QuestionDropdownModel>panel.getQuestionByName("test");
+    this.updateTestQuestion(test, obj[prop.name]);
+  }
+  private updateTestQuestion(test: QuestionDropdownModel, choicesByUrl: ChoicesRestful) {
+    if(!choicesByUrl) return;
+    test.visible = !!choicesByUrl.url;
+    test.choicesByUrl.setData(choicesByUrl);
   }
 }
 
