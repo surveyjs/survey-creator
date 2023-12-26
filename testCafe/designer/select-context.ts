@@ -51,6 +51,7 @@ test("Check page selector does not select survey", async (t) => {
   await t
     .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
+    .wait(100)
     .click(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1");
 });
