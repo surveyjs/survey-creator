@@ -69,10 +69,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
     this.model.item = this.props.item;
     const isNew = !this.props.question.isItemInList(this.props.item);
     this.model.isNew = isNew;
-    const bottomPadding = !isNew && this.question.showLabel ? 40 : 0;
-    const needStyle = !this.model.getIsNewItemSingle();
-    const height = needStyle ? (this.question.renderedImageHeight + bottomPadding) : undefined;
-    const imageStyle = needStyle ? { width: this.question.renderedImageWidth, height: height } : null;
+    const imageStyle = !this.model.getIsNewItemSingle() ? { width: this.question.renderedImageWidth, height: this.question.renderedImageHeight } : null;
 
     let content = null;
     if (isNew || this.model.isUploading) {
@@ -102,7 +99,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
           </div>
 
           {
-            this.model.isDraggable ?
+            this.model.isDraggable && this.model.canRenderControls ?
               <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
                 onPointerDown={(event: any) => this.model.onPointerDown(event)}
               >
@@ -111,20 +108,24 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
               : null
           }
 
-          <div className="svc-context-container svc-image-item-value-controls">
-            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-              className="svc-context-button"
-              onClick={() => this.model.chooseFile(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-            </span>) : null}
-            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-              className="svc-context-button svc-context-button--danger"
-              onClick={() => this.model.remove(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
-            </span>) : null}
-          </div>
+          {
+            this.model.canRenderControls ?
+              <div className="svc-context-container svc-image-item-value-controls">
+                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
+                  className="svc-context-button"
+                  onClick={() => this.model.chooseFile(this.model)}
+                >
+                  <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+                </span>) : null}
+                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
+                  className="svc-context-button svc-context-button--danger"
+                  onClick={() => this.model.remove(this.model)}
+                >
+                  <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
+                </span>) : null}
+              </div>
+              : null
+          }
         </>
       );
     }
@@ -141,7 +142,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
         onDragStart={this.preventDragHandler}
       >
         <div className={"svc-image-item-value-wrapper__ghost"} style={imageStyle}></div>
-        <div className={"svc-image-item-value-wrapper__content"} style={imageStyle}>
+        <div className={"svc-image-item-value-wrapper__content"}>
           <input
             type="file"
             aria-hidden="true"

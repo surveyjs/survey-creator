@@ -26,6 +26,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   public getIsNewItemSingle() {
     return this.isNew && this.question.choices.length === 0;
   }
+  public get canRenderControls() {
+    return this.getIsNewItemSingle() || !this.question.renderedImageHeight || this.question.renderedImageHeight > 150;
+  }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {
     const fileInput = <HTMLInputElement>model.itemsRoot.getElementsByClassName("svc-choose-file-input")[0];

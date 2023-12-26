@@ -3,7 +3,7 @@
     [attr.data-sv-drop-target-item-value]="adorner.isDraggable ? this.item.value : null" #container>
     <div class="svc-image-item-value-wrapper__ghost" [style]="getNewItemStyle()"></div>
 
-    <div class="svc-image-item-value-wrapper__content" [style]="getNewItemStyle()">
+    <div class="svc-image-item-value-wrapper__content">
       <input type="file" aria-hidden="true" tabindex="-1" [accept]="adorner.acceptedTypes"
         class="svc-choose-file-input" />
 
@@ -11,11 +11,12 @@
         <div *ngIf="!adorner.isNew" class="svc-image-item-value__item">
           <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
         </div>
-        <span *ngIf="adorner.isDraggable" class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
+        <span *ngIf="adorner.isDraggable && adorner.canRenderControls"
+          class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
           (pointerdown)="adorner.onPointerDown($event)" [attr.title]="undefined" [attr.aria-label]="undefined">
           <svg [iconName]="'icon-drag-area-indicator'" [size]="24" sv-ng-svg-icon></svg>
         </span>
-        <div class="svc-context-container svc-image-item-value-controls">
+        <div *ngIf="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
           <ng-container *ngIf="adorner.allowRemove && !adorner.isUploading">
             <span class="svc-context-button" (click)="adorner.chooseFile(adorner)" [key2click] [attr.title]="undefined"
               [attr.aria-label]="undefined">

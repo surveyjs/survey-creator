@@ -10,7 +10,7 @@
       :style="newItemStyle"
     ></div>
 
-    <div class="svc-image-item-value-wrapper__content" :style="newItemStyle">
+    <div class="svc-image-item-value-wrapper__content">
       <input
         type="file"
         aria-hidden="true"
@@ -24,7 +24,7 @@
           <component :is="componentName" v-bind="componentData"></component>
         </div>
         <span
-          v-if="adorner.isDraggable"
+          v-if="adorner.isDraggable && adorner.canRenderControls"
           class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
           @pointerdown="adorner.onPointerDown($event)"
           :title="undefined"
@@ -35,7 +35,7 @@
             :size="24"
           ></sv-svg-icon>
         </span>
-        <div class="svc-context-container svc-image-item-value-controls">
+        <div v-if="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
           <span
             class="svc-context-button"
             @click="adorner.chooseFile(adorner)"
@@ -137,11 +137,9 @@ const adorner = useCreatorModel(
 
 const newItemStyle = computed(() => {
   const needStyle = !adorner.value.getIsNewItemSingle();
-  const bottomPadding = !adorner.value.isNew && question.value.showLabel ? 40 : 0;
-  const height = needStyle ? (question.value.renderedImageHeight + bottomPadding + "px") : undefined;
   return {
     width: needStyle ? question.value.renderedImageWidth + "px" : undefined,
-    height: height,
+    height: needStyle ? question.value.renderedImageHeight + "px" : undefined,
   };
 });
 

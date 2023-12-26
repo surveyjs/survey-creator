@@ -50,9 +50,7 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
   }
   getNewItemStyle() {
     const needStyle = !this.getIsNewItemSingle();
-    const bottomPadding = !this.isNew && this.question.showLabel ? 40 : 0;
-    const height = needStyle ? (this.question.renderedImageHeight + bottomPadding) : undefined;
-    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: height };
+    return { width: needStyle ? this.question.renderedImageWidth : undefined, height: needStyle ? this.question.renderedImageHeight : undefined };
   }
 }
 
