@@ -110,6 +110,7 @@ export var danishStrings = {
     toolbox: "Værktøjskasse",
     "property-grid": "Egenskaber",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
+    propertyGridNoResultsFound: "Ingen resultater fundet",
     toolboxGeneralCategory: "Generelt",
     toolboxChoiceCategory: "Spørgsmål om valg",
     toolboxTextCategory: "Spørgsmål om tekstinput",
@@ -721,6 +722,7 @@ export var danishStrings = {
     both: "Begge",
     left: "left",
     right: "Højre",
+    leftRight: "Venstre og højre",
     color: "farve",
     date: "dato",
     datetime: "datetime",
@@ -931,6 +933,9 @@ export var danishStrings = {
     showLabel: "Vis billedtekster",
     value: "Værdi",
     tabAlign: "Tabulatorjustering",
+    sourceType: "Kilde type",
+    fitToContainer: "Passer til beholder",
+    setValueExpression: "Angiv værdiudtryk",
     description: "description",
     logoFit: "Logo pasform",
     pages: "Sider",
@@ -1905,3 +1910,8 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.logoPosition: "Logo position" => "Logo position"
 // theme.coverTitlePosition: "Title position" => "Titel position"
 // theme.coverDescriptionPosition: "Description position" => "Beskrivelse position"
+// ed.propertyGridNoResultsFound: "No results found" => "Ingen resultater fundet"
+// pv.leftRight: "Left and right" => "Venstre og højre"
+// p.sourceType: "Source type" => "Kilde type"
+// p.fitToContainer: "Fit to container" => "Passer til beholder"
+// p.setValueExpression: "Set value expression" => "Angiv værdiudtryk"

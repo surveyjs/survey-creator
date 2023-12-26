@@ -110,6 +110,7 @@ var portugueseTranslation = {
     toolbox: "Ferramentas",
     "property-grid": "Propriedades",
     propertyGridFilteredTextPlaceholder: "Escreva para pesquisar...",
+    propertyGridNoResultsFound: "Nenhum resultado encontrado",
     toolboxGeneralCategory: "Geral",
     toolboxChoiceCategory: "Questões de Escolha",
     toolboxTextCategory: "Questões de Texto",
@@ -721,6 +722,7 @@ var portugueseTranslation = {
     both: "Ambos",
     left: "esquerda",
     right: "direita",
+    leftRight: "Esquerda e direita",
     color: "cor",
     date: "data",
     datetime: "data hora",
@@ -931,6 +933,9 @@ var portugueseTranslation = {
     showLabel: "Mostrar legenda das imagens",
     value: "Valor",
     tabAlign: "Alinhamento de tabulação",
+    sourceType: "Tipo de origem",
+    fitToContainer: "Ajuste ao contêiner",
+    setValueExpression: "Definir expressão de valor",
     description: "Descrição",
     logoFit: "Ajustar o logo",
     pages: "páginas",
@@ -1386,3 +1391,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // signaturepad.penMaxWidth: "Maximum pen width" => "Largura máxima da caneta"
 // theme.coverTitlePosition: "Title position" => "Posição do título"
 // theme.coverDescriptionPosition: "Description position" => "Descrição da posição"
+// ed.propertyGridNoResultsFound: "No results found" => "Nenhum resultado encontrado"
+// pv.leftRight: "Left and right" => "Esquerda e direita"
+// p.sourceType: "Source type" => "Tipo de origem"
+// p.fitToContainer: "Fit to container" => "Ajuste ao contêiner"
+// p.setValueExpression: "Set value expression" => "Definir expressão de valor"

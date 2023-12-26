@@ -110,6 +110,7 @@ export var nlStrings = {
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
+    propertyGridNoResultsFound: "Geen resultaten gevonden",
     toolboxGeneralCategory: "Algemeen",
     toolboxChoiceCategory: "Keuzevragen",
     toolboxTextCategory: "Vragen over tekstinvoer",
@@ -721,6 +722,7 @@ export var nlStrings = {
     both: "Beide",
     left: "Links",
     right: "Rechts",
+    leftRight: "Links en rechts",
     color: "Kleur",
     date: "datum",
     datetime: "datetime",
@@ -931,6 +933,9 @@ export var nlStrings = {
     showLabel: "Afbeeldingsbijschriften weergeven",
     value: "Waarde",
     tabAlign: "Uitlijning van tabbladen",
+    sourceType: "Type bron",
+    fitToContainer: "Aanpassen aan container",
+    setValueExpression: "Expressie van ingestelde waarde",
     description: "Omschrijving",
     logoFit: "Logo past",
     pages: "Bladzijden",
@@ -1700,3 +1705,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimale penbreedte"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximale breedte van het hok"
 // theme.coverDescriptionPosition: "Description position" => "Beschrijving positie"
+// ed.propertyGridNoResultsFound: "No results found" => "Geen resultaten gevonden"
+// pv.leftRight: "Left and right" => "Links en rechts"
+// p.sourceType: "Source type" => "Type bron"
+// p.fitToContainer: "Fit to container" => "Aanpassen aan container"
+// p.setValueExpression: "Set value expression" => "Expressie van ingestelde waarde"

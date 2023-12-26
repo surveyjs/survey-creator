@@ -110,6 +110,7 @@ export var fiStrings = {
     toolbox: "Työkalupakki",
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Kirjoita etsiäksesi...",
+    propertyGridNoResultsFound: "Tuloksia ei löytynyt",
     toolboxGeneralCategory: "Yleinen",
     toolboxChoiceCategory: "Valintaa koskevat kysymykset",
     toolboxTextCategory: "Tekstinsyöttökysymykset",
@@ -721,6 +722,7 @@ export var fiStrings = {
     both: "both",
     left: "left",
     right: "Oikea",
+    leftRight: "Vasen ja oikea",
     color: "väri",
     date: "päivämäärä",
     datetime: "päivämäärä ja aika",
@@ -931,6 +933,9 @@ export var fiStrings = {
     showLabel: "Näytä kuvatekstit",
     value: "Arvo",
     tabAlign: "Sarkaimen tasaus",
+    sourceType: "Lähteen tyyppi",
+    fitToContainer: "Sovita konttiin",
+    setValueExpression: "Arvolausekkeen määrittäminen",
     description: "description",
     logoFit: "Logon sopivuus",
     pages: "Sivut",
@@ -1720,3 +1725,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Kynän vähimmäisleveys"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Kynän enimmäisleveys"
 // theme.coverDescriptionPosition: "Description position" => "Kuvauksen sijainti"
+// ed.propertyGridNoResultsFound: "No results found" => "Tuloksia ei löytynyt"
+// pv.leftRight: "Left and right" => "Vasen ja oikea"
+// p.sourceType: "Source type" => "Lähteen tyyppi"
+// p.fitToContainer: "Fit to container" => "Sovita konttiin"
+// p.setValueExpression: "Set value expression" => "Arvolausekkeen määrittäminen"

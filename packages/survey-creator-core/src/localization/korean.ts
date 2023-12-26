@@ -110,6 +110,7 @@ export var koreanStrings = {
     toolbox: "도구상자",
     "property-grid": "속성",
     propertyGridFilteredTextPlaceholder: "검색하려면 입력...",
+    propertyGridNoResultsFound: "결과를 찾을 수 없습니다.",
     toolboxGeneralCategory: "일반",
     toolboxChoiceCategory: "선택 질문",
     toolboxTextCategory: "텍스트 입력 질문",
@@ -721,6 +722,7 @@ export var koreanStrings = {
     both: "둘다",
     left: "왼쪽",
     right: "오른쪽",
+    leftRight: "왼쪽 및 오른쪽",
     color: "색",
     date: "날짜",
     datetime: "날짜/시간",
@@ -931,6 +933,9 @@ export var koreanStrings = {
     showLabel: "이미지 캡션 표시",
     value: "값",
     tabAlign: "탭 정렬",
+    sourceType: "소스 유형",
+    fitToContainer: "컨테이너에 맞추기",
+    setValueExpression: "설정 값 표현식",
     description: "설명",
     logoFit: "로고 핏",
     pages: "페이지",
@@ -1924,3 +1929,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "서명 영역 자동 크기 조정"
 // signaturepad.penMinWidth: "Minimum pen width" => "최소 펜 너비"
 // signaturepad.penMaxWidth: "Maximum pen width" => "최대 펜 너비"
+// ed.propertyGridNoResultsFound: "No results found" => "결과를 찾을 수 없습니다."
+// pv.leftRight: "Left and right" => "왼쪽 및 오른쪽"
+// p.sourceType: "Source type" => "소스 유형"
+// p.fitToContainer: "Fit to container" => "컨테이너에 맞추기"
+// p.setValueExpression: "Set value expression" => "설정 값 표현식"

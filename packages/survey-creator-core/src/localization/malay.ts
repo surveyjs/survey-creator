@@ -110,6 +110,7 @@ export var msStrings = {
     toolbox: "Kotak Alat",
     "property-grid": "Ciri",
     propertyGridFilteredTextPlaceholder: "Taip untuk mencari...",
+    propertyGridNoResultsFound: "Tiada keputusan ditemui",
     toolboxGeneralCategory: "Umum",
     toolboxChoiceCategory: "Soalan Pilihan",
     toolboxTextCategory: "Soalan Input Teks",
@@ -721,6 +722,7 @@ export var msStrings = {
     both: "kedua-duanya",
     left: "baki",
     right: "Kanan",
+    leftRight: "Kiri dan kanan",
     color: "Warna",
     date: "Tarikh",
     datetime: "masa tarikh",
@@ -931,6 +933,9 @@ export var msStrings = {
     showLabel: "Tunjukkan label",
     value: "Nilai",
     tabAlign: "Penjajaran tab",
+    sourceType: "Jenis sumber",
+    fitToContainer: "Muat ke bekas",
+    setValueExpression: "Mengesetkan ungkapan nilai",
     description: "perihalan",
     logoFit: "Muat logo",
     pages: "halaman",
@@ -1673,3 +1678,8 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.logoPosition: "Logo position" => "Kedudukan logo"
 // theme.coverTitlePosition: "Title position" => "Kedudukan tajuk"
 // theme.coverDescriptionPosition: "Description position" => "Kedudukan perihalan"
+// ed.propertyGridNoResultsFound: "No results found" => "Tiada keputusan ditemui"
+// pv.leftRight: "Left and right" => "Kiri dan kanan"
+// p.sourceType: "Source type" => "Jenis sumber"
+// p.fitToContainer: "Fit to container" => "Muat ke bekas"
+// p.setValueExpression: "Set value expression" => "Mengesetkan ungkapan nilai"

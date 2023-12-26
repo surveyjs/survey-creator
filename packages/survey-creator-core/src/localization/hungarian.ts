@@ -110,6 +110,7 @@ export var huStrings = {
     toolbox: "Eszköztár",
     "property-grid": "Kellékek",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
+    propertyGridNoResultsFound: "Nincs találat",
     toolboxGeneralCategory: "Általános",
     toolboxChoiceCategory: "Választási kérdések",
     toolboxTextCategory: "Szövegbeviteli kérdések",
@@ -721,6 +722,7 @@ export var huStrings = {
     both: "Mindkettő",
     left: "bal",
     right: "Jobbra",
+    leftRight: "Balra és jobbra",
     color: "szín",
     date: "dátum",
     datetime: "Dátum/idő",
@@ -931,6 +933,9 @@ export var huStrings = {
     showLabel: "Képfeliratok megjelenítése",
     value: "Érték",
     tabAlign: "Tabulátorigazítás",
+    sourceType: "Forrás típusa",
+    fitToContainer: "Tárolóhoz igazítás",
+    setValueExpression: "Értékkifejezés beállítása",
     description: "Leírás",
     logoFit: "Logó illeszkedés",
     pages: "Oldalak",
@@ -1873,3 +1878,8 @@ editorLocalization.locales["hu"] = huStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"
 // theme.coverDescriptionPosition: "Description position" => "Leírás pozíciója"
+// ed.propertyGridNoResultsFound: "No results found" => "Nincs találat"
+// pv.leftRight: "Left and right" => "Balra és jobbra"
+// p.sourceType: "Source type" => "Forrás típusa"
+// p.fitToContainer: "Fit to container" => "Tárolóhoz igazítás"
+// p.setValueExpression: "Set value expression" => "Értékkifejezés beállítása"
