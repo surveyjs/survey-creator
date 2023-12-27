@@ -48,6 +48,46 @@
         }
       }
     }
+
+    &.sd-rating--labels-top {
+      fieldset {
+        .sd-rating__min-text {
+          top: calcSize(1);
+        }
+
+        .sd-rating__max-text {
+          top: calcSize(1);
+        }
+      }
+    }
+
+    &.sd-rating--labels-bottom {
+      fieldset {
+        padding-bottom: calcSize(5);
+
+        .sd-rating__min-text {
+          bottom: calcSize(1);
+        }
+
+        .sd-rating__max-text {
+          bottom: calcSize(1);
+        }
+      }
+    }
+
+    &.sd-rating--labels-diagonal {
+      fieldset {
+        padding-bottom: calcSize(5);
+
+        .sd-rating__min-text {
+          top: calcSize(1);
+        }
+
+        .sd-rating__max-text {
+          bottom: calcSize(1);
+        }
+      }
+    }
   }
 
   .sd-question--table .sd-rating {
