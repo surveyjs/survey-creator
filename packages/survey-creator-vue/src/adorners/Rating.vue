@@ -22,7 +22,7 @@
         :aria-label="model?.addTooltip"
       ></sv-svg-icon>
     </div>
-    <component :is="componentName" v-bind="componentData"></component>
+    <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>
