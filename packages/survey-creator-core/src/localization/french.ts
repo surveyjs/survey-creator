@@ -110,6 +110,7 @@ var frenchTranslation = {
     toolbox: "Boîte à outils",
     "property-grid": "Propriétés",
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
+    propertyGridNoResultsFound: "Aucun résultat trouvé",
     toolboxGeneralCategory: "Général",
     toolboxChoiceCategory: "Quesitons à choix",
     toolboxTextCategory: "Questions de saisie libre",
@@ -721,6 +722,7 @@ var frenchTranslation = {
     both: "Les deux",
     left: "Gauche",
     right: "Droite",
+    leftRight: "Gauche et droite",
     color: "Couleur",
     date: "Date",
     datetime: "Date et heure",
@@ -931,6 +933,9 @@ var frenchTranslation = {
     showLabel: "Afficher les légendes des images",
     value: "Valeur",
     tabAlign: "Alignement des tabulations",
+    sourceType: "Type de source",
+    fitToContainer: "S’adapte au conteneur",
+    setValueExpression: "Définir l’expression de valeur",
     description: "Description",
     logoFit: "Ajustement du logo",
     pages: "Pages",
@@ -1780,3 +1785,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // signaturepad.penMinWidth: "Minimum pen width" => "Largeur minimale du stylo"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Largeur maximale du stylo"
 // theme.logoPosition: "Logo position" => "Position du logo"
+// ed.propertyGridNoResultsFound: "No results found" => "Aucun résultat trouvé"
+// pv.leftRight: "Left and right" => "Gauche et droite"
+// p.sourceType: "Source type" => "Type de source"
+// p.fitToContainer: "Fit to container" => "S’adapte au conteneur"
+// p.setValueExpression: "Set value expression" => "Définir l’expression de valeur"

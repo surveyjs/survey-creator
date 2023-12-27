@@ -110,6 +110,7 @@ export var indonesianStrings = {
     toolbox: "Kotak Perkakas",
     "property-grid": "Properti",
     propertyGridFilteredTextPlaceholder: "Ketik untuk mencari...",
+    propertyGridNoResultsFound: "Tidak ada hasil yang ditemukan",
     toolboxGeneralCategory: "Umum",
     toolboxChoiceCategory: "Pertanyaan Pilihan",
     toolboxTextCategory: "Pertanyaan Input Teks",
@@ -721,6 +722,7 @@ export var indonesianStrings = {
     both: "Keduanya",
     left: "kiri",
     right: "Kanan",
+    leftRight: "Kiri dan kanan",
     color: "warna",
     date: "tanggal",
     datetime: "Waktu tanggal",
@@ -931,6 +933,9 @@ export var indonesianStrings = {
     showLabel: "Tampilkan keterangan gambar",
     value: "Nilai",
     tabAlign: "Perataan tab",
+    sourceType: "Jenis sumber",
+    fitToContainer: "Sesuai dengan kontainer",
+    setValueExpression: "Mengatur ekspresi nilai",
     description: "deskripsi",
     logoFit: "Kecocokan logo",
     pages: "Halaman",
@@ -1874,3 +1879,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.logoPosition: "Logo position" => "Posisi logo"
 // theme.coverTitlePosition: "Title position" => "Posisi judul"
 // theme.coverDescriptionPosition: "Description position" => "Deskripsi posisi"
+// ed.propertyGridNoResultsFound: "No results found" => "Tidak ada hasil yang ditemukan"
+// pv.leftRight: "Left and right" => "Kiri dan kanan"
+// p.sourceType: "Source type" => "Jenis sumber"
+// p.fitToContainer: "Fit to container" => "Sesuai dengan kontainer"
+// p.setValueExpression: "Set value expression" => "Mengatur ekspresi nilai"

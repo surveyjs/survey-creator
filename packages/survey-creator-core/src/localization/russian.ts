@@ -110,6 +110,7 @@ export var ruStrings = {
     toolbox: "Панель инструментов",
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
+    propertyGridNoResultsFound: "Никаких результатов не найдено",
     toolboxGeneralCategory: "Общие",
     toolboxChoiceCategory: "Вопросы выбора",
     toolboxTextCategory: "Вопросы для ввода текста",
@@ -721,6 +722,7 @@ export var ruStrings = {
     both: "Оба",
     left: "Слева",
     right: "Правильно",
+    leftRight: "Влево и вправо",
     color: "Цвет",
     date: "дата",
     datetime: "ДатаТайм",
@@ -931,6 +933,9 @@ export var ruStrings = {
     showLabel: "Показать подписи к изображениям",
     value: "Ценность",
     tabAlign: "Выравнивание табуляции",
+    sourceType: "Тип источника",
+    fitToContainer: "Подходит для контейнера",
+    setValueExpression: "Выражение заданного значения",
     description: "Описание",
     logoFit: "Подходит под логотип",
     pages: "Страниц",
@@ -1780,3 +1785,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимальная ширина пера"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимальная ширина пера"
 // theme.coverDescriptionPosition: "Description position" => "Описание позиции"
+// ed.propertyGridNoResultsFound: "No results found" => "Никаких результатов не найдено"
+// pv.leftRight: "Left and right" => "Влево и вправо"
+// p.sourceType: "Source type" => "Тип источника"
+// p.fitToContainer: "Fit to container" => "Подходит для контейнера"
+// p.setValueExpression: "Set value expression" => "Выражение заданного значения"

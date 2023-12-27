@@ -110,6 +110,7 @@ export let svStrings = {
     toolbox: "Verktygslista",
     "property-grid": "Egenskaper",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
+    propertyGridNoResultsFound: "Inga resultat hittades",
     toolboxGeneralCategory: "Generellt",
     toolboxChoiceCategory: "Frågor om val",
     toolboxTextCategory: "Frågor om textinmatning",
@@ -721,6 +722,7 @@ export let svStrings = {
     both: "Båda",
     left: "left",
     right: "Höger",
+    leftRight: "Vänster och höger",
     color: "färg",
     date: "datum",
     datetime: "datetime",
@@ -931,6 +933,9 @@ export let svStrings = {
     showLabel: "Visa bildtexter",
     value: "Värde",
     tabAlign: "Justering av tabb",
+    sourceType: "Typ av källa",
+    fitToContainer: "Passa till behållare",
+    setValueExpression: "Ange värde-uttryck",
     description: "description",
     logoFit: "Logotyp passform",
     pages: "Sidor",
@@ -1897,3 +1902,8 @@ editorLocalization.locales["sv"] = svStrings;
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"
 // theme.coverTitlePosition: "Title position" => "Titel position"
 // theme.coverDescriptionPosition: "Description position" => "Beskrivning position"
+// ed.propertyGridNoResultsFound: "No results found" => "Inga resultat hittades"
+// pv.leftRight: "Left and right" => "Vänster och höger"
+// p.sourceType: "Source type" => "Typ av källa"
+// p.fitToContainer: "Fit to container" => "Passa till behållare"
+// p.setValueExpression: "Set value expression" => "Ange värde-uttryck"

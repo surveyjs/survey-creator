@@ -110,6 +110,7 @@ export var skStrings = {
     toolbox: "Súprava nástrojov",
     "property-grid": "Vlastnosti",
     propertyGridFilteredTextPlaceholder: "Zadajte reťazec pre vyhľadávanie...",
+    propertyGridNoResultsFound: "Nenašli sa žiadne výsledky",
     toolboxGeneralCategory: "Všeobecné",
     toolboxChoiceCategory: "Voľba Otázky",
     toolboxTextCategory: "Otázky na zadávanie textu",
@@ -721,6 +722,7 @@ export var skStrings = {
     both: "obidva",
     left: "vľavo",
     right: "Doprava",
+    leftRight: "Vľavo a vpravo",
     color: "farba",
     date: "dátum",
     datetime: "dátum a čas",
@@ -931,6 +933,9 @@ export var skStrings = {
     showLabel: "Zobraziť štítok",
     value: "Hodnota",
     tabAlign: "Zarovnanie tabulátora",
+    sourceType: "Typ zdroja",
+    fitToContainer: "Vhodné na kontajner",
+    setValueExpression: "Nastavenie výrazu hodnoty",
     description: "opis",
     logoFit: "umiestnenie loga",
     pages: "stránky",
@@ -1673,3 +1678,8 @@ editorLocalization.locales["sk"] = skStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatická zmena mierky oblasti podpisu"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimálna šírka pera"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximálna šírka pera"
+// ed.propertyGridNoResultsFound: "No results found" => "Nenašli sa žiadne výsledky"
+// pv.leftRight: "Left and right" => "Vľavo a vpravo"
+// p.sourceType: "Source type" => "Typ zdroja"
+// p.fitToContainer: "Fit to container" => "Vhodné na kontajner"
+// p.setValueExpression: "Set value expression" => "Nastavenie výrazu hodnoty"

@@ -22,6 +22,7 @@ test("Select questions and survey", async (t) => {
 });
 
 test("Check page selector does not select survey", async (t) => {
+  await t.resizeWindow(1920, 1080);
   await ClientFunction(() => {
     window["creator"].JSON = {
       "logoPosition": "right",
