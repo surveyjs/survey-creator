@@ -6,6 +6,6 @@
       <svg *ngIf="adorner.allowAdd" [iconName]="'icon-add_16x16'" [size]="16" [key2click] (click)="adorner.addItem(adorner)"
       [class]="adorner.addClassNames" [attr.title]="adorner.addTooltip" [attr.aria-label]="adorner.addTooltip"sv-ng-svg-icon></svg>
     </div>
-    <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
+    <ng-container *ngTemplateOutlet="contentTempl"></ng-container>
   </div>
 </ng-template>
