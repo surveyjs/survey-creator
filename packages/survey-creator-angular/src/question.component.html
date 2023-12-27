@@ -16,8 +16,8 @@
       <ng-template *ngIf="adorner.isEmptyElement && !!showPlaceholderComponent"
         [component]="{ name: placeholderComponent, data: placeholderComponentData }">
       </ng-template>
-      <svc-question-carryforward *ngIf="adorner.isUsingCarryForward" [model]="adorner.createCarryForwardParams()">
-      </svc-question-carryforward>
+      <svc-question-banner *ngIf="adorner.isBannerShowing" [model]="adorner.createBannerParams()">
+      </svc-question-banner>
 
       <ng-template *ngIf="adornerComponent"
         [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">

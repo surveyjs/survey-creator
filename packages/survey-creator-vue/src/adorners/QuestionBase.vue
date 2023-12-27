@@ -67,10 +67,10 @@
         :model="model"
         :element="element"
       />
-      <svc-question-carryforward
-        v-if="model.isUsingCarryForward"
+      <svc-question-banner
+        v-if="model.isBannerShowing"
         :model="carryForwardParams"
-      ></svc-question-carryforward>
+      ></svc-question-banner>
       <div class="svc-question__content-actions">
         <sv-action-bar
           :model="model.actionContainer"
@@ -98,8 +98,6 @@ defineExpose({
   questionRoot: root,
 });
 const carryForwardParams = computed(() =>
-  props.model.isUsingCarryForward
-    ? props.model.createCarryForwardParams()
-    : null
+  props.model.isBannerShowing ? props.model.createBannerParams() : null
 );
 </script>
