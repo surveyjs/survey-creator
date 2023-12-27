@@ -1234,29 +1234,40 @@ export class ThemeBuilder extends Base {
                             max: 100,
                             step: 5
                           },
+                          {
+                            type: "boolean",
+                            name: "overlapEnabled",
+                            renderAs: "checkbox",
+                            title: getLocString("theme.coverOverlapEnabled"),
+                            titleLocation: "hidden",
+                            descriptionLocation: "hidden",
+                          },
                         ]
                       },
+                    ]
+                  }, {
+                    type: "panel",
+                    questionTitleLocation: "top",
+                    visibleIf: "{panel.headerView} = 'advanced'",
+                    elements: [
                       {
-                        type: "fontSettings",
-                        name: "headerTitle",
-                        title: getLocString("theme.surveyTitle"),
-                        descriptionLocation: "hidden",
-                        defaultValue: this.getDefaultTitleSetting(true)
-                      },
-                      {
-                        type: "fontSettings",
-                        name: "headerDescription",
-                        title: getLocString("theme.surveyDescription"),
-                        descriptionLocation: "hidden",
-                        defaultValue: this.getDefaultDescriptionSetting(true)
-                      },
-                      {
-                        type: "boolean",
-                        name: "overlapEnabled",
-                        renderAs: "checkbox",
-                        title: getLocString("theme.coverOverlapEnabled"),
-                        titleLocation: "hidden",
-                        descriptionLocation: "hidden",
+                        type: "panel",
+                        elements: [
+                          {
+                            type: "fontSettings",
+                            name: "headerTitle",
+                            title: getLocString("theme.surveyTitle"),
+                            descriptionLocation: "hidden",
+                            defaultValue: this.getDefaultTitleSetting(true)
+                          },
+                          {
+                            type: "fontSettings",
+                            name: "headerDescription",
+                            title: getLocString("theme.surveyDescription"),
+                            descriptionLocation: "hidden",
+                            defaultValue: this.getDefaultDescriptionSetting(true)
+                          },
+                        ]
                       }
                     ]
                   }, {
@@ -1511,14 +1522,19 @@ export class ThemeBuilder extends Base {
                     descriptionLocation: "hidden",
                   }
                 ]
-              }]
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.pageTitle")}</div>`,
+              },
+            ]
           }, {
             type: "panel",
             elements: [
               {
                 type: "fontSettings",
                 name: "pageTitle",
-                title: getLocString("theme.pageTitle"),
+                title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1529,7 +1545,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "pageDescription",
-                title: getLocString("theme.pageDescription"),
+                title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1537,7 +1553,11 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.questionTitle")}</div>`,
+              },
             ]
           }, {
             type: "panel",
@@ -1545,7 +1565,7 @@ export class ThemeBuilder extends Base {
               {
                 type: "elementSettings",
                 name: "questionPanel",
-                title: getLocString("theme.questionPanel"),
+                title: getLocString("theme.backgroundCornerRadius"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
@@ -1558,7 +1578,7 @@ export class ThemeBuilder extends Base {
                 type: "boxshadowsettings",
                 name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
-                title: getLocString("theme.questionShadow"),
+                title: getLocString("theme.shadow"),
                 defaultValue: [
                   {
                     x: 0,
@@ -1578,7 +1598,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "questionTitle",
-                title: getLocString("theme.questionTitle"),
+                title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1589,7 +1609,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "questionDescription",
-                title: getLocString("theme.questionDescription"),
+                title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1597,7 +1617,11 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.editorPanel")}</div>`,
+              },
             ]
           }, {
             type: "panel",
@@ -1605,7 +1629,7 @@ export class ThemeBuilder extends Base {
               {
                 type: "elementSettings",
                 name: "editorPanel",
-                title: getLocString("theme.editorPanel"),
+                title: getLocString("theme.backgroundCornerRadius"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
@@ -1618,7 +1642,7 @@ export class ThemeBuilder extends Base {
                 type: "boxshadowsettings",
                 name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
-                title: getLocString("theme.editorShadow"),
+                title: getLocString("theme.shadow"),
                 defaultValue: [
                   {
                     x: 0,
@@ -1638,7 +1662,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "editorFont",
-                title: getLocString("theme.editorFont"),
+                title: getLocString("theme.font"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1646,13 +1670,17 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.lines")}</div>`,
+              },
             ]
           }, {
             type: "panel",
             elements: [{
               type: "panel",
-              title: getLocString("theme.linesColors"),
+              title: getLocString("theme.colorsTitle"),
               elements: [
                 {
                   type: "colorsettings",

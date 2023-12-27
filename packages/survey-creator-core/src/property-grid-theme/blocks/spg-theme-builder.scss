@@ -120,6 +120,15 @@
       content: none;
     }
   }
+
+  .spg-theme-group-caption {
+    @include defaultBold;
+    color: $foreground-dim;
+
+    position: relative;
+    top: calc(4 * #{$base-unit});
+    padding: calc(1 * #{$base-unit}) 0;
+  }
 }
 
 .sv-mobile-side-bar .spg-theme-builder-root {
