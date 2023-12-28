@@ -4,7 +4,7 @@
       <span>{{ model.text }}{{ " " }}</span>
       <span class="svc-carry-forward-panel__link">
         <svc-action-button
-          :text="model.question.name"
+          :text="model.actionText"
           :click="model.onClick.bind(model)"
         >
         </svc-action-button>
@@ -13,6 +13,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { QuestionCarryForwardParams } from "survey-creator-core";
-defineProps<{ model: QuestionCarryForwardParams }>();
+import type { QuestionBannerParams } from "survey-creator-core";
+defineProps<{ model: QuestionBannerParams }>();
 </script>

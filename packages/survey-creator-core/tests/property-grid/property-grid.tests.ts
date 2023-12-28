@@ -810,6 +810,29 @@ test("restfull property editor", () => {
   urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
 });
+test("restfull property editor & test dropdown", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choicesByUrl.url = "myUrl";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  const contentPanel = restFullQuestion.contentPanel;
+  const testQuestion = <QuestionDropdownModel>contentPanel.getQuestionByName("test");
+  const urlQuestion = contentPanel.getQuestionByName("url");
+  const valueNameQuestion = contentPanel.getQuestionByName("valueName");
+  expect(testQuestion).toBeTruthy();
+  expect(testQuestion.choices).toHaveLength(0);
+  expect(testQuestion.isVisible).toBeTruthy();
+  expect(testQuestion.choicesByUrl.url).toBe("myUrl");
+  urlQuestion.value = "";
+  expect(testQuestion.isVisible).toBeFalsy();
+  urlQuestion.value = "myUrl2";
+  expect(testQuestion.isVisible).toBeTruthy();
+  expect(testQuestion.choicesByUrl.url).toBe("myUrl2");
+  valueNameQuestion.value = "val";
+  expect(testQuestion.choicesByUrl.valueName).toBe("val");
+});
 test("restfull property editor, show imageLinkName", () => {
   const dropdown = new QuestionDropdownModel("q1");
   const imagePicker = new QuestionImagePickerModel("q2");

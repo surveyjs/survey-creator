@@ -159,6 +159,9 @@ export var mnStrings = {
     addNewQuestion: "Асуулт нэмэх",
     selectPage: "Хуудас сонгох...",
     carryForwardChoicesCopied: "Сонголтыг хуулбарладаг",
+    choicesLoadedFromWebText: "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг.",
+    choicesLoadedFromWebLinkText: "Тохиргоо руу явах",
+    choicesLoadedFromWebPreviewTitle: "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт",
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     panelPlaceHolder: "Энд хэрэглүүрээс асуулт чирнэ үү.",
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
@@ -1386,3 +1389,6 @@ editorLocalization.locales["mn"] = mnStrings;
 // p.sourceType: "Source type" => "Эх сурвалжийн төрөл"
 // p.fitToContainer: "Fit to container" => "Сав баглаа боодолд тохирно"
 // p.setValueExpression: "Set value expression" => "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Тохиргоо руу явах"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт"

@@ -159,6 +159,9 @@ export var huStrings = {
     addNewQuestion: "Kérdés felvétele",
     selectPage: "Válasszon oldalt...",
     carryForwardChoicesCopied: "A választási lehetőségek másolása innen történik",
+    choicesLoadedFromWebText: "A választási lehetőségek egy webszolgáltatásból töltődnek be.",
+    choicesLoadedFromWebLinkText: "Válassza a beállítások",
+    choicesLoadedFromWebPreviewTitle: "A betöltött választási lehetőségek előnézete",
     htmlPlaceHolder: "A HTML tartalom itt lesz.",
     panelPlaceHolder: "Itt dobjon el egy kérdést az eszköztárból.",
     surveyPlaceHolder: "A felmérés üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
@@ -1883,3 +1886,6 @@ editorLocalization.locales["hu"] = huStrings;
 // p.sourceType: "Source type" => "Forrás típusa"
 // p.fitToContainer: "Fit to container" => "Tárolóhoz igazítás"
 // p.setValueExpression: "Set value expression" => "Értékkifejezés beállítása"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "A választási lehetőségek egy webszolgáltatásból töltődnek be."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Válassza a beállítások"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "A betöltött választási lehetőségek előnézete"

@@ -159,6 +159,9 @@ export var nlStrings = {
     addNewQuestion: "Vraag toevoegen",
     selectPage: "Selecteer pagina...",
     carryForwardChoicesCopied: "Keuzes worden gekopieerd van",
+    choicesLoadedFromWebText: "Keuzes worden geladen vanuit een webservice.",
+    choicesLoadedFromWebLinkText: "Ga naar instellingen",
+    choicesLoadedFromWebPreviewTitle: "Voorbeeld van geladen keuzeopties",
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     panelPlaceHolder: "Drop hier een vraag uit de toolbox.",
     surveyPlaceHolder: "De enquête is leeg. Sleep een element uit de gereedschapskist of klik op de onderstaande knop.",
@@ -1710,3 +1713,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // p.sourceType: "Source type" => "Type bron"
 // p.fitToContainer: "Fit to container" => "Aanpassen aan container"
 // p.setValueExpression: "Set value expression" => "Expressie van ingestelde waarde"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Keuzes worden geladen vanuit een webservice."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ga naar instellingen"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Voorbeeld van geladen keuzeopties"

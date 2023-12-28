@@ -159,6 +159,9 @@ export var danishStrings = {
     addNewQuestion: "Tilføj spørgsmål",
     selectPage: "Vælg side...",
     carryForwardChoicesCopied: "Valg kopieres fra",
+    choicesLoadedFromWebText: "Valg indlæses fra en webtjeneste.",
+    choicesLoadedFromWebLinkText: "Gå til indstillinger",
+    choicesLoadedFromWebPreviewTitle: "Forhåndsvisning af indlæste valgmuligheder",
     htmlPlaceHolder: "HTML-indhold vil være her.",
     panelPlaceHolder: "Smid et spørgsmål fra værktøjskassen her.",
     surveyPlaceHolder: "Undersøgelsen er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
@@ -1915,3 +1918,6 @@ editorLocalization.locales["da"] = danishStrings;
 // p.sourceType: "Source type" => "Kilde type"
 // p.fitToContainer: "Fit to container" => "Passer til beholder"
 // p.setValueExpression: "Set value expression" => "Angiv værdiudtryk"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valg indlæses fra en webtjeneste."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til indstillinger"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning af indlæste valgmuligheder"
