@@ -187,8 +187,8 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createUsingRestfulParams(): QuestionBannerParams {
     if(!this.isUsingRestfull) return null;
     return {
-      actionText: "View settings",
-      text: "Choices are loaded from web",
+      actionText: this.creator.getLocString("ed.choicesLoadedFromWebLinkText"),
+      text: this.creator.getLocString("ed.choicesLoadedFromWebText"),
       onClick: () => { this.creator.selectElement(this.element, "choicesByUrl"); }
     };
   }

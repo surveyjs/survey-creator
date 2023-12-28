@@ -13,6 +13,7 @@ import {
   PropertyGridEditorQuestion,
 } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { editorLocalization } from "../editorLocalization";
 
 var json = {
   name: "propertygrid_restfull",
@@ -46,6 +47,7 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
     const choicesByUrl = obj[prop.name];
     new PropertyJSONGenerator(choicesByUrl, options, obj, prop).setupObjPanel(panel, true);
     const test = <QuestionDropdownModel>panel.addNewQuestion("dropdown", "test");
+    test.title = editorLocalization.getString("ed.choicesLoadedFromWebText");
     test.choices = [];
     this.updateTestQuestion(test, choicesByUrl);
   }
