@@ -45,7 +45,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           ["title", "description"],
           () => {
             this.addGhostPage();
-          }
+          },
+          "add_ghost"
         );
         this.patchPageForDragDrop(surveyElement, this.addGhostPage);
       }
@@ -71,7 +72,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       surveyElement.unRegisterFunctionOnPropertiesValueChanged([
         "title",
         "description"
-      ]);
+      ],
+        "add_ghost");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
@@ -83,7 +85,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   protected onElementSelectedChanged(isSelected: boolean) {
     super.onElementSelectedChanged(isSelected);
     this.isSelected = isSelected;
-    if(isSelected && this.creator.pageEditMode === "bypage") {
+    if (isSelected && this.creator.pageEditMode === "bypage") {
       this.setSurveyElement(<PageModel>this.creator.selectedElement);
     }
     if (isSelected && !!this.onPageSelectedCallback) {
@@ -127,7 +129,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
         currentPage.unRegisterFunctionOnPropertiesValueChanged([
           "title",
           "description"
-        ]);
+        ],
+          "add_ghost");
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
         return true;
       })) {
