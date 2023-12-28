@@ -162,7 +162,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     fileReader.onload = (e) => {
       const theme: ITheme = JSON.parse(fileReader.result as string);
       if (!!this.model) {
-        this.model.loadTheme(theme);
+        this.model.setTheme(theme);
       }
       callback && callback(theme);
     };

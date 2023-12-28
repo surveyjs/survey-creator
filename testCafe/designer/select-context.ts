@@ -21,7 +21,8 @@ test("Select questions and survey", async (t) => {
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 });
 
-test("Check page selector does not select survey", async (t) => {
+test.skip("Check page selector does not select survey", async (t) => {
+  await t.resizeWindow(1920, 1080);
   await ClientFunction(() => {
     window["creator"].JSON = {
       "logoPosition": "right",

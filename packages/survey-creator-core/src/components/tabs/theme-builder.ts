@@ -13,6 +13,7 @@ import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
+import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 
 require("./theme-builder.scss");
 
@@ -576,6 +577,12 @@ export class ThemeBuilder extends Base {
     }
     this.themeModified(options);
   }
+  private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
+    const name = options.name;
+    const value = options.value;
+    this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
+    this.themeModified(options);
+  }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
     if (options.name.indexOf("--") === 0) {
       this.setThemeCssVariablesChanges(options.name, options.value, options.question);
@@ -670,6 +677,11 @@ export class ThemeBuilder extends Base {
       if (options.name === "headerViewContainer") {
         this.headerViewContainerPropertiesChanged(options);
       }
+
+      if (options.name === "--sjs-shadow-inner") {
+        this.shadowInnerPropertiesChanged(options);
+      }
+
       this.cssVariablePropertiesChanged(options);
 
       this.blockThemeChangedNotifications += 1;
@@ -782,9 +794,9 @@ export class ThemeBuilder extends Base {
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables);
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
     panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables);
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
 
     panel.getQuestionByName("headerView").value = this.survey.headerView;
     panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
@@ -1617,7 +1629,8 @@ export class ThemeBuilder extends Base {
                     color: "rgba(0, 0, 0, 0.15)"
                   }
                 ]
-              }, {
+              },
+              {
                 type: "expression",
                 name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",

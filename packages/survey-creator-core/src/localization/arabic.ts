@@ -110,6 +110,7 @@ export var arStrings = {
     toolbox: "Toolbox",
     "property-grid": "Properties",
     propertyGridFilteredTextPlaceholder: "Type to search...",
+    propertyGridNoResultsFound: "لم يتم العثور على نتائج",
     toolboxGeneralCategory: "قائمة العام",
     toolboxChoiceCategory: "أسئلة الاختيار",
     toolboxTextCategory: "أسئلة إدخال النص",
@@ -721,6 +722,7 @@ export var arStrings = {
     both: "الكل",
     left: "يسار",
     right: "يمين",
+    leftRight: "اليسار واليمين",
     color: "لون",
     date: "تاريخ",
     datetime: "التاريخ والوقت",
@@ -931,6 +933,9 @@ export var arStrings = {
     showLabel: "عرض الملصق",
     value: "القيمة",
     tabAlign: "محاذاة علامات التبويب",
+    sourceType: "نوع المصدر",
+    fitToContainer: "يصلح للحاوية",
+    setValueExpression: "تعيين تعبير القيمة",
     description: "الوصف",
     logoFit: "تناسب الشعار",
     pages: "الصفحات",
@@ -1630,3 +1635,8 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.logoPosition: "Logo position" => "موضع الشعار"
 // theme.coverTitlePosition: "Title position" => "موضع العنوان"
 // theme.coverDescriptionPosition: "Description position" => "موقف الوصف"
+// ed.propertyGridNoResultsFound: "No results found" => "لم يتم العثور على نتائج"
+// pv.leftRight: "Left and right" => "اليسار واليمين"
+// p.sourceType: "Source type" => "نوع المصدر"
+// p.fitToContainer: "Fit to container" => "يصلح للحاوية"
+// p.setValueExpression: "Set value expression" => "تعيين تعبير القيمة"

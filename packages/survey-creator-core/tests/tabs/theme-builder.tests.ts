@@ -667,6 +667,82 @@ test("Check createBoxShadow and parseBoxShadow functions", () => {
 
 });
 
+test("Check reset for sjs-shadow-inner due to animation", () => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.activeTab = "theme";
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let shadowSmallEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-small");
+  let shadowInnerEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-inner");
+  let cssVariables: any;
+
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowSmallEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: true,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+
+  shadowInnerEditor.value = [
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: false,
+      color: "rgba(0, 0, 0, 0.15)"
+    },
+    {
+      x: 0,
+      y: 1,
+      blur: 2,
+      spread: 0,
+      isInset: true,
+      color: "rgba(0, 0, 0, 0.15)"
+    }
+  ];
+
+  cssVariables = creator?.theme?.cssVariables;
+  expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
+});
+
 test("Check boxshadowsettings question", () => {
   const survey = new SurveyModel({
     elements: [{
@@ -861,10 +937,17 @@ test("Theme builder export value from composite question", (): any => {
 test("import theme from file", (done) => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = (saveNo, callback) => {
+    saveThemeCount++;
+    callback(saveNo, "success");
+  };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeBuilder.themeEditorSurvey;
 
   const data = JSON.stringify({
     "cssVariables": {
@@ -883,6 +966,9 @@ test("import theme from file", (done) => {
     expect(themeEditor.getQuestionByName("themeMode").value).toEqual("lightweight");
     expect(themeEditor.getQuestionByName("backgroundImage").value).toBeTruthy();
     expect(themeEditor.getQuestionByName("backgroundImageFit").value).toEqual("auto");
+    expect(creator.theme.cssVariables!["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    expect(themeBuilder.simulator.survey.themeVariables["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    expect(saveThemeCount).toBe(1);
     done();
   });
 });
@@ -1931,6 +2017,41 @@ test("restore headerViewContainer values", (): any => {
   });
 });
 
+test("headerViewContainer get color values from theme", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.theme = {
+    "cssVariables": {
+      "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
+    },
+    "header": {
+      "backgroundImage": "",
+      "height": 256,
+      "inheritWidthFrom": "container",
+      "textAreaWidth": 512,
+      "overlapEnabled": false,
+      "backgroundImageOpacity": 1,
+      "backgroundImageFit": "cover",
+      "logoPositionX": "right",
+      "logoPositionY": "top",
+      "titlePositionX": "left",
+      "titlePositionY": "bottom",
+      "descriptionPositionX": "left",
+      "descriptionPositionY": "bottom"
+    }
+  };
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+
+  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+});
+
 test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -2006,7 +2127,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(fullTheme.cssVariables).length).toBe(80);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(81);
   expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
@@ -2023,7 +2144,7 @@ test("Get theme changes only", (): any => {
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(83);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(84);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
@@ -2047,7 +2168,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "cssVariables"
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(80);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(81);
   expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",

@@ -70,8 +70,13 @@
       <svc-question-banner
         v-if="model.isBannerShowing"
         :model="carryForwardParams"
-      ></svc-question-banner>
-      <div class="svc-question__content-actions">
+      ></svc-question-carryforward>
+      <div class="svc-question__content-actions" 
+      v-on:focusin="
+        (e) => {
+          model.select(model, e);
+          e.stopPropagation();
+        }">
         <sv-action-bar
           :model="model.actionContainer"
           :handleClick="false"

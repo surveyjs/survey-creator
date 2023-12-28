@@ -18,7 +18,7 @@ export interface QuestionWrapperFooterProps {
 }
 export class QuestionWrapperFooter extends React.Component<QuestionWrapperFooterProps, any> {
   render(): JSX.Element {
-    return (<div className={this.props.className}>
+    return (<div className={this.props.className} onFocus={(e) => this.props.model.select(this.props.model, new ReactMouseEvent(e as any))}>
       <SurveyActionBar model={this.props.model.actionContainer} handleClick={false}></SurveyActionBar>
     </div>);
   }

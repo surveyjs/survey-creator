@@ -40,7 +40,7 @@ const model = useCreatorModel(
 useBase(() => props.item);
 const toolboxCss = computed(
   () =>
-    (props.item.css + " " ?? "") +
+    ((props.item.css || "") + " " ?? "") +
     (!props.item.isVisible ? "sv-action--hidden" : "")
 );
 </script>

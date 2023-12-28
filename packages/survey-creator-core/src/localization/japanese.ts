@@ -110,6 +110,7 @@ export var jaStrings = {
     toolbox: "ツールボックス",
     "property-grid": "プロパティ",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
+    propertyGridNoResultsFound: "結果が見つかりませんでした",
     toolboxGeneralCategory: "一般",
     toolboxChoiceCategory: "選択の質問",
     toolboxTextCategory: "テキスト入力の質問",
@@ -721,6 +722,7 @@ export var jaStrings = {
     both: "両方",
     left: "左",
     right: "右",
+    leftRight: "左右",
     color: "色",
     date: "日付",
     datetime: "日時",
@@ -931,6 +933,9 @@ export var jaStrings = {
     showLabel: "画像のキャプションを表示する",
     value: "価値",
     tabAlign: "タブの配置",
+    sourceType: "ソースの種類",
+    fitToContainer: "コンテナにフィット",
+    setValueExpression: "設定値式",
     description: "形容",
     logoFit: "ロゴフィット",
     pages: "ページ",
@@ -1719,3 +1724,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.logoPosition: "Logo position" => "ロゴの位置"
 // theme.coverTitlePosition: "Title position" => "タイトルの位置"
 // theme.coverDescriptionPosition: "Description position" => "記述の位置"
+// ed.propertyGridNoResultsFound: "No results found" => "結果が見つかりませんでした"
+// pv.leftRight: "Left and right" => "左右"
+// p.sourceType: "Source type" => "ソースの種類"
+// p.fitToContainer: "Fit to container" => "コンテナにフィット"
+// p.setValueExpression: "Set value expression" => "設定値式"

@@ -110,6 +110,7 @@ export var hrStrings = {
     toolbox: "Alatni okvir",
     "property-grid": "Svojstva",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
+    propertyGridNoResultsFound: "Nisu pronađeni rezultati",
     toolboxGeneralCategory: "Općenito",
     toolboxChoiceCategory: "Pitanja o izboru",
     toolboxTextCategory: "Pitanja o unosu teksta",
@@ -721,6 +722,7 @@ export var hrStrings = {
     both: "oba",
     left: "lijevo",
     right: "Desno",
+    leftRight: "Lijevo i desno",
     color: "boja",
     date: "datum",
     datetime: "datum i vrijeme",
@@ -931,6 +933,9 @@ export var hrStrings = {
     showLabel: "Pokaži opise slika",
     value: "Vrijednost",
     tabAlign: "Poravnanje tabulatora",
+    sourceType: "Vrsta izvora",
+    fitToContainer: "Prilagodi spremniku",
+    setValueExpression: "Postavljanje izraza vrijednosti",
     description: "description",
     logoFit: "Prilagođavanje logotipa",
     pages: "Stranice",
@@ -1714,3 +1719,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatsko mijenjanje područja potpisa"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimalna širina olovke"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimalna širina olovke"
+// ed.propertyGridNoResultsFound: "No results found" => "Nisu pronađeni rezultati"
+// pv.leftRight: "Left and right" => "Lijevo i desno"
+// p.sourceType: "Source type" => "Vrsta izvora"
+// p.fitToContainer: "Fit to container" => "Prilagodi spremniku"
+// p.setValueExpression: "Set value expression" => "Postavljanje izraza vrijednosti"

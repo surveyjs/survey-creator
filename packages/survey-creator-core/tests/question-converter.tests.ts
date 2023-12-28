@@ -461,3 +461,67 @@ test("Keep startWithNewLine property value for next question, Bug#4729", () => {
   expect(q1.getType()).toBe("boolean");
   expect(q2.startWithNewLine).toBeFalsy();
 });
+const matrixdrodownDefaultJSON = {
+  "name": "q1",
+  "columns": [
+    {
+      "name": "Column 1"
+    },
+    {
+      "name": "Column 2"
+    },
+    {
+      "name": "Column 3"
+    }
+  ],
+  "choices": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "rows": [
+    "Row 1",
+    "Row 2"
+  ],
+  "type": "matrixdropdown"
+};
+const matrixDefaultJSON = {
+  "name": "q1",
+  "columns": [
+    "Column 1",
+    "Column 2",
+    "Column 3"
+  ],
+  "rows": [
+    "Row 1",
+    "Row 2"
+  ],
+  "type": "matrix"
+};
+test("Convert default matrix dropdown into single matrix, Bug#5025", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q1" }
+    ]
+  });
+  const matrix1 = <QuestionMatrixDropdownModel>ElementFactory.Instance.createElement("matrixdropdown", "q2");
+  expect(matrix1.columns).toHaveLength(3);
+  expect(matrix1.rows).toHaveLength(2);
+  expect(matrix1.columns[1].name).toBe("Column 2");
+  expect(matrix1.rows[1].value).toBe("Row 2");
+  survey.pages[0].addQuestion(matrix1);
+  const matrix2 = QuestionConverter.convertObject(matrix1, "matrix", matrixdrodownDefaultJSON, matrixDefaultJSON);
+  expect(matrix2.name).toBe("q2");
+  expect(matrix2.columns).toHaveLength(3);
+  expect(matrix2.rows).toHaveLength(2);
+  expect(matrix2.columns[1].value).toBe("Column 2");
+  expect(matrix2.rows[1].value).toBe("Row 2");
+  const matrix3 = QuestionConverter.convertObject(matrix2, "matrixdropdown", matrixDefaultJSON, matrixdrodownDefaultJSON);
+  expect(matrix3.name).toBe("q2");
+  expect(matrix3.columns).toHaveLength(3);
+  expect(matrix3.rows).toHaveLength(2);
+  expect(matrix3.columns[1].name).toBe("Column 2");
+  expect(matrix3.rows[1].value).toBe("Row 2");
+});

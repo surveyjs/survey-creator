@@ -31,7 +31,7 @@
     <!-- ko component: { name: 'svc-question-banner', params: $data } -->
     <!-- /ko -->
     <!-- /ko -->
-    <div class="svc-question__content-actions">
+    <div class="svc-question__content-actions" data-bind="event: {focusin: koSelect}">
       <!-- ko component: { name: 'sv-action-bar', params: { model: actionContainer, handleClick: false } } -->
       <!-- /ko -->
     </div>

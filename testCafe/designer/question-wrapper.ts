@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON, unselectedQuestionToolbarActions } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -95,7 +95,7 @@ test("Single input question wrapper action convert inputType", async (t) => {
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
+  const convertActionButton = unselectedQuestionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()
@@ -361,13 +361,21 @@ test("No tab stop in dynamic panel", async (t) => {
     .click(Selector(".sv-string-editor").withText("panel1"))
     .expect(Selector(".sv-string-editor").withText("panel1").focused).ok()
     .pressKey("tab")
-    .expect(Selector(".svc-action-button").withText("Add Question").focused).ok()
+    .expect(Selector(".svc-question__content--selected .svc-action-button").withText("Add Question").focused).ok()
     .pressKey("tab")
     .pressKey("tab")
     .pressKey("tab")
     .pressKey("tab")
     .pressKey("tab")
-    .expect(Selector(".svc-question__content--panel").focused).ok()
+    .expect(Selector(".sv-string-editor").withText("q2").focused).ok()
     .pressKey("tab")
-    .expect(Selector(".sv-string-editor").withText("q2").focused).ok();
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel .svc-action-button").withText("Add Question").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel .sv-action-bar-item").withText("Panel").focused).ok();
 });

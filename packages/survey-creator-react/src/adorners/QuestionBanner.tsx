@@ -5,12 +5,13 @@ import { ActionButton } from "../ActionButton";
 
 export class QuestionBanner extends React.Component<QuestionBannerParams, any> {
   render(): JSX.Element {
-    return (<div className="svc-carry-forward-panel">
-      <span>{this.props.text}{" "}</span>
-      <span className="svc-carry-forward-panel__link">
-        <ActionButton click={() => this.props.onClick()} text={this.props.actionText}></ActionButton>
-      </span>
-    </div>);
+    return (
+      <div className="svc-carry-forward-panel-wrapper"><div className="svc-carry-forward-panel">
+        <span>{this.props.text}{" "}</span>
+        <span className="svc-carry-forward-panel__link">
+          <ActionButton click={() => this.props.onClick()} text={this.props.actionText}></ActionButton>
+        </span>
+      </div></div>);
   }
 }
 
