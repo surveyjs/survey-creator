@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader } from "survey-core";
+import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, PanelModelBase } from "survey-core";
 import { CreatorBase } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -173,6 +173,7 @@ export class ThemeBuilder extends Base {
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
+  @property() groupAppearanceAdvancedMode: boolean;
 
   getFullThemeName(_themeName?: string) {
     if (this.themePalette === "light") {
@@ -617,14 +618,6 @@ export class ThemeBuilder extends Base {
     }
   }
   private updateDependentQuestionValues(options: ValueChangedEvent) {
-    if (options.name === "generalBackcolorDimColor") {
-      this.themeEditorSurvey.setValue("--sjs-general-backcolor-dim", options.value);
-      return true;
-    }
-    if (options.name === "--sjs-general-backcolor-dim") {
-      this.themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = options.value;
-      return false;
-    }
     if (options.name === "generalPrimaryColor") {
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
       return true;
@@ -718,6 +711,13 @@ export class ThemeBuilder extends Base {
         opt.actions = [];
       }
     });
+    themeEditorSurvey.onGetPanelTitleActions.add((sender, opt) => {
+      if (this.surveyProvider.isMobileView) return;
+
+      if (opt.panel && opt.panel.name == "groupAppearance") {
+        opt.titleActions.push(this.createAppearanceAdvancedModeAction(opt.panel));
+      }
+    });
     themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
       if (options.panel.hasParent) {
         const parent = (options.panel.parent ?? options.panel.parentQuestion);
@@ -735,6 +735,32 @@ export class ThemeBuilder extends Base {
     });
     return themeEditorSurvey;
   }
+
+  private createAppearanceAdvancedModeAction(panel: PanelModelBase) {
+    const advancedMode = new Action({
+      id: "advancedMode",
+      ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
+      ariaRole: "checkbox",
+      css: "sv-theme-group_title-action",
+      innerCss: this.groupAppearanceAdvancedMode ? "sv-theme-group_advanced-mode sv-theme-group_advanced-mode--active" : "sv-theme-group_advanced-mode",
+      title: getLocString("theme.advancedMode"),
+      iconName: this.groupAppearanceAdvancedMode ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
+      iconSize: 16,
+      action: () => {
+        this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
+        panel.getQuestionByName("advancedMode").value = this.groupAppearanceAdvancedMode;
+      }
+    });
+    this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
+      () => {
+        advancedMode.iconName = this.groupAppearanceAdvancedMode ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
+        advancedMode.css = this.groupAppearanceAdvancedMode ? "sv-theme-group_advanced-mode sv-theme-group_advanced-mode--active" : "sv-theme-group_advanced-mode";
+      },
+      "groupAppearanceAdvancedMode"
+    );
+    return advancedMode;
+  }
+
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
     return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
@@ -790,7 +816,6 @@ export class ThemeBuilder extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-    page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
@@ -901,7 +926,6 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
     themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
-    themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
     this.updateHeaderViewContainerEditors(newCssVariables);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
@@ -1314,7 +1338,7 @@ export class ThemeBuilder extends Base {
             elements: [
               {
                 type: "color",
-                name: "generalBackcolorDimColor",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
               },
@@ -1379,7 +1403,14 @@ export class ThemeBuilder extends Base {
         title: getLocString("theme.groupAppearance"),
         elements: [
           {
+            "type": "boolean",
+            "name": "advancedMode",
+            "visible": false,
+            "defaultValue": "false"
+          },
+          {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "color",
@@ -1412,6 +1443,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "dropdown",
@@ -1435,6 +1467,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "spinedit",
@@ -1456,23 +1489,12 @@ export class ThemeBuilder extends Base {
                 min: 0
               },
             ]
-          }
-        ]
-      }, {
-        type: "panel",
-        name: "groupAdvanced",
-        title: getLocString("theme.groupAdvanced"),
-        state: "collapsed",
-        elements: [
+          },
           {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
-                type: "color",
-                name: "--sjs-general-backcolor-dim",
-                title: getLocString("theme.backgroundDimColor"),
-                descriptionLocation: "hidden",
-              }, {
                 type: "panel",
                 title: getLocString("theme.accentBackground"),
                 elements: [
@@ -1530,6 +1552,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "fontSettings",
@@ -1561,6 +1584,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "elementSettings",
@@ -1625,6 +1649,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "elementSettings",
@@ -1678,6 +1703,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [{
               type: "panel",
               title: getLocString("theme.colorsTitle"),

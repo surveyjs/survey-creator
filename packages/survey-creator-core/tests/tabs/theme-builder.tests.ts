@@ -1173,34 +1173,29 @@ test("Theme undo redo changes", (): any => {
   const themeSurveyTab = themePlugin.model as ThemeBuilder;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const question = themeEditor.getQuestionByName("--sjs-general-backcolor-dim");
-  const generalBackcolorDimColorQuestion = themeEditor.getQuestionByName("generalBackcolorDimColor");
 
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("rgba(243, 243, 243, 1)");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
 
   question.value = "#ff0000";
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#ff0000");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
 
   themePlugin.undo();
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#f3f3f3");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
 
   themePlugin.redo();
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#ff0000");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
 });
 
 test("Theme undo redo general settings", (): any => {
@@ -1548,7 +1543,6 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
-  const generalBackcolorDimColor = themeEditorSurvey.getQuestionByName("generalBackcolorDimColor");
   const generalPrimaryColor = themeEditorSurvey.getQuestionByName("generalPrimaryColor");
 
   let pluginThemeSelectedCount = 0;
@@ -1572,7 +1566,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   expect(builderThemeModifiedCount).toBe(1);
   expect(builderThemeSelectedCount).toBe(1);
 
-  generalBackcolorDimColor.value = "#7a46bb";
+  backgroundDimColor.value = "#7a46bb";
   expect(pluginThemeModifiedCount).toBe(2);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(2);
