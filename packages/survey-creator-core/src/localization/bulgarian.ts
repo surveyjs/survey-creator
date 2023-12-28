@@ -159,6 +159,9 @@ export var bgStrings = {
     addNewQuestion: "Добавяне на въпрос",
     selectPage: "Избиране на страница...",
     carryForwardChoicesCopied: "Възможностите за избор се копират от",
+    choicesLoadedFromWebText: "Възможностите за избор се зареждат от уеб услуга.",
+    choicesLoadedFromWebLinkText: "Отидете в настройките",
+    choicesLoadedFromWebPreviewTitle: "Визуализация на заредените опции за избор",
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     panelPlaceHolder: "Пусни въпроса от кутията с инструменти тук.",
     surveyPlaceHolder: "Анкетата е празна. Плъзни елемент от кутията с инструменти или щракни върху бутона по-долу.",
@@ -1291,3 +1294,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // p.sourceType: "Source type" => "Тип източник"
 // p.fitToContainer: "Fit to container" => "Побиране в контейнера"
 // p.setValueExpression: "Set value expression" => "Задаване на израз за стойност"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Възможностите за избор се зареждат от уеб услуга."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Отидете в настройките"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Визуализация на заредените опции за избор"

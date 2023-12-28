@@ -159,6 +159,9 @@ export var koreanStrings = {
     addNewQuestion: "질문 추가",
     selectPage: "페이지 선택...",
     carryForwardChoicesCopied: "선택 항목은 다음에서 복사됩니다.",
+    choicesLoadedFromWebText: "선택 항목은 웹 서비스에서 로드됩니다.",
+    choicesLoadedFromWebLinkText: "설정으로 바로 가기",
+    choicesLoadedFromWebPreviewTitle: "로드된 선택 옵션 미리보기",
     htmlPlaceHolder: "HTML 콘텐츠가 여기에 있습니다.",
     panelPlaceHolder: "도구 상자에서 질문을 삭제하세요.",
     surveyPlaceHolder: "설문 조사가 비어 있습니다. 도구 상자에서 요소를 드래그하거나 아래 버튼을 클릭합니다.",
@@ -1934,3 +1937,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // p.sourceType: "Source type" => "소스 유형"
 // p.fitToContainer: "Fit to container" => "컨테이너에 맞추기"
 // p.setValueExpression: "Set value expression" => "설정 값 표현식"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "선택 항목은 웹 서비스에서 로드됩니다."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "설정으로 바로 가기"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "로드된 선택 옵션 미리보기"

@@ -159,6 +159,9 @@ export var skStrings = {
     addNewQuestion: "Pridať otázku",
     selectPage: "Vybrať stránku...",
     carryForwardChoicesCopied: "Voľby sa kopírujú z",
+    choicesLoadedFromWebText: "Možnosti sa načítavajú z webovej služby.",
+    choicesLoadedFromWebLinkText: "Prejdite na nastavenia",
+    choicesLoadedFromWebPreviewTitle: "Ukážka načítaných možností výberu",
     htmlPlaceHolder: "Obsah HTML bude tu.",
     panelPlaceHolder: "Tu položte otázku z panela nástrojov.",
     surveyPlaceHolder: "Prieskum je prázdny. Potiahnite prvok z panela s nástrojmi alebo kliknite na tlačidlo nižšie.",
@@ -1683,3 +1686,6 @@ editorLocalization.locales["sk"] = skStrings;
 // p.sourceType: "Source type" => "Typ zdroja"
 // p.fitToContainer: "Fit to container" => "Vhodné na kontajner"
 // p.setValueExpression: "Set value expression" => "Nastavenie výrazu hodnoty"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Možnosti sa načítavajú z webovej služby."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Prejdite na nastavenia"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ukážka načítaných možností výberu"

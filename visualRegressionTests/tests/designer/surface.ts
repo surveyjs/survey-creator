@@ -1494,6 +1494,37 @@ test("Check carry forward panel ranking", async (t) => {
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
   });
 });
+test("Restful service banner", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "dropdown",
+              "name": "country",
+              "title": "Select a country",
+              "description": "A full list of countries is queried from a RESTful web service.",
+              "choicesByUrl": {
+                "url": "https://surveyjs.io/api/CountriesExample",
+                "valueName": "name"
+              }
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    const questionSelector = Selector(".svc-question__adorner").nth(0);
+    await takeElementScreenshot("restful-question-banner.png", questionSelector, t, comparer);
+    await t.click(Selector("span").withText("Go to settings"));
+    const propsSelector = Selector("[data-name=\"choicesByUrl\"]");
+    await takeElementScreenshot("restful-properties.png", propsSelector, t, comparer);
+  });
+});
 
 test("Question adorners - popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {

@@ -159,6 +159,9 @@ var traditionalChineseTranslation = {
     addNewQuestion: "添加問題",
     selectPage: "選擇頁面...",
     carryForwardChoicesCopied: "選擇是從",
+    choicesLoadedFromWebText: "選項是從 Web 服務載入的。",
+    choicesLoadedFromWebLinkText: "前往“設置”",
+    choicesLoadedFromWebPreviewTitle: "載入選項的預覽",
     htmlPlaceHolder: "HTML內容將在這裡。",
     panelPlaceHolder: "在此處從工具箱中刪除問題。",
     surveyPlaceHolder: "調查為空。從工具箱中拖動元素或按下下面的按鈕。",
@@ -2008,3 +2011,6 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // p.sourceType: "Source type" => "源類型"
 // p.fitToContainer: "Fit to container" => "適合容器"
 // p.setValueExpression: "Set value expression" => "設置值表達式"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "選項是從 Web 服務載入的。"
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“設置”"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "載入選項的預覽"

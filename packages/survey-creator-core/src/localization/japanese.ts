@@ -159,6 +159,9 @@ export var jaStrings = {
     addNewQuestion: "質問を追加",
     selectPage: "ページを選択...",
     carryForwardChoicesCopied: "選択肢は",
+    choicesLoadedFromWebText: "選択肢は Web サービスから読み込まれます。",
+    choicesLoadedFromWebLinkText: "設定に移動",
+    choicesLoadedFromWebPreviewTitle: "読み込まれた選択肢オプションのプレビュー",
     htmlPlaceHolder: "HTMLコンテンツはここにあります。",
     panelPlaceHolder: "ここにツールボックスから質問をドロップします。",
     surveyPlaceHolder: "アンケートは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
@@ -1729,3 +1732,6 @@ editorLocalization.locales["ja"] = jaStrings;
 // p.sourceType: "Source type" => "ソースの種類"
 // p.fitToContainer: "Fit to container" => "コンテナにフィット"
 // p.setValueExpression: "Set value expression" => "設定値式"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "選択肢は Web サービスから読み込まれます。"
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "設定に移動"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "読み込まれた選択肢オプションのプレビュー"

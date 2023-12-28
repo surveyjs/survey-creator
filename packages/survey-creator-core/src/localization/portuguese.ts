@@ -159,6 +159,9 @@ var portugueseTranslation = {
     addNewQuestion: "Adicionar Questão",
     selectPage: "Selecionar página...",
     carryForwardChoicesCopied: "As opções são copiadas de",
+    choicesLoadedFromWebText: "As opções são carregadas a partir de um serviço Web.",
+    choicesLoadedFromWebLinkText: "Ir para configurações",
+    choicesLoadedFromWebPreviewTitle: "Pré-visualização das opções de escolha carregadas",
     htmlPlaceHolder: "O conteúdo HTML ficará aqui.",
     panelPlaceHolder: "Arraste uma questão da caixa de ferramentas aqui.",
     surveyPlaceHolder: "O questionário está vazio. Arraste um elemento da caixa de ferramentas ou clique no botão abaixo.",
@@ -1396,3 +1399,6 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // p.sourceType: "Source type" => "Tipo de origem"
 // p.fitToContainer: "Fit to container" => "Ajuste ao contêiner"
 // p.setValueExpression: "Set value expression" => "Definir expressão de valor"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "As opções são carregadas a partir de um serviço Web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ir para configurações"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pré-visualização das opções de escolha carregadas"

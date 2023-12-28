@@ -159,6 +159,9 @@ export var ruStrings = {
     addNewQuestion: "Добавить вопрос",
     selectPage: "Выберите страницу...",
     carryForwardChoicesCopied: "Варианты копируются из",
+    choicesLoadedFromWebText: "Варианты загружаются из веб-службы.",
+    choicesLoadedFromWebLinkText: "Перейдите в настройки",
+    choicesLoadedFromWebPreviewTitle: "Предварительный просмотр загруженных вариантов выбора",
     htmlPlaceHolder: "HTML-контент будет здесь.",
     panelPlaceHolder: "Задайте вопрос с панели инструментов здесь.",
     surveyPlaceHolder: "Опрос пуст. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
@@ -1790,3 +1793,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // p.sourceType: "Source type" => "Тип источника"
 // p.fitToContainer: "Fit to container" => "Подходит для контейнера"
 // p.setValueExpression: "Set value expression" => "Выражение заданного значения"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Варианты загружаются из веб-службы."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Перейдите в настройки"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Предварительный просмотр загруженных вариантов выбора"
