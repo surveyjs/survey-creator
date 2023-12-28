@@ -93,3 +93,22 @@ test("theme setting property grid", async (t) => {
     await takeElementScreenshot("theme-editor-property-grid-advanced-group.png", expandedGroup, t, comparer);
   });
 });
+
+test("theme setting property grid mobile", async (t) => {
+  const expandedGroup = Selector(".spg-theme-builder-root .spg-panel.sd-element--expanded");
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(400, 600);
+    await setJSON({
+      pages: [
+        { elements: [{ type: "text", name: "question1" }] },
+        { elements: [{ type: "text", name: "question2" }] }
+      ]
+    });
+    await t.click(Selector('button[title="Preview"]'));
+    await t.click(Selector('button[title="Open theme settings"]'));
+
+    await ClientFunction(() => document.body.focus())();
+    await takeElementScreenshot("theme-editor-property-grid-general-group-mobile.png", expandedGroup, t, comparer);
+  });
+});

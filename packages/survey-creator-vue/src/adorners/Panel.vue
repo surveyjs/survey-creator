@@ -39,6 +39,11 @@
           v-key2click
           @click="addNewQuestion"
         >
+          <sv-svg-icon
+            class="svc-panel__add-new-question-icon"
+            :iconName="'icon-add_24x24'"
+            :size="24"
+          ></sv-svg-icon>
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
           </span>
@@ -53,6 +58,11 @@
           v-key2click
           @click="addNewQuestion"
         >
+          <sv-svg-icon
+            class="svc-panel__add-new-question-icon"
+            :iconName="'icon-add_24x24'"
+            :size="24"
+          ></sv-svg-icon>
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
           </span>

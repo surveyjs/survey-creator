@@ -16,7 +16,7 @@ export * from "../string-editor";
 export * from "../adorners/question";
 export * from "../adorners/panel";
 export * from "../adorners/question-dropdown";
-export * from "../adorners/question-carryforward";
+export * from "../adorners/question-banner";
 export * from "../question-link-value";
 export * from "../question-embedded-survey";
 export * from "../adorners/question-image";

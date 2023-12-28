@@ -159,6 +159,9 @@ export var arStrings = {
     addNewQuestion: "Add Question",
     selectPage: "Select page...",
     carryForwardChoicesCopied: "يتم نسخ الاختيارات من",
+    choicesLoadedFromWebText: "يتم تحميل الاختيارات من خدمة ويب.",
+    choicesLoadedFromWebLinkText: "انتقل إلى الإعدادات",
+    choicesLoadedFromWebPreviewTitle: "معاينة خيارات الاختيار المحملة",
     htmlPlaceHolder: "محتوى HTML سيكون هنا",
     panelPlaceHolder: "قم بإسقاط السؤال من صندوق الأدوات إلى هنا",
     surveyPlaceHolder: "الاستطلاع فارغ. اسحب عنصرا من صندوق الأدوات أو انقر فوق الزر أدناه.",
@@ -1640,3 +1643,6 @@ editorLocalization.locales["ar"] = arStrings;
 // p.sourceType: "Source type" => "نوع المصدر"
 // p.fitToContainer: "Fit to container" => "يصلح للحاوية"
 // p.setValueExpression: "Set value expression" => "تعيين تعبير القيمة"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "يتم تحميل الاختيارات من خدمة ويب."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "انتقل إلى الإعدادات"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "معاينة خيارات الاختيار المحملة"

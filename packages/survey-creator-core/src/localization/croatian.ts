@@ -159,6 +159,9 @@ export var hrStrings = {
     addNewQuestion: "Dodaj pitanje",
     selectPage: "Odaberite stranicu...",
     carryForwardChoicesCopied: "Odabiri se kopiraju iz",
+    choicesLoadedFromWebText: "Izbori se učitavaju s web-usluge.",
+    choicesLoadedFromWebLinkText: "Idi na postavke",
+    choicesLoadedFromWebPreviewTitle: "Pretpregled učitanih mogućnosti izbora",
     htmlPlaceHolder: "HTML sadržaj će biti ovdje.",
     panelPlaceHolder: "Ovdje ispustite pitanje iz kutije s alatima.",
     surveyPlaceHolder: "Anketa je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
@@ -1724,3 +1727,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // p.sourceType: "Source type" => "Vrsta izvora"
 // p.fitToContainer: "Fit to container" => "Prilagodi spremniku"
 // p.setValueExpression: "Set value expression" => "Postavljanje izraza vrijednosti"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Izbori se učitavaju s web-usluge."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Idi na postavke"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pretpregled učitanih mogućnosti izbora"

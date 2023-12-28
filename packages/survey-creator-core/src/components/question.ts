@@ -15,7 +15,8 @@ import {
   DragOrClickHelper,
   QuestionSelectBase,
   createDropdownActionModel,
-  CssClassBuilder
+  CssClassBuilder,
+  QuestionPanelDynamicModel
 } from "survey-core";
 import { CreatorBase } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
@@ -32,9 +33,9 @@ import { settings } from "../creator-settings";
 import { StringEditorConnector, StringItemsNavigatorBase } from "./string-editor";
 import { DragDropSurveyElements } from "../survey-elements";
 
-export interface QuestionCarryForwardParams {
-  question: Question;
+export interface QuestionBannerParams {
   text: string;
+  actionText: string;
   onClick: () => void;
 }
 
@@ -109,6 +110,9 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     if (this.isEmptyElement) {
       result += " svc-question__content--empty";
     }
+    if (this.isEmptyTemplate) {
+      result += " svc-question__content--empty-template";
+    }
 
     if (this.isDragMe) {
       result += " svc-question__content--dragged";
@@ -156,21 +160,38 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   get dragTypeOverMe() {
     return this.element.dragTypeOverMe;
   }
-  public get isUsingCarryForward(): boolean {
+  public get isBannerShowing(): boolean {
+    return this.isUsingCarryForward || this.isUsingRestfull;
+  }
+  private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
   }
-  public createCarryForwardParams(): QuestionCarryForwardParams {
+  private get isUsingRestfull(): boolean {
+    return (<any>this.element)?.isUsingRestful;
+  }
+  public createBannerParams(): QuestionBannerParams {
+    return this.createCarryForwardParams() || this.createUsingRestfulParams();
+  }
+  private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
     const name = (<any>this.element)?.choicesFromQuestion;
     if (!name) return null;
     const question = this.creator.survey.getQuestionByName(name);
     if (!question) return null;
     return {
-      question: question, text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
+      actionText: question.name,
+      text: this.creator.getLocString("ed.carryForwardChoicesCopied"),
       onClick: () => { this.creator.selectElement(question); }
     };
   }
-
+  private createUsingRestfulParams(): QuestionBannerParams {
+    if(!this.isUsingRestfull) return null;
+    return {
+      actionText: this.creator.getLocString("ed.choicesLoadedFromWebLinkText"),
+      text: this.creator.getLocString("ed.choicesLoadedFromWebText"),
+      onClick: () => { this.creator.selectElement(this.element, "choicesByUrl"); }
+    };
+  }
   public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("inputType", "inputTypeAdorner");
@@ -224,6 +245,12 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       );
     }
 
+    return false;
+  }
+  public get isEmptyTemplate(): boolean {
+    if (this.surveyElement instanceof QuestionPanelDynamicModel) {
+      return this.surveyElement.templateElements.length == 0;
+    }
     return false;
   }
 
