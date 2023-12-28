@@ -510,16 +510,45 @@ svc-question,
   }
 }
 
+.svc-panel__add-new-question-container {
+  container-type: inline-size;
+}
+.svc-question__content--empty,
+.svc-question__content--empty-template {
+
+  &.svc-question__content--panel,
+  &.svc-question__content--paneldynamic,
+  &.svc-question__content--html {
+    container-type: inline-size;
+  }
+}
+.svc-question__content--empty-template {
+
+  .sd-question--paneldynamic,
+  .sd-question__content,
+  sv-ng-paneldynamic-question,
+  .sd-paneldynamic,
+  .sd-paneldynamic__panel-wrapper,
+  .svc-question__adorner,
+  .svc-question__adorner>div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .svc-panel__placeholder_frame {
+      flex-grow: 1;
+    }
+  }
+}
 .svc-panel__placeholder_frame {
   border: 1px dashed $border;
   width: 100%;
   box-sizing: border-box;
-  height: calcSize(30);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: calcSize(2) calcSize(8);
+  padding: calcSize(11) calcSize(8) calcSize(10);
   flex-grow: 1;
 }
 
@@ -545,7 +574,7 @@ svc-question,
 
   border: none;
   box-shadow: none;
-
+  padding: calcSize(0.5) calcSize(2);
   &:hover {
     outline: none;
   }
@@ -560,6 +589,51 @@ svc-question,
     color: $primary;
     text-wrap: nowrap;
   }
+}
+.svc-panel__add-new-question-icon {
+  margin: calcSize(0.5);
+  display: none;
+
+  use {
+    fill: $primary
+  }
+}
+
+@container (max-width: #{$sd-panel-normal-min-width}) {
+  .svc-panel__placeholder_frame {
+    padding: calcSize(11) calcSize(3) calcSize(10);
+  }
+}
+
+@container (max-width: #{$sd-panel-medium-min-width}) {
+  .svc-panel__placeholder {
+    display: none;
+  }
+
+  .svc-panel__placeholder_frame {
+    padding: calcSize(10) calcSize(3) calcSize(10);
+    .svc-panel__add-new-question {
+        margin: 0;
+      }
+    }
+    
+    .svc-panel__placeholder_frame,
+    .svc-panel__add-new-question-container {
+    .svc-panel__add-new-question-icon {
+      display: block;
+    }
+    .svc-panel__question-type-selector {
+      display: none;
+    }
+    .svc-panel__add-new-question {
+      padding: calcSize(0.5) calcSize(0.5);
+
+      .svc-text {
+        display: none;
+      }
+    }
+  }
+  
 }
 
 .svc-panel__question-type-selector {

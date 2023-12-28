@@ -55,6 +55,8 @@ $font-family: var(--sjs-font-family, var(--font-family));
 $font-size: var(--sjs-font-size, calc(2 * (var(--sjs-base-unit, var(--base-unit, 8px)))));
 $base-unit: var(--sjs-base-unit, var(--base-unit, 8px));
 
+$sd-panel-normal-min-width: 496px;
+$sd-panel-medium-min-width: 176px;
 @function calcSize($multiplier) {
   @if $multiplier ==1 {
     $result: #{$base-unit};

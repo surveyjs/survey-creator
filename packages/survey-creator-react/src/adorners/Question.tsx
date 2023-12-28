@@ -72,13 +72,13 @@ export class QuestionAdornerComponent extends CreatorModelElement<
   }
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
-    if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
+    //if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
       <div
-        className={"svc-question__content " + this.model.css()}
+        className={this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
-        {this.renderHeader()}
+        {allowInteractions ? this.renderHeader() : null}
         {content}
         {this.renderFooter()}
       </div>,
