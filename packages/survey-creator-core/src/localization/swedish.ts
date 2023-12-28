@@ -159,6 +159,9 @@ export let svStrings = {
     addNewQuestion: "Lägg till fråga",
     selectPage: "Välj sida...",
     carryForwardChoicesCopied: "Alternativen kopieras från",
+    choicesLoadedFromWebText: "Alternativen läses in från en webbtjänst.",
+    choicesLoadedFromWebLinkText: "Gå till inställningar",
+    choicesLoadedFromWebPreviewTitle: "Förhandsgranskning av inlästa alternativalternativ",
     htmlPlaceHolder: "HTML-innehåll kommer att finnas här.",
     panelPlaceHolder: "Släpp en fråga från verktygslådan här.",
     surveyPlaceHolder: "Enkäten är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
@@ -1907,3 +1910,6 @@ editorLocalization.locales["sv"] = svStrings;
 // p.sourceType: "Source type" => "Typ av källa"
 // p.fitToContainer: "Fit to container" => "Passa till behållare"
 // p.setValueExpression: "Set value expression" => "Ange värde-uttryck"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Alternativen läses in från en webbtjänst."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå till inställningar"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Förhandsgranskning av inlästa alternativalternativ"

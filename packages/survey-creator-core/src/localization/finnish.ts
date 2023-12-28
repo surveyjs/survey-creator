@@ -159,6 +159,9 @@ export var fiStrings = {
     addNewQuestion: "Lisää kysymys",
     selectPage: "Valitse sivu...",
     carryForwardChoicesCopied: "Valinnat kopioidaan kohteesta",
+    choicesLoadedFromWebText: "Valinnat ladataan verkkopalvelusta.",
+    choicesLoadedFromWebLinkText: "Siirry asetuksiin",
+    choicesLoadedFromWebPreviewTitle: "Ladattujen valintavaihtoehtojen esikatselu",
     htmlPlaceHolder: "HTML-sisältö on täällä.",
     panelPlaceHolder: "Pudota kysymys työkalupakista tähän.",
     surveyPlaceHolder: "Kysely on tyhjä. Vedä elementti työkalupakista tai napsauta alla olevaa painiketta.",
@@ -1730,3 +1733,6 @@ editorLocalization.locales["fi"] = fiStrings;
 // p.sourceType: "Source type" => "Lähteen tyyppi"
 // p.fitToContainer: "Fit to container" => "Sovita konttiin"
 // p.setValueExpression: "Set value expression" => "Arvolausekkeen määrittäminen"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valinnat ladataan verkkopalvelusta."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Siirry asetuksiin"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ladattujen valintavaihtoehtojen esikatselu"

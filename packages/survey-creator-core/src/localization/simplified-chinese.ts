@@ -159,6 +159,9 @@ var simplifiedChineseTranslation = {
     addNewQuestion: "添加问题",
     selectPage: "选择页面...",
     carryForwardChoicesCopied: "选择是从",
+    choicesLoadedFromWebText: "选项是从 Web 服务加载的。",
+    choicesLoadedFromWebLinkText: "前往“设置”",
+    choicesLoadedFromWebPreviewTitle: "加载选项的预览",
     htmlPlaceHolder: "HTML内容将在这里。",
     panelPlaceHolder: "在此处从工具箱中删除问题。",
     surveyPlaceHolder: "调查为空。从工具箱中拖动元素或单击下面的按钮。",
@@ -1872,3 +1875,6 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // p.sourceType: "Source type" => "源类型"
 // p.fitToContainer: "Fit to container" => "适合容器"
 // p.setValueExpression: "Set value expression" => "设置值表达式"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "选项是从 Web 服务加载的。"
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“设置”"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "加载选项的预览"

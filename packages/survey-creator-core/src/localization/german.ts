@@ -159,6 +159,9 @@ var germanTranslation = {
     addNewQuestion: "Frage hinzufügen",
     selectPage: "Seite auswählen ...",
     carryForwardChoicesCopied: "Auswahlmöglichkeiten werden kopiert von",
+    choicesLoadedFromWebText: "Auswahlmöglichkeiten werden aus einem Webdienst geladen.",
+    choicesLoadedFromWebLinkText: "Gehen Sie zu den Einstellungen",
+    choicesLoadedFromWebPreviewTitle: "Vorschau der geladenen Auswahloptionen",
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     panelPlaceHolder: "Ziehe eine Frage aus der Toolbox hier her.",
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",
@@ -1453,3 +1456,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.sourceType: "Source type" => "Quellentyp"
 // p.fitToContainer: "Fit to container" => "Passend zum Behälter"
 // p.setValueExpression: "Set value expression" => "Ausdruck \"Wert festlegen\""
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Auswahlmöglichkeiten werden aus einem Webdienst geladen."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gehen Sie zu den Einstellungen"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vorschau der geladenen Auswahloptionen"

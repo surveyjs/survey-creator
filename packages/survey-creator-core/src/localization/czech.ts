@@ -159,6 +159,9 @@ export var czStrings = {
     addNewQuestion: "Přidat otázku",
     selectPage: "Vyberte stránku...",
     carryForwardChoicesCopied: "Volby jsou zkopírovány z",
+    choicesLoadedFromWebText: "Volby se načítají z webové služby.",
+    choicesLoadedFromWebLinkText: "Přejděte do nastavení",
+    choicesLoadedFromWebPreviewTitle: "Náhled načtených voleb",
     htmlPlaceHolder: "Zde bude HTML obsah.",
     panelPlaceHolder: "Sem přetáhněte otázku z panelu nástrojů.",
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
@@ -1294,3 +1297,6 @@ editorLocalization.locales["cs"] = czStrings;
 // p.sourceType: "Source type" => "Typ zdroje"
 // p.fitToContainer: "Fit to container" => "Vhodné pro kontejner"
 // p.setValueExpression: "Set value expression" => "Nastavit výraz hodnoty"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Volby se načítají z webové služby."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Přejděte do nastavení"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Náhled načtených voleb"
