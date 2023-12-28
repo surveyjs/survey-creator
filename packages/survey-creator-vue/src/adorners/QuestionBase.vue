@@ -69,7 +69,7 @@
       />
       <svc-question-banner
         v-if="model.isBannerShowing"
-        :model="carryForwardParams"
+        :model="questionBannerParams"
       ></svc-question-carryforward>
       <div class="svc-question__content-actions" 
       v-on:focusin="
@@ -102,7 +102,7 @@ const root = ref();
 defineExpose({
   questionRoot: root,
 });
-const carryForwardParams = computed(() =>
+const questionBannerParams = computed(() =>
   props.model.isBannerShowing ? props.model.createBannerParams() : null
 );
 </script>
