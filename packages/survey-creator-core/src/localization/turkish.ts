@@ -159,6 +159,9 @@ export var turkishStrings = {
     addNewQuestion: "Soru Ekle",
     selectPage: "Sayfa seç...",
     carryForwardChoicesCopied: "Seçenekler şuradan kopyalanır:",
+    choicesLoadedFromWebText: "Seçimler bir web hizmetinden yüklenir.",
+    choicesLoadedFromWebLinkText: "Ayarlara git",
+    choicesLoadedFromWebPreviewTitle: "Yüklenen seçim seçeneklerinin önizlemesi",
     htmlPlaceHolder: "HTML içeriği burada olacak.",
     panelPlaceHolder: "Araç kutusundan buraya bir soru bırakın.",
     surveyPlaceHolder: "Anket boş. Araç kutusundan bir öğeyi sürükleyin veya aşağıdaki düğmeyi tıklatın.",
@@ -1725,3 +1728,6 @@ editorLocalization.locales["tr"] = turkishStrings;
 // p.sourceType: "Source type" => "Kaynak türü"
 // p.fitToContainer: "Fit to container" => "Konteynere sığdır"
 // p.setValueExpression: "Set value expression" => "Değer ifadesini ayarla"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Seçimler bir web hizmetinden yüklenir."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ayarlara git"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Yüklenen seçim seçeneklerinin önizlemesi"

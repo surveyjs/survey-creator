@@ -159,6 +159,9 @@ var polishStrings = {
     addNewQuestion: "Dodaj pytanie",
     selectPage: "Wybierz stronę...",
     carryForwardChoicesCopied: "Wybory są kopiowane z",
+    choicesLoadedFromWebText: "Opcje są ładowane z usługi internetowej.",
+    choicesLoadedFromWebLinkText: "Przejdź do ustawień",
+    choicesLoadedFromWebPreviewTitle: "Podgląd wczytanych opcji wyboru",
     htmlPlaceHolder: "Zawartość HTML będzie tutaj.",
     panelPlaceHolder: "Upuść pytanie z przybornika tutaj.",
     surveyPlaceHolder: "Ankieta jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
@@ -2003,3 +2006,6 @@ editorLocalization.locales["pl"] = polishStrings;
 // p.sourceType: "Source type" => "Typ źródła"
 // p.fitToContainer: "Fit to container" => "Pasuje do pojemnika"
 // p.setValueExpression: "Set value expression" => "Wyrażenie wartości zadanej"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Opcje są ładowane z usługi internetowej."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Przejdź do ustawień"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Podgląd wczytanych opcji wyboru"

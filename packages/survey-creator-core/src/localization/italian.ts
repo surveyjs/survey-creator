@@ -159,6 +159,9 @@ var italianTranslation = {
     addNewQuestion: "Aggiungi domanda",
     selectPage: "Seleziona la pagina...",
     carryForwardChoicesCopied: "Le scelte vengono copiate da",
+    choicesLoadedFromWebText: "Le scelte vengono caricate da un servizio Web.",
+    choicesLoadedFromWebLinkText: "Vai alle impostazioni",
+    choicesLoadedFromWebPreviewTitle: "Anteprima delle opzioni di scelta caricate",
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
     surveyPlaceHolder: "Il sondaggio è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
@@ -1488,3 +1491,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // p.sourceType: "Source type" => "Tipo di origine"
 // p.fitToContainer: "Fit to container" => "Adatto al contenitore"
 // p.setValueExpression: "Set value expression" => "Espressione del valore impostato"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Le scelte vengono caricate da un servizio Web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Vai alle impostazioni"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Anteprima delle opzioni di scelta caricate"

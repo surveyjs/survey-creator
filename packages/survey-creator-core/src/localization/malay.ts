@@ -159,6 +159,9 @@ export var msStrings = {
     addNewQuestion: "Tambahkan soalan",
     selectPage: "Pilih halaman...",
     carryForwardChoicesCopied: "Pilihan disalin daripada",
+    choicesLoadedFromWebText: "Pilihan dimuatkan dari perkhidmatan web.",
+    choicesLoadedFromWebLinkText: "Pergi ke seting",
+    choicesLoadedFromWebPreviewTitle: "Pratonton pilihan pilihan yang dimuatkan",
     htmlPlaceHolder: "Kandungan HTML akan berada di sini.",
     panelPlaceHolder: "Lepaskan soalan dari kotak alat di sini.",
     surveyPlaceHolder: "Tinjauan itu kosong. Seret elemen dari kotak alat atau klik butang di bawah.",
@@ -1683,3 +1686,6 @@ editorLocalization.locales["ms"] = msStrings;
 // p.sourceType: "Source type" => "Jenis sumber"
 // p.fitToContainer: "Fit to container" => "Muat ke bekas"
 // p.setValueExpression: "Set value expression" => "Mengesetkan ungkapan nilai"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Pilihan dimuatkan dari perkhidmatan web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Pergi ke seting"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratonton pilihan pilihan yang dimuatkan"
