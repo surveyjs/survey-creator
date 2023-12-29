@@ -10,10 +10,11 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { QuestionFileEditorModel } from "src/entries";
+import { QuestionFileEditorModel } from "../../custom-questions/question-file";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
+import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
 
@@ -737,14 +738,13 @@ export class ThemeBuilder extends Base {
   }
 
   private createAppearanceAdvancedModeAction(panel: PanelModelBase) {
-    const advancedMode = new Action({
+    const advancedMode = new Switcher({
       id: "advancedMode",
+      component: "svc-switcher",
       ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
-      innerCss: this.groupAppearanceAdvancedMode ? "sv-theme-group_advanced-mode sv-theme-group_advanced-mode--active" : "sv-theme-group_advanced-mode",
       title: getLocString("theme.advancedMode"),
-      iconName: this.groupAppearanceAdvancedMode ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16",
       iconSize: 16,
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
@@ -753,11 +753,11 @@ export class ThemeBuilder extends Base {
     });
     this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
       () => {
-        advancedMode.iconName = this.groupAppearanceAdvancedMode ? "icon-switch-active_16x16" : "icon-switch-inactive_16x16";
-        advancedMode.css = this.groupAppearanceAdvancedMode ? "sv-theme-group_advanced-mode sv-theme-group_advanced-mode--active" : "sv-theme-group_advanced-mode";
+        advancedMode.checked = !advancedMode.checked;
       },
       "groupAppearanceAdvancedMode"
     );
+    advancedMode.checked = false;
     return advancedMode;
   }
 
@@ -1489,8 +1489,7 @@ export class ThemeBuilder extends Base {
                 min: 0
               },
             ]
-          },
-          {
+          }, {
             type: "panel",
             visibleIf: "{advancedMode} = true",
             elements: [

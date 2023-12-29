@@ -87,8 +87,7 @@ test("theme setting property grid", async (t) => {
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-appearance-group.png", expandedGroup, t, comparer);
 
-    await t.click(getPropertyGridCategory("Appearance"));
-    await t.click(getPropertyGridCategory("Advanced"));
+    await t.click(getPropertyGridCategory("Appearance").find(".svc-switcher"));
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-advanced-group.png", expandedGroup, t, comparer);
   });

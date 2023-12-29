@@ -128,33 +128,16 @@
     position: relative;
     top: calc(4 * #{$base-unit});
     padding: calc(1 * #{$base-unit}) 0;
+    cursor: auto;
   }
 
-  .sv-theme-group_advanced-mode {
-    color: $foreground-light;
-
-    font-family: $font-family;
-    font-size: calc(1.5 * #{$base-unit});
-    font-style: normal;
-    font-weight: 600;
-    line-height: calc(1 * #{$base-unit});
-    align-items: center;
-    gap: calc(1 * #{$base-unit});
-
-    .spg-action-button__icon use {
-      fill: $foreground-dim-light;
-    }
-  }
-
-  .sv-theme-group_advanced-mode--active {
-    .spg-action-button__icon use {
-      background-color: $primary;
-    }
-  }
-
-  .spg-action-button.sv-theme-group_advanced-mode:hover,
-  .spg-action-button.sv-theme-group_advanced-mode:focus {
+  .sv-theme-group_title-action .spg-action-button:hover,
+  .sv-theme-group_title-action .spg-action-button:focus {
     background-color: unset;
+  }
+
+  .sd-panel__header.sd-element__header .spg-action-bar {
+    pointer-events: none;
   }
 }
 
