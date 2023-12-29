@@ -47,18 +47,18 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
     const choicesByUrl = obj[prop.name];
     new PropertyJSONGenerator(choicesByUrl, options, obj, prop).setupObjPanel(panel, true);
     const test = <QuestionDropdownModel>panel.addNewQuestion("dropdown", "test");
-    test.title = editorLocalization.getString("ed.choicesLoadedFromWebText");
+    test.title = editorLocalization.getString("ed.choicesLoadedFromWebPreviewTitle");
     test.choices = [];
     this.updateTestQuestion(test, choicesByUrl);
   }
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
-    if(prop.name !== "choicesByUrl") return;
+    if (prop.name !== "choicesByUrl") return;
     const panel = <PanelModel>question["contentPanel"];
     const test = <QuestionDropdownModel>panel.getQuestionByName("test");
     this.updateTestQuestion(test, obj[prop.name]);
   }
   private updateTestQuestion(test: QuestionDropdownModel, choicesByUrl: ChoicesRestful) {
-    if(!choicesByUrl) return;
+    if (!choicesByUrl) return;
     test.visible = !!choicesByUrl.url;
     test.choicesByUrl.setData(choicesByUrl);
   }

@@ -185,7 +185,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     };
   }
   private createUsingRestfulParams(): QuestionBannerParams {
-    if(!this.isUsingRestfull) return null;
+    if (!this.isUsingRestfull) return null;
     return {
       actionText: this.creator.getLocString("ed.choicesLoadedFromWebLinkText"),
       text: this.creator.getLocString("ed.choicesLoadedFromWebText"),
@@ -332,11 +332,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
         const newValue = this.getUpdatedPropertyValue(propName, item.id);
         this.surveyElement.setPropertyValue(propName, newValue);
         let title = item.title;
-        if(newValue !== item.id) {
+        if (newValue !== item.id) {
           const popup = newAction.popupModel;
           const list = popup.contentComponentData.model;
           const newItem = list.getActionById(newValue);
-          if(newItem) {
+          if (newItem) {
             title = newItem.title;
           }
         }
