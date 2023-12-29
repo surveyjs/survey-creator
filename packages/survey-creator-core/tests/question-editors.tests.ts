@@ -3,6 +3,7 @@ import { MatrixCellWrapperViewModel, MatrixCellWrapperEditSurvey } from "../src/
 import { QuestionRatingAdornerViewModel } from "../src/components/question-rating";
 import { CreatorTester } from "./creator-tester";
 import { SurveyHelper } from "../src/survey-helper";
+import { ItemValueWrapperViewModel } from "../src/components/item-value";
 
 test("QuestionRatingAdornerViewModel add/remove items w/o ratingItems", () => {
   const ratingQuestion = new QuestionRatingModel("q1");
@@ -177,12 +178,18 @@ test("Edit matrix cell question", (): any => {
   });
   const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
   let question = matrix.visibleRows[0].cells[0].question;
-  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
   const editQuestion = <QuestionSelectBase>editSurvey.question;
   expect(editQuestion.getType()).toEqual("radiogroup");
   expect(editQuestion.inMatrixMode).toBeTruthy();
+  let objType: string = "";
+  creator.onCollectionItemAllowOperations.add((sender, options) => {
+    objType = options.obj.getType();
+  });
   editQuestion.choices = [1, 2, 3, 4];
   expect(creator.state).toBeFalsy();
+  new ItemValueWrapperViewModel(creator, editQuestion, editQuestion.choices[0]);
+  expect(objType).toBe("matrixdropdowncolumn");
   editSurvey.apply();
   expect(matrix.columns[0].choices).toHaveLength(4);
   expect(matrix.columns[0].cellType).toEqual("radiogroup");

@@ -19,7 +19,7 @@ require("./matrix-cell.scss");
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
   private creator: CreatorBase;
-  constructor(creator: CreatorBase, private cellQuestion: Question, model?: Base) {
+  constructor(creator: CreatorBase, private cellQuestion: Question, private column: MatrixDropdownColumn, model?: Base) {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
@@ -31,6 +31,7 @@ export class MatrixCellWrapperEditSurvey {
     this.survey.questionTitleLocation = "hidden";
     this.question.setSurveyImpl(this.survey);
     this.question.inMatrixMode = true;
+    this.question.ownerObj = this.column;
   }
   public get survey(): SurveyModel { return this.surveyValue; }
   public get question(): Question { return this.survey.getAllQuestions()[0]; }
@@ -69,7 +70,8 @@ export class MatrixCellWrapperViewModel extends Base {
   }
 
   public editQuestion(model: MatrixCellWrapperViewModel, event: MouseEvent) {
-    const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, this);
+    const editSurvey = new MatrixCellWrapperEditSurvey(model.creator, model.question, model.column, this);
+    editSurvey.question.cellOwner = model;
     settings.showDialog(
       <IDialogOptions>{
         componentName: "svc-question-editor-content",
