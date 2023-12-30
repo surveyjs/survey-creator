@@ -1518,9 +1518,9 @@ test("Restful service banner", async (t) => {
     });
 
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.click(Selector("span").withText("Go to settings"));
     const questionSelector = Selector(".svc-question__adorner").nth(0);
     await takeElementScreenshot("restful-question-banner.png", questionSelector, t, comparer);
-    await t.click(Selector("span").withText("Go to settings"));
     const propsSelector = Selector("[data-name=\"choicesByUrl\"]");
     await takeElementScreenshot("restful-properties.png", propsSelector, t, comparer);
   });
