@@ -200,10 +200,51 @@ test("Edit matrix cell question", (): any => {
   expect(columnName).toBe("column1");
 
   question = matrix.visibleRows[0].cells[0].question;
-  editSurvey = new MatrixCellWrapperEditSurvey(creator, question);
+  editSurvey = new MatrixCellWrapperEditSurvey(creator, question, editQuestion.choices[0]);
   editSurvey.apply();
   expect(modifiedCounter).toBe(1);
   expect(stateCounter).toBe(1);
+});
+test("Edit matrix cell question & selectAll, other and none", (): any => {
+  let creator = new CreatorTester();
+  creator.JSON = {
+    "elements": [
+      {
+        "type": "matrixdropdown",
+        "name": "q1",
+        "columns": [{ name: "column1", cellType: "checkbox" }],
+        "choices": ["item1", "item2"],
+        "rows": ["row1", "row2"]
+      }
+    ]
+  };
+  const matrix = <QuestionMatrixDropdownModel>creator.survey.getQuestionByName("q1");
+  let question = matrix.visibleRows[0].cells[0].question;
+  let editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  let editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.getType()).toEqual("checkbox");
+  editQuestion.showSelectAllItem = true;
+  editQuestion.showNoneItem = true;
+  editQuestion.showOtherItem = true;
+  editSurvey.apply();
+  const columnQuestion = <QuestionCheckboxModel>matrix.columns[0].templateQuestion;
+  expect(columnQuestion.showSelectAllItem).toBeTruthy();
+  expect(columnQuestion.showNoneItem).toBeTruthy();
+  expect(columnQuestion.showOtherItem).toBeTruthy();
+
+  question = matrix.visibleRows[0].cells[0].question;
+  editSurvey = new MatrixCellWrapperEditSurvey(creator, question, matrix.columns[0]);
+  editQuestion = <QuestionCheckboxModel>editSurvey.question;
+  expect(editQuestion.showSelectAllItem).toBeTruthy();
+  expect(editQuestion.showNoneItem).toBeTruthy();
+  expect(editQuestion.showOtherItem).toBeTruthy();
+  editQuestion.showSelectAllItem = false;
+  editQuestion.showNoneItem = false;
+  editQuestion.showOtherItem = false;
+  editSurvey.apply();
+  expect(columnQuestion.showSelectAllItem).toBeFalsy();
+  expect(columnQuestion.showNoneItem).toBeFalsy();
+  expect(columnQuestion.showOtherItem).toBeFalsy();
 });
 test("QuestionRatingAdornerViewModel add rateValues and call onItemValueAdded event", () => {
   const creator = new CreatorTester();

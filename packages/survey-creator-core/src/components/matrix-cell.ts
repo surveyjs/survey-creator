@@ -45,6 +45,11 @@ export class MatrixCellWrapperEditSurvey {
       questionJSON.cellType = prevCellType;
     }
     if(Helpers.isTwoValueEquals(questionJSON, columnJSON)) return;
+    for(let key in columnJSON) {
+      if(questionJSON[key] === undefined && (columnJSON[key] === true || columnJSON[key] === false)) {
+        questionJSON[key] = !columnJSON[key];
+      }
+    }
     column.fromJSON(questionJSON);
     matrix.onColumnCellTypeChanged(column);
     this.creator.setModified({ type: "MATRIX_CELL_EDITOR", column: column });
