@@ -1594,6 +1594,8 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): boolean {
+    if(prop.type === "dropdown") return false;
+    if(prop.type === "buttongroup") return true;
     if (this.isLocaleProp(prop)) return false;
     if (
       !this.canRenderAsButtonGroup ||
