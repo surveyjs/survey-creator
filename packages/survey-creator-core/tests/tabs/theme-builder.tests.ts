@@ -937,10 +937,17 @@ test("Theme builder export value from composite question", (): any => {
 test("import theme from file", (done) => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.isAutoSave = true;
+  creator.autoSaveDelay = 0;
+  let saveThemeCount = 0;
+  creator.saveThemeFunc = (saveNo, callback) => {
+    saveThemeCount++;
+    callback(saveNo, "success");
+  };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
-  const themeEditor = themeSurveyTab.themeEditorSurvey;
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditor = themeBuilder.themeEditorSurvey;
 
   const data = JSON.stringify({
     "cssVariables": {
@@ -959,6 +966,9 @@ test("import theme from file", (done) => {
     expect(themeEditor.getQuestionByName("themeMode").value).toEqual("lightweight");
     expect(themeEditor.getQuestionByName("backgroundImage").value).toBeTruthy();
     expect(themeEditor.getQuestionByName("backgroundImageFit").value).toEqual("auto");
+    expect(creator.theme.cssVariables!["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    expect(themeBuilder.simulator.survey.themeVariables["--sjs-general-backcolor"]).toEqual("rgba(150, 150, 255, 1)");
+    expect(saveThemeCount).toBe(1);
     done();
   });
 });

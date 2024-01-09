@@ -159,6 +159,9 @@ export var indonesianStrings = {
     addNewQuestion: "Tambah pertanyaan",
     selectPage: "Pilih halaman...",
     carryForwardChoicesCopied: "Pilihan disalin dari",
+    choicesLoadedFromWebText: "Pilihan dimuat dari layanan web.",
+    choicesLoadedFromWebLinkText: "Buka pengaturan",
+    choicesLoadedFromWebPreviewTitle: "Pratinjau opsi pilihan yang dimuat",
     htmlPlaceHolder: "Konten HTML akan ada di sini.",
     panelPlaceHolder: "Jatuhkan pertanyaan dari kotak alat di sini.",
     surveyPlaceHolder: "Survei kosong. Seret elemen dari kotak alat atau klik tombol di bawah.",
@@ -1884,3 +1887,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // p.sourceType: "Source type" => "Jenis sumber"
 // p.fitToContainer: "Fit to container" => "Sesuai dengan kontainer"
 // p.setValueExpression: "Set value expression" => "Mengatur ekspresi nilai"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Pilihan dimuat dari layanan web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Buka pengaturan"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratinjau opsi pilihan yang dimuat"

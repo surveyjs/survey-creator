@@ -34,6 +34,13 @@
   }
 }
 
+@container (max-width: #{$sd-panel-medium-min-width}) {
+  .svc-question__content--image .sd-file__choose-btn--text {
+    .sv-svg-icon {
+      display: block;
+    }
+  }
+}
 .svc-question__content--loading {
   .sd-image {
     display: none;

@@ -57,7 +57,7 @@ export class ItemValueWrapperViewModel extends Base {
 
     this.allowItemOperations = { allowDelete: undefined, allowEdit: undefined, allowAdd: undefined };
     this.collectionProperty = Serializer.findProperty(question.getType(), this.collectionPropertyName);
-    this.creator.onCollectionItemAllowingCallback(question,
+    this.creator.onCollectionItemAllowingCallback(question.ownerObj || question,
       this.collectionProperty,
       question.visibleChoices,
       this.item,

@@ -159,6 +159,9 @@ var frenchTranslation = {
     addNewQuestion: "Ajouter Question",
     selectPage: "Sélectionner une page...",
     carryForwardChoicesCopied: "Les choix sont copiés à partir de",
+    choicesLoadedFromWebText: "Les choix sont chargés à partir d’un service Web.",
+    choicesLoadedFromWebLinkText: "Accédez aux paramètres",
+    choicesLoadedFromWebPreviewTitle: "Aperçu des options de choix chargées",
     htmlPlaceHolder: "Le contenu HTML se trouvera ici.",
     panelPlaceHolder: "Déposez une question de la boîte à outils ici.",
     surveyPlaceHolder: "Le sondage est vide. Faites glisser un élément de la boîte à outils ou cliquez sur le bouton ci-dessous.",
@@ -1790,3 +1793,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // p.sourceType: "Source type" => "Type de source"
 // p.fitToContainer: "Fit to container" => "S’adapte au conteneur"
 // p.setValueExpression: "Set value expression" => "Définir l’expression de valeur"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Les choix sont chargés à partir d’un service Web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Accédez aux paramètres"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Aperçu des options de choix chargées"

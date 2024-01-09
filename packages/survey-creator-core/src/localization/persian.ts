@@ -159,6 +159,9 @@ var persianStrings = {
     addNewQuestion: "اضافه کردن سوال",
     selectPage: "انتخاب صفحه ...",
     carryForwardChoicesCopied: "انتخاب ها کپی می شوند از",
+    choicesLoadedFromWebText: "انتخاب ها از یک سرویس وب بارگذاری می شوند.",
+    choicesLoadedFromWebLinkText: "رفتن به تنظیمات",
+    choicesLoadedFromWebPreviewTitle: "پیش نمایش گزینه های انتخاب بار شده",
     htmlPlaceHolder: "محتوای html اینجا خواهد بود",
     panelPlaceHolder: "سوالی را از داخل جعبه ابزار در اینجا قرار دهید",
     surveyPlaceHolder: "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",
@@ -1685,3 +1688,6 @@ editorLocalization.locales["fa"] = persianStrings;
 // p.sourceType: "Source type" => "نوع منبع"
 // p.fitToContainer: "Fit to container" => "مناسب برای ظرف"
 // p.setValueExpression: "Set value expression" => "تنظیم عبارت مقدار"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "انتخاب ها از یک سرویس وب بارگذاری می شوند."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "رفتن به تنظیمات"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "پیش نمایش گزینه های انتخاب بار شده"

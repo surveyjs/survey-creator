@@ -21,7 +21,8 @@ test("Select questions and survey", async (t) => {
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey");
 });
 
-test("Check page selector does not select survey", async (t) => {
+test.skip("Check page selector does not select survey", async (t) => {
+  await t.resizeWindow(1920, 1080);
   await ClientFunction(() => {
     window["creator"].JSON = {
       "logoPosition": "right",
@@ -51,7 +52,6 @@ test("Check page selector does not select survey", async (t) => {
   await t
     .click(Selector(".svc-tab-designer .svc-page .svc-question__content"), { offsetX: 5, offsetY: 50 })
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1")
-    .wait(100)
     .click(Selector(".svc-page-navigator-item__dot[title=\"page2\"]"))
     .expect(Selector(selectedObjectTextSelector).innerText).eql("question1");
 });

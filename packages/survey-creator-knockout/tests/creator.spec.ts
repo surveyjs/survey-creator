@@ -22,7 +22,7 @@ test("getObjectDisplayName", () => {
 //   expect(true).toEqual(true);
 // });
 
-test("isChost value for attached element", (): any => {
+test("isGhost value for attached element", (): any => {
   const creator = new SurveyCreator();
   creator.JSON = {
     elements: [
@@ -39,7 +39,7 @@ test("isChost value for attached element", (): any => {
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageAdornerModel = new CreatorSurveyPageComponent(creator as any, designerPlugin.model.newPage as any);
   expect(pageAdornerModel.isGhost).toBeTruthy();
-  expect(designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title").length).toBe(3);
+  expect(designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title").length).toBe(1);
 
   pageAdornerModel = new CreatorSurveyPageComponent(creator as any, creator.survey.pages[0] as any);
   expect(pageAdornerModel.isGhost).toBeFalsy();

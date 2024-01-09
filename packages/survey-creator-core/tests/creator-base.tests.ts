@@ -815,6 +815,30 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
+test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title");
+  expect(pageModel.isGhost).toBeTruthy();
+  expect(getTitleSubscriptions().length).toBe(1);
+  pageModel["attachElement"](designerPlugin.model.newPage);
+  expect(getTitleSubscriptions().length).toBe(1);
+  pageModel["detachElement"](designerPlugin.model.newPage);
+  expect(getTitleSubscriptions().length).toBe(0);
+});
 test("Create new page on changing title/description in ghost PageAdorner resets isGhost", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -3481,22 +3505,40 @@ test("Carry-forward banner", (): any => {
   const q1 = creator.survey.getQuestionByName("q1");
   const q2 = creator.survey.getQuestionByName("q2");
   const q2AdornerModel = new QuestionAdornerViewModel(creator, q2, undefined);
-  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  expect(q2AdornerModel.isBannerShowing).toBeTruthy();
   q2.choicesFromQuestion = "";
-  expect(q2AdornerModel.isUsingCarryForward).toBeFalsy();
-  expect(q2AdornerModel.createCarryForwardParams()).toBeFalsy();
+  expect(q2AdornerModel.isBannerShowing).toBeFalsy();
+  expect(q2AdornerModel.createBannerParams()).toBeFalsy();
   q2.choicesFromQuestion = "q1";
-  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
+  expect(q2AdornerModel.isBannerShowing).toBeTruthy();
   q1.name = "q11";
   expect(q2.choicesFromQuestion).toBe("q11");
-  expect(q2AdornerModel.isUsingCarryForward).toBeTruthy();
-  const params = q2AdornerModel.createCarryForwardParams();
-  expect(params.question.name).toBe("q11");
+  expect(q2AdornerModel.isBannerShowing).toBeTruthy();
+  const params = q2AdornerModel.createBannerParams();
+  expect(params.actionText).toBe("q11");
   expect(params.text).toBe("Choices are copied from");
   creator.selectElement(q2);
   expect(creator.selectedElementName).toBe("q2");
   params.onClick();
   expect(creator.selectedElementName).toBe("q11");
+});
+test("Choices restful banner", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "q1", choicesByUrl: { url: "abc" } }
+    ]
+  };
+  const q1 = <QuestionDropdownModel>creator.survey.getQuestionByName("q1");
+  const q1AdornerModel = new QuestionAdornerViewModel(creator, q1, undefined);
+  expect(q1AdornerModel.isBannerShowing).toBeTruthy();
+  expect(q1AdornerModel.createBannerParams()).toBeTruthy();
+  q1.choicesByUrl.url = "";
+  expect(q1AdornerModel.isBannerShowing).toBeFalsy();
+  expect(q1AdornerModel.createBannerParams()).toBeFalsy();
+  q1.choicesByUrl.url = "edf";
+  expect(q1AdornerModel.isBannerShowing).toBeTruthy();
+  expect(q1AdornerModel.createBannerParams()).toBeTruthy();
 });
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");

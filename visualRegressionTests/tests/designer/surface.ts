@@ -1314,16 +1314,15 @@ test("Question add type selector button", async (t) => {
       ]
     };
     await setJSON(json);
-    await t.click(Selector(".svc-panel__question-type-selector"));
-    await t.click(Selector(".svc-panel__question-type-selector")); // two clicks to set focus
-    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
     await t.hover(Selector(".svc-panel__question-type-selector"));
-    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
-    await t.click(Selector(".svc-page__question-type-selector"));
-    await t.click(Selector(".svc-page__question-type-selector")); // two clicks to set focus
-    await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-page__add-new-question"), t, comparer);
+    await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
+    await ClientFunction(() => { (document.querySelector(".svc-panel__question-type-selector") as HTMLDivElement).focus(); })();
+    await takeElementScreenshot("question-add-type-selector-button-panel-focus.png", Selector(".svc-panel__add-new-question-container"), t, comparer);
+
     await t.hover(Selector(".svc-page__question-type-selector"));
-    await takeElementScreenshot("question-add-type-selector-button-panel-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
+    await takeElementScreenshot("question-add-type-selector-button-page-hover.png", Selector(".svc-page__add-new-question"), t, comparer);
+    await ClientFunction(() => { (document.querySelector(".svc-page__question-type-selector") as HTMLDivElement).focus(); })();
+    await takeElementScreenshot("question-add-type-selector-button-page-focus.png", Selector(".svc-page__add-new-question"), t, comparer);
   });
 });
 
@@ -1431,6 +1430,22 @@ test("Check carry forward panel", async (t) => {
               "name": "question2",
               "choicesFromQuestion": "question1",
               "choicesFromQuestionMode": "selected"
+            },
+            {
+              "type": "checkbox",
+              "name": "question3",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+            },
+            {
+              "type": "checkbox",
+              "name": "question4",
+              "choicesFromQuestion": "question1",
+              "choicesFromQuestionMode": "selected",
+              "maxWidth": "400px",
+              "minWidth": "400px",
             }
           ]
         }
@@ -1440,6 +1455,8 @@ test("Check carry forward panel", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const rootSelector = Selector(".svc-question__adorner").nth(1);
     await takeElementScreenshot("carry-forward-panel.png", rootSelector, t, comparer);
+    await takeElementScreenshot("carry-forward-panel-small.png", Selector(".svc-question__adorner").nth(2), t, comparer);
+    await takeElementScreenshot("carry-forward-panel-medium.png", Selector(".svc-question__adorner").nth(3), t, comparer);
   });
 });
 
@@ -1475,6 +1492,37 @@ test("Check carry forward panel ranking", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const rootSelector = Selector(".svc-question__adorner").nth(1);
     await takeElementScreenshot("carry-forward-panel-ranking.png", rootSelector, t, comparer);
+  });
+});
+test("Restful service banner", async (t) => {
+  await t.resizeWindow(1920, 1920);
+  await setJSON(
+    {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "dropdown",
+              "name": "country",
+              "title": "Select a country",
+              "description": "A full list of countries is queried from a RESTful web service.",
+              "choicesByUrl": {
+                "url": "https://surveyjs.io/api/CountriesExample",
+                "valueName": "name"
+              }
+            }
+          ]
+        }
+      ]
+    });
+
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.click(Selector("span").withText("Go to settings"));
+    const questionSelector = Selector(".svc-question__adorner").nth(0);
+    await takeElementScreenshot("restful-question-banner.png", questionSelector, t, comparer);
+    const propsSelector = Selector("[data-name=\"choicesByUrl\"]");
+    await takeElementScreenshot("restful-properties.png", propsSelector, t, comparer);
   });
 });
 
@@ -1602,20 +1650,57 @@ test("Narrow question placeholder", async (t) => {
             {
               "type": "panel",
               "name": "question1",
-              "maxWidth": "250px"
+              "maxWidth": "200px",
+              "minWidth": "200px"
             },
             {
               "type": "paneldynamic",
               "name": "panel1",
-              "maxWidth": "250px",
+              "maxWidth": "200px",
+              "minWidth": "200px",
               "startWithNewLine": false,
               "isRequired": true
             },
             {
               "type": "html",
               "name": "question2",
-              "minWidth": "100px",
-              "maxWidth": "250px",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "startWithNewLine": false
+            },
+            {
+              "type": "image",
+              "name": "question3",
+              "maxWidth": "200px",
+              "minWidth": "200px",
+              "startWithNewLine": false
+            },
+            {
+              "type": "panel",
+              "name": "question1",
+              "maxWidth": "400px",
+              "minWidth": "400px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel1",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "startWithNewLine": false,
+              "isRequired": true
+            },
+            {
+              "type": "html",
+              "name": "question2",
+              "maxWidth": "400px",
+              "minWidth": "400px",
+              "startWithNewLine": false
+            },
+            {
+              "type": "html",
+              "name": "question3",
+              "maxWidth": "400px",
+              "minWidth": "400px",
               "startWithNewLine": false
             }
           ]
@@ -1632,5 +1717,127 @@ test("Narrow question placeholder", async (t) => {
     await takeElementScreenshot("panel-dynamic-placeholder.png", qContent.nth(1), t, comparer);
 
     await takeElementScreenshot("html-placeholder.png", qContent.nth(2), t, comparer);
+
+    await takeElementScreenshot("image-placeholder.png", qContent.nth(3), t, comparer);
+
+    await takeElementScreenshot("panel-placeholder-medium.png", qContent.nth(4), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-placeholder-medium.png", qContent.nth(5), t, comparer);
+
+    await takeElementScreenshot("html-placeholder-medium.png", qContent.nth(6), t, comparer);
+
+    await takeElementScreenshot("image-placeholder-medium.png", qContent.nth(7), t, comparer);
+
+  });
+});
+
+test("Narrow panel add question button", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1",
+                  "title": "Q1"
+                }
+              ],
+              "minWidth": "200px",
+              "maxWidth": "250px"
+            },
+            {
+              "type": "paneldynamic",
+              "name": "panel2",
+              "minWidth": "200px",
+              "maxWidth": "250px",
+              "startWithNewLine": false,
+              "templateElements": [
+                {
+                  "type": "text",
+                  "name": "question2",
+                  "title": "Q2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    await takeElementScreenshot("panel-narrow-add.png", Selector(".svc-question__content--panel"), t, comparer);
+
+    await takeElementScreenshot("panel-dynamic-narrow-add.png", Selector(".svc-question__content--paneldynamic"), t, comparer);
+  });
+});
+
+test("Dynamic panels in multi-line", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 1000);
+    const json = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "paneldynamic",
+              "name": "question1",
+              "startWithNewLine": false
+            },
+            {
+              "type": "checkbox",
+              "name": "question2",
+              "startWithNewLine": false,
+              "choices": [
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4",
+                "Item 5",
+                "Item 6"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await ClientFunction(() => {
+      (<any>window).creator.toolbox.isCompact = true;
+    })();
+    await takeElementScreenshot("panel-dynamic-in-multiline.png", Selector(".svc-row"), t, comparer);
+  });
+});
+
+test("Panel title editor is fully visible", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 1000);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "title": "Panel Title"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await t.click(Selector(".sv-string-editor").withText("Panel Title"));
+    await takeElementScreenshot("panel-title-editing.png", Selector(".svc-question__content--panel"), t, comparer);
   });
 });

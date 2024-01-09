@@ -258,7 +258,7 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
     if (selectorsNames.indexOf(question.name) < 0 && (parentName === "triggerEditorPanel" || parentName === "setValueIfPanel")) {
       const qType = question.getType();
       assignDefaultV2Classes(cssClasses, qType);
-      if(!defaultV2Css[qType]) {
+      if(!defaultV2Css[qType] && propertyGridCss[qType]) {
         copyCssClasses(cssClasses, propertyGridCss.question);
         copyCssClasses(cssClasses, propertyGridCss[qType]);
       }
