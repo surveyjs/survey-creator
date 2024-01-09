@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.125](https://github.com/surveyjs/survey-creator/compare/v1.9.109...v1.9.125) (2024-01-09)
+
+
+### Bug Fixes
+
+* change german translation of "header" ([#5013](https://github.com/surveyjs/survey-creator/issues/5013)) ([a004c08](https://github.com/surveyjs/survey-creator/commit/a004c08f3a576450023f163a8d902e469afb2bf1))
+
 ### [1.9.124](https://github.com/surveyjs/survey-creator/compare/v1.9.123...v1.9.124) (2024-01-05)
 
 ### [1.9.123](https://github.com/surveyjs/survey-creator/compare/v1.9.122...v1.9.123) (2023-12-27)
