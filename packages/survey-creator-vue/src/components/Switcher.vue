@@ -32,7 +32,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { useBase } from "@/base";
+import { useBase } from "survey-vue3-ui";
 import type { Switcher } from "survey-creator-core";
 const props = defineProps<{ item: Switcher }>();
 useBase(() => props.item);
