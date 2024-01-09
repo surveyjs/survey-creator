@@ -1,5 +1,5 @@
 <ng-template #template>
-  <button class="svc-switcher" type="button" (click)="model.action(model, model.getIsTrusted($event))"
+  <button type="button" (click)="model.action(model, model.getIsTrusted($event))"
     [key2click]="{ processEsc: false, disableTabStop: model.disableTabStop }" [class]="model.getActionBarItemCss()"
     [disabled]="model.disabled" [attr.title]="model.tooltip || model.title" [attr.aria-checked]="model.ariaChecked"
     [attr.aria-expanded]="model.ariaExpanded" [attr.role]="model.ariaRole">

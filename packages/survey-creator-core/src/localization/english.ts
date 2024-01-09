@@ -1068,7 +1068,7 @@ export var enStrings = {
     backgroundImageAttachmentScroll: "Scroll",
     panelBackgroundTransparency: "Panel background opacity",
     questionBackgroundTransparency: "Question background opacity",
-    questionTitle: "Question Box",
+    questionTitle: "Question box",
     editorPanel: "Input element",
     backgroundCornerRadius: "Background and corner radius",
     backcolor: "Default background",

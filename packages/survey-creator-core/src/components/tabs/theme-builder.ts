@@ -745,7 +745,6 @@ export class ThemeBuilder extends Base {
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
       title: getLocString("theme.advancedMode"),
-      iconSize: 16,
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
         panel.getQuestionByName("advancedMode").value = this.groupAppearanceAdvancedMode;
@@ -1258,6 +1257,11 @@ export class ThemeBuilder extends Base {
                             max: 100,
                             step: 5
                           },
+                        ]
+                      }, {
+                        type: "panel",
+                        titleLocation: "hidden",
+                        elements: [
                           {
                             type: "boolean",
                             name: "overlapEnabled",
@@ -1267,7 +1271,7 @@ export class ThemeBuilder extends Base {
                             descriptionLocation: "hidden",
                           },
                         ]
-                      },
+                      }
                     ]
                   }, {
                     type: "panel",

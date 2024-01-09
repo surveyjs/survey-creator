@@ -11,4 +11,8 @@ export class Switcher extends Action {
       .append("svc-switcher__icon--checked", this.checked)
       .toString();
   }
+
+  public getActionBarItemCss(): string {
+    return "svc-switcher " + super.getActionBarItemCss();
+  }
 }

@@ -1,6 +1,5 @@
 <template>
   <button
-    class="svc-switcher"
     :class="item.getActionBarItemCss()"
     type="button"
     v-on:click="

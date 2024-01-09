@@ -18,11 +18,10 @@ export class SwitcherComponent extends SurveyElementBase<ISwitcherComponentProps
 
   renderElement() {
     const tooltip = this.item.tooltip || this.item.title;
-    const className = "svc-switcher " + this.item.getActionBarItemCss();
     const title = this.item.hasTitle ? <span className="svc-switcher__title">{this.item.title}</span> : null;
     const button = attachKey2click(
       <button
-        className={className}
+        className={this.item.getActionBarItemCss()}
         type="button"
         disabled={this.item.disabled}
         onClick={(args) => this.item.action(this.item, this.item.getIsTrusted(args))}
