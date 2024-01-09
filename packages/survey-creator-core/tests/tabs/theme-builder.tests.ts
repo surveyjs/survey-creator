@@ -2257,6 +2257,26 @@ test("Creator footer action bar: all tabs", (): any => {
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
+
+test("Desktop mode: add advanced mode switcher", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeTruthy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+
+  const actions = propertyGridGroups[3].getTitleActions();
+  expect(actions.length).toBe(1);
+});
+
 test("Mobile mode: hide advanced settings in property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -2267,12 +2287,14 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
   const themeBuilder = themePlugin.model as ThemeBuilder;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const propertyGridGroups = themeEditorSurvey.pages[0].elements;
-  expect(propertyGridGroups.length).toBe(5);
+  expect(propertyGridGroups.length).toBe(4);
   expect(propertyGridGroups[0].visible).toBeTruthy();
   expect(propertyGridGroups[1].visible).toBeFalsy();
   expect(propertyGridGroups[2].visible).toBeTruthy();
   expect(propertyGridGroups[3].visible).toBeTruthy();
-  expect(propertyGridGroups[4].visible).toBeFalsy();
+
+  const actions = propertyGridGroups[3].getTitleActions();
+  expect(actions.length).toBe(0);
 });
 test("loadTheme fill all theme parameters: name, mode and compactness", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
