@@ -815,6 +815,30 @@ test("Create new page on changing title/description in ghost", (): any => {
   expect(designerPlugin.model.showNewPage).toBeFalsy();
   expect(designerPlugin.model.newPage).toBeFalsy();
 });
+test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      {
+        type: "text",
+        name: "q1"
+      }
+    ]
+  };
+  const designerPlugin = <TabDesignerPlugin>(
+    creator.getPlugin("designer")
+  );
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
+  const getTitleSubscriptions = () => designerPlugin.model.newPage["onPropChangeFunctions"].filter(f => f.name === "title");
+  expect(pageModel.isGhost).toBeTruthy();
+  expect(getTitleSubscriptions().length).toBe(1);
+  pageModel["attachElement"](designerPlugin.model.newPage);
+  expect(getTitleSubscriptions().length).toBe(1);
+  pageModel["detachElement"](designerPlugin.model.newPage);
+  expect(getTitleSubscriptions().length).toBe(0);
+});
 test("Create new page on changing title/description in ghost PageAdorner resets isGhost", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {

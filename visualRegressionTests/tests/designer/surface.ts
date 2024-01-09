@@ -1518,9 +1518,9 @@ test("Restful service banner", async (t) => {
     });
 
   await wrapVisualTest(t, async (t, comparer) => {
+    await t.click(Selector("span").withText("Go to settings"));
     const questionSelector = Selector(".svc-question__adorner").nth(0);
     await takeElementScreenshot("restful-question-banner.png", questionSelector, t, comparer);
-    await t.click(Selector("span").withText("Go to settings"));
     const propsSelector = Selector("[data-name=\"choicesByUrl\"]");
     await takeElementScreenshot("restful-properties.png", propsSelector, t, comparer);
   });
@@ -1815,5 +1815,29 @@ test("Dynamic panels in multi-line", async (t) => {
       (<any>window).creator.toolbox.isCompact = true;
     })();
     await takeElementScreenshot("panel-dynamic-in-multiline.png", Selector(".svc-row"), t, comparer);
+  });
+});
+
+test("Panel title editor is fully visible", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 1000);
+    const json = {
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "title": "Panel Title"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(json);
+    await t.click(Selector(".sv-string-editor").withText("Panel Title"));
+    await takeElementScreenshot("panel-title-editing.png", Selector(".svc-question__content--panel"), t, comparer);
   });
 });

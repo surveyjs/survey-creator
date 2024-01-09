@@ -180,6 +180,17 @@ test("settings.propertyGrid.useButtonGroup", (): any => {
   settings.propertyGrid.useButtonGroup = true;
 });
 
+test("Use dropdown & buttongroup property type", (): any => {
+  Serializer.addProperty("survey", { name: "prop1:dropdown", choices: [1] });
+  Serializer.addProperty("survey", { name: "prop2:buttongroup", choices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] });
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  expect(propertyGrid.survey.getQuestionByName("prop1").getType()).toEqual("dropdown");
+  expect(propertyGrid.survey.getQuestionByName("prop2").getType()).toEqual("buttongroup");
+  Serializer.removeProperty("survey", "prop1");
+  Serializer.removeProperty("survey", "prop2");
+});
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;

@@ -3180,8 +3180,9 @@ test("SurveyLogicItem,  setValue css", () => {
   expect(panel.getQuestionByName("logicTypeName").value).toBe("trigger_setvalue");
   const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
   const setValueQuestion = triggerEditorPanel.getQuestionByName("setValue");
-  expect(setValueQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
-  expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
+  expect(setValueQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value") > -1).toBeTruthy();
+  expect(setValueQuestion.contentQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value") > -1).toBeTruthy();
+  expect(setValueQuestion.cssClasses.mainRoot.indexOf("spg-question") > -1).toBeFalsy();
   ComponentCollection.Instance.clear();
 });
 test("Test questions css in an action panel", () => {
