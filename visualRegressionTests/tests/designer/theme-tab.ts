@@ -7,6 +7,8 @@ fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
 
+const advancedModeSwitcher = getPropertyGridCategory("Appearance").parent(".spg-title").find(".svc-switcher");
+
 test("Check boxshadow settings", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     const json = {};
@@ -14,7 +16,8 @@ test("Check boxshadow settings", async (t) => {
     const root = Selector("div[data-name='--sjs-shadow-small']");
     await t.resizeWindow(2000, 2000)
       .click(getTabbedMenuItemByText("Themes"))
-      .click(Selector("h4[aria-label='Advanced']"));
+      .click(getPropertyGridCategory("Appearance"))
+      .click(advancedModeSwitcher);
     await takeElementScreenshot("boxshadow-one-panel.png", root, t, comparer);
     await t.click(".spg-paneldynamic__add-btn");
     await t.hover(root, { offsetX: 0, offsetY: 0 });
@@ -87,7 +90,7 @@ test("theme setting property grid", async (t) => {
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-appearance-group.png", expandedGroup, t, comparer);
 
-    await t.click(getPropertyGridCategory("Appearance").find(".svc-switcher"));
+    await t.click(advancedModeSwitcher);
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-advanced-group.png", expandedGroup, t, comparer);
   });
