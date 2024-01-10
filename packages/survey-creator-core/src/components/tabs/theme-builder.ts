@@ -641,6 +641,8 @@ export class ThemeBuilder extends Base {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
     const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor", this);
+    themeEditorSurvey.lazyRendering = true;
+    themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -654,6 +656,7 @@ export class ThemeBuilder extends Base {
     });
 
     themeEditorSurvey.onValueChanged.add((sender, options: ValueChangedEvent) => {
+      if (options.name === "advancedMode") return;
       if (this.blockChanges) return;
 
       if (this.blockThemeChangedNotifications == 0) {

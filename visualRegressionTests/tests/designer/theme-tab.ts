@@ -60,6 +60,7 @@ test("theme setting property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1280, 4000);
     await setJSON({
+      title: "Title",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
