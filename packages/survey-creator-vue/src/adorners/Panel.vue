@@ -31,22 +31,24 @@
         ></sv-svg-icon>
       </div>
       <component :is="componentName" v-bind="componentData"></component>
-      <div v-if="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
-        <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
-        <div
-          v-if="adorner.showAddQuestionButton"
-          class="svc-panel__add-new-question svc-action-button"
-          v-key2click
-          @click="addNewQuestion"
-        >
-          <sv-svg-icon
-            class="svc-panel__add-new-question-icon"
-            :iconName="'icon-add_24x24'"
-            :size="24"
-          ></sv-svg-icon>
-          <span class="svc-text svc-text--normal svc-text--bold">
-            {{ adorner.addNewQuestionText }}
-          </span>
+      <div v-if="adorner.isEmptyElement" class="svc-panel__placeholder_frame-wrapper">
+        <div class="svc-panel__placeholder_frame">
+          <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
+          <div
+            v-if="adorner.showAddQuestionButton"
+            class="svc-panel__add-new-question svc-action-button"
+            v-key2click
+            @click="addNewQuestion"
+          >
+            <sv-svg-icon
+              class="svc-panel__add-new-question-icon"
+              :iconName="'icon-add_24x24'"
+              :size="24"
+            ></sv-svg-icon>
+            <span class="svc-text svc-text--normal svc-text--bold">
+              {{ adorner.addNewQuestionText }}
+            </span>
+          </div>
         </div>
       </div>
       <div
