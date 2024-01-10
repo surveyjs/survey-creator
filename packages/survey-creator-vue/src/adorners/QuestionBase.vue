@@ -39,10 +39,12 @@
       ></sv-template-renderer>
       <div
         v-if="model.isEmptyElement && !showPlaceholderComponent"
-        class="svc-panel__placeholder_frame"
+        class="svc-panel__placeholder_frame-wrapper"
       >
-        <div class="svc-panel__placeholder" data-bind="text: placeholderText">
-          {{ model.placeholderText }}
+        <div class="svc-panel__placeholder_frame">
+          <div class="svc-panel__placeholder" data-bind="text: placeholderText">
+            {{ model.placeholderText }}
+          </div>
         </div>
       </div>
       <component
