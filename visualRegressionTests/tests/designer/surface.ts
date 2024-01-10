@@ -93,7 +93,7 @@ test("Test question type converter on page for panel", async (t) => {
       .expect(Selector("#convertTo").visible).ok()
       .click(Selector("#convertTo"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
-    await takeElementScreenshot("convert-to-popup.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+    await takeElementScreenshot("convert-to-popup-panel.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
 
