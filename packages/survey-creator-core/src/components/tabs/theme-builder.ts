@@ -814,7 +814,11 @@ export class ThemeBuilder extends Base {
   }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
-    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    let groupHeaderVisibility = true;
+    if (!!this.survey) {
+      groupHeaderVisibility = !!this.survey.logo || !!this.survey.title || !!this.survey.description;
+    }
+    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings && groupHeaderVisibility;
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
