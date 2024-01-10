@@ -355,6 +355,7 @@ export var bgStrings = {
     markRequired: "Маркирай както се изисква",
     removeRequiredMark: "Премахване на необходимия знак",
     isAllRowRequired: "Изискване за отговор на всички редове",
+    eachRowUnique: "Предотвратяване на дублиращи се отговори в редове",
     requiredErrorText: "\"Задължително\" съобщение за грешка",
     startWithNewLine: "Показване на въпроса на нов ред",
     rows: "Редове",
@@ -1297,3 +1298,4 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Възможностите за избор се зареждат от уеб услуга."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Отидете в настройките"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Визуализация на заредените опции за избор"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвратяване на дублиращи се отговори в редове"

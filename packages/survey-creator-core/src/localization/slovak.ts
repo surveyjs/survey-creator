@@ -355,6 +355,7 @@ export var skStrings = {
     markRequired: "Označiť podľa potreby",
     removeRequiredMark: "Odstráňte požadovanú značku",
     isAllRowRequired: "Vyžadovať odpoveď pre všetky riadky",
+    eachRowUnique: "Zabráňte duplicitným odpovediam v riadkoch",
     requiredErrorText: "Text chyby pri povinných položkách",
     startWithNewLine: "Začína sa novým riadkom?",
     rows: "Počet riadkov",
@@ -1689,3 +1690,4 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Možnosti sa načítavajú z webovej služby."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Prejdite na nastavenia"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ukážka načítaných možností výberu"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zabráňte duplicitným odpovediam v riadkoch"

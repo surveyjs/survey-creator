@@ -355,6 +355,7 @@ export var mnStrings = {
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     removeRequiredMark: "Шаардлагатай тэмдэглэгээг хасах",
     isAllRowRequired: "Бүх мөрөнд хариулт шаардах",
+    eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     rows: "Мөр",
@@ -1392,3 +1393,4 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Тохиргоо руу явах"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ"

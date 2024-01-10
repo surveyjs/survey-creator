@@ -355,6 +355,7 @@ export var msStrings = {
     markRequired: "Tandakan mengikut keperluan",
     removeRequiredMark: "Mengalih keluar tanda yang diperlukan",
     isAllRowRequired: "Perlukan jawapan untuk semua baris",
+    eachRowUnique: "Mengelakkan respons pendua dalam baris",
     requiredErrorText: "Teks ralat diperlukan",
     startWithNewLine: "Mulakan dengan baris baharu?",
     rows: "Kiraan baris",
@@ -1689,3 +1690,4 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Pilihan dimuatkan dari perkhidmatan web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Pergi ke seting"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratonton pilihan pilihan yang dimuatkan"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mengelakkan respons pendua dalam baris"

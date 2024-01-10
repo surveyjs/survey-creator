@@ -355,6 +355,7 @@ export var nlStrings = {
     markRequired: "Markeren zoals vereist",
     removeRequiredMark: "Verwijder de vereiste markering",
     isAllRowRequired: "Antwoord vereisen voor alle rijen",
+    eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
     startWithNewLine: "Beginnen met een nieuwe regel?",
     rows: "Aantal rijen",
@@ -1716,3 +1717,4 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Keuzes worden geladen vanuit een webservice."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ga naar instellingen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Voorbeeld van geladen keuzeopties"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Voorkom dubbele antwoorden in rijen"
