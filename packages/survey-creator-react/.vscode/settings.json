@@ -5,7 +5,8 @@
     },
     "[typescript]": {
         "editor.codeActionsOnSave": {
-            "source.fixAll": "explicit"
+            "source.fixAll": true,
+            //"source.organizeImports": true, // be vare of https://github.com/microsoft/vscode-typescript-tslint-plugin/issues/51
         }
     },
     // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
