@@ -191,6 +191,32 @@ Survey.Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean", default: true }
 );
 ```
+
+If you are creating a [localizable property](#islocalizable) and want to display different default values for different locales, use localization capabilities to specify these default values. You can assign them at runtime, as shown below:
+
+```js
+Survey.surveyLocalization.getLocaleStrings("en")["myStringProperty"] = "Default value for English";
+Survey.surveyLocalization.getLocaleStrings("fr")["myStringProperty"] = "Default value for French";
+```
+
+Alternatively, you can add your custom property to each used [localization dictionary](https://github.com/surveyjs/survey-library/tree/master/src/localization). In this case, the default value for the current locale will be applied automatically. [Rebuild the library](https://github.com/surveyjs/survey-library/tree/master/src/localization#update-an-existing-dictionary) after updating the dictionaries.
+
+```js
+// localization/english.ts
+export var englishStrings = {
+  // ...
+  myStringProperty: "Default value for English"
+}
+```
+
+```js
+// localization/french.ts
+export var frenchSurveyStrings = {
+  // ...
+  myStringProperty: "Default value for French"
+}
+```
+
 #### `displayName`
 
 A string value that specifies a property caption. If not specified, the [`name`](#name) value is used instead.

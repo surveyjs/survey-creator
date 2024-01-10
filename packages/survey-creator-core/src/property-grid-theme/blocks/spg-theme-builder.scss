@@ -123,7 +123,7 @@
 }
 
 .sv-mobile-side-bar .spg-theme-builder-root {
-  .spg-nested-panel__content {
+  .spg-nested-panel__content::after {
     width: calc(4 * var(--sjs-base-unit, var(--base-unit, 8px)) + 100%);
     left: calc(-2 * var(--sjs-base-unit, var(--base-unit, 8px)));
   }

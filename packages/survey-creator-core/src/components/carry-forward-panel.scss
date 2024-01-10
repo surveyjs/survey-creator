@@ -1,3 +1,9 @@
+@import "../variables.scss";
+
+.svc-carry-forward-panel-wrapper {
+  width: 100%;
+  container-type: inline-size;
+}
 .svc-carry-forward-panel {
   box-sizing: border-box;
   width: 100%;
@@ -9,6 +15,18 @@
   font-size: calcSize(2);
   line-height: calcSize(3);
   color: rgba(0, 0, 0, 0.45);
+}
+  
+@container (max-width: #{$sd-panel-medium-min-width}) {
+    .svc-carry-forward-panel {
+      display: none;
+    }
+  }
+  
+@container (max-width: #{$sd-panel-normal-min-width}) {
+    .svc-carry-forward-panel {
+      padding: calcSize(4) calcSize(3);
+    }
 }
 .svc-carry-forward-panel__link {
   .svc-action-button {

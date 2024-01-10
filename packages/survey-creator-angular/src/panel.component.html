@@ -3,7 +3,7 @@
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
-    <div [class]="adorner.css()" [key2click]="{ disableTabStop: !adorner.element.isInteractiveDesignElement }"
+    <div [class]="adorner.css()" [key2click]="{ disableTabStop: true }"
       (click)="adorner.element.isInteractiveDesignElement ? adorner.select(adorner, $event) : null">
       <div *ngIf="adorner.allowDragging && adorner.element.isInteractiveDesignElement" class="svc-question__drag-area"
         (pointerdown)="adorner.onPointerDown($event)">
@@ -17,6 +17,8 @@
         <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
         <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
           (click)="addNewQuestion($event)">
+          <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')"
+          [size]="24" sv-ng-svg-icon></svg>
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
           </span>
@@ -30,6 +32,8 @@
       <div *ngIf="!adorner.isEmptyElement && adorner.showAddQuestionButton"
         class="svc-panel__add-new-question-container">
         <div class="svc-panel__add-new-question svc-action-button" [key2click] (click)="addNewQuestion($event)">
+          <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')"
+          [size]="24" sv-ng-svg-icon></svg>
           <span class="svc-text svc-text--normal svc-text--bold">
             {{ adorner.addNewQuestionText }}
           </span>
@@ -42,7 +46,7 @@
         </button>
       </div>
 
-      <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions">
+      <div *ngIf="adorner.element.isInteractiveDesignElement" class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event)">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
     </div>

@@ -110,6 +110,7 @@ export var ruStrings = {
     toolbox: "Панель инструментов",
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Введите для поиска...",
+    propertyGridNoResultsFound: "Никаких результатов не найдено",
     toolboxGeneralCategory: "Общие",
     toolboxChoiceCategory: "Вопросы выбора",
     toolboxTextCategory: "Вопросы для ввода текста",
@@ -158,6 +159,9 @@ export var ruStrings = {
     addNewQuestion: "Добавить вопрос",
     selectPage: "Выберите страницу...",
     carryForwardChoicesCopied: "Варианты копируются из",
+    choicesLoadedFromWebText: "Варианты загружаются из веб-службы.",
+    choicesLoadedFromWebLinkText: "Перейдите в настройки",
+    choicesLoadedFromWebPreviewTitle: "Предварительный просмотр загруженных вариантов выбора",
     htmlPlaceHolder: "HTML-контент будет здесь.",
     panelPlaceHolder: "Задайте вопрос с панели инструментов здесь.",
     surveyPlaceHolder: "Опрос пуст. Перетащите элемент с панели инструментов или нажмите кнопку ниже.",
@@ -721,6 +725,7 @@ export var ruStrings = {
     both: "Оба",
     left: "Слева",
     right: "Правильно",
+    leftRight: "Влево и вправо",
     color: "Цвет",
     date: "дата",
     datetime: "ДатаТайм",
@@ -931,6 +936,9 @@ export var ruStrings = {
     showLabel: "Показать подписи к изображениям",
     value: "Ценность",
     tabAlign: "Выравнивание табуляции",
+    sourceType: "Тип источника",
+    fitToContainer: "Подходит для контейнера",
+    setValueExpression: "Выражение заданного значения",
     description: "Описание",
     logoFit: "Подходит под логотип",
     pages: "Страниц",
@@ -1780,3 +1788,11 @@ editorLocalization.locales["ru"] = ruStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Минимальная ширина пера"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Максимальная ширина пера"
 // theme.coverDescriptionPosition: "Description position" => "Описание позиции"
+// ed.propertyGridNoResultsFound: "No results found" => "Никаких результатов не найдено"
+// pv.leftRight: "Left and right" => "Влево и вправо"
+// p.sourceType: "Source type" => "Тип источника"
+// p.fitToContainer: "Fit to container" => "Подходит для контейнера"
+// p.setValueExpression: "Set value expression" => "Выражение заданного значения"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Варианты загружаются из веб-службы."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Перейдите в настройки"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Предварительный просмотр загруженных вариантов выбора"

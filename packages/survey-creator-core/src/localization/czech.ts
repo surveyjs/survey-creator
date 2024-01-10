@@ -110,6 +110,7 @@ export var czStrings = {
     toolbox: "Sada nástrojů",
     "property-grid": "Vlastnosti",
     propertyGridFilteredTextPlaceholder: "Zadejte hledaný text...",
+    propertyGridNoResultsFound: "Nebyly nalezeny žádné výsledky",
     toolboxGeneralCategory: "Obecné",
     toolboxChoiceCategory: "Výběrové otázky",
     toolboxTextCategory: "Textové otázky",
@@ -158,6 +159,9 @@ export var czStrings = {
     addNewQuestion: "Přidat otázku",
     selectPage: "Vyberte stránku...",
     carryForwardChoicesCopied: "Volby jsou zkopírovány z",
+    choicesLoadedFromWebText: "Volby se načítají z webové služby.",
+    choicesLoadedFromWebLinkText: "Přejděte do nastavení",
+    choicesLoadedFromWebPreviewTitle: "Náhled načtených voleb",
     htmlPlaceHolder: "Zde bude HTML obsah.",
     panelPlaceHolder: "Sem přetáhněte otázku z panelu nástrojů.",
     surveyPlaceHolder: "Průzkum je prázdný. Přetáhněte prvek z panelu nástrojů nebo klikněte na tlačítko níže.",
@@ -721,6 +725,7 @@ export var czStrings = {
     both: "obě",
     left: "vlevo",
     right: "Pravá",
+    leftRight: "Vlevo a vpravo",
     color: "barva",
     date: "datum",
     datetime: "datum a čas",
@@ -931,6 +936,9 @@ export var czStrings = {
     showLabel: "Zobrazit popisky obrázku",
     value: "Hodnota",
     tabAlign: "Zarovnání záložek",
+    sourceType: "Typ zdroje",
+    fitToContainer: "Vhodné pro kontejner",
+    setValueExpression: "Nastavit výraz hodnoty",
     description: "Popis",
     logoFit: "Přizpůsobit logo",
     pages: "Stránky",
@@ -1284,3 +1292,11 @@ editorLocalization.locales["cs"] = czStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimální šířka pera"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximální šířka pera"
 // theme.coverDescriptionPosition: "Description position" => "Popis pozice"
+// ed.propertyGridNoResultsFound: "No results found" => "Nebyly nalezeny žádné výsledky"
+// pv.leftRight: "Left and right" => "Vlevo a vpravo"
+// p.sourceType: "Source type" => "Typ zdroje"
+// p.fitToContainer: "Fit to container" => "Vhodné pro kontejner"
+// p.setValueExpression: "Set value expression" => "Nastavit výraz hodnoty"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Volby se načítají z webové služby."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Přejděte do nastavení"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Náhled načtených voleb"

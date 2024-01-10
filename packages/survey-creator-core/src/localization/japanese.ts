@@ -110,6 +110,7 @@ export var jaStrings = {
     toolbox: "ツールボックス",
     "property-grid": "プロパティ",
     propertyGridFilteredTextPlaceholder: "検索するタイプ...",
+    propertyGridNoResultsFound: "結果が見つかりませんでした",
     toolboxGeneralCategory: "一般",
     toolboxChoiceCategory: "選択の質問",
     toolboxTextCategory: "テキスト入力の質問",
@@ -158,6 +159,9 @@ export var jaStrings = {
     addNewQuestion: "質問を追加",
     selectPage: "ページを選択...",
     carryForwardChoicesCopied: "選択肢は",
+    choicesLoadedFromWebText: "選択肢は Web サービスから読み込まれます。",
+    choicesLoadedFromWebLinkText: "設定に移動",
+    choicesLoadedFromWebPreviewTitle: "読み込まれた選択肢オプションのプレビュー",
     htmlPlaceHolder: "HTMLコンテンツはここにあります。",
     panelPlaceHolder: "ここにツールボックスから質問をドロップします。",
     surveyPlaceHolder: "アンケートは空です。ツールボックスから要素をドラッグするか、下のボタンをクリックします。",
@@ -721,6 +725,7 @@ export var jaStrings = {
     both: "両方",
     left: "左",
     right: "右",
+    leftRight: "左右",
     color: "色",
     date: "日付",
     datetime: "日時",
@@ -931,6 +936,9 @@ export var jaStrings = {
     showLabel: "画像のキャプションを表示する",
     value: "価値",
     tabAlign: "タブの配置",
+    sourceType: "ソースの種類",
+    fitToContainer: "コンテナにフィット",
+    setValueExpression: "設定値式",
     description: "形容",
     logoFit: "ロゴフィット",
     pages: "ページ",
@@ -1719,3 +1727,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.logoPosition: "Logo position" => "ロゴの位置"
 // theme.coverTitlePosition: "Title position" => "タイトルの位置"
 // theme.coverDescriptionPosition: "Description position" => "記述の位置"
+// ed.propertyGridNoResultsFound: "No results found" => "結果が見つかりませんでした"
+// pv.leftRight: "Left and right" => "左右"
+// p.sourceType: "Source type" => "ソースの種類"
+// p.fitToContainer: "Fit to container" => "コンテナにフィット"
+// p.setValueExpression: "Set value expression" => "設定値式"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "選択肢は Web サービスから読み込まれます。"
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "設定に移動"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "読み込まれた選択肢オプションのプレビュー"

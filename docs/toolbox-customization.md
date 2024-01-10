@@ -146,6 +146,7 @@ Since the Toolbox is meant to contain question and panel types, to add a new ele
 - [Create Composite Question Types](https://surveyjs.io/form-library/documentation/customize-question-types/create-composite-question-types)
 - [Integrate Third-Party Angular Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-angular)
 - [Integrate Third-Party React Components](https://surveyjs.io/form-library/documentation/customize-question-types/third-party-component-integration-react)
+- [Integrate Third-Party Vue 3 Components](/form-library/documentation/customize-question-types/third-party-component-integration-vue)
 
 <!--
 

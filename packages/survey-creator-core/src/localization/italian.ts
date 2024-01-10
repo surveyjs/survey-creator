@@ -110,6 +110,7 @@ var italianTranslation = {
     toolbox: "Toolbox",
     "property-grid": "Proprietà",
     propertyGridFilteredTextPlaceholder: "Digita per cercare...",
+    propertyGridNoResultsFound: "Nessun risultato trovato",
     toolboxGeneralCategory: "Generale",
     toolboxChoiceCategory: "Domande a scelta",
     toolboxTextCategory: "Domande sull'input di testo",
@@ -158,6 +159,9 @@ var italianTranslation = {
     addNewQuestion: "Aggiungi domanda",
     selectPage: "Seleziona la pagina...",
     carryForwardChoicesCopied: "Le scelte vengono copiate da",
+    choicesLoadedFromWebText: "Le scelte vengono caricate da un servizio Web.",
+    choicesLoadedFromWebLinkText: "Vai alle impostazioni",
+    choicesLoadedFromWebPreviewTitle: "Anteprima delle opzioni di scelta caricate",
     htmlPlaceHolder: "Il contenuto HTML sarà qui.",
     panelPlaceHolder: "Trascina una domanda dalla toolbox qui.",
     surveyPlaceHolder: "Il sondaggio è vuoto. Trascina un elemento dalla toolbox o clicca sul tasto sottostante.",
@@ -721,6 +725,7 @@ var italianTranslation = {
     both: "Entrambe",
     left: "Sinistra",
     right: "Destra",
+    leftRight: "Destra e sinistra",
     color: "Colore",
     date: "dattero",
     datetime: "datetime",
@@ -931,6 +936,9 @@ var italianTranslation = {
     showLabel: "Mostra le didascalie delle immagini",
     value: "Valore",
     tabAlign: "Allineamento delle tabulazioni",
+    sourceType: "Tipo di origine",
+    fitToContainer: "Adatto al contenitore",
+    setValueExpression: "Espressione del valore impostato",
     description: "Descrizione",
     logoFit: "Adattamento del logo",
     pages: "Pagine",
@@ -1478,3 +1486,11 @@ editorLocalization.locales["it"] = italianTranslation;
 // signaturepad.penMinWidth: "Minimum pen width" => "Larghezza minima della penna"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Larghezza massima della penna"
 // theme.coverDescriptionPosition: "Description position" => "Descrizione posizione"
+// ed.propertyGridNoResultsFound: "No results found" => "Nessun risultato trovato"
+// pv.leftRight: "Left and right" => "Destra e sinistra"
+// p.sourceType: "Source type" => "Tipo di origine"
+// p.fitToContainer: "Fit to container" => "Adatto al contenitore"
+// p.setValueExpression: "Set value expression" => "Espressione del valore impostato"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Le scelte vengono caricate da un servizio Web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Vai alle impostazioni"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Anteprima delle opzioni di scelta caricate"

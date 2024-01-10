@@ -110,6 +110,7 @@ export var huStrings = {
     toolbox: "Eszköztár",
     "property-grid": "Kellékek",
     propertyGridFilteredTextPlaceholder: "Írja be a kereséshez...",
+    propertyGridNoResultsFound: "Nincs találat",
     toolboxGeneralCategory: "Általános",
     toolboxChoiceCategory: "Választási kérdések",
     toolboxTextCategory: "Szövegbeviteli kérdések",
@@ -158,6 +159,9 @@ export var huStrings = {
     addNewQuestion: "Kérdés felvétele",
     selectPage: "Válasszon oldalt...",
     carryForwardChoicesCopied: "A választási lehetőségek másolása innen történik",
+    choicesLoadedFromWebText: "A választási lehetőségek egy webszolgáltatásból töltődnek be.",
+    choicesLoadedFromWebLinkText: "Válassza a beállítások",
+    choicesLoadedFromWebPreviewTitle: "A betöltött választási lehetőségek előnézete",
     htmlPlaceHolder: "A HTML tartalom itt lesz.",
     panelPlaceHolder: "Itt dobjon el egy kérdést az eszköztárból.",
     surveyPlaceHolder: "A felmérés üres. Húzzon egy elemet az eszköztárról, vagy kattintson az alábbi gombra.",
@@ -721,6 +725,7 @@ export var huStrings = {
     both: "Mindkettő",
     left: "bal",
     right: "Jobbra",
+    leftRight: "Balra és jobbra",
     color: "szín",
     date: "dátum",
     datetime: "Dátum/idő",
@@ -931,6 +936,9 @@ export var huStrings = {
     showLabel: "Képfeliratok megjelenítése",
     value: "Érték",
     tabAlign: "Tabulátorigazítás",
+    sourceType: "Forrás típusa",
+    fitToContainer: "Tárolóhoz igazítás",
+    setValueExpression: "Értékkifejezés beállítása",
     description: "Leírás",
     logoFit: "Logó illeszkedés",
     pages: "Oldalak",
@@ -1873,3 +1881,11 @@ editorLocalization.locales["hu"] = huStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Tollszélesség minimális"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximális tollszélesség"
 // theme.coverDescriptionPosition: "Description position" => "Leírás pozíciója"
+// ed.propertyGridNoResultsFound: "No results found" => "Nincs találat"
+// pv.leftRight: "Left and right" => "Balra és jobbra"
+// p.sourceType: "Source type" => "Forrás típusa"
+// p.fitToContainer: "Fit to container" => "Tárolóhoz igazítás"
+// p.setValueExpression: "Set value expression" => "Értékkifejezés beállítása"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "A választási lehetőségek egy webszolgáltatásból töltődnek be."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Válassza a beállítások"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "A betöltött választási lehetőségek előnézete"

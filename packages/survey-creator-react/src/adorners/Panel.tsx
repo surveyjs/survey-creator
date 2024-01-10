@@ -30,6 +30,11 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
             this.model.addNewQuestion();
           }}
         >
+          <SvgIcon
+            className={"svc-panel__add-new-question-icon"}
+            iconName={"icon-add_24x24"}
+            size={24}
+          ></SvgIcon>
           <span className="svc-text svc-text--normal svc-text--bold">
             {this.model.addNewQuestionText}
           </span>
@@ -38,24 +43,29 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
     );
   }
   protected disableTabStop() {
-    return !this.model.element.isInteractiveDesignElement;
+    return true;
   }
   protected renderFooter(): JSX.Element {
     return (<React.Fragment>
-      {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? attachKey2click(
+      {!this.model.isEmptyElement && this.model.element.isPanel && this.model.showAddQuestionButton ? (
         <div className="svc-panel__add-new-question-container">
-          <div
+          {attachKey2click(<div
             className="svc-panel__add-new-question svc-action-button"
             onClick={(e) => {
               e.stopPropagation();
               this.model.addNewQuestion();
             }}
           >
+            <SvgIcon
+              className={"svc-panel__add-new-question-icon"}
+              iconName={"icon-add_24x24"}
+              size={24}
+            ></SvgIcon>
             <span className="svc-text svc-text--normal svc-text--bold">
               {this.model.addNewQuestionText}
             </span>
 
-          </div>
+          </div>, undefined)}
           {attachKey2click(<button
             type="button"
             onClick={(e) => {

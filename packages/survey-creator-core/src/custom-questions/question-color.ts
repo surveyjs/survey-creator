@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, CssClassBuilder, IAction, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
+import { Action, ComputedUpdater, CssClassBuilder, IAction, IsTouch, ItemValue, ListModel, PopupModel, QuestionFactory, QuestionTextModel, Serializer, createDropdownActionModel, createDropdownActionModelAdvanced, property, propertyArray } from "survey-core";
 import { parseColor } from "../utils/utils";
 
 const DEFAULT_COLOR: string = "#000000";
@@ -138,6 +138,7 @@ export class QuestionColorModel extends QuestionTextModel {
     action.disableTabStop = true;
     const popupModel = <PopupModel>action.popupModel;
     const listModel = <ListModel<ItemValue>>popupModel.contentComponentData.model;
+    popupModel.displayMode = IsTouch ? "overlay" : "popup";
     popupModel.setWidthByTarget = true;
     popupModel.positionMode = "fixed";
     listModel.isItemSelected = (itemValue: ItemValue) => itemValue.value == this.value;

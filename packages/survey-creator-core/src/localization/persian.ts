@@ -110,6 +110,7 @@ var persianStrings = {
     toolbox: "جعبه ابزار",
     "property-grid": "ویژگی ها",
     propertyGridFilteredTextPlaceholder: "جستجو...",
+    propertyGridNoResultsFound: "نتیجه ای یافت نشد",
     toolboxGeneralCategory: "عمومی",
     toolboxChoiceCategory: "سوالات انتخاب",
     toolboxTextCategory: "سوالات ورودی متن",
@@ -158,6 +159,9 @@ var persianStrings = {
     addNewQuestion: "اضافه کردن سوال",
     selectPage: "انتخاب صفحه ...",
     carryForwardChoicesCopied: "انتخاب ها کپی می شوند از",
+    choicesLoadedFromWebText: "انتخاب ها از یک سرویس وب بارگذاری می شوند.",
+    choicesLoadedFromWebLinkText: "رفتن به تنظیمات",
+    choicesLoadedFromWebPreviewTitle: "پیش نمایش گزینه های انتخاب بار شده",
     htmlPlaceHolder: "محتوای html اینجا خواهد بود",
     panelPlaceHolder: "سوالی را از داخل جعبه ابزار در اینجا قرار دهید",
     surveyPlaceHolder: "نظرسنجی خالی است. یک آیتم را از جعبه ابزار انتخاب یا روی دکمه ی زیر کلیک کنید",
@@ -721,6 +725,7 @@ var persianStrings = {
     both: "هر دو",
     left: "چپ",
     right: "راست",
+    leftRight: "چپ و راست",
     color: "رنگ",
     date: "تاریخ",
     datetime: "تاریخ",
@@ -931,6 +936,9 @@ var persianStrings = {
     showLabel: "نمایش زیرنویسهای تصویر",
     value: "ارزش",
     tabAlign: "ترازبندی زبانه",
+    sourceType: "نوع منبع",
+    fitToContainer: "مناسب برای ظرف",
+    setValueExpression: "تنظیم عبارت مقدار",
     description: "توضیحات",
     logoFit: "لوگو مناسب است",
     pages: "صفحات",
@@ -1675,3 +1683,11 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.logoPosition: "Logo position" => "موقعیت لوگو"
 // theme.coverTitlePosition: "Title position" => "موقعیت عنوان"
 // theme.coverDescriptionPosition: "Description position" => "شرح موقعیت"
+// ed.propertyGridNoResultsFound: "No results found" => "نتیجه ای یافت نشد"
+// pv.leftRight: "Left and right" => "چپ و راست"
+// p.sourceType: "Source type" => "نوع منبع"
+// p.fitToContainer: "Fit to container" => "مناسب برای ظرف"
+// p.setValueExpression: "Set value expression" => "تنظیم عبارت مقدار"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "انتخاب ها از یک سرویس وب بارگذاری می شوند."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "رفتن به تنظیمات"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "پیش نمایش گزینه های انتخاب بار شده"

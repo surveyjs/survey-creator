@@ -403,3 +403,37 @@ test("dropdown popup in simulator - mobile", async (t) => {
     await takeElementScreenshot("test-tab-opened-dropdown-mobile.png", simulator, t, comparer);
   });
 });
+test("background image in preview", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    const previewTab = Selector(".svc-creator-tab").filterVisible();
+    await t.resizeWindow(1024, 768);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await ClientFunction(() => {
+      window["creator"].theme = {
+        "backgroundImage": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAwIiBoZWlnaHQ9IjIwMDAiPgo8Y2lyY2xlIGN4PSIxMDAwIiBjeT0iMTAwMCIgcj0iODgwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZDAwMDAiIHN0cm9rZS13aWR0aD0iMTUiLz4KPC9zdmc+",
+        "backgroundImageFit": "cover",
+        "backgroundImageAttachment": "fixed",
+        "backgroundOpacity": 1,
+        "cssVariables": {},
+        "themeName": "default",
+        "colorPalette": "light",
+        "isPanelless": false
+      };
+    })();
+    await t.click(Selector(".svc-tabbed-menu-item").withText("Preview"));
+    await t.click(Selector('input[title="Complete"]'));
+    await takeElementScreenshot("test-tab-background-image.png", previewTab, t, comparer);
+  });
+});

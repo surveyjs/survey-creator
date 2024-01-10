@@ -147,6 +147,7 @@
   height: 100%;
   // border-bottom: 1px solid $border-inside;
   box-shadow: inset 0px -1px 0px 0px $border-inside;
+  position: relative;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {

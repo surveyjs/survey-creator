@@ -110,6 +110,7 @@ export var bgStrings = {
     toolbox: "Кутия с инструменти",
     "property-grid": "Свойства",
     propertyGridFilteredTextPlaceholder: "Въведи за търсене...",
+    propertyGridNoResultsFound: "Няма намерени резултати",
     toolboxGeneralCategory: "Общ",
     toolboxChoiceCategory: "Въпроси за избор",
     toolboxTextCategory: "Въпроси с въвеждане на текст",
@@ -158,6 +159,9 @@ export var bgStrings = {
     addNewQuestion: "Добавяне на въпрос",
     selectPage: "Избиране на страница...",
     carryForwardChoicesCopied: "Възможностите за избор се копират от",
+    choicesLoadedFromWebText: "Възможностите за избор се зареждат от уеб услуга.",
+    choicesLoadedFromWebLinkText: "Отидете в настройките",
+    choicesLoadedFromWebPreviewTitle: "Визуализация на заредените опции за избор",
     htmlPlaceHolder: "HTML съдържанието ще бъде тук.",
     panelPlaceHolder: "Пусни въпроса от кутията с инструменти тук.",
     surveyPlaceHolder: "Анкетата е празна. Плъзни елемент от кутията с инструменти или щракни върху бутона по-долу.",
@@ -721,6 +725,7 @@ export var bgStrings = {
     both: "И двете",
     left: "Вляво",
     right: "Отдясно",
+    leftRight: "Наляво и надясно",
     color: "цвят",
     date: "дата",
     datetime: "Време за среща",
@@ -931,6 +936,9 @@ export var bgStrings = {
     showLabel: "Показване на надписи на изображения",
     value: "Стойност",
     tabAlign: "Подравняване на раздели",
+    sourceType: "Тип източник",
+    fitToContainer: "Побиране в контейнера",
+    setValueExpression: "Задаване на израз за стойност",
     description: "Описание",
     logoFit: "Подходящо за лого",
     pages: "Страници",
@@ -1281,3 +1289,11 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.logoPosition: "Logo position" => "Позиция на логото"
 // theme.coverTitlePosition: "Title position" => "Позиция на заглавието"
 // theme.coverDescriptionPosition: "Description position" => "Описание позиция"
+// ed.propertyGridNoResultsFound: "No results found" => "Няма намерени резултати"
+// pv.leftRight: "Left and right" => "Наляво и надясно"
+// p.sourceType: "Source type" => "Тип източник"
+// p.fitToContainer: "Fit to container" => "Побиране в контейнера"
+// p.setValueExpression: "Set value expression" => "Задаване на израз за стойност"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Възможностите за избор се зареждат от уеб услуга."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Отидете в настройките"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Визуализация на заредените опции за избор"

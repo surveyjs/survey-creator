@@ -1,14 +1,14 @@
 import * as ko from "knockout";
 import { QuestionAdornerViewModel } from "survey-creator-core";
-const template = require("./question-carryforward.html");
+const template = require("./question-banner.html");
 
-ko.components.register("svc-question-carryforward", {
+ko.components.register("svc-question-banner", {
   viewModel: {
     createViewModel: (
       params: QuestionAdornerViewModel,
       componentInfo: any
     ) => {
-      return params.createCarryForwardParams();
+      return params.createBannerParams();
     }
   },
   template: template
