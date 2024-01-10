@@ -110,6 +110,7 @@ export var mnStrings = {
     toolbox: "Хэрэглүүр",
     "property-grid": "Өмнөх",
     propertyGridFilteredTextPlaceholder: "Хайхын тулд бичнэ үү.....",
+    propertyGridNoResultsFound: "Ямар ч үр дүн олдсонгүй",
     toolboxGeneralCategory: "Ерөнхий",
     toolboxChoiceCategory: "Сонголттой асуултууд",
     toolboxTextCategory: "Хариулт бичих асуултууд",
@@ -158,6 +159,9 @@ export var mnStrings = {
     addNewQuestion: "Асуулт нэмэх",
     selectPage: "Хуудас сонгох...",
     carryForwardChoicesCopied: "Сонголтыг хуулбарладаг",
+    choicesLoadedFromWebText: "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг.",
+    choicesLoadedFromWebLinkText: "Тохиргоо руу явах",
+    choicesLoadedFromWebPreviewTitle: "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт",
     htmlPlaceHolder: "HTML агуулга энд байрлана.",
     panelPlaceHolder: "Энд хэрэглүүрээс асуулт чирнэ үү.",
     surveyPlaceHolder: "Санал асуулга хоосон байна. Хэрэглүүрээс асуулт чирнэ үү эсвэл доорх товчийг дарна уу.",
@@ -721,6 +725,7 @@ export var mnStrings = {
     both: "Аль аль нь",
     left: "Зүүн",
     right: "Баруун",
+    leftRight: "Зүүн, баруун",
     color: "өнгө",
     date: "огноо",
     datetime: "datetime",
@@ -931,6 +936,9 @@ export var mnStrings = {
     showLabel: "Зургийн тайлбар харуулах",
     value: "Утга",
     tabAlign: "Хавтас байрлуулах",
+    sourceType: "Эх сурвалжийн төрөл",
+    fitToContainer: "Сав баглаа боодолд тохирно",
+    setValueExpression: "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо",
     description: "Тайлбар",
     logoFit: "Лого",
     pages: "Хуудаснууд",
@@ -1376,3 +1384,11 @@ editorLocalization.locales["mn"] = mnStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Хамгийн бага үзэгний өргөн"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Хамгийн их үзэгний өргөн"
 // theme.coverTitlePosition: "Title position" => "Нүүр албан тушаал"
+// ed.propertyGridNoResultsFound: "No results found" => "Ямар ч үр дүн олдсонгүй"
+// pv.leftRight: "Left and right" => "Зүүн, баруун"
+// p.sourceType: "Source type" => "Эх сурвалжийн төрөл"
+// p.fitToContainer: "Fit to container" => "Сав баглаа боодолд тохирно"
+// p.setValueExpression: "Set value expression" => "Эрхэмлэх чанарыг илэрхийлэхийг тогтоо"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Тохиргоо руу явах"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт"

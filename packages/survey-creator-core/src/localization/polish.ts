@@ -110,6 +110,7 @@ var polishStrings = {
     toolbox: "Paleta",
     "property-grid": "Właściwości",
     propertyGridFilteredTextPlaceholder: "Wpisz, aby wyszukać...",
+    propertyGridNoResultsFound: "Nie znaleziono wyników",
     toolboxGeneralCategory: "Ogólne",
     toolboxChoiceCategory: "Pytania wyboru",
     toolboxTextCategory: "Pytania dotyczące wprowadzania tekstu",
@@ -158,6 +159,9 @@ var polishStrings = {
     addNewQuestion: "Dodaj pytanie",
     selectPage: "Wybierz stronę...",
     carryForwardChoicesCopied: "Wybory są kopiowane z",
+    choicesLoadedFromWebText: "Opcje są ładowane z usługi internetowej.",
+    choicesLoadedFromWebLinkText: "Przejdź do ustawień",
+    choicesLoadedFromWebPreviewTitle: "Podgląd wczytanych opcji wyboru",
     htmlPlaceHolder: "Zawartość HTML będzie tutaj.",
     panelPlaceHolder: "Upuść pytanie z przybornika tutaj.",
     surveyPlaceHolder: "Ankieta jest pusta. Przeciągnij element z przybornika lub kliknij przycisk poniżej.",
@@ -721,6 +725,7 @@ var polishStrings = {
     both: "Obie",
     left: "Lewy",
     right: "Prawy",
+    leftRight: "Lewy i prawy",
     color: "Kolor",
     date: "data",
     datetime: "datagodzina",
@@ -931,6 +936,9 @@ var polishStrings = {
     showLabel: "Pokaż podpisy pod obrazami",
     value: "Wartość",
     tabAlign: "Wyrównanie tabulatorów",
+    sourceType: "Typ źródła",
+    fitToContainer: "Pasuje do pojemnika",
+    setValueExpression: "Wyrażenie wartości zadanej",
     description: "Opis",
     logoFit: "Dopasowanie logo",
     pages: "Stron",
@@ -1993,3 +2001,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimalna szerokość pisaka"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksymalna szerokość pisaka"
 // theme.coverDescriptionPosition: "Description position" => "Opis pozycja"
+// ed.propertyGridNoResultsFound: "No results found" => "Nie znaleziono wyników"
+// pv.leftRight: "Left and right" => "Lewy i prawy"
+// p.sourceType: "Source type" => "Typ źródła"
+// p.fitToContainer: "Fit to container" => "Pasuje do pojemnika"
+// p.setValueExpression: "Set value expression" => "Wyrażenie wartości zadanej"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Opcje są ładowane z usługi internetowej."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Przejdź do ustawień"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Podgląd wczytanych opcji wyboru"

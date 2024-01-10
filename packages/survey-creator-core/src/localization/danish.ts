@@ -110,6 +110,7 @@ export var danishStrings = {
     toolbox: "Værktøjskasse",
     "property-grid": "Egenskaber",
     propertyGridFilteredTextPlaceholder: "Skriv for at søge...",
+    propertyGridNoResultsFound: "Ingen resultater fundet",
     toolboxGeneralCategory: "Generelt",
     toolboxChoiceCategory: "Spørgsmål om valg",
     toolboxTextCategory: "Spørgsmål om tekstinput",
@@ -158,6 +159,9 @@ export var danishStrings = {
     addNewQuestion: "Tilføj spørgsmål",
     selectPage: "Vælg side...",
     carryForwardChoicesCopied: "Valg kopieres fra",
+    choicesLoadedFromWebText: "Valg indlæses fra en webtjeneste.",
+    choicesLoadedFromWebLinkText: "Gå til indstillinger",
+    choicesLoadedFromWebPreviewTitle: "Forhåndsvisning af indlæste valgmuligheder",
     htmlPlaceHolder: "HTML-indhold vil være her.",
     panelPlaceHolder: "Smid et spørgsmål fra værktøjskassen her.",
     surveyPlaceHolder: "Undersøgelsen er tom. Træk et element fra værktøjskassen, eller klik på knappen nedenfor.",
@@ -721,6 +725,7 @@ export var danishStrings = {
     both: "Begge",
     left: "left",
     right: "Højre",
+    leftRight: "Venstre og højre",
     color: "farve",
     date: "dato",
     datetime: "datetime",
@@ -931,6 +936,9 @@ export var danishStrings = {
     showLabel: "Vis billedtekster",
     value: "Værdi",
     tabAlign: "Tabulatorjustering",
+    sourceType: "Kilde type",
+    fitToContainer: "Passer til beholder",
+    setValueExpression: "Angiv værdiudtryk",
     description: "description",
     logoFit: "Logo pasform",
     pages: "Sider",
@@ -1905,3 +1913,11 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.logoPosition: "Logo position" => "Logo position"
 // theme.coverTitlePosition: "Title position" => "Titel position"
 // theme.coverDescriptionPosition: "Description position" => "Beskrivelse position"
+// ed.propertyGridNoResultsFound: "No results found" => "Ingen resultater fundet"
+// pv.leftRight: "Left and right" => "Venstre og højre"
+// p.sourceType: "Source type" => "Kilde type"
+// p.fitToContainer: "Fit to container" => "Passer til beholder"
+// p.setValueExpression: "Set value expression" => "Angiv værdiudtryk"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valg indlæses fra en webtjeneste."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til indstillinger"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning af indlæste valgmuligheder"

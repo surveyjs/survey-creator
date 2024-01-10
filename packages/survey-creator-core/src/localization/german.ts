@@ -110,6 +110,7 @@ var germanTranslation = {
     toolbox: "Werkzeugleiste",
     "property-grid": "Eigenschaften",
     propertyGridFilteredTextPlaceholder: "Tippen, um zu suchen ...",
+    propertyGridNoResultsFound: "Keine Ergebnisse gefunden",
     toolboxGeneralCategory: "Allgemein",
     toolboxChoiceCategory: "Auswahl Fragen",
     toolboxTextCategory: "Text Eingabe Fragen",
@@ -158,6 +159,9 @@ var germanTranslation = {
     addNewQuestion: "Frage hinzufügen",
     selectPage: "Seite auswählen ...",
     carryForwardChoicesCopied: "Auswahlmöglichkeiten werden kopiert von",
+    choicesLoadedFromWebText: "Auswahlmöglichkeiten werden aus einem Webdienst geladen.",
+    choicesLoadedFromWebLinkText: "Gehen Sie zu den Einstellungen",
+    choicesLoadedFromWebPreviewTitle: "Vorschau der geladenen Auswahloptionen",
     htmlPlaceHolder: "HTML wird hier dargestellt werden.",
     panelPlaceHolder: "Ziehe eine Frage aus der Toolbox hier her.",
     surveyPlaceHolder: "Die Umfrage enthält keine Frage. Ziehe ein Element aus der Toolbox hier her oder drücke den Button unten.",
@@ -721,6 +725,7 @@ var germanTranslation = {
     both: "beides",
     left: "links",
     right: "rechts",
+    leftRight: "Links und rechts",
     color: "Farbe",
     date: "Datum",
     datetime: "Datum/Uhrzeit",
@@ -931,6 +936,9 @@ var germanTranslation = {
     showLabel: "Label anzeigen",
     value: "Wert",
     tabAlign: "Ausrichtung der Registerkarten",
+    sourceType: "Quellentyp",
+    fitToContainer: "Passend zum Behälter",
+    setValueExpression: "Ausdruck \"Wert festlegen\"",
     description: "Beschreibung",
     logoFit: "Passform des Logos",
     pages: "Seiten",
@@ -1031,7 +1039,7 @@ var germanTranslation = {
     "--base-unit": "Basiseinheit",
     groupGeneral: "Allgemein",
     groupAdvanced: "Fortgeschritten",
-    groupHeader: "Kopfball",
+    groupHeader: "Titelzeile",
     groupBackground: "Hintergrund",
     groupAppearance: "Aussehen",
     themeName: "Thema",
@@ -1381,7 +1389,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // survey.title: "Title" => "Titel"
 // page.title: "Title" => "Titel"
 // p.setValueIf: "Set value if" => "Wert setzen, wenn"
-// theme.groupHeader: "Header" => "Kopfball"
 // theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
 // theme.coverOverlapEnabled: "Overlap" => "Überlappung"
 // theme.backgroundImageFitFill: "Stretch" => "Strecken"
@@ -1443,3 +1450,12 @@ editorLocalization.locales["de"] = germanTranslation;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatisches Skalieren des Signaturbereichs"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimale Stiftbreite"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximale Stiftbreite"
+
+// ed.propertyGridNoResultsFound: "No results found" => "Keine Ergebnisse gefunden"
+// pv.leftRight: "Left and right" => "Links und rechts"
+// p.sourceType: "Source type" => "Quellentyp"
+// p.fitToContainer: "Fit to container" => "Passend zum Behälter"
+// p.setValueExpression: "Set value expression" => "Ausdruck \"Wert festlegen\""
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Auswahlmöglichkeiten werden aus einem Webdienst geladen."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gehen Sie zu den Einstellungen"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vorschau der geladenen Auswahloptionen"

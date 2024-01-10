@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ElementRef, Input, TemplateRef, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { CreatorBase, QuestionRatingAdornerViewModel } from "survey-creator-core";
@@ -24,6 +24,7 @@ AngularComponentFactory.Instance.registerComponent("svc-rating-question", Questi
 export class QuestionRatingAdornerDesignerComponent extends CreatorModelComponent<QuestionRatingAdornerViewModel> {
   @Input() componentName!: string;
   @Input() componentData!: any;
+  @Input() contentTempl!: TemplateRef<any>;
   public adorner!: QuestionRatingAdornerViewModel;
 
   protected createModel(): void {

@@ -1,6 +1,6 @@
 <template>
   <div class="svc-rating-question-content">
-    <div class="svc-rating-question-controls svc-item-value-controls">
+    <div :class="model?.controlsClassNames">
       <sv-svg-icon
         v-if="model?.allowRemove"
         :iconName="'icon-remove_16x16'"
@@ -22,7 +22,7 @@
         :aria-label="model?.addTooltip"
       ></sv-svg-icon>
     </div>
-    <component :is="componentName" v-bind="componentData"></component>
+    <slot></slot>
   </div>
 </template>
 <script lang="ts" setup>

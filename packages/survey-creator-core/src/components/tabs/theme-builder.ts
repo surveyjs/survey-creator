@@ -9,11 +9,87 @@ import { settings } from "../../creator-settings";
 import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } from "./theme-custom-questions/font-settings";
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
-import { PredefinedColors, PredefinedThemes, Themes, findSuitableTheme, getThemeFullName } from "./themes";
+import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
 import { QuestionFileEditorModel } from "src/entries";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
+import * as LibraryThemes from "survey-core/themes";
+import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
 
 require("./theme-builder.scss");
+
+Object.keys(LibraryThemes).forEach(libraryThemeName => {
+  const libraryTheme: ITheme = LibraryThemes[libraryThemeName];
+  const creatorThemeVariables = {};
+  const creatorTheme = {};
+  assign(creatorThemeVariables, libraryTheme.cssVariables);
+  assign(creatorTheme, libraryTheme, { cssVariables: creatorThemeVariables });
+  const creatorThemeName = getThemeFullName(libraryTheme);
+  Themes[creatorThemeName] = creatorTheme;
+});
+
+export function getThemeFullName(theme: ITheme) {
+  const themeName = theme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
+  if (theme.isPanelless === true) {
+    fullThemeName += "-panelless";
+  }
+  return fullThemeName;
+}
+
+export function getObjectDiffs(obj1: any, obj2: any = {}): any {
+  const result: any = {};
+  Object.keys(obj1).forEach(key => {
+    if (typeof obj1[key] === "object") {
+      result[key] = getObjectDiffs(obj1[key], obj2[key]);
+    } else {
+      if (obj1[key] !== undefined && obj1[key] != obj2[key]) {
+        result[key] = obj1[key];
+      }
+    }
+  });
+  return result;
+}
+
+export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
+  if (!baseTheme) {
+    let probeThemeFullName = getThemeFullName(fullTheme);
+    baseTheme = findSuitableTheme(fullTheme.themeName, fullTheme.colorPalette, fullTheme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+  }
+  const themeChanges: ITheme = getObjectDiffs(fullTheme, baseTheme);
+  Object.keys(themeChanges).forEach(propertyName => {
+    if (propertyName.toLowerCase().indexOf("background") !== -1) {
+      if (themeChanges[propertyName] === "" || themeChanges[propertyName] === Serializer.findProperty("survey", propertyName).defaultValue) {
+        delete themeChanges[propertyName];
+      }
+    }
+  });
+  themeChanges.themeName = baseTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  themeChanges.colorPalette = baseTheme.colorPalette || "light";
+  themeChanges.isPanelless = !!baseTheme.isPanelless;
+  return themeChanges;
+}
+
+export function findSuitableTheme(themeName: string, themePalette: string, themeMode: string, probeThemeFullName: string) {
+  let suitableTheme = Themes[probeThemeFullName];
+  if (!!suitableTheme) {
+    return suitableTheme;
+  }
+  const appropriateThemeNames = Object.keys(Themes).filter(fullName => fullName.indexOf(themeName + "-") === 0);
+  for (let fullThemeName of appropriateThemeNames) {
+    if (fullThemeName.indexOf(themeName + "-" + themePalette) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette;
+    }
+    if (fullThemeName.indexOf(themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "")) === 0) {
+      probeThemeFullName = themeName + "-" + themePalette + (themeMode === "lightweight" ? "-panelless" : "");
+    }
+  }
+  suitableTheme = Themes[appropriateThemeNames[0]];
+  if (!!suitableTheme) {
+    return suitableTheme;
+  }
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeBuilder.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  return Themes[defaultNearestThemeFullName] || ThemeBuilder.DefaultTheme;
+}
 
 export class ThemeBuilder extends Base {
   public static DefaultTheme = Themes["default-light"];
@@ -26,7 +102,7 @@ export class ThemeBuilder extends Base {
   private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
-  private blockChanges = false;
+  private blockChanges = true;
   private _availableThemes = PredefinedThemes;
   private prevQuestionValues: { [index: string]: any } = {};
 
@@ -135,11 +211,12 @@ export class ThemeBuilder extends Base {
     this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
     updateCustomQuestionJSONs();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
-    this.backgroundImage = this.surveyProvider.theme.backgroundImage !== undefined ? this.surveyProvider.theme.backgroundImage : surveyProvider.survey.backgroundImage;
-    this.backgroundImageFit = this.surveyProvider.theme.backgroundImageFit !== undefined ? this.surveyProvider.theme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
-    this.backgroundImageAttachment = this.surveyProvider.theme.backgroundImageAttachment !== undefined ? this.surveyProvider.theme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
-    this.backgroundOpacity = ((this.surveyProvider.theme.backgroundOpacity !== undefined ? this.surveyProvider.theme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
-    this.loadTheme(this.surveyProvider.theme);
+    const surveyTheme = this.surveyProvider.theme;
+    this.backgroundImage = surveyTheme.backgroundImage !== undefined ? surveyTheme.backgroundImage : surveyProvider.survey.backgroundImage;
+    this.backgroundImageFit = surveyTheme.backgroundImageFit !== undefined ? surveyTheme.backgroundImageFit : surveyProvider.survey.backgroundImageFit;
+    this.backgroundImageAttachment = surveyTheme.backgroundImageAttachment !== undefined ? surveyTheme.backgroundImageAttachment : surveyProvider.survey.backgroundImageAttachment;
+    this.backgroundOpacity = ((surveyTheme.backgroundOpacity !== undefined ? surveyTheme.backgroundOpacity : surveyProvider.survey.backgroundOpacity) || 1) * 100;
+    this.loadTheme(surveyTheme);
     this.surveyProvider.hasPendingThemeChanges = false;
     this.undoRedoManager = new UndoRedoManager();
     this.surveyProvider.onPropertyChanged.add(this.creatorPropertyChanged);
@@ -155,31 +232,34 @@ export class ThemeBuilder extends Base {
   public loadTheme(theme: ITheme) {
     this.blockThemeChangedNotifications += 1;
     try {
-      this.themeName = theme.themeName || this.themeName;
-      this.themePalette = theme.colorPalette || this.themePalette;
-      if (theme.isPanelless !== undefined) {
-        this.themeMode = theme.isPanelless === true ? "lightweight" : "panels";
+      let probeThemeFullName = getThemeFullName(theme);
+      const baseTheme = findSuitableTheme(theme.themeName, theme.colorPalette, theme.isPanelless ? "lightweight" : "panels", probeThemeFullName);
+      const themeChanges = getThemeChanges(theme, baseTheme);
+      if (this.currentTheme === theme) {
+        this.themeCssVariablesChanges = themeChanges.cssVariables || {};
       }
+      this.themeName = themeChanges.themeName;
+      this.themePalette = themeChanges.colorPalette;
+      this.themeMode = themeChanges.isPanelless === true ? "lightweight" : "panels";
+
       this.backgroundImage = theme.backgroundImage || this.backgroundImage;
       this.backgroundImageFit = theme.backgroundImageFit || this.backgroundImageFit;
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
-      const effectiveThemeCssVariables = {
-      };
-      const suitableTheme = this.findSuitableTheme(this.themeName);
-      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, suitableTheme.cssVariables || {});
+      const effectiveThemeCssVariables = {};
+      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       this.trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
-        backgroundImage: this.backgroundImage || suitableTheme.backgroundImage || "",
-        backgroundImageFit: this.backgroundImageFit || suitableTheme.backgroundImageFit,
-        backgroundImageAttachment: this.backgroundImageAttachment || suitableTheme.backgroundImageAttachment,
-        backgroundOpacity: (this.backgroundOpacity / 100) || suitableTheme.backgroundOpacity,
+        backgroundImage: this.backgroundImage || baseTheme.backgroundImage || "",
+        backgroundImageFit: this.backgroundImageFit || baseTheme.backgroundImageFit,
+        backgroundImageAttachment: this.backgroundImageAttachment || baseTheme.backgroundImageAttachment,
+        backgroundOpacity: (this.backgroundOpacity / 100) || baseTheme.backgroundOpacity,
       };
-      const headerSettings: IHeader = {} as any;
-      assign(headerSettings, suitableTheme.header || {});
-      if (Object.keys(headerSettings).length > 0) {
-        effectiveTheme.header = headerSettings;
+      const effectiveHeaderSettings: IHeader = {} as any;
+      assign(effectiveHeaderSettings, baseTheme.header || {});
+      if (Object.keys(effectiveHeaderSettings).length > 0) {
+        effectiveTheme.header = effectiveHeaderSettings;
       }
       assign(effectiveTheme, theme, { cssVariables: effectiveThemeCssVariables, themeName: this.themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" });
       this.surveyProvider.theme = effectiveTheme;
@@ -462,13 +542,13 @@ export class ThemeBuilder extends Base {
   private generalPropertiesChanged(options: ValueChangedEvent): boolean {
     if (["themeName", "themeMode", "themePalette"].indexOf(options.name) !== -1) {
       if (options.name === "themeName") {
-        this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value });
+        this.loadTheme(this.findSuitableTheme(options.value) || { [options.name]: options.value, isPanelless: this.themeMode === "lightweight", colorPalette: this.themePalette });
       }
       if (options.name === "themeMode") {
-        this.loadTheme({ isPanelless: options.value === "lightweight" });
+        this.loadTheme({ themeName: this.themeName, isPanelless: options.value === "lightweight", colorPalette: this.themePalette });
       }
       if (options.name === "themePalette") {
-        this.loadTheme({ colorPalette: options.value });
+        this.loadTheme({ themeName: this.themeName, isPanelless: this.themeMode === "lightweight", colorPalette: options.value });
       }
       this.themeModified({ theme: this.currentTheme });
       return true;
@@ -495,6 +575,12 @@ export class ThemeBuilder extends Base {
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
+    this.themeModified(options);
+  }
+  private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
+    const name = options.name;
+    const value = options.value;
+    this.themeCssVariablesChanges[name + "-reset"] = createBoxShadowReset(value);
     this.themeModified(options);
   }
   private cssVariablePropertiesChanged(options: ValueChangedEvent) {
@@ -591,6 +677,11 @@ export class ThemeBuilder extends Base {
       if (options.name === "headerViewContainer") {
         this.headerViewContainerPropertiesChanged(options);
       }
+
+      if (options.name === "--sjs-shadow-inner") {
+        this.shadowInnerPropertiesChanged(options);
+      }
+
       this.cssVariablePropertiesChanged(options);
 
       this.blockThemeChangedNotifications += 1;
@@ -664,12 +755,13 @@ export class ThemeBuilder extends Base {
     result["backgroundImageOpacity"] = headerSettings["backgroundImageOpacity"] / 100;
     return result;
   }
+
   private setHeaderBackgroundColorCssVariable(headerSettings: any) {
     let headerBackgroundColorValue = undefined;
     if (headerSettings["backgroundColorSwitch"] === "none") {
-      headerBackgroundColorValue = "trasparent";
+      headerBackgroundColorValue = "transparent";
     } else if (headerSettings["backgroundColorSwitch"] === "custom") {
-      headerBackgroundColorValue = headerSettings.backgroundColor;
+      headerBackgroundColorValue = headerSettings.backgroundColor ?? "transparent";
     }
     this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
   }
@@ -692,7 +784,7 @@ export class ThemeBuilder extends Base {
 
   private getBackgroundColorSwitchByValue(backgroundColor: string) {
     if (!backgroundColor) return "accentColor";
-    if (backgroundColor === "trasparent") return "none";
+    if (backgroundColor === "transparent") return "none";
     return "custom";
   }
   private updateVisibilityOfPropertyGridGroups() {
@@ -702,9 +794,9 @@ export class ThemeBuilder extends Base {
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables);
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
     panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables);
+    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
 
     panel.getQuestionByName("headerView").value = this.survey.headerView;
     panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
@@ -720,7 +812,7 @@ export class ThemeBuilder extends Base {
     panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
-    if (!!question && !!cssVariable && cssVariable !== "trasparent") {
+    if (!!question && !!cssVariable && cssVariable !== "transparent") {
       question.value = cssVariable;
     }
   }
@@ -847,7 +939,9 @@ export class ThemeBuilder extends Base {
   }
 
   private updateSimulatorTheme() {
-    this.survey.applyTheme(this.currentTheme);
+    if (!!this.survey) {
+      this.survey.applyTheme(this.currentTheme);
+    }
   }
 
   private _saveThemeFuncValue: (
@@ -1097,6 +1191,7 @@ export class ThemeBuilder extends Base {
                           {
                             type: "color",
                             name: "backgroundColor",
+                            allowEmptyValue: true,
                             enableIf: "{panel.backgroundColorSwitch} = 'custom'",
                             titleLocation: "hidden",
                             descriptionLocation: "hidden",
@@ -1534,7 +1629,8 @@ export class ThemeBuilder extends Base {
                     color: "rgba(0, 0, 0, 0.15)"
                   }
                 ]
-              }, {
+              },
+              {
                 type: "expression",
                 name: "--sjs-general-backcolor-dim-light",
                 expression: "{editorPanel.backcolor}",

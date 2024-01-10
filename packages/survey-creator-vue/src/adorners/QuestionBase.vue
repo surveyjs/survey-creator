@@ -16,7 +16,7 @@
         }
       "
       :class="model.css()"
-      v-key2click
+      v-key2click="{ disableTabStop: true }"
     >
       <div
         v-if="model.allowDragging"
@@ -67,11 +67,19 @@
         :model="model"
         :element="element"
       />
-      <svc-question-carryforward
-        v-if="model.isUsingCarryForward"
-        :model="carryForwardParams"
-      ></svc-question-carryforward>
-      <div class="svc-question__content-actions">
+      <svc-question-banner
+        v-if="model.isBannerShowing"
+        :model="questionBannerParams"
+      ></svc-question-banner>
+      <div
+        class="svc-question__content-actions"
+        v-on:focusin="
+          (e) => {
+            model.select(model, e);
+            e.stopPropagation();
+          }
+        "
+      >
         <sv-action-bar
           :model="model.actionContainer"
           :handleClick="false"
@@ -97,9 +105,7 @@ const root = ref();
 defineExpose({
   questionRoot: root,
 });
-const carryForwardParams = computed(() =>
-  props.model.isUsingCarryForward
-    ? props.model.createCarryForwardParams()
-    : null
+const questionBannerParams = computed(() =>
+  props.model.isBannerShowing ? props.model.createBannerParams() : null
 );
 </script>

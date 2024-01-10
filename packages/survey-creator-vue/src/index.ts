@@ -11,7 +11,6 @@ import ObjectSelector from "./property-panel/ObjectSelector.vue";
 import PropertyGrid from "./property-panel/PropertyGrid.vue";
 
 import ActionButton from "./components/ActionButton.vue";
-import SvgBundle from "./SvgBundle.vue";
 import Simulator from "./tabs/preview/Simulator.vue";
 import Test from "./tabs/preview/Test.vue";
 
@@ -69,12 +68,10 @@ import Dropdown from "./adorners/Dropdown.vue";
 import QuestionDropdown from "./adorners/QuestionDropdown.vue";
 import CellQuestionDropdownVue from "./adorners/CellQuestionDropdown.vue";
 import CustomWidget from "./adorners/CustomWidget.vue";
-import CarryForward from "./adorners/CarryForward.vue";
+import QuestionBanner from "./adorners/QuestionBanner.vue";
 
 function registerComponents(app: App) {
   app.component("SurveyCreatorComponent", SurveyCreatorComponent);
-  app.component("svc-svg-bundle", SvgBundle);
-
   app.component("svc-tabbed-menu", TabbedMenu);
   app.component("svc-tabbed-menu-item-wrapper", TabbedMenuItemWrapper);
   app.component("svc-tabbed-menu-item", TabbedMenuItem);
@@ -146,7 +143,7 @@ function registerComponents(app: App) {
   app.component("svc-dropdown-question", QuestionDropdown);
   app.component("svc-dropdown-question-adorner", Dropdown);
   app.component("svc-widget-question", CustomWidget);
-  app.component("svc-question-carryforward", CarryForward);
+  app.component("svc-question-banner", QuestionBanner);
 }
 
 export const surveyCreatorPlugin = {

@@ -207,6 +207,33 @@ test("Rating editing", async (t) => {
   });
 });
 
+test("Rating min/max editing", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "min",
+              "maxRateDescription": "max"
+            }
+          ]
+        }
+      ]
+    }
+    );
+    await t.resizeWindow(1900, 1000);
+    const question = Selector("div[data-name=question1]");
+    await t.click(question.find("span").withText("min"));
+    await takeElementScreenshot("rating-editing-min.png", question, t, comparer);
+    await t.click(question.find("span").withText("max"));
+    await takeElementScreenshot("rating-editing-max.png", question, t, comparer);
+  });
+});
+
 test("Rating in matrix", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await setJSON({
@@ -288,5 +315,47 @@ test("Rating long item", async (t) => {
     await takeElementScreenshot("rating-long-item.png", question, t, comparer);
     await t.click(Selector("span").withText("Lorem"));
     await takeElementScreenshot("rating-long-item-edit.png", question, t, comparer);
+  });
+});
+
+test("Rating labels location", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionLocation": "top"
+            },
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionLocation": "bottom"
+            },
+            {
+              "type": "rating",
+              "name": "question1",
+              "minRateDescription": "Bad",
+              "maxRateDescription": "Good",
+              "rateDescriptionLocation": "topBottom"
+            }
+          ]
+        }
+      ],
+      "widthMode": "static"
+    });
+    await t.resizeWindow(1900, 1000);
+    const question = Selector(".svc-rating-question-content");
+    await takeElementScreenshot("rating-top-labels.png", question.nth(0), t, comparer);
+    await takeElementScreenshot("rating-bottom-labels.png", question.nth(1), t, comparer);
+    await takeElementScreenshot("rating-top-bottom-labels.png", question.nth(2), t, comparer);
   });
 });

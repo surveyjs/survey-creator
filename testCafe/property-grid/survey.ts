@@ -37,9 +37,9 @@ test("Delete second page", async (t) => {
   await t
     .click(generalGroup)
     .click(pagesGroup)
-    .expect(deleteButtons.count).eql(2)
+    .expect(deleteButtons.count).eql(3)
     .click(deleteButtons)
-    .expect(deleteButtons.count).eql(1);
+    .expect(deleteButtons.count).eql(2);
 });
 
 test("Add calculated values", async (t) => {

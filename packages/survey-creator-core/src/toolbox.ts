@@ -466,12 +466,16 @@ export class QuestionToolbox
   }
   public updateTitles(): void {
     this.actions.forEach(action => {
-      const newTitle = editorLocalization.getString("qt." + action.name);
-      if (!!newTitle) {
-        action.title = newTitle;
-        action.tooltip = newTitle;
-      }
+      this.updateActionTitle(action);
+      this.updateActionTitle(action.innerItem);
     });
+  }
+  private updateActionTitle(action: IAction): void {
+    const newTitle = editorLocalization.getString("qt." + action.id);
+    if (!!newTitle) {
+      action.title = newTitle;
+      action.tooltip = newTitle;
+    }
   }
   private updateCategoriesState() {
     var noActive = this.allowExpandMultipleCategories || this.keepAllCategoriesExpanded;
@@ -811,6 +815,7 @@ export class QuestionToolbox
       iconName: iconName,
       title: title,
       tooltip: title,
+      className: "svc-toolbox__item svc-toolbox__item--" + iconName,
       json: elementJson,
       isCopied: false,
       category: category

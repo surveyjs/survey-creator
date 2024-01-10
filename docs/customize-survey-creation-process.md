@@ -67,7 +67,7 @@ Survey Creator raises events when users add new elements to a survey. You can ha
 | [`onPanelAdded`](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPanelAdded) | Raised when users add a panel to the survey. |
 | [`onPageAdded`](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onPageAdded) | Raised when users add a page to the survey. |
 | [`onMatrixColumnAdded`](https://surveyjs.io/Documentation/Survey-Creator/?id=surveycreator#onMatrixColumnAdded) | Raised when users add a column to the [Matrix Dropdown](https://surveyjs.io/Documentation/Library?id=questionmatrixdropdownmodel) or [Matrix Dynamic](https://surveyjs.io/Documentation/Library?id=questionmatrixdynamicmodel) question. |
-| [`onItemValueAdded`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onItemValueAdded) | Raised when users add a new item value (column, row, choice). |
+| [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) | Raised when users add a new item value (column, row, choice). |
 
 The code below shows how you can handle the `onQuestionAdded` event to customize the default question name:
 
@@ -94,7 +94,7 @@ Survey Creator contains different survey instances for design and preview modes.
 
 ### Design Mode Survey Instance
 
-To access the design mode survey instance, use the Survey Creator's [`survey`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#survey) property. You can do this at any point in your application. Use the [Survey API](https://surveyjs.io/Documentation/Library?id=surveymodel) to manipulate the survey instance. For example, the following code changes the survey [`title`](https://surveyjs.io/Documentation/Library?id=surveymodel#title):
+To access the design mode survey instance, use the Survey Creator's [`survey`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#survey) property. You can do this at any point in your application. Use the [Survey API](https://surveyjs.io/Documentation/Library?id=surveymodel) to manipulate the survey instance. For example, the following code changes the survey [`title`](https://surveyjs.io/Documentation/Library?id=surveymodel#title):
 
 ```js
 creator.survey.title = "My Survey";

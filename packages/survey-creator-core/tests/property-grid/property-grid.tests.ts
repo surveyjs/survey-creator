@@ -180,6 +180,17 @@ test("settings.propertyGrid.useButtonGroup", (): any => {
   settings.propertyGrid.useButtonGroup = true;
 });
 
+test("Use dropdown & buttongroup property type", (): any => {
+  Serializer.addProperty("survey", { name: "prop1:dropdown", choices: [1] });
+  Serializer.addProperty("survey", { name: "prop2:buttongroup", choices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] });
+  const survey = new SurveyModel();
+  const propertyGrid = new PropertyGridModelTester(survey);
+  expect(propertyGrid.survey.getQuestionByName("prop1").getType()).toEqual("dropdown");
+  expect(propertyGrid.survey.getQuestionByName("prop2").getType()).toEqual("buttongroup");
+  Serializer.removeProperty("survey", "prop1");
+  Serializer.removeProperty("survey", "prop2");
+});
+
 test("dropdown property editor, get choices on callback", () => {
   var choices = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   var callback = null;
@@ -809,6 +820,29 @@ test("restfull property editor", () => {
   expect(urlQuestion.value).toEqual("myUrl");
   urlQuestion.value = "myUrl2";
   expect(question.choicesByUrl.url).toEqual("myUrl2");
+});
+test("restfull property editor & test dropdown", () => {
+  const question = new QuestionDropdownModel("q1");
+  question.choicesByUrl.url = "myUrl";
+  const propertyGrid = new PropertyGridModelTester(question);
+  const restFullQuestion = <QuestionCompositeModel>(
+    propertyGrid.survey.getQuestionByName("choicesByUrl")
+  );
+  const contentPanel = restFullQuestion.contentPanel;
+  const testQuestion = <QuestionDropdownModel>contentPanel.getQuestionByName("test");
+  const urlQuestion = contentPanel.getQuestionByName("url");
+  const valueNameQuestion = contentPanel.getQuestionByName("valueName");
+  expect(testQuestion).toBeTruthy();
+  expect(testQuestion.choices).toHaveLength(0);
+  expect(testQuestion.isVisible).toBeTruthy();
+  expect(testQuestion.choicesByUrl.url).toBe("myUrl");
+  urlQuestion.value = "";
+  expect(testQuestion.isVisible).toBeFalsy();
+  urlQuestion.value = "myUrl2";
+  expect(testQuestion.isVisible).toBeTruthy();
+  expect(testQuestion.choicesByUrl.url).toBe("myUrl2");
+  valueNameQuestion.value = "val";
+  expect(testQuestion.choicesByUrl.valueName).toBe("val");
 });
 test("restfull property editor, show imageLinkName", () => {
   const dropdown = new QuestionDropdownModel("q1");
@@ -2901,4 +2935,17 @@ test("Do not allow to enter undefined or '' to number type", () => {
   choicesMinQuestion.value = "";
   expect(question.choicesMin).toBe(0);
   expect(choicesMinQuestion.value).toBe(0);
+});
+test("Allow delete all pages by default", () => {
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.addNewPage("page1");
+  survey.addNewPage("page2");
+  var propertyGrid = new PropertyGridModelTester(survey);
+  var pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  survey.currentPage = survey.pages[0];
+  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
+  expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
 });

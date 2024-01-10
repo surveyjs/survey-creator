@@ -110,6 +110,7 @@ export var nlStrings = {
     toolbox: "Gereedschap",
     "property-grid": "Eigenschappen",
     propertyGridFilteredTextPlaceholder: "Typ om te zoeken...",
+    propertyGridNoResultsFound: "Geen resultaten gevonden",
     toolboxGeneralCategory: "Algemeen",
     toolboxChoiceCategory: "Keuzevragen",
     toolboxTextCategory: "Vragen over tekstinvoer",
@@ -158,6 +159,9 @@ export var nlStrings = {
     addNewQuestion: "Vraag toevoegen",
     selectPage: "Selecteer pagina...",
     carryForwardChoicesCopied: "Keuzes worden gekopieerd van",
+    choicesLoadedFromWebText: "Keuzes worden geladen vanuit een webservice.",
+    choicesLoadedFromWebLinkText: "Ga naar instellingen",
+    choicesLoadedFromWebPreviewTitle: "Voorbeeld van geladen keuzeopties",
     htmlPlaceHolder: "HTML-inhoud zal hier zijn.",
     panelPlaceHolder: "Drop hier een vraag uit de toolbox.",
     surveyPlaceHolder: "De enquête is leeg. Sleep een element uit de gereedschapskist of klik op de onderstaande knop.",
@@ -721,6 +725,7 @@ export var nlStrings = {
     both: "Beide",
     left: "Links",
     right: "Rechts",
+    leftRight: "Links en rechts",
     color: "Kleur",
     date: "datum",
     datetime: "datetime",
@@ -931,6 +936,9 @@ export var nlStrings = {
     showLabel: "Afbeeldingsbijschriften weergeven",
     value: "Waarde",
     tabAlign: "Uitlijning van tabbladen",
+    sourceType: "Type bron",
+    fitToContainer: "Aanpassen aan container",
+    setValueExpression: "Expressie van ingestelde waarde",
     description: "Omschrijving",
     logoFit: "Logo past",
     pages: "Bladzijden",
@@ -1700,3 +1708,11 @@ editorLocalization.locales["nl"] = nlStrings;
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimale penbreedte"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximale breedte van het hok"
 // theme.coverDescriptionPosition: "Description position" => "Beschrijving positie"
+// ed.propertyGridNoResultsFound: "No results found" => "Geen resultaten gevonden"
+// pv.leftRight: "Left and right" => "Links en rechts"
+// p.sourceType: "Source type" => "Type bron"
+// p.fitToContainer: "Fit to container" => "Aanpassen aan container"
+// p.setValueExpression: "Set value expression" => "Expressie van ingestelde waarde"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Keuzes worden geladen vanuit een webservice."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ga naar instellingen"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Voorbeeld van geladen keuzeopties"

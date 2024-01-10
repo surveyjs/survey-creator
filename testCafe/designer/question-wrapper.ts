@@ -1,4 +1,4 @@
-import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem } from "../helper";
+import { getToolboxItemByText, questions, questionToolbarActions, url, selectedObjectTextSelector, urlDropdownCollapseView, getListItemByText, generalGroupName, SingleInputToolboxItem, setJSON, unselectedQuestionToolbarActions } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Question wrapper";
 
@@ -95,7 +95,7 @@ test("Single input question wrapper action convert inputType", async (t) => {
 });
 
 test("Single input question wrapper action convert on hover", async (t) => {
-  const convertActionButton = questionToolbarActions.find('button[title="Single-Line Input"]');
+  const convertActionButton = unselectedQuestionToolbarActions.find('button[title="Single-Line Input"]');
 
   await t
     .expect(questions.exists).notOk()
@@ -332,4 +332,50 @@ test("Carryforward banner", async (t) => {
     .expect(Selector("span").withText("Copy choices from").exists).ok()
     .click(Selector(".svc-carry-forward-panel").find(".svc-action-button").withText("question1"))
     .expect(getSelectedElementName()).eql("question1");
+});
+test("No tab stop in dynamic panel", async (t) => {
+  await setJSON({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          {
+            "type": "paneldynamic",
+            "name": "panel1"
+          },
+          {
+            "type": "panel",
+            "name": "panel2",
+            "elements": [
+              {
+                "type": "text",
+                "name": "q2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
+  await t
+    .click(Selector(".sv-string-editor").withText("panel1"))
+    .expect(Selector(".sv-string-editor").withText("panel1").focused).ok()
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--selected .svc-action-button").withText("Add Question").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".sv-string-editor").withText("q2").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel .svc-action-button").withText("Add Question").focused).ok()
+    .pressKey("tab")
+    .pressKey("tab")
+    .expect(Selector(".svc-question__content--panel .sv-action-bar-item").withText("Panel").focused).ok();
 });

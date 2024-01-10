@@ -67,29 +67,34 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       </div>
     );
   }
+  protected disableTabStop() {
+    return true;
+  }
   protected renderContent(allowInteractions: boolean): JSX.Element {
     var content = this.renderElementContent();
-    if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
+    //if (!allowInteractions) return <>{content}{this.renderFooter()}</>;
     return attachKey2click(
       <div
-        className={"svc-question__content " + this.model.css()}
+        className={this.model.css()}
         onClick={(e) => this.model.select(this.model, new ReactMouseEvent(e))}
       >
-        {this.renderHeader()}
+        {allowInteractions ? this.renderHeader() : null}
         {content}
         {this.renderFooter()}
-      </div>
-    );
+      </div>,
+      undefined, { disableTabStop: this.disableTabStop() });
   }
   protected renderHeader(): JSX.Element {
     return ReactElementFactory.Instance.createElement("svc-question-header", { model: this.model });
   }
   protected renderFooter(): JSX.Element {
-    return ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model });
+    const allowInteractions = this.model.element
+      .isInteractiveDesignElement;
+    return allowInteractions ? ReactElementFactory.Instance.createElement("svc-question-footer", { className: "svc-question__content-actions", model: this.model }) : null;
   }
   protected renderCarryForwardBanner(): JSX.Element {
-    if (!this.model.isUsingCarryForward) return null;
-    return ReactElementFactory.Instance.createElement("svc-question-carryforward", this.model.createCarryForwardParams());
+    if (!this.model.isBannerShowing) return null;
+    return ReactElementFactory.Instance.createElement("svc-question-banner", this.model.createBannerParams());
   }
   protected renderElementContent(): JSX.Element {
     return (

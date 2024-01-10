@@ -3,7 +3,7 @@
     (mouseover)="adorner.hover($event, $event.currentTarget)" (mouseleave)="adorner.hover($event, $event.currentTarget)"
     [attr.data-sv-drop-target-survey-element]="adorner.element.name || null" #container>
 
-    <div [class]="adorner.css()" [key2click] (click)="adorner.select(adorner, $event)">
+    <div [class]="adorner.css()" [key2click]="{ disableTabStop: true }" (click)="adorner.select(adorner, $event)">
       <div *ngIf="adorner.allowDragging" class="svc-question__drag-area" (pointerdown)="adorner.onPointerDown($event)">
         <svg class="svc-question__drag-element" [iconName]="'icon-drag-area-indicator_24x16'" [size]="24"
           sv-ng-svg-icon></svg>
@@ -16,14 +16,12 @@
       <ng-template *ngIf="adorner.isEmptyElement && !!showPlaceholderComponent"
         [component]="{ name: placeholderComponent, data: placeholderComponentData }">
       </ng-template>
-      <svc-question-carryforward *ngIf="adorner.isUsingCarryForward" [model]="adorner.createCarryForwardParams()">
-      </svc-question-carryforward>
-
       <ng-template *ngIf="adornerComponent"
         [component]="{ name: adornerComponent, data: { adorner: adorner, question: model } }">
       </ng-template>
-
-      <div class="svc-question__content-actions">
+      <svc-question-banner *ngIf="adorner.isBannerShowing" [model]="adorner.createBannerParams()">
+      </svc-question-banner>
+      <div class="svc-question__content-actions" (focusin)="adorner.select(adorner, $event)">
         <sv-action-bar [model]="adorner.actionContainer" [handleClick]="false"></sv-action-bar>
       </div>
     </div>

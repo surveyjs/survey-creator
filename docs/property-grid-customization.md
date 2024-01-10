@@ -24,7 +24,7 @@ import { Serializer } from "survey-core";
 Serializer.getProperty("boolean", "title").visible = false;
 ```
 
-If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/Documentation/Survey-Creator?id=surveycreator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
+If you want to hide multiple properties, handle the Survey Creator's [`onShowingProperty`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onShowingProperty) event. Its second parameter exposes the `canShow` Boolean property. Disable it for the properties you want to hide. The following example illustrates two cases: hide black-listed properties and keep only white-listed properties. This code hides the properties for [Panel](https://surveyjs.io/Documentation/Library?id=panelmodel) questions.
 
 ```js
 const blackList = [ "visible", "isRequired" ];
@@ -191,6 +191,32 @@ Survey.Serializer.addProperty("question",
   { name: "myBooleanProperty", type: "boolean", default: true }
 );
 ```
+
+If you are creating a [localizable property](#islocalizable) and want to display different default values for different locales, use localization capabilities to specify these default values. You can assign them at runtime, as shown below:
+
+```js
+Survey.surveyLocalization.getLocaleStrings("en")["myStringProperty"] = "Default value for English";
+Survey.surveyLocalization.getLocaleStrings("fr")["myStringProperty"] = "Default value for French";
+```
+
+Alternatively, you can add your custom property to each used [localization dictionary](https://github.com/surveyjs/survey-library/tree/master/src/localization). In this case, the default value for the current locale will be applied automatically. [Rebuild the library](https://github.com/surveyjs/survey-library/tree/master/src/localization#update-an-existing-dictionary) after updating the dictionaries.
+
+```js
+// localization/english.ts
+export var englishStrings = {
+  // ...
+  myStringProperty: "Default value for English"
+}
+```
+
+```js
+// localization/french.ts
+export var frenchSurveyStrings = {
+  // ...
+  myStringProperty: "Default value for French"
+}
+```
+
 #### `displayName`
 
 A string value that specifies a property caption. If not specified, the [`name`](#name) value is used instead.

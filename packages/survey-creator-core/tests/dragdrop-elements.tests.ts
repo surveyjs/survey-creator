@@ -325,7 +325,7 @@ test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
 
   ddHelper.draggedElement = pd;
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
-  ddHelper.maxNestedPanels = 0;
+  ddHelper.onGetMaxNestedPanels = (): number => { return 0; };
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(false);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);

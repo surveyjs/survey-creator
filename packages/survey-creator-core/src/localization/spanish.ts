@@ -110,6 +110,7 @@ var spanishTranslation = {
     toolbox: "Caja de herramientas",
     "property-grid": "Propiedades",
     propertyGridFilteredTextPlaceholder: "Escribe para buscar...",
+    propertyGridNoResultsFound: "No se han encontrado resultados",
     toolboxGeneralCategory: "general",
     toolboxChoiceCategory: "Preguntas de selección",
     toolboxTextCategory: "Preguntas entrada de texto",
@@ -158,6 +159,9 @@ var spanishTranslation = {
     addNewQuestion: "Añadir pregunta",
     selectPage: "Seleccionar página ...",
     carryForwardChoicesCopied: "Las opciones se copian de",
+    choicesLoadedFromWebText: "Las opciones se cargan desde un servicio web.",
+    choicesLoadedFromWebLinkText: "Ir a la configuración",
+    choicesLoadedFromWebPreviewTitle: "Vista previa de las opciones de elección cargadas",
     htmlPlaceHolder: "Contenido HTML irá aquí.",
     panelPlaceHolder: "Arrastra aquí una pregunta desde la caja de herramientas.",
     surveyPlaceHolder: "La encuesta está vacía. Arrastra una pregunta desde la caja de herramientas o haz click en el botón de abajo.",
@@ -721,6 +725,7 @@ var spanishTranslation = {
     both: "ambas",
     left: "izquierda",
     right: "Derecha",
+    leftRight: "Izquierda y derecha",
     color: "Color",
     date: "fecha",
     datetime: "fecha hora",
@@ -931,6 +936,9 @@ var spanishTranslation = {
     showLabel: "Mostrar leyenda de imagen",
     value: "Valor",
     tabAlign: "Alineación de tabulaciones",
+    sourceType: "Tipo de origen",
+    fitToContainer: "Ajuste al contenedor",
+    setValueExpression: "Establecer expresión de valor",
     description: "Descripción",
     logoFit: "Ajuste del logotipo",
     pages: "Páginas",
@@ -1494,3 +1502,11 @@ editorLocalization.locales["es"] = spanishTranslation;
 // signaturepad.penMinWidth: "Minimum pen width" => "Ancho mínimo del lápiz"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Ancho máximo del lápiz"
 // theme.coverDescriptionPosition: "Description position" => "Descripción posición"
+// ed.propertyGridNoResultsFound: "No results found" => "No se han encontrado resultados"
+// pv.leftRight: "Left and right" => "Izquierda y derecha"
+// p.sourceType: "Source type" => "Tipo de origen"
+// p.fitToContainer: "Fit to container" => "Ajuste al contenedor"
+// p.setValueExpression: "Set value expression" => "Establecer expresión de valor"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Las opciones se cargan desde un servicio web."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ir a la configuración"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vista previa de las opciones de elección cargadas"

@@ -110,6 +110,7 @@ var simplifiedChineseTranslation = {
     toolbox: "工具箱",
     "property-grid": "性能",
     propertyGridFilteredTextPlaceholder: "键入以搜索...",
+    propertyGridNoResultsFound: "未找到结果",
     toolboxGeneralCategory: "一般",
     toolboxChoiceCategory: "选择题",
     toolboxTextCategory: "文本输入问题",
@@ -158,6 +159,9 @@ var simplifiedChineseTranslation = {
     addNewQuestion: "添加问题",
     selectPage: "选择页面...",
     carryForwardChoicesCopied: "选择是从",
+    choicesLoadedFromWebText: "选项是从 Web 服务加载的。",
+    choicesLoadedFromWebLinkText: "前往“设置”",
+    choicesLoadedFromWebPreviewTitle: "加载选项的预览",
     htmlPlaceHolder: "HTML内容将在这里。",
     panelPlaceHolder: "在此处从工具箱中删除问题。",
     surveyPlaceHolder: "调查为空。从工具箱中拖动元素或单击下面的按钮。",
@@ -721,6 +725,7 @@ var simplifiedChineseTranslation = {
     both: "双",
     left: "左",
     right: "右",
+    leftRight: "左和右",
     color: "颜色",
     date: "日期",
     datetime: "日期时间",
@@ -931,6 +936,9 @@ var simplifiedChineseTranslation = {
     showLabel: "显示图像标题",
     value: "价值",
     tabAlign: "制表符对齐方式",
+    sourceType: "源类型",
+    fitToContainer: "适合容器",
+    setValueExpression: "设置值表达式",
     description: "说明",
     logoFit: "徽标合身",
     pages: "页面",
@@ -1862,3 +1870,11 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // theme.logoPosition: "Logo position" => "徽标位置"
 // theme.coverTitlePosition: "Title position" => "职称位置"
 // theme.coverDescriptionPosition: "Description position" => "描述位置"
+// ed.propertyGridNoResultsFound: "No results found" => "未找到结果"
+// pv.leftRight: "Left and right" => "左和右"
+// p.sourceType: "Source type" => "源类型"
+// p.fitToContainer: "Fit to container" => "适合容器"
+// p.setValueExpression: "Set value expression" => "设置值表达式"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "选项是从 Web 服务加载的。"
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“设置”"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "加载选项的预览"

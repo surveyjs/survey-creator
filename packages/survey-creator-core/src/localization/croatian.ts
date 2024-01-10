@@ -110,6 +110,7 @@ export var hrStrings = {
     toolbox: "Alatni okvir",
     "property-grid": "Svojstva",
     propertyGridFilteredTextPlaceholder: "Upišite za pretraživanje...",
+    propertyGridNoResultsFound: "Nisu pronađeni rezultati",
     toolboxGeneralCategory: "Općenito",
     toolboxChoiceCategory: "Pitanja o izboru",
     toolboxTextCategory: "Pitanja o unosu teksta",
@@ -158,6 +159,9 @@ export var hrStrings = {
     addNewQuestion: "Dodaj pitanje",
     selectPage: "Odaberite stranicu...",
     carryForwardChoicesCopied: "Odabiri se kopiraju iz",
+    choicesLoadedFromWebText: "Izbori se učitavaju s web-usluge.",
+    choicesLoadedFromWebLinkText: "Idi na postavke",
+    choicesLoadedFromWebPreviewTitle: "Pretpregled učitanih mogućnosti izbora",
     htmlPlaceHolder: "HTML sadržaj će biti ovdje.",
     panelPlaceHolder: "Ovdje ispustite pitanje iz kutije s alatima.",
     surveyPlaceHolder: "Anketa je prazna. Povucite element iz alatnog okvira ili kliknite donji gumb.",
@@ -721,6 +725,7 @@ export var hrStrings = {
     both: "oba",
     left: "lijevo",
     right: "Desno",
+    leftRight: "Lijevo i desno",
     color: "boja",
     date: "datum",
     datetime: "datum i vrijeme",
@@ -931,6 +936,9 @@ export var hrStrings = {
     showLabel: "Pokaži opise slika",
     value: "Vrijednost",
     tabAlign: "Poravnanje tabulatora",
+    sourceType: "Vrsta izvora",
+    fitToContainer: "Prilagodi spremniku",
+    setValueExpression: "Postavljanje izraza vrijednosti",
     description: "description",
     logoFit: "Prilagođavanje logotipa",
     pages: "Stranice",
@@ -1714,3 +1722,11 @@ editorLocalization.locales["hr"] = hrStrings;
 // signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "Automatsko mijenjanje područja potpisa"
 // signaturepad.penMinWidth: "Minimum pen width" => "Minimalna širina olovke"
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maksimalna širina olovke"
+// ed.propertyGridNoResultsFound: "No results found" => "Nisu pronađeni rezultati"
+// pv.leftRight: "Left and right" => "Lijevo i desno"
+// p.sourceType: "Source type" => "Vrsta izvora"
+// p.fitToContainer: "Fit to container" => "Prilagodi spremniku"
+// p.setValueExpression: "Set value expression" => "Postavljanje izraza vrijednosti"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Izbori se učitavaju s web-usluge."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Idi na postavke"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pretpregled učitanih mogućnosti izbora"

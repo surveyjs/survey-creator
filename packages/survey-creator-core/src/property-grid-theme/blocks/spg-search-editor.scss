@@ -67,6 +67,11 @@
   padding-inline-end: calcSize(1);
 }
 
+.svc-creator--mobile .spg-search-editor_input {
+  $fontSize: calcSize(1.5);
+  font-size: Max(16px, #{$fontSize});
+}
+
 .spg-search-editor_input::placeholder {
   color: $foreground-light;
 }

@@ -110,6 +110,7 @@ export var nbStrings = {
     toolbox: "Verktøyliste",
     "property-grid": "Innstillinger",
     propertyGridFilteredTextPlaceholder: "Skriv for å søke ...",
+    propertyGridNoResultsFound: "Fant ingen resultater",
     toolboxGeneralCategory: "Generelt",
     toolboxChoiceCategory: "Choice Spørsmål",
     toolboxTextCategory: "Spørsmål om tekstinndata",
@@ -158,6 +159,9 @@ export var nbStrings = {
     addNewQuestion: "Legg til spørsmål",
     selectPage: "Velg side...",
     carryForwardChoicesCopied: "Valgene kopieres fra",
+    choicesLoadedFromWebText: "Valgene lastes inn fra en webtjeneste.",
+    choicesLoadedFromWebLinkText: "Gå til innstillinger",
+    choicesLoadedFromWebPreviewTitle: "Forhåndsvisning av alternativer for lastet valg",
     htmlPlaceHolder: "HTML-innhold vil være her.",
     panelPlaceHolder: "Slipp et spørsmål fra verktøykassen her.",
     surveyPlaceHolder: "Undersøkelsen er tom. Dra et element fra verktøykassen, eller klikk på knappen nedenfor.",
@@ -721,6 +725,7 @@ export var nbStrings = {
     both: "both",
     left: "left",
     right: "Høyre",
+    leftRight: "Venstre og høyre",
     color: "farge",
     date: "daddel",
     datetime: "datetime",
@@ -931,6 +936,9 @@ export var nbStrings = {
     showLabel: "Vis bildetekster",
     value: "Verdi",
     tabAlign: "Justering av tabulatorer",
+    sourceType: "Type kilde",
+    fitToContainer: "Tilpass til container",
+    setValueExpression: "Angi verdiuttrykk",
     description: "description",
     logoFit: "Logo passform",
     pages: "Sider",
@@ -1723,3 +1731,11 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.logoPosition: "Logo position" => "Logo posisjon"
 // theme.coverTitlePosition: "Title position" => "Tittelposisjon"
 // theme.coverDescriptionPosition: "Description position" => "Beskrivelse posisjon"
+// ed.propertyGridNoResultsFound: "No results found" => "Fant ingen resultater"
+// pv.leftRight: "Left and right" => "Venstre og høyre"
+// p.sourceType: "Source type" => "Type kilde"
+// p.fitToContainer: "Fit to container" => "Tilpass til container"
+// p.setValueExpression: "Set value expression" => "Angi verdiuttrykk"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valgene lastes inn fra en webtjeneste."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til innstillinger"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning av alternativer for lastet valg"

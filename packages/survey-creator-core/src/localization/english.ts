@@ -161,6 +161,9 @@ export var enStrings = {
     addNewQuestion: "Add Question",
     selectPage: "Select page...",
     carryForwardChoicesCopied: "Choices are copied from",
+    choicesLoadedFromWebText: "Choices are loaded from a web service.",
+    choicesLoadedFromWebLinkText: "Go to settings",
+    choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options",
     htmlPlaceHolder: "HTML content will be here.",
     panelPlaceHolder: "Drop a question from the toolbox here.",
     surveyPlaceHolder: "The survey is empty. Drag an element from the toolbox or click the button below.",
@@ -724,6 +727,7 @@ export var enStrings = {
     both: "Both",
     left: "Left",
     right: "Right",
+    leftRight: "Left and right",
     color: "color",
     date: "date",
     datetime: "datetime",
@@ -934,6 +938,9 @@ export var enStrings = {
     showLabel: "Show image captions",
     value: "Value",
     tabAlign: "Tab alignment",
+    sourceType: "Source type",
+    fitToContainer: "Fit to container",
+    setValueExpression: "Set value expression",
     description: "Description", // Auto-generated string
     logoFit: "Logo fit", // Auto-generated string
     pages: "Pages", // Auto-generated string

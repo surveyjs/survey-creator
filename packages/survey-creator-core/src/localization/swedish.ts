@@ -110,6 +110,7 @@ export let svStrings = {
     toolbox: "Verktygslista",
     "property-grid": "Egenskaper",
     propertyGridFilteredTextPlaceholder: "Skriv för att söka...",
+    propertyGridNoResultsFound: "Inga resultat hittades",
     toolboxGeneralCategory: "Generellt",
     toolboxChoiceCategory: "Frågor om val",
     toolboxTextCategory: "Frågor om textinmatning",
@@ -158,6 +159,9 @@ export let svStrings = {
     addNewQuestion: "Lägg till fråga",
     selectPage: "Välj sida...",
     carryForwardChoicesCopied: "Alternativen kopieras från",
+    choicesLoadedFromWebText: "Alternativen läses in från en webbtjänst.",
+    choicesLoadedFromWebLinkText: "Gå till inställningar",
+    choicesLoadedFromWebPreviewTitle: "Förhandsgranskning av inlästa alternativalternativ",
     htmlPlaceHolder: "HTML-innehåll kommer att finnas här.",
     panelPlaceHolder: "Släpp en fråga från verktygslådan här.",
     surveyPlaceHolder: "Enkäten är tom. Dra ett element från verktygslådan eller klicka på knappen nedan.",
@@ -721,6 +725,7 @@ export let svStrings = {
     both: "Båda",
     left: "left",
     right: "Höger",
+    leftRight: "Vänster och höger",
     color: "färg",
     date: "datum",
     datetime: "datetime",
@@ -931,6 +936,9 @@ export let svStrings = {
     showLabel: "Visa bildtexter",
     value: "Värde",
     tabAlign: "Justering av tabb",
+    sourceType: "Typ av källa",
+    fitToContainer: "Passa till behållare",
+    setValueExpression: "Ange värde-uttryck",
     description: "description",
     logoFit: "Logotyp passform",
     pages: "Sidor",
@@ -1897,3 +1905,11 @@ editorLocalization.locales["sv"] = svStrings;
 // signaturepad.penMaxWidth: "Maximum pen width" => "Maximal pennbredd"
 // theme.coverTitlePosition: "Title position" => "Titel position"
 // theme.coverDescriptionPosition: "Description position" => "Beskrivning position"
+// ed.propertyGridNoResultsFound: "No results found" => "Inga resultat hittades"
+// pv.leftRight: "Left and right" => "Vänster och höger"
+// p.sourceType: "Source type" => "Typ av källa"
+// p.fitToContainer: "Fit to container" => "Passa till behållare"
+// p.setValueExpression: "Set value expression" => "Ange värde-uttryck"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Alternativen läses in från en webbtjänst."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå till inställningar"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Förhandsgranskning av inlästa alternativalternativ"
