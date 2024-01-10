@@ -21,6 +21,11 @@
       :survey="model.creator.survey"
       :page="model.page"
     ></survey-page>
+    <div v-if="model.showPlaceholder" class="svc-page__placeholder_frame">
+      <div class="svc-panel__placeholder_frame">
+        <div class="svc-panel__placeholder">{{model.placeholderText}}</div>
+      </div>
+    </div>
     <sv-action-bar :model="model.footerActionsBar"></sv-action-bar>
   </div>
 </template>
