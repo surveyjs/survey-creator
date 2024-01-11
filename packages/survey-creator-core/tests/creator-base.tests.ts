@@ -718,17 +718,13 @@ test("Create new page on creating designer plugin", (): any => {
   };
   expect(creator.viewType).toEqual("designer");
 
-  let designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
+  let designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   creator = new CreatorTester();
   expect(creator.survey.pages).toHaveLength(1);
-  designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
+  designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeFalsy();
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 
@@ -736,9 +732,7 @@ test("Create new page on creating designer plugin", (): any => {
   creator.survey.pages[0].addNewQuestion("text", "question1");
   creator.survey.addNewPage("page2");
   expect(creator.survey.pages).toHaveLength(2);
-  designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
+  designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(designerPlugin.model.newPage).toBeFalsy();
   expect(designerPlugin.model.showNewPage).toBeFalsy();
 
@@ -746,14 +740,17 @@ test("Create new page on creating designer plugin", (): any => {
   creator.survey.pages[1].title = "New page";
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.name).toBe("page3");
 
   creator.survey.pages[1].elements[0].delete();
-  expect(designerPlugin.model.newPage).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.name).toBe("page3");
 
   creator.survey.pages[1].delete();
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.showNewPage).toBeTruthy();
+  expect(designerPlugin.model.newPage.name).toBe("page2");
 
   creator.survey.addNewPage("page3");
   expect(designerPlugin.model.newPage).toBeFalsy();
@@ -778,29 +775,6 @@ test("Create new page with empty survey", (): any => {
   expect(designerPlugin.model.newPage).toBeTruthy();
   expect(designerPlugin.model.newPage.elements).toHaveLength(0);
 });
-test("Modified page without elements", (): any => {
-  const creator = new CreatorTester();
-  creator.JSON = {
-    "pages": [
-      {
-        "name": "page1",
-        "title": "Page1"
-      }
-    ]
-  };
-  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
-  expect(creator.survey.pages).toHaveLength(1);
-
-  let pageModel = new PageAdorner(creator, creator.survey.pages[0]);
-  expect(pageModel.isGhost).toBeFalsy();
-  expect(pageModel.showPlaceholder).toBeTruthy();
-  expect(designerPlugin.model.showNewPage).toBeTruthy();
-
-  creator.survey.pages[0].addNewQuestion("text", "q2");
-  expect(pageModel.isGhost).toBeTruthy();
-  expect(pageModel.showPlaceholder).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeTruthy();
-});
 test("Create new page on changing title/description in ghost", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -821,8 +795,8 @@ test("Create new page on changing title/description in ghost", (): any => {
   designerPlugin.model.newPage.title = "Some title";
   expect(pageModel.isGhost).toBeFalsy();
   expect(creator.survey.pages).toHaveLength(2);
-  expect(designerPlugin.model.newPage).toBeFalsy();
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
 
   pageModel = new PageAdorner(creator, creator.survey.pages[1]);
   pageModel.page.description = "Some text";
@@ -835,8 +809,8 @@ test("Create new page on changing title/description in ghost", (): any => {
   designerPlugin.model.newPage.description = "Some description";
   expect(pageModel.isGhost).toBeFalsy();
   expect(creator.survey.pages).toHaveLength(3);
-  expect(designerPlugin.model.showNewPage).toBeFalsy();
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.showNewPage).toBeTruthy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
 });
 test("Don't add extra subscriptions and fully unsubscribe title/description changes in ghost page", (): any => {
   const creator = new CreatorTester();
@@ -848,9 +822,7 @@ test("Don't add extra subscriptions and fully unsubscribe title/description chan
       }
     ]
   };
-  const designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
   let pageModel = new PageAdorner(creator, designerPlugin.model.newPage);
@@ -872,22 +844,24 @@ test("Create new page on changing title/description in ghost PageAdorner resets 
       }
     ]
   };
-  const designerPlugin = <TabDesignerPlugin>(
-    creator.getPlugin("designer")
-  );
+  const designerPlugin = <TabDesignerPlugin>(creator.getPlugin("designer"));
   expect(creator.survey.pages).toHaveLength(1);
   expect(designerPlugin.model.newPage).toBeTruthy();
 
   let currentNewPage = designerPlugin.model.newPage;
   const pageWrapperViewModel = new PageAdorner(creator, currentNewPage);
   expect(pageWrapperViewModel.isGhost).toBeTruthy();
+  expect(pageWrapperViewModel.showPlaceholder).toBeFalsy();
 
   designerPlugin.model.newPage.title = "Some title";
   expect(creator.survey.pages).toHaveLength(2);
-  expect(designerPlugin.model.newPage).toBeFalsy();
+  expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(pageWrapperViewModel.isGhost).toBeFalsy();
+  expect(pageWrapperViewModel.showPlaceholder).toBeTruthy();
 
   pageWrapperViewModel.addNewQuestion(null, undefined);
   expect(designerPlugin.model.newPage).toBeTruthy();
+  expect(pageWrapperViewModel.showPlaceholder).toBeFalsy();
 });
 test("Create new ghost on moving a question from one page to the ghost page", (): any => {
   const creator = new CreatorTester();

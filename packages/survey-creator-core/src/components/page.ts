@@ -51,6 +51,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           ["title", "description"],
           () => {
             this.addGhostPage();
+            this.updateShowPlaceholder();
           },
           "add_ghost"
         );
@@ -62,13 +63,10 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
           this.updateDragTypeOverMe();
         }
       );
+      surveyElement.registerFunctionOnPropertiesValueChanged(["elements"], (newValue: Array<IElement>) => {
+        this.updateShowPlaceholder(newValue);
+      });
       this.updateShowPlaceholder();
-      surveyElement.registerFunctionOnPropertiesValueChanged(
-        ["elements"],
-        (newValue: Array<IElement>) => {
-          this.updateShowPlaceholder(newValue);
-        }
-      );
       surveyElement.onFirstRendering();
       surveyElement.updateCustomWidgets();
       surveyElement.setWasShown(true);
@@ -79,16 +77,8 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
 
   protected detachElement(surveyElement: PageModel): void {
     if (!!surveyElement) {
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged([
-        "dragTypeOverMe"
-      ]);
-      surveyElement.unRegisterFunctionOnPropertiesValueChanged(
-        [
-          "title",
-          "description"
-        ],
-        "add_ghost"
-      );
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["dragTypeOverMe"]);
+      surveyElement.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
       surveyElement["surveyChangedCallback"] = undefined;
     }
     super.detachElement(surveyElement);
@@ -128,7 +118,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
     return this.calcIsGhostPage(this.page);
   }
   public get placeholderText(): string {
-    return getLocString("ed.surveyPlaceHolder");
+    return getLocString("ed.pagePlaceHolder");
   }
   protected isOperationsAllow(): boolean {
     return super.isOperationsAllow() && !this.isGhost && this.creator.pageEditMode !== "single" && this.creator.allowModifyPages;
@@ -143,17 +133,12 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
   private addGhostPage = (selectCurrentPage: boolean = true) => {
     const currentPage = this.page;
     if (this.isGhost) {
-      if (!!this.creator.addPage(currentPage, selectCurrentPage, () => {
-        currentPage.unRegisterFunctionOnPropertiesValueChanged(
-          [
-            "title",
-            "description"
-          ],
-          "add_ghost"
-        );
+      const addedPage = !!this.creator.addPage(currentPage, selectCurrentPage, () => {
+        currentPage.unRegisterFunctionOnPropertiesValueChanged(["title", "description"], "add_ghost");
         currentPage.name = SurveyHelper.getNewPageName(this.creator.survey.pages);
         return true;
-      })) {
+      });
+      if (addedPage) {
         this.creator.survey.currentPage = currentPage;
       }
     }
