@@ -357,6 +357,7 @@ export var enStrings = {
     markRequired: "Mark as required",
     removeRequiredMark: "Remove the required mark",
     isAllRowRequired: "Require answer for all rows",
+    eachRowUnique: "Prevent duplicate responses in rows",
     requiredErrorText: "\"Required\" error message",
     startWithNewLine: "Display the question on a new line",
     rows: "Rows",

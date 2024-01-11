@@ -355,6 +355,7 @@ export var indonesianStrings = {
     markRequired: "Tandai sesuai kebutuhan",
     removeRequiredMark: "Hapus tanda yang diperlukan",
     isAllRowRequired: "Memerlukan jawaban untuk semua baris",
+    eachRowUnique: "Mencegah respons duplikat dalam baris",
     requiredErrorText: "Pesan kesalahan \"Wajib\"",
     startWithNewLine: "Mulai dengan baris baru?",
     rows: "Jumlah baris",
@@ -1890,3 +1891,4 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Pilihan dimuat dari layanan web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Buka pengaturan"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratinjau opsi pilihan yang dimuat"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mencegah respons duplikat dalam baris"

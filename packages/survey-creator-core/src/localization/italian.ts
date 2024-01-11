@@ -355,6 +355,7 @@ var italianTranslation = {
     markRequired: "Contrassegna come richiesto",
     removeRequiredMark: "Rimuovere il segno richiesto",
     isAllRowRequired: "Richiedi risposta per tutte le righe",
+    eachRowUnique: "Impedisci risposte duplicate nelle righe",
     requiredErrorText: "\"Obbligatoria\" messaggio di errore",
     startWithNewLine: "Visualizza la domanda su una nuova riga",
     rows: "Righe",
@@ -1494,3 +1495,4 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Le scelte vengono caricate da un servizio Web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Vai alle impostazioni"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Anteprima delle opzioni di scelta caricate"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Impedisci risposte duplicate nelle righe"

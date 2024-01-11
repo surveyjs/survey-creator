@@ -355,6 +355,7 @@ var polishStrings = {
     markRequired: "Oznacz jako wymagane",
     removeRequiredMark: "Usuń wymagany znacznik",
     isAllRowRequired: "Wymagaj odpowiedzi dla wszystkich wierszy",
+    eachRowUnique: "Zapobieganie zduplikowanym odpowiedziom w wierszach",
     requiredErrorText: "Komunikat o błędzie \"Wymagane\"",
     startWithNewLine: "Czy rozpoczyna się nową linią?",
     rows: "Liczba wierszy",
@@ -2009,3 +2010,4 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Opcje są ładowane z usługi internetowej."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Przejdź do ustawień"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Podgląd wczytanych opcji wyboru"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zapobieganie zduplikowanym odpowiedziom w wierszach"

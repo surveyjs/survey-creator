@@ -355,6 +355,7 @@ export var arStrings = {
     markRequired: "وضع علامة كمطلوب",
     removeRequiredMark: "إزالة العلامة المطلوبة",
     isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
+    eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
     rows: "عدد الصفوف",
@@ -1646,3 +1647,4 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "يتم تحميل الاختيارات من خدمة ويب."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "انتقل إلى الإعدادات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "معاينة خيارات الاختيار المحملة"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "منع تكرار الاستجابات في الصفوف"

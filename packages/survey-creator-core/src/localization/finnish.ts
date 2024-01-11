@@ -355,6 +355,7 @@ export var fiStrings = {
     markRequired: "Merkitse pakollisesti",
     removeRequiredMark: "Poista vaadittu merkki",
     isAllRowRequired: "Vaadi vastaus kaikille riveille",
+    eachRowUnique: "Estä päällekkäiset vastaukset riveillä",
     requiredErrorText: "Vaadittu virheteksti",
     startWithNewLine: "Onko aloitus uudella rivillä?",
     rows: "Rivit",
@@ -1736,3 +1737,4 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valinnat ladataan verkkopalvelusta."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Siirry asetuksiin"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ladattujen valintavaihtoehtojen esikatselu"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Estä päällekkäiset vastaukset riveillä"

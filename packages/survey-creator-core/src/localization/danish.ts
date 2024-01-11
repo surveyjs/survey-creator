@@ -355,6 +355,7 @@ export var danishStrings = {
     markRequired: "Markér efter behov",
     removeRequiredMark: "Fjern det påkrævede mærke",
     isAllRowRequired: "Kræv svar for alle rækker",
+    eachRowUnique: "Undgå dublerede svar i rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
     rows: "Antal rækker",
@@ -1921,3 +1922,4 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valg indlæses fra en webtjeneste."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til indstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning af indlæste valgmuligheder"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Undgå dublerede svar i rækker"

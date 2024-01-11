@@ -355,6 +355,7 @@ export var huStrings = {
     markRequired: "Megjelölés kötelezőként",
     removeRequiredMark: "Távolítsa el a szükséges jelet",
     isAllRowRequired: "Válasz kérése minden sorhoz",
+    eachRowUnique: "A sorokban ismétlődő válaszok megakadályozása",
     requiredErrorText: "\"Kötelező\" hibaüzenet",
     startWithNewLine: "Új sorban kezdődik?",
     rows: "Sorok száma",
@@ -1889,3 +1890,4 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "A választási lehetőségek egy webszolgáltatásból töltődnek be."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Válassza a beállítások"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "A betöltött választási lehetőségek előnézete"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "A sorokban ismétlődő válaszok megakadályozása"

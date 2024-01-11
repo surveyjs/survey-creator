@@ -355,6 +355,7 @@ var persianStrings = {
     markRequired: "علامت گذاری به عنوان مورد نیاز",
     removeRequiredMark: "حذف علامت مورد نیاز",
     isAllRowRequired: "نیاز به پاسخ برای همه سطرها",
+    eachRowUnique: "جلوگیری از پاسخ های تکراری در ردیف ها",
     requiredErrorText: "متن خطای موردنیاز",
     startWithNewLine: "با سطر جدید شروع شود؟",
     rows: "تعداد سطر",
@@ -1691,3 +1692,4 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "انتخاب ها از یک سرویس وب بارگذاری می شوند."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "رفتن به تنظیمات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "پیش نمایش گزینه های انتخاب بار شده"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "جلوگیری از پاسخ های تکراری در ردیف ها"

@@ -355,6 +355,7 @@ var frenchTranslation = {
     markRequired: "Marquer au besoin",
     removeRequiredMark: "Supprimer la marque requise",
     isAllRowRequired: "Réponse obligatoire pour toutes les lignes",
+    eachRowUnique: "Éviter les réponses dupliquées dans les lignes",
     requiredErrorText: "Message d'erreur lorsque obligatoire",
     startWithNewLine: "Afficher la question sur une nouvelle ligne",
     rows: "Lignes",
@@ -1796,3 +1797,4 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Les choix sont chargés à partir d’un service Web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Accédez aux paramètres"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Aperçu des options de choix chargées"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Éviter les réponses dupliquées dans les lignes"
