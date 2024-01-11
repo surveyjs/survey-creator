@@ -355,6 +355,7 @@ export var ruStrings = {
     markRequired: "Отметьте как обязательный",
     removeRequiredMark: "Снимите нужную отметку",
     isAllRowRequired: "Все строки обязательны для заполнения",
+    eachRowUnique: "Предотвращение дублирования ответов в строках",
     requiredErrorText: "Это поле обязательное для заполнения",
     startWithNewLine: "Начинать с новой строки?",
     rows: "Количество строк",
@@ -1796,3 +1797,4 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Варианты загружаются из веб-службы."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Перейдите в настройки"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Предварительный просмотр загруженных вариантов выбора"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвращение дублирования ответов в строках"

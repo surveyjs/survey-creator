@@ -355,6 +355,7 @@ export var koreanStrings = {
     markRequired: "필요에 따라 표시",
     removeRequiredMark: "필요한 표시를 제거하십시오",
     isAllRowRequired: "모든 행에 대한 응답 필요",
+    eachRowUnique: "행의 중복 응답 방지",
     requiredErrorText: "\"필수\" 오류 메시지",
     startWithNewLine: "새 줄로 시작하겠습니까?",
     rows: "행 수",
@@ -1940,3 +1941,4 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "선택 항목은 웹 서비스에서 로드됩니다."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "설정으로 바로 가기"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "로드된 선택 옵션 미리보기"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "행의 중복 응답 방지"

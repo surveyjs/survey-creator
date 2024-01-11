@@ -355,6 +355,7 @@ export var czStrings = {
     markRequired: "Označit podle potřeby",
     removeRequiredMark: "Odstraňte požadovanou značku",
     isAllRowRequired: "Povinná odpověď pro všechny řádky",
+    eachRowUnique: "Zabránění duplicitním odpovědím v řádcích",
     requiredErrorText: "Text chyby pro povinnou otázku",
     startWithNewLine: "Začátek s novým řádkem?",
     rows: "Počet řádků",
@@ -1300,3 +1301,4 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Volby se načítají z webové služby."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Přejděte do nastavení"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Náhled načtených voleb"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zabránění duplicitním odpovědím v řádcích"

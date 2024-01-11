@@ -355,6 +355,7 @@ export var jaStrings = {
     markRequired: "必須としてマーク",
     removeRequiredMark: "必要なマークを削除する",
     isAllRowRequired: "全ての列で回答必須",
+    eachRowUnique: "行での回答の重複を防ぐ",
     requiredErrorText: "必要なエラーテキスト",
     startWithNewLine: "ニューラインで開始",
     rows: "列数",
@@ -1735,3 +1736,4 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "選択肢は Web サービスから読み込まれます。"
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "設定に移動"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "読み込まれた選択肢オプションのプレビュー"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "行での回答の重複を防ぐ"

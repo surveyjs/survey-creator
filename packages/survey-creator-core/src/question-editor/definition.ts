@@ -165,6 +165,7 @@ export class SurveyQuestionEditorDefinition {
     matrix: {
       properties: [
         { name: "isAllRowRequired", tab: "validation" },
+        { name: "eachRowUnique", tab: "validation" },
         { name: "showHeader", tab: "layout" },
         { name: "showColumnHeader", tab: "layout" },
         { name: "verticalAlign", tab: "layout" },

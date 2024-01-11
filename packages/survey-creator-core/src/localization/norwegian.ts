@@ -355,6 +355,7 @@ export var nbStrings = {
     markRequired: "Merk etter behov",
     removeRequiredMark: "Fjern ønsket merke",
     isAllRowRequired: "Nødvendig svar for alle rader",
+    eachRowUnique: "Forhindre dupliserte svar i rader",
     requiredErrorText: "Nødvendig feilmelding",
     startWithNewLine: "Må starte med ny linje?",
     rows: "Antall rader",
@@ -1739,3 +1740,4 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valgene lastes inn fra en webtjeneste."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til innstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning av alternativer for lastet valg"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Forhindre dupliserte svar i rader"

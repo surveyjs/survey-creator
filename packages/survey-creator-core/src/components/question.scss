@@ -523,14 +523,12 @@ svc-question,
   container-type: inline-size;
 }
 
-.svc-question__content--empty,
-.svc-question__content--empty-template {
-
-  &.svc-question__content--panel,
-  &.svc-question__content--paneldynamic,
-  &.svc-question__content--html {
+.svc-panel__placeholder_frame-wrapper {
     container-type: inline-size;
-  }
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    box-sizing: border-box;
 }
 
 .svc-question__content--empty-template {
