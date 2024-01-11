@@ -110,9 +110,11 @@ export class QuestionAdornerComponent extends CreatorModelElement<
       return null;
     }
     return (
-      <div className="svc-panel__placeholder_frame">
-        <div className="svc-panel__placeholder">
-          {this.model.placeholderText}
+      <div className="svc-panel__placeholder_frame-wrapper">
+        <div className="svc-panel__placeholder_frame">
+          <div className="svc-panel__placeholder">
+            {this.model.placeholderText}
+          </div>
         </div>
       </div>
     );
