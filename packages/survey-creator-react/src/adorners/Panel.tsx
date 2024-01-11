@@ -19,26 +19,28 @@ export class PanelAdornerComponent extends QuestionAdornerComponent {
       return null;
     }
     return (
-      <div className="svc-panel__placeholder_frame">
-        <div className="svc-panel__placeholder">
-          {this.model.placeholderText}
+      <div className="svc-panel__placeholder_frame-wrapper">
+        <div className="svc-panel__placeholder_frame">
+          <div className="svc-panel__placeholder">
+            {this.model.placeholderText}
+          </div>
+          {this.model.showAddQuestionButton ? attachKey2click(<div
+            className="svc-panel__add-new-question svc-action-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.model.addNewQuestion();
+            }}
+          >
+            <SvgIcon
+              className={"svc-panel__add-new-question-icon"}
+              iconName={"icon-add_24x24"}
+              size={24}
+            ></SvgIcon>
+            <span className="svc-text svc-text--normal svc-text--bold">
+              {this.model.addNewQuestionText}
+            </span>
+          </div>) : null}
         </div>
-        {this.model.showAddQuestionButton ? attachKey2click(<div
-          className="svc-panel__add-new-question svc-action-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            this.model.addNewQuestion();
-          }}
-        >
-          <SvgIcon
-            className={"svc-panel__add-new-question-icon"}
-            iconName={"icon-add_24x24"}
-            size={24}
-          ></SvgIcon>
-          <span className="svc-text svc-text--normal svc-text--bold">
-            {this.model.addNewQuestionText}
-          </span>
-        </div>) : null}
       </div>
     );
   }

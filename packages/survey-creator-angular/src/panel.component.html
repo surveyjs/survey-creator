@@ -13,15 +13,17 @@
 
       <ng-template [component]="{ name: componentName, data: componentData }"></ng-template>
 
-      <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame">
-        <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
-        <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
-          (click)="addNewQuestion($event)">
-          <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')"
-          [size]="24" sv-ng-svg-icon></svg>
-          <span class="svc-text svc-text--normal svc-text--bold">
-            {{ adorner.addNewQuestionText }}
-          </span>
+      <div *ngIf="adorner.isEmptyElement" class="svc-panel__placeholder_frame-wrapper">
+        <div class="svc-panel__placeholder_frame">
+          <div class="svc-panel__placeholder">{{ adorner.placeholderText }}</div>
+          <div *ngIf="adorner.showAddQuestionButton" class="svc-panel__add-new-question svc-action-button" [key2click]
+            (click)="addNewQuestion($event)">
+            <svg class="svc-panel__add-new-question-icon" [iconName]="('icon-add_24x24')"
+            [size]="24" sv-ng-svg-icon></svg>
+            <span class="svc-text svc-text--normal svc-text--bold">
+              {{ adorner.addNewQuestionText }}
+            </span>
+          </div>
         </div>
       </div>
 
