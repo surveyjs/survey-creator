@@ -1027,17 +1027,13 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  private getDefaultTitleSetting(isAdvanced?: boolean) {
+  private getDefaultTitleSetting() {
     const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
-    if (isAdvanced) {
-      result["color"] = "rgba(255, 255, 255, 1)";
-    }
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
     if (isAdvanced) {
-      result["color"] = "rgba(255, 255, 255, 1)";
       result["weight"] = "600";
     }
     return result;
@@ -1127,7 +1123,7 @@ export class ThemeBuilder extends Base {
                     "height": 256,
                     surveyTitle: this.getDefaultTitleSetting(),
                     surveyDescription: this.getDefaultDescriptionSetting(),
-                    headerTitle: this.getDefaultTitleSetting(true),
+                    headerTitle: this.getDefaultTitleSetting(),
                     headerDescription: this.getDefaultDescriptionSetting(true)
                   }
                 ],
@@ -1293,7 +1289,7 @@ export class ThemeBuilder extends Base {
                             name: "headerTitle",
                             title: getLocString("theme.surveyTitle"),
                             descriptionLocation: "hidden",
-                            defaultValue: this.getDefaultTitleSetting(true)
+                            defaultValue: this.getDefaultTitleSetting()
                           },
                           {
                             type: "fontSettings",
