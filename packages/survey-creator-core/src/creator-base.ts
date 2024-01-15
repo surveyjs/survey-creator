@@ -1115,6 +1115,11 @@ export class CreatorBase extends Base
    */
   public onDragDropAllow: CreatorEvent = new CreatorEvent();
 
+  /**
+   * options.
+   */
+  public onCreateQuestionCustomBanner: CreatorEvent = new CreatorEvent();
+
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
 

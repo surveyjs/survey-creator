@@ -161,7 +161,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.element.dragTypeOverMe;
   }
   public get isBannerShowing(): boolean {
-    return this.isUsingCarryForward || this.isUsingRestfull;
+    return this.isUsingCarryForward || this.isUsingRestfull || this.isBannerShowingProp;
   }
   private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
@@ -169,8 +169,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private get isUsingRestfull(): boolean {
     return (<any>this.element)?.isUsingRestful;
   }
+  private get isBannerShowingProp(): boolean {
+    return (this.element)?.getPropertyValue("isBannerShowing");
+  }
   public createBannerParams(): QuestionBannerParams {
-    return this.createCarryForwardParams() || this.createUsingRestfulParams();
+    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomBanners();
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
@@ -191,6 +194,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       text: this.creator.getLocString("ed.choicesLoadedFromWebText"),
       onClick: () => { this.creator.selectElement(this.element, "choicesByUrl"); }
     };
+  }
+  private createCustomBanners(): QuestionBannerParams {
+    if (!this.isBannerShowingProp) return null;
+    const res = {
+      actionText: "",
+      text: "",
+      onClick: () => { }
+    };
+    if(this.creator) {
+      this.creator.onCreateQuestionCustomBanner.fire(this.creator, res);
+    }
+    return res;
   }
   public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");
