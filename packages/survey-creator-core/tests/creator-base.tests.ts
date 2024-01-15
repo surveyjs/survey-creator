@@ -3905,6 +3905,10 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   creator.survey.pages[0].addNewQuestion("text", "qqq1");
   expect(reason).toHaveLength(8);
   expect(reason[7]).toEqual("DROPPED_FROM_TOOLBOX");
+  expect(creator.selectedElementName).toBe("question7");
+  creator.convertCurrentQuestion("comment");
+  expect(reason).toHaveLength(9);
+  expect(reason[8]).toEqual("ELEMENT_CONVERTED");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
