@@ -4250,3 +4250,19 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
   expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeFalsy();
 });
+test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
+  const creator = new CreatorTester();
+  const func = () => {
+    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, []);
+  };
+  expect(func()).toBe("asc");
+  settings.logic.questionSortOrder = "none";
+  expect(func()).toBe("none");
+  let sortOrder = "asc";
+  creator.onConditionQuestionsGetList.add((sender, options) => {
+    options.sortOrder = sortOrder;
+  });
+  expect(func()).toBe("asc");
+  sortOrder = "test";
+  expect(func()).toBe("test");
+});

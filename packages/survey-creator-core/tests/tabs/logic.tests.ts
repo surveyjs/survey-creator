@@ -3297,7 +3297,6 @@ test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   expect(panel.getQuestionByName("logicTypeName").value).toBe("trigger_setvalue");
   const triggerQuestionpanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
   const setToNameQuestion = triggerQuestionpanel.getQuestionByName("setToName");
-  expect(setToNameQuestion.value).toBe("q2");
   setToNameQuestion.value = "q3";
   const triggerEditorPanel = <PanelModel>panel.getElementByName("triggerEditorPanel");
   const setValueQuestion = triggerEditorPanel.getQuestionByName("setValue");
@@ -3307,6 +3306,40 @@ test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   const dpQuestion = setValueQuestion.panels[0].questions[0];
   expect(dpQuestion.getType()).toBe("text");
   expect(dpQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
+});
+test("SurveyLogicItem,  settings.logic.questionSortOrder", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q2" },
+      { type: "text", name: "q1" },
+      { type: "paneldynamic", name: "q3", templateElements: [{ type: "text", name: "q4" }] }
+    ],
+    triggers: [
+      { type: "setvalue", expression: "{q1}=1", setToName: "q2", setValue: 5 }
+    ]
+  });
+  let logic = new SurveyLogicUI(survey);
+  let row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  let panel = logic.itemEditor.panels[0];
+  let triggerQuestionpanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
+  let setToNameQuestion = triggerQuestionpanel.getQuestionByName("setToName");
+  expect(setToNameQuestion.choices).toHaveLength(3);
+  expect(setToNameQuestion.choices[0].value).toBe("q1");
+  expect(setToNameQuestion.choices[1].value).toBe("q2");
+
+  settings.logic.questionSortOrder = "none";
+  logic = new SurveyLogicUI(survey);
+  row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  panel = logic.itemEditor.panels[0];
+  triggerQuestionpanel = <PanelModel>panel.getElementByName("triggerQuestionsPanel");
+  setToNameQuestion = triggerQuestionpanel.getQuestionByName("setToName");
+  expect(setToNameQuestion.choices).toHaveLength(3);
+  expect(setToNameQuestion.choices[0].value).toBe("q2");
+  expect(setToNameQuestion.choices[1].value).toBe("q1");
+  settings.logic.questionSortOrder = "asc";
+
 });
 test("Include panel and page requiredIf into logic items", () => {
   const survey = new SurveyModel({

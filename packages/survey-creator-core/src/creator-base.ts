@@ -3349,7 +3349,7 @@ export class CreatorBase extends Base
     editor: any,
     list: any[]
   ): string {
-    if (this.onConditionQuestionsGetList.isEmpty) return "asc";
+    if (this.onConditionQuestionsGetList.isEmpty) return settings.logic.questionSortOrder;
     var options = {
       propertyName: propertyName,
       obj: obj,

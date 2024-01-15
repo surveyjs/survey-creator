@@ -1763,7 +1763,9 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
-    SurveyHelper.sortItems(qItems);
+    if(creatorSettings.logic.questionSortOrder === "asc") {
+      SurveyHelper.sortItems(qItems);
+    }
     return qItems;
   }
 
