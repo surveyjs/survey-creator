@@ -355,6 +355,7 @@ var germanTranslation = {
     markRequired: "Als erforderlich markieren",
     removeRequiredMark: "Entfernen Sie die erforderliche Markierung",
     isAllRowRequired: "Ist eine Antwort für alle Zeilen erforderlich?",
+    eachRowUnique: "Doppelte Beantwortungen in Zeilen verhindern",
     requiredErrorText: "Fehlermeldung bei nicht beantworteten erforderlichen Fragen",
     startWithNewLine: "Starte mit einer neuen Zeile",
     rows: "Zeilenanzahl",
@@ -1459,3 +1460,4 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Auswahlmöglichkeiten werden aus einem Webdienst geladen."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gehen Sie zu den Einstellungen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vorschau der geladenen Auswahloptionen"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Doppelte Beantwortungen in Zeilen verhindern"

@@ -15,6 +15,7 @@ export * from "./tabs/json/json-editor-ace.component";
 export * from "./tabs/logic/logic.component";
 export * from "./tabs/logic/logic-add-btn.component";
 export * from "./components/action-button.component";
+export * from "./components/switcher.component";
 export * from "./questions/question-link-value.component";
 export * from "./questions/question-embedded-survey.component";
 export * from "./tabs/translation/translation.component";

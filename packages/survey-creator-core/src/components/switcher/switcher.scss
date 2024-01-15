@@ -1,0 +1,90 @@
+@import "../../variables.scss";
+
+.svc-switcher.spg-action-button {
+  align-items: center;
+  gap: calcSize(1);
+  pointer-events: auto;
+}
+
+.svc-switcher__title {
+  color: $foreground-light;
+
+  font-family: $font-family;
+  font-size: calcSize(1.5);
+  font-style: normal;
+  font-weight: 600;
+  line-height: calcSize(1);
+}
+
+.svc-switcher__icon {
+  width: calcSize(2.5);
+  padding: calcSize(0.5);
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid $border;
+  background: $background-dim;
+
+  transition-duration: 0.2s;
+  transition-property: background;
+  transition-timing-function: linear;
+}
+
+.svc-switcher__icon:hover {
+  background: $background;
+}
+
+.svc-switcher__icon:focus {
+  border: calcSize(0.25) solid $primary;
+  background: $background-dim;
+}
+
+.svc-switcher__icon:hover:focus {
+  border: calcSize(0.25) solid $primary;
+  background: $background;
+}
+
+.svc-switcher__icon--checked,
+.svc-switcher__icon--checked:hover {
+  justify-content: center;
+  align-items: center;
+  border: unset;
+
+  border-radius: 100px;
+  background-color: $primary;
+}
+
+.svc-switcher__icon--checked:focus {
+  border: calcSize(0.25) solid $primary;
+  background-color: $primary-foreground;
+}
+
+.svc-switcher__icon-thumb {
+  width: calcSize(1);
+  height: calcSize(1);
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100px;
+  background-color: $foreground-dim-light;
+
+  transform: translateX(0);
+  margin-left: 0%;
+  transition-duration: 0.2s;
+  transition-property: margin-left, transform, background-color;
+  transition-timing-function: linear;
+}
+
+.svc-switcher__icon--checked .svc-switcher__icon-thumb {
+  background-color: $primary-foreground;
+  margin-left: 100%;
+  transform: translateX(-100%);
+}
+
+.svc-switcher__icon:focus,
+.svc-switcher__icon:hover:focus,
+.svc-switcher__icon--checked:focus {
+  .svc-switcher__icon-thumb {
+    background-color: $primary;
+  }
+}

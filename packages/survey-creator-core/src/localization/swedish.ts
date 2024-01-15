@@ -355,6 +355,7 @@ export let svStrings = {
     markRequired: "Markera efter behov",
     removeRequiredMark: "Ta bort det obligatoriska märket",
     isAllRowRequired: "Kräv svar för alla rader",
+    eachRowUnique: "Förhindra dubbletter av svar i rader",
     requiredErrorText: "Felmeddelandet \"Obligatoriskt\"",
     startWithNewLine: "Starta på en ny rad?",
     rows: "Antal rader",
@@ -1913,3 +1914,4 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Alternativen läses in från en webbtjänst."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå till inställningar"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Förhandsgranskning av inlästa alternativalternativ"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Förhindra dubbletter av svar i rader"

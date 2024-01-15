@@ -750,6 +750,10 @@ svc-question,
       }
     }
   }
+
+  .sd-table__row-disabled > .sd-table__cell {
+    opacity: 1;
+  }
 }
 
 .svc-question__content {

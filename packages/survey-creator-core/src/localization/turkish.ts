@@ -355,6 +355,7 @@ export var turkishStrings = {
     markRequired: "Gerektiği gibi işaretleyin",
     removeRequiredMark: "Gerekli işareti kaldırın",
     isAllRowRequired: "Tüm satırlar zorunlu",
+    eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     requiredErrorText: "Zorunlu hata yazısı",
     startWithNewLine: "Yeni satırla başla?",
     rows: "Satır sayısı",
@@ -1731,3 +1732,4 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Seçimler bir web hizmetinden yüklenir."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ayarlara git"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Yüklenen seçim seçeneklerinin önizlemesi"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Satırlarda yinelenen yanıtları önleme"

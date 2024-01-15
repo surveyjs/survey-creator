@@ -355,6 +355,7 @@ export var hrStrings = {
     markRequired: "Označi kao obavezno",
     removeRequiredMark: "Uklanjanje potrebne oznake",
     isAllRowRequired: "Zahtijevati odgovor za sve redove",
+    eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
     rows: "Broj redaka",
@@ -1730,3 +1731,4 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Izbori se učitavaju s web-usluge."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Idi na postavke"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pretpregled učitanih mogućnosti izbora"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Sprječavanje dvostrukih odgovora u recima"

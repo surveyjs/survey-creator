@@ -1,0 +1,11 @@
+<ng-template #template>
+  <button type="button" (click)="model.action(model, model.getIsTrusted($event))"
+    [key2click]="{ processEsc: false, disableTabStop: model.disableTabStop }" [class]="model.getActionBarItemCss()"
+    [disabled]="model.disabled" [attr.title]="model.tooltip || model.title" [attr.aria-checked]="model.ariaChecked"
+    [attr.aria-expanded]="model.ariaExpanded" [attr.role]="model.ariaRole">
+    <div [class]="model.getSwitcherIconCss()">
+      <div class="svc-switcher__icon-thumb"></div>
+    </div>
+    <span *ngIf="model.hasTitle" class="svc-switcher__title">{{ model.title }}</span>
+  </button>
+  <ng-template>

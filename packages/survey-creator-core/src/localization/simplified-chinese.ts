@@ -355,6 +355,7 @@ var simplifiedChineseTranslation = {
     markRequired: "标记为必填",
     removeRequiredMark: "删除所需的标记",
     isAllRowRequired: "要求所有行都回答",
+    eachRowUnique: "防止行中出现重复响应",
     requiredErrorText: "错误文字",
     startWithNewLine: "问题是否新起一行?",
     rows: "文本框行数",
@@ -1878,3 +1879,4 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "选项是从 Web 服务加载的。"
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“设置”"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "加载选项的预览"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "防止行中出现重复响应"
