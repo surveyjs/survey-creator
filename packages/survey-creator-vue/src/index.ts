@@ -83,6 +83,7 @@ function registerComponents(app: App) {
   app.component("svc-property-grid", PropertyGrid);
   app.component("svc-object-selector", ObjectSelector);
   app.component("svc-search", Search);
+  app.component("svc-switcher", Switcher);
 
   app.component("svc-action-button", ActionButton);
 
