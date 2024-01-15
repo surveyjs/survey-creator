@@ -3540,6 +3540,44 @@ test("Choices restful banner", (): any => {
   expect(q1AdornerModel.isBannerShowing).toBeTruthy();
   expect(q1AdornerModel.createBannerParams()).toBeTruthy();
 });
+test("Custom banners", (): any => {
+  Serializer.addProperty("selectbase", {
+    name: "prop1", choices: [0, 1, 2, 3],
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("prop1", value);
+      obj.setPropertyValue("isBannerShowing", value > 0);
+    }
+  });
+  const creator = new CreatorTester();
+  creator.onCreateQuestionCustomBanner.add((sender, options) => {
+    options.text = "Banner text#";
+    options.actionText = "Action text#";
+    options.onClick = () => {
+      creator.selectElement(creator.survey.getQuestionByName("q2"), "prop1");
+    };
+  });
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2" }
+    ]
+  };
+  const q1 = <QuestionDropdownModel>creator.survey.getQuestionByName("q1");
+
+  const q1AdornerModel = new QuestionAdornerViewModel(creator, q1, undefined);
+  expect(q1AdornerModel.isBannerShowing).toBeFalsy();
+  q1.prop1 = 1;
+  expect(q1AdornerModel.isBannerShowing).toBeTruthy();
+  const bannerParams = q1AdornerModel.createBannerParams();
+  expect(bannerParams.text).toBe("Banner text#");
+  expect(bannerParams.actionText).toBe("Action text#");
+  expect(creator.selectedElementName).toBe("survey");
+  bannerParams.onClick();
+  expect(creator.selectedElementName).toBe("q2");
+  q1.prop1 = 0;
+  expect(q1AdornerModel.isBannerShowing).toBeFalsy();
+  Serializer.removeProperty("selectbase", "prop1");
+});
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");
   expect(isTextInput(textarea)).toBeTruthy();
