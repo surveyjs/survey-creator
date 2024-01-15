@@ -1922,6 +1922,31 @@ test("set headerViewContainer advanced", (): any => {
   expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 });
 
+test("headerViewContainer survey title & description", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+
+  let currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  headerTitleQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
+
+  currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(255, 255, 255, 1)");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(255, 255, 255, 1)");
+});
+
 test("restore headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
