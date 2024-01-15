@@ -56,6 +56,7 @@ export var settings = {
     showAddQuestionButton: true
   },
   logic: {
+    questionSortOrder: "asc",
     get defaultOperator(): string { return settings.logic.defaultOperators.default; },
     set defaultOperator(val: string) { settings.logic.defaultOperators.default = val; },
     defaultOperators: {
