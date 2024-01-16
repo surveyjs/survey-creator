@@ -14,8 +14,7 @@ export var hebrewStrings = {
     deletePanel: "מחיקת לוח",
     deleteQuestion: "מחיקת שאלה",
     convertTo: "המרה ל",
-    drag: "גרירת אלמנט",
-    license: "אנא רכשו רישיון מפתחים כדי להשתמש ביוצר הסקר ביישום שלכם"
+    drag: "גרירת אלמנט"
   },
   // Question types
   qt: {

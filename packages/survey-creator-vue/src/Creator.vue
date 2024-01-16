@@ -79,11 +79,10 @@
           </div>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
-          <span class="svc-creator__non-commercial-text">
-            <a href="https://surveyjs.io/buy">
-              {{ model.licenseText }}
-            </a>
-          </span>
+          <span
+            class="svc-creator__non-commercial-text"
+            v-html="model.licenseText"
+          ></span>
         </div>
         <sv-notifier :model="model.notifier"></sv-notifier>
       </div>
