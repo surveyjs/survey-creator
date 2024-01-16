@@ -577,6 +577,7 @@ export class ThemeBuilder extends Base {
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
+    this.currentTheme.headerView = headerSettings["headerView"];
     this.themeModified(options);
   }
   private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
