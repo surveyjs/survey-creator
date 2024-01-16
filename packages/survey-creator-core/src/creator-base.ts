@@ -786,7 +786,7 @@ export class CreatorBase extends Base
    * The question users added.
    * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
    * A page to which the question was added.
-   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`\
+   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"` | `"ELEMENT_CONVERTED"`\
    * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
    * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
@@ -3610,6 +3610,7 @@ export class CreatorBase extends Base
     if (!el || el.getType() === newType) return;
     const objType = SurveyHelper.getObjectType(el);
     if (objType !== ObjType.Question && objType !== ObjType.Panel) return;
+    this.addNewElementReason = "ELEMENT_CONVERTED";
     el = this.convertQuestion(<Question>el, newType);
     this.selectElement(el, null, "#convertTo button");
   }
