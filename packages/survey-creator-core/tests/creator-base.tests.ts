@@ -3540,17 +3540,17 @@ test("Choices restful banner", (): any => {
   expect(q1AdornerModel.isBannerShowing).toBeTruthy();
   expect(q1AdornerModel.createBannerParams()).toBeTruthy();
 });
-test("Custom banners", (): any => {
+test("Custom messagePanel", (): any => {
   Serializer.addProperty("selectbase", {
     name: "prop1", choices: [0, 1, 2, 3],
     onSetValue: function (obj: any, value: any) {
       obj.setPropertyValue("prop1", value);
-      obj.setPropertyValue("isBannerShowing", value > 0);
+      obj.setPropertyValue("isMessagePanelVisible", value > 0);
     }
   });
   const creator = new CreatorTester();
-  creator.onCreateQuestionCustomBanner.add((sender, options) => {
-    options.text = "Banner text#";
+  creator.onCreateCustomMessagePanel.add((sender, options) => {
+    options.messageText = "Banner text#";
     options.actionText = "Action text#";
     options.onClick = () => {
       creator.selectElement(creator.survey.getQuestionByName("q2"), "prop1");

@@ -1118,7 +1118,7 @@ export class CreatorBase extends Base
   /**
    * options.
    */
-  public onCreateQuestionCustomBanner: CreatorEvent = new CreatorEvent();
+  public onCreateCustomMessagePanel: CreatorEvent = new CreatorEvent();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
