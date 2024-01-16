@@ -1173,6 +1173,13 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveThemeCount).toBe(4);
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
+
+  themeEditor.getQuestionByName("headerViewContainer").value = [{ headerView: "advanced" }];
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(1);
+  expect(saveThemeCount).toBe(5);
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 });
 
 test("Theme undo redo changes", (): any => {
