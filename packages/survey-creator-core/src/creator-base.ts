@@ -1137,9 +1137,62 @@ export class CreatorBase extends Base
   public onDragDropAllow: CreatorEvent = new CreatorEvent();
 
   /**
-   * options.
+   * An event that allows you to create a custom message panel.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/question)\
+   * A question for which the event is raised.
+   * - `options.messageText`: `string`\
+   * A notification message that you want to display. Assign a custom string value to this parameter.
+   * - `options.actionText`: `string`\
+   * A caption text for the action button. Assign a custom string value to this parameter.
+   * - `options.onClick`: `function`\
+   * A function that is called when users click the action button. Assign a custom function to this parameter.
+   * 
+   * A message panel displays a notification message instead of a question box on the design surface. A message panel contains a message and an action button. For instance, the following image illustrates a built-in message panel notifying survey authors that choice options are loaded from a web service:
+   * 
+   * <img src="https://surveyjs.io/stay-updated/release-notes/articles/v1.9.126/creator-message-panel.png" alt="Survey Creator: A message panel" width="75%">
+   * 
+   * To create a custom message panel, handle the `onCreateCustomMessagePanel` event. This event is raised for questions whose `isMessagePanelVisible` property set to `true`. The following code shows how to enable this property based on a condition. This code implements a custom data source selector for select-based questions (Dropdown, Checkboxes, Radio Button Group). When a survey author selects any data source other than "Custom", the `isMessagePanelVisible` property becomes enabled, indicating that the `onCreateCustomMessagePanel` event must be raised. A function that handles this event specifies custom message and action button texts and `onClick` event handler: 
+   * 
+   * ```js
+   * import { Serializer } from "survey-core";
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * 
+   * Serializer.addProperty("selectbase", {
+   *   name: "choicesDataSource",
+   *   displayName: "Data source",
+   *   category: "choices",
+   *   choices: [
+   *     { text: "Country", value: "country" },
+   *     { text: "Region", value: "region" },
+   *     { text: "City", value: "city" },
+   *     { text: "Custom", value: "custom" }
+   *   ],
+   *   onSetValue: function (obj: any, value: any) {
+   *     // Set the custom property value 
+   *     obj.setPropertyValue("choicesDataSource", value);
+   *     // Display the message panel based on a condition
+   *     obj.setPropertyValue("isMessagePanelVisible", value !== "custom");
+   *   }
+   * });
+   * 
+   * const creator = new SurveyCreatorModel({});
+   * 
+   * creator.onCreateCustomMessagePanel.add((_, options) => {
+   *   options.messageText = "Choices for this question are loaded from a predefined data source. ";
+   *   options.actionText = "Go to settings";
+   *   // Focus the "Data source" editor within the Property Grid
+   *   options.onClick = () => {
+   *     creator.selectElement(options.question, "choicesDataSource");
+   *   };
+   * });
+   * ```
    */
-  public onCreateQuestionCustomBanner: CreatorEvent = new CreatorEvent();
+  public onCreateCustomMessagePanel: CreatorEvent = new CreatorEvent();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;

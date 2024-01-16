@@ -161,7 +161,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.element.dragTypeOverMe;
   }
   public get isBannerShowing(): boolean {
-    return this.isUsingCarryForward || this.isUsingRestfull || this.isBannerShowingProp;
+    return this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible;
   }
   private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
@@ -169,11 +169,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private get isUsingRestfull(): boolean {
     return (<any>this.element)?.isUsingRestful;
   }
-  private get isBannerShowingProp(): boolean {
-    return (this.element)?.getPropertyValue("isBannerShowing");
+  private get isMessagePanelVisible(): boolean {
+    return (this.element)?.getPropertyValue("isMessagePanelVisible");
   }
   public createBannerParams(): QuestionBannerParams {
-    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomBanners();
+    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
@@ -195,16 +195,18 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       onClick: () => { this.creator.selectElement(this.element, "choicesByUrl"); }
     };
   }
-  private createCustomBanners(): QuestionBannerParams {
-    if (!this.isBannerShowingProp) return null;
-    const res = {
+  private createCustomMessagePanel(): QuestionBannerParams {
+    if (!this.isMessagePanelVisible) return null;
+    const res: any = {
+      question: this.element,
       actionText: "",
-      text: "",
+      messageText: "",
       onClick: () => { }
     };
     if(this.creator) {
-      this.creator.onCreateQuestionCustomBanner.fire(this.creator, res);
+      this.creator.onCreateCustomMessagePanel.fire(this.creator, res);
     }
+    res.text = res.messageText;
     return res;
   }
   public dispose(): void {
