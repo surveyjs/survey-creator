@@ -198,6 +198,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private createCustomMessagePanel(): QuestionBannerParams {
     if (!this.isMessagePanelVisible) return null;
     const res: any = {
+      question: this.element,
       actionText: "",
       messageText: "",
       onClick: () => { }
