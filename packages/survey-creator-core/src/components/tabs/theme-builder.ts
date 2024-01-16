@@ -675,7 +675,7 @@ export class ThemeBuilder extends Base {
         this.headerViewContainerPropertiesChanged(options);
       }
 
-      if (options.name === "--sjs-shadow-inner") {
+      if (options.name === "--sjs-shadow-inner" || options.name === "--sjs-shadow-small") {
         this.shadowInnerPropertiesChanged(options);
       }
 
