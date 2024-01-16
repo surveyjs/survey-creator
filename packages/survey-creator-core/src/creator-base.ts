@@ -405,12 +405,6 @@ export class CreatorBase extends Base
    */
   public onGetPropertyReadOnly: CreatorEvent = new CreatorEvent();
 
-  /**
-   * The event is fired when the survey creator creates a survey object (Survey.Survey).
-   *- sender the survey creator object that fires the event
-   *- options.survey the survey object showing in the creator.
-   *- options.reason indicates what component of the creator requests the survey. There are several reason types: "designer" - survey for designer survey, "test" - survey for "Preview" tab and "conditionEditor", "defaultValueEditor", "restfulEditor" - surveys for different property editors.
-   */
   public onSurveyInstanceCreated: CreatorEvent = new CreatorEvent();
 
   /**
@@ -442,15 +436,22 @@ export class CreatorBase extends Base
   public onGetObjectDisplayName: CreatorEvent = new CreatorEvent();
 
   /**
-   * This event is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
+   * An event that is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
    *
    * The event handler accepts the following arguments:
    *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.element` - The instance of a survey element (survey, page, panel, question) that the user configures.
-   * - `options.name` - The name of a property whose value has been edited.
-   * - `options.html` - HTML content. Pass this field's value to an HTML-to-Markdown converter.
-   * - `options.text` - A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.element`: `any`\
+   * The instance of a survey element (survey, page, panel, question) that the user configures.
+   * - `options.name`: `string`\
+   * The name of a property whose value has been edited.
+   * - `options.html`: `string`\
+   * HTML content. Pass this field's value to an HTML-to-Markdown converter.
+   * - `options.text`: `string`\
+   * A text string that may contain Markdown. Assign the result of the HTML-to-Markdown conversion to this field.
    */
   public onHtmlToMarkdown: CreatorEvent = new CreatorEvent();
 
@@ -524,42 +525,67 @@ export class CreatorBase extends Base
   public onShowingProperty: CreatorEvent = new CreatorEvent();
   public onCanShowProperty: CreatorEvent = this.onShowingProperty;
   /**
-   * The event is called after a survey that represents the Property Grid is created and all its questions (property editors) are setup.
-   * You can use this event to modify this survey to change the property grid behavior
-   *- options.obj the survey object that is currently editing in the property grid
-   *- options.survey the property grid survey
+   * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid by modifying the survey.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.object`: `any`\
+   * A survey element being edited in the Property Grid.
+   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)
+   * A survey that respresents the Property Grid. Use the `SurveyModel` API to modify the survey.
+   * @see onPropertyEditorCreated
    */
   public onPropertyGridSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
-    * The event is called after a property editor (in fact a survey question) has been created and all it's properties have been assign.
-    * You can use this event to modify the property editor properties or set event handlers to customize it's behavior
-    *- options.obj the survey object that is currently editing in the property grid
-    *- options.property the property that the current property editor is editing
-    *- options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
-    */
+   * An event that is raised when a property editor is created in the Property Grid. Use this event to modify the property editor or add event handlers to it.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.editor`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * - `options.property`: `JsonObjectProperty`\
+   * A property that corresponds to the created property editor.
+   * @see onPropertyGridSurveyCreated
+   */
   public onPropertyEditorCreated: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called after a property editor setups its title actions.
-   * You can use this event to modify the property editor title actions
-   *- options.obj the survey object that is currently editing in the property grid
-   *- options.property the property that the current property editor is editing
-   *- options.editor the property editor. In fact it is a survey question. We are using a heavily customizable survey as a property grid in Creator V2. It means that every property editor is a question.
-   *- options.titleActions the list of title actions.
+   * An event that is raised when title actions are added to a property editor. Title actions are most often used to reveal hints for properties configured by users. Handle this event you want to add, remove, or modify the title actions.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.object`: `any`\
+   * A survey element being edited in the Property Grid.
+   * - `options.editor`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * A property editor that contains the title actions. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * - `options.property`: `JsonObjectProperty`\
+   * A property that corresponds to the property editor.
+   * - `options.titleActions`: [`IAction[]`](https://surveyjs.io/form-library/documentation/api-reference/iaction)\
+   * A list of title actions.
    */
   public onPropertyEditorUpdateTitleActions: CreatorEvent = new CreatorEvent();
   /**
-   * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, and so on.
-   *
-   * Use this event to customize the pop-up window, for example, add custom action buttons.
+   * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, etc. Use this event to customize the pop-up window, for example, add custom action buttons.
    *
    * Parameters:
    *
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.obj` - An instance of a survey element (question or panel) that users are configuring in the Property Grid.
-   * - `options.property`- A `JsonObjectProperty` object with metadata about the property being edited.
-   * - `options.editor` - A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
-   * - `options.popupEditor` - An editor inside the pop-up window.
-   * - `options.popupModel` - A `PopupBaseViewModel` object that describes the pop-up window model. Use `options.popupModel.footerToolbar` to access the actions at the bottom of the window.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: `any`\
+   * The instance of a survey element (question or panel) that users are configuring in the Property Grid.
+   * - `options.property`: `JsonObjectProperty`\
+   * A property being edited.
+   * - `options.editor`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
+   * - `options.popupEditor`: `any`\
+   * An editor inside the pop-up window.
+   * - `options.popupModel`: `PopupBaseViewModel`\
+   * A pop-up window model. Use `options.popupModel.footerToolbar` to access the actions at the bottom of the window.
    */
   public onPropertyGridShowModal: CreatorEvent = new CreatorEvent();
   public onCanDeleteItem: CreatorEvent = new CreatorEvent();
@@ -608,12 +634,7 @@ export class CreatorBase extends Base
    *- options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Manual Entry" tab for "choices" property by default.
    */
   public onSetPropertyEditorOptions: CreatorEvent = new CreatorEvent();
-  /**
-   * The event is called on generation a new name for a new created element.
-   *- sender the survey creator object that fires the event
-   *- options.element a new created survey element. It can be question, panel or page
-   *- options.name a new suggested name, that is unique for the current survey. You can suggest your own name. If it is unique, creator will assign it to the element.
-   */
+
   public onGenerateNewName: CreatorEvent = new CreatorEvent();
   /**
    * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
@@ -3239,9 +3260,9 @@ export class CreatorBase extends Base
     item: Base,
     allowDelete: boolean
   ): boolean {
-    if(!!item && item["isPage"]) {
-      if(this.pageEditMode === "bypage") return item !== this.survey.currentPage;
-      if(this.pageEditMode === "single") return false;
+    if (!!item && item["isPage"]) {
+      if (this.pageEditMode === "bypage") return item !== this.survey.currentPage;
+      if (this.pageEditMode === "single") return false;
     }
     return this.canDeleteItem(object, item, allowDelete);
   }
@@ -3924,9 +3945,9 @@ function isContentElement(element: any) {
   return false;
 }
 function getQuestionFromElement(element: any): any {
-  if(!element) return null;
-  if(!!element.row) return element.row.data;
-  if(!!element.column) return element.column.colOwner;
+  if (!element) return null;
+  if (!!element.row) return element.row.data;
+  if (!!element.column) return element.column.colOwner;
   return null;
 }
 
@@ -3936,7 +3957,7 @@ export function getElementWrapperComponentName(element: any, reason: string, isP
     return "svc-logo-image";
   }
   if (reason === "cell" || reason === "column-header" || reason === "row-header") {
-    if(isContentElement(getQuestionFromElement(element))) return undefined;
+    if (isContentElement(getQuestionFromElement(element))) return undefined;
     return "svc-matrix-cell";
   }
   if (!isContentElement(element)) {
@@ -4022,8 +4043,8 @@ export function getItemValueWrapperComponentData(
   };
 }
 export function isStringEditable(element: any, name: string): boolean {
-  if(element.parentQuestion instanceof QuestionMatrixDropdownModelBase) {
-    if(!!element.data || isContentElement(element.parentQuestion)) return false;
+  if (element.parentQuestion instanceof QuestionMatrixDropdownModelBase) {
+    if (!!element.data || isContentElement(element.parentQuestion)) return false;
   }
   return !isContentElement(element) || element.isEditableTemplateElement;
 }
