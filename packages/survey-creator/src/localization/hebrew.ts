@@ -1,5 +1,4 @@
-// Please, uncomment the line below if you create a custom dictionary
-import { editorLocalization } from "survey-creator-core";
+import { editorLocalization } from "../editorLocalization";
 
 export var hebrewStrings = {
   // survey templates
