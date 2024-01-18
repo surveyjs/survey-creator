@@ -105,6 +105,8 @@ export class SurveyLogicType {
     if ((<any>obj).setOwner) {
       (<any>obj).setOwner(this.survey);
     }
+    //Do not fire notification about changes to our creator.survey model
+    obj["isGhost"] = true;
     return obj;
   }
   public cloneElement(el: Base): Base {

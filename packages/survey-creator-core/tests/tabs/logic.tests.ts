@@ -321,7 +321,12 @@ test("LogicItemEditor: update a trigger", () => {
   expect(expressionQuestion).toBeTruthy();
   expect(expressionQuestion.visible).toBeFalsy();
   runExpressionQuestion.value = "{q2} - 10";
+  let counter = 0;
+  survey.onPropertyValueChangedCallback = (name, oldValue, newValue, sender, arrayChanges) => {
+    counter++;
+  };
   setToNameQuestion.value = "q3";
+  expect(counter).toBe(0);
   editor.apply();
   var element = <SurveyTriggerRunExpression>logic.items[0].actions[0].element;
   expect(element.runExpression).toEqual("{q2} - 10");
