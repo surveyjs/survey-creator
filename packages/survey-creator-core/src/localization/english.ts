@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library in your app, a developer license is necessary. If you currently hold an activated license, ensure you're using the latest version available."
+    license: "To use our library, a <a href='https://surveyjs.io/licensing'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner'>set up your license key</a> and ensure you're using the latest version."
   },
   // Question types
   qt: {
