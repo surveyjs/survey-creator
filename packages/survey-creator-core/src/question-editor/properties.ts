@@ -2,12 +2,12 @@ import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
 } from "./definition";
-import * as Survey from "survey-core";
+import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 
 export class SurveyQuestionEditorPropertyDefinition {
-  public property: Survey.JsonObjectProperty;
+  public property: JsonObjectProperty;
   public title: string;
   public category: string;
   public createdFromTabName: boolean;
@@ -29,7 +29,7 @@ const otherTabName = "others";
 
 export class SurveyQuestionProperties {
   private showModeValue: string;
-  private properties: Array<Survey.JsonObjectProperty>;
+  private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   constructor(
@@ -38,14 +38,14 @@ export class SurveyQuestionProperties {
     className: string = null,
     showMode: string = null,
     private parentObj: any = null,
-    private parentProperty: Survey.JsonObjectProperty = null
+    private parentProperty: JsonObjectProperty = null
   ) {
     this.showModeValue = showMode;
-    this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    this.properties = Serializer.getPropertiesByObj(this.obj);
     this.fillPropertiesHash();
     this.buildTabs(className);
   }
-  public getProperty(propertyName: string): Survey.JsonObjectProperty {
+  public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
     return !!res && res.visible ? res.property : null;
   }
@@ -76,7 +76,7 @@ export class SurveyQuestionProperties {
       };
     }
   }
-  private isJSONPropertyVisible(property: Survey.JsonObjectProperty): boolean {
+  private isJSONPropertyVisible(property: JsonObjectProperty): boolean {
     var res = this.propertiesHash[property.name];
     return !!res && res.visible;
   }
@@ -91,7 +91,7 @@ export class SurveyQuestionProperties {
   }
   public getProperties(
     tab: SurveyQuestionEditorTabDefinition
-  ): Array<Survey.JsonObjectProperty> {
+  ): Array<JsonObjectProperty> {
     var res = [];
     for (var i = 0; i < tab.properties.length; i++) {
       res.push(tab.properties[i].property);
@@ -208,7 +208,7 @@ export class SurveyQuestionProperties {
     }
     return null;
   }
-  private getNextToNameProperty(property: Survey.JsonObjectProperty): string {
+  private getNextToNameProperty(property: JsonObjectProperty): string {
     if(!property.nextToProperty) return "";
     if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substring(1);
     return property.nextToProperty;
@@ -271,7 +271,7 @@ export class SurveyQuestionProperties {
       return result;
     }
     let hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result);
-    const dynamicClass = !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
     if(dynamicClass) {
       hasNonTabProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result);
     }
@@ -285,8 +285,8 @@ export class SurveyQuestionProperties {
     let res = false;
     let curClassName = className;
     while (curClassName) {
-      let metaClass = <Survey.JsonMetadataClass>(
-        Survey.Serializer.findClass(curClassName)
+      let metaClass = <JsonMetadataClass>(
+        Serializer.findClass(curClassName)
       );
       if (!metaClass) break;
       res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result);
@@ -329,7 +329,7 @@ export class SurveyQuestionProperties {
     return res;
   }
   private getJsonPropertyCategory(
-    jsonProperty: Survey.JsonObjectProperty
+    jsonProperty: JsonObjectProperty
   ): string {
     if (!jsonProperty) return null;
     if (!!jsonProperty.category) return jsonProperty.category;
