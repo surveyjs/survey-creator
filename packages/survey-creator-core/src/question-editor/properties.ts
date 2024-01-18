@@ -270,52 +270,63 @@ export class SurveyQuestionProperties {
       this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
-    var curClassName = className;
-    var hasNonTabProperties = false;
-    while (curClassName) {
-      let metaClass = <Survey.JsonMetadataClass>(
-        Survey.Serializer.findClass(curClassName)
-      );
-      if (!metaClass) break;
-      let classRes = SurveyQuestionEditorDefinition.definition[metaClass.name];
-      if (classRes) {
-        if (classRes.properties) {
-          var i = 0;
-          while (i < classRes.properties.length) {
-            var prop = classRes.properties[i];
-            var propName = typeof prop == "string" ? prop : prop.name;
-            var tabName = settings.propertyGrid.generalTabName;
-            if (typeof prop !== "string" && !!prop.tab) {
-              tabName = prop.tab;
-            }
-            var jsonProp = !!this.propertiesHash[propName]
-              ? this.propertiesHash[propName].property
-              : null;
-            var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-            if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
-              classRes.properties.splice(i, 1);
-            } else {
-              usedProperties[propName] = true;
-              i++;
-            }
-          }
-        }
-        if (classRes.tabs) {
-          for (var i = 0; i < classRes.tabs.length; i++) {
-            hasNonTabProperties =
-              hasNonTabProperties || classRes.tabs[i].name === otherTabName;
-            usedProperties[classRes.tabs[i].name] = true;
-          }
-        }
-        result.unshift(classRes);
-      }
-      curClassName = metaClass.parentName;
+    let hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result);
+    const dynamicClass = !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    if(dynamicClass) {
+      hasNonTabProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result);
     }
 
     if (!hasNonTabProperties) {
       this.addNonTabProperties(result, usedProperties);
     }
     return result;
+  }
+  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+    let res = false;
+    let curClassName = className;
+    while (curClassName) {
+      let metaClass = <Survey.JsonMetadataClass>(
+        Survey.Serializer.findClass(curClassName)
+      );
+      if (!metaClass) break;
+      res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result);
+      curClassName = metaClass.parentName;
+    }
+    return res;
+  }
+  private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+    const classRes = SurveyQuestionEditorDefinition.definition[className];
+    let res = false;
+    if(!classRes) return res;
+    if (classRes.properties) {
+      var i = 0;
+      while (i < classRes.properties.length) {
+        var prop = classRes.properties[i];
+        var propName = typeof prop == "string" ? prop : prop.name;
+        var tabName = settings.propertyGrid.generalTabName;
+        if (typeof prop !== "string" && !!prop.tab) {
+          tabName = prop.tab;
+        }
+        var jsonProp = !!this.propertiesHash[propName]
+          ? this.propertiesHash[propName].property
+          : null;
+        var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
+        if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+          classRes.properties.splice(i, 1);
+        } else {
+          usedProperties[propName] = true;
+          i++;
+        }
+      }
+    }
+    if (classRes.tabs) {
+      for (var i = 0; i < classRes.tabs.length; i++) {
+        res = res || classRes.tabs[i].name === otherTabName;
+        usedProperties[classRes.tabs[i].name] = true;
+      }
+    }
+    result.unshift(classRes);
+    return res;
   }
   private getJsonPropertyCategory(
     jsonProperty: Survey.JsonObjectProperty
