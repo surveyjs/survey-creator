@@ -641,9 +641,10 @@ export class ThemeBuilder extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor", this);
+    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this);
     themeEditorSurvey.lazyRendering = true;
     themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
+    themeEditorSurvey.setJsonObject(json);
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
