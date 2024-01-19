@@ -6,7 +6,8 @@ import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
-
+import { PropertyGridModel } from "../../property-grid";
+import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
  * 
@@ -43,6 +44,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private sidebarTab: SidebarTabModel;
   private _availableThemes = [].concat(PredefinedThemes);
 
+  public propertyGrid: PropertyGridModel;
+  private propertyGridTab: SidebarTabModel;
   public model: ThemeBuilder;
 
   private createVisibleUpdater() {
@@ -55,6 +58,11 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
     this.sidebarTab = this.creator.sidebar.addTab("theme");
     this.sidebarTab.caption = editorLocalization.getString("ed.themePropertyGridTitle");
+
+    this.propertyGrid = new PropertyGridModel(undefined, creator);
+    const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
+    this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid2", "svc-property-grid", propertyGridViewModel);
+
     creator.registerShortcut("undo_theme", {
       name: "undo",
       affectedTab: "theme",
@@ -83,9 +91,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new ThemeBuilder(this.creator, this.simulatorCssClasses);
     this.update();
+    this.propertyGrid.obj = this.model;
+
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
+
+    this.propertyGridTab.visible = true;
+    this.sidebarTab.visible = !this.propertyGridTab.visible;
   }
   public update(): void {
     if (!this.model) return;
