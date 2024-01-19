@@ -66,12 +66,12 @@ export class SearchManager extends Base {
     newValueInLow = newValueInLow.toLocaleLowerCase().trim();
     const visibleQuestions = this.survey.getAllQuestions().filter(q => q.isVisible);
     return visibleQuestions.filter(q => {
-      let questionTitle = q.title;
-      if(!!questionTitle) {
-        questionTitle = normalize(questionTitle, "search");
-        questionTitle = questionTitle.toLocaleLowerCase().trim();
+      let srcString = q.name + "|" + q.title + "|" + q.description;
+      if(!!srcString) {
+        srcString = normalize(srcString, "search");
+        srcString = srcString.toLocaleLowerCase().trim();
       }
-      return questionTitle.indexOf(newValueInLow) !== -1;
+      return srcString.indexOf(newValueInLow) !== -1;
     });
   }
   private setFiterString(newValue: string) {
