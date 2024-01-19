@@ -517,6 +517,12 @@ svc-question,
   }
 }
 
+.svc-panel__add-new-question-wrapper {
+  container-type: inline-size;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .svc-panel__placeholder_frame-wrapper {
   container-type: inline-size;
   width: 100%;
@@ -645,6 +651,13 @@ svc-question,
 
 }
 
+.svc-panel__question-type-selector-popup {
+  height: calcSize(5);
+  width: calcSize(5);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 .svc-panel__question-type-selector {
   appearance: none;
   display: flex;
