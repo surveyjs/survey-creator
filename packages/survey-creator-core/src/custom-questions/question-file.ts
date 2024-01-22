@@ -110,7 +110,7 @@ export class QuestionFileEditorModel extends QuestionFileModel {
       return true;
     }
   }
-  public onChooseFilesCallback: (input: HTMLInputElement, onFilesChosen: (files: File[]) => void) => void;
+  public onChooseFilesCallback: (input: HTMLInputElement, callback: (files: File[]) => void) => void;
   chooseFiles(event: Event) {
     if(this.isInputReadOnly || !this.onChooseFilesCallback) {
       return true;

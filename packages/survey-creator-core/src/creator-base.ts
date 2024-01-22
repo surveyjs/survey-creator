@@ -104,9 +104,6 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
 
 export class CreatorEvent extends EventBase<CreatorBase, any> { }
 
-/**
- * Base class for Survey Creator.
- */
 export class CreatorBase extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner, ILocalizableOwner {
   //ILocalizableOwner
@@ -482,6 +479,7 @@ export class CreatorBase extends Base
    * To disable a user interaction, set the correponding `allow...` property to `false`.
    * 
    * [Specify Adorner Visibility](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability (linkStyle))
+   * @see onCollectionItemAllowOperations
    */
   public onElementAllowOperations: CreatorEvent = new CreatorEvent();
 
@@ -549,6 +547,7 @@ export class CreatorBase extends Base
    * A property editor. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
    * - `options.property`: `JsonObjectProperty`\
    * A property that corresponds to the created property editor.
+   * @see onSetPropertyEditorOptions
    * @see onPropertyGridSurveyCreated
    */
   public onPropertyEditorCreated: CreatorEvent = new CreatorEvent();
@@ -591,47 +590,89 @@ export class CreatorBase extends Base
   public onCanDeleteItem: CreatorEvent = new CreatorEvent();
   public onCollectionItemDeleting: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called before rendering a collection item in a property editor. For example: a column in a column editor, or an item in Choices and so on.
-   * Use this event to prevent a collection item from being edited or removed from a collection. 
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object: Question, Panel, Page or Survey
-   *- options.property the collection property (Survey.JsonObjectProperty object). It has name, className, type, visible, readOnly and other properties
-   *- options.propertyName the collection property name
-   *- options.collection a collection where a target item is located. It is can be Columns in Matrices or Choices in Dropdown question and so on.
-   *- options.item a target collection item
-   *- options.allowDelete a boolean value. It is `true` by default. Set it false to prevent an item from being removed from the collection
-   *- options.allowAdd a boolean value. It is `true` by default. Set it false to prevent an item from being added to the collection
-   *- options.allowEdit a boolean value. It is `true` by default. Set it `false` to disable editing.
+   * An event that is raised when Survey Creator obtains permitted operations for a collection item (a choice option in Choices, a column or row in Columns, etc.). Use this event to prevent users from adding, deleting, or editing a particular collection item.
+   *  
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   * - `options.property`: `JsonObjectProperty`\
+   * A property that contains the collection to which the target item belongs.
+   * - `options.propertyName`: `string`\
+   * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   * - `options.collection`: [`Survey.Base[]`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
+   * - `options.item`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A target collection item.
+   * - `options.allowAdd`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being added to the collection.
+   * - `options.allowDelete`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being deleted.
+   * - `options.allowEdit`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being edited.
+   * @see onElementAllowOperations
    */
   public onCollectionItemAllowOperations: CreatorEvent = new CreatorEvent();
   /**
-    * The event is called on adding a new Survey.ItemValue object. It uses as an element in choices array in Radiogroup, checkbox and dropdown questions or Matrix columns and rows properties.
-    * Use this event, to set ItemValue.value and ItemValue.text properties by default or set a value to the custom property.
-    *- sender the survey creator object that fires the event
-    *- options.obj the object that contains the itemsValues array, for example selector, rating and single choice matrix questions.
-    *- options.propertyName  the object property Name. It can be "choices" for selector questions or rateValues for rating question or columns/rows for single choice matrix.
-    *- options.newItem a new created Survey.ItemValue object.
-    *- options.itemValues an editing Survey.ItemValue array. newItem object is not added yet into this array.
-    */
+   * An event that is raised when users add a new collection item (a choice option to Choices, a column or row to Columns, etc.). Use this event to modify this item.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   * - `options.property`: `JsonObjectProperty`\
+   * A property that contains the collection to which the target item belongs.
+   * - `options.propertyName`: `string`\
+   * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   * - `options.newItem`: [`ItemValue`](https://surveyjs.io/form-library/documentation/itemvalue)\
+   * A new collection item. Overwrite its `value` or `text` property if you want to change the item's value or display text.
+   * - `options.itemValues`: [`ItemValue[]`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.). This array does not include `options.newItem`.
+   * 
+   * > This event is not raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). For these cases, handle the [`onMatrixColumnAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMatrixColumnAdded) event instead.
+   * @see onCollectionItemAllowOperations
+   */
   public onItemValueAdded: CreatorEvent = new CreatorEvent();
   /**
-   * The event is called when a user adds a new column into MatrixDropdown or MatrixDynamic questions. Use it to set some properties of Survey.MatrixDropdownColumn by default, for example name or a custom property.
-   *- sender the survey creator object that fires the event
-   *- options.matrix a matrix question where column is located, matrix.columns.
-   *- options.newColumn a new created Survey.MatrixDropdownColumn object.
-   *- options.columns editable columns objects. They can be different from options.matrix.columns. options.columns and options.matrix.columns are equal after user press Apply or Cancel and options.columns will be set to options.matrix.columns or reset to initial state.
+   * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.matrix`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * A Multi-Select or Dynamic Matrix to which a new column is being added.
+   * - `options.newColumn`: [`MatrixDropdownColumn`](https://surveyjs.io/form-library/documentation/api-reference/matrixdropdowncolumn)\
+   * A new matrix column. Edit its properties if you want to modify this column.
+   * - `options.columns`: [`MatrixDropdownColumn[]`](https://surveyjs.io/form-library/documentation/api-reference/matrixdropdowncolumn)\
+   * An array of matrix columns. This array does not include `options.newColumn`.
+   * 
+   * > This event is not raised when users add a new column to a [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model). For this case, handle the [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) event instead.
+   * @see onCollectionItemAllowOperations
    */
   public onMatrixColumnAdded: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to control Property Editors UI.
-   *- sender the survey creator object that fires the event
-   *- options.obj the survey object which property is edited in the Property Editor.
-   *- options.propertyName  the name of the edited property.
-   *- options.editorOptions  options that can be changed.
-   *- options.editorOptions.allowAddRemoveItems a boolean property, true by default. Set it false to disable add/remove items in array properties. For example 'choices', 'columns', 'rows'.
-   *- options.editorOptions.allowRemoveAllItems a boolean property, true by default. Set it false to disable remove all items in array properties. For example 'choices', 'columns', 'rows'.
-   *- options.editorOptions.allowBatchEdit a boolean property, true by default. Set it false to hide the "Edit" button for the "choices" property.
-   *- options.editorOptions.itemsEntryType a string property, 'form' by default. Set it 'fast' to show "Manual Entry" tab for "choices" property by default.
+   * An event that is raised when a table property editor is created in the Property Grid. Use this event to configure the table property editor.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (survey, page, panel, question) for which the table property editor is created.
+   * - `options.propertyName`: `string`\
+   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
+   * - `options.editorOptions.allowAddRemoveItems`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
+   * - `options.editorOptions.allowRemoveAllItems`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
+   * - `options.editorOptions.allowBatchEdit`: `boolean`\
+   * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
+   * @see onPropertyEditorCreated
    */
   public onSetPropertyEditorOptions: CreatorEvent = new CreatorEvent();
 
@@ -682,7 +723,7 @@ export class CreatorBase extends Base
    * - `sender`: `CreatorBase`\
    * A Survey Creator instance that raised the event.
    * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
-   * A survey element (question, panel, page, or the survey itself) whose property is has changed.
+   * A survey element (question, panel, page, or the survey itself) whose property has changed.
    * - `options.propertyName`: `string`\
    * The name of the modified property.
    * - `options.value`: `any`\
@@ -692,14 +733,23 @@ export class CreatorBase extends Base
    */
   public onSurveyPropertyValueChanged: CreatorEvent = new CreatorEvent();
   /**
-    * Use this event to modify the list (name and titles) of the questions available in a condition editor.
-    *- sender the survey creator object that fires the event
-    *- options.obj the survey object which property is edited in the Property Editor.
-    *- options.propertyName  the name of the edited property.
-    *- options.editor the instance of Property Editor.
-    *- options.list the list of the questions available for condition
-    *- options.sortOrder "asc" (default) | "none". Change it to "none", if you don't want to sort your condition list
-    */
+   * An event that is raised when a condition editor renders a list of questions available for selection. Use this event to modify this list.
+   * 
+   * Parameters:
+   *
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
+   * A survey element (question, panel, page, or the survey itself) for which the condition editor is displayed.
+   * - `options.propertyName`: `string`\
+   * The name of a property being configured: `enableIf`, `requiredIf`, `visibleIf`, etc.
+   * - `options.editor`: `any`\
+   * A condition editor instance.
+   * - `options.list`: `any`\
+   * A list of questions available for selection.
+   * - `options.sortOrder`: `"asc"` (default) | `"none"`\
+   * The sort order of questions within the list. Set this property to `"none"` to disable sorting.
+   */
   public onConditionQuestionsGetList: CreatorEvent = new CreatorEvent();
   /**
    * Use this event to modify the title in a condition editor. The title is changing during editing. In case of empty or incorrect expression it tells that expression is incorrect
@@ -723,19 +773,23 @@ export class CreatorBase extends Base
    * A condition opeator for which the event is raised.
    * - `options.show`: `boolean`\
    * A Boolean property that you can set to `false` if you want to hide the condition operator.
-   * 
    */
   public onGetConditionOperator: CreatorEvent = new CreatorEvent();
   /**
-   * Use this event to modify the display text of a logic item in the Logic tab.
+   * An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
    * 
-   * The event handler accepts the following arguments:
+   * Parameters:
    * 
-   * - `sender` - A Survey Creator instance that raised the event.
-   * - `options.expression` - A logical expression associated with the logic item. 
-   * - `options.expressionText` - The same expression in a user-friendly format. It may contain question titles instead of question names.
-   * - `options.logicItem` - A logic item object. Contains an array of actions and other properties.
-   * - `options.text` - The expression and actions in a user-friendly format. Redefine this property if you want to change the display text.
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.expression`: `string`\
+   * A logical expression associated with the logic rule. 
+   * - `options.expressionText`: `string`\
+   * The same expression in a user-friendly format.
+   * - `options.logicItem`: `SurveyLogicItem`\
+   * An object that describes the logic rule. Contains an array of actions and other properties.
+   * - `options.text`: `string`\
+   * A user-friendly display text for the logic rule. Modify this parameter if you want to override the display text.
    */
   public onLogicItemDisplayText: CreatorEvent = new CreatorEvent();
   /**
@@ -794,6 +848,7 @@ export class CreatorBase extends Base
     * - `options.source` - A dragged element.
     * - `options.target` - A drop target.
     * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
+    * @see state
     */
   public onModified: CreatorEvent = new CreatorEvent();
   /**
@@ -874,6 +929,7 @@ export class CreatorBase extends Base
    * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
    * 
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   * @see survey
    */
   public onDesignerSurveyCreated: CreatorEvent = new CreatorEvent();
   /**
@@ -893,9 +949,15 @@ export class CreatorBase extends Base
   public onPreviewSurveyCreated: CreatorEvent = new CreatorEvent();
   public onTestSurveyCreated: CreatorEvent = this.onPreviewSurveyCreated;
   /**
-   * The event is called in case of UI notifications. By default all notifications are done via built-in alert () function.
-   * In case of any subscriptions to this event all notifications will be redirected into the event handler.
-   *- options.message is a message to show.
+   * An event that is raised when Survey Creator [displays a toast notification](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#notify). Use this event to implement custom toast notification.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.message`: `string`\
+   * A message to display.
+   * @see notify
    */
   public onNotify: CreatorEvent = new CreatorEvent();
   /**
@@ -938,15 +1000,23 @@ export class CreatorBase extends Base
    * A choice item for which the event is raised. This parameter has a value only when the dialog window is opened to select images for an [Image Picker](https://surveyjs.io/form-library/documentation/api-reference/image-picker-question-model) question.
    * - `options.callback: (files: Array<File>)`: `Function`\
    * A callback function to which you should pass selected files.
+   * @see onUploadFile
    * @see uploadFiles
    */
   public onOpenFileChooser: CreatorEvent = new CreatorEvent();
   /**
-   * The event is fired on uploading the files.
+   * An event that is raised when a user selects a file to upload. Use this event to upload the file to your server.
    * 
-   * - `sender` - the survey creator object that fires the event
-   * - `options.files` - the Javascript File objects array
-   * - `options.callback(status, imageLink)` - called on upload complete
+   * Parameters:
+   * 
+   * - `sender`: `CreatorBase`\
+   * A Survey Creator instance that raised the event.
+   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
+   * A question for which files are being uploaded.
+   * - `options.files`: [`File[]`](https://developer.mozilla.org/en-US/docs/Web/API/File)\
+   * Files to upload.
+   * - `options.callback(status: string, fileUrl: string)`: `Function`\
+   * A callback function that you should call when a file is uploaded successfully or when file upload fails. Pass `"success"` or `"error"` as the `status` argument. If the file upload is successful, pass the file's URL as the `fileUrl` argument.
    * 
    *  [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))   
    * @see uploadFiles
@@ -1148,15 +1218,15 @@ export class CreatorBase extends Base
    * - `options.messageText`: `string`\
    * A notification message that you want to display. Assign a custom string value to this parameter.
    * - `options.actionText`: `string`\
-   * A caption text for the action button. Assign a custom string value to this parameter.
+   * A caption text for the action link. Assign a custom string value to this parameter.
    * - `options.onClick`: `function`\
-   * A function that is called when users click the action button. Assign a custom function to this parameter.
+   * A function that is called when users click the action link. Assign a custom function to this parameter.
    * 
-   * A message panel displays a notification message instead of a question box on the design surface. A message panel contains a message and an action button. For instance, the following image illustrates a built-in message panel notifying survey authors that choice options are loaded from a web service:
+   * A message panel is displayed within a question box on the design surface. It contains a text message and an optional action link. The following image illustrates a built-in message panel that appears when a question sources its choice options from another question or from a web service:
    * 
    * <img src="https://surveyjs.io/stay-updated/release-notes/articles/v1.9.126/creator-message-panel.png" alt="Survey Creator: A message panel" width="75%">
    * 
-   * To create a custom message panel, handle the `onCreateCustomMessagePanel` event. This event is raised for questions whose `isMessagePanelVisible` property set to `true`. The following code shows how to enable this property based on a condition. This code implements a custom data source selector for select-based questions (Dropdown, Checkboxes, Radio Button Group). When a survey author selects any data source other than "Custom", the `isMessagePanelVisible` property becomes enabled, indicating that the `onCreateCustomMessagePanel` event must be raised. A function that handles this event specifies custom message and action button texts and `onClick` event handler: 
+   * To create a custom message panel, handle the `onCreateCustomMessagePanel` event. This event is raised for questions whose `isMessagePanelVisible` property set to `true`. The following code shows how to enable this property based on a condition. This code implements a custom data source selector for select-based questions (Dropdown, Checkboxes, Radio Button Group). When a survey author selects any data source other than "Custom", the `isMessagePanelVisible` property becomes enabled, indicating that the `onCreateCustomMessagePanel` event must be raised. A function that handles this event specifies custom message and action link texts and `onClick` event handler: 
    * 
    * ```js
    * import { Serializer } from "survey-core";
@@ -1203,7 +1273,7 @@ export class CreatorBase extends Base
   // public useTabsInElementEditor = false;
 
   /**
-   * Limits the number of items in a logical expression.
+   * Limits the number of items in a logical condition.
    *
    * Default value: -1 (unlimited)
    */
@@ -1240,7 +1310,6 @@ export class CreatorBase extends Base
    * If you set this property to `false`, users can only use UI elements to edit logical expressions.
    *
    * Default value: `true`
-   *
    * @see showLogicTab
    */
   public allowEditExpressionsInTextEditor = true;
@@ -1438,11 +1507,6 @@ export class CreatorBase extends Base
   public set showInvisibleElementsInPreviewTab(val: boolean) { this.showInvisibleElementsInTestSurveyTab = val; }
 
   /**
-   * Set this property to true if you want to show "page selector" in the toolabar instead of "pages editor"
-   */
-  public showPageSelectorInToolbar = false;
-
-  /**
    * Specifies whether users can switch between UI themes in the Preview tab.
    *
    * Default value: `true`
@@ -1460,16 +1524,12 @@ export class CreatorBase extends Base
   set tabs(val: Array<TabbedMenuItem>) {
     this.tabbedMenu.actions = val;
   }
-  /**
-   * Returns the localized string by its id
-   * @param str the string id.
-   */
   public getLocString(str: string) {
     return editorLocalization.getString(str);
   }
 
   /**
-   * Specifies whether to show an error message if a survey is not saved in the database.
+   * Specifies whether to show an error message if a survey is not saved in a database.
    *
    * Default value: `true`
    */
@@ -1478,8 +1538,11 @@ export class CreatorBase extends Base
   protected onSetReadOnly(newVal: boolean) { }
 
   /**
-   * Gets or sets the survey locale. The default value it is empty, this means the 'en' locale is used.
-   * You can set it to 'de' - German, 'fr' - French and so on.
+   * Specifies the locale of the Survey Creator UI.
+   * 
+   * Default value: `""` (inherited from `editorLocalization.currentLocale`)
+   * 
+   * [Localization & Globalization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages (linkStyle))
    */
   public get locale(): string {
     return this.getPropertyValue("locale", editorLocalization.currentLocale);
@@ -1700,7 +1763,7 @@ export class CreatorBase extends Base
   @property() showSidebarValue: boolean = true;
   public onShowSidebarVisibilityChanged: CreatorEvent = new CreatorEvent();
   /**
-   * Specifies whether to show the sidebar that displays Property Grid.
+   * Specifies whether to show the sidebar that displays the Property Grid.
    * 
    * Default value: `true`
    * @see sidebarLocation
@@ -2046,7 +2109,8 @@ export class CreatorBase extends Base
   }
 
   /**
-   * The editing survey object (Survey.Survey)
+   * A [survey](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) being configured in the Designer tab.
+   * @see onDesignerSurveyCreated
    */
   public get survey(): SurveyModel {
     return this.surveyValue;
@@ -2350,11 +2414,6 @@ export class CreatorBase extends Base
     }
   }
 
-  /**
-   * Set JSON as text  into survey. Clear undo/redo states optionally.
-   * @param value JSON as text
-   * @param clearState default false. Set this parameter to true to clear undo/redo states.
-   */
   public changeText(value: string, clearState = false): void {
     this.setTextValue(value);
     if (!value) {
@@ -2430,7 +2489,15 @@ export class CreatorBase extends Base
   }
   private _stateValue: string;
   /**
-   * Returns the creator state. It may return empty string or "saving" and "saved".
+   * Indicates the state of Survey Creator.
+   * 
+   * Possible values:
+   * 
+   * - `""` - Survey Creator doesn't have unsaved changes.
+   * - `"modified"` - Survey Creator has unsaved changes.
+   * - `"saving"` - Changes are being saved.
+   * - `"saved"` - Changes are successfully saved.
+   * @see onModified
    */
   public get state(): string {
     return !!this._stateValue ? this._stateValue : "";
@@ -2481,15 +2548,18 @@ export class CreatorBase extends Base
     this.setModified(options);
   }
   /**
-   * This function triggers user notification (via the alert() function if no onNotify event handler added).
-   * @see onNotify
+   * Displays a toast notification with a specified message.
+   * 
+   * If you want to implement custom toast notification from scratch, handle the [`onNotify`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onNotify) event.
+   * @param message A message to display.
+   * @param type A notification type: `"info"` (default) or `"error"`.
    */
-  public notify(msg: string, type: "info" | "error" = "info") {
+  public notify(message: string, type: "info" | "error" = "info") {
     if (this.onNotify.isEmpty) {
-      this.notifier.notify(msg, type);
-      // alert(msg);
+      this.notifier.notify(message, type);
+      // alert(message);
     } else {
-      this.onNotify.fire(this, { message: msg });
+      this.onNotify.fire(this, { message: message });
     }
   }
 
@@ -2699,8 +2769,9 @@ export class CreatorBase extends Base
   }
 
   /**
-   * Copy a question to the active page
-   * @param question A copied Survey.Question
+   * Creates a copy of a specified question and inserts the copy next to this question.
+   * @param question A question to copy.
+   * @returns The instance of a new question.
    */
   public fastCopyQuestion(question: Base): IElement {
     var newElement = this.copyElement(question);
@@ -2753,8 +2824,11 @@ export class CreatorBase extends Base
     this.deleteObject(element);
   }
   /**
-   * Create a new page with the same elements and place it next to the current one. It returns the new created Survey.Page
-   * @param page A copied Survey.Page
+   * Creates a copy of a specified page and inserts the copy next to this page.
+   * @param page A [page](https://surveyjs.io/form-library/documentation/api-reference/page-model) to copy.
+   * @returns The [instance of a new page](https://surveyjs.io/form-library/documentation/api-reference/page-model).
+   * @see onPageAdding
+   * @see onPageAdded
    */
   public copyPage(page: PageModel): PageModel {
     var newPage = <PageModel>(<any>this.copyElement(page));
@@ -2973,8 +3047,9 @@ export class CreatorBase extends Base
     return isValid;
   }
   /**
-   * Deletes all custom translation strings for the passed locale from Survey Creator and from the generated survey JSON schema.
+   * Deletes all custom translation strings for a specified locale from Survey Creator and from the generated survey JSON schema.
    * @param locale A locale code (for example, "en").
+   * @see locale
    */
   public deleteLocaleStrings(locale: string): void {
     const translation = new Translation(this.survey);
@@ -3038,13 +3113,15 @@ export class CreatorBase extends Base
     return json;
   }
   /**
-   * Open file chooser dialog
-   * @param input file input element
-   * @param onFilesChosen a call back function to process chosen files
+   * Opens a dialog window for users to select files.
+   * @param input A [file input HTML element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement).
+   * @param callback A callback function that you can use to process selected files. Accepts an array of JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank">File</a> objects.
+   * @see onOpenFileChooser
+   * @see onUploadFile
    */
   public chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void,
+    callback: (files: File[]) => void,
     context?: { element: SurveyElement, item?: ItemValue }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
@@ -3057,7 +3134,7 @@ export class CreatorBase extends Base
         for (let i = 0; i < input.files.length; i++) {
           files.push(input.files[i]);
         }
-        onFilesChosen(files);
+        callback(files);
       };
       input.click();
     } else {
@@ -3065,31 +3142,33 @@ export class CreatorBase extends Base
         input: input,
         element: context && context.element || this.survey,
         item: context && context.item,
-        callback: onFilesChosen
+        callback: callback
       });
     }
   }
   /**
-   * Upload the files on a server
-   * @param files files to upload
-   * @param uploadingCallback a call back function to get the status on uploading the file and operation result - URI of the uploaded file
+   * Uploads files to a server.
+   * @param files An array of JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank">File</a> objects that represent files to upload.
+   * @param question A [question instance](https://surveyjs.io/form-library/documentation/api-reference/question) for which files are uploaded.
+   * @param callback A callback function that indicates the upload status&mdash;"success" or "error"&mdash;as the first argument. If a file is uploaded successfully, the second argument contains the file's URL.
+   * @see onUploadFile
    */
   public uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ) {
     if (this.onUploadFile.isEmpty) {
       let fileReader = new FileReader();
       fileReader.onload = (e) => {
-        uploadingCallback("success", fileReader.result);
+        callback("success", fileReader.result);
       };
       fileReader.readAsDataURL(files[0]);
     } else {
       this.onUploadFile.fire(this, {
         question: question,
         files: files || [],
-        callback: uploadingCallback
+        callback: callback
       });
     }
   }
@@ -3520,7 +3599,7 @@ export class CreatorBase extends Base
   /**
    * A delay between changing survey settings and saving the survey JSON schema, measured in milliseconds. Applies only when the [`isAutoSave`](#isAutoSave) property is `true`.
    * 
-   * Default value: 500 (taken from `settings.autoSave.delay`)
+   * Default value: 500 (inherited from `settings.autoSave.delay`)
    * 
    * If a user changes the settings once again during the delay, only the latest version will be saved.
    */
@@ -3859,13 +3938,13 @@ export class CreatorBase extends Base
   }) isMobileView: boolean;
   @property({ defaultValue: false }) isTouch;
   /**
-   * Specifies Toolbox location.
+   * Specifies the Toolbox location.
    * 
    * Possible values:
    * 
-   * - `"left"` (default) - Displays Toolbox on the left side of the design surface.
-   * - `"right"` - Displays Toolbox on the right side of the design surface.
-   * - `"sidebar"` - Displays Toolbox as an overlay on top of Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify Property Grid position.
+   * - `"left"` (default) - Displays the Toolbox on the left side of the design surface.
+   * - `"right"` - Displays the Toolbox on the right side of the design surface.
+   * - `"sidebar"` - Displays the Toolbox as an overlay on top of the Property Grid. Use the [`sidebarLocation`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#sidebarLocation) property to specify the Property Grid position.
    */
   @property({
     defaultValue: "left", onSet: (newValue, target: CreatorBase) => {
@@ -3875,7 +3954,7 @@ export class CreatorBase extends Base
     }
   }) toolboxLocation: toolboxLocationType;
   /**
-   * Specifies the position of the sidebar that displays Property Grid. Applies only when [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) is `true`.
+   * Specifies the position of the sidebar that displays the Property Grid. Applies only when [`showSidebar`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showSidebar) is `true`.
    * 
    * Possible values:
    * 
@@ -3910,6 +3989,11 @@ export class CreatorBase extends Base
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
 }
+/**
+ * A class with properties, methods, and events that allow you to configure Survey Creator and manage its elements.
+ * 
+ * [View Demo](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/ (linkStyle))
+ */
 export class SurveyCreatorModel extends CreatorBase { }
 
 export class StylesManager {
