@@ -15,14 +15,6 @@
       }"
     >
       <div
-        class="svd-simulator-frame"
-        :style="{
-          width: simulatorFrame.landscapedFrameWidth + 'px',
-          height: simulatorFrame.landscapedFrameHeight + 'px',
-        }"
-        :class="simulatorFrame.cssClass"
-      ></div>
-      <div
         class="svd-simulator"
         :style="{
           width: simulatorFrame.deviceWidth + 'px',

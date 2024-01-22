@@ -129,10 +129,10 @@ export class SurveySimulatorModel extends Base {
 
     const deviceWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
     const deviceHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
-    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.frameHeight : device.frameWidth) / device.cssPixelRatio;
-    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.frameWidth : device.frameHeight) / device.cssPixelRatio;
-    const frameWidth = deviceLandscapedFrameWidth * scale;
-    const frameHeight = deviceLandscapedFrameHeight * scale;
+    const deviceLandscapedFrameWidth = (this.landscapeOrientation ? device.height : device.width) / device.cssPixelRatio;
+    const deviceLandscapedFrameHeight = (this.landscapeOrientation ? device.width : device.height) / device.cssPixelRatio;
+    const frameWidth = deviceLandscapedFrameWidth * scale + 2 * (this.landscapeOrientation ? 64 : 16);
+    const frameHeight = deviceLandscapedFrameHeight * scale + 2 * (this.landscapeOrientation ? 16 : 64);
 
     return {
       scale: this.simulatorScaleEnabled ? scale /* * device.cssPixelRatio */ : 1,
@@ -192,8 +192,6 @@ export var simulatorDevices = {
   //   ppi: 326,
   //   width: 640,
   //   height: 960,
-  //   frameWidth: 730,
-  //   frameHeight: 1340,
   //   deviceType: "phone",
   //   title: "iPhone",
   //   cssClass: "svd-simulator-iphone4"
@@ -203,8 +201,6 @@ export var simulatorDevices = {
   //   ppi: 326,
   //   width: 640,
   //   height: 1136,
-  //   frameWidth: 750,
-  //   frameHeight: 1500,
   //   deviceType: "phone",
   //   title: "iPhone 5",
   //   cssClass: "svd-simulator-iphone5",
@@ -214,8 +210,6 @@ export var simulatorDevices = {
     ppi: 326,
     width: 750,
     height: 1334,
-    frameWidth: 960,
-    frameHeight: 1750,
     deviceType: "phone",
     title: "iPhone 6",
     cssClass: "svd-simulator-iphone6",
@@ -225,8 +219,6 @@ export var simulatorDevices = {
     ppi: 401,
     width: 1080,
     height: 1920,
-    frameWidth: 1330,
-    frameHeight: 2550,
     deviceType: "phone",
     title: "iPhone 6 Plus",
     cssClass: "svd-simulator-iphone6plus",
@@ -236,8 +228,6 @@ export var simulatorDevices = {
     ppi: 326,
     width: 750,
     height: 1334,
-    frameWidth: 990,
-    frameHeight: 1860,
     deviceType: "phone",
     title: "iPhone 8",
     cssClass: "svd-simulator-iphone8",
@@ -247,8 +237,6 @@ export var simulatorDevices = {
     ppi: 401,
     width: 1080,
     height: 1920,
-    frameWidth: 1330,
-    frameHeight: 2550,
     deviceType: "phone",
     title: "iPhone 8 Plus",
     cssClass: "svd-simulator-iphone8plus",
@@ -258,8 +246,6 @@ export var simulatorDevices = {
     ppi: 458,
     width: 1125,
     height: 2436,
-    frameWidth: 1330,
-    frameHeight: 2680,
     deviceType: "phone",
     title: "iPhone X",
     cssClass: "svd-simulator-iphonex",
@@ -269,8 +255,6 @@ export var simulatorDevices = {
     ppi: 458,
     width: 1242,
     height: 2688,
-    frameWidth: 1410,
-    frameHeight: 2980,
     deviceType: "phone",
     title: "iPhone X Max",
     cssClass: "svd-simulator-iphonexmax",
@@ -280,8 +264,6 @@ export var simulatorDevices = {
     ppi: 264,
     width: 1536,
     height: 2048,
-    frameWidth: 1837,
-    frameHeight: 2563,
     deviceType: "tablet",
     title: "iPad",
     cssClass: "svd-simulator-ipad",
@@ -291,8 +273,6 @@ export var simulatorDevices = {
     ppi: 326,
     width: 1536,
     height: 2048,
-    frameWidth: 1890,
-    frameHeight: 2600,
     deviceType: "tablet",
     title: "iPad Mini",
     cssClass: "svd-simulator-ipadmini",
@@ -302,8 +282,6 @@ export var simulatorDevices = {
     ppi: 264,
     width: 1688,
     height: 2388,
-    frameWidth: 2008,
-    frameHeight: 2980,
     deviceType: "tablet",
     title: 'iPad Pro 11"',
     cssClass: "svd-simulator-ipadpro",
@@ -313,8 +291,6 @@ export var simulatorDevices = {
     ppi: 264,
     width: 2048,
     height: 2732,
-    frameWidth: 2360,
-    frameHeight: 3300,
     deviceType: "tablet",
     title: 'iPad Pro 12,9"',
     cssClass: "svd-simulator-ipadpro13",
@@ -324,8 +300,6 @@ export var simulatorDevices = {
     ppi: 316,
     width: 720,
     height: 1280,
-    frameWidth: 850,
-    frameHeight: 1630,
     deviceType: "phone",
     title: "Android Phone",
     cssClass: "svd-simulator-androidphone",
@@ -335,8 +309,6 @@ export var simulatorDevices = {
     ppi: 149,
     width: 800,
     height: 1280,
-    frameWidth: 1070,
-    frameHeight: 1480,
     deviceType: "tablet",
     title: "Android Tablet",
     cssClass: "svd-simulator-androidtablet",
@@ -346,8 +318,6 @@ export var simulatorDevices = {
     ppi: 294,
     width: 720,
     height: 1280,
-    frameWidth: 1152,
-    frameHeight: 2030,
     deviceType: "phone",
     title: "Windows 10 Phone",
     cssClass: "svd-simulator-win10phone",
@@ -357,8 +327,6 @@ export var simulatorDevices = {
     ppi: 148,
     width: 768,
     height: 1366,
-    frameWidth: 1040,
-    frameHeight: 1620,
     deviceType: "tablet",
     title: "MS Surface",
     cssClass: "svd-simulator-mssurface",
