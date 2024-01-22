@@ -186,10 +186,10 @@ export class UndoRedoController extends Base {
    * The event is called before undo happens.
    * options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
-  public onBeforeUndo: CreatorEvent = new CreatorEvent();
+  public onBeforeUndo: CreatorEvent<any> = new CreatorEvent<any>();
   /**
     * The event is called before redo happens.
     * options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
-  public onBeforeRedo: CreatorEvent = new CreatorEvent();
+  public onBeforeRedo: CreatorEvent<any> = new CreatorEvent<any>();
 }
