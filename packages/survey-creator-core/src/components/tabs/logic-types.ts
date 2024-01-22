@@ -1,7 +1,7 @@
 import {
   SurveyModel,
   Base,
-  HtmlConditionItem,
+  ItemValue,
   SurveyTrigger,
   Serializer,
   Helpers,
@@ -104,6 +104,10 @@ export class SurveyLogicType {
     obj["survey"] = this.survey;
     if ((<any>obj).setOwner) {
       (<any>obj).setOwner(this.survey);
+    }
+    //Do not fire notification about changes to our creator.survey model
+    if(obj instanceof ItemValue || obj instanceof SurveyTrigger) {
+      obj["isGhost"] = true;
     }
     return obj;
   }
