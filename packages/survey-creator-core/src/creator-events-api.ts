@@ -1,4 +1,4 @@
-import { Base, IAction, JsonObjectProperty, PopupBaseViewModel, Question, SurveyModel } from "survey-core";
+import { Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, PopupBaseViewModel, Question, SurveyModel } from "survey-core";
 
 export interface ElementDeletingEvent {
   /**
@@ -125,7 +125,7 @@ export interface DefineElementMenuItemsEvent {
   /**
    * An array of adorner actions. You can add, modify, or remove actions from this array.
    */
-  items: Array<IAction>;
+  items: IAction[];
 }
 export interface ShowingPropertyEvent {
   /**
@@ -154,7 +154,7 @@ export interface PropertyGridSurveyCreatedEvent {
   /**
    * A survey element being edited in the Property Grid.
    */
-  object: Base;
+  obj: Base;
   /**
    * A survey that respresents the Property Grid. Use the `SurveyModel` API to modify the survey.
    */
@@ -176,7 +176,7 @@ export interface PropertyEditorUpdateTitleActionsEvent {
   /**
    * A survey element being edited in the Property Grid.
    */
-  object: Base;
+  obj: Base;
   /**
    * A property editor that contains the title actions. It is an object of the [`Question`](https://surveyjs.io/form-library/documentation/question) type because the Property Grid is [built upon a regular survey](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys).
    */
@@ -188,10 +188,10 @@ export interface PropertyEditorUpdateTitleActionsEvent {
   /**
    * A list of title actions.
    */
-  titleActions: Array<IAction>;
+  titleActions: IAction[];
 }
 
-export interface onPropertyGridShowModalEvent {
+export interface PropertyGridShowModalEvent {
   /**
    * The instance of a survey element (question or panel) that users are configuring in the Property Grid.
    */
@@ -212,4 +212,179 @@ export interface onPropertyGridShowModalEvent {
    * A pop-up window model. Use `options.popupModel.footerToolbar` to access the actions at the bottom of the window.
    */
   popupModel: PopupBaseViewModel;
+}
+
+export interface CollectionItemAllowOperationsEvent {
+  /**
+   * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   */
+  obj: Base;
+  /**
+   * A property that contains the collection to which the target item belongs.
+   */
+  property: JsonObjectProperty;
+  /**
+   * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   */
+  propertyName: string;
+  /**
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
+   */
+  collection: Base[];
+  /**
+   * A target collection item.
+   */
+  item: Base;
+  /**
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being added to the collection.
+   */
+  allowAdd: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being deleted.
+   */
+  allowDelete: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to prevent the target item from being edited.
+   */
+  allowEdit: boolean;
+}
+
+export interface ItemValueAddedEvent {
+  /**
+   * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
+   */
+  obj: Base;
+  /**
+   * The property's name: `columns`, `rows`, `choices`, `rateValues`, etc.
+   */
+  propertyName: string;
+  /**
+   * A new collection item. Overwrite its `value` or `text` property if you want to change the item's value or display text.
+   */
+  newItem: ItemValue;
+  /**
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.). This array does not include `options.newItem`.
+   */
+  itemValues: ItemValue[];
+}
+
+export interface MatrixColumnAddedEvent {
+  /**
+   * A Multi-Select or Dynamic Matrix to which a new column is being added.
+   */
+  matrix: Question;
+  /**
+   * A new matrix column. Edit its properties if you want to modify this column.
+   */
+  newColumn: MatrixDropdownColumn;
+  /**
+   * An array of matrix columns. This array does not include `options.newColumn`.
+   */
+  columns: MatrixDropdownColumn[];
+}
+
+export interface SetPropertyEditorOptions {
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
+   */
+  allowAddRemoveItems: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to delete all table rows.
+   */
+  allowRemoveAllItems: boolean;
+  /**
+   * A Boolean property that you can set to `false` if you want to disallow users to edit table content as text in a pop-up window.
+   */
+  allowBatchEdit: boolean;
+}
+export interface SetPropertyEditorOptionsEvent {
+  /**
+   * A survey element (survey, page, panel, question) for which the table property editor is created.
+   */
+  obj: Base;
+  /**
+   * The name of the property with which the editor is associated: [`"columns"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns), [`"rows"`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows), [`"choices"`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices), etc.
+   */
+  propertyName: string;
+  /**
+   * options that you can modify
+   */
+  editorOptions: SetPropertyEditorOptions;
+}
+
+export interface PropertyValidationCustomErrorEvent {
+  /**
+   * A survey element (survey, page, panel, question) whose property is being validated.
+   */
+  obj: Base;
+  /**
+   * The name of a property being validated.
+   */
+  propertyName: string;
+  /**
+   * The property value.
+   */
+  value: any;
+  /**
+   * An error message you want to display. If `options.value` is valid, this parameter contains an empty string.
+   */
+  error: string;
+}
+
+export interface PropertyValueChangingEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property is being edited.
+   */
+  obj: Base;
+  /**
+   * The name of a property being modified.
+   */
+  propertyName: string;
+  /**
+   * An old property value.
+   */
+  value: any;
+  /**
+   * A new property value. Modify this parameter if you want to override the property value.
+   */
+  newValue: any;
+}
+
+export interface SurveyPropertyValueChangedEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) whose property has changed.
+   */
+  obj: Base;
+  /**
+   * The name of the modified property.
+   */
+  propertyName: string;
+  /**
+   * A new property value.
+   */
+  value: any;
+}
+
+export interface ConditionQuestionsGetListEvent {
+  /**
+   * A survey element (question, panel, page, or the survey itself) for which the condition editor is displayed.
+   */
+  obj: Base;
+  /**
+   * The name of a property being configured: `enableIf`, `requiredIf`, `visibleIf`, etc.
+   */
+  propertyName: string;
+  /**
+   * A condition editor instance.
+   */
+  editor: any;
+  /**
+   * A list of questions available for selection.
+   */
+  list: any;
+  /**
+   * `"asc"` (default) | `"none"`\
+   * The sort order of questions within the list. Set this property to `"none"` to disable sorting.
+   */
+  sortOrder: string;
 }
