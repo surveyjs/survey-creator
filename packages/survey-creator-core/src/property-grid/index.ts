@@ -1431,8 +1431,8 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
-    question.onChooseFilesCallback = ((input, onFilesChosen) => {
-      options.chooseFiles(input, onFilesChosen);
+    question.onChooseFilesCallback = ((input, callback) => {
+      options.chooseFiles(input, callback);
     });
   }
 

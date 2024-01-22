@@ -771,7 +771,7 @@ export class ThemeBuilder extends Base {
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
+    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => this.surveyProvider.chooseFiles(input, callback); });
   }
 
   private getCoverJson(headerSettings: any): any {
