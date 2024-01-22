@@ -63,7 +63,7 @@ test("mobile iphone", async (t) => {
     await t
       .click(getTabbedMenuItemByText(creatorTabPreviewName))
       .click(Selector("#deviceSelector button"))
-      .click(Selector(".sv-list__item").withText("iPhone 6"));
+      .click(Selector(".sv-list__item").withText("iPhone SE"));
 
     await takeElementScreenshot("test-tab-iphone.png", Selector(".svd-simulator-wrapper"), t, comparer);
   });
@@ -357,7 +357,7 @@ test("dropdown popup in simulator", async (t) => {
 
     await t.click(getTabbedMenuItemByText(creatorTabPreviewName));
     await t.click(Selector('[title="Select device type"]'));
-    await t.click(Selector("span").withText("iPhone X"));
+    await t.click(Selector("span").withText("iPhone SE"));
     await t.click(Selector('[data-name="nps-score"]'));
     await t.click(Selector("li.sv-list__item.sd-list__item span").withText("2"));
     await t.click(Selector('[data-name="nps-score"]'));
