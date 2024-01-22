@@ -29,7 +29,8 @@ import {
   surveyLocalization,
   AdaptiveActionContainer,
   QuestionCommentModel,
-  QuestionImagePickerModel
+  QuestionImagePickerModel,
+  ComponentCollection
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -2948,4 +2949,30 @@ test("Allow delete all pages by default", () => {
   survey.currentPage = survey.pages[0];
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[0])).toBeTruthy();
   expect(pagesQuestion.canRemoveRow(pagesQuestion.visibleRows[1])).toBeTruthy();
+});
+test("Setup correct categories for dynamic properties in components", () => {
+  ComponentCollection.Instance.add({
+    name: "customdropdown",
+    inheritBaseProps: ["allowClear", "showOtherItem"],
+    questionJSON: {
+      type: "dropdown",
+      choices: [1, 2, 3]
+    },
+  });
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    elements: [
+      { type: "customdropdown", name: "q1", allowClear: false, showOtherItem: true }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  const visibleQuestion = propertyGrid.survey.getQuestionByName("visible");
+  const allowClearQuestion = propertyGrid.survey.getQuestionByName("allowClear");
+  const showOtherItemQuestion = propertyGrid.survey.getQuestionByName("showOtherItem");
+  expect(visibleQuestion.parent.name).toBe("general");
+  expect(allowClearQuestion.parent.name).toBe("choices");
+  expect(showOtherItemQuestion.parent.name).toBe("choices");
+  ComponentCollection.Instance.clear();
 });
