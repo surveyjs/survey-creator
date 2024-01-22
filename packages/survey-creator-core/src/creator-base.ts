@@ -751,12 +751,7 @@ export class CreatorBase extends Base
    * The sort order of questions within the list. Set this property to `"none"` to disable sorting.
    */
   public onConditionQuestionsGetList: CreatorEvent = new CreatorEvent();
-  /**
-   * Use this event to modify the title in a condition editor. The title is changing during editing. In case of empty or incorrect expression it tells that expression is incorrect
-   *- sender the survey creator object that fires the event.
-   *- options.expression the current expression. If the expression is empty or incorrect then the value is empty.
-   *- options.title the default value of the title. You can change the default value.
-   */
+
   public onConditionGetTitle: CreatorEvent = new CreatorEvent();
   /**
    * An event that is raised when Survey Creator populates a condition editor with operators. Use this event to hide individual condition operators.
