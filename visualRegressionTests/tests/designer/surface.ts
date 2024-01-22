@@ -97,6 +97,44 @@ test("Test question type converter on page for panel", async (t) => {
   });
 });
 
+test("Test question type converter on page for panel", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 800);
+
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+
+    await t
+      .scroll(Selector(".svc-tab-designer"), "bottom")
+      .expect(Selector(".svc-panel__question-type-selector").visible).ok()
+      .click(Selector(".svc-panel__question-type-selector"))
+      .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await takeElementScreenshot("convert-to-popup-panel-not-empty.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
 test("Test question type converter (mobile)", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(600, 900);
