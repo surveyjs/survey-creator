@@ -338,8 +338,8 @@ export class SurveyQuestionEditorDefinition {
     expression: {
       properties: [
         "expression",
-        "currency",
         "displayStyle",
+        "currency",
         "format",
         "maximumFractionDigits",
         "minimumFractionDigits",
