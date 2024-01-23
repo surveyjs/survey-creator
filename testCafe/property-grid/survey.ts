@@ -85,7 +85,7 @@ test("Check showInMultiple columns editing", async (t) => {
   const question = Selector(".sv-string-editor").withText("Question 1");
   const columns = getPropertyGridCategory("Columns");
   const edit = Selector("button[title='Edit']");
-  const showInMultiple = Selector("input[aria-label='Show in multiple columns']");
+  const showInMultiple = Selector("input[name='showInMultipleColumns']");
   const radioMatrixCell = Selector("td:nth-of-type(2) .svc-matrix-cell");
   const controlButton = radioMatrixCell.find(".svc-matrix-cell__question-controls");
   await t
