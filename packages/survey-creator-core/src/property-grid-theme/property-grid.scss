@@ -108,6 +108,11 @@
   // flex-grow: 0;
   // margin-left: 0;
   // padding-left: 0;
+
+  .spg-action-button--icon {
+    opacity: 0.5;
+  }
+
   svg {
     fill: $foreground-dim-light;
   }
