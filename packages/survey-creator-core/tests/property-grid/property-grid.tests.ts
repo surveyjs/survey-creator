@@ -2976,3 +2976,31 @@ test("Setup correct categories for dynamic properties in components", () => {
   expect(showOtherItemQuestion.parent.name).toBe("choices");
   ComponentCollection.Instance.clear();
 });
+test("Setup correct categories for dynamic properties in components, #2", () => {
+  ComponentCollection.Instance.add({
+    name: "customtext",
+    inheritBaseProps: ["placeholder", "inputType"],
+    questionJSON: {
+      type: "text"
+    },
+  });
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    elements: [
+      { type: "customtext", name: "q1", placeholder: "abc" }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  const placeholderQuestion = propertyGrid.survey.getQuestionByName("placeholder");
+  const inputTypeQuestion = propertyGrid.survey.getQuestionByName("inputType");
+  expect(placeholderQuestion.parent.name).toBe("general");
+  expect(placeholderQuestion.isVisible).toBeTruthy();
+  expect(placeholderQuestion.title).toBe("Input area placeholder");
+  expect(inputTypeQuestion.parent.name).toBe("general");
+  const panel = propertyGrid.survey.getPanelByName("general");
+  expect(panel.questions[0].name).toBe("name");
+  expect(panel.questions[1].name).toBe("title");
+  ComponentCollection.Instance.clear();
+});

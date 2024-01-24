@@ -42,15 +42,15 @@ import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
-import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question) return false;
   const obj = this.question.obj;
   const prop = this.question.property;
   if (!obj || !prop) return false;
+  const originalProp = Serializer.getOriginalProperty(obj, prop.name);
   if (!Serializer.hasOriginalProperty(obj, prop.name)) return false;
-  return prop.visibleIf(obj);
+  return prop.isVisible("", obj);
 }
 function propertyEnableIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
