@@ -41,7 +41,7 @@ import { PageAdorner } from "./components/page";
 import { ElementDeletingEvent, GetPropertyReadOnlyEvent, GetObjectDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent, DefineElementMenuItemsEvent,
   ShowingPropertyEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent, PropertyGridShowModalEvent, CollectionItemAllowOperationsEvent,
   ItemValueAddedEvent, MatrixColumnAddedEvent, SetPropertyEditorOptionsEvent, PropertyValidationCustomErrorEvent, PropertyValueChangingEvent, SurveyPropertyValueChangedEvent,
-  ConditionQuestionsGetListEvent } from "./creator-events-api";
+  ConditionQuestionsGetListEvent, GetConditionOperatorEvent, LogicItemDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent } from "./creator-events-api";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -492,131 +492,29 @@ export class CreatorBase extends Base
   public onConditionGetTitle: CreatorEvent<any> = new CreatorEvent<any>();
   /**
    * An event that is raised when Survey Creator populates a condition editor with operators. Use this event to hide individual condition operators.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.questionName`: `string`\
-   * The name of a question for which conditions are displayed.
-   * - `options.questionName`: `string`\
-   * The name of a question for which conditions are displayed.
-   * - `options.operator`: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`\
-   * A condition opeator for which the event is raised.
-   * - `options.show`: `boolean`\
-   * A Boolean property that you can set to `false` if you want to hide the condition operator.
    */
-  public onGetConditionOperator: CreatorEvent<any> = new CreatorEvent<any>();
+  public onGetConditionOperator: CreatorEvent<GetConditionOperatorEvent> = new CreatorEvent<GetConditionOperatorEvent>();
   /**
    * An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.expression`: `string`\
-   * A logical expression associated with the logic rule. 
-   * - `options.expressionText`: `string`\
-   * The same expression in a user-friendly format.
-   * - `options.logicItem`: `SurveyLogicItem`\
-   * An object that describes the logic rule. Contains an array of actions and other properties.
-   * - `options.text`: `string`\
-   * A user-friendly display text for the logic rule. Modify this parameter if you want to override the display text.
    */
-  public onLogicItemDisplayText: CreatorEvent<any> = new CreatorEvent<any>();
+  public onLogicItemDisplayText: CreatorEvent<LogicItemDisplayTextEvent> = new CreatorEvent<LogicItemDisplayTextEvent>();
   /**
     * An event that is raised when users modify survey or theme settings.
-    * 
-    * Parameters:
-    * 
-    * - `sender`: `CreatorBase`\
-    * A Survey Creator instance that raised the event.
-    * 
-    * - `options.type`: `"ADDED_FROM_TOOLBOX"` | `"PAGE_ADDED"` | `"PAGE_MOVED"` | `"QUESTION_CONVERTED"` | `"QUESTION_CHANGED_BY_EDITOR"` | `"PROPERTY_CHANGED"` | `"ELEMENT_REORDERED"` | `"OBJECT_DELETED"` | `"VIEW_TYPE_CHANGED"` | `"DO_DROP"` | `"TRANSLATIONS_CHANGED"` | `"JSON_EDITOR"` | `"THEME_MODIFIED"`\
-    * A value that indicates the modification.
-    * 
-    * Depending on the `options.type` value, the `options` object contains parameters listed below:
-    * 
-    * `options.type`: `"ADDED_FROM_TOOLBOX"`
-    * - `options.question` - An added question.
-    * 
-    * `options.type`: `"PAGE_ADDED"`
-    * - `options.newValue` - An added page.
-    *
-    * `options.type`: `"PAGE_MOVED"`
-    * - `options.page` - A moved page.
-    * - `options.indexFrom` - A previous index.
-    * - `options.indexTo` - A current index.
-    *
-    * `options.type`: `"QUESTION_CONVERTED"`
-    * - `options.className` - The name of a class to which a question has been converted.
-    * - `options.oldValue` - An object of a previous class.
-    * - `options.newValue` - An object of a class specified by `options.className`.
-    *
-    * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
-    * - `options.question` - A question that has been edited in a pop-up editor.
-    *
-    * `options.type`: `"PROPERTY_CHANGED"`
-    * - `options.name` - The name of the changed property.
-    * - `options.target` - An object that contains the changed property.
-    * - `options.oldValue` - A previous value of the changed property.
-    * - `options.newValue` - A new value of the changed property.
-    *
-    * `options.type`: `"ELEMENT_REORDERED"`
-    * - `options.arrayName` - The name of the changed array.
-    * - `options.parent` - An object that contains the changed array.
-    * - `options.element` - A reordered element.
-    * - `options.indexFrom` - A previous index.
-    * - `options.indexTo` - A current index.
-    *
-    * `options.type`: `"OBJECT_DELETED"`
-    * - `options.target` - A deleted object.
-    *
-    * `options.type`: `"VIEW_TYPE_CHANGED"`
-    * - `options.newType` - A current view: `"editor"` or `"designer"`.
-    *
-    * `options.type`: `"DO_DROP"`
-    * - `options.page` - A parent page of the dragged element.
-    * - `options.source` - A dragged element.
-    * - `options.target` - A drop target.
-    * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
     * @see state
     */
-  public onModified: CreatorEvent<any> = new CreatorEvent<any>();
+  public onModified: CreatorEvent<ModifiedEvent> = new CreatorEvent<ModifiedEvent>();
   /**
    * An event that is raised when users add a question to the survey. Use this event to customize the question.
    * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
-   * The question users added.
-   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * A page to which the question was added.
-   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"` | `"ELEMENT_CONVERTED"`\
-   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
-   * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onQuestionAdded: CreatorEvent<any> = new CreatorEvent<any>();
+  public onQuestionAdded: CreatorEvent<QuestionAddedEvent> = new CreatorEvent<QuestionAddedEvent>();
   /**
    * An event that is raised when users add a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element to the survey. Use this event to customize the panel.
    * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.panel`: [`PanelModel`](https://surveyjs.io/form-library/documentation/api-reference/panel-model)\
-   * The panel users added.
-   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * A page to which the panel was added.
-   * - `options.reason`: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`\
-   * A value that indicates how the panel was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
-   * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onPanelAdded: CreatorEvent<any> = new CreatorEvent<any>();
+  public onPanelAdded: CreatorEvent<PanelAddedEvent> = new CreatorEvent<PanelAddedEvent>();
   /**
    * An event that is raised when a new page is added to the survey. Use this event to customize the page.
    * 

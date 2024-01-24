@@ -1,4 +1,5 @@
-import { Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, PopupBaseViewModel, Question, SurveyModel } from "survey-core";
+import { Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, PageModel, PanelModel, PopupBaseViewModel, Question, SurveyModel } from "survey-core";
+import { SurveyLogicItem } from "./components/tabs/logic-items";
 
 export interface ElementDeletingEvent {
   /**
@@ -387,4 +388,146 @@ export interface ConditionQuestionsGetListEvent {
    * The sort order of questions within the list. Set this property to `"none"` to disable sorting.
    */
   sortOrder: string;
+}
+
+export interface GetConditionOperatorEvent {
+  /**
+   * The name of a question for which conditions are displayed.
+   */
+  questionName: string;
+  /**
+   * A condition opeator for which the event is raised.
+   * Possible values are: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`
+   */
+  operator: string;
+  /**
+   * A Boolean property that you can set to `false` if you want to hide the condition operator.
+   */
+  show: boolean;
+}
+
+export interface LogicItemDisplayTextEvent {
+  /**
+   * A logical expression associated with the logic rule. 
+   */
+  expression: string;
+  /**
+   * The same expression in a user-friendly format.
+   */
+  expressionText: string;
+  /**
+   * An object that describes the logic rule. Contains an array of actions and other properties.
+   */
+  logicItem: SurveyLogicItem;
+  /**
+   * A user-friendly display text for the logic rule. Modify this parameter if you want to override the display text.
+   */
+  text: string;
+}
+
+export interface ModifiedEvent {
+  /*
+  * Possible values: `"ADDED_FROM_TOOLBOX"` | `"PAGE_ADDED"` | `"PAGE_MOVED"` | `"QUESTION_CONVERTED"` | `"QUESTION_CHANGED_BY_EDITOR"` | `"PROPERTY_CHANGED"` | `"ELEMENT_REORDERED"` | `"OBJECT_DELETED"` | `"VIEW_TYPE_CHANGED"` | `"DO_DROP"` | `"TRANSLATIONS_CHANGED"` | `"JSON_EDITOR"` | `"THEME_MODIFIED"`\
+  * A value that indicates the modification.
+  * 
+  * Depending on the `options.type` value, the `options` object contains parameters listed below:
+  * 
+  * `options.type`: `"ADDED_FROM_TOOLBOX"`
+  * - `options.question` - An added question.
+  * 
+  * `options.type`: `"PAGE_ADDED"`
+  * - `options.newValue` - An added page.
+  *
+  * `options.type`: `"PAGE_MOVED"`
+  * - `options.page` - A moved page.
+  * - `options.indexFrom` - A previous index.
+  * - `options.indexTo` - A current index.
+  *
+  * `options.type`: `"QUESTION_CONVERTED"`
+  * - `options.className` - The name of a class to which a question has been converted.
+  * - `options.oldValue` - An object of a previous class.
+  * - `options.newValue` - An object of a class specified by `options.className`.
+  *
+  * `options.type`: `"QUESTION_CHANGED_BY_EDITOR"`
+  * - `options.question` - A question that has been edited in a pop-up editor.
+  *
+  * `options.type`: `"PROPERTY_CHANGED"`
+  * - `options.name` - The name of the changed property.
+  * - `options.target` - An object that contains the changed property.
+  * - `options.oldValue` - A previous value of the changed property.
+  * - `options.newValue` - A new value of the changed property.
+  *
+  * `options.type`: `"ELEMENT_REORDERED"`
+  * - `options.arrayName` - The name of the changed array.
+  * - `options.parent` - An object that contains the changed array.
+  * - `options.element` - A reordered element.
+  * - `options.indexFrom` - A previous index.
+  * - `options.indexTo` - A current index.
+  *
+  * `options.type`: `"OBJECT_DELETED"`
+  * - `options.target` - A deleted object.
+  *
+  * `options.type`: `"VIEW_TYPE_CHANGED"`
+  * - `options.newType` - A current view: `"editor"` or `"designer"`.
+  *
+  * `options.type`: `"DO_DROP"`
+  * - `options.page` - A parent page of the dragged element.
+  * - `options.source` - A dragged element.
+  * - `options.target` - A drop target.
+  * - `options.newElement` - A new element. This parameter is defined only if users drag a question or panel from the Toolbox.
+  */
+  type: string;
+  question?: Question;
+
+  oldValue?: any;
+  newValue?: any;
+
+  page?: PageModel;
+  indexFrom?: number;
+  indexTo?: number;
+
+  className?: string;
+
+  source?: Base;
+  target?: Base;
+
+  parent?: Base;
+  element?: Base;
+  newElement?: Base;
+
+  arrayName?: string;
+
+  newType?: string;
+}
+
+export interface QuestionAddedEvent {
+  /**
+   * The question users added.
+   */
+  question: Question;
+  /**
+   * A page to which the question was added.
+   */
+  page: PageModel;
+  /**
+   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
+   * Possible values: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"` | `"ELEMENT_CONVERTED"`
+   */
+  reason: string;
+}
+
+export interface PanelAddedEvent {
+  /**
+   * The panel users added.
+   */
+  panel: PanelModel;
+  /**
+   * A page to which the panel was added.
+   */
+  page: PageModel;
+  /**
+   * A value that indicates how the panel was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
+   * Possible values: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
+   */
+  reason: string;
 }
