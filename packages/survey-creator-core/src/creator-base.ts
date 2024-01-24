@@ -38,10 +38,15 @@ import { StringEditorConnector } from "./components/string-editor";
 import { ThemeTabPlugin } from "./components/tabs/theme-plugin";
 import { DragDropSurveyElements } from "./survey-elements";
 import { PageAdorner } from "./components/page";
-import { ElementDeletingEvent, GetPropertyReadOnlyEvent, GetObjectDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent, DefineElementMenuItemsEvent,
-  ShowingPropertyEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent, PropertyGridShowModalEvent, CollectionItemAllowOperationsEvent,
-  ItemValueAddedEvent, MatrixColumnAddedEvent, SetPropertyEditorOptionsEvent, PropertyValidationCustomErrorEvent, PropertyValueChangingEvent, SurveyPropertyValueChangedEvent,
-  ConditionQuestionsGetListEvent, GetConditionOperatorEvent, LogicItemDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent } from "./creator-events-api";
+import { ElementDeletingEvent, GetPropertyReadOnlyEvent, GetObjectDisplayNameEvent, HtmlToMarkdownEvent, ElementAllowOperationsEvent,
+  DefineElementMenuItemsEvent, ShowingPropertyEvent, PropertyGridSurveyCreatedEvent, PropertyEditorCreatedEvent, PropertyEditorUpdateTitleActionsEvent,
+  PropertyGridShowModalEvent, CollectionItemAllowOperationsEvent, ItemValueAddedEvent, MatrixColumnAddedEvent, SetPropertyEditorOptionsEvent,
+  PropertyValidationCustomErrorEvent, PropertyValueChangingEvent, SurveyPropertyValueChangedEvent, ConditionQuestionsGetListEvent, GetConditionOperatorEvent,
+  LogicItemDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
+  GetPageActionsEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, SelectedElementChangingEvent,
+  SelectedElementChangedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
+  TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
+  CreateCustomMessagePanelEvent } from "./creator-events-api";
 
 require("./components/creator.scss");
 require("./components/string-editor.scss");
@@ -518,339 +523,155 @@ export class CreatorBase extends Base
   /**
    * An event that is raised when a new page is added to the survey. Use this event to customize the page.
    * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * The page users added.
-   * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onPageAdded: CreatorEvent<any> = new CreatorEvent<any>();
+  public onPageAdded: CreatorEvent<PageAddedEvent> = new CreatorEvent<PageAddedEvent>();
 
   /**
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.actions`: [`IAction[]`](https://surveyjs.io/form-library/documentation/api-reference/iaction)\
-   * An array of actions. You can add, modify, or remove actions from this array.
-   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * A page for which the event is raised.
-   * - `options.addNewQuestion(type)`: Method\
-   * Adds a new question of a specified [`type`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to the page.
    * @see onDefineElementMenuItems
    */
-  public onGetPageActions: CreatorEvent<any> = new CreatorEvent<any>();
+  public onGetPageActions: CreatorEvent<GetPageActionsEvent> = new CreatorEvent<GetPageActionsEvent>();
 
   /**
    * An event that is raised when Survey Creator instantiates a survey for the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide#designer-tab) tab. Use this event to customize the survey.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
-   * A survey to be displayed in the Designer tab.
    * 
    * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
    * 
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    * @see survey
    */
-  public onDesignerSurveyCreated: CreatorEvent<any> = new CreatorEvent<any>();
+  public onDesignerSurveyCreated: CreatorEvent<DesignerSurveyCreatedEvent> = new CreatorEvent<DesignerSurveyCreatedEvent>();
   /**
    * An event that is raised when Survey Creator instantiates a survey for the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide#preview-tab) tab. Use this event to customize the survey.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
-   * A survey to be displayed in the Preview tab.
    * 
    * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
    * 
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
-  public onPreviewSurveyCreated: CreatorEvent<any> = new CreatorEvent<any>();
+  public onPreviewSurveyCreated: CreatorEvent<PreviewSurveyCreatedEvent> = new CreatorEvent<PreviewSurveyCreatedEvent>();
   public onTestSurveyCreated: CreatorEvent<any> = this.onPreviewSurveyCreated;
   /**
    * An event that is raised when Survey Creator [displays a toast notification](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#notify). Use this event to implement custom toast notification.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.message`: `string`\
-   * A message to display.
    * @see notify
    */
-  public onNotify: CreatorEvent<any> = new CreatorEvent<any>();
+  public onNotify: CreatorEvent<NotifyEvent> = new CreatorEvent<NotifyEvent>();
   /**
    * An event that is raised before a survey element (question, panel, page, or the survey itself) is focused. Use this event to move focus to a different survey element.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.newSelectedElement`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
-   * An element that is going to be focused.
    * @see onSelectedElementChanged
    * @see selectedElement
    */
-  public onSelectedElementChanging: CreatorEvent<any> = new CreatorEvent<any>();
+  public onSelectedElementChanging: CreatorEvent<SelectedElementChangingEvent> = new CreatorEvent<SelectedElementChangingEvent>();
   /**
    * An event that is raised after a survey element (a question, panel, page, or the survey itself) is focused.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.newSelectedElement`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
-   * The [focused element](#selectedElement).
    * @see onSelectedElementChanging
    */
-  public onSelectedElementChanged: CreatorEvent<any> = new CreatorEvent<any>();
+  public onSelectedElementChanged: CreatorEvent<SelectedElementChangedEvent> = new CreatorEvent<SelectedElementChangedEvent>();
   /**
    * An event that is raised when Survey Creator opens a dialog window for users to select files.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.input`: [`HTMLInputElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)\
-   * A file input HTML element.
-   * - `options.element`: [`SurveyElement`](https://surveyjs.io/form-library/documentation/api-reference/surveyelement) | [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
-   * A question, panel, page, or survey for which this event is raised. 
-   * - `options.item`: `ItemValue`\
-   * A choice item for which the event is raised. This parameter has a value only when the dialog window is opened to select images for an [Image Picker](https://surveyjs.io/form-library/documentation/api-reference/image-picker-question-model) question.
-   * - `options.callback: (files: Array<File>)`: `Function`\
-   * A callback function to which you should pass selected files.
    * @see onUploadFile
    * @see uploadFiles
    */
-  public onOpenFileChooser: CreatorEvent<any> = new CreatorEvent<any>();
+  public onOpenFileChooser: CreatorEvent<OpenFileChooserEvent> = new CreatorEvent<OpenFileChooserEvent>();
   /**
    * An event that is raised when a user selects a file to upload. Use this event to upload the file to your server.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/api-reference/question)\
-   * A question for which files are being uploaded.
-   * - `options.files`: [`File[]`](https://developer.mozilla.org/en-US/docs/Web/API/File)\
-   * Files to upload.
-   * - `options.callback(status: string, fileUrl: string)`: `Function`\
-   * A callback function that you should call when a file is uploaded successfully or when file upload fails. Pass `"success"` or `"error"` as the `status` argument. If the file upload is successful, pass the file's URL as the `fileUrl` argument.
    * 
    *  [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))   
    * @see uploadFiles
    */
-  public onUploadFile: CreatorEvent<any> = new CreatorEvent<any>();
+  public onUploadFile: CreatorEvent<UploadFileEvent> = new CreatorEvent<UploadFileEvent>();
   /**
    * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
-   *
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
-   * A survey element (survey, page, panel, question) whose string translations are edited in the Translation tab.
-   * - `options.propertyName`: `string`\
-   * The name of a property being translated.
-   * - `options.visible`: `boolean`\
-   * A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
    */
-  public onTranslationStringVisibility: CreatorEvent<any> = new CreatorEvent<any>();
+  public onTranslationStringVisibility: CreatorEvent<TranslationStringVisibilityEvent> = new CreatorEvent<TranslationStringVisibilityEvent>();
   public onTranslationLocaleInitiallySelected: CreatorEvent<any> = new CreatorEvent<any>();
   /**
    * An event that is raised before a translated string is imported from a CSV file. Use this event to modify the string to be imported or cancel the import.
-   *
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.locale`: `string`\
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
-   * - `options.name`: `string`\
-   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
-   * - `options.text`: `string`\
-   * A text string to be imported. You can modify this property to import a different string or set this property to `undefined` to cancel the import.
    * @see onTranslationExportItem
    * @see onTranslationImported
    */
-  public onTranslationImportItem: CreatorEvent<any> = new CreatorEvent<any>();
+  public onTranslationImportItem: CreatorEvent<TranslationImportItemEvent> = new CreatorEvent<TranslationImportItemEvent>();
   /**
    * An event that is raised after all translated strings are imported from a CSV file.
-   * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
    * @see onTranslationImportItem
    * @see onTranslationExportItem
    */
-  public onTranslationImported: CreatorEvent<any> = new CreatorEvent<any>();
+  public onTranslationImported: CreatorEvent<TranslationImportedEvent> = new CreatorEvent<TranslationImportedEvent>();
   /**
    * An event that is raised before a translated string is exported to a CSV file. Use this event to modify the string to be exported.
-   *
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.obj`: [`Survey.Base`](https://surveyjs.io/form-library/documentation/api-reference/base)\
-   * A survey element (survey, page, panel, question) whose string translations are being exported to CSV.
-   * - `options.locale`: `string`\
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
-   * - `options.name`: `string`\
-   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
-   * - `options.locString`: `LocalizableString`\
-   * A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
-   * - `options.text`: `string`\
-   * A text string to be exported. The string is taken from the current locale. You can modify this property to export a different string.
    * @see onTranslationImportItem
    */
-  public onTranslationExportItem: CreatorEvent<any> = new CreatorEvent<any>();
+  public onTranslationExportItem: CreatorEvent<TranslationExportItemEvent> = new CreatorEvent<TranslationExportItemEvent>();
 
   /**
    * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
    * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.fromLocale`: `string`\
-   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
-   * - `options.toLocale`: `string`\
-   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
-   * - `options.strings`: `Array<string>`\
-   * Strings to translate.
-   * - `options.callback: (strings: Array<string>)`: `Function`\
-   * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
-   * 
-   * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. The following code shows how to integrate the Microsoft Translator service into Survey Creator:
-   * 
-   * ```js
-   * import { SurveyCreatorModel } from "survey-creator-core";
-   * const creatorOptions = { ... };
-   * const creator = new SurveyCreatorModel(creatorOptions);
-   * 
-   * const apiKey = "<your-microsoft-translator-api-key>";
-   * const resourceRegion = "<your-azure-region>";
-   * const endpoint = "https://api.cognitive.microsofttranslator.com/";
-   * creator.onMachineTranslate.add((_, options) => {
-   *   // Prepare strings for Microsoft Translator as an array of objects: [{ Text: "text to translate" }]
-   *   const data = [];
-   *   options.strings.forEach(str => { data.push({ Text: str }); });
-   *   // Include required locales in the URL
-   *   const params = "api-version=3.0&from=" + options.fromLocale + "&to=" + options.toLocale;
-   *   const url = endpoint + "/translate?" + params;
-   *   fetch(url, {
-   *     method: "POST",
-   *     headers: {
-   *       "Content-Type": "application/json",
-   *       "Ocp-Apim-Subscription-Key": apiKey,
-   *       "Ocp-Apim-Subscription-Region": resourceRegion,
-   *       "X-ClientTraceId": crypto.randomUUID()
-   *     },
-   *     body: JSON.stringify(data)
-   *   }).then(response => response.json())
-   *     .then(data => {
-   *       // Convert data received from Microsoft Translator to a flat array
-   *       const translatedStrings = [];
-   *       for (let i = 0; i < data.length; i++) {
-   *         translatedStrings.push(data[i].translations[0].text);
-   *       }
-   *       // Pass translated strings to Survey Creator
-   *       options.callback(translatedStrings);
-   * 
-   *     }).catch(error => {
-   *       // If translation was unsuccessful:
-   *       options.callback();
-   *       alert("Could not translate strings to the " + options.toLocale + " locale");
-   *     });
-   * });
-   * ```
-   * 
+  * Within the event handler, you need to pass translation strings and locale information to the translation service API. The service should return an array of translated strings that you need to pass to the `options.callback` function. The following code shows how to integrate the Microsoft Translator service into Survey Creator:
+  * 
+  * ```js
+  * import { SurveyCreatorModel } from "survey-creator-core";
+  * const creatorOptions = { ... };
+  * const creator = new SurveyCreatorModel(creatorOptions);
+  * 
+  * const apiKey = "<your-microsoft-translator-api-key>";
+  * const resourceRegion = "<your-azure-region>";
+  * const endpoint = "https://api.cognitive.microsofttranslator.com/";
+  * creator.onMachineTranslate.add((_, options) => {
+  *   // Prepare strings for Microsoft Translator as an array of objects: [{ Text: "text to translate" }]
+  *   const data = [];
+  *   options.strings.forEach(str => { data.push({ Text: str }); });
+  *   // Include required locales in the URL
+  *   const params = "api-version=3.0&from=" + options.fromLocale + "&to=" + options.toLocale;
+  *   const url = endpoint + "/translate?" + params;
+  *   fetch(url, {
+  *     method: "POST",
+  *     headers: {
+  *       "Content-Type": "application/json",
+  *       "Ocp-Apim-Subscription-Key": apiKey,
+  *       "Ocp-Apim-Subscription-Region": resourceRegion,
+  *       "X-ClientTraceId": crypto.randomUUID()
+  *     },
+  *     body: JSON.stringify(data)
+  *   }).then(response => response.json())
+  *     .then(data => {
+  *       // Convert data received from Microsoft Translator to a flat array
+  *       const translatedStrings = [];
+  *       for (let i = 0; i < data.length; i++) {
+  *         translatedStrings.push(data[i].translations[0].text);
+  *       }
+  *       // Pass translated strings to Survey Creator
+  *       options.callback(translatedStrings);
+  * 
+  *     }).catch(error => {
+  *       // If translation was unsuccessful:
+  *       options.callback();
+  *       alert("Could not translate strings to the " + options.toLocale + " locale");
+  *     });
+  * });
+  * ```
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    */
-  public onMachineTranslate: CreatorEvent<any> = new CreatorEvent<any>();
+  public onMachineTranslate: CreatorEvent<MachineTranslateEvent> = new CreatorEvent<MachineTranslateEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
-   * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.obj`: `any`\
-   * A survey element instance (survey, page, panel, question) whose string translation is being changed.
-   * - `options.locale`: `string`\
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
-   * - `options.locString`: `LocalizableString`\
-   * An object that you can use to manipulate a localization string. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
-   * - `options.newText`: `string`\
-   * A new value for the string translation.
    * 
    * Refer to the following help topics for more information on localization:
    * 
    * - [Localization & Globalization in SurveyJS Form Library](https://surveyjs.io/form-library/documentation/survey-localization)
    * - [Localization & Globalization in Survey Creator](https://surveyjs.io/survey-creator/documentation/localization)
    */
-  public onTranslationItemChanging: CreatorEvent<any> = new CreatorEvent<any>();
+  public onTranslationItemChanging: CreatorEvent<TranslationItemChangingEvent> = new CreatorEvent<TranslationItemChangingEvent>();
 
   /**
    * An event that is raised when users drag and drop survey elements within the design surface. Use this event to control drag and drop operations.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.draggedElement`: `IElement`\
-   * A survey element being dragged.
-   * - `options.fromElement`: `IElement`\
-   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
-   * - `options.toElement`: `IElement`\
-   * A survey element to which `draggedElement` is being dragged.
-   * - `options.insertBefore`: `IElement`\
-   * A survey element before which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed below all other elements within the container.
-   * - `options.insertAfter`: `IElement`\
-   * A survey element after which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed above all other elements within the container.
-   * - `options.parent`: `ISurveyElement`\
-   * A parent container (page or panel) within which `draggedElement` will be placed.
-   * - `options.survey`: [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model)\
-   * A survey within which the drag and drop operation occured.
-   * - `options.allow`: `boolean`\
-   * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
-   * - `options.target`: `IElement`\
-   * Obsolete. Use `options.draggedElement` instead.
-   * - `options.source`: `IElement`\
-   * Obsolete. Use `options.toElement` instead.
    * @see onDragStart
    * @see onDragEnd
    */
-  public onDragDropAllow: CreatorEvent<any> = new CreatorEvent<any>();
+  public onDragDropAllow: CreatorEvent<DragDropAllowEvent> = new CreatorEvent<DragDropAllowEvent>();
 
   /**
    * An event that allows you to create a custom message panel.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.question`: [`Question`](https://surveyjs.io/form-library/documentation/question)\
-   * A question for which the event is raised.
-   * - `options.messageText`: `string`\
-   * A notification message that you want to display. Assign a custom string value to this parameter.
-   * - `options.actionText`: `string`\
-   * A caption text for the action link. Assign a custom string value to this parameter.
-   * - `options.onClick`: `function`\
-   * A function that is called when users click the action link. Assign a custom function to this parameter.
    * 
    * A message panel is displayed within a question box on the design surface. It contains a text message and an optional action link. The following image illustrates a built-in message panel that appears when a question sources its choice options from another question or from a web service:
    * 
@@ -892,7 +713,7 @@ export class CreatorBase extends Base
    * });
    * ```
    */
-  public onCreateCustomMessagePanel: CreatorEvent<any> = new CreatorEvent<any>();
+  public onCreateCustomMessagePanel: CreatorEvent<CreateCustomMessagePanelEvent> = new CreatorEvent<CreateCustomMessagePanelEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
@@ -1785,7 +1606,7 @@ export class CreatorBase extends Base
     });
     survey.onDragDropAllow.add((sender, options) => {
       (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, options);
+      this.onDragDropAllow.fire(this, <any>options);
     });
 
     this.setSurvey(survey);
@@ -3201,7 +3022,7 @@ export class CreatorBase extends Base
     const options = {
       locale: locale,
       obj: obj,
-      locString: locString,
+      locString: <LocalizableString>locString,
       newText: newText
     };
     this.onTranslationItemChanging.fire(this, options);
@@ -3211,7 +3032,8 @@ export class CreatorBase extends Base
     if (this.onTranslationExportItem.isEmpty) return text;
     const options = {
       obj: obj,
-      locString: locString,
+      name: name,
+      locString: <LocalizableString>locString,
       locale: locale,
       text: text
     };

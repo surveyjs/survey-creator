@@ -1,4 +1,5 @@
-import { Base, IAction, ItemValue, JsonObjectProperty, MatrixDropdownColumn, PageModel, PanelModel, PopupBaseViewModel, Question, SurveyModel } from "survey-core";
+import { Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 
 export interface ElementDeletingEvent {
@@ -530,4 +531,263 @@ export interface PanelAddedEvent {
    * Possible values: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
    */
   reason: string;
+}
+
+export interface PageAddedEvent {
+  /**
+   * The page users added.
+   */
+  page: PageModel;
+}
+
+export interface GetPageActionsEvent {
+  /**
+   * An array of actions. You can add, modify, or remove actions from this array.
+   */
+  actions: IAction[];
+  /**
+   * A page for which the event is raised.
+   */
+  page: PageModel;
+  /**
+   * Adds a new question of a specified [`type`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to the page.
+   * @param type 
+   * @returns 
+   */
+  addNewQuestion: (type: string) => void;
+}
+
+export interface DesignerSurveyCreatedEvent {
+  /**
+   * A survey to be displayed in the Designer tab.
+   */
+  survey: SurveyModel;
+}
+
+export interface PreviewSurveyCreatedEvent {
+  /**
+   * A survey to be displayed in the Preview tab.
+   */
+  survey: SurveyModel;
+}
+
+export interface NotifyEvent {
+  /**
+   * A message to display.
+   */
+  message: string;
+}
+
+export interface SelectedElementChangingEvent {
+  /**
+   * An element that is going to be focused.
+   */
+  newSelectedElement: Base;
+}
+
+export interface SelectedElementChangedEvent {
+  /**
+   * The [focused element](#selectedElement).
+   */
+  newSelectedElement: Base;
+}
+
+export interface OpenFileChooserEvent {
+  /**
+   * A file input HTML element.
+   */
+  input: HTMLInputElement;
+  /**
+   * A question, panel, page, or survey for which this event is raised. 
+   */
+  element: Base;
+  /**
+   * A choice item for which the event is raised. This parameter has a value only when the dialog window is opened to select images for an [Image Picker](https://surveyjs.io/form-library/documentation/api-reference/image-picker-question-model) question.
+   */
+  item: ItemValue;
+  /**
+   * A callback function to which you should pass selected files.
+   * @param files 
+   * @returns 
+   */
+  callback: (files: Array<File>) => void;
+}
+
+export interface UploadFileEvent {
+  /**
+   * A question for which files are being uploaded.
+   */
+  question: Question;
+  /**
+   * Files to upload.
+   */
+  files: File[];
+  /**
+   * A callback function that you should call when a file is uploaded successfully or when file upload fails. Pass `"success"` or `"error"` as the `status` argument. If the file upload is successful, pass the file's URL as the `fileUrl` argument.
+   * @param status 
+   * @param fileUrl 
+   * @returns 
+   */
+  callback: (status: string, fileUrl: string) => void;
+}
+
+export interface TranslationStringVisibilityEvent {
+  /**
+   * A survey element (survey, page, panel, question) whose string translations are edited in the Translation tab.
+   */
+  obj: Base;
+  /**
+   * The name of a property being translated.
+   */
+  propertyName: string;
+  /**
+   * A Boolean value that specifies the property visibility. Set it to `false` to hide the property.
+   */
+  visible: boolean;
+}
+
+export interface TranslationImportItemEvent {
+  /**
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   */
+  locale: string;
+  /**
+   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   */
+  name: string;
+  /**
+   * A text string to be imported. You can modify this property to import a different string or set this property to `undefined` to cancel the import.
+   */
+  text: string;
+}
+
+export interface TranslationImportedEvent {
+}
+
+export interface TranslationExportItemEvent {
+  /**
+   * A survey element (survey, page, panel, question) whose string translations are being exported to CSV.
+   */
+  obj: Base;
+  /**
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   */
+  locale: string;
+  /**
+   * A full name of the translated string. It is composed of names of all parent elements, for example: `"mySurvey.page1.question2.title"`.
+   */
+  name: string;
+  /**
+   * A `LocalizableString` instance. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   */
+  locString: LocalizableString;
+  /**
+   * A text string to be exported. The string is taken from the current locale. You can modify this property to export a different string.
+   */
+  text: string;
+}
+
+export interface TranslationItemChangingEvent {
+  /**
+   * A survey element instance (survey, page, panel, question) whose string translation is being changed.
+   */
+  obj: Base;
+  /**
+   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   */
+  locale: string;
+  /**
+   * An object that you can use to manipulate a localization string. Call the `options.locString.getLocaleText(locale)` method if you need to get a text string for a specific locale.
+   */
+  locString: LocalizableString;
+  /**
+   * A new value for the string translation.
+   */
+  newText: string;
+}
+
+export interface MachineTranslateEvent {
+  /**
+   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   */
+  fromLocale: string;
+  /**
+   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   */
+  toLocale: string;
+  /**
+   * Strings to translate.
+   */
+  strings: Array<string>;
+  /**
+  * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
+  * 
+   * @param strings 
+   * @returns 
+   */
+  callback: (strings: Array<string>) => void;
+}
+
+export interface DragDropAllowEvent {
+  /**
+   * A survey element being dragged.
+   */
+  draggedElement: IElement;
+  /**
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   */
+  fromElement: IElement;
+  /**
+   * A survey element to which `draggedElement` is being dragged.
+   */
+  toElement: IElement;
+  /**
+   * A survey element before which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed below all other elements within the container.
+   */
+  insertBefore: IElement;
+  /**
+   * A survey element after which `draggedElement` will be placed. This parameter is `null` if the parent container (page or panel) has no elements or if `draggedElement` will be placed above all other elements within the container.
+   */
+  insertAfter: IElement;
+  /**
+   * A parent container (page or panel) within which `draggedElement` will be placed.
+   */
+  parent: ISurveyElement;
+  /**
+   * A survey within which the drag and drop operation occured.
+   */
+  survey: SurveyModel;
+  /**
+   * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
+   */
+  allow: boolean;
+  /**
+   * Obsolete. Use `options.draggedElement` instead.
+   */
+  target: IElement;
+  /**
+   * Obsolete. Use `options.toElement` instead.
+   */
+  source: IElement;
+}
+
+export interface CreateCustomMessagePanelEvent {
+  /**
+   * A question for which the event is raised.
+   */
+  question: Question;
+  /**
+   * A notification message that you want to display. Assign a custom string value to this parameter.
+   */
+  messageText: string;
+  /**
+   * A caption text for the action link. Assign a custom string value to this parameter.
+   */
+  actionText: string;
+  /**
+   * A function that is called when users click the action link. Assign a custom function to this parameter.
+   *
+   * @returns 
+   */
+  onClick: () => void;
 }
