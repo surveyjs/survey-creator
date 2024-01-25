@@ -270,21 +270,22 @@ export class SurveyQuestionProperties {
       this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
-    let hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result);
+    let hasNonTabDynamicProperties = false;
     const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
     if(dynamicClass) {
-      hasNonTabProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result);
+      hasNonTabDynamicProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result, className);
     }
+    const hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result, undefined);
 
-    if (!hasNonTabProperties) {
+    if (!hasNonTabProperties || !hasNonTabDynamicProperties) {
       this.addNonTabProperties(result, usedProperties);
     }
     return result;
   }
-  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>, baseClass: string): boolean {
     let res = false;
     let curClassName = className;
-    while (curClassName) {
+    while (curClassName && (!baseClass || !Serializer.isDescendantOf(baseClass, curClassName))) {
       let metaClass = <JsonMetadataClass>(
         Serializer.findClass(curClassName)
       );
