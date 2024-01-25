@@ -368,6 +368,10 @@ export class PropertyGridTitleActionsCreator {
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
       actions.push(helpAction);
+      if (actions.length === 1) {
+        question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
+        helpAction.iconSize = 16;
+      }
     }
     if (actions.length > 0) {
       options.titleActions = actions;
@@ -1431,8 +1435,8 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
-    question.onChooseFilesCallback = ((input, onFilesChosen) => {
-      options.chooseFiles(input, onFilesChosen);
+    question.onChooseFilesCallback = ((input, callback) => {
+      options.chooseFiles(input, callback);
     });
   }
 

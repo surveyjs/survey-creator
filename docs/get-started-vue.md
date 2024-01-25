@@ -113,7 +113,7 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ### Render Survey Creator
 
-Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method:
+Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method *in the exact order shown below*:
 
 ```js
 // main.ts

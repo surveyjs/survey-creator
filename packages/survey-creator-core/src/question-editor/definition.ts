@@ -338,8 +338,8 @@ export class SurveyQuestionEditorDefinition {
     expression: {
       properties: [
         "expression",
-        "currency",
         "displayStyle",
+        "currency",
         "format",
         "maximumFractionDigits",
         "minimumFractionDigits",
@@ -436,6 +436,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "optionsCaption", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "choicesMin", tab: "choices" },
+        { name: "choicesMax", tab: "choices" },
+        { name: "choicesStep", tab: "choices" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
       ],

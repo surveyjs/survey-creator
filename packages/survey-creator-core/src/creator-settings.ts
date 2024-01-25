@@ -306,13 +306,13 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void,
+    callback: (files: File[]) => void,
     context?: { element: SurveyElement, item?: ItemValue }
   ): void;
 }
@@ -458,11 +458,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
+  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

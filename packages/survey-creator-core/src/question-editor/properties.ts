@@ -2,12 +2,12 @@ import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
 } from "./definition";
-import * as Survey from "survey-core";
+import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 import { ISurveyCreatorOptions, settings } from "../creator-settings";
 
 export class SurveyQuestionEditorPropertyDefinition {
-  public property: Survey.JsonObjectProperty;
+  public property: JsonObjectProperty;
   public title: string;
   public category: string;
   public createdFromTabName: boolean;
@@ -29,7 +29,7 @@ const otherTabName = "others";
 
 export class SurveyQuestionProperties {
   private showModeValue: string;
-  private properties: Array<Survey.JsonObjectProperty>;
+  private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   constructor(
@@ -38,14 +38,14 @@ export class SurveyQuestionProperties {
     className: string = null,
     showMode: string = null,
     private parentObj: any = null,
-    private parentProperty: Survey.JsonObjectProperty = null
+    private parentProperty: JsonObjectProperty = null
   ) {
     this.showModeValue = showMode;
-    this.properties = Survey.Serializer.getPropertiesByObj(this.obj);
+    this.properties = Serializer.getPropertiesByObj(this.obj);
     this.fillPropertiesHash();
     this.buildTabs(className);
   }
-  public getProperty(propertyName: string): Survey.JsonObjectProperty {
+  public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
     return !!res && res.visible ? res.property : null;
   }
@@ -76,7 +76,7 @@ export class SurveyQuestionProperties {
       };
     }
   }
-  private isJSONPropertyVisible(property: Survey.JsonObjectProperty): boolean {
+  private isJSONPropertyVisible(property: JsonObjectProperty): boolean {
     var res = this.propertiesHash[property.name];
     return !!res && res.visible;
   }
@@ -91,7 +91,7 @@ export class SurveyQuestionProperties {
   }
   public getProperties(
     tab: SurveyQuestionEditorTabDefinition
-  ): Array<Survey.JsonObjectProperty> {
+  ): Array<JsonObjectProperty> {
     var res = [];
     for (var i = 0; i < tab.properties.length; i++) {
       res.push(tab.properties[i].property);
@@ -208,7 +208,7 @@ export class SurveyQuestionProperties {
     }
     return null;
   }
-  private getNextToNameProperty(property: Survey.JsonObjectProperty): string {
+  private getNextToNameProperty(property: JsonObjectProperty): string {
     if(!property.nextToProperty) return "";
     if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substring(1);
     return property.nextToProperty;
@@ -270,46 +270,10 @@ export class SurveyQuestionProperties {
       this.addNonTabProperties(result, usedProperties, true);
       return result;
     }
-    var curClassName = className;
-    var hasNonTabProperties = false;
-    while (curClassName) {
-      let metaClass = <Survey.JsonMetadataClass>(
-        Survey.Serializer.findClass(curClassName)
-      );
-      if (!metaClass) break;
-      let classRes = SurveyQuestionEditorDefinition.definition[metaClass.name];
-      if (classRes) {
-        if (classRes.properties) {
-          var i = 0;
-          while (i < classRes.properties.length) {
-            var prop = classRes.properties[i];
-            var propName = typeof prop == "string" ? prop : prop.name;
-            var tabName = settings.propertyGrid.generalTabName;
-            if (typeof prop !== "string" && !!prop.tab) {
-              tabName = prop.tab;
-            }
-            var jsonProp = !!this.propertiesHash[propName]
-              ? this.propertiesHash[propName].property
-              : null;
-            var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
-            if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
-              classRes.properties.splice(i, 1);
-            } else {
-              usedProperties[propName] = true;
-              i++;
-            }
-          }
-        }
-        if (classRes.tabs) {
-          for (var i = 0; i < classRes.tabs.length; i++) {
-            hasNonTabProperties =
-              hasNonTabProperties || classRes.tabs[i].name === otherTabName;
-            usedProperties[classRes.tabs[i].name] = true;
-          }
-        }
-        result.unshift(classRes);
-      }
-      curClassName = metaClass.parentName;
+    let hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result);
+    const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    if(dynamicClass) {
+      hasNonTabProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result);
     }
 
     if (!hasNonTabProperties) {
@@ -317,8 +281,55 @@ export class SurveyQuestionProperties {
     }
     return result;
   }
+  private getAllDefinitionsByClassCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+    let res = false;
+    let curClassName = className;
+    while (curClassName) {
+      let metaClass = <JsonMetadataClass>(
+        Serializer.findClass(curClassName)
+      );
+      if (!metaClass) break;
+      res = this.getAllDefinitionsByClassSingleCore(metaClass.name, usedProperties, result);
+      curClassName = metaClass.parentName;
+    }
+    return res;
+  }
+  private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
+    const classRes = SurveyQuestionEditorDefinition.definition[className];
+    let res = false;
+    if(!classRes) return res;
+    if (classRes.properties) {
+      var i = 0;
+      while (i < classRes.properties.length) {
+        var prop = classRes.properties[i];
+        var propName = typeof prop == "string" ? prop : prop.name;
+        var tabName = settings.propertyGrid.generalTabName;
+        if (typeof prop !== "string" && !!prop.tab) {
+          tabName = prop.tab;
+        }
+        var jsonProp = !!this.propertiesHash[propName]
+          ? this.propertiesHash[propName].property
+          : null;
+        var jsonPropertyCategory = this.getJsonPropertyCategory(jsonProp);
+        if (!!jsonPropertyCategory && jsonPropertyCategory !== tabName) {
+          classRes.properties.splice(i, 1);
+        } else {
+          usedProperties[propName] = true;
+          i++;
+        }
+      }
+    }
+    if (classRes.tabs) {
+      for (var i = 0; i < classRes.tabs.length; i++) {
+        res = res || classRes.tabs[i].name === otherTabName;
+        usedProperties[classRes.tabs[i].name] = true;
+      }
+    }
+    result.unshift(classRes);
+    return res;
+  }
   private getJsonPropertyCategory(
-    jsonProperty: Survey.JsonObjectProperty
+    jsonProperty: JsonObjectProperty
   ): string {
     if (!jsonProperty) return null;
     if (!!jsonProperty.category) return jsonProperty.category;

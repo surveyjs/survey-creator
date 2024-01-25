@@ -172,3 +172,38 @@ test("SearchManager: normalizeTextCallback", () => {
 
   settings.comparator.normalizeTextCallback = (str: string, reason: string): string => { return str; };
 });
+
+test("SearchManager: search by name and description", () => {
+  const searchManager = new SearchManager();
+  const survey = new SurveyModel({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q1",
+        "title": "First",
+        "description": "First description"
+      },
+      {
+        "type": "text",
+        "name": "q2",
+        "title": "Second",
+        "description": "Second description"
+      },
+      {
+        "type": "text",
+        "name": "q3",
+        "title": "Last",
+        "description": "Last description"
+      }
+    ]
+  });
+  searchManager.setSurvey(survey);
+  searchManager.filterString = "First";
+  expect(searchManager.allMatches).toHaveLength(1);
+
+  searchManager.filterString = "q1";
+  expect(searchManager.allMatches).toHaveLength(1);
+
+  searchManager.filterString = "description";
+  expect(searchManager.allMatches).toHaveLength(3);
+});

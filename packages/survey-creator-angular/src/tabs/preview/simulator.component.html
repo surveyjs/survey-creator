@@ -1,8 +1,11 @@
 <ng-template #template>
-  <div [class]="model.getRootCss()" (keydown)="model.tryToZoom($event, $event)" (mouseover)="activateZoom()" (mouseout)="deactivateZoom()">
-    <div *ngIf="model.hasFrame" class="svd-simulator-wrapper" id="svd-simulator-wrapper" [style.width]="simulatorFrame.frameWidth + 'px'" [style.height]="simulatorFrame.frameHeight + 'px'">
-      <div class="svd-simulator-frame" [style.width]="simulatorFrame.landscapedFrameWidth + 'px'" [style.height]="simulatorFrame.landscapedFrameHeight + 'px'" [class]="simulatorFrame.cssClass"></div>
-      <div class="svd-simulator" [style.width]="simulatorFrame.deviceWidth + 'px'" [style.height]="simulatorFrame.deviceHeight + 'px'" [style.transform]="'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)'">
+  <div [class]="model.getRootCss()" (keydown)="model.tryToZoom($event, $event)" (mouseover)="activateZoom()"
+    (mouseout)="deactivateZoom()">
+    <div *ngIf="model.hasFrame" class="svd-simulator-wrapper" id="svd-simulator-wrapper"
+      [style.width]="simulatorFrame.frameWidth + 'px'" [style.height]="simulatorFrame.frameHeight + 'px'">
+      <div class="svd-simulator" [style.width]="simulatorFrame.deviceWidth + 'px'"
+        [style.height]="simulatorFrame.deviceHeight + 'px'"
+        [style.transform]="'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)'">
         <div class="svd-simulator-content">
           <ng-template [component]="{ name: 'survey-widget', data: { model: model.survey } }"></ng-template>
         </div>

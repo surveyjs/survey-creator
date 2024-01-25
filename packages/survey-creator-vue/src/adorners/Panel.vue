@@ -55,36 +55,39 @@
         v-if="!adorner.isEmptyElement && adorner.showAddQuestionButton"
         class="svc-panel__add-new-question-container"
       >
-        <div
-          class="svc-panel__add-new-question svc-action-button"
-          v-key2click
-          @click="addNewQuestion"
-        >
-          <sv-svg-icon
-            class="svc-panel__add-new-question-icon"
-            :iconName="'icon-add_24x24'"
-            :size="24"
-          ></sv-svg-icon>
-          <span class="svc-text svc-text--normal svc-text--bold">
-            {{ adorner.addNewQuestionText }}
-          </span>
+        <div class="svc-panel__question-type-selector-popup"><sv-popup
+              :model="adorner.questionTypeSelectorModel.popupModel"
+            ></sv-popup>
         </div>
-        <button
-          type="button"
-          :title="adorner.addNewQuestionText"
-          v-key2click
-          @click="selectQuestionType"
-          class="svc-panel__question-type-selector"
-        >
-          <sv-svg-icon
-            class="svc-panel__question-type-selector-icon"
-            :iconName="adorner.questionTypeSelectorModel.iconName"
-            :size="24"
-          ></sv-svg-icon>
-          <sv-popup
-            :model="adorner.questionTypeSelectorModel.popupModel"
-          ></sv-popup>
-        </button>
+        <div class="svc-panel__add-new-question-wrapper">
+          <div
+            class="svc-panel__add-new-question svc-action-button"
+            v-key2click
+            @click="addNewQuestion"
+          >
+            <sv-svg-icon
+              class="svc-panel__add-new-question-icon"
+              :iconName="'icon-add_24x24'"
+              :size="24"
+            ></sv-svg-icon>
+            <span class="svc-text svc-text--normal svc-text--bold">
+              {{ adorner.addNewQuestionText }}
+            </span>
+          </div>
+          <button
+            type="button"
+            :title="adorner.addNewQuestionText"
+            v-key2click
+            @click="selectQuestionType"
+            class="svc-panel__question-type-selector"
+          >
+            <sv-svg-icon
+              class="svc-panel__question-type-selector-icon"
+              :iconName="adorner.questionTypeSelectorModel.iconName"
+              :size="24"
+              ></sv-svg-icon>
+          </button>
+        </div>
       </div>
 
       <div

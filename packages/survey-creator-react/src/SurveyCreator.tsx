@@ -65,13 +65,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
+      const htmlValue = { __html: this.props.creator.licenseText };
       licenseBanner = (
         <div className="svc-creator__banner">
-          <span className="svc-creator__non-commercial-text">
-            <a href="https://surveyjs.io/buy">
-              {this.props.creator.licenseText}
-            </a>
-          </span>
+          <span className="svc-creator__non-commercial-text" dangerouslySetInnerHTML={htmlValue}></span>
         </div>
       );
     }

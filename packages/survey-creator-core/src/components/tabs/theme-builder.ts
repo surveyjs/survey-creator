@@ -577,6 +577,7 @@ export class ThemeBuilder extends Base {
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
+    this.currentTheme.headerView = headerSettings["headerView"];
     this.themeModified(options);
   }
   private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
@@ -640,9 +641,10 @@ export class ThemeBuilder extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor", this);
+    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this);
     themeEditorSurvey.lazyRendering = true;
     themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
+    themeEditorSurvey.setJsonObject(json);
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -769,7 +771,7 @@ export class ThemeBuilder extends Base {
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
+    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => this.surveyProvider.chooseFiles(input, callback); });
   }
 
   private getCoverJson(headerSettings: any): any {

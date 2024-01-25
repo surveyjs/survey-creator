@@ -17,7 +17,8 @@ test("Check boxshadow settings", async (t) => {
     await t.resizeWindow(2000, 2000)
       .click(getTabbedMenuItemByText("Themes"))
       .click(getPropertyGridCategory("Appearance"))
-      .click(advancedModeSwitcher);
+      .click(advancedModeSwitcher)
+      .scrollIntoView(root);
     await takeElementScreenshot("boxshadow-one-panel.png", root, t, comparer);
     await t.click(".spg-paneldynamic__add-btn");
     await t.hover(root, { offsetX: 0, offsetY: 0 });
