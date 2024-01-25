@@ -1,6 +1,7 @@
 import { BaseAction, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
 import { getLogicString } from "./logic-types";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";

@@ -1,8 +1,9 @@
 import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
+import { ICreatorPlugin } from "./creator-settings";
 
 export interface ElementDeletingEvent {
   /**
@@ -729,7 +730,7 @@ export interface DragDropAllowEvent {
   /**
    * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
    */
-  fromElement: IElement;
+  fromElement: IPanel;
   /**
    * A survey element to which `draggedElement` is being dragged.
    */
@@ -749,7 +750,7 @@ export interface DragDropAllowEvent {
   /**
    * A survey within which the drag and drop operation occured.
    */
-  survey: SurveyModel;
+  survey?: SurveyModel;
   /**
    * A Boolean property that you can set to `false` if you want to cancel the drag and drop operation.
    */
@@ -757,11 +758,11 @@ export interface DragDropAllowEvent {
   /**
    * Obsolete. Use `options.draggedElement` instead.
    */
-  target: IElement;
+  target?: IElement;
   /**
    * Obsolete. Use `options.toElement` instead.
    */
-  source: IElement;
+  source?: IElement;
 }
 
 export interface CreateCustomMessagePanelEvent {
@@ -781,4 +782,66 @@ export interface CreateCustomMessagePanelEvent {
    * A function that is called when users click the action link. Assign a custom function to this parameter.
    */
   onClick: () => void;
+}
+
+export interface ActiveTabChangingEvent {
+  /**
+   * A tab that is going to become active.
+   * Possible values are: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"` 
+   */
+  tabName: string;
+  /**
+   * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
+   */
+  allow: boolean;
+}
+
+export interface ActiveTabChangedEvent {
+  /**
+   * A tab that has become active.
+   * Possible values are: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"` 
+   */
+  tabName: string;
+  plugin: ICreatorPlugin;
+  model: Base;
+}
+
+export interface BeforeUndoEvent {
+  /**
+   * A Boolean value that you can set to `false` if you want to prevent the undo operation.
+   */
+  canUndo: boolean;
+}
+
+export interface BeforeRedoEvent {
+  /**
+   * A Boolean value that you can set to `false` if you want to prevent the redo operation.
+   */
+  canRedo: boolean;
+}
+
+export interface PageAddingEvent {
+  /**
+   * A page to be added.
+   */
+  page: PageModel;
+  /**
+   * Set this property to `false` if you do not want to add the page.
+   */
+  allow: boolean;
+}
+
+export interface DragStartEndEvent {
+  /**
+   * A survey element being dragged.
+   */
+  draggedElement: IElement;
+  /**
+   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
+   */
+  fromElement: IElement;
+  /**
+   * A survey element to which `draggedElement` is being dragged.
+   */
+  toElement: IElement;
 }

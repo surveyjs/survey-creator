@@ -5,7 +5,7 @@ import {
   EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
   dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers
 } from "survey-core";
-import { ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
+import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
 import { SurveyJSON5 } from "./json5";
 import { DragDropChoices } from "survey-core";
@@ -47,7 +47,8 @@ import {
   PageGetFooterActionsEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
-  CreateCustomMessagePanelEvent
+  CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
+  PageAddingEvent, DragStartEndEvent
 } from "./creator-events-api";
 
 require("./components/creator.scss");
@@ -60,17 +61,6 @@ export interface IKeyboardShortcut {
   hotKey: { ctrlKey?: boolean, keyCode: number };
   macOsHotkey?: { shiftKey?: boolean, keyCode: number };
   execute: (context: any) => void;
-}
-
-export interface ICreatorPlugin {
-  activate: () => void;
-  update?: () => void;
-  deactivate?: () => boolean;
-  canDeactivateAsync?: (onSuccess: () => void) => void;
-  defaultAllowingDeactivate?: () => boolean | undefined;
-  dispose?: () => void;
-  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
-  model: Base;
 }
 //Obsolete
 export class CreatorAction extends Action {
@@ -1092,31 +1082,15 @@ export class CreatorBase extends Base
   }
   /**
    * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"`\
-   * A tab that is going to become active.
-   * - `options.allow`: `boolean`\
-   * Specifies whether the active tab can be switched. Set this property to `false` if you want to cancel the switch.
    * @see makeNewViewActive
    */
-  public onActiveTabChanging: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onActiveTabChanging: EventBase<CreatorBase, ActiveTabChangingEvent> = new EventBase<CreatorBase, ActiveTabChangingEvent>();
 
   /**
    * An event that is raised after the [active tab](#activeTab) is switched.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.tabName`: `"designer"` | `"test"` | `"theme"` | `"editor"` | `"logic"` | `"translation"`\
-   * A tab that has become active.
    * @see makeNewViewActive
    */
-  public onActiveTabChanged: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onActiveTabChanged: EventBase<CreatorBase, ActiveTabChangedEvent> = new EventBase<CreatorBase, ActiveTabChangedEvent>();
   /**
    * Gets or sets the currently displayed tab.
    * 
@@ -1309,32 +1283,18 @@ export class CreatorBase extends Base
   //#region Undo/Redo
   /**
    * An event that is raised before an undo operation.
-   * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.canUndo`: `boolean`\
-   * A Boolean value that you can set to `false` if you want to prevent the undo operation.
    * @see undo
    * @see redo
    * @see onBeforeRedo
    */
-  public onBeforeUndo: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onBeforeUndo: EventBase<CreatorBase, BeforeUndoEvent> = new EventBase<CreatorBase, BeforeUndoEvent>();
   /**
    * An event that is raised before an redo operation.
-   * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.canRedo`: `boolean`\
-   * A Boolean value that you can set to `false` if you want to prevent the redo operation.
    * @see redo
    * @see undo
    * @see onBeforeUndo
    */
-  public onBeforeRedo: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onBeforeRedo: EventBase<CreatorBase, BeforeRedoEvent> = new EventBase<CreatorBase, BeforeRedoEvent>();
 
   public get undoRedoManager(): UndoRedoManager {
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
@@ -1388,17 +1348,8 @@ export class CreatorBase extends Base
   }
   /**
    * An event that is raised before a new page is added to the survey. Handle this event if you do not want to add the page. 
-   * 
-   * Parameters:
-   *
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.page`: [`PageModel`](https://surveyjs.io/form-library/documentation/api-reference/page-model)\
-   * A page to be added.
-   * - `options.allow`: `boolean`\
-   * Set this property to `false` if you do not want to add the page.
    */
-  public onPageAdding: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onPageAdding: EventBase<CreatorBase, PageAddingEvent> = new EventBase<CreatorBase, PageAddingEvent>();
   @undoRedoTransaction()
   public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
     const options = {
@@ -1641,7 +1592,7 @@ export class CreatorBase extends Base
     });
     survey.onDragDropAllow.add((sender, options) => {
       (<any>options).survey = sender;
-      this.onDragDropAllow.fire(this, <any>options);
+      this.onDragDropAllow.fire(this, options);
     });
 
     this.setSurvey(survey);
@@ -1665,40 +1616,18 @@ export class CreatorBase extends Base
   }
   /**
    * An event that is raised when users start to drag a survey element within the design surface.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.draggedElement`: `any`\
-   * A survey element being dragged.
-   * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` is being dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
-   * - `options.toElement`: `any`\
-   * A survey element to which `draggedElement` is being dragged.
    * @see onDragEnd
    * @see onDragDropAllow
    */
-  public onDragStart: Event<() => any, any, any> = new Event<() => any, any, any>();
-  public onBeforeDrop: Event<() => any, any, any> = this.onDragStart;
+  public onDragStart: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onBeforeDrop: EventBase<any, DragStartEndEvent> = this.onDragStart;
   /**
    * An event that is raised when users finish dragging a survey element within the design surface.
-   * 
-   * Parameters:
-   * 
-   * - `sender`: `CreatorBase`\
-   * A Survey Creator instance that raised the event.
-   * - `options.draggedElement`: `any`\
-   * A survey element that was dragged.
-   * - `options.fromElement`: `any`\
-   * A survey element from which `draggedElement` was dragged. This parameter is `null` if `draggedElement` is being dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox).
-   * - `options.toElement`: `any`\
-   * A survey element to which `draggedElement` was dragged.
    * @see onDragStart
    * @see onDragDropAllow
    */
-  public onDragEnd: Event<() => any, any, any> = new Event<() => any, any, any>();
-  public onAfterDrop: Event<() => any, any, any> = this.onDragEnd;
+  public onDragEnd: EventBase<any, DragStartEndEvent> = new EventBase<any, DragStartEndEvent>();
+  public onAfterDrop: EventBase<any, DragStartEndEvent> = this.onDragEnd;
   private initDragDropSurveyElements() {
     DragDropSurveyElements.restrictDragQuestionBetweenPages =
       settings.dragDrop.restrictDragQuestionBetweenPages;
