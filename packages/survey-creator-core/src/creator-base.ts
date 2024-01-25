@@ -373,26 +373,26 @@ export class CreatorBase extends Base
    * An event that is raised before a survey element (a question, panel, or page) is deleted.
    * @see deleteElement
    */
-  public onElementDeleting: EventBase<CreatorBase, ElementDeletingEvent> = this.addEventBase<CreatorBase, ElementDeletingEvent>();
+  public onElementDeleting: EventBase<CreatorBase, ElementDeletingEvent> = this.addCreatorEvent<CreatorBase, ElementDeletingEvent>();
 
   /**
    * An event that is raised when Survey Creator sets the read-only status for a survey element property. Use this event to change the read-only status for individual properties.
    */
-  public onGetPropertyReadOnly: EventBase<CreatorBase, PropertyGetReadOnlyEvent> = this.addEventBase<CreatorBase, PropertyGetReadOnlyEvent>();
+  public onGetPropertyReadOnly: EventBase<CreatorBase, PropertyGetReadOnlyEvent> = this.addCreatorEvent<CreatorBase, PropertyGetReadOnlyEvent>();
 
-  public onSurveyInstanceCreated: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onSurveyInstanceCreated: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
 
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    * 
    * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
    */
-  public onGetObjectDisplayName: EventBase<CreatorBase, ElementGetDisplayNameEvent> = new EventBase<CreatorBase, ElementGetDisplayNameEvent>();
+  public onGetObjectDisplayName: EventBase<CreatorBase, ElementGetDisplayNameEvent> = this.addCreatorEvent<CreatorBase, ElementGetDisplayNameEvent>();
 
   /**
    * An event that is raised after a user has edited a text value on the design surface. This value may include HTML markup. You can handle the `onHtmlToMarkdown` event to convert the HTML markup to Markdown.
    */
-  public onHtmlToMarkdown: EventBase<CreatorBase, HtmlToMarkdownEvent> = new EventBase<CreatorBase, HtmlToMarkdownEvent>();
+  public onHtmlToMarkdown: EventBase<CreatorBase, HtmlToMarkdownEvent> = this.addCreatorEvent<CreatorBase, HtmlToMarkdownEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a survey element. Use this event to disable user interactions with a question, panel, or page on the design surface.
@@ -404,7 +404,7 @@ export class CreatorBase extends Base
    * [Specify Adorner Visibility](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability (linkStyle))
    * @see onCollectionItemAllowOperations
    */
-  public onElementAllowOperations: EventBase<CreatorBase, ElementAllowOperationsEvent> = new EventBase<CreatorBase, ElementAllowOperationsEvent>();
+  public onElementAllowOperations: EventBase<CreatorBase, ElementAllowOperationsEvent> = this.addCreatorEvent<CreatorBase, ElementAllowOperationsEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains [adorners](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#specify-adorner-availability) for a survey element. Use this event to hide and modify predefined adorners or add a custom adorner.
@@ -415,7 +415,7 @@ export class CreatorBase extends Base
    * @see onElementAllowOperations
    * @see onGetPageActions
    */
-  public onDefineElementMenuItems: EventBase<CreatorBase, ElementGetActionsEvent> = new EventBase<CreatorBase, ElementGetActionsEvent>();
+  public onDefineElementMenuItems: EventBase<CreatorBase, ElementGetActionsEvent> = this.addCreatorEvent<CreatorBase, ElementGetActionsEvent>();
   /**
    * An event that is raised when Survey Creator adds properties to a survey element selected on the design surface. Handle this event if you cancel the addition of certain properties and thus [hide them from the Property Grid](https://surveyjs.io/survey-creator/documentation/property-grid-customization#hide-properties-from-the-property-grid).
    * 
@@ -423,34 +423,34 @@ export class CreatorBase extends Base
    * 
    * [View Demo](https://surveyjs.io/survey-creator/examples/hide-category-from-property-grid/ (linkStyle))
    */
-  public onShowingProperty: EventBase<CreatorBase, PropertyAddingEvent> = new EventBase<CreatorBase, PropertyAddingEvent>();
+  public onShowingProperty: EventBase<CreatorBase, PropertyAddingEvent> = this.addCreatorEvent<CreatorBase, PropertyAddingEvent>();
   public onCanShowProperty: EventBase<CreatorBase, PropertyAddingEvent> = this.onShowingProperty;
   /**
    * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid by modifying the survey.
    * @see onPropertyEditorCreated
    */
-  public onPropertyGridSurveyCreated: EventBase<CreatorBase, PropertyGridSurveyCreatedEvent> = new EventBase<CreatorBase, PropertyGridSurveyCreatedEvent>();
+  public onPropertyGridSurveyCreated: EventBase<CreatorBase, PropertyGridSurveyCreatedEvent> = this.addCreatorEvent<CreatorBase, PropertyGridSurveyCreatedEvent>();
   /**
    * An event that is raised when a property editor is created in the Property Grid. Use this event to modify the property editor or add event handlers to it.
    * @see onSetPropertyEditorOptions
    * @see onPropertyGridSurveyCreated
    */
-  public onPropertyEditorCreated: EventBase<CreatorBase, PropertyEditorCreatedEvent> = new EventBase<CreatorBase, PropertyEditorCreatedEvent>();
+  public onPropertyEditorCreated: EventBase<CreatorBase, PropertyEditorCreatedEvent> = this.addCreatorEvent<CreatorBase, PropertyEditorCreatedEvent>();
   /**
    * An event that is raised when title actions are added to a property editor. Title actions are most often used to reveal hints for properties configured by users. Handle this event you want to add, remove, or modify the title actions.
    */
-  public onPropertyEditorUpdateTitleActions: EventBase<CreatorBase, PropertyEditorUpdateTitleActionsEvent> = new EventBase<CreatorBase, PropertyEditorUpdateTitleActionsEvent>();
+  public onPropertyEditorUpdateTitleActions: EventBase<CreatorBase, PropertyEditorUpdateTitleActionsEvent> = this.addCreatorEvent<CreatorBase, PropertyEditorUpdateTitleActionsEvent>();
   /**
    * An event that is raised before Survey Creator displays a pop-up window called from the Property Grid. This window allows users to edit choices, conditions, etc. Use this event to customize the pop-up window, for example, add custom action buttons.
    */
-  public onPropertyGridShowModal: EventBase<CreatorBase, PropertyGridShowPopupEvent> = new EventBase<CreatorBase, PropertyGridShowPopupEvent>();
-  public onCanDeleteItem: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
-  public onCollectionItemDeleting: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onPropertyGridShowModal: EventBase<CreatorBase, PropertyGridShowPopupEvent> = this.addCreatorEvent<CreatorBase, PropertyGridShowPopupEvent>();
+  public onCanDeleteItem: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
+  public onCollectionItemDeleting: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   /**
    * An event that is raised when Survey Creator obtains permitted operations for a collection item (a choice option in Choices, a column or row in Columns, etc.). Use this event to prevent users from adding, deleting, or editing a particular collection item.
    * @see onElementAllowOperations
    */
-  public onCollectionItemAllowOperations: EventBase<CreatorBase, CollectionItemAllowOperationsEvent> = new EventBase<CreatorBase, CollectionItemAllowOperationsEvent>();
+  public onCollectionItemAllowOperations: EventBase<CreatorBase, CollectionItemAllowOperationsEvent> = this.addCreatorEvent<CreatorBase, CollectionItemAllowOperationsEvent>();
   /**
    * An event that is raised when users add a new collection item (a choice option to Choices, a column or row to Columns, etc.). Use this event to modify this item.
    * 
@@ -459,7 +459,7 @@ export class CreatorBase extends Base
    * > This event is not raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). For these cases, handle the [`onMatrixColumnAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onMatrixColumnAdded) event instead.
    * @see onCollectionItemAllowOperations
    */
-  public onItemValueAdded: EventBase<CreatorBase, CollectionItemAddedEvent> = new EventBase<CreatorBase, CollectionItemAddedEvent>();
+  public onItemValueAdded: EventBase<CreatorBase, CollectionItemAddedEvent> = this.addCreatorEvent<CreatorBase, CollectionItemAddedEvent>();
   /**
    * An event that is raised when users add a new column to a [Multi-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-with-dropdown-list) or [Dynamic Matrix](https://surveyjs.io/form-library/documentation/api-reference/dynamic-matrix-table-question-model). Use this event to modify this column.
    * 
@@ -468,51 +468,51 @@ export class CreatorBase extends Base
    * > This event is not raised when users add a new column to a [Single-Select Matrix](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model). For this case, handle the [`onItemValueAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onItemValueAdded) event instead.
    * @see onCollectionItemAllowOperations
    */
-  public onMatrixColumnAdded: EventBase<CreatorBase, MatrixColumnAddedEvent> = new EventBase<CreatorBase, MatrixColumnAddedEvent>();
+  public onMatrixColumnAdded: EventBase<CreatorBase, MatrixColumnAddedEvent> = this.addCreatorEvent<CreatorBase, MatrixColumnAddedEvent>();
   /**
    * An event that is raised when a table property editor is created in the Property Grid. Use this event to configure the table property editor.
    * @see onPropertyEditorCreated
    */
-  public onSetPropertyEditorOptions: EventBase<CreatorBase, ConfigureTablePropertyEditorEvent> = new EventBase<CreatorBase, ConfigureTablePropertyEditorEvent>();
+  public onSetPropertyEditorOptions: EventBase<CreatorBase, ConfigureTablePropertyEditorEvent> = this.addCreatorEvent<CreatorBase, ConfigureTablePropertyEditorEvent>();
 
-  public onGenerateNewName: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onGenerateNewName: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   /**
    * An event that is raised when Survey Creator validates a modified value of a survey element property. Use this event to display a custom error message when the value is incorrect.
    * @see onPropertyValueChanging
    * @see onSurveyPropertyValueChanged
    */
-  public onPropertyValidationCustomError: EventBase<CreatorBase, PropertyDisplayCustomErrorEvent> = new EventBase<CreatorBase, PropertyDisplayCustomErrorEvent>();
+  public onPropertyValidationCustomError: EventBase<CreatorBase, PropertyDisplayCustomErrorEvent> = this.addCreatorEvent<CreatorBase, PropertyDisplayCustomErrorEvent>();
   /**
    * An event that is raised each time a user modifies a survey element property. Use this event to validate or correct a property value while the user changes it.
    * @see onPropertyValidationCustomError
    * @see onSurveyPropertyValueChanged
    */
-  public onPropertyValueChanging: EventBase<CreatorBase, PropertyValueChangingEvent> = new EventBase<CreatorBase, PropertyValueChangingEvent>();
+  public onPropertyValueChanging: EventBase<CreatorBase, PropertyValueChangingEvent> = this.addCreatorEvent<CreatorBase, PropertyValueChangingEvent>();
   /**
    * An event that is raised after a survey element property has changed.
    * @see onPropertyValidationCustomError
    * @see onPropertyValueChanging
    */
-  public onSurveyPropertyValueChanged: EventBase<CreatorBase, PropertyValueChangedEvent> = new EventBase<CreatorBase, PropertyValueChangedEvent>();
+  public onSurveyPropertyValueChanged: EventBase<CreatorBase, PropertyValueChangedEvent> = this.addCreatorEvent<CreatorBase, PropertyValueChangedEvent>();
   /**
    * An event that is raised when a condition editor renders a list of questions available for selection. Use this event to modify this list.
    */
-  public onConditionQuestionsGetList: EventBase<CreatorBase, ConditionGetQuestionListEvent> = new EventBase<CreatorBase, ConditionGetQuestionListEvent>();
+  public onConditionQuestionsGetList: EventBase<CreatorBase, ConditionGetQuestionListEvent> = this.addCreatorEvent<CreatorBase, ConditionGetQuestionListEvent>();
 
-  public onConditionGetTitle: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onConditionGetTitle: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   /**
    * An event that is raised when Survey Creator populates a condition editor with operators. Use this event to hide individual condition operators.
    */
-  public onGetConditionOperator: EventBase<CreatorBase, GetConditionOperatorEvent> = new EventBase<CreatorBase, GetConditionOperatorEvent>();
+  public onGetConditionOperator: EventBase<CreatorBase, GetConditionOperatorEvent> = this.addCreatorEvent<CreatorBase, GetConditionOperatorEvent>();
   /**
    * An event that is raised when the Logic tab constructs a user-friendly display text for a logic rule. Use this event to modify this display text.
    */
-  public onLogicItemDisplayText: EventBase<CreatorBase, LogicRuleGetDisplayTextEvent> = new EventBase<CreatorBase, LogicRuleGetDisplayTextEvent>();
+  public onLogicItemDisplayText: EventBase<CreatorBase, LogicRuleGetDisplayTextEvent> = this.addCreatorEvent<CreatorBase, LogicRuleGetDisplayTextEvent>();
   /**
     * An event that is raised when users modify survey or theme settings.
     * @see state
     */
-  public onModified: EventBase<CreatorBase, ModifiedEvent> = new EventBase<CreatorBase, ModifiedEvent>();
+  public onModified: EventBase<CreatorBase, ModifiedEvent> = this.addCreatorEvent<CreatorBase, ModifiedEvent>();
   /**
    * An event that is raised when users add a question to the survey. Use this event to customize the question.
    * 
@@ -520,7 +520,7 @@ export class CreatorBase extends Base
    * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onQuestionAdded: EventBase<CreatorBase, QuestionAddedEvent> = new EventBase<CreatorBase, QuestionAddedEvent>();
+  public onQuestionAdded: EventBase<CreatorBase, QuestionAddedEvent> = this.addCreatorEvent<CreatorBase, QuestionAddedEvent>();
   /**
    * An event that is raised when users add a [Panel](https://surveyjs.io/form-library/documentation/api-reference/panel-model) element to the survey. Use this event to customize the panel.
    * 
@@ -528,7 +528,7 @@ export class CreatorBase extends Base
    * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onPanelAdded: EventBase<CreatorBase, PanelAddedEvent> = new EventBase<CreatorBase, PanelAddedEvent>();
+  public onPanelAdded: EventBase<CreatorBase, PanelAddedEvent> = this.addCreatorEvent<CreatorBase, PanelAddedEvent>();
   /**
    * An event that is raised when a new page is added to the survey. Use this event to customize the page.
    * 
@@ -536,13 +536,13 @@ export class CreatorBase extends Base
    * 
    * [Customize Survey Elements on Creation](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#customize-survey-elements-on-creation (linkStyle))
    */
-  public onPageAdded: EventBase<CreatorBase, PageAddedEvent> = new EventBase<CreatorBase, PageAddedEvent>();
+  public onPageAdded: EventBase<CreatorBase, PageAddedEvent> = this.addCreatorEvent<CreatorBase, PageAddedEvent>();
 
   /**
    * An event that is raised when Survey Creator renders action buttons under each page on the design surface. Use this event to add, remove, or modify the buttons.
    * @see onDefineElementMenuItems
    */
-  public onGetPageActions: EventBase<CreatorBase, PageGetFooterActionsEvent> = new EventBase<CreatorBase, PageGetFooterActionsEvent>();
+  public onGetPageActions: EventBase<CreatorBase, PageGetFooterActionsEvent> = this.addCreatorEvent<CreatorBase, PageGetFooterActionsEvent>();
 
   /**
    * An event that is raised when Survey Creator instantiates a survey for the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide#designer-tab) tab. Use this event to customize the survey.
@@ -554,7 +554,7 @@ export class CreatorBase extends Base
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    * @see survey
    */
-  public onDesignerSurveyCreated: EventBase<CreatorBase, DesignerSurveyCreatedEvent> = new EventBase<CreatorBase, DesignerSurveyCreatedEvent>();
+  public onDesignerSurveyCreated: EventBase<CreatorBase, DesignerSurveyCreatedEvent> = this.addCreatorEvent<CreatorBase, DesignerSurveyCreatedEvent>();
   /**
    * An event that is raised when Survey Creator instantiates a survey for the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide#preview-tab) tab. Use this event to customize the survey.
    * 
@@ -564,30 +564,30 @@ export class CreatorBase extends Base
    * 
    * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
    */
-  public onPreviewSurveyCreated: EventBase<CreatorBase, PreviewSurveyCreatedEvent> = new EventBase<CreatorBase, PreviewSurveyCreatedEvent>();
+  public onPreviewSurveyCreated: EventBase<CreatorBase, PreviewSurveyCreatedEvent> = this.addCreatorEvent<CreatorBase, PreviewSurveyCreatedEvent>();
   public onTestSurveyCreated: EventBase<CreatorBase, any> = this.onPreviewSurveyCreated;
   /**
    * An event that is raised when Survey Creator [displays a toast notification](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#notify). Use this event to implement custom toast notification.
    * @see notify
    */
-  public onNotify: EventBase<CreatorBase, NotifyEvent> = new EventBase<CreatorBase, NotifyEvent>();
+  public onNotify: EventBase<CreatorBase, NotifyEvent> = this.addCreatorEvent<CreatorBase, NotifyEvent>();
   /**
    * An event that is raised before a survey element (question, panel, page, or the survey itself) is focused. Use this event to move focus to a different survey element.
    * @see onSelectedElementChanged
    * @see selectedElement
    */
-  public onSelectedElementChanging: EventBase<CreatorBase, ElementFocusingEvent> = new EventBase<CreatorBase, ElementFocusingEvent>();
+  public onSelectedElementChanging: EventBase<CreatorBase, ElementFocusingEvent> = this.addCreatorEvent<CreatorBase, ElementFocusingEvent>();
   /**
    * An event that is raised after a survey element (a question, panel, page, or the survey itself) is focused.
    * @see onSelectedElementChanging
    */
-  public onSelectedElementChanged: EventBase<CreatorBase, ElementFocusedEvent> = new EventBase<CreatorBase, ElementFocusedEvent>();
+  public onSelectedElementChanged: EventBase<CreatorBase, ElementFocusedEvent> = this.addCreatorEvent<CreatorBase, ElementFocusedEvent>();
   /**
    * An event that is raised when Survey Creator opens a dialog window for users to select files.
    * @see onUploadFile
    * @see uploadFiles
    */
-  public onOpenFileChooser: EventBase<CreatorBase, OpenFileChooserEvent> = new EventBase<CreatorBase, OpenFileChooserEvent>();
+  public onOpenFileChooser: EventBase<CreatorBase, OpenFileChooserEvent> = this.addCreatorEvent<CreatorBase, OpenFileChooserEvent>();
   /**
    * An event that is raised when a user selects a file to upload. Use this event to upload the file to your server.
    * 
@@ -596,29 +596,29 @@ export class CreatorBase extends Base
    * [View Demo](https://surveyjs.io/survey-creator/examples/file-upload/ (linkStyle))   
    * @see uploadFiles
    */
-  public onUploadFile: EventBase<CreatorBase, UploadFileEvent> = new EventBase<CreatorBase, UploadFileEvent>();
+  public onUploadFile: EventBase<CreatorBase, UploadFileEvent> = this.addCreatorEvent<CreatorBase, UploadFileEvent>();
   /**
    * An event that is raised when the Translation tab displays a property for translation. Use this event to control the property visibility.
    */
-  public onTranslationStringVisibility: EventBase<CreatorBase, TranslationStringVisibilityEvent> = new EventBase<CreatorBase, TranslationStringVisibilityEvent>();
-  public onTranslationLocaleInitiallySelected: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onTranslationStringVisibility: EventBase<CreatorBase, TranslationStringVisibilityEvent> = this.addCreatorEvent<CreatorBase, TranslationStringVisibilityEvent>();
+  public onTranslationLocaleInitiallySelected: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   /**
    * An event that is raised before a translated string is imported from a CSV file. Use this event to modify the string to be imported or cancel the import.
    * @see onTranslationExportItem
    * @see onTranslationImported
    */
-  public onTranslationImportItem: EventBase<CreatorBase, TranslationImportItemEvent> = new EventBase<CreatorBase, TranslationImportItemEvent>();
+  public onTranslationImportItem: EventBase<CreatorBase, TranslationImportItemEvent> = this.addCreatorEvent<CreatorBase, TranslationImportItemEvent>();
   /**
    * An event that is raised after all translated strings are imported from a CSV file.
    * @see onTranslationImportItem
    * @see onTranslationExportItem
    */
-  public onTranslationImported: EventBase<CreatorBase, TranslationImportedEvent> = new EventBase<CreatorBase, TranslationImportedEvent>();
+  public onTranslationImported: EventBase<CreatorBase, TranslationImportedEvent> = this.addCreatorEvent<CreatorBase, TranslationImportedEvent>();
   /**
    * An event that is raised before a translated string is exported to a CSV file. Use this event to modify the string to be exported.
    * @see onTranslationImportItem
    */
-  public onTranslationExportItem: EventBase<CreatorBase, TranslationExportItemEvent> = new EventBase<CreatorBase, TranslationExportItemEvent>();
+  public onTranslationExportItem: EventBase<CreatorBase, TranslationExportItemEvent> = this.addCreatorEvent<CreatorBase, TranslationExportItemEvent>();
 
   /**
    * An event that allows you to integrate a machine translation service, such as Google Translate or Microsoft Translator, into Survey Creator.
@@ -672,7 +672,7 @@ export class CreatorBase extends Base
    * 
    * > Survey Creator does not include a machine translation service out of the box. Our component only provides a UI for calling the service API.
    */
-  public onMachineTranslate: EventBase<CreatorBase, MachineTranslateEvent> = new EventBase<CreatorBase, MachineTranslateEvent>();
+  public onMachineTranslate: EventBase<CreatorBase, MachineTranslateEvent> = this.addCreatorEvent<CreatorBase, MachineTranslateEvent>();
 
   /**
    * An event that is raised before a string translation is changed. Use this event to override a new translation value.
@@ -684,14 +684,14 @@ export class CreatorBase extends Base
    * - [Localization & Globalization in SurveyJS Form Library](https://surveyjs.io/form-library/documentation/survey-localization)
    * - [Localization & Globalization in Survey Creator](https://surveyjs.io/survey-creator/documentation/localization)
    */
-  public onTranslationItemChanging: EventBase<CreatorBase, TranslationItemChangingEvent> = new EventBase<CreatorBase, TranslationItemChangingEvent>();
+  public onTranslationItemChanging: EventBase<CreatorBase, TranslationItemChangingEvent> = this.addCreatorEvent<CreatorBase, TranslationItemChangingEvent>();
 
   /**
    * An event that is raised when users drag and drop survey elements within the design surface. Use this event to control drag and drop operations.
    * @see onDragStart
    * @see onDragEnd
    */
-  public onDragDropAllow: EventBase<CreatorBase, DragDropAllowEvent> = new EventBase<CreatorBase, DragDropAllowEvent>();
+  public onDragDropAllow: EventBase<CreatorBase, DragDropAllowEvent> = this.addCreatorEvent<CreatorBase, DragDropAllowEvent>();
 
   /**
    * An event that allows you to create a custom message panel.
@@ -738,7 +738,7 @@ export class CreatorBase extends Base
    * });
    * ```
    */
-  public onCreateCustomMessagePanel: EventBase<CreatorBase, CreateCustomMessagePanelEvent> = new EventBase<CreatorBase, CreateCustomMessagePanelEvent>();
+  public onCreateCustomMessagePanel: EventBase<CreatorBase, CreateCustomMessagePanelEvent> = this.addCreatorEvent<CreatorBase, CreateCustomMessagePanelEvent>();
 
   public getSurveyJSONTextCallback: () => { text: string, isModified: boolean };
   public setSurveyJSONTextCallback: (text: string) => void;
@@ -1084,13 +1084,13 @@ export class CreatorBase extends Base
    * An event that is raised before the [active tab](#activeTab) is switched. Use this event to allow or cancel the switch.
    * @see makeNewViewActive
    */
-  public onActiveTabChanging: EventBase<CreatorBase, ActiveTabChangingEvent> = new EventBase<CreatorBase, ActiveTabChangingEvent>();
+  public onActiveTabChanging: EventBase<CreatorBase, ActiveTabChangingEvent> = this.addCreatorEvent<CreatorBase, ActiveTabChangingEvent>();
 
   /**
    * An event that is raised after the [active tab](#activeTab) is switched.
    * @see makeNewViewActive
    */
-  public onActiveTabChanged: EventBase<CreatorBase, ActiveTabChangedEvent> = new EventBase<CreatorBase, ActiveTabChangedEvent>();
+  public onActiveTabChanged: EventBase<CreatorBase, ActiveTabChangedEvent> = this.addCreatorEvent<CreatorBase, ActiveTabChangedEvent>();
   /**
    * Gets or sets the currently displayed tab.
    * 
@@ -1191,7 +1191,7 @@ export class CreatorBase extends Base
     const expandAction = this.sidebar.getExpandAction();
     !!expandAction && this.toolbar.actions.push(expandAction);
   }
-  public addEventBase<CreatorBase, T>(): EventBase<CreatorBase, T> {
+  public addCreatorEvent<CreatorBase, T>(): EventBase<CreatorBase, T> {
     return this.addEvent<CreatorBase, T>();
   }
   public updateToolboxIsCompact(newVal?: boolean) {
@@ -1224,7 +1224,7 @@ export class CreatorBase extends Base
     }
   }
   @property() showSidebarValue: boolean = true;
-  public onShowSidebarVisibilityChanged: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onShowSidebarVisibilityChanged: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   /**
    * Specifies whether to show the sidebar that displays the Property Grid.
    * 
@@ -1259,7 +1259,7 @@ export class CreatorBase extends Base
     this.onShowSidebarVisibilityChanged.fire(this, { show: value });
   }
   //#region Obsolete properties and functins
-  public onShowPropertyGridVisiblityChanged: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onShowPropertyGridVisiblityChanged: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
   public get showPropertyGrid(): boolean {
     SurveyHelper.warnNonSupported("showPropertyGrid", "showSidebar");
     return this.showSidebar;
@@ -1287,14 +1287,14 @@ export class CreatorBase extends Base
    * @see redo
    * @see onBeforeRedo
    */
-  public onBeforeUndo: EventBase<CreatorBase, BeforeUndoEvent> = new EventBase<CreatorBase, BeforeUndoEvent>();
+  public onBeforeUndo: EventBase<CreatorBase, BeforeUndoEvent> = this.addCreatorEvent<CreatorBase, BeforeUndoEvent>();
   /**
    * An event that is raised before an redo operation.
    * @see redo
    * @see undo
    * @see onBeforeUndo
    */
-  public onBeforeRedo: EventBase<CreatorBase, BeforeRedoEvent> = new EventBase<CreatorBase, BeforeRedoEvent>();
+  public onBeforeRedo: EventBase<CreatorBase, BeforeRedoEvent> = this.addCreatorEvent<CreatorBase, BeforeRedoEvent>();
 
   public get undoRedoManager(): UndoRedoManager {
     const plugin = this.getPlugin<UndoRedoPlugin>("undoredo");
@@ -1349,7 +1349,7 @@ export class CreatorBase extends Base
   /**
    * An event that is raised before a new page is added to the survey. Handle this event if you do not want to add the page. 
    */
-  public onPageAdding: EventBase<CreatorBase, PageAddingEvent> = new EventBase<CreatorBase, PageAddingEvent>();
+  public onPageAdding: EventBase<CreatorBase, PageAddingEvent> = this.addCreatorEvent<CreatorBase, PageAddingEvent>();
   @undoRedoTransaction()
   public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
     const options = {
@@ -1928,7 +1928,7 @@ export class CreatorBase extends Base
       this._updateSaveActions();
     }
   }
-  public onStateChanged: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onStateChanged: EventBase<CreatorBase, any> = this.addCreatorEvent<CreatorBase, any>();
 
   notifier = new Notifier({
     root: "svc-notifier",
