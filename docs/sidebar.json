@@ -86,8 +86,8 @@
       "Title": "Survey Creator API",
       "Items": [
         {
-          "Name": "surveycreatormodel",
-          "Title": "SurveyCreatorModel"
+          "Name": "surveycreator",
+          "Title": "SurveyCreator"
         },
         {
           "Name": "ICreatorOptions",

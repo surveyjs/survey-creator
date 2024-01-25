@@ -342,15 +342,15 @@ test("Simulator view switch", (): any => {
   };
   let model: TestSurveyTabViewModel = getTestModel(creator);
   expect(model.simulator.getRootCss().includes("svd-simulator-main--frame")).toBeFalsy();
-  model.simulator.device = "iPhone6";
+  model.simulator.device = "iPhone15";
   expect(model.simulator.getRootCss().includes("svd-simulator-main--frame")).toBeTruthy();
 });
-test("Simulator in iphone6", (): any => {
+test("Simulator in iphone15", (): any => {
   let creator: CreatorTester = new CreatorTester();
   let model: TestSurveyTabViewModel = getTestModel(creator);
-  model.simulator.device = "iPhone6";
-  expect(model.simulator.simulatorFrame.deviceWidth).toEqual(667);
-  expect(model.simulator.simulatorFrame.deviceHeight).toEqual(375);
+  model.simulator.device = "iPhone15";
+  expect(model.simulator.simulatorFrame.deviceWidth).toEqual(852);
+  expect(model.simulator.simulatorFrame.deviceHeight).toEqual(393);
 });
 test("Hide Test Again action on leaving Preview", (): any => {
   const creator: CreatorTester = new CreatorTester();

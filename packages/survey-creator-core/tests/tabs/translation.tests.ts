@@ -1909,3 +1909,11 @@ test("Translation update filterPageActiontitle after activated", () => {
   question.removeRow(1, false);
   expect(counter).toBe(1);
 });
+test("Set correct locale to settings survey", () => {
+  const creator = new CreatorTester();
+  creator.locale = "fr";
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const translation = tabTranslation.model;
+  expect(translation.settingsSurvey.locale).toBe("fr");
+});
