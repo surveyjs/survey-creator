@@ -1,6 +1,7 @@
 .svd-translation-tab {
   height: 100%;
   
+  @include disableTransitionAnimations;
   .form-group {
     margin-top: 1em;
   }
