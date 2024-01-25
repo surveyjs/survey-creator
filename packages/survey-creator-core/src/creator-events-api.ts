@@ -1,5 +1,7 @@
-import { Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement } from "survey-core";
+import {
+  Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement
+} from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 
 export interface ElementDeletingEvent {
@@ -8,7 +10,7 @@ export interface ElementDeletingEvent {
    */
   element: Base;
   /**
-   * The element type. Possible values: "question", "panel" and "page"
+   * The element type: `"question"`, `"panel"`, or `"page"`.
    */
   elementType: string;
   /**
@@ -17,7 +19,7 @@ export interface ElementDeletingEvent {
   allowing: boolean;
 }
 
-export interface GetPropertyReadOnlyEvent {
+export interface PropertyGetReadOnlyEvent {
   /**
    * A property whose read-only status you can change.
    */
@@ -40,7 +42,7 @@ export interface GetPropertyReadOnlyEvent {
   readOnly: boolean;
 }
 
-export interface GetObjectDisplayNameEvent {
+export interface ElementGetDisplayNameEvent {
   /**
    * A survey element (survey, page, question, or panel) whose name has been requested.
    */
@@ -119,7 +121,7 @@ export interface ElementAllowOperationsEvent {
   allowEdit: boolean;
 }
 
-export interface DefineElementMenuItemsEvent {
+export interface ElementGetActionsEvent {
   /**
    * A survey element (question, panel, or page) whose adorners you can customize.
    */
@@ -129,7 +131,7 @@ export interface DefineElementMenuItemsEvent {
    */
   items: IAction[];
 }
-export interface ShowingPropertyEvent {
+export interface PropertyAddingEvent {
   /**
    * A property being added.
    */
@@ -193,7 +195,7 @@ export interface PropertyEditorUpdateTitleActionsEvent {
   titleActions: IAction[];
 }
 
-export interface PropertyGridShowModalEvent {
+export interface PropertyGridShowPopupEvent {
   /**
    * The instance of a survey element (question or panel) that users are configuring in the Property Grid.
    */
@@ -251,7 +253,7 @@ export interface CollectionItemAllowOperationsEvent {
   allowEdit: boolean;
 }
 
-export interface ItemValueAddedEvent {
+export interface CollectionItemAddedEvent {
   /**
    * A survey element (survey, page, panel, question) that contains the collection to which the target item belongs.
    */
@@ -285,7 +287,7 @@ export interface MatrixColumnAddedEvent {
   columns: MatrixDropdownColumn[];
 }
 
-export interface SetPropertyEditorOptions {
+export interface TablePropertyEditorOptions {
   /**
    * A Boolean property that you can set to `false` if you want to disallow users to add and delete table rows.
    */
@@ -299,7 +301,7 @@ export interface SetPropertyEditorOptions {
    */
   allowBatchEdit: boolean;
 }
-export interface SetPropertyEditorOptionsEvent {
+export interface ConfigureTablePropertyEditorEvent {
   /**
    * A survey element (survey, page, panel, question) for which the table property editor is created.
    */
@@ -309,12 +311,12 @@ export interface SetPropertyEditorOptionsEvent {
    */
   propertyName: string;
   /**
-   * options that you can modify
+   * An obejct with table property editor settings that you can modify.
    */
-  editorOptions: SetPropertyEditorOptions;
+  editorOptions: TablePropertyEditorOptions;
 }
 
-export interface PropertyValidationCustomErrorEvent {
+export interface PropertyDisplayCustomErrorEvent {
   /**
    * A survey element (survey, page, panel, question) whose property is being validated.
    */
@@ -352,7 +354,7 @@ export interface PropertyValueChangingEvent {
   newValue: any;
 }
 
-export interface SurveyPropertyValueChangedEvent {
+export interface PropertyValueChangedEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) whose property has changed.
    */
@@ -367,7 +369,7 @@ export interface SurveyPropertyValueChangedEvent {
   value: any;
 }
 
-export interface ConditionQuestionsGetListEvent {
+export interface ConditionGetQuestionListEvent {
   /**
    * A survey element (question, panel, page, or the survey itself) for which the condition editor is displayed.
    */
@@ -385,8 +387,7 @@ export interface ConditionQuestionsGetListEvent {
    */
   list: any;
   /**
-   * `"asc"` (default) | `"none"`\
-   * The sort order of questions within the list. Set this property to `"none"` to disable sorting.
+   * The sort order of questions within the list: `"asc"` (default) or `"none"`. Set this property to `"none"` to disable sorting.
    */
   sortOrder: string;
 }
@@ -397,8 +398,7 @@ export interface GetConditionOperatorEvent {
    */
   questionName: string;
   /**
-   * A condition opeator for which the event is raised.
-   * Possible values are: `"empty"` | `"notempty"` | `"equal"` | `"notequal"` | `"contains"` | `"notcontains"` | `"anyof"` | `"allof"` | `"greater"` | `"less"` | `"greaterorequal"` | `"lessorequal"`
+   * A condition operator for which the event is raised: `"empty"`, `"notempty"`, `"equal"`, `"notequal"`, `"contains"`, `"notcontains"`, `"anyof"`, `"allof"`, `"greater"`, `"less"`, `"greaterorequal"`, or `"lessorequal"`.
    */
   operator: string;
   /**
@@ -407,7 +407,7 @@ export interface GetConditionOperatorEvent {
   show: boolean;
 }
 
-export interface LogicItemDisplayTextEvent {
+export interface LogicRuleGetDisplayTextEvent {
   /**
    * A logical expression associated with the logic rule. 
    */
@@ -428,8 +428,7 @@ export interface LogicItemDisplayTextEvent {
 
 export interface ModifiedEvent {
   /*
-  * Possible values: `"ADDED_FROM_TOOLBOX"` | `"PAGE_ADDED"` | `"PAGE_MOVED"` | `"QUESTION_CONVERTED"` | `"QUESTION_CHANGED_BY_EDITOR"` | `"PROPERTY_CHANGED"` | `"ELEMENT_REORDERED"` | `"OBJECT_DELETED"` | `"VIEW_TYPE_CHANGED"` | `"DO_DROP"` | `"TRANSLATIONS_CHANGED"` | `"JSON_EDITOR"` | `"THEME_MODIFIED"`\
-  * A value that indicates the modification.
+  * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"PAGE_ADDED"`, `"PAGE_MOVED"`, `"QUESTION_CONVERTED"`, `"QUESTION_CHANGED_BY_EDITOR"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"VIEW_TYPE_CHANGED"`, `"DO_DROP"`, `"TRANSLATIONS_CHANGED"`, `"JSON_EDITOR"`, `"THEME_MODIFIED"`
   * 
   * Depending on the `options.type` value, the `options` object contains parameters listed below:
   * 
@@ -511,8 +510,7 @@ export interface QuestionAddedEvent {
    */
   page: PageModel;
   /**
-   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
-   * Possible values: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"` | `"ELEMENT_CONVERTED"`
+   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) ("DROPPED_FROM_TOOLBOX"`), created using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), duplicated (`"ELEMENT_COPIED"`), or converted from another question type (`"ELEMENT_CONVERTED"`).
    */
   reason: string;
 }
@@ -528,7 +526,7 @@ export interface PanelAddedEvent {
   page: PageModel;
   /**
    * A value that indicates how the panel was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization), created using the Add Question button, or duplicated.
-   * Possible values: `"DROPPED_FROM_TOOLBOX"` | `"ADDED_FROM_PAGEBUTTON"` | `"ELEMENT_COPIED"`
+   * A value that indicates how the question was added: dragged from the [Toolbox](https://surveyjs.io/survey-creator/documentation/toolbox-customization) ("DROPPED_FROM_TOOLBOX"`), created using the Add Question button (`"ADDED_FROM_PAGEBUTTON"`), or duplicated (`"ELEMENT_COPIED"`).
    */
   reason: string;
 }
@@ -540,7 +538,7 @@ export interface PageAddedEvent {
   page: PageModel;
 }
 
-export interface GetPageActionsEvent {
+export interface PageGetFooterActionsEvent {
   /**
    * An array of actions. You can add, modify, or remove actions from this array.
    */
@@ -551,8 +549,7 @@ export interface GetPageActionsEvent {
   page: PageModel;
   /**
    * Adds a new question of a specified [`type`](https://surveyjs.io/form-library/documentation/api-reference/question#getType) to the page.
-   * @param type 
-   * @returns 
+   * @param type The type of the question to add.
    */
   addNewQuestion: (type: string) => void;
 }
@@ -578,16 +575,16 @@ export interface NotifyEvent {
   message: string;
 }
 
-export interface SelectedElementChangingEvent {
+export interface ElementFocusingEvent {
   /**
    * An element that is going to be focused.
    */
   newSelectedElement: Base;
 }
 
-export interface SelectedElementChangedEvent {
+export interface ElementFocusedEvent {
   /**
-   * The [focused element](#selectedElement).
+   * The [focused element](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#selectedElement).
    */
   newSelectedElement: Base;
 }
@@ -607,8 +604,7 @@ export interface OpenFileChooserEvent {
   item: ItemValue;
   /**
    * A callback function to which you should pass selected files.
-   * @param files 
-   * @returns 
+   * @param files An array of selected files.
    */
   callback: (files: Array<File>) => void;
 }
@@ -624,9 +620,8 @@ export interface UploadFileEvent {
   files: File[];
   /**
    * A callback function that you should call when a file is uploaded successfully or when file upload fails. Pass `"success"` or `"error"` as the `status` argument. If the file upload is successful, pass the file's URL as the `fileUrl` argument.
-   * @param status 
-   * @param fileUrl 
-   * @returns 
+   * @param status A string value that indicates a successful or failed file upload: `"success"` or `"error"`.
+   * @param fileUrl The URL of a successfully uploaded file.
    */
   callback: (status: string, fileUrl: string) => void;
 }
@@ -648,7 +643,7 @@ export interface TranslationStringVisibilityEvent {
 
 export interface TranslationImportItemEvent {
   /**
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
   locale: string;
   /**
@@ -670,7 +665,7 @@ export interface TranslationExportItemEvent {
    */
   obj: Base;
   /**
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
   locale: string;
   /**
@@ -693,7 +688,7 @@ export interface TranslationItemChangingEvent {
    */
   obj: Base;
   /**
-   * The current locale identifier (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
+   * The current locale code (`"en"`, `"de"`, etc.). Contains an empty string if the default locale is used.
    */
   locale: string;
   /**
@@ -708,11 +703,11 @@ export interface TranslationItemChangingEvent {
 
 export interface MachineTranslateEvent {
   /**
-   * A locale from which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * A locale from which you want to translate strings. Contains a locale code (`"en"`, `"de"`, etc.).
    */
   fromLocale: string;
   /**
-   * A locale to which you want to translate strings. Contains a locale identifier (`"en"`, `"de"`, etc.).
+   * A locale to which you want to translate strings. Contains a locale code (`"en"`, `"de"`, etc.).
    */
   toLocale: string;
   /**
@@ -721,9 +716,7 @@ export interface MachineTranslateEvent {
   strings: Array<string>;
   /**
   * A callback function that accepts translated strings. If the translation failed, pass an empty array or call this function without arguments.
-  * 
-   * @param strings 
-   * @returns 
+   * @param strings An array of translated strings.
    */
   callback: (strings: Array<string>) => void;
 }
@@ -786,8 +779,6 @@ export interface CreateCustomMessagePanelEvent {
   actionText: string;
   /**
    * A function that is called when users click the action link. Assign a custom function to this parameter.
-   *
-   * @returns 
    */
   onClick: () => void;
 }
