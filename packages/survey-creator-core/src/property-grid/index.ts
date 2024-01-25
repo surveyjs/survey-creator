@@ -48,7 +48,6 @@ function propertyVisibleIf(params: any): boolean {
   const obj = this.question.obj;
   const prop = this.question.property;
   if (!obj || !prop) return false;
-  const originalProp = Serializer.getOriginalProperty(obj, prop.name);
   if (!Serializer.hasOriginalProperty(obj, prop.name)) return false;
   return prop.isVisible("", obj);
 }

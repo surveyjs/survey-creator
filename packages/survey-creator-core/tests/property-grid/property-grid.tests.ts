@@ -3004,3 +3004,27 @@ test("Setup correct categories for dynamic properties in components, #2", () => 
   expect(panel.questions[1].name).toBe("title");
   ComponentCollection.Instance.clear();
 });
+test("Check showInMultipleColumns property visibility", () => {
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    elements: [
+      {
+        "type": "matrixdynamic",
+        "name": "matrix",
+        "columns": [
+          {
+            "name": "Column1",
+            "cellType": "checkbox",
+            "showInMultipleColumns": true
+          }
+        ]
+      }
+    ]
+  });
+  const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("matrix");
+  var propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const showInMultipleColumnsQuestion = propertyGrid.survey.getQuestionByName("showInMultipleColumns");
+  expect(showInMultipleColumnsQuestion.value).toBe(true);
+  expect(showInMultipleColumnsQuestion.isVisible).toBeTruthy();
+});
