@@ -104,6 +104,9 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
 
 export class CreatorEvent extends EventBase<CreatorBase, any> { }
 
+/**
+ * A base class for Survey Creator.
+ */
 export class CreatorBase extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner, ILocalizableOwner {
   //ILocalizableOwner
