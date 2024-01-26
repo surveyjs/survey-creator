@@ -366,11 +366,9 @@ export class PropertyGridTitleActionsCreator {
     }
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
-      actions.push(helpAction);
-      if (actions.length === 1) {
-        question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
-        helpAction.iconSize = 16;
-      }
+      actions.unshift(helpAction);
+      question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
+      helpAction.iconSize = 16;
     }
     if (actions.length > 0) {
       options.titleActions = actions;
@@ -441,6 +439,7 @@ export class PropertyGridTitleActionsCreator {
       tooltip: question.description,
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
+      css: "spg-help-action",
       showTitle: false,
       action: () => {
         question.descriptionLocation =
@@ -1473,8 +1472,8 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     return res;
   }
   public onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any): void {
-    if(!options.value && options.value !== 0) {
-      if(prop.defaultValue !== undefined) {
+    if (!options.value && options.value !== 0) {
+      if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
         options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
@@ -1597,8 +1596,8 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): boolean {
-    if(prop.type === "dropdown") return false;
-    if(prop.type === "buttongroup") return true;
+    if (prop.type === "dropdown") return false;
+    if (prop.type === "buttongroup") return true;
     if (this.isLocaleProp(prop)) return false;
     if (
       !this.canRenderAsButtonGroup ||
@@ -1766,7 +1765,7 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
-    if(creatorSettings.logic.questionSortOrder === "asc") {
+    if (creatorSettings.logic.questionSortOrder === "asc") {
       SurveyHelper.sortItems(qItems);
     }
     return qItems;
