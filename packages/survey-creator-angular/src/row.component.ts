@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { QuestionRowModel } from "survey-core";
-import { CreatorBase, RowViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
 import { AngularComponentFactory } from "survey-angular-ui";
 
@@ -9,7 +9,7 @@ import { AngularComponentFactory } from "survey-angular-ui";
   templateUrl: "./row.component.html"
 })
 export class CreatorRowComponent extends CreatorModelComponent<RowViewModel> {
-  @Input() componentData!: { creator: CreatorBase, row: QuestionRowModel };
+  @Input() componentData!: { creator: SurveyCreatorModel, row: QuestionRowModel };
 
   public model!: RowViewModel;
 

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { CreatorBase } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
 import { TestComponent } from "./test.component";
 
@@ -10,6 +10,6 @@ import { TestComponent } from "./test.component";
 })
 export class TestByPageComponent extends TestDefaultComponent {
   protected override createCreator(): void {
-    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
+    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true, pageEditMode: "bypage" });
   }
 }

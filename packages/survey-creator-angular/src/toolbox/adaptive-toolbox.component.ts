@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
-import { CreatorBase, QuestionToolbox } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
 import { VerticalResponsivityManager } from "survey-core";
 import { BaseAngular } from "survey-angular-ui";
 
@@ -9,7 +9,7 @@ import { BaseAngular } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class AdaptiveToolboxComponent extends BaseAngular<QuestionToolbox> implements AfterViewInit {
-  @Input() creator!: CreatorBase;
+  @Input() creator!: SurveyCreatorModel;
   @ViewChild("container") container!: ElementRef<HTMLElement>;
   private responsivityManager: VerticalResponsivityManager | undefined;
   public get model() {

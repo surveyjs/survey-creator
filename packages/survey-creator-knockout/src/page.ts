@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { ImplementorBase, Survey } from "survey-knockout-ui";
 import { SurveyCreator } from "./creator";
-import { CreatorBase, PageAdorner, SurveyHelper, toggleHovered } from "survey-creator-core";
+import { SurveyCreatorModel, PageAdorner, SurveyHelper, toggleHovered } from "survey-creator-core";
 import { PageModel } from "survey-core";
 
 const template = require("./page.html");
@@ -10,7 +10,7 @@ export class CreatorSurveyPageComponent extends PageAdorner {
   private pageUpdater;
   private currPage: PageModel;
 
-  constructor(creator: CreatorBase, private _page: PageModel | ko.Observable<PageModel>) {
+  constructor(creator: SurveyCreatorModel, private _page: PageModel | ko.Observable<PageModel>) {
     super(creator, ko.unwrap(_page));
 
     if(ko.isSubscribable(_page)) {

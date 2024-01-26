@@ -7,7 +7,7 @@ import {
   property,
   actionModeType
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
@@ -92,7 +92,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     protected surveyElement: T
   ) {
     super();

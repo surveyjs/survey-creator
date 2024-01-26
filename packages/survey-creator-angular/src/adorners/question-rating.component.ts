@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, TemplateRef, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { AngularComponentFactory, EmbeddedViewContentComponent } from "survey-angular-ui";
-import { CreatorBase, QuestionRatingAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionRatingAdornerViewModel } from "survey-creator-core";
 import { QuestionDesignerComponent } from "../question.component";
 import { QuestionRatingModel } from "survey-core";
 

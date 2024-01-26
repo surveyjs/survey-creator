@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { Survey } from "survey-knockout-ui";
 import {
   ICreatorOptions,
-  CreatorBase
+  SurveyCreatorModel
 } from "survey-creator-core";
 import { SurveyModel } from "survey-core";
 
@@ -10,7 +10,7 @@ if (!!ko.options) {
   ko.options.useOnlyNativeEvents = true;
 }
 
-export class SurveyCreator extends CreatorBase {
+export class SurveyCreator extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }

@@ -1,6 +1,6 @@
 import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
 import { settings } from "../../creator-settings";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder";
@@ -50,7 +50,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));

@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { CreatorBase, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
+import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
 
@@ -53,7 +53,7 @@ interface expectedValues {
   sidebarFlyoutMode: boolean;
   showPageNavigator: boolean;
 }
-function checkCreatorLayoutPropertiesByWidth(creator: CreatorBase, newOffsetWidth: number, options: expectedValues) {
+function checkCreatorLayoutPropertiesByWidth(creator: SurveyCreatorModel, newOffsetWidth: number, options: expectedValues) {
   const container: SimpleContainer = new SimpleContainer({});
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
 

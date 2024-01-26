@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { ToolboxToolViewModel, CreatorBase, IQuestionToolboxItem } from "survey-creator-core";
+import { ToolboxToolViewModel, SurveyCreatorModel, IQuestionToolboxItem } from "survey-creator-core";
 import { BaseAngular, AngularComponentFactory } from "survey-angular-ui";
 
 @Component({
@@ -8,7 +8,7 @@ import { BaseAngular, AngularComponentFactory } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class ToolboxItemComponent extends BaseAngular<ToolboxToolViewModel> {
-  @Input() creator!: CreatorBase;
+  @Input() creator!: SurveyCreatorModel;
   @Input() model!: IQuestionToolboxItem;
   @Input() isCompact: boolean = false;
   @Input() viewModel!: ToolboxToolViewModel

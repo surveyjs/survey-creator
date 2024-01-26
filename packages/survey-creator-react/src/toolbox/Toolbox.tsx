@@ -1,12 +1,12 @@
 import React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, SurveyElementBase } from "survey-react-ui";
-import { CreatorBase } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 import { SurveyCreatorToolboxTool } from "./ToolboxItem";
 import { SurveyCreatorToolboxCategory } from "./ToolboxCategory";
 
 export interface ISurveyCreatorToolboxProps {
-  model: CreatorBase;
+  model: SurveyCreatorModel;
 }
 
 export class Toolbox extends SurveyElementBase<ISurveyCreatorToolboxProps, any> {

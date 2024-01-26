@@ -1,5 +1,5 @@
 import { Action, ArrayChanges, Base, ComputedUpdater, property, EventBase } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { IUndoRedoChange, UndoRedoAction, UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoController extends Base {
@@ -39,7 +39,7 @@ export class UndoRedoController extends Base {
     }
   }
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     super();
     this.updateSurvey();
   }
@@ -186,10 +186,10 @@ export class UndoRedoController extends Base {
    * The event is called before undo happens.
    * options.canUndo a boolean value. It is true by default. Set it false to hide prevent undo operation.
    */
-  public onBeforeUndo: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onBeforeUndo: EventBase<SurveyCreatorModel, any> = new EventBase<SurveyCreatorModel, any>();
   /**
     * The event is called before redo happens.
     * options.canRedo a boolean value. It is true by default. Set it false to hide prevent redo operation.
     */
-  public onBeforeRedo: EventBase<CreatorBase, any> = new EventBase<CreatorBase, any>();
+  public onBeforeRedo: EventBase<SurveyCreatorModel, any> = new EventBase<SurveyCreatorModel, any>();
 }

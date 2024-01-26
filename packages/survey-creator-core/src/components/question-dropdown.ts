@@ -1,6 +1,6 @@
 
 import { QuestionDropdownModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, CssClassBuilder, ItemValue } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { editorLocalization } from "../editorLocalization";
 
@@ -11,7 +11,7 @@ export class QuestionDropdownAdornerViewModel extends QuestionAdornerViewModel {
   @property({ defaultValue: -1 }) private visibleCount: number;
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
   ) {

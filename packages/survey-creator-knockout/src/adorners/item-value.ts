@@ -5,7 +5,7 @@ import {
   SurveyTemplateRendererViewModel,
   SurveyModel
 } from "survey-core";
-import { CreatorBase, ItemValueWrapperViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ItemValueWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 import { KnockoutDragEvent } from "../events";
 
@@ -13,7 +13,7 @@ const template = require("./item-value.html");
 
 class KnockoutItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     public question: QuestionSelectBase,
     public item: ItemValue,
     public templateData: any

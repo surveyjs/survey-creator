@@ -1,5 +1,5 @@
 import { ActionContainer, ComputedUpdater, DragTypeOverMeEnum, IAction, PageModel, property } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { IPortableMouseEvent } from "../utils/events";
 import { SurveyElementAdornerBase } from "./action-container-view-model";
 import { toggleHovered } from "../utils/utils";
@@ -19,7 +19,7 @@ export class PageAdorner extends SurveyElementAdornerBase<PageModel> {
       this.dragTypeOverMe = this.page?.dragTypeOverMe;
     }
   }
-  constructor(creator: CreatorBase, page: PageModel) {
+  constructor(creator: SurveyCreatorModel, page: PageModel) {
     super(creator, page);
     this.actionContainer.sizeMode = "small";
     this.questionTypeSelectorModel = this.creator.getQuestionTypeSelectorModel(

@@ -1,5 +1,5 @@
 import { Base, property, ListModel, Action, ComputedUpdater } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { SurveyTextWorker, SurveyTextWorkerError } from "../../textWorker";
 import { saveToFileHandler } from "../../utils/utils";
@@ -13,7 +13,7 @@ export abstract class JsonEditorBaseModel extends Base {
   private jsonEditorChangedTimeoutId: number = -1;
   @property() hasErrors: boolean;
 
-  constructor(protected creator: CreatorBase) {
+  constructor(protected creator: SurveyCreatorModel) {
     super();
   }
   public get text(): string {
@@ -122,7 +122,7 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
   private exportAction: Action;
   private copyAction: Action;
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }
 
@@ -239,6 +239,6 @@ export abstract class TabJsonEditorBasePlugin implements ICreatorPlugin {
     return !textWorker.isJsonHasErrors;
   }
   protected abstract createModel(
-    creator: CreatorBase
+    creator: SurveyCreatorModel
   ): JsonEditorBaseModel;
 }

@@ -1,5 +1,5 @@
 import { SurveyModel, IAction, Base, Question } from "survey-core";
-import { CreatorBase, isStringEditable } from "../src/creator-base";
+import { SurveyCreatorModel, isStringEditable } from "../src/creator-base";
 import { settings as creatorSetting } from "../src/creator-settings";
 import { ICreatorOptions } from "../src/creator-options";
 import { SurveyLogic } from "../src/components/tabs/logic";
@@ -7,7 +7,7 @@ import { QuestionLinkValueModel } from "../src/components/link-value";
 
 const dummyQuestion = new QuestionLinkValueModel("q1");
 
-export class CreatorTester extends CreatorBase {
+export class CreatorTester extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions, setOldDefaultNewSurveyJSON = true) {
     super(options, options2);
     this.autoSaveDelay = 0;
