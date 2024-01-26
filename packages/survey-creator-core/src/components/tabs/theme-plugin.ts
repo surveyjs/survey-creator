@@ -1,6 +1,7 @@
 import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
 import { settings } from "../../creator-settings";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";

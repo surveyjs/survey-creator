@@ -353,7 +353,7 @@ export class StringEditorViewModelBase extends Base {
     let mdText = null;
     if (!this.editAsText) {
       var options = {
-        element: this.locString.owner,
+        element: <Base><any>this.locString.owner,
         text: <any>null,
         name: this.locString.name,
         html: event.target.innerHTML

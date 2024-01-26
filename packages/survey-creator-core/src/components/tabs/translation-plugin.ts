@@ -1,5 +1,6 @@
 import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";

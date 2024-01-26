@@ -1,6 +1,7 @@
 import { notShortCircuitAnd } from "../../utils/utils";
 import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
