@@ -1,6 +1,7 @@
 import { notShortCircuitAnd } from "../../utils/utils";
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
-import { ICreatorPlugin, CreatorBase } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";

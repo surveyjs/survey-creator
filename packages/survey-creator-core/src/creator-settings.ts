@@ -186,6 +186,17 @@ export interface ICollectionItemAllowOperations {
   allowAdd: boolean;
 }
 
+export interface ICreatorPlugin {
+  activate: () => void;
+  update?: () => void;
+  deactivate?: () => boolean;
+  canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate?: () => boolean | undefined;
+  dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
+  model: Base;
+}
+
 export interface ISurveyCreatorOptions {
   isMobileView: boolean;
   alwaySaveTextInPropertyEditors: boolean;

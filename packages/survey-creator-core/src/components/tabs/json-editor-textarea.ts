@@ -1,5 +1,6 @@
 import { SurveyModel, property, propertyArray } from "survey-core";
-import { ICreatorPlugin, CreatorBase } from "../../creator-base";
+import { CreatorBase } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
 import {
   JsonEditorBaseModel,
