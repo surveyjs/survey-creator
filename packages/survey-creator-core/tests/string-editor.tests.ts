@@ -476,7 +476,7 @@ test("StringEditorConnector for new choice, Bug#4292", (): any => {
   let eventValue, eventText;
   let eventCounter = 0;
   creator.onItemValueAdded.add((sender, options) => {
-    eventCounter ++;
+    eventCounter++;
     eventValue = options.newItem.value;
     eventText = options.newItem.text;
   });
@@ -832,6 +832,27 @@ test("StringEditor multiline paste for selectbase questions", (): any => {
   connectorItem2.onTextChanging.fire(null, { value: "\na\nb\r\nc\n" });
   expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "c", "item3"]);
   expect(question.choices.map(c => c.value)).toEqual(["item1", "item4", "item5", "item6", "item3"]);
+});
+
+test("StringEditor multiline paste with tabs and empty lines for selectbase questions", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "radiogroup", name: "q1", choices: ["item1", "item2", "item3"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as QuestionRadiogroupModel;
+  creator.selectElement(question);
+
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+  var connectorItem2 = StringEditorConnector.get(question.choices[1].locText);
+
+  connectorItem2.onTextChanging.fire(null, { value: "\n\t\t\n\ta\t\nb\r\n\n" });
+  expect(question.choices.map(c => c.text)).toEqual(["item1", "a", "b", "item3"]);
 });
 
 test("StringEditor multiline paste for selectbase questions - inplaceEditForValues", (): any => {
