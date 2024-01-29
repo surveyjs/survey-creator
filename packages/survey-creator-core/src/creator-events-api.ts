@@ -121,9 +121,9 @@ export interface ElementAllowOperationsEvent {
    */
   allowEdit: boolean;
   /**
-   * Allows users to control the settings button visibility. If you set this property to true/false the settings button will be explisitly shown/hidded. Undefiend values keeps the default behavior - the settings button is visible on mobile devices only.
+   * Controls the visibility of the Settings button that allows users to open the Property Grid for survey element configuration. Set this property to `true` or `false` to display or hide the Settings button at all times. The default value `undefined` displays the Settings button only when Survey Creator has small width.
    */
-  allowShowSettings: boolean | undefined,
+  allowShowSettings: boolean | undefined;
 }
 
 export interface ElementGetActionsEvent {
