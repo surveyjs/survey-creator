@@ -90,10 +90,10 @@
   </template>
 </template>
 <script setup lang="ts">
-import type { CreatorBase } from "survey-creator-core";
+import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
-const props = defineProps<{ model: CreatorBase }>();
+const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);
 });

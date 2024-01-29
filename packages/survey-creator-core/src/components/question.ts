@@ -18,7 +18,7 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
@@ -48,7 +48,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private dragOrClickHelper: DragOrClickHelper;
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {

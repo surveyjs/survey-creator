@@ -5,13 +5,13 @@
 </template>
 <script lang="ts" setup>
 import { slk } from "survey-core";
-import { CreatorBase, type ICreatorOptions } from "survey-creator-core";
+import { SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
 const props = defineProps<{options: ICreatorOptions, useSlk: boolean}>()
 if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
 }
-const creator = new CreatorBase(props.options);
+const creator = new SurveyCreatorModel(props.options);
 (window as any).creator = creator;
 </script>

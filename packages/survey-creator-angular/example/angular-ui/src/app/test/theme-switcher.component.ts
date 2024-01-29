@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { CreatorBase } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
 
 @Component({
@@ -11,6 +11,6 @@ import { TestDefaultComponent } from "./default.component";
 export class TestThemeSwitcherComponent extends TestDefaultComponent {
   protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
-    this.creator = new CreatorBase({});
+    this.creator = new SurveyCreatorModel({});
   }
 }

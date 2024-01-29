@@ -1,6 +1,6 @@
 import { notShortCircuitAnd } from "../../utils/utils";
 import { Base, SurveyModel, Action, ComputedUpdater } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
@@ -27,7 +27,7 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "designer"; });
   }
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("designer", this);
     const propertyGridModel = new PropertyGridModel(creator.survey as any as Base, creator);
     this.propertyGrid = new PropertyGridViewModel(propertyGridModel, creator);

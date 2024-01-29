@@ -7,7 +7,7 @@ import {
   QuestionRowModel
 } from "survey-core";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   ItemValueWrapperViewModel,
   RowViewModel
 } from "survey-creator-core";
@@ -17,7 +17,7 @@ const template = require("./row.html");
 
 class KnockoutRowViewModel extends RowViewModel {
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     public row: QuestionRowModel,
     public templateData: any
   ) {

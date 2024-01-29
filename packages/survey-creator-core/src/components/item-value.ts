@@ -9,7 +9,7 @@ import {
   DragOrClickHelper,
   Helpers
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { DragDropChoices } from "survey-core";
 require("./item-value.scss");
 import { getLocString } from "../editorLocalization";
@@ -25,7 +25,7 @@ export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isDragDropMoveUp: boolean;
   @property({ defaultValue: null }) ghostPosition: string; // need fot image-item-value
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     public question: QuestionSelectBase,
     public item: ItemValue
   ) {
@@ -160,7 +160,7 @@ export class ItemValueWrapperViewModel extends Base {
     }
     this.updateIsNew(model.question, model.item);
   }
-  public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: CreatorBase) {
+  public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: SurveyCreatorModel) {
     item.value = "newitem";
     const itemValue = creator.createNewItemValue(question);
     this.updateNewItemValue();

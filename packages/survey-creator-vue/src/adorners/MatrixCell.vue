@@ -26,7 +26,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CreatorBase, MatrixCellWrapperViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, MatrixCellWrapperViewModel } from "survey-creator-core";
 import type { QuestionSelectBase } from "survey-core";
 import { computed } from "vue";
 import { useCreatorModel } from "@/creator-model";
@@ -34,7 +34,7 @@ import { useCreatorModel } from "@/creator-model";
 const props = defineProps<{
   componentData: any;
 }>();
-const creator = computed<CreatorBase>(() => props.componentData.creator);
+const creator = computed<SurveyCreatorModel>(() => props.componentData.creator);
 const row = computed(() => props.componentData.row);
 const column = computed(() => props.componentData.column);
 const element = computed<QuestionSelectBase>(() => props.componentData.element);

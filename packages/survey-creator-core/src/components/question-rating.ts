@@ -10,7 +10,7 @@ import {
   CssClassBuilder,
   MatrixDropdownColumn
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { getLocString } from "../editorLocalization";
 import { getNextValue, getQuestionFromObj } from "../utils/utils";
 
@@ -18,7 +18,7 @@ require("./question-rating.scss");
 
 export class QuestionRatingAdornerViewModel extends Base {
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     public surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {

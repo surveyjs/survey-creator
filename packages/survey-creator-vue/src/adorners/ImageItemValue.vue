@@ -101,7 +101,7 @@
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
 import { computed, onMounted, ref } from "vue";
@@ -110,7 +110,7 @@ const props = defineProps<{
   componentName: string;
   componentData: {
     data: {
-      creator: CreatorBase;
+      creator: SurveyCreatorModel;
     };
     question: QuestionImagePickerModel;
     item: ImageItemValue;

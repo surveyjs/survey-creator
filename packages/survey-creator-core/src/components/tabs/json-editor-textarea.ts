@@ -1,5 +1,5 @@
 import { SurveyModel, property, propertyArray } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
 import {
@@ -16,7 +16,7 @@ export class TextareaJsonEditorModel extends JsonEditorBaseModel {
   public textElement: HTMLTextAreaElement;
   @property({ defaultValue: false }) canShowErrors: boolean;
 
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super(creator);
     this.onPluginActivate();
   }
@@ -88,7 +88,7 @@ export class TabJsonEditorTextareaPlugin
   extends TabJsonEditorBasePlugin
   implements ICreatorPlugin
 {
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super(creator);
     creator.addPluginTab(
       "editor",
@@ -98,7 +98,7 @@ export class TabJsonEditorTextareaPlugin
     );
   }
   protected createModel(
-    creator: CreatorBase
+    creator: SurveyCreatorModel
   ): JsonEditorBaseModel {
     return new TextareaJsonEditorModel(creator);
   }

@@ -1,5 +1,5 @@
 import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
@@ -15,7 +15,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   public model: Translation;
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("translation", this);
     this.sidebarTab = this.creator.sidebar.addTab("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");

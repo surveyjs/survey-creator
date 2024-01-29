@@ -27,10 +27,10 @@
 <script lang="ts" setup>
 import { useCreatorModel } from "@/creator-model";
 import type { SurveyModel, PageModel } from "survey-core";
-import type { CreatorBase } from "survey-creator-core";
+import type { SurveyCreatorModel } from "survey-creator-core";
 import { PageAdorner } from "survey-creator-core";
 const props = defineProps<{
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   survey: SurveyModel;
   page: PageModel;
 }>();

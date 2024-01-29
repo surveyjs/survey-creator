@@ -61,7 +61,7 @@ import { useCreatorModel } from "@/creator-model";
 import type { ItemValue, QuestionSelectBase } from "survey-core";
 import {
   ItemValueWrapperViewModel,
-  type CreatorBase,
+  type SurveyCreatorModel,
 } from "survey-creator-core";
 import { computed } from "vue";
 
@@ -69,7 +69,7 @@ const props = defineProps<{
   componentName: string;
   componentData: {
     data: {
-      creator: CreatorBase;
+      creator: SurveyCreatorModel;
     };
     question: QuestionSelectBase;
     item: ItemValue;
