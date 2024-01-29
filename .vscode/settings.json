@@ -12,6 +12,9 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
     // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     // "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
     // "typescript.format.insertSpaceBeforeFunctionParenthesis": false,

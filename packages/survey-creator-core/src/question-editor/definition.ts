@@ -623,6 +623,14 @@ export class SurveyQuestionEditorDefinition {
           name: "showNavigationButtons",
           tab: "navigation"
         },
+        {
+          name: "progressBarShowPageTitles",
+          tab: "navigation"
+        },
+        {
+          name: "progressBarShowPageNumbers",
+          tab: "navigation"
+        },
         { name: "showPrevButton", tab: "navigation" },
         { name: "firstPageIsStarted", tab: "navigation" },
         { name: "goNextPageAutomatic", tab: "navigation" },

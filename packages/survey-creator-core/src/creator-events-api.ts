@@ -120,6 +120,10 @@ export interface ElementAllowOperationsEvent {
    * Allows users to edit survey element properties on the design surface. If you disable this property, users can edit the properties only in the Property Grid.
    */
   allowEdit: boolean;
+  /**
+   * Controls the visibility of the Settings button that allows users to open the Property Grid for survey element configuration. Set this property to `true` or `false` to display or hide the Settings button at all times. The default value `undefined` displays the Settings button only when Survey Creator has small width.
+   */
+  allowShowSettings: boolean | undefined;
 }
 
 export interface ElementGetActionsEvent {
