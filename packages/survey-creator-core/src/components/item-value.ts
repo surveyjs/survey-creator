@@ -17,6 +17,14 @@ import { getNextItemText } from "../utils/utils";
 import { ICollectionItemAllowOperations } from "../creator-settings";
 import { StringEditorConnector } from "./string-editor";
 
+const specificChoices = {
+  "noneItem": "showNoneItem",
+  "otherItem": "showOtherItem",
+  "selectAllItem": "showSelectAllItem",
+  "refuseItem": "showRefuseItem",
+  "dontKnowItem": "showDontKnowItem"
+};
+
 export class ItemValueWrapperViewModel extends Base {
   @property({ defaultValue: false }) isNew: boolean;
   @property({ defaultValue: false }) isDragging: boolean;
@@ -32,19 +40,10 @@ export class ItemValueWrapperViewModel extends Base {
     super();
 
     this.updateIsNew(question, item);
-    const updateFromProperty = () => {
-      this.updateIsNew(question, item);
-    };
-    if (question.noneItem === item) {
-      question.registerFunctionOnPropertyValueChanged("showNoneItem", updateFromProperty);
-    } else if (question.otherItem === item) {
-      question.registerFunctionOnPropertyValueChanged("showOtherItem", updateFromProperty);
-    } else if (
-      question.isDescendantOf("checkbox") &&
-      (<QuestionCheckboxModel>question).selectAllItem === item
-    ) {
-      question.registerFunctionOnPropertyValueChanged("showSelectAllItem", updateFromProperty);
-    } else if (this.isNew) {
+    for(let key in Object.keys(specificChoices)) {
+      this.registerOnPropertyChanged(key, specificChoices[key]);
+    }
+    if (this.isNew) {
       question.visibleChoicesChangedCallback = () => {
         this.updateNewItemValue();
       };
@@ -79,7 +78,7 @@ export class ItemValueWrapperViewModel extends Base {
   private allowItemOperations: ICollectionItemAllowOperations;
   private canTouchItems: boolean = true;
   private focusCameFromDown: boolean = false;
-  private collectionProperty: JsonObjectProperty
+  private collectionProperty: JsonObjectProperty;
 
   get canBeDragged(): boolean {
     return !this.isNew && this.question.choices.indexOf(this.item) > -1;
@@ -93,6 +92,16 @@ export class ItemValueWrapperViewModel extends Base {
     if (!this.creator || !this.question || !this.question.newItem) return;
     this.question.newItem.value = this.creator.getNextItemValue(this.question);
     this.question.newItem.text = getNextItemText(this.question.choices);
+  }
+  private registerOnPropertyChanged(itemName: string, propertyName: string): void {
+    if (this.question[itemName] === this.item) {
+      const question = this.question;
+      const item = this.item;
+      const updateFromProperty = () => {
+        this.updateIsNew(question, item);
+      };
+      question.registerFunctionOnPropertyValueChanged(propertyName, updateFromProperty);
+    }
   }
   private get collectionPropertyName(): string {
     return !!this.item.ownerPropertyName ? this.item.ownerPropertyName : "choices";
@@ -141,23 +150,20 @@ export class ItemValueWrapperViewModel extends Base {
     if (this.creator.readOnly || !this.canTouchItems) return false;
     return this.question.choices.indexOf(item) !== -1;
   }
+  private getSpecificProp(model: ItemValueWrapperViewModel): string {
+    for(let key in specificChoices) {
+      if(model.question[key] === model.item) return specificChoices[key];
+    }
+    return undefined;
+  }
 
   public add(model: ItemValueWrapperViewModel) {
-    if (model.question.noneItem === model.item) {
-      model.question.hasNone = true;
+    const propName = this.getSpecificProp(model);
+    if(propName) {
+      model.question[propName] = true;
       return;
-    } else if (model.question.otherItem === model.item) {
-      model.question.hasOther = true;
-      return;
-    } else if (
-      model.question.isDescendantOf("checkbox") &&
-      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
-    ) {
-      (<any>model.question).hasSelectAll = true;
-      return;
-    } else {
-      this.addNewItem(model.item, model.question, model.creator);
     }
+    this.addNewItem(model.item, model.question, model.creator);
     this.updateIsNew(model.question, model.item);
   }
   public addNewItem(item: ItemValue, question: QuestionSelectBase, creator: CreatorBase) {
@@ -168,23 +174,17 @@ export class ItemValueWrapperViewModel extends Base {
   }
 
   public remove(model: ItemValueWrapperViewModel) {
-    if (model.question.noneItem === model.item) {
-      model.question.hasNone = false;
-    } else if (model.question.otherItem === model.item) {
-      model.question.hasOther = false;
-    } else if (
-      model.question.isDescendantOf("checkbox") &&
-      (<QuestionCheckboxModel>model.question).selectAllItem === model.item
-    ) {
-      (<any>model.question).hasSelectAll = false;
-    } else {
-      const choices = model.question.choices;
-      var index = choices.indexOf(model.item);
-      if (!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
-      var indexToFocus = this.findNextElementIndexToRemove(index);
-      model.question.choices.splice(index, 1);
-      this.focusNextElementToRemove(indexToFocus);
+    const propName = this.getSpecificProp(model);
+    if(propName) {
+      model.question[propName] = false;
+      return;
     }
+    const choices = model.question.choices;
+    var index = choices.indexOf(model.item);
+    if (!this.creator.onCollectionItemDeletingCallback(model.question, this.collectionProperty, choices, model.item)) return;
+    var indexToFocus = this.findNextElementIndexToRemove(index);
+    model.question.choices.splice(index, 1);
+    this.focusNextElementToRemove(indexToFocus);
     this.updateIsNew(model.question, model.item);
   }
 

@@ -341,6 +341,8 @@ export var enStrings = {
     showOtherItem: "Allow the Other option",
     otherText: "Other option text",
     showNoneItem: "Allow the None option",
+    showRefuseItem: "Allow the Refuse to Answer option",
+    showDontKnowItem: "Allow the Don't Know option",
     noneText: "None option text",
     showSelectAllItem: "Allow the Select All option",
     selectAllText: "Select All option text",
