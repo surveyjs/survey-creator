@@ -699,7 +699,7 @@ test("Property grid checkbox with description", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1080);
     await ClientFunction(() => {
-      (window as any).SurveyCreator.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
+      (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
     })();
     await setJSON({
       "pages": [
