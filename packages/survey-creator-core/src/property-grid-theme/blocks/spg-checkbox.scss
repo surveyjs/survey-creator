@@ -92,3 +92,9 @@
   align-items: flex-start;
   gap: calcSize(1);
 }
+
+.spg-checkbox {
+  .spg-question__description {
+    padding: calcSize(1) 0 0 calcSize(4);
+  }
+}

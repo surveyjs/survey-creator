@@ -694,3 +694,29 @@ test("Dropdown input in property grid", async (t) => {
     await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
   });
 });
+
+test("Property grid checkbox with description", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      (window as any).SurveyCreator.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
+    })();
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await t.click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 });
+    await takeElementScreenshot("pg-checkbox-hint.png", Selector("[data-name='visible']"), t, comparer);
+    await t.click(Selector("[data-name='visible'] .spg-action-button"));
+    await takeElementScreenshot("pg-checkbox-hint-opened.png", Selector("[data-name='visible']"), t, comparer);
+  });
+});
