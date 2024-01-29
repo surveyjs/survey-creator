@@ -3312,7 +3312,7 @@ test("SurveyLogicItem,  setValue for paneldynamic, Bug#4824", () => {
   expect(dpQuestion.getType()).toBe("text");
   expect(dpQuestion.cssClasses.mainRoot.indexOf("svc-logic-question-value")).toBeTruthy();
 });
-test("SurveyLogicItem,  settings.logic.questionSortOrder", () => {
+test("SurveyLogicItem,  settings.logic.questionSortOrder & triggers", () => {
   const survey = new SurveyModel({
     elements: [
       { type: "text", name: "q2" },
@@ -3344,7 +3344,25 @@ test("SurveyLogicItem,  settings.logic.questionSortOrder", () => {
   expect(setToNameQuestion.choices[0].value).toBe("q2");
   expect(setToNameQuestion.choices[1].value).toBe("q1");
   settings.logic.questionSortOrder = "asc";
-
+});
+test("SurveyLogicItem,  settings.logic.questionSortOrder & show/hide questions", () => {
+  settings.logic.questionSortOrder = "none";
+  const survey = new SurveyModel({
+    elements: [
+      { type: "text", name: "q2" },
+      { type: "text", name: "q1" },
+      { type: "text", name: "q3", visibleIf: "{q1} = 1" }
+    ]
+  });
+  const logic = new SurveyLogicUI(survey);
+  const row = logic.matrixItems.visibleRows[0];
+  row.showDetailPanel();
+  const question = logic.itemEditor.panels[0].getQuestionByName("elementSelector");
+  expect(question.choices).toHaveLength(3);
+  expect(question.choices[0].value).toBe("q2");
+  expect(question.choices[1].value).toBe("q1");
+  expect(question.choices[2].value).toBe("q3");
+  settings.logic.questionSortOrder = "asc";
 });
 test("Include panel and page requiredIf into logic items", () => {
   const survey = new SurveyModel({
