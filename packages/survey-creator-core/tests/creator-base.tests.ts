@@ -3493,6 +3493,59 @@ test("allowEdit and onElementAllowOperations", (): any => {
   creator.selectElement(question);
   expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
 });
+
+test("allowShowSettings and onElementAllowOperations", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
+
+  let allowShowSettings: any = undefined;
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowShowSettings = allowShowSettings;
+  });
+
+  const pageModel = creator.survey.pages[0];
+  const pageAdornerModel = new PageAdorner(creator, pageModel);
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdornerModel = new QuestionAdornerViewModel(creator, question, undefined);
+
+  creator.sidebar.flyoutMode = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+
+  allowShowSettings = undefined;
+  creator.sidebar.flyoutMode = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+
+  allowShowSettings = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+});
+
 test("Carry-forward banner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
