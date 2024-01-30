@@ -26,6 +26,7 @@
 
 .spg-container {
   width: 100%;
+  @include disableTransitionAnimations;
 }
 
 .spg-container.spg-container_search {
