@@ -738,6 +738,28 @@ test("Do not select choices if a question in a matrix mode (popup in our case) "
   expect(creator.selectedElementName).toBe("q2");
 });
 
+test("Refuse and Don't know items", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] }
+    ]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const refuseItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.refuseItem);
+  const dontKnowItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.dontKnowItem);
+
+  refuseItemAdorner.add(refuseItemAdorner);
+  expect(q1.showRefuseItem).toBeTruthy();
+  refuseItemAdorner.remove(refuseItemAdorner);
+  expect(q1.showRefuseItem).toBeFalsy();
+
+  dontKnowItemAdorner.add(dontKnowItemAdorner);
+  expect(q1.showDontKnowItem).toBeTruthy();
+  dontKnowItemAdorner.remove(dontKnowItemAdorner);
+  expect(q1.showDontKnowItem).toBeFalsy();
+});
+
 test("ImageItemValueWrapperViewModel isUploading", () => {
   const creator = new CreatorTester();
   creator.JSON = {
