@@ -97,4 +97,10 @@
   .spg-question__description {
     padding: calcSize(1) 0 0 calcSize(4);
   }
+
+  .spg-help-action {
+    use {
+      pointer-events: none;
+    }
+  }
 }
