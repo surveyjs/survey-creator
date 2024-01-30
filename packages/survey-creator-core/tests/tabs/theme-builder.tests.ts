@@ -678,7 +678,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   let cssVariables: any;
 
   cssVariables = creator?.theme?.cssVariables;
-  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowSmallEditor.value = [
@@ -2153,7 +2153,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(fullTheme.cssVariables).length).toBe(81);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(82);
   expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
@@ -2194,7 +2194,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "cssVariables"
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(81);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
   expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
