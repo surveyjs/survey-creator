@@ -1038,8 +1038,8 @@ export let svStrings = {
     "--primary-foreground": "Primär förgrundsfärg",
     "--foreground": "Förgrundsfärg",
     "--base-unit": "Basenhet",
+    advancedMode: "Avancerat läge",
     groupGeneral: "Allmänt",
-    groupAdvanced: "Avancerad",
     groupHeader: "Rubrik",
     groupBackground: "Bakgrund",
     groupAppearance: "Utseende",
@@ -1068,11 +1068,9 @@ export let svStrings = {
     backgroundImageAttachmentScroll: "Rulla",
     panelBackgroundTransparency: "Opacitet för panelbakgrund",
     questionBackgroundTransparency: "Frågans bakgrundsopacitet",
-    questionPanel: "Panelbakgrund och hörnradie",
     questionTitle: "Teckensnitt för frågerubrik",
-    questionDescription: "Typsnitt för frågebeskrivning",
     editorPanel: "Inmatningselement",
-    editorFont: "Teckensnitt för inmatningselement",
+    backgroundCornerRadius: "Bakgrund och hörnradie",
     backcolor: "Standardbakgrund",
     hovercolor: "Håll muspekaren bakgrund",
     borderDecoration: "Border dekoration",
@@ -1080,7 +1078,9 @@ export let svStrings = {
     accentForeground: "Accent förgrund",
     primaryForecolor: "Standardfärg",
     primaryForecolorLight: "Inaktiverad färg",
-    linesColors: "Mindre linjefärger",
+    colorsTitle: "Färger",
+    font: "Teckensnitt",
+    lines: "Linjer",
     borderDefault: "Mörkare",
     borderLight: "Tändare",
     fontFamily: "Teckensnitt familj",
@@ -1097,7 +1097,8 @@ export let svStrings = {
     surveyTitle: "Teckensnitt för undersökningstitel",
     surveyDescription: "Teckensnitt för undersökningsbeskrivning",
     pageTitle: "Teckensnitt för sidtitel",
-    pageDescription: "Teckensnitt för sidbeskrivning",
+    titleFont: "Titel typsnitt",
+    descriptionFont: "Beskrivning teckensnitt",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lägg till skuggeffekt",
@@ -1106,8 +1107,7 @@ export let svStrings = {
     boxShadowSpread: "Sprida",
     boxShadowDrop: "Droppe",
     boxShadowInner: "Inre",
-    questionShadow: "Skuggeffekter",
-    editorShadow: "Skuggeffekter för indataelement",
+    shadow: "Skugga effekter",
     headerView: "Utsikt",
     headerViewBasic: "Grundläggande",
     headerViewAdvanced: "Avancerad",
@@ -1915,3 +1915,11 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå till inställningar"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Förhandsgranskning av inlästa alternativalternativ"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Förhindra dubbletter av svar i rader"
+// theme.advancedMode: "Advanced mode" => "Avancerat läge"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Bakgrund och hörnradie"
+// theme.colorsTitle: "Colors" => "Färger"
+// theme.font: "Font" => "Teckensnitt"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Titel typsnitt"
+// theme.descriptionFont: "Description font" => "Beskrivning teckensnitt"
+// theme.shadow: "Shadow effects" => "Skugga effekter"

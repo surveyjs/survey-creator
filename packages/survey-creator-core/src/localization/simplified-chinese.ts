@@ -1038,8 +1038,8 @@ var simplifiedChineseTranslation = {
     "--primary-foreground": "原色前景色",
     "--foreground": "前景色",
     "--base-unit": "基本单元",
+    advancedMode: "高级模式",
     groupGeneral: "常规",
-    groupAdvanced: "高深",
     groupHeader: "页眉",
     groupBackground: "背景",
     groupAppearance: "外观",
@@ -1068,11 +1068,9 @@ var simplifiedChineseTranslation = {
     backgroundImageAttachmentScroll: "滚动",
     panelBackgroundTransparency: "面板背景不透明度",
     questionBackgroundTransparency: "问题背景不透明度",
-    questionPanel: "面板背景和角半径",
     questionTitle: "问题标题字体",
-    questionDescription: "问题描述字体",
     editorPanel: "输入元素",
-    editorFont: "输入元素字体",
+    backgroundCornerRadius: "背景和圆角半径",
     backcolor: "默认背景",
     hovercolor: "悬停背景",
     borderDecoration: "边框装饰",
@@ -1080,7 +1078,9 @@ var simplifiedChineseTranslation = {
     accentForeground: "强调文字前景",
     primaryForecolor: "默认颜色",
     primaryForecolorLight: "禁用颜色",
-    linesColors: "次要线条颜色",
+    colorsTitle: "颜色",
+    font: "字体",
+    lines: "线",
     borderDefault: "暗",
     borderLight: "打火机",
     fontFamily: "字体系列",
@@ -1097,7 +1097,8 @@ var simplifiedChineseTranslation = {
     surveyTitle: "调查标题字体",
     surveyDescription: "调查描述字体",
     pageTitle: "页面标题字体",
-    pageDescription: "页面描述字体",
+    titleFont: "标题字体",
+    descriptionFont: "描述字体",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "添加阴影效果",
@@ -1106,8 +1107,7 @@ var simplifiedChineseTranslation = {
     boxShadowSpread: "传播",
     boxShadowDrop: "落",
     boxShadowInner: "内",
-    questionShadow: "阴影效果",
-    editorShadow: "输入元素阴影效果",
+    shadow: "阴影效果",
     headerView: "视图",
     headerViewBasic: "基本",
     headerViewAdvanced: "高深",
@@ -1880,3 +1880,11 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“设置”"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "加载选项的预览"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "防止行中出现重复响应"
+// theme.advancedMode: "Advanced mode" => "高级模式"
+// theme.backgroundCornerRadius: "Background and corner radius" => "背景和圆角半径"
+// theme.colorsTitle: "Colors" => "颜色"
+// theme.font: "Font" => "字体"
+// theme.lines: "Lines" => "线"
+// theme.titleFont: "Title font" => "标题字体"
+// theme.descriptionFont: "Description font" => "描述字体"
+// theme.shadow: "Shadow effects" => "阴影效果"

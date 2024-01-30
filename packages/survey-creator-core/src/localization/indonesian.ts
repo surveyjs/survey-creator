@@ -1038,8 +1038,8 @@ export var indonesianStrings = {
     "--primary-foreground": "Warna latar depan primer",
     "--foreground": "Warna latar depan",
     "--base-unit": "Unit dasar",
+    advancedMode: "Mode lanjutan",
     groupGeneral: "Umum",
-    groupAdvanced: "Maju",
     groupHeader: "Header",
     groupBackground: "Latar",
     groupAppearance: "Rupa",
@@ -1068,11 +1068,9 @@ export var indonesianStrings = {
     backgroundImageAttachmentScroll: "Gulir",
     panelBackgroundTransparency: "Opasitas latar belakang panel",
     questionBackgroundTransparency: "Opasitas latar belakang pertanyaan",
-    questionPanel: "Latar belakang panel dan radius sudut",
     questionTitle: "Font judul pertanyaan",
-    questionDescription: "Font deskripsi pertanyaan",
     editorPanel: "Elemen input",
-    editorFont: "Font elemen input",
+    backgroundCornerRadius: "Latar belakang dan radius sudut",
     backcolor: "Latar belakang default",
     hovercolor: "Arahkan kursor ke latar belakang",
     borderDecoration: "Dekorasi perbatasan",
@@ -1080,7 +1078,9 @@ export var indonesianStrings = {
     accentForeground: "Latar depan aksen",
     primaryForecolor: "Warna default",
     primaryForecolorLight: "Warna dinonaktifkan",
-    linesColors: "Warna garis minor",
+    colorsTitle: "Warna",
+    font: "Font",
+    lines: "Baris",
     borderDefault: "Gelap",
     borderLight: "Ringan",
     fontFamily: "Keluarga font",
@@ -1097,7 +1097,8 @@ export var indonesianStrings = {
     surveyTitle: "Font judul survei",
     surveyDescription: "Font deskripsi survei",
     pageTitle: "Font judul halaman",
-    pageDescription: "Font deskripsi halaman",
+    titleFont: "Font judul",
+    descriptionFont: "Font deskripsi",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tambahkan Efek Bayangan",
@@ -1106,8 +1107,7 @@ export var indonesianStrings = {
     boxShadowSpread: "Penyebaran",
     boxShadowDrop: "Menjatuhkan",
     boxShadowInner: "Batin",
-    questionShadow: "Efek bayangan",
-    editorShadow: "Efek bayangan elemen input",
+    shadow: "Efek bayangan",
     headerView: "Melihat",
     headerViewBasic: "Dasar",
     headerViewAdvanced: "Maju",
@@ -1892,3 +1892,11 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Buka pengaturan"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratinjau opsi pilihan yang dimuat"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mencegah respons duplikat dalam baris"
+// theme.advancedMode: "Advanced mode" => "Mode lanjutan"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Latar belakang dan radius sudut"
+// theme.colorsTitle: "Colors" => "Warna"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Baris"
+// theme.titleFont: "Title font" => "Font judul"
+// theme.descriptionFont: "Description font" => "Font deskripsi"
+// theme.shadow: "Shadow effects" => "Efek bayangan"

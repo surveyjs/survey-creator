@@ -1038,8 +1038,8 @@ export var czStrings = {
     "--primary-foreground": "Hlavní barva popředí",
     "--foreground": "Barva popředí",
     "--base-unit": "Základní jednotka",
+    advancedMode: "Pokročilý režim",
     groupGeneral: "Obecné",
-    groupAdvanced: "Pokročilé",
     groupHeader: "Záhlaví",
     groupBackground: "Pozadí",
     groupAppearance: "Vzhled",
@@ -1068,11 +1068,9 @@ export var czStrings = {
     backgroundImageAttachmentScroll: "Svitek",
     panelBackgroundTransparency: "Průhlednost pozadí panelu",
     questionBackgroundTransparency: "Průhlednost pozadí otázek",
-    questionPanel: "Panel otázek",
     questionTitle: "Font nadpisu otázky",
-    questionDescription: "Font popisu otázky",
     editorPanel: "Editor",
-    editorFont: "Font editoru",
+    backgroundCornerRadius: "Pozadí a poloměr rohů",
     backcolor: "Výchozí pozadí",
     hovercolor: "Pozadí při přejetí myší",
     borderDecoration: "Dekorace hran",
@@ -1080,7 +1078,9 @@ export var czStrings = {
     accentForeground: "Zvýraznění popředí",
     primaryForecolor: "Výchozí barva",
     primaryForecolorLight: "Barva vypnutého pole",
-    linesColors: "Linky",
+    colorsTitle: "Barvy",
+    font: "Písmo",
+    lines: "Řádky",
     borderDefault: "Hlavní",
     borderLight: "Vedlejší",
     fontFamily: "Font",
@@ -1097,7 +1097,8 @@ export var czStrings = {
     surveyTitle: "Font nadpisu průzkumu",
     surveyDescription: "Písmo popisu průzkumu",
     pageTitle: "Font nadpisu stránky",
-    pageDescription: "Font popisu stránky",
+    titleFont: "Písmo nadpisu",
+    descriptionFont: "Popisné písmo",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Přidat stínový efekt",
@@ -1106,8 +1107,7 @@ export var czStrings = {
     boxShadowSpread: "Rozšíření",
     boxShadowDrop: "Kapka",
     boxShadowInner: "Vnitřní",
-    questionShadow: "Hrany / stíny panelu",
-    editorShadow: "Hrany / stíny editoru",
+    shadow: "Stínové efekty",
     headerView: "Pohled",
     headerViewBasic: "Základní",
     headerViewAdvanced: "Pokročilý",
@@ -1302,3 +1302,11 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Přejděte do nastavení"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Náhled načtených voleb"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zabránění duplicitním odpovědím v řádcích"
+// theme.advancedMode: "Advanced mode" => "Pokročilý režim"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Pozadí a poloměr rohů"
+// theme.colorsTitle: "Colors" => "Barvy"
+// theme.font: "Font" => "Písmo"
+// theme.lines: "Lines" => "Řádky"
+// theme.titleFont: "Title font" => "Písmo nadpisu"
+// theme.descriptionFont: "Description font" => "Popisné písmo"
+// theme.shadow: "Shadow effects" => "Stínové efekty"

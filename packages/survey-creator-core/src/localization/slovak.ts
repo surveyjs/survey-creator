@@ -1038,8 +1038,8 @@ export var skStrings = {
     "--primary-foreground": "Primárna farba popredia",
     "--foreground": "Farba popredia",
     "--base-unit": "Základná jednotka",
+    advancedMode: "Rozšírený režim",
     groupGeneral: "Všeobecné",
-    groupAdvanced: "Pokročilý",
     groupHeader: "Hlavička",
     groupBackground: "Pozadie",
     groupAppearance: "Vzhľad",
@@ -1068,11 +1068,9 @@ export var skStrings = {
     backgroundImageAttachmentScroll: "Zvitok",
     panelBackgroundTransparency: "Nepriehľadnosť pozadia panela",
     questionBackgroundTransparency: "Nepriehľadnosť pozadia otázky",
-    questionPanel: "Pozadie panela a polomer rohov",
     questionTitle: "Písmo názvu otázky",
-    questionDescription: "Písmo popisu otázky",
     editorPanel: "Vstupný prvok",
-    editorFont: "Písmo vstupného prvku",
+    backgroundCornerRadius: "Pozadie a polomer rohov",
     backcolor: "Predvolené pozadie",
     hovercolor: "Ukázanie na pozadie",
     borderDecoration: "Dekorácia okrajov",
@@ -1080,7 +1078,9 @@ export var skStrings = {
     accentForeground: "Zvýraznenie v popredí",
     primaryForecolor: "Predvolená farba",
     primaryForecolorLight: "Zakázaná farba",
-    linesColors: "Vedľajšie farby čiar",
+    colorsTitle: "Farby",
+    font: "Písmo",
+    lines: "Riadky",
     borderDefault: "Tmavšie",
     borderLight: "Zapaľovač",
     fontFamily: "Skupina písiem",
@@ -1097,7 +1097,8 @@ export var skStrings = {
     surveyTitle: "Písmo názvu prieskumu",
     surveyDescription: "Písmo popisu prieskumu",
     pageTitle: "Písmo názvu stránky",
-    pageDescription: "Písmo popisu stránky",
+    titleFont: "Písmo názvu",
+    descriptionFont: "Popisné písmo",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Pridanie efektu tieňa",
@@ -1106,8 +1107,7 @@ export var skStrings = {
     boxShadowSpread: "Nátierka",
     boxShadowDrop: "Kvapka",
     boxShadowInner: "Vnútorný",
-    questionShadow: "Efekty tieňov",
-    editorShadow: "Efekty tieňov vstupného prvku",
+    shadow: "Efekty tieňov",
     headerView: "Pohľad",
     headerViewBasic: "Základný",
     headerViewAdvanced: "Pokročilý",
@@ -1691,3 +1691,11 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Prejdite na nastavenia"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ukážka načítaných možností výberu"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zabráňte duplicitným odpovediam v riadkoch"
+// theme.advancedMode: "Advanced mode" => "Rozšírený režim"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Pozadie a polomer rohov"
+// theme.colorsTitle: "Colors" => "Farby"
+// theme.font: "Font" => "Písmo"
+// theme.lines: "Lines" => "Riadky"
+// theme.titleFont: "Title font" => "Písmo názvu"
+// theme.descriptionFont: "Description font" => "Popisné písmo"
+// theme.shadow: "Shadow effects" => "Efekty tieňov"

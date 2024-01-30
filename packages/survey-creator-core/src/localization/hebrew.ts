@@ -1,7 +1,7 @@
 import { editorLocalization } from "survey-creator-core";
 
 export var hebrewStrings = {
-  // Survey templates
+  // survey templates
   survey: {
     edit: "עריכה",
     externalHelpLink: "צפו ולמדו כיצד ליצור סקרים",
@@ -14,7 +14,7 @@ export var hebrewStrings = {
     deletePanel: "מחיקת לוח",
     deleteQuestion: "מחיקת שאלה",
     convertTo: "המרה ל",
-    drag: "גרירת אלמנט"
+    drag: "גרירת אלמנט",
   },
   // Question types
   qt: {
@@ -56,6 +56,8 @@ export var hebrewStrings = {
     hidePanel: "הסתר לוח",
     prevSelected: "בחר קודם",
     nextSelected: "בחר בבא בתור",
+    prevFocus: "פוקוס קודם",
+    nextFocus: "התמקד הבא",
     surveyTypeName: "סקר",
     pageTypeName: "דף",
     panelTypeName: "לוח",
@@ -84,6 +86,8 @@ export var hebrewStrings = {
     translation: "תרגום",
     saveSurvey: "שמור סקר",
     saveSurveyTooltip: "שמור סקר",
+    saveTheme: "שמור ערכת נושא",
+    saveThemeTooltip: "שמור ערכת נושא",
     designer: "מעצב",
     jsonEditor: "עורך JSON",
     jsonHideErrors: "הסתר שגיאות",
@@ -106,6 +110,7 @@ export var hebrewStrings = {
     toolbox: "ארגז הכלים",
     "property-grid": "מאפיינים",
     propertyGridFilteredTextPlaceholder: "הקלד כדי לחפש...",
+    propertyGridNoResultsFound: "לא נמצאו תוצאות",
     toolboxGeneralCategory: "כללי",
     toolboxChoiceCategory: "שאלות עם בחירה",
     toolboxTextCategory: "שאלות טקסטואליות",
@@ -136,96 +141,114 @@ export var hebrewStrings = {
     translationNoStrings: "אין מחרוזות לתרגום. אנא שנה את הסינון.",
     translationExportToSCVButton: "ייצא ל-CSV",
     translationImportFromSCVButton: "ייבא מ-CSV",
+    translateUsigAI: "תרגום אוטומטי של הכל",
+    translationDialogTitle: "מחרוזות לא מתורגמות",
     translationMergeLocaleWithDefault: "מזג {0} עם הגדרות ברירת המחדל",
     translationPlaceHolder: "תרגום...",
     themeExportButton: "ייצא",
     themeImportButton: "ייבא",
+    surveyJsonExportButton: "ייצא",
+    surveyJsonImportButton: "ייבוא",
+    surveyJsonCopyButton: "העתק ללוח",
     themeResetButton: "אפס הגדרות ערכת העיצוב לברירת המחדל",
+    themeResetConfirmation: "האם אתה באמת רוצה לאפס את ערכת הנושא? כל ההתאמות האישיות שלך יאבדו.",
+    themeResetConfirmationOk: "כן, אפס את ערכת הנושא",
     bold: "מודגש",
     italic: "נטוי",
     underline: "קו תחתון",
     addNewQuestion: "הוסף שאלה",
     selectPage: "בחר דף...",
     carryForwardChoicesCopied: "הטענות הועתקו מ",
+    choicesLoadedFromWebText: "האפשרויות נטענות משירות אינטרנט.",
+    choicesLoadedFromWebLinkText: "עבור אל הגדרות",
+    choicesLoadedFromWebPreviewTitle: "תצוגה מקדימה של אפשרויות בחירה שנטענו",
     htmlPlaceHolder: "התוכן של HTML יופיע כאן.",
     panelPlaceHolder: "גרר שאלה מתיק כלי הכלים לכאן.",
     surveyPlaceHolder: "הסקר ריק. גרור אלמנט מארגז הכלים או לחץ על הכפתור למטה.",
     imagePlaceHolder: "גרור ושחרר תמונה לכאן או לחץ על הכפתור למטה ובחר תמונה להעלאה",
     imageChooseImage: "בחר תמונה",
-    addNewTypeQuestion: "הוסף {0}", //{0} היא סוג השאלה הניתן לתרגום
+    addNewTypeQuestion: "הוסף {0}", //{0} is localizable question type
     chooseLogoPlaceholder: "[לוגו]",
     auto: "אוטומטי",
     choices_Item: "פריט ",
-  },
-
-  lg: {
-    addNewItem: "הוסף כלל חדש",
-    empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
-    page_visibilityName: "הצג (הסתר) עמוד",
-    page_enableName: "אפשר (בטל) עמוד",
-    panel_visibilityName: "הצג (הסתר) פאנל",
-    panel_enableName: "אפשר (בטל) פאנל",
-    question_visibilityName: "הצג (הסתר) שאלה",
-    question_enableName: "אפשר (בטל) שאלה",
-    question_requireName: "הפוך את השאלה לחובה",
-    column_visibilityName: "הצג (הסתר) עמודה",
-    column_enableName: "אפשר (בטל) עמודה",
-    column_requireName: "הפוך את העמודה לחובה",
-    trigger_completeName: "סיים את הסקר",
-    trigger_setvalueName: "הגדר ערך",
-    trigger_copyvalueName: "העתק ערך",
-    trigger_skipName: "דלג לשאלה",
-    trigger_runExpressionName: "הפעל ביטוי",
-    completedHtmlOnConditionName: "הגדר תיקנה לדף 'תודה שמילאת את הסקר'",
-    page_visibilityDescription: "הפוך את העמוד לגלוי כאשר הביטוי הלוגי מחזיר אמת. אחרת, השאר אותו בלתי נראה.",
-    panel_visibilityDescription: "הפוך את הפאנל לגלוי כאשר הביטוי הלוגי מחזיר אמת. אחרת, השאר אותו בלתי נראה.",
-    panel_enableDescription: "הפוך את הפאנל, וכל הרכיבים בתוכו, לפעיל כאשר הביטוי הלוגי מחזיר אמת. אחרת, השאר אותם מנוטרלים.",
-    question_visibilityDescription: "הפוך את השאלה לגלויה כאשר הביטוי הלוגי מחזיר אמת. אחרת, השאר אותה בלתי נראית.",
-    question_enableDescription: "הפוך את השאלה לפעילה כאשר הביטוי הלוגי מחזיר אמת. אחרת, השאר אותה מנוטרלת.",
-    question_requireDescription: "הפוך את השאלה לחובה כאשר הביטוי הלוגי מחזיר אמת.",
-    trigger_completeDescription: "כאשר הביטוי הלוגי מחזיר אמת, הסקר מתבצע והמשתמש רואה את דף ה'תודה'.",
-    trigger_setvalueDescription: "כאשר ערכי השאלות, שמשמשים בביטוי הלוגי, משתנים והביטוי מחזיר אמת, אז הערך מוגדר לשאלה שנבחרה.",
-    trigger_copyvalueDescription: "כאשר ערכי השאלות, שמשמשים הביטוי הלוגי, משתנים והביטוי מחזיר אמת, אז הערך של שאלה נבחרת מועתק לשאלה אחרת שנבחרה.",
-    trigger_skipDescription: "כאשר הביטוי הלוגי מחזיר אמת, הסקר מדלג לשאלה שנבחרה.",
-    trigger_runExpressionDescription: "כאשר הביטוי הלוגי מחזיר אמת, אז הביטוי המותאם אישית מתבצע. תוכל להגדיר אופציונלית את תוצאת הביטוי הזה לשאלה שנבחרה.",
-    completedHtmlOnConditionDescription: "אם הביטוי הלוגי מחזיר אמת, אז הטקסט המוגדר כברירת מחדל לדף 'תודה' משתנה לטקסט שהוזן.",
-    itemExpressionText: "כאשר הביטוי: '{0}' מחזיר אמת", //{0} - הביטוי
-    itemEmptyExpressionText: "כלל חדש",
-    page_visibilityText: "הפוך את העמוד {0} לגלוי", //{0} שם העמוד
-    panel_visibilityText: "הפוך את הפאנל {0} לגלוי", //{0} שם הפאנל
-    panel_enableText: "הפוך את הפאנל {0} לפעיל", //{0} שם הפאנל
-    question_visibilityText: "הפוך את השאלה {0} לגלויה", //{0} שם השאלה
-    question_enableText: "הפוך את השאלה {0} לפעילה", //{0} שם השאלה
-    question_requireText: "הפוך את השאלה {0} לחובה", //{0} שם השאלה
-    column_visibilityText: "הפוך את העמודה {0} של השאלה {1} לגלויה", //{0} שם העמודה, {1} שם השאלה
-    column_enableText: "הפוך את העמודה {0} של השאלה {1} לפעילה", //{0} שם העמודה, {1} שם השאלה
-    column_requireText: "הפוך את העמודה {0} של השאלה {1} לחובה", //{0} שם העמודה, {1} שם השאלה
-    trigger_completeText: "הסקר מתבצע",
-    trigger_setvalueText: "הגדר לשאלה: {0} את הערך {1}", //{0} שם השאלה, {1} setValue
-    trigger_setvalueEmptyText: "נקה את ערך השאלה: {0}", //{0} שם השאלה
-    trigger_copyvalueText: "העתק לשאלה: {0} את הערך מהשאלה {1}", //{0} ו {1} שמות השאלות
-    trigger_skipText: "דלג בסקר לשאלה {0}", //{0} שם השאלה
-    trigger_runExpressionText1: "הפעל את הביטוי: '{0}'", //{0} הביטוי
-    trigger_runExpressionText2: " והגדר את תוצאתו לשאלה: {0}", //{0} שם השאלה
-    completedHtmlOnConditionText: "הצג טקסט מותאם אישית עבור דף ה'תודה'.",
-    showAllQuestions: "כל השאלות",
-    showAllActionTypes: "כל סוגי הפעולות",
-    conditions: "תנאים",
-    actions: "פעולות",
-    expressionEditorTitle: "הגדר תנאי (ים)",
-    actionsEditorTitle: "הגדר פעולה (ות)",
-    deleteAction: "מחק פעולה",
-    addNewAction: "הוסף פעולה",
-    selectedActionCaption: "בחר פעולה...",
-    expressionInvalid: "הביטוי הלוגי ריק או לא תקין. אנא תקן אותו.",
-    noActionError: "בבקשה, הוסף לפחות פעולה אחת.",
-    actionInvalid: "בבקשה, תקן את הבעיות בפעולה (או פעולות) שלך.",
-    uncompletedRule_title: "הכללים הלוגיים אינם שלמים",
-    uncompletedRule_text: "לא השלמת חלק מהכללים הלוגיים. אם תעזוב את הלשונית כעת, השינויים יאבדו. האם אתה רוצה עדיין לעזוב את הלשונית מבלי להשלים את השינויים?",
-    uncompletedRule_apply: "כן",
-    uncompletedRule_cancel: "לא, אני רוצה להשלים את הכללים",
-    expressionSetup: "",
-    actionsSetup: ""
+    lg: {
+      addNewItem: "הוספת כלל חדש",
+      empty_tab: "צור כלל כדי להתאים אישית את זרימת הסקר.",
+      page_visibilityName: "הצג (הסתר) עמוד",
+      page_enableName: "הפוך דף לזמין (הפוך ללא זמין)",
+      page_requireName: "הפיכת הדף לנדרש",
+      panel_visibilityName: "הצג (הסתר) החלונית",
+      panel_enableName: "הפעל (השבית) את החלונית",
+      panel_requireName: "הפיכת הדף לנדרש",
+      question_visibilityName: "הצג (הסתר) שאלה",
+      question_enableName: "הפיכת שאלה לזמינה (השבתה",
+      question_requireName: "הפוך את השאלה לנדרשת",
+      question_resetValueName: "איפוס ערך שאלה",
+      question_setValueName: "הגדרת ערך שאלה",
+      column_visibilityName: "הצג (הסתר) עמודה",
+      column_enableName: "הפיכת עמודה לזמינה (ללא זמינה)",
+      column_requireName: "הפיכת עמודה לנדרשת",
+      column_resetValueName: "איפוס ערך עמודה",
+      column_setValueName: "הגדרת ערך עמודה",
+      trigger_completeName: "הסקר המלא",
+      trigger_setvalueName: "הגדר תשובה",
+      trigger_copyvalueName: "העתק תשובה",
+      trigger_skipName: "דלג לשאלה",
+      trigger_runExpressionName: "הפעל ביטוי",
+      completedHtmlOnConditionName: "הגדרת סימון דף \"סקר הושלם\"",
+      page_visibilityDescription: "הפוך את הדף לגלוי כאשר ביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה.",
+      panel_visibilityDescription: "הפוך את החלונית לגלויה כשביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה.",
+      panel_enableDescription: "הפוך את החלונית, ואת כל הרכיבים בתוכה, לזמינים כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותם מושבתים.",
+      question_visibilityDescription: "הפוך את השאלה לגלויה כאשר ביטוי הלוגיקה חוזר True. אחרת, שמור אותו בלתי נראה.",
+      question_enableDescription: "הפוך את השאלה לזמינה כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותו מושבת.",
+      question_requireDescription: "השאלה הופכת לנדרשת כאשר ביטוי הלוגיקה מחזיר True.",
+      trigger_completeDescription: "כאשר ביטוי הלוגיקה חוזר True, הסקר הושלם ומשתמש קצה רואה את 'דף התודה'.",
+      trigger_setvalueDescription: "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך מוגדר לשאלה שנבחרה.",
+      trigger_copyvalueDescription: "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך של שאלה נבחרת אחת מועתק לשאלה נבחרת אחרת.",
+      trigger_skipDescription: "כאשר ביטוי הלוגיקה חוזר True אז הסקר מדלג / ממקד את השאלה שנבחרה.",
+      trigger_runExpressionDescription: "כאשר ביטוי הלוגיקה מחזיר true, הביטוי המותאם אישית מתבצע. באפשרותך להגדיר תוצאת ביטוי זו בשאלה שנבחרה",
+      completedHtmlOnConditionDescription: "אם ביטוי הלוגיקה מחזיר true, טקסט ברירת המחדל עבור 'דף תודה' משתנה לטקסט הנתון.",
+      itemExpressionText: "כאשר expression: '{0}' מחזיר ערך True", //{0} - the expression
+      itemEmptyExpressionText: "כלל חדש",
+      page_visibilityText: "הפיכת {0} הדף לגלויות", //{0} page name
+      panel_visibilityText: "הפיכת {0} החלונית לגלויה", //{0} panel name
+      panel_enableText: "הפיכת {0} החלונית לזמינה", //{0} panel name
+      question_visibilityText: "הפוך את {0} השאלה לגלויה", //{0} question name
+      question_enableText: "הפוך שאלה {0} לזמינה", //{0} question name
+      question_requireText: "יש צורך בשאלה {0}", //{0} question name
+      question_resetValueText: "אפס ערך עבור שאלה: {0}",
+      question_setValueText: "הקצאת ערך: {1} לשאלה: {0}",
+      column_visibilityText: "הפוך את {0} העמודות של {1} השאלה לגלויות", //{0} column name, {1} question name
+      column_enableText: "הפיכת עמודה {0} של שאלה לזמינה {1}", //{0} column name, {1} question name
+      column_requireText: "הפוך את {0} העמודות של השאלה {1} לנדרש", //{0} column name, {1} question name
+      column_resetValueText: "איפוס ערך תא עבור עמודה: {0}",
+      column_setValueText: "הקצאת ערך תא: {1} לעמודה: {0}",
+      setValueExpressionPlaceholder: "ביטוי שתוצאתו תוקצה לשאלת היעד.",
+      trigger_completeText: "הסקר הושלם",
+      trigger_setvalueText: "העמידו בסימן שאלה: ערך {0} {1}", //{0} question name, {1} setValue
+      trigger_setvalueEmptyText: "ערך שאלה ברור: {0}", //{0} question name
+      trigger_copyvalueText: "העתק לשאלה: ערך {0} משאלה {1}", //{0} and {1} question names
+      trigger_skipText: "סקר דלג לשאלה {0}", //{0} question name
+      trigger_runExpressionText1: "ביטוי הפעלה: '{0}'", //{0} the expression
+      trigger_runExpressionText2: " ולהעמיד את תוצאתו בסימן שאלה: {0}", //{0} question name
+      completedHtmlOnConditionText: "הצג טקסט מותאם אישית עבור 'דף תודה'.",
+      showAllQuestions: "כל השאלות",
+      showAllActionTypes: "כל סוגי הפעולות",
+      conditions: "תנאים(ים)",
+      actions: "פעולה(ות)",
+      expressionEditorTitle: "הגדרת תנאים",
+      actionsEditorTitle: "הגדרת פעולות",
+      deleteAction: "מחיקת פעולה",
+      addNewAction: "הוסף פעולה",
+      selectedActionCaption: "בחר פעולה...",
+      expressionInvalid: "ביטוי הלוגיקה ריק או לא חוקי. אנא תקן זאת.",
+      noActionError: "אנא, הוסף לפחות פעולה אחת.",
+      actionInvalid: "אנא, תקן בעיות בפעולות שלך.",
+      uncompletedRule_title: "כללים לוגיים אינם שלמים",
+      uncompletedRule_text: "לא השלמת חלק מהכללים הלוגיים. אם תעזוב את הכרטיסיה כעת, השינויים יאבדו. האם אתה עדיין רוצה לעזוב את הכרטיסייה מבלי להשלים את השינויים?",
+      uncompletedRule_apply: "כן",
+      uncompletedRule_cancel: "לא, אני רוצה להשלים את הכללים"
+    }
   },
   // Property Editors
   pe: {
@@ -264,6 +287,7 @@ export var hebrewStrings = {
     fastEntry: "הזנה ידנית",
     fastEntryNonUniqueError: "הערך '{0}' אינו ייחודי",
     fastEntryChoicesCountError: "אנא הגבל את מספר הפריטים מ-{0} ל-{1}",
+    fastEntryChoicesMinCountError: "אנא הכנס לפחות {0} פריטים",
     fastEntryPlaceholder: "תוכל להזין נתונים בפורמט הבא:\nערך1|טקסט1\nערך2|טקסט2",
     formEntry: "הזנת טופס",
     testService: "בדוק את השירות",
@@ -331,6 +355,7 @@ export var hebrewStrings = {
     markRequired: "סמן כשדה חובה",
     removeRequiredMark: "הסר את הסימון כשדה חובה",
     isAllRowRequired: "חובה על תשובה בכל השורות",
+    eachRowUnique: "מניעת תגובות כפולות בשורות",
     requiredErrorText: "הודעת שגיאה לשדה חובה",
     startWithNewLine: "הצג את השאלה בשורה חדשה",
     rows: "שורות",
@@ -411,7 +436,12 @@ export var hebrewStrings = {
       imageHeight: "גובה התמונה (בערכים שמתקבלים ב- CSS)",
       imageWidth: "רוחב התמונה (בערכים שמתקבלים ב- CSS)"
     },
+    // survey templates
+    survey: {
+      title: "כותר"
+    },
     page: {
+      title: "כותר",
       maxTimeToFinish: "גבול זמן לסיום העמוד (בשניות)"
     },
     question: {
@@ -642,14 +672,26 @@ export var hebrewStrings = {
     columnsVisibleIf: "העמודות יוצגו אם",
     rowsVisibleIf: "השורות יוצגו אם",
     otherPlaceholder: "מציין מקום לתגובה",
-    rateType: "סוג דירוג" // Auto-generated string
+    signaturepad: {
+      showPlaceholder: "הצגת מציין המיקום",
+      placeholder: "טקסט מציין מיקום",
+      signatureWidth: "רוחב אזור חתימה",
+      signatureHeight: "גובה אזור חתימה",
+      signatureAutoScaleEnabled: "שינוי גודל אוטומטי של אזור החתימה",
+      penMinWidth: "רוחב עט מינימלי",
+      penMaxWidth: "רוחב עט מרבי"
+    },
+    filePlaceholder: "טקסט מציין מיקום קובץ",
+    photoPlaceholder: "טקסט מציין מיקום תמונה",
+    fileOrPhotoPlaceholder: "טקסט מציין מיקום של קובץ או תמונה",
+    rateType: "סוג דירוג"
   },
   // Property values
   pv: {
     "true": "אמת",
     "false": "שקר",
-    "file": "קבצים מקומיים",
-    "camera": "מצלמה",
+    file: "קבצים מקומיים",
+    camera: "מצלמה",
     "file-camera": "קבצים מקומיים או מצלמה",
     inherit: "ירושה",
     show: "נראה",
@@ -684,6 +726,7 @@ export var hebrewStrings = {
     both: "שניהם",
     left: "שמאל",
     right: "ימין",
+    leftRight: "ימין ושמאל",
     color: "צבע",
     date: "תאריך",
     datetime: "תאריך ושעה",
@@ -879,7 +922,10 @@ export var hebrewStrings = {
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\"."
+    keyName: "אם העמודה שצוינה מכילה ערכים זהים, הסקר יזרוק את השגיאה \"ערך מפתח לא ייחודי\".",
+    filePlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים\" או כאשר המצלמה אינה זמינה",
+    photoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"מצלמה\".",
+    fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\"."
   },
   // Properties
   p: {
@@ -891,6 +937,9 @@ export var hebrewStrings = {
     showLabel: "הצגת כתוביות לתמונות",
     value: "ערך",
     tabAlign: "יישור לשונית",
+    sourceType: "סוג מקור",
+    fitToContainer: "התאמה למיכל",
+    setValueExpression: "הגדרת ביטוי ערך",
     description: "תיאור",
     logoFit: "התאמת הלוגו",
     pages: "עמודים",
@@ -913,6 +962,8 @@ export var hebrewStrings = {
     descriptionLocation: "מיקום התיאור",
     defaultValueExpression: "ביטוי ערך ברירת מחדל",
     requiredIf: "נדרש אם",
+    resetValueIf: "איפוס ערך אם",
+    setValueIf: "הגדר ערך אם",
     validators: "מאמתים",
     bindings: "קישורים",
     renderAs: "תצוגה כ",
@@ -987,8 +1038,11 @@ export var hebrewStrings = {
     "--primary-foreground": "צבע ראשי",
     "--foreground": "צבע קדמי",
     "--base-unit": "יחידת בסיס",
+    advancedMode: "מצב מתקדם",
     groupGeneral: "כללי",
-    groupAdvanced: "מתקדם",
+    groupHeader: "כותרת",
+    groupBackground: "רקע",
+    groupAppearance: "מראה",
     themeName: "ערכת נושא",
     themeMode: "מצב שאלון",
     themeModePanels: "ברירת מחדל",
@@ -999,21 +1053,24 @@ export var hebrewStrings = {
     primaryDefaultColor: "ברירת מחדל",
     primaryDarkColor: "עכבר",
     primaryLightColor: "נבחר",
+    coverTitleForecolor: "צביעת כותרת מראש",
+    coverDescriptionForecolor: "תיאור צבע קדמי",
+    coverOverlapEnabled: "חופפים",
     backgroundDimColor: "צבע רקע",
     backgroundImage: "תמונת רקע",
     backgroundImageFitAuto: "אוטומטי",
     backgroundImageFitCover: "כיסוי",
     backgroundImageFitContain: "התאמה",
+    backgroundImageFitFill: "מתיחה",
+    backgroundImageFitTile: "אריח",
     backgroundOpacity: "שקיפות רקע",
     backgroundImageAttachmentFixed: "קבוע",
     backgroundImageAttachmentScroll: "גלילה",
     panelBackgroundTransparency: "שקיפות רקע לפאנלים",
     questionBackgroundTransparency: "שקיפות רקע לשאלות",
-    questionPanel: "רקע ורדיוס לפאנל שאלה",
     questionTitle: "גופן כותרת שאלה",
-    questionDescription: "גופן תיאור שאלה",
     editorPanel: "רקע אלמנט קלט",
-    editorFont: "גופן אלמנט קלט",
+    backgroundCornerRadius: "רקע ורדיוס פינה",
     backcolor: "רקע ברירת מחדל",
     hovercolor: "רקע העברת עכבר",
     borderDecoration: "קישוט גבול",
@@ -1021,7 +1078,9 @@ export var hebrewStrings = {
     accentForeground: "קדמי הדגשה",
     primaryForecolor: "צבע ברירת מחדל",
     primaryForecolorLight: "צבע כבוי",
-    linesColors: "צבעי קווים קטנים",
+    colorsTitle: "צבעים",
+    font: "גופן",
+    lines: "קווים",
     borderDefault: "כהה",
     borderLight: "בהיר",
     fontFamily: "סוג גופן",
@@ -1036,8 +1095,10 @@ export var hebrewStrings = {
     scale: "קנה מידה",
     cornerRadius: "רדיוס פינה",
     surveyTitle: "גופן כותרת שאלון",
+    surveyDescription: "גופן תיאור סקר",
     pageTitle: "גופן כותרת עמוד",
-    pageDescription: "גופן תיאור עמוד",
+    titleFont: "גופן כותרת",
+    descriptionFont: "גופן תיאור",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "הוספת אפקט צל",
@@ -1046,19 +1107,38 @@ export var hebrewStrings = {
     boxShadowSpread: "התפשטות",
     boxShadowDrop: "הטפה",
     boxShadowInner: "פנימי",
-    questionShadow: "אפקטי צל לשאלות",
-    editorShadow: "אפקטי צל לאלמנטי קלט",
+    shadow: "אפקטי צל",
+    headerView: "נוף",
+    headerViewBasic: "בסיסי",
+    headerViewAdvanced: "מתקדמים",
+    coverInheritWidthFrom: "רוחב אזור תוכן",
+    coverInheritWidthFromSurvey: "זהה לסקר",
+    coverInheritWidthFromContainer: "התאמה למיכל",
+    coverTextAreaWidth: "רוחב טקסט",
+    coverBackgroundColorSwitch: "צבע רקע",
+    coverBackgroundColorNone: "ללא",
+    coverBackgroundColorAccentColor: "צבע הדגשה",
+    coverBackgroundColorCustom: "מנהג",
+    horizontalAlignmentLeft: "שמאל",
+    horizontalAlignmentCenter: "מרכז",
+    horizontalAlignmentRight: "ימין",
+    verticalAlignmentTop: "סביבון",
+    verticalAlignmentMiddle: "אמצע",
+    verticalAlignmentBottom: "ישבן",
+    logoPosition: "מיקום הלוגו",
+    coverTitlePosition: "מיקום בתפקיד",
+    coverDescriptionPosition: "תיאור מיקום",
     names: {
-      "default": "ברירת מחדל",
-      "sharp": "חד",
-      "borderless": "ללא גבול",
-      "flat": "שטוח",
-      "plain": "פשוט",
-      "doubleborder": "גבול כפול",
-      "layered": "בשכבות",
-      "solid": "מוצק",
-      "threedimensional": "שלושה מימדים",
-      "contrast": "ניגודיות"
+      default: "ברירת מחדל",
+      sharp: "חד",
+      borderless: "ללא גבול",
+      flat: "שטוח",
+      plain: "פשוט",
+      doubleborder: "גבול כפול",
+      layered: "בשכבות",
+      solid: "מוצק",
+      threedimensional: "שלושה מימדים",
+      contrast: "ניגודיות"
     },
     colors: {
       teal: "טיל",
@@ -1076,3 +1156,157 @@ export var hebrewStrings = {
 // Replace "en" with a custom locale code (for example, "fr" or "de"),
 // Replace `enStrings` with the name of the variable that contains the custom dictionary.
 editorLocalization.locales["he"] = hebrewStrings;
+
+// The following strings have been translated by a machine translation service
+// Remove those strings that you have corrected manually
+// ed.prevFocus: "Focus previous" => "פוקוס קודם"
+// ed.nextFocus: "Focus next" => "התמקד הבא"
+// ed.saveTheme: "Save Theme" => "שמור ערכת נושא"
+// ed.saveThemeTooltip: "Save Theme" => "שמור ערכת נושא"
+// ed.propertyGridNoResultsFound: "No results found" => "לא נמצאו תוצאות"
+// ed.translateUsigAI: "Auto-translate All" => "תרגום אוטומטי של הכל"
+// ed.translationDialogTitle: "Untranslated strings" => "מחרוזות לא מתורגמות"
+// ed.surveyJsonExportButton: "Export" => "ייצא"
+// ed.surveyJsonImportButton: "Import" => "ייבוא"
+// ed.surveyJsonCopyButton: "Copy to clipboard" => "העתק ללוח"
+// ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "האם אתה באמת רוצה לאפס את ערכת הנושא? כל ההתאמות האישיות שלך יאבדו."
+// ed.themeResetConfirmationOk: "Yes, reset the theme" => "כן, אפס את ערכת הנושא"
+// ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "האפשרויות נטענות משירות אינטרנט."
+// ed.choicesLoadedFromWebLinkText: "Go to settings" => "עבור אל הגדרות"
+// ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "תצוגה מקדימה של אפשרויות בחירה שנטענו"
+// lg.addNewItem: "Add New Rule" => "הוספת כלל חדש"
+// lg.empty_tab: "Create a rule to customize the flow of the survey." => "צור כלל כדי להתאים אישית את זרימת הסקר."
+// lg.page_visibilityName: "Show (hide) page" => "הצג (הסתר) עמוד"
+// lg.page_enableName: "Enable (disable) page" => "הפוך דף לזמין (הפוך ללא זמין)"
+// lg.page_requireName: "Make page required" => "הפיכת הדף לנדרש"
+// lg.panel_visibilityName: "Show (hide) panel" => "הצג (הסתר) החלונית"
+// lg.panel_enableName: "Enable (disable) panel" => "הפעל (השבית) את החלונית"
+// lg.panel_requireName: "Make page required" => "הפיכת הדף לנדרש"
+// lg.question_visibilityName: "Show (hide) question" => "הצג (הסתר) שאלה"
+// lg.question_enableName: "Enable (disable) question" => "הפיכת שאלה לזמינה (השבתה"
+// lg.question_requireName: "Make question required" => "הפוך את השאלה לנדרשת"
+// lg.question_resetValueName: "Reset question value" => "איפוס ערך שאלה"
+// lg.question_setValueName: "Set question value" => "הגדרת ערך שאלה"
+// lg.column_visibilityName: "Show (hide) column" => "הצג (הסתר) עמודה"
+// lg.column_enableName: "Enable (disable) column" => "הפיכת עמודה לזמינה (ללא זמינה)"
+// lg.column_requireName: "Make column required" => "הפיכת עמודה לנדרשת"
+// lg.column_resetValueName: "Reset column value" => "איפוס ערך עמודה"
+// lg.column_setValueName: "Set column value" => "הגדרת ערך עמודה"
+// lg.trigger_completeName: "Complete survey" => "הסקר המלא"
+// lg.trigger_setvalueName: "Set answer" => "הגדר תשובה"
+// lg.trigger_copyvalueName: "Copy answer" => "העתק תשובה"
+// lg.trigger_skipName: "Skip to question" => "דלג לשאלה"
+// lg.trigger_runExpressionName: "Run expression" => "הפעל ביטוי"
+// lg.completedHtmlOnConditionName: "Set \"Survey Complete\" page markup" => "הגדרת סימון דף \"סקר הושלם\""
+// lg.page_visibilityDescription: "Make the page visible when the logic expression returns true. Otherwise keep it invisible." => "הפוך את הדף לגלוי כאשר ביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה."
+// lg.panel_visibilityDescription: "Make the panel visible when the logic expression returns true. Otherwise keep it invisible." => "הפוך את החלונית לגלויה כשביטוי הלוגיקה מחזיר True. אחרת, שמור אותו בלתי נראה."
+// lg.panel_enableDescription: "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled." => "הפוך את החלונית, ואת כל הרכיבים בתוכה, לזמינים כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותם מושבתים."
+// lg.question_visibilityDescription: "Make the question visible when the logic expression returns true. Otherwise keep it invisible." => "הפוך את השאלה לגלויה כאשר ביטוי הלוגיקה חוזר True. אחרת, שמור אותו בלתי נראה."
+// lg.question_enableDescription: "Make the question enable when the logic expression returns true. Otherwise keep it disabled." => "הפוך את השאלה לזמינה כאשר ביטוי הלוגיקה מחזיר True. אחרת, השאר אותו מושבת."
+// lg.question_requireDescription: "Question becomes required when the logic expression returns true." => "השאלה הופכת לנדרשת כאשר ביטוי הלוגיקה מחזיר True."
+// lg.trigger_completeDescription: "When the logic expression returns true then the survey becomes completed and an end-user see the 'Thank you page'." => "כאשר ביטוי הלוגיקה חוזר True, הסקר הושלם ומשתמש קצה רואה את 'דף התודה'."
+// lg.trigger_setvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value is set to the selected question." => "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך מוגדר לשאלה שנבחרה."
+// lg.trigger_copyvalueDescription: "When question values, that are used in the logic expression, are changed and the logic expression returns true, then the value of one selected question is copied to another selected question." => "כאשר ערכי שאלה, המשמשים בביטוי הלוגי, משתנים וביטוי הלוגיקה מחזיר True, הערך של שאלה נבחרת אחת מועתק לשאלה נבחרת אחרת."
+// lg.trigger_skipDescription: "When the logic expression returns true then the survey skip to / focus the selected question." => "כאשר ביטוי הלוגיקה חוזר True אז הסקר מדלג / ממקד את השאלה שנבחרה."
+// lg.trigger_runExpressionDescription: "When the logic expression returns true, then the custom expression is performed. You may optionally set this expression result into the selected question" => "כאשר ביטוי הלוגיקה מחזיר true, הביטוי המותאם אישית מתבצע. באפשרותך להגדיר תוצאת ביטוי זו בשאלה שנבחרה"
+// lg.completedHtmlOnConditionDescription: "If the logic expression returns true, then the default text for the 'Thank you page' is changed to the given one." => "אם ביטוי הלוגיקה מחזיר true, טקסט ברירת המחדל עבור 'דף תודה' משתנה לטקסט הנתון."
+// lg.itemExpressionText: "When expression: '{0}' returns true" => "כאשר expression: '{0}' מחזיר ערך True"
+// lg.itemEmptyExpressionText: "New rule" => "כלל חדש"
+// lg.page_visibilityText: "make page {0} visible" => "הפיכת {0} הדף לגלויות"
+// lg.panel_visibilityText: "make panel {0} visible" => "הפיכת {0} החלונית לגלויה"
+// lg.panel_enableText: "make panel {0} enable" => "הפיכת {0} החלונית לזמינה"
+// lg.question_visibilityText: "make question {0} visible" => "הפוך את {0} השאלה לגלויה"
+// lg.question_enableText: "make question {0} enable" => "הפוך שאלה {0} לזמינה"
+// lg.question_requireText: "make question {0} required" => "יש צורך בשאלה {0}"
+// lg.question_resetValueText: "reset value for question: {0}" => "אפס ערך עבור שאלה: {0}"
+// lg.question_setValueText: "assign value: {1} to question: {0}" => "הקצאת ערך: {1} לשאלה: {0}"
+// lg.column_visibilityText: "make column {0} of question {1} visible" => "הפוך את {0} העמודות של {1} השאלה לגלויות"
+// lg.column_enableText: "make column {0} of question {1} enable" => "הפיכת עמודה {0} של שאלה לזמינה {1}"
+// lg.column_requireText: "make column {0} of question {1} required" => "הפוך את {0} העמודות של השאלה {1} לנדרש"
+// lg.column_resetValueText: "reset cell value for column: {0}" => "איפוס ערך תא עבור עמודה: {0}"
+// lg.column_setValueText: "assign cell value: {1} to column: {0}" => "הקצאת ערך תא: {1} לעמודה: {0}"
+// lg.setValueExpressionPlaceholder: "An expression whose result will be assigned to the target question." => "ביטוי שתוצאתו תוקצה לשאלת היעד."
+// lg.trigger_completeText: "survey becomes completed" => "הסקר הושלם"
+// lg.trigger_setvalueText: "set into question: {0} value {1}" => "העמידו בסימן שאלה: ערך {0} {1}"
+// lg.trigger_setvalueEmptyText: "clear question value: {0}" => "ערך שאלה ברור: {0}"
+// lg.trigger_copyvalueText: "copy into question: {0} value from question {1}" => "העתק לשאלה: ערך {0} משאלה {1}"
+// lg.trigger_skipText: "survey skip to the question {0}" => "סקר דלג לשאלה {0}"
+// lg.trigger_runExpressionText1: "run expression: '{0}'" => "ביטוי הפעלה: '{0}'"
+// lg.trigger_runExpressionText2: " and set its result into question: {0}" => " ולהעמיד את תוצאתו בסימן שאלה: {0}"
+// lg.completedHtmlOnConditionText: "show custom text for the 'Thank you page'." => "הצג טקסט מותאם אישית עבור 'דף תודה'."
+// lg.showAllQuestions: "All Questions" => "כל השאלות"
+// lg.showAllActionTypes: "All Action Types" => "כל סוגי הפעולות"
+// lg.conditions: "Condition(s)" => "תנאים(ים)"
+// lg.actions: "Action(s)" => "פעולה(ות)"
+// lg.expressionEditorTitle: "Define condition(s)" => "הגדרת תנאים"
+// lg.actionsEditorTitle: "Define action(s)" => "הגדרת פעולות"
+// lg.deleteAction: "Delete Action" => "מחיקת פעולה"
+// lg.addNewAction: "Add Action" => "הוסף פעולה"
+// lg.selectedActionCaption: "Select action..." => "בחר פעולה..."
+// lg.expressionInvalid: "The logic expression is empty or invalid. Please correct it." => "ביטוי הלוגיקה ריק או לא חוקי. אנא תקן זאת."
+// lg.noActionError: "Please, add at least one action." => "אנא, הוסף לפחות פעולה אחת."
+// lg.actionInvalid: "Please, fix problems in your action(s)." => "אנא, תקן בעיות בפעולות שלך."
+// lg.uncompletedRule_title: "Logical rules are incomplete" => "כללים לוגיים אינם שלמים"
+// lg.uncompletedRule_text: "You have not completed some of the logical rules. If you leave the tab now, the changes will be lost. Do you still want to leave the tab without completing the changes?" => "לא השלמת חלק מהכללים הלוגיים. אם תעזוב את הכרטיסיה כעת, השינויים יאבדו. האם אתה עדיין רוצה לעזוב את הכרטיסייה מבלי להשלים את השינויים?"
+// lg.uncompletedRule_apply: "Yes" => "כן"
+// lg.uncompletedRule_cancel: "No, I want to complete the rules" => "לא, אני רוצה להשלים את הכללים"
+// pe.fastEntryChoicesMinCountError: "Please enter at least {0} items" => "אנא הכנס לפחות {0} פריטים"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "מניעת תגובות כפולות בשורות"
+// survey.title: "Title" => "כותר"
+// page.title: "Title" => "כותר"
+// signaturepad.showPlaceholder: "Show the placeholder" => "הצגת מציין המיקום"
+// signaturepad.placeholder: "Placeholder text" => "טקסט מציין מיקום"
+// signaturepad.signatureWidth: "Signature area width" => "רוחב אזור חתימה"
+// signaturepad.signatureHeight: "Signature area height" => "גובה אזור חתימה"
+// signaturepad.signatureAutoScaleEnabled: "Auto-scale the signature area" => "שינוי גודל אוטומטי של אזור החתימה"
+// signaturepad.penMinWidth: "Minimum pen width" => "רוחב עט מינימלי"
+// signaturepad.penMaxWidth: "Maximum pen width" => "רוחב עט מרבי"
+// pe.filePlaceholder: "File placeholder text" => "טקסט מציין מיקום קובץ"
+// pe.photoPlaceholder: "Photo placeholder text" => "טקסט מציין מיקום תמונה"
+// pe.fileOrPhotoPlaceholder: "File or photo placeholder text" => "טקסט מציין מיקום של קובץ או תמונה"
+// pv.leftRight: "Left and right" => "ימין ושמאל"
+// pehelp.filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable" => "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים\" או כאשר המצלמה אינה זמינה"
+// pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "חל כאשר \"סוג מקור\" הוא \"מצלמה\"."
+// pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\"."
+// p.sourceType: "Source type" => "סוג מקור"
+// p.fitToContainer: "Fit to container" => "התאמה למיכל"
+// p.setValueExpression: "Set value expression" => "הגדרת ביטוי ערך"
+// p.resetValueIf: "Reset value if" => "איפוס ערך אם"
+// p.setValueIf: "Set value if" => "הגדר ערך אם"
+// theme.advancedMode: "Advanced mode" => "מצב מתקדם"
+// theme.groupHeader: "Header" => "כותרת"
+// theme.groupBackground: "Background" => "רקע"
+// theme.groupAppearance: "Appearance" => "מראה"
+// theme.coverTitleForecolor: "Title forecolor" => "צביעת כותרת מראש"
+// theme.coverDescriptionForecolor: "Description forecolor" => "תיאור צבע קדמי"
+// theme.coverOverlapEnabled: "Overlap" => "חופפים"
+// theme.backgroundImageFitFill: "Stretch" => "מתיחה"
+// theme.backgroundImageFitTile: "Tile" => "אריח"
+// theme.backgroundCornerRadius: "Background and corner radius" => "רקע ורדיוס פינה"
+// theme.colorsTitle: "Colors" => "צבעים"
+// theme.font: "Font" => "גופן"
+// theme.lines: "Lines" => "קווים"
+// theme.surveyDescription: "Survey description font" => "גופן תיאור סקר"
+// theme.titleFont: "Title font" => "גופן כותרת"
+// theme.descriptionFont: "Description font" => "גופן תיאור"
+// theme.shadow: "Shadow effects" => "אפקטי צל"
+// theme.headerView: "View" => "נוף"
+// theme.headerViewBasic: "Basic" => "בסיסי"
+// theme.headerViewAdvanced: "Advanced" => "מתקדמים"
+// theme.coverInheritWidthFrom: "Content area width" => "רוחב אזור תוכן"
+// theme.coverInheritWidthFromSurvey: "Same as survey" => "זהה לסקר"
+// theme.coverInheritWidthFromContainer: "Fit to container" => "התאמה למיכל"
+// theme.coverTextAreaWidth: "Text width" => "רוחב טקסט"
+// theme.coverBackgroundColorSwitch: "Background color" => "צבע רקע"
+// theme.coverBackgroundColorNone: "None" => "ללא"
+// theme.coverBackgroundColorAccentColor: "Accent color" => "צבע הדגשה"
+// theme.coverBackgroundColorCustom: "Custom" => "מנהג"
+// theme.horizontalAlignmentLeft: "Left" => "שמאל"
+// theme.horizontalAlignmentCenter: "Center" => "מרכז"
+// theme.horizontalAlignmentRight: "Right" => "ימין"
+// theme.verticalAlignmentTop: "Top" => "סביבון"
+// theme.verticalAlignmentMiddle: "Middle" => "אמצע"
+// theme.verticalAlignmentBottom: "Bottom" => "ישבן"
+// theme.logoPosition: "Logo position" => "מיקום הלוגו"
+// theme.coverTitlePosition: "Title position" => "מיקום בתפקיד"
+// theme.coverDescriptionPosition: "Description position" => "תיאור מיקום"

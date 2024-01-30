@@ -1038,8 +1038,8 @@ var persianStrings = {
     "--primary-foreground": "رنگ پیشزمینه اصلی",
     "--foreground": "رنگ پیشزمینه",
     "--base-unit": "واحد پایه",
+    advancedMode: "حالت پیشرفته",
     groupGeneral: "عمومی",
-    groupAdvanced: "پیشرفته",
     groupHeader: "هدر",
     groupBackground: "پس زمینه",
     groupAppearance: "ظاهر",
@@ -1068,11 +1068,9 @@ var persianStrings = {
     backgroundImageAttachmentScroll: "حرکت",
     panelBackgroundTransparency: "تاری پسزمینه پانل",
     questionBackgroundTransparency: "تاری پسزمینۀ سؤال",
-    questionPanel: "پس زمینه پنل و شعاع گوشه",
     questionTitle: "قلم عنوان پرسش",
-    questionDescription: "قلم شرح سؤال",
     editorPanel: "عنصر ورودی",
-    editorFont: "قلم عنصر ورودی",
+    backgroundCornerRadius: "پس زمینه و شعاع گوشه",
     backcolor: "پسزمینۀ پیشفرض",
     hovercolor: "پسزمینه شناور",
     borderDecoration: "دکوراسیون مرزی",
@@ -1080,7 +1078,9 @@ var persianStrings = {
     accentForeground: "پیشزمینه لهجه",
     primaryForecolor: "رنگ پیشفرض",
     primaryForecolorLight: "رنگ غیرفعال",
-    linesColors: "رنگهای خط فرعی",
+    colorsTitle: "رنگ",
+    font: "فونت",
+    lines: "خطوط",
     borderDefault: "تیره تر",
     borderLight: "سبکتر",
     fontFamily: "خانواده قلم",
@@ -1097,7 +1097,8 @@ var persianStrings = {
     surveyTitle: "قلم عنوان نظرسنجی",
     surveyDescription: "قلم توصیف نظرسنجی",
     pageTitle: "قلم عنوان صفحه",
-    pageDescription: "قلم توصیف صفحه",
+    titleFont: "قلم عنوان",
+    descriptionFont: "قلم توصیف",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "افزودن جلوهی سایه",
@@ -1106,8 +1107,7 @@ var persianStrings = {
     boxShadowSpread: "گسترش",
     boxShadowDrop: "قطره",
     boxShadowInner: "درونی",
-    questionShadow: "جلوه های سایه",
-    editorShadow: "عناصر ورودی اثرات سایه",
+    shadow: "جلوه های سایه",
     headerView: "مشاهده",
     headerViewBasic: "اساسی",
     headerViewAdvanced: "پیشرفته",
@@ -1693,3 +1693,11 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "رفتن به تنظیمات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "پیش نمایش گزینه های انتخاب بار شده"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "جلوگیری از پاسخ های تکراری در ردیف ها"
+// theme.advancedMode: "Advanced mode" => "حالت پیشرفته"
+// theme.backgroundCornerRadius: "Background and corner radius" => "پس زمینه و شعاع گوشه"
+// theme.colorsTitle: "Colors" => "رنگ"
+// theme.font: "Font" => "فونت"
+// theme.lines: "Lines" => "خطوط"
+// theme.titleFont: "Title font" => "قلم عنوان"
+// theme.descriptionFont: "Description font" => "قلم توصیف"
+// theme.shadow: "Shadow effects" => "جلوه های سایه"

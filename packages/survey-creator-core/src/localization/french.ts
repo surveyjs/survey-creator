@@ -1038,8 +1038,8 @@ var frenchTranslation = {
     "--primary-foreground": "Couleur de premier plan primaire",
     "--foreground": "Couleur de premier plan",
     "--base-unit": "Unité de base",
+    advancedMode: "Mode avancé",
     groupGeneral: "Généralités",
-    groupAdvanced: "Avancé",
     groupHeader: "En-tête",
     groupBackground: "Arrière-plan",
     groupAppearance: "Apparence",
@@ -1068,11 +1068,9 @@ var frenchTranslation = {
     backgroundImageAttachmentScroll: "Défilable",
     panelBackgroundTransparency: "Opacité de l’arrière-plan des sections",
     questionBackgroundTransparency: "Opacité de l’arrière-plan des questions",
-    questionPanel: "Arrière-plan des sections et rayon d’angle",
     questionTitle: "Police du titre de la question",
-    questionDescription: "Police de la description de la question",
     editorPanel: "Champs de réponse",
-    editorFont: "Police des champs de réponse",
+    backgroundCornerRadius: "Arrière-plan et rayon d’angle",
     backcolor: "Arrière-plan par défaut",
     hovercolor: "Arrière-plan du survol",
     borderDecoration: "Décoration de bordure",
@@ -1080,7 +1078,9 @@ var frenchTranslation = {
     accentForeground: "Accentuation du premier plan",
     primaryForecolor: "Couleur par défaut",
     primaryForecolorLight: "Couleur Désactivée",
-    linesColors: "Couleurs des lignes secondaires",
+    colorsTitle: "Couleurs",
+    font: "Police",
+    lines: "Lignes",
     borderDefault: "Sombre",
     borderLight: "Clair",
     fontFamily: "Famille de polices",
@@ -1097,7 +1097,8 @@ var frenchTranslation = {
     surveyTitle: "Police du titre du sondage",
     surveyDescription: "Police de description de l’enquête",
     pageTitle: "Police du titre de la page",
-    pageDescription: "Police de la description de page",
+    titleFont: "Police du titre",
+    descriptionFont: "Police de description",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Ajouter un effet d’ombre",
@@ -1106,8 +1107,7 @@ var frenchTranslation = {
     boxShadowSpread: "Propagation",
     boxShadowDrop: "Extérieur",
     boxShadowInner: "Intérieur",
-    questionShadow: "Effets d’ombre",
-    editorShadow: "Effets d’ombre du champ de réponse",
+    shadow: "Effets d’ombre",
     headerView: "Vue",
     headerViewBasic: "Basique",
     headerViewAdvanced: "Avancé",
@@ -1798,3 +1798,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Accédez aux paramètres"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Aperçu des options de choix chargées"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Éviter les réponses dupliquées dans les lignes"
+// theme.advancedMode: "Advanced mode" => "Mode avancé"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Arrière-plan et rayon d’angle"
+// theme.colorsTitle: "Colors" => "Couleurs"
+// theme.font: "Font" => "Police"
+// theme.lines: "Lines" => "Lignes"
+// theme.titleFont: "Title font" => "Police du titre"
+// theme.descriptionFont: "Description font" => "Police de description"
+// theme.shadow: "Shadow effects" => "Effets d’ombre"

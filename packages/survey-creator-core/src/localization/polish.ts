@@ -1038,8 +1038,8 @@ var polishStrings = {
     "--primary-foreground": "Podstawowy kolor pierwszego planu",
     "--foreground": "Kolor pierwszego planu",
     "--base-unit": "Jednostka bazowa",
+    advancedMode: "Tryb zaawansowany",
     groupGeneral: "Ogólne",
-    groupAdvanced: "Zaawansowany",
     groupHeader: "Nagłówek",
     groupBackground: "Tło",
     groupAppearance: "Wygląd",
@@ -1068,11 +1068,9 @@ var polishStrings = {
     backgroundImageAttachmentScroll: "Przewijać",
     panelBackgroundTransparency: "Krycie tła panelu",
     questionBackgroundTransparency: "Nieprzezroczystość tła pytania",
-    questionPanel: "Tło panelu i promień narożnika",
     questionTitle: "Czcionka tytułu pytania",
-    questionDescription: "Czcionka opisu pytania",
     editorPanel: "Element wejściowy",
-    editorFont: "Czcionka elementu wejściowego",
+    backgroundCornerRadius: "Tło i promień narożnika",
     backcolor: "Domyślne tło",
     hovercolor: "Najedź kursorem na tło",
     borderDecoration: "Dekoracja obramowania",
@@ -1080,7 +1078,9 @@ var polishStrings = {
     accentForeground: "Akcent na pierwszym planie",
     primaryForecolor: "Kolor domyślny",
     primaryForecolorLight: "Kolor wyłączony",
-    linesColors: "Pomocnicze kolory linii",
+    colorsTitle: "Kolory",
+    font: "Czcionka",
+    lines: "Linie",
     borderDefault: "Ciemniejsze",
     borderLight: "Zapalniczka",
     fontFamily: "Rodzina czcionek",
@@ -1097,7 +1097,8 @@ var polishStrings = {
     surveyTitle: "Czcionka tytułu ankiety",
     surveyDescription: "Czcionka opisu ankiety",
     pageTitle: "Czcionka tytułu strony",
-    pageDescription: "Czcionka opisu strony",
+    titleFont: "Czcionka tytułu",
+    descriptionFont: "Czcionka opisu",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt cienia",
@@ -1106,8 +1107,7 @@ var polishStrings = {
     boxShadowSpread: "Rozprzestrzenianie się",
     boxShadowDrop: "Kropla",
     boxShadowInner: "Wewnętrzny",
-    questionShadow: "Efekty cienia",
-    editorShadow: "Efekty cienia elementu wejściowego",
+    shadow: "Efekty cienia",
     headerView: "Widok",
     headerViewBasic: "Podstawowy",
     headerViewAdvanced: "Zaawansowany",
@@ -2011,3 +2011,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Przejdź do ustawień"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Podgląd wczytanych opcji wyboru"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zapobieganie zduplikowanym odpowiedziom w wierszach"
+// theme.advancedMode: "Advanced mode" => "Tryb zaawansowany"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Tło i promień narożnika"
+// theme.colorsTitle: "Colors" => "Kolory"
+// theme.font: "Font" => "Czcionka"
+// theme.lines: "Lines" => "Linie"
+// theme.titleFont: "Title font" => "Czcionka tytułu"
+// theme.descriptionFont: "Description font" => "Czcionka opisu"
+// theme.shadow: "Shadow effects" => "Efekty cienia"

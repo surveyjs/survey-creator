@@ -1038,8 +1038,8 @@ export var bgStrings = {
     "--primary-foreground": "Основен цвят на преден план",
     "--foreground": "Цвят на преден план",
     "--base-unit": "Базова единица",
+    advancedMode: "Разширен режим",
     groupGeneral: "Общ",
-    groupAdvanced: "Разширен",
     groupHeader: "Заглавка",
     groupBackground: "Фон",
     groupAppearance: "Външен вид",
@@ -1068,11 +1068,9 @@ export var bgStrings = {
     backgroundImageAttachmentScroll: "Свитък",
     panelBackgroundTransparency: "Прозрачност на фона на панела",
     questionBackgroundTransparency: "Прозрачност на фона на въпроса",
-    questionPanel: "Панел с въпроси",
     questionTitle: "Шрифт на заглавието на въпроса",
-    questionDescription: "Шрифт на описанието на въпроса",
     editorPanel: "Редактор",
-    editorFont: "Шрифт на редактора",
+    backgroundCornerRadius: "Фон и радиус на ъгъла",
     backcolor: "Фон по подразбиране",
     hovercolor: "Фон под курсора на мишката",
     borderDecoration: "Декорация на контура",
@@ -1080,7 +1078,9 @@ export var bgStrings = {
     accentForeground: "Акцентен преден план",
     primaryForecolor: "Цвят по подразбиране",
     primaryForecolorLight: "Деактивиран цвят",
-    linesColors: "Линии",
+    colorsTitle: "Цветове",
+    font: "Шрифт",
+    lines: "Линии",
     borderDefault: "Преобладаващ",
     borderLight: "Незначителен",
     fontFamily: "Шрифтово семейство",
@@ -1097,7 +1097,8 @@ export var bgStrings = {
     surveyTitle: "Шрифт на заглавието на анкетата",
     surveyDescription: "Шрифт за описание на проучването",
     pageTitle: "Шрифт на заглавието на страницата",
-    pageDescription: "Page Description Font",
+    titleFont: "Шрифт на заглавието",
+    descriptionFont: "Шрифт за описание",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавяне на ефект на сянка",
@@ -1106,8 +1107,7 @@ export var bgStrings = {
     boxShadowSpread: "Разпространение",
     boxShadowDrop: "Капка",
     boxShadowInner: "Вътрешен",
-    questionShadow: "Граница на панела с въпроси / Сянка",
-    editorShadow: "Граница на редактора / Сянка",
+    shadow: "Ефекти на сянка",
     headerView: "Изглед",
     headerViewBasic: "Основен",
     headerViewAdvanced: "Напреднал",
@@ -1299,3 +1299,11 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Отидете в настройките"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Визуализация на заредените опции за избор"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвратяване на дублиращи се отговори в редове"
+// theme.advancedMode: "Advanced mode" => "Разширен режим"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Фон и радиус на ъгъла"
+// theme.colorsTitle: "Colors" => "Цветове"
+// theme.font: "Font" => "Шрифт"
+// theme.lines: "Lines" => "Линии"
+// theme.titleFont: "Title font" => "Шрифт на заглавието"
+// theme.descriptionFont: "Description font" => "Шрифт за описание"
+// theme.shadow: "Shadow effects" => "Ефекти на сянка"

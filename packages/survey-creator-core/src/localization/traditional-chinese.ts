@@ -1038,8 +1038,8 @@ var traditionalChineseTranslation = {
     "--primary-foreground": "原色前景色",
     "--foreground": "前景色",
     "--base-unit": "基本單元",
+    advancedMode: "高級模式",
     groupGeneral: "常規",
-    groupAdvanced: "高深",
     groupHeader: "頁眉",
     groupBackground: "背景",
     groupAppearance: "外觀",
@@ -1068,11 +1068,9 @@ var traditionalChineseTranslation = {
     backgroundImageAttachmentScroll: "滾動",
     panelBackgroundTransparency: "面板背景不透明度",
     questionBackgroundTransparency: "問題背景不透明度",
-    questionPanel: "面板背景和角半徑",
     questionTitle: "問題標題字體",
-    questionDescription: "問題描述字體",
     editorPanel: "輸入元素",
-    editorFont: "輸入元素字體",
+    backgroundCornerRadius: "背景和圓角半徑",
     backcolor: "默認背景",
     hovercolor: "懸停背景",
     borderDecoration: "邊框裝飾",
@@ -1080,7 +1078,9 @@ var traditionalChineseTranslation = {
     accentForeground: "強調文字前景",
     primaryForecolor: "默認顏色",
     primaryForecolorLight: "禁用顏色",
-    linesColors: "次要線條顏色",
+    colorsTitle: "顏色",
+    font: "字體",
+    lines: "線",
     borderDefault: "暗",
     borderLight: "打火機",
     fontFamily: "字體系列",
@@ -1097,7 +1097,8 @@ var traditionalChineseTranslation = {
     surveyTitle: "調查標題字體",
     surveyDescription: "調查描述字體",
     pageTitle: "頁面標題字體",
-    pageDescription: "頁面描述字體",
+    titleFont: "標題字體",
+    descriptionFont: "描述字體",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "添加陰影效果",
@@ -1106,8 +1107,7 @@ var traditionalChineseTranslation = {
     boxShadowSpread: "傳播",
     boxShadowDrop: "落",
     boxShadowInner: "內",
-    questionShadow: "陰影效果",
-    editorShadow: "輸入元素陰影效果",
+    shadow: "陰影效果",
     headerView: "視圖",
     headerViewBasic: "基本",
     headerViewAdvanced: "高深",
@@ -2016,3 +2016,11 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“設置”"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "載入選項的預覽"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "防止行中出現重複回應"
+// theme.advancedMode: "Advanced mode" => "高級模式"
+// theme.backgroundCornerRadius: "Background and corner radius" => "背景和圓角半徑"
+// theme.colorsTitle: "Colors" => "顏色"
+// theme.font: "Font" => "字體"
+// theme.lines: "Lines" => "線"
+// theme.titleFont: "Title font" => "標題字體"
+// theme.descriptionFont: "Description font" => "描述字體"
+// theme.shadow: "Shadow effects" => "陰影效果"
