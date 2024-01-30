@@ -258,7 +258,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "allowClear", tab: "choices" }
+        { name: "allowClear", tab: "choices" },
+        { name: "searchMode", tab: "choices" },
       ]
     },
     tagbox: {
@@ -266,6 +267,7 @@ export class SurveyQuestionEditorDefinition {
         "closeOnSelect",
         "placeholder",
         { name: "searchEnabled", tab: "choices" },
+        { name: "searchMode", tab: "choices" },
         { name: "hideSelectedItems", tab: "choices" },
         { name: "allowClear", tab: "choices" }
       ]
@@ -619,6 +621,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",
+          tab: "navigation"
+        },
+        {
+          name: "progressBarShowPageTitles",
+          tab: "navigation"
+        },
+        {
+          name: "progressBarShowPageNumbers",
           tab: "navigation"
         },
         { name: "showPrevButton", tab: "navigation" },

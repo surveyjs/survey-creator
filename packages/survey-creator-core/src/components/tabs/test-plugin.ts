@@ -1,6 +1,7 @@
 import { notShortCircuitAnd } from "../../utils/utils";
 import { Action, ComputedUpdater, createDropdownActionModel, surveyCss, defaultV2ThemeName, IAction, ListModel, PopupModel, surveyLocalization, SurveyModel, StylesManager } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { simulatorDevices } from "../simulator";
 import { TestSurveyTabViewModel } from "./test";
@@ -74,7 +75,7 @@ export class TabTestPlugin implements ICreatorPlugin {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "test"; });
   }
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("test", this, "ed.testSurvey");
     this.setPreviewTheme(this.creator.themeForPreview);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));

@@ -1,5 +1,5 @@
 import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
@@ -17,7 +17,7 @@ export class TabDesignerViewModel extends Base {
   @property() pageCount: number;
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
-  public creator: CreatorBase;
+  public creator: SurveyCreatorModel;
 
   private createNewPage() {
     const newPage: PageModel = this.survey.createNewPage("");
@@ -52,7 +52,7 @@ export class TabDesignerViewModel extends Base {
     return pages.length === 0 || pages[pages.length - 1].elements.length > 0;
   }
 
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);

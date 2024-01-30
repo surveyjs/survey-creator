@@ -240,6 +240,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
         { name: "allowClear", tab: "choices" },
+        { name: "searchMode", tab: "choices" }
       ],
     },
     imagepicker: {

@@ -1,5 +1,6 @@
 import { SurveyModel, property } from "survey-core";
-import { ICreatorPlugin, CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
 import { SurveyTextWorker } from "../../textWorker";
 import {
@@ -13,7 +14,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
   @property() private aceCanUndo: boolean = false;
   @property() private aceCanRedo: boolean = false;
 
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super(creator);
   }
 
@@ -101,7 +102,7 @@ export class AceJsonEditorModel extends JsonEditorBaseModel {
 export class TabJsonEditorAcePlugin
   extends TabJsonEditorBasePlugin
   implements ICreatorPlugin {
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super(creator);
     creator.addPluginTab(
       "editor",
@@ -111,7 +112,7 @@ export class TabJsonEditorAcePlugin
     );
   }
   protected createModel(
-    creator: CreatorBase
+    creator: SurveyCreatorModel
   ): JsonEditorBaseModel {
     return new AceJsonEditorModel(creator);
   }

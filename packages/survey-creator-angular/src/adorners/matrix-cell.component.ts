@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, TemplateRef, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
-import { CreatorBase, ItemValueWrapperViewModel, MatrixCellWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ItemValueWrapperViewModel, MatrixCellWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
 @Component({
@@ -14,7 +14,7 @@ export class MatrixCellComponent extends CreatorModelComponent<MatrixCellWrapper
   @Input() componentData!: any;
   @Input() contentTempl!: TemplateRef<any>;
   public adorner!: MatrixCellWrapperViewModel;
-  private get creator(): CreatorBase {
+  private get creator(): SurveyCreatorModel {
     return this.componentData.creator;
   }
   public get question(): QuestionSelectBase {

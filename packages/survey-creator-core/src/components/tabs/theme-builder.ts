@@ -1,6 +1,6 @@
 import { SurveySimulatorModel } from "../simulator";
 import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, PanelModelBase } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -207,7 +207,7 @@ export class ThemeBuilder extends Base {
   public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
   public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
 
-  constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
+  constructor(private surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
     this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";

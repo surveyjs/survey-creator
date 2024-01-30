@@ -20,7 +20,6 @@
   },
   "classRename": {
     "surveyeditor": "survey-creator",
-    "surveycreator": "survey-creator",
-    "surveycreatormodel": "survey-creator"
+    "surveycreator": "survey-creator"
   }
 }

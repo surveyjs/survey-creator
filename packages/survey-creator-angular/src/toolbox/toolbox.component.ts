@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CreatorBase, QuestionToolbox } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionToolbox } from "survey-creator-core";
 import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
 
 @Component({
@@ -8,7 +8,7 @@ import { AngularComponentFactory, BaseAngular } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class ToolboxComponent extends BaseAngular<QuestionToolbox> {
-  @Input() model!: CreatorBase;
+  @Input() model!: SurveyCreatorModel;
   public get toolbox() {
     return this.model.toolbox;
   }

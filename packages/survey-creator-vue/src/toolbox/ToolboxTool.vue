@@ -20,13 +20,13 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ToolboxToolViewModel, type CreatorBase } from "survey-creator-core";
+import { ToolboxToolViewModel, type SurveyCreatorModel } from "survey-creator-core";
 import type { Action } from "survey-core";
 import { useCreatorModel } from "@/creator-model";
 import { computed } from "vue";
 import { useBase } from "survey-vue3-ui";
 const props = defineProps<{
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   item: Action;
   isCompact: boolean;
 }>();

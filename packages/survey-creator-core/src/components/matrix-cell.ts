@@ -9,7 +9,7 @@ import {
   Helpers,
   IDialogOptions,
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { defaultV2Css } from "survey-core";
 import { toggleHovered } from "../utils/utils";
 import { SurveyHelper } from "../survey-helper";
@@ -18,8 +18,8 @@ require("./matrix-cell.scss");
 
 export class MatrixCellWrapperEditSurvey {
   private surveyValue: SurveyModel;
-  private creator: CreatorBase;
-  constructor(creator: CreatorBase, private cellQuestion: Question, private column: MatrixDropdownColumn, model?: Base) {
+  private creator: SurveyCreatorModel;
+  constructor(creator: SurveyCreatorModel, private cellQuestion: Question, private column: MatrixDropdownColumn, model?: Base) {
     this.creator = creator;
     let questionJSON = cellQuestion.toJSON();
     questionJSON.type = cellQuestion.getType();
@@ -57,7 +57,7 @@ export class MatrixCellWrapperEditSurvey {
 }
 
 export class MatrixCellWrapperViewModel extends Base {
-  constructor(public creator: CreatorBase, public templateData: any, public question: Question, public row: any, public column: any) {
+  constructor(public creator: SurveyCreatorModel, public templateData: any, public question: Question, public row: any, public column: any) {
     super();
     // if(!question && !!this.templateData.data) {
     //   this.question = this.templateData.data;

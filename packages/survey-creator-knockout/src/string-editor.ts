@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
+import { SurveyCreatorModel, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 import { LocalizableString } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
 const template = require("./string-editor.html");
@@ -12,7 +12,7 @@ export class StringEditorViewModel {
   private implementor = undefined;
   private baseModel: StringEditorViewModelBase;
 
-  constructor(public locString: any, private creator: CreatorBase, element: any) {
+  constructor(public locString: any, private creator: SurveyCreatorModel, element: any) {
     this.baseModel = new StringEditorViewModelBase(locString, creator);
     this.baseModel.getEditorElement = () => getEditorElement(element);
     this.implementor = new ImplementorBase(this.baseModel);

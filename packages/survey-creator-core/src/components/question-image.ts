@@ -1,6 +1,6 @@
 
 import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { getLocString } from "../editorLocalization";
@@ -32,7 +32,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
     public questionRoot: HTMLElement

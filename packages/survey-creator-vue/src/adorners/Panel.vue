@@ -108,7 +108,7 @@ import { useCreatorModel } from "@/creator-model";
 import type { Question } from "survey-core";
 import {
   QuestionAdornerViewModel,
-  type CreatorBase,
+  type SurveyCreatorModel,
 } from "survey-creator-core";
 const props = defineProps<{
   componentName: string;
@@ -117,7 +117,7 @@ const props = defineProps<{
 const adorner = useCreatorModel(
   () =>
     new QuestionAdornerViewModel(
-      props.componentData.data as CreatorBase,
+      props.componentData.data as SurveyCreatorModel,
       props.componentData.element as Question,
       null as any
     ),

@@ -2291,17 +2291,17 @@ test("property editor show help as description", () => {
     ) > -1
   ).toBeTruthy();
   expect(actions).toHaveLength(2);
-  expect(actions[1].id).toEqual("property-grid-help");
-  expect(actions[1].iconName).toEqual("icon-description");
+  expect(actions[0].id).toEqual("property-grid-help");
+  expect(actions[0].iconName).toEqual("icon-description");
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
-  actions[1].action();
+  actions[0].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual(
     "underTitle"
   );
-  expect(actions[1].iconName).toEqual("icon-description-hide");
-  actions[1].action();
+  expect(actions[0].iconName).toEqual("icon-description-hide");
+  actions[0].action();
   expect(defaultValueExpressionQuestion.descriptionLocation).toEqual("hidden");
-  expect(actions[1].iconName).toEqual("icon-description");
+  expect(actions[0].iconName).toEqual("icon-description");
 });
 test("Use maxLength property attribute", () => {
   Serializer.findProperty("question", "name").maxLength = 10;
@@ -2975,4 +2975,56 @@ test("Setup correct categories for dynamic properties in components", () => {
   expect(allowClearQuestion.parent.name).toBe("choices");
   expect(showOtherItemQuestion.parent.name).toBe("choices");
   ComponentCollection.Instance.clear();
+});
+test("Setup correct categories for dynamic properties in components, #2", () => {
+  ComponentCollection.Instance.add({
+    name: "customtext",
+    inheritBaseProps: ["placeholder", "inputType"],
+    questionJSON: {
+      type: "text"
+    },
+  });
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    elements: [
+      { type: "customtext", name: "q1", placeholder: "abc" }
+    ]
+  });
+  const question = survey.getQuestionByName("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  const placeholderQuestion = propertyGrid.survey.getQuestionByName("placeholder");
+  const inputTypeQuestion = propertyGrid.survey.getQuestionByName("inputType");
+  expect(placeholderQuestion.parent.name).toBe("general");
+  expect(placeholderQuestion.isVisible).toBeTruthy();
+  expect(placeholderQuestion.title).toBe("Input area placeholder");
+  expect(inputTypeQuestion.parent.name).toBe("general");
+  const panel = propertyGrid.survey.getPanelByName("general");
+  expect(panel.questions[0].name).toBe("name");
+  expect(panel.questions[1].name).toBe("title");
+  ComponentCollection.Instance.clear();
+});
+test("Check showInMultipleColumns property visibility", () => {
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  survey.fromJSON({
+    elements: [
+      {
+        "type": "matrixdynamic",
+        "name": "matrix",
+        "columns": [
+          {
+            "name": "Column1",
+            "cellType": "checkbox",
+            "showInMultipleColumns": true
+          }
+        ]
+      }
+    ]
+  });
+  const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("matrix");
+  var propertyGrid = new PropertyGridModelTester(question.columns[0]);
+  const showInMultipleColumnsQuestion = propertyGrid.survey.getQuestionByName("showInMultipleColumns");
+  expect(showInMultipleColumnsQuestion.value).toBe(true);
+  expect(showInMultipleColumnsQuestion.isVisible).toBeTruthy();
 });

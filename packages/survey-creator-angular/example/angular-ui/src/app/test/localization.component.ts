@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from "@angular/core";
-import { CreatorBase, localization } from "survey-creator-core";
+import { SurveyCreatorModel, localization } from "survey-creator-core";
 import { TestDefaultComponent } from "./default.component";
 
 @Component({
@@ -12,6 +12,6 @@ export class TestLocalizationComponent extends TestDefaultComponent {
     const loc = localization.getLocale("de");
     loc.ed.logic = "Miner Logik";
     localization.currentLocale = "de";
-    this.creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true });
+    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
   }
 }
