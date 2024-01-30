@@ -692,7 +692,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
     }
   ];
   cssVariables = creator?.theme?.cssVariables;
-  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
@@ -2170,7 +2170,7 @@ test("Get theme changes only", (): any => {
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(84);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(85);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
