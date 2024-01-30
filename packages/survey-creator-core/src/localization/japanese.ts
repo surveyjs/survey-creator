@@ -1038,8 +1038,8 @@ export var jaStrings = {
     "--primary-foreground": "原色の前景色",
     "--foreground": "景色",
     "--base-unit": "ベースユニット",
+    advancedMode: "詳細モード",
     groupGeneral: "全般",
-    groupAdvanced: "アドバンスド",
     groupHeader: "ヘッダ",
     groupBackground: "バックグラウンド",
     groupAppearance: "様子",
@@ -1068,11 +1068,9 @@ export var jaStrings = {
     backgroundImageAttachmentScroll: "スクロール",
     panelBackgroundTransparency: "パネルの背景の不透明度",
     questionBackgroundTransparency: "質問の背景の不透明度",
-    questionPanel: "パネルの背景と角の半径",
     questionTitle: "質問タイトルのフォント",
-    questionDescription: "質問の説明フォント",
     editorPanel: "入力要素",
-    editorFont: "入力要素のフォント",
+    backgroundCornerRadius: "背景と角の半径",
     backcolor: "デフォルトの背景",
     hovercolor: "ホバー背景",
     borderDecoration: "ボーダーデコレーション",
@@ -1080,7 +1078,9 @@ export var jaStrings = {
     accentForeground: "アクセントの前景",
     primaryForecolor: "デフォルトの色",
     primaryForecolorLight: "無効色",
-    linesColors: "マイナーラインカラー",
+    colorsTitle: "色",
+    font: "フォント",
+    lines: "台詞",
     borderDefault: "暗い",
     borderLight: "ライター",
     fontFamily: "フォントファミリ",
@@ -1097,7 +1097,8 @@ export var jaStrings = {
     surveyTitle: "アンケートタイトルのフォント",
     surveyDescription: "調査の説明フォント",
     pageTitle: "ページタイトルのフォント",
-    pageDescription: "ページ記述フォント",
+    titleFont: "タイトルのフォント",
+    descriptionFont: "説明フォント",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "シャドウ効果を追加",
@@ -1106,8 +1107,7 @@ export var jaStrings = {
     boxShadowSpread: "まん延",
     boxShadowDrop: "落とす",
     boxShadowInner: "内的",
-    questionShadow: "シャドウ効果",
-    editorShadow: "入力要素の影の効果",
+    shadow: "影の効果",
     headerView: "眺める",
     headerViewBasic: "基本的な",
     headerViewAdvanced: "アドバンスド",
@@ -1737,3 +1737,11 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "設定に移動"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "読み込まれた選択肢オプションのプレビュー"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "行での回答の重複を防ぐ"
+// theme.advancedMode: "Advanced mode" => "詳細モード"
+// theme.backgroundCornerRadius: "Background and corner radius" => "背景と角の半径"
+// theme.colorsTitle: "Colors" => "色"
+// theme.font: "Font" => "フォント"
+// theme.lines: "Lines" => "台詞"
+// theme.titleFont: "Title font" => "タイトルのフォント"
+// theme.descriptionFont: "Description font" => "説明フォント"
+// theme.shadow: "Shadow effects" => "影の効果"

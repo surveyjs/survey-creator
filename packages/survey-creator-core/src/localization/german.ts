@@ -1038,8 +1038,8 @@ var germanTranslation = {
     "--primary-foreground": "Primäre Vordergrundfarbe",
     "--foreground": "Vordergrundfarbe",
     "--base-unit": "Basiseinheit",
+    advancedMode: "Erweiterter Modus",
     groupGeneral: "Allgemein",
-    groupAdvanced: "Fortgeschritten",
     groupHeader: "Titelzeile",
     groupBackground: "Hintergrund",
     groupAppearance: "Erscheinungsbild",
@@ -1068,11 +1068,9 @@ var germanTranslation = {
     backgroundImageAttachmentScroll: "Scrollen",
     panelBackgroundTransparency: "Deckkraft des Panel-Hintergrunds",
     questionBackgroundTransparency: "Deckkraft des Hintergrunds der Frage",
-    questionPanel: "Paneelhintergrund und Eckenradius",
     questionTitle: "Schriftart des Fragetitels",
-    questionDescription: "Frage-Beschreibung-Schriftart",
     editorPanel: "Eingabeelement",
-    editorFont: "Schriftart des Eingabeelements",
+    backgroundCornerRadius: "Hintergrund und Eckenradius",
     backcolor: "Standard-Hintergrund",
     hovercolor: "Hover-Hintergrund",
     borderDecoration: "Bordüren-Verzierung",
@@ -1080,7 +1078,9 @@ var germanTranslation = {
     accentForeground: "Akzent Vordergrund",
     primaryForecolor: "Standardfarbe",
     primaryForecolorLight: "Deaktivierte Farbe",
-    linesColors: "Kleinere Linienfarben",
+    colorsTitle: "Farben",
+    font: "Schriftart",
+    lines: "Linien",
     borderDefault: "Dunkler",
     borderLight: "Feuerzeug",
     fontFamily: "Schriftfamilie",
@@ -1097,7 +1097,8 @@ var germanTranslation = {
     surveyTitle: "Schriftart für den Umfragetitel",
     surveyDescription: "Schriftart der Umfragebeschreibung",
     pageTitle: "Schriftart des Seitentitels",
-    pageDescription: "Schriftart für die Seitenbeschreibung",
+    titleFont: "Schriftart des Titels",
+    descriptionFont: "Beschreibung Schriftart",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schatteneffekt hinzufügen",
@@ -1106,8 +1107,7 @@ var germanTranslation = {
     boxShadowSpread: "Verbreitung",
     boxShadowDrop: "Tropfen",
     boxShadowInner: "Inner",
-    questionShadow: "Schatteneffekte",
-    editorShadow: "Schatteneffekte von Eingabeelementen",
+    shadow: "Schatten-Effekte",
     headerView: "Ansehen",
     headerViewBasic: "Grundlegend",
     headerViewAdvanced: "Fortgeschritten",
@@ -1444,3 +1444,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gehen Sie zu den Einstellungen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vorschau der geladenen Auswahloptionen"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Doppelte Beantwortungen in Zeilen verhindern"
+// theme.advancedMode: "Advanced mode" => "Erweiterter Modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Hintergrund und Eckenradius"
+// theme.colorsTitle: "Colors" => "Farben"
+// theme.font: "Font" => "Schriftart"
+// theme.lines: "Lines" => "Linien"
+// theme.titleFont: "Title font" => "Schriftart des Titels"
+// theme.descriptionFont: "Description font" => "Beschreibung Schriftart"
+// theme.shadow: "Shadow effects" => "Schatten-Effekte"

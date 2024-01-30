@@ -1038,8 +1038,8 @@ export var huStrings = {
     "--primary-foreground": "Elsődleges festőszín",
     "--foreground": "Festőszín",
     "--base-unit": "Alapegység",
+    advancedMode: "Speciális mód",
     groupGeneral: "Általános",
-    groupAdvanced: "Haladó",
     groupHeader: "Fejléc",
     groupBackground: "Háttér",
     groupAppearance: "Megjelenés",
@@ -1068,11 +1068,9 @@ export var huStrings = {
     backgroundImageAttachmentScroll: "Kézirattekercs",
     panelBackgroundTransparency: "Panel hátterének átlátszatlansága",
     questionBackgroundTransparency: "Kérdés hátterének átlátszatlansága",
-    questionPanel: "Panel háttere és saroksugara",
     questionTitle: "Kérdés címének betűtípusa",
-    questionDescription: "Kérdés leíró betűtípus",
     editorPanel: "Bemeneti elem",
-    editorFont: "Bemeneti elem betűtípusa",
+    backgroundCornerRadius: "Háttér és saroksugár",
     backcolor: "Alapértelmezett háttér",
     hovercolor: "Háttér rámutatása",
     borderDecoration: "Szegély dekoráció",
@@ -1080,7 +1078,9 @@ export var huStrings = {
     accentForeground: "Hangsúlyos előtér",
     primaryForecolor: "Alapértelmezett szín",
     primaryForecolorLight: "Letiltott szín",
-    linesColors: "Alvonalszínek",
+    colorsTitle: "Színek",
+    font: "Betűkészlet",
+    lines: "Sorok",
     borderDefault: "Sötétebb",
     borderLight: "Öngyújtó",
     fontFamily: "Betűcsalád",
@@ -1097,7 +1097,8 @@ export var huStrings = {
     surveyTitle: "Felmérés címének betűtípusa",
     surveyDescription: "Felmérés leírásának betűtípusa",
     pageTitle: "Oldalcím betűtípusa",
-    pageDescription: "Oldalleíró betűtípus",
+    titleFont: "Cím betűtípusa",
+    descriptionFont: "Leírás betűtípus",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Árnyékhatás hozzáadása",
@@ -1106,8 +1107,7 @@ export var huStrings = {
     boxShadowSpread: "Terjedés",
     boxShadowDrop: "Csepp",
     boxShadowInner: "Belső",
-    questionShadow: "Árnyék effektusok",
-    editorShadow: "Bemeneti elem árnyékeffektusai",
+    shadow: "Árnyék effektusok",
     headerView: "Nézet",
     headerViewBasic: "Alapvető",
     headerViewAdvanced: "Haladó",
@@ -1891,3 +1891,11 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Válassza a beállítások"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "A betöltött választási lehetőségek előnézete"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "A sorokban ismétlődő válaszok megakadályozása"
+// theme.advancedMode: "Advanced mode" => "Speciális mód"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Háttér és saroksugár"
+// theme.colorsTitle: "Colors" => "Színek"
+// theme.font: "Font" => "Betűkészlet"
+// theme.lines: "Lines" => "Sorok"
+// theme.titleFont: "Title font" => "Cím betűtípusa"
+// theme.descriptionFont: "Description font" => "Leírás betűtípus"
+// theme.shadow: "Shadow effects" => "Árnyék effektusok"

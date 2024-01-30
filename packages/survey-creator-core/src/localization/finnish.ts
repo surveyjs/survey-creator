@@ -1038,8 +1038,8 @@ export var fiStrings = {
     "--primary-foreground": "Ensisijainen etualan väri",
     "--foreground": "Edustan väri",
     "--base-unit": "Perusyksikkö",
+    advancedMode: "Edistynyt tila",
     groupGeneral: "Yleiset",
-    groupAdvanced: "Edistynyt",
     groupHeader: "Otsikko",
     groupBackground: "Tausta",
     groupAppearance: "Ulkonäkö",
@@ -1068,11 +1068,9 @@ export var fiStrings = {
     backgroundImageAttachmentScroll: "Vierittää",
     panelBackgroundTransparency: "Paneelin taustan peittävyys",
     questionBackgroundTransparency: "Taustan peittävyyden kyseenalaistaminen",
-    questionPanel: "Paneelin tausta ja kulmasäde",
     questionTitle: "Kysymyksen otsikon fontti",
-    questionDescription: "Kysymyksen kuvauksen fontti",
     editorPanel: "Syötä elementti",
-    editorFont: "Syöttöelementin fontti",
+    backgroundCornerRadius: "Taustan ja kulman säde",
     backcolor: "Oletustausta",
     hovercolor: "Vie hiiri taustalle",
     borderDecoration: "Reunusten koristelu",
@@ -1080,7 +1078,9 @@ export var fiStrings = {
     accentForeground: "Aksentti etualalla",
     primaryForecolor: "Oletusväri",
     primaryForecolorLight: "Käytöstä poistettu väri",
-    linesColors: "Pienet viivan värit",
+    colorsTitle: "Värit",
+    font: "Fontti",
+    lines: "Rivit",
     borderDefault: "Tummempi",
     borderLight: "Sytytin",
     fontFamily: "Fonttiperhe",
@@ -1097,7 +1097,8 @@ export var fiStrings = {
     surveyTitle: "Kyselyn otsikon fontti",
     surveyDescription: "Kyselyn kuvauksen fontti",
     pageTitle: "Sivun otsikon fontti",
-    pageDescription: "Sivun kuvauksen fontti",
+    titleFont: "Otsikon fontti",
+    descriptionFont: "Kuvauksen fontti",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lisää varjotehoste",
@@ -1106,8 +1107,7 @@ export var fiStrings = {
     boxShadowSpread: "Leviäminen",
     boxShadowDrop: "Pisara",
     boxShadowInner: "Sisäinen",
-    questionShadow: "Varjo-tehosteet",
-    editorShadow: "Syöttöelementin varjotehosteet",
+    shadow: "Varjo-tehosteet",
     headerView: "Näkymä",
     headerViewBasic: "Emäksinen",
     headerViewAdvanced: "Edistynyt",
@@ -1738,3 +1738,11 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Siirry asetuksiin"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ladattujen valintavaihtoehtojen esikatselu"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Estä päällekkäiset vastaukset riveillä"
+// theme.advancedMode: "Advanced mode" => "Edistynyt tila"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Taustan ja kulman säde"
+// theme.colorsTitle: "Colors" => "Värit"
+// theme.font: "Font" => "Fontti"
+// theme.lines: "Lines" => "Rivit"
+// theme.titleFont: "Title font" => "Otsikon fontti"
+// theme.descriptionFont: "Description font" => "Kuvauksen fontti"
+// theme.shadow: "Shadow effects" => "Varjo-tehosteet"
