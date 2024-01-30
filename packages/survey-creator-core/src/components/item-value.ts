@@ -40,9 +40,10 @@ export class ItemValueWrapperViewModel extends Base {
     super();
 
     this.updateIsNew(question, item);
-    for(let key in Object.keys(specificChoices)) {
+    for(let key in specificChoices) {
       this.registerOnPropertyChanged(key, specificChoices[key]);
     }
+    //this.registerOnPropertyChanged("selectAllItem", "hasSelectAll");
     if (this.isNew) {
       question.visibleChoicesChangedCallback = () => {
         this.updateNewItemValue();
