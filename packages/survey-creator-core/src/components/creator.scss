@@ -10,7 +10,7 @@ survey-creator,
 
   -webkit-font-smoothing: antialiased;
 
-  @supports not selector(::-webkit-scrollbar) {
+  @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
