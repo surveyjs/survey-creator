@@ -106,7 +106,9 @@ export type toolboxLocationType = "left" | "right" | "sidebar";
 export class CreatorEvent<T> extends EventBase<SurveyCreatorModel, T> { }
 
 /**
- * A base class for Survey Creator.
+ * A class with properties, methods, and events that allow you to configure Survey Creator and manage its elements.
+ * 
+ * [View Demo](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/ (linkStyle))
  */
 export class SurveyCreatorModel extends Base
   implements ISurveyCreatorOptions, ICreatorSelectionOwner, ILocalizableOwner {
@@ -3409,11 +3411,7 @@ export class SurveyCreatorModel extends Base
   }
   @property({ defaultValue: true }) enableLinkFileEditor: boolean;
 }
-/**
- * A class with properties, methods, and events that allow you to configure Survey Creator and manage its elements.
- * 
- * [View Demo](https://surveyjs.io/survey-creator/examples/free-nps-survey-template/ (linkStyle))
- */
+
 export class CreatorBase extends SurveyCreatorModel { }
 
 export class StylesManager {
