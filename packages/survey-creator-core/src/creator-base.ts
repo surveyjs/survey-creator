@@ -3,7 +3,8 @@ import {
   JsonObjectProperty, ActionContainer, AdaptiveActionContainer, IAction, Action, IPanel, SurveyElement, ItemValue,
   QuestionSelectBase, QuestionRowModel, LocalizableString, ILocalizableString, ILocalizableOwner, PopupBaseViewModel,
   EventBase, hasLicense, settings as SurveySettings, Event, Helpers as SurveyHelpers, MatrixDropdownColumn, JsonObject,
-  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers
+  dxSurveyService, ISurveyElement, PanelModelBase, surveyLocalization, QuestionMatrixDropdownModelBase, ITheme, Helpers,
+  chooseFiles
 } from "survey-core";
 import { ICreatorPlugin, ISurveyCreatorOptions, settings, ICollectionItemAllowOperations } from "./creator-settings";
 import { editorLocalization } from "./editorLocalization";
@@ -2543,18 +2544,7 @@ export class SurveyCreatorModel extends Base
     context?: { element: SurveyElement, item?: ItemValue }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
-      if (!window || !window["FileReader"]) return;
-      input.value = "";
-      input.onchange = (event) => {
-        if (!window["FileReader"]) return;
-        if (!input || !input.files || input.files.length < 1) return;
-        let files = [];
-        for (let i = 0; i < input.files.length; i++) {
-          files.push(input.files[i]);
-        }
-        callback(files);
-      };
-      input.click();
+      chooseFiles(input, callback);
     } else {
       this.onOpenFileChooser.fire(this, {
         input: input,
