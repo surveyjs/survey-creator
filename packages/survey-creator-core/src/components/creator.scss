@@ -10,7 +10,7 @@ survey-creator,
 
   -webkit-font-smoothing: antialiased;
 
-  * {
+  @supports not selector(::-webkit-scrollbar) {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
