@@ -142,6 +142,7 @@ export var hebrewStrings = {
     translationExportToSCVButton: "ייצא ל-CSV",
     translationImportFromSCVButton: "ייבא מ-CSV",
     translateUsigAI: "תרגום אוטומטי של הכל",
+    translateUsigAIFrom: "תרגם מ: ",
     translationDialogTitle: "מחרוזות לא מתורגמות",
     translationMergeLocaleWithDefault: "מזג {0} עם הגדרות ברירת המחדל",
     translationPlaceHolder: "תרגום...",
@@ -339,6 +340,8 @@ export var hebrewStrings = {
     showOtherItem: "אפשר אפשרות אחרת",
     otherText: "טקסט לאפשרות אחרת",
     showNoneItem: "אפשר אפשרות 'אף אחד'",
+    showRefuseItem: "אפשר את האפשרות סרב לענות",
+    showDontKnowItem: "אפשר את האפשרות 'לא יודע'",
     noneText: "טקסט לאפשרות 'אף אחד'",
     showSelectAllItem: "אפשר אפשרות 'בחר הכל'",
     selectAllText: "טקסט לאפשרות 'בחר הכל'",
@@ -1310,3 +1313,6 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.logoPosition: "Logo position" => "מיקום הלוגו"
 // theme.coverTitlePosition: "Title position" => "מיקום בתפקיד"
 // theme.coverDescriptionPosition: "Description position" => "תיאור מיקום"
+// ed.translateUsigAIFrom: "Translate from: " => "תרגם מ: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"

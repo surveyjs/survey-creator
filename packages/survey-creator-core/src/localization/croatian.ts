@@ -142,6 +142,7 @@ export var hrStrings = {
     translationExportToSCVButton: "Izvoz u CSV",
     translationImportFromSCVButton: "Uvoz iz CSV",
     translateUsigAI: "Automatski prevedi sve",
+    translateUsigAIFrom: "Prevedi iz: ",
     translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
@@ -339,6 +340,8 @@ export var hrStrings = {
     showOtherItem: "Ima i drugu stavku",
     otherText: "Tekst druge stavke",
     showNoneItem: "Nema stavku",
+    showRefuseItem: "Dopusti mogućnost Odbij odgovoriti",
+    showDontKnowItem: "Dopusti mogućnost Ne znam",
     noneText: "Nijedan tekst stavke",
     showSelectAllItem: "Sadrži odaberite sve stavke",
     selectAllText: "Odaberite sve stavke tekst",
@@ -1740,3 +1743,6 @@ editorLocalization.locales["hr"] = hrStrings;
 // theme.titleFont: "Title font" => "Font naslova"
 // theme.descriptionFont: "Description font" => "Font opisa"
 // theme.shadow: "Shadow effects" => "Efekti sjene"
+// ed.translateUsigAIFrom: "Translate from: " => "Prevedi iz: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Dopusti mogućnost Odbij odgovoriti"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Dopusti mogućnost Ne znam"

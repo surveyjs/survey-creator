@@ -142,6 +142,7 @@ var italianTranslation = {
     translationExportToSCVButton: "Esporta in CSV",
     translationImportFromSCVButton: "Importa da CSV",
     translateUsigAI: "Traduzione automatica di tutto",
+    translateUsigAIFrom: "Traduci da: ",
     translationDialogTitle: "Stringhe non tradotte",
     translationMergeLocaleWithDefault: "Unisci {0} con il predefinito",
     translationPlaceHolder: "Traduzione...",
@@ -339,6 +340,8 @@ var italianTranslation = {
     showOtherItem: "Consenti l'opzione Altro",
     otherText: "Testo dell'opzione Altro",
     showNoneItem: "Consenti l'opzione Nessuno",
+    showRefuseItem: "Consenti l'opzione Rifiuta di rispondere",
+    showDontKnowItem: "Consenti l'opzione Non so",
     noneText: "Testo dell'opzione Nessuno",
     showSelectAllItem: "Consenti l'opzione Seleziona tutti",
     selectAllText: "Testo dell'opzione Seleziona tutti",
@@ -1504,3 +1507,6 @@ editorLocalization.locales["it"] = italianTranslation;
 // theme.titleFont: "Title font" => "Carattere del titolo"
 // theme.descriptionFont: "Description font" => "Carattere di descrizione"
 // theme.shadow: "Shadow effects" => "Effetti ombra"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduci da: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Consenti l'opzione Rifiuta di rispondere"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Consenti l'opzione Non so"

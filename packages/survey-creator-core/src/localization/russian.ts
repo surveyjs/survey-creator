@@ -142,6 +142,7 @@ export var ruStrings = {
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
     translateUsigAI: "Автоматический перевод всех",
+    translateUsigAIFrom: "Перевести с: ",
     translationDialogTitle: "Непереведенные строки",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
     translationPlaceHolder: "Перевод...",
@@ -339,6 +340,8 @@ export var ruStrings = {
     showOtherItem: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
     showNoneItem: "Нет ни одного пункта",
+    showRefuseItem: "Разрешить опцию «Отказаться от ответа»",
+    showDontKnowItem: "Разрешить опцию «Не знаю»",
     noneText: "Текст пункта 'Ничего'",
     showSelectAllItem: "Выбрать все пункты",
     selectAllText: "Текст пункта 'Выбрать все пункты'",
@@ -1806,3 +1809,6 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.titleFont: "Title font" => "Шрифт заголовка"
 // theme.descriptionFont: "Description font" => "Описание шрифта"
 // theme.shadow: "Shadow effects" => "Эффекты теней"
+// ed.translateUsigAIFrom: "Translate from: " => "Перевести с: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"

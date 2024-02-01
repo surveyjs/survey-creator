@@ -142,6 +142,7 @@ var frenchTranslation = {
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
     translateUsigAI: "Traduire automatiquement tout",
+    translateUsigAIFrom: "Traduction: ",
     translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
@@ -339,6 +340,8 @@ var frenchTranslation = {
     showOtherItem: "Contient choix \"Autre\"",
     otherText: "Texte du choix \"Autre\"",
     showNoneItem: "Contient un choix \"Aucun\"",
+    showRefuseItem: "Autoriser l’option Refuser de répondre",
+    showDontKnowItem: "Autoriser l’option Ne sait pas",
     noneText: "Texte du choix \"Aucun\"",
     showSelectAllItem: "Contient un choix \"Tout sélectionner\"",
     selectAllText: "Texte du choix \"Tout sélectionner\"",
@@ -1806,3 +1809,6 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.titleFont: "Title font" => "Police du titre"
 // theme.descriptionFont: "Description font" => "Police de description"
 // theme.shadow: "Shadow effects" => "Effets d’ombre"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduction: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"

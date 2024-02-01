@@ -142,6 +142,7 @@ export var indonesianStrings = {
     translationExportToSCVButton: "Eksport ke CSV",
     translationImportFromSCVButton: "Import dari CSV",
     translateUsigAI: "Terjemahkan otomatis Semua",
+    translateUsigAIFrom: "Terjemahkan dari: ",
     translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
@@ -339,6 +340,8 @@ export var indonesianStrings = {
     showOtherItem: "Memiliki item lain",
     otherText: "Teks item lain",
     showNoneItem: "Perbolehkan opsi Tidak Ada",
+    showRefuseItem: "Perbolehkan opsi Tolak Jawab",
+    showDontKnowItem: "Perbolehkan opsi Tidak Tahu",
     noneText: "Tidak ada teks opsi",
     showSelectAllItem: "Perbolehkan opsi Pilih Semua",
     selectAllText: "Pilih Semua teks opsi",
@@ -1900,3 +1903,6 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.titleFont: "Title font" => "Font judul"
 // theme.descriptionFont: "Description font" => "Font deskripsi"
 // theme.shadow: "Shadow effects" => "Efek bayangan"
+// ed.translateUsigAIFrom: "Translate from: " => "Terjemahkan dari: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"

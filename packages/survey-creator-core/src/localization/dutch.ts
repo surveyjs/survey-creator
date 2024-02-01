@@ -142,6 +142,7 @@ export var nlStrings = {
     translationExportToSCVButton: "Exporteren naar CSV",
     translationImportFromSCVButton: "Importeren vanuit CSV",
     translateUsigAI: "Alles automatisch vertalen",
+    translateUsigAIFrom: "Vertalen van: ",
     translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
@@ -339,6 +340,8 @@ export var nlStrings = {
     showOtherItem: "Heeft de 'Anders:'-optie",
     otherText: "Titel 'Anders:'-optie",
     showNoneItem: "Heeft de 'Geen'-optie",
+    showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
+    showDontKnowItem: "De optie 'Weet niet' toestaan",
     noneText: "Titel 'Geen'-optie",
     showSelectAllItem: "Heeft de 'Alles selecteren'-optie",
     selectAllText: "Titel 'Alles selecteren'-optie",
@@ -1726,3 +1729,6 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.titleFont: "Title font" => "Titel lettertype"
 // theme.descriptionFont: "Description font" => "Beschrijving lettertype"
 // theme.shadow: "Shadow effects" => "Schaduweffecten"
+// ed.translateUsigAIFrom: "Translate from: " => "Vertalen van: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "De optie Weigeren om te antwoorden toestaan"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "De optie 'Weet niet' toestaan"

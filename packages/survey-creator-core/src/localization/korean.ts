@@ -142,6 +142,7 @@ export var koreanStrings = {
     translationExportToSCVButton: "CSV로 내보내기",
     translationImportFromSCVButton: "CSV에서 가져오기",
     translateUsigAI: "모두 자동 번역",
+    translateUsigAIFrom: "언어 선택(원문-번역): ",
     translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
@@ -339,6 +340,8 @@ export var koreanStrings = {
     showOtherItem: "다른 항목이 있습니다",
     otherText: "기타 항목 텍스트",
     showNoneItem: "없음 옵션 허용",
+    showRefuseItem: "응답 거부 옵션 허용",
+    showDontKnowItem: "모름 옵션 허용",
     noneText: "없음 옵션 텍스트",
     showSelectAllItem: "모두 선택 옵션 허용",
     selectAllText: "모두 선택 옵션 텍스트",
@@ -1950,3 +1953,6 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.titleFont: "Title font" => "제목 글꼴"
 // theme.descriptionFont: "Description font" => "설명 글꼴"
 // theme.shadow: "Shadow effects" => "그림자 효과"
+// ed.translateUsigAIFrom: "Translate from: " => "언어 선택(원문-번역): "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"

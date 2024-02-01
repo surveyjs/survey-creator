@@ -142,6 +142,7 @@ export var danishStrings = {
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
     translateUsigAI: "Oversæt automatisk alle",
+    translateUsigAIFrom: "Oversæt fra: ",
     translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
@@ -339,6 +340,8 @@ export var danishStrings = {
     showOtherItem: "Har andet element",
     otherText: "Andet element tekst",
     showNoneItem: "Tillad indstillingen Ingen",
+    showRefuseItem: "Tillad indstillingen Afvis at svare",
+    showDontKnowItem: "Tillad indstillingen Ved ikke",
     noneText: "Ingen tekst til valgmulighed",
     showSelectAllItem: "Tillad indstillingen Vælg alt",
     selectAllText: "Vælg tekst med valgmuligheden Alle",
@@ -1931,3 +1934,6 @@ editorLocalization.locales["da"] = danishStrings;
 // theme.titleFont: "Title font" => "Titel skrifttype"
 // theme.descriptionFont: "Description font" => "Beskrivelse skrifttype"
 // theme.shadow: "Shadow effects" => "Skyggeeffekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Oversæt fra: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillad indstillingen Afvis at svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillad indstillingen Ved ikke"

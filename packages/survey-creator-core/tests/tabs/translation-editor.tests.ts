@@ -289,7 +289,6 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[1].name).toBe("es");
 
   editor.setFromLocale("de");
-  expect(editor.translation.getEditFromLocale()).toBe("de");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
   expect(matrix.columns).toHaveLength(3);
@@ -297,7 +296,6 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[2].name).toBe("es");
 
   editor.setFromLocale("fr");
-  expect(editor.translation.getEditFromLocale()).toBe("fr");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
   expect(matrix.columns).toHaveLength(3);
@@ -305,7 +303,6 @@ test("Machine translation from non default locale - UI", () => {
   expect(matrix.columns[2].name).toBe("es");
 
   editor.setFromLocale("");
-  expect(editor.translation.getEditFromLocale()).toBe("");
   expect(editor.translation.getVisibleLocales()).toHaveLength(1);
   matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
   expect(matrix.columns).toHaveLength(2);

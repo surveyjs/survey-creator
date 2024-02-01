@@ -142,6 +142,7 @@ export var bgStrings = {
     translationExportToSCVButton: "Експортиране в CSV",
     translationImportFromSCVButton: "Импортиране от CSV",
     translateUsigAI: "Автоматичен превод на всички",
+    translateUsigAIFrom: "Преведи от: ",
     translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
@@ -339,6 +340,8 @@ export var bgStrings = {
     showOtherItem: "Достъп до опция Друго",
     otherText: "Текст на опция Друго",
     showNoneItem: "Достъп до опция Няма",
+    showRefuseItem: "Разрешаване на опцията \"Отказ на отговор\"",
+    showDontKnowItem: "Разрешаване на опцията \"Не знам\"",
     noneText: "Текст на опция Няма",
     showSelectAllItem: "Достъп до опция Избери всички",
     selectAllText: "Текст на опция Избери всички",
@@ -1307,3 +1310,6 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.titleFont: "Title font" => "Шрифт на заглавието"
 // theme.descriptionFont: "Description font" => "Шрифт за описание"
 // theme.shadow: "Shadow effects" => "Ефекти на сянка"
+// ed.translateUsigAIFrom: "Translate from: " => "Преведи от: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
