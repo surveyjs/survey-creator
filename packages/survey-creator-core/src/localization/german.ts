@@ -339,6 +339,8 @@ var germanTranslation = {
     showOtherItem: "Sonstiges auswählbar?",
     otherText: "Text für Sonstiges",
     showNoneItem: "Alle Elemente abwählbar?",
+    showRefuseItem: "Zulassen der Option \"Antwort ablehnen\"",
+    showDontKnowItem: "Erlauben Sie die Option \"Weiß nicht\"",
     noneText: "Text für die Abwahl aller Elemente",
     showSelectAllItem: "Alle Elemente auswählbar?",
     selectAllText: "Text für die Auswahl aller Elemente",
@@ -749,6 +751,9 @@ var germanTranslation = {
     onComplete: "Wenn die Umfrage abgeschlossen wurde",
     onHidden: "Wenn die Umfrage versteckt wurde",
     onHiddenContainer: "Wenn die Frage oder ihr Panel/Seite ausgeblendet wird",
+    contain: "Enthalten",
+    cover: "Deckel",
+    fill: "Füllen",
     clearInvisibleValues: {
       none: "Niemals"
     },
@@ -1452,3 +1457,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.titleFont: "Title font" => "Schriftart des Titels"
 // theme.descriptionFont: "Description font" => "Beschreibung Schriftart"
 // theme.shadow: "Shadow effects" => "Schatten-Effekte"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
+// pv.contain: "Contain" => "Enthalten"
+// pv.cover: "Cover" => "Deckel"
+// pv.fill: "Fill" => "Füllen"

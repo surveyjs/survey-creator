@@ -339,6 +339,8 @@ export var hebrewStrings = {
     showOtherItem: "אפשר אפשרות אחרת",
     otherText: "טקסט לאפשרות אחרת",
     showNoneItem: "אפשר אפשרות 'אף אחד'",
+    showRefuseItem: "אפשר את האפשרות סרב לענות",
+    showDontKnowItem: "אפשר את האפשרות 'לא יודע'",
     noneText: "טקסט לאפשרות 'אף אחד'",
     showSelectAllItem: "אפשר אפשרות 'בחר הכל'",
     selectAllText: "טקסט לאפשרות 'בחר הכל'",
@@ -749,6 +751,9 @@ export var hebrewStrings = {
     onComplete: "כאשר השאלון הושלם",
     onHidden: "כאשר השאלה הוסתרה",
     onHiddenContainer: "כאשר השאלה או הפאנל/העמוד שלה מוסתרים",
+    contain: "להכיל",
+    cover: "כריכה",
+    fill: "מילוי",
     clearInvisibleValues: {
       none: "לעולם"
     },
@@ -1310,3 +1315,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // theme.logoPosition: "Logo position" => "מיקום הלוגו"
 // theme.coverTitlePosition: "Title position" => "מיקום בתפקיד"
 // theme.coverDescriptionPosition: "Description position" => "תיאור מיקום"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"
+// pv.contain: "Contain" => "להכיל"
+// pv.cover: "Cover" => "כריכה"
+// pv.fill: "Fill" => "מילוי"

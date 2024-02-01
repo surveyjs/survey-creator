@@ -339,6 +339,8 @@ export var turkishStrings = {
     showOtherItem: "Başka bir öğeye sahip",
     otherText: "Diğer eleman metni",
     showNoneItem: "Hiçbir elemana sahip değil",
+    showRefuseItem: "Yanıtlamayı Reddet seçeneğine izin ver",
+    showDontKnowItem: "Bilmiyorum seçeneğine izin ver",
     noneText: "Hiçbir eleman metni",
     showSelectAllItem: "Tüm elemanlar seçildi",
     selectAllText: "Tüm elemanların yazısını seç",
@@ -749,6 +751,9 @@ export var turkishStrings = {
     onComplete: "Tamamlandığında",
     onHidden: "Gizlendiğinde",
     onHiddenContainer: "Soru veya paneli/sayfası gizlendiğinde",
+    contain: "Kapsamak",
+    cover: "Örtmek",
+    fill: "Doldurmak",
     clearInvisibleValues: {
       none: "Hiç"
     },
@@ -1741,3 +1746,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.titleFont: "Title font" => "Başlık yazı tipi"
 // theme.descriptionFont: "Description font" => "Açıklama yazı tipi"
 // theme.shadow: "Shadow effects" => "Gölge efektleri"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
+// pv.contain: "Contain" => "Kapsamak"
+// pv.cover: "Cover" => "Örtmek"
+// pv.fill: "Fill" => "Doldurmak"

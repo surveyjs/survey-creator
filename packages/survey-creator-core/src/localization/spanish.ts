@@ -339,6 +339,8 @@ var spanishTranslation = {
     showOtherItem: "Tiene opción 'Otro'",
     otherText: "Cambiar texto 'Otro'",
     showNoneItem: "Tiene opcion 'Ninguno'",
+    showRefuseItem: "Permitir la opción Negarse a responder",
+    showDontKnowItem: "Permitir la opción No sé",
     noneText: "Cambiar texto 'Ninguno'",
     showSelectAllItem: "Tiene opción 'Selecionar todo'",
     selectAllText: "Cambiar texto de 'Seleccionar todo'",
@@ -749,6 +751,9 @@ var spanishTranslation = {
     onComplete: "Al completarse",
     onHidden: "Al ocultarse",
     onHiddenContainer: "Cuando la pregunta o su panel/página se oculta",
+    contain: "Contener",
+    cover: "Cubrir",
+    fill: "Llenar",
     clearInvisibleValues: {
       none: "Nunca"
     },
@@ -1520,3 +1525,8 @@ editorLocalization.locales["es"] = spanishTranslation;
 // theme.titleFont: "Title font" => "Fuente del título"
 // theme.descriptionFont: "Description font" => "Fuente descriptiva"
 // theme.shadow: "Shadow effects" => "Efectos de sombra"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir la opción Negarse a responder"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir la opción No sé"
+// pv.contain: "Contain" => "Contener"
+// pv.cover: "Cover" => "Cubrir"
+// pv.fill: "Fill" => "Llenar"

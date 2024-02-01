@@ -339,6 +339,8 @@ export var bgStrings = {
     showOtherItem: "Достъп до опция Друго",
     otherText: "Текст на опция Друго",
     showNoneItem: "Достъп до опция Няма",
+    showRefuseItem: "Разрешаване на опцията \"Отказ на отговор\"",
+    showDontKnowItem: "Разрешаване на опцията \"Не знам\"",
     noneText: "Текст на опция Няма",
     showSelectAllItem: "Достъп до опция Избери всички",
     selectAllText: "Текст на опция Избери всички",
@@ -749,6 +751,9 @@ export var bgStrings = {
     onComplete: "Когато анкетата приключи",
     onHidden: "Когато въпросът стане скрит",
     onHiddenContainer: "Когато въпросът или неговият панел/страница се скрият",
+    contain: "Съдържам",
+    cover: "Капак",
+    fill: "Запълване",
     clearInvisibleValues: {
       none: "Никога"
     },
@@ -1307,3 +1312,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // theme.titleFont: "Title font" => "Шрифт на заглавието"
 // theme.descriptionFont: "Description font" => "Шрифт за описание"
 // theme.shadow: "Shadow effects" => "Ефекти на сянка"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
+// pv.contain: "Contain" => "Съдържам"
+// pv.cover: "Cover" => "Капак"
+// pv.fill: "Fill" => "Запълване"
