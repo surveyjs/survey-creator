@@ -112,7 +112,7 @@ var frenchTranslation = {
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
     toolboxGeneralCategory: "Général",
-    toolboxChoiceCategory: "Quesitons à choix",
+    toolboxChoiceCategory: "Questions à choix",
     toolboxTextCategory: "Questions de saisie libre",
     toolboxContainersCategory: "Conteneurs",
     toolboxMatrixCategory: "Questions matricielles",
