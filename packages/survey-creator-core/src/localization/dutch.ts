@@ -339,6 +339,8 @@ export var nlStrings = {
     showOtherItem: "Heeft de 'Anders:'-optie",
     otherText: "Titel 'Anders:'-optie",
     showNoneItem: "Heeft de 'Geen'-optie",
+    showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
+    showDontKnowItem: "De optie 'Weet niet' toestaan",
     noneText: "Titel 'Geen'-optie",
     showSelectAllItem: "Heeft de 'Alles selecteren'-optie",
     selectAllText: "Titel 'Alles selecteren'-optie",
@@ -749,6 +751,9 @@ export var nlStrings = {
     onComplete: "Bij afronden",
     onHidden: "Bij verbergen",
     onHiddenContainer: "Wanneer de vraag of het bijbehorende paneel/de bijbehorende pagina verborgen raakt",
+    contain: "Bevatten",
+    cover: "Bedekken",
+    fill: "Vullen",
     clearInvisibleValues: {
       none: "Nooit"
     },
@@ -1726,3 +1731,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // theme.titleFont: "Title font" => "Titel lettertype"
 // theme.descriptionFont: "Description font" => "Beschrijving lettertype"
 // theme.shadow: "Shadow effects" => "Schaduweffecten"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "De optie Weigeren om te antwoorden toestaan"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "De optie 'Weet niet' toestaan"
+// pv.contain: "Contain" => "Bevatten"
+// pv.cover: "Cover" => "Bedekken"
+// pv.fill: "Fill" => "Vullen"

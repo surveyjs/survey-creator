@@ -339,6 +339,8 @@ export var czStrings = {
     showOtherItem: "Má jinou položku",
     otherText: "Další text položky",
     showNoneItem: "Nemá žádnou položku",
+    showRefuseItem: "Povolte možnost Odmítnout odpověď",
+    showDontKnowItem: "Povolit možnost Nevím",
     noneText: "Žádný text položky",
     showSelectAllItem: "Vybral/a všechny položky",
     selectAllText: "Vyberte veškerý text položky",
@@ -749,6 +751,9 @@ export var czStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Když se otázka nebo její panel/stránka skryje",
+    contain: "Obsahovat",
+    cover: "Krýt",
+    fill: "Vyplnit",
     clearInvisibleValues: {
       none: "Nikdy"
     },
@@ -1310,3 +1315,8 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.titleFont: "Title font" => "Písmo nadpisu"
 // theme.descriptionFont: "Description font" => "Popisné písmo"
 // theme.shadow: "Shadow effects" => "Stínové efekty"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povolte možnost Odmítnout odpověď"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povolit možnost Nevím"
+// pv.contain: "Contain" => "Obsahovat"
+// pv.cover: "Cover" => "Krýt"
+// pv.fill: "Fill" => "Vyplnit"

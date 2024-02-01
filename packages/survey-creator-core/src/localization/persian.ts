@@ -339,6 +339,8 @@ var persianStrings = {
     showOtherItem: "دارای آیتم دیگر",
     otherText: "سایر آیتم های متن",
     showNoneItem: "هیچ آیتمی ندارد",
+    showRefuseItem: "اجازه دهید گزینه امتناع از پاسخ",
+    showDontKnowItem: "گزینه Don't Know را انتخاب کنید",
     noneText: "هیچ آیتم متنی وجود ندارد",
     showSelectAllItem: "همه موارد انتخاب شده است",
     selectAllText: "انتخاب همه آیتم های متن",
@@ -749,6 +751,9 @@ var persianStrings = {
     onComplete: "به محض تمام شدن",
     onHidden: "به محض مخفی شدن",
     onHiddenContainer: "هنگامی که سوال یا پانل / صفحه ان پنهان می شود",
+    contain: "حاوی",
+    cover: "پوشش",
+    fill: "پر کردن",
     clearInvisibleValues: {
       none: "هرگز"
     },
@@ -1701,3 +1706,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.titleFont: "Title font" => "قلم عنوان"
 // theme.descriptionFont: "Description font" => "قلم توصیف"
 // theme.shadow: "Shadow effects" => "جلوه های سایه"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
+// pv.contain: "Contain" => "حاوی"
+// pv.cover: "Cover" => "پوشش"
+// pv.fill: "Fill" => "پر کردن"

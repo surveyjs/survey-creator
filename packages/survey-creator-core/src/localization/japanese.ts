@@ -339,6 +339,8 @@ export var jaStrings = {
     showOtherItem: "他のアイテム",
     otherText: "他のアイテムのテキスト",
     showNoneItem: "ノーアイテム",
+    showRefuseItem: "[回答を拒否] オプションを許可する",
+    showDontKnowItem: "[わからない] オプションを許可する",
     noneText: "ノーアイテムのテキスト",
     showSelectAllItem: "アイテムを全て選択",
     selectAllText: "アイテムを全て選択のテキスト",
@@ -749,6 +751,9 @@ export var jaStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "質問またはそのパネル/ページが非表示になったとき",
+    contain: "含む",
+    cover: "覆う",
+    fill: "注ぐ",
     clearInvisibleValues: {
       none: "なし"
     },
@@ -1745,3 +1750,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.titleFont: "Title font" => "タイトルのフォント"
 // theme.descriptionFont: "Description font" => "説明フォント"
 // theme.shadow: "Shadow effects" => "影の効果"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "[回答を拒否] オプションを許可する"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "[わからない] オプションを許可する"
+// pv.contain: "Contain" => "含む"
+// pv.cover: "Cover" => "覆う"
+// pv.fill: "Fill" => "注ぐ"

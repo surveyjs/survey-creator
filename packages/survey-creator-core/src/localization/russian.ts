@@ -339,6 +339,8 @@ export var ruStrings = {
     showOtherItem: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
     showNoneItem: "Нет ни одного пункта",
+    showRefuseItem: "Разрешить опцию «Отказаться от ответа»",
+    showDontKnowItem: "Разрешить опцию «Не знаю»",
     noneText: "Текст пункта 'Ничего'",
     showSelectAllItem: "Выбрать все пункты",
     selectAllText: "Текст пункта 'Выбрать все пункты'",
@@ -749,6 +751,9 @@ export var ruStrings = {
     onComplete: "По завершению",
     onHidden: "По скрытию",
     onHiddenContainer: "Когда вопрос или его панель/страница становятся скрытыми",
+    contain: "Содержать",
+    cover: "Крышка",
+    fill: "Заполнять",
     clearInvisibleValues: {
       none: "Никогда"
     },
@@ -1806,3 +1811,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // theme.titleFont: "Title font" => "Шрифт заголовка"
 // theme.descriptionFont: "Description font" => "Описание шрифта"
 // theme.shadow: "Shadow effects" => "Эффекты теней"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"
+// pv.contain: "Contain" => "Содержать"
+// pv.cover: "Cover" => "Крышка"
+// pv.fill: "Fill" => "Заполнять"
