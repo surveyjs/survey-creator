@@ -339,6 +339,8 @@ var frenchTranslation = {
     showOtherItem: "Contient choix \"Autre\"",
     otherText: "Texte du choix \"Autre\"",
     showNoneItem: "Contient un choix \"Aucun\"",
+    showRefuseItem: "Autoriser l’option Refuser de répondre",
+    showDontKnowItem: "Autoriser l’option Ne sait pas",
     noneText: "Texte du choix \"Aucun\"",
     showSelectAllItem: "Contient un choix \"Tout sélectionner\"",
     selectAllText: "Texte du choix \"Tout sélectionner\"",
@@ -749,6 +751,9 @@ var frenchTranslation = {
     onComplete: "Quand terminé",
     onHidden: "Quand masqué",
     onHiddenContainer: "Lorsque la question ou sa section/page devient masquée",
+    contain: "Contenir",
+    cover: "Couvrir",
+    fill: "Remplir",
     clearInvisibleValues: {
       none: "Jamais"
     },
@@ -1806,3 +1811,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.titleFont: "Title font" => "Police du titre"
 // theme.descriptionFont: "Description font" => "Police de description"
 // theme.shadow: "Shadow effects" => "Effets d’ombre"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pv.contain: "Contain" => "Contenir"
+// pv.cover: "Cover" => "Couvrir"
+// pv.fill: "Fill" => "Remplir"

@@ -752,6 +752,9 @@ export var enStrings = {
     onComplete: "When the survey is completed",
     onHidden: "When the question becomes hidden",
     onHiddenContainer: "When the question or its panel/page becomes hidden",
+    contain: "Contain",
+    cover: "Cover",
+    fill: "Fill",
     clearInvisibleValues: {
       none: "Never"
     },

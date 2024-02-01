@@ -339,6 +339,8 @@ export var arStrings = {
     showOtherItem: "هل هناك خيار أخرى",
     otherText: "نص خيار أخرى",
     showNoneItem: "هل هناك خيار بلا",
+    showRefuseItem: "السماح بخيار رفض الإجابة",
+    showDontKnowItem: "السماح بالخيار \"لا أعرف\"",
     noneText: "نص خيار بلا",
     showSelectAllItem: "هل هناك خيار إختيار الكل",
     selectAllText: "نص خيار إختر الكل",
@@ -749,6 +751,9 @@ export var arStrings = {
     onComplete: "عند الإنتهاء",
     onHidden: "عند الإخفال",
     onHiddenContainer: "عند إخفاء الحاوية",
+    contain: "احتوى",
+    cover: "غطاء",
+    fill: "ملء",
     clearInvisibleValues: {
       none: "أبدا"
     },
@@ -1656,3 +1661,8 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.titleFont: "Title font" => "خط العنوان"
 // theme.descriptionFont: "Description font" => "خط الوصف"
 // theme.shadow: "Shadow effects" => "تأثيرات الظل"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "السماح بخيار رفض الإجابة"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "السماح بالخيار \"لا أعرف\""
+// pv.contain: "Contain" => "احتوى"
+// pv.cover: "Cover" => "غطاء"
+// pv.fill: "Fill" => "ملء"

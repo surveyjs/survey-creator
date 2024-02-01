@@ -339,6 +339,8 @@ export var nbStrings = {
     showOtherItem: "Har annet element",
     otherText: "Annet element-tekst",
     showNoneItem: "Har velg ingen",
+    showRefuseItem: "Tillat alternativet Nekt å svare",
+    showDontKnowItem: "Tillat alternativet Vet ikke",
     noneText: "Velg ingen-tekst",
     showSelectAllItem: "Har velg alt-element",
     selectAllText: "Velg alt elememt-tekst",
@@ -749,6 +751,9 @@ export var nbStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Når spørsmålet eller panelet/siden blir skjult",
+    contain: "Inneholde",
+    cover: "Lokk",
+    fill: "Fylle",
     clearInvisibleValues: {
       none: "Aldri"
     },
@@ -1749,3 +1754,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.titleFont: "Title font" => "Tittel skrift"
 // theme.descriptionFont: "Description font" => "Beskrivelse font"
 // theme.shadow: "Shadow effects" => "Skygge effekter"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
+// pv.contain: "Contain" => "Inneholde"
+// pv.cover: "Cover" => "Lokk"
+// pv.fill: "Fill" => "Fylle"

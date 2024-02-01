@@ -339,6 +339,8 @@ export var indonesianStrings = {
     showOtherItem: "Memiliki item lain",
     otherText: "Teks item lain",
     showNoneItem: "Perbolehkan opsi Tidak Ada",
+    showRefuseItem: "Perbolehkan opsi Tolak Jawab",
+    showDontKnowItem: "Perbolehkan opsi Tidak Tahu",
     noneText: "Tidak ada teks opsi",
     showSelectAllItem: "Perbolehkan opsi Pilih Semua",
     selectAllText: "Pilih Semua teks opsi",
@@ -749,6 +751,9 @@ export var indonesianStrings = {
     onComplete: "saat selesai",
     onHidden: "saat tersembunyi",
     onHiddenContainer: "Ketika pertanyaan atau panel/halamannya disembunyikan",
+    contain: "Mengandung",
+    cover: "Menutupi",
+    fill: "Isi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1900,3 +1905,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // theme.titleFont: "Title font" => "Font judul"
 // theme.descriptionFont: "Description font" => "Font deskripsi"
 // theme.shadow: "Shadow effects" => "Efek bayangan"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"
+// pv.contain: "Contain" => "Mengandung"
+// pv.cover: "Cover" => "Menutupi"
+// pv.fill: "Fill" => "Isi"

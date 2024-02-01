@@ -339,6 +339,8 @@ export var koreanStrings = {
     showOtherItem: "다른 항목이 있습니다",
     otherText: "기타 항목 텍스트",
     showNoneItem: "없음 옵션 허용",
+    showRefuseItem: "응답 거부 옵션 허용",
+    showDontKnowItem: "모름 옵션 허용",
     noneText: "없음 옵션 텍스트",
     showSelectAllItem: "모두 선택 옵션 허용",
     selectAllText: "모두 선택 옵션 텍스트",
@@ -749,6 +751,9 @@ export var koreanStrings = {
     onComplete: "완료",
     onHidden: "숨김",
     onHiddenContainer: "질문 또는 해당 패널/페이지가 숨겨지는 경우",
+    contain: "포함하다",
+    cover: "표지",
+    fill: "채우다",
     clearInvisibleValues: {
       none: "결코"
     },
@@ -1950,3 +1955,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // theme.titleFont: "Title font" => "제목 글꼴"
 // theme.descriptionFont: "Description font" => "설명 글꼴"
 // theme.shadow: "Shadow effects" => "그림자 효과"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"
+// pv.contain: "Contain" => "포함하다"
+// pv.cover: "Cover" => "표지"
+// pv.fill: "Fill" => "채우다"
