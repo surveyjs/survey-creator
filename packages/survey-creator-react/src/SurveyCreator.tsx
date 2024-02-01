@@ -19,7 +19,7 @@ import {
 } from "survey-react-ui";
 import {
   ICreatorOptions,
-  CreatorBase,
+  SurveyCreatorModel,
   ITabbedMenuItem
 } from "survey-creator-core";
 import { TabbedMenuComponent } from "./TabbedMenu";
@@ -37,7 +37,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     super(props);
     this.rootNode = React.createRef();
   }
-  get creator(): CreatorBase {
+  get creator(): SurveyCreatorModel {
     return this.props.creator;
   }
   protected getStateElement(): Base {
@@ -57,7 +57,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   private rootNode: React.RefObject<HTMLDivElement>;
 
   renderElement() {
-    const creator: CreatorBase = this.props.creator;
+    const creator: SurveyCreatorModel = this.props.creator;
     if (creator.isCreatorDisposed) return null;
     const creatorClassName = "svc-creator" + (this.props.creator.isMobileView ? " svc-creator--mobile" : "") + (this.props.creator.isTouch ? " svc-creator--touch" : "");
     const areaClassName = "svc-full-container svc-creator__area svc-flex-column" + (this.props.creator.haveCommercialLicense ? "" : " svc-creator__area--with-banner");
@@ -65,13 +65,10 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     const fullContainerClassName = "svc-flex-row svc-full-container" + (" svc-creator__side-bar--" + this.creator.sidebarLocation);
     let licenseBanner = null;
     if (!this.props.creator.haveCommercialLicense) {
+      const htmlValue = { __html: this.props.creator.licenseText };
       licenseBanner = (
         <div className="svc-creator__banner">
-          <span className="svc-creator__non-commercial-text">
-            <a href="https://surveyjs.io/buy">
-              {this.props.creator.licenseText}
-            </a>
-          </span>
+          <span className="svc-creator__non-commercial-text" dangerouslySetInnerHTML={htmlValue}></span>
         </div>
       );
     }
@@ -115,7 +112,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     );
   }
   renderActiveTab() {
-    const creator: CreatorBase = this.props.creator;
+    const creator: SurveyCreatorModel = this.props.creator;
     for (var i = 0; i < creator.tabs.length; i++) {
       if (creator.tabs[i].id === creator.activeTab) {
         return this.renderCreatorTab(creator.tabs[i]);
@@ -127,7 +124,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     if (tab.visible === false) {
       return null;
     }
-    const creator: CreatorBase = this.props.creator;
+    const creator: SurveyCreatorModel = this.props.creator;
     const component = !!tab.renderTab
       ? tab.renderTab()
       : ReactElementFactory.Instance.createElement(tab.componentContent, {
@@ -159,7 +156,7 @@ export class SurveyCreatorComponent extends SurveyElementBase<
   }
 }
 
-export class SurveyCreator extends CreatorBase {
+export class SurveyCreator extends SurveyCreatorModel {
   constructor(options: ICreatorOptions = {}, options2?: ICreatorOptions) {
     super(options, options2);
   }

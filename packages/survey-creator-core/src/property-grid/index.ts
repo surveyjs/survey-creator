@@ -42,7 +42,6 @@ import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { QuestionLinkValueModel } from "../components/link-value";
-import { CreatorBase } from "../creator-base";
 
 function propertyVisibleIf(params: any): boolean {
   if (!this.question) return false;
@@ -50,7 +49,7 @@ function propertyVisibleIf(params: any): boolean {
   const prop = this.question.property;
   if (!obj || !prop) return false;
   if (!Serializer.hasOriginalProperty(obj, prop.name)) return false;
-  return prop.visibleIf(obj);
+  return prop.isVisible("", obj);
 }
 function propertyEnableIf(params: any): boolean {
   if (!this.question || !this.question.obj || !this.question.property) return false;
@@ -367,7 +366,9 @@ export class PropertyGridTitleActionsCreator {
     }
     var helpAction = this.createPropertyHelpAction(question);
     if (!!helpAction) {
-      actions.push(helpAction);
+      actions.unshift(helpAction);
+      question.getTitleToolbar().containerCss += " spg-title-toolobar--single-help-action";
+      helpAction.iconSize = 16;
     }
     if (actions.length > 0) {
       options.titleActions = actions;
@@ -438,6 +439,7 @@ export class PropertyGridTitleActionsCreator {
       tooltip: question.description,
       id: "property-grid-help",
       iconName: this.getHelpActionIconName(question),
+      css: "spg-help-action",
       showTitle: false,
       action: () => {
         question.descriptionLocation =
@@ -1431,8 +1433,8 @@ export class PropertyGridLinkEditor extends PropertyGridEditor {
     } else {
       question.acceptedTypes = getAcceptedTypesByContentMode("image");
     }
-    question.onChooseFilesCallback = ((input, onFilesChosen) => {
-      options.chooseFiles(input, onFilesChosen);
+    question.onChooseFilesCallback = ((input, callback) => {
+      options.chooseFiles(input, callback);
     });
   }
 
@@ -1470,8 +1472,8 @@ export class PropertyGridEditorNumber extends PropertyGridEditor {
     return res;
   }
   public onValueChanging(obj: Base, prop: JsonObjectProperty, question: Question, options: any): void {
-    if(!options.value && options.value !== 0) {
-      if(prop.defaultValue !== undefined) {
+    if (!options.value && options.value !== 0) {
+      if (prop.defaultValue !== undefined) {
         options.value = prop.defaultValue;
       } else {
         options.value = prop.minValue !== undefined && prop.minValue > 0 ? prop.minValue : 0;
@@ -1594,8 +1596,8 @@ export class PropertyGridEditorDropdown extends PropertyGridEditor {
     prop: JsonObjectProperty,
     choices: Array<any>
   ): boolean {
-    if(prop.type === "dropdown") return false;
-    if(prop.type === "buttongroup") return true;
+    if (prop.type === "dropdown") return false;
+    if (prop.type === "buttongroup") return true;
     if (this.isLocaleProp(prop)) return false;
     if (
       !this.canRenderAsButtonGroup ||
@@ -1763,7 +1765,9 @@ export class PropertyGridEditorQuestion extends PropertyGridEditor {
       let value = this.getItemValue(<any>q);
       return { value: value, text: text };
     });
-    SurveyHelper.sortItems(qItems);
+    if (creatorSettings.logic.questionSortOrder === "asc") {
+      SurveyHelper.sortItems(qItems);
+    }
     return qItems;
   }
 

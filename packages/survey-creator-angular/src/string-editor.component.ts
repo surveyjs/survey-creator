@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, NgZone, ViewChild, ViewContainerRef } from "@angular/core";
 import { LocalizableString, CharacterCounter } from "survey-core";
-import { StringEditorViewModelBase, CreatorBase, editableStringRendererName } from "survey-creator-core";
+import { StringEditorViewModelBase, SurveyCreatorModel, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
 import { AngularComponentFactory } from "survey-angular-ui";
 
@@ -32,7 +32,7 @@ export class StringEditorComponent extends CreatorModelComponent<StringEditorVie
   public get locString(): LocalizableString {
     return this.model.locStr;
   }
-  public get creator(): CreatorBase {
+  public get creator(): SurveyCreatorModel {
     return this.model.creator;
   }
   protected getModel(): StringEditorViewModelBase {

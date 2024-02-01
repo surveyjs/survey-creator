@@ -7,7 +7,7 @@ import {
   property,
   actionModeType
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 
 export class SurveyElementActionContainer extends AdaptiveActionContainer {
@@ -92,7 +92,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
   private sidebarFlyoutModeChangedFunc: (sender: Base, options: any) => void;
 
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     protected surveyElement: T
   ) {
     super();
@@ -135,7 +135,7 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.detachElement(this.surveyElement);
     this.surveyElement = surveyElement;
     this.attachElement(this.surveyElement);
-    if(updateActions) {
+    if (updateActions) {
       this.updateActionsProperties();
     }
   }
@@ -172,8 +172,12 @@ export class SurveyElementAdornerBase<T extends SurveyElement = SurveyElement> e
     this.allowEditOption = (options.allowEdit == undefined || !!options.allowEdit);
     this.updateActionVisibility("delete", operationsAllow && options.allowDelete);
     this.updateActionVisibility("duplicate", operationsAllow && options.allowCopy);
-    const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
-    this.updateActionVisibility("settings", settingsVisibility);
+    if (options.allowShowSettings === undefined) {
+      const settingsVisibility = (options.allowEdit !== undefined) ? (operationsAllow && options.allowEdit) : this.creator.sidebar.flyoutMode;
+      this.updateActionVisibility("settings", settingsVisibility);
+    } else {
+      this.updateActionVisibility("settings", options.allowShowSettings);
+    }
     this.setShowAddQuestionButton(options.allowEdit !== false);
   }
   protected isOperationsAllow(): boolean {

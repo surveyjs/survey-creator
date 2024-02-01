@@ -165,6 +165,7 @@ export class SurveyQuestionEditorDefinition {
     matrix: {
       properties: [
         { name: "isAllRowRequired", tab: "validation" },
+        { name: "eachRowUnique", tab: "validation" },
         { name: "showHeader", tab: "layout" },
         { name: "showColumnHeader", tab: "layout" },
         { name: "verticalAlign", tab: "layout" },
@@ -216,6 +217,10 @@ export class SurveyQuestionEditorDefinition {
         { name: "otherPlaceholder", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "showRefuseItem", tab: "choices" },
+        { name: "refuseText", tab: "choices" },
+        { name: "showDontKnowItem", tab: "choices" },
+        { name: "dontKnowText", tab: "choices" },
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
@@ -257,7 +262,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMin", tab: "choices" },
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
-        { name: "allowClear", tab: "choices" }
+        { name: "allowClear", tab: "choices" },
+        { name: "searchMode", tab: "choices" },
       ]
     },
     tagbox: {
@@ -265,6 +271,7 @@ export class SurveyQuestionEditorDefinition {
         "closeOnSelect",
         "placeholder",
         { name: "searchEnabled", tab: "choices" },
+        { name: "searchMode", tab: "choices" },
         { name: "hideSelectedItems", tab: "choices" },
         { name: "allowClear", tab: "choices" }
       ]
@@ -337,8 +344,8 @@ export class SurveyQuestionEditorDefinition {
     expression: {
       properties: [
         "expression",
-        "currency",
         "displayStyle",
+        "currency",
         "format",
         "maximumFractionDigits",
         "minimumFractionDigits",
@@ -435,6 +442,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "optionsCaption", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "choicesMin", tab: "choices" },
+        { name: "choicesMax", tab: "choices" },
+        { name: "choicesStep", tab: "choices" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
       ],
@@ -615,6 +625,14 @@ export class SurveyQuestionEditorDefinition {
         { name: "startSurveyText", tab: "navigation" },
         {
           name: "showNavigationButtons",
+          tab: "navigation"
+        },
+        {
+          name: "progressBarShowPageTitles",
+          tab: "navigation"
+        },
+        {
+          name: "progressBarShowPageNumbers",
           tab: "navigation"
         },
         { name: "showPrevButton", tab: "navigation" },

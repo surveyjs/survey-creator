@@ -355,6 +355,7 @@ export var turkishStrings = {
     markRequired: "Gerektiği gibi işaretleyin",
     removeRequiredMark: "Gerekli işareti kaldırın",
     isAllRowRequired: "Tüm satırlar zorunlu",
+    eachRowUnique: "Satırlarda yinelenen yanıtları önleme",
     requiredErrorText: "Zorunlu hata yazısı",
     startWithNewLine: "Yeni satırla başla?",
     rows: "Satır sayısı",
@@ -1037,8 +1038,8 @@ export var turkishStrings = {
     "--primary-foreground": "Birincil ön plan rengi",
     "--foreground": "Ön plan rengi",
     "--base-unit": "Temel ünite",
+    advancedMode: "Gelişmiş mod",
     groupGeneral: "Genel",
-    groupAdvanced: "İleri",
     groupHeader: "Üstbilgi",
     groupBackground: "Arka plan",
     groupAppearance: "Görünüş",
@@ -1067,11 +1068,9 @@ export var turkishStrings = {
     backgroundImageAttachmentScroll: "Tomar",
     panelBackgroundTransparency: "Panel arka plan opaklığı",
     questionBackgroundTransparency: "Soru arka planı opaklığı",
-    questionPanel: "Panel arka planı ve köşe yarıçapı",
     questionTitle: "Soru başlığı yazı tipi",
-    questionDescription: "Soru açıklaması yazı tipi",
     editorPanel: "Giriş öğesi",
-    editorFont: "Giriş öğesi yazı tipi",
+    backgroundCornerRadius: "Arka plan ve köşe yarıçapı",
     backcolor: "Varsayılan arka plan",
     hovercolor: "Arka planın üzerine gelin",
     borderDecoration: "Bordür dekorasyonu",
@@ -1079,7 +1078,9 @@ export var turkishStrings = {
     accentForeground: "Vurgu ön planı",
     primaryForecolor: "Varsayılan renk",
     primaryForecolorLight: "Devre dışı bırakılmış renk",
-    linesColors: "Küçük çizgi renkleri",
+    colorsTitle: "Renk",
+    font: "Yazı tipi",
+    lines: "Satır",
     borderDefault: "Koyu",
     borderLight: "Çakmak",
     fontFamily: "Font ailesi",
@@ -1096,7 +1097,8 @@ export var turkishStrings = {
     surveyTitle: "Anket başlığı yazı tipi",
     surveyDescription: "Anket açıklaması yazı tipi",
     pageTitle: "Sayfa başlığı yazı tipi",
-    pageDescription: "Sayfa açıklaması yazı tipi",
+    titleFont: "Başlık yazı tipi",
+    descriptionFont: "Açıklama yazı tipi",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Gölge Efekti Ekle",
@@ -1105,8 +1107,7 @@ export var turkishStrings = {
     boxShadowSpread: "Yaymak",
     boxShadowDrop: "Damla",
     boxShadowInner: "İç",
-    questionShadow: "Gölge efektleri",
-    editorShadow: "Giriş öğesi gölge efektleri",
+    shadow: "Gölge efektleri",
     headerView: "Görünüm",
     headerViewBasic: "Temel",
     headerViewAdvanced: "İleri",
@@ -1731,3 +1732,12 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Seçimler bir web hizmetinden yüklenir."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ayarlara git"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Yüklenen seçim seçeneklerinin önizlemesi"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Satırlarda yinelenen yanıtları önleme"
+// theme.advancedMode: "Advanced mode" => "Gelişmiş mod"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Arka plan ve köşe yarıçapı"
+// theme.colorsTitle: "Colors" => "Renk"
+// theme.font: "Font" => "Yazı tipi"
+// theme.lines: "Lines" => "Satır"
+// theme.titleFont: "Title font" => "Başlık yazı tipi"
+// theme.descriptionFont: "Description font" => "Açıklama yazı tipi"
+// theme.shadow: "Shadow effects" => "Gölge efektleri"

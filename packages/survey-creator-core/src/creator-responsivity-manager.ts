@@ -1,4 +1,4 @@
-import { CreatorBase } from "./creator-base";
+import { SurveyCreatorModel } from "./creator-base";
 require("./responsivity.scss");
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
@@ -64,7 +64,7 @@ export class CreatorResponsivityManager {
     return container.parentElement;
   }
 
-  constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
+  constructor(protected container: HTMLDivElement, private creator: SurveyCreatorModel) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.findCorrectParent(this.container));

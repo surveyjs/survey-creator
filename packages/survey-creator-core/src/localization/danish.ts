@@ -355,6 +355,7 @@ export var danishStrings = {
     markRequired: "Markér efter behov",
     removeRequiredMark: "Fjern det påkrævede mærke",
     isAllRowRequired: "Kræv svar for alle rækker",
+    eachRowUnique: "Undgå dublerede svar i rækker",
     requiredErrorText: "Fejlmeddelelsen \"Påkrævet\"",
     startWithNewLine: "Skal starte med ny linie?",
     rows: "Antal rækker",
@@ -1037,8 +1038,8 @@ export var danishStrings = {
     "--primary-foreground": "Primær forgrundsfarve",
     "--foreground": "Forgrundsfarve",
     "--base-unit": "Basisenhed",
+    advancedMode: "Avanceret tilstand",
     groupGeneral: "Generel",
-    groupAdvanced: "Avanceret",
     groupHeader: "Header",
     groupBackground: "Baggrund",
     groupAppearance: "Udseende",
@@ -1067,11 +1068,9 @@ export var danishStrings = {
     backgroundImageAttachmentScroll: "Rulle",
     panelBackgroundTransparency: "Opacitet af panelets baggrund",
     questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
-    questionPanel: "Panelbaggrund og hjørneradius",
     questionTitle: "Skrifttype for spørgsmålstitel",
-    questionDescription: "Skrifttype til beskrivelse af spørgsmål",
     editorPanel: "Input element",
-    editorFont: "Skrifttype for inputelement",
+    backgroundCornerRadius: "Baggrund og hjørneradius",
     backcolor: "Standard baggrund",
     hovercolor: "Hold markøren over baggrunden",
     borderDecoration: "Kant dekoration",
@@ -1079,7 +1078,9 @@ export var danishStrings = {
     accentForeground: "Accent forgrund",
     primaryForecolor: "Standardfarve",
     primaryForecolorLight: "Deaktiveret farve",
-    linesColors: "Mindre stregfarver",
+    colorsTitle: "Farver",
+    font: "Skrifttype",
+    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lighter",
     fontFamily: "Skrifttypefamilie",
@@ -1096,7 +1097,8 @@ export var danishStrings = {
     surveyTitle: "Skrifttype for undersøgelsestitel",
     surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
     pageTitle: "Sidetitel skrifttype",
-    pageDescription: "Sidebeskrivelse skrifttype",
+    titleFont: "Titel skrifttype",
+    descriptionFont: "Beskrivelse skrifttype",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tilføj skyggeeffekt",
@@ -1105,8 +1107,7 @@ export var danishStrings = {
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråbe",
     boxShadowInner: "Indre",
-    questionShadow: "Skyggeeffekter",
-    editorShadow: "Skyggeeffekter for inputelement",
+    shadow: "Skyggeeffekter",
     headerView: "Udsigt",
     headerViewBasic: "Grundlæggende",
     headerViewAdvanced: "Avanceret",
@@ -1921,3 +1922,12 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valg indlæses fra en webtjeneste."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til indstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning af indlæste valgmuligheder"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Undgå dublerede svar i rækker"
+// theme.advancedMode: "Advanced mode" => "Avanceret tilstand"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.colorsTitle: "Colors" => "Farver"
+// theme.font: "Font" => "Skrifttype"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Titel skrifttype"
+// theme.descriptionFont: "Description font" => "Beskrivelse skrifttype"
+// theme.shadow: "Shadow effects" => "Skyggeeffekter"

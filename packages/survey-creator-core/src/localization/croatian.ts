@@ -355,6 +355,7 @@ export var hrStrings = {
     markRequired: "Označi kao obavezno",
     removeRequiredMark: "Uklanjanje potrebne oznake",
     isAllRowRequired: "Zahtijevati odgovor za sve redove",
+    eachRowUnique: "Sprječavanje dvostrukih odgovora u recima",
     requiredErrorText: "Potreban tekst pogreške",
     startWithNewLine: "Počinje li s novom linijom?",
     rows: "Broj redaka",
@@ -1037,8 +1038,8 @@ export var hrStrings = {
     "--primary-foreground": "Primarna boja prednjeg plana",
     "--foreground": "Boja prednjeg plana",
     "--base-unit": "Osnovna jedinica",
+    advancedMode: "Napredni način rada",
     groupGeneral: "Općenito",
-    groupAdvanced: "Napredan",
     groupHeader: "Zaglavlje",
     groupBackground: "Pozadina",
     groupAppearance: "Izgled",
@@ -1067,11 +1068,9 @@ export var hrStrings = {
     backgroundImageAttachmentScroll: "Svitak",
     panelBackgroundTransparency: "Neprozirnost pozadine ploče",
     questionBackgroundTransparency: "Pitanje neprozirnosti pozadine",
-    questionPanel: "Pozadina ploče i kutni radijus",
     questionTitle: "Font naslova pitanja",
-    questionDescription: "Font opisa pitanja",
     editorPanel: "Ulazni element",
-    editorFont: "Font elementa unosa",
+    backgroundCornerRadius: "Polumjer pozadine i kuta",
     backcolor: "Zadana pozadina",
     hovercolor: "Pozadina držanja pokazivača miša",
     borderDecoration: "Uređenje obruba",
@@ -1079,7 +1078,9 @@ export var hrStrings = {
     accentForeground: "Isticanje u prvom planu",
     primaryForecolor: "Zadana boja",
     primaryForecolorLight: "Onemogućena boja",
-    linesColors: "Sporedne boje crta",
+    colorsTitle: "Boje",
+    font: "Krstionica",
+    lines: "Linije",
     borderDefault: "Tamnije",
     borderLight: "Upaljač",
     fontFamily: "Obitelj fontova",
@@ -1096,7 +1097,8 @@ export var hrStrings = {
     surveyTitle: "Font naslova upitnika",
     surveyDescription: "Font opisa upitnika",
     pageTitle: "Font naslova stranice",
-    pageDescription: "Font opisa stranice",
+    titleFont: "Font naslova",
+    descriptionFont: "Font opisa",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt sjene",
@@ -1105,8 +1107,7 @@ export var hrStrings = {
     boxShadowSpread: "Širenje",
     boxShadowDrop: "Ispustiti",
     boxShadowInner: "Unutarnji",
-    questionShadow: "Efekti sjene",
-    editorShadow: "Efekti sjene ulaznog elementa",
+    shadow: "Efekti sjene",
     headerView: "Pogled",
     headerViewBasic: "Osnovni",
     headerViewAdvanced: "Napredan",
@@ -1730,3 +1731,12 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Izbori se učitavaju s web-usluge."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Idi na postavke"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pretpregled učitanih mogućnosti izbora"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Sprječavanje dvostrukih odgovora u recima"
+// theme.advancedMode: "Advanced mode" => "Napredni način rada"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Polumjer pozadine i kuta"
+// theme.colorsTitle: "Colors" => "Boje"
+// theme.font: "Font" => "Krstionica"
+// theme.lines: "Lines" => "Linije"
+// theme.titleFont: "Title font" => "Font naslova"
+// theme.descriptionFont: "Description font" => "Font opisa"
+// theme.shadow: "Shadow effects" => "Efekti sjene"

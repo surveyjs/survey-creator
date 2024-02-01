@@ -355,6 +355,7 @@ export var mnStrings = {
     markRequired: "Шаардлагын дагуу тэмдэглэгээ хийх",
     removeRequiredMark: "Шаардлагатай тэмдэглэгээг хасах",
     isAllRowRequired: "Бүх мөрөнд хариулт шаардах",
+    eachRowUnique: "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ",
     requiredErrorText: "Заавал бөглөх талбарыг бөглөөгүй байна",
     startWithNewLine: "Асуултыг шинэ мөрөнд харуулах",
     rows: "Мөр",
@@ -1037,8 +1038,8 @@ export var mnStrings = {
     "--primary-foreground": "Хүүхдийн хэсгийн өмнөх өнгө",
     "--foreground": "Өнгөө",
     "--base-unit": "Үндсэн нэгж",
+    advancedMode: "Дэвшилтэт хэв маяг",
     groupGeneral: "Ерөнхий",
-    groupAdvanced: "Өндөр хөгжсөн",
     groupHeader: "Толгойлогч",
     groupBackground: "Ар талын",
     groupAppearance: "Харагдах байдал",
@@ -1067,11 +1068,9 @@ export var mnStrings = {
     backgroundImageAttachmentScroll: "Хуйлмал бичиг",
     panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
     questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
-    questionPanel: "Панелийн ар талын болон булангийн радиус",
     questionTitle: "Асуулт нэрийн фонт",
-    questionDescription: "Асуултын тодорхойлолтын фонт",
     editorPanel: "Оролтын элемент",
-    editorFont: "Оролтын элементийн фонт",
+    backgroundCornerRadius: "Ар талын болон булангийн радиус",
     backcolor: "Дефолт нөхцөл байдал",
     hovercolor: "Hover-ийн гарал үүсэл",
     borderDecoration: "Хилийн чимэг",
@@ -1079,7 +1078,9 @@ export var mnStrings = {
     accentForeground: "Акцентийн өмнө",
     primaryForecolor: "Дефолт өнгө",
     primaryForecolorLight: "Хөгжлийн бэрхшээлтэй хүний өнгө",
-    linesColors: "Бага шугаман өнгө",
+    colorsTitle: "Өнгө",
+    font: "Фонт",
+    lines: "Шугам",
     borderDefault: "Илүү харанхуй",
     borderLight: "Гэрэлтэй",
     fontFamily: "Фонтын гэр бүл",
@@ -1096,7 +1097,8 @@ export var mnStrings = {
     surveyTitle: "Судалгааны нэрийн фонт",
     surveyDescription: "Судалгааны тодорхойлолтын фонт",
     pageTitle: "Хуудасны нэрийн фонт",
-    pageDescription: "Хуудасны дүрслэлийн фонт",
+    titleFont: "Нүүр фонт",
+    descriptionFont: "Дүрслэлийн фонт",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Сүүдрийн эффект нэмэх",
@@ -1105,8 +1107,7 @@ export var mnStrings = {
     boxShadowSpread: "Тархалт",
     boxShadowDrop: "Дусал",
     boxShadowInner: "Дотоод",
-    questionShadow: "Сүүдрийн нөлөө",
-    editorShadow: "Оролт элементийн сүүдрийн нөлөө",
+    shadow: "Сүүдрийн нөлөө",
     headerView: "Үзэх",
     headerViewBasic: "Үндсэн",
     headerViewAdvanced: "Өндөр хөгжсөн",
@@ -1392,3 +1393,12 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Сонголтыг вэбийн үйлчилгээнээс ачаалдаг."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Тохиргоо руу явах"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ"
+// theme.advancedMode: "Advanced mode" => "Дэвшилтэт хэв маяг"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Ар талын болон булангийн радиус"
+// theme.colorsTitle: "Colors" => "Өнгө"
+// theme.font: "Font" => "Фонт"
+// theme.lines: "Lines" => "Шугам"
+// theme.titleFont: "Title font" => "Нүүр фонт"
+// theme.descriptionFont: "Description font" => "Дүрслэлийн фонт"
+// theme.shadow: "Shadow effects" => "Сүүдрийн нөлөө"

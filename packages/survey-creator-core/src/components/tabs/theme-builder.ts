@@ -1,6 +1,6 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, IElement, PanelModel } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase } from "survey-core";
+import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
 import { propertyGridCss } from "../../property-grid-theme/property-grid";
@@ -16,6 +16,7 @@ import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-setting
 import { QuestionFileEditorModel } from "../../custom-questions/question-file";
 import { SurveyHelper } from "../../survey-helper";
 import { IPropertyGridEditorAdditingOptions } from "./theme-plugin";
+import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
 
@@ -175,6 +176,7 @@ export class ThemeBuilder extends Base {
   @property({ defaultValue: "default" }) themeName;
   @property({ defaultValue: "light" }) themePalette;
   @property({ defaultValue: "panels" }) themeMode;
+  @property() groupAppearanceAdvancedMode: boolean;
 
   getFullThemeName(_themeName?: string) {
     if (this.themePalette === "light") {
@@ -207,7 +209,7 @@ export class ThemeBuilder extends Base {
   public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
   public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
 
-  constructor(private surveyProvider: CreatorBase, private startThemeClasses: any = defaultV2Css) {
+  constructor(private surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
     this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
@@ -380,18 +382,18 @@ export class ThemeBuilder extends Base {
     let sibling;
     let insertIndex = -1;
 
-    if(!!params.category) {
+    if (!!params.category) {
       category = this.getPropertyGridCategory(params.category) as PanelModel;
     }
 
-    if(!!params.insertBefore) {
+    if (!!params.insertBefore) {
       sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertBefore);
       if (!!sibling) {
         insertIndex = sibling.parent.elements.indexOf(sibling) - 1;
       }
     }
 
-    if(!!params.insertAfter) {
+    if (!!params.insertAfter) {
       sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertAfter);
       if (!!sibling) {
         insertIndex = sibling.parent.elements.indexOf(sibling) + 1;
@@ -401,7 +403,7 @@ export class ThemeBuilder extends Base {
     if (!!params.element) {
       if (!!sibling) {
         sibling.parent.addElement(params.element, insertIndex);
-      } else if(!!category) {
+      } else if (!!category) {
         category.addElement(params.element);
       } else {
         SurveyHelper.warnText("No source found to add.");
@@ -625,6 +627,7 @@ export class ThemeBuilder extends Base {
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerTitle"), this.themeCssVariablesChanges);
       fontsettingsToCssVariable(options.question.panels[0].getElementByName("headerDescription"), this.themeCssVariablesChanges);
     }
+    this.currentTheme.headerView = headerSettings["headerView"];
     this.themeModified(options);
   }
   private shadowInnerPropertiesChanged(options: ValueChangedEvent) {
@@ -667,14 +670,6 @@ export class ThemeBuilder extends Base {
     }
   }
   private updateDependentQuestionValues(options: ValueChangedEvent) {
-    if (options.name === "generalBackcolorDimColor") {
-      this.themeEditorSurvey.setValue("--sjs-general-backcolor-dim", options.value);
-      return true;
-    }
-    if (options.name === "--sjs-general-backcolor-dim") {
-      this.themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = options.value;
-      return false;
-    }
     if (options.name === "generalPrimaryColor") {
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor", options.value);
       return true;
@@ -696,7 +691,10 @@ export class ThemeBuilder extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey(json, "theme_editor", this);
+    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this);
+    themeEditorSurvey.lazyRendering = true;
+    themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
+    themeEditorSurvey.setJsonObject(json);
     themeEditorSurvey.getCss().list = {};
     const themeBuilderCss = { ...propertyGridCss };
     themeBuilderCss.root += " spg-theme-builder-root";
@@ -710,6 +708,7 @@ export class ThemeBuilder extends Base {
     });
 
     themeEditorSurvey.onValueChanged.add((sender, options: ValueChangedEvent) => {
+      if (options.name === "advancedMode") return;
       if (this.blockChanges) return;
 
       if (this.blockThemeChangedNotifications == 0) {
@@ -728,7 +727,7 @@ export class ThemeBuilder extends Base {
         this.headerViewContainerPropertiesChanged(options);
       }
 
-      if (options.name === "--sjs-shadow-inner") {
+      if (options.name === "--sjs-shadow-inner" || options.name === "--sjs-shadow-small") {
         this.shadowInnerPropertiesChanged(options);
       }
 
@@ -768,6 +767,13 @@ export class ThemeBuilder extends Base {
         opt.actions = [];
       }
     });
+    themeEditorSurvey.onGetPanelTitleActions.add((sender, opt) => {
+      if (this.surveyProvider.isMobileView) return;
+
+      if (opt.panel && opt.panel.name == "groupAppearance") {
+        opt.titleActions.push(this.createAppearanceAdvancedModeAction(opt.panel));
+      }
+    });
     themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
       if (options.panel.hasParent) {
         const parent = (options.panel.parent ?? options.panel.parentQuestion);
@@ -785,13 +791,37 @@ export class ThemeBuilder extends Base {
     });
     return themeEditorSurvey;
   }
+
+  private createAppearanceAdvancedModeAction(panel: PanelModelBase) {
+    const advancedMode = new Switcher({
+      id: "advancedMode",
+      component: "svc-switcher",
+      ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
+      ariaRole: "checkbox",
+      css: "sv-theme-group_title-action",
+      title: getLocString("theme.advancedMode"),
+      action: () => {
+        this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
+        panel.getQuestionByName("advancedMode").value = this.groupAppearanceAdvancedMode;
+      }
+    });
+    this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
+      () => {
+        advancedMode.checked = !advancedMode.checked;
+      },
+      "groupAppearanceAdvancedMode"
+    );
+    advancedMode.checked = false;
+    return advancedMode;
+  }
+
   findSuitableTheme(themeName: string): ITheme {
     let probeThemeFullName = getThemeFullName({ themeName: themeName, colorPalette: this.themePalette, isPanelless: this.themeMode === "lightweight" } as any);
     return findSuitableTheme(themeName, this.themePalette, this.themeMode, probeThemeFullName);
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, onFilesChosen) => this.surveyProvider.chooseFiles(input, onFilesChosen); });
+    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => this.surveyProvider.chooseFiles(input, callback); });
   }
 
   private getCoverJson(headerSettings: any): any {
@@ -839,8 +869,11 @@ export class ThemeBuilder extends Base {
   }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
-    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-    page.getElementByName("groupAdvanced").visible = !this.surveyProvider.isMobileView;
+    let groupHeaderVisibility = true;
+    if (!!this.survey) {
+      groupHeaderVisibility = !!this.survey.logo || !!this.survey.title || !!this.survey.description;
+    }
+    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings && groupHeaderVisibility;
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
@@ -951,7 +984,6 @@ export class ThemeBuilder extends Base {
     themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
     themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
     themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
-    themeEditorSurvey.getQuestionByName("generalBackcolorDimColor").value = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim").value;
 
     this.updateHeaderViewContainerEditors(newCssVariables);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
@@ -1047,17 +1079,13 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  private getDefaultTitleSetting(isAdvanced?: boolean) {
+  private getDefaultTitleSetting() {
     const result = { family: settings.theme.fontFamily, weight: "700", size: 32 };
-    if (isAdvanced) {
-      result["color"] = "rgba(255, 255, 255, 1)";
-    }
     return result;
   }
   private getDefaultDescriptionSetting(isAdvanced?: boolean) {
     const result = { family: settings.theme.fontFamily, weight: "400", size: 16 };
     if (isAdvanced) {
-      result["color"] = "rgba(255, 255, 255, 1)";
       result["weight"] = "600";
     }
     return result;
@@ -1147,7 +1175,7 @@ export class ThemeBuilder extends Base {
                     "height": 256,
                     surveyTitle: this.getDefaultTitleSetting(),
                     surveyDescription: this.getDefaultDescriptionSetting(),
-                    headerTitle: this.getDefaultTitleSetting(true),
+                    headerTitle: this.getDefaultTitleSetting(),
                     headerDescription: this.getDefaultDescriptionSetting(true)
                   }
                 ],
@@ -1285,28 +1313,44 @@ export class ThemeBuilder extends Base {
                             step: 5
                           },
                         ]
-                      },
-                      {
-                        type: "fontSettings",
-                        name: "headerTitle",
-                        title: getLocString("theme.surveyTitle"),
-                        descriptionLocation: "hidden",
-                        defaultValue: this.getDefaultTitleSetting(true)
-                      },
-                      {
-                        type: "fontSettings",
-                        name: "headerDescription",
-                        title: getLocString("theme.surveyDescription"),
-                        descriptionLocation: "hidden",
-                        defaultValue: this.getDefaultDescriptionSetting(true)
-                      },
-                      {
-                        type: "boolean",
-                        name: "overlapEnabled",
-                        renderAs: "checkbox",
-                        title: getLocString("theme.coverOverlapEnabled"),
+                      }, {
+                        type: "panel",
                         titleLocation: "hidden",
-                        descriptionLocation: "hidden",
+                        elements: [
+                          {
+                            type: "boolean",
+                            name: "overlapEnabled",
+                            renderAs: "checkbox",
+                            title: getLocString("theme.coverOverlapEnabled"),
+                            titleLocation: "hidden",
+                            descriptionLocation: "hidden",
+                          },
+                        ]
+                      }
+                    ]
+                  }, {
+                    type: "panel",
+                    questionTitleLocation: "top",
+                    visibleIf: "{panel.headerView} = 'advanced'",
+                    elements: [
+                      {
+                        type: "panel",
+                        elements: [
+                          {
+                            type: "fontSettings",
+                            name: "headerTitle",
+                            title: getLocString("theme.surveyTitle"),
+                            descriptionLocation: "hidden",
+                            defaultValue: this.getDefaultTitleSetting()
+                          },
+                          {
+                            type: "fontSettings",
+                            name: "headerDescription",
+                            title: getLocString("theme.surveyDescription"),
+                            descriptionLocation: "hidden",
+                            defaultValue: this.getDefaultDescriptionSetting(true)
+                          },
+                        ]
                       }
                     ]
                   }, {
@@ -1353,7 +1397,7 @@ export class ThemeBuilder extends Base {
             elements: [
               {
                 type: "color",
-                name: "generalBackcolorDimColor",
+                name: "--sjs-general-backcolor-dim",
                 title: getLocString("theme.backgroundDimColor"),
                 descriptionLocation: "hidden",
               },
@@ -1418,7 +1462,14 @@ export class ThemeBuilder extends Base {
         title: getLocString("theme.groupAppearance"),
         elements: [
           {
+            "type": "boolean",
+            "name": "advancedMode",
+            "visible": false,
+            "defaultValue": "false"
+          },
+          {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "color",
@@ -1451,6 +1502,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "dropdown",
@@ -1474,6 +1526,7 @@ export class ThemeBuilder extends Base {
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = false",
             elements: [
               {
                 type: "spinedit",
@@ -1495,23 +1548,11 @@ export class ThemeBuilder extends Base {
                 min: 0
               },
             ]
-          }
-        ]
-      }, {
-        type: "panel",
-        name: "groupAdvanced",
-        title: getLocString("theme.groupAdvanced"),
-        state: "collapsed",
-        elements: [
-          {
+          }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
-                type: "color",
-                name: "--sjs-general-backcolor-dim",
-                title: getLocString("theme.backgroundDimColor"),
-                descriptionLocation: "hidden",
-              }, {
                 type: "panel",
                 title: getLocString("theme.accentBackground"),
                 elements: [
@@ -1561,14 +1602,20 @@ export class ThemeBuilder extends Base {
                     descriptionLocation: "hidden",
                   }
                 ]
-              }]
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.pageTitle")}</div>`,
+              },
+            ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "fontSettings",
                 name: "pageTitle",
-                title: getLocString("theme.pageTitle"),
+                title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1579,7 +1626,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "pageDescription",
-                title: getLocString("theme.pageDescription"),
+                title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1587,15 +1634,20 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.questionTitle")}</div>`,
+              },
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "elementSettings",
                 name: "questionPanel",
-                title: getLocString("theme.questionPanel"),
+                title: getLocString("theme.backgroundCornerRadius"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
@@ -1608,7 +1660,7 @@ export class ThemeBuilder extends Base {
                 type: "boxshadowsettings",
                 name: "--sjs-shadow-small",
                 descriptionLocation: "hidden",
-                title: getLocString("theme.questionShadow"),
+                title: getLocString("theme.shadow"),
                 defaultValue: [
                   {
                     x: 0,
@@ -1628,7 +1680,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "questionTitle",
-                title: getLocString("theme.questionTitle"),
+                title: getLocString("theme.titleFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1639,7 +1691,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "questionDescription",
-                title: getLocString("theme.questionDescription"),
+                title: getLocString("theme.descriptionFont"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1647,15 +1699,20 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.editorPanel")}</div>`,
+              },
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [
               {
                 type: "elementSettings",
                 name: "editorPanel",
-                title: getLocString("theme.editorPanel"),
+                title: getLocString("theme.backgroundCornerRadius"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   backcolor: "rgba(255, 255, 255, 1)",
@@ -1668,7 +1725,7 @@ export class ThemeBuilder extends Base {
                 type: "boxshadowsettings",
                 name: "--sjs-shadow-inner",
                 descriptionLocation: "hidden",
-                title: getLocString("theme.editorShadow"),
+                title: getLocString("theme.shadow"),
                 defaultValue: [
                   {
                     x: 0,
@@ -1688,7 +1745,7 @@ export class ThemeBuilder extends Base {
               }, {
                 type: "fontSettings",
                 name: "editorFont",
-                title: getLocString("theme.editorFont"),
+                title: getLocString("theme.font"),
                 descriptionLocation: "hidden",
                 defaultValue: {
                   family: settings.theme.fontFamily,
@@ -1696,13 +1753,18 @@ export class ThemeBuilder extends Base {
                   weight: "400",
                   size: 16
                 }
-              }
+              }, {
+                type: "html",
+                name: "theme",
+                html: `<div class='spg-theme-group-caption'>${getLocString("theme.lines")}</div>`,
+              },
             ]
           }, {
             type: "panel",
+            visibleIf: "{advancedMode} = true",
             elements: [{
               type: "panel",
-              title: getLocString("theme.linesColors"),
+              title: getLocString("theme.colorsTitle"),
               elements: [
                 {
                   type: "colorsettings",

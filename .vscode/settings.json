@@ -5,13 +5,15 @@
     },
     "[typescript]": {
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            //"source.organizeImports": true, // be vare of https://github.com/microsoft/vscode-typescript-tslint-plugin/issues/51
+            "source.fixAll": "explicit"
         },
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[markdown]": {
+        "editor.formatOnSave": false
     },
     // "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     // "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,

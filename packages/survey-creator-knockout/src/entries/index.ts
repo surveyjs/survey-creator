@@ -62,6 +62,7 @@ export * from "../header/logo-image";
 export * from "../tabs/translation-line-skeleton";
 export * from "../utils/survey-widget";
 export * from "../utils/utils";
+export * from "../switcher/switcher";
 
 export * from "../creator";
 

@@ -12,7 +12,7 @@
 import QuestionBase from "./QuestionBase.vue";
 import { useCreatorModel } from "../creator-model";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   QuestionDropdownAdornerViewModel,
 } from "survey-creator-core";
 import type { Question } from "survey-core";
@@ -23,7 +23,7 @@ const props = defineProps<{
 const model = useCreatorModel(
   () =>
     new QuestionDropdownAdornerViewModel(
-      props.componentData.data as CreatorBase,
+      props.componentData.data as SurveyCreatorModel,
       props.componentData.element as Question,
       null as any
     ),

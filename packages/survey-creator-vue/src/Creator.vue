@@ -79,11 +79,10 @@
           </div>
         </div>
         <div class="svc-creator__banner" v-if="!model.haveCommercialLicense">
-          <span class="svc-creator__non-commercial-text">
-            <a href="https://surveyjs.io/buy">
-              {{ model.licenseText }}
-            </a>
-          </span>
+          <span
+            class="svc-creator__non-commercial-text"
+            v-html="model.licenseText"
+          ></span>
         </div>
         <sv-notifier :model="model.notifier"></sv-notifier>
       </div>
@@ -91,10 +90,10 @@
   </template>
 </template>
 <script setup lang="ts">
-import type { CreatorBase } from "survey-creator-core";
+import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
-const props = defineProps<{ model: CreatorBase }>();
+const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);
 });

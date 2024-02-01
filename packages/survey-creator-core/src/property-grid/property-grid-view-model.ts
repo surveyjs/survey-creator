@@ -3,7 +3,7 @@ import { PropertyGridModel } from "./index";
 import { SelectionHistory } from "../selection-history";
 import { SurveyHelper } from "../survey-helper";
 import { ObjectSelectorModel } from "./object-selector";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { settings } from "../creator-settings";
 import { getLocString } from "../editorLocalization";
 import { SearchManager } from "./search-manager";
@@ -25,7 +25,7 @@ export class PropertyGridViewModel extends Base {
     }
   }) searchEnabled: boolean;
 
-  constructor(private propertyGridModel: PropertyGridModel, private creator: CreatorBase) {
+  constructor(private propertyGridModel: PropertyGridModel, private creator: SurveyCreatorModel) {
     super();
     this.searchEnabled = settings.propertyGrid.enableSearch;
     this.selectedElementName = this.getTitle();

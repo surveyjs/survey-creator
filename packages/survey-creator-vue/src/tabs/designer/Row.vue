@@ -6,11 +6,11 @@
 <script lang="ts" setup>
 import { useCreatorModel } from "@/creator-model";
 import type { QuestionRowModel } from "survey-core";
-import { CreatorBase, RowViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, RowViewModel } from "survey-creator-core";
 import { computed } from "vue";
 
 const props = defineProps<{
-  componentData: { creator: CreatorBase; row: QuestionRowModel };
+  componentData: { creator: SurveyCreatorModel; row: QuestionRowModel };
 }>();
 
 const creator = computed(() => props.componentData.creator);

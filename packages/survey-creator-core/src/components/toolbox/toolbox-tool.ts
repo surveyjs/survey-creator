@@ -1,12 +1,12 @@
 import { Base, SurveyModel, DragOrClickHelper } from "survey-core";
 import { IQuestionToolboxItem } from "../../toolbox";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { DragDropSurveyElements } from "../../survey-elements";
 export class ToolboxToolViewModel extends Base {
   private dragOrClickHelper: DragOrClickHelper;
   constructor(
     protected item: IQuestionToolboxItem,
-    protected creator: CreatorBase
+    protected creator: SurveyCreatorModel
   ) {
     super();
     this.dragOrClickHelper = new DragOrClickHelper(this.startDragToolboxItem);

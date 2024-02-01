@@ -355,6 +355,7 @@ export var nlStrings = {
     markRequired: "Markeren zoals vereist",
     removeRequiredMark: "Verwijder de vereiste markering",
     isAllRowRequired: "Antwoord vereisen voor alle rijen",
+    eachRowUnique: "Voorkom dubbele antwoorden in rijen",
     requiredErrorText: "Tekst bij niet-ingevulde verplichte vraag",
     startWithNewLine: "Beginnen met een nieuwe regel?",
     rows: "Aantal rijen",
@@ -1037,8 +1038,8 @@ export var nlStrings = {
     "--primary-foreground": "Primaire voorgrondkleur",
     "--foreground": "Voorgrondkleur",
     "--base-unit": "Basiseenheid",
+    advancedMode: "Geavanceerde modus",
     groupGeneral: "Algemeen",
-    groupAdvanced: "Geavanceerd",
     groupHeader: "Rubriek",
     groupBackground: "Achtergrond",
     groupAppearance: "Uiterlijk",
@@ -1067,11 +1068,9 @@ export var nlStrings = {
     backgroundImageAttachmentScroll: "Scrollen",
     panelBackgroundTransparency: "Dekking van de achtergrond van het deelvenster",
     questionBackgroundTransparency: "Ondoorzichtigheid van de vraagachtergrond",
-    questionPanel: "Achtergrond van het deelvenster en hoekradius",
     questionTitle: "Lettertype voor de titel van de vraag",
-    questionDescription: "Lettertype voor vraagbeschrijving",
     editorPanel: "Invoerelement",
-    editorFont: "Lettertype van invoerelement",
+    backgroundCornerRadius: "Achtergrond en hoekradius",
     backcolor: "Standaard achtergrond",
     hovercolor: "Achtergrond aanwijzen",
     borderDecoration: "Randdecoratie",
@@ -1079,7 +1078,9 @@ export var nlStrings = {
     accentForeground: "Accent voorgrond",
     primaryForecolor: "Standaardkleur",
     primaryForecolorLight: "Uitgeschakelde kleur",
-    linesColors: "Kleine lijnkleuren",
+    colorsTitle: "Kleuren",
+    font: "Lettertype",
+    lines: "Lijnen",
     borderDefault: "Donkerder",
     borderLight: "Aansteker",
     fontFamily: "Lettertypefamilie",
@@ -1096,7 +1097,8 @@ export var nlStrings = {
     surveyTitle: "Lettertype voor enquêtetitel",
     surveyDescription: "Lettertype met enquêtebeschrijving",
     pageTitle: "Lettertype voor paginatitel",
-    pageDescription: "Lettertype paginabeschrijving",
+    titleFont: "Titel lettertype",
+    descriptionFont: "Beschrijving lettertype",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schaduweffect toevoegen",
@@ -1105,8 +1107,7 @@ export var nlStrings = {
     boxShadowSpread: "Verspreiden",
     boxShadowDrop: "Druppel",
     boxShadowInner: "Binnenste",
-    questionShadow: "Schaduweffecten",
-    editorShadow: "Schaduweffecten van invoerelementen",
+    shadow: "Schaduweffecten",
     headerView: "Bekijken",
     headerViewBasic: "Basisch",
     headerViewAdvanced: "Geavanceerd",
@@ -1716,3 +1717,12 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Keuzes worden geladen vanuit een webservice."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ga naar instellingen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Voorbeeld van geladen keuzeopties"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Voorkom dubbele antwoorden in rijen"
+// theme.advancedMode: "Advanced mode" => "Geavanceerde modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Achtergrond en hoekradius"
+// theme.colorsTitle: "Colors" => "Kleuren"
+// theme.font: "Font" => "Lettertype"
+// theme.lines: "Lines" => "Lijnen"
+// theme.titleFont: "Title font" => "Titel lettertype"
+// theme.descriptionFont: "Description font" => "Beschrijving lettertype"
+// theme.shadow: "Shadow effects" => "Schaduweffecten"

@@ -1,5 +1,5 @@
 import { CssClassBuilder, ImageItemValue, ItemValue, property, QuestionSelectBase } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { ItemValueWrapperViewModel } from "./item-value";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 
@@ -9,7 +9,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
   @property({ defaultValue: false }) isFileDragging: boolean;
   @property({ defaultValue: false }) isUploading;
 
-  constructor(creator: CreatorBase, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, public itemsRoot: HTMLElement) {
+  constructor(creator: SurveyCreatorModel, public question: QuestionSelectBase, public item: ImageItemValue, public templateData: any, public itemsRoot: HTMLElement) {
     super(creator, question, item);
   }
 
@@ -25,6 +25,9 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
 
   public getIsNewItemSingle() {
     return this.isNew && this.question.choices.length === 0;
+  }
+  public get canRenderControls() {
+    return this.getIsNewItemSingle() || !this.question.renderedImageWidth || this.question.renderedImageWidth > 150;
   }
 
   chooseFile(model: ImageItemValueWrapperViewModel) {

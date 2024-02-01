@@ -1,4 +1,4 @@
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { Base, SurveyModel, property, ListModel, IAction, Action } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
 
@@ -28,7 +28,7 @@ export class ObjectSelector {
   private filteredTextInLow: string;
   private itemsValue: Array<ObjectSelectorItem>;
   constructor(
-    private creator: CreatorBase,
+    private creator: SurveyCreatorModel,
     survey: SurveyModel,
     private getObjectDisplayName: (
       obj: Base,
@@ -135,7 +135,7 @@ export class ObjectSelectorModel extends Base {
 
   @property() isVisible: boolean;
 
-  constructor(private creator: CreatorBase, private getObjectDisplayName: (obj: Base, area: string, reason: string, displayName: string) => string = undefined) {
+  constructor(private creator: SurveyCreatorModel, private getObjectDisplayName: (obj: Base, area: string, reason: string, displayName: string) => string = undefined) {
     super();
   }
   public get list(): ListModel {

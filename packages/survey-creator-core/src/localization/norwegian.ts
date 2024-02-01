@@ -355,6 +355,7 @@ export var nbStrings = {
     markRequired: "Merk etter behov",
     removeRequiredMark: "Fjern ønsket merke",
     isAllRowRequired: "Nødvendig svar for alle rader",
+    eachRowUnique: "Forhindre dupliserte svar i rader",
     requiredErrorText: "Nødvendig feilmelding",
     startWithNewLine: "Må starte med ny linje?",
     rows: "Antall rader",
@@ -1037,8 +1038,8 @@ export var nbStrings = {
     "--primary-foreground": "Primær forgrunnsfarge",
     "--foreground": "Forgrunnsfarge",
     "--base-unit": "Basisenhet",
+    advancedMode: "Avansert modus",
     groupGeneral: "Generelt",
-    groupAdvanced: "Avansert",
     groupHeader: "Topptekst",
     groupBackground: "Bakgrunn",
     groupAppearance: "Utseende",
@@ -1067,11 +1068,9 @@ export var nbStrings = {
     backgroundImageAttachmentScroll: "Bla",
     panelBackgroundTransparency: "Tetthet i panelbakgrunn",
     questionBackgroundTransparency: "Spørsmål om bakgrunnstetthet",
-    questionPanel: "Panelbakgrunn og hjørneradius",
     questionTitle: "Spørsmål tittel skrift",
-    questionDescription: "Skrift for spørsmålsbeskrivelse",
     editorPanel: "Inndata-element",
-    editorFont: "Skrift for inndataelement",
+    backgroundCornerRadius: "Bakgrunn og hjørneradius",
     backcolor: "Standard bakgrunn",
     hovercolor: "Pekerfølsom bakgrunn",
     borderDecoration: "Grense dekorasjon",
@@ -1079,7 +1078,9 @@ export var nbStrings = {
     accentForeground: "Uthevingsforgrunn",
     primaryForecolor: "Standardfarge",
     primaryForecolorLight: "Deaktivert farge",
-    linesColors: "Mindre linjefarger",
+    colorsTitle: "Farger",
+    font: "Font",
+    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lekter",
     fontFamily: "Skriftfamilie",
@@ -1096,7 +1097,8 @@ export var nbStrings = {
     surveyTitle: "Skrift for undersøkelsestittel",
     surveyDescription: "Skrift for undersøkelsesbeskrivelse",
     pageTitle: "Skrift for sidetittel",
-    pageDescription: "Skrift for sidebeskrivelse",
+    titleFont: "Tittel skrift",
+    descriptionFont: "Beskrivelse font",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Legg til skyggeeffekt",
@@ -1105,8 +1107,7 @@ export var nbStrings = {
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråpe",
     boxShadowInner: "Indre",
-    questionShadow: "Skygge effekter",
-    editorShadow: "Skyggeeffekter for inndataelement",
+    shadow: "Skygge effekter",
     headerView: "Utsikt",
     headerViewBasic: "Grunnleggende",
     headerViewAdvanced: "Avansert",
@@ -1739,3 +1740,12 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Valgene lastes inn fra en webtjeneste."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til innstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning av alternativer for lastet valg"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Forhindre dupliserte svar i rader"
+// theme.advancedMode: "Advanced mode" => "Avansert modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Bakgrunn og hjørneradius"
+// theme.colorsTitle: "Colors" => "Farger"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Tittel skrift"
+// theme.descriptionFont: "Description font" => "Beskrivelse font"
+// theme.shadow: "Shadow effects" => "Skygge effekter"

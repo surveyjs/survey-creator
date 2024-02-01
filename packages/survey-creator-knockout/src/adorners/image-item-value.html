@@ -12,13 +12,14 @@
       <!-- /ko -->
     </div>
 
-    <!-- ko if: isDraggable-->
+    <!-- ko if: isDraggable && canRenderControls-->
     <sv-svg-icon class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
       data-bind="event: { pointerdown: function(model, event) { onPointerDown(event); } }"
       params="iconName: 'icon-drag-area-indicator', size: 24">
     </sv-svg-icon>
     <!-- /ko -->
 
+    <!-- ko if: canRenderControls-->
     <div class="svc-context-container svc-image-item-value-controls" data-bind="event: { pointerdown: blockEvent }">
       <!-- ko if: allowRemove && !isUploading -->
       <sv-svg-icon class="svc-context-button" data-bind="click: chooseFile, key2click"
@@ -27,6 +28,7 @@
         params="iconName: 'icon-delete', size: 24"></sv-svg-icon>
       <!-- /ko -->
     </div>
+    <!-- /ko -->
     <!-- /ko -->
 
     <!-- ko if: isNew || isUploading -->

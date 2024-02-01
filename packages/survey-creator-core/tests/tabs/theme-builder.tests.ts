@@ -678,7 +678,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   let cssVariables: any;
 
   cssVariables = creator?.theme?.cssVariables;
-  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
   expect(cssVariables["--sjs-shadow-inner-reset"]).toBe("inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowSmallEditor.value = [
@@ -692,7 +692,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
     }
   ];
   cssVariables = creator?.theme?.cssVariables;
-  expect(cssVariables["--sjs-shadow-small-reset"]).toBeUndefined();
+  expect(cssVariables["--sjs-shadow-small-reset"]).toBe("0px 0px 0px 0px rgba(0, 0, 0, 0.15)");
 
   shadowInnerEditor.value = [
     {
@@ -1173,6 +1173,13 @@ test("Theme onModified and saveThemeFunc", (): any => {
   expect(saveThemeCount).toBe(4);
   expect(creator.hasPendingThemeChanges).toBeFalsy();
   expect(themePlugin.isModified).toBeTruthy();
+
+  themeEditor.getQuestionByName("headerViewContainer").value = [{ headerView: "advanced" }];
+  expect(modificationsLog).toBe("->THEME_MODIFIED->THEME_SELECTED->THEME_MODIFIED->THEME_MODIFIED->THEME_MODIFIED");
+  expect(saveCount).toBe(1);
+  expect(saveThemeCount).toBe(5);
+  expect(creator.hasPendingThemeChanges).toBeFalsy();
+  expect(themePlugin.isModified).toBeTruthy();
 });
 
 test("Theme undo redo changes", (): any => {
@@ -1183,34 +1190,29 @@ test("Theme undo redo changes", (): any => {
   const themeSurveyTab = themePlugin.model as ThemeBuilder;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const question = themeEditor.getQuestionByName("--sjs-general-backcolor-dim");
-  const generalBackcolorDimColorQuestion = themeEditor.getQuestionByName("generalBackcolorDimColor");
 
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("rgba(243, 243, 243, 1)");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
 
   question.value = "#ff0000";
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#ff0000");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
 
   themePlugin.undo();
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(false);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(true);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#f3f3f3");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#f3f3f3");
 
   themePlugin.redo();
   expect(themeSurveyTab.undoRedoManager.canUndo()).toBe(true);
   expect(themeSurveyTab.undoRedoManager.canRedo()).toBe(false);
   expect(themeSurveyTab["blockThemeChangedNotifications"]).toBe(0);
   expect(question.value).toBe("#ff0000");
-  expect(generalBackcolorDimColorQuestion.value).toBe("#ff0000");
 });
 
 test("Theme undo redo general settings", (): any => {
@@ -1558,7 +1560,6 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
   const backgroundDimColor = themeEditorSurvey.getQuestionByName("--sjs-general-backcolor-dim");
-  const generalBackcolorDimColor = themeEditorSurvey.getQuestionByName("generalBackcolorDimColor");
   const generalPrimaryColor = themeEditorSurvey.getQuestionByName("generalPrimaryColor");
 
   let pluginThemeSelectedCount = 0;
@@ -1582,7 +1583,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   expect(builderThemeModifiedCount).toBe(1);
   expect(builderThemeSelectedCount).toBe(1);
 
-  generalBackcolorDimColor.value = "#7a46bb";
+  backgroundDimColor.value = "#7a46bb";
   expect(pluginThemeModifiedCount).toBe(2);
   expect(pluginThemeSelectedCount).toBe(1);
   expect(builderThemeModifiedCount).toBe(2);
@@ -1928,6 +1929,31 @@ test("set headerViewContainer advanced", (): any => {
   expect(currentThemeCssVariables["--sjs-header-backcolor"]).toBe("#5094ed");
 });
 
+test("headerViewContainer survey title & description", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
+  const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
+
+  let currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBeUndefined();
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBeUndefined();
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  headerTitleQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
+  headerDescriptionQuestion.contentPanel.getQuestionByName("color").value = "rgba(255, 255, 255, 1)";
+
+  currentThemeCssVariables = creator.theme.cssVariables || {};
+  expect(currentThemeCssVariables["--sjs-font-headertitle-color"]).toBe("rgba(255, 255, 255, 1)");
+  expect(currentThemeCssVariables["--sjs-font-headerdescription-color"]).toBe("rgba(255, 255, 255, 1)");
+});
+
 test("restore headerViewContainer values", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -2127,7 +2153,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "isPanelless",
   ]);
-  expect(Object.keys(fullTheme.cssVariables).length).toBe(81);
+  expect(Object.keys(fullTheme.cssVariables).length).toBe(82);
   expect(Object.keys(themeChanges).length).toBe(4);
   expect(Object.keys(themeChanges)).toStrictEqual([
     "cssVariables",
@@ -2144,7 +2170,7 @@ test("Get theme changes only", (): any => {
   const fullModifiedTheme = themePlugin.getCurrentTheme() || {};
   const modifiedThemeChanges = themePlugin.getCurrentTheme(true) || {};
   expect(Object.keys(fullModifiedTheme).length).toBe(8);
-  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(84);
+  expect(Object.keys(fullModifiedTheme.cssVariables).length).toBe(85);
   expect(Object.keys(modifiedThemeChanges).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables).length).toBe(4);
   expect(Object.keys(modifiedThemeChanges.cssVariables)).toStrictEqual([
@@ -2168,7 +2194,7 @@ test("Get theme changes only", (): any => {
     "colorPalette",
     "cssVariables"
   ]);
-  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(81);
+  expect(Object.keys(fullThemeReset.cssVariables).length).toBe(82);
   expect(Object.keys(themeChangesReset).length).toBe(4);
   expect(Object.keys(themeChangesReset)).toStrictEqual([
     "cssVariables",
@@ -2263,6 +2289,41 @@ test("Creator footer action bar: all tabs", (): any => {
   receivedOrder = creator.footerToolbar.visibleActions.map(a => a.id).join("|");
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
+
+test("Hide groupHeader settings if the survey does not have a logo, title, or description", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeFalsy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+});
+test("Desktop mode: add advanced mode switcher", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  expect(propertyGridGroups[0].visible).toBeTruthy();
+  expect(propertyGridGroups[1].visible).toBeTruthy();
+  expect(propertyGridGroups[2].visible).toBeTruthy();
+  expect(propertyGridGroups[3].visible).toBeTruthy();
+
+  const actions = propertyGridGroups[3].getTitleActions();
+  expect(actions.length).toBe(1);
+});
+
 test("Mobile mode: hide advanced settings in property grid", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
@@ -2273,12 +2334,14 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
   const themeBuilder = themePlugin.model as ThemeBuilder;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const propertyGridGroups = themeEditorSurvey.pages[0].elements;
-  expect(propertyGridGroups.length).toBe(5);
+  expect(propertyGridGroups.length).toBe(4);
   expect(propertyGridGroups[0].visible).toBeTruthy();
   expect(propertyGridGroups[1].visible).toBeFalsy();
   expect(propertyGridGroups[2].visible).toBeTruthy();
   expect(propertyGridGroups[3].visible).toBeTruthy();
-  expect(propertyGridGroups[4].visible).toBeFalsy();
+
+  const actions = propertyGridGroups[3].getTitleActions();
+  expect(actions.length).toBe(0);
 });
 test("loadTheme fill all theme parameters: name, mode and compactness", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });

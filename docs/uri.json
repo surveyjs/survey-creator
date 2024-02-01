@@ -19,7 +19,6 @@
     "troubleshooting": "overview"
   },
   "classRename": {
-    "surveyeditor": "survey-creator",
-    "surveycreator": "survey-creator"
+    "surveycreatormodel": "survey-creator"
   }
 }

@@ -355,6 +355,7 @@ export var koreanStrings = {
     markRequired: "필요에 따라 표시",
     removeRequiredMark: "필요한 표시를 제거하십시오",
     isAllRowRequired: "모든 행에 대한 응답 필요",
+    eachRowUnique: "행의 중복 응답 방지",
     requiredErrorText: "\"필수\" 오류 메시지",
     startWithNewLine: "새 줄로 시작하겠습니까?",
     rows: "행 수",
@@ -1037,8 +1038,8 @@ export var koreanStrings = {
     "--primary-foreground": "기본 전경색",
     "--foreground": "전경색",
     "--base-unit": "베이스 유닛",
+    advancedMode: "어드밴스드 모드",
     groupGeneral: "일반",
-    groupAdvanced: "고급",
     groupHeader: "머리글",
     groupBackground: "배경",
     groupAppearance: "외관",
@@ -1067,11 +1068,9 @@ export var koreanStrings = {
     backgroundImageAttachmentScroll: "스크롤",
     panelBackgroundTransparency: "패널 배경 불투명도",
     questionBackgroundTransparency: "질문 배경 불투명도",
-    questionPanel: "패널 배경 및 모서리 반경",
     questionTitle: "질문 제목 글꼴",
-    questionDescription: "질문 설명 글꼴",
     editorPanel: "입력 요소",
-    editorFont: "입력 요소 글꼴",
+    backgroundCornerRadius: "배경 및 모서리 반경",
     backcolor: "기본 배경",
     hovercolor: "배경 가리키기",
     borderDecoration: "테두리 장식",
@@ -1079,7 +1078,9 @@ export var koreanStrings = {
     accentForeground: "악센트 전경",
     primaryForecolor: "기본 색상",
     primaryForecolorLight: "비활성화 된 색상",
-    linesColors: "보조 선 색상",
+    colorsTitle: "색상",
+    font: "글꼴",
+    lines: "라인",
     borderDefault: "어두운",
     borderLight: "라이터",
     fontFamily: "글꼴 패밀리",
@@ -1096,7 +1097,8 @@ export var koreanStrings = {
     surveyTitle: "설문조사 제목 글꼴",
     surveyDescription: "설문조사 설명 글꼴",
     pageTitle: "페이지 제목 글꼴",
-    pageDescription: "페이지 설명 글꼴",
+    titleFont: "제목 글꼴",
+    descriptionFont: "설명 글꼴",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "그림자 효과 추가",
@@ -1105,8 +1107,7 @@ export var koreanStrings = {
     boxShadowSpread: "전파",
     boxShadowDrop: "방울",
     boxShadowInner: "내부",
-    questionShadow: "그림자 효과",
-    editorShadow: "입력 요소 그림자 효과",
+    shadow: "그림자 효과",
     headerView: "보기",
     headerViewBasic: "기초의",
     headerViewAdvanced: "고급",
@@ -1940,3 +1941,12 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "선택 항목은 웹 서비스에서 로드됩니다."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "설정으로 바로 가기"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "로드된 선택 옵션 미리보기"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "행의 중복 응답 방지"
+// theme.advancedMode: "Advanced mode" => "어드밴스드 모드"
+// theme.backgroundCornerRadius: "Background and corner radius" => "배경 및 모서리 반경"
+// theme.colorsTitle: "Colors" => "색상"
+// theme.font: "Font" => "글꼴"
+// theme.lines: "Lines" => "라인"
+// theme.titleFont: "Title font" => "제목 글꼴"
+// theme.descriptionFont: "Description font" => "설명 글꼴"
+// theme.shadow: "Shadow effects" => "그림자 효과"

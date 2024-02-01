@@ -355,6 +355,7 @@ export var ruStrings = {
     markRequired: "Отметьте как обязательный",
     removeRequiredMark: "Снимите нужную отметку",
     isAllRowRequired: "Все строки обязательны для заполнения",
+    eachRowUnique: "Предотвращение дублирования ответов в строках",
     requiredErrorText: "Это поле обязательное для заполнения",
     startWithNewLine: "Начинать с новой строки?",
     rows: "Количество строк",
@@ -1037,8 +1038,8 @@ export var ruStrings = {
     "--primary-foreground": "Основной цвет переднего плана",
     "--foreground": "Цвет переднего плана",
     "--base-unit": "Базовый блок",
+    advancedMode: "Расширенный режим",
     groupGeneral: "Общее",
-    groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
     groupBackground: "Фон",
     groupAppearance: "Внешний вид",
@@ -1067,11 +1068,9 @@ export var ruStrings = {
     backgroundImageAttachmentScroll: "Прокручивать",
     panelBackgroundTransparency: "Непрозрачность фона панели",
     questionBackgroundTransparency: "Непрозрачность фона вопроса",
-    questionPanel: "Фон панели и радиус угла",
     questionTitle: "Шрифт заголовка вопроса",
-    questionDescription: "Шрифт описания вопроса",
     editorPanel: "Элемент ввода",
-    editorFont: "Шрифт элемента ввода",
+    backgroundCornerRadius: "Радиус фона и угла",
     backcolor: "Фон по умолчанию",
     hovercolor: "Фон при наведении курсора",
     borderDecoration: "Оформление бордюра",
@@ -1079,7 +1078,9 @@ export var ruStrings = {
     accentForeground: "Акцент на переднем плане",
     primaryForecolor: "Цвет по умолчанию",
     primaryForecolorLight: "Отключенный цвет",
-    linesColors: "Второстепенные цвета линий",
+    colorsTitle: "Знамя",
+    font: "Шрифт",
+    lines: "Обводы",
     borderDefault: "Темнее",
     borderLight: "Зажигалка",
     fontFamily: "Семейство шрифтов",
@@ -1096,7 +1097,8 @@ export var ruStrings = {
     surveyTitle: "Шрифт заголовка опроса",
     surveyDescription: "Шрифт описания опроса",
     pageTitle: "Шрифт заголовка страницы",
-    pageDescription: "Шрифт описания страницы",
+    titleFont: "Шрифт заголовка",
+    descriptionFont: "Описание шрифта",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавить эффект тени",
@@ -1105,8 +1107,7 @@ export var ruStrings = {
     boxShadowSpread: "Распространение",
     boxShadowDrop: "Капля",
     boxShadowInner: "Внутренний",
-    questionShadow: "Эффекты тени",
-    editorShadow: "Эффекты тени входного элемента",
+    shadow: "Эффекты теней",
     headerView: "Вид",
     headerViewBasic: "Основной",
     headerViewAdvanced: "Продвинутый",
@@ -1796,3 +1797,12 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Варианты загружаются из веб-службы."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Перейдите в настройки"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Предварительный просмотр загруженных вариантов выбора"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвращение дублирования ответов в строках"
+// theme.advancedMode: "Advanced mode" => "Расширенный режим"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Радиус фона и угла"
+// theme.colorsTitle: "Colors" => "Знамя"
+// theme.font: "Font" => "Шрифт"
+// theme.lines: "Lines" => "Обводы"
+// theme.titleFont: "Title font" => "Шрифт заголовка"
+// theme.descriptionFont: "Description font" => "Описание шрифта"
+// theme.shadow: "Shadow effects" => "Эффекты теней"

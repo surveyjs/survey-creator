@@ -1,0 +1,11 @@
+<!-- ko with: $data.item -->
+<button type="button"
+  data-bind="click: function(s, args) { $data.action($data, getIsTrusted(args)); }, key2click: { processEsc: false }, disable: $data.disabled, css: getActionBarItemCss(), attr: { title: $data.tooltip || $data.title, 'aria-checked': $data.ariaChecked, 'role': $data.ariaRole, 'aria-expanded': typeof $data.ariaExpanded === 'undefined' ? null : ($data.ariaExpanded ? 'true': 'false') }">
+  <div data-bind="css: getSwitcherIconCss()">
+    <div class="svc-switcher__icon-thumb"></div>
+  </div>
+  <!-- ko if: $data.hasTitle -->
+  <span class="svc-switcher__title" data-bind="text: title"></span>
+  <!-- /ko -->
+</button>
+<!-- /ko -->

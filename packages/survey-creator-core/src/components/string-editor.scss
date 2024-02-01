@@ -1,11 +1,12 @@
 @import "../variables.scss";
 
-.sd-element__title {
+.sd-element__header {
   .svc-string-editor {
     display: inline-block;
     max-width: 100%;
   }
 }
+
 .svc-string-editor {
   [contenteditable="true"] {
     user-select: text;
@@ -13,20 +14,23 @@
   }
 
   position: static;
+
   .sv-string-editor {
     position: relative;
     outline: none;
-    word-break: break-word;
     z-index: 12;
+
     &[aria-placeholder]:empty:before {
       content: attr(aria-placeholder);
       color: $foreground-light;
     }
   }
+
   .sv-string-editor--html,
   .sv-string-editor:focus-within {
     white-space: pre-wrap;
   }
+
   &.svc-string-editor--hidden {
     display: none;
   }
@@ -36,6 +40,13 @@
   display: inline-block;
   position: relative;
   z-index: 10;
+  width: 100%;
+}
+
+.svc-matrix-cell {
+  .svc-string-editor__content {
+    width: auto;
+  }
 }
 
 .svc-string-editor__content:focus-within .svc-remaining-character-counter {
@@ -70,6 +81,7 @@
   justify-content: right;
   line-height: 0px;
 }
+
 .svc-string-editor__error {
   margin-left: calcSize(1);
   line-height: calcSize(4);
@@ -95,6 +107,7 @@
 .svc-string-editor__button {
   display: none;
   position: relative;
+
   use {
     fill: $primary;
   }
@@ -104,9 +117,11 @@
   height: calcSize(2);
   width: calcSize(2);
   padding: calcSize(1);
+
   .sv-svg-icon {
     vertical-align: bottom;
   }
+
   &.sv-svg-icon {
     overflow: visible;
   }
@@ -131,6 +146,7 @@
     box-shadow: 0px 0px 0px calcSize(0.25) rgba(0, 0, 0, 0.16);
   }
 }
+
 .svc-string-editor:focus-within {
   .svc-string-editor__border {
     display: flex;
@@ -144,29 +160,32 @@
     box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $primary;
   }
 }
+
 .svc-string-editor.svc-string-editor--error:focus-within {
   .svc-string-editor__border {
     box-shadow: $shadow-medium, 0px 0px 0px calcSize(0.25) $red;
   }
 }
+
 .sd-boolean {
   .sv-string-editor:focus-within {
     white-space: nowrap;
   }
 }
+
 .sd-rating {
   .sd-rating__item:focus-within {
     border: calcSize(0.25) solid $primary;
 
     &:not(.sd-rating__min-text),
     &:not(.sd-rating__max-text) {
-    .svc-string-editor:focus-within {
-      .svc-string-editor__border {
-        display: none;
+      .svc-string-editor:focus-within {
+        .svc-string-editor__border {
+          display: none;
+        }
       }
     }
   }
-}
 }
 
 .sd-table__cell--actions,
@@ -175,6 +194,7 @@
     width: calcSize(2);
   }
 }
+
 .sd-table__cell--column-title {
   .svc-matrix-cell:not(:focus):focus-within {
     .svc-matrix-cell--selected {
@@ -183,12 +203,14 @@
       display: block;
     }
   }
+
   .svc-string-editor:focus-within {
     .svc-string-editor__border {
       display: none;
     }
   }
 }
+
 .sd-item__control-label {
   .svc-string-editor:focus-within {
     .svc-string-editor__border {
@@ -197,10 +219,12 @@
     }
   }
 }
+
 .svc-string-editor {
+
   &:hover,
   &:focus-within {
-    & ~ .sd-question__required-text {
+    &~.sd-question__required-text {
       visibility: hidden;
     }
   }

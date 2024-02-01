@@ -355,6 +355,7 @@ var spanishTranslation = {
     markRequired: "Marcar según sea necesario",
     removeRequiredMark: "Quitar la marca requerida",
     isAllRowRequired: "Requerir respuesta para todas las filas",
+    eachRowUnique: "Evitar respuestas duplicadas en filas",
     requiredErrorText: "Texto de error requerido",
     startWithNewLine: "¿Empieza con la nueva línea?",
     rows: "Número de filas",
@@ -1037,8 +1038,8 @@ var spanishTranslation = {
     "--primary-foreground": "Color primario de primer plano",
     "--foreground": "Color de primer plano",
     "--base-unit": "Unidad base",
+    advancedMode: "Modo avanzado",
     groupGeneral: "General",
-    groupAdvanced: "Avanzado",
     groupHeader: "Encabezado",
     groupBackground: "Fondo",
     groupAppearance: "Apariencia",
@@ -1067,11 +1068,9 @@ var spanishTranslation = {
     backgroundImageAttachmentScroll: "Pergamino",
     panelBackgroundTransparency: "Opacidad del fondo del panel",
     questionBackgroundTransparency: "Opacidad de fondo de la pregunta",
-    questionPanel: "Fondo del panel y radio de esquina",
     questionTitle: "Fuente del título de la pregunta",
-    questionDescription: "Fuente de descripción de la pregunta",
     editorPanel: "Elemento de entrada",
-    editorFont: "Fuente del elemento de entrada",
+    backgroundCornerRadius: "Fondo y radio de vértice",
     backcolor: "Fondo predeterminado",
     hovercolor: "Pasar el cursor de fondo",
     borderDecoration: "Decoración de bordes",
@@ -1079,7 +1078,9 @@ var spanishTranslation = {
     accentForeground: "Primer plano de acento",
     primaryForecolor: "Color predeterminado",
     primaryForecolorLight: "Color deshabilitado",
-    linesColors: "Colores de línea menores",
+    colorsTitle: "Colores",
+    font: "Fuente",
+    lines: "Lineas",
     borderDefault: "Oscuro",
     borderLight: "Encendedor",
     fontFamily: "Familia de fuentes",
@@ -1096,7 +1097,8 @@ var spanishTranslation = {
     surveyTitle: "Fuente del título de la encuesta",
     surveyDescription: "Fuente de descripción de la encuesta",
     pageTitle: "Fuente del título de la página",
-    pageDescription: "Fuente de descripción de la página",
+    titleFont: "Fuente del título",
+    descriptionFont: "Fuente descriptiva",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Agregar efecto de sombra",
@@ -1105,8 +1107,7 @@ var spanishTranslation = {
     boxShadowSpread: "Propagación",
     boxShadowDrop: "Soltar",
     boxShadowInner: "Interior",
-    questionShadow: "Efectos de sombra",
-    editorShadow: "Efectos de sombra del elemento de entrada",
+    shadow: "Efectos de sombra",
     headerView: "Vista",
     headerViewBasic: "Básico",
     headerViewAdvanced: "Avanzado",
@@ -1510,3 +1511,12 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Las opciones se cargan desde un servicio web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ir a la configuración"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vista previa de las opciones de elección cargadas"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Evitar respuestas duplicadas en filas"
+// theme.advancedMode: "Advanced mode" => "Modo avanzado"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Fondo y radio de vértice"
+// theme.colorsTitle: "Colors" => "Colores"
+// theme.font: "Font" => "Fuente"
+// theme.lines: "Lines" => "Lineas"
+// theme.titleFont: "Title font" => "Fuente del título"
+// theme.descriptionFont: "Description font" => "Fuente descriptiva"
+// theme.shadow: "Shadow effects" => "Efectos de sombra"

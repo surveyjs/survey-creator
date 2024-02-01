@@ -1,5 +1,6 @@
 import { ListModel, Action, IAction, Base, createDropdownActionModel, PageModel, ComputedUpdater, surveyLocalization } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { Translation, createImportCSVAction, createExportCSVAction } from "./translation";
@@ -14,7 +15,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
 
   public model: Translation;
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("translation", this);
     this.sidebarTab = this.creator.sidebar.addTab("translation");
     this.sidebarTab.caption = editorLocalization.getString("ed.translationPropertyGridTitle");
@@ -22,6 +23,7 @@ export class TabTranslationPlugin implements ICreatorPlugin {
   }
   public activate(): void {
     this.model = new Translation(this.creator.survey, this.creator);
+    this.model.settingsSurvey.locale = this.creator.locale;
     this.model.readOnly = this.creator.readOnly;
     this.model.translationStringVisibilityCallback = (obj: Base, propertyName: string, visible: boolean) => {
       const options = { obj: obj, propertyName: propertyName, visible: visible };

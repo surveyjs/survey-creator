@@ -355,6 +355,7 @@ var italianTranslation = {
     markRequired: "Contrassegna come richiesto",
     removeRequiredMark: "Rimuovere il segno richiesto",
     isAllRowRequired: "Richiedi risposta per tutte le righe",
+    eachRowUnique: "Impedisci risposte duplicate nelle righe",
     requiredErrorText: "\"Obbligatoria\" messaggio di errore",
     startWithNewLine: "Visualizza la domanda su una nuova riga",
     rows: "Righe",
@@ -1037,8 +1038,8 @@ var italianTranslation = {
     "--primary-foreground": "Colore di primo piano primario",
     "--foreground": "Colore di primo piano",
     "--base-unit": "Unità base",
+    advancedMode: "Modalità avanzata",
     groupGeneral: "Generale",
-    groupAdvanced: "Avanzato",
     groupHeader: "Intestazione",
     groupBackground: "Sfondo",
     groupAppearance: "Apparenza",
@@ -1067,11 +1068,9 @@ var italianTranslation = {
     backgroundImageAttachmentScroll: "Scorrere",
     panelBackgroundTransparency: "Opacità dello sfondo del pannello",
     questionBackgroundTransparency: "Opacità dello sfondo della domanda",
-    questionPanel: "Sfondo del pannello e raggio d'angolo",
     questionTitle: "Tipo di carattere del titolo della domanda",
-    questionDescription: "Carattere della descrizione della domanda",
     editorPanel: "Elemento di input",
-    editorFont: "Tipo di carattere dell'elemento di input",
+    backgroundCornerRadius: "Sfondo e raggio d'angolo",
     backcolor: "Sfondo predefinito",
     hovercolor: "Sfondo al passaggio del mouse",
     borderDecoration: "Decorazione del bordo",
@@ -1079,7 +1078,9 @@ var italianTranslation = {
     accentForeground: "Primo piano in primo piano",
     primaryForecolor: "Colore predefinito",
     primaryForecolorLight: "Colore disabilitato",
-    linesColors: "Colori di linea secondari",
+    colorsTitle: "Colori",
+    font: "Font",
+    lines: "Poema",
     borderDefault: "Scuro",
     borderLight: "Accendino",
     fontFamily: "Famiglia di caratteri",
@@ -1096,7 +1097,8 @@ var italianTranslation = {
     surveyTitle: "Carattere del titolo del sondaggio",
     surveyDescription: "Carattere della descrizione dell'indagine",
     pageTitle: "Carattere del titolo della pagina",
-    pageDescription: "Carattere della descrizione della pagina",
+    titleFont: "Carattere del titolo",
+    descriptionFont: "Carattere di descrizione",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Aggiungi effetto ombra",
@@ -1105,8 +1107,7 @@ var italianTranslation = {
     boxShadowSpread: "Diffusione",
     boxShadowDrop: "Goccia",
     boxShadowInner: "Interno",
-    questionShadow: "Effetti ombra",
-    editorShadow: "Effetti di ombreggiatura dell'elemento di input",
+    shadow: "Effetti ombra",
     headerView: "Vista",
     headerViewBasic: "Basico",
     headerViewAdvanced: "Avanzato",
@@ -1494,3 +1495,12 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Le scelte vengono caricate da un servizio Web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Vai alle impostazioni"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Anteprima delle opzioni di scelta caricate"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Impedisci risposte duplicate nelle righe"
+// theme.advancedMode: "Advanced mode" => "Modalità avanzata"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Sfondo e raggio d'angolo"
+// theme.colorsTitle: "Colors" => "Colori"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Poema"
+// theme.titleFont: "Title font" => "Carattere del titolo"
+// theme.descriptionFont: "Description font" => "Carattere di descrizione"
+// theme.shadow: "Shadow effects" => "Effetti ombra"

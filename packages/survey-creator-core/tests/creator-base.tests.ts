@@ -42,13 +42,12 @@ import {
   getElementWrapperComponentData,
   getElementWrapperComponentName,
   getQuestionContentWrapperComponentName,
-  ICreatorPlugin,
   isStringEditable
 } from "../src/creator-base";
 import { SurveyHelper } from "../src/survey-helper";
 import { CreatorTester } from "./creator-tester";
 import { EditorLocalization, editorLocalization } from "../src/editorLocalization";
-import { EmptySurveyCreatorOptions, settings } from "../src/creator-settings";
+import { ICreatorPlugin, settings } from "../src/creator-settings";
 import { PropertyGridEditorCollection } from "../src/property-grid/index";
 import { PropertyGridEditorMatrixItemValues } from "../src/property-grid/matrices";
 import { ObjectSelector } from "../src/property-grid/object-selector";
@@ -3494,6 +3493,59 @@ test("allowEdit and onElementAllowOperations", (): any => {
   creator.selectElement(question);
   expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
 });
+
+test("allowShowSettings and onElementAllowOperations", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "rating", name: "q1" }] };
+
+  let allowShowSettings: any = undefined;
+  creator.onElementAllowOperations.add((sender, options) => {
+    options.allowShowSettings = allowShowSettings;
+  });
+
+  const pageModel = creator.survey.pages[0];
+  const pageAdornerModel = new PageAdorner(creator, pageModel);
+  const question = creator.survey.getQuestionByName("q1");
+  const questionAdornerModel = new QuestionAdornerViewModel(creator, question, undefined);
+
+  creator.sidebar.flyoutMode = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+
+  allowShowSettings = undefined;
+  creator.sidebar.flyoutMode = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+
+  allowShowSettings = true;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeTruthy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeTruthy();
+
+  allowShowSettings = false;
+  creator.selectElement(pageModel);
+  expect(pageAdornerModel.getActionById("settings").visible).toBeFalsy();
+  creator.selectElement(question);
+  expect(questionAdornerModel.getActionById("settings").visible).toBeFalsy();
+});
+
 test("Carry-forward banner", (): any => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -3539,6 +3591,47 @@ test("Choices restful banner", (): any => {
   q1.choicesByUrl.url = "edf";
   expect(q1AdornerModel.isBannerShowing).toBeTruthy();
   expect(q1AdornerModel.createBannerParams()).toBeTruthy();
+});
+test("Custom messagePanel", (): any => {
+  Serializer.addProperty("selectbase", {
+    name: "prop1", choices: [0, 1, 2, 3],
+    onSetValue: function (obj: any, value: any) {
+      obj.setPropertyValue("prop1", value);
+      obj.setPropertyValue("isMessagePanelVisible", value > 0);
+    }
+  });
+  const creator = new CreatorTester();
+  let questionName;
+  creator.onCreateCustomMessagePanel.add((sender, options) => {
+    options.messageText = "Banner text#";
+    options.actionText = "Action text#";
+    questionName = options.question.name;
+    options.onClick = () => {
+      creator.selectElement(options.question, "prop1");
+    };
+  });
+  creator.JSON = {
+    elements: [
+      { type: "dropdown", name: "q1", choices: [1, 2, 3] },
+      { type: "text", name: "q2" }
+    ]
+  };
+  const q1 = <QuestionDropdownModel>creator.survey.getQuestionByName("q1");
+
+  const q1AdornerModel = new QuestionAdornerViewModel(creator, q1, undefined);
+  expect(q1AdornerModel.isBannerShowing).toBeFalsy();
+  q1.prop1 = 1;
+  expect(q1AdornerModel.isBannerShowing).toBeTruthy();
+  const bannerParams = q1AdornerModel.createBannerParams();
+  expect(questionName).toBe("q1");
+  expect(bannerParams.text).toBe("Banner text#");
+  expect(bannerParams.actionText).toBe("Action text#");
+  expect(creator.selectedElementName).toBe("survey");
+  bannerParams.onClick();
+  expect(creator.selectedElementName).toBe("q1");
+  q1.prop1 = 0;
+  expect(q1AdornerModel.isBannerShowing).toBeFalsy();
+  Serializer.removeProperty("selectbase", "prop1");
 });
 test("isTextInput", (): any => {
   const textarea = document.createElement("textarea");
@@ -3867,6 +3960,10 @@ test("Reason of question Added from toolbox, onclicking add question button, on 
   creator.survey.pages[0].addNewQuestion("text", "qqq1");
   expect(reason).toHaveLength(8);
   expect(reason[7]).toEqual("DROPPED_FROM_TOOLBOX");
+  expect(creator.selectedElementName).toBe("question7");
+  creator.convertCurrentQuestion("comment");
+  expect(reason).toHaveLength(9);
+  expect(reason[8]).toEqual("ELEMENT_CONVERTED");
 });
 test("Initial Property Grid category expanded state", (): any => {
   const creator = new CreatorTester();
@@ -4249,4 +4346,20 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   expect(creator.onCanDeleteItemCallback(survey, survey.pages[0], true)).toBeFalsy();
   expect(creator.onCanDeleteItemCallback(survey, survey.pages[1], true)).toBeFalsy();
   expect(creator.onCanDeleteItemCallback(survey, survey.pages[2], true)).toBeFalsy();
+});
+test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
+  const creator = new CreatorTester();
+  const func = () => {
+    return creator.onConditionQuestionsGetListCallback("test", creator.survey, undefined, []);
+  };
+  expect(func()).toBe("asc");
+  settings.logic.questionSortOrder = "none";
+  expect(func()).toBe("none");
+  let sortOrder = "asc";
+  creator.onConditionQuestionsGetList.add((sender, options) => {
+    options.sortOrder = sortOrder;
+  });
+  expect(func()).toBe("asc");
+  sortOrder = "test";
+  expect(func()).toBe("test");
 });

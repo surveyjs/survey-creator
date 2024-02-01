@@ -43,10 +43,10 @@
 </template>
 <script lang="ts" setup>
 import { VerticalResponsivityManager } from "survey-core";
-import type { CreatorBase } from "survey-creator-core";
+import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed, onMounted, onUnmounted, ref } from "vue";
-const props = defineProps<{ creator: CreatorBase }>();
+const props = defineProps<{ creator: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.creator.toolbox;
 });

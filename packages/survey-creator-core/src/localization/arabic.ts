@@ -355,6 +355,7 @@ export var arStrings = {
     markRequired: "وضع علامة كمطلوب",
     removeRequiredMark: "إزالة العلامة المطلوبة",
     isAllRowRequired: "المطالبة بالأجوبة لكل الصفوف",
+    eachRowUnique: "منع تكرار الاستجابات في الصفوف",
     requiredErrorText: "نص خطأ إلزامي السؤال",
     startWithNewLine: "إظهار السؤال في صف جديد",
     rows: "عدد الصفوف",
@@ -1037,8 +1038,8 @@ export var arStrings = {
     "--primary-foreground": "لون المقدمة الأساسي",
     "--foreground": "لون المقدمة",
     "--base-unit": "وحدة القاعدة",
+    advancedMode: "الوضع المتقدم",
     groupGeneral: "عام",
-    groupAdvanced: "متقدم",
     groupHeader: "راس",
     groupBackground: "خلفية",
     groupAppearance: "مظهر",
@@ -1067,11 +1068,9 @@ export var arStrings = {
     backgroundImageAttachmentScroll: "طومار",
     panelBackgroundTransparency: "عتامة خلفية اللوحة",
     questionBackgroundTransparency: "عتامة خلفية السؤال",
-    questionPanel: "خلفية اللوحة ونصف قطر الزاوية",
     questionTitle: "خط عنوان السؤال",
-    questionDescription: "خط وصف السؤال",
     editorPanel: "عنصر الإدخال",
-    editorFont: "خط عنصر الإدخال",
+    backgroundCornerRadius: "الخلفية ونصف قطر الزاوية",
     backcolor: "الخلفية الافتراضية",
     hovercolor: "خلفية التحويم",
     borderDecoration: "زخرفة الحدود",
@@ -1079,7 +1078,9 @@ export var arStrings = {
     accentForeground: "لهجة الصدارة",
     primaryForecolor: "اللون الافتراضي",
     primaryForecolorLight: "لون معطل",
-    linesColors: "ألوان الخطوط الثانوية",
+    colorsTitle: "الوان",
+    font: "الخط",
+    lines: "اسطر",
     borderDefault: "اظلم",
     borderLight: "أخف",
     fontFamily: "عائلة الخط",
@@ -1096,7 +1097,8 @@ export var arStrings = {
     surveyTitle: "خط عنوان الاستطلاع",
     surveyDescription: "خط وصف الاستطلاع",
     pageTitle: "خط عنوان الصفحة",
-    pageDescription: "خط وصف الصفحة",
+    titleFont: "خط العنوان",
+    descriptionFont: "خط الوصف",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "إضافة تأثير الظل",
@@ -1105,8 +1107,7 @@ export var arStrings = {
     boxShadowSpread: "انتشار",
     boxShadowDrop: "قطرة",
     boxShadowInner: "باطن",
-    questionShadow: "تأثيرات الظل",
-    editorShadow: "تأثيرات ظل عنصر الإدخال",
+    shadow: "تأثيرات الظل",
     headerView: "منظر",
     headerViewBasic: "أساسي",
     headerViewAdvanced: "متقدم",
@@ -1646,3 +1647,12 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "يتم تحميل الاختيارات من خدمة ويب."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "انتقل إلى الإعدادات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "معاينة خيارات الاختيار المحملة"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "منع تكرار الاستجابات في الصفوف"
+// theme.advancedMode: "Advanced mode" => "الوضع المتقدم"
+// theme.backgroundCornerRadius: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.colorsTitle: "Colors" => "الوان"
+// theme.font: "Font" => "الخط"
+// theme.lines: "Lines" => "اسطر"
+// theme.titleFont: "Title font" => "خط العنوان"
+// theme.descriptionFont: "Description font" => "خط الوصف"
+// theme.shadow: "Shadow effects" => "تأثيرات الظل"

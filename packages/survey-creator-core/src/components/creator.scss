@@ -10,7 +10,7 @@ survey-creator,
 
   -webkit-font-smoothing: antialiased;
 
-  * {
+  @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
@@ -123,13 +123,12 @@ survey-creator,
 .svc-creator__non-commercial-text {
   color: $primary-foreground;
   font-family: $font-family;
-  font-weight: bold;
   font-size: calcSize(2);
   vertical-align: middle;
+  padding: 12px 128px;
 
   a {
     color: $primary-foreground;
-    text-decoration: none;
   }
 }
 

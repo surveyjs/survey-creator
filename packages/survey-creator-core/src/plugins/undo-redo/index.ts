@@ -1,11 +1,12 @@
 import { SurveyModel } from "survey-core";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { UndoRedoController } from "./undo-redo-controller";
 import { UndoRedoManager } from "./undo-redo-manager";
 
 export class UndoRedoPlugin implements ICreatorPlugin {
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     this.model = new UndoRedoController(creator);
     this.model.createActions().forEach(action => creator.toolbar.actions.push(action));
     creator.registerShortcut("undo", {

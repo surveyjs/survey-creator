@@ -113,7 +113,7 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ### Render Survey Creator
 
-Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method:
+Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method *in the exact order shown below*:
 
 ```js
 // main.ts
@@ -232,6 +232,20 @@ function saveSurveyJson(url: string, json: object, saveNo: number, callback: Fun
 <template>
   <!-- ... -->
 </template>
+```
+
+If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
+
+```js
+// Server-side code for a NodeJS backend
+import { Model } from "survey-core";
+
+const incorrectSurveyJson = { ... };
+const survey = new Model(surveyJson);
+const correctSurveyJson = survey.toJSON();
+// ...
+// Save `correctSurveyJson` in a database
+// ...
 ```
 
 To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:

@@ -1,7 +1,7 @@
 import { Base, property, AdaptiveActionContainer, Action, ComputedUpdater, propertyArray } from "survey-core";
 import { settings } from "../../creator-settings";
 import { getLocString } from "../../editorLocalization";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { SidebarTabModel } from "./side-bar-tab-model";
 import { ResizeManager } from "../../utils/resizer";
 import { notShortCircuitAnd } from "../../utils/utils";
@@ -97,9 +97,9 @@ export class SidebarModel extends Base {
     }
   };
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     super();
-    this.onSidebarVisibilityChanged = (sender: CreatorBase, options: any) => {
+    this.onSidebarVisibilityChanged = (sender: SurveyCreatorModel, options: any) => {
       if (this.isDisposed) return;
       this.visible = options.show;
     };

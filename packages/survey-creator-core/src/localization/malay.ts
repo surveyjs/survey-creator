@@ -355,6 +355,7 @@ export var msStrings = {
     markRequired: "Tandakan mengikut keperluan",
     removeRequiredMark: "Mengalih keluar tanda yang diperlukan",
     isAllRowRequired: "Perlukan jawapan untuk semua baris",
+    eachRowUnique: "Mengelakkan respons pendua dalam baris",
     requiredErrorText: "Teks ralat diperlukan",
     startWithNewLine: "Mulakan dengan baris baharu?",
     rows: "Kiraan baris",
@@ -1037,8 +1038,8 @@ export var msStrings = {
     "--primary-foreground": "Warna latar depan utama",
     "--foreground": "Warna latar depan",
     "--base-unit": "Unit asas",
+    advancedMode: "Mod lanjutan",
     groupGeneral: "Umum",
-    groupAdvanced: "Lanjutan",
     groupHeader: "Pengepala",
     groupBackground: "Latar belakang",
     groupAppearance: "Penampilan",
@@ -1067,11 +1068,9 @@ export var msStrings = {
     backgroundImageAttachmentScroll: "Tatal",
     panelBackgroundTransparency: "Kelegapan latar belakang panel",
     questionBackgroundTransparency: "Kelegapan latar belakang soalan",
-    questionPanel: "Latar belakang panel dan jejari sudut",
     questionTitle: "Fon tajuk soalan",
-    questionDescription: "Fon perihalan soalan",
     editorPanel: "Unsur input",
-    editorFont: "Fon unsur input",
+    backgroundCornerRadius: "Latar belakang dan jejari sudut",
     backcolor: "Latar belakang lalai",
     hovercolor: "Latarbelakang penuding",
     borderDecoration: "Hiasan sempadan",
@@ -1079,7 +1078,9 @@ export var msStrings = {
     accentForeground: "Aksen latar depan",
     primaryForecolor: "Warna lalai",
     primaryForecolorLight: "Warna dinyahdayakan",
-    linesColors: "Warna garis kecil",
+    colorsTitle: "Warna",
+    font: "Fon",
+    lines: "Garisan",
     borderDefault: "Gelap",
     borderLight: "Lebih ringan",
     fontFamily: "Keluarga fon",
@@ -1096,7 +1097,8 @@ export var msStrings = {
     surveyTitle: "Fon tajuk tinjauan",
     surveyDescription: "Fon perihalan tinjauan",
     pageTitle: "Fon tajuk halaman",
-    pageDescription: "Fon perihalan halaman",
+    titleFont: "Fon tajuk",
+    descriptionFont: "Fon perihalan",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Menambah Kesan Bayang",
@@ -1105,8 +1107,7 @@ export var msStrings = {
     boxShadowSpread: "Penyebaran",
     boxShadowDrop: "Singgah",
     boxShadowInner: "Dalaman",
-    questionShadow: "Kesan bayang",
-    editorShadow: "Kesan bayang unsur input",
+    shadow: "Kesan bayang",
     headerView: "Lihat",
     headerViewBasic: "Asas",
     headerViewAdvanced: "Lanjutan",
@@ -1689,3 +1690,12 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.choicesLoadedFromWebText: "Choices are loaded from a web service." => "Pilihan dimuatkan dari perkhidmatan web."
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Pergi ke seting"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratonton pilihan pilihan yang dimuatkan"
+// pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mengelakkan respons pendua dalam baris"
+// theme.advancedMode: "Advanced mode" => "Mod lanjutan"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Latar belakang dan jejari sudut"
+// theme.colorsTitle: "Colors" => "Warna"
+// theme.font: "Font" => "Fon"
+// theme.lines: "Lines" => "Garisan"
+// theme.titleFont: "Title font" => "Fon tajuk"
+// theme.descriptionFont: "Description font" => "Fon perihalan"
+// theme.shadow: "Shadow effects" => "Kesan bayang"

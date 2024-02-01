@@ -1,5 +1,5 @@
 import { SurveyModel, QuestionPanelDynamicModel, ItemValue, PanelModel, Base, FunctionFactory, Question, QuestionHtmlModel, QuestionDropdownModel, SurveyElement, defaultV2Css } from "survey-core";
-import { ISurveyCreatorOptions, EmptySurveyCreatorOptions } from "../../creator-settings";
+import { ISurveyCreatorOptions, EmptySurveyCreatorOptions, settings } from "../../creator-settings";
 import { PropertyEditorSetupValue } from "../../property-grid/index";
 import { SurveyLogicItem, SurveyLogicAction } from "./logic-items";
 import { SurveyLogicType, getLogicString } from "./logic-types";
@@ -501,7 +501,9 @@ export class LogicItemEditor extends PropertyEditorSetupValue {
       }
       res.push(itemValue);
     }
-    SurveyHelper.sortItems(res);
+    if(settings.logic.questionSortOrder === "asc") {
+      SurveyHelper.sortItems(res);
+    }
     return res;
   }
   private isElementInInitialSelection(logicTypeName: string, el: Base): boolean {
