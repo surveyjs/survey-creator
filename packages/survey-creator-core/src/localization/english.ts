@@ -144,6 +144,7 @@ export var enStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "Auto-translate All",
+    translateUsigAIFrom: "Translate from: ",
     translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
