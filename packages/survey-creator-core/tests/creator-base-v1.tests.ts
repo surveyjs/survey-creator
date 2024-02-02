@@ -26,6 +26,7 @@ import { ObjectSelectorModel } from "../src/property-grid/object-selector";
 import { PageNavigatorViewModel } from "../src/components/page-navigator/page-navigator";
 import { QuestionAdornerViewModel } from "../src/components/question";
 import { PagesController } from "../src/pages-controller";
+import { settings as creatorSettings } from "../src/creator-settings";
 
 export * from "../src/components/link-value";
 
@@ -687,7 +688,8 @@ test("Do not call onPageAdded on pages move", () => {
   expect(counter).toEqual(2);
 });
 
-test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab", () => {
+test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab collapsePropertyTab, allowExpandMultipleCategories = true", () => {
+  creatorSettings.propertyGrid.allowExpandMultipleCategories = true;
   const creator = new CreatorTester();
   const page = creator.survey.pages[0];
   const q1 = page.addNewQuestion("text", "q1");
@@ -705,6 +707,7 @@ test("creator collapseAllPropertyTabs expandAllPropertyTabs expandPropertyTab co
   expect(logicPanel.isExpanded).toBeTruthy();
   creator.collapseAllPropertyTabs();
   expect(logicPanel.isExpanded).toBeFalsy();
+  creatorSettings.propertyGrid.allowExpandMultipleCategories = false;
 });
 
 test("generate element name based on another survey", () => {
