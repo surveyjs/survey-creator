@@ -15,6 +15,10 @@
   width: 100%;
 }
 
+.svc-flex-row.svc-full-container {
+  height: 0;
+  flex-grow: 1;
+}
 .svc-flex-row__element--growing {
   flex: 1;
   overflow: auto;
@@ -70,10 +74,6 @@
 }
 .svc-footer-bar {
   .svc-toolbar-wrapper {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     height: calcSize(6);
 
     .sv-action-bar {
@@ -84,6 +84,7 @@
       height: calc(6 * #{$base-unit});
       background: $background;
       border-top: 1px solid $border;
+      box-sizing: border-box;
     }
   }
 }
