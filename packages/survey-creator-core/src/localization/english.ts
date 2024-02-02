@@ -254,6 +254,77 @@ export var enStrings = {
   },
   // Property Editors
   pe: {
+    panel: {
+      name: "Panel name",
+      title: "Panel title",
+      description: "Panel description",
+      // visible: "Make panel visible", 
+      // readOnly: "Make panel read-only",
+      // isRequired: "Make panel required",
+      visibleIf: "Make the panel visible if",
+      requiredIf: "Make the panel required if",
+      questionsOrder: "Question order within the panel",
+      page: "Move the panel to page",
+      startWithNewLine: "Display the panel on a new line",
+      state: "Panel collapse state",
+      width: "Inline panel width",
+      minWidth: "Minimum panel width",
+      maxWidth: "Maximum panel width",
+      showNumber: "Number panels",
+      showQuestionNumbers: "Question numbering",
+      questionStartIndex: "Question indexing type"
+    },
+    question: {
+      name: "Question name",
+      title: "Question title",
+      description: "Question description",
+      // visible: "Make question visible", 
+      // readOnly: "Make question read-only",
+      // isRequired: "Make question required",
+      visibleIf: "Make the question visible if",
+      requiredIf: "Make the question required if",
+      page: "Move the question to page",
+      state: "Question box collapse state",
+      hideNumber: "Hide the question number",
+      titleLocation: "Question title alignment",
+      descriptionLocation: "Question description alignment",
+      errorLocation: "Error message alignment",
+      indent: "Increase the inner indent",
+      width: "Initial question width",
+      minWidth: "Minimum question width",
+      maxWidth: "Maximum question width",
+      // choices: {
+      //   visibleIf: "Make the option visible if",
+      //   enableIf: "Make the option selectable if"
+      // }
+    },
+    signaturepad: {
+      signatureWidth: "Signature area width",
+      signatureHeight: "Signature area height",
+      signatureAutoScaleEnabled: "Auto-scale the signature area",
+      showPlaceholder: "Show a placeholder within signature area",
+      placeholder: "Placeholder text",
+      allowClear: "Show the Clear button within signature area",
+      penMinWidth: "Minimum stroke width",
+      penMaxWidth: "Maximum stroke width",
+      penColor: "Stroke color"
+    },
+    comment: {
+      rows: "Input field height (in lines)"
+    },
+    expression: {
+      name: "Expression name",
+      title: "Expression title",
+      description: "Expression description",
+      expression: "Expression",
+    },
+    imageHeight: "Display area height",
+    imageWidth: "Display area width",
+    valueName: "Join identifier",
+    rateDescriptionLocation: "Label alignment",
+    size: "Input field width (in characters)",
+    cellErrorLocation: "Cell error message alignment",
+
     apply: "Apply",
     ok: "OK",
     save: "Save",
@@ -290,7 +361,7 @@ export var enStrings = {
     fastEntryNonUniqueError: "Value '{0}' is not unique",
     fastEntryChoicesCountError: "Please limit the number of items from {0} to {1}",
     fastEntryChoicesMinCountError: "Please enter at least {0} items",
-    fastEntryPlaceholder: "You can set data in the following format:\nvalue1|text\nvalue2",
+    fastEntryPlaceholder: "Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules.",
     formEntry: "Form Entry",
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",
@@ -299,7 +370,6 @@ export var enStrings = {
     conditionSelectPage: "Select page...",
     conditionSelectPanel: "Select panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
-    expressionHelp: "Use curly brackets to access answers: `{question1} + {question2}`. Expressions also support functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`, and others",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
     aceEditorPanelTitle: "Current panel",
@@ -307,86 +377,89 @@ export var enStrings = {
     assistantTitle: "Available questions",
     cellsEmptyRowsColumns: "There is should be at least one column or row",
     showPreviewBeforeComplete: "Preview answers before submitting the survey",
-    overridingPropertyPrefix: "Set by ",
+    overridingPropertyPrefix: "Enabled by a condition",
     resetToDefaultCaption: "Reset",
     propertyIsEmpty: "Please enter a value",
     propertyIsNoUnique: "Please enter a unique value",
     propertyNameIsNotUnique: "Please enter a unique name",
     propertyNameIsIncorrect: "Do not use reserved words: \"item\", \"choice\", \"panel\", \"row\".",
-    listIsEmpty: "No items have been added yet",
-    "listIsEmpty@choices": "No choices have been added yet",
-    "addNew@choices": "Add a choice",
+    listIsEmpty: "You don't have any items yet",
+    "listIsEmpty@choices": "You don't have any choices yet",
+    "listIsEmpty@columns": "You don't have any columns yet",
+    "listIsEmpty@rows": "You don't have any rows yet",
+    "listIsEmpty@validators": "You don't have any validation rules yet",
+    "addNew@choices": "Add new choice",
+    "addNew@columns": "Add new column",
+    "addNew@rows": "Add new row",
+    "addNew@validators": "Add new rule",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",
     rowid: "Row ID",
-    imageLink: "Image or video URL",
+    imageLink: "Image or video file URL",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
-    url: "Service URL",
-    path: "Path to data within the service",
-    valueName: "Store answers in the following JSON field",
+    url: "Web service's URL",
+    path: "Path to data",
     choicesbyurl: {
-      valueName: "Get values from the following JSON field"
+      valueName: "Get value to store from the following property"
     },
-    titleName: "Get display texts from the following JSON field",
-    imageLinkName: "Get image URLs from the following JSON field",
-    allowEmptyResponse: "Allow empty response",
+    titleName: "Get value to display from the following property",
+    imageLinkName: "Get file URLs from the following property",
+    allowEmptyResponse: "Accept empty response",
     titlePlaceholder: "Title",
     surveyTitlePlaceholder: "Survey Title",
     pageTitlePlaceholder: "Page {num}",
     descriptionPlaceholder: "Description",
     surveyDescriptionPlaceholder: "Description",
     pageDescriptionPlaceholder: "Description",
-    showOtherItem: "Allow the Other option",
-    otherText: "Other option text",
-    showNoneItem: "Allow the None option",
-    showRefuseItem: "Allow the Refuse to Answer option",
-    showDontKnowItem: "Allow the Don't Know option",
-    noneText: "None option text",
-    showSelectAllItem: "Allow the Select All option",
-    selectAllText: "Select All option text",
+    showOtherItem: "Enable the \"Other\" option",
+    otherText: "Rename the \"Other\" option",
+    showNoneItem: "Enable the \"None\" option",
+    showRefuseItem: "Enable the \"Refuse to Answer\" option",
+    showDontKnowItem: "Enable the \"Don't Know\" option",
+    noneText: "Rename the \"None\" option",
+    showSelectAllItem: "Enable the \"Select All\" option",
+    selectAllText: "Rename the \"Select All\" option",
     choicesMin: "Minimum value for auto-generated items",
     choicesMax: "Maximum value for auto-generated items",
-    choicesStep: "Step for auto-generated items",
+    choicesStep: "Step value for auto-generated items",
     name: "Name",
     title: "Title",
-    cellType: "Cell type",
+    cellType: "Cell input type",
     colCount: "Column count",
-    choicesOrder: "Choices sort order",
+    choicesOrder: "Choice order",
     visible: "Visible",
     isRequired: "Required",
     markRequired: "Mark as required",
     removeRequiredMark: "Remove the required mark",
-    isAllRowRequired: "Require answer for all rows",
+    isAllRowRequired: "Require an answer in each row",
     eachRowUnique: "Prevent duplicate responses in rows",
-    requiredErrorText: "\"Required\" error message",
+    requiredErrorText: "Error message for required questions",
     startWithNewLine: "Display the question on a new line",
     rows: "Rows",
     cols: "Columns",
-    placeholder: "Input area placeholder",
+    placeholder: "Placeholder text within input field",
     showPreview: "Show preview area",
     storeDataAsText: "Store file content in JSON result as text",
     maxSize: "Maximum file size (in bytes)",
-    imageHeight: "Image height",
-    imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Columns layout",
-    addRowLocation: "Add Row button location",
+    addRowLocation: "Add Row button alignment",
     addRowText: "Add Row button text",
     removeRowText: "Remove Row button text",
-    rateMin: "Minimum rate value",
-    rateMax: "Maximum rate value",
-    rateStep: "Rate step",
-    minRateDescription: "Minimum rate value description",
-    maxRateDescription: "Maximum rate value description",
+    rateMin: "Minimum rating value",
+    rateMax: "Maximum rating value",
+    rateStep: "Step value",
+    minRateDescription: "Minimum value label",
+    maxRateDescription: "Maximum value label",
     inputType: "Input type",
     optionsCaption: "Option placeholder",
     defaultValue: "Default Answer",
     cellsDefaultRow: "Default texts",
     surveyEditorTitle: "Edit survey settings",
     qEditorTitle: "Edit: {0}",
-    maxLength: "Maximum length (in characters)",
+    maxLength: "Maximum character limit",
     buildExpression: "Build",
     editExpression: "Edit",
     and: "and",
@@ -426,20 +499,14 @@ export var enStrings = {
     showCompletedPage: "Show the Survey Complete page",
     goNextPageAutomatic: "Proceed to the next page automatically",
     showProgressBar: "Progress bar location",
-    questionTitleLocation: "Question title location",
+    questionTitleLocation: "Question title alignment",
     requiredText: "Required symbol(s)",
-    questionStartIndex: "Start index (number or letter)",
-    showQuestionNumbers: "Question numbering",
     questionTitleTemplate: "Question title template, default is: '{no}. {require} {title}'",
-    questionErrorLocation: "Error message location",
+    questionErrorLocation: "Error message alignment",
     focusFirstQuestionAutomatic: "Focus first question on a new page",
     questionsOrder: "Element order on the page",
     maxTimeToFinish: "Time limit to finish the survey (in seconds)",
     maxTimeToFinishPage: "Time limit to finish one page (in seconds)",
-    image: {
-      imageHeight: "Image height (in CSS-accepted values)",
-      imageWidth: "Image width (in CSS-accepted values)"
-    },
     survey: {
       title: "Title"
     },
@@ -447,30 +514,26 @@ export var enStrings = {
       title: "Title",
       maxTimeToFinish: "Time limit to finish the page (in seconds)",
     },
-    question: {
-      page: "Parent page"
-    },
     showTimerPanel: "Timer location",
     showTimerPanelMode: "Timer mode",
     renderMode: "Panel display mode",
-    allowAddPanel: "Allow adding panels",
-    allowRemovePanel: "Allow removing panels",
+    allowAddPanel: "Enable panel addition",
+    allowRemovePanel: "Enable panel removal",
     noEntriesText: "Empty entries text",
     panelAddText: "Add Panel button text",
     panelRemoveText: "Remove Panel button text",
     isSinglePage: "Show all elements on one page",
     html: "HTML markup",
-    expression: "Expression",
     setValue: "Answer",
-    dataFormat: "Image format",
-    allowAddRows: "Allow adding rows",
-    allowRemoveRows: "Allow removing rows",
-    allowRowsDragAndDrop: "Allow row drag and drop",
-    responsiveImageSizeHelp: "Does not apply if you specify the exact image width or height.",
-    minImageWidth: "Minimum image width",
-    maxImageWidth: "Maximum image width",
-    minImageHeight: "Minimum image height",
-    maxImageHeight: "Maximum image height",
+    dataFormat: "Storage format",
+    allowAddRows: "Enable row addition",
+    allowRemoveRows: "Enable row removal",
+    allowRowsDragAndDrop: "Enable row reordering",
+    responsiveImageSizeHelp: "Does not apply if you specify the exact display area width or height.",
+    minImageWidth: "Minimum display area width",
+    maxImageWidth: "Maximum display area width",
+    minImageHeight: "Minimum display area height",
+    maxImageHeight: "Maximum display area height",
     minValue: "Minimum value",
     maxValue: "Maximum value",
     minLength: "Minimum length (in characters)",
@@ -482,10 +545,10 @@ export var enStrings = {
       text: "Error message",
       expression: "Validation expression"
     },
-    totalText: "Total row text",
-    totalType: "Total type",
-    totalExpression: "Total expression",
-    totalDisplayStyle: "Total value display style",
+    totalText: "Total row header",
+    totalType: "Aggregation method",
+    totalExpression: "Total value expression",
+    totalDisplayStyle: "Total value display format",
     totalCurrency: "Currency",
     totalFormat: "Formatted string",
     logo: "Logo (URL or base64-encoded string)",
@@ -494,7 +557,7 @@ export var enStrings = {
     maxOthersLength: "Maximum comment length (in characters)",
     autoGrowComment: "Auto-expand comment area if necessary",
     allowResizeComment: "Allow users to resize text areas",
-    textUpdateMode: "Update text question value",
+    textUpdateMode: "Update input field value",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     navigateToUrl: "Navigate to URL",
@@ -505,20 +568,20 @@ export var enStrings = {
     loadingHtml: "Markup to show while survey model is loading",
     commentText: "Comment area text",
     autocomplete: "Autocomplete type",
-    labelTrue: "\"True\" label",
-    labelFalse: "\"False\" label",
+    labelTrue: "Label for \"True\"",
+    labelFalse: "Label for \"False\"",
     allowClear: "Show the Clear button",
-    displayStyle: "Value display style",
+    displayStyle: "Display format",
     format: "Formatted string",
     maximumFractionDigits: "Maximum fractional digits",
     minimumFractionDigits: "Minimum fractional digits",
     useGrouping: "Display grouping separators",
-    allowMultiple: "Allow multiple files",
-    allowImagesPreview: "Preview images",
+    allowMultiple: "Enable multiple file upload",
+    allowImagesPreview: "Preview uploaded images",
     acceptedTypes: "Accepted file types",
-    waitForUpload: "Wait for the upload to complete",
+    waitForUpload: "Wait for upload to complete",
     needConfirmRemoveFile: "Confirm file deletion",
-    detailPanelMode: "Detail panel location",
+    detailPanelMode: "Row expansion alignment",
     minRowCount: "Minimum row count",
     maxRowCount: "Maximum row count",
     confirmDelete: "Confirm row deletion",
@@ -537,50 +600,46 @@ export var enStrings = {
     showRangeInProgress: "Show progress bar",
     templateTitleLocation: "Question title location",
     panelRemoveButtonLocation: "Remove Panel button location",
-    hideIfRowsEmpty: "Hide the question if there are no rows",
+    hideIfRowsEmpty: "Hide the question if it has no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
-    rateValues: "Custom rate values",
-    rateCount: "Rate count",
-    autoGenerate: "How to specify rate values?",
-    hideIfChoicesEmpty: "Hide the question if it contains no choices",
-    hideNumber: "Hide question number",
+    rateValues: "Custom rating values",
+    rateCount: "Rating count",
+    autoGenerate: "Rating configuration",
+    hideIfChoicesEmpty: "Hide the question if it has no choices",
     minWidth: "Minimum width (in CSS-accepted values)",
     maxWidth: "Maximum width (in CSS-accepted values)",
     width: "Width (in CSS-accepted values)",
     showHeader: "Show column headers",
     horizontalScroll: "Show horizontal scrollbar",
-    columnMinWidth: "Minimum column width (in CSS-accepted values)",
-    rowTitleWidth: "Row header width (in CSS-accepted values)",
-    valueTrue: "\"True\" value",
-    valueFalse: "\"False\" value",
+    columnMinWidth: "Minimum column width",
+    rowTitleWidth: "Row header width",
+    valueTrue: "Value to store when \"True\" is selected",
+    valueFalse: "Value to store when \"False\" is selected",
     minErrorText: "\"Value is below minimum\" error message",
     maxErrorText: "\"Value exceeds maximum\" error message",
     otherErrorText: "\"Empty comment\" error message",
-    keyDuplicationError: "\"Non-unique key value\" error message",
-    minSelectedChoices: "Minimum selected choices",
-    maxSelectedChoices: "Maximum selected choices",
+    keyDuplicationError: "Error message for duplicate responses",
+    minSelectedChoices: "Minimum choices to select",
+    maxSelectedChoices: "Maximum choices to select",
     showClearButton: "Show the Clear button",
-    showNumber: "Show panel number",
     logoWidth: "Logo width (in CSS-accepted values)",
     logoHeight: "Logo height (in CSS-accepted values)",
     readOnly: "Read-only",
-    enableIf: "Editable if",
+    enableIf: "Disable the read-only mode if",
     emptyRowsText: "\"No rows\" message",
-    size: "Input field size (in characters)",
-    separateSpecialChoices: "Separate special choices (None, Other, Select All)",
+    separateSpecialChoices: "Separate special choices",
     choicesFromQuestion: "Copy choices from the following question",
-    choicesFromQuestionMode: "Which choices to copy?",
-    showCommentArea: "Show the comment area",
-    commentPlaceholder: "Comment area placeholder",
-    displayRateDescriptionsAsExtremeItems: "Display rate descriptions as extreme values",
+    choicesFromQuestionMode: "Which choice options to copy",
+    showCommentArea: "Add a comment box",
+    commentPlaceholder: "Placeholder text for the comment box",
+    displayRateDescriptionsAsExtremeItems: "Show the labels as extreme values",
     rowsOrder: "Row order",
     columnsLayout: "Column layout",
     columnColCount: "Nested column count",
-    state: "Panel expand state",
     correctAnswer: "Correct Answer",
     defaultPanelValue: "Default Values",
     cells: "Cell Texts",
-    keyName: "Key column",
+    keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
       text: "Alt text"
     },
@@ -595,18 +654,21 @@ export var enStrings = {
       bottom: "In the bottom"
     },
     tabs: {
+      panel: {
+        layout: "Panel Layout",
+      },
       general: "General",
       fileOptions: "Options",
       html: "HTML Editor",
       columns: "Columns",
       rows: "Rows",
-      choices: "Choices",
+      choices: "Choice Options",
       items: "Items",
       visibleIf: "Visible If",
       enableIf: "Editable If",
       requiredIf: "Required If",
-      rateValues: "Rate Values",
-      choicesByUrl: "Choices from a RESTful Service",
+      rateValues: "Rating Values",
+      choicesByUrl: "Choices from a Web Service",
       matrixChoices: "Default Choices",
       multipleTextItems: "Text Inputs",
       numbering: "Numbering",
@@ -619,30 +681,27 @@ export var enStrings = {
       triggers: "Triggers",
       templateTitle: "Title template",
       totals: "Totals",
-      logic: "Logic",
+      logic: "Conditions",
       layout: "Layout",
       data: "Data",
       validation: "Validation",
-      cells: "Cell Texts",
+      cells: "Individual Cell Texts",
       showOnCompleted: "Survey Complete",
       logo: "Logo in Survey Header",
       slider: "Slider",
       expression: "Expression",
+      questionSettings: "Question Settings",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",
     items: "Items",
-    choicesVisibleIf: "Choices are visible if",
-    choicesEnableIf: "Choices are selectable if",
-    columnsEnableIf: "Columns are visible if",
-    rowsEnableIf: "Rows are visible if",
-    indent: "Add indents",
-    panel: {
-      indent: "Add outer indents"
-    },
-    innerIndent: "Add inner indents",
-    defaultValueFromLastRow: "Take default values from the last row",
-    defaultValueFromLastPanel: "Take default values from the last panel",
+    choicesVisibleIf: "Make choices visible if",
+    choicesEnableIf: "Make choices selectable if",
+    columnsEnableIf: "Make columns visible if",
+    rowsEnableIf: "Make rows visible if",
+    innerIndent: "Increase the inner indent",
+    defaultValueFromLastRow: "Use answers from the last row as default",
+    defaultValueFromLastPanel: "Use answers from the last panel as default",
     enterNewValue: "Please, enter the value.",
     noquestions: "There are no questions in the survey.",
     createtrigger: "Please create a trigger",
@@ -663,39 +722,28 @@ export var enStrings = {
     triggerRunExpressionEmpty: "Please enter a valid expression",
     emptyExpressionPlaceHolder: "Type expression here...",
     noFile: "No file choosen",
-    clearIfInvisible: "Clear the value if the question becomes hidden",
-    valuePropertyName: "Value property name",
-    searchEnabled: "Enable search",
+    clearIfInvisible: "Clear hidden question values",
+    valuePropertyName: "Store values in the following property",
+    searchEnabled: "Enable search-as-you-type",
     hideSelectedItems: "Hide selected items",
-    closeOnSelect: "Close the dropdown after selection",
-    signatureWidth: "Signature width",
-    signatureHeight: "Signature height",
-    verticalAlign: "Vertical alignment",
-    alternateRows: "Alternate rows",
-    columnsVisibleIf: "Columns are visible if",
-    rowsVisibleIf: "Rows are visible if",
-    otherPlaceholder: "Comment area placeholder",
-    signaturepad: {
-      showPlaceholder: "Show the placeholder",
-      placeholder: "Placeholder text",
-      signatureWidth: "Signature area width",
-      signatureHeight: "Signature area height",
-      signatureAutoScaleEnabled: "Auto-scale the signature area",
-      penMinWidth: "Minimum pen width",
-      penMaxWidth: "Maximum pen width",
-    },
-    filePlaceholder: "File placeholder text",
-    photoPlaceholder: "Photo placeholder text",
-    fileOrPhotoPlaceholder: "File or photo placeholder text",
-    rateType: "Rate type" // Auto-generated string
+    closeOnSelect: "Collapse the dropdown upon selection",
+    verticalAlign: "Vertical alignment within cells",
+    alternateRows: "Alternate row colors",
+    columnsVisibleIf: "Make columns visible if",
+    rowsVisibleIf: "Make rows visible if",
+    otherPlaceholder: "Placeholder text for the comment box",
+    filePlaceholder: "Placeholder text for Local file",
+    photoPlaceholder: "Placeholder text for Camera",
+    fileOrPhotoPlaceholder: "Placeholder text for Local file or Camera",
+    rateType: "Rating icon"
   },
   // Property values
   pv: {
     "true": "true",
     "false": "false",
-    "file": "Local files",
+    "file": "Local file",
     "camera": "Camera",
-    "file-camera": "Local files or camera",
+    "file-camera": "Local file or Camera",
     inherit: "Inherit",
     show: "Visible",
     hide: "Hidden",
@@ -708,6 +756,8 @@ export var enStrings = {
     asc: "Ascending",
     desc: "Descending",
     indeterminate: "Indeterminate",
+    selected: "Selected",
+    unselected: "Unselected",
     decimal: "decimal",
     currency: "currency",
     percent: "percent",
@@ -730,6 +780,7 @@ export var enStrings = {
     left: "Left",
     right: "Right",
     leftRight: "Left and right",
+    middle: "Middle",
     color: "color",
     date: "date",
     datetime: "datetime",
@@ -749,13 +800,16 @@ export var enStrings = {
     onPage: "Start on each page",
     edit: "Editable",
     display: "Read-only",
-    onComplete: "When the survey is completed",
-    onHidden: "When the question becomes hidden",
-    onHiddenContainer: "When the question or its panel/page becomes hidden",
     contain: "Contain",
     cover: "Cover",
     fill: "Fill",
+    onComplete: "Upon survey completion",
+    onHidden: "When question gets hidden",
+    onHiddenContainer: "When question or its panel/page gets hidden",
     clearInvisibleValues: {
+      none: "Never"
+    },
+    clearIfInvisible: {
       none: "Never"
     },
     inputType: {
@@ -792,10 +846,10 @@ export var enStrings = {
     buttons: "Completed pages (button UI)",
     underInput: "Under the input",
     underTitle: "Under the title",
-    onBlur: "On blur",
+    onBlur: "On lost focus",
     onTyping: "While typing",
     underRow: "Under the row",
-    underRowSingle: "Under the row, only one panel is visible",
+    underRowSingle: "Under the row, display one row expansion only",
     showNavigationButtons: {
       none: "Hidden"
     },
@@ -808,11 +862,8 @@ export var enStrings = {
     showTimerPanelMode: {
       all: "Both"
     },
-    detailPanelMode: {
-      none: "Hidden"
-    },
     addRowLocation: {
-      default: "Depends on matrix layout"
+      default: "Based on matrix layout"
     },
     panelsState: {
       default: "Users cannot expand or collapse panels",
@@ -823,12 +874,6 @@ export var enStrings = {
       auto: "Auto",
       static: "Static",
       responsive: "Responsive"
-    },
-    imageFit: {
-      none: "None",
-      contain: "Contain",
-      cover: "Cover",
-      fill: "Fill"
     },
     contentMode: {
       auto: "Auto",
@@ -842,17 +887,58 @@ export var enStrings = {
       dropdown: "Dropdown"
     },
     rateColorMode: {
-      default: "Default"
+      default: "Default",
+      scale: "Scale"
+    },
+    scaleColorMode: {
+      monochrome: "Monochrome",
+      colored: "Colored"
     },
     autoGenerate: {
-      "true": "Generate",
-      "false": "Enter manually"
+      "true": "Auto-generate",
+      "false": "Manual"
     },
     rateType: {
       labels: "Labels",
       stars: "Stars",
       smileys: "Smileys"
-    }
+    },
+    state: {
+      default: "Locked"
+    },
+    showQuestionNumbers: {
+      default: "Auto-numbering",
+      onpanel: "Reset on each panel",
+      off: "No numbering"
+    },
+    descriptionLocation: {
+      underTitle: "Under the question title",
+      underInput: "Under the input field"
+    },
+    selectToRankAreasLayout: {
+      horizontal: "Next to choices",
+      vertical: "Above choices"
+    },
+    displayStyle: {
+      decimal: "Decimal",
+      currency: "Currency",
+      percent: "Percentage",
+      date: "Date"
+    },
+    totalDisplayStyle: {
+      decimal: "Decimal",
+      currency: "Currency",
+      percent: "Percentage",
+      date: "Date"
+    },
+    rowsOrder: {
+      initial: "Original"
+    },
+    sum: "Sum",
+    count: "Count",
+    min: "Min",
+    max: "Max",
+    avg: "Avg"
   },
   // Operators
   op: {
@@ -917,21 +1003,133 @@ export var enStrings = {
     visibletrigger: "change visibility (deprecated)"
   },
   pehelp: {
-    cookieName: "Cookies prevent users from filling out the same survey twice.",
-    size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length.",
-    format: "Use {0} as a placeholder for the actual value.",
-    totalText: "Visible only when at least one column has Total type or Total expression.",
-    acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
-    columnColCount: "Applicable only to Radiogroup and Checkbox cell types.",
-    autocomplete: "Refer to the [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribute description for more information.",
-    valueName: "If you do not set this property, the answer will be stored in a field specified by the Name property.",
-    choicesbyurl: {
-      valueName: " "
+    panel: {
+      name: "A panel ID that is not visible to respondents.",
+      description: "Type a panel subtitle.",
+      isRequired: "Prevents survey submission unless at least one nested question has an answer.",
+      visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility.",
+      enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
+      requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
+      questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
+      questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
+      page: "Repositions the panel to the end of a selected page.",
+      innerIndent: "Adds space or margin between the question content and the left border of the question box.",
+      startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
+      state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
+      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
+      questionStartIndex: "Enter a number or letter with which you want to start numbering."
     },
-    keyName: "If the specified column contains identical values, the survey throws the \"Non-unique key value\" error.",
-    filePlaceholder: "Applies when \"Source type\" is \"Local files\" or when camera is unavailable",
-    photoPlaceholder: "Applies when \"Source type\" is \"Camera\".",
-    fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"."
+    question: {
+      name: "A question ID that is not visible to respondents.",
+      description: "Type a question subtitle.",
+      visibleIf: "Use the magic wand icon to set a conditional rule that determines question visibility.",
+      enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question.",
+      requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer.",
+      startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form.",
+      defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
+      resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or to the \"Default answer\" value (if either is set).",
+      setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response.",
+      setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input.",
+      page: "Repositions the question to the end of a selected page.",
+      state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed.",
+      titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default).",
+      descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default).",
+      errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose from: \"Top\" - an error text is placed at the top of the question box and \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      indent: "Adds space or margin between the question content and the left border of the question box.",
+      width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
+      surveyvalidator: {
+        expression: "Use the magic wand icon to set a validation rule for the question."
+      },
+    },
+    signaturepad: {
+      signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
+      signatureHeight: "Sets the height of the displayed signature area and the resulting image.",
+      signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions."
+    },
+    file: {
+      imageHeight: "Adjusts the height of the image in the survey results.",
+      imageWidth: "Adjusts the width of the image in the survey results.",
+    },
+    imagepicker: {
+      imageHeight: "Overrides the minimum and maximum height values.",
+      imageWidth: "Overrides the minimum and maximum width values.",
+      choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents.",
+    },
+    text: {
+      size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>.",
+      textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)."
+    },
+    comment: {
+      rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear."
+    },
+    columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents.",
+    rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents.",
+    columnMinWidth: "Accepts CSS values (px, %, in, pt, etc.).",
+    rowTitleWidth: "Accepts CSS values (px, %, in, pt, etc.).",
+    totalText: "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\".",
+    cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
+    keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a column, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
+    confirmDelete: "Triggers a prompt asking to confirm the row deletion.",
+    defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
+    keyName: "Reference a column ID to require a user to provide a unique response for each question within the specified column.",
+
+    detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed.",
+    imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
+    autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
+    allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
+    imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
+    choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",
+    title: "Type a user-friendly title to display.",
+    waitForUpload: "Ensures that users won't complete the survey until files are uploaded.",
+    minWidth: "Accepts CSS values (px, %, in, pt, etc.).",
+    maxWidth: "Accepts CSS values (px, %, in, pt, etc.).",
+    valueName: "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name.",
+    useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements.",
+    clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default).",
+    choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
+    showOtherItem: "When selected, users can include additional input in a separate comment box.",
+    separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
+    url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
+    path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",
+    choicesbyurl: {
+      valueName: "Enter a uniform property name within the array of objects whose value will be stored as a response in survey results."
+    },
+    titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list.",
+    allowEmptyResponse: "Select to allow the service to return an empty response or array.",
+    choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options.",
+    rateValues: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",
+    rating: {
+      displayMode: "\"Auto\" selects between the \"Buttons\" and \"Dropdown\" modes based on the available width. When the width is insufficient to display buttons, the question displays a dropdown."
+    },
+    valuePropertyName: "Allows you to connect questions that produce results in different formats. When such questions are linked together using a join identifier, this shared property stores selected question values.",
+    searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field.",
+    valueTrue: "A value to save in survey results when respondents give a positive answer.",
+    valueFalse: "A value to save in survey results when respondents give a negative answer.",
+    showPreview: "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded.",
+    needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion.",
+    selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area.",
+    dataList: "Enter a list of choices that will be suggested to the respondent during input.",
+    itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box.",
+    itemTitleWidth: "Sets consistent width for all item labels in pixels",
+    contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided.",
+    altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes.",
+    rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale.",
+    expression: {
+      name: "An expression ID that is not visible to respondents.",
+      description: "Type an expression subtitle.",
+      expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
+    },
+
+    cookieName: "Cookies prevent users from filling out the same survey twice.",
+    format: "Use {0} as a placeholder for the actual value.",
+    acceptedTypes: "Refer to the [accept](https://www.w3schools.com/tags/att_input_accept.asp) attribute description for more information.",
+    columnColCount: "Applies only if \"Cell input type\" is set to Radio Button Group or Checkboxes.",
+    autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
+    filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
+    photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
+    fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\"."
   },
   // Properties
   p: {
@@ -940,10 +1138,10 @@ export var enStrings = {
       title: "Leave it empty, if it is the same as 'Name'"
     },
     multiSelect: "Allow multiple selection",
-    showLabel: "Show image captions",
+    showLabel: "Show image and video captions",
     value: "Value",
     tabAlign: "Tab alignment",
-    sourceType: "Source type",
+    sourceType: "File source type",
     fitToContainer: "Fit to container",
     setValueExpression: "Set value expression",
     description: "Description", // Auto-generated string
@@ -962,19 +1160,17 @@ export var enStrings = {
     questionTitlePattern: "Question title pattern", // Auto-generated string
     widthMode: "Width mode", // Auto-generated string
     showBrandInfo: "Show brand info", // Auto-generated string
-    useDisplayValuesInDynamicTexts: "Use display values in dynamic texts", // Auto-generated string
+    useDisplayValuesInDynamicTexts: "Use display values in dynamic texts",
     visibleIf: "Visible if", // Auto-generated string
-    titleLocation: "Title location", // Auto-generated string
-    descriptionLocation: "Description location", // Auto-generated string
-    defaultValueExpression: "Default value expression", // Auto-generated string
+    defaultValueExpression: "Default value expression",
     requiredIf: "Required if", // Auto-generated string
-    resetValueIf: "Reset value if", // Auto-generated string
-    setValueIf: "Set value if", // Auto-generated string
-    validators: "Validators", // Auto-generated string
+    resetValueIf: "Reset value if",
+    setValueIf: "Set value if",
+    validators: "Validation rules",
     bindings: "Bindings", // Auto-generated string
     renderAs: "Render as", // Auto-generated string
     attachOriginalItems: "Attach original items", // Auto-generated string
-    choices: "Choices", // Auto-generated string
+    choices: "Choices",
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string
     cellHint: "Cell hint", // Auto-generated string
@@ -996,26 +1192,27 @@ export var enStrings = {
     minValueExpression: "Min value expression", // Auto-generated string
     maxValueExpression: "Max value expression", // Auto-generated string
     step: "Step", // Auto-generated string
-    dataList: "Data list", // Auto-generated string
-    itemSize: "Item size", // Auto-generated string
+    dataList: "Items for auto-suggest",
+    itemSize: "Input field width (in characters)",
+    itemTitleWidth: "Item label width (in px)",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
     navigationButtonsVisibility: "Navigation buttons visibility", // Auto-generated string
     navigationTitle: "Navigation title", // Auto-generated string
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string
-    autoGrow: "Auto grow", // Auto-generated string
-    allowResize: "Allow resizing",
+    autoGrow: "Expand input field dynamically",
+    allowResize: "Enable resize handle",
     acceptCarriageReturn: "Accept carriage return", // Auto-generated string
-    displayMode: "Display mode", // Auto-generated string
+    displayMode: "Display mode",
     rateType: "Rate type", // Auto-generated string
     label: "Label", // Auto-generated string
-    contentMode: "Content mode", // Auto-generated string
-    imageFit: "Image fit", // Auto-generated string
-    altText: "Alt text", // Auto-generated string
+    contentMode: "Content mode",
+    imageFit: "Image and thumbnail fit",
+    altText: "Alt text",
     height: "Height", // Auto-generated string
     penColor: "Pen color", // Auto-generated string
-    backgroundColor: "Background color", // Auto-generated string
+    backgroundColor: "Background color",
     templateElements: "Template elements", // Auto-generated string
     operator: "Operator", // Auto-generated string
     isVariable: "Is variable", // Auto-generated string
@@ -1025,15 +1222,17 @@ export var enStrings = {
     iconSize: "Icon size", // Auto-generated string
     precision: "Precision", // Auto-generated string
     matrixDragHandleArea: "Matrix drag handle area", // Auto-generated string
-    backgroundImage: "Background image", // Auto-generated string
+    backgroundImage: "Background image",
     backgroundImageFit: "Background image fit", // Auto-generated string
     backgroundImageAttachment: "Background image attachment", // Auto-generated string
     backgroundOpacity: "Background opacity", // Auto-generated string
-    selectToRankEnabled: "Select to rank enabled", // Auto-generated string
-    selectToRankAreasLayout: "Select to rank areas layout", // Auto-generated string
+    selectToRankEnabled: "Allow selective ranking",
+    selectToRankAreasLayout: "Ranking area alignment",
+    selectToRankEmptyRankedAreaText: "Text to show if all options are selected",
+    selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area",
     allowCameraAccess: "Allow camera access", // Auto-generated string
-    scaleColorMode: "Scale color mode", // Auto-generated string
-    rateColorMode: "Rate color mode", // Auto-generated string
+    scaleColorMode: "Rating icon color mode",
+    rateColorMode: "Smileys color scheme",
     templateTabTitle: "Template tab title", // Auto-generated string
     templateVisibleIf: "Template visible if", // Auto-generated string
     copyDisplayValue: "Copy display value" // Auto-generated string

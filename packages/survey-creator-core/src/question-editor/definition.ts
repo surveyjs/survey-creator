@@ -24,8 +24,8 @@ export class SurveyQuestionEditorDefinition {
         "title",
         "description",
         "visible",
-        "isRequired",
         "readOnly",
+        "isRequired",
         "showCommentArea",
         "commentText",
         "commentPlaceholder",
@@ -53,8 +53,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "correctAnswer", tab: "data" },
         { name: "useDisplayValuesInDynamicTexts", tab: "data" },
         { name: "clearIfInvisible", tab: "data" },
-        { name: "requiredErrorText", tab: "validation" },
-        { name: "validators", tab: "validation" }
+        { name: "validators", tab: "validation" },
+        { name: "requiredErrorText", tab: "validation" }
       ],
       tabs: [
         { name: "logic", index: 100 },
@@ -78,8 +78,8 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         "sourceType",
         "visible",
-        "isRequired",
         "readOnly",
+        "isRequired",
         "showCommentArea",
         "allowMultiple",
         { name: "showPreview" },
@@ -99,6 +99,18 @@ export class SurveyQuestionEditorDefinition {
     },
     signaturepad: {
       properties: [
+        "dataFormat",
+        "signatureWidth",
+        "signatureHeight",
+        "signatureAutoScaleEnabled",
+        "showPlaceholder",
+        "placeholder",
+        "allowClear",
+        "backgroundImage",
+        "backgroundColor",
+        "penMinWidth",
+        "penMaxWidth",
+        "penColor",
         "waitForUpload",
         { name: "storeDataAsText" },
       ]
@@ -193,13 +205,14 @@ export class SurveyQuestionEditorDefinition {
     },
     rating: {
       properties: [
-        { name: "displayMode", tab: "layout" },
+        { name: "displayMode", tab: "rateValues" },
         { name: "rateCount", tab: "rateValues" },
         { name: "rateMin", tab: "rateValues" },
         { name: "rateMax", tab: "rateValues" },
         { name: "rateStep", tab: "rateValues" },
         { name: "minRateDescription", tab: "rateValues" },
         { name: "maxRateDescription", tab: "rateValues" },
+        { name: "rateDescriptionLocation", tab: "rateValues" },
         { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
       ],
       tabs: [{ name: "rateValues", index: 10 }]
@@ -244,7 +257,7 @@ export class SurveyQuestionEditorDefinition {
     ranking: {
       properties: [
         { name: "selectToRankEnabled" },
-        { name: "selectToRankAreasLayout", tab: "layout" },
+        { name: "selectToRankAreasLayout" },
         { name: "minSelectedChoices", tab: "choices" },
         { name: "maxSelectedChoices", tab: "choices" }
       ]
@@ -361,8 +374,8 @@ export class SurveyQuestionEditorDefinition {
         "name",
         "title",
         "visible",
-        "isRequired",
         "readOnly",
+        "isRequired",
         "isUnique",
         "showInMultipleColumns",
         "width",
@@ -566,11 +579,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "visibleIf", tab: "logic" },
         { name: "enableIf", tab: "logic" },
         { name: "requiredIf", tab: "logic" },
-        { name: "questionTitleLocation", tab: "layout" },
-        { name: "questionErrorLocation", tab: "layout" }
+        { name: "questionTitleLocation", tab: "questionSettings" },
+        { name: "questionErrorLocation", tab: "questionSettings" }
       ],
       tabs: [
         { name: "logic", index: 100 },
+        { name: "questionSettings", index: 150 },
         { name: "layout", index: 200 },
         { name: "data", index: 300 },
         { name: "validation", index: 400 }
@@ -579,13 +593,12 @@ export class SurveyQuestionEditorDefinition {
     panel: {
       properties: [
         "isRequired",
+        { name: "questionsOrder", tab: "questionSettings" },
+        { name: "innerIndent", tab: "questionSettings" },
         { name: "requiredErrorText", tab: "validation" },
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "state", tab: "layout" },
-        { name: "questionsOrder", tab: "layout" },
-        { name: "indent", tab: "layout" },
-        { name: "innerIndent", tab: "layout" },
         { name: "width", tab: "layout" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },

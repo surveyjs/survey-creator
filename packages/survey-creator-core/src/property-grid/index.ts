@@ -572,8 +572,7 @@ export class PropertyJSONGenerator {
     linkValue.obj = question.obj;
     linkValue.visibleIf = "propertyEnableIf() = false";
     const overridingQuestion = panel.getQuestionByName(overridingProp);
-    const text = !!overridingQuestion ? overridingQuestion.title : overridingProp;
-    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix") + text;
+    linkValue.linkValueText = editorLocalization.getString("pe.overridingPropertyPrefix");
     linkValue.titleLocation = "hidden";
     linkValue.onUpdateCssClassesCallback = (css: any) => {
       css.questionWrapper = "spg-link-wrapper--overriding";
