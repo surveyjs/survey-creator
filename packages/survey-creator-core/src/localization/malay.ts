@@ -142,6 +142,7 @@ export var msStrings = {
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
     translateUsigAI: "Terjemahkan Secara automatik Semua",
+    translateUsigAIFrom: "Terjemah daripada: ",
     translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
@@ -1704,6 +1705,9 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.titleFont: "Title font" => "Fon tajuk"
 // theme.descriptionFont: "Description font" => "Fon perihalan"
 // theme.shadow: "Shadow effects" => "Kesan bayang"
+// ed.translateUsigAIFrom: "Translate from: " => "Terjemah daripada: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
 // pv.contain: "Contain" => "Mengandungi"

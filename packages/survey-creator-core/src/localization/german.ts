@@ -142,6 +142,7 @@ var germanTranslation = {
     translationExportToSCVButton: "Export (CSV)",
     translationImportFromSCVButton: "Import (CSV)",
     translateUsigAI: "Alle automatisch übersetzen",
+    translateUsigAIFrom: "Sprachrichtung: ",
     translationDialogTitle: "Nicht übersetzte Zeichenketten",
     translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache",
     translationPlaceHolder: "Übersetzung ...",
@@ -1457,6 +1458,9 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.titleFont: "Title font" => "Schriftart des Titels"
 // theme.descriptionFont: "Description font" => "Beschreibung Schriftart"
 // theme.shadow: "Shadow effects" => "Schatten-Effekte"
+// ed.translateUsigAIFrom: "Translate from: " => "Sprachrichtung: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
 // pv.contain: "Contain" => "Enthalten"

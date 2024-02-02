@@ -142,6 +142,7 @@ export var huStrings = {
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
     translateUsigAI: "Összes automatikus fordítása",
+    translateUsigAIFrom: "Fordítás: ",
     translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
@@ -1904,6 +1905,9 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.titleFont: "Title font" => "Cím betűtípusa"
 // theme.descriptionFont: "Description font" => "Leírás betűtípus"
 // theme.shadow: "Shadow effects" => "Árnyék effektusok"
+// ed.translateUsigAIFrom: "Translate from: " => "Fordítás: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
 // pv.contain: "Contain" => "Tartalmaz"

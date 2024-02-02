@@ -142,6 +142,7 @@ var frenchTranslation = {
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
     translateUsigAI: "Traduire automatiquement tout",
+    translateUsigAIFrom: "Traduction: ",
     translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
@@ -1811,6 +1812,9 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.titleFont: "Title font" => "Police du titre"
 // theme.descriptionFont: "Description font" => "Police de description"
 // theme.shadow: "Shadow effects" => "Effets d’ombre"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduction: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
 // pv.contain: "Contain" => "Contenir"

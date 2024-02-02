@@ -142,6 +142,7 @@ export var arStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "ترجمة تلقائية للكل",
+    translateUsigAIFrom: "ترجمة من: ",
     translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
@@ -1661,6 +1662,9 @@ editorLocalization.locales["ar"] = arStrings;
 // theme.titleFont: "Title font" => "خط العنوان"
 // theme.descriptionFont: "Description font" => "خط الوصف"
 // theme.shadow: "Shadow effects" => "تأثيرات الظل"
+// ed.translateUsigAIFrom: "Translate from: " => "ترجمة من: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "السماح بخيار رفض الإجابة"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "السماح بالخيار \"لا أعرف\""
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "السماح بخيار رفض الإجابة"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "السماح بالخيار \"لا أعرف\""
 // pv.contain: "Contain" => "احتوى"

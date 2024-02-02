@@ -142,6 +142,7 @@ var traditionalChineseTranslation = {
     translationExportToSCVButton: "匯出為CSV",
     translationImportFromSCVButton: "從 CSV 導入",
     translateUsigAI: "自動翻譯全部",
+    translateUsigAIFrom: "翻譯語言組合：",
     translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
@@ -2029,6 +2030,9 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.titleFont: "Title font" => "標題字體"
 // theme.descriptionFont: "Description font" => "描述字體"
 // theme.shadow: "Shadow effects" => "陰影效果"
+// ed.translateUsigAIFrom: "Translate from: " => "翻譯語言組合："
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
 // pv.contain: "Contain" => "包含"
