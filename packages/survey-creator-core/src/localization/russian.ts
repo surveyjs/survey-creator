@@ -752,6 +752,9 @@ export var ruStrings = {
     onComplete: "По завершению",
     onHidden: "По скрытию",
     onHiddenContainer: "Когда вопрос или его панель/страница становятся скрытыми",
+    contain: "Содержать",
+    cover: "Крышка",
+    fill: "Заполнять",
     clearInvisibleValues: {
       none: "Никогда"
     },
@@ -1812,3 +1815,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Перевести с: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"
+// pv.contain: "Contain" => "Содержать"
+// pv.cover: "Cover" => "Крышка"
+// pv.fill: "Fill" => "Заполнять"

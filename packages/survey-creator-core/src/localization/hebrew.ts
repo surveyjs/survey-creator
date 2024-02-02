@@ -752,6 +752,9 @@ export var hebrewStrings = {
     onComplete: "כאשר השאלון הושלם",
     onHidden: "כאשר השאלה הוסתרה",
     onHiddenContainer: "כאשר השאלה או הפאנל/העמוד שלה מוסתרים",
+    contain: "להכיל",
+    cover: "כריכה",
+    fill: "מילוי",
     clearInvisibleValues: {
       none: "לעולם"
     },
@@ -1316,3 +1319,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "תרגם מ: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "אפשר את האפשרות סרב לענות"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "אפשר את האפשרות 'לא יודע'"
+// pv.contain: "Contain" => "להכיל"
+// pv.cover: "Cover" => "כריכה"
+// pv.fill: "Fill" => "מילוי"

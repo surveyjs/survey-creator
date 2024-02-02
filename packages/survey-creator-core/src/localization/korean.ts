@@ -752,6 +752,9 @@ export var koreanStrings = {
     onComplete: "완료",
     onHidden: "숨김",
     onHiddenContainer: "질문 또는 해당 패널/페이지가 숨겨지는 경우",
+    contain: "포함하다",
+    cover: "표지",
+    fill: "채우다",
     clearInvisibleValues: {
       none: "결코"
     },
@@ -1956,3 +1959,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "언어 선택(원문-번역): "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"
+// pv.contain: "Contain" => "포함하다"
+// pv.cover: "Cover" => "표지"
+// pv.fill: "Fill" => "채우다"

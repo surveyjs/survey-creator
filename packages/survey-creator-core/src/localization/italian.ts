@@ -752,6 +752,9 @@ var italianTranslation = {
     onComplete: "Al termine del sondaggio",
     onHidden: "Quando la domanda diventa nascosta",
     onHiddenContainer: "Quando la domanda, o il suo pannello/pagina, diventa nascosta",
+    contain: "Contenere",
+    cover: "Coprire",
+    fill: "Riempire",
     clearInvisibleValues: {
       none: "Mai"
     },
@@ -1510,3 +1513,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.translateUsigAIFrom: "Translate from: " => "Traduci da: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Consenti l'opzione Rifiuta di rispondere"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Consenti l'opzione Non so"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Consenti l'opzione Rifiuta di rispondere"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Consenti l'opzione Non so"
+// pv.contain: "Contain" => "Contenere"
+// pv.cover: "Cover" => "Coprire"
+// pv.fill: "Fill" => "Riempire"

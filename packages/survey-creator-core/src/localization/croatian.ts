@@ -752,6 +752,9 @@ export var hrStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Kada se pitanje ili njegova ploča/stranica sakriju",
+    contain: "Sadržavati",
+    cover: "Pokriti",
+    fill: "Ispuniti",
     clearInvisibleValues: {
       none: "Nikada"
     },
@@ -1746,3 +1749,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Prevedi iz: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Dopusti mogućnost Odbij odgovoriti"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Dopusti mogućnost Ne znam"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Dopusti mogućnost Odbij odgovoriti"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Dopusti mogućnost Ne znam"
+// pv.contain: "Contain" => "Sadržavati"
+// pv.cover: "Cover" => "Pokriti"
+// pv.fill: "Fill" => "Ispuniti"

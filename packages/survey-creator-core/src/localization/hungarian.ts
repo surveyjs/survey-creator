@@ -752,6 +752,9 @@ export var huStrings = {
     onComplete: "befejezéskor",
     onHidden: "eltűnéskor",
     onHiddenContainer: "Amikor a kérdés vagy annak panelje/oldala rejtetté válik",
+    contain: "Tartalmaz",
+    cover: "Fedő",
+    fill: "Tölt",
     clearInvisibleValues: {
       none: "Soha"
     },
@@ -1905,3 +1908,8 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Fordítás: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pv.contain: "Contain" => "Tartalmaz"
+// pv.cover: "Cover" => "Fedő"
+// pv.fill: "Fill" => "Tölt"

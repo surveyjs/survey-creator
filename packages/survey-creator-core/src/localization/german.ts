@@ -752,6 +752,9 @@ var germanTranslation = {
     onComplete: "Wenn die Umfrage abgeschlossen wurde",
     onHidden: "Wenn die Umfrage versteckt wurde",
     onHiddenContainer: "Wenn die Frage oder ihr Panel/Seite ausgeblendet wird",
+    contain: "Enthalten",
+    cover: "Deckel",
+    fill: "Füllen",
     clearInvisibleValues: {
       none: "Niemals"
     },
@@ -1458,3 +1461,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.translateUsigAIFrom: "Translate from: " => "Sprachrichtung: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
+// pv.contain: "Contain" => "Enthalten"
+// pv.cover: "Cover" => "Deckel"
+// pv.fill: "Fill" => "Füllen"

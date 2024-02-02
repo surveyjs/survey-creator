@@ -752,6 +752,9 @@ export var turkishStrings = {
     onComplete: "Tamamlandığında",
     onHidden: "Gizlendiğinde",
     onHiddenContainer: "Soru veya paneli/sayfası gizlendiğinde",
+    contain: "Kapsamak",
+    cover: "Örtmek",
+    fill: "Doldurmak",
     clearInvisibleValues: {
       none: "Hiç"
     },
@@ -1747,3 +1750,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Çeviri kaynağı: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
+// pv.contain: "Contain" => "Kapsamak"
+// pv.cover: "Cover" => "Örtmek"
+// pv.fill: "Fill" => "Doldurmak"

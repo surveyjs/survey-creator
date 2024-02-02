@@ -752,6 +752,9 @@ export var jaStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "質問またはそのパネル/ページが非表示になったとき",
+    contain: "含む",
+    cover: "覆う",
+    fill: "注ぐ",
     clearInvisibleValues: {
       none: "なし"
     },
@@ -1751,3 +1754,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "言語の選択："
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "[回答を拒否] オプションを許可する"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "[わからない] オプションを許可する"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "[回答を拒否] オプションを許可する"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "[わからない] オプションを許可する"
+// pv.contain: "Contain" => "含む"
+// pv.cover: "Cover" => "覆う"
+// pv.fill: "Fill" => "注ぐ"

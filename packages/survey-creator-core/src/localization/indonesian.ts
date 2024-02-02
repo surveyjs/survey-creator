@@ -752,6 +752,9 @@ export var indonesianStrings = {
     onComplete: "saat selesai",
     onHidden: "saat tersembunyi",
     onHiddenContainer: "Ketika pertanyaan atau panel/halamannya disembunyikan",
+    contain: "Mengandung",
+    cover: "Menutupi",
+    fill: "Isi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1906,3 +1909,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Terjemahkan dari: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"
+// pv.contain: "Contain" => "Mengandung"
+// pv.cover: "Cover" => "Menutupi"
+// pv.fill: "Fill" => "Isi"

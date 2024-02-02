@@ -752,6 +752,9 @@ export var danishStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Når spørgsmålet eller dets panel/side bliver skjult",
+    contain: "Indeholde",
+    cover: "Dække",
+    fill: "Fylde",
     clearInvisibleValues: {
       none: "Aldrig"
     },
@@ -1937,3 +1940,8 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Oversæt fra: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillad indstillingen Afvis at svare"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Tillad indstillingen Ved ikke"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillad indstillingen Afvis at svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillad indstillingen Ved ikke"
+// pv.contain: "Contain" => "Indeholde"
+// pv.cover: "Cover" => "Dække"
+// pv.fill: "Fill" => "Fylde"

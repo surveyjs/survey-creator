@@ -980,3 +980,23 @@ test("ImageItemValueWrapperViewModel shouldn't override existing image if upload
   imageItemAdorner.chooseFile(imageItemAdorner);
   expect(question.choices[0].imageLink).toBe(successFile);
 });
+
+test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  let log = "";
+  creator.onOpenFileChooser.add((s, o) => {
+    log += "->onOpenFileChooser";
+    o.callback([]);
+  });
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const filePresentationModel = imageAdorner.filePresentationModel;
+  const fileQuestionAdornerSurvey = imageAdorner.filePresentationModel.getSurvey();
+
+  expect(log).toBe("");
+  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { });
+  expect(log).toBe("->onOpenFileChooser");
+});

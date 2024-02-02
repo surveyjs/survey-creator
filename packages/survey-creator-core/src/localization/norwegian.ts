@@ -752,6 +752,9 @@ export var nbStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Når spørsmålet eller panelet/siden blir skjult",
+    contain: "Inneholde",
+    cover: "Lokk",
+    fill: "Fylle",
     clearInvisibleValues: {
       none: "Aldri"
     },
@@ -1755,3 +1758,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Oversett fra: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
+// pv.contain: "Contain" => "Inneholde"
+// pv.cover: "Cover" => "Lokk"
+// pv.fill: "Fill" => "Fylle"

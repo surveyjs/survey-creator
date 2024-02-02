@@ -752,6 +752,9 @@ export var bgStrings = {
     onComplete: "Когато анкетата приключи",
     onHidden: "Когато въпросът стане скрит",
     onHiddenContainer: "Когато въпросът или неговият панел/страница се скрият",
+    contain: "Съдържам",
+    cover: "Капак",
+    fill: "Запълване",
     clearInvisibleValues: {
       none: "Никога"
     },
@@ -1313,3 +1316,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Преведи от: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
+// pv.contain: "Contain" => "Съдържам"
+// pv.cover: "Cover" => "Капак"
+// pv.fill: "Fill" => "Запълване"

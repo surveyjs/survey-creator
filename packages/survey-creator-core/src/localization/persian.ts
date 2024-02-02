@@ -752,6 +752,9 @@ var persianStrings = {
     onComplete: "به محض تمام شدن",
     onHidden: "به محض مخفی شدن",
     onHiddenContainer: "هنگامی که سوال یا پانل / صفحه ان پنهان می شود",
+    contain: "حاوی",
+    cover: "پوشش",
+    fill: "پر کردن",
     clearInvisibleValues: {
       none: "هرگز"
     },
@@ -1707,3 +1710,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "ترجمه از: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
+// pv.contain: "Contain" => "حاوی"
+// pv.cover: "Cover" => "پوشش"
+// pv.fill: "Fill" => "پر کردن"

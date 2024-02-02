@@ -752,6 +752,9 @@ var portugueseTranslation = {
     onComplete: "ao completar",
     onHidden: "ao ocultar",
     onHiddenContainer: "Quando a pergunta ou seu painel/página fica oculto",
+    contain: "Conter",
+    cover: "Cobrir",
+    fill: "Encher",
     clearInvisibleValues: {
       none: "Nunca"
     },
@@ -1418,3 +1421,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.translateUsigAIFrom: "Translate from: " => "Traduzir do: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir a opção Recusar resposta"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir a opção Não Sei"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir a opção Recusar resposta"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir a opção Não Sei"
+// pv.contain: "Contain" => "Conter"
+// pv.cover: "Cover" => "Cobrir"
+// pv.fill: "Fill" => "Encher"

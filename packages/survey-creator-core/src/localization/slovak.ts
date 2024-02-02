@@ -752,6 +752,9 @@ export var skStrings = {
     onComplete: "pri dokončení",
     onHidden: "pri skrytí",
     onHiddenContainer: "Keď sa otázka alebo jej panel/stránka skryje",
+    contain: "Obsahovať",
+    cover: "Prikryť",
+    fill: "Vyplniť",
     clearInvisibleValues: {
       none: "Nikdy"
     },
@@ -1705,3 +1708,8 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Preložiť z: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pv.contain: "Contain" => "Obsahovať"
+// pv.cover: "Cover" => "Prikryť"
+// pv.fill: "Fill" => "Vyplniť"

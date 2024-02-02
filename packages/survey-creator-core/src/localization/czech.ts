@@ -752,6 +752,9 @@ export var czStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Když se otázka nebo její panel/stránka skryje",
+    contain: "Obsahovat",
+    cover: "Krýt",
+    fill: "Vyplnit",
     clearInvisibleValues: {
       none: "Nikdy"
     },
@@ -1316,3 +1319,8 @@ editorLocalization.locales["cs"] = czStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Přeložit z: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povolte možnost Odmítnout odpověď"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Povolit možnost Nevím"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povolte možnost Odmítnout odpověď"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povolit možnost Nevím"
+// pv.contain: "Contain" => "Obsahovat"
+// pv.cover: "Cover" => "Krýt"
+// pv.fill: "Fill" => "Vyplnit"

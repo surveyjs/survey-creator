@@ -752,6 +752,9 @@ var traditionalChineseTranslation = {
     onComplete: "調查完成時",
     onHidden: "當問題變得隱藏時",
     onHiddenContainer: "當問題或其面板/頁面被隱藏時",
+    contain: "包含",
+    cover: "蓋",
+    fill: "填補",
     clearInvisibleValues: {
       none: "從不"
     },
@@ -2030,3 +2033,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // ed.translateUsigAIFrom: "Translate from: " => "翻譯語言組合："
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
+// pv.contain: "Contain" => "包含"
+// pv.cover: "Cover" => "蓋"
+// pv.fill: "Fill" => "填補"

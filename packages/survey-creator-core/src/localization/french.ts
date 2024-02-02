@@ -112,7 +112,7 @@ var frenchTranslation = {
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
     toolboxGeneralCategory: "Général",
-    toolboxChoiceCategory: "Quesitons à choix",
+    toolboxChoiceCategory: "Questions à choix",
     toolboxTextCategory: "Questions de saisie libre",
     toolboxContainersCategory: "Conteneurs",
     toolboxMatrixCategory: "Questions matricielles",
@@ -752,6 +752,9 @@ var frenchTranslation = {
     onComplete: "Quand terminé",
     onHidden: "Quand masqué",
     onHiddenContainer: "Lorsque la question ou sa section/page devient masquée",
+    contain: "Contenir",
+    cover: "Couvrir",
+    fill: "Remplir",
     clearInvisibleValues: {
       none: "Jamais"
     },
@@ -1812,3 +1815,8 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.translateUsigAIFrom: "Translate from: " => "Traduction: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pv.contain: "Contain" => "Contenir"
+// pv.cover: "Cover" => "Couvrir"
+// pv.fill: "Fill" => "Remplir"

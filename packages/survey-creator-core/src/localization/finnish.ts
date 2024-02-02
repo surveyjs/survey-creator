@@ -752,6 +752,9 @@ export var fiStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
+    contain: "Sisältää",
+    cover: "Kansi",
+    fill: "Täyttää",
     clearInvisibleValues: {
       none: "Koskaan"
     },
@@ -1752,3 +1755,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Käännös: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pv.contain: "Contain" => "Sisältää"
+// pv.cover: "Cover" => "Kansi"
+// pv.fill: "Fill" => "Täyttää"

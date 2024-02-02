@@ -752,6 +752,9 @@ export var msStrings = {
     onComplete: "Pada selesai",
     onHidden: "Pada tersembunyi",
     onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
+    contain: "Mengandungi",
+    cover: "Perlindungan",
+    fill: "Mengisi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1705,3 +1708,8 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Terjemah daripada: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pv.contain: "Contain" => "Mengandungi"
+// pv.cover: "Cover" => "Perlindungan"
+// pv.fill: "Fill" => "Mengisi"

@@ -752,6 +752,9 @@ var polishStrings = {
     onComplete: "Po zakończeniu ankiety",
     onHidden: "Gdy pytanie zostanie ukryte",
     onHiddenContainer: "Gdy pytanie lub jego panel/strona zostaną ukryte",
+    contain: "Zawierać",
+    cover: "Pokryć",
+    fill: "Wypełnić",
     clearInvisibleValues: {
       none: "Nigdy"
     },
@@ -2025,3 +2028,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Przetłumacz z: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pv.contain: "Contain" => "Zawierać"
+// pv.cover: "Cover" => "Pokryć"
+// pv.fill: "Fill" => "Wypełnić"

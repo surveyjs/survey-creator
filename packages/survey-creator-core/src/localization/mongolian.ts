@@ -752,6 +752,9 @@ export var mnStrings = {
     onComplete: "Санал асуулга амжилттай бөглөгдсөн үед.",
     onHidden: "Асуулт нуугдсан үед",
     onHiddenContainer: "Асуулт, панел эсвэл хуудас нуугдсан үед",
+    contain: "Агуулах",
+    cover: "Хөшиг",
+    fill: "Дүүргэлт",
     clearInvisibleValues: {
       none: "Хэзээ ч үгүй"
     },
@@ -1408,3 +1411,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.translateUsigAIFrom: "Translate from: " => "Аас орчуул: "
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pv.contain: "Contain" => "Агуулах"
+// pv.cover: "Cover" => "Хөшиг"
+// pv.fill: "Fill" => "Дүүргэлт"
