@@ -20,6 +20,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
     this.filePresentationModel.cssClasses.chooseFileIconId = "icon-choosefile";
+    surveyModel.onOpenFileChooser.add((s, o) => {
+      this.creator.chooseFiles(o.input, o.callback, { element: o.element as SurveyElement, item: o.item });
+    });
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
       if (!!fileToUpload) {
