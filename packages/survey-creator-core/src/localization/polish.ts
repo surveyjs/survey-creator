@@ -142,6 +142,7 @@ var polishStrings = {
     translationExportToSCVButton: "Eksport do pliku CSV",
     translationImportFromSCVButton: "Importowanie z pliku CSV",
     translateUsigAI: "Automatycznie tłumacz wszystko",
+    translateUsigAIFrom: "Przetłumacz z: ",
     translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
@@ -339,6 +340,8 @@ var polishStrings = {
     showOtherItem: "Czy możliwa własna odpowiedź",
     otherText: "Other item text",
     showNoneItem: "Zezwalaj na opcję Brak",
+    showRefuseItem: "Zezwól na opcję Odmów odpowiedzi",
+    showDontKnowItem: "Zezwól na opcję Nie wiem",
     noneText: "Tekst opcji Brak",
     showSelectAllItem: "Zezwalaj na opcję Zaznacz wszystko",
     selectAllText: "Zaznacz tekst opcji Wszystkie",
@@ -749,6 +752,9 @@ var polishStrings = {
     onComplete: "Po zakończeniu ankiety",
     onHidden: "Gdy pytanie zostanie ukryte",
     onHiddenContainer: "Gdy pytanie lub jego panel/strona zostaną ukryte",
+    contain: "Zawierać",
+    cover: "Pokryć",
+    fill: "Wypełnić",
     clearInvisibleValues: {
       none: "Nigdy"
     },
@@ -2019,3 +2025,11 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.titleFont: "Title font" => "Czcionka tytułu"
 // theme.descriptionFont: "Description font" => "Czcionka opisu"
 // theme.shadow: "Shadow effects" => "Efekty cienia"
+// ed.translateUsigAIFrom: "Translate from: " => "Przetłumacz z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pv.contain: "Contain" => "Zawierać"
+// pv.cover: "Cover" => "Pokryć"
+// pv.fill: "Fill" => "Wypełnić"

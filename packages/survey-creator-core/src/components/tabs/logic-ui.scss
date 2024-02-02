@@ -71,7 +71,6 @@
 }
 
 .svc-logic-operator.svc-logic-operator {
-
   &:hover,
   &:focus {
     color: #ffffff;
@@ -302,6 +301,9 @@
 }
 
 .sl-list {
+  padding-right: calcSize(0.5);
+  padding-left: calcSize(0.5);
+
   .sv-list__filter {
     padding-top: 0;
   }

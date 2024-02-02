@@ -142,6 +142,7 @@ export let svStrings = {
     translationExportToSCVButton: "Exportera till CSV",
     translationImportFromSCVButton: "Importera från CSV",
     translateUsigAI: "Översätt alla automatiskt",
+    translateUsigAIFrom: "Översätt från: ",
     translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
@@ -339,6 +340,8 @@ export let svStrings = {
     showOtherItem: "Har annat element",
     otherText: "Annat",
     showNoneItem: "Tillåt alternativet Ingen",
+    showRefuseItem: "Tillåt alternativet Vägra svara",
+    showDontKnowItem: "Tillåt alternativet Vet ej",
     noneText: "Alternativtext för Ingen",
     showSelectAllItem: "Tillåt alternativet Markera allt",
     selectAllText: "Markera all alternativtext",
@@ -749,6 +752,9 @@ export let svStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "När frågan eller dess panel/sida döljs",
+    contain: "Innehålla",
+    cover: "Täcka",
+    fill: "Fylla",
     clearInvisibleValues: {
       none: "Aldrig"
     },
@@ -1923,3 +1929,11 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.titleFont: "Title font" => "Titel typsnitt"
 // theme.descriptionFont: "Description font" => "Beskrivning teckensnitt"
 // theme.shadow: "Shadow effects" => "Skugga effekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Översätt från: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
+// pv.contain: "Contain" => "Innehålla"
+// pv.cover: "Cover" => "Täcka"
+// pv.fill: "Fill" => "Fylla"

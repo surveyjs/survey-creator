@@ -142,6 +142,7 @@ export var fiStrings = {
     translationExportToSCVButton: "Vie (CSV)",
     translationImportFromSCVButton: "Tuo (CSV)",
     translateUsigAI: "Käännä kaikki automaattisesti",
+    translateUsigAIFrom: "Käännös: ",
     translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
@@ -339,6 +340,8 @@ export var fiStrings = {
     showOtherItem: "On muu",
     otherText: "Muu teksti",
     showNoneItem: "Ei mitään",
+    showRefuseItem: "Salli Kieltäydy vastaamasta -vaihtoehto",
+    showDontKnowItem: "Salli En tiedä -vaihtoehto",
     noneText: "Ei mitään tekstiä",
     showSelectAllItem: "On valinnut kaikki",
     selectAllText: "Valitse kaikki tekstit",
@@ -749,6 +752,9 @@ export var fiStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
+    contain: "Sisältää",
+    cover: "Kansi",
+    fill: "Täyttää",
     clearInvisibleValues: {
       none: "Koskaan"
     },
@@ -1746,3 +1752,11 @@ editorLocalization.locales["fi"] = fiStrings;
 // theme.titleFont: "Title font" => "Otsikon fontti"
 // theme.descriptionFont: "Description font" => "Kuvauksen fontti"
 // theme.shadow: "Shadow effects" => "Varjo-tehosteet"
+// ed.translateUsigAIFrom: "Translate from: " => "Käännös: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pv.contain: "Contain" => "Sisältää"
+// pv.cover: "Cover" => "Kansi"
+// pv.fill: "Fill" => "Täyttää"

@@ -142,6 +142,7 @@ export var mnStrings = {
     translationExportToSCVButton: "CSV экспорт хийх",
     translationImportFromSCVButton: "CSV импорт хийх",
     translateUsigAI: "Авто-орчуулга Бүгд",
+    translateUsigAIFrom: "Аас орчуул: ",
     translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
@@ -339,6 +340,8 @@ export var mnStrings = {
     showOtherItem: "Өөр сонголт зөвшөөрөх",
     otherText: "Өөр сонголтын текст",
     showNoneItem: "None сонголтыг зөвшөөрөх",
+    showRefuseItem: "Хариулах татгалзах боломжийг олго",
+    showDontKnowItem: "Бүү мэд сонголтыг зөвшөөр",
     noneText: "None сонголтын текст",
     showSelectAllItem: "Бүгдийг сонгохыг зөвшөөрөх",
     selectAllText: "Бүгдийг сонгох",
@@ -749,6 +752,9 @@ export var mnStrings = {
     onComplete: "Санал асуулга амжилттай бөглөгдсөн үед.",
     onHidden: "Асуулт нуугдсан үед",
     onHiddenContainer: "Асуулт, панел эсвэл хуудас нуугдсан үед",
+    contain: "Агуулах",
+    cover: "Хөшиг",
+    fill: "Дүүргэлт",
     clearInvisibleValues: {
       none: "Хэзээ ч үгүй"
     },
@@ -1402,3 +1408,11 @@ editorLocalization.locales["mn"] = mnStrings;
 // theme.titleFont: "Title font" => "Нүүр фонт"
 // theme.descriptionFont: "Description font" => "Дүрслэлийн фонт"
 // theme.shadow: "Shadow effects" => "Сүүдрийн нөлөө"
+// ed.translateUsigAIFrom: "Translate from: " => "Аас орчуул: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pv.contain: "Contain" => "Агуулах"
+// pv.cover: "Cover" => "Хөшиг"
+// pv.fill: "Fill" => "Дүүргэлт"

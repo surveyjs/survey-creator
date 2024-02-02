@@ -144,6 +144,7 @@ export var enStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "Auto-translate All",
+    translateUsigAIFrom: "Translate from: ",
     translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
@@ -752,6 +753,9 @@ export var enStrings = {
     onComplete: "When the survey is completed",
     onHidden: "When the question becomes hidden",
     onHiddenContainer: "When the question or its panel/page becomes hidden",
+    contain: "Contain",
+    cover: "Cover",
+    fill: "Fill",
     clearInvisibleValues: {
       none: "Never"
     },

@@ -142,6 +142,7 @@ var traditionalChineseTranslation = {
     translationExportToSCVButton: "匯出為CSV",
     translationImportFromSCVButton: "從 CSV 導入",
     translateUsigAI: "自動翻譯全部",
+    translateUsigAIFrom: "翻譯語言組合：",
     translationDialogTitle: "未翻譯的字串",
     translationMergeLocaleWithDefault: "將{0}與預設區域設置合併",
     translationPlaceHolder: "譯本。。。",
@@ -339,6 +340,8 @@ var traditionalChineseTranslation = {
     showOtherItem: "可添加其他答案?",
     otherText: "其他答案文本",
     showNoneItem: "允許“無”選項",
+    showRefuseItem: "允許「拒絕應答」選項",
+    showDontKnowItem: "允許“不知道”選項",
     noneText: "無選項文字",
     showSelectAllItem: "允許「全選」選項",
     selectAllText: "全選選項文本",
@@ -749,6 +752,9 @@ var traditionalChineseTranslation = {
     onComplete: "調查完成時",
     onHidden: "當問題變得隱藏時",
     onHiddenContainer: "當問題或其面板/頁面被隱藏時",
+    contain: "包含",
+    cover: "蓋",
+    fill: "填補",
     clearInvisibleValues: {
       none: "從不"
     },
@@ -2024,3 +2030,11 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // theme.titleFont: "Title font" => "標題字體"
 // theme.descriptionFont: "Description font" => "描述字體"
 // theme.shadow: "Shadow effects" => "陰影效果"
+// ed.translateUsigAIFrom: "Translate from: " => "翻譯語言組合："
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允許「拒絕應答」選項"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允許“不知道”選項"
+// pv.contain: "Contain" => "包含"
+// pv.cover: "Cover" => "蓋"
+// pv.fill: "Fill" => "填補"

@@ -112,7 +112,7 @@ var frenchTranslation = {
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
     toolboxGeneralCategory: "Général",
-    toolboxChoiceCategory: "Quesitons à choix",
+    toolboxChoiceCategory: "Questions à choix",
     toolboxTextCategory: "Questions de saisie libre",
     toolboxContainersCategory: "Conteneurs",
     toolboxMatrixCategory: "Questions matricielles",
@@ -142,6 +142,7 @@ var frenchTranslation = {
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
     translateUsigAI: "Traduire automatiquement tout",
+    translateUsigAIFrom: "Traduction: ",
     translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
@@ -339,6 +340,8 @@ var frenchTranslation = {
     showOtherItem: "Contient choix \"Autre\"",
     otherText: "Texte du choix \"Autre\"",
     showNoneItem: "Contient un choix \"Aucun\"",
+    showRefuseItem: "Autoriser l’option Refuser de répondre",
+    showDontKnowItem: "Autoriser l’option Ne sait pas",
     noneText: "Texte du choix \"Aucun\"",
     showSelectAllItem: "Contient un choix \"Tout sélectionner\"",
     selectAllText: "Texte du choix \"Tout sélectionner\"",
@@ -749,6 +752,9 @@ var frenchTranslation = {
     onComplete: "Quand terminé",
     onHidden: "Quand masqué",
     onHiddenContainer: "Lorsque la question ou sa section/page devient masquée",
+    contain: "Contenir",
+    cover: "Couvrir",
+    fill: "Remplir",
     clearInvisibleValues: {
       none: "Jamais"
     },
@@ -1806,3 +1812,11 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // theme.titleFont: "Title font" => "Police du titre"
 // theme.descriptionFont: "Description font" => "Police de description"
 // theme.shadow: "Shadow effects" => "Effets d’ombre"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduction: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pv.contain: "Contain" => "Contenir"
+// pv.cover: "Cover" => "Couvrir"
+// pv.fill: "Fill" => "Remplir"

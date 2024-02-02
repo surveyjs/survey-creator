@@ -142,6 +142,7 @@ export var huStrings = {
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
     translateUsigAI: "Összes automatikus fordítása",
+    translateUsigAIFrom: "Fordítás: ",
     translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
@@ -339,6 +340,8 @@ export var huStrings = {
     showOtherItem: "Rendelkezik egyéb értékkel",
     otherText: "Az egyéb érték szövege",
     showNoneItem: "A Nincs lehetőség engedélyezése",
+    showRefuseItem: "A Válasz megtagadása lehetőség engedélyezése",
+    showDontKnowItem: "A Nem tudom lehetőség engedélyezése",
     noneText: "Nincs opció szövege",
     showSelectAllItem: "Az összes kijelölése lehetőség engedélyezése",
     selectAllText: "Az Összes kijelölése opció szövege",
@@ -749,6 +752,9 @@ export var huStrings = {
     onComplete: "befejezéskor",
     onHidden: "eltűnéskor",
     onHiddenContainer: "Amikor a kérdés vagy annak panelje/oldala rejtetté válik",
+    contain: "Tartalmaz",
+    cover: "Fedő",
+    fill: "Tölt",
     clearInvisibleValues: {
       none: "Soha"
     },
@@ -1899,3 +1905,11 @@ editorLocalization.locales["hu"] = huStrings;
 // theme.titleFont: "Title font" => "Cím betűtípusa"
 // theme.descriptionFont: "Description font" => "Leírás betűtípus"
 // theme.shadow: "Shadow effects" => "Árnyék effektusok"
+// ed.translateUsigAIFrom: "Translate from: " => "Fordítás: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pv.contain: "Contain" => "Tartalmaz"
+// pv.cover: "Cover" => "Fedő"
+// pv.fill: "Fill" => "Tölt"

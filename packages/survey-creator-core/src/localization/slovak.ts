@@ -142,6 +142,7 @@ export var skStrings = {
     translationExportToSCVButton: "Exportovať do CSV",
     translationImportFromSCVButton: "Importovať z CSV",
     translateUsigAI: "Automatický preklad všetkého",
+    translateUsigAIFrom: "Preložiť z: ",
     translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
@@ -339,6 +340,8 @@ export var skStrings = {
     showOtherItem: "Obsahuje inú položku",
     otherText: "Text inej položky",
     showNoneItem: "Neobsahuje žiadnu položku",
+    showRefuseItem: "Povoliť možnosť Odmietnuť odpovedať",
+    showDontKnowItem: "Povoliť možnosť Neviem",
     noneText: "Text pri žiadnej položke",
     showSelectAllItem: "Obsahuje vybraté všetky položky",
     selectAllText: "Text pri výbere všetkých položiek",
@@ -749,6 +752,9 @@ export var skStrings = {
     onComplete: "pri dokončení",
     onHidden: "pri skrytí",
     onHiddenContainer: "Keď sa otázka alebo jej panel/stránka skryje",
+    contain: "Obsahovať",
+    cover: "Prikryť",
+    fill: "Vyplniť",
     clearInvisibleValues: {
       none: "Nikdy"
     },
@@ -1699,3 +1705,11 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.titleFont: "Title font" => "Písmo názvu"
 // theme.descriptionFont: "Description font" => "Popisné písmo"
 // theme.shadow: "Shadow effects" => "Efekty tieňov"
+// ed.translateUsigAIFrom: "Translate from: " => "Preložiť z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pv.contain: "Contain" => "Obsahovať"
+// pv.cover: "Cover" => "Prikryť"
+// pv.fill: "Fill" => "Vyplniť"

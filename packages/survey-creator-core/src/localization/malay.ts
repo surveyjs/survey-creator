@@ -142,6 +142,7 @@ export var msStrings = {
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
     translateUsigAI: "Terjemahkan Secara automatik Semua",
+    translateUsigAIFrom: "Terjemah daripada: ",
     translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
@@ -339,6 +340,8 @@ export var msStrings = {
     showOtherItem: "Ada item lain",
     otherText: "Teks item lain",
     showNoneItem: "Tiada item",
+    showRefuseItem: "Benarkan pilihan Enggan Menjawab",
+    showDontKnowItem: "Benarkan pilihan Jangan Tahu",
     noneText: "Tiada teks item",
     showSelectAllItem: "Telah pilih semua item",
     selectAllText: "Pilih semua teks item",
@@ -749,6 +752,9 @@ export var msStrings = {
     onComplete: "Pada selesai",
     onHidden: "Pada tersembunyi",
     onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
+    contain: "Mengandungi",
+    cover: "Perlindungan",
+    fill: "Mengisi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1699,3 +1705,11 @@ editorLocalization.locales["ms"] = msStrings;
 // theme.titleFont: "Title font" => "Fon tajuk"
 // theme.descriptionFont: "Description font" => "Fon perihalan"
 // theme.shadow: "Shadow effects" => "Kesan bayang"
+// ed.translateUsigAIFrom: "Translate from: " => "Terjemah daripada: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pv.contain: "Contain" => "Mengandungi"
+// pv.cover: "Cover" => "Perlindungan"
+// pv.fill: "Fill" => "Mengisi"
