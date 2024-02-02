@@ -997,6 +997,6 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
   const fileQuestionAdornerSurvey = imageAdorner.filePresentationModel.getSurvey();
 
   expect(log).toBe("");
-  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), ([]) => { });
+  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { });
   expect(log).toBe("->onOpenFileChooser");
 });
