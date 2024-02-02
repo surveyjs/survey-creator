@@ -10,6 +10,7 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
 
+export * from "../creator-events-api";
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
 
