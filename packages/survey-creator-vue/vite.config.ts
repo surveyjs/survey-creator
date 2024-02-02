@@ -2,6 +2,7 @@ import { resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import copy from "rollup-plugin-copy";
 import generatePackageJson from "rollup-plugin-generate-package-json";
 const json = require("./publish/package.json");
 const packageJson = require("./package.json");
@@ -38,6 +39,10 @@ export default defineConfig(({ mode }) => {
         ],
 
         plugins: [
+          copy({
+            hook: "writeBundle",
+            targets: [{ src: "./README.md", dest: "./build" }],
+          }),
           generatePackageJson({
             inputFolder: "publish",
             outputFolder: "./build",
