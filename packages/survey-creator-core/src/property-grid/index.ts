@@ -1339,12 +1339,28 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return {
+    const res: any = {
       type: "boolean",
       default: false,
       renderAs: "checkbox",
       titleLocation: "hidden"
     };
+    const choices = prop.getChoices(obj, (choices: any) => { });
+    if(Array.isArray(choices) && choices.length >= 2) {
+      const jsonChoices = [];
+      for(let i = 0; i < 2; i ++) {
+        const val = choices[i].value || choices[i];
+        jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
+      }
+      const defaultValue = prop.getDefaultValue(obj) || jsonChoices[0].value;
+      const indexTrue = defaultValue === choices[1].value ? 1 : 0;
+      const indexFalse = indexTrue === 0 ? 1 : 0;
+      res.valueTrue = jsonChoices[indexTrue].value;
+      res.valueFalse = jsonChoices[indexFalse].value;
+      res.labelTrue = jsonChoices[indexTrue].text;
+      res.labelFalse = jsonChoices[indexFalse].text;
+    }
+    return res;
   }
   public isSupportGrouping(): boolean {
     return true;
@@ -1568,7 +1584,7 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
 
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return this.isLocaleProp(prop) || prop.hasChoices;
+    return prop.type !== "boolean" && (this.isLocaleProp(prop) || prop.hasChoices);
   }
   public getJSON(
     obj: Base,

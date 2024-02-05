@@ -30,7 +30,8 @@ import {
   AdaptiveActionContainer,
   QuestionCommentModel,
   QuestionImagePickerModel,
-  ComponentCollection
+  ComponentCollection,
+  QuestionBooleanModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -3054,4 +3055,20 @@ test("allowExpandMultipleCategories", () => {
   propSurvey.getAllPanels()[0].expand();
   expect(getOpendedCategories()).toBe(2);
   settings.propertyGrid.allowExpandMultipleCategories = false;
+});
+test("property with boolean type and two choices", () => {
+  const columnLayoutProperty = Serializer.findProperty("matrixdropdown", "columnLayout");
+  columnLayoutProperty.type = "boolean";
+
+  const matrix = new QuestionMatrixDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(matrix);
+  const columnLayoutQuestion = <QuestionBooleanModel>propertyGrid.survey.getQuestionByName("columnLayout");
+  expect(columnLayoutQuestion.getType()).toBe("boolean");
+  expect(columnLayoutQuestion.renderAs).toBe("checkbox");
+  expect(columnLayoutQuestion.valueTrue).toBe("horizontal");
+  expect(columnLayoutQuestion.valueFalse).toBe("vertical");
+  expect(columnLayoutQuestion.labelTrue).toBe("Horizontal");
+  expect(columnLayoutQuestion.labelFalse).toBe("Vertical");
+
+  columnLayoutProperty.type = "";
 });
