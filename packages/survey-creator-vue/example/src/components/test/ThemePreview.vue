@@ -1,5 +1,5 @@
 <template>
-    <Common :options="{ themeForPreview: 'modern' }" :use-slk="false"></Common>
+        <Common :options="{ themeForPreview: 'modern' }" :use-slk="true"></Common>
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';
@@ -10,3 +10,4 @@ import ("survey-core/defaultV2.css");
 // import ("survey-core/survey.css");
 import ("survey-creator-core/survey-creator-core.css");
 </script>
+S

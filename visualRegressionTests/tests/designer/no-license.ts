@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, wrapVisualTest } from "../../helper";
 
 const url = "http://127.0.0.1:8080/testCafe/testcafe-no-license";
-const title = "Themes tab";
+const title = "No License";
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });

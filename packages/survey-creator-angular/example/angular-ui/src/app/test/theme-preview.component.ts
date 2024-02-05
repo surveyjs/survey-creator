@@ -11,7 +11,6 @@ export class ThemePreviewComponent extends TestDefaultComponent {
   constructor() {
     super();
   }
-  protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({ themeForPreview: "modern" });
   }
