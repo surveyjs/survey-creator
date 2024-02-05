@@ -49,6 +49,7 @@ import { PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matr
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
+import { enStrings } from "../../src/localization/english";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -84,6 +85,18 @@ test("Check tabs creating", () => {
   var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
+});
+test("Categories titles", () => {
+  enStrings.pe.tabs.layout.panel = "Panel Layout";
+  enStrings.pe.tabs.layout.question = "Question Layout";
+  const question = new QuestionCheckboxModel("q1");
+  const panel = new PanelModel("panel1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  const questionLayout = propertyGrid.survey.getPanelByName("layout");
+  expect(questionLayout.title).toBe("Question Layout");
+  propertyGrid = new PropertyGridModelTester(panel);
+  const panelLayout = propertyGrid.survey.getPanelByName("layout");
+  expect(panelLayout.title).toBe("Panel Layout");
 });
 test("Stop doing it because of title actions - Hide question title if property is first in tab and has the same title as tab", () => {
   var question = new QuestionCheckboxModel("q1");

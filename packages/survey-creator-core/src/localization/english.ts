@@ -621,7 +621,11 @@ export var enStrings = {
       templateTitle: "Title template",
       totals: "Totals",
       logic: "Logic",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validation",
       cells: "Cell Texts",
