@@ -891,6 +891,13 @@ export class PropertyGridModel {
     this.survey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
+    this.survey.onElementContentVisibilityChanged.add((sender, options) => {
+      if(creatorSettings.propertyGrid.allowExpandMultipleCategories) return;
+      const el = options.element;
+      if(el && el.isPanel && el.isExpanded) {
+        this.collapseOtherPanels(<PanelModel>el);
+      }
+    });
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
     });
@@ -951,17 +958,21 @@ export class PropertyGridModel {
       panel.expand();
     }
   }
-  public collapseAllCategories() {
-    var panels = this.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      (<PanelModel>panels[i]).collapse();
-    }
+  public collapseAllCategories(): void {
+    this.collapseAllCategoriesExcept(null);
   }
-  public expandAllCategories() {
-    var panels = this.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      (<PanelModel>panels[i]).expand();
-    }
+  public expandAllCategories(): void {
+    this.survey.getAllPanels().forEach(pnl => {
+      pnl.expand();
+    });
+  }
+  private collapseOtherPanels(panel: PanelModel): void {
+    this.collapseAllCategoriesExcept(panel);
+  }
+  private collapseAllCategoriesExcept(panel: PanelModel): void {
+    this.survey.getAllPanels().forEach(pnl => {
+      if(pnl !== panel) pnl.collapse();
+    });
   }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "property-grid", this);
