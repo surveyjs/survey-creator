@@ -629,34 +629,26 @@ export class SurveyQuestionEditorDefinition {
         "width",
         "fitToContainer",
 
+        { name: "questionsOnPageMode", tab: "navigation" },
+        { name: "firstPageIsStarted", tab: "navigation" },
+        { name: "goNextPageAutomatic", tab: "navigation" },
+        { name: "showNavigationButtons", tab: "navigation" },
+        { name: "showPrevButton", tab: "navigation" },
+        { name: "showProgressBar", tab: "navigation" },
+        { name: "progressBarType", tab: "navigation" },
+        { name: "progressBarShowPageTitles", tab: "navigation" },
+        { name: "progressBarShowPageNumbers", tab: "navigation" },
+        { name: "showTOC", tab: "navigation" },
+        { name: "tocLocation", tab: "navigation" },
         { name: "showPreviewBeforeComplete", tab: "navigation" },
-        { name: "pagePrevText", tab: "navigation" },
-        { name: "pageNextText", tab: "navigation" },
-        { name: "completeText", tab: "navigation" },
         { name: "previewText", tab: "navigation" },
         { name: "editText", tab: "navigation" },
         { name: "startSurveyText", tab: "navigation" },
-        {
-          name: "showNavigationButtons",
-          tab: "navigation"
-        },
-        {
-          name: "progressBarShowPageTitles",
-          tab: "navigation"
-        },
-        {
-          name: "progressBarShowPageNumbers",
-          tab: "navigation"
-        },
-        { name: "showPrevButton", tab: "navigation" },
-        { name: "firstPageIsStarted", tab: "navigation" },
-        { name: "goNextPageAutomatic", tab: "navigation" },
-        { name: "showProgressBar", tab: "navigation" },
-        { name: "progressBarType", tab: "navigation" },
-        { name: "questionsOnPageMode", tab: "navigation" },
-        { name: "showTOC", tab: "navigation" },
-        { name: "tocLocation", tab: "navigation" },
+        { name: "pagePrevText", tab: "navigation" },
+        { name: "pageNextText", tab: "navigation" },
+        { name: "completeText", tab: "navigation" },
 
+        { name: "questionsOrder", tab: "question" },
         { name: "questionTitleLocation", tab: "question" },
         { name: "questionDescriptionLocation", tab: "question" },
         { name: "showQuestionNumbers", tab: "question" },
@@ -668,12 +660,10 @@ export class SurveyQuestionEditorDefinition {
           name: "focusFirstQuestionAutomatic",
           tab: "question"
         },
-        { name: "questionsOrder", tab: "question" },
         { name: "maxTextLength", tab: "question" },
         { name: "maxOthersLength", tab: "question" },
         { name: "autoGrowComment", tab: "question" },
         { name: "allowResizeComment", tab: "question" },
-
         { name: "showPageTitles", tab: "pages" },
         { name: "showPageNumbers", tab: "pages" },
 
