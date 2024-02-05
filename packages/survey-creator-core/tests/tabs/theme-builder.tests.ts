@@ -2878,16 +2878,16 @@ test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
     const defaultValueElement = options.survey.findQuestionByName("questionTitle")["defaultValue"];
 
     const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
-    creator.themeEditor.addPropertyGridEditor({ element: newFontSettings, insertBefore: "questionTitle" });
+    options.themeEditor.addPropertyGridEditor({ element: newFontSettings, insertBefore: "questionTitle" });
     newFontSettings.title = "Question title font";
     newFontSettings.value = defaultValueElement;
 
     const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
-    creator.themeEditor.addPropertyGridEditor({ element: newMatrixFontSettings, insertAfter: "questionTitle" });
+    options.themeEditor.addPropertyGridEditor({ element: newMatrixFontSettings, insertAfter: "questionTitle" });
     newMatrixFontSettings.title = "Matrix title font";
     newMatrixFontSettings.value = defaultValueElement;
 
-    creator.themeEditor.removePropertyGridEditor("questionTitle");
+    options.themeEditor.removePropertyGridEditor("questionTitle");
   });
   creator.themeEditor.activate();
   const themeBuilder = creator.themeEditor.model as ThemeBuilder;
