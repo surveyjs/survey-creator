@@ -52,8 +52,11 @@ function propertyVisibleIf(params: any): boolean {
   return prop.isVisible("", obj);
 }
 function propertyEnableIf(params: any): boolean {
-  if (!this.question || !this.question.obj || !this.question.property) return false;
-  return !this.question.obj[this.question.property.overridingProperty];
+  const prop = this.question.property;
+  const obj = this.question.obj;
+  if (!this.question || !obj || !prop) return false;
+  if(this.question.obj[prop.overridingProperty]) return false;
+  return prop.isEnable(obj);
 }
 
 FunctionFactory.Instance.register("propertyVisibleIf", propertyVisibleIf);
@@ -518,21 +521,22 @@ export class PropertyJSONGenerator {
       q.obj = this.obj;
       q.options = this.options;
       const eventVisibility = this.getVisibilityOnEvent(prop);
-      const eventReadOnly = this.isPropertyReadOnly(prop);
-      q.readOnly = q.readOnly || eventReadOnly;
+      q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
       if (!!prop.visibleIf && eventVisibility) {
         q.visibleIf = "propertyVisibleIf() = true";
       }
-      if (!!prop.overridingProperty && q.visible) {
-        q.onUpdateCssClassesCallback = (css: any) => {
-          css.questionWrapper = "spg-boolean-wrapper--overriding";
-        };
-        if (!eventReadOnly) {
+      if (q.visible && (!!prop.overridingProperty || prop.enableIf)) {
+        if (!q.readOnly) {
           q.enableIf = "propertyEnableIf() = true";
         }
-        const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
-        q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+        if(prop.overridingProperty) {
+          q.onUpdateCssClassesCallback = (css: any) => {
+            css.questionWrapper = "spg-boolean-wrapper--overriding";
+          };
+          const overridingQuestion = this.createOverridingQuestion(panel, q, prop.overridingProperty);
+          q.parent.addElement(overridingQuestion, q.parent.elements.indexOf(q) + 1);
+        }
       }
       q.descriptionLocation = "hidden";
       let helpText = editorLocalization.getPropertyHelpInEditor(this.obj.getType(), prop.name, prop.type);
