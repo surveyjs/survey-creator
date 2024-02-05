@@ -142,6 +142,7 @@ export var jaStrings = {
     translationExportToSCVButton: "CSVにエクスポートする",
     translationImportFromSCVButton: "CSVからインポートする",
     translateUsigAI: "すべて自動翻訳",
+    translateUsigAIFrom: "言語の選択：",
     translationDialogTitle: "未翻訳の文字列",
     translationMergeLocaleWithDefault: "{0}をデフォルトのロケールにマージする",
     translationPlaceHolder: "翻訳。。。",
@@ -1750,6 +1751,9 @@ editorLocalization.locales["ja"] = jaStrings;
 // theme.titleFont: "Title font" => "タイトルのフォント"
 // theme.descriptionFont: "Description font" => "説明フォント"
 // theme.shadow: "Shadow effects" => "影の効果"
+// ed.translateUsigAIFrom: "Translate from: " => "言語の選択："
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "[回答を拒否] オプションを許可する"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "[わからない] オプションを許可する"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "[回答を拒否] オプションを許可する"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "[わからない] オプションを許可する"
 // pv.contain: "Contain" => "含む"

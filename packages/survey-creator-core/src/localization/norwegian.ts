@@ -142,6 +142,7 @@ export var nbStrings = {
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
     translateUsigAI: "Oversett alle automatisk",
+    translateUsigAIFrom: "Oversett fra: ",
     translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
@@ -1754,6 +1755,9 @@ editorLocalization.locales["nb"] = nbStrings;
 // theme.titleFont: "Title font" => "Tittel skrift"
 // theme.descriptionFont: "Description font" => "Beskrivelse font"
 // theme.shadow: "Shadow effects" => "Skygge effekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Oversett fra: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
 // pv.contain: "Contain" => "Inneholde"

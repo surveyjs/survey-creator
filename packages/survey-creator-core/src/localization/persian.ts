@@ -142,6 +142,7 @@ var persianStrings = {
     translationExportToSCVButton: "برون بری به CSV",
     translationImportFromSCVButton: "برون ریزی از CSV",
     translateUsigAI: "ترجمه خودکار همه",
+    translateUsigAIFrom: "ترجمه از: ",
     translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
@@ -1706,6 +1707,9 @@ editorLocalization.locales["fa"] = persianStrings;
 // theme.titleFont: "Title font" => "قلم عنوان"
 // theme.descriptionFont: "Description font" => "قلم توصیف"
 // theme.shadow: "Shadow effects" => "جلوه های سایه"
+// ed.translateUsigAIFrom: "Translate from: " => "ترجمه از: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
 // pv.contain: "Contain" => "حاوی"

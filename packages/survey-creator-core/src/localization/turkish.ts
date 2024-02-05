@@ -142,6 +142,7 @@ export var turkishStrings = {
     translationExportToSCVButton: "CSV dışa çıkart",
     translationImportFromSCVButton: "CSV içe aktar",
     translateUsigAI: "Tümünü Otomatik Çevir",
+    translateUsigAIFrom: "Çeviri kaynağı: ",
     translationDialogTitle: "Çevrilmemiş dizeler",
     translationMergeLocaleWithDefault: "{0} varsayılan çeviri ile sıkıştır",
     translationPlaceHolder: "Çeviri...",
@@ -1746,6 +1747,9 @@ editorLocalization.locales["tr"] = turkishStrings;
 // theme.titleFont: "Title font" => "Başlık yazı tipi"
 // theme.descriptionFont: "Description font" => "Açıklama yazı tipi"
 // theme.shadow: "Shadow effects" => "Gölge efektleri"
+// ed.translateUsigAIFrom: "Translate from: " => "Çeviri kaynağı: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
 // pv.contain: "Contain" => "Kapsamak"

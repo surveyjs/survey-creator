@@ -30,7 +30,8 @@ import {
   AdaptiveActionContainer,
   QuestionCommentModel,
   QuestionImagePickerModel,
-  ComponentCollection
+  ComponentCollection,
+  QuestionBooleanModel
 } from "survey-core";
 import {
   EmptySurveyCreatorOptions,
@@ -2089,7 +2090,8 @@ test("Change page", () => {
   pageQuestion.value = "page2";
   expect(question.page.name).toEqual("page2");
 });
-test("Expand/collapse categories", () => {
+test("Expand/collapse categories, allowExpandMultipleCategories = true", () => {
+  settings.propertyGrid.allowExpandMultipleCategories = true;
   var question = new QuestionTextModel("q1");
   var options = new EmptySurveyCreatorOptions();
   var propertyGrid = new PropertyGridModelTester(question, options);
@@ -2104,6 +2106,7 @@ test("Expand/collapse categories", () => {
   expect(logicPanel.isExpanded).toBeTruthy();
   propertyGrid.collapseAllCategories();
   expect(logicPanel.isExpanded).toBeFalsy();
+  settings.propertyGrid.allowExpandMultipleCategories = false;
 });
 test("add item into rates", () => {
   var question = new QuestionRatingModel("q1");
@@ -3027,4 +3030,45 @@ test("Check showInMultipleColumns property visibility", () => {
   const showInMultipleColumnsQuestion = propertyGrid.survey.getQuestionByName("showInMultipleColumns");
   expect(showInMultipleColumnsQuestion.value).toBe(true);
   expect(showInMultipleColumnsQuestion.isVisible).toBeTruthy();
+});
+test("allowExpandMultipleCategories", () => {
+  const survey = new SurveyModel();
+  survey.setDesignMode(true);
+  const propertyGrid = new PropertyGridModelTester(survey);
+  const propSurvey = propertyGrid.survey;
+  const getOpendedCategories = (): number => {
+    let res = 0;
+    propSurvey.getAllPanels().forEach(panel => {
+      if(panel.isExpanded) res++;
+    });
+    return res;
+  };
+  expect(getOpendedCategories()).toBe(0);
+  propSurvey.getAllPanels()[0].expand();
+  expect(getOpendedCategories()).toBe(1);
+  propSurvey.getAllPanels()[1].expand();
+  expect(getOpendedCategories()).toBe(1);
+  expect(propSurvey.getAllPanels()[0].isExpanded).toBe(false);
+  expect(propSurvey.getAllPanels()[1].isExpanded).toBe(true);
+
+  settings.propertyGrid.allowExpandMultipleCategories = true;
+  propSurvey.getAllPanels()[0].expand();
+  expect(getOpendedCategories()).toBe(2);
+  settings.propertyGrid.allowExpandMultipleCategories = false;
+});
+test("property with boolean type and two choices", () => {
+  const columnLayoutProperty = Serializer.findProperty("matrixdropdown", "columnLayout");
+  columnLayoutProperty.type = "boolean";
+
+  const matrix = new QuestionMatrixDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(matrix);
+  const columnLayoutQuestion = <QuestionBooleanModel>propertyGrid.survey.getQuestionByName("columnLayout");
+  expect(columnLayoutQuestion.getType()).toBe("boolean");
+  expect(columnLayoutQuestion.renderAs).toBe("checkbox");
+  expect(columnLayoutQuestion.valueTrue).toBe("horizontal");
+  expect(columnLayoutQuestion.valueFalse).toBe("vertical");
+  expect(columnLayoutQuestion.labelTrue).toBe("Horizontal");
+  expect(columnLayoutQuestion.labelFalse).toBe("Vertical");
+
+  columnLayoutProperty.type = "";
 });

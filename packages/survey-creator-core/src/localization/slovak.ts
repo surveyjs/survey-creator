@@ -142,6 +142,7 @@ export var skStrings = {
     translationExportToSCVButton: "Exportovať do CSV",
     translationImportFromSCVButton: "Importovať z CSV",
     translateUsigAI: "Automatický preklad všetkého",
+    translateUsigAIFrom: "Preložiť z: ",
     translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
@@ -1704,6 +1705,9 @@ editorLocalization.locales["sk"] = skStrings;
 // theme.titleFont: "Title font" => "Písmo názvu"
 // theme.descriptionFont: "Description font" => "Popisné písmo"
 // theme.shadow: "Shadow effects" => "Efekty tieňov"
+// ed.translateUsigAIFrom: "Translate from: " => "Preložiť z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
 // pv.contain: "Contain" => "Obsahovať"

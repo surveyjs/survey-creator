@@ -98,7 +98,8 @@ export var settings = {
     maximumRowsCount: 0,
     maximumRateValues: 0,
     generalTabName: "general",
-    defaultExpandedTabName: "general"
+    defaultExpandedTabName: "general",
+    allowExpandMultipleCategories: false
   },
   toolbox: {
     /**

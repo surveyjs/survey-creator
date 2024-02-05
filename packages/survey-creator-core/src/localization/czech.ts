@@ -142,6 +142,7 @@ export var czStrings = {
     translationExportToSCVButton: "Export do CSV",
     translationImportFromSCVButton: "Import z CSV",
     translateUsigAI: "Automatický překlad Vše",
+    translateUsigAIFrom: "Přeložit z: ",
     translationDialogTitle: "Nepřeložené řetězce",
     translationMergeLocaleWithDefault: "Sloučit {0} s výchozím lokálem",
     translationPlaceHolder: "Překlad...",
@@ -1315,6 +1316,9 @@ editorLocalization.locales["cs"] = czStrings;
 // theme.titleFont: "Title font" => "Písmo nadpisu"
 // theme.descriptionFont: "Description font" => "Popisné písmo"
 // theme.shadow: "Shadow effects" => "Stínové efekty"
+// ed.translateUsigAIFrom: "Translate from: " => "Přeložit z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povolte možnost Odmítnout odpověď"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povolit možnost Nevím"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povolte možnost Odmítnout odpověď"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Povolit možnost Nevím"
 // pv.contain: "Contain" => "Obsahovat"

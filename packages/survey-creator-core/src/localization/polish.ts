@@ -142,6 +142,7 @@ var polishStrings = {
     translationExportToSCVButton: "Eksport do pliku CSV",
     translationImportFromSCVButton: "Importowanie z pliku CSV",
     translateUsigAI: "Automatycznie tłumacz wszystko",
+    translateUsigAIFrom: "Przetłumacz z: ",
     translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
@@ -2024,6 +2025,9 @@ editorLocalization.locales["pl"] = polishStrings;
 // theme.titleFont: "Title font" => "Czcionka tytułu"
 // theme.descriptionFont: "Description font" => "Czcionka opisu"
 // theme.shadow: "Shadow effects" => "Efekty cienia"
+// ed.translateUsigAIFrom: "Translate from: " => "Przetłumacz z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
 // pv.contain: "Contain" => "Zawierać"

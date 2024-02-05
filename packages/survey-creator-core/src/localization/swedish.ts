@@ -142,6 +142,7 @@ export let svStrings = {
     translationExportToSCVButton: "Exportera till CSV",
     translationImportFromSCVButton: "Importera från CSV",
     translateUsigAI: "Översätt alla automatiskt",
+    translateUsigAIFrom: "Översätt från: ",
     translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
@@ -1928,6 +1929,9 @@ editorLocalization.locales["sv"] = svStrings;
 // theme.titleFont: "Title font" => "Titel typsnitt"
 // theme.descriptionFont: "Description font" => "Beskrivning teckensnitt"
 // theme.shadow: "Shadow effects" => "Skugga effekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Översätt från: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
 // pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
 // pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
 // pv.contain: "Contain" => "Innehålla"

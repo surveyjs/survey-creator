@@ -890,6 +890,13 @@ export class PropertyGridModel {
     this.survey.onUpdateQuestionCssClasses.add((sender, options) => {
       this.onUpdateQuestionCssClasses(options);
     });
+    this.survey.onElementContentVisibilityChanged.add((sender, options) => {
+      if(creatorSettings.propertyGrid.allowExpandMultipleCategories) return;
+      const el = options.element;
+      if(el && el.isPanel && el.isExpanded) {
+        this.collapseOtherPanels(<PanelModel>el);
+      }
+    });
     this.survey.onAfterRenderQuestion.add((sender, options) => {
       this.onAfterRenderQuestion(options);
     });
@@ -950,17 +957,21 @@ export class PropertyGridModel {
       panel.expand();
     }
   }
-  public collapseAllCategories() {
-    var panels = this.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      (<PanelModel>panels[i]).collapse();
-    }
+  public collapseAllCategories(): void {
+    this.collapseAllCategoriesExcept(null);
   }
-  public expandAllCategories() {
-    var panels = this.survey.getAllPanels();
-    for (var i = 0; i < panels.length; i++) {
-      (<PanelModel>panels[i]).expand();
-    }
+  public expandAllCategories(): void {
+    this.survey.getAllPanels().forEach(pnl => {
+      pnl.expand();
+    });
+  }
+  private collapseOtherPanels(panel: PanelModel): void {
+    this.collapseAllCategoriesExcept(panel);
+  }
+  private collapseAllCategoriesExcept(panel: PanelModel): void {
+    this.survey.getAllPanels().forEach(pnl => {
+      if(pnl !== panel) pnl.collapse();
+    });
   }
   protected createSurvey(json: any): SurveyModel {
     return this.options.createSurvey(json, "property-grid", this);
@@ -1327,12 +1338,28 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions
   ): any {
-    return {
+    const res: any = {
       type: "boolean",
       default: false,
       renderAs: "checkbox",
       titleLocation: "hidden"
     };
+    const choices = prop.getChoices(obj, (choices: any) => { });
+    if(Array.isArray(choices) && choices.length >= 2) {
+      const jsonChoices = [];
+      for(let i = 0; i < 2; i ++) {
+        const val = choices[i].value || choices[i];
+        jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
+      }
+      const defaultValue = prop.getDefaultValue(obj) || jsonChoices[0].value;
+      const indexTrue = defaultValue === choices[1].value ? 1 : 0;
+      const indexFalse = indexTrue === 0 ? 1 : 0;
+      res.valueTrue = jsonChoices[indexTrue].value;
+      res.valueFalse = jsonChoices[indexFalse].value;
+      res.labelTrue = jsonChoices[indexTrue].text;
+      res.labelFalse = jsonChoices[indexFalse].text;
+    }
+    return res;
   }
   public isSupportGrouping(): boolean {
     return true;
@@ -1556,7 +1583,7 @@ export class PropertyGridEditorStringArray extends PropertyGridEditor {
 
 export class PropertyGridEditorDropdown extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
-    return this.isLocaleProp(prop) || prop.hasChoices;
+    return prop.type !== "boolean" && (this.isLocaleProp(prop) || prop.hasChoices);
   }
   public getJSON(
     obj: Base,
