@@ -4,14 +4,14 @@ import { TestDefaultComponent } from "./default.component";
 @Component({
   selector: "test-theme-preview",
   templateUrl: "./test.component.html",
-  styleUrls: ["./theme-switcher.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
-export class ThemePreviewComponent extends TestDefaultComponent {
+export class NoLicenseComponent extends TestDefaultComponent {
   constructor() {
     super();
   }
+  protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ themeForPreview: "modern" });
+    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
   }
 }

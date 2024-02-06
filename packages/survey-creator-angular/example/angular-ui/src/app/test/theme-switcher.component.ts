@@ -9,7 +9,6 @@ import { TestDefaultComponent } from "./default.component";
   encapsulation: ViewEncapsulation.None
 })
 export class TestThemeSwitcherComponent extends TestDefaultComponent {
-  protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
     this.creator = new SurveyCreatorModel({});
   }
