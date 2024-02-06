@@ -198,7 +198,7 @@ export var enStrings = {
       trigger_copyvalueName: "Copy answer",
       trigger_skipName: "Skip to question",
       trigger_runExpressionName: "Run expression",
-      completedHtmlOnConditionName: "Set \"Survey Complete\" page markup",
+      completedHtmlOnConditionName: "Set \"Thank You\" page markup",
       page_visibilityDescription: "Make the page visible when the logic expression returns true. Otherwise keep it invisible.",
       panel_visibilityDescription: "Make the panel visible when the logic expression returns true. Otherwise keep it invisible.",
       panel_enableDescription: "Make the panel, and all elements inside it, enable when the logic expression returns true. Otherwise keep them disabled.",
@@ -273,6 +273,26 @@ export var enStrings = {
       maxWidth: "Maximum panel width",
       showNumber: "Number panels"
     },
+    paneldynamic: {
+      name: "Panel name",
+      title: "Panel title",
+      description: "Panel description",
+      // visible: "Make panel visible", 
+      // readOnly: "Make panel read-only",
+      // isRequired: "Make panel required",
+      // visibleIf: "Make the panel visible if",
+      // requiredIf: "Make the panel required if",
+
+      // questionsOrder: "Question order within the panel",
+      // page: "Move the panel to page",
+      // startWithNewLine: "Display the panel on a new line",
+      // state: "Panel collapse state",
+      // width: "Inline panel width",
+      // minWidth: "Minimum panel width",
+      // maxWidth: "Maximum panel width",
+      // showNumber: "Number panels",
+      confirmDelete: "Confirm panel deletion"
+    },
     question: {
       name: "Question name",
       title: "Question title",
@@ -326,8 +346,16 @@ export var enStrings = {
       description: "Survey description"
     },
     page: {
-      title: "Title",
-      maxTimeToFinish: "Time limit to finish the page (in seconds)",
+      name: "Page name",
+      title: "Page title",
+      description: "Page description",
+      // visible: "Make page visible", 
+      // readOnly: "Make page read-only",
+      // isRequired: "Make page required",
+      visibleIf: "Make the page visible if",
+      requiredIf: "Make the page required if",
+      maxTimeToFinish: "Time limit to complete the page",
+      questionsOrder: "Question order on the page"
     },
     imageHeight: "Display area height",
     imageWidth: "Display area width",
@@ -401,12 +429,14 @@ export var enStrings = {
     "listIsEmpty@validators": "You don't have any validation rules yet",
     "listIsEmpty@calculatedValues": "You don't have any custom variables yet",
     "listIsEmpty@triggers": "You don't have any triggers yet",
+    "listIsEmpty@navigateToUrlOnCondition": "You don't have any links yet",
     "addNew@choices": "Add new choice",
     "addNew@columns": "Add new column",
     "addNew@rows": "Add new row",
     "addNew@validators": "Add new rule",
     "addNew@calculatedValues": "Add new variable",
     "addNew@triggers": "Add new trigger",
+    "addNew@navigateToUrlOnCondition": "Add new URL",
     expressionIsEmpty: "Expression is empty",
     value: "Value",
     text: "Text",
@@ -414,9 +444,10 @@ export var enStrings = {
     imageLink: "Image or video file URL",
     columnEdit: "Edit column: {0}",
     itemEdit: "Edit item: {0}",
-    url: "Web service's URL",
+    url: "URL",
     path: "Path to data",
     choicesbyurl: {
+      url: "Web service's URL",
       valueName: "Get value to store from the following property"
     },
     titleName: "Get value to display from the following property",
@@ -511,7 +542,7 @@ export var enStrings = {
     showNavigationButtons: "Show / hide navigation buttons",
     showPrevButton: "Show the Previous Page button",
     firstPageIsStarted: "First page is a start page",
-    showCompletedPage: "Show the Survey Complete page",
+    showCompletedPage: "Show the Thank You page",
     goNextPageAutomatic: "Auto-advance to the next page",
     showProgressBar: "Progress bar alignment",
     questionTitleLocation: "Question title alignment",
@@ -520,16 +551,16 @@ export var enStrings = {
     questionErrorLocation: "Error message alignment",
     focusFirstQuestionAutomatic: "Focus first question on a new page",
     questionsOrder: "Question order",
-    maxTimeToFinish: "Time limit to finish the survey (in seconds)",
-    maxTimeToFinishPage: "Time limit to finish one page (in seconds)",
-    showTimerPanel: "Timer location",
+    maxTimeToFinish: "Time limit to complete the survey",
+    maxTimeToFinishPage: "Time limit to complete one page",
+    showTimerPanel: "Timer alignment",
     showTimerPanelMode: "Timer mode",
     renderMode: "Panel display mode",
     allowAddPanel: "Enable panel addition",
     allowRemovePanel: "Enable panel removal",
     noEntriesText: "Empty entries text",
-    panelAddText: "Add Panel button text",
-    panelRemoveText: "Remove Panel button text",
+    panelAddText: "\"Add Panel\" button text",
+    panelRemoveText: "\"Remove Panel\" button text",
     isSinglePage: "Show all elements on one page",
     html: "HTML markup",
     setValue: "Answer",
@@ -568,11 +599,11 @@ export var enStrings = {
     textUpdateMode: "Update input field values",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
-    navigateToUrl: "Navigate to URL",
-    navigateToUrlOnCondition: "Dynamic URL",
+    navigateToUrl: "Redirect to an external link after submission",
+    navigateToUrlOnCondition: "Dynamic external link",
     completedBeforeHtml: "Markup to show if the user already filled out this survey",
-    completedHtml: "Survey Complete page markup",
-    completedHtmlOnCondition: "Dynamic Survey Complete page markup",
+    completedHtml: "Thank You page markup",
+    completedHtmlOnCondition: "Dynamic Thank You page markup",
     loadingHtml: "Markup to show while survey model is loading",
     commentText: "Comment area text",
     autocomplete: "Autocomplete type",
@@ -594,13 +625,10 @@ export var enStrings = {
     maxRowCount: "Maximum row count",
     confirmDelete: "Confirm row deletion",
     confirmDeleteText: "Confirmation message",
-    paneldynamic: {
-      confirmDelete: "Confirm panel deletion"
-    },
     panelCount: "Initial panel count",
     minPanelCount: "Minimum panel count",
     maxPanelCount: "Maximum panel count",
-    panelsState: "Inner panel expand state",
+    panelsState: "Inner panel collapse state",
     templateDescription: "Description template",
     templateTitle: "Title template",
     panelPrevText: "Previous Panel button tooltip",
@@ -686,7 +714,7 @@ export var enStrings = {
       navigation: "Navigation",
       question: "Question Settings",
       pages: "Pages",
-      timer: "Timer/Quiz",
+      timer: "Quiz Mode",
       calculatedValues: "Calculated Values",
       triggers: "Triggers",
       templateTitle: "Title template",
@@ -696,7 +724,7 @@ export var enStrings = {
       data: "Data",
       validation: "Validation",
       cells: "Individual Cell Texts",
-      showOnCompleted: "Survey Complete",
+      showOnCompleted: "Thank You Page",
       logo: "Logo in the Survey Header",
       slider: "Slider",
       expression: "Expression",
@@ -874,9 +902,10 @@ export var enStrings = {
       default: "Based on matrix layout"
     },
     panelsState: {
-      default: "Users cannot expand or collapse panels",
-      collapsed: "All panels are collapsed",
-      expanded: "All panels are expanded"
+      default: "Locked",
+      collapsed: "Collapse all",
+      expanded: "Expand all",
+      firstExpanded: "First expanded"
     },
     widthMode: {
       static: "Static",
@@ -1055,7 +1084,8 @@ export var enStrings = {
       surveyvalidator: {
         expression: "Use the magic wand icon to set a validation rule for the question."
       },
-      textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)."
+      textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
+      url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1122,6 +1152,21 @@ export var enStrings = {
     imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
     autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting.",
     allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field.",
+    maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page.",
+    maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page.",
+    page: {
+      maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page.",
+      visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
+      enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
+      requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
+      questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab.",
+      navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"."
+    },
+    showTimerPanel: "Sets the visibility and location of a timer on a page.",
+    panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded.",
+
     imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list.",
     choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents.",
     title: "Type a user-friendly title to display.",
@@ -1134,7 +1179,6 @@ export var enStrings = {
     choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question.",
     showOtherItem: "When selected, users can include additional input in a separate comment box.",
     separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout.",
-    url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
     path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array.",
     choicesbyurl: {
       valueName: "Enter a uniform property name within the array of objects whose value will be stored as a response in survey results."
@@ -1240,7 +1284,7 @@ export var enStrings = {
     itemTitleWidth: "Item label width (in px)",
     elements: "Elements", // Auto-generated string
     content: "Content", // Auto-generated string
-    navigationButtonsVisibility: "Navigation buttons visibility", // Auto-generated string
+    navigationButtonsVisibility: "Show / hide navigation buttons",
     navigationTitle: "Navigation title", // Auto-generated string
     navigationDescription: "Navigation description", // Auto-generated string
     longTap: "Long tap", // Auto-generated string

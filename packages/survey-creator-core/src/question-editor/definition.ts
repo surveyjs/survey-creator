@@ -599,12 +599,12 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "state", tab: "layout" },
-        { name: "width", tab: "layout" },
+        { name: "width", tab: "layout", placeholder: "Ex.: 6in" },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
-        { name: "questionStartIndex", tab: "numbering" },
-        { name: "minWidth", tab: "layout" },
-        { name: "maxWidth", tab: "layout" },
+        { name: "questionStartIndex", tab: "numbering", placeholder: "Ex.: a)" },
+        { name: "minWidth", tab: "layout", placeholder: "Ex.: 600px" },
+        { name: "maxWidth", tab: "layout", placeholder: "Ex.: 50%" },
       ],
       tabs: [{ name: "numbering", index: 350 }]
     },
@@ -613,9 +613,10 @@ export class SurveyQuestionEditorDefinition {
         "navigationTitle",
         "navigationDescription",
         "maxTimeToFinish",
-        { name: "questionsOrder", tab: "layout" },
-        { name: "navigationButtonsVisibility", tab: "layout" }
-      ]
+        { name: "questionsOrder", tab: "questionSettings" },
+        { name: "navigationButtonsVisibility", tab: "navigation" }
+      ],
+      tabs: [{ name: "navigation", index: 350 }]
     },
     survey: {
       properties: [
@@ -654,7 +655,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showQuestionNumbers", tab: "question" },
         { name: "questionTitlePattern", tab: "question" },
         { name: "requiredText", tab: "question" },
-        { name: "questionStartIndex", tab: "question" },
+        { name: "questionStartIndex", tab: "question", placeholder: "Ex.: a)" },
         { name: "questionErrorLocation", tab: "question" },
         {
           name: "focusFirstQuestionAutomatic",
@@ -679,9 +680,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "checkErrorsMode", tab: "validation" },
 
         { name: "navigateToUrl", tab: "showOnCompleted" },
+        { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },
         { name: "showCompletedPage", tab: "showOnCompleted" },
         { name: "completedHtml", tab: "showOnCompleted" },
-        { name: "navigateToUrlOnCondition", tab: "showOnCompleted" },
         { name: "completedHtmlOnCondition", tab: "showOnCompleted" },
         { name: "loadingHtml", tab: "showOnCompleted" },
         { name: "completedBeforeHtml", tab: "showOnCompleted" },
