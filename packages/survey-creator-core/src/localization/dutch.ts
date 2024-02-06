@@ -450,6 +450,9 @@ export var nlStrings = {
     question: {
       page: "Bovenliggende pagina"
     },
+    panel: {
+      page: "Bovenliggende pagina"
+    },
     showTimerPanel: "Toon timerpaneel",
     showTimerPanelMode: "Modus timerpaneel",
     renderMode: "Render-modus",

@@ -450,6 +450,9 @@ export var indonesianStrings = {
     question: {
       page: "Halaman induk"
     },
+    panel: {
+      page: "Halaman induk"
+    },
     showTimerPanel: "Tampilkan panel pengatur waktu",
     showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
     renderMode: "Mode render",

@@ -450,6 +450,9 @@ var portugueseTranslation = {
     question: {
       page: "Página principal"
     },
+    panel: {
+      page: "Página principal"
+    },
     showTimerPanel: "Mostrar o painel de cronômetro",
     showTimerPanelMode: "Mostrar painel de modo de cronômetro",
     renderMode: "Modo de renderização",

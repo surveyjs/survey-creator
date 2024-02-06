@@ -450,6 +450,9 @@ var germanTranslation = {
     question: {
       page: "Elternseite"
     },
+    panel: {
+      page: "Elternseite"
+    },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",
     renderMode: "Anzeigemodus",

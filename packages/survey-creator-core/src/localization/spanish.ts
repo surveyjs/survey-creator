@@ -450,6 +450,9 @@ var spanishTranslation = {
     question: {
       page: "Página padre"
     },
+    panel: {
+      page: "Página padre"
+    },
     showTimerPanel: "Mostrar panel de temporizador",
     showTimerPanelMode: "Mostrar modo de panel del temporizador",
     renderMode: "Modo de renderizado",

@@ -450,6 +450,9 @@ var simplifiedChineseTranslation = {
     question: {
       page: "父页面"
     },
+    panel: {
+      page: "父页面"
+    },
     showTimerPanel: "显示计时器面板",
     showTimerPanelMode: "显示计时器面板模式",
     renderMode: "渲染模式",

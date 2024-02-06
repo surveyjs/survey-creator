@@ -450,6 +450,9 @@ export var nbStrings = {
     question: {
       page: "Overordnet side"
     },
+    panel: {
+      page: "Overordnet side"
+    },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
     renderMode: "Gjengivelse modus",

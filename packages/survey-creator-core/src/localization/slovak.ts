@@ -450,6 +450,9 @@ export var skStrings = {
     question: {
       page: "Nadradená stránka"
     },
+    panel: {
+      page: "Nadradená stránka"
+    },
     showTimerPanel: "Zobraziť panel s časovačom",
     showTimerPanelMode: "Zobraziť režim panela s časovačom",
     renderMode: "Režim vykresľovania",

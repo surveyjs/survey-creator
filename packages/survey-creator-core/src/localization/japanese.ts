@@ -450,6 +450,9 @@ export var jaStrings = {
     question: {
       page: "親ページ"
     },
+    panel: {
+      page: "親ページ"
+    },
     showTimerPanel: "タイマーパネルを表示する",
     showTimerPanelMode: "タイマーパネルモードを表示",
     renderMode: "レンダーモード",

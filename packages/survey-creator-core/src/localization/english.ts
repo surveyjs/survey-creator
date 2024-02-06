@@ -451,6 +451,9 @@ export var enStrings = {
     question: {
       page: "Parent page"
     },
+    panel: {
+      page: "Parent page"
+    },
     showTimerPanel: "Timer location",
     showTimerPanelMode: "Timer mode",
     renderMode: "Panel display mode",

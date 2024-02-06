@@ -450,6 +450,9 @@ export var arStrings = {
     question: {
       page: "الصفحة الرئيسية"
     },
+    panel: {
+      page: "الصفحة الرئيسية"
+    },
     showTimerPanel: "إظهار لوحة المؤقت",
     showTimerPanelMode: "إظهار نمط لوحة المؤقت",
     renderMode: "نمط العرض",

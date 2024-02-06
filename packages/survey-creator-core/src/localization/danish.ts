@@ -450,6 +450,9 @@ export var danishStrings = {
     question: {
       page: "Overordnet side"
     },
+    panel: {
+      page: "Overordnet side"
+    },
     showTimerPanel: "Vis tidspanel",
     showTimerPanelMode: "Vis tidspanel tilstand",
     renderMode: "Renderingstilstand",

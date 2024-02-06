@@ -450,6 +450,9 @@ export var ruStrings = {
     question: {
       page: "Родительская страница"
     },
+    panel: {
+      page: "Родительская страница"
+    },
     showTimerPanel: "Показывать панель таймера",
     showTimerPanelMode: "Показывать режим панели таймера",
     renderMode: "Режим отображения панели",

@@ -450,6 +450,9 @@ export var fiStrings = {
     question: {
       page: "Pääsivu"
     },
+    panel: {
+      page: "Pääsivu"
+    },
     showTimerPanel: "Näytä ajastus -paneeli",
     showTimerPanelMode: "Näytä ajastus -paneelin tila",
     renderMode: "Renderöinnin tila",

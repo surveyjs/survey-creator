@@ -450,6 +450,9 @@ export var huStrings = {
     question: {
       page: "Szülőoldal"
     },
+    panel: {
+      page: "Szülőoldal"
+    },
     showTimerPanel: "Időzító mutatása",
     showTimerPanelMode: "Időzító módja",
     renderMode: "Megjelenítés módja",

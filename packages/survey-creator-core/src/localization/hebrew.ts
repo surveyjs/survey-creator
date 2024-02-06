@@ -450,6 +450,9 @@ export var hebrewStrings = {
     question: {
       page: "עמוד הורה"
     },
+    panel: {
+      page: "עמוד הורה"
+    },
     showTimerPanel: "מיקום הטיימר",
     showTimerPanelMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",

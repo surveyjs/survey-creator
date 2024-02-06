@@ -450,6 +450,9 @@ var frenchTranslation = {
     question: {
       page: "Page parent"
     },
+    panel: {
+      page: "Page parent"
+    },
     showTimerPanel: "Afficher le panneau chronomètre",
     showTimerPanelMode: "Mode d'affichage du panneau chronomètre",
     renderMode: "Mode de rendu",

@@ -450,6 +450,9 @@ export var czStrings = {
     question: {
       page: "Nadřazená stránka"
     },
+    panel: {
+      page: "Nadřazená stránka"
+    },
     showTimerPanel: "Zobrazit panel časovače",
     showTimerPanelMode: "Zobrazit režim panelu časovače",
     renderMode: "Režim vykreslování",

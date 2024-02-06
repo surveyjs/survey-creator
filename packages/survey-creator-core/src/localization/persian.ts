@@ -450,6 +450,9 @@ var persianStrings = {
     question: {
       page: "صفحه اصلی"
     },
+    panel: {
+      page: "صفحه اصلی"
+    },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
     renderMode: "حالت رندر",

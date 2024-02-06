@@ -450,6 +450,9 @@ export var turkishStrings = {
     question: {
       page: "Ana sayfa"
     },
+    panel: {
+      page: "Ana sayfa"
+    },
     showTimerPanel: "Zamanlayıcı panelini göster",
     showTimerPanelMode: "Zamanlayıcı paneli modunu göster",
     renderMode: "İşleme modu",

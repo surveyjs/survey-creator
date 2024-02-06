@@ -450,6 +450,9 @@ export var msStrings = {
     question: {
       page: "Halaman induk"
     },
+    panel: {
+      page: "Halaman induk"
+    },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",

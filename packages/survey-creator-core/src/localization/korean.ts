@@ -450,6 +450,9 @@ export var koreanStrings = {
     question: {
       page: "상위 페이지"
     },
+    panel: {
+      page: "상위 페이지"
+    },
     showTimerPanel: "타이머 패널 표시",
     showTimerPanelMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",

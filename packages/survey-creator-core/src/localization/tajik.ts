@@ -390,6 +390,9 @@ export var tgStrings = {
     question: {
       // page: "Parent page"
     },
+    panel: {
+      // page: "Parent page"
+    },
     showTimerPanel: "Нишон додани бастаи вақтсанҷ",
     showTimerPanelMode: "Нишон додани ҳолати бастаи таймер",
     // renderMode: "Panel display mode",

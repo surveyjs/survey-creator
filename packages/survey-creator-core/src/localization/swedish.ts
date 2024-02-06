@@ -450,6 +450,9 @@ export let svStrings = {
     question: {
       page: "Överordnad sida"
     },
+    panel: {
+      page: "Överordnad sida"
+    },
     showTimerPanel: "Visa tidtagning",
     showTimerPanelMode: "Visa tidtagning läge",
     renderMode: "Rendering läge",

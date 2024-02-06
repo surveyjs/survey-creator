@@ -450,6 +450,9 @@ var italianTranslation = {
     question: {
       page: "Pagina principale"
     },
+    panel: {
+      page: "Pagina principale"
+    },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
     renderMode: "Modalità di visualizzazione",

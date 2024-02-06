@@ -450,6 +450,9 @@ export var hrStrings = {
     question: {
       page: "Nadređena stranica"
     },
+    panel: {
+      page: "Nadređena stranica"
+    },
     showTimerPanel: "Pokaži ploču timera",
     showTimerPanelMode: "Prikazate način rada timer panela",
     renderMode: "Način prikaza",

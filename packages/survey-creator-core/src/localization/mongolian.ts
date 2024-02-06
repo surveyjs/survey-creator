@@ -450,6 +450,9 @@ export var mnStrings = {
     question: {
       page: "Эх хуудас"
     },
+    panel: {
+      page: "Эх хуудас"
+    },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
     renderMode: "Панелийн дэлгэцийн горим",

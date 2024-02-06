@@ -450,6 +450,9 @@ var polishStrings = {
     question: {
       page: "Strona nadrzędna"
     },
+    panel: {
+      page: "Strona nadrzędna"
+    },
     showTimerPanel: "Show timer panel",
     showTimerPanelMode: "Show timer panel mode",
     renderMode: "Render mode",

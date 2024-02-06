@@ -450,6 +450,9 @@ export var bgStrings = {
     question: {
       page: "Родителска страница"
     },
+    panel: {
+      page: "Родителска страница"
+    },
     showTimerPanel: "Местоположение на таймера",
     showTimerPanelMode: "Режим на таймера",
     renderMode: "Режим на показване на панела",
