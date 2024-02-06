@@ -2258,6 +2258,25 @@ test("DependedOn an array property", () => {
   Serializer.removeProperty("dropdown", "custProp");
 });
 
+test("enableIf JSON property attribute", () => {
+  Serializer.addProperty("question", {
+    name: "prop1",
+    category: "general",
+    enableIf: function (obj) {
+      return obj.title === "abc";
+    },
+  });
+  const question = new QuestionDropdownModel("q1");
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const prop1Question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(prop1Question.isReadOnly).toBeTruthy();
+  question.title = "abc";
+  expect(prop1Question.isReadOnly).toBeFalsy();
+
+  Serializer.removeProperty("question", "prop1");
+});
+
 test("showOptionsCaption/allowClear for dropdown with empty choice item", () => {
   Serializer.addProperty("question", {
     name: "test",
