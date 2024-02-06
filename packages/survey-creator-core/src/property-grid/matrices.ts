@@ -366,6 +366,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       cellType: "text",
       rowCount: 0,
       columns: columns,
+      showHeader: columns.length > 1,
       hideColumnsIfEmpty: true,
       addRowText: this.getAddRowText(prop),
       keyDuplicationError: editorLocalization.getString(
