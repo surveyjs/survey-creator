@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -1030,10 +1030,9 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   };
   await setJSON(json);
 
-  const Settings = Selector("[title=\"Open survey settings\"]");
   const PagesTab = Selector("h4").withExactText("Pages");
   await t
-    .click(Settings, { speed: 0.5 })
+    .click(surveySettingsButtonSelector, { speed: 0.5 })
     .click(PagesTab);
 
   const Page1 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);
