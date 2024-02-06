@@ -742,7 +742,13 @@ export class PropertyJSONGenerator {
   }
   private getPanelTitle(name: string, title: string): string {
     if (!!title) return title;
-    return editorLocalization.getString("pe.tabs." + name);
+    const res: any = editorLocalization.getString("pe.tabs." + name);
+    if(typeof res === "object") {
+      for(let key in res) {
+        if(Serializer.isDescendantOf(this.obj.getType(), key)) return res[key];
+      }
+    }
+    return res;
   }
   private getQuestionTitle(prop: JsonObjectProperty, title: string): string {
     if (!!prop.displayName) return prop.displayName;
