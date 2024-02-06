@@ -685,11 +685,14 @@ export class PropertyJSONGenerator {
     );
     if (!json) return null;
     json.name = prop.name;
+    json.title = this.getQuestionTitle(prop, title);
+    if(this.isQuestionTitleHidden(prop)) {
+      json.titleLocation = "hidden";
+    }
     json.visible = prop.visible;
     json.isReadOnly = prop.readOnly;
     json.isRequired = prop.isRequired;
     json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
-    json.title = this.getQuestionTitle(prop, title);
 
     if (["page", "panelbase"].indexOf(prop.className) && json.name === "name") {
       json.isRequired = true;
@@ -708,8 +711,6 @@ export class PropertyJSONGenerator {
     if (!prop) return null;
     var json = this.createQuestionJSON(prop, "", true, undefined);
     if (!json) return null;
-    json.name = prop.name;
-    json.title = this.getQuestionTitle(prop, "");
     if (prop.isUnique) {
       json.isUnique = prop.isUnique;
     }
@@ -747,6 +748,9 @@ export class PropertyJSONGenerator {
     if (!!prop.displayName) return prop.displayName;
     if (!!title && title !== prop.name) return title;
     return editorLocalization.getPropertyNameInEditor(this.obj.getType(), prop.name);
+  }
+  private isQuestionTitleHidden(prop: JsonObjectProperty): boolean {
+    return prop.displayName === "";
   }
 }
 
