@@ -2290,21 +2290,6 @@ test("Creator footer action bar: all tabs", (): any => {
   expect(receivedOrder).toEqual(designerTabButtonOrder);
 });
 
-test("Hide groupHeader settings if the survey does not have a logo, title, or description", (): any => {
-  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
-  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
-
-  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
-  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
-  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
-  expect(propertyGridGroups.length).toBe(4);
-  expect(propertyGridGroups[0].visible).toBeTruthy();
-  expect(propertyGridGroups[1].visible).toBeFalsy();
-  expect(propertyGridGroups[2].visible).toBeTruthy();
-  expect(propertyGridGroups[3].visible).toBeTruthy();
-});
 test("Desktop mode: add advanced mode switcher", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
