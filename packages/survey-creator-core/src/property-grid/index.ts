@@ -699,9 +699,9 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    if (typeof propDescr === "object" && propDescr.placeholder) {
-      json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
+    const placeholder = SurveyQuestionProperties.getPropertyPlaceholder(this.obj.getType(), prop.name);
+    if (!!placeholder) {
+      json.placeholder = editorLocalization.getString("pe." + placeholder);
     }
     return json;
   }
