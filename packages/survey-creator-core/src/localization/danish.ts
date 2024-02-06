@@ -450,6 +450,10 @@ export var danishStrings = {
     question: {
       page: "Overordnet side"
     },
+    panel: {
+      page: "Overordnet side",
+      indent: "Tilføj ydre indrykninger"
+    },
     showTimerPanel: "Vis tidspanel",
     showTimerPanelMode: "Vis tidspanel tilstand",
     renderMode: "Renderingstilstand",
@@ -637,9 +641,6 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     indent: "Tilføj indrykninger",
-    panel: {
-      indent: "Tilføj ydre indrykninger"
-    },
     innerIndent: "Tilføj indre indrykninger",
     defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
     defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",

@@ -450,6 +450,10 @@ export var huStrings = {
     question: {
       page: "Szülőoldal"
     },
+    panel: {
+      page: "Szülőoldal",
+      indent: "Külső behúzások hozzáadása"
+    },
     showTimerPanel: "Időzító mutatása",
     showTimerPanelMode: "Időzító módja",
     renderMode: "Megjelenítés módja",
@@ -637,9 +641,6 @@ export var huStrings = {
     columnsEnableIf: "Az oszlopok akkor láthatók, ha",
     rowsEnableIf: "A sorok akkor láthatók, ha",
     indent: "Behúzások hozzáadása",
-    panel: {
-      indent: "Külső behúzások hozzáadása"
-    },
     innerIndent: "Belső behúzások hozzáadása",
     defaultValueFromLastRow: "Alapértelmezett értékek felvétele az utolsó sorból",
     defaultValueFromLastPanel: "Alapértelmezett értékek felvétele az utolsó panelről",

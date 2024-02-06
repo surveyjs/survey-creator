@@ -450,6 +450,10 @@ export var indonesianStrings = {
     question: {
       page: "Halaman induk"
     },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambahkan inden luar"
+    },
     showTimerPanel: "Tampilkan panel pengatur waktu",
     showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
     renderMode: "Mode render",
@@ -637,9 +641,6 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     indent: "Menambahkan inden",
-    panel: {
-      indent: "Menambahkan inden luar"
-    },
     innerIndent: "Menambahkan inden dalam",
     defaultValueFromLastRow: "Mengambil nilai default dari baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai default dari panel terakhir",

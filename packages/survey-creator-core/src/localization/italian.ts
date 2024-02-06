@@ -450,6 +450,10 @@ var italianTranslation = {
     question: {
       page: "Pagina principale"
     },
+    panel: {
+      page: "Pagina principale",
+      indent: "Aggiungi rientri esterni"
+    },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
     renderMode: "Modalità di visualizzazione",
@@ -637,9 +641,6 @@ var italianTranslation = {
     columnsEnableIf: "Colonne visibili se",
     rowsEnableIf: "Righe visibili se",
     indent: "Aggiungi rientri",
-    panel: {
-      indent: "Aggiungi rientri esterni"
-    },
     innerIndent: "Aggiungi rientri interni",
     defaultValueFromLastRow: "Prendi i valori predefiniti dall'ultima riga",
     defaultValueFromLastPanel: "Prendi i valori predefiniti dall'ultimo pannello",

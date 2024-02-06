@@ -450,6 +450,10 @@ export let svStrings = {
     question: {
       page: "Överordnad sida"
     },
+    panel: {
+      page: "Överordnad sida",
+      indent: "Lägga till yttre indrag"
+    },
     showTimerPanel: "Visa tidtagning",
     showTimerPanelMode: "Visa tidtagning läge",
     renderMode: "Rendering läge",
@@ -637,9 +641,6 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     indent: "Lägga till indrag",
-    panel: {
-      indent: "Lägga till yttre indrag"
-    },
     innerIndent: "Lägga till inre indrag",
     defaultValueFromLastRow: "Ta standardvärden från den sista raden",
     defaultValueFromLastPanel: "Ta standardvärden från den sista panelen",

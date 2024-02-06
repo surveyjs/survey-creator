@@ -450,6 +450,10 @@ var frenchTranslation = {
     question: {
       page: "Page parent"
     },
+    panel: {
+      page: "Page parent",
+      indent: "Ajouter des tabulations externes"
+    },
     showTimerPanel: "Afficher le panneau chronomètre",
     showTimerPanelMode: "Mode d'affichage du panneau chronomètre",
     renderMode: "Mode de rendu",
@@ -637,9 +641,6 @@ var frenchTranslation = {
     columnsEnableIf: "Les colonnes sont visibles si",
     rowsEnableIf: "Les lignes sont visibles si",
     indent: "Ajouter des tabulations",
-    panel: {
-      indent: "Ajouter des tabulations externes"
-    },
     innerIndent: "Ajouter des tabulations internes",
     defaultValueFromLastRow: "Prendre les valeurs par défaut de la dernière ligne",
     defaultValueFromLastPanel: "Prendre les valeurs par défaut de la dernière section",

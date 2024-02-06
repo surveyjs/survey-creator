@@ -450,6 +450,10 @@ export var hebrewStrings = {
     question: {
       page: "עמוד הורה"
     },
+    panel: {
+      page: "עמוד הורה",
+      indent: "הוסף כניסות חיצוניות"
+    },
     showTimerPanel: "מיקום הטיימר",
     showTimerPanelMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",
@@ -637,9 +641,6 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     indent: "הוסף כניסות",
-    panel: {
-      indent: "הוסף כניסות חיצוניות"
-    },
     innerIndent: "הוסף כניסות פנימיות",
     defaultValueFromLastRow: "קבל ערכי ברירת מחדל מהשורה האחרונה",
     defaultValueFromLastPanel: "קבל ערכי ברירת מחדל מהפאנל האחרון",

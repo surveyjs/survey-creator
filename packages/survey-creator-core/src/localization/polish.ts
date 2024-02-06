@@ -450,6 +450,10 @@ var polishStrings = {
     question: {
       page: "Strona nadrzędna"
     },
+    panel: {
+      page: "Strona nadrzędna",
+      indent: "Dodawanie wcięć zewnętrznych"
+    },
     showTimerPanel: "Show timer panel",
     showTimerPanelMode: "Show timer panel mode",
     renderMode: "Render mode",
@@ -637,9 +641,6 @@ var polishStrings = {
     columnsEnableIf: "Kolumny są widoczne, jeśli",
     rowsEnableIf: "Wiersze są widoczne, jeśli",
     indent: "Dodawanie wcięć",
-    panel: {
-      indent: "Dodawanie wcięć zewnętrznych"
-    },
     innerIndent: "Dodawanie wcięć wewnętrznych",
     defaultValueFromLastRow: "Pobieranie wartości domyślnych z ostatniego wiersza",
     defaultValueFromLastPanel: "Pobieranie wartości domyślnych z ostatniego panelu",

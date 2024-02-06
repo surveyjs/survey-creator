@@ -450,6 +450,10 @@ export var czStrings = {
     question: {
       page: "Nadřazená stránka"
     },
+    panel: {
+      page: "Nadřazená stránka",
+      indent: "Přidat vnější odsazení"
+    },
     showTimerPanel: "Zobrazit panel časovače",
     showTimerPanelMode: "Zobrazit režim panelu časovače",
     renderMode: "Režim vykreslování",
@@ -637,9 +641,6 @@ export var czStrings = {
     columnsEnableIf: "Sloupce jsou viditelné, pokud",
     rowsEnableIf: "Řádky jsou viditelné, pokud",
     indent: "Přidat odsazení",
-    panel: {
-      indent: "Přidat vnější odsazení"
-    },
     innerIndent: "Přidat vnitřní odsazení",
     defaultValueFromLastRow: "Vzít výchozí hodnoty z posledního řádku",
     defaultValueFromLastPanel: "Vzít výchozí hodnoty z posledního panelu",

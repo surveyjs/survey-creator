@@ -450,6 +450,10 @@ export var ruStrings = {
     question: {
       page: "Родительская страница"
     },
+    panel: {
+      page: "Родительская страница",
+      indent: "Добавление внешних отступов"
+    },
     showTimerPanel: "Показывать панель таймера",
     showTimerPanelMode: "Показывать режим панели таймера",
     renderMode: "Режим отображения панели",
@@ -637,9 +641,6 @@ export var ruStrings = {
     columnsEnableIf: "Столбцы видны, если",
     rowsEnableIf: "Строки видны, если",
     indent: "Добавление отступов",
-    panel: {
-      indent: "Добавление внешних отступов"
-    },
     innerIndent: "Добавление внутренних отступов",
     defaultValueFromLastRow: "Взять значения по умолчанию из последней строки",
     defaultValueFromLastPanel: "Возьмите значения по умолчанию с последней панели",

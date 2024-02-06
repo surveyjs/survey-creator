@@ -450,6 +450,10 @@ export var jaStrings = {
     question: {
       page: "親ページ"
     },
+    panel: {
+      page: "親ページ",
+      indent: "外側のインデントを追加する"
+    },
     showTimerPanel: "タイマーパネルを表示する",
     showTimerPanelMode: "タイマーパネルモードを表示",
     renderMode: "レンダーモード",
@@ -637,9 +641,6 @@ export var jaStrings = {
     columnsEnableIf: "列は次の場合に表示されます。",
     rowsEnableIf: "行は次の場合に表示されます。",
     indent: "インデントを追加する",
-    panel: {
-      indent: "外側のインデントを追加する"
-    },
     innerIndent: "内側のインデントを追加する",
     defaultValueFromLastRow: "最後の行からデフォルト値を取得する",
     defaultValueFromLastPanel: "最後のパネルからデフォルト値を取得する",

@@ -450,6 +450,10 @@ export var fiStrings = {
     question: {
       page: "Pääsivu"
     },
+    panel: {
+      page: "Pääsivu",
+      indent: "Ulompien sisennysten lisääminen"
+    },
     showTimerPanel: "Näytä ajastus -paneeli",
     showTimerPanelMode: "Näytä ajastus -paneelin tila",
     renderMode: "Renderöinnin tila",
@@ -637,9 +641,6 @@ export var fiStrings = {
     columnsEnableIf: "Sarakkeet ovat näkyvissä, jos",
     rowsEnableIf: "Rivit ovat näkyvissä, jos",
     indent: "Sisennysten lisääminen",
-    panel: {
-      indent: "Ulompien sisennysten lisääminen"
-    },
     innerIndent: "Sisäisten sisennysten lisääminen",
     defaultValueFromLastRow: "Oletusarvojen ottaminen viimeiseltä riviltä",
     defaultValueFromLastPanel: "Ota oletusarvot viimeisestä paneelista",
