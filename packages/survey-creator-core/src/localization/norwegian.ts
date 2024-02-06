@@ -451,7 +451,8 @@ export var nbStrings = {
       page: "Overordnet side"
     },
     panel: {
-      page: "Overordnet side"
+      page: "Overordnet side",
+      indent: "Legge til ytre innrykk"
     },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
@@ -640,9 +641,6 @@ export var nbStrings = {
     columnsEnableIf: "Kolonner er synlige hvis",
     rowsEnableIf: "Rader er synlige hvis:",
     indent: "Legge til innrykk",
-    panel: {
-      indent: "Legge til ytre innrykk"
-    },
     innerIndent: "Legge til indre innrykk",
     defaultValueFromLastRow: "Ta standardverdier fra den siste raden",
     defaultValueFromLastPanel: "Ta standardverdier fra det siste panelet",

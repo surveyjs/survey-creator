@@ -451,7 +451,8 @@ export var skStrings = {
       page: "Nadradená stránka"
     },
     panel: {
-      page: "Nadradená stránka"
+      page: "Nadradená stránka",
+      indent: "Pridanie vonkajších zarážok"
     },
     showTimerPanel: "Zobraziť panel s časovačom",
     showTimerPanelMode: "Zobraziť režim panela s časovačom",
@@ -640,9 +641,6 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     indent: "Pridanie zarážok",
-    panel: {
-      indent: "Pridanie vonkajších zarážok"
-    },
     innerIndent: "Pridanie vnútorných zarážok",
     defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
     defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",

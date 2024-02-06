@@ -451,7 +451,8 @@ var simplifiedChineseTranslation = {
       page: "父页面"
     },
     panel: {
-      page: "父页面"
+      page: "父页面",
+      indent: "添加外部缩进"
     },
     showTimerPanel: "显示计时器面板",
     showTimerPanelMode: "显示计时器面板模式",
@@ -640,9 +641,6 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     indent: "添加缩进",
-    panel: {
-      indent: "添加外部缩进"
-    },
     innerIndent: "添加内部缩进",
     defaultValueFromLastRow: "从最后一行获取默认值",
     defaultValueFromLastPanel: "从最后一个面板中获取默认值",

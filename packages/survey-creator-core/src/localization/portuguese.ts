@@ -451,7 +451,8 @@ var portugueseTranslation = {
       page: "Página principal"
     },
     panel: {
-      page: "Página principal"
+      page: "Página principal",
+      indent: "Adicionar recuos externos"
     },
     showTimerPanel: "Mostrar o painel de cronômetro",
     showTimerPanelMode: "Mostrar painel de modo de cronômetro",
@@ -640,9 +641,6 @@ var portugueseTranslation = {
     columnsEnableIf: "Colunas estão visiveis se",
     rowsEnableIf: "Linhas estão visiveis se",
     indent: "Adicionar recuos",
-    panel: {
-      indent: "Adicionar recuos externos"
-    },
     innerIndent: "Adicionar recuos internos",
     defaultValueFromLastRow: "Utilizar os valores padrão da última linha",
     defaultValueFromLastPanel: "Utilizar os valores padrão do último painel",

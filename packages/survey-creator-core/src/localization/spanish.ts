@@ -451,7 +451,8 @@ var spanishTranslation = {
       page: "Página padre"
     },
     panel: {
-      page: "Página padre"
+      page: "Página padre",
+      indent: "Añadir indents externos"
     },
     showTimerPanel: "Mostrar panel de temporizador",
     showTimerPanelMode: "Mostrar modo de panel del temporizador",
@@ -640,9 +641,6 @@ var spanishTranslation = {
     columnsEnableIf: "Columnas son visibles si",
     rowsEnableIf: "Filas son visibles si",
     indent: "Añadir indents",
-    panel: {
-      indent: "Añadir indents externos"
-    },
     innerIndent: "Añadir indents internos",
     defaultValueFromLastRow: "Tomar valores por defecto de la última fila",
     defaultValueFromLastPanel: "Tomar valores por defecto del último panel",

@@ -451,7 +451,8 @@ export var danishStrings = {
       page: "Overordnet side"
     },
     panel: {
-      page: "Overordnet side"
+      page: "Overordnet side",
+      indent: "Tilføj ydre indrykninger"
     },
     showTimerPanel: "Vis tidspanel",
     showTimerPanelMode: "Vis tidspanel tilstand",
@@ -640,9 +641,6 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     indent: "Tilføj indrykninger",
-    panel: {
-      indent: "Tilføj ydre indrykninger"
-    },
     innerIndent: "Tilføj indre indrykninger",
     defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
     defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",

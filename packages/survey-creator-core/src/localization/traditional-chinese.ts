@@ -451,7 +451,8 @@ var traditionalChineseTranslation = {
       page: "父頁面"
     },
     panel: {
-      page: "父頁面"
+      page: "父頁面",
+      indent: "添加外部縮進"
     },
     showTimerPanel: "顯示計時器面板",
     showTimerPanelMode: "顯示計時器面板模式",
@@ -640,9 +641,6 @@ var traditionalChineseTranslation = {
     columnsEnableIf: "在以下情況下，列可見",
     rowsEnableIf: "在以下情況下，行可見",
     indent: "添加縮進",
-    panel: {
-      indent: "添加外部縮進"
-    },
     innerIndent: "添加內部縮進",
     defaultValueFromLastRow: "從最後一行獲取預設值",
     defaultValueFromLastPanel: "從最後一個面板中獲取預設值",

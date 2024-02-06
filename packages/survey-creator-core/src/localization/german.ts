@@ -451,7 +451,8 @@ var germanTranslation = {
       page: "Elternseite"
     },
     panel: {
-      page: "Elternseite"
+      page: "Elternseite",
+      indent: "Äußere Einzüge hinzufügen"
     },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",
@@ -640,9 +641,6 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sind sichtbar, wenn",
     rowsEnableIf: "Zeilen sind sichtbar, wenn",
     indent: "Einzüge hinzufügen",
-    panel: {
-      indent: "Äußere Einzüge hinzufügen"
-    },
     innerIndent: "Fügen Sie innere Einzüge hinzu",
     defaultValueFromLastRow: "Nehmen Sie Standardwerte aus der letzten Zeile",
     defaultValueFromLastPanel: "Nehmen Sie Standardwerte aus dem letzten Bereich",

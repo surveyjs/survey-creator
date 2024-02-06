@@ -451,7 +451,8 @@ export var koreanStrings = {
       page: "상위 페이지"
     },
     panel: {
-      page: "상위 페이지"
+      page: "상위 페이지",
+      indent: "바깥쪽 들여쓰기 추가"
     },
     showTimerPanel: "타이머 패널 표시",
     showTimerPanelMode: "타이머 패널 모드 표시",
@@ -640,9 +641,6 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     indent: "들여쓰기 추가",
-    panel: {
-      indent: "바깥쪽 들여쓰기 추가"
-    },
     innerIndent: "내부 들여쓰기 추가",
     defaultValueFromLastRow: "마지막 행에서 기본값 가져오기",
     defaultValueFromLastPanel: "마지막 패널에서 기본값 가져 오기",

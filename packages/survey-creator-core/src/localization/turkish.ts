@@ -451,7 +451,8 @@ export var turkishStrings = {
       page: "Ana sayfa"
     },
     panel: {
-      page: "Ana sayfa"
+      page: "Ana sayfa",
+      indent: "Dış girintiler ekleme"
     },
     showTimerPanel: "Zamanlayıcı panelini göster",
     showTimerPanelMode: "Zamanlayıcı paneli modunu göster",
@@ -640,9 +641,6 @@ export var turkishStrings = {
     columnsEnableIf: "Sütunlar şu durumlarda görünür:",
     rowsEnableIf: "Satırlar şu durumlarda görünür:",
     indent: "Girinti ekleme",
-    panel: {
-      indent: "Dış girintiler ekleme"
-    },
     innerIndent: "İç girintiler ekleme",
     defaultValueFromLastRow: "Son satırdaki varsayılan değerleri alma",
     defaultValueFromLastPanel: "Son panelden varsayılan değerleri alma",

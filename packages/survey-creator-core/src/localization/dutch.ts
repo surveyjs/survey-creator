@@ -451,7 +451,8 @@ export var nlStrings = {
       page: "Bovenliggende pagina"
     },
     panel: {
-      page: "Bovenliggende pagina"
+      page: "Bovenliggende pagina",
+      indent: "Buitenste streepjes toevoegen"
     },
     showTimerPanel: "Toon timerpaneel",
     showTimerPanelMode: "Modus timerpaneel",
@@ -640,9 +641,6 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     indent: "Inspringingen toevoegen",
-    panel: {
-      indent: "Buitenste streepjes toevoegen"
-    },
     innerIndent: "Binnenste inspringingen toevoegen",
     defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
     defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",

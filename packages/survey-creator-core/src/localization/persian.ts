@@ -451,7 +451,8 @@ var persianStrings = {
       page: "صفحه اصلی"
     },
     panel: {
-      page: "صفحه اصلی"
+      page: "صفحه اصلی",
+      indent: "اضافه کردن تورفتات بیرونی"
     },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
@@ -640,9 +641,6 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     indent: "افزودن تورفتهای",
-    panel: {
-      indent: "اضافه کردن تورفتات بیرونی"
-    },
     innerIndent: "اضافه کردن تورفتات داخلی",
     defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
     defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",

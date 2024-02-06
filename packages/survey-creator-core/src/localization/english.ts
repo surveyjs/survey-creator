@@ -452,7 +452,8 @@ export var enStrings = {
       page: "Parent page"
     },
     panel: {
-      page: "Parent page"
+      page: "Parent page",
+      indent: "Add outer indents"
     },
     showTimerPanel: "Timer location",
     showTimerPanelMode: "Timer mode",
@@ -645,9 +646,6 @@ export var enStrings = {
     columnsEnableIf: "Columns are visible if",
     rowsEnableIf: "Rows are visible if",
     indent: "Add indents",
-    panel: {
-      indent: "Add outer indents"
-    },
     innerIndent: "Add inner indents",
     defaultValueFromLastRow: "Take default values from the last row",
     defaultValueFromLastPanel: "Take default values from the last panel",

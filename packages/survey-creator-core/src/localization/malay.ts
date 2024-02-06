@@ -451,7 +451,8 @@ export var msStrings = {
       page: "Halaman induk"
     },
     panel: {
-      page: "Halaman induk"
+      page: "Halaman induk",
+      indent: "Menambah inden luaran"
     },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
@@ -640,9 +641,6 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     indent: "Menambah inden",
-    panel: {
-      indent: "Menambah inden luaran"
-    },
     innerIndent: "Menambah inden dalaman",
     defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",

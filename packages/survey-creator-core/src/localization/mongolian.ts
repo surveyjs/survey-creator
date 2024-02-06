@@ -451,7 +451,8 @@ export var mnStrings = {
       page: "Эх хуудас"
     },
     panel: {
-      page: "Эх хуудас"
+      page: "Эх хуудас",
+      indent: "Гаднах догол мөр нэмэх"
     },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
@@ -640,9 +641,6 @@ export var mnStrings = {
     columnsEnableIf: "Баганууд харагдана хэрэв",
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     indent: "Догол мөр нэмэх",
-    panel: {
-      indent: "Гаднах догол мөр нэмэх"
-    },
     innerIndent: "Дотоод догол мөр нэмэх",
     defaultValueFromLastRow: "Өмнөх мөрнөөс үндсэн утга авах",
     defaultValueFromLastPanel: "Сүүлийн панелаас үндсэн утга авах",

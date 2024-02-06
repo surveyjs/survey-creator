@@ -451,7 +451,8 @@ export var hrStrings = {
       page: "Nadređena stranica"
     },
     panel: {
-      page: "Nadređena stranica"
+      page: "Nadređena stranica",
+      indent: "Dodavanje vanjskih uvlaka"
     },
     showTimerPanel: "Pokaži ploču timera",
     showTimerPanelMode: "Prikazate način rada timer panela",
@@ -640,9 +641,6 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     indent: "Dodavanje uvlaka",
-    panel: {
-      indent: "Dodavanje vanjskih uvlaka"
-    },
     innerIndent: "Dodavanje unutarnjih uvlaka",
     defaultValueFromLastRow: "Uzimanje zadanih vrijednosti iz posljednjeg retka",
     defaultValueFromLastPanel: "Preuzimanje zadanih vrijednosti s posljednje ploče",
