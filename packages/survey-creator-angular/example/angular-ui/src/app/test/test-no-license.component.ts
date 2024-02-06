@@ -12,6 +12,6 @@ export class NoLicenseComponent extends TestDefaultComponent {
   }
   protected override getSlk(): boolean { return false; }
   protected override createCreator(): void {
-    this.creator = new SurveyCreatorModel({ showThemeTab: true });
+    this.creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true });
   }
 }
