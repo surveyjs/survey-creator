@@ -49,9 +49,9 @@ export var skStrings = {
     settings: "Nastavenia prieskumu",
     settingsTooltip: "Otvoriť nastavenia prieskumu",
     surveySettings: "Nastavenia prieskumu",
-    surveySettingsTooltip: "Otvorenie nastavení prieskumu",
+    surveySettingsTooltip: "Nastavenia prieskumu",
     themeSettings: "Nastavenia motívu",
-    themeSettingsTooltip: "Otvorenie nastavení motívu",
+    themeSettingsTooltip: "Nastavenia motívu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -450,6 +450,10 @@ export var skStrings = {
     question: {
       page: "Nadradená stránka"
     },
+    panel: {
+      page: "Nadradená stránka",
+      indent: "Pridanie vonkajších zarážok"
+    },
     showTimerPanel: "Zobraziť panel s časovačom",
     showTimerPanelMode: "Zobraziť režim panela s časovačom",
     renderMode: "Režim vykresľovania",
@@ -637,9 +641,6 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     indent: "Pridanie zarážok",
-    panel: {
-      indent: "Pridanie vonkajších zarážok"
-    },
     innerIndent: "Pridanie vnútorných zarážok",
     defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
     defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",

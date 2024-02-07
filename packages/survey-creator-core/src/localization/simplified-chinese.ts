@@ -49,9 +49,9 @@ var simplifiedChineseTranslation = {
     settings: "问卷设置",
     settingsTooltip: "打开设置",
     surveySettings: "调查设置",
-    surveySettingsTooltip: "打开调查设置",
+    surveySettingsTooltip: "调查设置",
     themeSettings: "主题设置",
-    themeSettingsTooltip: "打开主题设置",
+    themeSettingsTooltip: "主题设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -450,6 +450,10 @@ var simplifiedChineseTranslation = {
     question: {
       page: "父页面"
     },
+    panel: {
+      page: "父页面",
+      indent: "添加外部缩进"
+    },
     showTimerPanel: "显示计时器面板",
     showTimerPanelMode: "显示计时器面板模式",
     renderMode: "渲染模式",
@@ -637,9 +641,6 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     indent: "添加缩进",
-    panel: {
-      indent: "添加外部缩进"
-    },
     innerIndent: "添加内部缩进",
     defaultValueFromLastRow: "从最后一行获取默认值",
     defaultValueFromLastPanel: "从最后一个面板中获取默认值",

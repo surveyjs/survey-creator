@@ -49,9 +49,9 @@ export var hebrewStrings = {
     settings: "הגדרות",
     settingsTooltip: "פתח הגדרות",
     surveySettings: "הגדרות הסקר",
-    surveySettingsTooltip: "פתח הגדרות הסקר",
+    surveySettingsTooltip: "הגדרות סקר",
     themeSettings: "הגדרות ערכת העיצוב",
-    themeSettingsTooltip: "פתח הגדרות ערכת העיצוב",
+    themeSettingsTooltip: "הגדרות ערכת נושא",
     showPanel: "הצג לוח",
     hidePanel: "הסתר לוח",
     prevSelected: "בחר קודם",
@@ -450,6 +450,10 @@ export var hebrewStrings = {
     question: {
       page: "עמוד הורה"
     },
+    panel: {
+      page: "עמוד הורה",
+      indent: "הוסף כניסות חיצוניות"
+    },
     showTimerPanel: "מיקום הטיימר",
     showTimerPanelMode: "מצב הטיימר",
     renderMode: "מצב תצוגת הפאנל",
@@ -637,9 +641,6 @@ export var hebrewStrings = {
     columnsEnableIf: "העמודות יוצגו אם",
     rowsEnableIf: "השורות יוצגו אם",
     indent: "הוסף כניסות",
-    panel: {
-      indent: "הוסף כניסות חיצוניות"
-    },
     innerIndent: "הוסף כניסות פנימיות",
     defaultValueFromLastRow: "קבל ערכי ברירת מחדל מהשורה האחרונה",
     defaultValueFromLastPanel: "קבל ערכי ברירת מחדל מהפאנל האחרון",

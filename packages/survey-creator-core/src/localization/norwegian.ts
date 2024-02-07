@@ -49,9 +49,9 @@ export var nbStrings = {
     settings: "Skjemainnstillinger",
     settingsTooltip: "Åpne skjemainnstillinger",
     surveySettings: "Innstillinger for undersøkelse",
-    surveySettingsTooltip: "Åpne innstillinger for evaluering",
+    surveySettingsTooltip: "Innstillinger for undersøkelse",
     themeSettings: "Tema innstillinger",
-    themeSettingsTooltip: "Åpne temainnstillinger",
+    themeSettingsTooltip: "Temainnstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
@@ -450,6 +450,10 @@ export var nbStrings = {
     question: {
       page: "Overordnet side"
     },
+    panel: {
+      page: "Overordnet side",
+      indent: "Legge til ytre innrykk"
+    },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
     renderMode: "Gjengivelse modus",
@@ -637,9 +641,6 @@ export var nbStrings = {
     columnsEnableIf: "Kolonner er synlige hvis",
     rowsEnableIf: "Rader er synlige hvis:",
     indent: "Legge til innrykk",
-    panel: {
-      indent: "Legge til ytre innrykk"
-    },
     innerIndent: "Legge til indre innrykk",
     defaultValueFromLastRow: "Ta standardverdier fra den siste raden",
     defaultValueFromLastPanel: "Ta standardverdier fra det siste panelet",

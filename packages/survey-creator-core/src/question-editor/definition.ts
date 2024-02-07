@@ -1,8 +1,3 @@
-export interface ISurveyQuestionEditorDefinition {
-  title?: string;
-  properties?: Array<string | IPropertyEditorInfo>;
-  tabs?: Array<IPropertyTabInfo>;
-}
 export interface IPropertyEditorInfo {
   name: string;
   title?: string;
@@ -15,9 +10,21 @@ export interface IPropertyTabInfo {
   index?: number;
   title?: string;
   visible?: boolean;
+  parent?: string;
 }
+
+export interface ISurveyQuestionEditorDefinition {
+  title?: string;
+  properties?: Array<string | IPropertyEditorInfo>;
+  tabs?: Array<IPropertyTabInfo>;
+}
+
+export interface ISurveyPropertyGridDefinition {
+  [key: string]: ISurveyQuestionEditorDefinition;
+}
+
 export class SurveyQuestionEditorDefinition {
-  public static definition: { [key: string]: ISurveyQuestionEditorDefinition } = {
+  public static definition: ISurveyPropertyGridDefinition = {
     question: {
       properties: [
         "name",

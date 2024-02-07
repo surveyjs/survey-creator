@@ -49,9 +49,9 @@ export var arStrings = {
     settings: "Survey Settings",
     settingsTooltip: "Open survey settings",
     surveySettings: "إعدادات الاستطلاع",
-    surveySettingsTooltip: "افتح إعدادات الاستطلاع",
+    surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
-    themeSettingsTooltip: "فتح إعدادات النسق",
+    themeSettingsTooltip: "إعدادات النسق",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -450,6 +450,10 @@ export var arStrings = {
     question: {
       page: "الصفحة الرئيسية"
     },
+    panel: {
+      page: "الصفحة الرئيسية",
+      indent: "إضافة مسافات بادئة خارجية"
+    },
     showTimerPanel: "إظهار لوحة المؤقت",
     showTimerPanelMode: "إظهار نمط لوحة المؤقت",
     renderMode: "نمط العرض",
@@ -637,9 +641,6 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     indent: "إضافة مسافات بادئة",
-    panel: {
-      indent: "إضافة مسافات بادئة خارجية"
-    },
     innerIndent: "إضافة مسافات بادئة داخلية",
     defaultValueFromLastRow: "خذ القيم الافتراضية من الصف الأخير",
     defaultValueFromLastPanel: "خذ القيم الافتراضية من اللوحة الأخيرة",

@@ -49,9 +49,9 @@ export var czStrings = {
     settings: "Nastavení průzkumu",
     settingsTooltip: "Otevřít nastavení průzkumu",
     surveySettings: "Nastavení průzkumu",
-    surveySettingsTooltip: "Otevřít nastavení průzkumu",
+    surveySettingsTooltip: "Nastavení průzkumu",
     themeSettings: "Nastavení motivu",
-    themeSettingsTooltip: "Otevření nastavení motivu",
+    themeSettingsTooltip: "Nastavení motivu",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -450,6 +450,10 @@ export var czStrings = {
     question: {
       page: "Nadřazená stránka"
     },
+    panel: {
+      page: "Nadřazená stránka",
+      indent: "Přidat vnější odsazení"
+    },
     showTimerPanel: "Zobrazit panel časovače",
     showTimerPanelMode: "Zobrazit režim panelu časovače",
     renderMode: "Režim vykreslování",
@@ -637,9 +641,6 @@ export var czStrings = {
     columnsEnableIf: "Sloupce jsou viditelné, pokud",
     rowsEnableIf: "Řádky jsou viditelné, pokud",
     indent: "Přidat odsazení",
-    panel: {
-      indent: "Přidat vnější odsazení"
-    },
     innerIndent: "Přidat vnitřní odsazení",
     defaultValueFromLastRow: "Vzít výchozí hodnoty z posledního řádku",
     defaultValueFromLastPanel: "Vzít výchozí hodnoty z posledního panelu",

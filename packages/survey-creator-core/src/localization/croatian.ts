@@ -49,9 +49,9 @@ export var hrStrings = {
     settings: "Postavke ankete",
     settingsTooltip: "Otvaranje postavki ankete",
     surveySettings: "Postavke upitnika",
-    surveySettingsTooltip: "Otvaranje postavki upitnika",
+    surveySettingsTooltip: "Postavke upitnika",
     themeSettings: "Postavke teme",
-    themeSettingsTooltip: "Otvaranje postavki teme",
+    themeSettingsTooltip: "Postavke teme",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -450,6 +450,10 @@ export var hrStrings = {
     question: {
       page: "Nadređena stranica"
     },
+    panel: {
+      page: "Nadređena stranica",
+      indent: "Dodavanje vanjskih uvlaka"
+    },
     showTimerPanel: "Pokaži ploču timera",
     showTimerPanelMode: "Prikazate način rada timer panela",
     renderMode: "Način prikaza",
@@ -637,9 +641,6 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     indent: "Dodavanje uvlaka",
-    panel: {
-      indent: "Dodavanje vanjskih uvlaka"
-    },
     innerIndent: "Dodavanje unutarnjih uvlaka",
     defaultValueFromLastRow: "Uzimanje zadanih vrijednosti iz posljednjeg retka",
     defaultValueFromLastPanel: "Preuzimanje zadanih vrijednosti s posljednje ploče",

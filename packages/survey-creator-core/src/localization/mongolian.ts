@@ -49,9 +49,9 @@ export var mnStrings = {
     settings: "Тохиргоо",
     settingsTooltip: "Тохиргоог нээх",
     surveySettings: "Санал асуулгын тохиргоо",
-    surveySettingsTooltip: "Санал асуулгын тохиргоог нээх",
+    surveySettingsTooltip: "Судалгааны тохиргоо",
     themeSettings: "Сэдвийн тохиргоо",
-    themeSettingsTooltip: "Нээлттэй сэдвийн тохиргоо",
+    themeSettingsTooltip: "Сэдвийн тохиргоо",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -450,6 +450,10 @@ export var mnStrings = {
     question: {
       page: "Эх хуудас"
     },
+    panel: {
+      page: "Эх хуудас",
+      indent: "Гаднах догол мөр нэмэх"
+    },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
     renderMode: "Панелийн дэлгэцийн горим",
@@ -637,9 +641,6 @@ export var mnStrings = {
     columnsEnableIf: "Баганууд харагдана хэрэв",
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     indent: "Догол мөр нэмэх",
-    panel: {
-      indent: "Гаднах догол мөр нэмэх"
-    },
     innerIndent: "Дотоод догол мөр нэмэх",
     defaultValueFromLastRow: "Өмнөх мөрнөөс үндсэн утга авах",
     defaultValueFromLastPanel: "Сүүлийн панелаас үндсэн утга авах",

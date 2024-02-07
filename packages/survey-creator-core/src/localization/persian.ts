@@ -49,9 +49,9 @@ var persianStrings = {
     settings: "تنظیمات نظرسنجی",
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     surveySettings: "تنظیمات نظرسنجی",
-    surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
+    surveySettingsTooltip: "تنظیمات نظرسنجی",
     themeSettings: "تنظیمات تم",
-    themeSettingsTooltip: "باز کردن تنظیمات تم",
+    themeSettingsTooltip: "تنظیمات تم",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -450,6 +450,10 @@ var persianStrings = {
     question: {
       page: "صفحه اصلی"
     },
+    panel: {
+      page: "صفحه اصلی",
+      indent: "اضافه کردن تورفتات بیرونی"
+    },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
     renderMode: "حالت رندر",
@@ -637,9 +641,6 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     indent: "افزودن تورفتهای",
-    panel: {
-      indent: "اضافه کردن تورفتات بیرونی"
-    },
     innerIndent: "اضافه کردن تورفتات داخلی",
     defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
     defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",

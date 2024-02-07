@@ -1,7 +1,7 @@
 import {
   setJSON, collapseButtonSelector, expandButtonSelector, getPagesLength, getTabbedMenuItemByText,
   objectSelectorButton, objectSelectorPopup, propertyGridSelector, url,
-  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem
+  pageNavigator, creatorTabDesignerName, creatorTabPreviewName, changeToolboxLocation, SingleInputToolboxItem, surveySettingsButtonSelector
 } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Side bar";
@@ -80,7 +80,6 @@ test("SelectObject", async (t: TestController) => {
 const toolboxInDesigner = Selector(".svc-creator-tab .svc-toolbox");
 const toolboxInSidebar = Selector(".svc-side-bar .svc-toolbox");
 const toolboxButtonSelector = Selector(".sv-action-bar-item[title=\"Toolbox\"]");
-const settingsButtonSelector = Selector(".sv-action-bar-item[title=\"Open survey settings\"]");
 
 test("toolboxLocation sidebar", async (t) => {
   const propertyGridSelector = Selector(".spg-root-modern");
@@ -106,7 +105,7 @@ test("toolboxLocation sidebar", async (t) => {
     .expect(propertyGridSelector.exists).notOk()
     .expect(toolboxButtonSelector.visible).ok()
 
-    .click(settingsButtonSelector)
+    .click(surveySettingsButtonSelector)
     .expect(toolboxInDesigner.exists).notOk()
     .expect(toolboxInSidebar.exists).notOk()
     .expect(propertyGridSelector.visible).ok()

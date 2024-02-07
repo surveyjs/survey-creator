@@ -49,9 +49,9 @@ export var nlStrings = {
     settings: "Enquête-instellingen",
     settingsTooltip: "Open enquête-instellingen",
     surveySettings: "Enquête-instellingen",
-    surveySettingsTooltip: "Enquête-instellingen openen",
+    surveySettingsTooltip: "Enquête instellingen",
     themeSettings: "Thema-instellingen",
-    themeSettingsTooltip: "Thema-instellingen openen",
+    themeSettingsTooltip: "Thema-instellingen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -450,6 +450,10 @@ export var nlStrings = {
     question: {
       page: "Bovenliggende pagina"
     },
+    panel: {
+      page: "Bovenliggende pagina",
+      indent: "Buitenste streepjes toevoegen"
+    },
     showTimerPanel: "Toon timerpaneel",
     showTimerPanelMode: "Modus timerpaneel",
     renderMode: "Render-modus",
@@ -637,9 +641,6 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     indent: "Inspringingen toevoegen",
-    panel: {
-      indent: "Buitenste streepjes toevoegen"
-    },
     innerIndent: "Binnenste inspringingen toevoegen",
     defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
     defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",

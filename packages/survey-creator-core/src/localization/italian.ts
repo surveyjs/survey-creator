@@ -49,9 +49,9 @@ var italianTranslation = {
     settings: "Impostazioni sondaggio",
     settingsTooltip: "Apri le impostazioni del sondaggio",
     surveySettings: "Impostazioni del sondaggio",
-    surveySettingsTooltip: "Apri le impostazioni del sondaggio",
+    surveySettingsTooltip: "Impostazioni dell'indagine",
     themeSettings: "Impostazioni del tema",
-    themeSettingsTooltip: "Apri le impostazioni del tema",
+    themeSettingsTooltip: "Impostazioni del tema",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -450,6 +450,10 @@ var italianTranslation = {
     question: {
       page: "Pagina principale"
     },
+    panel: {
+      page: "Pagina principale",
+      indent: "Aggiungi rientri esterni"
+    },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
     renderMode: "Modalità di visualizzazione",
@@ -637,9 +641,6 @@ var italianTranslation = {
     columnsEnableIf: "Colonne visibili se",
     rowsEnableIf: "Righe visibili se",
     indent: "Aggiungi rientri",
-    panel: {
-      indent: "Aggiungi rientri esterni"
-    },
     innerIndent: "Aggiungi rientri interni",
     defaultValueFromLastRow: "Prendi i valori predefiniti dall'ultima riga",
     defaultValueFromLastPanel: "Prendi i valori predefiniti dall'ultimo pannello",

@@ -49,9 +49,9 @@ export var jaStrings = {
     settings: "アンケートの設定",
     settingsTooltip: "アンケートの設定を開く",
     surveySettings: "アンケート設定",
-    surveySettingsTooltip: "アンケート設定を開く",
+    surveySettingsTooltip: "アンケート設定",
     themeSettings: "テーマ設定",
-    themeSettingsTooltip: "テーマ設定を開く",
+    themeSettingsTooltip: "テーマ設定",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -450,6 +450,10 @@ export var jaStrings = {
     question: {
       page: "親ページ"
     },
+    panel: {
+      page: "親ページ",
+      indent: "外側のインデントを追加する"
+    },
     showTimerPanel: "タイマーパネルを表示する",
     showTimerPanelMode: "タイマーパネルモードを表示",
     renderMode: "レンダーモード",
@@ -637,9 +641,6 @@ export var jaStrings = {
     columnsEnableIf: "列は次の場合に表示されます。",
     rowsEnableIf: "行は次の場合に表示されます。",
     indent: "インデントを追加する",
-    panel: {
-      indent: "外側のインデントを追加する"
-    },
     innerIndent: "内側のインデントを追加する",
     defaultValueFromLastRow: "最後の行からデフォルト値を取得する",
     defaultValueFromLastPanel: "最後のパネルからデフォルト値を取得する",

@@ -49,9 +49,9 @@ export var indonesianStrings = {
     settings: "Pengaturan Survei",
     settingsTooltip: "Buka pengaturan",
     surveySettings: "Pengaturan Survei",
-    surveySettingsTooltip: "Buka pengaturan survei",
+    surveySettingsTooltip: "Pengaturan survei",
     themeSettings: "Pengaturan Tema",
-    themeSettingsTooltip: "Buka pengaturan tema",
+    themeSettingsTooltip: "Pengaturan tema",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -450,6 +450,10 @@ export var indonesianStrings = {
     question: {
       page: "Halaman induk"
     },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambahkan inden luar"
+    },
     showTimerPanel: "Tampilkan panel pengatur waktu",
     showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
     renderMode: "Mode render",
@@ -637,9 +641,6 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     indent: "Menambahkan inden",
-    panel: {
-      indent: "Menambahkan inden luar"
-    },
     innerIndent: "Menambahkan inden dalam",
     defaultValueFromLastRow: "Mengambil nilai default dari baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai default dari panel terakhir",

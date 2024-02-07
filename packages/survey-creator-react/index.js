@@ -23,15 +23,13 @@ let json = {
       description: "page1 -- description",
       elements: [
         {
-          type: "rating",
+          type: "matrixdropdown",
           name: "nps_score",
           title:
             "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-          isRequired: true,
-          rateMin: 0,
-          rateMax: 10,
-          minRateDescription: "(Most unlikely)",
-          maxRateDescription: "(Most likely)"
+          columns: [{
+            name: "column1"
+          }]
         },
         {
           type: "checkbox",

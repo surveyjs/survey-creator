@@ -49,9 +49,9 @@ export var bgStrings = {
     settings: "Настройки",
     settingsTooltip: "Отваряне на настройките",
     surveySettings: "Настройки на анкетата",
-    surveySettingsTooltip: "Отваряне настройките на анкетата",
+    surveySettingsTooltip: "Настройки на проучването",
     themeSettings: "Настройки на тема",
-    themeSettingsTooltip: "Отваряне на настройките на тема",
+    themeSettingsTooltip: "Настройки на тема",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -450,6 +450,10 @@ export var bgStrings = {
     question: {
       page: "Родителска страница"
     },
+    panel: {
+      page: "Родителска страница",
+      indent: "Добавяне на външни отстъпи"
+    },
     showTimerPanel: "Местоположение на таймера",
     showTimerPanelMode: "Режим на таймера",
     renderMode: "Режим на показване на панела",
@@ -637,9 +641,6 @@ export var bgStrings = {
     columnsEnableIf: "Колоните са видими, ако",
     rowsEnableIf: "Редовете са видими, ако",
     indent: "Добавяне на отстъпи",
-    panel: {
-      indent: "Добавяне на външни отстъпи"
-    },
     innerIndent: "Добавяне на вътрешни отстъпи",
     defaultValueFromLastRow: "Вземане стойностите по подразбиране от последния ред",
     defaultValueFromLastPanel: "Вземане стойностите по подразбиране от последния панел",

@@ -180,6 +180,25 @@ test("propertyEditor.displayName", () => {
   expect(enableIfQuestion.title).toEqual("It is enableIf");
   defaultStrings.pe["enableIf"] = oldValue;
 });
+test("displayName && hide property title", () => {
+  Serializer.addProperty("question", { name: "prop1", displayName: "Property 1" });
+  Serializer.addProperty("question", { name: "prop2", displayName: "" });
+  Serializer.addProperty("question", { name: "prop3" });
+
+  const propertyGrid = new PropertyGridModelTester(new Question("q1"));
+  const prop1Q = propertyGrid.survey.getQuestionByName("prop1");
+  const prop2Q = propertyGrid.survey.getQuestionByName("prop2");
+  const prop3Q = propertyGrid.survey.getQuestionByName("prop3");
+  expect(prop1Q.titleLocation).toBe("default");
+  expect(prop1Q.title).toBe("Property 1");
+  expect(prop2Q.titleLocation).toBe("hidden");
+  expect(prop3Q.titleLocation).toBe("default");
+  expect(prop3Q.title).toBe("Prop 3");
+
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
+});
 /**
  * Skip several tests with custom property editors. We do not it completely different now and any question, including custom widget, can become a property editors.
  */

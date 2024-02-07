@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -687,7 +687,7 @@ test("Dropdown input in property grid", async (t) => {
     await t.resizeWindow(1240, 870);
 
     await t
-      .click(Selector("button[title='Open survey settings'"))
+      .click(surveySettingsButtonSelector)
       .click(Selector(".spg-dropdown[aria-label='Survey language']"))
       .pressKey("a l i");
 

@@ -50,6 +50,7 @@ import { PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matr
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
+import { enStrings } from "../../src/localization/english";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -85,6 +86,18 @@ test("Check tabs creating", () => {
   var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
   expect(choicesPanel).toBeTruthy();
   expect(choicesPanel.title).toEqual("Choices");
+});
+test("Categories titles", () => {
+  enStrings.pe.tabs.layout.panel = "Panel Layout";
+  enStrings.pe.tabs.layout.question = "Question Layout";
+  const question = new QuestionCheckboxModel("q1");
+  const panel = new PanelModel("panel1");
+  let propertyGrid = new PropertyGridModelTester(question);
+  const questionLayout = propertyGrid.survey.getPanelByName("layout");
+  expect(questionLayout.title).toBe("Question Layout");
+  propertyGrid = new PropertyGridModelTester(panel);
+  const panelLayout = propertyGrid.survey.getPanelByName("layout");
+  expect(panelLayout.title).toBe("Panel Layout");
 });
 test("Stop doing it because of title actions - Hide question title if property is first in tab and has the same title as tab", () => {
   var question = new QuestionCheckboxModel("q1");
@@ -2258,6 +2271,25 @@ test("DependedOn an array property", () => {
   Serializer.removeProperty("dropdown", "custProp");
 });
 
+test("enableIf JSON property attribute", () => {
+  Serializer.addProperty("question", {
+    name: "prop1",
+    category: "general",
+    enableIf: function (obj) {
+      return obj.title === "abc";
+    },
+  });
+  const question = new QuestionDropdownModel("q1");
+
+  const propertyGrid = new PropertyGridModelTester(question);
+  const prop1Question = propertyGrid.survey.getQuestionByName("prop1");
+  expect(prop1Question.isReadOnly).toBeTruthy();
+  question.title = "abc";
+  expect(prop1Question.isReadOnly).toBeFalsy();
+
+  Serializer.removeProperty("question", "prop1");
+});
+
 test("showOptionsCaption/allowClear for dropdown with empty choice item", () => {
   Serializer.addProperty("question", {
     name: "test",
@@ -3071,4 +3103,56 @@ test("property with boolean type and two choices", () => {
   expect(columnLayoutQuestion.labelFalse).toBe("Vertical");
 
   columnLayoutProperty.type = "";
+});
+test("category, parent property", () => {
+  Serializer.addProperty("question", "prop1");
+  Serializer.addProperty("question", "prop2");
+  Serializer.addProperty("question", "prop3");
+  Serializer.addProperty("question", "prop4");
+  enStrings.pe.tabs["sub1"] = "Sub Panel 1";
+
+  const definition = SurveyQuestionEditorDefinition.definition["question"];
+  const properties = definition.properties || [];
+  const tabs = definition.tabs || [];
+  const oldPropCount = properties.length;
+  const oldTabCount = tabs.length;
+  properties.push({ name: "prop1", tab: "sub1" });
+  properties.push({ name: "prop2", tab: "sub2" });
+  properties.push({ name: "prop3", tab: "sub1" });
+  properties.push({ name: "prop4", tab: "sub2" });
+  tabs.push({ name: "sub1", parent: "general" });
+  tabs.push({ name: "sub2", parent: "general" });
+
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const generalPanel = propertyGrid.survey.getPanelByName("general");
+  generalPanel.expand();
+  generalPanel.collapse();
+  generalPanel.expand();
+  const sub1Panel = <PanelModel>generalPanel.getElementByName("sub1");
+  const sub2Panel = <PanelModel>generalPanel.getElementByName("sub2");
+  expect(sub1Panel).toBeTruthy();
+  expect(sub2Panel).toBeTruthy();
+  expect(sub1Panel.elements).toHaveLength(2);
+  expect(sub2Panel.elements).toHaveLength(2);
+  expect(sub1Panel.isVisible).toBeTruthy();
+  expect(sub2Panel.isVisible).toBeTruthy();
+  expect(sub1Panel.elements).toHaveLength(2);
+  expect(sub2Panel.elements).toHaveLength(2);
+  expect(sub1Panel.elements[0].name).toBe("prop1");
+  expect(sub1Panel.elements[1].name).toBe("prop3");
+  expect(sub2Panel.elements[0].name).toBe("prop2");
+  expect(sub2Panel.elements[1].name).toBe("prop4");
+  expect(sub1Panel.state).toBe("default");
+  expect(sub2Panel.state).toBe("default");
+  expect(sub1Panel.title).toBe("Sub Panel 1");
+  expect(sub2Panel.title).toBeFalsy();
+
+  delete enStrings.pe.tabs["sub1"];
+  properties.splice(oldPropCount, 4);
+  tabs.splice(oldTabCount, 2);
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
+  Serializer.removeProperty("question", "prop4");
 });

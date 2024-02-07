@@ -49,9 +49,9 @@ var spanishTranslation = {
     settings: "Configuración de la encuesta",
     settingsTooltip: "Configuración de encuesta abierta",
     surveySettings: "Opciones encuesta",
-    surveySettingsTooltip: "Abrir opciones encuesta",
+    surveySettingsTooltip: "Configuración de la encuesta",
     themeSettings: "Configuración del tema",
-    themeSettingsTooltip: "Abrir la configuración del tema",
+    themeSettingsTooltip: "Configuración del tema",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -450,6 +450,10 @@ var spanishTranslation = {
     question: {
       page: "Página padre"
     },
+    panel: {
+      page: "Página padre",
+      indent: "Añadir indents externos"
+    },
     showTimerPanel: "Mostrar panel de temporizador",
     showTimerPanelMode: "Mostrar modo de panel del temporizador",
     renderMode: "Modo de renderizado",
@@ -637,9 +641,6 @@ var spanishTranslation = {
     columnsEnableIf: "Columnas son visibles si",
     rowsEnableIf: "Filas son visibles si",
     indent: "Añadir indents",
-    panel: {
-      indent: "Añadir indents externos"
-    },
     innerIndent: "Añadir indents internos",
     defaultValueFromLastRow: "Tomar valores por defecto de la última fila",
     defaultValueFromLastPanel: "Tomar valores por defecto del último panel",

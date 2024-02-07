@@ -49,9 +49,9 @@ export var koreanStrings = {
     settings: "설정",
     settingsTooltip: "설정 열기",
     surveySettings: "설문조사 설정",
-    surveySettingsTooltip: "설문조사 설정 열기",
+    surveySettingsTooltip: "설문조사 설정",
     themeSettings: "테마 설정",
-    themeSettingsTooltip: "테마 설정 열기",
+    themeSettingsTooltip: "테마 설정",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -450,6 +450,10 @@ export var koreanStrings = {
     question: {
       page: "상위 페이지"
     },
+    panel: {
+      page: "상위 페이지",
+      indent: "바깥쪽 들여쓰기 추가"
+    },
     showTimerPanel: "타이머 패널 표시",
     showTimerPanelMode: "타이머 패널 모드 표시",
     renderMode: "렌더링 모드",
@@ -637,9 +641,6 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     indent: "들여쓰기 추가",
-    panel: {
-      indent: "바깥쪽 들여쓰기 추가"
-    },
     innerIndent: "내부 들여쓰기 추가",
     defaultValueFromLastRow: "마지막 행에서 기본값 가져오기",
     defaultValueFromLastPanel: "마지막 패널에서 기본값 가져 오기",

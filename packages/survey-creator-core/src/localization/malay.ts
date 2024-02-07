@@ -49,9 +49,9 @@ export var msStrings = {
     settings: "Tetapan Tinjauan",
     settingsTooltip: "Buka tetapan tinjauan",
     surveySettings: "Seting Tinjauan",
-    surveySettingsTooltip: "Buka seting tinjauan",
+    surveySettingsTooltip: "Seting tinjauan",
     themeSettings: "Seting Tema",
-    themeSettingsTooltip: "Buka seting tema",
+    themeSettingsTooltip: "Seting tema",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -450,6 +450,10 @@ export var msStrings = {
     question: {
       page: "Halaman induk"
     },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambah inden luaran"
+    },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
     renderMode: "Mod penyampaian",
@@ -637,9 +641,6 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     indent: "Menambah inden",
-    panel: {
-      indent: "Menambah inden luaran"
-    },
     innerIndent: "Menambah inden dalaman",
     defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",

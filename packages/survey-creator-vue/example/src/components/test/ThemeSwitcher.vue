@@ -1,5 +1,5 @@
 <template>
-    <Common :options="{ }" :use-slk="false"></Common>
+        <Common :options="{}" :use-slk="true"></Common>
 </template>
 <script lang="ts" setup>
 import Common from './Common.vue';

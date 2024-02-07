@@ -49,9 +49,9 @@ var germanTranslation = {
     settings: "Umfrageeinstellungen",
     settingsTooltip: "Umfrageeinstellungen öffnen",
     surveySettings: "Umfrage Einstellungen",
-    surveySettingsTooltip: "Umfrage Einstellungen öffnen",
+    surveySettingsTooltip: "Einstellungen für Umfragen",
     themeSettings: "Theme-Einstellungen",
-    themeSettingsTooltip: "Öffnen Sie die Theme-Einstellungen",
+    themeSettingsTooltip: "Theme-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -450,6 +450,10 @@ var germanTranslation = {
     question: {
       page: "Elternseite"
     },
+    panel: {
+      page: "Elternseite",
+      indent: "Äußere Einzüge hinzufügen"
+    },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",
     renderMode: "Anzeigemodus",
@@ -637,9 +641,6 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sind sichtbar, wenn",
     rowsEnableIf: "Zeilen sind sichtbar, wenn",
     indent: "Einzüge hinzufügen",
-    panel: {
-      indent: "Äußere Einzüge hinzufügen"
-    },
     innerIndent: "Fügen Sie innere Einzüge hinzu",
     defaultValueFromLastRow: "Nehmen Sie Standardwerte aus der letzten Zeile",
     defaultValueFromLastPanel: "Nehmen Sie Standardwerte aus dem letzten Bereich",
