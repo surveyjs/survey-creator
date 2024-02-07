@@ -917,7 +917,7 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
-  expect(columnsQuestion.emptyRowsText).toEqual("No items have been added yet");
+  expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
   expect(columnsQuestion.addRowText).toEqual("Add New");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;

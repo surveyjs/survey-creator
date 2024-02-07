@@ -28,7 +28,7 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("question", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty")).toEqual("Text");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "showTOC")).toEqual("Show TOC");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "showTOC")).toEqual("Show table of contents (TOC)");
 
   expect(editorLocalization.getPropertyNameInEditor("base", "testProperty2")).toEqual("All2");
   expect(editorLocalization.getPropertyNameInEditor("page", "testProperty2")).toEqual("All2");
@@ -114,7 +114,7 @@ test("change string to empty string", () => {
 });
 
 test("getPropertyNameInEditor", () => {
-  expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rate value");
+  expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rating value");
   expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
   expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
 });
@@ -141,7 +141,7 @@ test("getPropertyValue and spaces", () => {
   expect(editorLocalization.convertToCamelCase("On Top")).toEqual("On Top");
   expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
   expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
-  expect(editorLocalization.convertToCamelCase("showTOC")).toEqual("Show TOC");
+  expect(editorLocalization.convertToCamelCase("showTOC")).toEqual("Show table of contents (TOC)");
 });
 test("Update innerItem on changign title", (): any => {
   const item: any = {
@@ -200,7 +200,7 @@ test("Check creator license localization", (): any => {
   expect(creator.licenseText).toBe(editorLocalization.locales["en"].survey.license);
 });
 test("getPropertyValue autoGenerate and boolean", () => {
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generate");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Auto-generate");
   expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Enter manually");
   const deutschStrings: any = {
     pv: {

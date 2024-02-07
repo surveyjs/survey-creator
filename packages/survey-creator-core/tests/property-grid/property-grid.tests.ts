@@ -71,7 +71,7 @@ test("Create survey with editingObj", () => {
   expect(propertyGrid.survey.getValue("name")).toEqual("q1");
   var nameQuestion = propertyGrid.survey.getQuestionByName("name");
   expect(nameQuestion).toBeTruthy();
-  expect(nameQuestion.title).toEqual("Name");
+  expect(nameQuestion.title).toEqual("Question name");
   nameQuestion.value = "q2";
   expect(question.name).toEqual("q2");
 });
@@ -85,7 +85,7 @@ test("Check tabs creating", () => {
   expect(actions).toHaveLength(0);
   var choicesPanel = <PanelModel>propertyGrid.survey.getPanelByName("choices");
   expect(choicesPanel).toBeTruthy();
-  expect(choicesPanel.title).toEqual("Choices");
+  expect(choicesPanel.title).toEqual("Choice Options");
 });
 test("Categories titles", () => {
   enStrings.pe.tabs.layout.panel = "Panel Layout";
@@ -149,7 +149,7 @@ test("dropdown property editor localization", (): any => {
     "underInput"
   );
   expect(questionDescriptionLocationQuestion.choices[0].text).toEqual(
-    "Under the input"
+    "Under the input field"
   );
 
   var showPreviewQuestion = <QuestionDropdownModel>propertyGrid.survey.getQuestionByName("showPreviewBeforeComplete");
@@ -463,7 +463,7 @@ test("column[] property editor", (): any => {
   expect(columnsQuestion.showHeader).toBeFalsy; //"No header in matrix";
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
   expect(columnsQuestion.columns).toHaveLength(2); //"There are two columns");
-  expect(columnsQuestion.columns[0].title).toEqual("Name");
+  expect(columnsQuestion.columns[0].title).toEqual("Question name");
   expect(columnsQuestion.visibleRows).toHaveLength(3); //"There are three elements"
   expect(columnsQuestion.visibleRows[0].cells[0].value).toEqual("col1"); //"the first cell value is 'col1'"
   columnsQuestion.visibleRows[0].cells[0].value = "col11";
@@ -881,7 +881,7 @@ test("check imagepicker responsiveImageSize properties", () => {
   const imagePicker = new QuestionImagePickerModel("q2");
   let propertyGrid = new PropertyGridModelTester(imagePicker);
   const minWidth = <QuestionTextModel>propertyGrid.survey.getQuestionByName("minImageWidth");
-  expect(minWidth.description).toEqual("Does not apply if you specify the exact image width or height.");
+  expect(minWidth.description).toEqual("Does not apply if you specify the exact display area width or height.");
   expect(minWidth.inputType).toEqual("number");
 });
 
@@ -2429,8 +2429,8 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.emptyRowsText).toEqual("No items have been added yet");
-  expect(propEditorQuestion.addRowText).toEqual("Add New");
+  expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any triggers yet");
+  expect(propEditorQuestion.addRowText).toEqual("Add a trigger");
 
   propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
   propEditorQuestion = <QuestionMatrixDynamicModel>(
@@ -2438,7 +2438,7 @@ test("Show empty rows template if there is no rows", () => {
   );
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
-  expect(propEditorQuestion.emptyRowsText).toEqual("No choices have been added yet");
+  expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any choices yet");
   expect(propEditorQuestion.addRowText).toEqual("Add a choice");
 });
 test("Different property editors for trigger value", () => {
@@ -3032,7 +3032,7 @@ test("Setup correct categories for dynamic properties in components, #2", () => 
   const inputTypeQuestion = propertyGrid.survey.getQuestionByName("inputType");
   expect(placeholderQuestion.parent.name).toBe("general");
   expect(placeholderQuestion.isVisible).toBeTruthy();
-  expect(placeholderQuestion.title).toBe("Input area placeholder");
+  expect(placeholderQuestion.title).toBe("Placeholder text within input field");
   expect(inputTypeQuestion.parent.name).toBe("general");
   const panel = propertyGrid.survey.getPanelByName("general");
   expect(panel.questions[0].name).toBe("name");
@@ -3071,7 +3071,7 @@ test("allowExpandMultipleCategories", () => {
   const getOpendedCategories = (): number => {
     let res = 0;
     propSurvey.getAllPanels().forEach(panel => {
-      if(panel.isExpanded) res++;
+      if (panel.isExpanded) res++;
     });
     return res;
   };

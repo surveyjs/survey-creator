@@ -85,5 +85,5 @@ test("Placeholder for FastEntry editor", () => {
   const originalElement = new QuestionRadiogroupModel("originalElement");
   const options = new EmptySurveyCreatorOptions();
   const fastEntryEditor = new FastEntryEditor(originalElement.choices, options);
-  expect((fastEntryEditor.editSurvey.getAllQuestions()[0] as QuestionTextBase).placeholder).toEqual("You can set data in the following format:\nvalue1|text\nvalue2");
+  expect((fastEntryEditor.editSurvey.getAllQuestions()[0] as QuestionTextBase).placeholder).toEqual("Enter the list of choice options and their IDs in the following format:\n\nid|option\n\nA choice option ID is not visible to respondents and can be used in conditional rules.");
 });
