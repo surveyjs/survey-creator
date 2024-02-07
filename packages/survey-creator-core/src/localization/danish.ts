@@ -371,6 +371,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     rowCount: "Antal rækker",
     columnLayout: "Kolonnelayout",
+    transposeData: "Transponere rækker til kolonner",
     addRowLocation: "Tilføj række knapplacering",
     addRowText: "Tilføj række knaptekst",
     removeRowText: "Fjern række knaptekst",
@@ -624,7 +625,11 @@ export var danishStrings = {
       templateTitle: "Skabelon titel",
       totals: "Totaler",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celle tekster",
@@ -1946,3 +1951,8 @@ editorLocalization.locales["da"] = danishStrings;
 // pv.contain: "Contain" => "Indeholde"
 // pv.cover: "Cover" => "Dække"
 // pv.fill: "Fill" => "Fylde"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rækker til kolonner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

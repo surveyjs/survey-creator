@@ -373,6 +373,7 @@ export var enStrings = {
     imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Columns layout",
+    transposeData: "Transpose rows to columns",
     addRowLocation: "Add Row button location",
     addRowText: "Add Row button text",
     removeRowText: "Remove Row button text",

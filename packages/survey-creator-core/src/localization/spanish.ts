@@ -371,6 +371,7 @@ var spanishTranslation = {
     imageWidth: "Ancho de la imagen",
     rowCount: "Número de filas",
     columnLayout: "Diseño de columnas",
+    transposeData: "Transponer filas a columnas",
     addRowLocation: "Añadir la ubicación del botón de la fila",
     addRowText: "Añadir texto de botón de fila",
     removeRowText: "Eliminar el texto del botón de fila",
@@ -624,7 +625,11 @@ var spanishTranslation = {
       templateTitle: "Título de la plantilla",
       totals: "Totales",
       logic: "Lógica",
-      layout: "Diseño",
+      layout: {
+        panel: "Diseño",
+        question: "Diseño",
+        base: "Diseño"
+      },
       data: "Datos",
       validation: "Validación",
       cells: "Células",
@@ -1535,3 +1540,8 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pv.contain: "Contain" => "Contener"
 // pv.cover: "Cover" => "Cubrir"
 // pv.fill: "Fill" => "Llenar"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponer filas a columnas"
+// layout.panel: "Layout" => "Diseño"
+// layout.question: "Layout" => "Diseño"
+// layout.base: "Layout" => "Diseño"

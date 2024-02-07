@@ -371,6 +371,7 @@ export var fiStrings = {
     imageWidth: "Kuvan leveys",
     rowCount: "Rivien määrä",
     columnLayout: "Sarakkeiden asettelu",
+    transposeData: "Rivien transponointi sarakkeisiin",
     addRowLocation: "Lisää rivipainikkeen sijainti",
     addRowText: "Lisää rivipainikkeen teksti",
     removeRowText: "Poista rivipainikkeen teksti",
@@ -624,7 +625,11 @@ export var fiStrings = {
       templateTitle: "Mallin otsikko",
       totals: "Yhteensä",
       logic: "Logiikka",
-      layout: "Layout",
+      layout: {
+        panel: "Asettelu",
+        question: "Asettelu",
+        base: "Asettelu"
+      },
       data: "Data",
       validation: "Validointi",
       cells: "Solut",
@@ -1761,3 +1766,8 @@ editorLocalization.locales["fi"] = fiStrings;
 // pv.contain: "Contain" => "Sisältää"
 // pv.cover: "Cover" => "Kansi"
 // pv.fill: "Fill" => "Täyttää"
+
+// pe.transposeData: "Transpose rows to columns" => "Rivien transponointi sarakkeisiin"
+// layout.panel: "Layout" => "Asettelu"
+// layout.question: "Layout" => "Asettelu"
+// layout.base: "Layout" => "Asettelu"

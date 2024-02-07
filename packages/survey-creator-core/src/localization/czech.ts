@@ -371,6 +371,7 @@ export var czStrings = {
     imageWidth: "Šířka obrázku",
     rowCount: "Počet řádků",
     columnLayout: "Rozložení sloupců",
+    transposeData: "Transponování řádků do sloupců",
     addRowLocation: "Přidat umístění tlačítka řádku",
     addRowText: "Přidat text tlačítka řádku",
     removeRowText: "Odebrat text tlačítka řádku",
@@ -624,7 +625,11 @@ export var czStrings = {
       templateTitle: "Název šablony",
       totals: "Součty",
       logic: "Logika",
-      layout: "Rozložení",
+      layout: {
+        panel: "Rozložení",
+        question: "Rozložení",
+        base: "Rozložení"
+      },
       data: "Data",
       validation: "Ověřování",
       cells: "Buňky",
@@ -1325,3 +1330,8 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.contain: "Contain" => "Obsahovat"
 // pv.cover: "Cover" => "Krýt"
 // pv.fill: "Fill" => "Vyplnit"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponování řádků do sloupců"
+// layout.panel: "Layout" => "Rozložení"
+// layout.question: "Layout" => "Rozložení"
+// layout.base: "Layout" => "Rozložení"

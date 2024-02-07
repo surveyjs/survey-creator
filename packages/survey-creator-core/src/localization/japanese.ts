@@ -371,6 +371,7 @@ export var jaStrings = {
     imageWidth: "イメージの幅",
     rowCount: "列数",
     columnLayout: "行のレイアウト",
+    transposeData: "行を列に転置する",
     addRowLocation: "列ボタンのロケーションを追加",
     addRowText: "行ボタンのテキストを追加",
     removeRowText: "行ボタンのテキストを削除",
@@ -624,7 +625,11 @@ export var jaStrings = {
       templateTitle: "テンプレートタイトル",
       totals: "合計",
       logic: "ロジック",
-      layout: "レイアウト",
+      layout: {
+        panel: "レイアウト",
+        question: "レイアウト",
+        base: "レイアウト"
+      },
       data: "データ",
       validation: "検証",
       cells: "セル",
@@ -1760,3 +1765,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // pv.contain: "Contain" => "含む"
 // pv.cover: "Cover" => "覆う"
 // pv.fill: "Fill" => "注ぐ"
+
+// pe.transposeData: "Transpose rows to columns" => "行を列に転置する"
+// layout.panel: "Layout" => "レイアウト"
+// layout.question: "Layout" => "レイアウト"
+// layout.base: "Layout" => "レイアウト"

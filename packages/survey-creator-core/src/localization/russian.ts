@@ -371,6 +371,7 @@ export var ruStrings = {
     imageWidth: "Ширина изображения",
     rowCount: "Количество строк",
     columnLayout: "Макет столбцов",
+    transposeData: "Транспонирование строк в столбцы",
     addRowLocation: "Добавить расположение кнопки строки",
     addRowText: "Добавить текст кнопки строки",
     removeRowText: "Удалить кнопку строки текста",
@@ -624,7 +625,11 @@ export var ruStrings = {
       templateTitle: "Название шаблона",
       totals: "Итоги",
       logic: "Логика",
-      layout: "Планировка",
+      layout: {
+        panel: "Схема",
+        question: "Схема",
+        base: "Схема"
+      },
       data: "Данные",
       validation: "Проверка",
       cells: "Ячейки",
@@ -1821,3 +1826,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // pv.contain: "Contain" => "Содержать"
 // pv.cover: "Cover" => "Крышка"
 // pv.fill: "Fill" => "Заполнять"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспонирование строк в столбцы"
+// layout.panel: "Layout" => "Схема"
+// layout.question: "Layout" => "Схема"
+// layout.base: "Layout" => "Схема"

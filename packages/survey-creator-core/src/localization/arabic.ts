@@ -371,6 +371,7 @@ export var arStrings = {
     imageWidth: "عرض الصورة",
     rowCount: "عدد الصفوف",
     columnLayout: "تخطيط الأعمدة",
+    transposeData: "تبديل موضع الصفوف إلى أعمدة",
     addRowLocation: "موقع زر إضافة صف",
     addRowText: "نص زر إضافة صف",
     removeRowText: "نص زر حذف صف",
@@ -624,7 +625,11 @@ export var arStrings = {
       templateTitle: "عنوان القالب",
       totals: "Totals",
       logic: "المنطق",
-      layout: "التنسيق",
+      layout: {
+        panel: "تخطيط",
+        question: "تخطيط",
+        base: "تخطيط"
+      },
       data: "البيانات",
       validation: "التحقق",
       cells: "الخلايا",
@@ -1671,3 +1676,8 @@ editorLocalization.locales["ar"] = arStrings;
 // pv.contain: "Contain" => "احتوى"
 // pv.cover: "Cover" => "غطاء"
 // pv.fill: "Fill" => "ملء"
+
+// pe.transposeData: "Transpose rows to columns" => "تبديل موضع الصفوف إلى أعمدة"
+// layout.panel: "Layout" => "تخطيط"
+// layout.question: "Layout" => "تخطيط"
+// layout.base: "Layout" => "تخطيط"
