@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector } from "../../helper";
 
 const title = "Designer surface";
 
@@ -1010,7 +1010,7 @@ test("Check property grid flyout", async (t) => {
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
-    await t.click(Selector("button[title='Open survey settings']"));
+    await t.click(surveySettingsButtonSelector);
     await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
   });
 });
