@@ -280,18 +280,30 @@ export var enStrings = {
       // visible: "Make panel visible", 
       // readOnly: "Make panel read-only",
       // isRequired: "Make panel required",
-      // visibleIf: "Make the panel visible if",
-      // requiredIf: "Make the panel required if",
+      visibleIf: "Make the panel visible if",
+      requiredIf: "Make the panel required if",
 
       // questionsOrder: "Question order within the panel",
-      // page: "Move the panel to page",
-      // startWithNewLine: "Display the panel on a new line",
-      // state: "Panel collapse state",
-      // width: "Inline panel width",
-      // minWidth: "Minimum panel width",
-      // maxWidth: "Maximum panel width",
+      page: "Move the panel to page",
+      startWithNewLine: "Display the panel on a new line",
+      state: "Panel collapse state",
+      width: "Inline panel width",
+      minWidth: "Minimum panel width",
+      maxWidth: "Maximum panel width",
       // showNumber: "Number panels",
-      confirmDelete: "Confirm panel deletion"
+      confirmDelete: "Confirm panel deletion",
+      templateDescription: "Panel description pattern",
+      templateTitle: "Panel title pattern",
+      noEntriesText: "Empty panel text",
+      templateTabTitle: "Tab title pattern",
+      templateVisibleIf: "Make an individual panel visible if",
+      hideNumber: "Hide the panel number",
+      titleLocation: "Panel title alignment",
+      descriptionLocation: "Panel description alignment",
+      templateTitleLocation: "Question title alignment",
+      templateErrorLocation: "Error message alignment",
+      newPanelPosition: "New panel location",
+      keyName: "Prevent duplicate responses in the following question",
     },
     question: {
       name: "Question name",
@@ -309,14 +321,10 @@ export var enStrings = {
       descriptionLocation: "Question description alignment",
       errorLocation: "Error message alignment",
       indent: "Increase the inner indent",
-      width: "Initial question width",
+      width: "Inline question width",
       minWidth: "Minimum question width",
       maxWidth: "Maximum question width",
-      textUpdateMode: "Update input field value",
-      // choices: {
-      //   visibleIf: "Make the option visible if",
-      //   enableIf: "Make the option selectable if"
-      // }
+      textUpdateMode: "Update input field value"
     },
     signaturepad: {
       signatureWidth: "Signature area width",
@@ -334,13 +342,18 @@ export var enStrings = {
     },
     showQuestionNumbers: "Question numbering",
     questionStartIndex: "Question indexing type",
-    // expression: {
-    //   name: "Expression name",
-    //   title: "Expression title",
-    //   description: "Expression description",
-    //   expression: "Expression",
-    // },
-    expression: "Expression",
+    expression: {
+      name: "Expression name",
+      title: "Expression title",
+      description: "Expression description",
+      expression: "Expression",
+    },
+    trigger: {
+      expression: "Expression",
+    },
+    calculatedvalue: {
+      expression: "Expression",
+    },
     survey: {
       title: "Survey title",
       description: "Survey description"
@@ -356,6 +369,17 @@ export var enStrings = {
       requiredIf: "Make the page required if",
       maxTimeToFinish: "Time limit to complete the page",
       questionsOrder: "Question order on the page"
+    },
+    matrixdropdowncolumn: {
+      name: "Column name",
+      title: "Column title",
+      isUnique: "Prevent duplicate responses",
+      width: "Column width",
+      minWidth: "Minimum column width",
+      rows: "Input field height (in lines)",
+      visibleIf: "Make the column visible if",
+      requiredIf: "Make the column required if",
+      showInMultipleColumns: "Each option in a separate column"
     },
     imageHeight: "Display area height",
     imageWidth: "Display area width",
@@ -405,9 +429,9 @@ export var enStrings = {
     testService: "Test the service",
     itemSelectorEmpty: "Please select the element",
     conditionActionEmpty: "Please select the action",
-    conditionSelectQuestion: "Select question...",
-    conditionSelectPage: "Select page...",
-    conditionSelectPanel: "Select panel...",
+    conditionSelectQuestion: "Select a question...",
+    conditionSelectPage: "Select a page...",
+    conditionSelectPanel: "Select a panel...",
     conditionValueQuestionTitle: "Please enter/select the value",
     aceEditorHelp: "Press ctrl+space to get expression completion hint",
     aceEditorRowTitle: "Current row",
@@ -558,7 +582,6 @@ export var enStrings = {
     renderMode: "Panel display mode",
     allowAddPanel: "Enable panel addition",
     allowRemovePanel: "Enable panel removal",
-    noEntriesText: "Empty entries text",
     panelAddText: "\"Add Panel\" button text",
     panelRemoveText: "\"Remove Panel\" button text",
     isSinglePage: "Show all elements on one page",
@@ -629,22 +652,19 @@ export var enStrings = {
     minPanelCount: "Minimum panel count",
     maxPanelCount: "Maximum panel count",
     panelsState: "Inner panel collapse state",
-    templateDescription: "Description template",
-    templateTitle: "Title template",
-    panelPrevText: "Previous Panel button tooltip",
-    panelNextText: "Next Panel button tooltip",
-    showRangeInProgress: "Show progress bar",
-    templateTitleLocation: "Question title location",
-    panelRemoveButtonLocation: "Remove Panel button location",
+    panelPrevText: "\"Previous Panel\" button text",
+    panelNextText: "\"Next Panel\" button text",
+    showRangeInProgress: "Show the progress bar",
+    panelRemoveButtonLocation: "\"Remove Panel\" button alignment",
     hideIfRowsEmpty: "Hide the question if it has no rows",
     hideColumnsIfEmpty: "Hide columns if there are no rows",
     rateValues: "Custom rating values",
     rateCount: "Rating count",
     autoGenerate: "Rating configuration",
     hideIfChoicesEmpty: "Hide the question if it has no choices",
-    minWidth: "Minimum width (in CSS-accepted values)",
-    maxWidth: "Maximum width (in CSS-accepted values)",
-    width: "Width (in CSS-accepted values)",
+    minWidth: "Minimum width",
+    maxWidth: "Maximum width",
+    width: "Width",
     showHeader: "Show column headers",
     horizontalScroll: "Show horizontal scrollbar",
     columnMinWidth: "Minimum column width",
@@ -679,7 +699,9 @@ export var enStrings = {
     cells: "Cell Texts",
     keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
-      text: "Alt text"
+      text: "Alt text",
+      visibleIf: "Make the option visible if",
+      enableIf: "Make the option selectable if"
     },
     logoPosition: "Logo position",
     addLogo: "Add logo...",
@@ -801,9 +823,6 @@ export var enStrings = {
     percent: "percent",
     firstExpanded: "First panel is expanded",
     off: "Hide question numbers",
-    onpanel: "Start on each panel",
-    onPanel: "Start on each panel",
-    onSurvey: "Continue throughout the survey",
     list: "List",
     progressTop: "Panel navigator + Progress bar at the top",
     progressBottom: "Panel navigator + Progress bar at the bottom",
@@ -817,6 +836,7 @@ export var enStrings = {
     both: "Both",
     left: "Left",
     right: "Right",
+    center: "Center",
     leftRight: "Left and right",
     middle: "Middle",
     color: "color",
@@ -839,6 +859,8 @@ export var enStrings = {
     contain: "Contain",
     cover: "Cover",
     fill: "Fill",
+    next: "Next",
+    last: "Last",
     onComplete: "Upon survey completion",
     onHidden: "When question gets hidden",
     onHiddenContainer: "When question or its panel/page gets hidden",
@@ -945,6 +967,8 @@ export var enStrings = {
       on: "Auto-numbering",
       onPage: "Reset on each page",
       onpanel: "Reset on each panel",
+      onPanel: "Reset on each panel",
+      onSurvey: "Continue across the survey",
       off: "No numbering"
     },
     descriptionLocation: {
@@ -982,7 +1006,11 @@ export var enStrings = {
     count: "Count",
     min: "Min",
     max: "Max",
-    avg: "Avg"
+    avg: "Avg",
+    searchMode: {
+      contains: "Contains",
+      startsWith: "Starts with"
+    }
   },
   // Operators
   op: {
@@ -1050,7 +1078,7 @@ export var enStrings = {
     panel: {
       name: "A panel ID that is not visible to respondents.",
       description: "Type a panel subtitle.",
-      isRequired: "Prevents survey submission unless at least one nested question has an answer.",
+      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
@@ -1058,11 +1086,40 @@ export var enStrings = {
       questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
       page: "Repositions the panel to the end of a selected page.",
-      innerIndent: "Adds space or margin between the question content and the left border of the question box.",
+      innerIndent: "Adds space or margin between the panel content and the left border of the panel box.",
       startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
       state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
       width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)."
     },
+    paneldynamic: {
+      name: "A panel ID that is not visible to respondents.",
+      description: "Type a panel subtitle.",
+      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
+      visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility.",
+      enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel.",
+      requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
+      templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
+      // questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting.",
+      page: "Repositions the panel to the end of a selected page.",
+      innerIndent: "Adds space or margin between the panel content and the left border of the panel box.",
+      startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form.",
+      state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed.",
+      width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
+      templateTitle: "Type in a template for dynamic panel titles. Use \{panelIndex}\ for the panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
+      templateTabTitle: "Type in a template for tab titles. Use \{panelIndex}\ for a panel's general position and \{visiblePanelIndex}\ for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering.",
+      templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression.",
+      titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default).",
+      descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default).",
+      newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one.",
+      defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel.",
+      keyName: "Reference a question name to require a user to provide a unique response for this question in each panel.",
+    },
+    defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
+    resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set).",
+    setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response.",
+    setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input.",
     question: {
       name: "A question ID that is not visible to respondents.",
       description: "Type a question subtitle.",
@@ -1070,22 +1127,19 @@ export var enStrings = {
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer.",
       startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form.",
-      defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input.",
-      resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or to the \"Default answer\" value (if either is set).",
-      setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response.",
-      setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input.",
       page: "Repositions the question to the end of a selected page.",
       state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed.",
       titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default).",
       descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default).",
-      errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose from: \"Top\" - an error text is placed at the top of the question box and \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
+      errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default).",
       indent: "Adds space or margin between the question content and the left border of the question box.",
       width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.).",
       surveyvalidator: {
         expression: "Use the magic wand icon to set a validation rule for the question."
       },
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
-      url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data."
+      url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
+      searchMode: "A comparison operation used to filter the drop-down list."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
@@ -1109,6 +1163,15 @@ export var enStrings = {
     },
     survey: {
       mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing."
+    },
+    matrixdropdowncolumn: {
+      name: "A column ID that is not visible to respondents.",
+      isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column.",
+      rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear.",
+      visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility.",
+      enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column.",
+      requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
+      showInMultipleColumns: "When selected, creates an individual column for each choice option."
     },
     widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used.",
     cookieName: "Assign a unique cookie value for your survey. The cookie will be set in a respondent's browser upon survey completion to prevent repetitive survey submissions.",
@@ -1141,7 +1204,7 @@ export var enStrings = {
     rowTitleWidth: "Accepts CSS values (px, %, in, pt, etc.).",
     totalText: "Visible only if at least one column displays total values set with \"Aggregation method\" or \"Total value expression\".",
     cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property.",
-    keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled for a column, a respondent attempting to submit a duplicate entry will receive the following error message.",
+    keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message.",
     totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.).",
     confirmDelete: "Triggers a prompt asking to confirm the row deletion.",
     defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row.",
@@ -1156,6 +1219,7 @@ export var enStrings = {
     maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page.",
     page: {
       maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page.",
+      // isRequired: "Prevents survey submission unless at least one nested question has an answer.",
       visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility.",
       enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page.",
       requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer.",
@@ -1173,6 +1237,7 @@ export var enStrings = {
     waitForUpload: "Ensures that users won't complete the survey until files are uploaded.",
     minWidth: "Accepts CSS values (px, %, in, pt, etc.).",
     maxWidth: "Accepts CSS values (px, %, in, pt, etc.).",
+    width: "Accepts CSS values (px, %, in, pt, etc.).",
     valueName: "A join identifier is a custom key that you can assign to several questions to link them together and sync their values. These values will be merged into a single array or object and stored in survey results using the key as the property name.",
     useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements.",
     clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default).",
@@ -1261,8 +1326,6 @@ export var enStrings = {
     choicesByUrl: "Choices by url", // Auto-generated string
     currency: "Currency", // Auto-generated string
     cellHint: "Cell hint", // Auto-generated string
-    isUnique: "Is unique", // Auto-generated string
-    showInMultipleColumns: "Show in multiple columns", // Auto-generated string
     totalMaximumFractionDigits: "Total maximum fraction digits", // Auto-generated string
     totalMinimumFractionDigits: "Total minimum fraction digits", // Auto-generated string
     columns: "Columns", // Auto-generated string
@@ -1320,8 +1383,6 @@ export var enStrings = {
     allowCameraAccess: "Allow camera access", // Auto-generated string
     scaleColorMode: "Rating icon color mode",
     rateColorMode: "Smileys color scheme",
-    templateTabTitle: "Template tab title", // Auto-generated string
-    templateVisibleIf: "Template visible if", // Auto-generated string
     copyDisplayValue: "Copy display value" // Auto-generated string
   },
   theme: {

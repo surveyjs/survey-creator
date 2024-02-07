@@ -45,9 +45,21 @@ export class SurveyQuestionEditorDefinition {
         { name: "descriptionLocation", tab: "layout" },
         { name: "errorLocation", tab: "layout" },
         { name: "indent", tab: "layout" },
-        { name: "width", tab: "layout" },
-        { name: "minWidth", tab: "layout" },
-        { name: "maxWidth", tab: "layout" },
+        {
+          name: "width",
+          tab: "layout",
+          // placeholder: "Ex.: 6in"
+        },
+        {
+          name: "minWidth",
+          tab: "layout",
+          // placeholder: "Ex.: 600px"
+        },
+        {
+          name: "maxWidth",
+          tab: "layout",
+          // placeholder: "Ex.: 50%"
+        },
         { name: "valueName", tab: "data" },
         { name: "defaultValue", tab: "data" },
         { name: "correctAnswer", tab: "data" },
@@ -57,8 +69,8 @@ export class SurveyQuestionEditorDefinition {
         { name: "requiredErrorText", tab: "validation" }
       ],
       tabs: [
-        { name: "logic", index: 100 },
-        { name: "layout", index: 200 },
+        { name: "layout", index: 100 },
+        { name: "logic", index: 200 },
         { name: "data", index: 300 },
         { name: "validation", index: 400 }
       ]
@@ -370,9 +382,9 @@ export class SurveyQuestionEditorDefinition {
     },
     "matrixdropdowncolumn@default": {
       properties: [
-        "cellType",
         "name",
         "title",
+        "cellType",
         "visible",
         "readOnly",
         "isRequired",
@@ -466,6 +478,29 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesByUrl", index: 11 }
       ]
     },
+    "matrixdropdowncolumn@tagbox": {
+      properties: [
+        { name: "choicesFromQuestion", tab: "choices" },
+        { name: "choicesFromQuestionMode", tab: "choices" },
+        { name: "choiceValuesFromQuestion", tab: "choices" },
+        { name: "choiceTextsFromQuestion", tab: "choices" },
+        { name: "showOtherItem", tab: "choices" },
+        { name: "otherText", tab: "choices" },
+        { name: "choicesOrder", tab: "choices" },
+        { name: "optionsCaption", tab: "choices" },
+        { name: "showNoneItem", tab: "choices" },
+        { name: "noneText", tab: "choices" },
+        { name: "choicesMin", tab: "choices" },
+        { name: "choicesMax", tab: "choices" },
+        { name: "choicesStep", tab: "choices" },
+        { name: "choicesVisibleIf", tab: "logic" },
+        { name: "choicesEnableIf", tab: "logic" },
+      ],
+      tabs: [
+        { name: "choices", index: 10 },
+        { name: "choicesByUrl", index: 11 }
+      ]
+    },
     "matrixdropdowncolumn@text": {
       properties: [
         "inputType",
@@ -476,24 +511,28 @@ export class SurveyQuestionEditorDefinition {
         "dataList",
         "maxLength"
       ],
-      tabs: [{ name: "validators", index: 10 }]
+      tabs: [{ name: "validators", index: 25 }]
     },
     "matrixdropdowncolumn@comment": {
       properties: ["rows", "placeholder", "maxLength"],
-      tabs: [{ name: "validators", index: 10 }]
+      tabs: [{ name: "validators", index: 25 }]
     },
     "matrixdropdowncolumn@boolean": {
       properties: [
-        "defaultValue",
-        "labelTrue",
-        "labelFalse",
-        "valueTrue",
-        "valueFalse"
-      ]
+        { name: "labelTrue", tab: "data" },
+        { name: "labelFalse", tab: "data" },
+        { name: "valueTrue", tab: "data" },
+        { name: "valueFalse", tab: "data" },
+        { name: "defaultValue", tab: "data" }
+      ],
+      tabs: [{ name: "data", index: 25 }]
     },
     "matrixdropdowncolumn@expression": {
-      properties: ["displayStyle", "currency"],
-      tabs: [{ name: "expression", index: 10 }]
+      properties: [
+        "expression",
+        "displayStyle",
+        "currency"
+      ]
     },
     "matrixdropdowncolumn@rating": {
       properties: [
@@ -515,9 +554,9 @@ export class SurveyQuestionEditorDefinition {
     },
     multipletextitem: {
       properties: [
-        "inputType",
         "name",
         "title",
+        "inputType",
         "isRequired",
         "maxLength",
         "size",
@@ -562,8 +601,8 @@ export class SurveyQuestionEditorDefinition {
         "showRangeInProgress",
         { name: "defaultPanelValue", tab: "data" },
         { name: "defaultValueFromLastPanel", tab: "data" },
-        { name: "templateTitleLocation", tab: "layout" },
-        { name: "templateErrorLocation", tab: "layout" },
+        { name: "templateTitleLocation", tab: "questionSettings" },
+        { name: "templateErrorLocation", tab: "questionSettings" },
         { name: "panelRemoveButtonLocation", tab: "layout" },
         { name: "keyName", tab: "validation" },
         { name: "keyDuplicationError", tab: "validation" }
@@ -583,9 +622,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "questionErrorLocation", tab: "questionSettings" }
       ],
       tabs: [
-        { name: "logic", index: 100 },
-        { name: "questionSettings", index: 150 },
-        { name: "layout", index: 200 },
+        { name: "questionSettings", index: 100 },
+        { name: "layout", index: 150 },
+        { name: "logic", index: 200 },
         { name: "data", index: 300 },
         { name: "validation", index: 400 }
       ]
@@ -599,12 +638,28 @@ export class SurveyQuestionEditorDefinition {
         { name: "page", tab: "layout" },
         { name: "startWithNewLine", tab: "layout" },
         { name: "state", tab: "layout" },
-        { name: "width", tab: "layout", placeholder: "Ex.: 6in" },
+        {
+          name: "width",
+          tab: "layout",
+          // placeholder: "Ex.: 6in"
+        },
+        {
+          name: "minWidth",
+          tab: "layout",
+          // placeholder: "Ex.: 600px"
+        },
+        {
+          name: "maxWidth",
+          tab: "layout",
+          // placeholder: "Ex.: 50%"
+        },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
-        { name: "questionStartIndex", tab: "numbering", placeholder: "Ex.: a)" },
-        { name: "minWidth", tab: "layout", placeholder: "Ex.: 600px" },
-        { name: "maxWidth", tab: "layout", placeholder: "Ex.: 50%" },
+        {
+          name: "questionStartIndex",
+          tab: "numbering",
+          // placeholder: "Ex.: a)"
+        }
       ],
       tabs: [{ name: "numbering", index: 350 }]
     },
@@ -655,7 +710,11 @@ export class SurveyQuestionEditorDefinition {
         { name: "showQuestionNumbers", tab: "question" },
         { name: "questionTitlePattern", tab: "question" },
         { name: "requiredText", tab: "question" },
-        { name: "questionStartIndex", tab: "question", placeholder: "Ex.: a)" },
+        {
+          name: "questionStartIndex",
+          tab: "question",
+          // placeholder: "Ex.: a)"
+        },
         { name: "questionErrorLocation", tab: "question" },
         {
           name: "focusFirstQuestionAutomatic",
@@ -712,6 +771,21 @@ export class SurveyQuestionEditorDefinition {
     },
     "page@survey": {
       properties: ["name", "title"]
+    },
+    choicesByUrl: {
+      properties: [
+        {
+          name: "url",
+          // placeholder: "Ex.: https://api.example.com/books"
+        },
+        {
+          name: "path",
+          // placeholder: "Ex.: categories.fiction"
+        },
+        "valueName",
+        "titleName",
+        "allowEmptyResponse"
+      ]
     }
   };
 }
