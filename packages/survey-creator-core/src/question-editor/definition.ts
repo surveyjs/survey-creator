@@ -48,17 +48,17 @@ export class SurveyQuestionEditorDefinition {
         {
           name: "width",
           tab: "layout",
-          // placeholder: "Ex.: 6in"
+          placeholder: "width_placeholder"
         },
         {
           name: "minWidth",
           tab: "layout",
-          // placeholder: "Ex.: 600px"
+          placeholder: "minWidth_placeholder"
         },
         {
           name: "maxWidth",
           tab: "layout",
-          // placeholder: "Ex.: 50%"
+          placeholder: "maxWidth_placeholder"
         },
         { name: "valueName", tab: "data" },
         { name: "defaultValue", tab: "data" },
@@ -641,24 +641,24 @@ export class SurveyQuestionEditorDefinition {
         {
           name: "width",
           tab: "layout",
-          // placeholder: "Ex.: 6in"
+          placeholder: "width_placeholder"
         },
         {
           name: "minWidth",
           tab: "layout",
-          // placeholder: "Ex.: 600px"
+          placeholder: "minWidth_placeholder"
         },
         {
           name: "maxWidth",
           tab: "layout",
-          // placeholder: "Ex.: 50%"
+          placeholder: "maxWidth_placeholder"
         },
         { name: "showNumber", tab: "numbering" },
         { name: "showQuestionNumbers", tab: "numbering" },
         {
           name: "questionStartIndex",
           tab: "numbering",
-          // placeholder: "Ex.: a)"
+          placeholder: "questionStartIndex_placeholder"
         }
       ],
       tabs: [{ name: "numbering", index: 350 }]
@@ -713,7 +713,7 @@ export class SurveyQuestionEditorDefinition {
         {
           name: "questionStartIndex",
           tab: "question",
-          // placeholder: "Ex.: a)"
+          placeholder: "questionStartIndex_placeholder"
         },
         { name: "questionErrorLocation", tab: "question" },
         {
@@ -776,11 +776,11 @@ export class SurveyQuestionEditorDefinition {
       properties: [
         {
           name: "url",
-          // placeholder: "Ex.: https://api.example.com/books"
+          placeholder: "url_placeholder"
         },
         {
           name: "path",
-          // placeholder: "Ex.: categories.fiction"
+          placeholder: "path_placeholder"
         },
         "valueName",
         "titleName",

@@ -795,7 +795,13 @@ export var enStrings = {
     filePlaceholder: "Placeholder text for Local file",
     photoPlaceholder: "Placeholder text for Camera",
     fileOrPhotoPlaceholder: "Placeholder text for Local file or Camera",
-    rateType: "Rating icon"
+    rateType: "Rating icon",
+    url_placeholder: "Ex.: https://api.example.com/books",
+    path_placeholder: "Ex.: categories.fiction",
+    questionStartIndex_placeholder: "Ex.: a)",
+    width_placeholder: "Ex.: 6in",
+    minWidth_placeholder: "Ex.: 600px",
+    maxWidth_placeholder: "Ex.: 50%",
   },
   // Property values
   pv: {
