@@ -371,6 +371,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     rowCount: "Sorok száma",
     columnLayout: "Oszlopok elrendezése",
+    transposeData: "Sorok átültetése oszlopokba",
     addRowLocation: "'Új sor felvétele' gomb elhelyezése",
     addRowText: "'Új sor felvétele' gomb szövege",
     removeRowText: "'Sor eltávolítása' gomb szövege",
@@ -624,7 +625,11 @@ export var huStrings = {
       templateTitle: "Sablon címe",
       totals: "Összegek",
       logic: "Logika",
-      layout: "Elrendezés",
+      layout: {
+        panel: "Elrendezés",
+        question: "Elrendezés",
+        base: "Elrendezés"
+      },
       data: "Adat",
       validation: "Érvényesítés",
       cells: "Cella szövegek",
@@ -1914,3 +1919,8 @@ editorLocalization.locales["hu"] = huStrings;
 // pv.contain: "Contain" => "Tartalmaz"
 // pv.cover: "Cover" => "Fedő"
 // pv.fill: "Fill" => "Tölt"
+
+// pe.transposeData: "Transpose rows to columns" => "Sorok átültetése oszlopokba"
+// layout.panel: "Layout" => "Elrendezés"
+// layout.question: "Layout" => "Elrendezés"
+// layout.base: "Layout" => "Elrendezés"

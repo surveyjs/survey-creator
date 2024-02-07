@@ -371,6 +371,7 @@ export var nbStrings = {
     imageWidth: "Bildebredde",
     rowCount: "Antall rader",
     columnLayout: "Antall kolonner",
+    transposeData: "Transponere rader til kolonner",
     addRowLocation: "Legg til rad knapp-plassering",
     addRowText: "Legg til rad knapp-tekst",
     removeRowText: "Fjern rad knapp-tekst",
@@ -624,7 +625,11 @@ export var nbStrings = {
       templateTitle: "Mal-tittel",
       totals: "Totaler",
       logic: "Logikk",
-      layout: "Oppsett",
+      layout: {
+        panel: "Oppsett",
+        question: "Oppsett",
+        base: "Oppsett"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celler",
@@ -1764,3 +1769,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // pv.contain: "Contain" => "Inneholde"
 // pv.cover: "Cover" => "Lokk"
 // pv.fill: "Fill" => "Fylle"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rader til kolonner"
+// layout.panel: "Layout" => "Oppsett"
+// layout.question: "Layout" => "Oppsett"
+// layout.base: "Layout" => "Oppsett"

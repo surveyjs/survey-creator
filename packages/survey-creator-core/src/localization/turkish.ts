@@ -371,6 +371,7 @@ export var turkishStrings = {
     imageWidth: "Resim genişliği",
     rowCount: "Satır sayısı",
     columnLayout: "Kolon yerleşimi",
+    transposeData: "Satırları sütunlara dönüştürme",
     addRowLocation: "Satır butonu konumu ekle",
     addRowText: "Satır butonu yazısı ekle",
     removeRowText: "Satır butonu yazısını kaldır",
@@ -624,7 +625,11 @@ export var turkishStrings = {
       templateTitle: "Şablon başlığı",
       totals: "Toplamlar",
       logic: "Mantık",
-      layout: "Şablon",
+      layout: {
+        panel: "Düzen",
+        question: "Düzen",
+        base: "Düzen"
+      },
       data: "Veri",
       validation: "Doğrulayıcı",
       cells: "Hücreler",
@@ -1756,3 +1761,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pv.contain: "Contain" => "Kapsamak"
 // pv.cover: "Cover" => "Örtmek"
 // pv.fill: "Fill" => "Doldurmak"
+
+// pe.transposeData: "Transpose rows to columns" => "Satırları sütunlara dönüştürme"
+// layout.panel: "Layout" => "Düzen"
+// layout.question: "Layout" => "Düzen"
+// layout.base: "Layout" => "Düzen"

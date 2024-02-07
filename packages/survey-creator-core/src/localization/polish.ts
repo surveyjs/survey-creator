@@ -371,6 +371,7 @@ var polishStrings = {
     imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Układ kolumn",
+    transposeData: "Transponowanie wierszy do kolumn",
     addRowLocation: "Lokalizacja przycisku Dodaj wiersz",
     addRowText: "Add row button text",
     removeRowText: "Remove row button text",
@@ -624,7 +625,11 @@ var polishStrings = {
       templateTitle: "Template title",
       totals: "Sumy",
       logic: "Logika",
-      layout: "Układ",
+      layout: {
+        panel: "Układ",
+        question: "Układ",
+        base: "Układ"
+      },
       data: "Dane",
       validation: "Walidacja",
       cells: "Teksty komórek",
@@ -2034,3 +2039,8 @@ editorLocalization.locales["pl"] = polishStrings;
 // pv.contain: "Contain" => "Zawierać"
 // pv.cover: "Cover" => "Pokryć"
 // pv.fill: "Fill" => "Wypełnić"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponowanie wierszy do kolumn"
+// layout.panel: "Layout" => "Układ"
+// layout.question: "Layout" => "Układ"
+// layout.base: "Layout" => "Układ"

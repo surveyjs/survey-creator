@@ -125,6 +125,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "alternateRows", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
+        { name: "transposeData", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
         { name: "columnColCount", tab: "layout" },
         { name: "columnMinWidth", tab: "layout" },

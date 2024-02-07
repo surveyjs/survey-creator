@@ -371,6 +371,7 @@ var italianTranslation = {
     imageWidth: "Larghezza immagine",
     rowCount: "Numero delle righe",
     columnLayout: "Layout delle colonne",
+    transposeData: "Trasponi righe in colonne",
     addRowLocation: "Posizione del tasto Aggiungi riga",
     addRowText: "Testo del tasto per aggiungere una nuova riga",
     removeRowText: "Testo del tasto per eliminare una riga",
@@ -624,7 +625,11 @@ var italianTranslation = {
       templateTitle: "Template titolo",
       totals: "Totale",
       logic: "Logica",
-      layout: "Layout",
+      layout: {
+        panel: "Impaginazione",
+        question: "Impaginazione",
+        base: "Impaginazione"
+      },
       data: "Dati",
       validation: "Validazione",
       cells: "Testi Cella",
@@ -1519,3 +1524,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // pv.contain: "Contain" => "Contenere"
 // pv.cover: "Cover" => "Coprire"
 // pv.fill: "Fill" => "Riempire"
+
+// pe.transposeData: "Transpose rows to columns" => "Trasponi righe in colonne"
+// layout.panel: "Layout" => "Impaginazione"
+// layout.question: "Layout" => "Impaginazione"
+// layout.base: "Layout" => "Impaginazione"

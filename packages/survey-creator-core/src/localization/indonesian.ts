@@ -371,6 +371,7 @@ export var indonesianStrings = {
     imageWidth: "Lebar gambar",
     rowCount: "Jumlah baris",
     columnLayout: "Tata letak kolom",
+    transposeData: "Mengubah urutan baris menjadi kolom",
     addRowLocation: "Tambah lokasi tombol baris",
     addRowText: "Teks tambah tombol baris",
     removeRowText: "Teks hapus tombol baris",
@@ -624,7 +625,11 @@ export var indonesianStrings = {
       templateTitle: "Judul templat",
       totals: "Total",
       logic: "Logika",
-      layout: "Tata letak",
+      layout: {
+        panel: "Tata letak",
+        question: "Tata letak",
+        base: "Tata letak"
+      },
       data: "Data",
       validation: "Validasi",
       cells: "Teks Sel",
@@ -1915,3 +1920,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pv.contain: "Contain" => "Mengandung"
 // pv.cover: "Cover" => "Menutupi"
 // pv.fill: "Fill" => "Isi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris menjadi kolom"
+// layout.panel: "Layout" => "Tata letak"
+// layout.question: "Layout" => "Tata letak"
+// layout.base: "Layout" => "Tata letak"

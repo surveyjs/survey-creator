@@ -371,6 +371,7 @@ export var msStrings = {
     imageWidth: "Lebar imej",
     rowCount: "Kiraan baris",
     columnLayout: "Tataletak lajur",
+    transposeData: "Mengubah urutan baris kepada lajur",
     addRowLocation: "Tambahkan lokasi butang baris",
     addRowText: "Tambahkan teks butang baris",
     removeRowText: "Alih keluar teks butang baris",
@@ -624,7 +625,11 @@ export var msStrings = {
       templateTitle: "Tajuk templat",
       totals: "Jumlah",
       logic: "Logik",
-      layout: "Tataletak",
+      layout: {
+        panel: "Susun atur",
+        question: "Susun atur",
+        base: "Susun atur"
+      },
       data: "Data",
       validation: "Pengesahan",
       cells: "Sel",
@@ -1714,3 +1719,8 @@ editorLocalization.locales["ms"] = msStrings;
 // pv.contain: "Contain" => "Mengandungi"
 // pv.cover: "Cover" => "Perlindungan"
 // pv.fill: "Fill" => "Mengisi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris kepada lajur"
+// layout.panel: "Layout" => "Susun atur"
+// layout.question: "Layout" => "Susun atur"
+// layout.base: "Layout" => "Susun atur"

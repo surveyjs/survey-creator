@@ -371,6 +371,7 @@ export var hrStrings = {
     imageWidth: "Širina slike",
     rowCount: "Broj redaka",
     columnLayout: "Raspored stupaca",
+    transposeData: "Transponiranje redaka u stupce",
     addRowLocation: "Dodavanje lokacije gumba redaka",
     addRowText: "Dodavanje teksta gumba redak",
     removeRowText: "Uklanjanje teksta gumba redaka",
@@ -624,7 +625,11 @@ export var hrStrings = {
       templateTitle: "Naslov predloška",
       totals: "Zbrojeve",
       logic: "Logika",
-      layout: "Izgled",
+      layout: {
+        panel: "Tlocrt",
+        question: "Tlocrt",
+        base: "Tlocrt"
+      },
       data: "Podataka",
       validation: "Provjera valjanosti",
       cells: "Ćelije",
@@ -1755,3 +1760,8 @@ editorLocalization.locales["hr"] = hrStrings;
 // pv.contain: "Contain" => "Sadržavati"
 // pv.cover: "Cover" => "Pokriti"
 // pv.fill: "Fill" => "Ispuniti"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponiranje redaka u stupce"
+// layout.panel: "Layout" => "Tlocrt"
+// layout.question: "Layout" => "Tlocrt"
+// layout.base: "Layout" => "Tlocrt"

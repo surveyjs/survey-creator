@@ -371,6 +371,7 @@ var simplifiedChineseTranslation = {
     imageWidth: "图片宽度",
     rowCount: "默认行数",
     columnLayout: "列布局",
+    transposeData: "将行转置为列",
     addRowLocation: "添加行按钮位置",
     addRowText: "添加条目按钮文本",
     removeRowText: "删除条目按钮文本",
@@ -624,7 +625,11 @@ var simplifiedChineseTranslation = {
       templateTitle: "标题模板",
       totals: "总数",
       logic: "逻辑",
-      layout: "布局",
+      layout: {
+        panel: "布局",
+        question: "布局",
+        base: "布局"
+      },
       data: "数据",
       validation: "验证",
       cells: "单元格文本",
@@ -1903,3 +1908,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pv.contain: "Contain" => "包含"
 // pv.cover: "Cover" => "盖"
 // pv.fill: "Fill" => "填补"
+
+// pe.transposeData: "Transpose rows to columns" => "将行转置为列"
+// layout.panel: "Layout" => "布局"
+// layout.question: "Layout" => "布局"
+// layout.base: "Layout" => "布局"

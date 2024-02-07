@@ -371,6 +371,7 @@ export var hebrewStrings = {
     imageWidth: "רוחב התמונה",
     rowCount: "כמות השורות",
     columnLayout: "סידור העמודות",
+    transposeData: "ביצוע חילוף שורות לעמודות",
     addRowLocation: "מיקום כפתור הוסף שורה",
     addRowText: "טקסט לכפתור הוסף שורה",
     removeRowText: "טקסט לכפתור הסר שורה",
@@ -624,7 +625,11 @@ export var hebrewStrings = {
       templateTitle: "תבנית כותרת",
       totals: "סכומים",
       logic: "לוגיקה",
-      layout: "פריסה",
+      layout: {
+        panel: "פריסה",
+        question: "פריסה",
+        base: "פריסה"
+      },
       data: "נתונים",
       validation: "אימות",
       cells: "טקסטי תאים",
@@ -1325,3 +1330,8 @@ editorLocalization.locales["he"] = hebrewStrings;
 // pv.contain: "Contain" => "להכיל"
 // pv.cover: "Cover" => "כריכה"
 // pv.fill: "Fill" => "מילוי"
+
+// pe.transposeData: "Transpose rows to columns" => "ביצוע חילוף שורות לעמודות"
+// layout.panel: "Layout" => "פריסה"
+// layout.question: "Layout" => "פריסה"
+// layout.base: "Layout" => "פריסה"
