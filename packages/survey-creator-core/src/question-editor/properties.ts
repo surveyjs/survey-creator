@@ -24,6 +24,9 @@ export class SurveyQuestionEditorTabDefinition {
   public visible: boolean = true;
   public index: number = 0;
   public properties: Array<SurveyQuestionEditorPropertyDefinition> = [];
+  public parentName: string;
+  public parent: SurveyQuestionEditorTabDefinition;
+  public tabs: Array<SurveyQuestionEditorTabDefinition>;
 }
 
 const otherTabName = "others";
@@ -50,7 +53,7 @@ export class SurveyQuestionProperties {
     showMode: string = null,
     private parentObj: any = null,
     private parentProperty: JsonObjectProperty = null,
-    private propertyGridDefinition: ISurveyPropertyGridDefinition
+    private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
     if(!this.propertyGridDefinition) {
       this.propertyGridDefinition = SurveyQuestionEditorDefinition.definition;
@@ -154,6 +157,21 @@ export class SurveyQuestionProperties {
     this.tabs.sort(function (a, b) {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
+    this.setParentTabs();
+  }
+  private setParentTabs(): void {
+    this.tabs.forEach(tab => {
+      if(tab.parentName) {
+        const parent = this.getTabByName(tab.parentName);
+        if(parent) {
+          tab.parent = parent;
+          if(!Array.isArray(parent.tabs)) {
+            parent.tabs = [];
+          }
+          parent.tabs.push(tab);
+        }
+      }
+    });
   }
   private addPropertyIntoTab(
     defProperty: any,
@@ -164,6 +182,7 @@ export class SurveyQuestionProperties {
       if (defProperty.index > 0) {
         tab.index = defProperty.index;
       }
+      tab.parentName = defProperty.parent;
       if (defProperty.visible === false) {
         tab.visible = false;
       }
