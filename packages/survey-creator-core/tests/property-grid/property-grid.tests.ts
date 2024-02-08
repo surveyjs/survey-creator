@@ -2439,7 +2439,7 @@ test("Show empty rows template if there is no rows", () => {
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
   expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any choices yet");
-  expect(propEditorQuestion.addRowText).toEqual("Add a choice");
+  expect(propEditorQuestion.addRowText).toEqual("Add new choice");
 });
 test("Different property editors for trigger value", () => {
   const prop = Serializer.findProperty("setvaluetrigger", "setValue");
