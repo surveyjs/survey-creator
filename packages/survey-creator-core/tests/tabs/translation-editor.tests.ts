@@ -363,3 +363,51 @@ test("Machine translation from non default locale - onMachineTranslate", () => {
   expect(fromLocale).toBe("de");
   expect(fromStrings).toStrictEqual(["de: title", "de: desc"]);
 });
+test("Machine translation and cancel", () => {
+  const creator = new CreatorTester();
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: "Title 1",
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+    const translatedStrings = new Array<string>();
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  creator.JSON = json;
+  const q = creator.survey.getQuestionByName("q1");
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  let editor = tabTranslation.model.createTranslationEditor("de");
+  editor.doMachineTranslation();
+  editor.cancel();
+  expect(q.locTitle.getJson()).toStrictEqual("Title 1");
+  editor = tabTranslation.model.createTranslationEditor("de");
+  editor.doMachineTranslation();
+  editor.apply();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
+  editor = tabTranslation.model.createTranslationEditor("fr");
+  editor.doMachineTranslation();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
+  editor.cancel();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
+});
