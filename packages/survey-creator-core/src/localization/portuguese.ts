@@ -371,6 +371,7 @@ var portugueseTranslation = {
     imageWidth: "Largura da imagem",
     rowCount: "Contagem de linhas",
     columnLayout: "Layout das colunas",
+    transposeData: "Transpor linhas para colunas",
     addRowLocation: "Localização do botão de adicionar linha",
     addRowText: "Texto do botão para adicionar linhas",
     removeRowText: "Texto do botão para remover linhas",
@@ -624,7 +625,11 @@ var portugueseTranslation = {
       templateTitle: "Título do template",
       totals: "Totais",
       logic: "Lógica",
-      layout: "Disposição",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validação",
       cells: "Texto de Células",
@@ -1427,3 +1432,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pv.contain: "Contain" => "Conter"
 // pv.cover: "Cover" => "Cobrir"
 // pv.fill: "Fill" => "Encher"
+
+// pe.transposeData: "Transpose rows to columns" => "Transpor linhas para colunas"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

@@ -371,6 +371,7 @@ export var mnStrings = {
     imageWidth: "Зургийн өргөн",
     rowCount: "Мөрний тоо",
     columnLayout: "Баганы зохион байгуулалт",
+    transposeData: "Багануудад транспозын эгнээ",
     addRowLocation: "Мөр нэмэх товчны байршил",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
@@ -624,7 +625,11 @@ export var mnStrings = {
       templateTitle: "Гарчигны загвар",
       totals: "Нийт",
       logic: "Логик",
-      layout: "Зохион байгуулалт",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Өгөгдөл",
       validation: "Батлах",
       cells: "Нүдний текст",
@@ -1417,3 +1422,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // pv.contain: "Contain" => "Агуулах"
 // pv.cover: "Cover" => "Хөшиг"
 // pv.fill: "Fill" => "Дүүргэлт"
+
+// pe.transposeData: "Transpose rows to columns" => "Багануудад транспозын эгнээ"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

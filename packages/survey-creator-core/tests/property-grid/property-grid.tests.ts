@@ -460,7 +460,7 @@ test("column[] property editor", (): any => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion).toBeTruthy(); //"choices property editor created");
-  expect(columnsQuestion.showHeader).toBeFalsy; //"No header in matrix";
+  expect(columnsQuestion.showHeader).toBeTruthy();
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
   expect(columnsQuestion.columns).toHaveLength(2); //"There are two columns");
   expect(columnsQuestion.columns[0].title).toEqual("Question name");

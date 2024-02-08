@@ -371,6 +371,7 @@ export var nlStrings = {
     imageWidth: "Afbeelding breedte",
     rowCount: "Aantal rijen",
     columnLayout: "Kolommen layout",
+    transposeData: "Rijen transponeren naar kolommen",
     addRowLocation: "Voeg de locatie van de rijknop toe",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
@@ -624,7 +625,11 @@ export var nlStrings = {
       templateTitle: "Sjabloontitel",
       totals: "Totalen",
       logic: "Logica",
-      layout: "Indeling",
+      layout: {
+        panel: "Indeling",
+        question: "Indeling",
+        base: "Indeling"
+      },
       data: "Gegevens",
       validation: "Validatie",
       cells: "Cellen",
@@ -1741,3 +1746,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // pv.contain: "Contain" => "Bevatten"
 // pv.cover: "Cover" => "Bedekken"
 // pv.fill: "Fill" => "Vullen"
+
+// pe.transposeData: "Transpose rows to columns" => "Rijen transponeren naar kolommen"
+// layout.panel: "Layout" => "Indeling"
+// layout.question: "Layout" => "Indeling"
+// layout.base: "Layout" => "Indeling"

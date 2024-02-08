@@ -371,6 +371,7 @@ export var koreanStrings = {
     imageWidth: "이미지 너비",
     rowCount: "행 수",
     columnLayout: "열 위치",
+    transposeData: "행을 열로 바꾸기",
     addRowLocation: "행 버튼 위치 추가",
     addRowText: "행 버튼 텍스트 추가",
     removeRowText: "행 버튼 텍스트 제거",
@@ -624,7 +625,11 @@ export var koreanStrings = {
       templateTitle: "템플릿 제목",
       totals: "합계",
       logic: "논리학",
-      layout: "레이아웃",
+      layout: {
+        panel: "레이아웃",
+        question: "레이아웃",
+        base: "레이아웃"
+      },
       data: "데이터",
       validation: "유효성 검사",
       cells: "셀 텍스트",
@@ -1965,3 +1970,8 @@ editorLocalization.locales["ko"] = koreanStrings;
 // pv.contain: "Contain" => "포함하다"
 // pv.cover: "Cover" => "표지"
 // pv.fill: "Fill" => "채우다"
+
+// pe.transposeData: "Transpose rows to columns" => "행을 열로 바꾸기"
+// layout.panel: "Layout" => "레이아웃"
+// layout.question: "Layout" => "레이아웃"
+// layout.base: "Layout" => "레이아웃"
