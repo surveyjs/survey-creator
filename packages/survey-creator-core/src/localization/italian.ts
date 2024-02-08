@@ -49,9 +49,9 @@ var italianTranslation = {
     settings: "Impostazioni sondaggio",
     settingsTooltip: "Apri le impostazioni del sondaggio",
     surveySettings: "Impostazioni del sondaggio",
-    surveySettingsTooltip: "Apri le impostazioni del sondaggio",
+    surveySettingsTooltip: "Impostazioni dell'indagine",
     themeSettings: "Impostazioni del tema",
-    themeSettingsTooltip: "Apri le impostazioni del tema",
+    themeSettingsTooltip: "Impostazioni del tema",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -371,6 +371,7 @@ var italianTranslation = {
     imageWidth: "Larghezza immagine",
     rowCount: "Numero delle righe",
     columnLayout: "Layout delle colonne",
+    transposeData: "Trasponi righe in colonne",
     addRowLocation: "Posizione del tasto Aggiungi riga",
     addRowText: "Testo del tasto per aggiungere una nuova riga",
     removeRowText: "Testo del tasto per eliminare una riga",
@@ -449,6 +450,10 @@ var italianTranslation = {
     },
     question: {
       page: "Pagina principale"
+    },
+    panel: {
+      page: "Pagina principale",
+      indent: "Aggiungi rientri esterni"
     },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
@@ -620,7 +625,11 @@ var italianTranslation = {
       templateTitle: "Template titolo",
       totals: "Totale",
       logic: "Logica",
-      layout: "Layout",
+      layout: {
+        panel: "Impaginazione",
+        question: "Impaginazione",
+        base: "Impaginazione"
+      },
       data: "Dati",
       validation: "Validazione",
       cells: "Testi Cella",
@@ -637,9 +646,6 @@ var italianTranslation = {
     columnsEnableIf: "Colonne visibili se",
     rowsEnableIf: "Righe visibili se",
     indent: "Aggiungi rientri",
-    panel: {
-      indent: "Aggiungi rientri esterni"
-    },
     innerIndent: "Aggiungi rientri interni",
     defaultValueFromLastRow: "Prendi i valori predefiniti dall'ultima riga",
     defaultValueFromLastPanel: "Prendi i valori predefiniti dall'ultimo pannello",
@@ -1518,3 +1524,8 @@ editorLocalization.locales["it"] = italianTranslation;
 // pv.contain: "Contain" => "Contenere"
 // pv.cover: "Cover" => "Coprire"
 // pv.fill: "Fill" => "Riempire"
+
+// pe.transposeData: "Transpose rows to columns" => "Trasponi righe in colonne"
+// layout.panel: "Layout" => "Impaginazione"
+// layout.question: "Layout" => "Impaginazione"
+// layout.base: "Layout" => "Impaginazione"

@@ -460,7 +460,7 @@ test("column[] property editor", (): any => {
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion).toBeTruthy(); //"choices property editor created");
-  expect(columnsQuestion.showHeader).toBeFalsy; //"No header in matrix";
+  expect(columnsQuestion.showHeader).toBeTruthy();
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
   expect(columnsQuestion.columns).toHaveLength(2); //"There are two columns");
   expect(columnsQuestion.columns[0].title).toEqual("Name");
@@ -3103,4 +3103,56 @@ test("property with boolean type and two choices", () => {
   expect(columnLayoutQuestion.labelFalse).toBe("Vertical");
 
   columnLayoutProperty.type = "";
+});
+test("category, parent property", () => {
+  Serializer.addProperty("question", "prop1");
+  Serializer.addProperty("question", "prop2");
+  Serializer.addProperty("question", "prop3");
+  Serializer.addProperty("question", "prop4");
+  enStrings.pe.tabs["sub1"] = "Sub Panel 1";
+
+  const definition = SurveyQuestionEditorDefinition.definition["question"];
+  const properties = definition.properties || [];
+  const tabs = definition.tabs || [];
+  const oldPropCount = properties.length;
+  const oldTabCount = tabs.length;
+  properties.push({ name: "prop1", tab: "sub1" });
+  properties.push({ name: "prop2", tab: "sub2" });
+  properties.push({ name: "prop3", tab: "sub1" });
+  properties.push({ name: "prop4", tab: "sub2" });
+  tabs.push({ name: "sub1", parent: "general" });
+  tabs.push({ name: "sub2", parent: "general" });
+
+  const question = new QuestionDropdownModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const generalPanel = propertyGrid.survey.getPanelByName("general");
+  generalPanel.expand();
+  generalPanel.collapse();
+  generalPanel.expand();
+  const sub1Panel = <PanelModel>generalPanel.getElementByName("sub1");
+  const sub2Panel = <PanelModel>generalPanel.getElementByName("sub2");
+  expect(sub1Panel).toBeTruthy();
+  expect(sub2Panel).toBeTruthy();
+  expect(sub1Panel.elements).toHaveLength(2);
+  expect(sub2Panel.elements).toHaveLength(2);
+  expect(sub1Panel.isVisible).toBeTruthy();
+  expect(sub2Panel.isVisible).toBeTruthy();
+  expect(sub1Panel.elements).toHaveLength(2);
+  expect(sub2Panel.elements).toHaveLength(2);
+  expect(sub1Panel.elements[0].name).toBe("prop1");
+  expect(sub1Panel.elements[1].name).toBe("prop3");
+  expect(sub2Panel.elements[0].name).toBe("prop2");
+  expect(sub2Panel.elements[1].name).toBe("prop4");
+  expect(sub1Panel.state).toBe("default");
+  expect(sub2Panel.state).toBe("default");
+  expect(sub1Panel.title).toBe("Sub Panel 1");
+  expect(sub2Panel.title).toBeFalsy();
+
+  delete enStrings.pe.tabs["sub1"];
+  properties.splice(oldPropCount, 4);
+  tabs.splice(oldTabCount, 2);
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
+  Serializer.removeProperty("question", "prop4");
 });

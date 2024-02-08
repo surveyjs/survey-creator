@@ -49,9 +49,9 @@ export var jaStrings = {
     settings: "アンケートの設定",
     settingsTooltip: "アンケートの設定を開く",
     surveySettings: "アンケート設定",
-    surveySettingsTooltip: "アンケート設定を開く",
+    surveySettingsTooltip: "アンケート設定",
     themeSettings: "テーマ設定",
-    themeSettingsTooltip: "テーマ設定を開く",
+    themeSettingsTooltip: "テーマ設定",
     showPanel: "パネルを表示する",
     hidePanel: "パネルを非表示にする",
     prevSelected: "前を選択",
@@ -371,6 +371,7 @@ export var jaStrings = {
     imageWidth: "イメージの幅",
     rowCount: "列数",
     columnLayout: "行のレイアウト",
+    transposeData: "行を列に転置する",
     addRowLocation: "列ボタンのロケーションを追加",
     addRowText: "行ボタンのテキストを追加",
     removeRowText: "行ボタンのテキストを削除",
@@ -449,6 +450,10 @@ export var jaStrings = {
     },
     question: {
       page: "親ページ"
+    },
+    panel: {
+      page: "親ページ",
+      indent: "外側のインデントを追加する"
     },
     showTimerPanel: "タイマーパネルを表示する",
     showTimerPanelMode: "タイマーパネルモードを表示",
@@ -620,7 +625,11 @@ export var jaStrings = {
       templateTitle: "テンプレートタイトル",
       totals: "合計",
       logic: "ロジック",
-      layout: "レイアウト",
+      layout: {
+        panel: "レイアウト",
+        question: "レイアウト",
+        base: "レイアウト"
+      },
       data: "データ",
       validation: "検証",
       cells: "セル",
@@ -637,9 +646,6 @@ export var jaStrings = {
     columnsEnableIf: "列は次の場合に表示されます。",
     rowsEnableIf: "行は次の場合に表示されます。",
     indent: "インデントを追加する",
-    panel: {
-      indent: "外側のインデントを追加する"
-    },
     innerIndent: "内側のインデントを追加する",
     defaultValueFromLastRow: "最後の行からデフォルト値を取得する",
     defaultValueFromLastPanel: "最後のパネルからデフォルト値を取得する",
@@ -1759,3 +1765,8 @@ editorLocalization.locales["ja"] = jaStrings;
 // pv.contain: "Contain" => "含む"
 // pv.cover: "Cover" => "覆う"
 // pv.fill: "Fill" => "注ぐ"
+
+// pe.transposeData: "Transpose rows to columns" => "行を列に転置する"
+// layout.panel: "Layout" => "レイアウト"
+// layout.question: "Layout" => "レイアウト"
+// layout.base: "Layout" => "レイアウト"

@@ -49,9 +49,9 @@ export var czStrings = {
     settings: "Nastavení průzkumu",
     settingsTooltip: "Otevřít nastavení průzkumu",
     surveySettings: "Nastavení průzkumu",
-    surveySettingsTooltip: "Otevřít nastavení průzkumu",
+    surveySettingsTooltip: "Nastavení průzkumu",
     themeSettings: "Nastavení motivu",
-    themeSettingsTooltip: "Otevření nastavení motivu",
+    themeSettingsTooltip: "Nastavení motivu",
     showPanel: "Zobrazit panel",
     hidePanel: "Skrýt panel",
     prevSelected: "Vybrat předchozí",
@@ -371,6 +371,7 @@ export var czStrings = {
     imageWidth: "Šířka obrázku",
     rowCount: "Počet řádků",
     columnLayout: "Rozložení sloupců",
+    transposeData: "Transponování řádků do sloupců",
     addRowLocation: "Přidat umístění tlačítka řádku",
     addRowText: "Přidat text tlačítka řádku",
     removeRowText: "Odebrat text tlačítka řádku",
@@ -449,6 +450,10 @@ export var czStrings = {
     },
     question: {
       page: "Nadřazená stránka"
+    },
+    panel: {
+      page: "Nadřazená stránka",
+      indent: "Přidat vnější odsazení"
     },
     showTimerPanel: "Zobrazit panel časovače",
     showTimerPanelMode: "Zobrazit režim panelu časovače",
@@ -620,7 +625,11 @@ export var czStrings = {
       templateTitle: "Název šablony",
       totals: "Součty",
       logic: "Logika",
-      layout: "Rozložení",
+      layout: {
+        panel: "Rozložení",
+        question: "Rozložení",
+        base: "Rozložení"
+      },
       data: "Data",
       validation: "Ověřování",
       cells: "Buňky",
@@ -637,9 +646,6 @@ export var czStrings = {
     columnsEnableIf: "Sloupce jsou viditelné, pokud",
     rowsEnableIf: "Řádky jsou viditelné, pokud",
     indent: "Přidat odsazení",
-    panel: {
-      indent: "Přidat vnější odsazení"
-    },
     innerIndent: "Přidat vnitřní odsazení",
     defaultValueFromLastRow: "Vzít výchozí hodnoty z posledního řádku",
     defaultValueFromLastPanel: "Vzít výchozí hodnoty z posledního panelu",
@@ -1324,3 +1330,8 @@ editorLocalization.locales["cs"] = czStrings;
 // pv.contain: "Contain" => "Obsahovat"
 // pv.cover: "Cover" => "Krýt"
 // pv.fill: "Fill" => "Vyplnit"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponování řádků do sloupců"
+// layout.panel: "Layout" => "Rozložení"
+// layout.question: "Layout" => "Rozložení"
+// layout.base: "Layout" => "Rozložení"

@@ -1577,14 +1577,14 @@ test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.showHeader).toBeFalsy(); //according to design header is not shown for item values editor
+  expect(choicesQuestion.showHeader).toBeTruthy();
 
   Serializer.findProperty("itemvalue", "text").visible = false;
   propertyGrid = new PropertyGridModelTester(question);
   choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.showHeader).toBeFalsy();
+  expect(choicesQuestion.showHeader).toBeFalsy(); //one column only
   Serializer.findProperty("itemvalue", "text").visible = false;
 });
 test("SurveyPropertyCalculatedValueEditor", () => {

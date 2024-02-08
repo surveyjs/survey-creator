@@ -49,9 +49,9 @@ export let svStrings = {
     settings: "Enkät inställningar",
     settingsTooltip: "Öppna inställningar",
     surveySettings: "Inställningar för undersökning",
-    surveySettingsTooltip: "Öppna undersökningsinställningar",
+    surveySettingsTooltip: "Inställningar för undersökning",
     themeSettings: "Tema Inställningar",
-    themeSettingsTooltip: "Öppna temainställningar",
+    themeSettingsTooltip: "Inställningar för tema",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -371,6 +371,7 @@ export let svStrings = {
     imageWidth: "Bild bredd",
     rowCount: "Antal rader",
     columnLayout: "Stil på kolumn",
+    transposeData: "Transponera rader till kolumner",
     addRowLocation: "Lägg till radknapp plats",
     addRowText: "Lägg till knapp text",
     removeRowText: "Ta bort rad knapp text",
@@ -449,6 +450,10 @@ export let svStrings = {
     },
     question: {
       page: "Överordnad sida"
+    },
+    panel: {
+      page: "Överordnad sida",
+      indent: "Lägga till yttre indrag"
     },
     showTimerPanel: "Visa tidtagning",
     showTimerPanelMode: "Visa tidtagning läge",
@@ -620,7 +625,11 @@ export let svStrings = {
       templateTitle: "Mall titel",
       totals: "Summor",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Cell texter",
@@ -637,9 +646,6 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     indent: "Lägga till indrag",
-    panel: {
-      indent: "Lägga till yttre indrag"
-    },
     innerIndent: "Lägga till inre indrag",
     defaultValueFromLastRow: "Ta standardvärden från den sista raden",
     defaultValueFromLastPanel: "Ta standardvärden från den sista panelen",
@@ -1937,3 +1943,8 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.contain: "Contain" => "Innehålla"
 // pv.cover: "Cover" => "Täcka"
 // pv.fill: "Fill" => "Fylla"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponera rader till kolumner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

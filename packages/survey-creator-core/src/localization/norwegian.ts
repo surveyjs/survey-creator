@@ -49,9 +49,9 @@ export var nbStrings = {
     settings: "Skjemainnstillinger",
     settingsTooltip: "Åpne skjemainnstillinger",
     surveySettings: "Innstillinger for undersøkelse",
-    surveySettingsTooltip: "Åpne innstillinger for evaluering",
+    surveySettingsTooltip: "Innstillinger for undersøkelse",
     themeSettings: "Tema innstillinger",
-    themeSettingsTooltip: "Åpne temainnstillinger",
+    themeSettingsTooltip: "Temainnstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
@@ -371,6 +371,7 @@ export var nbStrings = {
     imageWidth: "Bildebredde",
     rowCount: "Antall rader",
     columnLayout: "Antall kolonner",
+    transposeData: "Transponere rader til kolonner",
     addRowLocation: "Legg til rad knapp-plassering",
     addRowText: "Legg til rad knapp-tekst",
     removeRowText: "Fjern rad knapp-tekst",
@@ -449,6 +450,10 @@ export var nbStrings = {
     },
     question: {
       page: "Overordnet side"
+    },
+    panel: {
+      page: "Overordnet side",
+      indent: "Legge til ytre innrykk"
     },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
@@ -620,7 +625,11 @@ export var nbStrings = {
       templateTitle: "Mal-tittel",
       totals: "Totaler",
       logic: "Logikk",
-      layout: "Oppsett",
+      layout: {
+        panel: "Oppsett",
+        question: "Oppsett",
+        base: "Oppsett"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celler",
@@ -637,9 +646,6 @@ export var nbStrings = {
     columnsEnableIf: "Kolonner er synlige hvis",
     rowsEnableIf: "Rader er synlige hvis:",
     indent: "Legge til innrykk",
-    panel: {
-      indent: "Legge til ytre innrykk"
-    },
     innerIndent: "Legge til indre innrykk",
     defaultValueFromLastRow: "Ta standardverdier fra den siste raden",
     defaultValueFromLastPanel: "Ta standardverdier fra det siste panelet",
@@ -1763,3 +1769,8 @@ editorLocalization.locales["nb"] = nbStrings;
 // pv.contain: "Contain" => "Inneholde"
 // pv.cover: "Cover" => "Lokk"
 // pv.fill: "Fill" => "Fylle"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rader til kolonner"
+// layout.panel: "Layout" => "Oppsett"
+// layout.question: "Layout" => "Oppsett"
+// layout.base: "Layout" => "Oppsett"

@@ -49,9 +49,9 @@ export var bgStrings = {
     settings: "Настройки",
     settingsTooltip: "Отваряне на настройките",
     surveySettings: "Настройки на анкетата",
-    surveySettingsTooltip: "Отваряне настройките на анкетата",
+    surveySettingsTooltip: "Настройки на проучването",
     themeSettings: "Настройки на тема",
-    themeSettingsTooltip: "Отваряне на настройките на тема",
+    themeSettingsTooltip: "Настройки на тема",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -371,6 +371,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     rowCount: "Брой редове",
     columnLayout: "Разположение на колоните",
+    transposeData: "Транспониране на редове в колони",
     addRowLocation: "Добавяне на местоположение на бутона за ред",
     addRowText: "Добавяне на текст на бутона за ред",
     removeRowText: "Премахване на текста на бутона за ред",
@@ -449,6 +450,10 @@ export var bgStrings = {
     },
     question: {
       page: "Родителска страница"
+    },
+    panel: {
+      page: "Родителска страница",
+      indent: "Добавяне на външни отстъпи"
     },
     showTimerPanel: "Местоположение на таймера",
     showTimerPanelMode: "Режим на таймера",
@@ -620,7 +625,11 @@ export var bgStrings = {
       templateTitle: "Шаблон за заглавие",
       totals: "Общо",
       logic: "Логика",
-      layout: "Оформление",
+      layout: {
+        panel: "Оформление",
+        question: "Оформление",
+        base: "Оформление"
+      },
       data: "Данни",
       validation: "Валидиране",
       cells: "Текст в клетката",
@@ -637,9 +646,6 @@ export var bgStrings = {
     columnsEnableIf: "Колоните са видими, ако",
     rowsEnableIf: "Редовете са видими, ако",
     indent: "Добавяне на отстъпи",
-    panel: {
-      indent: "Добавяне на външни отстъпи"
-    },
     innerIndent: "Добавяне на вътрешни отстъпи",
     defaultValueFromLastRow: "Вземане стойностите по подразбиране от последния ред",
     defaultValueFromLastPanel: "Вземане стойностите по подразбиране от последния панел",
@@ -1321,3 +1327,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // pv.contain: "Contain" => "Съдържам"
 // pv.cover: "Cover" => "Капак"
 // pv.fill: "Fill" => "Запълване"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспониране на редове в колони"
+// layout.panel: "Layout" => "Оформление"
+// layout.question: "Layout" => "Оформление"
+// layout.base: "Layout" => "Оформление"

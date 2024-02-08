@@ -49,9 +49,9 @@ export var msStrings = {
     settings: "Tetapan Tinjauan",
     settingsTooltip: "Buka tetapan tinjauan",
     surveySettings: "Seting Tinjauan",
-    surveySettingsTooltip: "Buka seting tinjauan",
+    surveySettingsTooltip: "Seting tinjauan",
     themeSettings: "Seting Tema",
-    themeSettingsTooltip: "Buka seting tema",
+    themeSettingsTooltip: "Seting tema",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -371,6 +371,7 @@ export var msStrings = {
     imageWidth: "Lebar imej",
     rowCount: "Kiraan baris",
     columnLayout: "Tataletak lajur",
+    transposeData: "Mengubah urutan baris kepada lajur",
     addRowLocation: "Tambahkan lokasi butang baris",
     addRowText: "Tambahkan teks butang baris",
     removeRowText: "Alih keluar teks butang baris",
@@ -449,6 +450,10 @@ export var msStrings = {
     },
     question: {
       page: "Halaman induk"
+    },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambah inden luaran"
     },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
@@ -620,7 +625,11 @@ export var msStrings = {
       templateTitle: "Tajuk templat",
       totals: "Jumlah",
       logic: "Logik",
-      layout: "Tataletak",
+      layout: {
+        panel: "Susun atur",
+        question: "Susun atur",
+        base: "Susun atur"
+      },
       data: "Data",
       validation: "Pengesahan",
       cells: "Sel",
@@ -637,9 +646,6 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     indent: "Menambah inden",
-    panel: {
-      indent: "Menambah inden luaran"
-    },
     innerIndent: "Menambah inden dalaman",
     defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",
@@ -1713,3 +1719,8 @@ editorLocalization.locales["ms"] = msStrings;
 // pv.contain: "Contain" => "Mengandungi"
 // pv.cover: "Cover" => "Perlindungan"
 // pv.fill: "Fill" => "Mengisi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris kepada lajur"
+// layout.panel: "Layout" => "Susun atur"
+// layout.question: "Layout" => "Susun atur"
+// layout.base: "Layout" => "Susun atur"

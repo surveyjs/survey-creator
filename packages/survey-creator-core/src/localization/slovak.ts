@@ -49,9 +49,9 @@ export var skStrings = {
     settings: "Nastavenia prieskumu",
     settingsTooltip: "Otvoriť nastavenia prieskumu",
     surveySettings: "Nastavenia prieskumu",
-    surveySettingsTooltip: "Otvorenie nastavení prieskumu",
+    surveySettingsTooltip: "Nastavenia prieskumu",
     themeSettings: "Nastavenia motívu",
-    themeSettingsTooltip: "Otvorenie nastavení motívu",
+    themeSettingsTooltip: "Nastavenia motívu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -371,6 +371,7 @@ export var skStrings = {
     imageWidth: "Šírka obrázka",
     rowCount: "Počet riadkov",
     columnLayout: "Rozloženie stĺpcov",
+    transposeData: "Transponovanie riadkov do stĺpcov",
     addRowLocation: "Poloha tlačidla na pridanie riadka",
     addRowText: "Text tlačidla na pridanie riadka",
     removeRowText: "Text tlačidla na odstránenie riadka",
@@ -449,6 +450,10 @@ export var skStrings = {
     },
     question: {
       page: "Nadradená stránka"
+    },
+    panel: {
+      page: "Nadradená stránka",
+      indent: "Pridanie vonkajších zarážok"
     },
     showTimerPanel: "Zobraziť panel s časovačom",
     showTimerPanelMode: "Zobraziť režim panela s časovačom",
@@ -620,7 +625,11 @@ export var skStrings = {
       templateTitle: "Titul šablóny",
       totals: "Celkové hodnoty",
       logic: "Logický výraz",
-      layout: "Rozloženie",
+      layout: {
+        panel: "Rozloženie",
+        question: "Rozloženie",
+        base: "Rozloženie"
+      },
       data: "Údaje",
       validation: "Overenie",
       cells: "Bunky",
@@ -637,9 +646,6 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     indent: "Pridanie zarážok",
-    panel: {
-      indent: "Pridanie vonkajších zarážok"
-    },
     innerIndent: "Pridanie vnútorných zarážok",
     defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
     defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",
@@ -1713,3 +1719,8 @@ editorLocalization.locales["sk"] = skStrings;
 // pv.contain: "Contain" => "Obsahovať"
 // pv.cover: "Cover" => "Prikryť"
 // pv.fill: "Fill" => "Vyplniť"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponovanie riadkov do stĺpcov"
+// layout.panel: "Layout" => "Rozloženie"
+// layout.question: "Layout" => "Rozloženie"
+// layout.base: "Layout" => "Rozloženie"

@@ -49,9 +49,9 @@ var traditionalChineseTranslation = {
     settings: "設置",
     settingsTooltip: "打開設置",
     surveySettings: "調查設置",
-    surveySettingsTooltip: "打開調查設置",
+    surveySettingsTooltip: "調查設置",
     themeSettings: "主題設置",
-    themeSettingsTooltip: "打開主題設置",
+    themeSettingsTooltip: "主題設置",
     showPanel: "顯示面板",
     hidePanel: "“隱藏”面板",
     prevSelected: "選擇上一個",
@@ -371,6 +371,7 @@ var traditionalChineseTranslation = {
     imageWidth: "圖片寬度",
     rowCount: "默認行數",
     columnLayout: "列佈局",
+    transposeData: "將行轉置為列",
     addRowLocation: "“添加行”按鈕位置",
     addRowText: "添加條目按鈕文本",
     removeRowText: "刪除條目按鈕文本",
@@ -449,6 +450,10 @@ var traditionalChineseTranslation = {
     },
     question: {
       page: "父頁面"
+    },
+    panel: {
+      page: "父頁面",
+      indent: "添加外部縮進"
     },
     showTimerPanel: "顯示計時器面板",
     showTimerPanelMode: "顯示計時器面板模式",
@@ -620,7 +625,11 @@ var traditionalChineseTranslation = {
       templateTitle: "標題範本",
       totals: "總數",
       logic: "邏輯",
-      layout: "佈局",
+      layout: {
+        panel: "佈局",
+        question: "佈局",
+        base: "佈局"
+      },
       data: "數據",
       validation: "驗證",
       cells: "單元格文本",
@@ -637,9 +646,6 @@ var traditionalChineseTranslation = {
     columnsEnableIf: "在以下情況下，列可見",
     rowsEnableIf: "在以下情況下，行可見",
     indent: "添加縮進",
-    panel: {
-      indent: "添加外部縮進"
-    },
     innerIndent: "添加內部縮進",
     defaultValueFromLastRow: "從最後一行獲取預設值",
     defaultValueFromLastPanel: "從最後一個面板中獲取預設值",
@@ -2038,3 +2044,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pv.contain: "Contain" => "包含"
 // pv.cover: "Cover" => "蓋"
 // pv.fill: "Fill" => "填補"
+
+// pe.transposeData: "Transpose rows to columns" => "將行轉置為列"
+// layout.panel: "Layout" => "佈局"
+// layout.question: "Layout" => "佈局"
+// layout.base: "Layout" => "佈局"

@@ -49,9 +49,9 @@ var portugueseTranslation = {
     settings: "Configurações da Pesquisa",
     settingsTooltip: "Configurações",
     surveySettings: "Configurações de Questionários",
-    surveySettingsTooltip: "Configurações",
+    surveySettingsTooltip: "Configurações do questionário",
     themeSettings: "Configurações do tema",
-    themeSettingsTooltip: "Abrir configurações de tema",
+    themeSettingsTooltip: "Configurações do tema",
     showPanel: "Mostrar Painel",
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
@@ -371,6 +371,7 @@ var portugueseTranslation = {
     imageWidth: "Largura da imagem",
     rowCount: "Contagem de linhas",
     columnLayout: "Layout das colunas",
+    transposeData: "Transpor linhas para colunas",
     addRowLocation: "Localização do botão de adicionar linha",
     addRowText: "Texto do botão para adicionar linhas",
     removeRowText: "Texto do botão para remover linhas",
@@ -449,6 +450,10 @@ var portugueseTranslation = {
     },
     question: {
       page: "Página principal"
+    },
+    panel: {
+      page: "Página principal",
+      indent: "Adicionar recuos externos"
     },
     showTimerPanel: "Mostrar o painel de cronômetro",
     showTimerPanelMode: "Mostrar painel de modo de cronômetro",
@@ -620,7 +625,11 @@ var portugueseTranslation = {
       templateTitle: "Título do template",
       totals: "Totais",
       logic: "Lógica",
-      layout: "Disposição",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validação",
       cells: "Texto de Células",
@@ -637,9 +646,6 @@ var portugueseTranslation = {
     columnsEnableIf: "Colunas estão visiveis se",
     rowsEnableIf: "Linhas estão visiveis se",
     indent: "Adicionar recuos",
-    panel: {
-      indent: "Adicionar recuos externos"
-    },
     innerIndent: "Adicionar recuos internos",
     defaultValueFromLastRow: "Utilizar os valores padrão da última linha",
     defaultValueFromLastPanel: "Utilizar os valores padrão do último painel",
@@ -1426,3 +1432,8 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // pv.contain: "Contain" => "Conter"
 // pv.cover: "Cover" => "Cobrir"
 // pv.fill: "Fill" => "Encher"
+
+// pe.transposeData: "Transpose rows to columns" => "Transpor linhas para colunas"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

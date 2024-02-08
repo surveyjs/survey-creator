@@ -37,7 +37,7 @@ import {
 import { QuestionFactory } from "survey-core";
 import { defaultV2Css } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
-import { IPropertyEditorInfo, SurveyQuestionEditorDefinition } from "../question-editor/definition";
+import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { parsePropertyDescription } from "./description-parser";
 import { QuestionFileEditorModel } from "../custom-questions/question-file";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
@@ -488,7 +488,7 @@ export class PropertyJSONGenerator {
     private options: ISurveyCreatorOptions = null,
     private parentObj: Base = null,
     private parentProperty: JsonObjectProperty = null,
-    private properties: Array<JsonObjectProperty> = null
+    private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) { }
   public toJSON(isNested: boolean = false, context: string = undefined): any {
     return this.createJSON(isNested, context);
@@ -605,13 +605,8 @@ export class PropertyJSONGenerator {
       if (className === "itemvalue") className += "[]";
       className += "@" + propName;
     }
-    var properties = new SurveyQuestionProperties(
-      this.obj,
-      null,
-      className,
-      undefined,
-      this.parentObj,
-      this.parentProperty
+    var properties = new SurveyQuestionProperties(this.obj, null,
+      className, undefined, this.parentObj, this.parentProperty, this.propertyGridDefinition
     );
     var tabs = properties.getTabs();
     var panels: any = {};
@@ -634,8 +629,8 @@ export class PropertyJSONGenerator {
     }
     return json;
   }
-  private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string): any {
-    var panel = this.createPanelJSON(tab.name, tab.title);
+  private createPanelProps(tab: SurveyQuestionEditorTabDefinition, context: string, isChild: boolean = false): any {
+    var panel = this.createPanelJSON(tab.name, tab.title, isChild);
     for (var i = 0; i < tab.properties.length; i++) {
       var propDef = tab.properties[i];
       var propJSON = this.createQuestionJSON(
@@ -654,20 +649,34 @@ export class PropertyJSONGenerator {
       if (!propJSON) continue;
       panel.elements.push(propJSON);
     }
+    if(Array.isArray(tab.tabs)) {
+      tab.tabs.forEach(child => {
+        const panelJSON = this.createPanelProps(child, context, true);
+        if(panelJSON.title === child.name) {
+          delete panelJSON.title;
+        }
+        if(panelJSON) {
+          panel.elements.push(panelJSON);
+        }
+      });
+    }
     return panel;
   }
   private updateQuestionJSONOnSameLine(json: any) {
     json.titleLocation = "left";
     json.minWidth = "50px";
   }
-  private createPanelJSON(category: string, title: string): any {
-    return {
+  private createPanelJSON(category: string, title: string, isChild: boolean): any {
+    const res: any = {
       type: "panel",
       name: category,
       title: this.getPanelTitle(category, title),
-      state: "collapsed",
       elements: []
     };
+    if(!isChild) {
+      res.state = "collapsed";
+    }
+    return res;
   }
   private createQuestionJSON(
     prop: JsonObjectProperty,
@@ -699,9 +708,9 @@ export class PropertyJSONGenerator {
       json.requiredErrorText = editorLocalization.getString("pe.propertyIsEmpty");
     }
 
-    const propDescr = SurveyQuestionEditorDefinition.definition[this.obj.getType()]?.properties.filter(property => property["name"] === prop.name)[0] as IPropertyEditorInfo;
-    if (typeof propDescr === "object" && propDescr.placeholder) {
-      json.placeholder = editorLocalization.getString("pe." + propDescr.placeholder);
+    const placeholder = SurveyQuestionProperties.getPropertyPlaceholder(this.obj.getType(), prop.name, this.propertyGridDefinition);
+    if (!!placeholder) {
+      json.placeholder = editorLocalization.getString("pe." + placeholder);
     }
     return json;
   }
@@ -778,7 +787,8 @@ export class PropertyGridModel {
   }
   constructor(
     obj: Base = null,
-    options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions()
+    options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions(),
+    private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
     this.options = options;
     if (this.options.enableLinkFileEditor) {
@@ -850,7 +860,7 @@ export class PropertyGridModel {
     this.surveyValue.css = propertyGridCss;
     var page = this.surveyValue.createNewPage("p1");
     if (!this.obj) return;
-    new PropertyJSONGenerator(this.obj, this.options).setupObjPanel(
+    new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
       page,
       false
     );
@@ -977,7 +987,9 @@ export class PropertyGridModel {
   }
   public expandAllCategories(): void {
     this.survey.getAllPanels().forEach(pnl => {
-      pnl.expand();
+      if(!pnl.parent.isPanel) {
+        pnl.expand();
+      }
     });
   }
   private collapseOtherPanels(panel: PanelModel): void {
@@ -985,7 +997,7 @@ export class PropertyGridModel {
   }
   private collapseAllCategoriesExcept(panel: PanelModel): void {
     this.survey.getAllPanels().forEach(pnl => {
-      if(pnl !== panel) pnl.collapse();
+      if(pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
     });
   }
   protected createSurvey(json: any): SurveyModel {

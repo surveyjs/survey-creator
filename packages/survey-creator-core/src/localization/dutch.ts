@@ -49,9 +49,9 @@ export var nlStrings = {
     settings: "Enquête-instellingen",
     settingsTooltip: "Open enquête-instellingen",
     surveySettings: "Enquête-instellingen",
-    surveySettingsTooltip: "Enquête-instellingen openen",
+    surveySettingsTooltip: "Enquête instellingen",
     themeSettings: "Thema-instellingen",
-    themeSettingsTooltip: "Thema-instellingen openen",
+    themeSettingsTooltip: "Thema-instellingen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -371,6 +371,7 @@ export var nlStrings = {
     imageWidth: "Afbeelding breedte",
     rowCount: "Aantal rijen",
     columnLayout: "Kolommen layout",
+    transposeData: "Rijen transponeren naar kolommen",
     addRowLocation: "Voeg de locatie van de rijknop toe",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
@@ -449,6 +450,10 @@ export var nlStrings = {
     },
     question: {
       page: "Bovenliggende pagina"
+    },
+    panel: {
+      page: "Bovenliggende pagina",
+      indent: "Buitenste streepjes toevoegen"
     },
     showTimerPanel: "Toon timerpaneel",
     showTimerPanelMode: "Modus timerpaneel",
@@ -620,7 +625,11 @@ export var nlStrings = {
       templateTitle: "Sjabloontitel",
       totals: "Totalen",
       logic: "Logica",
-      layout: "Indeling",
+      layout: {
+        panel: "Indeling",
+        question: "Indeling",
+        base: "Indeling"
+      },
       data: "Gegevens",
       validation: "Validatie",
       cells: "Cellen",
@@ -637,9 +646,6 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     indent: "Inspringingen toevoegen",
-    panel: {
-      indent: "Buitenste streepjes toevoegen"
-    },
     innerIndent: "Binnenste inspringingen toevoegen",
     defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
     defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",
@@ -1740,3 +1746,8 @@ editorLocalization.locales["nl"] = nlStrings;
 // pv.contain: "Contain" => "Bevatten"
 // pv.cover: "Cover" => "Bedekken"
 // pv.fill: "Fill" => "Vullen"
+
+// pe.transposeData: "Transpose rows to columns" => "Rijen transponeren naar kolommen"
+// layout.panel: "Layout" => "Indeling"
+// layout.question: "Layout" => "Indeling"
+// layout.base: "Layout" => "Indeling"
