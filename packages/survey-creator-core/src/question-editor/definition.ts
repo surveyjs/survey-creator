@@ -23,7 +23,6 @@ export interface ISurveyPropertiesDefinition {
   [key: string]: ISurveyQuestionEditorDefinition;
 }
 
-
 export interface ISurveyPropertyGridDefinition {
   autoGenerateProperties: boolean;
   classes: ISurveyPropertiesDefinition;
