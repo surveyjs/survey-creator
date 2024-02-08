@@ -35,6 +35,7 @@
   position: absolute;
   top: calcSize(1);
   right: calcSize(1);
+  z-index: 2;
 }
 
 .svc-image-item-value--new .svc-image-item-value-controls {
