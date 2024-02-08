@@ -371,6 +371,7 @@ export var skStrings = {
     imageWidth: "Šírka obrázka",
     rowCount: "Počet riadkov",
     columnLayout: "Rozloženie stĺpcov",
+    transposeData: "Transponovanie riadkov do stĺpcov",
     addRowLocation: "Poloha tlačidla na pridanie riadka",
     addRowText: "Text tlačidla na pridanie riadka",
     removeRowText: "Text tlačidla na odstránenie riadka",
@@ -624,7 +625,11 @@ export var skStrings = {
       templateTitle: "Titul šablóny",
       totals: "Celkové hodnoty",
       logic: "Logický výraz",
-      layout: "Rozloženie",
+      layout: {
+        panel: "Rozloženie",
+        question: "Rozloženie",
+        base: "Rozloženie"
+      },
       data: "Údaje",
       validation: "Overenie",
       cells: "Bunky",
@@ -1714,3 +1719,8 @@ editorLocalization.locales["sk"] = skStrings;
 // pv.contain: "Contain" => "Obsahovať"
 // pv.cover: "Cover" => "Prikryť"
 // pv.fill: "Fill" => "Vyplniť"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponovanie riadkov do stĺpcov"
+// layout.panel: "Layout" => "Rozloženie"
+// layout.question: "Layout" => "Rozloženie"
+// layout.base: "Layout" => "Rozloženie"

@@ -371,6 +371,7 @@ export let svStrings = {
     imageWidth: "Bild bredd",
     rowCount: "Antal rader",
     columnLayout: "Stil på kolumn",
+    transposeData: "Transponera rader till kolumner",
     addRowLocation: "Lägg till radknapp plats",
     addRowText: "Lägg till knapp text",
     removeRowText: "Ta bort rad knapp text",
@@ -624,7 +625,11 @@ export let svStrings = {
       templateTitle: "Mall titel",
       totals: "Summor",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Cell texter",
@@ -1938,3 +1943,8 @@ editorLocalization.locales["sv"] = svStrings;
 // pv.contain: "Contain" => "Innehålla"
 // pv.cover: "Cover" => "Täcka"
 // pv.fill: "Fill" => "Fylla"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponera rader till kolumner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

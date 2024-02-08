@@ -371,6 +371,7 @@ var traditionalChineseTranslation = {
     imageWidth: "圖片寬度",
     rowCount: "默認行數",
     columnLayout: "列佈局",
+    transposeData: "將行轉置為列",
     addRowLocation: "“添加行”按鈕位置",
     addRowText: "添加條目按鈕文本",
     removeRowText: "刪除條目按鈕文本",
@@ -624,7 +625,11 @@ var traditionalChineseTranslation = {
       templateTitle: "標題範本",
       totals: "總數",
       logic: "邏輯",
-      layout: "佈局",
+      layout: {
+        panel: "佈局",
+        question: "佈局",
+        base: "佈局"
+      },
       data: "數據",
       validation: "驗證",
       cells: "單元格文本",
@@ -2039,3 +2044,8 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pv.contain: "Contain" => "包含"
 // pv.cover: "Cover" => "蓋"
 // pv.fill: "Fill" => "填補"
+
+// pe.transposeData: "Transpose rows to columns" => "將行轉置為列"
+// layout.panel: "Layout" => "佈局"
+// layout.question: "Layout" => "佈局"
+// layout.base: "Layout" => "佈局"

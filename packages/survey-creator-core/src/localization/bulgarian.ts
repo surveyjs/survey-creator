@@ -371,6 +371,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     rowCount: "Брой редове",
     columnLayout: "Разположение на колоните",
+    transposeData: "Транспониране на редове в колони",
     addRowLocation: "Добавяне на местоположение на бутона за ред",
     addRowText: "Добавяне на текст на бутона за ред",
     removeRowText: "Премахване на текста на бутона за ред",
@@ -624,7 +625,11 @@ export var bgStrings = {
       templateTitle: "Шаблон за заглавие",
       totals: "Общо",
       logic: "Логика",
-      layout: "Оформление",
+      layout: {
+        panel: "Оформление",
+        question: "Оформление",
+        base: "Оформление"
+      },
       data: "Данни",
       validation: "Валидиране",
       cells: "Текст в клетката",
@@ -1322,3 +1327,8 @@ editorLocalization.locales["bg"] = bgStrings;
 // pv.contain: "Contain" => "Съдържам"
 // pv.cover: "Cover" => "Капак"
 // pv.fill: "Fill" => "Запълване"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспониране на редове в колони"
+// layout.panel: "Layout" => "Оформление"
+// layout.question: "Layout" => "Оформление"
+// layout.base: "Layout" => "Оформление"

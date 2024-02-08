@@ -371,6 +371,7 @@ var persianStrings = {
     imageWidth: "عرض تصویر",
     rowCount: "تعداد سطر",
     columnLayout: "قالب ستون ها",
+    transposeData: "جابهجا کردن سطرها به ستونها",
     addRowLocation: "اضافه کردن موقعیت دکمه سطری",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
@@ -624,7 +625,11 @@ var persianStrings = {
       templateTitle: "عنوان قالب",
       totals: "جمع کل",
       logic: "منطق",
-      layout: "چیدمان",
+      layout: {
+        panel: "طرح",
+        question: "طرح",
+        base: "طرح"
+      },
       data: "اطلاعات",
       validation: "اعتبارسنجی",
       cells: "سلول ها",
@@ -1716,3 +1721,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // pv.contain: "Contain" => "حاوی"
 // pv.cover: "Cover" => "پوشش"
 // pv.fill: "Fill" => "پر کردن"
+
+// pe.transposeData: "Transpose rows to columns" => "جابهجا کردن سطرها به ستونها"
+// layout.panel: "Layout" => "طرح"
+// layout.question: "Layout" => "طرح"
+// layout.base: "Layout" => "طرح"
