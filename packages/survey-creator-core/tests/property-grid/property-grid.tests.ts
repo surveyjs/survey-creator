@@ -2322,7 +2322,7 @@ test("property editor show help as description", () => {
   var actions = defaultValueExpressionQuestion.getTitleActions();
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "Use curly brackets"
+      "The expression can include basic calculations"
     ) > -1
   ).toBeTruthy();
   expect(actions).toHaveLength(2);
@@ -2430,7 +2430,7 @@ test("Show empty rows template if there is no rows", () => {
   expect(propEditorQuestion.hideColumnsIfEmpty).toBeTruthy();
   expect(propEditorQuestion.renderedTable.showTable).toBeFalsy();
   expect(propEditorQuestion.emptyRowsText).toEqual("You don't have any triggers yet");
-  expect(propEditorQuestion.addRowText).toEqual("Add a trigger");
+  expect(propEditorQuestion.addRowText).toEqual("Add new trigger");
 
   propertyGrid = new PropertyGridModelTester(survey.getQuestionByName("q1"));
   propEditorQuestion = <QuestionMatrixDynamicModel>(

@@ -544,6 +544,7 @@ export class SurveyQuestionEditorDefinition {
     "matrixdropdowncolumn@rating": {
       properties: [
         "rateValues",
+        { name: "displayMode", tab: "rateValues" },
         { name: "rateType", tab: "rateValues" },
         { name: "rateCount", tab: "rateValues" },
         { name: "rateColorMode", tab: "rateValues" },

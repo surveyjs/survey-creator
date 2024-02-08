@@ -141,7 +141,7 @@ test("getPropertyValue and spaces", () => {
   expect(editorLocalization.convertToCamelCase("On Top")).toEqual("On Top");
   expect(editorLocalization.convertToCamelCase("My First Option")).toEqual("My First Option");
   expect(editorLocalization.getPropertyValue("Another test")).toEqual("Another test");
-  expect(editorLocalization.convertToCamelCase("showTOC")).toEqual("Show table of contents (TOC)");
+  expect(editorLocalization.convertToCamelCase("showTOC")).toEqual("Show TOC");
 });
 test("Update innerItem on changign title", (): any => {
   const item: any = {
@@ -201,7 +201,7 @@ test("Check creator license localization", (): any => {
 });
 test("getPropertyValue autoGenerate and boolean", () => {
   expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Auto-generate");
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Enter manually");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Manual");
   const deutschStrings: any = {
     pv: {
       autoGenerate: {
