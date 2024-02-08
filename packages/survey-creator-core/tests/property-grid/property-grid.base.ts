@@ -4,6 +4,7 @@ import {
 } from "../../src/property-grid";
 import { Base } from "survey-core";
 import { ISurveyCreatorOptions } from "../../src/creator-settings";
+import { ISurveyPropertyGridDefinition } from "../../src/question-editor/definition";
 
 export * from "../../src/property-grid/matrices";
 export * from "../../src/property-grid/bindings";
@@ -13,9 +14,9 @@ export * from "../../src/custom-questions/question-text-with-reset";
 export * from "../../src/components/link-value";
 
 export class PropertyGridModelTester extends PropertyGridModel {
-  constructor(obj: Base, options: ISurveyCreatorOptions = null) {
+  constructor(obj: Base, options?: ISurveyCreatorOptions, propertyGridDefinition?: ISurveyPropertyGridDefinition) {
     PropertyGridEditorCollection.clearHash();
-    super(obj, options);
+    super(obj, options, propertyGridDefinition);
   }
 }
 export function findSetupAction(actions: Array<any>): any {
