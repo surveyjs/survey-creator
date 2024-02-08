@@ -329,6 +329,9 @@ export class SurveyQuestionEditorDefinition {
         { name: "minErrorText", tab: "validation" },
         { name: "maxErrorText", tab: "validation" },
         { name: "textUpdateMode", tab: "data" }
+      ],
+      tabs: [
+        { name: "maskSettings", index: 10 }
       ]
     },
     boolean: {
