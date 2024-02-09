@@ -3090,6 +3090,8 @@ test("allowExpandMultipleCategories", () => {
 });
 test("property with boolean type and two choices", () => {
   const columnLayoutProperty = Serializer.findProperty("matrixdropdown", "columnLayout");
+  const oldVisible = columnLayoutProperty.visible;
+  columnLayoutProperty.visible = true;
   columnLayoutProperty.type = "boolean";
 
   const matrix = new QuestionMatrixDropdownModel("q1");
@@ -3102,6 +3104,7 @@ test("property with boolean type and two choices", () => {
   expect(columnLayoutQuestion.labelTrue).toBe("Horizontal");
   expect(columnLayoutQuestion.labelFalse).toBe("Vertical");
 
+  columnLayoutProperty.visible = oldVisible;
   columnLayoutProperty.type = "";
 });
 test("category, parent property", () => {

@@ -129,7 +129,8 @@ export interface IPropertyGridEditor {
   getJSON(
     obj: Base,
     prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
+    options: ISurveyCreatorOptions,
+    propGridDefinition?: ISurveyPropertyGridDefinition
   ): any;
   showModalPropertyEditor?: (
     editor: IPropertyGridEditor,
@@ -137,7 +138,8 @@ export interface IPropertyGridEditor {
     question: Question,
     options: ISurveyCreatorOptions
   ) => IPropertyEditorSetup;
-  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
+  onCreated?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
+    propGridDefinition?: ISurveyPropertyGridDefinition) => void;
   onSetup?: (obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions) => void;
   validateValue?: (obj: Base, question: Question, prop: JsonObjectProperty, val: any) => string;
   onAfterRenderQuestion?: (
@@ -230,15 +232,17 @@ export var PropertyGridEditorCollection = {
     obj: Base,
     prop: JsonObjectProperty,
     options: ISurveyCreatorOptions,
-    context?: string
+    context?: string,
+    propGridDefinition?: ISurveyPropertyGridDefinition
   ): any {
     var res = this.getEditor(prop, context);
-    return !!res ? res.getJSON(obj, prop, options) : null;
+    return !!res ? res.getJSON(obj, prop, options, propGridDefinition) : null;
   },
-  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions,
+    propGridDefinition?: ISurveyPropertyGridDefinition): any {
     var res = this.getEditor(prop);
     if (!!res && !!res.onCreated) {
-      res.onCreated(obj, question, prop, options);
+      res.onCreated(obj, question, prop, options, propGridDefinition);
     }
   },
   onSetup(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
@@ -543,7 +547,7 @@ export class PropertyJSONGenerator {
       if (!!helpText) {
         q.description = helpText;
       }
-      PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options);
+      PropertyGridEditorCollection.onCreated(this.obj, q, prop, this.options, this.propertyGridDefinition);
       this.options.onPropertyEditorCreatedCallback(this.obj, prop, q);
     }
   }
@@ -686,10 +690,7 @@ export class PropertyJSONGenerator {
     var isVisible = this.isPropertyVisible(prop, isColumn ? "list" : "");
     if (!isVisible && isColumn) return null;
     var json = PropertyGridEditorCollection.getJSON(
-      this.obj,
-      prop,
-      this.options,
-      context
+      this.obj, prop, this.options, context, this.propertyGridDefinition
     );
     if (!json) return null;
     json.name = prop.name;
@@ -775,6 +776,7 @@ export class PropertyGridModel {
   private titleActionsCreator: PropertyGridTitleActionsCreator;
   private classNameProperty: string;
   private classNameValue: any;
+  private propertyGridDefinition: ISurveyPropertyGridDefinition;
 
   currentlySelectedProperty: string;
   currentlySelectedPanel: PanelModel;
@@ -787,9 +789,10 @@ export class PropertyGridModel {
   constructor(
     obj: Base = null,
     options: ISurveyCreatorOptions = new EmptySurveyCreatorOptions(),
-    private propertyGridDefinition: ISurveyPropertyGridDefinition = null
+    propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
     this.options = options;
+    this.propertyGridDefinition = propertyGridDefinition;
     if (this.options.enableLinkFileEditor) {
       PropertyGridEditorCollection.register(new PropertyGridLinkEditor());
     }
@@ -1263,7 +1266,8 @@ export abstract class PropertyGridEditor implements IPropertyGridEditor {
   public abstract getJSON(
     obj: Base,
     prop: JsonObjectProperty,
-    options: ISurveyCreatorOptions
+    options: ISurveyCreatorOptions,
+    propGridDefinition?: ISurveyPropertyGridDefinition
   ): any;
   showModalPropertyEditor(
     editor: IPropertyGridEditor,

@@ -325,12 +325,14 @@ test("SurveyElements: isDropTargetValid && maxNestedPanels", () => {
 
   ddHelper.draggedElement = pd;
   expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
+  expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(true);
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DragTypeOverMeEnum.InsideEmptyPanel)).toBe(false);
   ddHelper.onGetMaxNestedPanels = (): number => { return 0; };
-  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(false);
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q1"))).toBe(true);
   expect(ddHelper.isDropTargetValid(survey.getQuestionByName("q2"))).toBe(false);
-  ddHelper.isEdge = true;
-  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel1"))).toBe(true);
+  expect(ddHelper.isDropTargetValid(survey.getPanelByName("panel2"), undefined, DragTypeOverMeEnum.InsideEmptyPanel)).toBe(false);
 });
 
 // test("surveyelement: calcTargetRowMultiple for paneldynamic", () => {
@@ -805,7 +807,7 @@ test("drag drop to panel vertical", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
-  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Top);
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
@@ -888,7 +890,7 @@ test("drag drop to panel horizontal", () => {
   const ddHelper: any = new DragDropSurveyElements(survey);
   ddHelper.draggedElement = q1;
 
-  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.Top);
+  ddHelper.dragOverCore(p1, DragTypeOverMeEnum.InsideEmptyPanel);
   ddHelper.doDrop();
 
   expect(survey.toJSON()).toStrictEqual({
