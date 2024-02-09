@@ -48,12 +48,11 @@
 }
 
 .svc-image-item-value-controls__add {
+  background-color: transparent;
+
   use {
     fill: $primary;
   }
-}
-
-.svc-image-item-value-controls__add {
 
   &:hover,
   &:focus {
