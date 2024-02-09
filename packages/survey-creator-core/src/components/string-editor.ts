@@ -210,7 +210,9 @@ export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-  private connector: StringEditorConnector
+  private connector: StringEditorConnector;
+
+  private allowLineBreaks: boolean = false;
 
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
@@ -223,6 +225,7 @@ export class StringEditorViewModelBase extends Base {
   constructor(private locString: LocalizableString, private creator: SurveyCreatorModel) {
     super();
     this.locString = locString;
+    this.allowLineBreaks = Serializer.findProperty(this.locString.owner["getType"](), this.locString.name)?.type == "text";
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
@@ -361,7 +364,14 @@ export class StringEditorViewModelBase extends Base {
       this.creator.onHtmlToMarkdown.fire(this.creator, options);
       mdText = options.text;
     }
-    let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      if (!this.allowLineBreaks) txt = clearNewLines(txt);
+      clearedText = txt;
+    }
     let owner = this.locString.owner as any;
 
     var changingOptions = {

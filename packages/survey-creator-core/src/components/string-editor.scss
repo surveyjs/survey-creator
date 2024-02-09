@@ -234,3 +234,7 @@
 // .sv-title {
 //   position: relative;
 // }
+.sd-description .sv-string-editor,
+.sd-description .sv-string-viewer {
+  white-space: pre-wrap;
+}
