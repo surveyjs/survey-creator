@@ -126,13 +126,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--drag-over-inside", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft || this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
       result += " svc-question__content--drag-over-left";
     } else {
       result = result.replace(" svc-question__content--drag-over-left", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight || this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
       result += " svc-question__content--drag-over-right";
     } else {
       result = result.replace(" svc-question__content--drag-over-right", "");
