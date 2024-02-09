@@ -110,6 +110,32 @@ test("Check imagepicker add/delete items style", async (t) => {
     .click(".svc-image-item-value-controls__add");
 });
 
+test("Check imagepicker delete item", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  await explicitErrorHandler();
+  await setJSON({
+    elements: [{
+      type: "imagepicker", name: "q1", choices: [
+        {
+          "value": "lion",
+          "imageLink": "lion.jpg"
+        },
+        {
+          "value": "giraffe",
+          "imageLink": "lion.jpg"
+        }
+      ]
+    }]
+  });
+
+  await t
+    .expect(Selector(".svc-tab-designer .svc-context-button--danger").count).eql(2)
+    .expect(Selector(".svc-image-item-value:not(.svc-image-item-value--new)").count).eql(2)
+    .click(".svc-tab-designer .svc-context-button--danger")
+    .expect(Selector(".svc-tab-designer .svc-context-button--danger").count).eql(1)
+    .expect(Selector(".svc-image-item-value:not(.svc-image-item-value--new)").count).eql(1);
+});
+
 test("Focus on new panel added", async (t) => {
   await t.resizeWindow(1920, 1080);
   const EmptyPage = Selector("[data-sv-drop-target-survey-element='newGhostPage']");
