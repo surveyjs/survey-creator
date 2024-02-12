@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { slk } from "survey-core";
+import { slk } from "survey-co
 import { SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
@@ -14,7 +14,7 @@ if (props.useSlk) {
   slk("YjA3ZGFkZTMtNjU5NS00YTYxLTkzZmEtYWJiOThjMWVhNjk3OzE9MjAzNC0xMC0xNiwyPTIwMzQtMTAtMTYsND0yMDM0LTEwLTE2");
 }
 const creator = shallowRef(new SurveyCreatorModel(props.options));
-(window as any).creator = creator;
+(window as any).creator = creator.value;
 (window as any).updateCreatorModel = (options: any, json: any) => {
   (window as any).prevCreator = creator.value;
   const newCreator = new SurveyCreatorModel(options);
