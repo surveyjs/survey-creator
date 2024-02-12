@@ -1004,6 +1004,7 @@ export class PropertyGridModel {
     });
   }
   protected createSurvey(json: any): SurveyModel {
+    json.fitToContainer = false;
     return this.options.createSurvey(json, "property-grid", this);
   }
   protected getSurveyJSON(): any {
