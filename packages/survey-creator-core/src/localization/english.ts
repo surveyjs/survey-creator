@@ -807,7 +807,12 @@ export var enStrings = {
       none: "Hidden"
     },
     showProgressBar: {
-      off: "Hidden"
+      off: "Hidden",
+      auto: "Auto",
+      aboveHeader: "Above header",
+      belowHeader: "Below header",
+      bottom: "Bottom",
+      topBottom: "Top and Bottom"
     },
     showTimerPanel: {
       none: "Hidden"
@@ -948,6 +953,7 @@ export var enStrings = {
     },
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
+    swapOrder: "Swap the order of Yes and No",
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "Source type",
