@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { slk } from "survey-co
+import { slk } from "survey-core";
 import { SurveyCreatorModel, type ICreatorOptions } from "survey-creator-core";
 import "survey-core/survey.i18n";
 import "survey-creator-core/survey-creator-core.i18n";
