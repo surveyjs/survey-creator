@@ -205,13 +205,14 @@ const defaultProperties : ISurveyPropertiesDefinition = {
   },
   rating: {
     properties: [
-      { name: "displayMode", tab: "layout" },
+      { name: "displayMode", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
       { name: "rateMin", tab: "rateValues" },
       { name: "rateMax", tab: "rateValues" },
       { name: "rateStep", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
+      { name: "rateDescriptionLocation", tab: "rateValues" },
       { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
     ],
     tabs: [{ name: "rateValues", index: 10 }]
@@ -497,6 +498,7 @@ const defaultProperties : ISurveyPropertiesDefinition = {
   "matrixdropdowncolumn@rating": {
     properties: [
       "rateValues",
+      { name: "displayMode", tab: "rateValues" },
       { name: "rateType", tab: "rateValues" },
       { name: "rateCount", tab: "rateValues" },
       { name: "rateColorMode", tab: "rateValues" },
@@ -507,6 +509,7 @@ const defaultProperties : ISurveyPropertiesDefinition = {
       { name: "rateStep", tab: "rateValues" },
       { name: "minRateDescription", tab: "rateValues" },
       { name: "maxRateDescription", tab: "rateValues" },
+      { name: "rateDescriptionLocation", tab: "rateValues" },
       { name: "displayRateDescriptionsAsExtremeItems", tab: "rateValues" },
 
     ],
