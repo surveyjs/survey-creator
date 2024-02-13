@@ -41,11 +41,24 @@ export class SurveyCreatorComponent extends SurveyElementBase<
     return this.props.creator;
   }
   protected getStateElement(): Base {
-    return this.props.creator;
+    return this.creator;
   }
   get style(): any {
     return this.props.style;
   }
+
+  componentDidUpdate(prevProps: any, prevState: any): void {
+    super.componentDidUpdate(prevProps, prevState);
+    if(this.creator !== prevProps.creator) {
+      if(prevProps.creator) {
+        prevProps.creator.unsubscribeRootElement();
+      }
+      if(this.creator && this.rootNode.current) {
+        this.creator.setRootElement(this.rootNode.current);
+      }
+    }
+  }
+
   componentDidMount() {
     super.componentDidMount();
     this.creator.setRootElement(this.rootNode.current);
