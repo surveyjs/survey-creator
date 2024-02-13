@@ -1289,6 +1289,7 @@ export class ThemeBuilder extends Base {
                             name: "headerTitle",
                             title: getLocString("theme.surveyTitle"),
                             descriptionLocation: "hidden",
+                            allowEmptyColorValue: true,
                             defaultValue: this.getDefaultTitleSetting()
                           },
                           {
@@ -1296,6 +1297,7 @@ export class ThemeBuilder extends Base {
                             name: "headerDescription",
                             title: getLocString("theme.surveyDescription"),
                             descriptionLocation: "hidden",
+                            allowEmptyColorValue: true,
                             defaultValue: this.getDefaultDescriptionSetting(true)
                           },
                         ]
