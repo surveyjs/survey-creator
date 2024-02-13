@@ -48,7 +48,7 @@
   .sd-root-modern {
     min-height: 100%;
 
-    .sv-popup:not(.sv-popup--overlay) {
+    .sv-popup:not(.sv-popup--overlay):not(.sv-popup--modal) {
       width: auto;
     }
   }
