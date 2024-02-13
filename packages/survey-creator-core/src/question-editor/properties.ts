@@ -1,7 +1,8 @@
 import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
-  ISurveyPropertyGridDefinition
+  ISurveyPropertyGridDefinition,
+  defaultPropertyGridDefinition
 } from "./definition";
 import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
@@ -37,8 +38,8 @@ export class SurveyQuestionProperties {
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
-    if(!propertyGridDefinition) propertyGridDefinition = SurveyQuestionEditorDefinition.definition;
-    const props = propertyGridDefinition[className]?.properties;
+    if(!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
+    const props = propertyGridDefinition.classes[className]?.properties;
     if(!Array.isArray(props)) return "";
     for(let i = 0; i < props.length; i ++) {
       const prop = props[i];
@@ -56,7 +57,7 @@ export class SurveyQuestionProperties {
     private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
     if(!this.propertyGridDefinition) {
-      this.propertyGridDefinition = SurveyQuestionEditorDefinition.definition;
+      this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
     this.properties = Serializer.getPropertiesByObj(this.obj);
@@ -78,7 +79,8 @@ export class SurveyQuestionProperties {
     return true;
   }
   private getClassDefintion(name: string): ISurveyQuestionEditorDefinition {
-    return this.propertyGridDefinition[name];
+    if(!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
+    return this.propertyGridDefinition.classes[name];
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};
@@ -372,6 +374,7 @@ export class SurveyQuestionProperties {
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
+    if(!this.propertyGridDefinition.autoGenerateProperties) return;
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {
