@@ -1,4 +1,4 @@
-import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase } from "survey-core";
+import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass } from "survey-core";
 import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor, } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 
@@ -36,7 +36,6 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
     const panel = <PanelModel>question["contentPanel"];
     this._previewQuestion = <QuestionHtmlModel>panel.addNewQuestion("html", "preview");
     this.updatePanel(obj, question, prop);
-
   }
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question): void {
     if (prop.name === "maskSettings") {
@@ -51,15 +50,18 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
       this._propertyGrid.setupObjPanel(panel, true);
       this._prevMaskType = obj["maskType"];
     }
+    this.updatePreviewQuestion(masksettings, panel);
+  }
 
+  updatePreviewQuestion(masksettings: InputMaskBase, panel: PanelModel) {
     switch (masksettings.getType()) {
       case "masksettings":
         this._previewQuestion.visible = true;
         this._previewQuestion.html = "No settings";
         break;
-      case "numbermasksettings":
+      case "numbermask":
         this._previewQuestion.visible = true;
-        this._previewQuestion.html = masksettings.getMaskedValue("123456");
+        this._previewQuestion.html = masksettings["getNumberMaskedValue"](-123456.78);
         break;
       // case "masksettings":
       //   preview.html = "No settings";
@@ -68,9 +70,38 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
         this._previewQuestion.visible = false;
         break;
     }
-
-    panel.addElement(this._previewQuestion);
+    if (!panel.getElementByName(this._previewQuestion.name)) {
+      panel.addElement(this._previewQuestion);
+    }
   }
 }
 
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionMaskSettings());
+
+export class PropertyGridEditorMaskType extends PropertyGridEditor {
+  private _noneItem = { value: "none", text: "none" };
+
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "masktype";
+  }
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const result = {
+      type: "dropdown",
+      // optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
+      default: this._noneItem.value,
+      allowClear: false,
+      choices: this.getChoices(obj, prop, options)
+    };
+    return result;
+  }
+  private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
+    const classes = Serializer.getChildrenClasses("masksettings") || [];
+    const choices = classes.map((cl: JsonMetadataClass) => {
+      return { value: cl.name, text: cl.name };
+    });
+    choices.splice(0, 0, this._noneItem);
+    return choices;
+  }
+}
+
+PropertyGridEditorCollection.register(new PropertyGridEditorMaskType());
