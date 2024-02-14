@@ -33,7 +33,7 @@ test("Check states", async (t) => {
     await t.click(getPropertyGridCategory(generalGroupName));
     await t.click(getPropertyGridCategory(logicGroupName));
 
-    const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
+    const sectionContentElement = Selector("h4[aria-label=Conditions]").parent().nextSibling();
 
     await t.expect(sectionContentElement.visible).ok();
     await takeElementScreenshot("logic-button-default.png", sectionContentElement, t, comparer);
@@ -65,7 +65,7 @@ test("Check list item styles into logic popup", async (t) => {
     await t.click(getPropertyGridCategory(generalGroupName));
     await t.click(getPropertyGridCategory(logicGroupName));
 
-    const sectionContentElement = Selector("h4[aria-label=Logic]").parent().nextSibling();
+    const sectionContentElement = Selector("h4[aria-label=Conditions]").parent().nextSibling();
 
     await t.click(sectionContentElement.find(".spg-action-button").nth(1))
       .click(Selector(".sl-dropdown"))

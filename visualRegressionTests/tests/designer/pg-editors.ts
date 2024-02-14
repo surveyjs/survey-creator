@@ -184,7 +184,7 @@ test("Custom button into fast entry popup", async (t) => {
     })();
 
     const generalTab = Selector("h4").withExactText("General");
-    const choicesTab = Selector("h4").withExactText("Choices");
+    const choicesTab = Selector("h4").withExactText("Choice Options");
 
     await t
       .hover(getToolboxItemByText("Dropdown"))
@@ -201,7 +201,7 @@ test("Logic popup", async (t) => {
     await t.resizeWindow(1240, 870);
 
     const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Logic");
+    const logicTab = Selector("h4").withExactText("Conditions");
 
     await t
       .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
@@ -217,7 +217,7 @@ test("Logic popup mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);
     const generalTab = Selector("h4").withExactText("General");
-    const logicTab = Selector("h4").withExactText("Logic");
+    const logicTab = Selector("h4").withExactText("Conditions");
 
     await t
       .hover(getToolboxItemByText("Single-Line Input"), { offsetX: 25 })
@@ -275,12 +275,12 @@ test("Property grid checkbox - all states", async (t) => {
 
     await setCheckboxProperty("value", true);
     await setCheckboxProperty("readOnly", false);
-    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Description"));
+    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Question description"));
     await takeElementScreenshot("pg-checkbox-unchecked-focused.png", checkbox, t, comparer);
 
     await setCheckboxProperty("value", false);
     await setCheckboxProperty("readOnly", false);
-    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Description"));
+    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Question description"));
     await takeElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t, comparer);
 
     await ClientFunction(() => { document.body.focus(); })();
@@ -348,7 +348,7 @@ test("rateValues in property grid", async (t) => {
     });
     await t
       .click(Selector(".svc-question__adorner"))
-      .click(Selector(".spg-panel__title").withText("Rate Values"));
+      .click(Selector(".spg-panel__title").withText("Rating Values"));
 
     await takeElementScreenshot("pg-rate-values.png", Selector("div[data-name=rateValues"), t, comparer);
   });
@@ -360,7 +360,7 @@ test("Check bindings question", async (t) => {
     await addQuestionByAddQuestionButton(t, "Dynamic Matrix");
     await t
       .click(Selector("h4[aria-label=General]"))
-      .click(Selector("h4[aria-label=Logic]"));
+      .click(Selector("h4[aria-label=Conditions]"));
 
     await takeElementScreenshot("bindings-editor.png", Selector(".spg-question[data-name='bindings']"), t, comparer);
   });
@@ -369,8 +369,8 @@ test("Check triggers question", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1920);
     await t
-      .click(Selector("h4[aria-label=Logic]"))
-      .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add New']"));
+      .click(Selector("h4[aria-label=Conditions]"))
+      .click(Selector("div[data-name='triggers'] .spg-action-button--icon[title='Add new trigger']"));
     await takeElementScreenshot("triggers-editor.png", Selector("div[data-name='triggers']"), t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[aria-label='row 1, column triggerType'] input").focus())();
     await resetHoverToCreator(t);
@@ -688,10 +688,10 @@ test("Dropdown input in property grid", async (t) => {
 
     await t
       .click(surveySettingsButtonSelector)
-      .click(Selector(".spg-dropdown[aria-label='Survey language']"))
+      .click(Selector(".spg-dropdown[aria-label='Select a survey language']"))
       .pressKey("a l i");
 
-    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
+    await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Select a survey language']"), t, comparer);
   });
 });
 
