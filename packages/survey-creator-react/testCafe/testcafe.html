@@ -25,12 +25,27 @@
   window.surveyJSFramework = "react";
   const creator = new SurveyCreator.SurveyCreator({ showLogicTab: true, showTranslationTab: true });
   window.creator = creator;
+
+  class SurveyCreatorRenderComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { creator: creator };
+      window.updateCreatorModel = (options, json) => {
+        window.prevCreator = window.creator;
+        const creator = new SurveyCreator.SurveyCreator(options);
+        creator.JSON = json;
+        this.setState({ creator });
+        window.creator = creator;
+      }
+    }
+    render() {
+      return React.createElement(SurveyCreator.SurveyCreatorComponent, { creator: this.state.creator });
+    }
+  }
   const root = ReactDOM.createRoot(document.getElementById("survey-creator"));
   root.render(React.createElement(
-    SurveyCreator.SurveyCreatorComponent,
-    { creator: creator },
-    null
-  ),);
+    SurveyCreatorRenderComponent
+  ));
 </script>
 
 </html>

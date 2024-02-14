@@ -1302,6 +1302,7 @@ export var enStrings = {
     },
     multiSelect: "Allow multiple selection",
     showLabel: "Show image and video captions",
+    swapOrder: "Swap the order of Yes and No",
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "File source type",

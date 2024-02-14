@@ -25,6 +25,12 @@ export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements
   }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();
+    if(this.previousModel) {
+      this.previousModel.unsubscribeRootElement();
+    }
+    if(this.creator && this.container.nativeElement) {
+      this.creator.setRootElement(this.container.nativeElement);
+    }
   }
   public ngAfterViewInit(): void {
     this.creator.setRootElement(this.container.nativeElement);

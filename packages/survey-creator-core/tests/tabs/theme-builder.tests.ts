@@ -1789,13 +1789,11 @@ test("headerViewContainer init state", (): any => {
     "textAreaWidth": 512,
     "height": 256,
     "headerDescription": {
-      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 16,
       "weight": "600",
     },
     "headerTitle": {
-      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 32,
       "weight": "700",
@@ -2048,7 +2046,8 @@ test("headerViewContainer get color values from theme", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
-      "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
+      "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
+      "--sjs-font-headerdescription-color": "rgba(50, 16, 218, 0.45)",
     },
     "header": {
       "backgroundImage": "",
@@ -2074,8 +2073,8 @@ test("headerViewContainer get color values from theme", (): any => {
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
 
-  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
-  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(219, 15, 15, 0.91)");
+  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
 });
 
 test("headerViewContainer: restore backgroundColorSwitch", (): any => {
@@ -2103,6 +2102,19 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
 
   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("none");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeBuilder;
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
 });
 
 test("headerViewContainer: background color", (): any => {
@@ -2979,4 +2991,60 @@ test("getThemeChanges", (): any => {
   expect(themeChanges.isPanelless).toBe(true);
   expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
   expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+});
+
+test("header custom background color and theme changes", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  creator.activeTab = "theme";
+  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  let themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  let primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("accentColor");
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+
+  themeBuilder.selectTheme("contrast");
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
 });
