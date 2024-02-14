@@ -1,0 +1,23 @@
+import { CreatorTester } from "./creator-tester";
+import { CreatorPreset } from "../src/presets/presets";
+
+test("show/hidetabs", () => {
+  const creator = new CreatorTester();
+  expect(creator.tabs).toHaveLength(3);
+  new CreatorPreset({}).apply(creator);
+  expect(creator.tabs).toHaveLength(3);
+  new CreatorPreset({ tabs: { items: [] } }).apply(creator);
+  expect(creator.tabs).toHaveLength(3);
+  expect(creator.activeTab).toBe("designer");
+  const preset = new CreatorPreset({
+    tabs: {
+      items: ["preview", "unknown", "designer"],
+      activeTab: "preview"
+    }
+  });
+  preset.apply(creator);
+  expect(creator.tabs).toHaveLength(2);
+  expect(creator.tabs[0].id).toBe("test");
+  expect(creator.tabs[1].id).toBe("designer");
+  expect(creator.activeTab).toBe("test");
+});
