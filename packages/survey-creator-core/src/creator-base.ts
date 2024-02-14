@@ -1414,7 +1414,7 @@ export class SurveyCreatorModel extends Base
       theme: () => new ThemeTabPlugin(this), //TODO change name
       logic: () => new TabLogicPlugin(this),
       editor: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this),
-      tranlation: () => new TabTranslationPlugin(this)
+      translation: () => new TabTranslationPlugin(this)
     };
     for(let i = tabNames.length - 1; i >= 0; i --) {
       if(!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
