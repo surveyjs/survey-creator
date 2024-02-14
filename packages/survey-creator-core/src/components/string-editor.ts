@@ -212,8 +212,6 @@ export class StringEditorViewModelBase extends Base {
   private valueBeforeEdit: string;
   private connector: StringEditorConnector;
 
-  private allowLineBreaks: boolean = false;
-
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
 
@@ -225,7 +223,6 @@ export class StringEditorViewModelBase extends Base {
   constructor(private locString: LocalizableString, private creator: SurveyCreatorModel) {
     super();
     this.locString = locString;
-    this.allowLineBreaks = Serializer.findProperty(this.locString.owner["getType"](), this.locString.name)?.type == "text";
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
   }
 
@@ -326,7 +323,7 @@ export class StringEditorViewModelBase extends Base {
       const options = { value: event.target?.innerText, cancel: null };
       if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
-      sanitizeEditableContent(event.target);
+      sanitizeEditableContent(event.target, !this.locString.allowLineBreaks);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
       }
@@ -369,7 +366,7 @@ export class StringEditorViewModelBase extends Base {
       clearedText = mdText;
     } else {
       let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
-      if (!this.allowLineBreaks) txt = clearNewLines(txt);
+      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
       clearedText = txt;
     }
     let owner = this.locString.owner as any;
@@ -453,7 +450,7 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && (this.editAsText || !event.shiftKey)) {
+    if (event.keyCode === 13 && !event.shiftKey) {
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});
@@ -541,6 +538,7 @@ export class StringEditorViewModelBase extends Base {
       .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
       .append("svc-string-editor--readonly", !this.contentEditable)
       .append("svc-string-editor--error", !!this.errorText)
+      .append("svc-string-editor--multiline", !!this.locString.allowLineBreaks)
       .toString();
   }
 }
