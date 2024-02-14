@@ -35,9 +35,9 @@ test("Check section", async (t) => {
     // await t.click(Selector(".svd-grid-expand"));
     await t.click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 });
     await t.click(Selector("h4[aria-label=General]"));
-    await t.click(Selector("h4[aria-label='Choices Options']"));
+    await t.click(Selector("h4[aria-label='Choice Options']"));
 
-    const sectionContentElement = Selector("h4[aria-label='Choices Options']").parent().nextSibling();
+    const sectionContentElement = Selector("h4[aria-label='Choice Options']").parent().nextSibling();
     await t.expect(sectionContentElement.visible).ok();
     await takeElementScreenshot("choices-section-default.png", sectionContentElement, t, comparer);
     await ClientFunction(() => (<any>document).querySelector("[data-name='choices'] .spg-input").focus())();
