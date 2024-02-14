@@ -48,7 +48,6 @@ test("Get property description from peHelp. based on class name", () => {
   peHelp.survey = { testProperty: "Help_Survey" };
   peHelp.question = { testProperty: "Help_Question", testProperty2: "Help_Question2", testProperty3: "Help_Question3" };
   peHelp.text = { testProperty: "Help_Text" };
-
   expect(editorLocalization.getPropertyHelpInEditor("base", "testProperty")).toEqual("Help_All");
   expect(editorLocalization.getPropertyHelpInEditor("page", "testProperty")).toEqual("Help_All");
   expect(editorLocalization.getPropertyHelpInEditor("survey", "testProperty")).toEqual("Help_Survey");
@@ -64,9 +63,9 @@ test("Get property description from peHelp. based on class name", () => {
   expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty2")).toEqual("Help_Question2");
   expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty3")).toEqual("Help_Question3");
   expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty3")).toEqual("Help_Question3");
-  expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeTruthy();
+  expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeFalsy();
   expect(editorLocalization.getPropertyHelpInEditor("dropdown", "valueName", "string")).toBeTruthy();
-  expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeFalsy();
+  expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeTruthy();
 });
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;

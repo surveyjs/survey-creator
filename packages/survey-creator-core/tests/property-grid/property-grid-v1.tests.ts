@@ -1715,6 +1715,7 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
+  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1751,7 +1752,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "Use curly brackets"
+      "The expression can include basic calculations"
     ) > -1
   ).toBeTruthy();
 });

@@ -1339,10 +1339,10 @@ test("options.onSetPropertyEditorOptionsCallback", () => {
   expect(choicesQuestion.allowAddRows).toEqual(false);
   expect(choicesQuestion.allowRemoveRows).toEqual(false);
   const actions = choicesQuestion.getTitleActions();
-  expect(actions).toHaveLength(2);
+  expect(actions).toHaveLength(3);
   const updater = getAddItemActionEnableUpdater(choicesQuestion);
-  expect(actions[0].id).toEqual("property-grid-setup");
-  expect(actions[0].enabled).toBeFalsy();
+  expect(actions[1].id).toEqual("property-grid-setup");
+  expect(actions[1].enabled).toBeFalsy();
   expect(updater()).toBeFalsy();
 });
 
@@ -1369,9 +1369,10 @@ test("options.onSetPropertyEditorOptionsCallback - allowBatchEdit", () => {
   );
   expect(propName).toEqual("choices");
   const actions = choicesQuestion.getTitleActions();
-  expect(actions).toHaveLength(2);
-  expect(actions[0].id).toEqual("property-grid-clear");
-  expect(actions[1].id).toEqual("add-item");
+  expect(actions).toHaveLength(3);
+  expect(actions[0].id).toEqual("property-grid-help");
+  expect(actions[1].id).toEqual("property-grid-clear");
+  expect(actions[2].id).toEqual("add-item");
 });
 
 test("options.onValueChangingCallback", () => {
