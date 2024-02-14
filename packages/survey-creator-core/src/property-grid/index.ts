@@ -55,7 +55,7 @@ function propertyEnableIf(params: any): boolean {
   const prop = this.question.property;
   const obj = this.question.obj;
   if (!this.question || !obj || !prop) return false;
-  if(this.question.obj[prop.overridingProperty]) return false;
+  if (this.question.obj[prop.overridingProperty]) return false;
   return prop.isEnable(obj);
 }
 
@@ -186,7 +186,7 @@ export interface IPropertyGridEditor {
   onMatrixCellCreated?: (obj: Base, options: any) => void;
   onMatrixCellValueChanged?: (obj: Base, options: any) => void;
   onMatrixAllowRemoveRow?: (obj: Base, row: any) => boolean;
-  onGetQuestionTitleActions?: (obj: Base, options: any) => void;
+  onGetQuestionTitleActions?: (obj: Base, options: any, creator: ISurveyCreatorOptions) => void;
   onUpdateQuestionCssClasses?: (obj: Base, options: any) => void;
 }
 
@@ -313,10 +313,10 @@ export var PropertyGridEditorCollection = {
       res.onUpdateQuestionCssClasses(obj, options);
     }
   },
-  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any) {
+  onGetQuestionTitleActions(obj: Base, prop: JsonObjectProperty, options: any, creator: ISurveyCreatorOptions) {
     var res = this.getEditor(prop);
     if (!!res && !!res.onGetQuestionTitleActions) {
-      res.onGetQuestionTitleActions(obj, options);
+      res.onGetQuestionTitleActions(obj, options, creator);
     }
   },
   onValueChanged(obj: Base, prop: JsonObjectProperty, question: Question) {
@@ -534,7 +534,7 @@ export class PropertyJSONGenerator {
         if (!q.readOnly) {
           q.enableIf = "propertyEnableIf() = true";
         }
-        if(prop.overridingProperty) {
+        if (prop.overridingProperty) {
           q.onUpdateCssClassesCallback = (css: any) => {
             css.questionWrapper = "spg-boolean-wrapper--overriding";
           };
@@ -653,13 +653,13 @@ export class PropertyJSONGenerator {
       if (!propJSON) continue;
       panel.elements.push(propJSON);
     }
-    if(Array.isArray(tab.tabs)) {
+    if (Array.isArray(tab.tabs)) {
       tab.tabs.forEach(child => {
         const panelJSON = this.createPanelProps(child, context, true);
-        if(panelJSON.title === child.name) {
+        if (panelJSON.title === child.name) {
           delete panelJSON.title;
         }
-        if(panelJSON) {
+        if (panelJSON) {
           panel.elements.push(panelJSON);
         }
       });
@@ -677,7 +677,7 @@ export class PropertyJSONGenerator {
       title: this.getPanelTitle(category, title),
       elements: []
     };
-    if(!isChild) {
+    if (!isChild) {
       res.state = "collapsed";
     }
     return res;
@@ -696,7 +696,7 @@ export class PropertyJSONGenerator {
     if (!json) return null;
     json.name = prop.name;
     json.title = this.getQuestionTitle(prop, title);
-    if(this.isQuestionTitleHidden(prop)) {
+    if (this.isQuestionTitleHidden(prop)) {
       json.titleLocation = "hidden";
     }
     json.visible = prop.visible;
@@ -753,9 +753,9 @@ export class PropertyJSONGenerator {
   private getPanelTitle(name: string, title: string): string {
     if (!!title) return title;
     const res: any = editorLocalization.getString("pe.tabs." + name);
-    if(typeof res === "object") {
-      for(let key in res) {
-        if(Serializer.isDescendantOf(this.obj.getType(), key)) return res[key];
+    if (typeof res === "object") {
+      for (let key in res) {
+        if (Serializer.isDescendantOf(this.obj.getType(), key)) return res[key];
       }
     }
     return res;
@@ -884,7 +884,7 @@ export class PropertyGridModel {
     });
     this.survey.onGetQuestionTitleActions.add((sender, options) => {
       this.titleActionsCreator.onGetQuestionTitleActions(options);
-      this.onGetQuestionTitleActions(options);
+      this.onGetQuestionTitleActions(options, this.options);
       const q = options.question;
       this.options.onPropertyEditorUpdateTitleActionsCallback(this.obj, q.property, q, options.titleActions);
     });
@@ -919,9 +919,9 @@ export class PropertyGridModel {
       this.onUpdateQuestionCssClasses(options);
     });
     this.survey.onElementContentVisibilityChanged.add((sender, options) => {
-      if(creatorSettings.propertyGrid.allowExpandMultipleCategories) return;
+      if (creatorSettings.propertyGrid.allowExpandMultipleCategories) return;
       const el = options.element;
-      if(el && el.isPanel && el.isExpanded) {
+      if (el && el.isPanel && el.isExpanded) {
         this.collapseOtherPanels(<PanelModel>el);
       }
     });
@@ -990,7 +990,7 @@ export class PropertyGridModel {
   }
   public expandAllCategories(): void {
     this.survey.getAllPanels().forEach(pnl => {
-      if(!pnl.parent.isPanel) {
+      if (!pnl.parent.isPanel) {
         pnl.expand();
       }
     });
@@ -1000,7 +1000,7 @@ export class PropertyGridModel {
   }
   private collapseAllCategoriesExcept(panel: PanelModel): void {
     this.survey.getAllPanels().forEach(pnl => {
-      if(pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
+      if (pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
     });
   }
   protected createSurvey(json: any): SurveyModel {
@@ -1180,11 +1180,12 @@ export class PropertyGridModel {
     );
 
   }
-  private onGetQuestionTitleActions(options: any) {
+  private onGetQuestionTitleActions(options: any, creator: ISurveyCreatorOptions) {
     PropertyGridEditorCollection.onGetQuestionTitleActions(
       this.obj,
       options.question.property,
-      options
+      options,
+      creator
     );
   }
   private onMatrixCellValueChanged(options: any) {
@@ -1376,9 +1377,9 @@ export class PropertyGridEditorBoolean extends PropertyGridEditor {
       titleLocation: "hidden"
     };
     const choices = prop.getChoices(obj, (choices: any) => { });
-    if(Array.isArray(choices) && choices.length >= 2) {
+    if (Array.isArray(choices) && choices.length >= 2) {
       const jsonChoices = [];
-      for(let i = 0; i < 2; i ++) {
+      for (let i = 0; i < 2; i++) {
         const val = choices[i].value || choices[i];
         jsonChoices.push({ value: val, text: editorLocalization.getPropertyValueInEditor(prop.name, val) });
       }
