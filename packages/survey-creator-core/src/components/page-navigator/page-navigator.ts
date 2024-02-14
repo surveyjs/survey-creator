@@ -266,6 +266,11 @@ export class PageNavigatorViewModel extends Base {
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
   protected updateVisibleItems(allAvailableHeight: number): void {
     this.updateVisibility();
+    if (this.pagesController.creator["pageEditMode"] === "bypage") {
+      this.visibleItemsStartIndex = 0;
+      this.visibleItemsCount = this.items.length;
+      return;
+    }
     const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
     this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
 

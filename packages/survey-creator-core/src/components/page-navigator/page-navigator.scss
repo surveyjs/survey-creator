@@ -93,3 +93,19 @@ survey-creator,
     left: calcSize(1);
   }
 }
+
+.svc-tab-designer--bypage-mode {
+  .svc-tab-designer_content {
+    display: flex;
+    flex-direction: row;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .svc-tab-designer__page-navigator {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+  }
+}

@@ -152,6 +152,7 @@ export class TabDesignerViewModel extends Base {
     if (this.showPlaceholder) {
       rootCss += " svc-tab-designer--with-place-holder";
     }
+    rootCss += " svc-tab-designer--" + this.creator.pageEditMode + "-mode";
     return rootCss;
   }
 }
