@@ -1,5 +1,12 @@
 import { SurveyCreatorModel } from "../creator-base";
 
+export interface ICreatorPresetData {
+  tabs? : {
+    items?: Array<string>,
+    activeTab?: string,
+  };
+}
+
 export interface ICreatorPreset {
   setJson(json: any): void;
   apply(creator: SurveyCreatorModel): void;
@@ -52,7 +59,7 @@ export class CreatorTabsPreset extends CreatorPresetBase {
 }
 
 export class CreatorPreset extends CreatorPresetBase {
-  public constructor(json: any) {
+  public constructor(json: ICreatorPresetData) {
     super();
     this.setJson(json);
   }
