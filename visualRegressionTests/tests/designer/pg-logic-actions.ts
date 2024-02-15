@@ -82,7 +82,7 @@ test("Check run expression description", async (t) => {
     await t.resizeWindow(1920, 1080);
 
     await ClientFunction(() => {
-      (window as any).SurveyCreator.editorLocalization.getLocale().pe.expressionHelp = "Use curly brackets to access answers: `{question1} + {question2}`. Expressions also support functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`, and others";
+      (window as any).SurveyCreatorCore.editorLocalization.getLocale().pe.expressionHelp = "Use curly brackets to access answers: `{question1} + {question2}`. Expressions also support functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `count()`, `avg()`, and others";
     })();
     await setJSON({});
     await t.click(getPropertyGridCategory(logicGroupName))
