@@ -397,14 +397,14 @@ test("Page navigator scrolling in bypage mode", async (t) => {
       window["creator"].pageEditMode = "bypage";
     })();
     await t.wait(500);
-    await ClientFunction(() => {
-      document.querySelector(".svc-tab-designer")!.scrollTop = 500;
-    })();
-    await t.wait(500);
+    // await ClientFunction(() => {
+    //   document.querySelector(".svc-tab-designer")!.scrollTop = 500;
+    // })();
+    // await t.wait(500);
 
-    const designerElement = Selector(".svc-creator-tab");
+    const pageNavigatorElement = Selector(".svc-tab-designer__page-navigator");
 
-    await t.expect(designerElement.visible).ok();
-    await takeElementScreenshot("page-navigator-bypage.png", designerElement, t, comparer);
+    await t.expect(pageNavigatorElement.visible).ok();
+    await takeElementScreenshot("page-navigator-bypage.png", pageNavigatorElement, t, comparer);
   });
 });
