@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { Question, QuestionHtmlModel, SurveyTemplateRendererViewModel } from "survey-core";
 import { ImplementorBase } from "survey-knockout-ui";
-import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionAdornerViewModel } from "survey-creator-core";
 import { KnockoutMouseEvent } from "../events";
 const template = require("./panel.html");
 

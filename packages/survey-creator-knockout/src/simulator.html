@@ -3,9 +3,6 @@
   <!-- ko if: hasFrame -->
   <div class="svd-simulator-wrapper" id="svd-simulator-wrapper"
     data-bind="style: { width: simulatorFrame.frameWidth + 'px', height: simulatorFrame.frameHeight + 'px' }">
-    <div class="svd-simulator-frame"
-      data-bind="style: { width: simulatorFrame.landscapedFrameWidth + 'px', height: simulatorFrame.landscapedFrameHeight + 'px' }, css: simulatorFrame.cssClass">
-    </div>
     <div class="svd-simulator"
       data-bind="style: { width: simulatorFrame.deviceWidth + 'px', height: simulatorFrame.deviceHeight + 'px', transform: 'scale(' + simulatorFrame.scale + ') translate(-50%, -50%)' }">
       <survey-widget class="svd-simulator-content" params="model: survey"></survey-widget>

@@ -1,6 +1,7 @@
 import { BaseAction, Action, IAction, PopupModel, ListModel, ComputedUpdater } from "survey-core";
 import { getLogicString } from "./logic-types";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization } from "../../editorLocalization";
 import { SurveyLogicUI } from "./logic-ui";
 import { SurveyHelper } from "../../survey-helper";
@@ -10,7 +11,7 @@ export class TabLogicPlugin implements ICreatorPlugin {
   private filterActionTypeAction: Action;
   private fastEntryAction: Action;
   public model: SurveyLogicUI;
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("logic", this);
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
   }

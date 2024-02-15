@@ -49,9 +49,9 @@ export var huStrings = {
     settings: "Kérdőívbeállítások",
     settingsTooltip: "Nyissa meg a beállításokat",
     surveySettings: "Földmérési beállítások",
-    surveySettingsTooltip: "Nyissa meg a felmérési beállításokat",
+    surveySettingsTooltip: "Földmérési beállítások",
     themeSettings: "Téma beállítások",
-    themeSettingsTooltip: "Nyissa meg a témabeállításokat",
+    themeSettingsTooltip: "Téma beállításai",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -142,6 +142,7 @@ export var huStrings = {
     translationExportToSCVButton: "Mentés CSV-ként",
     translationImportFromSCVButton: "Betöltés CSV-ből.",
     translateUsigAI: "Összes automatikus fordítása",
+    translateUsigAIFrom: "Fordítás: ",
     translationDialogTitle: "Lefordítatlan karakterláncok",
     translationMergeLocaleWithDefault: "{0} összefűzése az alapértelmezett szöveggel.",
     translationPlaceHolder: "Fordítás...",
@@ -339,6 +340,8 @@ export var huStrings = {
     showOtherItem: "Rendelkezik egyéb értékkel",
     otherText: "Az egyéb érték szövege",
     showNoneItem: "A Nincs lehetőség engedélyezése",
+    showRefuseItem: "A Válasz megtagadása lehetőség engedélyezése",
+    showDontKnowItem: "A Nem tudom lehetőség engedélyezése",
     noneText: "Nincs opció szövege",
     showSelectAllItem: "Az összes kijelölése lehetőség engedélyezése",
     selectAllText: "Az Összes kijelölése opció szövege",
@@ -368,6 +371,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     rowCount: "Sorok száma",
     columnLayout: "Oszlopok elrendezése",
+    transposeData: "Sorok átültetése oszlopokba",
     addRowLocation: "'Új sor felvétele' gomb elhelyezése",
     addRowText: "'Új sor felvétele' gomb szövege",
     removeRowText: "'Sor eltávolítása' gomb szövege",
@@ -446,6 +450,10 @@ export var huStrings = {
     },
     question: {
       page: "Szülőoldal"
+    },
+    panel: {
+      page: "Szülőoldal",
+      indent: "Külső behúzások hozzáadása"
     },
     showTimerPanel: "Időzító mutatása",
     showTimerPanelMode: "Időzító módja",
@@ -617,7 +625,11 @@ export var huStrings = {
       templateTitle: "Sablon címe",
       totals: "Összegek",
       logic: "Logika",
-      layout: "Elrendezés",
+      layout: {
+        panel: "Elrendezés",
+        question: "Elrendezés",
+        base: "Elrendezés"
+      },
       data: "Adat",
       validation: "Érvényesítés",
       cells: "Cella szövegek",
@@ -634,9 +646,6 @@ export var huStrings = {
     columnsEnableIf: "Az oszlopok akkor láthatók, ha",
     rowsEnableIf: "A sorok akkor láthatók, ha",
     indent: "Behúzások hozzáadása",
-    panel: {
-      indent: "Külső behúzások hozzáadása"
-    },
     innerIndent: "Belső behúzások hozzáadása",
     defaultValueFromLastRow: "Alapértelmezett értékek felvétele az utolsó sorból",
     defaultValueFromLastPanel: "Alapértelmezett értékek felvétele az utolsó panelről",
@@ -749,6 +758,9 @@ export var huStrings = {
     onComplete: "befejezéskor",
     onHidden: "eltűnéskor",
     onHiddenContainer: "Amikor a kérdés vagy annak panelje/oldala rejtetté válik",
+    contain: "Tartalmaz",
+    cover: "Fedő",
+    fill: "Tölt",
     clearInvisibleValues: {
       none: "Soha"
     },
@@ -1038,8 +1050,8 @@ export var huStrings = {
     "--primary-foreground": "Elsődleges festőszín",
     "--foreground": "Festőszín",
     "--base-unit": "Alapegység",
+    advancedMode: "Speciális mód",
     groupGeneral: "Általános",
-    groupAdvanced: "Haladó",
     groupHeader: "Fejléc",
     groupBackground: "Háttér",
     groupAppearance: "Megjelenés",
@@ -1068,11 +1080,9 @@ export var huStrings = {
     backgroundImageAttachmentScroll: "Kézirattekercs",
     panelBackgroundTransparency: "Panel hátterének átlátszatlansága",
     questionBackgroundTransparency: "Kérdés hátterének átlátszatlansága",
-    questionPanel: "Panel háttere és saroksugara",
     questionTitle: "Kérdés címének betűtípusa",
-    questionDescription: "Kérdés leíró betűtípus",
     editorPanel: "Bemeneti elem",
-    editorFont: "Bemeneti elem betűtípusa",
+    backgroundCornerRadius: "Háttér és saroksugár",
     backcolor: "Alapértelmezett háttér",
     hovercolor: "Háttér rámutatása",
     borderDecoration: "Szegély dekoráció",
@@ -1080,7 +1090,9 @@ export var huStrings = {
     accentForeground: "Hangsúlyos előtér",
     primaryForecolor: "Alapértelmezett szín",
     primaryForecolorLight: "Letiltott szín",
-    linesColors: "Alvonalszínek",
+    colorsTitle: "Színek",
+    font: "Betűkészlet",
+    lines: "Sorok",
     borderDefault: "Sötétebb",
     borderLight: "Öngyújtó",
     fontFamily: "Betűcsalád",
@@ -1097,7 +1109,8 @@ export var huStrings = {
     surveyTitle: "Felmérés címének betűtípusa",
     surveyDescription: "Felmérés leírásának betűtípusa",
     pageTitle: "Oldalcím betűtípusa",
-    pageDescription: "Oldalleíró betűtípus",
+    titleFont: "Cím betűtípusa",
+    descriptionFont: "Leírás betűtípus",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Árnyékhatás hozzáadása",
@@ -1106,8 +1119,7 @@ export var huStrings = {
     boxShadowSpread: "Terjedés",
     boxShadowDrop: "Csepp",
     boxShadowInner: "Belső",
-    questionShadow: "Árnyék effektusok",
-    editorShadow: "Bemeneti elem árnyékeffektusai",
+    shadow: "Árnyék effektusok",
     headerView: "Nézet",
     headerViewBasic: "Alapvető",
     headerViewAdvanced: "Haladó",
@@ -1891,3 +1903,24 @@ editorLocalization.locales["hu"] = huStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Válassza a beállítások"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "A betöltött választási lehetőségek előnézete"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "A sorokban ismétlődő válaszok megakadályozása"
+// theme.advancedMode: "Advanced mode" => "Speciális mód"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Háttér és saroksugár"
+// theme.colorsTitle: "Colors" => "Színek"
+// theme.font: "Font" => "Betűkészlet"
+// theme.lines: "Lines" => "Sorok"
+// theme.titleFont: "Title font" => "Cím betűtípusa"
+// theme.descriptionFont: "Description font" => "Leírás betűtípus"
+// theme.shadow: "Shadow effects" => "Árnyék effektusok"
+// ed.translateUsigAIFrom: "Translate from: " => "Fordítás: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "A Válasz megtagadása lehetőség engedélyezése"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "A Nem tudom lehetőség engedélyezése"
+// pv.contain: "Contain" => "Tartalmaz"
+// pv.cover: "Cover" => "Fedő"
+// pv.fill: "Fill" => "Tölt"
+
+// pe.transposeData: "Transpose rows to columns" => "Sorok átültetése oszlopokba"
+// layout.panel: "Layout" => "Elrendezés"
+// layout.question: "Layout" => "Elrendezés"
+// layout.base: "Layout" => "Elrendezés"

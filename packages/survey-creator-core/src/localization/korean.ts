@@ -49,9 +49,9 @@ export var koreanStrings = {
     settings: "설정",
     settingsTooltip: "설정 열기",
     surveySettings: "설문조사 설정",
-    surveySettingsTooltip: "설문조사 설정 열기",
+    surveySettingsTooltip: "설문조사 설정",
     themeSettings: "테마 설정",
-    themeSettingsTooltip: "테마 설정 열기",
+    themeSettingsTooltip: "테마 설정",
     showPanel: "패널 표시",
     hidePanel: "패널 숨기기",
     prevSelected: "이전 선택",
@@ -142,6 +142,7 @@ export var koreanStrings = {
     translationExportToSCVButton: "CSV로 내보내기",
     translationImportFromSCVButton: "CSV에서 가져오기",
     translateUsigAI: "모두 자동 번역",
+    translateUsigAIFrom: "언어 선택(원문-번역): ",
     translationDialogTitle: "번역되지 않은 문자열",
     translationMergeLocaleWithDefault: "{0} 기본 로캘과 병합",
     translationPlaceHolder: "번역...",
@@ -339,6 +340,8 @@ export var koreanStrings = {
     showOtherItem: "다른 항목이 있습니다",
     otherText: "기타 항목 텍스트",
     showNoneItem: "없음 옵션 허용",
+    showRefuseItem: "응답 거부 옵션 허용",
+    showDontKnowItem: "모름 옵션 허용",
     noneText: "없음 옵션 텍스트",
     showSelectAllItem: "모두 선택 옵션 허용",
     selectAllText: "모두 선택 옵션 텍스트",
@@ -368,6 +371,7 @@ export var koreanStrings = {
     imageWidth: "이미지 너비",
     rowCount: "행 수",
     columnLayout: "열 위치",
+    transposeData: "행을 열로 바꾸기",
     addRowLocation: "행 버튼 위치 추가",
     addRowText: "행 버튼 텍스트 추가",
     removeRowText: "행 버튼 텍스트 제거",
@@ -446,6 +450,10 @@ export var koreanStrings = {
     },
     question: {
       page: "상위 페이지"
+    },
+    panel: {
+      page: "상위 페이지",
+      indent: "바깥쪽 들여쓰기 추가"
     },
     showTimerPanel: "타이머 패널 표시",
     showTimerPanelMode: "타이머 패널 모드 표시",
@@ -617,7 +625,11 @@ export var koreanStrings = {
       templateTitle: "템플릿 제목",
       totals: "합계",
       logic: "논리학",
-      layout: "레이아웃",
+      layout: {
+        panel: "레이아웃",
+        question: "레이아웃",
+        base: "레이아웃"
+      },
       data: "데이터",
       validation: "유효성 검사",
       cells: "셀 텍스트",
@@ -634,9 +646,6 @@ export var koreanStrings = {
     columnsEnableIf: "다음과 같은 경우 열이 표시됩니다.",
     rowsEnableIf: "다음과 같은 경우 행이 표시됩니다.",
     indent: "들여쓰기 추가",
-    panel: {
-      indent: "바깥쪽 들여쓰기 추가"
-    },
     innerIndent: "내부 들여쓰기 추가",
     defaultValueFromLastRow: "마지막 행에서 기본값 가져오기",
     defaultValueFromLastPanel: "마지막 패널에서 기본값 가져 오기",
@@ -749,6 +758,9 @@ export var koreanStrings = {
     onComplete: "완료",
     onHidden: "숨김",
     onHiddenContainer: "질문 또는 해당 패널/페이지가 숨겨지는 경우",
+    contain: "포함하다",
+    cover: "표지",
+    fill: "채우다",
     clearInvisibleValues: {
       none: "결코"
     },
@@ -1038,8 +1050,8 @@ export var koreanStrings = {
     "--primary-foreground": "기본 전경색",
     "--foreground": "전경색",
     "--base-unit": "베이스 유닛",
+    advancedMode: "어드밴스드 모드",
     groupGeneral: "일반",
-    groupAdvanced: "고급",
     groupHeader: "머리글",
     groupBackground: "배경",
     groupAppearance: "외관",
@@ -1068,11 +1080,9 @@ export var koreanStrings = {
     backgroundImageAttachmentScroll: "스크롤",
     panelBackgroundTransparency: "패널 배경 불투명도",
     questionBackgroundTransparency: "질문 배경 불투명도",
-    questionPanel: "패널 배경 및 모서리 반경",
     questionTitle: "질문 제목 글꼴",
-    questionDescription: "질문 설명 글꼴",
     editorPanel: "입력 요소",
-    editorFont: "입력 요소 글꼴",
+    backgroundCornerRadius: "배경 및 모서리 반경",
     backcolor: "기본 배경",
     hovercolor: "배경 가리키기",
     borderDecoration: "테두리 장식",
@@ -1080,7 +1090,9 @@ export var koreanStrings = {
     accentForeground: "악센트 전경",
     primaryForecolor: "기본 색상",
     primaryForecolorLight: "비활성화 된 색상",
-    linesColors: "보조 선 색상",
+    colorsTitle: "색상",
+    font: "글꼴",
+    lines: "라인",
     borderDefault: "어두운",
     borderLight: "라이터",
     fontFamily: "글꼴 패밀리",
@@ -1097,7 +1109,8 @@ export var koreanStrings = {
     surveyTitle: "설문조사 제목 글꼴",
     surveyDescription: "설문조사 설명 글꼴",
     pageTitle: "페이지 제목 글꼴",
-    pageDescription: "페이지 설명 글꼴",
+    titleFont: "제목 글꼴",
+    descriptionFont: "설명 글꼴",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "그림자 효과 추가",
@@ -1106,8 +1119,7 @@ export var koreanStrings = {
     boxShadowSpread: "전파",
     boxShadowDrop: "방울",
     boxShadowInner: "내부",
-    questionShadow: "그림자 효과",
-    editorShadow: "입력 요소 그림자 효과",
+    shadow: "그림자 효과",
     headerView: "보기",
     headerViewBasic: "기초의",
     headerViewAdvanced: "고급",
@@ -1942,3 +1954,24 @@ editorLocalization.locales["ko"] = koreanStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "설정으로 바로 가기"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "로드된 선택 옵션 미리보기"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "행의 중복 응답 방지"
+// theme.advancedMode: "Advanced mode" => "어드밴스드 모드"
+// theme.backgroundCornerRadius: "Background and corner radius" => "배경 및 모서리 반경"
+// theme.colorsTitle: "Colors" => "색상"
+// theme.font: "Font" => "글꼴"
+// theme.lines: "Lines" => "라인"
+// theme.titleFont: "Title font" => "제목 글꼴"
+// theme.descriptionFont: "Description font" => "설명 글꼴"
+// theme.shadow: "Shadow effects" => "그림자 효과"
+// ed.translateUsigAIFrom: "Translate from: " => "언어 선택(원문-번역): "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "응답 거부 옵션 허용"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "모름 옵션 허용"
+// pv.contain: "Contain" => "포함하다"
+// pv.cover: "Cover" => "표지"
+// pv.fill: "Fill" => "채우다"
+
+// pe.transposeData: "Transpose rows to columns" => "행을 열로 바꾸기"
+// layout.panel: "Layout" => "레이아웃"
+// layout.question: "Layout" => "레이아웃"
+// layout.base: "Layout" => "레이아웃"

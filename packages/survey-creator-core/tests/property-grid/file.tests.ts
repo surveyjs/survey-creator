@@ -5,7 +5,7 @@ import {
   EmptySurveyCreatorOptions,
 } from "../../src/creator-settings";
 import { imageMimeTypes } from "../../src/utils/utils";
-import { CreatorBase } from "../../src/creator-base";
+import { SurveyCreatorModel } from "../../src/creator-base";
 import { CreatorTester } from "../creator-tester";
 export * from "../../src/custom-questions/question-text-with-reset";
 
@@ -101,7 +101,7 @@ test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
-  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
   const question = new QuestionImageModel("q1");
   creator.onUploadFile.add((s, o) => {
@@ -117,7 +117,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event", () => {
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signature pad", () => {
-  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
   const question = new QuestionSignaturePadModel("q1");
   creator.onUploadFile.add((s, o) => {
@@ -133,7 +133,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with signat
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image item value", () => {
-  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   let uploadCount = 0;
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
@@ -150,7 +150,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with image 
 });
 
 test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo image", () => {
-  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   const survey = new SurveyModel();
   let uploadCount = 0;
   creator.onUploadFile.add((s, o) => {
@@ -166,7 +166,7 @@ test("Check PropertyGridLinkFileEditor creator's onUploadFiles event with logo i
 });
 
 test("Check PropertyGridLinkFileEditor acceptedTypes", () => {
-  const creator = new CreatorBase({ enableLinkFileEditor: true });
+  const creator = new SurveyCreatorModel({ enableLinkFileEditor: true });
   const question = new QuestionImagePickerModel("q1");
   question.choices = [{ value: "lion" }];
 

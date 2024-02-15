@@ -29,11 +29,11 @@
 import { useCreatorModel } from "@/creator-model";
 import type { QuestionRatingModel } from "survey-core";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   QuestionRatingAdornerViewModel,
 } from "survey-creator-core";
 const props = defineProps<{
-  componentData: { data: CreatorBase; question: QuestionRatingModel };
+  componentData: { data: SurveyCreatorModel; question: QuestionRatingModel };
   componentName: string;
 }>();
 const model = useCreatorModel(

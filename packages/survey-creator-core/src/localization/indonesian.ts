@@ -49,9 +49,9 @@ export var indonesianStrings = {
     settings: "Pengaturan Survei",
     settingsTooltip: "Buka pengaturan",
     surveySettings: "Pengaturan Survei",
-    surveySettingsTooltip: "Buka pengaturan survei",
+    surveySettingsTooltip: "Pengaturan survei",
     themeSettings: "Pengaturan Tema",
-    themeSettingsTooltip: "Buka pengaturan tema",
+    themeSettingsTooltip: "Pengaturan tema",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -142,6 +142,7 @@ export var indonesianStrings = {
     translationExportToSCVButton: "Eksport ke CSV",
     translationImportFromSCVButton: "Import dari CSV",
     translateUsigAI: "Terjemahkan otomatis Semua",
+    translateUsigAIFrom: "Terjemahkan dari: ",
     translationDialogTitle: "String yang tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabungkan {0} dengan default locale",
     translationPlaceHolder: "Terjemahan...",
@@ -339,6 +340,8 @@ export var indonesianStrings = {
     showOtherItem: "Memiliki item lain",
     otherText: "Teks item lain",
     showNoneItem: "Perbolehkan opsi Tidak Ada",
+    showRefuseItem: "Perbolehkan opsi Tolak Jawab",
+    showDontKnowItem: "Perbolehkan opsi Tidak Tahu",
     noneText: "Tidak ada teks opsi",
     showSelectAllItem: "Perbolehkan opsi Pilih Semua",
     selectAllText: "Pilih Semua teks opsi",
@@ -368,6 +371,7 @@ export var indonesianStrings = {
     imageWidth: "Lebar gambar",
     rowCount: "Jumlah baris",
     columnLayout: "Tata letak kolom",
+    transposeData: "Mengubah urutan baris menjadi kolom",
     addRowLocation: "Tambah lokasi tombol baris",
     addRowText: "Teks tambah tombol baris",
     removeRowText: "Teks hapus tombol baris",
@@ -446,6 +450,10 @@ export var indonesianStrings = {
     },
     question: {
       page: "Halaman induk"
+    },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambahkan inden luar"
     },
     showTimerPanel: "Tampilkan panel pengatur waktu",
     showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
@@ -617,7 +625,11 @@ export var indonesianStrings = {
       templateTitle: "Judul templat",
       totals: "Total",
       logic: "Logika",
-      layout: "Tata letak",
+      layout: {
+        panel: "Tata letak",
+        question: "Tata letak",
+        base: "Tata letak"
+      },
       data: "Data",
       validation: "Validasi",
       cells: "Teks Sel",
@@ -634,9 +646,6 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     indent: "Menambahkan inden",
-    panel: {
-      indent: "Menambahkan inden luar"
-    },
     innerIndent: "Menambahkan inden dalam",
     defaultValueFromLastRow: "Mengambil nilai default dari baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai default dari panel terakhir",
@@ -749,6 +758,9 @@ export var indonesianStrings = {
     onComplete: "saat selesai",
     onHidden: "saat tersembunyi",
     onHiddenContainer: "Ketika pertanyaan atau panel/halamannya disembunyikan",
+    contain: "Mengandung",
+    cover: "Menutupi",
+    fill: "Isi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1038,8 +1050,8 @@ export var indonesianStrings = {
     "--primary-foreground": "Warna latar depan primer",
     "--foreground": "Warna latar depan",
     "--base-unit": "Unit dasar",
+    advancedMode: "Mode lanjutan",
     groupGeneral: "Umum",
-    groupAdvanced: "Maju",
     groupHeader: "Header",
     groupBackground: "Latar",
     groupAppearance: "Rupa",
@@ -1068,11 +1080,9 @@ export var indonesianStrings = {
     backgroundImageAttachmentScroll: "Gulir",
     panelBackgroundTransparency: "Opasitas latar belakang panel",
     questionBackgroundTransparency: "Opasitas latar belakang pertanyaan",
-    questionPanel: "Latar belakang panel dan radius sudut",
     questionTitle: "Font judul pertanyaan",
-    questionDescription: "Font deskripsi pertanyaan",
     editorPanel: "Elemen input",
-    editorFont: "Font elemen input",
+    backgroundCornerRadius: "Latar belakang dan radius sudut",
     backcolor: "Latar belakang default",
     hovercolor: "Arahkan kursor ke latar belakang",
     borderDecoration: "Dekorasi perbatasan",
@@ -1080,7 +1090,9 @@ export var indonesianStrings = {
     accentForeground: "Latar depan aksen",
     primaryForecolor: "Warna default",
     primaryForecolorLight: "Warna dinonaktifkan",
-    linesColors: "Warna garis minor",
+    colorsTitle: "Warna",
+    font: "Font",
+    lines: "Baris",
     borderDefault: "Gelap",
     borderLight: "Ringan",
     fontFamily: "Keluarga font",
@@ -1097,7 +1109,8 @@ export var indonesianStrings = {
     surveyTitle: "Font judul survei",
     surveyDescription: "Font deskripsi survei",
     pageTitle: "Font judul halaman",
-    pageDescription: "Font deskripsi halaman",
+    titleFont: "Font judul",
+    descriptionFont: "Font deskripsi",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tambahkan Efek Bayangan",
@@ -1106,8 +1119,7 @@ export var indonesianStrings = {
     boxShadowSpread: "Penyebaran",
     boxShadowDrop: "Menjatuhkan",
     boxShadowInner: "Batin",
-    questionShadow: "Efek bayangan",
-    editorShadow: "Efek bayangan elemen input",
+    shadow: "Efek bayangan",
     headerView: "Melihat",
     headerViewBasic: "Dasar",
     headerViewAdvanced: "Maju",
@@ -1892,3 +1904,24 @@ editorLocalization.locales["id"] = indonesianStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Buka pengaturan"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratinjau opsi pilihan yang dimuat"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mencegah respons duplikat dalam baris"
+// theme.advancedMode: "Advanced mode" => "Mode lanjutan"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Latar belakang dan radius sudut"
+// theme.colorsTitle: "Colors" => "Warna"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Baris"
+// theme.titleFont: "Title font" => "Font judul"
+// theme.descriptionFont: "Description font" => "Font deskripsi"
+// theme.shadow: "Shadow effects" => "Efek bayangan"
+// ed.translateUsigAIFrom: "Translate from: " => "Terjemahkan dari: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Perbolehkan opsi Tolak Jawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Perbolehkan opsi Tidak Tahu"
+// pv.contain: "Contain" => "Mengandung"
+// pv.cover: "Cover" => "Menutupi"
+// pv.fill: "Fill" => "Isi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris menjadi kolom"
+// layout.panel: "Layout" => "Tata letak"
+// layout.question: "Layout" => "Tata letak"
+// layout.base: "Layout" => "Tata letak"

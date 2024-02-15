@@ -56,6 +56,7 @@ export var settings = {
     showAddQuestionButton: true
   },
   logic: {
+    questionSortOrder: "asc",
     get defaultOperator(): string { return settings.logic.defaultOperators.default; },
     set defaultOperator(val: string) { settings.logic.defaultOperators.default = val; },
     defaultOperators: {
@@ -97,7 +98,8 @@ export var settings = {
     maximumRowsCount: 0,
     maximumRateValues: 0,
     generalTabName: "general",
-    defaultExpandedTabName: "general"
+    defaultExpandedTabName: "general",
+    allowExpandMultipleCategories: false
   },
   toolbox: {
     /**
@@ -183,6 +185,17 @@ export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
   allowEdit: boolean;
   allowAdd: boolean;
+}
+
+export interface ICreatorPlugin {
+  activate: () => void;
+  update?: () => void;
+  deactivate?: () => boolean;
+  canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate?: () => boolean | undefined;
+  dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
+  model: Base;
 }
 
 export interface ISurveyCreatorOptions {
@@ -305,13 +318,13 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void,
+    callback: (files: File[]) => void,
     context?: { element: SurveyElement, item?: ItemValue }
   ): void;
 }
@@ -457,11 +470,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
+  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

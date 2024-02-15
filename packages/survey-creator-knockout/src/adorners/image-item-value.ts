@@ -5,14 +5,14 @@ import {
   QuestionSelectBase,
   SurveyTemplateRendererViewModel,
 } from "survey-core";
-import { CreatorBase, ImageItemValueWrapperViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { ImplementorBase } from "survey-knockout-ui";
 
 const template = require("./image-item-value.html");
 
 class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewModel {
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     public question: QuestionImagePickerModel,
     public item: ImageItemValue,
     public templateData: any,
@@ -39,13 +39,13 @@ class KnockoutImageItemValueWrapperViewModel extends ImageItemValueWrapperViewMo
     event.stopPropagation();
   }
 
-  dragleave = (_, event)=> {
+  dragleave = (_, event) => {
     this.onDragLeave(event);
   }
-  drop = (_, event)=> {
+  drop = (_, event) => {
     this.onDrop(event);
   }
-  dragover = (_, event)=> {
+  dragover = (_, event) => {
     this.onDragOver(event);
   }
   getNewItemStyle() {

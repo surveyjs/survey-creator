@@ -51,8 +51,7 @@
     </div>
     <!-- ko ifnot: creator.haveCommercialLicense -->
     <div class="svc-creator__banner">
-      <span class="svc-creator__non-commercial-text"><a href="https://surveyjs.io/buy"
-          data-bind="text: creator.licenseText"></a></span>
+      <span class="svc-creator__non-commercial-text" data-bind="html: creator.licenseText"></span>
     </div>
     <!-- /ko -->
     <!-- ko component: { name: 'sv-notifier', params: { notifier: creator.notifier } } -->

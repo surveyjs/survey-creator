@@ -16,7 +16,7 @@ export var enStrings = {
     deleteQuestion: "Delete Question",
     convertTo: "Convert to",
     drag: "Drag element",
-    license: "To use our library in your app, a developer license is necessary. If you currently hold an activated license, ensure you're using the latest version available."
+    license: "To use our library, a <a href='https://surveyjs.io/licensing'>developer license</a> is required. If you have an active license, <a href='https://surveyjs.io/remove-alert-banner'>set up your license key</a> and ensure you're using the latest version."
   },
   // Question types
   qt: {
@@ -51,9 +51,9 @@ export var enStrings = {
     settings: "Settings",
     settingsTooltip: "Open settings",
     surveySettings: "Survey Settings",
-    surveySettingsTooltip: "Open survey settings",
+    surveySettingsTooltip: "Survey settings",
     themeSettings: "Theme Settings",
-    themeSettingsTooltip: "Open theme settings",
+    themeSettingsTooltip: "Theme settings",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
@@ -144,6 +144,7 @@ export var enStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "Auto-translate All",
+    translateUsigAIFrom: "Translate from: ",
     translationDialogTitle: "Untranslated strings",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
@@ -342,6 +343,8 @@ export var enStrings = {
     showOtherItem: "Allow the Other option",
     otherText: "Other option text",
     showNoneItem: "Allow the None option",
+    showRefuseItem: "Allow the Refuse to Answer option",
+    showDontKnowItem: "Allow the Don't Know option",
     noneText: "None option text",
     showSelectAllItem: "Allow the Select All option",
     selectAllText: "Select All option text",
@@ -371,6 +374,7 @@ export var enStrings = {
     imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Columns layout",
+    transposeData: "Transpose rows to columns",
     addRowLocation: "Add Row button location",
     addRowText: "Add Row button text",
     removeRowText: "Remove Row button text",
@@ -448,6 +452,10 @@ export var enStrings = {
     },
     question: {
       page: "Parent page"
+    },
+    panel: {
+      page: "Parent page",
+      indent: "Add outer indents"
     },
     showTimerPanel: "Timer location",
     showTimerPanelMode: "Timer mode",
@@ -619,7 +627,11 @@ export var enStrings = {
       templateTitle: "Title template",
       totals: "Totals",
       logic: "Logic",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validation",
       cells: "Cell Texts",
@@ -636,9 +648,6 @@ export var enStrings = {
     columnsEnableIf: "Columns are visible if",
     rowsEnableIf: "Rows are visible if",
     indent: "Add indents",
-    panel: {
-      indent: "Add outer indents"
-    },
     innerIndent: "Add inner indents",
     defaultValueFromLastRow: "Take default values from the last row",
     defaultValueFromLastPanel: "Take default values from the last panel",
@@ -751,6 +760,9 @@ export var enStrings = {
     onComplete: "When the survey is completed",
     onHidden: "When the question becomes hidden",
     onHiddenContainer: "When the question or its panel/page becomes hidden",
+    contain: "Contain",
+    cover: "Cover",
+    fill: "Fill",
     clearInvisibleValues: {
       none: "Never"
     },
@@ -796,7 +808,12 @@ export var enStrings = {
       none: "Hidden"
     },
     showProgressBar: {
-      off: "Hidden"
+      off: "Hidden",
+      auto: "Auto",
+      aboveHeader: "Above header",
+      belowHeader: "Below header",
+      bottom: "Bottom",
+      topBottom: "Top and Bottom"
     },
     showTimerPanel: {
       none: "Hidden"
@@ -937,6 +954,7 @@ export var enStrings = {
     },
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
+    swapOrder: "Swap the order of Yes and No",
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "Source type",
@@ -1040,8 +1058,8 @@ export var enStrings = {
     "--primary-foreground": "Primary foreground color",
     "--foreground": "Foreground color",
     "--base-unit": "Base unit",
+    advancedMode: "Advanced mode",
     groupGeneral: "General",
-    groupAdvanced: "Advanced",
     groupHeader: "Header",
     groupBackground: "Background",
     groupAppearance: "Appearance",
@@ -1070,11 +1088,9 @@ export var enStrings = {
     backgroundImageAttachmentScroll: "Scroll",
     panelBackgroundTransparency: "Panel background opacity",
     questionBackgroundTransparency: "Question background opacity",
-    questionPanel: "Panel background and corner radius",
-    questionTitle: "Question title font",
-    questionDescription: "Question description font",
+    questionTitle: "Question box",
     editorPanel: "Input element",
-    editorFont: "Input element font",
+    backgroundCornerRadius: "Background and corner radius",
     backcolor: "Default background",
     hovercolor: "Hover background",
     borderDecoration: "Border decoration",
@@ -1082,7 +1098,9 @@ export var enStrings = {
     accentForeground: "Accent foreground",
     primaryForecolor: "Default color",
     primaryForecolorLight: "Disabled color",
-    linesColors: "Minor line colors",
+    colorsTitle: "Colors",
+    font: "Font",
+    lines: "Lines",
     borderDefault: "Darker",
     borderLight: "Lighter",
     fontFamily: "Font family",
@@ -1098,8 +1116,9 @@ export var enStrings = {
     cornerRadius: "Corner radius",
     surveyTitle: "Survey title font",
     surveyDescription: "Survey description font",
-    pageTitle: "Page title font",
-    pageDescription: "Page description font",
+    pageTitle: "Page",
+    titleFont: "Title font",
+    descriptionFont: "Description font",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Add Shadow Effect",
@@ -1108,8 +1127,7 @@ export var enStrings = {
     boxShadowSpread: "Spread",
     boxShadowDrop: "Drop",
     boxShadowInner: "Inner",
-    questionShadow: "Shadow effects",
-    editorShadow: "Input element shadow effects",
+    shadow: "Shadow effects",
     headerView: "View",
     headerViewBasic: "Basic",
     headerViewAdvanced: "Advanced",

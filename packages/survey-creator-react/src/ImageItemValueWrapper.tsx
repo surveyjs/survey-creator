@@ -99,7 +99,7 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
           </div>
 
           {
-            this.model.isDraggable ?
+            this.model.isDraggable && this.model.canRenderControls ?
               <span className="svc-context-button svc-image-item-value-controls__drag-area-indicator"
                 onPointerDown={(event: any) => this.model.onPointerDown(event)}
               >
@@ -108,20 +108,24 @@ export class ImageItemValueAdornerComponent extends CreatorModelElement<
               : null
           }
 
-          <div className="svc-context-container svc-image-item-value-controls">
-            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-              className="svc-context-button"
-              onClick={() => this.model.chooseFile(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
-            </span>) : null}
-            {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
-              className="svc-context-button svc-context-button--danger"
-              onClick={() => this.model.remove(this.model)}
-            >
-              <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
-            </span>) : null}
-          </div>
+          {
+            this.model.canRenderControls ?
+              <div className="svc-context-container svc-image-item-value-controls">
+                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
+                  className="svc-context-button"
+                  onClick={() => this.model.chooseFile(this.model)}
+                >
+                  <SvgIcon size={24} iconName={"icon-file"}></SvgIcon>
+                </span>) : null}
+                {this.model.allowRemove && !this.model.isUploading ? attachKey2click(<span
+                  className="svc-context-button svc-context-button--danger"
+                  onClick={() => this.model.remove(this.model)}
+                >
+                  <SvgIcon size={24} iconName={"icon-delete"}></SvgIcon>
+                </span>) : null}
+              </div>
+              : null
+          }
         </>
       );
     }

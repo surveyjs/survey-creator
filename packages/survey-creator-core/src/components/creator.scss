@@ -4,13 +4,14 @@
 survey-creator,
 .svc-creator {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   position: relative;
 
   -webkit-font-smoothing: antialiased;
 
-  * {
+  @-moz-document url-prefix() {
     scrollbar-width: thin;
     scrollbar-color: $border transparent;
   }
@@ -44,18 +45,13 @@ survey-creator,
   @include disableUserSelect;
 }
 
-.svc-creator__area.svc-creator__area--with-banner {
-  height: calc(100% - calc(4 * #{$base-unit}));
-}
-
 .svc-creator__content-wrapper {
   width: 100%;
-  height: calc(100% - calc(8 * #{$base-unit})); // without top toolbar
+  height: 0;
+    flex-grow: 1;
 }
 
-.svc-creator__content-wrapper--footer-toolbar {
-  height: calc(100% - calc(6 * #{$base-unit})); // without footer toolbar
-}
+
 
 .svc-creator__content-holder {
   width: 100%;
@@ -97,14 +93,10 @@ survey-creator,
 }
 
 .svc-creator__banner {
-  position: absolute;
-  bottom: calcSize(-4);
   width: 100%;
-  height: calcSize(4);
   line-height: calcSize(4);
   background-color: $secondary;
   text-align: center;
-  overflow: hidden;
 }
 
 .svc-item__banner {
@@ -122,17 +114,20 @@ survey-creator,
 
 .svc-creator__non-commercial-text {
   color: $primary-foreground;
-  font-family: $font-family;
-  font-weight: bold;
-  font-size: calcSize(2);
+  @include defaultBold;
   vertical-align: middle;
-
+  padding: calcSize(1.5) calcSize(16);
+    display: block;
   a {
     color: $primary-foreground;
-    text-decoration: none;
   }
 }
 
+.svc-creator--mobile {
+  .svc-creator__non-commercial-text {
+    padding: calcSize(1.5) calcSize(5);
+  }
+}
 .sv-drag-drop-ghost {
   top: calcSize(0.75);
   width: 100%;

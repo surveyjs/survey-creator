@@ -99,6 +99,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showColumnHeader", tab: "layout" },
         { name: "columnsVisibleIf", tab: "logic" },
         { name: "columnLayout", tab: "layout" },
+        { name: "transposeData", tab: "layout" },
         { name: "horizontalScroll", tab: "layout" },
         { name: "columnColCount", tab: "layout" },
         { name: "columnMinWidth", tab: "layout" },
@@ -199,6 +200,10 @@ export class SurveyQuestionEditorDefinition {
         { name: "otherPlaceholder", tab: "choices" },
         { name: "showNoneItem", tab: "choices" },
         { name: "noneText", tab: "choices" },
+        { name: "showRefuseItem", tab: "choices" },
+        { name: "refuseText", tab: "choices" },
+        { name: "showDontKnowItem", tab: "choices" },
+        { name: "dontKnowText", tab: "choices" },
         { name: "hideIfChoicesEmpty", tab: "logic" },
         { name: "choicesVisibleIf", tab: "logic" },
         { name: "choicesEnableIf", tab: "logic" },
@@ -240,6 +245,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "choicesMax", tab: "choices" },
         { name: "choicesStep", tab: "choices" },
         { name: "allowClear", tab: "choices" },
+        { name: "searchMode", tab: "choices" }
       ],
     },
     imagepicker: {

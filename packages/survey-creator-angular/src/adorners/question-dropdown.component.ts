@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { ItemValue, PageModel, Question, SurveyModel } from "survey-core";
-import { CreatorBase, QuestionAdornerViewModel, QuestionDropdownAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionAdornerViewModel, QuestionDropdownAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { QuestionDesignerComponent } from "../question.component";
 

@@ -49,9 +49,9 @@ export var arStrings = {
     settings: "Survey Settings",
     settingsTooltip: "Open survey settings",
     surveySettings: "إعدادات الاستطلاع",
-    surveySettingsTooltip: "افتح إعدادات الاستطلاع",
+    surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
-    themeSettingsTooltip: "فتح إعدادات النسق",
+    themeSettingsTooltip: "إعدادات النسق",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -142,6 +142,7 @@ export var arStrings = {
     translationExportToSCVButton: "Export to CSV",
     translationImportFromSCVButton: "Import from CSV",
     translateUsigAI: "ترجمة تلقائية للكل",
+    translateUsigAIFrom: "ترجمة من: ",
     translationDialogTitle: "النصوص غير المترجمة",
     translationMergeLocaleWithDefault: "Merge {0} with default locale",
     translationPlaceHolder: "Translation...",
@@ -339,6 +340,8 @@ export var arStrings = {
     showOtherItem: "هل هناك خيار أخرى",
     otherText: "نص خيار أخرى",
     showNoneItem: "هل هناك خيار بلا",
+    showRefuseItem: "السماح بخيار رفض الإجابة",
+    showDontKnowItem: "السماح بالخيار \"لا أعرف\"",
     noneText: "نص خيار بلا",
     showSelectAllItem: "هل هناك خيار إختيار الكل",
     selectAllText: "نص خيار إختر الكل",
@@ -368,6 +371,7 @@ export var arStrings = {
     imageWidth: "عرض الصورة",
     rowCount: "عدد الصفوف",
     columnLayout: "تخطيط الأعمدة",
+    transposeData: "تبديل موضع الصفوف إلى أعمدة",
     addRowLocation: "موقع زر إضافة صف",
     addRowText: "نص زر إضافة صف",
     removeRowText: "نص زر حذف صف",
@@ -446,6 +450,10 @@ export var arStrings = {
     },
     question: {
       page: "الصفحة الرئيسية"
+    },
+    panel: {
+      page: "الصفحة الرئيسية",
+      indent: "إضافة مسافات بادئة خارجية"
     },
     showTimerPanel: "إظهار لوحة المؤقت",
     showTimerPanelMode: "إظهار نمط لوحة المؤقت",
@@ -617,7 +625,11 @@ export var arStrings = {
       templateTitle: "عنوان القالب",
       totals: "Totals",
       logic: "المنطق",
-      layout: "التنسيق",
+      layout: {
+        panel: "تخطيط",
+        question: "تخطيط",
+        base: "تخطيط"
+      },
       data: "البيانات",
       validation: "التحقق",
       cells: "الخلايا",
@@ -634,9 +646,6 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     indent: "إضافة مسافات بادئة",
-    panel: {
-      indent: "إضافة مسافات بادئة خارجية"
-    },
     innerIndent: "إضافة مسافات بادئة داخلية",
     defaultValueFromLastRow: "خذ القيم الافتراضية من الصف الأخير",
     defaultValueFromLastPanel: "خذ القيم الافتراضية من اللوحة الأخيرة",
@@ -749,6 +758,9 @@ export var arStrings = {
     onComplete: "عند الإنتهاء",
     onHidden: "عند الإخفال",
     onHiddenContainer: "عند إخفاء الحاوية",
+    contain: "احتوى",
+    cover: "غطاء",
+    fill: "ملء",
     clearInvisibleValues: {
       none: "أبدا"
     },
@@ -1038,8 +1050,8 @@ export var arStrings = {
     "--primary-foreground": "لون المقدمة الأساسي",
     "--foreground": "لون المقدمة",
     "--base-unit": "وحدة القاعدة",
+    advancedMode: "الوضع المتقدم",
     groupGeneral: "عام",
-    groupAdvanced: "متقدم",
     groupHeader: "راس",
     groupBackground: "خلفية",
     groupAppearance: "مظهر",
@@ -1068,11 +1080,9 @@ export var arStrings = {
     backgroundImageAttachmentScroll: "طومار",
     panelBackgroundTransparency: "عتامة خلفية اللوحة",
     questionBackgroundTransparency: "عتامة خلفية السؤال",
-    questionPanel: "خلفية اللوحة ونصف قطر الزاوية",
     questionTitle: "خط عنوان السؤال",
-    questionDescription: "خط وصف السؤال",
     editorPanel: "عنصر الإدخال",
-    editorFont: "خط عنصر الإدخال",
+    backgroundCornerRadius: "الخلفية ونصف قطر الزاوية",
     backcolor: "الخلفية الافتراضية",
     hovercolor: "خلفية التحويم",
     borderDecoration: "زخرفة الحدود",
@@ -1080,7 +1090,9 @@ export var arStrings = {
     accentForeground: "لهجة الصدارة",
     primaryForecolor: "اللون الافتراضي",
     primaryForecolorLight: "لون معطل",
-    linesColors: "ألوان الخطوط الثانوية",
+    colorsTitle: "الوان",
+    font: "الخط",
+    lines: "اسطر",
     borderDefault: "اظلم",
     borderLight: "أخف",
     fontFamily: "عائلة الخط",
@@ -1097,7 +1109,8 @@ export var arStrings = {
     surveyTitle: "خط عنوان الاستطلاع",
     surveyDescription: "خط وصف الاستطلاع",
     pageTitle: "خط عنوان الصفحة",
-    pageDescription: "خط وصف الصفحة",
+    titleFont: "خط العنوان",
+    descriptionFont: "خط الوصف",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "إضافة تأثير الظل",
@@ -1106,8 +1119,7 @@ export var arStrings = {
     boxShadowSpread: "انتشار",
     boxShadowDrop: "قطرة",
     boxShadowInner: "باطن",
-    questionShadow: "تأثيرات الظل",
-    editorShadow: "تأثيرات ظل عنصر الإدخال",
+    shadow: "تأثيرات الظل",
     headerView: "منظر",
     headerViewBasic: "أساسي",
     headerViewAdvanced: "متقدم",
@@ -1648,3 +1660,24 @@ editorLocalization.locales["ar"] = arStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "انتقل إلى الإعدادات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "معاينة خيارات الاختيار المحملة"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "منع تكرار الاستجابات في الصفوف"
+// theme.advancedMode: "Advanced mode" => "الوضع المتقدم"
+// theme.backgroundCornerRadius: "Background and corner radius" => "الخلفية ونصف قطر الزاوية"
+// theme.colorsTitle: "Colors" => "الوان"
+// theme.font: "Font" => "الخط"
+// theme.lines: "Lines" => "اسطر"
+// theme.titleFont: "Title font" => "خط العنوان"
+// theme.descriptionFont: "Description font" => "خط الوصف"
+// theme.shadow: "Shadow effects" => "تأثيرات الظل"
+// ed.translateUsigAIFrom: "Translate from: " => "ترجمة من: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "السماح بخيار رفض الإجابة"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "السماح بالخيار \"لا أعرف\""
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "السماح بخيار رفض الإجابة"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "السماح بالخيار \"لا أعرف\""
+// pv.contain: "Contain" => "احتوى"
+// pv.cover: "Cover" => "غطاء"
+// pv.fill: "Fill" => "ملء"
+
+// pe.transposeData: "Transpose rows to columns" => "تبديل موضع الصفوف إلى أعمدة"
+// layout.panel: "Layout" => "تخطيط"
+// layout.question: "Layout" => "تخطيط"
+// layout.base: "Layout" => "تخطيط"

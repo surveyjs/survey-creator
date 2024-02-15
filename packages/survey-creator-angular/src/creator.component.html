@@ -23,8 +23,10 @@
             <div class="svc-creator__content-holder svc-flex-column">
               <ng-container *ngFor="let tab of creator.tabs">
                 <div class="svc-creator-tab" *ngIf="creator.viewType == tab.id && tab.visible"
-                  [attr.id]="'scrollableDiv-' + tab.id" [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
-                  <ng-template [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>
+                  [attr.id]="'scrollableDiv-' + tab.id"
+                  [class.svc-creator__toolbox--right]="creator.toolboxLocation == 'right'">
+                  <ng-template
+                    [component]="{ name: tab.componentContent, data: { model: tab.data.model } }"></ng-template>
                 </div>
               </ng-container>
             </div>
@@ -40,11 +42,7 @@
         </div>
       </div>
       <div class="svc-creator__banner" *ngIf="!creator.haveCommercialLicense">
-        <span class="svc-creator__non-commercial-text">
-          <a href="https://surveyjs.io/buy">
-            {{creator.licenseText}}
-          </a>
-        </span>
+        <span class="svc-creator__non-commercial-text" [innerHTML]="creator.licenseText | safeHtml"></span>
       </div>
       <sv-notifier [notifier]="creator.notifier"></sv-notifier>
     </div>

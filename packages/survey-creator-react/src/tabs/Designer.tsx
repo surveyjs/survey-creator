@@ -5,7 +5,7 @@ import {
   SurveyElementBase,
   SurveyHeader
 } from "survey-react-ui";
-import { CreatorBase, TabDesignerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, TabDesignerViewModel } from "survey-creator-core";
 import { SurveyPageNavigator } from "../PageNavigator";
 import { SurveyNavigation } from "../Navigation";
 
@@ -17,7 +17,7 @@ export class TabDesignerComponent extends SurveyElementBase<ITabDesignerComponen
   private get model(): TabDesignerViewModel {
     return this.props.data;
   }
-  protected get creator(): CreatorBase {
+  protected get creator(): SurveyCreatorModel {
     return this.model.creator;
   }
 

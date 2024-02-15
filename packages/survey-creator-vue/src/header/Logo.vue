@@ -52,9 +52,9 @@
 </template>
 <script lang="ts" setup>
 import { useCreatorModel } from "@/creator-model";
-import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { computed, onMounted, ref, watch } from "vue";
-const props = defineProps<{ data: CreatorBase }>();
+const props = defineProps<{ data: SurveyCreatorModel }>();
 const creator = computed(() => props.data);
 const survey = computed(() => creator.value.survey);
 const root = ref<HTMLDivElement>();

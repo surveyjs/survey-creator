@@ -49,9 +49,9 @@ export let svStrings = {
     settings: "Enkät inställningar",
     settingsTooltip: "Öppna inställningar",
     surveySettings: "Inställningar för undersökning",
-    surveySettingsTooltip: "Öppna undersökningsinställningar",
+    surveySettingsTooltip: "Inställningar för undersökning",
     themeSettings: "Tema Inställningar",
-    themeSettingsTooltip: "Öppna temainställningar",
+    themeSettingsTooltip: "Inställningar för tema",
     showPanel: "Visa panel",
     hidePanel: "Dölj panel",
     prevSelected: "Välj föregående",
@@ -142,6 +142,7 @@ export let svStrings = {
     translationExportToSCVButton: "Exportera till CSV",
     translationImportFromSCVButton: "Importera från CSV",
     translateUsigAI: "Översätt alla automatiskt",
+    translateUsigAIFrom: "Översätt från: ",
     translationDialogTitle: "Oöversatta strängar",
     translationMergeLocaleWithDefault: "Mergea {0} med standard språk",
     translationPlaceHolder: "Översättning...",
@@ -339,6 +340,8 @@ export let svStrings = {
     showOtherItem: "Har annat element",
     otherText: "Annat",
     showNoneItem: "Tillåt alternativet Ingen",
+    showRefuseItem: "Tillåt alternativet Vägra svara",
+    showDontKnowItem: "Tillåt alternativet Vet ej",
     noneText: "Alternativtext för Ingen",
     showSelectAllItem: "Tillåt alternativet Markera allt",
     selectAllText: "Markera all alternativtext",
@@ -368,6 +371,7 @@ export let svStrings = {
     imageWidth: "Bild bredd",
     rowCount: "Antal rader",
     columnLayout: "Stil på kolumn",
+    transposeData: "Transponera rader till kolumner",
     addRowLocation: "Lägg till radknapp plats",
     addRowText: "Lägg till knapp text",
     removeRowText: "Ta bort rad knapp text",
@@ -446,6 +450,10 @@ export let svStrings = {
     },
     question: {
       page: "Överordnad sida"
+    },
+    panel: {
+      page: "Överordnad sida",
+      indent: "Lägga till yttre indrag"
     },
     showTimerPanel: "Visa tidtagning",
     showTimerPanelMode: "Visa tidtagning läge",
@@ -617,7 +625,11 @@ export let svStrings = {
       templateTitle: "Mall titel",
       totals: "Summor",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Cell texter",
@@ -634,9 +646,6 @@ export let svStrings = {
     columnsEnableIf: "Kolumner visas om",
     rowsEnableIf: "Raderna visas om",
     indent: "Lägga till indrag",
-    panel: {
-      indent: "Lägga till yttre indrag"
-    },
     innerIndent: "Lägga till inre indrag",
     defaultValueFromLastRow: "Ta standardvärden från den sista raden",
     defaultValueFromLastPanel: "Ta standardvärden från den sista panelen",
@@ -749,6 +758,9 @@ export let svStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "När frågan eller dess panel/sida döljs",
+    contain: "Innehålla",
+    cover: "Täcka",
+    fill: "Fylla",
     clearInvisibleValues: {
       none: "Aldrig"
     },
@@ -1038,8 +1050,8 @@ export let svStrings = {
     "--primary-foreground": "Primär förgrundsfärg",
     "--foreground": "Förgrundsfärg",
     "--base-unit": "Basenhet",
+    advancedMode: "Avancerat läge",
     groupGeneral: "Allmänt",
-    groupAdvanced: "Avancerad",
     groupHeader: "Rubrik",
     groupBackground: "Bakgrund",
     groupAppearance: "Utseende",
@@ -1068,11 +1080,9 @@ export let svStrings = {
     backgroundImageAttachmentScroll: "Rulla",
     panelBackgroundTransparency: "Opacitet för panelbakgrund",
     questionBackgroundTransparency: "Frågans bakgrundsopacitet",
-    questionPanel: "Panelbakgrund och hörnradie",
     questionTitle: "Teckensnitt för frågerubrik",
-    questionDescription: "Typsnitt för frågebeskrivning",
     editorPanel: "Inmatningselement",
-    editorFont: "Teckensnitt för inmatningselement",
+    backgroundCornerRadius: "Bakgrund och hörnradie",
     backcolor: "Standardbakgrund",
     hovercolor: "Håll muspekaren bakgrund",
     borderDecoration: "Border dekoration",
@@ -1080,7 +1090,9 @@ export let svStrings = {
     accentForeground: "Accent förgrund",
     primaryForecolor: "Standardfärg",
     primaryForecolorLight: "Inaktiverad färg",
-    linesColors: "Mindre linjefärger",
+    colorsTitle: "Färger",
+    font: "Teckensnitt",
+    lines: "Linjer",
     borderDefault: "Mörkare",
     borderLight: "Tändare",
     fontFamily: "Teckensnitt familj",
@@ -1097,7 +1109,8 @@ export let svStrings = {
     surveyTitle: "Teckensnitt för undersökningstitel",
     surveyDescription: "Teckensnitt för undersökningsbeskrivning",
     pageTitle: "Teckensnitt för sidtitel",
-    pageDescription: "Teckensnitt för sidbeskrivning",
+    titleFont: "Titel typsnitt",
+    descriptionFont: "Beskrivning teckensnitt",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lägg till skuggeffekt",
@@ -1106,8 +1119,7 @@ export let svStrings = {
     boxShadowSpread: "Sprida",
     boxShadowDrop: "Droppe",
     boxShadowInner: "Inre",
-    questionShadow: "Skuggeffekter",
-    editorShadow: "Skuggeffekter för indataelement",
+    shadow: "Skugga effekter",
     headerView: "Utsikt",
     headerViewBasic: "Grundläggande",
     headerViewAdvanced: "Avancerad",
@@ -1915,3 +1927,24 @@ editorLocalization.locales["sv"] = svStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå till inställningar"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Förhandsgranskning av inlästa alternativalternativ"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Förhindra dubbletter av svar i rader"
+// theme.advancedMode: "Advanced mode" => "Avancerat läge"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Bakgrund och hörnradie"
+// theme.colorsTitle: "Colors" => "Färger"
+// theme.font: "Font" => "Teckensnitt"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Titel typsnitt"
+// theme.descriptionFont: "Description font" => "Beskrivning teckensnitt"
+// theme.shadow: "Shadow effects" => "Skugga effekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Översätt från: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillåt alternativet Vägra svara"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillåt alternativet Vet ej"
+// pv.contain: "Contain" => "Innehålla"
+// pv.cover: "Cover" => "Täcka"
+// pv.fill: "Fill" => "Fylla"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponera rader till kolumner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

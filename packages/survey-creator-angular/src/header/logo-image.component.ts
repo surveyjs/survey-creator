@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
 import { SurveyModel } from "survey-core";
-import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { AngularComponentFactory } from "survey-angular-ui";
 
 @Component({
@@ -10,7 +10,7 @@ import { AngularComponentFactory } from "survey-angular-ui";
   styles: [":host { display: none; }"]
 })
 export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageViewModel> implements AfterViewInit {
-  @Input() data!: CreatorBase;
+  @Input() data!: SurveyCreatorModel;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>;
   public model!: LogoImageViewModel;
   protected createModel(): void {
@@ -22,7 +22,7 @@ export class CreatorLogoImageComponent extends CreatorModelComponent<LogoImageVi
   protected getPropertiesToTrack(): string[] {
     return ["data"];
   }
-  public get creator(): CreatorBase {
+  public get creator(): SurveyCreatorModel {
     return this.data;
   }
   public get survey(): SurveyModel {

@@ -10,6 +10,7 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
 
+export * from "../creator-events-api";
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
 
@@ -77,6 +78,7 @@ export * from "../textWorker";
 export * from "../toolbox";
 export * from "../components/side-bar/side-bar-model";
 export * from "../components/side-bar/side-bar-tab-model";
+export * from "../components/switcher/switcher";
 export * from "../utils/events";
 export * from "../utils/utils";
 export * from "../question-editor/definition";

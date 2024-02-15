@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -687,10 +687,36 @@ test("Dropdown input in property grid", async (t) => {
     await t.resizeWindow(1240, 870);
 
     await t
-      .click(Selector("button[title='Open survey settings'"))
+      .click(surveySettingsButtonSelector)
       .click(Selector(".spg-dropdown[aria-label='Survey language']"))
       .pressKey("a l i");
 
     await takeElementScreenshot("pg-dropdown-editor-input.png", Selector(".spg-dropdown[aria-label='Survey language']"), t, comparer);
+  });
+});
+
+test("Property grid checkbox with description", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1080);
+    await ClientFunction(() => {
+      (window as any).SurveyCreatorCore.localization.getLocale("en").pehelp["visible"] = "Visible property's description";
+    })();
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await t.click("div[data-sv-drop-target-survey-element='question1']", { offsetX: 200, offsetY: 30 });
+    await takeElementScreenshot("pg-checkbox-hint.png", Selector("[data-name='visible']"), t, comparer);
+    await t.click(Selector("[data-name='visible'] .spg-action-button"));
+    await takeElementScreenshot("pg-checkbox-hint-opened.png", Selector("[data-name='visible']"), t, comparer);
   });
 });

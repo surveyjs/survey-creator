@@ -647,7 +647,7 @@ export class ConditionEditor extends PropertyEditorSetupValue {
     const res = [];
     const questions = this.survey.getAllQuestions();
     const contextObject = this.getContextObject();
-    let sortOrder = "acs";
+    let sortOrder = settings.logic.questionSortOrder;
     if (questions.length > 0) {
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i];

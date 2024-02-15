@@ -49,9 +49,9 @@ var polishStrings = {
     settings: "Ustawienia",
     settingsTooltip: "Otwórz ustawienia",
     surveySettings: "Ustawienia ankiety",
-    surveySettingsTooltip: "Otwórz ustawienia ankiety",
+    surveySettingsTooltip: "Ustawienia ankiety",
     themeSettings: "Ustawienia motywu",
-    themeSettingsTooltip: "Otwórz ustawienia motywu",
+    themeSettingsTooltip: "Ustawienia motywu",
     showPanel: "Pokaż panel",
     hidePanel: "Panel Ukryj",
     prevSelected: "Wybierz poprzedni",
@@ -142,6 +142,7 @@ var polishStrings = {
     translationExportToSCVButton: "Eksport do pliku CSV",
     translationImportFromSCVButton: "Importowanie z pliku CSV",
     translateUsigAI: "Automatycznie tłumacz wszystko",
+    translateUsigAIFrom: "Przetłumacz z: ",
     translationDialogTitle: "Nieprzetłumaczone ciągi znaków",
     translationMergeLocaleWithDefault: "Scalanie {0} z domyślnymi ustawieniami regionalnymi",
     translationPlaceHolder: "Tłumaczenie...",
@@ -339,6 +340,8 @@ var polishStrings = {
     showOtherItem: "Czy możliwa własna odpowiedź",
     otherText: "Other item text",
     showNoneItem: "Zezwalaj na opcję Brak",
+    showRefuseItem: "Zezwól na opcję Odmów odpowiedzi",
+    showDontKnowItem: "Zezwól na opcję Nie wiem",
     noneText: "Tekst opcji Brak",
     showSelectAllItem: "Zezwalaj na opcję Zaznacz wszystko",
     selectAllText: "Zaznacz tekst opcji Wszystkie",
@@ -368,6 +371,7 @@ var polishStrings = {
     imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Układ kolumn",
+    transposeData: "Transponowanie wierszy do kolumn",
     addRowLocation: "Lokalizacja przycisku Dodaj wiersz",
     addRowText: "Add row button text",
     removeRowText: "Remove row button text",
@@ -446,6 +450,10 @@ var polishStrings = {
     },
     question: {
       page: "Strona nadrzędna"
+    },
+    panel: {
+      page: "Strona nadrzędna",
+      indent: "Dodawanie wcięć zewnętrznych"
     },
     showTimerPanel: "Show timer panel",
     showTimerPanelMode: "Show timer panel mode",
@@ -617,7 +625,11 @@ var polishStrings = {
       templateTitle: "Template title",
       totals: "Sumy",
       logic: "Logika",
-      layout: "Układ",
+      layout: {
+        panel: "Układ",
+        question: "Układ",
+        base: "Układ"
+      },
       data: "Dane",
       validation: "Walidacja",
       cells: "Teksty komórek",
@@ -634,9 +646,6 @@ var polishStrings = {
     columnsEnableIf: "Kolumny są widoczne, jeśli",
     rowsEnableIf: "Wiersze są widoczne, jeśli",
     indent: "Dodawanie wcięć",
-    panel: {
-      indent: "Dodawanie wcięć zewnętrznych"
-    },
     innerIndent: "Dodawanie wcięć wewnętrznych",
     defaultValueFromLastRow: "Pobieranie wartości domyślnych z ostatniego wiersza",
     defaultValueFromLastPanel: "Pobieranie wartości domyślnych z ostatniego panelu",
@@ -749,6 +758,9 @@ var polishStrings = {
     onComplete: "Po zakończeniu ankiety",
     onHidden: "Gdy pytanie zostanie ukryte",
     onHiddenContainer: "Gdy pytanie lub jego panel/strona zostaną ukryte",
+    contain: "Zawierać",
+    cover: "Pokryć",
+    fill: "Wypełnić",
     clearInvisibleValues: {
       none: "Nigdy"
     },
@@ -1038,8 +1050,8 @@ var polishStrings = {
     "--primary-foreground": "Podstawowy kolor pierwszego planu",
     "--foreground": "Kolor pierwszego planu",
     "--base-unit": "Jednostka bazowa",
+    advancedMode: "Tryb zaawansowany",
     groupGeneral: "Ogólne",
-    groupAdvanced: "Zaawansowany",
     groupHeader: "Nagłówek",
     groupBackground: "Tło",
     groupAppearance: "Wygląd",
@@ -1068,11 +1080,9 @@ var polishStrings = {
     backgroundImageAttachmentScroll: "Przewijać",
     panelBackgroundTransparency: "Krycie tła panelu",
     questionBackgroundTransparency: "Nieprzezroczystość tła pytania",
-    questionPanel: "Tło panelu i promień narożnika",
     questionTitle: "Czcionka tytułu pytania",
-    questionDescription: "Czcionka opisu pytania",
     editorPanel: "Element wejściowy",
-    editorFont: "Czcionka elementu wejściowego",
+    backgroundCornerRadius: "Tło i promień narożnika",
     backcolor: "Domyślne tło",
     hovercolor: "Najedź kursorem na tło",
     borderDecoration: "Dekoracja obramowania",
@@ -1080,7 +1090,9 @@ var polishStrings = {
     accentForeground: "Akcent na pierwszym planie",
     primaryForecolor: "Kolor domyślny",
     primaryForecolorLight: "Kolor wyłączony",
-    linesColors: "Pomocnicze kolory linii",
+    colorsTitle: "Kolory",
+    font: "Czcionka",
+    lines: "Linie",
     borderDefault: "Ciemniejsze",
     borderLight: "Zapalniczka",
     fontFamily: "Rodzina czcionek",
@@ -1097,7 +1109,8 @@ var polishStrings = {
     surveyTitle: "Czcionka tytułu ankiety",
     surveyDescription: "Czcionka opisu ankiety",
     pageTitle: "Czcionka tytułu strony",
-    pageDescription: "Czcionka opisu strony",
+    titleFont: "Czcionka tytułu",
+    descriptionFont: "Czcionka opisu",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt cienia",
@@ -1106,8 +1119,7 @@ var polishStrings = {
     boxShadowSpread: "Rozprzestrzenianie się",
     boxShadowDrop: "Kropla",
     boxShadowInner: "Wewnętrzny",
-    questionShadow: "Efekty cienia",
-    editorShadow: "Efekty cienia elementu wejściowego",
+    shadow: "Efekty cienia",
     headerView: "Widok",
     headerViewBasic: "Podstawowy",
     headerViewAdvanced: "Zaawansowany",
@@ -2011,3 +2023,24 @@ editorLocalization.locales["pl"] = polishStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Przejdź do ustawień"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Podgląd wczytanych opcji wyboru"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zapobieganie zduplikowanym odpowiedziom w wierszach"
+// theme.advancedMode: "Advanced mode" => "Tryb zaawansowany"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Tło i promień narożnika"
+// theme.colorsTitle: "Colors" => "Kolory"
+// theme.font: "Font" => "Czcionka"
+// theme.lines: "Lines" => "Linie"
+// theme.titleFont: "Title font" => "Czcionka tytułu"
+// theme.descriptionFont: "Description font" => "Czcionka opisu"
+// theme.shadow: "Shadow effects" => "Efekty cienia"
+// ed.translateUsigAIFrom: "Translate from: " => "Przetłumacz z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zezwól na opcję Odmów odpowiedzi"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Zezwól na opcję Nie wiem"
+// pv.contain: "Contain" => "Zawierać"
+// pv.cover: "Cover" => "Pokryć"
+// pv.fill: "Fill" => "Wypełnić"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponowanie wierszy do kolumn"
+// layout.panel: "Layout" => "Układ"
+// layout.question: "Layout" => "Układ"
+// layout.base: "Layout" => "Układ"

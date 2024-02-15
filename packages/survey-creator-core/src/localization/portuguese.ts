@@ -49,9 +49,9 @@ var portugueseTranslation = {
     settings: "Configurações da Pesquisa",
     settingsTooltip: "Configurações",
     surveySettings: "Configurações de Questionários",
-    surveySettingsTooltip: "Configurações",
+    surveySettingsTooltip: "Configurações do questionário",
     themeSettings: "Configurações do tema",
-    themeSettingsTooltip: "Abrir configurações de tema",
+    themeSettingsTooltip: "Configurações do tema",
     showPanel: "Mostrar Painel",
     hidePanel: "Esconder Painel",
     prevSelected: "Selecionar anterior",
@@ -142,6 +142,7 @@ var portugueseTranslation = {
     translationExportToSCVButton: "Exportar para CSV",
     translationImportFromSCVButton: "Importar de CSV",
     translateUsigAI: "Tradução automática de todos",
+    translateUsigAIFrom: "Traduzir do: ",
     translationDialogTitle: "Cadeias de caracteres não traduzidas",
     translationMergeLocaleWithDefault: "Combinar {0} com o idioma pré-definido",
     translationPlaceHolder: "Tradução...",
@@ -339,6 +340,8 @@ var portugueseTranslation = {
     showOtherItem: "Tem item 'outros'",
     otherText: "Texto do item 'outros'",
     showNoneItem: "Permitir a opção Nenhum",
+    showRefuseItem: "Permitir a opção Recusar resposta",
+    showDontKnowItem: "Permitir a opção Não Sei",
     noneText: "texto de opção Nenhum",
     showSelectAllItem: "Permitir a opção Selecionar tudo",
     selectAllText: "texto de opção Selecionar Todos",
@@ -368,6 +371,7 @@ var portugueseTranslation = {
     imageWidth: "Largura da imagem",
     rowCount: "Contagem de linhas",
     columnLayout: "Layout das colunas",
+    transposeData: "Transpor linhas para colunas",
     addRowLocation: "Localização do botão de adicionar linha",
     addRowText: "Texto do botão para adicionar linhas",
     removeRowText: "Texto do botão para remover linhas",
@@ -446,6 +450,10 @@ var portugueseTranslation = {
     },
     question: {
       page: "Página principal"
+    },
+    panel: {
+      page: "Página principal",
+      indent: "Adicionar recuos externos"
     },
     showTimerPanel: "Mostrar o painel de cronômetro",
     showTimerPanelMode: "Mostrar painel de modo de cronômetro",
@@ -617,7 +625,11 @@ var portugueseTranslation = {
       templateTitle: "Título do template",
       totals: "Totais",
       logic: "Lógica",
-      layout: "Disposição",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validação",
       cells: "Texto de Células",
@@ -634,9 +646,6 @@ var portugueseTranslation = {
     columnsEnableIf: "Colunas estão visiveis se",
     rowsEnableIf: "Linhas estão visiveis se",
     indent: "Adicionar recuos",
-    panel: {
-      indent: "Adicionar recuos externos"
-    },
     innerIndent: "Adicionar recuos internos",
     defaultValueFromLastRow: "Utilizar os valores padrão da última linha",
     defaultValueFromLastPanel: "Utilizar os valores padrão do último painel",
@@ -749,6 +758,9 @@ var portugueseTranslation = {
     onComplete: "ao completar",
     onHidden: "ao ocultar",
     onHiddenContainer: "Quando a pergunta ou seu painel/página fica oculto",
+    contain: "Conter",
+    cover: "Cobrir",
+    fill: "Encher",
     clearInvisibleValues: {
       none: "Nunca"
     },
@@ -1038,8 +1050,8 @@ var portugueseTranslation = {
     "--primary-foreground": "Cor primária de primeiro plano",
     "--foreground": "Cor de primeiro plano",
     "--base-unit": "Unidade base",
+    advancedMode: "Modo avançado",
     groupGeneral: "Geral",
-    groupAdvanced: "Avançado",
     groupHeader: "Cabeçalho",
     groupBackground: "Fundo",
     groupAppearance: "Aparência",
@@ -1068,11 +1080,9 @@ var portugueseTranslation = {
     backgroundImageAttachmentScroll: "Rolar",
     panelBackgroundTransparency: "Opacidade do plano de fundo do painel",
     questionBackgroundTransparency: "Opacidade de fundo da pergunta",
-    questionPanel: "Fundo do painel e raio de canto",
     questionTitle: "Fonte do título da pergunta",
-    questionDescription: "Fonte da descrição da pergunta",
     editorPanel: "Elemento de entrada",
-    editorFont: "Fonte do elemento de entrada",
+    backgroundCornerRadius: "Fundo e raio de canto",
     backcolor: "Plano de fundo padrão",
     hovercolor: "Plano de fundo do mouse",
     borderDecoration: "Decoração de borda",
@@ -1080,7 +1090,9 @@ var portugueseTranslation = {
     accentForeground: "Destaque em primeiro plano",
     primaryForecolor: "Cor padrão",
     primaryForecolorLight: "Cor desativada",
-    linesColors: "Cores de linha secundárias",
+    colorsTitle: "Cores",
+    font: "Fonte",
+    lines: "Linhas",
     borderDefault: "Escuro",
     borderLight: "Isqueiro",
     fontFamily: "Família de fontes",
@@ -1097,7 +1109,8 @@ var portugueseTranslation = {
     surveyTitle: "Fonte do título do questionário",
     surveyDescription: "Fonte da descrição da pesquisa",
     pageTitle: "Fonte do título da página",
-    pageDescription: "Fonte da descrição da página",
+    titleFont: "Fonte do título",
+    descriptionFont: "Fonte de descrição",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Adicionar efeito de sombra",
@@ -1106,8 +1119,7 @@ var portugueseTranslation = {
     boxShadowSpread: "Espalhar",
     boxShadowDrop: "Deixar cair",
     boxShadowInner: "Interno",
-    questionShadow: "Efeitos de sombra",
-    editorShadow: "Efeitos de sombra do elemento de entrada",
+    shadow: "Efeitos de sombra",
     headerView: "Vista",
     headerViewBasic: "Básico",
     headerViewAdvanced: "Avançado",
@@ -1404,3 +1416,24 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ir para configurações"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pré-visualização das opções de escolha carregadas"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Impedir respostas duplicadas em linhas"
+// theme.advancedMode: "Advanced mode" => "Modo avançado"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Fundo e raio de canto"
+// theme.colorsTitle: "Colors" => "Cores"
+// theme.font: "Font" => "Fonte"
+// theme.lines: "Lines" => "Linhas"
+// theme.titleFont: "Title font" => "Fonte do título"
+// theme.descriptionFont: "Description font" => "Fonte de descrição"
+// theme.shadow: "Shadow effects" => "Efeitos de sombra"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduzir do: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir a opção Recusar resposta"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir a opção Não Sei"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir a opção Recusar resposta"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir a opção Não Sei"
+// pv.contain: "Contain" => "Conter"
+// pv.cover: "Cover" => "Cobrir"
+// pv.fill: "Fill" => "Encher"
+
+// pe.transposeData: "Transpose rows to columns" => "Transpor linhas para colunas"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

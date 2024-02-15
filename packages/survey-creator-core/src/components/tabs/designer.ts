@@ -1,5 +1,5 @@
 import { Base, PageModel, property, SurveyModel, ComputedUpdater, settings, IPage } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { getLocString } from "../../editorLocalization";
 import { PagesController } from "../../pages-controller";
 import { SurveyHelper } from "../../survey-helper";
@@ -17,9 +17,12 @@ export class TabDesignerViewModel extends Base {
   @property() pageCount: number;
   @property() designerCss: string;
   @property() showPlaceholder: boolean;
-  public creator: CreatorBase;
+  public creator: SurveyCreatorModel;
 
   private createNewPage() {
+    if (!this.creator.canAddPage()) {
+      return null;
+    }
     const newPage: PageModel = this.survey.createNewPage("");
     newPage["ignoreUndoRedo"] = true;
     this.creator.setNewNames(newPage);
@@ -42,8 +45,8 @@ export class TabDesignerViewModel extends Base {
     };
     newPage.num = this.survey.pages.length + 1;
     newPage.onPropertyChanged.add(checkNewElementHandler);
-    this.newPage = newPage;
     DragDropSurveyElements.newGhostPage = newPage;
+    return newPage;
   }
   private get canShowNewPage(): boolean {
     if (!this.survey || this.creator.pageEditMode === "single" || !this.creator.allowModifyPages) return false;
@@ -55,7 +58,7 @@ export class TabDesignerViewModel extends Base {
     return Object.keys(page.toJSON()).filter(key => key !== "name").length > 0;
   }
 
-  constructor(creator: CreatorBase) {
+  constructor(creator: SurveyCreatorModel) {
     super();
     this.creator = creator;
     this.pagesControllerValue = new PagesController(creator);
@@ -75,16 +78,16 @@ export class TabDesignerViewModel extends Base {
   }
   private isUpdatingNewPage: boolean;
   public onDesignerSurveyPropertyChanged(obj: Base, propName: string): void {
-    if(!obj || this.isUpdatingNewPage) return;
+    if (!obj || this.isUpdatingNewPage) return;
     this.isUpdatingNewPage = true;
-    if(propName === "elements" && obj.isDescendantOf("page")) {
+    if (propName === "elements" && obj.isDescendantOf("page")) {
       let updatePageController = false;
-      if((<PageModel>obj).elements.length === 0) {
+      if ((<PageModel>obj).elements.length === 0) {
         updatePageController = this.checkLastPageToDelete();
       }
       this.checkNewPage(updatePageController);
     }
-    if(propName === "pages" && obj.isDescendantOf("survey")) {
+    if (propName === "pages" && obj.isDescendantOf("survey")) {
       this.checkNewPage(true);
     }
     this.isUpdatingNewPage = false;
@@ -111,16 +114,18 @@ export class TabDesignerViewModel extends Base {
     if (this.showPlaceholder || this.canShowNewPage) {
       const pages = this.survey.pages;
       if (!this.newPage || (pages.length > 0 && this.newPage === pages[pages.length - 1])) {
-        this.createNewPage();
-        this.showNewPage = true;
+        this.newPage = this.createNewPage();
+        this.showNewPage = !!this.newPage;
       }
-      this.newPage.showTitle = !showPlaceholder;
-      this.newPage.showDescription = !showPlaceholder;
+      if (this.newPage) {
+        this.newPage.showTitle = !showPlaceholder;
+        this.newPage.showDescription = !showPlaceholder;
+      }
     } else {
       this.showNewPage = false;
       this.newPage = undefined;
     }
-    if(updatePageController) {
+    if (updatePageController) {
       if (this.newPage) {
         this.newPage.num = this.survey.pages.length + 1;
         this.newPage.name = SurveyHelper.getNewPageName(this.survey.pages);
@@ -133,12 +138,12 @@ export class TabDesignerViewModel extends Base {
     this.cssUpdater && this.cssUpdater.dispose();
   }
   private checkLastPageToDelete(): boolean {
-    if(this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
+    if (this.survey.pageCount === 0 || this.survey.isQuestionDragging) return false;
     const lastPage: PageModel = this.survey.pages[this.survey.pageCount - 1];
     if (lastPage.elements.length > 0 || (<any>lastPage).isConverting) return false;
     if (SurveyHelper.isPagePropertiesAreModified(lastPage)) return false;
     lastPage.delete();
-    if(this.survey.pageCount === 0) {
+    if (this.survey.pageCount === 0) {
       this.creator.selectElement(this.survey);
     }
     return true;

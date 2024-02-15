@@ -2,7 +2,7 @@ import { SurveySimulatorModel } from "../simulator";
 
 require("./test.scss");
 import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, Serializer, ComponentCollection } from "survey-core";
-import { CreatorBase } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { notShortCircuitAnd } from "../../utils/utils";
 
@@ -71,7 +71,7 @@ export class TestSurveyTabViewModel extends Base {
     return this.pages.visibleActions.length > 0 && !this.surveyProvider.isMobileView;
   }
 
-  constructor(private surveyProvider: CreatorBase, private startTheme: any = defaultV2Css) {
+  constructor(private surveyProvider: SurveyCreatorModel, private startTheme: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
   }

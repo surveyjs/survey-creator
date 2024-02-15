@@ -49,9 +49,9 @@ export var danishStrings = {
     settings: "Indstillinger for undersøgelse",
     settingsTooltip: "Åbn indstillinger",
     surveySettings: "Indstillinger for undersøgelse",
-    surveySettingsTooltip: "Åbn undersøgelsesindstillinger",
+    surveySettingsTooltip: "Indstillinger for undersøgelse",
     themeSettings: "Temaindstillinger",
-    themeSettingsTooltip: "Åbn temaindstillinger",
+    themeSettingsTooltip: "Temaindstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -142,6 +142,7 @@ export var danishStrings = {
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
     translateUsigAI: "Oversæt automatisk alle",
+    translateUsigAIFrom: "Oversæt fra: ",
     translationDialogTitle: "Uoversatte strenge",
     translationMergeLocaleWithDefault: "Flet {0} med standardsprog",
     translationPlaceHolder: "Oversættelse...",
@@ -339,6 +340,8 @@ export var danishStrings = {
     showOtherItem: "Har andet element",
     otherText: "Andet element tekst",
     showNoneItem: "Tillad indstillingen Ingen",
+    showRefuseItem: "Tillad indstillingen Afvis at svare",
+    showDontKnowItem: "Tillad indstillingen Ved ikke",
     noneText: "Ingen tekst til valgmulighed",
     showSelectAllItem: "Tillad indstillingen Vælg alt",
     selectAllText: "Vælg tekst med valgmuligheden Alle",
@@ -368,6 +371,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     rowCount: "Antal rækker",
     columnLayout: "Kolonnelayout",
+    transposeData: "Transponere rækker til kolonner",
     addRowLocation: "Tilføj række knapplacering",
     addRowText: "Tilføj række knaptekst",
     removeRowText: "Fjern række knaptekst",
@@ -446,6 +450,10 @@ export var danishStrings = {
     },
     question: {
       page: "Overordnet side"
+    },
+    panel: {
+      page: "Overordnet side",
+      indent: "Tilføj ydre indrykninger"
     },
     showTimerPanel: "Vis tidspanel",
     showTimerPanelMode: "Vis tidspanel tilstand",
@@ -617,7 +625,11 @@ export var danishStrings = {
       templateTitle: "Skabelon titel",
       totals: "Totaler",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celle tekster",
@@ -634,9 +646,6 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     indent: "Tilføj indrykninger",
-    panel: {
-      indent: "Tilføj ydre indrykninger"
-    },
     innerIndent: "Tilføj indre indrykninger",
     defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
     defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",
@@ -749,6 +758,9 @@ export var danishStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Når spørgsmålet eller dets panel/side bliver skjult",
+    contain: "Indeholde",
+    cover: "Dække",
+    fill: "Fylde",
     clearInvisibleValues: {
       none: "Aldrig"
     },
@@ -1038,8 +1050,8 @@ export var danishStrings = {
     "--primary-foreground": "Primær forgrundsfarve",
     "--foreground": "Forgrundsfarve",
     "--base-unit": "Basisenhed",
+    advancedMode: "Avanceret tilstand",
     groupGeneral: "Generel",
-    groupAdvanced: "Avanceret",
     groupHeader: "Header",
     groupBackground: "Baggrund",
     groupAppearance: "Udseende",
@@ -1068,11 +1080,9 @@ export var danishStrings = {
     backgroundImageAttachmentScroll: "Rulle",
     panelBackgroundTransparency: "Opacitet af panelets baggrund",
     questionBackgroundTransparency: "Spørgsmål baggrundsuigennemsigtighed",
-    questionPanel: "Panelbaggrund og hjørneradius",
     questionTitle: "Skrifttype for spørgsmålstitel",
-    questionDescription: "Skrifttype til beskrivelse af spørgsmål",
     editorPanel: "Input element",
-    editorFont: "Skrifttype for inputelement",
+    backgroundCornerRadius: "Baggrund og hjørneradius",
     backcolor: "Standard baggrund",
     hovercolor: "Hold markøren over baggrunden",
     borderDecoration: "Kant dekoration",
@@ -1080,7 +1090,9 @@ export var danishStrings = {
     accentForeground: "Accent forgrund",
     primaryForecolor: "Standardfarve",
     primaryForecolorLight: "Deaktiveret farve",
-    linesColors: "Mindre stregfarver",
+    colorsTitle: "Farver",
+    font: "Skrifttype",
+    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lighter",
     fontFamily: "Skrifttypefamilie",
@@ -1097,7 +1109,8 @@ export var danishStrings = {
     surveyTitle: "Skrifttype for undersøgelsestitel",
     surveyDescription: "Skrifttype til undersøgelsesbeskrivelse",
     pageTitle: "Sidetitel skrifttype",
-    pageDescription: "Sidebeskrivelse skrifttype",
+    titleFont: "Titel skrifttype",
+    descriptionFont: "Beskrivelse skrifttype",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Tilføj skyggeeffekt",
@@ -1106,8 +1119,7 @@ export var danishStrings = {
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråbe",
     boxShadowInner: "Indre",
-    questionShadow: "Skyggeeffekter",
-    editorShadow: "Skyggeeffekter for inputelement",
+    shadow: "Skyggeeffekter",
     headerView: "Udsigt",
     headerViewBasic: "Grundlæggende",
     headerViewAdvanced: "Avanceret",
@@ -1923,3 +1935,24 @@ editorLocalization.locales["da"] = danishStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til indstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning af indlæste valgmuligheder"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Undgå dublerede svar i rækker"
+// theme.advancedMode: "Advanced mode" => "Avanceret tilstand"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Baggrund og hjørneradius"
+// theme.colorsTitle: "Colors" => "Farver"
+// theme.font: "Font" => "Skrifttype"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Titel skrifttype"
+// theme.descriptionFont: "Description font" => "Beskrivelse skrifttype"
+// theme.shadow: "Shadow effects" => "Skyggeeffekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Oversæt fra: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillad indstillingen Afvis at svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillad indstillingen Ved ikke"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillad indstillingen Afvis at svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillad indstillingen Ved ikke"
+// pv.contain: "Contain" => "Indeholde"
+// pv.cover: "Cover" => "Dække"
+// pv.fill: "Fill" => "Fylde"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rækker til kolonner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

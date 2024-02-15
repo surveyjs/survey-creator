@@ -10,7 +10,7 @@ import {
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   PageAdorner,
   SurveyHelper,
   toggleHovered
@@ -19,7 +19,7 @@ import React from "react";
 import { ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   survey: SurveyModel;
   page: PageModel;
 }

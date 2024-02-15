@@ -49,9 +49,9 @@ export var skStrings = {
     settings: "Nastavenia prieskumu",
     settingsTooltip: "Otvoriť nastavenia prieskumu",
     surveySettings: "Nastavenia prieskumu",
-    surveySettingsTooltip: "Otvorenie nastavení prieskumu",
+    surveySettingsTooltip: "Nastavenia prieskumu",
     themeSettings: "Nastavenia motívu",
-    themeSettingsTooltip: "Otvorenie nastavení motívu",
+    themeSettingsTooltip: "Nastavenia motívu",
     showPanel: "Zobraziť panel",
     hidePanel: "Skryť panel",
     prevSelected: "Výber predchádzajúceho",
@@ -142,6 +142,7 @@ export var skStrings = {
     translationExportToSCVButton: "Exportovať do CSV",
     translationImportFromSCVButton: "Importovať z CSV",
     translateUsigAI: "Automatický preklad všetkého",
+    translateUsigAIFrom: "Preložiť z: ",
     translationDialogTitle: "Nepreložené reťazce",
     translationMergeLocaleWithDefault: "Zlúčiť {0} s predvoleným miestnym nastavením",
     translationPlaceHolder: "Preklad...",
@@ -339,6 +340,8 @@ export var skStrings = {
     showOtherItem: "Obsahuje inú položku",
     otherText: "Text inej položky",
     showNoneItem: "Neobsahuje žiadnu položku",
+    showRefuseItem: "Povoliť možnosť Odmietnuť odpovedať",
+    showDontKnowItem: "Povoliť možnosť Neviem",
     noneText: "Text pri žiadnej položke",
     showSelectAllItem: "Obsahuje vybraté všetky položky",
     selectAllText: "Text pri výbere všetkých položiek",
@@ -368,6 +371,7 @@ export var skStrings = {
     imageWidth: "Šírka obrázka",
     rowCount: "Počet riadkov",
     columnLayout: "Rozloženie stĺpcov",
+    transposeData: "Transponovanie riadkov do stĺpcov",
     addRowLocation: "Poloha tlačidla na pridanie riadka",
     addRowText: "Text tlačidla na pridanie riadka",
     removeRowText: "Text tlačidla na odstránenie riadka",
@@ -446,6 +450,10 @@ export var skStrings = {
     },
     question: {
       page: "Nadradená stránka"
+    },
+    panel: {
+      page: "Nadradená stránka",
+      indent: "Pridanie vonkajších zarážok"
     },
     showTimerPanel: "Zobraziť panel s časovačom",
     showTimerPanelMode: "Zobraziť režim panela s časovačom",
@@ -617,7 +625,11 @@ export var skStrings = {
       templateTitle: "Titul šablóny",
       totals: "Celkové hodnoty",
       logic: "Logický výraz",
-      layout: "Rozloženie",
+      layout: {
+        panel: "Rozloženie",
+        question: "Rozloženie",
+        base: "Rozloženie"
+      },
       data: "Údaje",
       validation: "Overenie",
       cells: "Bunky",
@@ -634,9 +646,6 @@ export var skStrings = {
     columnsEnableIf: "Stĺpce sú viditeľné, ak",
     rowsEnableIf: "Riadky sú viditeľné, ak",
     indent: "Pridanie zarážok",
-    panel: {
-      indent: "Pridanie vonkajších zarážok"
-    },
     innerIndent: "Pridanie vnútorných zarážok",
     defaultValueFromLastRow: "Prevzatie predvolených hodnôt z posledného riadka",
     defaultValueFromLastPanel: "Prevzatie predvolených hodnôt z posledného panela",
@@ -749,6 +758,9 @@ export var skStrings = {
     onComplete: "pri dokončení",
     onHidden: "pri skrytí",
     onHiddenContainer: "Keď sa otázka alebo jej panel/stránka skryje",
+    contain: "Obsahovať",
+    cover: "Prikryť",
+    fill: "Vyplniť",
     clearInvisibleValues: {
       none: "Nikdy"
     },
@@ -1038,8 +1050,8 @@ export var skStrings = {
     "--primary-foreground": "Primárna farba popredia",
     "--foreground": "Farba popredia",
     "--base-unit": "Základná jednotka",
+    advancedMode: "Rozšírený režim",
     groupGeneral: "Všeobecné",
-    groupAdvanced: "Pokročilý",
     groupHeader: "Hlavička",
     groupBackground: "Pozadie",
     groupAppearance: "Vzhľad",
@@ -1068,11 +1080,9 @@ export var skStrings = {
     backgroundImageAttachmentScroll: "Zvitok",
     panelBackgroundTransparency: "Nepriehľadnosť pozadia panela",
     questionBackgroundTransparency: "Nepriehľadnosť pozadia otázky",
-    questionPanel: "Pozadie panela a polomer rohov",
     questionTitle: "Písmo názvu otázky",
-    questionDescription: "Písmo popisu otázky",
     editorPanel: "Vstupný prvok",
-    editorFont: "Písmo vstupného prvku",
+    backgroundCornerRadius: "Pozadie a polomer rohov",
     backcolor: "Predvolené pozadie",
     hovercolor: "Ukázanie na pozadie",
     borderDecoration: "Dekorácia okrajov",
@@ -1080,7 +1090,9 @@ export var skStrings = {
     accentForeground: "Zvýraznenie v popredí",
     primaryForecolor: "Predvolená farba",
     primaryForecolorLight: "Zakázaná farba",
-    linesColors: "Vedľajšie farby čiar",
+    colorsTitle: "Farby",
+    font: "Písmo",
+    lines: "Riadky",
     borderDefault: "Tmavšie",
     borderLight: "Zapaľovač",
     fontFamily: "Skupina písiem",
@@ -1097,7 +1109,8 @@ export var skStrings = {
     surveyTitle: "Písmo názvu prieskumu",
     surveyDescription: "Písmo popisu prieskumu",
     pageTitle: "Písmo názvu stránky",
-    pageDescription: "Písmo popisu stránky",
+    titleFont: "Písmo názvu",
+    descriptionFont: "Popisné písmo",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Pridanie efektu tieňa",
@@ -1106,8 +1119,7 @@ export var skStrings = {
     boxShadowSpread: "Nátierka",
     boxShadowDrop: "Kvapka",
     boxShadowInner: "Vnútorný",
-    questionShadow: "Efekty tieňov",
-    editorShadow: "Efekty tieňov vstupného prvku",
+    shadow: "Efekty tieňov",
     headerView: "Pohľad",
     headerViewBasic: "Základný",
     headerViewAdvanced: "Pokročilý",
@@ -1691,3 +1703,24 @@ editorLocalization.locales["sk"] = skStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Prejdite na nastavenia"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ukážka načítaných možností výberu"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Zabráňte duplicitným odpovediam v riadkoch"
+// theme.advancedMode: "Advanced mode" => "Rozšírený režim"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Pozadie a polomer rohov"
+// theme.colorsTitle: "Colors" => "Farby"
+// theme.font: "Font" => "Písmo"
+// theme.lines: "Lines" => "Riadky"
+// theme.titleFont: "Title font" => "Písmo názvu"
+// theme.descriptionFont: "Description font" => "Popisné písmo"
+// theme.shadow: "Shadow effects" => "Efekty tieňov"
+// ed.translateUsigAIFrom: "Translate from: " => "Preložiť z: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Povoliť možnosť Odmietnuť odpovedať"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Povoliť možnosť Neviem"
+// pv.contain: "Contain" => "Obsahovať"
+// pv.cover: "Cover" => "Prikryť"
+// pv.fill: "Fill" => "Vyplniť"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponovanie riadkov do stĺpcov"
+// layout.panel: "Layout" => "Rozloženie"
+// layout.question: "Layout" => "Rozloženie"
+// layout.base: "Layout" => "Rozloženie"

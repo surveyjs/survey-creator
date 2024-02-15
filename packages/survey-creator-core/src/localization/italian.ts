@@ -49,9 +49,9 @@ var italianTranslation = {
     settings: "Impostazioni sondaggio",
     settingsTooltip: "Apri le impostazioni del sondaggio",
     surveySettings: "Impostazioni del sondaggio",
-    surveySettingsTooltip: "Apri le impostazioni del sondaggio",
+    surveySettingsTooltip: "Impostazioni dell'indagine",
     themeSettings: "Impostazioni del tema",
-    themeSettingsTooltip: "Apri le impostazioni del tema",
+    themeSettingsTooltip: "Impostazioni del tema",
     showPanel: "Mostra Pannello",
     hidePanel: "Nascondi Pannello",
     prevSelected: "Seleziona precedente",
@@ -142,6 +142,7 @@ var italianTranslation = {
     translationExportToSCVButton: "Esporta in CSV",
     translationImportFromSCVButton: "Importa da CSV",
     translateUsigAI: "Traduzione automatica di tutto",
+    translateUsigAIFrom: "Traduci da: ",
     translationDialogTitle: "Stringhe non tradotte",
     translationMergeLocaleWithDefault: "Unisci {0} con il predefinito",
     translationPlaceHolder: "Traduzione...",
@@ -339,6 +340,8 @@ var italianTranslation = {
     showOtherItem: "Consenti l'opzione Altro",
     otherText: "Testo dell'opzione Altro",
     showNoneItem: "Consenti l'opzione Nessuno",
+    showRefuseItem: "Consenti l'opzione Rifiuta di rispondere",
+    showDontKnowItem: "Consenti l'opzione Non so",
     noneText: "Testo dell'opzione Nessuno",
     showSelectAllItem: "Consenti l'opzione Seleziona tutti",
     selectAllText: "Testo dell'opzione Seleziona tutti",
@@ -368,6 +371,7 @@ var italianTranslation = {
     imageWidth: "Larghezza immagine",
     rowCount: "Numero delle righe",
     columnLayout: "Layout delle colonne",
+    transposeData: "Trasponi righe in colonne",
     addRowLocation: "Posizione del tasto Aggiungi riga",
     addRowText: "Testo del tasto per aggiungere una nuova riga",
     removeRowText: "Testo del tasto per eliminare una riga",
@@ -446,6 +450,10 @@ var italianTranslation = {
     },
     question: {
       page: "Pagina principale"
+    },
+    panel: {
+      page: "Pagina principale",
+      indent: "Aggiungi rientri esterni"
     },
     showTimerPanel: "Visualizzazione pannello timer",
     showTimerPanelMode: "Modalità visualizzazione pannello timer",
@@ -617,7 +625,11 @@ var italianTranslation = {
       templateTitle: "Template titolo",
       totals: "Totale",
       logic: "Logica",
-      layout: "Layout",
+      layout: {
+        panel: "Impaginazione",
+        question: "Impaginazione",
+        base: "Impaginazione"
+      },
       data: "Dati",
       validation: "Validazione",
       cells: "Testi Cella",
@@ -634,9 +646,6 @@ var italianTranslation = {
     columnsEnableIf: "Colonne visibili se",
     rowsEnableIf: "Righe visibili se",
     indent: "Aggiungi rientri",
-    panel: {
-      indent: "Aggiungi rientri esterni"
-    },
     innerIndent: "Aggiungi rientri interni",
     defaultValueFromLastRow: "Prendi i valori predefiniti dall'ultima riga",
     defaultValueFromLastPanel: "Prendi i valori predefiniti dall'ultimo pannello",
@@ -749,6 +758,9 @@ var italianTranslation = {
     onComplete: "Al termine del sondaggio",
     onHidden: "Quando la domanda diventa nascosta",
     onHiddenContainer: "Quando la domanda, o il suo pannello/pagina, diventa nascosta",
+    contain: "Contenere",
+    cover: "Coprire",
+    fill: "Riempire",
     clearInvisibleValues: {
       none: "Mai"
     },
@@ -1038,8 +1050,8 @@ var italianTranslation = {
     "--primary-foreground": "Colore di primo piano primario",
     "--foreground": "Colore di primo piano",
     "--base-unit": "Unità base",
+    advancedMode: "Modalità avanzata",
     groupGeneral: "Generale",
-    groupAdvanced: "Avanzato",
     groupHeader: "Intestazione",
     groupBackground: "Sfondo",
     groupAppearance: "Apparenza",
@@ -1068,11 +1080,9 @@ var italianTranslation = {
     backgroundImageAttachmentScroll: "Scorrere",
     panelBackgroundTransparency: "Opacità dello sfondo del pannello",
     questionBackgroundTransparency: "Opacità dello sfondo della domanda",
-    questionPanel: "Sfondo del pannello e raggio d'angolo",
     questionTitle: "Tipo di carattere del titolo della domanda",
-    questionDescription: "Carattere della descrizione della domanda",
     editorPanel: "Elemento di input",
-    editorFont: "Tipo di carattere dell'elemento di input",
+    backgroundCornerRadius: "Sfondo e raggio d'angolo",
     backcolor: "Sfondo predefinito",
     hovercolor: "Sfondo al passaggio del mouse",
     borderDecoration: "Decorazione del bordo",
@@ -1080,7 +1090,9 @@ var italianTranslation = {
     accentForeground: "Primo piano in primo piano",
     primaryForecolor: "Colore predefinito",
     primaryForecolorLight: "Colore disabilitato",
-    linesColors: "Colori di linea secondari",
+    colorsTitle: "Colori",
+    font: "Font",
+    lines: "Poema",
     borderDefault: "Scuro",
     borderLight: "Accendino",
     fontFamily: "Famiglia di caratteri",
@@ -1097,7 +1109,8 @@ var italianTranslation = {
     surveyTitle: "Carattere del titolo del sondaggio",
     surveyDescription: "Carattere della descrizione dell'indagine",
     pageTitle: "Carattere del titolo della pagina",
-    pageDescription: "Carattere della descrizione della pagina",
+    titleFont: "Carattere del titolo",
+    descriptionFont: "Carattere di descrizione",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Aggiungi effetto ombra",
@@ -1106,8 +1119,7 @@ var italianTranslation = {
     boxShadowSpread: "Diffusione",
     boxShadowDrop: "Goccia",
     boxShadowInner: "Interno",
-    questionShadow: "Effetti ombra",
-    editorShadow: "Effetti di ombreggiatura dell'elemento di input",
+    shadow: "Effetti ombra",
     headerView: "Vista",
     headerViewBasic: "Basico",
     headerViewAdvanced: "Avanzato",
@@ -1496,3 +1508,24 @@ editorLocalization.locales["it"] = italianTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Vai alle impostazioni"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Anteprima delle opzioni di scelta caricate"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Impedisci risposte duplicate nelle righe"
+// theme.advancedMode: "Advanced mode" => "Modalità avanzata"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Sfondo e raggio d'angolo"
+// theme.colorsTitle: "Colors" => "Colori"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Poema"
+// theme.titleFont: "Title font" => "Carattere del titolo"
+// theme.descriptionFont: "Description font" => "Carattere di descrizione"
+// theme.shadow: "Shadow effects" => "Effetti ombra"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduci da: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Consenti l'opzione Rifiuta di rispondere"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Consenti l'opzione Non so"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Consenti l'opzione Rifiuta di rispondere"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Consenti l'opzione Non so"
+// pv.contain: "Contain" => "Contenere"
+// pv.cover: "Cover" => "Coprire"
+// pv.fill: "Fill" => "Riempire"
+
+// pe.transposeData: "Transpose rows to columns" => "Trasponi righe in colonne"
+// layout.panel: "Layout" => "Impaginazione"
+// layout.question: "Layout" => "Impaginazione"
+// layout.base: "Layout" => "Impaginazione"

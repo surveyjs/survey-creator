@@ -31,12 +31,12 @@
 </template>
 <script lang="ts" setup>
 import type {
-  CreatorBase,
+  SurveyCreatorModel,
   IQuestionToolboxItem,
   ToolboxToolViewModel,
 } from "survey-creator-core";
 defineProps<{
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   item: IQuestionToolboxItem;
   isCompact: boolean;
   viewModel: ToolboxToolViewModel;

@@ -49,9 +49,9 @@ export var ruStrings = {
     settings: "Настройки опросника",
     settingsTooltip: "Открыть настройки",
     surveySettings: "Настройки опроса",
-    surveySettingsTooltip: "Откройте настройки опроса",
+    surveySettingsTooltip: "Настройки съемки",
     themeSettings: "Настройки темы",
-    themeSettingsTooltip: "Откройте настройки темы",
+    themeSettingsTooltip: "Настройки темы",
     showPanel: "Панель «Показать»",
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
@@ -142,6 +142,7 @@ export var ruStrings = {
     translationExportToSCVButton: "Экспорт в CSV",
     translationImportFromSCVButton: "Импорт из CSV",
     translateUsigAI: "Автоматический перевод всех",
+    translateUsigAIFrom: "Перевести с: ",
     translationDialogTitle: "Непереведенные строки",
     translationMergeLocaleWithDefault: "Объединить {0} с локалью по умолчанию",
     translationPlaceHolder: "Перевод...",
@@ -339,6 +340,8 @@ export var ruStrings = {
     showOtherItem: "Есть пункт 'Другое'",
     otherText: "Текст пункта 'Другое'",
     showNoneItem: "Нет ни одного пункта",
+    showRefuseItem: "Разрешить опцию «Отказаться от ответа»",
+    showDontKnowItem: "Разрешить опцию «Не знаю»",
     noneText: "Текст пункта 'Ничего'",
     showSelectAllItem: "Выбрать все пункты",
     selectAllText: "Текст пункта 'Выбрать все пункты'",
@@ -368,6 +371,7 @@ export var ruStrings = {
     imageWidth: "Ширина изображения",
     rowCount: "Количество строк",
     columnLayout: "Макет столбцов",
+    transposeData: "Транспонирование строк в столбцы",
     addRowLocation: "Добавить расположение кнопки строки",
     addRowText: "Добавить текст кнопки строки",
     removeRowText: "Удалить кнопку строки текста",
@@ -446,6 +450,10 @@ export var ruStrings = {
     },
     question: {
       page: "Родительская страница"
+    },
+    panel: {
+      page: "Родительская страница",
+      indent: "Добавление внешних отступов"
     },
     showTimerPanel: "Показывать панель таймера",
     showTimerPanelMode: "Показывать режим панели таймера",
@@ -617,7 +625,11 @@ export var ruStrings = {
       templateTitle: "Название шаблона",
       totals: "Итоги",
       logic: "Логика",
-      layout: "Планировка",
+      layout: {
+        panel: "Схема",
+        question: "Схема",
+        base: "Схема"
+      },
       data: "Данные",
       validation: "Проверка",
       cells: "Ячейки",
@@ -634,9 +646,6 @@ export var ruStrings = {
     columnsEnableIf: "Столбцы видны, если",
     rowsEnableIf: "Строки видны, если",
     indent: "Добавление отступов",
-    panel: {
-      indent: "Добавление внешних отступов"
-    },
     innerIndent: "Добавление внутренних отступов",
     defaultValueFromLastRow: "Взять значения по умолчанию из последней строки",
     defaultValueFromLastPanel: "Возьмите значения по умолчанию с последней панели",
@@ -749,6 +758,9 @@ export var ruStrings = {
     onComplete: "По завершению",
     onHidden: "По скрытию",
     onHiddenContainer: "Когда вопрос или его панель/страница становятся скрытыми",
+    contain: "Содержать",
+    cover: "Крышка",
+    fill: "Заполнять",
     clearInvisibleValues: {
       none: "Никогда"
     },
@@ -1038,8 +1050,8 @@ export var ruStrings = {
     "--primary-foreground": "Основной цвет переднего плана",
     "--foreground": "Цвет переднего плана",
     "--base-unit": "Базовый блок",
+    advancedMode: "Расширенный режим",
     groupGeneral: "Общее",
-    groupAdvanced: "Продвинутый",
     groupHeader: "Заголовок",
     groupBackground: "Фон",
     groupAppearance: "Внешний вид",
@@ -1068,11 +1080,9 @@ export var ruStrings = {
     backgroundImageAttachmentScroll: "Прокручивать",
     panelBackgroundTransparency: "Непрозрачность фона панели",
     questionBackgroundTransparency: "Непрозрачность фона вопроса",
-    questionPanel: "Фон панели и радиус угла",
     questionTitle: "Шрифт заголовка вопроса",
-    questionDescription: "Шрифт описания вопроса",
     editorPanel: "Элемент ввода",
-    editorFont: "Шрифт элемента ввода",
+    backgroundCornerRadius: "Радиус фона и угла",
     backcolor: "Фон по умолчанию",
     hovercolor: "Фон при наведении курсора",
     borderDecoration: "Оформление бордюра",
@@ -1080,7 +1090,9 @@ export var ruStrings = {
     accentForeground: "Акцент на переднем плане",
     primaryForecolor: "Цвет по умолчанию",
     primaryForecolorLight: "Отключенный цвет",
-    linesColors: "Второстепенные цвета линий",
+    colorsTitle: "Знамя",
+    font: "Шрифт",
+    lines: "Обводы",
     borderDefault: "Темнее",
     borderLight: "Зажигалка",
     fontFamily: "Семейство шрифтов",
@@ -1097,7 +1109,8 @@ export var ruStrings = {
     surveyTitle: "Шрифт заголовка опроса",
     surveyDescription: "Шрифт описания опроса",
     pageTitle: "Шрифт заголовка страницы",
-    pageDescription: "Шрифт описания страницы",
+    titleFont: "Шрифт заголовка",
+    descriptionFont: "Описание шрифта",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавить эффект тени",
@@ -1106,8 +1119,7 @@ export var ruStrings = {
     boxShadowSpread: "Распространение",
     boxShadowDrop: "Капля",
     boxShadowInner: "Внутренний",
-    questionShadow: "Эффекты тени",
-    editorShadow: "Эффекты тени входного элемента",
+    shadow: "Эффекты теней",
     headerView: "Вид",
     headerViewBasic: "Основной",
     headerViewAdvanced: "Продвинутый",
@@ -1798,3 +1810,24 @@ editorLocalization.locales["ru"] = ruStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Перейдите в настройки"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Предварительный просмотр загруженных вариантов выбора"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвращение дублирования ответов в строках"
+// theme.advancedMode: "Advanced mode" => "Расширенный режим"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Радиус фона и угла"
+// theme.colorsTitle: "Colors" => "Знамя"
+// theme.font: "Font" => "Шрифт"
+// theme.lines: "Lines" => "Обводы"
+// theme.titleFont: "Title font" => "Шрифт заголовка"
+// theme.descriptionFont: "Description font" => "Описание шрифта"
+// theme.shadow: "Shadow effects" => "Эффекты теней"
+// ed.translateUsigAIFrom: "Translate from: " => "Перевести с: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешить опцию «Отказаться от ответа»"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешить опцию «Не знаю»"
+// pv.contain: "Contain" => "Содержать"
+// pv.cover: "Cover" => "Крышка"
+// pv.fill: "Fill" => "Заполнять"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспонирование строк в столбцы"
+// layout.panel: "Layout" => "Схема"
+// layout.question: "Layout" => "Схема"
+// layout.base: "Layout" => "Схема"

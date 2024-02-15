@@ -49,9 +49,9 @@ var frenchTranslation = {
     settings: "Configuration du sondage",
     settingsTooltip: "Ouvrir paramètres",
     surveySettings: "Paramètres du sondage",
-    surveySettingsTooltip: "Ouvrir paramètres du sondage",
+    surveySettingsTooltip: "Paramètres de l’enquête",
     themeSettings: "Paramètres du thème",
-    themeSettingsTooltip: "Ouvrir les paramètres du thème",
+    themeSettingsTooltip: "Paramètres du thème",
     showPanel: "Afficher le panneau",
     hidePanel: "Masquer le panneau",
     prevSelected: "Sélectionnez précédent",
@@ -112,7 +112,7 @@ var frenchTranslation = {
     propertyGridFilteredTextPlaceholder: "Tapez pour rechercher...",
     propertyGridNoResultsFound: "Aucun résultat trouvé",
     toolboxGeneralCategory: "Général",
-    toolboxChoiceCategory: "Quesitons à choix",
+    toolboxChoiceCategory: "Questions à choix",
     toolboxTextCategory: "Questions de saisie libre",
     toolboxContainersCategory: "Conteneurs",
     toolboxMatrixCategory: "Questions matricielles",
@@ -142,6 +142,7 @@ var frenchTranslation = {
     translationExportToSCVButton: "Exporter en CSV",
     translationImportFromSCVButton: "Importer d'un CSV",
     translateUsigAI: "Traduire automatiquement tout",
+    translateUsigAIFrom: "Traduction: ",
     translationDialogTitle: "Chaînes non traduites",
     translationMergeLocaleWithDefault: "Fusionner {0} avec langue par défaut",
     translationPlaceHolder: "Traduction...",
@@ -339,6 +340,8 @@ var frenchTranslation = {
     showOtherItem: "Contient choix \"Autre\"",
     otherText: "Texte du choix \"Autre\"",
     showNoneItem: "Contient un choix \"Aucun\"",
+    showRefuseItem: "Autoriser l’option Refuser de répondre",
+    showDontKnowItem: "Autoriser l’option Ne sait pas",
     noneText: "Texte du choix \"Aucun\"",
     showSelectAllItem: "Contient un choix \"Tout sélectionner\"",
     selectAllText: "Texte du choix \"Tout sélectionner\"",
@@ -368,6 +371,7 @@ var frenchTranslation = {
     imageWidth: "Largeur de l'image",
     rowCount: "Nombre de lignes",
     columnLayout: "Inverser les lignes et les colonnes",
+    transposeData: "Transposer des lignes en colonnes",
     addRowLocation: "Emplacement bouton \"Ajouter une ligne\"",
     addRowText: "Texte bouton \"Ajouter une ligne\"",
     removeRowText: "Texte bouton \"Supprimer une ligne\"",
@@ -446,6 +450,10 @@ var frenchTranslation = {
     },
     question: {
       page: "Page parent"
+    },
+    panel: {
+      page: "Page parent",
+      indent: "Ajouter des tabulations externes"
     },
     showTimerPanel: "Afficher le panneau chronomètre",
     showTimerPanelMode: "Mode d'affichage du panneau chronomètre",
@@ -617,7 +625,11 @@ var frenchTranslation = {
       templateTitle: "Titre du modèle",
       totals: "Totaux",
       logic: "Conditions",
-      layout: "Disposition",
+      layout: {
+        panel: "Disposition",
+        question: "Disposition",
+        base: "Disposition"
+      },
       data: "Données",
       validation: "Validateurs",
       cells: "Cellules",
@@ -634,9 +646,6 @@ var frenchTranslation = {
     columnsEnableIf: "Les colonnes sont visibles si",
     rowsEnableIf: "Les lignes sont visibles si",
     indent: "Ajouter des tabulations",
-    panel: {
-      indent: "Ajouter des tabulations externes"
-    },
     innerIndent: "Ajouter des tabulations internes",
     defaultValueFromLastRow: "Prendre les valeurs par défaut de la dernière ligne",
     defaultValueFromLastPanel: "Prendre les valeurs par défaut de la dernière section",
@@ -749,6 +758,9 @@ var frenchTranslation = {
     onComplete: "Quand terminé",
     onHidden: "Quand masqué",
     onHiddenContainer: "Lorsque la question ou sa section/page devient masquée",
+    contain: "Contenir",
+    cover: "Couvrir",
+    fill: "Remplir",
     clearInvisibleValues: {
       none: "Jamais"
     },
@@ -1038,8 +1050,8 @@ var frenchTranslation = {
     "--primary-foreground": "Couleur de premier plan primaire",
     "--foreground": "Couleur de premier plan",
     "--base-unit": "Unité de base",
+    advancedMode: "Mode avancé",
     groupGeneral: "Généralités",
-    groupAdvanced: "Avancé",
     groupHeader: "En-tête",
     groupBackground: "Arrière-plan",
     groupAppearance: "Apparence",
@@ -1068,11 +1080,9 @@ var frenchTranslation = {
     backgroundImageAttachmentScroll: "Défilable",
     panelBackgroundTransparency: "Opacité de l’arrière-plan des sections",
     questionBackgroundTransparency: "Opacité de l’arrière-plan des questions",
-    questionPanel: "Arrière-plan des sections et rayon d’angle",
     questionTitle: "Police du titre de la question",
-    questionDescription: "Police de la description de la question",
     editorPanel: "Champs de réponse",
-    editorFont: "Police des champs de réponse",
+    backgroundCornerRadius: "Arrière-plan et rayon d’angle",
     backcolor: "Arrière-plan par défaut",
     hovercolor: "Arrière-plan du survol",
     borderDecoration: "Décoration de bordure",
@@ -1080,7 +1090,9 @@ var frenchTranslation = {
     accentForeground: "Accentuation du premier plan",
     primaryForecolor: "Couleur par défaut",
     primaryForecolorLight: "Couleur Désactivée",
-    linesColors: "Couleurs des lignes secondaires",
+    colorsTitle: "Couleurs",
+    font: "Police",
+    lines: "Lignes",
     borderDefault: "Sombre",
     borderLight: "Clair",
     fontFamily: "Famille de polices",
@@ -1097,7 +1109,8 @@ var frenchTranslation = {
     surveyTitle: "Police du titre du sondage",
     surveyDescription: "Police de description de l’enquête",
     pageTitle: "Police du titre de la page",
-    pageDescription: "Police de la description de page",
+    titleFont: "Police du titre",
+    descriptionFont: "Police de description",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Ajouter un effet d’ombre",
@@ -1106,8 +1119,7 @@ var frenchTranslation = {
     boxShadowSpread: "Propagation",
     boxShadowDrop: "Extérieur",
     boxShadowInner: "Intérieur",
-    questionShadow: "Effets d’ombre",
-    editorShadow: "Effets d’ombre du champ de réponse",
+    shadow: "Effets d’ombre",
     headerView: "Vue",
     headerViewBasic: "Basique",
     headerViewAdvanced: "Avancé",
@@ -1798,3 +1810,24 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Accédez aux paramètres"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Aperçu des options de choix chargées"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Éviter les réponses dupliquées dans les lignes"
+// theme.advancedMode: "Advanced mode" => "Mode avancé"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Arrière-plan et rayon d’angle"
+// theme.colorsTitle: "Colors" => "Couleurs"
+// theme.font: "Font" => "Police"
+// theme.lines: "Lines" => "Lignes"
+// theme.titleFont: "Title font" => "Police du titre"
+// theme.descriptionFont: "Description font" => "Police de description"
+// theme.shadow: "Shadow effects" => "Effets d’ombre"
+// ed.translateUsigAIFrom: "Translate from: " => "Traduction: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Autoriser l’option Refuser de répondre"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Autoriser l’option Ne sait pas"
+// pv.contain: "Contain" => "Contenir"
+// pv.cover: "Cover" => "Couvrir"
+// pv.fill: "Fill" => "Remplir"
+
+// pe.transposeData: "Transpose rows to columns" => "Transposer des lignes en colonnes"
+// layout.panel: "Layout" => "Disposition"
+// layout.question: "Layout" => "Disposition"
+// layout.base: "Layout" => "Disposition"

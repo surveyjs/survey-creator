@@ -36,21 +36,24 @@
 
     <!-- ko if: !koIsEmptyElement() && showAddQuestionButton -->
     <div class="svc-panel__add-new-question-container">
-      <div class="svc-panel__add-new-question svc-action-button"
-        data-bind="click: addNewQuestion, key2click, clickBubble: false">
-        <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 24 } } -->
+      <div class="svc-panel__question-type-selector-popup"><sv-popup
+          params="model: questionTypeSelectorModel.popupModel"></sv-popup></div>
+      <div class="svc-panel__add-new-question-wrapper">
+        <div class="svc-panel__add-new-question svc-action-button"
+          data-bind="click: addNewQuestion, key2click, clickBubble: false">
+          <!-- ko component: { name: 'sv-svg-icon', params: { css: 'svc-panel__add-new-question-icon', iconName: 'icon-add_24x24', size: 24 } } -->
+          <!-- /ko -->
+          <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
+          </span>
+        </div>
+        <!-- ko with: questionTypeSelectorModel -->
+        <button type="button"
+          data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
+          class="svc-panel__question-type-selector">
+          <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
+        </button>
         <!-- /ko -->
-        <span class="svc-text svc-text--normal svc-text--bold" data-bind="text: $data.addNewQuestionText">
-        </span>
       </div>
-      <!-- ko with: questionTypeSelectorModel -->
-      <button type="button"
-        data-bind="click: action, key2click, clickBubble: false, attr: { title: $data.addNewQuestionText }"
-        class="svc-panel__question-type-selector">
-        <sv-svg-icon class="svc-panel__question-type-selector-icon" params="iconName: iconName, size: 24"></sv-svg-icon>
-        <sv-popup params="model: popupModel"></sv-popup>
-      </button>
-      <!-- /ko -->
     </div>
     <!-- /ko -->
 

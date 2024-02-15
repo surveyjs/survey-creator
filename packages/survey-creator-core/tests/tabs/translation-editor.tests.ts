@@ -1,5 +1,5 @@
-import { SurveyModel } from "survey-core";
-import { Translation, TranslationItem } from "../../src/components/tabs/translation";
+import { QuestionMatrixDropdownModel, SurveyModel } from "survey-core";
+import { Translation, TranslationEditor, TranslationItem } from "../../src/components/tabs/translation";
 import "survey-core/survey.i18n";
 import { EmptySurveyCreatorOptions } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -249,4 +249,165 @@ test("Show Edit action only if doMachineTranslation is set", () => {
   expect(actions).toHaveLength(2);
   expect(actions[0].iconName).toBe("icon-language");
   expect(actions[1].iconName).toBe("icon-delete");
+});
+test("Machine translation from non default locale - UI", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: { de: "de: title", fr: "fr: title" },
+            description: { de: "de: title" }
+          },
+          {
+            type: "text",
+            name: "q2",
+            title: { default: "title", es: "es: title" },
+            description: { default: "en: title" }
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+  });
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  const editor: TranslationEditor = tabTranslation.model.createTranslationEditor("es");
+  expect(editor.fromLocales).toHaveLength(2);
+  const actions = editor.translation.stringsSurvey.navigationBar.actions;
+  expect(actions).toHaveLength(4);
+
+  expect(editor.translation.root.allLocItems).toHaveLength(3);
+  expect(editor.translation.getVisibleLocales()).toHaveLength(1);
+  let matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[1].name).toBe("es");
+
+  editor.setFromLocale("de");
+  expect(editor.translation.getVisibleLocales()).toHaveLength(1);
+  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  expect(matrix.columns).toHaveLength(3);
+  expect(matrix.columns[1].name).toBe("de");
+  expect(matrix.columns[2].name).toBe("es");
+
+  editor.setFromLocale("fr");
+  expect(editor.translation.getVisibleLocales()).toHaveLength(1);
+  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  expect(matrix.columns).toHaveLength(3);
+  expect(matrix.columns[1].name).toBe("fr");
+  expect(matrix.columns[2].name).toBe("es");
+
+  editor.setFromLocale("");
+  expect(editor.translation.getVisibleLocales()).toHaveLength(1);
+  matrix = editor.translation.stringsSurvey.getAllQuestions()[1];
+  expect(matrix.columns).toHaveLength(2);
+  expect(matrix.columns[1].name).toBe("es");
+});
+test("Machine translation from non default locale - onMachineTranslate", () => {
+  const creator = new CreatorTester();
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: { de: "de: title", fr: "fr: title" },
+            description: { de: "de: desc" }
+          },
+          {
+            type: "text",
+            name: "q2",
+            title: { default: "title", es: "es: title" },
+            description: { default: "en: title" }
+          }
+        ]
+      }
+    ]
+  };
+  let fromLocale = "";
+  let fromStrings: any;
+  creator.onMachineTranslate.add((sender, options) => {
+    const translatedStrings = new Array<string>();
+    fromLocale = options.fromLocale;
+    fromStrings = options.strings;
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  const createEditor = (): TranslationEditor => {
+    creator.JSON = json;
+    const tabTranslation = new TabTranslationPlugin(creator);
+    tabTranslation.activate();
+    return tabTranslation.model.createTranslationEditor("es");
+  };
+  let editor = createEditor();
+  editor.doMachineTranslation();
+  expect(fromLocale).toBe("en");
+  expect(fromStrings).toStrictEqual(["q1", "en: title"]);
+
+  editor = createEditor();
+  editor.setFromLocale("fr");
+  editor.doMachineTranslation();
+  expect(fromLocale).toBe("fr");
+  expect(fromStrings).toStrictEqual(["fr: title"]);
+
+  editor = createEditor();
+  editor.setFromLocale("de");
+  editor.doMachineTranslation();
+  expect(fromLocale).toBe("de");
+  expect(fromStrings).toStrictEqual(["de: title", "de: desc"]);
+});
+test("Machine translation and cancel", () => {
+  const creator = new CreatorTester();
+  const json = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1",
+            title: "Title 1",
+          }
+        ]
+      }
+    ]
+  };
+  creator.onMachineTranslate.add((sender, options) => {
+    const translatedStrings = new Array<string>();
+    options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+    options.callback(translatedStrings);
+  });
+  creator.JSON = json;
+  const q = creator.survey.getQuestionByName("q1");
+  const tabTranslation = new TabTranslationPlugin(creator);
+  tabTranslation.activate();
+  let editor = tabTranslation.model.createTranslationEditor("de");
+  editor.doMachineTranslation();
+  editor.cancel();
+  expect(q.locTitle.getJson()).toStrictEqual("Title 1");
+  editor = tabTranslation.model.createTranslationEditor("de");
+  editor.doMachineTranslation();
+  editor.apply();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
+  editor = tabTranslation.model.createTranslationEditor("fr");
+  editor.doMachineTranslation();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
+  editor.cancel();
+  expect(q.locTitle.getJson()).toStrictEqual({
+    default: "Title 1",
+    de: "de: Title 1"
+  });
 });

@@ -49,9 +49,9 @@ export var msStrings = {
     settings: "Tetapan Tinjauan",
     settingsTooltip: "Buka tetapan tinjauan",
     surveySettings: "Seting Tinjauan",
-    surveySettingsTooltip: "Buka seting tinjauan",
+    surveySettingsTooltip: "Seting tinjauan",
     themeSettings: "Seting Tema",
-    themeSettingsTooltip: "Buka seting tema",
+    themeSettingsTooltip: "Seting tema",
     showPanel: "Tunjukkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -142,6 +142,7 @@ export var msStrings = {
     translationExportToSCVButton: "Eksport kepada CSV",
     translationImportFromSCVButton: "Import daripada CSV",
     translateUsigAI: "Terjemahkan Secara automatik Semua",
+    translateUsigAIFrom: "Terjemah daripada: ",
     translationDialogTitle: "Rentetan tidak diterjemahkan",
     translationMergeLocaleWithDefault: "Gabung {0} dengan tempatan lalai",
     translationPlaceHolder: "Penterjemahan...",
@@ -339,6 +340,8 @@ export var msStrings = {
     showOtherItem: "Ada item lain",
     otherText: "Teks item lain",
     showNoneItem: "Tiada item",
+    showRefuseItem: "Benarkan pilihan Enggan Menjawab",
+    showDontKnowItem: "Benarkan pilihan Jangan Tahu",
     noneText: "Tiada teks item",
     showSelectAllItem: "Telah pilih semua item",
     selectAllText: "Pilih semua teks item",
@@ -368,6 +371,7 @@ export var msStrings = {
     imageWidth: "Lebar imej",
     rowCount: "Kiraan baris",
     columnLayout: "Tataletak lajur",
+    transposeData: "Mengubah urutan baris kepada lajur",
     addRowLocation: "Tambahkan lokasi butang baris",
     addRowText: "Tambahkan teks butang baris",
     removeRowText: "Alih keluar teks butang baris",
@@ -446,6 +450,10 @@ export var msStrings = {
     },
     question: {
       page: "Halaman induk"
+    },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambah inden luaran"
     },
     showTimerPanel: "Tunjukkan panel pemasa",
     showTimerPanelMode: "Tunjukkan mod panel pemasa",
@@ -617,7 +625,11 @@ export var msStrings = {
       templateTitle: "Tajuk templat",
       totals: "Jumlah",
       logic: "Logik",
-      layout: "Tataletak",
+      layout: {
+        panel: "Susun atur",
+        question: "Susun atur",
+        base: "Susun atur"
+      },
       data: "Data",
       validation: "Pengesahan",
       cells: "Sel",
@@ -634,9 +646,6 @@ export var msStrings = {
     columnsEnableIf: "Lajur kelihatan jika",
     rowsEnableIf: "Baris boleh dilihat jika",
     indent: "Menambah inden",
-    panel: {
-      indent: "Menambah inden luaran"
-    },
     innerIndent: "Menambah inden dalaman",
     defaultValueFromLastRow: "Mengambil nilai lalai daripada baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai lalai daripada panel terakhir",
@@ -749,6 +758,9 @@ export var msStrings = {
     onComplete: "Pada selesai",
     onHidden: "Pada tersembunyi",
     onHiddenContainer: "Apabila soalan atau panel/halamannya menjadi tersembunyi",
+    contain: "Mengandungi",
+    cover: "Perlindungan",
+    fill: "Mengisi",
     clearInvisibleValues: {
       none: "Tidak pernah"
     },
@@ -1038,8 +1050,8 @@ export var msStrings = {
     "--primary-foreground": "Warna latar depan utama",
     "--foreground": "Warna latar depan",
     "--base-unit": "Unit asas",
+    advancedMode: "Mod lanjutan",
     groupGeneral: "Umum",
-    groupAdvanced: "Lanjutan",
     groupHeader: "Pengepala",
     groupBackground: "Latar belakang",
     groupAppearance: "Penampilan",
@@ -1068,11 +1080,9 @@ export var msStrings = {
     backgroundImageAttachmentScroll: "Tatal",
     panelBackgroundTransparency: "Kelegapan latar belakang panel",
     questionBackgroundTransparency: "Kelegapan latar belakang soalan",
-    questionPanel: "Latar belakang panel dan jejari sudut",
     questionTitle: "Fon tajuk soalan",
-    questionDescription: "Fon perihalan soalan",
     editorPanel: "Unsur input",
-    editorFont: "Fon unsur input",
+    backgroundCornerRadius: "Latar belakang dan jejari sudut",
     backcolor: "Latar belakang lalai",
     hovercolor: "Latarbelakang penuding",
     borderDecoration: "Hiasan sempadan",
@@ -1080,7 +1090,9 @@ export var msStrings = {
     accentForeground: "Aksen latar depan",
     primaryForecolor: "Warna lalai",
     primaryForecolorLight: "Warna dinyahdayakan",
-    linesColors: "Warna garis kecil",
+    colorsTitle: "Warna",
+    font: "Fon",
+    lines: "Garisan",
     borderDefault: "Gelap",
     borderLight: "Lebih ringan",
     fontFamily: "Keluarga fon",
@@ -1097,7 +1109,8 @@ export var msStrings = {
     surveyTitle: "Fon tajuk tinjauan",
     surveyDescription: "Fon perihalan tinjauan",
     pageTitle: "Fon tajuk halaman",
-    pageDescription: "Fon perihalan halaman",
+    titleFont: "Fon tajuk",
+    descriptionFont: "Fon perihalan",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Menambah Kesan Bayang",
@@ -1106,8 +1119,7 @@ export var msStrings = {
     boxShadowSpread: "Penyebaran",
     boxShadowDrop: "Singgah",
     boxShadowInner: "Dalaman",
-    questionShadow: "Kesan bayang",
-    editorShadow: "Kesan bayang unsur input",
+    shadow: "Kesan bayang",
     headerView: "Lihat",
     headerViewBasic: "Asas",
     headerViewAdvanced: "Lanjutan",
@@ -1691,3 +1703,24 @@ editorLocalization.locales["ms"] = msStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Pergi ke seting"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pratonton pilihan pilihan yang dimuatkan"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Mengelakkan respons pendua dalam baris"
+// theme.advancedMode: "Advanced mode" => "Mod lanjutan"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Latar belakang dan jejari sudut"
+// theme.colorsTitle: "Colors" => "Warna"
+// theme.font: "Font" => "Fon"
+// theme.lines: "Lines" => "Garisan"
+// theme.titleFont: "Title font" => "Fon tajuk"
+// theme.descriptionFont: "Description font" => "Fon perihalan"
+// theme.shadow: "Shadow effects" => "Kesan bayang"
+// ed.translateUsigAIFrom: "Translate from: " => "Terjemah daripada: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Benarkan pilihan Enggan Menjawab"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Benarkan pilihan Jangan Tahu"
+// pv.contain: "Contain" => "Mengandungi"
+// pv.cover: "Cover" => "Perlindungan"
+// pv.fill: "Fill" => "Mengisi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris kepada lajur"
+// layout.panel: "Layout" => "Susun atur"
+// layout.question: "Layout" => "Susun atur"
+// layout.base: "Layout" => "Susun atur"

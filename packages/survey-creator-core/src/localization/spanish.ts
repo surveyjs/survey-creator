@@ -49,9 +49,9 @@ var spanishTranslation = {
     settings: "Configuración de la encuesta",
     settingsTooltip: "Configuración de encuesta abierta",
     surveySettings: "Opciones encuesta",
-    surveySettingsTooltip: "Abrir opciones encuesta",
+    surveySettingsTooltip: "Configuración de la encuesta",
     themeSettings: "Configuración del tema",
-    themeSettingsTooltip: "Abrir la configuración del tema",
+    themeSettingsTooltip: "Configuración del tema",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -142,6 +142,7 @@ var spanishTranslation = {
     translationExportToSCVButton: "Exportar a CSV",
     translationImportFromSCVButton: "Importación de CSV",
     translateUsigAI: "Traducir automáticamente todo",
+    translateUsigAIFrom: "Traducir de: ",
     translationDialogTitle: "Cadenas sin traducir",
     translationMergeLocaleWithDefault: "Merge {0} con lugar predeterminado",
     translationPlaceHolder: "Traducción...",
@@ -339,6 +340,8 @@ var spanishTranslation = {
     showOtherItem: "Tiene opción 'Otro'",
     otherText: "Cambiar texto 'Otro'",
     showNoneItem: "Tiene opcion 'Ninguno'",
+    showRefuseItem: "Permitir la opción Negarse a responder",
+    showDontKnowItem: "Permitir la opción No sé",
     noneText: "Cambiar texto 'Ninguno'",
     showSelectAllItem: "Tiene opción 'Selecionar todo'",
     selectAllText: "Cambiar texto de 'Seleccionar todo'",
@@ -368,6 +371,7 @@ var spanishTranslation = {
     imageWidth: "Ancho de la imagen",
     rowCount: "Número de filas",
     columnLayout: "Diseño de columnas",
+    transposeData: "Transponer filas a columnas",
     addRowLocation: "Añadir la ubicación del botón de la fila",
     addRowText: "Añadir texto de botón de fila",
     removeRowText: "Eliminar el texto del botón de fila",
@@ -446,6 +450,10 @@ var spanishTranslation = {
     },
     question: {
       page: "Página padre"
+    },
+    panel: {
+      page: "Página padre",
+      indent: "Añadir indents externos"
     },
     showTimerPanel: "Mostrar panel de temporizador",
     showTimerPanelMode: "Mostrar modo de panel del temporizador",
@@ -617,7 +625,11 @@ var spanishTranslation = {
       templateTitle: "Título de la plantilla",
       totals: "Totales",
       logic: "Lógica",
-      layout: "Diseño",
+      layout: {
+        panel: "Diseño",
+        question: "Diseño",
+        base: "Diseño"
+      },
       data: "Datos",
       validation: "Validación",
       cells: "Células",
@@ -634,9 +646,6 @@ var spanishTranslation = {
     columnsEnableIf: "Columnas son visibles si",
     rowsEnableIf: "Filas son visibles si",
     indent: "Añadir indents",
-    panel: {
-      indent: "Añadir indents externos"
-    },
     innerIndent: "Añadir indents internos",
     defaultValueFromLastRow: "Tomar valores por defecto de la última fila",
     defaultValueFromLastPanel: "Tomar valores por defecto del último panel",
@@ -749,6 +758,9 @@ var spanishTranslation = {
     onComplete: "Al completarse",
     onHidden: "Al ocultarse",
     onHiddenContainer: "Cuando la pregunta o su panel/página se oculta",
+    contain: "Contener",
+    cover: "Cubrir",
+    fill: "Llenar",
     clearInvisibleValues: {
       none: "Nunca"
     },
@@ -1038,8 +1050,8 @@ var spanishTranslation = {
     "--primary-foreground": "Color primario de primer plano",
     "--foreground": "Color de primer plano",
     "--base-unit": "Unidad base",
+    advancedMode: "Modo avanzado",
     groupGeneral: "General",
-    groupAdvanced: "Avanzado",
     groupHeader: "Encabezado",
     groupBackground: "Fondo",
     groupAppearance: "Apariencia",
@@ -1068,11 +1080,9 @@ var spanishTranslation = {
     backgroundImageAttachmentScroll: "Pergamino",
     panelBackgroundTransparency: "Opacidad del fondo del panel",
     questionBackgroundTransparency: "Opacidad de fondo de la pregunta",
-    questionPanel: "Fondo del panel y radio de esquina",
     questionTitle: "Fuente del título de la pregunta",
-    questionDescription: "Fuente de descripción de la pregunta",
     editorPanel: "Elemento de entrada",
-    editorFont: "Fuente del elemento de entrada",
+    backgroundCornerRadius: "Fondo y radio de vértice",
     backcolor: "Fondo predeterminado",
     hovercolor: "Pasar el cursor de fondo",
     borderDecoration: "Decoración de bordes",
@@ -1080,7 +1090,9 @@ var spanishTranslation = {
     accentForeground: "Primer plano de acento",
     primaryForecolor: "Color predeterminado",
     primaryForecolorLight: "Color deshabilitado",
-    linesColors: "Colores de línea menores",
+    colorsTitle: "Colores",
+    font: "Fuente",
+    lines: "Lineas",
     borderDefault: "Oscuro",
     borderLight: "Encendedor",
     fontFamily: "Familia de fuentes",
@@ -1097,7 +1109,8 @@ var spanishTranslation = {
     surveyTitle: "Fuente del título de la encuesta",
     surveyDescription: "Fuente de descripción de la encuesta",
     pageTitle: "Fuente del título de la página",
-    pageDescription: "Fuente de descripción de la página",
+    titleFont: "Fuente del título",
+    descriptionFont: "Fuente descriptiva",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Agregar efecto de sombra",
@@ -1106,8 +1119,7 @@ var spanishTranslation = {
     boxShadowSpread: "Propagación",
     boxShadowDrop: "Soltar",
     boxShadowInner: "Interior",
-    questionShadow: "Efectos de sombra",
-    editorShadow: "Efectos de sombra del elemento de entrada",
+    shadow: "Efectos de sombra",
     headerView: "Vista",
     headerViewBasic: "Básico",
     headerViewAdvanced: "Avanzado",
@@ -1512,3 +1524,24 @@ editorLocalization.locales["es"] = spanishTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ir a la configuración"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vista previa de las opciones de elección cargadas"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Evitar respuestas duplicadas en filas"
+// theme.advancedMode: "Advanced mode" => "Modo avanzado"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Fondo y radio de vértice"
+// theme.colorsTitle: "Colors" => "Colores"
+// theme.font: "Font" => "Fuente"
+// theme.lines: "Lines" => "Lineas"
+// theme.titleFont: "Title font" => "Fuente del título"
+// theme.descriptionFont: "Description font" => "Fuente descriptiva"
+// theme.shadow: "Shadow effects" => "Efectos de sombra"
+// ed.translateUsigAIFrom: "Translate from: " => "Traducir de: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir la opción Negarse a responder"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir la opción No sé"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Permitir la opción Negarse a responder"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Permitir la opción No sé"
+// pv.contain: "Contain" => "Contener"
+// pv.cover: "Cover" => "Cubrir"
+// pv.fill: "Fill" => "Llenar"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponer filas a columnas"
+// layout.panel: "Layout" => "Diseño"
+// layout.question: "Layout" => "Diseño"
+// layout.base: "Layout" => "Diseño"

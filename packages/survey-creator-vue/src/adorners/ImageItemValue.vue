@@ -24,7 +24,7 @@
           <component :is="componentName" v-bind="componentData"></component>
         </div>
         <span
-          v-if="adorner.isDraggable"
+          v-if="adorner.isDraggable && adorner.canRenderControls"
           class="svc-context-button svc-image-item-value-controls__drag-area-indicator"
           @pointerdown="adorner.onPointerDown($event)"
           :title="undefined"
@@ -35,7 +35,7 @@
             :size="24"
           ></sv-svg-icon>
         </span>
-        <div class="svc-context-container svc-image-item-value-controls">
+        <div v-if="adorner.canRenderControls" class="svc-context-container svc-image-item-value-controls">
           <span
             class="svc-context-button"
             @click="adorner.chooseFile(adorner)"
@@ -101,7 +101,7 @@
 import { useCreatorModel } from "@/creator-model";
 import type { ImageItemValue, QuestionImagePickerModel } from "survey-core";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   ImageItemValueWrapperViewModel,
 } from "survey-creator-core";
 import { computed, onMounted, ref } from "vue";
@@ -110,7 +110,7 @@ const props = defineProps<{
   componentName: string;
   componentData: {
     data: {
-      creator: CreatorBase;
+      creator: SurveyCreatorModel;
     };
     question: QuestionImagePickerModel;
     item: ImageItemValue;

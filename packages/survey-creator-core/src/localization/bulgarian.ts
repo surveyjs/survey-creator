@@ -49,9 +49,9 @@ export var bgStrings = {
     settings: "Настройки",
     settingsTooltip: "Отваряне на настройките",
     surveySettings: "Настройки на анкетата",
-    surveySettingsTooltip: "Отваряне настройките на анкетата",
+    surveySettingsTooltip: "Настройки на проучването",
     themeSettings: "Настройки на тема",
-    themeSettingsTooltip: "Отваряне на настройките на тема",
+    themeSettingsTooltip: "Настройки на тема",
     showPanel: "Показване на панела",
     hidePanel: "Скриване на панела",
     prevSelected: "Избиране на предишен",
@@ -142,6 +142,7 @@ export var bgStrings = {
     translationExportToSCVButton: "Експортиране в CSV",
     translationImportFromSCVButton: "Импортиране от CSV",
     translateUsigAI: "Автоматичен превод на всички",
+    translateUsigAIFrom: "Преведи от: ",
     translationDialogTitle: "Непреведени низове",
     translationMergeLocaleWithDefault: "Обединение {0} с локалната стойност по подразбиране",
     translationPlaceHolder: "Превод...",
@@ -339,6 +340,8 @@ export var bgStrings = {
     showOtherItem: "Достъп до опция Друго",
     otherText: "Текст на опция Друго",
     showNoneItem: "Достъп до опция Няма",
+    showRefuseItem: "Разрешаване на опцията \"Отказ на отговор\"",
+    showDontKnowItem: "Разрешаване на опцията \"Не знам\"",
     noneText: "Текст на опция Няма",
     showSelectAllItem: "Достъп до опция Избери всички",
     selectAllText: "Текст на опция Избери всички",
@@ -368,6 +371,7 @@ export var bgStrings = {
     imageWidth: "Широчина на изображението",
     rowCount: "Брой редове",
     columnLayout: "Разположение на колоните",
+    transposeData: "Транспониране на редове в колони",
     addRowLocation: "Добавяне на местоположение на бутона за ред",
     addRowText: "Добавяне на текст на бутона за ред",
     removeRowText: "Премахване на текста на бутона за ред",
@@ -446,6 +450,10 @@ export var bgStrings = {
     },
     question: {
       page: "Родителска страница"
+    },
+    panel: {
+      page: "Родителска страница",
+      indent: "Добавяне на външни отстъпи"
     },
     showTimerPanel: "Местоположение на таймера",
     showTimerPanelMode: "Режим на таймера",
@@ -617,7 +625,11 @@ export var bgStrings = {
       templateTitle: "Шаблон за заглавие",
       totals: "Общо",
       logic: "Логика",
-      layout: "Оформление",
+      layout: {
+        panel: "Оформление",
+        question: "Оформление",
+        base: "Оформление"
+      },
       data: "Данни",
       validation: "Валидиране",
       cells: "Текст в клетката",
@@ -634,9 +646,6 @@ export var bgStrings = {
     columnsEnableIf: "Колоните са видими, ако",
     rowsEnableIf: "Редовете са видими, ако",
     indent: "Добавяне на отстъпи",
-    panel: {
-      indent: "Добавяне на външни отстъпи"
-    },
     innerIndent: "Добавяне на вътрешни отстъпи",
     defaultValueFromLastRow: "Вземане стойностите по подразбиране от последния ред",
     defaultValueFromLastPanel: "Вземане стойностите по подразбиране от последния панел",
@@ -749,6 +758,9 @@ export var bgStrings = {
     onComplete: "Когато анкетата приключи",
     onHidden: "Когато въпросът стане скрит",
     onHiddenContainer: "Когато въпросът или неговият панел/страница се скрият",
+    contain: "Съдържам",
+    cover: "Капак",
+    fill: "Запълване",
     clearInvisibleValues: {
       none: "Никога"
     },
@@ -1038,8 +1050,8 @@ export var bgStrings = {
     "--primary-foreground": "Основен цвят на преден план",
     "--foreground": "Цвят на преден план",
     "--base-unit": "Базова единица",
+    advancedMode: "Разширен режим",
     groupGeneral: "Общ",
-    groupAdvanced: "Разширен",
     groupHeader: "Заглавка",
     groupBackground: "Фон",
     groupAppearance: "Външен вид",
@@ -1068,11 +1080,9 @@ export var bgStrings = {
     backgroundImageAttachmentScroll: "Свитък",
     panelBackgroundTransparency: "Прозрачност на фона на панела",
     questionBackgroundTransparency: "Прозрачност на фона на въпроса",
-    questionPanel: "Панел с въпроси",
     questionTitle: "Шрифт на заглавието на въпроса",
-    questionDescription: "Шрифт на описанието на въпроса",
     editorPanel: "Редактор",
-    editorFont: "Шрифт на редактора",
+    backgroundCornerRadius: "Фон и радиус на ъгъла",
     backcolor: "Фон по подразбиране",
     hovercolor: "Фон под курсора на мишката",
     borderDecoration: "Декорация на контура",
@@ -1080,7 +1090,9 @@ export var bgStrings = {
     accentForeground: "Акцентен преден план",
     primaryForecolor: "Цвят по подразбиране",
     primaryForecolorLight: "Деактивиран цвят",
-    linesColors: "Линии",
+    colorsTitle: "Цветове",
+    font: "Шрифт",
+    lines: "Линии",
     borderDefault: "Преобладаващ",
     borderLight: "Незначителен",
     fontFamily: "Шрифтово семейство",
@@ -1097,7 +1109,8 @@ export var bgStrings = {
     surveyTitle: "Шрифт на заглавието на анкетата",
     surveyDescription: "Шрифт за описание на проучването",
     pageTitle: "Шрифт на заглавието на страницата",
-    pageDescription: "Page Description Font",
+    titleFont: "Шрифт на заглавието",
+    descriptionFont: "Шрифт за описание",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Добавяне на ефект на сянка",
@@ -1106,8 +1119,7 @@ export var bgStrings = {
     boxShadowSpread: "Разпространение",
     boxShadowDrop: "Капка",
     boxShadowInner: "Вътрешен",
-    questionShadow: "Граница на панела с въпроси / Сянка",
-    editorShadow: "Граница на редактора / Сянка",
+    shadow: "Ефекти на сянка",
     headerView: "Изглед",
     headerViewBasic: "Основен",
     headerViewAdvanced: "Напреднал",
@@ -1299,3 +1311,24 @@ editorLocalization.locales["bg"] = bgStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Отидете в настройките"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Визуализация на заредените опции за избор"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Предотвратяване на дублиращи се отговори в редове"
+// theme.advancedMode: "Advanced mode" => "Разширен режим"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Фон и радиус на ъгъла"
+// theme.colorsTitle: "Colors" => "Цветове"
+// theme.font: "Font" => "Шрифт"
+// theme.lines: "Lines" => "Линии"
+// theme.titleFont: "Title font" => "Шрифт на заглавието"
+// theme.descriptionFont: "Description font" => "Шрифт за описание"
+// theme.shadow: "Shadow effects" => "Ефекти на сянка"
+// ed.translateUsigAIFrom: "Translate from: " => "Преведи от: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Разрешаване на опцията \"Отказ на отговор\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Разрешаване на опцията \"Не знам\""
+// pv.contain: "Contain" => "Съдържам"
+// pv.cover: "Cover" => "Капак"
+// pv.fill: "Fill" => "Запълване"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспониране на редове в колони"
+// layout.panel: "Layout" => "Оформление"
+// layout.question: "Layout" => "Оформление"
+// layout.base: "Layout" => "Оформление"

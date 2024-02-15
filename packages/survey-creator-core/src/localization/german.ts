@@ -49,9 +49,9 @@ var germanTranslation = {
     settings: "Umfrageeinstellungen",
     settingsTooltip: "Umfrageeinstellungen öffnen",
     surveySettings: "Umfrage Einstellungen",
-    surveySettingsTooltip: "Umfrage Einstellungen öffnen",
+    surveySettingsTooltip: "Einstellungen für Umfragen",
     themeSettings: "Theme-Einstellungen",
-    themeSettingsTooltip: "Öffnen Sie die Theme-Einstellungen",
+    themeSettingsTooltip: "Theme-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -142,6 +142,7 @@ var germanTranslation = {
     translationExportToSCVButton: "Export (CSV)",
     translationImportFromSCVButton: "Import (CSV)",
     translateUsigAI: "Alle automatisch übersetzen",
+    translateUsigAIFrom: "Sprachrichtung: ",
     translationDialogTitle: "Nicht übersetzte Zeichenketten",
     translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache",
     translationPlaceHolder: "Übersetzung ...",
@@ -339,6 +340,8 @@ var germanTranslation = {
     showOtherItem: "Sonstiges auswählbar?",
     otherText: "Text für Sonstiges",
     showNoneItem: "Alle Elemente abwählbar?",
+    showRefuseItem: "Zulassen der Option \"Antwort ablehnen\"",
+    showDontKnowItem: "Erlauben Sie die Option \"Weiß nicht\"",
     noneText: "Text für die Abwahl aller Elemente",
     showSelectAllItem: "Alle Elemente auswählbar?",
     selectAllText: "Text für die Auswahl aller Elemente",
@@ -368,6 +371,7 @@ var germanTranslation = {
     imageWidth: "Bildbreite",
     rowCount: "Zeilenanzahl",
     columnLayout: "Spaltenlayout",
+    transposeData: "Transponieren von Zeilen in Spalten",
     addRowLocation: "Zeilenknopfposition hinzufügen",
     addRowText: "Zeilenknopftext hinzufügen",
     removeRowText: "Zeilenknopftext löschen",
@@ -446,6 +450,10 @@ var germanTranslation = {
     },
     question: {
       page: "Elternseite"
+    },
+    panel: {
+      page: "Elternseite",
+      indent: "Äußere Einzüge hinzufügen"
     },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",
@@ -617,7 +625,11 @@ var germanTranslation = {
       templateTitle: "Titeltemplate",
       totals: "Summen",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Daten",
       validation: "Validierung",
       cells: "Zellen",
@@ -634,9 +646,6 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sind sichtbar, wenn",
     rowsEnableIf: "Zeilen sind sichtbar, wenn",
     indent: "Einzüge hinzufügen",
-    panel: {
-      indent: "Äußere Einzüge hinzufügen"
-    },
     innerIndent: "Fügen Sie innere Einzüge hinzu",
     defaultValueFromLastRow: "Nehmen Sie Standardwerte aus der letzten Zeile",
     defaultValueFromLastPanel: "Nehmen Sie Standardwerte aus dem letzten Bereich",
@@ -749,6 +758,9 @@ var germanTranslation = {
     onComplete: "Wenn die Umfrage abgeschlossen wurde",
     onHidden: "Wenn die Umfrage versteckt wurde",
     onHiddenContainer: "Wenn die Frage oder ihr Panel/Seite ausgeblendet wird",
+    contain: "Enthalten",
+    cover: "Deckel",
+    fill: "Füllen",
     clearInvisibleValues: {
       none: "Niemals"
     },
@@ -836,7 +848,7 @@ var germanTranslation = {
       dropdown: "Dropdown-Liste"
     },
     rateColorMode: {
-      default: "Vorgabe"
+      default: "Default"
     },
     autoGenerate: {
       "true": "Generieren",
@@ -1038,19 +1050,19 @@ var germanTranslation = {
     "--primary-foreground": "Primäre Vordergrundfarbe",
     "--foreground": "Vordergrundfarbe",
     "--base-unit": "Basiseinheit",
+    advancedMode: "Erweiterter Modus",
     groupGeneral: "Allgemein",
-    groupAdvanced: "Fortgeschritten",
     groupHeader: "Titelzeile",
     groupBackground: "Hintergrund",
-    groupAppearance: "Aussehen",
+    groupAppearance: "Erscheinungsbild",
     themeName: "Thema",
     themeMode: "Erscheinungsbild der Frage",
-    themeModePanels: "Vorgabe",
+    themeModePanels: "Standard",
     themeModeLightweight: "Ohne Paneele",
-    themePaletteLight: "Licht",
+    themePaletteLight: "Hell",
     themePaletteDark: "Dunkel",
     primaryColor: "Akzentfarbe",
-    primaryDefaultColor: "Vorgabe",
+    primaryDefaultColor: "Standard",
     primaryDarkColor: "Schweben",
     primaryLightColor: "Ausgewählt",
     coverTitleForecolor: "Vorfarbe des Titels",
@@ -1059,20 +1071,18 @@ var germanTranslation = {
     backgroundDimColor: "Hintergrundfarbe",
     backgroundImage: "Hintergrundbild",
     backgroundImageFitAuto: "Auto",
-    backgroundImageFitCover: "Deckel",
+    backgroundImageFitCover: "Abdecken",
     backgroundImageFitContain: "Enthalten",
     backgroundImageFitFill: "Strecken",
-    backgroundImageFitTile: "Fliese",
-    backgroundOpacity: "Undurchsichtigkeit",
-    backgroundImageAttachmentFixed: "Fest",
-    backgroundImageAttachmentScroll: "Schriftrolle",
+    backgroundImageFitTile: "Kachel",
+    backgroundOpacity: "Deckkraft",
+    backgroundImageAttachmentFixed: "Fixiert",
+    backgroundImageAttachmentScroll: "Scrollen",
     panelBackgroundTransparency: "Deckkraft des Panel-Hintergrunds",
     questionBackgroundTransparency: "Deckkraft des Hintergrunds der Frage",
-    questionPanel: "Paneelhintergrund und Eckenradius",
     questionTitle: "Schriftart des Fragetitels",
-    questionDescription: "Frage-Beschreibung-Schriftart",
     editorPanel: "Eingabeelement",
-    editorFont: "Schriftart des Eingabeelements",
+    backgroundCornerRadius: "Hintergrund und Eckenradius",
     backcolor: "Standard-Hintergrund",
     hovercolor: "Hover-Hintergrund",
     borderDecoration: "Bordüren-Verzierung",
@@ -1080,7 +1090,9 @@ var germanTranslation = {
     accentForeground: "Akzent Vordergrund",
     primaryForecolor: "Standardfarbe",
     primaryForecolorLight: "Deaktivierte Farbe",
-    linesColors: "Kleinere Linienfarben",
+    colorsTitle: "Farben",
+    font: "Schriftart",
+    lines: "Linien",
     borderDefault: "Dunkler",
     borderLight: "Feuerzeug",
     fontFamily: "Schriftfamilie",
@@ -1091,13 +1103,14 @@ var germanTranslation = {
     fontWeightRegular: "Regelmäßig",
     fontWeightHeavy: "Schwer",
     fontWeightSemiBold: "Halbfett",
-    fontWeightBold: "Kühn",
+    fontWeightBold: "Fett",
     scale: "Maßstab",
     cornerRadius: "Eckenradius",
     surveyTitle: "Schriftart für den Umfragetitel",
     surveyDescription: "Schriftart der Umfragebeschreibung",
     pageTitle: "Schriftart des Seitentitels",
-    pageDescription: "Schriftart für die Seitenbeschreibung",
+    titleFont: "Schriftart des Titels",
+    descriptionFont: "Beschreibung Schriftart",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schatteneffekt hinzufügen",
@@ -1106,30 +1119,29 @@ var germanTranslation = {
     boxShadowSpread: "Verbreitung",
     boxShadowDrop: "Tropfen",
     boxShadowInner: "Inner",
-    questionShadow: "Schatteneffekte",
-    editorShadow: "Schatteneffekte von Eingabeelementen",
+    shadow: "Schatten-Effekte",
     headerView: "Ansehen",
     headerViewBasic: "Grundlegend",
     headerViewAdvanced: "Fortgeschritten",
     coverInheritWidthFrom: "Breite des Inhaltsbereichs",
     coverInheritWidthFromSurvey: "Wie Umfrage",
-    coverInheritWidthFromContainer: "Passend zum Behälter",
+    coverInheritWidthFromContainer: "Passend zum Container",
     coverTextAreaWidth: "Textbreite",
     coverBackgroundColorSwitch: "Hintergrundfarbe",
-    coverBackgroundColorNone: "Nichts",
+    coverBackgroundColorNone: "Keine",
     coverBackgroundColorAccentColor: "Akzentfarbe",
-    coverBackgroundColorCustom: "Gewohnheit",
+    coverBackgroundColorCustom: "Bentzerdefiniert",
     horizontalAlignmentLeft: "Links",
     horizontalAlignmentCenter: "Mitte",
     horizontalAlignmentRight: "Rechts",
-    verticalAlignmentTop: "Nach oben",
+    verticalAlignmentTop: "Oben",
     verticalAlignmentMiddle: "Mitte",
-    verticalAlignmentBottom: "Unteres",
+    verticalAlignmentBottom: "Unten",
     logoPosition: "Position des Logos",
     coverTitlePosition: "Position des Titels",
     coverDescriptionPosition: "Beschreibung Position",
     names: {
-      default: "Vorgabe",
+      default: "Default",
       sharp: "Scharf",
       borderless: "Ohne Rand",
       flat: "Flach",
@@ -1239,7 +1251,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // displayMode.auto: "Auto" => "Auto"
 // displayMode.buttons: "Buttons" => "Tasten"
 // displayMode.dropdown: "Dropdown" => "Dropdown-Liste"
-// rateColorMode.default: "Default" => "Vorgabe"
 // pehelp.cookieName: "Cookies prevent users from filling out the same survey twice." => "Cookies verhindern, dass Benutzer dieselbe Umfrage zweimal ausfüllen."
 // pehelp.size: "Resizes the visible area of the input field. Please use the <b>Validation → Maximum length</b> setting to limit the input length." => "Ändert die Größe des sichtbaren Bereichs des Eingabefelds. Bitte verwenden Sie die Einstellung <b>Validierung → Maximale Länge</b>, um die Eingabelänge zu begrenzen."
 // pehelp.format: "Use {0} as a placeholder for the actual value." => "Verwenden Sie {0} als Platzhalter für den tatsächlichen Wert."
@@ -1289,22 +1300,15 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.groupAdvanced: "Advanced" => "Fortgeschritten"
 // theme.themeName: "Theme" => "Thema"
 // theme.themeMode: "Question appearance" => "Erscheinungsbild der Frage"
-// theme.themeModePanels: "Default" => "Vorgabe"
 // theme.themeModeLightweight: "Without Panels" => "Ohne Paneele"
-// theme.themePaletteLight: "Light" => "Licht"
 // theme.themePaletteDark: "Dark" => "Dunkel"
 // theme.primaryColor: "Accent color" => "Akzentfarbe"
-// theme.primaryDefaultColor: "Default" => "Vorgabe"
 // theme.primaryDarkColor: "Hover" => "Schweben"
 // theme.primaryLightColor: "Selected" => "Ausgewählt"
 // theme.backgroundDimColor: "Background color" => "Hintergrundfarbe"
 // theme.backgroundImage: "Background image" => "Hintergrundbild"
 // theme.backgroundImageFitAuto: "Auto" => "Auto"
-// theme.backgroundImageFitCover: "Cover" => "Deckel"
 // theme.backgroundImageFitContain: "Contain" => "Enthalten"
-// theme.backgroundOpacity: "Opacity" => "Undurchsichtigkeit"
-// theme.backgroundImageAttachmentFixed: "Fixed" => "Fest"
-// theme.backgroundImageAttachmentScroll: "Scroll" => "Schriftrolle"
 // theme.panelBackgroundTransparency: "Panel background opacity" => "Deckkraft des Panel-Hintergrunds"
 // theme.questionBackgroundTransparency: "Question background opacity" => "Deckkraft des Hintergrunds der Frage"
 // theme.questionPanel: "Panel background and corner radius" => "Paneelhintergrund und Eckenradius"
@@ -1329,7 +1333,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.fontWeightRegular: "Regular" => "Regelmäßig"
 // theme.fontWeightHeavy: "Heavy" => "Schwer"
 // theme.fontWeightSemiBold: "Semi-bold" => "Halbfett"
-// theme.fontWeightBold: "Bold" => "Kühn"
 // theme.scale: "Scale" => "Maßstab"
 // theme.cornerRadius: "Corner radius" => "Eckenradius"
 // theme.surveyTitle: "Survey title font" => "Schriftart für den Umfragetitel"
@@ -1345,7 +1348,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.boxShadowInner: "Inner" => "Inner"
 // theme.questionShadow: "Shadow effects" => "Schatteneffekte"
 // theme.editorShadow: "Input element shadow effects" => "Schatteneffekte von Eingabeelementen"
-// names.default: "Default" => "Vorgabe"
 // names.contrast: "Contrast" => "Kontrast"
 // names.plain: "Plain" => "Einfach"
 // names.simple: "Simple" => "Einfach"
@@ -1393,7 +1395,6 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.coverTitleForecolor: "Title forecolor" => "Vorfarbe des Titels"
 // theme.coverOverlapEnabled: "Overlap" => "Überlappung"
 // theme.backgroundImageFitFill: "Stretch" => "Strecken"
-// theme.backgroundImageFitTile: "Tile" => "Fliese"
 // theme.headerView: "View" => "Ansehen"
 // theme.headerViewBasic: "Basic" => "Grundlegend"
 // theme.headerViewAdvanced: "Advanced" => "Fortgeschritten"
@@ -1402,15 +1403,11 @@ editorLocalization.locales["de"] = germanTranslation;
 // theme.coverInheritWidthFromPage: "Fit to page" => "An Seite anpassen"
 // theme.coverTextAreaWidth: "Text width" => "Textbreite"
 // theme.coverBackgroundColorSwitch: "Background color" => "Hintergrundfarbe"
-// theme.coverBackgroundColorNone: "None" => "Nichts"
 // theme.coverBackgroundColorAccentColor: "Accent color" => "Akzentfarbe"
-// theme.coverBackgroundColorCustom: "Custom" => "Gewohnheit"
 // theme.horizontalAlignmentLeft: "Left" => "Links"
 // theme.horizontalAlignmentCenter: "Center" => "Mitte"
 // theme.horizontalAlignmentRight: "Right" => "Rechts"
-// theme.verticalAlignmentTop: "Top" => "Nach oben"
 // theme.verticalAlignmentMiddle: "Middle" => "Mitte"
-// theme.verticalAlignmentBottom: "Bottom" => "Unteres"
 // theme.logoPosition: "Logo Position" => "Position des Logos"
 // theme.coverTitlePosition: "Title Position" => "Position des Titels"
 // theme.coverDescriptionPosition: "Description Position" => "Beschreibung Position"
@@ -1428,14 +1425,12 @@ editorLocalization.locales["de"] = germanTranslation;
 // pehelp.photoPlaceholder: "Applies when \"Source type\" is \"Camera\"." => "Gilt, wenn der \"Quellentyp\" auf \"Kamera\" festgelegt ist."
 // pehelp.fileOrPhotoPlaceholder: "Applies when \"Source type\" is \"Local files or camera\"." => "Gilt, wenn \"Quelltyp\" \"Lokale Dateien oder Kamera\" ist."
 // theme.groupBackground: "Background" => "Hintergrund"
-// theme.groupAppearance: "Appearance" => "Aussehen"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
 // ed.themeResetConfirmation: "Do you really want to reset the theme? All your customizations will be lost." => "Möchten Sie das Theme wirklich zurücksetzen? Alle Ihre Anpassungen gehen verloren."
 // ed.themeResetConfirmationOk: "Yes, reset the theme" => "Ja, setzen Sie das Design zurück"
 // theme.groupBackground: "Background" => "Hintergrund"
 // theme.groupAppearance: "Appearance" => "Aussehen"
 // theme.coverDescriptionForecolor: "Description forecolor" => "Beschreibung Vorfarbe"
-// theme.coverInheritWidthFromContainer: "Fit to container" => "Passend zum Behälter"
 // signaturepad.showPlaceholder: "Show the placeholder" => "Platzhalter anzeigen"
 // signaturepad.placeholder: "Placeholder text" => "Platzhaltertext"
 // theme.surveyDescription: "Survey description font" => "Schriftart der Umfragebeschreibung"
@@ -1461,3 +1456,24 @@ editorLocalization.locales["de"] = germanTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gehen Sie zu den Einstellungen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Vorschau der geladenen Auswahloptionen"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Doppelte Beantwortungen in Zeilen verhindern"
+// theme.advancedMode: "Advanced mode" => "Erweiterter Modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Hintergrund und Eckenradius"
+// theme.colorsTitle: "Colors" => "Farben"
+// theme.font: "Font" => "Schriftart"
+// theme.lines: "Lines" => "Linien"
+// theme.titleFont: "Title font" => "Schriftart des Titels"
+// theme.descriptionFont: "Description font" => "Beschreibung Schriftart"
+// theme.shadow: "Shadow effects" => "Schatten-Effekte"
+// ed.translateUsigAIFrom: "Translate from: " => "Sprachrichtung: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Zulassen der Option \"Antwort ablehnen\""
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Erlauben Sie die Option \"Weiß nicht\""
+// pv.contain: "Contain" => "Enthalten"
+// pv.cover: "Cover" => "Deckel"
+// pv.fill: "Fill" => "Füllen"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponieren von Zeilen in Spalten"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

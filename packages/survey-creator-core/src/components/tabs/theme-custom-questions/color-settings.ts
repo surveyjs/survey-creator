@@ -29,13 +29,21 @@ ComponentCollection.Instance.add({
   onInit() {
     Serializer.addProperties("colorsettings", [{
       name: "choices:itemvalue[]",
+      visible: false
     },
     {
       name: "colorTitleLocation:string",
       default: "hidden",
+      visible: false
+    },
+    {
+      name: "allowEmptyValue:boolean",
+      default: false,
+      visible: false
     },
     {
       name: "colorTitle:string",
+      visible: false
     }
     ]);
   },
@@ -43,6 +51,7 @@ ComponentCollection.Instance.add({
     syncPropertiesFromCompositeToColor(question, "colorTitle", question.colorTitle);
     syncPropertiesFromCompositeToColor(question, "colorTitleLocation", question.colorTitleLocation);
     syncPropertiesFromCompositeToColor(question, "choices", question.choices);
+    syncPropertiesFromCompositeToColor(question, "allowEmptyValue", question.allowEmptyValue);
   },
   onPropertyChanged(question, propertyName, newValue) {
     syncPropertiesFromCompositeToColor(question, propertyName, newValue);
@@ -65,14 +74,20 @@ export function updateColorSettingsJSON() {
 
 function syncPropertiesFromCompositeToColor(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[0];
-  if(propertyName == "colorTitleLocation") {
+  if (!colorQuestion) {
+    return;
+  }
+  if (propertyName == "colorTitleLocation") {
     colorQuestion.titleLocation = newValue;
   }
-  if(propertyName == "colorTitle") {
+  if (propertyName == "colorTitle") {
     colorQuestion.title = newValue;
   }
-  if(propertyName == "choices") {
+  if (propertyName == "choices") {
     colorQuestion.choices = newValue;
+  }
+  if (propertyName == "allowEmptyValue") {
+    colorQuestion.allowEmptyValue = newValue;
   }
 }
 

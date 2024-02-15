@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   background-color: $background-dim;
+  @include disableTransitionAnimations;
 }
 
 .st-properties {
@@ -167,6 +168,10 @@ td.st-table__cell:first-of-type {
 
 .svc-translation-machine {
   margin-right: auto;
+}
+
+.svc-translation-machine-from {
+  margin-right: left;
 }
 
 .st-body__footer {

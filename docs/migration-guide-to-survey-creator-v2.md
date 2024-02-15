@@ -7,7 +7,7 @@ description: Learn how to migrate to Survey Creator V2 with this comprehensive g
 
 - [Migration in React](#migration-in-react)
 - [Migration in Angular](#migration-in-angular)
-- [Migration in jQuery, Knockout, and Vue](#migration-in-jquery-knockout-and-vue)
+- [Migration in jQuery, Knockout, and Vue 2](#migration-in-jquery-knockout-and-vue-2)
   - [Replace Packages / Source Links](#replace-packages--source-links)
   - [Update the Survey Creator Constructor](#update-the-survey-creator-constructor)
 - [Customized Property Editors](#customized-property-editors)
@@ -61,14 +61,14 @@ npm uninstall survey-creator-knockout
 
 After that, follow the instructions given in the following help topic: [Add a Survey to an Angular Application](https://surveyjs.io/form-library/documentation/get-started-angular).
 
-## Migration in jQuery, Knockout, and Vue
+## Migration in jQuery, Knockout, and Vue 2
 
 ### Replace Packages / Source Links
 
-Survey Creator versions for jQuery and Vue continue to use the Knockout engine. The new version does introduce a change though. We separated the Knockout monolith module into a platform-independent core ([`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core)) and platform-specific view models ([`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout)). You need to change references to SurveyJS and Survey Creator scripts and style sheets or replace npm packages accordingly:
+Survey Creator versions for jQuery and Vue 2 continue to use the Knockout engine. The new version does introduce a change though. We separated the Knockout monolith module into a platform-independent core ([`survey-creator-core`](https://www.npmjs.com/package/survey-creator-core)) and platform-specific view models ([`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout)). You need to change references to SurveyJS and Survey Creator scripts and style sheets or replace npm packages accordingly:
 
 <details>
-  <summary>Vue</summary>
+  <summary>Vue 2</summary>
 
 ```cmd
 npm uninstall survey-creator
@@ -107,7 +107,7 @@ import "survey-creator-core/survey-creator-core.min.css";
 ```
 </details>
 
-In Vue, most of the imports will break after you uninstall the old and install the new packages. Run your application to find all broken imports and change them to imports from `"survey-core"` or `"survey-creator-knockout"`.
+In Vue 2, most of the imports will break after you uninstall the old and install the new packages. Run your application to find all broken imports and change them to imports from `"survey-core"` or `"survey-creator-knockout"`.
 
 ### Update the Survey Creator Constructor 
 

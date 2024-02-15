@@ -49,9 +49,9 @@ export var mnStrings = {
     settings: "Тохиргоо",
     settingsTooltip: "Тохиргоог нээх",
     surveySettings: "Санал асуулгын тохиргоо",
-    surveySettingsTooltip: "Санал асуулгын тохиргоог нээх",
+    surveySettingsTooltip: "Судалгааны тохиргоо",
     themeSettings: "Сэдвийн тохиргоо",
-    themeSettingsTooltip: "Нээлттэй сэдвийн тохиргоо",
+    themeSettingsTooltip: "Сэдвийн тохиргоо",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -142,6 +142,7 @@ export var mnStrings = {
     translationExportToSCVButton: "CSV экспорт хийх",
     translationImportFromSCVButton: "CSV импорт хийх",
     translateUsigAI: "Авто-орчуулга Бүгд",
+    translateUsigAIFrom: "Аас орчуул: ",
     translationDialogTitle: "Огт орчуулагдаагүй уяанууд",
     translationMergeLocaleWithDefault: "{0}-г суурь хэлтэй нэгтгэх",
     translationPlaceHolder: "Орчуулга...",
@@ -339,6 +340,8 @@ export var mnStrings = {
     showOtherItem: "Өөр сонголт зөвшөөрөх",
     otherText: "Өөр сонголтын текст",
     showNoneItem: "None сонголтыг зөвшөөрөх",
+    showRefuseItem: "Хариулах татгалзах боломжийг олго",
+    showDontKnowItem: "Бүү мэд сонголтыг зөвшөөр",
     noneText: "None сонголтын текст",
     showSelectAllItem: "Бүгдийг сонгохыг зөвшөөрөх",
     selectAllText: "Бүгдийг сонгох",
@@ -368,6 +371,7 @@ export var mnStrings = {
     imageWidth: "Зургийн өргөн",
     rowCount: "Мөрний тоо",
     columnLayout: "Баганы зохион байгуулалт",
+    transposeData: "Багануудад транспозын эгнээ",
     addRowLocation: "Мөр нэмэх товчны байршил",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
@@ -446,6 +450,10 @@ export var mnStrings = {
     },
     question: {
       page: "Эх хуудас"
+    },
+    panel: {
+      page: "Эх хуудас",
+      indent: "Гаднах догол мөр нэмэх"
     },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
@@ -617,7 +625,11 @@ export var mnStrings = {
       templateTitle: "Гарчигны загвар",
       totals: "Нийт",
       logic: "Логик",
-      layout: "Зохион байгуулалт",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Өгөгдөл",
       validation: "Батлах",
       cells: "Нүдний текст",
@@ -634,9 +646,6 @@ export var mnStrings = {
     columnsEnableIf: "Баганууд харагдана хэрэв",
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     indent: "Догол мөр нэмэх",
-    panel: {
-      indent: "Гаднах догол мөр нэмэх"
-    },
     innerIndent: "Дотоод догол мөр нэмэх",
     defaultValueFromLastRow: "Өмнөх мөрнөөс үндсэн утга авах",
     defaultValueFromLastPanel: "Сүүлийн панелаас үндсэн утга авах",
@@ -749,6 +758,9 @@ export var mnStrings = {
     onComplete: "Санал асуулга амжилттай бөглөгдсөн үед.",
     onHidden: "Асуулт нуугдсан үед",
     onHiddenContainer: "Асуулт, панел эсвэл хуудас нуугдсан үед",
+    contain: "Агуулах",
+    cover: "Хөшиг",
+    fill: "Дүүргэлт",
     clearInvisibleValues: {
       none: "Хэзээ ч үгүй"
     },
@@ -1038,8 +1050,8 @@ export var mnStrings = {
     "--primary-foreground": "Хүүхдийн хэсгийн өмнөх өнгө",
     "--foreground": "Өнгөө",
     "--base-unit": "Үндсэн нэгж",
+    advancedMode: "Дэвшилтэт хэв маяг",
     groupGeneral: "Ерөнхий",
-    groupAdvanced: "Өндөр хөгжсөн",
     groupHeader: "Толгойлогч",
     groupBackground: "Ар талын",
     groupAppearance: "Харагдах байдал",
@@ -1068,11 +1080,9 @@ export var mnStrings = {
     backgroundImageAttachmentScroll: "Хуйлмал бичиг",
     panelBackgroundTransparency: "Панелийн ар талын харанхуй байдал",
     questionBackgroundTransparency: "Асуулт хариултын нөхцөл байдал",
-    questionPanel: "Панелийн ар талын болон булангийн радиус",
     questionTitle: "Асуулт нэрийн фонт",
-    questionDescription: "Асуултын тодорхойлолтын фонт",
     editorPanel: "Оролтын элемент",
-    editorFont: "Оролтын элементийн фонт",
+    backgroundCornerRadius: "Ар талын болон булангийн радиус",
     backcolor: "Дефолт нөхцөл байдал",
     hovercolor: "Hover-ийн гарал үүсэл",
     borderDecoration: "Хилийн чимэг",
@@ -1080,7 +1090,9 @@ export var mnStrings = {
     accentForeground: "Акцентийн өмнө",
     primaryForecolor: "Дефолт өнгө",
     primaryForecolorLight: "Хөгжлийн бэрхшээлтэй хүний өнгө",
-    linesColors: "Бага шугаман өнгө",
+    colorsTitle: "Өнгө",
+    font: "Фонт",
+    lines: "Шугам",
     borderDefault: "Илүү харанхуй",
     borderLight: "Гэрэлтэй",
     fontFamily: "Фонтын гэр бүл",
@@ -1097,7 +1109,8 @@ export var mnStrings = {
     surveyTitle: "Судалгааны нэрийн фонт",
     surveyDescription: "Судалгааны тодорхойлолтын фонт",
     pageTitle: "Хуудасны нэрийн фонт",
-    pageDescription: "Хуудасны дүрслэлийн фонт",
+    titleFont: "Нүүр фонт",
+    descriptionFont: "Дүрслэлийн фонт",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Сүүдрийн эффект нэмэх",
@@ -1106,8 +1119,7 @@ export var mnStrings = {
     boxShadowSpread: "Тархалт",
     boxShadowDrop: "Дусал",
     boxShadowInner: "Дотоод",
-    questionShadow: "Сүүдрийн нөлөө",
-    editorShadow: "Оролт элементийн сүүдрийн нөлөө",
+    shadow: "Сүүдрийн нөлөө",
     headerView: "Үзэх",
     headerViewBasic: "Үндсэн",
     headerViewAdvanced: "Өндөр хөгжсөн",
@@ -1394,3 +1406,24 @@ editorLocalization.locales["mn"] = mnStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Тохиргоо руу явах"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ачаалагдсан сонголтын урьдчилсан үзүүлэлт"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Дараалалд хувилж хариу үйлдэл үзүүлэхээс сэргийлнэ"
+// theme.advancedMode: "Advanced mode" => "Дэвшилтэт хэв маяг"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Ар талын болон булангийн радиус"
+// theme.colorsTitle: "Colors" => "Өнгө"
+// theme.font: "Font" => "Фонт"
+// theme.lines: "Lines" => "Шугам"
+// theme.titleFont: "Title font" => "Нүүр фонт"
+// theme.descriptionFont: "Description font" => "Дүрслэлийн фонт"
+// theme.shadow: "Shadow effects" => "Сүүдрийн нөлөө"
+// ed.translateUsigAIFrom: "Translate from: " => "Аас орчуул: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Хариулах татгалзах боломжийг олго"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Бүү мэд сонголтыг зөвшөөр"
+// pv.contain: "Contain" => "Агуулах"
+// pv.cover: "Cover" => "Хөшиг"
+// pv.fill: "Fill" => "Дүүргэлт"
+
+// pe.transposeData: "Transpose rows to columns" => "Багануудад транспозын эгнээ"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

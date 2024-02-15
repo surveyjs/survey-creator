@@ -1,4 +1,8 @@
 .spg-theme-builder-root {
+  .sv-skeleton-element {
+    min-height: 50px;
+  }
+
   .spg-paneldynamic__separator {
     border: none;
     margin: 0;
@@ -119,6 +123,25 @@
     &::after {
       content: none;
     }
+  }
+
+  .spg-theme-group-caption {
+    @include defaultBold;
+    color: $foreground-dim;
+
+    position: relative;
+    top: calc(4 * #{$base-unit});
+    padding: calc(1 * #{$base-unit}) 0;
+    cursor: auto;
+  }
+
+  .sv-theme-group_title-action .spg-action-button:hover,
+  .sv-theme-group_title-action .spg-action-button:focus {
+    background-color: unset;
+  }
+
+  .sd-panel__header.sd-element__header .spg-action-bar {
+    pointer-events: none;
   }
 }
 

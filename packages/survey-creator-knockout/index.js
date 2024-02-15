@@ -7,6 +7,7 @@ if (!window["%hammerhead%"]) {
     // showJSONEditorTab: false
     showLogicTab: true,
     showTranslationTab: true,
+    showThemeTab: true,
     showEmbeddedSurveyTab: true,
     isAutoSave: true,
     inplaceEditForValues: true

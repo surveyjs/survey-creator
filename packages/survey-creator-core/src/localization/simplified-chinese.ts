@@ -49,9 +49,9 @@ var simplifiedChineseTranslation = {
     settings: "问卷设置",
     settingsTooltip: "打开设置",
     surveySettings: "调查设置",
-    surveySettingsTooltip: "打开调查设置",
+    surveySettingsTooltip: "调查设置",
     themeSettings: "主题设置",
-    themeSettingsTooltip: "打开主题设置",
+    themeSettingsTooltip: "主题设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -142,6 +142,7 @@ var simplifiedChineseTranslation = {
     translationExportToSCVButton: "导出CSV",
     translationImportFromSCVButton: "导入CSV",
     translateUsigAI: "自动翻译全部",
+    translateUsigAIFrom: "翻译语言组合：",
     translationDialogTitle: "未翻译的字符串",
     translationMergeLocaleWithDefault: "同默认合并 {0} ",
     translationPlaceHolder: "译本。。。",
@@ -339,6 +340,8 @@ var simplifiedChineseTranslation = {
     showOtherItem: "可添加其他答案?",
     otherText: "其他答案文本",
     showNoneItem: "无",
+    showRefuseItem: "允许“拒绝应答”选项",
+    showDontKnowItem: "允许“不知道”选项",
     noneText: "无文本",
     showSelectAllItem: "有全选项",
     selectAllText: "选择全部文本",
@@ -368,6 +371,7 @@ var simplifiedChineseTranslation = {
     imageWidth: "图片宽度",
     rowCount: "默认行数",
     columnLayout: "列布局",
+    transposeData: "将行转置为列",
     addRowLocation: "添加行按钮位置",
     addRowText: "添加条目按钮文本",
     removeRowText: "删除条目按钮文本",
@@ -446,6 +450,10 @@ var simplifiedChineseTranslation = {
     },
     question: {
       page: "父页面"
+    },
+    panel: {
+      page: "父页面",
+      indent: "添加外部缩进"
     },
     showTimerPanel: "显示计时器面板",
     showTimerPanelMode: "显示计时器面板模式",
@@ -617,7 +625,11 @@ var simplifiedChineseTranslation = {
       templateTitle: "标题模板",
       totals: "总数",
       logic: "逻辑",
-      layout: "布局",
+      layout: {
+        panel: "布局",
+        question: "布局",
+        base: "布局"
+      },
       data: "数据",
       validation: "验证",
       cells: "单元格文本",
@@ -634,9 +646,6 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     indent: "添加缩进",
-    panel: {
-      indent: "添加外部缩进"
-    },
     innerIndent: "添加内部缩进",
     defaultValueFromLastRow: "从最后一行获取默认值",
     defaultValueFromLastPanel: "从最后一个面板中获取默认值",
@@ -749,6 +758,9 @@ var simplifiedChineseTranslation = {
     onComplete: "完成时",
     onHidden: "隐藏中",
     onHiddenContainer: "当问题或其面板/页面被隐藏时",
+    contain: "包含",
+    cover: "盖",
+    fill: "填补",
     clearInvisibleValues: {
       none: "从不"
     },
@@ -1038,8 +1050,8 @@ var simplifiedChineseTranslation = {
     "--primary-foreground": "原色前景色",
     "--foreground": "前景色",
     "--base-unit": "基本单元",
+    advancedMode: "高级模式",
     groupGeneral: "常规",
-    groupAdvanced: "高深",
     groupHeader: "页眉",
     groupBackground: "背景",
     groupAppearance: "外观",
@@ -1068,11 +1080,9 @@ var simplifiedChineseTranslation = {
     backgroundImageAttachmentScroll: "滚动",
     panelBackgroundTransparency: "面板背景不透明度",
     questionBackgroundTransparency: "问题背景不透明度",
-    questionPanel: "面板背景和角半径",
     questionTitle: "问题标题字体",
-    questionDescription: "问题描述字体",
     editorPanel: "输入元素",
-    editorFont: "输入元素字体",
+    backgroundCornerRadius: "背景和圆角半径",
     backcolor: "默认背景",
     hovercolor: "悬停背景",
     borderDecoration: "边框装饰",
@@ -1080,7 +1090,9 @@ var simplifiedChineseTranslation = {
     accentForeground: "强调文字前景",
     primaryForecolor: "默认颜色",
     primaryForecolorLight: "禁用颜色",
-    linesColors: "次要线条颜色",
+    colorsTitle: "颜色",
+    font: "字体",
+    lines: "线",
     borderDefault: "暗",
     borderLight: "打火机",
     fontFamily: "字体系列",
@@ -1097,7 +1109,8 @@ var simplifiedChineseTranslation = {
     surveyTitle: "调查标题字体",
     surveyDescription: "调查描述字体",
     pageTitle: "页面标题字体",
-    pageDescription: "页面描述字体",
+    titleFont: "标题字体",
+    descriptionFont: "描述字体",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "添加阴影效果",
@@ -1106,8 +1119,7 @@ var simplifiedChineseTranslation = {
     boxShadowSpread: "传播",
     boxShadowDrop: "落",
     boxShadowInner: "内",
-    questionShadow: "阴影效果",
-    editorShadow: "输入元素阴影效果",
+    shadow: "阴影效果",
     headerView: "视图",
     headerViewBasic: "基本",
     headerViewAdvanced: "高深",
@@ -1880,3 +1892,24 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "前往“设置”"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "加载选项的预览"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "防止行中出现重复响应"
+// theme.advancedMode: "Advanced mode" => "高级模式"
+// theme.backgroundCornerRadius: "Background and corner radius" => "背景和圆角半径"
+// theme.colorsTitle: "Colors" => "颜色"
+// theme.font: "Font" => "字体"
+// theme.lines: "Lines" => "线"
+// theme.titleFont: "Title font" => "标题字体"
+// theme.descriptionFont: "Description font" => "描述字体"
+// theme.shadow: "Shadow effects" => "阴影效果"
+// ed.translateUsigAIFrom: "Translate from: " => "翻译语言组合："
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允许“拒绝应答”选项"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允许“不知道”选项"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "允许“拒绝应答”选项"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "允许“不知道”选项"
+// pv.contain: "Contain" => "包含"
+// pv.cover: "Cover" => "盖"
+// pv.fill: "Fill" => "填补"
+
+// pe.transposeData: "Transpose rows to columns" => "将行转置为列"
+// layout.panel: "Layout" => "布局"
+// layout.question: "Layout" => "布局"
+// layout.base: "Layout" => "布局"

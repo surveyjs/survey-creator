@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { PageModel, SurveyModel } from "survey-core";
-import { CreatorBase, PageAdorner } from "survey-creator-core";
+import { SurveyCreatorModel, PageAdorner } from "survey-creator-core";
 import { CreatorModelComponent } from "./creator-model.component";
 
 @Component({
@@ -12,7 +12,7 @@ import { CreatorModelComponent } from "./creator-model.component";
 export class PageDesignerComponent extends CreatorModelComponent<PageAdorner> {
   @Input() model!: PageModel;
   @Input() survey!: SurveyModel;
-  @Input() creator!: CreatorBase;
+  @Input() creator!: SurveyCreatorModel;
   @Input() isGhost?: boolean;
   public adorner!: PageAdorner;
   protected createModel(): void {

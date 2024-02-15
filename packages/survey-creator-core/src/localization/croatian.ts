@@ -49,9 +49,9 @@ export var hrStrings = {
     settings: "Postavke ankete",
     settingsTooltip: "Otvaranje postavki ankete",
     surveySettings: "Postavke upitnika",
-    surveySettingsTooltip: "Otvaranje postavki upitnika",
+    surveySettingsTooltip: "Postavke upitnika",
     themeSettings: "Postavke teme",
-    themeSettingsTooltip: "Otvaranje postavki teme",
+    themeSettingsTooltip: "Postavke teme",
     showPanel: "Pokaži ploču",
     hidePanel: "Sakrij ploču",
     prevSelected: "Odaberi prethodno",
@@ -142,6 +142,7 @@ export var hrStrings = {
     translationExportToSCVButton: "Izvoz u CSV",
     translationImportFromSCVButton: "Uvoz iz CSV",
     translateUsigAI: "Automatski prevedi sve",
+    translateUsigAIFrom: "Prevedi iz: ",
     translationDialogTitle: "Neprevedeni nizovi",
     translationMergeLocaleWithDefault: "Spajanje {0} sa zadanim lokalomwith default locale.",
     translationPlaceHolder: "Prevođenje...",
@@ -339,6 +340,8 @@ export var hrStrings = {
     showOtherItem: "Ima i drugu stavku",
     otherText: "Tekst druge stavke",
     showNoneItem: "Nema stavku",
+    showRefuseItem: "Dopusti mogućnost Odbij odgovoriti",
+    showDontKnowItem: "Dopusti mogućnost Ne znam",
     noneText: "Nijedan tekst stavke",
     showSelectAllItem: "Sadrži odaberite sve stavke",
     selectAllText: "Odaberite sve stavke tekst",
@@ -368,6 +371,7 @@ export var hrStrings = {
     imageWidth: "Širina slike",
     rowCount: "Broj redaka",
     columnLayout: "Raspored stupaca",
+    transposeData: "Transponiranje redaka u stupce",
     addRowLocation: "Dodavanje lokacije gumba redaka",
     addRowText: "Dodavanje teksta gumba redak",
     removeRowText: "Uklanjanje teksta gumba redaka",
@@ -446,6 +450,10 @@ export var hrStrings = {
     },
     question: {
       page: "Nadređena stranica"
+    },
+    panel: {
+      page: "Nadređena stranica",
+      indent: "Dodavanje vanjskih uvlaka"
     },
     showTimerPanel: "Pokaži ploču timera",
     showTimerPanelMode: "Prikazate način rada timer panela",
@@ -617,7 +625,11 @@ export var hrStrings = {
       templateTitle: "Naslov predloška",
       totals: "Zbrojeve",
       logic: "Logika",
-      layout: "Izgled",
+      layout: {
+        panel: "Tlocrt",
+        question: "Tlocrt",
+        base: "Tlocrt"
+      },
       data: "Podataka",
       validation: "Provjera valjanosti",
       cells: "Ćelije",
@@ -634,9 +646,6 @@ export var hrStrings = {
     columnsEnableIf: "Stupci su vidljivi ako",
     rowsEnableIf: "Reci su vidljivi ako",
     indent: "Dodavanje uvlaka",
-    panel: {
-      indent: "Dodavanje vanjskih uvlaka"
-    },
     innerIndent: "Dodavanje unutarnjih uvlaka",
     defaultValueFromLastRow: "Uzimanje zadanih vrijednosti iz posljednjeg retka",
     defaultValueFromLastPanel: "Preuzimanje zadanih vrijednosti s posljednje ploče",
@@ -749,6 +758,9 @@ export var hrStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Kada se pitanje ili njegova ploča/stranica sakriju",
+    contain: "Sadržavati",
+    cover: "Pokriti",
+    fill: "Ispuniti",
     clearInvisibleValues: {
       none: "Nikada"
     },
@@ -1038,8 +1050,8 @@ export var hrStrings = {
     "--primary-foreground": "Primarna boja prednjeg plana",
     "--foreground": "Boja prednjeg plana",
     "--base-unit": "Osnovna jedinica",
+    advancedMode: "Napredni način rada",
     groupGeneral: "Općenito",
-    groupAdvanced: "Napredan",
     groupHeader: "Zaglavlje",
     groupBackground: "Pozadina",
     groupAppearance: "Izgled",
@@ -1068,11 +1080,9 @@ export var hrStrings = {
     backgroundImageAttachmentScroll: "Svitak",
     panelBackgroundTransparency: "Neprozirnost pozadine ploče",
     questionBackgroundTransparency: "Pitanje neprozirnosti pozadine",
-    questionPanel: "Pozadina ploče i kutni radijus",
     questionTitle: "Font naslova pitanja",
-    questionDescription: "Font opisa pitanja",
     editorPanel: "Ulazni element",
-    editorFont: "Font elementa unosa",
+    backgroundCornerRadius: "Polumjer pozadine i kuta",
     backcolor: "Zadana pozadina",
     hovercolor: "Pozadina držanja pokazivača miša",
     borderDecoration: "Uređenje obruba",
@@ -1080,7 +1090,9 @@ export var hrStrings = {
     accentForeground: "Isticanje u prvom planu",
     primaryForecolor: "Zadana boja",
     primaryForecolorLight: "Onemogućena boja",
-    linesColors: "Sporedne boje crta",
+    colorsTitle: "Boje",
+    font: "Krstionica",
+    lines: "Linije",
     borderDefault: "Tamnije",
     borderLight: "Upaljač",
     fontFamily: "Obitelj fontova",
@@ -1097,7 +1109,8 @@ export var hrStrings = {
     surveyTitle: "Font naslova upitnika",
     surveyDescription: "Font opisa upitnika",
     pageTitle: "Font naslova stranice",
-    pageDescription: "Font opisa stranice",
+    titleFont: "Font naslova",
+    descriptionFont: "Font opisa",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Dodaj efekt sjene",
@@ -1106,8 +1119,7 @@ export var hrStrings = {
     boxShadowSpread: "Širenje",
     boxShadowDrop: "Ispustiti",
     boxShadowInner: "Unutarnji",
-    questionShadow: "Efekti sjene",
-    editorShadow: "Efekti sjene ulaznog elementa",
+    shadow: "Efekti sjene",
     headerView: "Pogled",
     headerViewBasic: "Osnovni",
     headerViewAdvanced: "Napredan",
@@ -1732,3 +1744,24 @@ editorLocalization.locales["hr"] = hrStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Idi na postavke"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Pretpregled učitanih mogućnosti izbora"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Sprječavanje dvostrukih odgovora u recima"
+// theme.advancedMode: "Advanced mode" => "Napredni način rada"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Polumjer pozadine i kuta"
+// theme.colorsTitle: "Colors" => "Boje"
+// theme.font: "Font" => "Krstionica"
+// theme.lines: "Lines" => "Linije"
+// theme.titleFont: "Title font" => "Font naslova"
+// theme.descriptionFont: "Description font" => "Font opisa"
+// theme.shadow: "Shadow effects" => "Efekti sjene"
+// ed.translateUsigAIFrom: "Translate from: " => "Prevedi iz: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Dopusti mogućnost Odbij odgovoriti"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Dopusti mogućnost Ne znam"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Dopusti mogućnost Odbij odgovoriti"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Dopusti mogućnost Ne znam"
+// pv.contain: "Contain" => "Sadržavati"
+// pv.cover: "Cover" => "Pokriti"
+// pv.fill: "Fill" => "Ispuniti"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponiranje redaka u stupce"
+// layout.panel: "Layout" => "Tlocrt"
+// layout.question: "Layout" => "Tlocrt"
+// layout.base: "Layout" => "Tlocrt"

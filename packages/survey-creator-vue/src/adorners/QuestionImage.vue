@@ -15,7 +15,7 @@
 import QuestionBase from "./QuestionBase.vue";
 import { useCreatorModel } from "../creator-model";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   QuestionImageAdornerViewModel,
 } from "survey-creator-core";
 import { onMounted, ref } from "vue";
@@ -28,7 +28,7 @@ const root = ref();
 const model = useCreatorModel(
   () =>
     new QuestionImageAdornerViewModel(
-      props.componentData.data as CreatorBase,
+      props.componentData.data as SurveyCreatorModel,
       props.componentData.element as Question,
       null as any,
       null as any

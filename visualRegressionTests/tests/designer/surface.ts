@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText } from "../../helper";
+import { url, setJSON, takeElementScreenshot, addQuestionByAddQuestionButton, wrapVisualTest, getTabbedMenuItemByText, creatorTabPreviewName, creatorTabDesignerName, resetHoverToCreator, getToolboxItemByText, getPropertyGridCategory, generalGroupName, getListItemByText, surveySettingsButtonSelector } from "../../helper";
 
 const title = "Designer surface";
 
@@ -94,6 +94,44 @@ test("Test question type converter on page for panel", async (t) => {
       .click(Selector("#convertTo"))
       .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
     await takeElementScreenshot("convert-to-popup-panel.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
+  });
+});
+
+test("Test question type converter on page for panel", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1000, 800);
+
+    const surveyJSON = {
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "panel1",
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "question1"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        }
+      ]
+    };
+    await setJSON(surveyJSON);
+
+    await t
+      .scroll(Selector(".svc-tab-designer"), "bottom")
+      .expect(Selector(".svc-panel__question-type-selector").visible).ok()
+      .click(Selector(".svc-panel__question-type-selector"))
+      .expect(Selector(".sv-popup__container").filterVisible().visible).ok();
+    await takeElementScreenshot("convert-to-popup-panel-not-empty.png", Selector(".sv-popup__container").filterVisible(), t, comparer);
   });
 });
 
@@ -972,14 +1010,13 @@ test("Check property grid flyout", async (t) => {
     await t.resizeWindow(1120, 900);
     const root = Selector(".svc-creator");
     await setJSON({});
-    await t.click(Selector("button[title='Open survey settings']"));
+    await t.click(surveySettingsButtonSelector);
     await takeElementScreenshot("propery-grid-flyout.png", root, t, comparer);
   });
 });
 
 test("Check question adorner width", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 1080);
     await setJSON({
       "logoPosition": "right",
       "pages": [
@@ -1064,6 +1101,7 @@ test("Check question adorner width", async (t) => {
       "widthMode": "static",
       "width": "1400"
     });
+    await t.resizeWindow(1920, 1080);
     const root = Selector(".sd-page");
     await takeElementScreenshot("question-adorner-width.png", root, t, comparer);
   });

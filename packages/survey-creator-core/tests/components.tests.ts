@@ -738,6 +738,28 @@ test("Do not select choices if a question in a matrix mode (popup in our case) "
   expect(creator.selectedElementName).toBe("q2");
 });
 
+test("Refuse and Don't know items", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [
+      { type: "checkbox", name: "q1", choices: [1, 2, 3] }
+    ]
+  };
+  const q1 = <QuestionCheckboxModel>creator.survey.getAllQuestions()[0];
+  const refuseItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.refuseItem);
+  const dontKnowItemAdorner = new ItemValueWrapperViewModel(creator, q1, q1.dontKnowItem);
+
+  refuseItemAdorner.add(refuseItemAdorner);
+  expect(q1.showRefuseItem).toBeTruthy();
+  refuseItemAdorner.remove(refuseItemAdorner);
+  expect(q1.showRefuseItem).toBeFalsy();
+
+  dontKnowItemAdorner.add(dontKnowItemAdorner);
+  expect(q1.showDontKnowItem).toBeTruthy();
+  dontKnowItemAdorner.remove(dontKnowItemAdorner);
+  expect(q1.showDontKnowItem).toBeFalsy();
+});
+
 test("ImageItemValueWrapperViewModel isUploading", () => {
   const creator = new CreatorTester();
   creator.JSON = {
@@ -957,4 +979,24 @@ test("ImageItemValueWrapperViewModel shouldn't override existing image if upload
   isSuccess = false;
   imageItemAdorner.chooseFile(imageItemAdorner);
   expect(question.choices[0].imageLink).toBe(successFile);
+});
+
+test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
+  const creator = new CreatorTester();
+  creator.JSON = {
+    elements: [{ type: "image", name: "q1" }]
+  };
+  let log = "";
+  creator.onOpenFileChooser.add((s, o) => {
+    log += "->onOpenFileChooser";
+    o.callback([]);
+  });
+  const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
+  const imageAdorner = new QuestionImageAdornerViewModel(creator, question, undefined as any, { getElementsByClassName: () => [{}] } as any);
+  const filePresentationModel = imageAdorner.filePresentationModel;
+  const fileQuestionAdornerSurvey = imageAdorner.filePresentationModel.getSurvey();
+
+  expect(log).toBe("");
+  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { });
+  expect(log).toBe("->onOpenFileChooser");
 });

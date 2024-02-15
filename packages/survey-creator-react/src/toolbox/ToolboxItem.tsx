@@ -1,5 +1,5 @@
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   editorLocalization,
   IQuestionToolboxItem
 } from "survey-creator-core";
@@ -19,7 +19,7 @@ import { CreatorModelElement } from "../ModelElement";
 
 export interface ISurveyCreatorToolboxItemProps {
   item: IQuestionToolboxItem;
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   isCompact: boolean;
 }
 

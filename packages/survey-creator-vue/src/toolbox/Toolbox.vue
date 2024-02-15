@@ -29,10 +29,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { CreatorBase } from "survey-creator-core";
+import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
 import { computed } from "vue";
-const props = defineProps<{ model: CreatorBase }>();
+const props = defineProps<{ model: SurveyCreatorModel }>();
 const toolbox = computed(() => {
   return props.model.toolbox;
 });

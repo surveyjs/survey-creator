@@ -49,9 +49,9 @@ export var nlStrings = {
     settings: "Enquête-instellingen",
     settingsTooltip: "Open enquête-instellingen",
     surveySettings: "Enquête-instellingen",
-    surveySettingsTooltip: "Enquête-instellingen openen",
+    surveySettingsTooltip: "Enquête instellingen",
     themeSettings: "Thema-instellingen",
-    themeSettingsTooltip: "Thema-instellingen openen",
+    themeSettingsTooltip: "Thema-instellingen",
     showPanel: "Toon paneel",
     hidePanel: "Verberg paneel",
     prevSelected: "Selecteer vorige",
@@ -142,6 +142,7 @@ export var nlStrings = {
     translationExportToSCVButton: "Exporteren naar CSV",
     translationImportFromSCVButton: "Importeren vanuit CSV",
     translateUsigAI: "Alles automatisch vertalen",
+    translateUsigAIFrom: "Vertalen van: ",
     translationDialogTitle: "Onvertaalde tekenreeksen",
     translationMergeLocaleWithDefault: "Voeg {0} samen met de standaardlandinstelling",
     translationPlaceHolder: "Vertaling...",
@@ -339,6 +340,8 @@ export var nlStrings = {
     showOtherItem: "Heeft de 'Anders:'-optie",
     otherText: "Titel 'Anders:'-optie",
     showNoneItem: "Heeft de 'Geen'-optie",
+    showRefuseItem: "De optie Weigeren om te antwoorden toestaan",
+    showDontKnowItem: "De optie 'Weet niet' toestaan",
     noneText: "Titel 'Geen'-optie",
     showSelectAllItem: "Heeft de 'Alles selecteren'-optie",
     selectAllText: "Titel 'Alles selecteren'-optie",
@@ -368,6 +371,7 @@ export var nlStrings = {
     imageWidth: "Afbeelding breedte",
     rowCount: "Aantal rijen",
     columnLayout: "Kolommen layout",
+    transposeData: "Rijen transponeren naar kolommen",
     addRowLocation: "Voeg de locatie van de rijknop toe",
     addRowText: "Voeg tekst van de rijknop toe",
     removeRowText: "Verwijder de tekst van de rijknop",
@@ -446,6 +450,10 @@ export var nlStrings = {
     },
     question: {
       page: "Bovenliggende pagina"
+    },
+    panel: {
+      page: "Bovenliggende pagina",
+      indent: "Buitenste streepjes toevoegen"
     },
     showTimerPanel: "Toon timerpaneel",
     showTimerPanelMode: "Modus timerpaneel",
@@ -617,7 +625,11 @@ export var nlStrings = {
       templateTitle: "Sjabloontitel",
       totals: "Totalen",
       logic: "Logica",
-      layout: "Indeling",
+      layout: {
+        panel: "Indeling",
+        question: "Indeling",
+        base: "Indeling"
+      },
       data: "Gegevens",
       validation: "Validatie",
       cells: "Cellen",
@@ -634,9 +646,6 @@ export var nlStrings = {
     columnsEnableIf: "Kolommen zijn zichtbaar als",
     rowsEnableIf: "Rijen zijn zichtbaar als",
     indent: "Inspringingen toevoegen",
-    panel: {
-      indent: "Buitenste streepjes toevoegen"
-    },
     innerIndent: "Binnenste inspringingen toevoegen",
     defaultValueFromLastRow: "Standaardwaarden uit de laatste rij nemen",
     defaultValueFromLastPanel: "Standaardwaarden uit het laatste deelvenster overnemen",
@@ -749,6 +758,9 @@ export var nlStrings = {
     onComplete: "Bij afronden",
     onHidden: "Bij verbergen",
     onHiddenContainer: "Wanneer de vraag of het bijbehorende paneel/de bijbehorende pagina verborgen raakt",
+    contain: "Bevatten",
+    cover: "Bedekken",
+    fill: "Vullen",
     clearInvisibleValues: {
       none: "Nooit"
     },
@@ -1038,8 +1050,8 @@ export var nlStrings = {
     "--primary-foreground": "Primaire voorgrondkleur",
     "--foreground": "Voorgrondkleur",
     "--base-unit": "Basiseenheid",
+    advancedMode: "Geavanceerde modus",
     groupGeneral: "Algemeen",
-    groupAdvanced: "Geavanceerd",
     groupHeader: "Rubriek",
     groupBackground: "Achtergrond",
     groupAppearance: "Uiterlijk",
@@ -1068,11 +1080,9 @@ export var nlStrings = {
     backgroundImageAttachmentScroll: "Scrollen",
     panelBackgroundTransparency: "Dekking van de achtergrond van het deelvenster",
     questionBackgroundTransparency: "Ondoorzichtigheid van de vraagachtergrond",
-    questionPanel: "Achtergrond van het deelvenster en hoekradius",
     questionTitle: "Lettertype voor de titel van de vraag",
-    questionDescription: "Lettertype voor vraagbeschrijving",
     editorPanel: "Invoerelement",
-    editorFont: "Lettertype van invoerelement",
+    backgroundCornerRadius: "Achtergrond en hoekradius",
     backcolor: "Standaard achtergrond",
     hovercolor: "Achtergrond aanwijzen",
     borderDecoration: "Randdecoratie",
@@ -1080,7 +1090,9 @@ export var nlStrings = {
     accentForeground: "Accent voorgrond",
     primaryForecolor: "Standaardkleur",
     primaryForecolorLight: "Uitgeschakelde kleur",
-    linesColors: "Kleine lijnkleuren",
+    colorsTitle: "Kleuren",
+    font: "Lettertype",
+    lines: "Lijnen",
     borderDefault: "Donkerder",
     borderLight: "Aansteker",
     fontFamily: "Lettertypefamilie",
@@ -1097,7 +1109,8 @@ export var nlStrings = {
     surveyTitle: "Lettertype voor enquêtetitel",
     surveyDescription: "Lettertype met enquêtebeschrijving",
     pageTitle: "Lettertype voor paginatitel",
-    pageDescription: "Lettertype paginabeschrijving",
+    titleFont: "Titel lettertype",
+    descriptionFont: "Beschrijving lettertype",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Schaduweffect toevoegen",
@@ -1106,8 +1119,7 @@ export var nlStrings = {
     boxShadowSpread: "Verspreiden",
     boxShadowDrop: "Druppel",
     boxShadowInner: "Binnenste",
-    questionShadow: "Schaduweffecten",
-    editorShadow: "Schaduweffecten van invoerelementen",
+    shadow: "Schaduweffecten",
     headerView: "Bekijken",
     headerViewBasic: "Basisch",
     headerViewAdvanced: "Geavanceerd",
@@ -1718,3 +1730,24 @@ editorLocalization.locales["nl"] = nlStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ga naar instellingen"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Voorbeeld van geladen keuzeopties"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Voorkom dubbele antwoorden in rijen"
+// theme.advancedMode: "Advanced mode" => "Geavanceerde modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Achtergrond en hoekradius"
+// theme.colorsTitle: "Colors" => "Kleuren"
+// theme.font: "Font" => "Lettertype"
+// theme.lines: "Lines" => "Lijnen"
+// theme.titleFont: "Title font" => "Titel lettertype"
+// theme.descriptionFont: "Description font" => "Beschrijving lettertype"
+// theme.shadow: "Shadow effects" => "Schaduweffecten"
+// ed.translateUsigAIFrom: "Translate from: " => "Vertalen van: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "De optie Weigeren om te antwoorden toestaan"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "De optie 'Weet niet' toestaan"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "De optie Weigeren om te antwoorden toestaan"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "De optie 'Weet niet' toestaan"
+// pv.contain: "Contain" => "Bevatten"
+// pv.cover: "Cover" => "Bedekken"
+// pv.fill: "Fill" => "Vullen"
+
+// pe.transposeData: "Transpose rows to columns" => "Rijen transponeren naar kolommen"
+// layout.panel: "Layout" => "Indeling"
+// layout.question: "Layout" => "Indeling"
+// layout.base: "Layout" => "Indeling"

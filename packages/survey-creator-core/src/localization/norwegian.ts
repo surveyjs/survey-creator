@@ -49,9 +49,9 @@ export var nbStrings = {
     settings: "Skjemainnstillinger",
     settingsTooltip: "Åpne skjemainnstillinger",
     surveySettings: "Innstillinger for undersøkelse",
-    surveySettingsTooltip: "Åpne innstillinger for evaluering",
+    surveySettingsTooltip: "Innstillinger for undersøkelse",
     themeSettings: "Tema innstillinger",
-    themeSettingsTooltip: "Åpne temainnstillinger",
+    themeSettingsTooltip: "Temainnstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Velg forrige",
@@ -142,6 +142,7 @@ export var nbStrings = {
     translationExportToSCVButton: "Eksporter til CSV",
     translationImportFromSCVButton: "Importer fra CSV",
     translateUsigAI: "Oversett alle automatisk",
+    translateUsigAIFrom: "Oversett fra: ",
     translationDialogTitle: "Uoversatte strenger",
     translationMergeLocaleWithDefault: "Flett {0} med standard språk",
     translationPlaceHolder: "Oversettelse...",
@@ -339,6 +340,8 @@ export var nbStrings = {
     showOtherItem: "Har annet element",
     otherText: "Annet element-tekst",
     showNoneItem: "Har velg ingen",
+    showRefuseItem: "Tillat alternativet Nekt å svare",
+    showDontKnowItem: "Tillat alternativet Vet ikke",
     noneText: "Velg ingen-tekst",
     showSelectAllItem: "Har velg alt-element",
     selectAllText: "Velg alt elememt-tekst",
@@ -368,6 +371,7 @@ export var nbStrings = {
     imageWidth: "Bildebredde",
     rowCount: "Antall rader",
     columnLayout: "Antall kolonner",
+    transposeData: "Transponere rader til kolonner",
     addRowLocation: "Legg til rad knapp-plassering",
     addRowText: "Legg til rad knapp-tekst",
     removeRowText: "Fjern rad knapp-tekst",
@@ -446,6 +450,10 @@ export var nbStrings = {
     },
     question: {
       page: "Overordnet side"
+    },
+    panel: {
+      page: "Overordnet side",
+      indent: "Legge til ytre innrykk"
     },
     showTimerPanel: "Vis tidtaking",
     showTimerPanelMode: "Vis tidtaking-modus",
@@ -617,7 +625,11 @@ export var nbStrings = {
       templateTitle: "Mal-tittel",
       totals: "Totaler",
       logic: "Logikk",
-      layout: "Oppsett",
+      layout: {
+        panel: "Oppsett",
+        question: "Oppsett",
+        base: "Oppsett"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celler",
@@ -634,9 +646,6 @@ export var nbStrings = {
     columnsEnableIf: "Kolonner er synlige hvis",
     rowsEnableIf: "Rader er synlige hvis:",
     indent: "Legge til innrykk",
-    panel: {
-      indent: "Legge til ytre innrykk"
-    },
     innerIndent: "Legge til indre innrykk",
     defaultValueFromLastRow: "Ta standardverdier fra den siste raden",
     defaultValueFromLastPanel: "Ta standardverdier fra det siste panelet",
@@ -749,6 +758,9 @@ export var nbStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Når spørsmålet eller panelet/siden blir skjult",
+    contain: "Inneholde",
+    cover: "Lokk",
+    fill: "Fylle",
     clearInvisibleValues: {
       none: "Aldri"
     },
@@ -1038,8 +1050,8 @@ export var nbStrings = {
     "--primary-foreground": "Primær forgrunnsfarge",
     "--foreground": "Forgrunnsfarge",
     "--base-unit": "Basisenhet",
+    advancedMode: "Avansert modus",
     groupGeneral: "Generelt",
-    groupAdvanced: "Avansert",
     groupHeader: "Topptekst",
     groupBackground: "Bakgrunn",
     groupAppearance: "Utseende",
@@ -1068,11 +1080,9 @@ export var nbStrings = {
     backgroundImageAttachmentScroll: "Bla",
     panelBackgroundTransparency: "Tetthet i panelbakgrunn",
     questionBackgroundTransparency: "Spørsmål om bakgrunnstetthet",
-    questionPanel: "Panelbakgrunn og hjørneradius",
     questionTitle: "Spørsmål tittel skrift",
-    questionDescription: "Skrift for spørsmålsbeskrivelse",
     editorPanel: "Inndata-element",
-    editorFont: "Skrift for inndataelement",
+    backgroundCornerRadius: "Bakgrunn og hjørneradius",
     backcolor: "Standard bakgrunn",
     hovercolor: "Pekerfølsom bakgrunn",
     borderDecoration: "Grense dekorasjon",
@@ -1080,7 +1090,9 @@ export var nbStrings = {
     accentForeground: "Uthevingsforgrunn",
     primaryForecolor: "Standardfarge",
     primaryForecolorLight: "Deaktivert farge",
-    linesColors: "Mindre linjefarger",
+    colorsTitle: "Farger",
+    font: "Font",
+    lines: "Linjer",
     borderDefault: "Mørkere",
     borderLight: "Lekter",
     fontFamily: "Skriftfamilie",
@@ -1097,7 +1109,8 @@ export var nbStrings = {
     surveyTitle: "Skrift for undersøkelsestittel",
     surveyDescription: "Skrift for undersøkelsesbeskrivelse",
     pageTitle: "Skrift for sidetittel",
-    pageDescription: "Skrift for sidebeskrivelse",
+    titleFont: "Tittel skrift",
+    descriptionFont: "Beskrivelse font",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Legg til skyggeeffekt",
@@ -1106,8 +1119,7 @@ export var nbStrings = {
     boxShadowSpread: "Spredning",
     boxShadowDrop: "Dråpe",
     boxShadowInner: "Indre",
-    questionShadow: "Skygge effekter",
-    editorShadow: "Skyggeeffekter for inndataelement",
+    shadow: "Skygge effekter",
     headerView: "Utsikt",
     headerViewBasic: "Grunnleggende",
     headerViewAdvanced: "Avansert",
@@ -1741,3 +1753,24 @@ editorLocalization.locales["nb"] = nbStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Gå til innstillinger"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Forhåndsvisning av alternativer for lastet valg"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Forhindre dupliserte svar i rader"
+// theme.advancedMode: "Advanced mode" => "Avansert modus"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Bakgrunn og hjørneradius"
+// theme.colorsTitle: "Colors" => "Farger"
+// theme.font: "Font" => "Font"
+// theme.lines: "Lines" => "Linjer"
+// theme.titleFont: "Title font" => "Tittel skrift"
+// theme.descriptionFont: "Description font" => "Beskrivelse font"
+// theme.shadow: "Shadow effects" => "Skygge effekter"
+// ed.translateUsigAIFrom: "Translate from: " => "Oversett fra: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Tillat alternativet Nekt å svare"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Tillat alternativet Vet ikke"
+// pv.contain: "Contain" => "Inneholde"
+// pv.cover: "Cover" => "Lokk"
+// pv.fill: "Fill" => "Fylle"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rader til kolonner"
+// layout.panel: "Layout" => "Oppsett"
+// layout.question: "Layout" => "Oppsett"
+// layout.base: "Layout" => "Oppsett"

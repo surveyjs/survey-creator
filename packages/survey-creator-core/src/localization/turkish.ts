@@ -49,9 +49,9 @@ export var turkishStrings = {
     settings: "Anket Ayarları",
     settingsTooltip: "Anket ayarlarını aç",
     surveySettings: "Anket Ayarları",
-    surveySettingsTooltip: "Anket ayarlarını açma",
+    surveySettingsTooltip: "Anket ayarları",
     themeSettings: "Tema Ayarları",
-    themeSettingsTooltip: "Tema ayarlarını açma",
+    themeSettingsTooltip: "Tema ayarları",
     showPanel: "Paneli Göster",
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
@@ -142,6 +142,7 @@ export var turkishStrings = {
     translationExportToSCVButton: "CSV dışa çıkart",
     translationImportFromSCVButton: "CSV içe aktar",
     translateUsigAI: "Tümünü Otomatik Çevir",
+    translateUsigAIFrom: "Çeviri kaynağı: ",
     translationDialogTitle: "Çevrilmemiş dizeler",
     translationMergeLocaleWithDefault: "{0} varsayılan çeviri ile sıkıştır",
     translationPlaceHolder: "Çeviri...",
@@ -339,6 +340,8 @@ export var turkishStrings = {
     showOtherItem: "Başka bir öğeye sahip",
     otherText: "Diğer eleman metni",
     showNoneItem: "Hiçbir elemana sahip değil",
+    showRefuseItem: "Yanıtlamayı Reddet seçeneğine izin ver",
+    showDontKnowItem: "Bilmiyorum seçeneğine izin ver",
     noneText: "Hiçbir eleman metni",
     showSelectAllItem: "Tüm elemanlar seçildi",
     selectAllText: "Tüm elemanların yazısını seç",
@@ -368,6 +371,7 @@ export var turkishStrings = {
     imageWidth: "Resim genişliği",
     rowCount: "Satır sayısı",
     columnLayout: "Kolon yerleşimi",
+    transposeData: "Satırları sütunlara dönüştürme",
     addRowLocation: "Satır butonu konumu ekle",
     addRowText: "Satır butonu yazısı ekle",
     removeRowText: "Satır butonu yazısını kaldır",
@@ -446,6 +450,10 @@ export var turkishStrings = {
     },
     question: {
       page: "Ana sayfa"
+    },
+    panel: {
+      page: "Ana sayfa",
+      indent: "Dış girintiler ekleme"
     },
     showTimerPanel: "Zamanlayıcı panelini göster",
     showTimerPanelMode: "Zamanlayıcı paneli modunu göster",
@@ -617,7 +625,11 @@ export var turkishStrings = {
       templateTitle: "Şablon başlığı",
       totals: "Toplamlar",
       logic: "Mantık",
-      layout: "Şablon",
+      layout: {
+        panel: "Düzen",
+        question: "Düzen",
+        base: "Düzen"
+      },
       data: "Veri",
       validation: "Doğrulayıcı",
       cells: "Hücreler",
@@ -634,9 +646,6 @@ export var turkishStrings = {
     columnsEnableIf: "Sütunlar şu durumlarda görünür:",
     rowsEnableIf: "Satırlar şu durumlarda görünür:",
     indent: "Girinti ekleme",
-    panel: {
-      indent: "Dış girintiler ekleme"
-    },
     innerIndent: "İç girintiler ekleme",
     defaultValueFromLastRow: "Son satırdaki varsayılan değerleri alma",
     defaultValueFromLastPanel: "Son panelden varsayılan değerleri alma",
@@ -749,6 +758,9 @@ export var turkishStrings = {
     onComplete: "Tamamlandığında",
     onHidden: "Gizlendiğinde",
     onHiddenContainer: "Soru veya paneli/sayfası gizlendiğinde",
+    contain: "Kapsamak",
+    cover: "Örtmek",
+    fill: "Doldurmak",
     clearInvisibleValues: {
       none: "Hiç"
     },
@@ -1038,8 +1050,8 @@ export var turkishStrings = {
     "--primary-foreground": "Birincil ön plan rengi",
     "--foreground": "Ön plan rengi",
     "--base-unit": "Temel ünite",
+    advancedMode: "Gelişmiş mod",
     groupGeneral: "Genel",
-    groupAdvanced: "İleri",
     groupHeader: "Üstbilgi",
     groupBackground: "Arka plan",
     groupAppearance: "Görünüş",
@@ -1068,11 +1080,9 @@ export var turkishStrings = {
     backgroundImageAttachmentScroll: "Tomar",
     panelBackgroundTransparency: "Panel arka plan opaklığı",
     questionBackgroundTransparency: "Soru arka planı opaklığı",
-    questionPanel: "Panel arka planı ve köşe yarıçapı",
     questionTitle: "Soru başlığı yazı tipi",
-    questionDescription: "Soru açıklaması yazı tipi",
     editorPanel: "Giriş öğesi",
-    editorFont: "Giriş öğesi yazı tipi",
+    backgroundCornerRadius: "Arka plan ve köşe yarıçapı",
     backcolor: "Varsayılan arka plan",
     hovercolor: "Arka planın üzerine gelin",
     borderDecoration: "Bordür dekorasyonu",
@@ -1080,7 +1090,9 @@ export var turkishStrings = {
     accentForeground: "Vurgu ön planı",
     primaryForecolor: "Varsayılan renk",
     primaryForecolorLight: "Devre dışı bırakılmış renk",
-    linesColors: "Küçük çizgi renkleri",
+    colorsTitle: "Renk",
+    font: "Yazı tipi",
+    lines: "Satır",
     borderDefault: "Koyu",
     borderLight: "Çakmak",
     fontFamily: "Font ailesi",
@@ -1097,7 +1109,8 @@ export var turkishStrings = {
     surveyTitle: "Anket başlığı yazı tipi",
     surveyDescription: "Anket açıklaması yazı tipi",
     pageTitle: "Sayfa başlığı yazı tipi",
-    pageDescription: "Sayfa açıklaması yazı tipi",
+    titleFont: "Başlık yazı tipi",
+    descriptionFont: "Açıklama yazı tipi",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Gölge Efekti Ekle",
@@ -1106,8 +1119,7 @@ export var turkishStrings = {
     boxShadowSpread: "Yaymak",
     boxShadowDrop: "Damla",
     boxShadowInner: "İç",
-    questionShadow: "Gölge efektleri",
-    editorShadow: "Giriş öğesi gölge efektleri",
+    shadow: "Gölge efektleri",
     headerView: "Görünüm",
     headerViewBasic: "Temel",
     headerViewAdvanced: "İleri",
@@ -1733,3 +1745,24 @@ editorLocalization.locales["tr"] = turkishStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Ayarlara git"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Yüklenen seçim seçeneklerinin önizlemesi"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Satırlarda yinelenen yanıtları önleme"
+// theme.advancedMode: "Advanced mode" => "Gelişmiş mod"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Arka plan ve köşe yarıçapı"
+// theme.colorsTitle: "Colors" => "Renk"
+// theme.font: "Font" => "Yazı tipi"
+// theme.lines: "Lines" => "Satır"
+// theme.titleFont: "Title font" => "Başlık yazı tipi"
+// theme.descriptionFont: "Description font" => "Açıklama yazı tipi"
+// theme.shadow: "Shadow effects" => "Gölge efektleri"
+// ed.translateUsigAIFrom: "Translate from: " => "Çeviri kaynağı: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Yanıtlamayı Reddet seçeneğine izin ver"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Bilmiyorum seçeneğine izin ver"
+// pv.contain: "Contain" => "Kapsamak"
+// pv.cover: "Cover" => "Örtmek"
+// pv.fill: "Fill" => "Doldurmak"
+
+// pe.transposeData: "Transpose rows to columns" => "Satırları sütunlara dönüştürme"
+// layout.panel: "Layout" => "Düzen"
+// layout.question: "Layout" => "Düzen"
+// layout.base: "Layout" => "Düzen"

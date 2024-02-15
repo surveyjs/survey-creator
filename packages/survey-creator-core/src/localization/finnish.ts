@@ -49,9 +49,9 @@ export var fiStrings = {
     settings: "Kyselyn asetukset",
     settingsTooltip: "Avaa kyselyn asetukset",
     surveySettings: "Kyselyn asetukset",
-    surveySettingsTooltip: "Avaa kyselyn asetukset",
+    surveySettingsTooltip: "Kyselyn asetukset",
     themeSettings: "Teeman asetukset",
-    themeSettingsTooltip: "Avaa teema-asetukset",
+    themeSettingsTooltip: "Teeman asetukset",
     showPanel: "Näytä Paneeli",
     hidePanel: "Piilota Paneeli",
     prevSelected: "Valitse edellinen",
@@ -142,6 +142,7 @@ export var fiStrings = {
     translationExportToSCVButton: "Vie (CSV)",
     translationImportFromSCVButton: "Tuo (CSV)",
     translateUsigAI: "Käännä kaikki automaattisesti",
+    translateUsigAIFrom: "Käännös: ",
     translationDialogTitle: "Kääntämättömät merkkijonot",
     translationMergeLocaleWithDefault: "Yhdistä {0} oletuskielellä",
     translationPlaceHolder: "Käännös...",
@@ -339,6 +340,8 @@ export var fiStrings = {
     showOtherItem: "On muu",
     otherText: "Muu teksti",
     showNoneItem: "Ei mitään",
+    showRefuseItem: "Salli Kieltäydy vastaamasta -vaihtoehto",
+    showDontKnowItem: "Salli En tiedä -vaihtoehto",
     noneText: "Ei mitään tekstiä",
     showSelectAllItem: "On valinnut kaikki",
     selectAllText: "Valitse kaikki tekstit",
@@ -368,6 +371,7 @@ export var fiStrings = {
     imageWidth: "Kuvan leveys",
     rowCount: "Rivien määrä",
     columnLayout: "Sarakkeiden asettelu",
+    transposeData: "Rivien transponointi sarakkeisiin",
     addRowLocation: "Lisää rivipainikkeen sijainti",
     addRowText: "Lisää rivipainikkeen teksti",
     removeRowText: "Poista rivipainikkeen teksti",
@@ -446,6 +450,10 @@ export var fiStrings = {
     },
     question: {
       page: "Pääsivu"
+    },
+    panel: {
+      page: "Pääsivu",
+      indent: "Ulompien sisennysten lisääminen"
     },
     showTimerPanel: "Näytä ajastus -paneeli",
     showTimerPanelMode: "Näytä ajastus -paneelin tila",
@@ -617,7 +625,11 @@ export var fiStrings = {
       templateTitle: "Mallin otsikko",
       totals: "Yhteensä",
       logic: "Logiikka",
-      layout: "Layout",
+      layout: {
+        panel: "Asettelu",
+        question: "Asettelu",
+        base: "Asettelu"
+      },
       data: "Data",
       validation: "Validointi",
       cells: "Solut",
@@ -634,9 +646,6 @@ export var fiStrings = {
     columnsEnableIf: "Sarakkeet ovat näkyvissä, jos",
     rowsEnableIf: "Rivit ovat näkyvissä, jos",
     indent: "Sisennysten lisääminen",
-    panel: {
-      indent: "Ulompien sisennysten lisääminen"
-    },
     innerIndent: "Sisäisten sisennysten lisääminen",
     defaultValueFromLastRow: "Oletusarvojen ottaminen viimeiseltä riviltä",
     defaultValueFromLastPanel: "Ota oletusarvot viimeisestä paneelista",
@@ -749,6 +758,9 @@ export var fiStrings = {
     onComplete: "onComplete",
     onHidden: "onHidden",
     onHiddenContainer: "Kun kysymys tai sen paneeli/sivu piilotetaan",
+    contain: "Sisältää",
+    cover: "Kansi",
+    fill: "Täyttää",
     clearInvisibleValues: {
       none: "Koskaan"
     },
@@ -1038,8 +1050,8 @@ export var fiStrings = {
     "--primary-foreground": "Ensisijainen etualan väri",
     "--foreground": "Edustan väri",
     "--base-unit": "Perusyksikkö",
+    advancedMode: "Edistynyt tila",
     groupGeneral: "Yleiset",
-    groupAdvanced: "Edistynyt",
     groupHeader: "Otsikko",
     groupBackground: "Tausta",
     groupAppearance: "Ulkonäkö",
@@ -1068,11 +1080,9 @@ export var fiStrings = {
     backgroundImageAttachmentScroll: "Vierittää",
     panelBackgroundTransparency: "Paneelin taustan peittävyys",
     questionBackgroundTransparency: "Taustan peittävyyden kyseenalaistaminen",
-    questionPanel: "Paneelin tausta ja kulmasäde",
     questionTitle: "Kysymyksen otsikon fontti",
-    questionDescription: "Kysymyksen kuvauksen fontti",
     editorPanel: "Syötä elementti",
-    editorFont: "Syöttöelementin fontti",
+    backgroundCornerRadius: "Taustan ja kulman säde",
     backcolor: "Oletustausta",
     hovercolor: "Vie hiiri taustalle",
     borderDecoration: "Reunusten koristelu",
@@ -1080,7 +1090,9 @@ export var fiStrings = {
     accentForeground: "Aksentti etualalla",
     primaryForecolor: "Oletusväri",
     primaryForecolorLight: "Käytöstä poistettu väri",
-    linesColors: "Pienet viivan värit",
+    colorsTitle: "Värit",
+    font: "Fontti",
+    lines: "Rivit",
     borderDefault: "Tummempi",
     borderLight: "Sytytin",
     fontFamily: "Fonttiperhe",
@@ -1097,7 +1109,8 @@ export var fiStrings = {
     surveyTitle: "Kyselyn otsikon fontti",
     surveyDescription: "Kyselyn kuvauksen fontti",
     pageTitle: "Sivun otsikon fontti",
-    pageDescription: "Sivun kuvauksen fontti",
+    titleFont: "Otsikon fontti",
+    descriptionFont: "Kuvauksen fontti",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "Lisää varjotehoste",
@@ -1106,8 +1119,7 @@ export var fiStrings = {
     boxShadowSpread: "Leviäminen",
     boxShadowDrop: "Pisara",
     boxShadowInner: "Sisäinen",
-    questionShadow: "Varjo-tehosteet",
-    editorShadow: "Syöttöelementin varjotehosteet",
+    shadow: "Varjo-tehosteet",
     headerView: "Näkymä",
     headerViewBasic: "Emäksinen",
     headerViewAdvanced: "Edistynyt",
@@ -1738,3 +1750,24 @@ editorLocalization.locales["fi"] = fiStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "Siirry asetuksiin"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "Ladattujen valintavaihtoehtojen esikatselu"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "Estä päällekkäiset vastaukset riveillä"
+// theme.advancedMode: "Advanced mode" => "Edistynyt tila"
+// theme.backgroundCornerRadius: "Background and corner radius" => "Taustan ja kulman säde"
+// theme.colorsTitle: "Colors" => "Värit"
+// theme.font: "Font" => "Fontti"
+// theme.lines: "Lines" => "Rivit"
+// theme.titleFont: "Title font" => "Otsikon fontti"
+// theme.descriptionFont: "Description font" => "Kuvauksen fontti"
+// theme.shadow: "Shadow effects" => "Varjo-tehosteet"
+// ed.translateUsigAIFrom: "Translate from: " => "Käännös: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "Salli Kieltäydy vastaamasta -vaihtoehto"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "Salli En tiedä -vaihtoehto"
+// pv.contain: "Contain" => "Sisältää"
+// pv.cover: "Cover" => "Kansi"
+// pv.fill: "Fill" => "Täyttää"
+
+// pe.transposeData: "Transpose rows to columns" => "Rivien transponointi sarakkeisiin"
+// layout.panel: "Layout" => "Asettelu"
+// layout.question: "Layout" => "Asettelu"
+// layout.base: "Layout" => "Asettelu"

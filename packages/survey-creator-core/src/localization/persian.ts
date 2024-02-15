@@ -49,9 +49,9 @@ var persianStrings = {
     settings: "تنظیمات نظرسنجی",
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     surveySettings: "تنظیمات نظرسنجی",
-    surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
+    surveySettingsTooltip: "تنظیمات نظرسنجی",
     themeSettings: "تنظیمات تم",
-    themeSettingsTooltip: "باز کردن تنظیمات تم",
+    themeSettingsTooltip: "تنظیمات تم",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -142,6 +142,7 @@ var persianStrings = {
     translationExportToSCVButton: "برون بری به CSV",
     translationImportFromSCVButton: "برون ریزی از CSV",
     translateUsigAI: "ترجمه خودکار همه",
+    translateUsigAIFrom: "ترجمه از: ",
     translationDialogTitle: "رشتههای ترجمهنشده",
     translationMergeLocaleWithDefault: "ادغام {0} با زبان پیش فرض",
     translationPlaceHolder: "در حال ترجمه...",
@@ -339,6 +340,8 @@ var persianStrings = {
     showOtherItem: "دارای آیتم دیگر",
     otherText: "سایر آیتم های متن",
     showNoneItem: "هیچ آیتمی ندارد",
+    showRefuseItem: "اجازه دهید گزینه امتناع از پاسخ",
+    showDontKnowItem: "گزینه Don't Know را انتخاب کنید",
     noneText: "هیچ آیتم متنی وجود ندارد",
     showSelectAllItem: "همه موارد انتخاب شده است",
     selectAllText: "انتخاب همه آیتم های متن",
@@ -368,6 +371,7 @@ var persianStrings = {
     imageWidth: "عرض تصویر",
     rowCount: "تعداد سطر",
     columnLayout: "قالب ستون ها",
+    transposeData: "جابهجا کردن سطرها به ستونها",
     addRowLocation: "اضافه کردن موقعیت دکمه سطری",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
@@ -446,6 +450,10 @@ var persianStrings = {
     },
     question: {
       page: "صفحه اصلی"
+    },
+    panel: {
+      page: "صفحه اصلی",
+      indent: "اضافه کردن تورفتات بیرونی"
     },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
@@ -617,7 +625,11 @@ var persianStrings = {
       templateTitle: "عنوان قالب",
       totals: "جمع کل",
       logic: "منطق",
-      layout: "چیدمان",
+      layout: {
+        panel: "طرح",
+        question: "طرح",
+        base: "طرح"
+      },
       data: "اطلاعات",
       validation: "اعتبارسنجی",
       cells: "سلول ها",
@@ -634,9 +646,6 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     indent: "افزودن تورفتهای",
-    panel: {
-      indent: "اضافه کردن تورفتات بیرونی"
-    },
     innerIndent: "اضافه کردن تورفتات داخلی",
     defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
     defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",
@@ -749,6 +758,9 @@ var persianStrings = {
     onComplete: "به محض تمام شدن",
     onHidden: "به محض مخفی شدن",
     onHiddenContainer: "هنگامی که سوال یا پانل / صفحه ان پنهان می شود",
+    contain: "حاوی",
+    cover: "پوشش",
+    fill: "پر کردن",
     clearInvisibleValues: {
       none: "هرگز"
     },
@@ -1038,8 +1050,8 @@ var persianStrings = {
     "--primary-foreground": "رنگ پیشزمینه اصلی",
     "--foreground": "رنگ پیشزمینه",
     "--base-unit": "واحد پایه",
+    advancedMode: "حالت پیشرفته",
     groupGeneral: "عمومی",
-    groupAdvanced: "پیشرفته",
     groupHeader: "هدر",
     groupBackground: "پس زمینه",
     groupAppearance: "ظاهر",
@@ -1068,11 +1080,9 @@ var persianStrings = {
     backgroundImageAttachmentScroll: "حرکت",
     panelBackgroundTransparency: "تاری پسزمینه پانل",
     questionBackgroundTransparency: "تاری پسزمینۀ سؤال",
-    questionPanel: "پس زمینه پنل و شعاع گوشه",
     questionTitle: "قلم عنوان پرسش",
-    questionDescription: "قلم شرح سؤال",
     editorPanel: "عنصر ورودی",
-    editorFont: "قلم عنصر ورودی",
+    backgroundCornerRadius: "پس زمینه و شعاع گوشه",
     backcolor: "پسزمینۀ پیشفرض",
     hovercolor: "پسزمینه شناور",
     borderDecoration: "دکوراسیون مرزی",
@@ -1080,7 +1090,9 @@ var persianStrings = {
     accentForeground: "پیشزمینه لهجه",
     primaryForecolor: "رنگ پیشفرض",
     primaryForecolorLight: "رنگ غیرفعال",
-    linesColors: "رنگهای خط فرعی",
+    colorsTitle: "رنگ",
+    font: "فونت",
+    lines: "خطوط",
     borderDefault: "تیره تر",
     borderLight: "سبکتر",
     fontFamily: "خانواده قلم",
@@ -1097,7 +1109,8 @@ var persianStrings = {
     surveyTitle: "قلم عنوان نظرسنجی",
     surveyDescription: "قلم توصیف نظرسنجی",
     pageTitle: "قلم عنوان صفحه",
-    pageDescription: "قلم توصیف صفحه",
+    titleFont: "قلم عنوان",
+    descriptionFont: "قلم توصیف",
     boxShadowX: "X",
     boxShadowY: "Y",
     boxShadowAddRule: "افزودن جلوهی سایه",
@@ -1106,8 +1119,7 @@ var persianStrings = {
     boxShadowSpread: "گسترش",
     boxShadowDrop: "قطره",
     boxShadowInner: "درونی",
-    questionShadow: "جلوه های سایه",
-    editorShadow: "عناصر ورودی اثرات سایه",
+    shadow: "جلوه های سایه",
     headerView: "مشاهده",
     headerViewBasic: "اساسی",
     headerViewAdvanced: "پیشرفته",
@@ -1693,3 +1705,24 @@ editorLocalization.locales["fa"] = persianStrings;
 // ed.choicesLoadedFromWebLinkText: "Go to settings" => "رفتن به تنظیمات"
 // ed.choicesLoadedFromWebPreviewTitle: "Preview of loaded choice options" => "پیش نمایش گزینه های انتخاب بار شده"
 // pe.eachRowUnique: "Prevent duplicate responses in rows" => "جلوگیری از پاسخ های تکراری در ردیف ها"
+// theme.advancedMode: "Advanced mode" => "حالت پیشرفته"
+// theme.backgroundCornerRadius: "Background and corner radius" => "پس زمینه و شعاع گوشه"
+// theme.colorsTitle: "Colors" => "رنگ"
+// theme.font: "Font" => "فونت"
+// theme.lines: "Lines" => "خطوط"
+// theme.titleFont: "Title font" => "قلم عنوان"
+// theme.descriptionFont: "Description font" => "قلم توصیف"
+// theme.shadow: "Shadow effects" => "جلوه های سایه"
+// ed.translateUsigAIFrom: "Translate from: " => "ترجمه از: "
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
+// pe.showRefuseItem: "Allow the Refuse to Answer option" => "اجازه دهید گزینه امتناع از پاسخ"
+// pe.showDontKnowItem: "Allow the Don't Know option" => "گزینه Don't Know را انتخاب کنید"
+// pv.contain: "Contain" => "حاوی"
+// pv.cover: "Cover" => "پوشش"
+// pv.fill: "Fill" => "پر کردن"
+
+// pe.transposeData: "Transpose rows to columns" => "جابهجا کردن سطرها به ستونها"
+// layout.panel: "Layout" => "طرح"
+// layout.question: "Layout" => "طرح"
+// layout.base: "Layout" => "طرح"

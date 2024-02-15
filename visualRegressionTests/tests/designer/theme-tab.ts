@@ -1,11 +1,13 @@
 import { ClientFunction, Selector } from "testcafe";
-import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, wrapVisualTest } from "../../helper";
+import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, themeSettingsButtonSelector, wrapVisualTest } from "../../helper";
 
 const url = "http://127.0.0.1:8080/testCafe/testcafe-theme-tab";
 const title = "Themes tab";
 fixture`${title}`.page`${url}`.beforeEach(async (t) => {
   await t.maximizeWindow();
 });
+
+const advancedModeSwitcher = getPropertyGridCategory("Appearance").parent(".spg-title").find(".svc-switcher");
 
 test("Check boxshadow settings", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
@@ -14,7 +16,9 @@ test("Check boxshadow settings", async (t) => {
     const root = Selector("div[data-name='--sjs-shadow-small']");
     await t.resizeWindow(2000, 2000)
       .click(getTabbedMenuItemByText("Themes"))
-      .click(Selector("h4[aria-label='Advanced']"));
+      .click(getPropertyGridCategory("Appearance"))
+      .click(advancedModeSwitcher)
+      .scrollIntoView(root);
     await takeElementScreenshot("boxshadow-one-panel.png", root, t, comparer);
     await t.click(".spg-paneldynamic__add-btn");
     await t.hover(root, { offsetX: 0, offsetY: 0 });
@@ -57,6 +61,7 @@ test("theme setting property grid", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1280, 4000);
     await setJSON({
+      title: "Title",
       pages: [
         { elements: [{ type: "text", name: "question1" }] },
         { elements: [{ type: "text", name: "question2" }] }
@@ -87,8 +92,7 @@ test("theme setting property grid", async (t) => {
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-appearance-group.png", expandedGroup, t, comparer);
 
-    await t.click(getPropertyGridCategory("Appearance"));
-    await t.click(getPropertyGridCategory("Advanced"));
+    await t.click(advancedModeSwitcher);
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-advanced-group.png", expandedGroup, t, comparer);
   });
@@ -106,7 +110,7 @@ test("theme setting property grid mobile", async (t) => {
       ]
     });
     await t.click(Selector('button[title="Preview"]'));
-    await t.click(Selector('button[title="Open theme settings"]'));
+    await t.click(themeSettingsButtonSelector);
 
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-general-group-mobile.png", expandedGroup, t, comparer);

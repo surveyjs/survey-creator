@@ -19,10 +19,22 @@
   opacity: 0.75;
 }
 
-.svc-question__dropdown-choices--wrapper .svc-action-button {
-  margin-left: calcSize(6.75);
-  margin-top: calcSize(1);
+.svc-question__content>.svc-question__dropdown-choices--wrapper {
+  width: calc(100% + calcSize(8));
+  overflow-x: auto;
+  margin: 0 calcSize(-4);
 
-  cursor: pointer;
+  &>div {
+    width: calc(100% - calcSize(8));
+    display: inline-block;
+    min-width: calcSize(15);
+    margin: 0 calcSize(4);
+  }
+
+  .svc-action-button {
+    margin-left: calcSize(6.75);
+    margin-top: calcSize(1);
+
+    cursor: pointer;
+  }
 }
-

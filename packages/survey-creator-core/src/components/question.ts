@@ -18,7 +18,7 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
@@ -48,7 +48,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private dragOrClickHelper: DragOrClickHelper;
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
@@ -126,13 +126,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--drag-over-inside", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft || this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
       result += " svc-question__content--drag-over-left";
     } else {
       result = result.replace(" svc-question__content--drag-over-left", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight || this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
       result += " svc-question__content--drag-over-right";
     } else {
       result = result.replace(" svc-question__content--drag-over-right", "");
@@ -161,7 +161,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     return this.element.dragTypeOverMe;
   }
   public get isBannerShowing(): boolean {
-    return this.isUsingCarryForward || this.isUsingRestfull;
+    return this.isUsingCarryForward || this.isUsingRestfull || this.isMessagePanelVisible;
   }
   private get isUsingCarryForward(): boolean {
     return (<any>this.element)?.isUsingCarryForward;
@@ -169,8 +169,11 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private get isUsingRestfull(): boolean {
     return (<any>this.element)?.isUsingRestful;
   }
+  private get isMessagePanelVisible(): boolean {
+    return (this.element)?.getPropertyValue("isMessagePanelVisible");
+  }
   public createBannerParams(): QuestionBannerParams {
-    return this.createCarryForwardParams() || this.createUsingRestfulParams();
+    return this.createCarryForwardParams() || this.createUsingRestfulParams() || this.createCustomMessagePanel();
   }
   private createCarryForwardParams(): QuestionBannerParams {
     if (!this.isUsingCarryForward) return null;
@@ -191,6 +194,20 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       text: this.creator.getLocString("ed.choicesLoadedFromWebText"),
       onClick: () => { this.creator.selectElement(this.element, "choicesByUrl"); }
     };
+  }
+  private createCustomMessagePanel(): QuestionBannerParams {
+    if (!this.isMessagePanelVisible) return null;
+    const res: any = {
+      question: this.element,
+      actionText: "",
+      messageText: "",
+      onClick: () => { }
+    };
+    if(this.creator) {
+      this.creator.onCreateCustomMessagePanel.fire(this.creator, res);
+    }
+    res.text = res.messageText;
+    return res;
   }
   public dispose(): void {
     this.surveyElement.unRegisterFunctionOnPropertyValueChanged("isRequired", "isRequiredAdorner");

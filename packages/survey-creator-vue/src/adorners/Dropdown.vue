@@ -1,25 +1,27 @@
 <template>
   <div class="svc-question__dropdown-choices--wrapper">
-    <div class="svc-question__dropdown-choices">
-      <div
-        v-for="item in model.getRenderedItems()"
-        :key="item.value"
-        :class="model.getChoiceCss()"
-      >
-        <component
-          :is="getItemValueComponentName(item)"
-          v-bind="getItemValueComponentData(item)"
+    <div>
+      <div class="svc-question__dropdown-choices">
+        <div
+          v-for="item in model.getRenderedItems()"
+          :key="item.value"
+          :class="model.getChoiceCss()"
         >
-        </component>
+          <component
+            :is="getItemValueComponentName(item)"
+            v-bind="getItemValueComponentData(item)"
+          >
+          </component>
+        </div>
       </div>
+      <svc-action-button
+        v-if="model.needToCollapse"
+        :text="model.getButtonText()"
+        :click="model.switchCollapse.bind(model)"
+        :allowBubble="true"
+      >
+      </svc-action-button>
     </div>
-    <svc-action-button
-      v-if="model.needToCollapse"
-      :text="model.getButtonText()"
-      :click="model.switchCollapse.bind(model)"
-      :allowBubble="true"
-    >
-    </svc-action-button>
   </div>
 </template>
 <script lang="ts" setup>
