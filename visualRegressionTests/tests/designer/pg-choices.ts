@@ -152,7 +152,7 @@ test("Check choices editor with narrow property grid", async (t) => {
       .click(Selector(".svc-question__content"), { offsetX: -10, offsetY: -10 })
       .click(Selector("h4[aria-label=General]"))
       .click(Selector("h4[aria-label='Choice Options']"))
-      .click(questionSelector.find(".spg-action-button").nth(3));
+      .click(questionSelector.find("td .spg-action-button").nth(0));
 
     await takeElementScreenshot("choices-editor-narrow-pg.png", questionSelector, t, comparer);
   });
