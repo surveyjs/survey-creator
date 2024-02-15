@@ -29,17 +29,21 @@ ComponentCollection.Instance.add({
   onInit() {
     Serializer.addProperties("colorsettings", [{
       name: "choices:itemvalue[]",
+      visible: false
     },
     {
       name: "colorTitleLocation:string",
       default: "hidden",
+      visible: false
     },
     {
       name: "allowEmptyValue:boolean",
-      default: false
+      default: false,
+      visible: false
     },
     {
       name: "colorTitle:string",
+      visible: false
     }
     ]);
   },
@@ -70,6 +74,9 @@ export function updateColorSettingsJSON() {
 
 function syncPropertiesFromCompositeToColor(question: Question, propertyName: string, newValue: any) {
   const colorQuestion = question.contentPanel.questions[0];
+  if (!colorQuestion) {
+    return;
+  }
   if (propertyName == "colorTitleLocation") {
     colorQuestion.titleLocation = newValue;
   }

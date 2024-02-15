@@ -46,11 +46,12 @@ import {
   PropertyGridRowValueEditor,
   PropertyGridValueEditorBase
 } from "../../src/property-grid/values";
-import { PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
+import { PropertyGridEditorMatrixPages, PropertyGridEditorMatrixRateValues } from "../../src/property-grid/matrices";
 import { editorLocalization } from "../../src/editorLocalization";
 import { SurveyQuestionEditorDefinition } from "../../src/question-editor/definition";
 import { PropertyGridModelTester, findSetupAction } from "./property-grid.base";
 import { enStrings } from "../../src/localization/english";
+import { CreatorTester } from "../creator-tester";
 
 test("Check property grid survey options", () => {
   const oldValue = Serializer.findProperty(
@@ -3071,7 +3072,7 @@ test("allowExpandMultipleCategories", () => {
   const getOpendedCategories = (): number => {
     let res = 0;
     propSurvey.getAllPanels().forEach(panel => {
-      if(panel.isExpanded) res++;
+      if (panel.isExpanded) res++;
     });
     return res;
   };
@@ -3158,4 +3159,27 @@ test("category, parent property", () => {
   Serializer.removeProperty("question", "prop2");
   Serializer.removeProperty("question", "prop3");
   Serializer.removeProperty("question", "prop4");
+});
+
+test("check pages editor respects onPageAdding", () => {
+  const creator = new CreatorTester();
+  let allowAdd = true;
+  creator.onPageAdding.add((s, o) => {
+    o.allow = allowAdd;
+  });
+  const propertyGrid = new PropertyGridModelTester(creator.survey);
+  const pagesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("pages")
+  );
+  const propertyEditor = new PropertyGridEditorMatrixPages();
+  const options = { titleActions: [], question: pagesQuestion };
+  propertyEditor.onGetQuestionTitleActions(creator.survey, options, creator);
+  const addNewPageAction = options.titleActions[0] as IAction;
+
+  expect(creator.survey.pages.length).toBe(0);
+  addNewPageAction.action!();
+  expect(creator.survey.pages.length).toBe(1);
+  allowAdd = false;
+  addNewPageAction.action!();
+  expect(creator.survey.pages.length).toBe(1);
 });
