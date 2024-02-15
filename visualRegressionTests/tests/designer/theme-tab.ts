@@ -1,5 +1,5 @@
 import { ClientFunction, Selector } from "testcafe";
-import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, wrapVisualTest } from "../../helper";
+import { getPropertyGridCategory, getTabbedMenuItemByText, setJSON, takeElementScreenshot, themeSettingsButtonSelector, wrapVisualTest } from "../../helper";
 
 const url = "http://127.0.0.1:8080/testCafe/testcafe-theme-tab";
 const title = "Themes tab";
@@ -110,7 +110,7 @@ test("theme setting property grid mobile", async (t) => {
       ]
     });
     await t.click(Selector('button[title="Preview"]'));
-    await t.click(Selector('button[title="Open theme settings"]'));
+    await t.click(themeSettingsButtonSelector);
 
     await ClientFunction(() => document.body.focus())();
     await takeElementScreenshot("theme-editor-property-grid-general-group-mobile.png", expandedGroup, t, comparer);

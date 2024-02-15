@@ -388,7 +388,7 @@ export class SurveyCreatorModel extends Base
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
    * 
-   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/surveycreator#showObjectTitles) property instead of handling this event.
+   * Handle this event to replace survey element names in the UI with custom display texts. If you only want to replace the names with survey element titles, enable the [`showObjectTitles`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#showObjectTitles) property instead of handling this event.
    */
   public onGetObjectDisplayName: EventBase<SurveyCreatorModel, ElementGetDisplayNameEvent> = this.addCreatorEvent<SurveyCreatorModel, ElementGetDisplayNameEvent>();
 
@@ -1353,14 +1353,17 @@ export class SurveyCreatorModel extends Base
    * An event that is raised before a new page is added to the survey. Handle this event if you do not want to add the page. 
    */
   public onPageAdding: EventBase<SurveyCreatorModel, PageAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PageAddingEvent>();
-  @undoRedoTransaction()
-  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
+  public canAddPage(pageToAdd?: PageModel) {
     const options = {
       page: pageToAdd,
       allow: true
     };
     this.onPageAdding.fire(this, options);
-    if (!options.allow) {
+    return options.allow;
+  }
+  @undoRedoTransaction()
+  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
+    if (!this.canAddPage(pageToAdd)) {
       return null;
     }
     if (beforeAdd !== undefined) {
@@ -1892,6 +1895,9 @@ export class SurveyCreatorModel extends Base
 
   public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
+
+    if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
+
     if (reason === "designer" || reason === "modal-question-editor") {
       initializeDesignTimeSurveyModel(survey, this);
     }

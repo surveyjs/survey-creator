@@ -51,9 +51,9 @@ export var enStrings = {
     settings: "Settings",
     settingsTooltip: "Open settings",
     surveySettings: "Survey Settings",
-    surveySettingsTooltip: "Open survey settings",
+    surveySettingsTooltip: "Survey settings",
     themeSettings: "Theme Settings",
-    themeSettingsTooltip: "Open theme settings",
+    themeSettingsTooltip: "Theme settings",
     showPanel: "Show Panel",
     hidePanel: "Hide Panel",
     prevSelected: "Select previous",
@@ -373,6 +373,7 @@ export var enStrings = {
     imageWidth: "Image width",
     rowCount: "Row count",
     columnLayout: "Columns layout",
+    transposeData: "Transpose rows to columns",
     addRowLocation: "Add Row button location",
     addRowText: "Add Row button text",
     removeRowText: "Remove Row button text",
@@ -450,6 +451,10 @@ export var enStrings = {
     },
     question: {
       page: "Parent page"
+    },
+    panel: {
+      page: "Parent page",
+      indent: "Add outer indents"
     },
     showTimerPanel: "Timer location",
     showTimerPanelMode: "Timer mode",
@@ -621,7 +626,11 @@ export var enStrings = {
       templateTitle: "Title template",
       totals: "Totals",
       logic: "Logic",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validation",
       cells: "Cell Texts",
@@ -638,9 +647,6 @@ export var enStrings = {
     columnsEnableIf: "Columns are visible if",
     rowsEnableIf: "Rows are visible if",
     indent: "Add indents",
-    panel: {
-      indent: "Add outer indents"
-    },
     innerIndent: "Add inner indents",
     defaultValueFromLastRow: "Take default values from the last row",
     defaultValueFromLastPanel: "Take default values from the last panel",
@@ -801,7 +807,12 @@ export var enStrings = {
       none: "Hidden"
     },
     showProgressBar: {
-      off: "Hidden"
+      off: "Hidden",
+      auto: "Auto",
+      aboveHeader: "Above header",
+      belowHeader: "Below header",
+      bottom: "Bottom",
+      topBottom: "Top and Bottom"
     },
     showTimerPanel: {
       none: "Hidden"
@@ -942,6 +953,7 @@ export var enStrings = {
     },
     multiSelect: "Allow multiple selection",
     showLabel: "Show image captions",
+    swapOrder: "Swap the order of Yes and No",
     value: "Value",
     tabAlign: "Tab alignment",
     sourceType: "Source type",

@@ -349,6 +349,27 @@ Survey.Serializer.addProperty("question",
 );
 ```
 
+#### `enableIf`
+
+A function that specifies a condition based on which the property is switched to read-only mode. This function accepts the question or panel that a user configures as a parameter.
+
+In the following code, the `dateFormat` property is enabled only if an `inputType` property is set to one of the date types:
+
+```js
+Survey.Serializer.addProperty("text", {
+  name: "dateFormat",
+  category: "general",
+  visibleIndex: 7,
+  enableIf: function (obj) {
+    return (
+      obj.inputType === "date" ||
+      obj.inputType === "datetime" ||
+      obj.inputType === "datetime-local"
+    );
+  }
+});
+```
+
 #### `category`
 
 A string value that specifies a category in which to display the property. If `category` is not set, the property falls into the Others category. Categories are sorted according to [`categoryIndex`](#categoryindex) values.

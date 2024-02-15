@@ -49,9 +49,9 @@ export var indonesianStrings = {
     settings: "Pengaturan Survei",
     settingsTooltip: "Buka pengaturan",
     surveySettings: "Pengaturan Survei",
-    surveySettingsTooltip: "Buka pengaturan survei",
+    surveySettingsTooltip: "Pengaturan survei",
     themeSettings: "Pengaturan Tema",
-    themeSettingsTooltip: "Buka pengaturan tema",
+    themeSettingsTooltip: "Pengaturan tema",
     showPanel: "Tampilkan Panel",
     hidePanel: "Sembunyikan Panel",
     prevSelected: "Pilih sebelumnya",
@@ -371,6 +371,7 @@ export var indonesianStrings = {
     imageWidth: "Lebar gambar",
     rowCount: "Jumlah baris",
     columnLayout: "Tata letak kolom",
+    transposeData: "Mengubah urutan baris menjadi kolom",
     addRowLocation: "Tambah lokasi tombol baris",
     addRowText: "Teks tambah tombol baris",
     removeRowText: "Teks hapus tombol baris",
@@ -449,6 +450,10 @@ export var indonesianStrings = {
     },
     question: {
       page: "Halaman induk"
+    },
+    panel: {
+      page: "Halaman induk",
+      indent: "Menambahkan inden luar"
     },
     showTimerPanel: "Tampilkan panel pengatur waktu",
     showTimerPanelMode: "Tampilkan mode panel pengatur waktu",
@@ -620,7 +625,11 @@ export var indonesianStrings = {
       templateTitle: "Judul templat",
       totals: "Total",
       logic: "Logika",
-      layout: "Tata letak",
+      layout: {
+        panel: "Tata letak",
+        question: "Tata letak",
+        base: "Tata letak"
+      },
       data: "Data",
       validation: "Validasi",
       cells: "Teks Sel",
@@ -637,9 +646,6 @@ export var indonesianStrings = {
     columnsEnableIf: "Kolom terlihat jika",
     rowsEnableIf: "Baris terlihat jika",
     indent: "Menambahkan inden",
-    panel: {
-      indent: "Menambahkan inden luar"
-    },
     innerIndent: "Menambahkan inden dalam",
     defaultValueFromLastRow: "Mengambil nilai default dari baris terakhir",
     defaultValueFromLastPanel: "Mengambil nilai default dari panel terakhir",
@@ -1914,3 +1920,8 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pv.contain: "Contain" => "Mengandung"
 // pv.cover: "Cover" => "Menutupi"
 // pv.fill: "Fill" => "Isi"
+
+// pe.transposeData: "Transpose rows to columns" => "Mengubah urutan baris menjadi kolom"
+// layout.panel: "Layout" => "Tata letak"
+// layout.question: "Layout" => "Tata letak"
+// layout.base: "Layout" => "Tata letak"

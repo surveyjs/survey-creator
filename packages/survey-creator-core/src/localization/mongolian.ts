@@ -49,9 +49,9 @@ export var mnStrings = {
     settings: "Тохиргоо",
     settingsTooltip: "Тохиргоог нээх",
     surveySettings: "Санал асуулгын тохиргоо",
-    surveySettingsTooltip: "Санал асуулгын тохиргоог нээх",
+    surveySettingsTooltip: "Судалгааны тохиргоо",
     themeSettings: "Сэдвийн тохиргоо",
-    themeSettingsTooltip: "Нээлттэй сэдвийн тохиргоо",
+    themeSettingsTooltip: "Сэдвийн тохиргоо",
     showPanel: "Панел харуулах",
     hidePanel: "Панел нуух",
     prevSelected: "Өмнөхийг сонгох",
@@ -371,6 +371,7 @@ export var mnStrings = {
     imageWidth: "Зургийн өргөн",
     rowCount: "Мөрний тоо",
     columnLayout: "Баганы зохион байгуулалт",
+    transposeData: "Багануудад транспозын эгнээ",
     addRowLocation: "Мөр нэмэх товчны байршил",
     addRowText: "Мөр нэмэх",
     removeRowText: "Мөр устгах",
@@ -449,6 +450,10 @@ export var mnStrings = {
     },
     question: {
       page: "Эх хуудас"
+    },
+    panel: {
+      page: "Эх хуудас",
+      indent: "Гаднах догол мөр нэмэх"
     },
     showTimerPanel: "Тоолуурын байршил",
     showTimerPanelMode: "Тоолуурын горим",
@@ -620,7 +625,11 @@ export var mnStrings = {
       templateTitle: "Гарчигны загвар",
       totals: "Нийт",
       logic: "Логик",
-      layout: "Зохион байгуулалт",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Өгөгдөл",
       validation: "Батлах",
       cells: "Нүдний текст",
@@ -637,9 +646,6 @@ export var mnStrings = {
     columnsEnableIf: "Баганууд харагдана хэрэв",
     rowsEnableIf: "Мөрнүүд харагдана хэрэв",
     indent: "Догол мөр нэмэх",
-    panel: {
-      indent: "Гаднах догол мөр нэмэх"
-    },
     innerIndent: "Дотоод догол мөр нэмэх",
     defaultValueFromLastRow: "Өмнөх мөрнөөс үндсэн утга авах",
     defaultValueFromLastPanel: "Сүүлийн панелаас үндсэн утга авах",
@@ -1416,3 +1422,8 @@ editorLocalization.locales["mn"] = mnStrings;
 // pv.contain: "Contain" => "Агуулах"
 // pv.cover: "Cover" => "Хөшиг"
 // pv.fill: "Fill" => "Дүүргэлт"
+
+// pe.transposeData: "Transpose rows to columns" => "Багануудад транспозын эгнээ"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

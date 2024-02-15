@@ -49,9 +49,9 @@ export var ruStrings = {
     settings: "Настройки опросника",
     settingsTooltip: "Открыть настройки",
     surveySettings: "Настройки опроса",
-    surveySettingsTooltip: "Откройте настройки опроса",
+    surveySettingsTooltip: "Настройки съемки",
     themeSettings: "Настройки темы",
-    themeSettingsTooltip: "Откройте настройки темы",
+    themeSettingsTooltip: "Настройки темы",
     showPanel: "Панель «Показать»",
     hidePanel: "Скрыть панель",
     prevSelected: "Выберите предыдущую",
@@ -371,6 +371,7 @@ export var ruStrings = {
     imageWidth: "Ширина изображения",
     rowCount: "Количество строк",
     columnLayout: "Макет столбцов",
+    transposeData: "Транспонирование строк в столбцы",
     addRowLocation: "Добавить расположение кнопки строки",
     addRowText: "Добавить текст кнопки строки",
     removeRowText: "Удалить кнопку строки текста",
@@ -449,6 +450,10 @@ export var ruStrings = {
     },
     question: {
       page: "Родительская страница"
+    },
+    panel: {
+      page: "Родительская страница",
+      indent: "Добавление внешних отступов"
     },
     showTimerPanel: "Показывать панель таймера",
     showTimerPanelMode: "Показывать режим панели таймера",
@@ -620,7 +625,11 @@ export var ruStrings = {
       templateTitle: "Название шаблона",
       totals: "Итоги",
       logic: "Логика",
-      layout: "Планировка",
+      layout: {
+        panel: "Схема",
+        question: "Схема",
+        base: "Схема"
+      },
       data: "Данные",
       validation: "Проверка",
       cells: "Ячейки",
@@ -637,9 +646,6 @@ export var ruStrings = {
     columnsEnableIf: "Столбцы видны, если",
     rowsEnableIf: "Строки видны, если",
     indent: "Добавление отступов",
-    panel: {
-      indent: "Добавление внешних отступов"
-    },
     innerIndent: "Добавление внутренних отступов",
     defaultValueFromLastRow: "Взять значения по умолчанию из последней строки",
     defaultValueFromLastPanel: "Возьмите значения по умолчанию с последней панели",
@@ -1820,3 +1826,8 @@ editorLocalization.locales["ru"] = ruStrings;
 // pv.contain: "Contain" => "Содержать"
 // pv.cover: "Cover" => "Крышка"
 // pv.fill: "Fill" => "Заполнять"
+
+// pe.transposeData: "Transpose rows to columns" => "Транспонирование строк в столбцы"
+// layout.panel: "Layout" => "Схема"
+// layout.question: "Layout" => "Схема"
+// layout.base: "Layout" => "Схема"

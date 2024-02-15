@@ -1,6 +1,8 @@
 import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
+  ISurveyPropertyGridDefinition,
+  defaultPropertyGridDefinition
 } from "./definition";
 import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
@@ -23,6 +25,9 @@ export class SurveyQuestionEditorTabDefinition {
   public visible: boolean = true;
   public index: number = 0;
   public properties: Array<SurveyQuestionEditorPropertyDefinition> = [];
+  public parentName: string;
+  public parent: SurveyQuestionEditorTabDefinition;
+  public tabs: Array<SurveyQuestionEditorTabDefinition>;
 }
 
 const otherTabName = "others";
@@ -32,14 +37,28 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
+  public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
+    if(!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
+    const props = propertyGridDefinition.classes[className]?.properties;
+    if(!Array.isArray(props)) return "";
+    for(let i = 0; i < props.length; i ++) {
+      const prop = props[i];
+      if(typeof prop === "object" && prop.name === propName) return prop.placeholder || "";
+    }
+    return "";
+  }
   constructor(
     public obj: any,
     public options: ISurveyCreatorOptions = null,
     className: string = null,
     showMode: string = null,
     private parentObj: any = null,
-    private parentProperty: JsonObjectProperty = null
+    private parentProperty: JsonObjectProperty = null,
+    private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
+    if(!this.propertyGridDefinition) {
+      this.propertyGridDefinition = defaultPropertyGridDefinition;
+    }
     this.showModeValue = showMode;
     this.properties = Serializer.getPropertiesByObj(this.obj);
     this.fillPropertiesHash();
@@ -58,6 +77,10 @@ export class SurveyQuestionProperties {
         return false;
     }
     return true;
+  }
+  private getClassDefintion(name: string): ISurveyQuestionEditorDefinition {
+    if(!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
+    return this.propertyGridDefinition.classes[name];
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};
@@ -136,6 +159,21 @@ export class SurveyQuestionProperties {
     this.tabs.sort(function (a, b) {
       return a.index < b.index ? -1 : a.index > b.index ? 1 : 0;
     });
+    this.setParentTabs();
+  }
+  private setParentTabs(): void {
+    this.tabs.forEach(tab => {
+      if(tab.parentName) {
+        const parent = this.getTabByName(tab.parentName);
+        if(parent) {
+          tab.parent = parent;
+          if(!Array.isArray(parent.tabs)) {
+            parent.tabs = [];
+          }
+          parent.tabs.push(tab);
+        }
+      }
+    });
   }
   private addPropertyIntoTab(
     defProperty: any,
@@ -146,6 +184,7 @@ export class SurveyQuestionProperties {
       if (defProperty.index > 0) {
         tab.index = defProperty.index;
       }
+      tab.parentName = defProperty.parent;
       if (defProperty.visible === false) {
         tab.visible = false;
       }
@@ -253,19 +292,14 @@ export class SurveyQuestionProperties {
   ): Array<ISurveyQuestionEditorDefinition> {
     var result = [];
     var usedProperties = {};
-    if (
-      className.indexOf("@") > -1 &&
-      SurveyQuestionEditorDefinition.definition[className]
-    ) {
+    if (className.indexOf("@") > -1 && this.getClassDefintion(className)) {
       var defaultName =
         className.substring(0, className.indexOf("@") + 1) + "default";
-      if (
-        defaultName != className &&
-        !!SurveyQuestionEditorDefinition.definition[defaultName]
+      if (defaultName != className && !!this.getClassDefintion(defaultName)
       ) {
-        result.push(SurveyQuestionEditorDefinition.definition[defaultName]);
+        result.push(this.getClassDefintion(defaultName));
       }
-      result.push(SurveyQuestionEditorDefinition.definition[className]);
+      result.push(this.getClassDefintion(className));
       this.setUsedProperties(result, usedProperties);
       this.addNonTabProperties(result, usedProperties, true);
       return result;
@@ -296,7 +330,7 @@ export class SurveyQuestionProperties {
     return res;
   }
   private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
-    const classRes = SurveyQuestionEditorDefinition.definition[className];
+    const classRes = this.getClassDefintion(className);
     let res = false;
     if(!classRes) return res;
     if (classRes.properties) {
@@ -340,6 +374,7 @@ export class SurveyQuestionProperties {
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
+    if(!this.propertyGridDefinition.autoGenerateProperties) return;
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {

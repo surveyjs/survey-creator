@@ -49,9 +49,9 @@ var germanTranslation = {
     settings: "Umfrageeinstellungen",
     settingsTooltip: "Umfrageeinstellungen öffnen",
     surveySettings: "Umfrage Einstellungen",
-    surveySettingsTooltip: "Umfrage Einstellungen öffnen",
+    surveySettingsTooltip: "Einstellungen für Umfragen",
     themeSettings: "Theme-Einstellungen",
-    themeSettingsTooltip: "Öffnen Sie die Theme-Einstellungen",
+    themeSettingsTooltip: "Theme-Einstellungen",
     showPanel: "Panel anzeigen",
     hidePanel: "Panel verstecken",
     prevSelected: "Vorheriges auswählen",
@@ -371,6 +371,7 @@ var germanTranslation = {
     imageWidth: "Bildbreite",
     rowCount: "Zeilenanzahl",
     columnLayout: "Spaltenlayout",
+    transposeData: "Transponieren von Zeilen in Spalten",
     addRowLocation: "Zeilenknopfposition hinzufügen",
     addRowText: "Zeilenknopftext hinzufügen",
     removeRowText: "Zeilenknopftext löschen",
@@ -449,6 +450,10 @@ var germanTranslation = {
     },
     question: {
       page: "Elternseite"
+    },
+    panel: {
+      page: "Elternseite",
+      indent: "Äußere Einzüge hinzufügen"
     },
     showTimerPanel: "Position des Timers",
     showTimerPanelMode: "Modus des Timers",
@@ -620,7 +625,11 @@ var germanTranslation = {
       templateTitle: "Titeltemplate",
       totals: "Summen",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Daten",
       validation: "Validierung",
       cells: "Zellen",
@@ -637,9 +646,6 @@ var germanTranslation = {
     columnsEnableIf: "Spalten sind sichtbar, wenn",
     rowsEnableIf: "Zeilen sind sichtbar, wenn",
     indent: "Einzüge hinzufügen",
-    panel: {
-      indent: "Äußere Einzüge hinzufügen"
-    },
     innerIndent: "Fügen Sie innere Einzüge hinzu",
     defaultValueFromLastRow: "Nehmen Sie Standardwerte aus der letzten Zeile",
     defaultValueFromLastPanel: "Nehmen Sie Standardwerte aus dem letzten Bereich",
@@ -1466,3 +1472,8 @@ editorLocalization.locales["de"] = germanTranslation;
 // pv.contain: "Contain" => "Enthalten"
 // pv.cover: "Cover" => "Deckel"
 // pv.fill: "Fill" => "Füllen"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponieren von Zeilen in Spalten"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

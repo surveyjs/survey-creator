@@ -49,9 +49,9 @@ var persianStrings = {
     settings: "تنظیمات نظرسنجی",
     settingsTooltip: "باز کردن تنظیمات نظرسنجی",
     surveySettings: "تنظیمات نظرسنجی",
-    surveySettingsTooltip: "باز کردن تنظیمات نظرسنجی",
+    surveySettingsTooltip: "تنظیمات نظرسنجی",
     themeSettings: "تنظیمات تم",
-    themeSettingsTooltip: "باز کردن تنظیمات تم",
+    themeSettingsTooltip: "تنظیمات تم",
     showPanel: "نمایش پنل",
     hidePanel: "پنهان سازی پنل",
     prevSelected: "قبلی",
@@ -371,6 +371,7 @@ var persianStrings = {
     imageWidth: "عرض تصویر",
     rowCount: "تعداد سطر",
     columnLayout: "قالب ستون ها",
+    transposeData: "جابهجا کردن سطرها به ستونها",
     addRowLocation: "اضافه کردن موقعیت دکمه سطری",
     addRowText: "متن دکمه درج سطر",
     removeRowText: "متن دکمه حذف سطر",
@@ -449,6 +450,10 @@ var persianStrings = {
     },
     question: {
       page: "صفحه اصلی"
+    },
+    panel: {
+      page: "صفحه اصلی",
+      indent: "اضافه کردن تورفتات بیرونی"
     },
     showTimerPanel: "نمایش پنل زمان سنج",
     showTimerPanelMode: "نمایش حالت پنل زمان سنج",
@@ -620,7 +625,11 @@ var persianStrings = {
       templateTitle: "عنوان قالب",
       totals: "جمع کل",
       logic: "منطق",
-      layout: "چیدمان",
+      layout: {
+        panel: "طرح",
+        question: "طرح",
+        base: "طرح"
+      },
       data: "اطلاعات",
       validation: "اعتبارسنجی",
       cells: "سلول ها",
@@ -637,9 +646,6 @@ var persianStrings = {
     columnsEnableIf: "ستونها مرئی هستند اگر",
     rowsEnableIf: "سطرها مرئی هستند اگر",
     indent: "افزودن تورفتهای",
-    panel: {
-      indent: "اضافه کردن تورفتات بیرونی"
-    },
     innerIndent: "اضافه کردن تورفتات داخلی",
     defaultValueFromLastRow: "گرفتن مقادیر پیشفرض از اخرین سطر",
     defaultValueFromLastPanel: "گرفتن مقادیر پیشفرض از اخرین تابلو",
@@ -1715,3 +1721,8 @@ editorLocalization.locales["fa"] = persianStrings;
 // pv.contain: "Contain" => "حاوی"
 // pv.cover: "Cover" => "پوشش"
 // pv.fill: "Fill" => "پر کردن"
+
+// pe.transposeData: "Transpose rows to columns" => "جابهجا کردن سطرها به ستونها"
+// layout.panel: "Layout" => "طرح"
+// layout.question: "Layout" => "طرح"
+// layout.base: "Layout" => "طرح"

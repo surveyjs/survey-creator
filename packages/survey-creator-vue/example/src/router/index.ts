@@ -5,6 +5,7 @@ import ThemeSwitcher from "../components/test/ThemeSwitcher.vue"
 import ThemePreview from "../components/test/ThemePreview.vue"
 import Localization from "../components/test/Localization.vue";
 import ThemeTab from "../components/test/ThemeTab.vue";
+import NoLicense from "../components/test/NoLicense.vue";
 import ByPage from "../components/test/ByPage.vue";
 import DropdownCollapse from "../components/test/DropdownCollapse.vue";
 import CustomWidget from "../components/test/CustomWidget.vue";
@@ -20,7 +21,8 @@ const router = createRouter({
     { path: "/testCafe/testcafe-widget", component: CustomWidget },
     { path: "/testCafe/testcafe_localized_ui", component: Localization },
     { path: "/testCafe/dropdown-collapse-view", component: DropdownCollapse },
-    { path: "/testCafe/testcafe-theme-tab", component: ThemeTab }  
+    { path: "/testCafe/testcafe-theme-tab", component: ThemeTab },
+    { path: "/testCafe/testcafe-no-license", component: NoLicense }
   ]
 })
 

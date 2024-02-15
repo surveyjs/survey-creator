@@ -49,9 +49,9 @@ var spanishTranslation = {
     settings: "Configuración de la encuesta",
     settingsTooltip: "Configuración de encuesta abierta",
     surveySettings: "Opciones encuesta",
-    surveySettingsTooltip: "Abrir opciones encuesta",
+    surveySettingsTooltip: "Configuración de la encuesta",
     themeSettings: "Configuración del tema",
-    themeSettingsTooltip: "Abrir la configuración del tema",
+    themeSettingsTooltip: "Configuración del tema",
     showPanel: "Mostrar panel",
     hidePanel: "Ocultar panel",
     prevSelected: "Seleccionar anterior",
@@ -371,6 +371,7 @@ var spanishTranslation = {
     imageWidth: "Ancho de la imagen",
     rowCount: "Número de filas",
     columnLayout: "Diseño de columnas",
+    transposeData: "Transponer filas a columnas",
     addRowLocation: "Añadir la ubicación del botón de la fila",
     addRowText: "Añadir texto de botón de fila",
     removeRowText: "Eliminar el texto del botón de fila",
@@ -449,6 +450,10 @@ var spanishTranslation = {
     },
     question: {
       page: "Página padre"
+    },
+    panel: {
+      page: "Página padre",
+      indent: "Añadir indents externos"
     },
     showTimerPanel: "Mostrar panel de temporizador",
     showTimerPanelMode: "Mostrar modo de panel del temporizador",
@@ -620,7 +625,11 @@ var spanishTranslation = {
       templateTitle: "Título de la plantilla",
       totals: "Totales",
       logic: "Lógica",
-      layout: "Diseño",
+      layout: {
+        panel: "Diseño",
+        question: "Diseño",
+        base: "Diseño"
+      },
       data: "Datos",
       validation: "Validación",
       cells: "Células",
@@ -637,9 +646,6 @@ var spanishTranslation = {
     columnsEnableIf: "Columnas son visibles si",
     rowsEnableIf: "Filas son visibles si",
     indent: "Añadir indents",
-    panel: {
-      indent: "Añadir indents externos"
-    },
     innerIndent: "Añadir indents internos",
     defaultValueFromLastRow: "Tomar valores por defecto de la última fila",
     defaultValueFromLastPanel: "Tomar valores por defecto del último panel",
@@ -1534,3 +1540,8 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pv.contain: "Contain" => "Contener"
 // pv.cover: "Cover" => "Cubrir"
 // pv.fill: "Fill" => "Llenar"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponer filas a columnas"
+// layout.panel: "Layout" => "Diseño"
+// layout.question: "Layout" => "Diseño"
+// layout.base: "Layout" => "Diseño"

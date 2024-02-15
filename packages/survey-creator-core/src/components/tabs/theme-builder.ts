@@ -261,7 +261,7 @@ export class ThemeBuilder extends Base {
         backgroundOpacity: (this.backgroundOpacity / 100) || baseTheme.backgroundOpacity,
       };
       const effectiveHeaderSettings: IHeader = {} as any;
-      assign(effectiveHeaderSettings, baseTheme.header || {});
+      assign(effectiveHeaderSettings, baseTheme.header || {}, this.currentTheme.header || {});
       if (Object.keys(effectiveHeaderSettings).length > 0) {
         effectiveTheme.header = effectiveHeaderSettings;
       }
@@ -289,7 +289,11 @@ export class ThemeBuilder extends Base {
   }
 
   public setTheme(theme: ITheme) {
+    const headerBackgroundColorValue = this.currentTheme.cssVariables["--sjs-header-backcolor"];
     this.themeCssVariablesChanges = {};
+    if (headerBackgroundColorValue !== undefined) {
+      this.themeCssVariablesChanges["--sjs-header-backcolor"] = headerBackgroundColorValue;
+    }
     this.backgroundImage = "";
     this.backgroundImageFit = "cover";
     this.backgroundImageAttachment = "scroll";
@@ -869,17 +873,11 @@ export class ThemeBuilder extends Base {
   }
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
-    let groupHeaderVisibility = true;
-    if (!!this.survey) {
-      groupHeaderVisibility = !!this.survey.logo || !!this.survey.title || !!this.survey.description;
-    }
-    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings && groupHeaderVisibility;
+    page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerTitle"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
     panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
-    fontsettingsFromCssVariable(panel.getQuestionByName("headerDescription"), themeCssVariables, themeCssVariables["--sjs-primary-forecolor"]);
 
     panel.getQuestionByName("headerView").value = this.survey.headerView;
     panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
@@ -1341,6 +1339,7 @@ export class ThemeBuilder extends Base {
                             name: "headerTitle",
                             title: getLocString("theme.surveyTitle"),
                             descriptionLocation: "hidden",
+                            allowEmptyColorValue: true,
                             defaultValue: this.getDefaultTitleSetting()
                           },
                           {
@@ -1348,6 +1347,7 @@ export class ThemeBuilder extends Base {
                             name: "headerDescription",
                             title: getLocString("theme.surveyDescription"),
                             descriptionLocation: "hidden",
+                            allowEmptyColorValue: true,
                             defaultValue: this.getDefaultDescriptionSetting(true)
                           },
                         ]

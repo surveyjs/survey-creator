@@ -49,9 +49,9 @@ export var turkishStrings = {
     settings: "Anket Ayarları",
     settingsTooltip: "Anket ayarlarını aç",
     surveySettings: "Anket Ayarları",
-    surveySettingsTooltip: "Anket ayarlarını açma",
+    surveySettingsTooltip: "Anket ayarları",
     themeSettings: "Tema Ayarları",
-    themeSettingsTooltip: "Tema ayarlarını açma",
+    themeSettingsTooltip: "Tema ayarları",
     showPanel: "Paneli Göster",
     hidePanel: "Paneli Gizle",
     prevSelected: "Öncekini seç",
@@ -371,6 +371,7 @@ export var turkishStrings = {
     imageWidth: "Resim genişliği",
     rowCount: "Satır sayısı",
     columnLayout: "Kolon yerleşimi",
+    transposeData: "Satırları sütunlara dönüştürme",
     addRowLocation: "Satır butonu konumu ekle",
     addRowText: "Satır butonu yazısı ekle",
     removeRowText: "Satır butonu yazısını kaldır",
@@ -449,6 +450,10 @@ export var turkishStrings = {
     },
     question: {
       page: "Ana sayfa"
+    },
+    panel: {
+      page: "Ana sayfa",
+      indent: "Dış girintiler ekleme"
     },
     showTimerPanel: "Zamanlayıcı panelini göster",
     showTimerPanelMode: "Zamanlayıcı paneli modunu göster",
@@ -620,7 +625,11 @@ export var turkishStrings = {
       templateTitle: "Şablon başlığı",
       totals: "Toplamlar",
       logic: "Mantık",
-      layout: "Şablon",
+      layout: {
+        panel: "Düzen",
+        question: "Düzen",
+        base: "Düzen"
+      },
       data: "Veri",
       validation: "Doğrulayıcı",
       cells: "Hücreler",
@@ -637,9 +646,6 @@ export var turkishStrings = {
     columnsEnableIf: "Sütunlar şu durumlarda görünür:",
     rowsEnableIf: "Satırlar şu durumlarda görünür:",
     indent: "Girinti ekleme",
-    panel: {
-      indent: "Dış girintiler ekleme"
-    },
     innerIndent: "İç girintiler ekleme",
     defaultValueFromLastRow: "Son satırdaki varsayılan değerleri alma",
     defaultValueFromLastPanel: "Son panelden varsayılan değerleri alma",
@@ -1755,3 +1761,8 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pv.contain: "Contain" => "Kapsamak"
 // pv.cover: "Cover" => "Örtmek"
 // pv.fill: "Fill" => "Doldurmak"
+
+// pe.transposeData: "Transpose rows to columns" => "Satırları sütunlara dönüştürme"
+// layout.panel: "Layout" => "Düzen"
+// layout.question: "Layout" => "Düzen"
+// layout.base: "Layout" => "Düzen"

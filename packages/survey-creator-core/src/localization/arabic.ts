@@ -49,9 +49,9 @@ export var arStrings = {
     settings: "Survey Settings",
     settingsTooltip: "Open survey settings",
     surveySettings: "إعدادات الاستطلاع",
-    surveySettingsTooltip: "افتح إعدادات الاستطلاع",
+    surveySettingsTooltip: "إعدادات الاستطلاع",
     themeSettings: "إعدادات النسق",
-    themeSettingsTooltip: "فتح إعدادات النسق",
+    themeSettingsTooltip: "إعدادات النسق",
     showPanel: "إظهار اللوحة",
     hidePanel: "إخفاء اللوحة",
     prevSelected: "Select previous",
@@ -371,6 +371,7 @@ export var arStrings = {
     imageWidth: "عرض الصورة",
     rowCount: "عدد الصفوف",
     columnLayout: "تخطيط الأعمدة",
+    transposeData: "تبديل موضع الصفوف إلى أعمدة",
     addRowLocation: "موقع زر إضافة صف",
     addRowText: "نص زر إضافة صف",
     removeRowText: "نص زر حذف صف",
@@ -449,6 +450,10 @@ export var arStrings = {
     },
     question: {
       page: "الصفحة الرئيسية"
+    },
+    panel: {
+      page: "الصفحة الرئيسية",
+      indent: "إضافة مسافات بادئة خارجية"
     },
     showTimerPanel: "إظهار لوحة المؤقت",
     showTimerPanelMode: "إظهار نمط لوحة المؤقت",
@@ -620,7 +625,11 @@ export var arStrings = {
       templateTitle: "عنوان القالب",
       totals: "Totals",
       logic: "المنطق",
-      layout: "التنسيق",
+      layout: {
+        panel: "تخطيط",
+        question: "تخطيط",
+        base: "تخطيط"
+      },
       data: "البيانات",
       validation: "التحقق",
       cells: "الخلايا",
@@ -637,9 +646,6 @@ export var arStrings = {
     columnsEnableIf: "تكون الأعمدة مرئية إذا",
     rowsEnableIf: "تكون الصفوف مرئية إذا",
     indent: "إضافة مسافات بادئة",
-    panel: {
-      indent: "إضافة مسافات بادئة خارجية"
-    },
     innerIndent: "إضافة مسافات بادئة داخلية",
     defaultValueFromLastRow: "خذ القيم الافتراضية من الصف الأخير",
     defaultValueFromLastPanel: "خذ القيم الافتراضية من اللوحة الأخيرة",
@@ -1670,3 +1676,8 @@ editorLocalization.locales["ar"] = arStrings;
 // pv.contain: "Contain" => "احتوى"
 // pv.cover: "Cover" => "غطاء"
 // pv.fill: "Fill" => "ملء"
+
+// pe.transposeData: "Transpose rows to columns" => "تبديل موضع الصفوف إلى أعمدة"
+// layout.panel: "Layout" => "تخطيط"
+// layout.question: "Layout" => "تخطيط"
+// layout.base: "Layout" => "تخطيط"

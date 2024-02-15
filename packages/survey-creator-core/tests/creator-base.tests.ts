@@ -4363,3 +4363,18 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   sortOrder = "test";
   expect(func()).toBe("test");
 });
+
+test("New ghost page shouldn't be created if onPageAdding sets allow to false", (): any => {
+  const creator = new CreatorTester();
+  let allowAdd = false;
+  creator.onPageAdding.add((s, o) => {
+    o.allow = allowAdd;
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeFalsy();
+  expect(desigerTab.showNewPage).toBeFalsy();
+});

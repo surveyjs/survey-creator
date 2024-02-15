@@ -49,9 +49,9 @@ export var danishStrings = {
     settings: "Indstillinger for undersøgelse",
     settingsTooltip: "Åbn indstillinger",
     surveySettings: "Indstillinger for undersøgelse",
-    surveySettingsTooltip: "Åbn undersøgelsesindstillinger",
+    surveySettingsTooltip: "Indstillinger for undersøgelse",
     themeSettings: "Temaindstillinger",
-    themeSettingsTooltip: "Åbn temaindstillinger",
+    themeSettingsTooltip: "Temaindstillinger",
     showPanel: "Vis panel",
     hidePanel: "Skjul panel",
     prevSelected: "Vælg forrige",
@@ -371,6 +371,7 @@ export var danishStrings = {
     imageWidth: "Billedbredde",
     rowCount: "Antal rækker",
     columnLayout: "Kolonnelayout",
+    transposeData: "Transponere rækker til kolonner",
     addRowLocation: "Tilføj række knapplacering",
     addRowText: "Tilføj række knaptekst",
     removeRowText: "Fjern række knaptekst",
@@ -449,6 +450,10 @@ export var danishStrings = {
     },
     question: {
       page: "Overordnet side"
+    },
+    panel: {
+      page: "Overordnet side",
+      indent: "Tilføj ydre indrykninger"
     },
     showTimerPanel: "Vis tidspanel",
     showTimerPanelMode: "Vis tidspanel tilstand",
@@ -620,7 +625,11 @@ export var danishStrings = {
       templateTitle: "Skabelon titel",
       totals: "Totaler",
       logic: "Logik",
-      layout: "Layout",
+      layout: {
+        panel: "Layout",
+        question: "Layout",
+        base: "Layout"
+      },
       data: "Data",
       validation: "Validering",
       cells: "Celle tekster",
@@ -637,9 +646,6 @@ export var danishStrings = {
     columnsEnableIf: "Kolonner er synlige, hvis",
     rowsEnableIf: "Rækker er synlige, hvis",
     indent: "Tilføj indrykninger",
-    panel: {
-      indent: "Tilføj ydre indrykninger"
-    },
     innerIndent: "Tilføj indre indrykninger",
     defaultValueFromLastRow: "Tag standardværdier fra den sidste række",
     defaultValueFromLastPanel: "Tag standardværdier fra det sidste panel",
@@ -1945,3 +1951,8 @@ editorLocalization.locales["da"] = danishStrings;
 // pv.contain: "Contain" => "Indeholde"
 // pv.cover: "Cover" => "Dække"
 // pv.fill: "Fill" => "Fylde"
+
+// pe.transposeData: "Transpose rows to columns" => "Transponere rækker til kolonner"
+// layout.panel: "Layout" => "Layout"
+// layout.question: "Layout" => "Layout"
+// layout.base: "Layout" => "Layout"

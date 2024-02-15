@@ -49,9 +49,9 @@ export var huStrings = {
     settings: "Kérdőívbeállítások",
     settingsTooltip: "Nyissa meg a beállításokat",
     surveySettings: "Földmérési beállítások",
-    surveySettingsTooltip: "Nyissa meg a felmérési beállításokat",
+    surveySettingsTooltip: "Földmérési beállítások",
     themeSettings: "Téma beállítások",
-    themeSettingsTooltip: "Nyissa meg a témabeállításokat",
+    themeSettingsTooltip: "Téma beállításai",
     showPanel: "Panel megjelenítése",
     hidePanel: "Panel elrejtése",
     prevSelected: "Előző kiválasztása",
@@ -371,6 +371,7 @@ export var huStrings = {
     imageWidth: "Kép szélessége",
     rowCount: "Sorok száma",
     columnLayout: "Oszlopok elrendezése",
+    transposeData: "Sorok átültetése oszlopokba",
     addRowLocation: "'Új sor felvétele' gomb elhelyezése",
     addRowText: "'Új sor felvétele' gomb szövege",
     removeRowText: "'Sor eltávolítása' gomb szövege",
@@ -449,6 +450,10 @@ export var huStrings = {
     },
     question: {
       page: "Szülőoldal"
+    },
+    panel: {
+      page: "Szülőoldal",
+      indent: "Külső behúzások hozzáadása"
     },
     showTimerPanel: "Időzító mutatása",
     showTimerPanelMode: "Időzító módja",
@@ -620,7 +625,11 @@ export var huStrings = {
       templateTitle: "Sablon címe",
       totals: "Összegek",
       logic: "Logika",
-      layout: "Elrendezés",
+      layout: {
+        panel: "Elrendezés",
+        question: "Elrendezés",
+        base: "Elrendezés"
+      },
       data: "Adat",
       validation: "Érvényesítés",
       cells: "Cella szövegek",
@@ -637,9 +646,6 @@ export var huStrings = {
     columnsEnableIf: "Az oszlopok akkor láthatók, ha",
     rowsEnableIf: "A sorok akkor láthatók, ha",
     indent: "Behúzások hozzáadása",
-    panel: {
-      indent: "Külső behúzások hozzáadása"
-    },
     innerIndent: "Belső behúzások hozzáadása",
     defaultValueFromLastRow: "Alapértelmezett értékek felvétele az utolsó sorból",
     defaultValueFromLastPanel: "Alapértelmezett értékek felvétele az utolsó panelről",
@@ -1913,3 +1919,8 @@ editorLocalization.locales["hu"] = huStrings;
 // pv.contain: "Contain" => "Tartalmaz"
 // pv.cover: "Cover" => "Fedő"
 // pv.fill: "Fill" => "Tölt"
+
+// pe.transposeData: "Transpose rows to columns" => "Sorok átültetése oszlopokba"
+// layout.panel: "Layout" => "Elrendezés"
+// layout.question: "Layout" => "Elrendezés"
+// layout.base: "Layout" => "Elrendezés"

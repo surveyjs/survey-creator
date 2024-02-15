@@ -49,9 +49,9 @@ var simplifiedChineseTranslation = {
     settings: "问卷设置",
     settingsTooltip: "打开设置",
     surveySettings: "调查设置",
-    surveySettingsTooltip: "打开调查设置",
+    surveySettingsTooltip: "调查设置",
     themeSettings: "主题设置",
-    themeSettingsTooltip: "打开主题设置",
+    themeSettingsTooltip: "主题设置",
     showPanel: "显示面板",
     hidePanel: "“隐藏”面板",
     prevSelected: "选择上一个",
@@ -371,6 +371,7 @@ var simplifiedChineseTranslation = {
     imageWidth: "图片宽度",
     rowCount: "默认行数",
     columnLayout: "列布局",
+    transposeData: "将行转置为列",
     addRowLocation: "添加行按钮位置",
     addRowText: "添加条目按钮文本",
     removeRowText: "删除条目按钮文本",
@@ -449,6 +450,10 @@ var simplifiedChineseTranslation = {
     },
     question: {
       page: "父页面"
+    },
+    panel: {
+      page: "父页面",
+      indent: "添加外部缩进"
     },
     showTimerPanel: "显示计时器面板",
     showTimerPanelMode: "显示计时器面板模式",
@@ -620,7 +625,11 @@ var simplifiedChineseTranslation = {
       templateTitle: "标题模板",
       totals: "总数",
       logic: "逻辑",
-      layout: "布局",
+      layout: {
+        panel: "布局",
+        question: "布局",
+        base: "布局"
+      },
       data: "数据",
       validation: "验证",
       cells: "单元格文本",
@@ -637,9 +646,6 @@ var simplifiedChineseTranslation = {
     columnsEnableIf: "在以下情况下，列可见",
     rowsEnableIf: "在以下情况下，行可见",
     indent: "添加缩进",
-    panel: {
-      indent: "添加外部缩进"
-    },
     innerIndent: "添加内部缩进",
     defaultValueFromLastRow: "从最后一行获取默认值",
     defaultValueFromLastPanel: "从最后一个面板中获取默认值",
@@ -1902,3 +1908,8 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // pv.contain: "Contain" => "包含"
 // pv.cover: "Cover" => "盖"
 // pv.fill: "Fill" => "填补"
+
+// pe.transposeData: "Transpose rows to columns" => "将行转置为列"
+// layout.panel: "Layout" => "布局"
+// layout.question: "Layout" => "布局"
+// layout.base: "Layout" => "布局"
