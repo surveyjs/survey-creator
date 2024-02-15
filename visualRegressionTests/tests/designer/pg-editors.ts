@@ -275,12 +275,12 @@ test("Property grid checkbox - all states", async (t) => {
 
     await setCheckboxProperty("value", true);
     await setCheckboxProperty("readOnly", false);
-    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Question description"));
+    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Make the title and description visible"));
     await takeElementScreenshot("pg-checkbox-unchecked-focused.png", checkbox, t, comparer);
 
     await setCheckboxProperty("value", false);
     await setCheckboxProperty("readOnly", false);
-    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Question description"));
+    await t.click(checkbox).hover(Selector(".sv-string-viewer").withText("Make the title and description visible"));
     await takeElementScreenshot("pg-checkbox-checked-focused.png", checkbox, t, comparer);
 
     await ClientFunction(() => { document.body.focus(); })();
