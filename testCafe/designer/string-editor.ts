@@ -1,4 +1,4 @@
-import { RatingToolboxItem, explicitErrorHandler, generalGroupName, getPropertyGridCategory, setJSON, url } from "../helper";
+import { RatingToolboxItem, explicitErrorHandler, generalGroupName, getPropertyGridCategory, handleShiftEnter, setJSON, url } from "../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "String Editor";
 
@@ -992,4 +992,44 @@ test("Check string editor composition update events", async (t) => {
     const property = window["Survey"].Serializer.findProperty("question", "title");
     property.maxLength = undefined;
   })();
+});
+
+test("Check string-editor enter key", async (t) => {
+  await ClientFunction(() => {
+    const property = window["Survey"].Serializer.findProperty("question", "title");
+    property.maxLength = 2;
+  })();
+  await setJSON({
+    "elements": [
+      {
+        "type": "text",
+        "name": "q",
+        "maxLength": 1
+      }]
+  });
+  var titleQuerySelector = ".svc-designer-header .sd-title .svc-string-editor .sv-string-editor";
+  var descriptionQuerySelector = ".svc-designer-header .sd-description .svc-string-editor .sv-string-editor";
+  await handleShiftEnter(descriptionQuerySelector);
+  await t
+    .click(Selector(descriptionQuerySelector))
+    .pressKey("a b c")
+    .pressKey("shift+enter")
+    .pressKey("d e f")
+    .pressKey("enter");
+
+  await t.expect(await ClientFunction(() => {
+    return window["creator"].survey.description.trim();
+  })()).eql("abc\ndef");
+
+  await handleShiftEnter(titleQuerySelector);
+  await t
+    .click(Selector(titleQuerySelector))
+    .pressKey("a b c")
+    .pressKey("shift+enter")
+    .pressKey("d e f")
+    .pressKey("enter");
+
+  await t.expect(await ClientFunction(() => {
+    return window["creator"].survey.title.trim();
+  })()).eql("abcdef");
 });
