@@ -32,6 +32,7 @@ test("set toolbox categories", () => {
     }
   });
   preset.apply(creator);
+  const tb = creator.toolbox;
   expect(creator.toolbox.categories).toHaveLength(2);
   expect(creator.toolbox.visibleActions).toHaveLength(4);
   expect(creator.toolbox.hasCategories).toBeTruthy();
@@ -44,7 +45,30 @@ test("set toolbox items", () => {
     }
   });
   preset.apply(creator);
-  expect(creator.toolbox.categories).toHaveLength(1);
-  expect(creator.toolbox.visibleActions).toHaveLength(3);
-  expect(creator.toolbox.hasCategories).toBeFalsy();
+  const tb = creator.toolbox;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(3);
+  expect(tb.hasCategories).toBeFalsy();
+});
+test("set toolbox definition", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      definition: [
+        { name: "text", title: "Number", json: { type: "text", inputType: "number" } },
+        { name: "text-date", title: "Date", json: { type: "text", inputType: "date" } }
+      ],
+      items: ["text", "text-date", "dropdown", "matrix"],
+    }
+  });
+  preset.apply(creator);
+  const tb = creator.toolbox;
+  const actions = tb.visibleActions;
+  expect(tb.categories).toHaveLength(1);
+  expect(tb.visibleActions).toHaveLength(4);
+  expect(actions[0].title).toEqual("Number");
+  expect(actions[0].json.inputType).toEqual("number");
+  expect(actions[1].name).toEqual("text-date");
+  expect(actions[1].title).toEqual("Date");
+  expect(actions[1].json.inputType).toEqual("date");
 });

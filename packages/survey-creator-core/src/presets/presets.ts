@@ -1,5 +1,5 @@
 import { CreatorPresetBase } from "./presets-base";
-import { CreatorToolboxPreset } from "./presets-toolbox";
+import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { SurveyCreatorModel } from "../creator-base";
 import { IToolboxCategoryDefinition } from "../toolbox";
 
@@ -9,13 +9,13 @@ export interface ICreatorPresetData {
     activeTab?: string,
   };
   toolbox? : {
-    definition?: Array<any>,
+    definition?: Array<ICreatorPresetToolboxItem>,
     categories?: Array<IToolboxCategoryDefinition>,
     items?: Array<string>,
   };
 }
 
-export class CreatorTabsPreset extends CreatorPresetBase {
+export class CreatorPresetTabs extends CreatorPresetBase {
   public getPath(): string { return "tabs"; }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
@@ -40,6 +40,6 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   public getPath(): string { return ""; }
   protected setupPresets(): void {
-    this.addPresets(new CreatorTabsPreset(), new CreatorToolboxPreset());
+    this.addPresets(new CreatorPresetTabs(), new CreatorPresetToolbox());
   }
 }
