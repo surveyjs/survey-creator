@@ -805,6 +805,15 @@ export class PropertyGridModel {
     if (this.objValue === value) return;
     this.setObj(value);
   }
+  public setPropertyGridDefinition(val: ISurveyPropertyGridDefinition): void {
+    if(this.propertyGridDefinition === val) return;
+    this.propertyGridDefinition = val;
+    if(!!this.obj) {
+      const obj = this.obj;
+      this.obj = undefined;
+      this.obj = obj;
+    }
+  }
   public selectProperty(propertyName: string, focus = true) {
     if (!this.survey) return;
     var question = this.survey.getQuestionByName(propertyName);

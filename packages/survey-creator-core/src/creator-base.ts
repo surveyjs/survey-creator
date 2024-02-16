@@ -2535,6 +2535,16 @@ export class SurveyCreatorModel extends Base
     const translation = new Translation(this.survey);
     translation.deleteLocaleStrings(locale);
   }
+  private propertyGridDefinition: any;
+  public getPropertyGridDefinition(): any {
+    return this.propertyGridDefinition;
+  }
+  public setPropertyGridDefinition(val: any): void {
+    this.propertyGridDefinition = val;
+    if(this.designerPropertyGrid) {
+      this.designerPropertyGrid.setPropertyGridDefinition(val);
+    }
+  }
   private getPropertyGridExpandedCategory(): string {
     if (!this.designerPropertyGrid) return undefined;
     const panels = this.designerPropertyGrid.survey.getAllPanels();

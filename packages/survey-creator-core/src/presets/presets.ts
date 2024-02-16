@@ -1,36 +1,23 @@
 import { CreatorPresetBase } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
-import { SurveyCreatorModel } from "../creator-base";
+import { CreatorPresetTabs } from "./presets-tabs";
+import { CreatorPresetPropertyGrid } from "./presets-properties";
 import { IToolboxCategoryDefinition } from "../toolbox";
+import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 export interface ICreatorPresetData {
-  tabs? : {
+  propertyGrid?: {
+    definition?: ISurveyPropertyGridDefinition,
+  };
+  tabs?: {
     items?: Array<string>,
     activeTab?: string,
   };
-  toolbox? : {
+  toolbox?: {
     definition?: Array<ICreatorPresetToolboxItem>,
     categories?: Array<IToolboxCategoryDefinition>,
     items?: Array<string>,
   };
-}
-
-export class CreatorPresetTabs extends CreatorPresetBase {
-  public getPath(): string { return "tabs"; }
-  protected applyCore(creator: SurveyCreatorModel): void {
-    super.applyCore(creator);
-    if(this.json["items"]) {
-      this.applyTabs(creator, this.json["items"]);
-    }
-    let tab = this.json.activeTab;
-    if(tab) {
-      creator.activeTab = tab === "preview" ? "test" : tab;
-    }
-  }
-  private applyTabs(creator: SurveyCreatorModel, items: Array<string>): void {
-    if(!Array.isArray(items)) return;
-    creator.setTabs(items);
-  }
 }
 
 export class CreatorPreset extends CreatorPresetBase {
@@ -40,6 +27,7 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   public getPath(): string { return ""; }
   protected setupPresets(): void {
-    this.addPresets(new CreatorPresetTabs(), new CreatorPresetToolbox());
+    this.addPresets(new CreatorPresetTabs(), new CreatorPresetToolbox(),
+      new CreatorPresetPropertyGrid());
   }
 }

@@ -72,3 +72,37 @@ test("set toolbox definition", () => {
   expect(actions[1].title).toEqual("Date");
   expect(actions[1].json.inputType).toEqual("date");
 });
+test("set property grid defintion", () => {
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  creator.selectQuestionByName("q1");
+  const preset = new CreatorPreset({
+    propertyGrid: {
+      definition: {
+        autoGenerateProperties: false,
+        classes: {
+          question: {
+            properties: [
+              "name",
+              "title",
+              "indent",
+              { name: "visibleIf", tab: "logic" },
+              { name: "enableIf", tab: "logic" },
+            ],
+            tabs: [
+              { name: "logic", index: 15 }
+            ]
+          },
+        }
+      }
+    }
+  });
+  preset.apply(creator);
+  const survey = creator.propertyGrid;
+  const panels = survey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("logic");
+  expect(panels[0].elements).toHaveLength(3);
+  expect(panels[1].elements).toHaveLength(2);
+});
