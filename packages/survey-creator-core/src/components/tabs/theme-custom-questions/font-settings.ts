@@ -74,7 +74,8 @@ ComponentCollection.Instance.add({
     Serializer.addProperties("fontsettings", [
       {
         name: "allowEmptyColorValue:boolean",
-        default: false
+        default: false,
+        visible: false
       },
     ]);
   },

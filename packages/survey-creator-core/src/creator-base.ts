@@ -1371,14 +1371,17 @@ export class SurveyCreatorModel extends Base
    * An event that is raised before a new page is added to the survey. Handle this event if you do not want to add the page. 
    */
   public onPageAdding: EventBase<SurveyCreatorModel, PageAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PageAddingEvent>();
-  @undoRedoTransaction()
-  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
+  public canAddPage(pageToAdd?: PageModel) {
     const options = {
       page: pageToAdd,
       allow: true
     };
     this.onPageAdding.fire(this, options);
-    if (!options.allow) {
+    return options.allow;
+  }
+  @undoRedoTransaction()
+  public addPage(pageToAdd?: PageModel, changeSelection = true, beforeAdd?: () => boolean): PageModel {
+    if (!this.canAddPage(pageToAdd)) {
       return null;
     }
     if (beforeAdd !== undefined) {
