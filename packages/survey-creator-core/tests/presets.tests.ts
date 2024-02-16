@@ -21,7 +21,7 @@ test("show/hidetabs", () => {
   expect(creator.tabs[1].id).toBe("designer");
   expect(creator.activeTab).toBe("test");
 });
-test("set toolbox items", () => {
+test("set toolbox categories", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
     toolbox: {
@@ -34,4 +34,17 @@ test("set toolbox items", () => {
   preset.apply(creator);
   expect(creator.toolbox.categories).toHaveLength(2);
   expect(creator.toolbox.visibleActions).toHaveLength(4);
+  expect(creator.toolbox.hasCategories).toBeTruthy();
+});
+test("set toolbox items", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({
+    toolbox: {
+      items: ["text", "dropdown", "matrix"],
+    }
+  });
+  preset.apply(creator);
+  expect(creator.toolbox.categories).toHaveLength(1);
+  expect(creator.toolbox.visibleActions).toHaveLength(3);
+  expect(creator.toolbox.hasCategories).toBeFalsy();
 });
