@@ -917,8 +917,8 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
-  expect(columnsQuestion.emptyRowsText).toEqual("No items have been added yet");
-  expect(columnsQuestion.addRowText).toEqual("Add New");
+  expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
+  expect(columnsQuestion.addRowText).toEqual("Add new column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
@@ -1715,6 +1715,7 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
+  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1751,7 +1752,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "Use curly brackets"
+      "The expression can include basic calculations"
     ) > -1
   ).toBeTruthy();
 });

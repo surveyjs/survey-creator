@@ -23,7 +23,7 @@ test("Show/hide go to visibleIf link", () => {
   const logicPanel = propertyGrid.survey.getPanelByName("logic");
   expect(logicPanel.isExpanded).toBeFalsy();
   expect(visibleIfGoQuestion).toBeTruthy();
-  expect(visibleIfGoQuestion.linkValueText).toBe("Set by Visible if");
+  expect(visibleIfGoQuestion.linkValueText).toBe("Enabled by a condition");
   expect(visibleIfGoQuestion.startWithNewLine).toBeFalsy();
   expect(visibleIfGoQuestion.isVisible).toBe(false);
   question.visibleIf = "{q1} = false";
@@ -61,7 +61,7 @@ test("Show/hide go to visibleIf link for panel", () => {
   const logicPanel = propertyGrid.survey.getPanelByName("logic");
   expect(logicPanel.isExpanded).toBeFalsy();
   expect(visibleIfGoQuestion).toBeTruthy();
-  expect(visibleIfGoQuestion.linkValueText).toBe("Set by Visible if");
+  expect(visibleIfGoQuestion.linkValueText).toBe("Enabled by a condition");
   expect(visibleIfGoQuestion.startWithNewLine).toBeFalsy();
   expect(visibleIfGoQuestion.isVisible).toBe(false);
   panel.visibleIf = "{q1} = false";

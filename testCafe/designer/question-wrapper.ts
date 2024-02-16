@@ -312,7 +312,7 @@ test("Carryforward banner", async (t) => {
   const getSelectedElementName = ClientFunction(() => {
     return window["creator"].selectedElement.name;
   });
-  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabTitle = Selector("h4").withExactText("Choice Options");
   const generalTabTitle = Selector("h4").withExactText(generalGroupName);
   const carryForwardEditor = Selector("div[aria-label='Copy choices from the following question']");
   await t.expect(questions.exists).notOk()

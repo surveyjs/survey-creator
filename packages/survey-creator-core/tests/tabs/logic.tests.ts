@@ -1611,7 +1611,7 @@ test("LogicPlugin: actions titles support localization", () => {
   logicPlugin.model.questionFilter = "";
   expect(filterActionQuestion.title).toEqual("All Questions");
 
-  if(!editorLocalization.locales["de"]) {
+  if (!editorLocalization.locales["de"]) {
     editorLocalization.locales["de"] = {
       ed: { lg: { trigger_copyvalueName: "Fragenwert kopieren", showAllQuestions: "Alle Fragen anzeigen" } }
     };
@@ -1875,11 +1875,11 @@ test("SurveyLogicUI: check show/hide action switching placeholder 'Select panel/
   logic.expressionEditor.text = "{q1} = 1";
   var panel = logic.itemEditor.panels[0];
   panel.getQuestionByName("logicTypeName").value = "panel_visibility";
-  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a panel...");
   panel.getQuestionByName("logicTypeName").value = "question_visibility";
-  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select question...");
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a question...");
   panel.getQuestionByName("logicTypeName").value = "panel_visibility";
-  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select panel...");
+  expect((<QuestionDropdownModel>panel.getQuestionByName("elementSelector")).optionsCaption).toEqual("Select a panel...");
 });
 test("Use logic for matrix columns", () => {
   const survey = new SurveyModel({
@@ -2273,7 +2273,8 @@ test("LogicUI: edit visibleIf property for panel dynamic question template when 
         type: "paneldynamic", name: "q1",
         templateElements: [
           { type: "text", name: "q1_col1" },
-          { type: "panel", name: "panel",
+          {
+            type: "panel", name: "panel",
             elements: [{ type: "text", name: "q1_col2", visibleIf: "{panel.q1_col1} = 1" }]
           },
           { type: "text", name: "q1_col3" }]
@@ -2937,7 +2938,7 @@ test("Update expression on changing row value in matrix dropdown", (): any => {
 test("Use creator.onGetObjectDisplayName for element selector in visibleIf action", () => {
   const creator = new CreatorTester();
   creator.onGetObjectDisplayName.add(function (sender, options) {
-    if(options.area === "logic-tab:question-selector") {
+    if (options.area === "logic-tab:question-selector") {
       options.displayName = "# " + options.obj.title;
     }
   });
@@ -3395,7 +3396,7 @@ test("Include panel and page requiredIf into logic items", () => {
 
 class IncrementCounterTrigger extends SurveyTrigger {
 
-  public getType():string {
+  public getType(): string {
     return "incrementcountertrigger";
   }
   public get targetCounter(): string {
