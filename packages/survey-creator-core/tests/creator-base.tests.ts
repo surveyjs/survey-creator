@@ -2599,13 +2599,13 @@ test("Modify property editor titleActions on event", (): any => {
   let choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.getType()).toEqual("matrixdynamic");
-  expect(choicesQuestion.getTitleActions()).toHaveLength(3);
+  expect(choicesQuestion.getTitleActions()).toHaveLength(4);
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
   creator.selectElement(question);
   choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
-  expect(choicesQuestion.getTitleActions()).toHaveLength(4);
+  expect(choicesQuestion.getTitleActions()).toHaveLength(5);
   expect(question.choices).toHaveLength(0);
-  choicesQuestion.titleActions[3].action();
+  choicesQuestion.titleActions[4].action();
   expect(question.choices).toHaveLength(2);
 });
 test("Set readOnly option", (): any => {
@@ -4362,4 +4362,19 @@ test("Creator pageEditMode edit onCanDeleteItemCallback", (): any => {
   expect(func()).toBe("asc");
   sortOrder = "test";
   expect(func()).toBe("test");
+});
+
+test("New ghost page shouldn't be created if onPageAdding sets allow to false", (): any => {
+  const creator = new CreatorTester();
+  let allowAdd = false;
+  creator.onPageAdding.add((s, o) => {
+    o.allow = allowAdd;
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  const desigerTab = creator.getPlugin("designer").model as TabDesignerViewModel;
+  expect(creator.survey.pages).toHaveLength(1);
+  expect(desigerTab.newPage).toBeFalsy();
+  expect(desigerTab.showNewPage).toBeFalsy();
 });

@@ -4,6 +4,7 @@ import { surveyLocalization, Serializer } from "survey-core";
 
 export class EditorLocalization {
   public camelCaseBreaking = true;
+  public defaultLocale = "en";
   public currentLocale = "";
   public locales = {};
   private peByClass = {};
@@ -15,7 +16,7 @@ export class EditorLocalization {
   public getString(strName: string, locale: string = null): string {
     if(!locale) locale = this.currentLocale;
     const loc = this.getLocale(locale);
-    const defaultLocale = this.getLocale("en");
+    const defaultLocale = this.getDefaultStrings();
     const locs = [];
     if(!!loc) locs.push(loc);
     if(!!locale && locale.indexOf("-") > -1) {
@@ -195,9 +196,9 @@ export class EditorLocalization {
   }
   public getLocale(locale?: string): any {
     if (!locale) locale = this.currentLocale;
-    var loc = locale ? this.locales[locale] : defaultStrings;
-    if (!loc) loc = defaultStrings;
-    return loc;
+    var strs = locale ? this.locales[locale] : this.getDefaultStrings();
+    if (!strs) strs = this.getDefaultStrings();
+    return strs;
   }
   private getValueInternal(value: any, prefix: string, locale: string = null): string {
     if (value === "" || value === null || value === undefined) return "";
@@ -215,6 +216,14 @@ export class EditorLocalization {
       res.push(key);
     }
     return res;
+  }
+  public getDefaultStrings(): any {
+    const loc = this.defaultLocale;
+    if(!!loc && loc !== "en") {
+      const strs = this.getLocale(loc);
+      if(!!strs) return strs;
+    }
+    return defaultStrings;
   }
   private stringsDiff(str1: any, str2: any): boolean {
     if(typeof str1 === "function" || typeof str2 === "function") return false;

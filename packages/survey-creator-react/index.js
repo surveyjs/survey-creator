@@ -203,6 +203,7 @@ creator.onMachineTranslate.add((_, options) => {
   options.callback(translatedStrings);
 });
 creator.JSON = json;
+creator.locale = "de";
 window.creator = creator;
 
 creator.onElementAllowOperations.add((sender, options) => {

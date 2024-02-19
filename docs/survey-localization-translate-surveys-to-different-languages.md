@@ -93,6 +93,12 @@ editorLocalization.currentLocale = "customlocale";
 creator.locale = "customlocale";
 ```
 
+If any translation strings are missing in your custom locale, they will be taken from the default English locale. You can specify the `defaultLocale` property to use another locale as default:
+
+```js
+editorLocalization.defaultLocale = "fr";
+```
+
 ## Localize Survey Contents
 
 If you want your users to create multi-language surveys, enable survey-level localization as described in the following help topic: [Enable Localization and Switch Between Locales](/form-library/documentation/survey-localization#enable-localization-and-switch-between-locales). Survey-level localization allows Survey Creator users to select a default language different from English:
