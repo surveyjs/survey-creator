@@ -12,6 +12,8 @@ svc-toolbox {
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
+  scrollbar-gutter: stable;
+  padding-left: calc(calcSize(2) - 12px);
 }
 
 .svc-toolbox--compact {
@@ -111,7 +113,7 @@ svc-toolbox {
 }
 
 
-.svc-toolbox__category--collapsed{
+.svc-toolbox__category--collapsed {
   .svc-toolbox__tool {
     height: 0;
     visibility: hidden;
