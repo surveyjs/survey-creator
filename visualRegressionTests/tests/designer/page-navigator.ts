@@ -396,7 +396,7 @@ test("Page navigator scrolling in bypage mode", async (t) => {
     await ClientFunction(() => {
       window["creator"].pageEditMode = "bypage";
     })();
-    await t.wait(500);
+    await t.wait(1000);
     // await ClientFunction(() => {
     //   document.querySelector(".svc-tab-designer")!.scrollTop = 500;
     // })();
