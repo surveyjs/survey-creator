@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from "testcafe";
-import { addQuestionByAddQuestionButton, getToolboxItemByText, getVisibleElement, questionToolbarActions, setJSON, url } from "../helper";
+import { getToolboxItemByText, getVisibleElement, questionToolbarActions, setJSON, url } from "../helper";
 
 const title = "Creator";
 
@@ -78,4 +78,35 @@ test("Keyboard tab navigation between questions", async (t) => {
     .expect(Selector(".svc-question__content--selected .sv-action-bar-item").withText("Delete").focused).ok()
     .pressKey("tab")
     .expect(Selector(".sv-string-editor").withText("question2").focused).ok();
+});
+
+fixture`${title}`.page`${url}`.beforeEach(
+  async (t) => {
+    await t.maximizeWindow();
+  }
+);
+
+test("Check responsiveness is working correctly after model update", async t => {
+  if (await ClientFunction(() => window["surveyJSFramework"])() === "ko") {
+    return;
+  }
+  const mobileSelector = Selector(".svc-creator--mobile");
+  await t
+    .resizeWindow(1920, 1080)
+    .expect(mobileSelector.exists).notOk()
+    .resizeWindow(500, 800)
+    .expect(mobileSelector.exists).ok()
+    .resizeWindow(1920, 1080)
+    .expect(mobileSelector.exists).notOk();
+  await ClientFunction(() => {
+    (window as any).updateCreatorModel({}, { elements: { type: "text", name: "q115" } });
+  })();
+  await t.expect(Selector("[data-name='q115']").exists).ok()
+    .expect(await ClientFunction(() => !!(window as any).prevCreator.responsivityManager)()).notOk()
+    .resizeWindow(1920, 1080)
+    .expect(mobileSelector.exists).notOk()
+    .resizeWindow(500, 800)
+    .expect(mobileSelector.exists).ok()
+    .resizeWindow(1920, 1080)
+    .expect(mobileSelector.exists).notOk();
 });

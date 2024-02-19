@@ -1,4 +1,4 @@
-import { ComponentCollection, Question, QuestionCompositeModel } from "survey-core";
+import { ComponentCollection, Question, QuestionCompositeModel, Serializer } from "survey-core";
 import { getLocString } from "../../../editorLocalization";
 
 export const DefaultFonts = [
@@ -71,6 +71,19 @@ ComponentCollection.Instance.add({
   internal: true,
   elementsJSON: getElementsJSON(),
   onInit() {
+    Serializer.addProperties("fontsettings", [
+      {
+        name: "allowEmptyColorValue:boolean",
+        default: false,
+        visible: false
+      },
+    ]);
+  },
+  onLoaded(question) {
+    syncPropertiesFromComposite(question, "allowEmptyColorValue", question.allowEmptyColorValue);
+  },
+  onPropertyChanged(question, propertyName, newValue) {
+    syncPropertiesFromComposite(question, propertyName, newValue);
   },
   onCreated(question) {
     const color = question.contentPanel.getQuestionByName("color");
@@ -82,12 +95,19 @@ ComponentCollection.Instance.add({
   },
 });
 
+function syncPropertiesFromComposite(question: Question, propertyName: string, newValue: any) {
+  const colorQuestion = question.contentPanel.questions[2];
+  if (propertyName == "allowEmptyColorValue") {
+    colorQuestion.allowEmptyValue = newValue;
+  }
+}
+
 export function updateFontSettingsJSON() {
   const config = ComponentCollection.Instance.getCustomQuestionByName("fontsettings");
   config.json.elementsJSON = getElementsJSON();
 }
 
-export function fontsettingsToCssVariable(question: Question, themeCssVariables: {[index: string]: string}) {
+export function fontsettingsToCssVariable(question: Question, themeCssVariables: { [index: string]: string }) {
   Object.keys(question.value).forEach(key => {
     const innerQ = (<QuestionCompositeModel>question).contentPanel.getQuestionByName(key);
     const propertyName = `--sjs-font-${question.name.toLocaleLowerCase()}-${key}`;
@@ -107,7 +127,7 @@ export function fontsettingsFromCssVariable(question: Question, themeCssVariable
     compositeQuestion.contentPanel.getQuestionByName(propertyName).value = themeCssVariables[key];
   });
 
-  if(fontSettingsFromTheme.length === 0) {
+  if (fontSettingsFromTheme.length === 0) {
     if (!!defaultColorVariable) {
       compositeQuestion.contentPanel.getQuestionByName("color").value = defaultColorVariable;
     }

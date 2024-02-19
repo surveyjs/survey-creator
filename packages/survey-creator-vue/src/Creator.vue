@@ -92,13 +92,23 @@
 <script setup lang="ts">
 import type { SurveyCreatorModel } from "survey-creator-core";
 import { useBase } from "survey-vue3-ui";
-import { computed, onMounted, onUnmounted, ref, toRaw } from "vue";
+import { computed, onMounted, onUnmounted, ref, toRaw, watch } from "vue";
 const props = defineProps<{ model: SurveyCreatorModel }>();
 const model = computed(() => {
   return toRaw(props.model);
 });
 const root = ref<HTMLDivElement>();
-useBase(() => model.value);
+useBase(
+  () => model.value,
+  (newValue, oldValue) => {
+    if (oldValue) {
+      oldValue.unsubscribeRootElement();
+    }
+    if (newValue && root.value) {
+      newValue.setRootElement(root.value);
+    }
+  }
+);
 onMounted(() => {
   if (root.value) {
     props.model.setRootElement(root.value);
