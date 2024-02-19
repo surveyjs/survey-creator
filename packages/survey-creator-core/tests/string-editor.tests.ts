@@ -24,13 +24,13 @@ test("Test css", (): any => {
   });
   const locStrSurvey: LocalizableString = new LocalizableString(survey, false, "description");
   var stringEditorSurveyTitle = new StringEditorViewModelBase(locStrSurvey, creator);
-  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor");
+  expect(stringEditorSurveyTitle.className("")).toEqual("svc-string-editor svc-string-editor--multiline");
 
   const locStrQuestion: LocalizableString = new LocalizableString(survey.getQuestionByName("q"), false, "description");
   var stringEditorQuestion = new StringEditorViewModelBase(locStrQuestion, creator);
 
-  expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden");
-  expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor");
+  expect(stringEditorQuestion.className("")).toEqual("svc-string-editor svc-string-editor--hidden svc-string-editor--multiline");
+  expect(stringEditorQuestion.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");
 });
 test("Test string editor content editable", (): any => {
   let creator = new CreatorTester();
@@ -63,10 +63,10 @@ test("Test string editor content editable", (): any => {
 
   var stringEditorQuestion1Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q1"), false, "description"), creator);
   expect(stringEditorQuestion1Description.contentEditable).toEqual(true);
-  expect(stringEditorQuestion1Description.className("desc")).toEqual("svc-string-editor");
+  expect(stringEditorQuestion1Description.className("desc")).toEqual("svc-string-editor svc-string-editor--multiline");
   var stringEditorQuestion2Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q2"), false, "description"), creator);
   expect(stringEditorQuestion2Description.contentEditable).toEqual(false);
-  expect(stringEditorQuestion2Description.className("desc")).toEqual("svc-string-editor svc-string-editor--readonly");
+  expect(stringEditorQuestion2Description.className("desc")).toEqual("svc-string-editor svc-string-editor--readonly svc-string-editor--multiline");
   var stringEditorQuestion3Description = new StringEditorViewModelBase(new LocalizableString(survey.getQuestionByName("q3"), false, "description"), creator);
   expect(stringEditorQuestion3Description.contentEditable).toEqual(false);
 });

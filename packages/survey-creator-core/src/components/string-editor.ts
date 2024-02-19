@@ -210,7 +210,7 @@ export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-  private connector: StringEditorConnector
+  private connector: StringEditorConnector;
 
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
@@ -323,7 +323,7 @@ export class StringEditorViewModelBase extends Base {
       const options = { value: event.target?.innerText, cancel: null };
       if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
-      sanitizeEditableContent(event.target);
+      sanitizeEditableContent(event.target, !this.locString.allowLineBreaks);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
       }
@@ -361,7 +361,14 @@ export class StringEditorViewModelBase extends Base {
       this.creator.onHtmlToMarkdown.fire(this.creator, options);
       mdText = options.text;
     }
-    let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
+      clearedText = txt;
+    }
     let owner = this.locString.owner as any;
 
     var changingOptions = {
@@ -443,7 +450,7 @@ export class StringEditorViewModelBase extends Base {
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && (this.editAsText || !event.shiftKey)) {
+    if (event.keyCode === 13 && !event.shiftKey) {
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});
@@ -531,6 +538,7 @@ export class StringEditorViewModelBase extends Base {
       .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
       .append("svc-string-editor--readonly", !this.contentEditable)
       .append("svc-string-editor--error", !!this.errorText)
+      .append("svc-string-editor--multiline", !!this.locString.allowLineBreaks)
       .toString();
   }
 }
