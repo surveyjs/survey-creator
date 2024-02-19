@@ -994,7 +994,7 @@ test("Check string editor composition update events", async (t) => {
   })();
 });
 
-test.only("Check string-editor enter key", async (t) => {
+test("Check string-editor enter key", async (t) => {
   await ClientFunction(() => {
     const property = window["Survey"].Serializer.findProperty("question", "title");
     property.maxLength = 2;
