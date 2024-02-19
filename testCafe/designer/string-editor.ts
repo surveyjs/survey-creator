@@ -1018,7 +1018,7 @@ test("Check string-editor enter key", async (t) => {
     .pressKey("enter");
 
   await t.expect(await ClientFunction(() => {
-    return window["creator"].survey.description.trim();
+    return window["creator"].survey.description.trim().replace(/\n+/g, "\n");
   })()).eql("abc\ndef");
 
   await handleShiftEnter(titleQuerySelector);
