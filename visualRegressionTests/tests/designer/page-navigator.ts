@@ -136,6 +136,9 @@ test("Page Navigator works with - scroll-behavior: smooth;", async (t) => {
 test("Page navigator scrolling in bypage mode", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1920, 1000);
+    await ClientFunction(() => {
+      window["creator"].pageEditMode = "bypage";
+    })();
     await setJSON({
       title: "NPS Survey Question",
       pages: [
@@ -393,10 +396,7 @@ test("Page navigator scrolling in bypage mode", async (t) => {
       ],
       showQuestionNumbers: "off",
     });
-    await ClientFunction(() => {
-      window["creator"].pageEditMode = "bypage";
-    })();
-    await t.wait(1000);
+    await t.wait(500);
     // await ClientFunction(() => {
     //   document.querySelector(".svc-tab-designer")!.scrollTop = 500;
     // })();
