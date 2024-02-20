@@ -1406,14 +1406,14 @@ test("String editor whitespaces and linedreaks", async (t) => {
   await setJSON({
     "elements": [
       {
-        "type": "text",
+        "type": "radiogroup",
         "name": "q1",
-        "title": "a\nb\nc"
+        "choices": ["a\nb\nc"]
       },
       {
-        "type": "text",
+        "type": "radiogroup",
         "name": "q2",
-        "title": "a\nb\nc"
+        "choices": ["a\nb\nc"]
       }
     ]
   });
