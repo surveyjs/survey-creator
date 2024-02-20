@@ -167,7 +167,7 @@ test("stringsSurvey - one question in survey", () => {
   expect(question1Props.columns[0].title).toEqual("Default (English)");
   expect(question1Props.rows).toHaveLength(1);
   expect(question1Props.rows[0].value).toEqual("title");
-  expect(question1Props.rows[0].text).toEqual("Title");
+  expect(question1Props.rows[0].text).toEqual("Question title");
   const choicesPanel = <PanelModel>question1.elements[1];
   expect(choicesPanel.elements.length).toBe(3);
   const choicesProps1 = <QuestionMatrixDropdownModel>choicesPanel.elements[0];
@@ -1395,7 +1395,7 @@ test("Reset on changing creator.JSON", () => {
   creator.activeTab = "translation";
   expect(action.title).toEqual("Merge en with default locale");
   expect(action.tooltip).toEqual("Merge en with default locale");
-  if(!editorLocalization.locales["de"]) {
+  if (!editorLocalization.locales["de"]) {
     editorLocalization.locales["de"] = {
       ed: { translationMergeLocaleWithDefault: "Verschmelze {0} mit der Standardsprache" }
     };
@@ -1459,7 +1459,7 @@ test("Export dialect languages", () => {
 test("creator.onTranslationExportItem", () => {
   const creator = new CreatorTester({ showTranslationTab: true });
   creator.onTranslationExportItem.add((sender, options) => {
-    if(!options.text) {
+    if (!options.text) {
       options.text = options.locString.getLocaleText("");
     }
   });
@@ -1902,7 +1902,7 @@ test("Translation update filterPageActiontitle after activated", () => {
   tabTranslationPlugin.activate();
   let counter = 0;
   creator.onModified.add((sender, options) => {
-    counter ++;
+    counter++;
   });
   const question = tabTranslationPlugin.model.localesQuestion;
   expect(question.visibleRows).toHaveLength(2);

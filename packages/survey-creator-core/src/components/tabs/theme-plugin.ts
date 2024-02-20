@@ -283,7 +283,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           if (confirm) {
             this.model.resetTheme();
           }
-        }, getLocString("ed.themeResetConfirmationOk"));
+        }, getLocString("ed.themeResetConfirmationOk"), editorLocalization.currentLocale);
       }
     });
     items.push(this.resetTheme);

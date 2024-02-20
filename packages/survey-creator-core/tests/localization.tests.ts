@@ -28,7 +28,7 @@ test("Get property name from pe. based on class name", () => {
   expect(editorLocalization.getPropertyNameInEditor("question", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("matrix", "testProperty")).toEqual("Question");
   expect(editorLocalization.getPropertyNameInEditor("text", "testProperty")).toEqual("Text");
-  expect(editorLocalization.getPropertyNameInEditor("survey", "showTOC")).toEqual("Show TOC");
+  expect(editorLocalization.getPropertyNameInEditor("survey", "showTOC")).toEqual("Show table of contents (TOC)");
 
   expect(editorLocalization.getPropertyNameInEditor("base", "testProperty2")).toEqual("All2");
   expect(editorLocalization.getPropertyNameInEditor("page", "testProperty2")).toEqual("All2");
@@ -48,7 +48,6 @@ test("Get property description from peHelp. based on class name", () => {
   peHelp.survey = { testProperty: "Help_Survey" };
   peHelp.question = { testProperty: "Help_Question", testProperty2: "Help_Question2", testProperty3: "Help_Question3" };
   peHelp.text = { testProperty: "Help_Text" };
-
   expect(editorLocalization.getPropertyHelpInEditor("base", "testProperty")).toEqual("Help_All");
   expect(editorLocalization.getPropertyHelpInEditor("page", "testProperty")).toEqual("Help_All");
   expect(editorLocalization.getPropertyHelpInEditor("survey", "testProperty")).toEqual("Help_Survey");
@@ -64,9 +63,9 @@ test("Get property description from peHelp. based on class name", () => {
   expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty2")).toEqual("Help_Question2");
   expect(editorLocalization.getPropertyHelpInEditor("matrix", "testProperty3")).toEqual("Help_Question3");
   expect(editorLocalization.getPropertyHelpInEditor("text", "testProperty3")).toEqual("Help_Question3");
-  expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeTruthy();
+  expect(editorLocalization.getPropertyHelpInEditor("text", "test", "expression")).toBeFalsy();
   expect(editorLocalization.getPropertyHelpInEditor("dropdown", "valueName", "string")).toBeTruthy();
-  expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeFalsy();
+  expect(editorLocalization.getPropertyHelpInEditor("choicesByUrl", "valueName", "string")).toBeTruthy();
 });
 test("Get value name from pv. based on property name", () => {
   const pv: any = defaultStrings.pv;
@@ -114,7 +113,7 @@ test("change string to empty string", () => {
 });
 
 test("getPropertyNameInEditor", () => {
-  expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rate value");
+  expect(editorLocalization.getPropertyNameInEditor("rating", "rateMin")).toEqual("Minimum rating value");
   expect(editorLocalization.getPropertyNameInEditor("question", "someGoodProperty")).toEqual("Some good property");
   expect(editorLocalization.getPropertyNameInEditor("question", "title")).toEqual("Title");
 });
@@ -200,8 +199,8 @@ test("Check creator license localization", (): any => {
   expect(creator.licenseText).toBe(editorLocalization.locales["en"].survey.license);
 });
 test("getPropertyValue autoGenerate and boolean", () => {
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Generate");
-  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Enter manually");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", true)).toEqual("Auto-generate");
+  expect(editorLocalization.getPropertyValueInEditor("autoGenerate", false)).toEqual("Manual");
   const deutschStrings: any = {
     pv: {
       autoGenerate: {
@@ -227,4 +226,20 @@ test("it and it-custom translation", () => {
   expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkbox-it-custom");
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
   editorLocalization.currentLocale = "";
+});
+test("it and it-custom translation", () => {
+  expect(editorLocalization.defaultLocale).toEqual("en");
+  expect(editorLocalization.getLocale().qt.text).toEqual("Single-Line Input");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getLocale().qt.text).toEqual("Testo semplice");
+  const customStrings: any = {
+    qt: {
+      checkbox: "Checkbox-it-custom"
+    }
+  };
+  editorLocalization.locales["custom"] = customStrings;
+  editorLocalization.currentLocale = "custom";
+  expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkbox-it-custom");
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "en";
 });

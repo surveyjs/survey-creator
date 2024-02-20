@@ -30,7 +30,7 @@ test("Rename choice", async (t) => {
 
   const expectedNewChoiceName = "newItem1";
   const question1 = Selector("[data-name=\"question1\"]");
-  const choicesTab = Selector("h4").withExactText("Choices");
+  const choicesTab = Selector("h4").withExactText("Choice Options");
   const item1PGEditorInput = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0).find("td").nth(1).find("input");
 
   await t
@@ -67,10 +67,10 @@ test("https://github.com/surveyjs/survey-library/issues/4170, responsiveness bug
   };
   await setJSON(json);
   const question1 = Selector("[data-name=\"question1\"]");
-  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabTitle = Selector("h4").withExactText("Choice Options");
   const choicesTabContent = choicesTabTitle.parent().nextSibling();
   const clearButton = choicesTabContent.find(".spg-action-button[title='Clear']");
-  const addButton = choicesTabContent.find(".spg-action-button[title='Add a choice']");
+  const addButton = choicesTabContent.find(".spg-action-button[title='Add new choice']");
 
   await t
     .click(question1)
@@ -116,7 +116,7 @@ test("Load choices by custom button in fast edit", async (t) => {
   await setJSON(json);
   await setCreatorHandler();
   const question1 = Selector("[data-name=\"question1\"]");
-  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabTitle = Selector("h4").withExactText("Choice Options");
   const choicesTabContent = choicesTabTitle.parent().nextSibling();
   const fastEntryButton = choicesTabContent.find(".spg-action-button[title='Edit']");
   const setItemsButton = choicesTabContent.find(".sv-popup__button[title='Set Items']");
@@ -168,9 +168,9 @@ test("Enter image link after choice added via property grid", async (t) => {
   };
   await setJSON(json);
   const question1 = Selector("[data-name=\"question1\"]");
-  const choicesTabTitle = Selector("h4").withExactText("Choices");
+  const choicesTabTitle = Selector("h4").withExactText("Choice Options");
   const choicesTabContent = choicesTabTitle.parent().nextSibling();
-  const addButton = choicesTabContent.find(".spg-action-button[title='Add a choice']");
+  const addButton = choicesTabContent.find(".spg-action-button[title='Add new choice']");
   const input = choicesTabContent.find("input").nth(14);
 
   await t

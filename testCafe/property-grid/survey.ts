@@ -43,7 +43,7 @@ test("Delete second page", async (t) => {
 });
 
 test("Add calculated values", async (t) => {
-  const addButton = Selector("div[data-name=calculatedValues]").find("button[title='Add New']");
+  const addButton = Selector("div[data-name=calculatedValues]").find("button[title='Add new variable']");
   const rows = Selector("div[data-name=calculatedValues]").find("tbody").find("tr");
 
   await setJSON(json);

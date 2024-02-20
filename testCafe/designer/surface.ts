@@ -79,8 +79,8 @@ test("Check imagepicker add/delete items not raises errors and works fine: #3203
   await explicitErrorHandler();
   await t
     .click(".svc-toolbox__item--icon-imagepicker")
-    .click(".spg-panel__title--expandable[aria-label='Choices']")
-    .click(".spg-action-button[title='Add a choice']")
+    .click(".spg-panel__title--expandable[aria-label='Choice Options']")
+    .click(".spg-action-button[title='Add new choice']")
     .click(".spg-matrixdynamic tr:last-of-type .spg-action-button--danger")
     .expect(Selector(".sd-imagepicker").find(".sd-imagepicker > *:not(svc-image-item-value)").count).eql(6);
 });

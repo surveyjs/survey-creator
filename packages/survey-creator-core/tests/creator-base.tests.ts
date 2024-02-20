@@ -2599,13 +2599,13 @@ test("Modify property editor titleActions on event", (): any => {
   let choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
   expect(choicesQuestion).toBeTruthy();
   expect(choicesQuestion.getType()).toEqual("matrixdynamic");
-  expect(choicesQuestion.getTitleActions()).toHaveLength(3);
+  expect(choicesQuestion.getTitleActions()).toHaveLength(4);
   const question = <QuestionCheckboxModel>creator.survey.getAllQuestions()[1];
   creator.selectElement(question);
   choicesQuestion = creator.sidebar.getTabById("propertyGrid").model.survey.getQuestionByName("choices");
-  expect(choicesQuestion.getTitleActions()).toHaveLength(4);
+  expect(choicesQuestion.getTitleActions()).toHaveLength(5);
   expect(question.choices).toHaveLength(0);
-  choicesQuestion.titleActions[3].action();
+  choicesQuestion.titleActions[4].action();
   expect(question.choices).toHaveLength(2);
 });
 test("Set readOnly option", (): any => {
