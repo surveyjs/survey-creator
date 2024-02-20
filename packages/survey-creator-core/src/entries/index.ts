@@ -87,6 +87,7 @@ export * from "../utils/resizer";
 export * from "../plugins/undo-redo";
 export * from "../plugins/undo-redo/undo-redo-manager";
 export * from "../pages-controller";
+export * from "../presets/presets";
 
 require("../components/property-panel/property-panel-item.scss");
 require("../components/property-panel/property-panel.scss");
