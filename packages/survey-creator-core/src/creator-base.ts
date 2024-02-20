@@ -370,19 +370,19 @@ export class SurveyCreatorModel extends Base
   }
   private removePlugin(name: string): void {
     const plugin = this.getPlugin(name);
-    if(!plugin) return;
+    if (!plugin) return;
     let index = this.getTabIndex(name);
-    if(index > -1) {
+    if (index > -1) {
       this.tabs.splice(index, 1);
     }
     delete this.plugins[name];
-    if(plugin.dispose) {
+    if (plugin.dispose) {
       plugin.dispose();
     }
   }
   private getTabIndex(id: string): number {
-    for(let i = 0; i < this.tabs.length; i ++) {
-      if(this.tabs[i].id === id) return i;
+    for (let i = 0; i < this.tabs.length; i++) {
+      if (this.tabs[i].id === id) return i;
     }
     return -1;
   }
@@ -1408,10 +1408,8 @@ export class SurveyCreatorModel extends Base
     this.initPlugins();
     this.initFooterToolbar();
   }
-  //TODO-presets
-  public setTabs(tabNames: Array<string>): void {
-    if(!Array.isArray(tabNames)) return;
-    const tabInfo = {
+  private getTabsInfo(): any {
+    return {
       designer: () => new TabDesignerPlugin(this),
       preview: () => new TabTestPlugin(this),
       theme: () => new ThemeTabPlugin(this), //TODO change name
@@ -1419,26 +1417,39 @@ export class SurveyCreatorModel extends Base
       editor: () => TabJsonEditorAcePlugin.hasAceEditor() ? new TabJsonEditorAcePlugin(this) : new TabJsonEditorTextareaPlugin(this),
       translation: () => new TabTranslationPlugin(this)
     };
-    for(let i = tabNames.length - 1; i >= 0; i --) {
-      if(!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
+  }
+  public getAvailableTabNames(): Array<string> {
+    const res = [];
+    const tabInfo = this.getTabsInfo();
+    for (let key in tabInfo) {
+      res.push(key);
     }
-    if(tabNames.length === 0) return;
-    for(let i = this.tabs.length - 1; i >= 0; i --) {
+    return res;
+  }
+  //TODO-presets
+  public setTabs(tabNames: Array<string>): void {
+    if (!Array.isArray(tabNames)) return;
+    const tabInfo = this.getTabsInfo();
+    for (let i = tabNames.length - 1; i >= 0; i--) {
+      if (!tabInfo[tabNames[i]]) tabNames.splice(i, 1);
+    }
+    if (tabNames.length === 0) return;
+    for (let i = this.tabs.length - 1; i >= 0; i--) {
       const tabId = this.tabs[i].id;
-      const id = tabId === "test" ? "preview": tabId;
-      if(tabNames.indexOf(id) < 0) {
+      const id = tabId === "test" ? "preview" : tabId;
+      if (tabNames.indexOf(id) < 0) {
         this.removePlugin(tabId);
       }
     }
     tabNames.forEach(id => {
       const tabId = id === "preview" ? "test" : id;
-      if(tabInfo[id] && this.getTabIndex(tabId) < 0) {
+      if (tabInfo[id] && this.getTabIndex(tabId) < 0) {
         tabInfo[id]();
       }
     });
-    for(let i = 0; i < tabNames.length; i ++) {
+    for (let i = 0; i < tabNames.length; i++) {
       const index = this.getTabIndex(tabNames[i]);
-      if(index > -1 && index !== i) {
+      if (index > -1 && index !== i) {
         const item = this.tabs[index];
         this.tabs.splice(index, 1);
         this.tabs.splice(i, 0, item);
@@ -2541,7 +2552,7 @@ export class SurveyCreatorModel extends Base
   }
   public setPropertyGridDefinition(val: any): void {
     this.propertyGridDefinition = val;
-    if(this.designerPropertyGrid) {
+    if (this.designerPropertyGrid) {
       this.designerPropertyGrid.setPropertyGridDefinition(val);
     }
   }

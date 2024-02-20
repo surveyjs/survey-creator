@@ -1,11 +1,17 @@
 Survey.ComponentCollection.Instance.add({ name: "newrating", title: "SuperRating", elementsJSON: [{ "type": "rating", "name": "superrating", "title": "1", "isRequired": true, "rateMin": 0, "rateMax": 10, "minRateDescription": "1", "maxRateDescription": "2" }] });
 Survey.ComponentCollection.Instance.add({ name: "d2", title: "DDD", questionJSON: { "type": "dropdown", "name": "superrating", "title": "1", "isRequired": true, choices: [1, 2, 3] } });
 
-const confSurvey = new SurveyCreatorCore.CreatorPreset().createEditModel();
+let confSurvey;
+function getConfSurvey() {
+  if (!confSurvey) {
+    confSurvey = new SurveyCreatorCore.CreatorPreset().createEditModel(getCreator());
+  }
+  return confSurvey;
+}
 class ConfiguratorTemplateComponent extends React.Component {
   render() {
     return (<React.StrictMode>
-      <SurveyReact.Survey model={confSurvey} />
+      <SurveyReact.Survey model={getConfSurvey()} />
     </React.StrictMode>);
   }
 }
@@ -169,6 +175,7 @@ SurveyReact.ReactElementFactory.Instance.registerElement(
 );
 
 const creator = new SurveyCreator.SurveyCreator(options);
+function getCreator() { return creator; }
 const configuratorPlugin = {
   activate: () => { },
   deactivate: () => { return true; }
