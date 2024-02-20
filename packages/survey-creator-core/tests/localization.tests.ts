@@ -227,3 +227,19 @@ test("it and it-custom translation", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
   editorLocalization.currentLocale = "";
 });
+test("it and it-custom translation", () => {
+  expect(editorLocalization.defaultLocale).toEqual("en");
+  expect(editorLocalization.getLocale().qt.text).toEqual("Single-Line Input");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getLocale().qt.text).toEqual("Testo semplice");
+  const customStrings: any = {
+    qt: {
+      checkbox: "Checkbox-it-custom"
+    }
+  };
+  editorLocalization.locales["custom"] = customStrings;
+  editorLocalization.currentLocale = "custom";
+  expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkbox-it-custom");
+  expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "en";
+});

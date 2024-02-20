@@ -3184,3 +3184,17 @@ test("check pages editor respects onPageAdding", () => {
   addNewPageAction.action!();
   expect(creator.survey.pages.length).toBe(1);
 });
+test("Set property name into correct category", () => {
+  Serializer.addProperty("question", {
+    name: "validation",
+    category: "general",
+  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q);
+  const validationQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("validation"));
+  expect(validationQuestion.name).toEqual("validation");
+  expect(validationQuestion.parent.name).toEqual("general");
+  Serializer.removeProperty("question", "validation");
+});
