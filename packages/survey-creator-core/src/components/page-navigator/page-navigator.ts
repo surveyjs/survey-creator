@@ -128,6 +128,9 @@ export class PageNavigatorViewModel extends Base {
     item.data = page;
     return this.createActionBarCore(item);
   }
+  public get isByPageMode() {
+    return this.pagesController.creator["pageEditMode"] === "bypage";
+  }
   public scrollToPage(page: PageModel) {
     if (this.pageEditMode === "bypage") {
       this.pagesController.currentPage = page;
@@ -266,6 +269,9 @@ export class PageNavigatorViewModel extends Base {
   public static PAGE_NAVIGATION_ITEM_HEIGHT = 36;
   protected updateVisibleItems(allAvailableHeight: number): void {
     this.updateVisibility();
+    if (this.isByPageMode) {
+      return;
+    }
     const itemsAvailableHeight = allAvailableHeight - PageNavigatorViewModel.PAGE_NAVIGATION_MENU_ITEM_HEIGHT;
     this.visibleItemsCount = Math.floor(itemsAvailableHeight / PageNavigatorViewModel.PAGE_NAVIGATION_ITEM_HEIGHT);
 
@@ -278,7 +284,11 @@ export class PageNavigatorViewModel extends Base {
   }
   private _updateVisibility() {
     this.hasScrolling = !this._scrollableContainer || (this._scrollableContainer.scrollHeight > this._scrollableContainer.clientHeight);
-    this.visible = this.items.length > 1 && (this.hasScrolling || this.pagesController.creator["pageEditMode"] === "bypage");
+    this.visible = this.items.length > 1 && (this.hasScrolling || this.isByPageMode);
+    if (this.isByPageMode) {
+      this.visibleItemsStartIndex = 0;
+      this.visibleItemsCount = this.items.length;
+    }
   }
   private updateVisibility() {
     // this._updateVisibility();
