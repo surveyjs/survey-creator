@@ -1,6 +1,7 @@
 import { Base, JsonObjectProperty, ComponentCollection, Question, PanelModel, QuestionHtmlModel, InputMaskBase, Serializer, JsonMetadataClass } from "survey-core";
 import { PropertyGridEditorCollection, PropertyJSONGenerator, PropertyGridEditor, } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
+import { getLocString } from "../editorLocalization";
 
 var json = {
   name: "propertygrid_masksettings",
@@ -57,15 +58,12 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
     switch (masksettings.getType()) {
       case "masksettings":
         this._previewQuestion.visible = true;
-        this._previewQuestion.html = "No settings";
+        this._previewQuestion.html = getLocString("pe.maskSettingsPlaceHolder");
         break;
       case "numbermask":
         this._previewQuestion.visible = true;
         this._previewQuestion.html = masksettings["getNumberMaskedValue"](-123456.78);
         break;
-      // case "masksettings":
-      //   preview.html = "No settings";
-      //   break;
       default:
         this._previewQuestion.visible = false;
         break;
@@ -79,7 +77,7 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionMaskSettings());
 
 export class PropertyGridEditorMaskType extends PropertyGridEditor {
-  private _noneItem = { value: "none", text: "none" };
+  private _noneItem = { value: "none", text: getLocString("pv.none") };
 
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type == "masktype";
@@ -97,7 +95,7 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
   private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     const classes = Serializer.getChildrenClasses("masksettings") || [];
     const choices = classes.map((cl: JsonMetadataClass) => {
-      return { value: cl.name, text: cl.name };
+      return { value: cl.name, text: getLocString("pe." + cl.name) };
     });
     choices.splice(0, 0, this._noneItem);
     return choices;
