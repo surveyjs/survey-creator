@@ -1426,6 +1426,17 @@ export class SurveyCreatorModel extends Base
     }
     return res;
   }
+  public getTabNames(): Array<string> {
+    const tabNames = this.getAvailableTabNames();
+    const res = [];
+    this.tabs.forEach(tab => {
+      const name = tab.id === "test" ? "preview" : tab.id;
+      if (tabNames.indexOf(name) > -1) {
+        res.push(name);
+      }
+    })
+    return res;
+  }
   //TODO-presets
   public setTabs(tabNames: Array<string>): void {
     if (!Array.isArray(tabNames)) return;

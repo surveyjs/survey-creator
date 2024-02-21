@@ -35,24 +35,33 @@ export class CreatorPreset extends CreatorPresetBase {
     const presets = this.createPresets();
     const model = new SurveyModel(this.getEditModelJson(presets));
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
+    model.addNavigationItem({
+      id: "preset_save",
+      title: "Save", //TODO
+      action: () => {
+        this.applyFromSurveyModel(model, creator);
+      }
+    });
     presets.forEach(preset => {
       const q = model.getQuestionByName(preset.getPath());
       if (!!q) {
         preset.setupEditableQuestion(q, editingCreator);
       }
     });
-    model.addNavigationItem({
-      id: "preset_save",
-      title: "Save", //TODO
-      action: () => {
-        this.setJson(this.getJsonFromSurveyModel(model));
-        if (creator) {
-          this.apply(creator);
-        }
-      }
-    })
     model.data = this.getEditModelData();
+    presets.forEach(preset => {
+      const q = model.getQuestionByName(preset.getPath());
+      if (!!q) {
+        preset.setupEditableQuestionValue(q, editingCreator);
+      }
+    });
     return model;
+  }
+  public applyFromSurveyModel(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.setJson(this.getJsonFromSurveyModel(model));
+    if (creator) {
+      this.apply(creator);
+    }
   }
   public getJsonFromSurveyModel(model: SurveyModel): any {
     const res: any = {};
@@ -86,6 +95,7 @@ export class CreatorPreset extends CreatorPresetBase {
     const qJson = preset.getEditableQuestionJson();
     if (!!qJson) {
       qJson.name = name;
+      qJson.clearIfInvisible = "none";
       qJson.visibleIf = "{" + boolName + "} = true";
     }
     pageJson.elements = [bolEl];

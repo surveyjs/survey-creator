@@ -16,6 +16,7 @@ test("Preset edit model, tabs component", () => {
   const tabsQuestion = survey.getQuestionByName("tabs");
   expect(tabsQuestion).toBeTruthy();
   expect(tabsQuestion.isVisible).toBeFalsy();
+  expect(tabsQuestion.clearIfInvisible).toEqual("none");
   boolQuestion.value = true;
   expect(tabsQuestion.isVisible).toBeTruthy();
   const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
@@ -23,7 +24,7 @@ test("Preset edit model, tabs component", () => {
   expect(itemsQuestion.choices).toHaveLength(6);
   expect(itemsQuestion.choices[0].value).toEqual("designer");
   expect(itemsQuestion.choices[5].value).toEqual("translation");
-  expect(activeTabQuestion.visibleChoices).toHaveLength(0);
+  expect(activeTabQuestion.visibleChoices).toHaveLength(3);
   itemsQuestion.value = ["designer", "translation"];
   expect(activeTabQuestion.visibleChoices).toHaveLength(2);
   activeTabQuestion.value = "translation";
@@ -34,4 +35,33 @@ test("Preset edit model, tabs component", () => {
   boolQuestion.value = false;
   const resJson2 = preset.getJsonFromSurveyModel(survey);
   expect(resJson2).toEqual({});
+});
+test("Preset edit model, tabs component with creator, default items", () => {
+  const creator = new CreatorTester();
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel(creator);
+  const boolQuestion = survey.getQuestionByName("show_tabs");
+  boolQuestion.value = true;
+  const tabsQuestion = survey.getQuestionByName("tabs");
+  const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
+  const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
+  expect(defultTabs).toEqual(["designer", "preview", "editor"]);
+  itemsQuestion.value = ["preview", "logic"];
+  const activeTabQuestion = tabsQuestion.contentPanel.getQuestionByName("activeTab");
+  activeTabQuestion.value = "logic";
+  preset.applyFromSurveyModel(survey, creator);
+  expect(creator.tabs).toHaveLength(2);
+  expect(creator.tabs[0].id).toEqual("test");
+  expect(creator.tabs[1].id).toEqual("logic");
+  expect(creator.activeTab).toBe("logic");
+});
+test("Preset edit model, tabs component with creator, default items", () => {
+  const preset = new CreatorPreset({ tabs: { items: ["designer", "logic"] } });
+  const survey = preset.createEditModel();
+  const boolQuestion = survey.getQuestionByName("show_tabs");
+  boolQuestion.value = true;
+  const tabsQuestion = survey.getQuestionByName("tabs");
+  const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
+  const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
+  expect(defultTabs).toEqual(["designer", "logic"]);
 });

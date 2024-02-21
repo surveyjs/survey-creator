@@ -37,6 +37,12 @@ export class CreatorPresetTabs extends CreatorPresetBase {
       itemsQuestion.choices = creator.getAvailableTabNames();
     }
   }
+  setupEditableQuestionValue(question: Question, creator: SurveyCreatorModel): void {
+    const itemsQuestion = question.contentPanel.getQuestionByName("items");
+    if (itemsQuestion && itemsQuestion.isEmpty()) {
+      itemsQuestion.value = creator.getTabNames();
+    }
+  }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     if (this.json["items"]) {

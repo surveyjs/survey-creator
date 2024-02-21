@@ -7,6 +7,7 @@ export interface ICreatorPreset {
   getPath(): string;
   getEditableQuestionJson(): any;
   setupEditableQuestion(question: Question, creator: SurveyCreatorModel): void;
+  setupEditableQuestionValue(question: Question, creator: SurveyCreatorModel): void;
 }
 
 export abstract class CreatorPresetBase implements ICreatorPreset {
@@ -29,6 +30,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     return undefined;
   }
   setupEditableQuestion(question: Question, creator: SurveyCreatorModel): void { }
+  setupEditableQuestionValue(question: Question, creator: SurveyCreatorModel): void { }
   protected applyCore(creator: SurveyCreatorModel): void { }
   protected setupPresets(): void {
   }
