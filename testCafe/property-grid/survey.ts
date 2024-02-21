@@ -196,7 +196,8 @@ test("Drop-down menus do not close on second click", async (t) => {
     ]
   };
   await setJSON(json);
-  const dropdown = dataGroup.parent(".sd-element--expanded.spg-panel").find(".spg-dropdown");
+  const panel = dataGroup.parent(".sd-element--expanded.spg-panel");
+  const dropdown = panel.find(".spg-dropdown");
   const popupContainer = Selector(".sv-popup__container").filterVisible();
 
   await t
@@ -218,6 +219,6 @@ test("Drop-down menus do not close on second click", async (t) => {
     .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
     .expect(popupContainer.visible).ok()
 
-    .click("body", { offsetX: 600, offsetY: 20 })
+    .click(panel.find(".spg-panel__content"), { offsetX: 10, offsetY: 10 })
     .expect(popupContainer.visible).notOk();
 });

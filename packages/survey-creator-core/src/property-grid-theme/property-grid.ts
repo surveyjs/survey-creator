@@ -368,5 +368,12 @@ export var propertyGridCss = {
   },
   linkvalue: {
     content: "spg-link"
-  }
+  },
+  list: {
+    root: "sv-list__container sd-list",
+    item: "sv-list__item sd-list__item",
+    itemBody: "sv-list__item-body sd-list__item-body",
+    itemSelected: "sv-list__item--selected sd-list__item--selected",
+    itemFocused: "sv-list__item--focused sd-list__item--focused",
+  },
 };
