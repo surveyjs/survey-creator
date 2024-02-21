@@ -175,7 +175,7 @@ export var propertyGridCss = {
   },
   dropdown: {
     root: "",
-    popup: "",
+    popup: "sv-dropdown-popup",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
