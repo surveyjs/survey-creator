@@ -3,16 +3,16 @@ import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder";
+import { ThemeEditorModel, getThemeFullName, getThemeChanges } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 
 export interface IPropertyGridSurveyCreatedEvent {
   survey: SurveyModel;
-  themeEditor: ThemeBuilder;
+  model: ThemeEditorModel;
 }
-export interface IPropertyGridEditorAdditingOptions {
+export interface IAddPropertyGridEditorParams {
   element: IElement;
   category?: string;
   insertAfter?: string;
@@ -55,7 +55,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private sidebarTab: SidebarTabModel;
   private _availableThemes = [].concat(PredefinedThemes);
 
-  public model: ThemeBuilder;
+  public model: ThemeEditorModel;
 
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
@@ -93,12 +93,12 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
   }
   public activate(): void {
-    this.model = new ThemeBuilder(this.creator, this.simulatorCssClasses);
+    this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
     this.update();
     if (!!this.model.themeEditorSurvey) {
-      const options = <IPropertyGridSurveyCreatedEvent> {
+      const options = <IPropertyGridSurveyCreatedEvent>{
         survey: this.model.themeEditorSurvey,
-        themeEditor: this.model,
+        model: this.model,
       };
       this.onPropertyGridSurveyCreated.fire(this, options);
     }
@@ -427,7 +427,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
       if (setAsDefault) {
         this.availableThemes = [theme.themeName].concat(this.availableThemes);
-        ThemeBuilder.DefaultTheme = theme;
+        ThemeEditorModel.DefaultTheme = theme;
       } else {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
@@ -449,8 +449,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
       delete Themes[fullThemeName];
-      if (ThemeBuilder.DefaultTheme === themeToDelete) {
-        ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+      if (ThemeEditorModel.DefaultTheme === themeToDelete) {
+        ThemeEditorModel.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
