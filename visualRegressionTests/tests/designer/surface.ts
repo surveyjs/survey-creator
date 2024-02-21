@@ -1907,3 +1907,21 @@ test("Panel title editor is fully visible", async (t) => {
     await takeElementScreenshot("panel-title-editing.png", Selector(".svc-question__content--panel"), t, comparer);
   });
 });
+
+test("Check minimal height", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1120, 900);
+    const root = Selector(".svc-creator");
+    await setJSON({});
+    await ClientFunction(() => {
+      const creator = document.getElementById("survey-creator");
+      creator.style.position = "";
+      creator.style.top = "";
+      creator.style.bottom = "";
+      creator.style.left = "";
+      creator.style.right = "";
+      creator.style.height = "1px";
+    })();
+    await takeElementScreenshot("creator-min-height.png", root, t, comparer);
+  });
+});
