@@ -432,7 +432,7 @@ export interface LogicRuleGetDisplayTextEvent {
 }
 
 export interface ModifiedEvent {
-  /*
+  /**
   * A value that indicates the modification: `"ADDED_FROM_TOOLBOX"`, `"PAGE_ADDED"`, `"PAGE_MOVED"`, `"QUESTION_CONVERTED"`, `"QUESTION_CHANGED_BY_EDITOR"`, `"PROPERTY_CHANGED"`, `"ELEMENT_REORDERED"`, `"OBJECT_DELETED"`, `"VIEW_TYPE_CHANGED"`, `"DO_DROP"`, `"TRANSLATIONS_CHANGED"`, `"JSON_EDITOR"`, `"THEME_MODIFIED"`
   * 
   * Depending on the `options.type` value, the `options` object contains parameters listed below:
