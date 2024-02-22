@@ -1916,16 +1916,12 @@ test("Check minimal height", async (t) => {
     await ClientFunction(() => {
       const creator = document.getElementById("survey-creator");
 
-      window["testOldStyle"] = Object.assign({}, creator.style);
-
-      Object.assign({
-        position: "",
-        top: "",
-        bottom: "",
-        left: "",
-        right: "",
-        height: ""
-      });
+      creator.style.position = "";
+      creator.style.top = "";
+      creator.style.bottom = "";
+      creator.style.left = "";
+      creator.style.right = "";
+      creator.style.height = "1px";
     })();
     await takeElementScreenshot("creator-min-height.png", root, t, comparer);
   });
