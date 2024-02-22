@@ -68,7 +68,7 @@ export class TabDesignerViewModel extends Base {
     return this.pagesControllerValue;
   }
   public get isToolboxVisible(): boolean {
-    return this.creator.showToolboxValue && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
+    return this.creator.showToolbox && (this.creator.toolboxLocation === "right" || this.creator.toolboxLocation === "left");
   }
   public get placeholderText(): string {
     return getLocString("ed.surveyPlaceHolder");
