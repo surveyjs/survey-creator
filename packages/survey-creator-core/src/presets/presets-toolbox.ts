@@ -64,6 +64,6 @@ export class CreatorPresetToolbox extends CreatorPresetBase {
   public getPath(): string { return "toolbox"; }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetToolboxDefinition(), new CreatorPresetToolboxItems(),
-    new CreatorPresetToolboxCategories()];
+      new CreatorPresetToolboxCategories()];
   }
 }

@@ -1434,7 +1434,7 @@ export class SurveyCreatorModel extends Base
       if (tabNames.indexOf(name) > -1) {
         res.push(name);
       }
-    })
+    });
     return res;
   }
   //TODO-presets

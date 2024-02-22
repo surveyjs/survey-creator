@@ -30,7 +30,7 @@ export class CreatorPreset extends CreatorPresetBase {
   public getPath(): string { return ""; }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetTabs(), new CreatorPresetToolbox(),
-    new CreatorPresetPropertyGrid()];
+      new CreatorPresetPropertyGrid()];
   }
   public createEditModel(creator?: SurveyCreatorModel): SurveyModel {
     const editablePresets = this.createEditablePresets();
@@ -82,3 +82,4 @@ export class CreatorPreset extends CreatorPresetBase {
     });
     return modelJson;
   }
+}

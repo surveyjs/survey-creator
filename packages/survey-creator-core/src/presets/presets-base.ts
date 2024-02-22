@@ -20,7 +20,6 @@ export interface ICreatorPreset {
   createEditable(): CreatorPresetEditableBase;
 }
 
-
 export abstract class CreatorPresetBase implements ICreatorPreset {
   protected children: Array<ICreatorPreset> = [];
   protected json: any;
