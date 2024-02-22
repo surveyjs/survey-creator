@@ -175,7 +175,7 @@ export var propertyGridCss = {
   },
   dropdown: {
     root: "",
-    popup: "sv-dropdown-popup",
+    popup: "spg-dropdown-popup",
     small: "spg-row__question--small sd-row__question--small",
     control: "spg-input spg-dropdown sd-input sd-dropdown",
     filterStringInput: "sd-dropdown__filter-string-input spg-dropdown__filter-string-input",
@@ -368,12 +368,5 @@ export var propertyGridCss = {
   },
   linkvalue: {
     content: "spg-link"
-  },
-  list: {
-    root: "sv-list__container sd-list",
-    item: "sv-list__item sd-list__item",
-    itemBody: "sv-list__item-body sd-list__item-body",
-    itemSelected: "sv-list__item--selected sd-list__item--selected",
-    itemFocused: "sv-list__item--focused sd-list__item--focused",
   },
 };
