@@ -11,7 +11,7 @@ export interface ICreatorPreset {
 }
 
 export abstract class CreatorPresetBase implements ICreatorPreset {
-  private children: Array<ICreatorPreset> = [];
+  protected children: Array<ICreatorPreset> = [];
   protected json: any;
   public constructor() {
     this.setupPresets();

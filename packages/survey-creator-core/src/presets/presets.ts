@@ -33,8 +33,7 @@ export class CreatorPreset extends CreatorPresetBase {
     new CreatorPresetPropertyGrid()];
   }
   public createEditModel(creator?: SurveyCreatorModel): SurveyModel {
-    const presets = this.createPresets();
-    const model = new SurveyModel(this.getEditModelJson(presets));
+    const model = new SurveyModel(this.getEditModelJson());
     model.showCompleteButton = false;
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
     model.addNavigationItem({
@@ -44,14 +43,14 @@ export class CreatorPreset extends CreatorPresetBase {
         this.applyFromSurveyModel(model, creator);
       }
     });
-    presets.forEach(preset => {
+    this.children.forEach(preset => {
       const q = model.getQuestionByName(preset.getPath());
       if (!!q) {
         preset.setupEditableQuestion(q, editingCreator);
       }
     });
     model.data = this.getEditModelData();
-    presets.forEach(preset => {
+    this.children.forEach(preset => {
       const q = model.getQuestionByName(preset.getPath());
       if (!!q) {
         preset.setupEditableQuestionValue(q, editingCreator);
@@ -67,8 +66,7 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   public getJsonFromSurveyModel(model: SurveyModel): any {
     const res: any = {};
-    const presets = this.createPresets();
-    presets.forEach(preset => {
+    this.children.forEach(preset => {
       const name = preset.getPath();
       const q = model.getQuestionByName(name);
       const boolQ = model.getQuestionByName(this.getShowQuestionName(name));
@@ -78,9 +76,9 @@ export class CreatorPreset extends CreatorPresetBase {
     });
     return res;
   }
-  private getEditModelJson(presets: Array<ICreatorPreset>): any {
+  private getEditModelJson(): any {
     const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false };
-    presets.forEach(preset => {
+    this.children.forEach(preset => {
       modelJson.pages.push(this.createPageElements(preset));
     });
     return modelJson;
