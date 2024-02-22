@@ -24,10 +24,10 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 [View Full Code for Vue 3](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 [View Full Code for Vue 2](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue (linkStyle))
 
-If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repositories:
+If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
 
-- <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quick Start Boilerplate</a>
-- <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue 2 Quick Start Boilerplate</a>
+- <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue 2 Quickstart Template</a>
 
 ## Add Survey Creator to a Vue 3 Application
 

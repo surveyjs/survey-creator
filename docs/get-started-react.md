@@ -15,7 +15,10 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
-If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">React + SurveyJS Quick Start Boilerplate</a>.
+If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
+
+- <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">SurveyJS + React Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs-nextjs" target="_blank">SurveyJS + Next.js Quickstart Template</a>
 
 ## Install the `survey-creator-react` npm Package
 
