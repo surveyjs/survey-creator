@@ -90,9 +90,14 @@ export function SurveyCreatorWidget() {
 
 ## Render Survey Creator
 
-To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute:
+To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute, as shown below.
+
+> If you are using [Next.js](https://nextjs.org) or another framework that [has adopted React Server Components](https://react.dev/learn/start-a-new-react-project#bleeding-edge-react-frameworks), you need to explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 
 // ...
@@ -110,6 +115,9 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
@@ -227,6 +235,9 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
@@ -330,6 +341,9 @@ To view the application, run `npm run start` in a command line and open [http://
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
