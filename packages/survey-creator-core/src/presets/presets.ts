@@ -28,12 +28,14 @@ export class CreatorPreset extends CreatorPresetBase {
     this.setJson(json);
   }
   public getPath(): string { return ""; }
-  protected setupPresets(): void {
-    this.addPresets(this.createPresets());
+  protected createPresets(): Array<ICreatorPreset> {
+    return [new CreatorPresetTabs(), new CreatorPresetToolbox(),
+    new CreatorPresetPropertyGrid()];
   }
   public createEditModel(creator?: SurveyCreatorModel): SurveyModel {
     const presets = this.createPresets();
     const model = new SurveyModel(this.getEditModelJson(presets));
+    model.showCompleteButton = false;
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
     model.addNavigationItem({
       id: "preset_save",
@@ -76,12 +78,8 @@ export class CreatorPreset extends CreatorPresetBase {
     });
     return res;
   }
-  private createPresets(): Array<ICreatorPreset> {
-    return [new CreatorPresetTabs(), new CreatorPresetToolbox(),
-    new CreatorPresetPropertyGrid()];
-  }
   private getEditModelJson(presets: Array<ICreatorPreset>): any {
-    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false, showCompleteButton: false };
+    const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false };
     presets.forEach(preset => {
       modelJson.pages.push(this.createPageElements(preset));
     });

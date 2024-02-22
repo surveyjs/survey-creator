@@ -32,12 +32,16 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
   setupEditableQuestion(question: Question, creator: SurveyCreatorModel): void { }
   setupEditableQuestionValue(question: Question, creator: SurveyCreatorModel): void { }
   protected applyCore(creator: SurveyCreatorModel): void { }
-  protected setupPresets(): void {
+  protected createPresets(): Array<ICreatorPreset> {
+    return [];
   }
-  protected addPreset(preset: ICreatorPreset) {
+  private setupPresets(): void {
+    this.addPresets(this.createPresets());
+  }
+  private addPreset(preset: ICreatorPreset) {
     this.children.push(preset);
   }
-  protected addPresets(presets: ICreatorPreset[]): void {
+  private addPresets(presets: ICreatorPreset[]): void {
     presets.forEach(preset => this.addPreset(preset));
   }
 }

@@ -25,8 +25,8 @@ test("set toolbox categories", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({
     toolbox: {
-      items: ["text", "dropdown"],
       categories: [
+        { category: "general", items: ["text", "dropdown"] },
         { category: "matrix", items: ["matrix", "matrixdropdown"] }
       ]
     }
