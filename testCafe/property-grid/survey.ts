@@ -181,5 +181,43 @@ test("Text editors, loose focus on enter", async (t) => {
     .expect(Selector("div[data-name=title] input").focused).ok()
     .pressKey("Enter")
     .expect(Selector("div[data-name=title] input").focused).notOk();
+});
 
+test("Drop-down menus do not close on second click", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  await setJSON(json);
+  const panel = dataGroup.parent(".sd-element--expanded.spg-panel");
+  const dropdown = panel.find(".spg-dropdown");
+  const popupContainer = Selector(".sv-popup__container").filterVisible();
+
+  await t
+    .click(generalGroup)
+    .click(dataGroup);
+
+  const clientRectWidth = await dropdown.getBoundingClientRectProperty("width");
+  const dropdownWidth = parseInt(clientRectWidth.toString());
+  await t
+    .expect(dropdownWidth).gt(350)
+    .expect(popupContainer.visible).notOk()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).ok()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).notOk()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).ok()
+
+    .click(panel.find(".spg-panel__content"), { offsetX: 10, offsetY: 10 })
+    .expect(popupContainer.visible).notOk();
 });
