@@ -548,55 +548,6 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A survey that represents the Property Grid.
    * - `options.model`: `ThemeEditorModel`\
    * A Theme Editor model.
-   * 
-   * In the following code example, the `onPropertyGridSurveyCreated` event is used to create an independent editor for matrix title font settings and separate it from the question title font editor. To implement this, you need to first create two custom editors that edit different CSS variables and then remove the built-in editor:
-   * 
-   * ```js
-   * import { SurveyCreatorModel } from "survey-creator-core";
-   * import { Serializer } from "survey-core";
-   * const creatorOptions = { ... };
-   * const creator = new SurveyCreatorModel(creatorOptions);
-   * 
-   * creator.themeEditor.onPropertyGridSurveyCreated.add((_, { survey, model }) => {
-   *   // Get the default question title font editor. We will reuse it both new custom editors.
-   *   const defaultEditor = survey.findQuestionByName("questionTitle").defaultValue;
-   * 
-   *   // Create a custom substitute class for question title font settings
-   *   // The `name` property value will be used in the names of the CSS variables
-   *   const questionFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
-   *   model.addPropertyGridEditor({ element: questionFontSettings, insertBefore: "questionTitle" });
-   *   questionFontSettings.title = "Question title font";
-   *   questionFontSettings.value = defaultEditor;
-   * 
-   *   // Create a custom class for matrix font settings
-   *   const matrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
-   *   model.addPropertyGridEditor({ element: matrixFontSettings, insertAfter: "questionTitle" });
-   *   matrixFontSettings.title = "Matrix title font";
-   *   matrixFontSettings.value = defaultEditor;
-   * 
-   *   // Remove the built-in question title font editor from the Property Grid
-   *   model.removePropertyGridEditor("questionTitle");
-   * });
-   * ```
-   * 
-   * Now that the custom editors edit new CSS variables, you need to use these variables in the CSS rules applied to matrix and question headers, as shown in the following code listing. Note that the variable names include the `name` property values from the code example above. In addition, each variable declaration lists fallbacks that apply if the variable is unspecified.
-   * 
-   * ```css
-   * .sd-table__cell--header,
-   * .sd-matrix__cell:first-of-type {
-   *   color: var(--sjs-font-matrix-title-color, var(--sjs-font-questiontitle-color, var(--sjs-general-forecolor, #161616)));
-   *   font-family: var(--sjs-font-matrix-title-family, var(--sjs-font-questiontitle-family, var(--sjs-font-family, var(--font-family))));
-   *   font-size: var(--sjs-font-matrix-title-size, var(--sjs-font-questiontitle-size, var(--sjs-font-size, 16px)));
-   *   font-weight: var(--sjs-font-matrix-title-weight, var(--sjs-font-questiontitle-weight, 600));
-   * }
-   * 
-   * .sd-title.sd-element__title {
-   *   color: var(--sjs-font-custom-question-title-color, var(--sjs-font-questiontitle-color, var(--sjs-general-forecolor, #161616)));
-   *   font-family: var(--sjs-font-custom-question-title-family, var(--sjs-font-questiontitle-family, var(--sjs-font-family, var(--font-family))));
-   *   font-size: var(--sjs-font-custom-question-title-size, var(--sjs-font-questiontitle-size, var(--sjs-font-size, 16px)));
-   *   font-weight: var(--sjs-font-custom-question-title-weight, var(--sjs-font-questiontitle-weight, 600));
-   * }
-   * ```
    */
   public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();
 }
