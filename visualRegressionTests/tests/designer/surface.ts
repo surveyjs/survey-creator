@@ -1928,10 +1928,5 @@ test("Check minimal height", async (t) => {
       });
     })();
     await takeElementScreenshot("creator-min-height.png", root, t, comparer);
-    await ClientFunction(() => {
-      const creator = document.getElementById("survey-creator");
-
-      Object.assign(creator.style, window["testOldStyle"]);
-    })();
   });
 });
