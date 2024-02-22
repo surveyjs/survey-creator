@@ -12,7 +12,7 @@ ko.components.register("svc-tab-translation", {
       plugin.model.makeObservable((obj: Base) => {
         new ImplementorBase(obj);
       });
-      return plugin.model;
+      return { model: plugin.model };
     }
   },
   template: templateHtml
