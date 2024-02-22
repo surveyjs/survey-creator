@@ -1,4 +1,4 @@
-import { CreatorPresetBase, ICreatorPreset } from "./presets-base";
+import { CreatorPresetBase, ICreatorPreset, CreatorPresetEditableBase } from "./presets-base";
 import { CreatorPresetToolbox, ICreatorPresetToolboxItem } from "./presets-toolbox";
 import { CreatorPresetTabs } from "./presets-tabs";
 import { CreatorPresetPropertyGrid } from "./presets-properties";
@@ -33,7 +33,8 @@ export class CreatorPreset extends CreatorPresetBase {
     new CreatorPresetPropertyGrid()];
   }
   public createEditModel(creator?: SurveyCreatorModel): SurveyModel {
-    const model = new SurveyModel(this.getEditModelJson());
+    const editablePresets = this.createEditablePresets();
+    const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.showCompleteButton = false;
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
     model.addNavigationItem({
@@ -43,19 +44,9 @@ export class CreatorPreset extends CreatorPresetBase {
         this.applyFromSurveyModel(model, creator);
       }
     });
-    this.children.forEach(preset => {
-      const q = model.getQuestionByName(preset.getPath());
-      if (!!q) {
-        preset.setupEditableQuestion(q, editingCreator);
-      }
-    });
-    model.data = this.getEditModelData();
-    this.children.forEach(preset => {
-      const q = model.getQuestionByName(preset.getPath());
-      if (!!q) {
-        preset.setupEditableQuestionValue(q, editingCreator);
-      }
-    });
+    editablePresets.forEach(item => item.setupEditableQuestion(model, editingCreator));
+    const json = this.json ? this.json : {};
+    editablePresets.forEach(item => item.setupEditableQuestionValue(model, json[item.path], editingCreator));
     return model;
   }
   public applyFromSurveyModel(model: SurveyModel, creator: SurveyCreatorModel): void {
@@ -66,44 +57,28 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   public getJsonFromSurveyModel(model: SurveyModel): any {
     const res: any = {};
+    this.createEditablePresets().forEach(preset => {
+      preset.setJsonValue(model, res);
+    });
+    return res;
+  }
+  private createEditablePresets(): Array<CreatorPresetEditableBase> {
+    const res = [];
     this.children.forEach(preset => {
-      const name = preset.getPath();
-      const q = model.getQuestionByName(name);
-      const boolQ = model.getQuestionByName(this.getShowQuestionName(name));
-      if (!!q && !q.isEmpty() && boolQ.value) {
-        res[name] = JSON.parse(JSON.stringify(q.value));
+      const editable = preset.createEditable();
+      if (editable) {
+        res.push(editable);
       }
     });
     return res;
   }
-  private getEditModelJson(): any {
+  private getEditModelJson(editablePresets: Array<CreatorPresetEditableBase>): any {
     const modelJson = { pages: [], showTOC: true, showQuestionNumbers: false };
-    this.children.forEach(preset => {
-      modelJson.pages.push(this.createPageElements(preset));
+    editablePresets.forEach(preset => {
+      const pages = preset.createPages();
+      if (Array.isArray(pages)) {
+        pages.forEach(page => modelJson.pages.push(page));
+      }
     });
     return modelJson;
   }
-  private createPageElements(preset: ICreatorPreset): any {
-    const name = preset.getPath();
-    const pageJson = { name: "page_" + name, elements: [] };
-    const boolName = this.getShowQuestionName(name);
-    const bolEl = { name: boolName, type: "boolean" };
-    const qJson = preset.getEditableQuestionJson();
-    if (!!qJson) {
-      qJson.name = name;
-      qJson.clearIfInvisible = "none";
-      qJson.visibleIf = "{" + boolName + "} = true";
-    }
-    pageJson.elements = [bolEl];
-    if (!!qJson) {
-      pageJson.elements.push(qJson);
-    }
-    return pageJson;
-  }
-  private getShowQuestionName(name: string): string {
-    return "show_" + name;
-  }
-  private getEditModelData(): any {
-    return this.json;
-  }
-}

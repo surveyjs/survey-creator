@@ -1,4 +1,4 @@
-import { ICreatorPreset, CreatorPresetBase } from "./presets-base";
+import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
 

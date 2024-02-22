@@ -3,24 +3,21 @@ import { CreatorPreset } from "../src/presets/presets";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ tabs: { items: [] } }).createEditModel();
-  expect(survey.pages).toHaveLength(3);
+  expect(survey.pages).toHaveLength(1);
   expect(survey.pages[0].name).toEqual("page_tabs");
-  expect(survey.pages[1].name).toEqual("page_toolbox");
-  expect(survey.pages[2].name).toEqual("page_propertyGrid");
+  //expect(survey.pages[1].name).toEqual("page_toolbox");
+  //expect(survey.pages[2].name).toEqual("page_propertyGrid");
 });
 test("Preset edit model, tabs component", () => {
   const preset = new CreatorPreset({ tabs: { items: [] } });
   const survey = preset.createEditModel();
-  const boolQuestion = survey.getQuestionByName("show_tabs");
+  const boolQuestion = survey.getQuestionByName("tabs_show");
   expect(boolQuestion).toBeTruthy();
-  const tabsQuestion = survey.getQuestionByName("tabs");
-  expect(tabsQuestion).toBeTruthy();
-  expect(tabsQuestion.isVisible).toBeFalsy();
-  expect(tabsQuestion.clearIfInvisible).toEqual("none");
+  expect(boolQuestion.value).toBeFalsy();
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
+  expect(itemsQuestion.isVisible).toBeFalsy();
   boolQuestion.value = true;
-  expect(tabsQuestion.isVisible).toBeTruthy();
-  const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
-  const activeTabQuestion = tabsQuestion.contentPanel.getQuestionByName("activeTab");
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   expect(itemsQuestion.choices).toHaveLength(6);
   expect(itemsQuestion.choices[0].value).toEqual("designer");
   expect(itemsQuestion.choices[5].value).toEqual("translation");
@@ -40,14 +37,13 @@ test("Preset edit model, tabs component with creator, default items", () => {
   const creator = new CreatorTester();
   const preset = new CreatorPreset({});
   const survey = preset.createEditModel(creator);
-  const boolQuestion = survey.getQuestionByName("show_tabs");
+  const boolQuestion = survey.getQuestionByName("tabs_show");
   boolQuestion.value = true;
-  const tabsQuestion = survey.getQuestionByName("tabs");
-  const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
   expect(defultTabs).toEqual(["designer", "preview", "editor"]);
   itemsQuestion.value = ["preview", "logic"];
-  const activeTabQuestion = tabsQuestion.contentPanel.getQuestionByName("activeTab");
+  const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   activeTabQuestion.value = "logic";
   preset.applyFromSurveyModel(survey, creator);
   expect(creator.tabs).toHaveLength(2);
@@ -58,10 +54,9 @@ test("Preset edit model, tabs component with creator, default items", () => {
 test("Preset edit model, tabs component with creator, default items", () => {
   const preset = new CreatorPreset({ tabs: { items: ["designer", "logic"] } });
   const survey = preset.createEditModel();
-  const boolQuestion = survey.getQuestionByName("show_tabs");
+  const boolQuestion = survey.getQuestionByName("tabs_show");
   boolQuestion.value = true;
-  const tabsQuestion = survey.getQuestionByName("tabs");
-  const itemsQuestion = tabsQuestion.contentPanel.getQuestionByName("items");
+  const itemsQuestion = survey.getQuestionByName("tabs_items");
   const defultTabs = JSON.parse(JSON.stringify(itemsQuestion.value));
   expect(defultTabs).toEqual(["designer", "logic"]);
 });

@@ -1,53 +1,72 @@
-import { Question, ComponentCollection } from "survey-core";
-import { CreatorPresetBase } from "./presets-base";
+import { Question, SurveyModel } from "survey-core";
+import { CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 
-const comp_json = {
-  name: "editpreset_tabs",
-  showInToolbox: false,
-  internal: true,
-  elementsJSON: [
-    {
-      name: "items",
-      type: "ranking",
-      selectToRankEnabled: true,
-      minSelectedChoices: 1,
-      selectToRankAreasLayout: "vertical"
-    },
-    {
-      name: "activeTab",
-      type: "dropdown",
-      choicesFromQuestion: "items",
-      choicesFromQuestionMode: "selected",
+export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
+  public createMainPage(): any {
+    const nameShow = this.nameShow;
+    const visibleIf = "{" + nameShow + "} = true";
+    return {
+      name: "page_" + this.path,
+      elements: [
+        {
+          type: "boolean",
+          name: nameShow,
+        },
+        {
+          name: this.nameItems,
+          type: "ranking",
+          selectToRankEnabled: true,
+          minSelectedChoices: 1,
+          selectToRankAreasLayout: "vertical",
+          visibleIf: visibleIf
+        },
+        {
+          name: this.nameActiveTab,
+          type: "dropdown",
+          choicesFromQuestion: this.nameItems,
+          choicesFromQuestionMode: "selected",
+          visibleIf: visibleIf
+        }
+      ]
+    };
+  }
+  public setJsonValue(model: SurveyModel, res: any) {
+    const path = this.preset.getPath();
+    if(!model.getValue(this.nameShow)) return;
+    const items = model.getValue(this.nameItems);
+    if(!Array.isArray(items)) return;
+    const val: any = { items: items };
+    const activeTab = model.getValue(this.nameActiveTab);
+    if(activeTab) {
+      val.activeTab = activeTab;
     }
-  ]
-};
+    res[this.path] = val;
+  }
+  public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void {
+    const q = model.getQuestionByName(this.nameItems);
+    if (q) {
+      q.choices = creator.getAvailableTabNames();
+    }
+  }
+  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    json = json || {};
+    const items = json["items"] || [];
+    model.setValue(this.nameShow, items.length > 0);
+    model.setValue(this.nameItems, items.length > 0 ? items : creator.getTabNames());
+    //model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
+  }
+  private get nameShow() { return this.path + "_show"; }
+  private get nameItems() { return this.path + "_items"; }
+  private get nameActiveTab() { return this.path + "_activeTab"; }
+}
 
 export class CreatorPresetTabs extends CreatorPresetBase {
   public getPath(): string { return "tabs"; }
-  getEditableQuestionJson(): any {
-    if (!ComponentCollection.Instance.getCustomQuestionByName(comp_json.name)) {
-      ComponentCollection.Instance.add(comp_json as any);
-    }
-    return { type: comp_json.name };
-  }
-  setupEditableQuestion(question: Question, creator: SurveyCreatorModel): void {
-    const itemsQuestion = question.contentPanel.getQuestionByName("items");
-    if (itemsQuestion) {
-      itemsQuestion.choices = creator.getAvailableTabNames();
-    }
-  }
-  setupEditableQuestionValue(question: Question, creator: SurveyCreatorModel): void {
-    const itemsQuestion = question.contentPanel.getQuestionByName("items");
-    if (itemsQuestion && itemsQuestion.isEmpty()) {
-      itemsQuestion.value = creator.getTabNames();
-    }
-  }
+  public createEditable(): CreatorPresetEditableBase { return new CreatorPresetEditableTabs(this); }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
-    if (this.json["items"]) {
-      this.applyTabs(creator, this.json["items"]);
-    }
+    this.applyTabs(creator, this.json["items"]);
     const tab = this.json.activeTab;
     if (tab) {
       creator.activeTab = tab === "preview" ? "test" : tab;
