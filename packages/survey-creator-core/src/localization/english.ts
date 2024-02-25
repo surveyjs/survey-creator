@@ -381,6 +381,10 @@ export var enStrings = {
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column"
     },
+    multipletextitem: {
+      name: "Name",
+      title: "Title",
+    },
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",

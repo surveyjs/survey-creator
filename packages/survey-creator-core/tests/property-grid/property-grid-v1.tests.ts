@@ -553,7 +553,7 @@ test("SurveyPropertyItemValue override properties", () => {
       { name: "enableIf", visible: false }
     ],
     function () {
-      return new ItemValue(null, null, "ordergriditem");
+      return new ItemValue(null, undefined, "ordergriditem");
     },
     "itemvalue"
   );
@@ -565,10 +565,10 @@ test("SurveyPropertyItemValue override properties", () => {
     propertyGrid.survey.getQuestionByName("choices")
   );
   expect(choicesQuestion.columns).toHaveLength(2);
-  expect(choicesQuestion.columns[1].title).toEqual("Text");
+  expect(choicesQuestion.columns[1].title).toEqual("Alt text");
 
   var question2 = new QuestionTextModel("q1");
-  var item = new ItemValue("item1", null, "ordergriditem");
+  var item = new ItemValue("item1", undefined, "ordergriditem");
   (<any>item).price = 20;
   (<any>question2).orderItems.push(item);
 
