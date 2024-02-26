@@ -16,7 +16,8 @@
 }
 
 .svc-flex-row.svc-full-container {
-  height: 0;
+  height: calcSize(60);
+  min-height: calcSize(60);
   flex-grow: 1;
 }
 .svc-flex-row__element--growing {
