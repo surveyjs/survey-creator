@@ -53,7 +53,7 @@ test("On the right side (default)", async (t) => {
 
 test("On the right side opened popup", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
-    await t.resizeWindow(1920, 400);
+    await t.resizeWindow(1920, 500);
     await setJSON(json);
 
     await t.click(".svc-page-navigator__selector");
