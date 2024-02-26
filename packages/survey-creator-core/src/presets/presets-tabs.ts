@@ -3,11 +3,10 @@ import { CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 
 export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
-  public createMainPage(): any {
+  public createMainPageCore(): any {
     const nameShow = this.nameShow;
-    const visibleIf = "{" + nameShow + "} = true";
+    const visibleIf = this.getBoolVisibleIf(nameShow);
     return {
-      name: "page_" + this.path,
       elements: [
         {
           type: "boolean",
@@ -32,7 +31,6 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     };
   }
   public setJsonValue(model: SurveyModel, res: any) {
-    const path = this.preset.getPath();
     if(!model.getValue(this.nameShow)) return;
     const items = model.getValue(this.nameItems);
     if(!Array.isArray(items)) return;
@@ -54,7 +52,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     const items = json["items"] || [];
     model.setValue(this.nameShow, items.length > 0);
     model.setValue(this.nameItems, items.length > 0 ? items : creator.getTabNames());
-    //model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
+    model.setValue(this.nameActiveTab, json["activeTab"] || creator.activeTab);
   }
   private get nameShow() { return this.path + "_show"; }
   private get nameItems() { return this.path + "_items"; }

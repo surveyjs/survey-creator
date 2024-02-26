@@ -1,3 +1,4 @@
+import { Question, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
@@ -10,12 +11,39 @@ export interface ICreatorPresetToolboxItem {
   tooltip?: string;
 }
 
+export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditableBase {
+  public createMainPageCore(): any {
+    const parent = <CreatorPresetEditableToolbox>this.parent;
+    return {
+      visibleIf: this.getBoolVisibleIf(parent.nameDefinitionShow),
+      elements: [
+        {
+          type: "matrixdynamic",
+          name: this.nameMatrix,
+          columns: [
+            { cellType: "text", name: "name", isUnique: true, isRequired: true },
+            { cellType: "text", name: "iconName" },
+            { cellType: "text", name: "title" }
+          ],
+        }
+      ]
+    };
+  }
+  public setJsonValue(model: SurveyModel, res: any) {
+  }
+  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    json = json || {};
+  }
+  private get nameMatrix() { return this.fullPath + "_matrix"; }
+}
+
 export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
   public getPath(): string { return "definition"; }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     this.applyDefinition(creator, this.json);
   }
+  public createEditable(): CreatorPresetEditableBase { return new CreatorPresetEditableToolboxDefinition(this); }
   private applyDefinition(creator: SurveyCreatorModel, defintion: Array<ICreatorPresetToolboxItem>): void {
     if (!Array.isArray(defintion)) return;
     const tb = creator.toolbox;
@@ -60,8 +88,41 @@ export class CreatorPresetToolboxItems extends CreatorPresetBase {
   }
 }
 
+export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
+  public createMainPageCore(): any {
+    return {
+      elements: [
+        {
+          type: "boolean",
+          name: this.nameDefinitionShow,
+        },
+        {
+          name: this.nameSetupCategoriesShow,
+          type: "boolean"
+        },
+        {
+          name: this.nameCategoriesMode,
+          type: "buttongroup",
+          defaultValue: "categories",
+          choices: ["categories", "items"],
+          visibleIf: this.getBoolVisibleIf(this.nameSetupCategoriesShow)
+        }
+      ]
+    };
+  }
+  public setJsonValue(model: SurveyModel, res: any) {
+  }
+  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    json = json || {};
+  }
+  public get nameDefinitionShow() { return this.path + "_definition_show"; }
+  private get nameSetupCategoriesShow() { return this.path + "_categories_show"; }
+  public get nameCategoriesMode() { return this.path + "_categories_mode"; }
+}
+
 export class CreatorPresetToolbox extends CreatorPresetBase {
   public getPath(): string { return "toolbox"; }
+  public createEditable(): CreatorPresetEditableBase { return new CreatorPresetEditableToolbox(this); }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetToolboxDefinition(), new CreatorPresetToolboxItems(),
       new CreatorPresetToolboxCategories()];
