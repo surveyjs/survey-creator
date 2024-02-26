@@ -704,9 +704,11 @@ export var enStrings = {
     cells: "Cell Texts",
     keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
-      text: "Alt text",
       visibleIf: "Make the option visible if",
       enableIf: "Make the option selectable if"
+    },
+    imageitemvalue: {
+      text: "Alt text",
     },
     logoPosition: "Logo position",
     addLogo: "Add logo...",

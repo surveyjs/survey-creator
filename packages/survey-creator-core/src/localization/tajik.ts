@@ -521,7 +521,7 @@ export var tgStrings = {
     // defaultPanelValue: "Default Values",
     // cells: "Cell Texts",
     // keyName: "Key column",
-    itemvalue: {
+    imageitemvalue: {
       // text: "Alt text"
     },
     logoPosition: "Ҷойгиршавии логотип",
