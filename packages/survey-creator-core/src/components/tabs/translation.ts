@@ -1064,7 +1064,8 @@ export class Translation extends Base implements ITranslationLocales {
     this.setVisibleLocales([]);
     this.reset();
   }
-  public reset(): void {
+  public reset(alwaysReset: boolean = true): void {
+    if(!alwaysReset && !!this.root) return;
     var rootObj = !!this.filteredPage ? this.filteredPage : this.survey;
     var rootName = !!this.filteredPage ? rootObj["name"] : "survey";
     this.root = new TranslationGroup(rootName, rootObj, this);
@@ -1253,6 +1254,7 @@ export class Translation extends Base implements ITranslationLocales {
     });
   }
   public mergeLocaleWithDefault() {
+    this.reset(false);
     if (!this.hasLocale(this.defaultLocale)) return;
     this.root.mergeLocaleWithDefault(this.defaultLocale);
     this.setVisibleLocales([]);
