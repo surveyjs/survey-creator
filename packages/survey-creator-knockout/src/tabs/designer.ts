@@ -11,7 +11,7 @@ ko.components.register("svc-tab-designer", {
       const model = <TabDesignerViewModel>params.data.model;
       new ImplementorBase(model);
       new ImplementorBase(model.pagesController);
-      return model;
+      return { model };
     }
   },
   template: template

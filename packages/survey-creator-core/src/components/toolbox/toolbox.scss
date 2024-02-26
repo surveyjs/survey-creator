@@ -15,6 +15,13 @@ svc-toolbox {
   scrollbar-gutter: stable both-edges;
 }
 
+_::-webkit-full-page-media,
+_:future {
+  .svc-toolbox {
+    padding: calcSize(2);
+  }
+}
+
 .svc-toolbox--compact {
   width: calcSize(10.5);
   overflow: visible;

@@ -265,7 +265,20 @@ test("urlconditions property editor", () => {
   urlConditionsQuestion.addRow();
   expect(survey.navigateToUrlOnCondition).toHaveLength(2);
 });
-
+test("QuestionMultipleTextModel column titles", () => {
+  const question = new QuestionMultipleTextModel("q1");
+  const propertyGrid = new PropertyGridModelTester(question);
+  const itemsQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("items")
+  );
+  expect(itemsQuestion).toBeTruthy();
+  const columns = itemsQuestion.columns;
+  expect(columns).toHaveLength(2);
+  expect(columns[0].name).toEqual("name");
+  expect(columns[1].name).toEqual("title");
+  expect(columns[0].title).toEqual("Name");
+  expect(columns[1].title).toEqual("Title");
+});
 test("QuestionMultipleTextModel items property editor", () => {
   var question = new QuestionMultipleTextModel("q1");
   question.addItem("item1", "Item 1");

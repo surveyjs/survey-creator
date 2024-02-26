@@ -1227,9 +1227,10 @@ export class SurveyCreatorModel extends Base
     }
   }
 
+  @property({ defaultValue: true }) allowShowToolbox: boolean;
   @property({ defaultValue: true }) showToolboxValue: boolean;
   public get showToolbox() {
-    return this.showToolboxValue;
+    return this.showToolboxValue && this.allowShowToolbox;
   }
   public set showToolbox(val: boolean) {
     if (<any>val !== true && <any>val !== false) {
@@ -3430,7 +3431,16 @@ export class SurveyCreatorModel extends Base
     }
   }
   @property({ defaultValue: false }) showHeaderInEmptySurvey;
-  @property({ defaultValue: true }) showPageNavigator;
+  @property({ defaultValue: true }) public allowShowPageNavigator;
+  @property({ defaultValue: true }) private showPageNavigatorValue;
+
+  public get showPageNavigator() {
+    return this.showPageNavigatorValue && this.allowShowPageNavigator;
+  }
+  public set showPageNavigator(val: boolean) {
+    this.showPageNavigatorValue = val;
+  }
+
   @property({ getDefaultValue: () => { return settings.layout.showTabs; } }) showTabs;
   @property({ getDefaultValue: () => { return settings.layout.showToolbar; } }) showToolbar;
   @property({ getDefaultValue: () => { return settings.layout.allowCollapseSidebar; } }) allowCollapseSidebar;

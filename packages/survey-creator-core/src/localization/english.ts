@@ -381,6 +381,10 @@ export var enStrings = {
       requiredIf: "Make the column required if",
       showInMultipleColumns: "Each option in a separate column"
     },
+    multipletextitem: {
+      name: "Name",
+      title: "Title",
+    },
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",
@@ -700,9 +704,11 @@ export var enStrings = {
     cells: "Cell Texts",
     keyName: "Prevent duplicate responses in the following column",
     itemvalue: {
-      text: "Alt text",
       visibleIf: "Make the option visible if",
       enableIf: "Make the option selectable if"
+    },
+    imageitemvalue: {
+      text: "Alt text",
     },
     logoPosition: "Logo position",
     addLogo: "Add logo...",

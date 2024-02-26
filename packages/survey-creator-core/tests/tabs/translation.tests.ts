@@ -1917,3 +1917,16 @@ test("Set correct locale to settings survey", () => {
   const translation = tabTranslation.model;
   expect(translation.settingsSurvey.locale).toBe("fr");
 });
+test("If panel title then don't include it for 'Use string only' mode, Bug #5236", () => {
+  const survey = new SurveyModel({
+    elements: [
+      { type: "panel", name: "p1", elements: [{ type: "text", name: "q1 " }] }
+    ]
+  });
+  const translation: Translation = new Translation(survey);
+  translation.reset();
+  expect(translation.root.allLocItems).toHaveLength(1);
+  survey.getPanelByName("p1").title = "panel title";
+  translation.reset();
+  expect(translation.root.allLocItems).toHaveLength(2);
+});

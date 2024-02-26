@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { surveyLocalization, Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, createDropdownActionModel, ComponentCollection, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Cover, Serializer, Question, IHeader, PanelModelBase } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -10,10 +10,12 @@ import { DefaultFonts, fontsettingsFromCssVariable, fontsettingsToCssVariable } 
 import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "./theme-custom-questions/element-settings";
 import { UndoRedoManager } from "../../plugins/undo-redo/undo-redo-manager";
 import { PredefinedColors, PredefinedThemes, Themes } from "./themes";
-import { QuestionFileEditorModel } from "../../custom-questions/question-file";
 import { updateCustomQuestionJSONs } from "./theme-custom-questions";
 import * as LibraryThemes from "survey-core/themes";
 import { createBoxShadowReset } from "./theme-custom-questions/boxshadow-settings";
+import { QuestionFileEditorModel } from "../../custom-questions/question-file";
+import { SurveyHelper } from "../../survey-helper";
+import { IAddPropertyGridEditorParams } from "./theme-plugin";
 import { Switcher } from "../switcher/switcher";
 
 require("./theme-builder.scss");
@@ -29,7 +31,7 @@ Object.keys(LibraryThemes).forEach(libraryThemeName => {
 });
 
 export function getThemeFullName(theme: ITheme) {
-  const themeName = theme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  const themeName = theme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
   let fullThemeName = themeName + "-" + (theme.colorPalette || "light");
   if (theme.isPanelless === true) {
     fullThemeName += "-panelless";
@@ -64,7 +66,7 @@ export function getThemeChanges(fullTheme: ITheme, baseTheme?: ITheme) {
       }
     }
   });
-  themeChanges.themeName = baseTheme.themeName || ThemeBuilder.DefaultTheme.themeName || "default";
+  themeChanges.themeName = baseTheme.themeName || ThemeEditorModel.DefaultTheme.themeName || "default";
   themeChanges.colorPalette = baseTheme.colorPalette || "light";
   themeChanges.isPanelless = !!baseTheme.isPanelless;
   return themeChanges;
@@ -88,11 +90,11 @@ export function findSuitableTheme(themeName: string, themePalette: string, theme
   if (!!suitableTheme) {
     return suitableTheme;
   }
-  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeBuilder.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
-  return Themes[defaultNearestThemeFullName] || ThemeBuilder.DefaultTheme;
+  const defaultNearestThemeFullName = getThemeFullName({ themeName: ThemeEditorModel.DefaultTheme.themeName, colorPalette: themePalette || "light", isPanelless: themeMode === "lightweight" });
+  return Themes[defaultNearestThemeFullName] || ThemeEditorModel.DefaultTheme;
 }
 
-export class ThemeBuilder extends Base {
+export class ThemeEditorModel extends Base {
   public static DefaultTheme = Themes["default-light"];
   private json: any;
   public pages: ActionContainer = new ActionContainer();
@@ -118,20 +120,20 @@ export class ThemeBuilder extends Base {
   public simulator: SurveySimulatorModel;
   @property({
     defaultValue: false,
-    onSet: (val: boolean, target: ThemeBuilder) => {
+    onSet: (val: boolean, target: ThemeEditorModel) => {
       target.simulator.survey.showInvisibleElements = val;
     }
   })
   showInvisibleElements;
   @property({ defaultValue: true }) showPagesInTestSurveyTab;
   @property({
-    defaultValue: true, onSet: (value: boolean, target: ThemeBuilder) => {
+    defaultValue: true, onSet: (value: boolean, target: ThemeEditorModel) => {
       if (!!target.simulator) target.simulator.isRunning = value;
     }
   }) isRunning: boolean;
   @propertyArray() pageListItems: Array<IAction>;
   @property({
-    onSet: (val: PageModel, target: ThemeBuilder) => {
+    onSet: (val: PageModel, target: ThemeEditorModel) => {
       if (!!val) {
         const survey = target.simulator.survey;
         if (survey.firstPageIsStarted) {
@@ -152,22 +154,22 @@ export class ThemeBuilder extends Base {
   })
   activePage: PageModel;
   @property({
-    onSet: (newValue: string, _target: ThemeBuilder) => {
+    onSet: (newValue: string, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImage = newValue;
     }
   }) backgroundImage;
   @property({
-    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeBuilder) => {
+    defaultValue: "cover", onSet: (newValue: ImageFit, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImageFit = newValue;
     }
   }) backgroundImageFit;
   @property({
-    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeBuilder) => {
+    defaultValue: "scroll", onSet: (newValue: ImageAttachment, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundImageAttachment = newValue;
     }
   }) backgroundImageAttachment;
   @property({
-    onSet: (newValue: number, _target: ThemeBuilder) => {
+    onSet: (newValue: number, _target: ThemeEditorModel) => {
       _target.currentTheme.backgroundOpacity = newValue / 100;
     }
   }) backgroundOpacity;
@@ -203,14 +205,14 @@ export class ThemeBuilder extends Base {
     return this.currentTheme.cssVariables || {};
   }
 
-  public onThemeSelected = new EventBase<ThemeBuilder, { theme: ITheme }>();
-  public onThemePropertyChanged = new EventBase<ThemeBuilder, { name: string, value: any }>();
-  public onAllowModifyTheme = new EventBase<ThemeBuilder, { theme: ITheme, allow: boolean }>();
+  public onThemeSelected = new EventBase<ThemeEditorModel, { theme: ITheme }>();
+  public onThemePropertyChanged = new EventBase<ThemeEditorModel, { name: string, value: any }>();
+  public onAllowModifyTheme = new EventBase<ThemeEditorModel, { theme: ITheme, allow: boolean }>();
 
   constructor(private surveyProvider: SurveyCreatorModel, private startThemeClasses: any = defaultV2Css) {
     super();
     this.simulator = new SurveySimulatorModel();
-    this.themeName = ThemeBuilder.DefaultTheme.themeName || "default";
+    this.themeName = ThemeEditorModel.DefaultTheme.themeName || "default";
     updateCustomQuestionJSONs();
     this.themeEditorSurveyValue = this.createThemeEditorSurvey();
     const surveyTheme = this.surveyProvider.theme;
@@ -249,7 +251,7 @@ export class ThemeBuilder extends Base {
       this.backgroundImageAttachment = theme.backgroundImageAttachment || this.backgroundImageAttachment;
 
       const effectiveThemeCssVariables = {};
-      assign(effectiveThemeCssVariables, ThemeBuilder.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
+      assign(effectiveThemeCssVariables, ThemeEditorModel.DefaultTheme.cssVariables || {}, baseTheme.cssVariables || {});
       assign(effectiveThemeCssVariables, theme.cssVariables || {}, this.themeCssVariablesChanges);
       this.trimCssVariables(effectiveThemeCssVariables);
       const effectiveTheme: ITheme = {
@@ -274,7 +276,7 @@ export class ThemeBuilder extends Base {
     }
   }
 
-  private _defaultSessionTheme = ThemeBuilder.DefaultTheme;
+  private _defaultSessionTheme = ThemeEditorModel.DefaultTheme;
   public get defaultSessionTheme() {
     return this._defaultSessionTheme;
   }
@@ -322,7 +324,7 @@ export class ThemeBuilder extends Base {
     this.simulator.survey = newSurvey;
     this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
-    const self: ThemeBuilder = this;
+    const self: ThemeEditorModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
       self.isRunning = false;
     });
@@ -363,6 +365,54 @@ export class ThemeBuilder extends Base {
       }
     }
     this.updateSimulatorSurvey(json, currTheme);
+  }
+
+  public getPropertyGridCategory(categoryName: string): IElement | undefined {
+    const themeEditorGroups = this.themeEditorSurvey.getPage(0).elements;
+    const group = themeEditorGroups.filter(group => group.name === categoryName)[0];
+    return group;
+  }
+
+  public removePropertyGridEditor(name: string): void {
+    const element = this.themeEditorSurvey.findQuestionByName(name);
+    if (!!element) {
+      this.themeEditorSurvey.getPage(0).removeElement(element);
+    }
+  }
+
+  public addPropertyGridEditor(params: IAddPropertyGridEditorParams): void {
+
+    let category;
+    let sibling;
+    let insertIndex = -1;
+
+    if (!!params.category) {
+      category = this.getPropertyGridCategory(params.category) as PanelModel;
+    }
+
+    if (!!params.insertBefore) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertBefore);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) - 1;
+      }
+    }
+
+    if (!!params.insertAfter) {
+      sibling = (category || this.themeEditorSurvey).findQuestionByName(params.insertAfter);
+      if (!!sibling) {
+        insertIndex = sibling.parent.elements.indexOf(sibling) + 1;
+      }
+    }
+
+    if (!!params.element) {
+      if (!!sibling) {
+        sibling.parent.addElement(params.element, insertIndex);
+      } else if (!!category) {
+        category.addElement(params.element);
+      } else {
+        SurveyHelper.warnText("No source found to add.");
+      }
+    }
   }
 
   private creatorPropertyChanged = (sender, options) => {
@@ -506,7 +556,7 @@ export class ThemeBuilder extends Base {
       const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
       themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
       if (availebleThemes.indexOf(themeChooser.value) === -1) {
-        themeChooser.value = ThemeBuilder.DefaultTheme.themeName;
+        themeChooser.value = ThemeEditorModel.DefaultTheme.themeName;
       }
       this.updatePropertyGridEditorsAvailability();
     }
@@ -1061,7 +1111,7 @@ export class ThemeBuilder extends Base {
                     title: getLocString("theme.themeName"),
                     descriptionLocation: "hidden",
                     choices: this._availableThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-                    defaultValue: ThemeBuilder.DefaultTheme.themeName || "default",
+                    defaultValue: ThemeEditorModel.DefaultTheme.themeName || "default",
                     allowClear: false
                   },
                   {

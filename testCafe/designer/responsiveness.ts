@@ -181,10 +181,10 @@ test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
 
   await t
-    .resizeWindow(750, 500)
+    .resizeWindow(750, 600)
     .expect(mobilePropertGrid.exists).notOk()
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(mobilePropertGrid.visible).notOk()
 
     .click(surveySettingsButtonSelector)
@@ -218,7 +218,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbarActions.count).eql(3)
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
@@ -236,7 +236,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbar.exists).notOk()
     .expect(testTabToolbar.find(".sv-action").filterVisible().count).eql(3)
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbarActions.count).eql(5)
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
