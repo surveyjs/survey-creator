@@ -253,6 +253,128 @@ var traditionalChineseTranslation = {
   },
   // Property Editors
   pe: {
+    panel: {
+      name: "面板名稱",
+      title: "面板標題",
+      description: "面板說明",
+      visibleIf: "如果出現以下情況，則使面板可見",
+      requiredIf: "如果出現以下情況，則使面板成為必需的",
+      questionsOrder: "小組內的問題順序",
+      page: "父頁面",
+      startWithNewLine: "在新行上顯示面板",
+      state: "面板摺疊狀態",
+      width: "內嵌面板寬度",
+      minWidth: "最小面板寬度",
+      maxWidth: "最大面板寬度",
+      showNumber: "數字面板"
+    },
+    paneldynamic: {
+      name: "面板名稱",
+      title: "面板標題",
+      description: "面板說明",
+      visibleIf: "如果出現以下情況，則使面板可見",
+      requiredIf: "如果出現以下情況，則使面板成為必需的",
+      page: "將面板移動到頁面",
+      startWithNewLine: "在新行上顯示面板",
+      state: "面板摺疊狀態",
+      width: "內嵌面板寬度",
+      minWidth: "最小面板寬度",
+      maxWidth: "最大面板寬度",
+      confirmDelete: "確認面板刪除",
+      templateDescription: "面板描述模式",
+      templateTitle: "面板標題模式",
+      noEntriesText: "空面板文本",
+      templateTabTitle: "選項卡標題模式",
+      templateVisibleIf: "如果出現以下情況，則使單個面板可見",
+      hideNumber: "隱藏面板編號",
+      titleLocation: "面板標題對齊方式",
+      descriptionLocation: "面板描述對齊方式",
+      templateTitleLocation: "問題標題對齊方式",
+      templateErrorLocation: "錯誤消息對齊",
+      newPanelPosition: "新面板位置",
+      keyName: "防止在以下問題中重複回答"
+    },
+    question: {
+      name: "問題名稱",
+      title: "問題標題",
+      description: "問題描述",
+      visibleIf: "如果出現以下情況，請使問題可見",
+      requiredIf: "如果出現以下情況，則將問題設為必填項",
+      page: "父頁面",
+      state: "問題框摺疊狀態",
+      hideNumber: "隱藏問題編號",
+      titleLocation: "問題標題對齊方式",
+      descriptionLocation: "問題描述對齊方式",
+      errorLocation: "錯誤消息對齊",
+      indent: "增加內部縮進",
+      width: "內聯問題寬度",
+      minWidth: "最小問題寬度",
+      maxWidth: "最大問題寬度",
+      textUpdateMode: "更新輸入欄位值"
+    },
+    signaturepad: {
+      signatureWidth: "簽名區域寬度",
+      signatureHeight: "簽名區域高度",
+      signatureAutoScaleEnabled: "自動縮放簽名區域",
+      showPlaceholder: "顯示佔位元",
+      placeholder: "佔位元文本",
+      allowClear: "在簽名區域內顯示「清除」 按鈕",
+      penMinWidth: "最小筆寬",
+      penMaxWidth: "最大筆寬",
+      penColor: "描邊顏色"
+    },
+    comment: {
+      rows: "輸入欄位高度（以行為單位）"
+    },
+    showQuestionNumbers: "顯示問題編號",
+    questionStartIndex: "問題起始標誌 (1, 2 or 'A', 'a')",
+    expression: {
+      name: "表達式名稱",
+      title: "表達式標題",
+      description: "表達式說明",
+      expression: "表達"
+    },
+    trigger: {
+      expression: "表達"
+    },
+    calculatedvalue: {
+      expression: "表達"
+    },
+    // survey templates
+    survey: {
+      title: "標題",
+      description: "調查說明"
+    },
+    page: {
+      name: "頁面名稱",
+      title: "標題",
+      description: "頁面描述",
+      visibleIf: "如果出現以下情況，則使頁面可見",
+      requiredIf: "如果出現以下情況，則使頁面為必填項",
+      maxTimeToFinish: "完成頁面的時間限制（秒為單位 ）",
+      questionsOrder: "頁面上的問題順序"
+    },
+    matrixdropdowncolumn: {
+      name: "列名稱",
+      title: "專欄標題",
+      isUnique: "防止重複回應",
+      width: "列寬",
+      minWidth: "最小列寬",
+      rows: "輸入欄位高度（以行為單位）",
+      visibleIf: "如果出現以下情況，則使列可見",
+      requiredIf: "如果滿足以下條件，則使該列為必填項",
+      showInMultipleColumns: "每個選項都在單獨的列中"
+    },
+    multipletextitem: {
+      name: "名字",
+      title: "標題"
+    },
+    imageHeight: "圖片高度",
+    imageWidth: "圖片寬度",
+    valueName: "Value name",
+    rateDescriptionLocation: "標籤對齊",
+    size: "輸入欄位大小（以字元為單位 ）",
+    cellErrorLocation: "單元格錯誤消息對齊方式",
     apply: "應用",
     ok: "確定",
     save: "救",
@@ -298,7 +420,6 @@ var traditionalChineseTranslation = {
     conditionSelectPage: "選擇頁面...",
     conditionSelectPanel: "選擇面板...",
     conditionValueQuestionTitle: "請輸入/選擇值",
-    expressionHelp: "請輸入一項條件判斷。當條件判斷為真時問題/頁面將可見。例如: {question1} = 'value1' or ({question2} = 3 and {question3} < 5)",
     aceEditorHelp: "按 ctrl+空格鍵獲取表達式完成提示",
     aceEditorRowTitle: "當前行",
     aceEditorPanelTitle: "當前面板",
@@ -314,7 +435,19 @@ var traditionalChineseTranslation = {
     propertyNameIsIncorrect: "不要使用保留字：「專案」、「選項」、「面板」、“行”。",
     listIsEmpty: "尚未添加任何專案",
     "listIsEmpty@choices": "尚未添加任何選項",
+    "listIsEmpty@columns": "您還沒有任何列",
+    "listIsEmpty@rows": "您還沒有任何行",
+    "listIsEmpty@validators": "尚無任何驗證規則",
+    "listIsEmpty@calculatedValues": "您還沒有任何自訂變數",
+    "listIsEmpty@triggers": "您還沒有任何觸發器",
+    "listIsEmpty@navigateToUrlOnCondition": "您還沒有任何連結",
     "addNew@choices": "添加選項",
+    "addNew@columns": "添加新列",
+    "addNew@rows": "添加新行",
+    "addNew@validators": "添加新規則",
+    "addNew@calculatedValues": "添加新變數",
+    "addNew@triggers": "添加新觸發器",
+    "addNew@navigateToUrlOnCondition": "添加新 URL",
     expressionIsEmpty: "表達式為空",
     value: "值",
     text: "顯示文本",
@@ -324,8 +457,8 @@ var traditionalChineseTranslation = {
     itemEdit: "編輯選項: {0}",
     url: "URL",
     path: "Path",
-    valueName: "Value name",
     choicesbyurl: {
+      url: "Web 服務的 URL",
       valueName: "從以下 JSON 欄位中獲取值"
     },
     titleName: "Title name",
@@ -367,12 +500,10 @@ var traditionalChineseTranslation = {
     showPreview: "是否顯示圖像預覽?",
     storeDataAsText: "以 JSON 文本方式存儲文件",
     maxSize: "文件最大尺寸 (Bytes)",
-    imageHeight: "圖片高度",
-    imageWidth: "圖片寬度",
     rowCount: "默認行數",
     columnLayout: "列佈局",
-    transposeData: "將行轉置為列",
     addRowLocation: "“添加行”按鈕位置",
+    transposeData: "將行轉置為列",
     addRowText: "添加條目按鈕文本",
     removeRowText: "刪除條目按鈕文本",
     rateMin: "最低速率值",
@@ -428,44 +559,21 @@ var traditionalChineseTranslation = {
     showProgressBar: "顯示進度條",
     questionTitleLocation: "問題的標題位置",
     requiredText: "The question required symbol(s)",
-    questionStartIndex: "問題起始標誌 (1, 2 or 'A', 'a')",
-    showQuestionNumbers: "顯示問題編號",
     questionTitleTemplate: "問題標題模板, 默認為: '{no}. {require} {title}'",
     questionErrorLocation: "問題錯誤定位",
     focusFirstQuestionAutomatic: "改變頁面時聚焦在第一個問題",
     questionsOrder: "Elements order on the page",
     maxTimeToFinish: "完成調查的最長時間",
     maxTimeToFinishPage: "完成調查中頁面的最長時間",
-    image: {
-      imageHeight: "圖片高度（以 CSS 接受的值為單位）",
-      imageWidth: "影像寬度（以 CSS 接受的值為單位）"
-    },
-    // survey templates
-    survey: {
-      title: "標題"
-    },
-    page: {
-      title: "標題",
-      maxTimeToFinish: "完成頁面的時間限制（秒為單位 ）"
-    },
-    question: {
-      page: "父頁面"
-    },
-    panel: {
-      page: "父頁面",
-      indent: "添加外部縮進"
-    },
     showTimerPanel: "顯示計時器面板",
     showTimerPanelMode: "顯示計時器面板模式",
     renderMode: "渲染模式",
     allowAddPanel: "允許添加面板",
     allowRemovePanel: "允許刪除面板",
-    noEntriesText: "空條目文本",
     panelAddText: "添加面板文本",
     panelRemoveText: "刪除面板文本",
     isSinglePage: "在一個頁面上展示所有元素",
     html: "網頁標記",
-    expression: "表達",
     setValue: "答",
     dataFormat: "圖像格式",
     allowAddRows: "允許添加行",
@@ -528,19 +636,13 @@ var traditionalChineseTranslation = {
     maxRowCount: "最大行數",
     confirmDelete: "確認刪除行",
     confirmDeleteText: "確認消息",
-    paneldynamic: {
-      confirmDelete: "確認面板刪除"
-    },
     panelCount: "初始面板計數",
     minPanelCount: "最小面板數",
     maxPanelCount: "最大面板數",
     panelsState: "內面板展開狀態",
-    templateDescription: "描述範本",
-    templateTitle: "標題範本",
     panelPrevText: "“上一個面板”按鈕工具提示",
     panelNextText: "“下一個面板”按鈕工具提示",
     showRangeInProgress: "顯示進度條",
-    templateTitleLocation: "問題標題位置",
     panelRemoveButtonLocation: "“刪除面板”按鈕位置",
     hideIfRowsEmpty: "如果沒有行，則隱藏問題",
     hideColumnsIfEmpty: "如果沒有行，則隱藏列",
@@ -548,7 +650,6 @@ var traditionalChineseTranslation = {
     rateCount: "速率計數",
     autoGenerate: "如何指定速率值？",
     hideIfChoicesEmpty: "如果問題不包含任何選項，則隱藏問題",
-    hideNumber: "隱藏問題編號",
     minWidth: "最小寬度（以 CSS 接受的值為單位）",
     maxWidth: "最大寬度（以 CSS 接受的值為單位）",
     width: "寬度（以 CSS 接受的值為單位）",
@@ -565,28 +666,31 @@ var traditionalChineseTranslation = {
     minSelectedChoices: "最少選擇的選項",
     maxSelectedChoices: "最大選定選項數",
     showClearButton: "顯示“清除”按鈕",
-    showNumber: "顯示面板編號",
     logoWidth: "徽標寬度（以 CSS 接受的值為單位）",
     logoHeight: "徽標高度（以 CSS 接受的值為單位）",
     readOnly: "唯讀",
     enableIf: "可編輯，如果",
     emptyRowsText: "“無行”消息",
-    size: "輸入欄位大小（以字元為單位 ）",
     separateSpecialChoices: "單獨的特殊選項（無、其他、全選）",
     choicesFromQuestion: "複製以下問題的選項",
     choicesFromQuestionMode: "要複製哪些選項？",
+    progressBarShowPageTitles: "在進度條中顯示頁面標題",
+    progressBarShowPageNumbers: "在進度條中顯示頁碼",
     showCommentArea: "顯示評論區域",
     commentPlaceholder: "註釋區佔位元",
     displayRateDescriptionsAsExtremeItems: "將速率描述顯示為極值",
     rowsOrder: "行順序",
     columnsLayout: "列佈局",
     columnColCount: "嵌套列計數",
-    state: "面板展開狀態",
     correctAnswer: "正確答案",
     defaultPanelValue: "預設值",
     cells: "單元格文本",
     keyName: "鍵列",
     itemvalue: {
+      visibleIf: "如果出現以下情況，則使該選項可見",
+      enableIf: "如果出現以下情況，則使該選項可選"
+    },
+    imageitemvalue: {
       text: "可選文字"
     },
     logoPosition: "徽標位置",
@@ -600,6 +704,9 @@ var traditionalChineseTranslation = {
       bottom: "在底部"
     },
     tabs: {
+      panel: {
+        layout: "面板佈局"
+      },
       general: "通用項",
       fileOptions: "選項",
       html: "HTML 編輯器",
@@ -637,6 +744,7 @@ var traditionalChineseTranslation = {
       logo: "調查標題中的徽標",
       slider: "滑塊",
       expression: "表達",
+      questionSettings: "問題設置",
       others: "別人"
     },
     editProperty: "編輯屬性: '{0}'",
@@ -645,7 +753,6 @@ var traditionalChineseTranslation = {
     choicesEnableIf: "在以下情況下，可以選擇選項",
     columnsEnableIf: "在以下情況下，列可見",
     rowsEnableIf: "在以下情況下，行可見",
-    indent: "添加縮進",
     innerIndent: "添加內部縮進",
     defaultValueFromLastRow: "從最後一行獲取預設值",
     defaultValueFromLastPanel: "從最後一個面板中獲取預設值",
@@ -674,26 +781,21 @@ var traditionalChineseTranslation = {
     searchEnabled: "啟用搜索",
     hideSelectedItems: "隱藏選取選取專案",
     closeOnSelect: "選擇後關閉下拉清單",
-    signatureWidth: "簽名寬度",
-    signatureHeight: "標誌性高度",
     verticalAlign: "垂直對齊",
     alternateRows: "交替行",
     columnsVisibleIf: "在以下情況下，列可見",
     rowsVisibleIf: "在以下情況下，行可見",
     otherPlaceholder: "註釋區佔位元",
-    signaturepad: {
-      showPlaceholder: "顯示佔位元",
-      placeholder: "佔位元文本",
-      signatureWidth: "簽名區域寬度",
-      signatureHeight: "簽名區域高度",
-      signatureAutoScaleEnabled: "自動縮放簽名區域",
-      penMinWidth: "最小筆寬",
-      penMaxWidth: "最大筆寬"
-    },
     filePlaceholder: "檔佔位元文本",
     photoPlaceholder: "照片占位元文本",
     fileOrPhotoPlaceholder: "檔或照片佔位元文字",
-    rateType: "費率類型"
+    rateType: "費率類型",
+    url_placeholder: "例如：https://api.example.com/books",
+    path_placeholder: "例如：categories.fiction",
+    questionStartIndex_placeholder: "例如：a）",
+    width_placeholder: "例：6in",
+    minWidth_placeholder: "例如：600px",
+    maxWidth_placeholder: "例：50%"
   },
   // Property values
   pv: {
@@ -714,14 +816,13 @@ var traditionalChineseTranslation = {
     asc: "上升",
     desc: "降",
     indeterminate: "定",
+    selected: "選擇",
+    unselected: "未選中",
     decimal: "十進位",
     currency: "貨幣",
     percent: "百分之",
     firstExpanded: "第一個面板展開",
     off: "隱藏問題編號",
-    onpanel: "在每個面板上開始",
-    onPanel: "在每個面板上開始",
-    onSurvey: "在整個調查過程中繼續",
     list: "清單",
     progressTop: "面板導航器 + 頂部的進度條",
     progressBottom: "面板導航器 + 底部的進度條",
@@ -735,7 +836,9 @@ var traditionalChineseTranslation = {
     both: "雙",
     left: "左",
     right: "右",
+    center: "中心",
     leftRight: "左和右",
+    middle: "中間",
     color: "顏色",
     date: "日期",
     datetime: "日期時間",
@@ -751,17 +854,20 @@ var traditionalChineseTranslation = {
     url: "網址",
     week: "周",
     hidden: "隱藏",
-    on: "從上一頁繼續",
-    onPage: "從每個頁面開始",
     edit: "編輯",
     display: "唯讀",
-    onComplete: "調查完成時",
-    onHidden: "當問題變得隱藏時",
-    onHiddenContainer: "當問題或其面板/頁面被隱藏時",
     contain: "包含",
     cover: "蓋",
     fill: "填補",
+    next: "下一個",
+    last: "最後",
+    onComplete: "調查完成時",
+    onHidden: "當問題變得隱藏時",
+    onHiddenContainer: "當問題或其面板/頁面被隱藏時",
     clearInvisibleValues: {
+      none: "從不"
+    },
+    clearIfInvisible: {
       none: "從不"
     },
     inputType: {
@@ -785,9 +891,11 @@ var traditionalChineseTranslation = {
     onNextPage: "切換到下一頁時",
     onValueChanged: "更改答案後",
     onValueChanging: "更改答案之前",
-    standard: "原始結構",
-    singlePage: "所有問題都在一個頁面上",
-    questionPerPage: "單個頁面上的每個問題",
+    questionsOnPageMode: {
+      standard: "原始結構",
+      singlePage: "在一個頁面上顯示所有問題",
+      questionPerPage: "每頁顯示一個問題"
+    },
     noPreview: "無預覽",
     showAllQuestions: "顯示所有問題",
     showAnsweredQuestions: "僅顯示已回答的問題",
@@ -802,11 +910,9 @@ var traditionalChineseTranslation = {
     onTyping: "打字時",
     underRow: "在行下",
     underRowSingle: "在該行下，只有一個面板可見",
+    auto: "自動",
     showNavigationButtons: {
       none: "隱藏"
-    },
-    showProgressBar: {
-      off: "隱藏"
     },
     showTimerPanel: {
       none: "隱藏"
@@ -814,41 +920,35 @@ var traditionalChineseTranslation = {
     showTimerPanelMode: {
       all: "雙"
     },
-    detailPanelMode: {
-      none: "隱藏"
-    },
     addRowLocation: {
       default: "取決於矩陣佈局"
     },
     panelsState: {
       default: "使用者無法展開或摺疊面板",
       collapsed: "所有面板均已摺疊",
-      expanded: "所有面板均已展開"
+      expanded: "所有面板均已展開",
+      firstExpanded: "首次擴展"
     },
     widthMode: {
-      auto: "自動",
       static: "靜態的",
       responsive: "回應"
     },
-    imageFit: {
-      none: "沒有",
-      contain: "包含",
-      cover: "蓋",
-      fill: "填補"
-    },
     contentMode: {
-      auto: "自動",
       image: "圖像",
       video: "視頻",
       youtube: "優酷"
     },
     displayMode: {
-      auto: "自動",
       buttons: "按鈕",
       dropdown: "下拉清單"
     },
     rateColorMode: {
-      default: "違約"
+      default: "違約",
+      scale: "規模"
+    },
+    scaleColorMode: {
+      monochrome: "單色",
+      colored: "彩色"
     },
     autoGenerate: {
       "true": "生成",
@@ -858,6 +958,58 @@ var traditionalChineseTranslation = {
       labels: "標籤",
       stars: "星星",
       smileys: "笑臉"
+    },
+    state: {
+      default: "鎖"
+    },
+    showQuestionNumbers: {
+      default: "自動編號",
+      on: "自動編號",
+      onPage: "在每個頁面上重置",
+      onpanel: "在每個面板上重置",
+      onPanel: "在每個面板上重置",
+      onSurvey: "在整個調查中繼續",
+      off: "無編號"
+    },
+    descriptionLocation: {
+      underTitle: "在問題標題下",
+      underInput: "在輸入欄位下"
+    },
+    selectToRankAreasLayout: {
+      horizontal: "在選項旁邊",
+      vertical: "以上選擇"
+    },
+    displayStyle: {
+      decimal: "十進位",
+      currency: "貨幣",
+      percent: "百分比",
+      date: "日期"
+    },
+    totalDisplayStyle: {
+      decimal: "十進位",
+      currency: "貨幣",
+      percent: "百分比",
+      date: "日期"
+    },
+    rowsOrder: {
+      initial: "源語言"
+    },
+    questionsOrder: {
+      initial: "源語言"
+    },
+    showProgressBar: {
+      off: "隱藏",
+      aboveHeader: "標題上方",
+      belowHeader: "在標題下方"
+    },
+    sum: "和",
+    count: "計數",
+    min: "最小值",
+    max: "麥克斯",
+    avg: "平均",
+    searchMode: {
+      contains: "包含",
+      startsWith: "開頭為"
     }
   },
   // Operators
@@ -923,18 +1075,205 @@ var traditionalChineseTranslation = {
     visibletrigger: "修改可見性"
   },
   pehelp: {
+    panel: {
+      name: "受訪者不可見的面板ID。",
+      description: "鍵入面板字幕。",
+      visibleIf: "使用魔棒圖示設置確定面板可見性的條件規則。",
+      enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
+      requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      questionTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      questionErrorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      questionsOrder: "保持問題的原始順序或隨機化問題。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      page: "將面板重新置放到選頁面的末尾。",
+      innerIndent: "在面板內容和面板框的左邊框之間添加空格或邊距。",
+      startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
+      state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
+      width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
+    },
+    paneldynamic: {
+      name: "受訪者不可見的面板ID。",
+      description: "鍵入面板字幕。",
+      visibleIf: "使用魔棒圖示設置確定面板可見性的條件規則。",
+      enableIf: "使用魔棒圖示設置禁用面板唯讀模式的條件規則。",
+      requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      templateTitleLocation: "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      templateErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      errorLocation: "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。",
+      page: "將面板重新置放到選頁面的末尾。",
+      innerIndent: "在面板內容和面板框的左邊框之間添加空格或邊距。",
+      startWithNewLine: "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。",
+      state: "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。",
+      width: "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。",
+      templateTitle: "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      templateTabTitle: "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。",
+      templateVisibleIf: "此設置允許您控制動態面板中各個面板的可見性。使用“{panel}”佔位符在運算式中引用當前面板。",
+      titleLocation: "此面板中的所有問題都會自動繼承此設置。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。",
+      descriptionLocation: "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。",
+      newPanelPosition: "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。",
+      defaultValueFromLastPanel: "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。",
+      keyName: "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
+    },
+    defaultValueExpression: "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。",
+    resetValueIf: "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。",
+    setValueIf: "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。",
+    setValueExpression: "指定一個表達式，該運算式定義在滿足「如果設置值」規則中的條件時要設置的值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表達式確定的值可以被受訪者的手動輸入覆蓋。",
+    question: {
+      name: "受訪者不可見的問題ID。",
+      description: "鍵入問題副標題。",
+      visibleIf: "使用魔杖圖示設置確定問題可見性的條件規則。",
+      enableIf: "使用魔杖圖示設置條件規則，以禁用問題的唯讀模式。",
+      requiredIf: "使用魔杖圖標設置條件規則，除非問題得到答案，否則阻止調查推進或提交。",
+      startWithNewLine: "取消選擇以將問題與上一個問題或面板顯示在一行中。如果問題是表單中的第一個元素，則該設置不適用。",
+      page: "將問題重新置放到選頁面的末尾。",
+      state: "從以下選項中選擇：「展開」 - 問題框完整顯示，可以摺疊;“已摺疊” - 問題框僅顯示標題和描述，可以展開;“已鎖定” - 問題框完整顯示，無法摺疊。",
+      titleLocation: "覆蓋在面板、頁面或調查級別上定義的標題對齊規則。“繼承”選項將應用任何更高級別的設置（如果已設置）或調查級別的設置（預設為“頂部”）。",
+      descriptionLocation: "“繼承”選項應用調查級別設置（預設為“在問題標題下”）。",
+      errorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      indent: "在問題內容和問題框的左邊框之間添加空格或邊距。",
+      width: "設置問題的寬度，使其與同一行中的其他調查元素成比例。接受 CSS 值（px、%、in、pt 等）。",
+      surveyvalidator: {
+        expression: "使用魔杖圖示為問題設置驗證規則。"
+      },
+      textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。",
+      url: "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。",
+      searchMode: "用於篩選下拉清單的比較操作。"
+    },
+    signaturepad: {
+      signatureWidth: "設置顯示的簽名區域和生成的圖像的寬度。",
+      signatureHeight: "設置顯示的簽名區域和生成的圖像的高度。",
+      signatureAutoScaleEnabled: "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
+    },
+    file: {
+      imageHeight: "調整調查結果中圖像的高度。",
+      imageWidth: "調整調查結果中圖像的寬度。"
+    },
+    imagepicker: {
+      imageHeight: "覆蓋最小和最大高度值。",
+      imageWidth: "覆蓋最小和最大寬度值。",
+      choices: "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。"
+    },
+    text: {
+      size: "此設置僅調整輸入欄位的大小，不會影響問題框的寬度。要限制接受的輸入長度，請轉到<b>驗證→最大字元限制</b>。"
+    },
+    comment: {
+      rows: "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
+    },
+    // survey templates
+    survey: {
+      mode: "選擇：「可編輯」 - 使受訪者能夠填寫您的調查;“只讀” - 禁用表單編輯。"
+    },
+    matrixdropdowncolumn: {
+      name: "受訪者不可見的列ID。",
+      isUnique: "為列啟用后，受訪者需要為此列中的每個問題提供唯一的回答。",
+      rows: "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。",
+      visibleIf: "使用魔杖圖示設置確定列可見性的條件規則。",
+      enableIf: "使用魔杖圖示設置禁用列唯讀模式的條件規則。",
+      requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      showInMultipleColumns: "選取後，為每個選項創建一個單獨的列。"
+    },
+    widthMode: "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。",
     cookieName: "Cookie 可防止使用者兩次填寫同一調查問卷。",
-    size: "調整輸入欄位的可見區域的大小。請使用<b>「驗證→最大長度</b>」設置來限制輸入長度。",
-    format: "使用 {0} 作為實際值的佔位元。",
+    logo: "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。",
+    logoWidth: "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。",
+    logoHeight: "以 CSS 單位（px、%、in、pt 等）設置徽標高度。",
+    logoFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
+    goNextPageAutomatic: "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。調查也會自動完成。",
+    showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
+    showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
+    showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
+    questionTitleLocation: "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。",
+    requiredText: "一個符號或一系列符號，表示需要答案。",
+    questionStartIndex: "輸入要開始編號的數位或字母。",
+    questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。",
+    focusFirstQuestionAutomatic: "選擇是否希望每個頁面上的第一個輸入字段準備好進行文本輸入。",
+    questionsOrder: "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。",
+    maxTextLength: "僅適用於文本輸入問題。",
+    maxOthersLength: "僅供問題評論。",
+    autoGrowComment: "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。",
+    allowResizeComment: "僅適用於問題評論和長文本問題。",
+    calculatedValues: "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。",
+    includeIntoResult: "選擇是否希望將表達式的計算值與調查結果一起保存。",
+    triggers: "觸發器是基於表達式的事件或條件。一旦表達式被計算為「true」，觸發器就會觸發一個操作。這樣的操作可以選擇性地影響它的目標問題。",
+    clearInvisibleValues: "選擇是否清除條件邏輯隱藏的問題的值以及何時清除。",
+    textUpdateMode: "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。",
+    columns: "左邊的值用作條件規則中使用的列ID，右邊的值顯示給受訪者。",
+    rows: "左邊的值用作條件規則中使用的行ID，右邊的值顯示給受訪者。",
+    columnMinWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    rowTitleWidth: "接受 CSS 值（px、%、in、pt 等）。",
     totalText: "僅當至少一列具有 Total 類型或 Total 運算式時才可見。",
-    acceptedTypes: "有關詳細資訊，請參閱 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 屬性說明。",
-    columnColCount: "僅適用於單選組和複選框單元類型。",
-    autocomplete: "有關詳細資訊，請參閱 [autocomplete]（https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete） 屬性說明。",
+    cellErrorLocation: "設置與輸入無效的儲存格相關的錯誤訊息的位置。“繼承”選項應用“錯誤消息對齊”屬性中的設置。",
+    keyDuplicationError: "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。",
+    totalExpression: "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。",
+    confirmDelete: "觸發提示，要求確認刪除行。",
+    defaultValueFromLastRow: "複製最後一行的答案，並將其分配給下一個添加的動態行。",
+    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
+    description: "鍵入副標題。",
+    locale: "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。",
+    detailPanelMode: "設置詳細資訊部分相對於行的位置。從中選擇：「無」 - 不添加擴展;“Under the row” - 矩陣的每一行下都放置一個行擴展;“在行下，僅顯示一行擴展” - 僅在單行下顯示擴展，其餘行展開將摺疊。",
+    imageFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
+    autoGrow: "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。",
+    allowResize: "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。",
+    maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。",
+    maxTimeToFinishPage: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+    page: {
+      maxTimeToFinish: "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。",
+      visibleIf: "使用魔杖圖示設置確定頁面可見性的條件規則。",
+      enableIf: "使用魔杖圖示設置禁用頁面只讀模式的條件規則。",
+      requiredIf: "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。",
+      questionTitleLocation: "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      questionErrorLocation: "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。",
+      questionsOrder: "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。",
+      navigationButtonsVisibility: "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
+    },
+    showTimerPanel: "設置計時器在頁面上的可見性和位置。",
+    panelsState: "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。",
+    imageLinkName: "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。",
+    choices: "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。",
+    title: "鍵入要顯示的使用者友好標題。",
+    waitForUpload: "確保使用者在上傳檔之前不會完成調查。",
+    minWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    maxWidth: "接受 CSS 值（px、%、in、pt 等）。",
+    width: "接受 CSS 值（px、%、in、pt 等）。",
     valueName: "如果未設置此屬性，則答案將存儲在 Name 屬性指定的欄位中。",
+    useDisplayValuesInDynamicTexts: "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。",
+    clearIfInvisible: "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。",
+    choicesFromQuestionMode: "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。",
+    showOtherItem: "選取後，使用者可以在單獨的註釋框中包含其他輸入。",
+    separateSpecialChoices: "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。",
+    path: "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。",
     choicesbyurl: {
       valueName: " "
     },
-    keyName: "如果指定的列包含相同的值，則調查將引發「非唯一鍵值」錯誤。",
+    titleName: "在物件陣列中輸入一個統一的屬性名稱，該陣列包含要在選項清單中顯示的值。",
+    allowEmptyResponse: "選擇此選項可允許服務傳回空回應或陣列。",
+    choicesVisibleIf: "使用魔杖圖示設置條件規則，以確定所有選項的可見性。",
+    rateValues: "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。",
+    rating: {
+      displayMode: "“自動”根據可用寬度在“按鈕”和“下拉”模式之間進行選擇。當寬度不足以顯示按鈕時，問題將顯示一個下拉清單。"
+    },
+    valuePropertyName: "允許您連接以不同格式生成結果的問題。當使用聯接標識碼將此類問題連結在一起時，此共用屬性將存儲選定的問題值。",
+    searchEnabled: "選擇是否要更新下拉功能表內容以匹配使用者在輸入欄位中鍵入的搜索查詢。",
+    valueTrue: "當受訪者給出肯定答案時保存在調查結果中的值。",
+    valueFalse: "當受訪者給出否定答案時保存在調查結果中的值。",
+    showPreview: "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。",
+    needConfirmRemoveFile: "觸發提示，要求確認文件刪除。",
+    selectToRankEnabled: "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。",
+    dataList: "輸入將在輸入期間向受訪者建議的選項清單。",
+    itemSize: "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。",
+    itemTitleWidth: "為所有項目標籤設定一致的寬度（以像素為單位）",
+    contentMode: "“自動”選項會根據提供的源URL自動確定合適的顯示模式 - 圖像、視頻或YouTube。",
+    altText: "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。",
+    rateColorMode: "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。",
+    expression: {
+      name: "受訪者不可見的表達式ID。",
+      description: "鍵入表達式副標題。",
+      expression: "表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、條件 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
+    },
+    storeOthersAsComment: "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。",
+    format: "使用 {0} 作為實際值的佔位元。",
+    acceptedTypes: "有關詳細資訊，請參閱 [accept]（https://www.w3schools.com/tags/att_input_accept.asp） 屬性說明。",
+    columnColCount: "僅適用於單選組和複選框單元類型。",
+    autocomplete: "有關詳細資訊，請參閱 [autocomplete]（https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete） 屬性說明。",
     filePlaceholder: "當「源類型」為「本地檔」或相機不可用時適用",
     photoPlaceholder: "當「源類型」為「相機」時適用。",
     fileOrPhotoPlaceholder: "當「源類型」為「本地檔或相機」時適用。"
@@ -947,6 +1286,7 @@ var traditionalChineseTranslation = {
     },
     multiSelect: "允許多項選擇",
     showLabel: "顯示圖像標題",
+    swapOrder: "交換“是”和“否”的順序",
     value: "價值",
     tabAlign: "製表元對齊方式",
     sourceType: "源類型",
@@ -970,8 +1310,6 @@ var traditionalChineseTranslation = {
     showBrandInfo: "顯示品牌資訊",
     useDisplayValuesInDynamicTexts: "在動態文字中使用顯示值",
     visibleIf: "可見，如果",
-    titleLocation: "標題位置",
-    descriptionLocation: "描述位置",
     defaultValueExpression: "預設值表達式",
     requiredIf: "在以下情況下是必需的",
     resetValueIf: "如果出現以下情況，則重置值",
@@ -984,8 +1322,6 @@ var traditionalChineseTranslation = {
     choicesByUrl: "Url選項",
     currency: "貨幣",
     cellHint: "單元格提示",
-    isUnique: "是獨一無二的",
-    showInMultipleColumns: "在多列中顯示",
     totalMaximumFractionDigits: "最大小數位數總數",
     totalMinimumFractionDigits: "最小小數位數總數",
     columns: "列",
@@ -1004,6 +1340,7 @@ var traditionalChineseTranslation = {
     step: "步",
     dataList: "數據清單",
     itemSize: "專案大小",
+    itemTitleWidth: "項目標籤寬度（以 px 為單位）",
     elements: "元素",
     content: "內容",
     navigationButtonsVisibility: "導航按鈕可見性",
@@ -1037,11 +1374,11 @@ var traditionalChineseTranslation = {
     backgroundOpacity: "背景不透明度",
     selectToRankEnabled: "選擇啟用排名",
     selectToRankAreasLayout: "選擇以對區域佈局進行排名",
+    selectToRankEmptyRankedAreaText: "顯示是否選擇了所有選項的文字",
+    selectToRankEmptyUnrankedAreaText: "排名區域的佔位元文本",
     allowCameraAccess: "允許攝像頭訪問",
     scaleColorMode: "縮放顏色模式",
     rateColorMode: "評價顏色模式",
-    templateTabTitle: "範本選項卡標題",
-    templateVisibleIf: "範本可見，如果",
     copyDisplayValue: "複製顯示值"
   },
   theme: {
@@ -2049,3 +2386,315 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // layout.panel: "Layout" => "佈局"
 // layout.question: "Layout" => "佈局"
 // layout.base: "Layout" => "佈局"
+// panel.name: "Panel name" => "面板名稱"
+// panel.title: "Panel title" => "面板標題"
+// panel.description: "Panel description" => "面板說明"
+// panel.visibleIf: "Make the panel visible if" => "如果出現以下情況，則使面板可見"
+// panel.requiredIf: "Make the panel required if" => "如果出現以下情況，則使面板成為必需的"
+// panel.questionsOrder: "Question order within the panel" => "小組內的問題順序"
+// panel.startWithNewLine: "Display the panel on a new line" => "在新行上顯示面板"
+// panel.state: "Panel collapse state" => "面板摺疊狀態"
+// panel.width: "Inline panel width" => "內嵌面板寬度"
+// panel.minWidth: "Minimum panel width" => "最小面板寬度"
+// panel.maxWidth: "Maximum panel width" => "最大面板寬度"
+// panel.showNumber: "Number panels" => "數字面板"
+// paneldynamic.name: "Panel name" => "面板名稱"
+// paneldynamic.title: "Panel title" => "面板標題"
+// paneldynamic.description: "Panel description" => "面板說明"
+// paneldynamic.visibleIf: "Make the panel visible if" => "如果出現以下情況，則使面板可見"
+// paneldynamic.requiredIf: "Make the panel required if" => "如果出現以下情況，則使面板成為必需的"
+// paneldynamic.page: "Move the panel to page" => "將面板移動到頁面"
+// paneldynamic.startWithNewLine: "Display the panel on a new line" => "在新行上顯示面板"
+// paneldynamic.state: "Panel collapse state" => "面板摺疊狀態"
+// paneldynamic.width: "Inline panel width" => "內嵌面板寬度"
+// paneldynamic.minWidth: "Minimum panel width" => "最小面板寬度"
+// paneldynamic.maxWidth: "Maximum panel width" => "最大面板寬度"
+// paneldynamic.templateDescription: "Panel description pattern" => "面板描述模式"
+// paneldynamic.templateTitle: "Panel title pattern" => "面板標題模式"
+// paneldynamic.noEntriesText: "Empty panel text" => "空面板文本"
+// paneldynamic.templateTabTitle: "Tab title pattern" => "選項卡標題模式"
+// paneldynamic.templateVisibleIf: "Make an individual panel visible if" => "如果出現以下情況，則使單個面板可見"
+// paneldynamic.hideNumber: "Hide the panel number" => "隱藏面板編號"
+// paneldynamic.titleLocation: "Panel title alignment" => "面板標題對齊方式"
+// paneldynamic.descriptionLocation: "Panel description alignment" => "面板描述對齊方式"
+// paneldynamic.templateTitleLocation: "Question title alignment" => "問題標題對齊方式"
+// paneldynamic.templateErrorLocation: "Error message alignment" => "錯誤消息對齊"
+// paneldynamic.newPanelPosition: "New panel location" => "新面板位置"
+// paneldynamic.keyName: "Prevent duplicate responses in the following question" => "防止在以下問題中重複回答"
+// question.name: "Question name" => "問題名稱"
+// question.title: "Question title" => "問題標題"
+// question.description: "Question description" => "問題描述"
+// question.visibleIf: "Make the question visible if" => "如果出現以下情況，請使問題可見"
+// question.requiredIf: "Make the question required if" => "如果出現以下情況，則將問題設為必填項"
+// question.state: "Question box collapse state" => "問題框摺疊狀態"
+// question.hideNumber: "Hide the question number" => "隱藏問題編號"
+// question.titleLocation: "Question title alignment" => "問題標題對齊方式"
+// question.descriptionLocation: "Question description alignment" => "問題描述對齊方式"
+// question.errorLocation: "Error message alignment" => "錯誤消息對齊"
+// question.indent: "Increase the inner indent" => "增加內部縮進"
+// question.width: "Inline question width" => "內聯問題寬度"
+// question.minWidth: "Minimum question width" => "最小問題寬度"
+// question.maxWidth: "Maximum question width" => "最大問題寬度"
+// question.textUpdateMode: "Update input field value" => "更新輸入欄位值"
+// signaturepad.allowClear: "Show the Clear button within signature area" => "在簽名區域內顯示「清除」 按鈕"
+// signaturepad.penColor: "Stroke color" => "描邊顏色"
+// comment.rows: "Input field height (in lines)" => "輸入欄位高度（以行為單位）"
+// expression.name: "Expression name" => "表達式名稱"
+// expression.title: "Expression title" => "表達式標題"
+// expression.description: "Expression description" => "表達式說明"
+// expression.expression: "Expression" => "表達"
+// trigger.expression: "Expression" => "表達"
+// calculatedvalue.expression: "Expression" => "表達"
+// survey.description: "Survey description" => "調查說明"
+// page.name: "Page name" => "頁面名稱"
+// page.description: "Page description" => "頁面描述"
+// page.visibleIf: "Make the page visible if" => "如果出現以下情況，則使頁面可見"
+// page.requiredIf: "Make the page required if" => "如果出現以下情況，則使頁面為必填項"
+// page.questionsOrder: "Question order on the page" => "頁面上的問題順序"
+// matrixdropdowncolumn.name: "Column name" => "列名稱"
+// matrixdropdowncolumn.title: "Column title" => "專欄標題"
+// matrixdropdowncolumn.isUnique: "Prevent duplicate responses" => "防止重複回應"
+// matrixdropdowncolumn.width: "Column width" => "列寬"
+// matrixdropdowncolumn.minWidth: "Minimum column width" => "最小列寬"
+// matrixdropdowncolumn.rows: "Input field height (in lines)" => "輸入欄位高度（以行為單位）"
+// matrixdropdowncolumn.visibleIf: "Make the column visible if" => "如果出現以下情況，則使列可見"
+// matrixdropdowncolumn.requiredIf: "Make the column required if" => "如果滿足以下條件，則使該列為必填項"
+// matrixdropdowncolumn.showInMultipleColumns: "Each option in a separate column" => "每個選項都在單獨的列中"
+// multipletextitem.name: "Name" => "名字"
+// multipletextitem.title: "Title" => "標題"
+// pe.rateDescriptionLocation: "Label alignment" => "標籤對齊"
+// pe.cellErrorLocation: "Cell error message alignment" => "單元格錯誤消息對齊方式"
+// pe.listIsEmpty@columns: "You don't have any columns yet" => "您還沒有任何列"
+// pe.listIsEmpty@rows: "You don't have any rows yet" => "您還沒有任何行"
+// pe.listIsEmpty@validators: "You don't have any validation rules yet" => "尚無任何驗證規則"
+// pe.listIsEmpty@calculatedValues: "You don't have any custom variables yet" => "您還沒有任何自訂變數"
+// pe.listIsEmpty@triggers: "You don't have any triggers yet" => "您還沒有任何觸發器"
+// pe.listIsEmpty@navigateToUrlOnCondition: "You don't have any links yet" => "您還沒有任何連結"
+// pe.addNew@columns: "Add new column" => "添加新列"
+// pe.addNew@rows: "Add new row" => "添加新行"
+// pe.addNew@validators: "Add new rule" => "添加新規則"
+// pe.addNew@calculatedValues: "Add new variable" => "添加新變數"
+// pe.addNew@triggers: "Add new trigger" => "添加新觸發器"
+// pe.addNew@navigateToUrlOnCondition: "Add new URL" => "添加新 URL"
+// choicesbyurl.url: "Web service's URL" => "Web 服務的 URL"
+// pe.progressBarShowPageTitles: "Display page titles in progress bar" => "在進度條中顯示頁面標題"
+// pe.progressBarShowPageNumbers: "Display page numbers in progress bar" => "在進度條中顯示頁碼"
+// itemvalue.visibleIf: "Make the option visible if" => "如果出現以下情況，則使該選項可見"
+// itemvalue.enableIf: "Make the option selectable if" => "如果出現以下情況，則使該選項可選"
+// panel.layout: "Panel Layout" => "面板佈局"
+// tabs.questionSettings: "Question Settings" => "問題設置"
+// pe.url_placeholder: "Ex.: https://api.example.com/books" => "例如：https://api.example.com/books"
+// pe.path_placeholder: "Ex.: categories.fiction" => "例如：categories.fiction"
+// pe.questionStartIndex_placeholder: "Ex.: a)" => "例如：a）"
+// pe.width_placeholder: "Ex.: 6in" => "例：6in"
+// pe.minWidth_placeholder: "Ex.: 600px" => "例如：600px"
+// pe.maxWidth_placeholder: "Ex.: 50%" => "例：50%"
+// pv.selected: "Selected" => "選擇"
+// pv.unselected: "Unselected" => "未選中"
+// pv.center: "Center" => "中心"
+// pv.middle: "Middle" => "中間"
+// pv.next: "Next" => "下一個"
+// pv.last: "Last" => "最後"
+// clearIfInvisible.none: "Never" => "從不"
+// questionsOnPageMode.standard: "Original structure" => "原始結構"
+// questionsOnPageMode.singlePage: "Show all questions on one page" => "在一個頁面上顯示所有問題"
+// questionsOnPageMode.questionPerPage: "Show single question per page" => "每頁顯示一個問題"
+// pv.auto: "Auto" => "自動"
+// panelsState.firstExpanded: "First expanded" => "首次擴展"
+// rateColorMode.scale: "Scale" => "規模"
+// scaleColorMode.monochrome: "Monochrome" => "單色"
+// scaleColorMode.colored: "Colored" => "彩色"
+// state.default: "Locked" => "鎖"
+// showQuestionNumbers.default: "Auto-numbering" => "自動編號"
+// showQuestionNumbers.on: "Auto-numbering" => "自動編號"
+// showQuestionNumbers.onPage: "Reset on each page" => "在每個頁面上重置"
+// showQuestionNumbers.onpanel: "Reset on each panel" => "在每個面板上重置"
+// showQuestionNumbers.onPanel: "Reset on each panel" => "在每個面板上重置"
+// showQuestionNumbers.onSurvey: "Continue across the survey" => "在整個調查中繼續"
+// showQuestionNumbers.off: "No numbering" => "無編號"
+// descriptionLocation.underTitle: "Under the question title" => "在問題標題下"
+// descriptionLocation.underInput: "Under the input field" => "在輸入欄位下"
+// selectToRankAreasLayout.horizontal: "Next to choices" => "在選項旁邊"
+// selectToRankAreasLayout.vertical: "Above choices" => "以上選擇"
+// displayStyle.decimal: "Decimal" => "十進位"
+// displayStyle.currency: "Currency" => "貨幣"
+// displayStyle.percent: "Percentage" => "百分比"
+// displayStyle.date: "Date" => "日期"
+// totalDisplayStyle.decimal: "Decimal" => "十進位"
+// totalDisplayStyle.currency: "Currency" => "貨幣"
+// totalDisplayStyle.percent: "Percentage" => "百分比"
+// totalDisplayStyle.date: "Date" => "日期"
+// rowsOrder.initial: "Original" => "源語言"
+// questionsOrder.initial: "Original" => "源語言"
+// showProgressBar.aboveHeader: "Above the header" => "標題上方"
+// showProgressBar.belowHeader: "Below the header" => "在標題下方"
+// pv.sum: "Sum" => "和"
+// pv.count: "Count" => "計數"
+// pv.min: "Min" => "最小值"
+// pv.max: "Max" => "麥克斯"
+// pv.avg: "Avg" => "平均"
+// searchMode.contains: "Contains" => "包含"
+// searchMode.startsWith: "Starts with" => "開頭為"
+// panel.name: "A panel ID that is not visible to respondents." => "受訪者不可見的面板ID。"
+// panel.description: "Type a panel subtitle." => "鍵入面板字幕。"
+// panel.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "使用魔棒圖示設置確定面板可見性的條件規則。"
+// panel.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "使用魔棒圖示設置禁用面板唯讀模式的條件規則。"
+// panel.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
+// panel.questionTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
+// panel.questionErrorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
+// panel.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "保持問題的原始順序或隨機化問題。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
+// panel.page: "Repositions the panel to the end of a selected page." => "將面板重新置放到選頁面的末尾。"
+// panel.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容和面板框的左邊框之間添加空格或邊距。"
+// panel.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。"
+// panel.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。"
+// panel.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
+// paneldynamic.name: "A panel ID that is not visible to respondents." => "受訪者不可見的面板ID。"
+// paneldynamic.description: "Type a panel subtitle." => "鍵入面板字幕。"
+// paneldynamic.visibleIf: "Use the magic wand icon to set a conditional rule that determines panel visibility." => "使用魔棒圖示設置確定面板可見性的條件規則。"
+// paneldynamic.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the panel." => "使用魔棒圖示設置禁用面板唯讀模式的條件規則。"
+// paneldynamic.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
+// paneldynamic.templateTitleLocation: "Applies to all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "適用於此面板中的所有問題。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
+// paneldynamic.templateErrorLocation: "Sets the location of an error message in relation to a question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
+// paneldynamic.errorLocation: "Sets the location of an error message in relation to all questions within the panel. The \"Inherit\" option applies the page-level (if set) or survey-level setting." => "設置與面板中所有問題相關的錯誤消息的位置。“繼承”選項應用頁面級別（如果已設置）或調查級別設置。"
+// paneldynamic.page: "Repositions the panel to the end of a selected page." => "將面板重新置放到選頁面的末尾。"
+// paneldynamic.innerIndent: "Adds space or margin between the panel content and the left border of the panel box." => "在面板內容和面板框的左邊框之間添加空格或邊距。"
+// paneldynamic.startWithNewLine: "Unselect to display the panel in one line with the previous question or panel. The setting doesn't apply if the panel is the first element in your form." => "取消選擇以將面板與上一個問題或面板顯示在一行中。如果面板是表單中的第一個元素，則該設置不適用。"
+// paneldynamic.state: "Choose from: \"Expanded\" - the panel is displayed in full and can be collapsed; \"Collapsed\" - the panel displays only the title and description and can be expanded; \"Locked\" - the panel is displayed in full and cannot be collapsed." => "從中選擇：「展開」 - 面板完整顯示，可以摺疊;“已摺疊” - 面板僅顯示標題和描述，可以展開;“已鎖定” - 面板完整顯示，無法摺疊。"
+// paneldynamic.width: "Sets the width of the panel in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置面板的寬度，使其與同一行中的其他測量圖元成比例。接受 CSS 值（px、%、in、pt 等）。"
+// paneldynamic.templateTitle: "Type in a template for dynamic panel titles. Use {panelIndex} for the panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "鍵入動態面板標題的範本。使用 {panelIndex} 作為面板的常規位置，使用 {visiblePanelIndex} 作為其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。"
+// paneldynamic.templateTabTitle: "Type in a template for tab titles. Use {panelIndex} for a panel's general position and {visiblePanelIndex} for its order among visible panels. Insert these placeholders into the pattern to add automatic numbering." => "鍵入選項卡標題的範本。使用 {panelIndex} 表示面板的大致位置，使用 {visiblePanelIndex} 表示其在可見面板中的順序。將這些佔位元插入到圖案中以添加自動編號。"
+// paneldynamic.templateVisibleIf: "This setting allows you to control the visibility of individual panels within the dynamic panel. Use the `{panel}` placeholder to reference the current panel in your expression." => "此設置允許您控制動態面板中各個面板的可見性。使用“{panel}”佔位符在運算式中引用當前面板。"
+// paneldynamic.titleLocation: "This setting is automatically inherited by all questions within this panel. If you want to override this setting, define title alignment rules for individual questions. The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Top\" by default)." => "此面板中的所有問題都會自動繼承此設置。如果要覆蓋此設置，請為單個問題定義標題對齊規則。“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“頂部”）。"
+// paneldynamic.descriptionLocation: "The \"Inherit\" option applies the page-level (if set) or survey-level setting (\"Under the panel title\" by default)." => "“繼承”選項應用頁面級別（如果已設置）或調查級別設置（預設為“在面板標題下”）。"
+// paneldynamic.newPanelPosition: "Defines the position of a newly added panel. By default, new panels are added to the end. Select \"Next\" to insert a new panel after the current one." => "定義新添加的面板的位置。默認情況下，新面板將添加到末尾。選擇「下一步」以在當前面板之後插入新面板。"
+// paneldynamic.defaultValueFromLastPanel: "Duplicates answers from the last panel and assigns them to the next added dynamic panel." => "複製上一個面板中的答案，並將其分配給下一個添加的動態面板。"
+// paneldynamic.keyName: "Reference a question name to require a user to provide a unique response for this question in each panel." => "引用問題名稱以要求使用者在每個面板中為此問題提供唯一的答案。"
+// pehelp.defaultValueExpression: "This setting allows you to assign a default answer value based on an expression. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression serves as the initial default value that can be overridden by a respondent's manual input." => "此設定允許您根據表示式分配預設答案值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。此表達式確定的值用作初始預設值，可由回應者的手動輸入覆蓋。"
+// pehelp.resetValueIf: "Use the magic wand icon to set a conditional rule that determines when a respondent's input is reset to the value based on the \"Default value expression\" or \"Set value expression\" or to the \"Default answer\" value (if either is set)." => "使用魔杖圖示設置條件規則，該規則確定何時將受訪者的輸入重置為基於“預設值表達式”或“設置值表達式”的值，或重置為“預設答案”值（如果設置了其中任何一個）。"
+// pehelp.setValueIf: "Use the magic wand icon to set a conditional rule that determines when to run the \"Set value expression\" and dynamically assign the resulting value as a response." => "使用魔杖圖示設置條件規則，該規則確定何時運行「設置值表達式」 ，並將結果值動態分配為回應。"
+// pehelp.setValueExpression: "Specify an expression that defines the value to be set when the conditions in the \"Set value if\" rule are met. The expression can include basic calculations - `{q1_id} + {q2_id}`, Boolean expressions, such as `{age} > 60`, and functions: `iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc. The value determined by this expression can be overridden by a respondent's manual input." => "指定一個表達式，該運算式定義在滿足「如果設置值」規則中的條件時要設置的值。表達式可以包括基本計算 - '{q1_id} + {q2_id}'、布爾表達式，例如 '{age} > 60'，以及函數：'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）'等。由此表達式確定的值可以被受訪者的手動輸入覆蓋。"
+// question.name: "A question ID that is not visible to respondents." => "受訪者不可見的問題ID。"
+// question.description: "Type a question subtitle." => "鍵入問題副標題。"
+// question.visibleIf: "Use the magic wand icon to set a conditional rule that determines question visibility." => "使用魔杖圖示設置確定問題可見性的條件規則。"
+// question.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the question." => "使用魔杖圖示設置條件規則，以禁用問題的唯讀模式。"
+// question.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey advancing or submission unless the question received an answer." => "使用魔杖圖標設置條件規則，除非問題得到答案，否則阻止調查推進或提交。"
+// question.startWithNewLine: "Unselect to display the question in one line with the previous question or panel. The setting doesn't apply if the question is the first element in your form." => "取消選擇以將問題與上一個問題或面板顯示在一行中。如果問題是表單中的第一個元素，則該設置不適用。"
+// question.page: "Repositions the question to the end of a selected page." => "將問題重新置放到選頁面的末尾。"
+// question.state: "Choose from: \"Expanded\" - the question box is displayed in full and can be collapsed; \"Collapsed\" - the question box displays only the title and description and can be expanded; \"Locked\" - the question box is displayed in full and cannot be collapsed." => "從以下選項中選擇：「展開」 - 問題框完整顯示，可以摺疊;“已摺疊” - 問題框僅顯示標題和描述，可以展開;“已鎖定” - 問題框完整顯示，無法摺疊。"
+// question.titleLocation: "Overrides title alignment rules defined on a panel, page or survey level. The \"Inherit\" option applies any higher-level settings (if set) or survey-level setting (\"Top\" by default)." => "覆蓋在面板、頁面或調查級別上定義的標題對齊規則。“繼承”選項將應用任何更高級別的設置（如果已設置）或調查級別的設置（預設為“頂部”）。"
+// question.descriptionLocation: "The \"Inherit\" option applies the survey-level setting (\"Under the question title\" by default)." => "“繼承”選項應用調查級別設置（預設為“在問題標題下”）。"
+// question.errorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
+// question.indent: "Adds space or margin between the question content and the left border of the question box." => "在問題內容和問題框的左邊框之間添加空格或邊距。"
+// question.width: "Sets the width of the question in proportion to other survey elements in the same line. Accepts CSS values (px, %, in, pt, etc.)." => "設置問題的寬度，使其與同一行中的其他調查元素成比例。接受 CSS 值（px、%、in、pt 等）。"
+// surveyvalidator.expression: "Use the magic wand icon to set a validation rule for the question." => "使用魔杖圖示為問題設置驗證規則。"
+// question.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default)." => "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。“繼承”選項將應用調查級別設置（預設為“失去焦點時”）。"
+// question.url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data." => "您可以使用任何 Web 服務作為多項選擇題的數據來源。要填充選項值，請輸入提供數據的服務的URL。"
+// question.searchMode: "A comparison operation used to filter the drop-down list." => "用於篩選下拉清單的比較操作。"
+// signaturepad.signatureWidth: "Sets the width of the displayed signature area and the resulting image." => "設置顯示的簽名區域和生成的圖像的寬度。"
+// signaturepad.signatureHeight: "Sets the height of the displayed signature area and the resulting image." => "設置顯示的簽名區域和生成的圖像的高度。"
+// signaturepad.signatureAutoScaleEnabled: "Select if you want the signature area to fill all available space within the question box while maintaining the default 3:2 aspect ratio. When custom width and height values are set, the setting will keep the aspect ratio of these dimensions." => "選擇是否希望簽名區域填充問題框中的所有可用空間，同時保持預設的 3：2 縱橫比。設置自定義寬度和高度值后，該設置將保留這些尺寸的縱橫比。"
+// file.imageHeight: "Adjusts the height of the image in the survey results." => "調整調查結果中圖像的高度。"
+// file.imageWidth: "Adjusts the width of the image in the survey results." => "調整調查結果中圖像的寬度。"
+// imagepicker.imageHeight: "Overrides the minimum and maximum height values." => "覆蓋最小和最大高度值。"
+// imagepicker.imageWidth: "Overrides the minimum and maximum width values." => "覆蓋最小和最大寬度值。"
+// imagepicker.choices: "\"Value\" serves as an item ID used in conditional rules; \"Text\" is displayed to respondents." => "“值”用作條件規則中使用的專案ID;向受訪者顯示“文本”。"
+// text.size: "This setting only resizes the input field and doesn't affect the width of the question box. To limit the accepted input length, go to <b>Validation → Maximum character limit</b>." => "此設置僅調整輸入欄位的大小，不會影響問題框的寬度。要限制接受的輸入長度，請轉到<b>驗證→最大字元限制</b>。"
+// comment.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
+// survey.mode: "Choose between: \"Editable\" - enables respondents to fill out your survey; \"Read-only\" - disables form editing." => "選擇：「可編輯」 - 使受訪者能夠填寫您的調查;“只讀” - 禁用表單編輯。"
+// matrixdropdowncolumn.name: "A column ID that is not visible to respondents." => "受訪者不可見的列ID。"
+// matrixdropdowncolumn.isUnique: "When enabled for a column, a respondent is required to provide a unique response for each question within this column." => "為列啟用后，受訪者需要為此列中的每個問題提供唯一的回答。"
+// matrixdropdowncolumn.rows: "Sets the number of displayed lines in the input field. If the input takes up more lines, the scroll bar will appear." => "設置輸入欄位中顯示的行數。如果輸入佔用更多行，則會出現滾動條。"
+// matrixdropdowncolumn.visibleIf: "Use the magic wand icon to set a conditional rule that determines column visibility." => "使用魔杖圖示設置確定列可見性的條件規則。"
+// matrixdropdowncolumn.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the column." => "使用魔杖圖示設置禁用列唯讀模式的條件規則。"
+// matrixdropdowncolumn.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
+// matrixdropdowncolumn.showInMultipleColumns: "When selected, creates an individual column for each choice option." => "選取後，為每個選項創建一個單獨的列。"
+// pehelp.widthMode: "Choose from: \"Static\" - sets a fixed width; \"Responsive\" - makes the survey occupy the full width of the screen; \"Auto\" - applies either of the two depending on the question types used." => "從以下選項中選擇： 「靜態」 - 設置固定寬度;“回應式” - 使調查佔據螢幕的整個寬度;“自動” - 根據所使用的問題類型應用兩者中的任何一個。"
+// pehelp.logo: "Paste an image link (no size limits) or click the folder icon to browse a file from your computer (up to 64KB)." => "粘貼圖像連結（無大小限制）或按下資料夾圖示以瀏覽電腦中的檔（最大 64KB）。"
+// pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。"
+// pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標高度。"
+// pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。調查也會自動完成。"
+// pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "設置導航按鈕在頁面上的可見性和位置。"
+// pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。"
+// pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "啟用僅包含所有問題或已回答問題的預覽頁面。"
+// pehelp.questionTitleLocation: "Applies to all questions within the survey. This setting can be overridden by title alignment rules at lower levels: panel, page, or question. A lower-level setting will override those on a higher level." => "適用於調查中的所有問題。此設置可以被較低級別的標題對齊規則覆蓋：面板、頁面或問題。較低級別的設置將覆蓋較高級別的設置。"
+// pehelp.requiredText: "A symbol or a sequence of symbols indicating that an answer is required." => "一個符號或一系列符號，表示需要答案。"
+// pehelp.questionStartIndex: "Enter a number or letter with which you want to start numbering." => "輸入要開始編號的數位或字母。"
+// pehelp.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。"
+// pehelp.focusFirstQuestionAutomatic: "Select if you want the first input field on each page ready for text entry." => "選擇是否希望每個頁面上的第一個輸入字段準備好進行文本輸入。"
+// pehelp.questionsOrder: "Keeps the original order of questions or randomizes them. The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。此設置的效果僅在「預覽」選項卡中可見。"
+// pehelp.maxTextLength: "For text entry questions only." => "僅適用於文本輸入問題。"
+// pehelp.maxOthersLength: "For question comments only." => "僅供問題評論。"
+// pehelp.autoGrowComment: "Select if you want question comments and Long Text questions to auto-grow in height based on the entered text length." => "選擇是否希望問題註釋和長文本問題根據輸入的文字長度自動增加高度。"
+// pehelp.allowResizeComment: "For question comments and Long Text questions only." => "僅適用於問題評論和長文本問題。"
+// pehelp.calculatedValues: "Custom variables serve as intermediate or auxiliary variables used in form calculations. They take respondent inputs as source values. Each custom variable has a unique name and an expression it's based on." => "自訂變數用作表單計算中使用的中間變數或輔助變數。他們將受訪者的輸入作為源值。每個自定義變數都有一個唯一的名稱和它所基於的表達式。"
+// pehelp.includeIntoResult: "Select if you wish the calculated value of the expression to be saved along with survey results." => "選擇是否希望將表達式的計算值與調查結果一起保存。"
+// pehelp.triggers: "A trigger is an event or condition that is based on an expression. Once the expression is evaluated to \"true\", a trigger sets off an action. Such an action can optionally have a target question it affects." => "觸發器是基於表達式的事件或條件。一旦表達式被計算為「true」，觸發器就會觸發一個操作。這樣的操作可以選擇性地影響它的目標問題。"
+// pehelp.clearInvisibleValues: "Choose whether or not to clear values for questions hidden by conditional logic and when to do it." => "選擇是否清除條件邏輯隱藏的問題的值以及何時清除。"
+// pehelp.textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing." => "從中選擇：「失焦時」 - 當輸入字段失去焦點時，該值會更新;“鍵入時” - 當使用者鍵入時，該值會即時更新。"
+// pehelp.columns: "The left value serves as a column ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的列ID，右邊的值顯示給受訪者。"
+// pehelp.rows: "The left value serves as a row ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的行ID，右邊的值顯示給受訪者。"
+// pehelp.columnMinWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
+// pehelp.rowTitleWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
+// pehelp.cellErrorLocation: "Sets the location of an error message in relation to a cell with invalid input. The \"Inherit\" option applies the setting from the \"Error message alignment\" property." => "設置與輸入無效的儲存格相關的錯誤訊息的位置。“繼承”選項應用“錯誤消息對齊”屬性中的設置。"
+// pehelp.keyDuplicationError: "When the \"Prevent duplicate responses\" property is enabled, a respondent attempting to submit a duplicate entry will receive the following error message." => "啟用「防止重複響應」屬性後，嘗試提交重複條目的受訪者將收到以下錯誤消息。"
+// pehelp.totalExpression: "Allows you to calculate total values based on an expression. The expression can include basic calculations (`{q1_id} + {q2_id}`), Boolean expressions (`{age} > 60`) and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "允許您根據表達式計算總值。表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、布爾表達式 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
+// pehelp.confirmDelete: "Triggers a prompt asking to confirm the row deletion." => "觸發提示，要求確認刪除行。"
+// pehelp.defaultValueFromLastRow: "Duplicates answers from the last row and assigns them to the next added dynamic row." => "複製最後一行的答案，並將其分配給下一個添加的動態行。"
+// pehelp.description: "Type a subtitle." => "鍵入副標題。"
+// pehelp.locale: "Choose a language to begin creating your survey. To add a translation, switch to a new language and translate the original text here or in the Translations tab." => "選擇一種語言以開始創建調查。要添加翻譯，請切換到新語言，然後在此處或“翻譯”選項卡中翻譯原始文本。"
+// pehelp.detailPanelMode: "Sets the location of a details section in relation to a row. Choose from: \"None\" - no expansion is added; \"Under the row\" - a row expansion is placed under each row of the matrix; \"Under the row, display one row expansion only\" - an expansion is displayed under a single row only, the remaining row expansions are collapsed." => "設置詳細資訊部分相對於行的位置。從中選擇：「無」 - 不添加擴展;“Under the row” - 矩陣的每一行下都放置一個行擴展;“在行下，僅顯示一行擴展” - 僅在單行下顯示擴展，其餘行展開將摺疊。"
+// pehelp.imageFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
+// pehelp.autoGrow: "Gradually increases the height of the input field as data is being entered. Overrides the \"Input field height (in lines)\" setting." => "在輸入數據時逐漸增加輸入欄位的高度。覆蓋「輸入欄位高度（以行為單位）」設置。"
+// pehelp.allowResize: "The resize handle (or grip) appears in the corner and can be dragged to alter the size of the input field." => "調整大小的手柄（或手柄）出現在角落，可以拖動以更改輸入字段的大小。"
+// pehelp.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the Thank You page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到“感謝”頁面。"
+// pehelp.maxTimeToFinishPage: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
+// page.maxTimeToFinish: "A time interval in seconds after which the survey auto-advances to the next page." => "以秒為單位的時間間隔，在此時間間隔之後，調查將自動前進到下一頁。"
+// page.visibleIf: "Use the magic wand icon to set a conditional rule that determines page visibility." => "使用魔杖圖示設置確定頁面可見性的條件規則。"
+// page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "使用魔杖圖示設置禁用頁面只讀模式的條件規則。"
+// page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "使用魔杖圖示設置條件規則，除非至少有一個嵌套問題有答案，否則該規則將阻止調查提交。"
+// page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "適用於本頁中的所有問題。如果要覆蓋此設置，請為單個問題或面板定義標題對齊規則。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "設置與輸入無效的問題相關的錯誤消息的位置。選擇：「頂部」 - 錯誤文本放置在問題框的頂部;“底部” - 錯誤文本放置在問題框的底部。“繼承”選項將應用調查級別設置（預設為“頂部”）。"
+// page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "保持問題的原始順序或隨機化問題。繼承「選項應用調查級別設置（預設為」原始」。）。此設置的效果僅在「預覽」選項卡中可見。"
+// page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "設置導航按鈕在頁面上的可見性。“繼承”選項應用調查級別設置，預設為“可見”。"
+// pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "設置計時器在頁面上的可見性和位置。"
+// pehelp.panelsState: "Choose from: \"Locked\" - users cannot expand or collapse panels; \"Collapse all\" - all panels start in a collapsed state; \"Expand all\" - all panels start in an expanded state; \"First expanded\" - only the first panel is initially expanded." => "從以下選項中選擇：「鎖定」 - 使用者無法展開或摺疊面板;“全部摺疊” - 所有面板都以摺疊狀態啟動;“全部展開” - 所有面板都以展開狀態啟動;“首先展開” - 最初只有第一個面板被展開。"
+// pehelp.imageLinkName: "Enter a shared property name within the array of objects that contains the image or video file URLs you want to display in the choice list." => "在物件陣列中輸入共用屬性名稱，該數位包含要在選項清單中顯示的圖像或視頻檔URL。"
+// pehelp.choices: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"
+// pehelp.title: "Type a user-friendly title to display." => "鍵入要顯示的使用者友好標題。"
+// pehelp.waitForUpload: "Ensures that users won't complete the survey until files are uploaded." => "確保使用者在上傳檔之前不會完成調查。"
+// pehelp.minWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
+// pehelp.maxWidth: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
+// pehelp.width: "Accepts CSS values (px, %, in, pt, etc.)." => "接受 CSS 值（px、%、in、pt 等）。"
+// pehelp.useDisplayValuesInDynamicTexts: "In single- and multiple-selection question types, each choice option has an ID and display value. When selected, this setting shows a display value instead of an ID value in HTML questions and dynamic titles and descriptions of survey elements." => "在單選題和多選題類型中，每個選項都有一個 ID 和顯示值。選中此設置后，將在 HTML 問題以及調查元素的動態標題和描述中顯示顯示值，而不是 ID 值。"
+// pehelp.clearIfInvisible: "Choose whether or not to clear question values hidden by conditional logic and when to do it. The \"Inherit\" option applies the survey-level setting (\"Upon survey completion\" by default)." => "選擇是否清除條件邏輯隱藏的問題值以及何時清除。“繼承”選項應用調查級別設置（預設為“完成調查後”）。"
+// pehelp.choicesFromQuestionMode: "Choose from: \"All\" - copies all choice options from the selected question; \"Selected\" - dynamically copies only selected choice options; \"Unselected\" - dynamically copies only unselected choice options. The \"None\" and \"Other\" options are copied by default if enabled in the source question." => "從以下選項中選擇：「全部」 - 複製所選問題中的所有選項;“Selected” - 僅動態複製選定的選項選項;“未選擇” - 僅動態複製未選擇的選項。默認情況下，如果在源問題中啟用了“無”和“其他”選項，則會複製該選項。"
+// pehelp.showOtherItem: "When selected, users can include additional input in a separate comment box." => "選取後，使用者可以在單獨的註釋框中包含其他輸入。"
+// pehelp.separateSpecialChoices: "Displays each special choice option (\"None\", \"Other\", \"Select All\") on a new line, even when using a multiple-column layout." => "在新行上顯示每個特殊選項（“無”、“其他”、“全選”），即使使用多列佈局也是如此。"
+// pehelp.path: "Specify the location within the service dataset where the target array of objects is located. Leave empty if the URL already points to the array." => "指定服務數據集中目標物件陣列所在的位置。如果 URL 已指向陣列，則留空。"
+// pehelp.titleName: "Enter a uniform property name within the array of objects that contains the values you want to display in the choice list." => "在物件陣列中輸入一個統一的屬性名稱，該陣列包含要在選項清單中顯示的值。"
+// pehelp.allowEmptyResponse: "Select to allow the service to return an empty response or array." => "選擇此選項可允許服務傳回空回應或陣列。"
+// pehelp.choicesVisibleIf: "Use the magic wand icon to set a conditional rule that determines the visibility of all choice options." => "使用魔杖圖示設置條件規則，以確定所有選項的可見性。"
+// pehelp.rateValues: "The left value serves as an item ID used in conditional rules, the right value is displayed to respondents." => "左邊的值用作條件規則中使用的專案ID，右邊的值顯示給受訪者。"
+// rating.displayMode: "\"Auto\" selects between the \"Buttons\" and \"Dropdown\" modes based on the available width. When the width is insufficient to display buttons, the question displays a dropdown." => "“自動”根據可用寬度在“按鈕”和“下拉”模式之間進行選擇。當寬度不足以顯示按鈕時，問題將顯示一個下拉清單。"
+// pehelp.valuePropertyName: "Allows you to connect questions that produce results in different formats. When such questions are linked together using a join identifier, this shared property stores selected question values." => "允許您連接以不同格式生成結果的問題。當使用聯接標識碼將此類問題連結在一起時，此共用屬性將存儲選定的問題值。"
+// pehelp.searchEnabled: "Select if you want to update the drop-down menu contents to match the search query that a user is typing in the input field." => "選擇是否要更新下拉功能表內容以匹配使用者在輸入欄位中鍵入的搜索查詢。"
+// pehelp.valueTrue: "A value to save in survey results when respondents give a positive answer." => "當受訪者給出肯定答案時保存在調查結果中的值。"
+// pehelp.valueFalse: "A value to save in survey results when respondents give a negative answer." => "當受訪者給出否定答案時保存在調查結果中的值。"
+// pehelp.showPreview: "It's not recommended to disable this option as it overrides the Preview image and makes it hard for a user to understand whether the files have been uploaded." => "不建議禁用此選項，因為它會覆蓋預覽圖像，並使用戶難以了解檔是否已上傳。"
+// pehelp.needConfirmRemoveFile: "Triggers a prompt asking to confirm the file deletion." => "觸發提示，要求確認文件刪除。"
+// pehelp.selectToRankEnabled: "Enable to rank only selected choices. Users will drag selected items from the choice list to order them within the ranking area." => "啟用此選項可僅對選定的選項進行排名。使用者將從選項清單中拖動所選專案，以在排名區域內對它們進行排序。"
+// pehelp.dataList: "Enter a list of choices that will be suggested to the respondent during input." => "輸入將在輸入期間向受訪者建議的選項清單。"
+// pehelp.itemSize: "The setting only resizes the input fields and doesn't affect the width of the question box." => "該設置僅調整輸入欄位的大小，不會影響問題框的寬度。"
+// pehelp.itemTitleWidth: "Sets consistent width for all item labels in pixels" => "為所有項目標籤設定一致的寬度（以像素為單位）"
+// pehelp.contentMode: "The \"Auto\" option automatically determines the suitable mode for display - Image, Video, or YouTube - based on the source URL provided." => "“自動”選項會根據提供的源URL自動確定合適的顯示模式 - 圖像、視頻或YouTube。"
+// pehelp.altText: "Serves as a substitute when the image cannot be displayed on a user's device and for accessibility purposes." => "當圖像無法在使用者設備上顯示時，出於輔助功能的目的，可作為替代。"
+// pehelp.rateColorMode: "Defines the color of the selected emoji when the Rating icon type is set to \"Smileys\". Choose between: \"Default\" - the selected emoji appears in default survey color; \"Scale\" - the selected emoji inherits color from the rating scale." => "定義當評級圖示類型設置為「笑臉」時所選表情符號的顏色。選擇：「預設」 - 選取表情符號以預設調查顏色顯示;“比例” - 所選的表情符號繼承了評分量表的顏色。"
+// expression.name: "An expression ID that is not visible to respondents." => "受訪者不可見的表達式ID。"
+// expression.description: "Type an expression subtitle." => "鍵入表達式副標題。"
+// expression.expression: "An expression can include basic calculations (`{q1_id} + {q2_id}`), conditions (`{age} > 60`), and functions ('iif()`, `today()`, `age()`, `min()`, `max()`, `avg()`, etc.)." => "表達式可以包括基本計算 （'{q1_id} + {q2_id}'）、條件 （'{age} > 60'） 和函數 （'iif（）'、'today（）'、'age（）'、'min（）'、'max（）'、'avg（）' 等）。"
+// pehelp.storeOthersAsComment: "Select to store the \"Other\" option value as a separate property in survey results." => "選擇此選項可將「其他」選項值作為單獨的屬性存儲在調查結果中。"
+// p.swapOrder: "Swap the order of Yes and No" => "交換“是”和“否”的順序"
+// p.itemTitleWidth: "Item label width (in px)" => "項目標籤寬度（以 px 為單位）"
+// p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "顯示是否選擇了所有選項的文字"
+// p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名區域的佔位元文本"
