@@ -8,16 +8,26 @@ svc-toolbox {
 
 .svc-toolbox {
   height: 100%;
-  padding: calcSize(2);
+  padding: calcSize(2) calc(calcSize(2) - 12px);
   box-sizing: border-box;
   overflow-y: auto;
   direction: rtl;
+  scrollbar-gutter: stable both-edges;
+}
+
+_::-webkit-full-page-media,
+_:future {
+  .svc-toolbox {
+    padding: calcSize(2);
+  }
 }
 
 .svc-toolbox--compact {
   width: calcSize(10.5);
   overflow: visible;
   direction: ltr;
+  scrollbar-gutter: auto;
+  padding: calcSize(2);
 }
 
 .svc-toolbox__container {
@@ -111,7 +121,7 @@ svc-toolbox {
 }
 
 
-.svc-toolbox__category--collapsed{
+.svc-toolbox__category--collapsed {
   .svc-toolbox__tool {
     height: 0;
     visibility: hidden;

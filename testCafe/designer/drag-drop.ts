@@ -967,7 +967,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Question1 = Selector("[data-name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
-  const ChoicesTab = Selector("h4").withExactText("Choices");
+  const ChoicesTab = Selector("h4").withExactText("Choice Options");
   await t.click(ChoicesTab);
 
   const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);

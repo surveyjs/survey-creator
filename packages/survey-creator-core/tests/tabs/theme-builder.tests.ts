@@ -1,5 +1,5 @@
 import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel, settings as surveySettings } from "survey-core";
-import { ThemeBuilder, getThemeChanges } from "../../src/components/tabs/theme-builder";
+import { ThemeEditorModel, getThemeChanges } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
 export { QuestionSpinEditorModel } from "../../src/custom-questions/question-spin-editor";
@@ -8,7 +8,7 @@ import { elementSettingsFromCssVariable, elementSettingsToCssVariable } from "..
 import { fontsettingsToCssVariable, fontsettingsFromCssVariable } from "../../src/components/tabs/theme-custom-questions/font-settings";
 import { createColor } from "../../src/components/tabs/theme-custom-questions/color-settings";
 import { createBoxShadow, parseBoxShadow } from "../../src/components/tabs/theme-custom-questions/boxshadow-settings";
-import { ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
+import { IPropertyGridSurveyCreatedEvent, ThemeTabPlugin } from "../../src/components/tabs/theme-plugin";
 import { assign, parseColor } from "../../src/utils/utils";
 import { settings } from "../../src/creator-settings";
 import { CreatorTester } from "../creator-tester";
@@ -78,7 +78,7 @@ const themeFromFile = {
 };
 
 beforeEach(() => {
-  ThemeBuilder.DefaultTheme = Themes["default-light"];
+  ThemeEditorModel.DefaultTheme = Themes["default-light"];
 });
 
 test("assign function", (): any => {
@@ -95,7 +95,7 @@ test("Theme builder initialization", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
 
   expect(themeEditor.getQuestionByName("themeName").value).toEqual("default");
@@ -119,7 +119,7 @@ test("Theme builder panelBackgroundTransparency", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const panelBackgroundTransparency = themeEditor.getQuestionByName("panelBackgroundTransparency");
 
@@ -138,7 +138,7 @@ test("Theme builder questionBackgroundTransparency", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
@@ -157,7 +157,7 @@ test("Theme builder: survey settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const simulatorSurvey = themeSurveyTab.survey;
 
@@ -192,7 +192,7 @@ test("Theme builder switch themes", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const themePalette = themeEditor.getQuestionByName("themePalette");
   const primaryColor = themeEditor.getQuestionByName("--sjs-primary-backcolor");
@@ -212,7 +212,7 @@ test("Theme builder: composite question fontSettings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
 
@@ -244,7 +244,7 @@ test("Theme builder: composite question values are lost", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
   const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
@@ -417,7 +417,7 @@ test("Theme builder: composite question values set default value", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const pageTitleFontSettings = themeEditor.getQuestionByName("pageTitle");
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-font-pagetitle-family"]).toBeUndefined();
@@ -443,7 +443,7 @@ test("Theme builder: composite question elementSettings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
@@ -557,7 +557,7 @@ test("Theme builder reset to default", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
@@ -577,7 +577,7 @@ test("Theme builder themeMode not change modified values ", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const themeMode = themeEditor.getQuestionByName("themeMode");
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
@@ -672,7 +672,7 @@ test("Check reset for sjs-shadow-inner due to animation", () => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let shadowSmallEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-small");
   let shadowInnerEditor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-shadow-inner");
   let cssVariables: any;
@@ -920,7 +920,7 @@ test("Theme builder export value from composite question", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionDimLightBackground = themeEditor.getQuestionByName("--sjs-general-backcolor-dim-light");
 
@@ -946,7 +946,7 @@ test("import theme from file", (done) => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeBuilder.themeEditorSurvey;
 
   const data = JSON.stringify({
@@ -978,7 +978,7 @@ test("export theme to file", (done): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
 
   themeEditor.getQuestionByName("questionTitle").contentPanel.getQuestionByName("size").value = 19;
@@ -1005,7 +1005,7 @@ test("Theme builder: restore values of elementSettings from file", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionPanelSettings = themeEditor.getQuestionByName("questionPanel");
 
@@ -1040,7 +1040,7 @@ test("Theme builder: restore values of fontsettings from file", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
 
@@ -1078,7 +1078,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   creator.activeTab = "theme";
-  let themeSurveyTab = themePlugin.model as ThemeBuilder;
+  let themeSurveyTab = themePlugin.model as ThemeEditorModel;
   let questionTitleFontSettings = themeSurveyTab.themeEditorSurvey.getQuestionByName("questionTitle");
   expect(questionTitleFontSettings.getQuestionByName("family").value).toEqual("Open Sans");
   expect(questionTitleFontSettings.getQuestionByName("color").value).toEqual("rgba(0, 0, 0, 0.91)");
@@ -1095,7 +1095,7 @@ test("Theme builder: restore questionTitle switch tabs", (): any => {
 
   creator.activeTab = "designer";
   creator.activeTab = "theme";
-  themeSurveyTab = themePlugin.model as ThemeBuilder;
+  themeSurveyTab = themePlugin.model as ThemeEditorModel;
   questionTitleFontSettings = themeSurveyTab.themeEditorSurvey.getQuestionByName("questionTitle");
 
   expect(questionTitleFontSettings.getQuestionByName("family").value).toEqual("Open Sans");
@@ -1133,7 +1133,7 @@ test("Theme onModified and saveThemeFunc", (): any => {
     modificationsLog += "->THEME_MODIFIED";
   });
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeBuilder.themeEditorSurvey;
 
   expect(modificationsLog).toBe("");
@@ -1187,7 +1187,7 @@ test("Theme undo redo changes", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const question = themeEditor.getQuestionByName("--sjs-general-backcolor-dim");
 
@@ -1220,7 +1220,7 @@ test("Theme undo redo general settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const backgroundImageQuestion = themeEditor.getQuestionByName("backgroundImage");
 
@@ -1254,7 +1254,7 @@ test("Theme undo redo calculated questions", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const accentColorQuestion = themeEditor.getQuestionByName("--sjs-primary-backcolor");
   const accentColorDarkQuestion = themeEditor.getQuestionByName("--sjs-primary-backcolor-dark");
@@ -1298,7 +1298,7 @@ test("Theme undo redo expression questions", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const commonFontSizeQuestion = themeEditor.getQuestionByName("commonFontSize");
 
@@ -1336,7 +1336,7 @@ test("Theme builder: trigger responsiveness", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   let log = "";
   themeSurveyTab.survey.triggerResponsiveness = (hard: boolean) => {
@@ -1361,7 +1361,7 @@ test("Theme builder restore PG editor", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
 
   expect(themeSurveyTab.currentThemeCssVariables["--sjs-corner-radius"]).toEqual("20px");
@@ -1384,7 +1384,7 @@ test("Add theme before activate", (): any => {
   expect(themePlugin.availableThemes).toStrictEqual(themes.concat(["custom"]));
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditor.getQuestionByName("themeName") as QuestionDropdownModel;
 
@@ -1402,7 +1402,7 @@ test("Change available themes after activate", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditor.getQuestionByName("themeName") as QuestionDropdownModel;
 
@@ -1427,7 +1427,7 @@ test("Disable/hide properties in theme property grid", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
@@ -1464,7 +1464,7 @@ test("Keep theme css changes throgh the different themes choosen", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
@@ -1508,7 +1508,7 @@ test("findSuitableTheme", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
 
   expect(themeBuilder.findSuitableTheme("default").themeName).toEqual("default");
   expect(themeBuilder.findSuitableTheme("default").colorPalette).toEqual("light");
@@ -1529,7 +1529,7 @@ test("selectTheme", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
@@ -1554,7 +1554,7 @@ test("onThemeSelected + onThemePropertyChanged events", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
@@ -1605,7 +1605,7 @@ test("onAllowModifyTheme events + use creator.readOnly", (): any => {
   });
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themePalette = themeEditorSurvey.getQuestionByName("themePalette");
@@ -1629,7 +1629,7 @@ test("themeMode is switching to panelless and back", (): any => {
   creator.readOnly = true;
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themeMode = themeEditorSurvey.getQuestionByName("themeMode");
@@ -1664,7 +1664,7 @@ test("disable irrelevant settings", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  let themeEditorSurvey = (themePlugin.model as ThemeEditorModel).themeEditorSurvey;
 
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
@@ -1702,7 +1702,7 @@ test("disable irrelevant settings", (): any => {
   };
 
   themePlugin.activate();
-  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  themeEditorSurvey = (themePlugin.model as ThemeEditorModel).themeEditorSurvey;
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
   expect(themeEditorSurvey.getQuestionByName("pageTitle").isReadOnly).toBeFalsy();
@@ -1715,7 +1715,7 @@ test("disable page settings if single page mode", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  let themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  let themeEditorSurvey = (themePlugin.model as ThemeEditorModel).themeEditorSurvey;
   expect(creator.survey.isSinglePage).toBeFalsy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyTitle").isReadOnly).toBeTruthy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyDescription").isReadOnly).toBeTruthy();
@@ -1754,7 +1754,7 @@ test("disable page settings if single page mode", (): any => {
   };
 
   themePlugin.activate();
-  themeEditorSurvey = (themePlugin.model as ThemeBuilder).themeEditorSurvey;
+  themeEditorSurvey = (themePlugin.model as ThemeEditorModel).themeEditorSurvey;
   expect(creator.survey.isSinglePage).toBeTruthy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyTitle").isReadOnly).toBeFalsy();
   expect(themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("surveyDescription").isReadOnly).toBeFalsy();
@@ -1768,7 +1768,7 @@ test("headerViewContainer init state", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
@@ -1789,13 +1789,11 @@ test("headerViewContainer init state", (): any => {
     "textAreaWidth": 512,
     "height": 256,
     "headerDescription": {
-      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 16,
       "weight": "600",
     },
     "headerTitle": {
-      "color": "rgba(255, 255, 255, 1)",
       "family": "Open Sans",
       "size": 32,
       "weight": "700",
@@ -1819,7 +1817,7 @@ test("set headerViewContainer basic", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
   const surveyTitleQuestion = headerViewContainer.getElementByName("surveyTitle");
@@ -1858,7 +1856,7 @@ test("set headerViewContainer advanced", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
@@ -1935,7 +1933,7 @@ test("headerViewContainer survey title & description", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
@@ -1996,7 +1994,7 @@ test("restore headerViewContainer values", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer");
 
@@ -2048,7 +2046,8 @@ test("headerViewContainer get color values from theme", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.theme = {
     "cssVariables": {
-      "--sjs-primary-forecolor": "rgba(32, 32, 32, 1)",
+      "--sjs-font-headertitle-color": "rgba(219, 15, 15, 0.91)",
+      "--sjs-font-headerdescription-color": "rgba(50, 16, 218, 0.45)",
     },
     "header": {
       "backgroundImage": "",
@@ -2068,14 +2067,14 @@ test("headerViewContainer get color values from theme", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const headerViewContainer = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
   const headerTitleQuestion = headerViewContainer.getElementByName("headerTitle");
   const headerDescriptionQuestion = headerViewContainer.getElementByName("headerDescription");
 
-  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
-  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(32, 32, 32, 1)");
+  expect(headerTitleQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(219, 15, 15, 0.91)");
+  expect(headerDescriptionQuestion.contentPanel.getQuestionByName("color").value).toEqual("rgba(50, 16, 218, 0.45)");
 });
 
 test("headerViewContainer: restore backgroundColorSwitch", (): any => {
@@ -2084,7 +2083,7 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   headerViewContainer.getElementByName("headerView").value = "advanced";
@@ -2098,11 +2097,24 @@ test("headerViewContainer: restore backgroundColorSwitch", (): any => {
   expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("transparent");
 
   creator.activeTab = "theme";
-  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeBuilder = themePlugin.model as ThemeEditorModel;
   headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("none");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeEditorModel;
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
 });
 
 test("headerViewContainer: background color", (): any => {
@@ -2111,7 +2123,7 @@ test("headerViewContainer: background color", (): any => {
 
   creator.activeTab = "theme";
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
 
   headerViewContainer.getElementByName("headerView").value = "advanced";
@@ -2136,7 +2148,7 @@ test("Get theme changes only", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
@@ -2296,7 +2308,7 @@ test("Desktop mode: add advanced mode switcher", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const propertyGridGroups = themeEditorSurvey.pages[0].elements;
   expect(propertyGridGroups.length).toBe(4);
@@ -2316,7 +2328,7 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
 
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const propertyGridGroups = themeEditorSurvey.pages[0].elements;
   expect(propertyGridGroups.length).toBe(4);
@@ -2333,7 +2345,7 @@ test("loadTheme fill all theme parameters: name, mode and compactness", (): any 
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
 
   themeBuilder.setTheme(<any>{ isPanelless: true });
   expect(creator.theme.themeName).toBe("default");
@@ -2349,7 +2361,7 @@ test("Check all file edit questions has onChooseFiles callback", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   expect(!!themeEditorSurvey.getQuestionByName("backgroundImage").onChooseFilesCallback).toBeTruthy();
   expect(!!(<QuestionPanelDynamicModel>themeEditorSurvey.getPanelByName("groupHeader").questions[0]).panels[0].getQuestionByName("backgroundImage").onChooseFilesCallback).toBeTruthy();
@@ -2364,7 +2376,7 @@ test("Pass background image from survey to theme editor and back", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let themeEditorSurvey = themeBuilder.themeEditorSurvey;
   expect(creator.theme.backgroundImage).toBe(lionImage);
   expect(themeBuilder.backgroundImage).toBe(lionImage);
@@ -2385,7 +2397,7 @@ test("Pass background image from survey to theme editor and back", (): any => {
 
   themePlugin.deactivate();
   themePlugin.activate();
-  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeBuilder = themePlugin.model as ThemeEditorModel;
   themeEditorSurvey = themeBuilder.themeEditorSurvey;
   expect(creator.theme.backgroundImage).toBe("");
   expect(themeBuilder.backgroundImage).toBe("");
@@ -2399,7 +2411,7 @@ test("Keep background image in theme modifications", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   expect(creator.theme.backgroundImage).toBe(undefined);
@@ -2422,7 +2434,7 @@ test("Keep background image in theme modifications", (): any => {
   expect(creator.theme.backgroundImage).toBe(lionImage);
 
   themePlugin.activate();
-  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeBuilder = themePlugin.model as ThemeEditorModel;
   themeEditorSurvey = themeBuilder.themeEditorSurvey;
   expect(creator.theme.backgroundImage).toBe(lionImage);
   expect(themeBuilder.backgroundImage).toBe(lionImage);
@@ -2442,7 +2454,7 @@ test("Keep theme modifications between edit sessions", (): any => {
   };
   let themePlugin: ThemeTabPlugin = creator.getPlugin<ThemeTabPlugin>("theme");
   themePlugin.activate();
-  let themeBuilder = themePlugin.model as ThemeBuilder;
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
   let themeEditorSurvey = themeBuilder.themeEditorSurvey;
   let primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
   let themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
@@ -2471,7 +2483,7 @@ test("Set and use custom default theme", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
 
-  expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
+  expect(ThemeEditorModel.DefaultTheme).toEqual(Themes["default-light"]);
 
   const themes: string[] = [].concat(PredefinedThemes);
   expect(themePlugin.availableThemes).toStrictEqual(themes);
@@ -2479,7 +2491,7 @@ test("Set and use custom default theme", (): any => {
   const customTheme = { themeName: "custom", cssVariables: { "--a-var": "aVal" } };
   const fullThemeName = themePlugin.addTheme(customTheme, true);
   expect(Themes[fullThemeName]).toEqual(customTheme);
-  expect(ThemeBuilder.DefaultTheme).toEqual(customTheme);
+  expect(ThemeEditorModel.DefaultTheme).toEqual(customTheme);
   expect(themePlugin.availableThemes).toStrictEqual(["custom"].concat(themes));
 
   themePlugin.activate();
@@ -2506,7 +2518,7 @@ test("Set and use custom default theme", (): any => {
   expect(creator.theme.cssVariables["--a-var"]).toBe("aVal");
 
   themePlugin.activate();
-  themeBuilder = themePlugin.model as ThemeBuilder;
+  themeBuilder = themePlugin.model as ThemeEditorModel;
   themeEditorSurvey = themeBuilder.themeEditorSurvey;
   themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   expect(themeChooser.value).toBe("custom");
@@ -2514,7 +2526,7 @@ test("Set and use custom default theme", (): any => {
   expect(themeBuilder.survey.themeVariables["--a-var"]).toBe("aVal");
 
   themePlugin.removeTheme(customTheme);
-  expect(ThemeBuilder.DefaultTheme).toEqual(Themes["default-light"]);
+  expect(ThemeEditorModel.DefaultTheme).toEqual(Themes["default-light"]);
   expect(themeChooser.value).toBe("default");
   expect(creator.theme.cssVariables["--a-var"]).toBe(undefined);
   expect(themeBuilder.survey.themeVariables["--a-var"]).toBe(undefined);
@@ -2533,7 +2545,7 @@ test("Reset theme action calls confitmation dialog", (): any => {
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   const questionBackgroundTransparency = themeEditor.getQuestionByName("questionBackgroundTransparency");
 
@@ -2566,7 +2578,7 @@ test("Keep background image on reset theme action for default session theme", ()
   creator.theme = customTheme;
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
 
   expect(themeBuilder.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
   themeBuilder.defaultSessionTheme = creator.theme;
@@ -2602,7 +2614,7 @@ test("Reset theme to default one", (): any => {
   creator.theme = customTheme;
 
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
 
   expect(themeBuilder.defaultSessionTheme).toStrictEqual(Themes["default-light"]);
 
@@ -2638,7 +2650,7 @@ test("Check Theme builder's custom questions respect creator locale", (): any =>
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   expect(themeEditor.getQuestionByName("--sjs-primary-backcolor").contentPanel.getQuestionByName("opacity").title).toBe("opacity_test");
   expect(themeEditor.getQuestionByName("--sjs-shadow-small").contentQuestion.panels[0].getQuestionByName("x").title).toBe("boxShadowX_test");
@@ -2666,7 +2678,7 @@ test("saveTheme action", (): any => {
   creator.activeTab = "theme";
   expect(themePlugin["saveThemeAction"].visible).toBeTruthy();
   expect(themePlugin["saveThemeAction"].enabled).toBeFalsy();
-  const themeSurveyTab = themePlugin.model as ThemeBuilder;
+  const themeSurveyTab = themePlugin.model as ThemeEditorModel;
   const themeEditor = themeSurveyTab.themeEditorSurvey;
   themeEditor.getQuestionByName("--sjs-primary-backcolor").value = "some val";
   expect(themePlugin["saveThemeAction"].enabled).toBeTruthy();
@@ -2681,7 +2693,7 @@ test("Disable/enable themePalette property for custom theme variations in theme 
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
@@ -2748,7 +2760,7 @@ test("Disable/enable themeMode property for custom theme variations in theme pro
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
@@ -2851,9 +2863,49 @@ test("Simulator survey should respect survey current locale", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   expect(themeBuilder.simulator.survey.locale).toBe(creator.survey.locale);
   expect(themeBuilder.simulator.survey.locLogo.renderedHtml).toBe("FR logo");
+});
+
+test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.themeEditor.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
+    const defaultValueElement = options.survey.findQuestionByName("questionTitle")["defaultValue"];
+
+    const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
+    options.model.addPropertyGridEditor({ element: newFontSettings, insertBefore: "questionTitle" });
+    newFontSettings.title = "Question title font";
+    newFontSettings.value = defaultValueElement;
+
+    const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
+    options.model.addPropertyGridEditor({ element: newMatrixFontSettings, insertAfter: "questionTitle" });
+    newMatrixFontSettings.title = "Matrix title font";
+    newMatrixFontSettings.value = defaultValueElement;
+
+    options.model.removePropertyGridEditor("questionTitle");
+  });
+  creator.themeEditor.activate();
+  const themeBuilder = creator.themeEditor.model as ThemeEditorModel;
+  const themeEditor = themeBuilder.themeEditorSurvey;
+
+  const questionTitleFontSettings = themeEditor.getQuestionByName("questionTitle");
+  expect(questionTitleFontSettings).toBeNull();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-family"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-weight"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-color"]).toBeUndefined();
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-questiontitle-size"]).toBeUndefined();
+
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-family"]).toBe("Open Sans");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-weight"]).toBe("600");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-color"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-custom-question-title-size"]).toBe("16px");
+
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-family"]).toBe("Open Sans");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-weight"]).toBe("600");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-color"]).toBe("rgba(0, 0, 0, 0.91)");
+  expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-size"]).toBe("16px");
 });
 
 test("Reset theme action availability", (): any => {
@@ -2867,7 +2919,7 @@ test("Reset theme action availability", (): any => {
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   const resetThemeAction = themePlugin["resetTheme"];
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const themeMode = themeEditorSurvey.getQuestionByName("themeMode") as QuestionButtonGroupModel;
@@ -2922,7 +2974,7 @@ test("Custom theme assigned to creator", (): any => {
   };
   const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
   themePlugin.activate();
-  const themeBuilder = themePlugin.model as ThemeBuilder;
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
   const themeEditorSurvey = themeBuilder.themeEditorSurvey;
   const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
   const primaryBackColor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
@@ -2979,4 +3031,60 @@ test("getThemeChanges", (): any => {
   expect(themeChanges.isPanelless).toBe(true);
   expect(Object.keys(themeChanges.cssVariables!)).toStrictEqual(["--sjs-primary-backcolor"]);
   expect(themeChanges.cssVariables!["--sjs-primary-backcolor"]).toBe("rgba(255, 0, 0, 1)");
+});
+
+test("header custom background color and theme changes", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+
+  creator.activeTab = "theme";
+  let themeBuilder = themePlugin.model as ThemeEditorModel;
+  let headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+  let themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  let primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+
+  headerViewContainer.getElementByName("headerView").value = "advanced";
+  expect(headerViewContainer.getElementByName("backgroundColorSwitch").value).toEqual("accentColor");
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+
+  headerViewContainer.getElementByName("backgroundColorSwitch").value = "custom";
+  expect(headerViewContainer.getElementByName("backgroundColor").value).toBeUndefined();
+  headerViewContainer.getElementByName("backgroundColor").value = "#ff0000";
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeEditorModel;
+  themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  expect(themeChooser.value).toEqual("default");
+  expect(primaryBackColor.value).toEqual("rgba(25, 179, 148, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+
+  themeBuilder.selectTheme("contrast");
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+
+  creator.activeTab = "designer";
+  expect(creator.theme.cssVariables["--sjs-header-backcolor"]).toBe("#ff0000");
+
+  creator.activeTab = "theme";
+  themeBuilder = themePlugin.model as ThemeEditorModel;
+  themeChooser = themeBuilder.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+  primaryBackColor = themeBuilder.themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+  headerViewContainer = themeBuilder.themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0];
+
+  expect(themeChooser.value).toEqual("contrast");
+  expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
+  expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
+  expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
 });

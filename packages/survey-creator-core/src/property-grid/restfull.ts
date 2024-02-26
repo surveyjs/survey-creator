@@ -14,6 +14,7 @@ import {
 } from "./index";
 import { ISurveyCreatorOptions } from "../creator-settings";
 import { editorLocalization } from "../editorLocalization";
+import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 var json = {
   name: "propertygrid_restfull",
@@ -42,10 +43,11 @@ export class PropertyGridEditorQuestionRestfull extends PropertyGridEditorQuesti
       titleLocation: "hidden"
     };
   }
-  onCreated(obj: Base, question: Question, prop: JsonObjectProperty, options: ISurveyCreatorOptions): void {
+  onCreated(obj: Base, question: Question, prop: JsonObjectProperty,
+    options: ISurveyCreatorOptions, propGridDefinition?: ISurveyPropertyGridDefinition): void {
     const panel = <PanelModel>question["contentPanel"];
     const choicesByUrl = obj[prop.name];
-    new PropertyJSONGenerator(choicesByUrl, options, obj, prop).setupObjPanel(panel, true);
+    new PropertyJSONGenerator(choicesByUrl, options, obj, prop, propGridDefinition).setupObjPanel(panel, true);
     const test = <QuestionDropdownModel>panel.addNewQuestion("dropdown", "test");
     test.title = editorLocalization.getString("ed.choicesLoadedFromWebPreviewTitle");
     test.choices = [];

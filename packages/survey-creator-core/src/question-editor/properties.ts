@@ -1,7 +1,8 @@
 import {
   SurveyQuestionEditorDefinition,
   ISurveyQuestionEditorDefinition,
-  ISurveyPropertyGridDefinition
+  ISurveyPropertyGridDefinition,
+  defaultPropertyGridDefinition
 } from "./definition";
 import { JsonObjectProperty, Serializer, JsonMetadataClass } from "survey-core";
 import { SurveyHelper } from "../survey-helper";
@@ -37,12 +38,12 @@ export class SurveyQuestionProperties {
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
   public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
-    if(!propertyGridDefinition) propertyGridDefinition = SurveyQuestionEditorDefinition.definition;
-    const props = propertyGridDefinition[className]?.properties;
-    if(!Array.isArray(props)) return "";
-    for(let i = 0; i < props.length; i ++) {
+    if (!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
+    const props = propertyGridDefinition.classes[className]?.properties;
+    if (!Array.isArray(props)) return "";
+    for (let i = 0; i < props.length; i++) {
       const prop = props[i];
-      if(typeof prop === "object" && prop.name === propName) return prop.placeholder || "";
+      if (typeof prop === "object" && prop.name === propName) return prop.placeholder || "";
     }
     return "";
   }
@@ -55,8 +56,8 @@ export class SurveyQuestionProperties {
     private parentProperty: JsonObjectProperty = null,
     private propertyGridDefinition: ISurveyPropertyGridDefinition = null
   ) {
-    if(!this.propertyGridDefinition) {
-      this.propertyGridDefinition = SurveyQuestionEditorDefinition.definition;
+    if (!this.propertyGridDefinition) {
+      this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
     this.properties = Serializer.getPropertiesByObj(this.obj);
@@ -66,6 +67,10 @@ export class SurveyQuestionProperties {
   public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
     return !!res && res.visible ? res.property : null;
+  }
+  public getPropertyAsCategory(propertyName: string): JsonObjectProperty {
+    const prop = this.getProperty(propertyName);
+    return prop && (!prop.category || prop.category === propertyName) ? prop : null;
   }
   public get showMode(): string {
     return !!this.showModeValue ? this.showModeValue : "form";
@@ -78,7 +83,8 @@ export class SurveyQuestionProperties {
     return true;
   }
   private getClassDefintion(name: string): ISurveyQuestionEditorDefinition {
-    return this.propertyGridDefinition[name];
+    if (!this.propertyGridDefinition || !this.propertyGridDefinition.classes) return undefined;
+    return this.propertyGridDefinition.classes[name];
   }
   private fillPropertiesHash() {
     this.propertiesHash = {};
@@ -161,11 +167,11 @@ export class SurveyQuestionProperties {
   }
   private setParentTabs(): void {
     this.tabs.forEach(tab => {
-      if(tab.parentName) {
+      if (tab.parentName) {
         const parent = this.getTabByName(tab.parentName);
-        if(parent) {
+        if (parent) {
           tab.parent = parent;
-          if(!Array.isArray(parent.tabs)) {
+          if (!Array.isArray(parent.tabs)) {
             parent.tabs = [];
           }
           parent.tabs.push(tab);
@@ -193,7 +199,7 @@ export class SurveyQuestionProperties {
     var isString = typeof defProperty == "string";
     var name = !isString ? defProperty.name : defProperty;
     var propRes = this.propertiesHash[name];
-    if (!propRes) return false;
+    if (!propRes || isTab && !this.getPropertyAsCategory(name)) return false;
     if (!isString && defProperty.visible === false) return false;
     if (
       !propRes.visible &&
@@ -238,7 +244,7 @@ export class SurveyQuestionProperties {
     propName: string
   ): SurveyQuestionEditorTabDefinition {
     if (!propName) return null;
-    if(this.isPropertyOnSameLine(propName)) propName = propName.substring(1);
+    if (this.isPropertyOnSameLine(propName)) propName = propName.substring(1);
     for (var i = 0; i < this.tabs.length; i++) {
       if (!!this.getPropertyByNameInTab(this.tabs[i], propName))
         return this.tabs[i];
@@ -246,8 +252,8 @@ export class SurveyQuestionProperties {
     return null;
   }
   private getNextToNameProperty(property: JsonObjectProperty): string {
-    if(!property.nextToProperty) return "";
-    if(this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substring(1);
+    if (!property.nextToProperty) return "";
+    if (this.isPropertyOnSameLine(property.nextToProperty)) return property.nextToProperty.substring(1);
     return property.nextToProperty;
   }
   private isPropertyOnSameLine(nextToProperty: string): boolean {
@@ -276,10 +282,10 @@ export class SurveyQuestionProperties {
     return res;
   }
   private setUsedProperties(res: Array<ISurveyQuestionEditorDefinition>, usedProperties: any): void {
-    for(let i = 0; i < res.length; i ++) {
+    for (let i = 0; i < res.length; i++) {
       const props = res[i].properties;
-      if(!Array.isArray(props)) continue;
-      for(let j = 0; j < props.length; j ++) {
+      if (!Array.isArray(props)) continue;
+      for (let j = 0; j < props.length; j++) {
         const propName = !!props[j]["name"] ? props[j]["name"] : props[j];
         usedProperties[propName] = true;
       }
@@ -304,7 +310,7 @@ export class SurveyQuestionProperties {
     }
     let hasNonTabDynamicProperties = false;
     const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
-    if(dynamicClass) {
+    if (dynamicClass) {
       hasNonTabDynamicProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result, className);
     }
     const hasNonTabProperties = this.getAllDefinitionsByClassCore(className, usedProperties, result, undefined);
@@ -330,7 +336,7 @@ export class SurveyQuestionProperties {
   private getAllDefinitionsByClassSingleCore(className: string, usedProperties: any, result: Array<ISurveyQuestionEditorDefinition>): boolean {
     const classRes = this.getClassDefintion(className);
     let res = false;
-    if(!classRes) return res;
+    if (!classRes) return res;
     if (classRes.properties) {
       var i = 0;
       while (i < classRes.properties.length) {
@@ -354,8 +360,11 @@ export class SurveyQuestionProperties {
     }
     if (classRes.tabs) {
       for (var i = 0; i < classRes.tabs.length; i++) {
-        res = res || classRes.tabs[i].name === otherTabName;
-        usedProperties[classRes.tabs[i].name] = true;
+        const tabName = classRes.tabs[i].name;
+        res = res || tabName === otherTabName;
+        if (!!this.getPropertyAsCategory(tabName)) {
+          usedProperties[tabName] = true;
+        }
       }
     }
     result.unshift(classRes);
@@ -372,6 +381,7 @@ export class SurveyQuestionProperties {
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
+    if (!this.propertyGridDefinition.autoGenerateProperties) return;
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
     for (var i = 0; i < this.properties.length; i++) {

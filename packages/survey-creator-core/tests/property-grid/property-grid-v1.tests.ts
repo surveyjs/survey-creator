@@ -21,7 +21,8 @@ import {
   QuestionExpressionModel,
   SurveyTriggerComplete,
   SurveyTriggerSkip,
-  ImageItemValue
+  ImageItemValue,
+  QuestionImagePickerModel
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -553,7 +554,7 @@ test("SurveyPropertyItemValue override properties", () => {
       { name: "enableIf", visible: false }
     ],
     function () {
-      return new ItemValue(null, null, "ordergriditem");
+      return new ItemValue(null, undefined, "ordergriditem");
     },
     "itemvalue"
   );
@@ -568,7 +569,7 @@ test("SurveyPropertyItemValue override properties", () => {
   expect(choicesQuestion.columns[1].title).toEqual("Text");
 
   var question2 = new QuestionTextModel("q1");
-  var item = new ItemValue("item1", null, "ordergriditem");
+  var item = new ItemValue("item1", undefined, "ordergriditem");
   (<any>item).price = 20;
   (<any>question2).orderItems.push(item);
 
@@ -583,6 +584,16 @@ test("SurveyPropertyItemValue override properties", () => {
   Serializer.removeProperty("text", "orderItems");
   Serializer.removeClass("ordergriditem");
   Serializer.removeProperty("itemvalue", "price");
+});
+test("Image picker choices text title", () => {
+  var question = new QuestionImagePickerModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[1].title).toEqual("Alt text");
+
 });
 test("SurveyPropertyItemValueEditor override grid columns using canShowProperty callback", () => {
   Serializer.addProperty("itemvalue", {
@@ -917,8 +928,8 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
-  expect(columnsQuestion.emptyRowsText).toEqual("No items have been added yet");
-  expect(columnsQuestion.addRowText).toEqual("Add New");
+  expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
+  expect(columnsQuestion.addRowText).toEqual("Add new column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
@@ -1715,6 +1726,7 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
+  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1751,7 +1763,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "Use curly brackets"
+      "The expression can include basic calculations"
     ) > -1
   ).toBeTruthy();
 });
