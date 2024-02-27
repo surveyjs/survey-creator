@@ -134,9 +134,13 @@ export class SurveyQuestionProperties {
     for (var i = definitions.length - 1; i >= 0; i--) {
       var defItem = definitions[i];
       for (var j = !!defItem.tabs ? defItem.tabs.length - 1 : -1; j >= 0; j--) {
-        if (addedProperties.indexOf(defItem.tabs[j].name) > -1) continue;
-        if (this.addPropertyIntoTab(defItem.tabs[j], true)) {
-          addedProperties.push(defItem.tabs[j].name);
+        const defTab = defItem.tabs[j];
+        if (addedProperties.indexOf(defTab.name) > -1) {
+          this.setTabProperties(defTab);
+        } else {
+          if (this.addPropertyIntoTab(defTab, true)) {
+            addedProperties.push(defTab.name);
+          }
         }
       }
       for (
@@ -184,17 +188,7 @@ export class SurveyQuestionProperties {
     isTab: boolean = false
   ): boolean {
     if (isTab) {
-      let tab = this.getTabOrCreate(defProperty.name);
-      if (defProperty.index > 0) {
-        tab.index = defProperty.index;
-      }
-      tab.parentName = defProperty.parent;
-      if (defProperty.visible === false) {
-        tab.visible = false;
-      }
-      if (!!defProperty.title) {
-        tab.title = defProperty.title;
-      }
+      this.setTabProperties(defProperty);
     }
     var isString = typeof defProperty == "string";
     var name = !isString ? defProperty.name : defProperty;
@@ -221,6 +215,19 @@ export class SurveyQuestionProperties {
     let tab = this.getTabOrCreate(tabName);
     tab.properties.unshift(propertyDefinition);
     return true;
+  }
+  private setTabProperties(defProperty: any): void {
+    let tab = this.getTabOrCreate(defProperty.name);
+    if (defProperty.index > 0) {
+      tab.index = defProperty.index;
+    }
+    tab.parentName = defProperty.parent;
+    if (defProperty.visible === false) {
+      tab.visible = false;
+    }
+    if (!!defProperty.title) {
+      tab.title = defProperty.title;
+    }
   }
   private movePropertiesToNextProperties(
     properties: Array<SurveyQuestionEditorPropertyDefinition>
