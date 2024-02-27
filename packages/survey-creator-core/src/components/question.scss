@@ -767,6 +767,15 @@ svc-question,
     padding-right: calcSize(5);
     overflow-x: auto;
   }
+
+  .sd-composite {
+    .sd-question__content {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 }
 
 .svc-question__content--ranking {
