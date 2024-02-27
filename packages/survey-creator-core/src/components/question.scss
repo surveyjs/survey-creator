@@ -761,18 +761,16 @@ svc-question,
 
   .sd-question__content {
     min-width: min(calcSize(8), 100%);
-    margin-left: calcSize(-5);
-    margin-right: calcSize(-5);
-    padding-left: calcSize(5);
-    padding-right: calcSize(5);
     overflow-x: auto;
   }
-  .sd-element--complex {
+  &>.sd-element:not(.sd-element--complex),
+  &>.sd-question--complex,
+  &>.sd-panel {
     .sd-question__content {
-      margin-left: 0;
-      margin-right: 0;
-      padding-left: 0;
-      padding-right: 0;
+      margin-left: calcSize(-5);
+      margin-right: calcSize(-5);
+      padding-left: calcSize(5);
+      padding-right: calcSize(5);
     }
   }
 }
