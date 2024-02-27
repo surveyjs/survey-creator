@@ -964,8 +964,8 @@ var italianTranslation = {
     },
     showQuestionNumbers: {
       default: "Numerazione automatica",
-      on: "Numerazione automatica",
-      onPage: "Ripristina su ogni pagina",
+      on: "Continua dalla pagina precedente",
+      onPage: "Inizia da capo in ogni pagina",
       onpanel: "Ripristina su ogni pannello",
       onPanel: "Ripristina su ogni pannello",
       onSurvey: "Continua con l'indagine",
