@@ -758,15 +758,15 @@ svc-question,
   .svc-carry-forward-panel {
     margin-top: calcSize(2);
   }
-}
 
-.svc-question__content>.sd-question>.sd-question__content {
+  .sd-question__content {
     min-width: min(calcSize(8), 100%);
     margin-left: calcSize(-5);
     margin-right: calcSize(-5);
     padding-left: calcSize(5);
     padding-right: calcSize(5);
     overflow-x: auto;
+  }
 }
 
 .svc-question__content--ranking {
