@@ -11,7 +11,7 @@ ko.components.register("svc-tab-theme", {
       new ImplementorBase(plugin.model.simulator);
       new ImplementorBase(plugin.model.testAgainAction);
       new ImplementorBase(plugin.model);
-      return plugin.model;
+      return { model: plugin.model };
     },
   },
   template: template

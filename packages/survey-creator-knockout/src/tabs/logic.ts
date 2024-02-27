@@ -10,7 +10,7 @@ ko.components.register("svc-tab-logic", {
       const plugin: TabLogicPlugin = params.data;
       new ImplementorBase(plugin.model);
       new ImplementorBase(plugin.model.addNewButton);
-      return plugin.model;
+      return { model: plugin.model };
     }
   },
   template: templateHtml

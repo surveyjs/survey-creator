@@ -464,7 +464,7 @@ test("column[] property editor", (): any => {
   expect(columnsQuestion.showHeader).toBeTruthy();
   expect(columnsQuestion.getType()).toEqual("matrixdynamic"); //"It is a matrix";
   expect(columnsQuestion.columns).toHaveLength(2); //"There are two columns");
-  expect(columnsQuestion.columns[0].title).toEqual("Question name");
+  expect(columnsQuestion.columns[0].title).toEqual("Column name");
   expect(columnsQuestion.visibleRows).toHaveLength(3); //"There are three elements"
   expect(columnsQuestion.visibleRows[0].cells[0].value).toEqual("col1"); //"the first cell value is 'col1'"
   columnsQuestion.visibleRows[0].cells[0].value = "col11";
@@ -534,7 +534,7 @@ test("surveypages property editor", () => {
   expect(pagesQuestion.getType()).toEqual("matrixdynamic");
   expect(pagesQuestion.columns).toHaveLength(2);
   expect(pagesQuestion.columns[0].cellType).toEqual("text");
-  expect(pagesQuestion.columns[0].title).toEqual("Name");
+  expect(pagesQuestion.columns[0].title).toEqual("Page name");
   expect(pagesQuestion.visibleRows).toHaveLength(3);
   expect(pagesQuestion.visibleRows[0].cells[0].value).toEqual("page1");
   expect(pagesQuestion.visibleRows[0].cells[1].value).toBeFalsy();
@@ -3196,5 +3196,20 @@ test("Set property name into correct category", () => {
   const validationQuestion = <QuestionMatrixDynamicModel>(propertyGrid.survey.getQuestionByName("validation"));
   expect(validationQuestion.name).toEqual("validation");
   expect(validationQuestion.parent.name).toEqual("general");
+  Serializer.removeProperty("question", "validation");
+});
+test("Set correct property grid category", () => {
+  Serializer.addProperty("question", {
+    name: "validation",
+    category: "cust_category",
+    categoryIndex: 1
+  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q);
+  const panel = propertyGrid.survey.getPanelByName("cust_category");
+  expect(panel).toBeTruthy();
+  expect(propertyGrid.survey.getAllPanels().indexOf(panel)).toEqual(1);
   Serializer.removeProperty("question", "validation");
 });

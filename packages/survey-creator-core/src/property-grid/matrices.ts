@@ -12,7 +12,7 @@ import {
 } from "./index";
 import { updateMatixActionsClasses, updateMatrixRemoveAction } from "../utils/actions";
 import { QuestionRatingAdornerViewModel } from "../components/question-rating";
-import { CreatorBase, SurveyCreatorModel } from "../creator-base";
+import { CreatorBase } from "../creator-base";
 import { ISurveyPropertyGridDefinition } from "../question-editor/definition";
 
 Serializer.addProperty("itemvalue",

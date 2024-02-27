@@ -74,6 +74,9 @@ export class TabDesignerPlugin implements ICreatorPlugin {
     this.creator.focusElement(undefined, true);
   }
   public deactivate(): boolean {
+    if(this.model) {
+      this.model.dispose();
+    }
     this.model = undefined;
     this.propertyGridTab.visible = false;
     return true;

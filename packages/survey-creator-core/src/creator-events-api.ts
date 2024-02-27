@@ -165,7 +165,7 @@ export interface PropertyGridSurveyCreatedEvent {
    */
   obj: Base;
   /**
-   * A survey that respresents the Property Grid. Use the `SurveyModel` API to modify the survey.
+   * A survey that represents the Property Grid. Use the `SurveyModel` API to modify the survey.
    */
   survey: SurveyModel;
 }

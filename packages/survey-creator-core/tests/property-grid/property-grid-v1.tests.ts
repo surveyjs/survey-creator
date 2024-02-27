@@ -21,7 +21,8 @@ import {
   QuestionExpressionModel,
   SurveyTriggerComplete,
   SurveyTriggerSkip,
-  ImageItemValue
+  ImageItemValue,
+  QuestionImagePickerModel
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -553,7 +554,7 @@ test("SurveyPropertyItemValue override properties", () => {
       { name: "enableIf", visible: false }
     ],
     function () {
-      return new ItemValue(null, null, "ordergriditem");
+      return new ItemValue(null, undefined, "ordergriditem");
     },
     "itemvalue"
   );
@@ -568,7 +569,7 @@ test("SurveyPropertyItemValue override properties", () => {
   expect(choicesQuestion.columns[1].title).toEqual("Text");
 
   var question2 = new QuestionTextModel("q1");
-  var item = new ItemValue("item1", null, "ordergriditem");
+  var item = new ItemValue("item1", undefined, "ordergriditem");
   (<any>item).price = 20;
   (<any>question2).orderItems.push(item);
 
@@ -583,6 +584,16 @@ test("SurveyPropertyItemValue override properties", () => {
   Serializer.removeProperty("text", "orderItems");
   Serializer.removeClass("ordergriditem");
   Serializer.removeProperty("itemvalue", "price");
+});
+test("Image picker choices text title", () => {
+  var question = new QuestionImagePickerModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[1].title).toEqual("Alt text");
+
 });
 test("SurveyPropertyItemValueEditor override grid columns using canShowProperty callback", () => {
   Serializer.addProperty("itemvalue", {
