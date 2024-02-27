@@ -1923,7 +1923,7 @@ test("Check minimal height", async (t) => {
   });
 });
 
-test("Composite question - no scroll", async (t) => {
+test("Composite question - check no scroll", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await ClientFunction(() => {
       window["Survey"].ComponentCollection.Instance.add({
