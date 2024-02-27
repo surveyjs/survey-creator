@@ -22,6 +22,7 @@
 .svc-question__content {
   .sd-selectbase__column {
     margin-left: calcSize(5);
+    min-width: initial;
   }
 
   .sd-selectbase--mobile .sd-selectbase__column,
