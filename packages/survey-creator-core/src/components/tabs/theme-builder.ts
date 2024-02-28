@@ -109,6 +109,12 @@ export class ThemeEditorModel extends Base {
   private _availableThemes = PredefinedThemes;
   private prevQuestionValues: { [index: string]: any } = {};
 
+  private _setPGEditorPropertyValue(editor: Question, propertyName: string, value): void {
+    if (!!editor) {
+      editor[propertyName] = value;
+    }
+  }
+
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
   public get themeCssCustomizations() {
@@ -554,9 +560,11 @@ export class ThemeEditorModel extends Base {
     this._availableThemes = availebleThemes || [];
     if (this.themeEditorSurvey) {
       const themeChooser = this.themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
-      themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
-      if (availebleThemes.indexOf(themeChooser.value) === -1) {
-        themeChooser.value = ThemeEditorModel.DefaultTheme.themeName;
+      if (!!themeChooser) {
+        themeChooser.choices = availebleThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) }));
+        if (availebleThemes.indexOf(themeChooser.value) === -1) {
+          themeChooser.value = ThemeEditorModel.DefaultTheme.themeName;
+        }
       }
       this.updatePropertyGridEditorsAvailability();
     }
@@ -682,7 +690,7 @@ export class ThemeEditorModel extends Base {
       this.colorCalculator.calculateColors(options.value);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-light", this.colorCalculator.colorSettings.newColorLight);
       this.themeEditorSurvey.setValue("--sjs-primary-backcolor-dark", this.colorCalculator.colorSettings.newColorDark);
-      this.themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = options.value;
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", options.value);
       return false;
     }
     return false;
@@ -806,7 +814,7 @@ export class ThemeEditorModel extends Base {
       title: getLocString("theme.advancedMode"),
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
-        panel.getQuestionByName("advancedMode").value = this.groupAppearanceAdvancedMode;
+        this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
       }
     });
     this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
@@ -876,21 +884,21 @@ export class ThemeEditorModel extends Base {
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
-    panel.getQuestionByName("headerTitle").readOnly = !this.survey.hasTitle;
-    panel.getQuestionByName("headerDescription").readOnly = !this.survey.hasDescription;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerDescription"), "readOnly", !this.survey.hasDescription);
 
-    panel.getQuestionByName("headerView").value = this.survey.headerView;
-    panel.getQuestionByName("logoPosition").value = this.survey.logoPosition;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("headerView"), "value", this.survey.headerView);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "value", this.survey.logoPosition);
 
-    panel.getQuestionByName("logoPositionX").readOnly = !this.survey.logo;
-    panel.getQuestionByName("logoPositionY").readOnly = !this.survey.logo;
-    panel.getQuestionByName("logoPosition").readOnly = !this.survey.logo;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionX"), "readOnly", !this.survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPositionY"), "readOnly", !this.survey.logo);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("logoPosition"), "readOnly", !this.survey.logo);
 
-    panel.getQuestionByName("titlePositionX").readOnly = !this.survey.title;
-    panel.getQuestionByName("titlePositionY").readOnly = !this.survey.title;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionX"), "readOnly", !this.survey.title);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("titlePositionY"), "readOnly", !this.survey.title);
 
-    panel.getQuestionByName("descriptionPositionX").readOnly = !this.survey.description;
-    panel.getQuestionByName("descriptionPositionY").readOnly = !this.survey.description;
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionX"), "readOnly", !this.survey.description);
+    this._setPGEditorPropertyValue(panel.getQuestionByName("descriptionPositionY"), "readOnly", !this.survey.description);
   }
   private setCoverColorsFromThemeVariables(question: Question, cssVariable: string) {
     if (!!question && !!cssVariable && cssVariable !== "transparent") {
@@ -901,14 +909,16 @@ export class ThemeEditorModel extends Base {
     this.updateVisibilityOfPropertyGridGroups();
 
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
+    if(!headerViewContainerQuestion) return;
+
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
 
     if (!!this.survey) {
       this.setCoverPropertiesFromSurvey(panel, themeCssVariables);
-      panel.getQuestionByName("surveyTitle").readOnly = !this.survey.hasTitle;
+      this._setPGEditorPropertyValue(panel.getQuestionByName("surveyTitle"), "readOnly", !this.survey.hasTitle);
       fontsettingsFromCssVariable(panel.getQuestionByName("surveyTitle"), themeCssVariables);
-      panel.getQuestionByName("surveyDescription").readOnly = !this.survey.hasDescription;
+      this._setPGEditorPropertyValue(panel.getQuestionByName("surveyDescription"), "readOnly", !this.survey.hasDescription);
       fontsettingsFromCssVariable(panel.getQuestionByName("surveyDescription"), themeCssVariables);
 
       fontsettingsFromCssVariable(panel.getElementByName("surveyTitle"), this.themeCssVariablesChanges);
@@ -920,17 +930,17 @@ export class ThemeEditorModel extends Base {
     if (!!this.currentTheme.header) {
       Object.keys(this.currentTheme.header).forEach(key => {
         const question = panel.getQuestionByName(key);
-        if (!!question && key === "backgroundImageOpacity") {
-          question.value = this.currentTheme.header[key] * 100;
-        } else if (question) {
-          question.value = this.currentTheme.header[key];
+        if (key === "backgroundImageOpacity") {
+          this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key] * 100);
+        } else {
+          this._setPGEditorPropertyValue(question, "value", this.currentTheme.header[key]);
         }
       });
       this.setCoverColorsFromThemeVariables(panel.getQuestionByName("backgroundColor"), themeCssVariables["--sjs-header-backcolor"]);
 
       const backgroundColorValue = themeCssVariables["--sjs-header-backcolor"];
       if (!!backgroundColorValue) {
-        panel.getQuestionByName("backgroundColorSwitch").value = this.getBackgroundColorSwitchByValue(backgroundColorValue);
+        this._setPGEditorPropertyValue(panel.getQuestionByName("backgroundColorSwitch"), "value", this.getBackgroundColorSwitchByValue(backgroundColorValue));
       }
     }
   }
@@ -952,8 +962,8 @@ export class ThemeEditorModel extends Base {
       let themePanelless = themePanels + "-panelless";
       customThemeHasModeVariations = registeredThemes.indexOf(themePanels) !== -1 && registeredThemes.indexOf(themePanelless) !== -1;
     }
-    this.themeEditorSurvey.getQuestionByName("themeMode").readOnly = isCustomTheme && !customThemeHasModeVariations;
-    this.themeEditorSurvey.getQuestionByName("themePalette").readOnly = isCustomTheme && !customThemeHasPaletteVariations;
+    this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themeMode"), "readOnly", isCustomTheme && !customThemeHasModeVariations);
+    this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("themePalette"), "readOnly", isCustomTheme && !customThemeHasPaletteVariations);
 
     let canModify = !this.surveyProvider.readOnly;
     const options = {
@@ -963,25 +973,29 @@ export class ThemeEditorModel extends Base {
     this.onAllowModifyTheme.fire(this, options);
     this.themeEditorSurvey.getAllQuestions().forEach(q => {
       if (["themeName", "themePalette", "themeMode"].indexOf(q.name) === -1) {
-        q.readOnly = !options.allow;
+        this._setPGEditorPropertyValue(q, "readOnly", !options.allow);
       }
     });
 
     if (!!this.survey) {
       let pageElements = this.survey.isSinglePage ? this.survey.pages[0].elements : this.survey.pages;
-      this.themeEditorSurvey.getQuestionByName("pageTitle").readOnly = !pageElements.some(p => !!p.title);
-      this.themeEditorSurvey.getQuestionByName("pageDescription").readOnly = !pageElements.some(p => !!p.description);
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageTitle"), "readOnly", !pageElements.some(p => !!p.title));
+      this._setPGEditorPropertyValue(this.themeEditorSurvey.getQuestionByName("pageDescription"), "readOnly", !pageElements.some(p => !!p.description));
     }
   }
 
   private updatePropertyGridEditors(themeEditorSurvey: SurveyModel) {
     const newCssVariables = {};
     assign(newCssVariables, this.currentTheme.cssVariables);
-    themeEditorSurvey.getQuestionByName("backgroundImage").value = this.currentTheme.backgroundImage;
-    themeEditorSurvey.getQuestionByName("backgroundImageFit").value = this.currentTheme.backgroundImageFit;
-    themeEditorSurvey.getQuestionByName("backgroundImageAttachment").value = this.currentTheme.backgroundImageAttachment;
-    themeEditorSurvey.getQuestionByName("backgroundOpacity").value = this.currentTheme.backgroundOpacity * 100;
-    themeEditorSurvey.getQuestionByName("generalPrimaryColor").value = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor").value;
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImage"), "value", this.currentTheme.backgroundImage);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageFit"), "value", this.currentTheme.backgroundImageFit);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundImageAttachment"), "value", this.currentTheme.backgroundImageAttachment);
+    this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
+
+    const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
+    if(!!primaryBackcolor) {
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", primaryBackcolor.value);
+    }
 
     this.updateHeaderViewContainerEditors(newCssVariables);
     elementSettingsFromCssVariable(themeEditorSurvey.getQuestionByName("questionPanel"), newCssVariables, newCssVariables["--sjs-general-backcolor"], newCssVariables["--sjs-general-backcolor-dark"]);
@@ -994,13 +1008,13 @@ export class ThemeEditorModel extends Base {
     fontsettingsFromCssVariable(themeEditorSurvey.getQuestionByName("editorFont"), newCssVariables, newCssVariables["--sjs-general-forecolor"], newCssVariables["--sjs-general-forecolor-light"]);
 
     if (!!newCssVariables["--sjs-corner-radius"]) {
-      themeEditorSurvey.getQuestionByName("cornerRadius").value = parseFloat(newCssVariables["--sjs-corner-radius"]);
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("cornerRadius"), "value", parseFloat(newCssVariables["--sjs-corner-radius"]));
     }
     if (!!newCssVariables["--sjs-base-unit"]) {
-      themeEditorSurvey.getQuestionByName("commonScale").value = parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8;
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonScale"), "value", parseFloat(newCssVariables["--sjs-base-unit"]) * 100 / 8);
     }
     if (!!newCssVariables["--sjs-font-size"]) {
-      themeEditorSurvey.getQuestionByName("commonFontSize").value = parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16;
+      this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("commonFontSize"), "value", parseFloat(newCssVariables["--sjs-font-size"]) * 100 / 16);
     }
 
     themeEditorSurvey.getAllQuestions().forEach(question => {
