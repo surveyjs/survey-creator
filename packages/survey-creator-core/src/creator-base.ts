@@ -1571,21 +1571,20 @@ export class SurveyCreatorModel extends Base
     if (!json) {
       json = { "logoPosition": "right" };
     }
-    // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
-    const survey = this.createSurvey({});
-    survey.css = defaultV2Css;
-    survey.setIsMobile(!!this.isMobileView);
-    survey.setDesignMode(true);
-    survey.lazyRendering = true;
-    survey.setJsonObject(json);
-    if (survey.isEmpty) {
-      survey.setJsonObject(this.getDefaultSurveyJson());
-    }
+    const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
+      survey.css = defaultV2Css;
+      survey.setIsMobile(!!this.isMobileView);
+      survey.setDesignMode(true);
+      survey.lazyRendering = true;
+      survey.setJsonObject(json);
+      if (survey.isEmpty) {
+        survey.setJsonObject(this.getDefaultSurveyJson());
+      }
+    });
     survey.pages.forEach((page: PageModel) => {
       this.existingPages[page.id] = true;
     });
-    this.onDesignerSurveyCreated.fire(this, { survey: survey });
     survey.onQuestionAdded.add((sender: SurveyModel, options) => {
       this.doOnQuestionAdded(options.question, options.parentPanel);
     });
@@ -1894,7 +1893,7 @@ export class SurveyCreatorModel extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
+  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
     if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
@@ -1909,8 +1908,40 @@ export class SurveyCreatorModel extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
+    if(callback) {
+      callback(survey);
+    }
+    this.onSurveyInstanceCreated.fire(this, { survey: survey,
+      reason: reason,
+      area: this.getSurveyInstanceCreatedArea(reason),
+      model: !!model ? model : this.currentPlugin?.model });
+    if(reason === "designer") {
+      this.onDesignerSurveyCreated.fire(this, { survey: survey });
+    }
+    if(reason === "test") {
+      this.onPreviewSurveyCreated.fire(this, { survey: survey });
+    }
     return survey;
+  }
+  private getSurveyInstanceCreatedArea(reason: string): string {
+    const hash: any = {};
+    hash["designer"] =	"designer-tab";
+    hash["test"] =	"preview-tab";
+    hash["property-grid"] = "property-grid";
+    hash["default-value"] = "default-value-popup-editor";
+    hash["condition-builder"] = "logic-rule:condition-editor";
+    hash["logic-item-editor"] = "logic-rule:action-editor";
+    hash["logic-items"] = "logic-tab:condition-list";
+    hash["theme"] = "theme-tab";
+    hash["theme_editor"] = "theme-tab:property-grid";
+    hash["translation_settings"] = "translation-tab:language-list";
+    hash["translation_strings"] = "translation-tab:table";
+    hash["translation_strings_header"] = "translation-tab:table-header";
+    hash["cells-editor"] = "matrix-cell-values-popup-editor";
+    hash["fast-entry"] = "table-values-popup-editor";
+    hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
+    const res = hash[reason];
+    return !!res ? res : "internal-use";
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
@@ -2120,15 +2151,16 @@ export class SurveyCreatorModel extends Base
     this.updateNewElementExpressions(element);
   }
   private updateNewElementExpressions(element: ISurveyElement) {
-    var survey = this.createSurvey({}, "updateNewElementExpressions");
-    survey.setDesignMode(true);
-    if (element.isPage) {
-      survey.addPage(<PageModel>element);
-    } else {
-      survey.addNewPage("p1");
-      survey.pages[0].addElement(<IElement>element);
-    }
-    var logic = new SurveyLogic(survey);
+    const survey = this.createSurvey({}, "updateNewElementExpressions", undefined, (survey: SurveyModel): void => {
+      survey.setDesignMode(true);
+      if (element.isPage) {
+        survey.addPage(<PageModel>element);
+      } else {
+        survey.addNewPage("p1");
+        survey.pages[0].addElement(<IElement>element);
+      }
+    });
+    const logic = new SurveyLogic(survey);
     for (var key in this.newQuestionChangedNames) {
       logic.renameQuestion(key, this.newQuestionChangedNames[key]);
     }

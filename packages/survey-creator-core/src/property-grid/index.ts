@@ -852,22 +852,25 @@ export class PropertyGridModel {
       this.surveyValue.data = {};
       this.surveyValue.dispose();
     }
-    this.surveyValue = this.createSurvey(json);
-    this.surveyValue.questionErrorLocation = "bottom";
-    this.surveyValue.getCss().list = {};
-    this.surveyValue.css = propertyGridCss;
-    var page = this.surveyValue.createNewPage("p1");
-    if (!this.obj) return;
-    new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
-      page,
-      false
-    );
-    this.survey.enterKeyAction = "loseFocus";
-    this.survey.addPage(page);
-    this.survey.getAllQuestions().forEach(q => {
-      PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+    this.surveyValue = this.createSurvey(json, (survey: SurveyModel): void => {
+      survey.questionErrorLocation = "bottom";
+      survey.getCss().list = {};
+      survey.css = propertyGridCss;
+      var page = survey.createNewPage("p1");
+      if (!!this.obj) {
+        new PropertyJSONGenerator(this.obj, this.options, null, null, this.propertyGridDefinition).setupObjPanel(
+          page,
+          false
+        );
+        survey.enterKeyAction = "loseFocus";
+        survey.addPage(page);
+        survey.getAllQuestions().forEach(q => {
+          PropertyGridEditorCollection.onSetup(this.obj, q, q.property, this.options);
+        });
+        survey.checkErrorsMode = "onValueChanging";
+      }
     });
-    this.survey.checkErrorsMode = "onValueChanging";
+    if (!this.obj) return;
     this.survey.onValueChanged.add((sender, options) => {
       this.onValueChanged(options);
     });
@@ -998,8 +1001,8 @@ export class PropertyGridModel {
       if (pnl !== panel && !pnl.parent.isPanel) pnl.collapse();
     });
   }
-  protected createSurvey(json: any): SurveyModel {
-    return this.options.createSurvey(json, "property-grid", this);
+  protected createSurvey(json: any, callback?: (survey: SurveyModel) => void): SurveyModel {
+    return this.options.createSurvey(json, "property-grid", this, callback);
   }
   protected getSurveyJSON(): any {
     var res = {};
