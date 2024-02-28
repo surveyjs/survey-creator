@@ -1922,3 +1922,47 @@ test("Check minimal height", async (t) => {
     await takeElementScreenshot("creator-min-height.png", root, t, comparer);
   });
 });
+
+test("Composite question - check no scroll", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await ClientFunction(() => {
+      window["Survey"].ComponentCollection.Instance.add({
+        name: "fullname",
+        title: "Full Name",
+        elementsJSON: [
+          {
+            type: "text",
+            name: "firstName",
+            title: "First Name",
+            isRequired: true,
+            minWidth: 200
+          },
+          {
+            type: "text",
+            name: "lastName",
+            title: "Last Name",
+            isRequired: true,
+            minWidth: 200,
+            startWithNewLine: false,
+          }
+        ],
+      });
+    })();
+    await t.resizeWindow(1120, 900);
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "fullname",
+              "name": "question1"
+            }
+          ]
+        }
+      ]
+    });
+    await t.hover(".sd-input.sd-text");
+    await takeElementScreenshot("composite-question-no-scroll.png", Selector(".svc-question__adorner"), t, comparer);
+  });
+});

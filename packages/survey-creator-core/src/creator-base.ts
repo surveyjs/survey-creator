@@ -3276,14 +3276,13 @@ export class SurveyCreatorModel extends Base
       currentAddQuestionType = this.currentAddQuestionType;
     if (!!currentAddQuestionType) {
       const str = this.getLocString("ed.addNewTypeQuestion");
-      if (!!str && !!str["format"])
-        return str["format"](
-          this.toolbox.items.filter((item) => item.name == currentAddQuestionType)[0].title
-        );
+      const items = this.toolbox.items.filter((item) => item.name == currentAddQuestionType);
+      if (Array.isArray(items) && items.length > 0 && !!str && !!str["format"]) {
+        return str["format"](items[0].title);
+      }
     }
     return this.getLocString("ed.addNewQuestion");
   }
-
   public get addNewQuestionText() {
     return this.getAddNewQuestionText();
   }
