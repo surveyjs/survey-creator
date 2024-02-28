@@ -1461,6 +1461,20 @@ export class PropertyGridEditorString extends PropertyGridEditorStringBase {
   }
 }
 
+export class PropertyGridEditorDateTime extends PropertyGridEditor {
+  public fit(prop: JsonObjectProperty): boolean {
+    return prop.type == "datetime";
+  }
+
+  public getJSON(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): any {
+    const res: any = {
+      type: "text",
+      inputType: "date"
+    };
+    return res;
+  }
+}
+
 export class PropertyGridLinkEditor extends PropertyGridEditor {
   public fit(prop: JsonObjectProperty): boolean {
     return prop.type === "url" || prop.type === "file";
@@ -1889,6 +1903,7 @@ PropertyGridEditorCollection.register(new PropertyGridEditorQuestionSelectBase()
 PropertyGridEditorCollection.register(new PropertyGridEditorQuestionCarryForward());
 PropertyGridEditorCollection.register(new PropertyGridEditorImageSize());
 PropertyGridEditorCollection.register(new PropertyGridEditorColor());
+PropertyGridEditorCollection.register(new PropertyGridEditorDateTime());
 
 QuestionFactory.Instance.registerQuestion("buttongroup", (name) => {
   return new QuestionButtonGroupModel(name);

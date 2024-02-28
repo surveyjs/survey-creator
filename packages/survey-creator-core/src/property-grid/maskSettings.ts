@@ -88,6 +88,7 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
       // optionsCaption: editorLocalization.getString("pe.conditionSelectQuestion"),
       default: this._noneItem.value,
       allowClear: false,
+      searchEnabled: false,
       choices: this.getChoices(obj, prop, options)
     };
     return result;
