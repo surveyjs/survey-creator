@@ -1,7 +1,8 @@
-import { Question, SurveyModel } from "survey-core";
+import { Question, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
+import { SurveyJSON5 } from "../json5";
 
 export interface ICreatorPresetToolboxItem {
   name: string;
@@ -20,21 +21,91 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
         {
           type: "matrixdynamic",
           name: this.nameMatrix,
+          rowCount: 0,
           columns: [
             { cellType: "text", name: "name", isUnique: true, isRequired: true },
             { cellType: "text", name: "iconName" },
             { cellType: "text", name: "title" }
           ],
+          detailPanelMode: "underRow",
+          detailElements: [
+            { type: "text", name: "tooltip" },
+            { type: "comment", name: "json", rows: 15 }
+          ]
         }
       ]
     };
   }
-  public setJsonValue(model: SurveyModel, res: any) {
+  protected validateCore(model: SurveyModel): boolean {
+    const matrix = this.getMatrix(model);
+    const val = matrix.value;
+    if(!Array.isArray(val)) return true;
+    for(let rowIndex = 0; rowIndex < val.length; rowIndex ++) {
+      const json = val[rowIndex]["json"];
+      if(!!json) {
+        if(!this.validateJson(json)) {
+          const row = matrix.visibleRows[rowIndex];
+          row.showDetailPanel();
+          const jsonQuestion = row.getQuestionByName("json");
+          jsonQuestion.addError("The json is invalid"); //
+          jsonQuestion.focus();
+          return false;
+        }
+      }
+    }
+    return true;
   }
-  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    json = json || {};
+  public getJsonValueCore(model: SurveyModel): any {
+    const matrix = this.getMatrix(model);
+    const value = matrix.value;
+    if(!Array.isArray(value) || value.length === 0) return undefined;
+    const res = [];
+    for(let i = 0; i < value.length; i ++) {
+      const val = {};
+      const item = value[i];
+      for(let key in item) {
+        const itemVal = key === "json" ? this.parseJson(item[key]) : item[key];
+        if(!!itemVal) {
+          val[key] = itemVal;
+        }
+      }
+      res.push(val);
+    }
+    return res;
+  }
+  public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    json = json || [];
+    const question = this.getMatrix(model);
+    const value = [];
+    json.forEach(item => {
+      const val = {};
+      for(let key in item) {
+        val[key] = key === "json" ? JSON.stringify(item[key], null, 2) : item[key];
+      }
+      value.push(val);
+    });
+    question.value = value;
+  }
+  private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel {
+    return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix);
   }
   private get nameMatrix() { return this.fullPath + "_matrix"; }
+  private validateJson(text: string): boolean {
+    text = text.trim();
+    if(!text) return true;
+    const json = this.parseJson(text);
+    if(!json || !json.type) return false;
+    const obj = Serializer.createClass(json.type, json);
+    return !!obj;
+  }
+  private parseJson(text: string): any {
+    try {
+      const res = new SurveyJSON5().parse(text);
+      return res;
+    } catch(e) {
+      return undefined;
+    }
+  }
 }
 
 export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
@@ -110,10 +181,11 @@ export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
       ]
     };
   }
-  public setJsonValue(model: SurveyModel, res: any) {
-  }
-  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
+    if(json["definition"]) {
+      model.setValue(this.nameDefinitionShow, true);
+    }
   }
   public get nameDefinitionShow() { return this.path + "_definition_show"; }
   private get nameSetupCategoriesShow() { return this.path + "_categories_show"; }

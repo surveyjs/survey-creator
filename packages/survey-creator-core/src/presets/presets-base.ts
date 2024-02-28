@@ -29,17 +29,46 @@ export class CreatorPresetEditableBase {
     });
     return res;
   }
-  public createMainPage(): any {
+  public validate(model: SurveyModel): boolean {
+    if(!this.validateCore(model)) return false;
+    for(let i = 0; i < this.children.length; i ++) {
+      if(!this.children[i].validate(model)) return false;
+    }
+    return true;
+  }
+  protected validateCore(model: SurveyModel): boolean {
+    return true;
+  }
+  protected createMainPage(): any {
     const res = this.createMainPageCore();
     res.name = this.pageName;
     return res;
   }
   protected getBoolVisibleIf(name: string): string { return "{" + name + "}=true"; }
   protected createMainPageCore(): any { return {}; }
-  public setJsonValue(model: SurveyModel, res: any) { }
+  public getJsonValue(model: SurveyModel): any {
+    const core = this.getJsonValueCore(model);
+    let hasValue = !!core;
+    const res = hasValue ? core : {};
+    this.children.forEach(item => {
+      const val = item.getJsonValue(model);
+      if(!!val) {
+        hasValue = true;
+        res[item.path] = val;
+      }
+    });
+    return hasValue ? res : undefined;
+  }
   public getEditableQuestionJson(): any { return undefined; }
   public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void { }
-  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void { }
+  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupEditableQuestionValueCore(model, json, creator);
+    this.children.forEach(item => {
+      item.setupEditableQuestionValue(model, !!json ? json[item.path]: undefined, creator);
+    });
+  }
+  protected setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
+  protected getJsonValueCore(model: SurveyModel): any { return undefined; }
 }
 
 export interface ICreatorPreset {

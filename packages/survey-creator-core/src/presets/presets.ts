@@ -28,6 +28,9 @@ export class CreatorPreset extends CreatorPresetBase {
     this.setJson(json);
   }
   public getPath(): string { return ""; }
+  public getJson(): ICreatorPresetData {
+    return <ICreatorPresetData>this.json;
+  }
   protected createPresets(): Array<ICreatorPreset> {
     return [new CreatorPresetTabs(), new CreatorPresetToolbox(),
       new CreatorPresetPropertyGrid()];
@@ -35,6 +38,7 @@ export class CreatorPreset extends CreatorPresetBase {
   public createEditModel(creator?: SurveyCreatorModel): SurveyModel {
     const editablePresets = this.createEditablePresets();
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
+    model.editablePresets = editablePresets;
     model.showCompleteButton = false;
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
     model.addNavigationItem({
@@ -49,16 +53,29 @@ export class CreatorPreset extends CreatorPresetBase {
     editablePresets.forEach(item => item.setupEditableQuestionValue(model, json[item.path], editingCreator));
     return model;
   }
-  public applyFromSurveyModel(model: SurveyModel, creator: SurveyCreatorModel): void {
+  public applyFromSurveyModel(model: SurveyModel, creator?: SurveyCreatorModel): boolean {
+    if(!this.validatEditableModel(model)) return false;
     this.setJson(this.getJsonFromSurveyModel(model));
     if (creator) {
       this.apply(creator);
     }
+    return true;
+  }
+  private validatEditableModel(model: SurveyModel): boolean {
+    if(!model.validate(true, true)) return false;
+    const editablePresets = model.editablePresets;
+    for(let i = 0; i < editablePresets.length; i ++) {
+      if(!editablePresets[i].validate(model)) return false;
+    }
+    return true;
   }
   public getJsonFromSurveyModel(model: SurveyModel): any {
     const res: any = {};
     this.createEditablePresets().forEach(preset => {
-      preset.setJsonValue(model, res);
+      const val = preset.getJsonValue(model);
+      if(!!val) {
+        res[preset.path] = val;
+      }
     });
     return res;
   }

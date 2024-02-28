@@ -30,16 +30,16 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
       ]
     };
   }
-  public setJsonValue(model: SurveyModel, res: any) {
-    if(!model.getValue(this.nameShow)) return;
+  protected getJsonValueCore(model: SurveyModel): any {
+    if(!model.getValue(this.nameShow)) return undefined;
     const items = model.getValue(this.nameItems);
-    if(!Array.isArray(items)) return;
+    if(!Array.isArray(items)) return undefined;
     const val: any = { items: items };
     const activeTab = model.getValue(this.nameActiveTab);
     if(activeTab) {
       val.activeTab = activeTab;
     }
-    res[this.path] = val;
+    return val;
   }
   public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void {
     const q = model.getQuestionByName(this.nameItems);
@@ -47,7 +47,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
       q.choices = creator.getAvailableTabNames();
     }
   }
-  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     const items = json["items"] || [];
     model.setValue(this.nameShow, items.length > 0);

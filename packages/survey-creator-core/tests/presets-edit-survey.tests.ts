@@ -1,5 +1,5 @@
 import { CreatorTester } from "./creator-tester";
-import { CreatorPreset } from "../src/presets/presets";
+import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
@@ -91,4 +91,85 @@ test("Preset edit model, toolbox definition page", () => {
   expect(page.isVisible).toBeFalsy();
   boolDefinitionQuestion.value = true;
   expect(page.isVisible).toBeTruthy();
+});
+test("Preset edit model, toolbox definition page, validate name/json", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("toolbox_definition_show", true);
+  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  expect(matrixQuestion.visibleRows).toHaveLength(0);
+  matrixQuestion.addRow();
+  const row = matrixQuestion.visibleRows[0];
+  const nameQuestion = row.getQuestionByName("name");
+  row.showDetailPanel();
+  const jsonQuestion = row.getQuestionByName("json");
+  jsonQuestion.value = "{.";
+  expect(preset.applyFromSurveyModel(survey)).toBeFalsy();
+  expect(nameQuestion.errors).toHaveLength(1);
+  nameQuestion.value = "name1";
+  expect(preset.applyFromSurveyModel(survey)).toBeFalsy();
+  expect(nameQuestion.errors).toHaveLength(0);
+  expect(jsonQuestion.errors).toHaveLength(1);
+  jsonQuestion.value = "{ type: \"text\", inputType: \"date\" }";
+  expect(preset.applyFromSurveyModel(survey)).toBeTruthy();
+  expect(nameQuestion.errors).toHaveLength(0);
+  expect(jsonQuestion.errors).toHaveLength(0);
+});
+test("Preset edit model, toolbox definition page, default values", () => {
+  const presetJson = {
+    toolbox: {
+      definition: [
+        { name: "name1", json: { type: "text", inputType: "date" } },
+        { name: "name2", iconName: "icon2", json: { type: "text", inputType: "number" } },
+        { name: "name3", title: "Name 3", tooltip: "Name 3 tooltip" }
+      ]
+    }
+  };
+  const preset = new CreatorPreset(presetJson);
+  const survey = preset.createEditModel();
+  expect(survey.getValue("toolbox_definition_show")).toBeTruthy();
+  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  const val = matrixQuestion.value;
+  expect(val).toHaveLength(3);
+  expect(val[0]["name"]).toEqual("name1");
+  expect(val[1]["name"]).toEqual("name2");
+  expect(val[2]["name"]).toEqual("name3");
+  expect(val[0]["title"]).toBeFalsy();
+  expect(val[0]["iconName"]).toBeFalsy();
+  expect(val[0]["tooltip"]).toBeFalsy();
+  expect(val[1]["iconName"]).toEqual("icon2");
+  expect(val[2]["title"]).toEqual("Name 3");
+  expect(val[2]["tooltip"]).toEqual("Name 3 tooltip");
+  const definition = presetJson.toolbox.definition;
+  const json1 = JSON.parse(val[0]["json"]);
+  expect(json1).toEqual(definition[0].json);
+  const json2 = JSON.parse(val[1]["json"]);
+  expect(json2).toEqual(definition[1].json);
+  expect(val[2]["json"]).toBeFalsy();
+});
+test("Preset edit model, toolbox definition page, apply", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("toolbox_definition_show", true);
+  const matrixQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  matrixQuestion.addRow();
+  const row = matrixQuestion.visibleRows[0];
+  const nameQuestion = row.getQuestionByName("name");
+  nameQuestion.value = "name1";
+  row.showDetailPanel();
+  const jsonQuestion = row.getQuestionByName("json");
+  jsonQuestion.value = "{ type: \"text\", inputType: \"date\" }";
+  expect(preset.applyFromSurveyModel(survey)).toBeTruthy();
+  const etalon: ICreatorPresetData = {
+    toolbox: {
+      definition: [
+        {
+          name: "name1",
+          json: { type: "text", inputType: "date" }
+        }
+      ]
+    }
+  };
+  const testJson = preset.getJson();
+  expect(testJson).toEqual(etalon);
 });
