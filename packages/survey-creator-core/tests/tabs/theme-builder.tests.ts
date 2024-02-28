@@ -2908,6 +2908,33 @@ test("onPropertyGridSurveyCreated: Modify property grid", (): any => {
   expect(themeBuilder.currentThemeCssVariables["--sjs-font-matrix-title-size"]).toBe("16px");
 });
 
+test("onPropertyGridSurveyCreated: Modify property grid & switch themeName", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { questions: [{ type: "text", name: "q1" }] };
+  creator.themeEditor.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
+    options.model.themeEditorSurvey.getAllQuestions().forEach(q => {
+      if(q.name !== "themeName") {
+        options.model.removePropertyGridEditor(q.name);
+      }
+    });
+
+    const newFontSettings = Serializer.createClass("fontsettings", { name: "custom-question-title" });
+    options.model.addPropertyGridEditor({ element: newFontSettings, insertAfter: "themeName" });
+
+    const newMatrixFontSettings = Serializer.createClass("fontsettings", { name: "matrix-title" });
+    options.model.addPropertyGridEditor({ element: newMatrixFontSettings, insertAfter: "themeName" });
+  });
+  creator.themeEditor.activate();
+  const themeBuilder = creator.themeEditor.model as ThemeEditorModel;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+
+  expect(themeEditorSurvey.getAllQuestions()).toHaveLength(3);
+  const themeChooser = themeEditorSurvey.getQuestionByName("themeName") as QuestionDropdownModel;
+
+  themeChooser.value = "flat";
+  expect(themeEditorSurvey.getAllQuestions()).toHaveLength(3);
+});
+
 test("Reset theme action availability", (): any => {
   const originalCallback = surveySettings.confirmActionAsync;
   surveySettings.confirmActionAsync = (text, callback) => {
