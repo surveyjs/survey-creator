@@ -16,10 +16,9 @@ svc-toolbox {
 }
 
 _::-webkit-full-page-media,
-_:future {
-  .svc-toolbox {
-    padding: calcSize(2);
-  }
+_:future,
+:root .svc-toolbox {
+  padding: calcSize(2);
 }
 
 .svc-toolbox--compact {
