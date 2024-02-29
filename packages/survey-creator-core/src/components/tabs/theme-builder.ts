@@ -102,6 +102,7 @@ export class ThemeEditorModel extends Base {
   public testAgainAction: Action;
   public nextPageAction: Action;
   public undoRedoManager: UndoRedoManager;
+  private advancedModeSwitcher: Switcher;
   private themeEditorSurveyValue: SurveyModel;
   private themeCssVariablesChanges: { [index: string]: string } = {};
   private colorCalculator = new ColorCalculator();
@@ -780,10 +781,9 @@ export class ThemeEditorModel extends Base {
       }
     });
     themeEditorSurvey.onGetPanelTitleActions.add((sender, opt) => {
-      if (this.surveyProvider.isMobileView) return;
-
       if (opt.panel && opt.panel.name == "groupAppearance") {
-        opt.titleActions.push(this.createAppearanceAdvancedModeAction(opt.panel));
+        this.createAppearanceAdvancedModeAction(opt.panel);
+        opt.titleActions.push(this.advancedModeSwitcher);
       }
     });
     themeEditorSurvey.onUpdatePanelCssClasses.add((sender, options) => {
@@ -804,7 +804,7 @@ export class ThemeEditorModel extends Base {
     return themeEditorSurvey;
   }
 
-  private createAppearanceAdvancedModeAction(panel: PanelModelBase) {
+  private createAppearanceAdvancedModeAction(panel: PanelModelBase): void {
     const advancedMode = new Switcher({
       id: "advancedMode",
       component: "svc-switcher",
@@ -812,6 +812,7 @@ export class ThemeEditorModel extends Base {
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
       title: getLocString("theme.advancedMode"),
+      visible: !this.surveyProvider.isMobileView,
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
         this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
@@ -824,7 +825,7 @@ export class ThemeEditorModel extends Base {
       "groupAppearanceAdvancedMode"
     );
     advancedMode.checked = false;
-    return advancedMode;
+    this.advancedModeSwitcher = advancedMode;
   }
 
   findSuitableTheme(themeName: string): ITheme {
@@ -882,6 +883,9 @@ export class ThemeEditorModel extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
+    if(this.advancedModeSwitcher) {
+      this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
+    }
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);

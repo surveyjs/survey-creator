@@ -1,4 +1,4 @@
-import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyModel, settings as surveySettings } from "survey-core";
+import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { ThemeEditorModel, getThemeChanges } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -2317,8 +2317,9 @@ test("Desktop mode: add advanced mode switcher", (): any => {
   expect(propertyGridGroups[2].visible).toBeTruthy();
   expect(propertyGridGroups[3].visible).toBeTruthy();
 
-  const actions = propertyGridGroups[3].getTitleActions();
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
   expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeTruthy();
 });
 
 test("Mobile mode: hide advanced settings in property grid", (): any => {
@@ -2337,9 +2338,30 @@ test("Mobile mode: hide advanced settings in property grid", (): any => {
   expect(propertyGridGroups[2].visible).toBeTruthy();
   expect(propertyGridGroups[3].visible).toBeTruthy();
 
-  const actions = propertyGridGroups[3].getTitleActions();
-  expect(actions.length).toBe(0);
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+  expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeFalsy();
 });
+
+test("Change advancedModeSwitcher visibility", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  creator.JSON = { logo: "Logo", pages: [{ questions: [{ type: "text", name: "q1" }] }] };
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const propertyGridGroups = themeEditorSurvey.pages[0].elements;
+  expect(propertyGridGroups.length).toBe(4);
+  const actions = (propertyGridGroups[3] as any as SurveyElement).getTitleActions();
+
+  expect(actions.length).toBe(1);
+  expect(actions[0].visible).toBeTruthy();
+
+  creator.isMobileView = true;
+  expect(actions[0].visible).toBeFalsy();
+});
+
 test("loadTheme fill all theme parameters: name, mode and compactness", (): any => {
   const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
