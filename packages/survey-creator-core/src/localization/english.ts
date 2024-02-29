@@ -627,7 +627,7 @@ export var enStrings = {
     textUpdateMode: "Update input field values",
     maskType: "Type",
     patternmask: "Pattern",
-    numbermask: "Number",
+    numericmask: "Number",
     datetimemask: "Date",
     currencymask: "Currency",
     maskSettingsPlaceHolder: "The setting is empty. Select any type.",

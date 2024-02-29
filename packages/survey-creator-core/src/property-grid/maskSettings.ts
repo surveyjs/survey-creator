@@ -96,7 +96,11 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
   private getChoices(obj: Base, prop: JsonObjectProperty, options: ISurveyCreatorOptions): Array<any> {
     const classes = Serializer.getChildrenClasses("masksettings") || [];
     const choices = classes.map((cl: JsonMetadataClass) => {
-      return { value: cl.name, text: getLocString("pe." + cl.name) };
+      let value = cl.name;
+      if (cl.name.indexOf("mask") !== -1) {
+        value = value.slice(0, value.indexOf("mask"));
+      }
+      return { value: value, text: getLocString("pe." + cl.name) };
     });
     choices.splice(0, 0, this._noneItem);
     return choices;
