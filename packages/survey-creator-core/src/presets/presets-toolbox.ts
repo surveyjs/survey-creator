@@ -1,4 +1,4 @@
-import { Question, QuestionMatrixDynamicModel, Serializer, SurveyModel } from "survey-core";
+import { Question, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
@@ -134,8 +134,51 @@ export class CreatorPresetToolboxDefinition extends CreatorPresetBase {
     });
   }
 }
+export class CreatorPresetEditableToolboxItemsCore extends CreatorPresetEditableBase {
+  getPageVisibleIf(): string {
+    const parent = <CreatorPresetEditableToolbox>this.parent;
+    return this.getBoolVisibleIf(parent.nameCategoriesShow) + " and " + this.getTextVisibleIf(parent.nameCategoriesMode, this.path);
+  }
+
+}
+export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditableToolboxItemsCore {
+  public createMainPageCore(): any {
+    const parent = <CreatorPresetEditableToolbox>this.parent;
+    return {
+      visibleIf: this.getPageVisibleIf(),
+      elements: [
+        {
+          type: "paneldynamic",
+          name: this.namePanel,
+          panelCount: 0,
+          templateElements: [
+            { type: "text", name: "category", isUnique: true, isRequired: true },
+            {
+              type: "ranking",
+              name: "items",
+              choices: [1, 2, 3, 4] //TODO
+            }
+          ]
+        }
+      ]
+    };
+  }
+  protected validateCore(model: SurveyModel): boolean {
+    return true;
+  }
+  public getJsonValueCore(model: SurveyModel): any {
+    return undefined;
+  }
+  public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  }
+  private getPanel(model: SurveyModel): QuestionPanelDynamicModel {
+    return <QuestionPanelDynamicModel>model.getQuestionByName(this.namePanel);
+  }
+  private get namePanel() { return this.fullPath + "_panel"; }
+}
 export class CreatorPresetToolboxCategories extends CreatorPresetBase {
   public getPath(): string { return "categories"; }
+  public createEditable(): CreatorPresetEditableBase { return new CreatorPresetEditableToolboxCategories(this); }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     this.applyItems(creator, this.json);
@@ -146,8 +189,36 @@ export class CreatorPresetToolboxCategories extends CreatorPresetBase {
     creator.toolbox.hasCategories = true;
   }
 }
+export class CreatorPresetEditableToolboxItems extends CreatorPresetEditableToolboxItemsCore {
+  public createMainPageCore(): any {
+    const parent = <CreatorPresetEditableToolbox>this.parent;
+    return {
+      visibleIf: this.getPageVisibleIf(),
+      elements: [
+        {
+          type: "ranking",
+          name: this.name,
+          choices: [1, 2, 3, 4] //TODO
+        }
+      ]
+    };
+  }
+  protected validateCore(model: SurveyModel): boolean {
+    return true;
+  }
+  public getJsonValueCore(model: SurveyModel): any {
+    return undefined;
+  }
+  public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  }
+  private getPanel(model: SurveyModel): QuestionRankingModel {
+    return <QuestionRankingModel>model.getQuestionByName(this.name);
+  }
+  private get name() { return this.fullPath + "_name"; }
+}
 export class CreatorPresetToolboxItems extends CreatorPresetBase {
   public getPath(): string { return "items"; }
+  public createEditable(): CreatorPresetEditableBase { return new CreatorPresetEditableToolboxItems(this); }
   protected applyCore(creator: SurveyCreatorModel): void {
     super.applyCore(creator);
     this.applyItems(creator, this.json);
@@ -168,7 +239,7 @@ export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
           name: this.nameDefinitionShow,
         },
         {
-          name: this.nameSetupCategoriesShow,
+          name: this.nameCategoriesShow,
           type: "boolean"
         },
         {
@@ -176,7 +247,7 @@ export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
           type: "buttongroup",
           defaultValue: "categories",
           choices: ["categories", "items"],
-          visibleIf: this.getBoolVisibleIf(this.nameSetupCategoriesShow)
+          visibleIf: this.getBoolVisibleIf(this.nameCategoriesShow)
         }
       ]
     };
@@ -188,7 +259,7 @@ export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
     }
   }
   public get nameDefinitionShow() { return this.path + "_definition_show"; }
-  private get nameSetupCategoriesShow() { return this.path + "_categories_show"; }
+  public get nameCategoriesShow() { return this.path + "_categories_show"; }
   public get nameCategoriesMode() { return this.path + "_categories_mode"; }
 }
 

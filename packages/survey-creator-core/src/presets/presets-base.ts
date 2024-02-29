@@ -45,6 +45,7 @@ export class CreatorPresetEditableBase {
     return res;
   }
   protected getBoolVisibleIf(name: string): string { return "{" + name + "}=true"; }
+  protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
   protected createMainPageCore(): any { return {}; }
   public getJsonValue(model: SurveyModel): any {
     const core = this.getJsonValueCore(model);

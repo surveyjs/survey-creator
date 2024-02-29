@@ -3,11 +3,13 @@ import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
-  expect(survey.pages).toHaveLength(3);
+  expect(survey.pages).toHaveLength(5);
   expect(survey.visiblePages).toHaveLength(2);
   expect(survey.pages[0].name).toEqual("page_tabs");
   expect(survey.pages[1].name).toEqual("page_toolbox");
   expect(survey.pages[2].name).toEqual("page_toolbox_definition");
+  expect(survey.pages[3].name).toEqual("page_toolbox_items");
+  expect(survey.pages[4].name).toEqual("page_toolbox_categories");
 });
 test("Preset edit model, page component", () => {
   const preset = new CreatorPreset({ tabs: { items: [] } });
@@ -172,4 +174,23 @@ test("Preset edit model, toolbox definition page, apply", () => {
   };
   const testJson = preset.getJson();
   expect(testJson).toEqual(etalon);
+});
+test("Preset edit model, toolbox items and categories pages visibility", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  expect(survey.getPageByName("page_toolbox_items").visible).toBeFalsy();
+  survey.setValue("toolbox_categories_show", true);
+  expect(survey.getPageByName("page_toolbox_items").visible).toBeFalsy();
+  expect(survey.getPageByName("page_toolbox_categories").visible).toBeTruthy();
+  survey.setValue("toolbox_categories_mode", "items");
+  expect(survey.getPageByName("page_toolbox_items").visible).toBeTruthy();
+  expect(survey.getPageByName("page_toolbox_categories").visible).toBeFalsy();
+});
+test("Preset edit model, toolbox items", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("toolbox_categories_show", true);
+  survey.setValue("toolbox_categories_mode", "items");
+  const question = survey.getQuestionByName("toolbox_items_name");
+  expect(question).toBeTruthy();
 });
