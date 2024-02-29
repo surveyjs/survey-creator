@@ -1197,7 +1197,7 @@ export var enStrings = {
     logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.).",
     logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.).",
     logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio.",
-    goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically.",
+    goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page.",
     allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions.",
     showNavigationButtons: "Sets the visibility and location of navigation buttons on a page.",
     showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header.",

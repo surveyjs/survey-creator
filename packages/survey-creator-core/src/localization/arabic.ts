@@ -1178,7 +1178,7 @@ export var arStrings = {
     logoWidth: "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoHeight: "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
-    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية. يتم أيضا إكمال الاستطلاع تلقائيا.",
+    goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية.",
     allowCompleteSurveyAutomatic: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
     showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
@@ -2247,7 +2247,7 @@ editorLocalization.locales["ar"] = arStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "يضبط عرض الشعار بوحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية. يتم أيضا إكمال الاستطلاع تلقائيا."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "يضبط رؤية وموقع أزرار التنقل على الصفحة."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط."

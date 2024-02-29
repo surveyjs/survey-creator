@@ -1178,7 +1178,7 @@ var persianStrings = {
     logoWidth: "عرض لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoHeight: "ارتفاع لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره).",
     logoFit: "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود.",
-    goNextPageAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد. این نظرسنجی نیز به طور خودکار تکمیل می شود.",
+    goNextPageAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد.",
     allowCompleteSurveyAutomatic: "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار پس از پاسخ دادن به تمام سوالات پاسخ دهد.",
     showNavigationButtons: "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند.",
     showProgressBar: "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد.",
@@ -2292,7 +2292,7 @@ editorLocalization.locales["fa"] = persianStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "عرض لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "ارتفاع لوگو را در واحدهای CSS تنظیم می کند (px، ٪، in، pt و غیره)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "انتخاب از: \"هیچ\" - تصویر اندازه اصلی خود را حفظ می کند؛ \"شامل\" - تصویر تغییر اندازه به جا در حالی که حفظ نسبت ابعاد ان؛ \"Cover\" - تصویر کل جعبه را پر می کند در حالی که نسبت ابعاد ان را حفظ می کند. \"Fill\" - تصویر برای پر کردن جعبه بدون حفظ نسبت ابعاد ان کشیده می شود."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد. این نظرسنجی نیز به طور خودکار تکمیل می شود."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "انتخاب کنید که ایا می خواهید نظرسنجی به طور خودکار به صفحه بعدی پیش رود پس از اینکه یک پاسخ دهنده به تمام سوالات در صفحه فعلی پاسخ داد."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "قابلیت مشاهده و مکان دکمه های پیمایش را در یک صفحه تنظیم می کند."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "دید و مکان یک نوار پیشرفت را تنظیم می کند. مقدار \"Auto\" نوار پیشرفت را در بالا یا پایین هدر نظرسنجی نشان می دهد."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "صفحه پیش نمایش را فقط با تمام سوالات یا پاسخ داده شده فعال کنید."
