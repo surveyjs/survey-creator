@@ -556,6 +556,7 @@ export var ruStrings = {
     firstPageIsStarted: "Первая страница опросника является стартовой страницей.",
     showCompletedPage: "Показывать страницу с текстом по завершению заполнения (HTML финальной страницы)",
     goNextPageAutomatic: "Переходить на следующую страницу автоматически при заполнении всех вопросов",
+    allowCompleteSurveyAutomatic: "Автоматическое заполнение опроса",
     showProgressBar: "Показывать прогресс заполнения",
     questionTitleLocation: "Расположение заголовка вопроса",
     requiredText: "Символ для обязательного вопроса",
@@ -1178,6 +1179,7 @@ export var ruStrings = {
     logoHeight: "Задает высоту логотипа в единицах CSS (px, %, in, pt и т. д.).",
     logoFit: "Выберите один из следующих вариантов: \"Нет\" - изображение сохраняет свой первоначальный размер; \"Contain\" - размер изображения изменяется по размеру с сохранением его пропорций; «Обложка» - изображение заполняет всю коробку, сохраняя при этом соотношение сторон; \"Заливка\" - изображение растягивается для заполнения поля без сохранения его пропорций.",
     goNextPageAutomatic: "Выберите, хотите ли вы, чтобы опрос автоматически переходил на следующую страницу после того, как респондент ответит на все вопросы на текущей странице. Опрос также заполняется автоматически.",
+    allowCompleteSurveyAutomatic: "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы.",
     showNavigationButtons: "Задает видимость и расположение кнопок навигации на странице.",
     showProgressBar: "Задает видимость и расположение индикатора выполнения. Значение «Авто» отображает индикатор выполнения над или под заголовком опроса.",
     showPreviewBeforeComplete: "Включите страницу предварительного просмотра, на которой отображаются все вопросы или только ответы на них.",
@@ -2480,3 +2482,5 @@ editorLocalization.locales["ru"] = ruStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Ширина метки элемента (в пикселях)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Текст, показывающий, если выбраны все параметры"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Замещающий текст для области ранжирования"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Автоматическое заполнение опроса"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Выберите, хотите ли Вы, чтобы опрос завершался автоматически после того, как респондент ответит на все вопросы."

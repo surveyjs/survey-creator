@@ -556,6 +556,7 @@ export var nlStrings = {
     firstPageIsStarted: "De eerste pagina in de enquête is een startpagina",
     showCompletedPage: "Toon bij afronden deze HTML-code",
     goNextPageAutomatic: "Na alle vragen automatisch naar volgende pagina gaan",
+    allowCompleteSurveyAutomatic: "Vul de enquête automatisch in",
     showProgressBar: "Toon voortgangsbalk",
     questionTitleLocation: "Plek vraagtitel",
     requiredText: "Symbool(en) verplichte vraag",
@@ -1178,6 +1179,7 @@ export var nlStrings = {
     logoHeight: "Hiermee stelt u de hoogte van een logo in CSS-eenheden in (px, %, in, pt, enz.).",
     logoFit: "Kies uit: \"Geen\" - afbeelding behoudt zijn oorspronkelijke grootte; \"Bevatten\" - het formaat van de afbeelding wordt aangepast aan de beeldverhouding met behoud van de beeldverhouding; \"Omslag\" - afbeelding vult het hele vak met behoud van de beeldverhouding; \"Vullen\" - de afbeelding wordt uitgerekt om het vak te vullen zonder de beeldverhouding te behouden.",
     goNextPageAutomatic: "Selecteer of u wilt dat de enquête automatisch naar de volgende pagina wordt verplaatst nadat een respondent alle vragen op de huidige pagina heeft beantwoord. De enquête wordt ook automatisch ingevuld.",
+    allowCompleteSurveyAutomatic: "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord.",
     showNavigationButtons: "Hiermee stelt u de zichtbaarheid en locatie van navigatieknoppen op een pagina in.",
     showProgressBar: "Hiermee stelt u de zichtbaarheid en locatie van een voortgangsbalk in. De waarde \"Auto\" geeft de voortgangsbalk boven of onder de kop van de enquête weer.",
     showPreviewBeforeComplete: "Schakel de voorbeeldpagina in met alleen alle of beantwoorde vragen.",
@@ -2400,3 +2402,5 @@ editorLocalization.locales["nl"] = nlStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Breedte artikellabel (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst om aan te geven of alle opties zijn geselecteerd"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tijdelijke tekst voor het rangschikkingsgebied"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vul de enquête automatisch in"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Selecteer of u wilt dat de enquête automatisch wordt ingevuld nadat een respondent alle vragen heeft beantwoord."

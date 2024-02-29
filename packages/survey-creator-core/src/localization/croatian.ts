@@ -556,6 +556,7 @@ export var hrStrings = {
     firstPageIsStarted: "Prva stranica u anketi je početna stranica.",
     showCompletedPage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
     goNextPageAutomatic: "Kada odgovarate na sva pitanja, idite automatski na sljedeću stranicu",
+    allowCompleteSurveyAutomatic: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
     requiredText: "Pitanje je zahtijevalo simbole",
@@ -1178,6 +1179,7 @@ export var hrStrings = {
     logoHeight: "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
     goNextPageAutomatic: "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Anketa se također automatski dovršava.",
+    allowCompleteSurveyAutomatic: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
     showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
@@ -2414,3 +2416,5 @@ editorLocalization.locales["hr"] = hrStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Širina natpisa stavke (u px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst koji prikazuje jesu li odabrane sve mogućnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst rezerviranog mjesta za područje rangiranja"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja."

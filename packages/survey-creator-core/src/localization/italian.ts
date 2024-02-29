@@ -556,6 +556,7 @@ var italianTranslation = {
     firstPageIsStarted: "La prima pagina nel sondaggio è la pagina iniziale",
     showCompletedPage: "Mostra la pagina sondaggio Completo",
     goNextPageAutomatic: "Rispondendo a tutte le domande, vai alla pagina successiva in automatico",
+    allowCompleteSurveyAutomatic: "Completa automaticamente il sondaggio",
     showProgressBar: "Visualizza barra di avanzamento",
     questionTitleLocation: "Posizione del titolo della domanda",
     requiredText: "Simbolo domanda obbligatoria, ad esempio (*)",
@@ -1178,6 +1179,7 @@ var italianTranslation = {
     logoHeight: "Imposta l'altezza di un logo in unità CSS (px, %, in, pt e così via).",
     logoFit: "Scegli tra: \"Nessuna\" - l'immagine mantiene le sue dimensioni originali; \"Contieni\": l'immagine viene ridimensionata per adattarla mantenendo le sue proporzioni; \"Copertina\": l'immagine riempie l'intera scatola mantenendo le sue proporzioni; \"Riempi\" - l'immagine viene allungata per riempire la casella senza mantenerne le proporzioni.",
     goNextPageAutomatic: "Seleziona se desideri che l'indagine passi automaticamente alla pagina successiva dopo che un rispondente ha risposto a tutte le domande della pagina corrente. Anche il sondaggio viene completato automaticamente.",
+    allowCompleteSurveyAutomatic: "Seleziona questa opzione se desideri che l'indagine venga completata automaticamente dopo che un rispondente ha risposto a tutte le domande.",
     showNavigationButtons: "Imposta la visibilità e la posizione dei pulsanti di navigazione in una pagina.",
     showProgressBar: "Imposta la visibilità e la posizione di una barra di avanzamento. Il valore \"Auto\" mostra la barra di avanzamento sopra o sotto l'intestazione del sondaggio.",
     showPreviewBeforeComplete: "Abilita la pagina di anteprima con tutte le domande o solo con risposta.",
@@ -2178,3 +2180,5 @@ editorLocalization.locales["it"] = italianTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "Larghezza dell'etichetta dell'articolo (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Testo da mostrare se tutte le opzioni sono selezionate"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Testo segnaposto per l'area di classificazione"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Completa automaticamente il sondaggio"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Seleziona questa opzione se desideri che l'indagine venga completata automaticamente dopo che un rispondente ha risposto a tutte le domande."

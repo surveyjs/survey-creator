@@ -556,6 +556,7 @@ export var hebrewStrings = {
     firstPageIsStarted: "העמוד הראשון הוא עמוד התחלה",
     showCompletedPage: "הצג עמוד 'סקר הושלם'",
     goNextPageAutomatic: "עבור אוטומטית לעמוד הבא",
+    allowCompleteSurveyAutomatic: "השלם את הסקר באופן אוטומטי",
     showProgressBar: "מיקום שורת ההתקדמות",
     questionTitleLocation: "מיקום כותרת השאלה",
     requiredText: "סמן נדרש(ים)",
@@ -1178,6 +1179,7 @@ export var hebrewStrings = {
     logoHeight: "הגדרת גובה סמל ביחידות CSS (px, %, in, pt וכו').",
     logoFit: "בחר מתוך: \"ללא\" - התמונה שומרת על גודלה המקורי; \"להכיל\" - גודל התמונה משתנה כדי להתאים תוך שמירה על יחס גובה-רוחב שלה; \"כיסוי\" - התמונה ממלאת את התיבה כולה תוך שמירה על יחס הגובה-רוחב שלה; \"מילוי\" - התמונה נמתחת כדי למלא את התיבה מבלי לשמור על יחס הגובה-רוחב שלה.",
     goNextPageAutomatic: "בחר אם ברצונך שהסקר יתקדם לדף הבא באופן אוטומטי לאחר שמשיב יענה על כל השאלות בדף הנוכחי. גם הסקר יושלם באופן אוטומטי.",
+    allowCompleteSurveyAutomatic: "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות.",
     showNavigationButtons: "מגדיר את התצוגה והמיקום של לחצני ניווט בעמוד.",
     showProgressBar: "הגדרת הניראות והמיקום של מד התקדמות. הערך \"אוטומטי\" מציג את מד ההתקדמות מעל או מתחת לכותרת הסקר.",
     showPreviewBeforeComplete: "הפעל את דף התצוגה המקדימה עם כל השאלות או שאלות שנענו בלבד.",
@@ -1984,3 +1986,5 @@ editorLocalization.locales["he"] = hebrewStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "רוחב תווית פריט (בפיקסלים)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "טקסט שיציג אם כל האפשרויות נבחרו"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "טקסט מציין מיקום עבור אזור הדירוג"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "השלם את הסקר באופן אוטומטי"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות."

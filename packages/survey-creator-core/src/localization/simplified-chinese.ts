@@ -556,6 +556,7 @@ var simplifiedChineseTranslation = {
     firstPageIsStarted: "调查的第一页面为起始页.",
     showCompletedPage: "结尾展示完成后的页面 (completedHtml)",
     goNextPageAutomatic: "回答本页所有问题后，自动跳转到下一页",
+    allowCompleteSurveyAutomatic: "自动完成调查",
     showProgressBar: "显示进度条",
     questionTitleLocation: "问题的标题位置",
     requiredText: "问题必填标志",
@@ -1178,6 +1179,7 @@ var simplifiedChineseTranslation = {
     logoHeight: "以 CSS 单位（px、%、in、pt 等）设置徽标高度。",
     logoFit: "从以下选项中选择：“无” - 图像保持其原始大小;“包含” - 调整图像大小以适应其纵横比;“封面” - 图像填充整个框，同时保持其纵横比;“填充” - 拉伸图像以填充框，而不保持其纵横比。",
     goNextPageAutomatic: "选择是否希望调查在受访者回答当前页面上的所有问题后自动前进到下一页。调查也会自动完成。",
+    allowCompleteSurveyAutomatic: "选择是否希望在受访者回答所有问题后自动完成调查。",
     showNavigationButtons: "设置导航按钮在页面上的可见性和位置。",
     showProgressBar: "设置进度条的可见性和位置。“自动”值显示测量标题上方或下方的进度条。",
     showPreviewBeforeComplete: "启用仅包含所有问题或已回答问题的预览页面。",
@@ -2562,3 +2564,5 @@ editorLocalization.locales["zh-cn"] = simplifiedChineseTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "项目标签宽度（以 px 为单位）"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "显示是否选择了所有选项的文本"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名区域的占位符文本"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "自动完成调查"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "选择是否希望在受访者回答所有问题后自动完成调查。"

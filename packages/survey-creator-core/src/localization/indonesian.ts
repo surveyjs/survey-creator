@@ -556,6 +556,7 @@ export var indonesianStrings = {
     firstPageIsStarted: "Halaman pertama pada survei adalah halaman yang telah dimulai.",
     showCompletedPage: "Tampilkan keseluruhan halaman di akhir (completedHtml)",
     goNextPageAutomatic: "Setelah menjawa seluruh pertanyaan, pergi ke halaman berikutnya secara otomatis",
+    allowCompleteSurveyAutomatic: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
     questionTitleLocation: "Lokasi judul pertanyaan",
     requiredText: "Simbil pertanyaan wajib",
@@ -1178,6 +1179,7 @@ export var indonesianStrings = {
     logoHeight: "Mengatur tinggi logo dalam satuan CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya.",
     goNextPageAutomatic: "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini. Survei juga selesai secara otomatis.",
+    allowCompleteSurveyAutomatic: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
     showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
     showPreviewBeforeComplete: "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab.",
@@ -2574,3 +2576,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Lebar label item (dalam px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teks untuk memperlihatkan jika semua opsi dipilih"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks tempat penampung untuk area peringkat"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Selesaikan survei secara otomatis"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan."

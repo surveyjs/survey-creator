@@ -556,6 +556,7 @@ export var jaStrings = {
     firstPageIsStarted: "アンケートの最初のページは、開始ページです。",
     showCompletedPage: "完了したページを最後に表示する（completedHtml）",
     goNextPageAutomatic: "すべての質問に回答すると、自動的に次のページに移動します",
+    allowCompleteSurveyAutomatic: "調査に自動的に回答する",
     showProgressBar: "プログレスバーを表示する",
     questionTitleLocation: "質問のタイトルの場所",
     requiredText: "質問には記号が必要",
@@ -1178,6 +1179,7 @@ export var jaStrings = {
     logoHeight: "ロゴの高さを CSS 単位 (px、%、in、pt など) で設定します。",
     logoFit: "次から選択: 「なし」 - 画像は元のサイズを維持します。\"Contain\" - 画像はアスペクト比を維持しながらサイズ変更されます。「表紙」-画像は縦横比を維持しながらボックス全体を埋めます。\"Fill\" - 画像は、アスペクト比を維持せずにボックスを埋めるように引き伸ばされます。",
     goNextPageAutomatic: "回答者が現在のページのすべての質問に回答した後、アンケートを自動的に次のページに進めるかどうかを選択します。調査も自動的に完了します。",
+    allowCompleteSurveyAutomatic: "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。",
     showNavigationButtons: "ページ上のナビゲーションボタンの表示と位置を設定します。",
     showProgressBar: "プログレスバーの表示と位置を設定します。「自動」の値は、アンケートヘッダーの上または下に進行状況バーを表示します。",
     showPreviewBeforeComplete: "すべての質問または回答済みの質問のみを含むプレビューページを有効にします。",
@@ -2419,3 +2421,5 @@ editorLocalization.locales["ja"] = jaStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "アイテムラベルの幅 (px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "すべてのオプションが選択されている場合に表示されるテキスト"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "ランキングエリアのプレースホルダーテキスト"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "調査に自動的に回答する"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "回答者がすべての質問に回答した後にアンケートを自動的に完了する場合に選択します。"

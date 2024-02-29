@@ -556,6 +556,7 @@ export var msStrings = {
     firstPageIsStarted: "Halaman pertama dalam tinjauan ialah halaman permulaan.",
     showCompletedPage: "Tunjukkan halaman lengkap pada hujung (HTML dilengkapkan)",
     goNextPageAutomatic: "Selepas menjawab semua soalan, pergi ke halaman seterusnya secara automatik",
+    allowCompleteSurveyAutomatic: "Lengkapkan tinjauan secara automatik",
     showProgressBar: "Tunjukkan bar perkembangan",
     questionTitleLocation: "Lokasi tajuk soalan",
     requiredText: "Soalan memerlukan simbol",
@@ -1178,6 +1179,7 @@ export var msStrings = {
     logoHeight: "Menetapkan ketinggian logo dalam unit CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih daripada: \"Tiada\" - imej mengekalkan saiz asalnya; \"Mengandungi\" - imej diubah saiznya agar sesuai sambil mengekalkan nisbah aspeknya; \"Cover\" - imej mengisi keseluruhan kotak sambil mengekalkan nisbah aspeknya; \"Isian\" - imej diregangkan untuk mengisi kotak tanpa mengekalkan nisbah aspeknya.",
     goNextPageAutomatic: "Pilih jika anda ingin tinjauan diteruskan ke halaman berikut secara automatik selepas responden menjawab semua soalan pada halaman semasa. Tinjauan ini juga selesai secara automatik.",
+    allowCompleteSurveyAutomatic: "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan.",
     showNavigationButtons: "Mengesetkan kebolehlihatan dan lokasi butang navigasi pada halaman.",
     showProgressBar: "Menetapkan kebolehlihatan dan lokasi bar kemajuan. Nilai \"Auto\" memaparkan bar kemajuan di atas atau di bawah pengepala tinjauan.",
     showPreviewBeforeComplete: "Dayakan halaman pratonton dengan semua atau menjawab soalan sahaja.",
@@ -2373,3 +2375,5 @@ editorLocalization.locales["ms"] = msStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Lebar label item (dalam piksel)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teks untuk ditunjukkan jika semua opsyen dipilih"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks ruang letak untuk kawasan penarafan"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Lengkapkan tinjauan secara automatik"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih jika anda mahu tinjauan selesai secara automatik selepas responden menjawab semua soalan."

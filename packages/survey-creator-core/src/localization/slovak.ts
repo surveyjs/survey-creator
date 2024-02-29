@@ -556,6 +556,7 @@ export var skStrings = {
     firstPageIsStarted: "Prvá stránka v prieskume je úvodná stránka.",
     showCompletedPage: "Na konci zobraziť stránku s dokončením (completedHtml)",
     goNextPageAutomatic: "Po zodpovedaní všetkých otázok prejsť na ďalšiu stránku automaticky",
+    allowCompleteSurveyAutomatic: "Vyplňte prieskum automaticky",
     showProgressBar: "Zobraziť indikátor priebehu",
     questionTitleLocation: "Poloha titulu otázky",
     requiredText: "Povinný symbol(-y) otázok",
@@ -1178,6 +1179,7 @@ export var skStrings = {
     logoHeight: "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
     goNextPageAutomatic: "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke. Prieskum sa tiež dokončí automaticky.",
+    allowCompleteSurveyAutomatic: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
     showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
     showPreviewBeforeComplete: "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami.",
@@ -2373,3 +2375,5 @@ editorLocalization.locales["sk"] = skStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Šírka označenia položky (v px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, ktorý zobrazuje, či sú vybraté všetky možnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pre oblasť hodnotenia"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky."

@@ -556,6 +556,7 @@ export var arStrings = {
     firstPageIsStarted: "الصفحة الأولى في الإستبيان هي صفحة البدء",
     showCompletedPage: "إظهار الصفحة المكتملة في النهاية (صفحة ويب مكتملة)",
     goNextPageAutomatic: "عند الإجابة على جميع الأسئلة، إنتقل إلى الصفحة التالية تلقائياً",
+    allowCompleteSurveyAutomatic: "إكمال الاستطلاع تلقائيا",
     showProgressBar: "إظهار شريط التقدم",
     questionTitleLocation: "موقع عنوان السؤال",
     requiredText: "رمز السؤال مطلوب",
@@ -1178,6 +1179,7 @@ export var arStrings = {
     logoHeight: "يضبط ارتفاع الشعار في وحدات CSS (px ، ٪ ، in ، pt ، إلخ).",
     logoFit: "اختر من بين: \"لا شيء\" - تحافظ الصورة على حجمها الأصلي ؛ \"احتواء\" - يتم تغيير حجم الصورة لتلائم مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"الغلاف\" - تملأ الصورة المربع بأكمله مع الحفاظ على نسبة العرض إلى الارتفاع ؛ \"تعبئة\" - يتم تمديد الصورة لملء المربع دون الحفاظ على نسبة العرض إلى الارتفاع.",
     goNextPageAutomatic: "حدد ما إذا كنت تريد أن يتقدم الاستطلاع إلى الصفحة التالية تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة في الصفحة الحالية. يتم أيضا إكمال الاستطلاع تلقائيا.",
+    allowCompleteSurveyAutomatic: "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة.",
     showNavigationButtons: "يضبط رؤية وموقع أزرار التنقل على الصفحة.",
     showProgressBar: "يضبط رؤية شريط التقدم وموقعه. تعرض القيمة \"تلقائي\" شريط التقدم أعلى رأس الاستطلاع أو أسفله.",
     showPreviewBeforeComplete: "قم بتمكين صفحة المعاينة مع جميع الأسئلة أو الإجابة عليها فقط.",
@@ -2330,3 +2332,5 @@ editorLocalization.locales["ar"] = arStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "عرض تسمية العنصر (بالبكسل)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "نص لإظهار ما إذا كانت كل الخيارات محددة"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "نص العنصر النائب لمنطقة الترتيب"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "إكمال الاستطلاع تلقائيا"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة."

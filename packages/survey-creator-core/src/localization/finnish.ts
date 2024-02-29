@@ -556,6 +556,7 @@ export var fiStrings = {
     firstPageIsStarted: "Kyselyn ensimmäinen sivu on aloitussivu.",
     showCompletedPage: "Näytä valmis sivu lopussa (completeHtml)",
     goNextPageAutomatic: "Kun vastaat kaikkiin kysymyksiin, siirry seuraavalle sivulle automaattisesti",
+    allowCompleteSurveyAutomatic: "Vastaa kyselyyn automaattisesti",
     showProgressBar: "Näytä edistymispalkki",
     questionTitleLocation: "Kysymyksen otsikon sijainti",
     requiredText: "Kysymys vaadittu symboli (t)",
@@ -1178,6 +1179,7 @@ export var fiStrings = {
     logoHeight: "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.).",
     logoFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
     goNextPageAutomatic: "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Kyselyyn vastataan myös automaattisesti.",
+    allowCompleteSurveyAutomatic: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
@@ -2420,3 +2422,5 @@ editorLocalization.locales["fi"] = fiStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Nimikkeen otsikon leveys (px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teksti, joka näyttää, onko kaikki asetukset valittu"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Sijoitusalueen paikkamerkkiteksti"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vastaa kyselyyn automaattisesti"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin."

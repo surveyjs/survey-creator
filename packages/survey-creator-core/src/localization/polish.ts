@@ -556,6 +556,7 @@ var polishStrings = {
     firstPageIsStarted: "The first page in the survey is a started page.",
     showCompletedPage: "Show the completed page at the end (completedHtml)",
     goNextPageAutomatic: "On answering all questions, go to the next page automatically",
+    allowCompleteSurveyAutomatic: "Wypełnij ankietę automatycznie",
     showProgressBar: "Show progress bar",
     questionTitleLocation: "Question title location",
     requiredText: "The question required symbol(s)",
@@ -1178,6 +1179,7 @@ var polishStrings = {
     logoHeight: "Ustawia wysokość logo w jednostkach CSS (px, %, in, pt itd.).",
     logoFit: "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji.",
     goNextPageAutomatic: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie. Ankieta jest również wypełniana automatycznie.",
+    allowCompleteSurveyAutomatic: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
     showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
     showPreviewBeforeComplete: "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami.",
@@ -2693,3 +2695,5 @@ editorLocalization.locales["pl"] = polishStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Szerokość etykiety elementu (w pikselach)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst pokazujący, czy wszystkie opcje są zaznaczone"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst zastępczy dla obszaru klasyfikacji"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Wypełnij ankietę automatycznie"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania."

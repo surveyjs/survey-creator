@@ -556,6 +556,7 @@ var germanTranslation = {
     firstPageIsStarted: "Die erste Seite der Umfrage ist die Startseite",
     showCompletedPage: "Nach Abschluss die ausgefüllte Umfrage anzeigen",
     goNextPageAutomatic: "Wenn alle Fragen auf einer Seite beantwortet sind, gehe automatisch zur nächsten Seiten",
+    allowCompleteSurveyAutomatic: "Automatisches Ausfüllen der Umfrage",
     showProgressBar: "Fortschrittsbalken anzeigen",
     questionTitleLocation: "Position des Fragentitels",
     requiredText: "Symbol für erforderliche Fragen",
@@ -1178,6 +1179,7 @@ var germanTranslation = {
     logoHeight: "Legt die Höhe eines Logos in CSS-Einheiten (px, %, in, pt usw.) fest.",
     logoFit: "Wählen Sie aus: \"Keine\" - das Bild behält seine ursprüngliche Größe; \"Enthalten\" - die Größe des Bildes wird angepasst, wobei das Seitenverhältnis beibehalten wird. \"Cover\" - das Bild füllt den gesamten Rahmen aus, während das Seitenverhältnis beibehalten wird. \"Füllen\" - Das Bild wird gestreckt, um den Rahmen auszufüllen, ohne das Seitenverhältnis beizubehalten.",
     goNextPageAutomatic: "Wählen Sie diese Option aus, wenn die Umfrage automatisch zur nächsten Seite weitergeleitet werden soll, nachdem ein Befragter alle Fragen auf der aktuellen Seite beantwortet hat. Die Befragung wird ebenfalls automatisch abgeschlossen.",
+    allowCompleteSurveyAutomatic: "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat.",
     showNavigationButtons: "Legt die Sichtbarkeit und Position von Navigationsschaltflächen auf einer Seite fest.",
     showProgressBar: "Legt die Sichtbarkeit und Position einer Statusanzeige fest. Der Wert \"Auto\" zeigt den Fortschrittsbalken über oder unter der Kopfzeile der Umfrage an.",
     showPreviewBeforeComplete: "Aktivieren Sie die Vorschauseite nur mit allen oder beantworteten Fragen.",
@@ -2126,3 +2128,5 @@ editorLocalization.locales["de"] = germanTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "Breite der Artikelbeschriftung (in px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, der angezeigt werden soll, wenn alle Optionen ausgewählt sind"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platzhaltertext für den Rankingbereich"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatisches Ausfüllen der Umfrage"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Wählen Sie diese Option aus, wenn die Umfrage automatisch abgeschlossen werden soll, nachdem ein Befragter alle Fragen beantwortet hat."

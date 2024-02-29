@@ -556,6 +556,7 @@ export var nbStrings = {
     firstPageIsStarted: "Den første siden i skjema er startside.",
     showCompletedPage: "Vis ferdigsiden på slutten (completedHtml)",
     goNextPageAutomatic: "Når en har svart alle spørsmål, gå til neste side automatisk",
+    allowCompleteSurveyAutomatic: "Fullfør undersøkelsen automatisk",
     showProgressBar: "Vis fremdriftslinje",
     questionTitleLocation: "Spørsmål tittel plassering",
     requiredText: "Svar nødvendig symbol(er)",
@@ -1178,6 +1179,7 @@ export var nbStrings = {
     logoHeight: "Angir en logo høyde i CSS enheter (px, %, i, pt, etc.).",
     logoFit: "Velg mellom: \"Ingen\" - bildet opprettholder sin opprinnelige størrelse; \"Innehold\" - bildet endres for å passe samtidig som størrelsesforholdet opprettholdes; \"Cover\" - bildet fyller hele boksen mens du opprettholder størrelsesforholdet; \"Fyll\" - bildet strekkes for å fylle boksen uten å opprettholde størrelsesforholdet.",
     goNextPageAutomatic: "Velg om du vil at evalueringen skal gå automatisk til neste side etter at en svarperson har svart på alle spørsmålene på gjeldende side. Undersøkelsen fullføres også automatisk.",
+    allowCompleteSurveyAutomatic: "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene.",
     showNavigationButtons: "Angir synligheten og plasseringen av navigasjonsknapper på en side.",
     showProgressBar: "Angir synligheten og plasseringen til en fremdriftsindikator. \"Auto\"-verdien viser fremdriftslinjen over eller under undersøkelseshodet.",
     showPreviewBeforeComplete: "Aktiver forhåndsvisningssiden med alle eller besvarte spørsmål.",
@@ -2423,3 +2425,5 @@ editorLocalization.locales["nb"] = nbStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Bredden på vareetiketten (i piksler)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst som skal vises hvis alle alternativene er valgt"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Plassholdertekst for rangeringsområdet"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Fullfør undersøkelsen automatisk"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Velg om du vil at evalueringen skal fullføres automatisk etter at en svarperson har svart på alle spørsmålene."

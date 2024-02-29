@@ -556,6 +556,7 @@ export var huStrings = {
     firstPageIsStarted: "Az megkezdett lap a kérdőív első oldala.",
     showCompletedPage: "Befejező szöveg mutatása a kérdőív befejezésekor",
     goNextPageAutomatic: "Minden kérdés megválaszolásakor automatikusan a következő lapra lépés",
+    allowCompleteSurveyAutomatic: "A felmérés automatikus kitöltése",
     showProgressBar: "Előrehaladás-mutató megjelenítése",
     questionTitleLocation: "Kérdés címének helye",
     requiredText: "Kötelező szimbólum",
@@ -1178,6 +1179,7 @@ export var huStrings = {
     logoHeight: "Beállítja az embléma magasságát CSS egységekben (px, %, in, pt stb.).",
     logoFit: "Válasszon a következők közül: \"Nincs\" - a kép megőrzi eredeti méretét; \"Tartalmaz\" - a kép átméreteződik, hogy illeszkedjen, miközben megtartja képarányát; \"Borító\" - a kép kitölti az egész dobozt, miközben megtartja képarányát; \"Kitöltés\" - a kép a doboz kitöltéséhez nyúlik a képarány megtartása nélkül.",
     goNextPageAutomatic: "Válassza ki, hogy a felmérés automatikusan továbblépjen-e a következő oldalra, miután a válaszadó megválaszolta az aktuális oldalon található összes kérdést. A felmérés automatikusan is kitöltődik.",
+    allowCompleteSurveyAutomatic: "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést.",
     showNavigationButtons: "Beállítja a navigációs gombok láthatóságát és helyét az oldalon.",
     showProgressBar: "Beállítja a folyamatjelző sáv láthatóságát és helyét. Az \"Automatikus\" érték megjeleníti a folyamatjelző sávot a felmérés fejléce felett vagy alatt.",
     showPreviewBeforeComplete: "Engedélyezze az előnézeti oldalt csak az összes vagy megválaszolt kérdéssel.",
@@ -2573,3 +2575,5 @@ editorLocalization.locales["hu"] = huStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Elemcímke szélessége (képpontban)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Megjelenítendő szöveg, ha az összes beállítás ki van jelölve"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "A rangsorolási terület helyőrző szövege"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "A felmérés automatikus kitöltése"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést."

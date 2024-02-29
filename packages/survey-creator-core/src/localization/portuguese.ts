@@ -556,6 +556,7 @@ var portugueseTranslation = {
     firstPageIsStarted: "Primeira página da pesquisa é a página de início.",
     showCompletedPage: "Mostrar a página de conclusão no final (completedHtml)",
     goNextPageAutomatic: "Ao responder todas as perguntas, ir automaticamente para a próxima página",
+    allowCompleteSurveyAutomatic: "Preencha o questionário automaticamente",
     showProgressBar: "Mostrar barra de progresso",
     questionTitleLocation: "Localização do título da pergunta",
     requiredText: "Símbolo(s) para perguntas obrigatórias",
@@ -1178,6 +1179,7 @@ var portugueseTranslation = {
     logoHeight: "Define a altura do logotipo em unidades CSS (px, %, in, pt, etc.).",
     logoFit: "Escolha entre: \"Nenhum\" - a imagem mantém seu tamanho original; \"Conter\" - a imagem é redimensionada para se ajustar, mantendo sua proporção; \"Capa\" - a imagem preenche toda a caixa, mantendo sua proporção; \"Preencher\" - a imagem é esticada para preencher a caixa sem manter sua proporção.",
     goNextPageAutomatic: "Selecione se você deseja que o questionário avance para a próxima página automaticamente depois que um respondente responder a todas as perguntas na página atual. A pesquisa também é preenchida automaticamente.",
+    allowCompleteSurveyAutomatic: "Selecione se você deseja que o questionário seja concluído automaticamente depois que um respondente responder a todas as perguntas.",
     showNavigationButtons: "Define a visibilidade e a localização dos botões de navegação em uma página.",
     showProgressBar: "Define a visibilidade e o local de uma barra de progresso. O valor \"Auto\" exibe a barra de progresso acima ou abaixo do cabeçalho do questionário.",
     showPreviewBeforeComplete: "Habilite a página de visualização apenas com todas as perguntas ou com as respostas respondidas.",
@@ -2086,3 +2088,5 @@ editorLocalization.locales["pt"] = portugueseTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "Largura da etiqueta do item (em px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Texto para mostrar se todas as opções estão selecionadas"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texto de espaço reservado para a área de classificação"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Preencha o questionário automaticamente"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Selecione se você deseja que o questionário seja concluído automaticamente depois que um respondente responder a todas as perguntas."

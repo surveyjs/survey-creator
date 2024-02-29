@@ -556,6 +556,7 @@ export var turkishStrings = {
     firstPageIsStarted: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
     showCompletedPage: "Tamamlanan sayfayı en sonunda göster (HTML)",
     goNextPageAutomatic: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
+    allowCompleteSurveyAutomatic: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
     questionTitleLocation: "Soru başlığı konumu",
     requiredText: "Zorunlu soru sembolü",
@@ -1178,6 +1179,7 @@ export var turkishStrings = {
     logoHeight: "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar.",
     logoFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
     goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Anket de otomatik olarak tamamlanır.",
+    allowCompleteSurveyAutomatic: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
@@ -2415,3 +2417,5 @@ editorLocalization.locales["tr"] = turkishStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Öğe etiketi genişliği (piksel cinsinden)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tüm seçeneklerin seçili olup olmadığını gösteren metin"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Derecelendirme alanı için yer tutucu metin"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin."

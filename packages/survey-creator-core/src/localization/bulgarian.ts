@@ -556,6 +556,7 @@ export var bgStrings = {
     firstPageIsStarted: "Първата страница е начална.",
     showCompletedPage: "Показване на страницата Завършена анкета",
     goNextPageAutomatic: "Продължи автоматично към следващата страница.",
+    allowCompleteSurveyAutomatic: "Попълване на анкетата автоматично",
     showProgressBar: "Местоположение на лентата за напредък",
     questionTitleLocation: "Местоположение на заглавието на въпроса",
     requiredText: "Задължителен символ(и)",
@@ -1178,6 +1179,7 @@ export var bgStrings = {
     logoHeight: "Задава височина на логото в CSS единици (px, %, in, pt и т.н.).",
     logoFit: "Изберете от: \"Няма\" - изображението запазва оригиналния си размер; \"Съдържа\" - изображението се преоразмерява, за да се побере, като същевременно се запазва съотношението на страните; \"Cover\" - изображението запълва цялата кутия, като същевременно запазва съотношението на страните; \"Fill\" - изображението се разтяга, за да запълни кутията, без да се поддържа съотношението на страните.",
     goNextPageAutomatic: "Изберете дали искате проучването да премине автоматично към следващата страница, след като респондентът отговори на всички въпроси на текущата страница. Анкетата също се попълва автоматично.",
+    allowCompleteSurveyAutomatic: "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси.",
     showNavigationButtons: "Задава видимостта и местоположението на бутоните за навигация на дадена страница.",
     showProgressBar: "Задава видимостта и местоположението на лентата за напредъка. Стойността \"Автоматично\" показва лентата за напредъка над или под заглавката на проучването.",
     showPreviewBeforeComplete: "Разрешете страницата за визуализация само с всички въпроси или само с отговор.",
@@ -1981,3 +1983,5 @@ editorLocalization.locales["bg"] = bgStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Ширина на етикета на елемента (в пиксели)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Текст, който да се показва, ако са избрани всички опции"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Текст в контейнер за областта за класиране"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Попълване на анкетата автоматично"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Изберете дали искате проучването да завърши автоматично, след като респондентът отговори на всички въпроси."
