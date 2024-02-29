@@ -812,6 +812,7 @@ export class ThemeEditorModel extends Base {
       ariaRole: "checkbox",
       css: "sv-theme-group_title-action",
       title: getLocString("theme.advancedMode"),
+      visible: !this.surveyProvider.isMobileView,
       action: () => {
         this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
         this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
@@ -882,7 +883,9 @@ export class ThemeEditorModel extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-    this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
+    if(this.advancedModeSwitcher) {
+      this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
+    }
   }
   private setCoverPropertiesFromSurvey(panel, themeCssVariables: { [index: string]: string }) {
     this._setPGEditorPropertyValue(panel.getQuestionByName("headerTitle"), "readOnly", !this.survey.hasTitle);
