@@ -558,6 +558,16 @@ export interface PageGetFooterActionsEvent {
   addNewQuestion: (type: string) => void;
 }
 
+export interface SurveyInstanceCreatedEvent {
+  /**
+   * A survey that has been just created.
+   */
+  survey: SurveyModel;
+  reason: string;
+  area: string;
+  model?: Base;
+}
+
 export interface DesignerSurveyCreatedEvent {
   /**
    * A survey to be displayed in the Designer tab.
