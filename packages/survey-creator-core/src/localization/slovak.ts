@@ -556,6 +556,7 @@ export var skStrings = {
     firstPageIsStarted: "Prvá stránka v prieskume je úvodná stránka.",
     showCompletedPage: "Na konci zobraziť stránku s dokončením (completedHtml)",
     goNextPageAutomatic: "Po zodpovedaní všetkých otázok prejsť na ďalšiu stránku automaticky",
+    allowCompleteSurveyAutomatic: "Vyplňte prieskum automaticky",
     showProgressBar: "Zobraziť indikátor priebehu",
     questionTitleLocation: "Poloha titulu otázky",
     requiredText: "Povinný symbol(-y) otázok",
@@ -1177,7 +1178,8 @@ export var skStrings = {
     logoWidth: "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoHeight: "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.).",
     logoFit: "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán.",
-    goNextPageAutomatic: "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke. Prieskum sa tiež dokončí automaticky.",
+    goNextPageAutomatic: "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke.",
+    allowCompleteSurveyAutomatic: "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky.",
     showNavigationButtons: "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke.",
     showProgressBar: "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu.",
     showPreviewBeforeComplete: "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami.",
@@ -2288,7 +2290,7 @@ editorLocalization.locales["sk"] = skStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastavuje šírku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastavuje výšku loga v jednotkách CSS (px, %, in, pt atď.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z: \"Žiadne\" - obrázok si zachováva svoju pôvodnú veľkosť; \"Obsahovať\" - veľkosť obrázka sa zmení tak, aby sa zmestil pri zachovaní pomeru strán; \"Obal\" - obrázok vyplní celé pole pri zachovaní pomeru strán; \"Vyplniť\" - obrázok je natiahnutý tak, aby vyplnil pole bez zachovania pomeru strán."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke. Prieskum sa tiež dokončí automaticky."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, či chcete, aby prieskum automaticky postúpil na ďalšiu stranu po tom, čo respondent odpovie na všetky otázky na aktuálnej stránke."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastavuje viditeľnosť a umiestnenie navigačných tlačidiel na stránke."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastavuje viditeľnosť a umiestnenie indikátora priebehu. Hodnota \"Auto\" zobrazuje indikátor priebehu nad alebo pod hlavičkou prieskumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povoľte stránku ukážky so všetkými alebo iba zodpovedanými otázkami."
@@ -2373,3 +2375,5 @@ editorLocalization.locales["sk"] = skStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Šírka označenia položky (v px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, ktorý zobrazuje, či sú vybraté všetky možnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pre oblasť hodnotenia"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vyplňte prieskum automaticky"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, či chcete, aby sa prieskum dokončil automaticky po tom, čo respondent odpovie na všetky otázky."

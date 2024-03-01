@@ -556,6 +556,7 @@ var traditionalChineseTranslation = {
     firstPageIsStarted: "調查的第一頁面為起始頁.",
     showCompletedPage: "結尾展示完成後的頁面 (completedHtml)",
     goNextPageAutomatic: "回答本頁所有問題後，自動跳轉到下一頁",
+    allowCompleteSurveyAutomatic: "自動完成調查",
     showProgressBar: "顯示進度條",
     questionTitleLocation: "問題的標題位置",
     requiredText: "The question required symbol(s)",
@@ -1177,7 +1178,8 @@ var traditionalChineseTranslation = {
     logoWidth: "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。",
     logoHeight: "以 CSS 單位（px、%、in、pt 等）設置徽標高度。",
     logoFit: "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。",
-    goNextPageAutomatic: "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。調查也會自動完成。",
+    goNextPageAutomatic: "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。",
+    allowCompleteSurveyAutomatic: "選擇是否希望在受訪者回答所有問題後自動完成調查。",
     showNavigationButtons: "設置導航按鈕在頁面上的可見性和位置。",
     showProgressBar: "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。",
     showPreviewBeforeComplete: "啟用僅包含所有問題或已回答問題的預覽頁面。",
@@ -2613,7 +2615,7 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標寬度。"
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "以 CSS 單位（px、%、in、pt 等）設置徽標高度。"
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "從以下選項中選擇：「無」 - 影像保持其原始大小;“包含” - 調整圖像大小以適應其縱橫比;“封面” - 圖像填充整個框，同時保持其縱橫比;“填充” - 拉伸圖像以填充框，而不保持其縱橫比。"
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。調查也會自動完成。"
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "選擇是否希望調查在受訪者回答當前頁面上的所有問題後自動前進到下一頁。"
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "設置導航按鈕在頁面上的可見性和位置。"
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "設置進度條的可見性和位置。“自動”值顯示測量標題上方或下方的進度條。"
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "啟用僅包含所有問題或已回答問題的預覽頁面。"
@@ -2698,3 +2700,5 @@ editorLocalization.locales["zh-tw"] = traditionalChineseTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "項目標籤寬度（以 px 為單位）"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "顯示是否選擇了所有選項的文字"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "排名區域的佔位元文本"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "自動完成調查"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "選擇是否希望在受訪者回答所有問題後自動完成調查。"

@@ -556,6 +556,7 @@ export var indonesianStrings = {
     firstPageIsStarted: "Halaman pertama pada survei adalah halaman yang telah dimulai.",
     showCompletedPage: "Tampilkan keseluruhan halaman di akhir (completedHtml)",
     goNextPageAutomatic: "Setelah menjawa seluruh pertanyaan, pergi ke halaman berikutnya secara otomatis",
+    allowCompleteSurveyAutomatic: "Selesaikan survei secara otomatis",
     showProgressBar: "Tampilkan progress bar",
     questionTitleLocation: "Lokasi judul pertanyaan",
     requiredText: "Simbil pertanyaan wajib",
@@ -1177,7 +1178,8 @@ export var indonesianStrings = {
     logoWidth: "Mengatur lebar logo dalam satuan CSS (px, %, in, pt, dll.).",
     logoHeight: "Mengatur tinggi logo dalam satuan CSS (px, %, in, pt, dll.).",
     logoFit: "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya.",
-    goNextPageAutomatic: "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini. Survei juga selesai secara otomatis.",
+    goNextPageAutomatic: "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini.",
+    allowCompleteSurveyAutomatic: "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan.",
     showNavigationButtons: "Mengatur visibilitas dan lokasi tombol navigasi pada halaman.",
     showProgressBar: "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei.",
     showPreviewBeforeComplete: "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab.",
@@ -2489,7 +2491,7 @@ editorLocalization.locales["id"] = indonesianStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Mengatur lebar logo dalam satuan CSS (px, %, in, pt, dll.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Mengatur tinggi logo dalam satuan CSS (px, %, in, pt, dll.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Pilih dari: \"Tidak ada\" - gambar mempertahankan ukuran aslinya; \"Berisi\" - gambar diubah ukurannya agar pas dengan tetap mempertahankan rasio aspeknya; \"Cover\" - gambar mengisi seluruh kotak sambil mempertahankan rasio aspeknya; \"Isi\" - gambar direntangkan untuk mengisi kotak tanpa mempertahankan rasio aspeknya."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini. Survei juga selesai secara otomatis."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Pilih apakah Anda ingin survei maju ke halaman berikutnya secara otomatis setelah responden menjawab semua pertanyaan di halaman saat ini."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Mengatur visibilitas dan lokasi tombol navigasi pada halaman."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Mengatur visibilitas dan lokasi bilah kemajuan. Nilai \"Otomatis\" menampilkan bilah kemajuan di atas atau di bawah header survei."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktifkan halaman pratinjau hanya dengan semua atau pertanyaan yang dijawab."
@@ -2574,3 +2576,5 @@ editorLocalization.locales["id"] = indonesianStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Lebar label item (dalam px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teks untuk memperlihatkan jika semua opsi dipilih"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Teks tempat penampung untuk area peringkat"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Selesaikan survei secara otomatis"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Pilih apakah Anda ingin survei selesai secara otomatis setelah responden menjawab semua pertanyaan."

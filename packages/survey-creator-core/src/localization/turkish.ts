@@ -556,6 +556,7 @@ export var turkishStrings = {
     firstPageIsStarted: "Anketteki ilk sayfa bir başlangıç sayfasıdır.",
     showCompletedPage: "Tamamlanan sayfayı en sonunda göster (HTML)",
     goNextPageAutomatic: "Tüm soruları cevaplarken otomatik olarak sonraki sayfaya git",
+    allowCompleteSurveyAutomatic: "Anketi otomatik olarak tamamlama",
     showProgressBar: "İlerleme çubuğunu göster",
     questionTitleLocation: "Soru başlığı konumu",
     requiredText: "Zorunlu soru sembolü",
@@ -1177,7 +1178,8 @@ export var turkishStrings = {
     logoWidth: "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.).",
     logoHeight: "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar.",
     logoFit: "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır.",
-    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Anket de otomatik olarak tamamlanır.",
+    goNextPageAutomatic: "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin.",
+    allowCompleteSurveyAutomatic: "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin.",
     showNavigationButtons: "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar.",
     showProgressBar: "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler.",
     showPreviewBeforeComplete: "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin.",
@@ -2330,7 +2332,7 @@ editorLocalization.locales["tr"] = turkishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde bir logo genişliği ayarlar (px, %, in, pt, vb.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "CSS birimlerinde (px, %, in, pt, vb.) bir logo yüksekliği ayarlar."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Şunlar arasından seçim yapın: \"Yok\" - görüntü orijinal boyutunu korur; \"İçer\" - görüntü, en boy oranı korunurken sığacak şekilde yeniden boyutlandırılır; \"Kapak\" - görüntü, en boy oranını korurken tüm kutuyu doldurur; \"Doldur\" - görüntü, en boy oranını korumadan kutuyu dolduracak şekilde uzatılır."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin. Anket de otomatik olarak tamamlanır."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Yanıtlayan geçerli sayfadaki tüm soruları yanıtladıktan sonra anketin otomatik olarak bir sonraki sayfaya ilerlemesini isteyip istemediğinizi seçin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Sayfadaki gezinme düğmelerinin görünürlüğünü ve konumunu ayarlar."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "İlerleme çubuğunun görünürlüğünü ve konumunu ayarlar. \"Otomatik\" değeri, anket başlığının üstünde veya altında ilerleme çubuğunu görüntüler."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Önizleme sayfasını tüm sorularla veya yalnızca yanıtlanmış sorularla etkinleştirin."
@@ -2415,3 +2417,5 @@ editorLocalization.locales["tr"] = turkishStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Öğe etiketi genişliği (piksel cinsinden)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tüm seçeneklerin seçili olup olmadığını gösteren metin"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Derecelendirme alanı için yer tutucu metin"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Anketi otomatik olarak tamamlama"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Yanıtlayan tüm soruları yanıtladıktan sonra anketin otomatik olarak tamamlanmasını isteyip istemediğinizi seçin."
