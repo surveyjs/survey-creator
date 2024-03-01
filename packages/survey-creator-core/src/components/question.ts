@@ -309,11 +309,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const res = [];
     let lastItem = null;
     convertClasses.forEach((className: string) => {
-      const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
-      const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
-      lastItem = item;
-      res.push(action);
+      const items = this.creator.toolbox.items.filter(item => item.name == className);
+      if(Array.isArray(items) && items.length > 0) {
+        const item = items[0];
+        const needSeparator = lastItem && item.category != lastItem.category;
+        const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
+        lastItem = item;
+        res.push(action);
+      }
     });
     return res;
   }
