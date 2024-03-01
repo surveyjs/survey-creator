@@ -385,6 +385,28 @@ export var enStrings = {
       name: "Name",
       title: "Title",
     },
+    masksettings: {
+      saveMaskedValue: "Save masked value in survey results",
+    },
+    patternmask: {
+      pattern: "Value pattern"
+    },
+    datetimemask: {
+      min: "Minimum value",
+      max: "Maximum value"
+    },
+    numericmask: {
+      allowNegativeValues: "Allow negative values",
+      thousandsSeparator: "Thousands separator",
+      decimalSeparator: "Decimal separator",
+      precision: "Value precision",
+      min: "Minimum value",
+      max: "Maximum value",
+    },
+    currencymask: {
+      prefix: "Currency prefix",
+      suffix: "Currency suffix"
+    },
     imageHeight: "Display area height",
     imageWidth: "Display area width",
     valueName: "Join identifier",
@@ -626,11 +648,13 @@ export var enStrings = {
     autoGrowComment: "Auto-expand text areas",
     allowResizeComment: "Allow users to resize text areas",
     textUpdateMode: "Update input field values",
-    maskType: "Type",
-    patternmask: "Pattern",
-    numericmask: "Number",
-    datetimemask: "Date",
-    currencymask: "Currency",
+    maskType: "Input mask type",
+    maskTypes: {
+      patternmask: "Pattern",
+      numericmask: "Numeric",
+      datetimemask: "Date and Time",
+      currencymask: "Currency",
+    },
     maskSettingsPlaceHolder: "The setting is empty. Select any type.",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
@@ -756,7 +780,7 @@ export var enStrings = {
       templateTitle: "Title template",
       totals: "Totals",
       logic: "Conditions",
-      mask: "Mask settings",
+      mask: "Input Mask Settings",
       layout: {
         panel: "Panel Layout",
         question: "Layout",
@@ -1307,7 +1331,25 @@ export var enStrings = {
     autocomplete: "Select the data type that the user's browser can retrieve. This data is sourced either from past values entered by the user or from pre-configured values if any have been saved by the user for autocompletion.",
     filePlaceholder: "Applies when \"File source type\" is \"Local file\" or when camera is unavailable",
     photoPlaceholder: "Applies when \"File source type\" is \"Camera\".",
-    fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\"."
+    fileOrPhotoPlaceholder: "Applies when \"File source type\" is \"Local file or camera\".",
+    masksettings: {
+      saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results.",
+    },
+    patternmask: {
+      pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\` to escape a character.<br><b>Placeholder</b>: Ex.: +1(999)-999-99-99",
+    },
+    datetimemask: {
+      pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year.<br><b>Placeholder</b>: Ex.: mm/dd/yyyy",
+    },
+    numericmask: {
+      decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number.",
+      thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three.",
+      precision: "Limits how many digits to retain after the decimal point for a displayed number.",
+    },
+    currencymask: {
+      prefix: "One or several symbols to be displayed before the value.<br><b>Placeholder</b>: Ex.: $",
+      suffix: "One or several symbols to be displayed after the value.<br><b>Placeholder</b>: Ex.: USD"
+    },
   },
   // Properties
   p: {

@@ -370,7 +370,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maskSettings", tab: "mask" },
     ],
     tabs: [
-      { name: "mask", index: 10 }
+      { name: "mask", index: 250 }
     ]
   },
   boolean: {
@@ -806,7 +806,45 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "titleName",
       "allowEmptyResponse"
     ]
-  }
+  },
+  "patternmask@maskSettings": {
+    properties: [
+      "pattern",
+      "saveMaskedValue",
+    ]
+  },
+  "datetimemask@maskSettings": {
+    properties: [
+      "pattern",
+      "min",
+      "max",
+      "saveMaskedValue",
+    ]
+  },
+  "numericmask@maskSettings": {
+    properties: [
+      "min",
+      "max",
+      "precision",
+      "decimalSeparator",
+      "thousandsSeparator",
+      "allowNegativeValues",
+      "saveMaskedValue",
+    ]
+  },
+  "currencymask@maskSettings": {
+    properties: [
+      "prefix",
+      "suffix",
+      "min",
+      "max",
+      "precision",
+      "decimalSeparator",
+      "thousandsSeparator",
+      "allowNegativeValues",
+      "saveMaskedValue",
+    ]
+  },
 };
 
 export const defaultPropertyGridDefinition: ISurveyPropertyGridDefinition = {

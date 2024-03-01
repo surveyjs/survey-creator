@@ -100,7 +100,7 @@ export class PropertyGridEditorMaskType extends PropertyGridEditor {
       if (cl.name.indexOf("mask") !== -1) {
         value = value.slice(0, value.indexOf("mask"));
       }
-      return { value: value, text: getLocString("pe." + cl.name) };
+      return { value: value, text: getLocString("pe.maskTypes." + cl.name) };
     });
     choices.splice(0, 0, this._noneItem);
     return choices;
