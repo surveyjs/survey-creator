@@ -124,7 +124,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see activeTab
-   * @see onDesignerSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
@@ -141,7 +141,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see activeTab
-   * @see onPreviewSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
@@ -383,6 +383,17 @@ export class SurveyCreatorModel extends Base
    */
   public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
 
+  /**
+   * An event that is raised when Survey Creator [instantiates a survey to display a UI element](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys). Handle this event to customize the UI element by modifying the survey.
+   * 
+   * For information on event handler parameters, refer to descriptions within the interface.
+   * 
+   * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
+   * 
+   * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   */
   public onSurveyInstanceCreated: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
 
   /**
@@ -429,14 +440,13 @@ export class SurveyCreatorModel extends Base
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
   /**
-   * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid by modifying the survey.
-   * @see onPropertyEditorCreated
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    */
   public onPropertyGridSurveyCreated: EventBase<SurveyCreatorModel, PropertyGridSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridSurveyCreatedEvent>();
   /**
    * An event that is raised when a property editor is created in the Property Grid. Use this event to modify the property editor or add event handlers to it.
    * @see onSetPropertyEditorOptions
-   * @see onPropertyGridSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public onPropertyEditorCreated: EventBase<SurveyCreatorModel, PropertyEditorCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyEditorCreatedEvent>();
   /**
@@ -548,24 +558,11 @@ export class SurveyCreatorModel extends Base
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
 
   /**
-   * An event that is raised when Survey Creator instantiates a survey for the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide#designer-tab) tab. Use this event to customize the survey.
-   * 
-   * For information on event handler parameters, refer to descriptions within the interface.
-   * 
-   * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
-   * 
-   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
-   * @see survey
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    */
   public onDesignerSurveyCreated: EventBase<SurveyCreatorModel, DesignerSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, DesignerSurveyCreatedEvent>();
   /**
-   * An event that is raised when Survey Creator instantiates a survey for the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide#preview-tab) tab. Use this event to customize the survey.
-   * 
-   * For information on event handler parameters, refer to descriptions within the interface.
-   * 
-   * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
-   * 
-   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
    */
   public onPreviewSurveyCreated: EventBase<SurveyCreatorModel, PreviewSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PreviewSurveyCreatedEvent>();
   public onTestSurveyCreated: EventBase<SurveyCreatorModel, any> = this.onPreviewSurveyCreated;
@@ -1557,7 +1554,7 @@ export class SurveyCreatorModel extends Base
 
   /**
    * A [survey](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) being configured in the Designer tab.
-   * @see onDesignerSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public get survey(): SurveyModel {
     return this.surveyValue;
@@ -1908,25 +1905,27 @@ export class SurveyCreatorModel extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    if(callback) {
+    if (callback) {
       callback(survey);
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey,
+    this.onSurveyInstanceCreated.fire(this, {
+      survey: survey,
       reason: reason,
       area: this.getSurveyInstanceCreatedArea(reason),
-      model: !!model ? model : this.currentPlugin?.model });
-    if(reason === "designer") {
+      model: !!model ? model : this.currentPlugin?.model
+    });
+    if (reason === "designer") {
       this.onDesignerSurveyCreated.fire(this, { survey: survey });
     }
-    if(reason === "test") {
+    if (reason === "test") {
       this.onPreviewSurveyCreated.fire(this, { survey: survey });
     }
     return survey;
   }
   private getSurveyInstanceCreatedArea(reason: string): string {
     const hash: any = {};
-    hash["designer"] =	"designer-tab";
-    hash["test"] =	"preview-tab";
+    hash["designer"] = "designer-tab";
+    hash["test"] = "preview-tab";
     hash["property-grid"] = "property-grid";
     hash["default-value"] = "default-value-popup-editor";
     hash["condition-builder"] = "logic-rule:condition-editor";
