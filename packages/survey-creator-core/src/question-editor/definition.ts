@@ -707,6 +707,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "questionsOnPageMode", tab: "navigation" },
       { name: "firstPageIsStarted", tab: "navigation" },
       { name: "goNextPageAutomatic", tab: "navigation" },
+      { name: "allowCompleteSurveyAutomatic", tab: "navigation" },
       { name: "showNavigationButtons", tab: "navigation" },
       { name: "showPrevButton", tab: "navigation" },
       { name: "showProgressBar", tab: "navigation" },

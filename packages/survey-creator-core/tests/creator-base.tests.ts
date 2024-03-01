@@ -4378,3 +4378,16 @@ test("New ghost page shouldn't be created if onPageAdding sets allow to false", 
   expect(desigerTab.newPage).toBeFalsy();
   expect(desigerTab.showNewPage).toBeFalsy();
 });
+test("Add-remove toolbox items, #5271", (): any => {
+  const creator = new CreatorTester();
+  creator.toolbox.allowExpandMultipleCategories = true;
+  creator.toolbox.showCategoryTitles = true;
+  creator.onQuestionAdded.add((sender, options) => {
+    if (options.question.getType() === "dropdown") {
+      creator.toolbox.removeItem("dropdown");
+    }
+  });
+  creator.currentAddQuestionType = "dropdown";
+  creator.addNewQuestionInPage(() => {}, undefined, "dropdown");
+  expect(creator.getAddNewQuestionText()).toEqual("Add Question");
+});

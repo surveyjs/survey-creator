@@ -556,6 +556,7 @@ var polishStrings = {
     firstPageIsStarted: "The first page in the survey is a started page.",
     showCompletedPage: "Show the completed page at the end (completedHtml)",
     goNextPageAutomatic: "On answering all questions, go to the next page automatically",
+    allowCompleteSurveyAutomatic: "Wypełnij ankietę automatycznie",
     showProgressBar: "Show progress bar",
     questionTitleLocation: "Question title location",
     requiredText: "The question required symbol(s)",
@@ -1177,7 +1178,8 @@ var polishStrings = {
     logoWidth: "Ustawia szerokość logo w jednostkach CSS (px, %, in, pt itd.).",
     logoHeight: "Ustawia wysokość logo w jednostkach CSS (px, %, in, pt itd.).",
     logoFit: "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji.",
-    goNextPageAutomatic: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie. Ankieta jest również wypełniana automatycznie.",
+    goNextPageAutomatic: "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie.",
+    allowCompleteSurveyAutomatic: "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania.",
     showNavigationButtons: "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie.",
     showProgressBar: "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety.",
     showPreviewBeforeComplete: "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami.",
@@ -2608,7 +2610,7 @@ editorLocalization.locales["pl"] = polishStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Ustawia szerokość logo w jednostkach CSS (px, %, in, pt itd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Ustawia wysokość logo w jednostkach CSS (px, %, in, pt itd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Do wyboru: \"Brak\" - obraz zachowuje swój oryginalny rozmiar; \"Zawieraj\" - rozmiar obrazu jest zmieniany tak, aby pasował przy zachowaniu proporcji; \"Okładka\" - obraz wypełnia całe pole z zachowaniem proporcji; \"Wypełnij\" - obraz jest rozciągany w celu wypełnienia pola bez zachowania jego proporcji."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie. Ankieta jest również wypełniana automatycznie."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Wybierz, czy chcesz, aby ankieta automatycznie przechodziła do następnej strony po udzieleniu przez respondenta odpowiedzi na wszystkie pytania na bieżącej stronie."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Ustawia widoczność i położenie przycisków nawigacyjnych na stronie."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Ustawia widoczność i położenie paska postępu. Wartość \"Auto\" wyświetla pasek postępu nad lub pod nagłówkiem ankiety."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Włącz stronę podglądu ze wszystkimi pytaniami lub tylko odpowiedziami."
@@ -2693,3 +2695,5 @@ editorLocalization.locales["pl"] = polishStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Szerokość etykiety elementu (w pikselach)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst pokazujący, czy wszystkie opcje są zaznaczone"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst zastępczy dla obszaru klasyfikacji"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Wypełnij ankietę automatycznie"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Wybierz, jeśli chcesz, aby ankieta była wypełniana automatycznie po udzieleniu odpowiedzi respondenta na wszystkie pytania."

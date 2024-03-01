@@ -556,6 +556,7 @@ export var fiStrings = {
     firstPageIsStarted: "Kyselyn ensimmäinen sivu on aloitussivu.",
     showCompletedPage: "Näytä valmis sivu lopussa (completeHtml)",
     goNextPageAutomatic: "Kun vastaat kaikkiin kysymyksiin, siirry seuraavalle sivulle automaattisesti",
+    allowCompleteSurveyAutomatic: "Vastaa kyselyyn automaattisesti",
     showProgressBar: "Näytä edistymispalkki",
     questionTitleLocation: "Kysymyksen otsikon sijainti",
     requiredText: "Kysymys vaadittu symboli (t)",
@@ -1177,7 +1178,8 @@ export var fiStrings = {
     logoWidth: "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.).",
     logoHeight: "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.).",
     logoFit: "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta.",
-    goNextPageAutomatic: "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Kyselyyn vastataan myös automaattisesti.",
+    goNextPageAutomatic: "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin.",
+    allowCompleteSurveyAutomatic: "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin.",
     showNavigationButtons: "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin.",
     showProgressBar: "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella.",
     showPreviewBeforeComplete: "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä.",
@@ -2335,7 +2337,7 @@ editorLocalization.locales["fi"] = fiStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Määrittää logon leveyden CSS-yksiköissä (px, %, in, pt jne.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Asettaa logon korkeuden CSS-yksiköinä (px, %, in, pt jne.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Valitse seuraavista: \"Ei mitään\" - kuva säilyttää alkuperäisen kokonsa; \"Sisältää\" - kuvan kokoa muutetaan sopivaksi säilyttäen samalla kuvasuhteensa; \"Kansi\" - kuva täyttää koko laatikon säilyttäen samalla kuvasuhteensa; \"Täytä\" - kuva venytetään täyttämään laatikko säilyttämättä sen kuvasuhdetta."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin. Kyselyyn vastataan myös automaattisesti."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Valitse, haluatko kyselyn siirtyvän seuraavalle sivulle automaattisesti, kun vastaaja on vastannut kaikkiin nykyisen sivun kysymyksiin."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Määrittää sivun navigointipainikkeiden näkyvyyden ja sijainnin."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Määrittää edistymispalkin näkyvyyden ja sijainnin. \"Auto\"-arvo näyttää edistymispalkin kyselyn otsikon ylä- tai alapuolella."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Ota esikatselusivu käyttöön vain kaikilla kysymyksillä tai vastatuilla kysymyksillä."
@@ -2420,3 +2422,5 @@ editorLocalization.locales["fi"] = fiStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Nimikkeen otsikon leveys (px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Teksti, joka näyttää, onko kaikki asetukset valittu"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Sijoitusalueen paikkamerkkiteksti"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vastaa kyselyyn automaattisesti"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin."

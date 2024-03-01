@@ -556,6 +556,7 @@ export let svStrings = {
     firstPageIsStarted: "Den första sidan i enkäten är startsidan.",
     showCompletedPage: "Visa den slutförda sidan på slutet (completedHtml)",
     goNextPageAutomatic: "Vid besvarande av alla frågor, gå till nästa sida automatiskt",
+    allowCompleteSurveyAutomatic: "Fyll i enkäten automatiskt",
     showProgressBar: "Visa händelsförlopp",
     questionTitleLocation: "Fråga titel placering",
     requiredText: "Var vänlig skriv en text",
@@ -1177,7 +1178,8 @@ export let svStrings = {
     logoWidth: "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.).",
     logoHeight: "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.).",
     logoFit: "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet.",
-    goNextPageAutomatic: "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan. Enkäten fylls också i automatiskt.",
+    goNextPageAutomatic: "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan.",
+    allowCompleteSurveyAutomatic: "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor.",
     showNavigationButtons: "Anger synlighet och placering av navigeringsknappar på en sida.",
     showProgressBar: "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet.",
     showPreviewBeforeComplete: "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor.",
@@ -2512,7 +2514,7 @@ editorLocalization.locales["sv"] = svStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Anger en logotypbredd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Anger en logotyphöjd i CSS-enheter (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Välj mellan: \"Ingen\" - bilden behåller sin ursprungliga storlek; \"Innehåll\" - bildens storlek ändras så att den passar samtidigt som bildförhållandet bibehålls. \"Cover\" - bilden fyller hela rutan samtidigt som bildförhållandet bibehålls; \"Fyll\" - bilden sträcks ut för att fylla rutan utan att behålla bildförhållandet."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan. Enkäten fylls också i automatiskt."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Välj om du vill att undersökningen ska gå vidare till nästa sida automatiskt efter att en svarande har svarat på alla frågor på den aktuella sidan."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Anger synlighet och placering av navigeringsknappar på en sida."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Anger synlighet och plats för en förloppsindikator. Värdet \"Auto\" visar förloppsindikatorn ovanför eller under undersökningshuvudet."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Aktivera förhandsgranskningssidan med alla eller endast besvarade frågor."
@@ -2597,3 +2599,5 @@ editorLocalization.locales["sv"] = svStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Bredd på objektetikett (i px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text som ska visas om alla alternativ är markerade"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platshållartext för rangordningsområdet"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Fyll i enkäten automatiskt"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor."

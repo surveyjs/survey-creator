@@ -556,6 +556,7 @@ export var hrStrings = {
     firstPageIsStarted: "Prva stranica u anketi je početna stranica.",
     showCompletedPage: "Prikagušite dovršenu stranicu na kraju (completedHtml)",
     goNextPageAutomatic: "Kada odgovarate na sva pitanja, idite automatski na sljedeću stranicu",
+    allowCompleteSurveyAutomatic: "Automatsko ispunjavanje upitnika",
     showProgressBar: "Pokaži traku napretka",
     questionTitleLocation: "Lokacija naslova pitanja",
     requiredText: "Pitanje je zahtijevalo simbole",
@@ -1177,7 +1178,8 @@ export var hrStrings = {
     logoWidth: "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoHeight: "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.).",
     logoFit: "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike.",
-    goNextPageAutomatic: "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Anketa se također automatski dovršava.",
+    goNextPageAutomatic: "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici.",
+    allowCompleteSurveyAutomatic: "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja.",
     showNavigationButtons: "Postavlja vidljivost i mjesto navigacijskih gumba na stranici.",
     showProgressBar: "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika.",
     showPreviewBeforeComplete: "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima.",
@@ -2329,7 +2331,7 @@ editorLocalization.locales["hr"] = hrStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Postavlja širinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Postavlja visinu logotipa u CSS jedinicama (px, %, in, pt itd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Odaberite između: \"Nema\" - slika zadržava svoju izvornu veličinu; \"Sadrži\" - slika se mijenja kako bi stala uz zadržavanje omjera slike; \"Poklopac\" - slika ispunjava cijelu kutiju zadržavajući omjer slike; \"Ispuna\" - slika se rasteže kako bi ispunila kutiju bez zadržavanja omjera slike."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici. Anketa se također automatski dovršava."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Odaberite želite li da anketa automatski prijeđe na sljedeću stranicu nakon što ispitanik odgovori na sva pitanja na trenutnoj stranici."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Postavlja vidljivost i mjesto navigacijskih gumba na stranici."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Postavlja vidljivost i mjesto trake napretka. Vrijednost \"Automatski\" prikazuje traku napretka iznad ili ispod zaglavlja upitnika."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Omogućite stranicu pretpregleda samo sa svim ili odgovorenim pitanjima."
@@ -2414,3 +2416,5 @@ editorLocalization.locales["hr"] = hrStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Širina natpisa stavke (u px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Tekst koji prikazuje jesu li odabrane sve mogućnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Tekst rezerviranog mjesta za područje rangiranja"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatsko ispunjavanje upitnika"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Odaberite želite li da se anketa automatski dovrši nakon što ispitanik odgovori na sva pitanja."

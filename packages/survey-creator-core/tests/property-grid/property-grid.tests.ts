@@ -3198,3 +3198,18 @@ test("Set property name into correct category", () => {
   expect(validationQuestion.parent.name).toEqual("general");
   Serializer.removeProperty("question", "validation");
 });
+test("Set correct property grid category", () => {
+  Serializer.addProperty("question", {
+    name: "validation",
+    category: "cust_category",
+    categoryIndex: 1
+  });
+  const creator = new CreatorTester();
+  creator.JSON = { elements: [{ type: "text", name: "q1" }] };
+  const q = creator.survey.getQuestionByName("q1");
+  const propertyGrid = new PropertyGridModelTester(q);
+  const panel = propertyGrid.survey.getPanelByName("cust_category");
+  expect(panel).toBeTruthy();
+  expect(propertyGrid.survey.getAllPanels().indexOf(panel)).toEqual(1);
+  Serializer.removeProperty("question", "validation");
+});

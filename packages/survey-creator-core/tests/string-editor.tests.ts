@@ -725,6 +725,75 @@ test("StringEditorConnector for matrix questions (rows)", (): any => {
   }
 });
 
+test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
+  const creator = new CreatorTester();
+
+  var log = "";
+
+  creator.onItemValueAdded.add((sender, options) => {
+    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.length + "+" + options.newItem.title;
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrix", name: "q1", columns: ["Column 1", "Column 2"], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as any;
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  var connectorItemC1 = StringEditorConnector.get(question.columns[0].locText);
+  var connectorItemC2 = StringEditorConnector.get(question.columns[1].locText);
+  var connectorItemR1 = StringEditorConnector.get(question.rows[0].locText);
+  var connectorItemR2 = StringEditorConnector.get(question.rows[1].locText);
+
+  connectorItemC1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemC2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:2+Column 3");
+
+  log = "";
+
+  connectorItemR1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemR2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:2+Row 3");
+});
+
+test("StringEditorConnector for matrix - onMatrixColumnAdded event", (): any => {
+  const creator = new CreatorTester();
+
+  var log = "";
+
+  creator.onMatrixColumnAdded.add((sender, options) => {
+    log += options.matrix.name + ":" + options.columns.length + "+" + options.newColumn.title;
+  });
+  creator.JSON = {
+    elements: [
+      { type: "matrixdropdown", name: "q1", columns: [{ name: "Column 1" }, { name: "Column 2" }], rows: ["Row 1", "Row 2"] },
+    ]
+  };
+  const question = creator.survey.getQuestionByName("q1") as any;
+  creator.selectElement(question);
+  const questionAdorner = new QuestionAdornerViewModel(
+    creator,
+    question,
+    <any>undefined
+  );
+
+  var connectorItemC1 = StringEditorConnector.get(question.columns[0].locTitle);
+  var connectorItemC2 = StringEditorConnector.get(question.columns[1].locTitle);
+
+  connectorItemC1.onEditComplete.fire(null, {});
+  expect(log).toEqual("");
+  connectorItemC2.onEditComplete.fire(null, {});
+  expect(log).toEqual("q1:2+Column 3");
+});
+
 test("StringEditor on property value changing", () => {
   const creator = new CreatorTester();
   creator.JSON = {

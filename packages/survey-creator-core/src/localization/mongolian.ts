@@ -556,6 +556,7 @@ export var mnStrings = {
     firstPageIsStarted: "Эхлэх хуудас нь эхний хуудас байна",
     showCompletedPage: "Санал асуулга амжилттай бөглөгдсөн хуудсыг харуулах",
     goNextPageAutomatic: "Дараагийн хуудас руу автоматаар шилжих",
+    allowCompleteSurveyAutomatic: "Судалгааг автоматаар дуусгах",
     showProgressBar: "Явцын мөрний байршил",
     questionTitleLocation: "Асуултын гарчгийн байршил",
     requiredText: "Шаардлагатай тэмдэг(үүд)",
@@ -1177,7 +1178,8 @@ export var mnStrings = {
     logoWidth: "CSS нэгж (px, %, in, pt, гэх мэт) дээр логоны өргөнийг тогтооно.",
     logoHeight: "CSS нэгж (px, %, in, pt г.м) дээр логоны өндрийг тогтооно.",
     logoFit: "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон.",
-    goNextPageAutomatic: "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу. Мөн судалгааг автоматаар хийж дуусгана.",
+    goNextPageAutomatic: "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу.",
+    allowCompleteSurveyAutomatic: "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго.",
     showNavigationButtons: "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно.",
     showProgressBar: "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг.",
     showPreviewBeforeComplete: "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго.",
@@ -1991,7 +1993,7 @@ editorLocalization.locales["mn"] = mnStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "CSS нэгж (px, %, in, pt, гэх мэт) дээр логоны өргөнийг тогтооно."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "CSS нэгж (px, %, in, pt г.м) дээр логоны өндрийг тогтооно."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Сонгоно уу: \"None\" - зураг анхны хэмжээгээ хадгалдаг; \"Агуулах\" - дүрсийг тал харьцаагаа хадгалахын зэрэгцээ тохируулахын тулд дахин тохируулдаг; \"Cover\" - дүрс нь тал харьцаагаа хадгалахын зэрэгцээ хайрцгийг бүхэлд нь дүүргэдэг; \"Fill\" - дүрс нь тал харьцаагаа хадгалахгүйгээр хайрцгийг дүүргэхийн тулд сунаж тогтсон."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу. Мөн судалгааг автоматаар хийж дуусгана."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Тухайн хуудас дээрх бүх асуултад хариулагч хариулсны дараа судалгааг автоматаар дараагийн хуудас руу урагшлуулахыг хүсвэл сонгоно уу."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Хуудас дээр навигацийн товчны харагдах байдал, байршлыг тогтооно."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Хэмжилтийн тавцангийн харагдах байдал, байршлыг тогтооно. \"Авто\" үнэ цэнэ нь судалгааны толгой гарчгийн дээр эсвэл түүнээс доош хөгжил дэвшлийн барыг харуулдаг."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Зөвхөн бүх асуултаар эсвэл хариулт бүхий урьдчилан харах хуудсыг боломжтой болго."
@@ -2076,3 +2078,5 @@ editorLocalization.locales["mn"] = mnStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Барааны шошгоны өргөн (px-д)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Бүх сонголтыг сонгосон эсэхийг харуулах текст"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Хаягийн бүсэд байрлах газар эзэмшигчийн текст"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Судалгааг автоматаар дуусгах"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Асуултад хариулсан хүн бүх асуултанд хариулсны дараа судалгааг автоматаар дуусгахыг хүсвэл сонго."
