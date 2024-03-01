@@ -655,7 +655,6 @@ export var enStrings = {
       datetimemask: "Date and Time",
       currencymask: "Currency",
     },
-    maskSettingsPlaceHolder: "The setting is empty. Select any type.",
     focusOnFirstError: "Set focus on the first invalid answer",
     checkErrorsMode: "Run validation",
     navigateToUrl: "Redirect to an external link after submission",

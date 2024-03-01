@@ -55,18 +55,11 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
   }
 
   updatePreviewQuestion(masksettings: InputMaskBase, panel: PanelModel) {
-    switch (masksettings.getType()) {
-      case "masksettings":
-        this._previewQuestion.visible = true;
-        this._previewQuestion.html = getLocString("pe.maskSettingsPlaceHolder");
-        break;
-      case "numbermask":
-        this._previewQuestion.visible = true;
-        this._previewQuestion.html = masksettings["getNumberMaskedValue"](-123456.78);
-        break;
-      default:
-        this._previewQuestion.visible = false;
-        break;
+    if (masksettings.getType() === "masksettings") {
+      this._previewQuestion.visible = true;
+      this._previewQuestion.html = "&nbsp;";
+    } else {
+      this._previewQuestion.visible = false;
     }
     if (!panel.getElementByName(this._previewQuestion.name)) {
       panel.addElement(this._previewQuestion);
