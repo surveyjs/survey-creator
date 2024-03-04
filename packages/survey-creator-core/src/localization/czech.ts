@@ -556,6 +556,7 @@ export var czStrings = {
     firstPageIsStarted: "První stránka průzkumu je úvodní stránka.",
     showCompletedPage: "Zobrazení dokončené stránky na konci (completedHtml)",
     goNextPageAutomatic: "Po zodpovězení všech otázek automaticky přejít na další stránku",
+    allowCompleteSurveyAutomatic: "Automatické vyplnění dotazníku",
     showProgressBar: "Zobrazit ukazatel průběhu",
     questionTitleLocation: "Umístění názvu otázky",
     requiredText: "Povinné symboly otázky",
@@ -1177,7 +1178,8 @@ export var czStrings = {
     logoWidth: "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoHeight: "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.).",
     logoFit: "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran.",
-    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce. Dotazník je také vyplněn automaticky.",
+    goNextPageAutomatic: "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce.",
+    allowCompleteSurveyAutomatic: "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky.",
     showNavigationButtons: "Nastaví viditelnost a umístění navigačních tlačítek na stránce.",
     showProgressBar: "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu.",
     showPreviewBeforeComplete: "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami.",
@@ -1899,7 +1901,7 @@ editorLocalization.locales["cs"] = czStrings;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Nastaví šířku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Nastaví výšku loga v jednotkách CSS (px, %, in, pt atd.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Vyberte si z těchto možností: \"Žádné\" - obrázek si zachová svou původní velikost; \"Obsahovat\" - velikost obrázku se změní tak, aby se vešel při zachování poměru stran; \"Obálka\" - obrázek vyplní celý rámeček při zachování poměru stran; \"Výplň\" - obrázek je roztažen tak, aby vyplnil rámeček bez zachování poměru stran."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce. Dotazník je také vyplněn automaticky."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Vyberte, zda chcete, aby průzkum automaticky postoupil na další stránku poté, co respondent odpoví na všechny otázky na aktuální stránce."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Nastaví viditelnost a umístění navigačních tlačítek na stránce."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Nastaví viditelnost a umístění indikátoru průběhu. Hodnota \"Auto\" zobrazuje indikátor průběhu nad nebo pod záhlavím průzkumu."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Povolte stránku náhledu pouze se všemi nebo zodpovězenými otázkami."
@@ -1984,3 +1986,5 @@ editorLocalization.locales["cs"] = czStrings;
 // p.itemTitleWidth: "Item label width (in px)" => "Šířka popisku položky (v px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Text, který se zobrazí, pokud jsou vybrány všechny možnosti"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Zástupný text pro oblast hodnocení"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Automatické vyplnění dotazníku"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Vyberte, zda chcete, aby se průzkum vyplnil automaticky poté, co respondent odpoví na všechny otázky."

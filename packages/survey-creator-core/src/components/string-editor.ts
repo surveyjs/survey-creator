@@ -156,8 +156,18 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
     return [this.question.columns, this.question.rows];
   }
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
-    if (items == this.question.columns) this.question.addColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
-    if (items == this.question.rows) this.question.rows.push(text || new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
+    let titleBase: string;
+    let propertyName: string;
+    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
+    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
+    creator.onItemValueAddedCallback(
+      this.question,
+      propertyName,
+      newItem,
+      items
+    );
+    items.push(text || newItem);
   }
   protected getItemsPropertyName(items: any) {
     if (items == this.question.columns) return "columns";
@@ -168,6 +178,14 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   protected getItemLocString(items: any, item: any) {
     if (items == this.question.columns) return item.locTitle;
     return item.locText;
+  }
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (items == this.question.columns) {
+      var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+      creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
+      this.question.columns.push(column);
+    }
+    if (items == this.question.rows) super.addNewItem(creator, items, text);
   }
   protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     if (items == this.question.columns) {
@@ -446,7 +464,7 @@ export class StringEditorViewModelBase extends Base {
       // get text representation of clipboard
       var text = event.clipboardData.getData("text/plain");
       // insert text manually
-      document.execCommand("insertHTML", false, text);
+      document.execCommand("insertText", false, text);
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {

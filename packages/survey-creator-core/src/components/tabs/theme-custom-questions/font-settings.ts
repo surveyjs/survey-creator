@@ -120,6 +120,8 @@ export function fontsettingsToCssVariable(question: Question, themeCssVariables:
 }
 
 export function fontsettingsFromCssVariable(question: Question, themeCssVariables: { [index: string]: string }, defaultColorVariable?: string, defaultPlaceholderColorVariable?: string): void {
+  if (!question) return;
+
   const compositeQuestion = <QuestionCompositeModel>question;
   const fontSettingsFromTheme = Object.keys(themeCssVariables).filter(key => key.indexOf(question.name.toLocaleLowerCase()) !== -1);
   fontSettingsFromTheme.forEach(key => {

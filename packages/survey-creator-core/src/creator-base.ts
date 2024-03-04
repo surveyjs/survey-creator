@@ -1637,6 +1637,84 @@ export class SurveyCreatorModel extends Base
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
+  public addSurveyJson(json: any, indexPage?: number): void {
+    const survey = new SurveyModel(json);
+    this.updateAddingSurvey(survey);
+    this.addSurveyPages(survey, indexPage);
+  }
+  private updateAddingSurvey(survey: SurveyModel): void {
+    this.updateAddingPages(survey);
+    this.updateAddingPanels(survey);
+    this.updateAddingQuestions(survey);
+    this.updateAddingCalculatedValules(survey);
+    this.updateAddingArrays(survey);
+  }
+  private updateAddingPages(survey: SurveyModel): void {
+    this.updateAddingElements(survey, survey.pages, this.survey.pages,
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        el.name = SurveyHelper.getNewPageName(allElements);
+      });
+  }
+  private updateAddingPanels(survey: SurveyModel): void {
+    this.updateAddingElements(survey, <any>survey.getAllPanels(), <any>this.survey.getAllPanels(),
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        el.name = SurveyHelper.getNewPanelName(allElements);
+      });
+  }
+  private updateAddingQuestions(survey: SurveyModel): void {
+    const logic = new SurveyLogic(survey, this);
+    this.updateAddingElements(survey, survey.getAllQuestions(), this.survey.getAllQuestions(),
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        const oldName = el.name;
+        el.name = SurveyHelper.getNewQuestionName(allElements);
+        logic.renameQuestion(oldName, el.name);
+      });
+  }
+  private updateAddingCalculatedValules(survey: SurveyModel): void {
+    const logic = new SurveyLogic(survey, this);
+    this.updateAddingElements(survey, <any>survey.calculatedValues, <any>this.survey.calculatedValues,
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        const oldName = el.name;
+        el.name = SurveyHelper.getNewName(allElements, "var");
+        logic.renameQuestion(oldName, el.name);
+      });
+  }
+  private updateAddingArrays(survey: SurveyModel): void {
+    survey.triggers.forEach(item => this.survey.triggers.push(item));
+    survey.completedHtmlOnCondition.forEach(item => this.survey.completedHtmlOnCondition.push(item));
+    survey.calculatedValues.forEach(item => this.survey.calculatedValues.push(item));
+  }
+  private updateAddingElements(survey: SurveyModel, changingElements: Array<SurveyElement>,
+    existingElements: Array<SurveyElement>, onChange: (element: SurveyElement, allElements: Array<SurveyElement>)=> void): void {
+    const elementsToChange = [];
+    const hash = {};
+    existingElements.forEach(el => {
+      if(!!el.name) {
+        hash[el.name] = el;
+      }
+    });
+    changingElements.forEach(el => {
+      if(!!el.name && !!hash[el.name]) {
+        elementsToChange.push(el);
+      }
+    });
+    const allElements = existingElements.concat(changingElements);
+    elementsToChange.forEach(el => {
+      onChange(el, allElements);
+    });
+  }
+  private addSurveyPages(survey: SurveyModel, indexPage?: number): void {
+    if(indexPage === undefined || indexPage >= this.survey.pages.length) {
+      indexPage = -1;
+    }
+    for(let i = 0; i < survey.pages.length; i ++) {
+      if(indexPage < 0) {
+        this.survey.pages.push(survey.pages[i]);
+      } else {
+        this.survey.pages.splice(indexPage + i, 0, survey.pages[i]);
+      }
+    }
+  }
   private existingPages: {};
   /**
    * Returns true if initial survey was empty. It was not set via JSON property and default new survey is empty as well.

@@ -556,6 +556,7 @@ var spanishTranslation = {
     firstPageIsStarted: "La primera página en la encuesta es una página iniciada",
     showCompletedPage: "Mostrar la página completa al final (HTML finalizado)",
     goNextPageAutomatic: "Al responder todas las preguntas, vaya a la página siguiente automáticamente",
+    allowCompleteSurveyAutomatic: "Completar la encuesta automáticamente",
     showProgressBar: "Mostrar barra de progreso",
     questionTitleLocation: "Ubicación del título de la pregunta",
     requiredText: "La pregunta requerida (s) símbolo (s)",
@@ -1177,7 +1178,8 @@ var spanishTranslation = {
     logoWidth: "Establece el ancho del logotipo en unidades CSS (px, %, in, pt, etc.).",
     logoHeight: "Establece la altura del logotipo en unidades CSS (px, %, in, pt, etc.).",
     logoFit: "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto.",
-    goNextPageAutomatic: "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual. La encuesta también se completa automáticamente.",
+    goNextPageAutomatic: "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual.",
+    allowCompleteSurveyAutomatic: "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas.",
     showNavigationButtons: "Establece la visibilidad y la ubicación de los botones de navegación en una página.",
     showProgressBar: "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta.",
     showPreviewBeforeComplete: "Habilite la página de vista previa con todas las preguntas o solo las respondidas.",
@@ -2109,7 +2111,7 @@ editorLocalization.locales["es"] = spanishTranslation;
 // pehelp.logoWidth: "Sets a logo width in CSS units (px, %, in, pt, etc.)." => "Establece el ancho del logotipo en unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoHeight: "Sets a logo height in CSS units (px, %, in, pt, etc.)." => "Establece la altura del logotipo en unidades CSS (px, %, in, pt, etc.)."
 // pehelp.logoFit: "Choose from: \"None\" - image maintains its original size; \"Contain\" - image is resized to fit while maintaining its aspect ratio; \"Cover\" - image fills the entire box while maintaining its aspect ratio; \"Fill\" - image is stretched to fill the box without maintaining its aspect ratio." => "Elija entre: \"Ninguno\": la imagen mantiene su tamaño original; \"Contener\": se cambia el tamaño de la imagen para que se ajuste manteniendo su relación de aspecto; \"Portada\": la imagen llena toda la caja manteniendo su relación de aspecto; \"Relleno\": la imagen se estira para llenar el cuadro sin mantener su relación de aspecto."
-// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page. The survey is also completed automatically." => "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual. La encuesta también se completa automáticamente."
+// pehelp.goNextPageAutomatic: "Select if you want the survey to advance to the next page automatically after a respondent answers all questions on the current page." => "Seleccione si desea que la encuesta avance a la página siguiente automáticamente después de que un encuestado responda todas las preguntas de la página actual."
 // pehelp.showNavigationButtons: "Sets the visibility and location of navigation buttons on a page." => "Establece la visibilidad y la ubicación de los botones de navegación en una página."
 // pehelp.showProgressBar: "Sets the visibility and location of a progress bar. The \"Auto\" value displays the progress bar above or below the survey header." => "Establece la visibilidad y la ubicación de una barra de progreso. El valor \"Auto\" muestra la barra de progreso por encima o por debajo del encabezado de la encuesta."
 // pehelp.showPreviewBeforeComplete: "Enable the preview page with all or answered questions only." => "Habilite la página de vista previa con todas las preguntas o solo las respondidas."
@@ -2194,3 +2196,5 @@ editorLocalization.locales["es"] = spanishTranslation;
 // p.itemTitleWidth: "Item label width (in px)" => "Ancho de la etiqueta del elemento (en px)"
 // p.selectToRankEmptyRankedAreaText: "Text to show if all options are selected" => "Texto para mostrar si todas las opciones están seleccionadas"
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texto de marcador de posición para el área de clasificación"
+// pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Completar la encuesta automáticamente"
+// pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Seleccione si desea que la encuesta se complete automáticamente después de que un encuestado responda todas las preguntas."

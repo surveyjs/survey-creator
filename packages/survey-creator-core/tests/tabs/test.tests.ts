@@ -9,7 +9,9 @@ import { editorLocalization } from "../../src/editorLocalization";
 import "survey-core/survey.i18n";
 
 function getTestModel(creator: CreatorTester): TestSurveyTabViewModel {
-  creator.activeTab = "test";
+  if(creator.activeTab !== "test") {
+    creator.activeTab = "test";
+  }
   const testPlugin: TabTestPlugin = <TabTestPlugin>creator.getPlugin("test");
   return testPlugin.model;
 }
@@ -168,6 +170,38 @@ test("Enable/disable nextPage action on page visibility change and page actions,
   model.survey.setValue("q1", 3);
   expect(pageList.actions[1].enabled).toBeTruthy(); //TestSurveyTabViewModel.enableInvisiblePages = true
   expect(nextPage.enabled).toBeFalsy();
+});
+test("Page action title when the preview shows only, Bug#5277", (): any => {
+  const creator: CreatorTester = new CreatorTester({
+    showJSONEditorTab: false,
+    showDesignerTab: false
+  });
+  creator.JSON = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          {
+            type: "text",
+            name: "q1"
+          }
+        ]
+      },
+      {
+        name: "page2",
+        elements: [
+          {
+            type: "text",
+            name: "q2",
+          }
+        ]
+      }
+    ]
+  };
+  expect(creator.activeTab).toEqual("test");
+  const model: TestSurveyTabViewModel = getTestModel(creator);
+  const pageSelectorAction = model.pageActions.filter((item: IAction) => item.id === "pageSelector")[0];
+  expect(pageSelectorAction.title).toEqual("Page 1");
 });
 test("Show/hide device similator", (): any => {
   let creator: CreatorTester = new CreatorTester();

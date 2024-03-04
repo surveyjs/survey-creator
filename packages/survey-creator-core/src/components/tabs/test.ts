@@ -94,6 +94,7 @@ export class TestSurveyTabViewModel extends Base {
       component: "svc-complete-page",
       data: this
     });
+    const hasSurveyBefore = !!this.simulator.survey;
     this.simulator.survey = newSurvey;
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -126,6 +127,9 @@ export class TestSurveyTabViewModel extends Base {
       this.updatePageItem(options.page);
       this.updatePrevNextPageActionState();
     });
+    if(hasSurveyBefore) {
+      this.show();
+    }
   }
 
   public setJSON(json: any, currTheme: any) {

@@ -573,6 +573,7 @@ export class SurveyQuestionEditorDefinition {
         { name: "showPrevButton", tab: "navigation" },
         { name: "firstPageIsStarted", tab: "navigation" },
         { name: "goNextPageAutomatic", tab: "navigation" },
+        { name: "allowCompleteSurveyAutomatic", tab: "navigation" },
         { name: "showProgressBar", tab: "navigation" },
         { name: "progressBarType", tab: "navigation" },
         { name: "questionsOnPageMode", tab: "navigation" },
