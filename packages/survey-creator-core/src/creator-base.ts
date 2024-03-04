@@ -1562,7 +1562,7 @@ export class SurveyCreatorModel extends Base
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
-  public addSurveyJson(json: any, indexPage?: number): void {
+  public addCollectionItemsJson(json: any, indexPage?: number): void {
     const survey = new SurveyModel(json);
     this.updateAddingSurvey(survey);
     this.addSurveyPages(survey, indexPage);
