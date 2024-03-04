@@ -28,6 +28,20 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 Theme Editor produces a JSON object with CSS variables and other theme settings. For information on how to obtain this object and apply it to a survey, refer to the following help topic in Form Library documentation: [Create a Custom Theme](/form-library/documentation/manage-default-themes-and-styles#create-a-custom-theme).
 
+If you want to apply a custom theme to a survey being configured in Survey Creator, assign the theme JSON object to `SurveyCreatorModel`'s [`theme`](/survey-creator/documentation/api-reference/survey-creator#theme) property:
+
+```js
+import { SurveyCreatorModel } from "survey-creator-core";
+const creatorOptions = {
+  // ...
+  showThemeTab: true
+};
+const creator = new SurveyCreatorModel(creatorOptions);
+
+const themeJson = { ... };
+creator.theme = themeJson;
+```
+
 ## Save and Load Custom Themes
 
 Theme JSON objects can be stored on your server to let users save, share, and restore custom themes or switch between them. To save a theme JSON object, implement the `saveThemeFunc` function. It accepts two arguments:
@@ -41,7 +55,6 @@ A callback function. Call it and pass `saveNo` as the first argument. Set the se
 The following code shows how to use the `saveThemeFunc` function to save a survey model schema in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">`localStorage`</a> or in your web service:
 
 ```js
-
 import { SurveyCreatorModel } from "survey-creator-core";
 const creatorOptions = {
   // ...

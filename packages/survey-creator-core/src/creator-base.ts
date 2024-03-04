@@ -890,6 +890,14 @@ export class SurveyCreatorModel extends Base
 
   public hasPendingThemeChanges: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
+  /**
+   * Gets or sets a [theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) for the survey being configured.
+   * 
+   * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
+   * @see showThemeTab
+   * @see themeEditor
+   * @see saveThemeFunc
+   */
   public get theme(): ITheme {
     return this._theme;
   }
