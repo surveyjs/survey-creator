@@ -1564,6 +1564,21 @@ export class SurveyCreatorModel extends Base
   }
   /**
    * Adds new items to the [`pages`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#pages), [`triggers`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#triggers), [`calculatedValues`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#calculatedValues), and [`completedHtmlOnCondition`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#completedHtmlOnCondition) arrays in the existing survey JSON schema.
+   * 
+   * Use this method to merge the collection properties of two survey JSON schemas:
+   * 
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = { ... };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * 
+   * const surveyJson1 = { ... };
+   * const surveyJson2 = { ... };
+   * 
+   * creator.JSON = surveyJson1;
+   * creator.addCollectionItemsJson(surveyJson2);
+   * // `creator.JSON` contains the merged survey JSON schema
+   * ```
    * @param json A JSON object that contains the `pages`, `triggers`, `calculatedValues`, and/or `completedHtmlOnCondition` array(s).
    * @param insertPageIndex A zero-based index at which to insert new pages.
    */
