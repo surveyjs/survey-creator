@@ -1562,10 +1562,15 @@ export class SurveyCreatorModel extends Base
   public get survey(): SurveyModel {
     return this.surveyValue;
   }
-  public addCollectionItemsJson(json: any, indexPage?: number): void {
+  /**
+   * Adds new items to the [`pages`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#pages), [`triggers`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#triggers), [`calculatedValues`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#calculatedValues), and [`completedHtmlOnCondition`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#completedHtmlOnCondition) arrays in the existing survey JSON schema.
+   * @param json A JSON object that contains the `pages`, `triggers`, `calculatedValues`, and/or `completedHtmlOnCondition` array(s).
+   * @param insertPageIndex A zero-based index at which to insert new pages.
+   */
+  public addCollectionItemsJson(json: any, insertPageIndex?: number): void {
     const survey = new SurveyModel(json);
     this.updateAddingSurvey(survey);
-    this.addSurveyPages(survey, indexPage);
+    this.addSurveyPages(survey, insertPageIndex);
   }
   private updateAddingSurvey(survey: SurveyModel): void {
     this.updateAddingPages(survey);
@@ -1610,16 +1615,16 @@ export class SurveyCreatorModel extends Base
     survey.calculatedValues.forEach(item => this.survey.calculatedValues.push(item));
   }
   private updateAddingElements(survey: SurveyModel, changingElements: Array<SurveyElement>,
-    existingElements: Array<SurveyElement>, onChange: (element: SurveyElement, allElements: Array<SurveyElement>)=> void): void {
+    existingElements: Array<SurveyElement>, onChange: (element: SurveyElement, allElements: Array<SurveyElement>) => void): void {
     const elementsToChange = [];
     const hash = {};
     existingElements.forEach(el => {
-      if(!!el.name) {
+      if (!!el.name) {
         hash[el.name] = el;
       }
     });
     changingElements.forEach(el => {
-      if(!!el.name && !!hash[el.name]) {
+      if (!!el.name && !!hash[el.name]) {
         elementsToChange.push(el);
       }
     });
@@ -1629,11 +1634,11 @@ export class SurveyCreatorModel extends Base
     });
   }
   private addSurveyPages(survey: SurveyModel, indexPage?: number): void {
-    if(indexPage === undefined || indexPage >= this.survey.pages.length) {
+    if (indexPage === undefined || indexPage >= this.survey.pages.length) {
       indexPage = -1;
     }
-    for(let i = 0; i < survey.pages.length; i ++) {
-      if(indexPage < 0) {
+    for (let i = 0; i < survey.pages.length; i++) {
+      if (indexPage < 0) {
         this.survey.pages.push(survey.pages[i]);
       } else {
         this.survey.pages.splice(indexPage + i, 0, survey.pages[i]);
