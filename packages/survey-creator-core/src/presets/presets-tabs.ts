@@ -41,7 +41,7 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     }
     return val;
   }
-  public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void {
+  public setupEditableQuestionCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     const q = model.getQuestionByName(this.nameItems);
     if (q) {
       q.choices = creator.getAvailableTabNames();

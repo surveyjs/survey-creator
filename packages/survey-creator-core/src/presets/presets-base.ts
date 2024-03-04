@@ -61,13 +61,19 @@ export class CreatorPresetEditableBase {
     return hasValue ? res : undefined;
   }
   public getEditableQuestionJson(): any { return undefined; }
-  public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void { }
+  public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.setupEditableQuestionCore(model, creator);
+    this.children.forEach(item => {
+      item.setupEditableQuestion(model, creator);
+    });
+  }
   public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupEditableQuestionValueCore(model, json, creator);
     this.children.forEach(item => {
       item.setupEditableQuestionValue(model, !!json ? json[item.path]: undefined, creator);
     });
   }
+  public setupEditableQuestionCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
   protected setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
 }

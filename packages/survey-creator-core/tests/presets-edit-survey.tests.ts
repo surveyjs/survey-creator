@@ -1,5 +1,6 @@
 import { CreatorTester } from "./creator-tester";
 import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
+import { QuestionToolbox } from "../src/toolbox";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
@@ -186,11 +187,23 @@ test("Preset edit model, toolbox items and categories pages visibility", () => {
   expect(survey.getPageByName("page_toolbox_items").visible).toBeTruthy();
   expect(survey.getPageByName("page_toolbox_categories").visible).toBeFalsy();
 });
-test("Preset edit model, toolbox items", () => {
+test("Preset edit model, toolbox items, default value and apply", () => {
   const preset = new CreatorPreset({});
   const survey = preset.createEditModel();
   survey.setValue("toolbox_categories_show", true);
   survey.setValue("toolbox_categories_mode", "items");
   const question = survey.getQuestionByName("toolbox_items_name");
   expect(question).toBeTruthy();
+  const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
+  expect(question.choices).toHaveLength(defaultItems.length);
+  expect(question.value).toHaveLength(defaultItems.length);
+  question.value = ["boolean", "text", "checkbox"];
+  expect(preset.applyFromSurveyModel(survey)).toBeTruthy();
+  const etalon: ICreatorPresetData = {
+    toolbox: {
+      items: ["boolean", "text", "checkbox"]
+    }
+  };
+  const testJson = preset.getJson();
+  expect(testJson).toEqual(etalon);
 });

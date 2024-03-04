@@ -1,4 +1,4 @@
-import { Question, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
+import { ItemValue, Question, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
@@ -139,7 +139,14 @@ export class CreatorPresetEditableToolboxItemsCore extends CreatorPresetEditable
     const parent = <CreatorPresetEditableToolbox>this.parent;
     return this.getBoolVisibleIf(parent.nameCategoriesShow) + " and " + this.getTextVisibleIf(parent.nameCategoriesMode, this.path);
   }
-
+  public getDefaultToolboxItems(creator: SurveyCreatorModel): ItemValue[] {
+    const res = [];
+    const items = creator.toolbox.getDefaultItems([], false, true, true);
+    items.forEach(item => {
+      res.push(new ItemValue(item.id, item.title));
+    });
+    return res;
+  }
 }
 export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditableToolboxItemsCore {
   public createMainPageCore(): any {
@@ -156,7 +163,9 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
             {
               type: "ranking",
               name: "items",
-              choices: [1, 2, 3, 4] //TODO
+              selectToRankEnabled: true,
+              minSelectedChoices: 1,
+              selectToRankAreasLayout: "horizontal",
             }
           ]
         }
@@ -198,20 +207,25 @@ export class CreatorPresetEditableToolboxItems extends CreatorPresetEditableTool
         {
           type: "ranking",
           name: this.name,
-          choices: [1, 2, 3, 4] //TODO
+          selectToRankEnabled: true,
+          minSelectedChoices: 1,
+          selectToRankAreasLayout: "horizontal",
         }
       ]
     };
   }
-  protected validateCore(model: SurveyModel): boolean {
-    return true;
-  }
   public getJsonValueCore(model: SurveyModel): any {
-    return undefined;
+    return model.getValue(this.name);
+  }
+  public setupEditableQuestionCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getQuestion(model).choices = this.getDefaultToolboxItems(creator);
   }
   public setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    const val = [];
+    creator.toolbox.items.forEach(item => val.push(item.id));
+    this.getQuestion(model).value = val;
   }
-  private getPanel(model: SurveyModel): QuestionRankingModel {
+  private getQuestion(model: SurveyModel): QuestionRankingModel {
     return <QuestionRankingModel>model.getQuestionByName(this.name);
   }
   private get name() { return this.fullPath + "_name"; }

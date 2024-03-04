@@ -743,9 +743,7 @@ export class QuestionToolbox
   public createDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean) {
     supportedQuestions = supportedQuestions || this.supportedQuestions;
     this.clearItems();
-    this.getDefaultQuestionItems(supportedQuestions, useDefaultCategories).forEach(item => this.actions.push(item));
-    this.getRegisterCustomWidgets().forEach(item => this.addToolBoxItem(item));
-    this.getRegisterComponentQuestions().forEach(item => this.addToolBoxItem(item));
+    this.getDefaultItems(supportedQuestions, useDefaultCategories, true, true).forEach(item => this.addToolBoxItem(item, this.actions));
     this.onItemsChanged();
   }
   public getDefaultItems(supportedQuestions: Array<string>, useDefaultCategories: boolean,
@@ -810,19 +808,25 @@ export class QuestionToolbox
     });
     return res;
   }
-  private addToolBoxItem(action: QuestionToolboxItem): void {
+  private addToolBoxItem(action: QuestionToolboxItem, actions: QuestionToolboxItem[]): void {
     if(!action) return;
-    const existingAction = this.getActionById(action.id);
+    const existingAction = this.getActionByIdFromArray(action.id, actions);
     if (!!existingAction) {
-      this.actions.splice(this.actions.indexOf(existingAction), 1, action);
+      actions.splice(actions.indexOf(existingAction), 1, action);
     } else {
       const index = Array.isArray(this.supportedQuestions) ? this.supportedQuestions.indexOf(action.id) : -1;
       if (index > -1) {
-        this.actions.splice(index, 0, action);
+        actions.splice(index, 0, action);
       } else {
-        this.actions.push(action);
+        actions.push(action);
       }
     }
+  }
+  private getActionByIdFromArray(id: string, actions: QuestionToolboxItem[]): QuestionToolboxItem {
+    for(let i = 0; i < actions.length; i++) {
+      if(actions[i].id === id) return actions[i];
+    }
+    return undefined;
   }
   private createToolboxItemFromJSON(json: any): QuestionToolboxItem {
     if (json.showInToolbox === false || json.internal === true || !json.name) return undefined;
