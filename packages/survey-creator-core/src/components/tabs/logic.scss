@@ -248,6 +248,13 @@
   margin-right: calcSize(1);
 }
 
+.sl-row {
+  .sd-scrollable-container:not(.sd-scrollable-container--compact) {
+    overflow-x: auto;
+    padding: 2px;
+    margin: -2px;
+  }
+}
 .sl-question__title {
   color: $foreground;
   font-size: calcSize(2);

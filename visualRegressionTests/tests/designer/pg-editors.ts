@@ -225,7 +225,14 @@ test("Logic popup with boolean question", async (t) => {
             {
               "type": "text",
               "name": "question2",
-              "visibleIf": "{question1} = true"
+              "visibleIf": "{question1} = true",
+              "enableIf": "{question3} = 1"
+            },
+            {
+              "type": "rating",
+              "name": "question3",
+              "rateCount": 20,
+              "rateMax": 20
             },
             {
               "type": "boolean",
@@ -247,6 +254,9 @@ test("Logic popup with boolean question", async (t) => {
       .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"))
       .click(Selector(".sd-boolean--checked"));
     await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await t.click(Selector("button").withText("Cancel").filterVisible());
+    await t.click(Selector(".spg-panel__content div[data-name='enableIf'] button[title='Edit']"));
+    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
   });
 });
 
