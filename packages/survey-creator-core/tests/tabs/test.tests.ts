@@ -826,3 +826,31 @@ test("Update theme in active test/preview tab", (): any => {
   expect(creator.activeTab).toEqual("test");
   expect(testPlugin.model.survey.themeVariables["test"]).toBe("testVarValue");
 });
+test("Update theme in active test/preview tab", (): any => {
+  const creator = new CreatorTester();
+  let testBodyCss = "";
+  let previewBodyCss = "";
+  let instanceBodyCss = "";
+  let instanceArea = "";
+  creator.onTestSurveyCreated.add((sender, options) => {
+    testBodyCss = options.survey.css.body;
+  });
+  creator.onPreviewSurveyCreated.add((sender, options) => {
+    previewBodyCss = options.survey.css.body;
+  });
+  creator.onSurveyInstanceCreated.add((sender, options) => {
+    if(options.reason === "test") {
+      instanceBodyCss = options.survey.css.body;
+      instanceArea = options.area;
+    }
+  });
+  creator.JSON = {
+    elements: [{ type: "text", name: "q1" }]
+  };
+  creator.activeTab = "test";
+  expect(testBodyCss).toEqual("sd-body");
+  expect(previewBodyCss).toEqual("sd-body");
+  expect(instanceBodyCss).toEqual("sd-body");
+  expect(instanceArea).toEqual("preview-tab");
+});
+

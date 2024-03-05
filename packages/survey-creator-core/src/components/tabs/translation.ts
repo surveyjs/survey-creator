@@ -703,10 +703,11 @@ export class Translation extends Base implements ITranslationLocales {
   protected createSettingsSurvey(): SurveyModel {
     var json = this.getSettingsSurveyJSON();
     setSurveyJSONForPropertyGrid(json);
-    var res = this.options.createSurvey(json, "translation_settings", this);
-    res.css = propertyGridCss;
-    res.css.root += " st-properties";
-    res.rootCss += " st-properties";
+    var res = this.options.createSurvey(json, "translation_settings", this, (survey: SurveyModel): void => {
+      survey.css = propertyGridCss;
+      survey.css.root += " st-properties";
+      survey.rootCss += " st-properties";
+    });
     res.onValueChanged.add((sender, options) => {
       if (options.name == "locales") {
         this.updateLocales();
@@ -832,15 +833,16 @@ export class Translation extends Base implements ITranslationLocales {
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
-    var survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this);
-    survey.lazyRendering = true;
-    survey.skeletonComponentName = "sd-translation-line-skeleton";
-    survey.startLoadingFromJson();
-    survey.css = translationCss;
-    survey.addNewPage("page");
-    this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
-    survey.data = this.getStringsSurveyData(survey);
-    survey.endLoadingFromJson();
+    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings", this, (survey: SurveyModel): void => {
+      survey.lazyRendering = true;
+      survey.skeletonComponentName = "sd-translation-line-skeleton";
+      survey.startLoadingFromJson();
+      survey.css = translationCss;
+      survey.addNewPage("page");
+      this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
+      survey.data = this.getStringsSurveyData(survey);
+      survey.endLoadingFromJson();
+    });
     const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
       var itemValue = ItemValue.getItemByValue(question.rows, rowName);
       return !!itemValue ? itemValue["translationData"] : null;
@@ -891,17 +893,18 @@ export class Translation extends Base implements ITranslationLocales {
   private createStringsHeaderSurvey() {
     let json = {};
     setSurveyJSONForPropertyGrid(json, false);
-    let survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this);
-    survey.css = translationCss;
-    const newPage = survey.addNewPage("page");
+    const survey: SurveyModel = this.options.createSurvey(json, "translation_strings_header", this, (survey: SurveyModel): void => {
+      survey.css = translationCss;
+      const newPage = survey.addNewPage("page");
 
-    let matrix = <QuestionMatrixDropdownModel>(Serializer.createClass("matrixdropdown"));
-    matrix.name = "stringsHeader";
-    matrix.titleLocation = "hidden";
-    this.addLocaleColumns(matrix);
+      const matrix = <QuestionMatrixDropdownModel>(Serializer.createClass("matrixdropdown"));
+      matrix.name = "stringsHeader";
+      matrix.titleLocation = "hidden";
+      this.addLocaleColumns(matrix);
 
-    newPage.addQuestion(matrix);
-    survey.currentPage = survey.pages[0];
+      newPage.addQuestion(matrix);
+      survey.currentPage = survey.pages[0];
+    });
     return survey;
   }
   private addTranslationGroupIntoStringsSurvey(

@@ -50,16 +50,16 @@ export interface ElementGetDisplayNameEvent {
   obj: Base;
   /**
   * A Survey Creator UI element that requests the display name. Contains one of the following values:
-  *   - `"page-selector"` - Page selector on the design surface
-  *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab
-  *   - `"logic-tab:question-filter"` - Question filter in the Logic tab
-  *   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab
-  *   - `"preview-tab:page-list"` - Page list in the Preview tab
-  *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab
-  *   - `"property-grid:property-editor"` - Property editors in the Property Grid
-  *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid
-  *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid
-  *   - `"translation-tab"` - Translation tab
+  *   - `"page-selector"` - Page selector on the design surface.
+  *   - `"condition-editor"` - Condition pop-up window or drop-down menus that allow users to select questions in the Logic tab.
+  *   - `"logic-tab:question-filter"` - Question filter in the Logic tab.
+  *   - `"logic-tab:question-selector"` - Question selector on editing actions in the Logic tab.
+  *   - `"preview-tab:page-list"` - Page list in the Preview tab.
+  *   - `"preview-tab:selected-page"` - Selected page name in the Preview tab.
+  *   - `"property-grid:property-editor"` - Property editors in the Property Grid.
+  *   - `"property-grid-header:element-list"` - Survey element list in the header of the Property Grid.
+  *   - `"property-grid-header:selected-element"` - Selected survey element in the header of the Property Grid.
+  *   - `"translation-tab"` - Translation tab.
    */
   area: string;
   /**
@@ -556,6 +556,37 @@ export interface PageGetFooterActionsEvent {
    * @param type The type of the question to add.
    */
   addNewQuestion: (type: string) => void;
+}
+
+export interface SurveyInstanceCreatedEvent {
+  /**
+   * A Survey Creator UI element for which a survey is instantiated. Contains one of the following values:
+   *   - `"designer-tab"` - A preview survey in the Designer tab.
+   *   - `"preview-tab"` - A preview survey in the Preview tab.
+   *   - `"property-grid"` - A survey that represents the Property Grid.
+   *   - `"default-value-popup-editor"` - A survey that allows you to specify the default or correct value (for quizzes) in a pop-up window.
+   *   - `"logic-rule:condition-editor"` - A survey that allows you to configure conditions in a logic rule.
+   *   - `"logic-rule:action-editor"` - A survey that allows you to configure actions in a logic rule.
+   *   - `"logic-tab:condition-list"` - A survey that displays the list of logic rules in the Logic tab.
+   *   - `"theme-tab"` - A preview survey in the Themes tab.
+   *   - `"theme-tab:property-grid"` - A survey that represents the Property Grid in the Themes tab.
+   *   - `"translation-tab:language-list"` - A survey that displays the language list in the Translations tab.
+   *   - `"translation-tab:table"` - A survey that displays the translation table in the Translations tab.
+   *   - `"translation-tab:table-header"` - A survey that displays the header of the translation table in the Translations tab.
+   *   - `"table-values-popup-editor"` - A survey that allows you to edit values of a table (Choices, Rows, Columns, etc.) in a pop-up window.
+   *   - `"matrix-cell-values-popup-editor"` - A survey that allows you to [specify cell texts of a Single-Select Matrix](https://surveyjs.io/form-library/examples/scoring-rubric-example/) in a pop-up window.
+   *   - `"matrix-cell-question-popup-editor"` - A survey that allows you to configure a question within a cell of a [Multi-Select](https://surveyjs.io/form-library/examples/multi-select-matrix-question/) or [Dynamic Matrix](https://surveyjs.io/form-library/examples/dynamic-matrix-add-new-rows/) in a pop-up window.
+   */
+  area: string;
+  /**
+   * A survey that represents the Survey Creator UI element to be displayed. Use the [`SurveyModel`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) API to modify the survey.
+   */
+  survey: SurveyModel;
+  /**
+   * Obsolete. Use `options.area` instead.
+   */
+  reason: string;
+  model?: Base;
 }
 
 export interface DesignerSurveyCreatedEvent {
