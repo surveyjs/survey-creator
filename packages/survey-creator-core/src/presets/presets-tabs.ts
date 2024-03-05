@@ -41,13 +41,13 @@ export class CreatorPresetEditableTabs extends CreatorPresetEditableBase {
     }
     return val;
   }
-  public setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     const q = model.getQuestionByName(this.nameItems);
     if (q) {
       q.choices = creator.getAvailableTabNames();
     }
   }
-  public setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     const items = json["items"] || [];
     model.setValue(this.nameShow, items.length > 0);

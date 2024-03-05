@@ -73,7 +73,7 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
     }
     return res;
   }
-  public setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || [];
     const question = this.getMatrix(model);
     const value = [];
@@ -139,12 +139,25 @@ export class CreatorPresetEditableToolboxItemsCore extends CreatorPresetEditable
     const parent = <CreatorPresetEditableToolbox>this.parent;
     return this.getBoolVisibleIf(parent.nameCategoriesShow) + " and " + this.getTextVisibleIf(parent.nameCategoriesMode, this.path);
   }
-  public getDefaultToolboxItems(creator: SurveyCreatorModel): ItemValue[] {
-    const res = [];
-    const items = creator.toolbox.getDefaultItems([], false, true, true);
-    items.forEach(item => {
-      res.push(new ItemValue(item.id, item.title));
+  public getDefaultToolboxItems(model: SurveyModel, creator: SurveyCreatorModel): ItemValue[] {
+    const items = {};
+    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
+      items[item.id] = item.title;
     });
+    const definitionVal = model.getValue("toolbox_definition_matrix");
+    if(Array.isArray(definitionVal)) {
+      definitionVal.forEach(item => {
+        const key = item.name;
+        if(!!key && !items[key] || !!item.title) {
+          items[key] = item.title || key;
+        }
+      });
+    }
+    const res = [];
+    for(let key in items) {
+      res.push(new ItemValue(key, items[key]));
+    }
+
     return res;
   }
 }
@@ -184,8 +197,8 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
     });
     return res;
   }
-  public setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(creator);
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
     model.onMatrixRowAdded.add((sender, options) =>{
       if(options.question.name === this.nameMatrix) {
         options.row.onDetailPanelShowingChanged = () => {
@@ -197,7 +210,10 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
       options.row.onDetailPanelShowingChanged = undefined;
     });
   }
-  public setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
+  }
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     const nameCategories = {};
     const categories = [];
     creator.toolbox.items.forEach(item => {
@@ -281,10 +297,13 @@ export class CreatorPresetEditableToolboxItems extends CreatorPresetEditableTool
   public getJsonValueCore(model: SurveyModel): any {
     return model.getValue(this.name);
   }
-  public setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.getQuestion(model).choices = this.getDefaultToolboxItems(creator);
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getQuestion(model).choices = this.getDefaultToolboxItems(model, creator);
   }
-  public setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.getQuestion(model).choices = this.getDefaultToolboxItems(model, creator);
+  }
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     const val = [];
     creator.toolbox.items.forEach(item => val.push(item.id));
     this.getQuestion(model).value = val;
@@ -330,7 +349,7 @@ export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
       ]
     };
   }
-  public setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     json = json || {};
     if(json["definition"]) {
       model.setValue(this.nameDefinitionShow, true);

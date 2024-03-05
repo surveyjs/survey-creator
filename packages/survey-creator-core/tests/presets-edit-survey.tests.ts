@@ -245,3 +245,30 @@ test("Preset edit model, toolbox categories, default value and apply", () => {
   expect(category.items).toHaveLength(3);
   expect(category.count).toBeFalsy();
 });
+test("Preset edit model, toolbox items & definition page", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("toolbox_definition_show", true);
+  survey.setValue("toolbox_categories_show", true);
+  survey.setValue("toolbox_categories_mode", "items");
+  const itemsQuestion = survey.getQuestionByName("toolbox_items_name");
+  const defaultItems = new QuestionToolbox().getDefaultItems([], false, true, true);
+  expect(itemsQuestion.choices).toHaveLength(defaultItems.length);
+  expect(itemsQuestion.value).toHaveLength(defaultItems.length);
+
+  const definitionQuestion = survey.getQuestionByName("toolbox_definition_matrix");
+  definitionQuestion.addRow();
+  definitionQuestion.addRow();
+  const rowDef1 = definitionQuestion.visibleRows[0];
+  rowDef1.getQuestionByName("name").value = "name1";
+  const rowDef2 = definitionQuestion.visibleRows[1];
+  rowDef2.getQuestionByName("name").value = "radiogroup";
+  rowDef2.getQuestionByName("title").value = "Radiogroup_New";
+
+  survey.currentPage = survey.getPageByName("page_toolbox_items");
+  expect(survey.currentPage.name).toEqual("page_toolbox_items");
+  expect(itemsQuestion.choices).toHaveLength(defaultItems.length + 1);
+  expect(itemsQuestion.value).toHaveLength(defaultItems.length);
+  expect(itemsQuestion.choices[0].value).toEqual("radiogroup");
+  expect(itemsQuestion.choices[0].text).toEqual("Radiogroup_New");
+});

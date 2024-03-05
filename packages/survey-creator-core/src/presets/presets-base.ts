@@ -68,15 +68,24 @@ export class CreatorPresetEditableBase {
       item.setupQuestions(model, creator);
     });
   }
+  public setupOnCurrentPage(model: SurveyModel, creator: SurveyCreatorModel): void {
+    if(model.currentPage.name === this.pageName) {
+      this.setupOnCurrentPageCore(model, creator);
+    }
+    this.children.forEach(item => {
+      item.setupOnCurrentPage(model, creator);
+    });
+  }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
       item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
     });
   }
-  public setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
+  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
 }
 
 export interface ICreatorPreset {

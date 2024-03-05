@@ -52,6 +52,9 @@ export class CreatorPreset extends CreatorPresetBase {
     editablePresets.forEach(item => item.setupQuestions(model, editingCreator));
     const json = this.json ? this.json : {};
     editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], editingCreator));
+    model.onCurrentPageChanged.add((sender, options) => {
+      editablePresets.forEach(item => item.setupOnCurrentPage(model, editingCreator));
+    });
     return model;
   }
   public applyFromSurveyModel(model: SurveyModel, creator?: SurveyCreatorModel): boolean {
