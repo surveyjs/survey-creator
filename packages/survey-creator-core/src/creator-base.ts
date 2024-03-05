@@ -2510,7 +2510,8 @@ export class SurveyCreatorModel extends Base
       if (!!selEl && (focus || startEdit && (!selEl.hasTitle || selEl.isPanel))) {
         const el = document.getElementById(selEl.id);
         if (!!el) {
-          el.scrollIntoView({ block: "center" });
+          const blockValue = !this.rootElement || this.rootElement.clientHeight - 64 > el.clientHeight ? "center" : "start";
+          el.scrollIntoView({ block: blockValue });
           if (!propertyName && el.parentElement) {
             let elToFocus: HTMLElement = (typeof (focus) === "string") ? el.parentElement.querySelector(focus) : el.parentElement;
             elToFocus && elToFocus.focus();
