@@ -48,6 +48,8 @@ export class CreatorPresetEditableBase {
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
   protected createMainPageCore(): any { return {}; }
   public getJsonValue(model: SurveyModel): any {
+    const page = model.getPageByName(this.pageName);
+    if(!page.isVisible) return undefined;
     const core = this.getJsonValueCore(model);
     let hasValue = !!core;
     const res = hasValue ? core : {};
@@ -60,21 +62,20 @@ export class CreatorPresetEditableBase {
     });
     return hasValue ? res : undefined;
   }
-  public getEditableQuestionJson(): any { return undefined; }
-  public setupEditableQuestion(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.setupEditableQuestionCore(model, creator);
+  public setupQuestions(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.setupQuestionsCore(model, creator);
     this.children.forEach(item => {
-      item.setupEditableQuestion(model, creator);
+      item.setupQuestions(model, creator);
     });
   }
-  public setupEditableQuestionValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
-    this.setupEditableQuestionValueCore(model, json, creator);
+  public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
+    this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
-      item.setupEditableQuestionValue(model, !!json ? json[item.path]: undefined, creator);
+      item.setupQuestionsValue(model, !!json ? json[item.path]: undefined, creator);
     });
   }
-  public setupEditableQuestionCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
-  protected setupEditableQuestionValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
+  public setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void { }
+  protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
 }
 

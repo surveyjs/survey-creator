@@ -1,6 +1,7 @@
 import { CreatorTester } from "./creator-tester";
 import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
+import { QuestionMatrixDynamicModel } from "survey-core";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
@@ -206,4 +207,41 @@ test("Preset edit model, toolbox items, default value and apply", () => {
   };
   const testJson = preset.getJson();
   expect(testJson).toEqual(etalon);
+});
+test("Preset edit model, toolbox categories, default value and apply", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("toolbox_categories_show", true);
+  const question = <QuestionMatrixDynamicModel>survey.getQuestionByName("toolbox_categories_matrix");
+  expect(question).toBeTruthy();
+  const categoryCount = 5;
+  expect(question.rowCount).toEqual(categoryCount);
+  question.visibleRows.forEach(row => {
+    row.showDetailPanel();
+    const itemsQuestion = row.getQuestionByName("items");
+    const len = itemsQuestion.value.length;
+    expect(len > 0).toBeTruthy();
+    expect(itemsQuestion.choices).toHaveLength(len);
+  });
+  const row = question.visibleRows[0];
+  row.showDetailPanel();
+  let itemsQuestion = row.getQuestionByName("items");
+  const items = itemsQuestion.value;
+  const newValue = items.splice(0, 3);
+  itemsQuestion.value = items;
+  question.addRow();
+  const newRow = question.visibleRows[question.rowCount - 1];
+  newRow.getQuestionByName("name").value = "NewCategory";
+  newRow.showDetailPanel();
+  itemsQuestion = newRow.getQuestionByName("items");
+  expect(itemsQuestion.choices).toHaveLength(3);
+  itemsQuestion.value = newValue;
+  expect(preset.applyFromSurveyModel(survey)).toBeTruthy();
+  const json: any = preset.getJson();
+  expect(json.toolbox.items).toBeFalsy();
+  expect(json.toolbox.categories).toHaveLength(categoryCount + 1);
+  const category = json.toolbox?.categories[categoryCount];
+  expect(category.name).toEqual("NewCategory");
+  expect(category.items).toHaveLength(3);
+  expect(category.count).toBeFalsy();
 });

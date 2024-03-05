@@ -40,6 +40,7 @@ export class CreatorPreset extends CreatorPresetBase {
     const model = new SurveyModel(this.getEditModelJson(editablePresets));
     model.editablePresets = editablePresets;
     model.showCompleteButton = false;
+    model.keepIncorrectValues = true;
     const editingCreator = !!creator ? creator : new SurveyCreatorModel({});
     model.addNavigationItem({
       id: "preset_save",
@@ -48,9 +49,9 @@ export class CreatorPreset extends CreatorPresetBase {
         this.applyFromSurveyModel(model, creator);
       }
     });
-    editablePresets.forEach(item => item.setupEditableQuestion(model, editingCreator));
+    editablePresets.forEach(item => item.setupQuestions(model, editingCreator));
     const json = this.json ? this.json : {};
-    editablePresets.forEach(item => item.setupEditableQuestionValue(model, json[item.path], editingCreator));
+    editablePresets.forEach(item => item.setupQuestionsValue(model, json[item.path], editingCreator));
     return model;
   }
   public applyFromSurveyModel(model: SurveyModel, creator?: SurveyCreatorModel): boolean {
