@@ -464,7 +464,7 @@ export class StringEditorViewModelBase extends Base {
       // get text representation of clipboard
       var text = event.clipboardData.getData("text/plain");
       // insert text manually
-      document.execCommand("insertHTML", false, text);
+      document.execCommand("insertText", false, text);
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {

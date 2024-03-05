@@ -45,7 +45,7 @@ import {
   PropertyGridShowPopupEvent, CollectionItemAllowOperationsEvent, CollectionItemAddedEvent, MatrixColumnAddedEvent, ConfigureTablePropertyEditorEvent,
   PropertyDisplayCustomErrorEvent, PropertyValueChangingEvent, PropertyValueChangedEvent, ConditionGetQuestionListEvent, GetConditionOperatorEvent,
   LogicRuleGetDisplayTextEvent, ModifiedEvent, QuestionAddedEvent, PanelAddedEvent, PageAddedEvent,
-  PageGetFooterActionsEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
+  PageGetFooterActionsEvent, SurveyInstanceCreatedEvent, DesignerSurveyCreatedEvent, PreviewSurveyCreatedEvent, NotifyEvent, ElementFocusingEvent,
   ElementFocusedEvent, OpenFileChooserEvent, UploadFileEvent, TranslationStringVisibilityEvent, TranslationImportItemEvent,
   TranslationImportedEvent, TranslationExportItemEvent, MachineTranslateEvent, TranslationItemChangingEvent, DragDropAllowEvent,
   CreateCustomMessagePanelEvent, ActiveTabChangingEvent, ActiveTabChangedEvent, BeforeUndoEvent, BeforeRedoEvent,
@@ -124,7 +124,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see activeTab
-   * @see onDesignerSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   @property({ defaultValue: true }) showDesignerTab: boolean;
   /**
@@ -141,7 +141,7 @@ export class SurveyCreatorModel extends Base
    *
    * Default value: `true`
    * @see activeTab
-   * @see onPreviewSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public get showPreviewTab(): boolean { return this.showTestSurveyTab; }
   public set showPreviewTab(val: boolean) { this.showTestSurveyTab = val; }
@@ -383,7 +383,18 @@ export class SurveyCreatorModel extends Base
    */
   public onGetPropertyReadOnly: EventBase<SurveyCreatorModel, PropertyGetReadOnlyEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGetReadOnlyEvent>();
 
-  public onSurveyInstanceCreated: EventBase<SurveyCreatorModel, any> = this.addCreatorEvent<SurveyCreatorModel, any>();
+  /**
+   * An event that is raised when Survey Creator [instantiates a survey to display a UI element](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys). Handle this event to customize the UI element by modifying the survey.
+   * 
+   * For information on event handler parameters, refer to descriptions within the interface.
+   * 
+   * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
+   * 
+   * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
+   * 
+   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   */
+  public onSurveyInstanceCreated: EventBase<SurveyCreatorModel, SurveyInstanceCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, SurveyInstanceCreatedEvent>();
 
   /**
    * An event that is raised when Survey Creator obtains a survey element name to display it in the UI.
@@ -429,14 +440,14 @@ export class SurveyCreatorModel extends Base
   public onShowingProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyAddingEvent>();
   public onCanShowProperty: EventBase<SurveyCreatorModel, PropertyAddingEvent> = this.onShowingProperty;
   /**
-   * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid by modifying the survey.
-   * @see onPropertyEditorCreated
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * @deprecated
    */
   public onPropertyGridSurveyCreated: EventBase<SurveyCreatorModel, PropertyGridSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyGridSurveyCreatedEvent>();
   /**
    * An event that is raised when a property editor is created in the Property Grid. Use this event to modify the property editor or add event handlers to it.
    * @see onSetPropertyEditorOptions
-   * @see onPropertyGridSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public onPropertyEditorCreated: EventBase<SurveyCreatorModel, PropertyEditorCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PropertyEditorCreatedEvent>();
   /**
@@ -548,24 +559,13 @@ export class SurveyCreatorModel extends Base
   public onGetPageActions: EventBase<SurveyCreatorModel, PageGetFooterActionsEvent> = this.addCreatorEvent<SurveyCreatorModel, PageGetFooterActionsEvent>();
 
   /**
-   * An event that is raised when Survey Creator instantiates a survey for the [Designer](https://surveyjs.io/survey-creator/documentation/end-user-guide#designer-tab) tab. Use this event to customize the survey.
-   * 
-   * For information on event handler parameters, refer to descriptions within the interface.
-   * 
-   * [Design Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#design-mode-survey-instance (linkStyle))
-   * 
-   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
-   * @see survey
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * @deprecated
    */
   public onDesignerSurveyCreated: EventBase<SurveyCreatorModel, DesignerSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, DesignerSurveyCreatedEvent>();
   /**
-   * An event that is raised when Survey Creator instantiates a survey for the [Preview](https://surveyjs.io/survey-creator/documentation/end-user-guide#preview-tab) tab. Use this event to customize the survey.
-   * 
-   * For information on event handler parameters, refer to descriptions within the interface.
-   * 
-   * [Preview Mode Survey Instance](https://surveyjs.io/survey-creator/documentation/customize-survey-creation-process#preview-mode-survey-instance (linkStyle))
-   * 
-   * > If you want this event raised at startup, assign a survey JSON schema to the [`JSON`](#JSON) property *after* you add a handler to the event. If the JSON schema should be empty, specify the `JSON` property with an empty object.
+   * This event is obsolete. Use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event instead.
+   * @deprecated
    */
   public onPreviewSurveyCreated: EventBase<SurveyCreatorModel, PreviewSurveyCreatedEvent> = this.addCreatorEvent<SurveyCreatorModel, PreviewSurveyCreatedEvent>();
   public onTestSurveyCreated: EventBase<SurveyCreatorModel, any> = this.onPreviewSurveyCreated;
@@ -890,6 +890,14 @@ export class SurveyCreatorModel extends Base
 
   public hasPendingThemeChanges: boolean = false;
   private _theme: ITheme = { cssVariables: {} };
+  /**
+   * Gets or sets a [theme](https://surveyjs.io/form-library/documentation/api-reference/itheme) for the survey being configured.
+   * 
+   * [Theme Editor](https://surveyjs.io/survey-creator/documentation/theme-editor (linkStyle))
+   * @see showThemeTab
+   * @see themeEditor
+   * @see saveThemeFunc
+   */
   public get theme(): ITheme {
     return this._theme;
   }
@@ -1557,10 +1565,108 @@ export class SurveyCreatorModel extends Base
 
   /**
    * A [survey](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model) being configured in the Designer tab.
-   * @see onDesignerSurveyCreated
+   * @see onSurveyInstanceCreated
    */
   public get survey(): SurveyModel {
     return this.surveyValue;
+  }
+  /**
+   * Adds new items to the [`pages`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#pages), [`triggers`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#triggers), [`calculatedValues`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#calculatedValues), and [`completedHtmlOnCondition`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#completedHtmlOnCondition) arrays in the existing survey JSON schema.
+   * 
+   * Use this method to merge the collection properties of two survey JSON schemas:
+   * 
+   * ```js
+   * import { SurveyCreatorModel } from "survey-creator-core";
+   * const creatorOptions = { ... };
+   * const creator = new SurveyCreatorModel(creatorOptions);
+   * 
+   * const surveyJson1 = { ... };
+   * const surveyJson2 = { ... };
+   * 
+   * creator.JSON = surveyJson1;
+   * creator.addCollectionItemsJson(surveyJson2);
+   * // `creator.JSON` contains the merged survey JSON schema
+   * ```
+   * @param json A JSON object that contains the `pages`, `triggers`, `calculatedValues`, and/or `completedHtmlOnCondition` array(s).
+   * @param insertPageIndex A zero-based index at which to insert new pages.
+   */
+  public addCollectionItemsJson(json: any, insertPageIndex?: number): void {
+    const survey = new SurveyModel(json);
+    this.updateAddingSurvey(survey);
+    this.addSurveyPages(survey, insertPageIndex);
+  }
+  private updateAddingSurvey(survey: SurveyModel): void {
+    this.updateAddingPages(survey);
+    this.updateAddingPanels(survey);
+    this.updateAddingQuestions(survey);
+    this.updateAddingCalculatedValules(survey);
+    this.updateAddingArrays(survey);
+  }
+  private updateAddingPages(survey: SurveyModel): void {
+    this.updateAddingElements(survey, survey.pages, this.survey.pages,
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        el.name = SurveyHelper.getNewPageName(allElements);
+      });
+  }
+  private updateAddingPanels(survey: SurveyModel): void {
+    this.updateAddingElements(survey, <any>survey.getAllPanels(), <any>this.survey.getAllPanels(),
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        el.name = SurveyHelper.getNewPanelName(allElements);
+      });
+  }
+  private updateAddingQuestions(survey: SurveyModel): void {
+    const logic = new SurveyLogic(survey, this);
+    this.updateAddingElements(survey, survey.getAllQuestions(), this.survey.getAllQuestions(),
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        const oldName = el.name;
+        el.name = SurveyHelper.getNewQuestionName(allElements);
+        logic.renameQuestion(oldName, el.name);
+      });
+  }
+  private updateAddingCalculatedValules(survey: SurveyModel): void {
+    const logic = new SurveyLogic(survey, this);
+    this.updateAddingElements(survey, <any>survey.calculatedValues, <any>this.survey.calculatedValues,
+      (el: SurveyElement, allElements: Array<SurveyElement>): void => {
+        const oldName = el.name;
+        el.name = SurveyHelper.getNewName(allElements, "var");
+        logic.renameQuestion(oldName, el.name);
+      });
+  }
+  private updateAddingArrays(survey: SurveyModel): void {
+    survey.triggers.forEach(item => this.survey.triggers.push(item));
+    survey.completedHtmlOnCondition.forEach(item => this.survey.completedHtmlOnCondition.push(item));
+    survey.calculatedValues.forEach(item => this.survey.calculatedValues.push(item));
+  }
+  private updateAddingElements(survey: SurveyModel, changingElements: Array<SurveyElement>,
+    existingElements: Array<SurveyElement>, onChange: (element: SurveyElement, allElements: Array<SurveyElement>) => void): void {
+    const elementsToChange = [];
+    const hash = {};
+    existingElements.forEach(el => {
+      if (!!el.name) {
+        hash[el.name] = el;
+      }
+    });
+    changingElements.forEach(el => {
+      if (!!el.name && !!hash[el.name]) {
+        elementsToChange.push(el);
+      }
+    });
+    const allElements = existingElements.concat(changingElements);
+    elementsToChange.forEach(el => {
+      onChange(el, allElements);
+    });
+  }
+  private addSurveyPages(survey: SurveyModel, indexPage?: number): void {
+    if (indexPage === undefined || indexPage >= this.survey.pages.length) {
+      indexPage = -1;
+    }
+    for (let i = 0; i < survey.pages.length; i++) {
+      if (indexPage < 0) {
+        this.survey.pages.push(survey.pages[i]);
+      } else {
+        this.survey.pages.splice(indexPage + i, 0, survey.pages[i]);
+      }
+    }
   }
   private existingPages: {};
   /**
@@ -1571,21 +1677,20 @@ export class SurveyCreatorModel extends Base
     if (!json) {
       json = { "logoPosition": "right" };
     }
-    // currentPlugin.deactivate && currentPlugin.deactivate();
     this.existingPages = {};
-    const survey = this.createSurvey({});
-    survey.css = defaultV2Css;
-    survey.setIsMobile(!!this.isMobileView);
-    survey.setDesignMode(true);
-    survey.lazyRendering = true;
-    survey.setJsonObject(json);
-    if (survey.isEmpty) {
-      survey.setJsonObject(this.getDefaultSurveyJson());
-    }
+    const survey = this.createSurvey({}, "designer", undefined, (survey: SurveyModel) => {
+      survey.css = defaultV2Css;
+      survey.setIsMobile(!!this.isMobileView);
+      survey.setDesignMode(true);
+      survey.lazyRendering = true;
+      survey.setJsonObject(json);
+      if (survey.isEmpty) {
+        survey.setJsonObject(this.getDefaultSurveyJson());
+      }
+    });
     survey.pages.forEach((page: PageModel) => {
       this.existingPages[page.id] = true;
     });
-    this.onDesignerSurveyCreated.fire(this, { survey: survey });
     survey.onQuestionAdded.add((sender: SurveyModel, options) => {
       this.doOnQuestionAdded(options.question, options.parentPanel);
     });
@@ -1894,7 +1999,7 @@ export class SurveyCreatorModel extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any = {}, reason: string = "designer", model?: any): SurveyModel {
+  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
     if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
@@ -1909,8 +2014,42 @@ export class SurveyCreatorModel extends Base
         survey.clearInvisibleValues = "onComplete";
       }
     }
-    this.onSurveyInstanceCreated.fire(this, { survey: survey, reason: reason, model: !!model ? model : this.currentPlugin?.model });
+    if (callback) {
+      callback(survey);
+    }
+    this.onSurveyInstanceCreated.fire(this, {
+      survey: survey,
+      reason: reason,
+      area: this.getSurveyInstanceCreatedArea(reason),
+      model: !!model ? model : this.currentPlugin?.model
+    });
+    if (reason === "designer") {
+      this.onDesignerSurveyCreated.fire(this, { survey: survey });
+    }
+    if (reason === "test") {
+      this.onPreviewSurveyCreated.fire(this, { survey: survey });
+    }
     return survey;
+  }
+  private getSurveyInstanceCreatedArea(reason: string): string {
+    const hash: any = {};
+    hash["designer"] = "designer-tab";
+    hash["test"] = "preview-tab";
+    hash["property-grid"] = "property-grid";
+    hash["default-value"] = "default-value-popup-editor";
+    hash["condition-builder"] = "logic-rule:condition-editor";
+    hash["logic-item-editor"] = "logic-rule:action-editor";
+    hash["logic-items"] = "logic-tab:condition-list";
+    hash["theme"] = "theme-tab";
+    hash["theme_editor"] = "theme-tab:property-grid";
+    hash["translation_settings"] = "translation-tab:language-list";
+    hash["translation_strings"] = "translation-tab:table";
+    hash["translation_strings_header"] = "translation-tab:table-header";
+    hash["cells-editor"] = "matrix-cell-values-popup-editor";
+    hash["fast-entry"] = "table-values-popup-editor";
+    hash["modal-question-editor"] = "matrix-cell-question-popup-editor";
+    const res = hash[reason];
+    return !!res ? res : "internal-use";
   }
   protected createSurveyCore(json: any = {}, reason: string): SurveyModel {
     return new SurveyModel(json);
@@ -2120,15 +2259,16 @@ export class SurveyCreatorModel extends Base
     this.updateNewElementExpressions(element);
   }
   private updateNewElementExpressions(element: ISurveyElement) {
-    var survey = this.createSurvey({}, "updateNewElementExpressions");
-    survey.setDesignMode(true);
-    if (element.isPage) {
-      survey.addPage(<PageModel>element);
-    } else {
-      survey.addNewPage("p1");
-      survey.pages[0].addElement(<IElement>element);
-    }
-    var logic = new SurveyLogic(survey);
+    const survey = this.createSurvey({}, "updateNewElementExpressions", undefined, (survey: SurveyModel): void => {
+      survey.setDesignMode(true);
+      if (element.isPage) {
+        survey.addPage(<PageModel>element);
+      } else {
+        survey.addNewPage("p1");
+        survey.pages[0].addElement(<IElement>element);
+      }
+    });
+    const logic = new SurveyLogic(survey);
     for (var key in this.newQuestionChangedNames) {
       logic.renameQuestion(key, this.newQuestionChangedNames[key]);
     }
