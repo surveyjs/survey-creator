@@ -814,10 +814,11 @@ test("drag drop to panel vertical", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [{
-          "name": "q1",
-          "type": "text",
-        }]
+        {
+          "type": "panel", "name": "p1", elements: [{
+            "name": "q1",
+            "type": "text",
+          }]
         }
       ],
     }]
@@ -831,16 +832,17 @@ test("drag drop to panel vertical", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [
-          {
-            "name": "q2",
-            "type": "text",
-          },
-          {
-            "name": "q1",
-            "type": "text",
-          }
-        ]
+        {
+          "type": "panel", "name": "p1", elements: [
+            {
+              "name": "q2",
+              "type": "text",
+            },
+            {
+              "name": "q1",
+              "type": "text",
+            }
+          ]
         }
       ],
     }]
@@ -854,20 +856,21 @@ test("drag drop to panel vertical", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [
-          {
-            "name": "q2",
-            "type": "text",
-          },
-          {
-            "name": "q1",
-            "type": "text",
-          },
-          {
-            "name": "q3",
-            "type": "text",
-          }
-        ]
+        {
+          "type": "panel", "name": "p1", elements: [
+            {
+              "name": "q2",
+              "type": "text",
+            },
+            {
+              "name": "q1",
+              "type": "text",
+            },
+            {
+              "name": "q3",
+              "type": "text",
+            }
+          ]
         }
       ],
     }]
@@ -897,10 +900,11 @@ test("drag drop to panel horizontal", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [{
-          "name": "q1",
-          "type": "text",
-        }]
+        {
+          "type": "panel", "name": "p1", elements: [{
+            "name": "q1",
+            "type": "text",
+          }]
         }
       ],
     }]
@@ -914,17 +918,18 @@ test("drag drop to panel horizontal", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [
-          {
-            "name": "q2",
-            "type": "text",
-          },
-          {
-            "name": "q1",
-            "type": "text",
-            "startWithNewLine": false
-          }
-        ]
+        {
+          "type": "panel", "name": "p1", elements: [
+            {
+              "name": "q2",
+              "type": "text",
+            },
+            {
+              "name": "q1",
+              "type": "text",
+              "startWithNewLine": false
+            }
+          ]
         }
       ],
     }]
@@ -938,22 +943,23 @@ test("drag drop to panel horizontal", () => {
     pages: [{
       name: "page1",
       "elements": [
-        { "type": "panel", "name": "p1", elements: [
-          {
-            "name": "q2",
-            "type": "text",
-          },
-          {
-            "name": "q1",
-            "type": "text",
-            "startWithNewLine": false
-          },
-          {
-            "name": "q3",
-            "type": "text",
-            "startWithNewLine": false
-          }
-        ]
+        {
+          "type": "panel", "name": "p1", elements: [
+            {
+              "name": "q2",
+              "type": "text",
+            },
+            {
+              "name": "q1",
+              "type": "text",
+              "startWithNewLine": false
+            },
+            {
+              "name": "q3",
+              "type": "text",
+              "startWithNewLine": false
+            }
+          ]
         }
       ],
     }]
@@ -1105,7 +1111,7 @@ test("Support onDragDropAllow, Bug#4572", (): any => {
   let sourceName = "";
   let parentName = "";
   creator.onDragDropAllow.add((sender, options) => {
-    counter ++;
+    counter++;
     surveyQuestionCount = options.survey.getAllQuestions().length;
     targetName = options.target.name;
     sourceName = options.source.name;
@@ -1222,4 +1228,78 @@ test("Do not allow to drag inside panel", () => {
   checkAllowDragOver(p2);
   checkAllowDragOver(q1);
   checkAllowDragOver(q2);
+});
+
+test("onQuestionAdded doesn't fire when drag drop existing element", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1", },
+      { "type": "text", "name": "q2", },
+      { "type": "text", "name": "q3", },
+    ]
+  };
+  const survey = new SurveyModel(json);
+  let log = "";
+  survey.onQuestionAdded.add((s, o) => {
+    log += "->added:" + o.question.name;
+  });
+
+  const q1 = survey.getQuestionByName("q1");
+  const q3 = survey.getQuestionByName("q3");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q3;
+
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q1", "type": "text", },
+          { "name": "q3", "type": "text", },
+          { "name": "q2", "type": "text", },
+        ],
+      },
+    ],
+  });
+  expect(log).toBe("");
+});
+test("onQuestionAdded fires when drag drop new element", () => {
+  const json = {
+    "elements": [
+      { "type": "text", "name": "q1", },
+      { "type": "text", "name": "q2", },
+      { "type": "text", "name": "q3", },
+    ]
+  };
+  const survey = new SurveyModel(json);
+  let log = "";
+  survey.onQuestionAdded.add((s, o) => {
+    log += "->added:" + o.question.name;
+  });
+
+  const q1 = survey.getQuestionByName("q1");
+  const q4 = new QuestionTextModel("q4");
+
+  const ddHelper: any = new DragDropSurveyElements(survey);
+  ddHelper.draggedElement = q4;
+
+  ddHelper.dragOverCore(q1, DragTypeOverMeEnum.Bottom);
+  ddHelper.doDrop();
+  expect(survey.toJSON()).toStrictEqual({
+    "pages": [
+      {
+        "name": "page1",
+        "elements": [
+          { "name": "q1", "type": "text", },
+          { "name": "q4", "type": "text", },
+          { "name": "q2", "type": "text", },
+          { "name": "q3", "type": "text", },
+        ],
+      },
+    ],
+  });
+  expect(log).toBe("->added:q4");
 });
