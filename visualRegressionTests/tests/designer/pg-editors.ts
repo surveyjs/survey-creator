@@ -213,6 +213,53 @@ test("Logic popup", async (t) => {
   });
 });
 
+test("Logic popup with boolean question", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1240, 870);
+
+    await setJSON({
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2",
+              "visibleIf": "{question1} = true",
+              "enableIf": "{question3} = 1"
+            },
+            {
+              "type": "rating",
+              "name": "question3",
+              "rateCount": 20,
+              "rateMax": 20
+            },
+            {
+              "type": "boolean",
+              "name": "question1"
+            }
+          ]
+        }
+      ],
+      "showQuestionNumbers": "off"
+    });
+
+    const generalTab = Selector("h4").withExactText("General");
+    const logicTab = Selector("h4").withExactText("Conditions");
+
+    await t
+      .click(Selector(".svc-question__content .sd-question__title"))
+      .click(generalTab)
+      .click(logicTab)
+      .click(Selector(".spg-panel__content div[data-name='visibleIf'] button[title='Edit']"))
+      .click(Selector(".sd-boolean--checked"));
+    await takeElementScreenshot("pg-logic-popup-boolean.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+    await t.click(Selector("button").withText("Cancel").filterVisible());
+    await t.click(Selector(".spg-panel__content div[data-name='enableIf'] button[title='Edit']"));
+    await takeElementScreenshot("pg-logic-popup-rating.png", Selector(".sv-popup.sv-property-editor.sv-popup--modal .sv-popup__container"), t, comparer);
+  });
+});
+
 test("Logic popup mobile", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1240, 870);

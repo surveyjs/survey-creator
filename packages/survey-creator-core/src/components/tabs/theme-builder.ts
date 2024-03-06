@@ -318,18 +318,21 @@ export class ThemeEditorModel extends Base {
   }
 
   public updateSimulatorSurvey(json: any, theme: any) {
-    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this);
-    newSurvey.setCss(theme, false);
-    newSurvey.fitToContainer = true;
-    newSurvey.addLayoutElement({
-      id: "complete-customization",
-      container: "completePage" as any,
-      component: "svc-complete-page",
-      data: this
+    const newSurvey = this.surveyProvider.createSurvey(json || {}, "theme", this, (survey: SurveyModel): void => {
+      survey.setCss(theme, false);
+      survey.fitToContainer = true;
+      survey.addLayoutElement({
+        id: "complete-customization",
+        container: "completePage" as any,
+        component: "svc-complete-page",
+        data: this
+      });
+      if(!!json && !!json.locale) {
+        survey.locale = json.locale;
+      }
+      survey.applyTheme(this.currentTheme);
     });
-    newSurvey.locale = json.locale;
     this.simulator.survey = newSurvey;
-    this.updateSimulatorTheme();
     if (this.onSurveyCreatedCallback) this.onSurveyCreatedCallback(this.survey);
     const self: ThemeEditorModel = this;
     this.survey.onComplete.add((sender: SurveyModel) => {
@@ -704,16 +707,16 @@ export class ThemeEditorModel extends Base {
   protected createThemeEditorSurvey(): SurveyModel {
     const json = this.getThemeEditorSurveyJSON();
     setSurveyJSONForPropertyGrid(json, true, false);
-    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this);
-    themeEditorSurvey.lazyRendering = true;
-    themeEditorSurvey.lazyRenderingFirstBatchSize = 1;
-    themeEditorSurvey.setJsonObject(json);
-    themeEditorSurvey.getCss().list = {};
-    const themeBuilderCss = { ...propertyGridCss };
-    themeBuilderCss.root += " spg-theme-builder-root";
-    themeEditorSurvey.css = themeBuilderCss;
-    themeEditorSurvey.enterKeyAction = "loseFocus";
-
+    const themeEditorSurvey = this.surveyProvider.createSurvey({}, "theme_editor", this, (survey: SurveyModel): void => {
+      survey.lazyRendering = true;
+      survey.lazyRenderingFirstBatchSize = 1;
+      survey.setJsonObject(json);
+      survey.getCss().list = {};
+      const themeBuilderCss = { ...propertyGridCss };
+      themeBuilderCss.root += " spg-theme-builder-root";
+      survey.css = themeBuilderCss;
+      survey.enterKeyAction = "loseFocus";
+    });
     themeEditorSurvey.onValueChanging.add((sender, options: ValueChangingEvent) => {
       if (this.blockChanges) return;
 

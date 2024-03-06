@@ -293,7 +293,7 @@ export interface ISurveyCreatorOptions {
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
   stopUndoRedoTransaction();
-  createSurvey(json: any, reason: string, model?: any);
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel)=> void);
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Base,
@@ -444,8 +444,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   }
   startUndoRedoTransaction() { }
   stopUndoRedoTransaction() { }
-  createSurvey(json: any, reason: string, model?: any): SurveyModel {
-    return new SurveyModel(json);
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void): SurveyModel {
+    const survey = new SurveyModel(json);
+    if(!!callback) {
+      callback(survey);
+    }
+    return survey;
   }
   onConditionQuestionsGetListCallback(
     propertyName: string,

@@ -415,9 +415,10 @@ export class DragDropSurveyElements extends DragDropCore<any> {
       }
     };
 
-    (page.survey as SurveyModel).startMovingQuestion();
-    if (src.parent || src.page) {
-      (src.parent || src.page).removeElement(src);
+    const srcContainer = src.parent || src.page;
+    if (!!srcContainer) {
+      (page.survey as SurveyModel).startMovingQuestion();
+      srcContainer.removeElement(src);
     }
     const dest = this.dragOverIndicatorElement?.isPanel ? this.dragOverIndicatorElement : this.dropTarget;
     const isTargetIsContainer = dest.isPanel || dest.isPage;

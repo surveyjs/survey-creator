@@ -101,21 +101,25 @@ To access the design mode survey instance, use the Survey Creator's [`survey`](h
 creator.survey.title = "My Survey";
 ```
 
-Survey Creator may create a new design mode survey instance during the design process (for example, when a user switches from the JSON Editor tab back to the Designer). To handle the survey recreation, use the [`onDesignerSurveyCreated`](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
+Survey Creator may create a new design mode survey instance during the design process (for example, when a user switches from the JSON Editor tab back to the Designer). To handle the survey recreation, use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event.
 
 ```js
-creator.onDesignerSurveyCreated.add(function (_, options) {
-  // The recreated survey instance is stored in the `options.survey` property.
-  console.log(options.survey);
+creator.onSurveyInstanceCreated.add((_, options) => {
+  if (options.area === "designer-tab") {
+    // The recreated survey instance is stored in the `options.survey` property.
+    console.log(options.survey);
+  }
 })
 ```
 
 ### Preview Mode Survey Instance
 
-The preview mode survey instance is recreated each time a user opens the Preview tab. To access this instance, handle the [`onPreviewSurveyCreated`](https://surveyjs.io/Documentation/Survey-Creator?id=surveyeditor#onPreviewSurveyCreated) event:
+The preview mode survey instance is recreated each time a user opens the Preview tab. To access this instance, handle the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event as follows:
 
 ```js
-creator.onPreviewSurveyCreated.add(function (_, options) {
-  options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
+creator.onSurveyInstanceCreated.add((_, options) => {
+  if (options.area === "preview-tab") {
+    options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
+  }
 });
 ```

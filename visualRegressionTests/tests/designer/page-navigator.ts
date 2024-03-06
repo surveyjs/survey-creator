@@ -588,3 +588,105 @@ test("Page navigator in by-page mode has enough space to be shown", async (t) =>
     await takeElementScreenshot("page-navigator-by-page-not-overlaped.png", designSurface, t, comparer);
   });
 });
+test("Page navigator scrolls to top of long page and centers small page", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1500, 800);
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            }
+          ]
+        },
+        {
+          "name": "page2",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question2"
+            }
+          ]
+        },
+        {
+          "name": "page3",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question3"
+            }
+          ]
+        },
+        {
+          "name": "page4",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question4"
+            },
+            {
+              "type": "text",
+              "name": "question6"
+            },
+            {
+              "type": "text",
+              "name": "question7"
+            },
+            {
+              "type": "text",
+              "name": "question8"
+            },
+            {
+              "type": "text",
+              "name": "question9"
+            },
+            {
+              "type": "text",
+              "name": "question10"
+            },
+            {
+              "type": "text",
+              "name": "question11"
+            },
+            {
+              "type": "text",
+              "name": "question12"
+            },
+            {
+              "type": "text",
+              "name": "question13"
+            },
+            {
+              "type": "text",
+              "name": "question14"
+            },
+            {
+              "type": "text",
+              "name": "question15"
+            }
+          ]
+        },
+        {
+          "name": "page5",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question5"
+            }
+          ]
+        }
+      ]
+    });
+    const designSurface = Selector(".svc-creator");
+    const pageSelector = Selector(".svc-page-navigator__selector");
+    const listItemSelector = Selector(".sv-list__item-body");
+    await t.click(pageSelector).click(listItemSelector.withText("page4")).wait(500);
+    await takeElementScreenshot("page-navigator-select-long-page.png", designSurface, t, comparer);
+    await t.click(pageSelector).click(listItemSelector.withText("page2")).wait(500);
+    await takeElementScreenshot("page-navigator-select-short-page.png", designSurface, t, comparer);
+  });
+});

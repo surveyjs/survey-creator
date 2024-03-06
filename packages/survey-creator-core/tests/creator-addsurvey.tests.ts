@@ -27,19 +27,19 @@ test("Add pages into survey", (): any => {
   const json = {
     pages: [{ name: "page3", elements: [{ type: "text", name: "question3" }] }]
   };
-  creator.addSurveyJson(json);
+  creator.addCollectionItemsJson(json);
   expect(creator.survey.pages).toHaveLength(3);
   expect(creator.survey.pages[2].name).toEqual("page3");
 
   creator.JSON = surveyJSON;
   expect(creator.survey.pages).toHaveLength(2);
-  creator.addSurveyJson(json, 1);
+  creator.addCollectionItemsJson(json, 1);
   expect(creator.survey.pages).toHaveLength(3);
   expect(creator.survey.pages[1].name).toEqual("page3");
 
   creator.JSON = surveyJSON;
   expect(creator.survey.pages).toHaveLength(2);
-  creator.addSurveyJson(json, 0);
+  creator.addCollectionItemsJson(json, 0);
   expect(creator.survey.pages).toHaveLength(3);
   expect(creator.survey.pages[0].name).toEqual("page3");
 });
@@ -50,7 +50,7 @@ test("Add pages into survey", (): any => {
   const json = {
     pages: [{ name: "page1", elements: [{ type: "panel", name: "panel1", elements: [{ type: "text", name: "question1" }] }] }]
   };
-  creator.addSurveyJson(json);
+  creator.addCollectionItemsJson(json);
   expect(creator.survey.pages).toHaveLength(3);
   const page = creator.survey.pages[2];
   expect(page.name).toEqual("page3");
@@ -73,7 +73,7 @@ test("Update expressions", (): any => {
       { expression: "{question1} = 3" }
     ]
   };
-  creator.addSurveyJson(json);
+  creator.addCollectionItemsJson(json);
   expect(creator.survey.pages).toHaveLength(3);
   const survey = creator.survey;
   const page = survey.pages[2];
@@ -98,7 +98,7 @@ test("Update calculatedValues", (): any => {
       { name: "var1", expression: "1" }
     ]
   };
-  creator.addSurveyJson(json);
+  creator.addCollectionItemsJson(json);
   expect(creator.survey.pages).toHaveLength(3);
   const survey = creator.survey;
   const values = survey.calculatedValues;
