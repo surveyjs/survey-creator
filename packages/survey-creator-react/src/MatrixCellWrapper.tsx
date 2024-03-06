@@ -20,8 +20,8 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
   any
 > {
   model: MatrixCellWrapperViewModel;
-  protected createModel(): void {
-    const data = this.props.componentData;
+  protected createModel(props: any): void {
+    const data = props.componentData;
     this.model = new MatrixCellWrapperViewModel(
       data.creator,
       data.element,
