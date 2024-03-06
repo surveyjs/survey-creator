@@ -46,6 +46,7 @@ export class CreatorPresetEditableBase {
   }
   protected getBoolVisibleIf(name: string): string { return "{" + name + "}=true"; }
   protected getTextVisibleIf(name: string, val: string): string { return "{" + name + "}='" + val +"'"; }
+  protected getNotEmptyVisibleIf(name: string): string { return "{" + name + "} notempty"; }
   protected createMainPageCore(): any { return {}; }
   public getJsonValue(model: SurveyModel): any {
     const page = model.getPageByName(this.pageName);
@@ -86,6 +87,18 @@ export class CreatorPresetEditableBase {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
+  protected copyJson(json: any): any {
+    if(!json) return json;
+    const res = {};
+    for(let key in json) {
+      if(typeof json[key] === "object") {
+        res[key] = this.copyJson(json[key]);
+      } else {
+        res[key] = json[key];
+      }
+    }
+    return res;
+  }
 }
 
 export interface ICreatorPreset {

@@ -1,17 +1,19 @@
 import { CreatorTester } from "./creator-tester";
 import { CreatorPreset, ICreatorPresetData } from "../src/presets/presets";
 import { QuestionToolbox } from "../src/toolbox";
-import { QuestionMatrixDynamicModel } from "survey-core";
+import { QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
-  expect(survey.pages).toHaveLength(5);
-  expect(survey.visiblePages).toHaveLength(2);
+  expect(survey.pages).toHaveLength(7);
+  expect(survey.visiblePages).toHaveLength(3);
   expect(survey.pages[0].name).toEqual("page_tabs");
   expect(survey.pages[1].name).toEqual("page_toolbox");
   expect(survey.pages[2].name).toEqual("page_toolbox_definition");
   expect(survey.pages[3].name).toEqual("page_toolbox_items");
   expect(survey.pages[4].name).toEqual("page_toolbox_categories");
+  expect(survey.pages[5].name).toEqual("page_propertyGrid");
+  expect(survey.pages[6].name).toEqual("page_propertyGrid_definition");
 });
 test("Preset edit model, page component", () => {
   const preset = new CreatorPreset({ tabs: { items: [] } });
@@ -271,4 +273,28 @@ test("Preset edit model, toolbox items & definition page", () => {
   expect(itemsQuestion.value).toHaveLength(defaultItems.length);
   expect(itemsQuestion.choices[0].value).toEqual("radiogroup");
   expect(itemsQuestion.choices[0].text).toEqual("Radiogroup_New");
+});
+test("Preset edit model, toolbox properties, setup", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  expect(survey.getPageByName("page_propertyGrid_definition").visible).toBeFalsy();
+  survey.setValue("propertyGrid_definition_show", true);
+  expect(survey.getPageByName("page_propertyGrid_definition").visible).toBeTruthy();
+  const selectorQuestion = <QuestionDropdownModel>survey.getQuestionByName("propertyGrid_definition_selector");
+  const checkSelectorChoice = (value: string): boolean => {
+    const items = selectorQuestion.choices.filter(item => item.value === value);
+    return items.length > 0;
+  };
+  expect(checkSelectorChoice("survey")).toBeTruthy();
+  expect(checkSelectorChoice("page")).toBeTruthy();
+  expect(checkSelectorChoice("panel")).toBeTruthy();
+  expect(checkSelectorChoice("panelbase")).toBeTruthy();
+  expect(checkSelectorChoice("question")).toBeTruthy();
+  expect(checkSelectorChoice("selectbase")).toBeTruthy();
+  expect(checkSelectorChoice("matrixdropdownbase")).toBeTruthy();
+  expect(checkSelectorChoice("matrix")).toBeTruthy();
+  expect(checkSelectorChoice("base")).toBeFalsy();
+  expect(checkSelectorChoice("empty")).toBeFalsy();
+  expect(checkSelectorChoice("nonvalue")).toBeFalsy();
+  expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
 });

@@ -1,4 +1,4 @@
-import { ItemValue, MatrixDropdownRowModelBase, Question, QuestionMatrixDynamicModel, QuestionPanelDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
+import { ItemValue, MatrixDropdownRowModelBase, Question, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { IQuestionToolboxItem, IToolboxCategoryDefinition } from "../toolbox";
