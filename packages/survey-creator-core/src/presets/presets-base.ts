@@ -1,4 +1,4 @@
-import { SurveyModel } from "survey-core";
+import { Helpers, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 export class CreatorPresetEditableBase {
@@ -77,6 +77,12 @@ export class CreatorPresetEditableBase {
       item.setupOnCurrentPage(model, creator);
     });
   }
+  public updateOnValueChanged(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {
+    this.updateOnValueChangedCore(model, creator, name);
+    this.children.forEach(item => {
+      item.updateOnValueChanged(model, creator, name);
+    });
+  }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     this.setupQuestionsValueCore(model, json, creator);
     this.children.forEach(item => {
@@ -87,17 +93,9 @@ export class CreatorPresetEditableBase {
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {}
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
+  protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {}
   protected copyJson(json: any): any {
-    if(!json) return json;
-    const res = {};
-    for(let key in json) {
-      if(typeof json[key] === "object") {
-        res[key] = this.copyJson(json[key]);
-      } else {
-        res[key] = json[key];
-      }
-    }
-    return res;
+    return Helpers.getUnbindValue(json);
   }
 }
 

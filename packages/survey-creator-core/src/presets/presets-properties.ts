@@ -1,7 +1,21 @@
-import { ComponentCollection, ItemValue, MatrixDropdownRowModelBase, Question, QuestionDropdownModel, QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
+import { JsonObjectProperty, ItemValue, MatrixDropdownRowModelBase, QuestionDropdownModel,
+  QuestionMatrixDynamicModel, QuestionRankingModel, Serializer, SurveyModel } from "survey-core";
 import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./presets-base";
 import { SurveyCreatorModel } from "../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition } from "../question-editor/definition";
+import { SurveyQuestionProperties } from "../question-editor/properties";
+
+export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
+  constructor(className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
+    super(null, null, className, null, null, null, propertyGridDefinition);
+  }
+  protected initProperties(className: string): Array<JsonObjectProperty> {
+    return Serializer.getProperties(className);
+  }
+  protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
+    return prop.visible !== false;
+  }
+}
 
 export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEditableBase {
   private currentJson: ISurveyPropertyGridDefinition;
@@ -18,7 +32,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           type: "matrixdynamic",
           name: this.nameMatrix,
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
-          minRowCount: 1,
           allowRowsDragAndDrop: true,
           columns: [
             { cellType: "text", name: "name", isUnique: true, isRequired: true },
@@ -57,8 +70,20 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     });
     */
   }
-  protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    //this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
+  protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {
+    const selQuestion = this.getSelector(model);
+    if(name !== this.nameSelector || selQuestion.isEmpty()) return;
+    this.getMatrix(model).value = this.definitionToRows(selQuestion.value);
+
+  }
+  private definitionToRows(className: string): Array<any> {
+    const res = [];
+    const properties = new SurveyQuestionPresetProperties(className, this.currentJson);
+    properties.getTabs().forEach(tab => {
+      const row = { name: tab.name };
+      res.push(row);
+    });
+    return res;
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     if(!json) {

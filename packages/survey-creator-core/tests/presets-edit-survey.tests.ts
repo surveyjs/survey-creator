@@ -297,4 +297,11 @@ test("Preset edit model, toolbox properties, setup", () => {
   expect(checkSelectorChoice("empty")).toBeFalsy();
   expect(checkSelectorChoice("nonvalue")).toBeFalsy();
   expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
+  const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  expect(matrix.visible).toBeFalsy();
+  selectorQuestion.value = "survey";
+  expect(matrix.visible).toBeTruthy();
+  const rows = matrix.visibleRows;
+  expect(rows).toHaveLength(10);
+  expect(rows[0].getValue("name")).toEqual("general");
 });

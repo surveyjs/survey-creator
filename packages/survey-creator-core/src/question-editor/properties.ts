@@ -60,9 +60,18 @@ export class SurveyQuestionProperties {
       this.propertyGridDefinition = defaultPropertyGridDefinition;
     }
     this.showModeValue = showMode;
-    this.properties = Serializer.getPropertiesByObj(this.obj);
+    this.properties = this.initProperties(className);
     this.fillPropertiesHash();
     this.buildTabs(className);
+  }
+  protected initProperties(className: string): Array<JsonObjectProperty> {
+    return Serializer.getPropertiesByObj(this.obj);
+  }
+  protected getIsPropertyVisible(prop: JsonObjectProperty): boolean {
+    return SurveyHelper.isPropertyVisible(this.obj, prop, this.options, this.showMode, this.parentObj, this.parentProperty);
+  }
+  protected getDynamicClassName(): string {
+    return !!this.obj && this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
   }
   public getProperty(propertyName: string): JsonObjectProperty {
     var res = this.propertiesHash[propertyName];
@@ -92,14 +101,7 @@ export class SurveyQuestionProperties {
       var prop = this.properties[i];
       this.propertiesHash[prop.name] = {
         property: prop,
-        visible: SurveyHelper.isPropertyVisible(
-          this.obj,
-          prop,
-          this.options,
-          this.showMode,
-          this.parentObj,
-          this.parentProperty
-        ),
+        visible: this.getIsPropertyVisible(prop),
       };
     }
   }
@@ -126,7 +128,7 @@ export class SurveyQuestionProperties {
     return res;
   }
   private buildTabs(className: string) {
-    if (!className) {
+    if (!className && !!this.obj) {
       className = this.obj.getType();
     }
     var definitions = this.getAllDefinitionsByClass(className);
@@ -316,7 +318,7 @@ export class SurveyQuestionProperties {
       return result;
     }
     let hasNonTabDynamicProperties = false;
-    const dynamicClass = this.obj.isQuestion && !!this.obj.getDynamicType ? this.obj.getDynamicType() : "";
+    const dynamicClass = this.getDynamicClassName();
     if (dynamicClass) {
       hasNonTabDynamicProperties = this.getAllDefinitionsByClassCore(dynamicClass, usedProperties, result, className);
     }
