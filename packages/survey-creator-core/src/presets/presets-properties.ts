@@ -153,7 +153,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private updateCurrentJson(model: SurveyModel): void {
     if(!this.isMatrixValueChanged) return;
     this.isMatrixValueChanged = false;
-    if(!this.currentClassName) return;
+    if(!this.currentClassName || !this.currentJson || !this.currentJson.classes) return;
     const val = model.getValue(this.nameMatrix);
     if(!Array.isArray(val) || val.length === 0) return;
     const properties = [];
@@ -163,16 +163,18 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     val.forEach(tab => {
       if(Array.isArray(tab.items)) {
         if(tab.name === "general") {
+          tab.items.forEach(item => properties.push(item));
           properties.concat(tab.items);
         } else {
           tabs.push({ name: tab.name, index: index });
           index += step;
           tab.items.forEach(item => {
-            properties.push({ name: item.name, tab: tab.name });
+            properties.push({ name: item, tab: tab.name });
           });
         }
       }
     });
+    this.currentJson.classes[this.currentClassName] = { properties: properties, tabs: tabs };
   }
 }
 

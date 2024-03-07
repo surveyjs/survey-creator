@@ -344,5 +344,6 @@ test("Preset edit model, property grid, apply", () => {
   const propDef = preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
   expect(propDef?.autoGenerateProperties).toStrictEqual(false);
-  expect(surveyProps?.tabs).toHaveLength(2);
+  expect(surveyProps?.tabs).toHaveLength(1);
+  expect(surveyProps?.properties).toHaveLength(4);
 });
