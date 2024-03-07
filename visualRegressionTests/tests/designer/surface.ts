@@ -1995,10 +1995,11 @@ test("Check adorner actions responsivity after convert", async (t) => {
         }
       ]
     });
-    await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector("#convertTo").nth(2)).click(Selector("#convertTo").nth(2))
+    await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector("#convertTo").nth(2))
       .click(Selector("div[data-sv-drop-target-survey-element='question3'] .sv-list__item-body[title='Yes/No (Boolean)']"))
-      .click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
-      .click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
+      .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
+      .hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
+    await t.wait(100);
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
 });
