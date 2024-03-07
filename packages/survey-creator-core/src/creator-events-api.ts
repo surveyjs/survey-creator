@@ -179,6 +179,10 @@ export interface PropertyEditorCreatedEvent {
    * A property that corresponds to the created property editor.
    */
   property: JsonObjectProperty;
+  /**
+   * A survey element being edited in the Property Grid.
+   */
+  obj: Base;
 }
 
 export interface PropertyEditorUpdateTitleActionsEvent {
