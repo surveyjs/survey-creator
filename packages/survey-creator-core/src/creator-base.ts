@@ -1999,7 +1999,7 @@ export class SurveyCreatorModel extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void): SurveyModel {
+  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
     if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
@@ -2017,10 +2017,11 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
+    area = area || this.getSurveyInstanceCreatedArea(reason);
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
-      area: this.getSurveyInstanceCreatedArea(reason),
+      area: area,
       model: !!model ? model : this.currentPlugin?.model
     });
     if (reason === "designer") {
