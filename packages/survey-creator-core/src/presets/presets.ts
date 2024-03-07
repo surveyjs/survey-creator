@@ -58,6 +58,12 @@ export class CreatorPreset extends CreatorPresetBase {
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, editingCreator, options.name));
     });
+    model.onMatrixRowAdded.add((sender, options) => {
+      editablePresets.forEach(item => item.updateOnMatrixRowAdded(model, editingCreator, options));
+    });
+    model.onMatrixRowRemoved.add((sender, options) => {
+      options.row.onDetailPanelShowingChanged = undefined;
+    });
     return model;
   }
   public applyFromSurveyModel(model: SurveyModel, creator?: SurveyCreatorModel): boolean {
@@ -78,7 +84,7 @@ export class CreatorPreset extends CreatorPresetBase {
   }
   public getJsonFromSurveyModel(model: SurveyModel): any {
     const res: any = {};
-    this.createEditablePresets().forEach(preset => {
+    model.editablePresets.forEach(preset => {
       const val = preset.getJsonValue(model);
       if(!!val) {
         res[preset.path] = val;

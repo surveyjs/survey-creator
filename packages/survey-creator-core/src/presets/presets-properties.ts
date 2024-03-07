@@ -20,6 +20,7 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
 export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEditableBase {
   private currentJson: ISurveyPropertyGridDefinition;
   private currentClassProperties: SurveyQuestionPresetProperties;
+  private currentClassName: string;
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
@@ -35,7 +36,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
           allowRowsDragAndDrop: true,
           columns: [
-            { cellType: "text", name: "name", isUnique: true, isRequired: true },
+            { cellType: "text", name: "name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" },
             { cellType: "expression", name: "count", expression: "{row.items.length}" }
           ],
           detailPanelMode: "underRowSingle",
@@ -57,25 +58,32 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.getSelector(model).choices = this.getSelectorChoices(creator);
-    //this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
-    /*
-    model.onMatrixRowAdded.add((sender, options) =>{
-      if(options.question.name === this.nameMatrix) {
-        options.row.onDetailPanelShowingChanged = () => {
-          this.onDetailPanelShowingChanged(options.row);
-        };
-      }
-    });
-    model.onMatrixRowRemoved.add((sender, options) => {
-      options.row.onDetailPanelShowingChanged = undefined;
-    });
-    */
   }
+  protected updateOnMatrixRowAddedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    if(options.question.name === this.nameMatrix) {
+      options.row.onDetailPanelShowingChanged = () => {
+        this.onDetailPanelShowingChanged(options.row);
+      };
+    }
+  }
+  private isMatrixValueChanged: boolean;
   protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {
+    if(name === this.nameMatrix) {
+      this.isMatrixValueChanged = true;
+    }
+    if(name !== this.nameSelector) return;
+    this.updateCurrentJson(model);
     const selQuestion = this.getSelector(model);
-    if(name !== this.nameSelector || selQuestion.isEmpty()) return;
-    this.getMatrix(model).value = this.definitionToRows(selQuestion.value);
-
+    this.currentClassName = selQuestion.value;
+    if(!this.currentClassName) return;
+    const matrix = this.getMatrix(model);
+    matrix.value = this.definitionToRows(this.currentClassName);
+    this.isMatrixValueChanged = false;
+    matrix.visibleRows.forEach(row => {
+      row.onDetailPanelShowingChanged = () => {
+        this.onDetailPanelShowingChanged(row);
+      };
+    });
   }
   private definitionToRows(className: string): Array<any> {
     const res = [];
@@ -94,29 +102,6 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
     this.currentJson = json;
     this.currentJson.autoGenerateProperties = false;
-
-    /*
-    const nameCategories = {};
-    const categories = [];
-    creator.toolbox.items.forEach(item => {
-      const category = item.category;
-      if(!!category) {
-        if(!nameCategories[category]) {
-          const row = { name: category, items: [item.name] };
-          nameCategories[category] = row;
-          categories.push(row);
-        } else {
-          nameCategories[category].items.push(item.name);
-        }
-      }
-    });
-    model.setValue(this.nameMatrix, categories);
-    this.getMatrix(model).visibleRows.forEach(row => {
-      row.onDetailPanelShowingChanged = () => {
-        this.onDetailPanelShowingChanged(row);
-      };
-    });
-    */
   }
   private getMatrix(model: SurveyModel): QuestionMatrixDynamicModel { return <QuestionMatrixDynamicModel>model.getQuestionByName(this.nameMatrix); }
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
@@ -128,11 +113,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ItemValue> {
     const res = [];
-    /*
+    if(!this.currentClassProperties) return res;
+    const allProperties = this.currentClassProperties.getAllVisiblePropertiesNames(true);
     const model = <SurveyModel>row.getSurvey();
     const matrix = this.getMatrix(<SurveyModel>model);
-    const defaultItems = matrix.defaultItems;
-    if(!Array.isArray(defaultItems)) return res;
     const val = model.getValue(this.nameMatrix);
     const usedItems = {};
     if(Array.isArray(val)) {
@@ -143,12 +127,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
         }
       }
     }
-    defaultItems.forEach(item => {
-      if(!usedItems[item.id]) {
-        res.push(new ItemValue(item.id, item.title));
+    allProperties.forEach(name => {
+      if(!usedItems[name]) {
+        res.push(new ItemValue(name)); //TODO title
       }
     });
-    */
     return res;
   }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
@@ -166,6 +149,30 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     const res = [];
     classes.forEach(str => res.push(new ItemValue(str)));
     return res;
+  }
+  private updateCurrentJson(model: SurveyModel): void {
+    if(!this.isMatrixValueChanged) return;
+    this.isMatrixValueChanged = false;
+    if(!this.currentClassName) return;
+    const val = model.getValue(this.nameMatrix);
+    if(!Array.isArray(val) || val.length === 0) return;
+    const properties = [];
+    const tabs = [];
+    const step = 100;
+    let index = step;
+    val.forEach(tab => {
+      if(Array.isArray(tab.items)) {
+        if(tab.name === "general") {
+          properties.concat(tab.items);
+        } else {
+          tabs.push({ name: tab.name, index: index });
+          index += step;
+          tab.items.forEach(item => {
+            properties.push({ name: item.name, tab: tab.name });
+          });
+        }
+      }
+    });
   }
 }
 

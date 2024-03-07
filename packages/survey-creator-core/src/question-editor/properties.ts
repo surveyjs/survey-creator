@@ -37,7 +37,7 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
-  public unusedProperties: Array<JsonObjectProperty> = [];
+  private unusedProperties: Array<JsonObjectProperty> = [];
   public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
     if (!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
     const props = propertyGridDefinition.classes[className]?.properties;
@@ -64,6 +64,16 @@ export class SurveyQuestionProperties {
     this.properties = this.initProperties(className);
     this.fillPropertiesHash();
     this.buildTabs(className);
+  }
+  public getAllVisiblePropertiesNames(includeUnused: boolean): Array<string> {
+    const res = [];
+    this.tabs.forEach(tab => {
+      tab.properties.forEach(prop => res.push(prop.name));
+    });
+    if(includeUnused) {
+      this.unusedProperties.forEach(prop => res.push(prop.name));
+    }
+    return res;
   }
   protected initProperties(className: string): Array<JsonObjectProperty> {
     return Serializer.getPropertiesByObj(this.obj);

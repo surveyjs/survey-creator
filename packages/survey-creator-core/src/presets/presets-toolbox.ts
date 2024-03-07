@@ -162,6 +162,7 @@ export class CreatorPresetEditableToolboxItemsCore extends CreatorPresetEditable
   }
 }
 export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditableToolboxItemsCore {
+  private defaultItems: ItemValue[];
   public createMainPageCore(): any {
     return {
       visibleIf: this.getPageVisibleIf(),
@@ -197,21 +198,18 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
     });
     return res;
   }
-  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
-    model.onMatrixRowAdded.add((sender, options) =>{
-      if(options.question.name === this.nameMatrix) {
-        options.row.onDetailPanelShowingChanged = () => {
-          this.onDetailPanelShowingChanged(options.row);
-        };
-      }
-    });
-    model.onMatrixRowRemoved.add((sender, options) => {
-      options.row.onDetailPanelShowingChanged = undefined;
-    });
+  protected updateOnMatrixRowAddedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    if(options.question.name === this.nameMatrix) {
+      options.row.onDetailPanelShowingChanged = () => {
+        this.onDetailPanelShowingChanged(options.row);
+      };
+    }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {
-    this.getMatrix(model).defaultItems = this.getDefaultToolboxItems(model, creator);
+    this.defaultItems = this.getDefaultToolboxItems(model, creator);
+  }
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    this.defaultItems = this.getDefaultToolboxItems(model, creator);
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     const nameCategories = {};
@@ -245,8 +243,7 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
     const res = [];
     const model = <SurveyModel>row.getSurvey();
     const matrix = this.getMatrix(<SurveyModel>model);
-    const defaultItems = matrix.defaultItems;
-    if(!Array.isArray(defaultItems)) return res;
+    if(!Array.isArray(this.defaultItems)) return res;
     const val = model.getValue(this.nameMatrix);
     const usedItems = {};
     if(Array.isArray(val)) {
@@ -257,7 +254,7 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
         }
       }
     }
-    defaultItems.forEach(item => {
+    this.defaultItems.forEach(item => {
       if(!usedItems[item.id]) {
         res.push(new ItemValue(item.id, item.title));
       }
