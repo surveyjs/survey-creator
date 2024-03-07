@@ -1999,6 +1999,7 @@ test("Check adorner actions responsivity after convert", async (t) => {
       .click(Selector("div[data-sv-drop-target-survey-element='question3'] .sv-list__item-body[title='Yes/No (Boolean)']"))
       .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
       .hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
+    await ClientFunction(() => { document.body.focus(); })();
     await t.wait(100);
     await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
   });
