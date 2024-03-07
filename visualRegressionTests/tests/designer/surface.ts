@@ -1967,7 +1967,7 @@ test("Composite question - check no scroll", async (t) => {
   });
 });
 
-test("Check adorner actions responsifity after convert", async (t) => {
+test("Check adorner actions responsivity after convert", async (t) => {
   await wrapVisualTest(t, async (t, comparer) => {
     await t.resizeWindow(1400, 900);
     const root = Selector(".sd-page.sd-body__page");
