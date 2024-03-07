@@ -19,6 +19,7 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
 
 export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEditableBase {
   private currentJson: ISurveyPropertyGridDefinition;
+  private currentClassProperties: SurveyQuestionPresetProperties;
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
@@ -78,9 +79,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   private definitionToRows(className: string): Array<any> {
     const res = [];
-    const properties = new SurveyQuestionPresetProperties(className, this.currentJson);
-    properties.getTabs().forEach(tab => {
-      const row = { name: tab.name };
+    this.currentClassProperties = new SurveyQuestionPresetProperties(className, this.currentJson);
+    this.currentClassProperties.getTabs().forEach(tab => {
+      const props = [];
+      tab.properties.forEach(p => { props.push(p.name); });
+      const row = { name: tab.name, items: props };
       res.push(row);
     });
     return res;

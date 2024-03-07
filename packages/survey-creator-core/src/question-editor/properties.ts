@@ -37,6 +37,7 @@ export class SurveyQuestionProperties {
   private properties: Array<JsonObjectProperty>;
   private propertiesHash: any;
   private tabs: Array<SurveyQuestionEditorTabDefinition> = [];
+  public unusedProperties: Array<JsonObjectProperty> = [];
   public static getPropertyPlaceholder(className: string, propName: string, propertyGridDefinition?: ISurveyPropertyGridDefinition): string {
     if (!propertyGridDefinition) propertyGridDefinition = defaultPropertyGridDefinition;
     const props = propertyGridDefinition.classes[className]?.properties;
@@ -386,18 +387,29 @@ export class SurveyQuestionProperties {
     if (!!jsonProperty.category) return jsonProperty.category;
     return null;
   }
+  private getUnusedProperties(usedProperties: any, isFormMode: boolean = false): Array<JsonObjectProperty> {
+    const res = [];
+    for (var i = 0; i < this.properties.length; i++) {
+      const prop = this.properties[i];
+      if (this.isJSONPropertyVisible(prop) && !usedProperties[prop.name] && (!isFormMode || prop.showMode === "form")) {
+        res.push(prop);
+      }
+    }
+    return res;
+  }
   private addNonTabProperties(
     tabs: Array<ISurveyQuestionEditorDefinition>,
     usedProperties: any, isFormMode: boolean = false
   ) {
-    if (!this.propertyGridDefinition.autoGenerateProperties) return;
+    const unusedProperties = this.getUnusedProperties(usedProperties, isFormMode);
+    if (!this.propertyGridDefinition.autoGenerateProperties) {
+      this.unusedProperties = unusedProperties;
+      return;
+    }
     let classRes: any = { properties: [], tabs: [] };
     let tabNames = [];
-    for (var i = 0; i < this.properties.length; i++) {
-      let prop = this.properties[i];
-      if (!this.isJSONPropertyVisible(prop) || !!usedProperties[prop.name] ||
-        (isFormMode && prop.showMode !== "form"))
-        continue;
+    for (var i = 0; i < unusedProperties.length; i++) {
+      const prop = unusedProperties[i];
       let propCategory = this.getJsonPropertyCategory(prop);
       let tabName = !!propCategory
         ? propCategory
