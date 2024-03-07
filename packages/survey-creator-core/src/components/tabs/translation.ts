@@ -1349,8 +1349,8 @@ export class TranslationForEditor extends Translation {
   ) {
     super(survey, options, true);
   }
-  protected getSurveyStringsArea(): string { return "translation-tab-editor:table"; }
-  protected getSurveyStringsHeaderArea(): string { return "translation-tab-editor:table-header"; }
+  protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
+  protected getSurveyStringsHeaderArea(): string { return "translation-tab:table-header-popup-editor"; }
   protected onSurveyStringsCreated(survey: SurveyModel): void {
     this.surveyStringsCreatedCallback(survey);
   }
