@@ -441,7 +441,7 @@ export class SurveyQuestionProperties {
         }
       }
       classRes.properties.push({
-        name: this.properties[i].name,
+        name: prop.name,
         tab: tabName,
       });
     }
