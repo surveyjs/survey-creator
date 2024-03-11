@@ -365,7 +365,12 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "maxLength", tab: "validation" },
       { name: "minErrorText", tab: "validation" },
       { name: "maxErrorText", tab: "validation" },
-      { name: "textUpdateMode", tab: "data" }
+      { name: "textUpdateMode", tab: "data" },
+      { name: "maskType", tab: "mask" },
+      { name: "maskSettings", tab: "mask" },
+    ],
+    tabs: [
+      { name: "mask", index: 250 }
     ]
   },
   boolean: {
