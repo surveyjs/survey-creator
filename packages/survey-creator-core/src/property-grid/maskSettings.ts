@@ -55,12 +55,7 @@ export class PropertyGridEditorQuestionMaskSettings extends PropertyGridEditor {
   }
 
   updatePreviewQuestion(masksettings: InputMaskBase, panel: PanelModel) {
-    if (masksettings.getType() === "masksettings") {
-      this._previewQuestion.visible = true;
-      this._previewQuestion.html = "&nbsp;";
-    } else {
-      this._previewQuestion.visible = false;
-    }
+    this._previewQuestion.visible = masksettings.getType() === "masksettings";
     if (!panel.getElementByName(this._previewQuestion.name)) {
       panel.addElement(this._previewQuestion);
     }
