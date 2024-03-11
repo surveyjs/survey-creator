@@ -13,8 +13,8 @@ const surveyJSON = {
     {
       name: "page2",
       elements: [
-        { type: "text", name: "question1" },
-        { type: "panel", name: "panel1", elements: [{ type: "text", name: "question2" }] }
+        { type: "text", name: "question11" },
+        { type: "panel", name: "panel1", elements: [{ type: "text", name: "question22" }] }
       ]
     }
   ]
@@ -108,4 +108,25 @@ test("Update calculatedValues", (): any => {
   const page = survey.pages[2];
   expect(page.questions[0].name).toEqual("question3");
   expect(page.questions[0].visibleIf).toEqual("{var2} = 1");
+});
+test("Convert question names in panel dynamic tempalate", (): any => {
+  const creator = new CreatorTester();
+  creator.JSON = surveyJSON;
+  expect(creator.survey.pages).toHaveLength(2);
+  const json = {
+    elements: [
+      { type: "paneldynamic", name: "panel1",
+        templateElements: [
+          { type: "paneldynamic", name: "question1", templateElements: [{ type: "text", name: "question2" }] }
+        ]
+      }
+    ]
+  };
+  creator.addCollectionItemsJson(json);
+  expect(creator.survey.pages).toHaveLength(3);
+  const page = creator.survey.pages[2];
+  expect(page.name).toEqual("page3");
+  expect(page.questions[0].name).toEqual("question3");
+  expect(page.questions[0].templateElements[0].name).toEqual("question4");
+  expect(page.questions[0].templateElements[0].templateElements[0].name).toEqual("question5");
 });
