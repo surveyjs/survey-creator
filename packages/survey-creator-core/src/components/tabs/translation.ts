@@ -830,6 +830,9 @@ export class Translation extends Base implements ITranslationLocales {
     this.stringsHeaderSurvey = this.createStringsHeaderSurvey();
     this.updateReadOnly();
   }
+  protected getSurveyStringsArea(): string { return undefined; }
+  protected getSurveyStringsHeaderArea(): string { return undefined; }
+  protected onSurveyStringsCreated(survey: SurveyModel): void {}
   private createStringsSurvey(): SurveyModel {
     var json = { autoGrowComment: true, allowResizeComment: false };
     setSurveyJSONForPropertyGrid(json, false);
@@ -842,7 +845,8 @@ export class Translation extends Base implements ITranslationLocales {
       this.addTranslationGroupIntoStringsSurvey(survey.pages[0], this.root);
       survey.data = this.getStringsSurveyData(survey);
       survey.endLoadingFromJson();
-    });
+      this.onSurveyStringsCreated(survey);
+    }, this.getSurveyStringsArea());
     const getTransationItem = (question: QuestionMatrixDropdownModel, rowName: any): TranslationItem => {
       var itemValue = ItemValue.getItemByValue(question.rows, rowName);
       return !!itemValue ? itemValue["translationData"] : null;
@@ -904,7 +908,7 @@ export class Translation extends Base implements ITranslationLocales {
 
       newPage.addQuestion(matrix);
       survey.currentPage = survey.pages[0];
-    });
+    }, this.getSurveyStringsHeaderArea());
     return survey;
   }
   private addTranslationGroupIntoStringsSurvey(
@@ -1337,6 +1341,20 @@ export class Translation extends Base implements ITranslationLocales {
     super.dispose();
   }
 }
+export class TranslationForEditor extends Translation {
+  constructor(
+    survey: SurveyModel,
+    options: ISurveyCreatorOptions,
+    private surveyStringsCreatedCallback: (survey: SurveyModel) => void
+  ) {
+    super(survey, options, true);
+  }
+  protected getSurveyStringsArea(): string { return "translation-tab:table-popup-editor"; }
+  protected getSurveyStringsHeaderArea(): string { return "translation-tab:table-header-popup-editor"; }
+  protected onSurveyStringsCreated(survey: SurveyModel): void {
+    this.surveyStringsCreatedCallback(survey);
+  }
+}
 export class TranslationEditor {
   public fromLocales: Array<string> = [];
   private survey: SurveyModel;
@@ -1349,11 +1367,16 @@ export class TranslationEditor {
     this.survey = survey;
     this.options = options;
     this.locale = locale;
-    this.translationValue = new Translation(this.survey, this.options, true);
+    this.translationValue = new TranslationForEditor(this.survey, this.options, (survey: SurveyModel) => {
+      this.setupNavigationButtons(survey);
+    });
     this.translation.setEditMode(this.locale);
     this.translation.reset();
     this.fillFromLocales();
-    this.setupNavigationButtons();
+    const action = this.translation.stringsSurvey.navigationBar.getActionById("svc-translation-fromlocale");
+    if(!!action) {
+      action.visible = this.fromLocales.length > 0;
+    }
   }
   public get translation(): Translation { return this.translationValue; }
   public showDialog(): void {
@@ -1456,14 +1479,11 @@ export class TranslationEditor {
       item.fillLocales(this.fromLocales);
     });
   }
-  private setupNavigationButtons(): void {
-    const survey = this.translation.stringsSurvey;
+  private setupNavigationButtons(survey: SurveyModel): void {
     const actions = survey.navigationBar.actions;
     actions.splice(0, actions.length);
     if (this.options.getHasMachineTranslation()) {
-      if (this.fromLocales.length > 0) {
-        survey.addNavigationItem(this.createLocaleFromAction());
-      }
+      survey.addNavigationItem(this.createLocaleFromAction());
       survey.addNavigationItem(new Action({
         id: "svc-translation-machine",
         iconName: "icon-language",

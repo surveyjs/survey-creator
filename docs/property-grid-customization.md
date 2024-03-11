@@ -376,31 +376,34 @@ A string value that specifies a category in which to display the property. If `c
 
 The following table describes predefined categories:
 
-| `category`          | Element types that have the category                 | `categoryIndex` |
-| ------------------- | ---------------------------------------------------- | --------------- |
-| `"general"`         | Question, Panel, Page, Survey                        | -1              |
-| `"logic"`           | Question, Panel, Page, Survey                        | 100             |
-| `"layout"`          | Question, Panel, Page                                | 200             |
-| `"data"`            | Question                                             | 300             |
-| `"validation"`      | Question, Panel, Page                                | 400             |
-| `"logo"`            | Survey                                               | 50              |
-| `"navigation"`      | Survey                                               | 100             |
-| `"question"`        | Survey                                               | 200             |
-| `"logic"`           | Survey                                               | 300             |
-| `"data"`            | Survey                                               | 400             |
-| `"validation"`      | Survey                                               | 500             |
-| `"showOnCompleted"` | Survey                                               | 600             |
-| `"timer"`           | Survey                                               | 700             |
-| `"columns"`         | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 10              |
-| `"rows"`            | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 11              |
-| `"choices"`         | MatrixDropdownBase (Matrix Dropdown, Matrix Dynamic) | 12              |
-| `"columns"`         | Matrix                                               | 10              |
-| `"rows"`            | Matrix                                               | 11              |
-| `"cells"`           | Matrix                                               | 12              |
-| `"items"`           | Multiple Text                                        | 10              |
-| `"rateValues"`      | Rating                                               | 10              |
-| `"choices"`         | SelectBase (Dropdown, Checkbox, Radiogroup)          | 10              |
-| `"choicesByUrl"`    | SelectBase (Dropdown, Checkbox, Radiogroup)          | 11              |
+| `category`           | Category title             | Element types that have the category                  | `categoryIndex` |
+| -------------------- | -------------------------- | ----------------------------------------------------- | --------------- |
+| `"general"`          | General                    | Question, Panel, Page, Survey                         | -1              |
+| `"logo"`             | Logo in the Survey Header  | Survey                                                | 50              |
+| `"navigation"`       | Navigation                 | Survey                                                | 100             |
+| `"navigation"`       | Navigation                 | Page                                                  | 350             |
+| `"question"`         | Question Settings          | Survey                                                | 200             |
+| `"pages"`            | Pages                      | Survey                                                | 250             |
+| `"logic"`            | Conditions                 | Survey                                                | 300             |
+| `"logic"`            | Conditions                 | Question, Panel, Page                                 | 200             |
+| `"data"`             | Data                       | Survey                                                | 400             |
+| `"data"`             | Data                       | Question, Panel, Page                                 | 300             |
+| `"validation"`       | Validation                 | Survey                                                | 500             |
+| `"validation"`       | Validation                 | Question, Panel, Page                                 | 400             |
+| `"showOnCompleted"`  | Thank You Page             | Survey                                                | 600             |
+| `"timer"`            | Quiz Mode                  | Survey                                                | 700             |
+| `"questionSettings"` | Question Settings          | Panel, Page                                           | 100             |
+| `"layout"`           | Layout                     | Question                                              | 100             |
+| `"layout"`           | Panel Layout               | Panel                                                 | 150             |
+| `"numbering"`        | Numbering                  | Panel                                                 | 350             |
+| `"columns"`          | Columns                    | Matrices                                              | 10              |
+| `"rows"`             | Rows                       | Matrices                                              | 11              |
+| `"choices"`          | Choice Options             | Multi-Select Matrix, Dynamic Matrix                   | 12              |
+| `"cells"`            | Individual Cell Texts      | Single-Select Matrix                                  | 500             |
+| `"items"`            | Items                      | Multiple Textboxes                                    | 10              |
+| `"rateValues"`       | Rating Values              | Rating Scale                                          | 10              |
+| `"choices"`          | Choice Options             | SelectBase (Dropdown, Checkboxes, Radio Button Group) | 10              |
+| `"choicesByUrl"`     | Choices from a Web Service | SelectBase (Dropdown, Checkboxes, Radio Button Group) | 11              |
 
 #### `categoryIndex`
 
