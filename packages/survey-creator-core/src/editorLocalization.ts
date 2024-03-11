@@ -3,15 +3,31 @@ import { capitalize } from "./utils/utils";
 import { surveyLocalization, Serializer } from "survey-core";
 
 export class EditorLocalization {
+  private defaultLocaleValue: string = "en";
+  private currentLocaleValue: string = "";
   public camelCaseBreaking = true;
-  public defaultLocale = "en";
-  public currentLocale = "";
   public locales = {};
   private peByClass = {};
   private peHelpByClass = {};
   public reset() : void {
     this.peByClass = {};
     this.peHelpByClass = {};
+  }
+  public get defaultLocale(): string { return this.defaultLocaleValue; }
+  public set defaultLocale(val: string) {
+    if(!val) val = "en";
+    if(val !== this.defaultLocale) {
+      this.defaultLocaleValue = val;
+      this.reset();
+    }
+  }
+  public get currentLocale(): string { return this.currentLocaleValue; }
+  public set currentLocale(val: string) {
+    if(!val) val = "";
+    if(val !== this.currentLocale) {
+      this.currentLocaleValue = val;
+      this.reset();
+    }
   }
   public getString(strName: string, locale: string = null): string {
     if(!locale) locale = this.currentLocale;
