@@ -28,13 +28,13 @@ export class SurveyPageNavigator extends CreatorModelElement<
     super(props);
     this.containerRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     if (this.model) {
       this.model.dispose();
     }
     this.model = new PageNavigatorViewModel(
-      this.props.pagesController,
-      this.props.pageEditMode
+      props.pagesController,
+      props.pageEditMode
     );
   }
   protected getUpdatedModelProps(): string[] {

@@ -1966,3 +1966,41 @@ test("Composite question - check no scroll", async (t) => {
     await takeElementScreenshot("composite-question-no-scroll.png", Selector(".svc-question__adorner"), t, comparer);
   });
 });
+
+test("Check adorner actions responsivity after convert", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1400, 900);
+    const root = Selector(".sd-page.sd-body__page");
+    await setJSON({
+      "logoPosition": "right",
+      "pages": [
+        {
+          "name": "page1",
+          "elements": [
+            {
+              "type": "text",
+              "name": "question1"
+            },
+            {
+              "type": "text",
+              "name": "question2",
+              "startWithNewLine": false
+            },
+            {
+              "type": "text",
+              "name": "question3",
+              "startWithNewLine": false
+            }
+          ]
+        }
+      ]
+    });
+    await t.hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector("#convertTo").nth(2))
+      .click(Selector("div[data-sv-drop-target-survey-element='question3'] .sv-list__item-body[title='Yes/No (Boolean)']"))
+      .hover(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(1), { offsetX: 10, offsetY: 10 })
+      .hover(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 }).click(Selector(".svc-question__adorner").nth(2), { offsetX: 10, offsetY: 10 });
+    await ClientFunction(() => { document.body.focus(); })();
+    await t.wait(100);
+    await takeElementScreenshot("actions-on-converted-question.png", root.nth(0), t, comparer);
+  });
+});

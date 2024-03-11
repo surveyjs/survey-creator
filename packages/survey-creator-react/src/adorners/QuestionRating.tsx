@@ -8,13 +8,13 @@ import { CreatorModelElement } from "../ModelElement";
 export class QuestionRatingAdornerComponent extends CreatorModelElement<QuestionAdornerComponentProps, any> {
   private modelValue: QuestionRatingAdornerViewModel;
 
-  protected createModel(): void {
-    this.modelValue = this.createQuestionViewModel();
+  protected createModel(props: any): void {
+    this.modelValue = this.createQuestionViewModel(props);
   }
-  protected createQuestionViewModel(): QuestionRatingAdornerViewModel {
+  protected createQuestionViewModel(props: any): QuestionRatingAdornerViewModel {
     return new QuestionRatingAdornerViewModel(
-      this.props.componentData,
-      this.props.question as any,
+      props.componentData,
+      props.question as any,
       null
     );
   }
