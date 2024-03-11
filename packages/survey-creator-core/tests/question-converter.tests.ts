@@ -28,8 +28,9 @@ test("get converted classes", () => {
   expect(classes.length >= 3).toBeTruthy();
   expect(classes.indexOf("dropdown") > -1).toBeTruthy();
   classes = QuestionConverter.getConvertToClasses("text");
-  expect(classes).toHaveLength(1);
-  expect(classes[0]).toEqual("comment");
+  expect(classes).toHaveLength(2);
+  expect(classes.indexOf("comment") > -1).toBeTruthy();
+  expect(classes.indexOf("text") > -1).toBeTruthy();
   settings.questionConvertMode = QuestionConvertMode.AllTypes;
 });
 
@@ -47,13 +48,13 @@ test("get converted classes based on available types", () => {
     "checkbox",
     "text"
   ]);
-  expect(classes).toHaveLength(1);
+  expect(classes).toHaveLength(2);
   classes = QuestionConverter.getConvertToClasses("radiogroup", [
     "radiogroup",
     "comment",
     "text"
   ]);
-  expect(classes).toHaveLength(0);
+  expect(classes).toHaveLength(1);
   settings.questionConvertMode = QuestionConvertMode.AllTypes;
 });
 
@@ -524,4 +525,10 @@ test("Convert default matrix dropdown into single matrix, Bug#5025", () => {
   expect(matrix3.rows).toHaveLength(2);
   expect(matrix3.columns[1].name).toBe("Column 2");
   expect(matrix3.rows[1].value).toBe("Row 2");
+});
+test("get converted classes, it should include itself", () => {
+  settings.questionConvertMode = QuestionConvertMode.CompatibleTypes;
+  var classes = QuestionConverter.getConvertToClasses("radiogroup");
+  expect(classes[0]).toEqual("radiogroup");
+  settings.questionConvertMode = QuestionConvertMode.AllTypes;
 });

@@ -27,13 +27,20 @@ export class QuestionConverter {
     }
     QuestionConverter.convertInfo[className].push(convertToClassName);
   }
+  private static getConvertableClasses(className: string): Array<string> {
+    let res = QuestionConverter.convertInfo[className];
+    if(!!Array.isArray(res) && res.indexOf(className) < 0) {
+      res.unshift(className);
+    }
+    return res;
+  }
   public static getConvertToClasses(
     className: string,
     availableTypes: Array<string> = null, includeCurrent: boolean = false
   ): Array<string> {
     var res = settings.questionConvertMode == QuestionConvertMode.AllTypes
       ? getAllQuestionTypes(className, includeCurrent)
-      : QuestionConverter.convertInfo[className];
+      : QuestionConverter.getConvertableClasses(className);
     if (!res) return [];
     if (Array.isArray(availableTypes) && availableTypes.length > 0
     ) {
