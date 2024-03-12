@@ -245,11 +245,10 @@ test("it and it-custom translation", () => {
   editorLocalization.defaultLocale = "en";
 });
 test("Get property name from pe. based on class name", () => {
-//  editorLocalization.defaultLocale = "en";
-//  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Survey title");
-  editorLocalization.defaultLocale = "it";
-  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
+  editorLocalization.currentLocale = "";
   editorLocalization.defaultLocale = "fr";
   expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
   editorLocalization.defaultLocale = "en";
 });
