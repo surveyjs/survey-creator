@@ -526,9 +526,14 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "step",
       "placeholder",
       "dataList",
-      "maxLength"
+      "maxLength",
+      { name: "maskType", tab: "mask" },
+      { name: "maskSettings", tab: "mask" },
     ],
-    tabs: [{ name: "validators", index: 25 }]
+    tabs: [
+      { name: "mask", index: 20 },
+      { name: "validators", index: 25 }
+    ]
   },
   "matrixdropdowncolumn@comment": {
     properties: ["rows", "placeholder", "maxLength"],
@@ -806,7 +811,73 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       "titleName",
       "allowEmptyResponse"
     ]
-  }
+  },
+  "patternmask@maskSettings": {
+    properties: [
+      "pattern",
+      "saveMaskedValue",
+    ]
+  },
+  "datetimemask@maskSettings": {
+    properties: [
+      "pattern",
+      "min",
+      "max",
+      "saveMaskedValue",
+    ]
+  },
+  "numericmask@maskSettings": {
+    properties: [
+      "min",
+      "max",
+      "precision",
+      "decimalSeparator",
+      "thousandsSeparator",
+      "allowNegativeValues",
+      "saveMaskedValue",
+    ]
+  },
+  "currencymask@maskSettings": {
+    properties: [
+      "prefix",
+      "suffix",
+      "min",
+      "max",
+      "precision",
+      "decimalSeparator",
+      "thousandsSeparator",
+      "allowNegativeValues",
+      "saveMaskedValue",
+    ]
+  },
+  "patternmask": {
+    properties: [
+      {
+        name: "pattern",
+        placeholder: "pattern_placeholder"
+      },
+    ]
+  },
+  "datetimemask": {
+    properties: [
+      {
+        name: "pattern",
+        placeholder: "datetimepattern_placeholder"
+      },
+    ]
+  },
+  "currencymask": {
+    properties: [
+      {
+        name: "prefix",
+        placeholder: "currencyprefix_placeholder"
+      },
+      {
+        name: "suffix",
+        placeholder: "currencysuffix_placeholder"
+      },
+    ]
+  },
 };
 
 export const defaultPropertyGridDefinition: ISurveyPropertyGridDefinition = {

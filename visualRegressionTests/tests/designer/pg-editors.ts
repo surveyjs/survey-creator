@@ -1,4 +1,4 @@
-import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector } from "../../helper";
+import { url, setJSON, takeElementScreenshot, getToolboxItemByText, getPropertyGridCategory, generalGroupName, wrapVisualTest, addQuestionByAddQuestionButton, resetHoverToCreator, surveySettingsButtonSelector, inputMaskSettingsGroupName, getListItemByText } from "../../helper";
 import { ClientFunction, Selector } from "testcafe";
 const title = "Property Grid Editors";
 
@@ -765,5 +765,21 @@ test("Property grid checkbox with description", async (t) => {
     await takeElementScreenshot("pg-checkbox-hint.png", Selector("[data-name='visible']"), t, comparer);
     await t.click(Selector("[data-name='visible'] .spg-action-button"));
     await takeElementScreenshot("pg-checkbox-hint-opened.png", Selector("[data-name='visible']"), t, comparer);
+  });
+});
+test("Check property grid mask settings", async (t) => {
+  await wrapVisualTest(t, async (t, comparer) => {
+    await t.resizeWindow(1920, 1920);
+
+    await addQuestionByAddQuestionButton(t, "Single-Line Input");
+    await t
+      .click(getPropertyGridCategory(generalGroupName))
+      .click(getPropertyGridCategory(inputMaskSettingsGroupName))
+      .click(Selector(".spg-dropdown[aria-label='Input mask type']"))
+      .click(getListItemByText("Pattern"));
+
+    const expandedGroup = Selector(".spg-root-modern .spg-panel.sd-element--expanded");
+    await ClientFunction(() => { document.body.focus(); })();
+    await takeElementScreenshot("pg-input-mask-settings-pattern.png", expandedGroup, t, comparer);
   });
 });

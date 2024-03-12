@@ -68,6 +68,7 @@ export const creatorTabPreviewName = "Preview";
 export const creatorTabLogicName = "Logic";
 export const generalGroupName = "General";
 export const logicGroupName = "Conditions";
+export const inputMaskSettingsGroupName = "Input Mask Settings";
 
 export const creatorContentSelector = Selector(".svc-creator__content-holder");
 
