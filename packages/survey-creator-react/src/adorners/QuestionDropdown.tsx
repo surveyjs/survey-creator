@@ -12,10 +12,10 @@ export class QuestionDropdownAdornerComponent extends QuestionAdornerComponent {
   constructor(props: QuestionAdornerComponentProps) {
     super(props);
   }
-  protected createQuestionViewModel(): QuestionDropdownAdornerViewModel {
+  protected createQuestionViewModel(props: any): QuestionDropdownAdornerViewModel {
     return new QuestionDropdownAdornerViewModel(
-      this.props.componentData,
-      this.props.question as QuestionDropdownModel,
+      props.componentData,
+      props.question as QuestionDropdownModel,
       null
     );
   }

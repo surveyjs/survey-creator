@@ -179,6 +179,10 @@ export interface PropertyEditorCreatedEvent {
    * A property that corresponds to the created property editor.
    */
   property: JsonObjectProperty;
+  /**
+   * A survey element being edited in the Property Grid.
+   */
+  obj: Base;
 }
 
 export interface PropertyEditorUpdateTitleActionsEvent {
@@ -272,7 +276,7 @@ export interface CollectionItemAddedEvent {
    */
   newItem: ItemValue;
   /**
-   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.). This array does not include `options.newItem`.
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
    */
   itemValues: ItemValue[];
 }
@@ -287,7 +291,7 @@ export interface MatrixColumnAddedEvent {
    */
   newColumn: MatrixDropdownColumn;
   /**
-   * An array of matrix columns. This array does not include `options.newColumn`.
+   * An array of matrix columns.
    */
   columns: MatrixDropdownColumn[];
 }
@@ -573,6 +577,7 @@ export interface SurveyInstanceCreatedEvent {
    *   - `"translation-tab:language-list"` - A survey that displays the language list in the Translations tab.
    *   - `"translation-tab:table"` - A survey that displays the translation table in the Translations tab.
    *   - `"translation-tab:table-header"` - A survey that displays the header of the translation table in the Translations tab.
+   *   - `"translation-tab:table-popup-editor"` - A survey that displays a translation table for an individual language in a pop-up window. 
    *   - `"table-values-popup-editor"` - A survey that allows you to edit values of a table (Choices, Rows, Columns, etc.) in a pop-up window.
    *   - `"matrix-cell-values-popup-editor"` - A survey that allows you to [specify cell texts of a Single-Select Matrix](https://surveyjs.io/form-library/examples/scoring-rubric-example/) in a pop-up window.
    *   - `"matrix-cell-question-popup-editor"` - A survey that allows you to configure a question within a cell of a [Multi-Select](https://surveyjs.io/form-library/examples/multi-select-matrix-question/) or [Dynamic Matrix](https://surveyjs.io/form-library/examples/dynamic-matrix-add-new-rows/) in a pop-up window.

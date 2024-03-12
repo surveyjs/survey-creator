@@ -34,10 +34,10 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new PageAdorner(
-      this.props.creator,
-      this.props.page
+      props.creator,
+      props.page
     );
   }
   protected getUpdatedModelProps(): string[] {

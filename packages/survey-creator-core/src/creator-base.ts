@@ -1683,15 +1683,18 @@ export class SurveyCreatorModel extends Base
         el.name = SurveyHelper.getNewPageName(allElements);
       });
   }
+  private updateAddingExistingElements(): Array<SurveyElement> {
+    return [].concat(this.survey.getAllQuestions(false, true)).concat(this.survey.getAllPanels());
+  }
   private updateAddingPanels(survey: SurveyModel): void {
-    this.updateAddingElements(survey, <any>survey.getAllPanels(), <any>this.survey.getAllPanels(),
+    this.updateAddingElements(survey, <any>survey.getAllPanels(), this.updateAddingExistingElements(),
       (el: SurveyElement, allElements: Array<SurveyElement>): void => {
         el.name = SurveyHelper.getNewPanelName(allElements);
       });
   }
   private updateAddingQuestions(survey: SurveyModel): void {
     const logic = new SurveyLogic(survey, this);
-    this.updateAddingElements(survey, survey.getAllQuestions(), this.survey.getAllQuestions(),
+    this.updateAddingElements(survey, survey.getAllQuestions(false, true), this.updateAddingExistingElements(),
       (el: SurveyElement, allElements: Array<SurveyElement>): void => {
         const oldName = el.name;
         el.name = SurveyHelper.getNewQuestionName(allElements);
@@ -2074,7 +2077,7 @@ export class SurveyCreatorModel extends Base
     return options.displayName;
   }
 
-  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void): SurveyModel {
+  public createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
     const survey = this.createSurveyCore(json, reason);
 
     if (reason !== "designer" && reason !== "test") { survey.fitToContainer = false; }
@@ -2092,10 +2095,11 @@ export class SurveyCreatorModel extends Base
     if (callback) {
       callback(survey);
     }
+    area = area || this.getSurveyInstanceCreatedArea(reason);
     this.onSurveyInstanceCreated.fire(this, {
       survey: survey,
       reason: reason,
-      area: this.getSurveyInstanceCreatedArea(reason),
+      area: area,
       model: !!model ? model : this.currentPlugin?.model
     });
     if (reason === "designer") {

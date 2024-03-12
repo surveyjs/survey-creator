@@ -1,10 +1,10 @@
 ---
-title: JS Form Builder Library for React | Getting Started Guide
-description: A step-by-step guide to get started with Survey Creator component in a React application.
+title: React Form Builder | Generate dynamic HTML forms using JSON
+description: SurveyJS Form Builder for React is an open-source client-side component that fully integrates into your React application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
 ---
-# Add Survey Creator / Form Builder to a React Application
+# React Form Builder
 
-This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a React application. To add the component to your application, follow the steps below:
+[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component in React that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your React application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a React application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-react` npm Package](#install-the-survey-creator-react-npm-package)
 - [Configure Styles](#configure-styles)
@@ -15,7 +15,13 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 
 [View Full Code on GitHub](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/react (linkStyle))
 
-If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repository: <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">React + SurveyJS Quick Start Boilerplate</a>.
+If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
+
+- <a href="https://github.com/surveyjs/surveyjs_react_quickstart" target="_blank">SurveyJS + React Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs-nextjs" target="_blank">SurveyJS + Next.js Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs-remix" target="_blank">SurveyJS + Remix Quickstart Template</a>
+
+> In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for React.
 
 ## Install the `survey-creator-react` npm Package
 
@@ -87,9 +93,14 @@ export function SurveyCreatorWidget() {
 
 ## Render Survey Creator
 
-To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute:
+To render Survey Creator, import the `SurveyCreatorComponent`, add it to the template, and pass the instance you created in the previous step to the component's `creator` attribute, as shown below.
+
+> If you are using [Next.js](https://nextjs.org) or another framework that [has adopted React Server Components](https://react.dev/learn/start-a-new-react-project#bleeding-edge-react-frameworks), you need to explicitly mark the React component that renders a SurveyJS component as client code using the ['use client'](https://react.dev/reference/react/use-client) directive.
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 
 // ...
@@ -107,6 +118,9 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
@@ -224,6 +238,9 @@ export function SurveyCreatorWidget() {
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";
@@ -327,6 +344,9 @@ To view the application, run `npm run start` in a command line and open [http://
   <summary>View Full Code</summary>
 
 ```js
+// Uncomment the following line if you are using Next.js:
+// 'use client'
+
 import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
 import "survey-core/defaultV2.min.css";
 import "survey-creator-core/survey-creator-core.min.css";

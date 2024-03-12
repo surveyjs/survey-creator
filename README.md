@@ -7,7 +7,7 @@
 <img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/surveyjs/survey-creator.svg">
 </a>
 
-Survey Creator is a GUI-based no-code form builder library that allows you to create a self-hosted form management system and offload content work from software developers onto the shoulders of non-technical users, like content creators. The form buider produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Form Library](https://github.com/surveyjs/survey-library) to display a survey form in your application. You can try out our [free survey tool](https://surveyjs.io/create-free-survey) built to demonstrate the capabilities of the Survey Creator library and estimate its potential value for your project(s).
+Survey Creator is a GUI-based no-code form builder library that allows you to create a self-hosted form management system and offload content work from software developers onto the shoulders of non-technical users, like content creators. The form builder produces a survey configuration in JSON format. This configuration can be later used by the [SurveyJS Form Library](https://github.com/surveyjs/survey-library) to display a survey form in your application. You can try out our [free survey tool](https://surveyjs.io/create-free-survey) built to demonstrate the capabilities of the Survey Creator library and estimate its potential value for your project(s).
 
 ![Survey Creator / Form Builder by SurveyJS](docs/images/survey-creator-overview.png)
 
