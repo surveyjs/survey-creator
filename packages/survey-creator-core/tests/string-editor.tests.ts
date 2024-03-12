@@ -731,7 +731,7 @@ test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
   var log = "";
 
   creator.onItemValueAdded.add((sender, options) => {
-    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.length + "+" + options.newItem.title;
+    log += (options.obj as QuestionMatrixModel).name + ":" + options.itemValues.map(c => c.title).join(",") + "+" + options.newItem.title;
   });
   creator.JSON = {
     elements: [
@@ -754,14 +754,14 @@ test("StringEditorConnector for matrix - onItemValueAdded event", (): any => {
   connectorItemC1.onEditComplete.fire(null, {});
   expect(log).toEqual("");
   connectorItemC2.onEditComplete.fire(null, {});
-  expect(log).toEqual("q1:2+Column 3");
+  expect(log).toEqual("q1:Column 1,Column 2,Column 3+Column 3");
 
   log = "";
 
   connectorItemR1.onEditComplete.fire(null, {});
   expect(log).toEqual("");
   connectorItemR2.onEditComplete.fire(null, {});
-  expect(log).toEqual("q1:2+Row 3");
+  expect(log).toEqual("q1:Row 1,Row 2,Row 3+Row 3");
 });
 
 test("StringEditorConnector for matrix - onMatrixColumnAdded event", (): any => {
@@ -770,7 +770,7 @@ test("StringEditorConnector for matrix - onMatrixColumnAdded event", (): any => 
   var log = "";
 
   creator.onMatrixColumnAdded.add((sender, options) => {
-    log += options.matrix.name + ":" + options.columns.length + "+" + options.newColumn.title;
+    log += options.matrix.name + ":" + options.columns.map(c => c.name).join(",") + "+" + options.newColumn.title;
   });
   creator.JSON = {
     elements: [
@@ -791,7 +791,7 @@ test("StringEditorConnector for matrix - onMatrixColumnAdded event", (): any => 
   connectorItemC1.onEditComplete.fire(null, {});
   expect(log).toEqual("");
   connectorItemC2.onEditComplete.fire(null, {});
-  expect(log).toEqual("q1:2+Column 3");
+  expect(log).toEqual("q1:Column 1,Column 2,Column 3+Column 3");
 });
 
 test("StringEditor on property value changing", () => {
