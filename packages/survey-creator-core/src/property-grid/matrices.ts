@@ -302,13 +302,13 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
       row: MatrixDropdownRowModelBase,
       panel: PanelModel
     ) => {
-      new PropertyJSONGenerator(row.editingObj, q.options,
+      new PropertyJSONGenerator(row.editingObj, q.creatorOptions,
         q.obj, q.property, propGridDefinition
       ).setupObjPanel(panel, true);
     };
     matrix.allowRowsDragAndDrop = this.getAllowRowDragDrop(prop) && !matrix.isReadOnly;
-    if (!!q.options) {
-      this.setupUsingOptions(obj, matrix, q.options, prop);
+    if (!!q.creatorOptions) {
+      this.setupUsingOptions(obj, matrix, q.creatorOptions, prop);
     }
     if (!!prop.uniquePropertyName) {
       const column = matrix.getColumnByName(prop.uniquePropertyName);
@@ -325,7 +325,7 @@ export abstract class PropertyGridEditorMatrix extends PropertyGridEditor {
     var newObj = Serializer.createClass(prop.className);
     if (!newObj) return true;
     var panel = new PanelModel("");
-    new PropertyJSONGenerator(newObj, (<any>matrix).options, (<any>matrix).obj,
+    new PropertyJSONGenerator(newObj, (<any>matrix).creatorOptions, (<any>matrix).obj,
       prop, propGridDefinition
     ).setupObjPanel(panel, true);
     return panel.elements.length > 0;
