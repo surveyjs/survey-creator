@@ -296,10 +296,10 @@ export var propertyGridCss = {
     content: "spg-question__content spg-question__nopadding spg-question-group"
   },
   propertygrid_restfull: {
-    content: "spg-question__content spg-question__nopadding"
+    content: "spg-question__content spg-question__nopadding spg-restfull"
   },
   propertygrid_masksettings: {
-    content: "spg-question__content spg-question__nopadding"
+    content: "spg-question__content spg-question__nopadding spg-masksettings"
   },
   saveData: {
     root: "",

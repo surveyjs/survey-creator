@@ -169,11 +169,13 @@
   margin-top: calcSize(1);
 }
 
-.spg-question.sd-element--complex.sd-composite {
+.spg-restfull,
+.spg-masksettings {
   .spg-panel__content {
     gap: calcSize(2);
-  }
-  .spg-row {
-    margin-top: 0;
+
+    .spg-row {
+      margin-top: 0;
+    }
   }
 }
