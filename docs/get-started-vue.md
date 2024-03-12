@@ -29,6 +29,8 @@ If you are looking for a quick-start application that includes all SurveyJS comp
 - <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quickstart Template</a>
 - <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue 2 Quickstart Template</a>
 
+> In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Vue.js.
+
 ## Add Survey Creator to a Vue 3 Application
 
 ### Install the `survey-creator-vue` npm Package
