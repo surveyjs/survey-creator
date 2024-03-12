@@ -4,9 +4,7 @@ description: SurveyJS Form Builder for React is an open-source client-side compo
 ---
 # React Form Builder
 
-SurveyJS Form Builder is an open-source UI component in React that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your React application. It generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder UI features a dedicated GUI for conditional rules and form branching, and an integrated CSS theme editor for custom form styling and branding. In this guide, the terms Form Builder and Survey Creator are used interchangeably, and both refer to the SurveyJS form building component for React.
-
-This step-by-step tutorial will help you get started with the [Form Builder](https://surveyjs.io/create-survey) component in a React application. To add the component to your application, follow the steps below:
+[SurveyJS Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component in React that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your React application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a React application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-react` npm Package](#install-the-survey-creator-react-npm-package)
 - [Configure Styles](#configure-styles)
