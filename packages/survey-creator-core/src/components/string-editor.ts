@@ -161,13 +161,13 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
     if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
     if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
     const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
+    items.push(text || newItem);
     creator.onItemValueAddedCallback(
       this.question,
       propertyName,
       newItem,
       items
     );
-    items.push(text || newItem);
   }
   protected getItemsPropertyName(items: any) {
     if (items == this.question.columns) return "columns";
@@ -182,8 +182,8 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
   protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     if (items == this.question.columns) {
       var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
-      creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
       this.question.columns.push(column);
+      creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
     }
     if (items == this.question.rows) super.addNewItem(creator, items, text);
   }
