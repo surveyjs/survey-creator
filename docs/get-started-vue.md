@@ -1,10 +1,12 @@
 ---
-title: JS Form Builder Library for Vue.js | Getting Started Guide
-description: A step-by-step guide to get started with Survey Creator component in a Vue.js application.
+title: Vue Form Builder | Generate dynamic JSON forms in your Vue.js application
+description: SurveyJS Form Builder for Vue is an open-source client-side component that fully integrates into your Vue application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
 ---
-# Add Survey Creator / Form Builder to a Vue.js Application
+# Form Builder for Vue.js
 
-This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a Vue 2 or Vue 3 application. To add the component to your application, follow the steps below:
+SurveyJS Vue Form Builder is an open-source UI component that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms in any Vue application. It generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder UI features a dedicated GUI for conditional rules and form branching, and an integrated CSS theme editor for custom form styling and branding. In this guide, the terms Form Builder and Survey Creator are used interchangeably, and both refer to the SurveyJS form building component for Vue.js.
+
+This step-by-step tutorial will help you get started with the [Form Builder](https://surveyjs.io/create-survey) component in a Vue 2 or Vue 3 application. To add the component to your application, follow the steps below:
 
 - [Add Survey Creator to a Vue 3 Application](#add-survey-creator-to-a-vue-3-application)
   - [Install the `survey-creator-vue` npm Package](#install-the-survey-creator-vue-npm-package)
