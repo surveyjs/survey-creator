@@ -523,7 +523,7 @@ export class PropertyJSONGenerator {
       var prop = props[q.name];
       q.property = prop;
       q.obj = this.obj;
-      q.options = this.options;
+      q.creatorOptions = this.options;
       const eventVisibility = this.getVisibilityOnEvent(prop);
       q.readOnly = q.readOnly || this.isPropertyReadOnly(prop);
       q.visible = q.visible && eventVisibility;
