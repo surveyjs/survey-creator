@@ -1,10 +1,12 @@
 ---
-title: JS Form Builder Library for Angular | Getting Started Guide
-description: A step-by-step guide to get started with Survey Creator component in an Angular application.
+title: Angular Form Builder | Generate reactive HTML forms using JSON
+description: SurveyJS Form Builder for Angular is an open-source client-side component that fully integrates into your Angular application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
 ---
-# Add Survey Creator / Form Builder to an Angular Application
+# Angular Form Builder
 
-This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in an Angular application. To add the component to your application, follow the steps below:
+SurveyJS Form Builder is an open-source UI component in Angular that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms right in your Angular application. It generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder UI features a dedicated GUI for conditional rules and form branching, and an integrated CSS theme editor for custom form styling and branding. In this guide, the terms Form Builder and Survey Creator are used interchangeably, and both refer to the SurveyJS form building component for Angular.
+
+This step-by-step tutorial will help you get started with the [Form Builder](https://surveyjs.io/create-survey) component in an Angular application. To add the component to your application, follow the steps below:
 
 - [Install the `survey-creator-angular` npm Package](#install-the-survey-creator-angular-npm-package)
 - [Configure Styles](#configure-styles)
