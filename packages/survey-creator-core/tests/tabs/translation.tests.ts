@@ -1930,3 +1930,27 @@ test("If panel title then don't include it for 'Use string only' mode, Bug #5236
   translation.reset();
   expect(translation.root.allLocItems).toHaveLength(2);
 });
+test("Translation: readOnly & onMachineTranslate", () => {
+  let creator = new CreatorTester({ showTranslationTab: true });
+  creator.onActiveTabChanging.add((sender, options) => {
+    creator.readOnly = options.tabName !== "translation";
+  });
+  creator.onMachineTranslate.add((sender, options) => {});
+  creator.JSON = {
+    pages: [
+      {
+        name: "page2",
+        title: "Page title"
+      }
+    ]
+  };
+  creator.activeTab = "translation";
+  expect(creator.readOnly).toBeFalsy();
+  const tabTranslationPlugin: TabTranslationPlugin = creator.getPlugin("translation");
+  const translation = tabTranslationPlugin.model;
+  expect(translation.localesQuestion.visibleRows).toHaveLength(1);
+  translation.addLocale("de");
+  expect(translation.localesQuestion.visibleRows).toHaveLength(2);
+  creator.activeTab = "designer";
+  expect(creator.readOnly).toBeTruthy();
+});
