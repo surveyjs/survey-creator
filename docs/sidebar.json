@@ -93,6 +93,10 @@
           "Title": "Branching Logic"
         },
         {
+          "Name": "end-user-guide-add-navigation-elements-to-form",
+          "Title": "Form Navigation"
+        },
+        {
           "Name": "end-user-guide-prevent-duplicate-forms-submissions",
           "Title": "Prevent Duplicate Form Submissions"
         },
