@@ -10,7 +10,7 @@ import {
 } from "survey-react-ui";
 import { CreatorModelElement } from "../ModelElement";
 import {
-  CreatorBase,
+  SurveyCreatorModel,
   PageAdorner,
   SurveyHelper,
   toggleHovered
@@ -19,7 +19,7 @@ import React from "react";
 import { ReactMouseEvent } from "../events";
 
 interface ICreatorSurveyPageComponentProps {
-  creator: CreatorBase;
+  creator: SurveyCreatorModel;
   survey: SurveyModel;
   page: PageModel;
 }
@@ -34,10 +34,10 @@ export class CreatorSurveyPageComponent extends CreatorModelElement<
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new PageAdorner(
-      this.props.creator,
-      this.props.page
+      props.creator,
+      props.page
     );
   }
   protected getUpdatedModelProps(): string[] {

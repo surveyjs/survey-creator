@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { CreatorModelComponent } from "../creator-model.component";
-import { CreatorBase, IQuestionToolboxItem, ToolboxToolViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, IQuestionToolboxItem, ToolboxToolViewModel } from "survey-creator-core";
 import { Action } from "survey-core";
 
 @Component({
@@ -9,7 +9,7 @@ import { Action } from "survey-core";
   styles: [":host { display: none; }"]
 })
 export class ToolboxToolComponent extends CreatorModelComponent<Action> {
-  @Input() creator!: CreatorBase;
+  @Input() creator!: SurveyCreatorModel;
   @Input() item!: Action;
   @Input() isCompact: boolean = false;
   public model!: ToolboxToolViewModel;

@@ -1,13 +1,26 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel } from "survey-core";
 import { settings } from "../../creator-settings";
-import { CreatorBase, ICreatorPlugin } from "../../creator-base";
+import { SurveyCreatorModel } from "../../creator-base";
+import { ICreatorPlugin } from "../../creator-settings";
 import { editorLocalization, getLocString } from "../../editorLocalization";
-import { ThemeBuilder, getThemeFullName, getThemeChanges } from "./theme-builder";
+import { ThemeEditorModel, getThemeFullName, getThemeChanges } from "./theme-builder";
 import { SidebarTabModel } from "../side-bar/side-bar-tab-model";
 import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
+
+export interface IPropertyGridSurveyCreatedEvent {
+  survey: SurveyModel;
+  model: ThemeEditorModel;
+}
+export interface IAddPropertyGridEditorParams {
+  element: IElement;
+  category?: string;
+  insertAfter?: string;
+  insertBefore?: string;
+}
+
 /**
  * An object that enables you to modify, add, and remove UI themes and handle theme-related events. To access this object, use the [`themeEditor`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#themeEditor) property on a Survey Creator instance:
  * 
@@ -46,13 +59,13 @@ export class ThemeTabPlugin implements ICreatorPlugin {
 
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarTabModel;
-  public model: ThemeBuilder;
+  public model: ThemeEditorModel;
 
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
   }
 
-  constructor(private creator: CreatorBase) {
+  constructor(private creator: SurveyCreatorModel) {
     creator.addPluginTab("theme", this, "ed.themeSurvey");
     this.simulatorCssClasses = surveyCss[defaultV2ThemeName];
     this.createActions().forEach(action => creator.toolbar.actions.push(action));
@@ -89,10 +102,17 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     });
   }
   public activate(): void {
-    this.model = new ThemeBuilder(this.creator, this.simulatorCssClasses);
+    this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
     this.update();
     this.propertyGrid.obj = this.model;
 
+    if (!!this.model.themeEditorSurvey) {
+      const options = <IPropertyGridSurveyCreatedEvent>{
+        survey: this.model.themeEditorSurvey,
+        model: this.model,
+      };
+      this.onPropertyGridSurveyCreated.fire(this, options);
+    }
     this.sidebarTab.model = this.model.themeEditorSurvey;
     this.sidebarTab.componentName = "survey-widget";
     this.creator.sidebar.activeTab = this.sidebarTab.id;
@@ -277,7 +297,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
           if (confirm) {
             this.model.resetTheme();
           }
-        }, getLocString("ed.themeResetConfirmationOk"));
+        }, getLocString("ed.themeResetConfirmationOk"), editorLocalization.currentLocale);
       }
     });
     items.push(this.resetTheme);
@@ -421,7 +441,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     if (this._availableThemes.indexOf(theme.themeName) === -1) {
       if (setAsDefault) {
         this.availableThemes = [theme.themeName].concat(this.availableThemes);
-        ThemeBuilder.DefaultTheme = theme;
+        ThemeEditorModel.DefaultTheme = theme;
       } else {
         this.availableThemes = this.availableThemes.concat([theme.themeName]);
       }
@@ -443,8 +463,8 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     const fullThemeName = typeof themeAccessor === "string" ? themeAccessor : getThemeFullName(themeToDelete);
     if (!!themeToDelete) {
       delete Themes[fullThemeName];
-      if (ThemeBuilder.DefaultTheme === themeToDelete) {
-        ThemeBuilder.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
+      if (ThemeEditorModel.DefaultTheme === themeToDelete) {
+        ThemeEditorModel.DefaultTheme = Themes["default-light"] || Themes[Object.keys(Themes)[0]];
       }
       const registeredThemeNames = Object.keys(Themes);
       let themeModifications = registeredThemeNames.filter(themeName => themeName.indexOf(themeToDelete.themeName + "-") === 0);
@@ -519,7 +539,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    */
   public onThemePropertyChanged = new EventBase<ThemeTabPlugin, { name: string, value: any }>();
   /**
-   * An event that is raised when Theme Editor renders Property Grid. Use this event to switch the current theme to read-only mode.
+   * An event that you can use to switch the current theme to read-only mode.
    * 
    * Parameters:
    * 
@@ -531,4 +551,17 @@ export class ThemeTabPlugin implements ICreatorPlugin {
    * A Boolean property that you can set to `false` if you want to disallow theme modifications.
    */
   public onAllowModifyTheme = new EventBase<ThemeTabPlugin, { theme: ITheme, allow: boolean }>();
+  /**
+   * An event that is raised when a [survey that represents the Property Grid](https://surveyjs.io/survey-creator/documentation/creator-v2-whats-new#survey-creator-ui-elements-are-surveys) is instantiated. Handle this event to customize the Property Grid.
+   * 
+   * Parameters:
+   * 
+   * - `sender`: `ThemeTabPlugin`\
+   * A `ThemeTabPlugin` instance that raised the event.
+   * - `options.survey`: `SurveyModel`\
+   * A survey that represents the Property Grid.
+   * - `options.model`: `ThemeEditorModel`\
+   * A Theme Editor model.
+   */
+  public onPropertyGridSurveyCreated = new EventBase<ThemeTabPlugin, IPropertyGridSurveyCreatedEvent>();
 }

@@ -9,10 +9,10 @@ import {
 import { attachKey2click, ReactElementFactory, SvgIcon } from "survey-react-ui";
 
 export class QuestionWidgetAdornerComponent extends QuestionAdornerComponent {
-  protected createQuestionViewModel(): QuestionAdornerViewModel {
+  protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
     return new QuestionAdornerViewModel(
-      this.props.componentData,
-      this.props.question as any,
+      props.componentData,
+      props.question as any,
       null
     );
   }

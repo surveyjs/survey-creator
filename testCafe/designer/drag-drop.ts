@@ -1,4 +1,4 @@
-import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem } from "../helper";
+import { url, getPagesLength, getQuestionsLength, setJSON, getJSON, getQuestionNameByIndex, getItemValueByIndex, patchDragDropToDisableDrop, RatingToolboxItem, SingleInputToolboxItem, surveySettingsButtonSelector } from "../helper";
 import { Selector, ClientFunction } from "testcafe";
 const title = "Drag Drop";
 
@@ -967,7 +967,7 @@ test("Drag Drop MatrixRows (property grid)", async (t) => {
   const Question1 = Selector("[data-name=\"question1\"]");
   await t.click(Question1, { speed: 0.5 });
 
-  const ChoicesTab = Selector("h4").withExactText("Choices");
+  const ChoicesTab = Selector("h4").withExactText("Choice Options");
   await t.click(ChoicesTab);
 
   const Item1 = Selector("[data-name=\"choices\"] [data-sv-drop-target-matrix-row]").nth(0);
@@ -1030,10 +1030,9 @@ test("Drag Drop Pages MatrixRows (property grid Pages)", async (t) => {
   };
   await setJSON(json);
 
-  const Settings = Selector("[title=\"Open survey settings\"]");
   const PagesTab = Selector("h4").withExactText("Pages");
   await t
-    .click(Settings, { speed: 0.5 })
+    .click(surveySettingsButtonSelector, { speed: 0.5 })
     .click(PagesTab);
 
   const Page1 = Selector("[data-name=\"pages\"] [data-sv-drop-target-matrix-row]").nth(0);

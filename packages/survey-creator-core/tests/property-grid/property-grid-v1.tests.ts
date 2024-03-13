@@ -21,7 +21,8 @@ import {
   QuestionExpressionModel,
   SurveyTriggerComplete,
   SurveyTriggerSkip,
-  ImageItemValue
+  ImageItemValue,
+  QuestionImagePickerModel
 } from "survey-core";
 import {
   PropertyGridModel,
@@ -179,6 +180,25 @@ test("propertyEditor.displayName", () => {
   var enableIfQuestion = propertyGrid.survey.getQuestionByName("enableIf");
   expect(enableIfQuestion.title).toEqual("It is enableIf");
   defaultStrings.pe["enableIf"] = oldValue;
+});
+test("displayName && hide property title", () => {
+  Serializer.addProperty("question", { name: "prop1", displayName: "Property 1" });
+  Serializer.addProperty("question", { name: "prop2", displayName: "" });
+  Serializer.addProperty("question", { name: "prop3" });
+
+  const propertyGrid = new PropertyGridModelTester(new Question("q1"));
+  const prop1Q = propertyGrid.survey.getQuestionByName("prop1");
+  const prop2Q = propertyGrid.survey.getQuestionByName("prop2");
+  const prop3Q = propertyGrid.survey.getQuestionByName("prop3");
+  expect(prop1Q.titleLocation).toBe("default");
+  expect(prop1Q.title).toBe("Property 1");
+  expect(prop2Q.titleLocation).toBe("hidden");
+  expect(prop3Q.titleLocation).toBe("default");
+  expect(prop3Q.title).toBe("Prop 3");
+
+  Serializer.removeProperty("question", "prop1");
+  Serializer.removeProperty("question", "prop2");
+  Serializer.removeProperty("question", "prop3");
 });
 /**
  * Skip several tests with custom property editors. We do not it completely different now and any question, including custom widget, can become a property editors.
@@ -534,7 +554,7 @@ test("SurveyPropertyItemValue override properties", () => {
       { name: "enableIf", visible: false }
     ],
     function () {
-      return new ItemValue(null, null, "ordergriditem");
+      return new ItemValue(null, undefined, "ordergriditem");
     },
     "itemvalue"
   );
@@ -549,7 +569,7 @@ test("SurveyPropertyItemValue override properties", () => {
   expect(choicesQuestion.columns[1].title).toEqual("Text");
 
   var question2 = new QuestionTextModel("q1");
-  var item = new ItemValue("item1", null, "ordergriditem");
+  var item = new ItemValue("item1", undefined, "ordergriditem");
   (<any>item).price = 20;
   (<any>question2).orderItems.push(item);
 
@@ -564,6 +584,16 @@ test("SurveyPropertyItemValue override properties", () => {
   Serializer.removeProperty("text", "orderItems");
   Serializer.removeClass("ordergriditem");
   Serializer.removeProperty("itemvalue", "price");
+});
+test("Image picker choices text title", () => {
+  var question = new QuestionImagePickerModel("q1");
+  var propertyGrid = new PropertyGridModelTester(question);
+  var choicesQuestion = <QuestionMatrixDynamicModel>(
+    propertyGrid.survey.getQuestionByName("choices")
+  );
+  expect(choicesQuestion.columns).toHaveLength(3);
+  expect(choicesQuestion.columns[1].title).toEqual("Alt text");
+
 });
 test("SurveyPropertyItemValueEditor override grid columns using canShowProperty callback", () => {
   Serializer.addProperty("itemvalue", {
@@ -898,8 +928,8 @@ test("SurveyPropertyMatrixDropdownColumns show error on setting same column name
     propertyGrid.survey.getQuestionByName("columns")
   );
   expect(columnsQuestion.hideColumnsIfEmpty).toBeTruthy();
-  expect(columnsQuestion.emptyRowsText).toEqual("No items have been added yet");
-  expect(columnsQuestion.addRowText).toEqual("Add New");
+  expect(columnsQuestion.emptyRowsText).toEqual("You don't have any columns yet");
+  expect(columnsQuestion.addRowText).toEqual("Add new column");
   expect(columnsQuestion.getColumnByName("name").isUnique).toBeTruthy();
   var rows = columnsQuestion.visibleRows;
   expect(rows[1].getQuestionByColumnName("name").value).toEqual("column2");
@@ -1558,14 +1588,14 @@ test("SurveyPropertyItemValuesEditor + koShowHeader", () => {
   var choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.showHeader).toBeFalsy(); //according to design header is not shown for item values editor
+  expect(choicesQuestion.showHeader).toBeTruthy();
 
   Serializer.findProperty("itemvalue", "text").visible = false;
   propertyGrid = new PropertyGridModelTester(question);
   choicesQuestion = <QuestionMatrixDynamicModel>(
     propertyGrid.survey.getQuestionByName("choices")
   );
-  expect(choicesQuestion.showHeader).toBeFalsy();
+  expect(choicesQuestion.showHeader).toBeFalsy(); //one column only
   Serializer.findProperty("itemvalue", "text").visible = false;
 });
 test("SurveyPropertyCalculatedValueEditor", () => {
@@ -1696,6 +1726,7 @@ test("property editor titleQuestion.description", () => {
   var survey = new SurveyModel();
   survey.addNewPage("p");
   var question = survey.pages[0].addNewQuestion("text", "q1");
+  editorLocalization.reset();
   var curStrings = editorLocalization.getLocale("");
   curStrings.pehelp.title = "Common Title";
   curStrings.pehelp.survey = { title: "Survey Title" };
@@ -1732,7 +1763,7 @@ test("property editor titleQuestion.description", () => {
   );
   expect(
     defaultValueExpressionQuestion.description.indexOf(
-      "Use curly brackets"
+      "The expression can include basic calculations"
     ) > -1
   ).toBeTruthy();
 });

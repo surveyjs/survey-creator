@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { SurveyModel } from "survey-core";
-import { CreatorBase } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 import * as Survey from "survey-core";
 
 const json = {
@@ -86,5 +86,5 @@ export class ExampleComponent {
   }
 
   public survey = new SurveyModel(json);
-  public creator = new CreatorBase({ showLogicTab: true, showTranslationTab: true, showThemeTab: true })
+  public creator = new SurveyCreatorModel({ showLogicTab: true, showTranslationTab: true, showThemeTab: true })
 }

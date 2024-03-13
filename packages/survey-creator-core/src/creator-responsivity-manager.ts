@@ -1,10 +1,8 @@
-import { CreatorBase } from "./creator-base";
+import { SurveyCreatorModel } from "./creator-base";
 require("./responsivity.scss");
 export class CreatorResponsivityManager {
   private resizeObserver: ResizeObserver = undefined;
   private currentWidth;
-  private prevShowToolbox;
-  private prevShowPageNavigator;
   public static screenSizeBreakpoints: { [key: string]: number } = {
     "xxl": 1800,
     "xl": 1500,
@@ -33,26 +31,10 @@ export class CreatorResponsivityManager {
     this.creator.isMobileView = undefined;
   }
   private procesShowToolbox(toolboxVisible: boolean) {
-    if (toolboxVisible && !this.creator.showToolbox && this.prevShowToolbox !== undefined) {
-      this.creator.showToolbox = this.prevShowToolbox;
-      this.prevShowToolbox = undefined;
-    } else if (!toolboxVisible && this.creator.showToolbox && this.prevShowToolbox === undefined) {
-      this.prevShowToolbox = this.creator.showToolbox;
-      this.creator.showToolbox = false;
-    }
+    this.creator.allowShowToolbox = toolboxVisible;
   }
   private procesShowPageNavigator(pageNavigatorVisibility: boolean) {
-    if (this.creator.pageEditMode === "bypage") {
-      this.creator.showPageNavigator = true;
-      return;
-    }
-    if (pageNavigatorVisibility && !this.creator.showPageNavigator && this.prevShowPageNavigator !== undefined) {
-      this.creator.showPageNavigator = this.prevShowPageNavigator;
-      this.prevShowPageNavigator = undefined;
-    } else if (!pageNavigatorVisibility && this.creator.showPageNavigator && this.prevShowPageNavigator === undefined) {
-      this.prevShowPageNavigator = this.creator.showPageNavigator;
-      this.creator.showPageNavigator = false;
-    }
+    this.creator.allowShowPageNavigator = this.creator.pageEditMode === "bypage" || pageNavigatorVisibility;
   }
 
   private findCorrectParent(container: HTMLElement) {
@@ -64,7 +46,7 @@ export class CreatorResponsivityManager {
     return container.parentElement;
   }
 
-  constructor(protected container: HTMLDivElement, private creator: CreatorBase) {
+  constructor(protected container: HTMLDivElement, private creator: SurveyCreatorModel) {
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver((_) => this.process());
       this.resizeObserver.observe(this.findCorrectParent(this.container));
@@ -112,6 +94,8 @@ export class CreatorResponsivityManager {
   }
 
   public dispose(): void {
+    this.creator.allowShowToolbox = true;
+    this.creator.allowShowPageNavigator = true;
     if (!!this.resizeObserver) {
       this.resizeObserver.disconnect();
     }

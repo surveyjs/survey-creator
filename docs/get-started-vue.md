@@ -1,10 +1,10 @@
 ---
-title: JS Form Builder Library for Vue.js | Getting Started Guide
-description: A step-by-step guide to get started with Survey Creator component in a Vue.js application.
+title: Vue Form Builder | Generate dynamic JSON forms in your Vue.js application
+description: SurveyJS Form Builder for Vue is an open-source client-side component that fully integrates into your Vue application and generates form JSON definitions (schemas) behind the scenes. It offers a user-friendly drag-and-drop interface, GUI for form branching, and an integrated theme editor for customizing form design.
 ---
-# Add Survey Creator / Form Builder to a Vue.js Application
+# Form Builder for Vue.js
 
-This step-by-step tutorial will help you get started with the [Survey Creator](https://surveyjs.io/create-survey) component in a Vue 2 or Vue 3 application. To add the component to your application, follow the steps below:
+[SurveyJS Vue Form Builder](https://surveyjs.io/create-free-survey) is an open-source UI component that seamlessly integrates with any backend system and allows you to create and style multiple dynamic HTML forms in any Vue application. This component generates form definitions (schemas) in real-time and offers a no-code drag-and-drop interface that makes form creation accessible to anyone. The form builder features a dedicated GUI for conditional rules and form branching and an integrated CSS theme editor for custom form styling and branding. This step-by-step tutorial will help you get started with the Form Builder component in a Vue 2 or Vue 3 application. To add the component to your application, follow the steps below:
 
 - [Add Survey Creator to a Vue 3 Application](#add-survey-creator-to-a-vue-3-application)
   - [Install the `survey-creator-vue` npm Package](#install-the-survey-creator-vue-npm-package)
@@ -24,10 +24,12 @@ This step-by-step tutorial will help you get started with the [Survey Creator](h
 [View Full Code for Vue 3](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue3 (linkStyle))
 [View Full Code for Vue 2](https://github.com/surveyjs/code-examples/tree/main/get-started-creator/vue (linkStyle))
 
-If you are looking for a quick-start application that enables all Survey Creator features, refer to the following GitHub repositories:
+If you are looking for a quick-start application that includes all SurveyJS components, refer to the following GitHub repositories:
 
-- <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quick Start Boilerplate</a>
-- <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue 2 Quick Start Boilerplate</a>
+- <a href="https://github.com/surveyjs/surveyjs_vue3_quickstart" target="_blank">SurveyJS + Vue 3 Quickstart Template</a>
+- <a href="https://github.com/surveyjs/surveyjs_vue_quickstart" target="_blank">SurveyJS + Vue 2 Quickstart Template</a>
+
+> In this guide, the terms "Form Builder" and "Survey Creator" are used interchangeably and both refer to the SurveyJS form building component for Vue.js.
 
 ## Add Survey Creator to a Vue 3 Application
 
@@ -113,7 +115,7 @@ const creator = new SurveyCreatorModel(creatorOptions);
 
 ### Render Survey Creator
 
-Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method:
+Survey Creator rendering code is encapsulated in the `SurveyCreatorComponent`. To use it in your template, you need to install `surveyPlugin` (for SurveyJS Form Library) and `surveyCreatorPlugin`. Open the `main.ts` file, import these plugins, and install them using the `app.use()` method *in the exact order shown below*:
 
 ```js
 // main.ts
@@ -232,6 +234,20 @@ function saveSurveyJson(url: string, json: object, saveNo: number, callback: Fun
 <template>
   <!-- ... -->
 </template>
+```
+
+If you are running a NodeJS server, you can check a survey JSON schema before saving it. On the server, create a `SurveyModel` and call its [`toJSON()`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#toJSON) method. This method deletes unknown properties and incorrect property values from the survey JSON schema:
+
+```js
+// Server-side code for a NodeJS backend
+import { Model } from "survey-core";
+
+const incorrectSurveyJson = { ... };
+const survey = new Model(surveyJson);
+const correctSurveyJson = survey.toJSON();
+// ...
+// Save `correctSurveyJson` in a database
+// ...
 ```
 
 To load a survey model schema JSON into Survey Creator, assign the schema to Survey Creator's [`JSON`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#JSON) or [`text`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#text) property. Use `text` if the JSON object is converted to a string; otherwise, use `JSON`. The following code takes a survey model schema from the `localStorage`. If the schema is not found (for example, when Survey Creator is launched for the first time), a default JSON is used:

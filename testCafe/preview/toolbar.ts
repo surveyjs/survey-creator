@@ -157,8 +157,8 @@ test("Landscape switcher", async (t) => {
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
     .click(getBarItemByTitle("Select device type"))
-    .expect(getListItemByText("iPad").visible).ok()
-    .click(getListItemByText("iPad"))
+    .expect(getListItemByText("iPad Air").visible).ok()
+    .click(getListItemByText("iPad Air"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svd-simulator-main").hasClass("svd-simulator-main--frame")).ok()
     .expect(Selector(".svd-simulator-wrapper").clientWidth).gt(1200)
@@ -179,9 +179,9 @@ test("Device selector", async (t) => {
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
     .click(getBarItemByTitle("Select device type"))
-    .expect(getListItemByText("iPad").visible).ok()
+    .expect(getListItemByText("iPad Air").visible).ok()
 
-    .click(getListItemByText("iPad"))
+    .click(getListItemByText("iPad Air"))
     .click(Selector("input[value='Complete']"))
     .expect(orientationAction.hasAttribute("disabled")).notOk()
     .expect(Selector(".svc-preview__test-again span").withText(restartSurveyButtonText).visible).ok()
@@ -195,7 +195,7 @@ test("Device selector", async (t) => {
     .expect(getBarItemByTitle("Show invisible elements").visible).ok()
 
     .click(getBarItemByTitle("Select device type"))
-    .expect(getListItemByText("iPad").visible).ok();
+    .expect(getListItemByText("iPad Air").visible).ok();
 });
 test("Title hints", async (t) => {
   await explicitErrorHandler();

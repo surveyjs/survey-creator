@@ -19,17 +19,18 @@ Adorners are design-surface controls that allow Survey Creator users to manipula
 
 <img src="./images/survey-creator-dropdown-adorners.png" alt="Survey Creator - Adorners" width="50%">
 
-You can control the visibility of adorners using the `onElementAllowOperations` event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
+You can control the visibility of adorners using the [`onElementAllowOperations`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onElementAllowOperations) event. As the second parameter, the event handler accepts an object that exposes the following Boolean properties:
 
-| Property | Description    |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| `allowChangeRequired`  | Shows or hides the adorner that makes the question required. |
-| `allowChangeType`      | Shows or hides the adorner that changes the survey element type.      |
-| `allowChangeInputType` | Shows or hides the adorner that changes the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions.    |
-| `allowCopy`    | Shows or hides the adorner that duplicates the survey element.  |
-| `allowDelete`  | Shows or hides the adorner that deletes the survey element.  |
-| `allowDragging`  | Shows or hides the adorner that allows users to drag and drop survey elements.      |
-| `allowEdit`    | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
+| Property | Description |
+| -------- | ----------- |
+| `allowChangeRequired` | Shows or hides the adorner that makes the question required. |
+| `allowChangeType` | Shows or hides the adorner that changes the survey element type. |
+| `allowChangeInputType` | Shows or hides the adorner that changes the [`inputType`](https://surveyjs.io/form-library/documentation/api-reference/text-entry-question-model#inputType) property of Single-Line Input questions. |
+| `allowCopy` | Shows or hides the adorner that duplicates the survey element. |
+| `allowDelete` | Shows or hides the adorner that deletes the survey element. |
+| `allowDragging` | Shows or hides the adorner that allows users to drag and drop survey elements. |
+| `allowEdit` | Shows or hides the adorners that allow users to edit survey element properties on the design surface. If you disable this property, users can edit survey element properties only in the Property Grid. |
+| `allowShowSettings` | Shows or hides the adorner that allow users to open the Property Grid for survey element configuration. |
 
 The following code hides the "Change Type" adorner for Dropdown questions:
 
@@ -100,21 +101,25 @@ To access the design mode survey instance, use the Survey Creator's [`survey`](h
 creator.survey.title = "My Survey";
 ```
 
-Survey Creator may create a new design mode survey instance during the design process (for example, when a user switches from the JSON Editor tab back to the Designer). To handle the survey recreation, use the [`onDesignerSurveyCreated`](https://surveyjs.io/Documentation/Survey-Creator/?id=surveyeditor#onDesignerSurveyCreated) event.
+Survey Creator may create a new design mode survey instance during the design process (for example, when a user switches from the JSON Editor tab back to the Designer). To handle the survey recreation, use the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event.
 
 ```js
-creator.onDesignerSurveyCreated.add(function (_, options) {
-  // The recreated survey instance is stored in the `options.survey` property.
-  console.log(options.survey);
+creator.onSurveyInstanceCreated.add((_, options) => {
+  if (options.area === "designer-tab") {
+    // The recreated survey instance is stored in the `options.survey` property.
+    console.log(options.survey);
+  }
 })
 ```
 
 ### Preview Mode Survey Instance
 
-The preview mode survey instance is recreated each time a user opens the Preview tab. To access this instance, handle the [`onPreviewSurveyCreated`](https://surveyjs.io/Documentation/Survey-Creator?id=surveyeditor#onPreviewSurveyCreated) event:
+The preview mode survey instance is recreated each time a user opens the Preview tab. To access this instance, handle the [`onSurveyInstanceCreated`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onSurveyInstanceCreated) event as follows:
 
 ```js
-creator.onPreviewSurveyCreated.add(function (_, options) {
-  options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
+creator.onSurveyInstanceCreated.add((_, options) => {
+  if (options.area === "preview-tab") {
+    options.survey.title = "You started previewing the survey at: " + new Date().toLocaleTimeString();
+  }
 });
 ```

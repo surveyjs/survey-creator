@@ -74,7 +74,33 @@
     },
     {
       "Name": "End-User-Guide",
-      "Title": "End-User Documentation"
+      "Title": "End-User Documentation",
+      "Items": [
+        {
+          "Name": "end-user-guide-user-interface",
+          "Title": "UI Overview"
+        },
+        {
+          "Name": "end-user-guide-skip-logic-in-forms",
+          "Title": "Skip Logic"
+        },
+        {
+          "Name": "end-user-guide-form-display-logic",
+          "Title": "Display Logic"
+        },
+        {
+          "Name": "end-user-guide-branching-logic",
+          "Title": "Branching Logic"
+        },
+        {
+          "Name": "end-user-guide-prevent-duplicate-forms-submissions",
+          "Title": "Prevent Duplicate Form Submissions"
+        },
+        {
+          "Name": "end-user-guide-how-to-create-transfer-list",
+          "Title": "Create a Transfer List"
+        }
+      ]
     },
     {
       "Name": "BuilderOverview",
@@ -86,8 +112,8 @@
       "Title": "Survey Creator API",
       "Items": [
         {
-          "Name": "surveycreator",
-          "Title": "SurveyCreator"
+          "Name": "surveycreatormodel",
+          "Title": "SurveyCreatorModel"
         },
         {
           "Name": "ICreatorOptions",

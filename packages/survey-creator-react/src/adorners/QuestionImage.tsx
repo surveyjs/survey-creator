@@ -15,10 +15,10 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createQuestionViewModel(): QuestionAdornerViewModel {
+  protected createQuestionViewModel(props: any): QuestionAdornerViewModel {
     return new QuestionImageAdornerViewModel(
-      this.props.componentData,
-      this.props.question as any,
+      props.componentData,
+      props.question as any,
       null,
       null
     );
@@ -58,7 +58,7 @@ export class QuestionImageAdornerComponent extends QuestionAdornerComponent {
     </div>);
   }
   renderChooseButton(): JSX.Element {
-    return(<div className="svc-image-question-controls">
+    return (<div className="svc-image-question-controls">
       {this.model.allowEdit ? attachKey2click(<span
         className="svc-context-button"
         onClick={() => this.imageModel.chooseFile(this.imageModel)}

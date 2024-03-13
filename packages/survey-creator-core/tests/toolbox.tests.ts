@@ -58,6 +58,22 @@ test("toolbox addItem with index", (): any => {
   toolbox.addItem(<any>{ name: "countries" }, 0);
   expect(toolbox.items[0].name).toEqual("countries");
 });
+test("toolbox addItems and clear old, #5067", (): any => {
+  const toolbox = new QuestionToolbox();
+  expect(toolbox.items.length > 10).toBeTruthy();
+  toolbox.addItems([{
+    name: "custom-item",
+    isCopied: true,
+    iconName: "icon-default",
+    title: "Custom Type",
+    category: "Custom",
+    className: "svc-toolbox__custom-item",
+    json: { type: "text" }
+  }], true);
+  expect(toolbox.items).toHaveLength(1);
+  expect(toolbox.items[0].name).toEqual("custom-item");
+  expect(toolbox.items[0].id).toEqual("custom-item");
+});
 
 test("toolbox several categories", (): any => {
   var toolbox = new QuestionToolbox(["text", "dropdown"]);

@@ -1,6 +1,6 @@
 
 import { QuestionImageModel, SurveyElement, SurveyTemplateRendererTemplateData, SurveyModel, property, QuestionFileModel, Base, Serializer, CssClassBuilder } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { QuestionAdornerViewModel } from "./question";
 import { getAcceptedTypesByContentMode } from "../utils/utils";
 import { getLocString } from "../editorLocalization";
@@ -20,6 +20,9 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
     this.filePresentationModel.acceptedTypes = "image/*";
     this.filePresentationModel.storeDataAsText = false;
     this.filePresentationModel.cssClasses.chooseFileIconId = "icon-choosefile";
+    surveyModel.onOpenFileChooser.add((s, o) => {
+      this.creator.chooseFiles(o.input, o.callback, { element: o.element as SurveyElement, item: o.item });
+    });
     surveyModel.onUploadFiles.add((s, o) => {
       const fileToUpload = o.files[0];
       if (!!fileToUpload) {
@@ -32,7 +35,7 @@ export class QuestionImageAdornerViewModel extends QuestionAdornerViewModel {
   }
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     templateData: SurveyTemplateRendererTemplateData,
     public questionRoot: HTMLElement

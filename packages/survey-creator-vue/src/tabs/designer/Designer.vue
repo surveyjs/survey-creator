@@ -28,13 +28,17 @@
           <span class="svc-designer-placeholder-text svc-text svc-text--normal">
             {{ model.placeholderText }}
           </span>
-          <svc-page
-            class="svc-designer-placeholder-page"
-            :survey="model.creator.survey"
-            :creator="model.creator"
-            :page="model.newPage"
+          <div
+            className="svc-designer-placeholder-page"
+            data-sv-drop-target-survey-element="newGhostPage"
           >
-          </svc-page>
+            <svc-page
+              :survey="model.creator.survey"
+              :creator="model.creator"
+              :page="model.newPage"
+            >
+            </svc-page>
+          </div>
         </div>
       </template>
 

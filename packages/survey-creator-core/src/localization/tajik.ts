@@ -390,6 +390,10 @@ export var tgStrings = {
     question: {
       // page: "Parent page"
     },
+    panel: {
+      // page: "Parent page",
+      // indent: "Add outer indents"
+    },
     showTimerPanel: "Нишон додани бастаи вақтсанҷ",
     showTimerPanelMode: "Нишон додани ҳолати бастаи таймер",
     // renderMode: "Panel display mode",
@@ -517,7 +521,7 @@ export var tgStrings = {
     // defaultPanelValue: "Default Values",
     // cells: "Cell Texts",
     // keyName: "Key column",
-    itemvalue: {
+    imageitemvalue: {
       // text: "Alt text"
     },
     logoPosition: "Ҷойгиршавии логотип",
@@ -573,9 +577,6 @@ export var tgStrings = {
     // columnsEnableIf: "Columns are visible if",
     // rowsEnableIf: "Rows are visible if",
     // indent: "Add indents",
-    panel: {
-      // indent: "Add outer indents"
-    },
     // innerIndent: "Add inner indents",
     // defaultValueFromLastRow: "Take default values from the last row",
     // defaultValueFromLastPanel: "Take default values from the last panel",

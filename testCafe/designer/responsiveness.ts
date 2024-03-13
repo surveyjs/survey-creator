@@ -2,7 +2,7 @@ import { ClientFunction, Selector } from "testcafe";
 import {
   collapseButtonSelector, expandButtonSelector, getBarItemByTitle,
   getTabbedMenuItemByText, pageNavigator, propertyGridSelector, questions, questionToolbarActions,
-  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector
+  setJSON, toolbox, toolboxItemIcons, toolboxItemTitles, url, creatorTabDesignerName, creatorTabPreviewName, objectSelectorButton, getPropertyGridCategory, generalGroupName, getAddNewQuestionButton, selectedObjectTextSelector, surveySettingsButtonSelector
 } from "../helper";
 const title = "Responsiveness";
 
@@ -181,13 +181,13 @@ test("property grid for mobile devices", async (t) => {
   const mobilePropertGrid = Selector(".sv-mobile-side-bar .svc-side-bar__container");
 
   await t
-    .resizeWindow(750, 500)
+    .resizeWindow(750, 600)
     .expect(mobilePropertGrid.exists).notOk()
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(mobilePropertGrid.visible).notOk()
 
-    .click(getBarItemByTitle("Open survey settings").filterVisible())
+    .click(surveySettingsButtonSelector)
     .expect(mobilePropertGrid.visible).ok()
     .expect(Selector(selectedObjectTextSelector).innerText).eql("Survey")
 
@@ -218,7 +218,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbar.exists).notOk()
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbarActions.count).eql(3)
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
@@ -236,7 +236,7 @@ test("test tab for mobile devices", async (t) => {
     .expect(creatorFooterToolbar.exists).notOk()
     .expect(testTabToolbar.find(".sv-action").filterVisible().count).eql(3)
 
-    .resizeWindow(370, 400)
+    .resizeWindow(370, 600)
     .expect(testTabToolbar.exists).notOk()
     .expect(creatorFooterToolbarActions.count).eql(5)
     .expect(creatorFooterToolbarActions.nth(0).id).eql("svd-designer")
@@ -341,7 +341,7 @@ test("Responsive creator: property grid - click the shadow", async (t) => {
     .expect(flyoutPropertyGrid.exists).ok()
     .expect(objectSelectorButton.withText("page1").visible).ok()
     .click(collapseButtonSelector)
-    .click(getBarItemByTitle("Open survey settings").filterVisible())
+    .click(surveySettingsButtonSelector)
     .expect(objectSelectorButton.withText("Survey").visible).ok()
     .click(Selector(".svc-creator"), { offsetX: 237, offsetY: 273 })
 

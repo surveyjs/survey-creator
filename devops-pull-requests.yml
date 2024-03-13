@@ -200,6 +200,11 @@ jobs:
       npm run test
     displayName: 'Unit tests CreatorV2 Core'
 
+  - script: |
+      cd $(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core
+      npm run test:postcss
+    displayName: 'check postcss compatibility'
+
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)/survey-creator/packages/survey-creator-core/build'

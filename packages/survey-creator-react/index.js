@@ -197,7 +197,13 @@ const creator = new SurveyCreator.SurveyCreator(options);
 creator.onModified.add((sender, options) => {
   console.log(JSON.stringify(options, null, 3));
 });
+creator.onMachineTranslate.add((_, options) => {
+  const translatedStrings = [];
+  options.strings.forEach(str => { translatedStrings.push(options.toLocale + ": " + str); });
+  options.callback(translatedStrings);
+});
 creator.JSON = json;
+creator.locale = "de";
 window.creator = creator;
 
 creator.onElementAllowOperations.add((sender, options) => {

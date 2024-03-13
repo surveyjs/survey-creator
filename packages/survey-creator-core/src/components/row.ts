@@ -5,12 +5,12 @@ import {
   QuestionRowModel,
   DragTypeOverMeEnum
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 require("./row.scss");
 
 export class RowViewModel extends Base {
   constructor(
-    public creator: CreatorBase,
+    public creator: SurveyCreatorModel,
     public row: QuestionRowModel,
     public templateData: SurveyTemplateRendererTemplateData
   ) {

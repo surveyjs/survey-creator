@@ -1,11 +1,11 @@
 import React from "react";
 import { Base } from "survey-core";
 import { ReactElementFactory, LogoImage, SvgIcon, attachKey2click, LoadingIndicatorComponent } from "survey-react-ui";
-import { CreatorBase, LogoImageViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, LogoImageViewModel } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
 interface ILogoImageComponentProps {
-  data: CreatorBase;
+  data: SurveyCreatorModel;
 }
 
 export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentProps, any> {
@@ -15,12 +15,12 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     super(props);
     this.rootRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     let prevRoot: HTMLDivElement = null;
-    if(!!this.model) {
+    if (!!this.model) {
       prevRoot = this.model.root;
     }
-    this.model = new LogoImageViewModel(this.props.data, prevRoot);
+    this.model = new LogoImageViewModel(props.data, prevRoot);
   }
   protected getUpdatedModelProps(): string[] {
     return ["data"];
@@ -55,7 +55,7 @@ export class LogoImageComponent extends CreatorModelElement<ILogoImageComponentP
     </div>);
   }
   renderImage() {
-    return <div className={ this.model.containerCss }>
+    return <div className={this.model.containerCss}>
       {this.renderButtons()}
       <LogoImage data={this.props.data.survey}></LogoImage>
     </div>;

@@ -2,7 +2,7 @@
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory } from "survey-angular-ui";
 import { ImageItemValue, QuestionImagePickerModel } from "survey-core";
-import { CreatorBase, ImageItemValueWrapperViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ImageItemValueWrapperViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
 @Component({
@@ -15,7 +15,7 @@ export class ImageItemValueDesignerComponent extends CreatorModelComponent<Image
   @Input() componentData!: any;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef;
   public adorner!: ImageItemValueWrapperViewModel;
-  private get creator(): CreatorBase {
+  private get creator(): SurveyCreatorModel {
     return this.componentData.data.creator;
   }
   public get question(): QuestionImagePickerModel {

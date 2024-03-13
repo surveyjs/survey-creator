@@ -2,7 +2,7 @@
 import { ChangeDetectorRef, Component, Input, ViewContainerRef } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, EmbeddedViewContentComponent } from "survey-angular-ui";
 import { ItemValue, PageModel, PanelModel, Question, QuestionSelectBase, SurveyModel } from "survey-core";
-import { CreatorBase, ItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, ItemValueWrapperViewModel, QuestionAdornerViewModel } from "survey-creator-core";
 import { CreatorModelComponent } from "../creator-model.component";
 
 @Component({
@@ -14,7 +14,7 @@ export class ItemValueDesignerComponent extends CreatorModelComponent<ItemValueW
   @Input() componentName!: string;
   @Input() componentData!: any;
   public adorner!: ItemValueWrapperViewModel;
-  private get creator(): CreatorBase {
+  private get creator(): SurveyCreatorModel {
     return this.componentData.data.creator;
   }
   public get question(): QuestionSelectBase {

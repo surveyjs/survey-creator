@@ -34,17 +34,6 @@ export class SurveySimulator extends SurveyElementBase<any, any> {
             }}
           >
             <div
-              className={
-                "svd-simulator-frame " + this.model.simulatorFrame.cssClass
-              }
-              style={{
-                width:
-                  this.model.simulatorFrame.landscapedFrameWidth + "px",
-                height:
-                  this.model.simulatorFrame.landscapedFrameHeight + "px"
-              }}
-            ></div>
-            <div
               className="svd-simulator"
               style={{
                 width:

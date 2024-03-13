@@ -18,7 +18,7 @@ import {
   CssClassBuilder,
   QuestionPanelDynamicModel
 } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization, getLocString } from "../editorLocalization";
 import { QuestionConverter } from "../questionconverter";
 import { IPortableDragEvent, IPortableEvent, IPortableMouseEvent } from "../utils/events";
@@ -48,7 +48,7 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
   private dragOrClickHelper: DragOrClickHelper;
 
   constructor(
-    creator: CreatorBase,
+    creator: SurveyCreatorModel,
     surveyElement: SurveyElement,
     public templateData: SurveyTemplateRendererTemplateData
   ) {
@@ -126,13 +126,13 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
       result = result.replace(" svc-question__content--drag-over-inside", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineLeft || this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Left) {
       result += " svc-question__content--drag-over-left";
     } else {
       result = result.replace(" svc-question__content--drag-over-left", "");
     }
 
-    if (this.dragTypeOverMe === DragTypeOverMeEnum.MultilineRight || this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
+    if (this.dragTypeOverMe === DragTypeOverMeEnum.Right) {
       result += " svc-question__content--drag-over-right";
     } else {
       result = result.replace(" svc-question__content--drag-over-right", "");
@@ -309,11 +309,14 @@ export class QuestionAdornerViewModel extends SurveyElementAdornerBase {
     const res = [];
     let lastItem = null;
     convertClasses.forEach((className: string) => {
-      const item = this.creator.toolbox.items.filter(item => item.name == className)[0];
-      const needSeparator = lastItem && item.category != lastItem.category;
-      const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
-      lastItem = item;
-      res.push(action);
+      const items = this.creator.toolbox.items.filter(item => item.name == className);
+      if(Array.isArray(items) && items.length > 0) {
+        const item = items[0];
+        const needSeparator = lastItem && item.category != lastItem.category;
+        const action = this.creator.createIActionBarItemByClass(item.name, item.title, item.iconName, needSeparator);
+        lastItem = item;
+        res.push(action);
+      }
     });
     return res;
   }

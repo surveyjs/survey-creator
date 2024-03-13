@@ -64,7 +64,7 @@
 import type { LocalizableString } from "survey-core";
 import {
   StringEditorViewModelBase,
-  type CreatorBase,
+  type SurveyCreatorModel,
 } from "survey-creator-core";
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useCreatorModel } from "./creator-model";
@@ -73,7 +73,7 @@ const props = defineProps<{ locString: any }>();
 const locString = computed<LocalizableString>(() => {
   return props.locString.locStr;
 });
-const creator = computed<CreatorBase>(() => {
+const creator = computed<SurveyCreatorModel>(() => {
   return props.locString.creator;
 });
 const root = ref<HTMLElement>();

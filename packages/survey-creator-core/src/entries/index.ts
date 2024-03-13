@@ -10,6 +10,7 @@ export { editorLocalization as localization } from "../editorLocalization";
 export * from "../creator-settings";
 export { ICreatorOptions } from "../creator-options";
 
+export * from "../creator-events-api";
 export * from "../creator-base";
 export * from "../creator-responsivity-manager";
 
@@ -70,6 +71,7 @@ export * from "../property-grid/object-selector";
 export * from "../property-grid/restfull";
 export * from "../property-grid/values";
 export * from "../property-grid/search-manager";
+export * from "../property-grid/maskSettings";
 export { propertyGridCss } from "../property-grid-theme/property-grid";
 export * from "../questionconverter";
 export * from "../svgbundle";

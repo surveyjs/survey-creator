@@ -43,7 +43,7 @@ test("Delete second page", async (t) => {
 });
 
 test("Add calculated values", async (t) => {
-  const addButton = Selector("div[data-name=calculatedValues]").find("button[title='Add New']");
+  const addButton = Selector("div[data-name=calculatedValues]").find("button[title='Add new variable']");
   const rows = Selector("div[data-name=calculatedValues]").find("tbody").find("tr");
 
   await setJSON(json);
@@ -85,7 +85,7 @@ test("Check showInMultiple columns editing", async (t) => {
   const question = Selector(".sv-string-editor").withText("Question 1");
   const columns = getPropertyGridCategory("Columns");
   const edit = Selector("button[title='Edit']");
-  const showInMultiple = Selector("input[aria-label='Show in multiple columns']");
+  const showInMultiple = Selector("input[name='showInMultipleColumns']");
   const radioMatrixCell = Selector("td:nth-of-type(2) .svc-matrix-cell");
   const controlButton = radioMatrixCell.find(".svc-matrix-cell__question-controls");
   await t
@@ -181,5 +181,43 @@ test("Text editors, loose focus on enter", async (t) => {
     .expect(Selector("div[data-name=title] input").focused).ok()
     .pressKey("Enter")
     .expect(Selector("div[data-name=title] input").focused).notOk();
+});
 
+test("Drop-down menus do not close on second click", async (t) => {
+  await t.resizeWindow(1920, 1080);
+  const json = {
+    elements: [
+      {
+        type: "dropdown",
+        name: "q1",
+        title: "title"
+      }
+    ]
+  };
+  await setJSON(json);
+  const panel = dataGroup.parent(".sd-element--expanded.spg-panel");
+  const dropdown = panel.find(".spg-dropdown");
+  const popupContainer = Selector(".sv-popup__container").filterVisible();
+
+  await t
+    .click(generalGroup)
+    .click(dataGroup);
+
+  const clientRectWidth = await dropdown.getBoundingClientRectProperty("width");
+  const dropdownWidth = parseInt(clientRectWidth.toString());
+  await t
+    .expect(dropdownWidth).gt(350)
+    .expect(popupContainer.visible).notOk()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).ok()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).notOk()
+
+    .click(dropdown, { offsetX: dropdownWidth - 20, offsetY: 20 })
+    .expect(popupContainer.visible).ok()
+
+    .click(panel.find(".spg-panel__content"), { offsetX: 10, offsetY: 10 })
+    .expect(popupContainer.visible).notOk();
 });

@@ -21,11 +21,11 @@ export class ItemValueAdornerComponent extends CreatorModelElement<
   any
 > {
   model: ItemValueWrapperViewModel;
-  protected createModel(): void {
+  protected createModel(props: any): void {
     this.model = new ItemValueWrapperViewModel(
-      this.props.componentData.creator,
-      this.props.question,
-      this.props.item
+      props.componentData.creator,
+      props.question,
+      props.item
     );
   }
   protected getUpdatedModelProps(): string[] {

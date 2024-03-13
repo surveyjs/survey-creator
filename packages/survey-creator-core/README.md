@@ -11,7 +11,8 @@ A platform-independent data model for Survey Creator / Form Builder by [SurveyJS
 
 - [`survey-creator-react`](https://www.npmjs.com/package/survey-creator-react) for React
 - [`survey-creator-angular`](https://www.npmjs.com/package/survey-creator-angular) for Angular
-- [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) for Knockout, jQuery, and Vue
+- [`survey-creator-vue`](https://www.npmjs.com/package/survey-creator-vue) for Vue
+- [`survey-creator-knockout`](https://www.npmjs.com/package/survey-creator-knockout) for Knockout and jQuery
 
 ## Build the Survey Creator Model from Sources
 

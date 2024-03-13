@@ -98,7 +98,8 @@ export var settings = {
     maximumRowsCount: 0,
     maximumRateValues: 0,
     generalTabName: "general",
-    defaultExpandedTabName: "general"
+    defaultExpandedTabName: "general",
+    allowExpandMultipleCategories: false
   },
   toolbox: {
     /**
@@ -184,6 +185,17 @@ export interface ICollectionItemAllowOperations {
   allowDelete: boolean;
   allowEdit: boolean;
   allowAdd: boolean;
+}
+
+export interface ICreatorPlugin {
+  activate: () => void;
+  update?: () => void;
+  deactivate?: () => boolean;
+  canDeactivateAsync?: (onSuccess: () => void) => void;
+  defaultAllowingDeactivate?: () => boolean | undefined;
+  dispose?: () => void;
+  onDesignerSurveyPropertyChanged?: (obj: Base, propName: string) => void;
+  model: Base;
 }
 
 export interface ISurveyCreatorOptions {
@@ -281,7 +293,7 @@ export interface ISurveyCreatorOptions {
   onGetElementEditorTitleCallback(obj: Base, title: string): string;
   startUndoRedoTransaction();
   stopUndoRedoTransaction();
-  createSurvey(json: any, reason: string, model?: any);
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel)=> void, area?: string);
   onConditionQuestionsGetListCallback(
     propertyName: string,
     obj: Base,
@@ -306,13 +318,13 @@ export interface ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void;
   getHasMachineTranslation(): boolean;
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void;
   chooseFiles(
     input: HTMLInputElement,
-    onFilesChosen: (files: File[]) => void,
+    callback: (files: File[]) => void,
     context?: { element: SurveyElement, item?: ItemValue }
   ): void;
 }
@@ -432,8 +444,12 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   }
   startUndoRedoTransaction() { }
   stopUndoRedoTransaction() { }
-  createSurvey(json: any, reason: string, model?: any): SurveyModel {
-    return new SurveyModel(json);
+  createSurvey(json: any, reason: string, model?: any, callback?: (survey: SurveyModel) => void, area?: string): SurveyModel {
+    const survey = new SurveyModel(json);
+    if(!!callback) {
+      callback(survey);
+    }
+    return survey;
   }
   onConditionQuestionsGetListCallback(
     propertyName: string,
@@ -458,11 +474,11 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   uploadFiles(
     files: File[],
     question: Question,
-    uploadingCallback: (status: string, data: any) => any
+    callback: (status: string, data: any) => any
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, onFilesChosen: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
+  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

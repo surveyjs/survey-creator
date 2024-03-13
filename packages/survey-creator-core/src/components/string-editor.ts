@@ -1,5 +1,5 @@
 import { Base, LocalizableString, Serializer, JsonObjectProperty, property, ItemValue, ComputedUpdater, sanitizeEditableContent, Event as SurveyEvent, Question, QuestionMultipleTextModel, MultipleTextItemModel, QuestionMatrixBaseModel, QuestionMatrixModel, QuestionMatrixDropdownModel, MatrixDropdownColumn, QuestionMatrixDynamicModel, QuestionSelectBase, QuestionImagePickerModel, EventBase, CharacterCounter, CssClassBuilder } from "survey-core";
-import { CreatorBase } from "../creator-base";
+import { SurveyCreatorModel } from "../creator-base";
 import { editorLocalization } from "../editorLocalization";
 import { clearNewLines, getNextValue, select } from "../utils/utils";
 import { ItemValueWrapperViewModel } from "./item-value";
@@ -11,7 +11,7 @@ export abstract class StringItemsNavigatorBase {
   constructor(protected question: any) { }
   protected abstract getItemLocString(items: any, item: any): LocalizableString;
   protected abstract getItemSets(): Array<any>;
-  protected abstract addNewItem(creator: CreatorBase, items: any, text?: string): void;
+  protected abstract addNewItem(creator: SurveyCreatorModel, items: any, text?: string): void;
   protected abstract getItemsPropertyName(items: any): string;
   private static createItemsNavigator(question: any): StringItemsNavigatorBase {
     if (question instanceof QuestionImagePickerModel) return null;
@@ -23,7 +23,7 @@ export abstract class StringItemsNavigatorBase {
     return null;
   }
 
-  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
+  protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice();
     const createNewItem = (text: any): ItemValue => {
       const val = creator.inplaceEditForValues ? text : getNextItemValue(creator.getChoicesItemBaseTitle(), newItems);
@@ -37,7 +37,7 @@ export abstract class StringItemsNavigatorBase {
     });
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
-  private setEventsForItem(creator: CreatorBase, items: any[], item: any) {
+  private setEventsForItem(creator: SurveyCreatorModel, items: any[], item: any) {
     const connector = StringEditorConnector.get(this.getItemLocString(items, item));
     connector.onEditComplete.clear();
     connector.onEditComplete.add(() => {
@@ -70,7 +70,7 @@ export abstract class StringItemsNavigatorBase {
 
     connector.onTextChanging.clear();
     connector.onTextChanging.add((sender, options) => {
-      let lines = options.value.split(/\r?\n/).filter(line => !!line);
+      let lines = options.value.split(/\r?\n/).map(line => (line || "").trim()).filter(line => !!line);
       if (lines.length <= 1) return;
       options.cancel = true;
       const itemIndex = items.indexOf(item);
@@ -121,7 +121,7 @@ class StringItemsNavigatorSelectBase extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.choices];
   }
-  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     const itemValue = creator.createNewItemValue(this.question);
     if (!!text) itemValue.value = text;
   }
@@ -137,13 +137,13 @@ class StringItemsNavigatorMultipleText extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.items];
   }
-  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
     this.question.addItem(text || getNextValue("text", items.map(i => i.name)) as string);
   }
   protected getItemsPropertyName(items: any) {
     return "items";
   }
-  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
+  protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MultipleTextItemModel(text))).concat(items.slice(startIndex + 1));
     this.question[this.getItemsPropertyName(items)] = newItems;
   }
@@ -155,9 +155,19 @@ class StringItemsNavigatorMatrix extends StringItemsNavigatorBase {
   protected getItemSets() {
     return [this.question.columns, this.question.rows];
   }
-  protected addNewItem(creator: CreatorBase, items: any, text: string = null) {
-    if (items == this.question.columns) this.question.addColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
-    if (items == this.question.rows) this.question.rows.push(text || new ItemValue(getNextValue("Row ", items.map(i => i.value)) as string));
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    let titleBase: string;
+    let propertyName: string;
+    if (items == this.question.columns) { titleBase = "Column "; propertyName = "columns"; }
+    if (items == this.question.rows) { titleBase = "Row "; propertyName = "rows"; }
+    const newItem = new ItemValue(getNextValue(titleBase, items.map(i => i.value)) as string);
+    items.push(text || newItem);
+    creator.onItemValueAddedCallback(
+      this.question,
+      propertyName,
+      newItem,
+      items
+    );
   }
   protected getItemsPropertyName(items: any) {
     if (items == this.question.columns) return "columns";
@@ -169,7 +179,15 @@ class StringItemsNavigatorMatrixDropdown extends StringItemsNavigatorMatrix {
     if (items == this.question.columns) return item.locTitle;
     return item.locText;
   }
-  protected addNewItems(creator: CreatorBase, items: any, startIndex: number, itemsToAdd: string[]) {
+  protected addNewItem(creator: SurveyCreatorModel, items: any, text: string = null) {
+    if (items == this.question.columns) {
+      var column = new MatrixDropdownColumn(text || getNextValue("Column ", items.map(i => i.value)) as string);
+      this.question.columns.push(column);
+      creator.onMatrixDropdownColumnAddedCallback(this.question, column, this.question.columns);
+    }
+    if (items == this.question.rows) super.addNewItem(creator, items, text);
+  }
+  protected addNewItems(creator: SurveyCreatorModel, items: any, startIndex: number, itemsToAdd: string[]) {
     if (items == this.question.columns) {
       let newItems = items.slice(0, startIndex).concat(itemsToAdd.map(text => new MatrixDropdownColumn(text))).concat(items.slice(startIndex + 1));
       this.question[this.getItemsPropertyName(items)] = newItems;
@@ -210,7 +228,7 @@ export class StringEditorViewModelBase extends Base {
   private blurredByEscape: boolean = false;
   private focusedProgram: boolean = false;
   private valueBeforeEdit: string;
-  private connector: StringEditorConnector
+  private connector: StringEditorConnector;
 
   public getEditorElement: () => HTMLElement;
   public characterCounter = new CharacterCounter();
@@ -220,7 +238,7 @@ export class StringEditorViewModelBase extends Base {
   @property({ defaultValue: true }) editAsText: boolean;
   compostionInProgress: boolean;
 
-  constructor(private locString: LocalizableString, private creator: CreatorBase) {
+  constructor(private locString: LocalizableString, private creator: SurveyCreatorModel) {
     super();
     this.locString = locString;
     this.checkMarkdownToTextConversion(this.locString.owner, this.locString.name);
@@ -323,7 +341,7 @@ export class StringEditorViewModelBase extends Base {
       const options = { value: event.target?.innerText, cancel: null };
       if (this.connector) this.connector.onTextChanging.fire(this, options);
       if (options.cancel) return;
-      sanitizeEditableContent(event.target);
+      sanitizeEditableContent(event.target, !this.locString.allowLineBreaks);
       if (this.maxLength >= 0 && event.target.innerText.length > this.maxLength) {
         event.target.innerText = event.target.innerText.substring(0, this.maxLength);
       }
@@ -353,7 +371,7 @@ export class StringEditorViewModelBase extends Base {
     let mdText = null;
     if (!this.editAsText) {
       var options = {
-        element: this.locString.owner,
+        element: <Base><any>this.locString.owner,
         text: <any>null,
         name: this.locString.name,
         html: event.target.innerHTML
@@ -361,7 +379,14 @@ export class StringEditorViewModelBase extends Base {
       this.creator.onHtmlToMarkdown.fire(this.creator, options);
       mdText = options.text;
     }
-    let clearedText = mdText || clearNewLines(this.locString.hasHtml ? event.target.innerHTML : event.target.innerText);
+    let clearedText;
+    if (mdText) {
+      clearedText = mdText;
+    } else {
+      let txt = this.locString.hasHtml ? event.target.innerHTML : event.target.innerText;
+      if (!this.locString.allowLineBreaks) txt = clearNewLines(txt);
+      clearedText = txt;
+    }
     let owner = this.locString.owner as any;
 
     var changingOptions = {
@@ -439,11 +464,11 @@ export class StringEditorViewModelBase extends Base {
       // get text representation of clipboard
       var text = event.clipboardData.getData("text/plain");
       // insert text manually
-      document.execCommand("insertHTML", false, text);
+      document.execCommand("insertText", false, text);
     }
   }
   public onKeyDown(event: KeyboardEvent): boolean {
-    if (event.keyCode === 13 && (this.editAsText || !event.shiftKey)) {
+    if (event.keyCode === 13 && !event.shiftKey) {
       this.blurEditor();
       if (!event.ctrlKey && !event.metaKey) {
         this.connector.onEditComplete.fire(this, {});
@@ -531,6 +556,7 @@ export class StringEditorViewModelBase extends Base {
       .append("svc-string-editor--hidden", text == "" && this.placeholder == "")
       .append("svc-string-editor--readonly", !this.contentEditable)
       .append("svc-string-editor--error", !!this.errorText)
+      .append("svc-string-editor--multiline", !!this.locString.allowLineBreaks)
       .toString();
   }
 }

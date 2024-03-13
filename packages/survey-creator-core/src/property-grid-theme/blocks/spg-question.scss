@@ -56,9 +56,9 @@
 }
 
 .spg-question__description {
-  line-height: calcSize(3);
-  font-size: calcSize(2);
-  color: $foreground;
+  line-height: calcSize(2);
+  font-size: calcSize(1.5);
+  color: $foreground-dim-light;
   padding-bottom: calcSize(2);
   white-space: normal;
 }
@@ -167,4 +167,15 @@
 
 .spg-question__erbox--location--bottom {
   margin-top: calcSize(1);
+}
+
+.spg-restfull,
+.spg-masksettings {
+  .spg-panel__content {
+    gap: calcSize(2);
+
+    .spg-row {
+      margin-top: 0;
+    }
+  }
 }

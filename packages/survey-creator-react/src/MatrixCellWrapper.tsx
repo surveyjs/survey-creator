@@ -20,8 +20,12 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
   any
 > {
   model: MatrixCellWrapperViewModel;
-  protected createModel(): void {
-    const data = this.props.componentData;
+  protected createModel(props: any): void {
+    const data = props.componentData;
+    let prevIsSelected = false;
+    if (!!this.model) {
+      prevIsSelected = this.model.isSelected;
+    }
     this.model = new MatrixCellWrapperViewModel(
       data.creator,
       data.element,
@@ -29,6 +33,7 @@ export class MatrixCellAdornerComponent extends CreatorModelElement<
       data.row,
       data.column || data.element.cell?.column,
     );
+    this.model.isSelected = prevIsSelected;
   }
   protected getUpdatedModelProps(): string[] {
     return ["componentData"];

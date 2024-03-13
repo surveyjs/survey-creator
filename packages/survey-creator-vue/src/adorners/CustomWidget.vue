@@ -54,7 +54,7 @@
 <script lang="ts" setup>
 import { useCreatorModel } from "@/creator-model";
 import type { Question } from "survey-core";
-import { CreatorBase, QuestionAdornerViewModel } from "survey-creator-core";
+import { SurveyCreatorModel, QuestionAdornerViewModel } from "survey-creator-core";
 
 const props = defineProps<{
   componentName: string;
@@ -64,7 +64,7 @@ const props = defineProps<{
 const model = useCreatorModel(
   () =>
     new QuestionAdornerViewModel(
-      props.componentData.data as CreatorBase,
+      props.componentData.data as SurveyCreatorModel,
       props.componentData.element as Question,
       null as any
     ),

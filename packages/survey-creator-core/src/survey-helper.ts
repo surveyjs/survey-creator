@@ -273,11 +273,16 @@ export class SurveyHelper {
     questionJson.storeOthersAsComment = false;
     delete questionJson.valuePropertyName;
     SurveyHelper.deleteConditionProperties(questionJson);
-    if (!!questionJson.choices) {
-      for (var i = 0; i < questionJson.choices.length; i++) {
-        SurveyHelper.deleteConditionProperties(questionJson.choices[i]);
-      }
-    }
+    SurveyHelper.deleteConditionPropertiesFromArray(questionJson.choices);
+    SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rows);
+    SurveyHelper.deleteConditionPropertiesFromArray(questionJson.columns);
+    SurveyHelper.deleteConditionPropertiesFromArray(questionJson.rates);
+  }
+  private static deleteConditionPropertiesFromArray(jsonArray: Array<any>): void {
+    if(!Array.isArray(jsonArray)) return;
+    jsonArray.forEach(item => {
+      SurveyHelper.deleteConditionProperties(item);
+    });
   }
   public static convertMatrixRowsToText(rows: any): string {
     var result = rows

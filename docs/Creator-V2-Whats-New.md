@@ -61,9 +61,13 @@ New Survey Creator for React is a composition of true React components. The nati
 
 Most of the UI elements in the new Survey Creator (Property Grid, Translation and Logic Tabs, modal editors) are stylized surveys from our own SurveyJS Form Library for React. This feature allows you to integrate any 3rd-party React component into the SurveyJS Form Library and then reuse the same configuration to integrate the component into the Survey Creator. View examples that show how to integrate the [React Select](https://react-select.com/home) component [into a standalone survey](https://surveyjs.io/Examples/Library?id=custom-widget-react-select) or [into the Survey Creator](https://surveyjs.io/Examples/Survey-Creator?id=react-select).
 
-## Native Survey Creator for Angular
+## Native Survey Creator for Angular and Vue 3
 
-In November 2022, we also introduce a native implementation of Survey Creator for Angular. Angular-specific rendering code is distributed as the [`survey-creator-angular`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-angular) npm package. It should be used along with the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package that contains platform-independent code. Refer to the following tutorial to get started with native Survey Creator for Angular: [Add a Survey to an Angular Application](https://surveyjs.io/form-library/documentation/get-started-angular).
+In November 2022, we also introduced a native implementation of Survey Creator for Angular. A year later, in November 2023, Survey Creator for Vue 3 followed. Framework-specific rendering code is distributed as the [`survey-creator-angular`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-angular) and [`survey-creator-vue`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-vue) npm packages. They should be used along with the [`survey-creator-core`](https://github.com/surveyjs/survey-creator/tree/master/packages/survey-creator-core) package, which contains platform-independent code. Refer to the following tutorials to get started with the native Survey Creator implementations:
+
+[Add Survey Creator to an Angular Application](https://surveyjs.io/survey-creator/documentation/get-started-angular (linkStyle))
+
+[Add Survey Creator to a Vue 3 Application](https://surveyjs.io/survey-creator/documentation/get-started-vue#add-survey-creator-to-a-vue-3-application (linkStyle))
 
 <a id="ui-changes"></a>
 
@@ -186,10 +190,6 @@ To improve performance on large multi-page surveys, we introduce support for Laz
 Previously, we used to render survey elements first, and only then added [adorners](https://surveyjs.io/Documentation/Survey-Creator?id=survey-customization#specify-adorner-availability). This wasn't a very effective solution because we modified the DOM twice. The new version only modifies the DOM once and adds adorners right away. This was made possible because the new Survey Creator allows you to register new element rendering functions that override the default functions. For example, to implement in-place text editing in the Designer, we render an element that supports editable content instead of the default string element.
 
 <a id="platforms-and-plans"></a>
-
-## Native Survey Creator for Vue (Planned)
-
-The new Survey Creator includes native support for React, Angular, and Knockout. We also plan to develop a native version for Vue in the future. For now, you can integrate the Knockout version into your Vue application as described in the following article: [Get Started with Survey Creator in Vue](https://surveyjs.io/Documentation/Survey-Creator?id=get-started-vue).
 
 ## Migration to the New Survey Creator
 

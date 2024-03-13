@@ -1,7 +1,7 @@
 import React from "react";
 import { LocalizableString, Serializer, JsonObjectProperty, Base } from "survey-core";
 import { CharacterCounterComponent, ReactElementFactory, SurveyElementBase, SvgIcon } from "survey-react-ui";
-import { CreatorBase, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
+import { SurveyCreatorModel, StringEditorViewModelBase, editableStringRendererName } from "survey-creator-core";
 import { CreatorModelElement } from "./ModelElement";
 
 export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
@@ -12,11 +12,11 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
     this.state = { changed: 0 };
     this.svStringEditorRef = React.createRef();
   }
-  protected createModel(): void {
+  protected createModel(props: any): void {
     if (this.baseModel) {
       this.baseModel.dispose();
     }
-    this.baseModel = new StringEditorViewModelBase(this.locString, this.creator);
+    this.baseModel = new StringEditorViewModelBase(props.locStr.locStr, props.locStr.creator);
   }
   protected getUpdatedModelProps(): string[] {
     return ["creator", "locString"];
@@ -24,7 +24,7 @@ export class SurveyLocStringEditor extends CreatorModelElement<any, any> {
   private get locString(): LocalizableString {
     return this.props.locStr.locStr;
   }
-  private get creator(): CreatorBase {
+  private get creator(): SurveyCreatorModel {
     return this.props.locStr.creator;
   }
   private get style(): any {

@@ -1,23 +1,23 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { AngularComponentFactory, BaseAngular, SurveyContentComponent } from "survey-angular-ui";
-import { CreatorBase } from "survey-creator-core";
+import { SurveyCreatorModel } from "survey-creator-core";
 
 @Component({
   selector: "survey-creator",
   templateUrl: "./creator.component.html"
 })
-export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterViewInit {
-  @Input() model!: CreatorBase;
+export class CreatorComponent extends BaseAngular<SurveyCreatorModel> implements AfterViewInit {
+  @Input() model!: SurveyCreatorModel;
   @ViewChild("container", { read: ElementRef }) container!: ElementRef<HTMLDivElement>
 
   constructor(changeDetectorRef: ChangeDetectorRef) {
     super(changeDetectorRef);
     changeDetectorRef.detach();
   }
-  protected getModel(): CreatorBase {
+  protected getModel(): SurveyCreatorModel {
     return this.model;
   }
-  public get creator(): CreatorBase {
+  public get creator(): SurveyCreatorModel {
     return this.model;
   }
   protected override getShouldReattachChangeDetector(): boolean {
@@ -25,6 +25,12 @@ export class CreatorComponent extends BaseAngular<CreatorBase> implements AfterV
   }
   protected override onModelChanged(): void {
     this.changeDetectorRef.detectChanges();
+    if(this.previousModel) {
+      this.previousModel.unsubscribeRootElement();
+    }
+    if(this.creator && this.container.nativeElement) {
+      this.creator.setRootElement(this.container.nativeElement);
+    }
   }
   public ngAfterViewInit(): void {
     this.creator.setRootElement(this.container.nativeElement);

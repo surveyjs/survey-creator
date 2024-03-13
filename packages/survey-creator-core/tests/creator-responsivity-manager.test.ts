@@ -1,5 +1,5 @@
 import { QuestionAdornerViewModel } from "../src/components/question";
-import { CreatorBase, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
+import { SurveyCreatorModel, toolboxLocationType as toolboxLocationType } from "../src/creator-base";
 import { CreatorResponsivityManager } from "../src/creator-responsivity-manager";
 import { CreatorTester } from "./creator-tester";
 
@@ -53,7 +53,7 @@ interface expectedValues {
   sidebarFlyoutMode: boolean;
   showPageNavigator: boolean;
 }
-function checkCreatorLayoutPropertiesByWidth(creator: CreatorBase, newOffsetWidth: number, options: expectedValues) {
+function checkCreatorLayoutPropertiesByWidth(creator: SurveyCreatorModel, newOffsetWidth: number, options: expectedValues) {
   const container: SimpleContainer = new SimpleContainer({});
   const responsivityManager = new CreatorResponsivityManager(<any>container, creator);
 
@@ -325,3 +325,38 @@ test("CreatorResponsivityManager: Question Settings visibility", (): any => {
   expect(qModel.getActionById("settings").visible).toBeFalsy();
 });
 
+test("CreatorResponsivityManager: toolbox visibility works correctly after recreate responsivity manager", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  let responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  container.offsetWidth = 60;
+  responsivityManager.process();
+  expect(creator.showToolbox).toBe(false);
+  responsivityManager.dispose();
+  responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+  container.offsetWidth = 1920;
+  responsivityManager.process();
+  expect(creator.showToolbox).toBe(true);
+});
+
+test("CreatorResponsivityManager: page navigator visibility works correctly after recreate responsivity manager", (): any => {
+  const container: SimpleContainer = new SimpleContainer({});
+  const creator = new CreatorTester();
+  let responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+
+  creator.JSON = {
+    elements: [{ type: "text", name: "question1" }]
+  };
+  container.offsetWidth = 60;
+  responsivityManager.process();
+  expect(creator.showPageNavigator).toBe(false);
+  responsivityManager.dispose();
+  responsivityManager = new CreatorResponsivityManager(<any>container, creator);
+  container.offsetWidth = 1920;
+  responsivityManager.process();
+  expect(creator.showPageNavigator).toBe(true);
+});

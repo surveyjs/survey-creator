@@ -501,6 +501,44 @@ test("Merging a locale with default", () => {
   expect(translation.canMergeLocaleWithDefault).toBeTruthy();
   surveyLocalization.defaultLocale = "en";
 });
+test("Merging a locale with default - no reset", () => {
+  surveyLocalization.defaultLocale = "de";
+  const survey: SurveyModel = new SurveyModel({
+    locale: "de",
+    elements: [
+      {
+        type: "text",
+        name: "question1",
+        title: {
+          de: "title de",
+          fr: "title fr"
+        }
+      },
+      {
+        type: "text",
+        name: "question2",
+        title: {
+          default: "title default",
+          de: "title de",
+          fr: "title fr"
+        }
+      },
+      {
+        type: "text",
+        name: "question3",
+        title: {
+          default: "title default",
+          fr: "title fr"
+        }
+      }
+    ]
+  });
+  const translation: Translation = new Translation(survey);
+  translation.mergeLocaleWithDefault();
+  expect(translation.locales).toHaveLength(2);
+  expect(translation.canMergeLocaleWithDefault).toBeFalsy();
+  surveyLocalization.defaultLocale = "en";
+});
 test("Custom localizable property in question", () => {
   Serializer.addProperty("question", {
     name: "customProp",

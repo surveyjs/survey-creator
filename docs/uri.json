@@ -1,5 +1,7 @@
 {
-  "folders": [],
+  "folders": [
+    "end-user-guide"
+  ],
   "rename": {
     "create-specialized-question-types": "customize-question-types",
     "create-composite-question-types": "customize-question-types",
@@ -16,10 +18,10 @@
     "toolbox": "toolbox-customization",
     "survey-customization": "customize-survey-creation-process",
     "property-grid": "property-grid-customization",
-    "troubleshooting": "overview"
+    "troubleshooting": "overview",
+    "end-user-guide": "end-user-guide-user-interface"
   },
   "classRename": {
-    "surveyeditor": "survey-creator",
-    "surveycreator": "survey-creator"
+    "surveycreatormodel": "survey-creator"
   }
 }

@@ -26,6 +26,7 @@
 
 .spg-container {
   width: 100%;
+  @include disableTransitionAnimations;
 }
 
 .spg-container.spg-container_search {
@@ -100,4 +101,34 @@
 
 .spg-body--empty {
   margin: calcSize(3);
+}
+
+.spg-title-toolobar--single-help-action {
+  justify-content: flex-start;
+  padding-left: calcSize(0.5);
+
+  // flex-grow: 0;
+  // margin-left: 0;
+  // padding-left: 0;
+
+  .spg-help-action {
+    flex-grow: 1;
+    .spg-action-button--icon {
+      opacity: 0.5;
+      padding: calcSize(0.5);
+    }
+
+    .spg-action-button--icon:focus,
+    .spg-action-button--icon:hover {
+      opacity: 1;
+    }
+
+    .spg-action-button:active {
+      opacity: 0.5;
+    }
+
+    svg {
+      fill: $foreground-dim-light;
+    }
+  }
 }

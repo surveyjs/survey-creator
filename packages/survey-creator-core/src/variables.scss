@@ -141,3 +141,12 @@ $tab-min-height: var(--tab-min-height, auto);
   text-align: center;
   overflow: hidden;
 }
+
+@mixin disableTransitionAnimations {
+  * {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+  }
+}
