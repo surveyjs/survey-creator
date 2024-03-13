@@ -331,7 +331,7 @@ export class ThemeEditorModel extends Base {
         component: "svc-complete-page",
         data: this
       });
-      if(!!json && !!json.locale) {
+      if (!!json && !!json.locale) {
         survey.locale = json.locale;
       }
       survey.applyTheme(this.currentTheme);
@@ -890,7 +890,7 @@ export class ThemeEditorModel extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-    if(this.advancedModeSwitcher) {
+    if (this.advancedModeSwitcher) {
       this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
     }
   }
@@ -920,7 +920,7 @@ export class ThemeEditorModel extends Base {
     this.updateVisibilityOfPropertyGridGroups();
 
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
-    if(!headerViewContainerQuestion) return;
+    if (!headerViewContainerQuestion) return;
 
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
@@ -1004,7 +1004,7 @@ export class ThemeEditorModel extends Base {
     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
 
     const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-    if(!!primaryBackcolor) {
+    if (!!primaryBackcolor) {
       this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", primaryBackcolor.value);
     }
 
@@ -1857,9 +1857,9 @@ Serializer.addClass(
     {
       type: "dropdown",
       name: "themeName",
-      title: getLocString("theme.themeName"),
+      // title: getLocString("theme.themeName"),
       choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-      default: ThemeBuilder.DefaultTheme.themeName || "default",
+      default: ThemeEditorModel.DefaultTheme.themeName || "default",
       category: "general",
     }, {
       type: "buttongroup",
@@ -1873,7 +1873,7 @@ Serializer.addClass(
     }, {
       type: "buttongroup",
       name: "themeMode",
-      title: getLocString("theme.themeMode"),
+      // title: getLocString("theme.themeMode"),
       choices: [
         { value: "panels", text: getLocString("theme.themeModePanels") },
         { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
@@ -1882,7 +1882,7 @@ Serializer.addClass(
     }, {
       type: "colorsettings",
       name: "--sjs-general-backcolor-dim",
-      title: getLocString("theme.backgroundDimColor"),
+      // title: getLocString("theme.backgroundDimColor"),
       category: "background",
     }, {
       name: "backgroundImage:file",
@@ -1895,7 +1895,7 @@ Serializer.addClass(
         { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
         { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
       ],
-      defaultValue: "cover",
+      default: "cover",
       category: "background",
     }, {
       name: "backgroundImageAttachment",
@@ -1904,18 +1904,18 @@ Serializer.addClass(
         { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
         { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
       ],
-      defaultValue: "scroll",
+      default: "scroll",
       category: "background",
     }, {
       type: "spinedit",
       name: "backgroundImageOpacity",
-      title: getLocString("theme.backgroundOpacity"),
+      // title: getLocString("theme.backgroundOpacity"),
       //enableIf: "{backgroundImage} notempty",
-      unit: "%",
-      defaultValue: 100,
-      min: 0,
-      max: 100,
-      step: 5,
+      // unit: "%",
+      default: 100,
+      // min: 0,
+      // max: 100,
+      // step: 5,
       category: "background",
     },
   ]
