@@ -5,8 +5,8 @@ import { QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
-  expect(survey.pages).toHaveLength(7);
-  expect(survey.visiblePages).toHaveLength(3);
+  expect(survey.pages).toHaveLength(8);
+  expect(survey.visiblePages).toHaveLength(4);
   expect(survey.pages[0].name).toEqual("page_tabs");
   expect(survey.pages[1].name).toEqual("page_toolbox");
   expect(survey.pages[2].name).toEqual("page_toolbox_definition");
@@ -14,6 +14,7 @@ test("Preset edit model, create pages", () => {
   expect(survey.pages[4].name).toEqual("page_toolbox_categories");
   expect(survey.pages[5].name).toEqual("page_propertyGrid");
   expect(survey.pages[6].name).toEqual("page_propertyGrid_definition");
+  expect(survey.pages[7].name).toEqual("page_result");
 });
 test("Preset edit model, page component", () => {
   const preset = new CreatorPreset({ tabs: { items: [] } });
@@ -27,7 +28,10 @@ test("Preset edit model, page component", () => {
   const activeTabQuestion = survey.getQuestionByName("tabs_activeTab");
   expect(itemsQuestion.choices).toHaveLength(6);
   expect(itemsQuestion.choices[0].value).toEqual("designer");
+  expect(itemsQuestion.choices[4].value).toEqual("editor");
   expect(itemsQuestion.choices[5].value).toEqual("translation");
+  expect(itemsQuestion.choices[0].title).toEqual("Designer");
+  expect(itemsQuestion.choices[4].title).toEqual("JSON Editor");
   expect(activeTabQuestion.visibleChoices).toHaveLength(3);
   expect(activeTabQuestion.value).toEqual("designer");
   itemsQuestion.value = ["designer", "translation"];
@@ -288,10 +292,10 @@ test("Preset edit model, property grid, setup", () => {
   expect(checkSelectorChoice("survey")).toBeTruthy();
   expect(checkSelectorChoice("page")).toBeTruthy();
   expect(checkSelectorChoice("panel")).toBeTruthy();
-  expect(checkSelectorChoice("panelbase")).toBeTruthy();
-  expect(checkSelectorChoice("question")).toBeTruthy();
-  expect(checkSelectorChoice("selectbase")).toBeTruthy();
-  expect(checkSelectorChoice("matrixdropdownbase")).toBeTruthy();
+  expect(checkSelectorChoice("panelbase")).toBeFalsy();
+  expect(checkSelectorChoice("question")).toBeFalsy();
+  expect(checkSelectorChoice("selectbase")).toBeFalsy();
+  expect(checkSelectorChoice("matrixdropdownbase")).toBeFalsy();
   expect(checkSelectorChoice("matrix")).toBeTruthy();
   expect(checkSelectorChoice("base")).toBeFalsy();
   expect(checkSelectorChoice("empty")).toBeFalsy();

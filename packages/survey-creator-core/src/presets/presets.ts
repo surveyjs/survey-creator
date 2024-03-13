@@ -69,6 +69,7 @@ export class CreatorPreset extends CreatorPresetBase {
   public applyFromSurveyModel(model: SurveyModel, creator?: SurveyCreatorModel): boolean {
     if(!this.validatEditableModel(model)) return false;
     this.setJson(this.getJsonFromSurveyModel(model));
+    model.setValue("json_result", JSON.stringify(this.getJson(), null, 2));
     if (creator) {
       this.apply(creator);
     }
@@ -109,6 +110,13 @@ export class CreatorPreset extends CreatorPresetBase {
       if (Array.isArray(pages)) {
         pages.forEach(page => modelJson.pages.push(page));
       }
+    });
+    modelJson.pages.push({
+      name: "page_result",
+      title: "Preset JSON result",
+      elements: [
+        { type: "comment", rows: 80, name: "json_result", titleLocation: "hidden" }
+      ]
     });
     return modelJson;
   }

@@ -16,25 +16,43 @@ export class CreatorPresetEditableToolboxDefinition extends CreatorPresetEditabl
   public createMainPageCore(): any {
     const parent = <CreatorPresetEditableToolbox>this.parent;
     return {
+      title: "Toolbox items definition",
       visibleIf: this.getBoolVisibleIf(parent.nameDefinitionShow),
       elements: [
         {
           type: "matrixdynamic",
           name: this.nameMatrix,
+          title: "Define items definition",
           rowCount: 0,
+          addRowText: "Add New Item Defintion",
           columns: [
-            { cellType: "text", name: "name", isUnique: true, isRequired: true },
-            { cellType: "text", name: "iconName" },
-            { cellType: "text", name: "title" }
+            { cellType: "text", name: "name", title: "Name", isUnique: true, isRequired: true },
+            { cellType: "text", name: "iconName", title: "Icon Name" },
+            { cellType: "text", name: "title", title: "Title" }
           ],
           detailPanelMode: "underRow",
           detailElements: [
-            { type: "text", name: "tooltip" },
-            { type: "comment", name: "json", rows: 15 }
+            { type: "text", name: "tooltip", title: "Tooltip" },
+            { type: "comment", name: "json", title: "JSON that will be used on clicking item", rows: 15 }
           ]
         }
       ]
     };
+  }
+  protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
+    const matrix = this.getMatrix(model);
+    const nameColumn = matrix.getColumnByName("name");
+    const iconNameColumn = matrix.getColumnByName("iconName");
+    const names = [];
+    const iconNames = [];
+    creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
+      names.push(item.id);
+      iconNames.push(item.iconName || ("icon-" + item.id));
+    });
+    names.sort();
+    iconNames.sort();
+    nameColumn["dataList"] = names;
+    iconNameColumn["dataList"] = iconNames;
   }
   protected validateCore(model: SurveyModel): boolean {
     const matrix = this.getMatrix(model);
@@ -165,6 +183,7 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
   private defaultItems: ItemValue[];
   public createMainPageCore(): any {
     return {
+      title: "Setup toolbox categories",
       visibleIf: this.getPageVisibleIf(),
       elements: [
         {
@@ -172,15 +191,17 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
           name: this.nameMatrix,
           minRowCount: 1,
           allowRowsDragAndDrop: true,
+          showHeader: false,
           columns: [
-            { cellType: "text", name: "name", isUnique: true, isRequired: true },
-            { cellType: "expression", name: "count", expression: "{row.items.length}" }
+            { cellType: "text", name: "name", title: "Category Name", isUnique: true, isRequired: true },
+            { cellType: "expression", name: "count", title: "Number of items in category", expression: "{row.items.length}" }
           ],
           detailPanelMode: "underRowSingle",
           detailElements: [
             {
               type: "ranking",
               name: "items",
+              titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
               selectToRankAreasLayout: "horizontal"
@@ -279,11 +300,13 @@ export class CreatorPresetEditableToolboxItems extends CreatorPresetEditableTool
   public createMainPageCore(): any {
     const parent = <CreatorPresetEditableToolbox>this.parent;
     return {
+      title: "Setup toolbox items",
       visibleIf: this.getPageVisibleIf(),
       elements: [
         {
           type: "ranking",
           name: this.name,
+          titleLocation: "hidden",
           selectToRankEnabled: true,
           minSelectedChoices: 1,
           selectToRankAreasLayout: "horizontal",
@@ -327,20 +350,24 @@ export class CreatorPresetToolboxItems extends CreatorPresetBase {
 export class CreatorPresetEditableToolbox extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
+      title: "Setup toolbox",
       elements: [
         {
           type: "boolean",
           name: this.nameDefinitionShow,
+          title: "Update existing toolbox items and create new items"
         },
         {
+          type: "boolean",
           name: this.nameCategoriesShow,
-          type: "boolean"
+          title: "Setup toolbox items and categories"
         },
         {
-          name: this.nameCategoriesMode,
           type: "buttongroup",
+          name: this.nameCategoriesMode,
+          title: "Do you want to have categories or plain items",
           defaultValue: "categories",
-          choices: ["categories", "items"],
+          choices: [{ value: "categories", text: "Categories" }, { value: "items", text: "No categories" }],
           visibleIf: this.getBoolVisibleIf(this.nameCategoriesShow)
         }
       ]

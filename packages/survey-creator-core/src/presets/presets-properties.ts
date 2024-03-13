@@ -4,6 +4,7 @@ import { ICreatorPreset, CreatorPresetBase, CreatorPresetEditableBase } from "./
 import { SurveyCreatorModel } from "../creator-base";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition } from "../question-editor/definition";
 import { SurveyQuestionProperties } from "../question-editor/properties";
+import { editorLocalization } from "../editorLocalization";
 
 export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   constructor(className: string, propertyGridDefinition: ISurveyPropertyGridDefinition) {
@@ -24,26 +25,32 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
     return {
+      title: "Property Grid categories",
       visibleIf: this.getBoolVisibleIf(parent.nameDefinitionShow),
       elements: [
         {
           type: "dropdown",
           name: this.nameSelector,
+          title: "Select element to setup a property grid for it",
         },
         {
           type: "matrixdynamic",
           name: this.nameMatrix,
           visibleIf: this.getNotEmptyVisibleIf(this.nameSelector),
           allowRowsDragAndDrop: true,
+          showHeader: false,
+          titleLocation: "hidden",
+          addRowText: "Add New Category",
           columns: [
-            { cellType: "text", name: "name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" },
-            { cellType: "expression", name: "count", expression: "{row.items.length}" }
+            { cellType: "text", name: "name", title: "Category name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" },
+            { cellType: "expression", name: "count", title: "Number of properties", expression: "{row.items.length}" }
           ],
           detailPanelMode: "underRowSingle",
           detailElements: [
             {
               type: "ranking",
               name: "items",
+              titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
               selectToRankAreasLayout: "horizontal"
@@ -129,13 +136,13 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     }
     allProperties.forEach(name => {
       if(!usedItems[name]) {
-        res.push(new ItemValue(name)); //TODO title
+        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(this.currentClassName, name)));
       }
     });
     return res;
   }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
-    const classes = ["survey", "panelbase", "page", "panel", "question", "selectbase", "matrixdropdownbase"];
+    const classes = ["survey", "page", "panel"];
     const toolboxItems = {};
     creator.toolbox.getDefaultItems([], false, true, true).forEach(item => {
       toolboxItems[item.id] = true;
@@ -147,8 +154,13 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
       }
     });
     const res = [];
-    classes.forEach(str => res.push(new ItemValue(str)));
+    classes.forEach(str => res.push(new ItemValue(str, this.getSelectorItemTitle(str))));
     return res;
+  }
+  private getSelectorItemTitle(name: string): string {
+    if(name === "survey") return editorLocalization.getString("ed.surveyTypeName");
+    if(name === "page") return editorLocalization.getString("ed.pageTypeName");
+    return editorLocalization.getString("qt." + name);
   }
   private updateCurrentJson(model: SurveyModel): void {
     if(!this.isMatrixValueChanged) return;
@@ -189,10 +201,12 @@ export class CreatorPresetPropertyGridDefinition extends CreatorPresetBase {
 export class CreatorEditablePresetPropertyGrid extends CreatorPresetEditableBase {
   public createMainPageCore(): any {
     return {
+      title: "Setup Property Grid",
       elements: [
         {
           type: "boolean",
           name: this.nameDefinitionShow,
+          title: "Do you want to configure Property Grid categories and properties?"
         }
       ]
     };
