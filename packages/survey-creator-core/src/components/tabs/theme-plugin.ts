@@ -1,4 +1,4 @@
-import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel } from "survey-core";
+import { Action, ComputedUpdater, surveyCss, defaultV2ThemeName, ITheme, EventBase, Serializer, settings as surveySettings, Question, IElement, SurveyModel, PanelModelBase } from "survey-core";
 import { settings } from "../../creator-settings";
 import { SurveyCreatorModel } from "../../creator-base";
 import { ICreatorPlugin } from "../../creator-settings";
@@ -9,6 +9,8 @@ import { PredefinedThemes, Themes } from "./themes";
 import { notShortCircuitAnd, saveToFileHandler } from "../../utils/utils";
 import { PropertyGridModel } from "../../property-grid";
 import { PropertyGridViewModel } from "../../property-grid/property-grid-view-model";
+import { ThemeModel } from "./theme-model";
+import { Switcher } from "../switcher/switcher";
 
 export interface IPropertyGridSurveyCreatedEvent {
   survey: SurveyModel;
@@ -52,6 +54,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   private exportAction: Action;
   private undoAction: Action;
   private redoAction: Action;
+  private advancedModeSwitcher: Action;
   private inputFileElement: HTMLInputElement;
   private simulatorCssClasses: any = surveyCss[defaultV2ThemeName];
   private sidebarTab: SidebarTabModel;
@@ -60,9 +63,34 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public propertyGrid: PropertyGridModel;
   private propertyGridTab: SidebarTabModel;
   public model: ThemeEditorModel;
+  themeModel: ThemeModel;
 
   private createVisibleUpdater() {
     return <any>new ComputedUpdater<boolean>(() => { return this.creator.activeTab === "theme"; });
+  }
+
+  private createAppearanceAdvancedModeAction(panel: PanelModelBase): void {
+    const advancedMode = new Switcher({
+      id: "advancedMode",
+      component: "svc-switcher",
+      // ariaChecked: <any>new ComputedUpdater<boolean>(() => this.groupAppearanceAdvancedMode),
+      ariaRole: "checkbox",
+      css: "sv-theme-group_title-action",
+      title: getLocString("theme.advancedMode"),
+      visible: !this.creator.isMobileView,
+      action: () => {
+        // this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
+        // this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
+      }
+    });
+    // this.registerFunctionOnPropertyValueChanged("groupAppearanceAdvancedMode",
+    //   () => {
+    //     advancedMode.checked = !advancedMode.checked;
+    //   },
+    //   "groupAppearanceAdvancedMode"
+    // );
+    advancedMode.checked = false;
+    this.advancedModeSwitcher = advancedMode;
   }
 
   constructor(private creator: SurveyCreatorModel) {
@@ -75,6 +103,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.propertyGrid = new PropertyGridModel(undefined, creator);
     const propertyGridViewModel = new PropertyGridViewModel(this.propertyGrid, creator);
     this.propertyGridTab = this.creator.sidebar.addTab("propertyGrid2", "svc-property-grid", propertyGridViewModel);
+    this.themeModel = new ThemeModel();
 
     creator.registerShortcut("undo_theme", {
       name: "undo",
@@ -104,7 +133,14 @@ export class ThemeTabPlugin implements ICreatorPlugin {
   public activate(): void {
     this.model = new ThemeEditorModel(this.creator, this.simulatorCssClasses);
     this.update();
-    this.propertyGrid.obj = this.model;
+    // this.propertyGrid.obj = this.model;
+    this.propertyGrid.obj = this.themeModel;
+    this.propertyGrid.survey.onGetPanelTitleActions.add((sender, opt) => {
+      if (opt.panel && opt.panel.name == "appearance") {
+        this.createAppearanceAdvancedModeAction(opt.panel);
+        opt.titleActions.push(this.advancedModeSwitcher);
+      }
+    });
 
     if (!!this.model.themeEditorSurvey) {
       const options = <IPropertyGridSurveyCreatedEvent>{

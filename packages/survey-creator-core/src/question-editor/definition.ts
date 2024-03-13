@@ -797,6 +797,27 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   "page@survey": {
     properties: ["name", "title"]
   },
+  "themebuilder": {
+    properties: [
+      { name: "generalPrimaryColor", tab: "appearancecolor" },
+      { name: "panelBackgroundTransparency", tab: "appearancecolor" },
+      { name: "questionBackgroundTransparency", tab: "appearancecolor" },
+
+      { name: "--sjs-font-family", tab: "appearancefont" },
+      { name: "commonFontSize", tab: "appearancefont" },
+
+      { name: "commonScale", tab: "appearanceother" },
+      { name: "cornerRadius", tab: "appearanceother" },
+    ],
+    tabs: [
+      { name: "header", index: 100 },
+      { name: "background", index: 200 },
+      { name: "appearance", index: 300 },
+      { name: "appearancecolor", parent: "appearance" },
+      { name: "appearancefont", parent: "appearance" },
+      { name: "appearanceother", parent: "appearance" }
+    ]
+  },
   choicesByUrl: {
     properties: [
       {

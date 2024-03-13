@@ -118,10 +118,6 @@ export class ThemeEditorModel extends Base {
 
   onSurveyCreatedCallback: (survey: SurveyModel) => any;
 
-  public getType(): string {
-    return "themebuilder";
-  }
-
   public get themeCssCustomizations() {
     const customizations: { [index: string]: string } = {};
     assign(customizations, this.themeCssVariablesChanges);
@@ -1850,73 +1846,3 @@ export class ThemeEditorModel extends Base {
     super.dispose();
   }
 }
-
-Serializer.addClass(
-  "themebuilder",
-  [
-    {
-      type: "dropdown",
-      name: "themeName",
-      // title: getLocString("theme.themeName"),
-      choices: PredefinedThemes.map(theme => ({ value: theme, text: getLocString("theme.names." + theme) })),
-      default: ThemeEditorModel.DefaultTheme.themeName || "default",
-      category: "general",
-    }, {
-      type: "buttongroup",
-      name: "themePalette",
-      choices: [
-        { value: "light", text: getLocString("theme.themePaletteLight") },
-        { value: "dark", text: getLocString("theme.themePaletteDark") }
-      ],
-      default: "light",
-      category: "general",
-    }, {
-      type: "buttongroup",
-      name: "themeMode",
-      // title: getLocString("theme.themeMode"),
-      choices: [
-        { value: "panels", text: getLocString("theme.themeModePanels") },
-        { value: "lightweight", text: getLocString("theme.themeModeLightweight") }],
-      default: "panels",
-      category: "general",
-    }, {
-      type: "colorsettings",
-      name: "--sjs-general-backcolor-dim",
-      // title: getLocString("theme.backgroundDimColor"),
-      category: "background",
-    }, {
-      name: "backgroundImage:file",
-      category: "background",
-    }, {
-      name: "backgroundImageFit",
-      //enableIf: "{backgroundImage} notempty",
-      choices: [
-        { value: "auto", text: getLocString("theme.backgroundImageFitAuto") },
-        { value: "contain", text: getLocString("theme.backgroundImageFitContain") },
-        { value: "cover", text: getLocString("theme.backgroundImageFitCover") }
-      ],
-      default: "cover",
-      category: "background",
-    }, {
-      name: "backgroundImageAttachment",
-      //enableIf: "{backgroundImage} notempty",
-      choices: [
-        { value: "fixed", text: getLocString("theme.backgroundImageAttachmentFixed") },
-        { value: "scroll", text: getLocString("theme.backgroundImageAttachmentScroll") }
-      ],
-      default: "scroll",
-      category: "background",
-    }, {
-      type: "spinedit",
-      name: "backgroundImageOpacity",
-      // title: getLocString("theme.backgroundOpacity"),
-      //enableIf: "{backgroundImage} notempty",
-      // unit: "%",
-      default: 100,
-      // min: 0,
-      // max: 100,
-      // step: 5,
-      category: "background",
-    },
-  ]
-);

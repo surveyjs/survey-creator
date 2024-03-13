@@ -793,6 +793,9 @@ export var enStrings = {
       slider: "Slider",
       expression: "Expression",
       questionSettings: "Question Settings",
+      header: "Header",
+      background: "Background",
+      appearance: "Appearance",
       others: "Others"
     },
     editProperty: "Edit property '{0}'",
