@@ -115,7 +115,7 @@ export class CreatorPreset extends CreatorPresetBase {
       name: "page_result",
       title: "Preset JSON result",
       elements: [
-        { type: "comment", rows: 80, name: "json_result", titleLocation: "hidden" }
+        { type: "comment", rows: 40, name: "json_result", titleLocation: "hidden", placeholder: "Please click on the 'Save' button" }
       ]
     });
     return modelJson;
