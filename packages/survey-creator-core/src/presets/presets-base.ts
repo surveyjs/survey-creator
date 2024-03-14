@@ -1,4 +1,4 @@
-import { Helpers, SurveyModel } from "survey-core";
+import { EventBase, Helpers, SurveyModel } from "survey-core";
 import { SurveyCreatorModel } from "../creator-base";
 
 export class CreatorPresetEditableBase {
@@ -114,6 +114,7 @@ export interface ICreatorPreset {
 }
 
 export abstract class CreatorPresetBase implements ICreatorPreset {
+  public onApplied: EventBase<CreatorPresetBase, any> = new EventBase<CreatorPresetBase, any>();
   public children: Array<ICreatorPreset> = [];
   protected json: any;
   public constructor() {
@@ -127,6 +128,7 @@ export abstract class CreatorPresetBase implements ICreatorPreset {
     if (!this.json) return;
     this.applyCore(creator);
     this.children.forEach(item => item.apply(creator));
+    this.onApplied.fire(this, {});
   }
   public abstract getPath(): string;
   public createEditable(): CreatorPresetEditableBase { return undefined; }

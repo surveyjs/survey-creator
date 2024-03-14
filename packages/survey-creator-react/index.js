@@ -4,7 +4,14 @@ Survey.ComponentCollection.Instance.add({ name: "d2", title: "DDD", questionJSON
 let confSurvey;
 function getConfSurvey() {
   if (!confSurvey) {
-    confSurvey = new SurveyCreatorCore.CreatorPreset().createEditModel(getCreator());
+    const preset = new SurveyCreatorCore.CreatorPreset();
+    confSurvey = preset.createEditModel(getCreator());
+    preset.onApplied.add((sender, options) => {
+      const creator = getCreator();
+      if (creator.getTabNames().indexOf("configurator") < 0) {
+        creator.addPluginTab("configurator", configuratorPlugin, "Configurator", "svc-tab-configurator", 0);
+      }
+    });
   }
   return confSurvey;
 }
