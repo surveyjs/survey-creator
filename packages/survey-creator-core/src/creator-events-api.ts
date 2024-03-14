@@ -276,7 +276,7 @@ export interface CollectionItemAddedEvent {
    */
   newItem: ItemValue;
   /**
-   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.). This array does not include `options.newItem`.
+   * An array of collection items to which the target item belongs ([`columns`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#columns) or [`rows`](https://surveyjs.io/form-library/documentation/api-reference/matrix-table-question-model#rows) in matrix questions, [`choices`](https://surveyjs.io/form-library/documentation/api-reference/questionselectbase#choices) in select-based questions, etc.).
    */
   itemValues: ItemValue[];
 }
@@ -291,7 +291,7 @@ export interface MatrixColumnAddedEvent {
    */
   newColumn: MatrixDropdownColumn;
   /**
-   * An array of matrix columns. This array does not include `options.newColumn`.
+   * An array of matrix columns.
    */
   columns: MatrixDropdownColumn[];
 }

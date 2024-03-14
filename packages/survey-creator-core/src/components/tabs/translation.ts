@@ -729,16 +729,19 @@ export class Translation extends Base implements ITranslationLocales {
     });
     res.onGetMatrixRowActions.add((sender, options) => {
       updateMatrixRemoveAction(options.question, options.actions, options.row);
-      if (this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row")) {
+      if (this.options.getHasMachineTranslation() && findAction(options.actions, "remove-row") &&
+        Array.isArray(options.question.value)) {
         const q = options.question;
         const rowIndex = q.visibleRows.indexOf(options.row);
-        const locale = q.value[rowIndex].name;
-        options.actions.splice(0, 0, new Action({
-          iconName: "icon-language",
-          locTooltipName: "ed.translateUsigAI",
-          location: "end",
-          action: () => this.showTranslationEditor(locale)
-        }));
+        if(rowIndex >= 0 && rowIndex < q.value.length) {
+          const locale = q.value[rowIndex].name;
+          options.actions.splice(0, 0, new Action({
+            iconName: "icon-language",
+            locTooltipName: "ed.translateUsigAI",
+            location: "end",
+            action: () => this.showTranslationEditor(locale)
+          }));
+        }
       }
       updateMatixActionsClasses(options.actions);
     });

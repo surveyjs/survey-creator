@@ -2,6 +2,7 @@ import { editorLocalization, defaultStrings } from "../src/editorLocalization";
 import { CreatorTester } from "./creator-tester";
 import { Action } from "survey-core";
 export * from "../src/localization/italian";
+export * from "../src/localization/french";
 
 test("Get nested property", () => {
   expect(editorLocalization.getString("qt.text")).toEqual("Single-Line Input");
@@ -241,5 +242,13 @@ test("it and it-custom translation", () => {
   editorLocalization.currentLocale = "custom";
   expect(editorLocalization.getString("qt.checkbox")).toEqual("Checkbox-it-custom");
   expect(editorLocalization.getString("qt.text")).toEqual("Testo semplice");
+  editorLocalization.defaultLocale = "en";
+});
+test("Get property name from pe. based on class name", () => {
+  editorLocalization.currentLocale = "";
+  editorLocalization.defaultLocale = "fr";
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titre du questionnaire");
+  editorLocalization.defaultLocale = "it";
+  expect(editorLocalization.getPropertyNameInEditor("survey", "title")).toEqual("Titolo");
   editorLocalization.defaultLocale = "en";
 });
