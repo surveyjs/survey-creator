@@ -54,9 +54,11 @@ test("Check file editor with onDownloadfile and onUploadFile callbacks", () => {
   question.loadFiles(<any>[{ name: "secondValue" }]);
   expect(question.value).toBe("secondValueBase64");
   expect(clearCallbackLog).toBe("->firstValue");
-  question.onInputBlur(<any>{ target: {
-    value: "url_from_input"
-  } });
+  question.onInputBlur(<any>{
+    target: {
+      value: "url_from_input"
+    }
+  });
   expect(question.value).toBe("url_from_input");
   expect(clearCallbackLog).toBe("->firstValue->secondValue");
   expect(question["loadedFilesValue"]).toBe(undefined);
@@ -64,13 +66,17 @@ test("Check file editor with onDownloadfile and onUploadFile callbacks", () => {
 
 test("Check file editor event callbacks", () => {
   const question: QuestionFileEditorModel = new QuestionFileEditorModel("q1");
-  question.onInputChange(<any>{ target: {
-    value: "first_base64"
-  } });
+  question.onInputChange(<any>{
+    target: {
+      value: "first_base64"
+    }
+  });
   expect(question.value).toBe("first_base64");
-  question.onInputBlur(<any>{ target: {
-    value: "second_url"
-  } });
+  question.onInputBlur(<any>{
+    target: {
+      value: "second_url"
+    }
+  });
   expect(question.value).toBe("second_url");
 });
 
@@ -228,8 +234,10 @@ test("Check onOpenFileChooser called", () => {
   questionEditor["rootElement"] = <any>{ querySelectorAll: () => [{}] };
   let uploadCount = 0;
   let log = "";
+  let lastContext: any;
   creator.onOpenFileChooser.add((s, o) => {
     log += "->openedFileChooser";
+    lastContext = o.context;
     o.callback([{}]);
   });
   creator.onUploadFile.add((s, o) => {
@@ -239,8 +247,11 @@ test("Check onOpenFileChooser called", () => {
   });
   expect(uploadCount).toBe(0);
   expect(log).toBe("");
-  questionEditor.chooseFiles(<any>{ preventDefault: () => {}, stopPropagation: () => {} });
+  questionEditor.chooseFiles(<any>{ preventDefault: () => { }, stopPropagation: () => { } });
   expect(uploadCount).toBe(1);
   expect(log).toBe("->openedFileChooser->uploadFile");
   expect(questionEditor.value).toBe("url");
+  expect(lastContext.target).toEqual(question);
+  expect(lastContext.type).toEqual("image");
+  expect(lastContext.property).toEqual("imageLink");
 });

@@ -1,6 +1,6 @@
 import {
   Base, IAction, ItemValue, JsonObjectProperty, LocalizableString, MatrixDropdownColumn, PageModel, PanelModel,
-  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel
+  PopupBaseViewModel, Question, SurveyModel, IElement, ISurveyElement, IPanel, IChooseFileContext
 } from "survey-core";
 import { SurveyLogicItem } from "./components/tabs/logic-items";
 import { ICreatorPlugin } from "./creator-settings";
@@ -647,6 +647,7 @@ export interface OpenFileChooserEvent {
    * @param files An array of selected files.
    */
   callback: (files: Array<File>) => void;
+  context: IChooseFileContext;
 }
 
 export interface UploadFileEvent {

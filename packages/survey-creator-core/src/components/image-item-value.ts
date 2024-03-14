@@ -40,7 +40,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
         }
         model.isUploading = false;
       });
-    }, { element: model.question, item: model.item });
+    }, { element: model.question, item: model.item, target: model.item, type: model.item.getType(), property: "imageLink" });
   }
 
   public uploadFiles(files) {
@@ -61,7 +61,7 @@ export class ImageItemValueWrapperViewModel extends ItemValueWrapperViewModel {
     model.creator.chooseFiles(fileInput, (files: File[]) => {
       this.isChoosingNewFile = true;
       model.uploadFiles(files);
-    }, { element: model.question, item: model.item });
+    }, { element: model.question, item: model.item, target: model.item, type: model.item.getType(), property: "imageLink" });
   }
   onDragOver = (event: any) => {
     this.isFileDragging = true;

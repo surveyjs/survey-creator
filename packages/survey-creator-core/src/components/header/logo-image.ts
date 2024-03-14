@@ -36,7 +36,7 @@ export class LogoImageViewModel extends Base {
       if (fileInput.files.length === 0) {
         model.creator.chooseFiles(fileInput, (files: File[]) => {
           model.uploadFile(model, fileInput, files);
-        });
+        }, { element: this.survey as any, target: this.survey, type: this.survey.getType(), property: "logo" });
       }
       else model.uploadFile(model, fileInput, [fileInput.files[0]]);
     }

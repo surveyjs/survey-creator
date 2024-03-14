@@ -987,8 +987,10 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
     elements: [{ type: "image", name: "q1" }]
   };
   let log = "";
+  let lastContext: any;
   creator.onOpenFileChooser.add((s, o) => {
     log += "->onOpenFileChooser";
+    lastContext = o.context;
     o.callback([]);
   });
   const question = <QuestionImageModel>creator.survey.getAllQuestions()[0];
@@ -997,6 +999,9 @@ test("QuestionImageAdornerViewModel onOpenFileChooser event is raised", () => {
   const fileQuestionAdornerSurvey = imageAdorner.filePresentationModel.getSurvey();
 
   expect(log).toBe("");
-  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { });
+  fileQuestionAdornerSurvey.chooseFiles(document.createElement("input"), () => { }, { element: question, target: question, type: question.getType(), property: "imageLink" });
   expect(log).toBe("->onOpenFileChooser");
+  expect(lastContext.target).toEqual(question);
+  expect(lastContext.type).toEqual("image");
+  expect(lastContext.property).toEqual("imageLink");
 });
