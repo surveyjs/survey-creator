@@ -301,6 +301,21 @@ export var propertyGridCss = {
   propertygrid_masksettings: {
     content: "spg-question__content spg-question__nopadding spg-masksettings"
   },
+  propertygrid_headersettings: {
+    content: "spg-question__content spg-question__nopadding spg-headersettings"
+  },
+  colorsettings: {
+    content: "spg-question__content spg-question__nopadding spg-colorsettings"
+  },
+  fontsettings: {
+    content: "spg-question__content spg-question__nopadding spg-fontsettings"
+  },
+  elementsettings: {
+    content: "spg-question__content spg-question__nopadding spg-elementsettings"
+  },
+  boxshadowsettings: {
+    content: "spg-question__content spg-question__nopadding spg-boxshadowsettings"
+  },
   saveData: {
     root: "",
     saving: "",

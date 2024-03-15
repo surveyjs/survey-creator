@@ -79,6 +79,9 @@ export class ThemeTabPlugin implements ICreatorPlugin {
       title: getLocString("theme.advancedMode"),
       visible: !this.creator.isMobileView,
       action: () => {
+        advancedMode.checked = !advancedMode.checked;
+        this.propertyGrid.survey.setVariable("advancedmode", advancedMode.checked);
+
         // this.groupAppearanceAdvancedMode = !this.groupAppearanceAdvancedMode;
         // this._setPGEditorPropertyValue(panel.getQuestionByName("advancedMode"), "value", this.groupAppearanceAdvancedMode);
       }
@@ -135,6 +138,7 @@ export class ThemeTabPlugin implements ICreatorPlugin {
     this.update();
     // this.propertyGrid.obj = this.model;
     this.propertyGrid.obj = this.themeModel;
+    this.propertyGrid.survey.setVariable("advancedmode", false);
     this.propertyGrid.survey.onGetPanelTitleActions.add((sender, opt) => {
       if (opt.panel && opt.panel.name == "appearance") {
         this.createAppearanceAdvancedModeAction(opt.panel);

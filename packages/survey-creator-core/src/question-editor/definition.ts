@@ -799,23 +799,75 @@ const defaultProperties: ISurveyPropertiesDefinition = {
   },
   "themebuilder": {
     properties: [
+      { name: "header", tab: "header" },
       { name: "generalPrimaryColor", tab: "appearancecolor" },
       { name: "panelBackgroundTransparency", tab: "appearancecolor" },
       { name: "questionBackgroundTransparency", tab: "appearancecolor" },
+      { name: "--sjs-primary-backcolor", tab: "appearancecolor" },
+      { name: "--sjs-primary-backcolor-dark", tab: "appearancecolor" },
+      { name: "--sjs-primary-backcolor-light", tab: "appearancecolor" },
+      { name: "--sjs-primary-forecolor", tab: "appearancecolor" },
+      { name: "--sjs-primary-forecolor-light", tab: "appearancecolor" },
 
       { name: "--sjs-font-family", tab: "appearancefont" },
       { name: "commonFontSize", tab: "appearancefont" },
 
       { name: "commonScale", tab: "appearanceother" },
       { name: "cornerRadius", tab: "appearanceother" },
+
+      { name: "pageTitle", tab: "appearancepage" },
+      { name: "pageDescription", tab: "appearancepage" },
+
+      { name: "questionPanel", tab: "appearancequestion" },
+      { name: "--sjs-shadow-small", tab: "appearancequestion" },
+      { name: "questionTitle", tab: "appearancequestion" },
+      { name: "questionDescription", tab: "appearancequestion" },
+
+      { name: "editorPanel", tab: "appearanceinput" },
+      { name: "--sjs-shadow-inner", tab: "appearanceinput" },
+      { name: "editorFont", tab: "appearanceinput" },
+
+      { name: "--sjs-border-default", tab: "appearancelines" },
+      { name: "--sjs-border-light", tab: "appearancelines" },
+
     ],
     tabs: [
       { name: "header", index: 100 },
       { name: "background", index: 200 },
       { name: "appearance", index: 300 },
-      { name: "appearancecolor", parent: "appearance" },
-      { name: "appearancefont", parent: "appearance" },
-      { name: "appearanceother", parent: "appearance" }
+      { name: "appearanceother", parent: "appearance", index: 300 },
+      { name: "appearancefont", parent: "appearance", index: 200 },
+      { name: "appearancecolor", parent: "appearance", index: 100 },
+      { name: "appearancepage", parent: "appearance", index: 400 },
+      { name: "appearancequestion", parent: "appearance", index: 500 },
+      { name: "appearanceinput", parent: "appearance", index: 600 },
+      { name: "appearancelines", parent: "appearance", index: 700 },
+    ]
+  },
+  "headersettings": {
+    properties: [
+      { name: "backgroundColorSwitch", tab: "background" },
+      { name: "backgroundColor", tab: "background" },
+      { name: "backgroundImage", tab: "background" },
+      { name: "backgroundImageFit", tab: "background" },
+      { name: "backgroundImageOpacity", tab: "background" },
+      { name: "overlapEnabled", tab: "background" },
+
+      { name: "headerTitle", tab: "header" },
+      { name: "headerDescription", tab: "header" },
+
+      { name: "logoPositionX", tab: "positions" },
+      { name: "logoPositionY", tab: "positions" },
+      { name: "titlePositionX", tab: "positions" },
+      { name: "titlePositionY", tab: "positions" },
+      { name: "descriptionPositionX", tab: "positions" },
+      { name: "descriptionPositionY", tab: "positions" },
+    ],
+    tabs: [
+      { name: "general" },
+      { name: "background", parent: "general" },
+      { name: "header", parent: "general" },
+      { name: "positions", parent: "general" },
     ]
   },
   choicesByUrl: {
