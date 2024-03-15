@@ -300,6 +300,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
       { name: "allowClear", tab: "choices" },
+      { name: "textWrapEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
     ]
   },
@@ -310,7 +311,8 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "searchEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
       { name: "hideSelectedItems", tab: "choices" },
-      { name: "allowClear", tab: "choices" }
+      { name: "allowClear", tab: "choices" },
+      { name: "textWrapEnabled", tab: "choices" },
     ]
   },
   imagepicker: {
