@@ -219,11 +219,9 @@ export class CreatorPresetEditableToolboxCategories extends CreatorPresetEditabl
     });
     return res;
   }
-  protected updateOnMatrixRowAddedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
-      options.row.onDetailPanelShowingChanged = () => {
-        this.onDetailPanelShowingChanged(options.row);
-      };
+      this.onDetailPanelShowingChanged(options.row);
     }
   }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {

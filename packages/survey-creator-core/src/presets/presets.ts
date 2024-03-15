@@ -58,11 +58,8 @@ export class CreatorPreset extends CreatorPresetBase {
     model.onValueChanged.add((sender, options) => {
       editablePresets.forEach(item => item.updateOnValueChanged(model, editingCreator, options.name));
     });
-    model.onMatrixRowAdded.add((sender, options) => {
-      editablePresets.forEach(item => item.updateOnMatrixRowAdded(model, editingCreator, options));
-    });
-    model.onMatrixRowRemoved.add((sender, options) => {
-      options.row.onDetailPanelShowingChanged = undefined;
+    model.onMatrixDetailPanelVisibleChanged.add((sender, options) => {
+      editablePresets.forEach(item => item.updateOnMatrixDetailPanelVisibleChanged(model, editingCreator, options));
     });
     return model;
   }

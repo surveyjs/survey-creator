@@ -42,8 +42,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
           titleLocation: "hidden",
           addRowText: "Add New Category",
           columns: [
-            { cellType: "text", name: "name", title: "Category name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" },
-            { cellType: "expression", name: "count", title: "Number of properties", expression: "{row.items.length}" }
+            { cellType: "text", name: "name", title: "Category name", isUnique: true, isRequired: true, enableIf: "{row.name} <> 'general'" }
           ],
           detailPanelMode: "underRowSingle",
           detailElements: [
@@ -67,11 +66,9 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {
     this.getSelector(model).choices = this.getSelectorChoices(creator);
   }
-  protected updateOnMatrixRowAddedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
-      options.row.onDetailPanelShowingChanged = () => {
-        this.onDetailPanelShowingChanged(options.row);
-      };
+      this.onDetailPanelShowingChanged(options.row);
     }
   }
   private isMatrixValueChanged: boolean;

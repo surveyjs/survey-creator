@@ -83,10 +83,10 @@ export class CreatorPresetEditableBase {
       item.updateOnValueChanged(model, creator, name);
     });
   }
-  public updateOnMatrixRowAdded(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
-    this.updateOnMatrixRowAddedCore(model, creator, options);
+  public updateOnMatrixDetailPanelVisibleChanged(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
+    this.updateOnMatrixDetailPanelVisibleChangedCore(model, creator, options);
     this.children.forEach(item => {
-      item.updateOnMatrixRowAdded(model, creator, options);
+      item.updateOnMatrixDetailPanelVisibleChanged(model, creator, options);
     });
   }
   public setupQuestionsValue(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
@@ -100,7 +100,7 @@ export class CreatorPresetEditableBase {
   protected getJsonValueCore(model: SurveyModel): any { return undefined; }
   protected setupOnCurrentPageCore(model: SurveyModel, creator: SurveyCreatorModel): void {}
   protected updateOnValueChangedCore(model: SurveyModel, creator: SurveyCreatorModel, name: string): void {}
-  protected updateOnMatrixRowAddedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
+  protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {}
   protected copyJson(json: any): any {
     return Helpers.getUnbindValue(json);
   }
