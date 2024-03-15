@@ -340,14 +340,33 @@ test("Preset edit model, property grid, apply", () => {
   survey.setValue("propertyGrid_definition_selector", "survey");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
   matrix.value = [{ name: "general", items: ["title", "description"] },
-    { name: "second", items: ["page", "logo"] }];
-  survey.setValue("propertyGrid_definition_selector", "page");
-  matrix.value = [{ name: "general", items: ["name", "title"] },
-    { name: "logic", items: ["visibleIf", "enableIf"] }];
-  expect(preset.applyFromSurveyModel(survey)).toBeTruthy();
+    { name: "second", items: ["pages", "locale"] }];
+  const creator = new CreatorTester();
+  expect(preset.applyFromSurveyModel(survey, creator)).toBeTruthy();
   const propDef = preset.getJson().propertyGrid?.definition;
   const surveyProps = propDef?.classes["survey"];
   expect(propDef?.autoGenerateProperties).toStrictEqual(false);
   expect(surveyProps?.tabs).toHaveLength(1);
   expect(surveyProps?.properties).toHaveLength(4);
+  const propSurvey = creator.propertyGrid;
+  const panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("second");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[1].elements).toHaveLength(2);
+
+  survey.setValue("propertyGrid_definition_selector", "page");
+  matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", items: ["name", "title", "description"] }];
+  survey.setValue("propertyGrid_definition_selector", "survey");
+  expect(preset.applyFromSurveyModel(survey, creator)).toBeTruthy();
+  const pageProps = propDef?.classes["page"];
+  expect(pageProps?.tabs).toHaveLength(0);
+  expect(pageProps?.properties).toHaveLength(3);
+  creator.JSON = { pages: [{ name: "page1" }] };
+  creator.selectElement(creator.survey.pages[0]);
+  const panels2 = creator.propertyGrid.getAllPanels();
+  expect(panels2).toHaveLength(1);
+  expect(panels2[0].elements).toHaveLength(3);
 });

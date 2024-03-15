@@ -61,6 +61,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     };
   }
   public getJsonValueCore(model: SurveyModel): any {
+    this.updateCurrentJson(model);
     return this.currentJson;
   }
   protected setupQuestionsCore(model: SurveyModel, creator: SurveyCreatorModel): void {

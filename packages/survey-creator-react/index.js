@@ -7,8 +7,9 @@ function getConfSurvey() {
     const preset = new SurveyCreatorCore.CreatorPreset();
     confSurvey = preset.createEditModel(getCreator());
     preset.onApplied.add((sender, options) => {
-      const creator = getCreator();
-      if (creator.getTabNames().indexOf("configurator") < 0) {
+      const json = preset.getJson();
+      if (!!json.tabs && !!json.tabs.items) {
+        const creator = getCreator();
         creator.addPluginTab("configurator", configuratorPlugin, "Configurator", "svc-tab-configurator", 0);
       }
     });
