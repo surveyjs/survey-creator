@@ -249,6 +249,7 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choiceTextsFromQuestion", tab: "choices" },
       { name: "choicesOrder", tab: "choices" },
       { name: "colCount", tab: "layout" },
+      { name: "textWrapEnabled", tab: "choices" },
       { name: "showOtherItem", tab: "choices" },
       { name: "otherText", tab: "choices" },
       { name: "otherPlaceholder", tab: "choices" },
@@ -300,7 +301,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "choicesMax", tab: "choices" },
       { name: "choicesStep", tab: "choices" },
       { name: "allowClear", tab: "choices" },
-      { name: "textWrapEnabled", tab: "choices" },
       { name: "searchMode", tab: "choices" },
     ]
   },
@@ -312,7 +312,6 @@ const defaultProperties: ISurveyPropertiesDefinition = {
       { name: "searchMode", tab: "choices" },
       { name: "hideSelectedItems", tab: "choices" },
       { name: "allowClear", tab: "choices" },
-      { name: "textWrapEnabled", tab: "choices" },
     ]
   },
   imagepicker: {
