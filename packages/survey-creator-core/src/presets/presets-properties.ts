@@ -18,9 +18,116 @@ export class SurveyQuestionPresetProperties extends SurveyQuestionProperties {
   }
 }
 
+const presetPropertiesBaseClasses = ["question", "matrixdropdownbase", "selectbase", "panelbase"];
+
+export class SurveyQuestionPresetPropertiesDetail {
+  private propertiesHash = {};
+  public classes = new Array<string>();
+  private properties: SurveyQuestionPresetProperties;
+  constructor(private className: string, private currentJson: ISurveyPropertyGridDefinition) {
+    const cls = {};
+    this.properties = new SurveyQuestionPresetProperties(className, currentJson);
+    this.properties.getAllVisiblePropertiesNames(true).forEach(name => {
+      const prop = Serializer.findProperty(className, name);
+      if(prop) {
+        const propClassName = this.getPropClassName(prop);
+        this.propertiesHash[name] = propClassName;
+        cls[propClassName] = true;
+      }
+    });
+    for(let i = 0; i < presetPropertiesBaseClasses.length; i ++) {
+      const cl = presetPropertiesBaseClasses[i];
+      if(cls[cl]) {
+        this.classes.push(cl);
+      }
+    }
+    this.classes.push(className);
+  }
+  public getRows(): Array<any> {
+    const rows = [];
+    this.properties.getTabs().forEach(tab => {
+      const row: any = { name: tab.name };
+      tab.properties.forEach(prop => {
+        const clName = this.propertiesHash[prop.name];
+        if(!row[clName]) {
+          row[clName] = [];
+        }
+        row[clName].push(prop.name);
+      });
+      rows.push(row);
+    });
+    return rows;
+  }
+  public getRankingChoices(matrix: QuestionMatrixDynamicModel, row: MatrixDropdownRowModelBase, className: string): Array<ItemValue> {
+    const res = [];
+    const allProperties = [];
+    for(let key in this.propertiesHash) {
+      if(this.propertiesHash[key] == className) {
+        allProperties.push(key);
+      }
+    }
+    const val = matrix.value;
+    const usedItems = {};
+    if(Array.isArray(val)) {
+      const rowIndex = matrix.visibleRows.indexOf(row);
+      for(let i = 0; i < val.length; i ++) {
+        const items = val[i][className];
+        if(i !== rowIndex && Array.isArray(items)) {
+          items.forEach(v => usedItems[v] = true);
+        }
+      }
+    }
+    allProperties.forEach(name => {
+      if(!usedItems[name]) {
+        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(className, name)));
+      }
+    });
+    return res;
+  }
+  public updateCurrentJson(val: Array<any>): void {
+    if(!Array.isArray(val) || val.length === 0) return;
+    const tabNames = [];
+    this.classes.forEach(cl => {
+      this.updateCurrentJsonClass(val, cl, tabNames);
+    });
+  }
+  private updateCurrentJsonClass(val: Array<any>, clName: string, tabNames: Array<string>): void {
+    const properties = [];
+    const tabs = [];
+    const step = 100;
+    val.forEach(tab => {
+      const clVal = tab[clName];
+      if(Array.isArray(clVal)) {
+        if(tab.name === "general") {
+          clVal.forEach(item => properties.push(item));
+          properties.concat(clVal);
+        } else {
+          if(tabNames.indexOf(tab.name) < 0) {
+            tabNames.push(tab.name);
+            tabs.push({ name: tab.name, index: tabNames.length * step });
+          }
+          clVal.forEach(item => {
+            properties.push({ name: item, tab: tab.name });
+          });
+        }
+      }
+    });
+    this.currentJson.classes[clName] = { properties: properties, tabs: tabs };
+  }
+  private getPropClassName(prop: JsonObjectProperty): string {
+    const clName = prop.classInfo.name;
+    if(clName === this.className) return this.className;
+    for(let i = 1; i < presetPropertiesBaseClasses.length; i ++) {
+      const cl = presetPropertiesBaseClasses[i];
+      if(clName === cl || Serializer.isDescendantOf(clName, cl)) return cl;
+    }
+    return "question";
+  }
+}
+
 export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEditableBase {
   private currentJson: ISurveyPropertyGridDefinition;
-  private currentClassProperties: SurveyQuestionPresetProperties;
+  private currentProperties: SurveyQuestionPresetPropertiesDetail;
   private currentClassName: string;
   public createMainPageCore(): any {
     const parent = (<CreatorEditablePresetPropertyGrid>this.parent);
@@ -49,10 +156,10 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
             {
               type: "ranking",
               name: "items",
-              titleLocation: "hidden",
               selectToRankEnabled: true,
               minSelectedChoices: 1,
-              selectToRankAreasLayout: "horizontal"
+              selectToRankAreasLayout: "horizontal",
+              visible: false
             }
           ]
         }
@@ -68,7 +175,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   }
   protected updateOnMatrixDetailPanelVisibleChangedCore(model: SurveyModel, creator: SurveyCreatorModel, options: any): void {
     if(options.question.name === this.nameMatrix) {
-      this.onDetailPanelShowingChanged(options.row);
+      this.onDetailPanelShowingChanged(model, options.row);
     }
   }
   private isMatrixValueChanged: boolean;
@@ -82,24 +189,11 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     this.currentClassName = selQuestion.value;
     if(!this.currentClassName) return;
     const matrix = this.getMatrix(model);
-    matrix.value = this.definitionToRows(this.currentClassName);
+    this.currentProperties = new SurveyQuestionPresetPropertiesDetail(this.currentClassName, this.currentJson);
+    matrix.rowCount = 0;
+    this.updateDetailPanel(matrix);
+    matrix.value = this.currentProperties.getRows();
     this.isMatrixValueChanged = false;
-    matrix.visibleRows.forEach(row => {
-      row.onDetailPanelShowingChanged = () => {
-        this.onDetailPanelShowingChanged(row);
-      };
-    });
-  }
-  private definitionToRows(className: string): Array<any> {
-    const res = [];
-    this.currentClassProperties = new SurveyQuestionPresetProperties(className, this.currentJson);
-    this.currentClassProperties.getTabs().forEach(tab => {
-      const props = [];
-      tab.properties.forEach(p => { props.push(p.name); });
-      const row = { name: tab.name, items: props };
-      res.push(row);
-    });
-    return res;
   }
   protected setupQuestionsValueCore(model: SurveyModel, json: any, creator: SurveyCreatorModel): void {
     if(!json) {
@@ -112,32 +206,30 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
   private getSelector(model: SurveyModel): QuestionDropdownModel { return <QuestionDropdownModel>model.getQuestionByName(this.nameSelector); }
   private get nameMatrix() { return this.fullPath + "_matrix"; }
   private get nameSelector() { return this.fullPath + "_selector"; }
-  private onDetailPanelShowingChanged(row: MatrixDropdownRowModelBase): void {
-    if(!row.isDetailPanelShowing) return;
-    row.getQuestionByName("items").choices = this.getRankingChoices(row);
-  }
-  private getRankingChoices(row: MatrixDropdownRowModelBase): Array<ItemValue> {
-    const res = [];
-    if(!this.currentClassProperties) return res;
-    const allProperties = this.currentClassProperties.getAllVisiblePropertiesNames(true);
-    const model = <SurveyModel>row.getSurvey();
-    const matrix = this.getMatrix(<SurveyModel>model);
-    const val = model.getValue(this.nameMatrix);
-    const usedItems = {};
-    if(Array.isArray(val)) {
-      const rowIndex = matrix.visibleRows.indexOf(row);
-      for(let i = 0; i < val.length; i ++) {
-        if(i !== rowIndex && Array.isArray(val[i].items)) {
-          val[i].items.forEach(v => usedItems[v] = true);
-        }
-      }
+  private updateDetailPanel(matrix: QuestionMatrixDynamicModel): void {
+    const panel = matrix.detailPanel;
+    for(let i = panel.elements.length - 1; i >= 1; i --) {
+      panel.removeElement(panel.elements[i]);
     }
-    allProperties.forEach(name => {
-      if(!usedItems[name]) {
-        res.push(new ItemValue(name, editorLocalization.getPropertyNameInEditor(this.currentClassName, name)));
-      }
+    const itemsQ = panel.getQuestionByName("items");
+    const classes = this.currentProperties.classes;
+    classes.forEach(clName => {
+      const q = panel.addNewQuestion(itemsQ.getType());
+      const json = itemsQ.toJSON();
+      json.name = clName;
+      q.fromJSON(json);
     });
-    return res;
+  }
+  private onDetailPanelShowingChanged(model: SurveyModel, row: MatrixDropdownRowModelBase): void {
+    if(!row.isDetailPanelShowing || !this.currentProperties) return;
+    const classes = this.currentProperties.classes;
+    const matrix = this.getMatrix(model);
+    classes.forEach(clName => {
+      const q = row.detailPanel.getQuestionByName(clName);
+      const choices = this.currentProperties.getRankingChoices(matrix, row, clName);
+      q.choices = choices;
+      q.visible = choices.length > 0;
+    });
   }
   private getSelectorChoices(creator: SurveyCreatorModel): Array<ItemValue> {
     const classes = ["survey", "page", "panel"];
@@ -164,27 +256,7 @@ export class CreatorPresetEditablePropertyGridDefinition extends CreatorPresetEd
     if(!this.isMatrixValueChanged) return;
     this.isMatrixValueChanged = false;
     if(!this.currentClassName || !this.currentJson || !this.currentJson.classes) return;
-    const val = model.getValue(this.nameMatrix);
-    if(!Array.isArray(val) || val.length === 0) return;
-    const properties = [];
-    const tabs = [];
-    const step = 100;
-    let index = step;
-    val.forEach(tab => {
-      if(Array.isArray(tab.items)) {
-        if(tab.name === "general") {
-          tab.items.forEach(item => properties.push(item));
-          properties.concat(tab.items);
-        } else {
-          tabs.push({ name: tab.name, index: index });
-          index += step;
-          tab.items.forEach(item => {
-            properties.push({ name: item, tab: tab.name });
-          });
-        }
-      }
-    });
-    this.currentJson.classes[this.currentClassName] = { properties: properties, tabs: tabs };
+    this.currentProperties.updateCurrentJson(model.getValue(this.nameMatrix));
   }
 }
 
