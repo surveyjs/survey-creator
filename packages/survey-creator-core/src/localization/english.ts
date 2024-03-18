@@ -1062,7 +1062,8 @@ export var enStrings = {
     searchMode: {
       contains: "Contains",
       startsWith: "Starts with"
-    }
+    },
+    textWrapEnabled: "Wrap choices"
   },
   // Operators
   op: {
@@ -1191,7 +1192,8 @@ export var enStrings = {
       },
       textUpdateMode: "Choose from: \"On lost focus\" - the value is updated when the input field loses focus; \"While typing\" - the value is updated in real-time, as users are typing. The \"Inherit\" option applies the survey-level setting (\"On lost focus\" by default).",
       url: "You can use any web service as a data source for multiple-choice questions. To populate choice values, enter the URL of the service providing the data.",
-      searchMode: "A comparison operation used to filter the drop-down list."
+      searchMode: "A comparison operation used to filter the drop-down list.",
+      textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip."
     },
     signaturepad: {
       signatureWidth: "Sets the width of the displayed signature area and the resulting image.",
