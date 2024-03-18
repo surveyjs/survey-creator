@@ -325,7 +325,7 @@ export interface ISurveyCreatorOptions {
   chooseFiles(
     input: HTMLInputElement,
     callback: (files: File[]) => void,
-    context?: { element: SurveyElement, item?: ItemValue, target?: any, type?: string, property?: string }
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ): void;
 }
 
@@ -478,7 +478,7 @@ export class EmptySurveyCreatorOptions implements ISurveyCreatorOptions {
   ): void { }
   getHasMachineTranslation(): boolean { return this.machineTranslationValue; }
   doMachineTranslation(fromLocale: string, toLocale: string, strings: Array<string>, callback: (translated: Array<string>) => void): void { }
-  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: SurveyElement, item?: ItemValue }): void { }
+  chooseFiles(input: HTMLInputElement, callback: (files: File[]) => void, context?: { element: Base, item?: any, elementType?: string, propertyName?: string }): void { }
 }
 
 StylesManager.applyTheme("defaultV2");

@@ -3161,12 +3161,12 @@ test("Check onOpenFileChooser is called and context is passed", (): any => {
     const backgroundImageEditor = themeEditorSurvey.getQuestionByName("backgroundImage") as QuestionFileModel;
     backgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile");
-    expect(lastContext).toStrictEqual({ element: backgroundImageEditor, target: themeEditorSurvey, type: "theme", property: "backgroundImage" });
+    expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "theme", propertyName: "backgroundImage" });
 
     const headerBackgroundImageEditor = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("backgroundImage") as QuestionFileModel;
     headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
     expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
-    expect(lastContext).toStrictEqual({ element: headerBackgroundImageEditor, target: themeEditorSurvey, type: "theme", property: "headerViewContainer.backgroundImage" });
+    expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
   } finally {
     document.getElementById = origGetElementById;
   }

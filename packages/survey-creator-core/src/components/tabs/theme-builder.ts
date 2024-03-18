@@ -771,11 +771,13 @@ export class ThemeEditorModel extends Base {
 
     themeEditorSurvey.onOpenFileChooser.add((_, options) => {
       const context: any = {};
-      assign(context, options.context, { type: "theme" });
+      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme" });
       if (options.element) {
         const question = options.element as QuestionFileModel;
-        const themePropertyName = (question.parentQuestion ? question.parentQuestion.name + "." : "") + question.name;
-        context.property = themePropertyName;
+        context.propertyName = question.name;
+        if (question.parentQuestion) {
+          context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
+        }
       }
       this.surveyProvider.chooseFiles(options.input, options.callback, context as any);
     });
@@ -849,8 +851,13 @@ export class ThemeEditorModel extends Base {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
     questionsToPatch.forEach(q => {
       (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => {
-        const themePropertyName = (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
-        this.surveyProvider.chooseFiles(input, callback, { element: q, target: this.currentTheme, type: "theme", property: themePropertyName });
+        const themePropertyName = q.name;
+        let elementType = "theme";
+        if (q.parentQuestion) {
+          elementType = q.parentQuestion.name === "headerViewContainer" ? "header" : q.parentQuestion.name;
+        }
+        (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
+        this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
       }
     });
   }

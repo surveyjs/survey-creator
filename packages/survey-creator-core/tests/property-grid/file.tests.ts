@@ -251,7 +251,7 @@ test("Check onOpenFileChooser called", () => {
   expect(uploadCount).toBe(1);
   expect(log).toBe("->openedFileChooser->uploadFile");
   expect(questionEditor.value).toBe("url");
-  expect(lastContext.target).toEqual(question);
-  expect(lastContext.type).toEqual("image");
-  expect(lastContext.property).toEqual("imageLink");
+  expect(lastContext.element).toEqual(question);
+  expect(lastContext.elementType).toEqual("image");
+  expect(lastContext.propertyName).toEqual("imageLink");
 });

@@ -2695,7 +2695,7 @@ export class SurveyCreatorModel extends Base
   public chooseFiles(
     input: HTMLInputElement,
     callback: (files: File[]) => void,
-    context?: { element: SurveyElement, item?: ItemValue, target?: any, type?: string, property?: string }
+    context?: { element: Base, item?: any, elementType?: string, propertyName?: string }
   ) {
     if (this.onOpenFileChooser.isEmpty) {
       chooseFiles(input, callback);
@@ -2703,10 +2703,12 @@ export class SurveyCreatorModel extends Base
       this.onOpenFileChooser.fire(this, {
         input: input,
         element: context && context.element || this.survey,
+        elementType: context && context.elementType,
         item: context && context.item,
+        propertyName: context && context.propertyName,
         callback: callback,
-        context: context as IChooseFileContext
-      });
+        context: context
+      } as any);
     }
   }
   /**
