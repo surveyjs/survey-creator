@@ -4,6 +4,9 @@ import { QuestionToolbox } from "../src/toolbox";
 import { QuestionDropdownModel, QuestionMatrixDynamicModel } from "survey-core";
 import { defaultPropertyGridDefinition, ISurveyPropertyGridDefinition } from "../src/question-editor/definition";
 import { SurveyQuestionPresetPropertiesDetail } from "../src/presets/presets-properties";
+import { QuestionEmbeddedSurveyModel } from "../src/components/embedded-survey";
+
+export * from "../src/components/embedded-survey";
 
 test("Preset edit model, create pages", () => {
   const survey = new CreatorPreset({ }).createEditModel();
@@ -303,10 +306,11 @@ test("Preset edit model, property grid, setup", () => {
   expect(checkSelectorChoice("empty")).toBeFalsy();
   expect(checkSelectorChoice("nonvalue")).toBeFalsy();
   expect(checkSelectorChoice("textwithbutton")).toBeFalsy();
+  const panel = survey.getPanelByName("propPanel");
   const matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
-  expect(matrix.visible).toBeFalsy();
+  expect(panel.isVisible).toBeFalsy();
   selectorQuestion.value = "survey";
-  expect(matrix.visible).toBeTruthy();
+  expect(panel.isVisible).toBeTruthy();
   const rows = matrix.visibleRows;
   expect(rows).toHaveLength(10);
   expect(rows[0].getValue("name")).toEqual("general");
@@ -400,4 +404,30 @@ test("Preset edit model, property grid, apply", () => {
   const panels2 = creator.propertyGrid.getAllPanels();
   expect(panels2).toHaveLength(1);
   expect(panels2[0].elements).toHaveLength(3);
+});
+test("Preset edit model, live property grid", () => {
+  const preset = new CreatorPreset({});
+  const survey = preset.createEditModel();
+  survey.setValue("propertyGrid_definition_show", true);
+  survey.currentPage = survey.getPageByName("page_propertyGrid_definition");
+  survey.setValue("propertyGrid_definition_selector", "survey");
+  let matrix = <QuestionMatrixDynamicModel>survey.getQuestionByName("propertyGrid_definition_matrix");
+  matrix.value = [{ name: "general", survey: ["title", "description"] },
+    { name: "second", survey: ["pages", "locale"] }];
+  const embeddedSurvey = <QuestionEmbeddedSurveyModel>survey.getQuestionByName("propertyGrid_definition_propgrid");
+  let propSurvey = embeddedSurvey.embeddedSurvey;
+  let panels = propSurvey.getAllPanels();
+  expect(panels).toHaveLength(2);
+  expect(panels[0].name).toBe("general");
+  expect(panels[1].name).toBe("second");
+  expect(panels[0].elements).toHaveLength(2);
+  expect(panels[1].elements).toHaveLength(2);
+  matrix.visibleRows[0].showDetailPanel();
+  expect(panels[0].isExpanded).toBeTruthy();
+  matrix.visibleRows[0].hideDetailPanel();
+  expect(panels[0].isExpanded).toBeFalsy();
+  panels[1].expand();
+  expect(matrix.visibleRows[1].isDetailPanelShowing).toBeTruthy();
+  panels[1].collapse();
+  expect(matrix.visibleRows[1].isDetailPanelShowing).toBeFalsy();
 });
