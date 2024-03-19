@@ -369,6 +369,28 @@ export var koreanStrings = {
       name: "이름",
       title: "타이틀"
     },
+    masksettings: {
+      saveMaskedValue: "설문조사 결과에 마스킹된 값 저장"
+    },
+    patternmask: {
+      pattern: "값 패턴"
+    },
+    datetimemask: {
+      min: "최솟값",
+      max: "최대값"
+    },
+    numericmask: {
+      allowNegativeValues: "음수 값 허용",
+      thousandsSeparator: "1000 단위 구분 기호",
+      decimalSeparator: "소수 구분 기호",
+      precision: "값 정밀도",
+      min: "최솟값",
+      max: "최대값"
+    },
+    currencymask: {
+      prefix: "통화 접두사",
+      suffix: "통화 접미사"
+    },
     imageHeight: "이미지 높이",
     imageWidth: "이미지 너비",
     valueName: "값 이름",
@@ -609,6 +631,13 @@ export var koreanStrings = {
     autoGrowComment: "필요한 경우 주석 영역 자동 확장",
     allowResizeComment: "사용자가 텍스트 영역의 크기를 조정할 수 있도록 허용",
     textUpdateMode: "텍스트 질문 값 업데이트",
+    maskType: "입력 마스크 유형",
+    maskTypes: {
+      patternmask: "무늬",
+      numericmask: "숫자",
+      datetimemask: "날짜 및 시간",
+      currencymask: "통화"
+    },
     focusOnFirstError: "첫 번째 오답에 포커스 설정",
     checkErrorsMode: "유효성 검사 실행",
     navigateToUrl: "URL로 이동합니다.",
@@ -733,6 +762,7 @@ export var koreanStrings = {
       templateTitle: "템플릿 제목",
       totals: "합계",
       logic: "논리학",
+      mask: "입력 마스크 설정",
       layout: {
         panel: "레이아웃",
         question: "레이아웃",
@@ -796,7 +826,11 @@ export var koreanStrings = {
     questionStartIndex_placeholder: "예: a)",
     width_placeholder: "예: 6in",
     minWidth_placeholder: "예: 600px",
-    maxWidth_placeholder: "예: 50%"
+    maxWidth_placeholder: "예: 50%",
+    pattern_placeholder: "예: +1(999)-999-99-99",
+    datetimepattern_placeholder: "예: mm/dd/yyyy",
+    currencyprefix_placeholder: "예: $",
+    currencysuffix_placeholder: "예.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var koreanStrings = {
     searchMode: {
       contains: "포함",
       startsWith: "다음으로 시작"
-    }
+    },
+    textWrapEnabled: "줄 바꿈 선택"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var koreanStrings = {
       },
       textUpdateMode: "다음 중에서 선택: \"초점을 잃을 때\" - 입력 필드가 초점을 잃을 때 값이 업데이트됩니다. \"While typing\" - 사용자가 입력할 때 값이 실시간으로 업데이트됩니다. \"상속\" 옵션은 설문조사 수준 설정(기본적으로 \"초점 손실 시\")을 적용합니다.",
       url: "모든 웹 서비스를 객관식 질문의 데이터 소스로 사용할 수 있습니다. 선택 항목 값을 채우려면 데이터를 제공하는 서비스의 URL을 입력합니다.",
-      searchMode: "드롭다운 목록을 필터링하는 데 사용되는 비교 작업입니다."
+      searchMode: "드롭다운 목록을 필터링하는 데 사용되는 비교 작업입니다.",
+      textWrapEnabled: "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다."
     },
     signaturepad: {
       signatureWidth: "표시된 서명 영역과 결과 이미지의 너비를 설정합니다.",
@@ -1278,7 +1314,25 @@ export var koreanStrings = {
     autocomplete: "자세한 내용은 [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) 속성 설명을 참조하십시오.",
     filePlaceholder: "\"소스 유형\"이 \"로컬 파일\"이거나 카메라를 사용할 수 없는 경우에 적용됩니다.",
     photoPlaceholder: "\"소스 유형\"이 \"카메라\"인 경우에 적용됩니다.",
-    fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다."
+    fileOrPhotoPlaceholder: "\"소스 유형\"이 \"로컬 파일 또는 카메라\"인 경우에 적용됩니다.",
+    masksettings: {
+      saveMaskedValue: "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
+    },
+    patternmask: {
+      pattern: "패턴에는 문자열 리터럴과 다음 자리 표시자가 포함될 수 있습니다. '9' - 숫자의 경우; 'a' - 대문자 또는 소문자의 경우; '#' - 숫자 또는 대문자 또는 소문자의 경우. 백슬래시 '\\'를 사용하여 문자를 이스케이프합니다."
+    },
+    datetimemask: {
+      pattern: "패턴에는 구분 기호와 다음 자리 표시자가 포함될 수 있습니다. 'm' - 월 번호; 'mm' - 월 번호의 경우, 한 자리 값의 경우 선행 0이 있습니다. 'd' - 해당 월의 날짜; 'dd' - 한 달 중 일, 한 자리 값의 경우 선행 0이 있습니다. 'yy' - 연도의 마지막 두 자리 숫자; 'yyyy' - 4자리 연도입니다."
+    },
+    numericmask: {
+      decimalSeparator: "표시된 숫자의 정수 부분에서 소수 부분을 구분하는 데 사용되는 기호입니다.",
+      thousandsSeparator: "큰 숫자의 숫자를 3개의 그룹으로 구분하는 데 사용되는 기호입니다.",
+      precision: "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
+    },
+    currencymask: {
+      prefix: "값 앞에 표시할 하나 또는 여러 개의 기호입니다.",
+      suffix: "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."
+    }
   },
   // Properties
   p: {
@@ -2628,3 +2682,35 @@ editorLocalization.locales["ko"] = koreanStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "순위 영역의 자리 표시자 텍스트"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "설문조사 자동 완성"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "응답자가 모든 질문에 답변한 후 설문조사가 자동으로 완료되도록 하려면 선택합니다."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "설문조사 결과에 마스킹된 값 저장"
+// patternmask.pattern: "Value pattern" => "값 패턴"
+// datetimemask.min: "Minimum value" => "최솟값"
+// datetimemask.max: "Maximum value" => "최대값"
+// numericmask.allowNegativeValues: "Allow negative values" => "음수 값 허용"
+// numericmask.thousandsSeparator: "Thousands separator" => "1000 단위 구분 기호"
+// numericmask.decimalSeparator: "Decimal separator" => "소수 구분 기호"
+// numericmask.precision: "Value precision" => "값 정밀도"
+// numericmask.min: "Minimum value" => "최솟값"
+// numericmask.max: "Maximum value" => "최대값"
+// currencymask.prefix: "Currency prefix" => "통화 접두사"
+// currencymask.suffix: "Currency suffix" => "통화 접미사"
+// pe.maskType: "Input mask type" => "입력 마스크 유형"
+// maskTypes.patternmask: "Pattern" => "무늬"
+// maskTypes.numericmask: "Numeric" => "숫자"
+// maskTypes.datetimemask: "Date and Time" => "날짜 및 시간"
+// maskTypes.currencymask: "Currency" => "통화"
+// tabs.mask: "Input Mask Settings" => "입력 마스크 설정"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "예: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "예: mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "예: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "예.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "줄 바꿈 선택"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "선택 옵션의 긴 텍스트는 드롭다운 메뉴에 맞게 줄 바꿈을 자동으로 생성합니다. 텍스트를 자르려면 선택을 취소합니다."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "마스크가 적용된 질문 값을 현장조사 결과에 저장하려면 선택합니다."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "패턴에는 문자열 리터럴과 다음 자리 표시자가 포함될 수 있습니다. '9' - 숫자의 경우; 'a' - 대문자 또는 소문자의 경우; '#' - 숫자 또는 대문자 또는 소문자의 경우. 백슬래시 '\\'를 사용하여 문자를 이스케이프합니다."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "패턴에는 구분 기호와 다음 자리 표시자가 포함될 수 있습니다. 'm' - 월 번호; 'mm' - 월 번호의 경우, 한 자리 값의 경우 선행 0이 있습니다. 'd' - 해당 월의 날짜; 'dd' - 한 달 중 일, 한 자리 값의 경우 선행 0이 있습니다. 'yy' - 연도의 마지막 두 자리 숫자; 'yyyy' - 4자리 연도입니다."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "표시된 숫자의 정수 부분에서 소수 부분을 구분하는 데 사용되는 기호입니다."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "큰 숫자의 숫자를 3개의 그룹으로 구분하는 데 사용되는 기호입니다."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "표시된 숫자의 소수점 뒤에 유지할 자릿수를 제한합니다."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "값 앞에 표시할 하나 또는 여러 개의 기호입니다."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "값 뒤에 표시할 하나 또는 여러 개의 기호입니다."

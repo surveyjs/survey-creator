@@ -369,6 +369,28 @@ export let svStrings = {
       name: "Namn",
       title: "Titel"
     },
+    masksettings: {
+      saveMaskedValue: "Spara maskerat värde i undersökningsresultat"
+    },
+    patternmask: {
+      pattern: "Värdemönster"
+    },
+    datetimemask: {
+      min: "Minsta värde",
+      max: "Maximalt värde"
+    },
+    numericmask: {
+      allowNegativeValues: "Tillåt negativa värden",
+      thousandsSeparator: "Avgränsare för tusental",
+      decimalSeparator: "Decimaltecknet",
+      precision: "Värde precision",
+      min: "Minsta värde",
+      max: "Maximalt värde"
+    },
+    currencymask: {
+      prefix: "Prefix för valuta",
+      suffix: "Valutasuffix"
+    },
     imageHeight: "Bild höjd",
     imageWidth: "Bild bredd",
     valueName: "Värde namn",
@@ -609,6 +631,13 @@ export let svStrings = {
     autoGrowComment: "Expandera kommentarsområdet automatiskt om det behövs",
     allowResizeComment: "Tillåt användare att ändra storlek på textområden",
     textUpdateMode: "Uppdatera textfrågevärde",
+    maskType: "Typ av indatamask",
+    maskTypes: {
+      patternmask: "Mönster",
+      numericmask: "Numerisk",
+      datetimemask: "Datum och tid",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Ställ in fokus på det första ogiltiga svaret",
     checkErrorsMode: "Kör validering",
     navigateToUrl: "Navigera till URL",
@@ -733,6 +762,7 @@ export let svStrings = {
       templateTitle: "Mall titel",
       totals: "Summor",
       logic: "Logik",
+      mask: "Inställningar för inmatningsmask",
       layout: {
         panel: "Layout",
         question: "Layout",
@@ -796,7 +826,11 @@ export let svStrings = {
     questionStartIndex_placeholder: "Ex.: a)",
     width_placeholder: "Ex.: 6 tum",
     minWidth_placeholder: "Ex.: 600px",
-    maxWidth_placeholder: "Ex.: 50%"
+    maxWidth_placeholder: "Ex.: 50%",
+    pattern_placeholder: "Ex.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Ex.: mm/dd/åååå",
+    currencyprefix_placeholder: "Ex.: $",
+    currencysuffix_placeholder: "Ex.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export let svStrings = {
     searchMode: {
       contains: "Innehåller",
       startsWith: "Börjar med"
-    }
+    },
+    textWrapEnabled: "Radbryt val"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export let svStrings = {
       },
       textUpdateMode: "Välj mellan: \"Vid förlorat fokus\" - värdet uppdateras när inmatningsfältet tappar fokus; \"Medan du skriver\" - värdet uppdateras i realtid när användarna skriver. Alternativet \"Ärv\" tillämpar inställningen på undersökningsnivå (\"Vid förlorat fokus\" som standard).",
       url: "Du kan använda valfri webbtjänst som datakälla för flervalsfrågor. Om du vill fylla i alternativvärden anger du URL:en för den tjänst som tillhandahåller data.",
-      searchMode: "En jämförelseåtgärd som används för att filtrera listrutan."
+      searchMode: "En jämförelseåtgärd som används för att filtrera listrutan.",
+      textWrapEnabled: "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas."
     },
     signaturepad: {
       signatureWidth: "Anger bredden på det visade signaturområdet och den resulterande bilden.",
@@ -1278,7 +1314,25 @@ export let svStrings = {
     autocomplete: "Mer information finns i attributbeskrivningen [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete).",
     filePlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer\" eller när kameran inte är tillgänglig",
     photoPlaceholder: "Gäller när \"Källtyp\" är \"Kamera\".",
-    fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\"."
+    fileOrPhotoPlaceholder: "Gäller när \"Källtyp\" är \"Lokala filer eller kamera\".",
+    masksettings: {
+      saveMaskedValue: "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
+    },
+    patternmask: {
+      pattern: "Mönstret kan innehålla strängliteraler och följande platshållare: \"9\" – för en siffra; \"a\" - för en stor eller liten bokstav; \"#\" – för en siffra eller en stor eller liten bokstav. Använd omvänt snedstreck \"\\\" för att undvika ett tecken."
+    },
+    datetimemask: {
+      pattern: "Mönstret kan innehålla avgränsningstecken och följande platshållare: \"m\" – för månadsnummer; \"mm\" – för månadsnummer, med inledande nolla för ensiffriga värden. \"d\" - för dag i månaden; \"dd\" – för dag i månaden, med inledande nolla för ensiffriga värden. \"yy\" – för de två sista siffrorna i årtalet. \"yyyy\" – för ett fyrsiffrigt årtal."
+    },
+    numericmask: {
+      decimalSeparator: "En symbol som används för att skilja bråkdelen från heltalsdelen av ett visat tal.",
+      thousandsSeparator: "En symbol som används för att dela upp siffrorna i ett stort tal i grupper om tre.",
+      precision: "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
+    },
+    currencymask: {
+      prefix: "En eller flera symboler som ska visas före värdet.",
+      suffix: "En eller flera symboler som ska visas efter värdet."
+    }
   },
   // Properties
   p: {
@@ -2601,3 +2655,35 @@ editorLocalization.locales["sv"] = svStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Platshållartext för rangordningsområdet"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Fyll i enkäten automatiskt"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Välj om du vill att undersökningen ska slutföras automatiskt efter att en svarande har svarat på alla frågor."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Spara maskerat värde i undersökningsresultat"
+// patternmask.pattern: "Value pattern" => "Värdemönster"
+// datetimemask.min: "Minimum value" => "Minsta värde"
+// datetimemask.max: "Maximum value" => "Maximalt värde"
+// numericmask.allowNegativeValues: "Allow negative values" => "Tillåt negativa värden"
+// numericmask.thousandsSeparator: "Thousands separator" => "Avgränsare för tusental"
+// numericmask.decimalSeparator: "Decimal separator" => "Decimaltecknet"
+// numericmask.precision: "Value precision" => "Värde precision"
+// numericmask.min: "Minimum value" => "Minsta värde"
+// numericmask.max: "Maximum value" => "Maximalt värde"
+// currencymask.prefix: "Currency prefix" => "Prefix för valuta"
+// currencymask.suffix: "Currency suffix" => "Valutasuffix"
+// pe.maskType: "Input mask type" => "Typ av indatamask"
+// maskTypes.patternmask: "Pattern" => "Mönster"
+// maskTypes.numericmask: "Numeric" => "Numerisk"
+// maskTypes.datetimemask: "Date and Time" => "Datum och tid"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Inställningar för inmatningsmask"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ex.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ex.: mm/dd/åååå"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ex.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ex.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Radbryt val"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Långa texter i valalternativ genererar automatiskt radbrytningar för att passa in i rullgardinsmenyn. Avmarkera om du vill att texterna ska klippas."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Välj om du vill lagra frågevärdet med en tillämpad mask i undersökningsresultaten."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Mönstret kan innehålla strängliteraler och följande platshållare: \"9\" – för en siffra; \"a\" - för en stor eller liten bokstav; \"#\" – för en siffra eller en stor eller liten bokstav. Använd omvänt snedstreck \"\\\" för att undvika ett tecken."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Mönstret kan innehålla avgränsningstecken och följande platshållare: \"m\" – för månadsnummer; \"mm\" – för månadsnummer, med inledande nolla för ensiffriga värden. \"d\" - för dag i månaden; \"dd\" – för dag i månaden, med inledande nolla för ensiffriga värden. \"yy\" – för de två sista siffrorna i årtalet. \"yyyy\" – för ett fyrsiffrigt årtal."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "En symbol som används för att skilja bråkdelen från heltalsdelen av ett visat tal."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "En symbol som används för att dela upp siffrorna i ett stort tal i grupper om tre."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Begränsar hur många siffror som ska behållas efter decimaltecknet för ett tal som visas."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "En eller flera symboler som ska visas före värdet."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "En eller flera symboler som ska visas efter värdet."

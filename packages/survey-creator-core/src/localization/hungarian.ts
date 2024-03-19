@@ -369,6 +369,28 @@ export var huStrings = {
       name: "Név",
       title: "Cím"
     },
+    masksettings: {
+      saveMaskedValue: "Maszkolt érték mentése a felmérés eredményeiben"
+    },
+    patternmask: {
+      pattern: "Értékminta"
+    },
+    datetimemask: {
+      min: "Minimális érték",
+      max: "Maximális érték"
+    },
+    numericmask: {
+      allowNegativeValues: "Negatív értékek engedélyezése",
+      thousandsSeparator: "Több ezer szeparátor",
+      decimalSeparator: "Tizedeselválasztó",
+      precision: "Érték pontossága",
+      min: "Minimális érték",
+      max: "Maximális érték"
+    },
+    currencymask: {
+      prefix: "Pénznem előtag",
+      suffix: "Pénznem utótagja"
+    },
     imageHeight: "Kép magassága",
     imageWidth: "Kép szélessége",
     valueName: "Érték megnevezése",
@@ -609,6 +631,13 @@ export var huStrings = {
     autoGrowComment: "Szükség esetén automatikusan bontsa ki a megjegyzésterületet",
     allowResizeComment: "A szövegterületek átméretezésének engedélyezése a felhasználók számára",
     textUpdateMode: "Szöveges kérdés értékének frissítése",
+    maskType: "Beviteli maszk típusa",
+    maskTypes: {
+      patternmask: "Minta",
+      numericmask: "Numerikus",
+      datetimemask: "Dátum és idő",
+      currencymask: "Valuta"
+    },
     focusOnFirstError: "Fókusz beállítása az első érvénytelen válaszra",
     checkErrorsMode: "Érvényesítés futtatása",
     navigateToUrl: "Navigálás az URL-hez",
@@ -733,6 +762,7 @@ export var huStrings = {
       templateTitle: "Sablon címe",
       totals: "Összegek",
       logic: "Logika",
+      mask: "Beviteli maszk beállításai",
       layout: {
         panel: "Elrendezés",
         question: "Elrendezés",
@@ -796,7 +826,11 @@ export var huStrings = {
     questionStartIndex_placeholder: "Pl.: a)",
     width_placeholder: "Pl.: 6 hüvelyk",
     minWidth_placeholder: "Pl.: 600px",
-    maxWidth_placeholder: "Pl.: 50%"
+    maxWidth_placeholder: "Pl.: 50%",
+    pattern_placeholder: "Pl.: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Pl.: éééé/hh/nn",
+    currencyprefix_placeholder: "Pl.: $",
+    currencysuffix_placeholder: "Pl.: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var huStrings = {
     searchMode: {
       contains: "Tartalmaz",
       startsWith: "Ezzel kezdődik"
-    }
+    },
+    textWrapEnabled: "Tördelési lehetőségek"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var huStrings = {
       },
       textUpdateMode: "Válasszon a következők közül: \"Elveszett fókuszban\" - az érték frissül, amikor a beviteli mező elveszíti a fókuszt; \"Gépelés közben\" - az érték valós időben frissül, ahogy a felhasználók gépelnek. Az \"Öröklés\" opció a felmérés szintű beállítást alkalmazza (\"Alapértelmezés szerint elveszett fókuszban\").",
       url: "Bármely webszolgáltatást használhat adatforrásként feleletválasztós kérdésekhez. A választási lehetőségek értékeinek feltöltéséhez adja meg az adatokat szolgáltató szolgáltatás URL-címét.",
-      searchMode: "A legördülő lista szűrésére szolgáló összehasonlító művelet."
+      searchMode: "A legördülő lista szűrésére szolgáló összehasonlító művelet.",
+      textWrapEnabled: "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket."
     },
     signaturepad: {
       signatureWidth: "Beállítja a megjelenített aláírási terület szélességét és az eredményül kapott képet.",
@@ -1278,7 +1314,25 @@ export var huStrings = {
     autocomplete: "További információkért tekintse meg az [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) attribútum leírását.",
     filePlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" \"Helyi fájlok\", vagy ha a kamera nem érhető el",
     photoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" a \"Kamera\".",
-    fileOrPhotoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\"."
+    fileOrPhotoPlaceholder: "Akkor érvényes, ha a \"Forrás típusa\" értéke \"Helyi fájlok vagy kamera\".",
+    masksettings: {
+      saveMaskedValue: "Válassza ki, ha a kérdés értékét alkalmazott maszkkal szeretné tárolni a felmérés eredményeiben."
+    },
+    patternmask: {
+      pattern: "A minta karakterlánc-konstansokat és a következő helyőrzőket tartalmazhatja: \"9\" - egy számjegyhez; \"a\" - kis- vagy nagybetű esetében; '#' - számjegy vagy kis- vagy nagybetű. A fordított perjel használata \"\\\" a karakter elhagyásához."
+    },
+    datetimemask: {
+      pattern: "A minta elválasztó karaktereket és a következő helyőrzőket tartalmazhatja: \"m\" - a hónap száma; \"mm\" – a hónap száma, az első nullával az egyjegyű értékek esetében; \"d\" - a hónap napja; \"dd\" – a hónap napja, az első nullával az egyjegyű értékek esetében; \"yy\" – az év utolsó két számjegye; \"yyyy\" – négy számjegyű évre."
+    },
+    numericmask: {
+      decimalSeparator: "A törtrész és a megjelenített szám egész részének elválasztására szolgáló szimbólum.",
+      thousandsSeparator: "Egy szimbólum, amely nagy szám számjegyeit három csoportba sorolja.",
+      precision: "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
+    },
+    currencymask: {
+      prefix: "Egy vagy több szimbólum jelenik meg az érték előtt.",
+      suffix: "Egy vagy több szimbólum jelenik meg az érték után."
+    }
   },
   // Properties
   p: {
@@ -2577,3 +2631,35 @@ editorLocalization.locales["hu"] = huStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "A rangsorolási terület helyőrző szövege"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "A felmérés automatikus kitöltése"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Válassza ki, hogy szeretné-e, hogy a felmérés automatikusan kitöltődjön, miután a válaszadó megválaszolta az összes kérdést."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Maszkolt érték mentése a felmérés eredményeiben"
+// patternmask.pattern: "Value pattern" => "Értékminta"
+// datetimemask.min: "Minimum value" => "Minimális érték"
+// datetimemask.max: "Maximum value" => "Maximális érték"
+// numericmask.allowNegativeValues: "Allow negative values" => "Negatív értékek engedélyezése"
+// numericmask.thousandsSeparator: "Thousands separator" => "Több ezer szeparátor"
+// numericmask.decimalSeparator: "Decimal separator" => "Tizedeselválasztó"
+// numericmask.precision: "Value precision" => "Érték pontossága"
+// numericmask.min: "Minimum value" => "Minimális érték"
+// numericmask.max: "Maximum value" => "Maximális érték"
+// currencymask.prefix: "Currency prefix" => "Pénznem előtag"
+// currencymask.suffix: "Currency suffix" => "Pénznem utótagja"
+// pe.maskType: "Input mask type" => "Beviteli maszk típusa"
+// maskTypes.patternmask: "Pattern" => "Minta"
+// maskTypes.numericmask: "Numeric" => "Numerikus"
+// maskTypes.datetimemask: "Date and Time" => "Dátum és idő"
+// maskTypes.currencymask: "Currency" => "Valuta"
+// tabs.mask: "Input Mask Settings" => "Beviteli maszk beállításai"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Pl.: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Pl.: éééé/hh/nn"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Pl.: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Pl.: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Tördelési lehetőségek"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "A választási lehetőségekben szereplő hosszú szövegek automatikusan sortöréseket generálnak, hogy elférjenek a legördülő menüben. Törölje a jelet a jelölőnégyzetből, ha le szeretné vágni a szövegeket."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Válassza ki, ha a kérdés értékét alkalmazott maszkkal szeretné tárolni a felmérés eredményeiben."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "A minta karakterlánc-konstansokat és a következő helyőrzőket tartalmazhatja: \"9\" - egy számjegyhez; \"a\" - kis- vagy nagybetű esetében; '#' - számjegy vagy kis- vagy nagybetű. A fordított perjel használata \"\\\" a karakter elhagyásához."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "A minta elválasztó karaktereket és a következő helyőrzőket tartalmazhatja: \"m\" - a hónap száma; \"mm\" – a hónap száma, az első nullával az egyjegyű értékek esetében; \"d\" - a hónap napja; \"dd\" – a hónap napja, az első nullával az egyjegyű értékek esetében; \"yy\" – az év utolsó két számjegye; \"yyyy\" – négy számjegyű évre."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "A törtrész és a megjelenített szám egész részének elválasztására szolgáló szimbólum."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Egy szimbólum, amely nagy szám számjegyeit három csoportba sorolja."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Korlátozza, hogy hány számjegy maradjon meg a megjelenített szám tizedesvesszője után."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Egy vagy több szimbólum jelenik meg az érték előtt."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Egy vagy több szimbólum jelenik meg az érték után."

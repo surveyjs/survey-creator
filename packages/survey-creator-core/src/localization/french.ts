@@ -369,6 +369,28 @@ var frenchTranslation = {
       name: "Nom",
       title: "Titre"
     },
+    masksettings: {
+      saveMaskedValue: "Enregistrer la valeur masquée dans les résultats de l’enquête"
+    },
+    patternmask: {
+      pattern: "Modèle de valeur"
+    },
+    datetimemask: {
+      min: "Valeur minimale",
+      max: "Valeur maximale"
+    },
+    numericmask: {
+      allowNegativeValues: "Autoriser les valeurs négatives",
+      thousandsSeparator: "Séparateur de milliers",
+      decimalSeparator: "Séparateur décimal",
+      precision: "Précision de la valeur",
+      min: "Valeur minimale",
+      max: "Valeur maximale"
+    },
+    currencymask: {
+      prefix: "Préfixe de devise",
+      suffix: "Suffixe de devise"
+    },
     imageHeight: "Hauteur de l'image",
     imageWidth: "Largeur de l'image",
     valueName: "Variable de stockage",
@@ -609,6 +631,13 @@ var frenchTranslation = {
     autoGrowComment: "Développer automatiquement la zone de commentaires si nécessaire",
     allowResizeComment: "Autoriser les utilisateurs à redimensionner les zones de texte",
     textUpdateMode: "Mettre à jour la valeur de la question textuelle",
+    maskType: "Type de masque de saisie",
+    maskTypes: {
+      patternmask: "Modèle",
+      numericmask: "Numérique",
+      datetimemask: "Date et heure",
+      currencymask: "Monnaie"
+    },
     focusOnFirstError: "Renvoyer vers la première question ayant une erreur",
     checkErrorsMode: "Exécuter la validation",
     navigateToUrl: "Accédez à l'URL",
@@ -733,6 +762,7 @@ var frenchTranslation = {
       templateTitle: "Titre du modèle",
       totals: "Totaux",
       logic: "Conditions",
+      mask: "Paramètres du masque de saisie",
       layout: {
         panel: "Disposition",
         question: "Disposition",
@@ -796,7 +826,11 @@ var frenchTranslation = {
     questionStartIndex_placeholder: "Ex. : a)",
     width_placeholder: "Ex. : 6po",
     minWidth_placeholder: "Ex. : 600px",
-    maxWidth_placeholder: "Ex. : 50 %"
+    maxWidth_placeholder: "Ex. : 50 %",
+    pattern_placeholder: "Ex. : +1(999)-999-99-99",
+    datetimepattern_placeholder: "Ex. : mm/jj/aaaa",
+    currencyprefix_placeholder: "Ex. : $",
+    currencysuffix_placeholder: "Ex. : USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ var frenchTranslation = {
     searchMode: {
       contains: "Contient",
       startsWith: "Commence par"
-    }
+    },
+    textWrapEnabled: "Choix d’enveloppes"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ var frenchTranslation = {
       },
       textUpdateMode: "Choisissez parmi : « En cas de perte de focus » - la valeur est mise à jour lorsque le champ de saisie perd le focus ; « Pendant la saisie » - la valeur est mise à jour en temps réel, au fur et à mesure que les utilisateurs tapent. L’option « Hériter » applique le paramètre au niveau de l’enquête (« En cas de perte de focus » par défaut).",
       url: "Vous pouvez utiliser n’importe quel service Web comme source de données pour les questions à choix multiples. Pour renseigner les valeurs de choix, entrez l’URL du service fournissant les données.",
-      searchMode: "Opération de comparaison permettant de filtrer la liste déroulante."
+      searchMode: "Opération de comparaison permettant de filtrer la liste déroulante.",
+      textWrapEnabled: "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés."
     },
     signaturepad: {
       signatureWidth: "Définit la largeur de la zone de signature affichée et l’image résultante.",
@@ -1278,7 +1314,25 @@ var frenchTranslation = {
     autocomplete: "Reportez-vous à la description de l’attribut [saisie semi-automatique](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/saisie semi-automatique) pour plus d’informations.",
     filePlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux » ou lorsque l’appareil photo n’est pas disponible",
     photoPlaceholder: "S’applique lorsque le « Type de source » est « Appareil photo ».",
-    fileOrPhotoPlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux ou appareil photo »."
+    fileOrPhotoPlaceholder: "S’applique lorsque le « Type de source » est « Fichiers locaux ou appareil photo ».",
+    masksettings: {
+      saveMaskedValue: "Sélectionnez cette option si vous souhaitez stocker la valeur de la question à l’aide d’un masque appliqué dans les résultats de l’enquête."
+    },
+    patternmask: {
+      pattern: "Le modèle peut contenir des littéraux de chaîne et les espaces réservés suivants : '9' - pour un chiffre ; 'a' - pour une lettre majuscule ou minuscule ; '#' - pour un chiffre ou une lettre majuscule ou minuscule. Utilisez la barre oblique inverse '\\' pour échapper un caractère."
+    },
+    datetimemask: {
+      pattern: "Le modèle peut contenir des caractères de séparation et les espaces réservés suivants : 'm' - pour le numéro du mois ; 'mm' - pour le numéro du mois, avec un zéro non significatif pour les valeurs à un chiffre ; 'd' - pour le jour du mois ; 'dd' - pour le jour du mois, avec zéro en tête pour les valeurs à un chiffre ; 'yy' - pour les deux derniers chiffres de l’année ; 'yyyy' - pour une année à quatre chiffres."
+    },
+    numericmask: {
+      decimalSeparator: "Symbole utilisé pour séparer la partie fractionnaire de la partie entière d’un nombre affiché.",
+      thousandsSeparator: "Symbole utilisé pour séparer les chiffres d’un grand nombre en groupes de trois.",
+      precision: "Limite le nombre de chiffres à conserver après la virgule décimale pour un nombre affiché."
+    },
+    currencymask: {
+      prefix: "Un ou plusieurs symboles à afficher avant la valeur.",
+      suffix: "Un ou plusieurs symboles à afficher après la valeur."
+    }
   },
   // Properties
   p: {
@@ -2438,7 +2492,7 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // page.enableIf: "Use the magic wand icon to set a conditional rule that disables the read-only mode for the page." => "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui désactive le mode lecture seule de la page."
 // page.requiredIf: "Use the magic wand icon to set a conditional rule that prevents survey submission unless at least one nested question has an answer." => "Utilisez l’icône en forme de baguette magique pour définir une règle conditionnelle qui empêche l’envoi d’un sondage à moins qu’au moins une question imbriquée n’ait une réponse."
 // page.questionTitleLocation: "Applies to all questions within this page. If you want to override this setting, define title alignment rules for individual questions or panels. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "S’applique à toutes les questions de cette page. Si vous souhaitez remplacer ce paramètre, définissez des règles d’alignement des titres pour des questions ou des panneaux individuels. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)."
-// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)." 
+// page.questionErrorLocation: "Sets the location of an error message in relation to the question with invalid input. Choose between: \"Top\" - an error text is placed at the top of the question box; \"Bottom\" - an error text is placed at the bottom of the question box. The \"Inherit\" option applies the survey-level setting (\"Top\" by default)." => "Définit l’emplacement d’un message d’erreur par rapport à la question dont l’entrée n’est pas valide. Choisissez entre : « Haut » - un texte d’erreur est placé en haut de la zone de question ; « Bas » - un texte d’erreur est placé en bas de la zone de question. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Top » par défaut)."
 // page.questionsOrder: "Keeps the original order of questions or randomizes them. The \"Inherit\" option applies the survey-level setting (\"Original\" by default). The effect of this setting is only visible in the Preview tab." => "Conserve l’ordre d’origine des questions ou les rend aléatoires. L’option « Hériter » applique le paramètre au niveau de l’enquête (« Original » par défaut). L’effet de ce paramètre n’est visible que dans l’onglet Aperçu."
 // page.navigationButtonsVisibility: "Sets the visibility of navigation buttons on the page. The \"Inherit\" option applies the survey-level setting, which defaults to \"Visible\"." => "Définit la visibilité des boutons de navigation sur la page. L’option « Hériter » applique le paramètre au niveau de l’enquête, qui est par défaut « Visible »."
 // pehelp.showTimerPanel: "Sets the visibility and location of a timer on a page." => "Définit la visibilité et l’emplacement d’un minuteur sur une page."
@@ -2484,3 +2538,35 @@ editorLocalization.locales["fr"] = frenchTranslation;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Texte d’espace réservé pour la zone de classement"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Répondez automatiquement à l’enquête"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Sélectionnez cette option si vous souhaitez que l’enquête se termine automatiquement une fois qu’une personne interrogée a répondu à toutes les questions."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Enregistrer la valeur masquée dans les résultats de l’enquête"
+// patternmask.pattern: "Value pattern" => "Modèle de valeur"
+// datetimemask.min: "Minimum value" => "Valeur minimale"
+// datetimemask.max: "Maximum value" => "Valeur maximale"
+// numericmask.allowNegativeValues: "Allow negative values" => "Autoriser les valeurs négatives"
+// numericmask.thousandsSeparator: "Thousands separator" => "Séparateur de milliers"
+// numericmask.decimalSeparator: "Decimal separator" => "Séparateur décimal"
+// numericmask.precision: "Value precision" => "Précision de la valeur"
+// numericmask.min: "Minimum value" => "Valeur minimale"
+// numericmask.max: "Maximum value" => "Valeur maximale"
+// currencymask.prefix: "Currency prefix" => "Préfixe de devise"
+// currencymask.suffix: "Currency suffix" => "Suffixe de devise"
+// pe.maskType: "Input mask type" => "Type de masque de saisie"
+// maskTypes.patternmask: "Pattern" => "Modèle"
+// maskTypes.numericmask: "Numeric" => "Numérique"
+// maskTypes.datetimemask: "Date and Time" => "Date et heure"
+// maskTypes.currencymask: "Currency" => "Monnaie"
+// tabs.mask: "Input Mask Settings" => "Paramètres du masque de saisie"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Ex. : +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Ex. : mm/jj/aaaa"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Ex. : $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Ex. : USD"
+// pv.textWrapEnabled: "Wrap choices" => "Choix d’enveloppes"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Les longs textes dans les options de choix généreront automatiquement des sauts de ligne pour s’adapter au menu déroulant. Désélectionnez cette option si vous souhaitez que les textes soient coupés."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Sélectionnez cette option si vous souhaitez stocker la valeur de la question à l’aide d’un masque appliqué dans les résultats de l’enquête."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Le modèle peut contenir des littéraux de chaîne et les espaces réservés suivants : '9' - pour un chiffre ; 'a' - pour une lettre majuscule ou minuscule ; '#' - pour un chiffre ou une lettre majuscule ou minuscule. Utilisez la barre oblique inverse '\\' pour échapper un caractère."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Le modèle peut contenir des caractères de séparation et les espaces réservés suivants : 'm' - pour le numéro du mois ; 'mm' - pour le numéro du mois, avec un zéro non significatif pour les valeurs à un chiffre ; 'd' - pour le jour du mois ; 'dd' - pour le jour du mois, avec zéro en tête pour les valeurs à un chiffre ; 'yy' - pour les deux derniers chiffres de l’année ; 'yyyy' - pour une année à quatre chiffres."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Symbole utilisé pour séparer la partie fractionnaire de la partie entière d’un nombre affiché."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Symbole utilisé pour séparer les chiffres d’un grand nombre en groupes de trois."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Limite le nombre de chiffres à conserver après la virgule décimale pour un nombre affiché."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Un ou plusieurs symboles à afficher avant la valeur."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Un ou plusieurs symboles à afficher après la valeur."
