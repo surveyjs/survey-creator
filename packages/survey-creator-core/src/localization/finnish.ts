@@ -369,6 +369,28 @@ export var fiStrings = {
       name: "Nimi",
       title: "Nimike"
     },
+    masksettings: {
+      saveMaskedValue: "Peitetyn arvon tallentaminen kyselyn tuloksiin"
+    },
+    patternmask: {
+      pattern: "Arvon kuvio"
+    },
+    datetimemask: {
+      min: "Pienin arvo",
+      max: "Suurin arvo"
+    },
+    numericmask: {
+      allowNegativeValues: "Salli negatiiviset arvot",
+      thousandsSeparator: "Tuhansien erotin",
+      decimalSeparator: "Desimaalierotin",
+      precision: "Arvon tarkkuus",
+      min: "Pienin arvo",
+      max: "Suurin arvo"
+    },
+    currencymask: {
+      prefix: "Valuutan etuliite",
+      suffix: "Valuutan jälkiliite"
+    },
     imageHeight: "Kuvan korkeus",
     imageWidth: "Kuvan leveys",
     valueName: "Arvon nimi",
@@ -609,6 +631,13 @@ export var fiStrings = {
     autoGrowComment: "Laajenna kommenttialue tarvittaessa automaattisesti",
     allowResizeComment: "Salli käyttäjien muuttaa tekstialueiden kokoa",
     textUpdateMode: "Tekstikysymyksen arvon päivittäminen",
+    maskType: "Syöttörajoitteen tyyppi",
+    maskTypes: {
+      patternmask: "Kuvio",
+      numericmask: "Numeerinen",
+      datetimemask: "Päivämäärä ja kellonaika",
+      currencymask: "Valuutta"
+    },
     focusOnFirstError: "Aseta kohdistus ensimmäiseen virheelliseen vastaukseen",
     checkErrorsMode: "Suorita vahvistus",
     navigateToUrl: "Siirry URL-osoitteeseen",
@@ -733,6 +762,7 @@ export var fiStrings = {
       templateTitle: "Mallin otsikko",
       totals: "Yhteensä",
       logic: "Logiikka",
+      mask: "Syöttörajoitteen asetukset",
       layout: {
         panel: "Asettelu",
         question: "Asettelu",
@@ -796,7 +826,11 @@ export var fiStrings = {
     questionStartIndex_placeholder: "Esim.: a)",
     width_placeholder: "Esimerkki: 6 tuumaa",
     minWidth_placeholder: "Esimerkki: 600 pikseliä",
-    maxWidth_placeholder: "Esimerkki: 50 %"
+    maxWidth_placeholder: "Esimerkki: 50 %",
+    pattern_placeholder: "Esimerkki: +1(999)-999-99-99",
+    datetimepattern_placeholder: "Esimerkki: kk/pp/v",
+    currencyprefix_placeholder: "Esimerkki: $",
+    currencysuffix_placeholder: "Esimerkki: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var fiStrings = {
     searchMode: {
       contains: "Sisältää",
       startsWith: "Alkaa"
-    }
+    },
+    textWrapEnabled: "Kääri valinnat"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var fiStrings = {
       },
       textUpdateMode: "Valitse seuraavista: \"Kadonneessa tarkennuksessa\" - arvo päivitetään, kun syöttökenttä menettää tarkennuksen; \"Kirjoitettaessa\" - arvo päivitetään reaaliajassa, kun käyttäjät kirjoittavat. \"Peri\"-vaihtoehto käyttää kyselytason asetusta (\"Oletusarvoisesti menetetty kohdistus\").",
       url: "Voit käyttää mitä tahansa verkkopalvelua tietolähteenä monivalintakysymyksissä. Voit täyttää valinta-arvot antamalla tiedot tarjoavan palvelun URL-osoitteen.",
-      searchMode: "Vertailutoiminto, jota käytetään avattavan luettelon suodattamiseen."
+      searchMode: "Vertailutoiminto, jota käytetään avattavan luettelon suodattamiseen.",
+      textWrapEnabled: "Valintavaihtoehtojen pitkät tekstit luovat automaattisesti rivinvaihdot, jotka mahtuvat avattavaan valikkoon. Poista valinta, jos haluat leikata tekstit."
     },
     signaturepad: {
       signatureWidth: "Määrittää näytettävän allekirjoitusalueen ja tuloksena olevan kuvan leveyden.",
@@ -1278,7 +1314,25 @@ export var fiStrings = {
     autocomplete: "Lisätietoja on [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) -määritteen kuvauksessa.",
     filePlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot\" tai kun kamera ei ole käytettävissä",
     photoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Kamera\".",
-    fileOrPhotoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\"."
+    fileOrPhotoPlaceholder: "Käytetään, kun \"Lähdetyyppi\" on \"Paikalliset tiedostot tai kamera\".",
+    masksettings: {
+      saveMaskedValue: "Valitse, haluatko tallentaa kyselyn tuloksiin kysymyksen arvon käyttämällä maskia."
+    },
+    patternmask: {
+      pattern: "Kuvio voi sisältää merkkijonoliteraaleja ja seuraavia paikkamerkkejä: '9' - numerolle; \"a\" - isoille tai pienille kirjaimille; '#' - numerolle tai isolle tai pienelle kirjaimelle. Käytä kenoviivaa '\\' paetaksesi hahmoa."
+    },
+    datetimemask: {
+      pattern: "Kuvio voi sisältää erotinmerkkejä ja seuraavia paikkamerkkejä: 'm' - kuukauden numero; 'mm' - kuukauden numero, jonka alussa on nolla yksinumeroisille arvoille; \"d\" - kuukauden päivä; 'dd' - kuukauden päivä, jonka alussa on nolla yksinumeroisille arvoille; \"yy\" - vuoden kaksi viimeistä numeroa; \"VVVV\" - nelinumeroinen vuosi."
+    },
+    numericmask: {
+      decimalSeparator: "Symboli, jota käytetään erottamaan murto-osa näytetyn luvun kokonaislukuosasta.",
+      thousandsSeparator: "Symboli, jota käytetään erottamaan suuren luvun numerot kolmen ryhmiin.",
+      precision: "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
+    },
+    currencymask: {
+      prefix: "Yksi tai useampi symboli, joka näytetään ennen arvoa.",
+      suffix: "Yksi tai useampi symboli, joka näytetään arvon jälkeen."
+    }
   },
   // Properties
   p: {
@@ -2424,3 +2478,35 @@ editorLocalization.locales["fi"] = fiStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "Sijoitusalueen paikkamerkkiteksti"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "Vastaa kyselyyn automaattisesti"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "Valitse, haluatko kyselyn täyttyvän automaattisesti, kun vastaaja on vastannut kaikkiin kysymyksiin."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "Peitetyn arvon tallentaminen kyselyn tuloksiin"
+// patternmask.pattern: "Value pattern" => "Arvon kuvio"
+// datetimemask.min: "Minimum value" => "Pienin arvo"
+// datetimemask.max: "Maximum value" => "Suurin arvo"
+// numericmask.allowNegativeValues: "Allow negative values" => "Salli negatiiviset arvot"
+// numericmask.thousandsSeparator: "Thousands separator" => "Tuhansien erotin"
+// numericmask.decimalSeparator: "Decimal separator" => "Desimaalierotin"
+// numericmask.precision: "Value precision" => "Arvon tarkkuus"
+// numericmask.min: "Minimum value" => "Pienin arvo"
+// numericmask.max: "Maximum value" => "Suurin arvo"
+// currencymask.prefix: "Currency prefix" => "Valuutan etuliite"
+// currencymask.suffix: "Currency suffix" => "Valuutan jälkiliite"
+// pe.maskType: "Input mask type" => "Syöttörajoitteen tyyppi"
+// maskTypes.patternmask: "Pattern" => "Kuvio"
+// maskTypes.numericmask: "Numeric" => "Numeerinen"
+// maskTypes.datetimemask: "Date and Time" => "Päivämäärä ja kellonaika"
+// maskTypes.currencymask: "Currency" => "Valuutta"
+// tabs.mask: "Input Mask Settings" => "Syöttörajoitteen asetukset"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "Esimerkki: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "Esimerkki: kk/pp/v"
+// pe.currencyprefix_placeholder: "Ex.: $" => "Esimerkki: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "Esimerkki: USD"
+// pv.textWrapEnabled: "Wrap choices" => "Kääri valinnat"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "Valintavaihtoehtojen pitkät tekstit luovat automaattisesti rivinvaihdot, jotka mahtuvat avattavaan valikkoon. Poista valinta, jos haluat leikata tekstit."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "Valitse, haluatko tallentaa kyselyn tuloksiin kysymyksen arvon käyttämällä maskia."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "Kuvio voi sisältää merkkijonoliteraaleja ja seuraavia paikkamerkkejä: '9' - numerolle; \"a\" - isoille tai pienille kirjaimille; '#' - numerolle tai isolle tai pienelle kirjaimelle. Käytä kenoviivaa '\\' paetaksesi hahmoa."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "Kuvio voi sisältää erotinmerkkejä ja seuraavia paikkamerkkejä: 'm' - kuukauden numero; 'mm' - kuukauden numero, jonka alussa on nolla yksinumeroisille arvoille; \"d\" - kuukauden päivä; 'dd' - kuukauden päivä, jonka alussa on nolla yksinumeroisille arvoille; \"yy\" - vuoden kaksi viimeistä numeroa; \"VVVV\" - nelinumeroinen vuosi."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "Symboli, jota käytetään erottamaan murto-osa näytetyn luvun kokonaislukuosasta."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "Symboli, jota käytetään erottamaan suuren luvun numerot kolmen ryhmiin."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "Rajoittaa näytettävän luvun desimaalipilkun jälkeen säilytettävien numeroiden määrää."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "Yksi tai useampi symboli, joka näytetään ennen arvoa."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "Yksi tai useampi symboli, joka näytetään arvon jälkeen."

@@ -369,6 +369,28 @@ export var arStrings = {
       name: "اسم",
       title: "عنوان"
     },
+    masksettings: {
+      saveMaskedValue: "حفظ القيمة المقنعة في نتائج الاستطلاع"
+    },
+    patternmask: {
+      pattern: "نمط القيمة"
+    },
+    datetimemask: {
+      min: "الحد الأدنى للقيمة",
+      max: "القيمة القصوى"
+    },
+    numericmask: {
+      allowNegativeValues: "السماح بالقيم السالبة",
+      thousandsSeparator: "فاصل الآلاف",
+      decimalSeparator: "فاصل عشري",
+      precision: "دقة القيمة",
+      min: "الحد الأدنى للقيمة",
+      max: "القيمة القصوى"
+    },
+    currencymask: {
+      prefix: "بادئة العملة",
+      suffix: "لاحقة العملة"
+    },
     imageHeight: "طول الصورة",
     imageWidth: "عرض الصورة",
     valueName: "اسم القيمة",
@@ -609,6 +631,13 @@ export var arStrings = {
     autoGrowComment: "توسيع منطقة التعليق تلقائيا إذا لزم الأمر",
     allowResizeComment: "السماح للمستخدمين بتغيير حجم مناطق النص",
     textUpdateMode: "تحديث قيمة السؤال النصي",
+    maskType: "نوع قناع الإدخال",
+    maskTypes: {
+      patternmask: "رسم",
+      numericmask: "عددي",
+      datetimemask: "التاريخ والوقت",
+      currencymask: "عملة"
+    },
     focusOnFirstError: "تعيين التركيز على أول إجابة غير صالحة",
     checkErrorsMode: "تشغيل التحقق من الصحة",
     navigateToUrl: "انتقل إلى عنوان URL",
@@ -733,6 +762,7 @@ export var arStrings = {
       templateTitle: "عنوان القالب",
       totals: "Totals",
       logic: "المنطق",
+      mask: "إعدادات قناع الإدخال",
       layout: {
         panel: "تخطيط",
         question: "تخطيط",
@@ -796,7 +826,11 @@ export var arStrings = {
     questionStartIndex_placeholder: "مثال: أ)",
     width_placeholder: "مثال: 6 بوصة",
     minWidth_placeholder: "مثال: 600px",
-    maxWidth_placeholder: "مثال: 50٪"
+    maxWidth_placeholder: "مثال: 50٪",
+    pattern_placeholder: "مثال: +1 (999) -999-99-99",
+    datetimepattern_placeholder: "مثال: مم / يوم / سنة",
+    currencyprefix_placeholder: "مثال: $",
+    currencysuffix_placeholder: "مثال: الدولار الأمريكي"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var arStrings = {
     searchMode: {
       contains: "يحتوي",
       startsWith: "يبدأ ب"
-    }
+    },
+    textWrapEnabled: "خيارات الالتفاف"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var arStrings = {
       },
       textUpdateMode: "اختر من بين: \"عند فقدان التركيز\" - يتم تحديث القيمة عندما يفقد حقل الإدخال التركيز ؛ \"أثناء الكتابة\" - يتم تحديث القيمة في الوقت الفعلي ، حيث يكتب المستخدمون. يطبق خيار \"الوراثة\" إعداد مستوى الاستطلاع (\"عند فقدان التركيز\" افتراضيا).",
       url: "يمكنك استخدام أي خدمة ويب كمصدر بيانات لأسئلة الاختيار من متعدد. لتعبئة قيم الاختيار، أدخل عنوان URL للخدمة التي توفر البيانات.",
-      searchMode: "عملية مقارنة تستخدم لتصفية القائمة المنسدلة."
+      searchMode: "عملية مقارنة تستخدم لتصفية القائمة المنسدلة.",
+      textWrapEnabled: "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص."
     },
     signaturepad: {
       signatureWidth: "يضبط عرض مساحة التوقيع المعروضة والصورة الناتجة.",
@@ -1278,7 +1314,25 @@ export var arStrings = {
     autocomplete: "راجع وصف السمة [الإكمال التلقائي] (https://developer.mozilla.org/en-US/docs/Web/HTML/السمات/الإكمال التلقائي) للحصول على مزيد من المعلومات.",
     filePlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"ملفات محلية\" أو عندما تكون الكاميرا غير متوفرة",
     photoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الكاميرا\".",
-    fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\"."
+    fileOrPhotoPlaceholder: "ينطبق عندما يكون \"نوع المصدر\" هو \"الملفات المحلية أو الكاميرا\".",
+    masksettings: {
+      saveMaskedValue: "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
+    },
+    patternmask: {
+      pattern: "يمكن أن يحتوي النمط على حرفي السلسلة والعناصر النائبة التالية: \"9\" - للرقم ؛ \"a\" - لحرف كبير أو صغير ؛ '#' - لرقم أو حرف كبير أو صغير. استخدم الشرطة المائلة للخلف '\\' للهروب من حرف."
+    },
+    datetimemask: {
+      pattern: "يمكن أن يحتوي النمط على أحرف فاصلة والعناصر النائبة التالية: \"m\" - لرقم الشهر ؛ \"mm\" - لرقم الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"d\" - ليوم من الشهر ؛ \"dd\" - ليوم من الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"yy\" - لآخر رقمين من السنة ؛ \"YYYY\" - لمدة عام مكون من أربعة أرقام."
+    },
+    numericmask: {
+      decimalSeparator: "رمز يستخدم لفصل الجزء الكسري عن الجزء الصحيح من الرقم المعروض.",
+      thousandsSeparator: "رمز يستخدم لفصل أرقام عدد كبير إلى مجموعات من ثلاثة.",
+      precision: "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
+    },
+    currencymask: {
+      prefix: "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة.",
+      suffix: "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."
+    }
   },
   // Properties
   p: {
@@ -2334,3 +2388,35 @@ editorLocalization.locales["ar"] = arStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "نص العنصر النائب لمنطقة الترتيب"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "إكمال الاستطلاع تلقائيا"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "حدد ما إذا كنت تريد إكمال الاستطلاع تلقائيا بعد أن يجيب المستجيب على جميع الأسئلة."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "حفظ القيمة المقنعة في نتائج الاستطلاع"
+// patternmask.pattern: "Value pattern" => "نمط القيمة"
+// datetimemask.min: "Minimum value" => "الحد الأدنى للقيمة"
+// datetimemask.max: "Maximum value" => "القيمة القصوى"
+// numericmask.allowNegativeValues: "Allow negative values" => "السماح بالقيم السالبة"
+// numericmask.thousandsSeparator: "Thousands separator" => "فاصل الآلاف"
+// numericmask.decimalSeparator: "Decimal separator" => "فاصل عشري"
+// numericmask.precision: "Value precision" => "دقة القيمة"
+// numericmask.min: "Minimum value" => "الحد الأدنى للقيمة"
+// numericmask.max: "Maximum value" => "القيمة القصوى"
+// currencymask.prefix: "Currency prefix" => "بادئة العملة"
+// currencymask.suffix: "Currency suffix" => "لاحقة العملة"
+// pe.maskType: "Input mask type" => "نوع قناع الإدخال"
+// maskTypes.patternmask: "Pattern" => "رسم"
+// maskTypes.numericmask: "Numeric" => "عددي"
+// maskTypes.datetimemask: "Date and Time" => "التاريخ والوقت"
+// maskTypes.currencymask: "Currency" => "عملة"
+// tabs.mask: "Input Mask Settings" => "إعدادات قناع الإدخال"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "مثال: +1 (999) -999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "مثال: مم / يوم / سنة"
+// pe.currencyprefix_placeholder: "Ex.: $" => "مثال: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "مثال: الدولار الأمريكي"
+// pv.textWrapEnabled: "Wrap choices" => "خيارات الالتفاف"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "ستنشئ النصوص الطويلة في خيارات الاختيار فواصل أسطر تلقائيا لتلائم القائمة المنسدلة. قم بإلغاء تحديد ما إذا كنت تريد قص النصوص."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "حدد ما إذا كنت تريد تخزين قيمة السؤال باستخدام قناع مطبق في نتائج الاستطلاع."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "يمكن أن يحتوي النمط على حرفي السلسلة والعناصر النائبة التالية: \"9\" - للرقم ؛ \"a\" - لحرف كبير أو صغير ؛ '#' - لرقم أو حرف كبير أو صغير. استخدم الشرطة المائلة للخلف '\\' للهروب من حرف."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "يمكن أن يحتوي النمط على أحرف فاصلة والعناصر النائبة التالية: \"m\" - لرقم الشهر ؛ \"mm\" - لرقم الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"d\" - ليوم من الشهر ؛ \"dd\" - ليوم من الشهر ، مع صفر بادئ للقيم المكونة من رقم واحد ؛ \"yy\" - لآخر رقمين من السنة ؛ \"YYYY\" - لمدة عام مكون من أربعة أرقام."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "رمز يستخدم لفصل الجزء الكسري عن الجزء الصحيح من الرقم المعروض."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "رمز يستخدم لفصل أرقام عدد كبير إلى مجموعات من ثلاثة."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "يحد من عدد الأرقام التي سيتم الاحتفاظ بها بعد الفاصلة العشرية لرقم معروض."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "رمز واحد أو عدة رموز ليتم عرضها قبل القيمة."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "رمز واحد أو عدة رموز ليتم عرضها بعد القيمة."

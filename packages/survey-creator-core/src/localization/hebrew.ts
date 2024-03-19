@@ -369,6 +369,28 @@ export var hebrewStrings = {
       name: "שם",
       title: "כותר"
     },
+    masksettings: {
+      saveMaskedValue: "שמירת ערך מוסווה בתוצאות הסקר"
+    },
+    patternmask: {
+      pattern: "תבנית ערך"
+    },
+    datetimemask: {
+      min: "ערך מינימלי",
+      max: "ערך מרבי"
+    },
+    numericmask: {
+      allowNegativeValues: "התרת ערכים שליליים",
+      thousandsSeparator: "מפריד אלפים",
+      decimalSeparator: "מפריד עשרוני",
+      precision: "דיוק ערך",
+      min: "ערך מינימלי",
+      max: "ערך מרבי"
+    },
+    currencymask: {
+      prefix: "קידומת מטבע",
+      suffix: "סיומת מטבע"
+    },
     imageHeight: "גובה התמונה",
     imageWidth: "רוחב התמונה",
     valueName: "אחסן תשובות בשדה JSON הבא",
@@ -609,6 +631,13 @@ export var hebrewStrings = {
     autoGrowComment: "הרחבה אוטומטית של אזור ההערות כראוי",
     allowResizeComment: "אפשר התאמה ידנית של אזורי טקסט על ידי המשתמש",
     textUpdateMode: "עדכן את ערך הטקסט של השאלה",
+    maskType: "סוג מסיכת קלט",
+    maskTypes: {
+      patternmask: "תבנית",
+      numericmask: "מספריים",
+      datetimemask: "תאריך ושעה",
+      currencymask: "מטבע"
+    },
     focusOnFirstError: "קפיצה לתשובה השגויה הראשונה",
     checkErrorsMode: "הפעל את האימות",
     navigateToUrl: "נווט לכתובת URL",
@@ -733,6 +762,7 @@ export var hebrewStrings = {
       templateTitle: "תבנית כותרת",
       totals: "סכומים",
       logic: "לוגיקה",
+      mask: "הגדרות מסיכת קלט",
       layout: {
         panel: "פריסה",
         question: "פריסה",
@@ -796,7 +826,11 @@ export var hebrewStrings = {
     questionStartIndex_placeholder: "לדוגמה: א)",
     width_placeholder: "לדוגמה: 6in",
     minWidth_placeholder: "לדוגמה: 600px",
-    maxWidth_placeholder: "לדוגמה: 50%"
+    maxWidth_placeholder: "לדוגמה: 50%",
+    pattern_placeholder: "לדוגמה: +1(999)-999-99-99",
+    datetimepattern_placeholder: "לדוגמה: mm/dd/yyyy",
+    currencyprefix_placeholder: "לדוגמה: $",
+    currencysuffix_placeholder: "לדוגמה: USD"
   },
   // Property values
   pv: {
@@ -1011,7 +1045,8 @@ export var hebrewStrings = {
     searchMode: {
       contains: "מכיל",
       startsWith: "מתחיל ב"
-    }
+    },
+    textWrapEnabled: "אפשרויות גלישה"
   },
   // Operators
   op: {
@@ -1137,7 +1172,8 @@ export var hebrewStrings = {
       },
       textUpdateMode: "בחר מתוך: \"על מיקוד אבוד\" - הערך מתעדכן כאשר שדה הקלט מאבד את המיקוד; \"בעת הקלדה\" - הערך מתעדכן בזמן אמת, כאשר המשתמשים מקלידים. האפשרות \"ירושה\" מחילה את ההגדרה ברמת הסקר (\"מיקוד אבוד\" כברירת מחדל).",
       url: "באפשרותך להשתמש בכל שירות אינטרנט כמקור נתונים לשאלות אמריקאיות. כדי לאכלס ערכי בחירה, הזן את כתובת ה- URL של השירות המספק את הנתונים.",
-      searchMode: "פעולת השוואה המשמשת לסינון הרשימה הנפתחת."
+      searchMode: "פעולת השוואה המשמשת לסינון הרשימה הנפתחת.",
+      textWrapEnabled: "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו."
     },
     signaturepad: {
       signatureWidth: "קובע את רוחב אזור החתימה המוצג ואת התמונה שתיווצר.",
@@ -1278,7 +1314,25 @@ export var hebrewStrings = {
     autocomplete: "התייחסות לתיאור של [autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) למידע נוסף.",
     filePlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים\" או כאשר המצלמה אינה זמינה",
     photoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"מצלמה\".",
-    fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\"."
+    fileOrPhotoPlaceholder: "חל כאשר \"סוג מקור\" הוא \"קבצים מקומיים או מצלמה\".",
+    masksettings: {
+      saveMaskedValue: "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
+    },
+    patternmask: {
+      pattern: "התבנית יכולה להכיל מילולי מחרוזת ואת מצייני המיקום הבאים: '9' - עבור ספרה; 'a' - עבור אות גדולה או קטנה; '#' - עבור ספרה או אות גדולה או קטנה. השתמש בקו נטוי הפוך '\\' כדי לברוח מתו."
+    },
+    datetimemask: {
+      pattern: "התבנית יכולה להכיל תווים מפרידים ואת מצייני המיקום הבאים: 'm' - עבור מספר חודש; 'mm' - עבור מספר חודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'ד' - ליום בחודש; 'dd' - עבור יום בחודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'yy' - עבור שתי הספרות האחרונות של השנה; 'yyyy' - לשנה בת ארבע ספרות."
+    },
+    numericmask: {
+      decimalSeparator: "סמל המשמש להפרדת חלק השבר מהחלק השלם של מספר מוצג.",
+      thousandsSeparator: "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה.",
+      precision: "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
+    },
+    currencymask: {
+      prefix: "סימן אחד או יותר שיוצגו לפני הערך.",
+      suffix: "סימן אחד או יותר שיוצגו לאחר הערך."
+    }
   },
   // Properties
   p: {
@@ -1988,3 +2042,35 @@ editorLocalization.locales["he"] = hebrewStrings;
 // p.selectToRankEmptyUnrankedAreaText: "Placeholder text for the ranking area" => "טקסט מציין מיקום עבור אזור הדירוג"
 // pe.allowCompleteSurveyAutomatic: "Complete the survey automatically" => "השלם את הסקר באופן אוטומטי"
 // pehelp.allowCompleteSurveyAutomatic: "Select if you want the survey to complete automatically after a respondent answers all questions." => "בחר אם ברצונך שהסקר יושלם באופן אוטומטי לאחר שמשיב עונה על כל השאלות."
+// masksettings.saveMaskedValue: "Save masked value in survey results" => "שמירת ערך מוסווה בתוצאות הסקר"
+// patternmask.pattern: "Value pattern" => "תבנית ערך"
+// datetimemask.min: "Minimum value" => "ערך מינימלי"
+// datetimemask.max: "Maximum value" => "ערך מרבי"
+// numericmask.allowNegativeValues: "Allow negative values" => "התרת ערכים שליליים"
+// numericmask.thousandsSeparator: "Thousands separator" => "מפריד אלפים"
+// numericmask.decimalSeparator: "Decimal separator" => "מפריד עשרוני"
+// numericmask.precision: "Value precision" => "דיוק ערך"
+// numericmask.min: "Minimum value" => "ערך מינימלי"
+// numericmask.max: "Maximum value" => "ערך מרבי"
+// currencymask.prefix: "Currency prefix" => "קידומת מטבע"
+// currencymask.suffix: "Currency suffix" => "סיומת מטבע"
+// pe.maskType: "Input mask type" => "סוג מסיכת קלט"
+// maskTypes.patternmask: "Pattern" => "תבנית"
+// maskTypes.numericmask: "Numeric" => "מספריים"
+// maskTypes.datetimemask: "Date and Time" => "תאריך ושעה"
+// maskTypes.currencymask: "Currency" => "מטבע"
+// tabs.mask: "Input Mask Settings" => "הגדרות מסיכת קלט"
+// pe.pattern_placeholder: "Ex.: +1(999)-999-99-99" => "לדוגמה: +1(999)-999-99-99"
+// pe.datetimepattern_placeholder: "Ex.: mm/dd/yyyy" => "לדוגמה: mm/dd/yyyy"
+// pe.currencyprefix_placeholder: "Ex.: $" => "לדוגמה: $"
+// pe.currencysuffix_placeholder: "Ex.: USD" => "לדוגמה: USD"
+// pv.textWrapEnabled: "Wrap choices" => "אפשרויות גלישה"
+// question.textWrapEnabled: "Long texts in choice options will automatically generate line breaks to fit within the drop-down menu. Unselect if you want the texts to clip." => "טקסטים ארוכים באפשרויות בחירה ייצרו באופן אוטומטי מעברי שורה שיתאימו לתפריט הנפתח. בטל את הבחירה אם ברצונך שהטקסטים ייחתכו."
+// masksettings.saveMaskedValue: "Select if you want to store the question value with an applied mask in survey results." => "בחר אם ברצונך לאחסן את ערך השאלה עם מסיכה שהוחלה בתוצאות הסקר."
+// patternmask.pattern: "The pattern can contain string literals and the following placeholders: `9` - for a digit; `a` - for an upper- or lower-case letter; `#` - for a digit or an upper- or lower-case letter. Use backslash `\\` to escape a character." => "התבנית יכולה להכיל מילולי מחרוזת ואת מצייני המיקום הבאים: '9' - עבור ספרה; 'a' - עבור אות גדולה או קטנה; '#' - עבור ספרה או אות גדולה או קטנה. השתמש בקו נטוי הפוך '\\' כדי לברוח מתו."
+// datetimemask.pattern: "The pattern can contain separator characters and the following placeholders: `m` - for month number; `mm` - for month number, with leading zero for single-digit values; `d` - for day of the month; `dd` - for day of the month, with leading zero for single-digit values; `yy` - for the last two digits of the year; `yyyy` - for a four-digit year." => "התבנית יכולה להכיל תווים מפרידים ואת מצייני המיקום הבאים: 'm' - עבור מספר חודש; 'mm' - עבור מספר חודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'ד' - ליום בחודש; 'dd' - עבור יום בחודש, עם אפס מוביל עבור ערכים חד-ספרתיים; 'yy' - עבור שתי הספרות האחרונות של השנה; 'yyyy' - לשנה בת ארבע ספרות."
+// numericmask.decimalSeparator: "A symbol used to separate the fractional part from the integer part of a displayed number." => "סמל המשמש להפרדת חלק השבר מהחלק השלם של מספר מוצג."
+// numericmask.thousandsSeparator: "A symbol used to separate the digits of a large number into groups of three." => "סמל המשמש להפרדת הספרות של מספר גדול לקבוצות של שלושה."
+// numericmask.precision: "Limits how many digits to retain after the decimal point for a displayed number." => "מגביל את מספר הספרות שיש לשמור אחרי הנקודה העשרונית עבור מספר מוצג."
+// currencymask.prefix: "One or several symbols to be displayed before the value." => "סימן אחד או יותר שיוצגו לפני הערך."
+// currencymask.suffix: "One or several symbols to be displayed after the value." => "סימן אחד או יותר שיוצגו לאחר הערך."
