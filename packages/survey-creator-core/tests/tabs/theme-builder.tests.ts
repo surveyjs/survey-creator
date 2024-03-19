@@ -1,4 +1,4 @@
-import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionPanelDynamicModel, Serializer, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
+import { ComponentCollection, ITheme, Question, QuestionButtonGroupModel, QuestionCompositeModel, QuestionDropdownModel, QuestionFileModel, QuestionPanelDynamicModel, Serializer, SurveyElement, SurveyModel, settings as surveySettings } from "survey-core";
 import { ThemeEditorModel, getThemeChanges } from "../../src/components/tabs/theme-builder";
 import { PredefinedColors, PredefinedThemes, Themes } from "../../src/components/tabs/themes";
 export { QuestionFileEditorModel } from "../../src/custom-questions/question-file";
@@ -2935,7 +2935,7 @@ test("onPropertyGridSurveyCreated: Modify property grid & switch themeName", ():
   creator.JSON = { questions: [{ type: "text", name: "q1" }] };
   creator.themeEditor.onPropertyGridSurveyCreated.add((sender: ThemeTabPlugin, options: IPropertyGridSurveyCreatedEvent) => {
     options.model.themeEditorSurvey.getAllQuestions().forEach(q => {
-      if(q.name !== "themeName") {
+      if (q.name !== "themeName") {
         options.model.removePropertyGridEditor(q.name);
       }
     });
@@ -3136,4 +3136,38 @@ test("header custom background color and theme changes", (): any => {
   expect(primaryBackColor.value).toEqual("rgba(0, 0, 0, 1)");
   expect(headerViewContainer.getQuestionByName("backgroundColorSwitch").value).toEqual("custom");
   expect(headerViewContainer.getQuestionByName("backgroundColor").value).toBe("#ff0000");
+});
+test("Check onOpenFileChooser is called and context is passed", (): any => {
+  const creator: CreatorTester = new CreatorTester({ showThemeTab: true });
+  let log = "";
+  let lastContext;
+  creator.onOpenFileChooser.add((s, o) => {
+    log += "->onOpenFileChooser";
+    lastContext = o.context;
+    o.callback([{} as File]);
+  });
+  creator.onUploadFile.add((s, o) => {
+    log += "->uploadFile";
+    o.callback("success", "url");
+  });
+
+  const themePlugin: ThemeTabPlugin = <ThemeTabPlugin>creator.getPlugin("theme");
+  themePlugin.activate();
+  const themeBuilder = themePlugin.model as ThemeEditorModel;
+  const themeEditorSurvey = themeBuilder.themeEditorSurvey;
+  const origGetElementById = document.getElementById;
+  document.getElementById = () => ({} as any);
+  try {
+    const backgroundImageEditor = themeEditorSurvey.getQuestionByName("backgroundImage") as QuestionFileModel;
+    backgroundImageEditor.chooseFile(new MouseEvent("click"));
+    expect(log).toBe("->onOpenFileChooser->uploadFile");
+    expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "theme", propertyName: "backgroundImage" });
+
+    const headerBackgroundImageEditor = themeEditorSurvey.getQuestionByName("headerViewContainer").panels[0].getQuestionByName("backgroundImage") as QuestionFileModel;
+    headerBackgroundImageEditor.chooseFile(new MouseEvent("click"));
+    expect(log).toBe("->onOpenFileChooser->uploadFile->onOpenFileChooser->uploadFile");
+    expect(lastContext).toStrictEqual({ element: themeBuilder.currentTheme, elementType: "header", propertyName: "backgroundImage" });
+  } finally {
+    document.getElementById = origGetElementById;
+  }
 });

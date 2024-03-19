@@ -1,5 +1,5 @@
 import { SurveySimulatorModel } from "../simulator";
-import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase } from "survey-core";
+import { Base, propertyArray, property, PageModel, SurveyModel, Action, IAction, ActionContainer, ComputedUpdater, defaultV2Css, ITheme, ItemValue, ImageFit, ImageAttachment, QuestionDropdownModel, ValueChangingEvent, ValueChangedEvent, EventBase, Serializer, Question, IHeader, IElement, PanelModel, PanelModelBase, QuestionFileModel } from "survey-core";
 import { SurveyCreatorModel } from "../../creator-base";
 import { editorLocalization, getLocString } from "../../editorLocalization";
 import { setSurveyJSONForPropertyGrid } from "../../property-grid";
@@ -327,7 +327,7 @@ export class ThemeEditorModel extends Base {
         component: "svc-complete-page",
         data: this
       });
-      if(!!json && !!json.locale) {
+      if (!!json && !!json.locale) {
         survey.locale = json.locale;
       }
       survey.applyTheme(this.currentTheme);
@@ -769,6 +769,18 @@ export class ThemeEditorModel extends Base {
       }
     });
 
+    themeEditorSurvey.onOpenFileChooser.add((_, options) => {
+      const context: any = {};
+      assign(context, (options as any).context, { element: this.currentTheme as any, elementType: "theme" });
+      if (options.element) {
+        const question = options.element as QuestionFileModel;
+        context.propertyName = question.name;
+        if (question.parentQuestion) {
+          context.elementType = question.parentQuestion.name === "headerViewContainer" ? "header" : question.parentQuestion.name;
+        }
+      }
+      this.surveyProvider.chooseFiles(options.input, options.callback, context as any);
+    });
     themeEditorSurvey.onUploadFiles.add((_, options) => {
       const callback = (status: string, data: any) => options.callback(status, [{ content: data, file: options.files[0] }]);
       this.surveyProvider.uploadFiles(options.files, undefined, callback);
@@ -837,7 +849,17 @@ export class ThemeEditorModel extends Base {
   }
   private patchFileEditors(survey: SurveyModel) {
     const questionsToPatch = survey.getAllQuestions(false, false, true).filter(q => q.getType() == "fileedit");
-    questionsToPatch.forEach(q => { (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => this.surveyProvider.chooseFiles(input, callback); });
+    questionsToPatch.forEach(q => {
+      (<QuestionFileEditorModel>q).onChooseFilesCallback = (input, callback) => {
+        const themePropertyName = q.name;
+        let elementType = "theme";
+        if (q.parentQuestion) {
+          elementType = q.parentQuestion.name === "headerViewContainer" ? "header" : q.parentQuestion.name;
+        }
+        (q.parentQuestion ? q.parentQuestion.name + "." : "") + q.name;
+        this.surveyProvider.chooseFiles(input, callback, { element: this.currentTheme as any, elementType: elementType, propertyName: themePropertyName });
+      };
+    });
   }
 
   private getCoverJson(headerSettings: any): any {
@@ -886,7 +908,7 @@ export class ThemeEditorModel extends Base {
   private updateVisibilityOfPropertyGridGroups() {
     const page = this.themeEditorSurvey.pages[0];
     page.getElementByName("groupHeader").visible = this.surveyProvider.isMobileView ? false : settings.theme.allowEditHeaderSettings;
-    if(this.advancedModeSwitcher) {
+    if (this.advancedModeSwitcher) {
       this.advancedModeSwitcher.visible = !this.surveyProvider.isMobileView;
     }
   }
@@ -916,7 +938,7 @@ export class ThemeEditorModel extends Base {
     this.updateVisibilityOfPropertyGridGroups();
 
     const headerViewContainerQuestion = this.themeEditorSurvey.getQuestionByName("headerViewContainer");
-    if(!headerViewContainerQuestion) return;
+    if (!headerViewContainerQuestion) return;
 
     const panel = headerViewContainerQuestion.panels[0];
     panel.getQuestionByName("backgroundColor").choices = this.getPredefinedColorsItemValues();
@@ -1000,7 +1022,7 @@ export class ThemeEditorModel extends Base {
     this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("backgroundOpacity"), "value", this.currentTheme.backgroundOpacity * 100);
 
     const primaryBackcolor = themeEditorSurvey.getQuestionByName("--sjs-primary-backcolor");
-    if(!!primaryBackcolor) {
+    if (!!primaryBackcolor) {
       this._setPGEditorPropertyValue(themeEditorSurvey.getQuestionByName("generalPrimaryColor"), "value", primaryBackcolor.value);
     }
 
